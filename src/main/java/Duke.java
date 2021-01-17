@@ -10,5 +10,8 @@ public class Duke {
         // greeting
         String greeting = "Hello! I'm Duke\n" + "What can I do for you?\n";
         System.out.println(greeting);
+        // exit message
+        String exitMessage = "Bye. Hope to see you again soon!\n";
+        System.out.println(exitMessage);
     }
 }
