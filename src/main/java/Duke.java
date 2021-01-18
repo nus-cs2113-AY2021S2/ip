@@ -7,7 +7,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
-        // the above was already provided
+        // the following code is to complete the Level-0 increment
         String divider = "-----------------------------------";
         System.out.println(divider);
         System.out.println("Hello! I'm Duke");
