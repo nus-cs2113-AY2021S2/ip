@@ -2,7 +2,7 @@ public class Duke {
     public static void main(String[] args) {
         String divider = "____________________________________________________________";
         welcomeMsg(divider);
-        bye(divider);
+        exitMsg(divider);
     }
 
     public static void welcomeMsg(String divider) {
@@ -18,7 +18,7 @@ public class Duke {
         System.out.println(divider);
     }
 
-    public static void bye(String divider) {
+    public static void exitMsg(String divider) {
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println(divider);
     }
