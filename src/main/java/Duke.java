@@ -8,6 +8,7 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
 
         // the following code is to complete the Level-0 increment
+        // this is simply to test committing and pushing via intelliJ
         String divider = "-----------------------------------";
         System.out.println(divider);
         System.out.println("Hello! I'm Duke");
