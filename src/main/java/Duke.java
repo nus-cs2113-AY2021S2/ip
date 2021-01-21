@@ -1,6 +1,11 @@
 public class Duke {
     public static void main(String[] args) {
         String divider = "____________________________________________________________";
+        welcomeMsg(divider);
+        bye(divider);
+    }
+
+    public static void welcomeMsg(String divider) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -11,7 +16,6 @@ public class Duke {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
         System.out.println(divider);
-        bye(divider);
     }
 
     public static void bye(String divider) {
