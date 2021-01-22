@@ -14,7 +14,7 @@ public class Duke {
 	}
 
 	public static void greeting(){ 
-		System.out.println(border + "\n" + "Hello! I'm Duke\nWhat can I do for you?");
+		System.out.println(border + "\n" + "Hello! I'm Duke\nWhat can I do for you?\n" + border);
 	}
 
 	public static void exit(){
