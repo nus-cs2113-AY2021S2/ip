@@ -24,7 +24,7 @@ public class Duke {
                 printIndent(LONG_LINE);
                 for (int i = 0; i < savedList.size(); i += 1) {
                     Task task = savedList.get(i);
-                    printIndent(String.format("%d.[%s] %s", i+1, task.getStatusIcon(), task.getDescription()));
+                    printIndent(String.format("%d.[%s] %s", i + 1, task.getStatusIcon(), task.getDescription()));
                 }
                 printIndent(LONG_LINE);
                 break;
@@ -42,7 +42,7 @@ public class Duke {
                         Task task = savedList.get(index - 1);
                         task.markAsDone();
                         savedList.set(index - 1, task);
-                        
+
                         printIndent(LONG_LINE);
                         printIndent("Nice! I've marked this task as done:");
                         printIndent(String.format("  [%s] %s", task.getStatusIcon(), task.getDescription()));
