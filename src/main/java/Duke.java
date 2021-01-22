@@ -5,83 +5,92 @@ public class Duke {
     public static final String LONG_LINE = "____________________________________________________________";
 
     public static void main(String[] args) {
-        // Initialize data
-        Vector<Task> savedList = new Vector<>();
+        // Initialize a vector to store all the tasks
+        Vector<Task> tasks = new Vector<>();
 
         greeting();
+        printIndent(LONG_LINE);
 
         Scanner in = new Scanner(System.in);
         Boolean exit = false;
+
         while (!exit) {
             String line = in.nextLine();
-            String[] parameters = line.split(" ");
-            switch(parameters[0]) {
+            String[] arguments = line.split(" ");
+
+            printIndent(LONG_LINE);
+
+            switch(arguments[0]) {
             case "bye":
+                goodbye();
                 exit = true;
                 break;
             case "list":
-                // Print out everything in the list, index starts from 1
-                printIndent(LONG_LINE);
-                for (int i = 0; i < savedList.size(); i += 1) {
-                    Task task = savedList.get(i);
-                    printIndent(String.format("%d.[%s] %s", i + 1, task.getStatusIcon(), task.getDescription()));
-                }
-                printIndent(LONG_LINE);
+                list(tasks);
                 break;
             case "done":
-                if (parameters.length < 2) {
-                    // An index must be provided for the task to be marked "done"
-                    printLine("You will need to give me an index, like this: `done 2`");
-                } else {
-                    try {
-                        int index = Integer.parseInt(parameters[1]);
-                        if (index > savedList.size()) {
-                            throw new IllegalArgumentException();
-                        }
-
-                        Task task = savedList.get(index - 1);
-                        task.markAsDone();
-                        savedList.set(index - 1, task);
-
-                        printIndent(LONG_LINE);
-                        printIndent("Nice! I've marked this task as done:");
-                        printIndent(String.format("  [%s] %s", task.getStatusIcon(), task.getDescription()));
-                        printIndent(LONG_LINE);
-                    } catch (NumberFormatException e) {
-                        printLine("Index provided is not a proper number.");
-                    } catch (IllegalArgumentException e) {
-                        printLine("Task with this index is not found in our database.");
-                    }
-                }
+                done(tasks, arguments);
                 break;
             default:
-                // Save the line in the list
-                savedList.add(new Task(line));
-                printLine("added: " + line);
+                save(tasks, line);
             }
+
+            printIndent(LONG_LINE);
         }
         in.close();
-
-        goodbye();
     }
 
-    public static void greeting() {
-        printIndent(LONG_LINE);
-        printIndent("Hello! I'm Duke");
+    protected static void greeting() {
+        printIndent("Hello! I'm Duke.");
         printIndent("What can I do for you?");
-        printIndent(LONG_LINE);
     }
 
-    public static void goodbye() {
-        printLine("Bye. Hope to see you again soon!");
+    protected static void goodbye() {
+        printIndent("Bye. Hope to see you again soon!");
     }
 
-    protected static void printLine(String line) {
-        printIndent(LONG_LINE);
-        printIndent(line);
-        printIndent(LONG_LINE);
+    // Print out everything in the list, index starts from 1
+    protected static void list(Vector<Task> tasks) {
+        for (int i = 0; i < tasks.size(); i += 1) {
+            Task task = tasks.get(i);
+            printIndent(String.format("%d.[%s] %s", i + 1, task.getStatusIcon(), task.getDescription()));
+        }
     }
 
+    // Mark a task to be done with index specified in arguments[1]
+    protected static void done(Vector<Task> tasks, String[] arguments) {
+        if (arguments.length < 2) {
+            // An index must be provided for the task to be marked "done"
+            printIndent("You will need to give me an index, like this: `done 2`.");
+        } else {
+            try {
+                int index = Integer.parseInt(arguments[1]);
+                if (index > tasks.size() || index < 1) {
+                    // This index is out of the boundary of our database
+                    throw new IllegalArgumentException();
+                }
+
+                Task task = tasks.get(index - 1);
+                task.markAsDone();
+                tasks.set(index - 1, task);
+
+                printIndent("Nice! I've marked this task as done:");
+                printIndent(String.format("  [%s] %s", task.getStatusIcon(), task.getDescription()));
+            } catch (NumberFormatException e) {
+                printIndent("Index provided is not a proper number.");
+            } catch (IllegalArgumentException e) {
+                printIndent("Task with this index is not found in our database.");
+            }
+        }
+    }
+
+    // Save a new task in the task list
+    protected static void save(Vector<Task> tasks, String description) {
+        tasks.add(new Task(description));
+        printIndent("added: " + description);
+    }
+
+    // Print a line with 4 spaces as indentation
     protected static void printIndent(String line) {
         System.out.println("    " + line);
     }
