@@ -7,8 +7,8 @@ public class Duke {
         System.out.println("\t What can I do for you?");
         System.out.println("\t____________________________________________________________");
         Scanner sc = new Scanner(System.in);
-        String[] tasks = new String[100];
-        int numTasks = 0;
+        Task[] tasks = new Task[100];
+        int numberOfTasks = 0;
         while (true) {
             String command = sc.nextLine();
             System.out.println("\t____________________________________________________________");
@@ -17,12 +17,25 @@ public class Duke {
                 System.out.println("\t____________________________________________________________");
                 break;
             } else if (command.equals("list")) {
-                for (int i = 0; i < numTasks; i++) {
+                for (int i = 0; i < numberOfTasks; i++) {
                     System.out.println("\t " + (i + 1) + ". " + tasks[i]);
                 }
+            } else if (command.substring(0, 4).equals("done")) {
+                try {
+                    int taskNumber = Integer.parseInt(command.substring(5)) - 1;
+                    if (taskNumber <= numberOfTasks) {
+                        tasks[taskNumber].markAsDone();
+                        System.out.println("\t Nice! I've marked this task as done: ");
+                        System.out.println("   " + tasks[taskNumber]);
+                    } else {
+                        System.out.println("\t That's an invalid task number!");
+                    }
+                } catch (NumberFormatException nfe) {
+                    System.out.println("\t That's an invalid task number!");
+                }
             } else {
-                tasks[numTasks] = command;
-                numTasks = numTasks + 1;
+                tasks[numberOfTasks] = new Task(command);
+                numberOfTasks = numberOfTasks + 1;
                 System.out.println("\t added: " + command);
             }
             System.out.println("\t____________________________________________________________");
