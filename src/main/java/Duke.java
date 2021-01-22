@@ -1,5 +1,4 @@
 import  java.util.Scanner;
-import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
@@ -13,19 +12,40 @@ public class Duke {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
 
+        Task userTask[] = new Task[100];
+        int taskCounter = 0;
         Scanner sc = new Scanner(System.in);
         String userInput = sc.nextLine();
-        ArrayList<String> userInputList= new ArrayList<String>();
 
         while(!userInput.equals("bye")){
             if(userInput.equals("list")){
-                for (int counter = 0; counter < userInputList.size(); counter++) {
-                    System.out.println(counter+1 + ". " + userInputList.get(counter));
+                System.out.println("Here are the tasks in your list:");
+                for (int counter = 0; counter < taskCounter; counter++) {
+                    System.out.println((counter+1) + ".["+ userTask[counter].getStatusIcon() +"] " + userTask[counter].getDescription());
                 }
             }
             else {
-                System.out.println("added: " + userInput);
-                userInputList.add(userInput);
+                String[] individualWords = userInput.trim().split("\\s+");
+                int activityNumber=-1;
+                if(individualWords.length==2 && individualWords[0].equals("done")){
+                    System.out.println("yo1:");
+                    try {
+                        activityNumber = Integer.parseInt(individualWords[1]);
+                        userTask[activityNumber-1].setTaskStatus(true);
+                        System.out.println("Nice! I've marked this task as done:");
+                        System.out.println("   ["+ userTask[activityNumber-1].getStatusIcon() +"] " + userTask[activityNumber-1].getDescription());
+                    }
+                    catch (NumberFormatException e) {
+                        System.out.println("added: " + userInput);
+                        userTask[taskCounter] = new Task(userInput);
+                        taskCounter++;
+                    }
+                }
+                else {
+                    System.out.println("added: " + userInput);
+                    userTask[taskCounter] = new Task(userInput);
+                    taskCounter++;
+                }
             }
             userInput = sc.nextLine();
         }
