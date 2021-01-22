@@ -23,10 +23,10 @@ public class Duke {
             } else if (command.substring(0, 4).equals("done")) {
                 try {
                     int taskNumber = Integer.parseInt(command.substring(5)) - 1;
-                    if (taskNumber <= numberOfTasks) {
+                    if (0 <= taskNumber && taskNumber < numberOfTasks) {
                         tasks[taskNumber].markAsDone();
                         System.out.println("\t Nice! I've marked this task as done: ");
-                        System.out.println("   " + tasks[taskNumber]);
+                        System.out.println("\t   " + tasks[taskNumber]);
                     } else {
                         System.out.println("\t That's an invalid task number!");
                     }
