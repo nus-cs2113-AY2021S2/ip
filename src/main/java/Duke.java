@@ -16,7 +16,7 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         System.out.println(greet);
         String command;
-        while (1==1) {
+        while (true) {
             Scanner in = new Scanner(System.in);
             command = in.nextLine();
             if (command.equals("bye")) break;
