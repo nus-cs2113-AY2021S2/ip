@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 /**
  * This class is to build a personal assistance chat-bot called "Duke"
- * <p>
+ * 
  * Week-2:
  * The program is implemented to greet users and exits subsequently.
  *
