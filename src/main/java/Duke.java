@@ -42,6 +42,7 @@ public class Duke {
                     System.out.println("added: " + input);
                     continue;
                 }
+
             }
         }
     }
