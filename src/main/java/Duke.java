@@ -23,7 +23,6 @@ public class Duke {
     private static void addTask(Task task) {
         tasks[taskCount] = task;
         taskCount++;
-
         System.out.println("added: " + task.getDescription());
     }
 
@@ -35,7 +34,7 @@ public class Duke {
 
     private static void markAsDone(int index) {
         Task task = tasks[index - 1];
-        task.setIsDone(true);
+        task.setDone(true);
         System.out.println("Nice! I've marked this task as done:");
         System.out.println("  " + task);
     }

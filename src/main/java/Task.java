@@ -8,14 +8,14 @@ public class Task {
 
     public Task(String description, boolean isDone) {
         setDescription(description);
-        setIsDone(isDone);
+        setDone(isDone);
     }
 
     public void setDescription(String description) {
         this.description = description;
     }
 
-    public void setIsDone(boolean isDone) {
+    public void setDone(boolean isDone) {
         this.isDone = isDone;
     }
 
