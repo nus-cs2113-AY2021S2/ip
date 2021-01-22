@@ -36,7 +36,8 @@ public class Duke {
                         activityNumber = Integer.parseInt(individualWords[1]);
                         userTasks[activityNumber-1].setTaskStatus(true);
                         System.out.println("Nice! I've marked this task as done:");
-                        System.out.println("   ["+ userTasks[activityNumber-1].getStatusIcon() +"] " + userTasks[activityNumber-1].getDescription());
+                        System.out.println("   ["+ userTasks[activityNumber-1].getStatusIcon() +"] "
+                                + userTasks[activityNumber-1].getDescription());
                     } catch (NumberFormatException e) {
                         System.out.println("added: " + userInput);
                         userTasks[taskCounter] = new Task(userInput);
