@@ -1,5 +1,7 @@
 import java.util.Scanner;
 public class Duke {
+    static String[] list = new String[100];
+    static int index = 0;
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -20,8 +22,19 @@ public class Duke {
             Scanner in = new Scanner(System.in);
             command = in.nextLine();
             if (command.equals("bye")) break;
-            String toPrint = "____________________________________________________________\n" + command;
-            System.out.println(toPrint);
+
+            System.out.println("____________________________________________________________");
+
+            if (command.equals("list")) {
+                for (int i=0; i<index; ++i) {
+                    System.out.println((i+1)+". "+list[i]);
+                }
+            }
+            else { //if command is anything other than 'list' and 'bye'
+                list[index++] = command;
+                System.out.println("added: " + command);
+            }
+            
             System.out.println("____________________________________________________________");
         }
         System.out.println(byeBye);
