@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class Duke {
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -7,7 +9,21 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println(logo);
         System.out.println("Hello! I'm Duke.\nWhat can I do for you?\n");
-        System.out.println("Bye. Hope to see you again soon!");
-        System.exit(0);
+
+        Scanner sc = new Scanner(System.in);
+        Boolean isSame = true;
+        String bye = "bye";
+        while (isSame) {
+            String input = sc.nextLine().toLowerCase();
+            if (input.equalsIgnoreCase(bye)){
+                System.out.println("Bye. Hope to see you again soon!");
+                isSame = false;
+                System.exit(0);
+            }
+            else {
+                System.out.println(input);
+                continue;
+            }
+        }
     }
 }
