@@ -28,11 +28,11 @@ public class Duke {
 
 
     public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         String input;
         System.out.println(HELLO_MESSAGE);
         do {
-            input = in.nextLine().trim();
+            input = scanner.nextLine().trim();
             if (input.equalsIgnoreCase("bye")) {
                 //End programme
                 System.out.println(BYE_MESSAGE);
@@ -60,6 +60,9 @@ public class Duke {
     }
 
 
+    /**
+     * Prints list of task name.
+     */
     private static void printList() {
         System.out.println(LINE);
         for (int i = 0; i < taskCount; i++) {
@@ -75,6 +78,12 @@ public class Duke {
     }
 
 
+    /**
+     * Marks specified task as done.
+     * If position is invalid, print error message.
+     *
+     * @param input Input value by user.
+     */
     private static void markAsDone(String input) {
         try {
             int position = Integer.parseInt(input.split(" ")[1]) - 1;
@@ -92,6 +101,13 @@ public class Duke {
         }
     }
 
+
+    /**
+     * Marks specified task as undone.
+     * If position is invalid, print error message.
+     *
+     * @param input Input value by user.
+     */
     private static void markAsUndone(String input) {
         try {
             int position = Integer.parseInt(input.split(" ")[1]) - 1;
@@ -110,6 +126,11 @@ public class Duke {
     }
 
 
+    /**
+     * Creates new task with input as name.
+     *
+     * @param input Input value by user.
+     */
     public static void addTask(String input) {
         tasks[taskCount] = new Task(input);
         taskCount++;
