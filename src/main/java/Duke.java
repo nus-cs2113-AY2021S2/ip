@@ -36,11 +36,11 @@ public class Duke {
                 System.out.println("~____________________________________________________________~\n");
             } else if (phrase.startsWith("done ")) {
                 // Set a task as done
-                int index = phrase.charAt(phrase.length()-1) - '0';
+                int taskIndex = phrase.charAt(phrase.length()-1) - '0';
 
                 System.out.println("~____________________________________________________________~");
                 System.out.println("Nice! I've marked this task as done:");
-                Task task = tasks.get(index - 1);
+                Task task = tasks.get(taskIndex - 1);
                 task.markAsDone();
                 System.out.println("[" + task.getStatusIcon() + "] " + task.getDescription());
                 System.out.println("~____________________________________________________________~\n");
