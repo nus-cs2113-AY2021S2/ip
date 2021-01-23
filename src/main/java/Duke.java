@@ -5,7 +5,7 @@ public class Duke {
         String line;
         Scanner in = new Scanner(System.in);
 
-        String[] tasks = new String[100];
+        Task[] tasks = new Task[100];
         int index = 0;
 
         String logo = " ____        _        \n"
@@ -24,12 +24,20 @@ public class Duke {
         while (!line.equals("bye")){
             System.out.println("---------------------------------------------------------");
             if (line.equals("list")){
+                System.out.println("Here are the tasks in your list:");
                 for (int i = 1; i <= index; i++){
-                    System.out.println(i + ". " + tasks[i-1]);
+                    System.out.println(i + ".[" + tasks[i-1].getStatusIcon() + "] " + tasks[i-1].getDescription());
                 }
             }
+            else if (line.startsWith("done")){
+                int itemNum = Integer.parseInt(line.substring(5));
+                tasks[itemNum - 1].setAsDone();
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println("[" + tasks[itemNum-1].getStatusIcon() + "] " + tasks[itemNum-1].getDescription());
+            }
             else{
-                tasks[index] = line;
+                Task t = new Task(line);
+                tasks[index] = t;
                 index++;
                 System.out.println("added: " + line);
             }
