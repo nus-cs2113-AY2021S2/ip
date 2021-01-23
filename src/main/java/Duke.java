@@ -9,6 +9,7 @@ public class Duke {
             if (userInput.equals("bye")) {
                 break;
             }
+            // Simple Echo Function
             Output.printLine();
             System.out.println(userInput);
             Output.printLine();
