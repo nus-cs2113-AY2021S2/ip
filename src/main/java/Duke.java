@@ -5,26 +5,32 @@ public class Duke {
     public static String readPrompt(Scanner in){
         return in.nextLine();
     }
-
+/*
     public static void echoPrompt(String input){
         System.out.println(input);
     }
+*/
 
-    public static void displayList(Task[] list, int promptIndex){
+    public static void displaytaskList(Task[] taskList, int promptIndex){
         if (promptIndex==0){
             System.out.println("\tYou haven't noted down anything yet.");
         }
-        System.out.println("\tHere are the tasks in your list:");
+        System.out.println("\tHere are the tasks in your taskList:");
         for (int i=0; i<promptIndex; i++){
             System.out.println("\t" + (i+1) + "." +
-                                "[" + list[i].getStatusIcon() + "]" +
-                                list[i].getDescription());
+                                "[" + taskList[i].getStatusIcon() + "]" +
+                                taskList[i].getDescription());
         }
     }
 
-    private static void addToList(Task[] list, String prompt, int promptIndex) {
-        list[promptIndex] = new Task(prompt);
+    private static void addTotaskList(Task[] taskList, String prompt, int promptIndex) {
+        taskList[promptIndex] = new Task(prompt);
         System.out.println("\tadded: " + prompt);
+    }
+
+    private static void completeTask(Task[] taskList, String substring) {
+        int taskIndex = Integer.parseInt(substring) - 1;
+        taskList[taskIndex].markAsDone();
     }
 
     public static void main(String[] args) {
@@ -33,31 +39,33 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        String division_line = "\t____________________________________________________________\n";
-        String say_hi = "\tHello! I'm Ayanga, your personal task manager.\n" +
+        String divLine = "\t____________________________________________________________\n";
+        String greetings = "\tHello! I'm Ayanga, your personal task manager.\n" +
                         "\tWhat can I do for you?\n" +
                         "\tWave \"bye\" to me if you don't need me for now;\n" +
                         "\tSay \"list\" and I will display your tasks.\n";
-        Task[] list = new Task[100]; // list of task items
+        Task[] taskList = new Task[100]; // taskList of task items
 
-        System.out.print(division_line + say_hi + division_line);
+        System.out.print(divLine + greetings + divLine);
         Scanner in = new Scanner(System.in);
         int promptIndex = 0;
         String prompt = readPrompt(in);
         while (!prompt.equals("bye")) {
-            System.out.print(division_line);
+            System.out.print(divLine);
             if (prompt.equals("list")){
-                displayList(list, promptIndex);
+                displaytaskList(taskList, promptIndex);
+            } else if (prompt.startsWith("done")){
+                completeTask(taskList, prompt.substring(5));
             } else{
-                addToList(list, prompt, promptIndex);
+                addTotaskList(taskList, prompt, promptIndex);
                 promptIndex++;
             }
-            System.out.print(division_line);
+            System.out.print(divLine);
             prompt = readPrompt(in);
         }
-        String say_bye = "\tBye. Hope you have done your work next time I see you!\n";
+        String exitPhrase = "\tBye. Hope you have done your work next time I see you!\n";
 
-        System.out.println(division_line + say_bye + division_line);
+        System.out.println(divLine + exitPhrase + divLine);
     }
 
 

@@ -9,9 +9,9 @@ public class Task {
         this.isDone = false;
         totalTasks ++;
     }
-
+    //"\u2713" = tick symbol, "\u2718" = cross symbol
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? "\u2718" : " "); //return X if done or space if not
     }
 
     public String getDescription(){
