@@ -10,7 +10,7 @@ public class Duke {
         System.out.println(logo);
         System.out.println("Hello! I'm Duke.\nWhat can I do for you?\n");
 
-        String[] taskList = new String[100];
+        Task t = new Task();
         Scanner sc = new Scanner(System.in);
         Boolean isSame = true;
 
@@ -18,31 +18,24 @@ public class Duke {
         String list = "list";
 
         while (isSame) {
-            for (int i=0 ; i< taskList.length ; i++) {
-                String input = sc.nextLine().toLowerCase();
+            String input = sc.next().toLowerCase();
 
-                if (input.equalsIgnoreCase(bye)) {
-                    System.out.println("Bye. Hope to see you again soon!");
-                    isSame = false;
-                    System.exit(0);
-                }
-
-                else if (input.equalsIgnoreCase(list)) {
-                    for (int j=0 ; j< taskList.length ; j++) {
-                        if (taskList[j]==null) {
-                            break;
-                        }
-                        System.out.println(j+1 + ". " + taskList[j]);
-                    }
-                    i--;
-                }
-
-                else {
-                    taskList[i] = input;
-                    System.out.println("added: " + input);
-                    continue;
-                }
-
+            if (input.equalsIgnoreCase(bye)) {
+                System.out.println("Bye. Hope to see you again soon!");
+                isSame = false;
+                System.exit(0);
+            }
+            else if (input.equalsIgnoreCase(list)) {
+                t.showList();
+            }
+            else if (input.equalsIgnoreCase("done")){
+                System.out.println("enter task number: ");
+                int number = sc.nextInt();
+                t.markAsDone(number);
+            }
+            else {
+                t.addTask(input);
+                System.out.println("added new task: " + input);
             }
         }
     }
