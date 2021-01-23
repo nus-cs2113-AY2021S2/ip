@@ -6,6 +6,7 @@ public class Task {
 
     public Task() {
     }
+
     public Task(String taskDescription) {
         this.taskDescription = taskDescription;
     }

@@ -22,6 +22,10 @@ public class Duke {
 
     private static void setAddedTaskStatus(int taskId, boolean isDone) {
         taskId = taskId - 1;
+        if (taskId >= addedTasks.size() || taskId < 0) {
+            System.out.printf("I'm terribly sorry Sir/Madam/Other, %d is not a valid task id for the current list of tasks.\n", taskId);
+            return;
+        }
         addedTasks.get(taskId).setDone(isDone);
         System.out.printf("[X] %s\n", addedTasks.get(taskId).getTaskDescription());
     }
