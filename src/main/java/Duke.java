@@ -19,8 +19,8 @@ public class Duke {
         System.out.println("____________________________________________________________");
     }
 
-    public static void run(Scanner scanner){
-        while(true) {
+    public static void run(Scanner scanner) {
+        while (true) {
             String input = scanner.nextLine();
             if (input.equals("bye")) {
                 return;
@@ -44,7 +44,7 @@ public class Duke {
         System.out.println("____________________________________________________________");
     }
 
-    public static void addNewTask(String input){
+    public static void addNewTask(String input) {
         tasks[taskCount] = new Task(input);
         taskCount++;
         System.out.println("____________________________________________________________");
@@ -56,8 +56,8 @@ public class Duke {
         Task[] taskList = Arrays.copyOf(tasks, taskCount);
         System.out.println("____________________________________________________________");
         System.out.println("Here are the tasks in your list:");
-        for(int i = 0; i < taskList.length; i++){
-            System.out.printf("%d. %s%n", i+1, taskList[i]);
+        for (int i = 0; i < taskList.length; i++) {
+            System.out.printf("%d. %s%n", i + 1, taskList[i]);
         }
         System.out.println("____________________________________________________________");
     }

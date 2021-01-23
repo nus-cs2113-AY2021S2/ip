@@ -15,7 +15,7 @@ public class Task {
         return description;
     }
 
-    public void markDone(){
+    public void markDone() {
         this.isDone = true;
     }
 
