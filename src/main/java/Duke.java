@@ -11,8 +11,14 @@ public class Duke {
             if (userInput.equals("bye")) {
                 break;
             }
+
             else if (userInput.equals("list")) {
                 taskList.printTasks();
+            }
+            else if (userInput.startsWith("done")) {
+                String[] splitInput = userInput.split(" ");
+                int taskNumber = Integer.parseInt(splitInput[1]);
+                taskList.updateCompletion(taskNumber);
             }
             else {
                 Task newTask = new Task(userInput);
