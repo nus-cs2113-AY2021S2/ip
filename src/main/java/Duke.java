@@ -14,6 +14,7 @@ public class Duke {
         if (promptIndex==0){
             System.out.println("\tYou haven't noted down anything yet.");
         }
+        System.out.println("\tHere are the tasks in your list:");
         for (int i=0; i<promptIndex; i++){
             System.out.println("\t" + (i+1) + "." + list[i]);
         }
