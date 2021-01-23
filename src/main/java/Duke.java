@@ -34,8 +34,6 @@ public class Duke {
                 break;
             }
         } while (isLoop);
-
-
     }
 
     private static void addRecord(String userInput) {
