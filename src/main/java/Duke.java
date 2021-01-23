@@ -34,7 +34,7 @@ public class Duke {
                 isLoop = false;
                 break;
             default:
-                addRecord(inputs[0]);
+                addRecord(rawInput);
                 break;
             }
         } while (isLoop);
