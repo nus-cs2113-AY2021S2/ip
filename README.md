@@ -24,3 +24,6 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    | |_| | |_| |   <  __/
    |____/ \__,_|_|\_\___|
    ```
+   
+Notes:
+- How to configure Google Style Guide for Intellij: https://medium.com/swlh/configuring-google-style-guide-for-java-for-intellij-c727af4ef248

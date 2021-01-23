@@ -1,34 +1,38 @@
 package entity;
 
+/**
+ * An entity representing a Task.
+ */
 public class Task {
-    String taskDescription;
-    boolean isDone;
 
-    public Task() {
-    }
+  String taskDescription;
+  boolean isDone;
 
-    public Task(String taskDescription) {
-        this.taskDescription = taskDescription;
-    }
+  public Task() {
+  }
 
-    public Task(String taskDescription, boolean isDone) {
-        this.taskDescription = taskDescription;
-        this.isDone = isDone;
-    }
+  public Task(String taskDescription) {
+    this.taskDescription = taskDescription;
+  }
 
-    public String getTaskDescription() {
-        return taskDescription;
-    }
+  public Task(String taskDescription, boolean isDone) {
+    this.taskDescription = taskDescription;
+    this.isDone = isDone;
+  }
 
-    public void setTaskDescription(String taskDescription) {
-        this.taskDescription = taskDescription;
-    }
+  public String getTaskDescription() {
+    return taskDescription;
+  }
 
-    public boolean isDone() {
-        return isDone;
-    }
+  public void setTaskDescription(String taskDescription) {
+    this.taskDescription = taskDescription;
+  }
 
-    public void setDone(boolean done) {
-        isDone = done;
-    }
+  public boolean isDone() {
+    return isDone;
+  }
+
+  public void setDone(boolean done) {
+    isDone = done;
+  }
 }
