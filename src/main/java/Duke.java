@@ -11,7 +11,7 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
 
         Scanner sc = new Scanner(System.in);
-        ArrayList<String> tasks = new ArrayList<String>();
+        ArrayList<Task> tasks = new ArrayList<Task>();
 
         System.out.println("~____________________________________________________________~");
         System.out.println("What's up! I'm Duke");
@@ -21,19 +21,35 @@ public class Duke {
         boolean isRunning = true;
         while (isRunning) {
             String phrase = sc.nextLine();
+
             if (phrase.equals("bye")) {
+                // Exits program
                 isRunning = false;
             } else if (phrase.equals("list")) {
+                // List all tasks
                 System.out.println("~____________________________________________________________~");
+                System.out.println("Here are the tasks in your list:");
                 int i = 0;
-                for (String task : tasks) {
-                    System.out.println(++i + ". " + task);
+                for (Task task : tasks) {
+                    System.out.println(++i + ". [" + task.getStatusIcon() + "] " + task.getDescription());
                 };
                 System.out.println("~____________________________________________________________~\n");
-            } else {
+            } else if (phrase.startsWith("done ")) {
+                // Set a task as done
+                int index = phrase.charAt(phrase.length()-1) - '0';
+
                 System.out.println("~____________________________________________________________~");
+                System.out.println("Nice! I've marked this task as done:");
+                Task task = tasks.get(index - 1);
+                task.markAsDone();
+                System.out.println("[" + task.getStatusIcon() + "] " + task.getDescription());
+                System.out.println("~____________________________________________________________~\n");
+            } else {
+                // Add a task
+                System.out.println("~____________________________________________________________~");
+                Task task = new Task(phrase);
                 System.out.println("added: " + phrase);
-                tasks.add(phrase);
+                tasks.add(task);
                 System.out.println("~____________________________________________________________~\n");
             }
         }
