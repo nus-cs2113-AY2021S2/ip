@@ -14,18 +14,15 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         Boolean isSame = true;
 
-        String bye = "bye";
-        String list = "list";
-
         while (isSame) {
             String input = sc.next().toLowerCase();
 
-            if (input.equalsIgnoreCase(bye)) {
+            if (input.equalsIgnoreCase("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 isSame = false;
                 System.exit(0);
             }
-            else if (input.equalsIgnoreCase(list)) {
+            else if (input.equalsIgnoreCase("list")) {
                 t.showList();
             }
             else if (input.equalsIgnoreCase("done")){
