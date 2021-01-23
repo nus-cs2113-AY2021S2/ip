@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
         TaskList taskList = new TaskList();
-        Output.greet();
+        Output.printGreet();
         while (true){
             Scanner scan = new Scanner(System.in);
             String userInput = scan.nextLine();
@@ -26,6 +26,6 @@ public class Duke {
             }
             Output.printLine();
         }
-        Output.exit();
+        Output.printExit();
     }
 }
