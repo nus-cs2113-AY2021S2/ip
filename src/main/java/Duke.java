@@ -1,6 +1,10 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
+
+    public static String[] tasks = new String[100];
+    public static int taskCount = 0;
 
     public static void printStartUpMessage() {
         System.out.println("____________________________________________________________");
@@ -15,16 +19,30 @@ public class Duke {
         System.out.println("____________________________________________________________");
     }
 
-    public static void echo(Scanner scanner){
+    public static void run(Scanner scanner){
         while(true) {
             String input = scanner.nextLine();
             if (input.equals("bye")) {
                 return;
+            } else if (input.equals("list")) {
+                printTaskList();
+            } else {
+                tasks[taskCount] = input;
+                taskCount++;
+                System.out.println("____________________________________________________________");
+                System.out.println("added: " + input);
+                System.out.println("____________________________________________________________");
             }
-            System.out.println("____________________________________________________________");
-            System.out.println(input);
-            System.out.println("____________________________________________________________");
         }
+    }
+
+    public static void printTaskList() {
+        String[] taskList = Arrays.copyOf(tasks, taskCount);
+        System.out.println("____________________________________________________________");
+        for(int i = 0; i < taskList.length; i++){
+            System.out.printf("%d. %s%n", i+1, taskList[i]);
+        }
+        System.out.println("____________________________________________________________");
     }
 
     public static void main(String[] args) {
@@ -38,7 +56,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         printStartUpMessage();
-        echo(scanner);
+        run(scanner);
         printExitMessage();
     }
 }
