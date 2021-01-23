@@ -15,7 +15,7 @@ public class Duke {
         if (promptIndex==0){
             System.out.println("\tYou haven't noted down anything yet.");
         }
-        System.out.println("\tHere are the tasks in your taskList:");
+        System.out.println("\tHere are the tasks in your list:");
         for (int i=0; i<promptIndex; i++){
             System.out.println("\t" + (i+1) + "." +
                                 "[" + taskList[i].getStatusIcon() + "]" +
@@ -31,6 +31,9 @@ public class Duke {
     private static void completeTask(Task[] taskList, String substring) {
         int taskIndex = Integer.parseInt(substring) - 1;
         taskList[taskIndex].markAsDone();
+        System.out.println("\tNice! I've marked this task as done: \n" +
+                            "\t" + "[" + taskList[taskIndex].getStatusIcon() + "]" +
+                            taskList[taskIndex].getDescription());
     }
 
     public static void main(String[] args) {
