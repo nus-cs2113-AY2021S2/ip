@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Duke {
 
-    public static String[] tasks = new String[100];
+    public static Task[] tasks = new Task[100];
     public static int taskCount = 0;
 
     public static void printStartUpMessage() {
@@ -26,19 +26,36 @@ public class Duke {
                 return;
             } else if (input.equals("list")) {
                 printTaskList();
+            } else if (input.contains("done")) {
+                markTaskDone(input);
             } else {
-                tasks[taskCount] = input;
-                taskCount++;
-                System.out.println("____________________________________________________________");
-                System.out.println("added: " + input);
-                System.out.println("____________________________________________________________");
+                addNewTask(input);
             }
         }
     }
 
-    public static void printTaskList() {
-        String[] taskList = Arrays.copyOf(tasks, taskCount);
+    public static void markTaskDone(String input) {
+        String[] parts = input.split(" ");
+        int taskIndex = Integer.parseInt(parts[1]) - 1;
+        tasks[taskIndex].markDone();
         System.out.println("____________________________________________________________");
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println(tasks[taskIndex]);
+        System.out.println("____________________________________________________________");
+    }
+
+    public static void addNewTask(String input){
+        tasks[taskCount] = new Task(input);
+        taskCount++;
+        System.out.println("____________________________________________________________");
+        System.out.println("added: " + input);
+        System.out.println("____________________________________________________________");
+    }
+
+    public static void printTaskList() {
+        Task[] taskList = Arrays.copyOf(tasks, taskCount);
+        System.out.println("____________________________________________________________");
+        System.out.println("Here are the tasks in your list:");
         for(int i = 0; i < taskList.length; i++){
             System.out.printf("%d. %s%n", i+1, taskList[i]);
         }
