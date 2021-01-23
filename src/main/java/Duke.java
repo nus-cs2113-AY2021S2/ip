@@ -5,6 +5,9 @@ public class Duke {
         String line;
         Scanner in = new Scanner(System.in);
 
+        String[] tasks = new String[100];
+        int index = 0;
+
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -20,7 +23,16 @@ public class Duke {
         line = in.nextLine();
         while (!line.equals("bye")){
             System.out.println("---------------------------------------------------------");
-            System.out.println(line);
+            if (line.equals("list")){
+                for (int i = 1; i <= index; i++){
+                    System.out.println(i + ". " + tasks[i-1]);
+                }
+            }
+            else{
+                tasks[index] = line;
+                index++;
+                System.out.println("added: " + line);
+            }
             System.out.println("---------------------------------------------------------");
             line = in.nextLine();
         }
