@@ -15,7 +15,7 @@ public class Duke {
         Boolean isSame = true;
 
         while (isSame) {
-            String input = sc.next().toLowerCase();
+            String input = sc.nextLine().toLowerCase();
 
             if (input.equalsIgnoreCase("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
@@ -27,8 +27,7 @@ public class Duke {
             }
             else if (input.equalsIgnoreCase("done")){
                 System.out.println("enter task number: ");
-                int number = sc.nextInt();
-                t.markAsDone(number);
+                t.markAsDone();
             }
             else {
                 t.addTask(input);

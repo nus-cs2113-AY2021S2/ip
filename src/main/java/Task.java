@@ -1,5 +1,6 @@
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 public class Task {
 
@@ -34,8 +35,10 @@ public class Task {
         }
     }
 
-    public void markAsDone(int number) {
+    public void markAsDone() {
         int i = 1;
+        Scanner sc = new Scanner(System.in);
+        int number = sc.nextInt();
         if (number > taskList.size()) {
             System.out.println("task does not exist");
         }
