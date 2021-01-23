@@ -42,11 +42,12 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        String divLine = "\t____________________________________________________________\n";
+        String divLine = "\t__________________________________________________________________\n";
         String greetings = "\tHello! I'm Ayanga, your personal task manager.\n" +
-                        "\tWhat can I do for you?\n" +
+                        "\tWhat can I note down for you?\n" +
                         "\tWave \"bye\" to me if you don't need me for now;\n" +
-                        "\tSay \"list\" and I will display your tasks.\n";
+                        "\tSay \"list\" and I will display your tasks.\n" +
+                        "\tSay \"done\" and a number to let me know you completed which task.\n";
         Task[] taskList = new Task[100]; // taskList of task items
 
         System.out.print(divLine + greetings + divLine);
@@ -66,7 +67,8 @@ public class Duke {
             System.out.print(divLine);
             prompt = readPrompt(in);
         }
-        String exitPhrase = "\tBye. Hope you have done your work next time I see you!\n";
+        String exitPhrase = "\tBye. Hope you have done your work next time I see you!\n" +
+                            "\tAh, and also remember to take care of yourself and sleep early :)\n";
 
         System.out.println(divLine + exitPhrase + divLine);
     }
