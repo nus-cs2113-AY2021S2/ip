@@ -10,18 +10,20 @@ public class Duke {
         System.out.println(input);
     }
 
-    public static void displayList(String[] list, int promptIndex){
+    public static void displayList(Task[] list, int promptIndex){
         if (promptIndex==0){
             System.out.println("\tYou haven't noted down anything yet.");
         }
         System.out.println("\tHere are the tasks in your list:");
         for (int i=0; i<promptIndex; i++){
-            System.out.println("\t" + (i+1) + "." + list[i]);
+            System.out.println("\t" + (i+1) + "." +
+                                "[" + list[i].getStatusIcon() + "]" +
+                                list[i].getDescription());
         }
     }
 
-    private static void addToList(String[] list, String prompt, int promptIndex) {
-        list[promptIndex] = prompt;
+    private static void addToList(Task[] list, String prompt, int promptIndex) {
+        list[promptIndex] = new Task(prompt);
         System.out.println("\tadded: " + prompt);
     }
 
@@ -36,7 +38,7 @@ public class Duke {
                         "\tWhat can I do for you?\n" +
                         "\tWave \"bye\" to me if you don't need me for now;\n" +
                         "\tSay \"list\" and I will display your tasks.\n";
-        String[] list = new String[100]; // list of task items
+        Task[] list = new Task[100]; // list of task items
 
         System.out.print(division_line + say_hi + division_line);
         Scanner in = new Scanner(System.in);
