@@ -2,7 +2,7 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
-    private static int totalTasks=0;
+    private static int totalTasks = 0;
 
     public Task(String description) {
         this.description = description;

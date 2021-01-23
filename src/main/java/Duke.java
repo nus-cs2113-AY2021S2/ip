@@ -11,20 +11,20 @@ public class Duke {
     }
 */
 
-    public static void displaytaskList(Task[] taskList, int promptIndex){
-        if (promptIndex==0){
+    public static void displayList(Task[] taskList, int taskIndex){
+        if (taskIndex==0){
             System.out.println("\tYou haven't noted down anything yet.");
         }
         System.out.println("\tHere are the tasks in your list:");
-        for (int i=0; i<promptIndex; i++){
+        for (int i=0; i<taskIndex; i++){
             System.out.println("\t" + (i+1) + "." +
                                 "[" + taskList[i].getStatusIcon() + "]" +
                                 taskList[i].getDescription());
         }
     }
 
-    private static void addTotaskList(Task[] taskList, String prompt, int promptIndex) {
-        taskList[promptIndex] = new Task(prompt);
+    private static void addToList(Task[] taskList, String prompt, int taskIndex) {
+        taskList[taskIndex] = new Task(prompt);
         System.out.println("\tadded: " + prompt);
     }
 
@@ -52,17 +52,17 @@ public class Duke {
 
         System.out.print(divLine + greetings + divLine);
         Scanner in = new Scanner(System.in);
-        int promptIndex = 0;
+        int taskIndex = 0;
         String prompt = readPrompt(in);
         while (!prompt.equals("bye")) {
             System.out.print(divLine);
             if (prompt.equals("list")){
-                displaytaskList(taskList, promptIndex);
+                displayList(taskList, taskIndex);
             } else if (prompt.startsWith("done")){
                 completeTask(taskList, prompt.substring(5));
             } else{
-                addTotaskList(taskList, prompt, promptIndex);
-                promptIndex++;
+                addToList(taskList, prompt, taskIndex);
+                taskIndex++;
             }
             System.out.print(divLine);
             prompt = readPrompt(in);
