@@ -10,12 +10,24 @@ public class Duke {
         System.out.println("--------------------------------------------");
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
         System.out.println("--------------------------------------------");
+        ArrayList<String> added = new ArrayList<String>();
         Scanner sc = new Scanner(System.in);
         String in = sc.nextLine();
         do {
-            System.out.println("--------------------------------------------");
-            System.out.println(in);
-            System.out.println("--------------------------------------------");
+            if (in.equals("list")){
+                int count = 1;
+                System.out.println("--------------------------------------------");
+                for (String i : added){
+                    System.out.println(count+ ". " + i);
+                    count++;
+                }
+                System.out.println("--------------------------------------------");
+            }
+            else{
+                added.add(in);
+                System.out.println("--------------------------------------------");
+                System.out.println("added: " + in);
+                System.out.println("--------------------------------------------");}
             in = sc.nextLine();
         } while (!in.equals("bye"));
         System.out.println("--------------------------------------------");
