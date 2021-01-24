@@ -1,24 +1,42 @@
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class Duke {
     
     public static String HORIZONTAL_LINE = "____________________________________________________________";
+
     /**
      * Handles commands from user
-     * @param command command from the user
      */
-    public static void handleCommand(String command) {
-        switch (command) {
-        case "bye":
-            System.out.println(HORIZONTAL_LINE);
-            System.out.println("Bye. Hope to see you again soon!");
-            System.out.println(HORIZONTAL_LINE);
-            break;
-        default:
-            System.out.println(HORIZONTAL_LINE);
-            System.out.println(command);
-            System.out.println(HORIZONTAL_LINE);
-            break;
+    public static void handleCommand() {
+        String input;
+        Scanner in = new Scanner(System.in);
+        boolean shouldExit = false;
+        int taskCounter = 0;
+        String[] taskList = new String[100];
+        while (!shouldExit) {
+            input = in.nextLine();
+            if (input.equals("bye")) {
+                System.out.println(HORIZONTAL_LINE);
+                System.out.println("Bye. Hope to see you again soon!");
+                System.out.println(HORIZONTAL_LINE);
+                shouldExit = true;
+            } else if (input.equals("list")) {
+                System.out.println(HORIZONTAL_LINE);
+                String[] outputTaskList = Arrays.copyOf(taskList, taskCounter);
+                int listCounter = 1;
+                for (String task: outputTaskList) {
+                    System.out.println(listCounter + ". " + task);
+                    ++listCounter;
+                }
+                System.out.println(HORIZONTAL_LINE);
+            } else {
+                System.out.println(HORIZONTAL_LINE);
+                System.out.println("added: " + input);
+                taskList[taskCounter] = input;
+                ++taskCounter;
+                System.out.println(HORIZONTAL_LINE);
+            }
         }
     }
     public static void main(String[] args) {
@@ -37,17 +55,6 @@ public class Duke {
         System.out.println(greeting);
         System.out.println(HORIZONTAL_LINE);
 
-        String command; // receiving command input
-        boolean shouldExit = false;
-        Scanner in = new Scanner(System.in);
-        while (!shouldExit) {
-            command = in.nextLine();
-            if (command.equals("bye")) {
-                handleCommand(command);
-                shouldExit = true;
-            } else {
-                handleCommand(command);
-            }
-        }
+        handleCommand(); // handle input received
     }
 }
