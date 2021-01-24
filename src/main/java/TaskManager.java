@@ -3,7 +3,7 @@ public class TaskManager {
     int taskCount = 0;
 
     public void listTask() {
-        for(int i=0; i<taskCount; ++i){
+        for (int i=0; i<taskCount; ++i) {
             System.out.print(i+1 + ". [");
             System.out.print((tasks[i].isDone()) ? "X" : " ");
             System.out.println("] " + tasks[i].getTaskName());

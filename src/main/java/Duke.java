@@ -23,16 +23,16 @@ public class Duke {
             line = in.nextLine();
             printDashes();
 
-            if(line.equals("bye")){
+            if (line.equals("bye")) {
                 break;
             }
 
-            if(line.equals("list")) {
+            if (line.equals("list")) {
                 taskManager.listTask();
-            }else if(line.length()>4 && line.substring(0,4).equals("done")) {
+            } else if (line.length()>4 && line.substring(0,4).equals("done")) {
                 int taskNumber = Integer.parseInt(line.substring(5))-1;
                 taskManager.doneTask(taskNumber);
-            }else{
+            } else {
                 taskManager.addTask(line);
             }
 
