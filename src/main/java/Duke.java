@@ -6,10 +6,13 @@ public class Duke {
     static final int INPUT_CODE_EXIT = -1;
     static final int INPUT_CODE_DEFAULT = 0;
     static final int INPUT_CODE_LIST = 1;
+    static final int INPUT_CODE_DONE = 2;
+    static final int INPUT_CODE_INVALID = 3;
 
     public static void printDividerLine() {
         System.out.println("____________________________________________________________");
     }
+
     public static void printHelloStatement() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -22,23 +25,39 @@ public class Duke {
         System.out.println("What can I do for you?");
         printDividerLine();
     }
+
     public static void printBye() {
         printDividerLine();
         System.out.println("Bye. Hope to see you again soon!");
         System.out.print("____________________________________________________________");
     }
+
     private static int getCommandCode(String userCommand) {
-        switch (userCommand.toLowerCase()) {
+        String[] words = userCommand.split(" ");
+        switch (words[0].toLowerCase()) {
         case "bye":
             return INPUT_CODE_EXIT;
         case "list":
             return INPUT_CODE_LIST;
+        case "done":
+            try {
+                if (words.length == 1 || Integer.parseInt(words[1]) < 1) {
+                    return INPUT_CODE_INVALID;
+                } else {
+                    return INPUT_CODE_DONE;
+                }
+            } catch(NumberFormatException e){
+                return INPUT_CODE_INVALID;
+            }
         default:
             return INPUT_CODE_DEFAULT;
         }
     }
-    public static void echoCommand(String echoCommand) {
-        System.out.println(echoCommand);
+
+    public static int getTaskIndex(String userInput) {
+        String[] words = userInput.split(" ");
+        int indexResult = Integer.parseInt(words[1]);
+        return indexResult;
     }
 
     public static void main(String[] args) {
@@ -60,12 +79,23 @@ public class Duke {
                 break;
             case INPUT_CODE_LIST:
                 printDividerLine();
-                task.listJob();
+                task.listTask();
+                printDividerLine();
+                break;
+            case INPUT_CODE_DONE:
+                printDividerLine();
+                int index = getTaskIndex(userInput);
+                task.markDone(index);
+                printDividerLine();
+                break;
+            case INPUT_CODE_INVALID:
+                printDividerLine();
+                System.out.println("You have enter an invalid command, please try again.");
                 printDividerLine();
                 break;
             default:
                 printDividerLine();
-                task.addJob(userInput);
+                task.addTask(userInput);
                 printDividerLine();
                 break;
             }

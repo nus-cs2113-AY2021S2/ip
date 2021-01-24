@@ -1,27 +1,55 @@
 public class Task {
     static final int MAX_TASK_NUM = 100;
 
-    private String[] list = new String[MAX_TASK_NUM];
-    private int jobAmt;
+    private String[] list;
+    private String[] completionStatus;
+    private int taskAmt;
 
     public Task() {
-        jobAmt = 0;
+        list = new String[MAX_TASK_NUM];
+        taskAmt = 0;
+        completionStatus = new String[MAX_TASK_NUM];
     }
 
-    public Task(String[] list, int jobAmt) {
+    public Task(String[] list, int taskAmt, String[] completionStatus) {
         this.list = list;
-        this.jobAmt = jobAmt;
+        this.taskAmt = taskAmt;
+        this.completionStatus = completionStatus;
     }
 
-    public void addJob(String job) {
-        list[jobAmt] = job;
-        jobAmt++;
-        System.out.println("added: " + job);
+    public void addTask(String task) {
+        list[taskAmt] = task;
+        completionStatus[taskAmt] = " ";
+        taskAmt++;
+        System.out.println("added: " + task);
     }
 
-    public void listJob() {
+    public void listTask() {
+        System.out.println("Here are the tasks in your list:");
         for (int i=0; list[i] != null; i++) {
-            System.out.println((i+1) + ". " + list[i]);
+            System.out.println((i+1) + ".[" + completionStatus[i] + "] " + list[i]);
+        }
+    }
+
+    public void markDone(int index) {
+        if (index > taskAmt) {
+            System.out.println("There is no task number " + index + " , Please try again");
+        } else {
+            if (isDone(index) == true) {
+                System.out.println("You have already completed this task.");
+            } else {
+                completionStatus[index - 1] = "x";
+                System.out.println("Nice! I've marked this task as done: ");
+                System.out.println("[" + completionStatus[index - 1] + "] " + list[index - 1]);
+            }
+        }
+    }
+
+    public boolean isDone(int index) {
+        if (completionStatus[index-1] == "x") {
+            return true;
+        } else {
+            return false;
         }
     }
 }
