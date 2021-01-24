@@ -17,7 +17,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        boolean isContinue = true;
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -27,11 +26,10 @@ public class Duke {
 
         printIntroMessage();
 
-        while (isContinue){
+        while (true){
             Scanner in = new Scanner(System.in);
             String input = in.nextLine();
             if (input.equals("bye")){
-                isContinue = false;
                 printExitMessage();
             }
             switch (input) {
