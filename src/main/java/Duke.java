@@ -34,9 +34,23 @@ public class Duke {
         printLineWithNewLine();
     }
 
+<<<<<<< HEAD
     public static void echoMessage(String line){
         printLine();
         System.out.println(line);
+=======
+    public static void printList(String[] tasks, int count) {
+        printLine();
+        for (int i = 0; i < count; i++) {
+            System.out.println(i+1 + ". " + tasks[i]);
+        }
+        printLineWithNewLine();
+    }
+
+    public static void echoMessage(String line){
+        printLine();
+        System.out.println("added: " + line);
+>>>>>>> 611b409811856143e85e3d1ae576a236dc532df2
         printLineWithNewLine();
     }
 
@@ -47,6 +61,11 @@ public class Duke {
 
         String line;
         Scanner in = new Scanner(System.in);
+<<<<<<< HEAD
+=======
+        int count = 0;
+        String[] tasks = new String[100];
+>>>>>>> 611b409811856143e85e3d1ae576a236dc532df2
 
         while(true) {
             line = in.nextLine();
@@ -54,6 +73,15 @@ public class Duke {
                 printBye();
                 break;
             }
+<<<<<<< HEAD
+=======
+            else if (line.equals("list")) {
+                printList(tasks, count);
+                continue;
+            }
+            tasks[count] = line;
+            count++;
+>>>>>>> 611b409811856143e85e3d1ae576a236dc532df2
             echoMessage(line);
         }
     }
