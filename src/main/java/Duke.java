@@ -13,7 +13,7 @@ public class Duke {
         Scanner in = new Scanner(System.in);
         boolean shouldExit = false;
         int taskCounter = 0;
-        String[] taskList = new String[100];
+        Task[] taskList = new Task[100];
         while (!shouldExit) {
             input = in.nextLine();
             if (input.equals("bye")) {
@@ -23,17 +23,27 @@ public class Duke {
                 shouldExit = true;
             } else if (input.equals("list")) {
                 System.out.println(HORIZONTAL_LINE);
-                String[] outputTaskList = Arrays.copyOf(taskList, taskCounter);
-                int listCounter = 1;
-                for (String task: outputTaskList) {
-                    System.out.println(listCounter + ". " + task);
-                    ++listCounter;
+                System.out.println("Here are the tasks in your list:");
+                Task[] outputTaskList = Arrays.copyOf(taskList, taskCounter);
+                int descriptionCounter = 1;
+                for (Task task: outputTaskList) {
+                    String description = task.getDescription();
+                    System.out.println(descriptionCounter + ".[" + task.getStatusIcon() + "] " + description);
+                    ++descriptionCounter;
                 }
+                System.out.println(HORIZONTAL_LINE);
+            } else if (input.contains("done")) {
+                System.out.println(HORIZONTAL_LINE);
+                int number = Integer.parseInt(input.substring(5)) - 1; // minus 1 to adhere to array indexing
+                taskList[number].markAsDone();
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println("  [" + taskList[number].getStatusIcon() + "] " + taskList[number].getDescription());
                 System.out.println(HORIZONTAL_LINE);
             } else {
                 System.out.println(HORIZONTAL_LINE);
                 System.out.println("added: " + input);
-                taskList[taskCounter] = input;
+                Task task = new Task(input);
+                taskList[taskCounter] = task;
                 ++taskCounter;
                 System.out.println(HORIZONTAL_LINE);
             }
