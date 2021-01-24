@@ -5,6 +5,7 @@ public class Duke {
 
     static final int INPUT_CODE_EXIT = -1;
     static final int INPUT_CODE_DEFAULT = 0;
+    static final int INPUT_CODE_LIST = 1;
 
     public static void printDividerLine() {
         System.out.println("____________________________________________________________");
@@ -30,6 +31,8 @@ public class Duke {
         switch (userCommand.toLowerCase()) {
         case "bye":
             return INPUT_CODE_EXIT;
+        case "list":
+            return INPUT_CODE_LIST;
         default:
             return INPUT_CODE_DEFAULT;
         }
@@ -44,6 +47,7 @@ public class Duke {
         int commandCode = INPUT_CODE_DEFAULT;
         String userInput;
         Scanner in = new Scanner(System.in);
+        Task task = new Task();
 
         do {
             userInput = in.nextLine();
@@ -54,9 +58,14 @@ public class Duke {
             case INPUT_CODE_EXIT:
                 printBye();
                 break;
+            case INPUT_CODE_LIST:
+                printDividerLine();
+                task.listJob();
+                printDividerLine();
+                break;
             default:
                 printDividerLine();
-                echoCommand(userInput);
+                task.addJob(userInput);
                 printDividerLine();
                 break;
             }
