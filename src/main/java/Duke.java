@@ -3,7 +3,9 @@ import java.util.Arrays;
 
 public class Duke {
     
-    public static String HORIZONTAL_LINE = "____________________________________________________________";
+    public static void printHorizontalLine() {
+        System.out.println("____________________________________________________________");
+    }
 
     /**
      * Handles commands from user
@@ -17,12 +19,12 @@ public class Duke {
         while (!shouldExit) {
             input = in.nextLine();
             if (input.equals("bye")) {
-                System.out.println(HORIZONTAL_LINE);
+                printHorizontalLine();
                 System.out.println("Bye. Hope to see you again soon!");
-                System.out.println(HORIZONTAL_LINE);
+                printHorizontalLine();
                 shouldExit = true;
             } else if (input.equals("list")) {
-                System.out.println(HORIZONTAL_LINE);
+                printHorizontalLine();
                 System.out.println("Here are the tasks in your list:");
                 Task[] outputTaskList = Arrays.copyOf(taskList, taskCounter);
                 int descriptionCounter = 1;
@@ -31,39 +33,39 @@ public class Duke {
                     System.out.println(descriptionCounter + ".[" + task.getStatusIcon() + "] " + description);
                     ++descriptionCounter;
                 }
-                System.out.println(HORIZONTAL_LINE);
+                printHorizontalLine();
             } else if (input.contains("done")) {
-                System.out.println(HORIZONTAL_LINE);
-                int number = Integer.parseInt(input.substring(5)) - 1; // minus 1 to adhere to array indexing
-                taskList[number].markAsDone();
+                printHorizontalLine();
+                int index = Integer.parseInt(input.substring(5)) - 1; // minus 1 to adhere to array indexing
+                taskList[index].markAsDone();
                 System.out.println("Nice! I've marked this task as done:");
-                System.out.println("  [" + taskList[number].getStatusIcon() + "] " + taskList[number].getDescription());
-                System.out.println(HORIZONTAL_LINE);
+                System.out.println("  [" + taskList[index].getStatusIcon() + "] " + taskList[index].getDescription());
+                printHorizontalLine();
             } else {
-                System.out.println(HORIZONTAL_LINE);
+                printHorizontalLine();
                 System.out.println("added: " + input);
                 Task task = new Task(input);
                 taskList[taskCounter] = task;
                 ++taskCounter;
-                System.out.println(HORIZONTAL_LINE);
+                printHorizontalLine();
             }
         }
     }
     public static void main(String[] args) {
         // logo/loading
-        System.out.println(HORIZONTAL_LINE);
+        printHorizontalLine();
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        System.out.println(HORIZONTAL_LINE);
+        printHorizontalLine();
 
         // greeting
         String greeting = "Hello! I'm Duke\n" + "What can I do for you?";
         System.out.println(greeting);
-        System.out.println(HORIZONTAL_LINE);
+        printHorizontalLine();
 
         handleCommand(); // handle input received
     }
