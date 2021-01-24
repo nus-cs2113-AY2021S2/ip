@@ -11,7 +11,8 @@ public class Duke {
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
         System.out.println("--------------------------------------------");
         Task[] tasks = new Task[20];
-        char ch;
+        char ch1;
+        char ch2;
         Scanner sc = new Scanner(System.in);
         String in = sc.nextLine();
         int count1 = 0;
@@ -20,6 +21,7 @@ public class Duke {
             if (in.equals("list")){
                 int count = 1;
                 System.out.println("--------------------------------------------");
+                System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i< tasks.length; i++){
                     if (tasks[i] != null){
                         System.out.println(count+ ". " + tasks[i].getPrintedLine());
@@ -30,12 +32,22 @@ public class Duke {
 
             else if (in.contains("done")){
                 for (int i = 0; i <in.length(); i++){
-                    ch = in.charAt(i);
-                    if(Character.isDigit(ch)) {
-                        numerate = Character.getNumericValue(ch);
+                    ch1 = in.charAt(i);
+                    int index = i;
+                    if (++index == in.length()){
+                        if(Character.isDigit(ch1)) {
+                            numerate = Character.getNumericValue(ch1);
+                            break;
+                        }
+                    }
+                    ch2 = in.charAt(index);
+                    if(Character.isDigit(ch1)&&Character.isDigit(ch2)) {
+                        numerate = Character.getNumericValue(ch1)*10 + Character.getNumericValue(ch2);
+                        break;
                     }
                 }
                 System.out.println("--------------------------------------------");
+                System.out.println("Nice! I've marked this task as done: ");
                 tasks[numerate-1].markAsDone();
                 System.out.println(tasks[numerate-1].getPrintedLine());
                 System.out.println("--------------------------------------------");
