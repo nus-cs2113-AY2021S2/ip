@@ -17,6 +17,8 @@ public class Duke {
 
         Scanner in = new Scanner(System.in);
         String line;
+        String[] tasks = new String[100];
+        int taskCount = 0;
 
         while(true){
             line = in.nextLine();
@@ -26,7 +28,16 @@ public class Duke {
                 break;
             }
 
-            System.out.println(line);
+            if(line.equals("list")){
+                for(int i=0; i<taskCount; ++i){
+                    System.out.printf("%d. %s\n", i+1, tasks[i]);
+                }
+            }else{
+                tasks[taskCount] = line;
+                ++taskCount;
+                System.out.println("added: " + line);
+            }
+
             printDashes();
         }
 
