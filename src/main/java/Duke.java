@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Duke {
 
     public static void printIntroMessage(){
@@ -15,13 +17,38 @@ public class Duke {
     }
 
     public static void main(String[] args) {
+        boolean isContinue = true;
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
+
         printIntroMessage();
-        printExitMessage();
+
+        while (isContinue){
+            Scanner in = new Scanner(System.in);
+            String input = in.nextLine();
+            if (input.equals("bye")){
+                isContinue = false;
+                printExitMessage();
+            }
+            switch (input) {
+            case "list":
+                System.out.println("________________________________");
+                System.out.println("list");
+                System.out.println("________________________________");
+                break;
+            case "blah":
+                System.out.println("________________________________");
+                System.out.println("blah");
+                System.out.println("________________________________");
+                break;
+            default:
+                System.out.println("Try again!");
+                break;
+            }
+        }
     }
 }
