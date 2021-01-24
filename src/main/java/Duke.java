@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 public class Duke {
     private static final String BREAKLINE = "------------------------------------------------------------";
-    private static List<String> userList = new ArrayList<String>();
+    private static List<Task> userList = new ArrayList<Task>();
+
     public static void showLogo() {
         String logo = " ____        _        \n"
                     + "|  _ \\ _   _| | _____ \n"
@@ -27,15 +28,24 @@ public class Duke {
     }
     public static void showList() {
         int count = 1;
-        for (String i: userList) {
-            System.out.println(count + ". " + i);
+        System.out.println("Here are the tasks in your list:");
+        for (Task i: userList) {
+            System.out.println(count + ".[" + i.getStatusIcon() + "] " + i.description);
             count++;
         }
         System.out.println(BREAKLINE);
     }
     public static void addToList(String input){
-        userList.add(input);
+        Task newTask = new Task(input);
+        userList.add(newTask);
         System.out.println("Added: " + input);
+        System.out.println(BREAKLINE);
+    }
+    public static void markDone(int idNum) {
+        Task item = userList.get(idNum - 1);
+        item.setAsDone();
+        System.out.println("Nice! I've marked this task as done: ");
+        System.out.println("[" + item.getStatusIcon() + "] " + item.description);
         System.out.println(BREAKLINE);
     }
     public static void byeMessage() {
@@ -48,12 +58,18 @@ public class Duke {
         greetMessage();
         while(true) {
             String input = getUserInput();
-            switch (input) {
+            String[] split = input.split("\\s+");
+            String command = split[0];
+            switch (command) {
             case "bye":
                 byeMessage();
                 return;
             case "list":
                 showList();
+                break;
+            case "done":
+                int idNum = Integer.parseInt(split[1]);
+                markDone(idNum);
                 break;
             default:
                 addToList(input);
