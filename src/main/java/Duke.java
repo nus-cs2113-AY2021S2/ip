@@ -42,11 +42,9 @@ public class Duke {
         while (!line.equals("bye")) {
             if (line.equals("list")) {
                 displayTextList(tasks);
-            }
-            else if (line.contains("done")) {
+            } else if (line.contains("done")) {
                 markCompletedTasks(tasks, line);
-            }
-            else {
+            } else {
                 System.out.println("-------------------------------------");
                 System.out.println("added: " + line);
                 System.out.println("-------------------------------------");
@@ -64,8 +62,11 @@ public class Duke {
             Task task = tasks.get(counter);
             System.out.print((counter+1) + ".");
 
-            if (task.getCompleted()) { System.out.print("[X] "); }
-            else { System.out.print("[ ] "); }
+            if (task.getCompleted()) {
+                System.out.print("[X] ");
+            } else {
+                System.out.print("[ ] ");
+            }
 
             System.out.println(task.getTaskName());
             counter ++;
@@ -84,7 +85,7 @@ public class Duke {
         for (String index: indexesStrings) {
             int indexInt = Integer.parseInt(index) - 1;
             if (indexInt < tasks.size()) {
-                tasks.get(indexInt).setCompleted(true);
+                tasks.get(indexInt).setCompleted();
             }
             System.out.println("[X] " + tasks.get(indexInt).getTaskName());
         }
