@@ -15,10 +15,9 @@ public class Duke {
         System.out.println("What can I do for you?");
         printDashes();
 
+        TaskManager taskManager = new TaskManager();
         Scanner in = new Scanner(System.in);
         String line;
-        String[] tasks = new String[100];
-        int taskCount = 0;
 
         while(true){
             line = in.nextLine();
@@ -28,14 +27,13 @@ public class Duke {
                 break;
             }
 
-            if(line.equals("list")){
-                for(int i=0; i<taskCount; ++i){
-                    System.out.printf("%d. %s\n", i+1, tasks[i]);
-                }
+            if(line.equals("list")) {
+                taskManager.listTask();
+            }else if(line.length()>4 && line.substring(0,4).equals("done")) {
+                int taskNumber = Integer.parseInt(line.substring(5))-1;
+                taskManager.doneTask(taskNumber);
             }else{
-                tasks[taskCount] = line;
-                ++taskCount;
-                System.out.println("added: " + line);
+                taskManager.addTask(line);
             }
 
             printDashes();
