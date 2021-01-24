@@ -49,19 +49,17 @@ public class Duke {
             userInput = in.nextLine();
             commandCode = getCommandCode(userInput);
 
+            // No Fallthrough intended in this switch statement
             switch (commandCode) {
-                case INPUT_CODE_EXIT:
-                    printBye();
-                    break;
-
-                default:
-                    printDividerLine();
-                    echoCommand(userInput);
-                    printDividerLine();
-                    break;
+            case INPUT_CODE_EXIT:
+                printBye();
+                break;
+            default:
+                printDividerLine();
+                echoCommand(userInput);
+                printDividerLine();
+                break;
             }
         } while (commandCode != INPUT_CODE_EXIT);
-
-        // printBye();
     }
 }
