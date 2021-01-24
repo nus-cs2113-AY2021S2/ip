@@ -3,66 +3,66 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class Duke {
-    private static final String BREAKLINE = "------------------------------------------------------------";
-    private static List<Task> userList = new ArrayList<Task>();
+    private static final String BREAK_LINE = "------------------------------------------------------------";
+    private static final List<Task> tasks = new ArrayList<>();
 
     public static void showLogo() {
         String logo = " ____        _        \n"
-                    + "|  _ \\ _   _| | _____ \n"
-                    + "| | | | | | | |/ / _ \\\n"
-                    + "| |_| | |_| |   <  __/\n"
-                    + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println(BREAKLINE + "\n" + logo + "\n" + BREAKLINE);
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        System.out.println(BREAK_LINE + "\n" + logo + "\n" + BREAK_LINE);
     }
-    public static void greetMessage() {
+    public static void showGreetMessage() {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
-        System.out.println(BREAKLINE);
+        System.out.println(BREAK_LINE);
     }
     public static String getUserInput() {
         System.out.print("> ");
         Scanner in = new Scanner(System.in);
         String input = in.nextLine();
-        System.out.println(BREAKLINE);
+        System.out.println(BREAK_LINE);
         return input;
     }
     public static void showList() {
-        int count = 1;
+        int id = 1;
         System.out.println("Here are the tasks in your list:");
-        for (Task i: userList) {
-            System.out.println(count + ".[" + i.getStatusIcon() + "] " + i.description);
-            count++;
+        for (Task task: tasks) {
+            System.out.println(id + ".[" + task.getStatusIcon() + "] " + task.description);
+            id++;
         }
-        System.out.println(BREAKLINE);
+        System.out.println(BREAK_LINE);
     }
     public static void addToList(String input){
         Task newTask = new Task(input);
-        userList.add(newTask);
+        tasks.add(newTask);
         System.out.println("Added: " + input);
-        System.out.println(BREAKLINE);
+        System.out.println(BREAK_LINE);
     }
     public static void markDone(int idNum) {
-        Task item = userList.get(idNum - 1);
-        item.setAsDone();
-        System.out.println("Nice! I've marked this task as done: ");
-        System.out.println("[" + item.getStatusIcon() + "] " + item.description);
-        System.out.println(BREAKLINE);
+        Task task = tasks.get(idNum - 1);
+        task.setAsDone();
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println("[" + task.getStatusIcon() + "] " + task.description);
+        System.out.println(BREAK_LINE);
     }
-    public static void byeMessage() {
+    public static void showByeMessage() {
         System.out.println("Bye. Hope to see you again soon!");
-        System.out.println(BREAKLINE);
+        System.out.println(BREAK_LINE);
     }
 
     public static void main(String[] args) {
         showLogo();
-        greetMessage();
+        showGreetMessage();
         while(true) {
             String input = getUserInput();
             String[] split = input.split("\\s+");
             String command = split[0];
             switch (command) {
             case "bye":
-                byeMessage();
+                showByeMessage();
                 return;
             case "list":
                 showList();
