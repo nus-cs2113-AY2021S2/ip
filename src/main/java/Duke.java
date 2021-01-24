@@ -1,6 +1,10 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
+
+    private static int taskCount = 0;
+    private static String[] list = new String[100];
 
     public static void printIntroMessage(){
         System.out.println("________________________________");
@@ -14,6 +18,21 @@ public class Duke {
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println("________________________________");
         System.exit(0);
+    }
+
+    public static void addTaskToList(String task){
+        list[taskCount] = taskCount+1 +". " + task;
+        taskCount += 1;
+    }
+
+    public static String[] removeNullFromList(String[] tasks){
+        return Arrays.copyOf(tasks, taskCount);
+    }
+
+    public static void printList(String[] list){
+        for (String item: list){
+            System.out.println(item);
+        }
     }
 
     public static void main(String[] args) {
@@ -35,16 +54,14 @@ public class Duke {
             switch (input) {
             case "list":
                 System.out.println("________________________________");
-                System.out.println("list");
-                System.out.println("________________________________");
-                break;
-            case "blah":
-                System.out.println("________________________________");
-                System.out.println("blah");
+                printList(removeNullFromList(list));
                 System.out.println("________________________________");
                 break;
             default:
-                System.out.println("Try again!");
+                addTaskToList(input);
+                System.out.println("________________________________");
+                System.out.println("added: " + input);
+                System.out.println("________________________________");
                 break;
             }
         }
