@@ -34,6 +34,8 @@ public class Duke {
 
     private static int getCommandCode(String userCommand) {
         String[] words = userCommand.split(" ");
+
+        // No Fallthrough intended in this switch statement
         switch (words[0].toLowerCase()) {
         case "bye":
             return INPUT_CODE_EXIT;
