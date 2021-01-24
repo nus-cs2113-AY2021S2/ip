@@ -2,11 +2,44 @@ import java.util.Locale;
 import java.util.Scanner;
 
 public class Duke {
+    public static Task[] Tasks = new Task[100];
+
     public static void main(String[] args) {
         printGreeting();
         printLine();
-        loopEcho(); // Continues to get input until "bye" is the input
+        loopAddAndList();
         sayGoodbye();
+    }
+    public static void loopAddAndList() {
+        while(true) {
+            if(Task.totalTasks > 100) {
+                System.out.println("Maximum capacity reached");
+                return;
+            }
+            String line = getInput();
+            if(line.equalsIgnoreCase("bye")) {
+                return;
+            }
+            if(line.equalsIgnoreCase("list")) {
+                listItems();
+            }
+            else {
+                addItem(line);
+            }
+        }
+    }
+    public static void listItems() {
+        for(int i = 0; i < Task.totalTasks; i++) {
+            System.out.println(i+1 + ". " + Tasks[i].name);
+        }
+        printLine();
+    }
+    public static void addItem(String nameOfTask) {
+        int current = Task.totalTasks;
+        Tasks[current] = new Task(nameOfTask);
+        System.out.println("Wawaweewah! Added: " + nameOfTask);
+        Task.totalTasks += 1;
+        printLine();
     }
 
     public static void printGreeting() {
@@ -17,7 +50,6 @@ public class Duke {
         System.out.println("____________________________________________________________");
     }
     public static void sayGoodbye() {
-        printLine();
         System.out.println("Goodbye, big up yourself, keep it real, respekt.");
         printLine();
     }
@@ -26,17 +58,5 @@ public class Duke {
         String line = in.nextLine();
 
         return line;
-    }
-    public static void loopEcho() {
-        while(true) {
-            String line = getInput();
-            line = line.toLowerCase();
-            if(line.equals("bye")) {
-                return;
-            }
-            printLine();
-            System.out.println(line);
-            printLine();
-        }
     }
 }
