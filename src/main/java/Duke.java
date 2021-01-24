@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -30,14 +31,33 @@ public class Duke {
     }
 
     public static void echo() {
+        ArrayList<String> textList = new ArrayList<String>();
         String line;
         Scanner in = new Scanner(System.in);
         line = in.nextLine();
+
         while (!line.equals("bye")) {
-            System.out.println("-------------------------------------");
-            System.out.println(line);
-            System.out.println("-------------------------------------");
+            if (line.equals("list")) {
+                displayTextList(textList);
+            }
+            else {
+                System.out.println("-------------------------------------");
+                System.out.println("added: " + line);
+                System.out.println("-------------------------------------");
+                textList.add(line);
+            }
             line = in.nextLine();
         }
+    }
+
+    public static void displayTextList(ArrayList<String> textList) {
+        int counter = 0;
+        System.out.println("-------------------------------------");
+        while (counter < textList.size()) {
+            System.out.print((counter+1) + ". ");
+            System.out.print(textList.get(counter) + "\n");
+            counter ++;
+        }
+        System.out.println("-------------------------------------");
     }
 }
