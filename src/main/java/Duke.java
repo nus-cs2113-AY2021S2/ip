@@ -9,6 +9,7 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
+<<<<<<< HEAD
         printDashes();
 
         System.out.println("Hello! I'm Duke");
@@ -36,5 +37,7 @@ public class Duke {
 
     private static void printDashes(){
         System.out.println("____________________________________________________________");
+=======
+>>>>>>> parent of 215ebfb... Level 0 first attempt
     }
 }
