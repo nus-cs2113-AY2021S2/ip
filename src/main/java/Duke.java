@@ -1,7 +1,10 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
+        ArrayList<String> inputs = new ArrayList<>();
+
         String DECO_LINE = "____________________________________________________________";
         String HELLO_MESSAGE = " Hello! I'm Duke";
         String ASK_MESSAGE = " What can I do for you?";
@@ -17,11 +20,20 @@ public class Duke {
         String input = readinput.nextLine();
 
         while (!input.equals("bye")) {
-            System.out.println(DECO_LINE);
-            System.out.println(input);
-            System.out.println(DECO_LINE);
-            System.out.println();
-
+            if (input.equals("list")) {
+                System.out.println(DECO_LINE);
+                for (int i = 0; i < inputs.size(); i++) {
+                    System.out.println(" " + (i + 1) + ". " + inputs.get(i));
+                }
+                System.out.println(DECO_LINE);
+                System.out.println();
+            } else {
+                System.out.println(DECO_LINE);
+                System.out.println(" added: " + input);
+                System.out.println(DECO_LINE);
+                System.out.println();
+                inputs.add(input);
+            }
             input = readinput.nextLine();
         }
 
