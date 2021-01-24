@@ -20,21 +20,31 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         printLineWithNewLine();
     }
+
     public static void printHello() {
         printLine();
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
         printLineWithNewLine();
     }
+
     public static void printBye() {
         printLine();
         System.out.println("Bye. Hope to see you again soon!");
         printLineWithNewLine();
     }
 
+    public static void printList(String[] tasks, int count) {
+        printLine();
+        for (int i = 0; i < count; i++) {
+            System.out.println(i+1 + ". " + tasks[i]);
+        }
+        printLineWithNewLine();
+    }
+
     public static void echoMessage(String line){
         printLine();
-        System.out.println(line);
+        System.out.println("added: " + line);
         printLineWithNewLine();
     }
 
@@ -45,6 +55,8 @@ public class Duke {
 
         String line;
         Scanner in = new Scanner(System.in);
+        int count = 0;
+        String[] tasks = new String[100];
 
         while(true) {
             line = in.nextLine();
@@ -52,6 +64,12 @@ public class Duke {
                 printBye();
                 break;
             }
+            else if (line.equals("list")) {
+                printList(tasks, count);
+                continue;
+            }
+            tasks[count] = line;
+            count++;
             echoMessage(line);
         }
     }
