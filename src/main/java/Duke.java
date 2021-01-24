@@ -46,12 +46,11 @@ public class Duke {
                     String[] tasks = new String[100];
                     while (true) {
                         if (task.equalsIgnoreCase("bye")) {
-                            System.out.println("Bye, hope to see you again again soon!");
+                            System.out.println("Bye, hope to see you again again soon! You can now choose other function:)");
                             break;
                         }
                         else if (task.equals("list")) {
                             tl.showTaskList();
-                            break;
                         }
                         else{
                             tl.addTask(task);
@@ -61,7 +60,7 @@ public class Duke {
                     break;
                 case 3:
                     tl.showTaskList();
-                    System.out.println("Please enter the task number to be mark as done: ");
+                    System.out.println("Please enter the task number to be marked as done: ");
                     Scanner c = new Scanner(System.in);
                     int taskNo = c.nextInt();
                     Task t = new Task (tl.tasks[taskNo-1]);
