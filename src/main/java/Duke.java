@@ -28,10 +28,10 @@ public class Duke {
     }
     private static int getCommandCode(String userCommand) {
         switch (userCommand.toLowerCase()) {
-            case "bye":
-                return INPUT_CODE_EXIT;
-            default:
-                return INPUT_CODE_DEFAULT;
+        case "bye":
+            return INPUT_CODE_EXIT;
+        default:
+            return INPUT_CODE_DEFAULT;
         }
     }
     public static void echoCommand(String echoCommand) {
