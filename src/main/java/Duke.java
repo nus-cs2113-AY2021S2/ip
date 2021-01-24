@@ -9,12 +9,13 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        System.out.println("Hello, I'm Duke!\nWhat can i do for you?\n");
         System.out.println("Here are the things that i can do: ");
         System.out.println("1. Echo");
         System.out.println("2. Add task to your list & Mark task as done");
+        System.out.println("3. View task list and mark task as done");
         System.out.println("-1: Quit Duke");
 
+        TaskList tl = new TaskList();
         Scanner in = new Scanner(System.in);
         boolean run = true;
         while (run){
@@ -37,7 +38,7 @@ public class Duke {
                     break;
                 case 2:
                     System.out.println("Please enter the task you want to add in to the task list.");
-                    System.out.println("Enter 'list' to view task list and mark task as done.");
+                    System.out.println("Enter 'list' to view your task list.");
                     String task;
                     Scanner b = new Scanner(System.in);
                     int index = 0;
@@ -49,27 +50,24 @@ public class Duke {
                             break;
                         }
                         else if (task.equals("list")) {
-                            System.out.print("Here are the tasks in your list: \n");
-                            for (int i = 0; i < index; i++) {
-                                System.out.println((i + 1) + ": " + tasks[i]);
-                            }
-                            System.out.println("Please enter the task number to be mark as done: ");
-                            Scanner c = new Scanner(System.in);
-                            int taskNo = c.nextInt();
-                            Task t = new Task (tasks[taskNo-1]);
-                            t.markAsDone();
+                            tl.showTaskList();
                             break;
                         }
                         else{
-                            System.out.println("Added: " + task.trim());
-                            tasks[index] = task;
-                            index++;
+                            tl.addTask(task);
                         }
                         task = b.nextLine();
                     }
                     break;
+                case 3:
+                    tl.showTaskList();
+                    System.out.println("Please enter the task number to be mark as done: ");
+                    Scanner c = new Scanner(System.in);
+                    int taskNo = c.nextInt();
+                    Task t = new Task (tl.tasks[taskNo-1]);
+                    t.markAsDone();
+                    break;
                 case -1:
-
                     run = false;
                 default:
                     break;
