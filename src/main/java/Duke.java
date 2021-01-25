@@ -4,8 +4,10 @@ import java.util.Scanner;
 public class Duke {
 
 	private static final String border = "____________________________________________________________";
-	private static final String HelpMessage = "----------HELP COMMANDS----------\n"
+	private static final String HelpMessage = "HELP COMMANDS\n"
+			+ " any input - adds to timetable\n"
 			+ " list - view timetable\n"
+			+ " HELP - view help commands\n"
 			+ " done [index] - tick as done\n"
 			+ " bye  - terminate program\n"
 			+ border;
@@ -27,7 +29,8 @@ public class Duke {
 				+"　  | |　　) /\n"
 				+"   ノ )　　Lﾉ \n"
 				+"  (_／\n";
-		System.out.println(border + "\n" + "Good Day, I'm Alfred.\n" + alfred + border);
+		System.out.println(border + "\n" + "Good Day, I'm Alfred.\n" + alfred);
+		System.out.println("Enter HELP for commands\n" + border);
 	}
 
 	public static void printExit(){
@@ -45,8 +48,7 @@ public class Duke {
 
 	public static String readInput(){
 		Scanner in = new Scanner(System.in);
-		String input = in.nextLine();
-		return input;
+		return in.nextLine();
 	}
 
 	public static void addTask(String input) {
@@ -63,7 +65,7 @@ public class Duke {
 
 	private static void printTask() {
 		int i;
-		System.out.println("----------TIMETABLE----------");
+		System.out.println("TIMETABLE");
 		for(i=0;i<counter;i++) {
 			System.out.println(i+1 + ". [" + Timetable[i].getStatusIcon() + "] " + Timetable[i].getName() );
 		}
