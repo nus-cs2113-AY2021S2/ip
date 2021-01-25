@@ -12,6 +12,9 @@ public class Task {
         this.isDone = true;
     }
 
+    /**
+     * @return "x" if task is done, empty space otherwise
+     */
     public String getStatusIcon() {
         return (isDone? "\u2718" : " ");
     }

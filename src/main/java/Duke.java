@@ -27,7 +27,7 @@ public class Duke {
             // If user wants to mark a task as done
             if(line.substring(0, 4).equalsIgnoreCase("done")) {
                 // Check validity of input
-                if(isValidDone(line)) {
+                if(isValidMark(line)) {
                     int listNum = Integer.parseInt(line.substring(5));
                     // Check for illegal access to out of bounds index
                     if(listNum > Task.totalTasks) {
@@ -82,13 +82,10 @@ public class Duke {
      * Checks if input is of valid format.
      * Format should be "done<space><number>.
      * @param line input string
-     * @return true if line is valid format, false otherwise
+     * @return true if line is valid format, else false
      */
-    public static boolean isValidDone(String line) {
-        if(line.substring(5).matches("[0-9]+")) {
-            return true;
-        }
-        return false;
+    public static boolean isValidMark(String line) {
+        return line.substring(5).matches("[0-9]+");
     }
     public static void printGreeting() {
         System.out.println("Wagwan! I is Ali G. West side.");
