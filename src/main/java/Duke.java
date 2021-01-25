@@ -1,4 +1,15 @@
+import java.util.Scanner;
+
 public class Duke {
+
+    static final String LOGO = " ____        _        \n"
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|";
+    static final String WELCOME_MESSAGE = "Hello! I'm Duke\n"
+            + "What can I do for you?";
+    static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
 
     public static void printHorizontalLine() {
         String hLine = "_".repeat(60);
@@ -25,16 +36,17 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|";
-        String greeting = "Hello! I'm Duke\n"
-                + "What can I do for you?";
-        String exitMessage = "Bye. Hope to see you again soon!";
+        Scanner in = new Scanner(System.in);
 
-        printStatements(true, true, new String[]{logo, greeting});
-        printStatements(false, true, new String[]{exitMessage});
+        printStatements(true, true, new String[]{LOGO, WELCOME_MESSAGE});
+        while (true) {
+            String line = in.nextLine();
+            if (line.equals("bye")) {
+                break;
+            } else {
+                printStatements(true, true, new String[]{line});
+            }
+        }
+        printStatements(true, true, new String[]{EXIT_MESSAGE});
     }
 }
