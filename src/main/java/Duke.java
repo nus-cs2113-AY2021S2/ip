@@ -13,10 +13,25 @@ public class Duke {
         System.out.println("What can I do for you?\n");
 
         String input;
+        String[] tasks = new String[100];
+        int numTasks = 0;
         Scanner in = new Scanner(System.in);
         input = in.nextLine();
         while (!input.equals("bye")){
-            System.out.println(input + "\n");
+            if (input.equals("list")){
+                for (int i = 1; i <= numTasks; i++){
+                    System.out.println(i + ". " + tasks[i]);
+                }
+                System.out.println("\n");
+
+            }
+            else {
+                numTasks++;
+                System.out.println("added: " + input + "\n");
+                tasks[numTasks] = input;
+
+            }
+
             input = in.nextLine();
         }
 
