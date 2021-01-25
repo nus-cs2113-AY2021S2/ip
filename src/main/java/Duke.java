@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
@@ -11,6 +12,25 @@ public class Duke {
             + "What can I do for you?";
     static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
 
+    public static String[] tasks = new String[100];
+    public static int totalTasks = 0;
+
+    public static void recordTask(String task) {
+        if (task == null || task.length() == 0) {
+            return;
+        }
+        tasks[totalTasks] = task;
+        totalTasks++;
+        printHorizontalLine();
+        System.out.printf("\t added: %s", task);
+        System.out.println();
+        printHorizontalLine();
+    }
+
+    public static void listTasks() {
+        printStatements(true, Arrays.copyOf(tasks, totalTasks));
+    }
+
     public static void printHorizontalLine() {
         String hLine = "_".repeat(60);
         System.out.println("\t" + hLine);
@@ -23,30 +43,43 @@ public class Duke {
         }
     }
 
-    public static void printStatements(boolean printHead, boolean printFoot, String[] statements) {
-        if (printHead) {
-            printHorizontalLine();
+    private static void printStatement(String statement, int number) {
+        System.out.printf("\t %d. %s", number, statement);
+        System.out.println();
+    }
+
+    public static void printStatements(boolean printNumber, String[] statements) {
+        printHorizontalLine();
+        for (int i = 0; i < statements.length; i++) {
+            String statement = statements[i];
+            if (printNumber) {
+                printStatement(statement, i + 1);
+            } else {
+                printStatement(statement);
+            }
         }
-        for (String statement : statements) {
-            printStatement(statement);
-        }
-        if (printFoot) {
-            printHorizontalLine();
-        }
+        printHorizontalLine();
     }
 
     public static void main(String[] args) {
+        boolean onLoop = true;
         Scanner in = new Scanner(System.in);
 
-        printStatements(true, true, new String[]{LOGO, WELCOME_MESSAGE});
-        while (true) {
-            String line = in.nextLine();
-            if (line.equals("bye")) {
+        printStatements(false, new String[]{LOGO, WELCOME_MESSAGE});
+
+        while (onLoop) {
+            String line = in.nextLine().trim();
+            switch (line) {
+            case "bye":
+                onLoop = false;
                 break;
-            } else {
-                printStatements(true, true, new String[]{line});
+            case "list":
+                listTasks();
+                break;
+            default:
+                recordTask(line);
             }
         }
-        printStatements(true, true, new String[]{EXIT_MESSAGE});
+        printStatements(false, new String[]{EXIT_MESSAGE});
     }
 }
