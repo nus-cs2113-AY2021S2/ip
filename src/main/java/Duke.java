@@ -18,26 +18,13 @@ public class Duke {
         Scanner in = new Scanner(System.in);
         String command;
         command = in.nextLine();
-        while(!command.equals("bye")){
-            switch(command){
-                case "list":
-                    System.out.println("____________________________________________________________");
-                    System.out.println("list");
-                    System.out.println("____________________________________________________________");
-                    break;
-                case "blah":
-                    System.out.println("____________________________________________________________");
-                    System.out.println("blah");
-                    System.out.println("____________________________________________________________");
-                    break;
-                case "bye":
-                    break;
-                default:
-                    break;
-            }
+        while(!command.equals("bye")) {
+            System.out.println("____________________________________________________________");
+            System.out.println(command);
+            System.out.println("____________________________________________________________");
+
             command = in.nextLine();
         }
-
         System.out.println("____________________________________________________________");
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println("____________________________________________________________");
