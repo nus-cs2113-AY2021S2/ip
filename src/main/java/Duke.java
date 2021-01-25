@@ -4,9 +4,12 @@ import java.util.Scanner;
 public class Duke {
 
 	private static final String border = "____________________________________________________________";
-	private static final String HelpMessage = "HELP COMMANDS\n"
-			+" list - view timetable\n"
-			+" bye  - terminate program\n";
+	private static final String HelpMessage = "----------HELP COMMANDS----------\n"
+			+ " list - view timetable\n"
+			+ " done [index] - tick as done\n"
+			+ " bye  - terminate program\n"
+			+ border;
+
 	public static int MAX_SIZE = 100;
 	public static Task[] Timetable = new Task[MAX_SIZE];
 	private static int counter = 0;
@@ -47,17 +50,35 @@ public class Duke {
 	}
 
 	public static void addTask(String input) {
-
 		Timetable[counter] = new Task(input);
 		counter++;
-		System.out.println("Added: " + input + "\n" + border);
+		System.out.println("Added to Timetable: " + input + "\n" + border);
 	}
 
+	private static void checkTask(int Index) {
+		System.out.println("Good Job, I will mark this as done!");
+		Timetable[Index].markAsDone();
+		System.out.println("[" + Timetable[Index].getStatusIcon() + "] " + Timetable[Index].getName() + "\n" + border);
+	}
 
-	public static void loop(){
+	private static void printTask() {
+		int i;
+		System.out.println("----------TIMETABLE----------");
+		for(i=0;i<counter;i++) {
+			System.out.println(i+1 + ". [" + Timetable[i].getStatusIcon() + "] " + Timetable[i].getName() );
+		}
+		System.out.println(border);
+	}
+
+	public static void main(String[] args) {
+		printGreeting();
 		while(true){
 			String input = readInput();
-			if(input.equalsIgnoreCase("bye")){
+			if(Timetable.length>100){
+				System.out.println("Timetable exceeds 100.");
+				System.exit(1);
+			}
+			else if(input.equalsIgnoreCase("bye")){
 				printExit();
 				System.exit(1);
 			}
@@ -65,25 +86,16 @@ public class Duke {
 				System.out.println(HelpMessage);
 			}
 			else if(input.equalsIgnoreCase("list")) {
-				printTask(Timetable);
+				printTask();
+			}
+			else if(input.startsWith("done")){
+				int Index = Integer.parseInt(input.substring(5));
+				checkTask(Index-1);
 			}
 			else{
 				addTask(input);
 			}
 		}
-	}
-
-	private static void printTask(Task[] timetable) {
-		int i;
-		System.out.println("Timetable\n");
-		for(i=0;i<counter;i++) {
-			System.out.println(i+1 + ". " + timetable[i].getName());
-		}
-	}
-
-	public static void main(String[] args) {
-		printGreeting();
-		loop();
 	}
 
 }
