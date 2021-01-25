@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -14,28 +16,37 @@ public class Duke {
                 "____________________________________________________________\n");
 
         Scanner in = new Scanner(System.in);
-        boolean exit = false;
-        String[] storeList = new String[100];
-        int inputIndex = 0;
-        while (!exit){
+        List<Task> tasks = new ArrayList<Task>();
+
+        while (true){
             String line = in.nextLine();
-            if (!line.equals("bye") && !line.equals("list")){
-                System.out.println("added: " + line);
-                storeList[inputIndex] = line;
-                inputIndex++;
-                continue;
-            }
-            else if (line.equals("list")){
-                for (int i=0; i<inputIndex; i++){
-                    System.out.println(i+1 + ": " + storeList[i]);
+
+            if (line.equals("list")){
+                System.out.println("Here are the tasks in your list: ");
+                int index = 1;
+                for (Task t : tasks){
+                    System.out.println((index++)+".[" + t.getStatusIcon() + "] "+t.description);
                 }
                 continue;
+            }
+            else if (line.contains("done")){
+                System.out.println("Nice! I've marked this task as done: ");
+                String[] words = line.split(" ");
+                int doneIndex = Integer.parseInt(words[1]);
+                Task doneTask = tasks.get(doneIndex-1);
+                doneTask.markAsDone();
+                System.out.println("[" + doneTask.getStatusIcon() + "] "+doneTask.description);
             }
             else if (line.equals("bye")) {
                 System.out.println("____________________________________________________________\n" +
                         " Bye. Hope to see you again soon!\n" +
                         "____________________________________________________________\n");
-                exit = true;
+                break;
+            }
+            else {
+                System.out.println("added: " + line);
+                tasks.add(new Task(line));
+                continue;
             }
         }
     }
