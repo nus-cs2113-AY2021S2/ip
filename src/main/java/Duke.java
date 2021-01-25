@@ -2,7 +2,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
-
+    /** Total number of tasks keyed in Duke program **/
     private static int taskCount = 0;
     private static Task[] tasksObjectsArray = new Task[100];
 
@@ -20,6 +20,7 @@ public class Duke {
         System.out.println();
         System.out.println("________________________________");
     }
+
     public static void printExitMessage(){
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println("________________________________");
