@@ -1,13 +1,10 @@
-public class Duke {
+import java.util.Scanner;
 
-    public static void Level1(){
-        String text1 = "____________________________________________________________\n"
-                + "Hello! I'm Duke\n"
-                + "What can I do for you?\n"
-                + "____________________________________________________________\n"
-                + "Bye. Hope to see you again soon!\n"
-                + "____________________________________________________________\n";
-        System.out.println(text1);
+public class Duke {
+    public static void echo (String value){
+        System.out.println("**********************************************************");
+        System.out.println("You said: " + value);
+        System.out.println("**********************************************************");
     }
 
     public static void main(String[] args) {
@@ -17,6 +14,21 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        Level1();
+        String startText = "____________________________________________________________\n"
+                + "Hello! I'm Duke\n"
+                + "What can I do for you?\n"
+                + "____________________________________________________________\n";
+        System.out.println(startText);
+
+        String input;
+        Scanner in = new Scanner(System.in);
+        input = in.nextLine();
+        while (!input.equals("bye") ) {
+            echo(input);
+            input = in.nextLine();
+        }
+        System.out.println("#########################################################");
+        System.out.println("Bye. Hope to see you again soon!");
+        System.out.println("#########################################################");
     }
 }
