@@ -20,7 +20,7 @@ public class Duke {
         // the following is to fulfil the Level-1 increment
         Scanner sc = new Scanner(System.in);
 
-        Task[] taskManager = new Task[100];
+        Task[] Tasks = new Task[100];
         int taskCounter = 0;
         String input;
 
@@ -30,8 +30,8 @@ public class Duke {
             case "list":
                 System.out.println("This is your current list:");
                 for (int i = 0; i < taskCounter; i++){
-                    int j = i + 1;
-                    System.out.println(j + ": " + taskManager[i].getStatusIcon() + taskManager[i].getTaskName());
+                    int displayedTask = i + 1;
+                    System.out.println(displayedTask + ": " + Tasks[i].getStatusIcon() + Tasks[i].getTaskName());
                 }
                 System.out.println(divider);
                 break;
@@ -44,14 +44,14 @@ public class Duke {
                 if (input.split(" ")[0].equals("done")) {
                     int complete = Integer.parseInt(input.split(" ")[1]);
                     complete--; // because the value entered is 1 more than the actual value in the list
-                    taskManager[complete].markAsDone();
+                    Tasks[complete].markAsDone();
                     System.out.println("Nice! I've marked this task as done!");
-                    System.out.println(taskManager[complete].getStatusIcon() + taskManager[complete].getTaskName());
+                    System.out.println(Tasks[complete].getStatusIcon() + Tasks[complete].getTaskName());
                     System.out.println(divider);
                 }
                 else {
                     System.out.println(divider);
-                    taskManager[taskCounter] = new Task(input);
+                    Tasks[taskCounter] = new Task(input);
                     System.out.println("Duke says: I've added " + input);
                     taskCounter++;
                     System.out.println(divider);
