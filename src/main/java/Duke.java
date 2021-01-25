@@ -5,6 +5,7 @@ public class Duke {
 
     private static int taskCount = 0;
     private static String[] list = new String[100];
+    private static Task[] tasksObjects = new Task[100];
 
     public static void printIntroMessage(){
         System.out.println("________________________________");
@@ -20,12 +21,13 @@ public class Duke {
         System.exit(0);
     }
 
-    public static void addTaskToList(String task){
-        list[taskCount] = taskCount+1 +". " + task;
+    public static void addTaskToList(Task task){
+        list[taskCount] = taskCount+1 +". [" + task.getStatusIcon() + "]" + task.getDescription();
+        tasksObjects[taskCount] = task;
         taskCount += 1;
     }
 
-    public static String[] removeNullFromList(String[] tasks){
+    public static String[] removeNullFromStringList(String[] tasks){
         return Arrays.copyOf(tasks, taskCount);
     }
 
@@ -48,22 +50,34 @@ public class Duke {
         while (true){
             Scanner in = new Scanner(System.in);
             String input = in.nextLine();
-            if (input.equals("bye")){
-                printExitMessage();
+
+            if (input.equals("list")){
+                System.out.println("________________________________");
+                printList(removeNullFromStringList(list));
+                System.out.println("________________________________");
             }
-            switch (input) {
-            case "list":
-                System.out.println("________________________________");
-                printList(removeNullFromList(list));
-                System.out.println("________________________________");
+            else if (input.equals("bye")) {
+                printExitMessage();
                 break;
-            default:
-                addTaskToList(input);
+            }
+            else if (input.startsWith("done")) {
+                System.out.println("Nice! I've marked this task as done:");
+                int taskNumberDone = Integer.parseInt(input.substring(5));
+                System.out.println("[" + tasksObjects[taskNumberDone-1].getStatusIcon() + "]"
+                        + tasksObjects[taskNumberDone-1].getDescription());
+                tasksObjects[taskNumberDone-1].markAsDone();
+                list[taskNumberDone-1] = taskNumberDone +". [" + tasksObjects[taskNumberDone-1].getStatusIcon() + "]"
+                        + tasksObjects[taskNumberDone-1].getDescription();
+
+            }
+            else{
+                Task t = new Task(input);
+                addTaskToList(t);
                 System.out.println("________________________________");
-                System.out.println("added: " + input);
+                System.out.println("added: " + t.getDescription());
                 System.out.println("________________________________");
-                break;
             }
         }
     }
 }
+
