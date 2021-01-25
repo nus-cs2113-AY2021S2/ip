@@ -65,7 +65,7 @@ public class Duke {
     public static void main(String[] args) {
         printHelloStatement();
 
-        int commandCode = INPUT_CODE_DEFAULT;
+        int commandCode;
         String userInput;
         Scanner in = new Scanner(System.in);
         Task task = new Task();
