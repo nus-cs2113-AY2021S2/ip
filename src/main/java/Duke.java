@@ -17,6 +17,10 @@ public class Duke {
             if(line.equals("list")) {
                 tasks.listAllTasks();
                 line = in.nextLine();
+            } else if(line.matches("^\\ *(done)\\ *[1-9][0-9]*")){
+                int taskIndexShow = Integer.parseInt(line.replaceAll("[^0-9]", ""));
+                tasks.markTaskDone(taskIndexShow);
+                line = in.nextLine();
             } else {
                 tasks.addTask(line);
                 line = in.nextLine();
