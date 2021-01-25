@@ -1,11 +1,6 @@
 import java.util.Scanner;
 
 public class Duke {
-    public static void echo (String value){
-        System.out.println("**********************************************************");
-        System.out.println("You said: " + value);
-        System.out.println("**********************************************************");
-    }
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -23,8 +18,13 @@ public class Duke {
         String input;
         Scanner in = new Scanner(System.in);
         input = in.nextLine();
+
         while (!input.equals("bye") ) {
-            echo(input);
+            if(input.equals("list")){
+                List.getList();
+            }else{
+                new List(input);
+            }
             input = in.nextLine();
         }
         System.out.println("#########################################################");
