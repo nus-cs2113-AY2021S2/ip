@@ -42,7 +42,7 @@ public class Duke {
 
     private static void setDone(String[] inputs) {
         if (inputs.length != 2) {
-            System.out.println("Invalid input! (Too many arguments)");
+            System.out.println("Invalid input! (too much/less arguments)");
             return;
         }
         int targetRecordIndex = Integer.parseInt(inputs[1]) - 1;
