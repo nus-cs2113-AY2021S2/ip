@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.*;
 
 public class Duke {
     public static void main(String[] args) {
@@ -9,6 +10,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
         boolean isOn = true;
+        List<String> list = new ArrayList<String>();
 
         System.out.println("Hello from\n" + logo);
 
@@ -21,12 +23,19 @@ public class Duke {
             Scanner in = new Scanner(System.in);
             line = in.nextLine();
             if (line.equals("bye")) {
-                //System.out.println("Bye fellow coder! Hope to see you again soon!");
+                System.out.println("\tBye fellow coder! Hope to see you again soon!");
                 isOn = false;
+            } else if (line.equals("list")) {
+                int i = 0;
+                while (i < list.size()) {
+                    int num = i+1;
+                    System.out.println("\t" + num + ". " + list.get(i));
+                    i++;
+                }
             } else {
-                System.out.println("\t" + line);
+                System.out.println("\t" + "added: " + line);
+                list.add(line);
             }
         }
-        System.out.println("\tBye fellow coder! Hope to see you again soon!");
     }
 }
