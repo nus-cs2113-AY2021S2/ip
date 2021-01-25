@@ -1,4 +1,3 @@
-import java.util.Locale;
 import java.util.Scanner;
 
 public class Duke {
@@ -15,19 +14,38 @@ public class Duke {
 
         Scanner in = new Scanner(System.in);
 
-        // Loop to receive response
+        String[] list = new String[100];
+        int count = 0;
+
+         //Loop to receive response
         while (true){
             String input = in.nextLine();
 
-            // check if exit
+            // EXIT command
             if(input.toUpperCase().equals("BYE")){
                 break;
             }
 
-            // echo user command
-            System.out.println(input + '\n');
-        }
+            // LIST command
+            if(input.toUpperCase().equals("LIST")){
+                int numbering = 1;
+                for(String item : list){
+                    if(item == null)
+                        break;
+                    System.out.println(numbering + ". " + item);
+                    numbering++;
+                }
+                System.out.println();
+            }
 
+            // DEFAULT
+            else {
+                // store user command as job
+                list[count] = input;
+                count++;
+                System.out.println("Added to list: " + input + '\n');
+            }
+        }
 
         System.out.print(line);
         System.out.print(byeMessage);
