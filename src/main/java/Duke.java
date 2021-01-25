@@ -2,8 +2,6 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
-    /** Total number of tasks keyed in Duke program **/
-    private static int taskCount = 0;
     private static Task[] tasksObjectsArray = new Task[100];
 
     public static void printIntroMessage(){
@@ -27,9 +25,9 @@ public class Duke {
         System.exit(0);
     }
 
-    public static void addTaskToTaskList(Task task){
-        tasksObjectsArray[taskCount] = task;
-        taskCount += 1;
+    public static void addTaskToTaskList(String input){
+        Task task = new Task(input);
+        tasksObjectsArray[Task.getTaskCount()-1] = task;
         System.out.println("________________________________");
         System.out.println("added: " + task.getDescription());
         System.out.println("________________________________");
@@ -44,7 +42,7 @@ public class Duke {
     }
 
     public static Task[] removeNullFromList(Task[] tasks){
-        return Arrays.copyOf(tasks, taskCount);
+        return Arrays.copyOf(tasks, Task.getTaskCount());
     }
 
     public static void printTaskList(Task[] tasks){
@@ -73,8 +71,7 @@ public class Duke {
                 markTaskAsDone(taskNumberDone);
             }
             else{
-                Task t = new Task(input);
-                addTaskToTaskList(t);
+                addTaskToTaskList(input);
             }
         }
     }
