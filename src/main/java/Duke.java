@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
@@ -17,12 +18,26 @@ public class Duke {
 
         Scanner in = new Scanner(System.in);
         String command;
+        ArrayList<String> taskList = new ArrayList<String>();
+        int index;
+
         command = in.nextLine();
         while(!command.equals("bye")) {
-            System.out.println("____________________________________________________________");
-            System.out.println(command);
-            System.out.println("____________________________________________________________");
-
+            if(command.equals("list")){
+                index = 1;
+                System.out.println("____________________________________________________________");
+                for(String task: taskList){
+                    System.out.println(index + ". " + task);
+                    index += 1;
+                }
+                System.out.println("____________________________________________________________");
+            }
+            else {
+                System.out.println("____________________________________________________________");
+                taskList.add(command);
+                System.out.println("added: " + command);
+                System.out.println("____________________________________________________________");
+            }
             command = in.nextLine();
         }
         System.out.println("____________________________________________________________");
