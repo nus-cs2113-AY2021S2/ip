@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
@@ -12,23 +11,47 @@ public class Duke {
             + "What can I do for you?";
     static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
 
-    public static String[] tasks = new String[100];
+    public static Task[] tasks = new Task[100];
     public static int totalTasks = 0;
 
-    public static void recordTask(String task) {
-        if (task == null || task.length() == 0) {
+    public static void recordTask(String taskDescription) {
+        if (taskDescription == null || taskDescription.length() == 0) {
             return;
         }
-        tasks[totalTasks] = task;
+        tasks[totalTasks] = new Task(taskDescription);
         totalTasks++;
         printHorizontalLine();
-        System.out.printf("\t added: %s", task);
+        System.out.printf("\t added: %s", taskDescription);
         System.out.println();
         printHorizontalLine();
     }
 
     public static void listTasks() {
-        printStatements(true, Arrays.copyOf(tasks, totalTasks));
+        printHorizontalLine();
+        if (totalTasks == 0) {
+            printStatement("No task in record.");
+        } else {
+            for (int i = 0; i < totalTasks; i++) {
+                Task task = tasks[i];
+                System.out.printf("\t %d.[%s] %s", i + 1, task.getStatusIcon(), task.description);
+                System.out.println();
+            }
+        }
+        printHorizontalLine();
+    }
+
+    public static void markTaskDone(int taskNum) {
+        printHorizontalLine();
+        if (taskNum > 0 && taskNum <= totalTasks) {
+            tasks[taskNum - 1].isDone = true;
+            Task task = tasks[taskNum - 1];
+            printStatement("Nice! I've marked this task as done:");
+            System.out.printf("\t   [%s] %s", task.getStatusIcon(), task.description);
+            System.out.println();
+        } else {
+            printStatement("Oops, this task number does not exist.");
+        }
+        printHorizontalLine();
     }
 
     public static void printHorizontalLine() {
@@ -77,7 +100,19 @@ public class Duke {
                 listTasks();
                 break;
             default:
-                recordTask(line);
+                if (line.startsWith("done ")) {
+                    try {
+                        int taskNum = Integer.parseInt(line.substring(5));
+                        markTaskDone(taskNum);
+                    } catch (NumberFormatException e) {
+                        printHorizontalLine();
+                        printStatement("Oops, invalid done statement.");
+                        printHorizontalLine();
+                        break;
+                    }
+                } else {
+                    recordTask(line);
+                }
             }
         }
         printStatements(false, new String[]{EXIT_MESSAGE});
