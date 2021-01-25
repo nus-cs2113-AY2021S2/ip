@@ -14,4 +14,12 @@ public class Task {
     public String getTaskName() {
         return taskName;
     }
+
+    public void markAsDone(){
+        this.isDone = true;
+    }
+
+    public String getStatusIcon(){
+        return (isDone ? "[ \u2713 ] " : "[ \u2718 ] ");
+    }
 }
