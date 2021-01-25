@@ -22,7 +22,7 @@ public class Duke {
                 for (int i = 1; i <= numTasks; i++){
                     System.out.println(i + ". " + tasks[i]);
                 }
-                System.out.println("\n");
+                System.out.println();
 
             }
             else {
