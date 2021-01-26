@@ -18,8 +18,12 @@ public class Duke {
         String line;
         Scanner in = new Scanner(System.in);
         line = in.nextLine();
-        while (line != "bye") {
+        while (true) {
+            if (line.equals("bye")) {
+                break;
+            }
             printWithBorder("Did I hear you correctly? You said: " + line);
+            line = in.nextLine();
         }
         printWithBorder("Sad to see you go! ): See you soon!");
     }
