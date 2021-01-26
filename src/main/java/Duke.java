@@ -2,15 +2,26 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * This class is to build a personal assistance chat-bot called "Duke"
- * <p>
+ * This class is to build a personal assistance chat-bot called "Kaman"
+ * (Customised from Duke)
+ *
  * Week-2:
  * The program is implemented to greet users and exits subsequently.
+ *
+ * Week-3:
+ * Receives user inputs and stores them in "Task" objects
+ *
+ * Perform functions such as:
+ *  - Listing the stored records
+ *  - Marking records as done
+ *  - Exiting the program
+ *
+ *  Some codes are added to prompt the user when their input is invalid.
  *
  * @author NgManSing
  */
 public class Duke {
-    private static final ArrayList<String> records = new ArrayList<>();
+    private static final ArrayList<Task> records = new ArrayList<>();
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
@@ -24,14 +35,33 @@ public class Duke {
             String[] inputs = rawInput.split(" ");
             switch (inputs[0]) {
             case "list":
-                showList();
+                if (inputs.length == 1) {
+                    showList();
+                } else {
+                    addRecord(rawInput);
+                }
                 break;
             case "done":
-                setDone(inputs);
+                if (inputs.length == 2) {
+                    int targetRecordIndex;
+                    try {
+                        targetRecordIndex = Integer.parseInt(inputs[1]) - 1;
+                    } catch (NumberFormatException e) {
+                        addRecord(rawInput);
+                        break;
+                    }
+                    markAsDone(targetRecordIndex);
+                } else {
+                    addRecord(rawInput);
+                }
                 break;
             case "bye":
-                quitProgram();
-                isLoop = false;
+                if (inputs.length == 1) {
+                    quitProgram();
+                    isLoop = false;
+                } else {
+                    addRecord(rawInput);
+                }
                 break;
             default:
                 addRecord(rawInput);
@@ -40,33 +70,27 @@ public class Duke {
         } while (isLoop);
     }
 
-    private static void setDone(String[] inputs) {
-        if (inputs.length != 2) {
-            System.out.println("Invalid input! (too much/less arguments)");
+    private static void markAsDone(int index) {
+        if (index < 0 || index >= records.size()) {
+            System.out.println("Invalid input! (Index cannot be out of bounds)");
             return;
         }
-        int targetRecordIndex = Integer.parseInt(inputs[1]) - 1;
-        if (targetRecordIndex < 0) {
-            System.out.println("Invalid input! (Index should be at least 1)");
-            return;
-        }
-        String targetRecord = records.remove(targetRecordIndex);
-        String updatedRecord = "[X] " + targetRecord.substring(4);
-        records.add(targetRecordIndex, updatedRecord);
+        records.get(index).setAsDone();
         System.out.println("Nice! I've marked this task as done:");
-        System.out.println("\t" + updatedRecord);
+        System.out.println("\t" + "[X] " + records.get(index).getTaskName());
 
     }
 
     private static void addRecord(String userInput) {
         System.out.println("Added: " + userInput);
-        records.add("[ ] " + userInput);
+        records.add(new Task(userInput));
     }
 
     private static void showList() {
         System.out.println("Here is your task List:");
         for (int i = 0; i < records.size(); i++) {
-            System.out.println((i + 1) + ". " + records.get(i));
+            String mark = records.get(i).isDone() ? "[X] " : "[ ] ";
+            System.out.println((i + 1) + ". " + mark + records.get(i).getTaskName());
         }
     }
 
