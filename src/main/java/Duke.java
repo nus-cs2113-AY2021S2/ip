@@ -53,6 +53,9 @@ public class Duke {
 
 	/**
 	 * Returns error code message
+	 * Error Code 1: done command not in wrong format
+	 * Error Code 2: done Index is more than size of array
+	 * Error Code 3: Timetable is empty
 	 * @param code
 	 */
 	public static void error(int code){
