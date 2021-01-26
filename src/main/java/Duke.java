@@ -12,6 +12,8 @@ public class Duke {
                         "What can I do for you?\n"+
                         "____________________________________________________________");
         Scanner sc = new Scanner(System.in);
+        int i=0;
+        String[] texts = new String[100];
         while(true){
             String command = sc.next();
             if(command.equals("bye")){
@@ -19,9 +21,20 @@ public class Duke {
                         "Bye. Hope to see you again soon!\n"+
                         "____________________________________________________________");
                 break;
+            }else if(command.equals("list")){
+                System.out.println("____________________________________________________________");
+                for(int index=0; index<i;index++){
+                    System.out.print(index+1);
+                    System.out.println("." + texts[index]);
+                }
+                System.out.println("____________________________________________________________");
+            }else{
+                texts[i]=command;
+                System.out.println("____________________________________________________________");
+                System.out.println("added: "+texts[i]);
+                i++;
+                System.out.println("____________________________________________________________");
             }
-            System.out.println("____________________________________________________________\n"+
-                    command+"\n____________________________________________________________");
         }
 
 
