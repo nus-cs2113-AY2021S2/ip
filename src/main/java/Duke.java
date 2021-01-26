@@ -7,7 +7,7 @@ public class Duke {
         String byeMessage = "Bye! Hit me up if you feel like being productive again ;)\n";
         String line = "____________________________________________________________\n";
 
-        // Start - Greet user
+        // Start - Greets user
         System.out.print(line);
         System.out.print(helloMessage);
         System.out.print(line);
@@ -47,7 +47,7 @@ public class Duke {
             else if(input.toUpperCase().startsWith("DONE")){
                 String[] word = input.split(" ");
 
-                // handle invalid input
+                // handles invalid input
                 if(word.length != 2){
                     System.out.println("Wrong format! Enter in the format: \"done [number]\"");
                     System.out.println("Make sure number is a valid integer! \n");
@@ -76,9 +76,9 @@ public class Duke {
                 }
             }
 
-            // Adding new task
+            // Adds new task
             else {
-                // store user command as job
+                // stores user command as job
                 Task newTask = new Task(input);
                 taskList[Task.taskCount] = newTask;
                 Task.taskCount++;
