@@ -44,6 +44,9 @@ public class Main {
                 printLine();
                 System.out.println("Task completed!");
                 System.out.println("  " + list[taskNo - 1].getStatusSymbol() + list[taskNo - 1].getDesc());
+                if (list[taskNo-1].getTasksRemaining() == 0) {
+                    System.out.println("All remaining tasks completed!");
+                }
                 printLine();
             }
         }

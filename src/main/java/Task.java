@@ -2,9 +2,12 @@ public class Task {
     private String desc;
     private boolean isDone;
 
+    private static int tasksRemaining = 0;
+
     public Task(String desc) {
         this.desc = desc;
         this.isDone = false;
+        tasksRemaining++;
     }
 
     public String getDesc() {
@@ -19,7 +22,12 @@ public class Task {
         return (isDone ? " \u2612 " : " \u2610 ");
     }
 
+    public static int getTasksRemaining() {
+        return tasksRemaining;
+    }
+
     public void check() {
         isDone = true;
+        tasksRemaining--;
     }
 }
