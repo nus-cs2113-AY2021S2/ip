@@ -16,12 +16,16 @@ public class Duke {
 
         Scanner userInputScanner = new Scanner(System.in);
         String userInput = userInputScanner.nextLine();
-        while(!userInput.equals("bye")) {
-            switch (userInput) {
+        String[] userInputSplitted = userInput.split(" ");
+        while(!userInputSplitted[0].equals("bye")) {
+            switch (userInputSplitted[0]) {
             case "list":
                 System.out.println("_____________________________________________________");
                 Task.listTasks();
                 System.out.println("_____________________________________________________");
+                break;
+            case "done":
+                Task.markAsDone(userInputSplitted[1]);
                 break;
             default:
                 Task t = new Task(userInput);
@@ -30,6 +34,7 @@ public class Duke {
                 break;
             }
             userInput = userInputScanner.nextLine();
+            userInputSplitted = userInput.split(" ");
         }
         System.out.println("_____________________________________________________");
         System.out.println("Bye. Hope to see you again soon! :3");
