@@ -14,16 +14,21 @@ public class Duke {
         Scanner in = new Scanner(System.in);
         String input;
         input = in.nextLine();
+        String[] splitInput = input.split(" ");
         while (!input.equals("bye")) {
             if (input.equals("list")) {
                 List();
-                input = in.nextLine();
+            }
+            else if (input.length() < 5 ) {
+                Add(input);
+            }
+            else if (checkDone(input)) {
+                done(Integer.parseInt(input.trim().substring(5)));
             }
             else {
                 Add(input);
-                input = in.nextLine();
             }
-
+            input = in.nextLine();
         }
         Exit();
     }
@@ -47,12 +52,13 @@ public class Duke {
         End();
     }
 
-    private static String[] list = new String[100];
+    private static Task[] list = new Task[100];
 
     private static int numOfTask = 0;
 
     public static void Add(String input) {
-        list[numOfTask] = input;
+        Task task = new Task(input);
+        list[numOfTask] = task;
         numOfTask++;
         System.out.println("added: " + input);
         End();
@@ -65,5 +71,28 @@ public class Duke {
             count++;
         }
         End();
+    }
+
+    public static void done(int num) {
+        list[num-1].setAsDone();
+        System.out.println("Nice! I've marked this task as done: ");
+        System.out.println(list[num-1]);
+        End();
+    }
+
+    public static boolean checkDone (String input) {
+        String [] inputArray = input.split(" ");
+        if(inputArray.length != 2){
+            return false;
+        }
+        else {
+            try{
+                Integer.valueOf(inputArray[1]);
+                return true;
+            }
+            catch (Exception e){
+                return false;
+            }
+        }
     }
 }
