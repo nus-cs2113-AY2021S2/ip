@@ -2,11 +2,8 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                    + "|  _ \\ _   _| | _____ \n"
-                    + "| | | | | | | |/ / _ \\\n"
-                    + "| |_| | |_| |   <  __/\n" 
-                    + "|____/ \\__,_|_|\\_\\___|\n";
+        String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         System.out.println("What do you have to do today?");
 
@@ -15,6 +12,7 @@ public class Duke {
         String line;
         Scanner in = new Scanner(System.in);
         line = in.nextLine();
+        
         while (true) {
             if (line.equals("bye")) {
                 break;
@@ -25,7 +23,8 @@ public class Duke {
                     if (task == null) {
                         break;
                     }
-                    stringToPrint += ("\n" + Integer.toString(count) + ": [" + task.getStatusIcon() + "] " + task.getDescription());
+                    stringToPrint += ("\n" + Integer.toString(count) + ": [" + task.getStatusIcon() + "] "
+                            + task.getDescription());
                     count += 1;
                 }
                 printWithBorder(stringToPrint);
@@ -44,7 +43,7 @@ public class Duke {
         }
         printWithBorder("Sad to see you go! ): See you soon!");
     }
-    
+
     public static void printWithBorder(String line) {
         System.out.print("___________________________________________________\n");
         System.out.print(line + "\n");
