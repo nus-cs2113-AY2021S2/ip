@@ -168,7 +168,7 @@ public class Duke {
 	/**
 	 * Main Function
 	 * To Print Greeting as Default then loop function
-	 * @param args
+	 * @param String args
 	 */
 	public static void main(String[] args) {
 		printGreeting();
