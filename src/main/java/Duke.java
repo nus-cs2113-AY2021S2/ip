@@ -1,5 +1,6 @@
 import java.security.spec.RSAOtherPrimeInfo;
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class Duke {
     public static void main(String[] args) {
@@ -14,8 +15,15 @@ public class Duke {
         String input;
         input = in.nextLine();
         while (!input.equals("bye")) {
-            Echo(input);
-            input = in.nextLine();
+            if (input.equals("list")) {
+                List();
+                input = in.nextLine();
+            }
+            else {
+                Add(input);
+                input = in.nextLine();
+            }
+
         }
         Exit();
     }
@@ -37,6 +45,25 @@ public class Duke {
     public static void Echo(String input) {
         System.out.println(input);
         End();
+    }
 
+    private static String[] list = new String[100];
+
+    private static int numOfTask = 0;
+
+    public static void Add(String input) {
+        list[numOfTask] = input;
+        numOfTask++;
+        System.out.println("added: " + input);
+        End();
+    }
+
+    public static void List() {
+        int count = 0;
+        while (count < numOfTask) {
+            System.out.println(count+1 + ": " + list[count]);
+            count++;
+        }
+        End();
     }
 }
