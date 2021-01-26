@@ -13,9 +13,9 @@ public class Duke {
                         "____________________________________________________________");
         Scanner sc = new Scanner(System.in);
         int i=0;
-        String[] texts = new String[100];
+        Task[] tasks = new Task[100];
         while(true){
-            String command = sc.next();
+            String command = sc.nextLine();
             if(command.equals("bye")){
                 System.out.println("____________________________________________________________\n"+
                         "Bye. Hope to see you again soon!\n"+
@@ -23,15 +23,26 @@ public class Duke {
                 break;
             }else if(command.equals("list")){
                 System.out.println("____________________________________________________________");
+                System.out.println("Here are the tasks in your list:");
                 for(int index=0; index<i;index++){
-                    System.out.print(index+1);
-                    System.out.println("." + texts[index]);
+                    System.out.print(index+1+". ");
+                    System.out.print(tasks[index].getStatusIcon()+" ");
+                    System.out.println(tasks[index].description);
                 }
                 System.out.println("____________________________________________________________");
-            }else{
-                texts[i]=command;
+            }else if(command.contains("done")){
+//                System.out.print(command.substring(4));
+//                System.out.print("ddd");
+                int doneNumber=Integer.parseInt(command.substring(5));
+                System.out.println("Nice! I've marked this task as done: ");
+                tasks[doneNumber-1].markAsDone();
                 System.out.println("____________________________________________________________");
-                System.out.println("added: "+texts[i]);
+            }
+            else{
+                Task t = new Task(command);
+                tasks[i]= t;
+                System.out.println("____________________________________________________________");
+                System.out.println("added: "+t.description);
                 i++;
                 System.out.println("____________________________________________________________");
             }
