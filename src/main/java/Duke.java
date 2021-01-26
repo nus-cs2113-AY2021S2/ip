@@ -1,16 +1,16 @@
 import java.util.Scanner;
 
 public class Duke {
-    // Print horizontal line
-    public static void printLine(){
+    // Prints horizontal line
+    public static void printLine() {
         System.out.println("____________________________________________________________");
     }
-    // Print horizontal line with an extra new line
-    public static void printLineWithNewLine(){
+    // Prints horizontal line with an extra new line
+    public static void printLineWithNewLine() {
         System.out.println("____________________________________________________________\n");
     }
-    // Print logo
-    public static void printLogo(){
+    // Prints logo
+    public static void printLogo() {
         printLine();
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -20,20 +20,20 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         printLineWithNewLine();
     }
-    // Print hello message
+    // Prints hello message
     public static void printHello() {
         printLine();
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
         printLineWithNewLine();
     }
-    // Print bye message
+    // Prints bye message
     public static void printBye() {
         printLine();
         System.out.println("Bye. Hope to see you again soon!");
         printLineWithNewLine();
     }
-    // Print list of tasks
+    // Prints list of tasks
     public static void printList(Task[] tasks, int count) {
         printLine();
         System.out.println("Here are the tasks in your list:");
@@ -42,14 +42,14 @@ public class Duke {
         }
         printLineWithNewLine();
     }
-    // Add task to list
-    public static void addTask(Task[] tasks, int count, String line){
+    // Adds task to list
+    public static void addTask(Task[] tasks, int count, String line) {
         printLine();
         tasks[count] = new Task(line);
         System.out.println("added: " + line);
         printLineWithNewLine();
     }
-    // Mark task as done
+    // Marks task as done
     public static void markTask(Task[] tasks, int count, String line) {
         printLine();
         int length = line.length();
