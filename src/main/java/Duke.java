@@ -1,17 +1,7 @@
-import java.util.Locale;
 import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        /**
-         * String logo = " ____        _        \n"
-         *       + "|  _ \\ _   _| | _____ \n"
-         *       + "| | | | | | | |/ / _ \\\n"
-         *       + "| |_| | |_| |   <  __/\n"
-         *       + "|____/ \\__,_|_|\\_\\___|\n";
-         * System.out.println("Hello from\n" + logo);
-         */
-
         String logo = "**********************************\n"
                 + "*       Systems: [Online]        *\n"
                 + "*      Protocol: [Dominion]      *\n"
@@ -28,11 +18,25 @@ public class Duke {
                 + "Good Bye Commander.\n"
                 + "______________________________________________________\n";
 
+        String listTemplate = "***************************************\n"
+                + "*                                     *\n"
+                + "*   [Objectives]-[Missions]-[Tasks]   *\n"
+                + "*                                     *\n"
+                + "***************************************\n"
+                + "\n"
+                + "[Status] [S/N]\n";
+
         System.out.println(logo);
         System.out.println(greeting);
 
+        // UI Initialization Above
+
+        final int MAX_ARRAY_LENGTH = 100;
+        int listIndex = 0;
         String input;
         Scanner in = new Scanner(System.in);
+
+        List[] listArray = new List[MAX_ARRAY_LENGTH];
 
         while (true){
             input = in.nextLine();
@@ -42,14 +46,26 @@ public class Duke {
                 System.out.println(goodbye);
                 System.exit(0); // Ends the program
             case "LIST":
-                List.printList();
+                System.out.println(listTemplate);
+                List.printList(listArray, listIndex);
                 break;
             default:
-                List.addList(input);
-                String echo = "______________________________________________________\n"
-                        + "[Orders received] " + input + "\n"
-                        + "______________________________________________________\n";
-                System.out.println(echo);
+                String[] inputArray = input.split(" ");
+                if (inputArray[0].equalsIgnoreCase("done")) {
+                    String taskDone = List.markDone(listArray, inputArray[1], listIndex);
+                    String markDoneTemplate = "______________________________________________________\n"
+                            + "[Mission Completed] " + taskDone + "\n"
+                            + "______________________________________________________\n";
+                    System.out.println(markDoneTemplate);
+                } else {
+                    listArray[listIndex] = new List();
+                    listArray[listIndex].addList(input);
+                    String echo = "______________________________________________________\n"
+                            + "[Orders received] " + input + "\n"
+                            + "______________________________________________________\n";
+                    System.out.println(echo);
+                    listIndex++;
+                }
                 break;
             }
         }
