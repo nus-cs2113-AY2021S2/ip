@@ -20,19 +20,14 @@ public class Duke {
             switch (userInput) {
             case "list":
                 System.out.println("_____________________________________________________");
-                System.out.println("list");
-                System.out.println("_____________________________________________________");
-                break;
-            case "blah":
-                System.out.println("_____________________________________________________");
-                System.out.println("blah");
+                Task.listTasks();
                 System.out.println("_____________________________________________________");
                 break;
             default:
-                System.out.println("_____________________________________________________");
-                System.out.println("Uh oh, I don't understand what you have just typed :(");
-                System.out.println("The commands supported are: list, blah, bye");
-                System.out.println("_____________________________________________________");
+                Task t = new Task(userInput);
+                t.addTask(userInput);
+                System.out.println("added: " + userInput);
+                break;
             }
             userInput = userInputScanner.nextLine();
         }
