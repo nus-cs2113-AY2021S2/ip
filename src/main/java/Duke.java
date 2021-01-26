@@ -1,6 +1,9 @@
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Duke {
     private static final String logo = " ____        _        \n"
@@ -13,16 +16,20 @@ public class Duke {
     private static final String helloMessage = "Hello! I'm Duke";
     private static final String assistMessage = "What can I do for you?";
     private static final String byeMessage = "Bye. Hope to see you again soon!";
+    private static final String doneMessage = "Nice! I've marked this task as done:";
 
     private static int itemIndex = 0;
-    private static HashMap<Integer,String> storage = new HashMap<Integer,String>();
+    private static HashMap<Integer,Task> storage = new HashMap<Integer,Task>();
+    private static List<String> messages = new ArrayList<>();
 
     /**
      * Main function.
      */
     public static void main(String[] args) {
         System.out.println("Hello from\n" + logo);
-        reply(new String[]{helloMessage, assistMessage});
+        messages.add(helloMessage);
+        messages.add(assistMessage);
+        reply();
         Scanner in = new Scanner(System.in);
         handleMessage(in);
     }
@@ -30,7 +37,7 @@ public class Duke {
     /**
      * Wraps replies with horizontal lines and indentation.
      */
-    public static void reply(String[] messages) {
+    public static void reply() {
         String combined = "";
         String indentation = "     ";
         for (String message : messages) {
@@ -39,48 +46,99 @@ public class Duke {
             combined += "\n";
         }
         System.out.println(String.format("%s\n%s%s\n", horizontalLine, combined, horizontalLine));
+        messages.clear();
     }
 
     /**
-     * Echo messages from user.
      * If message if "list", lists all messages previously mentioned.
      * If message is "bye", exits program.
+     * If message is "done", proceeds to mark tasks as completed.
+     * Else, adds the message as a task.
      */
     public static void handleMessage(Scanner scanner) {
-        String line = scanner.nextLine();
+        String[] userInput = scanner.nextLine().split(" ");
 
-        switch (line) {
+        switch (userInput[0]) {
             case "bye":
-                reply(new String[]{byeMessage});
+                messages.add(byeMessage);
+                reply();
                 scanner.close();
                 break;
             case "list":
-                reply(fetchMessages());
+                messages.addAll(fetchTasks());
+                reply();
+                handleMessage(scanner);
+                break;
+            case "done":
+                messages.add(doneMessage);
+                if (userInput.length > 1) {
+                    String[] inputIndexes = Arrays.copyOfRange(userInput, 1, userInput.length);
+                    List<Integer> validIndexes = validateIndexes(inputIndexes);
+                    if (validIndexes != null) {
+                        List<String> completedTasks = completeTasks(validIndexes);
+                        messages.addAll(completedTasks);
+                    }
+                }
+                reply();
                 handleMessage(scanner);
                 break;
             default:
-                saveMessage(line);
-                reply(new String[]{"added: " + line});
+                addTask(userInput[0]);
+                messages.add("added: " + userInput[0]);
+                reply();
                 handleMessage(scanner);
         }
     }
 
     /**
-     * Saves current message.
+     * Saves current task.
      */
-    public static void saveMessage(String message) {
+    public static void addTask(String message) {
         itemIndex++;
-        storage.put(itemIndex, message);
+        Task task = new Task(itemIndex, message, false);
+        storage.put(itemIndex, task);
     }
 
     /**
      * Fetch all previously mentioned messages.
      */
-    public static String[] fetchMessages() {
-        String[] output = new String[storage.size()];
+    public static List<String> fetchTasks() {
+        List<String> output = new ArrayList<>();
         for (int index = 0; index < storage.size(); index++) {
-            String item = storage.get(index + 1);
-            output[index] = String.format("%d. %s", index + 1, item);
+            Task task = storage.get(index + 1);
+            output.add(task.toString());
+        }
+        return output;
+    }
+
+    /**
+     * Checks if task number is present and is an actual number.
+     */
+    public static List<Integer> validateIndexes(String[] indexes) {
+        List<Integer> validIndexes = new ArrayList<>();
+        for (String i : indexes) {
+            try {
+                int index = Integer.parseInt(i);
+                if (storage.containsKey(index)) {
+                    validIndexes.add(index);
+                }
+            } catch (NumberFormatException e) {
+                continue;
+            }
+        }
+        return validIndexes;
+    }
+
+    /**
+     * Marks the tasks as completed by their given task numbers.
+     */
+    public static List<String> completeTasks(List<Integer> indexes) {
+        List<String> output = new ArrayList<>();
+        for (int index : indexes) {
+            Task task = storage.get(index);
+            output.add(String.format(" [X] %s", task.getMessage()));
+            Task completedTask = new Task(index, task.getMessage(), true);
+            storage.put(index, completedTask);
         }
         return output;
     }
