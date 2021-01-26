@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 public class Duke {
+
     public static void greet() {
         String logo = "             ⣠⣤⣤⣤⣤⣤⣶⣦⣤⣄⡀" + System.lineSeparator()
                 + " ⠀⠀⠀⠀⠀⠀⠀⠀ ⢀⣴⣿⡿⠛⠉⠙⠛⠛⠛⠛⠻⢿⣿⣷⣤⡀" + System.lineSeparator()
@@ -29,64 +30,70 @@ public class Duke {
                 + "____________________________________________________________" + System.lineSeparator();
         System.out.println(greetings);
     }
-    public static void exit(){
-        String bye="____________________________________________________________"+ System.lineSeparator()
-                +"You have been kicked out! Bye!!!  (๑>ᴗ<๑)"+ System.lineSeparator()
-                + "____________________________________________________________"+ System.lineSeparator();
-        System.out.println(bye);
 
-    }
-
-    public static int addToList(String[] list, int listCount, String task){
-        list[listCount]= task;
-        System.out.println("____________________________________________________________");
-        System.out.println("added: "+task);
-        System.out.println("____________________________________________________________");
-        listCount++;
-        return listCount;
-    }
-    public static void printList(String[] list, int listCount){
-        for(int index =0; index< listCount;index++){
-            System.out.println("____________________________________________________________");
-            System.out.println((index+1)+". "+list[index]);
+    public static void exit(TaskList tasks){
+        String bye;
+        if(tasks.getAreAllTasksDone() && tasks.getTasksCounter()>0){
+            bye="____________________________________________________________"+ System.lineSeparator()
+                    + "Thanks for your help Crewmate!!"+ System.lineSeparator()
+                    + "We wouldn't have done without your help!!"+System.lineSeparator()
+                    + "Goodbye!!!! (￣▽￣)ノ"+System.lineSeparator()
+                    + "____________________________________________________________"+ System.lineSeparator();
         }
-        if(listCount==0){
-            System.out.println("____________________________________________________________");
-            System.out.println("This list is empty!!! YEEEEEEET!!!");
-            System.out.println("____________________________________________________________");
+        else if(tasks.getAreAllTasksNotDone()) {
+            bye = "____________________________________________________________" + System.lineSeparator()
+                    + "You have been kicked out! Bye Impostor!!!  (๑>ᴗ<๑)" + System.lineSeparator()
+                    + "____________________________________________________________" + System.lineSeparator();
         }
         else{
-            System.out.println("____________________________________________________________");
-        }
+            bye = "____________________________________________________________" + System.lineSeparator()
+                    + "You are abandoning us!!! I trusted you!!!  (　ﾟдﾟ)" + System.lineSeparator()
+                    + "____________________________________________________________" + System.lineSeparator();
 
+        }
+        System.out.println(bye);
     }
+
 
     public static void main(String[] args) {
         greet();
         boolean hasToExit = false;
         String line;
-        int listCount =0;
-        String[] list = new String[100];
+        TaskList tasks = new TaskList(100);
         Scanner in = new Scanner(System.in);
         while(!hasToExit){
             line = in.nextLine();
             switch (line){
             case "bye":
-                exit();
+                exit(tasks);
                 hasToExit = true;
                 break;
             case "list":
-                printList(list,listCount);
+                tasks.printList();
                 break;
 
             default:
-                listCount=addToList(list,listCount,line);
+                String []sentence = line.split(" ");
+                if(sentence[0].equals("done")){
+                    Integer index;
+                    try {
+                        index= Integer.parseInt(sentence[1]);
+                    } catch (NumberFormatException nfe) {
+                        index=-1;
+                    }
+                    if((index>0) && (index<(tasks.getTasksCounter())) && (sentence.length==2)){
+                        tasks.markAsDone(index-1);
+                    }
+                    else{
+                        tasks.markAsDone(-1);
+                    }
+
+                }
+                else {
+                    tasks.addNewTask(line);
+                }
                 break;
             }
         }
     }
-
-
-
-
 }

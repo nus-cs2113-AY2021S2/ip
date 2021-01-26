@@ -1,0 +1,160 @@
+public class TaskList {
+    protected String[] description;
+    protected boolean[] isDone;
+    protected static int tasksCounter=0;
+    protected static boolean areAllTasksDone = true;
+    protected static boolean areAllTasksNotDone = true;
+
+    public TaskList(int size){
+        this.description = new String[size];
+        this.isDone =new boolean[size];
+    }
+
+    public void addNewTask(String description) {
+        areAllTasksDone = false;
+        (this.description)[tasksCounter] = description;
+        (this.isDone)[tasksCounter] = false;
+        System.out.println("____________________________________________________________");
+        System.out.println("added: "+getTaskDescription(tasksCounter));
+        System.out.println("____________________________________________________________");
+        tasksCounter++;
+
+    }
+
+    public void printList(){
+        System.out.println("____________________________________________________________");
+        if(tasksCounter==0){
+            System.out.println("This list is empty!!! YEEEEEEET!!!");
+            System.out.println("____________________________________________________________");
+
+        }
+        else {
+            System.out.println("ATTENTION, Here's your list of tasks Crewmate!!!");
+            for (int index = 0; index < tasksCounter; index++) {
+                System.out.println((index + 1) + ". "+"["+getStatusIcon(index) +"]" + getTaskDescription(index));
+            }
+            if(getAreAllTasksDone()){
+                System.out.println("Good job Crewmate! You completed all your tasks! (─‿─)");
+            }
+            else if(getAreAllTasksNotDone()){
+                System.out.println("Are you really a Crewmate??? You haven't done any work! （○｀Ｏ´○）");
+            }
+            else{
+                System.out.println("You still have "+getNumberTasksLeft()+" task(s) left Crewmate! Hurry up!! ＼(｀0´)／");
+            }
+            System.out.println("____________________________________________________________");
+
+        }
+
+    }
+
+    public String getStatusIcon(int index) {
+        return ((this.isDone)[index] ? "\u2713" : "\u2718"); //return tick or X symbols
+    }
+
+    public boolean getAreAllTasksDone(){
+        areAllTasksDone = true;
+        for(int index = 0; index < tasksCounter;index++){
+            if(!getIsTaskDone(index)){
+                areAllTasksDone = false;
+                break;
+            }
+        }
+        return areAllTasksDone;
+    }
+    public boolean getAreAllTasksNotDone(){
+        areAllTasksNotDone=true;
+        for(int index = 0; index < tasksCounter;index++){
+            if(getIsTaskDone(index)){
+                areAllTasksNotDone = false;
+                break;
+            }
+        }
+        return areAllTasksNotDone;
+    }
+
+    public int getTasksCounter() {
+        return tasksCounter;
+    }
+
+    public void markAsDone(int index){
+        String phrase;
+        if((index >= tasksCounter)||(index< 0)){
+            if(areAllTasksNotDone) {
+                phrase = "____________________________________________________________" + System.lineSeparator()
+                        + "There's no such task?! Are you really a Crewmate??  (╬⓪益⓪)" + System.lineSeparator()
+                        + "____________________________________________________________" + System.lineSeparator();
+            }
+            else{
+                phrase = "____________________________________________________________" + System.lineSeparator()
+                        + "There's no such task?! Focus Crewmate!!  (╬⓪益⓪)" + System.lineSeparator()
+                        + "____________________________________________________________" + System.lineSeparator();
+            }
+        }
+        else {
+            if (!this.isDone[index]) {
+                (this.isDone)[index] = true;
+                areAllTasksNotDone = false;
+                if (getAreAllTasksDone()) {
+                    phrase = "____________________________________________________________" + System.lineSeparator()
+                            +" Nice! I've marked this task as done:"+ System.lineSeparator()
+                            +(index+1)+"["+getStatusIcon(index)+"]"+"."+getTaskDescription(index)+System.lineSeparator()
+                            + "Good job Crewmate! You completed all your tasks! (─‿─)" + System.lineSeparator()
+                            + "____________________________________________________________" + System.lineSeparator();
+                } else {
+                    phrase = "____________________________________________________________" + System.lineSeparator()
+                            +" Nice! I've marked this task as done:"+ System.lineSeparator()
+                            +(index+1)+"["+getStatusIcon(index)+"]"+"."+getTaskDescription(index)+System.lineSeparator()
+                            + "You still have " + getNumberTasksLeft() + " task(s) left Crewmate! Hurry up!! ＼(｀0´)／"
+                            + System.lineSeparator()
+                            + "____________________________________________________________" + System.lineSeparator();
+                }
+
+            }
+            else{
+                if(getAreAllTasksDone()){
+                    phrase = "____________________________________________________________" + System.lineSeparator()
+                            +"This job was already completed!!!!"+System.lineSeparator()
+                            + "Good job Crewmate! You completed all your tasks! (─‿─)" + System.lineSeparator()
+                            + "____________________________________________________________" + System.lineSeparator();
+
+                }
+                else{
+                    phrase = "____________________________________________________________" + System.lineSeparator()
+                            +"What are you doing??? This job was already completed!! (;¬_¬)"+System.lineSeparator()
+                            + "You still have " + getNumberTasksLeft() + " task(s) left Crewmate! Hurry up!! ＼(｀0´)／"
+                            + System.lineSeparator()
+                            + "____________________________________________________________" + System.lineSeparator();
+
+                }
+            }
+        }
+        System.out.println(phrase);
+    }
+
+    public boolean getIsTaskDone(int index){
+        return (this.isDone)[index];
+    }
+
+    public String getTaskDescription(int index){
+        return (this.description)[index];
+    }
+
+    public int getNumberTasksLeft(){
+        if(areAllTasksDone){
+            return 0;
+        }
+        else if(areAllTasksNotDone){
+            return getTasksCounter();
+        }
+        else{
+            int taskLeftCounter=0;
+            for(int index =0; index<tasksCounter;index++){
+                if(!getIsTaskDone(index)){
+                    taskLeftCounter++;
+                }
+            }
+            return taskLeftCounter;
+        }
+    }
+}
