@@ -64,6 +64,7 @@ public class Duke {
     }
 
     public static void printBye() {
+        printLine();
         System.out.println("Bye. Hope to see you again soon!\n");
         printLine();
     }
