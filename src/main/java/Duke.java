@@ -82,14 +82,14 @@ public class Duke {
             } else if (userInput.toLowerCase().contains("done")){ // userInput == done to mark task as done
                 if (userInput.matches(".*\\d.*")) { // checks if there is a number in done cmd
                     int taskNumber = Integer.parseInt(userInput.replaceAll("\\D+", "")) ;
-                    int indexOfTaskCompleted = taskNumber - 1;
-                    if (indexOfTaskCompleted < taskList.size()){
-                        taskList.get(indexOfTaskCompleted).setDone(true);
+                    int indexOfTaskToBeMarked = taskNumber - 1;
+                    if (indexOfTaskToBeMarked < taskList.size()){
+                        taskList.get(indexOfTaskToBeMarked).setDone(true);
                         String markedTaskAsDoneMessage =
                                 String.format("%s\t Nice! I've marked this task as done:\n %s %s \n%s \n",
                                         lineDivider,
-                                        taskList.get(indexOfTaskCompleted).getStatusIcon(),
-                                        taskList.get(indexOfTaskCompleted).getDescription(),
+                                        taskList.get(indexOfTaskToBeMarked).getStatusIcon(),
+                                        taskList.get(indexOfTaskToBeMarked).getDescription(),
                                         lineDivider);
                         System.out.println(markedTaskAsDoneMessage);
                     } else {
