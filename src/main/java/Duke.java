@@ -1,3 +1,4 @@
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Duke {
@@ -23,7 +24,7 @@ public class Duke {
                 + "Welcome Commander, can I be of assistance, commander?\n"
                 + "______________________________________________________\n";
 
-        String exit = "______________________________________________________\n"
+        String goodbye = "______________________________________________________\n"
                 + "Good Bye Commander.\n"
                 + "______________________________________________________\n";
 
@@ -33,16 +34,24 @@ public class Duke {
         String input;
         Scanner in = new Scanner(System.in);
 
-        while(true){
+        while (true){
             input = in.nextLine();
-            if(input.equalsIgnoreCase("bye")){
+
+            switch (input.toUpperCase()) {   // Force words to Upper to compare
+            case "BYE":
+                System.out.println(goodbye);
+                System.exit(0); // Ends the program
+            case "LIST":
+                List.printList();
+                break;
+            default:
+                List.addList(input);
+                String echo = "______________________________________________________\n"
+                        + "[Orders received] " + input + "\n"
+                        + "______________________________________________________\n";
+                System.out.println(echo);
                 break;
             }
-            String echo = "______________________________________________________\n"
-                    + "[Orders received] " + input + "\n"
-                    + "______________________________________________________\n";
-            System.out.println(echo);
         }
-        System.out.println(exit);
     }
 }
