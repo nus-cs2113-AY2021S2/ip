@@ -57,24 +57,24 @@ public class Duke {
      * Error Code 2: done Index is more than size of array
      * Error Code 3: Timetable is empty
      *
-     * @param code
+     * @param - code
      */
     public static void error(int code) {
         switch (code) {
-            case 1:
-                System.out.println("Error! You must enter an integer after" +
-                    " \"done\"!");
-                printBorder();
-                break;
-            case 2:
-                System.out.println("Error! You do not have that " +
-                    "many items in your timetable!");
-                printBorder();
-                break;
-            case 3:
-                System.out.println("Your timetable is empty! Add something!");
-                printBorder();
-                break;
+        case 1:
+            System.out.println("Error! You must enter an integer after"
+                + " \"done\"!");
+            printBorder();
+            break;
+        case 2:
+            System.out.println("Error! You do not have that "
+                + "many items in your timetable!");
+            printBorder();
+            break;
+        case 3:
+            System.out.println("Your timetable is empty! Add something!");
+            printBorder();
+            break;
         }
     }
 
@@ -147,7 +147,7 @@ public class Duke {
     /**
      * Check task as completed
      *
-     * @param ,index
+     * @param - index
      */
     private static void checkTask(int index) {
         System.out.println("Good Job, I will mark this as done!");
@@ -173,7 +173,7 @@ public class Duke {
      * Main Function
      * To Print Greeting as Default then loop function
      *
-     * @param args
+     * @param - args
      */
     public static void main(String[] args) {
         printGreeting();
