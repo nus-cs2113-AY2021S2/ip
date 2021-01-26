@@ -13,11 +13,11 @@ public class List {
 
     public static void printList(List[] listArray, int listIndex){
         for (int i = 0; i < listIndex; i++) {
-            //System.out.println("Print list");
-            System.out.println("[  " + getStatusIcon(listArray, i) + "  ]" + " [ " + (i+1) + " ] "
-                    + listArray[i].description); // +1 to make it user readable
+            System.out.println("[  " + getStatusIcon(listArray, i) + "  ]"
+                    + " [ " + (i+1) + " ] " // i+1 to make it user readable
+                    + listArray[i].description);
         }
-        System.out.println(); // To look UI look better
+        System.out.println(); // For a neater UI
     }
 
     public static String markDone(List[] listArray, String serialNumber, int listLength) {
@@ -26,6 +26,7 @@ public class List {
             listArray[listIndex].isDone = true;
             return listArray[listIndex].description;
         } else {
+            // No item in list to return
             return null;
         }
     }
@@ -44,6 +45,4 @@ public class List {
             return -1;
         }
     }
-
-
 }

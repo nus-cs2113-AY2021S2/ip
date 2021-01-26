@@ -2,11 +2,11 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        String logo = "**********************************\n"
-                + "*       Systems: [Online]        *\n"
-                + "*      Protocol: [Dominion]      *\n"
-                + "*          Race: [Terran]        *\n"
-                + "**********************************\n";
+        String logo = "******************************************************\n"
+                + "*                 Systems: [Online]                  *\n"
+                + "*                Protocol: [Dominion]                *\n"
+                + "*                    Race: [Terran]                  *\n"
+                + "******************************************************\n";
 
         String greeting = "______________________________________________________\n"
                 + "Systems Accessed...\n"
@@ -18,33 +18,33 @@ public class Duke {
                 + "Good Bye Commander.\n"
                 + "______________________________________________________\n";
 
-        String listTemplate = "***************************************\n"
-                + "*                                     *\n"
-                + "*   [Objectives]-[Missions]-[Tasks]   *\n"
-                + "*                                     *\n"
-                + "***************************************\n"
+        String listTemplate = "******************************************************\n"
+                + "*                                                    *\n"
+                + "*          [Objectives]-[Missions]-[Tasks]           *\n"
+                + "*                                                    *\n"
+                + "******************************************************\n"
                 + "\n"
                 + "[Status] [S/N]\n";
 
         System.out.println(logo);
         System.out.println(greeting);
-
         // UI Initialization Above
 
         final int MAX_ARRAY_LENGTH = 100;
         int listIndex = 0;
+        boolean shouldLoop = true;
         String input;
         Scanner in = new Scanner(System.in);
 
         List[] listArray = new List[MAX_ARRAY_LENGTH];
 
-        while (true){
+        while (shouldLoop){
             input = in.nextLine();
 
             switch (input.toUpperCase()) {   // Force words to Upper to compare
             case "BYE":
-                System.out.println(goodbye);
-                System.exit(0); // Ends the program
+                shouldLoop = false;
+                break;
             case "LIST":
                 System.out.println(listTemplate);
                 List.printList(listArray, listIndex);
@@ -57,7 +57,7 @@ public class Duke {
                             + "[Mission Completed] " + taskDone + "\n"
                             + "______________________________________________________\n";
                     System.out.println(markDoneTemplate);
-                } else {
+                } else { // All other inputs aside from keywords
                     listArray[listIndex] = new List();
                     listArray[listIndex].addList(input);
                     String echo = "______________________________________________________\n"
@@ -69,5 +69,6 @@ public class Duke {
                 break;
             }
         }
+        System.out.println(goodbye);
     }
 }
