@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
 
-        String helloMessage = "Hello I\'m Diuk! \n" + "What would you like to do today?\n";
+        String helloMessage = "Hello I'm Diuk! \nWhat would you like to do today?\n";
         String byeMessage = "Bye! Hit me up if you feel like being productive again ;)\n";
         String line = "____________________________________________________________\n";
 
@@ -21,12 +21,12 @@ public class Duke {
             String input = in.nextLine();
 
             // BYE command
-            if(input.toUpperCase().equals("BYE")){
+            if(input.equalsIgnoreCase("BYE")){
                 break;
             }
 
             // LIST command
-            if(input.toUpperCase().equals("LIST")){
+            if(input.equalsIgnoreCase("LIST")){
                 int numbering = 1;
 
                 // error handling - no jobs
@@ -44,7 +44,6 @@ public class Duke {
             }
 
             // DONE command
-            // todo: error handling?? - (a) calling done on alr completed jobs
             else if(input.toUpperCase().startsWith("DONE")){
                 String[] word = input.split(" ");
 
@@ -58,7 +57,6 @@ public class Duke {
                 int jobNumber = Integer.parseInt(word[1]) - 1;
 
                 if(jobNumber < Task.taskCount && jobNumber >= 0){
-                    // todo (a)
                     taskList[jobNumber].setDone(true);
                     System.out.print("Congrats! You've completed: \n   ");
                     taskList[jobNumber].printTask();
@@ -84,7 +82,7 @@ public class Duke {
                 Task newTask = new Task(input);
                 taskList[Task.taskCount] = newTask;
                 Task.taskCount++;
-                System.out.println("Added to list: " + input + '\n');
+                System.out.println("Added to list: " + newTask.getJob() + '\n');
             }
         }
 
