@@ -6,5 +6,15 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
+        Hello();
+        Bye();
+    }
+
+    public static void Hello() {
+        System.out.println("Hello! I'm Duke" + System.lineSeparator() + "What can I do for you?" + System.lineSeparator());
+    }
+
+    public static void Bye() {
+        System.out.println("Bye. Hope to see you again soon!" + System.lineSeparator());
     }
 }
