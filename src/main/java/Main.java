@@ -5,13 +5,6 @@ public class Main {
         System.out.println("_____________________________________________________");
     }
 
-    /*
-    public static void echo(String input) {
-        printLine();
-        System.out.println(input);
-        printLine();
-    }*/
-
     public static void add(String input, Task[] list, int index) {
         list[index] = new Task(input);
         printLine();
@@ -38,8 +31,7 @@ public class Main {
                 printLine();
                 System.out.println("Task \"" + list[taskNo-1].getDesc() + "\" is already complete");
                 printLine();
-            }
-            else {
+            } else {
                 list[taskNo-1].check();
                 printLine();
                 System.out.println("Task completed!");
@@ -49,8 +41,7 @@ public class Main {
                 }
                 printLine();
             }
-        }
-        else {
+        } else {
             printLine();
             System.out.println("Please provide a valid argument");
             printLine();
@@ -77,19 +68,16 @@ public class Main {
             if(input.length != 0) {
                 if(input[0].equalsIgnoreCase("list")) {
                     printList(list, index);
-                }
-                else if (input[0].equalsIgnoreCase("done")) {
+                } else if (input[0].equalsIgnoreCase("done")) {
                     if (input.length != 2) {
                         printLine();
                         System.out.println("Please provide 1 argument");
                         printLine();
-                    }
-                    else {
+                    } else {
                         int ind = Integer.parseInt(input[1]);
                         markAsDone(list, ind, index);
                     }
-                }
-                else {
+                } else {
                     add(in, list, index);
                     index++;
                 }
