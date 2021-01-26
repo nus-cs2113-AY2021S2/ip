@@ -4,25 +4,23 @@ public class Duke {
 
     public static void main(String[] args) {
         String command;
-        String [] taskList = new String [100];
-        int numberOfTasks = 0;
         Scanner in = new Scanner(System.in);
-
         System.out.println("____________________________________________________________");
         System.out.println("    Hi! I'm Duke (:");
         System.out.println("    What can I do for you today?");
         System.out.println("____________________________________________________________");
         command = in.nextLine();
         do {
-            if (command.equals("list")){
-                for (int i=1; i <= numberOfTasks; ++i)
-                    System.out.println(i + ". " + taskList[i-1]);
+            if (command.equals("list")) {
+                Task.listTask();
             }
             else {
-                taskList[numberOfTasks++] = command;
-                System.out.println("____________________________________________________________");
-                System.out.println("    added: " + command);
-                System.out.println("____________________________________________________________");
+                if (command.contains("done")) {
+                    Task.doneTask(command);
+                }
+                else {
+                    Task.addTask(command);
+                }
             }
             command = in.nextLine();
         } while (!command.equals("bye"));
