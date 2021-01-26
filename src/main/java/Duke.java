@@ -2,9 +2,18 @@ import java.util.Scanner;
 
 
 public class Duke {
+    /**
+     * A divider (horizontal line).
+     */
     public static final String DIVIDER_LINE_ONLY = "__________________________________________";
+    /**
+     * A divider (horizontal line) with line break at the end.
+     */
     public static final String DIVIDER = "__________________________________________\n";
 
+    /**
+     * Prints greetings when the program starts.
+     */
     public static void printGreetings() {
         System.out.println(
                 DIVIDER
@@ -16,6 +25,9 @@ public class Duke {
         );
     }
 
+    /**
+     * Prints greetings when the program ends.
+     */
     public static void printExitGreetings() {
         System.out.println(
                 DIVIDER
@@ -26,6 +38,11 @@ public class Duke {
         );
     }
 
+    /**
+     * Echos user's input string.
+     *
+     * @param userInput A string input by the user.
+     */
     public static void echoInput(String userInput) {
         System.out.println(
                 DIVIDER
@@ -41,10 +58,8 @@ public class Duke {
         ToDoList toDoList = new ToDoList();
         String userInput;
 
-        // boolean variable to control the input loop
         boolean isRunning = true;
         while (isRunning) {
-            // get user input
             userInput = sc.nextLine();
             String[] inputWords = userInput.split(" ");
             String userCommand = inputWords[0];
