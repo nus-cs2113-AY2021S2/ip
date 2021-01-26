@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class Duke {
 
+    //This method is called to greet the user
     public static void greet() {
         String logo = "             ⣠⣤⣤⣤⣤⣤⣶⣦⣤⣄⡀" + System.lineSeparator()
                 + " ⠀⠀⠀⠀⠀⠀⠀⠀ ⢀⣴⣿⡿⠛⠉⠙⠛⠛⠛⠛⠻⢿⣿⣷⣤⡀" + System.lineSeparator()
@@ -31,6 +32,10 @@ public class Duke {
         System.out.println(greetings);
     }
 
+    /**
+     * This method is used to say farewell to the user
+     * @param tasks is the list of tasks, the user input
+     */
     public static void exit(TaskList tasks){
         String bye;
         if(tasks.getAreAllTasksDone() && tasks.getTasksCounter()>0){
@@ -75,13 +80,13 @@ public class Duke {
             default:
                 String []sentence = line.split(" ");
                 if(sentence[0].equals("done")){
-                    Integer index;
+                    int index;
                     try {
                         index= Integer.parseInt(sentence[1]);
                     } catch (NumberFormatException nfe) {
                         index=-1;
                     }
-                    if((index>0) && (index<(tasks.getTasksCounter())) && (sentence.length==2)){
+                    if((index>0) && (index<=(tasks.getTasksCounter())) && (sentence.length==2)){
                         tasks.markAsDone(index-1);
                     }
                     else{

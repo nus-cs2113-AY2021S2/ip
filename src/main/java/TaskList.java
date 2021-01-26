@@ -5,11 +5,13 @@ public class TaskList {
     protected static boolean areAllTasksDone = true;
     protected static boolean areAllTasksNotDone = true;
 
+    //This the constructor of TaskList
     public TaskList(int size){
         this.description = new String[size];
         this.isDone =new boolean[size];
     }
 
+    //This instance method add a new task to the list
     public void addNewTask(String description) {
         areAllTasksDone = false;
         (this.description)[tasksCounter] = description;
@@ -21,12 +23,11 @@ public class TaskList {
 
     }
 
+    //This instance method prints the whole list of tasks
     public void printList(){
         System.out.println("____________________________________________________________");
         if(tasksCounter==0){
             System.out.println("This list is empty!!! YEEEEEEET!!!");
-            System.out.println("____________________________________________________________");
-
         }
         else {
             System.out.println("ATTENTION, Here's your list of tasks Crewmate!!!");
@@ -42,16 +43,19 @@ public class TaskList {
             else{
                 System.out.println("You still have "+getNumberTasksLeft()+" task(s) left Crewmate! Hurry up!! ＼(｀0´)／");
             }
-            System.out.println("____________________________________________________________");
+
 
         }
+        System.out.println("____________________________________________________________");
 
     }
 
+    //This instance method is used to get status icon of a task
     public String getStatusIcon(int index) {
         return ((this.isDone)[index] ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
+    //This instance method is used verify whether all tasks are done
     public boolean getAreAllTasksDone(){
         areAllTasksDone = true;
         for(int index = 0; index < tasksCounter;index++){
@@ -62,6 +66,8 @@ public class TaskList {
         }
         return areAllTasksDone;
     }
+
+    //This instance method is used to verify whether all tasks have not been done
     public boolean getAreAllTasksNotDone(){
         areAllTasksNotDone=true;
         for(int index = 0; index < tasksCounter;index++){
@@ -73,10 +79,12 @@ public class TaskList {
         return areAllTasksNotDone;
     }
 
+    //This instance method is used to return the Class-level attribute tasksCounter
     public int getTasksCounter() {
         return tasksCounter;
     }
 
+    //This instance method is used to mark a task as done
     public void markAsDone(int index){
         String phrase;
         if((index >= tasksCounter)||(index< 0)){
@@ -132,14 +140,17 @@ public class TaskList {
         System.out.println(phrase);
     }
 
+    //This instance method is used to verify whether a task has been completed
     public boolean getIsTaskDone(int index){
         return (this.isDone)[index];
     }
 
+    //This instance method is used to get the attribute description for a particular task
     public String getTaskDescription(int index){
         return (this.description)[index];
     }
 
+    //This instance method is used to get the number of tasks yet to be completed
     public int getNumberTasksLeft(){
         if(areAllTasksDone){
             return 0;
