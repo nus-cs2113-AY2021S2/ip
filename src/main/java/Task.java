@@ -2,7 +2,7 @@ public class Task {
     private String taskName;
     private boolean taskDone;
 
-    public Task(String name, boolean done){
+    public Task(String name, boolean done) {
         taskName = name;
         taskDone = done;
     }
@@ -11,11 +11,11 @@ public class Task {
         return taskName;
     }
 
-    public boolean getTaskDone(){
+    public boolean getTaskDone() {
         return taskDone;
     }
 
-    public void setTaskName(String name){
+    public void setTaskName(String name) {
         taskName = name;
     }
 

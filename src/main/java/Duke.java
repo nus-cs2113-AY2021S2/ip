@@ -16,18 +16,20 @@ public class Duke {
         Task[] tasks = new Task[100];
         int taskCount = 0;
         String userInput = sc.nextLine();
-        while (!userInput.equals("bye")){
-            if (userInput.equals("list")){
+        while (!userInput.equals("bye")) {
+            if (userInput.equals("list")) {
                 System.out.println("\t____________________________________________________________\n" +
                         "\tHere are the tasks in your list:");
-                for(int i=0; i<taskCount; i++){
-                    if(tasks[i].getTaskDone())
-                        System.out.println("\t" + (i+1) + ".[X]" + tasks[i].getTaskName());
-                    else
-                        System.out.println("\t" + (i+1) + ".[ ]" + tasks[i].getTaskName());
+                for(int i=0; i<taskCount; i++) {
+                    if(tasks[i].getTaskDone()) {
+                        System.out.println("\t" + (i + 1) + ".[X]" + tasks[i].getTaskName());
+                    }
+                    else {
+                        System.out.println("\t" + (i + 1) + ".[ ]" + tasks[i].getTaskName());
+                    }
                 }
                 System.out.println("\t____________________________________________________________\n");
-            } else if (userInput.startsWith("done")){
+            } else if (userInput.startsWith("done")) {
                 int taskIndex = (Integer.parseInt(userInput.split(" ")[1])) - 1;
                 tasks[taskIndex].setTaskDone(true);
                 System.out.println("\t____________________________________________________________\n" +
