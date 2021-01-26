@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Duke {
     private static final String DIVIDER = "____________________________________________________________";
-    private static final String[] STORED_TASKS = new String[100];
+    private static final Task[] STORED_TASKS = new Task[100];
     private static int storedTasksCount = 0;
 
     public static void main(String[] args) {
@@ -32,30 +32,39 @@ public class Duke {
     }
 
     public static void handleCommand(String command) {
-        switch(command) {
-        case "list":
+        if(command.equals("list")) {
             displayStoredTasks();
-            break;
-
-        case "bye":
+        } else if (command.startsWith("done")) {
+            markTaskAsDone(command);
+        } else if (command.equals("bye")) {
             exitMsg();
-            break;
-
-        default:
+        } else {
             storeTask(command);
         }
     }
 
     public static void displayStoredTasks() {
         System.out.println(DIVIDER);
+        System.out.println("Here are the tasks in your list:");
         for(int i=0; i<storedTasksCount; i++) {
-            System.out.printf("%d. %s\n", i+1, STORED_TASKS[i]);
+
+            System.out.println((i+1) + ".[" + ((STORED_TASKS[i].isDone()) ? "X" : " ") + "] " + STORED_TASKS[i].getDescription());
         }
         System.out.println(DIVIDER);
     }
 
+    public static void markTaskAsDone(String command) {
+        int taskIndex = Integer.parseInt(command.substring(4).strip());
+        Task taskToMark = STORED_TASKS[taskIndex];
+        taskToMark.markAsDone();
+        System.out.println(DIVIDER);
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println("[X] " + taskToMark.getDescription());
+        System.out.println(DIVIDER);
+    }
+
     public static void storeTask(String task) {
-        STORED_TASKS[storedTasksCount] = task;
+        STORED_TASKS[storedTasksCount] = new Task(task);
         storedTasksCount++;
         System.out.println(DIVIDER);
         System.out.println("added: " + task);
