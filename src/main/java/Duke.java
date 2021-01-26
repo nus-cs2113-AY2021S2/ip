@@ -2,14 +2,14 @@ import java.util.Scanner;
 
 public class Duke {
 
-    static final String LOGO = " ____        _        \n"
+    private static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|";
-    static final String WELCOME_MESSAGE = "Hello! I'm Duke\n"
+    private static final String WELCOME_MESSAGE = "Hello! I'm Duke\n"
             + "What can I do for you?";
-    static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
+    private static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
 
     public static Task[] tasks = new Task[100];
     public static int totalTasks = 0;
@@ -100,13 +100,13 @@ public class Duke {
                 listTasks();
                 break;
             default:
-                if (line.startsWith("done ")) {
+                if (line.startsWith("done")) {
                     try {
                         int taskNum = Integer.parseInt(line.substring(5));
                         markTaskDone(taskNum);
-                    } catch (NumberFormatException e) {
+                    } catch (NumberFormatException | StringIndexOutOfBoundsException e) {
                         printHorizontalLine();
-                        printStatement("Oops, invalid done statement.");
+                        printStatement("Oops, invalid done command.");
                         printHorizontalLine();
                         break;
                     }
