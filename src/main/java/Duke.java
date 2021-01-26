@@ -7,6 +7,8 @@ public class Duke {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
+    private static String[] userInputs = new String[100];
+    private static int userInputCounter = 0;
 
     public static void main(String[] args) {
         Duke.greet();
@@ -33,14 +35,36 @@ public class Duke {
         String userInput;
         userInput = in.nextLine();
         while (!userInput.equals("bye")) {
-            Duke.echo(userInput);
+            switch (userInput) {
+            case "list":
+                Duke.listUserInputs();
+                break;
+            default:
+                Duke.addUserInput(userInput);
+                Duke.echo(userInput);
+                break;
+            }
             userInput = in.nextLine();
         }
     }
 
     public static void echo(String text) {
         System.out.println(Duke.hLine);
-        System.out.println(text);
+        System.out.println("added: " + text);
+        System.out.println(Duke.hLine);
+    }
+
+    public static void addUserInput(String text) {
+        userInputs[userInputCounter++] = text;
+    }
+
+    public static void listUserInputs() {
+        int itemNumber;
+        System.out.println(Duke.hLine);
+        for (int i = 0; i < userInputCounter; i++) {
+            itemNumber = i+1;
+            System.out.println(itemNumber + ". " + userInputs[i]);
+        }
         System.out.println(Duke.hLine);
     }
 }
