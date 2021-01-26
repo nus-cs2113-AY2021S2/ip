@@ -43,16 +43,13 @@ public class Duke {
                 System.out.println();
                 System.out.println("*********************************************");
                 System.exit(0);
-            }
-            else if(input.equals("list")) {
+            } else if(input.equals("list")) {
                 printList(t);
                 System.out.println("*********************************************");
-            }
-            else if(input.startsWith("done")) {
+            } else if(input.startsWith("done")) {
                 int num = Integer.parseInt(input.substring(5));
                 completedTask(num);
-            }
-            else{
+            } else{
                 addToList(input);
                 System.out.println("added: "+ input);
                 System.out.println();
