@@ -56,7 +56,6 @@ public class Duke {
      * Error Code 1: done command not in wrong format
      * Error Code 2: done Index is more than size of array
      * Error Code 3: Timetable is empty
-     *
      * @param - code
      */
     public static void error(int code) {
@@ -123,7 +122,6 @@ public class Duke {
 
     /**
      * Read Input
-     *
      * @return input as String
      */
     public static String readInput() {
@@ -133,7 +131,6 @@ public class Duke {
 
     /**
      * Add new task to Timetable
-     *
      * @param input name of task
      */
     public static void addTask(String input) {
@@ -146,7 +143,6 @@ public class Duke {
 
     /**
      * Check task as completed
-     *
      * @param - index
      */
     private static void checkTask(int index) {
@@ -172,7 +168,6 @@ public class Duke {
     /**
      * Main Function
      * To Print Greeting as Default then loop function
-     *
      * @param - args
      */
     public static void main(String[] args) {
