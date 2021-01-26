@@ -140,7 +140,7 @@ public class Duke {
 
 	/**
 	 * Check task as completed
-	 * @param index
+	 * @param ,index
 	 */
 	private static void checkTask(int index) {
 		System.out.println("Good Job, I will mark this as done!");
