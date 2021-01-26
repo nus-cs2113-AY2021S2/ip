@@ -18,8 +18,8 @@ public class Duke {
             String command = sc.nextLine();
             if(command.equals("bye")){
                 System.out.println("____________________________________________________________\n"+
-                        "Bye. Hope to see you again soon!\n"+
-                        "____________________________________________________________");
+                                    "Bye. Hope to see you again soon!\n"+
+                                    "____________________________________________________________");
                 break;
             }else if(command.equals("list")){
                 System.out.println("____________________________________________________________");
@@ -31,14 +31,11 @@ public class Duke {
                 }
                 System.out.println("____________________________________________________________");
             }else if(command.contains("done")){
-//                System.out.print(command.substring(4));
-//                System.out.print("ddd");
                 int doneNumber=Integer.parseInt(command.substring(5));
                 System.out.println("Nice! I've marked this task as done: ");
                 tasks[doneNumber-1].markAsDone();
                 System.out.println("____________________________________________________________");
-            }
-            else{
+            } else{
                 Task t = new Task(command);
                 tasks[i]= t;
                 System.out.println("____________________________________________________________");
