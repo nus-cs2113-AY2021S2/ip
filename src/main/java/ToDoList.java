@@ -12,11 +12,15 @@ public class ToDoList {
         return numOfListItem;
     }
 
-    public void printList() {
+    public void printCurrentList() {
+        System.out.println(Duke.DIVIDER);
+        printList();
+        System.out.println(Duke.DIVIDER_LINE_ONLY);
+    }
+
+    private void printList() {
         int listSize = listItems.size();
-        System.out.println(Duke.DIVIDER
-                + "This is your current to-do list:"
-        );
+        System.out.println("This is your current to-do list:");
         if (listSize == 0) {
             System.out.println(" - The list is empty!");
             System.out.println(" - You can try add list item by input what\n"
@@ -32,7 +36,6 @@ public class ToDoList {
                 );
             }
         }
-        System.out.println(Duke.DIVIDER_LINE_ONLY);
     }
 
     public void addListItem(String content) {
@@ -47,7 +50,7 @@ public class ToDoList {
 
     }
 
-    public void updateListItem(int itemIndex, String newContent) {
+    public void updateItemContent(int itemIndex, String newContent) {
         ListItem itemToUpdate = listItems.get(itemIndex);
         itemToUpdate.setItemContent(newContent);
     }
@@ -63,16 +66,24 @@ public class ToDoList {
         );
     }
 
-    public void checkItem(int itemIndex) {
+    public void printItem(int itemIndex) {
         ListItem currentItem = listItems.get(itemIndex);
         boolean isItemDone = currentItem.isDone();
         System.out.println("Item content: " + currentItem.getItemContent());
-        System.out.println("Item status: " + (isItemDone ? "Finished" : "Unfinished"));
+        System.out.println("Item status: " + (isItemDone ? "Done" : "Undone"));
     }
 
     public void updateItemStatus(int itemIndex, boolean isDone) {
         ListItem currentItem = listItems.get(itemIndex);
         currentItem.setDone(isDone);
+        System.out.println(Duke.DIVIDER
+                + "The list item: \n"
+                + " | " + currentItem.getItemContent() + " |\n"
+                + "is marked as "
+                + (isDone ? "done" : "undone") + ".\n"
+        );
+        printList();
+        System.out.println(Duke.DIVIDER_LINE_ONLY);
     }
 
 }

@@ -46,13 +46,28 @@ public class Duke {
         while (isRunning) {
             // get user input
             userInput = sc.nextLine();
-
-            switch (userInput) {
+            String[] inputWords = userInput.split(" ");
+            String userCommand = inputWords[0];
+            switch (userCommand) {
             case "bye":
                 printExitGreetings();
                 return;
             case "list":
-                toDoList.printList();
+                toDoList.printCurrentList();
+                break;
+            case "done":
+                try {
+                    int itemIndex = Integer.parseInt(inputWords[1]);
+                    toDoList.updateItemStatus(itemIndex - 1, true);
+                } catch (Exception e) {
+                    System.out.println(DIVIDER
+                            + "Invalid input!\n"
+                            + "The item number should be a valid integer!\n"
+                            + DIVIDER
+                            + "Try again:"
+                    );
+                    continue;
+                }
                 break;
             default:
                 toDoList.addListItem(userInput);
