@@ -10,74 +10,71 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        Greet();
+        greet();
         Scanner in = new Scanner(System.in);
         String input;
         input = in.nextLine();
-        String[] splitInput = input.split(" ");
+
         while (!input.equals("bye")) {
             if (input.equals("list")) {
-                List();
-            }
-            else if (input.length() < 5 ) {
-                Add(input);
+                list();
             }
             else if (checkDone(input)) {
                 done(Integer.parseInt(input.trim().substring(5)));
             }
             else {
-                Add(input);
+                add(input);
             }
             input = in.nextLine();
         }
-        Exit();
+        exit();
     }
 
-    public static void Greet() {
+    public static void greet() {
         System.out.println("Hello! I'm Duke" + System.lineSeparator() + "What can I do for you?");
-        End();
+        end();
     }
 
-    public static void Exit() {
+    public static void exit() {
         System.out.println("Bye. Hope to see you again soon!" + System.lineSeparator());
-        End();
+        end();
     }
 
-    public static void End() {
+    public static void end() {
         System.out.println("____________________________________________________________" + System.lineSeparator());
     }
 
-    public static void Echo(String input) {
+    public static void echo(String input) {
         System.out.println(input);
-        End();
+        end();
     }
 
     private static Task[] list = new Task[100];
 
     private static int numOfTask = 0;
 
-    public static void Add(String input) {
+    public static void add(String input) {
         Task task = new Task(input);
         list[numOfTask] = task;
         numOfTask++;
         System.out.println("added: " + input);
-        End();
+        end();
     }
 
-    public static void List() {
+    public static void list() {
         int count = 0;
         while (count < numOfTask) {
-            System.out.println(count+1 + ": " + list[count]);
+            System.out.println(count + 1 + ": " + list[count]);
             count++;
         }
-        End();
+        end();
     }
 
     public static void done(int num) {
-        list[num-1].setAsDone();
+        list[num - 1].setAsDone();
         System.out.println("Nice! I've marked this task as done: ");
-        System.out.println(list[num-1]);
-        End();
+        System.out.println(list[num - 1]);
+        end();
     }
 
     public static boolean checkDone (String input) {
