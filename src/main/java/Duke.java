@@ -128,7 +128,7 @@ public class Duke {
 
 	/**
 	 * Add new task to Timetable
-	 * @param input ,name of task
+	 * @param input name of task
 	 */
 	public static void addTask(String input) {
 		timetable[listCounter] = new Task(input);
