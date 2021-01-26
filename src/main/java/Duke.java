@@ -11,7 +11,7 @@ public class Duke {
         printLine();
         printGreeting();
 
-        String [] list = new String[100];
+        Task [] list = new Task[100];
         int index = 0;
         Scanner in = new Scanner(System.in);
         String command = in.nextLine();
@@ -19,6 +19,8 @@ public class Duke {
         while (!command.equals("bye")) {
             if (command.equals("list")) {
                 printTasks(list, index);
+            } else if (command.substring(0,4).equals("done")) {
+                markDone(list, index, command);
             } else {
                 recordTasks(list, index, command);
                 index++;
@@ -34,16 +36,29 @@ public class Duke {
         printLine();
     }
 
-    public static void recordTasks(String[] list, int index, String command) {
-        list[index] = command;
+    public static void recordTasks(Task[] list, int index, String command) {
+        list[index] = new Task(command);
         printLine();
         System.out.println("added: " + command);
         printLine();
     }
 
-    public static void printTasks(String[] list, int index) {
+    public static void markDone(Task[] list, int index, String command) {
+        int number;
+        number = Integer.parseInt(command.substring(5));
+        number--;
+        list[number].isDone = true;
+        printLine();
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println(" " + " " + "[" + list[number].getStatusIcon() +"] " + list[number].description);
+        printLine();
+    }
+
+    public static void printTasks(Task[] list, int index) {
+        printLine();
+        System.out.println("Here are the tasks in your list:");
         for (int i = 1; i <= index; i++) {
-            System.out.println(i + ". " + list[i-1]);
+            System.out.println(i + "." + "[" + list[i-1].getStatusIcon() + "] " + list[i-1].description);
         }
         printLine();
     }
