@@ -8,7 +8,7 @@ public class Task {
     }
 
     public void markAsDone(){
-         isDone = true;
+        isDone = true;
     }
 
     public String getName() {
