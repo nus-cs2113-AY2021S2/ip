@@ -15,10 +15,22 @@ public class Duke {
 
         //echoes user inputs:
         String input = "";
+        String[] list = new String[100];
+        int itemCount = 0;
         input = in.nextLine();
         while (!input.equals("bye")) {
+
             System.out.println(line);
-            System.out.println(input);
+            if (input.equals("list")){
+                for (int i = 0; i < itemCount; i++){
+                    System.out.println(i+1 + ". " + list[i]);
+                }
+            }
+            else {
+                System.out.println("added: " + input); //output based on user input
+                list[itemCount] = input; //stores user inputs into list
+                itemCount++;
+            }
             System.out.println(line);
             input = in.nextLine();
         }
