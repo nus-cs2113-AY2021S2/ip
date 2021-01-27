@@ -42,19 +42,29 @@ public class Jarvis {
                     System.out.println("\tadded: " + task);
                     System.out.println("------------------------------------------------");
                 } else if (command.startsWith("list")) {
-                    System.out.println("\tHere are the tasks in your list, sir:");
-                    for (int i = 0; i < list.size(); i++) {
-                        Task t = list.get(i);
-                        System.out.println(String.format("\t\t%d. ", i + 1) + "[" + t.getTaskStatus() + "] " + t.description);
+                    if (list.size() != 0) {
+                        System.out.println("\tHere are the tasks in your list, sir:");
+                        for (int i = 0; i < list.size(); i++) {
+                            Task t = list.get(i);
+                            System.out.println(String.format("\t\t%d. ", i + 1) + "[" + t.getTaskStatus() + "] " + t.description);
+                        }
+                    } else {
+                        System.out.println("\tYou do not have any pending task, sir.");
                     }
                     System.out.println("------------------------------------------------");
                 } else if (command.startsWith("done")) {
                     String task = command.replaceFirst("done ", "");
                     int taskNumber = Integer.parseInt(task.substring(0, 1));
-                    Task t = list.get(taskNumber - 1);
-                    t.setTaskStatus(true);
-                    System.out.println("\tWell done, sir! I've marked this task as done:");
-                    System.out.println("\t\t[" + t.getTaskStatus() + "] " + t.description);
+                    if (taskNumber <= list.size()) {
+                        Task t = list.get(taskNumber - 1);
+                        t.setTaskStatus(true);
+                        System.out.println("\tWell done, sir! I've marked this task as done:");
+                        System.out.println("\t\t[" + t.getTaskStatus() + "] " + t.description);
+                    } else {
+                        System.out.println("\tSorry, sir.");
+                        System.out.println("\tI am unable to retrieve the information from the database.");
+                        System.out.println("\tWould you like to add the task instead, sir?");
+                    }
                     System.out.println("------------------------------------------------");
                 }
             } else {
