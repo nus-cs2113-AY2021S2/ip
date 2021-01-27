@@ -8,6 +8,8 @@ public class Duke {
 
         Scanner in = new Scanner(System.in);
 
+        String output = "Nothing.";
+
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -20,14 +22,35 @@ public class Duke {
                 " What can I do for you?\n" +
                 "____________________________________________________________\n" );
 
+        todolist list1 = new todolist();
+
+
+
         while(command_in){
             String input = in.nextLine();
-            if(input.equals("bye")){
-                input = "Bye. Hope to see you again soon!";
+
+            String[] tokens = input.split(" ");
+
+
+
+
+            if(tokens[0].equals("bye")){
+                output = "Bye. Hope to see you again soon!";
                 command_in = false;
+            }else if(tokens[0].equals("list")) {
+                output = list1.list_items();
+            }else{
+                output = list1.add_items(input);
             }
+
+
+
+
+
+
+
             System.out.println("____________________________________________________________\n" +
-            input + "\n" +
+            output + "\n" +
             "____________________________________________________________\n");
 
 
