@@ -12,6 +12,16 @@ public class Duke {
         numberOfTasks++;
     }
 
+    public static void markTaskAsDone(String taskDescription){
+        // Marks one of the tasks as done.
+        System.out.println("\t Nice! I've marked this task as done: ");
+        String[] input = taskDescription.split(" ");
+        int taskIndex = Integer.parseInt(input[1]);
+        tasks[taskIndex-1].markAsDone();
+        String output = String.format("%02d. [%s] %s", taskIndex, tasks[taskIndex-1].getStatusIcon(), tasks[taskIndex-1].getDescription());
+        System.out.println("\t" + output);
+    }
+
     public static void main(String[] args) {
         String greeting = "\t" + sectionDivider + "\n"
                 + "\tHello! I'm Duke. \n"
@@ -35,14 +45,8 @@ public class Duke {
                     String output = String.format("%02d. [%s] %s", i+1, tasks[i].getStatusIcon(), tasks[i].getDescription());
                     System.out.println("\t" + output);
                 }
-            }else if (line.contains("done")){
-                // Marks one of the tasks as done.
-                System.out.println("\t Nice! I've marked this task as done: ");
-                String[] input = line.split(" ");
-                int taskIndex = Integer.parseInt(input[1]);
-                tasks[taskIndex-1].markAsDone();
-                String output = String.format("%02d. [%s] %s", taskIndex, tasks[taskIndex-1].getStatusIcon(), tasks[taskIndex-1].getDescription());
-                System.out.println("\t" + output);
+            }else if (line.toLowerCase().contains("done")){
+                markTaskAsDone(line);
             }else{
                 addTask(line);
             }
