@@ -48,25 +48,29 @@ public class Duke {
             } else if (command[0].equals("done")) {
                 //If the first/only word is done, do the following check:
                 if (command.length == 2 && isInteger(command[1])) {
-                    //if the length is exactly 2 and the second value after the space is an integer, this is a valid command
+                    //if the length is exactly 2 and the second value after the space is an integer, valid command
                     if (0 < Integer.parseInt(command[1]) && Integer.parseInt(command[1]) <= taskList.size()) {
                         //if the given value to set as done is an existing index
                         taskList.get(Integer.parseInt(command[1]) - 1).setAsDone();
                         System.out.println("____________________________________________________________");
                         System.out.println("Nice! I've marked this task as done:");
-                        System.out.println("[" + taskList.get(Integer.parseInt(command[1]) - 1).getStatusIcon() + "] " + taskList.get(Integer.parseInt(command[1]) - 1).description);
+                        System.out.println("[" + taskList.get(Integer.parseInt(command[1]) - 1).getStatusIcon() + "] "
+                                + taskList.get(Integer.parseInt(command[1]) - 1).description);
                         System.out.println("____________________________________________________________");
                         //TODO
-                        // Currently a task can be marked as done repeatedly. This does not cause any errors, but may be required to fix
+                        // Currently a task can be marked as done repeatedly.
+                        // This does not cause any errors, but may be required to fix
                     } else {
                         //if the given value does not match to a range that makes sense
                         System.out.println("____________________________________________________________");
-                        System.out.println("The index in the task list that you have selected to indicate as done, does not exist!");
+                        System.out.println("The index in the task list that you have selected to indicate as done," +
+                                "does not exist!");
                         System.out.println("____________________________________________________________");
                     }
 
                 } else {
-                    // for the situation where the user keys in "done", "done 3.21512" or "done done" or something along these lines
+                    // for the situation where the user keys in "done", "done 3.21512" or "done done" or something
+                    // along these lines
                     //TODO
                     // perhaps can prompt a different message
                     System.out.println("____________________________________________________________");
