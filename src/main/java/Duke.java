@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -15,16 +17,25 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String userInput;
         String output;
+        List<String> tasks = new ArrayList<>();
         do{
             userInput = sc.nextLine();
             switch (userInput) {
                 case "bye":
                     output = "Bye. Hope to see you again soon!";
+                    System.out.println(output);
+                    break;
+                case "list":
+                    int i = 1;
+                    for(String task : tasks){
+                        System.out.println(i + ". " + task);
+                        i++;
+                    }
                     break;
                 default:
-                    output = userInput;
+                    tasks.add(userInput);
+                    System.out.println("added: " + userInput);
             }
-            System.out.println(output);
         } while(!userInput.toLowerCase().equals("bye"));
     }
 }
