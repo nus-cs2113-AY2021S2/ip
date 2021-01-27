@@ -11,7 +11,7 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718");  // return tick or X symbol
     }
 
-    public void setTaskStatus( boolean isDone) {
+    public void setTaskStatus(boolean isDone) {
         this.isDone = isDone;
     }
 }

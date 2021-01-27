@@ -11,15 +11,15 @@ public class Jarvis {
     public void initialise() throws InterruptedException {
         System.out.println("------------------------------------------------");
         System.out.println("Importing all preferences from home interface.");
-        int delay = 500;    // 0.5 seconds delay
-        TimeUnit.MILLISECONDS.sleep(delay);
+        int DELAY = 500;    // 0.5 seconds delay
+        TimeUnit.MILLISECONDS.sleep(DELAY);
         System.out.println("Systems are now fully operational.");
-        TimeUnit.MILLISECONDS.sleep(delay);
+        TimeUnit.MILLISECONDS.sleep(DELAY);
         System.out.print("Initialising");
-        TimeUnit.MILLISECONDS.sleep(delay);
+        TimeUnit.MILLISECONDS.sleep(DELAY);
         for (int i = 0; i <= 2; i++) {
             System.out.print(".");
-            TimeUnit.MILLISECONDS.sleep(delay);
+            TimeUnit.MILLISECONDS.sleep(DELAY);
         }
         System.out.println();
         System.out.println("------------------------------------------------");
