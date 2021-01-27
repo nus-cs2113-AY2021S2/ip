@@ -1,12 +1,12 @@
 public class Task {
-    protected String description;
+    protected String Description;
     protected boolean isDone;
-    protected Integer id;
+    protected Integer ID;
 
-    public Task(String description, Integer id) {
-        this.description = description;
+    public Task(String Description, Integer ID) {
+        this.Description = Description;
         this.isDone = false;
-        this.id = id;
+        this.ID = ID;
     }
 
     public String getStatusIcon() {
@@ -14,16 +14,16 @@ public class Task {
     }
 
     public String getStatus() {
-        String s = "[" + getStatusIcon() + "]";
-        return s;
+        String Status = "[" + getStatusIcon() + "]";
+        return Status;
     }
 
     public String getDescription() {
-        return description;
+        return Description;
     }
 
     public String getID() {
-        return String.valueOf(id);
+        return String.valueOf(ID);
     }
 
 }
