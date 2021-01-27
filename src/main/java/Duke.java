@@ -2,11 +2,10 @@ import java.util.Scanner;
 
 public class Duke {
     static String sectionDivider = "____________________________________________________________";
-
-    static String[] tasks = new String[100];
     static int numberOfTasks = 0;
 
     public static void main(String[] args) {
+        Task tasks[] = new Task[100];
         String greeting = "\t" + sectionDivider + "\n"
                 + "\tHello! I'm Duke. \n"
                 + "\tWhat can I do for you? \n"
@@ -23,13 +22,24 @@ public class Duke {
         while(line.toLowerCase().equals("bye") != true){
             System.out.println("\t" + sectionDivider);
             if(line.equals("list")){
+                // Lists out the things under tasks.
+                System.out.println("\t Here are the tasks in your list:");
                 for(int i= 0; i!=numberOfTasks; i++){
-                    String output = String.format("%02d. %s", i+1, tasks[i]);
+                    String output = String.format("%02d. [%s] %s", i+1, tasks[i].getStatusIcon(), tasks[i].getDescription());
                     System.out.println("\t" + output);
                 }
-            }else {
+            }else if (line.contains("done")){
+                // Marks one of the tasks as done.
+                System.out.println("\t Nice! I've marked this task as done: ");
+                String[] input = line.split(" ");
+                int taskIndex = Integer.parseInt(input[1]);
+                tasks[taskIndex-1].markAsDone();
+                String output = String.format("%02d. [%s] %s", taskIndex, tasks[taskIndex-1].getStatusIcon(), tasks[taskIndex-1].getDescription());
+                System.out.println("\t" + output);
+            }else{
                 System.out.println("\tadded: " + line);
-                tasks[numberOfTasks] = line;
+                Task t = new Task(line);
+                tasks[numberOfTasks] = t;
                 numberOfTasks++;
             }
             System.out.println("\t" + sectionDivider);
