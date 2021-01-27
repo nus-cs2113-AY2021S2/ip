@@ -42,7 +42,6 @@ public class Duke {
                 continue;
             }
 
-
             System.out.println(line);
             System.out.println("added: " + input);
             Task task = new Task(input);
@@ -55,7 +54,5 @@ public class Duke {
         System.out.println(line);
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println(line);
-
-
     }
 }
