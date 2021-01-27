@@ -1,6 +1,11 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
+
+    static ArrayList<String> tasksList = new ArrayList<> ();
+    static int tasksCount = 0 ;
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -12,19 +17,25 @@ public class Duke {
         System.out.println("What can I do for you?");
         System.out.println("------------------------------------------");
 
+        boolean toContinueAddingTask = true;
         Scanner sc = new Scanner(System.in);
+        String task = sc.nextLine();
 
-        String task1 = sc.nextLine();
-        System.out.println(task1);
+        while (toContinueAddingTask) {
 
-        String task2 = sc.nextLine();
-        System.out.println(task2);
+            if (task.equalsIgnoreCase("bye")) {
+                toContinueAddingTask = false;
+                System.out.println("bye");
+                System.out.println("------------------------------------------");
+                System.out.println("Bye. Hope to see you again soon!");
+                break;
+            }
+            tasksCount++;
+            tasksList.add(task);
+            System.out.println("    " + task);
+            task = sc.nextLine();
+        }
 
-        System.out.println("bye");
-        System.out.println("------------------------------------------");
 
-
-
-        System.out.println("Bye. Hope to see you again soon!");
     }
 }
