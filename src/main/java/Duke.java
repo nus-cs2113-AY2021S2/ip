@@ -1,17 +1,14 @@
 import java.util.Scanner;
 
 public class Duke {
-    public static String[] addX(int n, String arr[], String x)
-    {
-        // create a new array of size n+1
-        String newarr[] = new String[n + 1];
 
-        // insert the elements from
-        // the old array into the new array
-        // insert all elements till n
-        // then insert x at n+1
-        for (int i = 0; i < n; i++)
+    // Method to create a new array of size n+1
+    public static String[] addToArray(int n, String arr[], String x)
+    {
+        String newarr[] = new String[n + 1];
+        for (int i = 0; i < n; i++) {
             newarr[i] = arr[i];
+        }
         newarr[n] = x;
         return newarr;
     }
@@ -29,16 +26,14 @@ public class Duke {
             while (true) {
                 String line;
                 line = in.nextLine();
-                if (line.equals("bye")){
+                if (line.equals("bye")) {
                     break;
-                }
-                else if(line.equals("list")){
-                    for (int i=0; i<list.length; i++){
-                        System.out.println(i + ". " + list[i] );
+                } else if (line.equals("list")) {
+                    for (int i=0; i<list.length; i++) {
+                        System.out.println(i+1 + ". " + list[i] );
                     }
-                }
-                else{
-                    list = addX(list.length, list, line);
+                } else {
+                    list = addToArray(list.length, list, line);
                     System.out.println("added: " + line);
                 }
             }
