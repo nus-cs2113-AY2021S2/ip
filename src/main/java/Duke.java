@@ -3,9 +3,16 @@ import java.util.Scanner;
 public class Duke {
     static String sectionDivider = "____________________________________________________________";
     static int numberOfTasks = 0;
+    static Task tasks[] = new Task[100];
+
+    public static void addTask(String taskDescription){
+        System.out.println("\tadded: " + taskDescription);
+        Task t = new Task(taskDescription);
+        tasks[numberOfTasks] = t;
+        numberOfTasks++;
+    }
 
     public static void main(String[] args) {
-        Task tasks[] = new Task[100];
         String greeting = "\t" + sectionDivider + "\n"
                 + "\tHello! I'm Duke. \n"
                 + "\tWhat can I do for you? \n"
@@ -37,10 +44,7 @@ public class Duke {
                 String output = String.format("%02d. [%s] %s", taskIndex, tasks[taskIndex-1].getStatusIcon(), tasks[taskIndex-1].getDescription());
                 System.out.println("\t" + output);
             }else{
-                System.out.println("\tadded: " + line);
-                Task t = new Task(line);
-                tasks[numberOfTasks] = t;
-                numberOfTasks++;
+                addTask(line);
             }
             System.out.println("\t" + sectionDivider);
             line = in.nextLine();
