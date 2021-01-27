@@ -19,9 +19,7 @@ public class TaskList {
     public void printList() {
         System.out.println("____________________________________________________________");
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println((i+1) + ". [" +
-                    (tasks.get(i).isDone() ? "X":" ") +
-                    "] " + tasks.get(i).getLabel());
+            System.out.println((i+1) + ". " + tasks.get(i).getCheckbox() + " " + tasks.get(i).getLabel());
         }
         System.out.println("____________________________________________________________\n");
     }

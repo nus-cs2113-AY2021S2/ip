@@ -18,4 +18,8 @@ public class Task {
     public void isDone(boolean done) {
         this.done = done;
     }
+
+    public String getCheckbox() {
+        return this.isDone() ? "[X]":"[ ]";
+    }
 }
