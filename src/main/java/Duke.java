@@ -19,26 +19,40 @@ public class Duke {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
         lineBreak();
-        //Level 2: Add, List
+        //Level 3: Mark as Done
         Scanner in = new Scanner(System.in);
         String userInput;
-        String[] userInputList = new String[100];
+        Task[] taskList = new Task[100];
         int listCount = 0;
         while (true){
             userInput = in.nextLine();
             if (userInput.equals("list")){
                 lineBreak();
+                System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < listCount; i++){
-                    System.out.println(i+1 + ". " + userInputList[i]);
+                    Task currentTask = taskList[i];
+                    System.out.println(i+1 + ".[" + currentTask.getStatusIcon() + "] " + currentTask.description);
                 }
                 lineBreak();
                 continue;
             }
+
+            if (userInput.startsWith("done")){
+                String[] words = userInput.split(" ");
+                Task currentTask = taskList[Integer.parseInt(words[1]) - 1];
+                currentTask.markAsDone();
+                lineBreak();
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println("  [" + currentTask.getStatusIcon() + "] " + currentTask.description);
+                lineBreak();
+                continue;
+            }
+
             if (userInput.equals("bye")){
                 break;
             }
             lineBreak();
-            userInputList[listCount++] = userInput;
+            taskList[listCount++] = new Task(userInput);
             System.out.println("added: " + userInput);
             lineBreak();
         }
