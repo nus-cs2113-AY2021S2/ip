@@ -6,7 +6,7 @@ public class Task {
         this.description = description;
         this.isDone = false;
     }
-    public void setAsDone(){
+    public void markAsDone(){
         isDone = true;
     }
     public String getTask(){
