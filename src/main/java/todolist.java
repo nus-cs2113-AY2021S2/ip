@@ -5,10 +5,10 @@ public class todolist {
 
 
     public todolist(String[] arg){
-        items = arg.length;
+        this.items = arg.length;
         for(int i = 0; i < items; i++){
-            list[i] = arg[i];
-            tracker[i] = false;
+            this.list[i] = arg[i];
+            this.tracker[i] = false;
         }
     }
 
@@ -16,7 +16,7 @@ public class todolist {
 
     }
 
-    public String done(Boolean arg){
+    public String displayCheck(Boolean arg){
         if (arg){
             return "[X]";
         }else{
@@ -25,40 +25,40 @@ public class todolist {
     }
 
 
-    public String list_items(){
+    public String itemLister(){
         String output = "";
 
         for(int i = 0; i < items; i++){
             if(i < items - 1) {
-                output += Integer.toString(i + 1) + ". " + done(tracker[i]) + " " + list[i] + "\n";
+                output += Integer.toString(i + 1) + ". " + displayCheck(tracker[i]) + " " + list[i] + "\n";
             }else{
-                output += Integer.toString(i + 1) + ". " + done(tracker[i]) + " " + list[i];
+                output += Integer.toString(i + 1) + ". " + displayCheck(tracker[i]) + " " + list[i];
             }
         }
         return output;
     }
 
 
-    public String add_items(String arg){
+    public String itemAdder(String arg){
         this.list[items] = arg;
         this.tracker[items] = false;
         this.items += 1;
         return "added: " + arg;
     }
 
-    public String mark_done(String arg){
+    public String itemResolver(String arg){
         String output = "";
 
-        Integer task_no = Integer.parseInt(arg) - 1;
+        Integer taskNum = Integer.parseInt(arg) - 1;
 
-        if(tracker[task_no]){
+        if(tracker[taskNum]){
             return "Task is already done!";
         }
 
 
-        this.tracker[task_no] = true;
+        this.tracker[taskNum] = true;
         output = "Nice! I've marked this task as done: \n" +
-                 done(true) + " " + list[task_no];
+                 displayCheck(true) + " " + list[taskNum];
 
         return output;
     }
