@@ -17,9 +17,17 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String userInput;
         String output;
-        List<String> tasks = new ArrayList<>();
+        List<task> tasks = new ArrayList<>();
         do{
             userInput = sc.nextLine();
+
+            int taskIndex = 0;
+            if(userInput.contains("done")){
+                String[] split_ = userInput.split(" ");
+                userInput = split_[0];
+                taskIndex = Integer.valueOf(split_[1]);
+
+            }
             switch (userInput) {
                 case "bye":
                     output = "Bye. Hope to see you again soon!";
@@ -27,13 +35,22 @@ public class Duke {
                     break;
                 case "list":
                     int i = 1;
-                    for(String task : tasks){
-                        System.out.println(i + ". " + task);
+                    for(task task : tasks){
+                        System.out.println(i +  "." + task.getStatusIcon() + " " + task.description);
                         i++;
                     }
                     break;
+                case "done":
+                    task task_ = tasks.get(taskIndex);
+                    task_.markAsDone();
+                    System.out.println("Nice! I've marked this task as done:\n" +
+                                        task_.getStatusIcon() + task_.description);
+                    break;
                 default:
-                    tasks.add(userInput);
+                    // create a new task
+                    task newTask = new task(userInput);
+                    // added to list
+                    tasks.add(newTask);
                     System.out.println("added: " + userInput);
             }
         } while(!userInput.toLowerCase().equals("bye"));
