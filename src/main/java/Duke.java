@@ -16,28 +16,37 @@ public class Duke {
         System.out.println("What can I do for you?");
         System.out.println(line);
 
-        //Level-1
         String input;
         Scanner in = new Scanner(System.in);
         input = in.nextLine();
 
-        //Level-2
-        ArrayList<String> inputs = new ArrayList<String>();
+        ArrayList<Task> tasks = new ArrayList<Task>();
 
         while (!input.equals("bye")) {
-            if (input.equals("list") && inputs.size() > 0) {
+            if (input.equals("list") && tasks.size() > 0) {
                 System.out.println(line);
-                for (int i = 0; i < inputs.size(); i++) {
-                    System.out.println(i + 1 + ". " + inputs.get(i));
+                for (int i = 0; i < tasks.size(); i++) {
+                    System.out.println(i + 1 + "." + tasks.get(i).getStatusIcon() + tasks.get(i).getDescription());
                 }
+                System.out.println(line);
+                input = in.nextLine();
+                continue;
+            } else if (input.startsWith("done ")) {
+                int index = Integer.parseInt(input.replace("done ", ""));
+                tasks.get(index - 1).setDone();
+                System.out.println(line);
+                System.out.println("Nice! I've marked this task as done:" + System.lineSeparator()
+                        + tasks.get(index - 1).getStatusIcon() + tasks.get(index - 1).getDescription());
                 System.out.println(line);
                 input = in.nextLine();
                 continue;
             }
 
+
             System.out.println(line);
             System.out.println("added: " + input);
-            inputs.add(input);
+            Task task = new Task(input);
+            tasks.add(task);
             System.out.println(line);
 
             input = in.nextLine();
