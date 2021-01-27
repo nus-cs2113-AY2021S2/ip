@@ -36,10 +36,12 @@ public class Duke {
                         "____________________________________________________________\n");
 
             } else if (input.equals("list")) {
-                System.out.print(line);
+                System.out.print(line+"\n");
+                System.out.print("Here are the tasks in your list: "+"\n");
                 for (int i = 0; i < tasks.size(); i++) {
                     System.out.print(
-                            Integer.toString(i+1) + "." + "["+tasks.get(i).getStatusIcon()+"]"+ tasks.get(i).getDescription() + "\n");
+                            Integer.toString(i+1) + "." +
+                                    "["+tasks.get(i).getStatusIcon()+"]"+ tasks.get(i).getDescription() + "\n");
                 }
                 System.out.print(line);
             } else if (input.contains("done")){
@@ -47,6 +49,7 @@ public class Duke {
                 String taskNo = input.substring(dividerPosition+1);
                 int taskIndex = Integer.parseInt(taskNo)-1;
                 tasks.get(taskIndex).markAsDone();
+                System.out.print("Nice! I've marked this task as done:"+"\n"+ "["+tasks.get(taskIndex).getStatusIcon()+"]"+ tasks.get(taskIndex).getDescription());
 
 
             }
