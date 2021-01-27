@@ -1,22 +1,29 @@
+import javax.sound.midi.SysexMessage;
 import java.util.Scanner;
 
 public class Duke {
 
-    static String texts[] = new String[100];
-    static int textPosition = 0;
+    static Task[] tasks = new Task[100];
+    static int taskPosition = 0;
 
 
-    public static void storeText(String text){
-        texts[textPosition] = text;
-        textPosition++;
-        System.out.println("added: " + text);
+    public static void storeTask(Task t){
+        tasks[taskPosition] = t;
+        taskPosition++;
+        System.out.println("added: " + t.description);
     }
 
-    public static void listArray(String[] texts){
+    public static void markAsDone(int taskIndex){
+        System.out.println("Nice! I've marked this task as done: ");
+        tasks[taskIndex-1].isDone = true;
+        System.out.println("[" + tasks[taskIndex-1].getStatusIcon()+ "]" + tasks[taskIndex-1].description);
+    }
+
+    public static void listArray(Task[] tasks){
         int textNumber = 1;
-        for(String text:texts){
-            if(text != null){
-                System.out.println(textNumber + ". " + text);
+        for(Task t:tasks){
+            if(t != null){
+                System.out.println(textNumber + ".[" + t.getStatusIcon() + "] " + t.description);
                 textNumber++;
             }
         }
@@ -29,11 +36,19 @@ public class Duke {
         while(!text.equalsIgnoreCase("Bye")){
             Scanner in = new Scanner(System.in);
             text = in.nextLine();
+            Task t = new Task(text);
             if(text.equalsIgnoreCase("List")){
-                listArray(texts);
+                listArray(tasks);
             }
-            else {
-                storeText(text);
+            else if(text.startsWith("Done") || text.startsWith("done")){
+                //String completedTaskIndex = text.substring(5);
+                //tasks[Integer.parseInt(completedTaskIndex)-1];
+                Integer taskIndex = Integer.parseInt(text.substring(5));
+                markAsDone(taskIndex);
+
+            }
+            else{
+                storeTask(t);
             }
         }
         System.out.println("Bye! Hope to see you again soon!");
