@@ -23,15 +23,10 @@ public class Duke {
                 "____________________________________________________________\n" );
 
         todolist list1 = new todolist();
-
-
-
+        
         while(command_in){
             String input = in.nextLine();
-
             String[] tokens = input.split(" ");
-
-
 
 
             if(tokens[0].equals("bye")){
@@ -39,11 +34,11 @@ public class Duke {
                 command_in = false;
             }else if(tokens[0].equals("list")) {
                 output = list1.list_items();
+            }else if(tokens[0].equals("done")){
+                output = list1.mark_done(tokens[1]);
             }else{
                 output = list1.add_items(input);
             }
-
-
 
 
 
