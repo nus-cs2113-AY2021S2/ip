@@ -1,12 +1,26 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Bob {
-    public static void echoLine(String input) {
+    // List of tasks Bob has
+    public static ArrayList<String> tasks = new ArrayList<String>();
+
+    public static void addToList(String input) {
+        tasks.add(input);
         String echoString = "____________________________________________________________\n" +
-                input + "\n" +
+                "added: " + input + "\n" +
                 "____________________________________________________________\n";
         System.out.println(echoString);
     }
+
+    public static void printList() {
+        System.out.print("____________________________________________________________\n");
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println((i+1) + ". " + tasks.get(i));
+        }
+        System.out.println("____________________________________________________________\n");
+    }
+
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
@@ -15,15 +29,23 @@ public class Bob {
                 " If you need anything hit me up fam 😌\n";
         System.out.println(welcome);
 
-        while (true) {
+        // Scanner loop until bye command
+        boolean isScanning = true;
+        while (isScanning) {
             String line = in.nextLine();
 
-            if (line.equals("bye")) {
+            switch (line) {
+            case "list":
+                printList();
                 break;
+            case "bye":
+                isScanning = false;
+                break;
+            default:
+                addToList(line);
             }
-
-            echoLine(line);
         }
+
         String goodbye = "____________________________________________________________\n" +
                 " Chao 👌\n" +
                 "____________________________________________________________";
