@@ -41,8 +41,6 @@ public class Duke {
                 listArray(tasks);
             }
             else if(text.startsWith("Done") || text.startsWith("done")){
-                //String completedTaskIndex = text.substring(5);
-                //tasks[Integer.parseInt(completedTaskIndex)-1];
                 Integer taskIndex = Integer.parseInt(text.substring(5));
                 markAsDone(taskIndex);
 
