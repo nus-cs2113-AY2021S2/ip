@@ -26,21 +26,29 @@ public class Duke {
         String input = "";
         Scanner in = new Scanner(System.in);
         input = in.nextLine();
-        ArrayList<String> tasks = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
 
         while (!input.equals("bye")) {
-            if (!input.equals("list")) {
-                tasks.add(input);
+            if (!input.equals("list") && !input.contains("done") ) {
+                tasks.add(new Task(input));
                 System.out.print("____________________________________________________________\n" +
                         "added:" + input + "\n" +
                         "____________________________________________________________\n");
 
             } else if (input.equals("list")) {
+                System.out.print(line);
                 for (int i = 0; i < tasks.size(); i++) {
-                    System.out.print("____________________________________________________________\n" +
-                            Integer.toString(i+1) + "." + tasks.get(i) + "\n" +
-                            "____________________________________________________________\n");
+                    System.out.print(
+                            Integer.toString(i+1) + "." + "["+tasks.get(i).getStatusIcon()+"]"+ tasks.get(i).getDescription() + "\n");
                 }
+                System.out.print(line);
+            } else if (input.contains("done")){
+                int dividerPosition = input.indexOf(" ");
+                String taskNo = input.substring(dividerPosition+1);
+                int taskIndex = Integer.parseInt(taskNo)-1;
+                tasks.get(taskIndex).markAsDone();
+
+
             }
             input = in.nextLine();
         }
