@@ -16,21 +16,19 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         String userInput;
-        String output;
         List<task> tasks = new ArrayList<>();
         do{
             userInput = sc.nextLine();
-
             int taskIndex = 0;
             if(userInput.contains("done")){
-                String[] split_ = userInput.split(" ");
-                userInput = split_[0];
-                taskIndex = Integer.valueOf(split_[1]);
+                String[] splits = userInput.split(" ");
+                userInput = splits[0];
+                taskIndex = Integer.valueOf(splits[1]) - 1;
 
             }
             switch (userInput) {
                 case "bye":
-                    output = "Bye. Hope to see you again soon!";
+                    String output = "Bye. Hope to see you again soon!";
                     System.out.println(output);
                     break;
                 case "list":
@@ -53,6 +51,6 @@ public class Duke {
                     tasks.add(newTask);
                     System.out.println("added: " + userInput);
             }
-        } while(!userInput.toLowerCase().equals("bye"));
+        } while(!userInput.equalsIgnoreCase("bye"));
     }
 }
