@@ -20,7 +20,7 @@ public class Duke {
                 for (int i = 0; i < numberOfTasks; i++) {
                     System.out.println("\t " + (i + 1) + ". " + tasks[i]);
                 }
-            } else if (command.substring(0, 4).equals("done")) {
+            } else if (command.length() >= 4 && command.substring(0, 4).equals("done")) {
                 try {
                     int taskNumber = Integer.parseInt(command.substring(5)) - 1;
                     if (0 <= taskNumber && taskNumber < numberOfTasks) {
