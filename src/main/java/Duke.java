@@ -22,6 +22,15 @@ public class Duke {
         System.out.println("\t" + output);
     }
 
+    public static void listTasks(){
+        // Lists out the things under tasks.
+        System.out.println("\t Here are the tasks in your list:");
+        for(int i= 0; i!=numberOfTasks; i++){
+            String output = String.format("%02d. [%s] %s", i+1, tasks[i].getStatusIcon(), tasks[i].getDescription());
+            System.out.println("\t" + output);
+        }
+    }
+
     public static void main(String[] args) {
         String greeting = "\t" + sectionDivider + "\n"
                 + "\tHello! I'm Duke. \n"
@@ -39,12 +48,7 @@ public class Duke {
         while(line.toLowerCase().equals("bye") != true){
             System.out.println("\t" + sectionDivider);
             if(line.equals("list")){
-                // Lists out the things under tasks.
-                System.out.println("\t Here are the tasks in your list:");
-                for(int i= 0; i!=numberOfTasks; i++){
-                    String output = String.format("%02d. [%s] %s", i+1, tasks[i].getStatusIcon(), tasks[i].getDescription());
-                    System.out.println("\t" + output);
-                }
+                listTasks();
             }else if (line.toLowerCase().contains("done")){
                 markTaskAsDone(line);
             }else{
