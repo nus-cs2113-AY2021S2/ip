@@ -16,14 +16,12 @@ public class Duke {
         System.out.println("\tWhat can I help you with?");
         System.out.println("\t__________________________________________\n");
 
-        String userInput = sc.next();
+        String userInput = sc.nextLine();
         while(!userInput.equals("bye")) {
-            System.out.println("\t------------------------------------------");
-            System.out.println("\t" + userInput);
+            System.out.println(userInput);
             System.out.println("\t__________________________________________\n");
-            userInput = sc.next();
+            userInput = sc.nextLine();
         }
-        System.out.println("\t------------------------------------------");
         System.out.println("\tSee you soon! Goodbye! ^.^");
         System.out.println("\t__________________________________________");    }
 }
