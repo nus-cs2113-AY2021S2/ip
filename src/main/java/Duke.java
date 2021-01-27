@@ -2,8 +2,22 @@ import java.util.Scanner;
 
 public class Duke {
 
+    public static String[] list = new String[100];
+    public static int index = 0;
+
     public static void echo(String input) {
         System.out.println(input);
+    }
+
+    public static void addToList(String input) {
+        list[index] = input;
+        index++;
+    }
+
+    public static void printList() {
+        for (int i = 0; i < index; i++) {
+            System.out.println(String.valueOf(i + 1) + ". " + list[i]);
+        }
     }
 
     public static void main(String[] args) {
@@ -21,8 +35,14 @@ public class Duke {
             input = in.nextLine();
             if (input.compareTo("bye") == 0) {
                 running = false;
+            } else {
+                if (input.compareTo("list") == 0) {
+                    printList();
+                } else {
+                    addToList(input);
+                    System.out.println("Added: " + input);
+                }
             }
-            echo(input);
         } while (running);
         System.out.println("Bye. Hope to see you again soon!");
     }
