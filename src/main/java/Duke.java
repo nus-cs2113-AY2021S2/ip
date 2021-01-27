@@ -16,9 +16,13 @@ public class Duke {
                 list();
             } else if (command.startsWith("done")) {
                 done(command.split(" ")[1]);
-            } else {
-                add(command);
-            }
+            } else if (command.startsWith("todo")) {
+                addTodo(command.split(" ", 2)[1]);
+            } else if (command.startsWith("event")) {
+				addEvent(command.split(" ", 2)[1]);
+			} else if (command.startsWith("deadline")) {
+				addDeadline(command.split(" ", 2)[1]);
+			}
         }
     }
 
@@ -32,19 +36,43 @@ public class Duke {
         System.out.println(line);
         System.out.println("\tHere are the tasks in your list:");
         for (int i=0; i<currentTask; i++) {
-            System.out.println("\t" + Integer.toString(i+1) + ".[" + tasks[i].getStatusIcon() + "] " + tasks[i].getDescription());
+            System.out.println("\t" + Integer.toString(i+1) + ".[" + tasks[i].getType() + "][" + tasks[i].getStatusIcon() + "] " + tasks[i].getDescription());
         }
         System.out.println(line + "\n");
     }
 
-    public static void add(String task) {
-        Task t = new Task(task);
+    public static void addTodo(String todo) {
+        Todo t = new Todo(todo);
         tasks[currentTask] = t;
         currentTask++;
         System.out.println(line);
-        System.out.println("\tadded: " + task);
+        System.out.println("\tGot it. I've added this task:");
+		System.out.println("\t   [" + t.getType() + "][" + t.getStatusIcon() + "] " + t.getDescription());
+		System.out.println("\tNow you have " + Integer.toString(currentTask) + " tasks in the list.");
         System.out.println(line + "\n");
     }
+
+	public static void addEvent(String event) {
+		Event t = new Event(event);
+		tasks[currentTask] = t;
+		currentTask++;
+		System.out.println(line);
+        System.out.println("\tGot it. I've added this task:");
+		System.out.println("\t   [" + t.getType() + "][" + t.getStatusIcon() + "] " + t.getDescription());
+		System.out.println("\tNow you have " + Integer.toString(currentTask) + " tasks in the list.");
+        System.out.println(line + "\n"); 
+	}
+
+	public static void addDeadline(String deadline) {
+		Deadline t = new Deadline(deadline);
+		tasks[currentTask] = t;
+		currentTask++;
+		System.out.println(line);
+        System.out.println("\tGot it. I've added this task:");
+		System.out.println("\t   [" + t.getType() + "][" + t.getStatusIcon() + "] " + t.getDescription());
+		System.out.println("\tNow you have " + Integer.toString(currentTask) + " tasks in the list.");
+        System.out.println(line + "\n"); 
+	}
 
     public static void done(String item) {
         int i = Integer.parseInt(item)-1;
@@ -56,7 +84,7 @@ public class Duke {
             tasks[i].markAsDone();
             System.out.println(line);
             System.out.println("\tNice! I've marked this task as done:");
-            System.out.println("\t  [" + tasks[i].getStatusIcon() + "] " + tasks[i].getDescription());
+            System.out.println("\t  [" + tasks[i].getType() + "][" + tasks[i].getStatusIcon() + "] " + tasks[i].getDescription());
             System.out.println(line + "\n");
         }
     }
