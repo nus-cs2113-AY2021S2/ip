@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Duke {
 
-    public static String[] list = new String[100];
+    public static Task[] list = new Task[100];
     public static int index = 0;
 
     public static void echo(String input) {
@@ -10,13 +10,14 @@ public class Duke {
     }
 
     public static void addToList(String input) {
-        list[index] = input;
+        Task newTask = new Task(input);
+        list[index] = newTask;
         index++;
     }
 
     public static void printList() {
         for (int i = 0; i < index; i++) {
-            System.out.println(String.valueOf(i + 1) + ". " + list[i]);
+            System.out.println(String.valueOf(i + 1) + ". " + list[i].stringRepresentation());
         }
     }
 
@@ -39,8 +40,15 @@ public class Duke {
                 if (input.compareTo("list") == 0) {
                     printList();
                 } else {
-                    addToList(input);
-                    System.out.println("Added: " + input);
+                    String[] separated = input.split(" ");
+                    if (separated[0].compareTo("done") == 0) {
+                        list[Integer.parseInt(separated[1]) - 1].markDone();
+                        System.out.println("Nice! I've marked this task as done:");
+                        System.out.println(list[Integer.parseInt(separated[1]) - 1].stringRepresentation().replace("\u2713", "\u2718"));
+                    } else {
+                        addToList(input);
+                        System.out.println("Added: " + input);
+                    }
                 }
             }
         } while (running);
