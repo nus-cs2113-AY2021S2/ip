@@ -19,16 +19,27 @@ public class Duke {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
         lineBreak();
-        //Level 1: Echo
+        //Level 2: Add, List
         Scanner in = new Scanner(System.in);
         String userInput;
+        String[] userInputList = new String[100];
+        int listCount = 0;
         while (true){
             userInput = in.nextLine();
+            if (userInput.equals("list")){
+                lineBreak();
+                for (int i = 0; i < listCount; i++){
+                    System.out.println(i+1 + ". " + userInputList[i]);
+                }
+                lineBreak();
+                continue;
+            }
             if (userInput.equals("bye")){
                 break;
             }
             lineBreak();
-            System.out.println(userInput);
+            userInputList[listCount++] = userInput;
+            System.out.println("added: " + userInput);
             lineBreak();
         }
 
