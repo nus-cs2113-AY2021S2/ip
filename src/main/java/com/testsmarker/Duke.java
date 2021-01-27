@@ -1,3 +1,5 @@
+package com.testsmarker;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -15,20 +17,28 @@ public class Duke {
 
         //echoes user inputs:
         String input = "";
-        String[] list = new String[100];
+        tasks list[] = new tasks[100];
         int itemCount = 0;
         input = in.nextLine();
         while (!input.equals("bye")) {
 
             System.out.println(line);
             if (input.equals("list")){
+                System.out.println("Here are the tasks in your lists:");
                 for (int i = 0; i < itemCount; i++){
-                    System.out.println(i+1 + ". " + list[i]);
+                    System.out.println(i+1 + ".[" + list[i].getStatusIcon() + "] "+ list[i].getDescription());
                 }
+            }
+            else if (input.startsWith("done")){
+                String[] word = input.split(" ");
+                int index = Integer.parseInt(word[1]) - 1; //obtain task number(which starts from 1)
+                list[index].markAsDone(); //mark task by current command as done
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println("[" + list[index].getStatusIcon() + "] " + list[index].getDescription());
             }
             else {
                 System.out.println("added: " + input); //output based on user input
-                list[itemCount] = input; //stores user inputs into list
+                list[itemCount] = new tasks(input); //create new task "input" and store to array 'list'
                 itemCount++;
             }
             System.out.println(line);
