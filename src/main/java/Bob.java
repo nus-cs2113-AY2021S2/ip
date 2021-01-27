@@ -2,25 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Bob {
-    // List of tasks Bob has
-    public static ArrayList<String> tasks = new ArrayList<String>();
-
-    public static void addToList(String input) {
-        tasks.add(input);
-        String echoString = "____________________________________________________________\n" +
-                "added: " + input + "\n" +
-                "____________________________________________________________\n";
-        System.out.println(echoString);
-    }
-
-    public static void printList() {
-        System.out.print("____________________________________________________________\n");
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.println((i+1) + ". " + tasks.get(i));
-        }
-        System.out.println("____________________________________________________________\n");
-    }
-
+    public static TaskList taskList = new TaskList();
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
@@ -33,16 +15,21 @@ public class Bob {
         boolean isScanning = true;
         while (isScanning) {
             String line = in.nextLine();
+            String[] inputArr = line.split(" ");
 
-            switch (line) {
+            // String before first space taken as command rest as args
+            switch (inputArr[0]) {
             case "list":
-                printList();
+                taskList.printList();
+                break;
+            case "done":
+                taskList.completeTask(Integer.parseInt(inputArr[1]));
                 break;
             case "bye":
                 isScanning = false;
                 break;
             default:
-                addToList(line);
+                taskList.addToList(line);
             }
         }
 
