@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
@@ -9,6 +10,11 @@ public class Duke {
         System.out.print('\n');
     }
 
+    public static void exitMethod() {
+        System.out.print("My cover's blown!\n");
+        printSeparator();
+    }
+
     public static void echoMode() {
         String line;
         Scanner in = new Scanner(System.in);
@@ -18,8 +24,28 @@ public class Duke {
             printSeparator();
             line = in.nextLine();
         }
-        System.out.print("My cover's blown!\n");
-        printSeparator();
+        exitMethod();
+    }
+
+    public static void listMode() {
+        String line;
+        Scanner in = new Scanner(System.in);
+        line = in.nextLine();
+        String[] list = new String[100];
+        int listCount = 0;
+        while (!line.equals("bye")){
+            if(line.equals("list")) {
+                for(int i = 0; i < listCount; i++) {
+                    System.out.print((i+1) + ". " + list[i] + '\n');
+                }
+            } else {
+                list[listCount++] = line;
+                System.out.print("added: " + line + '\n');
+            }
+            printSeparator();
+            line = in.nextLine();
+        }
+        exitMethod();
     }
 
     public static void main(String[] args) {
@@ -32,6 +58,7 @@ public class Duke {
         printSeparator();
         System.out.print("Greetings, fellow humans!\nI am CI.\nHow may I help you?\n");
         printSeparator();
-        echoMode();
+        //echoMode();
+        listMode();
     }
 }
