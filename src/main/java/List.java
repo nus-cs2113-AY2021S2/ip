@@ -1,14 +1,10 @@
-import java.util.Arrays;
-
 public class List {
     private static int numItems = 0;
-    private Task TaskList[] = new Task[100];
+    private Task[] TaskList = new Task[100];
 
-    public void addTask(String task) {
-        Task myTask = new Task(task);
-        TaskList[numItems] = myTask;
-        //System.out.println(myTask);
-        //System.out.println(Arrays.toString(TaskList));
+    public void addTask(String inputTask) {
+        Task userTask = new Task(inputTask);
+        TaskList[numItems] = userTask;
         addTaskNum();
     }
 
