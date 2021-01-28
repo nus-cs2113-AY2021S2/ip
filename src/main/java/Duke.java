@@ -17,26 +17,44 @@ public class Duke {
         System.out.println("\tWhat can I help you with?");
         System.out.println("\t__________________________________________\n");
 
-        ArrayList<String> tasks = new ArrayList<String>();
+        ArrayList<Task> tasks = new ArrayList<Task>();
 
-        String userInput = sc.nextLine();
-        while(!userInput.equals("bye")) {
+        boolean loop = true;
+        while (loop) {
+            String userInput = sc.nextLine().trim();
+
             if (userInput.equals("list")) {
+                // displays the list of tasks
                 System.out.println("\t------------------------------------------");
-                for (int i=1; i<=tasks.size(); i++) {
-                    System.out.println("\t" + i + ". " + tasks.get(i-1));
+                System.out.println("\tHere are the tasks in your list: ");
+                int i = 1;
+                for (Task task : tasks) {
+                    System.out.println("\t" + i++ + ".[" + task.getStatusIcon() + "] " + task.getDescription());
                 }
                 System.out.println("\t__________________________________________\n");
-            }
-            else {
+            } else if (userInput.startsWith("done") && userInput.split(" ").length == 2) {
+                // sets a task as done
+                System.out.println("\t------------------------------------------");
+                System.out.println("\tGreat job! I've marked this task as done: ");
+                int taskIndex = Integer.parseInt(userInput.split(" ")[1]);
+                Task task = tasks.get(taskIndex - 1);
+                task.markAsDone();
+                System.out.println("\t[" + task.getStatusIcon() + "] " + task.getDescription());
+                System.out.println("\t__________________________________________\n");
+            } else if (userInput.equals("bye")) {
+                // exits the program
+                System.out.println("\t------------------------------------------");
+                System.out.println("\tSee you soon! Goodbye! ^.^");
+                System.out.println("\t__________________________________________");
+                loop = false;
+            } else {
+                // adds a task to the list of tasks
                 System.out.println("\t------------------------------------------");
                 System.out.println("\tadded: " + userInput);
-                tasks.add(userInput);
+                Task task = new Task(userInput);
+                tasks.add(task);
                 System.out.println("\t__________________________________________\n");
             }
-            userInput = sc.nextLine();
         }
-        System.out.println("\t------------------------------------------");
-        System.out.println("\tSee you soon! Goodbye! ^.^");
-        System.out.println("\t__________________________________________");    }
+    }
 }
