@@ -9,7 +9,7 @@ public class Duke {
         int counter = 0;
 
         System.out.println("Hello! I'm Duke\nWhat can i do for you?\n");
-
+        System.out.println("Hello! I'm Duke\nWhat can i do for you?\n");
 
 
 
