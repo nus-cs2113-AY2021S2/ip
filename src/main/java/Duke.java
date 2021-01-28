@@ -12,7 +12,6 @@ public class Duke {
         System.out.println("Here are the things that i can do: ");
         System.out.println("1. Echo");
         System.out.println("2. Add task to your list & Mark task as done");
-        System.out.println("3. View task list and mark task as done");
         System.out.println("-1: Quit Duke");
 
         TaskList tl = new TaskList();
@@ -52,24 +51,21 @@ public class Duke {
                         else if (task.equals("list")) {
                             tl.showTaskList();
                         }
+                        else if (task.contains("done")) {
+                            String taskNo = task.substring(task.length()-1);
+                            int c = Integer.parseInt(taskNo);
+                            TaskStatus t = new TaskStatus((tl.tasks[c-1]));
+                            t.markAsDone();
+                            break;
+                        }
                         else{
                             tl.addTask(task);
                         }
                         task = b.nextLine();
                     }
                     break;
-                case 3:
-                    tl.showTaskList();
-                    System.out.println("Please enter the task number to be marked as done: ");
-                    Scanner c = new Scanner(System.in);
-                    int taskNo = c.nextInt();
-                    Task t = new Task (tl.tasks[taskNo-1]);
-                    t.markAsDone();
-                    break;
                 case -1:
                     run = false;
-                default:
-                    break;
             }
         }
     }
