@@ -16,13 +16,18 @@ public class Duke {
         System.out.println("____________________________________________________________\n" +
                 " Hello! I'm Duke\n" +
                 " What can I do for you?\n" +
-                "____________________________________________________________\n");
+                "____________________________________________________________");
         String text = myObj.nextLine();
         List myList = new List();
         while (!text.equals("bye")) {
+            String[] sentenceWords = text.split(" ");
             printLine();
             if (text.equals("list")) {
                 myList.printList();
+            }
+            else if (sentenceWords[0].equals("done")) {
+                int markTask = Integer.parseInt(sentenceWords[1]);
+                myList.markDone(markTask);
             }
             else {
                 System.out.println("added: " + text);

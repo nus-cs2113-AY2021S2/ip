@@ -25,4 +25,10 @@ public class List {
             System.out.println( i+1 + ". " + TaskList[i] );
         }
     }
+
+    public void markDone(int index) {
+        TaskList[index-1].markAsDone();
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println(TaskList[index-1]);
+    }
 }
