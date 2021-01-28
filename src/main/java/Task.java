@@ -19,7 +19,8 @@ public class Task {
         this.done = done;
     }
 
+    // Returns a checkbox string depending on whether task is done
     public String getCheckbox() {
-        return this.isDone() ? "[X]":"[ ]";
+        return this.isDone() ? "[✔]":"[❌]";
     }
 }
