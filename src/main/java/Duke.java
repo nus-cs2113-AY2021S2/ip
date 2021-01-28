@@ -6,19 +6,19 @@ public class Duke {
     private static final String line = "____________________________________________________________";
 
     public static void main(String[] args) {
-        /*
+
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        */
+
         String greet = "____________________________________________________________\n" +
                 " Hello! I'm Duke\n" +
                 "____________________________________________________________";
         String exit = "Bye. Hope to see you again!\n" +
                 "____________________________________________________________\n";
-
+        System.out.println(logo);
         System.out.println(greet);
         System.out.print(" What can I do for you?\n");
         System.out.print(line);
