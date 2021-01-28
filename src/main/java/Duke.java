@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
+
         System.out.printf("Hello! I'm Duke\n" +
                 "What can I do for you?\n\n");
 
@@ -11,46 +12,56 @@ public class Duke {
                 "bye: Exit\n" +
                 "any other words: The word will be recorded as a task\n");
 
-        String[] items = new String[100];
-        char[] itemsStatus = new char[100];
-        int itemIndex = 0;
-        int taskIndex = 0;
-        String line;
+        Task[] tasks = new Task[100];
+        int currentTaskLength = 0;
+
         Scanner sc = new Scanner(System.in);
-        line = sc.nextLine();
-        while(!line.equals("bye")){
-            switch(line){
-            case "list":
-                for(int i=0; i<itemIndex; i++){
+        String input = sc.nextLine();
+
+        while(!input.equals("bye")){
+
+            if(input.equals("list")){
+                for(int i=0; i<currentTaskLength; i++){
                     System.out.println(i+1 + ".["
-                            + itemsStatus[i] + "] "
-                            + items[i]);
+                            + tasks[i].getStatusIcon() + "] "
+                            + tasks[i].getDescription());
                 }
-                line = sc.nextLine();
-                break;
-            case "done":
-                for(int i=0; i<itemIndex; i++){
-                    System.out.println(i+1 + ".["
-                            + itemsStatus[i] + "] "
-                            + items[i]);
+                input = sc.nextLine();
+                continue;
+            } else if(input.length() > 5){
+                String firstFiveChars = input.substring(0, 5);
+                String sixthToLastChars = input.substring(5);
+                if(firstFiveChars.equals("done ") && isInteger(sixthToLastChars)){
+                    int taskIndex = Integer.parseInt(sixthToLastChars) - 1;
+                    if(taskIndex < currentTaskLength){
+                        tasks[taskIndex].setIsDone(true);
+                        System.out.println("Nice! I've marked this task as done: ");
+                        System.out.println("["
+                                + tasks[taskIndex].getStatusIcon() + "] "
+                                + tasks[taskIndex].getDescription());
+                        input = sc.nextLine();
+                        continue;
+                    }
                 }
-                System.out.println("Enter the task number to mark as complete");
-                taskIndex = Integer.parseInt(sc.nextLine());
-                itemsStatus[taskIndex-1] = 'X';
-                System.out.println("Nice! I've marked this task as done: ");
-                System.out.println("["
-                        + itemsStatus[taskIndex-1] + "] "
-                        + items[taskIndex-1]);
-                line = sc.nextLine();
-                break;
-            default:
-                items[itemIndex] = line;
-                itemsStatus[itemIndex] = ' ';
-                System.out.println("added: " + items[itemIndex]);
-                itemIndex++;
-                line = sc.nextLine();
             }
+
+            tasks[currentTaskLength] = new Task(input);
+            System.out.println("added: " + tasks[currentTaskLength].getDescription());
+            currentTaskLength++;
+            input = sc.nextLine();
+
         }
         System.out.printf("Bye. Hope to see you again soon!\n");
+    }
+
+    public static boolean isInteger(String s) {
+        try {
+            Integer.parseInt(s);
+        } catch(NumberFormatException e) {
+            return false;
+        } catch(NullPointerException e) {
+            return false;
+        }
+        return true;
     }
 }
