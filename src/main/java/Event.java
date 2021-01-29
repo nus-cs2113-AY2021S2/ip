@@ -1,21 +1,21 @@
 public class Event extends Task {
-    private String eventTime;
+    private String at;
 
-    public Event(String description, String eventTime) {
+    public Event(String description, String at) {
         super(description);
-        setEventTime(eventTime);
+        setAt(at);
     }
 
-    public void setEventTime(String eventTime) {
-        this.eventTime = eventTime;
+    public void setAt(String at) {
+        this.at = at;
     }
 
-    public String getEventTime() {
-        return eventTime;
+    public String getAt() {
+        return at;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at: " + getEventTime() + ")";
+        return "[E]" + super.toString() + "(at: " + getAt() + ")";
     }
 }
