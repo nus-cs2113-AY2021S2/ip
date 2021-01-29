@@ -1,9 +1,10 @@
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 public class Duke {
     public static void lineBreak(){
-        String horizontalLine = "____________________________________________________________";
-        System.out.println(horizontalLine);
+        final String HORIZONTAL_LINE = "____________________________________________________________";
+        System.out.println(HORIZONTAL_LINE);
     }
 
     public static void main(String[] args) {
@@ -37,7 +38,7 @@ public class Duke {
                 continue;
             }
 
-            if (userInput.startsWith("done")){
+            if (userInput.startsWith("done")) {
                 String[] words = userInput.split(" ");
                 Task currentTask = taskList[Integer.parseInt(words[1]) - 1];
                 currentTask.markAsDone();
@@ -47,7 +48,6 @@ public class Duke {
                 lineBreak();
                 continue;
             }
-
             if (userInput.equals("bye")){
                 break;
             }
