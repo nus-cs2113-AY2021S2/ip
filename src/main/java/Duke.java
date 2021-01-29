@@ -13,7 +13,7 @@ public class Duke {
     private static void runProgram() {
         Task[] taskList = new Task[MAX_TASK];
 
-        //Loop to receive response
+        //Loop to receive response.
         while (true){
 
             String input = getInput();
