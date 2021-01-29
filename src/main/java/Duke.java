@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import  java.util.Scanner;
 
 public class Duke {
@@ -17,10 +18,65 @@ public class Duke {
 
         Task[] userTasks = new Task[MAX_NO_OF_TASKS];
         int taskCounter = 0;
+        boolean breakLoopStatus = false;
         Scanner in = new Scanner(System.in);
-        String userInput = in.nextLine();
+        String userInput = null;
+        String newUserTask = null;
 
+        while(true){
+            userInput = in.nextLine();
+            String[] individualWords = userInput.split(" ", 2);
+            switch(individualWords[0].toLowerCase()){
+            case "list":
+                System.out.println("Here are the tasks in your list:");
+                for (int counter = 0; counter < taskCounter; counter++) {
+                    System.out.println((counter+1) + "." + userTasks[counter].toString());
+                }
+                break;
+            case "todo":
+                newUserTask = individualWords[1];
+                userTasks[taskCounter] = new Todo(newUserTask);
+                taskCounter = showTaskCreationMessage(taskCounter, userTasks[taskCounter]);
+                break;
+            case "deadline":
+                newUserTask = individualWords[1].split("/by")[0];
+                String date = individualWords[1].split("/by")[1];
+                userTasks[taskCounter] = new Deadline(newUserTask, date);
+                taskCounter = showTaskCreationMessage(taskCounter, userTasks[taskCounter]);
+                break;
+            case "event":
+                newUserTask = individualWords[1].split("/at")[0];
+                String eventTime = individualWords[1].split("/at")[1];
+                userTasks[taskCounter] = new Event(newUserTask,eventTime);
+                taskCounter = showTaskCreationMessage(taskCounter, userTasks[taskCounter]);
+                break;
+            case "done":
+                int activityNumber=-1;
+                try {
+                    activityNumber = Integer.parseInt(individualWords[1]);
+                    userTasks[activityNumber-1].setTaskStatus(true);
+                    System.out.println("Nice! I've marked this task as done:");
+                    System.out.println(userTasks[activityNumber-1].toString());
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid task number");
+                }
+                break;
+            case "bye":
+                System.out.println("Bye. Hope to see you again soon!");
+                breakLoopStatus = true;
+                break;
+            default:
+                System.out.println("Oops. Unknown command. Try again");
+            }
+            if(breakLoopStatus){
+                break;
+            }
+        }
+
+
+        /*
         while(!userInput.equals("bye")){
+            String[] individualWords = userInput.trim().split("\\s+");
             if(userInput.equals("list")){
                 System.out.println("Here are the tasks in your list:");
                 for (int counter = 0; counter < taskCounter; counter++) {
@@ -51,7 +107,14 @@ public class Duke {
             }
             userInput = in.nextLine();
         }
+         */
+    }
 
-        System.out.println("Bye. Hope to see you again soon!");
+    private static int showTaskCreationMessage(int taskCounter, Task userTask) {
+        System.out.println("Got it. I've added this task: ");
+        System.out.println(userTask.toString());
+        taskCounter++;
+        System.out.println("Now you have " + taskCounter + " tasks in the list. ");
+        return taskCounter;
     }
 }
