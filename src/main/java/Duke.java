@@ -1,3 +1,4 @@
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Duke {
@@ -23,10 +24,13 @@ public class Duke {
     private static void addTask(Task task) {
         tasks[taskCount] = task;
         taskCount++;
-        System.out.println("added: " + task.getDescription());
+        System.out.println("Got it. I've added this task:");
+        System.out.println("  " + task);
+        System.out.println("Now you have " + taskCount + " tasks in the list.");
     }
 
     private static void showTasks() {
+        System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < taskCount; i++) {
             System.out.println(i + 1 + ". " + tasks[i]);
         }
@@ -45,7 +49,15 @@ public class Duke {
         } else if (input.toLowerCase().startsWith("done")) {
             markAsDone(Integer.parseInt(input.split(" ")[1]));
         } else if (input.toLowerCase().startsWith("todo")) {
-            addTask(new Todo(input));
+            String description = input.substring(5);
+            Task todoTask = new Todo(description);
+            addTask(todoTask);
+        } else if (input.toLowerCase().startsWith("event")) {
+            String[] eventSplit = input.split("/at ");
+            String description = eventSplit[0].substring(6);
+            String eventTime = eventSplit[1];
+            Task eventTask = new Event(description, eventTime);
+            addTask(eventTask);
         } else {
             System.out.println("Invalid input. Please try again with valid command.");
         }
