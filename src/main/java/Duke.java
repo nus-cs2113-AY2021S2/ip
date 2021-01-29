@@ -6,6 +6,8 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
         boolean isExit = false;
+        String [] store = new String[100];
+        int count = 0;
 
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -27,10 +29,20 @@ public class Duke {
                 System.out.println("    ____________________________________________________________");
                 isExit = true;
             }
+            else if(echo.equals("list")){
+                System.out.println("    ____________________________________________________________");
+                for (int i = 0; i < count; i++) {
+                    System.out.print("    "+(i+1));
+                    System.out.println(". "+store[i]);
+                }
+                System.out.println("    ____________________________________________________________");
+            }
             else{
                 System.out.println("    ____________________________________________________________");
-                System.out.println("    "+ echo);
+                System.out.println("    added: "+ echo);
                 System.out.println("    ____________________________________________________________");
+                store[count] = echo;
+                count++;
             }
         }
     }
