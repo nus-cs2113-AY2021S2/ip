@@ -3,7 +3,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.ArrayList;
 
 public class Jarvis {
-    private final ArrayList<Task> list = new ArrayList<>();   // create ArrayList
+    ArrayList<Task> list = new ArrayList<>();   // create ArrayList
 
     public Jarvis() {}
 
