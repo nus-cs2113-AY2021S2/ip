@@ -1,0 +1,19 @@
+todo Task A
+list
+event Event A /at 1 Apr 2021
+event Event B Missing 'at'
+list
+deadline Deadline A /by 1 Aug 2021
+deadline Deadline B Missing 'by'
+list
+Random Task without Type
+list
+done 1
+done 2
+done 4
+list
+done -1
+done Not_A_Number
+done 1000
+list
+bye
