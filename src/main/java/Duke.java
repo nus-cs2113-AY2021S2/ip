@@ -56,9 +56,10 @@ public class Duke {
      * Else, adds the message as a task.
      */
     public static void handleMessage(Scanner scanner) {
-        String[] userInput = scanner.nextLine().split(" ");
+        String sentence = scanner.nextLine();
+        String[] words = sentence.split(" ");
 
-        switch (userInput[0]) {
+        switch (words[0]) {
             case "bye":
                 messages.add(byeMessage);
                 reply();
@@ -71,8 +72,8 @@ public class Duke {
                 break;
             case "done":
                 messages.add(doneMessage);
-                if (userInput.length > 1) {
-                    String[] inputIndexes = Arrays.copyOfRange(userInput, 1, userInput.length);
+                if (words.length > 1) {
+                    String[] inputIndexes = Arrays.copyOfRange(words, 1, words.length);
                     List<Integer> validIndexes = validateIndexes(inputIndexes);
                     if (validIndexes != null) {
                         List<String> completedTasks = completeTasks(validIndexes);
@@ -83,8 +84,8 @@ public class Duke {
                 handleMessage(scanner);
                 break;
             default:
-                addTask(userInput[0]);
-                messages.add("added: " + userInput[0]);
+                addTask(sentence);
+                messages.add("added: " + sentence);
                 reply();
                 handleMessage(scanner);
         }
