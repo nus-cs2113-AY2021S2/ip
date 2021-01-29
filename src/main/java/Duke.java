@@ -1,9 +1,9 @@
 import java.util.Scanner;
-import java.util.Vector;
 
 public class Duke {
     private static Scanner SCANNER = new Scanner(System.in);
-    private static Vector<String> entries = new Vector<String>();
+    private static Task[] tasksList = new Task[100];
+    private static int tasksCount = 0;
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -17,16 +17,26 @@ public class Duke {
         System.out.println("What can I do for you?");
         printLine();
         while(true) {
-            String userCommand = getUserInput();
-            if (userCommand.equalsIgnoreCase("bye")){
+            String[] userCommand = getUserInput();
+            if (userCommand[0].equalsIgnoreCase("bye")){
                 exitDuke();
                 break;
             }
-            if (userCommand.equalsIgnoreCase("list")){
-                listOutEntries();
-            } else {
+            if (userCommand[0].equalsIgnoreCase("list")){
+                listOutTasks();
+            } else if (userCommand[0].equalsIgnoreCase("done" )) {
+                int taskNumber = Integer.parseInt(userCommand[1]);
+                taskNumber--;
+                Task selectedTask = tasksList[taskNumber];
+                selectedTask.markAsDone();
+                System.out.println("Nice! Following task is now marked as done:");
+                System.out.println("[X] " + selectedTask.description);
+            }
+            else {
             printLine();
-            addUserCommandToEntries(userCommand);
+            tasksList[tasksCount] = new Task(userCommand[0]);
+            tasksCount++;
+            System.out.println("Added: " + userCommand[0]);
             }
             printLine();
         }
@@ -35,7 +45,6 @@ public class Duke {
     private static void exitDuke() {
         printLine();
         System.out.println("Bye. Hope to see you again soon!");
-        return;
     }
 
     private static void printLine() {
@@ -46,22 +55,23 @@ public class Duke {
         System.out.println(userCommand);
     }
 
-    private static String getUserInput() {
-        String inputLine = SCANNER.nextLine();
-        return inputLine;
+    private static String[] getUserInput() {
+        String userInput = SCANNER.nextLine();
+        String[] listOfInputs = ((String) userInput).split(" ", 2);
+        if (!(listOfInputs[0].equalsIgnoreCase("done" ))) {
+            listOfInputs[0] = userInput;
+        }
+        return listOfInputs;
     }
 
-    private static void addUserCommandToEntries(String userCommand) {
-        String newEntries = userCommand;
-        entries.add(userCommand);
-        System.out.println("Added: " + userCommand);
-    }
 
-    private static void listOutEntries() {
+    private static void listOutTasks() {
         int i = 0;
-        while (i < entries.size()) {
-            System.out.println(i + ". " + entries.get(i));
+        while (i < tasksCount) {
+            Task selectedTask = tasksList[i];
             i++;
+            System.out.println(i + ". " + selectedTask.getStatusIcon() + " " + selectedTask.description);
         }
     }
+
 }
