@@ -53,9 +53,10 @@ public class Duke {
 
     /**
      * Returns error code message
-     * Error Code 1: done command not in wrong format
+     * Error Code 1: done command in wrong format
      * Error Code 2: done Index is more than size of array
      * Error Code 3: Timetable is empty
+     * Error Code 4: Task already marked done
      * @param - code
      */
     public static void error(int code) {
@@ -74,6 +75,9 @@ public class Duke {
             System.out.println("Your timetable is empty! Add something!");
             printBorder();
             break;
+        case 4:
+            System.out.println("You have already marked it as Done!");
+            printBorder();
         }
     }
 
@@ -146,11 +150,15 @@ public class Duke {
      * @param - index
      */
     private static void checkTask(int index) {
-        System.out.println("Good Job, I will mark this as done!");
-        timetable[index].markAsDone();
-        System.out.println("[" + timetable[index].getStatusIcon() + "] "
-            + timetable[index].getName());
-        printBorder();
+        if (timetable[index].isDone) {
+            error(4);
+        } else {
+            System.out.println("Good Job, I will mark this as done!");
+            timetable[index].markAsDone();
+            System.out.println("[" + timetable[index].getStatusIcon() + "] "
+                + timetable[index].getName());
+            printBorder();
+        }
     }
 
     /**
