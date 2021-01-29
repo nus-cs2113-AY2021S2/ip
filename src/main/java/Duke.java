@@ -58,7 +58,13 @@ public class Duke {
             String eventTime = eventSplit[1];
             Task eventTask = new Event(description, eventTime);
             addTask(eventTask);
-        } else {
+        } else if (input.toLowerCase().startsWith("deadline")) {
+            String[] deadlineSplit = input.split("/by ");
+            String description = deadlineSplit[0].substring(9);
+            String deadlineTime = deadlineSplit[1];
+            Task deadlineTask = new Deadline(description, deadlineTime);
+            addTask(deadlineTask);
+        }else {
             System.out.println("Invalid input. Please try again with valid command.");
         }
     }
