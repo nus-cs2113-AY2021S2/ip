@@ -1,8 +1,14 @@
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Vector;
 
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.ToDo;
+
 public class Duke {
-    public static final String LONG_LINE = "____________________________________________________________";
+    public static final String LONG_LINE = "------------------------------------------------------------";
 
     public static void main(String[] args) {
         // Initialize a vector to store all the tasks
@@ -31,6 +37,15 @@ public class Duke {
             case "done":
                 done(tasks, arguments);
                 break;
+            case "deadline":
+                deadline(tasks, arguments);
+                break;
+            case "event":
+                event(tasks, arguments);
+                break;
+            case "todo":
+                todo(tasks, arguments);
+                break;
             default:
                 save(tasks, line);
             }
@@ -51,9 +66,9 @@ public class Duke {
 
     // Print out everything in the list, index starts from 1
     protected static void list(Vector<Task> tasks) {
+        printIndent("Here are the tasks in your list:");
         for (int i = 0; i < tasks.size(); i += 1) {
-            Task task = tasks.get(i);
-            printIndent(String.format("%d.[%s] %s", i + 1, task.getStatusIcon(), task.getDescription()));
+            printIndent(String.format("%d.\t%s", i + 1, tasks.get(i)));
         }
     }
 
@@ -75,7 +90,7 @@ public class Duke {
                 tasks.set(index - 1, task);
 
                 printIndent("Nice! I've marked this task as done:");
-                printIndent(String.format("  [%s] %s", task.getStatusIcon(), task.getDescription()));
+                printIndent("\t" + task);
             } catch (NumberFormatException e) {
                 printIndent("Index provided is not a proper number.");
             } catch (IllegalArgumentException e) {
@@ -84,14 +99,64 @@ public class Duke {
         }
     }
 
+    // Create a deadline task
+    protected static void deadline(Vector<Task> tasks, String[] arguments) {
+        int i = findIndex(arguments, "/by");
+        if (i != -1) {
+            String description = String.join(" ", Arrays.copyOfRange(arguments, 1, i));
+            String byTime = String.join(" ", Arrays.copyOfRange(arguments, i + 1, arguments.length));
+            tasks.add(new Deadline(description, byTime));
+            printNewTask(tasks);
+        } else {
+            printIndent("You must specify a deadline after /by");
+        }
+    }
+
+    // Create an event task
+    protected static void event(Vector<Task> tasks, String[] arguments) {
+        int i = findIndex(arguments, "/at");
+        if (i != -1) {
+            String description = String.join(" ", Arrays.copyOfRange(arguments, 1, i));
+            String byTime = String.join(" ", Arrays.copyOfRange(arguments, i + 1, arguments.length));
+            tasks.add(new Event(description, byTime));
+            printNewTask(tasks);
+        } else {
+            printIndent("You must specify a event time after /at");
+        }
+    }
+
+    // Create a todo task
+    protected static void todo(Vector<Task> tasks, String[] arguments) {
+        tasks.add(new ToDo(String.join(" ", Arrays.copyOfRange(arguments, 1, arguments.length))));
+        printNewTask(tasks);
+    }
+
     // Save a new task in the task list
     protected static void save(Vector<Task> tasks, String description) {
         tasks.add(new Task(description));
-        printIndent("added: " + description);
+        printNewTask(tasks);
     }
 
-    // Print a line with 4 spaces as indentation
+    // Print a line with 1 tab as indentation
     protected static void printIndent(String line) {
-        System.out.println("    " + line);
+        System.out.println("\t" + line);
+    }
+
+    // Print a message for a successful insertion of task
+    protected static void printNewTask(Vector<Task> tasks) {
+        int size = tasks.size();
+        printIndent("Great. We added a new task:");
+        printIndent("\t" + tasks.get(size - 1));
+        printIndent(String.format("You have in total %d tasks", size));
+    }
+
+    // Find the index of a string in a string array
+    protected static int findIndex(String[] haystack, String needle) {
+        for (int i = 0; i < haystack.length; i += 1) {
+            if (haystack[i].equals(needle)) {
+                return i;
+            }
+        }
+        return -1;
     }
 }
