@@ -9,6 +9,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
+        // Prints welcome message
         System.out.println("_____________________________________________________");
         System.out.println("Hello! I'm Duke");
         System.out.print("What can I do for you?\n");
@@ -17,6 +18,7 @@ public class Duke {
         Scanner userInputScanner = new Scanner(System.in);
         String userInput = userInputScanner.nextLine();
         String[] userInputSplitted = userInput.split(" ");
+
         while(!userInputSplitted[0].equals("bye")) {
             switch (userInputSplitted[0]) {
             case "list":
@@ -36,6 +38,7 @@ public class Duke {
             userInput = userInputScanner.nextLine();
             userInputSplitted = userInput.split(" ");
         }
+
         System.out.println("_____________________________________________________");
         System.out.println("Bye. Hope to see you again soon! :3");
         System.out.println("_____________________________________________________");
