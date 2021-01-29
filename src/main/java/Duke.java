@@ -6,18 +6,17 @@ public class Duke {
 
     public static void main(String[] args) {
         printHello();
-        executeCommand();
+        runProgram();
         printBye();
     }
 
-    private static void executeCommand() {
-        Scanner in = new Scanner(System.in);
-
+    private static void runProgram() {
         Task[] taskList = new Task[MAX_TASK];
 
         //Loop to receive response
         while (true){
-            String input = in.nextLine();
+
+            String input = getInput();
 
             // BYE command
             if(isSameInput(input, "bye")){
@@ -34,13 +33,18 @@ public class Duke {
                 runDone(taskList, input);
             }
 
-            // Adds new task
+            // ADD command
             else {
                 runAdd(taskList, input);
             }
         }
 
 
+    }
+
+    private static String getInput() {
+        Scanner in = new Scanner(System.in);
+        return in.nextLine();
     }
 
     private static void runAdd(Task[] taskList, String input) {
