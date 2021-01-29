@@ -3,19 +3,18 @@ public class Task {
     protected boolean isDone;
 
     public Task() {
-        this("", false);
+        this("");
     }
 
-    public Task(String description, boolean isDone) {
+    public Task(String description) {
         setDescription(description);
-        setDone(isDone);
     }
 
     public void setDescription(String description) {
         this.description = description;
     }
 
-    public void setDone(boolean isDone) {
+    public void markAsDone(boolean isDone) {
         this.isDone = isDone;
     }
 

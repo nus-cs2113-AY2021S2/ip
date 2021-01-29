@@ -34,7 +34,7 @@ public class Duke {
 
     private static void markAsDone(int index) {
         Task task = tasks[index - 1];
-        task.setDone(true);
+        task.markAsDone(true);
         System.out.println("Nice! I've marked this task as done:");
         System.out.println("  " + task);
     }
@@ -44,8 +44,10 @@ public class Duke {
             showTasks();
         } else if (input.toLowerCase().startsWith("done")) {
             markAsDone(Integer.parseInt(input.split(" ")[1]));
+        } else if (input.toLowerCase().startsWith("todo")) {
+            addTask(new Todo(input));
         } else {
-            addTask(new Task(input, false));
+            System.out.println("Invalid input. Please try again with valid command.");
         }
     }
 
