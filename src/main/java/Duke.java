@@ -1,53 +1,56 @@
 import java.util.*;
-public class Duke {
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello! Im Duke\n" + logo + "What can I do for you?");
-        Duke dk = new Duke();
-        dk.run();
-
-    }
+public class Duke{
+    Scanner sc = new Scanner(System.in);
+    Task[] t = new Task[100];
+    int taskNo = 0;
 
     public void run() {
-        Task[] t = new Task[100];
-        int taskNo = 0;
-        System.out.println("Please enter you choice!");
-        Scanner sc = new Scanner(System.in);
-        int choice = sc.nextInt();
-        while(choice != 4){
-            switch (choice) {
-            case 1:
-                t[taskNo] = new Task();
-                System.out.println("Please enter you task!");
-                sc.nextLine();
-                t[taskNo].setDescription(sc.nextLine());
-                taskNo++;
-                break;
-            case 2:
-                System.out.println("Select this to print description");
-                for(int i = 0; i<taskNo;i++){
-                    System.out.println(t[i].getStatusIcon()+t[i].getDescription());
-                }
-                break;
 
-            case 3:
-                System.out.println("Please enter the task name you want to mark as done");
-                sc.nextLine();
-                for(int i = 0; i < taskNo; i++){
-                    if(t[i].getDescription().equals(sc.nextLine())){
-                        t[i].setDone(true);
-                        break;
-                    }
-                }
-                System.out.println("Mark task as done");
+        String choice;
+        do {
+            Ui.printMenu();
+            choice = sc.nextLine();
+            switch (choice) {
+
+            case "1":
+                enterTask();
+                break;
+            case "2":
+               printDescription();
+                break;
+            case "3":
+                markDone();
                 break;
             }
-            System.out.println("Please enter you choice!");
-            choice = sc.nextInt();
+        } while (!choice.equals("bye"));
+    }
+    private void enterTask() {
+        t[taskNo] = new Task();
+        System.out.println("Please enter you task!");
+        t[taskNo].setDescription(sc.nextLine());
+        t[taskNo].setTaskNo(taskNo);
+        taskNo++;
+    }
+
+    private void printDescription(){
+        System.out.println("Select this to print description");
+        for (int i = 0; i < taskNo; i++) {
+            System.out.println((t[i].getTaskNo() + 1) + "." + t[i].getStatusIcon() + t[i].getDescription());
         }
+    }
+
+    private void markDone(){
+        System.out.println("Please enter then task number you want to mark as done ");
+        String value = sc.nextLine().replaceAll("[^0-9]", "");
+        int newValue = Integer.parseInt(value);
+        t[newValue - 1].setDone(true);
+        System.out.println("Task sucessfully marked as done!");
+    }
+
+
+    public static void main(String[] args) {
+        Duke dk = new Duke();
+        Ui ui = new Ui();
+        dk.run();
     }
 }
