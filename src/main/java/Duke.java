@@ -2,7 +2,8 @@ import java.util.Locale;
 import java.util.Scanner;
 
 public class Duke {
-    static Task[] tasks = new Task[100];
+    static int CAPACITY = 100;
+    static Task[] tasks = new Task[CAPACITY];
     static int taskCount = 0;
 
     private static void showDivider() {
@@ -24,6 +25,10 @@ public class Duke {
     private static void addTask(Task task) {
         tasks[taskCount] = task;
         taskCount++;
+        showAddTaskMessage(task);
+    }
+
+    private static void showAddTaskMessage(Task task) {
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + task);
         System.out.println("Now you have " + taskCount + " tasks in the list.");
@@ -39,28 +44,36 @@ public class Duke {
     private static void markAsDone(int index) {
         Task task = tasks[index - 1];
         task.markAsDone(true);
+        showMarkAsDoneMessage(task);
+    }
+
+    private static void showMarkAsDoneMessage(Task task) {
         System.out.println("Nice! I've marked this task as done:");
         System.out.println("  " + task);
     }
 
     private static void parseCommand(String input) {
-        if (input.toLowerCase().startsWith("list")) {
+        String lowercaseInput = input.toLowerCase();
+        int firstSpacePosition = input.indexOf(" ");
+        String parameter = input.substring(firstSpacePosition + 1);
+
+        if (lowercaseInput.startsWith("list")) {
             showTasks();
-        } else if (input.toLowerCase().startsWith("done")) {
-            markAsDone(Integer.parseInt(input.split(" ")[1]));
-        } else if (input.toLowerCase().startsWith("todo")) {
-            String description = input.substring(5);
+        } else if (lowercaseInput.startsWith("done")) {
+            markAsDone(Integer.parseInt(parameter));
+        } else if (lowercaseInput.startsWith("todo")) {
+            String description = parameter;
             Task todoTask = new Todo(description);
             addTask(todoTask);
-        } else if (input.toLowerCase().startsWith("event")) {
-            String[] eventSplit = input.split("/at ");
-            String description = eventSplit[0].substring(6);
+        } else if (lowercaseInput.startsWith("event")) {
+            String[] eventSplit = parameter.split("/at ");
+            String description = eventSplit[0];
             String eventTime = eventSplit[1];
             Task eventTask = new Event(description, eventTime);
             addTask(eventTask);
-        } else if (input.toLowerCase().startsWith("deadline")) {
-            String[] deadlineSplit = input.split("/by ");
-            String description = deadlineSplit[0].substring(9);
+        } else if (lowercaseInput.startsWith("deadline")) {
+            String[] deadlineSplit = parameter.split("/by ");
+            String description = deadlineSplit[0];
             String deadlineTime = deadlineSplit[1];
             Task deadlineTask = new Deadline(description, deadlineTime);
             addTask(deadlineTask);
