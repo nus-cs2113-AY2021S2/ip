@@ -3,15 +3,20 @@ import java.util.Scanner;
 public class Duke {
     public static int MAX_SIZE = 100;
     public static Task[] timetable = new Task[MAX_SIZE];
-    private static int listCounter = 0;
-    private static final String border = "____________________________________________________________";
-    private static final String helpMessage = "HELP COMMANDS\n"
-        + "any input - adds to timetable\n"
-        + "list - view timetable\n"
-        + "HELP - view help commands\n"
-        + "done [index] - tick as done\n"
-        + "bye  - terminate program\n"
-        + border;
+    private static int LIST_COUNTER = 0;
+    private static final String BORDER = "============================================================";
+    private static final String HELP_MESSAGE = " HELP COMMANDS\n"
+        + "Input: adds to timetable\n"
+        + " Example: sleep\n\n"
+        + "List: view timetable\n"
+        + " Example: list\n\n"
+        + "Help: view help commands\n"
+        + " Example: Help\n\n"
+        + "Done: check task as done\n"
+        + " Example: Done 2\n\n"
+        + "Bye:  terminate program\n"
+        + " Example: bye\n\n"
+        + BORDER;
 
     public static void printGreeting() {
         String alfred = "⊂_ヽ\n"
@@ -48,7 +53,7 @@ public class Duke {
     }
 
     public static void printBorder() {
-        System.out.println(border);
+        System.out.println(BORDER);
     }
 
     /**
@@ -57,7 +62,7 @@ public class Duke {
      * Error Code 2: done Index is more than size of array
      * Error Code 3: Timetable is empty
      * Error Code 4: Task already marked done
-     * @param - code
+     * @param code - error code
      */
     public static void error(int code) {
         switch (code) {
@@ -94,15 +99,15 @@ public class Duke {
                 printExit();
                 System.exit(1);
             } else if (input.equalsIgnoreCase("help")) {
-                System.out.println(helpMessage);
-            } else if (input.startsWith("done")) {
+                System.out.println(HELP_MESSAGE);
+            } else if (input.toLowerCase().startsWith("done")) {
                 if (input.equalsIgnoreCase("done")) {
                     error(1);
                     continue;
                 }
                 if (input.substring(5).matches("[0-9]+")) {
                     int index = Integer.parseInt(input.substring(5));
-                    if (index > listCounter) {
+                    if (index > LIST_COUNTER) {
                         error(2);
                         continue;
                     }
@@ -113,7 +118,7 @@ public class Duke {
                     error(1);
                 }
             } else if (input.equalsIgnoreCase("list")) {
-                if (listCounter == 0) {
+                if (LIST_COUNTER == 0) {
                     error(3);
                     continue;
                 }
@@ -138,8 +143,8 @@ public class Duke {
      * @param input name of task
      */
     public static void addTask(String input) {
-        timetable[listCounter] = new Task(input);
-        listCounter += 1;
+        timetable[LIST_COUNTER] = new Task(input);
+        LIST_COUNTER += 1;
         System.out.println("I have added \"" + input + "\" "
             + "to the Timetable!");
         printBorder();
@@ -147,7 +152,7 @@ public class Duke {
 
     /**
      * Check task as completed
-     * @param - index
+     * @param index - index of task
      */
     private static void checkTask(int index) {
         if (timetable[index].isDone) {
@@ -166,7 +171,7 @@ public class Duke {
      */
     private static void printTask() {
         System.out.println("TIMETABLE");
-        for (int i = 0; i < listCounter; i++) {
+        for (int i = 0; i < LIST_COUNTER; i++) {
             System.out.println(i + 1 + ". [" + timetable[i].getStatusIcon() + "] "
                 + timetable[i].getName());
         }
@@ -176,7 +181,7 @@ public class Duke {
     /**
      * Main Function
      * To Print Greeting as Default then loop function
-     * @param - args
+     * @param args - argument
      */
     public static void main(String[] args) {
         printGreeting();
