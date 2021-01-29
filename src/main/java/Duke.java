@@ -15,7 +15,7 @@ public class Duke {
         Vector<Task> tasks = new Vector<>();
 
         greeting();
-        printIndent(LONG_LINE);
+        printlnWithIndent(LONG_LINE);
 
         Scanner in = new Scanner(System.in);
         Boolean exit = false;
@@ -24,11 +24,11 @@ public class Duke {
             String line = in.nextLine();
             String[] arguments = line.split(" ");
 
-            printIndent(LONG_LINE);
+            printlnWithIndent(LONG_LINE);
 
             switch(arguments[0]) {
             case "bye":
-                goodbye();
+                bye();
                 exit = true;
                 break;
             case "list":
@@ -50,25 +50,27 @@ public class Duke {
                 save(tasks, line);
             }
 
-            printIndent(LONG_LINE);
+            printlnWithIndent(LONG_LINE);
         }
         in.close();
     }
 
+    // Print a greeting message when the program is invoked
     protected static void greeting() {
-        printIndent("Hello! I'm Duke.");
-        printIndent("What can I do for you?");
+        printlnWithIndent("Hello! I'm Duke.");
+        printlnWithIndent("What can I do for you?");
     }
 
-    protected static void goodbye() {
-        printIndent("Bye. Hope to see you again soon!");
+    // Print a goodbye message before the program exits
+    protected static void bye() {
+        printlnWithIndent("Bye. Hope to see you again soon!");
     }
 
     // Print out everything in the list, index starts from 1
     protected static void list(Vector<Task> tasks) {
-        printIndent("Here are the tasks in your list:");
+        printlnWithIndent("Here are the tasks in your list:");
         for (int i = 0; i < tasks.size(); i += 1) {
-            printIndent(String.format("%d.\t%s", i + 1, tasks.get(i)));
+            printlnWithIndent(String.format("%d.\t%s", i + 1, tasks.get(i)));
         }
     }
 
@@ -76,7 +78,7 @@ public class Duke {
     protected static void done(Vector<Task> tasks, String[] arguments) {
         if (arguments.length < 2) {
             // An index must be provided for the task to be marked "done"
-            printIndent("You will need to give me an index, like this: `done 2`.");
+            printlnWithIndent("You will need to give me an index, like this: `done 2`.");
         } else {
             try {
                 int index = Integer.parseInt(arguments[1]);
@@ -89,12 +91,12 @@ public class Duke {
                 task.markAsDone();
                 tasks.set(index - 1, task);
 
-                printIndent("Nice! I've marked this task as done:");
-                printIndent("\t" + task);
+                printlnWithIndent("Nice! I've marked this task as done:");
+                printlnWithIndent("\t" + task);
             } catch (NumberFormatException e) {
-                printIndent("Index provided is not a proper number.");
+                printlnWithIndent("Index provided is not a proper number.");
             } catch (IllegalArgumentException e) {
-                printIndent("Task with this index is not found in our database.");
+                printlnWithIndent("Task with this index is not found in our database.");
             }
         }
     }
@@ -104,11 +106,11 @@ public class Duke {
         int i = findIndex(arguments, "/by");
         if (i != -1) {
             String description = String.join(" ", Arrays.copyOfRange(arguments, 1, i));
-            String byTime = String.join(" ", Arrays.copyOfRange(arguments, i + 1, arguments.length));
-            tasks.add(new Deadline(description, byTime));
+            String by = String.join(" ", Arrays.copyOfRange(arguments, i + 1, arguments.length));
+            tasks.add(new Deadline(description, by));
             printNewTask(tasks);
         } else {
-            printIndent("You must specify a deadline after /by");
+            printlnWithIndent("You must specify a deadline after /by");
         }
     }
 
@@ -117,40 +119,42 @@ public class Duke {
         int i = findIndex(arguments, "/at");
         if (i != -1) {
             String description = String.join(" ", Arrays.copyOfRange(arguments, 1, i));
-            String byTime = String.join(" ", Arrays.copyOfRange(arguments, i + 1, arguments.length));
-            tasks.add(new Event(description, byTime));
+            String at = String.join(" ", Arrays.copyOfRange(arguments, i + 1, arguments.length));
+            tasks.add(new Event(description, at));
             printNewTask(tasks);
         } else {
-            printIndent("You must specify a event time after /at");
+            printlnWithIndent("You must specify a event time after /at");
         }
     }
 
     // Create a todo task
     protected static void todo(Vector<Task> tasks, String[] arguments) {
-        tasks.add(new ToDo(String.join(" ", Arrays.copyOfRange(arguments, 1, arguments.length))));
+        String description = String.join(" ", Arrays.copyOfRange(arguments, 1, arguments.length));
+        tasks.add(new ToDo(description));
         printNewTask(tasks);
     }
 
-    // Save a new task in the task list
+    // Save a new task with no specific type in the task list
     protected static void save(Vector<Task> tasks, String description) {
         tasks.add(new Task(description));
         printNewTask(tasks);
     }
 
     // Print a line with 1 tab as indentation
-    protected static void printIndent(String line) {
+    protected static void printlnWithIndent(String line) {
         System.out.println("\t" + line);
     }
 
     // Print a message for a successful insertion of task
     protected static void printNewTask(Vector<Task> tasks) {
         int size = tasks.size();
-        printIndent("Great. We added a new task:");
-        printIndent("\t" + tasks.get(size - 1));
-        printIndent(String.format("You have in total %d tasks", size));
+        printlnWithIndent("Great. We added a new task:");
+        printlnWithIndent("\t" + tasks.get(size - 1));
+        printlnWithIndent(String.format("You have in total %d tasks", size));
     }
 
     // Find the index of a string in a string array
+    // Return the index if found and -1 if not found
     protected static int findIndex(String[] haystack, String needle) {
         for (int i = 0; i < haystack.length; i += 1) {
             if (haystack[i].equals(needle)) {
