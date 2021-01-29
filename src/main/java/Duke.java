@@ -3,13 +3,14 @@ public class Duke {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-        String inputCommand = sc.nextLine();
+
         String[] textList = new String[101];
         String[] doneList = new String[101];
         int listNumber = 1;
         String doneString = null;
 
         System.out.println("Hello! I'm Duke\nWhat can I do for you?\n");
+        String inputCommand = sc.nextLine();
 
         while (!inputCommand.equals("bye")) {
             if (inputCommand.equals("list")) {
