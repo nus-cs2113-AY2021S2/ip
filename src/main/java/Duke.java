@@ -6,20 +6,46 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        String dash = "-";
         Scanner myObj = new Scanner(System.in);
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?\n");
 
+        // print welcome message
+        System.out.println("Hello from\n" + logo);
+        System.out.println(dash.repeat(50));
+        System.out.println("Hello! I'm Duke");
+        System.out.println("What can I do for you?");
+        System.out.println(dash.repeat(50));
+
+        // scan input
         String command = myObj.nextLine();
 
-
-        while(!command.equals("bye")) {
-            System.out.println(command+"\n");
+        String[] tasks = new String[100];
+        int count = 1;
+        while (!command.equals("bye") && !command.equals("list")) {
+            // add task into array
+            tasks[count] = command;
+            count++;
+            // echo task
+            System.out.println(dash.repeat(50));
+            System.out.println("added: " + command);
+            System.out.println(dash.repeat(50));
             command = myObj.nextLine();
-
         }
-        System.out.println("Bye. Hope to see you again soon!");
-
+        // print list when command=list
+        if (command.equals("list")) {
+            for(int i=1; i<count; ++i){
+                System.out.println(dash.repeat(50));
+                System.out.println(i + "." + " " + tasks[i]);
+                System.out.println(dash.repeat(50));
+            }
+            command = myObj.nextLine();
+        }
+        // exit program when input=bye
+        if(command.equals("bye")) {
+            System.out.println(dash.repeat(50));
+            System.out.println("Bye. Hope to see you again soon!");
+            System.out.println(dash.repeat(50));
+        }
     }
+
 }
