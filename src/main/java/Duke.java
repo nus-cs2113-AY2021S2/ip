@@ -47,15 +47,15 @@ public class Duke {
         System.out.println(DIVIDER);
         System.out.println("Here are the tasks in your list:");
         for(int i=0; i<storedTasksCount; i++) {
-
-            System.out.println((i+1) + ".[" + ((STORED_TASKS[i].isDone()) ? "X" : " ") + "] " + STORED_TASKS[i].getDescription());
+            Task currentTask = STORED_TASKS[i];
+            System.out.printf("%d.[%s] %s\n", (i+1), currentTask.getStatusIcon(), currentTask.getDescription());
         }
         System.out.println(DIVIDER);
     }
 
     public static void markTaskAsDone(String command) {
-        int taskIndex = Integer.parseInt(command.substring(4).strip());
-        Task taskToMark = STORED_TASKS[taskIndex];
+        int indexOfTaskToMark = Integer.parseInt(command.substring(4).strip())-1;
+        Task taskToMark = STORED_TASKS[indexOfTaskToMark];
         taskToMark.markAsDone();
         System.out.println(DIVIDER);
         System.out.println("Nice! I've marked this task as done:");
@@ -63,11 +63,11 @@ public class Duke {
         System.out.println(DIVIDER);
     }
 
-    public static void storeTask(String task) {
-        STORED_TASKS[storedTasksCount] = new Task(task);
+    public static void storeTask(String description) {
+        STORED_TASKS[storedTasksCount] = new Task(description);
         storedTasksCount++;
         System.out.println(DIVIDER);
-        System.out.println("added: " + task);
+        System.out.println("added: " + description);
         System.out.println(DIVIDER);
     }
 
