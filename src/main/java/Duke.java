@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
         boolean isExit = false;
-        String [] store = new String[100];
+        Task [] store = new Task[100];
         int count = 0;
 
         String logo = " ____        _        \n"
@@ -16,8 +16,8 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         System.out.println("    ____________________________________________________________");
-        System.out.println("    Hello! I'm Duke ");
-        System.out.println("    What can I do for you?");
+        System.out.println("     Hello! I'm Duke ");
+        System.out.println("     What can I do for you?");
         System.out.println("    ____________________________________________________________");
 
         while(!isExit){
@@ -25,23 +25,39 @@ public class Duke {
             String echo = scanner.nextLine();
             if(echo.equals("bye")){
                 System.out.println("    ____________________________________________________________");
-                System.out.println("    Bye. Hope to see you again soon!");
+                System.out.println("     Bye. Hope to see you again soon!");
                 System.out.println("    ____________________________________________________________");
                 isExit = true;
             }
             else if(echo.equals("list")){
                 System.out.println("    ____________________________________________________________");
                 for (int i = 0; i < count; i++) {
-                    System.out.print("    "+(i+1));
-                    System.out.println(". "+store[i]);
+                    System.out.print("     "+(i+1));
+                    System.out.println(". "+store[i].getStatusIcon());
                 }
                 System.out.println("    ____________________________________________________________");
             }
+            else if(echo.contains("done")) {
+                int value = Integer.parseInt(echo.replaceAll("[^0-9]", ""));
+                if (value > count) {
+                    System.out.println("    ____________________________________________________________");
+                    System.out.println("     Task " + value + " does not exist!");
+                    System.out.println("    ____________________________________________________________");
+                } else {
+                    store[value - 1].markAsDone();
+                    System.out.println("    ____________________________________________________________");
+                    System.out.println("     Nice! I've marked this task as done: ");
+                    System.out.print("      ");
+                    System.out.println(store[value - 1].getStatusIcon());
+                    System.out.println("    ____________________________________________________________");
+                }
+            }
             else{
                 System.out.println("    ____________________________________________________________");
-                System.out.println("    added: "+ echo);
+                System.out.println("     added: "+ echo);
                 System.out.println("    ____________________________________________________________");
-                store[count] = echo;
+                Task t = new Task(echo);
+                store[count] = t;
                 count++;
             }
         }
