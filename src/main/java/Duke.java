@@ -37,7 +37,6 @@ public class Duke {
                     break;
                 case 2:
                     System.out.println("Please enter the task you want to add in to the task list.");
-                    System.out.println("Enter 'list' to view your task list.");
                     String task;
                     Scanner b = new Scanner(System.in);
                     int index = 0;
