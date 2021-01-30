@@ -4,10 +4,4 @@ This is a project template for a greenfield Java project. It's named after the J
 
 
 # Oscar Lai Duke Project - Alfred
-Features added:
-
--18/1/21: Level 0: Greeting 
--19/1/21: Level 0: Update
--24/1/21: Level 1 Added
--25/1/21: Level 2 and 3 Added
-
+Latest Update: 30-Jan [Level-4]
