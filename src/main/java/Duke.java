@@ -16,7 +16,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
         // To do textUITesting, comment line 19
-        System.out.println("Hello from\n" + logo);
+        System.out.println(logo);
         printDividingLine();
 
         // Print welcome message
@@ -25,15 +25,17 @@ public class Duke {
         // Scan for input
         Scanner userInputScanner = new Scanner(System.in);
         String userInput = userInputScanner.nextLine();
+
+        // Separate taskType and taskName(may contain
+        // dates/time) if applicable
         if(isOneWord(userInput)) {
             taskType = userInput;
-            taskName = userInput;
+            taskName = userInput;   // dummy value
         }
         else{
             splitInputScanner = new Scanner(userInput);
             taskType = splitInputScanner.next();
             taskName = splitInputScanner.nextLine();
-            userInputSplitted = userInput.split(" ");
         }
 
         // Loop for user input until "bye" is inputted
@@ -69,7 +71,7 @@ public class Duke {
                 break;
             case "done":
                 printDividingLine();
-                Task.markAsDone(userInputSplitted[1]);
+                Task.markAsDone(getTaskIndex(userInput));
                 printDividingLine();
                 break;
             default:
@@ -87,10 +89,19 @@ public class Duke {
                 splitInputScanner = new Scanner(userInput);
                 taskType = splitInputScanner.next();
                 taskName = splitInputScanner.nextLine();
-                userInputSplitted = userInput.split(" ");
             }
         }
+
+        // Print Bye Message
         printByeMessage();
+    }
+
+    private static String getTaskIndex(String userInput) {
+        String[] userInputSplitted;
+        String taskIndex;
+        userInputSplitted = userInput.split(" ");
+        taskIndex = userInputSplitted[1];
+        return taskIndex;
     }
 
     private static boolean isOneWord(String userInput) {
