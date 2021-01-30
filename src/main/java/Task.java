@@ -3,7 +3,8 @@ public class Task {
     protected boolean isDone;
     private int taskNo;
 
-    public Task() {
+    public Task(String Description) {
+        this.description = Description;
         this.isDone = false;
     }
 
@@ -16,25 +17,19 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "[\u2713]" : "[\u2718]"); //return tick or X symbols
+        return (isDone ? "[\u2713]" : "[\u2718] "); //return tick or X symbols
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public boolean isDone() {
-        return isDone;
-    }
-
     public void setDone(boolean done) {
         isDone = done;
     }
 
-
+    public String toString() {
+        return getStatusIcon()  + description;
+    }
 
 }
