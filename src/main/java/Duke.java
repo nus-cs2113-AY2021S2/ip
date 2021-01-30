@@ -16,7 +16,7 @@ public class Duke {
             "        ooooo        ooooo   ooooo        ooooo\n" +
             "       oooo            ooooooooo            oooo\n" +
             "        ooooo        ooooo   ooooo        ooooo\n" +
-            "         oooooooooooooooo     oooooooooooooooo \n" +
+            "         oooooooooooooooo     oooooooooooooooo\n" +
             "            oooooooooo           oooooooooo\n";
 
     static String LINE = "────────────────────────────────────────────────────────────";

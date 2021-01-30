@@ -1,0 +1,12 @@
+help
+list
+todo apple
+event apple /at pear
+deadline apple /by pear
+list
+done 2
+list
+undo 2
+list
+done 0
+bye
