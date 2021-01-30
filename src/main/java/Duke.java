@@ -29,7 +29,7 @@ public class Duke {
             int indexOfSpace = input.indexOf(" ");
             String subString = input.substring(indexOfSpace+1);
 
-            if (subString.contains("/")){
+            if (subString.contains("/")) {
                 int indexOfSlash = subString.indexOf("/");
                 stringTask = subString.substring(0, indexOfSlash-1);
 
@@ -39,7 +39,7 @@ public class Duke {
                 stringDate = subStringEnd;
             }
             
-            else{
+            else {
                 stringTask = subString;
             }
             
