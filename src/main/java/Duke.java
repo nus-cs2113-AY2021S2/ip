@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Duke {
-    public static String inputValue = null;
+    public static String inputValue[] = new String [100];
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -17,18 +17,28 @@ public class Duke {
     }
 
     public static void interaction(){
+        int listIndex = 0;
         do{
             Scanner input = new Scanner(System.in);
-            inputValue = input.next();
-            if(inputValue.equals("bye")){
+            inputValue[listIndex] = input.next();
+            if(inputValue[listIndex].equals("bye")){
                 System.out.println("____________________________________________________________\n"+
                 "Bye. Hope to see you again soon!"+"\n"+
                 "____________________________________________________________\n");
+            }else if(inputValue[listIndex].equals("list")){
+                System.out.println("____________________________________________________________\n");
+                for (int i = 0; i<listIndex; i++){
+                    int index = i+1;
+                    System.out.println(index +". "+ inputValue[i]);
+                }
+                System.out.println("____________________________________________________________\n");
             }else{
                 System.out.println("____________________________________________________________\n"+
-                inputValue+"\n"+
+                "added: "+inputValue[listIndex]+"\n"+
                 "____________________________________________________________\n");
+                listIndex+=1;
+                inputValue[listIndex]=inputValue[listIndex-1];
             }
-           }while(!inputValue.equals("bye"));
+           }while(!inputValue[listIndex].equals("bye"));
     }
 }
