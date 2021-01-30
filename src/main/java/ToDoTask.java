@@ -4,6 +4,9 @@ public class ToDoTask extends Task {
         super(name);
     }
 
+    /**
+     * Prints task status.
+     */
     @Override
     public void printStatus() {
         System.out.print("[T]");

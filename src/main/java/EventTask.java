@@ -11,6 +11,9 @@ public class EventTask extends Task {
         this.eventInfo = eventInfo;
     }
 
+    /**
+     * Prints task status.
+     */
     @Override
     public void printStatus() {
         System.out.print("[E]");

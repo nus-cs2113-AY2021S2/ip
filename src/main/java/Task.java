@@ -20,6 +20,9 @@ public class Task {
         return isDone;
     }
 
+    /**
+     * Prints task status.
+     */
     public void printStatus() {
         if (isDone) {
             System.out.print("[✓] " + name);

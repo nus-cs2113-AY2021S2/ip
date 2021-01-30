@@ -11,6 +11,9 @@ public class DeadlineTask extends Task {
         this.dueDate = dueDate;
     }
 
+    /**
+     * Prints task status.
+     */
     @Override
     public void printStatus() {
         System.out.print("[D]");
