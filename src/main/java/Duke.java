@@ -7,31 +7,37 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        String lineLowerCase;
-        String line;
+        String userCommand;
+        String userCommandLowerCase;
 
-        Scanner in = new Scanner(System.in);
+        Scanner userInput = new Scanner(System.in);
 
         TaskManager taskManager = new TaskManager();
 
         System.out.println("Hello there! This is\n" + logo + "How may I help you ?\n");
 
         do {
-            line = in.nextLine();
-            lineLowerCase = line.toLowerCase();
-            int donePosition = line.indexOf("done");
+            userCommand = userInput.nextLine();
+            userCommandLowerCase = userCommand.toLowerCase();
+            int donePosition = userCommand.indexOf("done");
 
-            if (lineLowerCase.equals("bye")) {
+            if (userCommandLowerCase.equals("bye")) {
                 taskManager.endTaskManager();
-            } else if (lineLowerCase.equals("list")) {
+            } else if (userCommandLowerCase.equals("list")) {
                 taskManager.listTasks();
             } else if (donePosition > -1) {
-                String[] words = line.split(" ");
-                int taskNumber = Integer.parseInt(words[1]);
-                taskManager.markAsDone(taskNumber);
+                String[] words = userCommand.split(" ");
+                if (words.length > 1) {
+                    int taskNumber = Integer.parseInt(words[1]);
+                    taskManager.markAsDone(taskNumber);
+                } else {
+                    System.out.print("\t____________________________________________________________\n");
+                    System.out.print("\tInvalid command. Please enter another task number\n");
+                    System.out.print("\t____________________________________________________________\n");
+                }
             } else {
-                taskManager.addTask(line);
+                taskManager.addTask(userCommand);
             }
-        } while (!lineLowerCase.equals("bye"));
+        } while (!userCommandLowerCase.equals("bye"));
     }
 }

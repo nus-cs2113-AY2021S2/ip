@@ -3,7 +3,7 @@ import java.util.List;
 
 public class TaskManager {
     private final List<Task> tasks = new ArrayList<>();
-    private static final String BORDER = "    ____________________________________________________________\n";
+    private static final String BORDER = "\t____________________________________________________________\n";
 
     public void addTask (String description) {
         Task task = new Task(description);
@@ -26,7 +26,7 @@ public class TaskManager {
 
     public void markAsDone(int taskNumber) {
         if (taskNumber > tasks.size()) {
-            System.out.print(BORDER +"\t Invalid task. Please enter another task number\n" + BORDER);
+            System.out.print(BORDER +"\t Invalid command. Please enter another task number\n" + BORDER);
         } else {
             taskNumber = taskNumber -1;
             tasks.get(taskNumber).setAsDone();
