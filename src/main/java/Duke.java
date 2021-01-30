@@ -56,7 +56,7 @@ public class Duke {
     }
 
     /**
-     * Lists all items added to the list
+     * Lists all items that were added to the list
      */
     public static void listItems() {
         System.out.println("Eez are the tings you added to the list");
