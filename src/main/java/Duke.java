@@ -120,6 +120,7 @@ public class Duke {
             isInRange = checkIsInRange(indexNumber);
         } else {
             showInvalidInputFormatError();
+            return isValidIndexNumber;
         }
 
         if (isInRange) {
