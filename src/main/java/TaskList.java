@@ -12,7 +12,7 @@ public class TaskList {
     }
 
     public void updateCompletion(int taskIndex) {
-        tasks.get(taskIndex - 1).isDone = true;
+        tasks.get(taskIndex - 1).setDone();
         System.out.println(String.format("Nice! I've marked this task as done:\n  %s",
                 tasks.get(taskIndex - 1).toString()));
     }

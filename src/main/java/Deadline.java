@@ -1,6 +1,6 @@
 public class Deadline extends Task {
 
-    String endTime;
+    private String endTime;
 
     public Deadline(String nameInit, String time) {
         super(nameInit);
