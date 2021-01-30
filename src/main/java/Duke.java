@@ -57,7 +57,8 @@ public class Duke {
     public static void printTasks(Task[] list, int index) {
         printLine();
         System.out.println("Here are the tasks in your list:");
-        for (int i = 1; i <= index; i++) {
+        int i;
+        for (i = 1; i <= index; i++) {
             System.out.println(i + "." + "[" + list[i-1].getStatusIcon() + "] " + list[i-1].description);
         }
         printLine();
