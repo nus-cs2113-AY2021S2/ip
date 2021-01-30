@@ -12,6 +12,10 @@ public class Duke {
      */
     public static void loop() {
         while (true) {
+            if(LIST_COUNTER == 100){
+                error(6);
+                return;
+            }
             String input = readInput();
             if (input.equalsIgnoreCase("bye")) {
                 printExit();
@@ -19,33 +23,18 @@ public class Duke {
             } else if (input.equalsIgnoreCase("help")) {
                 System.out.println(HELP_MESSAGE);
             } else if (input.toLowerCase().startsWith("done")) {
-                if (input.equalsIgnoreCase("done")) {
-                    error(1);
-                    continue;
-                }
-                if (input.substring(5).matches("[0-9]+")) {
-                    int index = Integer.parseInt(input.substring(5));
-                    if (index > LIST_COUNTER) {
-                        error(2);
-                        continue;
-                    }
-                    doneTask(index - 1);
-                } else if (input.substring(5).isBlank()) {
-                    error(1);
-                } else {
-                    error(1);
-                }
+                doneTask(input);
             } else if (input.equalsIgnoreCase("list")) {
                 printList();
             } else if (input.toLowerCase().startsWith("todo")){
-                addTodo(input.substring(5));
+                addTodo(input);
             } else if (input.toLowerCase().startsWith("deadline")){
-                addDeadline(input.substring(9));
+                addDeadline(input);
             } else if (input.toLowerCase().startsWith("event")){
-                addEvent(input.substring(6));
+                addEvent(input);
             } else {
-                System.out.println(" ¯\\_(ツ)_/¯ You have an Invalid Command!");
-                System.out.println("Enter \"HELP\" for help!");
+                System.out.println(" ¯\\_(ツ)_/¯ That is an invalid command!");
+                System.out.println("Enter \"HELP\" for commands!");
                 printBorder();
             }
         }
@@ -63,9 +52,14 @@ public class Duke {
 
     /**
      * Add new task to Timetable
-     * @param command - name of task
+     * @param input - name of task
      */
-    public static void addTodo(String command) {
+    public static void addTodo(String input) {
+        if(input.equals("todo")){
+            error(5);
+            return;
+        }
+        String command = input.substring(5);
         if(!command.isBlank()){
             Todo t = new Todo(command);
             list[LIST_COUNTER] = t;
@@ -81,10 +75,15 @@ public class Duke {
 
     /**
      * Add deadline to list
-     * @param command - add Deadline
+     * @param input - add Deadline
      */
-    public static void addDeadline(String command) {
-        if(command.contains("/by")) {
+    public static void addDeadline(String input) {
+        if(input.equals("deadline")){
+            error(5);
+            return;
+        }
+        String command = input.substring(9);
+        if(command.contains(" /by ")) {
             String[] parts = command.split(" /by ");
             String description = parts[0];
             String date = parts[1];
@@ -102,10 +101,15 @@ public class Duke {
 
     /**
      * Add event to list
-     * @param command - add event
+     * @param input - add event
      */
-    public static void addEvent(String command){
-        if(command.contains ("/at")){
+    public static void addEvent(String input){
+        if(input.equals("event")){
+            error(5);
+            return;
+        }
+        String command = input.substring(6);
+        if(command.contains (" /at ")){
             String[] parts = command.split(" /at ");
             String description = parts[0];
             String date = parts[1];
@@ -122,10 +126,33 @@ public class Duke {
     }
 
     /**
-     * Check task as completed
-     * @param index - index of task
+     * Check if done command is valid
+     * @param input - index of task
      */
-    private static void doneTask(int index) {
+    private static void doneTask(String input) {
+        if (input.equalsIgnoreCase("done")) {
+            error(1);
+            return;
+        }
+        if (input.substring(5).matches("[0-9]+")) {
+            int index = Integer.parseInt(input.substring(5));
+            if (index > LIST_COUNTER) {
+                error(2);
+                return;
+            }
+            checkTask(index - 1);
+        } else if (input.substring(5).isBlank()) {
+            error(1);
+        } else {
+            error(1);
+        }
+    }
+
+    /**
+     * Check respective task as done
+     * @param index - index of list
+     */
+    public static void checkTask(int index){
         if (list[index].isDone) {
             error(4);
         } else {
@@ -199,6 +226,9 @@ public class Duke {
             + "   ノ )　　Lﾉ \n"
             + "  (_／";
         printBorder();
+        System.out.println("Welcome to Duke v1.4 ----------- Latest Update: 31/1/21");
+        System.out.println("Developed by: Oscar Lai");
+        printBorder();
         System.out.println("Good Day, I'm Alfred.\n" + alfred);
         System.out.println("Enter HELP for commands");
         printBorder();
@@ -213,11 +243,12 @@ public class Duke {
             + "  (  (_)__)J-)\n"
             + "  (  /`.,   /\n"
             + "   \\/  ;   /\n"
-            + "    | === |See you again!"
-            + "Developed by: Oscar Lai\n"
-            + "Version 1.4";
+            + "    | === |See you again!\n";
         printBorder();
         System.out.println("Pleasure serving you...\n" + wave);
+        printBorder();
+        System.out.println("Developed by: Oscar Lai\n"
+            + "Version 1.4");
         printBorder();
     }
 
@@ -264,8 +295,12 @@ public class Duke {
                 printBorder();
                 break;
             case 5:
-                System.out.println("Invalid format!");
+                System.out.println("¯\\_(ツ)_/¯ That is an invalid format!");
                 System.out.println("Enter HELP for commands!");
+                printBorder();
+                break;
+            case 6:
+                System.out.println("List is full!");
                 printBorder();
                 break;
         }
