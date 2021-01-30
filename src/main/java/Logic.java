@@ -19,7 +19,7 @@ public class Logic {
                 }
                 case "done": {
                     int taskNumber = secondScan.nextInt();
-                    taskList.updateCompletion(taskNumber);
+                    taskList.updateCompleted(taskNumber);
                     break;
                 }
                 case "todo": {
