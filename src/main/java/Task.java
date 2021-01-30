@@ -30,4 +30,9 @@ public class Task {
         isDone = true;
         tasksRemaining--;
     }
+
+    public void uncheck() {
+        isDone = false;
+        tasksRemaining++;
+    }
 }
