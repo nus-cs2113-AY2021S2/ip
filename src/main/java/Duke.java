@@ -2,45 +2,131 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
+        String taskType;
+        String taskName;
+        String by;
+        String at;
+        Scanner splitInputScanner;
+        String[] userInputSplitted = {""};
+
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
+        printDividingLine();
 
-        // Prints welcome message
-        System.out.println("_____________________________________________________");
-        System.out.println("Hello! I'm Duke");
-        System.out.print("What can I do for you?\n");
-        System.out.println("_____________________________________________________");
+        // Print welcome message
+        printWelcomeMessage();
 
+        // Scan for input
         Scanner userInputScanner = new Scanner(System.in);
         String userInput = userInputScanner.nextLine();
-        String[] userInputSplitted = userInput.split(" ");
-
-        while(!userInputSplitted[0].equals("bye")) {
-            switch (userInputSplitted[0]) {
-            case "list":
-                System.out.println("_____________________________________________________");
-                Task.listTasks();
-                System.out.println("_____________________________________________________");
-                break;
-            case "done":
-                Task.markAsDone(userInputSplitted[1]);
-                break;
-            default:
-                Task t = new Task(userInput);
-                t.addTask(userInput);
-                System.out.println("added: " + userInput);
-                break;
-            }
-            userInput = userInputScanner.nextLine();
+        if(isOneWord(userInput)) {
+            taskType = userInput;
+            taskName = userInput;
+        }
+        else{
+            splitInputScanner = new Scanner(userInput);
+            taskType = splitInputScanner.next();
+            taskName = splitInputScanner.nextLine();
             userInputSplitted = userInput.split(" ");
         }
 
+        // Loop for user input until "bye" is inputted
+        while(!taskType.equals("bye")) {
+            switch (taskType) {
+            case "todo":
+                Task t = new Todo(taskName);
+                printDividingLine();
+                t.addTask();
+                printDividingLine();
+                break;
+            case "deadline":
+                by = extractTime(taskName);
+                taskName  = extractTaskName(taskName);
+                Task d = new Deadline(taskName, by);
+                printDividingLine();
+                d.addTask();
+                printDividingLine();
+                break;
+            case "event":
+                at = extractTime(taskName);
+                taskName = extractTaskName(taskName);
+                Task e = new Event(taskName, at);
+                //e.setTime(time);
+                printDividingLine();
+                e.addTask();
+                printDividingLine();
+                break;
+            case "list":
+                printDividingLine();
+                Task.listTasks();
+                printDividingLine();
+                break;
+            case "done":
+                printDividingLine();
+                Task.markAsDone(userInputSplitted[1]);
+                printDividingLine();
+                break;
+            default:
+                printCommandErrorMessage();
+                break;
+            }
+
+            // Scan input again
+            userInput = userInputScanner.nextLine();
+            if(isOneWord(userInput)) {
+                taskType = userInput;
+                taskName = userInput;
+            }
+            else{
+                splitInputScanner = new Scanner(userInput);
+                taskType = splitInputScanner.next();
+                taskName = splitInputScanner.nextLine();
+                userInputSplitted = userInput.split(" ");
+            }
+        }
+        printByeMessage();
+    }
+
+    private static boolean isOneWord(String userInput) {
+        return !userInput.contains(" ");
+    }
+
+    private static void printCommandErrorMessage() {
+        printDividingLine();
+        System.out.println("Uh oh this command is not available :<");
+        printDividingLine();
+    }
+
+    private static void printWelcomeMessage() {
+        printDividingLine();
+        System.out.println("Hello! I'm Duke");
+        System.out.print("What can I do for you?\n");
+        printDividingLine();
+    }
+
+    private static void printDividingLine() {
         System.out.println("_____________________________________________________");
+    }
+
+    private static void printByeMessage() {
+        printDividingLine();
         System.out.println("Bye. Hope to see you again soon! :3");
-        System.out.println("_____________________________________________________");
+        printDividingLine();
+    }
+
+    private static String extractTaskName(String s){
+        String[] splitArray = s.split("/");
+        return splitArray[0];
+    }
+
+    private static String extractTime(String s){
+        String[] splitArray = s.split("/");
+        Scanner sc = new Scanner(splitArray[1]);
+        sc.next();
+        return sc.nextLine();
     }
 }
