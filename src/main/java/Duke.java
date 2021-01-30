@@ -3,6 +3,7 @@ import Task.Deadline;
 import Task.Todo;
 import Task.Event;
 
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -109,18 +110,25 @@ public class Duke {
 
     /* Validate index number */
     private static boolean validateIndexNumber(String index) {
-        if (checkIsNumber(index)) {
-            int indexNumber = Integer.parseInt(index);
-            if (checkIsInRange(indexNumber)) {
-                return true;
-            } else {
+        boolean isNumber = checkIsNumber(index);
+        boolean isInRange = false;
+        int indexNumber = 0;
+        boolean isValidIndexNumber = false;
 
-            }
+        if (isNumber) {
+            indexNumber = Integer.parseInt(index);
+            isInRange = checkIsInRange(indexNumber);
         } else {
             showInvalidInputFormatError();
         }
 
-        return false;
+        if (isInRange) {
+            isValidIndexNumber = true;
+        } else {
+            showIndexOutOfBoundError();
+        }
+
+        return isValidIndexNumber;
     }
 
     /* Validate index range */
@@ -158,7 +166,7 @@ public class Duke {
         System.out.println("Invalid command. Please try again with valid command.");
     }
 
-    /* Parse input into command and execute command */
+    /* Parse input into command command */
     private static void parseCommand(String input) {
         int firstSpacePosition = input.indexOf(" ");
         String lowercaseCommand = input;
@@ -169,7 +177,12 @@ public class Duke {
             parameter = input.substring(firstSpacePosition + 1);
         }
 
-        switch(lowercaseCommand) {
+        executeCommand(lowercaseCommand, parameter);
+    }
+
+    /* Execute command based on input from parseCommand */
+    private static void executeCommand(String command, String parameter) {
+        switch(command) {
         case "list":
             showTasks();
             break;
@@ -193,8 +206,9 @@ public class Duke {
     public static void main(String[] args) {
         showGreeting();
 
-        while (true) {
-            Scanner line = new Scanner(System.in);
+        Scanner line = new Scanner(System.in);
+
+        while (line.hasNextLine()) {
             String input = line.nextLine();
             showDivider();
             if (input.toLowerCase().equals("bye")) {
