@@ -1,4 +1,8 @@
-import java.util.Locale;
+import Task.Task;
+import Task.Deadline;
+import Task.Todo;
+import Task.Event;
+
 import java.util.Scanner;
 
 public class Duke {
