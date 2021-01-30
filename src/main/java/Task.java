@@ -5,7 +5,7 @@ public class Task {
 
     public Task(String name) {
         this.name = name;
-        this.isDone = false;
+        setDone(false);
     }
 
     public void setDone(boolean isDone) {
@@ -19,4 +19,13 @@ public class Task {
     public boolean getDone() {
         return isDone;
     }
+
+    public void printStatus() {
+        if (isDone) {
+            System.out.print("[✓] " + name);
+        } else {
+            System.out.print("[ ] " + name);
+        }
+    }
+
 }
