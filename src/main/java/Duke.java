@@ -9,8 +9,45 @@ public class Duke {
     public static void printTaskList(ArrayList<Task> taskList) {
         System.out.println("Here are the tasks in your list: ");
         for (int i=0; i<tasksList.size(); i++){
-            System.out.println("    " + (i+1) + ". [" + taskList.get(i).getStatusIcon() + "] " + tasksList.get(i).getDescription());
+            System.out.println("    " + (i+1) + ". " + taskList.get(i));
         }
+    }
+
+    public static void addTask(String userInput) {
+        String description = userInput;
+        if (userInput.substring(0,8).equalsIgnoreCase("deadline")){
+            String by = "";
+            userInput = userInput.substring(9,userInput.length()).trim();
+            if (userInput.contains("/")){
+                int idx = userInput.indexOf('/');
+                description =userInput.substring(0, idx);
+                by = userInput.substring(idx+3, userInput.length()).trim();
+            }
+
+            Deadline d = new Deadline(description, by);
+            tasksList.add(d);
+        }
+        else if (userInput.substring(0,5).equalsIgnoreCase("event")){
+            String at = "";
+            userInput = userInput.substring(6,userInput.length()).trim();
+            if (userInput.contains("/")){
+                int idx = userInput.indexOf('/');
+                description =userInput.substring(0, idx);
+                at = userInput.substring(idx+3, userInput.length()).trim();
+            }
+
+            Event e = new Event(description, at);
+            tasksList.add(e);
+        }
+        else if (userInput.substring(0,4).equalsIgnoreCase("todo")){
+            description = userInput.substring(5, userInput.length());
+            Todo t = new Todo(description);
+            tasksList.add(t);
+        }
+        System.out.println("    Got it. I've added this task: \n      " + tasksList.get(tasksCount));
+        tasksCount++;
+        System.out.println("    Now you have " + tasksCount + " tasks in the list.");
+
     }
 
     public static void main(String[] args) {
@@ -42,13 +79,17 @@ public class Duke {
                 tasksList.get(idx-1).markAsDone();
                 System.out.println("------------------------------------------");
                 System.out.println("    Nice! I've marked this task as done: ");
-                System.out.println("    [" + tasksList.get(idx-1).getStatusIcon() + "] " + tasksList.get(idx-1).getDescription());
+                System.out.println("    " + tasksList.get(idx-1));
             }
             else {
-                Task t = new Task(task);
-                tasksCount++;
-                tasksList.add(t);
-                System.out.println("    added: " + task);
+                try {
+                    addTask(task);
+                }
+                catch (Exception e) {
+                    System.out.println("    Invalid input! To add task: Please start with 'todo'/ 'deadline' / 'event'. ");
+                    System.out.println("                   To view the list of tasks: Enter 'list'. ");
+                    System.out.println("                   To end the application: Enter 'bye'. ");
+                }
             }
             task = sc.nextLine().trim();
         }
