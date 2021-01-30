@@ -25,12 +25,26 @@ public class Duke {
         System.out.println("---------------------------------------------------------");
     }
 
+    /**
+     * Lists the tasks in order
+     */
     public static void printList() {
         System.out.println("Here are the tasks in your list:");
         for (int i = 1; i <= index; i++){
             System.out.print(i + ".");
             System.out.println(tasks[i-1].toString());
         }
+    }
+
+    /**
+     * Confirms task has been added
+     *
+     * @param task Task object that was added
+     */
+    public static void printAddTaskMessage(Task task) {
+        System.out.println("Got it. I've added this task:");
+        System.out.println(task.toString());
+        System.out.println("Now you have " + index + " tasks in the list");
     }
 
     public static void request() {
@@ -47,9 +61,7 @@ public class Duke {
                 String description = line.substring(descriptionStart);
                 tasks[index] = new Todo(description);
                 index++;
-                System.out.println("Got it. I've added this task:");
-                System.out.println(tasks[index-1].toString());
-                System.out.println("Now you have " + index + " tasks in the list");
+                printAddTaskMessage(tasks[index - 1]);
             } else if (line.startsWith("deadline")) {
                 int descriptionStart = 9;
                 int descriptionEnd = line.indexOf("/by") - 1;
@@ -58,9 +70,7 @@ public class Duke {
                 String by = line.substring(byStart);
                 tasks[index] = new Deadline(description, by);
                 index++;
-                System.out.println("Got it. I've added this task:");
-                System.out.println(tasks[index-1].toString());
-                System.out.println("Now you have " + index + " tasks in the list");
+                printAddTaskMessage(tasks[index - 1]);
             } else if (line.startsWith("event")) {
                 int descriptionStart = 6;
                 int descriptionEnd = line.indexOf("/at") - 1;
@@ -69,9 +79,7 @@ public class Duke {
                 String at = line.substring(atStart);
                 tasks[index] = new Event(description, at);
                 index++;
-                System.out.println("Got it. I've added this task:");
-                System.out.println(tasks[index-1].toString());
-                System.out.println("Now you have " + index + " tasks in the list");
+                printAddTaskMessage(tasks[index - 1]);
             } else if (line.startsWith("done")) {
                 int itemNum = Integer.parseInt(line.substring(5));
                 tasks[itemNum - 1].setAsDone();
