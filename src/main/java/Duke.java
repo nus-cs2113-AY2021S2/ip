@@ -14,6 +14,8 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
+
+        // To do textUITesting, comment line 19
         System.out.println("Hello from\n" + logo);
         printDividingLine();
 
