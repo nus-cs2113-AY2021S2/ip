@@ -182,7 +182,7 @@ public class Duke {
 
     /* Execute command based on input from parseCommand */
     private static void executeCommand(String command, String parameter) {
-        switch(command) {
+        switch (command) {
         case "list":
             showTasks();
             break;
