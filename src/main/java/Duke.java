@@ -1,20 +1,8 @@
 import java.util.Scanner;
 
 public class Duke {
-
-    // Method to create a new array of size n+1
-    public static String[] addToArray(int n, String arr[], String x)
-    {
-        String newarr[] = new String[n + 1];
-        for (int i = 0; i < n; i++) {
-            newarr[i] = arr[i];
-        }
-        newarr[n] = x;
-        return newarr;
-    }
-
     public static void main(String[] args) {
-        String[] list = new String[0];
+        Task[] list = new Task[100];
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -29,11 +17,27 @@ public class Duke {
                 if (line.equals("bye")) {
                     break;
                 } else if (line.equals("list")) {
-                    for (int i=0; i<list.length; i++) {
-                        System.out.println(i+1 + ". " + list[i] );
+                    int i = 0;
+                    while(list[i] != null) {
+                        if (list[i].isDone()) {
+                            System.out.println(i + 1 + ".[X] " + list[i].getDescription());
+                        } else {
+                            System.out.println(i + 1 + ".[ ] " + list[i].getDescription());
+                        }
+                        i++;
                     }
+                } else if (line.split(" ")[0].equals("done")) {
+                    int index = Integer.parseInt(line.split(" ")[1]) - 1;
+                    list[index].setDone();
+                    System.out.println("Nice! I've marked this task as done: ");
+                    System.out.println("[X] " + list[index].getDescription());
+
                 } else {
-                    list = addToArray(list.length, list, line);
+                    int i = 0;
+                    while (list[i] != null) {
+                        i++;
+                    }
+                    list[i] = new Task(line);
                     System.out.println("added: " + line);
                 }
             }
