@@ -26,8 +26,10 @@ public class Task {
             str = str + getStatusIcon() + "] " + description;
         } else {
             //System.out.print(" ] " + description);
-            str = str + " ] " + description;
+            str = str + getStatusIcon() + "] " + description;
         }
         return str;
     }
+
+    public void printingDescription(){ System.out.println(this); }
 }
