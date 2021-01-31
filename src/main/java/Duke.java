@@ -18,7 +18,6 @@ public class Duke {
 
         while (isSame) {
             String input = sc.nextLine();
-
             String stringTask;
             String stringDate = null;
 
@@ -32,27 +31,24 @@ public class Duke {
             if (subString.contains("/")) {
                 int indexOfSlash = subString.indexOf("/");
                 stringTask = subString.substring(0, indexOfSlash-1);
-
                 String subStringDate = subString.substring(indexOfSlash);
                 int indexNext = subStringDate.indexOf(" ");
                 String subStringEnd = subStringDate.substring(indexNext+1);
                 stringDate = subStringEnd;
             }
-            
             else {
                 stringTask = subString;
             }
-            
             int taskNumber = 0;
 
-            //If input is "bye", system exits with message.
+            // If input is "bye", system exits with message.
             if (input.equalsIgnoreCase("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 isSame = false;
                 System.exit(0);
             }
 
-            //If input is "list", list of tasks will be displayed.
+            // If input is "list", list of tasks will be displayed.
             else if (input.equalsIgnoreCase("list")) {
                 System.out.println("Here are the tasks in your list: ");
                 for (int i=0; i< taskList.length; i++){
@@ -62,12 +58,11 @@ public class Duke {
                 }
             }
 
-            //Identifies the task number to be marked as done.
+            // Identifies the task number to be marked as done.
             else if (input.contains("done")) {
                 for (int i = 0; i <input.length(); i++) {
                     char character = input.charAt(i);
                     int index = i;
-
                     if (++index == input.length()) {
                         if(Character.isDigit(character)) {
                             taskNumber = Character.getNumericValue(character);
@@ -75,19 +70,17 @@ public class Duke {
                         }
                     }
                     char characterTwo = input.charAt(index);
-
                     if(Character.isDigit(character) && Character.isDigit(characterTwo)) {
                         taskNumber = Character.getNumericValue(character)*10 + Character.getNumericValue(characterTwo);
                         break;
                     }
                 }
-
                 System.out.println("Nice! I've marked this task as done: ");
                 taskList[taskNumber-1].markAsDone();
                 System.out.println(taskList[taskNumber-1].printDescription());
             }
 
-            //Classify task as ToDo
+            // Classify task as ToDo.
             else if (input.contains("todo")) {
                 taskList[count] = new toDo(stringTask);
                 System.out.println("Got it. I've added this task: ");
@@ -96,7 +89,7 @@ public class Duke {
                 System.out.println("Now you have " + count + " tasks in the list.");
             }
 
-            //Classify task as Deadline
+            // Classify task as Deadline.
             else if (input.contains("deadline")) {
                 taskList[count] = new Deadline(stringTask, stringDate);
                 System.out.println("Got it. I've added this task: ");
@@ -105,7 +98,7 @@ public class Duke {
                 System.out.println("Now you have " + count + " tasks in the list.");
             }
 
-            //Classify task as Event
+            // Classify task as Event.
             else if (input.contains("event")) {
                 taskList[count] = new Event(stringTask, stringDate);
                 System.out.println("Got it. I've added this task: ");
@@ -114,7 +107,7 @@ public class Duke {
                 System.out.println("Now you have " + count + " tasks in the list.");
             }
 
-            //Adds in a new task
+            // Adds in a new task.
             else {
                 taskList[count] = new Task(input);
                 System.out.println("Added new task: " + taskList[count].getDescription());
