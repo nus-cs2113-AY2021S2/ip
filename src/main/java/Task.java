@@ -22,8 +22,8 @@ public class Task {
     public char getTaskType(){
         return taskType;
     }
-    public void setTaskStatus(boolean isDone){
-        this.isDone = isDone;
+    public void setTaskStatus(boolean Done){
+        this.isDone = Done;
     }
     public boolean getTaskStatus(){
         return isDone;

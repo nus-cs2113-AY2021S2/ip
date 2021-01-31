@@ -21,7 +21,7 @@ public class Duke {
             int choice = in.nextInt();
             switch (choice) {
                 case 1:
-                    System.out.println("Please input something and I will repeat it back to you:)");
+                    System.out.println("Please input something and I will repeat it back to you");
                     Scanner a = new Scanner(System.in);
                     String sentence = a.nextLine();
                     while (true) {
@@ -33,7 +33,8 @@ public class Duke {
                             sentence = a.nextLine();
                         }
                     }
-                    System.out.println("Thank you for using echo, you can now choose other function:)");
+                    System.out.println("Thank you for using echo, " +
+                            "you can now choose other function :)");
                     break;
                 case 2:
                     System.out.println("Please enter the task you want to add in to the task list.");
@@ -44,7 +45,6 @@ public class Duke {
                     task = b.nextLine();
                     while (true) {
                         if (task.equalsIgnoreCase("bye")) {
-                            System.out.println("Bye, hope to see you again again soon! You can now choose other function:)");
                             break;
                         }
                         else if (task.equals("list")) {
@@ -65,9 +65,9 @@ public class Duke {
                             index = addTaskMessage(index, tasks[index]);
                         }
                         else if (task.contains("deadline")){
-                            int slash = task.indexOf("/");
-                            String taskName1 = task.substring(9, slash-1);
-                            String by = task.substring(slash+3);
+                            int slash_sign = task.indexOf("/");
+                            String taskName1 = task.substring(9, slash_sign-1);
+                            String by = task.substring(slash_sign+3);
                             tasks[index] = new Deadline(taskName1,'D', by);
                             index = addTaskMessage(index, tasks[index]);
                         }
@@ -79,21 +79,26 @@ public class Duke {
                             index = addTaskMessage(index, tasks[index]);
                         }
                         else{
+                            //add tasks with no specific task type
                             tasks[index] = new Task(task);
                             index = addTaskMessage(index, tasks[index]);
                         }
                         task = b.nextLine();
-                        }
-                case -1:
+                    }
+                    System.out.println("Thank you for using Tasks function, " +
+                            "you can now choose other function :)");
+                    break;
+                case (-1):
+                    System.out.println("Goodbye, hope to see you again!");
                     run = false;
             }
         }
     }
     private static int addTaskMessage(int index, Task tasks) {
         System.out.println("Got it. I've added this task: ");
-        System.out.println(tasks.toString());
+        System.out.println(" " + tasks.toString());
+        System.out.println("Now you have " + (index+1) + " tasks in the list. ");
         index++;
-        System.out.println("Now you have " + index + " tasks in the list. ");
         return index;
         }
     }
