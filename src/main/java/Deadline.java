@@ -11,7 +11,7 @@ public class Deadline extends Task {
     public String getTaskSymbol() {
         return TASK_SYMBOL_D;
     }
-/*
+
     @Override
     public void printTaskDetails(){
         super.printTaskDetails();
@@ -19,7 +19,6 @@ public class Deadline extends Task {
     }
 
     public void printTaskTiming(){
-        System.out.print(" (by:" + this.taskTiming + ")");
+        System.out.print("(by: " + this.taskTiming + ")");
     }
- */
 }

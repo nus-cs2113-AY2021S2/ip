@@ -1,6 +1,6 @@
 public class Task {
     protected static final int MAX_TASK_NUM = 100;
-    protected static final String MARK_DONE = "x";
+    protected static final String MARK_DONE = "X";
     protected static final String MARK_UNDONE = " ";
     protected static final String TASK_SYMBOL_NA = "?";
 
@@ -19,11 +19,12 @@ public class Task {
         this.completionStatus = MARK_UNDONE;
     }
 
-    public void addTask (Task newTask) {
-        listOfTask[taskAmt] = newTask;
+    public void addTask () {
+        listOfTask[taskAmt] = this;
         taskAmt++;
         System.out.println("Got it. I've added this task:");
-        printTaskDetails(newTask);
+        this.printTaskDetails();
+        System.out.println();
         System.out.println("Now you have " + taskAmt + " tasks in the list.");
     }
 
@@ -35,16 +36,17 @@ public class Task {
                 break;
             }
             printIndexForPrinting(i+1);
-            printTaskDetails(currentTask);
+            currentTask.printTaskDetails();
+            System.out.println();
             i++;
         }
     }
-    public static void printTaskDetails(Task currentTask) {
-        currentTask.printTaskSymbol();
-        currentTask.printTaskCompletionStatus();
+
+    public void printTaskDetails() {
+        this.printTaskSymbol();
+        this.printTaskCompletionStatus();
         System.out.print(" ");
-        currentTask.printTaskDescription();
-        System.out.print("\n");
+        this.printTaskDescription();
     }
 
     private void printTaskSymbol() {
@@ -84,18 +86,20 @@ public class Task {
         if (index > taskAmt) {
             System.out.println("There is no task number " + index + " , Please try again");
         } else {
-            if (isDone(currentTask) == true) {
+            if (currentTask.isDone() == true) {
                 System.out.println("You have already completed this task.");
             } else {
                 currentTask.completionStatus = MARK_DONE;
                 System.out.println("Nice! I've marked this task as done: ");
-                System.out.println("[" + MARK_DONE + "] " + currentTask.taskDescription);
+                //System.out.println("[" + MARK_DONE + "] " + currentTask.taskDescription);
+                currentTask.printTaskDetails();
+                System.out.println();
             }
         }
     }
 
-    public boolean isDone(Task currentTask) {
-        if (currentTask.completionStatus == MARK_DONE) {
+    public boolean isDone() {
+        if (this.completionStatus == MARK_DONE) {
             return true;
         } else {
             return false;

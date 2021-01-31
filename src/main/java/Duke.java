@@ -9,6 +9,7 @@ public class Duke {
     static final int INPUT_CODE_INVALID = 3;
     static final int INPUT_CODE_TODO = 4;
     static final int INPUT_CODE_DEADLINE = 5;
+    static final int INPUT_CODE_EVENT = 6;
 
 
     public static void printDividerLine() {
@@ -67,8 +68,22 @@ public class Duke {
             return validateTodoCommand(words);
         case "deadline":
             return validateDeadlineCommand(userCommand);
+        case "event":
+            return validateEventCommand(userCommand);
         default:
             return INPUT_CODE_DEFAULT;
+        }
+    }
+
+    private static int validateEventCommand(String userCommand) {
+        try {
+            if (userCommand.contains("/")) {
+                return INPUT_CODE_EVENT;
+            } else {
+                return INPUT_CODE_INVALID;
+            }
+        } catch(NumberFormatException e){
+            return INPUT_CODE_INVALID;
         }
     }
 
@@ -135,7 +150,7 @@ public class Duke {
             printDividerLine();
             taskDescription = getTaskDescription(userInput);
             Task todoTask = new Todo(taskDescription);
-            todoTask.addTask(todoTask);
+            todoTask.addTask();
             printDividerLine();
             break;
         case INPUT_CODE_DEADLINE:
@@ -143,13 +158,21 @@ public class Duke {
             taskDescription = getTaskDescription(userInput);
             taskTiming = getTaskTiming(userInput);
             Task deadlineTask = new Deadline(taskDescription, taskTiming);
-            deadlineTask.addTask(deadlineTask);
+            deadlineTask.addTask();
+            printDividerLine();
+            break;
+        case INPUT_CODE_EVENT:
+            printDividerLine();
+            taskDescription = getTaskDescription(userInput);
+            taskTiming = getTaskTiming(userInput);
+            Task eventTask = new Event(taskDescription, taskTiming);
+            eventTask.addTask();
             printDividerLine();
             break;
         default:
             printDividerLine();
             Task newTask = new Task(userInput);
-            taskList.addTask(newTask);
+            newTask.addTask();
             printDividerLine();
             break;
         }
@@ -158,9 +181,9 @@ public class Duke {
     private static String getTaskTiming(String userInput) {
         String unfilteredTaskTiming = removeCommandCode(userInput);
         String[] taskTiming = unfilteredTaskTiming.split("/", 2);
+        taskTiming = taskTiming[1].split(" ", 2);
         return taskTiming[1];
     }
-
 
     private static String getTaskDescription(String userInput) {
         String taskDescription = removeCommandCode(userInput);
