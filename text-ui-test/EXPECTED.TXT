@@ -66,6 +66,11 @@ You have already marked it as Done!
 ============================================================
 Error! You do not have that many items in your list!
 ============================================================
+ LIST
+1. [T] [ ] sleep
+2. [D] [✓] homework (by: tomorrow)
+3. [E] [ ] birthday (at: friday)
+============================================================
 ============================================================
 Pleasure serving you...
  __      __

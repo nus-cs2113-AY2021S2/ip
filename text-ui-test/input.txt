@@ -9,4 +9,5 @@ done
 done 2
 done 2
 done 4
+list
 bye
