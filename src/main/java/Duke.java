@@ -2,9 +2,78 @@ import java.util.Scanner;
 
 public class Duke {
 
+    public static void main(String[] args) {
+        greet();
+        processCommands();
+    }
+
+    private static void processCommands() {
+        String line;
+        TaskList tasks = new TaskList(100);
+        Scanner in = new Scanner(System.in);
+        boolean hasToContinue = true;
+        while(hasToContinue){
+            line = in.nextLine();
+            hasToContinue = selectCommand(line, tasks, hasToContinue);
+        }
+    }
+
+    private static boolean selectCommand(String line, TaskList tasks, boolean hasToContinue) {
+        switch (line){
+        case "bye":
+            exit(tasks);
+            hasToContinue = false;
+            break;
+        case "list":
+            tasks.printList();
+            break;
+
+        default:
+            addOrMarkTasksInList(line, tasks);
+            break;
+        }
+        return hasToContinue;
+    }
+
+    private static void addOrMarkTasksInList(String line, TaskList tasks) {
+        String []sentence = line.split(" ");
+        if(sentence[0].equals("done")){
+            markTaskAsDone(tasks, sentence);
+
+        }
+        else {
+            tasks.addNewTask(line);
+        }
+    }
+
+    private static void markTaskAsDone(TaskList tasks, String[] sentence) {
+        int index;
+        try {
+            index= Integer.parseInt(sentence[1]);
+        } catch (NumberFormatException nfe) {
+            index=-1;
+        }
+        if((index>0) && (index<=(tasks.getTasksCounter())) && (sentence.length==2)){
+            tasks.markAsDone(index-1);
+        }
+        else{
+            tasks.markAsDone(-1);
+        }
+    }
+
     //This method is called to greet the user
     public static void greet() {
-        String logo = "             ⣠⣤⣤⣤⣤⣤⣶⣦⣤⣄⡀" + System.lineSeparator()
+        String logo = getLogo();
+        System.out.println("Ssshhhhhh!!!!!" + System.lineSeparator() + logo);
+        String greetings = "____________________________________________________________" + System.lineSeparator()
+                + "Hello Crewmate! I'm Arthur, ( ͡°͜ ʖ ͡°)" + System.lineSeparator()
+                + "Please assign me my tasks to complete!" + System.lineSeparator()
+                + "____________________________________________________________" + System.lineSeparator();
+        System.out.println(greetings);
+    }
+
+    private static String getLogo() {
+        return  "             ⣠⣤⣤⣤⣤⣤⣶⣦⣤⣄⡀" + System.lineSeparator()
                 + " ⠀⠀⠀⠀⠀⠀⠀⠀ ⢀⣴⣿⡿⠛⠉⠙⠛⠛⠛⠛⠻⢿⣿⣷⣤⡀" + System.lineSeparator()
                 + " ⠀⠀⠀⠀⠀⠀⠀⠀ ⣼⣿⠋⠀⠀⠀⠀⠀⠀⠀  ⢀⣀⣀⠈⢻⣿⣿⡄" + System.lineSeparator()
                 + " ⠀⠀⠀⠀⠀⠀⠀ ⣸⣿⡏⠀⠀⠀ ⣠⣶⣾⣿⣿⣿⠿⠿⠿⢿⣿⣿⣿⣄" + System.lineSeparator()
@@ -24,12 +93,6 @@ public class Duke {
                 + " ⠀⠀⠀⠀⠀⠀⠀⢿⣿⣦⣄⣀⣠⣴⣿⣿⠁⠀⠈⠻⣿⣿⣿⣿⡿⠏" + System.lineSeparator()
                 + " ⠀⠀⠀⠀⠀⠀⠀⠈⠛⠻⠿⠿⠿⠿⠋⠁" + System.lineSeparator();
 
-        System.out.println("Ssshhhhhh!!!!!" + System.lineSeparator() + logo);
-        String greetings = "____________________________________________________________" + System.lineSeparator()
-                + "Hello Crewmate! I'm Arthur, ( ͡° ͜ʖ ͡°)" + System.lineSeparator()
-                + "Please assign me my tasks to complete!" + System.lineSeparator()
-                + "____________________________________________________________" + System.lineSeparator();
-        System.out.println(greetings);
     }
 
     /**
@@ -60,45 +123,5 @@ public class Duke {
     }
 
 
-    public static void main(String[] args) {
-        greet();
-        boolean hasToExit = false;
-        String line;
-        TaskList tasks = new TaskList(100);
-        Scanner in = new Scanner(System.in);
-        while(!hasToExit){
-            line = in.nextLine();
-            switch (line){
-            case "bye":
-                exit(tasks);
-                hasToExit = true;
-                break;
-            case "list":
-                tasks.printList();
-                break;
 
-            default:
-                String []sentence = line.split(" ");
-                if(sentence[0].equals("done")){
-                    int index;
-                    try {
-                        index= Integer.parseInt(sentence[1]);
-                    } catch (NumberFormatException nfe) {
-                        index=-1;
-                    }
-                    if((index>0) && (index<=(tasks.getTasksCounter())) && (sentence.length==2)){
-                        tasks.markAsDone(index-1);
-                    }
-                    else{
-                        tasks.markAsDone(-1);
-                    }
-
-                }
-                else {
-                    tasks.addNewTask(line);
-                }
-                break;
-            }
-        }
-    }
 }
