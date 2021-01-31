@@ -1,8 +1,5 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
-import java.util.List;
 
 public class Duke {
     public static void main(String[] args) {
@@ -14,22 +11,22 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
 
         startGreetings();
-        echo();
+        echo(); // Method contains main while loop
         endGreetings();
     }
 
     public static void startGreetings() {
-        String greetings = "-------------------------------------\n"
-                         + "Hello! I'm Duke\n"
-                         + "What can I do for you?\n\n"
-                         + "-------------------------------------";
+        String greetings = "\t-------------------------------------\n"
+                         + "\tHello! I'm Duke\n"
+                         + "\tWhat can I do for you?\n\n"
+                         + "\t-------------------------------------";
         System.out.println(greetings);
     }
 
     public static void endGreetings() {
-        String exitStatements = "-------------------------------------\n"
-                              + "Bye. Hope to see you again soon!\n"
-                              + "-------------------------------------";
+        String exitStatements = "\t-------------------------------------\n"
+                              + "\tBye. Hope to see you again soon!\n"
+                              + "\t-------------------------------------";
         System.out.println(exitStatements);
     }
 
@@ -40,15 +37,13 @@ public class Duke {
         line = in.nextLine();
 
         while (!line.equals("bye")) {
-            if (line.equals("list")) {
+            List<String> userCommands = Arrays.asList(line.split(" "));
+            if (userCommands.get(0).equals("list")) {
                 displayTextList(tasks);
-            } else if (line.contains("done")) {
+            } else if (userCommands.get(0).equals("done")) {
                 markCompletedTasks(tasks, line);
             } else {
-                System.out.println("-------------------------------------");
-                System.out.println("added: " + line);
-                System.out.println("-------------------------------------");
-                tasks.add(new Task(line));
+                appendNewTask(tasks, userCommands);
             }
             line = in.nextLine();
         }
@@ -56,27 +51,20 @@ public class Duke {
 
     public static void displayTextList(ArrayList<Task> tasks) {
         int counter = 0;
-        System.out.println("-------------------------------------");
-        System.out.println("Here are the tasks in your list");
+        System.out.println("\t-------------------------------------");
+        System.out.println("\tHere are the tasks in your list:");
         while (counter < tasks.size()) {
             Task task = tasks.get(counter);
-            System.out.print((counter+1) + ".");
-
-            if (task.getCompleted()) {
-                System.out.print("[X] ");
-            } else {
-                System.out.print("[ ] ");
-            }
-
-            System.out.println(task.getTaskName());
+            System.out.print("\t" + (counter+1) + ".");
+            task.printTask();
             counter ++;
         }
-        System.out.println("-------------------------------------");
+        System.out.println("\t-------------------------------------");
     }
 
     public static void markCompletedTasks(ArrayList<Task> tasks, String line) {
-        System.out.println("-------------------------------------");
-        System.out.println("Nice! I've marked this task as done:");
+        System.out.println("\t-------------------------------------");
+        System.out.println("\tNice! I've marked this task as done:");
 
         List<String> indexesStrings = Arrays.stream(line.trim().split(" "))
                 .distinct()
@@ -87,8 +75,52 @@ public class Duke {
             if (indexInt < tasks.size()) {
                 tasks.get(indexInt).setCompleted();
             }
-            System.out.println("[X] " + tasks.get(indexInt).getTaskName());
+            System.out.print("\t");
+            tasks.get(indexInt).printTask();
         }
-        System.out.println("-------------------------------------");
+        System.out.println("\t-------------------------------------");
+    }
+
+    public static void appendNewTask(ArrayList<Task> tasks, List<String> instructions) {
+        System.out.println("\t-------------------------------------");
+        switch (instructions.get(0)) {
+        case "todo":
+            List<String> taskNameTodo = instructions.subList(1, instructions.size());
+            tasks.add(new ToDo(
+                    String.join(" ", taskNameTodo),
+                    instructions.get(0)
+            ));
+            System.out.println("\tGot it. I've added this task: ");
+            break;
+        case "deadline":
+            int indexDeadline = instructions.indexOf("/by");
+            List<String> taskNameDeadline = instructions.subList(1, indexDeadline);
+            List<String> timeConstraintDeadline = instructions.subList(indexDeadline+1, instructions.size());
+            tasks.add(new Deadline(
+                    String.join(" ", taskNameDeadline),
+                    instructions.get(0),
+                    String.join(" ", timeConstraintDeadline)
+            ));
+            System.out.println("\tGot it. I've added this task: ");
+            break;
+        case "event":
+            int indexEvent = instructions.indexOf("/at");
+            List<String> taskNameEvent = instructions.subList(1, indexEvent);
+            List<String> timeConstraintEvent = instructions.subList(indexEvent+1, instructions.size());
+            tasks.add(new Event(
+                    String.join(" ", taskNameEvent),
+                    instructions.get(0),
+                    String.join(" ", timeConstraintEvent)
+            ));
+            System.out.println("\tGot it. I've added this task: ");
+            break;
+        default:
+            System.out.println("\tInvalid instruction submitted.");
+            return;
+        }
+        System.out.print("\t  ");
+        tasks.get(tasks.size()-1).printTask();
+        System.out.println("\tNow you have " + tasks.size() + " tasks in the list");
+        System.out.println("\t-------------------------------------");
     }
 }
