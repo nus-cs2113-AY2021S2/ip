@@ -1,15 +1,15 @@
 import java.util.*;
 public class Duke {
 
-    public static String[] processInput(String in){
+    public static String[] processInput(String in) {
         String[] strings = new String[2];
         int index = in.indexOf(" ");
         String subString1 = in.substring(index+1);
-        if (!subString1.contains("/")){
+        if (!subString1.contains("/")) {
             strings[0] = subString1;
             return strings;
         }
-        else{
+        else {
             int index1 = subString1.indexOf("/");
             String subString2 = subString1.substring(0, index1-1);
             String subString3 = subString1.substring(index1);
@@ -51,7 +51,7 @@ public class Duke {
         int count1 = 0;
         do {
             int numerate = 0;
-            if (in.equals("list")){
+            if (in.equals("list")) {
                 int count = 1;
                 System.out.println("--------------------------------------------");
                 System.out.println("Here are the tasks in your list:");
@@ -63,7 +63,7 @@ public class Duke {
                 System.out.println("--------------------------------------------");
             }
 
-            else if (in.contains("done")){
+            else if (in.contains("done")) {
                 for (int i = 0; i <in.length(); i++){
                     ch1 = in.charAt(i);
                     int index = i;
@@ -116,7 +116,7 @@ public class Duke {
                 count1++;
             }
 
-            else{
+            else {
                 tasks[count1] = new Task();
                 tasks[count1].setDescription(in);
                 tasks[count1].setDone(false);
@@ -154,10 +154,10 @@ class Task {
         isDone = done;
     }
 
-    public void markAsDone(){
+    public void markAsDone() {
         isDone = true;
     }
-    public String getDescription(){
+    public String getDescription() {
         return this.description;
     }
     public String getStatusIcon() {
