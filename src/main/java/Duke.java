@@ -11,7 +11,6 @@ public class Duke {
         }
         else{
             int index1 = subString1.indexOf("/");
-            System.out.println(index1);
             String subString2 = subString1.substring(0, index1-1);
             String subString3 = subString1.substring(index1);
             int index2 = subString3.indexOf(" ");
