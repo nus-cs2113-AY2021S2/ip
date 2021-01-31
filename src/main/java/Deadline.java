@@ -13,12 +13,12 @@ public class Deadline extends Task {
     }
 
     @Override
-    public void printTaskDetails(){
+    public void printTaskDetails() {
         super.printTaskDetails();
         this.printTaskTiming();
     }
 
-    public void printTaskTiming(){
+    public void printTaskTiming() {
         System.out.print("(by: " + this.taskTiming + ")");
     }
 }

@@ -19,7 +19,7 @@ public class Task {
         this.completionStatus = MARK_UNDONE;
     }
 
-    public void addTask () {
+    public void addTask() {
         listOfTask[taskAmt] = this;
         taskAmt++;
         System.out.println("Got it. I've added this task:");

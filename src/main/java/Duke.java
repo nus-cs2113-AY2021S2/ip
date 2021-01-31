@@ -33,13 +33,6 @@ public class Duke {
                 "         | /     |  |\n" +
                 "         \\|     /   |akn\n" +
                 "          `-----`---'\n";
-        /*
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-         */
         printDividerLine();
         System.out.println(logo);
         System.out.println("Welcome Mushroom!");

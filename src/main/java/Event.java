@@ -13,7 +13,7 @@ public class Event extends Task {
     }
 
     @Override
-    public void printTaskDetails(){
+    public void printTaskDetails() {
         super.printTaskDetails();
         this.printTaskTiming();
     }
