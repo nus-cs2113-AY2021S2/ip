@@ -96,10 +96,14 @@ public class Duke {
         System.out.println(BREAK_LINE);
     }
     public static void markDone(int idNum) {
-        Task task = tasks.get(idNum - 1) ;
-        task.setAsDone();
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(task.toString());
+        if (idNum > 0 && idNum <= tasks.size()) {
+            Task task = tasks.get(idNum - 1);
+            task.setAsDone();
+            System.out.println("Nice! I've marked this task as done:");
+            System.out.println(task.toString());
+        } else {
+            System.out.println("Invalid task number");
+        }
         System.out.println(BREAK_LINE);
     }
     public static void showByeMessage() {
