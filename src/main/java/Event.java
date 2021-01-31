@@ -18,7 +18,7 @@ public class Event extends Task {
         this.printTaskTiming();
     }
 
-    public void printTaskTiming(){
+    public void printTaskTiming() {
         System.out.print("(by: " + this.taskTiming + ")");
     }
 }
