@@ -1,7 +1,12 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Wagwan! I is Ali G. West side.
+What is we chattin' bout today?
+____________________________________________________________
+Wicked. This ting is now on da list.
+[T][ ] remove
+You is having 1 task(s) on your list
+____________________________________________________________
+Eez are the tings you added to the list
+1. [T][ ] remove
+____________________________________________________________
+Goodbye, big up yourself, keep it real, respekt.
+____________________________________________________________

@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class Duke {
     private static final int ERR_OUT_OF_BOUNDS = -2;
     private static final int ERR_WRONG_FORMAT = -1;
+    private static final int INVALID_DONE = -1;
     private static final int EXIT = 0;
     private static final int LIST = 1;
     private static final int MARK = 2;
@@ -10,7 +11,6 @@ public class Duke {
     private static final int ADD_TODO = 4;
     private static final int ADD_DEADLINE = 5;
     private static final int ADD_EVENT = 6;
-    private static final int INVALID_DONE = -1;
 
     public static Task[] Tasks = new Task[100];
 
@@ -50,29 +50,33 @@ public class Duke {
      * Returns if user inputs bye or number of tasks exceeds 100
      */
     public static void loopCommands() {
-        while(true) {
+        while (true) {
             if (Task.totalTasks > 100) {
                 System.out.println("Maximum capacity reached");
                 return;
             }
-            String line = getInput();
-            int command = getCommand(line);
-            // No fallthrough required
-            switch (command) {
-            // If user wants to mark a task as done
-            case MARK:
-                markAsDone(line);
-                break;
-            // If user wants to list all tasks
-            case LIST:
-                listItems();
-                break;
-            case ADD:
-                // If user wants to add an item
-                addItem(line);
-                break;
-            case EXIT:
-               return;
+            Scanner in = new Scanner(System.in);
+            String line;
+            while (in.hasNextLine()) {
+                line = in.nextLine();
+                int command = getCommand(line);
+                // No fallthrough required
+                switch (command) {
+                // If user wants to mark a task as done
+                case MARK:
+                    markAsDone(line);
+                    break;
+                // If user wants to list all tasks
+                case LIST:
+                    listItems();
+                    break;
+                case ADD:
+                    // If user wants to add an item
+                    addItem(line);
+                    break;
+                case EXIT:
+                    return;
+                }
             }
         }
     }
@@ -209,9 +213,5 @@ public class Duke {
     }
     public static void printTotalTasks() {
         System.out.println("You is having " + Task.totalTasks + " task(s) on your list");
-    }
-    public static String getInput() {
-        Scanner in = new Scanner(System.in);
-        return in.nextLine();
     }
 }
