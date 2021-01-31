@@ -11,12 +11,12 @@ public class Task {
         return description;
     }
 
-    public boolean getIsDone(){
-        return isDone;
-    }
-
     public void setDescription(String description){
         this.description = description;
+    }
+
+    public boolean getIsDone(){
+        return isDone;
     }
 
     public void setIsDone(boolean isDone){
