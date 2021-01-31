@@ -3,7 +3,7 @@ public class Task {
     protected boolean isDone;
     public static int totalTasks = 0;
 
-    public Task(String name) {
+    protected Task(String name) {
         this.name = name;
         this.isDone = false;
     }
@@ -21,5 +21,13 @@ public class Task {
 
     public String getName() {
         return name;
+    }
+    // To be overridden
+    public String getType() {
+        return "[ ]";
+    }
+    // To be overridden
+    public String getDate() {
+        return "";
     }
 }
