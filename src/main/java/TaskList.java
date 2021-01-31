@@ -126,14 +126,14 @@ public class TaskList extends List {
     private String getTaskMarkedAsDoneMessage(int index) {
         String phrase;
         if (getAreAllTasksDone()) {
-            phrase =" Nice! I've marked this task as done:"+ System.lineSeparator()
-                    +(index +1)+"["+getStatusIcon(index)+"]"+"."+getTaskDescription(index)+System.lineSeparator()
+            phrase ="Nice! I've marked this task as done:"+ System.lineSeparator()
+                    +(index +1)+"["+getStatusIcon(index)+"]"+". "+getTaskDescription(index)+" "+System.lineSeparator()
                     + "Good job Crewmate! You completed all your tasks! (─‿─) in this list"+System.lineSeparator()
                     + "Don't forget to check the other lists as well!!!!" ;
         }
         else {
             phrase =" Nice! I've marked this task as done:"+ System.lineSeparator()
-                    +(index +1)+"["+getStatusIcon(index)+"]"+"."+getTaskDescription(index)+System.lineSeparator()
+                    +(index +1)+"["+getStatusIcon(index)+"]"+". "+getTaskDescription(index)+" "+System.lineSeparator()
                     + "You still have " + getNumberTasksLeft()
                     + " task(s) left in this list Crewmate! Hurry up!! ＼(｀0´)／";
 
@@ -141,7 +141,7 @@ public class TaskList extends List {
         return phrase;
     }
 
-    private String getTaskAlreadyCompletedPhrase() {
+    public String getTaskAlreadyCompletedPhrase() {
         String phrase;
         if(getAreAllTasksDone()){
             phrase = "This job was already completed!!!!"+System.lineSeparator()

@@ -1,0 +1,9 @@
+help me
+list
+done
+done todo
+deadline get married /mon 23.01.33
+done deadline aaa
+done deadline 1
+list
+bye

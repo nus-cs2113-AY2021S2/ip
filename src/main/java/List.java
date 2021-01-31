@@ -46,7 +46,7 @@ public class List {
 
 
     public void printCommandDoesNotExist(){
-        System.out.println("There's no such command!!! You look SUS!!!  (ー_ーゞ ");
+        System.out.println("There's no such command!!! You look SUS!!!  (ー_ーゞ");
         printDottedLines();
     }
 
@@ -61,6 +61,10 @@ public class List {
 
     public void printCompletedTasks() {
         System.out.println("Good job Crewmate! You completed all your tasks! (─‿─)");
+    }
+
+    public void printCheckOtherList(){
+        System.out.println("Don't forget to check the other lists as well!!!!");
     }
 
     public void printEmptyList() {
