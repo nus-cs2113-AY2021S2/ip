@@ -1,4 +1,3 @@
-import java.util.Locale;
 import java.util.Scanner;
 
 public class Duke {
@@ -8,6 +7,9 @@ public class Duke {
     static final int INPUT_CODE_LIST = 1;
     static final int INPUT_CODE_DONE = 2;
     static final int INPUT_CODE_INVALID = 3;
+    static final int INPUT_CODE_TODO = 4;
+    static final int INPUT_CODE_DEADLINE = 5;
+
 
     public static void printDividerLine() {
         System.out.println("____________________________________________________________");
@@ -60,21 +62,55 @@ public class Duke {
         case "list":
             return INPUT_CODE_LIST;
         case "done":
-            try {
-                if (words.length == 1 || Integer.parseInt(words[1]) < 1) {
-                    return INPUT_CODE_INVALID;
-                } else {
-                    return INPUT_CODE_DONE;
-                }
-            } catch(NumberFormatException e){
-                return INPUT_CODE_INVALID;
-            }
+            return validateDoneCommand(words);
+        case "todo":
+            return validateTodoCommand(words);
+        case "deadline":
+            return validateDeadlineCommand(userCommand);
         default:
             return INPUT_CODE_DEFAULT;
         }
     }
 
-    private static void performAction(int commandCode, String userInput, Task task) {
+    private static int validateDeadlineCommand(String userCommand) {
+        try {
+            if (userCommand.contains("/")) {
+                return INPUT_CODE_DEADLINE;
+            } else {
+                return INPUT_CODE_INVALID;
+            }
+        } catch(NumberFormatException e){
+            return INPUT_CODE_INVALID;
+        }
+    }
+
+    private static int validateTodoCommand(String[] words) {
+        try {
+            if (words.length <= 1) {
+                return INPUT_CODE_INVALID;
+            } else {
+                return INPUT_CODE_TODO;
+            }
+        } catch(NumberFormatException e){
+            return INPUT_CODE_INVALID;
+        }
+    }
+
+    private static int validateDoneCommand(String[] words) {
+        try {
+            if (words.length == 1 || Integer.parseInt(words[1]) < 1) {
+                return INPUT_CODE_INVALID;
+            } else {
+                return INPUT_CODE_DONE;
+            }
+        } catch(NumberFormatException e){
+            return INPUT_CODE_INVALID;
+        }
+    }
+
+    private static void performAction(int commandCode, String userInput, Task taskList) {
+        String taskDescription;
+        String taskTiming;
         // No Fallthrough intended in this switch statement
         switch (commandCode) {
         case INPUT_CODE_EXIT:
@@ -82,13 +118,12 @@ public class Duke {
             break;
         case INPUT_CODE_LIST:
             printDividerLine();
-            task.listTask();
+            taskList.listTask();
             printDividerLine();
             break;
         case INPUT_CODE_DONE:
             printDividerLine();
-            int index = getTaskIndexFromUserInput(userInput);
-            task.markDone(index);
+            taskList.markDone(getDoneIndexFromUserInput(userInput));
             printDividerLine();
             break;
         case INPUT_CODE_INVALID:
@@ -96,15 +131,56 @@ public class Duke {
             System.out.println("You have enter an invalid command, please try again.");
             printDividerLine();
             break;
+        case INPUT_CODE_TODO:
+            printDividerLine();
+            taskDescription = getTaskDescription(userInput);
+            Task todoTask = new Todo(taskDescription);
+            todoTask.addTask(todoTask);
+            printDividerLine();
+            break;
+        case INPUT_CODE_DEADLINE:
+            printDividerLine();
+            taskDescription = getTaskDescription(userInput);
+            taskTiming = getTaskTiming(userInput);
+            Task deadlineTask = new Deadline(taskDescription, taskTiming);
+            deadlineTask.addTask(deadlineTask);
+            printDividerLine();
+            break;
         default:
             printDividerLine();
-            task.addTask(userInput);
+            Task newTask = new Task(userInput);
+            taskList.addTask(newTask);
             printDividerLine();
             break;
         }
     }
 
-    private static int getTaskIndexFromUserInput(String userInput) {
+    private static String getTaskTiming(String userInput) {
+        String unfilteredTaskTiming = removeCommandCode(userInput);
+        String[] taskTiming = unfilteredTaskTiming.split("/", 2);
+        return taskTiming[1];
+    }
+
+
+    private static String getTaskDescription(String userInput) {
+        String taskDescription = removeCommandCode(userInput);
+        if (taskDescription.contains("/")) {
+            taskDescription = removeDateAndTime(taskDescription);
+        }
+        return taskDescription;
+    }
+
+    private static String removeDateAndTime(String unfilteredDescription) {
+        String[] unfilteredDescriptionArray= unfilteredDescription.split("/", 2);
+        return unfilteredDescriptionArray[0];
+    }
+
+    private static String removeCommandCode(String userInput) {
+        String[] userInputArray= userInput.split(" ", 2);
+        return userInputArray[1];
+    }
+
+    private static int getDoneIndexFromUserInput(String userInput) {
         String[] words = userInput.split(" ");
         int indexResult = Integer.parseInt(words[1]);
         return indexResult;
@@ -114,13 +190,13 @@ public class Duke {
         int commandCode;
         String userInput;
         Scanner in = new Scanner(System.in);
-        Task task = new Task();
+        Task taskList = new Task();
 
         printHelloStatement();
         do {
             userInput = in.nextLine();
             commandCode = getCommandCode(userInput);
-            performAction(commandCode, userInput, task);
+            performAction(commandCode, userInput, taskList);
         } while (commandCode != INPUT_CODE_EXIT);
     }
 }
