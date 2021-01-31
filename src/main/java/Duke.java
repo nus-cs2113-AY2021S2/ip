@@ -6,22 +6,23 @@ public class Duke {
     private static int LIST_COUNTER = 0;
 
     /**
-     * Loop through all possible commands with error code
+     * Loop through all possible commands
      * Possible Commands:
      * Todo, event, Deadline, help, list, done, bye
      */
     public static void loop() {
-        while (true) {
+        Scanner line = new Scanner(System.in);
+        while (line.hasNextLine()) {
+            String input = line.nextLine();
             if(LIST_COUNTER == 100){
                 error(6);
                 return;
             }
-            String input = readInput();
             if (input.equalsIgnoreCase("bye")) {
-                printExit();
+                PrintOutput.printExit();
                 System.exit(1);
             } else if (input.equalsIgnoreCase("help")) {
-                System.out.println(HELP_MESSAGE);
+                System.out.println(PrintOutput.HELP_MESSAGE);
             } else if (input.toLowerCase().startsWith("done")) {
                 doneTask(input);
             } else if (input.equalsIgnoreCase("list")) {
@@ -33,9 +34,9 @@ public class Duke {
             } else if (input.toLowerCase().startsWith("event")){
                 addEvent(input);
             } else {
-                System.out.println(" ¯\\_(ツ)_/¯ That is an invalid command!");
+                System.out.println("¯\\_(ツ)_/¯ That is an invalid command!");
                 System.out.println("Enter \"HELP\" for commands!");
-                printBorder();
+                PrintOutput.printBorder();
             }
         }
     }
@@ -46,7 +47,7 @@ public class Duke {
      * @param args - argument
      */
     public static void main(String[] args) {
-        printGreeting();
+        PrintOutput.printGreeting();
         loop();
     }
 
@@ -161,7 +162,7 @@ public class Duke {
             System.out.println("[" + list[index].getType() + "] ["
                 + list[index].getStatusIcon() + "] " + list[index].getName()
                 + list[index].getDate());
-            printBorder();
+            PrintOutput.printBorder();
         }
     }
 
@@ -174,7 +175,7 @@ public class Duke {
             System.out.print("s");
         }
         System.out.print(" in total!\n");
-        printBorder();
+        PrintOutput.printBorder();
     }
 
     /**
@@ -188,82 +189,12 @@ public class Duke {
                     +list[i].getStatusIcon() + "] " + list[i].getName()
                     + list[i].getDate());
             }
-            printBorder();
+            PrintOutput.printBorder();
         } else {
             error(3);
         }
     }
 
-    private static final String BORDER = "============================================================";
-    private static final String HELP_MESSAGE = " HELP COMMANDS\n"
-        + "todo: adds to list\n"
-        + " Example: todo sleep\n\n"
-        + "deadline: adds to list\n"
-        + " Example: deadline homework /by tomorrow\n\n"
-        + "event: adds to list\n"
-        + " Example: event block event /at tuesday\n\n"
-        + "List: view list\n"
-        + " Example: list\n\n"
-        + "Help: view help commands\n"
-        + " Example: Help\n\n"
-        + "Done: check task as done\n"
-        + " Example: Done 2\n\n"
-        + "Bye:  terminate program\n"
-        + " Example: bye\n\n"
-        + BORDER;
-
-    public static void printGreeting() {
-        String alfred = "⊂_ヽ\n"
-            + "　 ＼ ＼ what\n"
-            + "　　  ＼ ( ͡° ͜ʖ ͡°) can I \n"
-            + "　　　 >　   ⌒    ヽ\n"
-            + "　　　/ 　   へ      ＼\n"
-            + "　　/　　  /　  ＼   do for you?\n"
-            + "　　(　  (ヽ　　    ヽ _   つ\n"
-            + "   |  　| \\ \n"
-            + "　  | 丿 ＼ ⌒)\n"
-            + "　  | |　　) /\n"
-            + "   ノ )　　Lﾉ \n"
-            + "  (_／";
-        printBorder();
-        System.out.println("Welcome to Duke v1.4 ----------- Latest Update: 31/1/21");
-        System.out.println("Developed by: Oscar Lai");
-        printBorder();
-        System.out.println("Good Day, I'm Alfred.\n" + alfred);
-        System.out.println("Enter HELP for commands");
-        printBorder();
-    }
-
-    public static void printExit() {
-        String wave = " __      __\n"
-            + "( _\\    /_ )\n"
-            + " \\ _\\  /_ / \n"
-            + "  \\ _\\/_ /_ _\n"
-            + "  |_____/_/ /|\n"
-            + "  (  (_)__)J-)\n"
-            + "  (  /`.,   /\n"
-            + "   \\/  ;   /\n"
-            + "    | === |See you again!\n";
-        printBorder();
-        System.out.println("Pleasure serving you...\n" + wave);
-        printBorder();
-        System.out.println("Developed by: Oscar Lai\n"
-            + "Version 1.4");
-        printBorder();
-    }
-
-    /**
-     * Read Input
-     * @return input as String
-     */
-    public static String readInput() {
-        Scanner in = new Scanner(System.in);
-        return in.nextLine();
-    }
-
-    public static void printBorder() {
-        System.out.println(BORDER);
-    }
 
     /**
      * Returns error code message
@@ -279,29 +210,29 @@ public class Duke {
             case 1:
                 System.out.println("Error! You must enter an integer after"
                     + " \"done\"!");
-                printBorder();
+                PrintOutput.printBorder();
                 break;
             case 2:
                 System.out.println("Error! You do not have that "
                     + "many items in your list!");
-                printBorder();
+                PrintOutput.printBorder();
                 break;
             case 3:
                 System.out.println("Your list is empty! Add something!");
-                printBorder();
+                PrintOutput.printBorder();
                 break;
             case 4:
                 System.out.println("You have already marked it as Done!");
-                printBorder();
+                PrintOutput.printBorder();
                 break;
             case 5:
                 System.out.println("¯\\_(ツ)_/¯ That is an invalid format!");
                 System.out.println("Enter HELP for commands!");
-                printBorder();
+                PrintOutput.printBorder();
                 break;
             case 6:
                 System.out.println("List is full!");
-                printBorder();
+                PrintOutput.printBorder();
                 break;
         }
     }

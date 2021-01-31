@@ -1,0 +1,12 @@
+help
+blah
+list
+todo
+todo sleep
+deadline homework /by tomorrow
+event birthday /at friday
+done
+done 2
+done 2
+done 4
+bye
