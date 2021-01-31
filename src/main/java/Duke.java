@@ -26,8 +26,7 @@ public class Duke {
                 for (int i = 0; i < itemCount; i++) {
                     System.out.println(i+1 + ". " + list[i]);
                 }
-            }
-            else {
+            } else {
                 System.out.println("added: " + input); //output based on user input
                 list[itemCount] = input; //stores user inputs into list
                 itemCount++;
@@ -43,4 +42,6 @@ public class Duke {
         System.out.println(line);
 
     }
+
 }
+
