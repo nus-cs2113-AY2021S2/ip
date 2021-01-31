@@ -61,21 +61,25 @@ public class Duke {
                         }
                         else if (task.contains("todo")){
                             String taskName = task.substring(5);
-                            tasks[index] = new Todo(taskName);
+                            tasks[index] = new Todo(taskName, 'T');
                             index = addTaskMessage(index, tasks[index]);
                         }
                         else if (task.contains("deadline")){
                             int slash = task.indexOf("/");
                             String taskName1 = task.substring(9, slash-1);
                             String by = task.substring(slash+3);
-                            tasks[index] = new Deadline(taskName1, by);
+                            tasks[index] = new Deadline(taskName1,'D', by);
                             index = addTaskMessage(index, tasks[index]);
                         }
                         else if (task.contains("event")) {
                             int slash_sign = task.indexOf("/");
                             String taskName2 = task.substring(6, slash_sign - 1);
                             String at = task.substring(slash_sign + 3);
-                            tasks[index] = new Event(taskName2, at);
+                            tasks[index] = new Event(taskName2, 'E', at);
+                            index = addTaskMessage(index, tasks[index]);
+                        }
+                        else{
+                            tasks[index] = new Task(task);
                             index = addTaskMessage(index, tasks[index]);
                         }
                         task = b.nextLine();

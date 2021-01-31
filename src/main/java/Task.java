@@ -3,9 +3,8 @@ public class Task {
     protected boolean isDone;
     protected char taskType;
 
-    public Task(String description, char taskType) {
+    public Task(String description) {
         this.description = description;
-        this.taskType = taskType;
         this.isDone = false;
     }
     public void setDescription(String description){
