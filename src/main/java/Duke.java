@@ -98,7 +98,7 @@ public class Duke {
     }
 
     /**
-     * Checks validity of a done command
+     * Checks for presence of number in input AND for any illegal access of indexes
      * @param line input from user
      * @return index of item to mark as done if valid, -1 otherwise
      */
@@ -119,9 +119,8 @@ public class Duke {
     public static void listItems() {
         System.out.println("Eez are the tings you added to the list");
         for(int i = 0; i < Task.totalTasks; i++) {
-            System.out.println(i+1 + ". " + Tasks[i].getType() +
-                    "[" + Tasks[i].getStatusIcon() + "] " + Tasks[i].getName()
-                    + " " + Tasks[i].getDate());
+            printListItem(i+1, Tasks[i].getType(), Tasks[i].getStatusIcon(),
+                    Tasks[i].getName(), Tasks[i].getDate());
         }
         printLine();
     }
@@ -158,6 +157,7 @@ public class Duke {
     public static void addDeadline(String line) {
         if(line.contains("/by")) {
             int current = Task.totalTasks;
+            // Details of task starts at index 9 of input
             String nameAndDeadline = line.substring(9);
             String[] split = nameAndDeadline.split(" /by ");
             String name = split[0];
@@ -172,6 +172,7 @@ public class Duke {
     public static void addEvent(String nameOfTask) {
         if(nameOfTask.contains("/at")) {
             int current = Task.totalTasks;
+            // Details of task starts at index 6 of input
             String nameAndTime = nameOfTask.substring(6);
             String[] split = nameAndTime.split(" /at ");
             String name = split[0];
@@ -182,6 +183,9 @@ public class Duke {
         } else {
             printError(ERR_WRONG_FORMAT);
         }
+    }
+    public static void printListItem(int index, String type, String status, String name, String date) {
+        System.out.println(index + ". " + type + "[" + status + "] " + name + " " + date);
     }
     public static void printGreeting() {
         System.out.println("Wagwan! I is Ali G. West side.\nWhat is we chattin' bout today?");
