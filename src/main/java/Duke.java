@@ -13,10 +13,10 @@ public class Duke {
 
     private static void inputAndExecuteCommand(int taskCount, Task[] taskList) {
         String line;
+        Scanner scanner = new Scanner(System.in);
         
         while (true) {
-            Scanner in = new Scanner(System.in);
-            line = in.nextLine();
+            line = scanner.nextLine();
             String[] commandTypeAndArg = line.split(" ", 2);
             String commandType = commandTypeAndArg[0];
             String commandArg = null;
@@ -28,9 +28,11 @@ public class Duke {
             case "bye":
                 String exitMessage = "Sad to see you go! ): See you soon!";
                 printWithBorder(exitMessage);
+                scanner.close();
                 System.exit(0);
             case "help":
                 printWithBorder(COMMANDS);
+                break;
             case "list":
                 listAllTasks(taskList);
                 break;
@@ -48,6 +50,7 @@ public class Duke {
                 break;
             default:
                 displayInvalidCommandResponse();
+                break;
             }
         }
     }
@@ -105,8 +108,7 @@ public class Duke {
             if (task == null) {
                 break;
             }
-            stringToPrint += ("\n" + Integer.toString(count) + ": [" + task.getStatusIcon() + "] "
-                    + task.getDescription());
+            stringToPrint += ("\n    " + Integer.toString(count) + ". " + task.toString());
             count += 1;
         }
         printWithBorder(stringToPrint);

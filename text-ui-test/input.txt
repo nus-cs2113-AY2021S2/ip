@@ -1,0 +1,9 @@
+help
+todo team project
+deadline individual project /by before tutorial
+event lecture /at friday
+list
+done 2
+list
+LALALA
+bye

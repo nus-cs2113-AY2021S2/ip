@@ -5,3 +5,70 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+What do you have to do today?
+Commands:
+    todo taskName
+    deadline deadlineName /by time
+    event eventName /at time
+    list
+    done taskNumber
+    help
+    bye
+
+___________________________________________________
+Commands:
+    todo taskName
+    deadline deadlineName /by time
+    event eventName /at time
+    list
+    done taskNumber
+    help
+    bye
+
+___________________________________________________
+___________________________________________________
+Alrighty! I have added this new Todo:
+    [TD][ ] team project
+You now have 1 tasks in the list.
+___________________________________________________
+___________________________________________________
+Alrighty! I have added this new Deadline:
+    [DL][ ] individual project (by: before tutorial)
+You now have 2 tasks in the list.
+___________________________________________________
+___________________________________________________
+Alrighty! I have added this new Event:
+    [EV][ ] lecture (at: friday)
+You now have 3 tasks in the list.
+___________________________________________________
+___________________________________________________
+Here are the tasks in your list:
+    1. [TD][ ] team project
+    2. [DL][ ] individual project (by: before tutorial)
+    3. [EV][ ] lecture (at: friday)
+___________________________________________________
+___________________________________________________
+Very nice! I've marked this task as done:
+[X] individual project
+___________________________________________________
+___________________________________________________
+Here are the tasks in your list:
+    1. [TD][ ] team project
+    2. [DL][X] individual project (by: before tutorial)
+    3. [EV][ ] lecture (at: friday)
+___________________________________________________
+___________________________________________________
+Invalid command!
+Commands:
+    todo taskName
+    deadline deadlineName /by time
+    event eventName /at time
+    list
+    done taskNumber
+    help
+    bye
+
+___________________________________________________
+___________________________________________________
+Sad to see you go! ): See you soon!
+___________________________________________________
