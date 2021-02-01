@@ -8,6 +8,6 @@ public class Deadline extends Task {
     }
 
     public String toString() {
-        return String.format("[D][ ] " + description + "(by: " + by + ")");
+        return String.format("[D][ ] " + description + " (by: " + by + ")");
     }
 }

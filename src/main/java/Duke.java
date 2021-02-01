@@ -14,14 +14,17 @@ public class Duke {
     }
 
     public static void addTask(String userInput) {
-        String description = userInput;
+        String description = "";
         if (userInput.substring(0,8).equalsIgnoreCase("deadline")){
             String by = "";
-            userInput = userInput.substring(9,userInput.length()).trim();
+            userInput = userInput.substring(9).trim();
             if (userInput.contains("/")){
                 int idx = userInput.indexOf('/');
                 description =userInput.substring(0, idx);
-                by = userInput.substring(idx+3, userInput.length()).trim();
+                by = userInput.substring(idx+3).trim();
+            }
+            else {
+                description =userInput;
             }
 
             Deadline d = new Deadline(description, by);
@@ -29,18 +32,21 @@ public class Duke {
         }
         else if (userInput.substring(0,5).equalsIgnoreCase("event")){
             String at = "";
-            userInput = userInput.substring(6,userInput.length()).trim();
+            userInput = userInput.substring(6).trim();
             if (userInput.contains("/")){
                 int idx = userInput.indexOf('/');
                 description =userInput.substring(0, idx);
-                at = userInput.substring(idx+3, userInput.length()).trim();
+                at = userInput.substring(idx+3).trim();
+            }
+            else {
+                description =userInput;
             }
 
             Event e = new Event(description, at);
             tasks.add(e);
         }
         else if (userInput.substring(0,4).equalsIgnoreCase("todo")){
-            description = userInput.substring(5, userInput.length());
+            description = userInput.substring(5);
             Todo t = new Todo(description);
             tasks.add(t);
         }
