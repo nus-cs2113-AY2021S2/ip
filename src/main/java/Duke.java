@@ -21,8 +21,35 @@ public class Duke {
         System.out.println(" ____________________________________________________________\n" +
                 "     Here are the tasks in your list:");
         for(int i=0; i< num;i++){
-            System.out.println((i+1) +". "+ "[" + t[i].getStatusIcon()+"] "+ t[i].getDescription());
+            System.out.println((i+1) +". "+ "["+t[i].getSymbol()+"]"+"[" + t[i].getStatusIcon()+"] "+ t[i].getDescription());
         }
+    }
+
+    public static String userDone(String user_done){
+        switch(user_done){
+            case "todo":
+                return "T";
+            case "event":
+                return "E";
+            case "deadline":
+                return "D";
+            default:
+                break;
+        }
+        return "Wrong input";
+
+
+    }
+    public static void printTask(String taskKind, String substring,int num_of_goals, String ddl,String prep){
+        System.out.println("Got it. I've added this task: ");
+        if(ddl == null){
+            System.out.println("[" + taskKind + "]" + "[" + " " + "]" + " " + substring);
+        }
+        else{
+            System.out.println("[" + taskKind + "]" + "[" + " " + "]" + " " + substring + "(" + prep +":"+ddl +")");
+        }
+
+        System.out.println("Now you have " + num_of_goals + " task in your list!");
     }
 
 
@@ -32,33 +59,86 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String user_input = sc.nextLine();
         int num_of_goals = 0;
-        while(!user_input.equals("bye")){
-            if(user_input.equals("list")){
+
+        while(!user_input.equals("bye")) {
+            if (user_input.equals("list")) {
                 show_list(num_of_goals);
             }
 
-            else{
+            else {
                 int spacing = user_input.indexOf(" ");
-                String user_done = user_input.substring(0,spacing);
-                if(user_done.equals("done")){
+                int slash = user_input.indexOf("/");
+                System.out.println(slash);
+                String user_done = user_input.substring(0, spacing);
+                if (user_done.equals("done")){
                     String number = user_input.substring(spacing+1);
                     int number_converted = Integer.parseInt(number);
                     t[number_converted-1].markAsDone();
                     System.out.println("____________________________________________________________\n" +
                             "     Nice! I've marked this task as done: " );
-                    System.out.println("[" + t[number_converted-1].getStatusIcon()+"] "+ t[number_converted-1].getDescription());
+                    System.out.println("["+t[number_converted-1].getSymbol()+"]"+"[" + t[number_converted-1].getStatusIcon()+"] "+ t[number_converted-1].getDescription());
                     System.out.println("____________________________________________________________");
                 }
-                else{
-                    System.out.println( "___________________________________________________________\n" +
-                            "Added: "+ user_input +  "____________________________________________________________" );
-                    //to_do_list[num_of_goals] = user_input;
-                    t[num_of_goals] = new Task(user_input);
+                else if (slash!= -1){
+
+                    String taskKind = userDone(user_done);
+                    String taskName = user_input.substring(spacing + 1,slash);
+                    String period = user_input.substring(slash+1);
+                    //System.out.println(period);
+                    String prep = period.substring(0,period.indexOf(" "));
+                   // System.out.println(prep);
+                    String ddl= period.substring(period.indexOf(" ")+1);
+                    //System.out.println(ddl);
+
+                    t[num_of_goals] = new Task(taskName);
+                    t[num_of_goals].setSymbol(taskKind);
+                    t[num_of_goals].setDdl(ddl);
                     num_of_goals++;
+                    printTask(taskKind, taskName, num_of_goals,ddl,prep);
                 }
+                else{
+
+                    String taskKind = userDone(user_done);
+                    String taskName = user_input.substring(spacing + 1);
+                    //String ddl= user_input.substring(slash+1);
+                    //String ddl = null;
+                    t[num_of_goals] = new Task(taskName);
+                    t[num_of_goals].setSymbol(taskKind);
+                    //t[num_of_goals].setDdl(ddl);
+                    num_of_goals++;
+
+                    printTask(taskKind, taskName, num_of_goals,null,null);
+                }
+
             }
             user_input = sc.nextLine();
         }
+
+
+
+
+
+
+
+
+
+
+
+
+                //else if (user_input.equals("todo")){
+                  //  String todo= user_input.substring(spacing+1);
+
+                //}
+                //else{
+                  //  System.out.println( "___________________________________________________________\n" +
+                    //        "Added: "+ user_input +  "____________________________________________________________" );
+                    //to_do_list[num_of_goals] = user_input;
+                    //t[num_of_goals] = new Task(user_input);
+                    //num_of_goals++;
+                //}
+         //   }
+
+        //}
         System.out.println("____________________________________________________________\n" +
                 "     Bye. Hope to see you again soon!\n" +
                 "    ____________________________________________________________");
