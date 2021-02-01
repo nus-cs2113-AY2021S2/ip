@@ -1,0 +1,10 @@
+todo fyp report
+todo FIN tutorial
+event CL meeting at 2/2
+deadline iP by Wednesday
+list
+done 2
+done 4
+list
+done 1
+bye

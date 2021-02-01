@@ -40,7 +40,7 @@ public class Duke {
             System.out.println("Here are the tasks in your list: ");
             for(int i=0; i<taskCount; ++i){
                 Class classType = taskList[i].getClass();
-                System.out.print(i+1 + "[" + classType.getName().charAt(0) + "]" );
+                System.out.print(i+1 + ". [" + classType.getName().charAt(0) + "]" );
                 System.out.println("[" + taskList[i].getStatusIcon() + "] " + taskList[i].description + taskList[i].time);
             }
         }else{
