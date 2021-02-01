@@ -4,16 +4,29 @@ public class TaskManager {
 
     public void listTask() {
         for (int i=0; i<taskCount; ++i) {
-            System.out.print(i+1 + ". [");
-            System.out.print((tasks[i].isDone()) ? "X" : " ");
-            System.out.println("] " + tasks[i].getTaskName());
+            System.out.printf("%d: %s", i+1, tasks[i]);
+            System.out.println();
         }
     }
 
     public void addTask(String line) {
-        tasks[taskCount] = new Task(line);
+        if(line.startsWith("todo")){
+            tasks[taskCount] = new Todo(line);
+        }else if(line.startsWith("deadline")){
+            int byIndex = line.indexOf("/by");
+            String by = line.substring(byIndex+4);
+            tasks[taskCount] = new Deadline(line, by);
+        }else if(line.startsWith("event")){
+            int atIndex = line.indexOf("/at");
+            String at = line.substring(atIndex+4);
+            tasks[taskCount] = new Event(line, at);
+        }
+
+        System.out.println("Got it. I've added this task:");
+        System.out.println(tasks[taskCount]);
         ++taskCount;
-        System.out.println("added: " + line);
+        System.out.println("Now you have " + taskCount + " tasks in the list.");
+
     }
 
     public void doneTask(int taskNum) {
