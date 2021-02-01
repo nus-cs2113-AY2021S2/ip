@@ -64,7 +64,8 @@ public class TaskList {
                 System.out.println((i + 1) + ". "
                         + "[" + convertTaskType(currentItem.getTaskType()) + "] "
                         + "[" + (currentItem.isDone() ? "☑️" : "✖️") + "] "
-                        + currentItem.getTaskContent() + " "
+                        + currentItem.getTaskContent()
+                        + (currentItem.getTaskType() == TaskType.TODO ? "" : " ")
                         + timeString
                 );
             }

@@ -18,7 +18,7 @@ public class Duke {
         System.out.println(
                 DIVIDER
                         + " Welcome.\n"
-                        + " I am your assistant Friday. ✧ʕ̢̣̣̣̣̩̩̩̩·͡˔·ོɁ̡̣̣̣̣̩̩̩̩✧ \n"
+                        + " I am your assistant Friday. ✧ʕ̢̣̣̣̣̩̩̩̩·͡˔·ོɁ̡̣̣̣̣̩̩̩̩✧\n"
                         + " Just FYI, I am developed by Song Yu.\n"
                         + " May I know what I can help you?\n"
                         + DIVIDER_LINE_ONLY
@@ -29,10 +29,10 @@ public class Duke {
      * Prints greetings when the program ends.
      */
     public static void printExitGreetings() {
-        System.out.println(
+        System.out.print(
                 DIVIDER
                         + " Thank you for getting in touch.\n"
-                        + " See you next time. \n"
+                        + " See you next time.\n"
                         + "✧( ु•⌄• )◞ᴴᴬᵛᴱ ᴬ ᴳᴼᴼᴰ ᵀᴵᴹᴱ\n"
                         + DIVIDER_LINE_ONLY
         );
