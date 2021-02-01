@@ -11,12 +11,12 @@ public class Task {
         return description;
     }
 
-    public boolean getIsDone(){
-        return isDone;
-    }
-
     public void setDescription(String description){
         this.description = description;
+    }
+
+    public boolean getIsDone(){
+        return isDone;
     }
 
     public void setIsDone(boolean isDone){
@@ -25,5 +25,9 @@ public class Task {
 
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+    }
+
+    public void printTask(){
+        System.out.printf("[%s] %s\n",getStatusIcon(), getDescription());
     }
 }
