@@ -38,9 +38,8 @@ public class DukeController {
 
     public static void list(){
         for(int i=0; i<currentTaskLength; i++){
-            System.out.println(i+1 + ".["
-                    + tasks[i].getStatusIcon() + "] "
-                    + tasks[i].getDescription());
+            System.out.printf("%d.", i+1);
+            tasks[i].printTask();
         }
     }
 
@@ -61,10 +60,17 @@ public class DukeController {
     }
 
     public static void addTask(){
-        tasks[currentTaskLength] = new Task(input);
-        System.out.println("added: " + tasks[currentTaskLength].getDescription());
-        currentTaskLength++;
+        String exactAddCommand =  DukeCommandValidator.getExactAddCommand();
+        switch(exactAddCommand){
+        case DukeCommands.ADD_TODO:
 
+        }
+        /*
+        tasks[currentTaskLength] = new Task(input);
+        System.out.printf("Got it. I've added this task:\n  ");
+        tasks[currentTaskLength].printTask();
+        System.out.printf("Now you have %d tasks in the list.\n", currentTaskLength + 1);
+        currentTaskLength++;*/
     }
 
 }

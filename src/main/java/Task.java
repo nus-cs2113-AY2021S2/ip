@@ -26,4 +26,8 @@ public class Task {
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
+
+    public void printTask(){
+        System.out.printf(".[%s] %s\n",getStatusIcon(), getDescription());
+    }
 }
