@@ -1,5 +1,5 @@
-public class Task {
-    private String taskName;
+abstract public class Task {
+    private final String taskName;
     private boolean isDone;
 
     public Task(String taskName) {
@@ -17,5 +17,13 @@ public class Task {
 
     public String getTaskName() {
         return taskName;
+    }
+
+    abstract public String getTaskType();
+
+    @Override
+    public String toString() {
+        String mark = isDone ? "[X] " : "[ ] ";
+        return mark + taskName;
     }
 }
