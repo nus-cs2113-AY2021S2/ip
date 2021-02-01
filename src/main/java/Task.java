@@ -14,19 +14,19 @@ public class Task {
         this.isDone = false;
     }
 
-    public String getDescription() {
+    public String getTaskDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setTaskDescription(String description) {
         this.description = description;
     }
 
-    public boolean getStatus() {
+    public boolean getTaskStatus() {
         return isDone;
     }
 
-    public void setStatus() {
+    public void setTaskStatus() {
         isDone = true;
     }
 
@@ -35,9 +35,13 @@ public class Task {
      * If the task is done (i.e. isDone is true), "X" is returned. 
      * If the task is not done (i.e. isDone is false), " " is returned. 
      * 
-     * @return Status icon
+     * @return Status icon. 
      */
-    public String getStatusIcon() {
+    public String getTaskStatusIcon() {
         return (isDone ? "X" : " ");
+    }
+
+    public String toString() {
+        return String.format("[%s] %s", getTaskStatusIcon(), getTaskDescription());
     }
 }
