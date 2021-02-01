@@ -1,10 +1,10 @@
 public class Task {
     private String content;
-    private boolean done;
+    private boolean isDone;
 
     public Task(String content) {
         this.content = content;
-        this.done = false;
+        this.isDone = false;
     }
 
     public void setContent(String content) {
@@ -12,21 +12,22 @@ public class Task {
     }
 
     public void setDone(boolean done) {
-        this.done = done;
+        this.isDone = done;
     }
-
 
     public String getContent() {
         return content;
     }
 
     public boolean isDone() {
-        return done;
+        return isDone;
     }
-
 
     public String getStatusIcon() {
-        return (done ? "\u2718" : " "); //return tick or X symbols
+        return (isDone ? "\u2718" : " "); //return tick or X symbols
     }
 
+    public String toString() {
+        return "[" + getStatusIcon() + "]" + content;
+    }
 }

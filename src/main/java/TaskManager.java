@@ -7,12 +7,41 @@ public class TaskManager {
         numOfTasks = 0;
     }
 
-    public void addTask(String content) {
+    public int getNumOfTasks() {
+        return numOfTasks;
+    }
+
+    /*public void addTask(String content) {
         tasks[numOfTasks] = new Task(content);
         this.numOfTasks++;
         System.out.println("____________________________________________________________");
         System.out.println("added: " + content);
         System.out.println("____________________________________________________________");
+    }*/
+    public void showAddResult(int numOfTasks) {
+        System.out.println("____________________________________________________________");
+        System.out.println("Got it. I've added this task: ");
+        System.out.println(tasks[numOfTasks]);
+        System.out.println("Now you have " + (numOfTasks+1) + " tasks in the list.");
+        System.out.println("____________________________________________________________");
+    }
+    public void addTodo(String content) {
+        tasks[numOfTasks] = new Todo(content);
+        showAddResult(numOfTasks);
+        this.numOfTasks++;
+    }
+
+    public void addDeadline(String content, String by)
+    {
+        tasks[numOfTasks] = new Deadline(content, by);
+        showAddResult(numOfTasks);
+        this.numOfTasks++;
+    }
+
+    public void addEvent(String content, String at) {
+        tasks[numOfTasks] = new Event(content, at);
+        showAddResult(numOfTasks);
+        this.numOfTasks++;
     }
 
     public void markTaskDone(int taskIndexShow) {
@@ -20,7 +49,7 @@ public class TaskManager {
             this.tasks[taskIndexShow-1].setDone(true);
             System.out.println("____________________________________________________________");
             System.out.println("Nice! I've marked this task as done: ");
-            System.out.println("[" + tasks[taskIndexShow-1].getStatusIcon() + "] " + tasks[taskIndexShow-1].getContent());
+            System.out.println(tasks[taskIndexShow-1]);
             System.out.println("____________________________________________________________");
         } else {
             System.out.println("____________________________________________________________");
@@ -32,8 +61,10 @@ public class TaskManager {
     public void listAllTasks() {
         System.out.println("____________________________________________________________");
         for(int i=0; i< this.numOfTasks; i++) {
-            System.out.println(i+1 + ". [" + tasks[i].getStatusIcon() + "]" + tasks[i].getContent());
+            System.out.println(i+1 + ". " + tasks[i]);
         }
         System.out.println("____________________________________________________________");
     }
+
+
 }

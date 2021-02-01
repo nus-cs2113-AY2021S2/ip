@@ -1,3 +1,4 @@
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Duke {
@@ -31,9 +32,25 @@ public class Duke {
                 int taskIndexShow = Integer.parseInt(line.replaceAll("[^0-9]", ""));
                 tasks.markTaskDone(taskIndexShow);
                 line = in.nextLine();
-            } else {
-                tasks.addTask(line);
+            } else if(line.matches("^\\ *(todo).*$")){
+                String[] content = line.split("todo",2);
+                tasks.addTodo(content[1].trim());
                 line = in.nextLine();
+            } else if(line.matches("^\\ *(deadline).*(/by).*")){
+                String[] typeContentBy = line.trim().split("deadline", 2);
+                String[] contentBy = typeContentBy[1].trim().split("/by", 2);
+                tasks.addDeadline(contentBy[0].trim(), contentBy[1].trim());
+                line = in.nextLine();
+            } else if(line.matches("^\\ *(event).*(/at).*")){
+                    String[] typeContentAt= line.trim().split("event", 2);
+                    String[] contentAt = typeContentAt[1].trim().split("/at", 2);
+                    tasks.addEvent(contentAt[0].trim(), contentAt[1].trim());
+                    line = in.nextLine();
+            } else
+            {
+                System.out.println("Undefined!");
+                line = in.nextLine();
+
             }
         }
 
