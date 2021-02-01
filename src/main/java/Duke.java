@@ -45,11 +45,50 @@ public class Duke {
     }
 
     public static void addNewTask(String input) {
-        tasks[taskCount] = new Task(input);
-        taskCount++;
-        System.out.println("____________________________________________________________");
-        System.out.println("added: " + input);
-        System.out.println("____________________________________________________________");
+        Task taskToAdd = processTaskToAdd(input);
+        if (taskToAdd != null) {
+            tasks[taskCount] = taskToAdd;
+            taskCount++;
+            System.out.println("____________________________________________________________");
+            System.out.println("Got it. I've added this task:");
+            System.out.println(taskToAdd);
+            System.out.println("Now you have " + taskCount + " tasks in the list.");
+            System.out.println("____________________________________________________________");
+        }
+    }
+
+    public static Task processTaskToAdd(String input) {
+        if (input.contains("todo")) {
+            return processToDo(input);
+        } else if (input.contains("deadline")) {
+            return processDeadline(input);
+        } else if (input.contains("event")) {
+            return processEvent(input);
+        } else {
+            return null;
+        }
+
+    }
+
+    private static Event processEvent(String input) {
+        String substr = input.substring(5);
+        String[] parts = substr.split("/at");
+        String description = parts[0].trim();
+        String at = parts[1].trim();
+        return new Event(description, at);
+    }
+
+    private static Deadline processDeadline(String input) {
+        String substr = input.substring(8);
+        String[] parts = substr.split("/by");
+        String description = parts[0].trim();
+        String by = parts[1].trim();
+        return new Deadline(description, by);
+    }
+
+    private static ToDo processToDo(String input) {
+        String substr = input.substring(4);
+        return new ToDo(substr.trim());
     }
 
     public static void printTaskList() {
