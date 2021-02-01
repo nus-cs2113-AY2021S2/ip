@@ -3,13 +3,13 @@ import java.util.ArrayList;
 
 public class Duke {
 
-    static ArrayList<Task> tasksList = new ArrayList<> ();
+    static ArrayList<Task> tasks = new ArrayList<> ();
     static int tasksCount = 0 ;
 
-    public static void printTaskList(ArrayList<Task> taskList) {
+    public static void printTaskList(ArrayList<Task> tasks) {
         System.out.println("Here are the tasks in your list: ");
-        for (int i=0; i<tasksList.size(); i++){
-            System.out.println("    " + (i+1) + ". " + taskList.get(i));
+        for (int i=0; i<tasks.size(); i++){
+            System.out.println("    " + (i+1) + ". " + tasks.get(i));
         }
     }
 
@@ -25,7 +25,7 @@ public class Duke {
             }
 
             Deadline d = new Deadline(description, by);
-            tasksList.add(d);
+            tasks.add(d);
         }
         else if (userInput.substring(0,5).equalsIgnoreCase("event")){
             String at = "";
@@ -37,14 +37,14 @@ public class Duke {
             }
 
             Event e = new Event(description, at);
-            tasksList.add(e);
+            tasks.add(e);
         }
         else if (userInput.substring(0,4).equalsIgnoreCase("todo")){
             description = userInput.substring(5, userInput.length());
             Todo t = new Todo(description);
-            tasksList.add(t);
+            tasks.add(t);
         }
-        System.out.println("    Got it. I've added this task: \n      " + tasksList.get(tasksCount));
+        System.out.println("    Got it. I've added this task: \n      " + tasks.get(tasksCount));
         tasksCount++;
         System.out.println("    Now you have " + tasksCount + " tasks in the list.");
 
@@ -71,15 +71,15 @@ public class Duke {
                 break;
             }
             else if (task.equalsIgnoreCase("list")) {
-                printTaskList(tasksList);
+                printTaskList(tasks);
                 System.out.println("------------------------------------------");
             }
             else if (task.contains("done")){
                 int idx = Integer.parseInt(String.valueOf(task.charAt(5)));
-                tasksList.get(idx-1).markAsDone();
+                tasks.get(idx-1).markAsDone();
                 System.out.println("------------------------------------------");
                 System.out.println("    Nice! I've marked this task as done: ");
-                System.out.println("    " + tasksList.get(idx-1));
+                System.out.println("    " + tasks.get(idx-1));
             }
             else {
                 try {
