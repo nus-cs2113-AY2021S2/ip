@@ -2,78 +2,39 @@ import java.util.Scanner;
 import java.util.Arrays;
 
 public class Duke {
-    
-    public static void printHorizontalLine() {
+
+    private static final Scanner SCANNER = new Scanner(System.in);
+
+    private static Task[] taskList = new Task[100];
+    private static int count = 0;
+
+    // These are the prefix strings to define the data type of a command parameter
+    private static final String COMMAND_TODO_WORD = "todo";
+    private static final String COMMAND_EVENT_WORD = "event";
+    private static final String COMMAND_DEADLINE_WORD = "deadline";
+    private static final String COMMAND_LIST_WORD = "list";
+    private static final String COMMAND_EXIT_WORD = "bye";
+    private static final String COMMAND_DONE_WORD = "done";
+
+    /**
+     * Main entry point of the application.
+     * Initializes the application and starts the interaction with the user.
+     */
+    public static void main(String[] args) {
+        showLogo();
+        showGreeting();
+        while(true) {
+            String userCommand = getUserInput();
+            executeCommand(userCommand);
+        }
+        // handleCommand(); // handle input received
+    }
+
+    private static void printHorizontalLine() {
         System.out.println("____________________________________________________________");
     }
 
-    /**
-     * Handles commands from user
-     */
-    public static void handleCommand() {
-        String input;
-        Scanner in = new Scanner(System.in);
-        boolean shouldExit = false;
-        int taskCounter = 0;
-        Task[] taskList = new Task[100];
-        while (!shouldExit) {
-            input = in.nextLine();
-            if (input.equals("bye")) {
-                printHorizontalLine();
-                System.out.println("Bye. Hope to see you again soon!");
-                printHorizontalLine();
-                shouldExit = true;
-            } else if (input.equals("list")) {
-                printHorizontalLine();
-                System.out.println("Here are the tasks in your list:");
-                Task[] outputTaskList = Arrays.copyOf(taskList, taskCounter);
-                int descriptionCounter = 1;
-                for (Task task: outputTaskList) {
-                    System.out.println(descriptionCounter + "." + task.toString());
-                    ++descriptionCounter;
-                }
-                printHorizontalLine();
-            } else if (input.contains("done")) {
-                printHorizontalLine();
-                int index = Integer.parseInt(input.substring(5)) - 1; // minus 1 to adhere to array indexing
-                taskList[index].markAsDone();
-                System.out.println("Nice! I've marked this task as done:");
-                System.out.println("  [" + taskList[index].getStatusIcon() + "] " + taskList[index].getDescription());
-                printHorizontalLine();
-            } else if (input.contains("todo")) {
-                printHorizontalLine();
-                System.out.println("Got it. I've added this task:");
-                String description = input.substring(5);
-                Task task = new Todo(description);
-                System.out.println("  " + task.toString());
-                System.out.println("Now you have " + (taskCounter + 1) + " tasks in the list.");
-                taskList[taskCounter] = task;
-                ++taskCounter;
-                printHorizontalLine();
-            } else if (input.contains("deadline")) {
-                printHorizontalLine();
-                System.out.println("Got it. I've added this task:");
-                String[] inputs = input.substring(9).split(" /by ");
-                Task task = new Deadline(inputs[0], inputs[1]);
-                System.out.println("  " + task.toString());
-                System.out.println("Now you have " + (taskCounter + 1) + " tasks in the list.");
-                taskList[taskCounter] = task;
-                ++taskCounter;
-                printHorizontalLine();
-            } else if (input.contains("event")){
-                printHorizontalLine();
-                System.out.println("Got it. I've added this task:");
-                String[] inputs = input.substring(6).split(" /at ");
-                Task task = new Event(inputs[0], inputs[1]);
-                System.out.println("  " + task.toString());
-                System.out.println("Now you have " + (taskCounter + 1) + " tasks in the list.");
-                taskList[taskCounter] = task;
-                ++taskCounter;
-                printHorizontalLine();
-            }
-        }
-    }
-    public static void main(String[] args) {
+    private static void showLogo() {
         // logo/loading
         printHorizontalLine();
         String logo = " ____        _        \n"
@@ -82,13 +43,191 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        printHorizontalLine();
+    }
 
+
+    private static void showGreeting() {
         // greeting
+        printHorizontalLine();
         String greeting = "Hello! I'm Duke\n" + "What can I do for you?";
         System.out.println(greeting);
         printHorizontalLine();
-
-        handleCommand(); // handle input received
     }
+
+    private static String getUserInput() {
+        String inputLine = SCANNER.nextLine();
+        return inputLine;
+    }
+
+    /**
+     * Executes the command as specified by the user
+     *
+     * @param userInputString raw input from user
+     * prints out the interaction between the program and the user's inputs
+     */
+    private static void executeCommand(String userInputString) {
+        final String[] commandTypeAndParams = splitCommandWordAndArgs(userInputString);
+        final String commandType = commandTypeAndParams[0];
+        final String commandArgs = commandTypeAndParams[1];
+        switch (commandType) {
+        case COMMAND_TODO_WORD:
+            executeTodo(commandArgs);
+            break;
+        case COMMAND_DEADLINE_WORD:
+            executeDeadline(commandArgs);
+            break;
+        case COMMAND_EVENT_WORD:
+            executeEvent(commandArgs);
+            break;
+        case COMMAND_LIST_WORD:
+            executeList();
+            break;
+        case COMMAND_DONE_WORD:
+            executeDone(commandArgs);
+            break;
+        case COMMAND_EXIT_WORD:
+            executeExit();
+            break;
+        default:
+            break;
+        }
+    }
+
+    /**
+     * Splits raw user input into command word and command arguments string
+     * @param rawUserInput
+     * @return size 2 array; first elemetn is the command type and second element is the arguments string
+     */
+    private static String[] splitCommandWordAndArgs(String rawUserInput) {
+        final String[] split = rawUserInput.trim().split(" ", 2);
+        return split.length == 2 ? split : new String[] { split[0] , ""};
+    }
+
+    /**
+     * Add task under Todo class and feedback display message when Todo task added
+     * @param commandArgs Description of the task
+     */
+    private static void executeTodo(String commandArgs) {
+        final String description = commandArgs;
+        Task task = new Todo(description);
+        taskList[count] = task;
+        ++count;
+        getMessageForTodo(task, count);
+    }
+
+    private static void getMessageForTodo(Task task, int count) {
+        printHorizontalLine();
+        showAddTask();
+        System.out.println("  " + task.toString());
+        System.out.println("Now you have " + count + " tasks in the list.");
+        printHorizontalLine();
+    }
+
+    public static void showAddTask() {
+        System.out.println("Got it. I've added this task:");
+    }
+
+    /**
+     * Add task under Deadline class and feedback display message when Deadline task added
+     * @param commandArgs description and deadline of the task
+     */
+    private static void executeDeadline(String commandArgs) {
+        final String[] descriptionAndDeadline = splitDescriptionAndDeadline(commandArgs);
+        Task task = new Deadline(descriptionAndDeadline[0], descriptionAndDeadline[1]);
+        taskList[count] = task;
+        ++count;
+        getMessageForDeadline(task, count);
+    }
+
+
+    private static String[] splitDescriptionAndDeadline(String commandArgs) {
+        final String[] split = commandArgs.split(" /by ");
+        return split;
+    }
+
+    private static void getMessageForDeadline(Task task, int count) {
+        printHorizontalLine();
+        showAddTask();
+        System.out.println("  " + task.toString());
+        System.out.println("Now you have " + count + " tasks in the list.");
+        printHorizontalLine();
+    }
+
+    /**
+     * Add task under Event class and feedback display message when Event task added
+     * @param commandArgs
+     */
+    private static void executeEvent(String commandArgs) {
+        final String[] descriptionAndTime = splitDescriptionAndTime(commandArgs);
+        Task task = new Event(descriptionAndTime[0], descriptionAndTime[1]);
+        taskList[count] = task;
+        ++count;
+        getMessageForEvent(task, count);
+    }
+
+    private static String[] splitDescriptionAndTime(String commandArgs) {
+        final String[] split = commandArgs.split(" /at ");
+        return split;
+    }
+
+    private static void getMessageForEvent(Task task, int count) {
+        printHorizontalLine();
+        showAddTask();
+        System.out.println("  " + task.toString());
+        System.out.println("Now you have " + count + " tasks in the list.");
+        printHorizontalLine();
+    }
+
+    /**
+     * Generate feedback for list of task and task status
+     */
+    private static void executeList() {
+        printHorizontalLine();
+        showTasksList(taskList);
+        printHorizontalLine();
+    }
+
+    private static void showTasksList(Task[] taskList) {
+        System.out.println("Here are the tasks in your list:");
+        int descriptionCount = 1;
+        for (Task task : taskList) {
+            if (task != null) {
+                System.out.println(descriptionCount + "." + task.toString());
+                ++descriptionCount;
+            }
+        }
+    }
+
+    /**
+     * Mark task as done and display message when status of task is changed
+     * @param commandArgs
+     */
+    private static void executeDone(String commandArgs) {
+        int taskIndex = Integer.parseInt(commandArgs) - 1; // minus 1 to adhere to array indexing
+        Task taskToBeDone = taskList[taskIndex];
+        taskToBeDone.markAsDone();
+        showTaskDone(taskToBeDone);
+    }
+
+    private static void showTaskDone(Task task) {
+        printHorizontalLine();
+        System.out.println("  Nice! I've marked this task as done: ");
+        System.out.print("  [" + task.getStatusIcon() + "] " +task.getDescription());
+        printHorizontalLine();
+    }
+
+    /**
+     * exit the program
+     */
+    private static void executeExit() {
+        showGoodbye();
+        System.exit(0);
+    }
+
+    private static void showGoodbye() {
+        printHorizontalLine();
+        System.out.println("Bye. Hope to see you again soon!");
+        printHorizontalLine();
+    }
+
 }
