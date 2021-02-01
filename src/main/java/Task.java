@@ -76,5 +76,10 @@ public abstract class Task {
         this.taskType = taskType;
     }
 
+    /**
+     * Gets a String of time limit of a Task object, if applicable.
+     *
+     * @return The time limit of a Task in String.
+     */
     public abstract String getTimeLimitString();
 }

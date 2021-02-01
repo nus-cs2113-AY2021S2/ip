@@ -77,19 +77,6 @@ public class Duke {
     }
 
     /**
-     * Echos user's input string.
-     *
-     * @param userInput A string input by the user.
-     */
-    public static void echoInput(String userInput) {
-        System.out.println(
-                DIVIDER
-                        + userInput + "\n"
-                        + DIVIDER_LINE_ONLY
-        );
-    }
-
-    /**
      * Gets command from user input.
      *
      * @param userInput user's input.
@@ -104,7 +91,7 @@ public class Duke {
      * Gets user input and execute corresponding command until the loop is exit.
      *
      * @param sc       Java Scanner to get user input.
-     * @param taskList the list of tasks.
+     * @param taskList The list of Task objects.
      */
     private static void loopOperation(Scanner sc, TaskList taskList) {
         String userInput;
@@ -115,72 +102,25 @@ public class Duke {
             case "help":
                 printHelp();
                 break;
-            case "exit":
-            case "bye":
-                printExitGreetings();
-                return;
             case "list":
                 taskList.printCurrentList();
                 break;
             case "todo":
-                try {
-                    String[] parseResult = Todo.parseTaskContent(userInput);
-                    taskList.addTodoTask(parseResult[0]);
-                } catch (Exception e) {
-                    System.out.println(DIVIDER + e.getMessage() + DIVIDER_LINE_ONLY);
-                }
+                addTodoTaskToList(taskList, userInput);
                 break;
             case "deadline":
-                try {
-                    if (Deadline.isCommandValid(userInput)) {
-                        String[] parseResult = Deadline.parseTaskContent(userInput);
-                        String taskContent = parseResult[0];
-                        String taskDeadline = parseResult[1];
-                        taskList.addDeadlineTask(taskContent, taskDeadline);
-                    } else {
-                        throw new Exception("Invalid deadline command. Check 'help'.\n");
-                    }
-                } catch (Exception e) {
-                    System.out.println(DIVIDER + e.getMessage() + DIVIDER_LINE_ONLY);
-                }
+                addDeadlineTaskToList(taskList, userInput);
                 break;
             case "event":
-                try {
-                    if (Event.isCommandValid(userInput)) {
-                        String[] parseResult = Event.parseTaskContent(userInput);
-                        String taskContent = parseResult[0];
-                        String taskPeriod = parseResult[1];
-                        taskList.addEventTask(taskContent, taskPeriod);
-                    } else {
-                        throw new Exception("Invalid event command. Check 'help'.\n");
-                    }
-                } catch (Exception e) {
-                    System.out.println(DIVIDER + e.getMessage() + DIVIDER_LINE_ONLY);
-                }
+                addEventTaskToList(taskList, userInput);
                 break;
             case "done":
-                try {
-                    String taskIndexString = userInput.split(" ")[1];
-                    int itemIndex = Integer.parseInt(taskIndexString);
-                    if (!taskList.isIndexInRange(itemIndex - 1)) {
-                        System.out.println(DIVIDER
-                                + "The task index input is out of range!\n"
-                                + DIVIDER
-                                + "Try again:"
-                        );
-                        continue;
-                    }
-                    taskList.updateTaskStatus(itemIndex - 1, true);
-                } catch (Exception e) {
-                    System.out.println(DIVIDER
-                            + "Invalid input!\n"
-                            + "The item number should be a valid integer!\n"
-                            + DIVIDER
-                            + "Try again:"
-                    );
-                    continue;
-                }
+                handleDoneTask(taskList, userInput);
                 break;
+            case "exit":
+            case "bye":
+                printExitGreetings();
+                return;
             default:
                 printNotCommand();
                 break;
@@ -188,6 +128,138 @@ public class Duke {
         }
     }
 
+    /**
+     * Marks a task with a given integer index as done, if the index is not out of range.
+     *
+     * @param taskList  The list that stores Task objects.
+     * @param userInput User's keyboard input in String.
+     */
+    private static void handleDoneTask(TaskList taskList, String userInput) {
+        try {
+            String taskIndexString = getTaskIndexString(userInput);
+            int itemIndex = Integer.parseInt(taskIndexString);
+            if (isItemIndexOutOfRange(taskList, itemIndex)) {
+                return;
+            }
+            setTaskAsDone(taskList, itemIndex);
+        } catch (Exception e) {
+            printInvalidIntegerWarning();
+        }
+    }
+
+    /**
+     * Prints a warning that the input is not a valid integer.
+     */
+    private static void printInvalidIntegerWarning() {
+        System.out.println(DIVIDER
+                + "Invalid input!\n"
+                + "The item number should be a valid integer!\n"
+                + DIVIDER
+                + "Try again:"
+        );
+    }
+
+    /**
+     * Returns the task index in integer.
+     *
+     * @param userInput User's keyboard input in String.
+     * @return an integer task index.
+     */
+    private static String getTaskIndexString(String userInput) {
+        return userInput.split(" ")[1];
+    }
+
+    /**
+     * Sets the status of a Task object as done.
+     *
+     * @param taskList  The list that stores Task objects.
+     * @param itemIndex The index of the task object in the task list.
+     */
+    private static void setTaskAsDone(TaskList taskList, int itemIndex) {
+        taskList.updateTaskStatus(itemIndex - 1, true);
+    }
+
+    /**
+     * Returns true if the index of the task is out of range, false if in range.
+     *
+     * @param taskList  The list that stores Task objects.
+     * @param itemIndex The index of the task object in the task list.
+     * @return true if the index of the task is out of range.
+     */
+    private static boolean isItemIndexOutOfRange(TaskList taskList, int itemIndex) {
+        if (!taskList.isIndexInRange(itemIndex - 1)) {
+            System.out.println(DIVIDER
+                    + "The task index input is out of range!\n"
+                    + DIVIDER
+                    + "Try again:"
+            );
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Adds an event type task into the taskList.
+     *
+     * @param taskList  The list that stores Task objects.
+     * @param userInput User's keyboard input in String.
+     */
+    private static void addEventTaskToList(TaskList taskList, String userInput) {
+        try {
+            if (Event.isCommandValid(userInput)) {
+                String[] parseResult = Event.parseTaskContent(userInput);
+                String taskContent = parseResult[0];
+                String taskPeriod = parseResult[1];
+                taskList.addEventTask(taskContent, taskPeriod);
+            } else {
+                throw new Exception("Invalid event command. Check 'help'.\n");
+            }
+        } catch (Exception e) {
+            System.out.println(DIVIDER + e.getMessage() + DIVIDER_LINE_ONLY);
+        }
+    }
+
+    /**
+     * Adds a deadline type task into the taskList.
+     *
+     * @param taskList  The list that stores Task objects.
+     * @param userInput User's keyboard input in String.
+     */
+    private static void addDeadlineTaskToList(TaskList taskList, String userInput) {
+        try {
+            if (Deadline.isCommandValid(userInput)) {
+                String[] parseResult = Deadline.parseTaskContent(userInput);
+                String taskContent = parseResult[0];
+                String taskDeadline = parseResult[1];
+                taskList.addDeadlineTask(taskContent, taskDeadline);
+            } else {
+                throw new Exception("Invalid deadline command. Check 'help'.\n");
+            }
+        } catch (Exception e) {
+            System.out.println(DIVIDER + e.getMessage() + DIVIDER_LINE_ONLY);
+        }
+    }
+
+    /**
+     * Adds a to-do type task into the taskList.
+     *
+     * @param taskList  The list that stores Task objects.
+     * @param userInput User's keyboard input in String.
+     */
+    private static void addTodoTaskToList(TaskList taskList, String userInput) {
+        try {
+            String[] parseResult = Todo.parseTaskContent(userInput);
+            taskList.addTodoTask(parseResult[0]);
+        } catch (Exception e) {
+            System.out.println(DIVIDER + e.getMessage() + DIVIDER_LINE_ONLY);
+        }
+    }
+
+    /**
+     * The main method that drives the application.
+     *
+     * @param args Commandline arguments.
+     */
     public static void main(String[] args) {
         printGreetings();
         Scanner sc = new Scanner(System.in);

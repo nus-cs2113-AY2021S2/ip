@@ -25,25 +25,30 @@ public class Deadline extends Task {
     }
 
     public static String[] parseContentAndTime(String[] words, int byIndex) {
+        String content = getTaskContentString(words, byIndex);
+        String deadline = getTaskDeadlineString(words, byIndex);
+        String[] parseResult = new String[2];
+        parseResult[0] = content;
+        parseResult[1] = deadline;
+        return parseResult;
+    }
 
-        StringBuilder contentBuilder = new StringBuilder();
-        for (int j = 1; j < byIndex; j++) {
-            String contentWord = words[j] + " ";
-            contentBuilder.append(contentWord);
-        }
-        String content = contentBuilder.toString();
-
+    private static String getTaskDeadlineString(String[] words, int byIndex) {
         StringBuilder deadlineBuilder = new StringBuilder();
         for (int k = (byIndex + 1); k < words.length; k++) {
             String deadlineWord = words[k] + " ";
             deadlineBuilder.append(deadlineWord);
         }
-        String deadline = deadlineBuilder.toString();
+        return deadlineBuilder.toString().trim();
+    }
 
-        String[] parseResult = new String[2];
-        parseResult[0] = content.trim();
-        parseResult[1] = deadline.trim();
-        return parseResult;
+    private static String getTaskContentString(String[] words, int byIndex) {
+        StringBuilder contentBuilder = new StringBuilder();
+        for (int j = 1; j < byIndex; j++) {
+            String contentWord = words[j] + " ";
+            contentBuilder.append(contentWord);
+        }
+        return contentBuilder.toString().trim();
     }
 
 

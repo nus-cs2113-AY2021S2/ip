@@ -52,11 +52,7 @@ public class TaskList {
         int listSize = Tasks.size();
         System.out.println("This is your current task list:");
         if (listSize == 0) {
-            System.out.println(" - The list is empty!");
-            System.out.println(" - You can try add task object by input what\n"
-                    + "   you want to do.\n"
-                    + " - check 'help' for more."
-            );
+            printListEmptyWarning();
         } else {
             for (int i = 0; i < listSize; i++) {
                 Task currentItem = Tasks.get(i);
@@ -70,6 +66,17 @@ public class TaskList {
                 );
             }
         }
+    }
+
+    /**
+     * Prints warning message if the list is empty.
+     */
+    private void printListEmptyWarning() {
+        System.out.println(" - The list is empty!");
+        System.out.println(" - You can try add task object by input what\n"
+                + "   you want to do.\n"
+                + " - check 'help' for more."
+        );
     }
 
     /**
@@ -197,14 +204,24 @@ public class TaskList {
     public void updateTaskStatus(int itemIndex, boolean isDone) {
         Task currentItem = Tasks.get(itemIndex);
         currentItem.setDone(isDone);
+        printUpdatedTaskStatus(isDone, currentItem);
+        printList();
+        System.out.println(Duke.DIVIDER_LINE_ONLY);
+    }
+
+    /**
+     * Prints the updated status of a Task object.
+     *
+     * @param isDone      The status of the Task object.
+     * @param currentTask The current Task object whose status is updated.
+     */
+    private void printUpdatedTaskStatus(boolean isDone, Task currentTask) {
         System.out.println(Duke.DIVIDER
                 + "The task object: \n"
-                + " | " + currentItem.getTaskContent() + " |\n"
+                + " | " + currentTask.getTaskContent() + " |\n"
                 + "is marked as "
                 + (isDone ? "done" : "undone") + ".\n"
         );
-        printList();
-        System.out.println(Duke.DIVIDER_LINE_ONLY);
     }
 
     /**
