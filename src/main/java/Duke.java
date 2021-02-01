@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class Duke {
@@ -228,7 +227,7 @@ public class Duke {
     }
 
     private static String getNumTasksString(int numberOfTasks) {
-        if (numberOfTasks == 1) return "\t You have " + numberOfTasks + " task in the list.";
-        return "\t You have " + numberOfTasks + " tasks in the list.";
+        if (numberOfTasks == 1) return "\t You have " + Integer.toString(numberOfTasks) + " task in the list.";
+        return "\t You have " + Integer.toString(numberOfTasks) + " tasks in the list.";
     }
 }
