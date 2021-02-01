@@ -2,43 +2,52 @@ import java.util.Scanner;
 
 public class Duke {
 
-    public static void printTask(Task[] taskList, int taskCount){
-        System.out.println("**********************************************************");
-        if(taskCount>0){
-            System.out.println("Here are the tasks in your list: ");
-            for(int i=0; i<taskCount; ++i){
-                System.out.println(i+1 + ".[" + taskList[i].getStatusIcon() + "] " + taskList[i].description);
-            }
-        }else{
-            System.out.println("You have not entered any tasks at the moment! :)");
-        }
-        System.out.println("**********************************************************");
-
-    }
-
     public static void main(String[] args) {
         welcomeMessage();
 
-        String commandInput;
         Task[] taskList = new Task[100];
         int taskCount = 0;
         Scanner in = new Scanner(System.in);
-        commandInput = in.nextLine();
+        String commandInput = in.nextLine();
 
         while (!commandInput.equals("bye") ) {
             if(commandInput.equals("list")){
                 printTask(taskList, taskCount);
-            }else if(commandInput.startsWith("done")){
-                int taskNumber = Integer.parseInt(commandInput.substring(5,6));
-                taskList[taskNumber-1].doneTask();
-            }else{
-                taskList[taskCount] = new Task(commandInput);
+            }else if(commandInput.startsWith("done")) {
+                int taskNumber = Integer.parseInt(commandInput.substring(5, 6));
+                taskList[taskNumber - 1].doneTask();
+            }else if(commandInput.startsWith("todo")){
+                taskList[taskCount] = new Todo(commandInput.substring(5));
+                taskCount++;
+            }else if(commandInput.startsWith("event")){
+                int timeIndex = commandInput.indexOf("at");
+                taskList[taskCount] = new Event(commandInput.substring(6,timeIndex), commandInput.substring(timeIndex));
+                taskCount++;
+            }else if(commandInput.startsWith("deadline")){
+                int timeIndex = commandInput.indexOf("by");
+                taskList[taskCount] = new Deadline(commandInput.substring(9,timeIndex), commandInput.substring(timeIndex));
                 taskCount++;
             }
             commandInput = in.nextLine();
         }
 
         exitMessage();
+    }
+
+    private static void printTask(Task[] taskList, int taskCount){
+        System.out.println("**********************************************************");
+        if(taskCount>0){
+            System.out.println("Here are the tasks in your list: ");
+            for(int i=0; i<taskCount; ++i){
+                Class classType = taskList[i].getClass();
+                System.out.print(i+1 + "[" + classType.getName().charAt(0) + "]" );
+                System.out.println("[" + taskList[i].getStatusIcon() + "] " + taskList[i].description + taskList[i].time);
+            }
+        }else{
+            System.out.println("You have not entered any tasks at the moment! :)");
+        }
+        System.out.println("**********************************************************");
+
     }
 
     private static void exitMessage() {
