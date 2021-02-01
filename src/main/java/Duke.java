@@ -31,6 +31,7 @@ public class Duke {
 
             else if (userInput.toLowerCase().equals("list")){
                 System.out.println("\t____________________________________________________________");
+                System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < itemNo; i++){
                     System.out.printf("\t%d. [%s] %s\n", i+1, list[i].getStatusIcon(), list[i].description);
                 }
