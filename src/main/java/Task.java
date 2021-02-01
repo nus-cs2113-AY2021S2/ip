@@ -90,8 +90,7 @@ public class Task {
                 System.out.println("You have already completed this task.");
             } else {
                 currentTask.completionStatus = MARK_DONE;
-                System.out.println("Nice! I've marked this task as done: ");
-                //System.out.println("[" + MARK_DONE + "] " + currentTask.taskDescription);
+                System.out.println("Nice! I've marked this task as done:");
                 currentTask.printTaskDetails();
                 System.out.println();
             }
