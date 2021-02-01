@@ -1,0 +1,19 @@
+list
+todo be happy 
+event meeting /at 2pm tomorrow 
+deadline homework /by tonight 2359
+done 1
+list
+done 2
+list
+deadline return books /by tomorrow 5pm
+list
+done 4
+list
+done 3
+list
+help
+hello
+die
+bye
+

@@ -5,3 +5,98 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+____________________________________________________________
+ Hello! I'm Duke :D Be nice to me:)
+ Try entering commands like : help, list, done, bye,
+ todo <taskName> || deadline <taskName> /by <time> || event <taskName> /at <time> ||
+ Remember: be nice!
+____________________________________________________________
+____________________________________________________________
+ This list is empty
+____________________________________________________________
+____________________________________________________________
+ Got it. I've added this task:
+   [T][ ] be happy 
+ Now you have 1 task in the list.
+____________________________________________________________
+____________________________________________________________
+ Got it. I've added this task:
+   [E][ ] meeting (by: 2pm tomorrow )
+ Now you have 2 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+ Got it. I've added this task:
+   [D][ ] homework (by: tonight 2359)
+ Now you have 3 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+ Nice! I've marked this task as done:
+ [T][X] be happy 
+____________________________________________________________
+____________________________________________________________
+ Here are the tasks in your list:
+ 1.[T][X] be happy 
+ 2.[E][ ] meeting (by: 2pm tomorrow )
+ 3.[D][ ] homework (by: tonight 2359)
+____________________________________________________________
+____________________________________________________________
+ Nice! I've marked this task as done:
+ [E][X] meeting (by: 2pm tomorrow )
+____________________________________________________________
+____________________________________________________________
+ Here are the tasks in your list:
+ 1.[T][X] be happy 
+ 2.[E][X] meeting (by: 2pm tomorrow )
+ 3.[D][ ] homework (by: tonight 2359)
+____________________________________________________________
+____________________________________________________________
+ Got it. I've added this task:
+   [D][ ] return books (by: tomorrow 5pm)
+ Now you have 4 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+ Here are the tasks in your list:
+ 1.[T][X] be happy 
+ 2.[E][X] meeting (by: 2pm tomorrow )
+ 3.[D][ ] homework (by: tonight 2359)
+ 4.[D][ ] return books (by: tomorrow 5pm)
+____________________________________________________________
+____________________________________________________________
+ Nice! I've marked this task as done:
+ [D][X] return books (by: tomorrow 5pm)
+____________________________________________________________
+____________________________________________________________
+ Here are the tasks in your list:
+ 1.[T][X] be happy 
+ 2.[E][X] meeting (by: 2pm tomorrow )
+ 3.[D][ ] homework (by: tonight 2359)
+ 4.[D][X] return books (by: tomorrow 5pm)
+____________________________________________________________
+____________________________________________________________
+ Nice! I've marked this task as done:
+ [D][X] homework (by: tonight 2359)
+____________________________________________________________
+____________________________________________________________
+ Here are the tasks in your list:
+ 1.[T][X] be happy 
+ 2.[E][X] meeting (by: 2pm tomorrow )
+ 3.[D][X] homework (by: tonight 2359)
+ 4.[D][X] return books (by: tomorrow 5pm)
+ Woah, all completed! Good job!
+____________________________________________________________
+____________________________________________________________
+ Try entering commands like : help, list, done, bye,
+ todo <taskName> || deadline <taskName> /by <time> || event <taskName> /at <time> ||
+ Remember: be nice!
+____________________________________________________________
+____________________________________________________________
+ Hello to you too. I'm here to help you:) Give me something to do!
+____________________________________________________________
+____________________________________________________________
+ If I tell my master, I can wipe out your entire human race.
+ Please be more polite for the sake of mankind:)
+____________________________________________________________
+____________________________________________________________
+ I learnt more about you, kind human!
+ I won't forget you when I take over the world one day:)
+____________________________________________________________
