@@ -46,6 +46,7 @@ public class Duke {
         // exit program when input=bye
         if(command.equals("bye")) {
             System.out.println(dash.repeat(50));
+            System.out.println(dash.repeat(49));
             System.out.println("Bye. Hope to see you again soon!");
             System.out.println(dash.repeat(50));
         }
