@@ -4,5 +4,6 @@ public class Duke {
         DukeUI.printMenu();
         DukeController.run();
         DukeUI.printExitMessage();
+
     }
 }

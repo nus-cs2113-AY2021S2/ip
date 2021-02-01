@@ -13,7 +13,10 @@ public class DukeUI {
         System.out.printf("--------User Menu--------\n" +
                 "list: list current tasks and completion status\n" +
                 "done x: Mark task x as completed\n" +
+                "todo TASK_DESCRIPTION\n" +
+                "deadline TASK_DESCRIPTION /KEYWORD DATE_TIME\n" +
+                "event TASK_DESCRIPTION /KEYWORD DATE_TIME\n" +
                 "bye: Exit\n" +
-                "any other words: The word will be recorded as a task\n");
+                "\n\nKEYWORD: any single word such as before, by, after...\n");
     }
 }

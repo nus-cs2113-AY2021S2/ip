@@ -2,10 +2,19 @@ public class Event extends Task{
     private String duration;
     private String keyWordBeforeDuration;
 
-    public Event(String description, String duration, String keyWordBeforeDuration) {
+    public Event(String description) {
         super(description);
-        this.duration = duration;
-        this.keyWordBeforeDuration = keyWordBeforeDuration;
+        preprocessInput(description);
+    }
+
+    private void preprocessInput(String input){
+        int indexOfBackslash = input.indexOf("/");
+        this.description = input.substring(0,indexOfBackslash);
+        String stringAfterBackslash = input.substring(indexOfBackslash+1);
+        int indexFirstSpaceAfterBackslash = stringAfterBackslash.indexOf(" ");
+        this.keyWordBeforeDuration =
+                stringAfterBackslash.substring(0, indexFirstSpaceAfterBackslash);
+        this.duration = stringAfterBackslash.substring(indexFirstSpaceAfterBackslash + 1);
     }
 
     public String getDuration() {
@@ -27,7 +36,7 @@ public class Event extends Task{
     @Override
     public void printTask() {
         System.out.printf("[E][%s] %s (%s: %s)\n",
-                super.getStatusIcon(), super.getDescription(),
+                super.getStatusIcon(), super.getDescription().substring(6),
                 getKeyWordBeforeDuration(), getDuration());
     }
 }

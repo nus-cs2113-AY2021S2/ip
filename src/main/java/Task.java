@@ -28,6 +28,6 @@ public class Task {
     }
 
     public void printTask(){
-        System.out.printf(".[%s] %s\n",getStatusIcon(), getDescription());
+        System.out.printf("[%s] %s\n",getStatusIcon(), getDescription());
     }
 }

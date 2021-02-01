@@ -14,8 +14,9 @@ public class DukeController {
             currentCommand = DukeCommandValidator.getCommand(input);
 
             switch (currentCommand){
-            case DukeCommands.ADD:{
-                addTask();
+            case DukeCommands.INVALID_COMMAND:{
+                System.out.println("Please enter a valid command!");
+                DukeUI.printMenu();
                 break;
             }
             case DukeCommands.LIST:{
@@ -27,6 +28,10 @@ public class DukeController {
             }
             case DukeCommands.DONE:{
                 done();
+                break;
+            }
+            case DukeCommands.ADD:{
+                add();
                 break;
             }
             default: {
@@ -59,18 +64,21 @@ public class DukeController {
 
     }
 
-    public static void addTask(){
-        String exactAddCommand =  DukeCommandValidator.getExactAddCommand();
-        switch(exactAddCommand){
-        case DukeCommands.ADD_TODO:
-
+    public static void add(){
+        if(DukeCommandValidator.validateTodo(input)==true){
+            tasks[currentTaskLength] = new ToDo(input);
+        }else if(DukeCommandValidator.validateDeadline(input)==true){
+            tasks[currentTaskLength] = new Deadline(input);;
+        }else if(DukeCommandValidator.validateEvent(input)){
+            tasks[currentTaskLength] = new Event(input);
+        }else{
+            System.out.println("Invalid syntax for add commands! Please try again!");
+            DukeUI.printMenu();
         }
-        /*
-        tasks[currentTaskLength] = new Task(input);
         System.out.printf("Got it. I've added this task:\n  ");
         tasks[currentTaskLength].printTask();
         System.out.printf("Now you have %d tasks in the list.\n", currentTaskLength + 1);
-        currentTaskLength++;*/
+        currentTaskLength++;
     }
 
 }
