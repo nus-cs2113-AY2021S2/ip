@@ -29,8 +29,7 @@ public class Duke {
                 Task[] outputTaskList = Arrays.copyOf(taskList, taskCounter);
                 int descriptionCounter = 1;
                 for (Task task: outputTaskList) {
-                    String description = task.getDescription();
-                    System.out.println(descriptionCounter + ".[" + task.getStatusIcon() + "] " + description);
+                    System.out.println(descriptionCounter + "." + task.toString());
                     ++descriptionCounter;
                 }
                 printHorizontalLine();
@@ -41,10 +40,33 @@ public class Duke {
                 System.out.println("Nice! I've marked this task as done:");
                 System.out.println("  [" + taskList[index].getStatusIcon() + "] " + taskList[index].getDescription());
                 printHorizontalLine();
-            } else {
+            } else if (input.contains("todo")) {
                 printHorizontalLine();
-                System.out.println("added: " + input);
-                Task task = new Task(input);
+                System.out.println("Got it. I've added this task:");
+                String description = input.substring(5);
+                Task task = new Todo(description);
+                System.out.println("  " + task.toString());
+                System.out.println("Now you have " + (taskCounter + 1) + " tasks in the list.");
+                taskList[taskCounter] = task;
+                ++taskCounter;
+                printHorizontalLine();
+            } else if (input.contains("deadline")) {
+                printHorizontalLine();
+                System.out.println("Got it. I've added this task:");
+                String[] inputs = input.substring(9).split(" /by ");
+                Task task = new Deadline(inputs[0], inputs[1]);
+                System.out.println("  " + task.toString());
+                System.out.println("Now you have " + (taskCounter + 1) + " tasks in the list.");
+                taskList[taskCounter] = task;
+                ++taskCounter;
+                printHorizontalLine();
+            } else if (input.contains("event")){
+                printHorizontalLine();
+                System.out.println("Got it. I've added this task:");
+                String[] inputs = input.substring(6).split(" /at ");
+                Task task = new Event(inputs[0], inputs[1]);
+                System.out.println("  " + task.toString());
+                System.out.println("Now you have " + (taskCounter + 1) + " tasks in the list.");
                 taskList[taskCounter] = task;
                 ++taskCounter;
                 printHorizontalLine();
