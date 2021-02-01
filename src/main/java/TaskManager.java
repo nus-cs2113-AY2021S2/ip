@@ -18,6 +18,7 @@ public class TaskManager {
     }
 
     public void markDone(int taskIdNum) {
+//        Check if user input for 'done' task id is within the range of the list.
         if (taskIdNum > 0 && taskIdNum <= tasks.size()) {
             int taskListIndexNum = taskIdNum-1;
             Task task = tasks.get(taskListIndexNum);
@@ -26,15 +27,7 @@ public class TaskManager {
             System.out.println(task.toString());
         } else {
             System.out.println("Invalid task number.");
-            printTasksNumber();
-        }
-    }
-
-    public void printTasksNumber() {
-        if (tasks.size() == 1) {
-            System.out.println("Now you have " + tasks.size() + " task in the list.");
-        } else {
-            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            printNumberOfTasks();
         }
     }
 
@@ -48,15 +41,23 @@ public class TaskManager {
         addTaskToList(eventTask);
     }
 
-    public void addDeadlineToList(String description, String by){
+    public void addDeadlineToList(String description, String by) {
         Deadline deadlineTask = new Deadline(description, by);
         addTaskToList(deadlineTask);
     }
 
-    private void addTaskToList(Task task){
+    private void addTaskToList(Task task) {
         tasks.add(task);
         System.out.println("Got it. I've added this task:");
         System.out.println(task.toString());
-        printTasksNumber();
+        printNumberOfTasks();
+    }
+
+    public void printNumberOfTasks() {
+        if (tasks.size() == 1) {
+            System.out.println("Now you have " + tasks.size() + " task in the list.");
+        } else {
+            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+        }
     }
 }

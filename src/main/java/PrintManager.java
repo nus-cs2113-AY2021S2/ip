@@ -31,7 +31,7 @@ public class PrintManager {
                 + "* Add event -> 'event <description> /at <when>'\n"
                 + "* Add todo task -> 'todo <description>'\n"
                 + "* Show list -> 'list'\n"
-                + "* Mark as done -> 'done <list index number>'\n"
+                + "* Mark as done -> 'done <task number>'\n"
                 + "* Exit -> 'bye'\n");
     }
 }

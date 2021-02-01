@@ -26,12 +26,16 @@ public class Command {
 
     private void setCommandFromInput(String input){
         commandType = getCommandTypeFromInput(input);
+//        Split user input by the first "/" to separate description and second argument (at or by, if applicable).
         String[] arguments = input.split("/", 2);
+//        remove the command word (eg. deadline, event, etc.) from the description.
         description = arguments[0].substring(arguments[0].indexOf(' ')+1);
-        if(commandType == CommandEnum.DEADLINE || commandType == CommandEnum.EVENT){
+        if (commandType == CommandEnum.DEADLINE || commandType == CommandEnum.EVENT) {
+//            remove the '/by' or '/at' from the 'when' argument
             when = arguments[1].substring(arguments[1].indexOf(' ')+1);
         }
-        if(commandType == CommandEnum.DONE){
+        if (commandType == CommandEnum.DONE) {
+//            Split user input by " " to separate 'done' and task number according to the format.
             String taskNumArgument = input.split(" ")[1];
             taskNum = Integer.parseInt(taskNumArgument);
         }
