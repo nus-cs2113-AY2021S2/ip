@@ -36,6 +36,15 @@ public class Task {
 
         String output = this.isDone ? doneBox : emptyBox;
         output += this.job;
+
+        output = addLabel(output);
+
         System.out.println(output);
+    }
+
+    public String addLabel(String s){
+        String label = "[*]";
+        label += s;
+        return label;
     }
 }

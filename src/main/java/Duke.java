@@ -12,27 +12,32 @@ public class Duke {
 
     private static void runProgram() {
         Task[] taskList = new Task[MAX_TASK];
+        Scanner in = new Scanner(System.in);
 
         //Loop to receive response.
         while (true){
 
-            String input = getInput();
+            String input = in.nextLine();
 
             // BYE command
-            if(isSameInput(input, "bye")){
+            if(input.equalsIgnoreCase("bye")){
                 return;
             }
 
             // LIST command
-            if(isSameInput(input, "list")){
+            if(input.equalsIgnoreCase("list")){
                 runList(taskList);
             }
 
             // DONE command
-            else if(input.toUpperCase().startsWith("DONE")){
+            else if(startsWith(input, "done")){
                 runDone(taskList, input);
             }
 
+            // TO-DO COMMAND
+            else if(startsWith(input, "todo")){
+                runTodo(taskList, input);
+            }
             // ADD command
             else {
                 runAdd(taskList, input);
@@ -42,23 +47,20 @@ public class Duke {
 
     }
 
-    private static String getInput() {
-        Scanner in = new Scanner(System.in);
-        return in.nextLine();
-    }
-
     private static void runAdd(Task[] taskList, String input) {
         // stores user command as job
         Task newTask = new Task(input);
+
         taskList[Task.taskCount] = newTask;
         Task.taskCount++;
-        printTaskAdded(newTask.getJob());
+
+        printTaskAdded(newTask);
     }
 
     private static void runDone(Task[] taskList, String input) {
         String[] word = input.split(" ");
 
-        // handles invalid input
+        // check invalid input
         if(word.length != 2){
             printInvalidInputWarning();
             return;
@@ -94,8 +96,18 @@ public class Duke {
         }
     }
 
-    private static boolean isSameInput(String input, String command){
-        return input.equalsIgnoreCase(command);
+    private static void runTodo(Task[] taskList, String input) {
+        // stores user command as job
+        Todo newTask = new Todo(input);
+
+        taskList[Task.taskCount] = newTask;
+        Task.taskCount++;
+
+        printTaskAdded(newTask);
+    }
+
+    private static boolean startsWith(String input, String command){
+        return input.toUpperCase().startsWith(command.toUpperCase());
     }
 
     private static void markJobAsDone(Task task) {
@@ -103,6 +115,36 @@ public class Duke {
         System.out.print("Congrats! You've completed: \n   ");
         task.printTask();
         System.out.println();
+    }
+
+    private static void printTaskAdded(Task task) {
+        System.out.println("Added to list: ");
+        task.printTask();
+        printNumTasks();
+        System.out.println();
+    }
+
+    private static void printNumTasks(){
+        String output = Integer.toString(Task.taskCount);
+        output += (Task.taskCount == 1)? " task" : " tasks";
+        output += " in the list";
+
+        System.out.println(output);
+    }
+
+    private static void printInvalidInputWarning() {
+        System.out.println("Wrong format! Enter in the format: \"done [number]\"");
+        System.out.println("Make sure number is a valid integer! \n");
+    }
+
+    private static void printNoTaskWarning() {
+        System.out.println("You don't have any tasks yet! Enter a task \n");
+    }
+
+    private static void printInvalidTaskWarning(int jobNumber) {
+        String smaller = "Enter a valid job number. Use the list command to view your current tasks.\n";
+        String larger = "You don't have that many jobs! Use the list command to view your current tasks.\n";
+        System.out.println(jobNumber < 0 ? smaller : larger);
     }
 
     private static void printHello() {
@@ -123,24 +165,4 @@ public class Duke {
         System.out.print(bye_message);
         System.out.print(line);
     }
-
-    private static void printInvalidInputWarning() {
-        System.out.println("Wrong format! Enter in the format: \"done [number]\"");
-        System.out.println("Make sure number is a valid integer! \n");
-    }
-
-    private static void printTaskAdded(String task) {
-        System.out.println("Added to list: " + task + '\n');
-    }
-
-    private static void printNoTaskWarning() {
-        System.out.println("You don't have any tasks yet! Enter a task \n");
-    }
-
-    private static void printInvalidTaskWarning(int jobNumber) {
-        String smaller = "Enter a valid job number. Use the list command to view your current tasks.\n";
-        String larger = "You don't have that many jobs! Use the list command to view your current tasks.\n";
-        System.out.println(jobNumber < 0 ? smaller : larger);
-    }
-
 }
