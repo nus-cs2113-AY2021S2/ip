@@ -1,37 +1,60 @@
 public class TaskManager {
+
+    private static final String INVALID_COMMAND_MESSAGE = "Invalid command. Please try again.";
+
     private Task[] tasks = new Task[100];
     int taskCount = 0;
 
-    public void listTask() {
-        for (int i=0; i<taskCount; ++i) {
-            System.out.printf("%d: %s", i+1, tasks[i]);
-            System.out.println();
+    public String listTask() {
+        StringBuilder feedback = new StringBuilder();
+
+        for (int i=0; i<taskCount-1; ++i) {
+            feedback.append(String.format("%d: %s", (i + 1), tasks[i])).append(System.lineSeparator());
         }
+        feedback.append(String.format("%d: %s", (taskCount), tasks[taskCount-1]));
+
+        return feedback.toString();
     }
 
-    public void addTask(String line) {
-        if(line.startsWith("todo")){
-            tasks[taskCount] = new Todo(line);
-        }else if(line.startsWith("deadline")){
-            int byIndex = line.indexOf("/by");
-            String by = line.substring(byIndex+4);
-            tasks[taskCount] = new Deadline(line, by);
-        }else if(line.startsWith("event")){
-            int atIndex = line.indexOf("/at");
-            String at = line.substring(atIndex+4);
-            tasks[taskCount] = new Event(line, at);
+    public String addTask(String taskType, String description) {
+        switch (taskType) {
+        case "todo":
+            tasks[taskCount] = new Todo(description);
+            break;
+        case "deadline": {
+            String[] nameAndDate = parseDescription(description, " /by ");
+            tasks[taskCount] = new Deadline(nameAndDate[0], nameAndDate[1]);
+            break;
+        }
+        case "event": {
+            String[] nameAndDate = parseDescription(description, " /at ");
+            tasks[taskCount] = new Event(nameAndDate[0], nameAndDate[1]);
+            break;
+        }
+        default:
+            return INVALID_COMMAND_MESSAGE;
         }
 
-        System.out.println("Got it. I've added this task:");
-        System.out.println(tasks[taskCount]);
         ++taskCount;
-        System.out.println("Now you have " + taskCount + " tasks in the list.");
 
+        return "Got it. I've added this task:" + System.lineSeparator()
+                + tasks[taskCount-1] + System.lineSeparator()
+                + "Now you have " + taskCount + " tasks in the list.";
     }
 
-    public void doneTask(int taskNum) {
+    private String[] parseDescription(String description, String regex) {
+        final String[] split = description.split(regex);
+        if(split.length == 2){
+            return split;
+        }else{
+            return new String[]{split[0], ""};
+        }
+    }
+
+    public String doneTask(int taskNum) {
         tasks[taskNum].setAsDone();
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println("[X] " + tasks[taskNum].getTaskName());
+
+        return "Nice! I've marked this task as done:" + System.lineSeparator()
+                + tasks[taskNum];
     }
 }

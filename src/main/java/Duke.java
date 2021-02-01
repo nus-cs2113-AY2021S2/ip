@@ -1,60 +1,43 @@
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Duke {
-    private static String DIVIDER = "____________________________________________________________";
-    private static Scanner in;
+
+    private static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
+    private static UserInterface ui = new UserInterface();
+    private static TaskManager taskManager = new TaskManager();
 
     public static void main(String[] args) {
-        showWelcomeMessage();
 
-        TaskManager taskManager = new TaskManager();
-        in = new Scanner(System.in);
+        ui.showWelcomeMessage();
 
         while(true){
-            String input = getUserInput();
+            String input = ui.getUserInput();
+            String[] parsedInput = ui.parseInput(input);
+            String feedback = executeCommand(parsedInput);
+            ui.printFeedback(feedback);
+        }
+    }
 
-            if (input.equals("bye")) {
-                break;
-            }
-
-            if (input.equals("list")) {
-                taskManager.listTask();
-            } else if (input.length()>4 && input.substring(0,4).equals("done")) {
-                int taskNumber = Integer.parseInt(input.substring(5))-1;
-                taskManager.doneTask(taskNumber);
-            } else {
-                taskManager.addTask(input);
-            }
-
-            printDivider();
+    private static String executeCommand(String[] inputs){
+        String command = inputs[0].toLowerCase();
+        String feedback = null;
+        switch(command){
+        case "bye":
+            ui.showExitMessage();
+            System.exit(0);
+            break;
+        case "list":
+            feedback = taskManager.listTask();
+            break;
+        case "done":
+            int taskNumber = Integer.parseInt(inputs[1])-1;
+            feedback = taskManager.doneTask(taskNumber);
+            break;
+        default:
+            feedback = taskManager.addTask(command, inputs[1]);
         }
 
-        System.out.println("Bye. Hope to see you again soon!");
-        printDivider();
-    }
-
-    private static String getUserInput() {
-        String line;
-        line = in.nextLine();
-        printDivider();
-        return line;
-    }
-
-    private static void showWelcomeMessage() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        printDivider();
-
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
-        printDivider();
-    }
-
-    private static void printDivider(){
-        System.out.println(DIVIDER);
+        return feedback;
     }
 }
