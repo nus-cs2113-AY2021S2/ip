@@ -1,14 +1,16 @@
 public class Task {
-    private final String description;
-    private boolean isDone;
+    protected final String description;
+    protected boolean isDone;
+    protected String taskType;
 
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.taskType = "[]";
     }
 
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? "\u2713" : " "); //return space or tick symbols
     }
 
     public void setAsDone() {
@@ -18,4 +20,9 @@ public class Task {
     public String getDescription() {
         return description;
     }
+
+    public String toString() {
+        return taskType + "[" + getStatusIcon() + "] " + description;
+    }
+
 }
