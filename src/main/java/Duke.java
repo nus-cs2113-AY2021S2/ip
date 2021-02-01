@@ -31,7 +31,7 @@ public class Duke {
             while(line.equals("list")){
                 System.out.println("____________________________________________________________\n");
                 for (int i = 0; i < index; i++){
-                    System.out.println(i+1 + ": " + anArray[i] + "\n");
+                    System.out.println(i+1 + ". " + anArray[i] + "\n");
                 }
                 System.out.println("____________________________________________________________\n");
                 line = "";
