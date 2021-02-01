@@ -32,7 +32,7 @@ public class Duke {
                 list.taskCompleted(command);
             }
             // adds tasks into list
-            else {//(!command.equals("list") && !command.equals("done") && !command.equals("bye"))
+            else if (!command.equals("list") && !command.equals("done") && !command.equals("bye")) {
                 System.out.println("added: " + command);
                 list.addTasks(command);
             }
