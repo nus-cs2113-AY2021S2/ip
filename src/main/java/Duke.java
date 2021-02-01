@@ -50,7 +50,7 @@ public class Duke {
 
     private static void handleList() {
         String outputText;
-        outputText = "Here are the tasks in your list: ";
+        outputText = "Here are the tasks in your list:";
         for (int i = 0; i < Task.getNumberOfTasks(); i++) {
             String taskNumber = (i + 1) + ".";
             outputText += System.lineSeparator() +
