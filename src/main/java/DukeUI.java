@@ -12,7 +12,7 @@ public class DukeUI {
     public static void printMenu() {
         System.out.printf("--------User Menu--------\n" +
                 "list: list current tasks and completion status\n" +
-                "done: Mark a task as completed\n" +
+                "done x: Mark task x as completed\n" +
                 "bye: Exit\n" +
                 "any other words: The word will be recorded as a task\n");
     }

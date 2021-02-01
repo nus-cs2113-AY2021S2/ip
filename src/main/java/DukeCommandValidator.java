@@ -1,32 +1,28 @@
 public class DukeCommandValidator {
+    static int MINIMUM_DONE_LENGTH = 5;
 
-    public String getCommand(String input){
-        switch (input){
-        case "bye": return "bye";
-        case "list": return "list";
-        default: return detailCheck(input);
+    public static int getCommand(String input){
+        if(input.equals("bye")){
+            return DukeCommands.EXIT;
         }
+        if(input.equals("list")){
+            return DukeCommands.LIST;
+        }
+        if(input.length()>MINIMUM_DONE_LENGTH){
+            if(validateDoneCommand(input) == true){
+                return DukeCommands.DONE;
+            }
+        }
+        return DukeCommands.ADD;
     }
 
-    private String detailCheck(String input){
-        validateDoneCommand(input);
-        return input;
-    }
-
-    public String validateDoneCommand(String input){
-        final int MINIMUM_DONE_LENGTH = 5;
-        if(input.length()<MINIMUM_DONE_LENGTH){
-            return
-        }
+    public static boolean validateDoneCommand(String input){
         String firstFiveChars = input.substring(0, 5);
         String sixthToLastChars = input.substring(5);
         if(firstFiveChars.equals("done ") && isInteger(sixthToLastChars)){
-            int taskIndex = Integer.parseInt(sixthToLastChars) - 1;
-            if(taskIndex < currentTaskLength){
-                return taskIndex;
-            }
+            return true;
         }
-        return INVALID_TASK_ID;
+        return false;
     }
 
     public static boolean isInteger(String s) {
