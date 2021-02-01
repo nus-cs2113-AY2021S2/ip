@@ -1,6 +1,9 @@
 import java.util.Scanner;
 
 public class Duke {
+    static final String COMMANDS = "Commands:\n    todo taskName\n    deadline deadlineName /by time\n" 
+            + "    event eventName /at time\n    list\n    done taskNumber\n    help\n    bye\n";
+
     public static void main(String[] args) {
         displayWelcomeMessage();
         int taskCount = 0;
@@ -26,14 +29,22 @@ public class Duke {
                 String exitMessage = "Sad to see you go! ): See you soon!";
                 printWithBorder(exitMessage);
                 System.exit(0);
+            case "help":
+                printWithBorder(COMMANDS);
             case "list":
                 listAllTasks(taskList);
                 break;
             case "done":
                 markTaskAsDone(taskList, commandArg);
                 break;
-            case "add":
-                taskCount = addTask(taskCount, taskList, commandArg);
+            case "todo":
+                taskCount = addTodo(taskCount, taskList, commandArg);
+                break;
+            case "deadline":
+                taskCount = addDeadline(taskCount, taskList, commandArg);
+                break;
+            case "event":
+                taskCount = addEvent(taskCount, taskList, commandArg);
                 break;
             default:
                 displayInvalidCommandResponse();
@@ -41,15 +52,41 @@ public class Duke {
         }
     }
 
+    private static int addEvent(int taskCount, Task[] taskList, String commandArg) {
+        String[] taskDescriptionAndAt = commandArg.split(" /at ", 2);
+        String description = taskDescriptionAndAt[0];
+        String at = taskDescriptionAndAt[1];
+        Event task = new Event(description, at);
+        taskList[taskCount] = task;
+        taskCount += 1;
+        printWithBorder("Alrighty! I have added this new Event:\n    " + task.toString() + "\nYou now have "
+        + Integer.toString(taskCount) + " tasks in the list.");
+        return taskCount;
+    }
+
+    private static int addDeadline(int taskCount, Task[] taskList, String commandArg) {
+        String[] taskDescriptionAndBy = commandArg.split(" /by ", 2);
+        String description = taskDescriptionAndBy[0];
+        String by = taskDescriptionAndBy[1];
+        Deadline task = new Deadline(description, by);
+        taskList[taskCount] = task;
+        taskCount += 1;
+        printWithBorder("Alrighty! I have added this new Deadline:\n    " + task.toString() + "\nYou now have "
+        + Integer.toString(taskCount) + " tasks in the list.");
+        return taskCount;
+    }
+
     private static void displayInvalidCommandResponse() {
-        String invalidCommandResponse = "Invalid command!\nCommands: 'add', 'list', 'done'\n";
+        String invalidCommandResponse = "Invalid command!\n" + COMMANDS;
         printWithBorder(invalidCommandResponse);
     }
 
-    private static int addTask(int taskCount, Task[] taskList, String commandArg) {
-        taskList[taskCount] = new Task(commandArg);
+    private static int addTodo(int taskCount, Task[] taskList, String commandArg) {
+        Todo task = new Todo(commandArg);
+        taskList[taskCount] = task;
         taskCount += 1;
-        printWithBorder("I have added: " + commandArg);
+        printWithBorder("Alrighty! I have added this new Todo:\n    " + task.toString() + "\nYou now have "
+        + Integer.toString(taskCount) + " tasks in the list.");
         return taskCount;
     }
 
@@ -80,7 +117,7 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.print("Hello from\n" + logo + "\n");
         System.out.print("What do you have to do today?\n");
-        System.out.print("Commands: 'add', 'list', 'done'\n");
+        System.out.print(COMMANDS + "\n");
     }
 
     public static void printWithBorder(String line) {
