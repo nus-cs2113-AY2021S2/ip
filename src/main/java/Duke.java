@@ -5,7 +5,7 @@ public class Duke {
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+                + "|____/ \\__,_|_|\\_\\_______|\n";
         String dash = "-";
         Scanner myObj = new Scanner(System.in);
 
