@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
@@ -20,7 +19,7 @@ public class Duke {
     }
 
     public static void toDoList() {
-        String[] list = new String[100];
+        Task[] list = new Task[100];
         int itemNo = 0;
         String userInput;
         while (true) {
@@ -33,15 +32,23 @@ public class Duke {
             else if (userInput.toLowerCase().equals("list")){
                 System.out.println("\t____________________________________________________________");
                 for (int i = 0; i < itemNo; i++){
-                    System.out.printf("%d. %s\n", i+1, list[i]);
+                    System.out.printf("\t%d. [%s] %s\n", i+1, list[i].getStatusIcon(), list[i].description);
                 }
                 System.out.println("\t____________________________________________________________");
             }
 
+            else if (userInput.toLowerCase().contains("done")){
+                int taskNo = (Integer.parseInt(userInput.replaceAll("[^0-9]",""))) - 1;
+                list[taskNo].markAsDone();
+                System.out.printf("\tNice! I have marked this task as done:\n");
+                System.out.printf("\t[%s] %s\n", list[taskNo].getStatusIcon(), list[taskNo].description);
+
+            }
+
             else {
-                list[itemNo] = userInput;
+                list[itemNo] = new Task(userInput);
                 System.out.println("\t____________________________________________________________");
-                System.out.println("\t added:read " + userInput);
+                System.out.println("\t added: " + userInput);
                 System.out.println("\t____________________________________________________________");
                 itemNo++;
             }
