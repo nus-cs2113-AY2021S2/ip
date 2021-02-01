@@ -15,11 +15,28 @@ public class Duke {
         String line;
         Scanner in = new Scanner(System.in);
         line = in.nextLine();
+        int index = 0;
+        String[] anArray = new String[100];
         while (!line.equals("bye")) {
-            System.out.println("____________________________________________________________\n");
-            System.out.println(line);
-            System.out.println("____________________________________________________________\n");
-            line = in.nextLine();
+            while(!line.equals("list")) {
+                if (!line.equals("")) {
+                    System.out.println("____________________________________________________________\n");
+                    System.out.println("added: " + line);
+                    anArray[index] = line;
+                    index++;
+                    System.out.println("____________________________________________________________\n");
+                }
+                line = in.nextLine();
+            }
+            while(line.equals("list")){
+                System.out.println("____________________________________________________________\n");
+                for (int i = 0; i < index; i++){
+                    System.out.println(i+1 + ": " + anArray[i] + "\n");
+                }
+                System.out.println("____________________________________________________________\n");
+                line = "";
+
+            }
 
         }
         System.out.println("____________________________________________________________\n");
