@@ -6,7 +6,7 @@ public class Duke {
     private static Task[] tasks = new Task[MAX_TASKS];
 
     public static void main(String[] args) {
-        Menu.greet();
+        Menu.printGreeting();
         while (true) {
             String userInput = getUserInput();
             executeUserCommand(userInput);
@@ -17,22 +17,23 @@ public class Duke {
         String[] commandAndArgs = getCommandAndArgs(userInput);
         String commandType = commandAndArgs[0];
         String commandArgs = commandAndArgs[1];
+
         switch (commandType) {
         case "list":
-            handleList();
+            executeList();
             break;
         case "done":
-            handleDone(commandArgs);
+            executeDone(commandArgs);
             break;
         case "bye":
-            handleExit();
+            executeExit();
             break;
         case "todo":
         case "deadline":
         case "event":
         default:
             // handle other user inputs as tasks for now
-            handleAdd(commandType, commandArgs);
+            executeAdd(commandType, commandArgs);
             break;
         }
     }
@@ -48,7 +49,7 @@ public class Duke {
         return split.length == 2 ? split : new String[] { split[0], "" };
     }
 
-    private static void handleList() {
+    private static void executeList() {
         String outputText;
         outputText = "Here are the tasks in your list:";
         for (int i = 0; i < Task.getNumberOfTasks(); i++) {
@@ -58,10 +59,10 @@ public class Duke {
                     taskNumber + " " +
                     tasks[i].toString();
         }
-        Menu.echo(outputText);
+        Menu.printText(outputText);
     }
 
-    private static void handleDone(String taskNumberString) {
+    private static void executeDone(String taskNumberString) {
         int taskNumber = Integer.parseInt(taskNumberString);
         String outputText;
         if (taskNumber < 1 || taskNumber > Task.getNumberOfTasks()) {
@@ -78,10 +79,10 @@ public class Duke {
                 outputText = "Task already marked as done!";
             }
         }
-        Menu.echo(outputText);
+        Menu.printText(outputText);
     }
 
-    private static void handleAdd(String commandType, String commandArgs) {
+    private static void executeAdd(String commandType, String commandArgs) {
         String outputText = "Got it. I've added this task:" + System.lineSeparator();
         Task t;
         switch (commandType) {
@@ -105,11 +106,11 @@ public class Duke {
         tasks[Task.getNumberOfTasks() - 1] = t;
         outputText += "\t" + t + System.lineSeparator();
         outputText += "Now you have " + Task.getNumberOfTasks() + " tasks in the list.";
-        Menu.echo(outputText);
+        Menu.printText(outputText);
     }
 
-    private static void handleExit() {
-        Menu.bye();
+    private static void executeExit() {
+        Menu.printBye();
         System.exit(0);
     }
 }
