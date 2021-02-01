@@ -1,17 +1,23 @@
 import java.util.Scanner;
 
 public class Duke {
+    static int taskCount = 0;
+    static Task[] taskList = new Task[100];
     static final String COMMANDS = "Commands:\n    todo taskName\n    deadline deadlineName /by time\n" 
             + "    event eventName /at time\n    list\n    done taskNumber\n    help\n    bye\n";
 
     public static void main(String[] args) {
         displayWelcomeMessage();
-        int taskCount = 0;
-        Task[] taskList = new Task[100];
-        inputAndExecuteCommand(taskCount, taskList);
+        inputAndExecuteCommand();
+        displayExitMessage();
     }
 
-    private static void inputAndExecuteCommand(int taskCount, Task[] taskList) {
+    private static void displayExitMessage() {
+        String exitMessage = "Sad to see you go! ): See you soon!";
+        printWithBorder(exitMessage);
+    }
+
+    private static void inputAndExecuteCommand() {
         String line;
         Scanner scanner = new Scanner(System.in);
         
@@ -24,59 +30,68 @@ public class Duke {
                 commandArg = commandTypeAndArg[1];
             }
 
-            switch (commandType) {
-            case "bye":
-                String exitMessage = "Sad to see you go! ): See you soon!";
-                printWithBorder(exitMessage);
+            if (commandType.equals("bye")) {
                 scanner.close();
-                System.exit(0);
-            case "help":
-                printWithBorder(COMMANDS);
-                break;
-            case "list":
-                listAllTasks(taskList);
-                break;
-            case "done":
-                markTaskAsDone(taskList, commandArg);
-                break;
-            case "todo":
-                taskCount = addTodo(taskCount, taskList, commandArg);
-                break;
-            case "deadline":
-                taskCount = addDeadline(taskCount, taskList, commandArg);
-                break;
-            case "event":
-                taskCount = addEvent(taskCount, taskList, commandArg);
-                break;
-            default:
-                displayInvalidCommandResponse();
-                break;
+                return;
             }
+            executeCommand(commandType, commandArg);
+        }
+    }
+    
+    private static void executeCommand(String commandType, String commandArg) {
+        switch (commandType) {
+        case "help":
+            printWithBorder(COMMANDS);
+            break;
+        case "list":
+            listAllTasks();
+            break;
+        case "done":
+            markTaskAsDone(commandArg);
+            break;
+        case "todo":
+            addTodo(commandArg);
+            break;
+        case "deadline":
+            addDeadline(commandArg);
+            break;
+        case "event":
+            addEvent(commandArg);
+            break;
+        default:
+            displayInvalidCommandResponse();
+            break;
         }
     }
 
-    private static int addEvent(int taskCount, Task[] taskList, String commandArg) {
+    private static void addTodo(String commandArg) {
+        Todo task = new Todo(commandArg);
+        addTaskToListAndPrintMessage(task);
+    }
+
+    private static void addEvent(String commandArg) {
         String[] taskDescriptionAndAt = commandArg.split(" /at ", 2);
         String description = taskDescriptionAndAt[0];
         String at = taskDescriptionAndAt[1];
         Event task = new Event(description, at);
-        taskList[taskCount] = task;
-        taskCount += 1;
-        printWithBorder("Alrighty! I have added this new Event:\n    " + task.toString() + "\nYou now have "
-        + Integer.toString(taskCount) + " tasks in the list.");
-        return taskCount;
+        addTaskToListAndPrintMessage(task);
     }
 
-    private static int addDeadline(int taskCount, Task[] taskList, String commandArg) {
+    private static void addDeadline(String commandArg) {
         String[] taskDescriptionAndBy = commandArg.split(" /by ", 2);
         String description = taskDescriptionAndBy[0];
         String by = taskDescriptionAndBy[1];
         Deadline task = new Deadline(description, by);
+        addTaskToListAndPrintMessage(task);
+    }
+
+    private static void addTaskToListAndPrintMessage(Task task) {
         taskList[taskCount] = task;
         taskCount += 1;
-        printWithBorder("Alrighty! I have added this new Deadline:\n    " + task.toString() + "\nYou now have "
-        + Integer.toString(taskCount) + " tasks in the list.");
-        return taskCount;
+        String className = task.getClass().getSimpleName();
+        String taskSuccessfullyAddedMessage = "Alrighty! I have added this new " + className + ":\n    "
+                + task.toString() + "\nYou now have " + Integer.toString(taskCount) + " tasks in the list.";
+        printWithBorder(taskSuccessfullyAddedMessage);
     }
 
     private static void displayInvalidCommandResponse() {
@@ -84,34 +99,26 @@ public class Duke {
         printWithBorder(invalidCommandResponse);
     }
 
-    private static int addTodo(int taskCount, Task[] taskList, String commandArg) {
-        Todo task = new Todo(commandArg);
-        taskList[taskCount] = task;
-        taskCount += 1;
-        printWithBorder("Alrighty! I have added this new Todo:\n    " + task.toString() + "\nYou now have "
-        + Integer.toString(taskCount) + " tasks in the list.");
-        return taskCount;
-    }
-
-    private static void markTaskAsDone(Task[] taskList, String commandArg) {
+    private static void markTaskAsDone(String commandArg) {
         int taskNumber = Integer.parseInt(commandArg);
         Task task = taskList[taskNumber - 1];
         task.setIsDone();
-        printWithBorder("Very nice! I've marked this task as done:\n" + "[" + task.getStatusIcon() + "] "
-                + task.getDescription());
+        String taskSuccessfullyMarkedDoneMessage = "Very nice! I've marked this task as done:\n    " 
+                + task.toString();
+        printWithBorder(taskSuccessfullyMarkedDoneMessage);
     }
 
-    private static void listAllTasks(Task[] taskList) {
+    private static void listAllTasks() {
         int count = 1;
-        String stringToPrint = "Here are the tasks in your list:";
+        String listOfTasksString = "Here are the tasks in your list:";
         for (Task task : taskList) {
             if (task == null) {
                 break;
             }
-            stringToPrint += ("\n    " + Integer.toString(count) + ". " + task.toString());
+            listOfTasksString += ("\n    " + Integer.toString(count) + ". " + task.toString());
             count += 1;
         }
-        printWithBorder(stringToPrint);
+        printWithBorder(listOfTasksString);
     }
 
     private static void displayWelcomeMessage() {

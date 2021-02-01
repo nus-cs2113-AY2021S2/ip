@@ -48,7 +48,7 @@ Here are the tasks in your list:
 ___________________________________________________
 ___________________________________________________
 Very nice! I've marked this task as done:
-[X] individual project
+    [DL][X] individual project (by: before tutorial)
 ___________________________________________________
 ___________________________________________________
 Here are the tasks in your list:
