@@ -5,7 +5,7 @@ public class Duke {
 
         System.out.printf("Hello! I'm Duke\n" +
                 "What can I do for you?\n\n");
-
+t
         System.out.printf("--------User Menu--------\n" +
                 "list: list current tasks and completion status\n" +
                 "done: Mark a task as completed\n" +
@@ -19,7 +19,6 @@ public class Duke {
         String input = sc.nextLine();
 
         while(!input.equals("bye")){
-
             if(input.equals("list")){
                 for(int i=0; i<currentTaskLength; i++){
                     System.out.println(i+1 + ".["
