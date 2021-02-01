@@ -7,7 +7,8 @@ public class TaskManager {
 
     public String listTask() {
         StringBuilder feedback = new StringBuilder();
-
+        
+        feedback.append("Here are the tasks in your list:" + System.lineSeparator());
         for (int i=0; i<taskCount-1; ++i) {
             feedback.append(String.format("%d: %s", (i + 1), tasks[i])).append(System.lineSeparator());
         }

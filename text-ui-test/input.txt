@@ -1,0 +1,12 @@
+todo borrow book
+someRandomCommand
+some random command
+list
+ToDo read book
+deadline return book /by June 6th
+deadline assignment
+event project meeting /at Aug 6th 2-4pm
+list
+done 1
+list
+bye

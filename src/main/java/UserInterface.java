@@ -30,7 +30,12 @@ public class UserInterface {
     }
 
     public String[] parseInput(String input) {
-        return input.split(" ", 2);
+        String[] split = input.split(" ", 2);
+        if (split.length == 2) {
+            return split;
+        } else {
+            return new String[]{split[0], ""};
+        }
     }
 
     private void printDivider(){
