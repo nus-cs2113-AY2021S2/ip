@@ -1,0 +1,8 @@
+list
+todo complete this project
+deadline CS2113T ip submission /by before the tutorial
+list
+done 1
+event CS2101 lecture /at Tuesdays 10 am
+list
+bye

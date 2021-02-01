@@ -5,6 +5,11 @@ public class Duke {
 
     private static String LINE_DIVIDER = "\t____________________________________________________________";
 
+    private static String getNumTasksString(int numberOfTasks) {
+        if (numberOfTasks == 1) return "\tNow you have " + numberOfTasks + " task in the list.";
+        return "\tNow you have " + numberOfTasks + " tasks in the list.";
+    }
+
     public static void main(String[] args) {
         System.out.println(LINE_DIVIDER);
         System.out.println("\t Hello! I'm Duke");
@@ -69,6 +74,7 @@ public class Duke {
                 tasks.add(todoTask);
                 System.out.println("\t added: " + todoTask);
                 numberOfTasks = numberOfTasks + 1;
+                System.out.println(getNumTasksString(numberOfTasks));
                 break;
             case "deadline":
                 if (commandTokens.length < 2) {
@@ -85,7 +91,7 @@ public class Duke {
                 tasks.add(deadlineTask);
                 System.out.println("\t added: " + deadlineTask);
                 numberOfTasks = numberOfTasks + 1;
-                System.out.println("\tNow you have " + numberOfTasks + " in the list.");
+                System.out.println(getNumTasksString(numberOfTasks));
                 break;
             case "event":
                 if (commandTokens.length < 2) {
@@ -102,7 +108,7 @@ public class Duke {
                 tasks.add(eventTask);
                 System.out.println("\t added: " + eventTask);
                 numberOfTasks = numberOfTasks + 1;
-                System.out.println("\tNow you have " + numberOfTasks + " tasks in the list.");
+                System.out.println(getNumTasksString(numberOfTasks));
                 break;
             case "help":
                 System.out.println("\t List of valid commands:");
