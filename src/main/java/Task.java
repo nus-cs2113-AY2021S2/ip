@@ -9,6 +9,22 @@ public class Task {
         numberOfTasks++;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public boolean isDone() {
+        return isDone;
+    }
+
+    public void setDone(boolean done) {
+        isDone = done;
+    }
+
     public String getStatusIcon() {
         return (isDone ? "\u2718" : " ");
     }
@@ -17,10 +33,7 @@ public class Task {
         return numberOfTasks;
     }
 
-    public void setDone(boolean done) {
-        isDone = done;
-    }
-
+    @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
     }

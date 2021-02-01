@@ -27,8 +27,13 @@ public class Duke {
         case "bye":
             handleExit();
             break;
+        case "todo":
+        case "deadline":
+        case "event":
         default:
-            handleAdd(userInput);
+            // handle other user inputs as tasks for now
+            handleAdd(commandType, commandArgs);
+            break;
         }
     }
 
@@ -76,11 +81,30 @@ public class Duke {
         Menu.echo(outputText);
     }
 
-    private static void handleAdd(String taskDescription) {
-        String outputText = " added: ";
-        Task t = new Task(taskDescription);
+    private static void handleAdd(String commandType, String commandArgs) {
+        String outputText = "Got it. I've added this task:" + System.lineSeparator();
+        Task t;
+        switch (commandType) {
+        case "todo":
+            String todoArgs = commandArgs;
+            t = new Todo(todoArgs);
+            break;
+        case "deadline":
+            String[] deadlineArgs = commandArgs.split("\\s+/by\\s+",2);
+            t = new Deadline(deadlineArgs[0], deadlineArgs[1]);
+            break;
+        case "event":
+            String[] eventArgs = commandArgs.split("\\s+/at\\s+", 2);
+            t = new Event(eventArgs[0], eventArgs[1]);
+            break;
+        default:
+            String taskArgs = commandArgs;
+            t = new Task(taskArgs);
+            break;
+        }
         tasks[Task.getNumberOfTasks() - 1] = t;
-        outputText += taskDescription;
+        outputText += "\t" + t + System.lineSeparator();
+        outputText += "Now you have " + Task.getNumberOfTasks() + " tasks in the list.";
         Menu.echo(outputText);
     }
 
