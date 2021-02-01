@@ -15,16 +15,34 @@ public class Duke {
 
         Scanner scan = new Scanner(System.in);
         String text = "";
-        text = scan.nextLine();
-        while (!text.equals("bye")) {
-            System.out.println("____________________________________________________________");
-            System.out.println(text);
-            System.out.println("____________________________________________________________");
+        Boolean isContinue = true;
+
+        String[] lists = new String[100];
+        int index = 0;
+
+        while (isContinue) {
             text = scan.nextLine();
+
+            if (text.equals("list")) {
+                System.out.println("____________________________________________________________");
+                for (int i=0; i<index; i++) {
+                    System.out.println((i+1) + "." + lists[i]);
+                }
+                System.out.println("____________________________________________________________");
+            } else if (text.equals("bye")) {
+                isContinue = false;
+
+                System.out.println("____________________________________________________________");
+                System.out.println("Bye. Hope to see you again soon!");
+                System.out.println("____________________________________________________________");
+            } else {
+                lists[index++] = text;
+
+                System.out.println("____________________________________________________________");
+                System.out.println("added: " + text + " to the list");
+                System.out.println("____________________________________________________________");
+            }
         }
 
-        System.out.println("____________________________________________________________");
-        System.out.println("Bye. Hope to see you again soon!");
-        System.out.println("____________________________________________________________");
     }
 }
