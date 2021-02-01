@@ -12,7 +12,7 @@ public class Task {
     }
 
     public String getStatus() {
-        return (isDone ? "[X]" : "[ ]");
+        return (isDone ? "[X] " : "[ ] ");
     }
 
     public void setDescription(String description) {
@@ -21,5 +21,10 @@ public class Task {
 
     public void markAsDone() {
         this.isDone = true;
+    }
+
+    @Override
+    public String toString() {
+        return this.getStatus() + description;
     }
 }
