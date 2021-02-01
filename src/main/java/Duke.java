@@ -115,9 +115,12 @@ public class Duke {
     }
 
     private static void displayWelcomeMessage() {
-        String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.print("Hello from\n" + logo + "\n");
+        String logo = "         __    _    _              ____        __           \n"
+                +"        / /_  (_)  (_)___ ___     / __ \\__  __/ /_____      \n"
+                +"       / __ \\/ /  / / __ `__ \\   / / / / / / / //_/ _ \\     \n"
+                +"      / / / / /  / / / / / / /  / /_/ / /_/ / ,< /  __/     \n"
+                +"     /_/ /_/_/  /_/_/ /_/ /_/  /_____/\\__,_/_/|_|\\___/     \n";
+        System.out.print(logo + "\n");
         System.out.print("What do you have to do today?\n");
         System.out.print(COMMANDS + "\n");
     }
