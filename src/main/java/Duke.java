@@ -13,36 +13,60 @@ public class Duke {
         System.out.println("What can I do for you?");
         System.out.println("____________________________________________________________");
 
-        Scanner scan = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         String text = "";
         Boolean isContinue = true;
 
         String[] lists = new String[100];
-        int index = 0;
+        Boolean[] isDones = new Boolean[100];
+        Integer index = 0;
 
         while (isContinue) {
-            text = scan.nextLine();
+            text = scanner.nextLine();
+            String[] words = text.split(" ");
+            System.out.println(java.util.Arrays.toString(words));
+            String firstWord = words[0];
 
-            if (text.equals("list")) {
+            if (firstWord.equals("done")) {
+                Integer number = 0;
+                number = number.valueOf(words[1]);
+
+                if (number > index) {
+                    continue;
+                }
+
+                isDones[number-1] = true;
+                System.out.println("____________________________________________________________");
+                System.out.println("I marked task " + number + " as done!");
+                System.out.println(">> [X] " + lists[number]);
+                System.out.println("____________________________________________________________");
+            } else if (firstWord.equals("list")) {
                 System.out.println("____________________________________________________________");
                 for (int i=0; i<index; i++) {
-                    System.out.println((i+1) + "." + lists[i]);
+                    String status = "[ ]";
+                    if (isDones[i]) {
+                        status = "[X]";
+                    }
+                    System.out.println((i+1) + "." + status + " " + lists[i]);
                 }
                 System.out.println("____________________________________________________________");
-            } else if (text.equals("bye")) {
+            } else if (firstWord.equals("bye")) {
                 isContinue = false;
 
                 System.out.println("____________________________________________________________");
                 System.out.println("Bye. Hope to see you again soon!");
                 System.out.println("____________________________________________________________");
             } else {
-                lists[index++] = text;
+                lists[index] = text;
+                isDones[index++] = false;
 
                 System.out.println("____________________________________________________________");
                 System.out.println("added: " + text + " to the list");
                 System.out.println("____________________________________________________________");
             }
         }
+
+        scanner.close();
 
     }
 }
