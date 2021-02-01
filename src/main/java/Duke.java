@@ -100,19 +100,19 @@ public class Duke {
 
     private static void printEmptyInputMessage() {
         System.out.println(LINE_DIVIDER);
-        System.out.println("Please enter a command!");
+        System.out.println("\t Please enter a command!");
         System.out.println(LINE_DIVIDER);
     }
 
     private static void printInsufficientArgumentsMessage() {
         System.out.println(LINE_DIVIDER);
-        System.out.println("Please give me more details about the task!");
+        System.out.println("\t Please give me more details about the task!");
         System.out.println(LINE_DIVIDER);
     }
 
     private static void printInvalidArgumentsMessage() {
         System.out.println(LINE_DIVIDER);
-        System.out.println("That's an invalid task number!");
+        System.out.println("\t That's an invalid task number!");
         System.out.println(LINE_DIVIDER);
     }
 
@@ -123,8 +123,8 @@ public class Duke {
         while (!isDoneReadingInputs) {
             String userCommand = userInput.nextLine();
             String[] commandTokens = tokenizeInput(userCommand);
+            /* Handle empty inputs */
             if (commandTokens.length == 0) {
-                /* Handle empty inputs */
                 printEmptyInputMessage();
                 continue;
             }
@@ -183,8 +183,8 @@ public class Duke {
 
     private static String[] tokenizeInput(String userCommand) {
         String[] commandTokens = userCommand.split(" ", 2);
+        /* Handle empty inputs */
         if (commandTokens.length == 0) {
-            /* Handle empty inputs */
             return commandTokens;
         }
         /* Make commands case-insensitive */
