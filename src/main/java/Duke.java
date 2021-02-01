@@ -150,11 +150,16 @@ public class Duke {
         int totalNumberOfTasksRemaining = todoList.getNumberTasksLeft()
                 + deadLineList.getNumberTasksLeft() + eventLists.getNumberTasksLeft();
 
-        if(totalNumberOfTasksRemaining>0) {
+
+        if(totalNumberOfTasksRemaining==0){
+            dukeList.printCompletedTasksInAllLists();
+        }
+        else if(totalNumberOfTasksRemaining>0) {
             if (totalNumberOfTasksRemaining == todoList.getTasksCounter()
                     + deadLineList.getTasksCounter() + eventLists.getTasksCounter()) {
                 dukeList.printNoTasksDoneInAllList();
-            } else {
+            }
+            else {
                 dukeList.printSomeTasksRemaining(totalNumberOfTasksRemaining);
 
             }

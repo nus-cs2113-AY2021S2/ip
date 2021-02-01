@@ -62,6 +62,9 @@ public class List {
     public void printCompletedTasks() {
         System.out.println("Good job Crewmate! You completed all your tasks! (─‿─)");
     }
+    public void printCompletedTasksInAllLists(){
+        System.out.println("Good job Crewmate! You completed all your tasks in all your lists! (─‿─)");
+    }
 
     public void printCheckOtherList(){
         System.out.println("Don't forget to check the other lists as well!!!!");
