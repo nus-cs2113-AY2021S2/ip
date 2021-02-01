@@ -29,6 +29,11 @@ public class Duke {
                 runList(taskList);
             }
 
+            //HELP COMMAND
+            else if(input.equalsIgnoreCase("help")){
+                printHelp();
+            }
+
             // DONE command
             else if(startsWith(input, "done")){
                 runDone(taskList, input);
@@ -36,8 +41,14 @@ public class Duke {
 
             // TO-DO COMMAND
             else if(startsWith(input, "todo")){
-                runTodo(taskList, input);
+                runTodo(taskList, parseJob(input));
             }
+
+            // DEADLINE COMMAND
+            else if(startsWith(input, "deadline")){
+                runDeadline(taskList, parseJob(input), parseDeadline(input));
+            }
+
             // ADD command
             else {
                 runAdd(taskList, input);
@@ -97,13 +108,64 @@ public class Duke {
     }
 
     private static void runTodo(Task[] taskList, String input) {
-        // stores user command as job
+
+        if(input == null){
+            printInvalidInputWarning();
+            return;
+        }
+
         Todo newTask = new Todo(input);
 
         taskList[Task.taskCount] = newTask;
         Task.taskCount++;
 
         printTaskAdded(newTask);
+    }
+
+    private static void runDeadline(Task[] taskList, String input, String by){
+
+        if(input == null || by == null){
+            printInvalidInputWarning();
+            return;
+        }
+
+        Deadline newTask = new Deadline(input, by);
+        taskList[Task.taskCount] = newTask;
+        Task.taskCount++;
+
+        printTaskAdded(newTask);
+
+    }
+
+    private static String parseJob(String input) {
+
+        String[] words = input.split(" ");
+
+        if(words.length < 2){
+            return null;
+        }
+
+        String job = words[1];
+
+        for(int i=2; i<words.length; i++){
+            if(words[i].equalsIgnoreCase("/by")){
+                break;
+            }
+            job += " " + words[i];
+        }
+
+        return job;
+    }
+
+    private static String parseDeadline(String input) {
+
+        String[] words = input.split("/by");
+
+        if(words.length == 1){
+            return null;
+        }
+
+        return words[1].trim();
     }
 
     private static boolean startsWith(String input, String command){
@@ -133,8 +195,7 @@ public class Duke {
     }
 
     private static void printInvalidInputWarning() {
-        System.out.println("Wrong format! Enter in the format: \"done [number]\"");
-        System.out.println("Make sure number is a valid integer! \n");
+        System.out.println("Wrong format! Enter \"help\" for a list of available commands and format");
     }
 
     private static void printNoTaskWarning() {
@@ -145,6 +206,33 @@ public class Duke {
         String smaller = "Enter a valid job number. Use the list command to view your current tasks.\n";
         String larger = "You don't have that many jobs! Use the list command to view your current tasks.\n";
         System.out.println(jobNumber < 0 ? smaller : larger);
+    }
+
+    private static void printHelp(){
+        String commandList = "LIST - \n" +
+                "FORMAT: list";
+
+        String commandDone = "DONE - \n" +
+                "FORMAT: done [(int) number]";
+
+        String commandTodo = "TODO - \n" +
+                "FORMAT: todo [(str) job]";
+
+        String commandDeadline = "DEADLINE - \n" +
+                "FORMAT: deadline [(str) job] /by [(str) deadline]";
+        String commandAdd = "ADD - \n" +
+                "FORMAT: [(str) job]";
+
+
+        System.out.println("COMMAND LIST:");
+        System.out.println("-------------");
+        System.out.println(commandAdd + '\n');
+        System.out.println(commandTodo + '\n');
+        System.out.println(commandDeadline + '\n');
+        System.out.println(commandList + '\n');
+        System.out.println(commandDone + '\n');
+        System.out.println("To exit, enter \"bye\"");
+
     }
 
     private static void printHello() {

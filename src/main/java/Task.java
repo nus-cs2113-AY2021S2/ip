@@ -1,6 +1,6 @@
 public class Task {
-    private String job;
-    private boolean isDone;
+    protected String job;
+    protected boolean isDone;
 
     public static int taskCount = 0;
 
