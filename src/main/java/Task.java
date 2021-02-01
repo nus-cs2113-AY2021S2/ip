@@ -8,7 +8,7 @@ public class Task {
     }
 
     public String getTaskStatus() {
-        return (isDone ? "\u2718" : " ");    // return X (done) or space (not done)
+        return (isDone ? "X" : " ");    // return X (done) or space (not done)
     }
 
     public void setTaskStatus(boolean isDone) {
