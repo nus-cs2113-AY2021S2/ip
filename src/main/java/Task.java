@@ -1,4 +1,5 @@
 public class Task {
+
     protected String description;
     protected boolean isDone;
 
@@ -8,10 +9,14 @@ public class Task {
     }
     // Returns status icon
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? "\u2713" : " "); //return tick or X symbols
     }
     // Marks task as done
     public void markAsDone() {
         this.isDone = true;
+    }
+    // Prints task
+    public void printTask() {
+        System.out.println("[ ][" + getStatusIcon() + "] " + description);
     }
 }
