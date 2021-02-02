@@ -3,35 +3,37 @@ import java.util.Scanner;
 
 public class Duke {
     static final String lineDivider = "\t__________________________________________________________________________\n";
+
     static final String dukeKeywords = "\t\t Use 'todo', 'deadline' , 'event' to enter tasks!\n";
     public static final String LOGO = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
+                                    + "|  _ \\ _   _| | _____ \n"
+                                    + "| | | | | | | |/ / _ \\\n"
+                                    + "| |_| | |_| |   <  __/\n"
+                                    + "|____/ \\__,_|_|\\_\\___|\n";
 
-    static final String dukeGreeting = LOGO + lineDivider + "\t Hello! I'm Duke - your personal task manager \n\t"
-            + dukeKeywords + lineDivider;
-    static final String dukeFarewell =  lineDivider + "\t Bye. Hope to see you again soon!\n" + lineDivider;
+    static final String dukeGreeting =
+            String.format("%s%s\t Hello! I'm Duke - your personal task manager \n\t%s%s",
+                    LOGO,
+                    lineDivider,
+                    dukeKeywords,
+                    lineDivider);
+    static final String dukeFarewell = String.format("%s\t Bye. Hope to see you again soon!\n%s",
+            lineDivider,
+            lineDivider);
 
     static Scanner sc = new Scanner(System.in);
 
     public static void echos(){
-
         String userInput = sc.nextLine();
-
         while (!userInput.toLowerCase().equals("bye")){
             String echos = String.format("%s\t %s\n%s",lineDivider,userInput.toLowerCase(),lineDivider);
             System.out.println(echos);
             userInput = sc.nextLine();
         }
-
-
     }
 
 
     public static void taskApp(){
-
         ArrayList<Task> taskList = new ArrayList<>();
         while (true){
             System.out.print("Enter command: ");
@@ -151,7 +153,6 @@ public class Duke {
 
     public static void main(String[] args) {
 
-
         // Greetings
         System.out.println(dukeGreeting);
 
@@ -161,7 +162,5 @@ public class Duke {
         // Farewell procedure
         System.out.println(dukeFarewell);
     }
-
-
 
 }

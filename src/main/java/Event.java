@@ -6,7 +6,7 @@ public class Event extends Task {
         super(task);
         this.eventDateBy = eventDateBy;
     }
-
+    
     @Override
     public String getStatusIcon() {
         return (isDone ? "[E][\u2713]" : "[E][\u2718]"); //return tick or X symbols
