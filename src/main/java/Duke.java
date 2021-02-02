@@ -4,59 +4,102 @@ public class Duke {
     private static Scanner in = new Scanner(System.in);
     private static int taskNumber = 0;
     private static Task[] t = new Task[100];
+    private static String line = "*********************************************";
 
-    public static void addToList(String word){
-        Task task = new Task(word);
-        t[taskNumber] = task;
-        taskNumber++;
+    private static void helloMessage() {
+        System.out.println(line);
+        System.out.println("Hello! I'm Julia");
+        System.out.println("What can I do for you?");
+        System.out.println();
+        System.out.println(line);
+        String input ="";
     }
+    private static void byeMessage() {
+        System.out.println("Bye. Hope to see you again soon!");
+        System.out.println();
+        System.out.println(line);
+        System.exit(0);
+    }
+
     public static void printList(Task[]t){
         int count=1;
         System.out.println("Here are the tasks in your list: ");
-        Task[] newTasks= Arrays.copyOf(t,taskNumber);
-        for(Task newTask: newTasks) {
-            System.out.println(count+"."+"["+newTask.getStatusIcon()+"]"+newTask.getDescription());
+        for(int i=0; i<taskNumber;i++) {
+            System.out.println(count+"."+t[i].toString());
             count++;
         }
+        System.out.println(line);
     }
 
     public static void completedTask(int number){
         System.out.println("Nice! I've marked this task as done:");
         t[number-1].markAsDone();
-        System.out.println("["+t[number-1].getStatusIcon()+"]"+t[number-1].getDescription());
-        System.out.println("*********************************************");
+        System.out.println(t[number-1].toString());
+        System.out.println(line);
+    }
+    public static void addTodo(String newTask){
+        System.out.println("Got it. I've added this task: ");
+        Todo todo = new Todo(newTask);
+        t[taskNumber] = todo;
+        taskNumber++;
+        System.out.println(todo.toString());
+        System.out.println("Now you have "+ taskNumber+ " tasks in the list.");
+        System.out.println(line);
+    }
+    public static void addDeadline(String deadline){
+        String[] split = deadline.split(" /by");
+        System.out.println("Got it. I've added this task: ");
+        Deadline day = new Deadline(split[0],split[1]);
+        t[taskNumber]=day;
+        taskNumber++;
+        System.out.println(day.toString());
+        System.out.println("Now you have "+ taskNumber+ " tasks in the list.");
+        System.out.println(line);
+
     }
 
+    public static void addEvent(String event){
+        String[] split = event.split(" /at");
+        System.out.println("Got it. I've added this task: ");
+        Event time = new Event(split[0],split[1]);
+        t[taskNumber]=time;
+        taskNumber++;
+        System.out.println(time.toString());
+        System.out.println("Now you have "+ taskNumber+ " tasks in the list.");
+        System.out.println(line);
+    }
 
     public static void main(String[] args) {
-        System.out.println("*********************************************");
-        System.out.println("Hello! I'm Julia");
-        System.out.println("What can I do for you?");
-        System.out.println();
-        System.out.println("*********************************************");
-        String input ="";
+        helloMessage();
+        String input;
         while(true){
             input = in.nextLine();
-            System.out.println("*********************************************");
+            System.out.println(line);
             if(input.equals("bye")){
-                System.out.println("Bye. Hope to see you again soon!");
-                System.out.println();
-                System.out.println("*********************************************");
-                System.exit(0);
+                byeMessage();
             } else if(input.equals("list")) {
                 printList(t);
-                System.out.println("*********************************************");
             } else if(input.startsWith("done")) {
                 int num = Integer.parseInt(input.substring(5));
                 completedTask(num);
+            } else if(input.startsWith("todo")){
+                input = input.substring(5);
+                addTodo(input);
+            } else if(input.startsWith("deadline")){
+                input = input.substring(8);
+                addDeadline(input);
+            } else if(input.startsWith("event")){
+                input = input.substring(5);
+                addEvent(input);
             } else{
-                addToList(input);
-                System.out.println("added: "+ input);
-                System.out.println();
-                System.out.println("*********************************************");
+                System.out.println("Only todo, done, deadline, event and list commands are accepted");
+                System.out.println(line);
             }
 
         }
 
     }
+
+
+
 }
