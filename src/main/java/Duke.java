@@ -41,12 +41,17 @@ public class Duke {
 
             // TO-DO COMMAND
             else if(startsWith(input, "todo")){
-                runTodo(taskList, parseJob(input));
+                runTodo(taskList, parseJob(input, ""));
             }
 
             // DEADLINE COMMAND
             else if(startsWith(input, "deadline")){
-                runDeadline(taskList, parseJob(input), parseDeadline(input));
+                runDeadline(taskList, parseJob(input, "/by"), parseDate(input, "/by"));
+            }
+
+            // EVENTS COMMAND
+            else if(startsWith(input, "event")){
+                runEvent(taskList, parseJob(input, "/at"), parseDate(input, "/at"));
             }
 
             // ADD command
@@ -57,6 +62,10 @@ public class Duke {
 
 
     }
+
+    /**
+     * COMMAND RUNNER METHODS
+     * */
 
     private static void runAdd(Task[] taskList, String input) {
         // stores user command as job
@@ -137,7 +146,27 @@ public class Duke {
 
     }
 
-    private static String parseJob(String input) {
+    private static void runEvent(Task[] taskList, String input, String by){
+
+        if(input == null || by == null){
+            printInvalidInputWarning();
+            return;
+        }
+
+        Event newTask = new Event(input, by);
+        taskList[Task.taskCount] = newTask;
+        Task.taskCount++;
+
+        printTaskAdded(newTask);
+
+    }
+
+    /**
+     * IDK TO CLASSIFY
+     * TODO
+     * */
+
+    private static String parseJob(String input, String type) {
 
         String[] words = input.split(" ");
 
@@ -145,27 +174,31 @@ public class Duke {
             return null;
         }
 
-        String job = words[1];
-
-        for(int i=2; i<words.length; i++){
-            if(words[i].equalsIgnoreCase("/by")){
-                break;
-            }
-            job += " " + words[i];
-        }
-
-        return job;
+        return getJobString(words, type);
     }
 
-    private static String parseDeadline(String input) {
+    private static String parseDate(String input, String type) {
 
-        String[] words = input.split("/by");
+        String[] words = input.split(type);
 
         if(words.length == 1){
             return null;
         }
 
         return words[1].trim();
+    }
+
+    private static String getJobString(String[] words, String type) {
+
+        String job = words[1];
+
+        for(int i = 2; i< words.length; i++){
+            if(words[i].equalsIgnoreCase(type)){
+                break;
+            }
+            job += " " + words[i];
+        }
+        return job;
     }
 
     private static boolean startsWith(String input, String command){
@@ -179,14 +212,20 @@ public class Duke {
         System.out.println();
     }
 
+
+
+    /**
+     * PRINTING METHODS
+     * */
+
     private static void printTaskAdded(Task task) {
         System.out.println("Added to list: ");
         task.printTask();
-        printNumTasks();
+        printNumTasksLeft();
         System.out.println();
     }
 
-    private static void printNumTasks(){
+    private static void printNumTasksLeft(){
         String output = Integer.toString(Task.taskCount);
         output += (Task.taskCount == 1)? " task" : " tasks";
         output += " in the list";
@@ -195,17 +234,19 @@ public class Duke {
     }
 
     private static void printInvalidInputWarning() {
-        System.out.println("Wrong format! Enter \"help\" for a list of available commands and format");
+        System.out.println("Wrong format! Enter \"help\" for a list of available commands and format\n");
     }
 
     private static void printNoTaskWarning() {
-        System.out.println("You don't have any tasks yet! Enter a task \n");
+        System.out.println("You don't have any tasks yet! Enter a task");
+        System.out.println("Enter \"help\" for a list of available commands and format\n");
     }
 
     private static void printInvalidTaskWarning(int jobNumber) {
-        String smaller = "Enter a valid job number. Use the list command to view your current tasks.\n";
-        String larger = "You don't have that many jobs! Use the list command to view your current tasks.\n";
+        String smaller = "Enter a valid job number. Use the list command to view your current tasks.";
+        String larger = "You don't have that many jobs! Use the list command to view your current tasks.";
         System.out.println(jobNumber < 0 ? smaller : larger);
+        System.out.println("Enter \"help\" for a list of available commands and format\n");
     }
 
     private static void printHelp(){
@@ -231,7 +272,7 @@ public class Duke {
         System.out.println(commandDeadline + '\n');
         System.out.println(commandList + '\n');
         System.out.println(commandDone + '\n');
-        System.out.println("To exit, enter \"bye\"");
+        System.out.println("To exit, enter \"bye\"\n");
 
     }
 

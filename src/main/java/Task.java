@@ -38,6 +38,7 @@ public class Task {
         output += this.job;
 
         output = addLabel(output);
+        output = addEnd(output);
 
         System.out.println(output);
     }
@@ -46,5 +47,11 @@ public class Task {
         String label = "[*]";
         label += s;
         return label;
+    }
+
+    public String addEnd(String s){
+        String end = " ";
+        return s.concat(end);
+
     }
 }

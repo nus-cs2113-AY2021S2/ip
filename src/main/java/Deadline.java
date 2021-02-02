@@ -2,11 +2,6 @@ public class Deadline extends Task{
 
     protected String by;
 
-    public Deadline() {
-        super();
-        this.by = null;
-    }
-
     public Deadline(String inputJob, String by) {
         super(inputJob);
         this.by = by;
@@ -20,26 +15,17 @@ public class Deadline extends Task{
         this.by = by;
     }
 
-    @Override
-    public void printTask() {
-        String doneBox = "[X] ";
-        String emptyBox = "[ ] ";
-
-        String output = this.isDone ? doneBox : emptyBox;
-        output += this.job;
-
-        output = addLabel(output);
-
-        output += " (" + "by:" + this.by + ")";
-
-        System.out.println(output);
-
-    }
 
     @Override
     public String addLabel(String s) {
         String label = "[D]";
         label += s;
         return label;
+    }
+
+    @Override
+    public String addEnd(String s){
+        String end = " (" + "by:" + this.by + ")";
+        return s.concat(end);
     }
 }
