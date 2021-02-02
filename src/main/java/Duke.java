@@ -1,46 +1,41 @@
 import java.util.Scanner;
 public class Duke {
 
-
     public static void main(String[] args) {
 
-        Scanner sc = new Scanner(System.in);
-
-        String[] textList = new String[101];
-        String[] doneList = new String[101];
-        int listNumber = 1;
         String doneString = null;
+        Task[] tasks = new Task[101];
 
         Greetings.welcome();
 
+        Scanner sc = new Scanner(System.in);
         String inputCommand = sc.nextLine();
 
         while (!inputCommand.equals("bye")) {
             if (inputCommand.equals("list")) {
-                System.out.println("Here are the tasks in your list:");
-                for (int i = 1; i < listNumber; i++) {
-                    System.out.println(i + "." + "[" + doneList[i] + "] " + textList[i]);
+                if (Task.getListCount() > 1) {
+                    System.out.println("Here are the tasks in your list:");
+                    System.out.println("_______________________________________");
+                    for (int i = 1; i < Task.getListCount(); i++) {
+                        System.out.println(i + "." + tasks[i].getStatusIcon() + " " + tasks[i].description);
+                        }
+                } else {
+                    System.out.println("\uD83D\uDE14\n Please add a task to the list");
                 }
             } else if (inputCommand.equals("blah")) {
-                System.out.println(inputCommand);
-            } else if (inputCommand.equals("bye")) {
-                break;
+                System.out.println("blah");
+
             } else {
                 String trimmed_inputCommand = inputCommand.trim();
                 if (trimmed_inputCommand.length() > 4) {
                     doneString = trimmed_inputCommand.substring(0, 4);
                 }
                 if ("done".equals(doneString) && (trimmed_inputCommand.length() > 4)) {
-                    System.out.println("Nice! I've marked this task as done:");
-                    System.out.println("[X] " + inputCommand);
                     int doneIndex = Integer.parseInt(inputCommand.substring(5));
-                    doneList[doneIndex] = "X";
+                    tasks[doneIndex].updateDoneStatus();
 
                 } else {
-                    textList[listNumber] = inputCommand;
-                    doneList[listNumber] = " ";
-                    System.out.println("added: " + textList[listNumber]);
-                    listNumber++;
+                    tasks[Task.getListCount()] = new Task(inputCommand);
                 }
             }
             inputCommand = sc.nextLine();
