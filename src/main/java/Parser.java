@@ -3,38 +3,41 @@ public class Parser {
         String[] inputData = input.split(" ");
         String[] taskDetails;
         switch (inputData[0]) {
-            case "done" -> {
-                int completedTask = Integer.parseInt(input.split(" ")[1]);
-                completedTask--;
-                tasks[completedTask].markAsDone();
-                System.out.println("The Force is with you! The following task has been marked as done:");
-                System.out.println(tasks[completedTask]);
-                UI.showDivider();
+        case "done": {
+            int completedTask = Integer.parseInt(input.split(" ")[1]);
+            completedTask--;
+            tasks[completedTask].markAsDone();
+            System.out.println("The Force is with you! The following task has been marked as done:");
+            System.out.println(tasks[completedTask]);
+            UI.showDivider();
+            break;
             }
-            case "deadline" -> {
-                taskDetails = findTaskDetails(inputData);
-                tasks[Task.getTaskCounter()] = new Deadline(taskDetails[0], taskDetails[1]);
-                System.out.println("Roger Roger. The following task has been added:");
-                System.out.println(tasks[Task.getTaskCounter()]);
-                UI.showDivider();
-                Task.incrementTaskCounter();
-
+        case "deadline": {
+            taskDetails = findTaskDetails(inputData);
+            tasks[Task.getTaskCounter()] = new Deadline(taskDetails[0], taskDetails[1]);
+            System.out.println("Roger Roger. The following task has been added:");
+            System.out.println(tasks[Task.getTaskCounter()]);
+            UI.showDivider();
+            Task.incrementTaskCounter();
+            break;
             }
-            case "event" -> {
-                taskDetails = findTaskDetails(inputData);
-                tasks[Task.getTaskCounter()] = new Event(taskDetails[0], taskDetails[1]);
-                System.out.println("Roger Roger. The following task has been added:");
-                System.out.println(tasks[Task.getTaskCounter()]);
-                UI.showDivider();
-                Task.incrementTaskCounter();
+        case "event": {
+            taskDetails = findTaskDetails(inputData);
+            tasks[Task.getTaskCounter()] = new Event(taskDetails[0], taskDetails[1]);
+            System.out.println("Roger Roger. The following task has been added:");
+            System.out.println(tasks[Task.getTaskCounter()]);
+            UI.showDivider();
+            Task.incrementTaskCounter();
+            break;
             }
-            case "todo" -> {
-                taskDetails = findTaskDetails(inputData);
-                tasks[Task.getTaskCounter()] = new Todo(taskDetails[0]);
-                System.out.println("Roger Roger. The following task has been added:");
-                System.out.println(tasks[Task.getTaskCounter()]);
-                UI.showDivider();
-                Task.incrementTaskCounter();
+        case "todo": {
+            taskDetails = findTaskDetails(inputData);
+            tasks[Task.getTaskCounter()] = new Todo(taskDetails[0]);
+            System.out.println("Roger Roger. The following task has been added:");
+            System.out.println(tasks[Task.getTaskCounter()]);
+            UI.showDivider();
+            Task.incrementTaskCounter();
+            break;
             }
         }
     }
