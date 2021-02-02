@@ -5,7 +5,7 @@ import java.util.Vector;
 
 public class Duke {
     public static void takeCommand(String command,List<Task> tasks){
-        String[] subStrs=command.split(" ");
+        String[] subStrs = command.split(" ");
 
         switch(subStrs[0]){
         case "list":
@@ -18,7 +18,7 @@ public class Duke {
             int taskNo = Integer.parseInt(subStrs[1]);
             Task temp = tasks.get(taskNo-1);
             temp.markAsDone();
-            tasks.set(taskNo-1,temp);
+            tasks.set(taskNo-1, temp);
             break;
         default:
             Task task = new Task(command);
