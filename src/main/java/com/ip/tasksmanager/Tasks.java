@@ -11,25 +11,21 @@ public class Tasks {
         this.isDone = false;
     }
 
-    public String getDescription() {
-        return this.description;
-    }
-
-    public String getTypeOfTask() {
-        return this.typeOfTask;
+    public void markAsDone() {
+        this.isDone = true;
     }
 
     public String getStatusIcon() {
         return (isDone ? "\u2713" : " "); //return tick or blank space
     }
 
-    public void markAsDone() {
-        this.isDone = true;
+    public String getDescription() {
+        return this.description;
     }
 
     //common output for 'todo', 'deadlines', 'events' + 'tasks' + 'done' command:
     public String convertToTaskOutputString() {
-        return "[" + this.getTypeOfTask() + "]" + "[" + this.getStatusIcon() + "] " + this.getDescription();
+        return "[" + this.getStatusIcon() + "] " + this.getDescription();
     }
 
 }

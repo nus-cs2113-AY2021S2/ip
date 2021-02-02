@@ -6,18 +6,21 @@ public class Deadlines extends Tasks {
 
     public Deadlines(String description, String date) {
         super(description);
-        this.date = date;
         this.typeOfTask = "D";
+        this.date = date;
     }
 
-    //get deadline:
+    public String getTypeOfTask() {
+        return this.typeOfTask;
+    }
+
     public String getDate() {
         return this.date;
     }
 
     @Override
     public String convertToTaskOutputString() {
-        return super.convertToTaskOutputString()  + "(" + "by: " + this.date + ")";
+        return "[" + getTypeOfTask() + "]" + super.convertToTaskOutputString()  + "(" + "by: " + this.date + ")";
     }
 
 }

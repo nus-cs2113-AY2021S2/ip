@@ -6,18 +6,21 @@ public class Events extends Tasks {
 
     public Events(String description, String date) {
         super(description);
-        this.date = date;
         this.typeOfTask = "E";
+        this.date = date;
     }
 
-    //get deadline:
+    public String getTypeOfTask() {
+        return this.typeOfTask;
+    }
+
     public String getDate() {
         return this.date;
     }
 
     @Override
     public String convertToTaskOutputString() {
-        return super.convertToTaskOutputString() + "(" + "at: " + this.date + ")";
+        return "[" + getTypeOfTask() + "]" + super.convertToTaskOutputString() + "(" + "at: " + this.date + ")";
     }
 
 }
