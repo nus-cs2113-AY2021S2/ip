@@ -19,7 +19,7 @@ public class Duke {
     }
 
     public static void toDoList() {
-        Task[] list = new Task[100];
+        Task[] tasks = new Task[100];
         int itemNo = 0;
         String userInput;
         while (true) {
@@ -27,27 +27,23 @@ public class Duke {
 
             userInput = sc.nextLine();
 
-            if (userInput.toLowerCase().equals("bye")) break;
-
-            else if (userInput.toLowerCase().equals("list")){
+            if (userInput.toLowerCase().equals("bye")) {
+                break;
+            } else if (userInput.toLowerCase().equals("tasks")){
                 System.out.println("\t____________________________________________________________");
-                System.out.println("Here are the tasks in your list:");
+                System.out.println("Here are the tasks in your tasks:");
                 for (int i = 0; i < itemNo; i++){
-                    System.out.printf("\t%d. [%s] %s\n", i+1, list[i].getStatusIcon(), list[i].description);
+                    System.out.printf("\t%d. [%s] %s\n", i+1, tasks[i].getStatusIcon(), tasks[i].description);
                 }
                 System.out.println("\t____________________________________________________________");
-            }
-
-            else if (userInput.toLowerCase().contains("done")){
+            } else if (userInput.toLowerCase().contains("done")){
                 int taskNo = (Integer.parseInt(userInput.replaceAll("[^0-9]",""))) - 1;
-                list[taskNo].markAsDone();
+                tasks[taskNo].setDone();
                 System.out.printf("\tNice! I have marked this task as done:\n");
-                System.out.printf("\t[%s] %s\n", list[taskNo].getStatusIcon(), list[taskNo].description);
+                System.out.printf("\t[%s] %s\n", tasks[taskNo].getStatusIcon(), tasks[taskNo].description);
 
-            }
-
-            else {
-                list[itemNo] = new Task(userInput);
+            } else {
+                tasks[itemNo] = new Task(userInput);
                 System.out.println("\t____________________________________________________________");
                 System.out.println("\t added: " + userInput);
                 System.out.println("\t____________________________________________________________");
