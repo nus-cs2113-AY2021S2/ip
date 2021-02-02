@@ -7,7 +7,7 @@ public class Duke {
     public static String line = "____________________________________________________________";
     public static final int INPUT_PHRASES_COUNT = 2;
 
-    public static Tasks tasks[] = new Tasks[100]; //for storing (all types of) tasks
+    public static Tasks[] tasks = new Tasks[100]; //for storing (all types of) tasks
     public static int taskCount = 0; //for counting tasks
     public static String taskInputString; //contains taskName and taskDate (from user's input)
     public static String taskName;
