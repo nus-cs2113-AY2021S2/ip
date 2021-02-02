@@ -35,4 +35,10 @@ public class Task {
   public void setDone(boolean done) {
     isDone = done;
   }
+
+  @Override
+  public String toString() {
+    String checkMark = isDone ? "X" : " ";
+    return String.format("[%s] %s", checkMark, taskDescription);
+  }
 }
