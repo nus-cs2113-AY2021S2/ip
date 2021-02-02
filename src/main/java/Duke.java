@@ -19,10 +19,14 @@ public class Duke {
         while (!command.equals("bye")) {
             if (command.equals("list")) {
                 printTasks(list, index);
-            } else if (command.substring(0,4).equals("done")) {
-                markDone(list, index, command);
-            } else {
-                recordTasks(list, index, command);
+            } else if (command.substring(0,4).equals("todo")) {
+                recordTasks(list, index, command,"todo");
+                index++;
+            } else if (command.substring(0,8).equals("deadline")) {
+                recordTasks(list, index, command,"deadline");
+                index++;
+            } else if (command.substring(0,5).equals("event")) {
+                recordTasks(list, index,command,"event");
                 index++;
             }
             command = in.nextLine();
@@ -36,30 +40,31 @@ public class Duke {
         printLine();
     }
 
-    public static void recordTasks(Task[] list, int index, String command) {
-        list[index] = new Task(command);
+    public static void recordTasks(Task list[], int index, String command, String category) {
         printLine();
-        System.out.println("added: " + command);
-        printLine();
-    }
-
-    public static void markDone(Task[] list, int index, String command) {
-        int number;
-        number = Integer.parseInt(command.substring(5));
-        number--;
-        list[number].isDone = true;
-        printLine();
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(" " + " " + "[" + list[number].getStatusIcon() +"] " + list[number].description);
+        System.out.println("Got it. I've added this task:");
+        if (category == "todo") {
+            list[index] = new Todo(command.substring(5));
+        } else if (category == "deadline") {
+            String content = command.substring(9, command.indexOf("/"));
+            String deadline = command.substring(command.indexOf("/") + 4);
+            list[index] = new Deadline(content, deadline);
+        } else if (category == "event") {
+            String content = command.substring(6,command.indexOf("/"));
+            String eventTime = command.substring(command.indexOf("/") + 4);
+            list[index] = new Event(content, eventTime);
+        }
+        System.out.println(list[index].toString());
+        int count = index + 1;
+        System.out.println("Now you have " + count + " tasks in the list.");
         printLine();
     }
 
     public static void printTasks(Task[] list, int index) {
         printLine();
         System.out.println("Here are the tasks in your list:");
-        int i;
-        for (i = 1; i <= index; i++) {
-            System.out.println(i + "." + "[" + list[i-1].getStatusIcon() + "] " + list[i-1].description);
+        for (int i = 1; i <= index; i++) {
+            System.out.println(i + "." + list[i-1].toString());
         }
         printLine();
     }
