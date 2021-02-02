@@ -74,6 +74,7 @@ public class DukeController {
         }else{
             System.out.println("Invalid syntax for add commands! Please try again!");
             DukeUI.printMenu();
+            return;
         }
         System.out.printf("Got it. I've added this task:\n  ");
         tasks[currentTaskLength].printTask();

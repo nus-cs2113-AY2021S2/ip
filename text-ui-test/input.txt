@@ -1,0 +1,15 @@
+todo sleep
+todoINVALIDCOMMAND
+deadline CS2113 ip /by 10 Feb
+deadline INVALIDCOMMAND/INVALIDCOMMAND
+event exam /from 11 Feb 1pm to 2pm
+event INVALIDCOMMAND /
+list
+done 1
+list
+done 3
+list
+done 0
+list
+INVALIDCOMMAND
+bye

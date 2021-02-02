@@ -1,7 +1,88 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+Hello! I'm Duke
+What can I do for you?
 
+
+--------User Menu--------
+list: list current tasks and completion status
+done x: Mark task x as completed
+todo TASK_DESCRIPTION
+deadline TASK_DESCRIPTION /KEYWORD DATE_TIME
+event TASK_DESCRIPTION /KEYWORD DATE_TIME
+bye: Exit
+(KEYWORD: any single word such as before, by, after...)
+
+Got it. I've added this task:
+  [T][✘] sleep
+Now you have 1 tasks in the list.
+Please enter a valid command!
+
+
+--------User Menu--------
+list: list current tasks and completion status
+done x: Mark task x as completed
+todo TASK_DESCRIPTION
+deadline TASK_DESCRIPTION /KEYWORD DATE_TIME
+event TASK_DESCRIPTION /KEYWORD DATE_TIME
+bye: Exit
+(KEYWORD: any single word such as before, by, after...)
+
+Got it. I've added this task:
+  [D][✘] CS2113 ip  (by: 10 Feb)
+Now you have 2 tasks in the list.
+Invalid syntax for add commands! Please try again!
+
+
+--------User Menu--------
+list: list current tasks and completion status
+done x: Mark task x as completed
+todo TASK_DESCRIPTION
+deadline TASK_DESCRIPTION /KEYWORD DATE_TIME
+event TASK_DESCRIPTION /KEYWORD DATE_TIME
+bye: Exit
+(KEYWORD: any single word such as before, by, after...)
+
+Got it. I've added this task:
+  [E][✘] exam  (from: 11 Feb 1pm to 2pm)
+Now you have 3 tasks in the list.
+Invalid syntax for add commands! Please try again!
+
+
+--------User Menu--------
+list: list current tasks and completion status
+done x: Mark task x as completed
+todo TASK_DESCRIPTION
+deadline TASK_DESCRIPTION /KEYWORD DATE_TIME
+event TASK_DESCRIPTION /KEYWORD DATE_TIME
+bye: Exit
+(KEYWORD: any single word such as before, by, after...)
+
+1.[T][✘] sleep
+2.[D][✘] CS2113 ip  (by: 10 Feb)
+3.[E][✘] exam  (from: 11 Feb 1pm to 2pm)
+Nice! I've marked this task as done: 
+[✓] todo sleep
+1.[T][✓] sleep
+2.[D][✘] CS2113 ip  (by: 10 Feb)
+3.[E][✘] exam  (from: 11 Feb 1pm to 2pm)
+Nice! I've marked this task as done: 
+[✓] event exam 
+1.[T][✓] sleep
+2.[D][✘] CS2113 ip  (by: 10 Feb)
+3.[E][✓] exam  (from: 11 Feb 1pm to 2pm)
+The task index you have entered is out of bound!
+1.[T][✓] sleep
+2.[D][✘] CS2113 ip  (by: 10 Feb)
+3.[E][✓] exam  (from: 11 Feb 1pm to 2pm)
+Please enter a valid command!
+
+
+--------User Menu--------
+list: list current tasks and completion status
+done x: Mark task x as completed
+todo TASK_DESCRIPTION
+deadline TASK_DESCRIPTION /KEYWORD DATE_TIME
+event TASK_DESCRIPTION /KEYWORD DATE_TIME
+bye: Exit
+(KEYWORD: any single word such as before, by, after...)
+
+Bye. Hope to see you again soon!
