@@ -7,7 +7,6 @@ public class Duke {
     //to keep track of the number of task
     private static int count = 0;
     private static Scanner in = new Scanner(System.in);
-
     //Array of object
     private static Task[] tasks = new Task[100];
 
