@@ -6,11 +6,11 @@ public class DeadLines extends Task{
         super(task);
         this.by = by;
     }
+
     @Override
     public void printStatus() {
         System.out.print("[D]");
         super.printStatus();
         System.out.println("(by: "+by+")");
     }
-
 }

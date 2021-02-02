@@ -12,5 +12,4 @@ public class Events extends Task{
         super.printStatus();
         System.out.println("(at: "+by+")");
     }
-
 }

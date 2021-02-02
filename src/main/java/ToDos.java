@@ -11,5 +11,4 @@ public class ToDos extends Task{
         super.printStatus();
         System.out.print("\n");
     }
-
 }

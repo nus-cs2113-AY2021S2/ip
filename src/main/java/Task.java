@@ -1,5 +1,6 @@
 public class Task {
-    private String taskName;
+
+    private final String taskName;
     private boolean isDone;
 
     public Task(String task){
@@ -20,11 +21,10 @@ public class Task {
     }
 
     public void printStatus(){
-        if(isDone){
-            System.out.print("["+"\u2713"+"] "+taskName);
+        if(getDone()){
+            System.out.print("["+"\u2713"+"] "+getName());
         }else{
-            System.out.print("["+" "+"] "+taskName);
+            System.out.print("["+" "+"] "+getName());
         }
     }
-
 }
