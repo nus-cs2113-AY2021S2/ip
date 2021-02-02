@@ -1,4 +1,6 @@
 public class Task {
+    public static final String CHECK_MARK = "\u2713";
+    public static final String X_MARK = "\u2718";
     protected String description;
     protected boolean isDone;
 
@@ -8,7 +10,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718");
+        return (isDone ? CHECK_MARK : X_MARK);
     }
 
     public String getDescription() {
