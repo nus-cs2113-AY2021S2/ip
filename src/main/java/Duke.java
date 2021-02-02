@@ -22,10 +22,10 @@ public class Duke {
         Task[] tasks = new Task[100];
         int itemNo = 0;
         String userInput;
+        Scanner sc = new Scanner(System.in);
 
         running:
-        while (true) {
-            Scanner sc = new Scanner(System.in);
+        while (sc.hasNextLine()) {
             userInput = sc.nextLine();
             String[] strings = userInput.split(" ",2);
             String taskType = strings[0].toLowerCase();
