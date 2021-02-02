@@ -1,16 +1,9 @@
 public class todolist {
-    private String[] list = new String[100];
-    private int items = 0;
-    private Boolean[] tracker = new Boolean[100];
+    protected String[] list = new String[100];
+    protected int items = 0;
+    protected Boolean[] tracker = new Boolean[100];
 
 
-    public todolist(String[] arg){
-        this.items = arg.length;
-        for(int i = 0; i < items; i++){
-            this.list[i] = arg[i];
-            this.tracker[i] = false;
-        }
-    }
 
     public todolist(){
 
@@ -25,7 +18,7 @@ public class todolist {
     }
 
 
-    public String itemLister(){
+    public String listItems(){
         String output = "";
 
         for(int i = 0; i < items; i++){
@@ -39,14 +32,14 @@ public class todolist {
     }
 
 
-    public String itemAdder(String arg){
+    public String addItems(String arg){
         this.list[items] = arg;
         this.tracker[items] = false;
         this.items += 1;
-        return "added: " + arg;
+        return arg;
     }
 
-    public String itemResolver(String arg){
+    public String resolveItem(String arg){
         String output = "";
 
         Integer taskNum = Integer.parseInt(arg) - 1;
@@ -61,6 +54,10 @@ public class todolist {
                  displayCheck(true) + " " + list[taskNum];
 
         return output;
+    }
+
+    public int getItems(){
+        return this.items;
     }
 
 

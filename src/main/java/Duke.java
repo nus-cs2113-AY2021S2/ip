@@ -2,6 +2,49 @@ import java.util.Scanner;
 
 
 public class Duke {
+
+
+
+
+
+    public static String command_parser(todo list, String command){
+        String[] tokens = command.split(" ");
+        int startofitem = command.indexOf(" ") + 1;
+        int endofitem;
+        int startofdate;
+        String out = "";
+        switch(tokens[0]){
+        case "list":
+            out = list.listItems();
+            break;
+        case "deadline":
+            endofitem = command.indexOf("/by") - 1;
+            startofdate = endofitem + 5;
+            out = list.addItems(command.substring(startofitem,endofitem),listTypes.deadline,command.substring(startofdate));
+            out += "\nNow you have " + list.getItems() + " item(s) in the list!";
+            break;
+        case "event":
+            endofitem = command.indexOf("/at") - 1;
+            startofdate = endofitem + 5;
+            out = list.addItems(command.substring(startofitem,endofitem),listTypes.event,command.substring(startofdate));
+            out += "\nNow you have " + list.getItems() + " item(s) in the list!";
+            break;
+        case "todo":
+            out = list.addItems(command.substring(startofitem),listTypes.todo);
+            out += "\nYou have " + list.getItems() + " item(s) in the list!";
+            break;
+        case "done":
+            out = list.resolveItem(tokens[1]) ;
+            out += "\nNow you have " + list.getItems() + " item(s) in the list!";
+        }
+
+        return out;
+
+    }
+
+
+
+
     public static void main(String[] args) {
 
         Boolean ContinueChat = true;
@@ -23,22 +66,29 @@ public class Duke {
                 "____________________________________________________________\n" );
 
         todolist initialList = new todolist();
+        todo listTest = new todo();
         
         while(ContinueChat){
             String input = in.nextLine();
-            String[] tokens = input.split(" ");
-
-
-            if(tokens[0].equals("bye")){
+            if(input.equals("bye")){
                 output = "Bye. Hope to see you again soon!";
                 ContinueChat = false;
-            }else if(tokens[0].equals("list")) {
-                output = initialList.itemLister();
-            }else if(tokens[0].equals("done")){
-                output = initialList.itemResolver(tokens[1]);
-            }else{
-                output = initialList.itemAdder(input);
+            }else {
+                /*String[] tokens = input.split(" ");
+                if (tokens[0].equals("bye")) {
+                    output = "Bye. Hope to see you again soon!";
+                    ContinueChat = false;
+                } else if (tokens[0].equals("list")) {
+                    output = initialList.listItems();
+                } else if (tokens[0].equals("done")) {
+                    output = initialList.resolveItem(tokens[1]);
+                } else {
+                    output = "added: " + initialList.addItems(input);
+                }*/
+                output = command_parser(listTest,input);
             }
+
+
 
 
 
