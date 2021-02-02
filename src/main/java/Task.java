@@ -27,12 +27,20 @@ public class Task {
     }
 
     public void check() {
-        isDone = true;
-        tasksRemaining--;
+        if (isDone == false) {
+            isDone = true;
+            tasksRemaining--;
+        }
     }
 
     public void uncheck() {
-        isDone = false;
-        tasksRemaining++;
+        if (isDone == true) {
+            isDone = false;
+            tasksRemaining++;
+        }
+    }
+
+    public String toString() {
+        return getStatusSymbol() + getDesc();
     }
 }

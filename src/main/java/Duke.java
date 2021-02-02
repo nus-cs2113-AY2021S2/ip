@@ -1,4 +1,3 @@
-import java.nio.file.Watchable;
 import java.util.Scanner;
 
 public class Duke {
@@ -22,56 +21,120 @@ public class Duke {
             + "Command prefix: done\n"
             + "Argument(s): task number\n";
     public static final String ADD_MESSAGE = " added to list\n";
-    public static final String TASK_COMPLETE_MESSAGE = "Task completed!\n";
-    public static final String TASK_ALREADY_COMPLETE_MESSAGE = " is already complete\n";
-    public static final String ALL_TASKS_COMPLETE_MESSAGE = "All remaining tasks completed!\n";
-    public static final String INVALID_ARGUMENT_MESSAGE = "Please provide a valid argument\n";
+    public static final String NO_DEADLINE_MESSAGE = "Please indicate a deadline after \"/by\"\n";
+    public static final String NO_TIME_MESSAGE = "Please indicate the event time after \"/at\"\n";
+    public static final String TASK_CHECKED_MESSAGE = "Task checked off!\n";
+    public static final String TASK_ALREADY_CHECKED_MESSAGE = " is already checked off\n";
+    public static final String ALL_TASKS_CHECKED_MESSAGE = "All remaining tasks have been checked off!\n";
+    public static final String TASK_UNCHECKED_MESSAGE = "Task is no longer checked off\n";
+    public static final String TASK_NOT_CHECKED_MESSAGE = " is not checked\n";
+    public static final String INVALID_ARGUMENT_MESSAGE = "Invalid argument!\n";
+    public static final String INVALID_COMMAND_MESSAGE = "I am sorry, I do not recognise that command\n"
+            + "Please try again\n";
 
 
 
     public static void main(String[] args) {
         System.out.print(WELCOME_MESSAGE);
+        interact();
+        System.out.print(BYE_MESSAGE);
+    }
 
+    public static void interact() {
         Task[] list = new Task[100];
         int index = 0;
 
         Scanner scan = new Scanner(System.in);
         String in = scan.nextLine();
 
-
-        String[] input = in.split(" ");
-
-
-        while (!input[0].equalsIgnoreCase("bye")) {
-            if(input[0].equalsIgnoreCase("list")) {
-                printList(list, index);
-            } else if (input[0].equalsIgnoreCase("done")) {
-                if (input.length != 2) {
-                    System.out.println("Please provide 1 argument");
-                } else {
-                    try {
-                        int ind = Integer.parseInt(input[1]);
-                        markAsDone(list, ind, index);
-                    } catch (NumberFormatException e) {
-                        System.out.print(LINE + INVALID_ARGUMENT_MESSAGE + LINE);
-                    }
-                }
-            } else if(input[0].equalsIgnoreCase("help") && input.length==1) {
-                System.out.print(LINE + HELP_MESSAGE + LINE);
-            } else {
-                add(in, list, index);
-                index++;
-            }
-            in = scan.nextLine();
-            input = in.split(" ");
+        String cmd;
+        String input;
+        if (in.contains(" ")) {
+            cmd = in.substring(0, in.indexOf(" ")); //if there is no " ", index returned is -1
+            input = in.substring(in.indexOf(" ") + 1);
+        } else {
+            cmd = in;
+            input = null;
         }
 
-        System.out.print(BYE_MESSAGE);
+        while (!cmd.equalsIgnoreCase("bye")) {
+            switch (cmd.toLowerCase()) {
+            case "help":
+                System.out.print(LINE + HELP_MESSAGE + LINE); //we should probably write an entire method for help
+                break;
+            case "list":
+                printList(list, index);
+                break;
+            case "todo":
+                addToDo(input, list, index);
+                index++;
+                break;
+            case "deadline":
+                if(input.toLowerCase().contains("/by")) {
+                    String desc = input.substring(0, input.toLowerCase().indexOf("/by") - 1);
+                    String dueDate = input.substring(input.toLowerCase().indexOf("/by") + 4);
+                    addDeadline(desc, dueDate, list, index);
+                    index++;
+                } else {
+                    System.out.print(LINE + INVALID_ARGUMENT_MESSAGE + NO_DEADLINE_MESSAGE + LINE);
+                }
+                break;
+            case "event":
+                if(input.toLowerCase().contains("/at")) {
+                    String desc = input.substring(0, input.toLowerCase().indexOf("/at")-1);
+                    String date = input.substring(input.toLowerCase().indexOf("/at")+4);
+                    addEvent(desc, date, list, index);
+                    index++;
+                } else {
+                    System.out.print(LINE + INVALID_ARGUMENT_MESSAGE + NO_TIME_MESSAGE + LINE);
+                }
+                break;
+            case "done":
+                try {
+                    int ind = Integer.parseInt(input);
+                    markAsDone(list, ind, index);
+                } catch (NumberFormatException e) {
+                    System.out.print(LINE + INVALID_ARGUMENT_MESSAGE + LINE);
+                }
+                break;
+            case "undo":
+                try {
+                    int ind = Integer.parseInt(input);
+                    undoMarkAsDone(list, ind, index);
+                } catch (NumberFormatException e) {
+                    System.out.print(LINE + INVALID_ARGUMENT_MESSAGE + LINE);
+                }
+                break;
+            default:
+                System.out.print(LINE + INVALID_COMMAND_MESSAGE + LINE);
+            }
+            in = scan.nextLine();
+
+            if (in.contains(" ")) {
+                cmd = in.substring(0, in.indexOf(" ")); //if there is no space, index returned is -1
+                input = in.substring(in.indexOf(" ") + 1);
+            } else {
+                cmd = in;
+                input = null;
+            }
+        }
     }
 
-    public static void add(String input, Task[] list, int index) {
-        list[index] = new Task(input);
-        System.out.print(LINE + "\"" + list[index].getDesc() + "\"" + ADD_MESSAGE + LINE);
+    public static void addToDo(String input, Task[] list, int index) {
+        list[index] = new ToDo(input);
+        System.out.print(LINE + "\"" + input + "\"" + ADD_MESSAGE + LINE);
+    }
+
+    public static void addDeadline(String desc, String dueDate, Task[] list, int index) {
+        list[index] = new Deadline(desc, dueDate);
+        System.out.print(LINE + "\"" + desc + "\"" + ADD_MESSAGE +
+                "Please complete by: " + dueDate + "\n" + LINE);
+    }
+
+    public static void addEvent(String desc, String date, Task[] list, int index) {
+        list[index] = new Event(desc, date);
+        System.out.print(LINE + "\"" + desc + "\"" + ADD_MESSAGE +
+                "It occurs at: " + date + "\n" + LINE);
     }
 
     public static void printList(Task[] list, int index) {
@@ -80,23 +143,39 @@ public class Duke {
             if (i<9) {
                 System.out.print(" ");
             }
-            System.out.println(i+1 + list[i].getStatusSymbol() + list[i].getDesc());
+            System.out.println(i+1 + list[i].toString());
         }
-        System.out.print(LINE);
+        System.out.print("There are " + Task.getTasksRemaining() + " task(s) on the list\n" + LINE);
     }
 
     public static void markAsDone(Task[] list, int taskNo, int max) {
         if (taskNo <= max && taskNo > 0) { //no. is valid
             if (list[taskNo-1].getStatus()) {
                 System.out.print(LINE + "Task \"" + list[taskNo-1].getDesc() + "\""
-                        + TASK_ALREADY_COMPLETE_MESSAGE + LINE);
+                        + TASK_ALREADY_CHECKED_MESSAGE + LINE);
             } else {
                 list[taskNo-1].check();
-                System.out.print(LINE + TASK_COMPLETE_MESSAGE);
+                System.out.print(LINE + TASK_CHECKED_MESSAGE);
                 System.out.println("  " + list[taskNo - 1].getStatusSymbol() + list[taskNo - 1].getDesc());
-                if (list[taskNo-1].getTasksRemaining() == 0) {
-                    System.out.print(ALL_TASKS_COMPLETE_MESSAGE);
+                if (Task.getTasksRemaining() == 0) {
+                    System.out.print(ALL_TASKS_CHECKED_MESSAGE);
                 }
+                System.out.print(LINE);
+            }
+        } else {
+            System.out.print(LINE + INVALID_ARGUMENT_MESSAGE+ LINE);
+        }
+    }
+
+    public static void undoMarkAsDone(Task[] list, int taskNo, int max) {
+        if (taskNo <= max && taskNo > 0) { //no. is valid
+            if (!list[taskNo-1].getStatus()) {
+                System.out.print(LINE + "Task \"" + list[taskNo-1].getDesc() + "\""
+                        + TASK_NOT_CHECKED_MESSAGE + LINE);
+            } else {
+                list[taskNo-1].uncheck();
+                System.out.print(LINE + TASK_UNCHECKED_MESSAGE);
+                System.out.println("  " + list[taskNo - 1].getStatusSymbol() + list[taskNo - 1].getDesc());
                 System.out.print(LINE);
             }
         } else {
