@@ -1,6 +1,28 @@
-public class MainUI {
+import java.util.Scanner;
 
-    public static void showWelcomeScreen(){
+public class MainPage {
+
+    public static void displayUI(Scanner in){
+        printWelcomeMessage();
+        while (true){
+            String input = in.nextLine();
+            if (input.equals("list")){
+                TaskManager.printTaskList();
+            }
+            else if (input.equals("bye")) {
+                printExitMessage();
+            }
+            else if (input.startsWith("done")) {
+                int taskNumberDone = StringManipulator.getTaskNumberDone(input);
+                TaskManager.markTaskAsDone(taskNumberDone);
+            }
+            else{
+                TaskManager.addTask(input);
+            }
+        }
+    }
+
+    public static void printWelcomeMessage() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"

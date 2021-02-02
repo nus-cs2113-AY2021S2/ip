@@ -1,4 +1,8 @@
 public class StringManipulator {
+    
+    public StringManipulator(){
+        // TODO: 02-Feb-21
+    }
 
     public static String getFirstWord(String input){
         return input.split(" ")[0];
@@ -17,5 +21,9 @@ public class StringManipulator {
         int firstWhiteSpaceIndex = input.indexOf(" ");
         int firstSlashIndex = input.indexOf("/");
         return input.substring(firstWhiteSpaceIndex+1, firstSlashIndex);
+    }
+
+    public static int getTaskNumberDone(String input){
+        return Integer.parseInt(input.substring(5));
     }
 }

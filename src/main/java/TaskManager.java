@@ -1,6 +1,11 @@
 import java.util.Arrays;
 
 public class TaskManager {
+
+    public TaskManager(){
+        // TODO: 02-Feb-21
+    }
+
     private static Task[] tasksObjectsArray = new Task[100];
 
     public static void addTask(String input){
@@ -28,11 +33,11 @@ public class TaskManager {
     }
 
     private static void printMessageAfterTaskIsAdded(Task task) {
-        MainUI.printDivider();
+        MainPage.printDivider();
         System.out.println("Got it. I have added this task:");
         System.out.println("\t"+task);
         printTaskCount();
-        MainUI.printDivider();
+        MainPage.printDivider();
     }
 
     private static void printTaskCount() {
@@ -44,21 +49,21 @@ public class TaskManager {
         tasksObjectsArray[taskNumber-1].markAsDone();
         System.out.println("[" + tasksObjectsArray[taskNumber-1].getStatusIcon() + "]"
                 + tasksObjectsArray[taskNumber-1].getDescription());
-
     }
 
     public static Task[] removeNullFromList(){
         return Arrays.copyOf(tasksObjectsArray, Task.getTaskCount());
     }
 
-    public static void printTaskList(Task[] tasks){
+    public static void printTaskList(){
+        Task[] tasks = removeNullFromList();
         int TaskCount = 0;
-        MainUI.printDivider();
+        MainPage.printDivider();
         System.out.println("Here are the tasks in your list:");
         for (Task task: tasks){
             TaskCount +=1;
             System.out.println(TaskCount + "." + task);
         }
-        MainUI.printDivider();
+        MainPage.printDivider();
     }
 }
