@@ -1,7 +1,7 @@
 public class Task {
     private String item;
     private int index;
-    private String status = " ";
+    private String status;
     private String type;
 
     public Task(String item, int index) {
@@ -16,15 +16,15 @@ public class Task {
     }
 
     public String getItem() {
-        return this.item;
+        return item;
     }
 
     public int getIndex() {
-        return this.index;
+        return index;
     }
 
     public String getStatus() {
-        return this.status;
+        return status;
     }
 
     public String getType() {
