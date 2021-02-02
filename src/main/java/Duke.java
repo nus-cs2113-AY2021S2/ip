@@ -1,37 +1,110 @@
 import java.util.Scanner;
 
 public class Duke {
-    private static final int MAX_ARRAY_LENGTH = 100;
-    private static int taskLength = 0;
-    private static boolean shouldLoop = true;
-    private static String input;
 
-    private static String logo
-            = "******************************************************\n"
-            + "*                 Systems: [Online]                  *\n"
-            + "*                Protocol: [Dominion]                *\n"
-            + "*                    Race: [Terran]                  *\n"
-            + "******************************************************\n";
+    private static void initialiseWelcomeMessage() {
+        String logo
+                = "******************************************************\n"
+                + "*                 Systems: [Online]                  *\n"
+                + "*                Protocol: [Dominion]                *\n"
+                + "*                    Race: [Terran]                  *\n"
+                + "******************************************************\n";
 
-    private static String greeting
-            = "______________________________________________________\n"
-            + "Systems Accessed...\n"
-            + "Decrypting Overwrite...\n"
-            + "Welcome Commander, can I be of assistance, commander?\n"
-            + "______________________________________________________\n";
+        String greeting
+                = "______________________________________________________\n"
+                + "Systems Accessed...\n"
+                + "Decrypting Overwrite...\n"
+                + "Welcome Commander, can I be of assistance, commander?\n"
+                + "______________________________________________________\n";
 
-    private static String goodbye
-            = "______________________________________________________\n"
-            + "Good Bye Commander.\n"
-            + "______________________________________________________\n";
-
-    public static void main(String[] args) {
-        // UI Initialization
         System.out.println(logo);
         System.out.println(greeting);
+    }
 
+    private static void printGoodbyeMessage() {
+        String goodbye
+                = "______________________________________________________\n"
+                + "Good Bye Commander.\n"
+                + "______________________________________________________\n";
+
+        System.out.println(goodbye);
+    }
+
+    private static String getCommand(String userInput) {
+        String[] inputArray = userInput.split(" ");
+        String command = inputArray[0];
+        return command.toUpperCase();
+    }
+
+    private static void executeCommand(String command, String userInput) {
+        String errand;
+        String timestamp;
+
+        switch(command) {
+        case "TODO":
+            errand = getErrand(userInput);
+            Task todo = new Todo(errand);
+            todo.addToTaskList(errand, null); // Todo has no timestamp
+            break;
+        case "EVENT":
+            errand = getErrand(userInput);
+            timestamp = getTimestamp(userInput);
+            Task event = new Event(errand, timestamp);
+            event.addToTaskList(errand, timestamp);
+            break;
+        case "DEADLINE":
+            errand = getErrand(userInput);
+            timestamp = getTimestamp(userInput);
+            Task deadline = new Deadline(errand, timestamp);
+            deadline.addToTaskList(errand, timestamp);
+            break;
+        case "LIST":
+            Task.printList();
+            break;
+        case "BYE":
+            printGoodbyeMessage();
+            break;
+        }
+    }
+
+    private static String getTimestamp(String userInput) {
+        int slashPosition = userInput.indexOf("/");
+        String timestamp = userInput.substring(slashPosition+1);
+        String[] timestampArray = timestamp.split(" ");
+        timestamp = timestampArray[1];
+        return timestamp.trim();
+    }
+
+    private static String getErrand(String userInput) {
+        String errand;
+        int spacePosition = userInput.indexOf(" ");
+        int slashPosition = userInput.indexOf("/");
+
+        // Slash not found, no timestamp behind
+        if(slashPosition == -1) {
+            errand = userInput.substring(spacePosition);
+        } else {
+            errand = userInput.substring(spacePosition, slashPosition);
+        }
+        return errand.trim();
+    }
+
+    public static void main(String[] args) {
+        String userInput;
+        String command;
         Scanner in = new Scanner(System.in);
 
+        initialiseWelcomeMessage();
+
+        do {
+            userInput = in.nextLine();
+            command = getCommand(userInput);
+            executeCommand(command, userInput);
+        } while (!command.equals("BYE"));
+
+
+
+        /*
         Task task = new Task();
         Task[] mission = new Task[MAX_ARRAY_LENGTH];
 
@@ -65,6 +138,8 @@ public class Duke {
                 break;
             }
         }
-        System.out.println(goodbye);
+
+        printGoodbyeMessage();
+        */
     }
 }
