@@ -19,7 +19,8 @@ public class Parser {
         }
     }
 
-    private static String[] getCommand(String input) { String[] command = input.trim().split(" ");
+    private static String[] getCommand(String input) {
+        String[] command = input.trim().split(" ");
         return command;
     }
 }

@@ -1,15 +1,12 @@
 import java.util.Arrays;
 
-public class AddCommand implements Command{
+public class AddCommand implements Command {
     public AddCommand(String input) {
     }
 
     private static final String TODO = "todo";
     private static final String DEADLINE = "deadline";
     private static final String EVENT = "event";
-
-    public static Task[] tasks = new Task[100];
-    public static int numOfTasks = 0;
 
     public void execute(String input) {
         String[] command = input.trim().split(" ");
@@ -28,6 +25,8 @@ public class AddCommand implements Command{
                 Event eventTask = new Event(getDescription(input), getOn(input));
                 addTask(eventTask);
                 break;
+            default:
+                System.out.println("This function is not recognized!");
         }
         end();
     }
@@ -36,22 +35,22 @@ public class AddCommand implements Command{
         if (input.contains("/")) {
             String[] split = input.trim().split("/");
             String[] commandPlusDescription = split[0].trim().split(" ");
-            String[] description = new String[commandPlusDescription.length - 1];
-            for (int i = 1; i < commandPlusDescription.length; i++) {
-                description[i - 1] = commandPlusDescription[i];
-            }
-
-            return Arrays.toString(description).replace(",", "").replace("[", "").replace("]", "").trim();
-        }
-        else {
+            return splitCommand(commandPlusDescription);
+        } else {
             String[] commandPlusDescription = input.trim().split(" ");
-            String[] description = new String[commandPlusDescription.length - 1];
-            for (int i = 1; i < commandPlusDescription.length; i++) {
-                description[i - 1] = commandPlusDescription[i];
-            }
-            return Arrays.toString(description).replace(",", "").replace("[", "").replace("]", "").trim();
+            return splitCommand(commandPlusDescription);
         }
+    }
 
+    private String splitCommand(String[] commandPlusDescription) {
+        String[] description = new String[commandPlusDescription.length - 1];
+        for (int i = 1; i < commandPlusDescription.length; i++) {
+            description[i - 1] = commandPlusDescription[i];
+        }
+        return Arrays.toString(description).replace(",", "")
+                .replace("[", "")
+                .replace("]", "")
+                .trim();
     }
 
     public String getBy(String input) {
@@ -65,10 +64,10 @@ public class AddCommand implements Command{
     }
 
     private void addTask(Task t) {
-       TaskStorer.tasks[TaskStorer.numOfTasks] = t;
-        TaskStorer.numOfTasks++;
+        TaskManager.tasks[TaskManager.numOfTasks] = t;
+        TaskManager.numOfTasks++;
         System.out.println("Got it. I've added this task:" + System.lineSeparator() + t.toString());
-        System.out.println("Now you have " + TaskStorer.numOfTasks + " task in the list.");
+        System.out.println("Now you have " + TaskManager.numOfTasks + " task in the list.");
     }
     public static void end() {
         System.out.println("____________________________________________________________" + System.lineSeparator());

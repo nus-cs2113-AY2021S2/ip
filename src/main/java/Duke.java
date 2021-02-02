@@ -1,6 +1,4 @@
-import java.security.spec.RSAOtherPrimeInfo;
 import java.util.Scanner;
-import java.util.Arrays;
 
 public class Duke {
     public static void main(String[] args) {
@@ -20,15 +18,13 @@ public class Duke {
             input = in.nextLine();
         }
     }
+
     public static void greet() {
         System.out.println("Hello! I'm Duke" + System.lineSeparator() + "What can I do for you?");
         end();
     }
+
     public static void end() {
         System.out.println("____________________________________________________________" + System.lineSeparator());
     }
-
-
-
-
 }
