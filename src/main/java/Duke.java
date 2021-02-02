@@ -20,15 +20,19 @@ public class Duke {
             }
 
             else if(line.equals("list")){
-                new Task().printList(); //print list
+                //print list
+                new Task().printList();
             }
             else if(line.contains("done")){
-                String [] words = line.split(" "); //spilt the word to get the number
-                int index = Integer.parseInt(words[words.length-1]); //get the number
+                //spilt the word to get the number
+                String [] words = line.split(" ");
+                //get the number
+                int index = Integer.parseInt(words[words.length-1]);
                 new Task().MarkAsDone(index-1);
             }
             else {
-                new Task().addTask(line); //add task
+                //add task
+                new Task().addTask(line);
             }
         }
         System.out.println("Bye. Hope to see you again soon!\n");
