@@ -2,8 +2,16 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    static final String lineDivider = "\t____________________________________________________________\n";
-    static final String dukeGreeting = lineDivider + "\t Hello! I'm Duke\n\t What can I do for you?\n" + lineDivider;
+    static final String lineDivider = "\t__________________________________________________________________________\n";
+    static final String dukeKeywords = "\t\t Use 'todo', 'deadline' , 'event' to enter tasks!\n";
+    public static final String LOGO = " ____        _        \n"
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
+
+    static final String dukeGreeting = LOGO + lineDivider + "\t Hello! I'm Duke - your personal task manager \n\t"
+            + dukeKeywords + lineDivider;
     static final String dukeFarewell =  lineDivider + "\t Bye. Hope to see you again soon!\n" + lineDivider;
 
     static Scanner sc = new Scanner(System.in);
@@ -13,7 +21,6 @@ public class Duke {
         String userInput = sc.nextLine();
 
         while (!userInput.toLowerCase().equals("bye")){
-//            String echos = lineDivider + "\t" + userInput.toLowerCase() + "\n" + lineDivider;
             String echos = String.format("%s\t %s\n%s",lineDivider,userInput.toLowerCase(),lineDivider);
             System.out.println(echos);
             userInput = sc.nextLine();
@@ -22,117 +29,131 @@ public class Duke {
 
     }
 
-//    // Level 2
-//    public static void addList(){
-//        System.out.print("Enter task: ");
-//        String userInput = sc.nextLine();
-//        ArrayList<String> taskList = new ArrayList<String>();
-//
-//        while (!userInput.toLowerCase().equals("bye")) {
-//            if (!userInput.toLowerCase().equals("list")) { // userInput != list
-//                if (taskList.contains(userInput)){ // handle duplicate task
-//                    String taskExistMessage = String.format("%s\t \"%s\" already exists. \n%s", lineDivider, userInput, lineDivider);
-//                    System.out.println(taskExistMessage);
-//                }else{ // new task
-//                    taskList.add(userInput);
-//
-//                    String addedMessage = String.format("%s\t added: %s\n%s", lineDivider, userInput, lineDivider);
-//
-//                    System.out.println(addedMessage + "\tEnter \"list\" to see full list. \n");
-//                }
-//            }else if(!taskList.isEmpty()) { // userInput == list
-//                ListIterator<String> it = taskList.listIterator();
-//                System.out.print(lineDivider);
-//                while (it.hasNext()) {
-//                    System.out.println("\t" + (it.nextIndex() + 1) + ". " + it.next());
-//                }
-//                System.out.println(lineDivider);
-//            } else {
-//                String emptyListMessage = String.format("%s\t List is empty!\n %s \n", lineDivider, lineDivider);
-//                System.out.println(emptyListMessage);
-//            }
-//
-//            System.out.print("Enter task: ");
-//            userInput = sc.nextLine();
-//        }
-//
-//    }
-    // Level 3
+
     public static void taskApp(){
 
-        System.out.print("Enter task: ");
-        String userInput = sc.nextLine();
         ArrayList<Task> taskList = new ArrayList<>();
+        while (true){
+            System.out.print("Enter command: ");
+            String userInput = sc.nextLine();
 
-        while (!userInput.toLowerCase().equals("bye")) {
-            if (userInput.toLowerCase().equals("list")) { // userInput == list
-                if(!taskList.isEmpty()) { // userInput == list
-                    System.out.print(lineDivider);
+            String commandWord = userInput.split(" ")[0].toLowerCase();
+            String content = userInput.substring(userInput.indexOf(" ") + 1);
 
-                    for(int i = 0; i < taskList.size(); i++ ){
-                        System.out.println("\t" + (i+1) + ". " + taskList.get(i).getStatusIcon() + " " + taskList.get(i).getDescription() );
-                    }
-                    System.out.print(lineDivider);
-                    System.out.println("\tEnter \"done _\" to see mark task as done. \n");
-                } else {
-                    String emptyListMessage = String.format("%s\t List is empty!\n %s \n", lineDivider, lineDivider);
-                    System.out.print(emptyListMessage);
-                }
+            switch (commandWord) {
+                case "todo":
+                    System.out.println("todo");
+                    taskList.add(new Todo(content));
+                    addTaskSuccessMessage(taskList, "\tGot it. I've added this task: ");
+                    break;
+                    
+                case "deadline":
+                    System.out.println("deadline");
+                    String deadlineTask = content.split("/")[0].toLowerCase();
+                    String datelineDateBy = content.split("/")[1].split(" ")[1];
+                    taskList.add(new Deadline(deadlineTask,datelineDateBy ));
+                    addTaskSuccessMessage(taskList, "\tGot it. I've added this deadline: ");
+                    break;
+                    
+                case "event":
+                    System.out.println("event");
+                    String eventTask = content.split("/")[0].toLowerCase();
+                    String eventDateBy = content.split("/")[1];
+                    eventDateBy = eventDateBy.substring(eventDateBy.indexOf(" "));
+                    taskList.add(new Event(eventTask,eventDateBy));
+                    addTaskSuccessMessage(taskList, "\tGot it. I've added this Event: ");
+                    break;
 
-            } else if (userInput.toLowerCase().contains("done")){ // userInput == done to mark task as done
-                if (userInput.matches(".*\\d.*")) { // checks if there is a number in done cmd
-                    int taskNumber = Integer.parseInt(userInput.replaceAll("\\D+", "")) ;
-                    int indexOfTaskToBeMarked = taskNumber - 1;
-                    if (indexOfTaskToBeMarked < taskList.size()){
-                        taskList.get(indexOfTaskToBeMarked).setDone(true);
-                        String markedTaskAsDoneMessage =
-                                String.format("%s\t Nice! I've marked this task as done:\n %s %s \n%s \n",
-                                        lineDivider,
-                                        taskList.get(indexOfTaskToBeMarked).getStatusIcon(),
-                                        taskList.get(indexOfTaskToBeMarked).getDescription(),
-                                        lineDivider);
-                        System.out.println(markedTaskAsDoneMessage);
-                    } else {
-                        String taskDoesNotExistMessage = String.format("%s\t Task does not exist!\n %s \n", lineDivider, lineDivider);
-                        System.out.print(taskDoesNotExistMessage);
-                    }
-                } else {
-                    String invalidInputMessage = String.format("%s\t Invalid input!\n %s \n", lineDivider, lineDivider);
-                    System.out.print(invalidInputMessage);
-                }
-            } else { // regular adding of task
-                taskList.add(new Task(userInput));
+                case "list":
 
-                String addedMessage = String.format("%s\t added: %s\n%s", lineDivider, userInput, lineDivider);
+                    String listReturnString = String.format("%s%s%s",lineDivider,getList(taskList),lineDivider);
+                    System.out.println(listReturnString);
 
-                System.out.println(addedMessage + "\tEnter \"list\" to see full list. \n");
+                    break;
 
+                case "done":
+                    markTaskDone(taskList, userInput, content);
+
+                    break;
+
+                case "bye":
+                    System.out.println(dukeFarewell);
+                    System.exit(0);
+                default:
+                    System.out.println("Command word not recognised - please start command with " +
+                            "'todo', 'deadline' or 'event'");
             }
-            System.out.print("Enter task: ");
-            userInput = sc.nextLine();
         }
 
     }
 
+    public static void markTaskDone(ArrayList<Task> taskList, String userInput, String content) {
+        if (userInput.matches(".*\\d.*")) { // checks if there is a number in done cmd
+            int taskNumber = Integer.parseInt(content) ;
+            int indexOfTaskToBeMarked = taskNumber - 1;
+            if (indexOfTaskToBeMarked < taskList.size()){
+                taskList.get(indexOfTaskToBeMarked).setDone(true);
+                String markedTaskAsDoneMessage =
+                        String.format("%s\t Nice! I've marked this task as done:\n %s %s \n%s \n",
+                                lineDivider,
+                                taskList.get(indexOfTaskToBeMarked).getStatusIcon(),
+                                taskList.get(indexOfTaskToBeMarked).getDescription(),
+                                lineDivider);
+                System.out.println(markedTaskAsDoneMessage);
+                } else {
+                String taskDoesNotExistMessage = String.format("%s\t Task does not exist!\n %s \n", lineDivider, lineDivider);
+                System.out.print(taskDoesNotExistMessage);
+            }
+        } else {
+            String doneErrorPrompt = "Which task do you want to mark done?";
+            String doneListMessage = String.format("%s\t%s\n\t%s\n%s",lineDivider,doneErrorPrompt,getList(taskList),lineDivider);
+            System.out.println(doneListMessage);
+        }
+    }
+
+    public static void addTaskSuccessMessage(ArrayList<Task> taskList, String s) {
+        System.out.println(lineDivider);
+        System.out.println(s);
+        System.out.println("\t " + taskList.get(taskList.size() - 1).getStatusIcon()
+                + " " + taskList.get(taskList.size() - 1).getDescription());
+        System.out.println(lineDivider);
+    }
+
+    public static String getList(ArrayList<Task> taskList) {
+        if(!taskList.isEmpty()) { // userInput == list
+            StringBuilder sb = new StringBuilder();
+            String listAsString;
+
+            for (int i = 0; i < taskList.size(); i++) {
+                sb.append("\t");
+                sb.append((i + 1));
+                sb.append(". ");
+                sb.append(taskList.get(i).getStatusIcon());
+                sb.append(" ");
+                sb.append(taskList.get(i).getDescription());
+                sb.append("\n");
+                sb.toString();
+            }
+            sb.append("\n");
+            sb.append("\tNow you have ");
+            sb.append(taskList.size());
+            sb.append(" tasks in the list. \n");
+            sb.append("\tEnter \"done _\" to see mark task as done. \n");
+            listAsString = sb.toString();
+
+            return listAsString;
+        }
+        else {
+            return "List is empty!";
+        }
+    }
 
 
     public static void main(String[] args) {
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-//        System.out.println("Hello from\n" + logo);
 
 
         // Greetings
         System.out.println(dukeGreeting);
-
-        // Do echo function - Level 1
-//        echos();
-
-        // Do Add, List function - Level 2
-//        addList();
 
         // Mark as done - Task Manager app - Level 3
         taskApp();
