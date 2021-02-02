@@ -74,19 +74,19 @@ public class Duke {
     }
 
     /**
-     * Main program
+     * Starts the program. 
      */
     public static void main(String[] args) {
         initTaskList();
         displayWelcomeMessage();
-        while(true) {
-            userCommand = getUserInput();
+        while (true) {
+            getUserInput();
             executeCommand();
         }
     }
 
     /**
-     * Initializes the task list 
+     * Initializes the task list. 
      */
     private static void initTaskList() {
         tasks = new Task[MAX_LIST_SIZE];
@@ -94,7 +94,7 @@ public class Duke {
     }
 
     /**
-     * Displays the welcome message at launch. 
+     * Displays the welcome message. 
      */
     private static void displayWelcomeMessage() {
         displayToUser(MESSAGE_WELCOME);
@@ -105,10 +105,9 @@ public class Duke {
      * 
      * @return The user input obtained.  
      */
-    private static String getUserInput() {
+    private static void getUserInput() {
         // Remove trailing spaces
-        String command = SCANNER.nextLine().trim();
-        return command;
+        userCommand = SCANNER.nextLine().trim();
     }
 
     /**
@@ -133,7 +132,8 @@ public class Duke {
      *  - Add new event task to list. 
      * NO_COMMAND:
      *  - No command detected, display error message. 
-     * DEFAULT: invalid commands, display error message. 
+     * DEFAULT: 
+     *  - Invalid command, display error message. 
      */
     private static void executeCommand() {
         switch(getCommand()) {
@@ -166,7 +166,6 @@ public class Duke {
             displayToUser(ERROR_NO_COMMAND_RECEIVED);
             return;
         default:
-            // Invalid command
             displayToUser(ERROR_INVALID_COMMAND_RECEIVED);
             return;
         }
@@ -230,7 +229,7 @@ public class Duke {
         displayToUser(MESSAGE_MARKED, tasks[taskNumber].toString());
     }
 
-        /**
+    /**
      * Adds a new todo task to task list. 
      */
     private static void executeAddTodo() {
@@ -241,16 +240,17 @@ public class Duke {
 
     /**
      * Adds a new deadline task to task list. 
+     * Processes the user input to extract date. 
+     * If date is not null, create new deadline task. 
+     * Otherwise, display invalid command error. 
      */
     private static void executeAddDeadline() {
-        // Process deadline parameters
         String date = processParameters(DEADLINE_DATA_PREFIX_BY);
         if (date != null) {
             tasks[sizeOfTaskList] = new Deadline(userCommand, date);
             sizeOfTaskList++;
             displayAddTaskSuccessMessage();
         } else {
-            // Display error message
             displayToUser(ERROR_INVALID_COMMAND_RECEIVED);
         }
     }
@@ -296,11 +296,11 @@ public class Duke {
      */
     private static void displayAddTaskSuccessMessage() {
         displayToUser(MESSAGE_ADDED, "  " + getTask(sizeOfTaskList-1).toString(), String.format(MESSAGE_NUMBER_OF_TASKS,
-             sizeOfTaskList));
+                sizeOfTaskList));
     }
 
     /**
-     * Displays a message to the user. 
+     * Displays a given message to the user. 
      * 
      * @param message Message to be displayed. 
      */
@@ -330,11 +330,11 @@ public class Duke {
      * @return The list of all items in list, formatted with numberings and the total number of tasks in list. 
      */
     private static String getDisplayString(Task[] tasks) {
-        final StringBuilder message = new StringBuilder();
+        StringBuilder message = new StringBuilder();
         message.append(String.format("%s", MESSAGE_LIST));
 
         for (int i = 0; i < sizeOfTaskList; i++) {
-            final int displayIndex = i + 1;
+            int displayIndex = i + 1;
             message.append(String.format("\n\t %d. %s", displayIndex, getTask(i).toString()));
         }
         return message.toString();

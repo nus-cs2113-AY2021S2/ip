@@ -1,5 +1,4 @@
 public class Task {
-    /** Description of task */
     protected String description;
     /** Boolean to track if task is completed */
     protected boolean isDone;
