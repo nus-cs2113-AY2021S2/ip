@@ -1,5 +1,7 @@
 import java.util.Scanner;
 public class Duke {
+
+
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
@@ -9,7 +11,8 @@ public class Duke {
         int listNumber = 1;
         String doneString = null;
 
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?\n");
+        Greetings.welcome();
+
         String inputCommand = sc.nextLine();
 
         while (!inputCommand.equals("bye")) {
@@ -42,6 +45,7 @@ public class Duke {
             }
             inputCommand = sc.nextLine();
         }
-            System.out.println("Bye. Hope to see you again soon!");
+        Greetings.goodbye();
     }
+
 }
