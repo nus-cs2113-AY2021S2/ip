@@ -39,6 +39,7 @@ public class Duke {
     private static void executeCommand(String command, String userInput) {
         String errand;
         String timestamp;
+        String timestampHeader;
 
         switch(command) {
         case "TODO":
@@ -49,13 +50,15 @@ public class Duke {
         case "EVENT":
             errand = getErrand(userInput);
             timestamp = getTimestamp(userInput);
-            Task event = new Event(errand, timestamp);
+            timestampHeader = getTimestampHeader(userInput);
+            Task event = new Event(errand, timestamp, timestampHeader);
             event.addToTaskList(errand, timestamp);
             break;
         case "DEADLINE":
             errand = getErrand(userInput);
             timestamp = getTimestamp(userInput);
-            Task deadline = new Deadline(errand, timestamp);
+            timestampHeader = getTimestampHeader(userInput);
+            Task deadline = new Deadline(errand, timestamp, timestampHeader);
             deadline.addToTaskList(errand, timestamp);
             break;
         case "LIST":
@@ -88,13 +91,23 @@ public class Duke {
         String inputSubstring = getSubstring(userInput);
         int slashPosition = inputSubstring.indexOf("/");
         String timestamp = inputSubstring.substring(slashPosition);
-        String[] timestampArray = timestamp.split(" ");
-        timestamp = timestampArray[1];
+        int spacePosition = timestamp.indexOf(" ");
+        timestamp = timestamp.substring(spacePosition);
         return timestamp.trim();
     }
 
+    private static String getTimestampHeader(String userInput){
+        String inputSubstring = getSubstring(userInput);
+        int slashPosition = inputSubstring.indexOf("/");
+        String timestampHeader = inputSubstring.substring(slashPosition);
+        int spacePosition = timestampHeader.indexOf(" ");
+        timestampHeader = timestampHeader.substring(1, spacePosition);
+        return timestampHeader;
+    }
+
     /**
-     * Starts the Task Manager program
+     * Starts the Task Manager program.
+     * <p>Runs an infinite loop until "BYE" is called</p>
      */
     private static void runTaskManager() {
         String userInput;

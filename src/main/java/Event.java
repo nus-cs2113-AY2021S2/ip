@@ -1,10 +1,12 @@
 public class Event extends Task{
     private static final String EVENT_TYPE = "E";
     private String at;
+    private String timestampHeader;
 
-    public Event (String errand, String timestamp) {
+    public Event (String errand, String timestamp, String timestampHeader) {
         super(errand);
         this.at = timestamp;
+        this.timestampHeader = timestampHeader;
     }
 
     @Override
@@ -19,7 +21,7 @@ public class Event extends Task{
     }
 
     private void printAt() {
-        String trialingAt = " (at: " + at + ")";
+        String trialingAt = " (" + timestampHeader + ": " + at + ")";
         System.out.print(trialingAt);
     }
 }

@@ -1,10 +1,12 @@
 public class Deadline extends Task{
     private static final String DEADLINE_TYPE = "D";
-    protected String by;
+    private String by;
+    private String timestampHeader;
 
-    public Deadline(String errand, String timestamp) {
+    public Deadline(String errand, String timestamp, String timestampHeader) {
         super(errand);
-        by = timestamp;
+        this.by = timestamp;
+        this.timestampHeader = timestampHeader;
     }
 
     @Override
@@ -19,7 +21,7 @@ public class Deadline extends Task{
     }
 
     private void printBy() {
-        String trialingBy = " (by: " + by + ")";
+        String trialingBy = " (" + timestampHeader + ": " + by + ")";
         System.out.print(trialingBy);
     }
 }

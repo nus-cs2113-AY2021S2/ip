@@ -39,7 +39,7 @@ public class Task {
     }
 
     private void printTaskIndex(int taskIndex) {
-        System.out.print("[" + Integer.toString(taskIndex + 1) + "]");
+        System.out.print("[" + (taskIndex + 1) + "]");
     }
 
     private void printTaskType() {
@@ -90,7 +90,7 @@ public class Task {
     }
 
     private void printTaskCount() {
-        String taskCountMessage = "There are now " + Integer.toString(taskIndex + 1)
+        String taskCountMessage = "There are now " + (taskIndex + 1)
                 + " mission objectives, Commander.";
         System.out.println(taskCountMessage);
     }
