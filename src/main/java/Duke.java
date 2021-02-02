@@ -68,7 +68,7 @@ public class Duke {
    */
   public static void main(String[] args) {
     String welcomeText = "Hello, I am a PC assistant\n"
-        + "How do you want to set your tasks today?\n";
+        + "How do you want to set your tasks today?";
     System.out.println(welcomeText);
     Scanner scanner = new Scanner(System.in);
     String commandString = scanner.nextLine().toLowerCase(Locale.ROOT).trim();
@@ -79,7 +79,7 @@ public class Duke {
       Matcher commandMatches = commandPattern.matcher(commandString);
       if (!commandMatches.matches()) {
         System.out.println("Oof, invalid command :(");
-        System.out.println("What else can I get you?");
+        System.out.println("What other tasks do you want to do?");
         commandString = scanner.nextLine().toLowerCase(Locale.ROOT).trim();
         continue;
       }
@@ -120,7 +120,7 @@ public class Duke {
             break;
         }
       }
-      System.out.println("What else can I get you?");
+      System.out.println("What other tasks do you want to do?");
       commandString = scanner.nextLine().toLowerCase(Locale.ROOT).trim();
     }
   }

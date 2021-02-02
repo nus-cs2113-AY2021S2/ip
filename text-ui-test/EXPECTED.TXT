@@ -1,7 +1,17 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Hello, I am a PC assistant
+How do you want to set your tasks today?
+Gotcha, added this todo: [T][ ] buy milk
+What other tasks do you want to do?
+Gotcha, added this event: [E][ ] meeting (at: 9.30)
+What other tasks do you want to do?
+Gotcha, added this deadline: [D][ ] retire (by: 40)
+What other tasks do you want to do?
+Setting to done, original task status: [T][ ] buy milk
+>>> New task status: [T][X] buy milk
+What other tasks do you want to do?
+Here are the tasks in your list, Sir/Madam/Other:
+>>> 1. [T][X] buy milk
+>>> 2. [E][ ] meeting (at: 9.30)
+>>> 3. [D][ ] retire (by: 40)
+What other tasks do you want to do?
+Goodbye, hope to see you soon!
