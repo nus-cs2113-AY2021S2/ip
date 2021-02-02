@@ -5,19 +5,6 @@ import java.util.Scanner;
 /**
  * This class is to build a personal assistance chat-bot called "Kaman"
  * (Customised from Duke)
- * <p>
- * Week-2:
- * The program is implemented to greet users and exits subsequently.
- * <p>
- * Week-3:
- * Receives user inputs and stores them in "Task" objects
- * <p>
- * Perform functions such as:
- * - Listing the stored records
- * - Marking records as done
- * - Exiting the program
- * <p>
- * Some codes are added to prompt the user when their input is invalid.
  *
  * @author NgManSing
  */
@@ -65,14 +52,13 @@ public class Duke {
     }
 
     private static boolean executeCommandBye(String rawInput, String[] arguments) {
-        boolean isLoop = true;
-        if (arguments.length == 0) {
-            quitProgram();
-            isLoop = false;
-        } else {
+        if (arguments.length != 0) {
             System.out.println("Command \"Bye\" requires no argument. Please try again!");
+            return true;
         }
-        return isLoop;
+
+        quitProgram();
+        return false;
     }
 
     private static void executeCommandDone(String[] arguments) {
@@ -83,6 +69,7 @@ public class Duke {
         } catch (NumberFormatException e) {
             isArgumentInteger = false;
         }
+
         if (arguments.length == 1 && isArgumentInteger) {
             markAsDone(targetRecordIndex);
         } else {
@@ -156,39 +143,37 @@ public class Duke {
                 break;
             }
         }
-        if (hasSlashElement) {
-            switch (taskType) {
-            case Deadline.TASK_TYPE:
-                if (detailFragments[slashElementIndex].substring(1).equals("by")) {
-                    isTypeMatch = true;
-                }
-                break;
-            case Event.TASK_TYPE:
-                if (detailFragments[slashElementIndex].substring(1).equals("at")) {
-                    isTypeMatch = true;
-                }
-                break;
-            }
-        } else {
+        if (!hasSlashElement) {
             System.out.println("Invalid input! (No date/time provided)");
             return null;
         }
 
-        if (isTypeMatch) {
-            StringBuilder taskName = new StringBuilder();
-            StringBuilder dueDay = new StringBuilder();
-            for (int i = 0; i < slashElementIndex; i++) {
-                taskName.append(detailFragments[i]);
+        switch (taskType) {
+        case Deadline.TASK_TYPE:
+            if (detailFragments[slashElementIndex].substring(1).equals("by")) {
+                isTypeMatch = true;
             }
-            for (int i = slashElementIndex + 1; i < detailFragments.length; i++) {
-                dueDay.append(detailFragments[i]);
+            break;
+        case Event.TASK_TYPE:
+            if (detailFragments[slashElementIndex].substring(1).equals("at")) {
+                isTypeMatch = true;
             }
-            return new String[]{taskName.toString(), dueDay.toString()};
-        } else {
-            System.out.println("Invalid input! (keywords not matches)");
+            break;
+        }
+        if (!isTypeMatch) {
+            System.out.println("Invalid input! (keywords not matching)");
             return null;
         }
 
+        StringBuilder taskName = new StringBuilder();
+        StringBuilder dueDay = new StringBuilder();
+        for (int i = 0; i < slashElementIndex; i++) {
+            taskName.append(detailFragments[i]);
+        }
+        for (int i = slashElementIndex + 1; i < detailFragments.length; i++) {
+            dueDay.append(detailFragments[i]);
+        }
+        return new String[]{taskName.toString(), dueDay.toString()};
     }
 
     private static void showList() {
