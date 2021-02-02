@@ -42,7 +42,7 @@ public class Duke {
 
         switch(command) {
         case "TODO":
-            errand = getErrand(userInput);
+            errand = getSubstring(userInput);
             Task todo = new Todo(errand);
             todo.addToTaskList(errand, null); // Todo has no timestamp
             break;
@@ -61,85 +61,55 @@ public class Duke {
         case "LIST":
             Task.printList();
             break;
+        case "DONE":
+            errand = getSubstring(userInput);
+            Task.markDone(errand); // In this case, errand is the index of the item
+            break;
         case "BYE":
             printGoodbyeMessage();
             break;
         }
     }
 
+    private static String getSubstring(String userInput) {
+        int spacePosition = userInput.indexOf(" ");
+        String inputSubstring = userInput.substring(spacePosition+1);
+        return inputSubstring;
+    }
+
+    private static String getErrand(String userInput) {
+        String inputSubstring = getSubstring(userInput);
+        int slashPosition = inputSubstring.indexOf("/");
+        String errand = inputSubstring.substring(0, slashPosition);
+        return errand.trim();
+    }
+
     private static String getTimestamp(String userInput) {
-        int slashPosition = userInput.indexOf("/");
-        String timestamp = userInput.substring(slashPosition+1);
+        String inputSubstring = getSubstring(userInput);
+        int slashPosition = inputSubstring.indexOf("/");
+        String timestamp = inputSubstring.substring(slashPosition);
         String[] timestampArray = timestamp.split(" ");
         timestamp = timestampArray[1];
         return timestamp.trim();
     }
 
-    private static String getErrand(String userInput) {
-        String errand;
-        int spacePosition = userInput.indexOf(" ");
-        int slashPosition = userInput.indexOf("/");
-
-        // Slash not found, no timestamp behind
-        if(slashPosition == -1) {
-            errand = userInput.substring(spacePosition);
-        } else {
-            errand = userInput.substring(spacePosition, slashPosition);
-        }
-        return errand.trim();
-    }
-
-    public static void main(String[] args) {
+    /**
+     * Starts the Task Manager program
+     */
+    private static void runTaskManager() {
         String userInput;
         String command;
         Scanner in = new Scanner(System.in);
-
-        initialiseWelcomeMessage();
 
         do {
             userInput = in.nextLine();
             command = getCommand(userInput);
             executeCommand(command, userInput);
         } while (!command.equals("BYE"));
+    }
 
-
-
-        /*
-        Task task = new Task();
-        Task[] mission = new Task[MAX_ARRAY_LENGTH];
-
-        while (shouldLoop){
-            input = in.nextLine();
-
-            switch (input.toUpperCase()) {   // Force words to Upper to compare
-            case "BYE":
-                shouldLoop = false;
-                break;
-            case "LIST":
-                task.printList(mission, taskLength);
-                break;
-            default:
-                String[] inputArray = input.split(" ");
-                if (inputArray[0].equalsIgnoreCase("done")) {
-                    String taskDone = task.markDone(mission, inputArray[1], taskLength);
-                    String markDoneTemplate = "______________________________________________________\n"
-                            + "[Mission Completed] " + taskDone + "\n"
-                            + "______________________________________________________\n";
-                    System.out.println(markDoneTemplate);
-                } else { // All other inputs aside from keywords
-                    mission[taskLength] = new Task();
-                    mission[taskLength].addList(input);
-                    String echo = "______________________________________________________\n"
-                            + "[Orders received] " + input + "\n"
-                            + "______________________________________________________\n";
-                    System.out.println(echo);
-                    taskLength++;
-                }
-                break;
-            }
-        }
-
-        printGoodbyeMessage();
-        */
+    public static void main(String[] args) {
+        initialiseWelcomeMessage();
+        runTaskManager();
     }
 }

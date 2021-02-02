@@ -1,6 +1,5 @@
 public class Task {
     protected String description;
-    protected String timestamp;
     protected boolean isDone;
     protected static int taskIndex = 0;
     protected static final int MAX_ARRAY_SIZE = 100;
@@ -27,11 +26,6 @@ public class Task {
             index++;
         }
         System.out.println("\n");
-    }
-
-    protected void printTaskItem() {
-        String item = " " + this.description;
-        System.out.print(item);
     }
 
     private static void printTaskHeader() {
@@ -64,6 +58,11 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718");
     }
 
+    protected void printTaskItem() {
+        String item = " " + this.description;
+        System.out.print(item);
+    }
+
     public void addToTaskList(String errand, String timestamp) {
         echoInput(errand, timestamp);
         taskArray[taskIndex] = this;
@@ -71,68 +70,47 @@ public class Task {
     }
 
     public void echoInput(String errand, String timestamp) {
-        String echoBottom;
+        String taskString;
         String echoTop = "______________________________________________________\n"
                 + "[Orders received]:\n";
+        String echoBottom = "______________________________________________________\n";
 
         if (timestamp == null) { // Todo tasks
-            echoBottom = " " + errand + "\n"
-                    + "______________________________________________________\n";
+            taskString = " " + errand + "\n";
         } else { // Deadlines and Events
-            echoBottom = " " + errand + " (Timestamp: " + timestamp + ")" + "\n"
-                    + "______________________________________________________\n";
+            taskString = " " + errand + " (Timestamp: " + timestamp + ")" + "\n";
         }
 
         System.out.println(echoTop);
         printTaskType();
         printCompletionStatus();
+        System.out.println(taskString);
+        printTaskCount();
         System.out.println(echoBottom);
     }
 
-    /*
-    public void addList(String description) {
-        this.description = description;
-        this.isDone = false;
+    private void printTaskCount() {
+        String taskCountMessage = "There are now " + Integer.toString(taskIndex + 1)
+                + " mission objectives, Commander.";
+        System.out.println(taskCountMessage);
     }
 
-    public static String getStatusIcon(Task[] listArray, int i) {
-        return (listArray[i].isDone ? "\u2713" : "\u2718");
+    public static void markDone(String errand) { // In this case, errand is the index of the item
+        int taskIndex = Integer.parseInt(errand) - 1;
+        taskArray[taskIndex].isDone = true;
+        printMarkDonePrompt(taskIndex);
     }
 
-    public static void printList(Task[] listArray, int listIndex){
-        printTaskHeader();
-        for (int i = 0; i < listIndex; i++) {
-            System.out.println("[  " + getStatusIcon(listArray, i) + "  ]"
-                    + " [ " + (i+1) + " ] " // i+1 to make it user readable
-                    + listArray[i].description);
-        }
-        System.out.println(); // For a neater UI
-    }
+    private static void printMarkDonePrompt(int taskIndex) {
+        String doneTextTop = "______________________________________________________\n"
+                + "[Objective Completed]:\n";
+        String doneTextBottom = "______________________________________________________\n";
 
-    public static String markDone(Task[] tasksArray, String serialNumber, int taskLength) {
-        int taskIndex = serialNumberCheck(serialNumber, taskLength);
-        if (taskIndex >= 0) {
-            tasksArray[taskIndex].isDone = true;
-            return tasksArray[taskIndex].description;
-        } else {
-            // No item in list to return
-            return null;
-        }
+        System.out.println(doneTextTop);
+        taskArray[taskIndex].printTaskType();
+        taskArray[taskIndex].printCompletionStatus();
+        taskArray[taskIndex].printTaskItem();
+        System.out.println();
+        System.out.println(doneTextBottom);
     }
-
-    private static int serialNumberCheck(String serialNumber, int taskLength) {
-        try {
-            int taskIndex = Integer.parseInt(serialNumber);
-            taskIndex--; // Users will key in +1 of index due to S/N
-            if (taskIndex < taskLength && taskIndex >= 0) {
-                return taskIndex;
-            } else {
-                System.out.println("Index out of bound");
-                return -1;
-            }
-        } catch (NumberFormatException e) {
-            return -1;
-        }
-    }
-    */
 }
