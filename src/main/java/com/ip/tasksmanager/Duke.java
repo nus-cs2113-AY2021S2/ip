@@ -6,7 +6,6 @@ public class Duke {
 
     public static String line = "____________________________________________________________";
     public static final int INPUT_PHRASES_COUNT = 2;
-    public static boolean hasNextLine = false;
 
     public static Tasks tasks[] = new Tasks[100]; //for storing (all types of) tasks
     public static int taskCount = 0; //for counting tasks
@@ -39,20 +38,20 @@ public class Duke {
      * Removes taskType from user's entire input string
      * Stores remaining string (with taskName and taskDate combined) in static variable taskInputString
      *
-     * @param input entire input string of the user
+     * @param input - entire input string of the user, made of taskType + taskName + taskDate
      */
     public static void separateTypeOfTaskAndTaskInputString(String input) {
         //find position between taskType and rest of task description
-        int taskStringPosition = input.indexOf(" ") + 1;
-        taskInputString = input.substring(taskStringPosition);
+        int taskInputStringPosition = input.indexOf(" ") + 1;
+        taskInputString = input.substring(taskInputStringPosition);
     }
 
     /**
-     * Takes in the remaining taskInput of the user's input
+     * Takes in the remaining 'taskInputString' of the user's input
      * Splits it into two parts, the name and date of the task
      * and stores it in two static variables, taskName & taskDate respectively
      *
-     * @param taskInput essentially taskInputString, which contains only taskName and taskDate combined
+     * @param taskInput - essentially taskInputString, which does not include taskType
      */
     public static void splitTaskNameAndDate(String taskInput) {
         int beforeDatePosition = taskInput.indexOf("/");
@@ -114,17 +113,18 @@ public class Duke {
                 tasks[taskCount] = new Events(taskName, taskDate); //add task to list
                 printAddedTask();
             }
-            //OR: lists all the user's current tasks:
+            //OR: lists all the user's current tasks in the format of taskType,taskStatus,taskName(and taskDate):
             else if (input.startsWith("list")) {
                 System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < taskCount; i++) {
-                    System.out.println(i + 1 + "." + tasks[i].convertToTaskOutputString());
+                    int taskNumber = i+1; //stores the current numbering of the bulleted tasks
+                    System.out.println(taskNumber + "." + tasks[i].convertToTaskOutputString());
                 }
             }
-            //OR: mark current task as 'done' & informs the user about it:
+            //OR: mark current task as 'done' & outputs the taskType,taskStatus,taskName(and taskDate):
             else if (input.startsWith("done")) {
-                String[] word = input.split(" ");
-                int index = Integer.parseInt(word[1]) - 1; //obtain task number(which starts from 1)
+                String[] commandAndTaskNumber = input.split(" ");
+                int index = Integer.parseInt(commandAndTaskNumber[1]) - 1; //obtain task number(which starts from 1)
 
                 tasks[index].markAsDone(); //mark task given by current command as 'done'
 
