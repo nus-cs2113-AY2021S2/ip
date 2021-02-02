@@ -12,7 +12,7 @@ public class Duke {
     public static final String WELCOME_MESSAGE = LINE + "Hello from\n" + LOGO
             + "What can I do for you today?\n" + LINE;
     public static final String BYE_MESSAGE = LINE + "Goodbye! Hope to see you around soon!\n" + LINE;
-    public static final String HELP_MESSAGE = LINE + "Add task:\n"
+    public static final String HELP_MESSAGE = LINE + "Add todo:\n"
             + "Command prefix: NONE\n"
             + "Argument(s): task\n\n"
             + "Show tasks:\n"
@@ -32,12 +32,10 @@ public class Duke {
     public static final String INVALID_COMMAND_MESSAGE = "I am sorry, I do not recognise that command\n"
             + "Please try again\n";
 
-
-
     public static void main(String[] args) {
-        System.out.print(WELCOME_MESSAGE);
+        printWelcome();
         interact();
-        System.out.print(BYE_MESSAGE);
+        printBye();
     }
 
     public static void interact() {
@@ -66,11 +64,17 @@ public class Duke {
                 printList(list, index);
                 break;
             case "todo":
-                addToDo(input, list, index);
-                index++;
+                if(input==null) {
+                    printInvalidArgumentMessage();
+                } else {
+                    addToDo(input, list, index);
+                    index++;
+                }
                 break;
             case "deadline":
-                if(input.toLowerCase().contains("/by")) {
+                if (input == null) {
+                    printInvalidArgumentMessage();
+                } else if(input.toLowerCase().contains("/by")) {
                     String desc = input.substring(0, input.toLowerCase().indexOf("/by") - 1);
                     String dueDate = input.substring(input.toLowerCase().indexOf("/by") + 4);
                     addDeadline(desc, dueDate, list, index);
@@ -80,7 +84,9 @@ public class Duke {
                 }
                 break;
             case "event":
-                if(input.toLowerCase().contains("/at")) {
+                if (input == null) {
+                    printInvalidArgumentMessage();
+                } else if(input.toLowerCase().contains("/at")) {
                     String desc = input.substring(0, input.toLowerCase().indexOf("/at")-1);
                     String date = input.substring(input.toLowerCase().indexOf("/at")+4);
                     addEvent(desc, date, list, index);
@@ -93,16 +99,16 @@ public class Duke {
                 try {
                     int ind = Integer.parseInt(input);
                     markAsDone(list, ind, index);
-                } catch (NumberFormatException e) {
-                    System.out.print(LINE + INVALID_ARGUMENT_MESSAGE + LINE);
+                } catch (Exception e) {
+                    printInvalidArgumentMessage();
                 }
                 break;
             case "undo":
                 try {
                     int ind = Integer.parseInt(input);
                     undoMarkAsDone(list, ind, index);
-                } catch (NumberFormatException e) {
-                    System.out.print(LINE + INVALID_ARGUMENT_MESSAGE + LINE);
+                } catch (Exception e) {
+                    printInvalidArgumentMessage();
                 }
                 break;
             default:
@@ -163,7 +169,7 @@ public class Duke {
                 System.out.print(LINE);
             }
         } else {
-            System.out.print(LINE + INVALID_ARGUMENT_MESSAGE+ LINE);
+            printInvalidArgumentMessage();
         }
     }
 
@@ -179,7 +185,18 @@ public class Duke {
                 System.out.print(LINE);
             }
         } else {
-            System.out.print(LINE + INVALID_ARGUMENT_MESSAGE+ LINE);
+            printInvalidArgumentMessage();
         }
+    }
+
+    private static void printWelcome() {
+        System.out.print(WELCOME_MESSAGE);
+    }
+
+    private static void printBye() {
+        System.out.print(BYE_MESSAGE);
+    }
+    private static void printInvalidArgumentMessage() {
+        System.out.print(LINE + INVALID_ARGUMENT_MESSAGE + LINE);
     }
 }
