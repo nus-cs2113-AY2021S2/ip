@@ -38,10 +38,10 @@ public class Duke {
             case ("todo"):
                 tasks[itemNo] = new Todo(taskDescription);
                 System.out.println("\t____________________________________________________________");
-                System.out.println("Got it! I've added this task:");
+                System.out.println("\tGot it! I've added this task:");
                 System.out.println("\t" + tasks[itemNo].toString());
                 itemNo++;
-                System.out.printf("Now you have %d tasks in the list.\n", itemNo);
+                System.out.printf("\tNow you have %d tasks in the list.\n", itemNo);
                 System.out.println("\t____________________________________________________________");
                 break;
 
@@ -51,10 +51,10 @@ public class Duke {
                 String by = strings[1];
                 tasks[itemNo] = new Deadline(taskDescription, by);
                 System.out.println("\t____________________________________________________________");
-                System.out.println("Got it! I've added this task:");
+                System.out.println("\tGot it! I've added this task:");
                 System.out.println("\t" + tasks[itemNo].toString());
                 itemNo++;
-                System.out.printf("Now you have %d tasks in the list.\n", itemNo);
+                System.out.printf("\tNow you have %d tasks in the list.\n", itemNo);
                 System.out.println("\t____________________________________________________________");
                 break;
 
