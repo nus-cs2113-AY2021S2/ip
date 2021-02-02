@@ -1,6 +1,6 @@
 public class Task {
-    private boolean done;
-    private String label;
+    protected boolean done;
+    protected String label;
 
     public Task(String label) {
         this.done = false;
@@ -15,6 +15,11 @@ public class Task {
         return label;
     }
 
+    @Override
+    public String toString() {
+        return getLabel();
+    }
+
     public void isDone(boolean done) {
         this.done = done;
     }
@@ -22,5 +27,10 @@ public class Task {
     // Returns a checkbox string depending on whether task is done
     public String getCheckbox() {
         return this.isDone() ? "[✔]":"[❌]";
+    }
+
+    // Returns a string depending on type of Task
+    public String getTypeString() {
+        return "[ ]";
     }
 }
