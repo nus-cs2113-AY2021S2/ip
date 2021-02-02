@@ -9,7 +9,7 @@ public class Task {
         this.description = description;
         this.isDone = false;
         taskCount += 1;
-        
+
     }
 
     public String getStatusIcon(){
@@ -34,5 +34,10 @@ public class Task {
 
     public void markAsDone(){
         isDone = true;
+    }
+
+    @Override
+    public String toString() {
+        return "[" + getStatusIcon() + "] " + getDescription();
     }
 }
