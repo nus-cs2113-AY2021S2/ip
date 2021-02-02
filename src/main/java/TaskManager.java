@@ -11,7 +11,7 @@ public class TaskManager {
     public static void addTask(String input){
         String firstWord = StringManipulator.getFirstWord(input);
         if (firstWord.equals("todo")){
-            String taskDescription = StringManipulator.getStringAfterWhiteSpaceFor(input);
+            String taskDescription = StringManipulator.getStringAfterWhiteSpace(input);
             Todo t = new Todo(taskDescription);
             tasksObjectsArray[Task.getTaskCount()-1] = t;
             printMessageAfterTaskIsAdded(t);
