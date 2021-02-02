@@ -11,7 +11,7 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
 
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> tasks = new ArrayList<Task>();
+        ArrayList<Todo> todos = new ArrayList<Todo>();
 
         System.out.println("~____________________________________________________________~");
         System.out.println("What's up! I'm Duke");
@@ -26,30 +26,30 @@ public class Duke {
                 // Exits program
                 isRunning = false;
             } else if (phrase.equals("list")) {
-                // List all tasks
+                // List all todos
                 System.out.println("~____________________________________________________________~");
-                System.out.println("Here are the tasks in your list:");
+                System.out.println("Here are the todos in your list:");
                 int i = 0;
-                for (Task task : tasks) {
-                    System.out.println(++i + ". [" + task.getStatusIcon() + "] " + task.getDescription());
+                for (Todo todo : todos) {
+                    System.out.println(++i + ". [" + todo.getStatusIcon() + "] " + todo.getDescription());
                 };
                 System.out.println("~____________________________________________________________~\n");
             } else if (phrase.startsWith("done ")) {
-                // Set a task as done
-                int taskIndex = phrase.charAt(phrase.length()-1) - '0';
+                // Set a todo as done
+                int todoIndex = phrase.charAt(phrase.length()-1) - '0';
 
                 System.out.println("~____________________________________________________________~");
-                System.out.println("Nice! I've marked this task as done:");
-                Task task = tasks.get(taskIndex - 1);
-                task.markAsDone();
-                System.out.println("[" + task.getStatusIcon() + "] " + task.getDescription());
+                System.out.println("Nice! I've marked this todo as done:");
+                Todo todo = todos.get(todoIndex - 1);
+                todo.markAsDone();
+                System.out.println("[" + todo.getStatusIcon() + "] " + todo.getDescription());
                 System.out.println("~____________________________________________________________~\n");
             } else {
-                // Add a task
+                // Add a todo
                 System.out.println("~____________________________________________________________~");
-                Task task = new Task(phrase);
+                Todo todo = new Todo(phrase);
                 System.out.println("added: " + phrase);
-                tasks.add(task);
+                todos.add(todo);
                 System.out.println("~____________________________________________________________~\n");
             }
         }
