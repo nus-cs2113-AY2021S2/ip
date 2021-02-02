@@ -20,7 +20,7 @@ public class TaskManager {
     }*/
     public void showAddResult(int numOfTasks) {
         System.out.println("____________________________________________________________");
-        System.out.println("Got it. I've added this task: ");
+        System.out.println("Got it. I've added this task:");
         System.out.println(tasks[numOfTasks]);
         System.out.println("Now you have " + (numOfTasks+1) + " tasks in the list.");
         System.out.println("____________________________________________________________");
@@ -48,7 +48,7 @@ public class TaskManager {
         if (taskIndexShow > 0 && taskIndexShow <= numOfTasks) {
             this.tasks[taskIndexShow-1].setDone(true);
             System.out.println("____________________________________________________________");
-            System.out.println("Nice! I've marked this task as done: ");
+            System.out.println("Nice! I've marked this task as done:");
             System.out.println(tasks[taskIndexShow-1]);
             System.out.println("____________________________________________________________");
         } else {

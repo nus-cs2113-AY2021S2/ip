@@ -3,8 +3,14 @@ import java.util.Scanner;
 
 public class Duke {
     public static void showHello() {
+        String logo = " ____        _\n"
+                + "|  _ \\ _   _| | _____\n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        System.out.println("Hello from\n" + logo);
         System.out.println("____________________________________________________________");
-        System.out.println("Hello! I'm Soul, your truly soul mate");
+        System.out.println("Hello! I'm Duke, your truly daily helper");
         System.out.println("What can I do for you?");
         System.out.println("____________________________________________________________");
 
