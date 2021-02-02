@@ -5,11 +5,13 @@ public class Bob {
     public static TaskList taskList = new TaskList();
 
     public static void main(String[] args) {
+        welcomeMessage();
+        scannerLoop();
+        goodbyeMessage();
+    }
+
+    private static void scannerLoop() {
         Scanner in = new Scanner(System.in);
-        String welcome = "____________________________________________________________\n" +
-                " Hello! I'm Bob 😀\n" +
-                " If you need anything hit me up fam 😌\n";
-        System.out.println(welcome);
 
         // Scanner loop until bye command
         boolean isScanning = true;
@@ -32,10 +34,19 @@ public class Bob {
                 taskList.addToList(line);
             }
         }
+    }
 
+    private static void goodbyeMessage() {
         String goodbye = "____________________________________________________________\n" +
                 " Chao 👌\n" +
                 "____________________________________________________________";
         System.out.println(goodbye);
+    }
+
+    private static void welcomeMessage() {
+        String welcome = "____________________________________________________________\n" +
+                " Hello! I'm Bob 😀\n" +
+                " If you need anything hit me up fam 😌\n";
+        System.out.println(welcome);
     }
 }
