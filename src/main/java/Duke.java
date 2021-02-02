@@ -12,7 +12,6 @@ public class Duke {
         System.out.println("What can I do for you?");
         System.out.println();
         System.out.println(line);
-        String input ="";
     }
     private static void byeMessage() {
         System.out.println("Bye. Hope to see you again soon!");
@@ -31,7 +30,7 @@ public class Duke {
         System.out.println(line);
     }
 
-    public static void completedTask(int number){
+    public static void markAsDone(int number){
         System.out.println("Nice! I've marked this task as done:");
         t[number-1].markAsDone();
         System.out.println(t[number-1].toString());
@@ -81,7 +80,7 @@ public class Duke {
                 printList(t);
             } else if(input.startsWith("done")) {
                 int num = Integer.parseInt(input.substring(5));
-                completedTask(num);
+                markAsDone(num);
             } else if(input.startsWith("todo")){
                 input = input.substring(5);
                 addTodo(input);
