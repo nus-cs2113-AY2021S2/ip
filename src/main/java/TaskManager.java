@@ -11,13 +11,6 @@ public class TaskManager {
         return numOfTasks;
     }
 
-    /*public void addTask(String content) {
-        tasks[numOfTasks] = new Task(content);
-        this.numOfTasks++;
-        System.out.println("____________________________________________________________");
-        System.out.println("added: " + content);
-        System.out.println("____________________________________________________________");
-    }*/
     public void showAddResult(int numOfTasks) {
         System.out.println("____________________________________________________________");
         System.out.println("Got it. I've added this task:");
@@ -25,6 +18,7 @@ public class TaskManager {
         System.out.println("Now you have " + (numOfTasks+1) + " tasks in the list.");
         System.out.println("____________________________________________________________");
     }
+
     public void addTodo(String content) {
         tasks[numOfTasks] = new Todo(content);
         showAddResult(numOfTasks);

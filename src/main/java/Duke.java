@@ -1,7 +1,17 @@
-import java.util.Locale;
 import java.util.Scanner;
 
 public class Duke {
+
+    private static final Scanner SCANNER = new Scanner(System.in);
+    private static final char INPUT_COMMENT_MARKER = '#';
+    private static final int CAPACITY = 99;
+    private static TaskManager tasks;
+
+
+    public static void initTaskManager() {
+         tasks = new TaskManager(CAPACITY);
+    }
+
     public static void showHello() {
         String logo = " ____        _\n"
                 + "|  _ \\ _   _| | _____\n"
@@ -22,44 +32,103 @@ public class Duke {
         System.out.println("____________________________________________________________");
     }
 
-    public static void main(String[] args) {
-        showHello();
-        String line;
-        Scanner in = new Scanner(System.in);
-        line = in.nextLine();
-
-        TaskManager tasks = new TaskManager(99);
-
-        while (!line.equals("bye")) {
-            if(line.equals("list")) {
-                tasks.listAllTasks();
-                line = in.nextLine();
-            } else if(line.matches("^\\ *(done)\\ *[1-9][0-9]*")){
-                int taskIndexShow = Integer.parseInt(line.replaceAll("[^0-9]", ""));
-                tasks.markTaskDone(taskIndexShow);
-                line = in.nextLine();
-            } else if(line.matches("^\\ *(todo).*$")){
-                String[] content = line.split("todo",2);
-                tasks.addTodo(content[1].trim());
-                line = in.nextLine();
-            } else if(line.matches("^\\ *(deadline).*(/by).*")){
-                String[] typeContentBy = line.trim().split("deadline", 2);
-                String[] contentBy = typeContentBy[1].trim().split("/by", 2);
-                tasks.addDeadline(contentBy[0].trim(), contentBy[1].trim());
-                line = in.nextLine();
-            } else if(line.matches("^\\ *(event).*(/at).*")){
-                    String[] typeContentAt= line.trim().split("event", 2);
-                    String[] contentAt = typeContentAt[1].trim().split("/at", 2);
-                    tasks.addEvent(contentAt[0].trim(), contentAt[1].trim());
-                    line = in.nextLine();
-            } else
-            {
-                System.out.println("Undefined!");
-                line = in.nextLine();
-
-            }
-        }
-
+    private static void executeExitProgramRequest() {
         showBye();
+        System.exit(0);
+    }
+
+    private static String getUserInput() {
+        String inputLine = SCANNER.nextLine();
+        // silently consume all blank and comment lines
+        while (inputLine.trim().isEmpty() || inputLine.trim().charAt(0) == INPUT_COMMENT_MARKER) {
+            inputLine = SCANNER.nextLine();
+        }
+        return inputLine;
+    }
+
+    public static CommandType getCommandType(String userInputString) {
+        CommandType commandType;
+        if(userInputString.equals("list")) {
+            commandType = CommandType.LIST;
+        } else if (userInputString.matches("^\\ *(done)\\ *[1-9][0-9]*")) {
+            commandType = CommandType.DONE;
+        } else if (userInputString.matches("^\\ *(todo).*$")) {
+            commandType = CommandType.TODO;
+        } else if (userInputString.matches("^\\ *(deadline).*(/by).*")) {
+            commandType = CommandType.DEADLINE;
+        } else if (userInputString.matches("^\\ *(event).*(/at).*")) {
+            commandType = CommandType.EVENT;
+        } else if (userInputString.equals("bye")) {
+            commandType = CommandType.EXIT;
+        } else {
+            commandType = CommandType.UNDEFINED;
+        }
+        return commandType;
+    }
+
+    public static void getMessageForInvalidCommandInput() {
+        System.out.println("Undefined!");
+    }
+
+    public static void executeAddTodo(String userCommand) {
+        String[] typeContent = userCommand.split("todo",2);
+        tasks.addTodo(typeContent[1].trim());
+    }
+
+    public static void executeAddDeadline(String userCommand) {
+        String[] typeContentBy = userCommand.trim().split("deadline", 2);
+        String[] contentBy = typeContentBy[1].trim().split("/by", 2);
+        tasks.addDeadline(contentBy[0].trim(), contentBy[1].trim());
+    }
+
+    public static void executeAddEvent(String userCommand) {
+        String[] typeContentAt= userCommand.trim().split("event", 2);
+        String[] contentAt = typeContentAt[1].trim().split("/at", 2);
+        tasks.addEvent(contentAt[0].trim(), contentAt[1].trim());
+    }
+
+    public static void executeList(String userCommand) {
+        tasks.listAllTasks();
+    }
+
+    public static void executeDone(String userCommand) {
+        int taskIndexShow = Integer.parseInt(userCommand.replaceAll("[^0-9]", ""));
+        tasks.markTaskDone(taskIndexShow);
+    }
+
+    public static void executeCommand(String userInputString) {
+        CommandType type = getCommandType(userInputString);
+        switch (type) {
+        case TODO:
+            executeAddTodo(userInputString);
+            return;
+        case DEADLINE:
+            executeAddDeadline(userInputString);
+            return;
+        case EVENT:
+            executeAddEvent(userInputString);
+            return;
+        case LIST:
+            executeList(userInputString);
+            return;
+        case DONE:
+            executeDone(userInputString);
+            return;
+        case EXIT:
+            executeExitProgramRequest();
+            return;
+        default:
+            getMessageForInvalidCommandInput();
+            return;
+        }
+    }
+
+    public static void main(String[] args) {
+        initTaskManager();
+        showHello();
+        while (true) {
+            String userCommand = getUserInput();
+            executeCommand(userCommand);
+        }
     }
 }
