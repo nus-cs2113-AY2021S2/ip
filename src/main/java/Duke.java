@@ -19,13 +19,13 @@ public class Duke {
         while (!command.equals("bye")) {
             if (command.equals("list")) {
                 printTasks(list, index);
-            } else if (command.substring(0,4).equals("todo")) {
+            } else if (command.startsWith("todo")) {
                 recordTasks(list, index, command,"todo");
                 index++;
-            } else if (command.substring(0,8).equals("deadline")) {
+            } else if (command.startsWith("deadline")) {
                 recordTasks(list, index, command,"deadline");
                 index++;
-            } else if (command.substring(0,5).equals("event")) {
+            } else if (command.startsWith("event")) {
                 recordTasks(list, index,command,"event");
                 index++;
             }
@@ -42,17 +42,16 @@ public class Duke {
 
     public static void recordTasks(Task list[], int index, String command, String category) {
         printLine();
+        String time = command.substring(command.indexOf("/") + 4);
         System.out.println("Got it. I've added this task:");
-        if (category == "todo") {
+        if (category.equals("todo")) {
             list[index] = new Todo(command.substring(5));
-        } else if (category == "deadline") {
+        } else if (category.equals("deadline")) {
             String content = command.substring(9, command.indexOf("/"));
-            String deadline = command.substring(command.indexOf("/") + 4);
-            list[index] = new Deadline(content, deadline);
-        } else if (category == "event") {
+            list[index] = new Deadline(content, time);
+        } else if (category.equals("event")) {
             String content = command.substring(6,command.indexOf("/"));
-            String eventTime = command.substring(command.indexOf("/") + 4);
-            list[index] = new Event(content, eventTime);
+            list[index] = new Event(content, time);
         }
         System.out.println(list[index].toString());
         int count = index + 1;
