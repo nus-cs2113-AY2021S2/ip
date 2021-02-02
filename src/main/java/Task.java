@@ -1,4 +1,5 @@
 public class Task {
+
     protected String description;
     protected boolean isDone;
 
@@ -9,5 +10,10 @@ public class Task {
 
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718");
+    }
+
+    @Override
+    public String toString() {
+        return String.format("[%s] %s", getStatusIcon(), description);
     }
 }
