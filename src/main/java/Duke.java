@@ -28,37 +28,37 @@ public class Duke {
     }
   }
 
-  private static void setAddedTaskStatus(int taskId, boolean isDone) {
+  private static String setAddedTaskStatus(int taskId, boolean isDone) {
     int actualTaskId = taskId - 1;
     if (actualTaskId >= addedTasks.size() || actualTaskId < 0) {
-      System.out.printf(
+      return String.format(
           "I'm terribly sorry Sir/Madam/Other :(\n"
-              + "%d is not a valid task id for the current list of tasks.\n",
+              + "%d is not a valid task id for the current list of tasks.",
           taskId);
-      return;
     }
     Task selectedTask = addedTasks.get(actualTaskId);
-    System.out.printf("Setting to done, original task status: %s\n", selectedTask.toString());
+    String originalTaskStatus = selectedTask.toString();
     selectedTask.setDone(isDone);
-    System.out.printf(">>> New task status: %s\n", selectedTask.toString());
+    return String.format("Setting to done, original task status: %s\n>>> New task status: %s",
+        originalTaskStatus, selectedTask.toString());
   }
 
-  private static void addTodo(String description) {
+  private static String addTodo(String description) {
     Todo newTodo = new Todo(description);
     addedTasks.add(newTodo);
-    System.out.printf("Gotcha, added this todo: %s\n", newTodo.toString());
+    return String.format("Gotcha, added this todo: %s", newTodo.toString());
   }
 
-  private static void addDeadline(String description, String by) {
+  private static String addDeadline(String description, String by) {
     Deadline newDeadline = new Deadline(description, by);
     addedTasks.add(newDeadline);
-    System.out.printf("Gotcha, added this deadline: %s\n", newDeadline.toString());
+    return String.format("Gotcha, added this deadline: %s", newDeadline.toString());
   }
 
-  private static void addEvent(String description, String at) {
+  private static String addEvent(String description, String at) {
     Event newEvent = new Event(description, at);
     addedTasks.add(newEvent);
-    System.out.printf("Gotcha, added this event: %s\n", newEvent.toString());
+    return String.format("Gotcha, added this event: %s", newEvent.toString());
   }
 
   /**
@@ -101,22 +101,30 @@ public class Duke {
         switch (nextCommand) {
           case "done":
             int taskId = Integer.parseInt(commandArgs);
-            setAddedTaskStatus(taskId, true);
+            String taskStatusAdditionOutcome = setAddedTaskStatus(taskId, true);
+            System.out.println(taskStatusAdditionOutcome);
             break;
           case "todo":
-            addTodo(commandArgs);
+            String todoAdditionOutcome = addTodo(commandArgs);
+            System.out.println(todoAdditionOutcome);
             break;
           case "deadline":
             String[] deadlineArgs = commandArgs.split(" /by ");
-            if (deadlineArgs.length == 2) {
-              addDeadline(deadlineArgs[0], deadlineArgs[1]);
+            if (deadlineArgs.length != 2) {
+              System.out.println("Not sure how to parse your request to add a deadline...");
+              break;
             }
+            String deadlineAdditionOutcome = addDeadline(deadlineArgs[0], deadlineArgs[1]);
+            System.out.println(deadlineAdditionOutcome);
             break;
           case "event":
             String[] eventArgs = commandArgs.split(" /at ");
-            if (eventArgs.length == 2) {
-              addEvent(eventArgs[0], eventArgs[1]);
+            if (eventArgs.length != 2) {
+              System.out.println("Not sure how to parse your request to add an event...");
+              break;
             }
+            String eventAdditionOutcome = addEvent(eventArgs[0], eventArgs[1]);
+            System.out.println(eventAdditionOutcome);
             break;
         }
       }
