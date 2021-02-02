@@ -1,41 +1,70 @@
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
 
-        String line;
-        String []word = new String[2];
-        String []list= new String[100];
-        Scanner in = new Scanner(System.in);
-        int counter = 0;
+    //to store the sentence
+    private static String line;
+    //to keep track of the number of task
+    private static int count = 0;
+    private static Scanner in = new Scanner(System.in);
+
+    //Array of object
+    private static Task[] tasks = new Task[100];
+
+
+    public static void main(String[] args) {
 
         System.out.println("Hello! I'm Duke\nWhat can i do for you?\n");
 
-        while(true) {
+        while(true){
 
             line = in.nextLine();
 
             if(line.equals("bye")){
+                System.out.println("Bye. Hope to see you again soon!\n");
                 break;
             }
+            else if(line.contains("todo")){
+                String task = line.substring(5,line.length());
+                tasks[count]= new ToDos(task);
+                System.out.println("Got it. I've added this task");
+                System.out.print("  ");
+                tasks[count++].printStatus();
+                System.out.println("Now you have "+count+" tasks in the list");
+            }
+            else if(line.contains("deadline")){
+                String task = line.substring(9,line.indexOf("/"));
+                String by = line.substring(line.indexOf("/")+4,line.length());
+                tasks[count]= new DeadLines(task,by);
+                System.out.println("Got it. I've added this task:");
+                System.out.print("  ");
+                tasks[count++].printStatus();
+                System.out.println("Now you have "+count+" tasks in the list");
+            }
+            else if(line.contains("event")){
+                String task = line.substring(6,line.indexOf("/"));
+                String by = line.substring(line.indexOf("/")+4,line.length());
+                tasks[count]=new Events(task,by);
+                System.out.println("Got it. I've added this task:");
+                System.out.print("  ");
+                tasks[count++].printStatus();
+                System.out.println("Now you have "+count+" tasks in the list:");
+            }
+            else if(line.contains("list")){
+                for(int i=0;i<count;i++){
+                    System.out.print(i+1+".");
+                    tasks[i].printStatus();
+                }
+            }else if(line.contains("done")){
+                int index = Integer.parseInt(line.substring(5,line.length()));
+                tasks[index-1].setDone(true);
+                System.out.println("Nice! I've marked this task as done:");
+                tasks[index-1].printStatus();
+            }
 
-            else if(line.equals("list")){
-                //print list
-                new Task().printList();
-            }
-            else if(line.contains("done")){
-                //spilt the word to get the number
-                String [] words = line.split(" ");
-                //get the number
-                int index = Integer.parseInt(words[words.length-1]);
-                new Task().MarkAsDone(index-1);
-            }
-            else {
-                //add task
-                new Task().addTask(line);
-            }
+
         }
-        System.out.println("Bye. Hope to see you again soon!\n");
 
     }
+
 }
