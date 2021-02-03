@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Duke {
     public enum inputCommand {
-        ADD, BYE, LIST, DONE, ERROR
+        ADD, BYE, DONE, ERROR, LIST, TODO, DEADLINE, EVENT;
     }
 
     public static void main(String[] args) {
@@ -40,26 +40,38 @@ public class Duke {
     private static inputCommand processInput(TaskList taskList, String input) {
         switch (getCommand(input)) {
         case ADD:
-            taskList.addTask(input);
-            return inputCommand.ADD;
-        case BYE:
-            return inputCommand.BYE;
-        case LIST:
-            return inputCommand.LIST;
+            taskList.addTask(input, inputCommand.ADD);
+            break;
+        case TODO:
+            taskList.addTask(input, inputCommand.TODO);
+            break;
+        case DEADLINE:
+            taskList.addTask(input, inputCommand.DEADLINE);
+            break;
+        case EVENT:
+            taskList.addTask(input, inputCommand.EVENT);
+            break;
         case DONE:
             //Retrieve task number from input
             int taskNum = getTaskNum(input);
             taskList.finishTask(taskNum - 1);
-            return inputCommand.DONE;
+            break;
         default:
-            return inputCommand.ERROR;
+            break;
         }
+        return getCommand(input);
     }
 
     private static void outputReaction(inputCommand command, String input, TaskList taskList) {
         switch (command) {
         case ADD:
-            System.out.println("Added: " + input);
+            // Fallthrough
+        case DEADLINE:
+            // Fallthrough
+        case EVENT:
+            // Fallthrough
+        case TODO:
+            System.out.println("Added: " + taskList.getTask());
             break;
         case BYE:
             System.out.println("Bye. Hope to see you again soon!");
@@ -87,6 +99,15 @@ public class Duke {
         }
         else if (input.startsWith("done ")) {
             return inputCommand.DONE;
+        }
+        else if (input.startsWith("todo ")) {
+            return inputCommand.TODO;
+        }
+        else if (input.startsWith("deadline ")) {
+            return inputCommand.DEADLINE;
+        }
+        else if (input.startsWith("event ")) {
+            return inputCommand.EVENT;
         }
         else {
             return inputCommand.ADD;

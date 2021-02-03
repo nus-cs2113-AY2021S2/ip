@@ -7,8 +7,23 @@ public class TaskList {
         tasks = new ArrayList<>();
     }
 
-    public void addTask(String description) {
-        Task newTask = new Task(description);
+    public void addTask(String description, Duke.inputCommand command) {
+        Task newTask;
+
+        switch (command) {
+        case TODO:
+            newTask = new ToDo(description);
+            break;
+        case EVENT:
+            newTask = new Event(description);
+            break;
+        case DEADLINE:
+            newTask = new Deadline(description);
+            break;
+        default:
+            newTask = new Task(description);
+            break;
+        }
         tasks.add(newTask);
     }
 
@@ -18,8 +33,7 @@ public class TaskList {
         for (int i = 0; i < tasks.size(); i++) {
             outputString.append(i + 1);
             outputString.append(".");
-            outputString.append(tasks.get(i).getStatusIcon());
-            outputString.append(tasks.get(i).getDescription());
+            outputString.append(tasks.get(i).toString());
             outputString.append(System.lineSeparator());
         }
         if (outputString.length() == 0) {
@@ -33,6 +47,11 @@ public class TaskList {
     }
 
     public String getTask(int taskNum) {
-        return tasks.get(taskNum).getStatusIcon() + tasks.get(taskNum).getDescription();
+        return tasks.get(taskNum).toString();
+    }
+
+    // Gets the Last task of tasks array
+    public String getTask() {
+        return tasks.get(tasks.size() - 1).toString();
     }
 }
