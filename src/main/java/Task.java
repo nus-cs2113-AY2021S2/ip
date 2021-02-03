@@ -19,17 +19,13 @@ public class Task {
         return description;
     }
 
-    public String listTask() {
+    public String toString() {
         String str = "[";
         if (isDone) {
-            //System.out.print(getStatusIcon() + "] " + description);
             str = str + getStatusIcon() + "] " + description;
         } else {
-            //System.out.print(" ] " + description);
             str = str + getStatusIcon() + "] " + description;
         }
         return str;
     }
-
-    public void printingDescription(){ System.out.println(this); }
 }

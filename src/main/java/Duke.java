@@ -3,7 +3,36 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.*;
 
+/* need to parse commands now into todo, deadline, event */
+/* after parsing commands, need to parse the task and the time */
+/* need to have counter that keeps tracks of total tasks in list */
+
 public class Duke {
+
+    private static String getUserInput() {
+        Scanner in = new Scanner(System.in);
+        return in.nextLine();
+    }
+
+    private static void showExitMessage() {
+        System.out.println("\tBye fellow coder! Hope to see you again soon!");
+    }
+
+    private static void listTasks(List<Task> list) {
+        int i = 0;
+        while (i < list.size()) {
+            int num = i+1;
+            System.out.println("\t" + num + ". " + list.get(i).toString());
+            i++;
+        }
+    }
+
+    private static void markAsDone(List<Task> list, int index) {
+        list.get(index).markAsDone();
+        System.out.println("\tNice! I've marked this task as done:");
+        System.out.println("\t\t" + list.get(index).toString());
+    }
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -12,6 +41,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
         boolean isOn = true;
+        int taskCounter = 0;
         List<Task> list = new ArrayList<Task>();
 
         System.out.println("Hello from\n" + logo);
@@ -22,29 +52,51 @@ public class Duke {
 
         while(isOn) {
             String line;
-            Scanner in = new Scanner(System.in);
-            line = in.nextLine();
+            line = getUserInput();
             String[] part = line.split("(?<=\\D)(?=\\d)");
+            int commandIndex = line.indexOf(' ');
+            int timeIndex = line.indexOf('/');
+            String command = null;
+            String test = null;
+            if (commandIndex != -1) {
+                command = line.substring(0, commandIndex);
+            }
+
             if (line.equals("bye")) {
-                System.out.println("\tBye fellow coder! Hope to see you again soon!");
+                showExitMessage();
                 isOn = false;
             } else if (line.equals("list")) {
-                int i = 0;
-                while (i < list.size()) {
-                    int num = i+1;
-                    System.out.println("\t" + num + ". " + list.get(i).listTask());
-                    i++;
-                }
+                listTasks(list);
             } else if (part[0].equals("done ")) {
                 int index = Integer.parseInt(part[1]) - 1;
-                list.get(index).markAsDone();
-                System.out.println("\tNice! I've marked this task as done:");
-                System.out.println("\t\t" + list.get(index).listTask());
-            } else {
-                System.out.println("\t" + "added: " + line);
-                list.add(new Task(line));
-                //System.out.println(part[0]);
-            } 
+                markAsDone(list, index);
+            } else if (command.equals("todo")) {
+                String task = line.substring(commandIndex);
+                list.add(new Todo(task));
+
+                System.out.println("Got it. I've added this task:");
+                System.out.println("\t" + list.get(taskCounter).toString());
+                taskCounter++;
+                System.out.println("Now you have " + taskCounter + " tasks in the list.\n");
+            } else if (command.equals("deadline")) {
+                String task = line.substring(commandIndex, timeIndex);
+                String time = line.substring(timeIndex+4);
+                list.add(new Deadline(task, time));
+
+                System.out.println("Got it. I've added this task:");
+                System.out.println("\t" + list.get(taskCounter).toString());
+                taskCounter++;
+                System.out.println("Now you have " + taskCounter + " tasks in the list.");
+            } else if (command.equals("event")) {
+                String task = line.substring(commandIndex, timeIndex);
+                String time = line.substring(timeIndex+4);
+                list.add(new Event(task, time));
+
+                System.out.println("Got it. I've added this task:");
+                System.out.println("\t" + list.get(taskCounter).toString());
+                taskCounter++;
+                System.out.println("Now you have " + taskCounter + " tasks in the list.");
+            }
         }
     }
 }
