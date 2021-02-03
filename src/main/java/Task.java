@@ -1,6 +1,7 @@
 public class Task {
     protected String description;
     protected boolean isDone;
+
     //can create static variable to get number of tasks (the range for indexes for the "done" command in main)
 
     public Task(String description){
@@ -15,5 +16,9 @@ public class Task {
 
     public void setAsDone(){
         this.isDone = true;
+    }
+
+    public String toString(){
+        return "[" + getStatusIcon() + "] " + this.description;
     }
 }

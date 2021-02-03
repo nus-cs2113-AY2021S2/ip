@@ -1,7 +1,31 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
+
+    public static final String LINE = "____________________________________________________________";
+
+    public static boolean checkForSubstring(String[] input, String substring){
+        for(String string : input){
+            if(string.equals(substring)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static int indexOfSubstring(String[] input, String substring){
+        int index = 0;
+        for(String string : input){
+            if(string.equals(substring)){
+                return index;
+            }
+            index++;
+        }
+        return -1;
+    }
+
     public static boolean isInteger(String s) {
         try {
             Integer.parseInt(s);
@@ -9,6 +33,11 @@ public class Duke {
             return false;
         }
         return true;
+    }
+
+    public static void badUserInput(){
+        System.out.println("I'm sorry, your input does not comply with the available features I have");
+        System.out.println("Kindly try again");
     }
 
     public static void main(String[] args) {
@@ -31,63 +60,109 @@ public class Duke {
 
         Scanner in = new Scanner(System.in);
         String userInput;
-        ArrayList<Task> taskList = new ArrayList<Task>();
+        //instead of using tasks[100], I used an ArrayList. Index int is to access elements
+        ArrayList<Task> tasks = new ArrayList<Task>();
         int index;
+        Task newItem = null;
 
         userInput = in.nextLine();
         while (!userInput.equals("bye")) {
             String[] command = userInput.split(" ");
-            if (command[0].equals("list") && command.length == 1) {
-                index = 1;
-                System.out.println("____________________________________________________________");
-                for (Task task : taskList) {
-                    System.out.println(index + "." + "[" + task.getStatusIcon() + "] " + task.description);
-                    index += 1;
+            String instruction = command[0];
+            boolean isUserInputGood = true;
+            boolean isNewItem = false;
+
+            switch(instruction){
+            case "list":
+                if(command.length == 1){
+                    index = 1;
+                    System.out.println(LINE);
+                    for (Task task : tasks) {
+                        System.out.println(index + "." + task.toString());
+                        index += 1;
+                    }
+                    System.out.println(LINE);
+                }else{
+                    isUserInputGood = false;
                 }
-                System.out.println("____________________________________________________________");
-            } else if (command[0].equals("done")) {
-                //If the first/only word is done, do the following check:
-                if (command.length == 2 && isInteger(command[1])) {
-                    //if the length is exactly 2 and the second value after the space is an integer, valid command
-                    if (0 < Integer.parseInt(command[1]) && Integer.parseInt(command[1]) <= taskList.size()) {
+                break;
+            case "done":
+                if(command.length == 2 && isInteger(command[1])){
+                    index = Integer.parseInt(command[1]) - 1;
+                    if (0 <= index && index < tasks.size()) {
                         //if the given value to set as done is an existing index
-                        taskList.get(Integer.parseInt(command[1]) - 1).setAsDone();
-                        System.out.println("____________________________________________________________");
+                        tasks.get(index).setAsDone();
+                        System.out.println(LINE);
                         System.out.println("Nice! I've marked this task as done:");
-                        System.out.println("[" + taskList.get(Integer.parseInt(command[1]) - 1).getStatusIcon() + "] "
-                                + taskList.get(Integer.parseInt(command[1]) - 1).description);
-                        System.out.println("____________________________________________________________");
+                        System.out.println(tasks.get(index).toString());
+                        System.out.println(LINE);
                         //TODO
                         // Currently a task can be marked as done repeatedly.
                         // This does not cause any errors, but may be required to fix
                     } else {
-                        //if the given value does not match to a range that makes sense
-                        System.out.println("____________________________________________________________");
-                        System.out.println("The index in the task list that you have selected to indicate as done," +
-                                "does not exist!");
-                        System.out.println("____________________________________________________________");
+                        System.out.println("The input index that you have selected to indicate as done,"+
+                                "is out of the range of existing indexes!");
                     }
-
                 } else {
-                    // for the situation where the user keys in "done", "done 3.21512" or "done done" or something
-                    // along these lines
-                    //TODO
-                    // perhaps can prompt a different message
-                    System.out.println("____________________________________________________________");
-                    taskList.add(new Task(userInput));
-                    System.out.println("added: " + userInput);
-                    System.out.println("____________________________________________________________");
+                    isUserInputGood = false;
                 }
-            } else {
-                System.out.println("____________________________________________________________");
-                taskList.add(new Task(userInput));
-                System.out.println("added: " + userInput);
-                System.out.println("____________________________________________________________");
+                break;
+            case "todo":
+                if(command.length > 1) {
+                    newItem = new Todo(String.join(" ", Arrays.copyOfRange(command, 1, command.length)));
+                    tasks.add(newItem);
+                    isNewItem = true;
+                } else {
+                    isUserInputGood = false;
+                }
+                break;
+            case "event":
+                if(checkForSubstring(command, "/at")){
+                    int separatorIndex = indexOfSubstring(command, "/at");
+                    String description = String.join(" ", Arrays.copyOfRange(command,
+                            1, separatorIndex));
+                    String at = String.join(" ",Arrays.copyOfRange(command,
+                            separatorIndex + 1, command.length));
+                    newItem = new Event(description, at);
+                    tasks.add(newItem);
+                    isNewItem = true;
+                } else{
+                    isUserInputGood = false;
+                }
+                break;
+            case "deadline":
+                if(checkForSubstring(command, "/by")){
+                    int separatorIndex = indexOfSubstring(command, "/by");
+                    String description = String.join(" ", Arrays.copyOfRange(command,
+                            1, separatorIndex));
+                    String by = String.join(" ",Arrays.copyOfRange(command,
+                            separatorIndex + 1, command.length));
+                    newItem = new Deadline(description, by);
+                    tasks.add(newItem);
+                    isNewItem = true;
+                } else{
+                    isUserInputGood = false;
+                }
+                break;
+            default:
+                isUserInputGood = false;
+                break;
             }
+
+            if(!isUserInputGood) {
+                badUserInput();
+            } else if (isNewItem){
+                System.out.println(LINE);
+                System.out.println("Got it. I've added this task:");
+                System.out.println(newItem.toString());
+                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                System.out.println(LINE);
+            }
+
             userInput = in.nextLine();
         }
-        System.out.println("____________________________________________________________");
+        System.out.println(LINE);
         System.out.println("Bye. Hope to see you again soon!");
-        System.out.println("____________________________________________________________");
+        System.out.println(LINE);
     }
 }
