@@ -1,13 +1,13 @@
 public class Deadline extends Task {
 
-    protected String by;
+    protected String deadlineDate;
 
-    public Deadline(String description, String by) {
+    public Deadline(String description, String deadlineDate) {
         super(description);
-        this.by = by;
+        this.deadlineDate = deadlineDate;
     }
-    // Prints task
+    @Override
     public void printTask() {
-        System.out.println("[D][" + getStatusIcon() + "] " + description + "(by:" + by +")");
+        System.out.println("[D][" + getStatusIcon() + "] " + description + "(by:" + deadlineDate +")");
     }
 }

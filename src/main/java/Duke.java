@@ -1,110 +1,121 @@
 import java.util.Scanner;
 
 public class Duke {
+
+    static final int COMMAND_DEFAULT = 0;
+    static final int COMMAND_TODO = 1;
+    static final int COMMAND_DEADLINE = 2;
+    static final int COMMAND_EVENT = 3;
+
     // Prints horizontal line
-    public static void printLine() {
+    public static void printDividerLine() {
         System.out.println("____________________________________________________________");
-    }
-    // Prints horizontal line with an extra new line
-    public static void printLineWithNewLine() {
-        System.out.println("____________________________________________________________\n");
     }
     // Prints hello message
     public static void printHello() {
-        printLine();
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
-        printLineWithNewLine();
+        printDividerLine();
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        System.out.println("Hello! I'm Duke\n" + logo);
+        System.out.println("What can I do for you?\n" + "List of commands: todo, deadline, event, done, bye");
+        printDividerLine();
     }
     // Prints bye message
     public static void printBye() {
-        printLine();
+        printDividerLine();
         System.out.println("Bye. Hope to see you again soon!");
-        printLineWithNewLine();
+        printDividerLine();
     }
     // Prints list of tasks
     public static void printList(Task[] tasks, int count) {
-        printLine();
+        printDividerLine();
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < count; i++) {
             System.out.print(i + 1 + ".");
             tasks[i].printTask();
         }
-        printLineWithNewLine();
+        printDividerLine();
     }
     // Adds task to list
-    public static int addTask(Task[] tasks, int count, String line, int command) {
-        printLine();
-        int indexOfSlash = line.indexOf("/");
+    public static int addTask(Task[] tasks, int taskCount, String userInput, int command) {
         String description;
         String date;
-        if (command == 0) {
-            tasks[count] = new Task(line);
-        } else if (command == 1) {
-            description = line.substring(5);
-            tasks[count] = new Todo(description);
-        } else if (command == 2) {
-            description = line.substring(9,indexOfSlash);
-            date = line.substring(indexOfSlash+3);
-            tasks[count] = new Deadline(description, date);
-        } else if (command == 3) {
-            description = line.substring(6,indexOfSlash);
-            date = line.substring(indexOfSlash+3);
-            tasks[count] = new Event(description, date);
+        int indexOfSlash = userInput.indexOf("/");
+
+        printDividerLine();
+
+        switch (command) {
+        case COMMAND_TODO:
+            description = userInput.substring(5);
+            tasks[taskCount] = new Todo(description);
+            break;
+        case COMMAND_DEADLINE:
+            description = userInput.substring(9, indexOfSlash);
+            date = userInput.substring(indexOfSlash + 3);
+            tasks[taskCount] = new Deadline(description, date);
+            break;
+        case COMMAND_EVENT:
+            description = userInput.substring(6, indexOfSlash);
+            date = userInput.substring(indexOfSlash + 3);
+            tasks[taskCount] = new Event(description, date);
+            break;
+        default:
+            tasks[taskCount] = new Task(userInput);
         }
-        System.out.println("Got it. I've added this task:");
-        System.out.print("  ");
-        tasks[count++].printTask();
-        System.out.println("Now you have " + count + " tasks in the list.");
-        printLineWithNewLine();
-        return count;
+
+        System.out.print("Got it. I've added this task:\n  ");
+        tasks[taskCount++].printTask();
+        System.out.println("Now you have " + taskCount + " tasks in the list.");
+        printDividerLine();
+        return taskCount;
     }
     // Marks task as done
-    public static void markTask(Task[] tasks, int count, String line) {
-        printLine();
-        int length = line.length();
+    public static void markTask(Task[] tasks, int count, String userInput) {
+        int length = userInput.length();
+        String number = userInput.substring(5);
+        int taskNumber = Integer.parseInt(number) - 1;
+
+        printDividerLine();
         // Check if input is valid
         if (length <= 5) {
             return;
         }
-        String digits = line.substring(5);
-        int number = Integer.parseInt(digits) - 1;
-        // Check if number is valid
-        if (number >= count || number < 0) {
-            return;
+        if (taskNumber < count && taskNumber >= 0) {
+            tasks[taskNumber].markAsDone();
+            System.out.println("Nice! I've marked this task as done:");
+            tasks[taskNumber].printTask();
+            printDividerLine();
         }
-        tasks[number].markAsDone();
-        System.out.println("Nice! I've marked this task as done:");
-        tasks[number].printTask();
-        printLineWithNewLine();
     }
 
     public static void main(String[] args) {
+        String userInput;
+        Scanner in = new Scanner(System.in);
+        Task[] tasks = new Task[100];
+        int taskCount = 0;
 
         printHello();
 
-        String line;
-        Scanner in = new Scanner(System.in);
-        int count = 0;
-        Task[] tasks = new Task[100];
-
         while(true) {
-            line = in.nextLine();
-            if (line.equals("bye")) {
+            userInput = in.nextLine();
+            if (userInput.equals("bye")) {
                 printBye();
                 break;
-            } else if (line.equals("list")) {
-                printList(tasks, count);
-            } else if (line.startsWith("done")) {
-                markTask(tasks, count, line);
-            } else if (line.startsWith("todo")) {
-                count = addTask(tasks, count, line, 1);
-            } else if (line.startsWith("deadline")) {
-                count = addTask(tasks, count, line, 2);
-            } else if (line.startsWith("event")) {
-                count = addTask(tasks, count, line, 3);
+            } else if (userInput.equals("list")) {
+                printList(tasks, taskCount);
+            } else if (userInput.startsWith("done")) {
+                markTask(tasks, taskCount, userInput);
+            } else if (userInput.startsWith("todo")) {
+                taskCount = addTask(tasks, taskCount, userInput, COMMAND_TODO);
+            } else if (userInput.startsWith("deadline")) {
+                taskCount = addTask(tasks, taskCount, userInput, COMMAND_DEADLINE);
+            } else if (userInput.startsWith("event")) {
+                taskCount = addTask(tasks, taskCount, userInput, COMMAND_EVENT);
             } else {
-                count = addTask(tasks, count, line, 0);
+                taskCount = addTask(tasks, taskCount, userInput, COMMAND_DEFAULT);
             }
         }
     }

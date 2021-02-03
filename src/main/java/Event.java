@@ -1,13 +1,13 @@
 public class Event extends Task {
 
-    protected String at;
+    protected String eventDate;
 
-    public Event(String description, String at) {
+    public Event(String description, String eventDate) {
         super(description);
-        this.at = at;
+        this.eventDate = eventDate;
     }
-    // Prints task
+    @Override
     public void printTask() {
-        System.out.println("[E][" + getStatusIcon() + "] " + description + "(at:" + at +")");
+        System.out.println("[E][" + getStatusIcon() + "] " + description + "(at:" + eventDate +")");
     }
 }
