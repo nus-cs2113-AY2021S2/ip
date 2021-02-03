@@ -4,6 +4,7 @@ public class Duke {
     private static Task[] tasks = new Task[100];
 
     public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -19,11 +20,14 @@ public class Duke {
         int numOfCompletedTasks = 0;
         int numOfTasks = 0;
         int n = 0;
-        while(isOn) {
-            Scanner in = new Scanner(System.in);
+        while(isOn && in.hasNextLine()) {
             String line = in.nextLine();
             String[] words = line.split(" ");
             if(line.equals("bye")){
+                System.out.println("    --------------------------------------------------------------------------------");
+                System.out.println("    Bye. Hope to see you again soon!");
+                System.out.println(" ");
+                System.out.println("    --------------------------------------------------------------------------------");
                 isOn = false;
             }
             else if(words[0].equals("todo")){
@@ -143,9 +147,5 @@ public class Duke {
                 System.out.println("    --------------------------------------------------------------------------------");
             }
         }
-        System.out.println("    --------------------------------------------------------------------------------");
-        System.out.println("    Bye. Hope to see you again soon!");
-        System.out.println(" ");
-        System.out.println("    --------------------------------------------------------------------------------");
     }
 }
