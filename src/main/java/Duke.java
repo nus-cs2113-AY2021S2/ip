@@ -24,8 +24,8 @@ public class Duke {
         System.out.print(line);
 
         String input = "";
-        Scanner in = new Scanner(System.in);
-        input = in.nextLine();
+        Scanner userInput = new Scanner(System.in);
+        input = userInput.nextLine();
         ArrayList<Task> tasks = new ArrayList<>();
 
         while (!input.equals("bye")) {
@@ -38,7 +38,7 @@ public class Duke {
                 System.out.print("____________________________________________________________\n" +
                         "Got it. I've added this task:"  + "\n" +
                         "[T]" + "[ ] " + t +"\n"+
-                        "Now you have " +tasks.size() + " tasks in the list." + "\n"+
+                        "Now you have " +tasks.size() + " tasks userInput the list." + "\n"+
                         "____________________________________________________________\n");
 
             }else if (input.contains("deadline") ) {
@@ -51,7 +51,7 @@ public class Duke {
                 System.out.print("____________________________________________________________\n" +
                         "Got it. I've added this task:"  + "\n" +
                         "[D]" + "[ ] " + d + "("+"by: " +by+")"+"\n"+
-                        "Now you have " +tasks.size() + " tasks in the list." + "\n"+
+                        "Now you have " +tasks.size() + " tasks userInput the list." + "\n"+
                         "____________________________________________________________\n");
 
             }else if (input.contains("event") ) {
@@ -63,13 +63,18 @@ public class Duke {
                 System.out.print("____________________________________________________________\n" +
                         "Got it. I've added this task:"  + "\n" +
                         "[E]" + "[ ] " + e + "("+"at: " +at+")"+"\n"+
-                        "Now you have " +tasks.size() + " tasks in the list." + "\n"+
+                        "Now you have " +tasks.size() + " tasks userInput the list." + "\n"+
                         "____________________________________________________________\n");
 
             }else if (input.equals("list")) {
+                if(tasks.size() == 0){
+                    System.out.print(line+"\n");
+                    System.out.print("You have zero task at the moment."+"\n");
+                    System.out.print(line+"\n");
+                }else{
 
                 System.out.print(line+"\n");
-                System.out.print("Here are the tasks in your list: "+"\n");
+                System.out.print("Here are the tasks userInput your list: "+"\n");
 
                 for (int i = 0; i < tasks.size(); i++) {
                     System.out.print(
@@ -77,23 +82,33 @@ public class Duke {
                                     "["+tasks.get(i).getStatusIcon()+"] "+
                                     tasks.get(i).getDescription() + "\n");
                 }
-                System.out.print(line+"\n");
+                System.out.print(line+"\n");}
 
-            } else if (input.contains("done")){
+            }else if (input.contains("done")){
 
                 int dividerPosition = input.indexOf(" ");
                 String taskNo = input.substring(dividerPosition+1);
 
                 int taskIndex = Integer.parseInt(taskNo)-1;
+                if(taskIndex > tasks.size()){
+                    System.out.print(line+"\n");
+                    System.out.print("You have no such task."+"\n");
+                    System.out.print(line+"\n");
+                }else{
                 tasks.get(taskIndex).markAsDone();
                 System.out.print(line+"\n");
                 System.out.print("Nice! I've marked this task as done:"+"\n"
                         +"["+tasks.get(taskIndex).getType()+"]"+"["+tasks.get(taskIndex).getStatusIcon()+"] "+
                         tasks.get(taskIndex).getDescription()+"\n");
                 System.out.print(line+"\n");
-
+                }
+            }else{
+                System.out.print(line+"\n");
+                System.out.print("Sorry, I didnt get you."+"\n"+
+                        "Please enter the command again."+"\n");
+                System.out.print(line+"\n");
             }
-            input = in.nextLine();
+            input = userInput.nextLine();
         }
         System.out.println(exit);
 
