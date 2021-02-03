@@ -26,7 +26,7 @@ public class Duke {
         return -1;
     }
 
-    public static boolean isInteger(String s) {
+    public static boolean checkIfInteger(String s) {
         try {
             Integer.parseInt(s);
         } catch (NumberFormatException e) {
@@ -35,12 +35,7 @@ public class Duke {
         return true;
     }
 
-    public static void badUserInput(){
-        System.out.println("I'm sorry, your input does not comply with the available features I have");
-        System.out.println("Kindly try again");
-    }
-
-    public static void main(String[] args) {
+    public static void welcomeMessage(){
         String logo = " _                          \n"
                 + "| |                         \n"
                 + "| |     _   _   ___   _ __  \n"
@@ -51,17 +46,49 @@ public class Duke {
                 + "        |___/              \n";
         System.out.println("Hello from\n" + logo);
 
-
         System.out.println();
         System.out.println("____________________________________________________________");
         System.out.println("Hello! I'm Lyon");
         System.out.println("What can I do for you?");
+    }
 
+    public static void badUserInputMessage(){
+        System.out.println(LINE);
+        System.out.println("I'm sorry, your input does not comply with the available features I have");
+        System.out.println("Kindly try again");
+    }
+
+    public static void markTaskDoneMessage(ArrayList<Task> tasks, int index){
+        System.out.println(LINE);
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println(tasks.get(index).toString());
+        System.out.println(LINE);
+    }
+
+
+    public static void newItemMessage(ArrayList<Task> tasks, Task newItem){
+        System.out.println(LINE);
+        System.out.println("Got it. I've added this task:");
+        System.out.println(newItem.toString());
+        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+        System.out.println(LINE);
+    }
+
+    public static void goodbyeMessage(){
+        System.out.println(LINE);
+        System.out.println("Bye. Hope to see you again soon!");
+        System.out.println(LINE);
+    }
+
+    public static void main(String[] args) {
+
+        welcomeMessage();
 
         Scanner in = new Scanner(System.in);
         String userInput;
-        //instead of using tasks[100], I used an ArrayList. Index int is to access elements
+        // Instead of using tasks[100], I used an ArrayList.
         ArrayList<Task> tasks = new ArrayList<Task>();
+        // Index int is to access elements of the ArrayList
         int index;
         Task newItem = null;
 
@@ -87,15 +114,12 @@ public class Duke {
                 }
                 break;
             case "done":
-                if(command.length == 2 && isInteger(command[1])){
+                if(command.length == 2 && checkIfInteger(command[1])){
                     index = Integer.parseInt(command[1]) - 1;
                     if (0 <= index && index < tasks.size()) {
-                        //if the given value to set as done is an existing index
+                        // If the given value to set as done is an existing index
                         tasks.get(index).setAsDone();
-                        System.out.println(LINE);
-                        System.out.println("Nice! I've marked this task as done:");
-                        System.out.println(tasks.get(index).toString());
-                        System.out.println(LINE);
+                        markTaskDoneMessage(tasks, index);
                         //TODO
                         // Currently a task can be marked as done repeatedly.
                         // This does not cause any errors, but may be required to fix
@@ -123,6 +147,7 @@ public class Duke {
                             1, separatorIndex));
                     String at = String.join(" ",Arrays.copyOfRange(command,
                             separatorIndex + 1, command.length));
+
                     newItem = new Event(description, at);
                     tasks.add(newItem);
                     isNewItem = true;
@@ -137,6 +162,7 @@ public class Duke {
                             1, separatorIndex));
                     String by = String.join(" ",Arrays.copyOfRange(command,
                             separatorIndex + 1, command.length));
+
                     newItem = new Deadline(description, by);
                     tasks.add(newItem);
                     isNewItem = true;
@@ -150,19 +176,13 @@ public class Duke {
             }
 
             if(!isUserInputGood) {
-                badUserInput();
+                badUserInputMessage();
             } else if (isNewItem){
-                System.out.println(LINE);
-                System.out.println("Got it. I've added this task:");
-                System.out.println(newItem.toString());
-                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-                System.out.println(LINE);
+                newItemMessage(tasks, newItem);
             }
 
             userInput = in.nextLine();
         }
-        System.out.println(LINE);
-        System.out.println("Bye. Hope to see you again soon!");
-        System.out.println(LINE);
+        goodbyeMessage();
     }
 }
