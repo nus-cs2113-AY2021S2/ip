@@ -39,6 +39,7 @@ public class Duke {
             }
             while(line.equals("list")){
                 System.out.println("____________________________________________________________\n");
+                System.out.println("Here are the tasks in your list:\n");
                 for (int i = 0; i < index; i++){
                     System.out.println(i+1 + ".[" + anArray[i].getStatusIcon() + "] " + anArray[i].getDescription() + "\n");
                 }
