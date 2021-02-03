@@ -167,11 +167,13 @@ public class Duke {
 
         StringBuilder taskName = new StringBuilder();
         StringBuilder dueDay = new StringBuilder();
-        for (int i = 0; i < slashElementIndex; i++) {
-            taskName.append(detailFragments[i]);
+        taskName.append(detailFragments[0]);
+        for (int i = 1; i < slashElementIndex; i++) {
+            taskName.append(" ").append(detailFragments[i]);
         }
-        for (int i = slashElementIndex + 1; i < detailFragments.length; i++) {
-            dueDay.append(detailFragments[i]);
+        dueDay.append(detailFragments[slashElementIndex + 1]);
+        for (int i = slashElementIndex + 2; i < detailFragments.length; i++) {
+            dueDay.append(" ").append(detailFragments[i]);
         }
         return new String[]{taskName.toString(), dueDay.toString()};
     }
