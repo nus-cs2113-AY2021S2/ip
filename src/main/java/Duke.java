@@ -1,8 +1,18 @@
 import java.util.Scanner;
 
 public class Duke {
+    private static final int MAX_TASK = 3;
 
-    private static final int MAX_TASK = 100;
+    private static final int BYE_COMMAND = 0;
+    private static final int LIST_COMMAND = 1;
+    private static final int HELP_COMMAND = 2;
+    private static final int DONE_COMMAND = 3;
+    private static final int TODO_COMMAND = 4;
+    private static final int DEADLINE_COMMAND = 5;
+    private static final int EVENTS_COMMAND = 6;
+    private static final int ADD_COMMAND = 7;
+
+
 
     public static void main(String[] args) {
         printHello();
@@ -13,55 +23,154 @@ public class Duke {
     private static void runProgram() {
         Task[] taskList = new Task[MAX_TASK];
         Scanner in = new Scanner(System.in);
+        boolean  isFull = false;
 
         //Loop to receive response.
         while (true){
 
             String input = in.nextLine();
+            int command = parseCommand(input);
 
-            // BYE command
-            if(input.equalsIgnoreCase("bye")){
+            //HANDLE FULL LIST
+            if(Task.taskCount == MAX_TASK && !isFull){
+                printListFullWarning();
+                isFull = true;
+                continue;
+            }
+
+            // This check only allows commands "list" and "bye" to pass when list is full
+
+            if (isFull && !isAllowedWhenListFull(command)) {
+                printListFullWarning();
+                continue;
+            }
+
+            switch(command) {
+            case BYE_COMMAND:
                 return;
-            }
 
-            // LIST command
-            if(input.equalsIgnoreCase("list")){
+            case LIST_COMMAND:
                 runList(taskList);
-            }
+                break;
 
-            //HELP COMMAND
-            else if(input.equalsIgnoreCase("help")){
+            case HELP_COMMAND:
                 printHelp();
-            }
+                break;
 
-            // DONE command
-            else if(startsWith(input, "done")){
+            case DONE_COMMAND:
                 runDone(taskList, input);
-            }
+                break;
 
-            // TO-DO COMMAND
-            else if(startsWith(input, "todo")){
+            case TODO_COMMAND:
                 runTodo(taskList, parseJob(input, ""));
-            }
+                break;
 
-            // DEADLINE COMMAND
-            else if(startsWith(input, "deadline")){
+            case DEADLINE_COMMAND:
                 runDeadline(taskList, parseJob(input, "/by"), parseDate(input, "/by"));
-            }
+                break;
 
-            // EVENTS COMMAND
-            else if(startsWith(input, "event")){
+            case EVENTS_COMMAND:
                 runEvent(taskList, parseJob(input, "/at"), parseDate(input, "/at"));
-            }
+                break;
 
-            // ADD command
-            else {
+            default:
                 runAdd(taskList, input);
             }
         }
 
 
     }
+
+
+    /**
+     * READ AND PARSE USER INPUT
+     * */
+
+    private static int parseCommand(String input){
+        // BYE command
+        if (input.equalsIgnoreCase("bye")) {
+            return BYE_COMMAND;
+        }
+
+        // LIST command
+        if (input.equalsIgnoreCase("list")) {
+            return LIST_COMMAND;
+        }
+
+        //HELP COMMAND
+        else if (input.equalsIgnoreCase("help")) {
+            return HELP_COMMAND;
+        }
+
+        // DONE command
+        else if (startsWith(input, "done")) {
+            return DONE_COMMAND;
+        }
+
+        // TO-DO COMMAND
+        else if (startsWith(input, "todo")) {
+            return TODO_COMMAND;
+        }
+
+        // DEADLINE COMMAND
+        else if (startsWith(input, "deadline")) {
+            return DEADLINE_COMMAND;
+        }
+
+        // EVENTS COMMAND
+        else if (startsWith(input, "event")) {
+            return EVENTS_COMMAND;
+        }
+
+        // ADD command
+        else {
+            return ADD_COMMAND;
+        }
+    }
+
+    private static String parseJob(String input, String type) {
+
+        String[] words = input.split(" ");
+
+        if(words.length < 2){
+            return null;
+        }
+
+        return getJobString(words, type);
+    }
+
+    private static String parseDate(String input, String type) {
+
+        String[] words = input.split(type);
+
+        if(words.length == 1){
+            return null;
+        }
+
+        return words[1].trim();
+    }
+
+    private static String getJobString(String[] words, String type) {
+
+        String job = words[1];
+
+        for(int i = 2; i< words.length; i++){
+            if(words[i].equalsIgnoreCase(type)){
+                break;
+            }
+            job += " " + words[i];
+        }
+        return job;
+    }
+
+    private static boolean startsWith(String input, String command){
+        return input.toUpperCase().startsWith(command.toUpperCase());
+    }
+
+    private static boolean isAllowedWhenListFull(int command){
+        return (command == LIST_COMMAND || command == BYE_COMMAND);
+    }
+
 
     /**
      * COMMAND RUNNER METHODS
@@ -118,7 +227,7 @@ public class Duke {
 
     private static void runTodo(Task[] taskList, String input) {
 
-        if(input == null){
+        if (input == null) {
             printInvalidInputWarning();
             return;
         }
@@ -159,50 +268,6 @@ public class Duke {
 
         printTaskAdded(newTask);
 
-    }
-
-    /**
-     * IDK TO CLASSIFY
-     * TODO
-     * */
-
-    private static String parseJob(String input, String type) {
-
-        String[] words = input.split(" ");
-
-        if(words.length < 2){
-            return null;
-        }
-
-        return getJobString(words, type);
-    }
-
-    private static String parseDate(String input, String type) {
-
-        String[] words = input.split(type);
-
-        if(words.length == 1){
-            return null;
-        }
-
-        return words[1].trim();
-    }
-
-    private static String getJobString(String[] words, String type) {
-
-        String job = words[1];
-
-        for(int i = 2; i< words.length; i++){
-            if(words[i].equalsIgnoreCase(type)){
-                break;
-            }
-            job += " " + words[i];
-        }
-        return job;
-    }
-
-    private static boolean startsWith(String input, String command){
-        return input.toUpperCase().startsWith(command.toUpperCase());
     }
 
     private static void markJobAsDone(Task task) {
@@ -247,6 +312,12 @@ public class Duke {
         String larger = "You don't have that many jobs! Use the list command to view your current tasks.";
         System.out.println(jobNumber < 0 ? smaller : larger);
         System.out.println("Enter \"help\" for a list of available commands and format\n");
+    }
+
+    private static void printListFullWarning() {
+        System.out.println("List is full!");
+        System.out.println("Use the \"list\" command to view your tasks.");
+        System.out.println("Enter \"bye\" to exit... \n");
     }
 
     private static void printHelp(){
