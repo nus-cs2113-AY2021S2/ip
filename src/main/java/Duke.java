@@ -1,21 +1,21 @@
 import java.util.Scanner;
 
 public class Duke {
-    public enum inputCommand {
-        ADD, BYE, DONE, ERROR, LIST, TODO, DEADLINE, EVENT
-    }
+    private static TaskList taskList = new TaskList();
+    private static Scanner in = initialiseInput();
+    private static Command command;
+    private static String input;
 
+    /**
+     * Main entry point of the application.
+     * Initializes the application and starts the interaction with the user.
+     */
     public static void main(String[] args) {
         printInitialMsg();
-        Scanner in = initialiseInput();
-        TaskList taskList = new TaskList();
-
-        inputCommand command;
         do {
-            String input = takeInput(in);
-            command = processInput(taskList, input);
-            outputReaction(command, input, taskList);
-        } while (command != inputCommand.BYE);
+            scanInput();
+            outputReaction();
+        } while (canContinue());
     }
 
     private static void printInitialMsg() {
@@ -29,39 +29,12 @@ public class Duke {
         System.out.println("What can I do for you?");
     }
 
-    private static Scanner initialiseInput() {
-        return new Scanner(System.in);
+    private static void scanInput() {
+        input = takeInput(in);
+        command = processInput(taskList, input);
     }
 
-    private static String takeInput(Scanner in) {
-        return in.nextLine();
-    }
-
-    private static inputCommand processInput(TaskList taskList, String input) {
-        switch (getCommand(input)) {
-        case ADD:
-            taskList.addTask(input, inputCommand.ADD);
-            break;
-        case TODO:
-            taskList.addTask(input, inputCommand.TODO);
-            break;
-        case DEADLINE:
-            taskList.addTask(input, inputCommand.DEADLINE);
-            break;
-        case EVENT:
-            taskList.addTask(input, inputCommand.EVENT);
-            break;
-        case DONE:
-            int taskNum = getTaskNum(input);
-            taskList.finishTask(taskNum - 1);
-            break;
-        default:
-            break;
-        }
-        return getCommand(input);
-    }
-
-    private static void outputReaction(inputCommand command, String input, TaskList taskList) {
+    private static void outputReaction() {
         switch (command) {
         case ADD:
             // Fallthrough
@@ -89,31 +62,67 @@ public class Duke {
         }
     }
 
-    private static inputCommand getCommand(String input) {
+    private static boolean canContinue() {
+        return command != Command.BYE;
+    }
+
+    private static Scanner initialiseInput() {
+        return new Scanner(System.in);
+    }
+
+    private static String takeInput(Scanner in) {
+        return in.nextLine();
+    }
+
+    private static Command processInput(TaskList taskList, String input) {
+        switch (getCommand(input)) {
+        case ADD:
+            taskList.addTask(input, Command.ADD);
+            break;
+        case TODO:
+            taskList.addTask(input, Command.TODO);
+            break;
+        case DEADLINE:
+            taskList.addTask(input, Command.DEADLINE);
+            break;
+        case EVENT:
+            taskList.addTask(input, Command.EVENT);
+            break;
+        case DONE:
+            int taskNum = getTaskNum(input);
+            taskList.finishTask(taskNum - 1);
+            break;
+        default:
+            break;
+        }
+        return getCommand(input);
+    }
+
+    private static Command getCommand(String input) {
         if (input.equals("list")) {
-            return inputCommand.LIST;
+            return Command.LIST;
         }
         else if (input.equals("bye")) {
-            return inputCommand.BYE;
+            return Command.BYE;
         }
         else if (input.startsWith("done ")) {
-            return inputCommand.DONE;
+            return Command.DONE;
         }
         else if (input.startsWith("todo ")) {
-            return inputCommand.TODO;
+            return Command.TODO;
         }
         else if (input.startsWith("deadline ")) {
-            return inputCommand.DEADLINE;
+            return Command.DEADLINE;
         }
         else if (input.startsWith("event ")) {
-            return inputCommand.EVENT;
+            return Command.EVENT;
         }
         else {
-            return inputCommand.ADD;
+            return Command.ADD;
         }
     }
 
     private static int getTaskNum(String input) {
-        return Integer.parseInt(input.replace("done ", ""));
+        return Integer.parseInt(input.replaceFirst("done ", ""));
     }
 }

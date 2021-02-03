@@ -5,3 +5,35 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Hello! I'm Duke
+What can I do for you?
+List is empty!
+Added: [T][ ] I want to learn a new language
+Added: [D][ ] cs3235 quiz (by: this friday)
+Added: [E][ ] cs2113t meeting (at: this sunday 10am)
+Added: [T][ ] sleep early everyday
+Added: [T][ ] eat properly
+Nice! I've marked this task as done:
+[T][X] sleep early everyday
+Added: [D][ ] homework (by: tonight)
+Nice! I've marked this task as done:
+[D][X] homework (by: tonight)
+Added: [E][ ] lecture (at: tmr)
+Nice! I've marked this task as done:
+[T][X] I want to learn a new language
+Nice! I've marked this task as done:
+[D][X] cs3235 quiz (by: this friday)
+Nice! I've marked this task as done:
+[E][X] cs2113t meeting (at: this sunday 10am)
+Nice! I've marked this task as done:
+[T][X] eat properly
+Nice! I've marked this task as done:
+[E][X] lecture (at: tmr)
+1.[T][X] I want to learn a new language
+2.[D][X] cs3235 quiz (by: this friday)
+3.[E][X] cs2113t meeting (at: this sunday 10am)
+4.[T][X] sleep early everyday
+5.[T][X] eat properly
+6.[D][X] homework (by: tonight)
+7.[E][X] lecture (at: tmr)
+Bye. Hope to see you again soon!

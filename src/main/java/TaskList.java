@@ -7,20 +7,20 @@ public class TaskList {
         tasks = new ArrayList<>();
     }
 
-    public void addTask(String description, Duke.inputCommand command) {
+    public void addTask(String description, Command command) {
         Task newTask;
         String[] stringArray;
         switch (command) {
         case TODO:
-            newTask = new ToDo(description);
+            newTask = new ToDo(description.replaceFirst("todo ", ""));
             break;
         case EVENT:
             stringArray = description.split("/at");
-            newTask = new Event(stringArray[0].replace("event ", ""), stringArray[1].trim());
+            newTask = new Event(stringArray[0].replaceFirst("event ", ""), stringArray[1].trim());
             break;
         case DEADLINE:
             stringArray = description.split("/by");
-            newTask = new Deadline(stringArray[0].replace("deadline ", ""), stringArray[1].trim());
+            newTask = new Deadline(stringArray[0].replaceFirst("deadline ", ""), stringArray[1].trim());
             break;
         default:
             newTask = new Task(description);
