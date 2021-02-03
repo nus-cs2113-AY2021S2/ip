@@ -33,8 +33,6 @@ public class Duke {
                 System.out.println("Nice! I've marked this task as done:");
                 lists.get(num - 1).markAsDone();
                 System.out.println(lists.get(num - 1).toString());
-
-
             } else if (word.contains("deadline")) {
                 String sentence = word.substring(word.indexOf(" ") + 1);
                 String title = sentence.substring(0, sentence.indexOf("/") - 1);
@@ -51,7 +49,6 @@ public class Duke {
                 } else {
                     System.out.println("Now you have " + lists.size() + " tasks in the list.");
                 }
-
             } else if (word.contains("todo")) {
                 String sentence = word.substring(word.indexOf(" ") + 1);
 
@@ -66,8 +63,6 @@ public class Duke {
                 } else {
                     System.out.println("Now you have " + lists.size() + " tasks in the list.");
                 }
-
-
             } else if (word.contains("event")) {
                 String sentence = word.substring(word.indexOf(" ") + 1);
                 String title = sentence.substring(0, sentence.indexOf("/") - 1);
