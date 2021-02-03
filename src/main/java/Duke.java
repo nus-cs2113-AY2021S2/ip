@@ -2,6 +2,20 @@ import java.util.Scanner;
 
 public class Duke {
     static String sectionDivider = "____________________________________________________________";
+    public static void greetUser(){
+        String greeting = "\t" + sectionDivider + "\n"
+                + "\tHello! I'm Duke. \n"
+                + "\tWhat can I do for you? \n"
+                + "\t" + sectionDivider;
+        System.out.println(greeting);
+    }
+    public static void signOff(){
+        String sign_off = "\t" + sectionDivider + "\n"
+                + "\tBye. Hope to see you again soon!\n"
+                + "\t" + sectionDivider;
+        System.out.println(sign_off);
+    }
+
     static int numberOfTasks = 0;
     static Task tasks[] = new Task[100];
 
@@ -32,15 +46,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        String greeting = "\t" + sectionDivider + "\n"
-                + "\tHello! I'm Duke. \n"
-                + "\tWhat can I do for you? \n"
-                + "\t" + sectionDivider;
-        String sign_off = "\t" + sectionDivider + "\n"
-                + "\tBye. Hope to see you again soon!\n"
-                + "\t" + sectionDivider;
-
-        System.out.println(greeting);
+        greetUser();
 
         String line;
         Scanner in = new Scanner(System.in);
@@ -57,6 +63,7 @@ public class Duke {
             System.out.println("\t" + sectionDivider);
             line = in.nextLine();
         }
-        System.out.println(sign_off);
+
+        signOff();
     }
 }
