@@ -68,7 +68,7 @@ public class Duke {
                 System.out.println("\t------------------------------------------");
                 switch(userInput.split(" ")[0]) {
                 case "todo":
-                    // adds todo tasks
+                    // adds to-do tasks
                     Task todo = new Todo(userInput.substring(5));
                     tasks.add(todo);
                     System.out.println("\tGot it. I've added this task: ");
