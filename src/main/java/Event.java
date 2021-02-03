@@ -1,8 +1,8 @@
 public class Event extends Task {
-    String at;
-    public Event(String description, String at) {
+    String eventTime;
+    public Event(String description, String eventTime) {
         super(description);
-        this.at = at;
+        this.eventTime = eventTime;
     }
 
     @Override
@@ -12,6 +12,6 @@ public class Event extends Task {
 
     @Override
     public String getDescription() {
-        return super.getDescription() + "(at: " + at + ")";
+        return super.getDescription() + "(at: " + eventTime + ")";
     }
 }
