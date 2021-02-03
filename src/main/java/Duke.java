@@ -13,8 +13,14 @@ public class Duke {
             + "What can I do for you today?\n" + LINE;
     public static final String BYE_MESSAGE = LINE + "Goodbye! Hope to see you around soon!\n" + LINE;
     public static final String HELP_MESSAGE = LINE + "Add todo:\n"
-            + "Command prefix: NONE\n"
+            + "Command prefix: todo\n"
             + "Argument(s): task\n\n"
+            + "Add deadline:\n"
+            + "Command prefix: deadline\n"
+            + "Argument(s): task /by due date\n\n"
+            + "Add event:\n"
+            + "Command prefix: event\n"
+            + "Argument(s): event /at time\n\n"
             + "Show tasks:\n"
             + "Command prefix: list\n\n"
             + "Check task off:\n"
