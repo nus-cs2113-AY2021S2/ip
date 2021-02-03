@@ -26,13 +26,13 @@ public class Duke {
         boolean  isFull = false;
 
         //Loop to receive response.
-        while (true){
+        while (true) {
 
             String input = in.nextLine();
             int command = parseCommand(input);
 
             //HANDLE FULL LIST
-            if(Task.taskCount == MAX_TASK && !isFull){
+            if (Task.taskCount == MAX_TASK && !isFull) {
                 printListFullWarning();
                 isFull = true;
                 continue;
@@ -143,7 +143,7 @@ public class Duke {
 
         String[] words = input.split(type);
 
-        if(words.length == 1){
+        if (words.length == 1) {
             return null;
         }
 
@@ -154,8 +154,8 @@ public class Duke {
 
         String job = words[1];
 
-        for(int i = 2; i< words.length; i++){
-            if(words[i].equalsIgnoreCase(type)){
+        for (int i = 2; i< words.length; i++) {
+            if (words[i].equalsIgnoreCase(type)) {
                 break;
             }
             job += " " + words[i];
@@ -190,20 +190,20 @@ public class Duke {
         String[] word = input.split(" ");
 
         // check invalid input
-        if(word.length != 2){
+        if (word.length != 2) {
             printInvalidInputWarning();
             return;
         }
 
         int jobNumber = Integer.parseInt(word[1]) - 1;
 
-        if(jobNumber < Task.taskCount && jobNumber >= 0){
+        if (jobNumber < Task.taskCount && jobNumber >= 0) {
             markJobAsDone(taskList[jobNumber]);
         }
-        else if(Task.taskCount == 0){
+        else if (Task.taskCount == 0) {
             printNoTaskWarning();
         }
-        else{
+        else {
             printInvalidTaskWarning(jobNumber);
         }
     }
@@ -212,7 +212,7 @@ public class Duke {
         int numbering = 1;
 
         // error handling - no jobs
-        if(Task.taskCount == 0){
+        if (Task.taskCount == 0) {
             System.out.println("No tasks yet! What would you like to do today?\n");
         }
         else {
@@ -242,7 +242,7 @@ public class Duke {
 
     private static void runDeadline(Task[] taskList, String input, String by){
 
-        if(input == null || by == null){
+        if (input == null || by == null) {
             printInvalidInputWarning();
             return;
         }
@@ -257,7 +257,7 @@ public class Duke {
 
     private static void runEvent(Task[] taskList, String input, String by){
 
-        if(input == null || by == null){
+        if (input == null || by == null) {
             printInvalidInputWarning();
             return;
         }
