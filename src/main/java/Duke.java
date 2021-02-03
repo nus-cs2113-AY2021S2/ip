@@ -15,21 +15,30 @@ public class Duke {
         sendWelcomeMessage();
         printLine();
         while(true) {
-            String[] userCommand = getUserInput();
-            if (userCommand[0].equalsIgnoreCase("bye")){
+            String[] listOfUserInputs = getUserInput();
+            String userCommand = listOfUserInputs[0];
+            String inputDetails = listOfUserInputs[1];
+            if (userCommand.equalsIgnoreCase("bye")){
                 exitDuke();
                 break;
             }
-            if (userCommand[0].equalsIgnoreCase("list")){
+            if (userCommand.equalsIgnoreCase("list")){
                 listOutTasks();
-            } else if (userCommand[0].equalsIgnoreCase("done" )) {
-                markTaskAsDone(userCommand[1]);
             }
-            else {
-                addTasktoList(userCommand);
+            else if (userCommand.equalsIgnoreCase("done" )) {
+                markTaskAsDone(inputDetails);
+            }
+            else  if (isValidInput(userCommand)){
+                processUserRequest(userCommand, inputDetails);
+            } else {
+                System.out.println("Please check your spelling.");
             }
             printLine();
         }
+    }
+
+    private static boolean isValidInput(String userCommand) {
+        return userCommand.equalsIgnoreCase("todo") | userCommand.equalsIgnoreCase("deadline") | userCommand.equalsIgnoreCase("event");
     }
 
     private static void sendWelcomeMessage() {
@@ -39,11 +48,20 @@ public class Duke {
         System.out.println("What can I do for you?");
     }
 
-    private static void addTasktoList(String[] userCommand) {
+    private static void processUserRequest(String userCommand, String inputDetails) {
         printLine();
-        tasksList[tasksCount] = new Task(userCommand[0]);
+        //task creation
+        tasksList[tasksCount] = new Task(inputDetails, userCommand);
+        Task selectedTask = tasksList[tasksCount];
         tasksCount++;
-        System.out.println("Added: " + userCommand[0]);
+        notifyUser(inputDetails, selectedTask);
+
+    }
+
+    private static void notifyUser(String inputDetails, Task selectedTask) {
+        System.out.println("Got it. I've added this task:");
+        System.out.println("  " + selectedTask.getTaskType() + selectedTask.getStatusIcon() + " " + selectedTask.description);
+        System.out.println("Now you have " + tasksCount + " tasks in the list.");
     }
 
     private static void markTaskAsDone(String s) {
@@ -68,8 +86,8 @@ public class Duke {
     private static String[] getUserInput() {
         String userInput = SCANNER.nextLine();
         String[] listOfInputs = userInput.split(" ", 2);
-        if (!(listOfInputs[0].equalsIgnoreCase("done" ))) {
-            listOfInputs[0] = userInput;
+        if (listOfInputs.length == 1) {
+            listOfInputs = new String[]{userInput, "filler"};
         }
         return listOfInputs;
     }
@@ -80,7 +98,7 @@ public class Duke {
         while (i < tasksCount) {
             Task selectedTask = tasksList[i];
             i++;
-            System.out.println(i + ". " + selectedTask.getStatusIcon() + " " + selectedTask.description);
+            System.out.println(i + ". " + selectedTask.getTaskType() + selectedTask.getStatusIcon() + " " + selectedTask.description);
         }
     }
 
