@@ -151,7 +151,7 @@ public class Duke {
             int taskNumber = Integer.parseInt(argValue);
             if (taskNumber > 0 && taskNumber <= numberOfTasks) {
                 int taskIndex = taskNumber - 1;
-                tasks[taskIndex].isDone = true;
+                tasks[taskIndex].setDone(true);
                 Task task = tasks[taskIndex];
                 printStatements(TASK_MARK_AS_DONE_FORMAT,
                         String.format(DOUBLE_SPACE_PREFIX_STRING_FORMAT, task));

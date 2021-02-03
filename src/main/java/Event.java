@@ -6,6 +6,14 @@ public class Event extends Task {
         this.at = at;
     }
 
+    public String getAt() {
+        return at;
+    }
+
+    public void setAt(String at) {
+        this.at = at;
+    }
+
     @Override
     public String toString() {
         return String.format("[%c]%s (at: %s)", 'E', super.toString(), at);
