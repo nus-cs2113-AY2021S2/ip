@@ -12,9 +12,9 @@ public class Mark {
 
         System.out.println(
                 "\t____________________________________________________________\n" +
-                "\tHello! I'm Duke\n" +
-                "\tWhat can I do for you?\n" +
-                "\t____________________________________________________________\n");
+                        "\tHello! I'm Duke\n" +
+                        "\tWhat can I do for you?\n" +
+                        "\t____________________________________________________________\n");
         String[] list = new String[999];
         Task[] tlist = new Task[999];
 
@@ -26,16 +26,16 @@ public class Mark {
             if (line.equals("bye")) {
                 System.out.println(
                         "\t____________________________________________________________\n" +
-                        "\tBye. Hope to see you again soon!\n" +
-                        "\t___________________________________________________________");
+                                "\tBye. Hope to see you again soon!\n" +
+                                "\t___________________________________________________________");
                 System.exit(0);
             }else if (line.equals("list")) {
                 System.out.println(
                         "\t____________________________________________________________\n" +
-                        "\tHere are the tasks in your list:\n");
+                                "\tHere are the tasks in your list:\n");
                 int number = 1;
                 for (int i = 0; i < counter; i++) {
-                        System.out.println("\t" + number + ".[" + tlist[i].getStatusIcon() + "] " + list[i] + "\n");
+                    System.out.println("\t" + number + ".[" + tlist[i].getStatusIcon() + "] " + list[i] + "\n");
                     number++;
                 }
                 System.out.println(
@@ -47,8 +47,8 @@ public class Mark {
                 tlist[num-1] = t;
                 System.out.println(
                         "\t____________________________________________________________\n" +
-                        "\tNice! I've marked this task as done: \n" + "\t" +
-                        "[" +t.getStatusIcon() + "] " + list[num-1]  + "\n" +
+                                "\tNice! I've marked this task as done: \n" + "\t" +
+                                "[" +t.getStatusIcon() + "] " + list[num-1]  + "\n" +
                                 "\t____________________________________________________________\n");
                 continue;
             }else{
