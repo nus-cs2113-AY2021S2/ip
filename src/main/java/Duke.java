@@ -1,3 +1,5 @@
+import model.*;
+
 import java.util.Scanner;
 
 public class Duke{
@@ -66,6 +68,6 @@ public class Duke{
     private void markDone(String input){
         int newValue = Integer.parseInt(input);
         t[newValue - 1].setDone(true);
-        System.out.println("Task sucessfully marked as done!");
+        System.out.println("model.Task sucessfully marked as done!");
     }
 }
