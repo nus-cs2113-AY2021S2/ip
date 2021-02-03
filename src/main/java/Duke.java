@@ -1,4 +1,4 @@
-import java.util.*;
+import java.util.Scanner;
 
 public class Duke{
     Scanner sc = new Scanner(System.in);
@@ -59,7 +59,7 @@ public class Duke{
         for (int i = 0; i < taskNo; i++) {
             System.out.println((t[i].getTaskNo() + 1) + ". " + t[i].toString());
         }
-        System.out.println("You have " + (taskNo+1) + " task(s) in the list." );
+        System.out.println("You have " + (taskNo) + " task(s) in the list." );
 
     }
 
