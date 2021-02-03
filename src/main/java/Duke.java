@@ -19,8 +19,8 @@ public class Duke {
 
         ArrayList<Task> tasks = new ArrayList<Task>();
 
-        boolean loop = true;
-        while (loop) {
+        boolean runLoop = true;
+        while (runLoop) {
             String userInput = sc.nextLine().trim();
 
             if (userInput.equals("list")) {
@@ -46,7 +46,7 @@ public class Duke {
                 System.out.println("\t------------------------------------------");
                 System.out.println("\tSee you soon! Goodbye! ^.^");
                 System.out.println("\t__________________________________________");
-                loop = false;
+                runLoop = false;
             } else {
                 // adds a task to the list of tasks
                 System.out.println("\t------------------------------------------");
