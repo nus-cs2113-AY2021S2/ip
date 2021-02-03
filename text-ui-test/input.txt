@@ -1,0 +1,7 @@
+todo read book
+list
+deadline finish homeowork /by Saturday
+done 1
+event dance /at Thurday 6-8pm
+list
+bye
