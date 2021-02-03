@@ -18,41 +18,86 @@ public class Duke {
         System.out.println("\t__________________________________________\n");
 
         ArrayList<Task> tasks = new ArrayList<Task>();
-
+        int taskCount = 0;
         boolean runLoop = true;
+
         while (runLoop) {
+
             String userInput = sc.nextLine().trim();
 
-            if (userInput.equals("list")) {
-                // displays the list of tasks
-                System.out.println("\t------------------------------------------");
-                System.out.println("\tHere are the tasks in your list: ");
-                int i = 1;
-                for (Task task : tasks) {
-                    System.out.println("\t" + i++ + ".[" + task.getStatusIcon() + "] " + task.getDescription());
-                }
-                System.out.println("\t__________________________________________\n");
-            } else if (userInput.startsWith("done") && userInput.split(" ").length == 2) {
-                // sets a task as done
-                System.out.println("\t------------------------------------------");
-                System.out.println("\tGreat job! I've marked this task as done: ");
-                int taskIndex = Integer.parseInt(userInput.split(" ")[1]);
-                Task task = tasks.get(taskIndex - 1);
-                task.markAsDone();
-                System.out.println("\t[" + task.getStatusIcon() + "] " + task.getDescription());
-                System.out.println("\t__________________________________________\n");
-            } else if (userInput.equals("bye")) {
+            if (userInput.equals("bye")) {
                 // exits the program
                 System.out.println("\t------------------------------------------");
                 System.out.println("\tSee you soon! Goodbye! ^.^");
-                System.out.println("\t__________________________________________");
+                System.out.println("\t__________________________________________\n");
                 runLoop = false;
-            } else {
-                // adds a task to the list of tasks
+            } else if (userInput.equals("list")) {
                 System.out.println("\t------------------------------------------");
-                System.out.println("\tadded: " + userInput);
-                Task task = new Task(userInput);
-                tasks.add(task);
+                if (taskCount == 0) {
+                    // if list is empty
+                    System.out.println("\tYour list is empty!");
+                }
+                else {
+                    // displays the list of tasks
+                    System.out.println("\tHere are the tasks in your list: ");
+                    int i = 1;
+                    for (Task task : tasks) {
+                        System.out.println("\t" + i++ + "." + task.toString());
+                    }
+                }
+                System.out.println("\t__________________________________________\n");
+            } else if (userInput.split(" ")[0].equals("done")) {
+                // check if task exists
+                System.out.println("\t------------------------------------------");
+                // check if
+                int taskIndex = Integer.parseInt(userInput.split(" ")[1]);
+                if (taskIndex > taskCount) {
+                    System.out.println("\tTask " + taskIndex + " does not exist! Please try again.");
+                }
+                else {
+                    // sets a task as done
+                    System.out.println("\tGreat job! I've marked this task as done: ");
+                    Task task = tasks.get(taskIndex - 1);
+                    task.markAsDone();
+                    System.out.println("\t" + task.toString());
+
+                }
+                System.out.println("\t__________________________________________\n");
+            } else {
+                // adds a task to the list
+                System.out.println("\t------------------------------------------");
+                switch(userInput.split(" ")[0]) {
+                case "todo":
+                    // adds todo tasks
+                    Task todo = new Todo(userInput.substring(5));
+                    tasks.add(todo);
+                    System.out.println("\tGot it. I've added this task: ");
+                    System.out.println("\t" + todo.toString());
+                    taskCount++;
+                    break;
+                case "deadline":
+                    // adds tasks with deadline
+                    Task deadline = new Deadline(userInput.substring(9, userInput.indexOf("/by")),
+                            userInput.substring(userInput.indexOf("/by")+4));
+                    tasks.add(deadline);
+                    System.out.println("\tGot it. I've added this task: ");
+                    System.out.println("\t" + deadline.toString());
+                    taskCount++;
+                    break;
+                case "event":
+                    // adds event tasks
+                    Task event = new Event(userInput.substring(6, userInput.indexOf("/at")),
+                            userInput.substring(userInput.indexOf("/at")+4));
+                    tasks.add(event);
+                    System.out.println("\tGot it. I've added this task: ");
+                    System.out.println("\t" + event.toString());
+                    taskCount++;
+                    break;
+                default:
+                    // invalid task type
+                    System.out.println("\tInvalid task entered. Please specify task type!");
+                }
+                System.out.println("\tNow you have " + taskCount + " tasks in the list.");
                 System.out.println("\t__________________________________________\n");
             }
         }
