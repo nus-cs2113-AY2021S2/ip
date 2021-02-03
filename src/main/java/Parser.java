@@ -9,7 +9,9 @@ public class Parser {
             tasks[completedTask].markAsDone();
             System.out.println("The Force is with you! The following task has been marked as done:");
             System.out.println(tasks[completedTask]);
+            System.out.println("You still have " + Task.getTaskCounter() + " tasks in your list!");
             UI.showDivider();
+
             break;
             }
         case "deadline": {
@@ -17,8 +19,11 @@ public class Parser {
             tasks[Task.getTaskCounter()] = new Deadline(taskDetails[0], taskDetails[1]);
             System.out.println("Roger Roger. The following task has been added:");
             System.out.println(tasks[Task.getTaskCounter()]);
-            UI.showDivider();
             Task.incrementTaskCounter();
+            System.out.println("You now have " + Task.getTaskCounter() + " tasks to complete in your list!");
+            UI.showDivider();
+
+
             break;
             }
         case "event": {
@@ -26,8 +31,11 @@ public class Parser {
             tasks[Task.getTaskCounter()] = new Event(taskDetails[0], taskDetails[1]);
             System.out.println("Roger Roger. The following task has been added:");
             System.out.println(tasks[Task.getTaskCounter()]);
-            UI.showDivider();
             Task.incrementTaskCounter();
+            System.out.println("You now have " + Task.getTaskCounter() + " tasks to complete in your list!");
+            UI.showDivider();
+
+
             break;
             }
         case "todo": {
@@ -35,8 +43,11 @@ public class Parser {
             tasks[Task.getTaskCounter()] = new Todo(taskDetails[0]);
             System.out.println("Roger Roger. The following task has been added:");
             System.out.println(tasks[Task.getTaskCounter()]);
-            UI.showDivider();
             Task.incrementTaskCounter();
+            System.out.println("You now have " + Task.getTaskCounter() + " tasks to complete in your list!");
+            UI.showDivider();
+
+
             break;
             }
         }

@@ -5,3 +5,60 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+-----------------------------------
+Hello there! I'm Duke
+I have the high ground! How may I help you?
+-----------------------------------
+Roger Roger. The following task has been added:
+Event : [ ? ]  master yoda you survived || Happening on: 10pm Coruscant Time
+-----------------------------------
+What is thy bidding, my master?
+-----------------------------------
+Roger Roger. The following task has been added:
+Deadline : [ ? ]  execute order 66 || Due by: today 7pm
+-----------------------------------
+What is thy bidding, my master?
+-----------------------------------
+Roger Roger. The following task has been added:
+Todo : [ ? ]  kill all the jedi
+-----------------------------------
+What is thy bidding, my master?
+-----------------------------------
+Roger Roger. The following task has been added:
+Event : [ ? ]  i am all the sith || Happening on: exegol at 6pm
+-----------------------------------
+What is thy bidding, my master?
+-----------------------------------
+Roger Roger. The following task has been added:
+Deadline : [ ? ]  and i am all the jedi || Due by: exegol at 630pm
+-----------------------------------
+What is thy bidding, my master?
+-----------------------------------
+This is your current list:
+1: Event : [ ? ]  master yoda you survived || Happening on: 10pm Coruscant Time
+2: Deadline : [ ? ]  execute order 66 || Due by: today 7pm
+3: Todo : [ ? ]  kill all the jedi
+4: Event : [ ? ]  i am all the sith || Happening on: exegol at 6pm
+5: Deadline : [ ? ]  and i am all the jedi || Due by: exegol at 630pm
+-----------------------------------
+What is thy bidding, my master?
+-----------------------------------
+The Force is with you! The following task has been marked as done:
+Todo : [ ? ]  kill all the jedi
+-----------------------------------
+What is thy bidding, my master?
+-----------------------------------
+The Force is with you! The following task has been marked as done:
+Deadline : [ ? ]  execute order 66 || Due by: today 7pm
+-----------------------------------
+What is thy bidding, my master?
+-----------------------------------
+This is your current list:
+1: Event : [ ? ]  master yoda you survived || Happening on: 10pm Coruscant Time
+2: Deadline : [ ? ]  execute order 66 || Due by: today 7pm
+3: Todo : [ ? ]  kill all the jedi
+4: Event : [ ? ]  i am all the sith || Happening on: exegol at 6pm
+5: Deadline : [ ? ]  and i am all the jedi || Due by: exegol at 630pm
+-----------------------------------
+What is thy bidding, my master?
+-----------------------------------
