@@ -21,7 +21,21 @@ public class Duke {
 
     public static void addTask(String taskDescription){
         System.out.println("\tadded: " + taskDescription);
-        Task t = new Task(taskDescription);
+        taskDescription = taskDescription.toLowerCase();
+        Task t;
+        if (taskDescription.contains("todo")) {
+            t = new Todo(taskDescription.substring(5));
+        } else if (taskDescription.contains("deadline")) {
+            // Adds task as a Deadline
+            taskDescription.replace("deadline ", "");
+            int byIndex = taskDescription.indexOf("/by ");
+            t = new Deadline(taskDescription.substring(9, byIndex-1), taskDescription.substring(byIndex+4));
+        } else {
+            // Adds task as an Event.
+            taskDescription.replace("event ", "");
+            int atIndex = taskDescription.indexOf("/at ");
+            t = new Event(taskDescription.substring(6, atIndex-1), taskDescription.substring(atIndex+4));
+        }
         tasks[numberOfTasks] = t;
         numberOfTasks++;
     }
