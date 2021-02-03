@@ -1,4 +1,4 @@
-package model;
+package view;
 
 public class Ui {
     public static String logo = " ____        _        \n"
