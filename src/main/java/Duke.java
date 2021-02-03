@@ -30,25 +30,54 @@ public class Duke {
 
         while (!input.equals("bye")) {
 
-            if (!input.equals("list") && !input.contains("done") ) {
-                tasks.add(new Task(input));
+            if (input.contains("todo") ) {
+                int dividerPosition = input.indexOf(" ");
+                String t = input.substring(dividerPosition+1);
+                tasks.add(new Todo(t));
 
                 System.out.print("____________________________________________________________\n" +
-                        "added:" + input + "\n" +
+                        "Got it. I've added this task:"  + "\n" +
+                        "[T]" + "[ ] " + t +"\n"+
+                        "Now you have " +tasks.size() + " tasks in the list." + "\n"+
                         "____________________________________________________________\n");
 
-            } else if (input.equals("list")) {
+            }else if (input.contains("deadline") ) {
+                int dividerPosition = input.indexOf(" ");
+                int dividerPosition_1 = input.indexOf("/");
+                String d = input.substring(dividerPosition+1,dividerPosition_1);
+                String by = input.substring(dividerPosition_1+4);
+                tasks.add(new Deadline(d,by));
+
+                System.out.print("____________________________________________________________\n" +
+                        "Got it. I've added this task:"  + "\n" +
+                        "[D]" + "[ ] " + d + "("+"by: " +by+")"+"\n"+
+                        "Now you have " +tasks.size() + " tasks in the list." + "\n"+
+                        "____________________________________________________________\n");
+
+            }else if (input.contains("event") ) {
+                int dividerPosition = input.indexOf(" ");
+                int dividerPosition_1 = input.indexOf("/");
+                String e = input.substring(dividerPosition+1,dividerPosition_1);
+                String at = input.substring(dividerPosition_1+4);
+                tasks.add(new Event(e,at));
+                System.out.print("____________________________________________________________\n" +
+                        "Got it. I've added this task:"  + "\n" +
+                        "[E]" + "[ ] " + e + "("+"at: " +at+")"+"\n"+
+                        "Now you have " +tasks.size() + " tasks in the list." + "\n"+
+                        "____________________________________________________________\n");
+
+            }else if (input.equals("list")) {
 
                 System.out.print(line+"\n");
                 System.out.print("Here are the tasks in your list: "+"\n");
 
                 for (int i = 0; i < tasks.size(); i++) {
                     System.out.print(
-                            Integer.toString(i+1) + "." +
-                                    "["+tasks.get(i).getStatusIcon()+"]"+
+                            Integer.toString(i+1) + "." + "["+tasks.get(i).getType()+"]"+
+                                    "["+tasks.get(i).getStatusIcon()+"] "+
                                     tasks.get(i).getDescription() + "\n");
                 }
-                System.out.print(line);
+                System.out.print(line+"\n");
 
             } else if (input.contains("done")){
 
@@ -57,11 +86,11 @@ public class Duke {
 
                 int taskIndex = Integer.parseInt(taskNo)-1;
                 tasks.get(taskIndex).markAsDone();
-
+                System.out.print(line+"\n");
                 System.out.print("Nice! I've marked this task as done:"+"\n"
-                        +"["+tasks.get(taskIndex).getStatusIcon()+"]"+
-                        tasks.get(taskIndex).getDescription());
-
+                        +"["+tasks.get(taskIndex).getType()+"]"+"["+tasks.get(taskIndex).getStatusIcon()+"] "+
+                        tasks.get(taskIndex).getDescription()+"\n");
+                System.out.print(line+"\n");
 
             }
             input = in.nextLine();
