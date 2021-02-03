@@ -6,7 +6,6 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
-        System.out.print("Got it. I've added this task:\n" + this + '\n');
     }
 
     public String getDescription() {
