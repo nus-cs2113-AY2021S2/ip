@@ -20,8 +20,7 @@ public class Duke {
     static Task tasks[] = new Task[100];
 
     public static void addTask(String taskDescription){
-        System.out.println("\tadded: " + taskDescription);
-        taskDescription = taskDescription.toLowerCase();
+        System.out.println("\tGot it. I've added this task: ");
         Task t;
         if (taskDescription.contains("todo")) {
             t = new Todo(taskDescription.substring(5));
@@ -37,7 +36,9 @@ public class Duke {
             t = new Event(taskDescription.substring(6, atIndex-1), taskDescription.substring(atIndex+4));
         }
         tasks[numberOfTasks] = t;
+        System.out.println("\t" + t);
         numberOfTasks++;
+        System.out.println("\tNow you have " + numberOfTasks + " tasks in the list.");
     }
 
     public static void markTaskAsDone(String taskDescription){
