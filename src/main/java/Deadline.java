@@ -2,7 +2,7 @@ public class Deadline extends Task {
     protected String by;
 
     /**
-     * Creates the deadline object. 
+     * Creates a Deadline object. 
      * 
      * @param description Name of task. 
      * @param by Deadline of task to complete. 

@@ -1,9 +1,7 @@
 import java.util.Scanner;
 
 public class Duke {
-    /**
-     * Words for commands. 
-     */
+    // Words for commands. 
     private static final String COMMAND_TODO_WORD = "todo";
     private static final String COMMAND_DEADLINE_WORD = "deadline";
     private static final String COMMAND_EVENT_WORD = "event";
@@ -12,9 +10,7 @@ public class Duke {
     private static final String COMMAND_EXIT_WORD = "bye";
     private static final String NO_COMMAND = "";
     
-    /**
-     * Display messages. 
-     */
+    // Display messages. 
     private static final String MESSAGE_WELCOME = "Hello! I'm Duke, what can I do for you?";
     private static final String MESSAGE_BORDER = "__________".repeat(6);
     private static final String MESSAGE_ADDED = "Got it. I've added this task: ";
@@ -26,31 +22,22 @@ public class Duke {
     private static final String ERROR_NO_COMMAND_RECEIVED = "No command detected. ";
     private static final String ERROR_INVALID_COMMAND_RECEIVED = "Invalid command. ";
 
-    /**
-     * Filter words to locate date for deadline and event tasks. 
-     */
+    // Filter words to locate date for deadline and event tasks. 
     private static final String DEADLINE_DATA_PREFIX_BY = "/by";
     private static final String EVENT_DATA_PREFIX_AT = "/at";
 
-    /**
-     * List of all tasks. 
-     */
+
+    // List of all tasks. 
     private static Task[] tasks;
     private static String userCommand;
 
-    /**
-     * Maximum number of tasks that can be held. 
-     */
+    // Maximum number of tasks that can be held. 
     private static final int MAX_LIST_SIZE = 100;
 
-    /**
-     * Total number of tasks in task list. 
-     */
+    // Total number of tasks in task list. 
     private static int sizeOfTaskList = 0;
 
-    /**
-     * Scanner for extracting user input. 
-     */
+    // Scanner for extracting user input. 
     private static final Scanner SCANNER = new Scanner(System.in);
     
     /**
@@ -69,6 +56,10 @@ public class Duke {
      * @return Task number. 
      */
     private static int getTaskNumber(String command) {
+        // Gets the taskNumber from the index of the first " ". 
+        // Adds 1 to the index remove the " " from string. 
+        // Since user input task number starts from 1, remove 1 from taskNumber to 
+        //         reflect the correct taskNumber in tasks. 
         int taskNumber = Integer.parseInt(command.substring(command.indexOf(" ") + 1)) - 1;
         return taskNumber;
     }
@@ -256,10 +247,12 @@ public class Duke {
     }
 
     /**
-     * Adds a new event task to task list. 
+     * Adds a new deadline task to task list. 
+     * Processes the user input to extract date. 
+     * If date is not null, create new deadline task. 
+     * Otherwise, display invalid command error. 
      */
     private static void executeAddEvent() {
-        // Process event parameters
         String date = processParameters(EVENT_DATA_PREFIX_AT);
         if (date != null) {
             tasks[sizeOfTaskList] = new Event(userCommand, date);
@@ -282,6 +275,7 @@ public class Duke {
     private static String processParameters(String filterString) {
         int indexOfDate = userCommand.indexOf(filterString);
         if (indexOfDate > 0) {
+            // Add 4 to indexOfDate to remove the "/by " or "/at " filter strings. 
             String date = userCommand.substring(indexOfDate + 4);
             userCommand = userCommand.substring(0, indexOfDate - 1);
             return date;
