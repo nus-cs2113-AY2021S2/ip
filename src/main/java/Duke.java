@@ -22,13 +22,13 @@ public class Duke {
                 printList();
                 continue;
             }
-            else if (line.contains("done")){
-                markDone(line);
-                continue;
-            }
             else if (line.equals("bye")) {
                 printBye();
                 break;
+            }
+            else if (line.contains("done")){
+                markDone(line);
+                continue;
             }
             else if (line.contains("todo")){
                 addTodo(line);
