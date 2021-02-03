@@ -26,8 +26,7 @@ public class Duke {
                 System.out.println("Here are the tasks in your list:");
                 for(int index=0; index<i;index++){
                     System.out.print(index+1+". ");
-                    System.out.print(tasks[index].getStatusIcon()+" ");
-                    System.out.println(tasks[index].description);
+                    System.out.println(tasks[index]);
                 }
                 System.out.println("____________________________________________________________");
             }else if(command.contains("done")){
@@ -35,12 +34,39 @@ public class Duke {
                 System.out.println("Nice! I've marked this task as done: ");
                 tasks[doneNumber-1].markAsDone();
                 System.out.println("____________________________________________________________");
-            } else{
-                Task t = new Task(command);
-                tasks[i]= t;
+            } else if(command.contains("todo")){
                 System.out.println("____________________________________________________________");
-                System.out.println("added: "+t.description);
+                tasks[i] = new Todo(command.substring(5));
+                System.out.println("Got it. I've added this task:");
+                System.out.println(tasks[i]);
+                System.out.println("Now you have "+ Task.getTaskCount() +" task(s) in the list.");
+                System.out.println("____________________________________________________________");
                 i++;
+            }else if(command.contains("deadline")) {
+                System.out.println("____________________________________________________________");
+                //Deadline t = new Deadline(8,command.indexOf("/by"));
+                String description = command.substring(8, command.indexOf("/by"));
+                String by = command.substring(command.indexOf("/by") + 4);
+                tasks[i] = new Deadline(description, by);
+                System.out.println("Got it. I've added this task:");
+                System.out.println(tasks[i]);
+                System.out.println("Now you have "+ Task.getTaskCount() +" task(s) in the list.");
+                System.out.println("____________________________________________________________");
+                i++;
+            }else if(command.contains("event")) {
+                System.out.println("____________________________________________________________");
+                //Deadline t = new Deadline(8,command.indexOf("/by"));
+                String description = command.substring(6, command.indexOf("/at"));
+                String at = command.substring(command.indexOf("/at") + 4);
+                tasks[i] = new Event(description, at);
+                System.out.println("Got it. I've added this task:");
+                System.out.println(tasks[i]);
+                System.out.println("Now you have "+ Task.getTaskCount() +" task(s) in the list.");
+                System.out.println("____________________________________________________________");
+                i++;
+            }else{
+                System.out.println("____________________________________________________________");
+                System.out.println("Invalid command please enter again");
                 System.out.println("____________________________________________________________");
             }
         }

@@ -1,10 +1,21 @@
 public class Task {
     protected String description;
+//    protected String taskType = "T";
     protected boolean isDone;
+    private static int taskCount=0;
+
+    public static int getTaskCount() {
+        return taskCount;
+    }
+
+    public static void setTaskCount(int taskCount) {
+        Task.taskCount = taskCount;
+    }
 
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        taskCount++;
     }
 
     public String getStatusIcon() {
@@ -21,5 +32,9 @@ public class Task {
     public void markAsDone(){
         isDone = true;
         System.out.println(this.getStatusIcon()+" "+this.description);
+    }
+    @Override
+    public String toString(){
+        return "[" + this.getStatusIcon() +"]" + this.description;
     }
 }
