@@ -24,9 +24,19 @@ public class Duke {
                 OutputGenerator.listOutput(taskList);
             } else if (userInput.toLowerCase(Locale.ROOT).startsWith("done")) {
                 OutputGenerator.doneOutput(taskList, userInput);
-            } else {
-                OutputGenerator.addOutput(taskList,userInput);
+            } else if (userInput.toLowerCase(Locale.ROOT).startsWith("todo")) {
+                OutputGenerator.addTodoOutput(taskList,userInput);
+            } else if (userInput.toLowerCase(Locale.ROOT).startsWith("deadline")){
+                OutputGenerator.addDeadlineOutput(taskList,userInput);
+            } else if (userInput.toLowerCase(Locale.ROOT).startsWith("event")) {
+                OutputGenerator.addEventOutput(taskList,userInput);
             }
+/*
+            else {
+                OutputGenerator.Output(taskList,userInput);
+            }
+
+ */
             userInput = sc.nextLine();
         }
         System.out.print(LINE_SEPERATOR +

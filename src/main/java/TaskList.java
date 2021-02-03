@@ -20,12 +20,8 @@ public class TaskList {
         tasks[taskIndex].setTaskDone(true);
     }
 
-    public String getTaskName(int taskIndex){
-        return tasks[taskIndex].getTaskName();
-    }
-
-    public boolean getTaskDone(int taskIndex){
-        return tasks[taskIndex].getTaskDone();
+    public Task getTask(int taskIndex){
+        return tasks[taskIndex];
     }
 
     public void printTaskList(){

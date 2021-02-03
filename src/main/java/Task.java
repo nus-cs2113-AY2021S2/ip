@@ -1,7 +1,7 @@
 public class Task {
-    private String taskName;
-    private boolean taskDone;
-    private static final String TASK_INFO_FORMAT = "[%s]%s";
+    public String taskName;
+    public boolean taskDone;
+    public static final String TASK_INFO_FORMAT = "[ ][%s]%s";
 
     public Task(String name, boolean done) {
         taskName = name;
