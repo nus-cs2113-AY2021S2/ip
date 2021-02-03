@@ -15,8 +15,8 @@ public class Todo extends Task {
     }
 
     public String getType(){
-            return "T";
-        }
+        return "T";
+    }
     public String toString() {
         String status = null;
         if (isDone){
