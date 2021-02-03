@@ -23,19 +23,23 @@ public class Duke {
     }
 
     private static void addToList(Task[] tasks, String prompt, int taskIndex, String taskType) {
+        int cutOffPoint = 0;
         switch(taskType) {
             case "todo":
                 tasks[taskIndex] = new Todo(prompt);
                 break;
             case "deadline":
-                tasks[taskIndex] = new Deadline(prompt, prompt);
+                cutOffPoint = prompt.indexOf("/by");
+                tasks[taskIndex] = new Deadline(prompt.substring(0,cutOffPoint-1), prompt.substring(cutOffPoint+4));
                 break;
             case "event":
-                tasks[taskIndex] = new Event(prompt, prompt);
+                cutOffPoint = prompt.indexOf("/at");
+                tasks[taskIndex] = new Event(prompt.substring(0,cutOffPoint-1), prompt.substring(cutOffPoint+4));
                 break;
         }
         System.out.println("\tGot it. I've added this task:\n" +
                             "\t  " + tasks[taskIndex].toString());
+        System.out.println("\tNow you have "+ (taskIndex+1) +" tasks in the list.");
     }
 
     private static void completeTask(Task[] tasks, String substring) {
@@ -43,6 +47,7 @@ public class Duke {
         tasks[taskIndex].markAsDone();
         System.out.println("\tNice! I've marked this task as done: \n" +
                             "\t" + tasks[taskIndex].toString());
+        //bug here: does not deal with overflow values of input
     }
 
     public static void main(String[] args) {
@@ -70,13 +75,13 @@ public class Duke {
             } else if (prompt.startsWith("done")){
                 completeTask(tasks, prompt.substring(5));
             } else if (prompt.startsWith("todo")){
-                addToList(tasks, prompt, taskIndex, "todo");
+                addToList(tasks, prompt.substring(5), taskIndex, "todo");
                 taskIndex++;
             } else if (prompt.startsWith("deadline")){
-                addToList(tasks, prompt, taskIndex, "deadline");
+                addToList(tasks, prompt.substring(9), taskIndex, "deadline");
                 taskIndex++;
             } else if (prompt.startsWith("event")){
-                addToList(tasks, prompt, taskIndex, "event");
+                addToList(tasks, prompt.substring(6), taskIndex, "event");
                 taskIndex++;
             } else{
                 System.out.println("Invalid prompt. Please try other keywords.");
