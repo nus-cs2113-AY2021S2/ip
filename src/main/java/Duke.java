@@ -10,7 +10,7 @@ public class Duke {
             System.out.println("No tasks yet!");
         } else {
             for (int i = 0; i < Task.totalTasks; i++) {
-                System.out.printf("%d.[%s] %s\n", i+1, tasks[i].getStatusIcon(), tasks[i].getDescription());
+                System.out.printf("%d.%s\n", i+1, tasks[i].toString());
             }
         }
     }
@@ -35,9 +35,49 @@ public class Duke {
         }
     }
 
+    public static String[] extractDetailsFromInput(String input, String keyword) {
+        String[] inputArray = new String[2];
+        String inputWithoutKeyword = input.split(keyword)[1];
+        int numDetails = 0;
+        switch(keyword) {
+        case "deadline":
+            inputArray = inputWithoutKeyword.split("/by");
+            numDetails += 2;
+            break;
+        case "event":
+            inputArray = inputWithoutKeyword.split("/at");
+            numDetails += 2;
+            break;
+        case "todo":
+            inputArray[0] = inputWithoutKeyword;
+            numDetails++;
+            break;
+        default:
+            break;
+        }
+
+        for (int i = 0; i < numDetails; i++) {
+            inputArray[i] = inputArray[i].strip();
+        }
+        return inputArray;
+    }
+
     public static void addTask(String input) {
-        tasks[Task.totalTasks] = new Task(input);
-        System.out.println("added: "+ input);
+        String[] inputArray;
+        if (input.contains("deadline")) {
+            inputArray = extractDetailsFromInput(input, "deadline");
+            tasks[Task.totalTasks] = new Deadline(inputArray[0], inputArray[1]);
+        } else if (input.contains("event")) {
+            inputArray = extractDetailsFromInput(input, "event");
+            tasks[Task.totalTasks] = new Event(inputArray[0], inputArray[1]);
+        } else if (input.contains("todo")){
+            inputArray = extractDetailsFromInput(input, "todo");
+            tasks[Task.totalTasks] = new Todo(inputArray[0]);
+        }
+
+        System.out.println("I have added this task:" );
+        System.out.println(tasks[Task.totalTasks-1].toString());
+        System.out.println("You now have " + Task.totalTasks + " tasks in your tasklist.");
     }
 
     public static void main(String[] args) {

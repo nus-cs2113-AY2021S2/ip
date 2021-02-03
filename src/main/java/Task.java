@@ -22,10 +22,13 @@ public class Task {
         if (!this.isDone) {
             this.isDone = true;
             System.out.println("Great! I've marked this task as done: ");
-            System.out.printf("[%s] %s\n", this.getStatusIcon(), this.description);
+            System.out.println(this.toString());
         } else {
             System.out.println("You already completed this task previously!");
         }
+    }
 
+    public String toString(){
+        return "[" + this.getStatusIcon() + "] " + this.getDescription();
     }
 }
