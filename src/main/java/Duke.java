@@ -20,13 +20,13 @@ public class Duke {
             "        ooooo        ooooo   ooooo        ooooo\n" +
             "         oooooooooooooooo     oooooooooooooooo\n" +
             "            oooooooooo           oooooooooo\n";
-    private static final String HELLO_MESSAGE = LOGO + "\n" + LINE + "\n"
+    private static final String MESSAGE_WELCOME = LOGO + "\n" + LINE + "\n"
             + "8K: Hi there! 8K here.\n"
             + "    How can I help you?\n"
             + "    (Enter \"help\" to view all commands.)\n" + LINE;
-    private static final String BYE_MESSAGE = LINE + "\n"
+    private static final String MESSAGE_BYE = LINE + "\n"
             + "8K: Bye bye! Have a nice day.\n" + LINE;
-    private static final String HELP_MESSAGE = LINE + "\n"
+    private static final String MESSAGE_HELP = LINE + "\n"
             + "8K: bye - Exit programme.\n"
             + "    help - Show list of commands.\n"
             + "    list - Show list of saved values.\n"
@@ -35,36 +35,36 @@ public class Duke {
             + "    deadline <name> /by <date> - Creates task with deadline.\n"
             + "    done n - Mark nth item as done.\n"
             + "    undo n - Mark nth item as not done.\n" + LINE;
-    private static final String MARK_DONE_MESSAGE =  LINE + "\nMarked as done:\n";
-    private static final String MARK_UNDONE_MESSAGE = LINE + "\nMarked as undone:\n";
-    private static final String ERROR_MESSAGE = LINE + "\n"
+    private static final String MESSAGE_MARK_DONE =  LINE + "\nMarked as done:\n";
+    private static final String MESSAGE_MARK_UNDONE = LINE + "\nMarked as undone:\n";
+    private static final String MESSAGE_ERROR = LINE + "\n"
             + "8K: Sorry. I do not understand.\n" + LINE;
-    private static final String LIST_FULL_MESSAGE = LINE + "\n"
+    private static final String MESSAGE_LIST_FULL = LINE + "\n"
             + "8K: List is full." + "\n" + LINE;
-    private static final String EMPTY_LIST_MESSAGE = "<< List is empty >>\n" + LINE;
+    private static final String MESSAGE_EMPTY_LIST = "<< List is empty >>\n" + LINE;
 
 
     //Constants
     private static final int MAX_SIZE = 100;
-    private static final int LENGTH_OF_EVENT_WORD = 5;
-    private static final int LENGTH_OF_DEADLINE_WORD = 8;
-    private static final int LENGTH_OF_TODO_WORD = 4;
+    private static final int LENGTH_OF_WORD_EVENT = 5;
+    private static final int LENGTH_OF_WORD_DEADLINE = 8;
+    private static final int LENGTH_OF_WORD_TODO = 4;
 
 
     //Variables & arrays
     private static final Task[] tasks = new Task[MAX_SIZE];
     private static int taskCount = 0;
-    private static boolean endProgram = false;
+    private static boolean endProgramNow = false;
 
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String input;
-        System.out.println(HELLO_MESSAGE);
+        System.out.println(MESSAGE_WELCOME);
         do {
             input = scanner.nextLine().trim();
             processInput(input);
-        } while (!endProgram);
+        } while (!endProgramNow);
     }
 
 
@@ -76,13 +76,13 @@ public class Duke {
     private static void processInput(String input) {
         if (input.equals("bye")) {
             //Ends program
-            setEndProgram();
+            endProgram();
         } else if (input.equals("list")) {
             //Shows saved tasks
             printList();
         } else if (input.equals("help")) {
             //Shows all commands
-            System.out.println(HELP_MESSAGE);
+            System.out.println(MESSAGE_HELP);
         } else if (input.startsWith("done ")) {
             //Marks item as done
             setDoneStatus(input, true);
@@ -92,15 +92,15 @@ public class Duke {
         } else if (input.startsWith("todo ")) {
             //Adds new ToDoTask
             addToDo(input);
-        } else if (input.startsWith("event ") && input.contains(" /at ")) {
+        } else if (input.startsWith("event ")) {
             //Adds new EventTask
             addEvent(input);
-        } else if (input.startsWith("deadline ") && input.contains(" /by ")) {
+        } else if (input.startsWith("deadline ")) {
             //Adds new DeadlineTask
             addDeadline(input);
         } else {
             //Prints error (unrecognized command)
-            System.out.println(ERROR_MESSAGE);
+            System.out.println(MESSAGE_ERROR);
         }
     }
 
@@ -108,9 +108,9 @@ public class Duke {
     /**
      * Ends while-loop to exit program.
      */
-    private static void setEndProgram() {
-        System.out.println(BYE_MESSAGE);
-        endProgram = true;
+    private static void endProgram() {
+        System.out.println(MESSAGE_BYE);
+        endProgramNow = true;
     }
 
 
@@ -120,7 +120,7 @@ public class Duke {
     private static void printList() {
         System.out.println(LINE);
         if (taskCount == 0) {
-            System.out.println(EMPTY_LIST_MESSAGE);
+            System.out.println(MESSAGE_EMPTY_LIST);
             return;
         }
         for (int i = 0; i < taskCount; i++) {
@@ -144,18 +144,18 @@ public class Duke {
             if (position < taskCount) {
                 tasks[position].setDone(isDone);
                 if (isDone) {
-                    System.out.print(MARK_DONE_MESSAGE);
+                    System.out.print(MESSAGE_MARK_DONE);
                 } else {
-                    System.out.print(MARK_UNDONE_MESSAGE);
+                    System.out.print(MESSAGE_MARK_UNDONE);
                 }
                 tasks[position].printStatus();
                 System.out.println("\n" + LINE);
             } else {
                 //Out of bounds
-                System.out.println(ERROR_MESSAGE);
+                System.out.println(MESSAGE_ERROR);
             }
         } catch (Exception e) {
-            System.out.println(ERROR_MESSAGE);
+            System.out.println(MESSAGE_ERROR);
         }
     }
 
@@ -168,10 +168,10 @@ public class Duke {
     public static void addToDo(String input) {
         if (taskCount >= MAX_SIZE) {
             //Array full
-            System.out.println(LIST_FULL_MESSAGE);
+            System.out.println(MESSAGE_LIST_FULL);
             return;
         }
-        input = input.substring(LENGTH_OF_TODO_WORD + 1);
+        input = input.substring(LENGTH_OF_WORD_TODO + 1);
         tasks[taskCount] = new ToDoTask(input);
         taskCount++;
         printAddedContent(input);
@@ -185,15 +185,18 @@ public class Duke {
      * @param input Input value by user.
      */
     public static void addEvent(String input) {
-        String[] inputSplit = input.substring(LENGTH_OF_EVENT_WORD + 1).split(" /at ");
-        if (taskCount >= MAX_SIZE) {
-            //Array full
-            System.out.println(LIST_FULL_MESSAGE);
+        if (!input.contains(" /at ")) {
+            System.out.println(MESSAGE_ERROR);
             return;
         }
-        if (inputSplit.length < 2) {
+        String[] inputSplit = input.substring(LENGTH_OF_WORD_EVENT + 1).split(" /at ");
+        if (taskCount >= MAX_SIZE) {
+            //Array full
+            System.out.println(MESSAGE_LIST_FULL);
+            return;
+        } else if (inputSplit.length < 2) {
             //Invalid input
-            System.out.println(ERROR_MESSAGE);
+            System.out.println(MESSAGE_ERROR);
             return;
         }
         tasks[taskCount] = new EventTask(inputSplit[0], inputSplit[1]);
@@ -209,15 +212,18 @@ public class Duke {
      * @param input Input value by user.
      */
     public static void addDeadline(String input) {
-        String[] inputSplit = input.substring(LENGTH_OF_DEADLINE_WORD + 1).split(" /by ");
-        if (taskCount >= MAX_SIZE) {
-            //Array full
-            System.out.println(LIST_FULL_MESSAGE);
+        if (!input.contains(" /by ")) {
+            System.out.println(MESSAGE_ERROR);
             return;
         }
-        if (inputSplit.length < 2) {
+        String[] inputSplit = input.substring(LENGTH_OF_WORD_DEADLINE + 1).split(" /by ");
+        if (taskCount >= MAX_SIZE) {
+            //Array full
+            System.out.println(MESSAGE_LIST_FULL);
+            return;
+        } else if (inputSplit.length < 2) {
             //Invalid input
-            System.out.println(ERROR_MESSAGE);
+            System.out.println(MESSAGE_ERROR);
             return;
         }
         tasks[taskCount] = new DeadlineTask(inputSplit[0], inputSplit[1]);
