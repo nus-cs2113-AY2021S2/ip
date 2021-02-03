@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Duke {
-    private static final int MAX_TASK = 3;
+    private static final int MAX_TASK = 100;
 
     private static final int BYE_COMMAND = 0;
     private static final int LIST_COMMAND = 1;

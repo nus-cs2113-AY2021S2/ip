@@ -1,0 +1,11 @@
+some work
+todo some work
+deadline some work /by some time
+event some work /at some time
+list
+done 1
+done -1
+done 10
+list
+help
+bye

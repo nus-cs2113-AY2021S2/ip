@@ -1,7 +1,61 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+____________________________________________________________
+Hello I'm Diuk!
+What would you like to do today?
+____________________________________________________________
+Added to list:
+[*][ ] some work
+1 task in the list
 
+Added to list:
+[T][ ] some work
+2 tasks in the list
+
+Added to list:
+[D][ ] some work (by:some time)
+3 tasks in the list
+
+Added to list:
+[E][ ] some work (at:some time)
+4 tasks in the list
+
+1. [*][ ] some work
+2. [T][ ] some work
+3. [D][ ] some work (by:some time)
+4. [E][ ] some work (at:some time)
+
+Congrats! You've completed:
+   [*][X] some work
+
+Enter a valid job number. Use the list command to view your current tasks.
+Enter "help" for a list of available commands and format
+
+You don't have that many jobs! Use the list command to view your current tasks.
+Enter "help" for a list of available commands and format
+
+1. [*][X] some work
+2. [T][ ] some work
+3. [D][ ] some work (by:some time)
+4. [E][ ] some work (at:some time)
+
+COMMAND LIST:
+-------------
+ADD -
+FORMAT: [(str) job]
+
+TODO -
+FORMAT: todo [(str) job]
+
+DEADLINE -
+FORMAT: deadline [(str) job] /by [(str) deadline]
+
+LIST -
+FORMAT: list
+
+DONE -
+FORMAT: done [(int) number]
+
+To exit, enter "bye"
+
+____________________________________________________________
+Bye! Hit me up if you feel like being productive again ;)
+____________________________________________________________
