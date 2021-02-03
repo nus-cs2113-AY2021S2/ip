@@ -7,6 +7,11 @@ public class Todo {
         isDone = false;
     }
 
+    Todo(){
+        this.name = "";
+        isDone = false;
+    }
+
 
     public void markDone() {
         isDone = true;

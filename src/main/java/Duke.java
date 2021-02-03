@@ -61,16 +61,12 @@ public class Duke {
                 printAddMessage(todo);
                 break;
             case "event":
-                String name = content.substring(0, content.indexOf('/') - 1);
-                String time = content.substring(content.indexOf('/') + 4);
-                Event event = new Event(name, time);
+                Event event = new Event(content);
                 addToList(event);
                 printAddMessage(event);
                 break;
             case "deadline":
-                String name1 = content.substring(0, content.indexOf('/') - 1);
-                String time1 = content.substring(content.indexOf('/') + 4);
-                Deadline deadline = new Deadline(name1, time1);
+                Deadline deadline = new Deadline(content);
                 addToList(deadline);
                 printAddMessage(deadline);
                 break;

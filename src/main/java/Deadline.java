@@ -1,7 +1,7 @@
 public class Deadline extends Event{
 
-    Deadline(String name, String time) {
-        super(name, time);
+    Deadline(String content) {
+        super(content);
     }
 
     public String toString() {
