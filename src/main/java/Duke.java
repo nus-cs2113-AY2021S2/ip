@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Duke {
     public enum inputCommand {
-        ADD, BYE, DONE, ERROR, LIST, TODO, DEADLINE, EVENT;
+        ADD, BYE, DONE, ERROR, LIST, TODO, DEADLINE, EVENT
     }
 
     public static void main(String[] args) {
