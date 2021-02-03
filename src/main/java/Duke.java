@@ -25,15 +25,15 @@ public class Duke {
 
     private static void addToList(Task[] taskList, String prompt, int taskIndex) {
         taskList[taskIndex] = new Task(prompt);
-        System.out.println("\tadded: " + prompt);
+        System.out.println("\tGot it. I've added this task:\n" +
+                            "  " + taskList[taskIndex].toString());
     }
 
     private static void completeTask(Task[] taskList, String substring) {
         int taskIndex = Integer.parseInt(substring) - 1;
         taskList[taskIndex].markAsDone();
         System.out.println("\tNice! I've marked this task as done: \n" +
-                            "\t" + "[" + taskList[taskIndex].getStatusIcon() + "]" +
-                            taskList[taskIndex].getDescription());
+                            "\t" + taskList[taskIndex].toString());
     }
 
     public static void main(String[] args) {
