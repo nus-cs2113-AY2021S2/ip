@@ -24,17 +24,20 @@ public class Duke {
             }
             if (userCommand.equalsIgnoreCase("list")){
                 listOutTasks();
-            }
-            else if (userCommand.equalsIgnoreCase("done" )) {
+            } else if (userCommand.equalsIgnoreCase("done" )) {
                 markTaskAsDone(inputDetails);
-            }
-            else  if (isValidInput(userCommand)){
+            } else  if (isValidInput(userCommand)){
+                //process Todo, event or deadline
                 processUserRequest(userCommand, inputDetails);
             } else {
-                System.out.println("Please check your spelling.");
+                errorMessage();
             }
             printLine();
         }
+    }
+
+    private static void errorMessage() {
+        System.out.println("Please check your spelling.");
     }
 
     private static boolean isValidInput(String userCommand) {
@@ -50,7 +53,6 @@ public class Duke {
 
     private static void processUserRequest(String userCommand, String inputDetails) {
         printLine();
-        //task creation
         tasksList[tasksCount] = new Task(inputDetails, userCommand);
         Task selectedTask = tasksList[tasksCount];
         tasksCount++;
