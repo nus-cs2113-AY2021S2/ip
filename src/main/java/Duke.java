@@ -52,7 +52,6 @@ public class Duke {
             taskList.addTask(input, inputCommand.EVENT);
             break;
         case DONE:
-            //Retrieve task number from input
             int taskNum = getTaskNum(input);
             taskList.finishTask(taskNum - 1);
             break;

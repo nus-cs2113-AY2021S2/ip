@@ -9,16 +9,18 @@ public class TaskList {
 
     public void addTask(String description, Duke.inputCommand command) {
         Task newTask;
-
+        String[] stringArray;
         switch (command) {
         case TODO:
             newTask = new ToDo(description);
             break;
         case EVENT:
-            newTask = new Event(description);
+            stringArray = description.split("/at");
+            newTask = new Event(stringArray[0].replace("event ", ""), stringArray[1].trim());
             break;
         case DEADLINE:
-            newTask = new Deadline(description);
+            stringArray = description.split("/by");
+            newTask = new Deadline(stringArray[0].replace("deadline ", ""), stringArray[1].trim());
             break;
         default:
             newTask = new Task(description);

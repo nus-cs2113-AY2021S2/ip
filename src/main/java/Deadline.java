@@ -1,9 +1,8 @@
-public class Deadline extends Task{
-    String description;
-    public Deadline(String description) {
+public class Deadline extends Task {
+    String by;
+    public Deadline(String description, String by) {
         super(description);
-        String[] stringArray = description.split("/by");
-        this.description = stringArray[0] + "(by:" + stringArray[1] + ")";
+        this.by = by;
     }
 
     @Override
@@ -13,6 +12,6 @@ public class Deadline extends Task{
 
     @Override
     public String getDescription() {
-        return description;
+        return super.getDescription() + "(by: " + by + ")";
     }
 }

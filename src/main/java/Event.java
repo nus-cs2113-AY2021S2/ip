@@ -1,9 +1,8 @@
-public class Event extends Task{
-    String description;
-    public Event(String description) {
+public class Event extends Task {
+    String at;
+    public Event(String description, String at) {
         super(description);
-        String[] stringArray = description.split("/at");
-        this.description = stringArray[0] + "(at:" + stringArray[1] + ")";
+        this.at = at;
     }
 
     @Override
@@ -13,6 +12,6 @@ public class Event extends Task{
 
     @Override
     public String getDescription() {
-        return description;
+        return super.getDescription() + "(at: " + at + ")";
     }
 }
