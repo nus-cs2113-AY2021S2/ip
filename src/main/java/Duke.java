@@ -40,7 +40,7 @@ public class Duke {
         // Lists out the things under tasks.
         System.out.println("\t Here are the tasks in your list:");
         for(int i= 0; i!=numberOfTasks; i++){
-            String output = String.format("%02d. [%s] %s", i+1, tasks[i].getStatusIcon(), tasks[i].getDescription());
+            String output = String.format("%02d. %s", i+1, tasks[i]);
             System.out.println("\t" + output);
         }
     }

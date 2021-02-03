@@ -18,4 +18,8 @@ public class Task {
     public void markAsDone(){
         this.isDone = true;
     }
+
+    public String toString(){
+        return String.format("[" + this.getStatusIcon() + "] " + this.getDescription());
+    }
 }
