@@ -9,7 +9,6 @@ public class Duke {
             + "|____/ \\__,_|_|\\_\\___|\n";
     private static final String LINE_SEPERATOR = "\t____________________________________________________________";
 
-
     public static void main(String[] args) {
         System.out.println("\tHello from\n" + LOGO);
         System.out.println(LINE_SEPERATOR +
@@ -20,23 +19,23 @@ public class Duke {
         TaskList taskList = new TaskList();
         String userInput = sc.nextLine();
         while (!userInput.equals("bye")) {
-            if (userInput.equals("list")) {
-                OutputGenerator.listOutput(taskList);
-            } else if (userInput.toLowerCase(Locale.ROOT).startsWith("done")) {
-                OutputGenerator.doneOutput(taskList, userInput);
-            } else if (userInput.toLowerCase(Locale.ROOT).startsWith("todo")) {
-                OutputGenerator.addTodoOutput(taskList,userInput);
-            } else if (userInput.toLowerCase(Locale.ROOT).startsWith("deadline")){
-                OutputGenerator.addDeadlineOutput(taskList,userInput);
-            } else if (userInput.toLowerCase(Locale.ROOT).startsWith("event")) {
-                OutputGenerator.addEventOutput(taskList,userInput);
+            try {
+                if (userInput.equals("list")) {
+                    OutputGenerator.listOutput(taskList);
+                } else if (userInput.toLowerCase(Locale.ROOT).startsWith("done")) {
+                    OutputGenerator.doneOutput(taskList, userInput);
+                } else if (userInput.toLowerCase(Locale.ROOT).startsWith("todo")) {
+                    OutputGenerator.addTodoOutput(taskList, userInput);
+                } else if (userInput.toLowerCase(Locale.ROOT).startsWith("deadline")) {
+                    OutputGenerator.addDeadlineOutput(taskList, userInput);
+                } else if (userInput.toLowerCase(Locale.ROOT).startsWith("event")) {
+                    OutputGenerator.addEventOutput(taskList, userInput);
+                } else {
+                    OutputGenerator.defaultOutput();
+                }
+            } catch (RuntimeException runtimeException){
+                OutputGenerator.defaultOutput();
             }
-/*
-            else {
-                OutputGenerator.Output(taskList,userInput);
-            }
-
- */
             userInput = sc.nextLine();
         }
         System.out.print(LINE_SEPERATOR +

@@ -11,20 +11,7 @@ public class OutputGenerator {
 
     public static void doneOutput(TaskList taskList, String input){
         String[] inputPart = input.trim().split("\\s+",2);
-        int taskIndex = -1;
-        try {
-            taskIndex = (Integer.parseInt(inputPart[1])) - 1;
-        } catch (NumberFormatException e){
-            for(int i=0; i<taskList.getTaskCount(); i++){
-                if(inputPart[1].equals(taskList.getTask(i).getTaskName())){
-                    taskIndex = i;
-                }
-            }
-        }
-        if(taskIndex == -1){
-            System.out.println(LINE_SEPERATOR + "\nThe task doesn't exsit.\n" + LINE_SEPERATOR);
-            return;
-        }
+        int taskIndex = Integer.parseInt(inputPart[1]) - 1;
         if(taskIndex > taskList.getTaskCount()-1){
             System.out.println(LINE_SEPERATOR + "\nIndex out of bound.\n" + LINE_SEPERATOR);
             return;
@@ -41,18 +28,6 @@ public class OutputGenerator {
 
     public static void addTodoOutput(TaskList taskList, String input){
         String[] inputPart = input.trim().split("\\s+",2);
-        int taskIndex = -1;
-        boolean taskExist = false;
-        for(int i=0; i<taskList.getTaskCount(); i++){
-            if(taskList.getTask(i).getTaskName().equals(inputPart[1])){
-                taskExist = true;
-                break;
-            }
-        }
-        if(taskExist){
-            System.out.println(LINE_SEPERATOR + "\nThe ToDo already exists.\n" + LINE_SEPERATOR);
-            return;
-        }
         ToDo newTodo = new ToDo(inputPart[1],false);
         taskList.addTask(newTodo);
         System.out.println(LINE_SEPERATOR +
@@ -65,18 +40,6 @@ public class OutputGenerator {
         String[] nameDoby = inputPart[1].split("/by");
         String name = nameDoby[0].trim();
         String doby = nameDoby[1].trim();
-        int taskIndex = -1;
-        boolean taskExist = false;
-        for(int i=0; i<taskList.getTaskCount(); i++){
-            if(taskList.getTask(i).getTaskName().equals(name)){
-                taskExist = true;
-                break;
-            }
-        }
-        if(taskExist){
-            System.out.println(LINE_SEPERATOR + "\nThe Deadline already exists.\n" + LINE_SEPERATOR);
-            return;
-        }
         Deadline newDeadline = new Deadline(name,false,doby);
         taskList.addTask(newDeadline);
         System.out.println(LINE_SEPERATOR +
@@ -89,22 +52,17 @@ public class OutputGenerator {
         String[] nameAt = inputPart[1].split("/at");
         String name = nameAt[0].trim();
         String at = nameAt[1].trim();
-        int taskIndex = -1;
-        boolean taskExist = false;
-        for(int i=0; i<taskList.getTaskCount(); i++){
-            if(taskList.getTask(i).getTaskName().equals(name)){
-                taskExist = true;
-                break;
-            }
-        }
-        if(taskExist){
-            System.out.println(LINE_SEPERATOR + "\nThe Deadline already exists.\n" + LINE_SEPERATOR);
-            return;
-        }
         Event newEvent = new Event(name,false,at);
         taskList.addTask(newEvent);
         System.out.println(LINE_SEPERATOR +
                 "\n\tEvent added:\n\t  " +  newEvent.getTaskInfoFormat() +
                 "\n\tNow you have " + taskList.getTaskCount() + " tasks in the list\n" + LINE_SEPERATOR);
     }
+
+    public static void defaultOutput(){
+        System.out.println(LINE_SEPERATOR + "\n\tInvalid input format.");
+        System.out.println("\tInput format:\n\ttodo todo name\n\tdeadline deadline name /by time of deadline" +
+                "\n\tevent event name /at time of the event\n" + LINE_SEPERATOR);
+    }
+
 }
