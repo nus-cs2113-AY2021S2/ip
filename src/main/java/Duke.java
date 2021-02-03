@@ -2,19 +2,24 @@ import java.util.Scanner;
 
 public class Duke {
 
-    public static Task[] list = new Task[100];
+    public static Todo[] list = new Todo[100];
     public static int index = 0;
 
-    public static void addToList(String input) {
-        Task newTask = new Task(input);
-        list[index] = newTask;
+    public static void addToList(Todo task) {
+        list[index] = task;
         index++;
     }
 
     public static void printList() {
         for (int i = 0; i < index; i++) {
-            System.out.println(String.valueOf(i + 1) + ". " + list[i].representAsString());
+            System.out.println(String.valueOf(i + 1) + ". " + list[i].toString());
         }
+    }
+
+    public static void printAddMessage(Todo task) {
+        System.out.println("Got it. I've added this task:");
+        System.out.println("  " + task.toString());
+        System.out.println("Now you have " + String.valueOf(index) + " tasks in the list.");
     }
 
     public static void main(String[] args) {
@@ -30,20 +35,48 @@ public class Duke {
         boolean running = true;
         do {
             input = in.nextLine();
-            if (input.compareTo("bye") == 0) {
-                running = false;
-            } else if (input.compareTo("list") == 0) {
-                printList();
+            String command = "";
+            String content = "";
+            if (input.indexOf(' ') == -1) {
+                command = input;
             } else {
-                String[] separated = input.split(" ");
-                if (separated[0].compareTo("done") == 0) {
-                    list[Integer.parseInt(separated[1]) - 1].markDone();
-                    System.out.println("Nice! I've marked this task as done:");
-                    System.out.println(list[Integer.parseInt(separated[1]) - 1].representAsString().replace("\u2713", "\u2718"));
-                } else {
-                    addToList(input);
-                    System.out.println("Added: " + input);
-                }
+                command = input.substring(0, input.indexOf(' '));
+                content = input.substring(input.indexOf(' ') + 1);
+            }
+            switch (command) {
+            case "bye":
+                running = false;
+                break;
+            case "list":
+                printList();
+                break;
+            case "done":
+                list[Integer.parseInt(content) - 1].markDone();
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println(list[Integer.parseInt(content) - 1].toString());
+                break;
+            case "todo":
+                Todo todo = new Todo(content);
+                addToList(todo);
+                printAddMessage(todo);
+                break;
+            case "event":
+                String name = content.substring(0, content.indexOf('/') - 1);
+                String time = content.substring(content.indexOf('/') + 4);
+                Event event = new Event(name, time);
+                addToList(event);
+                printAddMessage(event);
+                break;
+            case "deadline":
+                String name1 = content.substring(0, content.indexOf('/') - 1);
+                String time1 = content.substring(content.indexOf('/') + 4);
+                Deadline deadline = new Deadline(name1, time1);
+                addToList(deadline);
+                printAddMessage(deadline);
+                break;
+            default:
+                System.out.println("Invalid input, please try again");
+                break;
             }
 
         } while (running);
