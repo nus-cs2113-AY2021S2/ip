@@ -1,58 +1,34 @@
 public class Parser {
-    public static void addOrCompleteTask(String input, Task[] tasks){
+    public static void processTask(String input) {
         String[] inputData = input.split(" ");
         String[] taskDetails;
         switch (inputData[0]) {
-        case "done": {
-            int completedTask = Integer.parseInt(input.split(" ")[1]);
-            completedTask--;
-            tasks[completedTask].markAsDone();
-            System.out.println("The Force is with you! The following task has been marked as done:");
-            System.out.println(tasks[completedTask]);
-            System.out.println("You still have " + Task.getTaskCounter() + " tasks in your list!");
-            UI.showDivider();
-
+        case "done":
+            int completedTaskIndex = Integer.parseInt(input.split(" ")[1]);
+            completedTaskIndex--;
+            Task.completeTask(completedTaskIndex);
+            UI.taskCompletedSuccessfully();
             break;
-            }
-        case "deadline": {
+        case "deadline":
             taskDetails = findTaskDetails(inputData);
-            tasks[Task.getTaskCounter()] = new Deadline(taskDetails[0], taskDetails[1]);
-            System.out.println("Roger Roger. The following task has been added:");
-            System.out.println(tasks[Task.getTaskCounter()]);
-            Task.incrementTaskCounter();
-            System.out.println("You now have " + Task.getTaskCounter() + " tasks to complete in your list!");
-            UI.showDivider();
-
-
+            Task.addNewTask(new Deadline(taskDetails[0], taskDetails[1]));
+            UI.taskAddedSuccessfully();
             break;
-            }
-        case "event": {
+        case "event":
             taskDetails = findTaskDetails(inputData);
-            tasks[Task.getTaskCounter()] = new Event(taskDetails[0], taskDetails[1]);
-            System.out.println("Roger Roger. The following task has been added:");
-            System.out.println(tasks[Task.getTaskCounter()]);
-            Task.incrementTaskCounter();
-            System.out.println("You now have " + Task.getTaskCounter() + " tasks to complete in your list!");
-            UI.showDivider();
-
-
+            Task.addNewTask(new Event(taskDetails[0], taskDetails[1]));
+            UI.taskAddedSuccessfully();
             break;
-            }
-        case "todo": {
+        case "todo":
             taskDetails = findTaskDetails(inputData);
-            tasks[Task.getTaskCounter()] = new Todo(taskDetails[0]);
-            System.out.println("Roger Roger. The following task has been added:");
-            System.out.println(tasks[Task.getTaskCounter()]);
-            Task.incrementTaskCounter();
-            System.out.println("You now have " + Task.getTaskCounter() + " tasks to complete in your list!");
-            UI.showDivider();
-
-
+            Task.addNewTask(new Todo(taskDetails[0]));
+            UI.taskAddedSuccessfully();
             break;
-            }
+        default:
+            System.out.println("Please re-check your input! Terminating program now...");
         }
     }
-    public static String[] findTaskDetails(String[] inputData){
+    public static String[] findTaskDetails(String[] inputData) {
         String[] parsedData = new String [2];
         String prefix = "";
         StringBuilder inputDueDate = new StringBuilder();
@@ -63,8 +39,7 @@ public class Parser {
             if (inputData[i].equals("||")){
                 separatorIndex = i;
                 break;
-            }
-            else {
+            } else {
                 inputDescription.append(prefix).append(inputData[i]);
                 prefix = " ";
             }
@@ -72,7 +47,7 @@ public class Parser {
         parsedData[0] = inputDescription.toString();
 
         prefix = "";
-        for (int j = separatorIndex + 1; j < inputData.length; j++){
+        for (int j = separatorIndex + 1; j < inputData.length; j++) {
             inputDueDate.append(prefix).append(inputData[j]);
             prefix = " ";
         }

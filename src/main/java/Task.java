@@ -2,6 +2,9 @@ public class Task {
     private boolean isDone;
     private String description;
     private static int taskCounter = 0;
+    private static int completedTaskCounter = 0;
+    private static Task[] tasks = new Task[100];
+    private static int completedTaskIndex = 0;
 
     public Task(String description){
         this.description = description;
@@ -25,8 +28,36 @@ public class Task {
         return (isDone ? "[ \u2713 ] " : "[ \u2718 ] ");
     }
 
+    // static methods for all the Tasks
     public static int getTaskCounter() {
         return taskCounter;
+    }
+
+    public static int getRemainingTasks() {
+        return taskCounter - completedTaskCounter;
+    }
+
+    public static Task[] getTaskList() {
+        return tasks;
+    }
+
+    public static void addNewTask(Task newTask) {
+        tasks[taskCounter] = newTask;
+        incrementTaskCounter();
+    }
+
+    public static void completeTask(int taskNumber) {
+        tasks[taskNumber].markAsDone();
+        completedTaskIndex = taskNumber;
+        completedTaskCounter++;
+    }
+
+    public static Task getLatestTask(boolean getCompletedTask) {
+        if (getCompletedTask) {
+            return tasks[completedTaskIndex];
+        } else {
+            return tasks[getTaskCounter() - 1];
+        }
     }
 
     public static void incrementTaskCounter(){
@@ -36,6 +67,8 @@ public class Task {
     public static void decrementTaskCounter(){
         taskCounter--;
     }
+
+    // standard string return format for all tasks subclasses expand on this format
     @Override
     public String toString(){
         return this.getStatusIcon() + " " + this.getDescription();

@@ -3,12 +3,8 @@ import java.util.Scanner;
 public class Duke {
 
     public static void main(String[] args) {
-
         UI.showWelcomeScreen();
-
         Scanner sc = new Scanner(System.in);
-
-        Task[] tasks = new Task[100];
         String input;
 
         do {
@@ -18,7 +14,7 @@ public class Duke {
                 System.out.println("This is your current list:");
                 for (int i = 0; i < Task.getTaskCounter(); i++){
                     int displayedTask = i + 1;
-                    System.out.println(displayedTask + ": " + tasks[i]);
+                    System.out.println(displayedTask + ": " + Task.getTaskList()[i]);
                 }
                 UI.showDivider();
                 break;
@@ -29,7 +25,7 @@ public class Duke {
                 break;
             default:
                 // todo make the heavy lifting be done by another processing class instead of here
-                Parser.addOrCompleteTask(input, tasks);
+                Parser.processTask(input);
 
             }
         } while (!input.equals("bye"));
