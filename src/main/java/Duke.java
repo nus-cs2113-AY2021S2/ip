@@ -5,17 +5,7 @@ public class Duke {
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("--------------------------------------------------------------------------------");
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
-        System.out.println(" ");
-        System.out.println("--------------------------------------------------------------------------------");
+        welcomeMessage();
         boolean isOn = true;
         int numOfCompletedTasks = 0;
         int numOfTasks = 0;
@@ -147,5 +137,19 @@ public class Duke {
                 System.out.println("    --------------------------------------------------------------------------------");
             }
         }
+    }
+
+    private static void welcomeMessage() {
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        System.out.println("Hello from\n" + logo);
+        System.out.println("--------------------------------------------------------------------------------");
+        System.out.println("Hello! I'm Duke");
+        System.out.println("What can I do for you?");
+        System.out.println(" ");
+        System.out.println("--------------------------------------------------------------------------------");
     }
 }
