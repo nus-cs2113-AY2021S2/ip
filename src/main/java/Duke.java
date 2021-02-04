@@ -50,32 +50,56 @@ public class Duke {
                             System.out.println((i+1) + "." + tasks[i].toString());
                         }
                     } else if (task.contains("done")) {
-                        String taskNo = task.substring(task.length()-1);
-                        int new_taskNo = Integer.parseInt(taskNo);
-                        tasks[new_taskNo-1].setTaskStatus(true);
-                        System.out.println("Nice! I've marked this task as done:");
-                        System.out.println(tasks[new_taskNo-1].toString());
+                        try {
+                            String taskNo = task.substring(task.length() - 1);
+                            int new_taskNo = Integer.parseInt(taskNo);
+                            tasks[new_taskNo - 1].setTaskStatus(true);
+                            System.out.println("Nice! I've marked this task as done:");
+                            System.out.println(tasks[new_taskNo - 1].toString());
+                        } catch (StringIndexOutOfBoundsException e){
+                            System.out.println(":( Opppss!! The number of task to be done" +
+                                    "cannot be empty");
+                        }
                     } else if (task.contains("todo")){
-                        String taskName = task.substring(5);
-                        tasks[index] = new Todo(taskName, 'T');
-                        index = addTaskMessage(index, tasks[index]);
+                        try{
+                            String taskName = task.substring(5);
+                            tasks[index] = new Todo(taskName, 'T');
+                            index = addTaskMessage(index, tasks[index]);
+                        } catch (StringIndexOutOfBoundsException e){
+                            System.out.println(":( Opppss!! The description of a" +
+                                    "todo cannot be empty");
+                        }
                     } else if (task.contains("deadline")){
-                        int slash_sign = task.indexOf("/");
-                        String taskName1 = task.substring(9, slash_sign-1);
-                        String by = task.substring(slash_sign+3);
-                        tasks[index] = new Deadline(taskName1,'D', by);
-                        index = addTaskMessage(index, tasks[index]);
+                        try {
+                            int slash_sign = task.indexOf("/");
+                            String taskName1 = task.substring(9, slash_sign - 1);
+                            String by = task.substring(slash_sign + 3);
+                            tasks[index] = new Deadline(taskName1, 'D', by);
+                            index = addTaskMessage(index, tasks[index]);
+                        } catch (StringIndexOutOfBoundsException e){
+                            System.out.println(":( Opppss!! The description of a" +
+                                    "deadline cannot be empty");
+                        }
                     } else if (task.contains("event")) {
-                        int slash_sign = task.indexOf("/");
-                        String taskName2 = task.substring(6, slash_sign - 1);
-                        String at = task.substring(slash_sign + 3);
-                        tasks[index] = new Event(taskName2, 'E', at);
-                        index = addTaskMessage(index, tasks[index]);
+                        try {
+                            int slash_sign = task.indexOf("/");
+                            String taskName2 = task.substring(6, slash_sign - 1);
+                            String at = task.substring(slash_sign + 3);
+                            tasks[index] = new Event(taskName2, 'E', at);
+                            index = addTaskMessage(index, tasks[index]);
+                        } catch (StringIndexOutOfBoundsException e){
+                            System.out.println(":( Opppss!! The description of a" +
+                                    "event cannot be empty");
+                        }
                     } else{
+                        System.out.println(":( Opppss!! I'm sorry, " +
+                                "but i don't know what that means...");
+                    }
+                    /* else{
                         //add tasks with no specific task type
                         tasks[index] = new Task(task);
                         index = addTaskMessage(index, tasks[index]);
-                    }
+                    } */
                     task = b.nextLine();
                 }
                 System.out.println("Thank you for using Tasks function, " +
