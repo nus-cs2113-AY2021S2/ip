@@ -24,7 +24,7 @@ public class TaskManager {
     /**
      * Saves current task.
      */
-    public static List<String> addTask(String taskType, String message) {
+    public List<String> addTask(String taskType, String message) {
         List<String> messages = new ArrayList<String>();
         Task task;
         int taskIndex = storage.size() + 1;
@@ -66,7 +66,7 @@ public class TaskManager {
     /**
      * Fetch all previously mentioned messages.
      */
-    public static List<String> fetchTasks() {
+    public List<String> fetchTasks() {
         List<String> messages = new ArrayList<String>();
         for (int index = 0; index < storage.size(); index++) {
             Task task = storage.get(index + 1);
@@ -78,14 +78,14 @@ public class TaskManager {
     /**
      * Checks if task is present in storage by index.
      */
-    public static boolean isTaskPresent(int index) {
+    public boolean isTaskPresent(int index) {
         return storage.containsKey(index);
     }
 
     /**
      * Marks the tasks as completed by their given task numbers.
      */
-    public static List<String> completeTasks(List<Integer> indexes) {
+    public List<String> completeTasks(List<Integer> indexes) {
         List<String> messages = new ArrayList<String>();
         messages.add(Constants.doneMessage);
         for (int index : indexes) {
@@ -101,7 +101,7 @@ public class TaskManager {
     /**
      * Get number of undone tasks in storage.
      */
-    public static int getIncompleteTasksCount() {
+    public int getIncompleteTasksCount() {
         int count = 0;
         for (Task task : storage.values()) {
             if (!task.isTaskDone()) {

@@ -1,5 +1,4 @@
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +32,7 @@ public class Logic {
     /**
      * Fetches all valid tasks user wants to complete, by task index number.
      */
-    private static List<Integer> tasksToComplete(String[] indexes) {
+    private List<Integer> tasksToComplete(String[] indexes) {
         List<Integer> tasks = new ArrayList<>();
         for (String index : indexes) {
             if (Utils.isInteger(index)) {
@@ -52,7 +51,7 @@ public class Logic {
      * If message is "done", proceeds to mark tasks as completed.
      * Else, adds the message as a task.
      */
-    public static void handleMessage() {
+    public void handleMessage() {
         String sentence = scanner.nextLine();
         String[] words = sentence.split(" ");
         String command = words[0];
