@@ -1,5 +1,9 @@
 import java.util.Scanner;
 import java.util.Arrays;
+import duke.Deadline;
+import duke.Task;
+import duke.Event;
+import duke.Todo;
 
 public class Duke {
     static final int MAX_NO_OF_TASKS = 100;
