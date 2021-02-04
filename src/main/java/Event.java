@@ -1,6 +1,6 @@
 public class Event extends Task {
 
-    private final String eventTime;
+    protected String eventTime;
 
     public Event(String description, String eventTime) {
         super(description);
