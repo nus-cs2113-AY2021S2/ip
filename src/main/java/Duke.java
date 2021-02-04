@@ -9,36 +9,49 @@ public class Duke {
     }
 
     public static void main(String[] args) {
+        printWelcome();
+
+        String text = scanner.nextLine();
+        List list = new List();
+
+        while (!text.equals("bye")) {
+            String[] stringTokens = text.split(" ", 2);
+            printLine();
+            switch (stringTokens[0]) {
+                case "list":
+                    list.printList();
+                    break;
+                case "done":
+                    list.markDone(Integer.parseInt(stringTokens[1]));
+                    break;
+                case "todo":
+                    list.addTask(stringTokens[1]);
+                    break;
+                case "deadline":
+                    list.addDeadline(stringTokens[1]);
+                    break;
+                case "event":
+                    list.addEvent(stringTokens[1]);
+                    break;
+                default:
+                    System.out.println("no such command!");
+            }
+            printLine();
+            text = scanner.nextLine();
+        }
+        System.out.println(LINEBREAK + "Bye, Hope to see you again soon!\n" + LINEBREAK);
+    }
+
+    public static void printWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        System.out.println("____________________________________________________________\n" +
+        System.out.println(LINEBREAK +
                 " Hello! I'm Duke\n" +
                 " What can I do for you?\n" +
-                "____________________________________________________________");
-
-        String text = scanner.nextLine();
-        List list = new List();
-
-        while (!text.equals("bye")) {
-            String[] stringTokens = text.split(" ");
-            printLine();
-            if (text.equals("list")) {
-                list.printList();
-            } else if (stringTokens[0].equals("done")) {
-                int taskNumber = Integer.parseInt(stringTokens[1]);
-                list.markDone(taskNumber);
-            } else {
-                System.out.println("added: " + text);
-                list.addTask(text);
-            }
-            printLine();
-            text = scanner.nextLine();
-        }
-
-        System.out.println(LINEBREAK + "Bye, Hope to see you again soon!\n" + LINEBREAK);
+                LINEBREAK);
     }
 }
