@@ -4,7 +4,7 @@ public class Command {
         String[] taskDescription;
         switch (splitTaskInput[0]){
             case "done":
-                int taskNumberCompleted = Integer.parseInt(splitTaskInput[1]) - 1;
+                int taskNumberCompleted = Integer.parseInt(splitTaskInput[1]);
                 taskNumberCompleted--;
                 Task.completeTask(taskNumberCompleted);
                 UI.taskCompleted();
@@ -39,24 +39,26 @@ public class Command {
 
     public static String[] findTaskDescription(String[] splitTaskInput){
         String[] taskDescription = new String[2];
-        int slashIndex=-1;
+        int slashIndex=1;
         StringBuilder description = new StringBuilder();
         StringBuilder deadline = new StringBuilder();
         String space = "";
         for (int i = 1; i<splitTaskInput.length;i++){
-            if(splitTaskInput[i].equals('/')) {
-                slashIndex = i;
+            if(splitTaskInput[i].equals("/")) {
+                slashIndex++;
+                System.out.println(slashIndex);
                 break;
             }
             else {
                 description.append(space).append(splitTaskInput[i]);
                 space = " ";
+                slashIndex++;
             }
         }
         taskDescription[0]=description.toString();
 
         space = "";
-        for (int j = slashIndex+1; j<splitTaskInput.length;j++){
+        for (int j = slashIndex; j<splitTaskInput.length;j++){
             deadline.append(space).append(splitTaskInput[j]);
             space = " ";
         }
