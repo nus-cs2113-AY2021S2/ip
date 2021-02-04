@@ -7,9 +7,9 @@ public class Task {
         this.isDone = false;
     }
 
-	public String getType() {
-		return " ";
-	}
+    public String getType() {
+        return " ";
+    }
 
     public String getStatusIcon() {
         return (isDone ? "X" : " ");
@@ -19,9 +19,9 @@ public class Task {
         return description;
     }
 
-	public String getDate() {
-		return "";
-	}
+    public String getDate() {
+        return "";
+    }
 
     public void markAsDone() {
         this.isDone = true;

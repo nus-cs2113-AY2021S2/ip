@@ -19,10 +19,10 @@ public class Duke {
             } else if (command.startsWith("todo")) {
                 addTodo(command.split(" ", 2)[1]);
             } else if (command.startsWith("event")) {
-				addEvent(command.split(" ", 2)[1]);
-			} else if (command.startsWith("deadline")) {
-				addDeadline(command.split(" ", 2)[1]);
-			}
+                addEvent(command.split(" ", 2)[1]);
+            } else if (command.startsWith("deadline")) {
+                addDeadline(command.split(" ", 2)[1]);
+            }
         }
     }
 
@@ -36,7 +36,8 @@ public class Duke {
         System.out.println(line);
         System.out.println("\tHere are the tasks in your list:");
         for (int i=0; i<currentTask; i++) {
-            System.out.println("\t" + Integer.toString(i+1) + ".[" + tasks[i].getType() + "][" + tasks[i].getStatusIcon() + "] " + tasks[i].getDescription() + " " + tasks[i].getDate());
+            System.out.println("\t" + Integer.toString(i+1) + ".[" + tasks[i].getType() + "]["
+                    + tasks[i].getStatusIcon() + "] " + tasks[i].getDescription() + " " + tasks[i].getDate());
         }
         System.out.println(line + "\n");
     }
@@ -47,50 +48,52 @@ public class Duke {
         currentTask++;
         System.out.println(line);
         System.out.println("\tGot it. I've added this task:");
-		System.out.println("\t   [" + t.getType() + "][" + t.getStatusIcon() + "] " + t.getDescription());
-		System.out.println("\tNow you have " + Integer.toString(currentTask) + " tasks in the list.");
+        System.out.println("\t   [" + t.getType() + "][" + t.getStatusIcon() + "] " + t.getDescription());
+        System.out.println("\tNow you have " + Integer.toString(currentTask) + " tasks in the list.");
         System.out.println(line + "\n");
     }
 
-	public static void addEvent(String event) {
-		try {
-			String description = event.split("/at")[0].strip();
-			String date = event.split("/at")[1].strip();
-			Event t = new Event(description, date);
-			tasks[currentTask] = t;
-			currentTask++;
-			System.out.println(line);
-			System.out.println("\tGot it. I've added this task:");
-			System.out.println("\t   [" + t.getType() + "][" + t.getStatusIcon() + "] " + t.getDescription() + " " + t.getDate());
-			System.out.println("\tNow you have " + Integer.toString(currentTask) + " tasks in the list.");
+    public static void addEvent(String event) {
+        try {
+            String description = event.split("/at")[0].strip();
+            String date = event.split("/at")[1].strip();
+            Event t = new Event(description, date);
+            tasks[currentTask] = t;
+            currentTask++;
+            System.out.println(line);
+            System.out.println("\tGot it. I've added this task:");
+            System.out.println("\t   [" + t.getType() + "][" + t.getStatusIcon() + "] "
+                    + t.getDescription() + " " + t.getDate());
+            System.out.println("\tNow you have " + Integer.toString(currentTask) + " tasks in the list.");
     	    System.out.println(line + "\n");
-		}
-		catch (ArrayIndexOutOfBoundsException e) {
-			System.out.println(line);
-			System.out.println("\tPlease specify event date.");
-			System.out.println(line + "\n");
-		}
-	}
+        }
+        catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println(line);
+            System.out.println("\tPlease specify event date.");
+            System.out.println(line + "\n");
+        }
+    }
 
-	public static void addDeadline(String deadline) {
-		try {
-			String description = deadline.split("/by")[0].strip();
-			String date = deadline.split("/by")[1].strip();
-			Deadline t = new Deadline(description, date);
-			tasks[currentTask] = t;
-			currentTask++;
-			System.out.println(line);
-	        System.out.println("\tGot it. I've added this task:");
-			System.out.println("\t   [" + t.getType() + "][" + t.getStatusIcon() + "] " + t.getDescription() + " " + t.getDate());
-			System.out.println("\tNow you have " + Integer.toString(currentTask) + " tasks in the list.");
-	        System.out.println(line + "\n");
-		}
-		catch (ArrayIndexOutOfBoundsException e) {
-			System.out.println(line);
-			System.out.println("\tPlease specify deadline.");
-			System.out.println(line + "\n");
-		}
-	}
+    public static void addDeadline(String deadline) {
+        try {
+            String description = deadline.split("/by")[0].strip();
+            String date = deadline.split("/by")[1].strip();
+            Deadline t = new Deadline(description, date);
+            tasks[currentTask] = t;
+            currentTask++;
+            System.out.println(line);
+            System.out.println("\tGot it. I've added this task:");
+            System.out.println("\t   [" + t.getType() + "][" + t.getStatusIcon() + "] "
+                    + t.getDescription() + " " + t.getDate());
+            System.out.println("\tNow you have " + Integer.toString(currentTask) + " tasks in the list.");
+            System.out.println(line + "\n");
+        }
+        catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println(line);
+            System.out.println("\tPlease specify deadline.");
+            System.out.println(line + "\n");
+        }
+    }
 
     public static void done(String item) {
         int i = Integer.parseInt(item)-1;
@@ -102,7 +105,8 @@ public class Duke {
             tasks[i].markAsDone();
             System.out.println(line);
             System.out.println("\tNice! I've marked this task as done:");
-            System.out.println("\t  [" + tasks[i].getType() + "][" + tasks[i].getStatusIcon() + "] " + tasks[i].getDescription());
+            System.out.println("\t  [" + tasks[i].getType() + "][" + tasks[i].getStatusIcon() + "] "
+                    + tasks[i].getDescription());
             System.out.println(line + "\n");
         }
     }
