@@ -12,28 +12,31 @@ What can I do for you?
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
-  [T][ ] borrow book
+  [T][ ] Ong Wei Sheng: Answer CS2113 tutorial questions
 Now you have 1 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
-Here are the tasks in your list:
-1.[T][ ] borrow book
-____________________________________________________________
-____________________________________________________________
 Got it. I've added this task:
-  [D][ ] return book (by: Sunday)
+  [D][ ] weekly CS2113 quiz (by: Monday 9pm)
 Now you have 2 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
+Here are the tasks in your list:
+1.[T][ ] Ong Wei Sheng: Answer CS2113 tutorial questions
+2.[D][ ] weekly CS2113 quiz (by: Monday 9pm)
+____________________________________________________________
+____________________________________________________________
 Got it. I've added this task:
-  [E][ ] project meeting (at: Mon 2-4pm)
+  [E][ ] CS2113 lecture (at: Friday 4 to 6 pm)
 Now you have 3 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
-Got it. I've added this task:
-  [D][ ] do homework (by: no idea :-p)
-Now you have 4 tasks in the list.
+Nice! I've marked this task as done:
+  [T][X] Ong Wei Sheng: Answer CS2113 tutorial questions
 ____________________________________________________________
 ____________________________________________________________
-Bye. Hope to see you again soon!
+Here are the tasks in your list:
+1.[T][X] Ong Wei Sheng: Answer CS2113 tutorial questions
+2.[D][ ] weekly CS2113 quiz (by: Monday 9pm)
+3.[E][ ] CS2113 lecture (at: Friday 4 to 6 pm)
 ____________________________________________________________
