@@ -6,8 +6,8 @@ public class Duke {
     public static int currentTask = 0;
 
     public static void takeInput() {
-        while (true) {
-            Scanner scannerObject = new Scanner(System.in);
+        Scanner scannerObject = new Scanner(System.in);
+        while (scannerObject.hasNextLine()) {
             String command = scannerObject.nextLine();
             if (command.equals("bye")) {
                 bye();
