@@ -18,8 +18,7 @@ public class Duke {
         System.out.println("Here are the tasks in your list:");
         for(int i=0; i<tasks.size(); ++i){
             System.out.println((i+1) + "." +
-                    "[" + tasks.get(i).getStatusIcon()+"] "+
-                    tasks.get(i).description+ "\n");
+                    tasks.get(i).toString()+ "\n");
         }
         System.out.println(divider);
     }
@@ -30,6 +29,38 @@ public class Duke {
         System.out.println(divider + "Nice! I've marked this task as done:"+
                 "\n["+ currentTask.getStatusIcon()+ "]" + currentTask.description +
                 "\n" + divider);
+    }
+
+    public static void addToDo(String input){
+        String taskName = input.substring(5);
+        Task currentTask = new ToDo(taskName);
+        tasks.add(currentTask);
+        System.out.println(divider + "Got it. I've added this task:\n" +
+                currentTask.toString() + "\n");
+        System.out.println("Now you have "+tasks.size()+" tasks in your list.\n" + divider);
+    }
+
+    public static void addDeadline(String input){
+        int deadlineIndex = input.indexOf("/");
+        String description = input.substring(9, deadlineIndex);
+        String deadline = input.substring(deadlineIndex+4);
+        Task currentTask = new Deadline(description, deadline);
+        tasks.add(currentTask);
+        System.out.println(divider + "Got it. I've added this task:\n" +
+                currentTask.toString() + "\n");
+        System.out.println("Now you have "+tasks.size()+" tasks in your list.\n");
+    }
+
+    public static void addEvent(String input){
+        int timeIndex = input.indexOf("/");
+        String description = input.substring(6, timeIndex);
+        String timeDetails = input.substring(timeIndex + 4);
+        Task currentTask = new Event(description, timeDetails);
+        tasks.add(currentTask);
+        System.out.println(divider + "Got it. I've added this task:\n" +
+                currentTask.toString() + "\n");
+        System.out.println("Now you have " + tasks.size() + " tasks in your list.\n" + divider);
+
     }
 
     private static void exitDuke(){
@@ -53,9 +84,15 @@ public class Duke {
             input = in.nextLine();
             if (input.equals("list")) {
                 listTask();
-            }else if(input.contains("done")){
+            }else if(input.contains("done")) {
                 int index = Integer.parseInt(input.substring(5));
                 markTaskDone(index);
+            }else if(input.contains("todo")){
+                addToDo(input);
+            }else if(input.contains("deadline")){
+                addDeadline(input);
+            }else if(input.contains("event")){
+                addEvent(input);
             }else if(input.equals("bye")){
                 exitDuke();
                 break;
