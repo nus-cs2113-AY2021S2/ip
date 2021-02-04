@@ -28,6 +28,8 @@ public class Duke {
             } else if (command.startsWith("event")) {
                 recordTasks(list, index,command,"event");
                 index++;
+            } else if (command.startsWith("done")) {
+                markDone(list, command);
             }
             command = in.nextLine();
         }
@@ -40,23 +42,36 @@ public class Duke {
         printLine();
     }
 
-    public static void recordTasks(Task list[], int index, String command, String category) {
+    public static void recordTasks(Task[] list, int index, String command, String category) {
         printLine();
-        String time = command.substring(command.indexOf("/") + 4);
         System.out.println("Got it. I've added this task:");
         if (category.equals("todo")) {
             list[index] = new Todo(command.substring(5));
-        } else if (category.equals("deadline")) {
-            String content = command.substring(9, command.indexOf("/"));
-            list[index] = new Deadline(content, time);
-        } else if (category.equals("event")) {
-            String content = command.substring(6,command.indexOf("/"));
-            list[index] = new Event(content, time);
+        } else {
+            String Time = command.substring(command.indexOf("/") + 4);
+            if (category.equals("deadline")) {
+                String content = command.substring(9, command.indexOf("/"));
+                list[index] = new Deadline(content, Time);
+            } else if (category.equals("event")) {
+                String content = command.substring(6,command.indexOf("/"));
+                list[index] = new Event(content, Time);
+            }
         }
         System.out.println(list[index].toString());
         int count = index + 1;
         System.out.println("Now you have " + count + " tasks in the list.");
         printLine();
+    }
+
+    public static void markDone(Task[] list, String command) {
+        int i;
+        i = Integer.parseInt(command.substring(5));
+        list[i-1].isDone = true;
+        printLine();
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println(" " + " " + list[i-1].toString());
+        printLine();
+
     }
 
     public static void printTasks(Task[] list, int index) {
