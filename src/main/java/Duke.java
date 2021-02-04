@@ -31,7 +31,7 @@ public class Duke {
                 System.out.println("Here are the tasks in your list:");
                 int i = 0;
                 for (Task task : tasks) {
-                    System.out.println(++i + ". [" + task.getStatusIcon() + "] " + task.getDescription());
+                    System.out.println(++i + ". " + task.toString());
                 };
                 System.out.println("~____________________________________________________________~\n");
             } else if (phrase.startsWith("done ")) {
@@ -91,6 +91,7 @@ public class Duke {
                 System.out.println("~____________________________________________________________~");
             }
         }
+        // Exits Program
         System.out.println("\n~____________________________________________________________~");
         System.out.println("Alright cheers mate!");
         System.out.println("~____________________________________________________________~");
