@@ -14,7 +14,7 @@ public class Task {
         return "[" + getStatusIcon() + "] " + description;
     }
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? "✓" : "✘"); //return ✓ or X symbols
     }
     public void setTaskType(char taskType){
         this.taskType = taskType;
