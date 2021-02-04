@@ -95,11 +95,13 @@ public class Duke {
                         System.out.println(":( Opppss!! I'm sorry, " +
                                 "but i don't know what that means...");
                     }
-                    /* else{
+                    /*
+                    else{
                         //add tasks with no specific task type
                         tasks[index] = new Task(task);
                         index = addTaskMessage(index, tasks[index]);
-                    } */
+                    }
+                    */
                     task = b.nextLine();
                 }
                 System.out.println("Thank you for using Tasks function, " +
