@@ -12,7 +12,6 @@ public class Todo {
         isDone = false;
     }
 
-
     public void markDone() {
         isDone = true;
     }
