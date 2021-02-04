@@ -4,7 +4,8 @@ import java.util.Scanner;
 public class Duke {
     static final String lineDivider = "\t__________________________________________________________________________\n";
 
-    static final String dukeKeywords = "\t\t Use 'todo', 'deadline' , 'event' to enter tasks!\n";
+    static final String dukeKeywords = "\t\t Use 'todo', 'deadline' , 'event' to enter tasks!\n" +
+                                       "\t\t Use 'list' to view tasks!\n";
     public static final String LOGO = " ____        _        \n"
                                     + "|  _ \\ _   _| | _____ \n"
                                     + "| | | | | | | |/ / _ \\\n"
@@ -12,7 +13,7 @@ public class Duke {
                                     + "|____/ \\__,_|_|\\_\\___|\n";
 
     static final String dukeGreeting =
-            String.format("%s%s\t Hello! I'm Duke - your personal task manager \n\t%s%s",
+            String.format("%s%s\t Hello! I'm Duke - your personal task manager \n%s%s",
                     LOGO,
                     lineDivider,
                     dukeKeywords,
@@ -35,7 +36,8 @@ public class Duke {
 
     public static void taskApp(){
         ArrayList<Task> taskList = new ArrayList<>();
-        while (true){
+        while (true) {
+
             System.out.print("Enter command: ");
             String userInput = sc.nextLine();
 
@@ -44,59 +46,49 @@ public class Duke {
 
             switch (commandWord) {
                 case "todo":
-                    System.out.println("todo");
                     taskList.add(new Todo(content));
                     addTaskSuccessMessage(taskList, "\tGot it. I've added this task: ");
                     break;
-                    
                 case "deadline":
-                    System.out.println("deadline");
                     String deadlineTask = content.split("/")[0].toLowerCase();
-                    String datelineDateBy = content.split("/")[1].split(" ")[1];
+                    String datelineDateBy = content.split("/")[1];
+                    datelineDateBy = datelineDateBy.substring(datelineDateBy.indexOf(" ")+1);
                     taskList.add(new Deadline(deadlineTask,datelineDateBy ));
                     addTaskSuccessMessage(taskList, "\tGot it. I've added this deadline: ");
                     break;
-                    
                 case "event":
-                    System.out.println("event");
                     String eventTask = content.split("/")[0].toLowerCase();
                     String eventDateBy = content.split("/")[1];
                     eventDateBy = eventDateBy.substring(eventDateBy.indexOf(" "));
                     taskList.add(new Event(eventTask,eventDateBy));
                     addTaskSuccessMessage(taskList, "\tGot it. I've added this Event: ");
                     break;
-
                 case "list":
-
                     String listReturnString = String.format("%s%s%s",lineDivider,getList(taskList),lineDivider);
                     System.out.println(listReturnString);
-
                     break;
-
                 case "done":
                     markTaskDone(taskList, userInput, content);
-
                     break;
-
                 case "bye":
                     System.out.println(dukeFarewell);
                     System.exit(0);
+                    break;
                 default:
                     System.out.println("Command word not recognised - please start command with " +
                             "'todo', 'deadline' or 'event'");
             }
         }
-
     }
 
-    public static void markTaskDone(ArrayList<Task> taskList, String userInput, String content) {
+    public static void markTaskDone(ArrayList<Task> taskList, String userInput, String content){
         if (userInput.matches(".*\\d.*")) { // checks if there is a number in done cmd
             int taskNumber = Integer.parseInt(content) ;
             int indexOfTaskToBeMarked = taskNumber - 1;
             if (indexOfTaskToBeMarked < taskList.size()){
                 taskList.get(indexOfTaskToBeMarked).setDone(true);
                 String markedTaskAsDoneMessage =
-                        String.format("%s\t Nice! I've marked this task as done:\n %s %s \n%s \n",
+                        String.format("%s\t Nice! I've marked this task as done:\n \t %s %s \n%s",
                                 lineDivider,
                                 taskList.get(indexOfTaskToBeMarked).getStatusIcon(),
                                 taskList.get(indexOfTaskToBeMarked).getDescription(),
@@ -125,7 +117,6 @@ public class Duke {
         if(!taskList.isEmpty()) { // userInput == list
             StringBuilder sb = new StringBuilder();
             String listAsString;
-
             for (int i = 0; i < taskList.size(); i++) {
                 sb.append("\t");
                 sb.append((i + 1));
@@ -142,14 +133,12 @@ public class Duke {
             sb.append(" tasks in the list. \n");
             sb.append("\tEnter \"done _\" to see mark task as done. \n");
             listAsString = sb.toString();
-
             return listAsString;
         }
         else {
             return "List is empty!";
         }
     }
-
 
     public static void main(String[] args) {
 
