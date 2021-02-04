@@ -1,6 +1,6 @@
 public class Output {
 
-    public static void printStart () {
+    public static void printStart() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"

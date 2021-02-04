@@ -7,74 +7,69 @@ public class Duke {
     public static final Scanner SCANNER = new Scanner(System.in);
 
     public static void main(String[] args) {
-        //skeletal version of Duke
         String userInput = "";
-
         Output.printStart();
 
-        while(true) {
+        while (true) {
             userInput = SCANNER.nextLine();
             Output.printBorder();
-            if(userInput.trim().equals("bye")) {
+            if (userInput.trim().equals("bye")) {
                 Output.printBye();
                 break;
             } else if (userInput.startsWith("list")) {
                 System.out.println("Here are the tasks in your list: ");
-                for(int i = 0; i<tasks.size(); i++) {
-                    System.out.print(i+1 + ".");
-                    //System.out.print(tasks.get(i).getStatusIcon(tasks.get(i).isDone()));
+                for (int i = 0; i < tasks.size(); i++) {
+                    System.out.print(i + 1 + ".");
                     System.out.println(tasks.get(i));
                 }
             } else if (userInput.trim().startsWith("done")) {
-                //String = userInput.substring(4);
                 int processedInput;
-                processedInput = Integer.parseInt(userInput.replaceAll("[^0-9]","")) -1;
+                processedInput = Integer.parseInt(userInput.replaceAll("[^0-9]", "")) - 1;
                 tasks.get(processedInput).setDone();
                 System.out.println("Nice! I've marked this task as done: ");
                 System.out.println(tasks.get(processedInput));
-                // System.out.println("Now you have "+ tasks.size() + " tasks in the list.");
-            } else if(userInput.startsWith("todo")) {
+            } else if (userInput.startsWith("todo")) {
                 System.out.println("Got it. I've added this task: ");
                 Task newTask = new Todo(userInput.substring(5));
                 tasks.add(newTask);
                 System.out.println("  " + newTask.toString());
-                System.out.println("Now you have "+ tasks.size() + " tasks in the list.");
-            } else if(userInput.startsWith("deadline")) {
+                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            } else if (userInput.startsWith("deadline")) {
                 System.out.println("Got it. I've added this task: ");
                 String by = "";
                 String processedDeadlineInput;
                 int getSlashIndex = 0;
-                for(int i=0; i<userInput.length(); i++) {
+                for (int i = 0; i < userInput.length(); i++) {
                     char getSlash = userInput.charAt(i);
-                    if(getSlash == '/') {
+                    if (getSlash == '/') {
                         getSlashIndex = i;
                         break;
                     }
                 }
-                by = userInput.substring(getSlashIndex+4);
-                processedDeadlineInput = userInput.substring(9,getSlashIndex).trim();
+                by = userInput.substring(getSlashIndex + 4);
+                processedDeadlineInput = userInput.substring(9, getSlashIndex).trim();
                 Task newTask = new Deadline(processedDeadlineInput, by);
                 tasks.add(newTask);
                 System.out.println("  " + newTask.toString());
-                System.out.println("Now you have "+ tasks.size() + " tasks in the list.");
-            } else if(userInput.startsWith("event")) {
+                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            } else if (userInput.startsWith("event")) {
                 System.out.println("Got it. I've added this task: ");
                 String at;
                 String processedEventInput;
                 int getSlashIndex = 0;
-                for(int i=0; i<userInput.length(); i++) {
+                for (int i = 0; i < userInput.length(); i++) {
                     char getSlash = userInput.charAt(i);
-                    if(getSlash == '/') {
+                    if (getSlash == '/') {
                         getSlashIndex = i;
                         break;
                     }
                 }
-                at = userInput.substring(getSlashIndex+4).trim();
-                processedEventInput = userInput.substring(6,getSlashIndex).trim();
+                at = userInput.substring(getSlashIndex + 4).trim();
+                processedEventInput = userInput.substring(6, getSlashIndex).trim();
                 Task newTask = new Event(processedEventInput, at);
                 tasks.add(newTask);
                 System.out.println("  " + newTask.toString());
-                System.out.println("Now you have "+ tasks.size() + " tasks in the list.");
+                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
             }
 
             Output.printBorder();
