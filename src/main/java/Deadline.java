@@ -19,12 +19,13 @@ public class Deadline extends Task {
         return "D";
     }
 
-    public String toString(){
-
-        return super.toString() + "\n"
-                + "do by: " + by;
+    @Override
+    public String toString() {
+        return "[" + getType() + "]" + "[" + getStatusIcon() + "] " +
+                description + " (by: " + by + ")";
     }
 }
+
 
 
 

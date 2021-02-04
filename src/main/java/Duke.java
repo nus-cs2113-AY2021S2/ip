@@ -3,7 +3,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
-    private static final String line = "____________________________________________________________";
+    private static final String line = "____________________________________________________________\n";
 
     public static void main(String[] args) {
 
@@ -21,7 +21,7 @@ public class Duke {
         System.out.println(logo);
         System.out.println(greet);
         System.out.print(" What can I do for you?\n");
-        System.out.print(line+"\n");
+        System.out.print(line);
 
         String input = "";
         Scanner userInput = new Scanner(System.in);
@@ -33,65 +33,86 @@ public class Duke {
             if (input.contains("todo")) {
                 int dividerPosition = input.indexOf(" ");
                 String t = input.substring(dividerPosition + 1);
+                if(dividerPosition==-1 || t.equals("")){
+                    System.out.print(line);
+                    System.out.print("I don't quite understand." +  "\n" + "Please enter the command again." + "\n");
+                    System.out.print(line);
+                } else {
                 tasks.add(new Todo(t));
-
-                System.out.print("____________________________________________________________\n" + "Got it. I've added this task:" + "\n" + "[T]" + "[ ] " + t + "\n" + "Now you have " + tasks.size() + " tasks in the list." + "\n" + "____________________________________________________________\n");
+                System.out.print(line + "Got it. I've added this task:" + "\n" + new Todo(t) + "\n" + "Now you have " + tasks.size() + " tasks in the list." + "\n" + line );
+                }
 
             } else if (input.contains("deadline")) {
                 int dividerPosition = input.indexOf(" ");
                 int dividerPosition_1 = input.indexOf("/");
                 String d = input.substring(dividerPosition + 1, dividerPosition_1);
                 String by = input.substring(dividerPosition_1 + 4);
+                if(dividerPosition==-1 || d.equals("") || !input.contains(" ")){
+                    System.out.print(line);
+                    System.out.print("I don't quite understand." +  "\n" + "Please enter the command again." + "\n");
+                    System.out.print(line);
+                } else {
                 tasks.add(new Deadline(d, by));
-
-                System.out.print("____________________________________________________________\n" + "Got it. I've added this task:" + "\n" + "[D]" + "[ ] " + d + "(" + "by: " + by + ")" + "\n" + "Now you have " + tasks.size() + " tasks in the list." + "\n" + "____________________________________________________________\n");
+                System.out.print(line + "Got it. I've added this task:" + "\n" + new Deadline(d,by) + "\n" + "Now you have " + tasks.size() + " tasks in the list." + "\n" + line);
+                }
 
             } else if (input.contains("event")) {
                 int dividerPosition = input.indexOf(" ");
                 int dividerPosition_1 = input.indexOf("/");
                 String e = input.substring(dividerPosition + 1, dividerPosition_1);
                 String at = input.substring(dividerPosition_1 + 4);
+                if(dividerPosition==-1 || e.equals("") || !input.contains(" ")){
+                    System.out.print(line);
+                    System.out.print("I don't quite understand." +  "\n" + "Please enter the command again." + "\n");
+                    System.out.print(line);
+                } else {
                 tasks.add(new Event(e, at));
-                System.out.print("____________________________________________________________\n" + "Got it. I've added this task:" + "\n" + "[E]" + "[ ] " + e + "(" + "at: " + at + ")" + "\n" + "Now you have " + tasks.size() + " tasks in the list." + "\n" + "____________________________________________________________\n");
+                System.out.print(line + "Got it. I've added this task:" + "\n"  + new Event(e, at) + "\n" + "Now you have " + tasks.size() + " tasks in the list." + "\n" + line);
+                }
 
             } else if (input.equals("list")) {
                 if (tasks.size() == 0) {
-                    System.out.print(line + "\n");
+                    System.out.print(line);
                     System.out.print("You have zero task at the moment." + "\n");
-                    System.out.print(line + "\n");
+                    System.out.print(line);
                 } else {
 
-                    System.out.print(line + "\n");
+                    System.out.print(line);
                     System.out.print("Here are the tasks in your list: " + "\n");
 
                     for (int i = 0; i < tasks.size(); i++) {
-                        System.out.print(
-                                Integer.toString(i + 1) + "." + "[" + tasks.get(i).getType() + "]" + "[" + tasks.get(i).getStatusIcon() + "] " + tasks.get(i).getDescription() + "\n");
+                        System.out.print(i + 1 + "." + tasks.get(i)+ "\n");
                     }
-                    System.out.print(line + "\n");
+                    System.out.print(line);
                 }
 
             } else if (input.contains("done")) {
 
                 int dividerPosition = input.indexOf(" ");
                 String taskNo = input.substring(dividerPosition + 1);
-                System.out.print(taskNo);
+                if (dividerPosition == -1 || taskNo.equals("") || !input.contains(" ")) {
+                    System.out.print(line);
+                    System.out.print("I don't quite understand." +  "\n" + "Please enter the command again." + "\n");
+                    System.out.print(line);
+                    input = userInput.nextLine();
+                }
                 int taskIndex = Integer.parseInt(taskNo) - 1;
                 if (taskIndex >=tasks.size()) {
-                    System.out.print(line + "\n");
+                    System.out.print(line);
                     System.out.print("You have no such task." + "\n");
-                    System.out.print(line + "\n");
-                } else {
+                    System.out.print(line);
+                }
+                else {
                     System.out.print(taskIndex);
                     tasks.get(taskIndex).markAsDone();
-                    System.out.print(line + "\n");
-                    System.out.print("Nice! I've marked this task as done:" + "\n" + "[" + tasks.get(taskIndex).getType() + "]" + "[" + tasks.get(taskIndex).getStatusIcon() + "] " + tasks.get(taskIndex).getDescription() + "\n");
-                    System.out.print(line + "\n");
+                    System.out.print(line);
+                    System.out.print("Nice! I've marked this task as done:" + "\n" + tasks.get(taskIndex) + "\n");
+                    System.out.print(line);
                 }
             } else {
-                System.out.print(line + "\n");
+                System.out.print(line);
                 System.out.print("Sorry, I didnt get you." + "\n" + "Please enter the command again." + "\n");
-                System.out.print(line + "\n");
+                System.out.print(line);
             }
             input = userInput.nextLine();
         }

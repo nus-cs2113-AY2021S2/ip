@@ -19,6 +19,12 @@ public class Event extends Task {
         return "E";
     }
 
+    @Override
+    public String toString() {
+        return "[" + getType() + "]" + "[" + getStatusIcon() + "] " +
+                description + " (at: " + at + ")";
+    }
+
 
 }
 

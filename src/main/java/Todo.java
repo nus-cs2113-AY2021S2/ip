@@ -17,13 +17,8 @@ public class Todo extends Task {
     public String getType(){
         return "T";
     }
+    @Override
     public String toString() {
-        String status = null;
-        if (isDone){
-            status = "Yes";
-        } else {
-            status = "No";
-        }
-        return super.toString() + "\n" + "is done? " + status;
+        return "[" + getType() + "]" + "[" + getStatusIcon() + "] " + description;
     }
 }
