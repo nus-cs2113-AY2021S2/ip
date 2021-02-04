@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
@@ -23,7 +22,7 @@ public class Duke {
         System.out.print(" What can I do for you?\n");
         System.out.print(line);
 
-        String input = "";
+        String input;
         Scanner userInput = new Scanner(System.in);
         input = userInput.nextLine();
         ArrayList<Task> tasks = new ArrayList<>();
@@ -33,13 +32,13 @@ public class Duke {
             if (input.contains("todo")) {
                 int dividerPosition = input.indexOf(" ");
                 String t = input.substring(dividerPosition + 1);
-                if(dividerPosition==-1 || t.equals("")){
+                if(dividerPosition==-1 || t.equals("") || !input.contains(" ")){
                     System.out.print(line);
                     System.out.print("I don't quite understand." +  "\n" + "Please enter the command again." + "\n");
                     System.out.print(line);
                 } else {
-                tasks.add(new Todo(t));
-                System.out.print(line + "Got it. I've added this task:" + "\n" + new Todo(t) + "\n" + "Now you have " + tasks.size() + " tasks in the list." + "\n" + line );
+                    tasks.add(new Todo(t));
+                    System.out.print(line + "Got it. I've added this task:" + "\n" + new Todo(t) + "\n" + "Now you have " + tasks.size() + " tasks in the list." + "\n" + line );
                 }
 
             } else if (input.contains("deadline")) {
@@ -52,8 +51,8 @@ public class Duke {
                     System.out.print("I don't quite understand." +  "\n" + "Please enter the command again." + "\n");
                     System.out.print(line);
                 } else {
-                tasks.add(new Deadline(d, by));
-                System.out.print(line + "Got it. I've added this task:" + "\n" + new Deadline(d,by) + "\n" + "Now you have " + tasks.size() + " tasks in the list." + "\n" + line);
+                    tasks.add(new Deadline(d, by));
+                    System.out.print(line + "Got it. I've added this task:" + "\n" + new Deadline(d,by) + "\n" + "Now you have " + tasks.size() + " tasks in the list." + "\n" + line);
                 }
 
             } else if (input.contains("event")) {
@@ -66,8 +65,8 @@ public class Duke {
                     System.out.print("I don't quite understand." +  "\n" + "Please enter the command again." + "\n");
                     System.out.print(line);
                 } else {
-                tasks.add(new Event(e, at));
-                System.out.print(line + "Got it. I've added this task:" + "\n"  + new Event(e, at) + "\n" + "Now you have " + tasks.size() + " tasks in the list." + "\n" + line);
+                    tasks.add(new Event(e, at));
+                    System.out.print(line + "Got it. I've added this task:" + "\n"  + new Event(e, at) + "\n" + "Now you have " + tasks.size() + " tasks in the list." + "\n" + line);
                 }
 
             } else if (input.equals("list")) {
