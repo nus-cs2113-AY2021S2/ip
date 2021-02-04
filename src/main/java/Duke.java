@@ -21,7 +21,7 @@ public class Duke {
         System.out.println(logo);
         System.out.println(greet);
         System.out.print(" What can I do for you?\n");
-        System.out.print(line);
+        System.out.print(line+"\n");
 
         String input = "";
         Scanner userInput = new Scanner(System.in);
@@ -75,13 +75,14 @@ public class Duke {
 
                 int dividerPosition = input.indexOf(" ");
                 String taskNo = input.substring(dividerPosition + 1);
-
+                System.out.print(taskNo);
                 int taskIndex = Integer.parseInt(taskNo) - 1;
-                if (taskIndex > tasks.size()) {
+                if (taskIndex >=tasks.size()) {
                     System.out.print(line + "\n");
                     System.out.print("You have no such task." + "\n");
                     System.out.print(line + "\n");
                 } else {
+                    System.out.print(taskIndex);
                     tasks.get(taskIndex).markAsDone();
                     System.out.print(line + "\n");
                     System.out.print("Nice! I've marked this task as done:" + "\n" + "[" + tasks.get(taskIndex).getType() + "]" + "[" + tasks.get(taskIndex).getStatusIcon() + "] " + tasks.get(taskIndex).getDescription() + "\n");
