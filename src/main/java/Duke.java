@@ -38,15 +38,22 @@ public class Duke {
                 // Set a task as done
                 int taskIndex = phrase.charAt(phrase.length()-1) - '0';
 
-                System.out.println("~____________________________________________________________~");
-                System.out.println("Nice! I've marked this task as done:");
-                Task task = tasks.get(taskIndex - 1);
-                task.markAsDone();
-                System.out.println("[" + task.getStatusIcon() + "] " + task.getDescription());
-                System.out.println("~____________________________________________________________~\n");
+                if (taskIndex < tasks.size() || taskIndex > tasks.size()) {
+                    System.out.println("~____________________________________________________________~");
+                    System.out.println("Oops task " + taskIndex + " does not exist! Try again mate!");
+                    System.out.println("~____________________________________________________________~");
+                } else {
+                    System.out.println("~____________________________________________________________~");
+                    System.out.println("Nice! I've marked this task as done:");
+                    Task task = tasks.get(taskIndex - 1);
+                    task.markAsDone();
+                    System.out.println("[" + task.getStatusIcon() + "] " + task.getDescription());
+                    System.out.println("~____________________________________________________________~\n");
+                }
             } else if (phrase.startsWith("todo ")) {
                 // Add a To-Do
                 System.out.println("~____________________________________________________________~");
+                phrase = phrase.substring(5);
                 Todo todo = new Todo(phrase);
                 System.out.println("Got it! I've added this task:");
                 tasks.add(todo);
@@ -56,23 +63,32 @@ public class Duke {
             } else if (phrase.startsWith("deadline ")) {
                 // Add a Deadline
                 System.out.println("~____________________________________________________________~");
-                Deadline deadline = new Deadline(phrase, null); // TODO:Add deadline param
+                int dividerPosition = phrase.indexOf("/");
+                String by = phrase.substring(dividerPosition+4);
+                phrase = phrase.substring(9, dividerPosition);
+                Deadline deadline = new Deadline(phrase, by);
                 System.out.println("Got it! I've added this task:");
                 tasks.add(deadline);
                 System.out.println(deadline);
                 System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                 System.out.println("~____________________________________________________________~\n");
             } else if (phrase.startsWith("event ")) {
-                // Add a Deadline
+                // Add an Event
                 System.out.println("~____________________________________________________________~");
-                Event event = new Event(phrase, null); // TODO:Add event time param
+                int dividerPosition = phrase.indexOf("/");
+                String eventTime = phrase.substring(dividerPosition+4);
+                phrase = phrase.substring(6, dividerPosition);
+                Event event = new Event(phrase, eventTime);
                 System.out.println("Got it! I've added this task:");
                 tasks.add(event);
                 System.out.println(event);
                 System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                 System.out.println("~____________________________________________________________~\n");
             } else {
-                // TODO: Error Handling
+                // Invalid Task
+                System.out.println("~____________________________________________________________~");
+                System.out.println("Sorry mate I do not understand your request. Please specify task :)");
+                System.out.println("~____________________________________________________________~");
             }
         }
         System.out.println("\n~____________________________________________________________~");
