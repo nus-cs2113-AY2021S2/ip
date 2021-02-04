@@ -211,8 +211,8 @@ public class Duke {
 
     private static void showTaskDone(Task task) {
         printHorizontalLine();
-        System.out.println("  Nice! I've marked this task as done: ");
-        System.out.print("  [" + task.getStatusIcon() + "] " +task.getDescription());
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println("  " + task.toString());
         printHorizontalLine();
     }
 
