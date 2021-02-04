@@ -1,3 +1,5 @@
+import javax.sound.midi.SysexMessage;
+
 public class Deadline extends Task {
 
     protected String by;
@@ -7,8 +9,18 @@ public class Deadline extends Task {
         this.by = by;
     }
 
-    public String toString(){
-        return "[D]" + super.toString() + " (by: " + by + ")";
+
+    public String getStatusIcon() {
+        return "[D]" + "[" + super.getStatusIcon() +"]";
     }
+
+
+    @Override
+    public String getDescription() {
+        return super.getDescription() + " " + "(" + by + ")";
+    }
+
+
+
 
 }
