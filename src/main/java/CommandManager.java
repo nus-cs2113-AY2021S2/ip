@@ -9,37 +9,55 @@ public class CommandManager {
 
     private static final String DEADLINE_DELIMITER = "/by";
     private static final String EVENT_DELIMITER = "/at";
-    private static final String COMMAND_AND_ARG_DELIMITER = "\\s+";
+    private static final String WHITESPACE_DELIMITER = "\\s+";
+
+    private static int SIZE_OF_SENTENCE_COMPONENT = 2;
+    private static int FIRST_COMPONENT = 0;
+    private static int SECOND_COMPONENT = 1;
 
     public static String[] splitUserInput(String userInput, String delimiter) {
-        final String[] split = userInput.trim().split(delimiter, 2);
-        return split.length == 2 ? split : new String[] { split[0] , "" }; // else case: no parameters
+        final String[] commandAndDescription = userInput.trim().split(delimiter, SIZE_OF_SENTENCE_COMPONENT);
+        boolean isValidCommandAndDescription = (commandAndDescription.length == SIZE_OF_SENTENCE_COMPONENT);
+        if (isValidCommandAndDescription) {
+            return commandAndDescription;
+        } else {
+            String[] commandAndEmptyDescription = new String []{commandAndDescription[FIRST_COMPONENT] ,""};
+            return commandAndEmptyDescription;
+        }
+        //return words.length == SIZE_OF_SENTENCE_COMPONENT ? words : new String[] { words[FIRST_COMPONENT] , "" }; // else case: no parameters
+    }
+
+    public static String[] getTaskAndDate (String command, String description) {
+        String[] taskAndDate = new String[SIZE_OF_SENTENCE_COMPONENT];
+        switch(command) {
+        case DEADLINE_COMMAND:
+            taskAndDate = splitUserInput(description, DEADLINE_DELIMITER);
+            break;
+        case EVENT_COMMAND:
+            taskAndDate = splitUserInput(description, EVENT_DELIMITER);
+            break;
+        }
+        return taskAndDate;
     }
 
     public static void executeCommand(String userInput, TaskManager taskManager) {
-        String[] splitCommandAndArg = splitUserInput(userInput, COMMAND_AND_ARG_DELIMITER);
-        String command = splitCommandAndArg[0];
-        String argument = splitCommandAndArg[1];
-        String description, deadline, eventDate;
-        if (!argument.equals("")) {
+        String[] commandAndDescription = splitUserInput(userInput, WHITESPACE_DELIMITER);
+        String command = commandAndDescription[FIRST_COMPONENT];
+        String description = commandAndDescription[SECOND_COMPONENT];
+        boolean isValidDescription = !description.isEmpty();
+        if (isValidDescription) {
             switch (command) {
             case TODO_COMMAND:
-                taskManager.toDo(argument);
+                taskManager.toDo(description);
                 break;
             case DEADLINE_COMMAND:
-                String[] descriptionAndDeadline = splitUserInput(argument, DEADLINE_DELIMITER);
-                description = descriptionAndDeadline[0];
-                deadline = descriptionAndDeadline[1];
-                taskManager.deadLine(description,deadline);
+                taskManager.deadLine(getTaskAndDate(command,description));
                 break;
             case EVENT_COMMAND:
-                String[] descriptionAndEvent = splitUserInput(argument, EVENT_DELIMITER);
-                description = descriptionAndEvent[0];
-                eventDate = descriptionAndEvent[1];
-                taskManager.event(description,eventDate);
+                taskManager.event(getTaskAndDate(command,description));
                 break;
             case DONE_COMMAND:
-                int taskNumber = Integer.parseInt(argument);
+                int taskNumber = Integer.parseInt(description);
                 taskManager.markAsDone(taskNumber);
                 break;
             default:

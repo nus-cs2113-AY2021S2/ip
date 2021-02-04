@@ -10,7 +10,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : " "); //return space or tick symbols
+        return (isDone ? "X" : " "); //return space or tick symbols
     }
 
     public void setAsDone() {
@@ -24,5 +24,4 @@ public class Task {
     public String toString() {
         return taskType + "[" + getStatusIcon() + "] " + description;
     }
-
 }

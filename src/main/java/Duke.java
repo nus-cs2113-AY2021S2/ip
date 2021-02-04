@@ -13,7 +13,6 @@ public class Duke {
 
     public static void main(String[] args) {
         showGreetings();
-
         TaskManager taskManager = new TaskManager();
 
         while (true) {
