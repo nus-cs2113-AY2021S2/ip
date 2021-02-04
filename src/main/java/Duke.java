@@ -17,8 +17,7 @@ public class Duke {
         System.out.println("\tWhat can I help you with?");
         System.out.println("\t__________________________________________\n");
 
-        ArrayList<Task> tasks = new ArrayList<Task>();
-        int taskCount = 0;
+        ArrayList<Task> tasks = new ArrayList<>();
         boolean runLoop = true;
 
         while (runLoop) {
@@ -33,7 +32,7 @@ public class Duke {
                 runLoop = false;
             } else if (userInput.equals("list")) {
                 System.out.println("\t------------------------------------------");
-                if (taskCount == 0) {
+                if (tasks.size() == 0) {
                     // if list is empty
                     System.out.println("\tYour list is empty!");
                 }
@@ -50,14 +49,14 @@ public class Duke {
                 // check if task exists
                 System.out.println("\t------------------------------------------");
                 // check if
-                int taskIndex = Integer.parseInt(userInput.split(" ")[1]);
-                if (taskIndex > taskCount) {
+                int taskIndex = Integer.parseInt(userInput.split(" ")[1]) - 1;
+                if (taskIndex > tasks.size()-1) {
                     System.out.println("\tTask " + taskIndex + " does not exist! Please try again.");
                 }
                 else {
                     // sets a task as done
                     System.out.println("\tGreat job! I've marked this task as done: ");
-                    Task task = tasks.get(taskIndex - 1);
+                    Task task = tasks.get(taskIndex);
                     task.markAsDone();
                     System.out.println("\t" + task.toString());
 
@@ -73,7 +72,6 @@ public class Duke {
                     tasks.add(todo);
                     System.out.println("\tGot it. I've added this task: ");
                     System.out.println("\t" + todo.toString());
-                    taskCount++;
                     break;
                 case "deadline":
                     // adds tasks with deadline
@@ -82,7 +80,6 @@ public class Duke {
                     tasks.add(deadline);
                     System.out.println("\tGot it. I've added this task: ");
                     System.out.println("\t" + deadline.toString());
-                    taskCount++;
                     break;
                 case "event":
                     // adds event tasks
@@ -91,13 +88,12 @@ public class Duke {
                     tasks.add(event);
                     System.out.println("\tGot it. I've added this task: ");
                     System.out.println("\t" + event.toString());
-                    taskCount++;
                     break;
                 default:
                     // invalid task type
                     System.out.println("\tInvalid task entered. Please specify task type!");
                 }
-                System.out.println("\tNow you have " + taskCount + " tasks in the list.");
+                System.out.println("\tNow you have " + tasks.size() + " tasks in the list.");
                 System.out.println("\t__________________________________________\n");
             }
         }
