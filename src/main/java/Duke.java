@@ -70,7 +70,7 @@ public class Duke {
 
                 Task t = new Event(title, date);
                 t.toString();
-                lists.add(t);
+                lists.add(t);:w
 
                 System.out.println("Got it. I've added this task:");
                 System.out.println("  " + t);
