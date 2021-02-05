@@ -11,7 +11,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718");
+        return (isDone ? "X" : " ");
     }
 
     public String getDescription() {
@@ -21,7 +21,7 @@ public class Task {
     public void markAsDone(){
         if (!this.isDone) {
             this.isDone = true;
-            System.out.println("Great! I've marked this task as done: ");
+            System.out.println("Great! I've marked this task as done:");
             System.out.println(this.toString());
         } else {
             System.out.println("You already completed this task previously!");

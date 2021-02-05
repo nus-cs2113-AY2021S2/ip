@@ -102,6 +102,6 @@ public class Duke {
             input = sc.nextLine();
         }
 
-        System.out.println("Goodbye！See you again soon :)");
+        System.out.println("Goodbye. See you again soon :)");
     }
 }

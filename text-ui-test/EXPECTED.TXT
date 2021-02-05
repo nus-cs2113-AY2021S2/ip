@@ -1,7 +1,29 @@
-Hello from
+Hello! I am
  ____        _        
 |  _ \ _   _| | _____ 
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+What can I do for you today?
+No tasks yet!
+I have added this task:
+[T][ ] borrow book
+You now have 1 tasks in your tasklist.
+1.[T][ ] borrow book
+I have added this task:
+[D][ ] return book (by: Sunday)
+You now have 2 tasks in your tasklist.
+I have added this task:
+[E][ ] project meeting (at: Mon 2-4pm)
+You now have 3 tasks in your tasklist.
+1.[T][ ] borrow book
+2.[D][ ] return book (by: Sunday)
+3.[E][ ] project meeting (at: Mon 2-4pm)
+Great! I've marked this task as done:
+[D][X] return book (by: Sunday)
+1.[T][ ] borrow book
+2.[D][X] return book (by: Sunday)
+3.[E][ ] project meeting (at: Mon 2-4pm)
+Task 6 does not exist! Enter 'list' to view tasklist :)
+Goodbye. See you again soon :)
