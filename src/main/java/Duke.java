@@ -1,15 +1,18 @@
 import java.util.Scanner;
 
 public class Duke {
-
-    public static void main(String[] args) {
+    public static void displayWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println(logo);
-        System.out.println("Hello there! I'm Duke.\nWhat can I do for you?\n");
+        System.out.println("Hello there! I'm Duke.\nWhat can I do for my G?\n");
+    }
+
+    public static void main(String[] args) {
+        displayWelcome();
 
         Task[] taskList = new Task[100];
         int count = 0;
@@ -35,10 +38,10 @@ public class Duke {
                 int indexNext = subStringDate.indexOf(" ");
                 String subStringEnd = subStringDate.substring(indexNext+1);
                 stringDate = subStringEnd;
-            }
-            else {
+            } else {
                 stringTask = subString;
             }
+
             int taskNumber = 0;
 
             // If input is "bye", system exits with message.
@@ -51,7 +54,7 @@ public class Duke {
             // If input is "list", list of tasks will be displayed.
             else if (input.equalsIgnoreCase("list")) {
                 System.out.println("Here are the tasks in your list: ");
-                for (int i=0; i< taskList.length; i++){
+                for (int i=0; i< taskList.length; i++) {
                     if (taskList[i] != null){
                         System.out.println(i+1 + ". " + taskList[i].printDescription());
                     }
