@@ -46,7 +46,6 @@ public class Command {
         for (int i = 1; i<splitTaskInput.length;i++){
             if(splitTaskInput[i].equals("/")) {
                 slashIndex++;
-                System.out.println(slashIndex);
                 break;
             }
             else {
