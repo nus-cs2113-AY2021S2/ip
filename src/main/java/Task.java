@@ -11,12 +11,16 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718");
     }
 
+    public boolean getDone() {
+        return isDone;
+    }
+
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + description;
     }
 
-    public void markAsDone() {
+    public void setDone() {
         isDone = true;
     }
 }

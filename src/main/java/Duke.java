@@ -1,15 +1,14 @@
-import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 public class Duke {
 
     public static final int MAX_TASK = 100;
 
-    public static final Scanner SCANNER = new Scanner(System.in);
-
     static Task[] taskList = new Task[MAX_TASK];
 
     static int listCount = 0;
+
+    public static final Scanner SCANNER = new Scanner(System.in);
 
     public static void main(String[] args) {
         greet();
@@ -38,63 +37,69 @@ public class Duke {
         System.out.println(HORIZONTAL_LINE);
     }
 
-    public static void echoCommand(String command) {
-        lineBreak();
-        switch (command) {
-        case "list":
-            System.out.println("Here are the tasks in your list:");
-            break;
-        case "done":
-            System.out.println("Nice! I've marked this task as done:");
-            break;
-        case "todo":
-            //Fallthrough
-        case "deadline":
-            //Fallthrough
-        case "event":
-            System.out.println("Got it. I've added this task:");
-            break;
-        case "bye":
-            System.out.println("Bye. Hope to see you again soon!");
-            break;
+    public static void listTasks() {
+        if (listCount == 0) {
+            System.out.println("There are no tasks in your list");
+            return;
+        }
+        System.out.println("Here are the tasks in your list:");
+        for (int i = 0; i < listCount; i++) {
+            Task currentTask = taskList[i];
+            System.out.println(i + 1 + "." + currentTask.toString());
         }
     }
 
-    public static void executeCommand(String userInput) {
-        String[] words = userInput.split(" ");
-        String command = words[0];
+    public static void updateTask(int taskIndex) {
+        Task currentTask = taskList[taskIndex];
+        if (currentTask.getDone() == true) {
+            System.out.println("This task has already been completed:");
+        } else {
+            currentTask.setDone();
+            System.out.println("Nice! I've marked this task as done:");
+        }
+        System.out.println("  " + currentTask.toString());
+    }
+
+    public static void addTask(String taskType, String description) {
         int dividerPosition;
-        echoCommand(command);
-        switch (command) {
-        case "list":
-            for (int i = 0; i < listCount; i++) {
-                Task currentTask = taskList[i];
-                System.out.println(i + 1 + "." + currentTask.toString());
-            }
-            break;
-        case "done":
-            Task currentTask = taskList[Integer.parseInt(words[1]) - 1];
-            currentTask.markAsDone();
-            System.out.println("  " + currentTask.toString());
-            break;
+        switch (taskType) {
         case "todo":
-            taskList[listCount++] = new Todo(userInput.substring(5));
-            System.out.println("  " + taskList[listCount - 1].toString());
-            System.out.println("Now you have " + listCount + " tasks in the list.");
+            taskList[listCount++] = new Todo(description);
             break;
         case "deadline":
-            dividerPosition = userInput.indexOf("/by");
-            String by = userInput.substring(dividerPosition + 4);
-            taskList[listCount++] = new Deadline(userInput.substring(9, dividerPosition - 1), by);
-            System.out.println("  " + taskList[listCount - 1].toString());
-            System.out.println("Now you have " + listCount + " tasks in the list.");
+            dividerPosition = description.indexOf("/by");
+            String by = description.substring(dividerPosition + 4);
+            taskList[listCount++] = new Deadline(description.substring(0, dividerPosition - 1), by);
             break;
         case "event":
-            dividerPosition = userInput.indexOf("/at");
-            String at = userInput.substring(dividerPosition + 4);
-            taskList[listCount++] = new Event(userInput.substring(6, dividerPosition - 1), at);
-            System.out.println("  " + taskList[listCount - 1].toString());
-            System.out.println("Now you have " + listCount + " tasks in the list.");
+            dividerPosition = description.indexOf("/at");
+            String at = description.substring(dividerPosition + 4);
+            taskList[listCount++] = new Event(description.substring(0, dividerPosition - 1), at);
+            break;
+        }
+        System.out.println("Got it. I've added this task:");
+        System.out.println("  " + taskList[listCount - 1].toString());
+        System.out.println("Now you have " + listCount + " tasks in the list.");
+    }
+
+    public static void executeCommand(String userInput) {
+        String[] words = userInput.split(" ", 2);
+        String commandWord = words[0];
+        lineBreak();
+        switch (commandWord) {
+        case "list":
+            listTasks();
+            break;
+        case "done":
+            updateTask(Integer.parseInt(words[1]) - 1);
+            break;
+        case "todo":
+            //Fallthrough
+        case "deadline":
+            //Fallthrough
+        case "event":
+            String commandDescription = words[1];
+            addTask(commandWord, commandDescription);
             break;
         case "bye":
             exitProgram();
