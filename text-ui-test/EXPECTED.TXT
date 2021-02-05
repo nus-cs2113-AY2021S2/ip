@@ -23,10 +23,10 @@ Got it. I've added this task:
 Now you have 3 tasks in the list.
 ---------------------------------------------------------------
 ---------------------------------------------------------------
-Invalid input format. Please try again with correct format.
+☹ OOPS!!! The parameter format for this command is incorrect!
 ---------------------------------------------------------------
 ---------------------------------------------------------------
-Invalid input format. Please try again with correct format.
+☹ OOPS!!! The parameter format for this command is incorrect!
 ---------------------------------------------------------------
 ---------------------------------------------------------------
 Here are the tasks in your list:
@@ -57,14 +57,14 @@ Nice! I've marked this task as done:
   [T][✓] read book
 ---------------------------------------------------------------
 ---------------------------------------------------------------
-Invalid index number. Please enter the correct index number.
+☹ OOPS!!! The index number is out of range :-(
 ---------------------------------------------------------------
 ---------------------------------------------------------------
 Nice! I've marked this task as done:
   [E][✓] blackpink concert (at: 12KST, 31 Jan 2021)
 ---------------------------------------------------------------
 ---------------------------------------------------------------
-Invalid input format. Please try again with correct format.
+☹ OOPS!!! The parameter must be a number :-(
 ---------------------------------------------------------------
 ---------------------------------------------------------------
 Nice! I've marked this task as done:
@@ -79,13 +79,13 @@ Here are the tasks in your list:
 5. [D][✓] CS2106 Assignment (by: 5 Feb 2021)
 ---------------------------------------------------------------
 ---------------------------------------------------------------
-Invalid input format. Please try again with correct format.
+☹ OOPS!!! The index number cannot be empty :-(
 ---------------------------------------------------------------
 ---------------------------------------------------------------
-Invalid input format. Please try again with correct format.
+☹ OOPS!!! The parameter format for this command is incorrect!
 ---------------------------------------------------------------
 ---------------------------------------------------------------
-Invalid input format. Please try again with correct format.
+☹ OOPS!!! The parameter format for this command is incorrect!
 ---------------------------------------------------------------
 ---------------------------------------------------------------
 Here are the tasks in your list:
