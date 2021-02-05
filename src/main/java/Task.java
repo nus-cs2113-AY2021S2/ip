@@ -19,4 +19,7 @@ public class Task {
     public void setDone() {
         this.isDone = true;
     }
+    public String getType(){
+        return "T";
+    }
 }
