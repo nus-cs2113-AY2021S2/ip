@@ -3,14 +3,104 @@ import java.util.Scanner;
 public class Duke {
     public static String inputString;
     public static int listindex = 0;
-    public static String list[] = new String[100];
-    public static String isDone[] = new String[100];
+    public static String list[][] = new String[100][5];
+    //public static String isDone[] = new String[100];
+    //public static String tasktype[] = new String[100];
 
     public static void main(String[] args) {
         greetings();
-        AddIntoList();
+        StartingMenu();
         goodbye();
     }
+    public static void StartingMenu(){
+        do {
+            Scanner userinput = new Scanner(System.in);
+            inputString = userinput.nextLine();
+            String inputStringSplit[] = inputString.split(" ",2);
+            System.out.println("____________________________________________________________");
+            if (inputString.equalsIgnoreCase("bye")){
+                break;
+            } else if(inputString.equalsIgnoreCase("list")) {
+                PrintList(0, listindex);
+                continue;
+            } else if (inputStringSplit.length >1){
+                if (inputStringSplit[0].equalsIgnoreCase("done")) {
+                    MarkAsDone(inputStringSplit[1]);
+                } else if (inputStringSplit[0].equalsIgnoreCase("deadline")
+                        ||inputStringSplit[0].equalsIgnoreCase("todo")
+                        ||inputStringSplit[0].equalsIgnoreCase("event")) {
+                    AddToList(inputStringSplit[0], inputStringSplit[1]);
+                }
+            } else {
+                ErrorMsg();
+                continue;
+            }
+        }while(!inputString.equalsIgnoreCase("bye"));
+    }
+
+    public static void ErrorMsg(){
+        System.out.println("What is the task type? Do you wanna set it as done?");
+    }
+
+    public static void AddToList(String tasktype, String task){
+        //try {
+            if (tasktype.equalsIgnoreCase("todo")) {
+                String[] TaskTime = task.split(" ", 2);
+                list[listindex][0] = "T";
+                list[listindex][1] = " ";
+                list[listindex][2] = task;
+                list[listindex][3] = " ";
+            } else if (tasktype.equalsIgnoreCase("deadline")) {
+                list[listindex][0] = "D";
+                list[listindex][1] = " ";
+                String[] TaskTime = task.split("/", 2);
+                list[listindex][2] = TaskTime[0];
+                list[listindex][3] = "(by:" + TaskTime[1] + ")";
+            } else if (tasktype.equalsIgnoreCase("event")) {
+                list[listindex][0] = "E";
+                list[listindex][1] = " ";
+                String[] TaskTime = task.split("/", 2);
+                list[listindex][2] = TaskTime[0];
+                list[listindex][3] = "(at:" + TaskTime[1] + ")";
+            }
+        //}catch(Exception e){
+        //        ErrorMsg();
+        //    }
+            System.out.println(" Added:");
+            PrintList(listindex, listindex + 1);
+            listindex += 1;
+    }
+    //public static void AddToList(String tasktype, String task){
+    //    list[listindex][0] = tasktype;
+    //    list[listindex][1] = " ";
+    //    list[listindex][2] = task;
+    //    System.out.println(" Added:");
+    //    PrintList(listindex, listindex + 1);
+    //    listindex += 1;
+    //}
+//
+    public static void PrintList(int startIndex, int endIndex) {
+        for (int i = startIndex; i < endIndex; i++) {
+            System.out.println(i + 1 + ": [" + list[i][0] + "][" + list[i][1] + "]:" + " " + list[i][2] +list[i][3]);
+        }
+    }
+
+    public static void MarkAsDone(String donetask){
+        try{
+            int donetaskindex = Integer.parseInt(donetask) - 1;
+            System.out.println("____________________________________________________________");
+            System.out.println("Yay! This task is done!");
+            list[donetaskindex][1] = "X";
+            PrintList(donetaskindex, donetaskindex + 1);
+            return;
+        } catch(Exception e) {
+            System.out.println("Which task is done?");
+            PrintList(0, listindex);
+        }
+    }
+
+
+
     public static void greetings(){
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -36,50 +126,6 @@ public class Duke {
             System.out.println(inputString);
             System.out.println("____________________________________________________________");
         }while(!inputString.equalsIgnoreCase("bye"));
-    }
-
-    public static void AddIntoList(){
-        do {
-            Scanner userinput = new Scanner(System.in);
-            inputString = userinput.nextLine(); //not sure if the content after whitespace will be included
-            String inputStringSplit[] = inputString.split(" ");
-            System.out.println("____________________________________________________________");
-            if(inputStringSplit[0].equalsIgnoreCase("list")) {
-                PrintList(0, listindex);
-                continue;
-            } else if (inputStringSplit[0].equalsIgnoreCase("done")){
-                try{
-                    int tempindex = Integer.parseInt(inputStringSplit[1]);
-                    MarkAsDone(tempindex);
-                    continue;
-                } catch(Exception e) {
-                    System.out.println("Which task is done?");
-                    PrintList(0, listindex);
-                    continue;
-                }
-
-            } else if(inputString.equalsIgnoreCase("bye")){
-                break;
-            }
-            list[listindex] = inputString;
-            isDone[listindex] = " ";
-            listindex += 1;
-            System.out.println(" Added:" + inputString);
-            System.out.println("____________________________________________________________");
-        }while(!inputString.equalsIgnoreCase("bye"));
-    }
-
-    public static void PrintList(int startIndex, int endIndex) {
-        for (int i = startIndex; i < endIndex; i++) {
-            System.out.println(i + 1 + "[" + isDone[i] + "]:" + list[i]);
-        }
-    }
-
-    public static void MarkAsDone(int index){
-        System.out.println("____________________________________________________________");
-        System.out.println("Yay! This task is done!");
-        isDone[index - 1] = "X";
-        PrintList(index - 1, index);
     }
     public static void goodbye(){
         System.out.println(" Bye. Hope to see you again soon!\n" +
