@@ -27,7 +27,7 @@ public class Duke {
         Task currentTask = tasks.get(index-1);
         currentTask.markAsDone();
         System.out.println(divider + "Nice! I've marked this task as done:"+
-                "\n["+ currentTask.getStatusIcon()+ "]" + currentTask.description +
+                "\n"+ currentTask.toString() +
                 "\n" + divider);
     }
 
