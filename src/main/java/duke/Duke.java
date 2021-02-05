@@ -1,7 +1,9 @@
-import task.Task;
-import task.Deadline;
-import task.Todo;
-import task.Event;
+package duke;
+
+import duke.task.Task;
+import duke.task.Deadline;
+import duke.task.Todo;
+import duke.task.Event;
 
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -149,7 +151,7 @@ public class Duke {
     }
 
     /* Execute command based on input from parseCommand */
-    private static void executeCommand(String command, String parameter) throws DukeException{
+    private static void executeCommand(String command, String parameter) throws DukeException {
         switch (command) {
         case "list":
             showTasks();
