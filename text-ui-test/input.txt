@@ -1,0 +1,9 @@
+todo Destroy Zagara's Base
+event Coronation of Mengsk on Korhol /at Year 2260 Month 5
+deadline Find Sarah Kerrigan /before Year 2265
+list
+done 2
+list
+done 1
+list
+bye
