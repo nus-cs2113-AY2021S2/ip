@@ -8,7 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Duke {
-    static int MAX_CAPACITY = 100;
+    static final int MAX_CAPACITY = 100;
     static Task[] tasks = new Task[MAX_CAPACITY];
     static int taskCount = 0;
 
@@ -45,25 +45,23 @@ public class Duke {
     }
 
     /* Create new event task */
-    private static void createEventTask(String parameter) {
+    private static void createEventTask(String parameter) throws DukeException {
         String[] eventParameters = splitParameter(parameter, "/at ");
-        if (validateNumberOfInputParameters(eventParameters, 2)) {
-            String description = eventParameters[0];
-            String at = eventParameters[1];
-            Task task = new Event(description, at);
-            addTask(task);
-        }
+        validateNumberOfInputParameters(eventParameters, 2);
+        String description = eventParameters[0];
+        String at = eventParameters[1];
+        Task task = new Event(description, at);
+        addTask(task);
     }
 
     /* Create new deadline task */
-    private static void createDeadlineTask(String parameter) {
+    private static void createDeadlineTask(String parameter) throws DukeException {
         String[] deadlineParameters = splitParameter(parameter, "/by ");
-        if (validateNumberOfInputParameters(deadlineParameters, 2)) {
-            String description = deadlineParameters[0];
-            String by = deadlineParameters[1];
-            Task task = new Deadline(description, by);
-            addTask(task);
-        }
+        validateNumberOfInputParameters(deadlineParameters, 2);
+        String description = deadlineParameters[0];
+        String by = deadlineParameters[1];
+        Task task = new Deadline(description, by);
+        addTask(task);
     }
 
     /* Split parameter string into array of parameters */
@@ -73,12 +71,10 @@ public class Duke {
     }
 
     /* Validate number of input parameters */
-    private static boolean validateNumberOfInputParameters(String[] parameters, int number) {
+    private static void validateNumberOfInputParameters(String[] parameters, int number)
+        throws DukeException {
         if (parameters.length < number) {
-            showInvalidInputFormatError();
-            return false;
-        } else {
-            return true;
+            throw new DukeException("The parameter format for this command is incorrect!");
         }
     }
 
@@ -98,51 +94,47 @@ public class Duke {
     }
 
     /* Mark specified task as done */
-    private static void markAsDone(String index) {
-        if (validateIndexNumber(index)) {
-            int indexNumber = Integer.parseInt(index);
-            Task task = tasks[indexNumber - 1];
-            task.markAsDone(true);
-            showMarkAsDoneMessage(task);
-        }
+    private static void markAsDone(String index) throws DukeException {
+        validateIndexNumber(index);
+        int indexNumber = Integer.parseInt(index);
+        Task task = tasks[indexNumber - 1];
+        task.markAsDone(true);
+        showMarkAsDoneMessage(task);
     }
 
     /* Validate index number */
-    private static boolean validateIndexNumber(String index) {
-        boolean isNumber = checkIsNumber(index);
-        boolean isInRange = false;
-        int indexNumber = 0;
-        boolean isValidIndexNumber = false;
+    private static void validateIndexNumber(String index) throws DukeException {
+        checkIsNumber(index);
 
-        if (isNumber) {
-            indexNumber = Integer.parseInt(index);
-            isInRange = checkIsInRange(indexNumber);
-        } else {
-            showInvalidInputFormatError();
-            return isValidIndexNumber;
-        }
-
-        if (isInRange) {
-            isValidIndexNumber = true;
-        } else {
-            showIndexOutOfBoundError();
-        }
-
-        return isValidIndexNumber;
+        int indexNumber = Integer.parseInt(index);
+        checkIsInRange(indexNumber);
     }
 
     /* Validate index range */
-    private static boolean checkIsInRange(int index) {
-        return index >= 0 && index <= taskCount;
+    private static void checkIsInRange(int index) throws DukeException {
+        if (index <= 0 || index > taskCount) {
+            throw new DukeException("The index number is out of range :-(");
+        }
     }
 
     /* Validate whether input is a number */
-    private static boolean checkIsNumber(String input) {
+    private static void checkIsNumber(String input) throws DukeException {
+        checkIsEmpty(input);
+
         String regex = "[0-9]+";
         Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(input);
 
-        return matcher.find();
+        if (!matcher.find()) {
+            throw new DukeException("The parameter must be a number :-(");
+        }
+    }
+
+    /* Validate whether input is empty */
+    private static void checkIsEmpty(String input) throws DukeException {
+        if (input == "") {
+            throw new DukeException("The index number cannot be empty :-(");
+        }
     }
 
     /* Show mark task as done message */
@@ -151,37 +143,13 @@ public class Duke {
         System.out.println("  " + task);
     }
 
-    /* Show invalid input format error */
-    private static void showInvalidInputFormatError() {
-        System.out.println("Invalid input format. Please try again with correct format.");
-    }
-
-    /* Show invalid index out of bound error */
-    private static void showIndexOutOfBoundError() {
-        System.out.println("Invalid index number. Please enter the correct index number.");
-    }
-
-    /* Show invalid command error */
-    private static void showInvalidCommandError() {
-        System.out.println("Invalid command. Please try again with valid command.");
-    }
-
-    /* Parse input into command command */
-    private static void parseCommand(String input) {
-        int firstSpacePosition = input.indexOf(" ");
-        String lowercaseCommand = input;
-        String parameter = "";
-
-        if (firstSpacePosition > 0) {
-            lowercaseCommand = input.substring(0, firstSpacePosition).toLowerCase();
-            parameter = input.substring(firstSpacePosition + 1);
-        }
-
-        executeCommand(lowercaseCommand, parameter);
+    /* Print exception error message */
+    private static void printErrorMessage(DukeException de) {
+        System.out.println(de.getMessage());
     }
 
     /* Execute command based on input from parseCommand */
-    private static void executeCommand(String command, String parameter) {
+    private static void executeCommand(String command, String parameter) throws DukeException{
         switch (command) {
         case "list":
             showTasks();
@@ -199,13 +167,26 @@ public class Duke {
             createDeadlineTask(parameter);
             break;
         default:
-            showInvalidCommandError();
+            throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
     }
 
-    public static void main(String[] args) {
-        showGreeting();
+    /* Parse input into command command */
+    private static String[] parseCommand(String input) {
+        int firstSpacePosition = input.indexOf(" ");
+        String lowercaseCommand = input;
+        String parameter = "";
 
+        if (firstSpacePosition > 0) {
+            lowercaseCommand = input.substring(0, firstSpacePosition).toLowerCase();
+            parameter = input.substring(firstSpacePosition + 1);
+        }
+
+        return new String[]{lowercaseCommand, parameter};
+    }
+
+    /* Interacts with user until bye is met */
+    private static void interactWithUser() {
         Scanner line = new Scanner(System.in);
 
         while (line.hasNextLine()) {
@@ -214,10 +195,21 @@ public class Duke {
             if (input.toLowerCase().equals("bye")) {
                 break;
             }
-            parseCommand(input);
+
+            String[] parsedCommand = parseCommand(input);
+
+            try {
+                executeCommand(parsedCommand[0], parsedCommand[1]);
+            } catch (DukeException de) {
+                printErrorMessage(de);
+            }
             showDivider();
         }
+    }
 
+    public static void main(String[] args) {
+        showGreeting();
+        interactWithUser();
         showExit();
     }
 }
