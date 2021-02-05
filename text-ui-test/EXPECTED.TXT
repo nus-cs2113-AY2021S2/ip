@@ -30,15 +30,15 @@ Hello there! This is Jack. Welcome to Task Tracker!
 	 Now you have 4 tasks in the list.
 	____________________________________________________________
 	____________________________________________________________
+	 Nice! I've marked this as done:
+	 [X] CS2113 lecture (at: Friday 4 to 6 pm)
+	____________________________________________________________
+	____________________________________________________________
 	Here are the task in your list:
 	1.[T][X] borrow book
 	2.[D][ ] weekly CS2113 quiz (by: Monday 9pm)
-	3.[E][ ] CS2113 lecture (at: Friday 4 to 6 pm)
+	3.[E][X] CS2113 lecture (at: Friday 4 to 6 pm)
 	4.[T][ ] read book
-	____________________________________________________________
-	____________________________________________________________
-	 Nice! I've marked this as done:
-	 [X] CS2113 lecture (at: Friday 4 to 6 pm)
 	____________________________________________________________
 	____________________________________________________________
 	 Got it. I've added this task:
@@ -46,7 +46,15 @@ Hello there! This is Jack. Welcome to Task Tracker!
 	 Now you have 5 tasks in the list.
 	____________________________________________________________
 	____________________________________________________________
-	 Invalid command. Please enter another task number
+	 Invalid command. Please enter another task number.
+	____________________________________________________________
+	____________________________________________________________
+	Here are the task in your list:
+	1.[T][X] borrow book
+	2.[D][ ] weekly CS2113 quiz (by: Monday 9pm)
+	3.[E][X] CS2113 lecture (at: Friday 4 to 6 pm)
+	4.[T][ ] read book
+	5.[D][ ] return book (by: by: June 6th)
 	____________________________________________________________
 	____________________________________________________________
 	 Good Bye. Hope to see you again soon!

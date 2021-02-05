@@ -7,28 +7,47 @@ public class CommandManager {
     private static final String EVENT_COMMAND = "event";
     private static final String DONE_COMMAND = "done";
 
+    private static final String EMPTY = "";
+
     private static final String DEADLINE_DELIMITER = "/by";
     private static final String EVENT_DELIMITER = "/at";
     private static final String WHITESPACE_DELIMITER = "\\s+";
 
-    private static int SIZE_OF_SENTENCE_COMPONENT = 2;
-    private static int FIRST_COMPONENT = 0;
-    private static int SECOND_COMPONENT = 1;
+    private static final int SIZE_LIMIT = 2;
+    private static final int FIRST_WORD = 0;
+    private static final int SECOND_WORD = 1;
+
+    private static String command = EMPTY;
+    private static String description = EMPTY;
+
+    public static void getCommandAndDescription(String userInput) {
+        String [] words = splitUserInput(userInput, WHITESPACE_DELIMITER);
+        command = getCommand(words);
+        description = getDescription(words);
+    }
+
+    public static String getCommand(String[] words) {
+        return words[FIRST_WORD];
+    }
+
+    public static String getDescription(String[] words) {
+        return words[SECOND_WORD];
+    }
 
     public static String[] splitUserInput(String userInput, String delimiter) {
-        final String[] commandAndDescription = userInput.trim().split(delimiter, SIZE_OF_SENTENCE_COMPONENT);
-        boolean isValidCommandAndDescription = (commandAndDescription.length == SIZE_OF_SENTENCE_COMPONENT);
+        String[] commandAndDescription = userInput.trim().split(delimiter, SIZE_LIMIT);
+        boolean isValidCommandAndDescription = (commandAndDescription.length == SIZE_LIMIT);
         if (isValidCommandAndDescription) {
             return commandAndDescription;
         } else {
-            String[] commandAndEmptyDescription = new String []{commandAndDescription[FIRST_COMPONENT] ,""};
+            String[] commandAndEmptyDescription = new String []
+                    {commandAndDescription[FIRST_WORD] ,EMPTY};
             return commandAndEmptyDescription;
         }
-        //return words.length == SIZE_OF_SENTENCE_COMPONENT ? words : new String[] { words[FIRST_COMPONENT] , "" }; // else case: no parameters
     }
 
-    public static String[] getTaskAndDate (String command, String description) {
-        String[] taskAndDate = new String[SIZE_OF_SENTENCE_COMPONENT];
+    public static String[] getTaskAndDate () {
+        String[] taskAndDate = new String[SIZE_LIMIT];
         switch(command) {
         case DEADLINE_COMMAND:
             taskAndDate = splitUserInput(description, DEADLINE_DELIMITER);
@@ -41,9 +60,7 @@ public class CommandManager {
     }
 
     public static void executeCommand(String userInput, TaskManager taskManager) {
-        String[] commandAndDescription = splitUserInput(userInput, WHITESPACE_DELIMITER);
-        String command = commandAndDescription[FIRST_COMPONENT];
-        String description = commandAndDescription[SECOND_COMPONENT];
+        getCommandAndDescription(userInput);
         boolean isValidDescription = !description.isEmpty();
         if (isValidDescription) {
             switch (command) {
@@ -51,10 +68,10 @@ public class CommandManager {
                 taskManager.toDo(description);
                 break;
             case DEADLINE_COMMAND:
-                taskManager.deadLine(getTaskAndDate(command,description));
+                taskManager.deadLine(getTaskAndDate());
                 break;
             case EVENT_COMMAND:
-                taskManager.event(getTaskAndDate(command,description));
+                taskManager.event(getTaskAndDate());
                 break;
             case DONE_COMMAND:
                 int taskNumber = Integer.parseInt(description);

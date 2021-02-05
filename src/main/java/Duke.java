@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Duke {
-    private static Scanner SCANNER = new Scanner(System.in);
+    private static final Scanner SCANNER = new Scanner(System.in);
 
     public static String getUserInput () {
         return SCANNER.nextLine();
