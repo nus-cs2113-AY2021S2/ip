@@ -15,9 +15,10 @@ public class Deadline implements Task {
         this.deadline = deadline;
         this.isDone = isDone;
         this.index = index;
-        this.message = String.format("[D][%s] %s",
-                isDone ? "X" : " ",
-                fullDescription
+        this.message = String.format(
+            "[D][%s] %s",
+            isDone ? "X" : " ",
+            fullDescription
         );
     }
 

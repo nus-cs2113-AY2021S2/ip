@@ -15,9 +15,10 @@ public class Event implements Task {
         this.event = event;
         this.isDone = isDone;
         this.index = index;
-        this.message = String.format("[E][%s] %s",
-                isDone ? "X" : " ",
-                fullDescription
+        this.message = String.format(
+            "[E][%s] %s",
+            isDone ? "X" : " ",
+            fullDescription
         );
     }
 

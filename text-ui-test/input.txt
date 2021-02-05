@@ -1,3 +1,6 @@
-no command input
-todo borrow book
-bye
+todo Jaden : Answer CS2113 tutorial questions
+deadline weekly CS2113 quiz /by Monday 9pm
+list
+event CS2113 lecture /at Friday 4 to 6 pm
+done 1
+list

@@ -13,11 +13,14 @@ public class Utils {
             }
             allMessages += indentation + message + "\n";
         }
-        System.out.println(String.format("%s\n%s%s\n",
-                Constants.horizontalLine,
+        System.out.println(
+            String.format(
+                "%s\n%s%s\n",
+                Constants.HORIZONTAL_LINE,
                 allMessages,
-                Constants.horizontalLine
-        ));
+                Constants.HORIZONTAL_LINE
+            )
+        );
         messages.clear();
     }
 

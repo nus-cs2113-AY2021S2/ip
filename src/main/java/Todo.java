@@ -13,8 +13,8 @@ public class Todo implements Task {
         this.isDone = isDone;
         this.index = index;
         this.message = String.format("[T][%s] %s",
-                isDone ? "X" : " ",
-                description
+            isDone ? "X" : " ",
+            description
         );
     }
 

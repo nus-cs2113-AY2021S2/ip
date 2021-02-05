@@ -29,35 +29,35 @@ public class TaskManager {
         Task task;
         int taskIndex = storage.size() + 1;
         switch (taskType) {
-            case Constants.TODO:
-                task = new Todo(taskIndex, message, false);
-                break;
-            case Constants.DEADLINE:
-                String[] deadlineTask = message.split(" /by ");
-                String details = deadlineTask[0].trim();
-                if (deadlineTask.length <= 1 || details.isEmpty()) {
-                    messages.add(Constants.deadlineErrorMessage);
-                    return messages;
-                }
-                String time = deadlineTask[1].trim();
-                task = new Deadline(taskIndex, details, false, time);
-                break;
-            case Constants.EVENT:
-                String[] eventTask = message.split(" /at ");
-                details = eventTask[0].trim();
-                if (eventTask.length <= 1 || details.isEmpty()) {
-                    messages.add(Constants.eventErrorMessage);
-                    return messages;
-                }
-                time = eventTask[1].trim();
-                task = new Event(taskIndex, details, false, time);
-                break;
-            default:
-                messages.add(Constants.todoErrorMessage);
+        case Constants.TODO:
+            task = new Todo(taskIndex, message, false);
+            break;
+        case Constants.DEADLINE:
+            String[] deadlineTask = message.split(" /by ");
+            String details = deadlineTask[0].trim();
+            if (deadlineTask.length <= 1 || details.isEmpty()) {
+                messages.add(Constants.DEADLINE_ERROR_MESSAGE);
                 return messages;
+            }
+            String time = deadlineTask[1].trim();
+            task = new Deadline(taskIndex, details, false, time);
+            break;
+        case Constants.EVENT:
+            String[] eventTask = message.split(" /at ");
+            details = eventTask[0].trim();
+            if (eventTask.length <= 1 || details.isEmpty()) {
+                messages.add(Constants.EVENT_ERROR_MESSAGE);
+                return messages;
+            }
+            time = eventTask[1].trim();
+            task = new Event(taskIndex, details, false, time);
+            break;
+        default:
+            messages.add(Constants.TODO_ERROR_MESSAGE);
+            return messages;
         }
         storage.put(taskIndex, task);
-        messages.add(Constants.addedMessage);
+        messages.add(Constants.ADDED_MESSAGE);
         messages.add(task.getMessage());
         messages.add(String.format("Tasks left: %d",getIncompleteTasksCount()));
         return messages;
@@ -87,7 +87,7 @@ public class TaskManager {
      */
     public List<String> completeTasks(List<Integer> indexes) {
         List<String> messages = new ArrayList<String>();
-        messages.add(Constants.doneMessage);
+        messages.add(Constants.DONE_MESSAGE);
         for (int index : indexes) {
             Task task = storage.get(index);
             messages.add(String.format(" [X] %s\n", task.getDescription()));

@@ -12,8 +12,8 @@ public class Logic {
 
     private Logic() {
         messages = new ArrayList<>();
-        messages.add(Constants.helloMessage);
-        messages.add(Constants.assistMessage);
+        messages.add(Constants.HELLO_MESSAGE);
+        messages.add(Constants.ASSIST_MESSAGE);
         Utils.reply(messages);
         scanner = new Scanner(System.in);
         taskManager = TaskManager.getInstance();
@@ -58,36 +58,36 @@ public class Logic {
         String task = String.join(" ", Arrays.copyOfRange(words, 1, words.length));
 
         switch (command) {
-            case Constants.BYE:
-                messages.add(Constants.byeMessage);
-                Utils.reply(messages);
-                scanner.close();
-                return;
-            case Constants.LIST:
-                List<String> response = taskManager.fetchTasks();
+        case Constants.BYE:
+            messages.add(Constants.BYE_MESSAGE);
+            Utils.reply(messages);
+            scanner.close();
+            return;
+        case Constants.LIST:
+            List<String> response = taskManager.fetchTasks();
+            messages.addAll(response);
+            break;
+        case Constants.DONE:
+            List<Integer> indexes = tasksToComplete(Arrays.copyOfRange(words, 1, words.length));
+            if (!indexes.isEmpty()) {
+                response = taskManager.completeTasks(indexes);
                 messages.addAll(response);
-                break;
-            case Constants.DONE:
-                List<Integer> indexes = tasksToComplete(Arrays.copyOfRange(words, 1, words.length));
-                if (!indexes.isEmpty()) {
-                    response = taskManager.completeTasks(indexes);
-                    messages.addAll(response);
-                } else {
-                    messages.add(Constants.doneErrorMessage);
-                }
-                break;
-            case Constants.TODO:
-            case Constants.DEADLINE:
-            case Constants.EVENT:
-                if (task.isEmpty()) {
-                    messages.add(Constants.errorMessage);
-                } else {
-                    response = taskManager.addTask(command, task);
-                    messages.addAll(response);
-                }
-                break;
-            default:
-                messages.add(Constants.errorMessage);
+            } else {
+                messages.add(Constants.DONE_ERROR_MESSAGE);
+            }
+            break;
+        case Constants.TODO:
+        case Constants.DEADLINE:
+        case Constants.EVENT:
+            if (task.isEmpty()) {
+                messages.add(Constants.ERROR_MESSAGE);
+            } else {
+                response = taskManager.addTask(command, task);
+                messages.addAll(response);
+            }
+            break;
+        default:
+            messages.add(Constants.ERROR_MESSAGE);
         }
         Utils.reply(messages);
         handleMessage();
