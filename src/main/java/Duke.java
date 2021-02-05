@@ -1,11 +1,6 @@
-import java.awt.*;
 import java.util.List;
 import java.util.Scanner;
 import java.util.*;
-
-/* need to parse commands now into todo, deadline, event */
-/* after parsing commands, need to parse the task and the time */
-/* need to have counter that keeps tracks of total tasks in list */
 
 public class Duke {
 
@@ -19,6 +14,7 @@ public class Duke {
     }
 
     private static void listTasks(List<Task> list) {
+        System.out.println("\tHere are the tasks in your list:");
         int i = 0;
         while (i < list.size()) {
             int num = i+1;
@@ -31,6 +27,13 @@ public class Duke {
         list.get(index).markAsDone();
         System.out.println("\tNice! I've marked this task as done:");
         System.out.println("\t\t" + list.get(index).toString());
+    }
+
+    private static void printAddedTask(List<Task> list, int taskCounter) {
+        System.out.println("Got it. I've added this task:");
+        System.out.println("\t" + list.get(taskCounter).toString());
+        int counter = taskCounter + 1;
+        System.out.println("Now you have " + counter + " tasks in the list.\n");
     }
 
     public static void main(String[] args) {
@@ -74,28 +77,22 @@ public class Duke {
                 String task = line.substring(commandIndex);
                 list.add(new Todo(task));
 
-                System.out.println("Got it. I've added this task:");
-                System.out.println("\t" + list.get(taskCounter).toString());
+                printAddedTask(list, taskCounter);
                 taskCounter++;
-                System.out.println("Now you have " + taskCounter + " tasks in the list.\n");
             } else if (command.equals("deadline")) {
                 String task = line.substring(commandIndex, timeIndex);
                 String time = line.substring(timeIndex+4);
                 list.add(new Deadline(task, time));
 
-                System.out.println("Got it. I've added this task:");
-                System.out.println("\t" + list.get(taskCounter).toString());
+                printAddedTask(list, taskCounter);
                 taskCounter++;
-                System.out.println("Now you have " + taskCounter + " tasks in the list.");
             } else if (command.equals("event")) {
                 String task = line.substring(commandIndex, timeIndex);
                 String time = line.substring(timeIndex+4);
                 list.add(new Event(task, time));
 
-                System.out.println("Got it. I've added this task:");
-                System.out.println("\t" + list.get(taskCounter).toString());
+                printAddedTask(list, taskCounter);
                 taskCounter++;
-                System.out.println("Now you have " + taskCounter + " tasks in the list.");
             }
         }
     }
