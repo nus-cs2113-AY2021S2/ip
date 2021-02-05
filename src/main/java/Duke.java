@@ -109,6 +109,7 @@ public class Duke {
     }
 
     public static void exitProgram() {
+        System.out.println("Bye. Hope to see you again soon!");
         lineBreak();
         System.exit(0);
     }
