@@ -2,11 +2,47 @@ Wagwan! I is Ali G. West side.
 What is we chattin' bout today?
 ____________________________________________________________
 Wicked. This ting is now on da list.
-[T][ ] remove
+[T][ ] remove 
 You is having 1 task(s) on your list
 ____________________________________________________________
+Are you spasticated? The format is wrong!
+____________________________________________________________
+Are you spasticated? The format is wrong!
+____________________________________________________________
+Wicked. This ting is now on da list.
+[D][ ] transcript (by: saturday 2359)
+You is having 2 task(s) on your list
+____________________________________________________________
 Eez are the tings you added to the list
-1. [T][ ] remove
+1. [T][ ] remove 
+2. [D][ ] transcript (by: saturday 2359)
+____________________________________________________________
+Wicked. This ting is now on da list.
+[E][ ] meeting (at: monday 2-4)
+You is having 3 task(s) on your list
+____________________________________________________________
+Wicked. This ting is now on da list.
+[D][ ] slides (by: tuesday 33)
+You is having 4 task(s) on your list
+____________________________________________________________
+Eez are the tings you added to the list
+1. [T][ ] remove 
+2. [D][ ] transcript (by: tuesday 33)
+3. [E][ ] meeting (at: monday 2-4)
+4. [D][ ] slides (by: tuesday 33)
+____________________________________________________________
+meeting set to done. You're well smart innit?
+____________________________________________________________
+Eez are the tings you added to the list
+1. [T][ ] remove 
+2. [D][ ] transcript (by: tuesday 33)
+3. [E][?] meeting (at: monday 2-4)
+4. [D][ ] slides (by: tuesday 33)
+____________________________________________________________
+Woah woah. Don't violate the rules aight. I is watching you.
+____________________________________________________________
+____________________________________________________________
+Are you spasticated? The format is wrong!
 ____________________________________________________________
 Goodbye, big up yourself, keep it real, respekt.
 ____________________________________________________________

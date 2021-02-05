@@ -1,3 +1,13 @@
 todo remove
+blah
+fak ni
+deadline transcript /by saturday 2359
 list
+event meeting /at monday 2-4
+deadline slides /by tuesday 33
+list
+done 3
+list
+done 10
+fak ni
 bye

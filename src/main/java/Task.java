@@ -1,7 +1,7 @@
 public class Task {
     protected String name;
     protected boolean isDone;
-    public static int totalTasks = 0;
+    public static int totalNumberOfTasks = 0;
 
     protected Task(String name) {
         this.name = name;
