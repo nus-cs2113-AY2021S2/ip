@@ -203,9 +203,8 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
-        showGreeting();
-
+    /* Reads in user input until bye is met */
+    private static void readUserInput() {
         Scanner line = new Scanner(System.in);
 
         while (line.hasNextLine()) {
@@ -217,7 +216,11 @@ public class Duke {
             parseCommand(input);
             showDivider();
         }
+    }
 
+    public static void main(String[] args) {
+        showGreeting();
+        readUserInput();
         showExit();
     }
 }
