@@ -89,20 +89,19 @@ public class Duke {
 
                 int dividerPosition = input.indexOf(" ");
                 String taskNo = input.substring(dividerPosition + 1);
+                int taskIndex = Integer.parseInt(taskNo) - 1;
                 if (dividerPosition == -1 || taskNo.equals("") || !input.contains(" ")) {
                     System.out.print(line);
                     System.out.print("I don't quite understand." +  "\n" + "Please enter the command again." + "\n");
                     System.out.print(line);
                     input = userInput.nextLine();
                 }
-                int taskIndex = Integer.parseInt(taskNo) - 1;
                 if (taskIndex >=tasks.size()) {
                     System.out.print(line);
                     System.out.print("You have no such task." + "\n");
                     System.out.print(line);
                 }
                 else {
-                    System.out.print(taskIndex);
                     tasks.get(taskIndex).markAsDone();
                     System.out.print(line);
                     System.out.print("Nice! I've marked this task as done:" + "\n" + tasks.get(taskIndex) + "\n");
