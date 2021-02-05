@@ -29,7 +29,7 @@ Hello from
 
 	------------------------------------------
 	Great job! I've marked this task as done: 
-	[T][?] read book
+	[T][X] read book
 	__________________________________________
 
 	------------------------------------------
@@ -40,7 +40,7 @@ Hello from
 
 	------------------------------------------
 	Here are the tasks in your list: 
-	1.[T][?] read book
+	1.[T][X] read book
 	2.[D][ ] finish homeowork (by: Saturday)
 	3.[E][ ] dance (at: Thurday 6-8pm)
 	__________________________________________
