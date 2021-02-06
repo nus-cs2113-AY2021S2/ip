@@ -1,22 +1,11 @@
 list
-todo be happy
-blah
-done x
-done 12
-done -1
-event meeting
-event meeting /at
-event /at 2pm tomorrow
-event meeting /at 2pm tomorrow
+todo be happy 
+event meeting /at 2pm tomorrow 
 deadline homework /by tonight 2359
 done 1
 list
 done 2
 list
-deadline return books
-deadline return books /by
-deadline return books /by
-deadline /by tomorrow 5pm
 deadline return books /by tomorrow 5pm
 list
 done 4
@@ -25,6 +14,6 @@ done 3
 list
 help
 hello
-hey
+die
 bye
 

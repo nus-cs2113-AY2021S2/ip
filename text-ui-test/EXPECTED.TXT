@@ -7,64 +7,21 @@ Hello from
 
 ____________________________________________________________
  Hello! I'm Duke :D Be nice to me:)
-
  Try entering commands like : help, list, done, bye,
  todo <taskName> || deadline <taskName> /by <time> || event <taskName> /at <time> ||
  Remember: be nice!
 ____________________________________________________________
 ____________________________________________________________
- The list is empty. Add a task to the list now!
- Type 'help' if you need help.
+ This list is empty
 ____________________________________________________________
 ____________________________________________________________
  Got it. I've added this task:
-   [T][ ] be happy
+   [T][ ] be happy 
  Now you have 1 task in the list.
 ____________________________________________________________
 ____________________________________________________________
- OOPS!!! I didn't quite get you. Enter a valid command.
- Please don't break me:(
- Type 'help' if you need help.
-____________________________________________________________
-____________________________________________________________
- Hey, no funny business!
- Enter a valid command format to mark a task as complete.
- e.g. done 2
- Type 'help' if you need help.
-____________________________________________________________
-____________________________________________________________
-
- After the 'done' command,
- enter a valid integer within this range:
- [1, 1]
- Please don't break me:( No tricks!
- Type 'list' to see all the tasks.
- Type 'help' if you need help.
-____________________________________________________________
-____________________________________________________________
-
- After the 'done' command,
- enter a valid integer within this range:
- [1, 1]
- Please don't break me:( No tricks!
- Type 'list' to see all the tasks.
- Type 'help' if you need help.
-____________________________________________________________
-____________________________________________________________
-OOPS!!! The command format for event is wrong.
- Type 'help' if you need help.
-____________________________________________________________
-____________________________________________________________
-OOPS!!! The description or time of an event cannot be empty.
- Type 'help' if you need help.
-____________________________________________________________
-____________________________________________________________
-OOPS!!! The description or time of an event cannot be empty.
- Type 'help' if you need help.
-____________________________________________________________
-____________________________________________________________
  Got it. I've added this task:
-   [E][ ] meeting (at: 2pm tomorrow)
+   [E][ ] meeting (by: 2pm tomorrow )
  Now you have 2 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
@@ -74,39 +31,23 @@ ____________________________________________________________
 ____________________________________________________________
 ____________________________________________________________
  Nice! I've marked this task as done:
- [T][X] be happy
+ [T][X] be happy 
 ____________________________________________________________
 ____________________________________________________________
  Here are the tasks in your list:
- 1.[T][X] be happy
- 2.[E][ ] meeting (at: 2pm tomorrow)
+ 1.[T][X] be happy 
+ 2.[E][ ] meeting (by: 2pm tomorrow )
  3.[D][ ] homework (by: tonight 2359)
 ____________________________________________________________
 ____________________________________________________________
  Nice! I've marked this task as done:
- [E][X] meeting (at: 2pm tomorrow)
+ [E][X] meeting (by: 2pm tomorrow )
 ____________________________________________________________
 ____________________________________________________________
  Here are the tasks in your list:
- 1.[T][X] be happy
- 2.[E][X] meeting (at: 2pm tomorrow)
+ 1.[T][X] be happy 
+ 2.[E][X] meeting (by: 2pm tomorrow )
  3.[D][ ] homework (by: tonight 2359)
-____________________________________________________________
-____________________________________________________________
-OOPS!!! The command format for deadline is wrong.
- Type 'help' if you need help.
-____________________________________________________________
-____________________________________________________________
-OOPS!!! The description or time of a deadline cannot be empty.
- Type 'help' if you need help.
-____________________________________________________________
-____________________________________________________________
-OOPS!!! The description or time of a deadline cannot be empty.
- Type 'help' if you need help.
-____________________________________________________________
-____________________________________________________________
-OOPS!!! The description or time of a deadline cannot be empty.
- Type 'help' if you need help.
 ____________________________________________________________
 ____________________________________________________________
  Got it. I've added this task:
@@ -115,8 +56,8 @@ ____________________________________________________________
 ____________________________________________________________
 ____________________________________________________________
  Here are the tasks in your list:
- 1.[T][X] be happy
- 2.[E][X] meeting (at: 2pm tomorrow)
+ 1.[T][X] be happy 
+ 2.[E][X] meeting (by: 2pm tomorrow )
  3.[D][ ] homework (by: tonight 2359)
  4.[D][ ] return books (by: tomorrow 5pm)
 ____________________________________________________________
@@ -126,8 +67,8 @@ ____________________________________________________________
 ____________________________________________________________
 ____________________________________________________________
  Here are the tasks in your list:
- 1.[T][X] be happy
- 2.[E][X] meeting (at: 2pm tomorrow)
+ 1.[T][X] be happy 
+ 2.[E][X] meeting (by: 2pm tomorrow )
  3.[D][ ] homework (by: tonight 2359)
  4.[D][X] return books (by: tomorrow 5pm)
 ____________________________________________________________
@@ -137,8 +78,8 @@ ____________________________________________________________
 ____________________________________________________________
 ____________________________________________________________
  Here are the tasks in your list:
- 1.[T][X] be happy
- 2.[E][X] meeting (at: 2pm tomorrow)
+ 1.[T][X] be happy 
+ 2.[E][X] meeting (by: 2pm tomorrow )
  3.[D][X] homework (by: tonight 2359)
  4.[D][X] return books (by: tomorrow 5pm)
  Woah, all completed! Good job!
@@ -149,14 +90,11 @@ ____________________________________________________________
  Remember: be nice!
 ____________________________________________________________
 ____________________________________________________________
- Hello to you too. I'm here to help you:)
- Give me something to do!
- Type 'help' if you need help.
+ Hello to you too. I'm here to help you:) Give me something to do!
 ____________________________________________________________
 ____________________________________________________________
- Hello to you too. I'm here to help you:)
- Give me something to do!
- Type 'help' if you need help.
+ If I tell my master, I can wipe out your entire human race.
+ Please be more polite for the sake of mankind:)
 ____________________________________________________________
 ____________________________________________________________
  I learnt more about you, kind human!
