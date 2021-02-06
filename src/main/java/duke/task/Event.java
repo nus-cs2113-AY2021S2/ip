@@ -1,6 +1,12 @@
-public class Deadline extends Task{
-    private static final String ALPHABET_D = "D";
-    private String by;
+package duke.task;
+
+import duke.exceptions.EmptyInputException;
+import duke.exceptions.IncompleteInputException;
+import duke.exceptions.InvalidDateInputException;
+
+public class Event extends Task{
+    private static final String ALPHABET_E = "E";
+    private String at;
     private static final String JAN = "01";
     private static final String FEB = "02";
     private static final String MAR = "03";
@@ -14,14 +20,14 @@ public class Deadline extends Task{
     private static final String NOV = "11";
     private static final String DEC = "12";
 
-    public Deadline(String d, String by){
+    public Event(String d, String at){
         super(d);
-        this.by = by;
+        this.at = at;
     }
 
     @Override
     public String getTaskType(){
-        return ALPHABET_D;
+        return ALPHABET_E;
     }
 
     @Override
@@ -31,21 +37,21 @@ public class Deadline extends Task{
     }
 
     public void printTime(){
-        System.out.print(" (by:" + this.by + ")");
+        System.out.print(" (at:" + this.at + ")");
     }
 
     @Override
     public void printInputErrorMessage(String userInput) {
         super.printInputErrorMessage(userInput);
-        System.out.println("  deadline [deadline name] /by [MM/DD/YYYY]\n"
-                + "    e.g. deadline return book /by 03/28/2021");
+        System.out.println("  event [event name] /at [MM-DD-YYYY]\n"
+                + "    e.g. event project meeting /at 03-28-2021");
     }
 
     @Override
     public void printInvalidDateInputMessage(String userInput) {
         super.printInvalidDateInputMessage(userInput);
-        System.out.println("  deadline [deadline name] /by [MM/DD/YYYY]\n"
-                + "    e.g. deadline return book /by 03/28/2021");
+        System.out.println("  event [event name] /at [MM-DD-YYYY]\n"
+                + "    e.g. event project meeting /at 03-28-2021");
     }
 
     @Override
@@ -60,12 +66,12 @@ public class Deadline extends Task{
         super.addTask();
     }
 
-    private boolean isIncomplete(Deadline d){
-        return d.by.equals("");
+    private boolean isIncomplete(Event e){
+        return e.at.equals("");
     }
 
-    private boolean isInvalidDate(Deadline d){
-        String[] splitDate = d.by.split("/");
+    private boolean isInvalidDate(Event e){
+        String[] splitDate = e.at.trim().split("-");
         // Formatting is incorrect
         if (splitDate.length != 3){
             return true;
@@ -122,4 +128,5 @@ public class Deadline extends Task{
     private boolean isLeapYear(int year){
         return (year % 4 == 0);
     }
+
 }

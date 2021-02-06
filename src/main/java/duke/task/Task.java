@@ -1,3 +1,9 @@
+package duke.task;
+
+import duke.exceptions.EmptyInputException;
+import duke.exceptions.IncompleteInputException;
+import duke.exceptions.InvalidDateInputException;
+
 public class Task {
     private static final int MAX_NUMBER_OF_TASKS = 100;
     protected String description;
@@ -6,7 +12,7 @@ public class Task {
     private static int taskCount = 0;
     private static String time;
 
-    // Task Constructor
+    // duke.task.Task Constructor
     public Task(String description){
         this.description = description;
         this.isDone = false;
@@ -26,7 +32,7 @@ public class Task {
         System.out.println("");
     }
 
-    // Add Task to taskList and increment taskCount
+    // Add duke.task.Task to taskList and increment taskCount
     public void addTask() throws
             EmptyInputException, IncompleteInputException, InvalidDateInputException {
         // Throw Exception if no valid task is detected
