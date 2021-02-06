@@ -4,6 +4,7 @@ public class ToDo extends Task {
         super(taskName, taskType);
     }
 
+    @Override
     public void printTask() {
         String output;
         if (isCompleted) {

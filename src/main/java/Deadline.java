@@ -10,6 +10,7 @@ public class Deadline extends Task {
 
     public void setTimeConstraint(String timeConstraint) { this.timeConstraint = timeConstraint; }
 
+    @Override
     public void printTask() {
         String output;
         if (isCompleted) {

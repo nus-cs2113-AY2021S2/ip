@@ -2,6 +2,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Duke {
+    private static final String lineSpacing = "\t----------------------------------";
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -10,24 +12,23 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
-        startGreetings();
+        initialGreetings();
         echo(); // Method contains main while loop
-        endGreetings();
+        finalGreetings();
     }
 
-    public static void startGreetings() {
-        String greetings = "\t-------------------------------------\n"
-                         + "\tHello! I'm Duke\n"
-                         + "\tWhat can I do for you?\n\n"
-                         + "\t-------------------------------------";
+    public static void initialGreetings() {
+        String greetings = "\tHello! I'm Duke\n" + "\tWhat can I do for you?\n\n";
+        System.out.println(lineSpacing);
         System.out.println(greetings);
+        System.out.println(lineSpacing);
     }
 
-    public static void endGreetings() {
-        String exitStatements = "\t-------------------------------------\n"
-                              + "\tBye. Hope to see you again soon!\n"
-                              + "\t-------------------------------------";
+    public static void finalGreetings() {
+        String exitStatements = "\tBye. Hope to see you again soon!\n";
+        System.out.println(lineSpacing);
         System.out.println(exitStatements);
+        System.out.println(lineSpacing);
     }
 
     public static void echo() {
@@ -39,9 +40,9 @@ public class Duke {
         while (!line.equals("bye")) {
             List<String> userCommands = Arrays.asList(line.split(" "));
             if (userCommands.get(0).equals("list")) {
-                displayTextList(tasks);
+                displayTaskList(tasks);
             } else if (userCommands.get(0).equals("done")) {
-                markCompletedTasks(tasks, line);
+                markCompletedTasks(tasks, userCommands.subList(1, userCommands.size()));
             } else {
                 appendNewTask(tasks, userCommands);
             }
@@ -49,9 +50,9 @@ public class Duke {
         }
     }
 
-    public static void displayTextList(ArrayList<Task> tasks) {
+    public static void displayTaskList(ArrayList<Task> tasks) {
         int counter = 0;
-        System.out.println("\t-------------------------------------");
+        System.out.println(lineSpacing);
         System.out.println("\tHere are the tasks in your list:");
         while (counter < tasks.size()) {
             Task task = tasks.get(counter);
@@ -59,26 +60,27 @@ public class Duke {
             task.printTask();
             counter ++;
         }
-        System.out.println("\t-------------------------------------");
+        System.out.println(lineSpacing);
     }
 
-    public static void markCompletedTasks(ArrayList<Task> tasks, String line) {
-        System.out.println("\t-------------------------------------");
+    public static void markCompletedTasks(ArrayList<Task> tasks, List<String> taskIndexes) {
+        System.out.println(lineSpacing);
         System.out.println("\tNice! I've marked this task as done:");
 
-        List<String> indexesStrings = Arrays.stream(line.trim().split(" "))
-                .distinct()
-                .filter(x -> x.matches("\\d+"))
-                .collect(Collectors.toList());
-        for (String index: indexesStrings) {
-            int indexInt = Integer.parseInt(index) - 1;
+        for (String index: taskIndexes) {
+            int indexInt;
+            try {
+                indexInt = Integer.parseInt(index) - 1;
+            } catch (NumberFormatException e) {
+                continue;
+            }
             if (indexInt < tasks.size()) {
                 tasks.get(indexInt).setCompleted();
             }
             System.out.print("\t");
             tasks.get(indexInt).printTask();
         }
-        System.out.println("\t-------------------------------------");
+        System.out.println(lineSpacing);
     }
 
     public static void appendNewTask(ArrayList<Task> tasks, List<String> instructions) {
