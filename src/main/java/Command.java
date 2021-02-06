@@ -2,7 +2,7 @@ public class Command {
     private CommandEnum commandType;
     private String description;
     private String when;
-    private int taskNum;
+    private Integer taskNum;
 
     public Command(String userInput){
         setCommandFromInput(userInput);
@@ -20,7 +20,7 @@ public class Command {
         return when;
     }
 
-    public int getTaskNum(){
+    public Integer getTaskNum(){
         return taskNum;
     }
 
@@ -36,8 +36,12 @@ public class Command {
         }
         if (commandType == CommandEnum.DONE) {
 //            Split user input by " " to separate 'done' and task number according to the format.
-            String taskNumArgument = input.split(" ")[1];
-            taskNum = Integer.parseInt(taskNumArgument);
+            try {
+                String taskNumArgument = input.split(" ")[1];
+                taskNum = Integer.parseInt(taskNumArgument);
+            } catch (ArrayIndexOutOfBoundsException indexError) {
+                System.out.println("Error -> Task number cannot be left empty.");
+            }
         }
     }
 

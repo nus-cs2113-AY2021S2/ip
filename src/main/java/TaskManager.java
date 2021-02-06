@@ -17,17 +17,18 @@ public class TaskManager {
         }
     }
 
-    public void markDone(int taskIdNum) {
+    public void markDone(Integer taskIdNum) {
 //        Check if user input for 'done' task id is within the range of the list.
-        if (taskIdNum > 0 && taskIdNum <= tasks.size()) {
-            int taskListIndexNum = taskIdNum-1;
-            Task task = tasks.get(taskListIndexNum);
-            task.setAsDone();
-            System.out.println("Nice! I've marked this task as done:");
-            System.out.println(task.toString());
-        } else {
-            System.out.println("Invalid task number.");
-            printNumberOfTasks();
+        try {
+            if (taskIdNum != null) {
+                int taskListIndexNum = taskIdNum - 1;
+                Task task = tasks.get(taskListIndexNum);
+                task.setAsDone();
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println(task.toString());
+            }
+        } catch (IndexOutOfBoundsException error) {
+            System.out.println("Error -> Cannot find task with the specified task number " + taskIdNum + ".");
         }
     }
 
