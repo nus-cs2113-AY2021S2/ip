@@ -21,7 +21,7 @@ public class Duke {
             return "list";
         } else if (input.equalsIgnoreCase("bye")) {
             return "bye";
-        } else if (input.equalsIgnoreCase("todo") || input.equalsIgnoreCase("deadline") || input.equalsIgnoreCase("event")) {
+        } else if (input.contains("todo") || input.contains("deadline") || input.contains("event")) {
             int indexOfSpace = input.indexOf(" ");
             if (indexOfSpace == -1) {
                 return "retry";
@@ -41,30 +41,26 @@ public class Duke {
     }
 
     public static String extractDate(String input) {
-        String Date;
+        String Date = null;
         if (input.equalsIgnoreCase("list")) {
             return "list";
         } else if (input.equalsIgnoreCase("bye")) {
             return "bye";
-        } else if (input.equalsIgnoreCase("todo") || input.equalsIgnoreCase("deadline") || input.equalsIgnoreCase("event")) {
+        } else if (input.contains("todo")) {
+            return null;
+        } else if (input.contains("deadline") || input.contains("event")) {
             int indexOfSpace = input.indexOf(" ");
-            if (indexOfSpace == -1) {
-                return "retry";
+            String subString = input.substring(indexOfSpace + 1);
+            if (subString.contains("/")) {
+                int indexOfSlash = subString.indexOf("/");
+                String subStringDate = subString.substring(indexOfSlash);
+                int indexNext = subStringDate.indexOf(" ");
+                Date = subStringDate.substring(indexNext + 1);
             } else {
-                String subString = input.substring(indexOfSpace + 1);
-                if (subString.contains("/")) {
-                    int indexOfSlash = subString.indexOf("/");
-                    String subStringDate = subString.substring(indexOfSlash);
-                    int indexNext = subStringDate.indexOf(" ");
-                    Date = subStringDate.substring(indexNext + 1);
-                } else {
-                    Date = null;
-                }
-                return Date;
+                Date = null;
+                    }
             }
-        } else {
-            return "nonsense";
-        }
+        return Date;
     }
 
     public static void main(String[] args) {
@@ -107,8 +103,8 @@ public class Duke {
                 int indexSpace = input.indexOf(" ");
                 String numberString = input.substring(indexSpace + 1);
                 int taskNumber = Integer.parseInt(numberString);
-                System.out.println("Awwww yeah! I've marked this task as done... brrrrrap brrrrrap: ");
                 taskList[taskNumber - 1].markAsDone();
+                System.out.println("Awwww yeah! I've marked this task as done... brrrrrap brrrrrap: ");
                 System.out.println(taskList[taskNumber - 1].printDescription());
             } else if (input.contains("todo")) {
                 taskList[count] = new toDo(stringTask);
