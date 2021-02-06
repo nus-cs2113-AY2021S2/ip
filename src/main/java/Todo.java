@@ -10,4 +10,9 @@ public class Todo extends Task{
         label += s;
         return label;
     }
+
+    @Override
+    public String addEnd(String s) {
+        return s.concat("");
+    }
 }

@@ -10,16 +10,16 @@ public class Duke {
     private static final int TODO_COMMAND = 4;
     private static final int DEADLINE_COMMAND = 5;
     private static final int EVENTS_COMMAND = 6;
-    private static final int ADD_COMMAND = 7;
+    private static final int UNKNOWN_COMMAND = 7;
 
 
     public static void main(String[] args) {
         printHello();
-        runProgram();
+        runUserCommand();
         printBye();
     }
 
-    private static void runProgram() {
+    private static void runUserCommand() {
         Task[] taskList = new Task[MAX_TASK];
         Scanner in = new Scanner(System.in);
 
@@ -31,9 +31,10 @@ public class Duke {
             int command = parseCommand(input);
 
 
+            // If list is full, will only allow LIST and BYE command to pass
             try {
                 checkListCapacity(command);
-            } catch (RestrictedCommandException e) {
+            } catch (FullListException e) {
                 printListFullWarning();
                 continue;
             }
@@ -67,7 +68,7 @@ public class Duke {
                 break;
 
             default:
-                runAdd(taskList, input);
+                runUnknownCommand(input);
             }
         }
 
@@ -114,9 +115,9 @@ public class Duke {
             return EVENTS_COMMAND;
         }
 
-        // ADD command
+        // UNKNOWN command
         else {
-            return ADD_COMMAND;
+            return UNKNOWN_COMMAND;
         }
     }
 
@@ -165,13 +166,13 @@ public class Duke {
     }
 
 
-    private static void checkListCapacity(int command) throws RestrictedCommandException {
+    private static void checkListCapacity(int command) throws FullListException {
         if (Task.taskCount == MAX_TASK && !Task.isFull) {
             Task.isFull = true;
         }
 
         if (Task.isFull && !isAllowedWhenListFull(command)) {
-            throw new RestrictedCommandException();
+            throw new FullListException();
         }
     }
 
@@ -179,16 +180,6 @@ public class Duke {
     /**
      * COMMAND RUNNER METHODS
      */
-
-    private static void runAdd(Task[] taskList, String input) {
-        // stores user command as job
-        Task newTask = new Task(input);
-
-        taskList[Task.taskCount] = newTask;
-        Task.taskCount++;
-
-        printTaskAdded(newTask);
-    }
 
     private static void runDone(Task[] taskList, String input) {
         String[] word = input.split(" ");
@@ -271,8 +262,7 @@ public class Duke {
     }
 
     private static void runEvent(Task[] taskList, String input) {
-        String job = "";
-        String at = "";
+        String job, at;
 
         try {
             job = parseJob(input, "/at");
@@ -288,6 +278,11 @@ public class Duke {
 
         printTaskAdded(newTask);
 
+    }
+
+    private static void runUnknownCommand(String input) {
+        System.out.println("No idea what " + input + " means!");
+        System.out.println("Enter \"help\" for a list of available commands and format\n");
     }
 
     private static void markJobAsDone(Task task) {
@@ -352,13 +347,10 @@ public class Duke {
 
         String commandDeadline = "DEADLINE - \n" +
                 "FORMAT: deadline [(str) job] /by [(str) deadline]";
-        String commandAdd = "ADD - \n" +
-                "FORMAT: [(str) job]";
 
 
         System.out.println("COMMAND LIST:");
         System.out.println("-------------");
-        System.out.println(commandAdd + '\n');
         System.out.println(commandTodo + '\n');
         System.out.println(commandDeadline + '\n');
         System.out.println(commandList + '\n');

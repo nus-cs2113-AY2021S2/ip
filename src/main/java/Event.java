@@ -14,6 +14,7 @@ public class Event extends Task {
         this.at = at;
     }
 
+
     @Override
     public String addLabel(String s){
         String label = "[E]";

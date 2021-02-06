@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     protected String job;
     protected boolean isDone;
 
@@ -10,7 +10,7 @@ public class Task {
         this.isDone = false;
     }
 
-    public Task(String inputJob){
+    public Task(String inputJob) {
         this.job = inputJob;
         this.isDone = false;
     }
@@ -31,7 +31,7 @@ public class Task {
         isDone = done;
     }
 
-    public void printTask(){
+    public void printTask() {
         String doneBox = "[X] ";
         String emptyBox = "[ ] ";
 
@@ -44,17 +44,10 @@ public class Task {
         System.out.println(output);
     }
 
-    public String addLabel(String s){
-        String label = "[*]";
-        label += s;
-        return label;
-    }
+    public abstract String addEnd(String s);
 
-    public String addEnd(String s){
-        String end = " ";
-        return s.concat(end);
+    public abstract String addLabel(String s);
 
-    }
 }
 
 
