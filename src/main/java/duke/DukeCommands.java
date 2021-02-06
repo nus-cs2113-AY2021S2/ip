@@ -1,3 +1,5 @@
+package duke;
+
 public class DukeCommands {
     public static final int INVALID_COMMAND = 6386;
     public static final int LIST = 2535;

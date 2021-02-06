@@ -1,3 +1,9 @@
+package duke;
+
+import duke.Deadline;
+import duke.DukeCommandValidator;
+import duke.DukeCommands;
+
 import java.util.Scanner;
 
 public class DukeController {
