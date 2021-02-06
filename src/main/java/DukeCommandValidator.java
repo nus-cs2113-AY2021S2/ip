@@ -11,16 +11,16 @@ public class DukeCommandValidator {
         if(input.equals("list")){
             return DukeCommands.LIST;
         }
-        if(validateDoneCommand(input) == true){
+        if(isDoneCommandValid(input) == true){
             return DukeCommands.DONE;
         }
-        if(validateAddCommand(input) == true) {
+        if(isAddCommandValid(input) == true) {
             return DukeCommands.ADD;
         }
         return DukeCommands.INVALID_COMMAND;
     }
 
-    public static boolean validateTodo(String input){
+    public static boolean isToDoValid(String input){
         if(input.length()>=MINIMUN_TODO_LENGTH) {
             if (input.substring(0, 5).equals("todo ")) {
                 return true;
@@ -29,7 +29,7 @@ public class DukeCommandValidator {
         return false;
     }
 
-    public static boolean validateDeadline(String input){
+    public static boolean isDeadlineValid(String input){
         if(input.length()<MINIMUM_DEADLINE_LENGTH){
             return false;
         }
@@ -53,7 +53,7 @@ public class DukeCommandValidator {
         return true;
     }
 
-    public static boolean validateEvent(String input){
+    public static boolean isEventValid(String input){
         if(input.length()<MINIMUM_EVENT_LENGTH){
             return false;
         }
@@ -78,7 +78,7 @@ public class DukeCommandValidator {
     }
 
 
-    public static Boolean validateAddCommand(String input){
+    public static Boolean isAddCommandValid(String input){
 
         if(input.length()>=MINIMUN_TODO_LENGTH) {
             if (input.substring(0, 5).equals("todo ")) {
@@ -101,7 +101,7 @@ public class DukeCommandValidator {
         return false;
     }
 
-    public static boolean validateDoneCommand(String input){
+    public static boolean isDoneCommandValid(String input){
         if(input.length()<=MINIMUM_DONE_LENGTH){
             return false;
         }

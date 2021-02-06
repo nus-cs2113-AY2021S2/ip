@@ -65,11 +65,11 @@ public class DukeController {
     }
 
     public static void add(){
-        if(DukeCommandValidator.validateTodo(input)==true){
+        if(DukeCommandValidator.isToDoValid(input)==true){
             tasks[currentTaskLength] = new ToDo(input);
-        }else if(DukeCommandValidator.validateDeadline(input)==true){
+        }else if(DukeCommandValidator.isDeadlineValid(input)==true){
             tasks[currentTaskLength] = new Deadline(input);;
-        }else if(DukeCommandValidator.validateEvent(input)){
+        }else if(DukeCommandValidator.isEventValid(input)){
             tasks[currentTaskLength] = new Event(input);
         }else{
             System.out.println("Invalid syntax for add commands! Please try again!");
