@@ -5,13 +5,13 @@ Initialising...
 ------------------------------------------------
 	Hello, sir. J.A.R.V.I.S at your service.
 ------------------------------------------------
-	hi
+	Sorry, sir. I do not recognise this command.
 ------------------------------------------------
 	You do not have any pending task, sir.
 ------------------------------------------------
 	Sorry, sir.
 	I am unable to retrieve the information from the database.
-	Would you like to add the task instead, sir?
+	Would you like to add the task instead?
 ------------------------------------------------
 	Got it. I've added this task:
 		[T][ ] borrow book
