@@ -1,3 +1,9 @@
+package duke.task;
+
+import duke.exceptions.EmptyInputException;
+import duke.exceptions.IncompleteInputException;
+import duke.exceptions.InvalidDateInputException;
+
 public class Deadline extends Task{
     private static final String ALPHABET_D = "D";
     private String by;
@@ -37,15 +43,15 @@ public class Deadline extends Task{
     @Override
     public void printInputErrorMessage(String userInput) {
         super.printInputErrorMessage(userInput);
-        System.out.println("  deadline [deadline name] /by [MM/DD/YYYY]\n"
-                + "    e.g. deadline return book /by 03/28/2021");
+        System.out.println("  deadline [deadline name] /by [MM-DD-YYYY]\n"
+                + "    e.g. deadline return book /by 03-28-2021");
     }
 
     @Override
     public void printInvalidDateInputMessage(String userInput) {
         super.printInvalidDateInputMessage(userInput);
-        System.out.println("  deadline [deadline name] /by [MM/DD/YYYY]\n"
-                + "    e.g. deadline return book /by 03/28/2021");
+        System.out.println("  deadline [deadline name] /by [MM-DD-YYYY]\n"
+                + "    e.g. deadline return book /by 03-28-2021");
     }
 
     @Override
@@ -65,7 +71,8 @@ public class Deadline extends Task{
     }
 
     private boolean isInvalidDate(Deadline d){
-        String[] splitDate = d.by.split("/");
+        System.out.println("Debug message 2: " + d);
+        String[] splitDate = d.by.trim().split("-");
         // Formatting is incorrect
         if (splitDate.length != 3){
             return true;
