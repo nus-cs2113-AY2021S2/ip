@@ -42,12 +42,8 @@ public class Duke {
                 MessagePrinter.printGenericErrorMessage();
                 break;
             }
-
             System.out.println(dottedLine);
-
         }
-
         MessagePrinter.printByeMessage();
-
     }
 }

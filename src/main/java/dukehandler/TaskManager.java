@@ -20,7 +20,6 @@ public class TaskManager {
     public static void addNewTask(String taskType, String fullCommand) {
         String[] part = fullCommand.split(taskType);
         try {
-
             checkNewTaskToAdd(taskType, part[1].trim());
             switch (taskType) {
             case "todo":
@@ -36,7 +35,6 @@ public class TaskManager {
                 break;
             }
             printAddedTask();
-
         } catch (ExceptionInvalidCommand eic) {
             MessagePrinter.printInvalidCommandMessage(taskType);
         } catch (ArrayIndexOutOfBoundsException | ExceptionsEmptyCommandDescription oob) {

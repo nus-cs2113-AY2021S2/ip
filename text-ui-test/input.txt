@@ -23,6 +23,8 @@ done 4
 list
 done 3
 list
+done 4
+done 3
 help
 hello
 hey
