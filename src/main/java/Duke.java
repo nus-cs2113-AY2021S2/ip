@@ -19,58 +19,23 @@ public class Duke {
             if (inputString.equalsIgnoreCase("bye")){
                 break;
             } else if (inputStringSplit[0].equalsIgnoreCase("done")){
-                MarkAsDone(inputStringSplit[1]);
+                if (inputStringSplit.length>1){
+                    MarkAsDone(inputStringSplit[1]);
+                } else {
+                    DukeException.doneWithoutNo();
+                }
             } else if (inputStringSplit[0].equalsIgnoreCase("list")){
                 PrintList(0, listIndex);
-            } else if (inputStringSplit.length > 1){
-                AddToList(inputStringSplit[0],inputStringSplit[1]);
-            } else {
-                errorMsg();
+            } else if (AddToList.keywordCheck(inputStringSplit[0])){
+                if (inputStringSplit.length > 1){
+                    AddToList.AddToList(inputStringSplit[0],inputStringSplit[1]);
+                } else {
+                    DukeException.taskDescriptionEmpty();
+                }
             }
-        }
-    }
-
-    public static void errorMsg(){
-        System.out.println(" Oh this input is not recognised, try again^_^");
-    }
-
-    public static void AddToList(String tasktype, String task){
-        if (tasktype.equalsIgnoreCase("todo")) {
-            lists[listIndex][0] = "T";
-            lists[listIndex][1] = " ";
-            lists[listIndex][2] = task;
-            lists[listIndex][3] = " ";
-            System.out.println(" Task added! ^_^ [");
-            PrintList(listIndex, listIndex + 1);
-            listIndex += 1;
-        } else if (tasktype.equalsIgnoreCase("deadline")) {
-            if(task.contains("/")){
-                String[] TaskAndTime = task.split("/", 2);
-                lists[listIndex][0] = "T";
-                lists[listIndex][1] = " ";
-                lists[listIndex][2] = TaskAndTime[0];
-                lists[listIndex][3] = "(at:" + TaskAndTime[1] + ")";
-                System.out.println(" Task added! ^_^ [");
-                PrintList(listIndex, listIndex + 1);
-                listIndex += 1;
-            } else{
-                errorMsg();
+             else {
+                DukeException.illegalInput();
             }
-        } else if (tasktype.equalsIgnoreCase("event")) {
-            if(task.contains("/")){
-                String[] TaskAndTime = task.split("/", 2);
-                lists[listIndex][0] = "E";
-                lists[listIndex][1] = " ";
-                lists[listIndex][2] = TaskAndTime[0];
-                lists[listIndex][3] = "(at:" + TaskAndTime[1] + ")";
-                System.out.println(" Task added! ^_^ [");
-                PrintList(listIndex, listIndex + 1);
-                listIndex += 1;
-            } else{
-                errorMsg();
-            }
-        } else {
-            errorMsg();
         }
     }
     public static void PrintList(int startIndex, int endIndex) {
@@ -82,16 +47,13 @@ public class Duke {
     public static void MarkAsDone(String donetask){
         int donetaskIndex = Integer.parseInt(donetask) - 1;
         if (donetaskIndex<listIndex) {
-            System.out.println("Yay! This task is done!");
+            System.out.println(" Yay! This task is done!");
             lists[donetaskIndex][1] = "X";
             PrintList(donetaskIndex, donetaskIndex + 1);
         } else {
-            errorMsg();
+            DukeException.exceedListLength(donetaskIndex);
         }
     }
-
-
-
     public static void greetings(){
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
