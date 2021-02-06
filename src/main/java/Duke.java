@@ -1,3 +1,11 @@
+import duke.exceptions.EmptyInputException;
+import duke.exceptions.IncompleteInputException;
+import duke.exceptions.InvalidDateInputException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -51,6 +59,7 @@ public class Duke {
                 break;
             case "deadline":
                 by = extractTime(taskName);
+                System.out.println("Debug message 1: " + by);
                 taskName  = extractTaskName(taskName);
                 Task d = new Deadline(taskName, by);
                 printDividingLine();
