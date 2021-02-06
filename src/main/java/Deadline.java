@@ -25,7 +25,7 @@ public class Deadline extends Task{
 
     @Override
     public String addEnd(String s){
-        String end = " (" + "by:" + this.by + ")";
+        String end = " (" + "by: " + this.by + ")";
         return s.concat(end);
     }
 }

@@ -23,7 +23,7 @@ public class Event extends Task {
 
     @Override
     public String addEnd(String s){
-        String end = " (" + "at:" + this.at + ")";
+        String end = " (" + "at: " + this.at + ")";
         return s.concat(end);
     }
 

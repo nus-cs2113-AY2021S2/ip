@@ -3,6 +3,7 @@ public class Task {
     protected boolean isDone;
 
     public static int taskCount = 0;
+    public static boolean isFull = false;
 
     public Task() {
         this.job = null;
@@ -55,3 +56,5 @@ public class Task {
 
     }
 }
+
+
