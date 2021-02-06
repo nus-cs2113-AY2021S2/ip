@@ -1,9 +1,16 @@
+import error.DoneCheckedException;
+import error.ListEmptyException;
+import error.WrongFormatException;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
 import java.util.Scanner;
 
 public class Duke {
-    public static int MAX_SIZE = 100;
+    public static final int MAX_SIZE = 100;
     public static Task[] list = new Task[MAX_SIZE];
-    private static int LIST_COUNTER = 0;
+    private static int listCounter = 0;
 
     /**
      * Loop through all possible commands
@@ -14,29 +21,30 @@ public class Duke {
         Scanner line = new Scanner(System.in);
         while (line.hasNextLine()) {
             String input = line.nextLine();
-            if(LIST_COUNTER == 100){
-                error(6);
-                return;
-            }
-            if (input.equalsIgnoreCase("bye")) {
-                PrintOutput.printExit();
-                System.exit(1);
-            } else if (input.equalsIgnoreCase("help")) {
-                System.out.println(PrintOutput.HELP_MESSAGE);
-            } else if (input.toLowerCase().startsWith("done")) {
-                doneTask(input);
-            } else if (input.equalsIgnoreCase("list")) {
-                printList();
-            } else if (input.toLowerCase().startsWith("todo")){
-                addTodo(input);
-            } else if (input.toLowerCase().startsWith("deadline")){
-                addDeadline(input);
-            } else if (input.toLowerCase().startsWith("event")){
-                addEvent(input);
-            } else {
-                System.out.println("¯\\_(ツ)_/¯ That is an invalid command!");
-                System.out.println("Enter \"HELP\" for commands!");
-                PrintOutput.printBorder();
+            try{
+                if (listCounter>=100) {
+                    throw new IndexOutOfBoundsException();
+                }
+                if (input.equalsIgnoreCase("bye")) {
+                    PrintOutput.printExit();
+                    System.exit(1);
+                } else if (input.equalsIgnoreCase("help")) {
+                    System.out.println(PrintOutput.HELP_MESSAGE);
+                } else if (input.toLowerCase().startsWith("done")) {
+                    doneTask(input);
+                } else if (input.equalsIgnoreCase("list")) {
+                    printList();
+                } else if (input.toLowerCase().startsWith("todo")) {
+                    addTodo(input);
+                } else if (input.toLowerCase().startsWith("deadline")) {
+                    addDeadline(input);
+                } else if (input.toLowerCase().startsWith("event")) {
+                    addEvent(input);
+                } else {
+                    checkError("INVALID_COMMAND");
+                }
+            } catch (IndexOutOfBoundsException e) {
+                checkError("INDEX_EXCEEDS_LIST");
             }
         }
     }
@@ -56,21 +64,23 @@ public class Duke {
      * @param input - name of task
      */
     public static void addTodo(String input) {
-        if(input.equals("todo")){
-            error(5);
-            return;
-        }
-        String command = input.substring(5);
-        if(!command.isBlank()){
+        try{
+            if (input.equals("todo")) {
+                throw new WrongFormatException();
+            }
+            String command = input.substring(5);
+            if (command.isBlank()) {
+                throw new WrongFormatException();
+            }
             Todo t = new Todo(command);
-            list[LIST_COUNTER] = t;
-            LIST_COUNTER += 1;
+            list[listCounter] = t;
+            listCounter += 1;
             System.out.println("I have added [" + t.getType() + "]["
                 + t.getStatusIcon() + "] \""
                 + t.getName() + "\" " + "to the List!");
             printNoOfTask();
-        } else{
-            error(5);
+        } catch(WrongFormatException e) {
+            checkError("INVALID_FORMAT");
         }
     }
 
@@ -79,24 +89,26 @@ public class Duke {
      * @param input - add Deadline
      */
     public static void addDeadline(String input) {
-        if(input.equals("deadline")){
-            error(5);
-            return;
-        }
-        String command = input.substring(9);
-        if(command.contains(" /by ")) {
+        try{
+            if (input.equals("deadline")) {
+                throw new WrongFormatException();
+            }
+            String command = input.substring(9);
+            if (!command.contains(" /by ")) {
+                throw new WrongFormatException();
+            }
             String[] parts = command.split(" /by ");
             String description = parts[0];
             String date = parts[1];
             Deadline t = new Deadline(description,date);
-            list[LIST_COUNTER] = t;
-            LIST_COUNTER += 1;
+            list[listCounter] = t;
+            listCounter += 1;
             System.out.println("I have added [" + t.getType() + "]["
-                + t.getStatusIcon() + "] \""
-                + t.getName() + t.getDate() + "\"" + " to the List!");
+                    + t.getStatusIcon() + "] \""
+                    + t.getName() + t.getDate() + "\"" + " to the List!");
             printNoOfTask();
-        } else {
-            error(5);
+        } catch (WrongFormatException e) {
+            checkError("INVALID_FORMAT");
         }
     }
 
@@ -105,24 +117,26 @@ public class Duke {
      * @param input - add event
      */
     public static void addEvent(String input){
-        if(input.equals("event")){
-            error(5);
-            return;
-        }
-        String command = input.substring(6);
-        if(command.contains (" /at ")){
+        try {
+            if (input.equals("event")) {
+                throw new WrongFormatException();
+            }
+            String command = input.substring(6);
+            if (!command.contains(" /at ")) {
+                throw new WrongFormatException();
+            }
             String[] parts = command.split(" /at ");
             String description = parts[0];
             String date = parts[1];
             Event t = new Event(description,date);
-            list[LIST_COUNTER] = t;
-            LIST_COUNTER += 1;
+            list[listCounter] = t;
+            listCounter += 1;
             System.out.println("I have added [" + t.getType() + "]["
-                + t.getStatusIcon() + "] \""
-                + t.getName() + t.getDate() + "\"" + " to the List!");
+                    + t.getStatusIcon() + "] \""
+                    + t.getName() + t.getDate() + "\"" + " to the List!");
             printNoOfTask();
-        } else {
-            error(5);
+        } catch (WrongFormatException e) {
+            checkError("INVALID_FORMAT");
         }
     }
 
@@ -131,21 +145,22 @@ public class Duke {
      * @param input - index of task
      */
     private static void doneTask(String input) {
-        if (input.equalsIgnoreCase("done")) {
-            error(1);
-            return;
-        }
-        if (input.substring(5).matches("[0-9]+")) {
+        try{
+            if (input.equalsIgnoreCase("done")) {
+                throw new WrongFormatException();
+            }
+            if (!input.substring(5).matches("[0-9]+")) {
+                throw new WrongFormatException();
+            }
             int index = Integer.parseInt(input.substring(5));
-            if (index > LIST_COUNTER) {
-                error(2);
-                return;
+            if (index > listCounter) {
+                throw new IndexOutOfBoundsException();
             }
             checkTask(index - 1);
-        } else if (input.substring(5).isBlank()) {
-            error(1);
-        } else {
-            error(1);
+        } catch (IndexOutOfBoundsException e) {
+            checkError("INDEX_EXCEEDS_LIST");
+        } catch (WrongFormatException e) {
+            checkError("WRONG_DONE_FORMAT");
         }
     }
 
@@ -154,15 +169,18 @@ public class Duke {
      * @param index - index of list
      */
     public static void checkTask(int index){
-        if (list[index].isDone) {
-            error(4);
-        } else {
+        try{
+            if (list[index].checkIsDone()) {
+                throw new DoneCheckedException();
+            }
             System.out.println("Good Job, I will mark this as done!");
             list[index].markAsDone();
             System.out.println("[" + list[index].getType() + "] ["
-                + list[index].getStatusIcon() + "] " + list[index].getName()
-                + list[index].getDate());
+                    + list[index].getStatusIcon() + "] " + list[index].getName()
+                    + list[index].getDate());
             PrintOutput.printBorder();
+        } catch (DoneCheckedException e) {
+            checkError("DONE_CHECKED_ERROR");
         }
     }
 
@@ -170,8 +188,8 @@ public class Duke {
      * Print the number of task in list
      */
     public static void printNoOfTask() {
-        System.out.print("You have " + LIST_COUNTER + " task");
-        if(LIST_COUNTER > 1){
+        System.out.print("You have " + listCounter + " task");
+        if (listCounter > 1) {
             System.out.print("s");
         }
         System.out.print(" in total!\n");
@@ -182,58 +200,62 @@ public class Duke {
      * print List
      */
     public static void printList(){
-        if (LIST_COUNTER > 0) {
+        try {
+            if (!(listCounter>0)) {
+                throw new ListEmptyException();
+            }
             System.out.println(" LIST");
-            for (int i = 0; i < LIST_COUNTER; i++) {
+            for (int i = 0; i < listCounter; i++) {
                 System.out.println(i + 1 +  ". [" + list[i].getType() +  "] " + "["
-                    +list[i].getStatusIcon() + "] " + list[i].getName()
-                    + list[i].getDate());
+                        +list[i].getStatusIcon() + "] " + list[i].getName()
+                        + list[i].getDate());
             }
             PrintOutput.printBorder();
-        } else {
-            error(3);
+        } catch (ListEmptyException e) {
+            checkError("EMPTY_LIST");
         }
     }
 
-
     /**
+     * Check Error Method
      * Returns error code message
-     * Error Code 1: done command in wrong format
-     * Error Code 2: done Index is more than size of array
-     * Error Code 3: Timetable is empty
-     * Error Code 4: Task already marked done
-     * Error Code 5: Invalid Command format
-     * @param code - error code
+     * @param ERROR_MESSAGE - Error Message
      */
-    public static void error(int code) {
-        switch (code) {
-            case 1:
-                System.out.println("Error! You must enter an integer after"
+    public static void checkError(String ERROR_MESSAGE) {
+        switch (ERROR_MESSAGE) {
+        case "WRONG_DONE_FORMAT":
+            System.out.println("Error! You must enter an integer after"
                     + " \"done\"!");
-                PrintOutput.printBorder();
-                break;
-            case 2:
-                System.out.println("Error! You do not have that "
+            PrintOutput.printBorder();
+            break;
+        case "INDEX_EXCEEDS_LIST":
+            System.out.println("Error! You do not have that "
                     + "many items in your list!");
-                PrintOutput.printBorder();
+            PrintOutput.printBorder();
+            break;
+        case "EMPTY_LIST":
+            System.out.println("Your list is empty! Add something!");
+            PrintOutput.printBorder();
                 break;
-            case 3:
-                System.out.println("Your list is empty! Add something!");
-                PrintOutput.printBorder();
-                break;
-            case 4:
-                System.out.println("You have already marked it as Done!");
-                PrintOutput.printBorder();
-                break;
-            case 5:
-                System.out.println("¯\\_(ツ)_/¯ That is an invalid format!");
-                System.out.println("Enter HELP for commands!");
-                PrintOutput.printBorder();
-                break;
-            case 6:
-                System.out.println("List is full!");
-                PrintOutput.printBorder();
-                break;
+        case "DONE_CHECKED_ERROR":
+             System.out.println("You have already marked it as Done!");
+             PrintOutput.printBorder();
+             break;
+        case "INVALID_FORMAT":
+             System.out.println("¯\\_(ツ)_/¯ That is an invalid format!");
+             System.out.println("Enter HELP for commands!");
+             PrintOutput.printBorder();
+             break;
+        case "LIST_FULL":
+            System.out.println("List is full!");
+            PrintOutput.printBorder();
+            break;
+        case "INVALID_COMMAND":
+            System.out.println("¯\\_(ツ)_/¯ That is an invalid command!");
+            System.out.println("Enter \"HELP\" for commands!");
+            PrintOutput.printBorder();
+            break;
+
         }
     }
 }

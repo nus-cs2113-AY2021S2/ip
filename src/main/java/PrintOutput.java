@@ -32,7 +32,7 @@ public class PrintOutput {
             + "   ノ )　　Lﾉ \n"
             + "  (_／";
         printBorder();
-        System.out.println("Welcome to Duke v1.4 ----------- Latest Update: 31/1/21");
+        System.out.println("Welcome to Duke v1.5 ----------- Latest Update: 6/2/21");
         System.out.println("Developed by: Oscar Lai");
         printBorder();
         System.out.println("Good Day, I'm Alfred.\n" + alfred);
@@ -43,18 +43,17 @@ public class PrintOutput {
     public static void printExit() {
         String wave = " __      __\n"
             + "( _\\    /_ )\n"
-            + " \\ _\\  /_ / \n"
+            + " \\ _\\  /_ /\n"
             + "  \\ _\\/_ /_ _\n"
             + "  |_____/_/ /|\n"
             + "  (  (_)__)J-)\n"
             + "  (  /`.,   /\n"
             + "   \\/  ;   /\n"
             + "    | === |See you again!\n";
-        printBorder();
         System.out.println("Pleasure serving you...\n" + wave);
         printBorder();
         System.out.println("Developed by: Oscar Lai\n"
-            + "Version 1.4");
+                + "Version 1.5");
         printBorder();
     }
 

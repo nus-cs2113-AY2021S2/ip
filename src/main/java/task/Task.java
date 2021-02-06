@@ -1,3 +1,5 @@
+package task;
+
 public class Task {
     private final String name;
     protected boolean isDone;
@@ -9,6 +11,10 @@ public class Task {
 
     public void markAsDone(){
         isDone = true;
+    }
+
+    public boolean checkIsDone(){
+        return isDone;
     }
 
     public String getName() {
