@@ -6,22 +6,25 @@ public class AddToList extends Duke {
             lists[listIndex][2] = task;
             lists[listIndex][3] = " ";
             TaskAddedText();
-        } else {
+        } else if (taskType.equalsIgnoreCase("deadline")) {
             if (task.contains("/")) {
-                String[] TaskAndTime= task.split("/", 2);
-                if (taskType.equalsIgnoreCase("deadline")) {
-                    lists[listIndex][0] = "D";
-                    lists[listIndex][1] = " ";
-                    lists[listIndex][2] = TaskAndTime[0].trim();
-                    lists[listIndex][3] = " (by:" + TaskAndTime[1].trim() + ")";
-                    TaskAddedText();
-                } else if (taskType.equalsIgnoreCase("event")) {
-                    lists[listIndex][0] = "E";
-                    lists[listIndex][1] = " ";
-                    lists[listIndex][2] = TaskAndTime[0].trim();
-                    lists[listIndex][3] = " (at:" + TaskAndTime[1].trim() + ")";
-                    TaskAddedText();
-                }
+                String[] TaskAndTime = task.split("/", 2);
+                lists[listIndex][0] = "D";
+                lists[listIndex][1] = " ";
+                lists[listIndex][2] = TaskAndTime[0];
+                lists[listIndex][3] = "(by:" + TaskAndTime[1] + ")";
+                TaskAddedText();
+            } else {
+                DukeException.taskWithoutTime();
+            }
+        } else if (taskType.equalsIgnoreCase("event")) {
+            if (task.contains("/")) {
+                String[] TaskAndTime = task.split("/", 2);
+                lists[listIndex][0] = "E";
+                lists[listIndex][1] = " ";
+                lists[listIndex][2] = TaskAndTime[0];
+                lists[listIndex][3] = "(at:" + TaskAndTime[1] + ")";
+                TaskAddedText();
             } else {
                 DukeException.taskWithoutTime();
             }
@@ -29,7 +32,7 @@ public class AddToList extends Duke {
     }
 
     public static void TaskAddedText() {
-    System.out.println(" Task added! ^_^");
+        System.out.println(" Task added! ^_^");
         PrintList(listIndex, listIndex + 1);
         listIndex += 1;
     }
