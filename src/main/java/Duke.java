@@ -12,6 +12,7 @@ public class Duke {
     }
 
     /*Methods to process the input of the user.
+    If input is not valid, returns string nonsense.
     The type of task is indicated by the first substring and the task description is found after the first blank space.
     If a forward slash present,  ths substring is split into the task and the end date which is indicated by the slash.*/
     public static String extractTask(String input) {
@@ -73,7 +74,6 @@ public class Duke {
         int count = 0;
         Scanner sc = new Scanner(System.in);
         Boolean isSame = true;
-
         while (isSame) {
             String input = sc.nextLine();
             String stringTask = extractTask(input);
