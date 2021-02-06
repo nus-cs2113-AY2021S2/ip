@@ -1,28 +1,10 @@
 import java.util.Scanner;
 
+
 public class Duke {
-    public static class Tasks{
-        private String description;
-        private boolean isDone;
-        public Tasks(String description){
-            this.description = description;
-            this.isDone =false;
-        }
-        public void setDescription(String description) {
-            this.description = description;
-        }
-
-        public void setDone(boolean done) {
-            isDone = done;
-        }
-
-        public String getDescription() {
-            return this.description;
-        }
-    }
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        Tasks[] inputTasks = new Tasks[100];
+        Tasks[] inputTasks = new Tasks[100]; // will act like pointers so you have to create different objects all the time.
 
         int counter = 0;
         String logo = " ____        _        \n"
@@ -42,9 +24,17 @@ public class Duke {
                 System.out.println("____________________________________________________________");
                 System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i< counter; i++) {
-                    System.out.println(i+1+ ".[ ] " + inputTasks[i].getDescription());
+                    System.out.println(i+1+ ".[ " +inputTasks[i].setDisplay()+ " ]" + inputTasks[i].getDescription());
                 }
                 System.out.println("____________________________________________________________");
+            }
+            else if(input.contains("done")){
+                int num = Integer.parseInt(input.split(" ")[1]);
+                System.out.println("____________________________________________________________");
+                System.out.println("Nice! I've marked this task as done: ");
+                System.out.println("[\u2718] " + inputTasks[num-1].getDescription());
+                System.out.println("____________________________________________________________");
+                inputTasks[num-1].setDone();
             }
             else {
                 Tasks temp = new Tasks(input);
@@ -52,8 +42,8 @@ public class Duke {
                 System.out.println("____________________________________________________________");
                 System.out.println("added: " + input);
                 System.out.println("____________________________________________________________");
+                counter++;
             }
-            counter++;
             input = in.nextLine();
         }
         System.out.println("____________________________________________________________");
