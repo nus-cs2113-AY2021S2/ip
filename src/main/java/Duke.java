@@ -1,3 +1,7 @@
+import errors.DescriptionSplitException;
+import errors.ListFullException;
+import errors.MissingKeywordException;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -37,11 +41,20 @@ public class Duke {
             + "    undo n - Mark nth item as not done.\n" + LINE;
     private static final String MESSAGE_MARK_DONE =  LINE + "\nMarked as done:\n";
     private static final String MESSAGE_MARK_UNDONE = LINE + "\nMarked as undone:\n";
-    private static final String MESSAGE_ERROR = LINE + "\n"
+
+
+    //Errors
+    private static final String MESSAGE_UNRECOGNIZED_COMMAND = LINE + "\n"
             + "8K: Sorry. I do not understand.\n" + LINE;
+    private static final String MESSAGE_OUT_OF_BOUNDS = LINE + "\n"
+            + "8K: Out of bounds.\n" + LINE;
     private static final String MESSAGE_LIST_FULL = LINE + "\n"
             + "8K: List is full." + "\n" + LINE;
     private static final String MESSAGE_EMPTY_LIST = "<< List is empty >>\n" + LINE;
+    private static final String MESSAGE_MISSING_AT_KEYWORD = LINE + "\n"
+            + "8K: Please include \"/at\" to specify event info.\n" + LINE;
+    private static final String MESSAGE_MISSING_BY_KEYWORD = LINE + "\n"
+            + "8K: Please include \"/by\" to specify due date.\n" + LINE;
 
 
     //Constants
@@ -100,7 +113,7 @@ public class Duke {
             addDeadline(input);
         } else {
             //Prints error (unrecognized command)
-            System.out.println(MESSAGE_ERROR);
+            System.out.println(MESSAGE_UNRECOGNIZED_COMMAND);
         }
     }
 
@@ -141,21 +154,22 @@ public class Duke {
     private static void setDoneStatus(String input, Boolean isDone) {
         try {
             int position = Integer.parseInt(input.split(" ")[1]) - 1;
-            if (position < taskCount) {
-                tasks[position].setDone(isDone);
-                if (isDone) {
-                    System.out.print(MESSAGE_MARK_DONE);
-                } else {
-                    System.out.print(MESSAGE_MARK_UNDONE);
-                }
-                tasks[position].printStatus();
-                System.out.println("\n" + LINE);
-            } else {
+            if (position >= taskCount || position < 0) {
                 //Out of bounds
-                System.out.println(MESSAGE_ERROR);
+                throw new IndexOutOfBoundsException();
             }
+            tasks[position].setDone(isDone);
+            if (isDone) {
+                System.out.print(MESSAGE_MARK_DONE);
+            } else {
+                System.out.print(MESSAGE_MARK_UNDONE);
+            }
+            tasks[position].printStatus();
+            System.out.println("\n" + LINE);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println(MESSAGE_OUT_OF_BOUNDS);
         } catch (Exception e) {
-            System.out.println(MESSAGE_ERROR);
+            System.out.println(MESSAGE_UNRECOGNIZED_COMMAND);
         }
     }
 
@@ -166,15 +180,18 @@ public class Duke {
      * @param input Input value by user.
      */
     public static void addToDo(String input) {
-        if (taskCount >= MAX_SIZE) {
-            //Array full
+        try {
+            if (taskCount >= MAX_SIZE) {
+                //Array full
+                throw new ListFullException();
+            }
+            input = input.substring(LENGTH_OF_WORD_TODO + 1);
+            tasks[taskCount] = new ToDoTask(input);
+            taskCount++;
+            printAddedContent(input);
+        } catch (ListFullException e) {
             System.out.println(MESSAGE_LIST_FULL);
-            return;
         }
-        input = input.substring(LENGTH_OF_WORD_TODO + 1);
-        tasks[taskCount] = new ToDoTask(input);
-        taskCount++;
-        printAddedContent(input);
     }
 
 
@@ -185,23 +202,28 @@ public class Duke {
      * @param input Input value by user.
      */
     public static void addEvent(String input) {
-        if (!input.contains(" /at ")) {
-            System.out.println(MESSAGE_ERROR);
-            return;
-        }
-        String[] inputSplit = input.substring(LENGTH_OF_WORD_EVENT + 1).split(" /at ");
-        if (taskCount >= MAX_SIZE) {
-            //Array full
+        try {
+            if (!input.contains(" /at ")) {
+                throw new MissingKeywordException();
+            }
+            String[] inputSplit = input.substring(LENGTH_OF_WORD_EVENT + 1).split(" /at ");
+            if (taskCount >= MAX_SIZE) {
+                //Array full
+                throw new ListFullException();
+            } else if (inputSplit.length < 2) {
+                //Invalid input
+                throw new DescriptionSplitException();
+            }
+            tasks[taskCount] = new EventTask(inputSplit[0], inputSplit[1]);
+            taskCount++;
+            printAddedContent(inputSplit[0]);
+        } catch (DescriptionSplitException e) {
+            System.out.println(MESSAGE_UNRECOGNIZED_COMMAND);
+        } catch (ListFullException e) {
             System.out.println(MESSAGE_LIST_FULL);
-            return;
-        } else if (inputSplit.length < 2) {
-            //Invalid input
-            System.out.println(MESSAGE_ERROR);
-            return;
+        } catch (MissingKeywordException e) {
+            System.out.println(MESSAGE_MISSING_AT_KEYWORD);
         }
-        tasks[taskCount] = new EventTask(inputSplit[0], inputSplit[1]);
-        taskCount++;
-        printAddedContent(inputSplit[0]);
     }
 
 
@@ -212,23 +234,28 @@ public class Duke {
      * @param input Input value by user.
      */
     public static void addDeadline(String input) {
-        if (!input.contains(" /by ")) {
-            System.out.println(MESSAGE_ERROR);
-            return;
-        }
-        String[] inputSplit = input.substring(LENGTH_OF_WORD_DEADLINE + 1).split(" /by ");
-        if (taskCount >= MAX_SIZE) {
-            //Array full
+        try {
+            if (!input.contains(" /by ")) {
+                throw new MissingKeywordException();
+            }
+            String[] inputSplit = input.substring(LENGTH_OF_WORD_DEADLINE + 1).split(" /by ");
+            if (taskCount >= MAX_SIZE) {
+                //Array full
+                throw new ListFullException();
+            } else if (inputSplit.length < 2) {
+                //Invalid input
+                throw new DescriptionSplitException();
+            }
+            tasks[taskCount] = new DeadlineTask(inputSplit[0], inputSplit[1]);
+            taskCount++;
+            printAddedContent(inputSplit[0]);
+        } catch (DescriptionSplitException e) {
+            System.out.println(MESSAGE_UNRECOGNIZED_COMMAND);
+        } catch (ListFullException e) {
             System.out.println(MESSAGE_LIST_FULL);
-            return;
-        } else if (inputSplit.length < 2) {
-            //Invalid input
-            System.out.println(MESSAGE_ERROR);
-            return;
+        } catch (MissingKeywordException e) {
+            System.out.println(MESSAGE_MISSING_BY_KEYWORD);
         }
-        tasks[taskCount] = new DeadlineTask(inputSplit[0], inputSplit[1]);
-        taskCount++;
-        printAddedContent(inputSplit[0]);
     }
 
 

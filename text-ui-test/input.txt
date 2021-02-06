@@ -1,7 +1,9 @@
 help
 list
 todo apple
+event apple
 event apple /at pear
+deadline apple
 deadline apple /by pear
 list
 done 2
