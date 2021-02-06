@@ -80,7 +80,6 @@ public class MessagePrinter {
             if (ifNumber == 0) {
                 printEmptyListMessage();
             } else {
-                System.out.println();
                 System.out.println(" After the 'done' command,\n"
                         + " enter a valid integer within this range:\n"
                         + " [1, " + ifNumber + "]\n"
