@@ -38,7 +38,7 @@ public class Duke {
             System.out.println("Here are the tasks in your list:");
             for (int i = 1; i < taskCount; i++) {
                 System.out.println(i + ". " + tasks[i].getTaskType() + " " + tasks[i].getStatusIcon()
-                        + tasks[i].getDescription());
+                        + tasks[i].getDescription() + tasks[i].getDateTime());
             }
         } else {
             System.out.println("Please input a task.");
