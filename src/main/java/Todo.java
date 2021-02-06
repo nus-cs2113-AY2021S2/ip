@@ -9,4 +9,11 @@ public class Todo extends Task{
     public String getTaskType(){
         return ALPHABET_T;
     }
+
+    @Override
+    public void printInputErrorMessage(String userInput) {
+        super.printInputErrorMessage(userInput);
+        System.out.println("  todo [task name]\n"
+                + "    e.g. todo read book");
+    }
 }

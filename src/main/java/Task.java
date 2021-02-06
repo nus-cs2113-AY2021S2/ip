@@ -27,13 +27,23 @@ public class Task {
     }
 
     // Add Task to taskList and increment taskCount
-    public void addTask(){
+    public void addTask() throws
+            EmptyInputException, IncompleteInputException, InvalidDateInputException {
+        // Throw Exception if no valid task is detected
+        if (isEmpty(this)){
+            throw new EmptyInputException();
+        }
+
         System.out.println("Got it, I've added this task:");
         System.out.print("  ");
         this.printTaskInformation();
         System.out.println("");
         taskList[taskCount]= this;
         taskCount++;
+        printSuccessfulTaskAddition();
+    }
+
+    private void printSuccessfulTaskAddition() {
         if(taskCount == 1) {
             System.out.println("Now you have " + taskCount + " task in the list.");
         }
@@ -80,5 +90,21 @@ public class Task {
 
     private void printTaskName(){
         System.out.print(this.description);
+    }
+
+    private boolean isEmpty(Task t){
+        return t.description.equals("");
+    }
+
+    public void printInputErrorMessage(String userInput) {
+        System.out.println("This command entered is incomplete: "
+                + userInput + "\n");
+        System.out.println("Please enter the command as follows:");
+    }
+
+    public void printInvalidDateInputMessage(String userInput) {
+        System.out.println("The date entered is invalid: "
+                + userInput + "\n");
+        System.out.println("Please enter the command as follows:");
     }
 }
