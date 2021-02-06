@@ -4,10 +4,9 @@ public class Duke {
     public static void main(String[] args) {
         String taskType;
         String taskName;
-        String by;
-        String at;
+        String by = "";
+        String at = "";
         Scanner splitInputScanner;
-        String[] userInputSplitted = {""};
 
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -28,13 +27,16 @@ public class Duke {
 
         // Separate taskType and taskName(may contain
         // dates/time) if applicable
+        userInput = userInput.trim();   // removes leading and trailing spaces
         if(isOneWord(userInput)) {
             taskType = userInput;
-            taskName = userInput;   // dummy value
+            taskName = "";
         }
         else{
             splitInputScanner = new Scanner(userInput);
-            taskType = splitInputScanner.next();
+            // Extract task type
+            taskType = splitInputScanner.next().toLowerCase();
+            // Extract task description
             taskName = splitInputScanner.nextLine();
         }
 
@@ -44,7 +46,7 @@ public class Duke {
             case "todo":
                 Task t = new Todo(taskName);
                 printDividingLine();
-                t.addTask();
+                addTaskWithValidation(userInput, t);
                 printDividingLine();
                 break;
             case "deadline":
@@ -52,16 +54,15 @@ public class Duke {
                 taskName  = extractTaskName(taskName);
                 Task d = new Deadline(taskName, by);
                 printDividingLine();
-                d.addTask();
+                addTaskWithValidation(userInput, d);
                 printDividingLine();
                 break;
             case "event":
                 at = extractTime(taskName);
                 taskName = extractTaskName(taskName);
                 Task e = new Event(taskName, at);
-                //e.setTime(time);
                 printDividingLine();
-                e.addTask();
+                addTaskWithValidation(userInput, e);
                 printDividingLine();
                 break;
             case "list":
@@ -83,7 +84,7 @@ public class Duke {
             userInput = userInputScanner.nextLine();
             if(isOneWord(userInput)) {
                 taskType = userInput;
-                taskName = userInput;
+                taskName = "";
             }
             else{
                 splitInputScanner = new Scanner(userInput);
@@ -94,6 +95,16 @@ public class Duke {
 
         // Print Bye Message
         printByeMessage();
+    }
+
+    private static void addTaskWithValidation(String userInput, Task t) {
+        try {
+            t.addTask();
+        } catch (EmptyInputException | IncompleteInputException e){
+            t.printInputErrorMessage(userInput);
+        } catch (InvalidDateInputException e){
+            t.printInvalidDateInputMessage(userInput);
+        }
     }
 
     private static String getTaskIndex(String userInput) {
@@ -121,25 +132,51 @@ public class Duke {
         printDividingLine();
     }
 
-    private static void printDividingLine() {
-        System.out.println("_____________________________________________________");
-    }
-
     private static void printByeMessage() {
         printDividingLine();
         System.out.println("Bye. Hope to see you again soon! :3");
         printDividingLine();
     }
 
+    private static void printDividingLine() {
+        System.out.println("_____________________________________________________");
+    }
+
     private static String extractTaskName(String s){
+        // If s is empty
+        if (isEmpty(s)){
+            return "";
+        }
+
         String[] splitArray = s.split("/");
+
         return splitArray[0];
     }
 
     private static String extractTime(String s){
+        // If s is empty
+        if (isEmpty(s)){
+            return "";
+        }
+
         String[] splitArray = s.split("/");
+
+        // If there is no date field
+        if (splitArray.length < 2){
+            return "";
+        }
+
+        // If s is invalid input
+        if (splitArray[1].split(" ").length != 2){
+            return "";
+        }
+
         Scanner sc = new Scanner(splitArray[1]);
-        sc.next();
-        return sc.nextLine();
+        sc.next();              // remove 'by' or 'at'
+        return sc.nextLine();   // extract time/date
+    }
+
+    private static boolean isEmpty(String s){
+        return s.equals("");
     }
 }
