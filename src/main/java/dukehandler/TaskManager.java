@@ -21,17 +21,25 @@ public class TaskManager {
         String[] part = fullCommand.split(taskType);
         try {
             checkNewTaskToAdd(taskType, part[1].trim());
+            String description = part[1].trim();
+            String[] descriptionAndTime;
+            String taskName;
+            String timeOrDate;
             switch (taskType) {
             case "todo":
-                tasks[index] = new ToDo(part[1].trim());
+                tasks[index] = new ToDo(description);
                 break;
             case "deadline":
-                String[] time = part[1].split("/by");
-                tasks[index] = new Deadline(time[0].trim(), time[1].trim());
+                descriptionAndTime = description.split("/by");
+                taskName = descriptionAndTime[0].trim();
+                timeOrDate = descriptionAndTime[1].trim();
+                tasks[index] = new Deadline(taskName, timeOrDate);
                 break;
             case "event":
-                time = part[1].split("/at");
-                tasks[index] = new Event(time[0].trim(), time[1].trim());
+                descriptionAndTime = description.split("/at");
+                taskName = descriptionAndTime[0].trim();
+                timeOrDate = descriptionAndTime[1].trim();
+                tasks[index] = new Event(taskName, timeOrDate);
                 break;
             }
             printAddedTask();
