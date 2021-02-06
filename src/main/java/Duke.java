@@ -22,7 +22,6 @@ public class Duke {
     private static void runProgram() {
         Task[] taskList = new Task[MAX_TASK];
         Scanner in = new Scanner(System.in);
-        boolean isFull = false;
 
 
         //Loop to receive response.
@@ -31,15 +30,10 @@ public class Duke {
             String input = in.nextLine();
             int command = parseCommand(input);
 
-            //HANDLE FULL LIST
-            if (Task.taskCount == MAX_TASK && !isFull) {
-                printListFullWarning();
-                isFull = true;
-                continue;
-            }
 
-            // This check only allows commands "list" and "bye" to pass when list is full
-            if (isFull && !isAllowedWhenListFull(command)) {
+            try {
+                checkListCapacity(command);
+            } catch (RestrictedCommandException e) {
                 printListFullWarning();
                 continue;
             }
@@ -76,7 +70,6 @@ public class Duke {
                 runAdd(taskList, input);
             }
         }
-
 
     }
 
@@ -166,8 +159,20 @@ public class Duke {
         return input.toUpperCase().startsWith(command.toUpperCase());
     }
 
+
     private static boolean isAllowedWhenListFull(int command) {
         return (command == LIST_COMMAND || command == BYE_COMMAND);
+    }
+
+
+    private static void checkListCapacity(int command) throws RestrictedCommandException {
+        if (Task.taskCount == MAX_TASK && !Task.isFull) {
+            Task.isFull = true;
+        }
+
+        if (Task.isFull && !isAllowedWhenListFull(command)) {
+            throw new RestrictedCommandException();
+        }
     }
 
 
