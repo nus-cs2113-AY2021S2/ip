@@ -1,13 +1,17 @@
 import errors.DescriptionSplitException;
 import errors.ListFullException;
 import errors.MissingKeywordException;
+import tasks.DeadlineTask;
+import tasks.EventTask;
+import tasks.Task;
+import tasks.ToDoTask;
 
 import java.util.Scanner;
 
 public class Duke {
 
     //Strings
-    private static final String LINE = "────────────────────────────────────────────────────────────";
+    private static final String LINE = "───────────────────────────────────────────────────────────────────────────";
     private static final String LOGO = "                o                     o\n" +
             "                oooo               oooo\n" +
             "                ooooooo         ooooooo\n" +
@@ -36,7 +40,7 @@ public class Duke {
             + "    list - Show list of saved values.\n"
             + "    todo <name> - Creates new todo task.\n"
             + "    event <name> /at <info> - Creates new event.\n"
-            + "    deadline <name> /by <date> - Creates task with deadline.\n"
+            + "    deadline <name> /by <date> - Creates new deadline.\n"
             + "    done n - Mark nth item as done.\n"
             + "    undo n - Mark nth item as not done.\n" + LINE;
     private static final String MESSAGE_MARK_DONE =  LINE + "\nMarked as done:\n";
@@ -52,9 +56,9 @@ public class Duke {
             + "8K: List is full." + "\n" + LINE;
     private static final String MESSAGE_EMPTY_LIST = "<< List is empty >>\n" + LINE;
     private static final String MESSAGE_MISSING_AT_KEYWORD = LINE + "\n"
-            + "8K: Please include \"/at\" to specify event info.\n" + LINE;
+            + "8K: Please follow the format \"<name> /at <info>\" to create event.\n" + LINE;
     private static final String MESSAGE_MISSING_BY_KEYWORD = LINE + "\n"
-            + "8K: Please include \"/by\" to specify due date.\n" + LINE;
+            + "8K: Please follow the format \"<name> /by <date>\" to create deadline.\n" + LINE;
 
 
     //Constants
