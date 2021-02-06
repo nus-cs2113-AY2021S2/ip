@@ -8,16 +8,16 @@ public class Duke {
 
     public static void main(String[] args) {
         MessagePrinter.printGreetMessage();
-        String command;
+        String fullCommand;
         Scanner in = new Scanner(System.in); // when typing input manually
         while (true) {
-            command = in.nextLine();
-            if (command.equals("bye")) {
+            fullCommand = in.nextLine();
+            if (fullCommand.equals("bye")) {
                 break;
             }
             System.out.println(dottedLine);
 
-            String[] partOfCommand = command.split(" ");
+            String[] partOfCommand = fullCommand.split(" ");
 
             switch (partOfCommand[0]) {
             case "help":
@@ -27,7 +27,7 @@ public class Duke {
                 TaskManager.printAllTasks();
                 break;
             case "done":
-                TaskManager.markTaskAsDone(command.substring(4).trim());
+                TaskManager.markTaskAsDone(fullCommand.substring(4).trim());
                 break;
             case "hey":
             case "hello":
@@ -36,7 +36,8 @@ public class Duke {
             case "todo":
             case "deadline":
             case "event":
-                TaskManager.addNewTask(partOfCommand[0], command);
+                String taskType = partOfCommand[0];
+                TaskManager.addNewTask(taskType, fullCommand);
                 break;
             default:
                 MessagePrinter.printGenericErrorMessage();
