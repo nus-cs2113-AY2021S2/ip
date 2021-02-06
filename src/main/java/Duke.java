@@ -73,7 +73,6 @@ public class Duke {
         int count = 0;
         Scanner sc = new Scanner(System.in);
         Boolean isSame = true;
-
         while (isSame) {
             String input = sc.nextLine();
             String stringTask = extractTask(input);
