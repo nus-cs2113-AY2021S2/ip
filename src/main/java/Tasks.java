@@ -1,32 +1,31 @@
 public class Tasks{
     private String description;
     private  boolean isDone;
-    public Tasks(String description){
+    public Tasks (String description) {
         this.description = description;
         this.isDone =false;
     }
     public void setDescription(String description) {
+
         this.description = description;
     }
 
     public void setDone() {
-        this.isDone = true;
+
+        isDone = true;
     }
 
     public String getDescription() {
-        return this.description;
+
+        return description;
     }
 
     public String  setDisplay(){
-        if(this.isDone == true){
+        if (isDone) {
             return "\u2718";
-        }
-        else{
+        } else {
             return " ";
         }
     }
-
-
-
 
 }
