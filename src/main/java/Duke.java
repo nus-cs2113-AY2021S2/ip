@@ -8,7 +8,62 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println(logo);
-        System.out.println("Hello there! I'm Duke.\nWhat can I do for my G?\n");
+        System.out.println("Ay yo homie! You lookin PENGGGGGGGG today!\nIt's ya boi Duke the Dawg. What can I do for ma G?\n");
+    }
+
+    /*Methods to process the input of the user.
+    The type of task is indicated by the first substring and the task description is found after the first blank space.
+    If a forward slash present,  ths substring is split into the task and the end date which is indicated by the slash.*/
+    public static String extractTask(String input) {
+        String Task;
+        if (input.equalsIgnoreCase("list")) {
+            return "list";
+        } else if (input.equalsIgnoreCase("bye")) {
+            return "bye";
+        } else if (input.equalsIgnoreCase("todo") || input.equalsIgnoreCase("deadline") || input.equalsIgnoreCase("event")) {
+            int indexOfSpace = input.indexOf(" ");
+            if (indexOfSpace == -1) {
+                return "retry";
+            } else {
+                String subString = input.substring(indexOfSpace + 1);
+                if (subString.contains("/")) {
+                    int indexOfSlash = subString.indexOf("/");
+                    Task = subString.substring(0, indexOfSlash - 1);
+                } else {
+                    Task = subString;
+                }
+                return Task;
+            }
+        } else {
+            return "nonsense";
+        }
+    }
+
+    public static String extractDate(String input) {
+        String Date;
+        if (input.equalsIgnoreCase("list")) {
+            return "list";
+        } else if (input.equalsIgnoreCase("bye")) {
+            return "bye";
+        } else if (input.equalsIgnoreCase("todo") || input.equalsIgnoreCase("deadline") || input.equalsIgnoreCase("event")) {
+            int indexOfSpace = input.indexOf(" ");
+            if (indexOfSpace == -1) {
+                return "retry";
+            } else {
+                String subString = input.substring(indexOfSpace + 1);
+                if (subString.contains("/")) {
+                    int indexOfSlash = subString.indexOf("/");
+                    String subStringDate = subString.substring(indexOfSlash);
+                    int indexNext = subStringDate.indexOf(" ");
+                    Date = subStringDate.substring(indexNext + 1);
+                } else {
+                    Date = null;
+                }
+                return Date;
+            }
+        } else {
+            return "nonsense";
+        }
     }
 
     public static void main(String[] args) {
@@ -21,101 +76,65 @@ public class Duke {
 
         while (isSame) {
             String input = sc.nextLine();
-            String stringTask;
-            String stringDate = null;
+            String stringTask = extractTask(input);
+            String stringDate = extractDate(input);
 
-            /*Processes the input of the user.
-            The type of task is indicated by the first substring and the task description is found after the first blank space.
-            If a forward slash present,  ths substring is split into the task and the end date which is indicated by the slash.
-             */
-            int indexOfSpace = input.indexOf(" ");
-            String subString = input.substring(indexOfSpace+1);
+             /* If input is "bye", system exits with message.
+             If input is "list", list of tasks will be displayed.
+             If input is "done", the task number to be marked as done.
+             If input is "todo", classify task as ToDo.
+             If input is "Deadline", classify task as Deadline.
+             If input is "Event", classify task as Event.
+             If there is no task specified after specifying the type of task, system will prompt for another input*/
 
-            if (subString.contains("/")) {
-                int indexOfSlash = subString.indexOf("/");
-                stringTask = subString.substring(0, indexOfSlash-1);
-                String subStringDate = subString.substring(indexOfSlash);
-                int indexNext = subStringDate.indexOf(" ");
-                String subStringEnd = subStringDate.substring(indexNext+1);
-                stringDate = subStringEnd;
-            } else {
-                stringTask = subString;
+            if (stringTask.contains("retry")) {
+                System.out.println("Oi allow it fam! Why you got no tasks? Are you dumb? Try again... you melon!");
+                continue;
             }
 
-            int taskNumber = 0;
-
-            // If input is "bye", system exits with message.
             if (input.equalsIgnoreCase("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
+                System.out.println("Ciao Ciao. See ya soon fam!");
                 isSame = false;
                 System.exit(0);
-            }
-
-            // If input is "list", list of tasks will be displayed.
-            else if (input.equalsIgnoreCase("list")) {
-                System.out.println("Here are the tasks in your list: ");
+            } else if (input.equalsIgnoreCase("list")) {
+                System.out.println("Here are the tings in yo list: ");
                 for (int i=0; i< taskList.length; i++) {
                     if (taskList[i] != null){
                         System.out.println(i+1 + ". " + taskList[i].printDescription());
                     }
                 }
-            }
-
-            // Identifies the task number to be marked as done.
-            else if (input.contains("done")) {
-                for (int i = 0; i <input.length(); i++) {
-                    char character = input.charAt(i);
-                    int index = i;
-                    if (++index == input.length()) {
-                        if(Character.isDigit(character)) {
-                            taskNumber = Character.getNumericValue(character);
-                            break;
-                        }
-                    }
-                    char characterTwo = input.charAt(index);
-                    if(Character.isDigit(character) && Character.isDigit(characterTwo)) {
-                        taskNumber = Character.getNumericValue(character)*10 + Character.getNumericValue(characterTwo);
-                        break;
-                    }
-                }
-                System.out.println("Nice! I've marked this task as done: ");
-                taskList[taskNumber-1].markAsDone();
-                System.out.println(taskList[taskNumber-1].printDescription());
-            }
-
-            // Classify task as ToDo.
-            else if (input.contains("todo")) {
+            } else if (input.contains("done")) {
+                int indexSpace = input.indexOf(" ");
+                String numberString = input.substring(indexSpace + 1);
+                int taskNumber = Integer.parseInt(numberString);
+                System.out.println("Awwww yeah! I've marked this task as done... brrrrrap brrrrrap: ");
+                taskList[taskNumber - 1].markAsDone();
+                System.out.println(taskList[taskNumber - 1].printDescription());
+            } else if (input.contains("todo")) {
                 taskList[count] = new toDo(stringTask);
-                System.out.println("Got it. I've added this task: ");
+                System.out.println("Ayy I got you my brother. I've added this ting: ");
                 System.out.println(taskList[count].printDescription());
                 count++;
-                System.out.println("Now you have " + count + " tasks in the list.");
-            }
-
-            // Classify task as Deadline.
-            else if (input.contains("deadline")) {
+                System.out.println("Dayuum son! You have " + count + " mad tings in the list.");
+            } else if (input.contains("deadline")) {
                 taskList[count] = new Deadline(stringTask, stringDate);
-                System.out.println("Got it. I've added this task: ");
+                System.out.println("I feel ya. I've added this ting: ");
                 System.out.println(taskList[count].printDescription());
                 count++;
-                System.out.println("Now you have " + count + " tasks in the list.");
-            }
-
-            // Classify task as Event.
-            else if (input.contains("event")) {
+                System.out.println("Jeeeeeeeez! You got " + count + " mad tings in the list.");
+            } else if (input.contains("event")) {
                 taskList[count] = new Event(stringTask, stringDate);
-                System.out.println("Got it. I've added this task: ");
+                System.out.println("No problem ma dude. I've added this ting: ");
                 System.out.println(taskList[count].printDescription());
                 count++;
-                System.out.println("Now you have " + count + " tasks in the list.");
-            }
-
-            // Adds in a new task.
-            else {
-                taskList[count] = new Task(input);
+                System.out.println("Wowza! You making it rain with " + count + " mad tings in the list.");
+            } else {
+                /*taskList[count] = new Task(input);
                 System.out.println("Added new task: " + taskList[count].getDescription());
                 count++;
-                System.out.println("You now have " + count + " tasks in your list.");
+                System.out.println("You now have " + count + " tasks in your list.");*/
+                System.out.println("What are you tryna say to me? Chatting nonsense yea?");
+                continue;
             }
         }
     }

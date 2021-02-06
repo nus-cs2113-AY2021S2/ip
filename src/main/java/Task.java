@@ -1,6 +1,8 @@
 public class Task{
     protected String description;
     protected boolean isDone;
+    protected String Task;
+    protected String Date;
 
     public Task() {}
 
