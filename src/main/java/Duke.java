@@ -24,10 +24,10 @@ public class Duke {
                 taskCounter = createTodoTask(userTasks, taskCounter, individualWords);
                 break;
             case "deadline":
-                taskCounter = createDeadlineTask(userTasks, taskCounter, individualWords[1]);
+                taskCounter = createDeadlineTask(userTasks, taskCounter, individualWords);
                 break;
             case "event":
-                taskCounter = createEventTask(userTasks, taskCounter, individualWords[1]);
+                taskCounter = createEventTask(userTasks, taskCounter, individualWords);
                 break;
             case "done":
                 markActivityAsDone(userTasks, individualWords);
@@ -36,7 +36,7 @@ public class Duke {
                 exitLoopStatus = terminateProgram();
                 break;
             default:
-                System.out.println("Oops. Unknown command. Try again");
+                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
             if (checkLoopStatus(exitLoopStatus)) {
                 break;
@@ -70,29 +70,41 @@ public class Duke {
         }
     }
 
-    private static int createEventTask(Task[] userTasks, int taskCounter, String individualWord) {
+    private static int createEventTask(Task[] userTasks, int taskCounter, String[] individualWords) {
         String newUserTask;
-        newUserTask = individualWord.split("/at")[0];
-        String eventTime = individualWord.split("/at")[1];
-        userTasks[taskCounter] = new Event(newUserTask,eventTime);
-        taskCounter = showTaskCreationMessage(taskCounter, userTasks[taskCounter]);
+        try {
+            newUserTask = individualWords[1].split("/at")[0];
+            String eventTime = individualWords[1].split("/at")[1];
+            userTasks[taskCounter] = new Event(newUserTask, eventTime);
+            taskCounter = showTaskCreationMessage(taskCounter, userTasks[taskCounter]);
+        } catch (ArrayIndexOutOfBoundsException e){
+            System.out.println("☹ OOPS!!! The description or date of a event cannot be empty.");
+        }
         return taskCounter;
     }
 
-    private static int createDeadlineTask(Task[] userTasks, int taskCounter, String individualWord) {
+    private static int createDeadlineTask(Task[] userTasks, int taskCounter, String[] individualWords) {
         String newUserTask;
-        newUserTask = individualWord.split("/by")[0];
-        String date = individualWord.split("/by")[1];
-        userTasks[taskCounter] = new Deadline(newUserTask, date);
-        taskCounter = showTaskCreationMessage(taskCounter, userTasks[taskCounter]);
+        try {
+            newUserTask = individualWords[1].split("/by")[0];
+            String date = individualWords[1].split("/by")[1];
+            userTasks[taskCounter] = new Deadline(newUserTask, date);
+            taskCounter = showTaskCreationMessage(taskCounter, userTasks[taskCounter]);
+        } catch (ArrayIndexOutOfBoundsException e){
+            System.out.println("☹ OOPS!!! The description or date of a deadline cannot be empty.");
+        }
         return taskCounter;
     }
 
     private static int createTodoTask(Task[] userTasks, int taskCounter, String[] individualWords) {
         String newUserTask;
-        newUserTask = individualWords[1];
-        userTasks[taskCounter] = new Todo(newUserTask);
-        taskCounter = showTaskCreationMessage(taskCounter, userTasks[taskCounter]);
+        try {
+            newUserTask = individualWords[1];
+            userTasks[taskCounter] = new Todo(newUserTask);
+            taskCounter = showTaskCreationMessage(taskCounter, userTasks[taskCounter]);
+        } catch (ArrayIndexOutOfBoundsException e){
+            System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+        }
         return taskCounter;
     }
 
