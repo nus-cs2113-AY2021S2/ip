@@ -3,4 +3,10 @@ event meeting /at 9.30
 deadline retire /by 40
 done 1
 list
+todo
+event
+event meeting
+deadline
+deadline retire
+blah
 bye

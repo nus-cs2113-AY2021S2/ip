@@ -68,6 +68,16 @@ public class Duke {
     }
 
     /**
+     * Source: https://stackoverflow.com/questions/31412294/java-check-not-null-empty-else-assign-default-value
+     * Get value of object, and if it is null, set it to the default value.
+     * @param defaultValue
+     * @return
+     */
+    public static <T> T getValueOrDefault(T value, T defaultValue) {
+        return value == null ? defaultValue : value;
+    }
+
+    /**
      * The main driver function for the application.
      *
      * @param args command line arguments
@@ -95,45 +105,49 @@ public class Duke {
                 continue;
             }
             nextCommand = commandMatches.group(1);
-            String commandArgs = commandMatches.group(2);
-            boolean noCommandArgs = commandArgs == null || commandArgs.length() == 0;
-            if (noCommandArgs) {
-                switch (nextCommand) {
-                case "list":
-                    printAddedTasks();
-                    continue;
-                case "bye":
-                    sayGoodbye();
-                    return;
-                default:
-                    System.out.println("Invalid command :(");
-                    continue;
-                }
-            }
+            String commandArgs = getValueOrDefault(commandMatches.group(2), "");
             commandArgs = commandArgs.trim();
             switch (nextCommand) {
+            case "list":
+                printAddedTasks();
+                continue;
+            case "bye":
+                sayGoodbye();
+                return;
             case "done":
                 int taskId = Integer.parseInt(commandArgs);
                 String taskStatusAdditionOutcome = setAddedTaskStatus(taskId, true);
                 System.out.println(taskStatusAdditionOutcome);
                 break;
             case "todo":
+                if (commandArgs.length() == 0) {
+                    System.out.println("Oops, todo description cannot be empty :(");
+                    break;
+                }
                 String todoAdditionOutcome = addTodo(commandArgs);
                 System.out.println(todoAdditionOutcome);
                 break;
             case "deadline":
+                if (commandArgs.length() == 0) {
+                    System.out.println("Oops, deadline description cannot be empty :(");
+                    break;
+                }
                 String[] deadlineArgs = commandArgs.split(" /by ");
                 if (deadlineArgs.length != 2) {
-                    System.out.println("Not sure how to parse your request to add a deadline...");
+                    System.out.println("Oops, deadline due date cannot be empty :(");
                     break;
                 }
                 String deadlineAdditionOutcome = addDeadline(deadlineArgs[0], deadlineArgs[1]);
                 System.out.println(deadlineAdditionOutcome);
                 break;
             case "event":
+                if (commandArgs.length() == 0) {
+                    System.out.println("Oops, event description cannot be empty :(");
+                    break;
+                }
                 String[] eventArgs = commandArgs.split(" /at ");
                 if (eventArgs.length != 2) {
-                    System.out.println("Not sure how to parse your request to add an event...");
+                    System.out.println("Oops, event time cannot be empty :(");
                     break;
                 }
                 String eventAdditionOutcome = addEvent(eventArgs[0], eventArgs[1]);
