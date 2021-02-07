@@ -1,21 +1,20 @@
 ============================================================
-Welcome to Duke v1.4 ----------- Latest Update: 31/1/21
+Welcome to Duke v1.5 ----------- Latest Update: 6/2/21
 Developed by: Oscar Lai
 ============================================================
 Good Day, I'm Alfred.
-⊂_ヽ
-　 ＼ ＼ what
-　　  ＼ ( ͡° ͜ʖ ͡°) can I 
-　　　 >　   ⌒    ヽ
-　　　/ 　   へ      ＼
-　　/　　  /　  ＼   do for you?
-　　(　  (ヽ　　    ヽ _   つ
-   |  　| \ 
-　  | 丿 ＼ ⌒)
+⊂_ ヽ
+　 ＼ ＼ ^^^^^^
+　　 ＼ ( ͡° ͜ʖ ͡°) ...what can I do for you?
+　　　 >　   ⌒ ヽ
+　　　/ 　 へ   ＼
+　　 / # /　 ＼ ＼...check out my six pack tho.
+　　(　  (ヽ　　ヽ _ つ
+   |  　| \
+　  | 丿 ＼ ⌒)...Enter HELP for command list!
 　  | |　　) /
-   ノ )　　Lﾉ 
+   ノ )　　Lﾉ
   (_／
-Enter HELP for commands
 ============================================================
  HELP COMMANDS
 todo: adds to list
@@ -71,7 +70,6 @@ Error! You do not have that many items in your list!
 2. [D] [✓] homework (by: tomorrow)
 3. [E] [ ] birthday (at: friday)
 ============================================================
-============================================================
 Pleasure serving you...
  __      __
 ( _\    /_ )
@@ -85,5 +83,5 @@ Pleasure serving you...
 
 ============================================================
 Developed by: Oscar Lai
-Version 1.4
+Version 1.5
 ============================================================

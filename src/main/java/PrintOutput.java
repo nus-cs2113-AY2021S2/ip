@@ -19,24 +19,23 @@ public class PrintOutput {
         + BORDER;
 
     public static void printGreeting() {
-        String alfred = "⊂_ヽ\n"
-            + "　 ＼ ＼ what\n"
-            + "　　  ＼ ( ͡° ͜ʖ ͡°) can I \n"
-            + "　　　 >　   ⌒    ヽ\n"
-            + "　　　/ 　   へ      ＼\n"
-            + "　　/　　  /　  ＼   do for you?\n"
-            + "　　(　  (ヽ　　    ヽ _   つ\n"
-            + "   |  　| \\ \n"
-            + "　  | 丿 ＼ ⌒)\n"
+        String alfred = "⊂_ ヽ\n"
+            + "　 ＼ ＼ ^^^^^^\n"
+            + "　　 ＼ ( ͡° ͜ʖ ͡°) ...what can I do for you?\n"
+            + "　　　 >　   ⌒ ヽ\n"
+            + "　　　/ 　 へ   ＼\n"
+            + "　　 / # /　 ＼ ＼...check out my six pack tho.\n"
+            + "　　(　  (ヽ　　ヽ _ つ\n"
+            + "   |  　| \\\n"
+            + "　  | 丿 ＼ ⌒)...Enter HELP for command list!\n"
             + "　  | |　　) /\n"
-            + "   ノ )　　Lﾉ \n"
+            + "   ノ )　　Lﾉ\n"
             + "  (_／";
         printBorder();
         System.out.println("Welcome to Duke v1.5 ----------- Latest Update: 6/2/21");
         System.out.println("Developed by: Oscar Lai");
         printBorder();
         System.out.println("Good Day, I'm Alfred.\n" + alfred);
-        System.out.println("Enter HELP for commands");
         printBorder();
     }
 

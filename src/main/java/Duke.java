@@ -44,7 +44,7 @@ public class Duke {
                     checkError("INVALID_COMMAND");
                 }
             } catch (IndexOutOfBoundsException e) {
-                checkError("INDEX_EXCEEDS_LIST");
+                checkError("LIST_FULL");
             }
         }
     }
@@ -76,8 +76,8 @@ public class Duke {
             list[listCounter] = t;
             listCounter += 1;
             System.out.println("I have added [" + t.getType() + "]["
-                + t.getStatusIcon() + "] \""
-                + t.getName() + "\" " + "to the List!");
+                    + t.getStatusIcon() + "] \""
+                    + t.getName() + "\" " + "to the List!");
             printNoOfTask();
         } catch(WrongFormatException e) {
             checkError("INVALID_FORMAT");
@@ -236,7 +236,7 @@ public class Duke {
         case "EMPTY_LIST":
             System.out.println("Your list is empty! Add something!");
             PrintOutput.printBorder();
-                break;
+            break;
         case "DONE_CHECKED_ERROR":
              System.out.println("You have already marked it as Done!");
              PrintOutput.printBorder();
