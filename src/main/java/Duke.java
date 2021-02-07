@@ -53,6 +53,7 @@ public class Duke {
         }
         return false;
 
+
     }
 
     public static void printTask(String taskKind, String substring, int num_of_goals, String ddl, String prep) {
@@ -135,14 +136,6 @@ public class Duke {
                             printTask(taskKind, taskName, num_of_goals, null, null);
                         }
 
-                        //String ddl= user_input.substring(slash+1);
-                        //String ddl = null;
-
-
-
-                        //String ddl= user_input.substring(slash+1);
-                        //String ddl = null;
-
 
                     }
 
@@ -150,21 +143,7 @@ public class Duke {
                 user_input = sc.nextLine();
             }
 
-
-            //else if (user_input.equals("todo")){
-            //  String todo= user_input.substring(spacing+1);
-
-            //}
-            //else{
-            //  System.out.println( "___________________________________________________________\n" +
-            //        "Added: "+ user_input +  "____________________________________________________________" );
-            //to_do_list[num_of_goals] = user_input;
-            //t[num_of_goals] = new Task(user_input);
-            //num_of_goals++;
-            //}
-            //   }
-
-            //}
+            
         }
         System.out.println("____________________________________________________________\n" +
                 "     Bye. Hope to see you again soon!\n" +
