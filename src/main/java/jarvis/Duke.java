@@ -1,3 +1,7 @@
+package jarvis;
+
+import jarvis.exception.InvalidCommandException;
+
 public class Duke {
     public static void main(String[] args) throws InterruptedException {
         Jarvis jarvis = new Jarvis();
