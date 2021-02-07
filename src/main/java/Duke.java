@@ -17,7 +17,7 @@ public class Duke {
 
     private static final String GREETING_MESSAGE = "Wagwan! I is Ali G. West side.\nWhat is we chattin' bout today?";
     private static final String GOODBYE_MESSAGE = "Goodbye, big up yourself, keep it real, respekt.";
-    private static final String BORDER_LINE = "____________________________________________________________";
+    private static final String BORDER_LINE = "___________________________________________________________";
     private static final String LIST_ITEMS_MESSAGE = "Eez are the tings you added to the list";
     private static final String EXCEED_CAPACITY_MESSAGE = "Maximum capacity reached";
     private static final String ADDED_TO_LIST_MESSAGE = "Wicked. This ting is now on da list.";
