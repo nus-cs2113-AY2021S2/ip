@@ -1,7 +1,11 @@
-import java.lang.reflect.Array;
-import java.util.EmptyStackException;
+import exceptions.EmptyDescriptionException;
+import exceptions.EmptyNumberException;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
+
 import java.util.Scanner;
-import java.util.Arrays;
 
 public class Duke {
 
@@ -27,7 +31,7 @@ public class Duke {
     private static final String MESSAGE_INVALID_DEADLINE = "No deadline provided or wrong splitter.";
     private static final String MESSAGE_INVALID_EVENT = "No event date and time provided or wrong splitter.";
     private static final String MESSAGE_INVALID_COMMAND_DONE = "Number not provided for the task to be marked as done.";
-    private static final String MESSAGE_INVALID_NUMBER_DONE = "Task number does not exist.";
+    private static final String MESSAGE_INVALID_NUMBER_DONE = "task.Task number does not exist.";
 
     /**
      * Main entry point of the application.
@@ -141,7 +145,7 @@ public class Duke {
     }
 
     /**
-     * Add task under Todo class and feedback display message when Todo task added
+     * Add task under task.Todo class and feedback display message when task.Todo task added
      * @param commandArgs Description of the task
      */
     private static void executeTodo(String commandArgs) throws EmptyDescriptionException{
@@ -169,7 +173,7 @@ public class Duke {
     }
 
     /**
-     * Add task under Deadline class and feedback display message when Deadline task added
+     * Add task under task.Deadline class and feedback display message when task.Deadline task added
      * @param commandArgs description and deadline of the task
      */
     private static void executeDeadline(String commandArgs) throws EmptyDescriptionException{
@@ -200,7 +204,7 @@ public class Duke {
     }
 
     /**
-     * Add task under Event class and feedback display message when Event task added
+     * Add task under task.Event class and feedback display message when task.Event task added
      * @param commandArgs
      */
     private static void executeEvent(String commandArgs) throws EmptyDescriptionException {
