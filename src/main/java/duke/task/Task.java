@@ -1,4 +1,6 @@
-public class Task {
+package duke.task;
+
+public abstract class Task {
     private String description;
     private boolean isDone;
 
@@ -16,6 +18,7 @@ public class Task {
     }
 
     private String getStatusIcon() {
-        return (isDone ? "X" : " "); // return X if task is done, and space otherwise
+        /* Return X if task is done, and space otherwise */
+        return (isDone ? "X" : " ");
     }
 }
