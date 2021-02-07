@@ -64,13 +64,20 @@ public class Task {
         taskCounter++;
     }
 
-    public static void decrementTaskCounter(){
-        taskCounter--;
-    }
-
     // standard string return format for all tasks subclasses expand on this format
     @Override
     public String toString(){
         return this.getStatusIcon() + " " + this.getDescription();
     }
+
+    // Check for exceptions
+    public static void checkDoneTask(int task) throws TaskAlreadyCompletedException, TaskNotExistException{
+        if (task > taskCounter - 1) {
+            throw new TaskNotExistException();
+        }
+        if (tasks[task].isDone()) {
+            throw new TaskAlreadyCompletedException();
+        }
+    }
+
 }
