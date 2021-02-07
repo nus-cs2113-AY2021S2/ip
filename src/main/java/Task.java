@@ -3,6 +3,7 @@ public class Task {
     protected boolean isDone;
     protected String symbol = null;
     protected String ddl = null;
+    protected String preposition = null;
 
     public Task(String description) {
         this.description = description;
@@ -44,6 +45,15 @@ public class Task {
     public void setDdl(String ddl) {
         this.ddl = ddl;
     }
+
+    public String getPrep() {
+        return this.preposition;
+    }
+
+    public void setPrep(String prep) {
+        this.preposition = prep;
+    }
+
 
     //...
 }
