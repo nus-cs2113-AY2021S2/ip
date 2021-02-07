@@ -3,42 +3,39 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 /**
- * This class is to build a personal assistance chat-bot called "Kaman"
- * (Customised from Duke)
+ * This class is to build a personal assistant chatbot called "Kaman"
+ * (Customized from Duke)
  *
  * @author NgManSing
  */
 public class Duke {
     private static final ArrayList<Task> records = new ArrayList<>();
+    private static final Scanner scan = new Scanner(System.in);
 
     public static void main(String[] args) {
         boolean isLoop = true;
         printWelcomeMsg();
 
         do {
-            String rawInput = getUserInput();
-            String[] inputs = rawInput.split(" ");
-            String command = inputs[0];
-            String[] arguments = Arrays.copyOfRange(inputs, 1, inputs.length);
-
-            switch (command) {
+            UserInput userInput = getUserInput();
+            switch (userInput.getCommand()) {
             case "todo":
-                addRecord(arguments, Todo.TASK_TYPE);
+                addRecord(userInput.getArguments(), Todo.TASK_TYPE);
                 break;
             case "deadline":
-                addRecord(arguments, Deadline.TASK_TYPE);
+                addRecord(userInput.getArguments(), Deadline.TASK_TYPE);
                 break;
             case "event":
-                addRecord(arguments, Event.TASK_TYPE);
+                addRecord(userInput.getArguments(), Event.TASK_TYPE);
                 break;
             case "list":
                 showList();
                 break;
             case "done":
-                executeCommandDone(arguments);
+                executeCommandDone(userInput.getArguments());
                 break;
             case "bye":
-                isLoop = executeCommandBye(rawInput, arguments);
+                isLoop = isEndProgram(userInput.getArguments());
                 break;
             default:
                 promptUserInputInvalid();
@@ -47,11 +44,34 @@ public class Duke {
         } while (isLoop);
     }
 
+    private static class UserInput {
+        private String command;
+        private String[] arguments;
+
+        public UserInput(String rawInput) {
+            processInput(rawInput);
+        }
+
+        private void processInput(String rawInput) {
+            String[] inputFragments = rawInput.split(" ");
+            command = inputFragments[0];
+            arguments = Arrays.copyOfRange(inputFragments, 1, inputFragments.length);
+        }
+
+        public String getCommand() {
+            return command;
+        }
+
+        public String[] getArguments() {
+            return arguments;
+        }
+    }
+
     private static void promptUserInputInvalid() {
         System.out.println("Invalid command! Please try again!");
     }
 
-    private static boolean executeCommandBye(String rawInput, String[] arguments) {
+    private static boolean isEndProgram(String[] arguments) {
         if (arguments.length != 0) {
             System.out.println("Command \"Bye\" requires no argument. Please try again!");
             return true;
@@ -77,11 +97,13 @@ public class Duke {
         }
     }
 
-    private static String getUserInput() {
-        Scanner scan = new Scanner(System.in);
-        String userInput = scan.nextLine();
+    private static UserInput getUserInput() {
+        String userInput = "dummy";
+        if (scan.hasNextLine()) {
+            userInput = scan.nextLine();
+        }
         System.out.println("Command entered: " + userInput);
-        return userInput;
+        return new UserInput(userInput);
     }
 
     private static void printWelcomeMsg() {
@@ -103,6 +125,7 @@ public class Duke {
         String[] details = null;
         String taskName;
         String date;
+
         switch (taskType) {
         case Todo.TASK_TYPE:
             taskName = String.join(" ", detailFragments);
@@ -124,7 +147,10 @@ public class Duke {
                 records.add(new Event(taskName, date));
             }
             break;
+        default:
+            throw new IllegalArgumentException("A non-taskType is passed to addRecord.");
         }
+
         if (details != null || taskType.equals(Todo.TASK_TYPE)) {
             int numberOfRecords = records.size();
             System.out.println("Got it. I've added this task:");
@@ -159,7 +185,10 @@ public class Duke {
                 isTypeMatch = true;
             }
             break;
+        default:
+            throw new IllegalArgumentException("A non-taskType is passed to getTaskNameAndDate.");
         }
+
         if (!isTypeMatch) {
             System.out.println("Invalid input! (keywords not matching)");
             return null;
