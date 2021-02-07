@@ -253,7 +253,6 @@ public class Duke {
 
     /**
      * Prints appropriate error message according to error type.
-     * Error types are illegally accessing indexes and wrong command format.
      *
      * @param type type of error thrown.
      */
