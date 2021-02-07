@@ -1,3 +1,8 @@
+package Duke;
+
+import Duke.Tasks.Deadline;
+import Duke.Tasks.Event;
+import Duke.Tasks.Todo;
 
 import java.util.Scanner;
 
