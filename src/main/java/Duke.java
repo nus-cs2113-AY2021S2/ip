@@ -135,9 +135,14 @@ public class Duke {
                             printTask(taskKind, taskName, num_of_goals, null, null);
                         }
 
+                        //String ddl= user_input.substring(slash+1);
+                        //String ddl = null;
+
+
 
                         //String ddl= user_input.substring(slash+1);
                         //String ddl = null;
+
 
                     }
 
