@@ -69,6 +69,10 @@ Nice! I've marked this task as done:
 [E][X] project meeting (by: Mon 2-4pm)
 ____________________________________________________________
 ____________________________________________________________
+There is no task number 4.
+Please try again!
+____________________________________________________________
+____________________________________________________________
 Here are the tasks in your list:
 1.[T][X] read book
 2.[D][X] return book (by: Sunday)
