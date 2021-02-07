@@ -17,65 +17,81 @@ public class Duke {
 
         while (true){
             String line = in.nextLine();
+            String taskType = "";
 
-            if (line.equals("list")){
-                printList();
-                continue;
-            }
-            else if (line.equals("bye")) {
-                printBye();
-                break;
-            }
-            else if (line.contains("done")){
-                markDone(line);
-                continue;
-            }
-            else if (line.contains("todo")){
-                addTodo(line);
-                continue;
-            }
-            else if (line.contains("deadline")){
-                addDeadline(line);
-                continue;
-            }
-            else if (line.contains("event")){
-                addEvent(line);
-                continue;
+            try {
+                if (line.equals("list")){
+                    printList();
+                    continue;
+                }
+                else if (line.equals("bye")) {
+                    printBye();
+                    break;
+                }
+                else if (line.contains("done")){
+                    taskType = "done";
+                    markDone(line);
+                    continue;
+                }
+                else if (line.contains("todo")){
+                    taskType = "todo";
+                    addTodo(line);
+                    continue;
+                }
+                else if (line.contains("deadline")){
+                    taskType = "deadline";
+                    addDeadline(line);
+                    continue;
+                }
+                else if (line.contains("event")){
+                    taskType = "event";
+                    addEvent(line);
+                    continue;
+                }
+                else {
+                    throw new DukeException();
+                }
+
+            } catch (ArrayIndexOutOfBoundsException e){
+                System.out.println("OOPS!!! The description of a " + taskType + " cannot be empty.");
+
+            } catch (DukeException e) {
+                System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         }
     }
 
     private static void addEvent(String line) {
-        System.out.println("Got it. I've added this task: ");
         String[] words = line.split(" ", 2);
         String detailWords = words[1];
         String[] info = detailWords.split(" /at ", 2);
         String taskDescription = info[0];
         String atTime = info[1];
         tasks[taskCount] = new Event(taskDescription,atTime);
+        System.out.println("Got it. I've added this task: ");
         System.out.println(tasks[taskCount].toString());
         taskCount++;
         System.out.println("Now you have " + taskCount + " tasks in the list.");
     }
 
     private static void addDeadline(String line) {
-        System.out.println("Got it. I've added this task: ");
         String[] words = line.split(" ", 2);
         String detailWords = words[1];
         String[] info = detailWords.split(" /by ", 2);
         String taskDescription = info[0];
         String byDate = info[1];
         tasks[taskCount] = new Deadline(taskDescription,byDate);
+        System.out.println("Got it. I've added this task: ");
         System.out.println(tasks[taskCount].toString());
         taskCount++;
         System.out.println("Now you have " + taskCount + " tasks in the list.");
     }
 
     private static void addTodo(String line) {
-        System.out.println("Got it. I've added this task: ");
         String[] words = line.split(" ", 2);
         String taskDescription = words[1];
         tasks[taskCount] = new Todo(taskDescription);
+        System.out.println("Got it. I've added this task: ");
         System.out.println(tasks[taskCount].toString());
         taskCount++;
         System.out.println("Now you have " + taskCount + " tasks in the list.");
@@ -88,11 +104,11 @@ public class Duke {
     }
 
     private static void markDone(String line) {
-        System.out.println("Nice! I've marked this task as done: ");
         String[] words = line.split(" ", 2);
         int doneIndex = Integer.parseInt(words[1]);
         Task doneTask = tasks[doneIndex-1];
         doneTask.markAsDone();
+        System.out.println("Nice! I've marked this task as done: ");
         System.out.println("[" + doneTask.getStatusIcon() + "] "+doneTask.description);
     }
 
