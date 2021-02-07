@@ -8,4 +8,16 @@ public class Event extends Deadline {
         return "Event : " + super.toBaseString() + " || Happening on: " + this.getDateTime();
     }
 
+    // Exceptions
+
+    public static void checkEventInput(String[] taskDetails) throws MissingEventDurationException, MissingTaskDescriptionException {
+        if (taskDetails[0] == null){
+            throw new MissingTaskDescriptionException();
+        }
+        if (taskDetails[1] == null) {
+            throw new MissingEventDurationException();
+        }
+
+    }
+
 }

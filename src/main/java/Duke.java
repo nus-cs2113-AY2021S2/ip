@@ -24,8 +24,11 @@ public class Duke {
                 System.out.println(UI.divider);
                 break;
             default:
-                // todo make the heavy lifting be done by another processing class instead of here
-                Parser.processTask(input);
+                try {
+                    TaskManager.processTask(input);
+                } catch (InvalidInputException e) {
+                    System.out.println(e.getMessage());
+                }
 
             }
         } while (!input.equals("bye"));
