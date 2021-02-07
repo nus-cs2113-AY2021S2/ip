@@ -44,6 +44,7 @@ public class Duke {
         return userInput;
     }
 
+    // Reused from Lecture Week 4 Contacts program
     private static String[] getCommandAndArgs(String userInput) {
         String[] split = userInput.split("\\s+", 2);
         return split.length == 2 ? split : new String[] { split[0], "" };
@@ -64,22 +65,26 @@ public class Duke {
 
     private static void executeDone(String taskNumberString) {
         int taskNumber = Integer.parseInt(taskNumberString);
-        String outputText;
-        if (taskNumber < 1 || taskNumber > Task.getNumberOfTasks()) {
-            outputText = "Task number invalid!";
-        } else {
-            Task task = tasks[taskNumber - 1];
-            if (!task.isDone) {
-                task.setDone(true);
-                outputText = "Nice! I've marked this task as done:" +
-                        System.lineSeparator() +
-                        "\t" +
-                        task.toString();
-            } else {
-                outputText = "Task already marked as done!";
-            }
+
+        if (!isValidTaskNumber(taskNumber)) {
+            Menu.printText("Task number invalid!");
+            return;
         }
-        Menu.printText(outputText);
+        Task task = tasks[taskNumber - 1];
+
+        if (task.isDone) {
+            Menu.printText("Task already marked as done!");
+            return;
+        }
+        task.setDone(true);
+        Menu.printText("Nice! I've marked this task as done:"
+                + System.lineSeparator()
+                + "\t"
+                + task);
+    }
+
+    private static boolean isValidTaskNumber(int taskNumber) {
+        return taskNumber < 1 || taskNumber > Task.getNumberOfTasks();
     }
 
     private static void executeAdd(String commandType, String commandArgs) {
@@ -87,8 +92,7 @@ public class Duke {
         Task t;
         switch (commandType) {
         case "todo":
-            String todoArgs = commandArgs;
-            t = new Todo(todoArgs);
+            t = new Todo(commandArgs);
             break;
         case "deadline":
             String[] deadlineArgs = commandArgs.split("\\s+/by\\s+",2);
@@ -99,8 +103,7 @@ public class Duke {
             t = new Event(eventArgs[0], eventArgs[1]);
             break;
         default:
-            String taskArgs = commandArgs;
-            t = new Task(taskArgs);
+            t = new Task(commandArgs);
             break;
         }
         tasks[Task.getNumberOfTasks() - 1] = t;
