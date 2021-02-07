@@ -1,16 +1,21 @@
+todo
 todo Task A
 list
 event Event A /at 1 Apr 2021
-event Event B Missing 'at'
+event Event B Missing 'at' Type A
+event Event B Missing 'at' Type B /at
 list
 deadline Deadline A /by 1 Aug 2021
-deadline Deadline B Missing 'by'
+deadline Deadline B Missing 'by' Type A
+deadline Deadline B Missing 'by' Type B /by
 list
-Random Task without Type
+random unknown command
 list
+done 3
 done 1
 done 2
-done 4
+list
+done 3
 list
 done -1
 done Not_A_Number

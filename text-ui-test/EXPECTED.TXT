@@ -2,6 +2,9 @@
 	What can I do for you?
 	------------------------------------------------------------
 	------------------------------------------------------------
+	Oops! You will need to provide a description.
+	------------------------------------------------------------
+	------------------------------------------------------------
 	Great. We added a new task:
 		[T][✘] Task A
 	You have in total 1 tasks
@@ -16,7 +19,10 @@
 	You have in total 2 tasks
 	------------------------------------------------------------
 	------------------------------------------------------------
-	You must specify a event time after /at
+	Oops! You must specify an event date following /at keyword.
+	------------------------------------------------------------
+	------------------------------------------------------------
+	Oops! You must specify an event date following /at keyword.
 	------------------------------------------------------------
 	------------------------------------------------------------
 	Here are the tasks in your list:
@@ -29,7 +35,10 @@
 	You have in total 3 tasks
 	------------------------------------------------------------
 	------------------------------------------------------------
-	You must specify a deadline after /by
+	Oops! You must specify a deadline date following /by keyword.
+	------------------------------------------------------------
+	------------------------------------------------------------
+	Oops! You must specify a deadline date following /by keyword.
 	------------------------------------------------------------
 	------------------------------------------------------------
 	Here are the tasks in your list:
@@ -38,13 +47,17 @@
 	3.	[D][✘] Deadline A (by: 1 Aug 2021)
 	------------------------------------------------------------
 	------------------------------------------------------------
-	I cannot recognize what your command means.
+	Oops! Command given is not recognized as a valid one.
 	------------------------------------------------------------
 	------------------------------------------------------------
 	Here are the tasks in your list:
 	1.	[T][✘] Task A
 	2.	[E][✘] Event A (at: 1 Apr 2021)
 	3.	[D][✘] Deadline A (by: 1 Aug 2021)
+	------------------------------------------------------------
+	------------------------------------------------------------
+	Nice! I've marked this task as done:
+		[D][✓] Deadline A (by: 1 Aug 2021)
 	------------------------------------------------------------
 	------------------------------------------------------------
 	Nice! I've marked this task as done:
@@ -55,28 +68,35 @@
 		[E][✓] Event A (at: 1 Apr 2021)
 	------------------------------------------------------------
 	------------------------------------------------------------
-	Task with this index is not found in our database.
+	Here are the tasks in your list:
+	1.	[T][✓] Task A
+	2.	[E][✓] Event A (at: 1 Apr 2021)
+	3.	[D][✓] Deadline A (by: 1 Aug 2021)
+	------------------------------------------------------------
+	------------------------------------------------------------
+	Nice! I've marked this task as done:
+		[D][✓] Deadline A (by: 1 Aug 2021)
 	------------------------------------------------------------
 	------------------------------------------------------------
 	Here are the tasks in your list:
 	1.	[T][✓] Task A
 	2.	[E][✓] Event A (at: 1 Apr 2021)
-	3.	[D][✘] Deadline A (by: 1 Aug 2021)
+	3.	[D][✓] Deadline A (by: 1 Aug 2021)
 	------------------------------------------------------------
 	------------------------------------------------------------
-	Task with this index is not found in our database.
+	Oops! We don't have an existing entry with this index.
 	------------------------------------------------------------
 	------------------------------------------------------------
-	Index provided is not a proper number.
+	Oops! Only integer is accepted as the argument.
 	------------------------------------------------------------
 	------------------------------------------------------------
-	Task with this index is not found in our database.
+	Oops! We don't have an existing entry with this index.
 	------------------------------------------------------------
 	------------------------------------------------------------
 	Here are the tasks in your list:
 	1.	[T][✓] Task A
 	2.	[E][✓] Event A (at: 1 Apr 2021)
-	3.	[D][✘] Deadline A (by: 1 Aug 2021)
+	3.	[D][✓] Deadline A (by: 1 Aug 2021)
 	------------------------------------------------------------
 	------------------------------------------------------------
 	Bye. Hope to see you again soon!

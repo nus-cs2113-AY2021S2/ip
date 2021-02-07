@@ -1,5 +1,8 @@
 package duke.task;
 
+import duke.exception.InvalidInputException;
+import duke.exception.InvalidInputException.InputExceptionType;
+
 public class Task {
     // We set the default type icon to be *, which should be overwritten for child classes
     protected String typeIcon = "*";
@@ -9,7 +12,10 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
-    public Task(String description) {
+    public Task(String description) throws InvalidInputException {
+        if (description.isEmpty()) {
+            throw new InvalidInputException(InputExceptionType.EMPTY_DESCRIPTION);
+        }
         this.description = description;
         this.isDone = false;
     }
