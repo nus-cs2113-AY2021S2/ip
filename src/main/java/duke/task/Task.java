@@ -1,4 +1,4 @@
-package task;
+package duke.task;
 
 public class Task {
     // We set the default type icon to be *, which should be overwritten for child classes
