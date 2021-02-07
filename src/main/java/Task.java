@@ -14,21 +14,10 @@ public class Task {
         this.isDone = true;
     }
 
-    public boolean getIsDone() {
-        return isDone;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setIsDone(boolean done) {
-        this.isDone = isDone;
-    }
 
     @Override
     public String toString(){
-        return description;
+        return "["+ getStatusIcon() +"] "+ description;
     }
 
 }

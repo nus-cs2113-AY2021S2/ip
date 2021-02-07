@@ -1,9 +1,15 @@
 import java.util.Arrays;
 import java.util.Scanner;
 public class Duke {
+    private static final int TASK_MAX_SIZE = 100;
+    private static final int DONE_LENGTH = 5;
+    private static final int EVENT_LENGTH = 5;
+    private static final int TODO_LENGTH = 5;
+    private static final int DEADLINE_LENGTH = 8;
+
     private static Scanner in = new Scanner(System.in);
     private static int taskNumber = 0;
-    private static Task[] t = new Task[100];
+    private static Task[] t = new Task[TASK_MAX_SIZE];
     private static String line = "*********************************************";
 
     private static void helloMessage() {
@@ -30,20 +36,35 @@ public class Duke {
         System.out.println(line);
     }
 
-    public static void markAsDone(int number){
-        System.out.println("Nice! I've marked this task as done:");
-        t[number-1].markAsDone();
-        System.out.println(t[number-1].toString());
-        System.out.println(line);
+    public static void markAsDone(String input){
+        try {
+            int newNum = Integer.parseInt(input.substring(DONE_LENGTH));
+            if (newNum >= taskNumber || newNum < 0) {
+                throw new ArrayIndexOutOfBoundsException();
+            }
+            System.out.println("Nice! I've marked this task as done:");
+            t[newNum - 1].markAsDone();
+            System.out.println(t[newNum - 1].toString());
+            System.out.println(line);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("☹ OOPS!!! The task number is invalid!");
+            System.out.println(line);
+        }
+
     }
     public static void addTodo(String newTask){
-        System.out.println("Got it. I've added this task: ");
-        Todo todo = new Todo(newTask);
-        t[taskNumber] = todo;
-        taskNumber++;
-        System.out.println(todo.toString());
-        System.out.println("Now you have "+ taskNumber+ " tasks in the list.");
-        System.out.println(line);
+        try {
+            newTask = newTask.substring(TODO_LENGTH);
+            System.out.println("Got it. I've added this task: ");
+            Todo todo = new Todo(newTask);
+            t[taskNumber] = todo;
+            taskNumber++;
+            System.out.println(todo.toString());
+            printTotalTasks();
+        } catch (StringIndexOutOfBoundsException e) {
+            System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+            System.out.println(line);
+        }
     }
     public static void addDeadline(String deadline){
         String[] split = deadline.split(" /by");
@@ -52,9 +73,12 @@ public class Duke {
         t[taskNumber]=day;
         taskNumber++;
         System.out.println(day.toString());
+        printTotalTasks();
+
+    }
+    public static void printTotalTasks(){
         System.out.println("Now you have "+ taskNumber+ " tasks in the list.");
         System.out.println(line);
-
     }
 
     public static void addEvent(String event){
@@ -64,8 +88,7 @@ public class Duke {
         t[taskNumber]=time;
         taskNumber++;
         System.out.println(time.toString());
-        System.out.println("Now you have "+ taskNumber+ " tasks in the list.");
-        System.out.println(line);
+       printTotalTasks();
     }
 
     public static void main(String[] args) {
@@ -79,19 +102,17 @@ public class Duke {
             } else if(input.equals("list")) {
                 printList(t);
             } else if(input.startsWith("done")) {
-                int num = Integer.parseInt(input.substring(5));
-                markAsDone(num);
+                markAsDone(input);
             } else if(input.startsWith("todo")){
-                input = input.substring(5);
                 addTodo(input);
             } else if(input.startsWith("deadline")){
-                input = input.substring(8);
+                input = input.substring(DEADLINE_LENGTH);
                 addDeadline(input);
             } else if(input.startsWith("event")){
-                input = input.substring(5);
+                input = input.substring(EVENT_LENGTH);
                 addEvent(input);
             } else{
-                System.out.println("Only todo, done, deadline, event and list commands are accepted");
+                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 System.out.println(line);
             }
 
