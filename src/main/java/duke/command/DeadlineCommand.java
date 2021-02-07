@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.task.Deadline;
+import duke.ui.Menu;
+import duke.exception.MissingDescriptionException;
+import duke.task.Task;
+
 public class DeadlineCommand extends Command {
 
     public DeadlineCommand(String commandArgs) {

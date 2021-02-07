@@ -1,3 +1,7 @@
+package duke.exception;
+
+import duke.command.CommandType;
+
 public class MissingDescriptionException extends DukeException {
     private CommandType commandType;
 

@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.exception.InvalidTaskNumberException;
+import duke.ui.Menu;
+import duke.task.Task;
+
 public class DoneCommand extends Command {
 
     public DoneCommand(String commandArgs) {
@@ -6,18 +12,14 @@ public class DoneCommand extends Command {
 
     @Override
     public void execute(Task[] tasks) throws InvalidTaskNumberException {
-        if (!isValidNumber(commandArgs)) {
+        if (!isValidNumber(commandArgs) || !isValidTaskNumber(Integer.parseInt(commandArgs))) {
             throw new InvalidTaskNumberException(commandArgs);
         }
         int taskNumber = Integer.parseInt(commandArgs);
 
-        if (!isValidTaskNumber(taskNumber)) {
-            throw new InvalidTaskNumberException(commandArgs);
-        }
         Task task = tasks[taskNumber - 1];
-
-        if (task.isDone) {
-            Menu.printText("Task already marked as done!");
+        if (task.isDone()) {
+            Menu.printText("duke.task.Task already marked as done!");
             return;
         }
         task.setDone(true);
