@@ -1,3 +1,8 @@
+package duke.task;
+
+import duke.exception.MissingEventDurationException;
+import duke.exception.MissingTaskDescriptionException;
+
 public class Event extends Deadline {
 
     public Event(String description, String eventDuration) {

@@ -6,43 +6,43 @@ Hello from
 |____/ \__,_|_|\_\___|
 
 -----------------------------------
-Hello there! I'm Duke
+Hello there! I'm duke.controller.Duke
 I have the high ground! How may I help you?
 -----------------------------------
 Roger Roger. The following task has been added:
-Todo : [ ? ]  Manika Hennedige: Answer CS2113 tutorial questions
+duke.task.Todo : [ ? ]  Manika Hennedige: Answer CS2113 tutorial questions
 You now have 1 tasks in your list!
 -----------------------------------
 What is thy bidding, my master?
 -----------------------------------
 Roger Roger. The following task has been added:
-Deadline : [ ? ]  weekly CS2113 || Due by: Monday 9pm
+duke.task.Deadline : [ ? ]  weekly CS2113 || Due by: Monday 9pm
 You now have 2 tasks in your list!
 -----------------------------------
 What is thy bidding, my master?
 -----------------------------------
 This is your current list:
-1: Todo : [ ? ]  Manika Hennedige: Answer CS2113 tutorial questions
-2: Deadline : [ ? ]  weekly CS2113 || Due by: Monday 9pm
+1: duke.task.Todo : [ ? ]  Manika Hennedige: Answer CS2113 tutorial questions
+2: duke.task.Deadline : [ ? ]  weekly CS2113 || Due by: Monday 9pm
 -----------------------------------
 What is thy bidding, my master?
 -----------------------------------
 Roger Roger. The following task has been added:
-Event : [ ? ]  CS2113 || Happening on: Friday 4-6pm
+duke.task.Event : [ ? ]  CS2113 || Happening on: Friday 4-6pm
 You now have 3 tasks in your list!
 -----------------------------------
 What is thy bidding, my master?
 -----------------------------------
 The Force is with you! The following task has been marked as done:
-Todo : [ ? ]  Manika Hennedige: Answer CS2113 tutorial questions
+duke.task.Todo : [ ? ]  Manika Hennedige: Answer CS2113 tutorial questions
 You still have 2 tasks to complete in your list!
 -----------------------------------
 What is thy bidding, my master?
 -----------------------------------
 This is your current list:
-1: Todo : [ ? ]  Manika Hennedige: Answer CS2113 tutorial questions
-2: Deadline : [ ? ]  weekly CS2113 || Due by: Monday 9pm
-3: Event : [ ? ]  CS2113 || Happening on: Friday 4-6pm
+1: duke.task.Todo : [ ? ]  Manika Hennedige: Answer CS2113 tutorial questions
+2: duke.task.Deadline : [ ? ]  weekly CS2113 || Due by: Monday 9pm
+3: duke.task.Event : [ ? ]  CS2113 || Happening on: Friday 4-6pm
 -----------------------------------
 What is thy bidding, my master?
 -----------------------------------

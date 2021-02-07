@@ -1,3 +1,9 @@
+package duke.controller;
+
+import duke.exception.*;
+import duke.task.*;
+import duke.ui.*;
+
 public class TaskManager {
     public static void processTask(String input) throws InvalidInputException {
         String[] inputData = input.split(" ");

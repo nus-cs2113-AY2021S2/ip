@@ -1,3 +1,7 @@
+package duke.ui;
+
+import duke.task.Task;
+
 public class UI {
     public static String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -10,7 +14,7 @@ public class UI {
     public static void showWelcomeScreen() {
         System.out.println("Hello from\n" + logo);
         System.out.println(divider);
-        System.out.println("Hello there! I'm Duke");
+        System.out.println("Hello there! I'm duke.controller.Duke");
         System.out.println("I have the high ground! How may I help you?");
         System.out.println(divider);
     }
