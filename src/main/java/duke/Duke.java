@@ -1,11 +1,14 @@
+package duke;
 
 import java.util.*;
+
+import duke.Task.*;
 
 
 public class Duke {
     //public static String[] to_do_list= new String[100];
     //public static Task finish_goal = new Task("finish goal in list");
-    public static Task t[] = new Task[100];
+    public static duke.Task t[] = new duke.Task[100];
 
     public static void show_welcome_msg() {
         String logo = " ____        _        \n"
@@ -107,7 +110,7 @@ public class Duke {
                             String ddl = period.substring(period.indexOf(" ") + 1);
                             //System.out.println(ddl);
 
-                            t[num_of_goals] = new Task(taskName);
+                            t[num_of_goals] = new duke.Task(taskName);
                             t[num_of_goals].setSymbol(taskKind);
                             t[num_of_goals].setDdl(ddl);
                             t[num_of_goals].setPrep(prep);
@@ -128,7 +131,7 @@ public class Duke {
                         String taskName = user_input.substring(spacing + 1);
 
                         if (!noInput(taskName)) {
-                            t[num_of_goals] = new Task(taskName);
+                            t[num_of_goals] = new duke.Task(taskName);
                             t[num_of_goals].setSymbol(taskKind);
                             //t[num_of_goals].setDdl(ddl);
                             num_of_goals++;
@@ -143,7 +146,7 @@ public class Duke {
                 user_input = sc.nextLine();
             }
 
-            
+
         }
         System.out.println("____________________________________________________________\n" +
                 "     Bye. Hope to see you again soon!\n" +
