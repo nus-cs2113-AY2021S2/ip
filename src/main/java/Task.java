@@ -84,7 +84,8 @@ public class Task {
     public void markDone(int index) {
         Task currentTask = listOfTask[index-1];
         if (index > taskAmt) {
-            System.out.println("There is no task number " + index + " , Please try again");
+            System.out.println("There is no task number " + index + ".");
+            System.out.println("Please try again!");
         } else {
             if (currentTask.isDone() == true) {
                 System.out.println("You have already completed this task.");
