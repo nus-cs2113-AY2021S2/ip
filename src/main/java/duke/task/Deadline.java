@@ -1,3 +1,8 @@
+package duke.task;
+
+import duke.exception.MissingDueDateException;
+import duke.exception.MissingTaskDescriptionException;
+
 public class Deadline extends Task {
     protected String dueDate;
 

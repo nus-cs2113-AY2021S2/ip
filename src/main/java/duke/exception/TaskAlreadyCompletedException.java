@@ -1,3 +1,5 @@
+package duke.exception;
+
 public class TaskAlreadyCompletedException extends Exception {
     @Override
     public String getMessage() {

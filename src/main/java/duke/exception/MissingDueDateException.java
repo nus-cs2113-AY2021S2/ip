@@ -1,3 +1,5 @@
+package duke.exception;
+
 public class MissingDueDateException extends Exception {
     @Override
     public String getMessage() {

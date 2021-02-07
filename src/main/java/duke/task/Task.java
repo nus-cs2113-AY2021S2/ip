@@ -1,3 +1,8 @@
+package duke.task;
+
+import duke.exception.TaskAlreadyCompletedException;
+import duke.exception.TaskNotExistException;
+
 public class Task {
     private boolean isDone;
     private String description;
@@ -71,7 +76,7 @@ public class Task {
     }
 
     // Check for exceptions
-    public static void checkDoneTask(int task) throws TaskAlreadyCompletedException, TaskNotExistException{
+    public static void checkDoneTask(int task) throws TaskAlreadyCompletedException, TaskNotExistException {
         if (task > taskCounter - 1) {
             throw new TaskNotExistException();
         }
