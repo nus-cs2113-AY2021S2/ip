@@ -14,34 +14,43 @@ public class Duke {
 
     public static void main(String[] args) {
         boolean isLoop = true;
-        printWelcomeMsg();
 
-        do {
-            UserInput userInput = getUserInput();
-            switch (userInput.getCommand()) {
-            case "todo":
-                addRecord(userInput.getArguments(), Todo.TASK_TYPE);
-                break;
-            case "deadline":
-                addRecord(userInput.getArguments(), Deadline.TASK_TYPE);
-                break;
-            case "event":
-                addRecord(userInput.getArguments(), Event.TASK_TYPE);
-                break;
-            case "list":
-                showList();
-                break;
-            case "done":
-                executeCommandDone(userInput.getArguments());
-                break;
-            case "bye":
-                isLoop = isEndProgram(userInput.getArguments());
-                break;
-            default:
+        printWelcomeMsg();
+        while (isLoop) {
+            try {
+                isLoop = receiveCommand();
+            } catch (DukeException e) {
                 promptUserInputInvalid();
-                break;
             }
-        } while (isLoop);
+        }
+    }
+
+    private static boolean receiveCommand() throws DukeException {
+        boolean isLoop = true;
+        UserInput userInput = getUserInput();
+        switch (userInput.getCommand()) {
+        case "todo":
+            addRecord(userInput.getArguments(), Todo.TASK_TYPE);
+            break;
+        case "deadline":
+            addRecord(userInput.getArguments(), Deadline.TASK_TYPE);
+            break;
+        case "event":
+            addRecord(userInput.getArguments(), Event.TASK_TYPE);
+            break;
+        case "list":
+            showList(userInput.getArguments());
+            break;
+        case "done":
+            executeCommandDone(userInput.getArguments());
+            break;
+        case "bye":
+            isLoop = isEndProgram(userInput.getArguments());
+            break;
+        default:
+            throw new DukeException();
+        }
+        return isLoop;
     }
 
     private static class UserInput {
@@ -68,12 +77,12 @@ public class Duke {
     }
 
     private static void promptUserInputInvalid() {
-        System.out.println("Invalid command! Please try again!");
+        System.out.println("I don't understand your input! Please try again!");
     }
 
     private static boolean isEndProgram(String[] arguments) {
         if (arguments.length != 0) {
-            System.out.println("Command \"Bye\" requires no argument. Please try again!");
+            System.out.println("Command \"bye\" requires no argument. Please try again!");
             return true;
         }
 
@@ -82,6 +91,10 @@ public class Duke {
     }
 
     private static void executeCommandDone(String[] arguments) {
+        if (arguments.length == 0) {
+            System.out.println("Command \"done\" requires an integer argument. Please try again!");
+            return;
+        }
         int targetRecordIndex = -1;
         boolean isArgumentInteger = true;
         try {
@@ -93,7 +106,7 @@ public class Duke {
         if (arguments.length == 1 && isArgumentInteger) {
             markAsDone(targetRecordIndex);
         } else {
-            System.out.println("Command \"Done\" only requires an integer argument. Please try again!");
+            System.out.println("Command \"done\" only requires an integer argument. Please try again!");
         }
     }
 
@@ -125,11 +138,17 @@ public class Duke {
         String[] details = null;
         String taskName;
         String date;
+        boolean isAdded = false;
 
         switch (taskType) {
         case Todo.TASK_TYPE:
-            taskName = String.join(" ", detailFragments);
-            records.add(new Todo(taskName));
+            if (detailFragments.length > 0) {
+                taskName = String.join(" ", detailFragments);
+                records.add(new Todo(taskName));
+                isAdded = true;
+            } else {
+                showInvalidEmptyDescription();
+            }
             break;
         case Deadline.TASK_TYPE:
             details = getTaskNameAndDate(detailFragments, taskType);
@@ -137,6 +156,7 @@ public class Duke {
                 taskName = details[0];
                 date = details[1];
                 records.add(new Deadline(taskName, date));
+                isAdded = true;
             }
             break;
         case Event.TASK_TYPE:
@@ -145,13 +165,14 @@ public class Duke {
                 taskName = details[0];
                 date = details[1];
                 records.add(new Event(taskName, date));
+                isAdded = true;
             }
             break;
         default:
             throw new IllegalArgumentException("A non-taskType is passed to addRecord.");
         }
 
-        if (details != null || taskType.equals(Todo.TASK_TYPE)) {
+        if (isAdded) {
             int numberOfRecords = records.size();
             System.out.println("Got it. I've added this task:");
             System.out.println("\t" + records.get(numberOfRecords - 1));
@@ -159,55 +180,40 @@ public class Duke {
         }
     }
 
+    private static void showInvalidEmptyDescription() {
+        System.out.println("The description of a task cannot be empty.");
+    }
+
     private static String[] getTaskNameAndDate(String[] detailFragments, String taskType) {
-        int slashElementIndex;
-        boolean hasSlashElement = false;
-        boolean isTypeMatch = false;
-        for (slashElementIndex = 0; slashElementIndex < detailFragments.length - 1; slashElementIndex++) {
-            if (detailFragments[slashElementIndex].charAt(0) == '/') {
-                hasSlashElement = true;
-                break;
-            }
-        }
-        if (!hasSlashElement) {
-            System.out.println("Invalid input! (No date/time provided)");
+        int keywordIndex = Arrays.asList(detailFragments).indexOf(taskType.equals(Deadline.TASK_TYPE) ? "/by" : "/at");
+        if (keywordIndex < 0 || keywordIndex == detailFragments.length - 1) {
+            System.out.println("Invalid argument! It may be resulted from:");
+            System.out.println("1. No date/time provided");
+            System.out.println("2. keywords not matching");
             return null;
         }
-
-        switch (taskType) {
-        case Deadline.TASK_TYPE:
-            if (detailFragments[slashElementIndex].substring(1).equals("by")) {
-                isTypeMatch = true;
-            }
-            break;
-        case Event.TASK_TYPE:
-            if (detailFragments[slashElementIndex].substring(1).equals("at")) {
-                isTypeMatch = true;
-            }
-            break;
-        default:
-            throw new IllegalArgumentException("A non-taskType is passed to getTaskNameAndDate.");
-        }
-
-        if (!isTypeMatch) {
-            System.out.println("Invalid input! (keywords not matching)");
+        if (keywordIndex == 0) {
+            showInvalidEmptyDescription();
             return null;
         }
-
         StringBuilder taskName = new StringBuilder();
         StringBuilder dueDay = new StringBuilder();
         taskName.append(detailFragments[0]);
-        for (int i = 1; i < slashElementIndex; i++) {
+        for (int i = 1; i < keywordIndex; i++) {
             taskName.append(" ").append(detailFragments[i]);
         }
-        dueDay.append(detailFragments[slashElementIndex + 1]);
-        for (int i = slashElementIndex + 2; i < detailFragments.length; i++) {
+        dueDay.append(detailFragments[keywordIndex + 1]);
+        for (int i = keywordIndex + 2; i < detailFragments.length; i++) {
             dueDay.append(" ").append(detailFragments[i]);
         }
         return new String[]{taskName.toString(), dueDay.toString()};
     }
 
-    private static void showList() {
+    private static void showList(String[] arguments) {
+        if (arguments.length != 0) {
+            System.out.println("Command \"list\" requires no argument. Please try again!");
+            return;
+        }
         System.out.println("Here is your task List:");
         for (int i = 0; i < records.size(); i++) {
             System.out.println((i + 1) + ". " + records.get(i));
