@@ -1,6 +1,6 @@
 import java.util.List;
 import java.util.Scanner;
-import java.util.*;
+import java.util.ArrayList;
 
 public class Duke {
 
@@ -9,29 +9,46 @@ public class Duke {
         return in.nextLine();
     }
 
+    private static String getFirstWord(String text) {
+        int index = text.indexOf(' ');
+
+        if (index > -1) { // Check if there is more than one word.
+
+            return text.substring(0, index).trim(); // Extract first word.
+
+        } else {
+
+            return text; // Text is the first word itself.
+        }
+    }
+
     private static void showExitMessage() {
         System.out.println("\tBye fellow coder! Hope to see you again soon!");
     }
 
-    private static void listTasks(List<Task> list) {
-        System.out.println("\tHere are the tasks in your list:");
+    private static void listTasks(List<Task> tasks) {
         int i = 0;
-        while (i < list.size()) {
-            int num = i+1;
-            System.out.println("\t" + num + ". " + list.get(i).toString());
-            i++;
+        if (tasks.size() == 0) {
+            System.out.println("\tWow! You have time on your hands! Go do something you enjoy :)");
+        } else {
+            System.out.println("\tHere are the tasks in your list:");
+            while (i < tasks.size()) {
+                int num = i + 1;
+                System.out.println("\t" + num + ". " + tasks.get(i).toString());
+                i++;
+            }
         }
     }
 
-    private static void markAsDone(List<Task> list, int index) {
-        list.get(index).markAsDone();
+    private static void markAsDone(List<Task> tasks, int index) {
+        tasks.get(index).markAsDone();
         System.out.println("\tNice! I've marked this task as done:");
-        System.out.println("\t\t" + list.get(index).toString());
+        System.out.println("\t\t" + tasks.get(index).toString());
     }
 
-    private static void printAddedTask(List<Task> list, int taskCounter) {
+    private static void printAddedTask(List<Task> tasks, int taskCounter) {
         System.out.println("Got it. I've added this task:");
-        System.out.println("\t" + list.get(taskCounter).toString());
+        System.out.println("\t" + tasks.get(taskCounter).toString());
         int counter = taskCounter + 1;
         System.out.println("Now you have " + counter + " tasks in the list.\n");
     }
@@ -45,7 +62,7 @@ public class Duke {
 
         boolean isOn = true;
         int taskCounter = 0;
-        List<Task> list = new ArrayList<Task>();
+        List<Task> tasks = new ArrayList<Task>();
 
         System.out.println("Hello from\n" + logo);
 
@@ -55,44 +72,54 @@ public class Duke {
 
         while(isOn) {
             String line;
-            line = getUserInput();
+            line = getUserInput().trim();
             String[] part = line.split("(?<=\\D)(?=\\d)");
             int commandIndex = line.indexOf(' ');
             int timeIndex = line.indexOf('/');
-            String command = null;
-            String test = null;
-            if (commandIndex != -1) {
-                command = line.substring(0, commandIndex);
-            }
+            String command = getFirstWord(line);
 
             if (line.equals("bye")) {
                 showExitMessage();
                 isOn = false;
             } else if (line.equals("list")) {
-                listTasks(list);
-            } else if (part[0].equals("done ")) {
-                int index = Integer.parseInt(part[1]) - 1;
-                markAsDone(list, index);
+                listTasks(tasks);
+            } else if (part[0].equals("done")) {
+                int index = Integer.parseInt(part[1]);
+                markAsDone(tasks, index);
             } else if (command.equals("todo")) {
-                String task = line.substring(commandIndex);
-                list.add(new Todo(task));
+                try {
+                    String task = line.substring(commandIndex);
+                    tasks.add(new Todo(task));
 
-                printAddedTask(list, taskCounter);
-                taskCounter++;
+                    printAddedTask(tasks, taskCounter);
+                    taskCounter++;
+                } catch (StringIndexOutOfBoundsException e) {
+                    System.out.println("\tAre you sure you have nothing to do? :)");
+                }
             } else if (command.equals("deadline")) {
-                String task = line.substring(commandIndex, timeIndex);
-                String time = line.substring(timeIndex+4);
-                list.add(new Deadline(task, time));
+                try {
+                    String task = line.substring(commandIndex, timeIndex);
+                    String time = line.substring(timeIndex + 4);
+                    tasks.add(new Deadline(task, time));
 
-                printAddedTask(list, taskCounter);
-                taskCounter++;
+                    printAddedTask(tasks, taskCounter);
+                    taskCounter++;
+                } catch (StringIndexOutOfBoundsException e) {
+                    System.out.println("\tAre you sure you have no deadlines to meet? :)");
+                }
             } else if (command.equals("event")) {
-                String task = line.substring(commandIndex, timeIndex);
-                String time = line.substring(timeIndex+4);
-                list.add(new Event(task, time));
+                try {
+                    String task = line.substring(commandIndex, timeIndex);
+                    String time = line.substring(timeIndex + 4);
+                    tasks.add(new Event(task, time));
 
-                printAddedTask(list, taskCounter);
-                taskCounter++;
+                    printAddedTask(tasks, taskCounter);
+                    taskCounter++;
+                } catch (StringIndexOutOfBoundsException e) {
+                    System.out.println("\tAre you sure you have nothing going on? :)");
+                }
+            } else {
+                System.out.println("\tI am afraid a computer program is not able to understand what you're saying!");
             }
         }
     }
