@@ -1,11 +1,13 @@
+package duke;
+
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Vector;
 
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.ToDo;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 public class Duke {
     public static final String LONG_LINE = "------------------------------------------------------------";
