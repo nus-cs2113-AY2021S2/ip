@@ -1,11 +1,13 @@
 public class ToDo extends Task{
 
-    public ToDo(String description) {
-        super(description);
+
+    public ToDo(String taskDescription) {
+        super(taskDescription);
+        this.taskType = "[T]";
     }
 
     @Override
     public String toString(){
-        return "[T]" + super.toString();
+        return super.toString();
     }
 }
