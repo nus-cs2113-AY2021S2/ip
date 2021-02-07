@@ -1,4 +1,8 @@
+package duke;
+
 import java.util.Scanner;
+import duke.task.*;
+import duke.error.*;
 
 public class Duke {
     // Words for commands. 
@@ -158,9 +162,9 @@ public class Duke {
                 displayAddTaskSuccessMessage();
                 return;
             default:
-                throw new IllegalCommandException();
+                throw new IllegalThreadStateException();
             }
-        } catch (IllegalCommandException exception) {
+        } catch (IllegalThreadStateException exception) {
             // If command detected is not found in available commands
             displayToUser(ERROR_INVALID_COMMAND_RECEIVED);
         } catch (IndexOutOfBoundsException exception) {
