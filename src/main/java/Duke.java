@@ -16,7 +16,7 @@ public class Duke {
     private static final String MESSAGE_MARKED = "Nice! I've marked this task as done: ";
     private static final String MESSAGE_LIST = "Here are the tasks in your list: ";
     private static final String MESSAGE_EXIT = "Bye. Hope to see you again soon! ";
-    private static final String MESSAGE_NUMBER_OF_TASKS = "Now you have %s tasks in the list. ";
+    private static final String MESSAGE_NUMBER_OF_TASKS = "You have %s task(s) in the list. ";
     private static final String ERROR_INDEX_OUT_OF_RANGE = "Index out of range. ";
     private static final String ERROR_INVALID_COMMAND_RECEIVED = "Invalid command. Available commands: " 
             + System.lineSeparator() + "\t  list, done, todo, deadline, event, bye";
@@ -165,7 +165,7 @@ public class Duke {
             displayToUser(ERROR_INVALID_COMMAND_RECEIVED);
         } catch (IndexOutOfBoundsException exception) {
             // If task number input by user is out of range
-            displayToUser(ERROR_INDEX_OUT_OF_RANGE, MESSAGE_NUMBER_OF_TASKS);
+            displayToUser(ERROR_INDEX_OUT_OF_RANGE, String.format(MESSAGE_NUMBER_OF_TASKS, sizeOfTaskList));
         } catch (NumberFormatException exception) {
             // If task number is not an integer
             displayToUser(ERROR_INVALID_SYNTAX_RECEIVED, MESSAGE_MARK_SYNTAX);
