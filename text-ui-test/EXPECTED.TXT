@@ -38,16 +38,13 @@
 	3.	[D][✘] Deadline A (by: 1 Aug 2021)
 	------------------------------------------------------------
 	------------------------------------------------------------
-	Great. We added a new task:
-		[*][✘] Random Task without Type
-	You have in total 4 tasks
+	I cannot recognize what your command means.
 	------------------------------------------------------------
 	------------------------------------------------------------
 	Here are the tasks in your list:
 	1.	[T][✘] Task A
 	2.	[E][✘] Event A (at: 1 Apr 2021)
 	3.	[D][✘] Deadline A (by: 1 Aug 2021)
-	4.	[*][✘] Random Task without Type
 	------------------------------------------------------------
 	------------------------------------------------------------
 	Nice! I've marked this task as done:
@@ -58,15 +55,13 @@
 		[E][✓] Event A (at: 1 Apr 2021)
 	------------------------------------------------------------
 	------------------------------------------------------------
-	Nice! I've marked this task as done:
-		[*][✓] Random Task without Type
+	Task with this index is not found in our database.
 	------------------------------------------------------------
 	------------------------------------------------------------
 	Here are the tasks in your list:
 	1.	[T][✓] Task A
 	2.	[E][✓] Event A (at: 1 Apr 2021)
 	3.	[D][✘] Deadline A (by: 1 Aug 2021)
-	4.	[*][✓] Random Task without Type
 	------------------------------------------------------------
 	------------------------------------------------------------
 	Task with this index is not found in our database.
@@ -82,7 +77,6 @@
 	1.	[T][✓] Task A
 	2.	[E][✓] Event A (at: 1 Apr 2021)
 	3.	[D][✘] Deadline A (by: 1 Aug 2021)
-	4.	[*][✓] Random Task without Type
 	------------------------------------------------------------
 	------------------------------------------------------------
 	Bye. Hope to see you again soon!

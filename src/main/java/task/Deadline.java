@@ -5,12 +5,12 @@ public class Deadline extends Task {
 
     public Deadline(String description, String by) {
         super(description);
-        this.symbol = "D";
         this.by = by;
+        typeIcon = "D";
     }
 
     @Override
     public String toString() {
-        return super.toString() + String.format(" (by: %s)", this.by);
+        return super.toString() + String.format(" (by: %s)", by);
     }
 }

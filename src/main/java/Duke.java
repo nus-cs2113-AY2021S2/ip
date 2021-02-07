@@ -14,13 +14,13 @@ public class Duke {
         // Initialize a vector to store all the tasks
         Vector<Task> tasks = new Vector<>();
 
-        greeting();
+        greetingHandler();
         printlnWithIndent(LONG_LINE);
 
         Scanner in = new Scanner(System.in);
-        Boolean exit = false;
+        Boolean isExit = false;
 
-        while (!exit) {
+        while (!isExit) {
             String line = in.nextLine();
             String[] arguments = line.split(" ");
 
@@ -28,26 +28,26 @@ public class Duke {
 
             switch(arguments[0]) {
             case "bye":
-                bye();
-                exit = true;
+                byeHandler();
+                isExit = true;
                 break;
             case "list":
-                list(tasks);
+                listHandler(tasks);
                 break;
             case "done":
-                done(tasks, arguments);
+                doneHandler(tasks, arguments);
                 break;
             case "deadline":
-                deadline(tasks, arguments);
+                deadlineHandler(tasks, arguments);
                 break;
             case "event":
-                event(tasks, arguments);
+                eventHandler(tasks, arguments);
                 break;
             case "todo":
-                todo(tasks, arguments);
+                todoHandler(tasks, arguments);
                 break;
             default:
-                save(tasks, line);
+                invalidCommandHandler(tasks, line);
             }
 
             printlnWithIndent(LONG_LINE);
@@ -55,19 +55,23 @@ public class Duke {
         in.close();
     }
 
+    /*
+     * Handlers for different actions
+     */
+
     // Print a greeting message when the program is invoked
-    protected static void greeting() {
+    protected static void greetingHandler() {
         printlnWithIndent("Hello! I'm Duke.");
         printlnWithIndent("What can I do for you?");
     }
 
     // Print a goodbye message before the program exits
-    protected static void bye() {
+    protected static void byeHandler() {
         printlnWithIndent("Bye. Hope to see you again soon!");
     }
 
     // Print out everything in the list, index starts from 1
-    protected static void list(Vector<Task> tasks) {
+    protected static void listHandler(Vector<Task> tasks) {
         printlnWithIndent("Here are the tasks in your list:");
         for (int i = 0; i < tasks.size(); i += 1) {
             printlnWithIndent(String.format("%d.\t%s", i + 1, tasks.get(i)));
@@ -75,7 +79,7 @@ public class Duke {
     }
 
     // Mark a task to be done with index specified in arguments[1]
-    protected static void done(Vector<Task> tasks, String[] arguments) {
+    protected static void doneHandler(Vector<Task> tasks, String[] arguments) {
         if (arguments.length < 2) {
             // An index must be provided for the task to be marked "done"
             printlnWithIndent("You will need to give me an index, like this: `done 2`.");
@@ -102,7 +106,7 @@ public class Duke {
     }
 
     // Create a deadline task
-    protected static void deadline(Vector<Task> tasks, String[] arguments) {
+    protected static void deadlineHandler(Vector<Task> tasks, String[] arguments) {
         int i = findIndex(arguments, "/by");
         if (i != -1) {
             String description = String.join(" ", Arrays.copyOfRange(arguments, 1, i));
@@ -115,7 +119,7 @@ public class Duke {
     }
 
     // Create an event task
-    protected static void event(Vector<Task> tasks, String[] arguments) {
+    protected static void eventHandler(Vector<Task> tasks, String[] arguments) {
         int i = findIndex(arguments, "/at");
         if (i != -1) {
             String description = String.join(" ", Arrays.copyOfRange(arguments, 1, i));
@@ -128,17 +132,20 @@ public class Duke {
     }
 
     // Create a todo task
-    protected static void todo(Vector<Task> tasks, String[] arguments) {
+    protected static void todoHandler(Vector<Task> tasks, String[] arguments) {
         String description = String.join(" ", Arrays.copyOfRange(arguments, 1, arguments.length));
         tasks.add(new ToDo(description));
         printNewTask(tasks);
     }
 
     // Save a new task with no specific type in the task list
-    protected static void save(Vector<Task> tasks, String description) {
-        tasks.add(new Task(description));
-        printNewTask(tasks);
+    protected static void invalidCommandHandler(Vector<Task> tasks, String description) {
+        printlnWithIndent("I cannot recognize what your command means.");
     }
+
+    /*
+     * Help functions
+     */
 
     // Print a line with 1 tab as indentation
     protected static void printlnWithIndent(String line) {
