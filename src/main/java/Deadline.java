@@ -14,7 +14,7 @@ public class Deadline extends Task {
 
     @Override
     public String getDateTime() {
-        return "(by: " + dateTime + ")";
+        return "(by:" + dateTime + ")";
     }
 }
 

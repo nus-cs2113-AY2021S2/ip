@@ -16,12 +16,12 @@ public class Task {
         return (isDone ? "[X]":"[ ]");
     }
 
-    public void updateDoneStatus(){
+    public void setDone(){
         isDone = true;
     }
 
     public String getDateTime() {
-        return null;
+        return "";
     }
 
     public String getTaskType() {
