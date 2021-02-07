@@ -1,3 +1,5 @@
+package duke.task;
+
 public class Task {
     protected String description;
     /** Boolean to track if task is completed */
