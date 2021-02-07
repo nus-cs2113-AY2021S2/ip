@@ -1,3 +1,5 @@
+import java.lang.reflect.Array;
+import java.util.EmptyStackException;
 import java.util.Scanner;
 import java.util.Arrays;
 
@@ -16,6 +18,17 @@ public class Duke {
     private static final String COMMAND_EXIT_WORD = "bye";
     private static final String COMMAND_DONE_WORD = "done";
 
+    // error messages
+    private static final String MESSAGE_DESCRIPTION_EMPTY_TODO = "The description of a todo cannot be empty.";
+    private static final String MESSAGE_DESCRIPTION_EMPTY_DEADLINE = "The description of a deadline cannot be empty.";
+    private static final String MESSAGE_DESCRIPTION_EMPTY_EVENT = "The description of a event cannot be empty.";
+    private static final String MESSAGE_DESCRIPTION_EMPTY_DONE = "The number of the task to be marked as done cannot be empty.";
+    private static final String MESSAGE_INVALID_COMMAND = "I'm sorry, but I don't know what that means.";
+    private static final String MESSAGE_INVALID_DEADLINE = "No deadline provided or wrong splitter.";
+    private static final String MESSAGE_INVALID_EVENT = "No event date and time provided or wrong splitter.";
+    private static final String MESSAGE_INVALID_COMMAND_DONE = "Number not provided for the task to be marked as done.";
+    private static final String MESSAGE_INVALID_NUMBER_DONE = "Task number does not exist.";
+
     /**
      * Main entry point of the application.
      * Initializes the application and starts the interaction with the user.
@@ -27,7 +40,6 @@ public class Duke {
             String userCommand = getUserInput();
             executeCommand(userCommand);
         }
-        // handleCommand(); // handle input received
     }
 
     private static void printHorizontalLine() {
@@ -71,24 +83,49 @@ public class Duke {
         final String commandArgs = commandTypeAndParams[1];
         switch (commandType) {
         case COMMAND_TODO_WORD:
-            executeTodo(commandArgs);
+            try {
+                executeTodo(commandArgs);
+            } catch (EmptyDescriptionException e) {
+                System.out.println(MESSAGE_DESCRIPTION_EMPTY_TODO);
+            }
             break;
         case COMMAND_DEADLINE_WORD:
-            executeDeadline(commandArgs);
+            try {
+                executeDeadline(commandArgs);
+            } catch (EmptyDescriptionException e) {
+                System.out.println(MESSAGE_DESCRIPTION_EMPTY_DEADLINE);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println(MESSAGE_INVALID_DEADLINE);
+            }
             break;
         case COMMAND_EVENT_WORD:
-            executeEvent(commandArgs);
+            try {
+                executeEvent(commandArgs);
+            } catch (EmptyDescriptionException e) {
+                System.out.println(MESSAGE_DESCRIPTION_EMPTY_EVENT);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println(MESSAGE_INVALID_EVENT);
+            }
             break;
         case COMMAND_LIST_WORD:
             executeList();
             break;
         case COMMAND_DONE_WORD:
-            executeDone(commandArgs);
+            try {
+                executeDone(commandArgs);
+            } catch (EmptyNumberException e) {
+                System.out.println(MESSAGE_DESCRIPTION_EMPTY_DONE);
+            } catch (NumberFormatException e) {
+                System.out.println(MESSAGE_INVALID_COMMAND_DONE);
+            } catch (NullPointerException e) {
+                System.out.println(MESSAGE_INVALID_NUMBER_DONE);
+            }
             break;
         case COMMAND_EXIT_WORD:
             executeExit();
             break;
         default:
+            System.out.println(MESSAGE_INVALID_COMMAND);
             break;
         }
     }
@@ -107,12 +144,16 @@ public class Duke {
      * Add task under Todo class and feedback display message when Todo task added
      * @param commandArgs Description of the task
      */
-    private static void executeTodo(String commandArgs) {
+    private static void executeTodo(String commandArgs) throws EmptyDescriptionException{
         final String description = commandArgs;
-        Task task = new Todo(description);
-        taskList[count] = task;
-        ++count;
-        getMessageForTodo(task, count);
+        if (description.equals("")) {
+            throw new EmptyDescriptionException();
+        } else {
+            Task task = new Todo(description);
+            taskList[count] = task;
+            ++count;
+            getMessageForTodo(task, count);
+        }
     }
 
     private static void getMessageForTodo(Task task, int count) {
@@ -131,12 +172,17 @@ public class Duke {
      * Add task under Deadline class and feedback display message when Deadline task added
      * @param commandArgs description and deadline of the task
      */
-    private static void executeDeadline(String commandArgs) {
-        final String[] descriptionAndDeadline = splitDescriptionAndDeadline(commandArgs);
-        Task task = new Deadline(descriptionAndDeadline[0], descriptionAndDeadline[1]);
-        taskList[count] = task;
-        ++count;
-        getMessageForDeadline(task, count);
+    private static void executeDeadline(String commandArgs) throws EmptyDescriptionException{
+        if (commandArgs.equals("")) {
+            throw new EmptyDescriptionException();
+        } else {
+            final String[] descriptionAndDeadline = splitDescriptionAndDeadline(commandArgs);
+            Task task = new Deadline(descriptionAndDeadline[0], descriptionAndDeadline[1]);
+            taskList[count] = task;
+            ++count;
+            getMessageForDeadline(task, count);
+        }
+
     }
 
 
@@ -157,12 +203,16 @@ public class Duke {
      * Add task under Event class and feedback display message when Event task added
      * @param commandArgs
      */
-    private static void executeEvent(String commandArgs) {
-        final String[] descriptionAndTime = splitDescriptionAndTime(commandArgs);
-        Task task = new Event(descriptionAndTime[0], descriptionAndTime[1]);
-        taskList[count] = task;
-        ++count;
-        getMessageForEvent(task, count);
+    private static void executeEvent(String commandArgs) throws EmptyDescriptionException {
+        if (commandArgs.equals("")) {
+            throw new EmptyDescriptionException();
+        } else {
+            final String[] descriptionAndTime = splitDescriptionAndTime(commandArgs);
+            Task task = new Event(descriptionAndTime[0], descriptionAndTime[1]);
+            taskList[count] = task;
+            ++count;
+            getMessageForEvent(task, count);
+        }
     }
 
     private static String[] splitDescriptionAndTime(String commandArgs) {
@@ -202,7 +252,10 @@ public class Duke {
      * Mark task as done and display message when status of task is changed
      * @param commandArgs
      */
-    private static void executeDone(String commandArgs) {
+    private static void executeDone(String commandArgs) throws EmptyNumberException {
+        if (commandArgs.equals("")) {
+            throw new EmptyNumberException();
+        }
         int taskIndex = Integer.parseInt(commandArgs) - 1; // minus 1 to adhere to array indexing
         Task taskToBeDone = taskList[taskIndex];
         taskToBeDone.markAsDone();
