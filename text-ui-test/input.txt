@@ -9,5 +9,4 @@ list
 done 3
 list
 done 10
-fak ni
 bye
