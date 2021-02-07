@@ -1,4 +1,58 @@
 Hello! I am Kaman :)
 What can I do for you?
+Command entered: Testing
+I don't understand your input! Please try again!
+Command entered: todo
+The description of a task cannot be empty.
+Command entered: todo Task-1
+Got it. I've added this task:
+	[T][ ] Task-1
+Now you have 1 tasks in the list.
+Command entered: list
+Here is your task List:
+1. [T][ ] Task-1
+Command entered: deadline Task-2
+Invalid argument! It may be resulted from:
+1. No date/time provided
+2. keywords not matching
+Command entered: deadline Task-2 /at 10:00am
+Invalid argument! It may be resulted from:
+1. No date/time provided
+2. keywords not matching
+Command entered: deadline Task-2 /by 10:00am
+Got it. I've added this task:
+	[D][ ] Task-2 (by: 10:00am)
+Now you have 2 tasks in the list.
+Command entered: list
+Here is your task List:
+1. [T][ ] Task-1
+2. [D][ ] Task-2 (by: 10:00am)
+Command entered: event Task-3
+Invalid argument! It may be resulted from:
+1. No date/time provided
+2. keywords not matching
+Command entered: event Task-3 /by tmr
+Invalid argument! It may be resulted from:
+1. No date/time provided
+2. keywords not matching
+Command entered: event Task-3 /at tmr
+Got it. I've added this task:
+	[E][ ] Task-3 (at: tmr)
+Now you have 3 tasks in the list.
+Command entered: list
+Here is your task List:
+1. [T][ ] Task-1
+2. [D][ ] Task-2 (by: 10:00am)
+3. [E][ ] Task-3 (at: tmr)
+Command entered: done 0
+Invalid input! (Index cannot be out of bounds)
+Command entered: done 2
+Nice! I've marked this task as done:
+	[D][X] Task-2 (by: 10:00am)
+Command entered: list
+Here is your task List:
+1. [T][ ] Task-1
+2. [D][X] Task-2 (by: 10:00am)
+3. [E][ ] Task-3 (at: tmr)
 Command entered: bye
 Bye. Hope to see you again soon!
