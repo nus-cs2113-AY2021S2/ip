@@ -1,3 +1,5 @@
+package duke;
+
 public class Task {
     protected static final int MAX_TASK_NUM = 100;
     protected static final String MARK_DONE = "X";
