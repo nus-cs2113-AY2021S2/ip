@@ -8,7 +8,6 @@ public class Duke {
     private static final String COMMAND_MARK_WORD = "done";
     private static final String COMMAND_LIST_WORD = "list";
     private static final String COMMAND_EXIT_WORD = "bye";
-    private static final String NO_COMMAND = "";
     
     // Display messages. 
     private static final String MESSAGE_WELCOME = "Hello! I'm Duke, what can I do for you?";
@@ -19,8 +18,15 @@ public class Duke {
     private static final String MESSAGE_EXIT = "Bye. Hope to see you again soon! ";
     private static final String MESSAGE_NUMBER_OF_TASKS = "Now you have %s tasks in the list. ";
     private static final String ERROR_INDEX_OUT_OF_RANGE = "Index out of range. ";
-    private static final String ERROR_NO_COMMAND_RECEIVED = "No command detected. ";
-    private static final String ERROR_INVALID_COMMAND_RECEIVED = "Invalid command. ";
+    private static final String ERROR_INVALID_COMMAND_RECEIVED = "Invalid command. Available commands: " 
+            + System.lineSeparator() + "\t  list, done, todo, deadline, event, bye";
+    private static final String ERROR_EMPTY_LIST = "You have no tasks recorded.";
+    private static final String ERROR_INVALID_SYNTAX_RECEIVED = "Invalid syntax! Usage: ";
+
+    private static final String MESSAGE_MARK_SYNTAX = " done <task number>";
+    private static final String MESSAGE_TODO_SYNTAX = " todo <task name>";
+    private static final String MESSAGE_DEADLINE_SYNTAX = " deadline <task name> /by <date>";
+    private static final String MESSAGE_EVENT_SYNTAX = " event <task name> /at <date>";
 
     // Filter words to locate date for deadline and event tasks. 
     private static final String DEADLINE_DATA_PREFIX_BY = "/by";
@@ -50,17 +56,26 @@ public class Duke {
         return tasks[index];
     }
 
+    private static boolean isTaskListEmpty() {
+        return sizeOfTaskList == 0;
+    }
+
     /**
      * Gets task number from the input string. 
      * 
      * @return Task number. 
      */
-    private static int getTaskNumber(String command) {
+    private static int getTaskNumber() throws NumberFormatException, IllegalTaskException, TaskListEmptyException {
         // Gets the taskNumber from the index of the first " ". 
         // Adds 1 to the index remove the " " from string. 
         // Since user input task number starts from 1, remove 1 from taskNumber to 
         //         reflect the correct taskNumber in tasks. 
-        int taskNumber = Integer.parseInt(command.substring(command.indexOf(" ") + 1)) - 1;
+        if (userCommand == null) {
+            throw new IllegalTaskException(MESSAGE_MARK_SYNTAX);
+        } if (isTaskListEmpty()) {
+            throw new TaskListEmptyException();
+        }
+        int taskNumber = Integer.parseInt(userCommand.substring(userCommand.indexOf(" ") + 1)) - 1;
         return taskNumber;
     }
 
@@ -127,38 +142,48 @@ public class Duke {
      *  - Invalid command, display error message. 
      */
     private static void executeCommand() {
-        switch(getCommand()) {
-        case COMMAND_EXIT_WORD:
-            // Fallthrough
-            displayToUser(MESSAGE_EXIT);
-            executeExitProgramRequest();
-        case COMMAND_LIST_WORD:
-            executeListAllTasks();
-            return;
-        case COMMAND_MARK_WORD:
-            int taskNumber = getTaskNumber(userCommand);
-            if (isTaskNumberValid(taskNumber)) {
-                executeMarkTask(taskNumber);
-                displayMarkTaskSuccessMessage(taskNumber);
-            } else {
-                displayToUser(ERROR_INDEX_OUT_OF_RANGE);
+        try {
+            switch(getCommand()) {
+            case COMMAND_EXIT_WORD:
+                // Fallthrough
+                displayToUser(MESSAGE_EXIT);
+                executeExitProgramRequest();
+            case COMMAND_LIST_WORD:
+                executeListAllTasks();
+                return;
+            case COMMAND_MARK_WORD:
+                int taskNumber = getTaskNumber();
+                if (isTaskNumberValid(taskNumber)) {
+                    executeMarkTask(taskNumber);
+                    displayMarkTaskSuccessMessage(taskNumber);
+                    return;
+                }
+                throw new IndexOutOfBoundsException();
+            case COMMAND_TODO_WORD:
+                executeAddTodo(); 
+                displayAddTaskSuccessMessage();
+                return;
+            case COMMAND_DEADLINE_WORD:
+                executeAddDeadline();
+                displayAddTaskSuccessMessage();
+                return;
+            case COMMAND_EVENT_WORD:
+                executeAddEvent();
+                displayAddTaskSuccessMessage();
+                return;
+            default:
+                throw new IllegalCommandException();
             }
-            return;
-        case COMMAND_TODO_WORD:
-            executeAddTodo(); 
-            return;
-        case COMMAND_DEADLINE_WORD:
-            executeAddDeadline();
-            return;
-        case COMMAND_EVENT_WORD:
-            executeAddEvent();
-            return;
-        case NO_COMMAND:
-            displayToUser(ERROR_NO_COMMAND_RECEIVED);
-            return;
-        default:
+        } catch (IllegalCommandException e) {
             displayToUser(ERROR_INVALID_COMMAND_RECEIVED);
-            return;
+        } catch (IndexOutOfBoundsException e) {
+            displayToUser(ERROR_INDEX_OUT_OF_RANGE);
+        } catch (NumberFormatException e) {
+            displayToUser(ERROR_INVALID_SYNTAX_RECEIVED, MESSAGE_MARK_SYNTAX);
+        } catch (TaskListEmptyException e) {
+            displayToUser(ERROR_EMPTY_LIST);
+        } catch (IllegalTaskException e) {
+            displayToUser(ERROR_INVALID_SYNTAX_RECEIVED, e.getMessage());
         }
     }
 
@@ -168,6 +193,7 @@ public class Duke {
      * @return Command extracted. 
      */
     private static String getCommand() {
+        // First word of userCommand is the task command. 
         String commandWord = userCommand.split(" ")[0].toLowerCase();
         if (userCommand.length() > 4) {
             userCommand = userCommand.substring(userCommand.indexOf(" ") + 1, userCommand.length());
@@ -188,7 +214,10 @@ public class Duke {
      * Lists all tasks current in the tasks list. 
      * Shows the type of task (T, D, E) and marks X if the task is done. 
      */
-    private static void executeListAllTasks() {
+    private static void executeListAllTasks() throws TaskListEmptyException {
+        if (isTaskListEmpty()) {
+            throw new TaskListEmptyException();
+        }
         displayToUser(tasks);
     }
 
@@ -223,10 +252,12 @@ public class Duke {
     /**
      * Adds a new todo task to task list. 
      */
-    private static void executeAddTodo() {
+    private static void executeAddTodo() throws IllegalTaskException {
+        if (userCommand == null) {
+            throw new IllegalTaskException(MESSAGE_TODO_SYNTAX);
+        } 
         tasks[sizeOfTaskList] = new Todo(userCommand);
         sizeOfTaskList++;
-        displayAddTaskSuccessMessage();
     }
 
     /**
@@ -235,15 +266,10 @@ public class Duke {
      * If date is not null, create new deadline task. 
      * Otherwise, display invalid command error. 
      */
-    private static void executeAddDeadline() {
+    private static void executeAddDeadline() throws IllegalTaskException {
         String date = processParameters(DEADLINE_DATA_PREFIX_BY);
-        if (date != null) {
-            tasks[sizeOfTaskList] = new Deadline(userCommand, date);
-            sizeOfTaskList++;
-            displayAddTaskSuccessMessage();
-        } else {
-            displayToUser(ERROR_INVALID_COMMAND_RECEIVED);
-        }
+        tasks[sizeOfTaskList] = new Deadline(userCommand, date);
+        sizeOfTaskList++;
     }
 
     /**
@@ -252,17 +278,10 @@ public class Duke {
      * If date is not null, create new deadline task. 
      * Otherwise, display invalid command error. 
      */
-    private static void executeAddEvent() {
+    private static void executeAddEvent() throws IllegalTaskException {
         String date = processParameters(EVENT_DATA_PREFIX_AT);
-        if (date != null) {
-            tasks[sizeOfTaskList] = new Event(userCommand, date);
-            sizeOfTaskList++;
-            displayAddTaskSuccessMessage();
-        } else {
-            // Display error message
-            displayToUser(ERROR_INVALID_COMMAND_RECEIVED);
-        }
-
+        tasks[sizeOfTaskList] = new Event(userCommand, date);
+        sizeOfTaskList++;
     }
 
     /**
@@ -272,17 +291,31 @@ public class Duke {
      * @param filterString The string to find in userCommand depending on an event (/at) or deadline (/by). 
      * @return The date extracted from userCommand. 
      */
-    private static String processParameters(String filterString) {
+    private static String processParameters(String filterString) throws IllegalTaskException {
         int indexOfDate = userCommand.indexOf(filterString);
         if (indexOfDate > 0) {
-            // Add 4 to indexOfDate to remove the "/by " or "/at " filter strings. 
-            String date = userCommand.substring(indexOfDate + 4);
+            String date = getDate(indexOfDate, filterString);
             userCommand = userCommand.substring(0, indexOfDate - 1);
             return date;
-        } else {
-            return null;
         }
-        
+        throw new IllegalTaskException(getSyntaxMessage(filterString));
+    }
+
+    private static String getSyntaxMessage(String filterString) {
+        if (filterString.equals(DEADLINE_DATA_PREFIX_BY)) {
+            return MESSAGE_DEADLINE_SYNTAX;
+        }
+        return MESSAGE_EVENT_SYNTAX;
+    }
+
+    private static String getDate(int indexOfDate, String filterString) throws IllegalTaskException {
+        // Check if string contains date after filterString 
+        // +4 to remove filterString and +1 to convert index to length. Total: +5
+        if (userCommand.length() < indexOfDate + 5) {
+            throw new IllegalTaskException(getSyntaxMessage(filterString));
+        }
+        // Add 4 to indexOfDate to remove the "/by " or "/at " filter strings. 
+        return userCommand.substring(indexOfDate + 4);
     }
 
     /**
