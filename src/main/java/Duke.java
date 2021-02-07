@@ -1,5 +1,9 @@
 import java.util.Scanner;
 import java.util.Arrays;
+import duke.Deadline;
+import duke.Task;
+import duke.Event;
+import duke.Todo;
 
 public class Duke {
     static final int MAX_NO_OF_TASKS = 100;
@@ -57,7 +61,7 @@ public class Duke {
                             System.out.println("Nice! I've marked this task as done:");
                             System.out.println(tasks[new_taskNo - 1].toString());
                         } catch (StringIndexOutOfBoundsException e){
-                            System.out.println(":( Opppss!! The number of task to be done" +
+                            System.out.println(":( OOps!! The number of task to be done" +
                                     "cannot be empty");
                         }
                     } else if (task.contains("todo")){
@@ -66,7 +70,7 @@ public class Duke {
                             tasks[index] = new Todo(taskName, 'T');
                             index = addTaskMessage(index, tasks[index]);
                         } catch (StringIndexOutOfBoundsException e){
-                            System.out.println(":( Opppss!! The description of a" +
+                            System.out.println(":( OOps!! The description of a" +
                                     "todo cannot be empty");
                         }
                     } else if (task.contains("deadline")){
@@ -77,7 +81,7 @@ public class Duke {
                             tasks[index] = new Deadline(taskName1, 'D', by);
                             index = addTaskMessage(index, tasks[index]);
                         } catch (StringIndexOutOfBoundsException e){
-                            System.out.println(":( Opppss!! The description of a" +
+                            System.out.println(":( OOps!! The description of a" +
                                     "deadline cannot be empty");
                         }
                     } else if (task.contains("event")) {
@@ -88,11 +92,11 @@ public class Duke {
                             tasks[index] = new Event(taskName2, 'E', at);
                             index = addTaskMessage(index, tasks[index]);
                         } catch (StringIndexOutOfBoundsException e){
-                            System.out.println(":( Opppss!! The description of a" +
+                            System.out.println(":( OOps!! The description of a" +
                                     "event cannot be empty");
                         }
                     } else{
-                        System.out.println(":( Opppss!! I'm sorry, " +
+                        System.out.println(":( OOps!! I'm sorry, " +
                                 "but i don't know what that means...");
                     }
                     /*
