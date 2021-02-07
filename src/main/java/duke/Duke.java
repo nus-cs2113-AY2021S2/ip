@@ -17,44 +17,38 @@ public class Duke {
 
         Scanner in = new Scanner(System.in);
 
-        while (true){
+        while (true) {
             String line = in.nextLine();
             String taskType = "";
 
             try {
-                if (line.equals("list")){
+                if (line.equals("list")) {
                     printList();
                     continue;
-                }
-                else if (line.equals("bye")) {
+                } else if (line.equals("bye")) {
                     printBye();
                     break;
-                }
-                else if (line.contains("done")){
+                } else if (line.contains("done")) {
                     taskType = "done";
                     markDone(line);
                     continue;
-                }
-                else if (line.contains("todo")){
+                } else if (line.contains("todo")) {
                     taskType = "todo";
                     addTodo(line);
                     continue;
-                }
-                else if (line.contains("deadline")){
+                } else if (line.contains("deadline")) {
                     taskType = "deadline";
                     addDeadline(line);
                     continue;
-                }
-                else if (line.contains("event")){
+                } else if (line.contains("event")) {
                     taskType = "event";
                     addEvent(line);
                     continue;
-                }
-                else {
+                } else {
                     throw new DukeException();
                 }
 
-            } catch (ArrayIndexOutOfBoundsException e){
+            } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("OOPS!!! The description of a " + taskType + " cannot be empty.");
 
             } catch (DukeException e) {
@@ -69,7 +63,7 @@ public class Duke {
         String[] info = detailWords.split(" /at ", 2);
         String taskDescription = info[0];
         String atTime = info[1];
-        tasks[taskCount] = new Event(taskDescription,atTime);
+        tasks[taskCount] = new Event(taskDescription, atTime);
         System.out.println("Got it. I've added this task: ");
         System.out.println(tasks[taskCount].toString());
         taskCount++;
@@ -82,7 +76,7 @@ public class Duke {
         String[] info = detailWords.split(" /by ", 2);
         String taskDescription = info[0];
         String byDate = info[1];
-        tasks[taskCount] = new Deadline(taskDescription,byDate);
+        tasks[taskCount] = new Deadline(taskDescription, byDate);
         System.out.println("Got it. I've added this task: ");
         System.out.println(tasks[taskCount].toString());
         taskCount++;
@@ -108,17 +102,17 @@ public class Duke {
     private static void markDone(String line) {
         String[] words = line.split(" ", 2);
         int doneIndex = Integer.parseInt(words[1]);
-        Task doneTask = tasks[doneIndex-1];
+        Task doneTask = tasks[doneIndex - 1];
         doneTask.markAsDone();
         System.out.println("Nice! I've marked this task as done: ");
-        System.out.println("[" + doneTask.getStatusIcon() + "] "+doneTask.description);
+        System.out.println("[" + doneTask.getStatusIcon() + "] " + doneTask.description);
     }
 
     private static void printList() {
         System.out.println("Here are the tasks in your list: ");
         int index = 0;
-        while (index < taskCount){
-            System.out.println((index+1)+"." +tasks[index].toString());
+        while (index < taskCount) {
+            System.out.println((index + 1) + "." + tasks[index].toString());
             index++;
         }
     }
