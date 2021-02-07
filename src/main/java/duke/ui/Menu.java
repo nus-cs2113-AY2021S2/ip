@@ -1,4 +1,8 @@
-import javax.sound.midi.Soundbank;
+package duke.ui;
+
+import duke.task.Task;
+import duke.exception.DukeException;
+
 import java.util.Scanner;
 
 public class Menu {

@@ -1,11 +1,20 @@
-import java.util.List;
+package duke.parser;
+
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.ListCommand;
+import duke.command.TodoCommand;
+import duke.exception.UnknownCommandException;
 
 public class Parser {
 
     /**
-     * Takes in a user input and returns a Command object.
+     * Takes in a user input and returns a duke.command.Command object.
      * @param userInput
-     * @return Command
+     * @return duke.command.Command
      */
     public static Command parseUserInput(String userInput) throws UnknownCommandException {
         String[] commandAndArgs = getCommandAndArgs(userInput);

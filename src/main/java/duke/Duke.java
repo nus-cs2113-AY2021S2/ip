@@ -1,4 +1,10 @@
-import java.util.Scanner;
+package duke;
+
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.task.Task;
+import duke.ui.Menu;
 
 public class Duke {
     private static final int MAX_TASKS = 100;

@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.task.Event;
+import duke.ui.Menu;
+import duke.exception.MissingDescriptionException;
+import duke.task.Task;
+
 public class EventCommand extends Command {
 
     public EventCommand(String commandArgs) {
