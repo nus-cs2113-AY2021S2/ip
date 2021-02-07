@@ -1,3 +1,5 @@
+package duke;
+
 public class Event extends Task {
     private static final String TASK_SYMBOL_EVENT = "E";
     private String taskTiming;
