@@ -1,3 +1,12 @@
+package duke;
+
+import duke.exception.DukeException;
+import duke.command.UserInput;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -51,29 +60,6 @@ public class Duke {
             throw new DukeException();
         }
         return isLoop;
-    }
-
-    private static class UserInput {
-        private String command;
-        private String[] arguments;
-
-        public UserInput(String rawInput) {
-            processInput(rawInput);
-        }
-
-        private void processInput(String rawInput) {
-            String[] inputFragments = rawInput.split(" ");
-            command = inputFragments[0];
-            arguments = Arrays.copyOfRange(inputFragments, 1, inputFragments.length);
-        }
-
-        public String getCommand() {
-            return command;
-        }
-
-        public String[] getArguments() {
-            return arguments;
-        }
     }
 
     private static void promptUserInputInvalid() {
@@ -135,7 +121,7 @@ public class Duke {
     }
 
     private static void addRecord(String[] detailFragments, String taskType) {
-        String[] details = null;
+        String[] details;
         String taskName;
         String date;
         boolean isAdded = false;

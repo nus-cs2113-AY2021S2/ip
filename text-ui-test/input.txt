@@ -14,5 +14,6 @@ done 0
 done 2
 list
 done
-
+list 2
+bye again~
 bye
