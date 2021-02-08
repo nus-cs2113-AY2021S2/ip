@@ -1,5 +1,8 @@
+package duke;
+import duke.myExceptions.*;
+import duke.myTasks.*;
 import java.util.Scanner;
-import MyExceptions.*;
+
 
 public class Duke {
 
@@ -14,17 +17,17 @@ public class Duke {
 
     public static void printList() {
         for (int i = 0; i < index; i++) {
-            System.out.println(String.valueOf(i + 1) + ". " + list[i].toString());
+            System.out.println((i + 1) + ". " + list[i].toString());
         }
     }
 
     public static void printAddMessage(Todo task) {
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + task.toString());
-        System.out.println("Now you have " + String.valueOf(index) + " tasks in the list.");
+        System.out.println("Now you have " + index + " tasks in the list.");
     }
 
-    public static void executeInstruction(String command, String content) throws InvalidInput, NoContent, NoTime, NullPointerException, NumberFormatException{
+    public static void executeInstruction(String command, String content) throws InvalidInput, NoContent, NoTime, NullPointerException, NumberFormatException, ArrayIndexOutOfBoundsException{
         switch (command) {
         case "bye":
             isRunning = false;
@@ -69,7 +72,7 @@ public class Duke {
         String input;
         do {
             input = in.nextLine();
-            String command = "to";
+            String command;
             String content = "";
             if (input.indexOf(' ') == -1) {
                 command = input;
@@ -81,13 +84,11 @@ public class Duke {
                 executeInstruction(command, content);
             } catch (InvalidInput e) {
                 System.out.println("Invalid command used");
-            } catch (NoContent e) {
+            } catch (NoContent | StringIndexOutOfBoundsException e) {
                 System.out.println("Needs a name");
             } catch (NoTime e) {
                 System.out.println("Needs time. Add \"/by <time>\" to command.");
-            } catch (StringIndexOutOfBoundsException e) {
-                System.out.println("Needs a name");
-            } catch (NullPointerException e) {
+            } catch (NullPointerException | ArrayIndexOutOfBoundsException e) {
                 System.out.println("You have inputted an invalid index number");
             } catch (NumberFormatException e) {
                 System.out.println("Specify which task to mark as done");

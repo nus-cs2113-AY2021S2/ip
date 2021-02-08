@@ -1,9 +1,10 @@
-import MyExceptions.NoContent;
-import MyExceptions.NoTime;
+package duke.myTasks;
 
+import duke.myExceptions.NoContent;
+import duke.myExceptions.NoTime;
 public class Deadline extends Event{
 
-    Deadline(String content) throws NoContent, NoTime {
+    public Deadline(String content) throws NoContent, NoTime {
         super(content);
     }
 

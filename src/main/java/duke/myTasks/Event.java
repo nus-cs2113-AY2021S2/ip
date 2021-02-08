@@ -1,14 +1,16 @@
-import MyExceptions.NoContent;
-import MyExceptions.NoTime;
+package duke.myTasks;
+import duke.myExceptions.NoContent;
+import duke.myExceptions.NoTime;
+
 
 public class Event extends Todo{
     protected String time;
 
-    Event(String content) throws NoContent, NoTime{
+    public Event(String content) throws NoContent, NoTime{
         if (content.equals("")) {
             throw new NoContent();
         }
-        if (content.indexOf("/") == -1) {
+        if (!content.contains("/")) {
             throw new NoTime();
         }
         String name = content.substring(0, content.indexOf('/') - 1);

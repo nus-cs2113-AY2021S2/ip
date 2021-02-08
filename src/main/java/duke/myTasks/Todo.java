@@ -1,10 +1,11 @@
-import MyExceptions.NoContent;
+package duke.myTasks;
+import duke.myExceptions.NoContent;
 
 public class Todo {
     protected String name;
     protected boolean isDone;
 
-    Todo(String name) throws NoContent{
+    public Todo(String name) throws NoContent{
         if (name.equals("")) {
             throw new NoContent();
         }
