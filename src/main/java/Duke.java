@@ -24,7 +24,7 @@ public class Duke {
         System.out.println("Now you have " + String.valueOf(index) + " tasks in the list.");
     }
 
-    public static void executeInstruction(String command, String content) throws InvalidInput, NoContent, NoTime{
+    public static void executeInstruction(String command, String content) throws InvalidInput, NoContent, NoTime, NullPointerException, NumberFormatException{
         switch (command) {
         case "bye":
             isRunning = false;
@@ -87,6 +87,10 @@ public class Duke {
                 System.out.println("Needs time. Add \"/by <time>\" to command.");
             } catch (StringIndexOutOfBoundsException e) {
                 System.out.println("Needs a name");
+            } catch (NullPointerException e) {
+                System.out.println("You have inputted an invalid index number");
+            } catch (NumberFormatException e) {
+                System.out.println("Specify which task to mark as done");
             }
         } while (isRunning);
         System.out.println("Bye. Hope to see you again soon!");
