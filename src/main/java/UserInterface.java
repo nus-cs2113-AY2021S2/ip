@@ -24,30 +24,21 @@ public class UserInterface {
         String input;
         do {
             input = scanner.nextLine();
-        } while(input.trim().isEmpty());
+        } while (input.trim().isEmpty());
         printDivider();
         return input;
     }
 
-    public String[] parseInput(String input) {
-        String[] split = input.split(" ", 2);
-        if (split.length == 2) {
-            return split;
-        } else {
-            return new String[]{split[0], ""};
-        }
-    }
-
-    private void printDivider(){
+    private void printDivider() {
         System.out.println(DIVIDER);
     }
 
-    public void showExitMessage(){
+    public void showExitMessage() {
         System.out.println(EXIT_MESSAGE);
     }
 
     public void printFeedback(String feedback) {
-        if(feedback != null) {
+        if (feedback != null) {
             System.out.println(feedback);
             printDivider();
         }

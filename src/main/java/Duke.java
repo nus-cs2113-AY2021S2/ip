@@ -1,9 +1,5 @@
-import java.util.Locale;
-import java.util.Scanner;
-
 public class Duke {
 
-    private static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
     private static UserInterface ui = new UserInterface();
     private static TaskManager taskManager = new TaskManager();
 
@@ -11,18 +7,19 @@ public class Duke {
 
         ui.showWelcomeMessage();
 
-        while(true){
+        while (true) {
             String input = ui.getUserInput();
-            String[] parsedInput = ui.parseInput(input);
-            String feedback = executeCommand(parsedInput);
+            String feedback = executeCommand(input);
             ui.printFeedback(feedback);
         }
     }
 
-    private static String executeCommand(String[] inputs){
-        String command = inputs[0].toLowerCase();
+    private static String executeCommand(String input) {
+        String[] parsedInput = parseInput(input);
+        String command = parsedInput[0].toLowerCase();
         String feedback = null;
-        switch(command){
+
+        switch (command) {
         case "bye":
             ui.showExitMessage();
             System.exit(0);
@@ -31,13 +28,32 @@ public class Duke {
             feedback = taskManager.listTask();
             break;
         case "done":
-            int taskNumber = Integer.parseInt(inputs[1])-1;
-            feedback = taskManager.doneTask(taskNumber);
+            try {
+                int taskNumber = Integer.parseInt(parsedInput[1]) - 1;
+                feedback = taskManager.doneTask(taskNumber);
+            } catch (NumberFormatException e) {
+                feedback = "OOPS!!! Task number has to be a number";
+            }
             break;
         default:
-            feedback = taskManager.addTask(command, inputs[1]);
+            try {
+                feedback = taskManager.addTask(command, parsedInput[1]);
+            } catch (InvalidCommandException e) {
+                feedback = "OOPS!!! I'm sorry, but I don't know what that means :(";
+            } catch (EmptyDescriptionException e) {
+                feedback = "OOPS!!! The description of a " + command + " cannot be empty.";
+            }
         }
 
         return feedback;
+    }
+
+    public static String[] parseInput(String input) {
+        String[] split = input.split(" ", 2);
+        if (split.length == 2) {
+            return split;
+        } else {
+            return new String[]{split[0], ""};
+        }
     }
 }
