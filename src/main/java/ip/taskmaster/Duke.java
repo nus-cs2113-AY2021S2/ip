@@ -1,5 +1,10 @@
 package ip.taskmaster;
 
+import ip.taskmaster.task.Deadline;
+import ip.taskmaster.task.Event;
+import ip.taskmaster.task.Task;
+import ip.taskmaster.task.Todo;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -15,6 +20,7 @@ public class Duke {
 
         Task[] list = new Task[100];
         int index = 0;
+        int slashPosition = 0;
         Scanner in = new Scanner(System.in);
         String command = in.nextLine();
 
@@ -28,27 +34,46 @@ public class Duke {
                     }
                     recordTasks(list, index, command, "todo");
                     index++;
-                } else if (command.startsWith("deadline")) {
-                    if (command.length() <= 9) {
-                        throw new DukeException("deadline");
-                    }
-                    recordTasks(list, index, command, "deadline");
-                    index++;
-                } else if (command.startsWith("event")) {
-                    if (command.length() <= 6) {
-                        throw new DukeException("event");
-                    }
-                    recordTasks(list, index, command, "event");
-                    index++;
-                } else if (command.startsWith("done")) {
-                    if (command.length() <= 5) {
-                        throw new DukeException("done");
-                    }
-                    markDone(list, command);
                 } else {
-                    printLine();
-                    System.out.println("🙁 OOPS!!! I'm sorry, but I don't know what that means :-(");
-                    printLine();
+                    int Position = Integer.parseInt(String.valueOf(command.indexOf('/')));
+                    if (command.startsWith("deadline")) {
+                        if (command.length() <= 9) {
+                            throw new DukeException("deadline");
+                        }
+                        slashPosition = Position;
+                        if (slashPosition != -1) {
+                            recordTasks(list, index, command, "deadline");
+                            index++;
+                        } else {
+                            printLine();
+                            System.out.println("🙁 OOPS!!! The deadline time is missing.");
+                            System.out.println("Please fill in the time! :)");
+                            printLine();
+                        }
+                    } else if (command.startsWith("event")) {
+                        if (command.length() <= 6) {
+                            throw new DukeException("event");
+                        }
+                        slashPosition = Position;
+                        if (slashPosition != -1) {
+                            recordTasks(list, index, command, "event");
+                            index++;
+                        } else {
+                            printLine();
+                            System.out.println("🙁 OOPS!!! The event time is missing.");
+                            System.out.println("Please fill in the time! :)");
+                        }
+                    } else if (command.startsWith("done")) {
+                        if (command.length() <= 5) {
+                            throw new DukeException("done");
+                        }
+                        markDone(list, command);
+                    } else {
+                        printLine();
+                        System.out.println("🙁 OOPS!!! I'm sorry, but I don't know what that means :-(");
+                        System.out.println("Please input again! :)");
+                        printLine();
+                    }
                 }
             } catch (DukeException e) {
                 printLine();
@@ -57,6 +82,7 @@ public class Duke {
                 } else {
                     System.out.println("☹ OOPS!!! The description of a " + e.category + " cannot be empty.");
                 }
+                System.out.println("Please complete the description! :)");
                 printLine();
             }
             command = in.nextLine();
@@ -95,7 +121,7 @@ public class Duke {
     public static void markDone(Task[] list, String command) {
         int i;
         i = Integer.parseInt(command.substring(5));
-        list[i - 1].isDone = true;
+        list[i - 1].setDone(true);
         printLine();
         System.out.println("Nice! I've marked this task as done:");
         System.out.println(" " + " " + list[i - 1].toString());
@@ -114,7 +140,7 @@ public class Duke {
 
     public static void printBye() {
         printLine();
-        System.out.println("Bye. Hope to see you again soon!\n");
+        System.out.println("Bye. Hope to see you again soon!");
         printLine();
     }
 

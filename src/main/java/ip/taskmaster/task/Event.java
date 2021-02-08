@@ -1,4 +1,4 @@
-package ip.taskmaster;
+package ip.taskmaster.task;
 
 public class Event extends Task {
     protected String at;
