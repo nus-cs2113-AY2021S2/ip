@@ -24,7 +24,7 @@ public class Duke {
         System.out.println("Now you have " + String.valueOf(index) + " tasks in the list.");
     }
 
-    public static void executeInstruction(String command, String content) throws InvalidInput{
+    public static void executeInstruction(String command, String content) throws InvalidInput, NoContentInTodo{
         switch (command) {
         case "bye":
             isRunning = false;
@@ -81,6 +81,8 @@ public class Duke {
                 executeInstruction(command, content);
             } catch (InvalidInput e) {
                 System.out.println("Invalid command used");
+            } catch (NoContentInTodo e) {
+                System.out.println("Todo needs a name");
             }
         } while (isRunning);
         System.out.println("Bye. Hope to see you again soon!");
