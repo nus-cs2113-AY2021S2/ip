@@ -12,11 +12,13 @@ public class Duke {
         Task task;
         ToDo toDo;
         String[] splitCommand;
-        String[] date;
+        String[] description;
         String command;
         int numberOfTasks = 0;
 
         while (!(command = userInput.nextLine().trim()).equals("bye")) {
+
+            printHorizontalLine();
 
             if (command.equals("list")) {
                 printListMessage(tasks, numberOfTasks);
@@ -29,37 +31,65 @@ public class Duke {
             switch (tokens[0]) {
             case "done":
                 int taskNumber = Integer.parseInt(tokens[1]);
-                task = tasks[taskNumber-1];
+                task = tasks[taskNumber - 1];
                 task.markAsDone();
-                printHorizontalLine();
                 printDoneMessage(task);
-                printHorizontalLine();
                 break;
             case "deadline":
-                splitCommand = command.split(" ", 2);
-                date = splitCommand[1].split("/by", 2);
-                Deadline deadline = new Deadline(date[0].trim(), date[1].trim());
-                tasks[numberOfTasks] = deadline;
-                printDeadlineMessage(deadline, ++numberOfTasks);
-                printHorizontalLine();
+                try {
+                    splitCommand = command.split(" ", 2);
+                    description = splitCommand[1].split("/by", 2);
+                    checkForValidDeadlineInput(description);
+                    Deadline deadline = new Deadline(description[0].trim(), description[1].trim());
+                    tasks[numberOfTasks] = deadline;
+                    printDeadlineMessage(deadline, ++numberOfTasks);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    printMissingFieldsMessage();
+                } catch (DescriptionFieldEmptyException e) {
+                    printDescriptionFieldEmptyMessage();
+                } catch (TimeFieldEmptyException e) {
+                    printTimeFieldEmptyMessage();
+                } catch (MultipleTimeFieldsException e) {
+                    printTooManyTimeFieldsMessage();
+                }
                 break;
             case "event":
-                splitCommand = command.split(" ", 2);
-                date = splitCommand[1].split("/at", 2);
-                Event event = new Event(date[0].trim(), date[1].trim());
-                tasks[numberOfTasks] = event;
-                printEventMessage(event, ++numberOfTasks);
-                printHorizontalLine();
+                try {
+                    splitCommand = command.split(" ", 2);
+                    description = splitCommand[1].split("/at", 2);
+                    checkForValidEventInput(description);
+                    Event event = new Event(description[0].trim(), description[1].trim());
+                    tasks[numberOfTasks] = event;
+                    printEventMessage(event, ++numberOfTasks);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    printMissingFieldsMessage();
+                } catch (DescriptionFieldEmptyException e) {
+                    printDescriptionFieldEmptyMessage();
+                } catch (TimeFieldEmptyException e) {
+                    printTimeFieldEmptyMessage();
+                } catch (MultipleTimeFieldsException e) {
+                    printTooManyTimeFieldsMessage();
+                }
+                break;
+            case "todo":
+                try {
+                    toDo = new ToDo(tokens[1]);
+                    tasks[numberOfTasks] = toDo;
+                    printToDoMessage(toDo, ++numberOfTasks);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    printMissingFieldsMessage();
+                }
                 break;
             default:
-                toDo = new ToDo(command);
-                tasks[numberOfTasks] = toDo;
-                printToDoMessage(toDo, ++numberOfTasks);
-                printHorizontalLine();
+                printCommandDoesNotExistMessage();
                 break;
             }
+
+            printHorizontalLine();
         }
+
         printByeMessage();
+
     }
 
     public static void printHorizontalLine() {
@@ -110,4 +140,49 @@ public class Duke {
         System.out.println(" Bye. Hope to see you again soon!");
         printHorizontalLine();
     }
+
+    public static void checkForValidDeadlineInput(String[] input) throws DescriptionFieldEmptyException,
+            TimeFieldEmptyException,
+            MultipleTimeFieldsException {
+        if (input[0].trim().equals("")) {
+            throw new DescriptionFieldEmptyException();
+        } else if (input[1].contains("/by")) {
+            throw new MultipleTimeFieldsException();
+        } else if (input[1].trim().equals("")) {
+            throw new TimeFieldEmptyException();
+        }
+    }
+
+    public static void checkForValidEventInput(String[] input) throws DescriptionFieldEmptyException,
+            TimeFieldEmptyException,
+            MultipleTimeFieldsException {
+        if (input[0].trim().equals("")) {
+            throw new DescriptionFieldEmptyException();
+        } else if (input[1].contains("/at")) {
+            throw new MultipleTimeFieldsException();
+        } else if (input[1].trim().equals("")) {
+            throw new TimeFieldEmptyException();
+        }
+    }
+
+    public static void printDescriptionFieldEmptyMessage() {
+        System.out.println(" ERROR: the description field of a task cannot be empty :(");
+    }
+
+    public static void printTimeFieldEmptyMessage() {
+        System.out.println(" ERROR: the time field of a task cannot be empty :(");
+    }
+
+    public static void printMissingFieldsMessage() {
+        System.out.println(" ERROR: make sure that you've input a description and time field!");
+    }
+
+    public static void printTooManyTimeFieldsMessage() {
+        System.out.println(" ERROR: too many timings, try again with just one!");
+    }
+
+    public static void printCommandDoesNotExistMessage() {
+        System.out.println(" ERROR: there is no such command, try again!");
+    }
+
 }
