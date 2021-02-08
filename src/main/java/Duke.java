@@ -12,9 +12,21 @@ public class Duke {
         displayExitMessage();
     }
 
-    private static void displayExitMessage() {
-        String exitMessage = "Sad to see you go! ): See you soon!";
-        printWithBorder(exitMessage);
+    private static void displayWelcomeMessage() {
+        String logo = "         __    _    _              ____        __           \n"
+                +"        / /_  (_)  (_)___ ___     / __ \\__  __/ /_____      \n"
+                +"       / __ \\/ /  / / __ `__ \\   / / / / / / / //_/ _ \\     \n"
+                +"      / / / / /  / / / / / / /  / /_/ / /_/ / ,< /  __/     \n"
+                +"     /_/ /_/_/  /_/_/ /_/ /_/  /_____/\\__,_/_/|_|\\___/     \n";
+        System.out.print(logo + "\n");
+        System.out.print("What do you have to do today?\n");
+        System.out.print(COMMANDS + "\n");
+    }
+
+    public static void printWithBorder(String line) {
+        System.out.print("_______________________________________________________________________________\n");
+        System.out.print(line + "\n");
+        System.out.print("_______________________________________________________________________________\n");
     }
 
     private static void inputAndExecuteCommand() {
@@ -24,21 +36,28 @@ public class Duke {
         while (true) {
             line = scanner.nextLine();
             String[] commandTypeAndArg = line.split(" ", 2);
-            String commandType = commandTypeAndArg[0];
+            String commandType = commandTypeAndArg[0].trim();
             String commandArg = null;
             if (commandTypeAndArg.length > 1) {
-                commandArg = commandTypeAndArg[1];
+                commandArg = commandTypeAndArg[1].trim();
             }
 
             if (commandType.equals("bye")) {
                 scanner.close();
                 return;
             }
-            executeCommand(commandType, commandArg);
+            
+            try {
+                executeCommand(commandType, commandArg);
+            } catch (NullCommandArgException | InvalidCommandTimeException | InvalidCommand | InvalidTaskNumberException e) {
+                printWithBorder(e.getMessage());
+                continue;
+            }
         }
     }
     
-    private static void executeCommand(String commandType, String commandArg) {
+    private static void executeCommand(String commandType, String commandArg)
+            throws NullCommandArgException, InvalidCommandTimeException, InvalidCommand, InvalidTaskNumberException {
         switch (commandType) {
         case "help":
             printWithBorder(COMMANDS);
@@ -59,53 +78,8 @@ public class Duke {
             addEvent(commandArg);
             break;
         default:
-            displayInvalidCommandResponse();
-            break;
+            throw new InvalidCommand(commandType + " " + commandArg);
         }
-    }
-
-    private static void addTodo(String commandArg) {
-        Todo task = new Todo(commandArg);
-        addTaskToListAndPrintMessage(task);
-    }
-
-    private static void addEvent(String commandArg) {
-        String[] taskDescriptionAndAt = commandArg.split(" /at ", 2);
-        String description = taskDescriptionAndAt[0];
-        String at = taskDescriptionAndAt[1];
-        Event task = new Event(description, at);
-        addTaskToListAndPrintMessage(task);
-    }
-
-    private static void addDeadline(String commandArg) {
-        String[] taskDescriptionAndBy = commandArg.split(" /by ", 2);
-        String description = taskDescriptionAndBy[0];
-        String by = taskDescriptionAndBy[1];
-        Deadline task = new Deadline(description, by);
-        addTaskToListAndPrintMessage(task);
-    }
-
-    private static void addTaskToListAndPrintMessage(Task task) {
-        taskList[taskCount] = task;
-        taskCount += 1;
-        String className = task.getClass().getSimpleName();
-        String taskSuccessfullyAddedMessage = "Alrighty! I have added this new " + className + ":\n    "
-                + task.toString() + "\nYou now have " + Integer.toString(taskCount) + " tasks in the list.";
-        printWithBorder(taskSuccessfullyAddedMessage);
-    }
-
-    private static void displayInvalidCommandResponse() {
-        String invalidCommandResponse = "Invalid command!\n" + COMMANDS;
-        printWithBorder(invalidCommandResponse);
-    }
-
-    private static void markTaskAsDone(String commandArg) {
-        int taskNumber = Integer.parseInt(commandArg);
-        Task task = taskList[taskNumber - 1];
-        task.setIsDone();
-        String taskSuccessfullyMarkedDoneMessage = "Very nice! I've marked this task as done:\n    " 
-                + task.toString();
-        printWithBorder(taskSuccessfullyMarkedDoneMessage);
     }
 
     private static void listAllTasks() {
@@ -121,20 +95,88 @@ public class Duke {
         printWithBorder(listOfTasksString);
     }
 
-    private static void displayWelcomeMessage() {
-        String logo = "         __    _    _              ____        __           \n"
-                +"        / /_  (_)  (_)___ ___     / __ \\__  __/ /_____      \n"
-                +"       / __ \\/ /  / / __ `__ \\   / / / / / / / //_/ _ \\     \n"
-                +"      / / / / /  / / / / / / /  / /_/ / /_/ / ,< /  __/     \n"
-                +"     /_/ /_/_/  /_/_/ /_/ /_/  /_____/\\__,_/_/|_|\\___/     \n";
-        System.out.print(logo + "\n");
-        System.out.print("What do you have to do today?\n");
-        System.out.print(COMMANDS + "\n");
+    private static void markTaskAsDone(String commandArg) throws NullCommandArgException, InvalidTaskNumberException {
+        checkNullArgs("done", commandArg);
+        int taskNumber;
+        try {
+            taskNumber = Integer.parseInt(commandArg);
+        } catch (NumberFormatException e) {
+            throw new InvalidTaskNumberException(commandArg);
+        }
+        
+        if (taskNumber < 0 || taskNumber >= taskCount) {
+            throw new InvalidTaskNumberException(taskNumber);
+        }
+        
+        Task task = taskList[taskNumber - 1];
+        task.setIsDone();
+        String taskSuccessfullyMarkedDoneMessage = "Very nice! I've marked this task as done:\n    " 
+                + task.toString();
+        printWithBorder(taskSuccessfullyMarkedDoneMessage);
     }
 
-    public static void printWithBorder(String line) {
-        System.out.print("___________________________________________________\n");
-        System.out.print(line + "\n");
-        System.out.print("___________________________________________________\n");
+    private static void addTodo(String commandArg) throws NullCommandArgException {
+        checkNullArgs("todo", commandArg);
+        Todo task = new Todo(commandArg);
+        addTaskToListAndPrintMessage(task);
+    }
+
+    private static void addDeadline(String commandArg) throws NullCommandArgException, InvalidCommandTimeException {
+        checkNullArgs("deadline", commandArg);
+        String[] taskDescriptionAndBy = splitCommandArg("deadline", commandArg);  
+        String description = taskDescriptionAndBy[0];
+        String by = taskDescriptionAndBy[1];
+        Deadline task = new Deadline(description, by);
+        addTaskToListAndPrintMessage(task);
+    }
+
+    private static void addEvent(String commandArg) throws NullCommandArgException, InvalidCommandTimeException {
+        checkNullArgs("event", commandArg);
+        String[] taskDescriptionAndAt = splitCommandArg("event", commandArg);       
+        String description = taskDescriptionAndAt[0];
+        String at = taskDescriptionAndAt[1];
+        Event task = new Event(description, at);
+        addTaskToListAndPrintMessage(task);
+    }
+
+    private static String[] splitCommandArg(String commandType, String commandArg) throws InvalidCommandTimeException {
+        String[] taskDescriptionAndTime;
+        String delimiter = null;
+        switch (commandType) {
+        case "deadline":
+            delimiter = "/by";
+            break;
+        case "event":
+            delimiter = "/at";
+            break;
+        }
+        taskDescriptionAndTime = commandArg.split(delimiter, 2);
+        if (taskDescriptionAndTime.length == 1 || taskDescriptionAndTime[1].equals("")) {
+            throw new InvalidCommandTimeException(commandType);
+        }
+        taskDescriptionAndTime[0] = taskDescriptionAndTime[0].trim();
+        taskDescriptionAndTime[1] = taskDescriptionAndTime[1].trim();
+
+        return taskDescriptionAndTime;
+    }
+
+    private static void checkNullArgs(String commandType, String commandArg) throws NullCommandArgException {
+        if (commandArg == null) {
+            throw new NullCommandArgException(commandType);
+        }
+    }
+
+    private static void addTaskToListAndPrintMessage(Task task) {
+        taskList[taskCount] = task;
+        taskCount += 1;
+        String className = task.getClass().getSimpleName();
+        String taskSuccessfullyAddedMessage = "Alrighty! I have added this new " + className + ":\n    "
+                + task.toString() + "\nYou now have " + Integer.toString(taskCount) + " tasks in the list.";
+        printWithBorder(taskSuccessfullyAddedMessage);
+    }
+
+    private static void displayExitMessage() {
+        String exitMessage = "Sad to see you go! ): See you soon!";
+        printWithBorder(exitMessage);
     }
 }
