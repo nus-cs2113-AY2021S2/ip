@@ -1,6 +1,8 @@
 import java.util.Scanner;
 
 public class Duke {
+
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -24,15 +26,41 @@ public class Duke {
                     anArray[i-1].markAsDone();
                     System.out.println("____________________________________________________________\n");
                     System.out.println("Nice! I've marked this task as done:\n ");
-                    System.out.println("[X]" + anArray[i-1].getDescription() + "\n");
+                    System.out.println(anArray[i-1].toString() + "\n");
                     System.out.println("____________________________________________________________\n");
                 }
-                else if (!line.equals("")) {
+                else if (line.contains("todo")) {
                     System.out.println("____________________________________________________________\n");
-                    System.out.println("added: " + line);
-                    Task t = new Task(line);
+                    Todo t = new Todo(line.replace("todo ",""));
                     anArray[index] = t;
                     index++;
+                    System.out.println("Got it. I've added this task:\n");
+                    System.out.println(t.toString() + "\n");
+                    System.out.println("Now you have " + index + " tasks in the list.\n");
+                    System.out.println("____________________________________________________________\n");
+                }
+                else if (line.contains("event")) {
+                    System.out.println("____________________________________________________________\n");
+                    line = line.replace("event", "");
+                    String[] parts = line.split("/at");
+                    Event t = new Event(parts[0].trim(), parts[1].trim());
+                    anArray[index] = t;
+                    index++;
+                    System.out.println("Got it. I've added this task:\n");
+                    System.out.println(t.toString() + "\n");
+                    System.out.println("Now you have " + index + " tasks in the list.\n");
+                    System.out.println("____________________________________________________________\n");
+                }
+                else if (line.contains("deadline")) {
+                    System.out.println("____________________________________________________________\n");
+                    line = line.replace("deadline", "");
+                    String[] parts = line.split("/by");
+                    Deadline t = new Deadline(parts[0].trim(), parts[1].trim());
+                    anArray[index] = t;
+                    index++;
+                    System.out.println("Got it. I've added this task:\n");
+                    System.out.println(t.toString() + "\n");
+                    System.out.println("Now you have " + index + " tasks in the list.\n");
                     System.out.println("____________________________________________________________\n");
                 }
                 line = in.nextLine();
@@ -41,7 +69,7 @@ public class Duke {
                 System.out.println("____________________________________________________________\n");
                 System.out.println("Here are the tasks in your list:\n");
                 for (int i = 0; i < index; i++){
-                    System.out.println(i+1 + ".[" + anArray[i].getStatusIcon() + "] " + anArray[i].getDescription() + "\n");
+                    System.out.println(i+1 + ". " + anArray[i].toString() + "\n");
                 }
                 System.out.println("____________________________________________________________\n");
                 line = "";
