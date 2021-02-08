@@ -22,35 +22,62 @@ public class TED {
             line = in.nextLine();
 
             if (line.startsWith("deadline")) {
+                try {
+                    line.substring(line.indexOf(" "));
+                } catch (java.lang.StringIndexOutOfBoundsException e) {
+                    System.out.print(
+                            "\t____________________________________________________________\n" +
+                            "\t☹ OOPS!!! The description of a " + line + " cannot be empty.\n" +
+                            "\t____________________________________________________________\n");
+                    continue;
+                }
                 elem = line.substring(line.indexOf(" ")+1, line.indexOf("/")-1);
                 Deadline t = new Deadline(elem, line.substring(line.indexOf("/")+4));
                 tasks.add(t);
-                System.out.println(
+                System.out.print(
                         "\t____________________________________________________________\n" +
                         "\tGot it. I've added this task: \n" +
                         "\t" + t + "\n" +
                         "\tNow you have " + tasks.size() + " tasks in the list.\n" +
-                        "\t____________________________________________________________");
+                        "\t____________________________________________________________\n");
             } else if (line.charAt(0) == 'e') {
+                try {
+                    line.substring(line.indexOf(" "));
+                } catch (java.lang.StringIndexOutOfBoundsException e) {
+                    System.out.print(
+                            "\t____________________________________________________________\n" +
+                            "\t☹ OOPS!!! The description of a " + line + " cannot be empty.\n" +
+                            "\t____________________________________________________________\n");
+                    continue;
+                }
                 elem = line.substring(line.indexOf(" ")+1, line.indexOf("/")-1);
                 event t = new event(elem, line.substring(line.indexOf("/")+4));
                 tasks.add(t);
-                System.out.println(
+                System.out.print(
                         "\t____________________________________________________________\n" +
                         "\tGot it. I've added this task: \n" +
                         "\t" + t + "\n" +
                         "\tNow you have " + tasks.size() + " tasks in the list.\n" +
-                        "\t____________________________________________________________");
+                        "\t____________________________________________________________\n");
             } else if (line.startsWith("todo")) {
+                try {
+                    line.substring(line.indexOf(" "));
+                } catch (java.lang.StringIndexOutOfBoundsException e) {
+                    System.out.print(
+                            "\t____________________________________________________________\n" +
+                            "\t☹ OOPS!!! The description of a " + line + " cannot be empty.\n" +
+                            "\t____________________________________________________________\n");
+                    continue;
+                }
                 elem = line.substring(5);
                 todo t = new todo(elem);
                 tasks.add(t);
-                System.out.println(
+                System.out.print(
                         "\t____________________________________________________________\n" +
                         "\tGot it. I've added this task: \n" +
                         "\t" + t + "\n" +
                         "\tNow you have " + tasks.size() + " tasks in the list.\n" +
-                        "\t____________________________________________________________");
+                        "\t____________________________________________________________\n");
             } else if (line.equals("list")) {
                 System.out.print(
                         "\t____________________________________________________________\n" +
@@ -70,12 +97,18 @@ public class TED {
                         "\tNice! I've marked this task as done: \n" + "\t" +
                         tasks.get(num-1)  + "\n" +
                         "\t____________________________________________________________\n");
-            } else {
+            } else if (line.equals("bye")){
                 System.out.print(
                         "\t____________________________________________________________\n" +
                         "\tBye. Hope to see you again soon!\n" +
-                        "\t____________________________________________________________");
+                        "\t____________________________________________________________\n");
                 System.exit(0);
+            } else {
+                System.out.print(
+                        "\t____________________________________________________________\n" +
+                        "\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
+                        "\tPlease start with the following title:\n\t[T][ ]todo\n\t[D][ ]deadline\n\t[E][ ]event\n" +
+                        "\t____________________________________________________________\n");
             }
         }
     }
