@@ -1,3 +1,10 @@
+package ManagerClasses;
+
+import TaskClasses.Deadline;
+import TaskClasses.Event;
+import TaskClasses.Task;
+import TaskClasses.Todo;
+
 import java.util.ArrayList;
 import java.util.List;
 

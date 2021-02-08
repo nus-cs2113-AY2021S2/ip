@@ -1,3 +1,5 @@
+package ManagerClasses;
+
 public class PrintManager {
     private static final String BREAK_LINE = "------------------------------------------------------------";
 
