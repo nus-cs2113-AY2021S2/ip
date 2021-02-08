@@ -1,3 +1,5 @@
+package ip.taskmaster;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -11,33 +13,60 @@ public class Duke {
         printLine();
         printGreeting();
 
-        Task [] list = new Task[100];
+        Task[] list = new Task[100];
         int index = 0;
         Scanner in = new Scanner(System.in);
         String command = in.nextLine();
 
         while (!command.equals("bye")) {
-            if (command.equals("list")) {
-                printTasks(list, index);
-            } else if (command.startsWith("todo")) {
-                recordTasks(list, index, command,"todo");
-                index++;
-            } else if (command.startsWith("deadline")) {
-                recordTasks(list, index, command,"deadline");
-                index++;
-            } else if (command.startsWith("event")) {
-                recordTasks(list, index,command,"event");
-                index++;
-            } else if (command.startsWith("done")) {
-                markDone(list, command);
+            try {
+                if (command.equals("list")) {
+                    printTasks(list, index);
+                } else if (command.startsWith("todo")) {
+                    if (command.length() <= 5) {
+                        throw new DukeException("todo");
+                    }
+                    recordTasks(list, index, command, "todo");
+                    index++;
+                } else if (command.startsWith("deadline")) {
+                    if (command.length() <= 9) {
+                        throw new DukeException("deadline");
+                    }
+                    recordTasks(list, index, command, "deadline");
+                    index++;
+                } else if (command.startsWith("event")) {
+                    if (command.length() <= 6) {
+                        throw new DukeException("event");
+                    }
+                    recordTasks(list, index, command, "event");
+                    index++;
+                } else if (command.startsWith("done")) {
+                    if (command.length() <= 5) {
+                        throw new DukeException("done");
+                    }
+                    markDone(list, command);
+                } else {
+                    printLine();
+                    System.out.println("🙁 OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    printLine();
+                }
+            } catch (DukeException e) {
+                printLine();
+                if (e.category.equals("event")) {
+                    System.out.println("☹ OOPS!!! The description of an event cannot be empty.");
+                } else {
+                    System.out.println("☹ OOPS!!! The description of a " + e.category + " cannot be empty.");
+                }
+                printLine();
             }
             command = in.nextLine();
+
         }
         printBye();
     }
 
     public static void printGreeting() {
-        System.out.println("Hello! I'm Duke");
+        System.out.println("Hello! I'm ip.taskmaster.Duke");
         System.out.println("What can I do for you?\n");
         printLine();
     }
@@ -53,7 +82,7 @@ public class Duke {
                 String content = command.substring(9, command.indexOf("/"));
                 list[index] = new Deadline(content, Time);
             } else if (category.equals("event")) {
-                String content = command.substring(6,command.indexOf("/"));
+                String content = command.substring(6, command.indexOf("/"));
                 list[index] = new Event(content, Time);
             }
         }
@@ -66,10 +95,10 @@ public class Duke {
     public static void markDone(Task[] list, String command) {
         int i;
         i = Integer.parseInt(command.substring(5));
-        list[i-1].isDone = true;
+        list[i - 1].isDone = true;
         printLine();
         System.out.println("Nice! I've marked this task as done:");
-        System.out.println(" " + " " + list[i-1].toString());
+        System.out.println(" " + " " + list[i - 1].toString());
         printLine();
 
     }
@@ -78,7 +107,7 @@ public class Duke {
         printLine();
         System.out.println("Here are the tasks in your list:");
         for (int i = 1; i <= index; i++) {
-            System.out.println(i + "." + list[i-1].toString());
+            System.out.println(i + "." + list[i - 1].toString());
         }
         printLine();
     }
