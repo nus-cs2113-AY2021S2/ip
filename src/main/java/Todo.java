@@ -1,8 +1,13 @@
+import MyExceptions.NoContent;
+
 public class Todo {
     protected String name;
     protected boolean isDone;
 
-    Todo(String name) {
+    Todo(String name) throws NoContent{
+        if (name.equals("")) {
+            throw new NoContent();
+        }
         this.name = name;
         isDone = false;
     }
