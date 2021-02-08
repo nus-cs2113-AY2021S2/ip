@@ -156,6 +156,7 @@ public class Duke {
     public static void checkForValidEventInput(String[] input) throws DescriptionFieldEmptyException,
             TimeFieldEmptyException,
             MultipleTimeFieldsException {
+
         if (input[0].trim().equals("")) {
             throw new DescriptionFieldEmptyException();
         } else if (input[1].contains("/at")) {
@@ -163,6 +164,7 @@ public class Duke {
         } else if (input[1].trim().equals("")) {
             throw new TimeFieldEmptyException();
         }
+
     }
 
     public static void printDescriptionFieldEmptyMessage() {
