@@ -1,3 +1,13 @@
+package duke;
+
+import duke.exception.DescriptionFieldEmptyException;
+import duke.exception.MultipleTimeFieldsException;
+import duke.exception.TimeFieldEmptyException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -104,7 +114,7 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n");
         printHorizontalLine();
-        System.out.println(" Hello! I'm Duke");
+        System.out.println(" Hello! I'm duke.Duke");
         System.out.println(" What can I do for you?");
         printHorizontalLine();
     }
