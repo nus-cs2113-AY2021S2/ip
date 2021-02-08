@@ -54,5 +54,11 @@ Here is your task List:
 1. [T][ ] Task-1
 2. [D][X] Task-2 (by: 10:00am)
 3. [E][ ] Task-3 (at: tmr)
+Command entered: done
+Command "done" requires an integer argument. Please try again!
+Command entered: list 2
+Command "list" requires no argument. Please try again!
+Command entered: bye again~
+Command "bye" requires no argument. Please try again!
 Command entered: bye
 Bye. Hope to see you again soon!
