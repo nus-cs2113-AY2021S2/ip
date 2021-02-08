@@ -39,6 +39,7 @@ public class Duke {
      * Fails if task description argument value is invalid.
      *
      * @param commandArgs this should contain task description
+     * @see #validateTodoArguments(String) 
      */
     private static void recordTodo(String commandArgs) {
         try {
@@ -63,6 +64,7 @@ public class Duke {
      * Fails if any argument value is invalid.
      *
      * @param commandArgs this should contain task description and deadline-by
+     * @see #validateDeadlineArguments(String) 
      */
     private static void recordDeadline(String commandArgs) {
         try {
@@ -91,6 +93,7 @@ public class Duke {
      * Fails if any argument value is invalid.
      *
      * @param commandArgs this should contain task description and event-at
+     * @see #validateEventArguments(String) 
      */
     private static void recordEvent(String commandArgs) {
         try {
@@ -155,36 +158,41 @@ public class Duke {
      * Marks a task as done based on the order of the list.
      *
      * @param commandArgs this should contain the task number to mark as done
+     * @see #validateTaskDoneArguments(String)
      */
     private static void markTaskDone(String commandArgs) {
         try {
-            String argValue = parseArgument(commandArgs, null);
-            if (argValue == null) {
-                throw new DukeException(ERROR_EMPTY_TASK_NUMBER_MESSAGE);
-            }
-            int taskNumber = Integer.parseInt(argValue);
-            if (taskNumber >= MAX_NUMBER_OF_TASKS) {
-                // Prevents ArrayIndexOutOfBoundsException beyond upper limit:
-                // -> Upper limit: MAX_NUMBER_OF_TASKS - 1
-                throw new DukeException(ERROR_INVALID_TASK_NUMBER_MESSAGE);
-            }
-            if (taskNumber > 0 && taskNumber <= numberOfTasks) {
-                int taskIndex = taskNumber - 1;
-                tasks[taskIndex].setDone(true);
-                Task task = tasks[taskIndex];
-                TextUI.printStatements(TASK_MARK_AS_DONE_FORMAT,
-                        String.format(DOUBLE_SPACE_PREFIX_STRING_FORMAT, task));
-            } else {
-                // Prevents ArrayIndexOutOfBoundsException beyond lower limit:
-                // -> Lower limit: 0
-                // Prevents NullPointerException beyond index (numberOfTasks - 1).
-                throw new DukeException(ERROR_INVALID_TASK_NUMBER_MESSAGE);
-            }
+            int taskNumber = validateTaskDoneArguments(commandArgs);
+            int taskIndex = taskNumber - 1;
+            tasks[taskIndex].setDone(true);
+            Task task = tasks[taskIndex];
+            TextUI.printStatements(TASK_MARK_AS_DONE_FORMAT,
+                    String.format(DOUBLE_SPACE_PREFIX_STRING_FORMAT, task));
         } catch (NumberFormatException e) {
             TextUI.printError(ERROR_NOT_A_TASK_NUMBER_MESSAGE);
         } catch (DukeException e) {
             TextUI.printError(e.getMessage());
         }
+    }
+
+    private static int validateTaskDoneArguments(String commandArgs) throws DukeException, NumberFormatException {
+        String argValue = parseArgument(commandArgs, null);
+        if (argValue == null) {
+            throw new DukeException(ERROR_EMPTY_TASK_NUMBER_MESSAGE);
+        }
+        int taskNumber = Integer.parseInt(argValue);
+        if (taskNumber >= MAX_NUMBER_OF_TASKS) {
+            // Prevents ArrayIndexOutOfBoundsException beyond upper limit:
+            // -> Upper limit: MAX_NUMBER_OF_TASKS - 1
+            throw new DukeException(ERROR_INVALID_TASK_NUMBER_MESSAGE);
+        }
+        if (taskNumber <= 0 || taskNumber > numberOfTasks) {
+            // Prevents ArrayIndexOutOfBoundsException beyond lower limit:
+            // -> Lower limit: 0
+            // Prevents NullPointerException beyond index (numberOfTasks - 1).
+            throw new DukeException(ERROR_INVALID_TASK_NUMBER_MESSAGE);
+        }
+        return taskNumber;
     }
 
     private static void exitProgram() {
