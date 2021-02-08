@@ -2,6 +2,8 @@ import java.util.Scanner;
 import java.util.Random;
 
 public class Duke {
+    private static Task[] tasks = new Task[100];
+    private static int taskCount = 0;
 
     public static void printSeparator() {
         for(int i = 0; i < 60; i++) {
@@ -15,7 +17,12 @@ public class Duke {
         printSeparator();
     }
 
-    public static void echoMode(String line) {
+    /**
+     * Echoes the user input with random upper and lower case for mockery.
+     *
+     * @param line User input.
+     */
+    public static void mockEcho(String line) {
         Random rd = new Random();
         for(int i = 0; i < line.length(); i++) {
             if(rd.nextBoolean()) {
@@ -27,55 +34,101 @@ public class Duke {
         System.out.print('\n');
     }
 
-    public static void printTasks(Task[] tasks, int taskCount) {
-        System.out.print("Here are the tasks in your list:\n");
-        for(int i = 0; i < taskCount; i++) {
-            System.out.print((i+1) + "." + tasks[i] + '\n');
+    public static void printTasks() throws DukeException{
+        if (taskCount < 1) {
+            throw new DukeException();
+        } else {
+            System.out.print("There are " + taskCount + " tasks in your list:\n");
+            for(int i = 0; i < taskCount; i++) {
+                System.out.print((i+1) + "." + tasks[i] + '\n');
+            }
         }
     }
 
+    public static void addTask(Task t) throws DukeException{
+        if (t.getDescription().isEmpty()) {
+            throw new DukeException();
+        } else {
+            tasks[taskCount++] = t;
+            System.out.print("Got it. I've added this task:\n" + t.toString() + '\n');
+        }
+    }
+
+    public static void markIndexDone(int taskIndex) throws DukeException{
+        try {
+            tasks[taskIndex].setDone();
+        } catch (Exception e) {
+            throw new DukeException();
+        }
+    }
+
+    public static void printHelp() {
+        System.out.print("I can remember your tasks for you!\n\n" +
+                "Available commands:\n" +
+                "\ttodo <description>\n" +
+                "\tdeadline <description> /by <time due>\n" +
+                "\tevent <description> /at <time occuring>\n" +
+                "\tlist\n" + "\tdone <taskIndex>\n");
+    }
+
     public static void listMode() {
-        String line, details;
+        String line;
         String[] lineParts;
         Scanner in = new Scanner(System.in);
         line = in.nextLine();
-        Task[] tasks = new Task[100];
-        int taskCount = 0;
         while (!line.equals("bye")){
             lineParts = line.split(" ");
             switch(lineParts[0]) {
+            case "-h":
+                printHelp();
+                break;
             case "list":
-                printTasks(tasks, taskCount);
+                try {
+                    printTasks();
+                } catch (DukeException e) {
+                    System.out.print("You don't have any tasks currently!\n");
+                }
                 break;
             case "done":
-                int taskIndex = Integer.parseInt(lineParts[1]) - 1;
-                if (taskIndex <= taskCount) {
-                    tasks[taskIndex].setDone();
-                } else {
+                try {
+                    int taskIndex = Integer.parseInt(lineParts[1]) - 1;
+                    markIndexDone(taskIndex);
+                } catch (NumberFormatException e) {
+                    System.out.print(lineParts[1] + " is not a valid number.\n");
+                } catch (DukeException e) {
                     System.out.print("That is not a valid task index, please try again.\n");
                 }
                 break;
             case "todo":
-                tasks[taskCount++] = new Todo(line.replace("todo ", ""));
+                try {
+                    addTask(new Todo(line.replace("todo", "").trim()));
+                } catch (DukeException e) {
+                    System.out.print("The description of a todo cannot be empty.\n");
+                }
                 break;
             case "deadline":
                 try {
                     int byIndex = line.indexOf("/by");
-                    tasks[taskCount++] = new Deadline(line.substring(9, byIndex), line.substring(byIndex + 4));
-                } catch (Exception e) {
-                    System.out.print("Something went wrong. Please put the due date after [/by].\n");
+                    addTask(new Deadline(line.substring(9, byIndex), line.substring(byIndex + 4)));
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.print("Something went wrong. Please put the due date after /by.\n");
+                } catch (DukeException e) {
+                    System.out.print("The description of a deadline cannot be empty.\n");
                 }
                 break;
             case "event":
                 try {
                     int atIndex = line.indexOf("/at");
-                    tasks[taskCount++] = new Event(line.substring(6, atIndex), line.substring(atIndex + 4));
-                } catch (Exception e) {
-                    System.out.print("Something went wrong. Please put the event time after [/at].\n");
+                    addTask(new Event(line.substring(6, atIndex), line.substring(atIndex + 4)));
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.print("Something went wrong. Please put the event time after /at.\n");
+                } catch (DukeException e) {
+                    System.out.print("The description of a event cannot be empty.\n");
                 }
                 break;
             default:
-                echoMode(line);
+                mockEcho(line);
+                System.out.print("Use -h for list or available commands.\n");
             }
             printSeparator();
             line = in.nextLine();
