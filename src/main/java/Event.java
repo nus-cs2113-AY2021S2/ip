@@ -1,19 +1,19 @@
-public class Event extends Deadline{
-    private static final String TASKTITLE ="E";
+public class Event extends Deadline {
+    private static final String TASK_TITLE = "E";
 
-    public Event(int size){
+    public Event(int size) {
         super(size);
     }
 
     @Override
-    public String getBy(String line){
-        String[] lineWords= line.split("/",2);
+    public String getBy(String line) {
+        String[] lineWords = line.split("/", 2);
         String by;
-        try{
+        try {
             by = lineWords[1];
 
-        }catch(ArrayIndexOutOfBoundsException e) {
-            by ="No Event time!! Noice!!! :)";
+        } catch (ArrayIndexOutOfBoundsException e) {
+            by = "No Event time!! Noice!!! :)";
         }
 
         return by;
@@ -22,9 +22,10 @@ public class Event extends Deadline{
 
     @Override
     public void printTaskDescription() {
-        String phrase = "Aight Crewmate!! I've got a new event for you!!!"+System.lineSeparator()
-                +"  ["+TASKTITLE+"]"+"["+getStatusIcon(getTasksCounter())+"]"+ getTaskDescription(tasksCounter)+"(by: "
-                +getTaskBy(getTasksCounter())+")";
+        String phrase = "Aight Crewmate!! I've got a new event for you!!!" + System.lineSeparator()
+                + "  [" + TASK_TITLE + "]" + "[" + getStatusIcon(getTasksCounter()) + "]"
+                + getTaskDescription(tasksCounter) + "(by: "
+                + getTaskBy(getTasksCounter()) + ")";
         System.out.println(phrase);
     }
 

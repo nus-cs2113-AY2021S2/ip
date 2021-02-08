@@ -1,7 +1,15 @@
 help me
 list
 done
+todo
+deadline
+event
 done todo
+done deadline
+done event
+todo eat
+done todo 1
+todo
 deadline get married /mon 23.01.33
 done deadline aaa
 done deadline 1
