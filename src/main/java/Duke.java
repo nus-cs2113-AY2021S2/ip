@@ -5,6 +5,7 @@ import list.Deadline;
 import list.Event;
 import list.List;
 import list.Todo;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -20,17 +21,15 @@ public class Duke {
     private static void processCommands() {
         String line;
         List dukeList = new List(CHAT_BOT_NAME);
-        Todo todoList = new Todo(MAX_LIST_SIZE);
-        Deadline deadLineList = new Deadline(MAX_LIST_SIZE);
-        Event eventLists = new Event(MAX_LIST_SIZE);
-
+        List[] allLists = {new Todo(MAX_LIST_SIZE), new Deadline(MAX_LIST_SIZE), new Event(MAX_LIST_SIZE)};
         Scanner in = new Scanner(System.in);
 
         boolean hasToContinue = true;
         dukeList.printHelp();
         while (hasToContinue) {
             line = in.nextLine();
-            hasToContinue = selectCommand(dukeList, line, hasToContinue, todoList, deadLineList, eventLists);
+            hasToContinue = selectCommand(dukeList, line, hasToContinue, (Todo) allLists[0], (Deadline) allLists[1],
+                    (Event) allLists[2]);
         }
 
     }
