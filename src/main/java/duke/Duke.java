@@ -34,7 +34,7 @@ public class Duke {
     private static final String SET_TO_DONE_MESSAGE = " set to done. You're well smart innit?";
     private static final String OUT_OF_BOUNDS_MESSAGE = "Woah. Don't violate the indexes aight. I is watching you.";
     private static final String WRONG_FORMAT_MESSAGE = "Are you spasticated? The format is wrong!";
-    private static final String TOTAL_TASK_MESSAGE = "You is having %d duke.task(s) on your list";
+    private static final String TOTAL_TASK_MESSAGE = "You is having %d task(s) on your list";
     private static final String NO_NAME_MESSAGE = "Why you be trying to find something with no name? Ave' you been smoking me special stash?";
 
     public static Task[] Tasks = new Task[MAX_SIZE];
@@ -60,7 +60,7 @@ public class Duke {
                 int command = getCommand(line);
                 // No fallthrough required
                 switch (command) {
-                // If user wants to mark a duke.task as done
+                // If user wants to mark a task as done
                 case COMMAND_MARK:
                     markAsDone(line);
                     break;
@@ -104,7 +104,7 @@ public class Duke {
         return COMMAND_ADD;
     }
     /**
-     * Marks a duke.task as done.
+     * Marks a task as done.
      * Checks for out of bounds access and presence of numerical value.
      *
      * @param line user input.
@@ -142,8 +142,7 @@ public class Duke {
         return INVALID_DONE;
     }
     /**
-     * Append new item to back of the list.
-     * Parses type of item to add.
+     * Parses type of item to add and calls appropriate method.
      *
      * @param line raw input given by user.
      */
@@ -170,10 +169,10 @@ public class Duke {
         }
     }
     /**
-     * Parses the type of duke.task to add to list.
+     * Parses the type of task to add to list.
      *
      * @param line input from user.
-     * @return Type of duke.task to add if valid input, duke.error otherwise.
+     * @return Type of task to add if valid input, error otherwise.
      */
     public static int getItemType(String line) throws WrongFormatException {
         if (line.equalsIgnoreCase("todo")) {
@@ -211,7 +210,7 @@ public class Duke {
         }
         if (line.contains("/by")) {
             int current = Task.totalNumberOfTasks;
-            // Details of duke.task starts at index 9 of input
+            // Details of task starts at index 9 of input
             String nameAndDeadline = line.substring(9);
             String[] split = nameAndDeadline.split(" /by ");
             String name = split[0];
@@ -229,7 +228,7 @@ public class Duke {
         }
         if (nameOfTask.contains("/at")) {
             int current = Task.totalNumberOfTasks;
-            // Details of duke.task starts at index 6 of input
+            // Details of task starts at index 6 of input
             String nameAndTime = nameOfTask.substring(6);
             String[] split = nameAndTime.split(" /at ");
             String name = split[0];
@@ -261,9 +260,9 @@ public class Duke {
     }
 
     /**
-     * Prints appropriate duke.error message according to duke.error type.
+     * Prints appropriate error message according to error type.
      *
-     * @param type type of duke.error thrown.
+     * @param type type of error thrown.
      */
     public static void printError(int type) {
         // No fallthrough required
