@@ -22,22 +22,33 @@ public class Duke {
                         + "____________________________________________________________\n";
                 System.out.println(userQueryReturn);
                 userQuery = stringScanner.nextLine();
-            }else if(!userQuery.equalsIgnoreCase("list")) {
+            }else if(userQuery.contains("todo")||userQuery.contains("deadline")||userQuery.contains("event")) {
                 taskItems.add(new Task(userQuery));
                 itemCount++;
-                userQueryReturn = "____________________________________________________________\n"
-                        + " Got it. I've added this task: \n"
-                        + "   ["+taskItems.get(taskItems.size()-1).getTypeIcon()+"]["+taskItems.get(taskItems.size()-1).getStatusIcon()+"] "+taskItems.get(taskItems.size()-1).getDescription()+"\n"
-                        + " Now you have "+taskItems.size()+" tasks in the list.\n"
-                        + "____________________________________________________________\n";
+                if(userQuery.equalsIgnoreCase("todo") || userQuery.equalsIgnoreCase("deadline") || userQuery.equalsIgnoreCase("event")){
+                    userQueryReturn = "____________________________________________________________\n"
+                            + taskItems.get(taskItems.size() - 1).getDescription()
+                            + "\n____________________________________________________________\n";
+                }else {
+                    userQueryReturn = "____________________________________________________________\n"
+                            + " Got it. I've added this task: \n"
+                            + "   [" + taskItems.get(taskItems.size() - 1).getTypeIcon() + "][" + taskItems.get(taskItems.size() - 1).getStatusIcon() + "] " + taskItems.get(taskItems.size() - 1).getDescription() + "\n"
+                            + " Now you have " + taskItems.size() + " tasks in the list.\n"
+                            + "____________________________________________________________\n";
+                }
                 System.out.println(userQueryReturn);
                 userQuery = stringScanner.nextLine();
-            }else{
+            }else if(userQuery.equalsIgnoreCase("list")){
                 System.out.println("____________________________________________________________");
                 System.out.println(" Here are the tasks in your list: ");
                 for(int i=0; i<itemCount; i++){
                     System.out.println(" "+String.valueOf(i+1)+".["+taskItems.get(i).getTypeIcon()+"]["+taskItems.get(i).getStatusIcon()+"] "+taskItems.get(i).getDescription());
                 }
+                System.out.println("____________________________________________________________\n");
+                userQuery = stringScanner.nextLine();
+            }else{
+                System.out.println("____________________________________________________________");
+                System.out.println(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 System.out.println("____________________________________________________________\n");
                 userQuery = stringScanner.nextLine();
             }

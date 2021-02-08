@@ -5,30 +5,38 @@ public class Task {
     protected String deadline = "";
 
     public Task(String description) {
-        if(description.contains("todo")||description.contains("deadline")||description.contains("event")) {
-            String command = description.substring(0, description.indexOf(' '));
-            String content = description.substring(description.indexOf(' ') + 1);
+        if(description.equalsIgnoreCase("todo")) {
+            typeIcon = "ErrorT";
+        } else if(description.equalsIgnoreCase("event")) {
+            typeIcon = "ErrorE";
+        } else if(description.equalsIgnoreCase("deadline")) {
+            typeIcon = "ErrorD";
+        } else {
+            if (description.contains("todo") || description.contains("deadline") || description.contains("event")) {
+                String command = description.substring(0, description.indexOf(' '));
+                String content = description.substring(description.indexOf(' ') + 1);
 
-            this.description = content;
-            this.isDone = false;
-            switch (command) {
-            case "todo":
-                typeIcon = "T";
-                break;
-            case "deadline":
-                typeIcon = "D";
-                deadline = content.substring(content.indexOf('/')+4);
-                break;
-            case "event":
-                typeIcon = "E";
-                deadline = content.substring(content.indexOf('/')+4);
-                break;
-            default:
-                typeIcon = " ";
+                this.description = content;
+                this.isDone = false;
+                switch (command) {
+                case "todo":
+                    typeIcon = "T";
+                    break;
+                case "deadline":
+                    typeIcon = "D";
+                    deadline = content.substring(content.indexOf('/') + 4);
+                    break;
+                case "event":
+                    typeIcon = "E";
+                    deadline = content.substring(content.indexOf('/') + 4);
+                    break;
+                default:
+                    typeIcon = " ";
+                }
+            } else {
+                this.description = description;
+                this.isDone = false;
             }
-        }else{
-            this.description = description;
-            this.isDone = false;
         }
     }
 
@@ -48,6 +56,12 @@ public class Task {
     public String getDescription() {
         String content;
         switch (typeIcon) {
+        case "ErrorT":
+            return "☹ OOPS!!! The description of a todo cannot be empty.";
+        case "ErrorD":
+            return "☹ OOPS!!! The description of a deadline cannot be empty.";
+        case "ErrorE":
+            return "☹ OOPS!!! The description of an event cannot be empty.";
         case "D":
             return description.substring(0,description.indexOf('/')) + " (by: " + deadline + ")";
         case "E":
