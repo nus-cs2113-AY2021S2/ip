@@ -1,3 +1,4 @@
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Duke {
@@ -49,7 +50,10 @@ public class Duke {
         }
     }
 
-    public static void updateTask(int taskIndex) {
+    public static void updateTask(int taskIndex) throws DukeException {
+        if (taskIndex >= listCount) {
+            throw new DukeException();
+        }
         Task currentTask = taskList[taskIndex];
         if (currentTask.getDone() == true) {
             System.out.println("This task has already been completed:");
@@ -60,18 +64,24 @@ public class Duke {
         System.out.println("  " + currentTask.toString());
     }
 
-    public static void addTask(String taskType, String description) {
+    public static void addTask(DukeCommand taskType, String description) throws DukeException {
         int dividerPosition;
         switch (taskType) {
-        case "todo":
+        case TODO:
             taskList[listCount++] = new Todo(description);
             break;
-        case "deadline":
+        case DEADLINE:
+            if (!description.contains("/by")) {
+                throw new DukeException();
+            }
             dividerPosition = description.indexOf("/by");
             String by = description.substring(dividerPosition + 4);
             taskList[listCount++] = new Deadline(description.substring(0, dividerPosition - 1), by);
             break;
-        case "event":
+        case EVENT:
+            if (!description.contains("/at")) {
+                throw new DukeException();
+            }
             dividerPosition = description.indexOf("/at");
             String at = description.substring(dividerPosition + 4);
             taskList[listCount++] = new Event(description.substring(0, dividerPosition - 1), at);
@@ -84,28 +94,47 @@ public class Duke {
 
     public static void executeCommand(String userInput) {
         String[] words = userInput.split(" ", 2);
-        String commandWord = words[0];
+        DukeCommand commandWord = null;
+        try {
+            commandWord = DukeCommand.valueOf(words[0].toUpperCase(Locale.ROOT));
+        } catch (IllegalArgumentException e) {
+            lineBreak();
+            System.out.println("I'm sorry, but I don't know what that means.");
+            lineBreak();
+            return;
+        }
         lineBreak();
         switch (commandWord) {
-        case "list":
+        case LIST:
             listTasks();
             break;
-        case "done":
-            updateTask(Integer.parseInt(words[1]) - 1);
+        case DONE:
+            try {
+                updateTask(Integer.parseInt(words[1]) - 1);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("Please enter the index of the task that is done.");
+            } catch (NumberFormatException e) {
+                System.out.println("You must enter a integer after done.");
+            } catch (DukeException e) {
+                System.out.println("Task " + words[1] + " does not exist.");
+                System.out.println("There are " + listCount + " tasks in the list.");
+            }
             break;
-        case "todo":
+        case TODO:
             //Fallthrough
-        case "deadline":
+        case DEADLINE:
             //Fallthrough
-        case "event":
+        case EVENT:
             try {
                 String commandDescription = words[1];
                 addTask(commandWord, commandDescription);
             } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("OOPS!!! The description of a " + commandWord + " cannot be empty.");
+                System.out.println("The description of " + commandWord + " cannot be empty.");
+            } catch (DukeException e) {
+                System.out.println("The format of " + commandWord + " is incorrect.");
             }
             break;
-        case "bye":
+        case BYE:
             exitProgram();
             //Fallthrough
         }
