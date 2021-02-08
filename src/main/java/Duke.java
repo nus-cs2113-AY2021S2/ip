@@ -21,6 +21,7 @@ public class Duke {
     private static final String COMMAND_LIST_WORD = "list";
     private static final String COMMAND_END_WORD = "bye";
     private static final String BYE = "Bye. Hope to see you again soon!";
+    private static final String ERROR_MESSAGE = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
 
     private static final int CAPACITY = 100;
     private static final int ITEM_DATA_COUNT = 3;
@@ -106,7 +107,7 @@ public class Duke {
             endSystem();
             return 0;
         default:
-            showToUser("NotFound"+DIVIDER);
+            showError();
             return 1;
         }
     }
@@ -123,7 +124,12 @@ public class Duke {
             showToUser(index+". "+LEFTPAR+allItems[i][0]+RIGHTPAR+LEFTPAR+allItems[i][1]+RIGHTPAR+allItems[i][2]);}
     }
 
+    public static void showError(){
+        showToUser(ERROR_MESSAGE,DIVIDER);
+    }
+
     public static void addDeadlineItem(String commandArgs){
+        checkError(commandArgs);
         commandArgs = commandArgs.replace("/", "(");
         commandArgs = commandArgs.replace("by", "by:");
         commandArgs = commandArgs+")";
@@ -131,23 +137,31 @@ public class Duke {
     }
 
     public static void addTodoItem(String commandArgs){
+        checkError(commandArgs);
         addItemToItemBook(COMMAND_TODO_WORD,commandArgs);
     }
 
     public static void addEventItem(String commandArgs){
+        checkError(commandArgs);
         commandArgs = commandArgs.replace("/", "(");
         commandArgs = commandArgs.replace("at", "at:");
         commandArgs = commandArgs+")";
         addItemToItemBook(COMMAND_EVENT_WORD,commandArgs);
     }
 
+    public static void doneItem(String doneStringNumber){
+        checkError(doneStringNumber);
+        int doneInteger = Integer.parseInt(doneStringNumber)-1;
+        allItems[doneInteger][1] = DONE;
+    }
+
     public static void endSystem(){
         showToUser(BYE);
     }
 
-    public static void doneItem(String doneStringNumber){
-        int doneInteger = Integer.parseInt(doneStringNumber)-1;
-        allItems[doneInteger][1] = DONE;
+    public static void checkError(String commandArgs){
+        if (commandArgs.isEmpty())
+            showError();
     }
     
 }
