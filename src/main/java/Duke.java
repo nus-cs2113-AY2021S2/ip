@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 public class Duke {
 
     private static final String COMMAND_LIST_WORD = "list";
@@ -12,14 +10,7 @@ public class Duke {
     private static final String COMMAND_DONE_WORD = "done";
 
     private static final String DOUBLE_SPACE_PREFIX_STRING_FORMAT = "  %s";
-    private static final String HORIZONTAL_LINE = "_".repeat(60);
-    private static final String LOGO = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|";
-    private static final String WELCOME_MESSAGE = "Hello! I'm Duke\n"
-            + "What can I do for you?";
+
     private static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
     private static final String LIST_TASK_MESSAGE = "Here are the tasks in your list:";
     private static final String LIST_NO_TASK_MESSAGE = "No task in record.";
@@ -29,7 +20,6 @@ public class Duke {
     private static final String ERROR_COMMAND_MESSAGE = "Invalid command.";
     private static final String ERROR_INVALID_DEADLINE_MESSAGE = "Invalid deadline.";
     private static final String ERROR_INVALID_EVENT_MESSAGE = "Invalid event.";
-    private static final String ERROR_PREFIX_MESSAGE = "ERROR: ";
     private static final String ERROR_INVALID_TASK_NAME_MESSAGE = "Invalid task name.";
     private static final String ERROR_INVALID_TASK_NUMBER_MESSAGE = "Invalid task number.";
 
@@ -37,7 +27,6 @@ public class Duke {
     private static Task[] tasks = new Task[MAX_NUMBER_OF_TASKS];
     private static int numberOfTasks = 0;
 
-    private static final Scanner SCANNER = new Scanner(System.in);
 
     /**
      * Records a new Todo task into the global task array.
@@ -49,7 +38,7 @@ public class Duke {
     private static void recordTodo(String commandArgs) {
         String taskDescription = parseArgument(commandArgs, null);
         if (isArgumentValueEmpty(taskDescription)) {
-            printError(ERROR_INVALID_TASK_NAME_MESSAGE);
+            TextUI.printError(ERROR_INVALID_TASK_NAME_MESSAGE);
             return;
         }
         recordTask(new Todo(taskDescription));
@@ -65,13 +54,13 @@ public class Duke {
     private static void recordDeadline(String commandArgs) {
         String taskDescription = parseArgument(commandArgs, null);
         if (isArgumentValueEmpty(taskDescription)) {
-            printError(ERROR_INVALID_TASK_NAME_MESSAGE);
+            TextUI.printError(ERROR_INVALID_TASK_NAME_MESSAGE);
             return;
         }
 
         String deadlineBy = parseArgument(commandArgs, COMMAND_DEADLINE_BY_TOKEN);
         if (isArgumentValueEmpty(deadlineBy)) {
-            printError(ERROR_INVALID_DEADLINE_MESSAGE);
+            TextUI.printError(ERROR_INVALID_DEADLINE_MESSAGE);
             return;
         }
         recordTask(new Deadline(taskDescription, deadlineBy));
@@ -87,13 +76,13 @@ public class Duke {
     private static void recordEvent(String commandArgs) {
         String taskDescription = parseArgument(commandArgs, null);
         if (isArgumentValueEmpty(taskDescription)) {
-            printError(ERROR_INVALID_TASK_NAME_MESSAGE);
+            TextUI.printError(ERROR_INVALID_TASK_NAME_MESSAGE);
             return;
         }
 
         String eventAt = parseArgument(commandArgs, COMMAND_EVENT_AT_TOKEN);
         if (isArgumentValueEmpty(eventAt)) {
-            printError(ERROR_INVALID_EVENT_MESSAGE);
+            TextUI.printError(ERROR_INVALID_EVENT_MESSAGE);
             return;
         }
         recordTask(new Event(taskDescription, eventAt));
@@ -108,7 +97,7 @@ public class Duke {
     private static void recordTask(Task task) {
         tasks[numberOfTasks] = task;
         numberOfTasks++;
-        printStatements(TASK_ADDED_MESSAGE,
+        TextUI.printStatements(TASK_ADDED_MESSAGE,
                 String.format(DOUBLE_SPACE_PREFIX_STRING_FORMAT, task),
                 String.format(TASK_TOTAL_TASKS_STRING_FORMAT, numberOfTasks));
     }
@@ -117,10 +106,10 @@ public class Duke {
      * Prints all tasks (tasks are numbered based on addition).
      */
     private static void printAllTasks() {
-        printStatement(LIST_TASK_MESSAGE);
+        TextUI.printStatement(LIST_TASK_MESSAGE);
         for (int i = 0; i < numberOfTasks; i++) {
             Task task = tasks[i];
-            printStatement(String.format("%d.%s", i + 1, task));
+            TextUI.printStatement(String.format("%d.%s", i + 1, task));
         }
     }
 
@@ -129,11 +118,11 @@ public class Duke {
      */
     private static void listTasks() {
         if (numberOfTasks == 0) {
-            printStatements(LIST_NO_TASK_MESSAGE);
+            TextUI.printStatements(LIST_NO_TASK_MESSAGE);
         } else {
-            printHorizontalLine();
+            TextUI.printHorizontalLine();
             printAllTasks();
-            printHorizontalLine();
+            TextUI.printHorizontalLine();
         }
     }
 
@@ -153,55 +142,20 @@ public class Duke {
                 int taskIndex = taskNumber - 1;
                 tasks[taskIndex].setDone(true);
                 Task task = tasks[taskIndex];
-                printStatements(TASK_MARK_AS_DONE_FORMAT,
+                TextUI.printStatements(TASK_MARK_AS_DONE_FORMAT,
                         String.format(DOUBLE_SPACE_PREFIX_STRING_FORMAT, task));
             } else {
                 throw new Exception(ERROR_INVALID_TASK_NUMBER_MESSAGE);
             }
         } catch (Exception e) {
-            printError(ERROR_INVALID_TASK_NUMBER_MESSAGE);
+            TextUI.printError(ERROR_INVALID_TASK_NUMBER_MESSAGE);
         }
     }
 
-    private static void printHorizontalLine() {
-        System.out.println("\t" + HORIZONTAL_LINE);
-    }
 
-    /**
-     * Prints a statement with a tab and spacing character.
-     * Can print multiple lines if the statement string has line
-     * breaks in it.
-     */
-    private static void printStatement(String statement) {
-        String[] fragments = statement.split("\\R");
-        for (String fragment : fragments) {
-            System.out.println("\t " + fragment);
-        }
-    }
-
-    /**
-     * Prints statements within horizontal line borders.
-     */
-    private static void printStatements(String... statement) {
-        printHorizontalLine();
-        for (String s : statement) {
-            printStatement(s);
-        }
-        printHorizontalLine();
-    }
-
-    private static void printError(String errorDescription) {
-        printHorizontalLine();
-        printStatement(String.format("%s %s", ERROR_PREFIX_MESSAGE, errorDescription));
-        printHorizontalLine();
-    }
-
-    private static void printWelcomeMessage() {
-        printStatements(LOGO, WELCOME_MESSAGE);
-    }
 
     private static void exitProgram() {
-        printStatements(EXIT_MESSAGE);
+        TextUI.printStatements(EXIT_MESSAGE);
         System.exit(0);
     }
 
@@ -210,9 +164,9 @@ public class Duke {
      * with the arguments.
      */
     private static void executeCommand(String userInput) {
-        String[] parsedCommand = parseCommand(userInput);
-        String commandName = parsedCommand[0];
-        String commandArgs = parsedCommand[1];
+        String[] commandAndArgs = parseCommand(userInput);
+        String commandName = commandAndArgs[0];
+        String commandArgs = commandAndArgs[1];
 
         switch (commandName) {
         case COMMAND_LIST_WORD:
@@ -231,9 +185,10 @@ public class Duke {
             markTaskDone(commandArgs);
             break;
         case COMMAND_BYE_WORD:
+            // Does not fallthrough, exits program instead.
             exitProgram();
         default:
-            printError(ERROR_COMMAND_MESSAGE);
+            TextUI.printError(ERROR_COMMAND_MESSAGE);
         }
     }
 
@@ -244,12 +199,12 @@ public class Duke {
      *         and second element is the arguments string
      */
     private static String[] parseCommand(String userInput) {
-        final String[] parsedCommand = userInput.trim().split("\\s+", 2);
+        final String[] commandAndArgs = userInput.trim().split("\\s+", 2);
         // parsedCommand's length after split will always be more than zero.
-        if (parsedCommand.length == 1) {
-            return new String[] {parsedCommand[0], ""};
+        if (commandAndArgs.length == 1) {
+            return new String[] {commandAndArgs[0], ""};
         }
-        return parsedCommand;
+        return commandAndArgs;
     }
 
     /**
@@ -265,12 +220,12 @@ public class Duke {
     private static String parseArgument(String commandArgs, String token) {
         int readFromIndex = 0;
         int readUntilIndex = commandArgs.length();
-        if (token != null) {
-            if (commandArgs.contains(token)) {
-                readFromIndex = commandArgs.indexOf(token) + token.length();
-            } else {
-                return null;
-            }
+        boolean hasToken = (token != null) && (commandArgs.contains(token));
+        boolean hasMissingToken = (token != null) && !(commandArgs.contains(token));
+        if (hasToken) {
+            readFromIndex = commandArgs.indexOf(token) + token.length();
+        } else if (hasMissingToken) {
+            return null;
         }
         int result = commandArgs.indexOf("/", readFromIndex);
         if (result != -1) {
@@ -286,27 +241,13 @@ public class Duke {
      * @return true if empty, false if not empty
      */
     private static boolean isArgumentValueEmpty(String argValue) {
-        return argValue == null || argValue.length() == 0;
-    }
-
-    /**
-     * Reads user input per line.
-     * Ignores lines that contains only whitespace.
-     *
-     * @return trimmed line string entered by the user
-     */
-    private static String getUserInput() {
-        String userInput;
-        do {
-            userInput = SCANNER.nextLine().trim();
-        } while (userInput.isEmpty());
-        return userInput;
+        return (argValue == null) || (argValue.length() == 0);
     }
 
     public static void main(String[] args) {
-        printWelcomeMessage();
+        TextUI.printWelcomeMessage();
         while (true) {
-            String userCommand = getUserInput();
+            String userCommand = TextUI.getUserInput();
             executeCommand(userCommand);
         }
     }
