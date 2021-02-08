@@ -1,4 +1,4 @@
-package ip.taskmaster;
+package ip.duke;
 
 public class DukeException extends Exception{
     protected String category;

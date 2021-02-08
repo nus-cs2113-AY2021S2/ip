@@ -1,9 +1,9 @@
-package ip.taskmaster;
+package ip.duke;
 
-import ip.taskmaster.task.Deadline;
-import ip.taskmaster.task.Event;
-import ip.taskmaster.task.Task;
-import ip.taskmaster.task.Todo;
+import ip.duke.task.Deadline;
+import ip.duke.task.Event;
+import ip.duke.task.Task;
+import ip.duke.task.Todo;
 
 import java.util.Scanner;
 

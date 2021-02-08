@@ -1,4 +1,4 @@
-package ip.taskmaster.task;
+package ip.duke.task;
 
 public class Task {
     protected String description;
