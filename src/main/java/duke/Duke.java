@@ -1,3 +1,8 @@
+package duke;
+
+import duke.exception.EmptyDescriptionException;
+import duke.exception.InvalidCommandException;
+
 public class Duke {
 
     private static UserInterface ui = new UserInterface();

@@ -1,3 +1,12 @@
+package duke;
+
+import duke.exception.EmptyDescriptionException;
+import duke.exception.InvalidCommandException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 public class TaskManager {
 
     private Task[] tasks = new Task[100];
