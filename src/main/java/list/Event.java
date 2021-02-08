@@ -1,3 +1,5 @@
+package list;
+
 public class Event extends Deadline {
     private static final String TASK_TITLE = "E";
 

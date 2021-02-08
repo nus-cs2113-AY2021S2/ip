@@ -1,3 +1,10 @@
+import exceptions.IllegalCommandException;
+import exceptions.IllegalListException;
+import exceptions.IllegalTaskException;
+import list.Deadline;
+import list.Event;
+import list.List;
+import list.Todo;
 import java.util.Scanner;
 
 public class Duke {

@@ -1,3 +1,5 @@
+package list;
+
 public class List {
     protected String name;
     protected int tasksCounter = 0;

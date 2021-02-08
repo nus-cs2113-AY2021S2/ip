@@ -1,3 +1,7 @@
+package list;
+
+import exceptions.IllegalTaskException;
+
 public class TaskList extends List {
     protected String[] description;
     protected boolean[] isDone;
