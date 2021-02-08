@@ -9,25 +9,30 @@ public class TaskManager {
     }
 
     public void printTasks() {
-        int taskId = 1;
-        System.out.println("Here are the tasks in your list:");
-        for (Task task: tasks) {
-            System.out.println(taskId + ". " + task.toString());
-            taskId++;
+        if (tasks.size() == 0) {
+            System.out.println("Oops, it seems like you have no tasks in your list");
+        } else {
+            int taskId = 1;
+            System.out.println("Here are the tasks in your list:");
+            for (Task task: tasks) {
+                System.out.println(taskId + ". " + task.toString());
+                taskId++;
+            }
         }
     }
 
-    public void markDone(int taskIdNum) {
+    public void markDone(Integer taskIdNum) {
 //        Check if user input for 'done' task id is within the range of the list.
-        if (taskIdNum > 0 && taskIdNum <= tasks.size()) {
-            int taskListIndexNum = taskIdNum-1;
-            Task task = tasks.get(taskListIndexNum);
-            task.setAsDone();
-            System.out.println("Nice! I've marked this task as done:");
-            System.out.println(task.toString());
-        } else {
-            System.out.println("Invalid task number.");
-            printNumberOfTasks();
+        try {
+            if (taskIdNum != null) {
+                int taskListIndexNum = taskIdNum - 1;
+                Task task = tasks.get(taskListIndexNum);
+                task.setAsDone();
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println(task.toString());
+            }
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Error -> Cannot find task with the specified task number " + taskIdNum + ".");
         }
     }
 
