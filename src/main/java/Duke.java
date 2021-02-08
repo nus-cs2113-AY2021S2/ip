@@ -98,8 +98,12 @@ public class Duke {
         case "deadline":
             //Fallthrough
         case "event":
-            String commandDescription = words[1];
-            addTask(commandWord, commandDescription);
+            try {
+                String commandDescription = words[1];
+                addTask(commandWord, commandDescription);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("OOPS!!! The description of a " + commandWord + " cannot be empty.");
+            }
             break;
         case "bye":
             exitProgram();
