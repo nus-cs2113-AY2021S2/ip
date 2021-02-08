@@ -1,99 +1,153 @@
 import java.util.Scanner;
 
 public class Duke {
-    public static String inputValue[] = new String [100];
-    public static boolean inputStatus[] = new boolean [100];
-    public static String inputState[] = new String [100];
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
+    private static final String VERSION = "Duke - Version 1.0";
+    private static final String DIVIDER = "===================================================";
+    private static final String LOGO = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("____________________________________________________________\n"+
-        "Hello! I'm Duke\n"+
-        "What can I do for you?\n"+
-       "____________________________________________________________\n");
-        interaction();
+    private static final String GREETING = "Hello! I'm Duke\n"
+                 +"What can I do for you?\n";
+
+    private static final Scanner SCANNER = new Scanner(System.in);
+
+    private static final char INPUT_COMMENT_MARKER = '#';
+    private static final String COMMAND_TODO_WORD = "todo";
+    private static final String COMMAND_EVENT_WORD = "event";
+    private static final String COMMAND_DEADLINE_WORD = "deadline";
+    private static final String COMMAND_DONE_WORD = "done";
+    private static final String COMMAND_LIST_WORD = "list";
+    private static final String COMMAND_END_WORD = "bye";
+    private static final String BYE = "Bye. Hope to see you again soon!";
+
+    private static final int CAPACITY = 100;
+    private static final int ITEM_DATA_COUNT = 3;
+
+    private static final String LEFTPAR = "[";
+    private static final String RIGHTPAR = "] ";
+
+    private static String[][] allItems;
+    private static int count;
+
+    private static String DONE = "done";
+    private static String UNDO = "undo";
+
+    public static void main(String[] args) {
+        initItemBook();
+        showWelcomeMessage();
+        while (true) {
+            String userCommand = getUserInput();
+            echoUserCommand(userCommand);
+            int returnValue = executeCommand(userCommand);
+            if(returnValue == 0)
+                break;
+        }
     }
 
-    public static void interaction(){
-        int listIndex = 0;
-        String deleteString = "done ";
-        String stateTodo = "todo ";
-        String stateDeadline = "deadline ";
-        String stateEvent = "event ";
-        do{
-            Scanner input = new Scanner(System.in);
-            input.useDelimiter("\n");
-            inputValue[listIndex] = input.next();
-            inputStatus[listIndex] = false;
-            inputState[listIndex] = "T";
-            if(inputValue[listIndex].equals("bye")){
-                System.out.println("____________________________________________________________\n"+
-                "Bye. Hope to see you again soon!"+"\n"+
-                "____________________________________________________________\n");
-            }else if(inputValue[listIndex].equals("list")){
-                System.out.println("____________________________________________________________\n");
-                for (int i = 0; i<listIndex; i++){
-                    int index = i+1;
-                    if (inputStatus[i]==true){
-                        System.out.println(index +".["+inputState[i]+"]"+"[x] "+ inputValue[i]);
-                    }else{
-                        System.out.println(index +".["+inputState[i]+"]"+"[ ] "+ inputValue[i]);
-                    }
-                }
-                System.out.println("____________________________________________________________\n");
-            }else if(inputValue[listIndex].startsWith(deleteString)){
-                inputValue[listIndex] = deletePrefix(inputValue[listIndex],deleteString);
-                int doneIndex = Integer.parseInt(inputValue[listIndex]);
-                System.out.println("____________________________________________________________\n"+
-                "Nice! I've marked this task as done: \n"+
-                "["+inputState[doneIndex-1]+"]"+"[X] "+ inputValue[doneIndex-1]+"\n"+
-                "____________________________________________________________\n");
-                inputStatus[doneIndex-1] = true;
-            }else{
-                if(inputValue[listIndex].startsWith(stateEvent)){
-                    inputState[listIndex] = "E";
-                    inputValue[listIndex] = deletePrefix(inputValue[listIndex],stateEvent);
-                    inputValue[listIndex] = inputValue[listIndex].replace("/", "(");
-                    inputValue[listIndex] = inputValue[listIndex].replace("at", "at:");
-                    inputValue[listIndex] = inputValue[listIndex]+")";
-                }else if(inputValue[listIndex].startsWith(stateTodo)){
-                    inputState[listIndex] = "T";
-                    inputValue[listIndex] = deletePrefix(inputValue[listIndex],stateTodo);
-                }else if(inputValue[listIndex].startsWith(stateDeadline)){
-                    inputState[listIndex] = "D";
-                    inputValue[listIndex] = deletePrefix(inputValue[listIndex],stateDeadline);
-                    inputValue[listIndex] = inputValue[listIndex].replace("/", "(");
-                    inputValue[listIndex] = inputValue[listIndex].replace("by", "by:");
-                    inputValue[listIndex] = inputValue[listIndex]+")";
-                }
-                System.out.println("____________________________________________________________\n"+
-                "Got it. I've added this task:\n"+
-                "["+inputState[listIndex]+"]"+"[ ] "+inputValue[listIndex]+"\n"+
-                "Now you have "+(listIndex+1)+" tasks in the list.\n"+
-                "____________________________________________________________\n");
-                listIndex+=1;
-                inputValue[listIndex]=inputValue[listIndex-1];
-            }
-           }while(!inputValue[listIndex].equals("bye"));
+    private static void initItemBook() {
+        allItems = new String[CAPACITY][ITEM_DATA_COUNT];
+        count = 0;
     }
 
-    public static String deletePrefix(String input, String prefix){
-        int prefixLength = prefix.length();
-        input = input.substring(prefixLength);
-        return input;
+    private static void addItemToItemBook(String commandType, String commandData) {
+        allItems[count][0] = commandType;
+        allItems[count][1] = UNDO;
+        allItems[count][2] = commandData;
+        count++;
     }
-    // public static String inputState(int state){
-    //     String returnValue = null;
-    //     if(state == 0){
-    //         returnValue = 
-    //     }else if(state == 1){
 
-    //     }else if(state ==2){
+    private static void showWelcomeMessage() {
+        showToUser(DIVIDER, DIVIDER, VERSION, LOGO, GREETING, DIVIDER);
+    }
 
-    //     }
-    // }
+    private static void showToUser(String... message) {
+        for (String m : message) {
+            System.out.println(m);
+        }
+    }
+
+    private static String getUserInput() {
+        System.out.print("Enter command: ");
+        String inputLine = SCANNER.nextLine();
+        // silently consume all blank and comment lines
+        while (inputLine.trim().isEmpty() || inputLine.trim().charAt(0) == INPUT_COMMENT_MARKER) {
+            inputLine = SCANNER.nextLine();
+        }
+        return inputLine;
+    }
+
+    private static void echoUserCommand(String userCommand) {
+        showToUser("[Command entered:" + userCommand + "]", DIVIDER);
+    }
+
+    private static int executeCommand(String userInputString) {
+        final String[] commandTypeAndParams = splitCommandWordAndArgs(userInputString);
+        final String commandType = commandTypeAndParams[0];
+        final String commandArgs = commandTypeAndParams[1];
+        switch (commandType) {
+        case COMMAND_TODO_WORD:
+            addTodoItem(commandArgs);
+            return 1;
+        case COMMAND_EVENT_WORD:
+            addEventItem(commandArgs);
+            return 1;
+        case COMMAND_DEADLINE_WORD:
+            addDeadlineItem(commandArgs);
+            return 1;
+        case COMMAND_LIST_WORD:
+            showListItem();
+            return 1;
+        case COMMAND_DONE_WORD:
+            doneItem(commandArgs);
+            return 1;
+        case COMMAND_END_WORD:
+            endSystem();
+            return 0;
+        default:
+            showToUser("NotFound"+DIVIDER);
+            return 1;
+        }
+    }
+
+    private static String[] splitCommandWordAndArgs(String rawUserInput) {
+        final String[] split = rawUserInput.trim().split("\\s+", 2);
+        return split.length == 2 ? split : new String[] { split[0] , "" }; // else case: no parameters
+    }
+
+
+    public static void showListItem(){
+        for (int i = 0; i<count; i++){
+            int index = i+1;
+            showToUser(index+". "+LEFTPAR+allItems[i][0]+RIGHTPAR+LEFTPAR+allItems[i][1]+RIGHTPAR+allItems[i][2]);}
+    }
+
+    public static void addDeadlineItem(String commandArgs){
+        commandArgs = commandArgs.replace("/", "(");
+        commandArgs = commandArgs.replace("by", "by:");
+        commandArgs = commandArgs+")";
+        addItemToItemBook(COMMAND_DEADLINE_WORD,commandArgs);
+    }
+
+    public static void addTodoItem(String commandArgs){
+        addItemToItemBook(COMMAND_TODO_WORD,commandArgs);
+    }
+
+    public static void addEventItem(String commandArgs){
+        commandArgs = commandArgs.replace("/", "(");
+        commandArgs = commandArgs.replace("at", "at:");
+        commandArgs = commandArgs+")";
+        addItemToItemBook(COMMAND_EVENT_WORD,commandArgs);
+    }
+
+    public static void endSystem(){
+        showToUser(BYE);
+    }
+
+    public static void doneItem(String doneStringNumber){
+        int doneInteger = Integer.parseInt(doneStringNumber)-1;
+        allItems[doneInteger][1] = DONE;
+    }
+    
 }
