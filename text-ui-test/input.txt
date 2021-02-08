@@ -1,6 +1,19 @@
+blah
 list
+done 1
+todo
 todo borrow book
+deadline
+deadline /by
+deadline  /by Sunday
+deadline return book
+deadline return book /by
 deadline return book /by Sunday
+event
+event /by
+event  /at Mon 2-4pm
+event project meeting
+event project meeting /at
 event project meeting /at Mon 2-4pm
 todo write essay for GES
 done done
@@ -13,4 +26,6 @@ done 3
 list
 done 2
 list
+done -1
+done
 bye
