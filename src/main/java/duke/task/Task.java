@@ -1,3 +1,5 @@
+package duke.task;
+
 public class Task {
     protected String name;
     protected boolean isDone;
@@ -13,7 +15,7 @@ public class Task {
     }
 
     /**
-     * @return "x" if task is done, empty space otherwise
+     * @return "x" if duke.task is done, empty space otherwise
      */
     public String getStatusIcon() {
         return (isDone? "\u2718" : " ");

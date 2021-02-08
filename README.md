@@ -1,8 +1,8 @@
-# Duke project template
+# duke.Duke project template
 
 This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_.
 
-## Duke chatbot inspired by Ali G. West side. Any wacky typos are intentional.
+## duke.Duke chatbot inspired by Ali G. West side. Any wacky typos are intentional.
 
 What's this? This be some kind of fancy tekmology I can use on me compooter. Wicked! Wait till I show this to me Julie and Rainbow Jeremy.
 

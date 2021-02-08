@@ -1,3 +1,13 @@
+package duke;
+
+import duke.error.EmptyNameFieldException;
+import duke.error.IllegalAccessException;
+import duke.error.WrongFormatException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -24,7 +34,7 @@ public class Duke {
     private static final String SET_TO_DONE_MESSAGE = " set to done. You're well smart innit?";
     private static final String OUT_OF_BOUNDS_MESSAGE = "Woah. Don't violate the indexes aight. I is watching you.";
     private static final String WRONG_FORMAT_MESSAGE = "Are you spasticated? The format is wrong!";
-    private static final String TOTAL_TASK_MESSAGE = "You is having %d task(s) on your list";
+    private static final String TOTAL_TASK_MESSAGE = "You is having %d duke.task(s) on your list";
     private static final String NO_NAME_MESSAGE = "Why you be trying to find something with no name? Ave' you been smoking me special stash?";
 
     public static Task[] Tasks = new Task[MAX_SIZE];
@@ -50,7 +60,7 @@ public class Duke {
                 int command = getCommand(line);
                 // No fallthrough required
                 switch (command) {
-                // If user wants to mark a task as done
+                // If user wants to mark a duke.task as done
                 case COMMAND_MARK:
                     markAsDone(line);
                     break;
@@ -65,7 +75,6 @@ public class Duke {
                 case COMMAND_EXIT:
                     return;
                 }
-
             } catch (IndexOutOfBoundsException e) {
                 printError(ERR_MAX_CAPACITY);
             } catch (IllegalAccessException e) {
@@ -95,13 +104,13 @@ public class Duke {
         return COMMAND_ADD;
     }
     /**
-     * Marks a task as done.
+     * Marks a duke.task as done.
      * Checks for out of bounds access and presence of numerical value.
      *
      * @param line user input.
      */
     public static void markAsDone(String line) throws IllegalAccessException, EmptyNameFieldException {
-        if(line.length() < 6) {
+        if (line.length() < 6) {
             throw new EmptyNameFieldException();
         }
         int listNum = checkValidDone(line);
@@ -161,10 +170,10 @@ public class Duke {
         }
     }
     /**
-     * Parses the type of task to add to list.
+     * Parses the type of duke.task to add to list.
      *
      * @param line input from user.
-     * @return Type of task to add if valid input, error otherwise.
+     * @return Type of duke.task to add if valid input, duke.error otherwise.
      */
     public static int getItemType(String line) throws WrongFormatException {
         if (line.equalsIgnoreCase("todo")) {
@@ -187,7 +196,7 @@ public class Duke {
         printBorderLine();
     }
     public static void addTodo(String line) throws EmptyNameFieldException {
-        if(line.length() < 6) {
+        if (line.length() < 6) {
             throw new EmptyNameFieldException();
         }
         int current = Task.totalNumberOfTasks;
@@ -197,12 +206,12 @@ public class Duke {
         printAddedToList(current, nameOfTask);
     }
     public static void addDeadline(String line) throws EmptyNameFieldException, WrongFormatException {
-        if(line.length() < 10) {
+        if (line.length() < 10) {
             throw new EmptyNameFieldException();
         }
         if (line.contains("/by")) {
             int current = Task.totalNumberOfTasks;
-            // Details of task starts at index 9 of input
+            // Details of duke.task starts at index 9 of input
             String nameAndDeadline = line.substring(9);
             String[] split = nameAndDeadline.split(" /by ");
             String name = split[0];
@@ -215,12 +224,12 @@ public class Duke {
         }
     }
     public static void addEvent(String nameOfTask) throws EmptyNameFieldException, WrongFormatException {
-        if(nameOfTask.length() < 7) {
+        if (nameOfTask.length() < 7) {
             throw new EmptyNameFieldException();
         }
         if (nameOfTask.contains("/at")) {
             int current = Task.totalNumberOfTasks;
-            // Details of task starts at index 6 of input
+            // Details of duke.task starts at index 6 of input
             String nameAndTime = nameOfTask.substring(6);
             String[] split = nameAndTime.split(" /at ");
             String name = split[0];
@@ -252,9 +261,9 @@ public class Duke {
     }
 
     /**
-     * Prints appropriate error message according to error type.
+     * Prints appropriate duke.error message according to duke.error type.
      *
-     * @param type type of error thrown.
+     * @param type type of duke.error thrown.
      */
     public static void printError(int type) {
         // No fallthrough required
