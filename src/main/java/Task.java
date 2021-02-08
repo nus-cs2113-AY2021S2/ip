@@ -12,9 +12,9 @@ public class Task {
         return description;
     }
 
-    public void markAsDone() {
+    public void setDone() {
         isDone = true;
-        System.out.print("Nice! I've marked this task as done:\n" + this + '\n');
+        System.out.print("Nice! I've marked this task as done:\n" + this.toString() + '\n');
     }
 
     public String getStatusIcon() {
@@ -24,6 +24,7 @@ public class Task {
         return "[\u2718] ";
     }
 
+    @Override
     public String toString() {
         return this.getStatusIcon() + this.description;
     }

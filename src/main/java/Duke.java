@@ -4,7 +4,7 @@ import java.util.Random;
 public class Duke {
 
     public static void printSeparator() {
-        for(int i = 0; i < 40; i++) {
+        for(int i = 0; i < 60; i++) {
             System.out.print('-');
         }
         System.out.print('\n');
@@ -48,9 +48,9 @@ public class Duke {
                 printTasks(tasks, taskCount);
                 break;
             case "done":
-                int index = Integer.parseInt(lineParts[1]) - 1;
-                if (index <= taskCount) {
-                    tasks[index].markAsDone();
+                int taskIndex = Integer.parseInt(lineParts[1]) - 1;
+                if (taskIndex <= taskCount) {
+                    tasks[taskIndex].setDone();
                 } else {
                     System.out.print("That is not a valid task index, please try again.\n");
                 }
@@ -59,12 +59,20 @@ public class Duke {
                 tasks[taskCount++] = new Todo(line.replace("todo ", ""));
                 break;
             case "deadline":
-                int byIndex = line.indexOf("/by");
-                tasks[taskCount++] = new Deadline(line.substring(9, byIndex), line.substring(byIndex + 4));
+                try {
+                    int byIndex = line.indexOf("/by");
+                    tasks[taskCount++] = new Deadline(line.substring(9, byIndex), line.substring(byIndex + 4));
+                } catch (Exception e) {
+                    System.out.print("Something went wrong. Please put the due date after [/by].\n");
+                }
                 break;
             case "event":
-                int atIndex = line.indexOf("/at");
-                tasks[taskCount++] = new Event(line.substring(6, atIndex), line.substring(atIndex + 4));
+                try {
+                    int atIndex = line.indexOf("/at");
+                    tasks[taskCount++] = new Event(line.substring(6, atIndex), line.substring(atIndex + 4));
+                } catch (Exception e) {
+                    System.out.print("Something went wrong. Please put the event time after [/at].\n");
+                }
                 break;
             default:
                 echoMode(line);
