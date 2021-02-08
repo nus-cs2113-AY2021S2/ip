@@ -1,5 +1,11 @@
+package duke;
+
 import java.util.Scanner;
 import java.util.Random;
+import duke.task.Task;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
 
 public class Duke {
     private static Task[] tasks = new Task[100];
