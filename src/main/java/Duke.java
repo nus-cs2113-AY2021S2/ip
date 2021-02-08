@@ -17,11 +17,16 @@ public class Duke {
     private static final String TASK_ADDED_MESSAGE = "Got it. I've added this task:";
     private static final String TASK_TOTAL_TASKS_STRING_FORMAT = "Now you have %d tasks in the list.";
     private static final String TASK_MARK_AS_DONE_FORMAT = "Nice! I've marked this task as done:";
-    private static final String ERROR_COMMAND_MESSAGE = "Invalid command.";
-    private static final String ERROR_INVALID_DEADLINE_MESSAGE = "Invalid deadline.";
-    private static final String ERROR_INVALID_EVENT_MESSAGE = "Invalid event.";
-    private static final String ERROR_INVALID_TASK_NAME_MESSAGE = "Invalid task name.";
-    private static final String ERROR_INVALID_TASK_NUMBER_MESSAGE = "Invalid task number.";
+    private static final String ERROR_COMMAND_MESSAGE = "I'm sorry, but I don't know what that means :-(";
+    private static final String ERROR_EMPTY_DEADLINE_BY_MESSAGE = "The deadline's /by argument cannot be empty.";
+    private static final String ERROR_EMPTY_EVENT_AT_MESSAGE = "The event's /at argument cannot be empty.";
+
+    private static final String ERROR_EMPTY_TASK_NUMBER_MESSAGE = "Missing task number,"
+            + "please specify a valid task number.";
+    private static final String ERROR_INVALID_TASK_NUMBER_MESSAGE = "The task number you've entered is invalid.";
+    private static final String ERROR_NOT_A_TASK_NUMBER_MESSAGE =
+            "Please enter a valid positive integer for a task number.";
+    private static final String ERROR_EMPTY_TASK_STRING_FORMAT = "The description of a %s cannot be empty.";
 
     private static final int MAX_NUMBER_OF_TASKS = 100;
     private static Task[] tasks = new Task[MAX_NUMBER_OF_TASKS];
@@ -36,12 +41,20 @@ public class Duke {
      * @param commandArgs this should contain task description
      */
     private static void recordTodo(String commandArgs) {
+        try {
+            String taskDescription = validateTodoArguments(commandArgs);
+            recordTask(new Todo(taskDescription));
+        } catch (DukeException e) {
+            TextUI.printError(e.getMessage());
+        }
+    }
+
+    private static String validateTodoArguments(String commandArgs) throws DukeException {
         String taskDescription = parseArgument(commandArgs, null);
         if (isArgumentValueEmpty(taskDescription)) {
-            TextUI.printError(ERROR_INVALID_TASK_NAME_MESSAGE);
-            return;
+            throw new DukeException(String.format(ERROR_EMPTY_TASK_STRING_FORMAT, "todo"));
         }
-        recordTask(new Todo(taskDescription));
+        return taskDescription;
     }
 
     /**
@@ -52,18 +65,24 @@ public class Duke {
      * @param commandArgs this should contain task description and deadline-by
      */
     private static void recordDeadline(String commandArgs) {
-        String taskDescription = parseArgument(commandArgs, null);
-        if (isArgumentValueEmpty(taskDescription)) {
-            TextUI.printError(ERROR_INVALID_TASK_NAME_MESSAGE);
-            return;
+        try {
+            String[] deadlineArgValues = validateDeadlineArguments(commandArgs);
+            recordTask(new Deadline(deadlineArgValues[0], deadlineArgValues[1]));
+        } catch (DukeException e) {
+            TextUI.printError(e.getMessage());
         }
+    }
 
+    private static String[] validateDeadlineArguments(String commandArgs) throws DukeException {
+        String taskDescription = parseArgument(commandArgs, null);
         String deadlineBy = parseArgument(commandArgs, COMMAND_DEADLINE_BY_TOKEN);
-        if (isArgumentValueEmpty(deadlineBy)) {
-            TextUI.printError(ERROR_INVALID_DEADLINE_MESSAGE);
-            return;
+        if (isArgumentValueEmpty(taskDescription)) {
+            throw new DukeException(String.format(ERROR_EMPTY_TASK_STRING_FORMAT, "deadline"));
         }
-        recordTask(new Deadline(taskDescription, deadlineBy));
+        if (isArgumentValueEmpty(deadlineBy)) {
+            throw new DukeException(ERROR_EMPTY_DEADLINE_BY_MESSAGE);
+        }
+        return new String[] {taskDescription, deadlineBy};
     }
 
     /**
@@ -74,18 +93,24 @@ public class Duke {
      * @param commandArgs this should contain task description and event-at
      */
     private static void recordEvent(String commandArgs) {
-        String taskDescription = parseArgument(commandArgs, null);
-        if (isArgumentValueEmpty(taskDescription)) {
-            TextUI.printError(ERROR_INVALID_TASK_NAME_MESSAGE);
-            return;
+        try {
+            String[] eventArgValues = validateEventArguments(commandArgs);
+            recordTask(new Event(eventArgValues[0], eventArgValues[1]));
+        } catch (DukeException e) {
+            TextUI.printError(e.getMessage());
         }
+    }
 
+    private static String[] validateEventArguments(String commandArgs) throws DukeException {
+        String taskDescription = parseArgument(commandArgs, null);
         String eventAt = parseArgument(commandArgs, COMMAND_EVENT_AT_TOKEN);
-        if (isArgumentValueEmpty(eventAt)) {
-            TextUI.printError(ERROR_INVALID_EVENT_MESSAGE);
-            return;
+        if (isArgumentValueEmpty(taskDescription)) {
+            throw new DukeException(String.format(ERROR_EMPTY_TASK_STRING_FORMAT, "event"));
         }
-        recordTask(new Event(taskDescription, eventAt));
+        if (isArgumentValueEmpty(eventAt)) {
+            throw new DukeException(ERROR_EMPTY_EVENT_AT_MESSAGE);
+        }
+        return new String[] {taskDescription, eventAt};
     }
 
     /**
@@ -135,9 +160,14 @@ public class Duke {
         try {
             String argValue = parseArgument(commandArgs, null);
             if (argValue == null) {
-                throw new Exception(ERROR_INVALID_TASK_NUMBER_MESSAGE);
+                throw new DukeException(ERROR_EMPTY_TASK_NUMBER_MESSAGE);
             }
             int taskNumber = Integer.parseInt(argValue);
+            if (taskNumber >= MAX_NUMBER_OF_TASKS) {
+                // Prevents ArrayIndexOutOfBoundsException beyond upper limit:
+                // -> Upper limit: MAX_NUMBER_OF_TASKS - 1
+                throw new DukeException(ERROR_INVALID_TASK_NUMBER_MESSAGE);
+            }
             if (taskNumber > 0 && taskNumber <= numberOfTasks) {
                 int taskIndex = taskNumber - 1;
                 tasks[taskIndex].setDone(true);
@@ -145,14 +175,17 @@ public class Duke {
                 TextUI.printStatements(TASK_MARK_AS_DONE_FORMAT,
                         String.format(DOUBLE_SPACE_PREFIX_STRING_FORMAT, task));
             } else {
-                throw new Exception(ERROR_INVALID_TASK_NUMBER_MESSAGE);
+                // Prevents ArrayIndexOutOfBoundsException beyond lower limit:
+                // -> Lower limit: 0
+                // Prevents NullPointerException beyond index (numberOfTasks - 1).
+                throw new DukeException(ERROR_INVALID_TASK_NUMBER_MESSAGE);
             }
-        } catch (Exception e) {
-            TextUI.printError(ERROR_INVALID_TASK_NUMBER_MESSAGE);
+        } catch (NumberFormatException e) {
+            TextUI.printError(ERROR_NOT_A_TASK_NUMBER_MESSAGE);
+        } catch (DukeException e) {
+            TextUI.printError(e.getMessage());
         }
     }
-
-
 
     private static void exitProgram() {
         TextUI.printStatements(EXIT_MESSAGE);

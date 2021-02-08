@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class TextUI {
-    private static final String HORIZONTAL_LINE = "_".repeat(60);
+    private static final String HORIZONTAL_LINE = "_".repeat(65);
     private static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
