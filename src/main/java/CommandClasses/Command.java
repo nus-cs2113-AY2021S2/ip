@@ -1,3 +1,9 @@
+package CommandClasses;
+
+import ExceptionClasses.EmptyByOrAtWhenException;
+import ExceptionClasses.EmptyTaskDescriptionException;
+import ExceptionClasses.TooManyArgumentsException;
+
 public class Command {
     private CommandEnum commandType;
     private String description;

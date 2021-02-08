@@ -1,3 +1,5 @@
+package CommandClasses;
+
 public enum CommandEnum {
     BYE,
     LIST,

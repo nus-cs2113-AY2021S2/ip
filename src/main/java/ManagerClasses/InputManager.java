@@ -1,3 +1,9 @@
+package ManagerClasses;
+
+import CommandClasses.Command;
+import ExceptionClasses.EmptyByOrAtWhenException;
+import ExceptionClasses.EmptyTaskDescriptionException;
+
 import java.util.Scanner;
 
 public class InputManager {
