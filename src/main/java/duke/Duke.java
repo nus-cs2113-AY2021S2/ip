@@ -1,4 +1,8 @@
+package duke;
+
 import java.util.Scanner;
+import duke.task.*;
+import duke.exception.*;
 
 public class Duke {
     static int taskCount = 0;
@@ -49,15 +53,16 @@ public class Duke {
             
             try {
                 executeCommand(commandType, commandArg);
-            } catch (NullCommandArgException | InvalidCommandTimeException | InvalidCommand | InvalidTaskNumberException e) {
+            } catch (NullCommandArgException | InvalidCommandTimeException
+            | InvalidCommandException | InvalidTaskNumberException e) {
                 printWithBorder(e.getMessage());
                 continue;
             }
         }
     }
     
-    private static void executeCommand(String commandType, String commandArg)
-            throws NullCommandArgException, InvalidCommandTimeException, InvalidCommand, InvalidTaskNumberException {
+    private static void executeCommand(String commandType, String commandArg) throws NullCommandArgException,
+    InvalidCommandTimeException, InvalidCommandException, InvalidTaskNumberException {
         switch (commandType) {
         case "help":
             printWithBorder(COMMANDS);
@@ -78,7 +83,7 @@ public class Duke {
             addEvent(commandArg);
             break;
         default:
-            throw new InvalidCommand(commandType + " " + commandArg);
+            throw new InvalidCommandException(commandType);
         }
     }
 

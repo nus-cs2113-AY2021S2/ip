@@ -1,3 +1,5 @@
+package duke.exception;
+
 public class InvalidTaskNumberException extends Exception {
     private static String errorMessage = " is not a valid task number.";
     private String input;

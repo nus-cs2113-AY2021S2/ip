@@ -1,3 +1,5 @@
+package duke.exception;
+
 public class InvalidCommandTimeException extends Exception {
     private String errorMessage;
     private String commandType;
