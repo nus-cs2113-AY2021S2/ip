@@ -8,6 +8,6 @@ public class Event extends Task {
     }
 
     public String toString() {
-        return String.format("[E][ ]" + description + " (at: " + at + ")");
+        return String.format("[E][" + getStatusIcon() + "] " + description + " (at: " + at + ")");
     }
 }
