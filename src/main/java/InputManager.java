@@ -22,13 +22,29 @@ public class InputManager {
                 taskManager.markDone(command.getTaskNum());
                 break;
             case DEADLINE:
-                taskManager.addDeadlineToList(command.getDescription(), command.getWhen());
+                try {
+                    taskManager.addDeadlineToList(command.getDescription(), command.getWhen());
+                } catch (EmptyTaskDescriptionException e) {
+                    System.out.println("Error -> Empty task description");
+                } catch (EmptyByOrAtWhenException | NullPointerException e) {
+                    System.out.println("Error -> Deadline by when is not stated");
+                }
                 break;
             case EVENT:
-                taskManager.addEventToList(command.getDescription(), command.getWhen());
+                try {
+                    taskManager.addEventToList(command.getDescription(), command.getWhen());
+                } catch (EmptyTaskDescriptionException e) {
+                    System.out.println("Error -> Empty task description");
+                } catch (EmptyByOrAtWhenException | NullPointerException e) {
+                    System.out.println("Error -> Event at when is not stated");
+                }
                 break;
             case TODO:
-                taskManager.addTodoToList(command.getDescription());
+                try {
+                    taskManager.addTodoToList(command.getDescription());
+                } catch (EmptyTaskDescriptionException e) {
+                    System.out.println("Error -> Empty task description");
+                }
                 break;
             default:
                 PrintManager.printHelpMessage();

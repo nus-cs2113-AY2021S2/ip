@@ -9,11 +9,15 @@ public class TaskManager {
     }
 
     public void printTasks() {
-        int taskId = 1;
-        System.out.println("Here are the tasks in your list:");
-        for (Task task: tasks) {
-            System.out.println(taskId + ". " + task.toString());
-            taskId++;
+        if (tasks.size() == 0) {
+            System.out.println("Oops, it seems like you have no tasks in your list");
+        } else {
+            int taskId = 1;
+            System.out.println("Here are the tasks in your list:");
+            for (Task task: tasks) {
+                System.out.println(taskId + ". " + task.toString());
+                taskId++;
+            }
         }
     }
 
@@ -27,7 +31,7 @@ public class TaskManager {
                 System.out.println("Nice! I've marked this task as done:");
                 System.out.println(task.toString());
             }
-        } catch (IndexOutOfBoundsException error) {
+        } catch (IndexOutOfBoundsException e) {
             System.out.println("Error -> Cannot find task with the specified task number " + taskIdNum + ".");
         }
     }
