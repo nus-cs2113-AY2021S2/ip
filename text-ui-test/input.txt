@@ -1,12 +1,18 @@
-todo remove
+todo change amp
 blah
 fak ni
-deadline transcript /by saturday 2359
+blah
+deadline remaster drums /by saturday 2359
 list
-event meeting /at monday 2-4
-deadline slides /by tuesday 33
+write guitar part
+event record /at monday 2-4
+todo add guitars /at thursday 8pm
+deadline restring guitar /by tuesday 33
 list
 done 3
 list
+event live gig /at friday 10pm
+done 5
 done 10
+list
 bye
