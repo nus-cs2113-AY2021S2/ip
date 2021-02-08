@@ -1,6 +1,9 @@
+import MyExceptions.NoContent;
+import MyExceptions.NoTime;
+
 public class Deadline extends Event{
 
-    Deadline(String content) {
+    Deadline(String content) throws NoContent, NoTime {
         super(content);
     }
 
