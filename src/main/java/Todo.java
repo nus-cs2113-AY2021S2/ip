@@ -1,21 +1,23 @@
-public class Todo extends TaskList{
+public class Todo extends TaskList {
 
-    private static final String TASKTITLE ="T";
+    private static final String TASK_TITLE = "T";
 
-    public Todo(int size){
+    public Todo(int size) {
         super(size);
     }
 
     @Override
     public void printTaskDescription() {
-        String phrase = "Aight Crewmate!! I've got a new task for you to do!!!"+System.lineSeparator()
-                +"  ["+TASKTITLE+"]"+"["+getStatusIcon(getTasksCounter())+"]"+ getTaskDescription(tasksCounter);
+        String phrase = "Aight Crewmate!! I've got a new task for you to do!!!" + System.lineSeparator()
+                + "  [" + TASK_TITLE + "]" + "[" + getStatusIcon(getTasksCounter()) + "]"
+                + getTaskDescription(tasksCounter);
         System.out.println(phrase);
     }
 
     @Override
     public void printTask(int index) {
-        String phrase =(index+1)+ "."+"["+TASKTITLE+"]"+"["+getStatusIcon(index)+"]"+ getTaskDescription(index);
+        String phrase = (index + 1) + "." + "[" + TASK_TITLE + "]" + "[" + getStatusIcon(index) + "]"
+                + getTaskDescription(index);
         System.out.println(phrase);
     }
 

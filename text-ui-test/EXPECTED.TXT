@@ -43,6 +43,31 @@ There's no such command!!! You look SUS!!!  (?_??
 ____________________________________________________________________________________
 There's no such command!!! You look SUS!!!  (?_??
 ____________________________________________________________________________________
+There's no such command!!! You look SUS!!!  (?_??
+____________________________________________________________________________________
+There's no such command!!! You look SUS!!!  (?_??
+____________________________________________________________________________________
+There's no such command!!! You look SUS!!!  (?_??
+____________________________________________________________________________________
+There's no such command!!! You look SUS!!!  (?_??
+____________________________________________________________________________________
+There's no such command!!! You look SUS!!!  (?_??
+____________________________________________________________________________________
+____________________________________________________________________________________
+Aight Crewmate!! I've got a new task for you to do!!!
+  [T][?]eat
+Are you really a Crewmate??? You haven't done any work in this list! ????�??
+____________________________________________________________________________________
+____________________________________________________________________________________
+Nice! I've marked this task as done:
+1[?]. eat
+Good job Crewmate! You completed all your tasks! in this list(???)
+Don't forget to check the other lists as well!!!!
+____________________________________________________________________________________
+Good job Crewmate! You completed all your tasks in all your lists! (???)
+____________________________________________________________________________________
+There's no such command!!! You look SUS!!!  (?_??
+____________________________________________________________________________________
 ____________________________________________________________________________________
 Aight Crewmate!! I've got a new deadline for you!!!
   [D][?]get married (by: mon 23.01.33)
@@ -50,21 +75,25 @@ Are you really a Crewmate??? You haven't done any work in this list! ????�??
 ____________________________________________________________________________________
 ____________________________________________________________________________________
 There's no such task?! Are you really a Crewmate??  (????)
-____________________________________________________________________________________
-Are you really a Crewmate??? You haven't done any work AT ALL! ????�??
+You still have 1 task(s) left in all your Lists ! Hurry up!! ?(?0�)?
 ____________________________________________________________________________________
 ____________________________________________________________________________________
 Nice! I've marked this task as done:
 1[?]. get married
-Good job Crewmate! You completed all your tasks! (???) in this list
+Good job Crewmate! You completed all your tasks! in this list(???)
 Don't forget to check the other lists as well!!!!
 ____________________________________________________________________________________
 Good job Crewmate! You completed all your tasks in all your lists! (???)
 ____________________________________________________________________________________
 ____________________________________________________________________________________
+ATTENTION, Here's your list of your tasks TO DO Crewmate!!!
+1.[T][?]eat
+Good job Crewmate! You completed all your tasks in  this list! (???)
+____________________________________________________________________________________
+____________________________________________________________________________________
 ATTENTION, Here's your list of DEADLINE(S) to meet  Crewmate!!!
 1.[D][?]get married (by: mon 23.01.33)
-Good job Crewmate! You completed all your tasks! (???)
+Good job Crewmate! You completed all your tasks in  this list! (???)
 ____________________________________________________________________________________
 Good job Crewmate! You completed all your tasks in all your lists! (???)
 ____________________________________________________________________________________
