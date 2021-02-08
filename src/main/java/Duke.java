@@ -1,5 +1,10 @@
+import java.text.NumberFormat;
+import java.util.Locale;
 import java.util.Scanner;
 import java.util.ArrayList;
+import duke.exceptions.*;
+import duke.tasks.TaskType;
+
 
 
 public class Duke {
@@ -9,11 +14,7 @@ public class Duke {
     static final int TODOLENGTH = 4;
     static final int EVENTLENGTH = 5;
     static final int DEADLINELENGTH = 8;
-    enum TaskType {
-        TODO,
-        EVENT,
-        DEADLINE
-    }
+
 
     public static void printTaskList() {
         System.out.println("Here are the tasks in your list: ");
@@ -78,13 +79,13 @@ public class Duke {
 
     public static void addTask(String userInput) {
         try {
-            if (userInput.startsWith("deadline")){
+            if (userInput.toLowerCase().startsWith("deadline")){
                 addDeadline(userInput);
             }
-            else if (userInput.startsWith("event")){
+            else if (userInput.toLowerCase().startsWith("event")){
                 addEvent(userInput);
             }
-            else if (userInput.startsWith("todo")){
+            else if (userInput.toLowerCase().startsWith("todo")){
                 addTodo(userInput);
             }
             else {
@@ -98,6 +99,22 @@ public class Duke {
             e.printErrorTaskCannotBeEmpty();
         }
     }
+
+    public static void markTaskDone(String task) {
+        try {
+            int idx = Integer.parseInt(String.valueOf(task.charAt(TODOLENGTH+1)));
+            tasks.get(idx-1).markAsDone();
+            System.out.println("------------------------------------------");
+            System.out.println("    Nice! I've marked this task as done: ");
+            System.out.println("    " + tasks.get(idx-1));
+        } catch (NumberFormatException e) {
+            System.out.println("OOPS!!! Please enter an integer after 'done'.");
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("OOPS!!! Please choose a valid task index.");
+        }
+
+    }
+
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -124,11 +141,7 @@ public class Duke {
                 System.out.println("------------------------------------------");
             }
             else if (task.contains("done")){
-                int idx = Integer.parseInt(String.valueOf(task.charAt(5)));
-                tasks.get(idx-1).markAsDone();
-                System.out.println("------------------------------------------");
-                System.out.println("    Nice! I've marked this task as done: ");
-                System.out.println("    " + tasks.get(idx-1));
+                markTaskDone(task);
             }
             else {
                 addTask(task);
