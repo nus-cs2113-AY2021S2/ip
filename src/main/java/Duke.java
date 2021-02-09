@@ -48,7 +48,7 @@ public class Duke {
 
     public static void interact() {
         Task[] list = new Task[100];
-        int index = 0;
+        int taskCount = 0;
 
         Scanner scan = new Scanner(System.in);
         String in = scan.nextLine();
@@ -69,22 +69,22 @@ public class Duke {
                 System.out.print(LINE + HELP_MESSAGE + LINE); //we should probably write an entire method for help
                 break;
             case "list":
-                printList(list, index);
+                printList(list, taskCount);
                 break;
             case "todo":
-                index = addToDo(input, list, index);
+                taskCount = addToDo(input, list, taskCount);
                 break;
             case "deadline":
-                index = addDeadline(input, list, index);
+                taskCount = addDeadline(input, list, taskCount);
                 break;
             case "event":
-                index = addEvent(input, list, index);
+                taskCount = addEvent(input, list, taskCount);
                 break;
             case "done":
-                markAsDone(list, index, input);
+                markAsDone(list, taskCount, input);
                 break;
             case "undo":
-                undoMarkAsDone(list, index, input);
+                undoMarkAsDone(list, taskCount, input);
                 break;
             default:
                 System.out.print(LINE + INVALID_COMMAND_MESSAGE + LINE);
@@ -92,7 +92,7 @@ public class Duke {
             in = scan.nextLine();
 
             if (in.contains(" ")) {
-                cmd = in.substring(0, in.indexOf(" ")); //if there is no space, index returned is -1
+                cmd = in.substring(0, in.indexOf(" ")); //if there is no space, taskCount returned is -1
                 input = in.substring(in.indexOf(" ") + 1);
             } else {
                 cmd = in;
@@ -134,17 +134,17 @@ public class Duke {
         return index;
     }
 
-    public static int addEvent(String input, Task[] list, int index) {
+    public static int addEvent(String input, Task[] list, int taskCount) {
         if (input == null) {
             System.out.print(LINE + NO_DESCRIPTION_MESSAGE + LINE);
         } else if(input.toLowerCase().contains("/at")) {
             try {
                 String desc = input.substring(0, input.toLowerCase().indexOf("/at")-1);
                 String date = input.substring(input.toLowerCase().indexOf("/at")+4);
-                list[index] = new Event(desc, date);
+                list[taskCount] = new Event(desc, date);
                 System.out.print(LINE + "\"" + desc + "\"" + ADD_MESSAGE +
                         "It occurs at: " + date + "\n" + LINE);
-                index++;
+                taskCount++;
             } catch (Exception e) {
                 System.out.print(LINE + INVALID_ARGUMENT_MESSAGE + LINE);
             }
@@ -152,15 +152,15 @@ public class Duke {
             System.out.print(LINE + INVALID_ARGUMENT_MESSAGE + NO_TIME_MESSAGE + LINE);
         }
 
-        return index;
+        return taskCount;
     }
 
-    public static void printList(Task[] list, int index) {
-        if(index == 0) {
+    public static void printList(Task[] list, int taskCount) {
+        if(taskCount == 0) {
             System.out.print(LINE + EMPTY_LIST_MESSAGE + LINE);
         } else {
             System.out.print(LINE);
-            for (int i = 0; i < index; i++) {
+            for (int i = 0; i < taskCount; i++) {
                 if (i < 9) {
                     System.out.print(" ");
                 }
