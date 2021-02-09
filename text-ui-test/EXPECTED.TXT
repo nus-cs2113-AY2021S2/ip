@@ -14,4 +14,16 @@ Here are the tasks in your list, Sir/Madam/Other:
 >>> 2. [E][ ] meeting (at: 9.30)
 >>> 3. [D][ ] retire (by: 40)
 What other tasks do you want to do?
+Oops, todo description cannot be empty :(
+What other tasks do you want to do?
+Oops, event description cannot be empty :(
+What other tasks do you want to do?
+Oops, event time cannot be empty :(
+What other tasks do you want to do?
+Oops, deadline description cannot be empty :(
+What other tasks do you want to do?
+Oops, deadline due date cannot be empty :(
+What other tasks do you want to do?
+Invalid command :(
+What other tasks do you want to do?
 Goodbye, hope to see you soon!
