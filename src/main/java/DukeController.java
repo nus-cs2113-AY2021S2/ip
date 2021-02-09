@@ -32,9 +32,13 @@ public class DukeController {
     }
 
     public static void addNewTask(String input) {
-        Task taskToAdd = processTaskToAdd(input);
-        if (taskToAdd != null) {
-            addTaskSuccessful(taskToAdd);
+        try {
+            Task taskToAdd = processTaskToAdd(input);
+            if (taskToAdd != null) {
+                addTaskSuccessful(taskToAdd);
+            }
+        } catch (UnknownCommandException e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -44,14 +48,19 @@ public class DukeController {
         UI.addTaskSuccessfulMessage(taskToAdd, taskCount);
     }
 
-    public static Task processTaskToAdd(String input) {
-        if (input.contains("todo")) {
-            return processToDo(input);
-        } else if (input.contains("deadline")) {
-            return processDeadline(input);
-        } else if (input.contains("event")) {
-            return processEvent(input);
-        } else {
+    public static Task processTaskToAdd(String input) throws UnknownCommandException{
+        try {
+            if (input.contains("todo")) {
+                return processToDo(input);
+            } else if (input.contains("deadline")) {
+                return processDeadline(input);
+            } else if (input.contains("event")) {
+                return processEvent(input);
+            } else {
+                throw new UnknownCommandException();
+            }
+        } catch (EmptyTodoException e) {
+            System.out.println(e.getMessage());
             return null;
         }
 
@@ -73,8 +82,11 @@ public class DukeController {
         return new Deadline(description, by);
     }
 
-    private static ToDo processToDo(String input) {
+    private static ToDo processToDo(String input) throws EmptyTodoException {
         String substr = input.substring(TODO_STRING_LENGTH);
+        if (substr.length() == 0) {
+            throw new EmptyTodoException();
+        }
         return new ToDo(substr.trim());
     }
 }
