@@ -1,15 +1,16 @@
 import java.util.Scanner;
 
 public class MainPage {
-
+    public static final String LIST_COMMAND = "list";
+    public static final String BYE_COMMAND = "bye";
     public static void displayUI(Scanner in){
         printWelcomeMessage();
         while (true){
             String input = in.nextLine();
-            if (input.equals("list")){
+            if (input.equals(LIST_COMMAND)) {
                 TaskManager.printTaskList();
             }
-            else if (input.equals("bye")) {
+            else if (input.equals(BYE_COMMAND)) {
                 printExitMessage();
             }
             else if (input.startsWith("done")) {
