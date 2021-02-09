@@ -102,9 +102,22 @@ public class TaskManager {
         messages.add(Constants.DONE_MESSAGE);
         for (int index : indexes) {
             Task task = storage.get(index);
-            messages.add(String.format(" [X] %s\n", task.getDescription()));
-            Todo completedTask = new Todo(index, task.getDescription(), true);
-            storage.put(index, completedTask);
+            Task completedTask = null;
+            if (task instanceof Todo) {
+                completedTask = new Todo(index, task.getDescription(), true);
+            }
+            if (task instanceof Deadline) {
+                completedTask = new Deadline(index, task.getDescription(), true,
+                    ((Deadline) task).getDeadline());
+            }
+            if (task instanceof Event) {
+                completedTask = new Event(index, task.getDescription(), true,
+                    ((Event) task).getEvent());
+            }
+            if (completedTask != null) {
+                messages.add(completedTask.getMessage());
+                storage.put(index, completedTask);
+            }
         }
         messages.add(String.format("Tasks left: %d",getIncompleteTasksCount()));
         return messages;
