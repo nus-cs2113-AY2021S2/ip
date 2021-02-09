@@ -34,7 +34,7 @@ public class Task {
                 + "*                                                    *\n"
                 + "*          [Objectives]-[Missions]-[Tasks]           *\n"
                 + "*                                                    *\n"
-                + "******************************************************\n";
+                + "******************************************************";
         System.out.println(tasksTemplate);
     }
 
@@ -95,10 +95,23 @@ public class Task {
         System.out.println(taskCountMessage);
     }
 
-    public static void markDone(String errand) { // In this case, errand is the index of the item
-        int taskIndex = Integer.parseInt(errand) - 1;
-        taskArray[taskIndex].isDone = true;
-        printMarkDonePrompt(taskIndex);
+    public static void markDone(String index) throws IllegalTaskCommandException {
+        int indexOfTask;
+        try {
+            indexOfTask = Integer.parseInt(index) - 1;
+        } catch (NumberFormatException e) {
+            IllegalTaskCommandException.printErrorLogo();
+            System.err.println("Only numbers are allowed commander!");
+            return; // Ends the method here as invalid input is entered
+        }
+
+        if (indexOfTask < 0) {
+            throw new IllegalTaskCommandException("There is no such task, Commander!");
+        } else if (indexOfTask >= taskIndex) {
+            throw new IllegalTaskCommandException("Unacceptable location Commander!");
+        }
+        taskArray[indexOfTask].isDone = true;
+        printMarkDonePrompt(indexOfTask);
     }
 
     private static void printMarkDonePrompt(int taskIndex) {
