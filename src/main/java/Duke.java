@@ -44,17 +44,17 @@ public class Duke {
 
     public static CommandType getCommandType(String userInputString) {
         CommandType commandType;
-        if(userInputString.equals("list")) {
+        if(userInputString.equalsIgnoreCase("LIST")) {
             commandType = CommandType.LIST;
-        } else if (userInputString.matches("^(done).*$")) {
+        } else if (userInputString.toUpperCase().matches("^(DONE).*$")) {
             commandType = CommandType.DONE;
-        } else if (userInputString.matches("^(todo).*$")) {
+        } else if (userInputString.toUpperCase().matches("^(TODO).*$")) {
             commandType = CommandType.TODO;
-        } else if (userInputString.matches("^(deadline).*$")) {
+        } else if (userInputString.toUpperCase().matches("^(DEADLINE).*$")) {
             commandType = CommandType.DEADLINE;
-        } else if (userInputString.matches("^(event).*$")) {
+        } else if (userInputString.toUpperCase().matches("^(EVENT).*$")) {
             commandType = CommandType.EVENT;
-        } else if (userInputString.equals("bye")) {
+        } else if (userInputString.equalsIgnoreCase("BYE")) {
             commandType = CommandType.EXIT;
         } else {
             commandType = CommandType.UNDEFINED;
@@ -62,12 +62,14 @@ public class Duke {
         return commandType;
     }
 
-    public static void getMessageForInvalidCommandInput() {
-        System.out.println("Undefined!");
+    public static void showMessageForInvalidCommandInput() {
+        System.out.println("____________________________________________________________");
+        System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(!");
+        System.out.println("____________________________________________________________");
     }
 
     public static void executeAddTodo(String userCommand) throws EmptyDescriptionException{
-        String[] typeContent = userCommand.split("todo",2);
+        String[] typeContent = userCommand.split("[Tt][Oo][Dd][Oo]",2);
         if (typeContent[1].equals("")) {
             throw new EmptyDescriptionException(CommandType.TODO);
         }
@@ -77,28 +79,34 @@ public class Duke {
 
     public static void executeAddDeadline(String userCommand) throws EmptyDescriptionException{
         try {
-            String[] typeContentBy = userCommand.trim().split("deadline", 2);
-            String[] contentBy = typeContentBy[1].trim().split("/by", 2);
+            String[] typeContentBy = userCommand.trim().split("[Dd][Ee][Aa][Dd][Ll][Ii][Nn][Ee]", 2);
+            String[] contentBy = typeContentBy[1].trim().split("/[Bb][Yy]", 2);
             if (contentBy[0].trim().equals("") || contentBy[1].trim().equals("")) {
                 throw new EmptyDescriptionException(CommandType.DEADLINE);
             }
             tasks.addDeadline(contentBy[0].trim(), contentBy[1].trim());
         } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("____________________________________________________________");
             System.out.println("No /by founded in the command");
+            System.out.println("____________________________________________________________");
+
         }
 
     }
 
     public static void executeAddEvent(String userCommand) throws EmptyDescriptionException{
         try {
-            String[] typeContentAt= userCommand.trim().split("event", 2);
-            String[] contentAt = typeContentAt[1].trim().split("/at", 2);
+            String[] typeContentAt= userCommand.trim().split("[Ee][Vv][Ee][Nn][Tt]", 2);
+            String[] contentAt = typeContentAt[1].trim().split("/[Aa][Tt]", 2);
             if (contentAt[0].trim().equals("") || contentAt[1].trim().equals("")) {
                 throw new EmptyDescriptionException(CommandType.EVENT);
             }
             tasks.addEvent(contentAt[0].trim(), contentAt[1].trim());
         } catch (IndexOutOfBoundsException e){
+            System.out.println("____________________________________________________________");
             System.out.println("No /at founded in the command");
+            System.out.println("____________________________________________________________");
+
         }
 
     }
@@ -143,7 +151,7 @@ public class Duke {
                 executeExitProgramRequest();
                 return;
             default:
-                getMessageForInvalidCommandInput();
+                showMessageForInvalidCommandInput();
                 return;
             }
         } catch (EmptyDescriptionException e) {
