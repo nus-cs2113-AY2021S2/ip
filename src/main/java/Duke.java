@@ -36,12 +36,12 @@ public class Duke {
         return command.toUpperCase();
     }
 
-    private static void executeCommand(String command, String userInput) throws IllegalTaskCommandException {
+    private static void executeCommand(String command, String userInput) {
         String errand;
         String timestamp;
         String timestampHeader;
 
-        switch (command) {
+        switch(command) {
         case "TODO":
             errand = getSubstring(userInput);
             Task todo = new Todo(errand);
@@ -49,15 +49,15 @@ public class Duke {
             break;
         case "EVENT":
             errand = getErrand(userInput);
-            timestampHeader = getTimestampHeader(userInput);
             timestamp = getTimestamp(userInput);
+            timestampHeader = getTimestampHeader(userInput);
             Task event = new Event(errand, timestamp, timestampHeader);
             event.addToTaskList(errand, timestamp);
             break;
         case "DEADLINE":
             errand = getErrand(userInput);
-            timestampHeader = getTimestampHeader(userInput);
             timestamp = getTimestamp(userInput);
+            timestampHeader = getTimestampHeader(userInput);
             Task deadline = new Deadline(errand, timestamp, timestampHeader);
             deadline.addToTaskList(errand, timestamp);
             break;
@@ -71,49 +71,38 @@ public class Duke {
         case "BYE":
             printGoodbyeMessage();
             break;
-        default:
-            throw new IllegalTaskCommandException("Unacceptable Command!");
         }
     }
 
-    private static String getSubstring(String userInput) throws IllegalTaskCommandException {
-        String cleanUserInput = userInput.strip(); // Removes any leading and trailing spaces
-        int spacePosition = cleanUserInput.indexOf(" ");
-        if (spacePosition < 0) { // Is single command
-            throw new IllegalTaskCommandException("Insufficient command parameters commander!");
-        }
-        return cleanUserInput.substring(spacePosition + 1);
+    private static String getSubstring(String userInput) {
+        int spacePosition = userInput.indexOf(" ");
+        String inputSubstring = userInput.substring(spacePosition+1);
+        return inputSubstring;
     }
 
-    private static String getErrand(String userInput) throws IllegalTaskCommandException {
+    private static String getErrand(String userInput) {
         String inputSubstring = getSubstring(userInput);
         int slashPosition = inputSubstring.indexOf("/");
-        if (slashPosition < 0) {
-            throw new IllegalTaskCommandException("Timestamp not found commander!");
-        }
         String errand = inputSubstring.substring(0, slashPosition);
         return errand.trim();
     }
 
-    private static String getTimestampHeader(String userInput) throws IllegalTaskCommandException {
-        String inputSubstring = getSubstring(userInput);
-        int slashPosition = inputSubstring.indexOf("/");
-        String timestampHeader = inputSubstring.substring(slashPosition);
-        int spacePosition = timestampHeader.indexOf(" ");
-        if (timestampHeader.split(" ").length < 2) {
-            throw new IllegalTaskCommandException("Missing timestamp commander!");
-        }
-        timestampHeader = timestampHeader.substring(1, spacePosition);
-        return timestampHeader;
-    }
-
-    private static String getTimestamp(String userInput) throws IllegalTaskCommandException {
+    private static String getTimestamp(String userInput) {
         String inputSubstring = getSubstring(userInput);
         int slashPosition = inputSubstring.indexOf("/");
         String timestamp = inputSubstring.substring(slashPosition);
         int spacePosition = timestamp.indexOf(" ");
         timestamp = timestamp.substring(spacePosition);
         return timestamp.trim();
+    }
+
+    private static String getTimestampHeader(String userInput){
+        String inputSubstring = getSubstring(userInput);
+        int slashPosition = inputSubstring.indexOf("/");
+        String timestampHeader = inputSubstring.substring(slashPosition);
+        int spacePosition = timestampHeader.indexOf(" ");
+        timestampHeader = timestampHeader.substring(1, spacePosition);
+        return timestampHeader;
     }
 
     /**
@@ -128,14 +117,7 @@ public class Duke {
         do {
             userInput = in.nextLine();
             command = getCommand(userInput);
-
-            try {
-                executeCommand(command, userInput);
-            } catch (IllegalTaskCommandException e) {
-                e.printErrorLogo();
-                System.err.println(e);
-            }
-
+            executeCommand(command, userInput);
         } while (!command.equals("BYE"));
     }
 
