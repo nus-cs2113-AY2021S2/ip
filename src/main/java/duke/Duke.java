@@ -1,5 +1,7 @@
 package duke;
 
+import duke.exceptions.EmptyListException;
+import duke.exceptions.TaskDoneException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
