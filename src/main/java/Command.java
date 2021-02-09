@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public interface Command {
-    public void execute(String string);
+    public void execute(String string) throws DukeException;
 }
 //    private static String getCommand(String input) {
 //        String[] command = input.trim().split(" ");

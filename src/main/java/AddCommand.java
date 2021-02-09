@@ -8,9 +8,15 @@ public class AddCommand implements Command {
     private static final String DEADLINE = "deadline";
     private static final String EVENT = "event";
 
-    public void execute(String input) {
+    public void execute(String input) throws DukeException {
         String[] command = input.trim().split(" ");
         String action = command[0];
+
+        if (!action.equals(TODO) || !action.equals(DEADLINE) || !action.equals(EVENT)) { //to check if the action required is recognised
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+        } else if (command.length == 1) { //to check if there is more than just a recognised action for todo, deadline and event commands
+            throw new DukeException("OOPS!!! The description of a " + action + " cannot be empty.");
+        }
 
         switch (action) {
             case TODO:

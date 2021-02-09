@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Duke {
@@ -14,7 +15,12 @@ public class Duke {
         input = in.nextLine();
         while (!input.equals("bye")) {
             Command command = Parser.parse(input);
-            command.execute(input);
+            try {
+                command.execute(input);
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
+                end();
+            }
             input = in.nextLine();
         }
     }
