@@ -30,13 +30,15 @@ public class Duke {
             //Split user input to retrieve task type (i.e. event, deadline) and task description.
             String[] strings = userInput.split(" ",2);
             String taskType = strings[0].toLowerCase();
-            String taskDescription = null;
-            if (strings.length > 1){
-                taskDescription = strings[1];
-            }
-
+            String taskDescription;
             switch (taskType) {
             case ("todo"):
+                try{
+                    taskDescription = strings[1];
+                } catch (ArrayIndexOutOfBoundsException missingInput){
+                    System.out.println("OOPS!!! The description of a todo cannot be empty.");
+                    break;
+                }
                 tasks[indexOfTask] = new Todo(taskDescription);
                 System.out.println("\t____________________________________________________________");
                 System.out.println("\tGot it! I've added this task:");
@@ -49,6 +51,12 @@ public class Duke {
             case ("deadline"):
                 // taskDescription now contains task description and it's deadline date and/or time
                 // Split task description and deadline date and/or time
+                try{
+                    taskDescription = strings[1];
+                } catch (ArrayIndexOutOfBoundsException missingInput){
+                    System.out.println("OOPS!!! The description of a deadline cannot be empty.");
+                    break;
+                }
                 strings = taskDescription.split(" /by ",2);
                 taskDescription = strings[0];
                 String deadlineDate = strings[1];
@@ -64,6 +72,12 @@ public class Duke {
             case ("event"):
                 // taskDescription now contains task description and it's event date and/or timeslot
                 // Split task description and event's date and/or timeslot
+                try{
+                    taskDescription = strings[1];
+                } catch (ArrayIndexOutOfBoundsException missingInput){
+                    System.out.println("OOPS!!! The description of an event cannot be empty.");
+                    break;
+                }
                 strings = taskDescription.split(" /at ",2);
                 taskDescription = strings[0];
                 String eventDate = strings[1];
@@ -87,6 +101,12 @@ public class Duke {
                 break;
 
             case ("done"):
+                try{
+                    taskDescription = strings[1];
+                } catch (ArrayIndexOutOfBoundsException missingInput){
+                    System.out.println("OOPS!!! Please specify task number.");
+                    break;
+                }
                 int indexOfTaskDone = Integer.parseInt(taskDescription) - 1;
                 tasks[indexOfTaskDone].setDone();
                 System.out.println("\t____________________________________________________________");
