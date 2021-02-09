@@ -17,17 +17,13 @@ public class Task {
         this.isDone = true;
     }
 
+    public boolean isDone() { return isDone; }
+
     public String getTask() {
         return description;
     }
 
     public String toString() {
-        String str = "[";
-        if (isDone) {
-            str = str + getStatusIcon() + "] " + description;
-        } else {
-            str = str + getStatusIcon() + "] " + description;
-        }
-        return str;
+        return "[" + getStatusIcon() + "] " + getTask();
     }
 }

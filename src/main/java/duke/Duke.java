@@ -11,6 +11,20 @@ import java.util.ArrayList;
 
 public class Duke {
 
+    private static void welcomeMessage() {
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+
+        System.out.println("Hello from\n" + logo);
+
+        System.out.println("Hello! I'm Duke");
+        System.out.println("What can I do for you?");
+        System.out.println("");
+    }
+
     private static String getUserInput() {
         Scanner in = new Scanner(System.in);
         return in.nextLine();
@@ -47,10 +61,16 @@ public class Duke {
         }
     }
 
-    private static void markAsDone(List<Task> tasks, int index) {
-        tasks.get(index).markAsDone();
-        System.out.println("\tNice! I've marked this task as done:");
-        System.out.println("\t\t" + tasks.get(index).toString());
+    private static void markAsDone(List<Task> tasks, int index) throws EmptyListException, TaskDoneException {
+        if (tasks.size() == 0) {
+            throw new EmptyListException();
+        } else if (tasks.get(index).isDone()) {
+            throw new TaskDoneException();
+        } else {
+            tasks.get(index).markAsDone();
+            System.out.println("\tNice! I've marked this task as done:");
+            System.out.println("\t\t" + tasks.get(index).toString());
+        }
     }
 
     private static void printAddedTask(List<Task> tasks, int taskCounter) {
@@ -61,26 +81,17 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+
+        welcomeMessage();
 
         boolean isOn = true;
         int taskCounter = 0;
         List<Task> tasks = new ArrayList<Task>();
 
-        System.out.println("Hello from\n" + logo);
-
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
-        System.out.println("");
-
         while(isOn) {
             String line;
             line = getUserInput().trim();
-            String[] part = line.split("(?<=\\D)(?=\\d)");
+            String[] parts = line.split("(?<=\\D)(?=\\d)");
             int commandIndex = line.indexOf(' ');
             int timeIndex = line.indexOf('/');
             String command = getFirstWord(line);
@@ -90,9 +101,15 @@ public class Duke {
                 isOn = false;
             } else if (line.equals("list")) {
                 listTasks(tasks);
-            } else if (part[0].equals("done")) {
-                int index = Integer.parseInt(part[1]);
-                markAsDone(tasks, index);
+            } else if (parts[0].equals("done ")) {
+                try {
+                    int index = Integer.parseInt(parts[1]) - 1;
+                    markAsDone(tasks, index);
+                } catch (EmptyListException e) {
+                    System.out.println("\tIm afraid the item does not exist!");
+                } catch (TaskDoneException e) {
+                    System.out.println("\tTask has already been completed!");
+                }
             } else if (command.equals("todo")) {
                 try {
                     String task = line.substring(commandIndex);
