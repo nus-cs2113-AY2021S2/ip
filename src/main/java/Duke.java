@@ -7,59 +7,90 @@ public class Duke {
     public static final String LINE = "____________________________________________________________";
 
     public static void runProgram(){
+        //TODO
+        // improve this section by making sections more abstract
         Scanner in = new Scanner(System.in);
         String userInput;
         // Instead of using tasks[100], I used an ArrayList.
-        ArrayList<Task> tasks = new ArrayList<Task>();
-        Task newItem = null;
+        ArrayList<Task> tasks = new ArrayList<>();
+        Task newItem;
 
         userInput = in.nextLine();
         while (!userInput.equals("bye")) {
             String[] command = userInput.split(" ");
             String instruction = command[0];
-            boolean isUserInputGood = true;
 
             switch(instruction){
             case "list":
-                isUserInputGood = listCommand(command, tasks);
+                try{
+                    listCommand(command, tasks);
+                }
+                catch (DukeException e){
+                    System.out.println("The list command can only contain 1 word.");
+                }
+                catch (Exception e){
+                    badUserInputMessage();
+                }
                 break;
             case "done":
-                isUserInputGood = doneCommand(command, tasks);
+                try{
+                    doneCommand(command, tasks);
+                }
+                catch (DukeException e){
+                    System.out.println("The done command consists of the word done, and an integer.");
+                }
+                catch (Exception e){
+                    badUserInputMessage();
+                }
                 break;
             case "todo":
-                newItem = todoCommand(command, tasks);
-                if(newItem == null){
-                    isUserInputGood = false;
+                try{
+                    newItem = todoCommand(command, tasks);
+                    newItemMessage(tasks, newItem);
+                }
+                catch (DukeException e){
+                    System.out.println("The description of a todo cannot be empty!");
+                }
+                catch (Exception e){
+                    badUserInputMessage();
                 }
                 break;
             case "event":
-                newItem = eventCommand(command, tasks);
-                if(newItem == null){
-                    isUserInputGood = false;
+                try{
+                    newItem = eventCommand(command, tasks);
+                    newItemMessage(tasks, newItem);
+                }
+                catch (DukeException e){
+                    System.out.println("Your input should contain /at separated by spaces, " +
+                            "followed by the event time.");
+                }
+                catch(Exception e){
+                    badUserInputMessage();
                 }
                 break;
             case "deadline":
-                newItem = deadlineCommand(command, tasks);
-                if(newItem == null){
-                    isUserInputGood = false;
+                try{
+                    newItem = deadlineCommand(command, tasks);
+                    newItemMessage(tasks, newItem);
+                }
+                catch(DukeException e){
+                    System.out.println("Your input should contain /by separated by spaces, " +
+                            "followed by the deadline.");
+                }
+                catch (Exception e){
+                    badUserInputMessage();
                 }
                 break;
             default:
-                isUserInputGood = false;
+                System.out.println("I have no such feature!");
                 break;
-            }
-
-            if(!isUserInputGood) {
-                badUserInputMessage();
-            } else if (newItem != null){
-                newItemMessage(tasks, newItem);
             }
 
             userInput = in.nextLine();
         }
     }
 
-    public static boolean listCommand(String[] command, ArrayList<Task> tasks){
+    public static void listCommand(String[] command, ArrayList<Task> tasks) throws DukeException{
         if(command.length == 1){
             int index = 1;
             System.out.println(LINE);
@@ -68,13 +99,12 @@ public class Duke {
                 index += 1;
             }
             System.out.println(LINE);
-            return true;
         } else {
-            return false;
+            throw new DukeException();
         }
     }
 
-    public static boolean doneCommand(String[] command, ArrayList<Task> tasks){
+    public static void doneCommand(String[] command, ArrayList<Task> tasks) throws DukeException{
         if(command.length == 2 && checkIfInteger(command[1])){
             int index = Integer.parseInt(command[1]) - 1;
             if (0 <= index && index < tasks.size()) {
@@ -85,26 +115,25 @@ public class Duke {
                 // Currently a task can be marked as done repeatedly.
                 // This does not cause any errors, but may be required to fix
             } else {
-                System.out.println("The input index that you have selected to indicate as done,"+
+                System.out.println("The input index that you have selected to indicate as done, "+
                         "is out of the range of existing indexes!");
             }
-            return true;
         } else {
-            return false;
+            throw new DukeException();
         }
     }
 
-    public static Task todoCommand(String[] command, ArrayList<Task> tasks){
+    public static Task todoCommand(String[] command, ArrayList<Task> tasks) throws DukeException{
         if(command.length > 1) {
             Task newItem = new Todo(String.join(" ", Arrays.copyOfRange(command, 1, command.length)));
             tasks.add(newItem);
             return newItem;
         } else {
-            return null;
+            throw new DukeException();
         }
     }
 
-    public static Task eventCommand(String[] command, ArrayList<Task> tasks){
+    public static Task eventCommand(String[] command, ArrayList<Task> tasks) throws DukeException{
         if(checkForSubstring(command, "/at")){
             int separatorIndex = indexOfSubstring(command, "/at");
             String description = String.join(" ", Arrays.copyOfRange(command,
@@ -116,11 +145,11 @@ public class Duke {
             tasks.add(newItem);
             return newItem;
         } else{
-            return null;
+            throw new DukeException();
         }
     }
 
-    public static Task deadlineCommand(String[] command, ArrayList<Task> tasks){
+    public static Task deadlineCommand(String[] command, ArrayList<Task> tasks) throws DukeException{
         if(checkForSubstring(command, "/by")){
             int separatorIndex = indexOfSubstring(command, "/by");
             String description = String.join(" ", Arrays.copyOfRange(command,
@@ -132,7 +161,7 @@ public class Duke {
             tasks.add(newItem);
             return newItem;
         } else{
-            return null;
+            throw new DukeException();
         }
     }
 
