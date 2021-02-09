@@ -15,7 +15,7 @@ IF ERRORLEVEL 1 (
 REM no error here, errorlevel == 0
 
 REM run the program, feed commands from input file and redirect the output to the ACTUAL.TXT
-java -classpath ..\bin duke.Duke < INPUT_2.TXT > ACTUAL.TXT
+java -classpath ..\bin duke.Duke < INPUT_1.TXT > ACTUAL.TXT
 
 REM compare the output to the expected output
-FC ACTUAL.TXT EXPECTED_2.TXT
+FC ACTUAL.TXT EXPECTED_1.TXT
