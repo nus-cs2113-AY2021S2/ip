@@ -1,3 +1,4 @@
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Duke {
@@ -27,14 +28,13 @@ public class Duke {
     }
 
     public static void showBye() {
-        System.out.println("____________________________________________________________");
-        System.out.println("Bye. Hope to see you again soon!");
-        System.out.println("____________________________________________________________");
+        showExecuteResult("Bye. Hope to see you again soon!");
     }
 
-    private static void executeExitProgramRequest() {
-        showBye();
-        System.exit(0);
+    public static void showExecuteResult(String result) {
+        System.out.println("____________________________________________________________");
+        System.out.println(result);
+        System.out.println("____________________________________________________________");
     }
 
     private static String getUserInput() {
@@ -48,17 +48,17 @@ public class Duke {
 
     public static CommandType getCommandType(String userInputString) {
         CommandType commandType;
-        if(userInputString.equals("list")) {
+        if(userInputString.equalsIgnoreCase("LIST")) {
             commandType = CommandType.LIST;
-        } else if (userInputString.matches("^\\ *(done)\\ *[1-9][0-9]*")) {
+        } else if (userInputString.toUpperCase().matches("^(DONE).*$")) {
             commandType = CommandType.DONE;
-        } else if (userInputString.matches("^\\ *(todo).*$")) {
+        } else if (userInputString.toUpperCase().matches("^(TODO).*$")) {
             commandType = CommandType.TODO;
-        } else if (userInputString.matches("^\\ *(deadline).*(/by).*")) {
+        } else if (userInputString.toUpperCase().matches("^(DEADLINE).*$")) {
             commandType = CommandType.DEADLINE;
-        } else if (userInputString.matches("^\\ *(event).*(/at).*")) {
+        } else if (userInputString.toUpperCase().matches("^(EVENT).*$")) {
             commandType = CommandType.EVENT;
-        } else if (userInputString.equals("bye")) {
+        } else if (userInputString.equalsIgnoreCase("BYE")) {
             commandType = CommandType.EXIT;
         } else {
             commandType = CommandType.UNDEFINED;
@@ -66,61 +66,100 @@ public class Duke {
         return commandType;
     }
 
-    public static void getMessageForInvalidCommandInput() {
-        System.out.println("Undefined!");
+    public static void showMessageForInvalidCommandInput() {
+        showExecuteResult("OOPS!!! I'm sorry, but I don't know what that means :-(!");
     }
 
-    public static void executeAddTodo(String userCommand) {
-        String[] typeContent = userCommand.split("todo",2);
+    public static void executeAddTodo(String userCommand) throws EmptyDescriptionException{
+        String[] typeContent = userCommand.split("[Tt][Oo][Dd][Oo]",2);
+        if (typeContent[1].equals("")) {
+            throw new EmptyDescriptionException(CommandType.TODO);
+        }
+
         tasks.addTodo(typeContent[1].trim());
     }
 
-    public static void executeAddDeadline(String userCommand) {
-        String[] typeContentBy = userCommand.trim().split("deadline", 2);
-        String[] contentBy = typeContentBy[1].trim().split("/by", 2);
-        tasks.addDeadline(contentBy[0].trim(), contentBy[1].trim());
+    public static void executeAddDeadline(String userCommand) throws EmptyDescriptionException{
+        try {
+            String[] typeContentBy = userCommand.trim().split("[Dd][Ee][Aa][Dd][Ll][Ii][Nn][Ee]", 2);
+            String[] contentBy = typeContentBy[1].trim().split("/[Bb][Yy]", 2);
+            if (contentBy[0].trim().equals("") || contentBy[1].trim().equals("")) {
+                throw new EmptyDescriptionException(CommandType.DEADLINE);
+            }
+            tasks.addDeadline(contentBy[0].trim(), contentBy[1].trim());
+        } catch (ArrayIndexOutOfBoundsException e) {
+            showExecuteResult("OOPS!!! No /by founded in the command");
+
+        }
+
     }
 
-    public static void executeAddEvent(String userCommand) {
-        String[] typeContentAt= userCommand.trim().split("event", 2);
-        String[] contentAt = typeContentAt[1].trim().split("/at", 2);
-        tasks.addEvent(contentAt[0].trim(), contentAt[1].trim());
+    public static void executeAddEvent(String userCommand) throws EmptyDescriptionException{
+        try {
+            String[] typeContentAt= userCommand.trim().split("[Ee][Vv][Ee][Nn][Tt]", 2);
+            String[] contentAt = typeContentAt[1].trim().split("/[Aa][Tt]", 2);
+            if (contentAt[0].trim().equals("") || contentAt[1].trim().equals("")) {
+                throw new EmptyDescriptionException(CommandType.EVENT);
+            }
+            tasks.addEvent(contentAt[0].trim(), contentAt[1].trim());
+        } catch (IndexOutOfBoundsException e){
+            showExecuteResult("OOPS!!! No /at founded in the command");
+        }
+
     }
 
     public static void executeList(String userCommand) {
         tasks.listAllTasks();
     }
 
-    public static void executeDone(String userCommand) {
-        int taskIndexShow = Integer.parseInt(userCommand.replaceAll("[^0-9]", ""));
-        tasks.markTaskDone(taskIndexShow);
+    public static void executeDone(String userCommand) throws EmptyDescriptionException{
+        try{
+            int taskIndexShow = Integer.parseInt(userCommand.replaceAll("[^0-9]", ""));
+            if(taskIndexShow <= 0 || taskIndexShow > tasks.getNumOfTasks()) {
+                throw new EmptyDescriptionException(CommandType.DONE);
+            }
+            tasks.markTaskDone(taskIndexShow);
+        } catch (NumberFormatException e) {
+            throw new EmptyDescriptionException(CommandType.DONE);
+        }
+    }
+
+    private static void executeExitProgramRequest() {
+        showBye();
+        System.exit(0);
     }
 
     public static void executeCommand(String userInputString) {
         CommandType type = getCommandType(userInputString);
-        switch (type) {
-        case TODO:
-            executeAddTodo(userInputString);
-            return;
-        case DEADLINE:
-            executeAddDeadline(userInputString);
-            return;
-        case EVENT:
-            executeAddEvent(userInputString);
-            return;
-        case LIST:
-            executeList(userInputString);
-            return;
-        case DONE:
-            executeDone(userInputString);
-            return;
-        case EXIT:
-            executeExitProgramRequest();
-            return;
-        default:
-            getMessageForInvalidCommandInput();
+        try {
+            switch (type) {
+            case TODO:
+                executeAddTodo(userInputString);
+                return;
+            case DEADLINE:
+                executeAddDeadline(userInputString);
+                return;
+            case EVENT:
+                executeAddEvent(userInputString);
+                return;
+            case LIST:
+                executeList(userInputString);
+                return;
+            case DONE:
+                executeDone(userInputString);
+                return;
+            case EXIT:
+                executeExitProgramRequest();
+                return;
+            default:
+                showMessageForInvalidCommandInput();
+                return;
+            }
+        } catch (EmptyDescriptionException e) {
+            e.showMessage();
             return;
         }
+
     }
 
     public static void main(String[] args) {
@@ -128,7 +167,7 @@ public class Duke {
         showHello();
         while (true) {
             String userCommand = getUserInput();
-            executeCommand(userCommand);
+            executeCommand(userCommand.trim());
         }
     }
 }

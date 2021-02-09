@@ -11,61 +11,64 @@ What can I do for you?
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
-[T][ ]readbook
+[T][ ]task1
 Now you have 1 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
-[D][ ]return book (by: June 6th)
+[T][ ]task2
 Now you have 2 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
-[E][ ]project meeting (at: Aug 6th 2-4pm)
+[E][ ]PLAY (at: 3PM)
 Now you have 3 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
+OOPS!!! The description of a EVENT cannot be empty.
+____________________________________________________________
+____________________________________________________________
+OOPS!!! The description of a EVENT cannot be empty.
+____________________________________________________________
+____________________________________________________________
 Got it. I've added this task:
-[T][ ]join sports club
+[E][ ]study (at: 4pm)
 Now you have 4 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
-Nice! I've marked this task as done:
-[T][X]readbook
+OOPS!!! The description of a DEADLINE cannot be empty.
 ____________________________________________________________
 ____________________________________________________________
-Nice! I've marked this task as done:
-[T][X]join sports club
-____________________________________________________________
-____________________________________________________________
-1. [T][X]readbook
-2. [D][ ]return book (by: June 6th)
-3. [E][ ]project meeting (at: Aug 6th 2-4pm)
-4. [T][X]join sports club
+OOPS!!! The description of a DEADLINE cannot be empty.
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
-[T][ ]borrow book
+[D][ ]submit (by: 10am)
 Now you have 5 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
-Got it. I've added this task:
-[D][ ]return book (by: Sunday)
-Now you have 6 tasks in the list.
+1. [T][ ]task1
+2. [T][ ]task2
+3. [E][ ]PLAY (at: 3PM)
+4. [E][ ]study (at: 4pm)
+5. [D][ ]submit (by: 10am)
 ____________________________________________________________
 ____________________________________________________________
-Got it. I've added this task:
-[E][ ]project meeting (at: Mon 2-4pm)
-Now you have 7 tasks in the list.
+OOPS!!! The task ID that you DONE is invalid
 ____________________________________________________________
 ____________________________________________________________
-1. [T][X]readbook
-2. [D][ ]return book (by: June 6th)
-3. [E][ ]project meeting (at: Aug 6th 2-4pm)
-4. [T][X]join sports club
-5. [T][ ]borrow book
-6. [D][ ]return book (by: Sunday)
-7. [E][ ]project meeting (at: Mon 2-4pm)
+OOPS!!! The task ID that you DONE is invalid
+____________________________________________________________
+____________________________________________________________
+Nice! I've marked this task as done:
+[E][X]study (at: 4pm)
+____________________________________________________________
+____________________________________________________________
+1. [T][ ]task1
+2. [T][ ]task2
+3. [E][ ]PLAY (at: 3PM)
+4. [E][X]study (at: 4pm)
+5. [D][ ]submit (by: 10am)
 ____________________________________________________________
 ____________________________________________________________
 Bye. Hope to see you again soon!
