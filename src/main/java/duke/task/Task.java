@@ -1,4 +1,6 @@
-package duke;
+package duke.task;
+
+import duke.exception.IllegalTaskCommandException;
 
 public class Task {
     protected String description;

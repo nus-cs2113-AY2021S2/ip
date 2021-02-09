@@ -1,6 +1,6 @@
-package duke;
+package duke.task;
 
-public class Event extends Task{
+public class Event extends Task {
     private static final String EVENT_TYPE = "E";
     private String at;
     private String timestampHeader;
