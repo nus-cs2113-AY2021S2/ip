@@ -6,6 +6,7 @@ public class TaskManager {
     private static final String TODO_COMMAND = "todo";
     private static final String DEADLINE_COMMAND = "deadline";
     private static final String EVENT_COMMAND = "event";
+    public static final String DONE_COMMAND = "done";
 
     private static final String ADDED_TASK_MESSAGE = "Got it. I have added this task: ";
     private static final String MARKED_TASK_AS_DONE_MESSAGE = "Nice! I've marked this task as done: ";
@@ -16,36 +17,54 @@ public class TaskManager {
 
     private static Task[] tasksObjectsArray = new Task[MAX_TASK_SIZE];
 
-    public static void addTask(String input){
+    public static void handleTask(String input) throws CommandNotFoundException {
+//        String[] commandWords = input.split(" ");
+//        String firstWord = commandWords[0];
         String firstWord = StringManipulator.getFirstWord(input);
-        if (firstWord.equals(TODO_COMMAND)){
-            String taskDescription = StringManipulator.getStringAfterWhiteSpace(input);
-            Todo t = new Todo(taskDescription);
-            tasksObjectsArray[Task.getTaskCount()-1] = t;
-            printMessageAfterTaskIsAdded(t);
-        }
-        else if(firstWord.equals(DEADLINE_COMMAND)){
+        switch (firstWord){
+        case DONE_COMMAND:
+            int taskNumberDone = StringManipulator.getTaskNumberDone(input);
+            markTaskAsDone(taskNumberDone);
+            break;
+        case TODO_COMMAND:
+            try{
+                String taskDescription = StringManipulator.getIndexOfStringAfterWhiteSpace(input);
+                System.out.println(taskDescription);
+                Todo t = new Todo(taskDescription);
+                t.checkIfToDoDescriptionExists(taskDescription);
+                System.out.println("added: " + taskDescription + "to array");
+                tasksObjectsArray[Task.getTaskCount()-1] = t;
+                printMessageAfterTaskIsAdded(t);
+            } catch (TaskDescriptionMissingException e) {
+                System.out.println(e.getMessage());
+                MainUI.printDivider();
+            }
+            break;
+        case DEADLINE_COMMAND:
             String dueDate = StringManipulator.getStringAfterSlash(input);
             String taskDescription = StringManipulator.getStringAfterWhiteSpaceAndBeforeSlash(input);
             Deadline d = new Deadline(taskDescription,dueDate);
             tasksObjectsArray[Task.getTaskCount()-1] = d;
             printMessageAfterTaskIsAdded(d);
-        }
-        else if(firstWord.equals(EVENT_COMMAND)){
+            break;
+        case EVENT_COMMAND:
             String eventPeriod = StringManipulator.getStringAfterSlash(input);
-            String taskDescription = StringManipulator.getStringAfterWhiteSpaceAndBeforeSlash(input);
+            taskDescription = StringManipulator.getStringAfterWhiteSpaceAndBeforeSlash(input);
             Event e = new Event(taskDescription,eventPeriod);
             tasksObjectsArray[Task.getTaskCount()-1] = e;
             printMessageAfterTaskIsAdded(e);
+            break;
+        default:
+            throw new CommandNotFoundException();
         }
     }
 
     private static void printMessageAfterTaskIsAdded(Task task) {
-        MainPage.printDivider();
+        MainUI.printDivider();
         System.out.println(ADDED_TASK_MESSAGE);
         System.out.println("\t"+task);
         printTaskCount();
-        MainPage.printDivider();
+        MainUI.printDivider();
     }
 
     private static void printTaskCount() {
@@ -66,12 +85,13 @@ public class TaskManager {
     public static void printTaskList(){
         Task[] tasks = removeNullFromList();
         int TaskCount = 0;
-        MainPage.printDivider();
+        MainUI.printDivider();
         System.out.println("Here are the tasks in your list:");
         for (Task task: tasks){
             TaskCount +=1;
             System.out.println(TaskCount + "." + task);
         }
-        MainPage.printDivider();
+        MainUI.printDivider();
     }
+
 }

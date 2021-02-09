@@ -36,6 +36,14 @@ public class Task {
         isDone = true;
     }
 
+    public static void increaseTaskCount(){
+        taskCount += 1;
+    }
+
+    public static void decreaseTaskCount(){
+        taskCount -= 1;
+    }
+
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + getDescription();

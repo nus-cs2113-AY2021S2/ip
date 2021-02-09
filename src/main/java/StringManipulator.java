@@ -12,8 +12,11 @@ public class StringManipulator {
         return input.substring(input.indexOf("/")+1+2);
     }
 
-    public static String getStringAfterWhiteSpace(String input){
+    public static String getIndexOfStringAfterWhiteSpace(String input){
         int firstWhiteSpaceIndex = input.indexOf(" ");
+        if (firstWhiteSpaceIndex == -1){
+            return input.substring(input.length());
+        }
         return input.substring(firstWhiteSpaceIndex+1);
     }
 

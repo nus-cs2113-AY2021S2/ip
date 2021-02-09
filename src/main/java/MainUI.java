@@ -1,23 +1,33 @@
 import java.util.Scanner;
 
-public class MainPage {
+public class MainUI {
+    public static final String LIST_COMMAND = "list";
+    public static final String BYE_COMMAND = "bye";
+
+    public static boolean isEnding = false;
 
     public static void displayUI(Scanner in){
         printWelcomeMessage();
-        while (true){
+        runProgram(in);
+    }
+
+    private static void runProgram(Scanner in) {
+        while (!isEnding){
             String input = in.nextLine();
-            if (input.equals("list")){
+            switch (input){
+            case LIST_COMMAND:
                 TaskManager.printTaskList();
-            }
-            else if (input.equals("bye")) {
-                printExitMessage();
-            }
-            else if (input.startsWith("done")) {
-                int taskNumberDone = StringManipulator.getTaskNumberDone(input);
-                TaskManager.markTaskAsDone(taskNumberDone);
-            }
-            else{
-                TaskManager.addTask(input);
+                break;
+            case BYE_COMMAND:
+                stopProgram();
+                break;
+            default:
+                try {
+                    TaskManager.handleTask(input);
+                } catch (CommandNotFoundException e) {
+                    System.out.println(e.getMessage());
+                }
+                break;
             }
         }
     }
@@ -36,7 +46,8 @@ public class MainPage {
         printDivider();
     }
 
-    public static void printExitMessage(){
+    public static void stopProgram(){
+        isEnding = true;
         System.out.println("Bye. Hope to see you again soon!");
         printDivider();
         System.exit(0);
