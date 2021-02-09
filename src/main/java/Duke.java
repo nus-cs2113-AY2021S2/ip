@@ -10,23 +10,44 @@ public class Duke { //implement toString() next
         Scanner in = new Scanner(System.in);
         String commandInput = in.nextLine();
 
-        while (!commandInput.equals("bye")) { //Process commands taken from user
+        while (!commandInput.equals("bye")) {
+            //Process commands taken from user, exit if user typed "bye"
             if (commandInput.equals("list")) {
                 printList(taskList, taskCount);
             } else if (commandInput.startsWith("done")) {
-                int taskNumber = Integer.parseInt(commandInput.substring(5, 6));
-                taskList[taskNumber - 1].setDone();
+                try {
+                    int taskNumber = Integer.parseInt(commandInput.substring(5, 6));
+                    taskList[taskNumber - 1].setDone();
+                } catch (StringIndexOutOfBoundsException e) {
+                    System.out.println("☹ OOPS!!! No task number detected, please try again.");
+                } catch (NullPointerException e) {
+                    System.out.println("☹ OOPS!!! Invalid number, please try again.");
+                }
             } else if (commandInput.startsWith("todo")) {
-                taskList[taskCount] = new Todo(commandInput.substring(5));
-                taskCount++;
+                try {
+                    taskList[taskCount] = new Todo(commandInput.substring(5));
+                    taskCount++;
+                } catch (StringIndexOutOfBoundsException e) {
+                    System.out.println("☹ OOPS!!! The description is empty, please try again.");
+                }
             } else if (commandInput.startsWith("event")) {
-                int timeIndex = commandInput.indexOf("/at");
-                taskList[taskCount] = new Event(commandInput.substring(6, timeIndex), commandInput.substring(timeIndex + 1));
-                taskCount++;
+                try {
+                    int timeIndex = commandInput.indexOf("/at");
+                    taskList[taskCount] = new Event(commandInput.substring(6, timeIndex), commandInput.substring(timeIndex + 1));
+                    taskCount++;
+                } catch (StringIndexOutOfBoundsException e) {
+                    System.out.println("☹ OOPS!!! The description is invalid, please try again.");
+                }
             } else if (commandInput.startsWith("deadline")) {
-                int timeIndex = commandInput.indexOf("/by");
-                taskList[taskCount] = new Deadline(commandInput.substring(9, timeIndex), commandInput.substring(timeIndex + 1));
-                taskCount++;
+                try {
+                    int timeIndex = commandInput.indexOf("/by");
+                    taskList[taskCount] = new Deadline(commandInput.substring(9, timeIndex), commandInput.substring(timeIndex + 1));
+                    taskCount++;
+                } catch (StringIndexOutOfBoundsException e) {
+                    System.out.println("☹ OOPS!!! The description is invalid, please try again.");
+                }
+            } else {
+                System.out.println("Invalid command entered, please try again.");
             }
             commandInput = in.nextLine();
         }
@@ -37,7 +58,7 @@ public class Duke { //implement toString() next
     private static void printList(Task[] taskList, int taskCount) {
         System.out.println("************************************************************");
         if (taskCount > 0) {
-            System.out.println("Here are the tasks in your list: ");
+            System.out.println("Here are the tasks in your list:");
             for (int i = 0; i < taskCount; ++i) {
                 Class classType = taskList[i].getClass();
                 System.out.print(i + 1 + ". [" + classType.getName().charAt(0) + "]");
