@@ -2,6 +2,8 @@ public class Event extends Task{
 
     protected String eventPeriod;
 
+    public static final String EVENT_LABEL = "[E]";
+
     public Event(String description, String eventPeriod) {
         super(description);
         this.eventPeriod = eventPeriod;
@@ -17,6 +19,6 @@ public class Event extends Task{
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at:" + eventPeriod + ")";
+        return EVENT_LABEL + super.toString() + "(at:" + eventPeriod + ")";
     }
 }
