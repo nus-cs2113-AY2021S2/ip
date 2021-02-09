@@ -58,9 +58,6 @@ public class Duke {
             }
             break;
         default:
-            Task task = new Task(command);
-            tasks.add(task);
-            System.out.println("    added: " + command);
             break;
         }
     }
