@@ -1,3 +1,7 @@
+package duke.command;
+
+import duke.command.Command;
+
 public class ExitCommand implements Command {
     public ExitCommand(String input) {
     }

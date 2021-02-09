@@ -1,4 +1,6 @@
-import java.sql.SQLOutput;
+package duke.main;
+
+import duke.command.Command;
 import java.util.Scanner;
 
 public class Duke {

@@ -1,3 +1,7 @@
+package duke.command;
+
+import duke.task.*;
+import duke.main.*;
 import java.util.Arrays;
 
 public class AddCommand implements Command {
@@ -12,7 +16,7 @@ public class AddCommand implements Command {
         String[] command = input.trim().split(" ");
         String action = command[0];
 
-        if (!action.equals(TODO) || !action.equals(DEADLINE) || !action.equals(EVENT)) { //to check if the action required is recognised
+        if (!action.equals(TODO) && !action.equals(DEADLINE) && !action.equals(EVENT)) { //to check if the action required is recognised
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         } else if (command.length == 1) { //to check if there is more than just a recognised action for todo, deadline and event commands
             throw new DukeException("OOPS!!! The description of a " + action + " cannot be empty.");

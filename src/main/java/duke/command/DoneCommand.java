@@ -1,3 +1,7 @@
+package duke.command;
+
+import duke.task.TaskManager;
+
 public class DoneCommand implements Command {
     public DoneCommand(String input) {
     }

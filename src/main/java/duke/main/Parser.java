@@ -1,3 +1,8 @@
+package duke.main;
+
+import duke.command.*;
+import duke.task.*;
+
 public class Parser {
     private static final String BYE = "bye";
     private static final String LIST = "list";
