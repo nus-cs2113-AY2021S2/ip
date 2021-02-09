@@ -11,36 +11,123 @@ public class Duke {
 
     private static final String LINE_DIVIDER = "\t____________________________________________________________";
 
-
     public static void main(String[] args) {
         DukePrinter.printWelcomeMessage();
         interactWithUser();
         DukePrinter.printExitMessage();
     }
 
-    private static void addTodo(ArrayList<Task> tasks, String description) {
+    private static void interactWithUser() {
+        ArrayList<Task> tasks = new ArrayList<Task>();
+        boolean isDoneReadingInputs = false;
+        while (!isDoneReadingInputs) {
+            String[] commandTokens = DukeReader.readUserInput();
+            try {
+                isDoneReadingInputs = executeUserInput(tasks, commandTokens);
+            } catch (DukeException dukeException) {
+                String errorMessage = dukeException.getMessage();
+                DukePrinter.printErrorMessage(errorMessage);
+            } catch (NumberFormatException numberFormatException) {
+                DukePrinter.printInvalidArgumentsMessage();
+            }
+        }
+    }
+
+    private static boolean executeUserInput(
+            ArrayList<Task> tasks, String[] commandTokens)
+            throws DukeException, NumberFormatException {
+        if (commandTokens.length == 0) {
+            throw new DukeException("Please enter a command.\n"
+                    + "Try using \"help\" for a list of commands."
+            );
+        }
+        boolean isDoneReadingInputs = false;
+        switch (commandTokens[0]) {
+        case DukeCommands.BYE_COMMAND:
+            isDoneReadingInputs = true;
+            break;
+        case DukeCommands.LIST_COMMAND:
+            DukePrinter.printTasks(tasks);
+            break;
+        case DukeCommands.HELP_COMMAND:
+            DukePrinter.printHelpMessage();
+            break;
+        case DukeCommands.DONE_COMMAND:
+            markTaskAsDone(tasks, commandTokens);
+            break;
+        case DukeCommands.TODO_COMMAND:
+            addTodo(tasks, commandTokens);
+            break;
+        case DukeCommands.DEADLINE_COMMAND:
+            addDeadline(tasks, commandTokens);
+            break;
+        case DukeCommands.EVENT_COMMAND:
+            addEvent(tasks, commandTokens);
+            break;
+        default:
+            /* Unknown command, prompt user to use the "help" command */
+            DukePrinter.printFallbackMessage();
+            break;
+        }
+        return isDoneReadingInputs;
+    }
+
+    private static void addTodo(ArrayList<Task> tasks, String[] commandArguments) throws DukeException {
+        if (commandArguments.length < 2) {
+            throw new DukeException("Please give me more details about the task!");
+        }
+        if (commandArguments[1].equals("")) {
+            throw new DukeException("The description of a task can't be empty. Please try again.");
+        }
+        String description = commandArguments[1];
         Todo todo = new Todo(description);
         tasks.add(todo);
         DukePrinter.printTaskAdded(tasks, todo);
     }
 
-    private static void addDeadline(ArrayList<Task> tasks, String description, String dueDate) {
+    private static void addDeadline(ArrayList<Task> tasks, String[] commandArguments) throws DukeException {
+        if (commandArguments.length < 3) {
+            throw new DukeException("Please give me more details about the task!");
+        }
+        if (commandArguments[1].equals("")) {
+            throw new DukeException("The description of a task can't be empty. Please try again.");
+        }
+        if (commandArguments[2].equals("")) {
+            throw new DukeException("Please specify a deadline for the task.");
+        }
+        String description = commandArguments[1];
+        String dueDate = commandArguments[2];
         Deadline deadline = new Deadline(description, dueDate);
         tasks.add(deadline);
         DukePrinter.printTaskAdded(tasks, deadline);
     }
 
-    private static void addEvent(ArrayList<Task> tasks, String description, String eventDate) {
+    private static void addEvent(ArrayList<Task> tasks, String[] commandArguments) throws DukeException {
+        if (commandArguments.length < 3) {
+            throw new DukeException("Please give me more details about the task!");
+        }
+        if (commandArguments[1].equals("")) {
+            throw new DukeException("The description of a task can't be empty. Please try again.");
+        }
+        if (commandArguments[2].equals("")) {
+            throw new DukeException("Please specify a date for the event.");
+        }
+        String description = commandArguments[1];
+        String eventDate = commandArguments[2];
         Event event = new Event(description, eventDate);
         tasks.add(event);
         DukePrinter.printTaskAdded(tasks, event);
     }
 
-    private static void markTaskAsDone(ArrayList<Task> tasks, int taskNumber) {
+    private static void markTaskAsDone(ArrayList<Task> tasks, String[] commandArguments)
+            throws DukeException, NumberFormatException {
+        if (commandArguments.length < 2) {
+            throw new DukeException("Please give me more details about the task!");
+        }
+        int taskNumber = Integer.parseInt(commandArguments[1]);
         /* Enforce that taskNumber is valid */
         if (taskNumber < 1 || taskNumber > tasks.size()) {
-            DukePrinter.printInvalidArgumentsMessage();
-            return;
+            throw new DukeException("That's an invalid task number!");
         }
         /* Change from 1-based indexing to 0-based indexing */
         taskNumber = taskNumber - 1;
@@ -50,88 +137,4 @@ public class Duke {
         System.out.println("\t   " + tasks.get(taskNumber));
         System.out.println(LINE_DIVIDER);
     }
-
-    private static void interactWithUser() {
-        ArrayList<Task> tasks = new ArrayList<Task>();
-        boolean isDoneReadingInputs = false;
-        while (!isDoneReadingInputs) {
-            String[] commandTokens = DukeReader.readUserInput();
-            /* Handle empty inputs */
-            if (commandTokens.length == 0) {
-                DukePrinter.printEmptyInputMessage();
-                continue;
-            }
-            switch (commandTokens[0]) {
-            case DukeCommands.BYE_COMMAND:
-                isDoneReadingInputs = true;
-                break;
-            case DukeCommands.LIST_COMMAND:
-                DukePrinter.printTasks(tasks);
-                break;
-            case DukeCommands.HELP_COMMAND:
-                DukePrinter.printHelpMessage();
-                break;
-            case DukeCommands.DONE_COMMAND:
-                if (commandTokens.length < 2) {
-                    DukePrinter.printInsufficientArgumentsMessage();
-                    break;
-                }
-                int taskNumber;
-                try {
-                    taskNumber = Integer.parseInt(commandTokens[1]);
-                } catch (NumberFormatException numberFormatException) {
-                    DukePrinter.printInvalidArgumentsMessage();
-                    break;
-                }
-                markTaskAsDone(tasks, taskNumber);
-                break;
-            case DukeCommands.TODO_COMMAND:
-                if (commandTokens.length < 2) {
-                    DukePrinter.printInsufficientArgumentsMessage();
-                    break;
-                }
-                if (commandTokens[1].equals("")) {
-                    DukePrinter.printEmptyDescriptionMessage();
-                    break;
-                }
-                addTodo(tasks, commandTokens[1]);
-                break;
-            case DukeCommands.DEADLINE_COMMAND:
-                if (commandTokens.length < 3) {
-                    DukePrinter.printInsufficientArgumentsMessage();
-                    break;
-                }
-                if (commandTokens[1].equals("")) {
-                    DukePrinter.printEmptyDescriptionMessage();
-                    break;
-                }
-                if (commandTokens[2].equals("")) {
-                    DukePrinter.printEmptyDeadlineMessage();
-                    break;
-                }
-                addDeadline(tasks, commandTokens[1], commandTokens[2]);
-                break;
-            case DukeCommands.EVENT_COMMAND:
-                if (commandTokens.length < 3) {
-                    DukePrinter.printInsufficientArgumentsMessage();
-                    break;
-                }
-                if (commandTokens[1].equals("")) {
-                    DukePrinter.printEmptyDescriptionMessage();
-                    break;
-                }
-                if (commandTokens[2].equals("")) {
-                    DukePrinter.printEmptyEventDateMessage();
-                    break;
-                }
-                addEvent(tasks, commandTokens[1], commandTokens[2]);
-                break;
-            default:
-                /* Unknown command, prompt user to use the "help" command */
-                DukePrinter.printFallbackMessage();
-                break;
-            }
-        }
-    }
-
 }
