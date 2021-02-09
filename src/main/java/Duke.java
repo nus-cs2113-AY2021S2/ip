@@ -26,7 +26,9 @@ public class Duke {
             + "Check task off:\n"
             + "Command prefix: done\n"
             + "Argument(s): task number\n";
+    public static final String EMPTY_LIST_MESSAGE = "There are not tasks in the list\n";
     public static final String ADD_MESSAGE = " added to list\n";
+    public static final String NO_DESCRIPTION_MESSAGE = "The description cannot be empty!\n";
     public static final String NO_DEADLINE_MESSAGE = "Please indicate a deadline after \"/by\"\n";
     public static final String NO_TIME_MESSAGE = "Please indicate the event time after \"/at\"\n";
     public static final String TASK_CHECKED_MESSAGE = "Task checked off!\n";
@@ -70,52 +72,19 @@ public class Duke {
                 printList(list, index);
                 break;
             case "todo":
-                if(input==null) {
-                    printInvalidArgumentMessage();
-                } else {
-                    addToDo(input, list, index);
-                    index++;
-                }
+                index = addToDo(input, list, index);
                 break;
             case "deadline":
-                if (input == null) {
-                    printInvalidArgumentMessage();
-                } else if(input.toLowerCase().contains("/by")) {
-                    String desc = input.substring(0, input.toLowerCase().indexOf("/by") - 1);
-                    String dueDate = input.substring(input.toLowerCase().indexOf("/by") + 4);
-                    addDeadline(desc, dueDate, list, index);
-                    index++;
-                } else {
-                    System.out.print(LINE + INVALID_ARGUMENT_MESSAGE + NO_DEADLINE_MESSAGE + LINE);
-                }
+                index = addDeadline(input, list, index);
                 break;
             case "event":
-                if (input == null) {
-                    printInvalidArgumentMessage();
-                } else if(input.toLowerCase().contains("/at")) {
-                    String desc = input.substring(0, input.toLowerCase().indexOf("/at")-1);
-                    String date = input.substring(input.toLowerCase().indexOf("/at")+4);
-                    addEvent(desc, date, list, index);
-                    index++;
-                } else {
-                    System.out.print(LINE + INVALID_ARGUMENT_MESSAGE + NO_TIME_MESSAGE + LINE);
-                }
+                index = addEvent(input, list, index);
                 break;
             case "done":
-                try {
-                    int ind = Integer.parseInt(input);
-                    markAsDone(list, ind, index);
-                } catch (Exception e) {
-                    printInvalidArgumentMessage();
-                }
+                markAsDone(list, index, input);
                 break;
             case "undo":
-                try {
-                    int ind = Integer.parseInt(input);
-                    undoMarkAsDone(list, ind, index);
-                } catch (Exception e) {
-                    printInvalidArgumentMessage();
-                }
+                undoMarkAsDone(list, index, input);
                 break;
             default:
                 System.out.print(LINE + INVALID_COMMAND_MESSAGE + LINE);
@@ -132,67 +101,120 @@ public class Duke {
         }
     }
 
-    public static void addToDo(String input, Task[] list, int index) {
-        list[index] = new ToDo(input);
-        System.out.print(LINE + "\"" + input + "\"" + ADD_MESSAGE + LINE);
+    public static int addToDo(String input, Task[] list, int index) {
+        if(input==null) {
+            System.out.print(LINE + NO_DESCRIPTION_MESSAGE + LINE);
+        } else {
+            list[index] = new ToDo(input);
+            System.out.print(LINE + "\"" + input + "\"" + ADD_MESSAGE + LINE);
+            index++;
+        }
+        return index;
+
     }
 
-    public static void addDeadline(String desc, String dueDate, Task[] list, int index) {
-        list[index] = new Deadline(desc, dueDate);
-        System.out.print(LINE + "\"" + desc + "\"" + ADD_MESSAGE +
-                "Please complete by: " + dueDate + "\n" + LINE);
+    public static int addDeadline(String input, Task[] list, int index) {
+        if (input == null) {
+            System.out.print(LINE + NO_DESCRIPTION_MESSAGE + LINE);
+        } else if(input.toLowerCase().contains("/by")) {
+            try {
+                String desc = input.substring(0, input.toLowerCase().indexOf("/by") - 1);
+                String dueDate = input.substring(input.toLowerCase().indexOf("/by") + 4);
+                list[index] = new Deadline(desc, dueDate);
+                System.out.print(LINE + "\"" + desc + "\"" + ADD_MESSAGE +
+                        "Please complete by: " + dueDate + "\n" + LINE);
+                index++;
+            } catch (Exception e) {
+                System.out.print(LINE + INVALID_ARGUMENT_MESSAGE + LINE);
+            }
+        } else {
+            System.out.print(LINE + INVALID_ARGUMENT_MESSAGE + NO_DEADLINE_MESSAGE + LINE);
+        }
+
+        return index;
     }
 
-    public static void addEvent(String desc, String date, Task[] list, int index) {
-        list[index] = new Event(desc, date);
-        System.out.print(LINE + "\"" + desc + "\"" + ADD_MESSAGE +
-                "It occurs at: " + date + "\n" + LINE);
+    public static int addEvent(String input, Task[] list, int index) {
+        if (input == null) {
+            System.out.print(LINE + NO_DESCRIPTION_MESSAGE + LINE);
+        } else if(input.toLowerCase().contains("/at")) {
+            try {
+                String desc = input.substring(0, input.toLowerCase().indexOf("/at")-1);
+                String date = input.substring(input.toLowerCase().indexOf("/at")+4);
+                list[index] = new Event(desc, date);
+                System.out.print(LINE + "\"" + desc + "\"" + ADD_MESSAGE +
+                        "It occurs at: " + date + "\n" + LINE);
+                index++;
+            } catch (Exception e) {
+                System.out.print(LINE + INVALID_ARGUMENT_MESSAGE + LINE);
+            }
+        } else {
+            System.out.print(LINE + INVALID_ARGUMENT_MESSAGE + NO_TIME_MESSAGE + LINE);
+        }
+
+        return index;
     }
 
     public static void printList(Task[] list, int index) {
-        System.out.print(LINE);
-        for(int i=0; i<index; i++) {
-            if (i<9) {
-                System.out.print(" ");
-            }
-            System.out.println(i+1 + list[i].toString());
-        }
-        System.out.print("There are " + Task.getTasksRemaining() + " task(s) on the list\n" + LINE);
-    }
-
-    public static void markAsDone(Task[] list, int taskNo, int max) {
-        if (taskNo <= max && taskNo > 0) { //no. is valid
-            if (list[taskNo-1].getStatus()) {
-                System.out.print(LINE + "Task \"" + list[taskNo-1].getDesc() + "\""
-                        + TASK_ALREADY_CHECKED_MESSAGE + LINE);
-            } else {
-                list[taskNo-1].check();
-                System.out.print(LINE + TASK_CHECKED_MESSAGE);
-                System.out.println("  " + list[taskNo - 1].getStatusSymbol() + list[taskNo - 1].getDesc());
-                if (Task.getTasksRemaining() == 0) {
-                    System.out.print(ALL_TASKS_CHECKED_MESSAGE);
+        if(index == 0) {
+            System.out.print(LINE + EMPTY_LIST_MESSAGE + LINE);
+        } else {
+            System.out.print(LINE);
+            for (int i = 0; i < index; i++) {
+                if (i < 9) {
+                    System.out.print(" ");
                 }
-                System.out.print(LINE);
+                System.out.println(i + 1 + list[i].toString());
             }
-        } else {
-            printInvalidArgumentMessage();
+            System.out.print("There are " + Task.getTasksRemaining() + " task(s) on the list\n" + LINE);
         }
     }
 
-    public static void undoMarkAsDone(Task[] list, int taskNo, int max) {
-        if (taskNo <= max && taskNo > 0) { //no. is valid
-            if (!list[taskNo-1].getStatus()) {
-                System.out.print(LINE + "Task \"" + list[taskNo-1].getDesc() + "\""
-                        + TASK_NOT_CHECKED_MESSAGE + LINE);
+    public static void markAsDone(Task[] list, int max, String input) {
+        try {
+            int taskNo = Integer.parseInt(input);
+            if (taskNo <= max && taskNo > 0) { //no. is valid
+                if (list[taskNo-1].getStatus()) {
+                    System.out.print(LINE + "Task \"" + list[taskNo-1].getDesc() + "\""
+                            + TASK_ALREADY_CHECKED_MESSAGE + LINE);
+                } else {
+                    list[taskNo-1].check();
+                    System.out.print(LINE + TASK_CHECKED_MESSAGE);
+                    System.out.println("  " + list[taskNo - 1].getStatusSymbol() + list[taskNo - 1].getDesc());
+                    if (Task.getTasksRemaining() == 0) {
+                        System.out.print(ALL_TASKS_CHECKED_MESSAGE);
+                    }
+                    System.out.print(LINE);
+                }
             } else {
-                list[taskNo-1].uncheck();
-                System.out.print(LINE + TASK_UNCHECKED_MESSAGE);
-                System.out.println("  " + list[taskNo - 1].getStatusSymbol() + list[taskNo - 1].getDesc());
-                System.out.print(LINE);
+                printInvalidArgumentMessage();
             }
-        } else {
+        } catch (Exception e) {
             printInvalidArgumentMessage();
         }
+
+    }
+
+    public static void undoMarkAsDone(Task[] list, int max, String input) {
+        try {
+            int taskNo = Integer.parseInt(input);
+            if (taskNo <= max && taskNo > 0) { //no. is valid
+                if (!list[taskNo-1].getStatus()) {
+                    System.out.print(LINE + "Task \"" + list[taskNo-1].getDesc() + "\""
+                            + TASK_NOT_CHECKED_MESSAGE + LINE);
+                } else {
+                    list[taskNo-1].uncheck();
+                    System.out.print(LINE + TASK_UNCHECKED_MESSAGE);
+                    System.out.println("  " + list[taskNo - 1].getStatusSymbol() + list[taskNo - 1].getDesc());
+                    System.out.print(LINE);
+                }
+            } else {
+                printInvalidArgumentMessage();
+            }
+        } catch (Exception e) {
+            printInvalidArgumentMessage();
+        }
+
     }
 
     private static void printWelcome() {
@@ -202,6 +224,7 @@ public class Duke {
     private static void printBye() {
         System.out.print(BYE_MESSAGE);
     }
+
     private static void printInvalidArgumentMessage() {
         System.out.print(LINE + INVALID_ARGUMENT_MESSAGE + LINE);
     }
