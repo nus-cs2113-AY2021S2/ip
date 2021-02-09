@@ -15,13 +15,41 @@ public class Duke {
             } else if (command.equals("list")) {
                 list();
             } else if (command.startsWith("done")) {
-                done(command.split(" ")[1]);
+                try {
+                    done(command.split(" ")[1]);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println(line);
+                    System.out.println("\tPlease specify index of task");
+                    System.out.println(line);
+                }
             } else if (command.startsWith("todo")) {
-                addTodo(command.split(" ", 2)[1]);
+                try {
+                    addTodo(command.split(" ", 2)[1]);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println(line);
+                    System.out.println("\tTodo description cannot be empty");
+                    System.out.println(line);
+                }
             } else if (command.startsWith("event")) {
-                addEvent(command.split(" ", 2)[1]);
+                try {
+                    addEvent(command.split(" ", 2)[1]);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println(line);
+                    System.out.println("\tEvent description cannot be empty");
+                    System.out.println(line);
+                }
             } else if (command.startsWith("deadline")) {
-                addDeadline(command.split(" ", 2)[1]);
+                try {
+                    addDeadline(command.split(" ", 2)[1]);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println(line);
+                    System.out.println("\tDeadline description cannot be empty");
+                    System.out.println(line);
+                }
+            } else {
+                System.out.println(line);
+                System.out.println("\tOOPS!!! I'm sorry, but I don't know what that means :(");
+                System.out.println(line);
             }
         }
     }
