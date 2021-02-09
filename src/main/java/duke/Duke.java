@@ -1,4 +1,7 @@
-import java.util.Locale;
+package duke;
+
+import duke.task.TaskManager;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -21,7 +24,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         System.out.println("____________________________________________________________");
-        System.out.println("Hello! I'm Duke, your truly daily helper");
+        System.out.println("Hello! I'm duke.Duke, your truly daily helper");
         System.out.println("What can I do for you?");
         System.out.println("____________________________________________________________");
 
