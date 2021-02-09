@@ -11,8 +11,6 @@ public class Duke {
         String userInput;
         // Instead of using tasks[100], I used an ArrayList.
         ArrayList<Task> tasks = new ArrayList<Task>();
-        // Index int is to access elements of the ArrayList
-        int index;
         Task newItem = null;
 
         userInput = in.nextLine();
@@ -20,76 +18,29 @@ public class Duke {
             String[] command = userInput.split(" ");
             String instruction = command[0];
             boolean isUserInputGood = true;
-            boolean isNewItem = false;
 
             switch(instruction){
             case "list":
-                if(command.length == 1){
-                    index = 1;
-                    System.out.println(LINE);
-                    for (Task task : tasks) {
-                        System.out.println(index + "." + task.toString());
-                        index += 1;
-                    }
-                    System.out.println(LINE);
-                }else{
-                    isUserInputGood = false;
-                }
+                isUserInputGood = listCommand(command, tasks);
                 break;
             case "done":
-                if(command.length == 2 && checkIfInteger(command[1])){
-                    index = Integer.parseInt(command[1]) - 1;
-                    if (0 <= index && index < tasks.size()) {
-                        // If the given value to set as done is an existing index
-                        tasks.get(index).setAsDone();
-                        markTaskDoneMessage(tasks, index);
-                        //TODO
-                        // Currently a task can be marked as done repeatedly.
-                        // This does not cause any errors, but may be required to fix
-                    } else {
-                        System.out.println("The input index that you have selected to indicate as done,"+
-                                "is out of the range of existing indexes!");
-                    }
-                } else {
-                    isUserInputGood = false;
-                }
+                isUserInputGood = doneCommand(command, tasks);
                 break;
             case "todo":
-                if(command.length > 1) {
-                    newItem = new Todo(String.join(" ", Arrays.copyOfRange(command, 1, command.length)));
-                    tasks.add(newItem);
-                    isNewItem = true;
-                } else {
+                newItem = todoCommand(command, tasks);
+                if(newItem == null){
                     isUserInputGood = false;
                 }
                 break;
             case "event":
-                if(checkForSubstring(command, "/at")){
-                    int separatorIndex = indexOfSubstring(command, "/at");
-                    String description = String.join(" ", Arrays.copyOfRange(command,
-                            1, separatorIndex));
-                    String at = String.join(" ",Arrays.copyOfRange(command,
-                            separatorIndex + 1, command.length));
-
-                    newItem = new Event(description, at);
-                    tasks.add(newItem);
-                    isNewItem = true;
-                } else{
+                newItem = eventCommand(command, tasks);
+                if(newItem == null){
                     isUserInputGood = false;
                 }
                 break;
             case "deadline":
-                if(checkForSubstring(command, "/by")){
-                    int separatorIndex = indexOfSubstring(command, "/by");
-                    String description = String.join(" ", Arrays.copyOfRange(command,
-                            1, separatorIndex));
-                    String by = String.join(" ",Arrays.copyOfRange(command,
-                            separatorIndex + 1, command.length));
-
-                    newItem = new Deadline(description, by);
-                    tasks.add(newItem);
-                    isNewItem = true;
-                } else{
+                newItem = deadlineCommand(command, tasks);
+                if(newItem == null){
                     isUserInputGood = false;
                 }
                 break;
@@ -100,11 +51,88 @@ public class Duke {
 
             if(!isUserInputGood) {
                 badUserInputMessage();
-            } else if (isNewItem){
+            } else if (newItem != null){
                 newItemMessage(tasks, newItem);
             }
 
             userInput = in.nextLine();
+        }
+    }
+
+    public static boolean listCommand(String[] command, ArrayList<Task> tasks){
+        if(command.length == 1){
+            int index = 1;
+            System.out.println(LINE);
+            for (Task task : tasks) {
+                System.out.println(index + "." + task.toString());
+                index += 1;
+            }
+            System.out.println(LINE);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static boolean doneCommand(String[] command, ArrayList<Task> tasks){
+        if(command.length == 2 && checkIfInteger(command[1])){
+            int index = Integer.parseInt(command[1]) - 1;
+            if (0 <= index && index < tasks.size()) {
+                // If the given value to set as done is an existing index
+                tasks.get(index).setAsDone();
+                markTaskDoneMessage(tasks, index);
+                //TODO
+                // Currently a task can be marked as done repeatedly.
+                // This does not cause any errors, but may be required to fix
+            } else {
+                System.out.println("The input index that you have selected to indicate as done,"+
+                        "is out of the range of existing indexes!");
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static Task todoCommand(String[] command, ArrayList<Task> tasks){
+        if(command.length > 1) {
+            Task newItem = new Todo(String.join(" ", Arrays.copyOfRange(command, 1, command.length)));
+            tasks.add(newItem);
+            return newItem;
+        } else {
+            return null;
+        }
+    }
+
+    public static Task eventCommand(String[] command, ArrayList<Task> tasks){
+        if(checkForSubstring(command, "/at")){
+            int separatorIndex = indexOfSubstring(command, "/at");
+            String description = String.join(" ", Arrays.copyOfRange(command,
+                    1, separatorIndex));
+            String at = String.join(" ",Arrays.copyOfRange(command,
+                    separatorIndex + 1, command.length));
+
+            Task newItem = new Event(description, at);
+            tasks.add(newItem);
+            return newItem;
+        } else{
+            return null;
+        }
+    }
+
+    public static Task deadlineCommand(String[] command, ArrayList<Task> tasks){
+        if(checkForSubstring(command, "/by")){
+            int separatorIndex = indexOfSubstring(command, "/by");
+            String description = String.join(" ", Arrays.copyOfRange(command,
+                    1, separatorIndex));
+            String by = String.join(" ",Arrays.copyOfRange(command,
+                    separatorIndex + 1, command.length));
+
+            Task newItem = new Deadline(description, by);
+            tasks.add(newItem);
+            return newItem;
+        } else{
+            return null;
         }
     }
 
