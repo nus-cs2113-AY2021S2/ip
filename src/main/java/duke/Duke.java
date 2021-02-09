@@ -37,9 +37,8 @@ public class Duke {
             ArrayList<Task> tasks, String[] commandTokens)
             throws DukeException, NumberFormatException {
         if (commandTokens.length == 0) {
-            throw new DukeException(
-                    "Please enter a command.\n" +
-                            "Try using \"help\" for a list of commands."
+            throw new DukeException("Please enter a command.\n"
+                    + "Try using \"help\" for a list of commands."
             );
         }
         boolean isDoneReadingInputs = false;
@@ -73,77 +72,77 @@ public class Duke {
         return isDoneReadingInputs;
     }
 
-    private static void addTodo(ArrayList<Task> tasks, String[] arguments) throws DukeException {
-        if (arguments.length < 2) {
+    private static void addTodo(ArrayList<Task> tasks, String[] commandArguments) throws DukeException {
+        if (commandArguments.length < 2) {
             throw new DukeException(
                     "Please give me more details about the task!"
             );
         }
-        if (arguments[1].equals("")) {
+        if (commandArguments[1].equals("")) {
             throw new DukeException(
                     "The description of a task can't be empty. Please try again."
             );
         }
-        String description = arguments[1];
+        String description = commandArguments[1];
         Todo todo = new Todo(description);
         tasks.add(todo);
         DukePrinter.printTaskAdded(tasks, todo);
     }
 
-    private static void addDeadline(ArrayList<Task> tasks, String[] arguments) throws DukeException {
-        if (arguments.length < 3) {
+    private static void addDeadline(ArrayList<Task> tasks, String[] commandArguments) throws DukeException {
+        if (commandArguments.length < 3) {
             throw new DukeException(
                     "Please give me more details about the task!"
             );
         }
-        if (arguments[1].equals("")) {
+        if (commandArguments[1].equals("")) {
             throw new DukeException(
                     "The description of a task can't be empty. Please try again."
             );
         }
-        if (arguments[2].equals("")) {
+        if (commandArguments[2].equals("")) {
             throw new DukeException(
                     "Please specify a deadline for the task."
             );
         }
-        String description = arguments[1];
-        String dueDate = arguments[2];
+        String description = commandArguments[1];
+        String dueDate = commandArguments[2];
         Deadline deadline = new Deadline(description, dueDate);
         tasks.add(deadline);
         DukePrinter.printTaskAdded(tasks, deadline);
     }
 
-    private static void addEvent(ArrayList<Task> tasks, String[] arguments) throws DukeException {
-        if (arguments.length < 3) {
+    private static void addEvent(ArrayList<Task> tasks, String[] commandArguments) throws DukeException {
+        if (commandArguments.length < 3) {
             throw new DukeException(
                     "Please give me more details about the task!"
             );
         }
-        if (arguments[1].equals("")) {
+        if (commandArguments[1].equals("")) {
             throw new DukeException(
                     "The description of a task can't be empty. Please try again."
             );
         }
-        if (arguments[2].equals("")) {
+        if (commandArguments[2].equals("")) {
             throw new DukeException(
                     "Please specify a date for the event."
             );
         }
-        String description = arguments[1];
-        String eventDate = arguments[2];
+        String description = commandArguments[1];
+        String eventDate = commandArguments[2];
         Event event = new Event(description, eventDate);
         tasks.add(event);
         DukePrinter.printTaskAdded(tasks, event);
     }
 
-    private static void markTaskAsDone(ArrayList<Task> tasks, String[] arguments)
+    private static void markTaskAsDone(ArrayList<Task> tasks, String[] commandArguments)
             throws DukeException, NumberFormatException {
-        if (arguments.length < 2) {
+        if (commandArguments.length < 2) {
             throw new DukeException(
                     "Please give me more details about the task!"
             );
         }
-        int taskNumber = Integer.parseInt(arguments[1]);
+        int taskNumber = Integer.parseInt(commandArguments[1]);
         /* Enforce that taskNumber is valid */
         if (taskNumber < 1 || taskNumber > tasks.size()) {
             throw new DukeException(
