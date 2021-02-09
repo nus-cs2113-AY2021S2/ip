@@ -28,8 +28,12 @@ public class Duke {
     }
 
     public static void showBye() {
+        showExecuteResult("Bye. Hope to see you again soon!");
+    }
+
+    public static void showExecuteResult(String result) {
         System.out.println("____________________________________________________________");
-        System.out.println("Bye. Hope to see you again soon!");
+        System.out.println(result);
         System.out.println("____________________________________________________________");
     }
 
@@ -63,9 +67,7 @@ public class Duke {
     }
 
     public static void showMessageForInvalidCommandInput() {
-        System.out.println("____________________________________________________________");
-        System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(!");
-        System.out.println("____________________________________________________________");
+        showExecuteResult("OOPS!!! I'm sorry, but I don't know what that means :-(!");
     }
 
     public static void executeAddTodo(String userCommand) throws EmptyDescriptionException{
@@ -86,9 +88,7 @@ public class Duke {
             }
             tasks.addDeadline(contentBy[0].trim(), contentBy[1].trim());
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("____________________________________________________________");
-            System.out.println("No /by founded in the command");
-            System.out.println("____________________________________________________________");
+            showExecuteResult("OOPS!!! No /by founded in the command");
 
         }
 
@@ -103,10 +103,7 @@ public class Duke {
             }
             tasks.addEvent(contentAt[0].trim(), contentAt[1].trim());
         } catch (IndexOutOfBoundsException e){
-            System.out.println("____________________________________________________________");
-            System.out.println("No /at founded in the command");
-            System.out.println("____________________________________________________________");
-
+            showExecuteResult("OOPS!!! No /at founded in the command");
         }
 
     }
@@ -116,11 +113,15 @@ public class Duke {
     }
 
     public static void executeDone(String userCommand) throws EmptyDescriptionException{
-        int taskIndexShow = Integer.parseInt(userCommand.replaceAll("[^0-9]", ""));
-        if(taskIndexShow <= 0 || taskIndexShow > tasks.getNumOfTasks()) {
+        try{
+            int taskIndexShow = Integer.parseInt(userCommand.replaceAll("[^0-9]", ""));
+            if(taskIndexShow <= 0 || taskIndexShow > tasks.getNumOfTasks()) {
+                throw new EmptyDescriptionException(CommandType.DONE);
+            }
+            tasks.markTaskDone(taskIndexShow);
+        } catch (NumberFormatException e) {
             throw new EmptyDescriptionException(CommandType.DONE);
         }
-        tasks.markTaskDone(taskIndexShow);
     }
 
     private static void executeExitProgramRequest() {

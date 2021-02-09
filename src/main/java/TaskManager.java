@@ -12,11 +12,7 @@ public class TaskManager {
     }
 
     public void showAddResult(int numOfTasks) {
-        System.out.println("____________________________________________________________");
-        System.out.println("Got it. I've added this task:");
-        System.out.println(tasks[numOfTasks]);
-        System.out.println("Now you have " + (numOfTasks+1) + " tasks in the list.");
-        System.out.println("____________________________________________________________");
+        Duke.showExecuteResult("Got it. I've added this task:\n" + tasks[numOfTasks] + "\nNow you have " + (numOfTasks+1) + " tasks in the list.");
     }
 
     public void addTodo(String content) {
@@ -39,17 +35,8 @@ public class TaskManager {
     }
 
     public void markTaskDone(int taskIndexShow) {
-        if (taskIndexShow > 0 && taskIndexShow <= numOfTasks) {
-            this.tasks[taskIndexShow-1].setDone(true);
-            System.out.println("____________________________________________________________");
-            System.out.println("Nice! I've marked this task as done:");
-            System.out.println(tasks[taskIndexShow-1]);
-            System.out.println("____________________________________________________________");
-        } else {
-            System.out.println("____________________________________________________________");
-            System.out.println("No such task found! Please try again");
-            System.out.println("____________________________________________________________");
-        }
+        this.tasks[taskIndexShow-1].setDone(true);
+        Duke.showExecuteResult("Nice! I've marked this task as done:\n" + tasks[taskIndexShow-1]);
     }
 
     public void listAllTasks() {
