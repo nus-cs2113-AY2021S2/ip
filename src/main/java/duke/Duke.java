@@ -1,16 +1,15 @@
+package duke;
+
+import duke.io.TextUI;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+import duke.io.Command;
+
 public class Duke {
 
-    private static final String COMMAND_LIST_WORD = "list";
-    private static final String COMMAND_BYE_WORD = "bye";
-    private static final String COMMAND_TODO_WORD = "todo";
-    private static final String COMMAND_DEADLINE_WORD = "deadline";
-    private static final String COMMAND_DEADLINE_BY_TOKEN = "/by";
-    private static final String COMMAND_EVENT_WORD = "event";
-    private static final String COMMAND_EVENT_AT_TOKEN = "/at";
-    private static final String COMMAND_DONE_WORD = "done";
-
     private static final String DOUBLE_SPACE_PREFIX_STRING_FORMAT = "  %s";
-
     private static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
     private static final String LIST_TASK_MESSAGE = "Here are the tasks in your list:";
     private static final String LIST_NO_TASK_MESSAGE = "No task in record.";
@@ -77,7 +76,7 @@ public class Duke {
 
     private static String[] validateDeadlineArguments(String commandArgs) throws DukeException {
         String taskDescription = parseArgument(commandArgs, null);
-        String deadlineBy = parseArgument(commandArgs, COMMAND_DEADLINE_BY_TOKEN);
+        String deadlineBy = parseArgument(commandArgs, Command.DEADLINE_BY_TOKEN);
         if (isArgumentValueEmpty(taskDescription)) {
             throw new DukeException(String.format(ERROR_EMPTY_TASK_STRING_FORMAT, "deadline"));
         }
@@ -106,7 +105,7 @@ public class Duke {
 
     private static String[] validateEventArguments(String commandArgs) throws DukeException {
         String taskDescription = parseArgument(commandArgs, null);
-        String eventAt = parseArgument(commandArgs, COMMAND_EVENT_AT_TOKEN);
+        String eventAt = parseArgument(commandArgs, Command.EVENT_AT_TOKEN);
         if (isArgumentValueEmpty(taskDescription)) {
             throw new DukeException(String.format(ERROR_EMPTY_TASK_STRING_FORMAT, "event"));
         }
@@ -210,22 +209,22 @@ public class Duke {
         String commandArgs = commandAndArgs[1];
 
         switch (commandName) {
-        case COMMAND_LIST_WORD:
+        case Command.LIST_WORD:
             listTasks();
             break;
-        case COMMAND_TODO_WORD:
+        case Command.TODO_WORD:
             recordTodo(commandArgs);
             break;
-        case COMMAND_DEADLINE_WORD:
+        case Command.DEADLINE_WORD:
             recordDeadline(commandArgs);
             break;
-        case COMMAND_EVENT_WORD:
+        case Command.EVENT_WORD:
             recordEvent(commandArgs);
             break;
-        case COMMAND_DONE_WORD:
+        case Command.DONE_WORD:
             markTaskDone(commandArgs);
             break;
-        case COMMAND_BYE_WORD:
+        case Command.BYE_WORD:
             // Does not fallthrough, exits program instead.
             exitProgram();
         default:
