@@ -9,6 +9,7 @@ public class Duke {
     public static void runProgram(){
         //TODO
         // improve this section by making sections more abstract
+        // particularly the switch case block
         Scanner in = new Scanner(System.in);
         String userInput;
         // Instead of using tasks[100], I used an ArrayList.
