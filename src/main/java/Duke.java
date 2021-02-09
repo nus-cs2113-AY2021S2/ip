@@ -59,12 +59,17 @@ public class Duke {
         System.out.print(goodbyeString);
     }
 
-    public static void printInvalidInputMessage() {
-        String invalidInputString = BORDER + NEWLINE
-                + "I'm sorry, I don't quite understand. "
-                + "Can you try again?" + NEWLINE
-                + BORDER + NEWLINE + NEWLINE;
-        System.out.print(invalidInputString);
+    public static void printInvalidInputMessage(String message) {
+        String openString = BORDER + NEWLINE;
+        String closeString = NEWLINE + BORDER + NEWLINE + NEWLINE;
+        if (message == null) {
+            String invalidInputString = "I'm sorry, I don't quite understand. Can you try again?";
+            System.out.print(openString + invalidInputString + closeString);
+        }
+        else {
+            System.out.print(openString + message + closeString);
+        }
+
     }
 
     public static void help() {
@@ -164,68 +169,80 @@ public class Duke {
         }
         userInput = userInput.trim();
         String[] tokens = userInput.split(" ", 2);
-        boolean isValid = true;
         if (tokens.length < 2) {
-            printInvalidInputMessage();
+            String invalidMessage = "Squealll! Not enough or invalid fields entered :(";
+            printInvalidInputMessage(invalidMessage);
             return;
         }
         switch(tokens[0]) {
         case "done":
-            isValid = hasIndex(tokens);
-            if (isValid) {
-                markInList(Integer.parseInt(tokens[1]));
+            try {
+                int index = getTaskIndex(tokens);
+                boolean isPossibleIndex = index > 0;
+                boolean isValidIndex = index <= tasksCount;
+                if (isPossibleIndex && isValidIndex) {
+                    markInList(index);
+                }
+                else {
+                    String invalidMessage = "Squeal! There is no task with number "
+                            + index + "in the list";
+                    printInvalidInputMessage(invalidMessage);
+                    return;
+                }
+            } catch (DukeException e) {
+                String invalidMessage = "Squeal! Second field must be a number.";
+                printInvalidInputMessage(invalidMessage);
             }
             break;
         case "todo":
             addTodo(tokens[1]);
             break;
         case "deadline":
-            isValid = isDeadlineOrTiming(" /by ", tokens);
-            if (isValid) {
-                int position = tokens[1].indexOf("/by");
+            try {
+                int position = getPositionOfKeyword(" /by ", tokens);
                 addDeadline(tokens[1].substring(0, position - 1), tokens[1].substring(position + 4));
+            } catch (DukeException e) {
+                printInvalidInputMessage(null); //to make more detailed (no/repeated keyword/no description)
             }
             break;
         case "event":
-            isValid = isDeadlineOrTiming(" /at ", tokens);
-            if (isValid) {
-                int position = tokens[1].indexOf("/at");
+            try {
+                int position = getPositionOfKeyword(" /at ", tokens);
                 addEvent(tokens[1].substring(0, position - 1), tokens[1].substring(position + 4));
+            } catch (DukeException e) {
+                printInvalidInputMessage(null);
             }
             break;
         default:
-            printInvalidInputMessage();
+            printInvalidInputMessage(null);
             break;
         }
-        if (!isValid) {
-            printInvalidInputMessage();
-        }
     }
 
-    public static boolean hasIndex(String[] tokens) {
+    public static int getTaskIndex(String[] tokens) throws DukeException {
         try {
             Integer.parseInt(tokens[1]);
+            return Integer.parseInt(tokens[1]);
         } catch (NumberFormatException e) {
-            return false;
+            throw new DukeException();
         }
-        int index = Integer.parseInt(tokens[1]);
-        boolean isPossibleIndex = index > 0;
-        boolean isValidIndex = index <= tasksCount;
-        return isPossibleIndex && isValidIndex;
     }
 
-    public static boolean isDeadlineOrTiming(String keyword, String[] tokens) {
+    public static int getPositionOfKeyword(String keyword, String[] tokens) throws DukeException {
         if (!tokens[1].contains(keyword)) {
-            return false;
+            throw new DukeException();
         }
         String[] words = tokens[1].split(keyword, 2);
         if (words.length < 2) {
-            return false;
+            throw new DukeException();
         }
-        String repeatedKeyword = keyword.trim();
-        boolean isInvalidTask = words[0].contains(repeatedKeyword);
-        boolean isInvalidDeadlineOrTiming = words[1].contains(repeatedKeyword);
-        return !isInvalidTask && !isInvalidDeadlineOrTiming;
+        String actualKeyword = keyword.trim();
+        boolean isInvalidTask = words[0].contains(actualKeyword);
+        boolean isInvalidDeadlineOrTiming = words[1].contains(actualKeyword);
+        if (isInvalidTask || isInvalidDeadlineOrTiming) {
+            throw new DukeException();
+        }
+        return tokens[1].indexOf(actualKeyword);
     }
 
 
