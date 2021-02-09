@@ -6,6 +6,13 @@ public class Todo extends Task{
         super(description);
     }
 
+    public static void checkIfToDoDescriptionExists(String input) throws TaskDescriptionMissingException {
+        if (input.isBlank()){
+            Task.decreaseTaskCount();
+            throw new TaskDescriptionMissingException();
+        }
+    }
+
     @Override
     public String toString() {
         return TODO_LABEL + super.toString();
