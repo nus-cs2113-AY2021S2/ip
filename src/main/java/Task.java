@@ -6,8 +6,6 @@ public class Task {
         this.description = description;
         this.isDone = false;
         System.out.println("Got it. I've added this task: ");
-        //System.out.print(toString());
-
     }
 
     public String getStatusIcon() {
