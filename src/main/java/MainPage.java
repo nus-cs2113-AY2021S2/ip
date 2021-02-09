@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class MainPage {
     public static final String LIST_COMMAND = "list";
     public static final String BYE_COMMAND = "bye";
+    public static final String DONE_COMMAND = "done";
     public static void displayUI(Scanner in){
         printWelcomeMessage();
         while (true){
@@ -13,7 +14,7 @@ public class MainPage {
             else if (input.equals(BYE_COMMAND)) {
                 printExitMessage();
             }
-            else if (input.startsWith("done")) {
+            else if (input.startsWith(DONE_COMMAND)) {
                 int taskNumberDone = StringManipulator.getTaskNumberDone(input);
                 TaskManager.markTaskAsDone(taskNumberDone);
             }
