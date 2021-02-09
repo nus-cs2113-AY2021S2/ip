@@ -74,14 +74,10 @@ public class Duke {
 
     private static void addTodo(ArrayList<Task> tasks, String[] commandArguments) throws DukeException {
         if (commandArguments.length < 2) {
-            throw new DukeException(
-                    "Please give me more details about the task!"
-            );
+            throw new DukeException("Please give me more details about the task!");
         }
         if (commandArguments[1].equals("")) {
-            throw new DukeException(
-                    "The description of a task can't be empty. Please try again."
-            );
+            throw new DukeException("The description of a task can't be empty. Please try again.");
         }
         String description = commandArguments[1];
         Todo todo = new Todo(description);
@@ -91,19 +87,13 @@ public class Duke {
 
     private static void addDeadline(ArrayList<Task> tasks, String[] commandArguments) throws DukeException {
         if (commandArguments.length < 3) {
-            throw new DukeException(
-                    "Please give me more details about the task!"
-            );
+            throw new DukeException("Please give me more details about the task!");
         }
         if (commandArguments[1].equals("")) {
-            throw new DukeException(
-                    "The description of a task can't be empty. Please try again."
-            );
+            throw new DukeException("The description of a task can't be empty. Please try again.");
         }
         if (commandArguments[2].equals("")) {
-            throw new DukeException(
-                    "Please specify a deadline for the task."
-            );
+            throw new DukeException("Please specify a deadline for the task.");
         }
         String description = commandArguments[1];
         String dueDate = commandArguments[2];
@@ -114,19 +104,13 @@ public class Duke {
 
     private static void addEvent(ArrayList<Task> tasks, String[] commandArguments) throws DukeException {
         if (commandArguments.length < 3) {
-            throw new DukeException(
-                    "Please give me more details about the task!"
-            );
+            throw new DukeException("Please give me more details about the task!");
         }
         if (commandArguments[1].equals("")) {
-            throw new DukeException(
-                    "The description of a task can't be empty. Please try again."
-            );
+            throw new DukeException("The description of a task can't be empty. Please try again.");
         }
         if (commandArguments[2].equals("")) {
-            throw new DukeException(
-                    "Please specify a date for the event."
-            );
+            throw new DukeException("Please specify a date for the event.");
         }
         String description = commandArguments[1];
         String eventDate = commandArguments[2];
@@ -138,16 +122,12 @@ public class Duke {
     private static void markTaskAsDone(ArrayList<Task> tasks, String[] commandArguments)
             throws DukeException, NumberFormatException {
         if (commandArguments.length < 2) {
-            throw new DukeException(
-                    "Please give me more details about the task!"
-            );
+            throw new DukeException("Please give me more details about the task!");
         }
         int taskNumber = Integer.parseInt(commandArguments[1]);
         /* Enforce that taskNumber is valid */
         if (taskNumber < 1 || taskNumber > tasks.size()) {
-            throw new DukeException(
-                    "That's an invalid task number!"
-            );
+            throw new DukeException("That's an invalid task number!");
         }
         /* Change from 1-based indexing to 0-based indexing */
         taskNumber = taskNumber - 1;
