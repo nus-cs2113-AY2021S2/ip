@@ -1,57 +1,52 @@
 ____________________________________________________________
-Hello I'm Diuk!
+Hello I'm Diuk! 
 What would you like to do today?
 ____________________________________________________________
-Added to list:
-[*][ ] some work
+No idea what some work means!
+Enter "help" for a list of available commands and format
+
+Added to list: 
+[T][ ] some work
 1 task in the list
 
-Added to list:
-[T][ ] some work
+Added to list: 
+[D][ ] some work (by: some time)
 2 tasks in the list
 
-Added to list:
-[D][ ] some work (by:some time)
+Added to list: 
+[E][ ] some work (at: some time)
 3 tasks in the list
 
-Added to list:
-[E][ ] some work (at:some time)
-4 tasks in the list
+1. [T][ ] some work
+2. [D][ ] some work (by: some time)
+3. [E][ ] some work (at: some time)
 
-1. [*][ ] some work
-2. [T][ ] some work
-3. [D][ ] some work (by:some time)
-4. [E][ ] some work (at:some time)
+Congrats! You've completed: 
+   [T][X] some work
 
-Congrats! You've completed:
-   [*][X] some work
-
-Enter a valid job number. Use the list command to view your current tasks.
-Enter "help" for a list of available commands and format
+Wrong format: ! Enter "help" for a list of available commands and format
 
 You don't have that many jobs! Use the list command to view your current tasks.
 Enter "help" for a list of available commands and format
 
-1. [*][X] some work
-2. [T][ ] some work
-3. [D][ ] some work (by:some time)
-4. [E][ ] some work (at:some time)
+Wrong format: ! Enter "help" for a list of available commands and format
+
+1. [T][X] some work
+2. [D][ ] some work (by: some time)
+3. [E][ ] some work (at: some time)
 
 COMMAND LIST:
 -------------
-ADD -
-FORMAT: [(str) job]
-
-TODO -
+TODO - 
 FORMAT: todo [(str) job]
 
-DEADLINE -
+DEADLINE - 
 FORMAT: deadline [(str) job] /by [(str) deadline]
 
-LIST -
+LIST - 
 FORMAT: list
 
-DONE -
+DONE - 
 FORMAT: done [(int) number]
 
 To exit, enter "bye"
