@@ -2,7 +2,8 @@ import java.util.Scanner;
 
 public class Duke {
     private static final String DIVIDER = "____________________________________________________________";
-    private static final Task[] STORED_TASKS = new Task[100];
+    private static final int MAX_TASKS_COUNT = 100;
+    private static final Task[] STORED_TASKS = new Task[MAX_TASKS_COUNT];
     private static int storedTasksCount = 0;
 
     public static void main(String[] args) {
