@@ -1,3 +1,12 @@
+package duke;
+
+import exception.EmptyTodoException;
+import exception.UnknownCommandException;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.ToDo;
+
 import java.util.Scanner;
 
 public class DukeController {

@@ -1,3 +1,5 @@
+package task;
+
 public class Task {
     public static final String CHECK_MARK = "\u2713";
     public static final String X_MARK = "\u2718";
