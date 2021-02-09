@@ -1,4 +1,4 @@
-package entity;
+package dukchess.entity;
 
 public class Deadline extends Task {
     private String by;

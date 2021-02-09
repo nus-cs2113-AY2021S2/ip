@@ -1,4 +1,4 @@
-package entity;
+package dukchess.entity;
 
 public class Todo extends Task {
 

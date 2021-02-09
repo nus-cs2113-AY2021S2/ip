@@ -1,7 +1,7 @@
-package entity;
+package dukchess.entity;
 
 /**
- * An entity representing a Task.
+ * An dukess.entity representing a Task.
  */
 public class Task {
 

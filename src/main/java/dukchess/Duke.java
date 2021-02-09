@@ -1,3 +1,5 @@
+package dukchess;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -5,10 +7,10 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import entity.Deadline;
-import entity.Event;
-import entity.Task;
-import entity.Todo;
+import dukchess.entity.Deadline;
+import dukchess.entity.Event;
+import dukchess.entity.Task;
+import dukchess.entity.Todo;
 
 /**
  * Main application driver class.

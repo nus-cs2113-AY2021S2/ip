@@ -1,4 +1,4 @@
-package entity;
+package dukchess.entity;
 
 public class Event extends Task {
     private String at;
