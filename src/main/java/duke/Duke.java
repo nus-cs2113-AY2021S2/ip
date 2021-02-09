@@ -56,82 +56,100 @@ public class Duke {
         boolean isDoneReadingInputs = false;
         while (!isDoneReadingInputs) {
             String[] commandTokens = DukeReader.readUserInput();
-            /* Handle empty inputs */
-            if (commandTokens.length == 0) {
-                DukePrinter.printEmptyInputMessage();
-                continue;
-            }
-            switch (commandTokens[0]) {
-            case DukeCommands.BYE_COMMAND:
-                isDoneReadingInputs = true;
-                break;
-            case DukeCommands.LIST_COMMAND:
-                DukePrinter.printTasks(tasks);
-                break;
-            case DukeCommands.HELP_COMMAND:
-                DukePrinter.printHelpMessage();
-                break;
-            case DukeCommands.DONE_COMMAND:
-                if (commandTokens.length < 2) {
-                    DukePrinter.printInsufficientArgumentsMessage();
-                    break;
-                }
-                int taskNumber;
-                try {
-                    taskNumber = Integer.parseInt(commandTokens[1]);
-                } catch (NumberFormatException numberFormatException) {
-                    DukePrinter.printInvalidArgumentsMessage();
-                    break;
-                }
-                markTaskAsDone(tasks, taskNumber);
-                break;
-            case DukeCommands.TODO_COMMAND:
-                if (commandTokens.length < 2) {
-                    DukePrinter.printInsufficientArgumentsMessage();
-                    break;
-                }
-                if (commandTokens[1].equals("")) {
-                    DukePrinter.printEmptyDescriptionMessage();
-                    break;
-                }
-                addTodo(tasks, commandTokens[1]);
-                break;
-            case DukeCommands.DEADLINE_COMMAND:
-                if (commandTokens.length < 3) {
-                    DukePrinter.printInsufficientArgumentsMessage();
-                    break;
-                }
-                if (commandTokens[1].equals("")) {
-                    DukePrinter.printEmptyDescriptionMessage();
-                    break;
-                }
-                if (commandTokens[2].equals("")) {
-                    DukePrinter.printEmptyDeadlineMessage();
-                    break;
-                }
-                addDeadline(tasks, commandTokens[1], commandTokens[2]);
-                break;
-            case DukeCommands.EVENT_COMMAND:
-                if (commandTokens.length < 3) {
-                    DukePrinter.printInsufficientArgumentsMessage();
-                    break;
-                }
-                if (commandTokens[1].equals("")) {
-                    DukePrinter.printEmptyDescriptionMessage();
-                    break;
-                }
-                if (commandTokens[2].equals("")) {
-                    DukePrinter.printEmptyEventDateMessage();
-                    break;
-                }
-                addEvent(tasks, commandTokens[1], commandTokens[2]);
-                break;
-            default:
-                /* Unknown command, prompt user to use the "help" command */
-                DukePrinter.printFallbackMessage();
-                break;
+            try {
+                isDoneReadingInputs = parseCommandTokens(tasks, isDoneReadingInputs, commandTokens);
+            } catch (DukeException dukeException) {
+                String errorMessage = dukeException.getMessage();
+                DukePrinter.printErrorMessage(errorMessage);
+            } catch (NumberFormatException numberFormatException) {
+                DukePrinter.printInvalidArgumentsMessage();
             }
         }
+    }
+
+    private static boolean parseCommandTokens(
+            ArrayList<Task> tasks, boolean isDoneReadingInputs, String[] commandTokens)
+            throws DukeException, NumberFormatException {
+        if (commandTokens.length == 0) {
+            throw new DukeException(
+                    "Please enter a command.\n" +
+                    "Try using \"help\" for a list of commands."
+            );
+        }
+        switch (commandTokens[0]) {
+        case DukeCommands.BYE_COMMAND:
+            isDoneReadingInputs = true;
+            break;
+        case DukeCommands.LIST_COMMAND:
+            DukePrinter.printTasks(tasks);
+            break;
+        case DukeCommands.HELP_COMMAND:
+            DukePrinter.printHelpMessage();
+            break;
+        case DukeCommands.DONE_COMMAND:
+            if (commandTokens.length < 2) {
+                throw new DukeException(
+                        "Please give me more details about the task!"
+                );
+            }
+            int taskNumber = Integer.parseInt(commandTokens[1]);
+            markTaskAsDone(tasks, taskNumber);
+            break;
+        case DukeCommands.TODO_COMMAND:
+            if (commandTokens.length < 2) {
+                throw new DukeException(
+                        "Please give me more details about the task!"
+                );
+            }
+            if (commandTokens[1].equals("")) {
+                throw new DukeException(
+                        "The description of a task can't be empty. Please try again."
+                );
+            }
+            addTodo(tasks, commandTokens[1]);
+            break;
+        case DukeCommands.DEADLINE_COMMAND:
+            if (commandTokens.length < 3) {
+                throw new DukeException(
+                        "Please give me more details about the task!"
+                );
+            }
+            if (commandTokens[1].equals("")) {
+                throw new DukeException(
+                        "The description of a task can't be empty. Please try again."
+                );
+            }
+            if (commandTokens[2].equals("")) {
+                throw new DukeException(
+                        "Please specify a deadline for the task."
+                );
+            }
+            addDeadline(tasks, commandTokens[1], commandTokens[2]);
+            break;
+        case DukeCommands.EVENT_COMMAND:
+            if (commandTokens.length < 3) {
+                throw new DukeException(
+                        "Please give me more details about the task!"
+                );
+            }
+            if (commandTokens[1].equals("")) {
+                throw new DukeException(
+                        "The description of a task can't be empty. Please try again."
+                );
+            }
+            if (commandTokens[2].equals("")) {
+                throw new DukeException(
+                        "Please specify a date for the event."
+                );
+            }
+            addEvent(tasks, commandTokens[1], commandTokens[2]);
+            break;
+        default:
+            /* Unknown command, prompt user to use the "help" command */
+            DukePrinter.printFallbackMessage();
+            break;
+        }
+        return isDoneReadingInputs;
     }
 
 }

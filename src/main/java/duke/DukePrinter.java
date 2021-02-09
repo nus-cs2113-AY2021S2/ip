@@ -83,21 +83,6 @@ public class DukePrinter {
         printMessage(fallbackMessage);
     }
 
-    public static void printEmptyInputMessage() {
-        String[] emptyInputMessage = {
-                "Please enter a command.",
-                "Try using \"help\" for a list of commands."
-        };
-        printMessage(emptyInputMessage);
-    }
-
-    public static void printInsufficientArgumentsMessage() {
-        String[] insufficientArgumentsMessage = {
-                "Please give me more details about the task!"
-        };
-        printMessage(insufficientArgumentsMessage);
-    }
-
     public static void printInvalidArgumentsMessage() {
         String[] invalidArgumentsMessage = {
                 "That's an invalid task number!"
@@ -105,24 +90,10 @@ public class DukePrinter {
         printMessage(invalidArgumentsMessage);
     }
 
-    public static void printEmptyDescriptionMessage() {
-        String[] emptyDescriptionMessage = {
-                "The description of a task can't be empty. Please try again."
+    public static void printErrorMessage(String errorMessage) {
+        String[] errorMessages = {
+                errorMessage,
         };
-        printMessage(emptyDescriptionMessage);
-    }
-
-    public static void printEmptyDeadlineMessage() {
-        String[] emptyDeadlineMessage = {
-                "Please specify a deadline for the task."
-        };
-        printMessage(emptyDeadlineMessage);
-    }
-
-    public static void printEmptyEventDateMessage() {
-        String[] emptyEventDateMessage = {
-                "Please specify a date for the event."
-        };
-        printMessage(emptyEventDateMessage);
+        printMessage(errorMessages);
     }
 }
