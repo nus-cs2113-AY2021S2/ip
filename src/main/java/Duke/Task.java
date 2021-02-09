@@ -1,3 +1,5 @@
+package Duke;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -12,7 +14,7 @@ public class Task {
         printDescription();
     }
 
-    public Task(String description, String time) {
+    public Task(String description, String time)  {
         this.description = description;
         this.isDone = false;
         this.time = "(" + time.substring(0, 2) + ":" + time.substring(2) + ")";

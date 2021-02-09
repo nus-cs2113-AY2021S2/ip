@@ -1,3 +1,5 @@
+package Duke;
+
 import java.util.Scanner;
 
 public class Duke { //implement toString() next
@@ -86,7 +88,7 @@ public class Duke { //implement toString() next
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + LOGO);
         String STARTMESSAGE = "____________________________________________________________\n"
-                + "Hello! I'm Duke\n"
+                + "Hello! I'm Duke.Duke\n"
                 + "What can I do for you?\n"
                 + "____________________________________________________________\n";
         System.out.println(STARTMESSAGE);
