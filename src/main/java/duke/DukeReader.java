@@ -19,7 +19,7 @@ public class DukeReader {
             if (commandTokens.length < 2) {
                 break;
             }
-            String[] commandSplitDeadline = commandTokens[1].split(DukeCommands.DEADLINE_DELIMITER);
+            String[] commandSplitDeadline = commandTokens[1].split(DukeCommands.DEADLINE_DELIMITER, 2);
             commandParsed = new String[commandSplitDeadline.length + 1];
             commandParsed[0] = commandTokens[0];
             for (int i = 0; i < commandSplitDeadline.length; i++) {
@@ -30,7 +30,7 @@ public class DukeReader {
             if (commandTokens.length < 2) {
                 break;
             }
-            String[] commandSplitEvent = commandTokens[1].split(DukeCommands.EVENT_DELIMITER);
+            String[] commandSplitEvent = commandTokens[1].split(DukeCommands.EVENT_DELIMITER, 2);
             commandParsed = new String[commandSplitEvent.length + 1];
             commandParsed[0] = commandTokens[0];
             for (int i = 0; i < commandSplitEvent.length; i++) {
