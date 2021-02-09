@@ -1,3 +1,5 @@
+package duke.model;
+
 public interface Task {
     
     public boolean isTaskDone();

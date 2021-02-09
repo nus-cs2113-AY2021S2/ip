@@ -1,22 +1,27 @@
-public class Event implements Task {
+package duke.model;
+
+public class Deadline implements Task {
     private final String description;
     private final boolean isDone;
     private final int index;
     private final String message;
-    private final String event;
+    private final String deadline;
 
     /**
-     * Constructs an event task.
-     * Requires the task number, a task description, indication if task is done and the event.
+     * Constructs a Deadline task.
+     * @param index Index number of task.
+     * @param description Name of task.
+     * @param isDone True if this task is completed.
+     * @param deadline Date/time this task expires.
      */
-    public Event(int index, String description, boolean isDone, String event) {
-        String fullDescription = String.format("%s (at: %s)", description, event);
+    public Deadline(int index, String description, boolean isDone, String deadline) {
+        String fullDescription = String.format("%s (by: %s)", description, deadline);
         this.description = fullDescription;
-        this.event = event;
+        this.deadline = deadline;
         this.isDone = isDone;
         this.index = index;
         this.message = String.format(
-            "[E][%s] %s",
+            "[D][%s] %s",
             isDone ? "X" : " ",
             fullDescription
         );
@@ -38,8 +43,8 @@ public class Event implements Task {
         return message;
     }
 
-    public String getEvent() {
-        return event;
+    public String getDeadline() {
+        return deadline;
     }
 
     @Override

@@ -1,3 +1,5 @@
+package duke.model;
+
 public class Todo implements Task {
     private final String description;
     private final boolean isDone;
@@ -5,8 +7,10 @@ public class Todo implements Task {
     private final String message;
 
     /**
-     * Constructs a todo task.
-     * Requires the task number, a task description, indication if task is done.
+     * Constructs a Todo task.
+     * @param index Index number of task.
+     * @param description Name of task.
+     * @param isDone True if this task is completed.
      */
     public Todo(int index, String description, boolean isDone) {
         this.description = description.trim();
