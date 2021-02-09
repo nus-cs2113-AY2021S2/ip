@@ -15,7 +15,7 @@ public class Task {
     public Task(String description, String time) {
         this.description = description;
         this.isDone = false;
-        this.time = "(" + time.substring(0,2) + ":" + time.substring(2) + ")";
+        this.time = "(" + time.substring(0, 2) + ":" + time.substring(2) + ")";
         taskCount++;
         printDescription();
     }
@@ -24,7 +24,7 @@ public class Task {
         return (isDone ? "\u2713" : " "); //return tick or X symbols ✘
     }
 
-    public void doneTask(){
+    public void setDone() {
         this.isDone = true;
         printDoneTask();
     }
@@ -33,7 +33,7 @@ public class Task {
         Class classType = this.getClass();
         System.out.println("**********************************************************");
         System.out.println("[" + classType.getName().charAt(0) + "]" + "[" + getStatusIcon() + "] " + this.description + this.time);
-        System.out.println("Now you have " + taskCount +" tasks in the list.");
+        System.out.println("Now you have " + taskCount + " tasks in the list.");
         System.out.println("**********************************************************");
     }
 
