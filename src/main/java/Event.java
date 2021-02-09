@@ -6,10 +6,10 @@ public class Event extends Task{
     }
     @Override
     public String getStatusIcon() {
-        return "[E]" + super.getStatusIcon();
+        return "[E]" + super.getStatusIcon() + " " ;
     }
     @Override
     public String toString() {
-        return super.toString() + "(" + "at: " + by + ")";
+        return "\t" + super.toString() + "(" + "at:" + by + ")";
     }
 }

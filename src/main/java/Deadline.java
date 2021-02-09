@@ -8,11 +8,11 @@ public class Deadline extends Task{
 
     @Override
     public String getStatusIcon() {
-        return "[D]" + super.getStatusIcon();
+        return "[D]" + super.getStatusIcon() + " ";
     }
 
     @Override
     public String toString() {
-        return super.toString() + "(" + "by: " + by + ")";
+        return "\t " + super.toString() + "(" + "by:" + by + ")";
     }
 }

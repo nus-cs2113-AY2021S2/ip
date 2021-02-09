@@ -3,9 +3,9 @@ public class Todo extends Task{
         super(description);
     }
     @Override
-    public String getStatusIcon() { return "[T]" + super.getStatusIcon();
+    public String getStatusIcon() { return "[T]" + super.getStatusIcon() + " ";
     }
     @Override
-    public String toString() { return super.toString();
+    public String toString() { return "\t " + super.toString();
     }
 }
