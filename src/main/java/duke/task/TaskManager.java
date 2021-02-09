@@ -1,3 +1,8 @@
+package duke.task;
+
+import duke.command.CommandNotFoundException;
+import duke.command.MainUI;
+
 import java.util.Arrays;
 
 public class TaskManager {

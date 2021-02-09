@@ -1,3 +1,5 @@
+package duke.task;
+
 public class TaskDescriptionMissingException extends Exception {
     @Override
     public String getMessage() {
