@@ -17,20 +17,35 @@ public class Duke {
         welcomeMessage();
 
         input = getString(in);
+        Command command;
 
         while (!isBye()) {
             if (isList()) {
-                executeCommand(input, Command.LIST);
+                command = Command.LIST;
             } else if (isDone()) {
-                executeCommand(input, Command.DONE);
+                command = Command.DONE;
             } else if (isTodo()) {
-                executeCommand(input, Command.TODO);
+                command = Command.TODO;
             } else if (isEvent()) {
-                executeCommand(input, Command.EVENT);
+                command = Command.EVENT;
             } else if (isDeadline()) {
-                executeCommand(input, Command.DEADLINE);
+                command = Command.DEADLINE;
             } else {
-                executeCommand(input, Command.TASK);
+                command = Command.INVALID;
+            }
+
+            try {
+                executeCommand(input, command);
+            } catch (InvalidCommandException e) {
+                System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
+            } catch (EmptyInputException e) {
+                System.out.println("OOPS!!! The description of a new task cannot be empty.");
+            } catch (StringIndexOutOfBoundsException e) {
+                System.out.println("OOPS!!! You need to add time for new Event or Deadline with '/at' or '/by'!!");
+            } catch (InvalidEventTimeException e) {
+                System.out.println("OOPS!!! You need to add time for new Event with keyword '/at'!!");
+            } catch (InvalidDeadlineTimeException e) {
+                System.out.println("OOPS!!! You need to add time for new Deadline with keyword '/by'!!");
             }
 
             System.out.println();
@@ -42,7 +57,7 @@ public class Duke {
 
     }
 
-    public static void executeCommand(String input, Command c) {
+    public static void executeCommand(String input, Command c) throws InvalidCommandException, EmptyInputException, InvalidEventTimeException, InvalidDeadlineTimeException {
         switch (c) {
         case LIST:
             listBeginMessage();
@@ -52,28 +67,71 @@ public class Duke {
             markTaskAsDone(input);
             break;
         case TODO:
+            verifyValidInput(input, c);
             incrementTasks();
             addNewTodo(input);
             confirmNewTask();
             break;
         case EVENT:
+            verifyValidInput(input, c);
             incrementTasks();
             addNewEvent(input);
             confirmNewTask();
             break;
         case DEADLINE:
+            verifyValidInput(input, c);
             incrementTasks();
             addNewDeadline(input);
             confirmNewTask();
             break;
-        case TASK:
-            incrementTasks();
-            addNewTask(input);
-            confirmNewTask();
-            break;
+        case INVALID:
+            throw new InvalidCommandException();
 
         }
     }
+
+    private static void verifyValidInput(String input, Command c) throws EmptyInputException, InvalidEventTimeException, InvalidDeadlineTimeException {
+        if (isEmptyInput(input, c)) {
+            throw new EmptyInputException();
+        }
+
+        switch (c) {
+        case EVENT:
+            if (validEventTime(input)) {
+                break;
+            } else {
+                throw new InvalidEventTimeException();
+            }
+        case DEADLINE:
+            if (validDeadlineTime(input)) {
+                break;
+            } else {
+                throw new InvalidDeadlineTimeException();
+            }
+        }
+    }
+
+    private static boolean validDeadlineTime(String input) throws InvalidEventTimeException {
+        return input.substring(getTimePosition(input), getTimePosition(input) + 3).equals("/by");
+    }
+
+    private static boolean validEventTime(String input) {
+        return (input.substring(getTimePosition(input), getTimePosition(input) + 3).equals("/at"));
+    }
+
+
+    private static boolean isEmptyInput(String input, Command c) {
+        switch (c) {
+        case TODO:
+            return (input.substring(TODO_START, input.length()).strip().equals(""));
+        case EVENT:
+            return input.substring(EVENT_START, getTimePosition(input)).strip().equals("");
+        case DEADLINE:
+            return (input.substring(DEADLINE_START, getTimePosition(input)).strip().equals(""));
+        }
+        return false;
+    }
+
 
     private static void markTaskAsDone(String input) {
         int completedTaskIndex = getCompletedTaskIndex(input);
