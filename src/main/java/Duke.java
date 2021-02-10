@@ -17,53 +17,71 @@ public class Duke {
         String text = "";
         Boolean isContinue = true;
 
-        String[] lists = new String[100];
-        Boolean[] isDones = new Boolean[100];
+        Todo[] todos = new Todo[100];
         Integer index = 0;
 
         while (isContinue) {
             text = scanner.nextLine();
-            String[] words = text.split(" ");
-            System.out.println(java.util.Arrays.toString(words));
-            String firstWord = words[0];
-
-            if (firstWord.equals("done")) {
-                Integer number = 0;
-                number = number.valueOf(words[1]);
-
-                if (number > index) {
-                    continue;
-                }
-
-                isDones[number-1] = true;
+            if (text.equals("list")) {
                 System.out.println("____________________________________________________________");
-                System.out.println("I marked task " + number + " as done!");
-                System.out.println(">> [X] " + lists[number]);
-                System.out.println("____________________________________________________________");
-            } else if (firstWord.equals("list")) {
-                System.out.println("____________________________________________________________");
-                for (int i=0; i<index; i++) {
-                    String status = "[ ]";
-                    if (isDones[i]) {
-                        status = "[X]";
-                    }
-                    System.out.println((i+1) + "." + status + " " + lists[i]);
+                System.out.println("Here are the tasks in your list:");
+                for (int i = 0; i < index; i++){
+                    int number = i+1;
+                    System.out.println( number + "." + todos[i]);
                 }
                 System.out.println("____________________________________________________________");
-            } else if (firstWord.equals("bye")) {
-                isContinue = false;
 
-                System.out.println("____________________________________________________________");
-                System.out.println("Bye. Hope to see you again soon!");
-                System.out.println("____________________________________________________________");
             } else {
-                lists[index] = text;
-                isDones[index++] = false;
+                String[] arr = text.split(" ", 2);
+                String action = arr[0];
+                String input = arr[1];
 
-                System.out.println("____________________________________________________________");
-                System.out.println("added: " + text + " to the list");
-                System.out.println("____________________________________________________________");
+                if (action.equals("done")){
+                    int setAsDone =Integer.parseInt(input) ;
+                    setAsDone--;
+                    todos[setAsDone].setDone(true);
+
+                    System.out.println("____________________________________________________________");
+                    System.out.println(todos[setAsDone]);
+                    System.out.println("____________________________________________________________");
+
+                } else if (action.equals("todo")) {
+                    Todo newTodo = new Todo(input);
+                    todos[index++] = newTodo;
+
+                    System.out.println("____________________________________________________________");
+                    System.out.println("Got it. I've added this task: ");
+                    System.out.println(todos[index - 1]);
+                    System.out.println("Now you have " + index + " tasks in the list.");
+                    System.out.println("____________________________________________________________");
+
+                } else if (action.equals("deadline")) {
+                    String[] inputs = input.split(" /by ", 2);
+                    Deadline newDeadline = new Deadline(inputs[0], inputs[1]);
+                    todos[index++] = newDeadline;
+
+                    System.out.println("____________________________________________________________");
+                    System.out.println("Got it. I've added this task: " + input);
+                    System.out.println(todos[index - 1]);
+                    System.out.println("Now you have " + index + " tasks in the list.");
+                    System.out.println("____________________________________________________________");
+
+                } else if (action.equals("event")) {
+                    String[] inputs = input.split(" /at ", 2);
+                    Event newEvent = new Event(inputs[0], inputs[1]);
+                    todos[index++] = newEvent;
+
+                    System.out.println("____________________________________________________________");
+                    System.out.println("Got it. I've added this task: " + input);
+                    System.out.println(todos[index - 1]);
+                    System.out.println("Now you have " + index + " tasks in the list.");
+                    System.out.println("____________________________________________________________");
+
+                } else {
+                    System.out.println("Sorry, I do not know what you mean.");
+                }
             }
+
         }
 
         scanner.close();
