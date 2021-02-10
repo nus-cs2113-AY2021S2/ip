@@ -1,31 +1,60 @@
 public class Tasks{
-    private String description;
-    private  boolean isDone;
-    public Tasks (String description) {
+    protected String description;
+    protected  boolean isDone;
+    protected String taskType;
+    protected String extraDescription;
+
+    public Tasks(String description){
         this.description = description;
         this.isDone =false;
+        this.taskType = " ";
+        this.extraDescription =" ";
+    }
+    public Tasks(String description, String taskType){
+        this.description = description;
+        this.isDone =false;
+        this.taskType = taskType;
     }
     public void setDescription(String description) {
-
         this.description = description;
     }
 
     public void setDone() {
-
-        isDone = true;
+        this.isDone = true;
     }
 
     public String getDescription() {
-
-        return description;
+        return this.description;
     }
 
     public String  setDisplay(){
-        if (isDone) {
+        if(this.isDone == true){
             return "\u2718";
-        } else {
+        }
+        else{
             return " ";
         }
     }
+    public String getTaskType(){
+        return taskType;
+    }
+    public String displayTaskType(){
+        if(taskType.equals("todo")){
+            return "T";
+        }
+        else if( taskType.equals("deadline")){
+            return "D";
+        }
+        else if( taskType.equals("event")){
+            return "E";
+        }
+        else{
+            return " ";
+        }
+    }
+
+
+
+
 
 }

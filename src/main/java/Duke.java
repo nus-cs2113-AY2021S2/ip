@@ -1,7 +1,12 @@
 import java.util.Scanner;
 
+
 public class Duke {
-    public static void displayInitialMessage(){
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        Tasks[] inputTasks = new Tasks[100]; // will act like pointers so you have to create different objects all the time.
+
+        int counter = 0;
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -12,56 +17,82 @@ public class Duke {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
         System.out.println("____________________________________________________________");
-    }
-
-    public static void displayGoodByeMessage(){
-        System.out.println("____________________________________________________________");
-        System.out.println("Bye. Hope to see you again soon!");
-        System.out.println("____________________________________________________________");
-    }
-
-    public static void displayLine(){
-        System.out.println("____________________________________________________________");
-    }
-
-    public static void main (String[] args) {
-        // Creating a System.in object to take in the user input.
-        Scanner in = new Scanner(System.in);
-        // Creating an array of Tasks class to store different descriptions
-        Tasks[] inputTasks = new Tasks[100]; // will act like pointers so you have to create different objects all the time.
-        // Creating a counter to be able to traverse through the entire array.
-        int counter = 0;
-        displayInitialMessage();
         String input = in.nextLine();
-        // This loop will only end once the user inputs the string bye.
-        while (!input.equals("bye")) {
+        while(!input.equals("bye")){
 
-            //Displays the tasks defined by the user
-            if (input.equals("list")) {
-                displayLine();
+            if(input.equals("list")) {
+                System.out.println("____________________________________________________________");
                 System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i< counter; i++) {
-                    System.out.println(i+1+".[ "+inputTasks[i].setDisplay()+" ]"+inputTasks[i].getDescription());
+                    System.out.println(i+1+" .[ " +inputTasks[i].displayTaskType()+ " ]" + " [" +inputTasks[i].setDisplay()+ "] " + inputTasks[i].getDescription() + inputTasks[i].extraDescription);
                 }
-                displayLine();
-            } else if (input.contains("done")) {
-                // This will mark the task as done.
+                System.out.println("____________________________________________________________");
+            }
+            else if(input.split(" ")[0].equals("done")){
                 int num = Integer.parseInt(input.split(" ")[1]);
-                displayLine();
+                System.out.println("____________________________________________________________");
                 System.out.println("Nice! I've marked this task as done: ");
-                System.out.println("[\u2718] " + inputTasks[num-1].getDescription());
-                displayLine();
+                System.out.println("[" +inputTasks[num-1].displayTaskType()+ "] [\u2718] " + inputTasks[num-1].getDescription());
+                System.out.println("____________________________________________________________");
                 inputTasks[num-1].setDone();
-            } else {
+            }
+            else if(input.split(" ")[0].equals("todo")){
+                int startIndex = input.indexOf("o");
+                ToDo temp = new ToDo(input.substring(startIndex+4),input.split(" ")[0]);
+                inputTasks[counter]=temp;
+                System.out.println("____________________________________________________________");
+                System.out.println("Got it. I've added this task: ");
+                System.out.println("[ " +inputTasks[counter].displayTaskType()+ " ]" + " [" +inputTasks[counter].setDisplay()+ "] " + inputTasks[counter].getDescription() + inputTasks[counter].extraDescription);
+                counter++;
+                System.out.println("Now you have " + counter + " tasks in the list");
+                System.out.println("____________________________________________________________");
+
+            }
+            else if(input.split(" ")[0].equals("deadline")){
+                int startIndex = input.indexOf("n");
+                int endIndex = input.indexOf("\\at");
+                String preciseInput = input.substring(startIndex+3,endIndex-1).trim();
+                Deadline temp = new Deadline(preciseInput,input.split(" ")[0],input.substring(endIndex+4));
+                inputTasks[counter]=temp;
+                System.out.println("____________________________________________________________");
+                System.out.println("Got it. I've added this task: ");
+                System.out.println("[ " +inputTasks[counter].displayTaskType()+ " ]" + " [" +inputTasks[counter].setDisplay()+ "] " + inputTasks[counter].getDescription() + inputTasks[counter].extraDescription);
+                counter++;
+                System.out.println("Now you have " + counter + " tasks in the list");
+                System.out.println("____________________________________________________________");
+
+            }
+            else if(input.split(" ")[0].equals("event")){
+
+                int startIndex = input.indexOf("t");
+                int endIndex = input.indexOf("\\by");
+                String preciseInput = input.substring(startIndex+2,endIndex-1).trim();
+                Event temp = new Event(preciseInput,input.split(" ")[0],input.substring(endIndex+4));
+                inputTasks[counter]=temp;
+                System.out.println("____________________________________________________________");
+                System.out.println("Got it. I've added this task: ");
+                System.out.println("[ " +inputTasks[counter].displayTaskType()+ " ]" + " [" +inputTasks[counter].setDisplay()+ "] " + inputTasks[counter].getDescription() + inputTasks[counter].extraDescription);
+                counter++;
+                System.out.println("Now you have " + counter + " tasks in the list");
+                System.out.println("____________________________________________________________");
+
+            }
+            else {
                 Tasks temp = new Tasks(input);
                 inputTasks[counter]=temp;
-                displayLine();
-                System.out.println("added: " + input);
-                displayLine();
+                System.out.println("____________________________________________________________");
+                System.out.println("Got it. I've added this task: ");
+                System.out.println(input);
                 counter++;
+                System.out.println("Now you have " + counter + " tasks in the list");
+                System.out.println("____________________________________________________________");
             }
             input = in.nextLine();
         }
-        displayGoodByeMessage();
+        System.out.println("____________________________________________________________");
+        System.out.println("Bye. Hope to see you again soon!");
+        System.out.print("____________________________________________________________");
+        System.out.print("\n");
+
     }
 }
