@@ -1,4 +1,4 @@
-import javax.lang.model.type.NullType;
+package duke.exception;
 
 public class DukeException extends Exception {
     private TaskType taskType;
