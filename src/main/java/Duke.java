@@ -1,8 +1,8 @@
 import java.util.Scanner;
 
 public class Duke {
-    private static TaskList taskList = new TaskList();
-    private static Scanner in = initialiseInput();
+    private static final TaskList taskList = new TaskList();
+    private static final Scanner in = initialiseInput();
     private static Command command;
     private static String input;
 
@@ -14,7 +14,7 @@ public class Duke {
         printInitialMsg();
         do {
             scanInput();
-            outputReaction();
+            printReaction();
         } while (canContinue());
     }
 
@@ -34,7 +34,7 @@ public class Duke {
         command = processInput(taskList, input);
     }
 
-    private static void outputReaction() {
+    private static void printReaction() {
         switch (command) {
         case ADD:
             // Fallthrough
@@ -43,7 +43,7 @@ public class Duke {
         case EVENT:
             // Fallthrough
         case TODO:
-            System.out.println("Added: " + taskList.getTask());
+            System.out.println("Added: " + taskList.getLastTask());
             break;
         case BYE:
             System.out.println("Bye. Hope to see you again soon!");
@@ -101,23 +101,17 @@ public class Duke {
     private static Command getCommand(String input) {
         if (input.equals("list")) {
             return Command.LIST;
-        }
-        else if (input.equals("bye")) {
+        } else if (input.equals("bye")) {
             return Command.BYE;
-        }
-        else if (input.startsWith("done ")) {
+        } else if (input.startsWith("done ")) {
             return Command.DONE;
-        }
-        else if (input.startsWith("todo ")) {
+        } else if (input.startsWith("todo ")) {
             return Command.TODO;
-        }
-        else if (input.startsWith("deadline ")) {
+        } else if (input.startsWith("deadline ")) {
             return Command.DEADLINE;
-        }
-        else if (input.startsWith("event ")) {
+        } else if (input.startsWith("event ")) {
             return Command.EVENT;
-        }
-        else {
+        } else {
             return Command.ADD;
         }
     }

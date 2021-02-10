@@ -53,7 +53,7 @@ public class TaskList {
     }
 
     // Gets the Last task of tasks array
-    public String getTask() {
+    public String getLastTask() {
         return tasks.get(tasks.size() - 1).toString();
     }
 }
