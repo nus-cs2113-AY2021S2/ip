@@ -1,14 +1,14 @@
 public class Task {
-    protected boolean done;
+    protected boolean isDone;
     protected String label;
 
     public Task(String label) {
-        this.done = false;
+        this.isDone = false;
         this.label = label;
     }
 
     public boolean isDone() {
-        return done;
+        return isDone;
     }
 
     public String getLabel() {
@@ -21,7 +21,7 @@ public class Task {
     }
 
     public void isDone(boolean done) {
-        this.done = done;
+        this.isDone = done;
     }
 
     // Returns a checkbox string depending on whether task is done

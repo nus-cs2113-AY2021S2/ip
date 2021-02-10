@@ -126,10 +126,10 @@ public class Bob {
      * Followed by creating event object
      */
     private static void addEvent(String command) {
-        final String startTimeMarker = "/at";
+        final String timeMarker = "/at";
         String commandType = Command.EVENT.name().toLowerCase();
 
-        String[] commandArray = command.split(startTimeMarker);
+        String[] commandArray = command.split(timeMarker);
         String label = getLabel(commandArray[0],commandType);
         String startTime = commandArray[1].trim();
 
@@ -141,10 +141,10 @@ public class Bob {
      * Followed by creating Deadline object
      */
     private static void addDeadline(String command) {
-        final String dueTimeMarker = "/by";
+        final String timeMarker = "/by";
         String commandType = Command.DEADLINE.name().toLowerCase();
 
-        String[] commandArray = command.split(dueTimeMarker);
+        String[] commandArray = command.split(timeMarker);
         String label = getLabel(commandArray[0],commandType);
         String dueTime = commandArray[1].trim();
 
