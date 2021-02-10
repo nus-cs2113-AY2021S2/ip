@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class TaskList {
     private ArrayList<Task> tasks;
-    protected final static String lineString = "____________________________________________________________\n";
+    protected static final String LINE_STRING = "____________________________________________________________\n";
 
     public TaskList() {
         this.tasks = new ArrayList<>();
@@ -15,19 +15,19 @@ public class TaskList {
     }
 
     private void addToListMessage(int index) {
-        System.out.print(lineString);
+        System.out.print(LINE_STRING);
         System.out.println("Say no more fam. The task is added:\n  " + this.getStatus(index));
         System.out.println((index + 1) + " tasks in the list.");
-        System.out.println(lineString);
+        System.out.println(LINE_STRING);
     }
 
     // Prints contents of list
     public void printList() {
-        System.out.print(lineString);
+        System.out.print(LINE_STRING);
         for (int i = 0; i < tasks.size(); i++) {
             System.out.println((i+1) + "." + this.getStatus(i));
         }
-        System.out.println(lineString);
+        System.out.println(LINE_STRING);
     }
 
     // gets a status printed
@@ -44,9 +44,9 @@ public class TaskList {
     }
 
     private void completeTaskMessage(int index) {
-        System.out.print(lineString);
+        System.out.print(LINE_STRING);
         System.out.println("Task marked as done, gg ez");
         System.out.println("  " + this.getStatus(index));
-        System.out.println(lineString);
+        System.out.println(LINE_STRING);
     }
 }
