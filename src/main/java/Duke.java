@@ -46,6 +46,9 @@ public class Duke {
             } catch (NumberFormatException e) {
                 System.out.println(DIVLINE + "\t:( OOPS!!! You are not specifying a valid task number.");
                 System.out.print(DIVLINE);
+            } catch (TaskAlreadyDoneException e) {
+                System.out.println(DIVLINE + "\tThe task is already done. :)");
+                System.out.print(DIVLINE);
             }
             break;
         case "deadline":
@@ -132,7 +135,10 @@ public class Duke {
         System.out.print(DIVLINE);
     }
 
-    private static void completeTask(int taskIndex) {
+    private static void completeTask(int taskIndex) throws TaskAlreadyDoneException {
+        if (tasks[taskIndex].getIsDone()){
+            throw new TaskAlreadyDoneException();
+        }
         tasks[taskIndex].markAsDone();
         System.out.print(DIVLINE);
         System.out.println("\tNice! I've marked this task as done: \n" +
