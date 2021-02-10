@@ -40,6 +40,14 @@ public class Duke {
             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
         }
     }
+
+    public static void validateListInput(String[] words) throws DukeException {
+        boolean invalidListInput = words.length > 1;
+        if (invalidListInput) {
+            throw new DukeException("☹ OOPS!!! The description of a list should be empty.");
+        }
+    }
+
     public static void main(String[] args) {
         Integer totalTasks = 0;
         Task[] Tasks =  new Task[100];
@@ -68,6 +76,14 @@ public class Duke {
                 continue;
             }
             if(isList){
+                try {
+                    validateListInput(words);
+                } catch (Exception e) {
+                    System.out.println(e);
+                    line = Input.nextLine();
+                    inSystem = !line.equals("bye");
+                    continue;
+                }
                 printDashLine();
                 System.out.println("Here are the tasks in your list:");
                 printList(Tasks, totalTasks);
