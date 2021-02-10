@@ -1,6 +1,5 @@
-import jdk.jshell.spi.ExecutionControl;
 
-public class Task {
+public abstract class Task {
     protected String taskName;
     protected String taskType;
     protected boolean isCompleted;
@@ -19,11 +18,9 @@ public class Task {
 
     public void setTaskType(String taskType) { this.taskType = taskType; }
 
-    public boolean getCompleted() { return isCompleted; }
+    public boolean getIsCompleted() { return isCompleted; }
 
-    public void setCompleted() { isCompleted = true; }
+    public void setIsCompleted(boolean isCompleted) { this.isCompleted = isCompleted; }
 
-    public void printTask() {
-        throw new java.lang.UnsupportedOperationException("Not supported yet.");
-    }
+    public abstract void printTask();
 }
