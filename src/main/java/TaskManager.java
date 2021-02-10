@@ -8,37 +8,40 @@ public class TaskManager {
     private static final int ARRAY_INDEX_FOR_DESCRIPTION = 0;
     private static final int ARRAY_INDEX_FOR_DATE = 1;
 
-    public void toDo (String description) {
+    public void addToDo (String description) {
         Task task = new ToDo(description);
         taskList.add(task);
-        printTaskMessage(task);
+        printAddTaskMessage(task);
     }
 
-    public void deadLine (String[] taskAndDeadline) {
+    public void addDeadline (String[] taskAndDeadline) {
         String description = taskAndDeadline[ARRAY_INDEX_FOR_DESCRIPTION];
         String by = taskAndDeadline[ARRAY_INDEX_FOR_DATE];
         Task task = new Deadline(description, by);
         taskList.add(task);
-        printTaskMessage(task);
+        printAddTaskMessage(task);
     }
 
-    public void event (String[] eventAndDate) {
+    public void addEvent (String[] eventAndDate) {
         String taskEvent = eventAndDate[ARRAY_INDEX_FOR_DESCRIPTION];
         String at = eventAndDate[ARRAY_INDEX_FOR_DATE];
         Task task = new Event(taskEvent, at);
         taskList.add(task);
-        printTaskMessage(task);
+        printAddTaskMessage(task);
     }
 
-    public void printTaskMessage(Task task) {
-        System.out.print(BORDER + "\t Got it. I've added this task:\n");
-        System.out.print("\t   " + task + "\n");
-        System.out.print("\t Now you have " + taskList.size() + " tasks in the list.\n"
+    public void printAddTaskMessage(Task task) {
+        System.out.print(BORDER
+                + "\t Got it. I've added this task:\n"
+                + "\t   " + task + "\n"
+                + "\t Now you have " + taskList.size() + " tasks in the list.\n"
                 + BORDER);
     }
 
     public void printExitMessage() {
-        System.out.print(BORDER + "\t Good Bye. Hope to see you again soon!" + "\n" + BORDER);
+        System.out.print(BORDER
+                + "\t Good Bye. Hope to see you again soon!" + "\n"
+                + BORDER);
     }
 
     public void listTasks() {
@@ -51,18 +54,11 @@ public class TaskManager {
     }
 
     public void markAsDone(int taskNumber) {
-        int SizeOfTaskList = taskList.size();
-        if (taskNumber > SizeOfTaskList) {
-            System.out.print(BORDER +"\t Invalid command. Please enter another task number.\n" + BORDER);
-        } else {
-            int taskIndex = taskNumber -1;
-            taskList.get(taskIndex).setAsDone();
-            System.out.print(BORDER + "\t Nice! I've marked this as done:\n");
-            System.out.print("\t [" + taskList.get(taskIndex).getStatusIcon() + "] " +
-                    taskList.get(taskIndex).getDescription() + "\n" + BORDER);
-        }
-    }
-    public void echo(String userInput) {
-        System.out.print(BORDER + "\t" + userInput + "\n" + BORDER);
+        taskList.get(taskNumber).setAsDone();
+        System.out.print(BORDER
+                + "\t Nice! I've marked this as done:\n"
+                + "\t [" + taskList.get(taskNumber).getStatusIcon() + "] "
+                + taskList.get(taskNumber).getDescription() + "\n"
+                + BORDER);
     }
 }
