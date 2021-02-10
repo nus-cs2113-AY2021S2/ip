@@ -7,18 +7,20 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
-        totalTasks ++;
-    }
-    //"\u2713" = tick symbol, "\u2718" = cross symbol
-    public String getStatusIcon() {
-        return (isDone ? "\u2718" : " "); //return X if done or space if not
+        totalTasks++;
     }
 
-    public String getDescription(){
+    //"\u2713" = tick symbol, "\u2718" = cross symbol
+    public String getStatusIcon() {
+        //return X if done or space if not
+        return (isDone ? "\u2718" : " ");
+    }
+
+    public String getDescription() {
         return this.description;
     }
 
-    public void markAsDone(){
+    public void markAsDone() {
         this.isDone = true;
     }
 
@@ -26,6 +28,4 @@ public class Task {
     public String toString() {
         return "[" + getStatusIcon() + "] " + getDescription();
     }
-
-
 }
