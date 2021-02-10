@@ -1,3 +1,5 @@
+package duke;
+
 import duke.taskexceptions.EmptyTaskDateException;
 import duke.taskexceptions.NoTaskDateException;
 import duke.taskexceptions.NoTaskNameException;
@@ -23,7 +25,7 @@ public class Duke {
     public static void saysHiToUser() {
         //Greeting:
         System.out.println(line);
-        System.out.println("Hello! I'm Duke");
+        System.out.println("Hello! I'm duke.Duke");
         System.out.println("What can I do for you?");
         System.out.println(line);
     }
