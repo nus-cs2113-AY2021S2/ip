@@ -21,26 +21,35 @@ public class Duke {
     static int numberOfTasks = 0;
     static Task tasks[] = new Task[100];
 
-    public static void addTask(String taskDescription){
+    public static void addTask(String taskDescription) {
         System.out.println("\tGot it. I've added this task: ");
         Task t;
+        boolean isValidInput = true;
         if (taskDescription.contains("todo")) {
-            t = new Todo(taskDescription.substring(5));
+            try {
+                t = new Todo(taskDescription.substring(5));
+            } catch (IndexOutOfBoundsException e) {
+                System.out.print("\tSorry, the description of TODO cannot be empty.\n");
+                isValidInput = false;
+                t = new Todo(" ");  // Does not do anything.
+            }
         } else if (taskDescription.contains("deadline")) {
             // Adds task as a Deadline
             taskDescription.replace("deadline ", "");
             int byIndex = taskDescription.indexOf("/by ");
-            t = new Deadline(taskDescription.substring(9, byIndex-1), taskDescription.substring(byIndex+4));
+            t = new Deadline(taskDescription.substring(9, byIndex - 1), taskDescription.substring(byIndex + 4));
         } else {
             // Adds task as an Event.
             taskDescription.replace("event ", "");
             int atIndex = taskDescription.indexOf("/at ");
-            t = new Event(taskDescription.substring(6, atIndex-1), taskDescription.substring(atIndex+4));
+            t = new Event(taskDescription.substring(6, atIndex - 1), taskDescription.substring(atIndex + 4));
         }
-        tasks[numberOfTasks] = t;
-        System.out.println("\t" + t);
-        numberOfTasks++;
-        System.out.println("\tNow you have " + numberOfTasks + " tasks in the list.");
+        if (isValidInput) {
+            tasks[numberOfTasks] = t;
+            System.out.println("\t" + t);
+            numberOfTasks++;
+            System.out.println("\tNow you have " + numberOfTasks + " tasks in the list.");
+        }
     }
 
     public static void markTaskAsDone(String taskDescription){
@@ -85,9 +94,9 @@ public class Duke {
     private static void handleInput(String line) throws IllegalCommandWordException {
         line = line.trim();
         String[] wordsEntered = line.split(" ");
-        if (!commandWords.contains(wordsEntered[0])) {
+        if (!commandWords.contains(wordsEntered[0].toLowerCase())) {
             throw new IllegalCommandWordException();
-        } else if (line.equals("list")){
+        } else if (line.toLowerCase().equals("list")){
             listTasks();
         } else if (line.toLowerCase().contains("done")){
             markTaskAsDone(line);
