@@ -1,4 +1,7 @@
 import java.util.Scanner;
+import Duke.TodoException;
+import Duke.InvalidCommandException;
+import Duke.Task;
 
 public class Duke {
     private static final Scanner SCANNER = new Scanner(System.in);
@@ -63,7 +66,7 @@ public class Duke {
         System.out.println("Please check your spelling.");
     }
 
-    private static boolean isValidInput(String userCommand) throws InvalidCommandException{
+    private static boolean isValidInput(String userCommand) throws InvalidCommandException {
         var isValid = userCommand.equalsIgnoreCase("todo") | userCommand.equalsIgnoreCase("deadline") | userCommand.equalsIgnoreCase("event");
         if (!isValid) {
             throw new InvalidCommandException();
@@ -93,7 +96,7 @@ public class Duke {
 
     private static void notifyUser(String inputDetails, Task selectedTask) {
         System.out.println("Got it. I've added this task:");
-        System.out.println("  " + selectedTask.getTaskType() + selectedTask.getStatusIcon() + " " + selectedTask.description);
+        System.out.println("  " + selectedTask.getTaskType() + selectedTask.getStatusIcon() + " " + selectedTask.getDescription());
         System.out.println("Now you have " + tasksCount + " tasks in the list.");
     }
 
@@ -103,7 +106,7 @@ public class Duke {
         Task selectedTask = tasksList[taskNumber];
         selectedTask.markAsDone();
         System.out.println("Nice! Following task is now marked as done:");
-        System.out.println("[X] " + selectedTask.description);
+        System.out.println("[X] " + selectedTask.getDescription());
     }
 
     private static void exitDuke() {
@@ -132,7 +135,7 @@ public class Duke {
         while (i < tasksCount) {
             Task selectedTask = tasksList[i];
             i++;
-            System.out.println(i + ". " + selectedTask.getTaskType() + selectedTask.getStatusIcon() + " " + selectedTask.description);
+            System.out.println(i + ". " + selectedTask.getTaskType() + selectedTask.getStatusIcon() + " " + selectedTask.getDescription());
         }
     }
 

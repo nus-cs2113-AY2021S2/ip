@@ -1,3 +1,5 @@
+package Duke;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -34,5 +36,9 @@ public class Task {
         } else {
             return "[E]";
         }
+    }
+
+    public String getDescription() {
+        return this.description;
     }
 }

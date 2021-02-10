@@ -1,3 +1,5 @@
+package Duke;
+
 public class TodoException extends Exception {
     private String errorMessage;
 
