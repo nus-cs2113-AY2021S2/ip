@@ -24,7 +24,56 @@ public class Duke {
         }
     }
 
-    public static void listTasks() {
+    public static void executeTodo(String command) {
+        tasks[numberOfTasks] = new Todo(command.replaceFirst("todo", ""));
+        Todo.printTodoDescription();
+        keywords[numberOfTasks] = "T";
+        tasks[numberOfTasks++].printDescription();
+        System.out.print("\n");
+        printTotalTasks();
+    }
+
+    public static void executeDeadline(String command) {
+        try {
+            by = command.substring(command.indexOf("/") + 3);
+            command = command.substring(8, command.indexOf("/"));
+            tasks[numberOfTasks] = new Deadline(command, by);
+            Deadline.printDeadlineDescription();
+            keywords[numberOfTasks] = "D";
+            tasks[numberOfTasks++].printDescription();
+            System.out.println("(by:" + by + ")");
+            printTotalTasks();
+        } catch (IndexOutOfBoundsException e) {
+            DukeException.deadlineIsEmpty();
+        }
+    }
+
+    public static void executeEvent(String command) {
+        try {
+            at = command.substring(command.indexOf("/") + 3);
+            command = command.substring(5, command.indexOf("/"));
+            tasks[numberOfTasks] = new Event(command, at);
+            Event.printEventDescription();
+            keywords[numberOfTasks] = "E";
+            tasks[numberOfTasks++].printDescription();
+            System.out.println("(at:" + at + ")");
+            printTotalTasks();
+        } catch (IndexOutOfBoundsException e) {
+            DukeException.eventIsEmpty();
+        }
+    }
+
+    public static void executeDone(String command) {
+        String[] words;
+        words = command.split(" ");
+        tasks[Integer.parseInt(words[1]) - 1].markAsDone();
+        printDone(Integer.parseInt(words[1]) - 1);
+    }
+
+    public static void listTasks() throws ArrayIndexOutOfBoundsException {
+        if (numberOfTasks == 0) {
+            throw new ArrayIndexOutOfBoundsException();
+        }
         for (int i = 1; i <= numberOfTasks; ++i) {
             System.out.print(i + ".");
             switch (keywords[i - 1]) {
@@ -49,8 +98,6 @@ public class Duke {
 
     public static void main(String[] args) {
         String command;
-        String[] words;
-
         Scanner in = new Scanner(System.in);
         UserInterface.printHello();
         command = in.nextLine();
@@ -58,43 +105,27 @@ public class Duke {
             // makes the input case-insensitive
             command = command.toLowerCase();
             if (command.equals("list")) {
-                listTasks();
-            } else {
-                if (command.contains("done")) {
-                    words = command.split(" ");
-                    tasks[Integer.parseInt(words[1]) - 1].markAsDone();
-                    printDone(Integer.parseInt(words[1]) - 1);
-                } else if (command.contains("todo")) {
-                    tasks[numberOfTasks] = new Todo(command.replaceFirst("todo", ""));
-                    Todo.printTodoDescription();
-                    keywords[numberOfTasks] = "T";
-                    tasks[numberOfTasks++].printDescription();
-                    System.out.print("\n");
-                    printTotalTasks();
-                } else if (command.contains("deadline")) {
-                    by = command.substring(command.indexOf("/") + 3);
-                    command = command.substring(8, command.indexOf("/"));
-                    tasks[numberOfTasks] = new Deadline(command, by);
-                    Deadline.printDeadlineDescription();
-                    keywords[numberOfTasks] = "D";
-                    tasks[numberOfTasks++].printDescription();
-                    System.out.println("(by:" + by + ")");
-                    printTotalTasks();
-                } else if (command.contains("event")) {
-                    at = command.substring(command.indexOf("/") + 3);
-                    command = command.substring(5, command.indexOf("/"));
-                    tasks[numberOfTasks] = new Event(command, at);
-                    Event.printEventDescription();
-                    keywords[numberOfTasks] = "E";
-                    tasks[numberOfTasks++].printDescription();
-                    System.out.println("(at:" + at + ")");
-                    printTotalTasks();
-                } else {
-                    System.out.println("Invalid command! Please try again.");
+                try {
+                    listTasks();
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    DukeException.listIsEmpty();
                 }
+            } else if (command.contains("done")) {
+                executeDone(command);
+            } else if (command.contains("todo")) {
+                if (!DukeException.checkTodo(command)) {
+                    executeTodo(command);
+                }
+            } else if (command.contains("deadline")) {
+                executeDeadline(command);
+            } else if (command.contains("event")) {
+                executeEvent(command);
+            } else {
+                DukeException.commandIsInvalid();
             }
             command = in.nextLine();
-        } while (!command.equals("bye"));
+        } while(!command.equals("bye"));
         UserInterface.printBye();
     }
 }
+
