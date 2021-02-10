@@ -1,9 +1,11 @@
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class Duke {
+    static List<Task> tasks = new ArrayList<>();
+    static Boolean notBye = true;
     public static void main(String[] args) {
 //        String logo = " ____        _        \n"
 //                + "|  _ \\ _   _| | _____ \n"
@@ -16,41 +18,52 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         String userInput;
-        List<task> tasks = new ArrayList<>();
-        do{
+        while(notBye) {
             userInput = sc.nextLine();
-            int taskIndex = 0;
-            if(userInput.contains("done")){
-                String[] splits = userInput.split(" ");
-                userInput = splits[0];
-                taskIndex = Integer.valueOf(splits[1]) - 1;
+            processUserInput(userInput);
+            System.out.println("-----------------------------");
+        }
+    }
 
+    /**
+     * process the user input and understand the command
+     * @param userInput: value input by a user
+     */
+    private static void processUserInput(String userInput) {
+        if(userInput.startsWith("todo")){
+            String description = userInput.substring(5);
+            tasks.add(new Todo(description));
+        }
+        else if(userInput.startsWith("deadline")){
+            String[] split = userInput.split("/");
+            String description = split[0].substring(8);
+            String by = split[1];
+            tasks.add(new Deadline(description, by));
+        }
+        else if(userInput.startsWith("event")){
+            String[] split = userInput.split("/");
+            String description = split[0].substring(5);
+            String at = split[1];
+            tasks.add(new Event(description, at));
+        }
+        else if(userInput.equalsIgnoreCase("list")){
+            int i = 1;
+            for(Task task : tasks){
+                System.out.println(i +  "." + task.toString());
+                i++;
             }
-            switch (userInput) {
-                case "bye":
-                    String output = "Bye. Hope to see you again soon!";
-                    System.out.println(output);
-                    break;
-                case "list":
-                    int i = 1;
-                    for(task task : tasks){
-                        System.out.println(i +  "." + task.getStatusIcon() + " " + task.description);
-                        i++;
-                    }
-                    break;
-                case "done":
-                    task task_ = tasks.get(taskIndex);
-                    task_.markAsDone();
-                    System.out.println("Nice! I've marked this task as done:\n" +
-                                        task_.getStatusIcon() + task_.description);
-                    break;
-                default:
-                    // create a new task
-                    task newTask = new task(userInput);
-                    // added to list
-                    tasks.add(newTask);
-                    System.out.println("added: " + userInput);
-            }
-        } while(!userInput.equalsIgnoreCase("bye"));
+        }
+        else if(userInput.startsWith("done")){
+            int taskIndex = Integer.valueOf(userInput.split(" ")[1]) - 1;
+            Task task_ = tasks.get(taskIndex);
+            task_.markAsDone();
+            System.out.println("Nice! I've marked this task as done:\n" +
+                    task_.toString());
+        }
+        else if(userInput.equalsIgnoreCase("bye")){
+                String bye = "Bye. Hope to see you again soon!";
+                System.out.println(bye);
+                notBye = false;
+        }
     }
 }
