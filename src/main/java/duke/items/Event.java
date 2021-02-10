@@ -1,4 +1,7 @@
-class Event extends Task {
+package duke.items;
+
+
+public class Event extends Task {
     private String at;
 
     public Event(String description, String atInput) {

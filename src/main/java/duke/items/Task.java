@@ -1,3 +1,7 @@
+package duke.items;
+
+import duke.exceptions.InvalidIndexExceptions;
+
 public class Task {
     private static int numOfTasks = 0;
     protected String description;
@@ -17,7 +21,10 @@ public class Task {
         list[numOfTasks] = task;
         numOfTasks++;
     }
-    public static void setDone(int index) {
+    public static void setDone(int index) throws InvalidIndexExceptions{
+        if (index >= numOfTasks){
+            throw new InvalidIndexExceptions();
+        }
         list[index].isDone = true;
         System.out.println("Nice! I've marked this task as done: ");
         System.out.println("[\u2713] " + list[index].getDescription());
@@ -29,7 +36,7 @@ public class Task {
         this.isDone = false;
     }
     public void print(){
-        if (this.isDone == true) {
+        if (this.isDone) {
             System.out.println("[T][\u2713] " + description );
         } else {
             System.out.println("[T][\u2718] " + description );
