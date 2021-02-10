@@ -1,3 +1,5 @@
+package duke;
+
 public class DeadLines extends Task{
 
     private String by;
