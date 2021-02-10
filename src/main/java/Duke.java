@@ -1,3 +1,7 @@
+import duke.Deadline;
+import duke.Event;
+import duke.Task;
+import duke.Todo;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -46,7 +50,7 @@ public class Duke {
                 try {
                     int ind = Integer.parseInt(input.split(" ")[1]) - 1;
                     if (ind < inputs.size() && ind >= 0) {
-                        if (inputs.get(ind).isDone) {
+                        if (inputs.get(ind).getIsDone()) {
                             System.out.println(" Task is already marked done!");
                         } else {
                             inputs.get(ind).markAsDone();
