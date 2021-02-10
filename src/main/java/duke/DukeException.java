@@ -1,3 +1,5 @@
+package duke;
+
 public class DukeException extends Exception{
     public String getEmptyListMessage(){
         return "\t:( OOPS!!! You haven't noted down anything yet.";

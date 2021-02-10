@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -53,16 +55,16 @@ public class Duke {
             break;
         case "deadline":
             try {
-                addDeadlineToList(prompt.substring(9));
-            } catch (IllegalDeadlinePrompt illegalDeadlinePrompt) {
+                addDeadlineToList(prompt.substring(8));
+            } catch (IllegalDeadlinePrompt e) {
                 System.out.println(DIVLINE + "\t:( OOPS!!! You are not specifying a valid deadline with time.");
                 System.out.print(DIVLINE);
             }
             break;
         case "event":
             try {
-                addEventToList(prompt.substring(6));
-            } catch (IllegalEventPrompt illegalEventPrompt) {
+                addEventToList(prompt.substring(5));
+            } catch (IllegalEventPrompt e) {
                 System.out.println(DIVLINE + "\t:( OOPS!!! You are not specifying a valid event with venue.");
                 System.out.print(DIVLINE);
             }
@@ -70,7 +72,7 @@ public class Duke {
         case "todo":
             try {
                 addTodoToList(prompt.substring(4));
-            } catch (IllegalTodoPrompt illegalTodoPrompt) {
+            } catch (IllegalTodoPrompt e) {
                 System.out.println(DIVLINE + "\t:( OOPS!!! The description of a todo cannot be empty.");
                 System.out.print(DIVLINE);
             }
@@ -96,25 +98,35 @@ public class Duke {
     }
 
     private static void addDeadlineToList(String description) throws IllegalDeadlinePrompt {
-        int splitPoint = description.indexOf("/by");
-        if (splitPoint==-1){
+        if (description.startsWith(" ")){
+            String ddlDscp = description.substring(1);
+            int splitPoint = ddlDscp.indexOf("/by");
+            if (splitPoint==-1){
+                throw new IllegalDeadlinePrompt();
+            }
+            tasks[taskCount] = new Deadline(ddlDscp.substring(0, splitPoint - 1),
+                    ddlDscp.substring(splitPoint + 4));
+            printAddSuccessMessage(tasks[taskCount]);
+            taskCount++;
+        } else {
             throw new IllegalDeadlinePrompt();
         }
-        tasks[taskCount] = new Deadline(description.substring(0, splitPoint - 1),
-                                        description.substring(splitPoint + 4));
-        printAddSuccessMessage(tasks[taskCount]);
-        taskCount++;
     }
 
     private static void addEventToList(String description) throws IllegalEventPrompt {
-        int splitPoint = description.indexOf("/at");
-        if (splitPoint==-1){
+        if (description.startsWith(" ")){
+            String evtDscp = description.substring(1);
+            int splitPoint = evtDscp.indexOf("/at");
+            if (splitPoint==-1){
+                throw new IllegalEventPrompt();
+            }
+            tasks[taskCount] = new Event(evtDscp.substring(0, splitPoint - 1),
+                    evtDscp.substring(splitPoint + 4));
+            printAddSuccessMessage(tasks[taskCount]);
+            taskCount++;
+        } else {
             throw new IllegalEventPrompt();
         }
-        tasks[taskCount] = new Event(description.substring(0, splitPoint - 1),
-                                     description.substring(splitPoint + 4));
-        printAddSuccessMessage(tasks[taskCount]);
-        taskCount++;
     }
 
     private static void addTodoToList(String description) throws IllegalTodoPrompt {
