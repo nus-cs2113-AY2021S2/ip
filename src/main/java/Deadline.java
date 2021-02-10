@@ -8,11 +8,17 @@ public class Deadline extends Task{
     }
 
     @Override
-    public String getTaskInfoFormat() {
+    public void printTaskInfo() {
         if(super.getTaskDone()){
-            return String.format(TASK_INFO_FORMAT,"X",taskName,doBefore);
+            System.out.println(String.format(TASK_INFO_FORMAT,"X",taskName,doBefore));
         } else {
-            return String.format(TASK_INFO_FORMAT," ",taskName,doBefore);
+            System.out.println(String.format(TASK_INFO_FORMAT," ",taskName,doBefore));
         }
+    }
+
+    @Override
+    public void newTaskOutput(){
+        System.out.print(LINE_SEPERATOR + "\n    Deadline added:\n      ");
+        this.printTaskInfo();
     }
 }
