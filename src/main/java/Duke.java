@@ -16,7 +16,8 @@ public class Duke {
         String greet = "____________________________________________________________\n" +
                 " Hello! I'm Duke\n" +
                 "____________________________________________________________";
-        String exit = "Bye. Hope to see you again!\n" +
+        String exit = "____________________________________________________________\n" +
+                "Bye. Hope to see you again!\n" +
                 "____________________________________________________________\n";
         System.out.println(logo);
         System.out.println(greet);
