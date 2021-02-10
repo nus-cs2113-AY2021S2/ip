@@ -4,7 +4,7 @@ import Duke.InvalidCommandException;
 import Duke.Task;
 
 public class Duke {
-    private static final Scanner SCANNER = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
     private static final Task[] tasksList = new Task[100];
     private static int tasksCount = 0;
     public static final String LOGO = " ____        _        \n"
@@ -117,7 +117,7 @@ public class Duke {
 
 
     private static String[] getUserInput() {
-        String userInput = SCANNER.nextLine();
+        String userInput = scanner.nextLine();
         String[] listOfInputs = userInput.split(" ", 2);
         if (listOfInputs.length == 1) {
             listOfInputs = new String[]{userInput, "filler"};
