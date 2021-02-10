@@ -1,13 +1,13 @@
 public class Event extends Task {
 
-    protected String at;
+    protected String date;
 
-    public Event(String description, String at) {
+    public Event(String description, String date) {
         super(description);
-        this.at = at;
+        this.date = date;
     }
 
     public String toString() {
-        return "[E][" + super.getStatusIcon() + "] " + super.getDescription() + " (at: " + at + ")";
+        return "[E][" + super.getStatusIcon() + "] " + super.getDescription() + " (at: " + date + ")";
     }
 }
