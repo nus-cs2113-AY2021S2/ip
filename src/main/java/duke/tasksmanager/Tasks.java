@@ -1,4 +1,4 @@
-package com.ip.tasksmanager;
+package duke.tasksmanager;
 
 public class Tasks {
 

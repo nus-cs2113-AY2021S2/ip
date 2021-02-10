@@ -1,12 +1,12 @@
-package com.ip.tasksmanager;
+package duke.tasksmanager;
 
-public class Deadlines extends Tasks {
+public class Events extends Tasks {
 
     protected String date;
 
-    public Deadlines(String description, String date) {
+    public Events(String description, String date) {
         super(description);
-        this.typeOfTask = "D";
+        this.typeOfTask = "E";
         this.date = date;
     }
 
@@ -20,7 +20,7 @@ public class Deadlines extends Tasks {
 
     @Override
     public String convertToTaskOutputString() {
-        return "[" + getTypeOfTask() + "]" + super.convertToTaskOutputString()  + "(" + "by: " + this.date + ")";
+        return "[" + getTypeOfTask() + "]" + super.convertToTaskOutputString() + "(" + "at: " + this.date + ")";
     }
 
 }
