@@ -38,26 +38,94 @@ public class Duke {
      * Removes taskType from user's entire input string
      * Stores remaining string (with taskName and taskDate combined) in static variable taskInputString
      *
+     * throws exception if user string does not contain task (taskName, taskDate etc.)
      * @param input - entire input string of the user, made of taskType + taskName + taskDate
      */
     public static void separateTypeOfTaskAndTaskInputString(String input) {
-        //find position between taskType and rest of task description
+        //find position between taskType and rest of task description:
         int taskInputStringPosition = input.indexOf(" ") + 1;
         taskInputString = input.substring(taskInputStringPosition);
     }
 
     /**
-     * Takes in the remaining 'taskInputString' of the user's input
-     * Splits it into two parts, the name and date of the task
-     * and stores it in two static variables, taskName & taskDate respectively
+     * Removes taskType from user's entire input string
+     * Stores remaining string (with taskName and taskDate combined) in static variable taskInputString
      *
+     * Checks if TaskName exists
+     *
+     * throws exception if user input string does not contain proper taskName
+     * @param input - entire input string of the user, made of taskType + taskName + taskDate
+     */
+    public static void throwsExceptionForNoTaskName(String input) throws NoTaskNameException{
+        int taskInputStringPosition = input.indexOf(" ") + 1;
+        taskInputString = input.substring(taskInputStringPosition);
+
+        boolean hasNoTaskInputString = false;
+        if(taskInputStringPosition == 0){
+            hasNoTaskInputString = true; //since input.indexOf(" ") returns -1 if no TaskName
+        }
+
+        if (hasNoTaskInputString || taskInputString.isBlank() || taskInputString.startsWith("/")){
+            throw new NoTaskNameException();
+        }
+    }
+
+    /**
+     * Takes in the remaining 'taskInputString' of the user's input
+     * Splits it into two parts, the TaskName and TaskDateString
+     * Splits TaskDateString into complement word "by:" or "at:" & TaskDate
+     *
+     * End Results: TaskName and TaskDate
      * @param taskInput - essentially taskInputString, which does not include taskType
      */
     public static void splitTaskNameAndDate(String taskInput) {
+        int beforeDateStringPosition = taskInput.indexOf("/");
+        taskName = taskInput.substring(0, beforeDateStringPosition);
+
+        int dateStringPosition = beforeDateStringPosition + 1;
+        String taskDateString = taskInput.substring(dateStringPosition);
+
+        int datePosition = taskDateString.indexOf(" ") + 1;
+        taskDate = taskDateString.substring(datePosition);
+    }
+
+    /**
+     * Takes in the remaining 'taskInputString' of the user's input
+     * Splits it into two parts, then stores into TaskName
+     *
+     * and TaskDateString of the task
+     *
+     * Splits TaskDateString into 2 parts, complement word "by:" or "at:" & taskDate (further split by " ")
+     * ArrayIndexOutOfBoundsException() - TaskDateString is empty - date is missing
+     * TaskDateFormatException() - TaskDateString is not written in the Correct Format
+     *
+     * StringIndexOutOfBoundsException() - if date is missing
+     * ArrayIndexOutOfBoundsException() - if date is made of empty spaces
+     * @param taskInput - essentially taskInputString, which does not include taskType
+     */
+    public static void throwsExceptionForNoTaskDate(String taskInput) throws TaskDateFormatException, NoTaskDateException, EmptyTaskDateException {
         int beforeDatePosition = taskInput.indexOf("/");
-        int datePosition = beforeDatePosition + 4;
+        if (beforeDatePosition == -1){
+            throw new EmptyTaskDateException();
+        }
         taskName = taskInput.substring(0, beforeDatePosition);
-        taskDate = taskInput.substring(datePosition);
+
+        int dateStringPosition = beforeDatePosition + 1;
+        String taskDateString = taskInput.substring(dateStringPosition);
+
+        String[] taskDateStringWord = taskDateString.split(" "); //throws ArrayIndexOutOfBoundsException for emptyDateString
+        if (!(taskDateStringWord[0].equals("at:") || taskDateStringWord[0].equals("by:"))){
+            throw new TaskDateFormatException();
+        }
+
+        int datePosition = taskDateString.indexOf(" ")+1;
+        if (datePosition == 0) {
+            throw new NoTaskDateException(); //throws NoTaskDateException for missing TaskDate
+        }
+        taskDate = taskDateString.substring(datePosition);
+        if (taskDate.isBlank()) {
+            throw new EmptyTaskDateException(); //throws EmptyTaskDateException for empty TaskDate
+        }
     }
 
     /**
@@ -89,29 +157,17 @@ public class Duke {
 
             //add and store task to list of tasks
             if (input.startsWith("todo")) {
-                System.out.println("Got it. I've added this task:");
 
-                separateTypeOfTaskAndTaskInputString(input);
-                taskName = taskInputString;
+                addToDo(input);
 
-                tasks[taskCount] = new ToDos(taskName); //add task to list
-                printAddedTask();
             } else if (input.startsWith("deadline")) {
-                System.out.println("Got it. I've added this task:");
 
-                separateTypeOfTaskAndTaskInputString(input);
-                splitTaskNameAndDate(taskInputString);
+                addDeadline(input);
 
-                tasks[taskCount] = new Deadlines(taskName, taskDate); //add task to list
-                printAddedTask();
             } else if (input.startsWith("event")) {
-                System.out.println("Got it. I've added this task:");
 
-                separateTypeOfTaskAndTaskInputString(input);
-                splitTaskNameAndDate(taskInputString);
+                addEvent(input);
 
-                tasks[taskCount] = new Events(taskName, taskDate); //add task to list
-                printAddedTask();
             }
             //OR: lists all the user's current tasks in the format of taskType,taskStatus,taskName(and taskDate):
             else if (input.startsWith("list")) {
@@ -123,13 +179,9 @@ public class Duke {
             }
             //OR: mark current task as 'done' & outputs the taskType,taskStatus,taskName(and taskDate):
             else if (input.startsWith("done")) {
-                String[] commandAndTaskNumber = input.split(" ");
-                int index = Integer.parseInt(commandAndTaskNumber[1]) - 1; //obtain task number(which starts from 1)
 
-                tasks[index].markAsDone(); //mark task given by current command as 'done'
+                markAndPrintsTaskAsDone(input);
 
-                System.out.println("Nice! I've marked this task as done:");
-                System.out.println(" " + tasks[index].convertToTaskOutputString());
             } else {
                 System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
@@ -141,6 +193,94 @@ public class Duke {
         }
 
         saysByeToUser();
+    }
+
+    public static void addToDo(String input) {
+        try {
+            throwsExceptionForNoTaskName(input);
+            System.out.println("Got it. I've added this task:");
+
+            separateTypeOfTaskAndTaskInputString(input);
+            taskName = taskInputString;
+
+            tasks[taskCount] = new ToDos(taskName); //add task to list
+            printAddedTask();
+
+        } catch (NoTaskNameException e) {
+            System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+        }
+    }
+
+    public static void addDeadline(String input) {
+        try {
+            throwsExceptionForNoTaskName(input);
+            throwsExceptionForNoTaskDate(taskInputString);
+
+            System.out.println("Got it. I've added this task:");
+
+            separateTypeOfTaskAndTaskInputString(input);
+            splitTaskNameAndDate(taskInputString);
+
+            tasks[taskCount] = new Deadlines(taskName, taskDate); //add task to list
+            printAddedTask();
+
+        } catch (NoTaskNameException e) {
+            System.out.println("☹ OOPS!!! The description of a Deadline task cannot be empty.");
+        } catch(ArrayIndexOutOfBoundsException e) {
+            System.out.println("Please add a date to the Deadline description. :))"); //missing date
+        } catch (TaskDateFormatException e) {
+            System.out.println("Please change the format to \"Task /at: Date\"."); //wrong date format
+        } catch (NoTaskDateException e) {
+            System.out.println("Please add a date to the Deadline description. :))"); //missing date
+        } catch (EmptyTaskDateException e) {
+            System.out.println("Please add a date to the Deadline task description. :))"); //empty date
+        }
+    }
+
+    public static void addEvent(String input) {
+        try {
+            throwsExceptionForNoTaskName(input);
+            throwsExceptionForNoTaskDate(taskInputString);
+
+            System.out.println("Got it. I've added this task:");
+
+            separateTypeOfTaskAndTaskInputString(input);
+            splitTaskNameAndDate(taskInputString);
+
+            tasks[taskCount] = new Events(taskName, taskDate); //add task to list
+            printAddedTask();
+
+        } catch (NoTaskNameException e) {
+            System.out.println("☹ OOPS!!! The description of a Event task cannot be empty.");
+        } catch(ArrayIndexOutOfBoundsException e) {
+            System.out.println("Please add a date to the Event description. :))"); //missing date
+        } catch (TaskDateFormatException e) {
+            System.out.println("Please change the format to \"Task /at: Date\"."); //wrong date format
+        } catch (NoTaskDateException e) {
+            System.out.println("Please add a date to the Event description. :))"); //missing date
+        } catch (EmptyTaskDateException e) {
+            System.out.println("Please add a date to the Event task description. :))"); //empty date
+        }
+    }
+
+    public static void markAndPrintsTaskAsDone(String input){
+        try{
+            String[] commandAndTaskNumber = input.split(" ");
+            int index = Integer.parseInt(commandAndTaskNumber[1]) - 1; //obtain task number(which starts from 1)
+            //throws NumberFormatException() when user does not input a number after word 'done'
+
+            tasks[index].markAsDone(); //mark task given by current command as 'done'
+
+            System.out.println("Nice! I've marked this task as done:");
+            System.out.println(" " + tasks[index].convertToTaskOutputString());
+            //throws NullPointerException if taskNumber out of bounds
+
+        } catch (NumberFormatException e) {
+            System.out.println("Please input in the format of \'done taskNumber\'"); //wrong format for TaskNumber
+        } catch (NullPointerException e) {
+            System.out.println("Please input a smaller valid task number.");
+            System.out.println("You can list all tasks to check the total number of tasks you have. :))"); //invalid TaskNumber
+        }
     }
 
 }
