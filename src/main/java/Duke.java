@@ -4,52 +4,14 @@ import java.util.Scanner;
 public class Duke {
 
 
-
-
-
-/*    public static String command_parser(todo list, String command){
-        String[] tokens = command.split(" ");
-        int itemStartIndex = command.indexOf(" ") + 1;
-        int itemEndIndex;
-        int dateStartIndex;
-        String out = "";
-        switch(tokens[0]){
-        case "list":
-            out = list.listItems();
-            break;
-        case "deadline":
-            itemEndIndex = command.indexOf("/by") - 1;
-            dateStartIndex = itemEndIndex + 5;
-            out = list.addItems(command.substring(itemStartIndex,itemEndIndex),listTypes.deadline,command.substring(dateStartIndex));
-            out += "\nNow you have " + list.getItems() + " item(s) in the list!";
-            break;
-        case "event":
-            itemEndIndex = command.indexOf("/at") - 1;
-            dateStartIndex = itemEndIndex + 5;
-            out = list.addItems(command.substring(itemStartIndex,itemEndIndex),listTypes.event,command.substring(dateStartIndex));
-            out += "\nNow you have " + list.getItems() + " item(s) in the list!";
-            break;
-        case "todo":
-            out = list.addItems(command.substring(itemStartIndex),listTypes.todo);
-            out += "\nYou have " + list.getItems() + " item(s) in the list!";
-            break;
-        case "done":
-            out = list.resolveItem(tokens[1]) ;
-            out += "\nNow you have " + list.getItems() + " item(s) in the list!";
-        }
-
-        return out;
-
-    }*/
-
     public static String command_parser(todov2 list, String command){
         String[] tokens = command.split(" ");
         int itemStartIndex = command.indexOf(" ") + 1;
         int itemEndIndex;
         int dateStartIndex;
         String out = "";
-        String desc;
-        String date;
+        String desc = "";
+        String date = "";
         switch(tokens[0]){
         case "list":
             out = list.listItems();
@@ -57,28 +19,54 @@ public class Duke {
         case "deadline":
             itemEndIndex = command.indexOf("/by") - 1;
             dateStartIndex = itemEndIndex + 5;
-            desc = command.substring(itemStartIndex,itemEndIndex);
-            date = command.substring(dateStartIndex);
+            try {
+                desc = command.substring(itemStartIndex, itemEndIndex);
+                date = command.substring(dateStartIndex);
+            }catch(StringIndexOutOfBoundsException e) {
+                out = "Invalid deadline task format!"
+                    + " Try the following: deadline [task] /by [date] ";
+                break;
+            }
             out = list.addTask(desc, listTypes.deadline, date);
             out += "\nYou now have " + list.tasksLeft() + " task(s) left in the list!";
             break;
         case "event":
             itemEndIndex = command.indexOf("/at") - 1;
             dateStartIndex = itemEndIndex + 5;
-            desc = command.substring(itemStartIndex,itemEndIndex);
-            date = command.substring(dateStartIndex);
+            try {
+                desc = command.substring(itemStartIndex, itemEndIndex);
+                date = command.substring(dateStartIndex);
+            }catch(StringIndexOutOfBoundsException e) {
+                out = "Invalid command format!"
+                    + " Try the following: event [task] /at [date] ";
+                break;
+            }
             out = list.addTask(desc, listTypes.event, date);
             out += "\nYou now have " + list.tasksLeft() + " task(s) left in the list!";
             break;
         case "todo":
+
             desc = command.substring(itemStartIndex);
+            if(desc.equals("todo")){
+                out = "Invalid todo task!";
+                break;
+            }
             out = list.addTask(desc,listTypes.todo);
             out += "\nYou now have " + list.tasksLeft() + " task(s) left in the list!";
             break;
         case "done":
-            out = list.resolveTask(tokens[1]) ;
+            try {
+                out = list.resolveTask(tokens[1]);
+            }catch(ArrayIndexOutOfBoundsException e){
+                out = "Invalid selection!";
+                break;
+            }
             out += "\nYou now have " + list.tasksLeft() + " task(s) left in the list!";
+            break;
+        default:
+            out = "Invalid task command!";
         }
+
 
         return out;
 
