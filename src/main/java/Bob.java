@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 public class Bob {
+    public static final String LINE_STRING = "____________________________________________________________\n";
     public static TaskList taskList = new TaskList();
 
     public static void main(String[] args) {
@@ -10,10 +11,11 @@ public class Bob {
     }
 
     private static void welcomeMessage() {
-        String welcome = "____________________________________________________________\n" +
+        String welcome = LINE_STRING +
                 " Hello! I'm Bob 😀\n" +
-                " If you need anything hit me up fam 😌\n";
-        System.out.println(welcome);
+                " If you need anything hit me up fam 😌\n" +
+                LINE_STRING;
+        System.out.print(welcome);
     }
 
 
@@ -23,10 +25,8 @@ public class Bob {
     }
 
     private static void goodbyeMessage() {
-        String goodbye = "____________________________________________________________\n" +
-                " Chao 👌\n" +
-                "____________________________________________________________";
-        System.out.println(goodbye);
+        String goodbye = LINE_STRING + " Chao 👌\n" + LINE_STRING;
+        System.out.print(goodbye);
     }
 
     /**
@@ -34,19 +34,63 @@ public class Bob {
      */
     private static void scanLoop(Scanner in) {
         boolean isScanning = true;
+        String inputString = "";
+        Command commandType = null;
+
         while (isScanning) {
-            String inputString = in.nextLine();
-            isScanning = scanSwitch(inputString);
+            try {
+                inputString = in.nextLine();
+                commandType = getCommandType(inputString);
+                isScanning = scanSwitch(inputString, commandType);
+            } catch (java.util.InputMismatchException e) {
+                printInputMismatch();
+            } catch (NoSuchMethodException  e) {
+                printNoSuchMethod();
+            } catch (NoCommandLabelException e) {
+                printNoCommandLabel(commandType);
+            } catch (NoCommandFormatException e) {
+                printNoCommandFormat(commandType);
+            }
         }
+    }
+
+    private static void printInputMismatch() {
+        String exceptionMessage = LINE_STRING +
+                " 😥 There is some issue with getting you input\n" +
+                LINE_STRING;
+        System.out.println(exceptionMessage);
+    }
+
+    private static void printNoSuchMethod() {
+        String exceptionMessage = LINE_STRING +
+                " 😥 I don't quite get what you mean dude\n" +
+                LINE_STRING;
+        System.out.println(exceptionMessage);
+    }
+
+    private static void printNoCommandLabel(Command commandType) {
+        String commandName = commandType.name().toLowerCase();
+        String exceptionMessage = LINE_STRING +
+                " 😥 You gotta tell me what is the task for " + commandName + "\n" +
+                LINE_STRING;
+        System.out.println(exceptionMessage);
+    }
+
+    private static void printNoCommandFormat(Command commandType) {
+        String commandName = commandType.name().toLowerCase();
+        String exceptionMessage = LINE_STRING +
+                " 😥 You gotta use the time marker for " + commandName + "\n" +
+                "and the time which it happens\n" +
+                LINE_STRING;
+        System.out.println(exceptionMessage);
     }
 
     /**
      * String before first space taken as command rest as args
      */
-    private static boolean scanSwitch(String inputString) {
+    private static boolean scanSwitch(String inputString, Command commandType) throws NoSuchMethodException, NoCommandLabelException, NoCommandFormatException {
         String[] inputStringArr = inputString.split(" ");
         boolean isScanning = true;
-        Command commandType = getCommandType(inputStringArr[0]);
 
         switch (commandType) {
         case LIST:
@@ -67,14 +111,10 @@ public class Bob {
         case BYE:
             isScanning = false;
             break;
-        default: //regular task
-            addTask(inputString);
+        default:
+            throw new NoSuchMethodException();
         }
         return isScanning;
-    }
-
-    private static void addTask(String inputString) {
-        taskList.addToList(new Task(inputString));
     }
 
     private static void completeTask(String s) {
@@ -89,9 +129,11 @@ public class Bob {
      * Takes a string and returns a enum Command
      * Treats an unknown command as regular task
      */
-    private static Command getCommandType(String commandString) {
+    private static Command getCommandType(String commandString) throws NoSuchMethodException{
         Command command;
-        switch (commandString) {
+        String[] inputStringArr = commandString.split(" ");
+
+        switch (inputStringArr[0]) {
         case "list":
             command = Command.LIST;
             break;
@@ -111,13 +153,15 @@ public class Bob {
             command = Command.BYE;
             break;
         default:
-            command =  Command.TASK;
+            throw new NoSuchMethodException();
         }
         return command;
     }
 
-    private static void addTodo(String command) {
-        String label = command.substring("todo".length() + 1);
+    private static void addTodo(String command) throws NoCommandLabelException {
+        String commandType = Command.TODO.name().toLowerCase();
+        String label = getLabel(command,commandType);
+
         taskList.addToList(new Todo(label));
     }
 
@@ -125,11 +169,15 @@ public class Bob {
      * Phrases command into label and startTime parts
      * Followed by creating event object
      */
-    private static void addEvent(String command) {
-        final String timeMarker = "/at";
+    private static void addEvent(String command) throws NoCommandLabelException, NoCommandFormatException {
+        final String TIME_MARKER = "/at";
         String commandType = Command.EVENT.name().toLowerCase();
+        String[] commandArray = command.split(TIME_MARKER);
 
-        String[] commandArray = command.split(timeMarker);
+        if (commandArray.length < 2) {
+            throw new NoCommandFormatException();
+        }
+
         String label = getLabel(commandArray[0],commandType);
         String startTime = commandArray[1].trim();
 
@@ -140,18 +188,26 @@ public class Bob {
      * Phrases command into label and dueTime parts
      * Followed by creating Deadline object
      */
-    private static void addDeadline(String command) {
-        final String timeMarker = "/by";
+    private static void addDeadline(String command) throws NoCommandLabelException, NoCommandFormatException {
+        final String TIME_MARKER = "/by";
         String commandType = Command.DEADLINE.name().toLowerCase();
+        String[] commandArray = command.split(TIME_MARKER);
 
-        String[] commandArray = command.split(timeMarker);
+        if (commandArray.length < 2) {
+            throw new NoCommandFormatException();
+        }
+
         String label = getLabel(commandArray[0],commandType);
         String dueTime = commandArray[1].trim();
 
         taskList.addToList(new Deadline(label, dueTime));
     }
 
-    private static String getLabel(String string, String commandType) {
-        return string.replaceFirst(commandType,"").trim();
+    private static String getLabel(String string, String commandType) throws NoCommandLabelException {
+        String label = string.replaceFirst(commandType,"").trim();
+        if (label.isEmpty()) {
+            throw new NoCommandLabelException();
+        }
+        return label;
     }
 }
