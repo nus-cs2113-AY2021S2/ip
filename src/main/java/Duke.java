@@ -47,6 +47,67 @@ public class Duke {
         System.out.println("Now you have " + index + " tasks in the list");
     }
 
+    public static void addTodo(String line){
+        try{
+            int descriptionStart = 5;
+            int descriptionEnd = line.length();
+            String description = line.substring(descriptionStart, descriptionEnd);
+            tasks[index] = new Todo(description);
+            index++;
+            printAddTaskMessage(tasks[index - 1]);
+        }
+        catch (StringIndexOutOfBoundsException e){
+            System.out.println("\u2639 OOPS!!! The description of a todo cannot be empty.");
+        }
+    }
+
+    public static void addDeadline(String line){
+        try{
+            int descriptionStart = 9;
+            int descriptionEnd = line.indexOf("/by") - 1;
+            String description = line.substring(descriptionStart, descriptionEnd);
+            int byStart = line.indexOf("/by") + 4;
+            int byEnd = line.length();
+            String by = line.substring(byStart, byEnd);
+            tasks[index] = new Deadline(description, by);
+            index++;
+            printAddTaskMessage(tasks[index - 1]);
+        }
+        catch (StringIndexOutOfBoundsException e){
+            System.out.println("\u2639 OOPS!!! The description of a deadline cannot be empty.");
+        }
+    }
+
+    public static void addEvent(String line){
+        try{
+            int descriptionStart = 6;
+            int descriptionEnd = line.indexOf("/at") - 1;
+            String description = line.substring(descriptionStart, descriptionEnd);
+            int atStart = line.indexOf("/at") + 4;
+            int atEnd = line.length();
+            String at = line.substring(atStart, atEnd);
+            tasks[index] = new Event(description, at);
+            index++;
+            printAddTaskMessage(tasks[index - 1]);
+        }
+        catch (StringIndexOutOfBoundsException e){
+            System.out.println("\u2639 OOPS!!! The description of an event cannot be empty.");
+        }
+    }
+
+    public static void markDone(String line){
+        try{
+            int itemNum = Character.getNumericValue(line.charAt(5));
+            tasks[itemNum - 1].setAsDone();
+            System.out.println("Nice! I've marked this task as done: ");
+            System.out.println(tasks[itemNum-1].toString());
+        }
+        catch (NullPointerException e){
+            System.out.println("\u2639 OOPS!!! Cannot find the task.");
+        }
+    }
+
+
     public static void request() {
         String line;
         Scanner in = new Scanner(System.in);
@@ -57,36 +118,15 @@ public class Duke {
             if (line.equals("list")) {
                 printList();
             } else if (line.startsWith("todo")) {
-                int descriptionStart = 5;
-                String description = line.substring(descriptionStart);
-                tasks[index] = new Todo(description);
-                index++;
-                printAddTaskMessage(tasks[index - 1]);
+                addTodo(line);
             } else if (line.startsWith("deadline")) {
-                int descriptionStart = 9;
-                int descriptionEnd = line.indexOf("/by") - 1;
-                String description = line.substring(descriptionStart, descriptionEnd);
-                int byStart = line.indexOf("/by") + 4;
-                String by = line.substring(byStart);
-                tasks[index] = new Deadline(description, by);
-                index++;
-                printAddTaskMessage(tasks[index - 1]);
+                addDeadline(line);
             } else if (line.startsWith("event")) {
-                int descriptionStart = 6;
-                int descriptionEnd = line.indexOf("/at") - 1;
-                String description = line.substring(descriptionStart, descriptionEnd);
-                int atStart = line.indexOf("/at") + 4;
-                String at = line.substring(atStart);
-                tasks[index] = new Event(description, at);
-                index++;
-                printAddTaskMessage(tasks[index - 1]);
+                addEvent(line);
             } else if (line.startsWith("done")) {
-                int itemNum = Integer.parseInt(line.substring(5));
-                tasks[itemNum - 1].setAsDone();
-                System.out.println("Nice! I've marked this task as done:");
-                System.out.println(tasks[itemNum-1].toString());
+                markDone(line);
             } else {
-                System.out.println("Invalid input");
+                System.out.println("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
             System.out.println("---------------------------------------------------------");
             line = in.nextLine();
