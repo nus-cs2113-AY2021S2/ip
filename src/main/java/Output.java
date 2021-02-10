@@ -19,4 +19,11 @@ public class Output {
     public static void printBye() {
         System.out.println("Bye. Hope to see you again soon!");
     }
+
+    public static void printEmptyCommand(String emptyCommand) {
+        System.out.println("OOPS!!! The description of a " + emptyCommand + " cannot be empty.");
+    }
+    public static void printWrongCommand() {
+        System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
+    }
 }

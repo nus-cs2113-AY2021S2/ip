@@ -22,19 +22,31 @@ public class Duke {
                     System.out.print(i + 1 + ".");
                     System.out.println(tasks.get(i));
                 }
-            } else if (userInput.trim().startsWith("done")) {
+            } else if (userInput.split(" ")[0].equals("done")) {
+                if(userInput.length() < 6) {
+                    Output.printEmptyCommand("done");
+                    continue;
+                }
                 int processedInput;
                 processedInput = Integer.parseInt(userInput.replaceAll("[^0-9]", "")) - 1;
                 tasks.get(processedInput).setDone();
                 System.out.println("Nice! I've marked this task as done: ");
                 System.out.println(tasks.get(processedInput));
-            } else if (userInput.startsWith("todo")) {
+            } else if (userInput.split(" ")[0].equals("todo")) {
+                if(userInput.length() < 6) {
+                    Output.printEmptyCommand("todo");
+                    continue;
+                }
                 System.out.println("Got it. I've added this task: ");
                 Task newTask = new Todo(userInput.substring(5));
                 tasks.add(newTask);
                 System.out.println("  " + newTask.toString());
                 System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-            } else if (userInput.startsWith("deadline")) {
+            } else if (userInput.split(" ")[0].equals("deadline")) {
+                if(userInput.length() < 10) {
+                    Output.printEmptyCommand("deadline");
+                    continue;
+                }
                 System.out.println("Got it. I've added this task: ");
                 String by = "";
                 String processedDeadlineInput;
@@ -52,7 +64,11 @@ public class Duke {
                 tasks.add(newTask);
                 System.out.println("  " + newTask.toString());
                 System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-            } else if (userInput.startsWith("event")) {
+            } else if (userInput.split(" ")[0].equals("event")) {
+                if(userInput.length() < 7) {
+                    Output.printEmptyCommand("event");
+                    continue;
+                }
                 System.out.println("Got it. I've added this task: ");
                 String at;
                 String processedEventInput;
@@ -70,6 +86,8 @@ public class Duke {
                 tasks.add(newTask);
                 System.out.println("  " + newTask.toString());
                 System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            } else {
+                Output.printWrongCommand();
             }
 
             Output.printBorder();
