@@ -13,9 +13,6 @@ public class Task {
     public String getTask(){
         return description;
     }
-    public String getStatusIcon(){
-        return (isDone ? "X":" ");
-    }
 
     @Override
     public String toString(){
