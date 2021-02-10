@@ -8,11 +8,17 @@ public class Event extends Task{
     }
 
     @Override
-    public String getTaskInfoFormat() {
+    public void printTaskInfo() {
         if(super.getTaskDone()){
-            return String.format(TASK_INFO_FORMAT,"X",taskName,duration);
+            System.out.println(String.format(TASK_INFO_FORMAT,"X",taskName,duration));
         } else {
-            return String.format(TASK_INFO_FORMAT," ",taskName,duration);
+            System.out.println(String.format(TASK_INFO_FORMAT," ",taskName,duration));
         }
+    }
+
+    @Override
+    public void newTaskOutput(){
+        System.out.print(LINE_SEPERATOR + "\n    Event added:\n      ");
+        this.printTaskInfo();
     }
 }

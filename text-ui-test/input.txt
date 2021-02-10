@@ -1,0 +1,12 @@
+todo read a book
+list
+deadline return a book /by Sunday 10am
+list
+done 1
+list
+event tutorial /at Feb 5 10am
+list
+done 2
+done 3
+list
+bye

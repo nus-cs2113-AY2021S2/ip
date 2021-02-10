@@ -6,11 +6,17 @@ public class ToDo extends Task{
     }
 
     @Override
-    public String getTaskInfoFormat() {
+    public void printTaskInfo() {
         if(super.getTaskDone()){
-                return String.format(TASK_INFO_FORMAT,"X",taskName);
+                System.out.println(String.format(TASK_INFO_FORMAT,"X",taskName));
         } else {
-                return String.format(TASK_INFO_FORMAT," ",taskName);
+                System.out.println(String.format(TASK_INFO_FORMAT," ",taskName));
         }
+    }
+
+    @Override
+    public void newTaskOutput(){
+        System.out.print(LINE_SEPERATOR + "\n    ToDo added:\n      ");
+        this.printTaskInfo();
     }
 }
