@@ -1,20 +1,22 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     static String sectionDivider = "____________________________________________________________";
-    public static void greetUser(){
+    private static void greetUser(){
         String greeting = "\t" + sectionDivider + "\n"
                 + "\tHello! I'm Duke. \n"
                 + "\tWhat can I do for you? \n"
                 + "\t" + sectionDivider;
         System.out.println(greeting);
     }
-    public static void signOff(){
+    private static void signOff(){
         String sign_off = "\t" + sectionDivider + "\n"
                 + "\tBye. Hope to see you again soon!\n"
                 + "\t" + sectionDivider;
         System.out.println(sign_off);
     }
+    private static String commandWords = "list" + "done" + "todo" + "deadline" + "event";
 
     static int numberOfTasks = 0;
     static Task tasks[] = new Task[100];
@@ -68,17 +70,29 @@ public class Duke {
         line = in.nextLine();
         while(line.toLowerCase().equals("bye") != true){
             System.out.println("\t" + sectionDivider);
-            if(line.equals("list")){
-                listTasks();
-            }else if (line.toLowerCase().contains("done")){
-                markTaskAsDone(line);
-            }else{
-                addTask(line);
+            try {
+                handleInput(line);
+            } catch (IllegalCommandWordException e){
+                System.out.print("\tInvalid input! Please start with a valid command word!\n");
+            } finally {
+                System.out.println("\t" + sectionDivider);
+                line = in.nextLine();
             }
-            System.out.println("\t" + sectionDivider);
-            line = in.nextLine();
         }
-
         signOff();
+    }
+
+    private static void handleInput(String line) throws IllegalCommandWordException {
+        line = line.trim();
+        String[] wordsEntered = line.split(" ");
+        if (!commandWords.contains(wordsEntered[0])) {
+            throw new IllegalCommandWordException();
+        } else if (line.equals("list")){
+            listTasks();
+        } else if (line.toLowerCase().contains("done")){
+            markTaskAsDone(line);
+        } else {
+            addTask(line);
+        }
     }
 }
