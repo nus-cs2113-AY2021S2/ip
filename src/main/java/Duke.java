@@ -6,14 +6,12 @@ import Duke.Task;
 public class Duke {
     private static final Scanner SCANNER = new Scanner(System.in);
     private static final Task[] tasksList = new Task[100];
-
     private static int tasksCount = 0;
     public static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-
     public static void main(String[] args) {
         sendWelcomeMessage();
         printLine();
@@ -91,7 +89,6 @@ public class Duke {
         Task selectedTask = tasksList[tasksCount];
         tasksCount++;
         notifyUser(inputDetails, selectedTask);
-
     }
 
     private static void notifyUser(String inputDetails, Task selectedTask) {
@@ -138,5 +135,4 @@ public class Duke {
             System.out.println(i + ". " + selectedTask.getTaskType() + selectedTask.getStatusIcon() + " " + selectedTask.getDescription());
         }
     }
-
 }
