@@ -1,3 +1,5 @@
+package duke.task;
+
 public class Todo extends Task {
     /**
      * Parses the content of a Task object from user input and return it in an array.
