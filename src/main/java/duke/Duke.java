@@ -56,29 +56,29 @@ public class Duke {
         case "deadline":
             try {
                 addDeadlineToList(prompt.substring(8));
-            } catch (IllegalDeadlinePrompt e) {
-                System.out.println(DIVLINE + "\t:( OOPS!!! You are not specifying a valid deadline with time.");
+            } catch (DukeException e) {
+                System.out.println(DIVLINE + e.getIllegalDeadlineMessage());
                 System.out.print(DIVLINE);
             }
             break;
         case "event":
             try {
                 addEventToList(prompt.substring(5));
-            } catch (IllegalEventPrompt e) {
-                System.out.println(DIVLINE + "\t:( OOPS!!! You are not specifying a valid event with venue.");
+            } catch (DukeException e) {
+                System.out.println(DIVLINE + e.getIllegalEventMessage());
                 System.out.print(DIVLINE);
             }
             break;
         case "todo":
             try {
                 addTodoToList(prompt.substring(4));
-            } catch (IllegalTodoPrompt e) {
-                System.out.println(DIVLINE + "\t:( OOPS!!! The description of a todo cannot be empty.");
+            } catch (DukeException e) {
+                System.out.println(DIVLINE + e.getIllegalTodoMessage());
                 System.out.print(DIVLINE);
             }
             break;
         default:
-            throw new DukeException();
+            throw new DukeException("Illegal keyword.");
         }
          return;
     }
@@ -87,7 +87,7 @@ public class Duke {
      * */
     private static void displayList() throws DukeException {
         if (taskCount == 0) {
-            throw new DukeException();
+            throw new DukeException("Empty list. Nothing to be displayed.");
         }
         System.out.print(DIVLINE);
         System.out.println("\tHere are the tasks in your list:");
@@ -97,45 +97,45 @@ public class Duke {
         System.out.print(DIVLINE);
     }
 
-    private static void addDeadlineToList(String description) throws IllegalDeadlinePrompt {
+    private static void addDeadlineToList(String description) throws DukeException {
         if (description.startsWith(" ")){
             String ddlDscp = description.substring(1);
             int splitPoint = ddlDscp.indexOf("/by");
             if (splitPoint==-1){
-                throw new IllegalDeadlinePrompt();
+                throw new DukeException("Illegal Deadline prompt detected.");
             }
             tasks[taskCount] = new Deadline(ddlDscp.substring(0, splitPoint - 1),
                     ddlDscp.substring(splitPoint + 4));
             printAddSuccessMessage(tasks[taskCount]);
             taskCount++;
         } else {
-            throw new IllegalDeadlinePrompt();
+            throw new DukeException("Illegal Deadline prompt detected.");
         }
     }
 
-    private static void addEventToList(String description) throws IllegalEventPrompt {
+    private static void addEventToList(String description) throws DukeException {
         if (description.startsWith(" ")){
             String evtDscp = description.substring(1);
             int splitPoint = evtDscp.indexOf("/at");
             if (splitPoint==-1){
-                throw new IllegalEventPrompt();
+                throw new DukeException("Illegal Event prompt detected.");
             }
             tasks[taskCount] = new Event(evtDscp.substring(0, splitPoint - 1),
                     evtDscp.substring(splitPoint + 4));
             printAddSuccessMessage(tasks[taskCount]);
             taskCount++;
         } else {
-            throw new IllegalEventPrompt();
+            throw new DukeException("Illegal Event prompt detected.");
         }
     }
 
-    private static void addTodoToList(String description) throws IllegalTodoPrompt {
+    private static void addTodoToList(String description) throws DukeException {
         if (description.startsWith(" ")) {
             tasks[taskCount] = new Todo(description.substring(1));
             printAddSuccessMessage(tasks[taskCount]);
             taskCount++;
         } else {
-            throw new IllegalTodoPrompt();
+            throw new DukeException("Illegal Todo Prompt detected.");
         }
     }
 
@@ -149,7 +149,7 @@ public class Duke {
 
     private static void completeTask(int taskIndex) throws DukeException {
         if (tasks[taskIndex].getIsDone()){
-            throw new DukeException();
+            throw new DukeException("Task has already been marked done.");
         }
         tasks[taskIndex].markAsDone();
         System.out.print(DIVLINE);
