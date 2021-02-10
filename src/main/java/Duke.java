@@ -1,4 +1,8 @@
 import java.util.Scanner;
+import tasks.Task;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.ToDo;
 
 public class Duke {
     public static void printList(Task[] Tasks, Integer totalTasks){
@@ -91,7 +95,7 @@ public class Duke {
             }
             else if(isDone) {
                 int taskNumber = Integer.parseInt(words[1]) - 1;
-                Tasks[taskNumber].isDone = true;
+                Tasks[taskNumber].taskComplete();
                 printDashLine();
                 System.out.println("Nice! I've marked this task as done:\n" + " " + Tasks[taskNumber].getStatus() + " " + Tasks[taskNumber].getDescription());
                 printDashLine();

@@ -1,3 +1,5 @@
+package tasks;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -21,6 +23,10 @@ public class Task {
 
     public String toString() {
         return getStatus() + " " + getDescription();
+    }
+
+    public void taskComplete() {
+        isDone = true;
     }
 
 
