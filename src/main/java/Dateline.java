@@ -1,5 +1,5 @@
-class Dateline extends Task{
-    private String by;
+class Dateline extends Task {
+    protected String by;
 
     public Dateline(String description, String byInput) {
         super(description);
@@ -15,5 +15,13 @@ class Dateline extends Task{
     @Override
     public String getType() {
         return "D";
+    }
+    @Override
+    public void print(){
+        if (this.isDone) {
+            System.out.println("[D][\u2713] " + description + " (by: " + by + ")");
+        } else {
+            System.out.println("[D][\u2718] " + description + " (by: " + by + ")");
+        }
     }
 }

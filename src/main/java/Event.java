@@ -1,4 +1,4 @@
-public class Event extends Task{
+class Event extends Task {
     private String at;
 
     public Event(String description, String atInput) {
@@ -14,5 +14,14 @@ public class Event extends Task{
     @Override
     public String getType() {
         return "E";
+    }
+
+    @Override
+    public void print(){
+        if (this.isDone) {
+            System.out.println("[E][\u2713] " + description + " (at: " + at + ")" );
+        } else {
+            System.out.println("[E][\u2718] " + description + " (at: " + at + ")" );
+        }
     }
 }
