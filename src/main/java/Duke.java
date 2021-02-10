@@ -92,11 +92,6 @@ public class Duke {
                 String taskNo = input.substring(dividerPosition + 1);
                 try{
                     int taskIndex = Integer.parseInt(taskNo) - 1;
-                    if (dividerPosition == -1 || taskNo.equals("") || !input.contains(" ")) {
-                        System.out.print(line);
-                        System.out.print("I don't quite understand." +  "\n" + "Please enter the command again." + "\n");
-                        System.out.print(line);
-                    }
                     if (taskIndex >=tasks.size()) {
                         System.out.print(line);
                         System.out.print("You have no such task." + "\n");
@@ -110,7 +105,7 @@ public class Duke {
                     }
                 } catch (NumberFormatException e) {
                     System.out.print(line);
-                    System.out.print("I don't quite understand." +  "\n" + "Please enter the command again." + "\n");
+                    System.out.print("I don't quite understand." +  "\n" + "Please enter a number after done command." + "\n");
                     System.out.print(line);
                 }
             } else {
