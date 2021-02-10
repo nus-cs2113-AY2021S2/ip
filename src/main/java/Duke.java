@@ -19,6 +19,8 @@ public class Duke {
     public static void printDashLine(){
         System.out.println("____________________________________________________________");
     }
+
+    
     public static void main(String[] args) {
         Integer totalTasks = 0;
         Task[] Tasks =  new Task[100];
