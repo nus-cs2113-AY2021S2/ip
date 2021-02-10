@@ -25,7 +25,7 @@ public class Duke {
      * Throws an exception if keyword is invalid.
      * @param   prompt  is the raw input string
      * */
-    public static void processPrompt(String prompt) throws IllegalKeywordException {
+    public static void processPrompt(String prompt) throws DukeException {
         String keyword = prompt.contains(" ") ? prompt.split(" ")[0] : prompt;
         switch (keyword) {
         case "bye":
@@ -34,8 +34,8 @@ public class Duke {
         case "list":
             try {
                 displayList();
-            } catch (EmptyListException e) {
-                System.out.println(DIVLINE + "\t:( OOPS!!! You haven't noted down anything yet.");
+            } catch (DukeException e) {
+                System.out.println(DIVLINE + e.getEmptyListMessage());
                 System.out.print(DIVLINE);
             }
             break;
@@ -46,8 +46,8 @@ public class Duke {
             } catch (NumberFormatException e) {
                 System.out.println(DIVLINE + "\t:( OOPS!!! You are not specifying a valid task number.");
                 System.out.print(DIVLINE);
-            } catch (TaskAlreadyDoneException e) {
-                System.out.println(DIVLINE + "\tThe task is already done. :)");
+            } catch (DukeException e) {
+                System.out.println(DIVLINE + e.getTaskAlreadyDoneMessage());
                 System.out.print(DIVLINE);
             }
             break;
@@ -76,16 +76,16 @@ public class Duke {
             }
             break;
         default:
-            throw new IllegalKeywordException();
+            throw new DukeException();
         }
          return;
     }
 
     /**
      * */
-    private static void displayList() throws EmptyListException {
+    private static void displayList() throws DukeException {
         if (taskCount == 0) {
-            throw new EmptyListException();
+            throw new DukeException();
         }
         System.out.print(DIVLINE);
         System.out.println("\tHere are the tasks in your list:");
@@ -135,9 +135,9 @@ public class Duke {
         System.out.print(DIVLINE);
     }
 
-    private static void completeTask(int taskIndex) throws TaskAlreadyDoneException {
+    private static void completeTask(int taskIndex) throws DukeException {
         if (tasks[taskIndex].getIsDone()){
-            throw new TaskAlreadyDoneException();
+            throw new DukeException();
         }
         tasks[taskIndex].markAsDone();
         System.out.print(DIVLINE);
@@ -153,8 +153,8 @@ public class Duke {
             try{
                 String prompt = in.nextLine();
                 processPrompt(prompt);
-            } catch (IllegalKeywordException e) {
-                System.out.println(DIVLINE + "\t:( OOPS!!! I'm sorry, but I don't know what that means.");
+            } catch (DukeException e) {
+                System.out.println(DIVLINE + e.getIllegalKeywordMessage());
                 System.out.print(DIVLINE);
             }
         }
