@@ -121,7 +121,6 @@ public class Duke {
             input = userInput.nextLine();
         }
         System.out.println(exit);
-
-
+        
     }
 }
