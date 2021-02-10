@@ -39,7 +39,8 @@ public class Duke {
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        Tasks[] inputTasks = new Tasks[100]; // will act like pointers so you have to create different objects all the time.
+        final int max = 100;
+        Tasks[] inputTasks = new Tasks[max]; // will act like pointers so you have to create different objects all the time.
 
         int counter = 0;
         displayInitialMessage();
