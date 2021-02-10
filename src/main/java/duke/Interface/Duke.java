@@ -1,3 +1,10 @@
+package duke.Interface;
+
+import duke.Controller.Deadline;
+import duke.Controller.Event;
+import duke.Controller.Task;
+import duke.Controller.toDo;
+
 import java.util.Scanner;
 
 public class Duke {

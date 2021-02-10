@@ -1,3 +1,5 @@
+package duke.Controller;
+
 public class Event extends Task {
     protected String atDate;
 
