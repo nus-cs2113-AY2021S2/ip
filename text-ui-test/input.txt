@@ -6,7 +6,7 @@ done 1
 todo read book
 done 3
 list
-deadline return book /by June 6th
+deadline return book /by by: June 6th
 done 500
 list
 bye
