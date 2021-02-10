@@ -62,17 +62,31 @@ public class Duke {
         return inputArray;
     }
 
-    public static void addTask(String input) {
+    public static void addTask(String input) throws DukeException {
         String[] inputArray;
         if (input.contains("deadline")) {
-            inputArray = extractDetailsFromInput(input, "deadline");
+            try {
+                inputArray = extractDetailsFromInput(input, "deadline");
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new DukeException(TaskType.DEADLINE);
+            }
             tasks[Task.totalTasks] = new Deadline(inputArray[0], inputArray[1]);
         } else if (input.contains("event")) {
-            inputArray = extractDetailsFromInput(input, "event");
+            try {
+                inputArray = extractDetailsFromInput(input, "event");
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new DukeException(TaskType.EVENT);
+            }
             tasks[Task.totalTasks] = new Event(inputArray[0], inputArray[1]);
         } else if (input.contains("todo")){
-            inputArray = extractDetailsFromInput(input, "todo");
+            try {
+                inputArray = extractDetailsFromInput(input, "todo");
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new DukeException(TaskType.TODO);
+            }
             tasks[Task.totalTasks] = new Todo(inputArray[0]);
+        } else {
+            throw new DukeException(TaskType.INVALID);
         }
 
         System.out.println("I have added this task:" );
@@ -97,7 +111,24 @@ public class Duke {
             } else if (input.contains("done")) {
                 markTasksAsDone(input);
             } else {
-                addTask(input);
+                try {
+                    addTask(input);
+                } catch (DukeException e) {
+                    TaskType taskType = e.getTaskType();
+                    switch (taskType) {
+                    case DEADLINE:
+                        System.out.println("Please input deadline tasks in the correct format. (e.g deadline <task description> /by <deadline>)");
+                        break;
+                    case EVENT:
+                        System.out.println("Please input event tasks in the correct format. (e.g. event <task description> /at <timing>)");
+                        break;
+                    case TODO:
+                        System.out.println("Please input todo tasks in the correct format. (e.g. todo <task description>)");
+                        break;
+                    case INVALID:
+                        System.out.println("Please input a valid command! (e.g. deadline..., done..., list)");
+                    }
+                }
             }
             input = sc.nextLine();
         }
