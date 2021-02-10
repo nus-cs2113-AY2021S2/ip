@@ -5,7 +5,7 @@ public class Duke {
     public static void main(String[] args) {
         ArrayList<Task> inputs = new ArrayList<>();
 
-        String LOGO = "\n" +
+        final String LOGO = "\n" +
                 " .----------------.  .----------------. \n" +
                 "| .--------------. || .--------------. |\n" +
                 "| |    ______    | || |        __    | |\n" +
@@ -17,12 +17,12 @@ public class Duke {
                 "| |              | || |              | |\n" +
                 "| '--------------' || '--------------' |\n" +
                 " '----------------'  '----------------' ";
-        String DECO_LINE = "____________________________________________________________";
-        String HELLO_MESSAGE = " Hello! I'm 9%.";
-        String ASK_MESSAGE = " What can I do for you?";
-        String BYE_MESSAGE = " Bye. Hope to see you again soon!";
-        String ERROR_MESSAGE = " Sorry, I can't recognize your input.";
-        String ADD_TASK = " Got it. I've added this task:";
+        final String DECO_LINE = "____________________________________________________________";
+        final String HELLO_MESSAGE = " Hello! I'm 9%.";
+        final String ASK_MESSAGE = " What can I do for you? (todo/deadline/event)";
+        final String BYE_MESSAGE = " Bye. Hope to see you again soon!";
+        final String ERROR_MESSAGE = " Sorry, I can't recognize your input.";
+        final String ADD_TASK = " Got it. I've added this task:";
 
         System.out.println(LOGO);
         System.out.println(DECO_LINE);
@@ -47,17 +47,17 @@ public class Duke {
                     int ind = Integer.parseInt(input.split(" ")[1]) - 1;
                     if (ind < inputs.size() && ind >= 0) {
                         if (inputs.get(ind).isDone) {
-                            System.out.println("Task is already marked done!");
+                            System.out.println(" Task is already marked done!");
                         } else {
                             inputs.get(ind).markAsDone();
-                            System.out.println(inputs.get(ind).toString());
+                            System.out.println(" " + inputs.get(ind).toString());
                         }
                     } else {
-                        System.out.println("Index is out of boundary!");
+                        System.out.println(" Index is out of boundary!");
                     }
                 } catch (NumberFormatException nfe) {
                     System.out.println(DECO_LINE);
-                    System.out.println("Format is wrong!");
+                    System.out.println(" Format is wrong!");
                     System.out.println(DECO_LINE);
                 }
                 System.out.println(DECO_LINE);
