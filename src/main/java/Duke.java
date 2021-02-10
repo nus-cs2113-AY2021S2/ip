@@ -93,7 +93,7 @@ public class Duke {
      * @param sc       Java Scanner to get user input.
      * @param taskList The list of Task objects.
      */
-    private static void loopOperation(Scanner sc, TaskList taskList) {
+    private static void operateMainLoop(Scanner sc, TaskList taskList) {
         String userInput;
         while (true) {
             userInput = sc.nextLine();
@@ -118,6 +118,7 @@ public class Duke {
                 handleDoneTask(taskList, userInput);
                 break;
             case "exit":
+                //FALL-THROUGH
             case "bye":
                 printExitGreetings();
                 return;
@@ -206,14 +207,11 @@ public class Duke {
      */
     private static void addEventTaskToList(TaskList taskList, String userInput) {
         try {
-            if (Event.isCommandValid(userInput)) {
-                String[] parseResult = Event.parseTaskContent(userInput);
-                String taskContent = parseResult[0];
-                String taskPeriod = parseResult[1];
-                taskList.addEventTask(taskContent, taskPeriod);
-            } else {
-                throw new Exception("Invalid event command. Check 'help'.\n");
-            }
+            Event.isCommandValid(userInput);
+            String[] parseResult = Event.parseTaskContent(userInput);
+            String taskContent = parseResult[0];
+            String taskPeriod = parseResult[1];
+            taskList.addEventTask(taskContent, taskPeriod);
         } catch (Exception e) {
             System.out.println(DIVIDER + e.getMessage() + DIVIDER_LINE_ONLY);
         }
@@ -227,14 +225,11 @@ public class Duke {
      */
     private static void addDeadlineTaskToList(TaskList taskList, String userInput) {
         try {
-            if (Deadline.isCommandValid(userInput)) {
-                String[] parseResult = Deadline.parseTaskContent(userInput);
-                String taskContent = parseResult[0];
-                String taskDeadline = parseResult[1];
-                taskList.addDeadlineTask(taskContent, taskDeadline);
-            } else {
-                throw new Exception("Invalid deadline command. Check 'help'.\n");
-            }
+            Deadline.isCommandValid(userInput);
+            String[] parseResult = Deadline.parseTaskContent(userInput);
+            String taskContent = parseResult[0];
+            String taskDeadline = parseResult[1];
+            taskList.addDeadlineTask(taskContent, taskDeadline);
         } catch (Exception e) {
             System.out.println(DIVIDER + e.getMessage() + DIVIDER_LINE_ONLY);
         }
@@ -264,6 +259,6 @@ public class Duke {
         printGreetings();
         Scanner sc = new Scanner(System.in);
         TaskList taskList = new TaskList();
-        loopOperation(sc, taskList);
+        operateMainLoop(sc, taskList);
     }
 }

@@ -7,11 +7,13 @@ public class Deadline extends Task {
         this.deadline = deadline;
     }
 
-    public static boolean isCommandValid(String userInput) {
-        return userInput.contains("/by");
+    public static void isCommandValid(String userInput) throws Exception {
+        if (!userInput.contains("/by")) {
+            throw new Exception("Invalid deadline command. Check 'help'.\n");
+        }
     }
 
-    public static String[] parseTaskContent(String userInput) {
+    public static String[] parseTaskContent(String userInput) throws Exception {
         String[] words = userInput.split(" ");
         int byIndex = 0;
         for (int i = 0; i < words.length; i++) {
@@ -24,7 +26,7 @@ public class Deadline extends Task {
         return parseContentAndTime(words, byIndex);
     }
 
-    public static String[] parseContentAndTime(String[] words, int byIndex) {
+    public static String[] parseContentAndTime(String[] words, int byIndex) throws Exception {
         String content = getTaskContentString(words, byIndex);
         String deadline = getTaskDeadlineString(words, byIndex);
         String[] parseResult = new String[2];
@@ -33,22 +35,30 @@ public class Deadline extends Task {
         return parseResult;
     }
 
-    private static String getTaskDeadlineString(String[] words, int byIndex) {
+    private static String getTaskDeadlineString(String[] words, int byIndex) throws Exception {
         StringBuilder deadlineBuilder = new StringBuilder();
         for (int k = (byIndex + 1); k < words.length; k++) {
             String deadlineWord = words[k] + " ";
             deadlineBuilder.append(deadlineWord);
         }
-        return deadlineBuilder.toString().trim();
+        String deadline = deadlineBuilder.toString().trim();
+        if (deadline.length() < 1) {
+            throw new Exception("Time limit must be input! Check 'help'.\n");
+        }
+        return deadline;
     }
 
-    private static String getTaskContentString(String[] words, int byIndex) {
+    private static String getTaskContentString(String[] words, int byIndex) throws Exception {
         StringBuilder contentBuilder = new StringBuilder();
         for (int j = 1; j < byIndex; j++) {
             String contentWord = words[j] + " ";
             contentBuilder.append(contentWord);
         }
-        return contentBuilder.toString().trim();
+        String contentStr = contentBuilder.toString().trim();
+        if (contentStr.length() < 1) {
+            throw new Exception("Task content must be input! Check 'help'.\n");
+        }
+        return contentStr;
     }
 
 

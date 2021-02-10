@@ -14,11 +14,13 @@ public class Event extends Task {
         this.period = period;
     }
 
-    public static boolean isCommandValid(String userInput) {
-        return userInput.contains("/at");
+    public static void isCommandValid(String userInput) throws Exception {
+        if (!userInput.contains("/at")) {
+            throw new Exception("Invalid event command. Check 'help'.\n");
+        }
     }
 
-    public static String[] parseTaskContent(String userInput) {
+    public static String[] parseTaskContent(String userInput) throws Exception {
         String[] words = userInput.split(" ");
         int atIndex = 0;
         for (int i = 0; i < words.length; i++) {

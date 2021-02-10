@@ -1,13 +1,11 @@
 public class Todo extends Task {
-    /**
-     * Parses the content of a Task object from user input and return it in an array.
-     *
-     * @param userInput User's keyboard input in String.
-     * @return An array that stores the content of the to-do Task.
-     */
-    public static String[] parseTaskContent(String userInput) {
+    public static String[] parseTaskContent(String userInput) throws Exception {
         String[] parseResult = new String[1];
-        parseResult[0] = userInput.substring(5).trim();
+        String contentStr = userInput.substring(5).trim();
+        if (contentStr.length() < 1) {
+            throw new Exception("Invalid todo command! Check 'help'.\n");
+        }
+        parseResult[0] = contentStr;
         return parseResult;
     }
 
