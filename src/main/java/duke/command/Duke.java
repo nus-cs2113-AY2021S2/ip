@@ -1,3 +1,6 @@
+package duke.command;
+
+import duke.task.*;
 import java.util.*;
 
 public class Duke {
@@ -55,6 +58,7 @@ public class Duke {
             } catch (DukeExceptions e) {
                 System.out.println("Invalid instructions detected in the following line: " + line);
                 System.out.println("Clarification on the use of this app can be found ...");
+                System.out.println(lineSpacing);
             }
         }
     }
@@ -90,8 +94,10 @@ public class Duke {
                 }
             } catch (DukeExceptions e) {
                 System.out.println("\tTask number " + index + " does not exist");
+                System.out.println(lineSpacing);
             } catch (NumberFormatException e) {
                 System.out.println("\tInvalid Expression! Must provide task numbers (" + index + ")");
+                System.out.println(lineSpacing);
             }
         }
         System.out.println(lineSpacing);

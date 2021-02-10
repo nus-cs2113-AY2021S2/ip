@@ -1,7 +1,9 @@
-public class Deadline extends Task {
+package duke.task;
+
+public class Event extends Task {
     protected String timeConstraint;
 
-    public Deadline(String taskName, String taskType, String timeConstraint) {
+    public Event(String taskName, String taskType, String timeConstraint) {
         super(taskName, taskType);
         this.timeConstraint = timeConstraint;
     }
@@ -14,11 +16,11 @@ public class Deadline extends Task {
     public void printTask() {
         String output;
         if (isCompleted) {
-            output = "[D][X] " + taskName;
+            output = "[E][X] " + taskName;
         } else {
-            output = "[D][ ] " + taskName;
+            output = "[E][ ] " + taskName;
         }
-        output += " (by: " + timeConstraint + ")";
+        output += " (at: " + timeConstraint + ")";
         System.out.println(output);
     }
 }
