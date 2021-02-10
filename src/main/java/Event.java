@@ -10,12 +10,13 @@ public class Event extends Task {
 
     public void setTimeConstraint(String timeConstraint) { this.timeConstraint = timeConstraint; }
 
+    @Override
     public void printTask() {
         String output;
         if (isCompleted) {
-            output = "[D][X] " + taskName;
+            output = "[E][X] " + taskName;
         } else {
-            output = "[D][ ] " + taskName;
+            output = "[E][ ] " + taskName;
         }
         output += " (at: " + timeConstraint + ")";
         System.out.println(output);
