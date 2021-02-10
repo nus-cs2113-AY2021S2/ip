@@ -6,6 +6,7 @@ public class Duke {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         welcomeMessage();
+        String[] commands = {"bye","deadline","todo","event","done","list"};
         boolean isOn = true;
         int numOfCompletedTasks = 0;
         int numOfTasks = 0;
@@ -19,19 +20,22 @@ public class Duke {
                 System.out.println(" ");
                 System.out.println("    --------------------------------------------------------------------------------");
                 isOn = false;
-            }
-            else if(words[0].equals("todo")){
+            } else if(words[0].equals("todo")){
                 String description = "";
                 int wordsCount = words.length;
+                if(words.length==1){
+                    System.out.println("    --------------------------------------------------------------------------------");
+                    System.out.println("    OOPS!! The description of a todo cannot be empty.");
+                    System.out.println("    --------------------------------------------------------------------------------");
+                    continue;
+                }
                 for(String word:words){
                     wordsCount--;
                     if(word.equals("todo")){
                         continue;
-                    }
-                    else if(wordsCount==0){
+                    } else if(wordsCount==0){
                         description = description + word;
-                    }
-                    else{
+                    } else{
                         description = description + word + " ";
                     }
                 }
@@ -60,11 +64,9 @@ public class Duke {
                     }
                     if(byFlag && wordsCount==0){
                         by = by + word;
-                    }
-                    else if(byFlag){
+                    } else if(byFlag){
                         by = by + word + " ";
-                    }
-                    else{
+                    } else{
                         description = description + word + " ";
                     }
                 }
@@ -76,8 +78,7 @@ public class Duke {
                 System.out.println("    Now you have " + n +" tasks in the list.");
                 System.out.println(" ");
                 System.out.println("    --------------------------------------------------------------------------------");
-            }
-            else if(words[0].equals("event")){
+            } else if(words[0].equals("event")){
                 String description = "";
                 String at = "";
                 boolean atFlag = false;
@@ -93,11 +94,9 @@ public class Duke {
                     }
                     if(atFlag && wordsCount==0){
                         at = at + word;
-                    }
-                    else if(atFlag){
+                    } else if(atFlag){
                         at = at + word + " ";
-                    }
-                    else{
+                    } else{
                         description = description + word + " ";
                     }
                 }
@@ -109,8 +108,7 @@ public class Duke {
                 System.out.println("    Now you have " + n +" tasks in the list.");
                 System.out.println(" ");
                 System.out.println("    --------------------------------------------------------------------------------");
-            }
-            else if(words[0].equals("done")){
+            } else if(words[0].equals("done")){
                 int taskNum = Integer.parseInt(words[1])-1;
                 tasks[taskNum].markAsDone();
                 System.out.println("    --------------------------------------------------------------------------------");
@@ -118,8 +116,7 @@ public class Duke {
                 System.out.println("      " + tasks[taskNum]);
                 System.out.println(" ");
                 System.out.println("    --------------------------------------------------------------------------------");
-            }
-            else if(line.equals("list")){
+            } else if(line.equals("list")){
                 System.out.println("    --------------------------------------------------------------------------------");
                 System.out.println("    Here are the tasks in your list:");
                 for(int i=0;i<n;i++){
@@ -127,13 +124,9 @@ public class Duke {
                 }
                 System.out.println(" ");
                 System.out.println("    --------------------------------------------------------------------------------");
-            }
-            else {
-                tasks[n] = new Task(line);
-                n++;
+            } else {
                 System.out.println("    --------------------------------------------------------------------------------");
-                System.out.println("    added: " + line);
-                System.out.println(" ");
+                System.out.println("    OOPS!! I'm sorry, but I don't know what that means");
                 System.out.println("    --------------------------------------------------------------------------------");
             }
         }
