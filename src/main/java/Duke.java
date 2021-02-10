@@ -1,3 +1,10 @@
+import duke.exception.DukeException;
+import duke.exception.TaskType;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -29,7 +36,7 @@ public class Duke {
                 if (completedIndex > 0 && completedIndex <= Task.totalTasks){
                     tasks[completedIndex - 1].markAsDone();
                 } else {
-                    System.out.printf("Task %d does not exist! Enter 'list' to view tasklist :)\n", completedIndex);
+                    System.out.printf("duke.task.Task %d does not exist! Enter 'list' to view tasklist :)\n", completedIndex);
                 }
             }
         }
