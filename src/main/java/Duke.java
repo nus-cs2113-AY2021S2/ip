@@ -1,4 +1,6 @@
+import java.util.EmptyStackException;
 import java.util.Scanner;
+
 
 
 public class Duke {
@@ -42,47 +44,48 @@ public class Duke {
         int counter = 0;
         displayInitialMessage();
         String input = in.nextLine();
-        while(!input.equals("bye")){
-            if(input.equals("list")) {
-                ListCommand command = new ListCommand(inputTasks, counter);
-                command.printList();
-            }
-            else if(input.split(" ")[0].equals("done")){
-                int num = Integer.parseInt(input.split(" ")[1]);
-                DoneCommand command = new DoneCommand(inputTasks, num);
-                command.markDone();
-            }
-            else if(input.split(" ")[0].equals("todo")){
-                AddCommand command = new AddCommand(inputTasks, input, counter, 1);
-                inputTasks = command.addTask();
-                counter++;
+        try {
+            while (!input.equals("bye")) {
+                if (input.equals("list")) {
+                    ListCommand command = new ListCommand(inputTasks, counter);
+                    command.printList();
+                } else if (input.split(" ")[0].equals("done")) {
+                    int num = Integer.parseInt(input.split(" ")[1]);
+                    DoneCommand command = new DoneCommand(inputTasks, num);
+                    command.markDone();
+                } else if (input.split(" ")[0].equals("todo")) {
+                    AddCommand command = new AddCommand(inputTasks, input, counter, 1);
+                    inputTasks = command.addTask();
+                    counter++;
 
-            }
-            else if(input.split(" ")[0].equals("deadline")){
-                AddCommand command = new AddCommand(inputTasks, input, counter, 0);
-                inputTasks = command.addTask();
-                counter++;
+                } else if (input.split(" ")[0].equals("deadline")) {
+                    AddCommand command = new AddCommand(inputTasks, input, counter, 0);
+                    inputTasks = command.addTask();
+                    counter++;
 
-            }
-            else if(input.split(" ")[0].equals("event")){
-                AddCommand command = new AddCommand(inputTasks, input, counter, 2);
-                inputTasks = command.addTask();
-                counter++;
+                } else if (input.split(" ")[0].equals("event")) {
+                    AddCommand command = new AddCommand(inputTasks, input, counter, 2);
+                    inputTasks = command.addTask();
+                    counter++;
+                }
+                else {
+                    throw new EmptyStackException();
+                }
 
+                input = in.nextLine();
             }
-            else {
-                Tasks temp = new Tasks(input);
-                inputTasks[counter]=temp;
-                displayLine();
-                addedMessage();
-                System.out.println(input);
-                counter++;
-                displayCount(counter);
-                displayLine();
-            }
-            input = in.nextLine();
+
+            displayGoodByeMessage();
         }
-        displayGoodByeMessage();
-
+        catch (StringIndexOutOfBoundsException e ){
+            displayLine();
+            System.out.println("☹ OOPS!!! The description of the command cannot be empty.");
+            displayLine();
+        }
+        catch (EmptyStackException e){
+            displayLine();
+            System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            displayLine();
+        }
     }
 }
