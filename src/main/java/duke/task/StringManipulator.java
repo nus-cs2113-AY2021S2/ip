@@ -25,6 +25,12 @@ public class StringManipulator {
     public static String getStringAfterWhiteSpaceAndBeforeSlash(String input){
         int firstWhiteSpaceIndex = input.indexOf(" ");
         int firstSlashIndex = input.indexOf("/");
+        if (firstWhiteSpaceIndex == -1) {
+            return input.substring(input.length());
+        }
+        if (firstSlashIndex == -1) {
+            return input.substring(firstWhiteSpaceIndex+1, input.length());
+        }
         return input.substring(firstWhiteSpaceIndex+1, firstSlashIndex);
     }
 

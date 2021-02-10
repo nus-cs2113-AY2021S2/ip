@@ -46,15 +46,21 @@ public class TaskManager {
             }
             break;
         case DEADLINE_COMMAND:
-            String dueDate = StringManipulator.getStringAfterSlash(input);
-            String taskDescription = StringManipulator.getStringAfterWhiteSpaceAndBeforeSlash(input);
-            Deadline d = new Deadline(taskDescription,dueDate);
-            tasksObjectsArray[Task.getTaskCount()-1] = d;
-            printMessageAfterTaskIsAdded(d);
+            try {
+                String dueDate = StringManipulator.getStringAfterSlash(input);
+                String taskDescription = StringManipulator.getStringAfterWhiteSpaceAndBeforeSlash(input);
+                Deadline d = new Deadline(taskDescription,dueDate);
+                d.checkIfDeadlineDescriptionExists(taskDescription);
+                tasksObjectsArray[Task.getTaskCount()-1] = d;
+                printMessageAfterTaskIsAdded(d);
+            } catch (TaskDescriptionMissingException e) {
+                System.out.println(e.getMessage());
+                MainUI.printDivider();
+            }
             break;
         case EVENT_COMMAND:
             String eventPeriod = StringManipulator.getStringAfterSlash(input);
-            taskDescription = StringManipulator.getStringAfterWhiteSpaceAndBeforeSlash(input);
+            String taskDescription = StringManipulator.getStringAfterWhiteSpaceAndBeforeSlash(input);
             Event e = new Event(taskDescription,eventPeriod);
             tasksObjectsArray[Task.getTaskCount()-1] = e;
             printMessageAfterTaskIsAdded(e);

@@ -21,6 +21,14 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    public void checkIfDeadlineDescriptionExists(String input) throws TaskDescriptionMissingException {
+        if (input.isBlank()) {
+            Task.decreaseTaskCount();
+            throw new TaskDescriptionMissingException();
+        }
+    }
+
+
     @Override
     public String toString() {
         return DEADLINE_LABEL + super.toString() + "(by:" + by + ")";
