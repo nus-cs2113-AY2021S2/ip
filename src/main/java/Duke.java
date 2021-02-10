@@ -1,9 +1,59 @@
 import java.util.Scanner;
 
 public class Duke {
+    /**
+     * Command line output constants
+     * */
+    final static String DIVLINE = "\t__________________________________________________________________\n";
+    final static String GREETINGS = "\tHello! I'm Ayanga, your personal task manager.\n" +
+            "\tWhat can I note down for you?\n" +
+            "\tWave \"bye\" to me if you don't need me for now;\n" +
+            "\tSay \"list\" and I will display your tasks.\n" +
+            "\tSay \"done\" and a number to let me know you completed which task.\n";
+    final static String PARTINGS = "\tBye. Hope you have done your work next time I see you!\n" +
+            "\tAh, and also remember to take care of yourself and sleep early :)\n";
+    private static boolean isExiting = false;
 
-    public static String readPrompt(Scanner in) {
-        return in.nextLine();
+    /**
+     * Deals with raw input, extracts keyword and calls respective methods.
+     * @param   prompt  is the raw input string
+     * */
+    public static void processPrompt(String prompt) {
+        String keyword = prompt.contains(" ") ? prompt.split(" ")[0] : prompt;
+        System.out.print(DIVLINE);
+        switch(keyword){
+        case "bye":
+            break;
+        case "list":
+            break;
+        case "done":
+            break;
+        case "deadline":
+            break;
+        case "event":
+            break;
+        default:
+            break;
+        }
+
+//            if (prompt.equals("list")) {
+//                displayList(tasks, taskIndex);
+//            } else if (prompt.startsWith("done")) {
+//                completeTask(tasks, prompt.substring(5));
+//            } else if (prompt.startsWith("todo")) {
+//                addToList(tasks, prompt.substring(5), taskIndex, "todo");
+//                taskIndex++;
+//            } else if (prompt.startsWith("deadline")) {
+//                addToList(tasks, prompt.substring(9), taskIndex, "deadline");
+//                taskIndex++;
+//            } else if (prompt.startsWith("event")) {
+//                addToList(tasks, prompt.substring(6), taskIndex, "event");
+//                taskIndex++;
+//            } else {
+//                System.out.println("Invalid prompt. Please try other keywords.");
+//            }
+        System.out.print(DIVLINE);
+        return;
     }
 
     public static void displayList(Task[] tasks, int taskIndex) {
@@ -46,49 +96,16 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        String divLine = "\t__________________________________________________________________\n";
-        String greetings = "\tHello! I'm Ayanga, your personal task manager.\n" +
-                "\tWhat can I note down for you?\n" +
-                "\tWave \"bye\" to me if you don't need me for now;\n" +
-                "\tSay \"list\" and I will display your tasks.\n" +
-                "\tSay \"done\" and a number to let me know you completed which task.\n";
-        Task[] tasks = new Task[100]; // tasks of task items
-
-        System.out.print(divLine + greetings + divLine);
+        Task[] tasks = new Task[100];   // list of task items
+        System.out.print(DIVLINE + GREETINGS + DIVLINE);
         Scanner in = new Scanner(System.in);
         int taskIndex = 0;
-        String prompt = readPrompt(in);
-        while (!prompt.equals("bye")) {
-            System.out.print(divLine);
-            if (prompt.equals("list")) {
-                displayList(tasks, taskIndex);
-            } else if (prompt.startsWith("done")) {
-                completeTask(tasks, prompt.substring(5));
-            } else if (prompt.startsWith("todo")) {
-                addToList(tasks, prompt.substring(5), taskIndex, "todo");
-                taskIndex++;
-            } else if (prompt.startsWith("deadline")) {
-                addToList(tasks, prompt.substring(9), taskIndex, "deadline");
-                taskIndex++;
-            } else if (prompt.startsWith("event")) {
-                addToList(tasks, prompt.substring(6), taskIndex, "event");
-                taskIndex++;
-            } else {
-                System.out.println("Invalid prompt. Please try other keywords.");
-            }
-            System.out.print(divLine);
-            prompt = readPrompt(in);
+        while (!isExiting) {
+            String prompt = in.nextLine();
         }
 
-        String exitPhrase = "\tBye. Hope you have done your work next time I see you!\n" +
-                "\tAh, and also remember to take care of yourself and sleep early :)\n";
 
-        System.out.println(divLine + exitPhrase + divLine);
+        System.out.println(DIVLINE + PARTINGS + DIVLINE);
     }
 
 
