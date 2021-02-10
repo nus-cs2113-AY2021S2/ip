@@ -20,8 +20,13 @@ public class Duke {
         String userInput;
         while(notBye) {
             userInput = sc.nextLine();
-            processUserInput(userInput);
+            try {
+                processUserInput(userInput);
+            }catch (DukeException e){
+                System.out.println(e.toString());
+            }
             System.out.println("-----------------------------");
+
         }
     }
 
@@ -29,24 +34,26 @@ public class Duke {
      * process the user input and understand the command
      * @param userInput: value input by a user
      */
-    private static void processUserInput(String userInput) {
+    private static void processUserInput(String userInput) throws DukeException {
+        String description = null;
         if(userInput.startsWith("todo")){
-            try {
-                String description = userInput.substring(5);
-                tasks.add(new Todo(description));
-            }catch(StringIndexOutOfBoundsException e){
-                System.err.println("OOPS!!! The description of a todo cannot be empty.");
+            if(userInput.equals("todo")){
+                throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
             }
-        }
+            else {
+                description = userInput.substring(5);
+                tasks.add(new Todo(description));
+            }
+            }
         else if(userInput.startsWith("deadline")){
             String[] split = userInput.split("/");
-            String description = split[0].substring(8);
+            description = split[0].substring(8);
             String by = split[1];
             tasks.add(new Deadline(description, by));
         }
         else if(userInput.startsWith("event")){
             String[] split = userInput.split("/");
-            String description = split[0].substring(5);
+            description = split[0].substring(5);
             String at = split[1];
             tasks.add(new Event(description, at));
         }
@@ -70,7 +77,7 @@ public class Duke {
                 notBye = false;
         }
         else{
-            System.err.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 }
