@@ -1,7 +1,7 @@
 public class todolist {
     protected String[] list = new String[100];
-    protected int items = 0;
     protected Boolean[] tracker = new Boolean[100];
+    protected int items = 0;
 
 
 

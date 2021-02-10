@@ -7,7 +7,7 @@ public class Duke {
 
 
 
-    public static String command_parser(todo list, String command){
+/*    public static String command_parser(todo list, String command){
         String[] tokens = command.split(" ");
         int itemStartIndex = command.indexOf(" ") + 1;
         int itemEndIndex;
@@ -40,7 +40,56 @@ public class Duke {
 
         return out;
 
+    }*/
+
+    public static String command_parser(todov2 list, String command){
+        String[] tokens = command.split(" ");
+        int itemStartIndex = command.indexOf(" ") + 1;
+        int itemEndIndex;
+        int dateStartIndex;
+        String out = "";
+        String desc;
+        String date;
+        switch(tokens[0]){
+        case "list":
+            out = list.listItems();
+            break;
+        case "deadline":
+            itemEndIndex = command.indexOf("/by") - 1;
+            dateStartIndex = itemEndIndex + 5;
+            desc = command.substring(itemStartIndex,itemEndIndex);
+            date = command.substring(dateStartIndex);
+            out = list.addTask(desc, listTypes.deadline, date);
+            out += "\nYou now have " + list.tasksLeft() + " task(s) left in the list!";
+            break;
+        case "event":
+            itemEndIndex = command.indexOf("/at") - 1;
+            dateStartIndex = itemEndIndex + 5;
+            desc = command.substring(itemStartIndex,itemEndIndex);
+            date = command.substring(dateStartIndex);
+            out = list.addTask(desc, listTypes.event, date);
+            out += "\nYou now have " + list.tasksLeft() + " task(s) left in the list!";
+            break;
+        case "todo":
+            desc = command.substring(itemStartIndex);
+            out = list.addTask(desc,listTypes.todo);
+            out += "\nYou now have " + list.tasksLeft() + " task(s) left in the list!";
+            break;
+        case "done":
+            out = list.resolveTask(tokens[1]) ;
+            out += "\nYou now have " + list.tasksLeft() + " task(s) left in the list!";
+        }
+
+        return out;
+
     }
+
+
+
+
+
+
+
 
     public static void dukeResponse(String output){
         System.out.println("____________________________________________________________\n" +
@@ -71,7 +120,7 @@ public class Duke {
         Boolean continueChat = true;
         Scanner in = new Scanner(System.in);
         String output = "Nothing.";
-        todo todoList = new todo();
+        todov2 todoList = new todov2();
 
 
 
