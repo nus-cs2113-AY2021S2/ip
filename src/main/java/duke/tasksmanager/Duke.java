@@ -1,4 +1,4 @@
-package com.ip.tasksmanager;
+package duke.tasksmanager;
 
 import java.util.Scanner;
 
@@ -130,6 +130,8 @@ public class Duke {
 
                 System.out.println("Nice! I've marked this task as done:");
                 System.out.println(" " + tasks[index].convertToTaskOutputString());
+            } else {
+                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
 
             System.out.println(line); //end of current response to User
