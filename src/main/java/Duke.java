@@ -1,4 +1,9 @@
 import java.util.Scanner;
+import Exception.DeadlineFormatException;
+import Exception.TaskFormatException;
+import Exception.TodoFormatException;
+import Exception.EventFormatException;
+import Exception.TaskAlreadyDoneException;
 
 public class Duke {
     private static final String LOGO = " ____        _\n"

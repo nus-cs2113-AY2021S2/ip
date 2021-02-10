@@ -1,4 +1,6 @@
-public class EventFormatException extends TaskFormatException{
+package Exception;
+
+public class EventFormatException extends TaskFormatException {
     @Override
     public String toString(){
         return new String("    Name of event should be specified after keyword event. " +

@@ -1,3 +1,5 @@
+import Exception.TaskAlreadyDoneException;
+
 public class TaskList {
     private Task[] tasks = new Task[100];
     private int taskCount = 0;
@@ -45,7 +47,7 @@ public class TaskList {
         return -1;
     }
 
-    public void setTaskDone(String index) throws IndexOutOfBoundsException, NumberFormatException, TaskAlreadyDoneException{
+    public void setTaskDone(String index) throws IndexOutOfBoundsException, NumberFormatException, TaskAlreadyDoneException {
         int indexInt = Integer.parseInt(index) - 1;
         if(indexInt > taskCount){
             throw new IndexOutOfBoundsException();
