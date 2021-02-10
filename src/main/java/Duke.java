@@ -26,22 +26,49 @@ public class Duke {
                 listOutTasks();
             } else if (userCommand.equalsIgnoreCase("done" )) {
                 markTaskAsDone(inputDetails);
-            } else  if (isValidInput(userCommand)){
+            } else  {
+                if (!isValidCommand(userCommand)) {
+                    continue;
+                };
                 //process Todo, event or deadline
-                processUserRequest(userCommand, inputDetails);
-            } else {
-                errorMessage();
+                processCommandWithException(userCommand, inputDetails);
             }
             printLine();
         }
+    }
+
+    private static void processCommandWithException(String userCommand, String inputDetails) {
+        try {
+            processUserRequest(userCommand, inputDetails);
+        } catch (TodoException e) {
+            printLine();
+            System.out.println(e.sendErrorMessage());
+        }
+    }
+
+    private static boolean isValidCommand(String userCommand) {
+        boolean isValid = true;
+        try {
+            isValidInput(userCommand);
+        } catch (InvalidCommandException e) {
+            printLine();
+            System.out.println(e.sendErrorMessage());
+            printLine();
+            isValid = false;
+        }
+        return isValid;
     }
 
     private static void errorMessage() {
         System.out.println("Please check your spelling.");
     }
 
-    private static boolean isValidInput(String userCommand) {
-        return userCommand.equalsIgnoreCase("todo") | userCommand.equalsIgnoreCase("deadline") | userCommand.equalsIgnoreCase("event");
+    private static boolean isValidInput(String userCommand) throws InvalidCommandException{
+        var isValid = userCommand.equalsIgnoreCase("todo") | userCommand.equalsIgnoreCase("deadline") | userCommand.equalsIgnoreCase("event");
+        if (!isValid) {
+            throw new InvalidCommandException();
+        }
+        return true;
     }
 
     private static void sendWelcomeMessage() {
@@ -51,7 +78,11 @@ public class Duke {
         System.out.println("What can I do for you?");
     }
 
-    private static void processUserRequest(String userCommand, String inputDetails) {
+    private static void processUserRequest(String userCommand, String inputDetails) throws TodoException {
+        if (inputDetails.equalsIgnoreCase("filler") & userCommand.equalsIgnoreCase("todo")) {
+            throw new TodoException();
+        }
+        printLine();
         printLine();
         tasksList[tasksCount] = new Task(inputDetails, userCommand);
         Task selectedTask = tasksList[tasksCount];
@@ -96,6 +127,7 @@ public class Duke {
 
 
     private static void listOutTasks() {
+        printLine();
         int i = 0;
         while (i < tasksCount) {
             Task selectedTask = tasksList[i];
