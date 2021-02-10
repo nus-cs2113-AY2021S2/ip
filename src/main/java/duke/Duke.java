@@ -1,3 +1,10 @@
+package duke;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -99,7 +106,7 @@ public class Duke {
         try{
             int itemNum = Character.getNumericValue(line.charAt(5));
             tasks[itemNum - 1].setAsDone();
-            System.out.println("Nice! I've marked this task as done: ");
+            System.out.println("Nice! I've marked this task as done:");
             System.out.println(tasks[itemNum-1].toString());
         }
         catch (NullPointerException e){
