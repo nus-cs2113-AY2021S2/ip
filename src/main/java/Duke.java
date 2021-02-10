@@ -31,7 +31,7 @@ public class Duke {
 
     private static void scanInput() {
         input = takeInput(in);
-        command = processInput(taskList, input);
+        processInput(taskList, input);
     }
 
     private static void printReaction() {
@@ -57,7 +57,6 @@ public class Duke {
                     taskList.getTask(taskNum - 1));
             break;
         case ERROR:
-            System.out.println("Wrong Input!");
             break;
         }
     }
@@ -74,31 +73,43 @@ public class Duke {
         return in.nextLine();
     }
 
-    private static Command processInput(TaskList taskList, String input) {
-        switch (getCommand(input)) {
-        case ADD:
-            taskList.addTask(input, Command.ADD);
-            break;
-        case TODO:
-            taskList.addTask(input, Command.TODO);
-            break;
-        case DEADLINE:
-            taskList.addTask(input, Command.DEADLINE);
-            break;
-        case EVENT:
-            taskList.addTask(input, Command.EVENT);
-            break;
-        case DONE:
-            int taskNum = getTaskNum(input);
-            taskList.finishTask(taskNum - 1);
-            break;
-        default:
-            break;
+    private static void processInput(TaskList taskList, String input) {
+        try {
+            command =  getCommand(input);
+            switch (command) {
+            case ADD:
+                command = taskList.addTask(input, Command.ADD);
+                break;
+            case TODO:
+                command = taskList.addTask(input.replaceFirst("todo ", ""), Command.TODO);
+                break;
+            case DEADLINE:
+                command = taskList.addTask(input.replaceFirst("deadline ", ""), Command.DEADLINE);
+                break;
+            case EVENT:
+                command = taskList.addTask(input.replaceFirst("event ", ""), Command.EVENT);
+                break;
+            case DONE:
+                try {
+                    taskList.validateDescription(input, Command.DONE);
+                } catch (EmptyDescriptionException e) {
+                    System.out.println("Done command needs task number!");;
+                    command = Command.ERROR;
+                    break;
+                }
+                int taskNum = getTaskNum(input);
+                taskList.finishTask(taskNum - 1);
+                break;
+            default:
+                break;
+            }
+        } catch (InvalidCommandException e) {
+            System.out.println("Wrong command entered!: " + input);
+            command = Command.ERROR;
         }
-        return getCommand(input);
     }
 
-    private static Command getCommand(String input) {
+    private static Command getCommand(String input) throws InvalidCommandException {
         if (input.equals("list")) {
             return Command.LIST;
         } else if (input.equals("bye")) {
@@ -112,7 +123,7 @@ public class Duke {
         } else if (input.startsWith("event ")) {
             return Command.EVENT;
         } else {
-            return Command.ADD;
+            throw new InvalidCommandException();
         }
     }
 

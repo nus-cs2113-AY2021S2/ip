@@ -1,5 +1,6 @@
 list
 todo I want to learn a new language
+add I want to sleep
 deadline cs3235 quiz /by this friday
 event cs2113t meeting /at this sunday 10am
 todo sleep early everyday
@@ -8,6 +9,10 @@ done 4
 deadline homework /by tonight
 done 6
 event lecture /at tmr
+done 
+deadline 
+todo 
+event 
 done 1
 done 2
 done 3

@@ -1,32 +1,58 @@
 import java.util.ArrayList;
 
 public class TaskList {
-    private ArrayList<Task> tasks;
+    private final ArrayList<Task> tasks;
 
     public TaskList() {
         tasks = new ArrayList<>();
     }
 
-    public void addTask(String description, Command command) {
+    public Command addTask(String description, Command command) {
         Task newTask;
         String[] stringArray;
+        try {
+            validateDescription(description, command);
+        } catch (EmptyDescriptionException e) {
+            System.out.println("The description cannot be empty!");
+            return Command.ERROR;
+        }
         switch (command) {
         case TODO:
-            newTask = new ToDo(description.replaceFirst("todo ", ""));
+            newTask = new ToDo(description);
             break;
         case EVENT:
             stringArray = description.split("/at");
-            newTask = new Event(stringArray[0].replaceFirst("event ", ""), stringArray[1].trim());
+            newTask = new Event(stringArray[0], stringArray[1].trim());
             break;
         case DEADLINE:
             stringArray = description.split("/by");
-            newTask = new Deadline(stringArray[0].replaceFirst("deadline ", ""), stringArray[1].trim());
+            newTask = new Deadline(stringArray[0], stringArray[1].trim());
             break;
         default:
             newTask = new Task(description);
             break;
         }
         tasks.add(newTask);
+        return command;
+    }
+
+    public void validateDescription(String description, Command command) throws EmptyDescriptionException {
+        if (description.equals("")) {
+            throw new EmptyDescriptionException();
+        }
+        switch (command) {
+        case DONE:
+            if (description.replace("done ", "").equals("")) {
+                throw new EmptyDescriptionException();
+            }
+            break;
+        case TODO:
+            break;
+        case DEADLINE:
+            break;
+        case EVENT:
+            break;
+        }
     }
 
     @Override
