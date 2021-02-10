@@ -30,7 +30,7 @@ public class Duke {
             } else  {
                 if (!isValidCommand(userCommand)) {
                     continue;
-                };
+                }
                 //process Todo, event or deadline
                 processCommandWithException(userCommand, inputDetails);
             }
@@ -60,16 +60,11 @@ public class Duke {
         return isValid;
     }
 
-    private static void errorMessage() {
-        System.out.println("Please check your spelling.");
-    }
-
-    private static boolean isValidInput(String userCommand) throws InvalidCommandException {
+    private static void isValidInput(String userCommand) throws InvalidCommandException {
         var isValid = userCommand.equalsIgnoreCase("todo") | userCommand.equalsIgnoreCase("deadline") | userCommand.equalsIgnoreCase("event");
         if (!isValid) {
             throw new InvalidCommandException();
         }
-        return true;
     }
 
     private static void sendWelcomeMessage() {
@@ -88,10 +83,10 @@ public class Duke {
         tasksList[tasksCount] = new Task(inputDetails, userCommand);
         Task selectedTask = tasksList[tasksCount];
         tasksCount++;
-        notifyUser(inputDetails, selectedTask);
+        notifyUser(selectedTask);
     }
 
-    private static void notifyUser(String inputDetails, Task selectedTask) {
+    private static void notifyUser(Task selectedTask) {
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + selectedTask.getTaskType() + selectedTask.getStatusIcon() + " " + selectedTask.getDescription());
         System.out.println("Now you have " + tasksCount + " tasks in the list.");
