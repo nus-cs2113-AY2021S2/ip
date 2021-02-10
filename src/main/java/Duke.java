@@ -8,6 +8,7 @@ public class Duke {
     private static final int EVENT_LENGTH = 6;
     private static final int BY_LENGTH = 3;
     private static final int AT_LENGTH = 3;
+    private static String exceptionGreeting = "\ud83d\ude16 OOPS!!! ";
     private static Task[] tasks = new Task[100];
     private static int taskCounter = 0;
 
@@ -26,32 +27,86 @@ public class Duke {
                 break;
             } else if (line.equals("list")) {
                 printTasksList();
-                continue;
             } else if (line.startsWith("done")) {
-                int index = Integer.parseInt(line.substring(DONE_LENGTH)) - 1;
-                tasks[index].markAsDone();
-                printDoneTask(index);
-                continue;
+                markAsDone(line);
             } else if (line.startsWith("todo")) {
-                String description = line.substring(TODO_LENGTH);
-                Task newTask = new ToDo(description);
-                tasks[taskCounter] = newTask;
+                addNewTodo(line);
             } else if (line.startsWith("deadline")) {
-                int index = line.indexOf("/");
-                String description = line.substring(DEADLINE_LENGTH, index - 1);
-                String by = line.substring(index + BY_LENGTH).trim();
-                Task newTask = new Deadline(description, by);
-                tasks[taskCounter] = newTask;
+                addNewDeadline(line);
             } else if (line.startsWith("event")) {
-                int index = line.indexOf("/");
-                String description = line.substring(EVENT_LENGTH, index - 1);
-                String at = line.substring(index + AT_LENGTH).trim();
-                Task newTask = new Event(description, at);
-                tasks[taskCounter] = newTask;
+                addNewEvent(line);
+            } else {
+                printInvalidInput();
             }
+        }
+    }
+
+    private static void printInvalidInput() {
+        printHorizontalLine();
+        System.out.println("\t" + exceptionGreeting + "I'm sorry, but I don't know what that means :-(");
+        printHorizontalLine();
+    }
+
+    private static void addNewEvent(String line) {
+        try {
+            int index = line.indexOf("/");
+            String description = line.substring(EVENT_LENGTH, index - 1);
+            String at = line.substring(index + AT_LENGTH).trim();
+            Task newTask = new Event(description, at);
+            tasks[taskCounter] = newTask;
             taskCounter++;
             printNewTask();
+        } catch (StringIndexOutOfBoundsException e) {
+            printEmptyDescription("event");
         }
+    }
+
+    private static void addNewDeadline(String line) {
+        try {
+            int index = line.indexOf("/");
+            String description = line.substring(DEADLINE_LENGTH, index - 1);
+            String by = line.substring(index + BY_LENGTH).trim();
+            Task newTask = new Deadline(description, by);
+            tasks[taskCounter] = newTask;
+            taskCounter++;
+            printNewTask();
+        } catch (StringIndexOutOfBoundsException e) {
+            printEmptyDescription("deadline");
+        }
+    }
+
+    private static void addNewTodo(String line) {
+        try {
+            String description = line.substring(TODO_LENGTH);
+            Task newTask = new ToDo(description);
+            tasks[taskCounter] = newTask;
+            taskCounter++;
+            printNewTask();
+        } catch (StringIndexOutOfBoundsException e) {
+            printEmptyDescription("todo");
+        }
+    }
+
+    private static void printEmptyDescription(String type) {
+        printHorizontalLine();
+        System.out.println("\t" + exceptionGreeting + "The description of a " + type + " cannot be empty.");
+        printHorizontalLine();
+    }
+
+    private static void markAsDone(String line) {
+        try {
+            int index = Integer.parseInt(line.substring(DONE_LENGTH)) - 1;
+            tasks[index].markAsDone();
+            printDoneTask(index);
+        } catch (NullPointerException e) {
+            printInvalidTask();
+        }
+    }
+
+    private static void printInvalidTask() {
+        printHorizontalLine();
+        System.out.println("\t" + exceptionGreeting + "That task number does not exist.");
+        printHorizontalLine();
     }
 
     private static void printDoneTask(int index) {
