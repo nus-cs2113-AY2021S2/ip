@@ -1,13 +1,17 @@
+import java.util.ArrayList;
+import java.util.Scanner;
 public class Duke {
+    private static final String line = "____________________________________________________________\n";
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-<<<<<<< Updated upstream
+
         System.out.println("Hello from\n" + logo);
-=======
+
 
         String greet = "____________________________________________________________\n" +
                 " Hello! I'm Duke\n" +
@@ -119,6 +123,5 @@ public class Duke {
         System.out.println(exit);
 
 
->>>>>>> Stashed changes
     }
 }
