@@ -1,3 +1,5 @@
+package duke.task;
+
 public class Todo extends Task {
     public static String[] parseTaskContent(String userInput) throws Exception {
         String[] parseResult = new String[1];
