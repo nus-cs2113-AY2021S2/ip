@@ -1,8 +1,13 @@
 import java.util.Scanner;
+import commands.Task;
+import commands.Todo;
+import commands.Deadline;
+import commands.Event;
+import exceptions.DukeException;
 
 public class Duke {
     public static final int maxTasks = 100;
-    private static final String border = "    ―――――――――――――――――――――――――――――――――――――――――――――――――";
+    private static final String border = "    ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――";
     private static Task[] tasks = new Task[maxTasks];
 
     public static void main(String[] args) {
@@ -166,10 +171,10 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        System.out.println("--------------------------------------------------------------------------------");
+        System.out.println("――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――");
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
         System.out.println(" ");
-        System.out.println("--------------------------------------------------------------------------------");
+        System.out.println("――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――");
     }
 }
