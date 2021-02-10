@@ -33,9 +33,23 @@
         [T][X]read a book
     ____________________________________________________________
     ____________________________________________________________
+    Name of event should be specified after keyword event. Name and the time should be separated by "/at"
+    Input format:
+    todo todo name
+    deadline deadline name /by time of deadline
+    event event name /at time of the event
+    ____________________________________________________________
+    ____________________________________________________________
     Here are the tasks in your list:
     1.[T][X]read a book
     2.[D][ ]return a book (by: Sunday 10am)
+    ____________________________________________________________
+    ____________________________________________________________
+    Name of event should be specified after keyword event. Name and the time should be separated by "/at"
+    Input format:
+    todo todo name
+    deadline deadline name /by time of deadline
+    event event name /at time of the event
     ____________________________________________________________
     ____________________________________________________________
     Event added:
@@ -43,10 +57,34 @@
     Now you have 3 tasks in the list
     ____________________________________________________________
     ____________________________________________________________
+    Name of deadline should be specified after keyword deadline. Name and the time to finish should be separated by "/by"
+    Input format:
+    todo todo name
+    deadline deadline name /by time of deadline
+    event event name /at time of the event
+    ____________________________________________________________
+    ____________________________________________________________
+    The task is done already.
+    ____________________________________________________________
+    ____________________________________________________________
+    Invalid input format.
+    Input format:
+    todo todo name
+    deadline deadline name /by time of deadline
+    event event name /at time of the event
+    ____________________________________________________________
+    ____________________________________________________________
     Here are the tasks in your list:
     1.[T][X]read a book
     2.[D][ ]return a book (by: Sunday 10am)
     3.[E][ ]tutorial (at: Feb 5 10am)
+    ____________________________________________________________
+    ____________________________________________________________
+    Name of Todo should be specified after todo keyword
+    Input format:
+    todo todo name
+    deadline deadline name /by time of deadline
+    event event name /at time of the event
     ____________________________________________________________
     ____________________________________________________________
     Nice! I've marked this task as done:

@@ -1,4 +1,3 @@
-import java.util.Locale;
 import java.util.Scanner;
 
 public class Duke {
@@ -31,18 +30,33 @@ public class Duke {
                     tasks.setTaskDone(inputParts[1]);
                     break;
                 case "todo":
+                    if(inputParts.length < 2) {
+                        throw new TodoFormatException();
+                    }
                     ToDo newTodo = new ToDo(inputParts[1],false);
                     tasks.addTask(newTodo);
                     break;
                 case "deadline":
+                    if (inputParts.length < 2) {
+                        throw new DeadlineFormatException();
+                    }
                     String[] deadlineNameDoby = inputParts[1].split("/by");
+                    if(deadlineNameDoby.length < 2) {
+                        throw new DeadlineFormatException();
+                    }
                     String deadlineName = deadlineNameDoby[0].trim();
                     String deadlineDoby = deadlineNameDoby[1].trim();
                     Deadline newDeadline = new Deadline(deadlineName,false,deadlineDoby);
                     tasks.addTask(newDeadline);
                     break;
                 case "event":
+                    if (inputParts.length < 2) {
+                        throw new EventFormatException();
+                    }
                     String[] eventNameDoby = inputParts[1].split("/at");
+                    if(eventNameDoby.length < 2) {
+                        throw new EventFormatException();
+                    }
                     String eventName = eventNameDoby[0].trim();
                     String eventDoby = eventNameDoby[1].trim();
                     Event newEvent = new Event(eventName,false,eventDoby);
@@ -61,6 +75,8 @@ public class Duke {
                 System.out.println(LINE_SEPERATOR + "\n    The task is done already.\n" + LINE_SEPERATOR);
             } catch (IndexOutOfBoundsException e) {
                 System.out.println(LINE_SEPERATOR + "\n    The task index is out of bound.\n" + LINE_SEPERATOR);
+            } catch (TaskFormatException e) {
+                System.out.println(LINE_SEPERATOR + "\n" + e.toString() + LINE_SEPERATOR);
             }
             userInput = sc.nextLine();
         }

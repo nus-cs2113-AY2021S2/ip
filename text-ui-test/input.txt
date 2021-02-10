@@ -3,9 +3,15 @@ list
 deadline return a book /by Sunday 10am
 list
 done 1
+event
 list
+event join concert / at tomorrow
 event tutorial /at Feb 5 10am
+deadline do online quiz Tuesday 10pm
+done 1
+blah
 list
+todo
 done 2
 done 3
 list
