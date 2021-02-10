@@ -19,9 +19,8 @@ public abstract class Task {
     public void markAsDone(){
         isDone = true;
     }
-    /* public String getType(){
-        return "";
-    }*/
+    public abstract String getType();
+
 
     public String toString(){
         return "description: " + description;

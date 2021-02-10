@@ -1,16 +1,13 @@
-import java.util.ArrayList;
-import java.util.Scanner;
-
 public class Duke {
-    private static final String line = "____________________________________________________________\n";
-
     public static void main(String[] args) {
-
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
+<<<<<<< Updated upstream
+        System.out.println("Hello from\n" + logo);
+=======
 
         String greet = "____________________________________________________________\n" +
                 " Hello! I'm Duke\n" +
@@ -46,7 +43,7 @@ public class Duke {
                 int dividerPosition_1 = input.indexOf("/");
                 String d = input.substring(dividerPosition + 1, dividerPosition_1);
                 String by = input.substring(dividerPosition_1 + 4);
-                if(dividerPosition==-1 || d.equals("") || !input.contains(" ")){
+                if(dividerPosition==-1 || d.equals("") || !input.contains(" ")){ 
                     System.out.print(line);
                     System.out.print("I don't quite understand." +  "\n" + "Please enter the command again." + "\n");
                     System.out.print(line);
@@ -89,22 +86,27 @@ public class Duke {
 
                 int dividerPosition = input.indexOf(" ");
                 String taskNo = input.substring(dividerPosition + 1);
-                int taskIndex = Integer.parseInt(taskNo) - 1;
-                if (dividerPosition == -1 || taskNo.equals("") || !input.contains(" ")) {
+                try{
+                    int taskIndex = Integer.parseInt(taskNo) - 1;
+                    if (dividerPosition == -1 || taskNo.equals("") || !input.contains(" ")) {
+                        System.out.print(line);
+                        System.out.print("I don't quite understand." +  "\n" + "Please enter the command again." + "\n");
+                        System.out.print(line);
+                    }
+                    if (taskIndex >=tasks.size()) {
+                        System.out.print(line);
+                        System.out.print("You have no such task." + "\n");
+                        System.out.print(line);
+                    }
+                    else {
+                        tasks.get(taskIndex).markAsDone();
+                        System.out.print(line);
+                        System.out.print("Nice! I've marked this task as done:" + "\n" + tasks.get(taskIndex) + "\n");
+                        System.out.print(line);
+                    }
+                } catch (NumberFormatException e) {
                     System.out.print(line);
                     System.out.print("I don't quite understand." +  "\n" + "Please enter the command again." + "\n");
-                    System.out.print(line);
-                    input = userInput.nextLine();
-                }
-                if (taskIndex >=tasks.size()) {
-                    System.out.print(line);
-                    System.out.print("You have no such task." + "\n");
-                    System.out.print(line);
-                }
-                else {
-                    tasks.get(taskIndex).markAsDone();
-                    System.out.print(line);
-                    System.out.print("Nice! I've marked this task as done:" + "\n" + tasks.get(taskIndex) + "\n");
                     System.out.print(line);
                 }
             } else {
@@ -116,5 +118,7 @@ public class Duke {
         }
         System.out.println(exit);
 
+
+>>>>>>> Stashed changes
     }
 }
