@@ -56,34 +56,52 @@ public class Duke {
     }
 
     private static void deadlineTasks(int i, Task[] tasks, String command) {
-        String description = command.substring(8, command.indexOf("/by"));
-        String by = command.substring(command.indexOf("/by") + 4);
-        tasks[i] = new Deadline(description, by);
-        System.out.println("Got it. I've added this task:");
-        System.out.println(tasks[i]);
-        System.out.println("Now you have "+ Task.getTaskCount() +" task(s) in the list.");
+        try {
+            String description = command.substring(8, command.indexOf("/by"));
+            String by = command.substring(command.indexOf("/by") + 4);
+            tasks[i] = new Deadline(description, by);
+            System.out.println("Got it. I've added this task:");
+            System.out.println(tasks[i]);
+            System.out.println("Now you have "+ Task.getTaskCount() +" task(s) in the list.");
+        } catch (StringIndexOutOfBoundsException e) {
+            System.out.println("OOPS!!! The description of a deadline must include /by and description.");
+        }
     }
 
     private static void eventTask(int i, Task[] tasks, String command) {
-        String description = command.substring(6, command.indexOf("/at"));
-        String at = command.substring(command.indexOf("/at") + 4);
-        tasks[i] = new Event(description, at);
-        System.out.println("Got it. I've added this task:");
-        System.out.println(tasks[i]);
-        System.out.println("Now you have "+ Task.getTaskCount() +" task(s) in the list.");
+        try {
+            String description = command.substring(6, command.indexOf("/at"));
+            String at = command.substring(command.indexOf("/at") + 4);
+            tasks[i] = new Event(description, at);
+            System.out.println("Got it. I've added this task:");
+            System.out.println(tasks[i]);
+            System.out.println("Now you have "+ Task.getTaskCount() +" task(s) in the list.");
+        } catch (StringIndexOutOfBoundsException e) {
+            System.out.println("OOPS!!! The description of a event must include /at and description.");
+        }
     }
 
     private static void todoTask(int i, Task[] tasks, String command) {
-        tasks[i] = new Todo(command.substring(5));
-        System.out.println("Got it. I've added this task:");
-        System.out.println(tasks[i]);
-        System.out.println("Now you have "+ Task.getTaskCount() +" task(s) in the list.");
+        try {
+            tasks[i] = new Todo(command.substring(5));
+            System.out.println("Got it. I've added this task:");
+            System.out.println(tasks[i]);
+            System.out.println("Now you have "+ Task.getTaskCount() +" task(s) in the list.");
+        } catch (StringIndexOutOfBoundsException e) {
+            System.out.println("OOPS!!! The description of a todo cannot be empty.");
+        }
     }
 
     private static void doneTasks(Task[] tasks, String command) {
-        int doneNumber=Integer.parseInt(command.substring(5));
-        System.out.println("Nice! I've marked this task as done: ");
-        tasks[doneNumber-1].markAsDone();
+        try {
+            int doneNumber=Integer.parseInt(command.substring(5));
+            System.out.println("Nice! I've marked this task as done: ");
+            tasks[doneNumber-1].markAsDone();
+        } catch (NumberFormatException e) {
+            System.out.println("OOPS!!! A number is expected after command done");
+        }catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("OOPS!!! Please select from the task list.");
+        }
     }
 
     private static void listTasks(int i, Task[] tasks) {
