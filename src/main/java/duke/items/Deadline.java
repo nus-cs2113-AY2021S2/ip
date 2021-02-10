@@ -1,7 +1,9 @@
-class Dateline extends Task {
+package duke.items;
+
+public class Deadline extends Task {
     protected String by;
 
-    public Dateline(String description, String byInput) {
+    public Deadline(String description, String byInput) {
         super(description);
         this.by = byInput;
     }
