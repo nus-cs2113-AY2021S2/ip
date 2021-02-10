@@ -31,8 +31,12 @@ public class Duke {
      */
     private static void processUserInput(String userInput) {
         if(userInput.startsWith("todo")){
-            String description = userInput.substring(5);
-            tasks.add(new Todo(description));
+            try {
+                String description = userInput.substring(5);
+                tasks.add(new Todo(description));
+            }catch(StringIndexOutOfBoundsException e){
+                System.err.println("OOPS!!! The description of a todo cannot be empty.");
+            }
         }
         else if(userInput.startsWith("deadline")){
             String[] split = userInput.split("/");
@@ -64,6 +68,9 @@ public class Duke {
                 String bye = "Bye. Hope to see you again soon!";
                 System.out.println(bye);
                 notBye = false;
+        }
+        else{
+            System.err.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 }
