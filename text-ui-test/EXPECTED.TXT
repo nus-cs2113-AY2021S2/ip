@@ -9,6 +9,7 @@ Hello! I'm Duke
 What can I do for you?
 List is empty!
 Added: [T][ ] I want to learn a new language
+Wrong command entered!: add I want to sleep
 Added: [D][ ] cs3235 quiz (by: this friday)
 Added: [E][ ] cs2113t meeting (at: this sunday 10am)
 Added: [T][ ] sleep early everyday
@@ -19,6 +20,10 @@ Added: [D][ ] homework (by: tonight)
 Nice! I've marked this task as done:
 [D][X] homework (by: tonight)
 Added: [E][ ] lecture (at: tmr)
+Done command needs task number!
+The description cannot be empty!
+The description cannot be empty!
+The description cannot be empty!
 Nice! I've marked this task as done:
 [T][X] I want to learn a new language
 Nice! I've marked this task as done:
