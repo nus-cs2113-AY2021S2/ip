@@ -1,8 +1,5 @@
 import java.util.Scanner;
 
-import jdk.javadoc.internal.doclets.toolkit.BaseConfiguration.Hidden;
-import jdk.javadoc.internal.tool.DocEnvImpl;
-
 public class Duke {
     public static Task[] tasks = new Task[100];
     public static int currentTask = 0;
