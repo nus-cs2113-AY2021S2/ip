@@ -21,7 +21,7 @@ public class Duke {
                 return;
             } else if (inputStringSplit[0].equalsIgnoreCase("done")){
                 if (inputStringSplit.length>1){
-                    MarkAsDone(inputStringSplit[1]);
+                    MarkAsDone.MarkAsDone(inputStringSplit[1]);
                 } else {
                     DukeException.doneWithoutNo();
                 }
@@ -44,16 +44,7 @@ public class Duke {
         }
     }
 
-    public static void MarkAsDone(String doneTask){
-        int donetaskIndex = Integer.parseInt(doneTask) - 1;
-        if (donetaskIndex < listIndex) {
-            System.out.println(" Yay! This task is done!");
-            lists[donetaskIndex][1] = "X";
-            PrintList(donetaskIndex, donetaskIndex + 1);
-        } else {
-            DukeException.exceedListLength(donetaskIndex);
-        }
-    }
+
     public static void greetings(){
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
