@@ -8,7 +8,10 @@ public class Task {
         this.isDone = false;
     }
 
-    public Task(){};
+    public Task() {
+    }
+
+    ;
 
     public void setDescription(String description) {
         this.description = description;
@@ -22,10 +25,13 @@ public class Task {
         if (isDone == false) {
             isDone = true;
             System.out.println("Nice! I've marked this task as done: ");
-        }
-        else {
+        } else {
             System.out.println("This task is already marked as done.");
         }
+    }
+
+    public int getDone() {
+            return(isDone? 1:0);
     }
 
     public String getDescription() {

@@ -7,7 +7,10 @@ public class Duke {
     public static void main(String[] args) {
         DukeController dc = new DukeController();
         dc.welcomeMessage();
-        ArrayList <Task> tasks = new ArrayList<Task>();
+        ArrayList <Task> tasks = dc.loadFile();
+        if (tasks == null) {
+            tasks = new ArrayList<Task>();
+        }
         Scanner sc = new Scanner(System.in);
         String in = sc.nextLine();
         String[] strings = new String[3];
@@ -41,6 +44,10 @@ public class Duke {
             else if (in.contains("event")) {
                 dc.printEvent(tasks, in, strings, count1);
                 count1++;
+            }
+
+            else if (in.contains("save")) {
+                dc.saveOutput(tasks);
             }
 
             else {
