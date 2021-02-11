@@ -1,9 +1,11 @@
+import jdk.jshell.spi.ExecutionControl;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
 /*        String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -34,51 +36,70 @@ public class Duke {
                 lists.get(num - 1).markAsDone();
                 System.out.println(lists.get(num - 1).toString());
             } else if (word.contains("deadline")) {
-                String sentence = word.substring(word.indexOf(" ") + 1);
-                String title = sentence.substring(0, sentence.indexOf("/") - 1);
-                String date = word.substring(word.indexOf("by") + 3);
+                try {
+                    String sentence = word.substring(word.indexOf(" ") + 1);
+                    String title = sentence.substring(0, sentence.indexOf("/") - 1);
+                    String date = word.substring(word.indexOf("by") + 3);
 
-                Task t = new Deadline(title, date);
-                t.toString();
-                lists.add(t);
 
-                System.out.println("Got it. I've added this task:");
-                System.out.println("  " + t);
-                if (lists.size() == 1) {
-                    System.out.println("Now you have " + lists.size() + " task in the list.");
-                } else {
-                    System.out.println("Now you have " + lists.size() + " tasks in the list.");
+                    //if (sentence.equals("deadline")) throw new DukeException(sentence);
+
+                    Task t = new Deadline(title, date);
+                    t.toString();
+                    lists.add(t);
+
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println("  " + t);
+                    if (lists.size() == 1) {
+                        System.out.println("Now you have " + lists.size() + " task in the list.");
+                    } else {
+                        System.out.println("Now you have " + lists.size() + " tasks in the list.");
+                    }
+                } catch (Exception e) {
+                    System.out.println("OOPS!!! The description of a deadline cannot be empty.");
                 }
             } else if (word.contains("todo")) {
-                String sentence = word.substring(word.indexOf(" ") + 1);
+                try {
+                    String sentence = word.substring(word.indexOf(" ") + 1);
 
-                Task t = new Todo(sentence);
-                t.toString();
-                lists.add(t);
+                    if (sentence.equals("todo")) throw new DukeException(sentence);
 
-                System.out.println("Got it. I've added this task:");
-                System.out.println("  " + t);
-                if (lists.size() == 1) {
-                    System.out.println("Now you have " + lists.size() + " task in the list.");
-                } else {
-                    System.out.println("Now you have " + lists.size() + " tasks in the list.");
+                    Task t = new Todo(sentence);
+                    t.toString();
+                    lists.add(t);
+
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println("  " + t);
+                    if (lists.size() == 1) {
+                        System.out.println("Now you have " + lists.size() + " task in the list.");
+                    } else {
+                        System.out.println("Now you have " + lists.size() + " tasks in the list.");
+                    }
+                } catch (Exception e) {
+                    System.out.println("OOPS!!! The description of a todo cannot be empty.");
                 }
             } else if (word.contains("event")) {
-                String sentence = word.substring(word.indexOf(" ") + 1);
-                String title = sentence.substring(0, sentence.indexOf("/") - 1);
-                String date = word.substring(word.indexOf("at") + 3);
+                try {
+                    String sentence = word.substring(word.indexOf(" ") + 1);
+                    String title = sentence.substring(0, sentence.indexOf("/") - 1);
+                    String date = word.substring(word.indexOf("at") + 3);
 
-                Task t = new Event(title, date);
-                t.toString();
-                lists.add(t);:w
+                    Task t = new Event(title, date);
+                    t.toString();
+                    lists.add(t);
 
-                System.out.println("Got it. I've added this task:");
-                System.out.println("  " + t);
-                if (lists.size() == 1) {
-                    System.out.println("Now you have " + lists.size() + " task in the list.");
-                } else {
-                    System.out.println("Now you have " + lists.size() + " tasks in the list.");
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println("  " + t);
+                    if (lists.size() == 1) {
+                        System.out.println("Now you have " + lists.size() + " task in the list.");
+                    } else {
+                        System.out.println("Now you have " + lists.size() + " tasks in the list.");
+                    }
+                } catch (Exception e) {
+                    System.out.println("OOPS!!! The description of a event cannot be empty.");
                 }
+            } else {
+                System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         }
     }
