@@ -27,4 +27,8 @@ public class Task {
         this.isDone = true;
     }
 
+    public boolean isDone() {
+        return this.isDone;
+    }
+
 }
