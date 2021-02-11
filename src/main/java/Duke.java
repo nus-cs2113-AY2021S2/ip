@@ -160,8 +160,8 @@ public class Duke {
     }
 
     public static void checkError(String commandArgs){
-        if (commandArgs.isEmpty())
-            showError();
+        if (commandArgs.isEmpty()){
+            showError();}
     }
     
 }
