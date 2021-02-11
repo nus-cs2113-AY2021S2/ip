@@ -11,6 +11,7 @@ public class Duke {
             String command = scannerObject.nextLine();
             if (command.equals("bye")) {
                 bye();
+                scannerObject.close();
                 break;
             } else if (command.equals("list")) {
                 list();
