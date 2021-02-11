@@ -75,6 +75,11 @@ public class Duke {
         }
     }
 
+    private static void deleteTask(List<Task> tasks, int index) {
+        tasks.remove(index);
+        System.out.println("\tDone! One less worry for you :)");
+    }
+
     private static void printAddedTask(List<Task> tasks, int taskCounter) {
         System.out.println("Got it. I've added this task:");
         System.out.println("\t" + tasks.get(taskCounter).toString());
@@ -112,6 +117,13 @@ public class Duke {
                 } catch (TaskDoneException e) {
                     System.out.println("\tTask has already been completed!");
                 }
+            } else if (parts[0].equals("delete ")) {
+                    try {
+                        int index = Integer.parseInt(parts[1]) - 1;
+                        deleteTask(tasks, index);
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println("\tYou can't delete something that does not exist!");
+                    }
             } else if (command.equals("todo")) {
                 try {
                     String task = line.substring(commandIndex);
