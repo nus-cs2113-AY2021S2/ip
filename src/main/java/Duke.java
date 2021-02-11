@@ -15,7 +15,7 @@ public class Duke {
         while(true) {
             Scanner userInput = new Scanner(System.in);
             inputString = userInput.nextLine();
-            String inputStringSplit[] = inputString.split(" ", 2);
+            String[] inputStringSplit = inputString.split(" ", 2);
             System.out.println("____________________________________________________________");
             if (inputString.equalsIgnoreCase("bye")){
                 return;
