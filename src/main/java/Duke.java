@@ -1,12 +1,13 @@
 import java.util.Scanner;
 import Controller.DukeController;
 import Tasks.*;
+import java.util.ArrayList;
 public class Duke {
 
     public static void main(String[] args) {
         DukeController dc = new DukeController();
         dc.welcomeMessage();
-        Task[] tasks = new Task[100];
+        ArrayList <Task> tasks = new ArrayList<Task>();
         Scanner sc = new Scanner(System.in);
         String in = sc.nextLine();
         String[] strings = new String[3];
@@ -16,6 +17,10 @@ public class Duke {
             int numerate = 0;
             if (in.equals("list")) {
                 dc.printList(tasks);
+            }
+
+            else if (in.contains("delete")) {
+                dc.deleteTask(tasks, in);
             }
 
             else if (in.contains("done")) {

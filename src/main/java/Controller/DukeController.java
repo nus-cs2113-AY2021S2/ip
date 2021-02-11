@@ -1,5 +1,6 @@
 package Controller;
 import Tasks.*;
+import java.util.ArrayList;
 public class DukeController {
 
     public DukeController() {};
@@ -23,15 +24,6 @@ public class DukeController {
         }
     }
 
-    public int listLength(Task[] tasks) {
-        int length = 0;
-        for (int i = 0; i<tasks.length; i++) {
-            if (tasks[i] != null) {
-                length++;
-            }
-        }
-        return length;
-    }
 
     public int charNumber(String in) {
         char ch1, ch2;
@@ -63,36 +55,35 @@ public class DukeController {
         System.out.println("--------------------------------------------");
     }
 
-    public void printTask(Task[] tasks, int count) {
+    public void printTask(ArrayList<Task> tasks, int count) {
         System.out.println("--------------------------------------------");
         System.out.println("Got it. I've added this task: ");
-        System.out.println(tasks[count].getPrintedLine());
-        System.out.println("Now you have " + listLength(tasks) + " tasks in the list.");
+        System.out.println(tasks.get(count).getPrintedLine());
+        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
         System.out.println("--------------------------------------------");
     }
 
-    public void printList(Task[] tasks) {
+    public void printList(ArrayList<Task> tasks) {
         int count = 1;
         System.out.println("--------------------------------------------");
         System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i< tasks.length; i++){
-            if (tasks[i] != null){
-                System.out.println(count+ ". " + tasks[i].getPrintedLine());
-                count++;}
+        for (Task task: tasks) {
+            System.out.println(count+ ". " + task.getPrintedLine());
+            count++;
         }
         System.out.println("--------------------------------------------");
     }
 
-    public void printDone(Task[] tasks, String in) {
+    public void printDone(ArrayList<Task> tasks, String in) {
         int numerate;
         numerate = charNumber(in);
         try {
-            if (numerate > listLength(tasks)) {
+            if (numerate > tasks.size()) {
                 throw new NullPointerException("There is no such event in your list");
             }
             System.out.println("--------------------------------------------");
-            tasks[numerate-1].markAsDone();
-            System.out.println(tasks[numerate-1].getPrintedLine());
+            tasks.get(numerate-1).markAsDone();
+            System.out.println(tasks.get(numerate-1).getPrintedLine());
             System.out.println("--------------------------------------------");
         }
         catch (NullPointerException e) {
@@ -101,12 +92,13 @@ public class DukeController {
         }
     }
 
-    public void printTodo(Task[] tasks, String in, String[] strings, int count1) {
+    public void printTodo(ArrayList<Task> tasks, String in, String[] strings, int count1) {
         try{
             if (in.equals("todo")) {
                 throw new DukeException("todo");
             }
-            tasks[count1] = new ToDo(strings[0]);
+            Task task = new ToDo(strings[0]);
+            tasks.add(task);
             printTask(tasks, count1);
         }
         catch(DukeException e) {
@@ -115,12 +107,13 @@ public class DukeController {
         }
     }
 
-    public void printDeadline(Task[] tasks, String in, String[] strings, int count1) {
+    public void printDeadline(ArrayList<Task> tasks, String in, String[] strings, int count1) {
         try{
             if (in.equals("deadline")) {
                 throw new DukeException("deadline");
             }
-            tasks[count1] = new Deadline(strings[0], strings[1]);
+            Task task = new Deadline(strings[0], strings[1]);
+            tasks.add(task);
             printTask(tasks, count1);
         }
         catch (DukeException e) {
@@ -129,12 +122,13 @@ public class DukeController {
         }
     }
 
-    public void printEvent(Task[] tasks, String in, String[] strings, int count1) {
+    public void printEvent(ArrayList<Task> tasks, String in, String[] strings, int count1) {
         try{
             if (in.equals("event")) {
                 throw new DukeException("event");
             }
-            tasks[count1] = new Event(strings[0], strings[1]);
+            Task task = new Event(strings[0], strings[1]);
+            tasks.add(task);
             printTask(tasks, count1);
         }
         catch (DukeException e) {
@@ -151,6 +145,27 @@ public class DukeController {
         }
         catch (DukeException e) {
             System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
+            System.out.println("--------------------------------------------");
+        }
+    }
+
+    public void deleteTask(ArrayList<Task> tasks, String in){
+        int numerate;
+        numerate = charNumber(in);
+        try {
+            if (numerate > tasks.size()) {
+                throw new NullPointerException("There is no such event in your list");
+            }
+            System.out.println("--------------------------------------------");
+            System.out.println("Noted. I've removed this task: ");
+            System.out.println(tasks.get(numerate-1).getPrintedLine());
+            tasks.remove(numerate-1);
+            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            System.out.println("--------------------------------------------");
+
+        }
+        catch (NullPointerException e) {
+            System.out.println(e.getMessage());
             System.out.println("--------------------------------------------");
         }
     }
