@@ -19,7 +19,8 @@ public class Duke {
                     done(command.split(" ")[1]);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.out.println(line);
-                    System.out.println("\tPlease specify index of task");
+                    System.out.println("\tPlease specify index of task done");
+                    printUsage("Done");
                     System.out.println(line);
                 }
             } else if (command.startsWith("todo")) {
@@ -27,7 +28,8 @@ public class Duke {
                     addTodo(command.split(" ", 2)[1]);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.out.println(line);
-                    System.out.println("\tTodo description cannot be empty");
+                    System.out.println("\tPlease specify the todo description");
+                    printUsage("Todo");
                     System.out.println(line);
                 }
             } else if (command.startsWith("event")) {
@@ -35,7 +37,8 @@ public class Duke {
                     addEvent(command.split(" ", 2)[1]);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.out.println(line);
-                    System.out.println("\tEvent description cannot be empty");
+                    System.out.println("\tPlease specify the event description");
+                    printUsage("Event");
                     System.out.println(line);
                 }
             } else if (command.startsWith("deadline")) {
@@ -43,12 +46,13 @@ public class Duke {
                     addDeadline(command.split(" ", 2)[1]);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.out.println(line);
-                    System.out.println("\tDeadline description cannot be empty");
+                    System.out.println("\tPlease specify the deadline description");
+                    printUsage("Deadline");
                     System.out.println(line);
                 }
             } else {
                 System.out.println(line);
-                System.out.println("\tOOPS!!! I'm sorry, but I don't know what that means :(");
+                System.out.println("\tSorry, this command is not available yet. Stay tuned! :)");
                 System.out.println(line);
             }
         }
@@ -98,6 +102,7 @@ public class Duke {
         catch (ArrayIndexOutOfBoundsException e) {
             System.out.println(line);
             System.out.println("\tPlease specify event date.");
+            printUsage("Event");
             System.out.println(line + "\n");
         }
     }
@@ -119,6 +124,7 @@ public class Duke {
         catch (ArrayIndexOutOfBoundsException e) {
             System.out.println(line);
             System.out.println("\tPlease specify deadline.");
+            printUsage("Deadline");
             System.out.println(line + "\n");
         }
     }
@@ -136,6 +142,18 @@ public class Duke {
             System.out.println("\t  [" + tasks[i].getType() + "][" + tasks[i].getStatusIcon() + "] "
                     + tasks[i].getDescription());
             System.out.println(line + "\n");
+        }
+    }
+
+    public static void printUsage(String type) {
+        if (type=="Todo") {
+            System.out.println("\tUsage: todo [task]");
+        } else if (type=="Event") {
+            System.out.println("\tUsage: event [event] /at [time]");
+        } else if (type=="Deadline") {
+            System.out.println("\tUsage: deadline [task] /by [due date]");
+        } else if (type=="Done") {
+            System.out.println("\tUsage: done [index of task]");
         }
     }
 
