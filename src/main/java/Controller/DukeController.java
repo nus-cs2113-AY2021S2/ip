@@ -88,7 +88,6 @@ public class DukeController {
     }
 
     public ArrayList<Task> loadFile() {
-        int index;
         ArrayList<Task> tasks = new ArrayList<Task>();
         try {
             File myObj = new File("duke.txt");
