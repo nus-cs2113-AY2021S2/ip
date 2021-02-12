@@ -9,12 +9,20 @@ public class Duke {
     static String by;
     static int indexOfBy;
 
-    public static void storeTask(Task t){
-        tasks[taskPosition] = t;
-        taskPosition++;
-        System.out.println("Got it! I've added this task!");
-        System.out.println(t.getStatusIcon() +" " + t.getDescription());
-        System.out.println("Now you have " + countArray(tasks) + " tasks!");
+    public static void storeTask(Task t) throws TodoException{
+        if (!t.description.isEmpty()){
+            tasks[taskPosition] = t;
+            taskPosition++;
+            System.out.println("Got it! I've added this task!");
+            System.out.println(t.description);
+            System.out.println(t.getStatusIcon() + " " + t.getDescription());
+            System.out.println("Now you have " + countArray(tasks) + " tasks!");
+
+        }
+        else {
+            throw new TodoException();
+        }
+
     }
 
     public static int countArray(Task[] tasks){
@@ -43,7 +51,7 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InvalidCommandException, InvalidDateException{
         System.out.println("Hello! I'm 343 Guilty Spark! You may call me Spark!");
         System.out.println("What can I do for you?");
         String text = "hi";
@@ -54,6 +62,7 @@ public class Duke {
             //Task t = new Task(text);
             String[] arr = text.split(" "); //split command input into words
             String command = arr[0];
+
             switch (command){
             case "deadline":
             case "Deadline":
@@ -62,23 +71,50 @@ public class Duke {
                 description = text.substring(9,indexOfBy-1);
                 by = text.substring(indexOfBy + 1);
                 Deadline deadlineTask = new Deadline(description,by);
-                storeTask(deadlineTask);
+                try {
+                    storeTask(deadlineTask);
+                } catch (TodoException e) {
+                    e.printStackTrace();
+                }
                 break;
             case "todo":
             case "Todo":
             case "TODO":
-                description = text.substring(5);
-                Todo todoTask = new Todo(description);
-                storeTask(todoTask);
-                break;
+
+                try{
+                    description = text.substring(5);
+                    Todo todoTask = new Todo(description);
+                    storeTask(todoTask);
+                    break;
+                } catch (TodoException e){
+                    System.out.println("Todo cannot be empty");
+                    break;
+                }
+                catch (IndexOutOfBoundsException e){
+                    System.out.println("Todo list cannot be empty! Try again!");
+                    break;
+                }
+
+
             case "event":
             case "Event":
             case "EVENT":
-                indexOfBy = text.indexOf('/');
-                String description = text.substring(6,indexOfBy-1);
-                String by = text.substring(indexOfBy + 1);
-                Event eventTask = new Event(description,by);
-                storeTask(eventTask);
+
+                try {
+                    if (!text.contains("/")){
+                        throw new InvalidDateException();
+                    }
+                    indexOfBy = text.indexOf('/');
+
+                    String description = text.substring(6,indexOfBy-1);
+                    String by = text.substring(indexOfBy + 1);
+                    Event eventTask = new Event(description,by);
+                    storeTask(eventTask);
+                } catch (TodoException e) {
+                    System.out.println("Event description cannot be empty! Try again!");
+                } catch (InvalidDateException e){
+                    System.out.println("Event must have a date! Try again!");
+                }
                 break;
             case "List":
             case "list":
@@ -91,6 +127,9 @@ public class Duke {
                 Integer taskIndex = Integer.parseInt(arr[1]);
                 markAsDone(taskIndex);
                 break;
+
+            default:
+                System.out.println("Invalid command. Only accepts Todo,List,Event or Deadline!");
             }
 
 
