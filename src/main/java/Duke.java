@@ -6,7 +6,7 @@ public class Duke {
         printLogo();
 
         Scanner sc = new Scanner(System.in);
-        String phrase = "";
+        String phrase;
         ArrayList<Task> tasks = new ArrayList<Task>();
 
         printDivider();
@@ -20,11 +20,6 @@ public class Duke {
             inputCommand(phrase, tasks);
             printEndDivider();
         } while (!phrase.equals("bye"));
-
-        // Exits Program
-        printEndDivider();
-        System.out.println("Alright cheers mate!");
-        printDivider();
     }
 
     public static void inputCommand(String phrase, ArrayList<Task> tasks) {
@@ -32,6 +27,10 @@ public class Duke {
         int dividerPosition = phrase.indexOf("/");
 
         switch (subStrings[0]) {
+        case ("bye"):
+            // Exits program
+            System.out.println("Alright cheers mate!");
+            break;
         case ("list"):
             // List all tasks
             System.out.println("Here are the tasks in your list:");
