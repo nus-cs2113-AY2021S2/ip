@@ -6,6 +6,7 @@ public class Duke {
         printLogo();
 
         Scanner sc = new Scanner(System.in);
+        String phrase = "";
         ArrayList<Task> tasks = new ArrayList<Task>();
 
         printDivider();
@@ -13,83 +14,79 @@ public class Duke {
         System.out.println("What can I do for you?");
         printEndDivider();
 
-        boolean isRunning = true;
-        while (isRunning) {
-            String phrase = sc.nextLine();
+        do {
+            phrase = sc.nextLine();
+            printDivider();
+            inputCommand(phrase, tasks);
+            printEndDivider();
+        } while (!phrase.equals("bye"));
 
-            if (phrase.equals("bye")) {
-                // Exits program
-                isRunning = false;
-            } else if (phrase.equals("list")) {
-                // List all tasks
-                printDivider();
-                System.out.println("Here are the tasks in your list:");
-                int i = 0;
-                for (Task task : tasks) {
-                    System.out.println(++i + ". " + task.toString());
-                };
-                printEndDivider();
-            } else if (phrase.startsWith("done ")) {
-                // Set a task as done
-                int taskIndex = phrase.charAt(phrase.length()-1) - '0';
-
-                if (taskIndex > tasks.size()) {
-                    printDivider();
-                    System.out.println("Oops task " + taskIndex + " does not exist! Try again mate!");
-                    printEndDivider();
-                } else {
-                    printDivider();
-                    System.out.println("Nice! I've marked this task as done:");
-                    Task task = tasks.get(taskIndex - 1);
-                    task.markAsDone();
-                    System.out.println("[" + task.getStatusIcon() + "] " + task.getDescription());
-                    printEndDivider();
-                }
-            } else if (phrase.startsWith("todo ")) {
-                // Add a To-Do
-                printDivider();
-                phrase = phrase.substring(5);
-                Todo todo = new Todo(phrase);
-                System.out.println("Got it! I've added this task:");
-                tasks.add(todo);
-                System.out.println(todo);
-                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-                printEndDivider();
-            } else if (phrase.startsWith("deadline ")) {
-                // Add a Deadline
-                printDivider();
-                int dividerPosition = phrase.indexOf("/");
-                String by = phrase.substring(dividerPosition+4);
-                phrase = phrase.substring(9, dividerPosition);
-                Deadline deadline = new Deadline(phrase, by);
-                System.out.println("Got it! I've added this task:");
-                tasks.add(deadline);
-                System.out.println(deadline);
-                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-                printEndDivider();
-            } else if (phrase.startsWith("event ")) {
-                // Add an Event
-                printDivider();
-                int dividerPosition = phrase.indexOf("/");
-                String eventTime = phrase.substring(dividerPosition+4);
-                phrase = phrase.substring(6, dividerPosition);
-                Event event = new Event(phrase, eventTime);
-                System.out.println("Got it! I've added this task:");
-                tasks.add(event);
-                System.out.println(event);
-                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-                printEndDivider();
-            } else {
-                // Invalid Task
-                printDivider();
-                System.out.println("Sorry mate I do not understand your request. Please specify task :)");
-                printEndDivider();
-            }
-        }
         // Exits Program
         printEndDivider();
         System.out.println("Alright cheers mate!");
         printDivider();
+    }
+
+    public static void inputCommand(String phrase, ArrayList<Task> tasks) {
+        String[] subStrings = phrase.split(" ");
+        int dividerPosition = phrase.indexOf("/");
+
+        switch (subStrings[0]) {
+        case ("list"):
+            // List all tasks
+            System.out.println("Here are the tasks in your list:");
+            int i = 0;
+            for (Task task : tasks) {
+                System.out.println(++i + ". " + task.toString());
+            }
+            break;
+        case ("done"):
+            // Set a task as done
+            int taskIndex = phrase.charAt(phrase.length() - 1) - '0';
+
+            if (taskIndex > tasks.size()) {
+                System.out.println("Oops task " + taskIndex + " does not exist! Try again mate!");
+            } else {
+                System.out.println("Nice! I've marked this task as done:");
+                Task task = tasks.get(taskIndex - 1);
+                task.markAsDone();
+                System.out.println("[" + task.getStatusIcon() + "] " + task.getDescription());
+            }
+            break;
+        case ("todo"):
+            // Add a To-Do
+            phrase = phrase.substring(5);
+            Todo todo = new Todo(phrase);
+            System.out.println("Got it! I've added this task:");
+            tasks.add(todo);
+            System.out.println(todo);
+            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            break;
+        case ("deadline"):
+            // Add a Deadline
+            String by = phrase.substring(dividerPosition + 4);
+            phrase = phrase.substring(9, dividerPosition);
+            Deadline deadline = new Deadline(phrase, by);
+            System.out.println("Got it! I've added this task:");
+            tasks.add(deadline);
+            System.out.println(deadline);
+            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            break;
+        case ("event"):
+            // Add an Event
+            String eventTime = phrase.substring(dividerPosition + 4);
+            phrase = phrase.substring(6, dividerPosition);
+            Event event = new Event(phrase, eventTime);
+            System.out.println("Got it! I've added this task:");
+            tasks.add(event);
+            System.out.println(event);
+            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            break;
+        default:
+            // Invalid Task
+            System.out.println("Sorry mate I do not understand your request. Please specify task :)");
+            break;
+        }
     }
 
     private static void printLogo() {
