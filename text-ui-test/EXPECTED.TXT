@@ -13,9 +13,26 @@ Got it. I've added this task:
 Now you have 2 tasks in the list.
 ---------------------------------------------------------------
 ---------------------------------------------------------------
+Got it. I've added this task:
+  [T][✘] practice coding
+Now you have 3 tasks in the list.
+---------------------------------------------------------------
+---------------------------------------------------------------
 Here are the tasks in your list:
 1. [T][✘] read book
 2. [T][✘] return book
+3. [T][✘] practice coding
+---------------------------------------------------------------
+---------------------------------------------------------------
+☹ OOPS!!! The index number is out of range :-(
+---------------------------------------------------------------
+---------------------------------------------------------------
+☹ OOPS!!! The index number is out of range :-(
+---------------------------------------------------------------
+---------------------------------------------------------------
+Noted. I've removed this task:
+  [T][✘] return book
+Now you have 2 tasks in the list.
 ---------------------------------------------------------------
 ---------------------------------------------------------------
 Got it. I've added this task:
@@ -31,7 +48,7 @@ Now you have 3 tasks in the list.
 ---------------------------------------------------------------
 Here are the tasks in your list:
 1. [T][✘] read book
-2. [T][✘] return book
+2. [T][✘] practice coding
 3. [E][✘] blackpink concert (at: 12KST, 31 Jan 2021)
 ---------------------------------------------------------------
 ---------------------------------------------------------------
@@ -47,7 +64,7 @@ Now you have 5 tasks in the list.
 ---------------------------------------------------------------
 Here are the tasks in your list:
 1. [T][✘] read book
-2. [T][✘] return book
+2. [T][✘] practice coding
 3. [E][✘] blackpink concert (at: 12KST, 31 Jan 2021)
 4. [D][✘] CS2105 Assignment (by: 31 Jan 2021)
 5. [D][✘] CS2106 Assignment (by: 5 Feb 2021)
@@ -73,7 +90,7 @@ Nice! I've marked this task as done:
 ---------------------------------------------------------------
 Here are the tasks in your list:
 1. [T][✓] read book
-2. [T][✘] return book
+2. [T][✘] practice coding
 3. [E][✓] blackpink concert (at: 12KST, 31 Jan 2021)
 4. [D][✘] CS2105 Assignment (by: 31 Jan 2021)
 5. [D][✓] CS2106 Assignment (by: 5 Feb 2021)
@@ -90,7 +107,7 @@ Here are the tasks in your list:
 ---------------------------------------------------------------
 Here are the tasks in your list:
 1. [T][✓] read book
-2. [T][✘] return book
+2. [T][✘] practice coding
 3. [E][✓] blackpink concert (at: 12KST, 31 Jan 2021)
 4. [D][✘] CS2105 Assignment (by: 31 Jan 2021)
 5. [D][✓] CS2106 Assignment (by: 5 Feb 2021)
@@ -98,6 +115,25 @@ Here are the tasks in your list:
 ---------------------------------------------------------------
 ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
 ---------------------------------------------------------------
+---------------------------------------------------------------
+Noted. I've removed this task:
+  [T][✓] read book
+Now you have 4 tasks in the list.
+---------------------------------------------------------------
+---------------------------------------------------------------
+Noted. I've removed this task:
+  [E][✓] blackpink concert (at: 12KST, 31 Jan 2021)
+Now you have 3 tasks in the list.
+---------------------------------------------------------------
+---------------------------------------------------------------
+Noted. I've removed this task:
+  [D][✓] CS2106 Assignment (by: 5 Feb 2021)
+Now you have 2 tasks in the list.
+---------------------------------------------------------------
+---------------------------------------------------------------
+Here are the tasks in your list:
+1. [T][✘] practice coding
+2. [D][✘] CS2105 Assignment (by: 31 Jan 2021)
 ---------------------------------------------------------------
 Bye. Hope to see you again soon!
 ---------------------------------------------------------------

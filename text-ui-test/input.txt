@@ -1,6 +1,10 @@
 todo read book
 todo return book
+todo practice coding
 list
+delete 4
+delete 0
+delete 2
 event blackpink concert /at 12KST, 31 Jan 2021
 event AWS Summit /by 12 Jan 2020
 event
@@ -19,4 +23,8 @@ deadline
 deadline CS2107 Assignment
 list
 hehehe
+delete 1
+delete 2
+delete 3
+list
 bye
