@@ -10,12 +10,21 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
+import java.nio.file.Paths;
+
 public class Duke {
-    static ArrayList<Task> tasks = new ArrayList<>();
+    private static ArrayList<Task> tasks = new ArrayList<>();
 
     /* Show divider */
     private static void showDivider() {
-        System.out.println("---------------------------------------------------------------");
+        System.out.println("-----------------------------------------------------------------");
     }
 
     /* Show greeting message */
@@ -151,7 +160,7 @@ public class Duke {
 
     /* Validate whether input is empty */
     private static void checkIsEmpty(String input) throws DukeException {
-        if (input == "") {
+        if (input.equals("")) {
             throw new DukeException("The index number cannot be empty :-(");
         }
     }
@@ -175,25 +184,30 @@ public class Duke {
     }
 
     /* Execute command based on input from parseCommand */
-    private static void executeCommand(String command, String parameter) throws DukeException {
+    private static void executeCommand(String command, String parameter, File taskFile) throws DukeException {
         switch (command) {
         case "list":
             showTasks();
             break;
         case "done":
             markAsDone(parameter);
+            storeTasksToFile(taskFile);
             break;
         case "todo":
             createTodoTask(parameter);
+            storeTasksToFile(taskFile);
             break;
         case "event":
             createEventTask(parameter);
+            storeTasksToFile(taskFile);
             break;
         case "deadline":
             createDeadlineTask(parameter);
+            storeTasksToFile(taskFile);
             break;
         case "delete":
             deleteTask(parameter);
+            storeTasksToFile(taskFile);
             break;
         default:
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
@@ -215,20 +229,20 @@ public class Duke {
     }
 
     /* Interacts with user until bye is met */
-    private static void interactWithUser() {
+    private static void interactWithUser(File taskFile) {
         Scanner line = new Scanner(System.in);
 
         while (line.hasNextLine()) {
             String input = line.nextLine();
             showDivider();
-            if (input.toLowerCase().equals("bye")) {
+            if (input.equalsIgnoreCase("bye")) {
                 break;
             }
 
             String[] parsedCommand = parseCommand(input);
 
             try {
-                executeCommand(parsedCommand[0], parsedCommand[1]);
+                executeCommand(parsedCommand[0], parsedCommand[1], taskFile);
             } catch (DukeException de) {
                 printErrorMessage(de);
             }
@@ -236,9 +250,79 @@ public class Duke {
         }
     }
 
+    /* Load tasks from data file if exists */
+    private static void loadTasksFromFile(File taskFile) throws DukeException {
+        if (taskFile.exists()) {
+            FileInputStream fileInputStream = null;
+            ObjectInputStream objectInputStream = null;
+
+            try {
+                fileInputStream = new FileInputStream(taskFile);
+                objectInputStream = new ObjectInputStream(fileInputStream);
+
+                tasks = (ArrayList<Task>) objectInputStream.readObject();
+            } catch (IOException e) {
+                throw new DukeException("Input/Output error. Failed to load tasks from file.");
+            } catch (ClassNotFoundException e) {
+                throw new DukeException("Data corrupted. Failed to load tasks from file.");
+            } finally {
+                try {
+                    if (fileInputStream != null) {
+                        fileInputStream.close();
+                    }
+
+                    if (objectInputStream != null) {
+                        objectInputStream.close();
+                    }
+                } catch (IOException e) {
+                    throw new DukeException("Something's wrong when closing the file...");
+                }
+            }
+        }
+    }
+
+    /* Store changes made to task list into tasks file */
+    private static void storeTasksToFile(File taskFile) throws DukeException {
+        if (!taskFile.exists()) {
+            taskFile.getParentFile().mkdirs();
+        }
+
+        FileOutputStream fileOutputStream = null;
+        ObjectOutputStream objectOutputStream = null;
+
+        try {
+            fileOutputStream = new FileOutputStream(taskFile);
+            objectOutputStream = new ObjectOutputStream(fileOutputStream);
+
+            objectOutputStream.writeObject(tasks);
+        } catch (IOException e) {
+            throw new DukeException("Input/Output error. Failed to store tasks to file.");
+        } finally {
+            try {
+                if (fileOutputStream != null) {
+                    fileOutputStream.close();
+                }
+
+                if (objectOutputStream != null) {
+                    objectOutputStream.close();
+                }
+            } catch (IOException e) {
+                throw new DukeException("Something's wrong when closing the file...");
+            }
+        }
+    }
+
     public static void main(String[] args) {
+        File taskFile = Paths.get("data/tasks.txt").toFile();
+
+        try {
+            loadTasksFromFile(taskFile);
+        } catch (DukeException de) {
+            printErrorMessage(de);
+        }
+
         showGreeting();
-        interactWithUser();
+        interactWithUser(taskFile);
         showExit();
     }
 }
