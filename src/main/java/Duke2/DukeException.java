@@ -1,3 +1,5 @@
+package Duke2;
+
 public class DukeException extends Duke {
     public static void taskDescriptionEmpty(){
         System.out.println(" No task description :(\n Ahh what's the task here?");
@@ -8,7 +10,7 @@ public class DukeException extends Duke {
     }
 
     public static void illegalInput() {
-        System.out.println(" Duke doesn't know what to do with the command D:");
+        System.out.println(" Duke2.Duke doesn't know what to do with the command D:");
     }
 
     public static void doneWithoutNo() {

@@ -1,3 +1,5 @@
+package Duke2;
+
 public class AddToList extends Duke {
     public static void AddToList(String taskType, String task) {
         if (taskType.equalsIgnoreCase("todo")) {

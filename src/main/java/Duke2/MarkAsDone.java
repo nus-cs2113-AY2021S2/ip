@@ -1,3 +1,5 @@
+package Duke2;
+
 public class MarkAsDone extends Duke{
     public static void MarkAsDone(String doneTask){
         try{

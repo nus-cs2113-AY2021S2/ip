@@ -1,3 +1,5 @@
+package Duke2;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -28,7 +30,7 @@ public class Duke {
             } else if (inputStringSplit[0].equalsIgnoreCase("list")){
                 PrintList(0, listIndex);
             } else if (AddToList.keywordCheck(inputStringSplit[0])){
-                if (inputStringSplit.length > 1){
+                if (inputStringSplit.length > 1 && inputStringSplit[1] != null){
                     AddToList.AddToList(inputStringSplit[0],inputStringSplit[1]);
                 } else {
                     DukeException.taskDescriptionEmpty();
@@ -53,7 +55,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println( logo +
                 "____________________________________________________________\n" +
-                " Hello! I'm Duke\n" +
+                " Hello! I'm Duke2.Duke\n" +
                 " What can I do for you?\n" +
                 "____________________________________________________________\n");
     }
