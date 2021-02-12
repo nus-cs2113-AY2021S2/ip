@@ -17,10 +17,10 @@ public class dukeController {
     }
 
     /*Methods to process the input of the user.
-If input is not valid, returns string nonsense.
-The type of task is indicated by the first substring and the task description is found after the first blank space.
-If a forward slash present,  ths substring is split into the task and the end date which is indicated by the slash.
-Exception handling includes cases where no tasks are specified, invalid inputs, no date or time being specified (for event and deadline)*/
+    If input is not valid, returns string nonsense.
+    The type of task is indicated by the first substring and the task description is found after the first blank space.
+    If a forward slash present,  ths substring is split into the task and the end date which is indicated by the slash.
+    Exception handling includes cases where no tasks are specified, invalid inputs, no date or time being specified (for event and deadline)*/
     public String extractTask(String input) {
         String Task;
         if (input.equalsIgnoreCase("list")) {

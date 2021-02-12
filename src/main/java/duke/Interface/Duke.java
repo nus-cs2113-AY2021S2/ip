@@ -1,22 +1,18 @@
 package duke.Interface;
 
-import duke.Tasks.Deadline;
-import duke.Tasks.Event;
-import duke.Tasks.Task;
-import duke.Tasks.toDo;
+
+import duke.Tasks.*;
 import duke.Controller.dukeController;
 
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-
     public static void main(String[] args) {
         dukeController duke = new dukeController();
         duke.displayWelcome();
 
         ArrayList <Task> tasks= new ArrayList <Task> ();
-        int count = 0;
         Scanner sc = new Scanner(System.in);
         Boolean isSame = true;
         while (isSame) {
@@ -32,7 +28,6 @@ public class Duke {
              If input is "Deadline", classify task as Deadline.
              If input is "Event", classify task as Event.
              If there is no task specified after specifying the type of task, system will prompt for another input*/
-
             if (stringTask.contains("retry")) {
                 System.out.println("Hoi allow it fam! Why you got no tasks? Are you dumb? Try again... you melon!");
                 continue;
