@@ -13,6 +13,8 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718");
     }
 
+    public String getTextIcon() { return (isDone ? "1" :" 0"); }
+
     public void markAsDone() {
         this.isDone = true;
     }
@@ -22,6 +24,10 @@ public class Task {
     public String getTask() {
         return description;
     }
+
+    public String getType() { return null; }
+
+    public String getTime() { return null; }
 
     public String toString() {
         return "[" + getStatusIcon() + "] " + getTask();

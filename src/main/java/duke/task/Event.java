@@ -10,7 +10,13 @@ public class Event extends Task {
     }
 
     @Override
+    public String getTime() { return this.time; }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + time + ")";
     }
+
+    @Override
+    public String getType() { return "E"; }
 }
