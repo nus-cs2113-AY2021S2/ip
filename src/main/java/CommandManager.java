@@ -20,6 +20,7 @@ public class CommandManager {
     private static final int SECOND_HALF = 1;
 
     private static final int ARRAY_INDEX_FOR_DATE = 1;
+    private static final int EXTRA_INDEX_FOR_ARRAY = 1;
 
     public CommandManager(String userInput) {
         String[] words = splitUserInput(userInput, WHITESPACE_DELIMITER);
@@ -82,7 +83,7 @@ public class CommandManager {
             taskManager.addEvent(getDescriptionAndDate(command, description));
             break;
         case DONE_COMMAND:
-            int taskNumber = Integer.parseInt(description);
+            int taskNumber = Integer.parseInt(description)-EXTRA_INDEX_FOR_ARRAY;
             taskManager.markAsDone(taskNumber);
             break;
         case EXIT_COMMAND:

@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class Duke {
     private static final Scanner SCANNER = new Scanner(System.in);
+    private static final String BORDER = "\t____________________________________________________________\n";
 
     public static void showGreetings () {
         System.out.print("Hello there! This is Jack. Welcome to Task Tracker!\n");
@@ -15,13 +16,21 @@ public class Duke {
         try {
             CommandManager.executeCommand(command, description, taskManager);
         } catch (IndexOutOfBoundsException | NumberFormatException errorToMarkAsDone) {
-            System.out.print("☹ OOPS!!! It seems that you have entered an invalid task number.\n");
+            System.out.print(BORDER +
+                    "\t☹ OOPS!!! It seems that you have entered an invalid number.\n"
+                    + BORDER);
         } catch (EmptyOrWrongInputException errorInvalidOrNoInput) {
-            System.out.print("☹ OOPS!!! It seems that you have entered an invalid input.\n");
+            System.out.print(BORDER +
+                    "\t☹ OOPS!!! It seems that you have entered an invalid input.\n"
+                    + BORDER);
         } catch (EmptyDescriptionException emptyDescriptionException) {
-            System.out.print("☹ OOPS!!! It seems that you have not enter a description.\n");
+            System.out.print(BORDER +
+                    "\t☹ OOPS!!! It seems that you have not enter a description.\n"
+                    + BORDER);
         } catch (EmptyDateException emptyDateException) {
-            System.out.print("☹ OOPS!!! It seems that you have not enter a date.\n");
+            System.out.print(BORDER +
+                    "\t☹ OOPS!!! It seems that you have not enter a date.\n"
+                    + BORDER);
         }
     }
 

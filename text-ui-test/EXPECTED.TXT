@@ -42,11 +42,11 @@ Hello there! This is Jack. Welcome to Task Tracker!
 	____________________________________________________________
 	____________________________________________________________
 	 Got it. I've added this task:
-	   [D][ ] return book (by: by: June 6th)
+	   [D][ ] return book (by: June 6th)
 	 Now you have 5 tasks in the list.
 	____________________________________________________________
 	____________________________________________________________
-	 Invalid command. Please enter another task number.
+	☹ OOPS!!! It seems that you have entered an invalid number.
 	____________________________________________________________
 	____________________________________________________________
 	Here are the task in your list:
@@ -54,7 +54,25 @@ Hello there! This is Jack. Welcome to Task Tracker!
 	2.[D][ ] weekly CS2113 quiz (by: Monday 9pm)
 	3.[E][X] CS2113 lecture (at: Friday 4 to 6 pm)
 	4.[T][ ] read book
-	5.[D][ ] return book (by: by: June 6th)
+	5.[D][ ] return book (by: June 6th)
+	____________________________________________________________
+	____________________________________________________________
+	☹ OOPS!!! It seems that you have entered an invalid number.
+	____________________________________________________________
+	____________________________________________________________
+	☹ OOPS!!! It seems that you have entered an invalid input.
+	____________________________________________________________
+	____________________________________________________________
+	☹ OOPS!!! It seems that you have entered an invalid input.
+	____________________________________________________________
+	____________________________________________________________
+	☹ OOPS!!! It seems that you have not enter a description.
+	____________________________________________________________
+	____________________________________________________________
+	☹ OOPS!!! It seems that you have not enter a date.
+	____________________________________________________________
+	____________________________________________________________
+	☹ OOPS!!! It seems that you have not enter a date.
 	____________________________________________________________
 	____________________________________________________________
 	 Good Bye. Hope to see you again soon!
