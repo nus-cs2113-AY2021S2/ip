@@ -44,7 +44,7 @@ public class Duke {
             int taskIndex = phrase.charAt(phrase.length() - 1) - '0';
 
             if (taskIndex > tasks.size()) {
-                System.out.println("Oops task " + taskIndex + " does not exist! Try again mate!");
+                System.out.println("\uD83D\uDE2D Oops task " + taskIndex + " does not exist! Try again mate!");
             } else {
                 System.out.println("Nice! I've marked this task as done:");
                 Task task = tasks.get(taskIndex - 1);
@@ -54,36 +54,48 @@ public class Duke {
             break;
         case ("todo"):
             // Add a To-Do
-            phrase = phrase.substring(5);
-            Todo todo = new Todo(phrase);
-            System.out.println("Got it! I've added this task:");
-            tasks.add(todo);
-            System.out.println(todo);
-            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            try {
+                phrase = phrase.substring(5);
+                Todo todo = new Todo(phrase);
+                System.out.println("Got it! I've added this task:");
+                tasks.add(todo);
+                System.out.println(todo);
+                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            } catch (StringIndexOutOfBoundsException e) {
+                System.out.println("\uD83D\uDE2D Description of To-Do cannot be empty!");
+            }
             break;
         case ("deadline"):
-            // Add a Deadline
-            String by = phrase.substring(dividerPosition + 4);
-            phrase = phrase.substring(9, dividerPosition);
-            Deadline deadline = new Deadline(phrase, by);
-            System.out.println("Got it! I've added this task:");
-            tasks.add(deadline);
-            System.out.println(deadline);
-            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            try {
+                // Add a Deadline
+                String by = phrase.substring(dividerPosition + 4);
+                phrase = phrase.substring(9, dividerPosition);
+                Deadline deadline = new Deadline(phrase, by);
+                System.out.println("Got it! I've added this task:");
+                tasks.add(deadline);
+                System.out.println(deadline);
+                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            } catch (StringIndexOutOfBoundsException e) {
+                System.out.println("\uD83D\uDE2D Please enter deadline in the format: 'deadline <name> /by <day> <time>'");
+            }
             break;
         case ("event"):
             // Add an Event
-            String eventTime = phrase.substring(dividerPosition + 4);
-            phrase = phrase.substring(6, dividerPosition);
-            Event event = new Event(phrase, eventTime);
-            System.out.println("Got it! I've added this task:");
-            tasks.add(event);
-            System.out.println(event);
-            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            try {
+                String eventTime = phrase.substring(dividerPosition + 4);
+                phrase = phrase.substring(6, dividerPosition);
+                Event event = new Event(phrase, eventTime);
+                System.out.println("Got it! I've added this task:");
+                tasks.add(event);
+                System.out.println(event);
+                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            } catch (StringIndexOutOfBoundsException e) {
+                System.out.println("\uD83D\uDE2D Please enter event in the format: 'event <name> /at <day> <time>'");
+            }
             break;
         default:
             // Invalid Task
-            System.out.println("Sorry mate I do not understand your request. Please specify task :)");
+            System.out.println("\uD83D\uDE2D Sorry mate I do not understand your request. Please specify task");
             break;
         }
     }
