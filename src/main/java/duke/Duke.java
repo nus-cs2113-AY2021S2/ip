@@ -7,7 +7,9 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -162,7 +164,7 @@ public class Duke {
             String command = getFirstWord(line);
 
             if (line.equals("bye")) {
-                writeToFile(tasks);
+                writeToFile(tasks);     //Data is only saved when user properly exits program
                 showExitMessage();
                 isOn = false;
             } else if (line.equals("list")) {
