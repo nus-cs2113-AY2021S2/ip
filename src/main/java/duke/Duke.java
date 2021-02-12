@@ -107,6 +107,16 @@ public class Duke {
         }
     }
 
+    /* Delete specified task */
+    private static void deleteTask(String index) throws DukeException {
+        if (validateIndexNumber(index)) {
+            int indexNumber = Integer.parseInt(index);
+            Task task = tasks.get(indexNumber - 1);
+            tasks.remove(task);
+            showDeleteTaskMessage(task);
+        }
+    }
+
     /* Validate index number */
     private static boolean validateIndexNumber(String index) throws DukeException {
         if (checkIsNumber(index)) {
@@ -152,6 +162,13 @@ public class Duke {
         System.out.println("  " + task);
     }
 
+    /* Show delete task message */
+    private static void showDeleteTaskMessage(Task task) {
+        System.out.println("Noted. I've removed this task:");
+        System.out.println("  " + task);
+        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+    }
+
     /* Print exception error message */
     private static void printErrorMessage(DukeException de) {
         System.out.println(de.getMessage());
@@ -174,6 +191,9 @@ public class Duke {
             break;
         case "deadline":
             createDeadlineTask(parameter);
+            break;
+        case "delete":
+            deleteTask(parameter);
             break;
         default:
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
