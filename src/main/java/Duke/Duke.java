@@ -30,7 +30,7 @@ public class Duke {
             } else if (inputStringSplit[0].equalsIgnoreCase("list")){
                 PrintList(0, listIndex);
             } else if (AddToList.keywordCheck(inputStringSplit[0])){
-                if (inputStringSplit.length > 1 && inputStringSplit[1] != null){
+                if (inputStringSplit.length > 1 ){
                     AddToList.AddToList(inputStringSplit[0],inputStringSplit[1]);
                 } else {
                     DukeException.taskDescriptionEmpty();
@@ -41,7 +41,7 @@ public class Duke {
         }
     }
     public static void PrintList(int startIndex, int endIndex) {
-        for(int i = startIndex; i < endIndex; i++) {
+        for(int i = startIndex; i < endIndex; ++i) {
             System.out.println(" " + (i + 1) + ": [" + lists[i][0] + "][" + lists[i][1] + "]:" + " " + lists[i][2] +lists[i][3]);
         }
     }
@@ -60,7 +60,7 @@ public class Duke {
                 "____________________________________________________________\n");
     }
     public static void goodbye(){
-        System.out.println(" Bye. Hope to see you again soon!\n" +
+        System.out.println(" Bye! Hope to see you again soon!\n" +
                 "____________________________________________________________");
     }
 }
