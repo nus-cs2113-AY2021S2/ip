@@ -1,3 +1,10 @@
+package duke;
+
+import duke.exception.EmptyDateException;
+import duke.exception.EmptyDescriptionException;
+import duke.exception.EmptyOrWrongInputException;
+import duke.task.TaskManager;
+
 public class CommandManager {
 
     protected String command;
