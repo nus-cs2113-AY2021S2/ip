@@ -41,15 +41,17 @@ public class Duke {
             break;
         case ("done"):
             // Set a task as done
-            int taskIndex = phrase.charAt(phrase.length() - 1) - '0';
+            try {
+                int taskIndex = phrase.charAt(phrase.length() - 1) - '0';
 
-            if (taskIndex > tasks.size()) {
-                System.out.println("\uD83D\uDE2D Oops task " + taskIndex + " does not exist! Try again mate!");
-            } else {
-                System.out.println("Nice! I've marked this task as done:");
                 Task task = tasks.get(taskIndex - 1);
                 task.markAsDone();
+                System.out.println("Nice! I've marked this task as done:");
                 System.out.println("[" + task.getStatusIcon() + "] " + task.getDescription());
+            } catch (NumberFormatException e) {
+                System.out.println("\uD83D\uDE2D Please input a valid number!");
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("\uD83D\uDE2D Sorry task index is out of range!");
             }
             break;
         case ("todo"):
