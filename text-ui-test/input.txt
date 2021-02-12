@@ -6,7 +6,13 @@ done 1
 todo read book
 done 3
 list
-deadline return book /by by: June 6th
+deadline return book /by June 6th
 done 500
 list
+done
+blah
+blah blah
+todo
+deadline return book
+event CS2113 lecture
 bye
