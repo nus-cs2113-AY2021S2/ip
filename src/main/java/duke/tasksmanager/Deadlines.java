@@ -2,8 +2,6 @@ package duke.tasksmanager;
 
 public class Deadlines extends Tasks {
 
-    protected String date;
-
     public Deadlines(String description, String date) {
         super(description);
         this.typeOfTask = "D";

@@ -7,6 +7,12 @@ import duke.taskexceptions.TaskDateFormatException;
 
 import duke.tasksmanager.*;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -20,6 +26,10 @@ public class Duke {
     public static String taskInputString; //contains taskName and taskDate (from user's input)
     public static String taskName;
     public static String taskDate;
+
+    public static File dukePrevInputList = new File("data/dukeList.txt");
+    // creates a File object to represent a file duke.txt
+    // that exists in the data directory relative to the current working directory
 
     /**
      * Prints some lines to welcome the user:
@@ -283,6 +293,12 @@ public class Duke {
     //MAIN:
     public static void main(String[] args) {
 
+        try {
+            loadPrevListIntoNewList(); //load previous ArrayList from local hard disk
+        } catch (IOException e) {
+            System.out.println("IO exception :O");
+        }
+
         saysHiToUser();
 
         Scanner in = new Scanner(System.in);
@@ -323,7 +339,76 @@ public class Duke {
 
         }
 
+        //write to file:
+        try {
+            PrintWriter writer = new PrintWriter("data/dukeList.txt");
+            writer.print("");
+            writer.close();
+            for (int i = 0; i < taskCount; i++) {
+                Tasks currentTask = tasks.get(i);
+                appendToFile(currentTask.typeOfTask + "/" +
+                        currentTask.isDone + "/" +
+                        currentTask.description);
+                if (currentTask.typeOfTask.equals("D") || currentTask.typeOfTask.equals("E")) {
+                    appendToFile("/" + currentTask.date);
+                }
+                appendToFile(System.lineSeparator());
+            }
+
+        } catch (FileNotFoundException e) {
+            System.out.println("Write: File not found");
+        } catch (IOException e) {
+            System.out.print("Unable to write to file");
+        }
+
         saysByeToUser();
+    }
+
+    /**
+     * If file exists, loads older data from file into ArrayList 'tasks'
+     * Else, creates new file
+     * In both cases, file used to store new data in this iteration of Duke Main
+     * @throws IOException
+     */
+    private static void loadPrevListIntoNewList() throws IOException {
+        try {
+            Scanner s = new Scanner(dukePrevInputList); // create a Scanner using the File as the source
+            // add one todo, deadline OR event task
+            // based on current entry:
+            while (s.hasNext()) {
+                String[] prevListEntryWord = s.nextLine().split("/");
+                switch (prevListEntryWord[0]) {
+                case "T":
+                    tasks.add(new ToDos(prevListEntryWord[2]));
+                    break;
+                case "D":
+                    tasks.add(new Deadlines(prevListEntryWord[2], prevListEntryWord[3]));
+                    break;
+                case "E":
+                    tasks.add(new Events(prevListEntryWord[2], prevListEntryWord[3]));
+                    break;
+                default:
+                    break;
+                }
+                if (prevListEntryWord[1].equals("true")) {
+                    tasks.get(taskCount).markAsDone(); //if is a 'no', task is auto-marked as not done
+                }
+                taskCount++; //increment taskCount for added task
+            }
+
+        } catch (FileNotFoundException e) {
+            //For the first time, create a new file for the user:
+            File dataDirectory = new File("data");
+            dataDirectory.mkdir();
+            File dukeFile = new File("data","dukeList.txt");
+            dukeFile.createNewFile();
+        }
+    }
+
+    private static void appendToFile(String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter("data/dukeList.txt", true);
+        fw.write(textToAdd);
+        fw.close();
     }
 
 }

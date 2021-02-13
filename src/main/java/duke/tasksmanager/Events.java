@@ -2,8 +2,6 @@ package duke.tasksmanager;
 
 public class Events extends Tasks {
 
-    protected String date;
-
     public Events(String description, String date) {
         super(description);
         this.typeOfTask = "E";

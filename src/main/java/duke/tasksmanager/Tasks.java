@@ -2,9 +2,10 @@ package duke.tasksmanager;
 
 public class Tasks {
 
-    protected String description;
-    protected boolean isDone;
-    protected String typeOfTask;
+    public String description;
+    public boolean isDone;
+    public String typeOfTask;
+    public String date;
 
     public Tasks(String description) {
         this.description = description;
