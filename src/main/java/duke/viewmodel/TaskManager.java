@@ -1,9 +1,11 @@
 package duke.viewmodel;
 
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 
+import duke.data.Repository;
 import duke.model.Deadline;
 import duke.model.Event;
 import duke.model.Task;
@@ -16,8 +18,8 @@ public class TaskManager {
     private static TaskGenerator taskGenerator;
     
     private TaskManager() {
-        storage = new HashMap<Integer,Task>();
         taskGenerator = new TaskGenerator();
+        storage = Repository.read();
     }
 
     /**
@@ -135,5 +137,9 @@ public class TaskManager {
             }
         }
         return count;
+    }
+
+    public void saveTasksToDisk() {
+        Repository.save(storage);
     }
 }

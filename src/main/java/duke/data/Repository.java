@@ -1,7 +1,6 @@
 package duke.data;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
@@ -12,49 +11,47 @@ import duke.model.Deadline;
 import duke.model.Event;
 import duke.model.Task;
 import duke.model.Todo;
-import duke.viewmodel.TaskGenerator;
-import duke.viewmodel.TaskManager;
 
 public class Repository {
-    private static Repository instance = null;
-    private static String filePath;
+    private static final String filePath = "./src/main/java/duke/data/tasks.txt";
+    private static final String nullValue = "-";
 
-    private Repository(String path) {
-        filePath = path;
-        TaskGenerator taskGenerator = new TaskGenerator();
-    }
-
-    public static Repository getInstance(String path) {
-        if (instance == null) {
-            instance = new Repository(path);
-        }
-        return instance;
-    }
-
-    public static void save(HashMap<Integer, Task> tasks) throws IOException {
-        FileWriter fw = new FileWriter(filePath);
-        for (Map.Entry<Integer,Task> entry : tasks.entrySet()) {
-            int index = entry.getKey();
-            Task task = entry.getValue();
-            String textInput = convertToFile(index, task);
-            fw.write(textInput + "\n");
-        }
-        fw.close();
-    }
-
-    public static HashMap<Integer, Task> read() throws FileNotFoundException {
-        File f = new File(filePath);
-        Scanner s = new Scanner(f);
-        HashMap<Integer, Task> tasks = new HashMap<>();
-        while (s.hasNext()) {
-            String input = s.nextLine();
-            if (!input.isEmpty()) {
-                Task task = convertToTask(input);
-                int index = task.getIndex();
-                tasks.put(index, task);
+    public static void save(HashMap<Integer, Task> tasks) {
+        try {
+            FileWriter fw = new FileWriter(filePath);
+            for (Map.Entry<Integer,Task> entry : tasks.entrySet()) {
+                int index = entry.getKey();
+                Task task = entry.getValue();
+                String textInput = convertToFile(index, task);
+                fw.write(textInput + "\n");
             }
+            fw.close();
+        } catch (IOException ioException) {
+            System.out.println(ioException.getMessage());
         }
-        return tasks;
+    }
+
+    public static HashMap<Integer, Task> read() {
+        try {
+            File f = new File(filePath);
+            if (f.createNewFile()) {
+                System.out.println("New file created at: " + f.getPath());
+            }
+            Scanner s = new Scanner(f);
+            HashMap<Integer, Task> tasks = new HashMap<>();
+            while (s.hasNext()) {
+                String input = s.nextLine();
+                if (!input.isEmpty()) {
+                    Task task = convertToTask(input);
+                    int index = task.getIndex();
+                    tasks.put(index, task);
+                }
+            }
+            return tasks;
+        } catch (IOException fileNotFoundException) {
+            System.out.println(fileNotFoundException.getMessage());
+        }
+        return null;
     }
 
     private static String convertToFile(int index, Task task) {
@@ -68,9 +65,9 @@ public class Repository {
                 "index:%s," +
                 "description:%s," +
                 "isDone:%s," +
-                "event:%s" +
+                "event:%s," +
                 "deadline:%s",
-                "E",stringIndex, description, isDone, event, ""
+                "E",stringIndex, description, isDone, event, nullValue
             );
         }
         if (task instanceof Deadline) {
@@ -80,9 +77,9 @@ public class Repository {
                             "index:%s," +
                             "description:%s," +
                             "isDone:%s," +
-                            "event:%s" +
+                            "event:%s," +
                             "deadline:%s",
-                    "D",stringIndex, description, isDone, "", deadline
+                    "D",stringIndex, description, isDone, nullValue, deadline
             );
         }
         if (task instanceof Todo) {
@@ -91,9 +88,9 @@ public class Repository {
                             "index:%s," +
                             "description:%s," +
                             "isDone:%s," +
-                            "event:%s" +
+                            "event:%s," +
                             "deadline:%s",
-                    "T",stringIndex, description, isDone, "", ""
+                    "T",stringIndex, description, isDone, nullValue, nullValue
             );
         }
         return "";

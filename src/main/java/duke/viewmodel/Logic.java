@@ -43,13 +43,14 @@ public class Logic {
         String[] words = sentence.split(" ");
         String command = words[0];
         String task = String.join(" ", Arrays.copyOfRange(words, 1, words.length));
-        List<String> response = new ArrayList<>();
+        List<String> response;
 
         try {
             switch (command) {
             case Constants.BYE:
                 messages.add(Constants.BYE_MESSAGE);
                 Utils.reply(messages);
+                taskManager.saveTasksToDisk();
                 scanner.close();
                 return;
             case Constants.LIST:

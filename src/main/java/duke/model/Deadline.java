@@ -16,7 +16,7 @@ public class Deadline implements Task {
      */
     public Deadline(int index, String description, boolean isDone, String deadline) {
         String fullDescription = String.format("%s (by: %s)", description, deadline);
-        this.description = fullDescription;
+        this.description = description.trim();
         this.deadline = deadline;
         this.isDone = isDone;
         this.index = index;

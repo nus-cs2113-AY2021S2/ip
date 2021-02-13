@@ -2,11 +2,11 @@ package duke.model;
 
 public interface Task {
     
-    public boolean isTaskDone();
+    boolean isTaskDone();
 
-    public int getIndex();
+    int getIndex();
 
-    public String getMessage();
+    String getMessage();
 
-    public String getDescription();
+    String getDescription();
 }
