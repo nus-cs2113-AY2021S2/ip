@@ -1,12 +1,7 @@
-import errors.DescriptionSplitException;
-import errors.ListFullException;
-import errors.MissingKeywordException;
-import tasks.DeadlineTask;
-import tasks.EventTask;
-import tasks.Task;
-import tasks.ToDoTask;
+import errors.*;
+import tasks.*;
 
-import java.util.Scanner;
+import java.util.*;
 
 public class Duke {
 
@@ -43,22 +38,21 @@ public class Duke {
             + "    deadline <name> /by <date> - Creates new deadline.\n"
             + "    done n - Mark nth item as done.\n"
             + "    undo n - Mark nth item as not done.\n" + LINE;
-    private static final String MESSAGE_MARK_DONE =  LINE + "\nMarked as done:\n";
-    private static final String MESSAGE_MARK_UNDONE = LINE + "\nMarked as undone:\n";
+    private static final String MESSAGE_MARK_DONE =  LINE + "\nMarked as done:";
+    private static final String MESSAGE_MARK_UNDONE = LINE + "\nMarked as undone:";
+    private static final String MESSAGE_DELETED = LINE + "\nDeleted:";
 
 
     //Errors
     private static final String MESSAGE_UNRECOGNIZED_COMMAND = LINE + "\n"
             + "8K: Sorry. I do not understand.\n" + LINE;
-    private static final String MESSAGE_OUT_OF_BOUNDS = LINE + "\n"
-            + "8K: Out of bounds.\n" + LINE;
     private static final String MESSAGE_LIST_FULL = LINE + "\n"
             + "8K: List is full." + "\n" + LINE;
     private static final String MESSAGE_EMPTY_LIST = "<< List is empty >>\n" + LINE;
     private static final String MESSAGE_MISSING_AT_KEYWORD = LINE + "\n"
-            + "8K: Please follow the format \"<name> /at <info>\" to create event.\n" + LINE;
+            + "8K: Please follow the format \"event <name> /at <info>\" to create event.\n" + LINE;
     private static final String MESSAGE_MISSING_BY_KEYWORD = LINE + "\n"
-            + "8K: Please follow the format \"<name> /by <date>\" to create deadline.\n" + LINE;
+            + "8K: Please follow the format \"deadline <name> /by <date>\" to create deadline.\n" + LINE;
 
 
     //Constants
@@ -69,7 +63,7 @@ public class Duke {
 
 
     //Variables & arrays
-    private static final Task[] tasks = new Task[MAX_SIZE];
+    private static final ArrayList<Task> tasks = new ArrayList<>();
     private static int taskCount = 0;
     private static boolean endProgramNow = false;
 
@@ -115,6 +109,9 @@ public class Duke {
         } else if (input.startsWith("deadline ")) {
             //Adds new DeadlineTask
             addDeadline(input);
+        } else if (input.startsWith("delete ")) {
+            //Delete specified tasks
+            deleteTasks(input);
         } else {
             //Prints error (unrecognized command)
             System.out.println(MESSAGE_UNRECOGNIZED_COMMAND);
@@ -142,7 +139,7 @@ public class Duke {
         }
         for (int i = 0; i < taskCount; i++) {
             System.out.print((i + 1) + ".");
-            tasks[i].printStatus();
+            tasks.get(i).printStatus();
             System.out.println();
         }
         System.out.println(LINE);
@@ -162,16 +159,14 @@ public class Duke {
                 //Out of bounds
                 throw new IndexOutOfBoundsException();
             }
-            tasks[position].setDone(isDone);
+            tasks.get(position).setDone(isDone);
             if (isDone) {
-                System.out.print(MESSAGE_MARK_DONE);
+                System.out.println(MESSAGE_MARK_DONE);
             } else {
-                System.out.print(MESSAGE_MARK_UNDONE);
+                System.out.println(MESSAGE_MARK_UNDONE);
             }
-            tasks[position].printStatus();
+            tasks.get(position).printStatus();
             System.out.println("\n" + LINE);
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println(MESSAGE_OUT_OF_BOUNDS);
         } catch (Exception e) {
             System.out.println(MESSAGE_UNRECOGNIZED_COMMAND);
         }
@@ -190,7 +185,7 @@ public class Duke {
                 throw new ListFullException();
             }
             input = input.substring(LENGTH_OF_WORD_TODO + 1);
-            tasks[taskCount] = new ToDoTask(input);
+            tasks.add(new ToDoTask(input));
             taskCount++;
             printAddedContent(input);
         } catch (ListFullException e) {
@@ -218,15 +213,15 @@ public class Duke {
                 //Invalid input
                 throw new DescriptionSplitException();
             }
-            tasks[taskCount] = new EventTask(inputSplit[0], inputSplit[1]);
+            tasks.add(new EventTask(inputSplit[0], inputSplit[1]));
             taskCount++;
             printAddedContent(inputSplit[0]);
-        } catch (DescriptionSplitException e) {
-            System.out.println(MESSAGE_UNRECOGNIZED_COMMAND);
         } catch (ListFullException e) {
             System.out.println(MESSAGE_LIST_FULL);
         } catch (MissingKeywordException e) {
             System.out.println(MESSAGE_MISSING_AT_KEYWORD);
+        } catch (Exception e) {
+            System.out.println(MESSAGE_UNRECOGNIZED_COMMAND);
         }
     }
 
@@ -250,18 +245,70 @@ public class Duke {
                 //Invalid input
                 throw new DescriptionSplitException();
             }
-            tasks[taskCount] = new DeadlineTask(inputSplit[0], inputSplit[1]);
+            tasks.add(new DeadlineTask(inputSplit[0], inputSplit[1]));
             taskCount++;
             printAddedContent(inputSplit[0]);
-        } catch (DescriptionSplitException e) {
-            System.out.println(MESSAGE_UNRECOGNIZED_COMMAND);
         } catch (ListFullException e) {
             System.out.println(MESSAGE_LIST_FULL);
         } catch (MissingKeywordException e) {
             System.out.println(MESSAGE_MISSING_BY_KEYWORD);
+        } catch (Exception e) {
+            System.out.println(MESSAGE_UNRECOGNIZED_COMMAND);
         }
     }
 
+    /**
+     * Deletes multiple tasks from list.
+     *
+     * @param input Input value by user.
+     */
+    public static void deleteTasks(String input) {
+        try {
+            String[] indices = input.split(" ");
+            if (indices.length < 2) {
+                throw new DescriptionSplitException();
+            }
+            TreeSet<Integer> validIndices = new TreeSet<>();
+            for (int i = 1; i < indices.length; i++) {
+                int index = processIndex(indices[i]);
+                if (index != -1) {
+                    validIndices.add(index);
+                }
+            }
+            if (validIndices.size() < 1) {
+                throw new IndexOutOfBoundsException();
+            }
+            NavigableSet<Integer> sortedIndices = validIndices.descendingSet();
+            System.out.println(MESSAGE_DELETED);
+            for (int index : sortedIndices) {
+                tasks.get(index).printStatus();
+                System.out.println();
+                tasks.remove(index);
+                taskCount--;
+            }
+            System.out.println(LINE);
+        } catch (Exception e) {
+            System.out.println(MESSAGE_UNRECOGNIZED_COMMAND);
+        }
+    }
+
+    /**
+     * Processes index task from list. Returns -1 if invalid.
+     *
+     * @param stringIndex Index of task to remove.
+     */
+    public static int processIndex(String stringIndex) {
+        try {
+            int intIndex = Integer.parseInt(stringIndex) - 1;
+            if (intIndex >= taskCount || intIndex < 0) {
+                //Out of bounds
+                throw new IndexOutOfBoundsException();
+            }
+            return intIndex;
+        } catch (Exception e) {
+            return -1;
+        }
+    }
 
     /**
      * Prints successfully added message.
