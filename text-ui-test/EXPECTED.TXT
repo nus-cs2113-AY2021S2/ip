@@ -26,4 +26,10 @@ Oops, deadline due date cannot be empty :(
 What other tasks do you want to do?
 Invalid command :(
 What other tasks do you want to do?
+Noted, I've removed this task:
+[E][ ] meeting (at: 9.30)
+Now, you have 2 tasks in the list.
+What other tasks do you want to do?
+There is no task with id 69 at the moment.
+What other tasks do you want to do?
 Goodbye, hope to see you soon!
