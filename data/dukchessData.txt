@@ -1,0 +1,3 @@
+[T][ ] buy milk
+[E][ ] retire (at: 40)
+[D][ ] submit homework (by: never)
