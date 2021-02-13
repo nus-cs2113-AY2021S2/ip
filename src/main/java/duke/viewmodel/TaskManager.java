@@ -1,7 +1,5 @@
 package duke.viewmodel;
 
-import com.sun.tools.internal.jxc.ap.Const;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
