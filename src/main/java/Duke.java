@@ -6,6 +6,10 @@ import tasks.EventTask;
 import tasks.Task;
 import tasks.ToDoTask;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
@@ -59,7 +63,10 @@ public class Duke {
             + "8K: Please follow the format \"<name> /at <info>\" to create event.\n" + LINE;
     private static final String MESSAGE_MISSING_BY_KEYWORD = LINE + "\n"
             + "8K: Please follow the format \"<name> /by <date>\" to create deadline.\n" + LINE;
-
+    private static final String MESSAGE_SAVE_ERROR = LINE + "\n"
+            + "8K: Failed to save.\n" + LINE;
+    private static final String MESSAGE_LOAD_ERROR = LINE + "\n"
+            + "8K: Failed to load.\n" + LINE;
 
     //Constants
     private static final int MAX_SIZE = 100;
@@ -77,6 +84,11 @@ public class Duke {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String input;
+        try {
+            loadFile();
+        } catch (Exception e) {
+            //no file to load
+        }
         System.out.println(MESSAGE_WELCOME);
         do {
             input = scanner.nextLine().trim();
@@ -127,6 +139,11 @@ public class Duke {
      */
     private static void endProgram() {
         System.out.println(MESSAGE_BYE);
+        try {
+            saveFile();
+        } catch (Exception e) {
+            System.out.println(MESSAGE_SAVE_ERROR);
+        }
         endProgramNow = true;
     }
 
@@ -183,7 +200,7 @@ public class Duke {
      *
      * @param input Input value by user.
      */
-    public static void addToDo(String input) {
+    private static void addToDo(String input) {
         try {
             if (taskCount >= MAX_SIZE) {
                 //Array full
@@ -205,7 +222,7 @@ public class Duke {
      *
      * @param input Input value by user.
      */
-    public static void addEvent(String input) {
+    private static void addEvent(String input) {
         try {
             if (!input.contains(" /at ")) {
                 throw new MissingKeywordException();
@@ -237,7 +254,7 @@ public class Duke {
      *
      * @param input Input value by user.
      */
-    public static void addDeadline(String input) {
+    private static void addDeadline(String input) {
         try {
             if (!input.contains(" /by ")) {
                 throw new MissingKeywordException();
@@ -274,4 +291,54 @@ public class Duke {
         System.out.println(LINE);
     }
 
+
+    /**
+     * Saves tasks into file.
+     */
+    public static void saveFile() throws IOException {
+        File path = new File("tasks.txt");
+        if (!path.exists()) {
+            if (!path.createNewFile()) {
+                throw new IOException();
+            }
+        }
+        FileWriter fileWriter = new FileWriter(path);
+        for (int i = 0; i < taskCount; i++) {
+            fileWriter.write(tasks[i].formatData());
+        }
+        fileWriter.flush();
+        fileWriter.close();
+    }
+
+    /**
+     * Loads tasks from file.
+     */
+    public static void loadFile() throws FileNotFoundException {
+        File path = new File("tasks.txt");
+        if (!path.exists()) {
+            throw new FileNotFoundException();
+        }
+        Scanner scanner = new Scanner(path);
+        try {
+            while (scanner.hasNext()) {
+                String input = scanner.nextLine();
+                if (input.startsWith("todo ")) {
+                    //Adds new ToDoTask
+                    addToDo(input);
+                } else if (input.startsWith("event ")) {
+                    //Adds new EventTask
+                    addEvent(input);
+                } else if (input.startsWith("deadline ")) {
+                    //Adds new DeadlineTask
+                    addDeadline(input);
+                }
+                if (scanner.nextLine().equals("true")) {
+                    setDoneStatus("done " + taskCount, true);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(MESSAGE_LOAD_ERROR);
+        }
+
+    }
 }

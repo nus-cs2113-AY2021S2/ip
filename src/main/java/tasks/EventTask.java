@@ -22,4 +22,13 @@ public class EventTask extends Task {
         super.printStatus();
         System.out.print(" (at: " + eventInfo + ")");
     }
+
+    /**
+     * Outputs formatted data for saving.
+     */
+    @Override
+    public String formatData() {
+        return "event " + getName() + " /at " + eventInfo + "\n"
+                + getDone() + "\n";
+    }
 }
