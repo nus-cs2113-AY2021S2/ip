@@ -1,12 +1,15 @@
 package dukchess;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.Locale;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.io.FileWriter;
 
+import dukchess.dao.TaskList;
 import dukchess.entity.Deadline;
 import dukchess.entity.Event;
 import dukchess.entity.Task;
@@ -17,7 +20,24 @@ import dukchess.entity.Todo;
  */
 public class Duke {
 
-    private static List<Task> tasks = new ArrayList<Task>();
+    private static TaskList tasks;
+
+    private static void initializeDukchess() {
+
+        try {
+            String dataDirPath = Paths.get("./data").toString();
+            File dataDir = new File(dataDirPath);
+            dataDir.mkdir(); // try creating directory. If fail, its okay
+            String duchessDataPath = Paths.get("./data/dukchessData.txt").toString();
+            File dukchessData = new File(duchessDataPath);
+            if (!dukchessData.exists()) { // if file does not exist, create it
+                new FileWriter(dukchessData).close();
+            }
+            tasks = new TaskList(dukchessData);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     private static void printAddedTasks() {
         if (tasks.size() == 0) {
@@ -85,6 +105,8 @@ public class Duke {
      * @param args command line arguments
      */
     public static void main(String[] args) {
+        initializeDukchess();
+
         String welcomeText = "Hello, I am a PC assistant\n"
                 + "How do you want to set your tasks today?";
         System.out.println(welcomeText);
@@ -115,6 +137,7 @@ public class Duke {
                 continue;
             case "bye":
                 sayGoodbye();
+                tasks.flushTaskList();
                 return;
             case "done":
                 int taskId = Integer.parseInt(commandArgs);
