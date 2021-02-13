@@ -22,4 +22,13 @@ public class DeadlineTask extends Task {
         super.printStatus();
         System.out.print(" (by: " + dueDate + ")");
     }
+
+    /**
+     * Outputs formatted data for saving.
+     */
+    @Override
+    public String formatData() {
+        return "deadline " + getName() + " /by " + dueDate + "\n"
+                + getDone() + "\n";
+    }
 }

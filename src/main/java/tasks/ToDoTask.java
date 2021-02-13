@@ -14,4 +14,13 @@ public class ToDoTask extends Task {
         System.out.print("[T]");
         super.printStatus();
     }
+
+    /**
+     * Outputs formatted data for saving.
+     */
+    @Override
+    public String formatData() {
+        return "todo " + getName() + "\n"
+                + getDone() + "\n";
+    }
 }

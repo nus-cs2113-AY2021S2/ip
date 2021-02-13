@@ -1,6 +1,6 @@
 package tasks;
 
-public class Task {
+public abstract class Task {
 
     private final String name;
     private boolean isDone;
@@ -33,4 +33,8 @@ public class Task {
         }
     }
 
+    /**
+     * Outputs formatted data for saving.
+     */
+    abstract public String formatData();
 }
