@@ -19,7 +19,6 @@ import java.util.Scanner;
 public class Duke {
 
     public static String line = "____________________________________________________________";
-    public static final int INPUT_PHRASES_COUNT = 2;
 
     public static ArrayList<Tasks> tasks = new ArrayList<>(); //for storing (all types of) tasks
     public static int taskCount = 0; //for counting tasks
@@ -350,7 +349,7 @@ public class Duke {
      * In both cases, file used to store new data in this iteration of Duke Main
      * @throws IOException
      */
-    private static void loadPrevListIntoNewList() throws IOException {
+    public static void loadPrevListIntoNewList() throws IOException {
         try {
             Scanner s = new Scanner(dukePrevInputList); // create a Scanner using the File as the source
             // add one todo, deadline OR event task
@@ -409,7 +408,7 @@ public class Duke {
         }
     }
 
-    private static void appendToDukeListFile(String textToAdd) throws IOException {
+    public static void appendToDukeListFile(String textToAdd) throws IOException {
         FileWriter fw = new FileWriter("data/dukeList.txt", true);
         fw.write(textToAdd);
         fw.close();
