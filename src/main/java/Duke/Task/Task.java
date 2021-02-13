@@ -23,6 +23,14 @@ public class Task {
         return taskDescription;
     }
 
+    public String getTaskType() {
+        return null;
+    }
+
+    public String getTaskTime() {
+        return null;
+    }
+
     public String toString() {
         return "[" + getStatusIcon() + "] " + getTask();
     }

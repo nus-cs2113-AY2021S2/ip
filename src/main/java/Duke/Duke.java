@@ -1,14 +1,13 @@
 package Duke;
 
-import Duke.Functions.AddToList;
-import Duke.Functions.Delete;
-import Duke.Functions.MarkAsDone;
+import Duke.Functions.*;
 import Duke.Exceptions.DukeException;
 import Duke.Task.*;
 
 import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.*;
 
 public class Duke {
     private static String LINE = "____________________________________________________________";
@@ -18,9 +17,12 @@ public class Duke {
 
     public static void main(String[] args) {
         greetings();
+        readFile(lists);
         processInput();
+        writeFile(lists);
         goodbye();
     }
+
 
     public static void processInput(){
         Scanner userInput = new Scanner(System.in);
@@ -53,6 +55,67 @@ public class Duke {
             } else {
                 DukeException.illegalInput();
             }
+        }
+    }
+
+    private static void readFile(List<Task> lists){
+        try {
+            File file = new File("src/main/java/Duke/Duke.txt");
+            if (file.createNewFile()) {
+                System.out.println("A new file has been created! ^_^");
+            } else {
+                System.out.println("Reading saved Task Lists ^_^");
+                Scanner readingFile = new Scanner(file);
+                while (readingFile.hasNextLine()) {
+                    String line = readingFile.nextLine();
+                    String[] parts = line.split("\\|", 4);
+                    String type = parts[0];
+                    String isDone = parts[1];
+                    String task = parts[2];
+                    if (type.equals("T")) {
+                        Task taskInFile = new ToDoTask(task);
+                        lists.add(taskInFile);
+                        if (isDone.equals("true")) {
+                            taskInFile.markAsDone();
+                        }
+                    } else if (type.equals("D")) {
+                        String time = parts[3];
+                        DeadlineTask taskInFile = new DeadlineTask(task, time);
+                        lists.add(taskInFile);
+                        if (isDone.equals("true")) {
+                            taskInFile.markAsDone();
+                        }
+                    } else {
+                        String time = parts[3];
+                        EventTask taskInFile = new EventTask(task, time);
+                        lists.add(taskInFile);
+                        if (isDone.equals("true")) {
+                            taskInFile.markAsDone();
+                        }
+                    }
+                }
+                taskCount = lists.size();
+                printList(0, taskCount);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void writeFile(List<Task> lists){
+        try {
+            FileWriter writer = new FileWriter("src/main/java/Duke/Duke.txt",false);
+            for (Task taskInList : lists) {
+                if (taskInList instanceof ToDoTask) {
+                    writer.write(taskInList.getTaskType() + "|" + taskInList.isDone() + "|" + taskInList.getTask().trim());
+                } else {
+                    writer.write(taskInList.getTaskType() + "|" + taskInList.isDone() + "|" + taskInList.getTask().trim() + "|" + taskInList.getTaskTime().trim());
+                }
+                writer.write("\r\n");
+            }
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

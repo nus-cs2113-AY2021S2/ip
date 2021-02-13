@@ -10,6 +10,16 @@ public class DeadlineTask extends Task {
     }
 
     @Override
+    public String getTaskTime() {
+        return time;
+    }
+
+    @Override
+    public String getTaskType() {
+        return "D";
+    }
+
+    @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + time + ")";
     }
