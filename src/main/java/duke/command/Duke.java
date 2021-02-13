@@ -5,7 +5,7 @@ import java.util.*;
 
 public class Duke {
     private static final String lineSpacing = "\t----------------------------------";
-    private static ArrayList<Task> tasks = new ArrayList<>();
+    private static ArrayList<Task> tasks = new ArrayList<>(); // USe arraylist
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
