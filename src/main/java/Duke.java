@@ -20,6 +20,7 @@ public class Duke {
     private static final String COMMAND_DONE_WORD = "done";
     private static final String COMMAND_LIST_WORD = "list";
     private static final String COMMAND_END_WORD = "bye";
+    private static final String COMMAND_DELETE_WORD = "delete";
     private static final String BYE = "Bye. Hope to see you again soon!";
     private static final String ERROR_MESSAGE = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
 
@@ -106,6 +107,9 @@ public class Duke {
         case COMMAND_END_WORD:
             endSystem();
             return 0;
+        case COMMAND_DELETE_WORD:
+            deleteItem(commandArgs);
+            return 1;
         default:
             showError();
             return 1;
@@ -153,6 +157,20 @@ public class Duke {
         checkError(doneStringNumber);
         int doneInteger = Integer.parseInt(doneStringNumber)-1;
         allItems[doneInteger][1] = DONE;
+    }
+
+    public static void deleteItem(String deleteStringNumber){
+        checkError(deleteStringNumber);
+        if(Integer.parseInt(deleteStringNumber)>=count){
+            showError();
+        } else{
+            for(int i=Integer.parseInt(deleteStringNumber)-1;i<=count;i++){
+                allItems[i][0]=allItems[i+1][0];
+                allItems[i][1]=allItems[i+1][1];
+                allItems[i][2]=allItems[i+1][2];
+            }
+            count--;
+        }
     }
 
     public static void endSystem(){
