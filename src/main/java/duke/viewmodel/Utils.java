@@ -12,19 +12,19 @@ public class Utils {
         if (messages.isEmpty()) {
             return;
         }
-        String allMessages = "";
+        StringBuilder allMessages = new StringBuilder();
         String indentation = "     ";
         for (String message : messages) {
             if (message.isEmpty()) {
                 continue;
             }
-            allMessages += indentation + message + "\n";
+            allMessages.append(indentation).append(message).append("\n");
         }
         System.out.println(
             String.format(
                 "%s\n%s%s\n",
                 Constants.HORIZONTAL_LINE,
-                allMessages,
+                    allMessages.toString(),
                 Constants.HORIZONTAL_LINE
             )
         );

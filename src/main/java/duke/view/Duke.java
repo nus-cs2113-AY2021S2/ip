@@ -7,7 +7,7 @@ public class Duke {
     /**
      * Main function of Duke.
      */
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         Logic logic = Logic.getInstance();
         logic.handleMessage();
     }

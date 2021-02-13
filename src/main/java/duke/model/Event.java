@@ -16,7 +16,7 @@ public class Event implements Task {
      */
     public Event(int index, String description, boolean isDone, String event) {
         String fullDescription = String.format("%s (at: %s)", description, event);
-        this.description = fullDescription;
+        this.description = description.trim();
         this.event = event;
         this.isDone = isDone;
         this.index = index;
