@@ -7,11 +7,22 @@ import duke.task.Todo;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.Files;
 
 public class Duke {
 
     public static ArrayList<Task> tasks = new ArrayList<>();
     public static int taskCount = 0;
+
+    public static final String root = System.getProperty("user.dir");
+    public static final Path filePath = Paths.get(root, "data", "duke.txt");
+    public static final Path dirPath = Paths.get(root, "data");
+
 
     public static void greet() {
         String logo = " ____        _\n"
@@ -158,10 +169,77 @@ public class Duke {
             line = in.nextLine();
         }
         bidGoodbye();
+        saveFile();
+    }
+
+    public static void loadFile() throws IOException{
+        File fileDirectory = new File(dirPath.toString());
+
+        if (!fileDirectory.exists()) {
+            fileDirectory.mkdir();
+        }
+
+        File dataFile = new File(filePath.toString());
+        dataFile.createNewFile();
+        Scanner scanner = new Scanner(dataFile);
+
+        while (scanner.hasNext()) {
+            String line = scanner.nextLine();
+            String type = line.substring(0, 1);
+            String info = line.substring(8);
+            int dateIndex = info.indexOf('|');
+            switch (type) {
+            case "T":
+                tasks.add(new Todo(info));
+                if (line.charAt(4) == 'Y') {
+                    tasks.get(tasks.size() - 1).setAsDone();
+                }
+                break;
+            case "D":
+                tasks.add(new Deadline(info.substring(0, dateIndex - 1), info.substring(dateIndex + 2)));
+                if (line.charAt(4) == 'Y') {
+                    tasks.get(tasks.size() - 1).setAsDone();
+                }
+                break;
+            case "E":
+                tasks.add(new Event(info.substring(0, dateIndex - 1), info.substring(dateIndex + 2)));
+                if (line.charAt(4) == 'Y') {
+                    tasks.get(tasks.size() - 1).setAsDone();
+                }
+                break;
+            default:
+                break;
+            }
+        }
+    }
+
+    public static void saveFile() {
+        try {
+            FileWriter writer = new FileWriter(filePath.toString());
+            for (Task task : tasks) {
+                if (task instanceof Todo) {
+                    writer.write("T | " + task.getStatusIcon() + " | " + task.getDescription() + System.lineSeparator());
+                } else if (task instanceof Deadline) {
+                    writer.write("D | " + task.getStatusIcon() + " | " + task.getDescription() + " | " + ((Deadline) task).getBy() + System.lineSeparator());
+                } else if (task instanceof Event) {
+                    writer.write("E | " + task.getStatusIcon() + " | " + task.getDescription() + " | " + ((Event) task).getAt() + System.lineSeparator());
+                } else {
+                    return;
+                }
+            }
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {
         greet();
+        try {
+            loadFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         request();
     }
 }
