@@ -69,6 +69,18 @@ public class Duke {
         return String.format("Gotcha, added this event: %s", newEvent.toString());
     }
 
+    private static String deleteTask(int taskIdToDelete) {
+        try {
+            Task taskToDelete = tasks.get(taskIdToDelete - 1);
+            tasks.remove(taskIdToDelete - 1);
+            return String.format("Noted, I've removed this task:\n" +
+                    "%s\n" +
+                    "Now, you have %d tasks in the list.", taskToDelete.toString(), tasks.size());
+        } catch (IndexOutOfBoundsException indexOutOfBoundsException) {
+            return String.format("There is no task with id %d at the moment.", taskIdToDelete);
+        }
+    }
+
     /**
      * Source: https://stackoverflow.com/questions/31412294/java-check-not-null-empty-else-assign-default-value
      * Get value of object, and if it is null, set it to the default value.
@@ -154,6 +166,19 @@ public class Duke {
                 }
                 String eventAdditionOutcome = addEvent(eventArgs[0], eventArgs[1]);
                 System.out.println(eventAdditionOutcome);
+                break;
+            case "delete":
+                if (commandArgs.length() == 0) {
+                    System.out.println("You have to specify which task to delete!");
+                    break;
+                }
+                try {
+                    Integer taskIdToDelete = Integer.parseInt(commandArgs);
+                    String deletionOutcome = deleteTask(taskIdToDelete);
+                    System.out.println(deletionOutcome);
+                } catch (NumberFormatException numberFormatException) {
+                    System.out.println("Invalid number passed to task deletion command.");
+                }
                 break;
             default:
                 System.out.println("Invalid command :(");

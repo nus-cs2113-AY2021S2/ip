@@ -9,4 +9,6 @@ event meeting
 deadline
 deadline retire
 blah
+delete 2
+delete 69
 bye
