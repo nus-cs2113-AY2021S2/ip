@@ -25,17 +25,43 @@ public class UI {
         System.out.println(divider);
     }
 
+    public static void showAllTasks() {
+        System.out.println("This is your current list:");
+        for (int i = 0; i < Task.getTaskCounter(); i++){
+            int displayedTask = i + 1;
+            System.out.println(displayedTask + ". " + Task.getTaskList().get(i));
+        }
+        System.out.println("Of these tasks, you still have " + Task.getRemainingTasks() + " to complete!");
+        UI.showDivider();
+    }
+
     public static void taskAddedSuccessfully() {
         System.out.println("Roger Roger. The following task has been added:");
-        System.out.println(Task.getLatestTask(false));
+        boolean getCompletedTask = false;
+        System.out.println(Task.getRecentTask(getCompletedTask));
         System.out.println("You now have " + Task.getTaskCounter() + " tasks in your list!");
         UI.showDivider();
     }
 
     public static void taskCompletedSuccessfully() {
         System.out.println("The Force is with you! The following task has been marked as done:");
-        System.out.println(Task.getLatestTask(true));
+        boolean getCompletedTask = true;
+        System.out.println(Task.getRecentTask(getCompletedTask));
         System.out.println("You still have " + Task.getRemainingTasks() + " tasks to complete in your list!");
         UI.showDivider();
+    }
+
+    public static void taskDeletedSuccessfully() {
+        System.out.println("I am altering the deal. The following task has been deleted:");
+        boolean getCompletedTask = false;
+        System.out.println(Task.getRecentTask(getCompletedTask));
+        System.out.println("You still have " + Task.getRemainingTasks() + " tasks to complete in your list!");
+        UI.showDivider();
+    }
+
+    public static void showFarewellScreen() {
+        System.out.println(UI.divider);
+        System.out.println("Bye! Hope to hear from you again soon!");
+        System.out.println(UI.divider);
     }
 }

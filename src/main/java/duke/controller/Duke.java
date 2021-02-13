@@ -17,17 +17,10 @@ public class Duke {
             input = sc.nextLine();
             switch (input) {
             case "list":
-                System.out.println("This is your current list:");
-                for (int i = 0; i < Task.getTaskCounter(); i++){
-                    int displayedTask = i + 1;
-                    System.out.println(displayedTask + ". " + Task.getTaskList().get(i));
-                }
-                UI.showDivider();
+                UI.showAllTasks();
                 break;
             case "bye":
-                System.out.println(UI.divider);
-                System.out.println("Bye! Hope to hear from you again soon!");
-                System.out.println(UI.divider);
+                UI.showFarewellScreen();
                 break;
             default:
                 try {
