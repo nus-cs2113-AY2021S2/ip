@@ -17,7 +17,7 @@ import dukchess.entity.Todo;
  */
 public class Duke {
 
-    private static List<Task> tasks = new ArrayList<Task>();
+    private static ArrayList<Task> tasks = new ArrayList<Task>();
 
     private static void printAddedTasks() {
         if (tasks.size() == 0) {
