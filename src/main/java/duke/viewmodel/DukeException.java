@@ -33,6 +33,10 @@ public class DukeException extends Exception {
             return Constants.EVENT_EMPTY_MESSAGE;
         case Constants.EMPTY_EVENT_TIME:
             return Constants.EVENT_EMPTY_TIME_MESSAGE;
+        case Constants.NO_TASK_FOUND:
+            return Constants.TASK_DOES_NOT_EXIST;
+        case Constants.INDEX_FORMAT_ERROR:
+            return Constants.INDEX_NUMBER_INPUT_MESSAGE;
         }
         return Constants.INTERNAL_ERROR_MESSAGE;
     }

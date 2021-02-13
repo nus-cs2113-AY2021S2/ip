@@ -56,8 +56,10 @@ public class Logic {
                 response = taskManager.fetchTasks();
                 break;
             case Constants.DONE:
-                List<Integer> indexes = tasksToComplete(Arrays.copyOfRange(words, 1, words.length));
-                response = taskManager.completeTasks(indexes);
+                response = taskManager.completeTask(task);
+                break;
+            case Constants.DELETE:
+                response = taskManager.deleteTask(task);
                 break;
             default:
                 response = taskManager.addTask(command, task);
@@ -69,24 +71,6 @@ public class Logic {
             Utils.notifyError(dukeException.getMessage());
             handleMessage();
         }
-    }
-
-    /**
-     * Fetches all valid tasks user wants to complete, by task index number.
-     * @param indexes Indexes of tasks the user wants to complete.
-     * @return Indexes of tasks to be completed in storage.
-     */
-    private List<Integer> tasksToComplete(String[] indexes) {
-        List<Integer> tasks = new ArrayList<>();
-        for (String index : indexes) {
-            if (isInteger(index)) {
-                int taskIndex = Integer.parseInt(index);
-                if (taskManager.isTaskPresent(taskIndex)) {
-                    tasks.add(taskIndex);
-                }
-            }
-        }
-        return tasks;
     }
 
     /**
