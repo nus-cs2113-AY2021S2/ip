@@ -1,4 +1,6 @@
-public class Todo extends Task{
+package duke.task;
+
+public class Todo extends Task {
     private static final String TODO_TYPE = "T";
 
     public Todo (String errand) {

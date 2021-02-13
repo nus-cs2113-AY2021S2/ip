@@ -1,4 +1,12 @@
+list
+done 0
+done 
+done -1
+/todo Destroy Zagara's Base
 todo Destroy Zagara's Base
+todo 
+deadline Find Arcterus Mengsk /
+deadline Find Arcterus Mengsk /before
 event Coronation of Mengsk on Korhol /at Year 2260 Month 5
 deadline Find Sarah Kerrigan /before Year 2265
 list

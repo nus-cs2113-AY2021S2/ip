@@ -10,6 +10,29 @@ Decrypting Overwrite...
 Welcome Commander, can I be of assistance, commander?
 ______________________________________________________
 
+******************************************************
+*                                                    *
+*          [Objectives]-[Missions]-[Tasks]           *
+*                                                    *
+******************************************************
+
+
+*****
+* ! *
+*****
+There is no such task, Commander!
+*****
+* ! *
+*****
+Insufficient command parameters commander!
+*****
+* ! *
+*****
+There is no such task, Commander!
+*****
+* ! *
+*****
+Unacceptable Command!
 ______________________________________________________
 [Orders received]:
 
@@ -18,6 +41,18 @@ ______________________________________________________
 There are now 1 mission objectives, Commander.
 ______________________________________________________
 
+*****
+* ! *
+*****
+Insufficient command parameters commander!
+*****
+* ! *
+*****
+Missing timestamp commander!
+*****
+* ! *
+*****
+Missing timestamp commander!
 ______________________________________________________
 [Orders received]:
 
@@ -39,7 +74,6 @@ ______________________________________________________
 *          [Objectives]-[Missions]-[Tasks]           *
 *                                                    *
 ******************************************************
-
 [1][T][ ] Destroy Zagara's Base
 [2][E][ ] Coronation of Mengsk on Korhol (at: Year 2260 Month 5)
 [3][D][ ] Find Sarah Kerrigan (before: Year 2265)
@@ -56,7 +90,6 @@ ______________________________________________________
 *          [Objectives]-[Missions]-[Tasks]           *
 *                                                    *
 ******************************************************
-
 [1][T][ ] Destroy Zagara's Base
 [2][E][X] Coronation of Mengsk on Korhol (at: Year 2260 Month 5)
 [3][D][ ] Find Sarah Kerrigan (before: Year 2265)
@@ -73,7 +106,6 @@ ______________________________________________________
 *          [Objectives]-[Missions]-[Tasks]           *
 *                                                    *
 ******************************************************
-
 [1][T][X] Destroy Zagara's Base
 [2][E][X] Coronation of Mengsk on Korhol (at: Year 2260 Month 5)
 [3][D][ ] Find Sarah Kerrigan (before: Year 2265)

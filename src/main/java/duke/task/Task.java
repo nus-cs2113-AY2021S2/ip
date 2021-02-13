@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.exception.IllegalTaskCommandException;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -101,7 +105,7 @@ public class Task {
             indexOfTask = Integer.parseInt(index) - 1;
         } catch (NumberFormatException e) {
             IllegalTaskCommandException.printErrorLogo();
-            System.err.println("Only numbers are allowed commander!");
+            System.out.println("Only numbers are allowed commander!");
             return; // Ends the method here as invalid input is entered
         }
 
