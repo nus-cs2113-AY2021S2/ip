@@ -27,3 +27,4 @@ Prerequisites: JDK 11, update IntelliJ to the most recent version.
    
 Notes:
 - How to configure Google Style Guide for Intellij: https://medium.com/swlh/configuring-google-style-guide-for-java-for-intellij-c727af4ef248
+- How to compile .jar using IntellJ: https://www.jetbrains.com/help/idea/compiling-applications.html#package_into_jar
