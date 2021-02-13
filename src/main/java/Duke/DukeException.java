@@ -17,6 +17,10 @@ public class DukeException extends Duke {
         System.out.println(" No index input :(\n Which task is done?");
     }
 
+    public static void deleteWithoutNo() {
+        System.out.println(" No index input :(\n Which task you wanna delete?");
+    }
+
     public static void exceedListLength(int taskIndex) {
         System.out.println(" You don't have Task "+ taskIndex +" in your list ^_^");
     }
