@@ -49,6 +49,8 @@ public class Duke {
     private static final String MESSAGE_MARK_DONE =  LINE + "\nMarked as done:";
     private static final String MESSAGE_MARK_UNDONE = LINE + "\nMarked as undone:";
     private static final String MESSAGE_DELETED = LINE + "\nDeleted:";
+    private static final String MESSAGE_FILE_LOADED = LINE + "\n"
+            + "File loaded successfully.\n" + LINE;
 
 
     //Errors
@@ -65,6 +67,8 @@ public class Duke {
             + "8K: Failed to save.\n" + LINE;
     private static final String MESSAGE_LOAD_ERROR = LINE + "\n"
             + "8K: Failed to load.\n" + LINE;
+    private static final String MESSAGE_FILE_NOT_FOUND = LINE + "\n"
+            + "File not found. New file will be created.\n" + LINE;
 
     //Constants
     private static final int MAX_SIZE = 100;
@@ -84,8 +88,9 @@ public class Duke {
         String input;
         try {
             loadFile();
+            System.out.println(MESSAGE_FILE_LOADED);
         } catch (Exception e) {
-            //no file to load
+            System.out.println(MESSAGE_FILE_NOT_FOUND);
         }
         System.out.println(MESSAGE_WELCOME);
         do {
