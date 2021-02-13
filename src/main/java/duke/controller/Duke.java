@@ -20,7 +20,7 @@ public class Duke {
                 System.out.println("This is your current list:");
                 for (int i = 0; i < Task.getTaskCounter(); i++){
                     int displayedTask = i + 1;
-                    System.out.println(displayedTask + ": " + Task.getTaskList()[i]);
+                    System.out.println(displayedTask + ". " + Task.getTaskList().get(i));
                 }
                 UI.showDivider();
                 break;
@@ -34,6 +34,7 @@ public class Duke {
                     TaskManager.processTask(input);
                 } catch (InvalidInputException e) {
                     System.out.println(e.getMessage());
+                    UI.showDivider();
                 }
 
             }

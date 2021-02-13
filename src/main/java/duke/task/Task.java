@@ -3,12 +3,14 @@ package duke.task;
 import duke.exception.TaskAlreadyCompletedException;
 import duke.exception.TaskNotExistException;
 
+import java.util.ArrayList;
+
 public class Task {
     private boolean isDone;
     private String description;
     private static int taskCounter = 0;
     private static int completedTaskCounter = 0;
-    private static Task[] tasks = new Task[100];
+    public static ArrayList<Task> tasks = new ArrayList<>();
     private static int completedTaskIndex = 0;
 
     public Task(String description){
@@ -42,26 +44,27 @@ public class Task {
         return taskCounter - completedTaskCounter;
     }
 
-    public static Task[] getTaskList() {
+    public static ArrayList<Task> getTaskList() {
         return tasks;
     }
 
     public static void addNewTask(Task newTask) {
-        tasks[taskCounter] = newTask;
+        tasks.add(newTask);
         incrementTaskCounter();
     }
 
+
     public static void completeTask(int taskNumber) {
-        tasks[taskNumber].markAsDone();
+        tasks.get(taskNumber).markAsDone();
         completedTaskIndex = taskNumber;
         completedTaskCounter++;
     }
 
     public static Task getLatestTask(boolean getCompletedTask) {
         if (getCompletedTask) {
-            return tasks[completedTaskIndex];
+            return tasks.get(completedTaskIndex);
         } else {
-            return tasks[getTaskCounter() - 1];
+            return tasks.get(getTaskCounter() - 1);
         }
     }
 
@@ -76,11 +79,11 @@ public class Task {
     }
 
     // Check for exceptions
-    public static void checkDoneTask(int task) throws TaskAlreadyCompletedException, TaskNotExistException {
-        if (task > taskCounter - 1) {
+    public static void checkDoneTask(int queryTask) throws TaskAlreadyCompletedException, TaskNotExistException {
+        if (queryTask > taskCounter - 1) {
             throw new TaskNotExistException();
         }
-        if (tasks[task].isDone()) {
+        if (tasks.get(queryTask).isDone()) {
             throw new TaskAlreadyCompletedException();
         }
     }
