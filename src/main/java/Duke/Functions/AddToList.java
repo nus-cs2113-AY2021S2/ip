@@ -1,29 +1,24 @@
-package Duke;
+package Duke.Functions;
+
+import Duke.Duke;
+import Duke.Exceptions.DukeException;
+import Duke.Task.DeadlineTask;
+import Duke.Task.EventTask;
+import Duke.Task.ToDoTask;
 
 public class AddToList extends Duke {
     public static void AddToList(String taskType, String taskDescription) {
         if (taskType.equalsIgnoreCase("todo")) {
-            lists[taskCount][0] = "T";
-            lists[taskCount][1] = " ";
-            lists[taskCount][2] = taskDescription;
-            lists[taskCount][3] = " ";
+            lists.add(new ToDoTask(taskDescription));
             taskAddedText();
-
     } else if (taskDescription.contains("/")) {
             String[] taskAndTime = taskDescription.split("/", 2);
             if (taskType.equalsIgnoreCase("deadline")) {
-                lists[taskCount][0] = "D";
-                lists[taskCount][1] = " ";
-                lists[taskCount][2] = taskAndTime[0].trim();
-                lists[taskCount][3] = " (by:" + taskAndTime[1].trim() + ")";
+                lists.add(new DeadlineTask(taskAndTime[0], taskAndTime[1]));
                 taskAddedText();
             } else if (taskType.equalsIgnoreCase("event")) {
-                lists[taskCount][0] = "E";
-                lists[taskCount][1] = " ";
-                lists[taskCount][2] = taskAndTime[0].trim();
-                lists[taskCount][3] = " (at:" + taskAndTime[1].trim() + ")";
+                lists.add(new EventTask(taskAndTime[0], taskAndTime[1]));
                 taskAddedText();
-
             }
         } else {
             DukeException.taskWithoutTime();

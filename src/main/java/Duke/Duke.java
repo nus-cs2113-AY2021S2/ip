@@ -1,12 +1,20 @@
 package Duke;
 
+import Duke.Functions.AddToList;
+import Duke.Functions.Delete;
+import Duke.Functions.MarkAsDone;
+import Duke.Exceptions.DukeException;
+import Duke.Task.*;
+
+import java.util.List;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     private static String LINE = "____________________________________________________________";
     public static String inputString;
     public static int taskCount = 0;
-    public static String[][] lists = new String[100][5];
+    public static List<Task> lists = new ArrayList<Task>();
 
     public static void main(String[] args) {
         greetings();
@@ -53,7 +61,7 @@ public class Duke {
             System.out.println("List is empty :o\n" + LINE + "\n");
         } else {
             for(int i = startIndex; i < endIndex; ++i) {
-                System.out.println(" " + (i + 1) + ": [" + lists[i][0] + "][" + lists[i][1] + "]:" + " " + lists[i][2] +lists[i][3]);
+                System.out.println(" " + (i + 1) + ": " + lists.get(i).toString());
             }
         }
     }
@@ -64,7 +72,7 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println( LOGO + LINE + "\n" + " Hello! I'm Duke\n" + " What can I do for you?\n" + LINE + "\n" );
+        System.out.println( LOGO + LINE + "\n" + " Hello! I'm Duke.Duke\n" + " What can I do for you?\n" + LINE + "\n" );
     }
 
     public static void goodbye(){
