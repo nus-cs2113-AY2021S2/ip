@@ -46,12 +46,21 @@ public class Duke {
     }
 
     public static void parseUserCommands(String line) {
+        if (line.equals("")) {
+            return;
+        }
+
         List<String> userCommands = Arrays.asList(line.split(" "));
+        if (userCommands.size() < 1) {
+            return;
+        }
 
         if (userCommands.get(0).equals("list")) {
             displayTaskList();
         } else if (userCommands.get(0).equals("done")) {
             markCompletedTasks(userCommands.subList(1, userCommands.size()));
+        } else if (userCommands.get(0).equals("delete")) {
+            deleteTask(userCommands.subList(1, userCommands.size()));
         } else {
             try {
                 appendNewTask(userCommands);
@@ -147,6 +156,39 @@ public class Duke {
         }
         System.out.print("\t  ");
         tasks.get(tasks.size()-1).printTask();
+        System.out.println("\tNow you have " + tasks.size() + " tasks in the list");
+        System.out.println(lineSpacing);
+    }
+
+    public static void deleteTask(List<String> taskIndexes) {
+        System.out.println(lineSpacing);
+        System.out.println("\tNoted. I've removed this task:");
+
+        List<Integer> tasksIndexToDelete = new ArrayList<>();
+
+        for (String index: taskIndexes) {
+            int indexInt;
+            try {
+                indexInt = Integer.parseInt(index) - 1;
+                if (indexInt >= tasks.size()){
+                    throw new DukeExceptions();
+                }
+                else {
+                    Task deletedTask = tasks.get(indexInt);
+                    System.out.print("\t");
+                    tasks.get(indexInt).printTask();
+                    tasksIndexToDelete.add(indexInt);
+                }
+            } catch (DukeExceptions e) {
+                System.out.println("\tTask number " + index + " does not exist");
+            } catch (NumberFormatException e) {
+                System.out.println("\tInvalid Expression! Must provide task numbers (" + index + ")");
+            }
+        }
+        Collections.sort(tasksIndexToDelete, Collections.reverseOrder());
+        for (Integer index: tasksIndexToDelete) {
+            tasks.remove((int)index);
+        }
         System.out.println("\tNow you have " + tasks.size() + " tasks in the list");
         System.out.println(lineSpacing);
     }
