@@ -1,24 +1,30 @@
+import models.Deadline;
+import models.Event;
+import models.Task;
+import models.Todo;
+import io.DukePrint;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        printLogo();
+        DukePrint.printLogo();
 
         Scanner sc = new Scanner(System.in);
         String phrase;
         ArrayList<Task> tasks = new ArrayList<Task>();
 
-        printDivider();
+        DukePrint.printDivider();
         System.out.println("What's up! I'm Duke");
         System.out.println("What can I do for you?");
-        printEndDivider();
+        DukePrint.printEndDivider();
 
         do {
             phrase = sc.nextLine();
-            printDivider();
+            DukePrint.printDivider();
             inputCommand(phrase, tasks);
-            printEndDivider();
+            DukePrint.printEndDivider();
         } while (!phrase.equals("bye"));
     }
 
@@ -69,7 +75,7 @@ public class Duke {
             break;
         case ("deadline"):
             try {
-                // Add a Deadline
+                // Add a models.Deadline
                 String by = phrase.substring(dividerPosition + 4);
                 phrase = phrase.substring(9, dividerPosition);
                 Deadline deadline = new Deadline(phrase, by);
@@ -82,7 +88,7 @@ public class Duke {
             }
             break;
         case ("event"):
-            // Add an Event
+            // Add an models.Event
             try {
                 String eventTime = phrase.substring(dividerPosition + 4);
                 phrase = phrase.substring(6, dividerPosition);
@@ -96,27 +102,10 @@ public class Duke {
             }
             break;
         default:
-            // Invalid Task
+            // Invalid models.Task
             System.out.println("\uD83D\uDE2D Sorry mate I do not understand your request. Please specify task");
             break;
         }
-    }
-
-    private static void printLogo() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-    }
-
-    private static void printDivider() {
-        System.out.println("~____________________________________________________________~");
-    }
-
-    private static void printEndDivider() {
-        System.out.println("~____________________________________________________________~\n");
     }
 
 }

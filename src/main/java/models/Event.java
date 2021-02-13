@@ -1,3 +1,5 @@
+package models;
+
 public class Event extends Task {
 
     protected String eventTime;
