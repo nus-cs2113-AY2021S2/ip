@@ -49,39 +49,45 @@ public class Duke {
         String timestamp;
         String timestampHeader;
 
-        switch (command) {
-        case "TODO":
-            errand = getSubstring(userInput);
-            Task todo = new Todo(errand);
-            todo.addToTaskList(errand, null); // Todo has no timestamp
-            break;
-        case "EVENT":
-            errand = getErrand(userInput);
-            timestampHeader = getTimestampHeader(userInput);
-            timestamp = getTimestamp(userInput);
-            Task event = new Event(errand, timestamp, timestampHeader);
-            event.addToTaskList(errand, timestamp);
-            break;
-        case "DEADLINE":
-            errand = getErrand(userInput);
-            timestampHeader = getTimestampHeader(userInput);
-            timestamp = getTimestamp(userInput);
-            Task deadline = new Deadline(errand, timestamp, timestampHeader);
-            deadline.addToTaskList(errand, timestamp);
-            break;
-        case "LIST":
-            Task.printList();
-            break;
-        case "DONE":
-            errand = getSubstring(userInput);
-            Task.markDone(errand); // In this case, errand is the index of the item
-            break;
-        case "BYE":
-            printGoodbyeMessage();
-            break;
-        default:
-            throw new IllegalTaskCommandException("Unacceptable Command!");
+        try {
+            switch (command) {
+            case "TODO":
+                errand = getSubstring(userInput);
+                Task todo = new Todo(errand);
+                todo.addToTaskList(errand, null); // Todo has no timestamp
+                break;
+            case "EVENT":
+                errand = getErrand(userInput);
+                timestampHeader = getTimestampHeader(userInput);
+                timestamp = getTimestamp(userInput);
+                Task event = new Event(errand, timestamp, timestampHeader);
+                event.addToTaskList(errand, timestamp);
+                break;
+            case "DEADLINE":
+                errand = getErrand(userInput);
+                timestampHeader = getTimestampHeader(userInput);
+                timestamp = getTimestamp(userInput);
+                Task deadline = new Deadline(errand, timestamp, timestampHeader);
+                deadline.addToTaskList(errand, timestamp);
+                break;
+            case "LIST":
+                Task.printList();
+                break;
+            case "DONE":
+                errand = getSubstring(userInput);
+                Task.markDone(errand); // In this case, errand is the index of the item
+                break;
+            case "BYE":
+                printGoodbyeMessage();
+                break;
+            default:
+                throw new IllegalTaskCommandException("Unacceptable Command!");
+            }
+        } catch (IllegalTaskCommandException e) {
+            e.printErrorLogo();
+            System.out.println(e.getMessage());
         }
+
     }
 
     private static String getSubstring(String userInput) throws IllegalTaskCommandException {
@@ -128,7 +134,7 @@ public class Duke {
      * Starts the Task Manager program.
      * <p>Runs an infinite loop until "BYE" is called</p>
      */
-    private static void runTaskManager() {
+    private static void runTaskManager() throws IllegalTaskCommandException {
         String userInput;
         String command;
         Scanner in = new Scanner(System.in);
@@ -136,18 +142,11 @@ public class Duke {
         do {
             userInput = in.nextLine();
             command = getCommand(userInput);
-
-            try {
-                executeCommand(command, userInput);
-            } catch (IllegalTaskCommandException e) {
-                e.printErrorLogo();
-                System.err.println(e);
-            }
-
+            executeCommand(command, userInput);
         } while (!command.equals("BYE"));
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IllegalTaskCommandException {
         initialiseWelcomeMessage();
         runTaskManager();
     }

@@ -7,6 +7,6 @@ public class IllegalTaskCommandException extends Exception{
     }
 
     public static void printErrorLogo() {
-        System.err.println("*****\n* ! *\n*****");
+        System.out.println("*****\n* ! *\n*****");
     }
 }
