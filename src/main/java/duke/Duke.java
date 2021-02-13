@@ -339,31 +339,11 @@ public class Duke {
 
         }
 
-        //write to file:
-        try {
-            PrintWriter writer = new PrintWriter("data/dukeList.txt");
-            writer.print("");
-            writer.close();
-            for (int i = 0; i < taskCount; i++) {
-                Tasks currentTask = tasks.get(i);
-                appendToFile(currentTask.typeOfTask + "/" +
-                        currentTask.isDone + "/" +
-                        currentTask.description);
-                if (currentTask.typeOfTask.equals("D") || currentTask.typeOfTask.equals("E")) {
-                    appendToFile("/" + currentTask.date);
-                }
-                appendToFile(System.lineSeparator());
-            }
-
-        } catch (FileNotFoundException e) {
-            System.out.println("Write: File not found");
-        } catch (IOException e) {
-            System.out.print("Unable to write to file");
-        }
-
+        overwriteDukeListFile();
         saysByeToUser();
     }
 
+    //Methods to Save 'DukeList.txt':
     /**
      * If file exists, loads older data from file into ArrayList 'tasks'
      * Else, creates new file
@@ -391,7 +371,7 @@ public class Duke {
                     break;
                 }
                 if (prevListEntryWord[1].equals("true")) {
-                    tasks.get(taskCount).markAsDone(); //if is a 'no', task is auto-marked as not done
+                    tasks.get(taskCount).markAsDone(); //if is a 'false', task is auto-marked as not done
                 }
                 taskCount++; //increment taskCount for added task
             }
@@ -405,7 +385,31 @@ public class Duke {
         }
     }
 
-    private static void appendToFile(String textToAdd) throws IOException {
+    public static void overwriteDukeListFile() {
+        //write to file:
+        try {
+            PrintWriter writer = new PrintWriter("data/dukeList.txt");
+            writer.print("");
+            writer.close();
+            for (int i = 0; i < taskCount; i++) {
+                Tasks currentTask = tasks.get(i);
+                appendToDukeListFile(currentTask.typeOfTask + "/" +
+                        currentTask.isDone + "/" +
+                        currentTask.description);
+                if (currentTask.typeOfTask.equals("D") || currentTask.typeOfTask.equals("E")) {
+                    appendToDukeListFile("/" + currentTask.date);
+                }
+                appendToDukeListFile(System.lineSeparator());
+            }
+
+        } catch (FileNotFoundException e) {
+            System.out.println("Write: File not found");
+        } catch (IOException e) {
+            System.out.print("Unable to write to file");
+        }
+    }
+
+    private static void appendToDukeListFile(String textToAdd) throws IOException {
         FileWriter fw = new FileWriter("data/dukeList.txt", true);
         fw.write(textToAdd);
         fw.close();
