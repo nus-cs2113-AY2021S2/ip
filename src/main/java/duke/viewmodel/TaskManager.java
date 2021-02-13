@@ -1,9 +1,8 @@
 package duke.viewmodel;
 
-import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.ArrayList;
 
 import duke.data.Repository;
 import duke.model.Deadline;
@@ -41,7 +40,7 @@ public class TaskManager {
      * @throws DukeException When a task is missing a name or deadline/event.
      */
     public List<String> addTask(String taskType, String message) throws DukeException {
-        List<String> messages = new ArrayList<String>();
+        List<String> messages = new ArrayList<>();
         Task task;
         int taskIndex = storage.size() + 1;
         switch (taskType) {
@@ -70,7 +69,7 @@ public class TaskManager {
      * @throws DukeException When the storage is empty.
      */
     public List<String> fetchTasks() throws DukeException {
-        List<String> messages = new ArrayList<String>();
+        List<String> messages = new ArrayList<>();
         for (int index = 0; index < storage.size(); index++) {
             Task task = storage.get(index + 1);
             messages.add(task.toString());
@@ -82,27 +81,15 @@ public class TaskManager {
     }
 
     /**
-     * Checks if task is present in storage by index.
-     * @param index The task index.
-     * @return True if task is present in storage.
+     * Marks the task as completed by the given task index.
+     * @param stringIndex Index number of task.
+     * @return Messages to notify user that task has been completed.
+     * @throws DukeException When task does not exist in storage.
      */
-    public boolean isTaskPresent(int index) {
-        return storage.containsKey(index);
-    }
-
-    /**
-     * Marks the tasks as completed by their given task numbers.
-     * @param indexes Index numbers of tasks.
-     * @return Tasks that were completed.
-     * @throws DukeException When no indexes are provided.
-     */
-    public List<String> completeTasks(List<Integer> indexes) throws DukeException {
-        if (indexes.isEmpty()) {
-            throw new DukeException(Constants.EMPTY_TASK_COMPLETE_LIST);
-        }
-        List<String> messages = new ArrayList<String>();
-        messages.add(Constants.DONE_MESSAGE);
-        for (int index : indexes) {
+    public List<String> completeTask(String stringIndex) throws DukeException {
+        try {
+            List<String> messages = new ArrayList<>();
+            int index = Integer.parseInt(stringIndex);
             Task task = storage.get(index);
             Task completedTask = null;
             if (task instanceof Todo) {
@@ -110,19 +97,24 @@ public class TaskManager {
             }
             if (task instanceof Deadline) {
                 completedTask = new Deadline(index, task.getDescription(), true,
-                    ((Deadline) task).getDeadline());
+                        ((Deadline) task).getDeadline());
             }
             if (task instanceof Event) {
                 completedTask = new Event(index, task.getDescription(), true,
-                    ((Event) task).getEvent());
+                        ((Event) task).getEvent());
             }
             if (completedTask != null) {
-                messages.add(completedTask.getMessage());
                 storage.put(index, completedTask);
+                messages.add(Constants.DONE_MESSAGE);
+                messages.add(completedTask.getMessage());
+                messages.add(String.format("Tasks left: %d",getIncompleteTasksCount()));
+                return messages;
+            } else {
+                throw new DukeException(Constants.NO_TASK_FOUND);
             }
+        } catch (NumberFormatException numberFormatException) {
+            throw new DukeException(Constants.INDEX_FORMAT_ERROR);
         }
-        messages.add(String.format("Tasks left: %d",getIncompleteTasksCount()));
-        return messages;
     }
 
     /**
@@ -137,6 +129,30 @@ public class TaskManager {
             }
         }
         return count;
+    }
+
+    /**
+     * Removes a task from storage by their task index number.
+     * @param stringIndex Index number of the task.
+     * @return Messages to notify user that task has been deleted.
+     * @throws DukeException When task does not exist in storage.
+     */
+    public List<String> deleteTask(String stringIndex) throws DukeException {
+        try {
+            int index = Integer.parseInt(stringIndex);
+            List<String> messages = new ArrayList<>();
+            Task removedTask = storage.remove(index);
+            if (removedTask != null) {
+                messages.add(Constants.DELETED_MESSAGE);
+                messages.add(removedTask.getMessage());
+                messages.add(String.format("Tasks left: %d",getIncompleteTasksCount()));
+                return messages;
+            } else {
+                throw new DukeException(Constants.NO_TASK_FOUND);
+            }
+        } catch (NumberFormatException numberFormatException) {
+            throw new DukeException(Constants.INDEX_FORMAT_ERROR);
+        }
     }
 
     public void saveTasksToDisk() {
