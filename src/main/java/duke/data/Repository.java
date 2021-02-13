@@ -13,10 +13,23 @@ import duke.model.Event;
 import duke.model.Task;
 import duke.model.Todo;
 import duke.viewmodel.TaskGenerator;
+import duke.viewmodel.TaskManager;
 
 public class Repository {
-    private static final TaskGenerator taskGenerator = new TaskGenerator();
-    private static final String filePath = "";
+    private static Repository instance = null;
+    private static String filePath;
+
+    private Repository(String path) {
+        filePath = path;
+        TaskGenerator taskGenerator = new TaskGenerator();
+    }
+
+    public static Repository getInstance(String path) {
+        if (instance == null) {
+            instance = new Repository(path);
+        }
+        return instance;
+    }
 
     public static void save(HashMap<Integer, Task> tasks) throws IOException {
         FileWriter fw = new FileWriter(filePath);
