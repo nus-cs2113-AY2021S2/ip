@@ -43,6 +43,7 @@ public class Duke {
             + "    todo <name> - Creates new todo task.\n"
             + "    event <name> /at <info> - Creates new event.\n"
             + "    deadline <name> /by <date> - Creates new deadline.\n"
+            + "    delete <indices> - Deletes selected tasks.\n"
             + "    done n - Mark nth item as done.\n"
             + "    undo n - Mark nth item as not done.\n" + LINE;
     private static final String MESSAGE_MARK_DONE =  LINE + "\nMarked as done:";

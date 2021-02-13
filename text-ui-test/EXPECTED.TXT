@@ -27,6 +27,7 @@
     todo <name> - Creates new todo task.
     event <name> /at <info> - Creates new event.
     deadline <name> /by <date> - Creates new deadline.
+    delete <indices> - Deletes selected tasks.
     done n - Mark nth item as done.
     undo n - Mark nth item as not done.
 ───────────────────────────────────────────────────────────────────────────
