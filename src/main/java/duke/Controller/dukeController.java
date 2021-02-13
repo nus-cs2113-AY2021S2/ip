@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import duke.Tasks.*;
 
 public class dukeController {
-    public dukeController() {};
+    public dukeController() {
+    }
+
+    ;
 
     public void displayWelcome() {
         String logo = " ____        _        \n"
@@ -83,16 +86,16 @@ public class dukeController {
         }
     }
 
-    public void printTaskList(ArrayList <Task> tasks) {
+    public void printTaskList(ArrayList<Task> tasks) {
         int number = 1;
         System.out.println("Here are the tings in yo list: ");
-        for (Task task: tasks) {
+        for (Task task : tasks) {
             System.out.println(number + ". " + task.printDescription());
             number++;
         }
     }
 
-    public void showDone(ArrayList <Task> tasks, String input) {
+    public void showDone(ArrayList<Task> tasks, String input) {
         int indexSpace = input.indexOf(" ");
         if (indexSpace == -1) {
             System.out.println("I see you forget how to type numbers yea... you donut! Type in your task number man!");
@@ -112,7 +115,7 @@ public class dukeController {
         }
     }
 
-    public void deleteTask(ArrayList <Task> tasks, String input) {
+    public void deleteTask(ArrayList<Task> tasks, String input) {
         int indexSpace = input.indexOf(" ");
         if (indexSpace == -1) {
             System.out.println("I see you forget how to type numbers yea... you donut! Type in your task number man!");
@@ -133,7 +136,7 @@ public class dukeController {
         }
     }
 
-    public void printToDo(ArrayList <Task> tasks, String input, String description) {
+    public void printToDo(ArrayList<Task> tasks, String input, String description) {
         Task todo = new toDo(description);
         tasks.add(todo);
         System.out.println("Ayy I got you my brother. I've added this ting: ");
@@ -141,7 +144,7 @@ public class dukeController {
         System.out.println("Dayuum son! You have " + tasks.size() + " mad tings in the list.");
     }
 
-    public void printDeadline(ArrayList <Task> tasks, String input, String description, String date){
+    public void printDeadline(ArrayList<Task> tasks, String input, String description, String date) {
         Task deadline = new Deadline(description, date);
         tasks.add(deadline);
         System.out.println("Ayy I got you my brother. I've added this ting: ");
@@ -149,13 +152,11 @@ public class dukeController {
         System.out.println("Jeeeeeeez! You have " + tasks.size() + " mad tings in the list.");
     }
 
-    public void printEvent(ArrayList <Task> tasks, String input, String description, String date) {
-        Task event = new Event(description,date);
+    public void printEvent(ArrayList<Task> tasks, String input, String description, String date) {
+        Task event = new Event(description, date);
         tasks.add(event);
         System.out.println("Ayy I got you my brother. I've added this ting: ");
         System.out.println(event.printDescription());
         System.out.println("I feer! You have " + tasks.size() + " mad tings in the list.");
     }
-
-
 }
