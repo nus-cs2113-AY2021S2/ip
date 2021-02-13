@@ -51,14 +51,11 @@ public class Duke {
      */
     public static void addToDo(String input) {
         try {
-            throwsExceptionForNoTaskName(input);
-
-            System.out.println("Got it. I've added this task:");
-
             separateTypeOfTaskAndTaskInputString(input);
             taskName = taskInputString;
-
             tasks.add(new ToDos(taskName)); //add task to list
+
+            System.out.println("Got it. I've added this task:");
             printAddedTask();
 
         } catch (NoTaskNameException e) {
@@ -75,15 +72,11 @@ public class Duke {
      */
     public static void addDeadline(String input) {
         try {
-            throwsExceptionForNoTaskName(input);
-            throwsExceptionForNoTaskDate(taskInputString);
-
-            System.out.println("Got it. I've added this task:");
-
             separateTypeOfTaskAndTaskInputString(input);
             splitTaskNameAndDate(taskInputString);
-
             tasks.add(new Deadlines(taskName, taskDate)); //add task to list
+
+            System.out.println("Got it. I've added this task:");
             printAddedTask();
 
         } catch (NoTaskNameException e) {
@@ -106,15 +99,11 @@ public class Duke {
      */
     public static void addEvent(String input) {
         try {
-            throwsExceptionForNoTaskName(input);
-            throwsExceptionForNoTaskDate(taskInputString);
-
-            System.out.println("Got it. I've added this task:");
-
             separateTypeOfTaskAndTaskInputString(input);
             splitTaskNameAndDate(taskInputString);
-
             tasks.add(new Events(taskName, taskDate)); //add task to list
+
+            System.out.println("Got it. I've added this task:");
             printAddedTask();
 
         } catch (NoTaskNameException e) {
@@ -182,7 +171,6 @@ public class Duke {
             String[] commandAndTaskNumber = input.split(" ");
             if (commandAndTaskNumber.length < 2) {
                 throw new NumberFormatException(); //throws NumberFormatException() when user does not input a number after word 'done'
-
             }
             int index = Integer.parseInt(commandAndTaskNumber[1]) - 1; //obtain index from task number(which starts from 1)
 
@@ -191,7 +179,6 @@ public class Duke {
 
             System.out.println("Nice! I've marked this task as done:");
             System.out.println(" " + taskDone.convertToTaskOutputString());
-
 
         } catch (NumberFormatException e) {
             System.out.println("Please input in the format of \'done taskNumber\'"); //wrong format for TaskNumber
@@ -220,25 +207,11 @@ public class Duke {
      * Removes taskType from user's entire input string
      * Stores remaining string (with taskName and taskDate combined) in static variable taskInputString
      *
-     * throws exception if user string does not contain task (taskName, taskDate etc.)
+     * throws exception if user string does not contain proper taskName (taskName, taskDate etc.)
      * @param input - entire input string of the user, made of taskType + taskName + taskDate
      */
-    public static void separateTypeOfTaskAndTaskInputString(String input) {
+    public static void separateTypeOfTaskAndTaskInputString(String input) throws NoTaskNameException {
         //find position between taskType and rest of task description:
-        int taskInputStringPosition = input.indexOf(" ") + 1;
-        taskInputString = input.substring(taskInputStringPosition);
-    }
-
-    /**
-     * Removes taskType from user's entire input string
-     * Stores remaining string (with taskName and taskDate combined) in static variable taskInputString
-     *
-     * Checks if TaskName exists
-     *
-     * throws exception if user input string does not contain proper taskName
-     * @param input - entire input string of the user, made of taskType + taskName + taskDate
-     */
-    public static void throwsExceptionForNoTaskName(String input) throws NoTaskNameException {
         int taskInputStringPosition = input.indexOf(" ") + 1;
         taskInputString = input.substring(taskInputStringPosition);
 
@@ -254,25 +227,6 @@ public class Duke {
 
     /**
      * Takes in the remaining 'taskInputString' of the user's input
-     * Splits it into two parts, the TaskName and TaskDateString
-     * Splits TaskDateString into complement word "by:" or "at:" & TaskDate
-     *
-     * End Results: TaskName and TaskDate
-     * @param taskInput - essentially taskInputString, which does not include taskType
-     */
-    public static void splitTaskNameAndDate(String taskInput) {
-        int beforeDateStringPosition = taskInput.indexOf("/");
-        taskName = taskInput.substring(0, beforeDateStringPosition);
-
-        int dateStringPosition = beforeDateStringPosition + 1;
-        String taskDateString = taskInput.substring(dateStringPosition);
-
-        int datePosition = taskDateString.indexOf(" ") + 1;
-        taskDate = taskDateString.substring(datePosition);
-    }
-
-    /**
-     * Takes in the remaining 'taskInputString' of the user's input
      * Splits it into two parts, then stores into TaskName
      * and TaskDateString of the task
      *
@@ -282,9 +236,10 @@ public class Duke {
      * NoTaskDateException() - no date after '/at' or '/by'
      * EmptyTaskDateException() - empty date after '/at' or '/by'
      *
+     * End Results: TaskName and TaskDate
      * @param taskInput - essentially taskInputString, which does not include taskType
      */
-    public static void throwsExceptionForNoTaskDate(String taskInput) throws TaskDateFormatException, NoTaskDateException, EmptyTaskDateException {
+    public static void splitTaskNameAndDate(String taskInput) throws TaskDateFormatException, NoTaskDateException, EmptyTaskDateException {
         int beforeDatePosition = taskInput.indexOf("/");
         if (beforeDatePosition == -1) {
             throw new TaskDateFormatException(); //if no '/', asks user to change TaskDateString format
