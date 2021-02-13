@@ -279,8 +279,8 @@ public class Duke {
      * Splits TaskDateString into 2 parts, complement word "by:" or "at:" & taskDate (further split by " ")
      *
      * TaskDateFormatException() - TaskDateString is written in an incorrect format
-     * NoTaskDateException() - no date after '/at:' or '/by:'
-     * EmptyTaskDateException() - empty date after '/at:' or '/by:'
+     * NoTaskDateException() - no date after '/at' or '/by'
+     * EmptyTaskDateException() - empty date after '/at' or '/by'
      *
      * @param taskInput - essentially taskInputString, which does not include taskType
      */
@@ -295,7 +295,7 @@ public class Duke {
         String taskDateString = taskInput.substring(dateStringPosition);
 
         String[] taskDateStringWord = taskDateString.split(" ");
-        if (!(taskDateStringWord[0].equals("at:") || taskDateStringWord[0].equals("by:"))) {
+        if (!(taskDateStringWord[0].equals("at") || taskDateStringWord[0].equals("by"))) {
             throw new TaskDateFormatException(); //if incorrect complement word in non-empty string after '/', asks user to change TaskDateString format
         }
 

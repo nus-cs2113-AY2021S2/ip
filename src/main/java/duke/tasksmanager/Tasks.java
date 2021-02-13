@@ -16,7 +16,7 @@ public class Tasks {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : " "); //return tick or blank space
+        return (isDone ? "X" : " "); //return tick or blank space
     }
 
     public String getDescription() {
