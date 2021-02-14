@@ -13,4 +13,12 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by: " + deadlineDate + ")";
     }
+
+    public void setDeadlineDate(String deadlineDate){
+        this.deadlineDate = deadlineDate;
+    }
+
+    public String getDeadlineDate(){
+        return deadlineDate;
+    }
 }
