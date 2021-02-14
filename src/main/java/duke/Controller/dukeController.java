@@ -2,9 +2,11 @@ package duke.Controller;
 
 import java.util.ArrayList;
 import duke.Tasks.*;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class dukeController {
-    public dukeController() {};
+    public dukeController() {}
 
     public void displayWelcome() {
         String logo = " ____        _        \n"
@@ -31,7 +33,10 @@ public class dukeController {
             return "done";
         } else if (input.contains("delete")) {
             return "delete";
-        } else if (input.contains("todo") || input.contains("deadline") || input.contains("event")) {
+        } else if (input.contains("save")) {
+            return "save";
+        }
+        else if (input.contains("todo") || input.contains("deadline") || input.contains("event")) {
             int indexOfSpace = input.indexOf(" ");
             if (indexOfSpace == -1) {
                 return "retry";
@@ -62,6 +67,8 @@ public class dukeController {
             return "todo";
         } else if (input.contains("delete")) {
             return "delete";
+        } else if (input.contains("save")) {
+            return "save";
         } else if (input.contains("deadline") || input.contains("event")) {
             int indexOfSpace = input.indexOf(" ");
             String subString = input.substring(indexOfSpace + 1);
@@ -83,16 +90,16 @@ public class dukeController {
         }
     }
 
-    public void printTaskList(ArrayList <Task> tasks) {
+    public void printTaskList(ArrayList<Task> tasks) {
         int number = 1;
         System.out.println("Here are the tings in yo list: ");
-        for (Task task: tasks) {
+        for (Task task : tasks) {
             System.out.println(number + ". " + task.printDescription());
             number++;
         }
     }
 
-    public void showDone(ArrayList <Task> tasks, String input) {
+    public void showDone(ArrayList<Task> tasks, String input) {
         int indexSpace = input.indexOf(" ");
         if (indexSpace == -1) {
             System.out.println("I see you forget how to type numbers yea... you donut! Type in your task number man!");
@@ -112,7 +119,7 @@ public class dukeController {
         }
     }
 
-    public void deleteTask(ArrayList <Task> tasks, String input) {
+    public void deleteTask(ArrayList<Task> tasks, String input) {
         int indexSpace = input.indexOf(" ");
         if (indexSpace == -1) {
             System.out.println("I see you forget how to type numbers yea... you donut! Type in your task number man!");
@@ -133,7 +140,7 @@ public class dukeController {
         }
     }
 
-    public void printToDo(ArrayList <Task> tasks, String input, String description) {
+    public void printToDo(ArrayList<Task> tasks, String input, String description) {
         Task todo = new toDo(description);
         tasks.add(todo);
         System.out.println("Ayy I got you my brother. I've added this ting: ");
@@ -141,7 +148,7 @@ public class dukeController {
         System.out.println("Dayuum son! You have " + tasks.size() + " mad tings in the list.");
     }
 
-    public void printDeadline(ArrayList <Task> tasks, String input, String description, String date){
+    public void printDeadline(ArrayList<Task> tasks, String input, String description, String date) {
         Task deadline = new Deadline(description, date);
         tasks.add(deadline);
         System.out.println("Ayy I got you my brother. I've added this ting: ");
@@ -149,12 +156,32 @@ public class dukeController {
         System.out.println("Jeeeeeeez! You have " + tasks.size() + " mad tings in the list.");
     }
 
-    public void printEvent(ArrayList <Task> tasks, String input, String description, String date) {
-        Task event = new Event(description,date);
+    public void printEvent(ArrayList<Task> tasks, String input, String description, String date) {
+        Task event = new Event(description, date);
         tasks.add(event);
         System.out.println("Ayy I got you my brother. I've added this ting: ");
         System.out.println(event.printDescription());
         System.out.println("I feer! You have " + tasks.size() + " mad tings in the list.");
     }
 
+    public void saveFile(ArrayList<Task> tasks) throws IOException {
+        try {
+            FileWriter writer = new FileWriter("saveDuke.txt");
+            for (Task task : tasks) {
+                if (task instanceof toDo) {
+                    writer.write("T" + " | " + task.getSaveDone() + " | " + task.getDescription());
+                } else if (task instanceof Deadline) {
+                    writer.write("D" + " | " + task.getSaveDone() + " | " + task.getDescription() + " | " + ((Deadline) task).getByDate());
+                } else if (task instanceof Event) {
+                    writer.write("E" + " | " + task.getSaveDone() + " | " + task.getDescription() + " | " + ((Event) task).getAtDate());
+                }
+                writer.write("\n");
+            }
+            writer.close();
+            System.out.print("Yea cuhhhh... filed saved!");
+        } catch (IOException e) {
+            System.out.println("Cannot save file my G!");
+            e.printStackTrace();
+        }
+    }
 }

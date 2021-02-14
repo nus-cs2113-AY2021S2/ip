@@ -34,4 +34,8 @@ public class Task{
     public String printDescription() {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
+
+    public int getSaveDone() {
+        return (isDone? 1:0);
+    }
 }
