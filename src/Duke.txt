@@ -1,0 +1,6 @@
+[✓] todo sleep
+[ ] event football /at friday 2pm
+[ ] todo eat
+[✓] todo relax
+[ ] todo gym
+[✓] deadline project meeting /by 21st feb

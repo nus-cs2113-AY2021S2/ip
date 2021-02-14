@@ -15,5 +15,10 @@ public class Todo extends Task {
     public String getDate(){
         return "";
     }
+
+    @Override
+    public String outputData() {
+        return "[" + getStatusIcon() + "] " + "todo " + getName() ;
+    }
 }
 

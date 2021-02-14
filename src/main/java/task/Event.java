@@ -18,4 +18,9 @@ public class Event extends Task {
     public String getDate() {
         return " (at: " + at + ")";
     }
+
+    @Override
+    public String outputData() {
+        return "[" + getStatusIcon() + "] " + "event " + getName() + " /at " + at;
+    }
 }

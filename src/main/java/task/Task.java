@@ -1,6 +1,6 @@
 package task;
 
-public class Task {
+public abstract class Task {
     private final String name;
     protected boolean isDone;
 
@@ -32,5 +32,7 @@ public class Task {
     public String getStatusIcon() {
         return (isDone ? "\u2713" : " "); //return tick as done and empty as not done
     }
+
+    abstract public String outputData();
 
 }

@@ -5,11 +5,15 @@ import task.Deadline;
 import task.Event;
 import task.Task;
 import task.Todo;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    public static final ArrayList<Task> list = new ArrayList<>();//Task[] list = new Task[MAX_SIZE];
+    public static final ArrayList<Task> list = new ArrayList<>();
     private static int listCounter = 0;
 
     /**
@@ -26,6 +30,7 @@ public class Duke {
                     throw new IndexOutOfBoundsException();
                 }
                 if (input.equalsIgnoreCase("bye")) {
+                    saveFile();
                     PrintOutput.printExit();
                     System.exit(1);
                 } else if (input.equalsIgnoreCase("help")) {
@@ -45,7 +50,7 @@ public class Duke {
                 } else {
                     checkError("INVALID_COMMAND");
                 }
-            } catch (IndexOutOfBoundsException e) {
+            } catch (IndexOutOfBoundsException | IOException e) {
                 checkError("LIST_FULL");
             }
         }
@@ -53,12 +58,21 @@ public class Duke {
 
     /**
      * Main Function
-     * To Print Greeting as Default then loop function
+     * Loads Duke.txt File to Start Program and loop through commands
+     * Error if Duke.txt Not Found
      * @param args - argument
      */
     public static void main(String[] args) {
         PrintOutput.printGreeting();
-        loop();
+        try {
+            loadFile();
+            System.out.println("Duke.txt successfully loaded!");
+            PrintOutput.printBorder();
+            loop();
+        } catch (FileNotFoundException e) {
+            checkError("FILE_NOT_FOUND");
+        }
+
     }
 
     /**
@@ -185,8 +199,8 @@ public class Duke {
 
             System.out.println("Noted! I will delete this at once!");
             System.out.println("[" + list.get(index).getType() + "] ["
-                + list.get(index).getStatusIcon() + "] " + list.get(index).getName()
-                + list.get(index).getDate());
+                    + list.get(index).getStatusIcon() + "] " + list.get(index).getName()
+                    + list.get(index).getDate());
             list.remove(index);
             listCounter--;
             printNoOfTask();
@@ -241,13 +255,143 @@ public class Duke {
             System.out.println(" LIST");
             for (int i = 0; i < listCounter; i++) {
                 System.out.println(i + 1 +  ". [" + list.get(i).getType() +  "] " + "["
-                        +list.get(i).getStatusIcon() + "] " + list.get(i).getName()
+                        + list.get(i).getStatusIcon() + "] " + list.get(i).getName()
                         + list.get(i).getDate());
             }
             PrintOutput.printBorder();
         } catch (ListEmptyException e) {
             checkError("EMPTY_LIST");
         }
+    }
+
+    /**
+     * Method to load Duke.txt
+     * Throws Exception if Duke.txt not Found
+     * @throws FileNotFoundException - File Not Found Exception
+     */
+    private static void loadFile() throws FileNotFoundException {
+        File file = new File("src/Duke.txt");
+        if (!file.exists()) {
+            throw new FileNotFoundException();
+        }
+        Scanner line = new Scanner(file);
+        while (line.hasNext()) {
+            String input = line.nextLine();
+            if (input.toLowerCase().substring(4).startsWith("todo")) {
+                importTodo(input);
+            } else if (input.toLowerCase().substring(4).startsWith("deadline")) {
+                importDeadline(input);
+            } else if (input.toLowerCase().substring(4).startsWith("event")) {
+                importEvent(input);
+            }
+        }
+    }
+
+    /**
+     * Imports todo from Duke.txt to Program
+     * @param input - Command
+     */
+    private static void importTodo(String input) {
+        try{
+            if (input.substring(4).equals("todo")) {
+                throw new WrongFormatException();
+            }
+            String command = input.substring(9);
+            if (command.isBlank()) {
+                throw new WrongFormatException();
+            }
+            Todo t = new Todo(command);
+            list.add(t);
+            listCounter ++;
+            if (input.charAt(1) == '\u2713') {
+                t.markAsDone();
+            }
+            System.out.println("Imported \"Todo: " + t.getName()
+                + "\" from Duke.txt!");
+            PrintOutput.printBorder();
+        } catch(WrongFormatException e) {
+            checkError("INVALID_FORMAT");
+        }
+    }
+
+    /**
+     * Imports Deadline from Duke.txt to Program
+     * @param input - Command
+     */
+    private static void importDeadline(String input) {
+        try{
+            if (input.substring(4).equals("deadline")) {
+                throw new WrongFormatException();
+            }
+            String command = input.substring(13);
+            if (!command.contains(" /by ")) {
+                throw new WrongFormatException();
+            }
+            String[] parts = command.split(" /by ");
+            String description = parts[0];
+            String date = parts[1];
+            Deadline t = new Deadline(description,date);
+            list.add(t);
+            listCounter ++;
+            if (input.charAt(1) == '\u2713') {
+                t.markAsDone();
+            }
+            System.out.println("Imported \"Deadline: " + t.getName()
+                + "\" from Duke.txt!");
+            PrintOutput.printBorder();
+        } catch (WrongFormatException e) {
+            checkError("INVALID_FORMAT");
+        }
+    }
+
+    /**
+     * Imports Event from Duke.txt to Program
+     * @param input - Command
+     */
+    private static void importEvent(String input) {
+        try {
+            if (input.equals("event")) {
+                throw new WrongFormatException();
+            }
+            String command = input.substring(10);
+            if (!command.contains(" /at ")) {
+                throw new WrongFormatException();
+            }
+            String[] parts = command.split(" /at ");
+            String description = parts[0];
+            String date = parts[1];
+            Event t = new Event(description, date);
+            list.add(t);
+            listCounter++;
+            if (input.charAt(1) == '\u2713') {
+                t.markAsDone();
+            }
+            System.out.println("Imported \"Event: " + t.getName()
+                + "\" from Duke.txt!");
+            PrintOutput.printBorder();
+        } catch (WrongFormatException e) {
+            checkError("INVALID_FORMAT");
+        }
+    }
+
+    /**
+     * Method to update Duke.txt
+     * Throws Exception if Duke.txt not found
+     * @throws IOException - IO Exception Error
+     */
+    private static void saveFile() throws IOException {
+        File file = new File("src/Duke.txt");
+        if (!file.exists()){
+            if(!file.createNewFile()) {
+                throw new IOException();
+            }
+        }
+        FileWriter fw = new FileWriter("src/Duke.txt");
+        for(int i = 0; i< listCounter; i++) {
+            fw.write(list.get(i).outputData());
+            fw.write("\n");
+        }
+        fw.close();
     }
 
     /**
@@ -298,7 +442,10 @@ public class Duke {
             System.out.println("Enter \"HELP\" for commands!");
             PrintOutput.printBorder();
             break;
-
+        case "FILE_NOT_FOUND":
+            System.out.println("No Duke.txt file found in directory "
+                    + "Please try again!");
+            PrintOutput.printBorder();
         }
     }
 }
