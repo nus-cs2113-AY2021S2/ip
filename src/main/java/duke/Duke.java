@@ -301,7 +301,7 @@ public class Duke {
         return INVALID_INDEX;
     }
 
-    /* ************************************* Methods used to print stuff *************************************************/
+    /* ************************************* Methods used to print stuff **********************************************/
 
     /** Method used to print each item for "list" command */
     public static void printListItem(int index, String type, String status, String name, String date) {
@@ -366,7 +366,7 @@ public class Duke {
         printBorderLine();
     }
 
-    /* ********************************************* Methods for File IO **************************************************/
+    /* ********************************************* Methods for File IO **********************************************/
     public static void loadData() throws IOException {
         File f = new File(FILEPATH);
         f.getParentFile().mkdirs();
