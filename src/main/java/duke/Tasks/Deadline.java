@@ -2,9 +2,8 @@ package duke.Tasks;
 
 public class Deadline extends Task {
     protected String byDate;
-    protected String taskType = "D";
 
-    public Deadline() {};
+    public Deadline() {}
 
     public Deadline(String description, String by) {
         super(description);
@@ -13,10 +12,6 @@ public class Deadline extends Task {
 
     public String getByDate() {
         return byDate;
-    }
-
-    public String getTaskType() {
-        return taskType;
     }
 
     public String printDescription() {
