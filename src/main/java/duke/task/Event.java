@@ -13,4 +13,12 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (at: " + eventLocation + ")";
     }
+
+    public void setEventLocation(String eventLocation){
+        this.eventLocation = eventLocation;
+    }
+
+    public String getEventLocation(){
+        return eventLocation;
+    }
 }
