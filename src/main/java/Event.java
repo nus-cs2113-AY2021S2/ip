@@ -10,6 +10,6 @@ public class Event extends Task{
     }
     @Override
     public String toString() {
-        return "\t" + super.toString() + "(" + "at:" + by + ")";
+        return "\t " + super.toString() + "(" + "at:" + by + ")";
     }
 }
