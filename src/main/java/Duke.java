@@ -85,13 +85,19 @@ public class Duke {
                 }
                 System.out.println(DECO_LINE);
             } else if (input.split(" ")[0].equals("todo")) {
-                String task = input.split(" ", 2)[1];
-                inputs.add(new Todo(task, false));
-                System.out.println(DECO_LINE);
-                System.out.println(ADD_TASK);
-                System.out.println("   [T][ ] " + task);
-                System.out.println(" Now you have " + inputs.size() + " tasks in the list.");
-                System.out.println(DECO_LINE);
+                try {
+                    String task = input.split(" ", 2)[1];
+                    inputs.add(new Todo(task, false));
+                    System.out.println(DECO_LINE);
+                    System.out.println(ADD_TASK);
+                    System.out.println("   [T][ ] " + task);
+                    System.out.println(" Now you have " + inputs.size() + " tasks in the list.");
+                    System.out.println(DECO_LINE);
+                } catch (Exception nfe) {
+                    System.out.println(DECO_LINE);
+                    System.out.println("Format is wrong! You should write \"todo <event>\"");
+                    System.out.println(DECO_LINE);
+                }
             } else if (input.split(" ")[0].equals("deadline")) {
                 try {
                     String task = input.split(" /by ")[0].split(" ", 2)[1];
