@@ -11,12 +11,12 @@ import java.util.ArrayList;
 
 public class TaskManager {
 
-    private ArrayList<Task> tasks = new ArrayList<>();
+    private final ArrayList<Task> tasks = new ArrayList<>();
 
     public String listTask() {
         StringBuilder feedback = new StringBuilder();
 
-        feedback.append("Here are the tasks in your list:" + System.lineSeparator());
+        feedback.append("Here are the tasks in your list:").append(System.lineSeparator());
         for (int i = 0; i < tasks.size() - 1; ++i) {
             feedback.append(String.format("%d: %s", (i + 1), tasks.get(i))).append(System.lineSeparator());
         }
@@ -55,11 +55,8 @@ public class TaskManager {
                 + "Now you have " + tasks.size() + " tasks in the list.";
     }
 
-    private boolean isValidTaskType (String taskType) {
-        if (taskType.equals("todo") || taskType.equals("deadline") || taskType.equals("event")) {
-            return true;
-        }
-        return false;
+    private boolean isValidTaskType(String taskType) {
+        return taskType.equals("todo") || taskType.equals("deadline") || taskType.equals("event");
     }
 
     private String[] parseDescription(String description, String regex) {
@@ -79,5 +76,17 @@ public class TaskManager {
         }
         return "Nice! I've marked this task as done:" + System.lineSeparator()
                 + tasks.get(taskNum);
+    }
+
+    public String deleteTask(int taskNumber) {
+        String task = tasks.get(taskNumber).toString();
+        try {
+            tasks.remove(taskNumber);
+        } catch (IndexOutOfBoundsException e) {
+            return "OOPS!!! Invalid task number. Try 1-" + tasks.size();
+        }
+        return "Noted. I've removed this task:" + System.lineSeparator() +
+                task + System.lineSeparator() +
+                "Now you have " + tasks.size() + " tasks in the list.";
     }
 }
