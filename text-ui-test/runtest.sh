@@ -2,6 +2,12 @@
 cwd=$(pwd)
 cd $(dirname "$0")
 
+# delete save file from previous run
+if [ -e "duke.save" ]
+then
+    rm duke.save
+fi
+
 # create bin directory if it doesn't exist
 if [ ! -d "../bin" ]
 then

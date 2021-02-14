@@ -1,9 +1,12 @@
 package duke.task;
 
+import java.io.Serializable;
+
 import duke.exception.InvalidInputException;
 import duke.exception.InvalidInputException.InputExceptionType;
 
-public class Task {
+@SuppressWarnings("serial")
+public abstract class Task implements Serializable {
     // We set the default type icon to be *, which should be overwritten for child classes
     protected String typeIcon = "*";
 

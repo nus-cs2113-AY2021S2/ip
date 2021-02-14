@@ -10,10 +10,21 @@ import duke.task.Task;
 
 public class Duke {
     public static final String LONG_LINE = "------------------------------------------------------------";
+    public static final String SAVE_PATH = "duke.save";
 
     public static void main(String[] args) {
         // Initialize a vector to store all the tasks
-        Vector<Task> tasks = new Vector<>();
+        Vector<Task> tasks = null;
+        try {
+            tasks = Helper.loadList(SAVE_PATH);
+        } catch (Exception e) {
+            Helper.printlnWithIndent("Got a problem when loading save file at " + SAVE_PATH + ": " + e.getMessage());
+            Helper.printlnWithIndent("An empty list will be used instead!");
+        } finally {
+            if (tasks == null) {
+                tasks = new Vector<>();
+            }
+        }
 
         ActionHandler.greetingHandler();
         Helper.printlnWithIndent(LONG_LINE);
@@ -43,18 +54,22 @@ public class Duke {
                     break;
                 case "done":
                     ActionHandler.doneHandler(tasks, arguments);
+                    Helper.saveList(SAVE_PATH, tasks);
                     break;
                 case "delete":
                     ActionHandler.deleteHandler(tasks, arguments);
                     break;
                 case "deadline":
                     ActionHandler.deadlineHandler(tasks, arguments);
+                    Helper.saveList(SAVE_PATH, tasks);
                     break;
                 case "event":
                     ActionHandler.eventHandler(tasks, arguments);
+                    Helper.saveList(SAVE_PATH, tasks);
                     break;
                 case "todo":
                     ActionHandler.todoHandler(tasks, arguments);
+                    Helper.saveList(SAVE_PATH, tasks);
                     break;
                 default:
                     throw new InvalidInputException(InputExceptionType.UNKNOWN_COMMAND);
