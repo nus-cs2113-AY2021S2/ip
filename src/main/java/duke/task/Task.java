@@ -11,7 +11,8 @@ public class Task {
     private static int taskCounter = 0;
     private static int completedTaskCounter = 0;
     public static ArrayList<Task> tasks = new ArrayList<>();
-    private static int completedTaskIndex = 0;
+    // private static int completedTaskIndex = 0;
+    private static Task recentTask;
 
     public Task(String description){
         this.description = description;
@@ -53,16 +54,26 @@ public class Task {
         incrementTaskCounter();
     }
 
+    public static void deleteTask(int taskNumber){
+        recentTask = tasks.get(taskNumber);
+        if (tasks.get(taskNumber).isDone) {
+            completedTaskCounter--;
+        }
+        tasks.remove(taskNumber);
+        taskCounter--;
+    }
+
 
     public static void completeTask(int taskNumber) {
         tasks.get(taskNumber).markAsDone();
-        completedTaskIndex = taskNumber;
-        completedTaskCounter++;
+        recentTask = tasks.get(taskNumber);
+        // completedTaskIndex = taskNumber;
+        completedTaskCounter -= -1;
     }
 
-    public static Task getLatestTask(boolean getCompletedTask) {
+    public static Task getRecentTask(boolean getCompletedTask) {
         if (getCompletedTask) {
-            return tasks.get(completedTaskIndex);
+            return recentTask;
         } else {
             return tasks.get(getTaskCounter() - 1);
         }
@@ -79,10 +90,14 @@ public class Task {
     }
 
     // Check for exceptions
-    public static void checkDoneTask(int queryTask) throws TaskAlreadyCompletedException, TaskNotExistException {
+    public static void checkTaskIndex(int queryTask) throws TaskNotExistException {
         if (queryTask > taskCounter - 1) {
             throw new TaskNotExistException();
         }
+
+    }
+
+    public static void checkTaskComplete(int queryTask) throws  TaskAlreadyCompletedException {
         if (tasks.get(queryTask).isDone()) {
             throw new TaskAlreadyCompletedException();
         }

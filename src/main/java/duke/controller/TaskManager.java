@@ -10,12 +10,21 @@ public class TaskManager {
         String[] taskDetails;
         switch (inputData[0]) {
             case "done":
+            case "delete":
                 try {
-                    int completedTaskIndex = Integer.parseInt(input.split(" ")[1]);
-                    completedTaskIndex--;
-                    Task.checkDoneTask(completedTaskIndex);
-                    Task.completeTask(completedTaskIndex);
-                    UI.taskCompletedSuccessfully();
+                    int taskIndex = Integer.parseInt(input.split(" ")[1]);
+                    taskIndex--;
+                    Task.checkTaskIndex(taskIndex);
+                    if (inputData[0].equals("done")) {
+                        Task.checkTaskComplete(taskIndex);
+                        Task.completeTask(taskIndex);
+                        UI.taskCompletedSuccessfully();
+                    }
+                    else {
+                        Task.deleteTask(taskIndex);
+                        UI.taskDeletedSuccessfully();
+                    }
+
                 } catch (NumberFormatException e) {
                     System.out.println("That didn't work...please enter a valid number");
                     UI.showDivider();
