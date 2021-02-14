@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+# delete save file from previous run
+if [ -e "duke.save" ]
+then
+    rm duke.save
+fi
+
 # create bin directory if it doesn't exist
 if [ ! -d "../bin" ]
 then
