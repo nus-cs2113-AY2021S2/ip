@@ -270,7 +270,7 @@ public class Duke {
      * @throws FileNotFoundException - File Not Found Exception
      */
     private static void loadFile() throws FileNotFoundException {
-        File file = new File("src/Duke.txt");
+        File file = new File("Duke.txt");
         if (!file.exists()) {
             throw new FileNotFoundException();
         }
@@ -380,13 +380,13 @@ public class Duke {
      * @throws IOException - IO Exception Error
      */
     private static void saveFile() throws IOException {
-        File file = new File("src/Duke.txt");
+        File file = new File("Duke.txt");
         if (!file.exists()){
             if(!file.createNewFile()) {
                 throw new IOException();
             }
         }
-        FileWriter fw = new FileWriter("src/Duke.txt");
+        FileWriter fw = new FileWriter("Duke.txt");
         for(int i = 0; i< listCounter; i++) {
             fw.write(list.get(i).outputData());
             fw.write("\n");
