@@ -100,8 +100,6 @@ public class List {
     }
 
     public void printGoodEnding() {
-        printDottedLines();
-
         System.out.print("Thanks for your help Crewmate!!" + System.lineSeparator()
                 + "We wouldn't have done this without your help!!" + System.lineSeparator()
                 + "Goodbye!!!! (￣▽￣)ノ" + System.lineSeparator());
@@ -110,14 +108,12 @@ public class List {
     }
 
     public void printBadEnding() {
-        printDottedLines();
         System.out.print("You have been kicked out! Bye Impostor!!!  (๑>ᴗ<๑)" + System.lineSeparator());
         printDottedLines();
 
     }
 
     public void printTraitor() {
-        printDottedLines();
         System.out.print("You are abandoning us!!! I trusted you!!!  (　ﾟдﾟ)" + System.lineSeparator());
         printDottedLines();
     }

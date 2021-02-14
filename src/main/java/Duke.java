@@ -114,6 +114,17 @@ public class Duke {
             addTaskInEventList(line);
             break;
         }
+        case "delete": {
+            try {
+                deleteTask(sentence);
+            } catch (IllegalCommandException e) {
+                throw new IllegalCommandException();
+            } catch (IllegalTaskException e) {
+                throw new IllegalTaskException();
+            }
+
+            break;
+        }
         default:
             throw new IllegalCommandException();
         }
@@ -141,8 +152,25 @@ public class Duke {
         tasks.add(newTask);
     }
 
-    private static void markTaskAsDone(String[] sentence) throws IllegalCommandException, IllegalTaskException,
-            IllegalTaskRedoException {
+    private static void deleteTask(String[] sentence) throws IllegalCommandException, IllegalTaskException {
+        int index;
+        try {
+            index = getIndex(sentence);
+        } catch (IllegalCommandException e) {
+            throw new IllegalCommandException();
+        } catch (IllegalTaskException e) {
+            throw new IllegalTaskException();
+        }
+
+        TaskList t = tasks.get(index - 1);
+        t.printTask();
+        tasks.remove(index - 1);
+        if (tasks.size() > 0) {
+            printNumberOfTasksLeft();
+        }
+    }
+
+    private static int getIndex(String[] sentence) throws IllegalCommandException, IllegalTaskException {
         if (sentence.length > 2) {
             throw new IllegalCommandException();
         }
@@ -150,23 +178,30 @@ public class Duke {
         if (index > tasks.size() || index == -1) {
             throw new IllegalTaskException();
         }
-        int i = 1;
+        return index;
+    }
 
-        for (TaskList t : tasks) {
-            if (index == i) {
-                try {
-                    t.markAsDone();
-                } catch (IllegalTaskRedoException e) {
-                    throw new IllegalTaskRedoException();
-                }
-                tasks.set(index - 1, t);
-                printNumberOfTasksLeft();
-                break;
-            }
-            i++;
+    private static void markTaskAsDone(String[] sentence) throws IllegalCommandException, IllegalTaskException,
+            IllegalTaskRedoException {
+        int index;
+        try {
+            index = getIndex(sentence);
+        } catch (IllegalCommandException e) {
+            throw new IllegalCommandException();
+        } catch (IllegalTaskException e) {
+            throw new IllegalTaskException();
         }
 
+        TaskList t = tasks.get(index - 1);
+        try {
+            t.markAsDone();
+        } catch (IllegalTaskRedoException e) {
+            throw new IllegalTaskRedoException();
+        }
+        tasks.set(index - 1, t);
+        printNumberOfTasksLeft();
     }
+
 
     public static int getIndexFromCommand(String index) {
         try {
@@ -178,9 +213,9 @@ public class Duke {
     }
 
     public static void printNumberOfTasksLeft() {
-        if (getAreAllTasksDone()) {
+        if (getAreAllTasksDone() && tasks.size() > 0) {
             dukeList.printCompletedTasks();
-        } else if (getAreAllTasksNotDone()) {
+        } else if (getAreAllTasksNotDone() && tasks.size() > 0) {
             dukeList.printNoTasksDone();
         } else {
             int tasksLeft = getNumberOfTaskRemaining();
