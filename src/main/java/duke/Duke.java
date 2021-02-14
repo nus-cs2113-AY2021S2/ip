@@ -164,7 +164,7 @@ public class Duke {
             String command = getFirstWord(line);
 
             if (line.equals("bye")) {
-                writeToFile(tasks);     //Data is only saved when user properly exits program
+                writeToFile(tasks);
                 showExitMessage();
                 isOn = false;
             } else if (line.equals("list")) {
@@ -173,6 +173,7 @@ public class Duke {
                 try {
                     int index = Integer.parseInt(parts[1]) - 1;
                     markAsDone(tasks, index);
+                    writeToFile(tasks);
                 } catch (EmptyListException e) {
                     System.out.println("\tIm afraid the item does not exist!");
                 } catch (TaskDoneException e) {
@@ -182,6 +183,7 @@ public class Duke {
                     try {
                         int index = Integer.parseInt(parts[1]) - 1;
                         deleteTask(tasks, index);
+                        writeToFile(tasks);
                     } catch (IndexOutOfBoundsException e) {
                         System.out.println("\tYou can't delete something that does not exist!");
                     }
@@ -192,6 +194,7 @@ public class Duke {
 
                     printAddedTask(tasks, taskCounter);
                     taskCounter++;
+                    writeToFile(tasks);
                 } catch (StringIndexOutOfBoundsException e) {
                     System.out.println("\tAre you sure you have nothing to do? :)");
                 }
@@ -203,6 +206,7 @@ public class Duke {
 
                     printAddedTask(tasks, taskCounter);
                     taskCounter++;
+                    writeToFile(tasks);
                 } catch (StringIndexOutOfBoundsException e) {
                     System.out.println("\tAre you sure you have no deadlines to meet? :)");
                 }
@@ -214,6 +218,7 @@ public class Duke {
 
                     printAddedTask(tasks, taskCounter);
                     taskCounter++;
+                    writeToFile(tasks);
                 } catch (StringIndexOutOfBoundsException e) {
                     System.out.println("\tAre you sure you have nothing going on? :)");
                 }
