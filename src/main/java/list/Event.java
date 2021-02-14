@@ -37,6 +37,9 @@ public class Event extends Deadline {
         System.out.println("ATTENTION, Here's your list of EVENT(S) to attend  Crewmate!!!");
     }
 
-
+    @Override
+    public String getTaskToPrintInFile() {
+        return ("event " + this.description + "/" + this.by);
+    }
 }
 

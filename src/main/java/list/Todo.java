@@ -27,4 +27,9 @@ public class Todo extends TaskList {
     public void printListName() {
         System.out.println("ATTENTION, Here's your list of your tasks TO DO Crewmate!!!");
     }
+
+    @Override
+    public String getTaskToPrintInFile(){
+        return ("todo " + this.description + System.lineSeparator() +this.isDone);
+    }
 }

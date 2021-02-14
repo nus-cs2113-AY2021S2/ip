@@ -196,4 +196,8 @@ public class TaskList extends List {
         }
         return taskLeftCounter;
     }
+
+    public String getTaskToPrintInFile(){
+        return "";
+    }
 }

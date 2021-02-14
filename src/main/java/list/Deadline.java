@@ -66,4 +66,9 @@ public class Deadline extends TaskList {
     public void printListName() {
         System.out.println("ATTENTION, Here's your list of DEADLINE(S) to meet  Crewmate!!!");
     }
+
+    @Override
+    public String getTaskToPrintInFile(){
+        return ("deadline " + this.description + "/" + this.by);
+    }
 }
