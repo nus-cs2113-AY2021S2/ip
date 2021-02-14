@@ -58,6 +58,7 @@ public class Duke {
                     break;
                 case "delete":
                     ActionHandler.deleteHandler(tasks, arguments);
+                    Helper.saveList(SAVE_PATH, tasks);
                     break;
                 case "deadline":
                     ActionHandler.deadlineHandler(tasks, arguments);
