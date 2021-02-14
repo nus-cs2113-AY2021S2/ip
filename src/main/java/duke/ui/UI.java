@@ -1,6 +1,9 @@
 package duke.ui;
 
+import duke.datamanager.FileManager;
 import duke.task.Task;
+
+import java.io.IOException;
 
 public class UI {
     public static String logo = " ____        _        \n"
@@ -14,12 +17,25 @@ public class UI {
     public static void showWelcomeScreen() {
         System.out.println("Hello from\n" + logo);
         System.out.println(divider);
-        System.out.println("Hello there! I'm duke.controller.Duke");
+        System.out.println("Hello there! I'm Duke");
+        System.out.println("I'm going to load any saved data that you may have now!");
+        try {
+            FileManager.readFile();
+        } catch (IOException e) {
+            System.out.println("Looks like you don't have a save file - please create a directory " +
+                    "called 'data' in the project directory!");
+        }
         System.out.println("I have the high ground! How may I help you?");
         System.out.println(divider);
     }
 
     public static void showDivider() {
+        System.out.println("Saving data...");
+        try {
+            FileManager.saveToFile();
+        } catch (IOException e) {
+            System.out.println("Unable to save - please create a directory called 'data' in the project directory!");
+        }
         System.out.println(divider);
         System.out.println("What is thy bidding, my master?");
         System.out.println(divider);
