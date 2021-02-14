@@ -29,7 +29,7 @@ public class Jarvis {
         printDivider();
         System.out.println("Importing all preferences from home interface.");
         TimeUnit.MILLISECONDS.sleep(DELAY);
-        System.out.println("Synchronising to the cloud.");
+        System.out.println("Synchronising from the cloud.");
         TimeUnit.MILLISECONDS.sleep(DELAY);
         System.out.println("Systems are now fully operational.");
         TimeUnit.MILLISECONDS.sleep(DELAY);
@@ -119,6 +119,36 @@ public class Jarvis {
         }
     }
 
+    // handles InvalidTaskException
+    public void handleInvalidTaskException() {
+        System.out.println("\tSorry, sir.");
+        System.out.println("\tNo such task was found in the list.");
+        System.out.println("\tWould you like to add the task instead?");
+        printDivider();
+    }
+
+    // handles EmptyListException
+    public void handleEmptyListException() {
+        System.out.println("\tYou do not have any pending task, sir.");
+        printDivider();
+    }
+
+    // removes the task from the list if exist
+    public void runDelete(String command) throws InvalidTaskException {
+        String description = command.replaceFirst("delete ", "");
+        int taskNumber = Integer.parseInt(description.substring(0, 1));
+        if (taskNumber <= tasks.size()) {
+            Task task = tasks.get(taskNumber - 1);
+            tasks.remove(task);
+            System.out.println("\tNoted, sir! I've removed this task:");
+            System.out.println("\t\t" + task.toString());
+            System.out.println("\tNow you have " + tasks.size() + " tasks in the list.");
+            printDivider();
+        } else {    // if the task is not in the ArrayList, throw InvalidTaskException
+            throw new InvalidTaskException();
+        }
+    }
+
     // JARVIS main task manager
     public void performTask() throws InvalidCommandException {
         String command = in.nextLine();
@@ -134,17 +164,19 @@ public class Jarvis {
             try {
                 runList();
             } catch (EmptyListException exception) {
-                System.out.println("\tYou do not have any pending task, sir.");
-                printDivider();
+                handleEmptyListException();
             }
         } else if (command.startsWith("done")) {    // done
             try {
                 runDone(command);
             } catch (InvalidTaskException exception) {
-                System.out.println("\tSorry, sir.");
-                System.out.println("\tI am unable to retrieve the information from the database.");
-                System.out.println("\tWould you like to add the task instead?");
-                printDivider();
+                handleInvalidTaskException();
+            }
+        } else if (command.startsWith("delete")) {
+            try {
+                runDelete(command);
+            } catch (InvalidTaskException exception) {
+                handleInvalidTaskException();
             }
         } else {    // if invalid command, throw InvalidCommandException
             throw new InvalidCommandException();
