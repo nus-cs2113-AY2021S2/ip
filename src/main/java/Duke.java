@@ -67,6 +67,29 @@ public class Duke {
         System.out.println("Now you have " + num_of_goals + " task in your list!");
     }
 
+    public static int totalNum(){
+        int count=0;
+        for(int i=0;i<t.length;i++){
+            if(t[i]!=null){
+                count=count+1;
+            }
+
+        }
+        return count;
+    }
+    public static void delete(int index) {
+        System.out.println("Noted. I've removed this task: ");
+        System.out.println("[" + t[index].symbol + "]" + "[" + " " + "]" + " " + t[index].description + "(" + t[index].preposition + ":" + t[index].ddl + ")");
+        for (int i = index; i < t.length - 1; i++) {
+            t[i] = t[i + 1];
+        }
+
+
+
+        System.out.println("Now you have " + totalNum() + " task in your list!");
+
+
+    }
 
     public static void main(String[] args) {
 
@@ -76,6 +99,7 @@ public class Duke {
         int num_of_goals = 0;
 
         while (!user_input.equals("bye")) {
+
             if (user_input.equals("list")) {
                 show_list(num_of_goals);
             } else {
@@ -91,7 +115,13 @@ public class Duke {
                             "     Nice! I've marked this task as done: ");
                     System.out.println("[" + t[number_converted - 1].getSymbol() + "]" + "[" + t[number_converted - 1].getStatusIcon() + "] " + t[number_converted - 1].getDescription() + "(" + t[number_converted - 1].getPrep() + ":" + t[number_converted - 1].getDdl() + ")");
                     System.out.println("____________________________________________________________");
-                } else if (slash != -1) {
+                } else if(user_done.equals("delete")){
+                    String number = user_input.substring(spacing + 1);
+                    int number_converted = Integer.parseInt(number);
+                    delete(number_converted - 1);
+                    num_of_goals =num_of_goals-1;
+                }
+                else if (slash != -1) {
                     String taskKind = userDone(user_done);
                     if (!taskKind.equals("")) {
                         // System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -140,10 +170,10 @@ public class Duke {
                     }
 
                 }
-                user_input = sc.nextLine();
             }
+            user_input = sc.nextLine();
 
-            
+
         }
         System.out.println("____________________________________________________________\n" +
                 "     Bye. Hope to see you again soon!\n" +
