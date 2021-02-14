@@ -95,7 +95,14 @@ public class Duke {
                             System.out.println(":( OOps!! The description of a" +
                                     "event cannot be empty");
                         }
-                    } else{
+                    } else if (task.contains("delete")){
+                        int delete_index = Integer.parseInt(task.substring(7));
+                        Task delete_task = tasks[delete_index];
+                        removeTaskMessage(delete_index, delete_task);
+                        index -= 1;
+                        System.out.println("Now you have " + index + " tasks in the list.");
+                    }
+                    else{
                         System.out.println(":( OOps!! I'm sorry, " +
                                 "but i don't know what that means...");
                     }
@@ -117,6 +124,11 @@ public class Duke {
             }
         }
     }
+    private static void removeTaskMessage(int delete_index, Task delete_task) {
+        System.out.println("Noted. I've removed this task: ");
+        System.out.println("  " + delete_task.toString());
+    }
+
     private static int addTaskMessage(int index, Task tasks) {
         System.out.println("Got it. I've added this task: ");
         System.out.println(" " + tasks.toString());
