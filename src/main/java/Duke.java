@@ -307,7 +307,7 @@ public class Duke {
                 t.markAsDone();
             }
             System.out.println("Imported \"Todo: " + t.getName()
-                + "\" from Duke.txt!");
+                    + "\" from Duke.txt!");
             PrintOutput.printBorder();
         } catch(WrongFormatException e) {
             checkError("INVALID_FORMAT");
@@ -337,7 +337,7 @@ public class Duke {
                 t.markAsDone();
             }
             System.out.println("Imported \"Deadline: " + t.getName()
-                + "\" from Duke.txt!");
+                    + "\" from Duke.txt!");
             PrintOutput.printBorder();
         } catch (WrongFormatException e) {
             checkError("INVALID_FORMAT");
@@ -367,7 +367,7 @@ public class Duke {
                 t.markAsDone();
             }
             System.out.println("Imported \"Event: " + t.getName()
-                + "\" from Duke.txt!");
+                    + "\" from Duke.txt!");
             PrintOutput.printBorder();
         } catch (WrongFormatException e) {
             checkError("INVALID_FORMAT");
@@ -443,7 +443,7 @@ public class Duke {
             PrintOutput.printBorder();
             break;
         case "FILE_NOT_FOUND":
-            System.out.println("No Duke.txt file found in directory "
+            System.out.println("Duke.txt not found in directory. "
                     + "Please try again!");
             PrintOutput.printBorder();
         }
