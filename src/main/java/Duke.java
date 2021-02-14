@@ -1,14 +1,14 @@
-import duke.Deadline;
-import duke.Event;
-import duke.Task;
-import duke.Todo;
+import duke.storage.Storage;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
-        ArrayList<Task> inputs = new ArrayList<>();
-
+    public static void main(String[] args) throws duke.exception.DukeException {
         final String LOGO = "\n" +
                 " .----------------.  .----------------. \n" +
                 "| .--------------. || .--------------. |\n" +
@@ -27,13 +27,16 @@ public class Duke {
         final String BYE_MESSAGE = " Bye. Hope to see you again soon!";
         final String ERROR_MESSAGE = " Sorry, I can't recognize your input.";
         final String ADD_TASK = " Got it. I've added this task:";
+        final String FILE = "./ip/src/main/java/db/tasks.txt";
+
+        Storage storage = new Storage(FILE);
+        ArrayList<Task> inputs = new ArrayList<>(storage.loadTasks());
 
         System.out.println(LOGO);
         System.out.println(DECO_LINE);
         System.out.println(HELLO_MESSAGE);
         System.out.println(ASK_MESSAGE);
         System.out.println(DECO_LINE);
-        System.out.println();
 
         Scanner readinput = new Scanner(System.in);
         String input = readinput.nextLine();
@@ -83,7 +86,7 @@ public class Duke {
                 System.out.println(DECO_LINE);
             } else if (input.split(" ")[0].equals("todo")) {
                 String task = input.split(" ", 2)[1];
-                inputs.add(new Todo(task));
+                inputs.add(new Todo(task, false));
                 System.out.println(DECO_LINE);
                 System.out.println(ADD_TASK);
                 System.out.println("   [T][ ] " + task);
@@ -93,7 +96,7 @@ public class Duke {
                 try {
                     String task = input.split(" /by ")[0].split(" ", 2)[1];
                     String deadline = input.split(" /by ")[1];
-                    inputs.add(new Deadline(task, deadline));
+                    inputs.add(new Deadline(task, false, deadline));
                     System.out.println(DECO_LINE);
                     System.out.println(ADD_TASK);
                     System.out.println("   [D][ ] " + task + " (by: " + deadline + ")");
@@ -108,7 +111,7 @@ public class Duke {
                 try {
                     String task = input.split(" /at ")[0].split(" ", 2)[1];
                     String schedule = input.split(" /at ")[1];
-                    inputs.add(new Event(task, schedule));
+                    inputs.add(new Event(task, false, schedule));
                     System.out.println(DECO_LINE);
                     System.out.println(ADD_TASK);
                     System.out.println("   [E][ ] " + task + " (at: " + schedule + ")");
@@ -127,6 +130,7 @@ public class Duke {
             input = readinput.nextLine();
         }
 
+        storage.saveTasks(inputs);
         System.out.println(DECO_LINE);
         System.out.println(BYE_MESSAGE);
         System.out.println(DECO_LINE);

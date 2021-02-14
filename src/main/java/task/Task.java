@@ -1,12 +1,12 @@
-package duke;
+package duke.task;
 
 public class Task {
     protected String description;
     protected boolean isDone;
 
-    public Task(String description) {
+    public Task(String description, boolean isDone) {
         this.description = description;
-        this.isDone = false;
+        this.isDone = isDone;
     }
 
     public String getDescription() {
@@ -23,5 +23,10 @@ public class Task {
 
     public void markAsDone() {
         this.isDone = true;
+    }
+
+    public String saveToHardDisk() {
+        int isDone = this.isDone ? 1 : 0;
+        return " | " + isDone + " | " + description;
     }
 }
