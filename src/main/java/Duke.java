@@ -41,6 +41,19 @@ public class Duke {
     private static int tasksCount = 0;
 
 
+    /** Invalid input messages */
+    private static final String DEFAULT_INVALID_MESSAGE
+            = "I'm sorry, I don't quite understand :( Could you try again?";
+    private static final String MISSING_FIELDS_MESSAGE
+            = "I think you missed some fields! Try again?";
+    private static final String INVALID_INDEX_MESSAGE
+            = "Squeal! Second field must be a number.";
+    private static final String OUTSIDE_RANGE_INDEX_MESSAGE
+            = "Squeal? There is no task in the list with index ";
+    private static final String INVALID_TASK_MESSAGE
+            = "Squeal... Are you sure that is a task?";
+
+
     /** Methods that display messages */
     public static void greet() {
         String greetString = BORDER + NEWLINE
@@ -62,14 +75,11 @@ public class Duke {
     public static void printInvalidInputMessage(String message) {
         String openString = BORDER + NEWLINE;
         String closeString = NEWLINE + BORDER + NEWLINE + NEWLINE;
-        if (message == null) {
-            String invalidInputString = "I'm sorry, I don't quite understand. Can you try again?";
-            System.out.print(openString + invalidInputString + closeString);
-        }
-        else {
+        if (message != null) {
             System.out.print(openString + message + closeString);
+            return;
         }
-
+        System.out.print(openString + DEFAULT_INVALID_MESSAGE + closeString);
     }
 
     public static void help() {
@@ -95,6 +105,7 @@ public class Duke {
                 + BORDER + NEWLINE + NEWLINE;
         System.out.print(helpString);
     }
+
 
     /** Methods that print part of or full list */
     public static void echo() {
@@ -132,28 +143,28 @@ public class Duke {
         echo();
     }
 
-    public static void addDeadline(String description, String deadline) {
-        tasks[tasksCount] = new Deadline(description, tasksCount+1, deadline);
+    public static void addDeadline(String task, String deadline) {
+        tasks[tasksCount] = new Deadline(task, tasksCount+1, deadline);
         tasks[tasksCount].setStatus(DEFAULT_STATUS);
         tasks[tasksCount].setType("D");
         tasksCount++;
         echo();
     }
 
-    public static void addEvent(String description, String time) {
-        tasks[tasksCount] = new Event(description, tasksCount+1, time);
+    public static void addEvent(String task, String time) {
+        tasks[tasksCount] = new Event(task, tasksCount+1, time);
         tasks[tasksCount].setStatus(DEFAULT_STATUS);
         tasks[tasksCount].setType("E");
         tasksCount++;
         echo();
     }
 
-    public static void markInList(int id) {
-        tasks[id-1].setStatus(DONE_STATUS);
+    public static void markInList(int index) {
+        tasks[index-1].setStatus(DONE_STATUS);
         System.out.print(BORDER + NEWLINE);
         System.out.print("Nice! This task is now done:" + NEWLINE);
         System.out.print("\t");
-        tasks[id-1].printTask();
+        tasks[index-1].printTask();
         System.out.print(NEWLINE + BORDER + NEWLINE + NEWLINE);
     }
 
@@ -169,48 +180,43 @@ public class Duke {
         }
         userInput = userInput.trim();
         String[] tokens = userInput.split(" ", 2);
-        if (tokens.length < 2) {
-            String invalidMessage = "Squealll! Not enough or invalid fields entered :(";
-            printInvalidInputMessage(invalidMessage);
-            return;
-        }
         switch(tokens[0]) {
         case "done":
             try {
-                int index = getTaskIndex(tokens);
-                boolean isPossibleIndex = index > 0;
-                boolean isValidIndex = index <= tasksCount;
-                if (isPossibleIndex && isValidIndex) {
-                    markInList(index);
-                }
-                else {
-                    String invalidMessage = "Squeal! There is no task with number "
-                            + index + "in the list";
-                    printInvalidInputMessage(invalidMessage);
-                    return;
-                }
+                int index = getTaskIndex(tokens[1]);
+                markInList(index);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                printInvalidInputMessage(MISSING_FIELDS_MESSAGE);
+            } catch (NumberFormatException e) {
+                printInvalidInputMessage(INVALID_INDEX_MESSAGE);
             } catch (DukeException e) {
-                String invalidMessage = "Squeal! Second field must be a number.";
-                printInvalidInputMessage(invalidMessage);
+                printInvalidInputMessage(OUTSIDE_RANGE_INDEX_MESSAGE + tokens[1]);
             }
             break;
         case "todo":
-            addTodo(tokens[1]);
+            try {
+                String taskDescription = getTodoDescription(tokens[1]);
+                addTodo(taskDescription);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                printInvalidInputMessage(MISSING_FIELDS_MESSAGE);
+            } catch (DukeException e) {
+                printInvalidInputMessage(INVALID_TASK_MESSAGE);
+            }
             break;
         case "deadline":
             try {
-                int position = getPositionOfKeyword(" /by ", tokens);
-                addDeadline(tokens[1].substring(0, position - 1), tokens[1].substring(position + 4));
-            } catch (DukeException e) {
-                printInvalidInputMessage(null); //to make more detailed (no/repeated keyword/no description)
+                String[] words = getDeadlineOrEventDescription(" /by ", tokens[1]);
+                addDeadline(words[0], words[1]);
+            } catch (ArrayIndexOutOfBoundsException | DukeException e) {
+                printInvalidInputMessage(MISSING_FIELDS_MESSAGE);
             }
             break;
         case "event":
             try {
-                int position = getPositionOfKeyword(" /at ", tokens);
-                addEvent(tokens[1].substring(0, position - 1), tokens[1].substring(position + 4));
-            } catch (DukeException e) {
-                printInvalidInputMessage(null);
+                String[] words = getDeadlineOrEventDescription(" /at ", tokens[1]);
+                addEvent(words[0], words[1]);
+            } catch (ArrayIndexOutOfBoundsException | DukeException e) {
+                printInvalidInputMessage(MISSING_FIELDS_MESSAGE);
             }
             break;
         default:
@@ -219,30 +225,32 @@ public class Duke {
         }
     }
 
-    public static int getTaskIndex(String[] tokens) throws DukeException {
-        try {
-            Integer.parseInt(tokens[1]);
-            return Integer.parseInt(tokens[1]);
-        } catch (NumberFormatException e) {
+    public static int getTaskIndex(String description) throws DukeException {
+        int index = Integer.parseInt(description);
+        boolean isPossibleIndex = index > 0;
+        boolean isValidIndex = index <= tasksCount;
+        if (!isPossibleIndex || !isValidIndex) {
             throw new DukeException();
+        }
+        return index;
+    }
+
+    public static String getTodoDescription(String description) throws DukeException {
+        try {
+            /* task description contains only numbers */
+            Long.parseLong(description);
+            throw new DukeException();
+        } catch (NumberFormatException e) {
+            return description;
         }
     }
 
-    public static int getPositionOfKeyword(String keyword, String[] tokens) throws DukeException {
-        if (!tokens[1].contains(keyword)) {
-            throw new DukeException();
-        }
-        String[] words = tokens[1].split(keyword, 2);
+    public static String[] getDeadlineOrEventDescription(String keyword, String sentence) throws DukeException {
+        String[] words = sentence.split(keyword, 2);
         if (words.length < 2) {
             throw new DukeException();
         }
-        String actualKeyword = keyword.trim();
-        boolean isInvalidTask = words[0].contains(actualKeyword);
-        boolean isInvalidDeadlineOrTiming = words[1].contains(actualKeyword);
-        if (isInvalidTask || isInvalidDeadlineOrTiming) {
-            throw new DukeException();
-        }
-        return tokens[1].indexOf(actualKeyword);
+        return words;
     }
 
 
