@@ -1,20 +1,23 @@
 package duke;
 
-import duke.exception.EmptyDescriptionException;
-import duke.exception.InvalidCommandException;
-
 public class Duke {
+
+    private static final String dataFilePath = "data/data.txt";
 
     private static final UserInterface ui = new UserInterface();
     private static final TaskManager taskManager = new TaskManager();
+    private static final DataManager dataManager = new DataManager(dataFilePath);
 
     public static void main(String[] args) {
 
         ui.showWelcomeMessage();
 
+        taskManager.setData(dataManager.loadData());
+
         while (true) {
             String input = ui.getUserInput();
             String feedback = executeCommand(input);
+            dataManager.saveData(taskManager.getData());
             ui.printFeedback(feedback);
         }
     }
@@ -49,13 +52,7 @@ public class Duke {
             }
             break;
         default:
-            try {
-                feedback = taskManager.addTask(command, parsedInput[1]);
-            } catch (InvalidCommandException e) {
-                feedback = "OOPS!!! I'm sorry, but I don't know what that means :(";
-            } catch (EmptyDescriptionException e) {
-                feedback = "OOPS!!! The description of a " + command + " cannot be empty.";
-            }
+            feedback = taskManager.addTask(command, parsedInput[1]);
         }
 
         return feedback;

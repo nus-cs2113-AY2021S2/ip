@@ -10,6 +10,10 @@ Hello! I'm Duke
 What can I do for you?
 ____________________________________________________________
 ____________________________________________________________
+Here are the tasks in your list:
+Your task list is empty... ):
+____________________________________________________________
+____________________________________________________________
 Got it. I've added this task:
 [T][ ] borrow book
 Now you have 1 tasks in the list.
