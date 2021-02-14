@@ -10,6 +10,10 @@ public class Event extends Task {
         this.atDate = at;
     }
 
+    public String getAtDate() {
+        return atDate;
+    }
+
     public String printDescription() {
         return "[E]" + super.printDescription() + " (at: " + atDate + ")";
     }

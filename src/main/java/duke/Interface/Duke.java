@@ -1,14 +1,14 @@
 package duke.Interface;
 
-
 import duke.Tasks.*;
 import duke.Controller.dukeController;
 
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         dukeController duke = new dukeController();
         duke.displayWelcome();
 
@@ -52,6 +52,8 @@ public class Duke {
                 duke.printDeadline(tasks, input, stringTask, stringDate);
             } else if (input.contains("event")) {
                 duke.printEvent(tasks, input, stringTask, stringDate);
+            } else if (input.contains("save")){
+                duke.saveFile(tasks);
             } else {
                 System.out.println("What are you tryna say to me? Chatting nonsense yea?");
                 continue;

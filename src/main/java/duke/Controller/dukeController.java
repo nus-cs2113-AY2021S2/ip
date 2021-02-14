@@ -2,12 +2,11 @@ package duke.Controller;
 
 import java.util.ArrayList;
 import duke.Tasks.*;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class dukeController {
-    public dukeController() {
-    }
-
-    ;
+    public dukeController() {}
 
     public void displayWelcome() {
         String logo = " ____        _        \n"
@@ -34,7 +33,10 @@ public class dukeController {
             return "done";
         } else if (input.contains("delete")) {
             return "delete";
-        } else if (input.contains("todo") || input.contains("deadline") || input.contains("event")) {
+        } else if (input.contains("save")) {
+            return "save";
+        }
+        else if (input.contains("todo") || input.contains("deadline") || input.contains("event")) {
             int indexOfSpace = input.indexOf(" ");
             if (indexOfSpace == -1) {
                 return "retry";
@@ -65,6 +67,8 @@ public class dukeController {
             return "todo";
         } else if (input.contains("delete")) {
             return "delete";
+        } else if (input.contains("save")) {
+            return "save";
         } else if (input.contains("deadline") || input.contains("event")) {
             int indexOfSpace = input.indexOf(" ");
             String subString = input.substring(indexOfSpace + 1);
@@ -158,5 +162,26 @@ public class dukeController {
         System.out.println("Ayy I got you my brother. I've added this ting: ");
         System.out.println(event.printDescription());
         System.out.println("I feer! You have " + tasks.size() + " mad tings in the list.");
+    }
+
+    public void saveFile(ArrayList<Task> tasks) throws IOException {
+        try {
+            FileWriter writer = new FileWriter("saveDuke.txt");
+            for (Task task : tasks) {
+                if (task instanceof toDo) {
+                    writer.write("T" + " | " + task.getSaveDone() + " | " + task.getDescription());
+                } else if (task instanceof Deadline) {
+                    writer.write("D" + " | " + task.getSaveDone() + " | " + task.getDescription() + " | " + ((Deadline) task).getByDate());
+                } else if (task instanceof Event) {
+                    writer.write("E" + " | " + task.getSaveDone() + " | " + task.getDescription() + " | " + ((Event) task).getAtDate());
+                }
+                writer.write("\n");
+            }
+            writer.close();
+            System.out.print("Yea cuhhhh... filed saved!");
+        } catch (IOException e) {
+            System.out.println("Cannot save file my G!");
+            e.printStackTrace();
+        }
     }
 }
