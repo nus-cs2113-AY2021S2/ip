@@ -1,15 +1,13 @@
+import java.io.*;
 import java.util.Scanner;
+import java.util.List;
 
 public class Duke {
     private static final String VERSION = "Duke - Version 1.0";
     private static final String DIVIDER = "===================================================";
-    private static final String LOGO = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-    private static final String GREETING = "Hello! I'm Duke\n"
-                 +"What can I do for you?\n";
+    private static final String LOGO = " ____        _        \n" + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n" + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
+    private static final String GREETING = "Hello! I'm Duke\n" + "What can I do for you?\n";
 
     private static final Scanner SCANNER = new Scanner(System.in);
 
@@ -43,7 +41,7 @@ public class Duke {
             String userCommand = getUserInput();
             echoUserCommand(userCommand);
             int returnValue = executeCommand(userCommand);
-            if(returnValue == 0)
+            if (returnValue == 0)
                 break;
         }
     }
@@ -51,6 +49,24 @@ public class Duke {
     private static void initItemBook() {
         allItems = new String[CAPACITY][ITEM_DATA_COUNT];
         count = 0;
+        readFile(lists);
+    }
+
+    private static void readFile(List<Task> lists) {
+        File file = new File("src/main/java/Duke/Duke.txt");
+        if(file.createNewFile()){
+            showToUser("A new file has been created");
+        }else {
+            Scanner readingFile = new Scanner(file);
+            while (readingFile.hasNextLine()){
+                String line = readingFile.nextLine();
+                String[] part = line.split("-",3);
+                allItems[count][0] = part[0];
+                allItems[count][1] = part[1];
+                allItems[count][2] = part[2];
+                count++;
+            }
+        }
     }
 
     private static void addItemToItemBook(String commandType, String commandData) {
