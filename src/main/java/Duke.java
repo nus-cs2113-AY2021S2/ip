@@ -41,6 +41,19 @@ public class Duke {
     private static int tasksCount = 0;
 
 
+    /** Invalid input messages */
+    private static final String DEFAULT_INVALID_MESSAGE
+            = "I'm sorry, I don't quite understand :( Could you try again?";
+    private static final String MISSING_FIELDS_MESSAGE
+            = "I think you missed some fields! Try again?";
+    private static final String INVALID_INDEX_MESSAGE
+            = "Squeal! Second field must be a number.";
+    private static final String OUTSIDE_RANGE_INDEX_MESSAGE
+            = "Squeal? There is no task in the list with index ";
+    private static final String INVALID_TASK_MESSAGE
+            = "Squeal... Are you sure that is a task?";
+
+
     /** Methods that display messages */
     public static void greet() {
         String greetString = BORDER + NEWLINE
@@ -93,6 +106,7 @@ public class Duke {
         System.out.print(helpString);
     }
 
+
     /** Methods that print part of or full list */
     public static void echo() {
         System.out.print(BORDER + NEWLINE);
@@ -129,43 +143,30 @@ public class Duke {
         echo();
     }
 
-    public static void addDeadline(String description, String deadline) {
-        tasks[tasksCount] = new Deadline(description, tasksCount+1, deadline);
+    public static void addDeadline(String task, String deadline) {
+        tasks[tasksCount] = new Deadline(task, tasksCount+1, deadline);
         tasks[tasksCount].setStatus(DEFAULT_STATUS);
         tasks[tasksCount].setType("D");
         tasksCount++;
         echo();
     }
 
-    public static void addEvent(String description, String time) {
-        tasks[tasksCount] = new Event(description, tasksCount+1, time);
+    public static void addEvent(String task, String time) {
+        tasks[tasksCount] = new Event(task, tasksCount+1, time);
         tasks[tasksCount].setStatus(DEFAULT_STATUS);
         tasks[tasksCount].setType("E");
         tasksCount++;
         echo();
     }
 
-    public static void markInList(int id) {
-        tasks[id-1].setStatus(DONE_STATUS);
+    public static void markInList(int index) {
+        tasks[index-1].setStatus(DONE_STATUS);
         System.out.print(BORDER + NEWLINE);
         System.out.print("Nice! This task is now done:" + NEWLINE);
         System.out.print("\t");
-        tasks[id-1].printTask();
+        tasks[index-1].printTask();
         System.out.print(NEWLINE + BORDER + NEWLINE + NEWLINE);
     }
-
-
-    /** Invalid input messages */
-    private static final String DEFAULT_INVALID_MESSAGE
-            = "I'm sorry, I don't quite understand :( Could you try again?";
-    private static final String MISSING_FIELDS_MESSAGE
-            = "I think you missed some fields! Try again?";
-    private static final String INVALID_INDEX_MESSAGE
-            = "Squeal! Second field must be a number.";
-    private static final String OUTSIDE_RANGE_INDEX_MESSAGE
-            = "Squeal? There is no task in the list with index ";
-    private static final String INVALID_TASK_MESSAGE
-            = "Squeal... Are you sure that is a task?";
 
 
     /** Methods that check if user inputs are valid commands */
