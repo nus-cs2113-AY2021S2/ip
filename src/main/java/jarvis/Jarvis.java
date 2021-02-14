@@ -25,9 +25,11 @@ public class Jarvis {
 
     // initialisation of JARVIS (just for fun)
     public void startJarvis() throws InterruptedException {
+        int DELAY = 500;    // 0.5 seconds delay
         printDivider();
         System.out.println("Importing all preferences from home interface.");
-        int DELAY = 500;    // 0.5 seconds delay
+        TimeUnit.MILLISECONDS.sleep(DELAY);
+        System.out.println("Synchronising to the cloud.");
         TimeUnit.MILLISECONDS.sleep(DELAY);
         System.out.println("Systems are now fully operational.");
         TimeUnit.MILLISECONDS.sleep(DELAY);

@@ -1,5 +1,6 @@
 ------------------------------------------------
 Importing all preferences from home interface.
+Synchronising to the cloud.
 Systems are now fully operational.
 Initialising...
 ------------------------------------------------
