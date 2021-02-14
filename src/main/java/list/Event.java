@@ -3,8 +3,8 @@ package list;
 public class Event extends Deadline {
     private static final String TASK_TITLE = "E";
 
-    public Event(int size) {
-        super(size);
+    public Event(String line) {
+        super(line);
     }
 
     @Override
@@ -23,20 +23,16 @@ public class Event extends Deadline {
     }
 
     @Override
-    public void printTaskDescription() {
-        String phrase = "Aight Crewmate!! I've got a new event for you!!!" + System.lineSeparator()
-                + "  [" + TASK_TITLE + "]" + "[" + getStatusIcon(getTasksCounter()) + "]"
-                + getTaskDescription(tasksCounter) + "(by: "
-                + getTaskBy(getTasksCounter()) + ")";
+    public void printTask() {
+        String phrase = "[" + TASK_TITLE + "]" + "[" + getStatusIcon() + "]"
+                + getTaskDescription() + "(by: "
+                + getTaskBy() + ")";
         System.out.println(phrase);
     }
 
-
     @Override
-    public void printListName() {
-        System.out.println("ATTENTION, Here's your list of EVENT(S) to attend  Crewmate!!!");
+    public void printAddedTask() {
+        System.out.println("Aight Crewmate!! I've got a new event for you!!! (¬‿¬): " + getTaskDescription());
     }
-
-
 }
 

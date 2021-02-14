@@ -2,29 +2,23 @@ package list;
 
 public class Deadline extends TaskList {
     private static final String TASK_TITLE = "D";
-    protected String[] by;
+    protected String by;
 
-    public Deadline(int size) {
-        super(size);
-        by = new String[size];
-    }
 
-    @Override
-    public void addNewTask(String line) {
-        areAllTasksDone = false;
-        (this.description)[tasksCounter] = getDescription(line);
-        (this.by)[tasksCounter] = getBy(line);
-        (this.isDone)[tasksCounter] = false;
-        printDottedLines();
-        printTaskDescription();
-        tasksCounter++;
-        printNumberOfTasksLeft();
-        printDottedLines();
+    public Deadline(String line) {
+        this.isDone = false;
+        this.description = getDescription(line);
+        this.by = getBy(line);
+        printAddedTask();
     }
 
     private String getDescription(String line) {
         String[] description = line.split("/", 2);
         return description[0];
+    }
+
+    public String getTaskBy() {
+        return this.by;
     }
 
     public String getBy(String line) {
@@ -36,34 +30,19 @@ public class Deadline extends TaskList {
         } catch (ArrayIndexOutOfBoundsException e) {
             by = "No Deadline!! Hehe! :)";
         }
-
         return by;
-
-    }
-
-    public String getTaskBy(int index) {
-        return this.by[index];
     }
 
     @Override
-    public void printTaskDescription() {
-        String phrase = "Aight Crewmate!! I've got a new deadline for you!!!" + System.lineSeparator()
-                + "  [" + TASK_TITLE + "]" + "[" + getStatusIcon(getTasksCounter()) + "]"
-                + getTaskDescription(tasksCounter) + "(by: "
-                + getTaskBy(getTasksCounter()) + ")";
+    public void printTask() {
+        String phrase = "[" + TASK_TITLE + "]" + "[" + getStatusIcon() + "]"
+                + getTaskDescription() + "(by: "
+                + getTaskBy() + ")";
         System.out.println(phrase);
     }
 
     @Override
-    public void printTask(int index) {
-        String phrase = (index + 1) + "." + "[" + TASK_TITLE + "]" + "[" + getStatusIcon(index) + "]"
-                + getTaskDescription(index) + "(by: "
-                + getTaskBy(index) + ")";
-        System.out.println(phrase);
-    }
-
-    @Override
-    public void printListName() {
-        System.out.println("ATTENTION, Here's your list of DEADLINE(S) to meet  Crewmate!!!");
+    public void printAddedTask() {
+        System.out.println("Aight Crewmate!! I've got a new deadline for you!!! (¬‿¬): " + getTaskDescription());
     }
 }

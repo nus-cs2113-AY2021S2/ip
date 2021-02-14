@@ -2,11 +2,44 @@ package list;
 
 public class List {
     protected String name;
-    protected int tasksCounter = 0;
-
 
     public List(String name) {
         this.name = name;
+    }
+
+    public void greet() {
+        String logo = getLogo();
+        System.out.println("Ssshhhhhh!!!!!" + System.lineSeparator() + logo);
+        String greetings = "____________________________________________________________________________________"
+                + System.lineSeparator()
+                + "Hello Crewmate! I'm Arthur, ( ͡°͜ ʖ ͡°)" + System.lineSeparator()
+                + "Please assign me my tasks to complete!" + System.lineSeparator()
+                + "____________________________________________________________________________________"
+                + System.lineSeparator();
+        System.out.println(greetings);
+    }
+
+    private static String getLogo() {
+        return "             ⣠⣤⣤⣤⣤⣤⣶⣦⣤⣄⡀" + System.lineSeparator()
+                + " ⠀⠀⠀⠀⠀⠀⠀⠀ ⢀⣴⣿⡿⠛⠉⠙⠛⠛⠛⠛⠻⢿⣿⣷⣤⡀" + System.lineSeparator()
+                + " ⠀⠀⠀⠀⠀⠀⠀⠀ ⣼⣿⠋⠀⠀⠀⠀⠀⠀⠀  ⢀⣀⣀⠈⢻⣿⣿⡄" + System.lineSeparator()
+                + " ⠀⠀⠀⠀⠀⠀⠀ ⣸⣿⡏⠀⠀⠀ ⣠⣶⣾⣿⣿⣿⠿⠿⠿⢿⣿⣿⣿⣄" + System.lineSeparator()
+                + " ⠀⠀⠀⠀⠀⠀⠀ ⣿⣿⠁⠀⠀ ⢰⣿⣿⣯⠁⠀⠀⠀⠀⠀⠀⠀ ⠈⠙⢿⣷⡄" + System.lineSeparator()
+                + " ⠀⠀⣀⣤⣴⣶⣶⣿⡟⠀⠀⠀ ⢸⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  ⣿⣷" + System.lineSeparator()
+                + " ⠀⢰⣿⡟⠋⠉⣹⣿⡇⠀⠀⠀ ⠘⣿⣿⣿⣿⣷⣦⣤⣤⣤⣶⣶⣶⣶⣿⣿⣿" + System.lineSeparator()
+                + " ⠀⢸⣿⡇⠀⠀⣿⣿⡇⠀⠀⠀⠀ ⠹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠃" + System.lineSeparator()
+                + " ⠀⣸⣿⡇⠀⠀⣿⣿⡇⠀⠀⠀⠀⠀ ⠉⠻⠿⣿⣿⣿⣿⡿⠿⠿⠛⢻⣿⡇" + System.lineSeparator()
+                + " ⠀⣿⣿⠁⠀⠀⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀   ⢸⣿⣧" + System.lineSeparator()
+                + " ⠀⣿⣿⠀⠀⠀⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  ⢸⣿⣿" + System.lineSeparator()
+                + " ⠀⣿⣿⠀⠀⠀⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  ⢸⣿⣿" + System.lineSeparator()
+                + " ⠀⢿⣿⡆⠀⠀⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  ⢸⣿⡇" + System.lineSeparator()
+                + " ⠀⠸⣿⣧⡀⠀⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  ⣿⣿⠃" + System.lineSeparator()
+                + " ⠀⠀⠛⢿⣿⣿⣿⣿⣇⠀⠀⠀⠀⠀⣰⣿⣿⣷⣶⣶⣶⣶⠶⠀⢠⣿⣿" + System.lineSeparator()
+                + " ⠀⠀⠀⠀⠀⠀⠀⣿⣿⠀⠀⠀⠀⠀⣿⣿⡇⠀⣽⣿⡏⠁⠀⠀  ⢸⣿⡇" + System.lineSeparator()
+                + " ⠀⠀⠀⠀⠀⠀⠀⣿⣿⠀⠀⠀⠀⠀⣿⣿⡇⠀⢹⣿⡆⠀⠀⠀  ⣸⣿⠇" + System.lineSeparator()
+                + " ⠀⠀⠀⠀⠀⠀⠀⢿⣿⣦⣄⣀⣠⣴⣿⣿⠁⠀⠈⠻⣿⣿⣿⣿⡿⠏" + System.lineSeparator()
+                + " ⠀⠀⠀⠀⠀⠀⠀⠈⠛⠻⠿⠿⠿⠿⠋⠁" + System.lineSeparator();
+
     }
 
 
@@ -17,23 +50,13 @@ public class List {
                 + "       todo <task>        :add task to To Do list" + System.lineSeparator()
                 + "   event <task> /<time>   :add task to Event List with time" + System.lineSeparator()
                 + "   deadline <task /<by>   :add task to Deadline List" + System.lineSeparator()
-                + "    done todo <index>     :mark task <index> as done in To Do List" + System.lineSeparator()
-                + "    done event <index>    :mark task <index> as done in Event List" + System.lineSeparator()
-                + "  done deadline <index>   :mark task <index> as done in Deadline List" + System.lineSeparator();
+                + "       done  <index>      :mark task <index> as done in List" + System.lineSeparator();
 
         System.out.println(help);
         printDottedLines();
 
     }
 
-
-    public void incrementTaskCounter() {
-        this.tasksCounter++;
-    }
-
-    public int getTasksCounter() {
-        return tasksCounter;
-    }
 
     public void printListName() {
         System.out.println("ATTENTION, Here's your list of tasks Crewmate!!!");
@@ -43,19 +66,17 @@ public class List {
         System.out.println("____________________________________________________________________________________");
     }
 
-    public void printDottedLineWithNewLine() {
-        System.out.println("____________________________________________________________________________________"
-                + System.lineSeparator());
-    }
-
 
     public void printCommandDoesNotExist() {
         System.out.println("There's no such command!!! You look SUS!!!  (ー_ーゞ");
-        printDottedLines();
     }
 
-    public void printWrongListName() {
-        System.out.println("This chosen list doesn't exist crewmate!! Watchu doin??? (¬_¬)");
+    public void printWrongTaskDoneName() {
+        System.out.println("This task has already been completed crewmate!! Watchu doin??? (¬_¬)");
+    }
+
+    public void printInvalidTaskPhrase() {
+        System.out.println("There's no such task?! Focus Crewmate!!  (╬⓪益⓪)");
     }
 
 
@@ -67,31 +88,19 @@ public class List {
         System.out.println("Good job Crewmate! You completed all your tasks in  this list! (─‿─)");
     }
 
-    public void printCompletedTasksInAllLists() {
-        System.out.println("Good job Crewmate! You completed all your tasks in all your lists! (─‿─)");
-    }
-
-    public void printCheckOtherList() {
-        System.out.println("Don't forget to check the other lists as well!!!!");
-    }
-
     public void printEmptyList() {
         System.out.println("This list is empty!!! YEEEEEEET!!!");
+        printDottedLines();
     }
 
-    public void printNoTasksDoneInAllList() {
-        System.out.println("Are you really a Crewmate??? You haven't done any work AT ALL! （○｀Ｏ´○）");
-    }
 
     public void printSomeTasksRemaining(int counter) {
         System.out.println("You still have "
-                + counter + " task(s) left in all your Lists ! Hurry up!! ＼(｀0´)／");
+                + counter + " task(s) left in your Lists ! Hurry up!! ＼(｀0´)／");
     }
 
     public void printGoodEnding() {
-        printDottedLines();
-
-        System.out.println("Thanks for your help Crewmate!!" + System.lineSeparator()
+        System.out.print("Thanks for your help Crewmate!!" + System.lineSeparator()
                 + "We wouldn't have done this without your help!!" + System.lineSeparator()
                 + "Goodbye!!!! (￣▽￣)ノ" + System.lineSeparator());
         printDottedLines();
@@ -99,17 +108,14 @@ public class List {
     }
 
     public void printBadEnding() {
-        printDottedLines();
-        System.out.println("You have been kicked out! Bye Impostor!!!  (๑>ᴗ<๑)" + System.lineSeparator());
+        System.out.print("You have been kicked out! Bye Impostor!!!  (๑>ᴗ<๑)" + System.lineSeparator());
         printDottedLines();
 
     }
 
     public void printTraitor() {
-        printDottedLines();
-        System.out.println("You are abandoning us!!! I trusted you!!!  (　ﾟдﾟ)" + System.lineSeparator());
+        System.out.print("You are abandoning us!!! I trusted you!!!  (　ﾟдﾟ)" + System.lineSeparator());
         printDottedLines();
     }
-
 
 }

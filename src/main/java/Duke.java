@@ -1,93 +1,90 @@
 import exceptions.IllegalCommandException;
 import exceptions.IllegalListException;
 import exceptions.IllegalTaskException;
-import list.Deadline;
-import list.Event;
-import list.List;
-import list.Todo;
+import exceptions.IllegalTaskRedoException;
+import list.*;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
 
-    public static final int MAX_LIST_SIZE = 100;
+
     public static final String CHAT_BOT_NAME = "Arthur";
+    public static final List dukeList = new List(CHAT_BOT_NAME);
+    public static ArrayList<TaskList> tasks = new ArrayList<>();
 
     public static void main(String[] args) {
-        greet();
+        dukeList.greet();
         processCommands();
     }
 
     private static void processCommands() {
         String line;
-        List dukeList = new List(CHAT_BOT_NAME);
-        List[] allLists = {new Todo(MAX_LIST_SIZE), new Deadline(MAX_LIST_SIZE), new Event(MAX_LIST_SIZE)};
         Scanner in = new Scanner(System.in);
 
         boolean hasToContinue = true;
         dukeList.printHelp();
         while (hasToContinue) {
             line = in.nextLine();
-            hasToContinue = selectCommand(dukeList, line, hasToContinue, (Todo) allLists[0], (Deadline) allLists[1],
-                    (Event) allLists[2]);
+            hasToContinue = selectCommand(line);
         }
 
     }
 
-    private static boolean selectCommand(List dukeList, String line, boolean hasToContinue, Todo todoList,
-                                         Deadline deadLineList, Event eventLists) {
+    private static boolean selectCommand(String line) {
         switch (line) {
         case "bye":
-            exit(dukeList, todoList, deadLineList, eventLists);
-            hasToContinue = false;
-            break;
+            exit();
+            return false;
         case "list":
-            printAllLists(dukeList, todoList, deadLineList, eventLists);
+            try {
+                printAllLists();
+            } catch (IllegalListException e) {
+                dukeList.printEmptyList();
+            }
             break;
         case "help":
             dukeList.printHelp();
             break;
 
         default:
-            handleAmendList(dukeList, line, todoList, deadLineList, eventLists);
+            handleAmendList(line);
             break;
         }
-        return hasToContinue;
+        return true;
     }
 
-    private static void handleAmendList(List dukeList, String line, Todo todoList, Deadline deadLineList, Event eventLists) {
+    private static void handleAmendList(String line) {
         try {
-            amendList(dukeList, line, todoList, deadLineList, eventLists);
+            amendList(line);
         } catch (IllegalCommandException e) {
             dukeList.printCommandDoesNotExist();
-        } catch (IllegalListException e) {
-            dukeList.printWrongListName();
-            dukeList.printDottedLines();
-
+        } catch (IllegalTaskException e) {
+            dukeList.printInvalidTaskPhrase();
+        } catch (IllegalTaskRedoException e) {
+            printTaskAlreadyCompletedPhrase();
         }
-    }
-
-    private static void printAllLists(List dukeList, Todo todoList, Deadline deadLineList, Event eventLists) {
-        if (todoList.getTasksCounter() > 0) {
-            todoList.printList();
-        }
-        if (deadLineList.getTasksCounter() > 0) {
-            deadLineList.printList();
-        }
-        if (eventLists.getTasksCounter() > 0) {
-            eventLists.printList();
-        }
-        if (dukeList.getTasksCounter() == 0) {
-            dukeList.printEmptyList();
-            dukeList.printDottedLines();
-            return;
-        }
-        printAllTasksCounter(dukeList, todoList, deadLineList, eventLists);
         dukeList.printDottedLines();
     }
 
-    private static void amendList(List dukeList, String line, Todo todoList, Deadline deadLineList, Event eventsList)
-            throws IllegalCommandException, IllegalListException {
+    private static void printAllLists() throws IllegalListException {
+        int i = 1;
+        if (tasks.size() == 0) {
+            throw new IllegalListException();
+        }
+        dukeList.printListName();
+        for (TaskList t : tasks) {
+            System.out.print(i + ". ");
+            t.printTask();
+            i++;
+        }
+        printNumberOfTasksLeft();
+        dukeList.printDottedLines();
+    }
+
+    private static void amendList(String line) throws IllegalCommandException, IllegalTaskException,
+            IllegalTaskRedoException {
         String[] sentence = line.split(" ");
         if (sentence.length < 2) {
             throw new IllegalCommandException();
@@ -95,163 +92,190 @@ public class Duke {
         switch (sentence[0]) {
         case "done":
             try {
-                markTaskAsDone(dukeList, sentence, todoList, deadLineList, eventsList);
+                markTaskAsDone(sentence);
             } catch (IllegalCommandException e) {
                 throw new IllegalCommandException();
-            } catch (IllegalListException e) {
-                throw new IllegalListException();
+            } catch (IllegalTaskRedoException e) {
+                throw new IllegalTaskRedoException();
+            } catch (IllegalTaskException e) {
+                throw new IllegalTaskException();
             }
             return;
 
         case "todo": {
-            addTaskInTodoList(line, todoList);
+            addTaskInTodoList(line);
             break;
         }
         case "deadline": {
-            addTaskInTodoOrDeadlineList(line, deadLineList);
+            addTaskInDeadlineList(line);
             break;
         }
         case "event": {
-            addTaskInTodoOrDeadlineList(line, eventsList);
+            addTaskInEventList(line);
+            break;
+        }
+        case "delete": {
+            try {
+                deleteTask(sentence);
+            } catch (IllegalCommandException e) {
+                throw new IllegalCommandException();
+            } catch (IllegalTaskException e) {
+                throw new IllegalTaskException();
+            }
+
             break;
         }
         default:
             throw new IllegalCommandException();
         }
-        dukeList.incrementTaskCounter();
+
     }
 
-    private static void addTaskInTodoOrDeadlineList(String line, Deadline deadLineList) {
+    private static void addTaskInDeadlineList(String line) {
         String[] commandWords = (line.split(" ", 2));
         String description = commandWords[1];
-        deadLineList.addNewTask(description);
+        Deadline newTask = new Deadline(description);
+        tasks.add(newTask);
     }
 
-    private static void addTaskInTodoList(String line, Todo todoList) {
+    private static void addTaskInEventList(String line) {
         String[] commandWords = (line.split(" ", 2));
         String description = commandWords[1];
-        todoList.addNewTask(description);
+        Event newTask = new Event(description);
+        tasks.add(newTask);
     }
 
-    private static void markTaskAsDone(List dukeList, String[] sentence, Todo todoList, Deadline deadLineList,
-                                       Event eventList) throws IllegalCommandException, IllegalListException {
+    private static void addTaskInTodoList(String line) {
+        String[] commandWords = (line.split(" ", 2));
+        String description = commandWords[1];
+        Todo newTask = new Todo(description);
+        tasks.add(newTask);
+    }
+
+    private static void deleteTask(String[] sentence) throws IllegalCommandException, IllegalTaskException {
         int index;
-        if (sentence.length == 2) {
+        try {
+            index = getIndex(sentence);
+        } catch (IllegalCommandException e) {
+            throw new IllegalCommandException();
+        } catch (IllegalTaskException e) {
+            throw new IllegalTaskException();
+        }
+
+        TaskList t = tasks.get(index - 1);
+        t.printTask();
+        tasks.remove(index - 1);
+        if (tasks.size() > 0) {
+            printNumberOfTasksLeft();
+        }
+    }
+
+    private static int getIndex(String[] sentence) throws IllegalCommandException, IllegalTaskException {
+        if (sentence.length > 2) {
             throw new IllegalCommandException();
         }
-        String listToChooseFrom = sentence[1];
-        switch (listToChooseFrom) {
-        case "todo":
-            index = getIndexFromCommand(sentence[2]);
-            try {
-                todoList.markAsDone(index);
-            } catch (IllegalTaskException e) {
-                System.out.println(todoList.getInvalidTaskPhrase());
-            }
-            break;
-        case "deadline":
-            index = getIndexFromCommand(sentence[2]);
-            try {
-                deadLineList.markAsDone(index);
-            } catch (IllegalTaskException e) {
-                System.out.println(deadLineList.getInvalidTaskPhrase());
-            }
-
-            break;
-        case "event":
-            index = getIndexFromCommand(sentence[2]);
-            try {
-                eventList.markAsDone(index);
-            } catch (IllegalTaskException e) {
-                System.out.println(eventList.getInvalidTaskPhrase());
-            }
-            break;
-        default:
-            throw new IllegalListException();
+        int index = getIndexFromCommand(sentence[1]);
+        if (index > tasks.size() || index == -1) {
+            throw new IllegalTaskException();
         }
-        if (dukeList.getTasksCounter() > 0) {
-            printAllTasksCounter(dukeList, todoList, deadLineList, eventList);
-            dukeList.printDottedLines();
-        }
-
-
+        return index;
     }
 
-    private static void printAllTasksCounter(List dukeList, Todo todoList, Deadline deadLineList, Event eventLists) {
-        int totalNumberOfTasksRemaining = todoList.getNumberTasksLeft()
-                + deadLineList.getNumberTasksLeft() + eventLists.getNumberTasksLeft();
-
-
-        if (totalNumberOfTasksRemaining == 0) {
-            dukeList.printCompletedTasksInAllLists();
-        } else if (totalNumberOfTasksRemaining > 0) {
-            if (totalNumberOfTasksRemaining == todoList.getTasksCounter()
-                    + deadLineList.getTasksCounter() + eventLists.getTasksCounter()) {
-                dukeList.printNoTasksDoneInAllList();
-            } else {
-                dukeList.printSomeTasksRemaining(totalNumberOfTasksRemaining);
-
-            }
+    private static void markTaskAsDone(String[] sentence) throws IllegalCommandException, IllegalTaskException,
+            IllegalTaskRedoException {
+        int index;
+        try {
+            index = getIndex(sentence);
+        } catch (IllegalCommandException e) {
+            throw new IllegalCommandException();
+        } catch (IllegalTaskException e) {
+            throw new IllegalTaskException();
         }
+
+        TaskList t = tasks.get(index - 1);
+        try {
+            t.markAsDone();
+        } catch (IllegalTaskRedoException e) {
+            throw new IllegalTaskRedoException();
+        }
+        tasks.set(index - 1, t);
+        printNumberOfTasksLeft();
     }
+
 
     public static int getIndexFromCommand(String index) {
         try {
-            return Integer.parseInt(index) - 1;
+            return Integer.parseInt(index);
         } catch (NumberFormatException nfe) {
             return -1;
         }
 
     }
 
-
-    public static void greet() {
-        String logo = getLogo();
-        System.out.println("Ssshhhhhh!!!!!" + System.lineSeparator() + logo);
-        String greetings = "____________________________________________________________________________________"
-                + System.lineSeparator()
-                + "Hello Crewmate! I'm Arthur, ( ͡°͜ ʖ ͡°)" + System.lineSeparator()
-                + "Please assign me my tasks to complete!" + System.lineSeparator()
-                + "____________________________________________________________________________________"
-                + System.lineSeparator();
-        System.out.println(greetings);
+    public static void printNumberOfTasksLeft() {
+        if (getAreAllTasksDone() && tasks.size() > 0) {
+            dukeList.printCompletedTasks();
+        } else if (getAreAllTasksNotDone() && tasks.size() > 0) {
+            dukeList.printNoTasksDone();
+        } else {
+            int tasksLeft = getNumberOfTaskRemaining();
+            dukeList.printSomeTasksRemaining(tasksLeft);
+        }
     }
 
-    private static String getLogo() {
-        return "             ⣠⣤⣤⣤⣤⣤⣶⣦⣤⣄⡀" + System.lineSeparator()
-                + " ⠀⠀⠀⠀⠀⠀⠀⠀ ⢀⣴⣿⡿⠛⠉⠙⠛⠛⠛⠛⠻⢿⣿⣷⣤⡀" + System.lineSeparator()
-                + " ⠀⠀⠀⠀⠀⠀⠀⠀ ⣼⣿⠋⠀⠀⠀⠀⠀⠀⠀  ⢀⣀⣀⠈⢻⣿⣿⡄" + System.lineSeparator()
-                + " ⠀⠀⠀⠀⠀⠀⠀ ⣸⣿⡏⠀⠀⠀ ⣠⣶⣾⣿⣿⣿⠿⠿⠿⢿⣿⣿⣿⣄" + System.lineSeparator()
-                + " ⠀⠀⠀⠀⠀⠀⠀ ⣿⣿⠁⠀⠀ ⢰⣿⣿⣯⠁⠀⠀⠀⠀⠀⠀⠀ ⠈⠙⢿⣷⡄" + System.lineSeparator()
-                + " ⠀⠀⣀⣤⣴⣶⣶⣿⡟⠀⠀⠀ ⢸⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  ⣿⣷" + System.lineSeparator()
-                + " ⠀⢰⣿⡟⠋⠉⣹⣿⡇⠀⠀⠀ ⠘⣿⣿⣿⣿⣷⣦⣤⣤⣤⣶⣶⣶⣶⣿⣿⣿" + System.lineSeparator()
-                + " ⠀⢸⣿⡇⠀⠀⣿⣿⡇⠀⠀⠀⠀ ⠹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠃" + System.lineSeparator()
-                + " ⠀⣸⣿⡇⠀⠀⣿⣿⡇⠀⠀⠀⠀⠀ ⠉⠻⠿⣿⣿⣿⣿⡿⠿⠿⠛⢻⣿⡇" + System.lineSeparator()
-                + " ⠀⣿⣿⠁⠀⠀⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀   ⢸⣿⣧" + System.lineSeparator()
-                + " ⠀⣿⣿⠀⠀⠀⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  ⢸⣿⣿" + System.lineSeparator()
-                + " ⠀⣿⣿⠀⠀⠀⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  ⢸⣿⣿" + System.lineSeparator()
-                + " ⠀⢿⣿⡆⠀⠀⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  ⢸⣿⡇" + System.lineSeparator()
-                + " ⠀⠸⣿⣧⡀⠀⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  ⣿⣿⠃" + System.lineSeparator()
-                + " ⠀⠀⠛⢿⣿⣿⣿⣿⣇⠀⠀⠀⠀⠀⣰⣿⣿⣷⣶⣶⣶⣶⠶⠀⢠⣿⣿" + System.lineSeparator()
-                + " ⠀⠀⠀⠀⠀⠀⠀⣿⣿⠀⠀⠀⠀⠀⣿⣿⡇⠀⣽⣿⡏⠁⠀⠀  ⢸⣿⡇" + System.lineSeparator()
-                + " ⠀⠀⠀⠀⠀⠀⠀⣿⣿⠀⠀⠀⠀⠀⣿⣿⡇⠀⢹⣿⡆⠀⠀⠀  ⣸⣿⠇" + System.lineSeparator()
-                + " ⠀⠀⠀⠀⠀⠀⠀⢿⣿⣦⣄⣀⣠⣴⣿⣿⠁⠀⠈⠻⣿⣿⣿⣿⡿⠏" + System.lineSeparator()
-                + " ⠀⠀⠀⠀⠀⠀⠀⠈⠛⠻⠿⠿⠿⠿⠋⠁" + System.lineSeparator();
+    public static boolean getAreAllTasksDone() {
+        boolean areAllTasksDone = true;
+        for (TaskList t : tasks) {
+            if (!t.getIsTaskDone()) {
+                areAllTasksDone = false;
+                break;
+            }
+        }
+        return areAllTasksDone;
+    }
 
+    public static boolean getAreAllTasksNotDone() {
+        boolean areAllTasksNotDone = true;
+        for (TaskList t : tasks) {
+            if (t.getIsTaskDone()) {
+                areAllTasksNotDone = false;
+                break;
+            }
+        }
+        return areAllTasksNotDone;
     }
 
 
-    public static void exit(List dukeList, Todo todoList, Deadline deadLineList, Event eventLists) {
+    private static int getNumberOfTaskRemaining() {
+        int counter = 0;
+        for (TaskList t : tasks) {
+            if (!t.getIsTaskDone()) {
+                counter++;
+            }
+        }
+        return counter;
+    }
 
-        boolean isAllDone = todoList.getAreAllTasksDone() && (dukeList.getTasksCounter() > 0)
-                && deadLineList.getAreAllTasksDone() && eventLists.getAreAllTasksDone();
+    public static void printTaskAlreadyCompletedPhrase() {
+        String phrase;
+        if (getAreAllTasksDone()) {
+            phrase = "This job was already completed!!!!" + System.lineSeparator()
+                    + "Good job Crewmate! You completed all your tasks in this list! (─‿─)" + System.lineSeparator();
 
-        boolean isNothingDone = todoList.getAreAllTasksNotDone() && deadLineList.getAreAllTasksNotDone()
-                && eventLists.getAreAllTasksNotDone() && (dukeList.getTasksCounter() > 0);
 
-        if (isAllDone) {
+        } else {
+            phrase = "What are you doing??? This job was already completed!! (;¬_¬)" + System.lineSeparator()
+                    + "You still have " + getNumberOfTaskRemaining()
+                    + " tasks left in this list Crewmate! Hurry up!! ＼(｀0´)／";
+        }
+        System.out.println(phrase);
+    }
+
+
+    public static void exit() {
+        if (tasks.size() > 0 && getAreAllTasksDone()) {
             dukeList.printGoodEnding();
-        } else if (isNothingDone) {
+        } else if (tasks.size() > 0 && getAreAllTasksNotDone()) {
             dukeList.printBadEnding();
         } else {
             dukeList.printTraitor();

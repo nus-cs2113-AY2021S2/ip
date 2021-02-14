@@ -30,9 +30,7 @@ ________________________________________________________________________________
        todo <task>        :add task to To Do list
    event <task> /<time>   :add task to Event List with time
    deadline <task /<by>   :add task to Deadline List
-    done todo <index>     :mark task <index> as done in To Do List
-    done event <index>    :mark task <index> as done in Event List
-  done deadline <index>   :mark task <index> as done in Deadline List
+       done  <index>      :mark task <index> as done in List
 
 ____________________________________________________________________________________
 There's no such command!!! You look SUS!!!  (?_??
@@ -47,59 +45,37 @@ There's no such command!!! You look SUS!!!  (?_??
 ____________________________________________________________________________________
 There's no such command!!! You look SUS!!!  (?_??
 ____________________________________________________________________________________
-There's no such command!!! You look SUS!!!  (?_??
+There's no such task?! Focus Crewmate!!  (????)
 ____________________________________________________________________________________
-There's no such command!!! You look SUS!!!  (?_??
+There's no such task?! Focus Crewmate!!  (????)
 ____________________________________________________________________________________
-There's no such command!!! You look SUS!!!  (?_??
+There's no such task?! Focus Crewmate!!  (????)
 ____________________________________________________________________________________
-____________________________________________________________________________________
-Aight Crewmate!! I've got a new task for you to do!!!
-  [T][?]eat
-Are you really a Crewmate??? You haven't done any work in this list! ????�??
-____________________________________________________________________________________
+Aight Crewmate!! I've got a new task for you to do!!! (�?�): eat
 ____________________________________________________________________________________
 Nice! I've marked this task as done:
-1[?]. eat
-Good job Crewmate! You completed all your tasks! in this list(???)
-Don't forget to check the other lists as well!!!!
+[T][?]eat
 ____________________________________________________________________________________
-Good job Crewmate! You completed all your tasks in all your lists! (???)
+Good job Crewmate! You completed all your tasks in  this list! (???)
 ____________________________________________________________________________________
 There's no such command!!! You look SUS!!!  (?_??
 ____________________________________________________________________________________
+Aight Crewmate!! I've got a new deadline for you!!! (�?�): get married
 ____________________________________________________________________________________
-Aight Crewmate!! I've got a new deadline for you!!!
-  [D][?]get married (by: mon 23.01.33)
-Are you really a Crewmate??? You haven't done any work in this list! ????�??
-____________________________________________________________________________________
-____________________________________________________________________________________
-There's no such task?! Are you really a Crewmate??  (????)
-You still have 1 task(s) left in all your Lists ! Hurry up!! ?(?0�)?
-____________________________________________________________________________________
+There's no such task?! Focus Crewmate!!  (????)
 ____________________________________________________________________________________
 Nice! I've marked this task as done:
-1[?]. get married
-Good job Crewmate! You completed all your tasks! in this list(???)
-Don't forget to check the other lists as well!!!!
+[D][?]get married (by: mon 23.01.33)
 ____________________________________________________________________________________
-Good job Crewmate! You completed all your tasks in all your lists! (???)
-____________________________________________________________________________________
-____________________________________________________________________________________
-ATTENTION, Here's your list of your tasks TO DO Crewmate!!!
-1.[T][?]eat
 Good job Crewmate! You completed all your tasks in  this list! (???)
 ____________________________________________________________________________________
-____________________________________________________________________________________
-ATTENTION, Here's your list of DEADLINE(S) to meet  Crewmate!!!
-1.[D][?]get married (by: mon 23.01.33)
+ATTENTION, Here's your list of tasks Crewmate!!!
+1. [T][?]eat
+2. [D][?]get married (by: mon 23.01.33)
 Good job Crewmate! You completed all your tasks in  this list! (???)
-____________________________________________________________________________________
-Good job Crewmate! You completed all your tasks in all your lists! (???)
 ____________________________________________________________________________________
 ____________________________________________________________________________________
 Thanks for your help Crewmate!!
 We wouldn't have done this without your help!!
 Goodbye!!!! (???)?
-
 ____________________________________________________________________________________
