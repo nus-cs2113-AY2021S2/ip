@@ -5,19 +5,61 @@ import exceptions.IllegalTaskRedoException;
 import list.*;
 
 import java.util.ArrayList;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.FileWriter;
 
 public class Duke {
 
 
     public static final String CHAT_BOT_NAME = "Arthur";
-    public static final List dukeList = new List(CHAT_BOT_NAME);
+    public static final String FILE_PATH = "data/duke.txt";
     public static ArrayList<TaskList> tasks = new ArrayList<>();
 
     public static void main(String[] args) {
         dukeList.greet();
+        loadFromFile();
         processCommands();
     }
+
+    public static void loadFromFile(){
+        try {
+            File fd = new File(FILE_PATH); // create a File for the given file path
+            Scanner s = new Scanner(fd); // create a Scanner using the File as the source
+            int i = 0;
+
+            while (s.hasNext()) {
+                selectCommand(s.nextLine());
+                if (s.nextLine().equals("true")){
+                    TaskList t = tasks.get(i);
+                    t.markAsDone();
+                    tasks.set(i,t);
+                }
+            }
+        } catch (java.io.IOException e){
+            System.out.println("Your saved data cannot be found or does not exist");
+        }
+
+    }
+
+    public static void saveToFile(){
+        boolean hasSaved =true;
+        do {
+            try {
+                FileWriter fw = new FileWriter(FILE_PATH, false);
+                for (TaskList t : tasks) {
+                    fw.write(t.getTaskToPrintInFile());
+                    fw.write(t.getIsTaskDone());
+                }
+                hasSaved = true;
+            } catch (java.io.IOException e) {
+                hasSaved = false;
+            }
+        }while (!hasSaved);
+    }
+
 
     private static void processCommands() {
         String line;
@@ -128,7 +170,7 @@ public class Duke {
         default:
             throw new IllegalCommandException();
         }
-
+        saveToFile();
     }
 
     private static void addTaskInDeadlineList(String line) {

@@ -45,4 +45,9 @@ public class Deadline extends TaskList {
     public void printAddedTask() {
         System.out.println("Aight Crewmate!! I've got a new deadline for you!!! (¬‿¬): " + getTaskDescription());
     }
+
+    @Override
+    public String getTaskToPrintInFile(){
+        return ("deadline " + this.description + "/" + this.by);
+    }
 }

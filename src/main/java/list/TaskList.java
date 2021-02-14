@@ -40,4 +40,8 @@ public class TaskList extends List {
     public void printAddedTask() {
         System.out.println("Added " + getTaskDescription());
     }
+
+    public String getTaskToPrintInFile(){
+        return "";
+    }
 }

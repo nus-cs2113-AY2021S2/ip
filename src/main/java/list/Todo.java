@@ -21,4 +21,9 @@ public class Todo extends TaskList {
                 + getTaskDescription();
         System.out.println(phrase);
     }
+
+    @Override
+    public String getTaskToPrintInFile(){
+        return ("todo " + this.description + System.lineSeparator() +this.isDone);
+    }
 }
