@@ -1,7 +1,6 @@
 package duke.controller;
 
 import duke.exception.InvalidInputException;
-import duke.task.Task;
 import duke.ui.*;
 
 import java.util.Scanner;
@@ -27,7 +26,7 @@ public class Duke {
                     TaskManager.processTask(input);
                 } catch (InvalidInputException e) {
                     System.out.println(e.getMessage());
-                    UI.showDivider();
+                    UI.requestInput();
                 }
 
             }

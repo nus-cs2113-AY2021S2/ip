@@ -18,24 +18,33 @@ public class UI {
         System.out.println("Hello from\n" + logo);
         System.out.println(divider);
         System.out.println("Hello there! I'm Duke");
-        System.out.println("I'm going to load any saved data that you may have now!");
-        try {
-            FileManager.readFile();
-        } catch (IOException e) {
-            System.out.println("Looks like you don't have a save file - please create a directory " +
-                    "called 'data' in the project directory!");
-        }
+        showLoadDataScreen();
         System.out.println("I have the high ground! How may I help you?");
         System.out.println(divider);
     }
 
-    public static void showDivider() {
+    public static void showLoadDataScreen() {
+        System.out.println("Searching for saved data...");
+        try {
+            FileManager.readFile();
+            System.out.println("Loading saved data...");
+        } catch (IOException e) {
+            System.out.println("No data found - please ensure that a directory " +
+                    "called 'data' is in your project directory");
+        }
+    }
+
+    public static void showSaveDataScreen() {
         System.out.println("Saving data...");
         try {
             FileManager.saveToFile();
+            System.out.println("Data saved successfully!");
         } catch (IOException e) {
             System.out.println("Unable to save - please create a directory called 'data' in the project directory!");
         }
+    }
+
+    public static void requestInput() {
         System.out.println(divider);
         System.out.println("What is thy bidding, my master?");
         System.out.println(divider);
@@ -48,7 +57,7 @@ public class UI {
             System.out.println(displayedTask + ". " + Task.getTaskList().get(i));
         }
         System.out.println("Of these tasks, you still have " + Task.getRemainingTasks() + " to complete!");
-        UI.showDivider();
+        UI.requestInput();
     }
 
     public static void taskAddedSuccessfully() {
@@ -56,7 +65,8 @@ public class UI {
         boolean getCompletedTask = false;
         System.out.println(Task.getRecentTask(getCompletedTask));
         System.out.println("You now have " + Task.getTaskCounter() + " tasks in your list!");
-        UI.showDivider();
+        showSaveDataScreen();
+        UI.requestInput();
     }
 
     public static void taskCompletedSuccessfully() {
@@ -64,7 +74,8 @@ public class UI {
         boolean getCompletedTask = true;
         System.out.println(Task.getRecentTask(getCompletedTask));
         System.out.println("You still have " + Task.getRemainingTasks() + " tasks to complete in your list!");
-        UI.showDivider();
+        showSaveDataScreen();
+        UI.requestInput();
     }
 
     public static void taskDeletedSuccessfully() {
@@ -72,7 +83,8 @@ public class UI {
         boolean getCompletedTask = false;
         System.out.println(Task.getRecentTask(getCompletedTask));
         System.out.println("You still have " + Task.getRemainingTasks() + " tasks to complete in your list!");
-        UI.showDivider();
+        showSaveDataScreen();
+        UI.requestInput();
     }
 
     public static void showFarewellScreen() {

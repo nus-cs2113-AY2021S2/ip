@@ -27,13 +27,16 @@ public class TaskManager {
 
                 } catch (NumberFormatException e) {
                     System.out.println("That didn't work...please enter a valid number");
-                    UI.showDivider();
+                    UI.requestInput();
                 } catch (TaskAlreadyCompletedException e) {
                     System.out.println(e.getMessage());
-                    UI.showDivider();
+                    UI.requestInput();
                 } catch (TaskNotExistException e) {
                     System.out.println(e.getMessage());
-                    UI.showDivider();
+                    UI.requestInput();
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("Please input the correct number of the task you wish to interact with");
+                    UI.requestInput();
                 }
                 break;
             case "deadline":
@@ -45,10 +48,10 @@ public class TaskManager {
                     break;
                 } catch (MissingDueDateException e) {
                     System.out.println(e.getMessage());
-                    UI.showDivider();
+                    UI.requestInput();
                 } catch (MissingTaskDescriptionException e) {
                     System.out.println(e.getMessage());
-                    UI.showDivider();
+                    UI.requestInput();
                 }
                 break;
             case "event":
@@ -60,10 +63,10 @@ public class TaskManager {
                     break;
                 } catch (MissingEventDurationException e) {
                     System.out.println(e.getMessage());
-                    UI.showDivider();
+                    UI.requestInput();
                 } catch (MissingTaskDescriptionException e) {
                     System.out.println(e.getMessage());
-                    UI.showDivider();
+                    UI.requestInput();
                 }
                 break;
             case "todo":
@@ -75,7 +78,7 @@ public class TaskManager {
                     break;
                 } catch (MissingTaskDescriptionException e) {
                     System.out.println(e.getMessage());
-                    UI.showDivider();
+                    UI.requestInput();
                 }
                 break;
             default:
