@@ -17,4 +17,9 @@ public class Event extends Task {
     public String getDate() {
         return "(at: " + this.eventTime + ")";
     }
+
+    @Override
+    public String getTime() {
+        return this.eventTime;
+    }
 }

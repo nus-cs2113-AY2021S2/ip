@@ -8,6 +8,7 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -25,7 +26,6 @@ public class Duke {
     private static final int ADD_TODO = 4;
     private static final int ADD_DEADLINE = 5;
     private static final int ADD_EVENT = 6;
-    private static final int MAX_SIZE = 100;
 
     private static final String GREETING_MESSAGE = "Wagwan! I is Ali G. West side.\nWhat is we chattin' bout today?";
     private static final String GOODBYE_MESSAGE = "Goodbye, big up yourself, keep it real, respekt.";
@@ -39,29 +39,33 @@ public class Duke {
     private static final String TOTAL_TASK_MESSAGE = "You is having %d task(s) on your list";
     private static final String NO_NAME_MESSAGE = "Why you be trying to find something with no name? Ave' you been smoking me special stash?";
     private static final String DELETED_MESSAGE = "This ting has been deleted. I could've done that task, you stupid.";
+    private static final String FILEPATH = "tasklogs/tasks.txt";
 
     public static ArrayList<Task> Tasks = new ArrayList<>();
 
     public static void main(String[] args) {
-        printGreeting();
-        loopCommands();
-        sayGoodbye();
+        try {
+            printGreeting();
+            loopCommands();
+            sayGoodbye();
+            saveFile();
+        } catch (IOException e) {
+            System.out.println("IO");
+            e.printStackTrace();
+        }
     }
-
     /**
      * Loops through all features available.
      * Returns if user inputs bye or number of tasks exceeds 100.
      *
      * @throws IndexOutOfBoundsException if number of tasks exceeds max size.
      */
-    public static void loopCommands() {
+    public static void loopCommands() throws IOException {
+        loadData();
         Scanner in = new Scanner(System.in);
         while (in.hasNextLine()) {
             String line = in.nextLine();
             try {
-                if (Task.totalNumberOfTasks > MAX_SIZE) {
-                    throw new IndexOutOfBoundsException();
-                }
                 int command = getCommand(line);
                 // No fallthrough required
                 switch (command) {
@@ -296,6 +300,9 @@ public class Duke {
         }
         return INVALID_INDEX;
     }
+
+    /* ************************************* Methods used to print stuff *************************************************/
+
     /** Method used to print each item for "list" command */
     public static void printListItem(int index, String type, String status, String name, String date) {
         System.out.println(index + ". " + type + "[" + status + "] " + name + " " + date);
@@ -357,5 +364,66 @@ public class Duke {
             System.out.println(EXCEED_CAPACITY_MESSAGE);
         }
         printBorderLine();
+    }
+
+    /* ********************************************* Methods for File IO **************************************************/
+    public static void loadData() throws IOException {
+        File f = new File(FILEPATH);
+        f.getParentFile().mkdirs();
+        f.createNewFile();
+        Scanner s = new Scanner(f);
+        while(s.hasNext()) {
+            Tasks.add(deserializeFile(s.nextLine()));
+            Task.totalNumberOfTasks += 1;
+        }
+    }
+    public static Task deserializeFile(String line) {
+        String[] components = line.split(" \\| ");
+        // No fallthrough required
+        switch(components[0]) {
+        case "[T]":
+            Task fileTodo = new Todo(components[2]);
+            if (components[1].equals("1")) {
+                fileTodo.setDone();
+            }
+            return fileTodo;
+        case "[E]":
+            Task fileEvent = new Event(components[2], components[3]);
+            if (components[1].equals("1")) {
+                fileEvent.setDone();
+            }
+            return fileEvent;
+        }
+        // Case where task is deadline
+        Task fileDeadline = new Deadline(components[2], components[3]);
+        if (components[1].equals("1")) {
+            fileDeadline.setDone();
+        }
+        return fileDeadline;
+    }
+    public static void saveFile() throws IOException {
+        StringBuilder saveText = new StringBuilder();
+        for(Task task: Tasks) {
+            saveText.append(serializeFile(task));
+        }
+        FileWriter w = new FileWriter(FILEPATH);
+        w.write(saveText.toString());
+        w.close();
+    }
+    public static String serializeFile(Task task) {
+        String serialized = task.getType();
+        serialized += " | ";
+        if (task.checkDone()) {
+            serialized += "1 | ";
+        } else {
+            serialized += "0 | ";
+        }
+        serialized += task.getName();
+        if (!(task instanceof Todo)) {
+            serialized += " | ";
+        }
+        serialized += task.getTime();
+
+        return serialized + "\n";
     }
 }

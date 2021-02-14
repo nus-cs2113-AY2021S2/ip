@@ -1,0 +1,5 @@
+[T] | 0 | change amp
+[D] | 0 | remaster drums | tuesday 10am
+[E] | 1 | write guitar part | friday 10pm
+[D] | 0 | restring guitar | tuesday 10am
+[E] | 1 | live gig | friday 10pm

@@ -17,4 +17,9 @@ public class Deadline extends Task {
     public String getDate() {
         return "(by: " + this.deadline + ")";
     }
+
+    @Override
+    public String getTime() {
+        return this.deadline;
+    }
 }

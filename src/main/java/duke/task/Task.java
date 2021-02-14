@@ -14,6 +14,9 @@ public class Task {
         this.isDone = true;
     }
 
+    public boolean checkDone() {
+        return this.isDone;
+    }
     /**
      * @return "x" if duke.task is done, empty space otherwise
      */
@@ -30,6 +33,10 @@ public class Task {
     }
     // To be overridden
     public String getDate() {
+        return "";
+    }
+    // To be overridden
+    public String getTime() {
         return "";
     }
 }
