@@ -12,6 +12,7 @@ public class Task {
     public void setDescription(String description){
         this.description = description;
     }
+    public String getDescription() {return description;}
     public String toString(){
         return "[" + getStatusIcon() + "] " + description;
     }
@@ -30,5 +31,6 @@ public class Task {
     public boolean getTaskStatus(){
         return isDone;
     }
+    public String getFileStatus(){return (isDone ? "1" : "0"); }
 
 }

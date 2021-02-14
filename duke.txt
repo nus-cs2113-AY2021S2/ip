@@ -1,0 +1,7 @@
+T | 1 | sleep
+T | 0 | eat
+D | 1 | hw |  Monday
+E | 1 | meeting |  tmr
+T | 0 | ffff
+T | 0 | gggg
+E | 1 | lfine |  wkpegg
