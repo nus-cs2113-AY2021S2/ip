@@ -5,8 +5,8 @@ import duke.exception.InvalidCommandException;
 
 public class Duke {
 
-    private static UserInterface ui = new UserInterface();
-    private static TaskManager taskManager = new TaskManager();
+    private static final UserInterface ui = new UserInterface();
+    private static final TaskManager taskManager = new TaskManager();
 
     public static void main(String[] args) {
 
@@ -36,6 +36,14 @@ public class Duke {
             try {
                 int taskNumber = Integer.parseInt(parsedInput[1]) - 1;
                 feedback = taskManager.doneTask(taskNumber);
+            } catch (NumberFormatException e) {
+                feedback = "OOPS!!! Task number has to be a number";
+            }
+            break;
+        case "delete":
+            try {
+                int taskNumber = Integer.parseInt(parsedInput[1]) - 1;
+                feedback = taskManager.deleteTask(taskNumber);
             } catch (NumberFormatException e) {
                 feedback = "OOPS!!! Task number has to be a number";
             }

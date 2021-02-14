@@ -7,19 +7,20 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+import java.util.ArrayList;
+
 public class TaskManager {
 
-    private Task[] tasks = new Task[100];
-    int taskCount = 0;
+    private final ArrayList<Task> tasks = new ArrayList<>();
 
     public String listTask() {
         StringBuilder feedback = new StringBuilder();
 
-        feedback.append("Here are the tasks in your list:" + System.lineSeparator());
-        for (int i = 0; i < taskCount - 1; ++i) {
-            feedback.append(String.format("%d: %s", (i + 1), tasks[i])).append(System.lineSeparator());
+        feedback.append("Here are the tasks in your list:").append(System.lineSeparator());
+        for (int i = 0; i < tasks.size() - 1; ++i) {
+            feedback.append(String.format("%d: %s", (i + 1), tasks.get(i))).append(System.lineSeparator());
         }
-        feedback.append(String.format("%d: %s", (taskCount), tasks[taskCount - 1]));
+        feedback.append(String.format("%d: %s", (tasks.size()), tasks.get(tasks.size() - 1)));
 
         return feedback.toString();
     }
@@ -35,32 +36,27 @@ public class TaskManager {
 
         switch (taskType) {
         case "todo":
-            tasks[taskCount] = new Todo(description);
+            tasks.add(new Todo(description));
             break;
         case "deadline": {
             String[] nameAndDate = parseDescription(description, " /by ");
-            tasks[taskCount] = new Deadline(nameAndDate[0], nameAndDate[1]);
+            tasks.add(new Deadline(nameAndDate[0], nameAndDate[1]));
             break;
         }
         case "event": {
             String[] nameAndDate = parseDescription(description, " /at ");
-            tasks[taskCount] = new Event(nameAndDate[0], nameAndDate[1]);
+            tasks.add(new Event(nameAndDate[0], nameAndDate[1]));
             break;
         }
         }
 
-        ++taskCount;
-
         return "Got it. I've added this task:" + System.lineSeparator()
-                + tasks[taskCount - 1] + System.lineSeparator()
-                + "Now you have " + taskCount + " tasks in the list.";
+                + tasks.get(tasks.size() - 1) + System.lineSeparator()
+                + "Now you have " + tasks.size() + " tasks in the list.";
     }
 
-    private boolean isValidTaskType (String taskType) {
-        if (taskType.equals("todo") || taskType.equals("deadline") || taskType.equals("event")) {
-            return true;
-        }
-        return false;
+    private boolean isValidTaskType(String taskType) {
+        return taskType.equals("todo") || taskType.equals("deadline") || taskType.equals("event");
     }
 
     private String[] parseDescription(String description, String regex) {
@@ -74,11 +70,23 @@ public class TaskManager {
 
     public String doneTask(int taskNum) {
         try {
-            tasks[taskNum].setAsDone();
+            tasks.get(taskNum).setAsDone();
         } catch (IndexOutOfBoundsException e) {
-            return "OOPS!!! Invalid task number. Try 1-" + taskCount;
+            return "OOPS!!! Invalid task number. Try 1-" + tasks.size();
         }
         return "Nice! I've marked this task as done:" + System.lineSeparator()
-                + tasks[taskNum];
+                + tasks.get(taskNum);
+    }
+
+    public String deleteTask(int taskNumber) {
+        String task = tasks.get(taskNumber).toString();
+        try {
+            tasks.remove(taskNumber);
+        } catch (IndexOutOfBoundsException e) {
+            return "OOPS!!! Invalid task number. Try 1-" + tasks.size();
+        }
+        return "Noted. I've removed this task:" + System.lineSeparator() +
+                task + System.lineSeparator() +
+                "Now you have " + tasks.size() + " tasks in the list.";
     }
 }
