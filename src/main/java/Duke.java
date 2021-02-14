@@ -1,6 +1,9 @@
 
 import java.util.*;
-
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 public class Duke {
     //public static String[] to_do_list= new String[100];
@@ -68,8 +71,61 @@ public class Duke {
     }
 
 
-    public static void main(String[] args) {
+    private static void printFileContents(String filePath) throws FileNotFoundException {
+        File f = new File(filePath); // create a File for the given file path
+        Scanner s = new Scanner(f); // create a Scanner using the File as the source
+        while (s.hasNext()) {
+            System.out.println(s.nextLine());
+        }
+    }
 
+    public static void loadFile() {
+        try {
+            printFileContents("/Users/chenlingcui/Desktop/CS2113/duke.txt");
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
+    }
+
+    //private static void appendToFile(String filePath, String textToAppend) throws IOException {
+    //  FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
+    //fw.write(textToAppend);
+    //fw.close();
+    //}
+
+    private static void writeToFile(String filePath, String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        fw.write(textToAdd);
+        fw.close();
+    }
+    private static void appendToFile(String filePath, String textToAppend) throws IOException {
+        FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
+        fw.write(textToAppend);
+        fw.close();
+    }
+
+    public static void changeFile(int num) {
+
+        try {
+            writeToFile("/Users/chenlingcui/Desktop/CS2113/duke.txt", "[" + t[0].getSymbol() + "]" + "[" + t[0].getStatusIcon() + "] " + t[0].getDescription() + "(" + t[0].getPrep() + ":" + t[0].getDdl() + ")");
+            appendToFile("/Users/chenlingcui/Desktop/CS2113/duke.txt","\n");
+        } catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
+        for(int i=1;i<num;i++){
+            try {
+                appendToFile("/Users/chenlingcui/Desktop/CS2113/duke.txt", "[" + t[i].getSymbol() + "]" + "[" + t[i].getStatusIcon() + "] " + t[i].getDescription() + "(" + t[i].getPrep() + ":" + t[i].getDdl() + ")");
+                appendToFile("/Users/chenlingcui/Desktop/CS2113/duke.txt","\n");
+            }catch(IOException e){
+                System.out.println("Something went wrong: " + e.getMessage());
+            }
+        }
+
+    }
+
+
+    public static void main(String[] args) {
+        loadFile();
         show_welcome_msg();
         Scanner sc = new Scanner(System.in);
         String user_input = sc.nextLine();
@@ -83,6 +139,7 @@ public class Duke {
                 int slash = user_input.indexOf("/");
                 //System.out.println(slash);
                 String user_done = user_input.substring(0, spacing);
+                //check whether user has done some tasks
                 if (user_done.equals("done")) {
                     String number = user_input.substring(spacing + 1);
                     int number_converted = Integer.parseInt(number);
@@ -91,6 +148,7 @@ public class Duke {
                             "     Nice! I've marked this task as done: ");
                     System.out.println("[" + t[number_converted - 1].getSymbol() + "]" + "[" + t[number_converted - 1].getStatusIcon() + "] " + t[number_converted - 1].getDescription() + "(" + t[number_converted - 1].getPrep() + ":" + t[number_converted - 1].getDdl() + ")");
                     System.out.println("____________________________________________________________");
+
                 } else if (slash != -1) {
                     String taskKind = userDone(user_done);
                     if (!taskKind.equals("")) {
@@ -140,10 +198,11 @@ public class Duke {
                     }
 
                 }
-                user_input = sc.nextLine();
-            }
 
-            
+            }
+            changeFile(num_of_goals);
+            user_input = sc.nextLine();
+
         }
         System.out.println("____________________________________________________________\n" +
                 "     Bye. Hope to see you again soon!\n" +
