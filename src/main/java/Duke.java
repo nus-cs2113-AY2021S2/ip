@@ -1,6 +1,8 @@
 import java.util.*;
 
 public class Duke {
+
+
     public static void main(String[] args) {
         String logo = "____________________________________________________________\n"
                 + " Hello! I'm Duke\n"
@@ -13,12 +15,22 @@ public class Duke {
         ArrayList<Task> taskItems = new ArrayList<Task>();
         int itemCount = 0;
         while(!userQuery.equalsIgnoreCase("bye")){
-            if(userQuery.contains("done")){
+            if(userQuery.contains("done")) {
                 int doneIndex = Integer.parseInt(userQuery.substring(5));
-                taskItems.get(doneIndex-1).setStatus(true);
+                taskItems.get(doneIndex - 1).setStatus(true);
                 userQueryReturn = "____________________________________________________________\n"
-                        +" Nice! I've marked this task as done: \n"
-                        + " ["+taskItems.get(doneIndex-1).getTypeIcon()+"]["+taskItems.get(doneIndex-1).getStatusIcon()+"] "+taskItems.get(doneIndex-1).getDescription()+"\n"
+                        + " Nice! I've marked this task as done: \n"
+                        + " [" + taskItems.get(doneIndex - 1).getTypeIcon() + "][" + taskItems.get(doneIndex - 1).getStatusIcon() + "] " + taskItems.get(doneIndex - 1).getDescription() + "\n"
+                        + "____________________________________________________________\n";
+                System.out.println(userQueryReturn);
+                userQuery = stringScanner.nextLine();
+            }else if(userQuery.contains("delete")){
+                int doneIndex = Integer.parseInt(userQuery.substring(7));
+                Task removedItem = taskItems.remove(doneIndex);
+                userQueryReturn = "____________________________________________________________\n"
+                        + " Noted. I've removed this task: \n"
+                        + "   [" + removedItem.getTypeIcon() + "][" + removedItem.getStatusIcon() + "] " + removedItem.getDescription() + "\n"
+                        + " Now you have "+ taskItems.size() + " tasks in the list.\n"
                         + "____________________________________________________________\n";
                 System.out.println(userQueryReturn);
                 userQuery = stringScanner.nextLine();
