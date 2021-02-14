@@ -5,6 +5,7 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+import java.util.ArrayList;
 import  java.util.Scanner;
 
 public class Duke {
@@ -14,7 +15,7 @@ public class Duke {
     public static void main(String[] args) {
         showWelcomeMessage();
 
-        Task[] userTasks = new Task[MAX_NO_OF_TASKS];
+        ArrayList<Task> userTasks = new ArrayList<>(MAX_NO_OF_TASKS);
         int taskCounter = 0;
         boolean exitLoopStatus = false;
         Scanner inputCommand = new Scanner(System.in);
@@ -39,6 +40,9 @@ public class Duke {
             case "done":
                 markActivityAsDone(userTasks, individualWords);
                 break;
+            case "delete":
+                taskCounter = deleteATask(userTasks, taskCounter, individualWords);
+                break;
             case "bye":
                 exitLoopStatus = terminateProgram();
                 break;
@@ -49,6 +53,23 @@ public class Duke {
                 break;
             }
         }
+    }
+
+    private static int deleteATask(ArrayList<Task> userTasks, int taskCounter, String[] individualWords) {
+        int activityNumber;
+        Task temporaryTask;
+        try {
+            activityNumber = Integer.parseInt(individualWords[1]);
+            temporaryTask = userTasks.get(activityNumber-1);
+            userTasks.remove(temporaryTask);
+            taskCounter--;
+            System.out.println("Noted. I've removed this task: ");
+            System.out.println(temporaryTask.toString());
+            System.out.println("Now you have " + taskCounter + " tasks in the list. ");
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid task number");
+        }
+        return taskCounter;
     }
 
     private static boolean checkLoopStatus(boolean exitLoopStatus) {
@@ -65,60 +86,60 @@ public class Duke {
         return exitLoopStatus;
     }
 
-    private static void markActivityAsDone(Task[] userTasks, String[] individualWords) {
+    private static void markActivityAsDone(ArrayList<Task> userTasks, String[] individualWords) {
         int activityNumber;
         try {
             activityNumber = Integer.parseInt(individualWords[1]);
-            userTasks[activityNumber-1].setTaskStatus(true);
+            userTasks.get(activityNumber-1).setTaskStatus(true);
             System.out.println("Nice! I've marked this task as done:");
-            System.out.println(userTasks[activityNumber-1].toString());
+            System.out.println(userTasks.get(activityNumber-1).toString());
         } catch (NumberFormatException e) {
             System.out.println("Invalid task number");
         }
     }
 
-    private static int createEventTask(Task[] userTasks, int taskCounter, String[] individualWords) {
+    private static int createEventTask(ArrayList<Task> userTasks, int taskCounter, String[] individualWords) {
         String newUserTask;
         try {
             newUserTask = individualWords[1].split("/at")[0];
             String eventTime = individualWords[1].split("/at")[1];
-            userTasks[taskCounter] = new Event(newUserTask, eventTime);
-            taskCounter = showTaskCreationMessage(taskCounter, userTasks[taskCounter]);
+            userTasks.add(new Event(newUserTask, eventTime));
+            taskCounter = showTaskCreationMessage(taskCounter, userTasks.get(taskCounter));
         } catch (ArrayIndexOutOfBoundsException e){
             System.out.println("☹ OOPS!!! The description or date of a event cannot be empty.");
         }
         return taskCounter;
     }
 
-    private static int createDeadlineTask(Task[] userTasks, int taskCounter, String[] individualWords) {
+    private static int createDeadlineTask(ArrayList<Task> userTasks, int taskCounter, String[] individualWords) {
         String newUserTask;
         try {
             newUserTask = individualWords[1].split("/by")[0];
             String date = individualWords[1].split("/by")[1];
-            userTasks[taskCounter] = new Deadline(newUserTask, date);
-            taskCounter = showTaskCreationMessage(taskCounter, userTasks[taskCounter]);
+            userTasks.add(new Deadline(newUserTask, date));
+            taskCounter = showTaskCreationMessage(taskCounter, userTasks.get(taskCounter));
         } catch (ArrayIndexOutOfBoundsException e){
             System.out.println("☹ OOPS!!! The description or date of a deadline cannot be empty.");
         }
         return taskCounter;
     }
 
-    private static int createTodoTask(Task[] userTasks, int taskCounter, String[] individualWords) {
+    private static int createTodoTask(ArrayList<Task> userTasks, int taskCounter, String[] individualWords) {
         String newUserTask;
         try {
             newUserTask = individualWords[1];
-            userTasks[taskCounter] = new Todo(newUserTask);
-            taskCounter = showTaskCreationMessage(taskCounter, userTasks[taskCounter]);
+            userTasks.add(new Todo(newUserTask));
+            taskCounter = showTaskCreationMessage(taskCounter, userTasks.get(taskCounter));
         } catch (ArrayIndexOutOfBoundsException e){
             System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
         }
         return taskCounter;
     }
 
-    private static void displayListOfActivities(Task[] userTasks, int taskCounter) {
+    private static void displayListOfActivities(ArrayList<Task> userTasks, int taskCounter) {
         System.out.println("Here are the tasks in your list:");
         for (int counter = 0; counter < taskCounter; counter++) {
-            System.out.println((counter+1) + "." + userTasks[counter].toString());
+            System.out.println((counter+1) + "." + userTasks.get(counter).toString());
         }
     }
 
