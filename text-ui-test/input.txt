@@ -1,10 +1,19 @@
 todo borrow book
-list
-deadline return book /by Sunday
+LiSt
+deadliNE return book /by Sunday
 event project meeting /at Mon 2-4pm
+list
 done 2
+delete 5
+delete 2
+done 0
+done hehe
 deadline do homework /by no idea :-p
 list
+deadline plan day /by
+deadline /by 11pm
+deadline /by
+deadline plan /by today /by tmr
 todo
 blah
 bye
