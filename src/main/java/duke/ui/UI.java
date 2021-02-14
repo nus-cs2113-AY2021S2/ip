@@ -80,8 +80,8 @@ public class UI {
 
     public static void taskDeletedSuccessfully() {
         System.out.println("I am altering the deal. The following task has been deleted:");
-        boolean getCompletedTask = false;
-        System.out.println(Task.getRecentTask(getCompletedTask));
+        boolean getDeletedTask = true;
+        System.out.println(Task.getRecentTask(getDeletedTask));
         System.out.println("You still have " + Task.getRemainingTasks() + " tasks to complete in your list!");
         showSaveDataScreen();
         UI.requestInput();

@@ -10,8 +10,7 @@ public class Task {
     private String description;
     private static int taskCounter = 0;
     private static int completedTaskCounter = 0;
-    public static ArrayList<Task> tasks = new ArrayList<>();
-    // private static int completedTaskIndex = 0;
+    private static ArrayList<Task> tasks = new ArrayList<>();
     private static Task recentTask;
 
     public Task(String description){
@@ -60,6 +59,7 @@ public class Task {
             completedTaskCounter--;
         }
         tasks.remove(taskNumber);
+        System.out.println("The deleted task is : " + recentTask);
         taskCounter--;
     }
 
@@ -71,8 +71,8 @@ public class Task {
         completedTaskCounter -= -1;
     }
 
-    public static Task getRecentTask(boolean getCompletedTask) {
-        if (getCompletedTask) {
+    public static Task getRecentTask(boolean manipulatedTask) {
+        if (manipulatedTask) {
             return recentTask;
         } else {
             return tasks.get(getTaskCounter() - 1);
@@ -81,6 +81,10 @@ public class Task {
 
     public static void incrementTaskCounter(){
         taskCounter++;
+    }
+
+    public static void incrementCompletedTaskCounter() {
+        completedTaskCounter++;
     }
 
     // standard string return format for all tasks subclasses expand on this format
@@ -94,7 +98,6 @@ public class Task {
         if (queryTask > taskCounter - 1) {
             throw new TaskNotExistException();
         }
-
     }
 
     public static void checkTaskComplete(int queryTask) throws  TaskAlreadyCompletedException {
@@ -102,5 +105,4 @@ public class Task {
             throw new TaskAlreadyCompletedException();
         }
     }
-
 }

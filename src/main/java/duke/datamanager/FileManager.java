@@ -34,7 +34,6 @@ public class FileManager {
                     Todo newTask = readTodo(taskComponents);
                     Task.addNewTask(newTask);
                     break;
-
             }
         }
     }
@@ -63,7 +62,6 @@ public class FileManager {
             }
             appendToFile(filePath, textToAppend);
         }
-
     }
 
 
@@ -72,6 +70,7 @@ public class FileManager {
         boolean isDone = taskComponents[1].equals("1");
         if (isDone) {
             newTodo.markAsDone();
+            Task.incrementCompletedTaskCounter();
         }
         return newTodo;
     }
@@ -82,6 +81,7 @@ public class FileManager {
         boolean isDone = taskComponents[1].equals("1");
         if (isDone) {
             newDeadline.markAsDone();
+            Task.incrementCompletedTaskCounter();
         }
         return newDeadline;
     }
@@ -92,6 +92,7 @@ public class FileManager {
         boolean isDone = taskComponents[1].equals("1");
         if (isDone) {
             newEvent.markAsDone();
+            Task.incrementCompletedTaskCounter();
         }
         return newEvent;
     }

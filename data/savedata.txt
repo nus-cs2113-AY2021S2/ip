@@ -1,8 +1,9 @@
 Duke's Most Recent Task List
-E | 1 | Use the Force || 2pm at home
-T | 0 | Kill all the Jedi
 D | 0 | Exile to Dagobah || 5pm Coruscant Time
 E | 0 | Kill the younglings || After lunch
 D | 1 | Kidnap the chancellor || Whenever tbh
 T | 0 | Learn about Jacen Solo
 T | 1 | Find out about Tenel-Ka and Allana
+T | 0 | Figure out what happened to Darth Krayt
+D | 0 | Blow up Death Star II || 2pm - Near Endor
+E | 0 | Hear the tragedy of Darth Plagueis the Wise || Senate chambers
