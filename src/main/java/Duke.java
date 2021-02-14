@@ -65,6 +65,22 @@ public class Duke {
                     System.out.println(DECO_LINE);
                 }
                 System.out.println(DECO_LINE);
+            } else if (input.split(" ")[0].equals("remove")) {
+                System.out.println(DECO_LINE);
+                try {
+                    int ind = Integer.parseInt(input.split(" ")[1]) - 1;
+                    if (ind < inputs.size() && ind >= 0) {
+                        inputs.remove(ind);
+                        System.out.println(" Task is removed!");
+                    } else {
+                        System.out.println(" Index is out of boundary!");
+                    }
+                } catch (NumberFormatException nfe) {
+                    System.out.println(DECO_LINE);
+                    System.out.println(" Format is wrong!");
+                    System.out.println(DECO_LINE);
+                }
+                System.out.println(DECO_LINE);
             } else if (input.split(" ")[0].equals("todo")) {
                 String task = input.split(" ", 2)[1];
                 inputs.add(new Todo(task));
