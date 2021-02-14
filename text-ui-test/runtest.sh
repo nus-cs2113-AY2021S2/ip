@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+cwd=$(pwd)
+cd $(dirname "$0")
 
 # create bin directory if it doesn't exist
 if [ ! -d "../bin" ]
@@ -36,3 +38,5 @@ else
     echo "Test result: FAILED"
     exit 1
 fi
+
+cd $cwd

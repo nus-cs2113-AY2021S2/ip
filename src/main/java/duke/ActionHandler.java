@@ -24,6 +24,10 @@ public class ActionHandler {
 
     // Print out everything in the list, index starts from 1
     protected static void listHandler(Vector<Task> tasks) {
+        if (tasks.size() == 0) {
+            Helper.printlnWithIndent("You don't have a task in your list!");
+            return;
+        }
         Helper.printlnWithIndent("Here are the tasks in your list:");
         for (int i = 0; i < tasks.size(); i += 1) {
             Helper.printlnWithIndent(String.format("%d.\t%s", i + 1, tasks.get(i)));
@@ -48,6 +52,28 @@ public class ActionHandler {
                 tasks.set(index - 1, task);
 
                 Helper.printlnWithIndent("Nice! I've marked this task as done:");
+                Helper.printlnWithIndent("\t" + task);
+            } catch (NumberFormatException e) {
+                throw new InvalidInputException(InputExceptionType.NOT_INTEGER, e);
+            }
+        }
+    }
+
+    // Delete a task from the list
+    protected static void deleteHandler(Vector<Task> tasks, String[] arguments) throws InvalidInputException {
+        if (arguments.length < 2) {
+            // An index must be provided for the task to be marked "done"
+            Helper.printlnWithIndent("You will need to give me an index, like this: `delete 2`.");
+        } else {
+            try {
+                int index = Integer.parseInt(arguments[1]);
+                if (index > tasks.size() || index < 1) {
+                    // This index is out of the boundary of our database
+                    throw new InvalidInputException(InputExceptionType.INDEX_OUT_OF_BOUND);
+                }
+
+                Task task = tasks.remove(index - 1);
+                Helper.printlnWithIndent("Sure! I've removed this task:");
                 Helper.printlnWithIndent("\t" + task);
             } catch (NumberFormatException e) {
                 throw new InvalidInputException(InputExceptionType.NOT_INTEGER, e);
