@@ -1,6 +1,8 @@
 import dukehandler.MessagePrinter;
 import dukehandler.TaskManager;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
@@ -9,10 +11,28 @@ public class Duke {
     public static void main(String[] args) {
         MessagePrinter.printGreetMessage();
         String fullCommand;
+        String filePath = new File("").getAbsolutePath();
+        File f = new File(filePath+"/tasks.txt");
+        try {
+            if (f.createNewFile()) {
+                System.out.println(" I have created a file at this location:\n "
+                                + f.getAbsolutePath() + "\n"
+                                + " to store all your tasks!");
+            }
+            TaskManager.loadTasksFromFile(f.getAbsolutePath());
+        } catch (IOException e) {
+            MessagePrinter.printIOErrorMessage();
+        }
+
         Scanner in = new Scanner(System.in); // when typing input manually
         while (true) {
             fullCommand = in.nextLine();
             if (fullCommand.equals("bye")) {
+                try {
+                    TaskManager.saveTasksToFile(f.getAbsolutePath());
+                } catch (IOException e) {
+                    MessagePrinter.printIOErrorMessage();
+                }
                 break;
             }
             System.out.println(dottedLine);

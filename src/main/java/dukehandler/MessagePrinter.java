@@ -23,7 +23,8 @@ public class MessagePrinter {
 
     public static void printHelpMessage() {
         String helpMessage = " Try entering commands like : help, list, done, bye,\n"
-                + " todo <taskName> || deadline <taskName> /by <time>"
+                + " todo <taskName>\n"
+                + " || deadline <taskName> /by <time>\n"
                 + " || event <taskName> /at <time> ||\n"
                 + " Remember: be nice!";
         System.out.println(helpMessage);
@@ -84,4 +85,9 @@ public class MessagePrinter {
         System.out.println(" Type 'help' if you need help.");
     }
 
+    public static void printIOErrorMessage() {
+        String IOErrorMessage = dottedLine + "\n OOPS!!! I couldn't access your file\n" +
+                " because of an IO Error. Sorry!\n" + dottedLine;
+        System.out.println(IOErrorMessage);
+    }
 }

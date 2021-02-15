@@ -9,9 +9,14 @@ ____________________________________________________________
  Hello! I'm Duke :D Be nice to me:)
 
  Try entering commands like : help, list, done, bye,
- todo <taskName> || deadline <taskName> /by <time> || event <taskName> /at <time> ||
+ todo <taskName>
+ || deadline <taskName> /by <time>
+ || event <taskName> /at <time> ||
  Remember: be nice!
 ____________________________________________________________
+ I have created a file at this location:
+ /Users/newaccount/Repositories/ip/text-ui-test/tasks.txt
+ to store all your tasks!
 ____________________________________________________________
  The list is empty. Add a task to the list now!
  Type 'help' if you need help.
@@ -194,7 +199,9 @@ ____________________________________________________________
 ____________________________________________________________
 ____________________________________________________________
  Try entering commands like : help, list, done, bye,
- todo <taskName> || deadline <taskName> /by <time> || event <taskName> /at <time> ||
+ todo <taskName>
+ || deadline <taskName> /by <time>
+ || event <taskName> /at <time> ||
  Remember: be nice!
 ____________________________________________________________
 ____________________________________________________________
