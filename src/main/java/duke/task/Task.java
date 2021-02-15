@@ -10,6 +10,11 @@ public class Task {
         this.isDone = false;
     }
 
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -33,5 +38,9 @@ public class Task {
     @Override
     public String toString() {
         return String.format("[%s] %s", getStatusIcon(), description);
+    }
+
+    public String toFileEntry() {
+        return String.format("| %d | %s", isDone ? 1 : 0, description);
     }
 }
