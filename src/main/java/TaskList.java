@@ -1,9 +1,15 @@
+import java.io.IOException;
 import java.util.ArrayList;
 
 import Exceptions.*;
 
 public class TaskList {
-    protected ArrayList<Task> tasksLists = new ArrayList<>();
+    protected static ArrayList<Task> tasksLists = new ArrayList<>();
+    protected Storage storage = new Storage();
+
+    public static void addFromFile(Task input) {
+        tasksLists.add(input);
+    }
 
     public void addTask(Task task) {
         task.toString();
@@ -17,7 +23,7 @@ public class TaskList {
         }
     }
 
-    public void addEvent(String inputs) throws WrongEventFormatException {
+    public void addEvent(String inputs) throws WrongEventFormatException, IOException {
         if (!inputs.matches("\".+/at.+\"")) throw new WrongEventFormatException();
 
         String command = inputs.substring(inputs.indexOf(" ") + 1);
@@ -25,10 +31,11 @@ public class TaskList {
         String date = inputs.substring(inputs.indexOf("at") + 3);
 
         Event newEvent = new Event(title, date);
+        storage.writeToFile(inputs);
         addTask(newEvent);
     }
 
-    public void addDeadline(String inputs) throws WrongDeadlineFormatException {
+    public void addDeadline(String inputs) throws WrongDeadlineFormatException, IOException {
         if (!inputs.matches("\".+/by.+\"")) throw new WrongDeadlineFormatException();
 
         String command = inputs.substring(inputs.indexOf(" ") + 1);
@@ -36,14 +43,16 @@ public class TaskList {
         String date = inputs.substring(inputs.indexOf("at") + 3);
 
         Deadline newDeadline = new Deadline(title, date);
+        storage.writeToFile(inputs);
         addTask(newDeadline);
     }
 
-    public void addTodo(String inputs) throws WrongToDoFormatException {
+    public void addTodo(String inputs) throws WrongToDoFormatException, IOException {
         String title = inputs.substring(inputs.indexOf(" ") + 1);
         if (inputs.equals("todo")) throw new WrongToDoFormatException();
 
         Todo newTodo = new Todo(title);
+        storage.writeToFile(inputs);
         addTask(newTodo);
     }
 
