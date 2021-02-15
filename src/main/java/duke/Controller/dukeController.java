@@ -1,9 +1,12 @@
 package duke.Controller;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 import duke.Tasks.*;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.FileNotFoundException;
 
 public class dukeController {
     public dukeController() {}
@@ -183,5 +186,47 @@ public class dukeController {
             System.out.println("Cannot save file my G!");
             e.printStackTrace();
         }
+    }
+
+    public ArrayList<Task> printFileContents() throws FileNotFoundException {
+        ArrayList<Task> tasks = new ArrayList<Task>();
+        try {
+            File saveDuke = new File("saveDuke.txt");
+            Scanner fileReader = new Scanner(saveDuke);
+            while (fileReader.hasNext()) {
+                String line = fileReader.nextLine();
+                String[] stringSplit = line.split(" | ");
+                if (stringSplit[0].equals("T")) {
+                    Task task = new toDo(stringSplit[4]);
+                    if (stringSplit[2].equals("0")) {
+                        task.setAsDone(false);
+                    } else {
+                        task.setAsDone(true);
+                    }
+                    tasks.add(task);
+                } else if (stringSplit[0].equals("E")) {
+                    Task task = new Event(stringSplit[4], stringSplit[6]);
+                    if (stringSplit[2].equals("0")) {
+                        task.setAsDone(false);
+                    } else {
+                        task.setAsDone(true);
+                    }
+                    tasks.add(task);
+                } else if (stringSplit[0].equals("D")) {
+                    Task task = new Deadline(stringSplit[4], stringSplit[6]);
+                    if (stringSplit[2].equals("0")) {
+                        task.setAsDone(false);
+                    } else {
+                        task.setAsDone(true);
+                    }
+                    tasks.add(task);
+                }
+            }
+            fileReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Cannot load file...you are clapped! Churn up new list please.");
+            return null;
+        }
+        return tasks;
     }
 }

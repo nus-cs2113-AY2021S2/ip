@@ -12,7 +12,10 @@ public class Duke {
         dukeController duke = new dukeController();
         duke.displayWelcome();
 
-        ArrayList <Task> tasks= new ArrayList <Task> ();
+        ArrayList <Task> tasks = duke.printFileContents();
+        if (tasks == null) {
+            tasks = new ArrayList<Task>();
+        }
         Scanner sc = new Scanner(System.in);
         Boolean isSame = true;
         while (isSame) {
