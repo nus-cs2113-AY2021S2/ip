@@ -1,6 +1,6 @@
 package duke.task;
 
-public class Task {
+public abstract class Task {
     protected String description;
     /** Boolean to track if task is completed */
     protected boolean isDone;
@@ -40,6 +40,15 @@ public class Task {
      */
     public String getTaskStatusIcon() {
         return (isDone ? "X" : " ");
+    }
+
+    /**
+     * Returns the string format for file storing. 
+     */
+    public abstract String getTaskType();
+
+    public String toStorageString() {
+        return String.format("%s, %s, %s", getTaskType(), String.valueOf(getTaskStatus()), getTaskDescription());
     }
 
     public String toString() {

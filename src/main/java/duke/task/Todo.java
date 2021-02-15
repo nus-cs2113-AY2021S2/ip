@@ -10,6 +10,18 @@ public class Todo extends Task {
         super(description);
     }
 
+    public String getTaskType() {
+        return "todo";
+    }
+ 
+    /**
+     * Returns the string format for file storing. 
+     */
+    @Override
+    public String toStorageString() {
+        return super.toStorageString();
+    }
+
     @Override
     public String toString() {
         return "[T]" + super.toString();
