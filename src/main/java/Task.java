@@ -1,4 +1,4 @@
-public class Task {
+public class Task implements java.io.Serializable{
     protected String description;
     protected boolean isDone;
     protected String typeIcon;
@@ -51,6 +51,18 @@ public class Task {
 
     public void setStatus(boolean isDone){
         this.isDone = isDone;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setTypeIcon(String typeIcon) {
+        this.typeIcon = typeIcon;
+    }
+
+    public void setDeadline(String deadline) {
+        this.deadline = deadline;
     }
 
     public String getDescription() {

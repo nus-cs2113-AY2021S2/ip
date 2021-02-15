@@ -1,7 +1,50 @@
+import java.io.*;
 import java.util.*;
 
 public class Duke {
+    public static void saveToFile(ArrayList<Task> taskItems){
+        String filename = "duke.txt";
+
+        try {
+            FileOutputStream fileStream = new FileOutputStream(filename);
+            ObjectOutputStream outStream = new ObjectOutputStream(fileStream);
+
+            outStream.writeObject(taskItems);
+
+            fileStream.close();
+            outStream.close();
+
+            System.out.println("taskItems have been serialized");
+        }catch(IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
+        ArrayList<Task> taskItems = new ArrayList<Task>();
+        int itemCount = 0;
+        try {
+            File dukeFile = new File("duke.txt");
+            dukeFile.createNewFile();
+            BufferedReader br = new BufferedReader(new FileReader("duke.txt"));
+            if (br.readLine()!= null) {
+                System.out.println("Retrieving list details...");
+                FileInputStream fileStream = new FileInputStream("duke.txt");
+                ObjectInputStream inStream = new ObjectInputStream(fileStream);
+
+                taskItems = (ArrayList<Task>)inStream.readObject();
+
+                fileStream.close();
+                inStream.close();
+            }
+        }catch(IOException e) {
+            System.out.println("IOException occurred");
+            e.printStackTrace();
+        }catch(ClassNotFoundException e) {
+            System.out.println("ClassNotFoundException occurred");
+            e.printStackTrace();
+        }
+
         String logo = "____________________________________________________________\n"
                 + " Hello! I'm Duke\n"
                 + " What can I do for you?\n\n"
@@ -10,8 +53,7 @@ public class Duke {
         Scanner stringScanner = new Scanner(System.in);
         String userQuery = stringScanner.nextLine();
         String userQueryReturn = "";
-        ArrayList<Task> taskItems = new ArrayList<Task>();
-        int itemCount = 0;
+
         while(!userQuery.equalsIgnoreCase("bye")){
             if(userQuery.contains("done")){
                 int doneIndex = Integer.parseInt(userQuery.substring(5));
@@ -21,6 +63,7 @@ public class Duke {
                         + " ["+taskItems.get(doneIndex-1).getTypeIcon()+"]["+taskItems.get(doneIndex-1).getStatusIcon()+"] "+taskItems.get(doneIndex-1).getDescription()+"\n"
                         + "____________________________________________________________\n";
                 System.out.println(userQueryReturn);
+                saveToFile(taskItems);
                 userQuery = stringScanner.nextLine();
             }else if(userQuery.contains("todo")||userQuery.contains("deadline")||userQuery.contains("event")) {
                 taskItems.add(new Task(userQuery));
@@ -37,6 +80,7 @@ public class Duke {
                             + "____________________________________________________________\n";
                 }
                 System.out.println(userQueryReturn);
+                saveToFile(taskItems);
                 userQuery = stringScanner.nextLine();
             }else if(userQuery.equalsIgnoreCase("list")){
                 System.out.println("____________________________________________________________");
