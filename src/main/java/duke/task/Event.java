@@ -8,6 +8,11 @@ public class Event extends Task {
         this.at = at;
     }
 
+    public Event(String description, boolean isDone, String at) {
+        super(description, isDone);
+        this.at = at;
+    }
+
     public String getAt() {
         return at;
     }
@@ -19,5 +24,10 @@ public class Event extends Task {
     @Override
     public String toString() {
         return String.format("[%c]%s (at: %s)", 'E', super.toString(), at);
+    }
+
+    @Override
+    public String toFileEntry() {
+        return String.format("%c %s | %s", 'E', super.toFileEntry(), at);
     }
 }

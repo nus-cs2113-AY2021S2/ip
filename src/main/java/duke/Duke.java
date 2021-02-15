@@ -1,11 +1,16 @@
 package duke;
 
+import duke.io.FileIO;
 import duke.io.TextUI;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 import duke.io.Command;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Duke {
 
@@ -19,6 +24,7 @@ public class Duke {
     private static final String ERROR_COMMAND_MESSAGE = "I'm sorry, but I don't know what that means :-(";
     private static final String ERROR_EMPTY_DEADLINE_BY_MESSAGE = "The deadline's /by argument cannot be empty.";
     private static final String ERROR_EMPTY_EVENT_AT_MESSAGE = "The event's /at argument cannot be empty.";
+    private static final String ERROR_WRITE_TO_FILE_MESSAGE = "Unable to write to file. :<(";
 
     private static final String ERROR_EMPTY_TASK_NUMBER_MESSAGE = "Missing task number,"
             + "please specify a valid task number.";
@@ -30,7 +36,6 @@ public class Duke {
     private static final int MAX_NUMBER_OF_TASKS = 100;
     private static Task[] tasks = new Task[MAX_NUMBER_OF_TASKS];
     private static int numberOfTasks = 0;
-
 
     /**
      * Records a new Todo task into the global task array.
@@ -127,6 +132,11 @@ public class Duke {
         TextUI.printStatements(TASK_ADDED_MESSAGE,
                 String.format(DOUBLE_SPACE_PREFIX_STRING_FORMAT, task),
                 String.format(TASK_TOTAL_TASKS_STRING_FORMAT, numberOfTasks));
+        try {
+            FileIO.writeTasksToFile(new ArrayList<>(Arrays.asList(Arrays.copyOf(tasks, numberOfTasks))));
+        } catch (IOException e) {
+            TextUI.printError(ERROR_WRITE_TO_FILE_MESSAGE);
+        }
     }
 
     /**
@@ -167,6 +177,11 @@ public class Duke {
             Task task = tasks[taskIndex];
             TextUI.printStatements(TASK_MARK_AS_DONE_FORMAT,
                     String.format(DOUBLE_SPACE_PREFIX_STRING_FORMAT, task));
+            try {
+                FileIO.writeTasksToFile(new ArrayList<>(Arrays.asList(Arrays.copyOf(tasks, numberOfTasks))));
+            } catch (IOException e) {
+                TextUI.printError(ERROR_WRITE_TO_FILE_MESSAGE);
+            }
         } catch (NumberFormatException e) {
             TextUI.printError(ERROR_NOT_A_TASK_NUMBER_MESSAGE);
         } catch (DukeException e) {
@@ -286,6 +301,9 @@ public class Duke {
 
     public static void main(String[] args) {
         TextUI.printWelcomeMessage();
+        tasks = FileIO.retrieveTasksFromFile();
+        numberOfTasks = tasks.length;
+        tasks = Arrays.copyOf(tasks, MAX_NUMBER_OF_TASKS);
         while (true) {
             String userCommand = TextUI.getUserInput();
             executeCommand(userCommand);
