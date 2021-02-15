@@ -110,7 +110,7 @@ public class dukeController {
             String numberString = input.substring(indexSpace + 1);
             int taskNumber = Integer.parseInt(numberString);
             try {
-                if (taskNumber > tasks.size()) {
+                if (taskNumber > tasks.size() || taskNumber == 0) {
                     throw new NullPointerException("Are you blind? There is no such task number you fool!");
                 }
                 tasks.get(taskNumber - 1).markAsDone();
@@ -130,7 +130,7 @@ public class dukeController {
             String numberString = input.substring(indexSpace + 1);
             int taskNumber = Integer.parseInt(numberString);
             try {
-                if (taskNumber > tasks.size()) {
+                if (taskNumber > tasks.size() || taskNumber == 0) {
                     throw new NullPointerException("Are you blind? There is no such task number you fool!");
                 }
                 System.out.println("Awwww yeah! I've deleted this task like a beast: ");
