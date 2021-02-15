@@ -21,7 +21,7 @@ public class Constants {
     public static final String COMPLETE_TASK_ERROR_MESSAGE = "There are no tasks to complete.";
     public static final String EMPTY_TASK_LIST_MESSAGE = "You currently have no tasks.";
     public static final String TODO_EMPTY_MESSAGE = "Description of a todo cannot be empty!";
-    public static final String DEADLINE_EMPTY_MESSAGE = "Description of a deadline cannot be empty!";
+    public static final String DEADLINE_EMPTY_MESSAGE = "Description of deadline can't be empty!";
     public static final String DEADLINE_EMPTY_TIME_MESSAGE = "Deadline missing!";
     public static final String EVENT_EMPTY_MESSAGE = "Description of a event cannot be empty!";
     public static final String EVENT_EMPTY_TIME_MESSAGE = "Event missing!";

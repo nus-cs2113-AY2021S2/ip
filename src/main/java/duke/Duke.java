@@ -1,4 +1,4 @@
-package duke.view;
+package duke;
 
 import duke.viewmodel.Logic;
 

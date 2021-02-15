@@ -3,7 +3,9 @@ package duke.data;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -11,9 +13,10 @@ import duke.model.Deadline;
 import duke.model.Event;
 import duke.model.Task;
 import duke.model.Todo;
+import duke.viewmodel.Utils;
 
 public class Repository {
-    private static final String filePath = "./src/main/java/duke/data/tasks.txt";
+    private static final String filePath = "./tasks.txt";
     private static final String nullValue = "-";
 
     public static void save(HashMap<Integer, Task> tasks) {
@@ -32,10 +35,12 @@ public class Repository {
     }
 
     public static HashMap<Integer, Task> read() {
+        List<String> messages = new ArrayList<>();
         try {
             File f = new File(filePath);
             if (f.createNewFile()) {
-                System.out.println("New file created at: " + f.getPath());
+                messages.add("Tasks can be found at: " + f.getPath());
+                Utils.reply(messages);
             }
             Scanner s = new Scanner(f);
             HashMap<Integer, Task> tasks = new HashMap<>();
@@ -49,7 +54,8 @@ public class Repository {
             }
             return tasks;
         } catch (IOException fileNotFoundException) {
-            System.out.println(fileNotFoundException.getMessage());
+            messages.add(fileNotFoundException.getMessage());
+            Utils.reply(messages);
         }
         return null;
     }

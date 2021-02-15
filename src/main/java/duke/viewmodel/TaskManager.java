@@ -3,6 +3,7 @@ package duke.viewmodel;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import duke.data.Repository;
 import duke.model.Deadline;
@@ -70,8 +71,8 @@ public class TaskManager {
      */
     public List<String> fetchTasks() throws DukeException {
         List<String> messages = new ArrayList<>();
-        for (int index = 0; index < storage.size(); index++) {
-            Task task = storage.get(index + 1);
+        for (Map.Entry<Integer,Task> entry : storage.entrySet()) {
+            Task task = entry.getValue();
             messages.add(task.toString());
         }
         if (messages.isEmpty()) {

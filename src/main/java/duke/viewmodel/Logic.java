@@ -13,12 +13,12 @@ public class Logic {
     private static TaskManager taskManager;
 
     private Logic() {
+        taskManager = TaskManager.getInstance();
         messages = new ArrayList<>();
         messages.add(Constants.HELLO_MESSAGE);
         messages.add(Constants.ASSIST_MESSAGE);
         Utils.reply(messages);
         scanner = new Scanner(System.in);
-        taskManager = TaskManager.getInstance();
     }
 
     /**
@@ -42,7 +42,9 @@ public class Logic {
         String sentence = scanner.nextLine();
         String[] words = sentence.split(" ");
         String command = words[0];
-        String task = String.join(" ", Arrays.copyOfRange(words, 1, words.length));
+        String task = String.join(
+            " ", Arrays.copyOfRange(words, 1, words.length)
+        );
         List<String> response;
 
         try {
