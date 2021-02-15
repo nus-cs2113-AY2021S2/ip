@@ -1,6 +1,12 @@
-import java.io.*;
+package Duke;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+// import Duke.Function.*;
+// import Duke.Task.*;
 import java.util.Scanner;
-import java.util.List;
+// import java.util.List;
 
 public class Duke {
     private static final String VERSION = "Duke - Version 1.0";
@@ -49,23 +55,31 @@ public class Duke {
     private static void initItemBook() {
         allItems = new String[CAPACITY][ITEM_DATA_COUNT];
         count = 0;
-        readFile(lists);
+        readFile();
     }
 
-    private static void readFile(List<Task> lists) {
+    private static void readFile() {
         File file = new File("src/main/java/Duke/Duke.txt");
-        if(file.createNewFile()){
-            showToUser("A new file has been created");
-        }else {
-            Scanner readingFile = new Scanner(file);
-            while (readingFile.hasNextLine()){
-                String line = readingFile.nextLine();
-                String[] part = line.split("-",3);
-                allItems[count][0] = part[0];
-                allItems[count][1] = part[1];
-                allItems[count][2] = part[2];
-                count++;
+        try {
+            if (file.createNewFile()) {
+                showToUser("A new file has been created");
+            } else {
+                Scanner readingFile = new Scanner(file);
+                while (readingFile.hasNextLine()) {
+                    String line = readingFile.nextLine();
+                    String[] part = line.split("-", 3);
+                    allItems[count][0] = part[0];
+                    allItems[count][1] = part[1];
+                    allItems[count][2] = part[2];
+                    count++;
+                }
             }
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
     }
 
