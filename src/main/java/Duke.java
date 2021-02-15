@@ -158,7 +158,7 @@ public class Duke {
         while (!user_input.equals("bye")) {
 
             if (user_input.equals("list")) {
-                show_list(num_of_goals);
+                show_list(totalNum());
             } else {
                 int spacing = user_input.indexOf(" ");
                 int slash = user_input.indexOf("/");
@@ -179,9 +179,6 @@ public class Duke {
                     int number_converted = Integer.parseInt(number);
                     delete(number_converted - 1);
                     num_of_goals = num_of_goals - 1;
-                } else if (slash != -1) {
-
-
                 } else if (slash != -1) {
 
                     String taskKind = userDone(user_done);
@@ -234,10 +231,11 @@ public class Duke {
                 }
 
             }
+            changeFile(num_of_goals);
             user_input = sc.nextLine();
         }
-        changeFile(num_of_goals);
-        user_input = sc.nextLine();
+
+
         System.out.println("____________________________________________________________\n"+
                 "     Bye. Hope to see you again soon!\n"+
                 "    ____________________________________________________________");
