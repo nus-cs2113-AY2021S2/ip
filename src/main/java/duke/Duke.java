@@ -15,7 +15,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 /**
- * This class is to build a personal assistant chatbot called "Kaman"
+ * This class is to build a personal assistant chatbot called "Happy"
  * (Customized from Duke)
  *
  * @author NgManSing
@@ -145,7 +145,7 @@ public class Duke {
     }
 
     private static void printWelcomeMsg() {
-        System.out.println("Hello! I am Kaman :)");
+        System.out.println("Hello! I am Happy :)");
         System.out.println("What can I do for you?");
     }
 
