@@ -122,7 +122,6 @@ public class Duke {
             userInput = in.nextLine();
 
             String[] command = userInput.split(" ");
-            String instruction = command[0];
 
             if(isSpecialCharacterPresent(userInput)){
                 continue;
@@ -202,6 +201,14 @@ public class Duke {
                 System.out.println("I have no such feature!");
             }
             break;
+        case "delete":
+            try{
+                deleteCommand(command, tasks);
+            } catch (DukeException e) {
+                System.out.println("The delete command consists of the word delete, and an integer.");
+            } catch (Exception e) {
+                badUserInputMessage();
+            }
         default:
             System.out.println("I have no such feature!");
             break;
@@ -232,6 +239,22 @@ public class Duke {
                 markTaskDoneMessage(tasks, index);
             } else {
                 System.out.println("The input index that you have selected to indicate as done, "+
+                        "is out of the range of existing indexes!");
+            }
+        } else {
+            throw new DukeException();
+        }
+    }
+
+    public static void deleteCommand(String[] command, ArrayList<Task> tasks) throws DukeException{
+        if(command.length == 2 && checkIfInteger(command[1])){
+            int index = Integer.parseInt(command[1]) - 1;
+            if (0 <= index && index < tasks.size()) {
+                // If the given value to delete is an existing index, allow deletion
+                deleteTaskMessage(tasks, index);
+                tasks.remove(index);
+            } else {
+                System.out.println("The input index that you have selected to delete, "+
                         "is out of the range of existing indexes!");
             }
         } else {
@@ -344,6 +367,13 @@ public class Duke {
     public static void markTaskDoneMessage(ArrayList<Task> tasks, int index){
         System.out.println(LINE);
         System.out.println("Nice! I've marked this task as done:");
+        System.out.println(tasks.get(index).toString());
+        System.out.println(LINE);
+    }
+
+    public static void deleteTaskMessage(ArrayList<Task> tasks, int index){
+        System.out.println(LINE);
+        System.out.println("Noted! I have removed this task:");
         System.out.println(tasks.get(index).toString());
         System.out.println(LINE);
     }
