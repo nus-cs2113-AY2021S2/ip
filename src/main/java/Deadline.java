@@ -1,6 +1,7 @@
 public class Deadline extends Task {
 
     private final String dateBy;
+    private int numberOfDaysLeft;
 
 
     public Deadline(String task, String dateBy) {
@@ -13,9 +14,12 @@ public class Deadline extends Task {
         return (isDone ? "[D][\u2713]" : "[D][\u2718]"); //return tick or X symbols
     }
 
+    @Override
     public String getDescription() {
-        String deadlineDescription = String.format("%s(by: %s)", description, dateBy);
+        String deadlineDescription = String.format("%s (by: %s)", description, dateBy);
         return deadlineDescription;
     }
+
+
 
 }

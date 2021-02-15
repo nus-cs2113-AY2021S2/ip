@@ -13,7 +13,7 @@ public class Event extends Task {
     }
 
     public String getDescription() {
-        String deadlineDescription = String.format("%s(at:%s)", description, eventDateBy);
+        String deadlineDescription = String.format("%s (at: %s)", description, eventDateBy);
         return deadlineDescription;
     }
 

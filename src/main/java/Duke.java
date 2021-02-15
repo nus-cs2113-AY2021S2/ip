@@ -5,12 +5,12 @@ public class Duke {
     static final String lineDivider = "\t__________________________________________________________________________\n";
 
     static final String dukeKeywords = "\t\t Use 'todo', 'deadline' , 'event' to enter tasks!\n" +
-                                       "\t\t Use 'list' to view tasks!\n";
+            "\t\t Use 'list' to view tasks!\n";
     public static final String LOGO = " ____        _        \n"
-                                    + "|  _ \\ _   _| | _____ \n"
-                                    + "| | | | | | | |/ / _ \\\n"
-                                    + "| |_| | |_| |   <  __/\n"
-                                    + "|____/ \\__,_|_|\\_\\___|\n";
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
 
     static final String dukeGreeting =
             String.format("%s%s\t Hello! I'm Duke - your personal task manager \n%s%s",
@@ -24,17 +24,41 @@ public class Duke {
 
     static Scanner sc = new Scanner(System.in);
 
-    public static void echos(){
-        String userInput = sc.nextLine();
-        while (!userInput.toLowerCase().equals("bye")){
-            String echos = String.format("%s\t %s\n%s",lineDivider,userInput.toLowerCase(),lineDivider);
-            System.out.println(echos);
-            userInput = sc.nextLine();
+    public static String extractTaskMessage(String userInput) throws DukeExceptionNoTaskMessage {
+        if (userInput.indexOf(" ") > 0) {
+            return userInput.substring(userInput.indexOf(" ") + 1);
+        } else {
+            String errMessage = String.format("%s\tOOPS!!! The description of a task cannot be empty.\n%s",
+                    lineDivider,
+                    lineDivider);
+            throw new DukeExceptionNoTaskMessage(errMessage);
         }
     }
 
+    public static String extractDateBy(String content) throws DukeExceptionNoDateBy {
+        if (content.contains("//")) {
 
-    public static void taskApp(){
+            // using the limit parameter limits the number outputs the string splits
+            String taskAndDate = content.split("//",2)[1].strip();
+
+            if (taskAndDate.contains("by") || taskAndDate.contains("at")) {
+                return taskAndDate.substring(taskAndDate.indexOf(" ")).strip();
+            } else {
+                return taskAndDate;
+            }
+        } else {
+            String errMessage = String.format("%s\t OOPS!!! For deadlines and events, " +
+                            "there must be a dateby denoted using\n" +
+                            "\t  the '//' symbol (e.g \"deadline task 1 // by Tuesday 2pm\"\n " +
+                            "\t  or \"event task 1 // at 10/2/2021\" ) \n %s",
+                    lineDivider,
+                    lineDivider);
+            throw new DukeExceptionNoDateBy(errMessage);
+
+        }
+    }
+
+    public static void taskApp() throws DukeExceptionNoTaskMessage, DukeExceptionNoDateBy {
         ArrayList<Task> taskList = new ArrayList<>();
         while (true) {
 
@@ -42,50 +66,80 @@ public class Duke {
             String userInput = sc.nextLine();
 
             String commandWord = userInput.split(" ")[0].toLowerCase();
-            String content = userInput.substring(userInput.indexOf(" ") + 1);
+            String content = null;
 
             switch (commandWord) {
                 case "todo":
+                    try {
+                        content = extractTaskMessage(userInput.strip());
+                    } catch (DukeExceptionNoTaskMessage ex) {
+                        System.out.println(ex.getMessage());
+                        continue;
+                    }
                     taskList.add(new Todo(content));
                     addTaskSuccessMessage(taskList, "\tGot it. I've added this task: ");
+
                     break;
                 case "deadline":
-                    String deadlineTask = content.split("/")[0].toLowerCase();
-                    String datelineDateBy = content.split("/")[1];
-                    datelineDateBy = datelineDateBy.substring(datelineDateBy.indexOf(" ")+1);
-                    taskList.add(new Deadline(deadlineTask,datelineDateBy ));
+                    String datelineDateBy = null;
+                    String deadlineTask = null;
+
+                    try {
+                        content = extractTaskMessage(userInput.strip());
+                        datelineDateBy = extractDateBy(content);
+                        deadlineTask = content.split("//")[0].toLowerCase();
+
+                    } catch (DukeExceptionNoTaskMessage | DukeExceptionNoDateBy ex) {
+                        System.out.println(ex.getMessage());
+                        continue;
+                    }
+                    taskList.add(new Deadline(deadlineTask.strip(), datelineDateBy.strip()));
                     addTaskSuccessMessage(taskList, "\tGot it. I've added this deadline: ");
                     break;
+
                 case "event":
-                    String eventTask = content.split("/")[0].toLowerCase();
-                    String eventDateBy = content.split("/")[1];
-                    eventDateBy = eventDateBy.substring(eventDateBy.indexOf(" "));
-                    taskList.add(new Event(eventTask,eventDateBy));
+                    String eventTask = null;
+                    String eventDateBy = null;
+
+                    try{
+                        content = extractTaskMessage(userInput.strip());
+                        eventDateBy = extractDateBy(content);
+                        eventTask = content.split("//")[0].toLowerCase();
+                    } catch (DukeExceptionNoTaskMessage | DukeExceptionNoDateBy ex) {
+                        System.out.println(ex.getMessage());
+                        continue;
+                    }
+                    taskList.add(new Event(eventTask.strip(), eventDateBy.strip()));
                     addTaskSuccessMessage(taskList, "\tGot it. I've added this Event: ");
                     break;
                 case "list":
-                    String listReturnString = String.format("%s%s%s",lineDivider,getList(taskList),lineDivider);
+                    String listReturnString = String.format("%s%s%s", lineDivider, getList(taskList), lineDivider);
                     System.out.println(listReturnString);
                     break;
                 case "done":
-                    markTaskDone(taskList, userInput, content);
+                    markTaskDone(taskList, userInput);
                     break;
                 case "bye":
                     System.out.println(dukeFarewell);
                     System.exit(0);
                     break;
                 default:
-                    System.out.println("Command word not recognised - please start command with " +
-                            "'todo', 'deadline' or 'event'");
+                    String defaultMessage =
+                            String.format("%s \t Command word not recognised - please start command with\n " +
+                                            " \t 'todo', 'deadline' or 'event' \n%s",
+                                    lineDivider,
+                                    lineDivider);
+
+                    System.out.println(defaultMessage);
             }
         }
     }
 
-    public static void markTaskDone(ArrayList<Task> taskList, String userInput, String content){
+    public static void markTaskDone(ArrayList<Task> taskList, String userInput) {
         if (userInput.matches(".*\\d.*")) { // checks if there is a number in done cmd
-            int taskNumber = Integer.parseInt(content) ;
+            int taskNumber = Integer.parseInt(userInput.replaceAll("\\D+",""));
             int indexOfTaskToBeMarked = taskNumber - 1;
-            if (indexOfTaskToBeMarked < taskList.size()){
+            if (indexOfTaskToBeMarked < taskList.size()) {
                 taskList.get(indexOfTaskToBeMarked).setDone(true);
                 String markedTaskAsDoneMessage =
                         String.format("%s\t Nice! I've marked this task as done:\n \t %s %s \n%s",
@@ -94,13 +148,15 @@ public class Duke {
                                 taskList.get(indexOfTaskToBeMarked).getDescription(),
                                 lineDivider);
                 System.out.println(markedTaskAsDoneMessage);
-                } else {
+            } else {
                 String taskDoesNotExistMessage = String.format("%s\t Task does not exist!\n %s \n", lineDivider, lineDivider);
                 System.out.print(taskDoesNotExistMessage);
             }
         } else {
-            String doneErrorPrompt = "Which task do you want to mark done?";
-            String doneListMessage = String.format("%s\t%s\n\t%s\n%s",lineDivider,doneErrorPrompt,getList(taskList),lineDivider);
+            // empty list ! 
+            String doneErrorPrompt = "OOPS!!! Unable to mark task as done as your input is not in the right format!\n " +
+                    "Which task do you want to mark done?";
+            String doneListMessage = String.format("%s%s\n\t%s\n%s", lineDivider, doneErrorPrompt, getList(taskList), lineDivider);
             System.out.println(doneListMessage);
         }
     }
@@ -114,7 +170,7 @@ public class Duke {
     }
 
     public static String getList(ArrayList<Task> taskList) {
-        if(!taskList.isEmpty()) { // userInput == list
+        if (!taskList.isEmpty()) { // userInput == list
             StringBuilder sb = new StringBuilder();
             String listAsString;
             for (int i = 0; i < taskList.size(); i++) {
@@ -134,13 +190,12 @@ public class Duke {
             sb.append("\tEnter \"done _\" to see mark task as done. \n");
             listAsString = sb.toString();
             return listAsString;
-        }
-        else {
+        } else {
             return "List is empty!";
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeExceptionNoDateBy, DukeExceptionNoTaskMessage {
 
         // Greetings
         System.out.println(dukeGreeting);
