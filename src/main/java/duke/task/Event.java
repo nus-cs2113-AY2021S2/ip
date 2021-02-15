@@ -14,4 +14,7 @@ public class Event extends Task {
         return "[EV]" + super.toString() + " (at: " + at + ")";
     }
 
+    public String getAt() {
+        return at;
+    }
 }

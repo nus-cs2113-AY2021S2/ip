@@ -1,4 +1,10 @@
 import java.util.ArrayList;
+import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
 import java.util.Scanner;
 import duke.task.*;
 import duke.exception.*;
@@ -11,7 +17,9 @@ public class Duke {
 
     public static void main(String[] args) {
         displayWelcomeMessage();
+        loadHistory();
         inputAndExecuteCommand();
+        saveHistory();
         displayExitMessage();
     }
 
@@ -24,6 +32,66 @@ public class Duke {
         System.out.print(logo + "\n");
         System.out.print("What do you have to do today?\n");
         System.out.print(COMMANDS + "\n");
+    }
+
+    private static void loadHistory() {
+        String home = System.getProperty("user.dir");
+        createDirectory(home);
+        loadDataFile(home);
+    }
+
+    private static void createDirectory(String home) {
+        Path path = Paths.get(home, "data");
+        try {
+            Files.createDirectory(path);
+        } catch (FileAlreadyExistsException e) {
+            // do nothing
+        } catch (Exception e) {
+            String errorMessage = "ERROR creating directory!\n" + e.getLocalizedMessage();
+            printWithBorder(errorMessage);
+        }
+    }
+
+    private static void loadDataFile(String home) {
+        Path path = Paths.get(home, "data", "duke.txt");
+        if (Files.notExists(path)) {
+            return;
+        }
+        try {
+            List<String> data = Files.readAllLines(path);
+            for (String line : data) {
+                loadTask(line);
+            }
+        } catch (Exception e) {
+            String errorMessage = "ERROR retrieving data!\n" + e.getLocalizedMessage();
+            printWithBorder(errorMessage);
+        }
+    }
+
+    private static void loadTask(String line) {
+        String[] tokens = line.split("~");
+        String taskType = tokens[0];
+        String isDone = tokens[1];
+        String description = tokens[2];
+        Task task = new Task(description);
+        switch (taskType) {
+        case "Todo":
+            task = new Todo(description);
+            break;
+        case "Deadline":
+            String by = tokens[3];
+            task = new Deadline(description, by);
+            break;
+        case "Event":
+            String at = tokens[3];
+            task = new Event(description, at);
+            break;
+        }
+        if (isDone == "1") {
+            task.setIsDone();
+        }
+        taskList.add(task);
+        taskCount += 1;
     }
 
     public static void printWithBorder(String line) {
@@ -197,6 +265,55 @@ public class Duke {
         String taskSuccessfullyDeletedMessage = "Yay! I've successfuly deleted this task:\n    " 
                 + task.toString();
         printWithBorder(taskSuccessfullyDeletedMessage);
+    }
+
+    private static void saveHistory() {
+        String home = System.getProperty("user.dir");
+        Path path = Paths.get(home, "data", "duke.txt");
+        try {
+            Files.deleteIfExists(path);
+            Files.createFile(path);
+            ArrayList<String> listOfTaskDetails = getListOfTaskDetails();
+            Files.write(path, listOfTaskDetails);
+        } catch (IOException e) {
+            String errorMessage = "ERROR saving data!\n" + e.getMessage();
+            printWithBorder(errorMessage);
+        }
+    }
+
+    private static ArrayList<String> getListOfTaskDetails() {
+        ArrayList<String> listOfTaskDetails = new ArrayList<String>();
+        for (Task task : taskList) {
+            if (task == null){
+                break;
+            }
+            String taskType = task.getClass().getSimpleName();
+            String isDone;
+            if (task.isDone()) {
+                isDone = "1";
+            } else {
+                isDone = "0";
+            }
+            String taskDescription = task.getDescription();
+            String taskDetails = taskType + "~" + isDone + "~" + taskDescription;
+            taskDetails = getTaskDetails(task, taskDetails);
+            listOfTaskDetails.add(taskDetails);
+        }
+        return listOfTaskDetails;
+    }
+
+    private static String getTaskDetails(Task task, String taskDetails) {
+        if (task instanceof Deadline) {
+            Deadline deadline = (Deadline) task;
+            String by = deadline.getBy();
+            taskDetails += "~" + by;
+        }
+        if (task instanceof Event) {
+            Event event = (Event) task;
+            String at = event.getAt();
+            taskDetails += "~" + at;
+        }
+        return taskDetails;
     }
 
     private static void displayExitMessage() {
