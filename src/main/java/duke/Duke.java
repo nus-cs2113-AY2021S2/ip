@@ -55,9 +55,6 @@ public class Duke {
         case "done":
             executeCommandDone(userInput.getArguments());
             break;
-        case "save":
-            saveRecords(userInput.getArguments());
-            break;
         case "bye":
             isLoop = isEndProgram(userInput.getArguments());
             break;
@@ -67,18 +64,13 @@ public class Duke {
         return isLoop;
     }
 
-    private static void saveRecords(String[] arguments) {
-        if (arguments.length != 0) {
-            System.out.println("Command \"save\" requires no argument. Please try again!");
-            return;
-        }
+    private static void saveRecords() {
         try {
             FileWriter save = new FileWriter("Records.txt");
             for (Task task : records) {
                 save.write(task.getSaveString() + "\n");
             }
             save.close();
-            System.out.println("The records are saved into the local disk successfully.");
         } catch (IOException e) {
             System.out.println("IOException - File failed to be saved");
             e.printStackTrace();
@@ -141,6 +133,7 @@ public class Duke {
         records.get(index).setAsDone();
         System.out.println("Nice! I've marked this task as done:");
         System.out.println("\t" + records.get(index));
+        saveRecords();
     }
 
     private static void addRecord(String[] detailFragments, String taskType) {
@@ -186,6 +179,7 @@ public class Duke {
             System.out.println("Got it. I've added this task:");
             System.out.println("\t" + records.get(numberOfRecords - 1));
             System.out.printf("Now you have %d tasks in the list.\n", numberOfRecords);
+            saveRecords();
         }
     }
 

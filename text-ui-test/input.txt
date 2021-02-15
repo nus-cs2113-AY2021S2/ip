@@ -15,6 +15,5 @@ done 2
 list
 done
 list 2
-save
 bye again~
 bye

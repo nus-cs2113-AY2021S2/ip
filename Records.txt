@@ -1,3 +1,4 @@
-T|0|123
-D|0|1234|qqp
-E|0|pakj|lll
+T|0|cck
+T|1|lla
+D|0|aac|op
+E|0|00p|op
