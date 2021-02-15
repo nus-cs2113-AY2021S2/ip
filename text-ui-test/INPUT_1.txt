@@ -1,3 +1,4 @@
+clear
 list
 todo complete this project
 deadline CS2113T ip submission /by before the tutorial

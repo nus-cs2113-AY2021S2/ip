@@ -10,6 +10,7 @@ public interface DukeCommands {
     public static final String DEADLINE_COMMAND = "deadline";
     public static final String EVENT_COMMAND = "event";
     public static final String DELETE_COMMAND = "delete";
+    public static final String CLEAR_COMMAND = "clear";
 
 
     /* List of command delimiters, e.g. "/by" for "deadline" */

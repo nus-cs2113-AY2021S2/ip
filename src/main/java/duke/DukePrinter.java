@@ -150,4 +150,11 @@ public class DukePrinter {
         };
         printMessage(exportErrorMessages);
     }
+
+    public static void printTasksClearedMessage() {
+        String[] taskClearedMessages = {
+                "All tasks removed!"
+        };
+        printMessage(taskClearedMessages);
+    }
 }

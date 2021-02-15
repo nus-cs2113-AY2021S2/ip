@@ -58,6 +58,9 @@ public class Duke {
             DukePrinter.writeToFile(tasks, DUKE_EXPORT_DIRECTORY, DUKE_EXPORT_FILENAME);
             isDoneReadingInputs = true;
             break;
+        case DukeCommands.CLEAR_COMMAND:
+            clearAllTasks(tasks);
+            break;
         case DukeCommands.LIST_COMMAND:
             DukePrinter.printTasks(tasks);
             break;
@@ -85,6 +88,11 @@ public class Duke {
             break;
         }
         return isDoneReadingInputs;
+    }
+
+    private static void clearAllTasks(ArrayList<Task> tasks) {
+        tasks.clear();
+        DukePrinter.printTasksClearedMessage();
     }
 
     private static void addTodo(ArrayList<Task> tasks, ArrayList<String> commandArguments) throws DukeException {

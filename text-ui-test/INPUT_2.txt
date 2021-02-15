@@ -1,3 +1,4 @@
+clear
 todo
 deadline /by empty input?
 event       how about some trailing spaces /at    
