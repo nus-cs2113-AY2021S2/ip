@@ -135,7 +135,7 @@ public class Duke {
         if(command.length == 2 && checkIfInteger(command[1])){
             int index = Integer.parseInt(command[1]) - 1;
             if (0 <= index && index < tasks.size()) {
-                // If the given value to delete is an existing index
+                // If the given value to delete is an existing index, allow deletion
                 deleteTaskMessage(tasks, index);
                 tasks.remove(index);
             } else {
