@@ -475,7 +475,7 @@ public class Duke {
         System.out.println("Task " + (index + 1) + " has been deleted:");
         System.out.print("   ");
         taskList.get(index).printTask();
-        System.out.println("Tasks remaining: " + (taskList.size()) + "\n");
+        System.out.println("Tasks remaining: " + (taskList.size() - 1) + "\n");
     }
 
     private static void printNumTasksLeft() {
