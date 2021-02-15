@@ -43,6 +43,17 @@ public class Duke {
                     badUserInputMessage();
                 }
                 break;
+            case "delete":
+                try{
+                    deleteCommand(command, tasks);
+                }
+                catch (DukeException e){
+                    System.out.println("The delete command consists of the word delete, and an integer.");
+                }
+                catch (Exception e){
+                    badUserInputMessage();
+                }
+                break;
             case "todo":
                 try{
                     newItem = todoCommand(command, tasks);
@@ -113,6 +124,22 @@ public class Duke {
                 markTaskDoneMessage(tasks, index);
             } else {
                 System.out.println("The input index that you have selected to indicate as done, "+
+                        "is out of the range of existing indexes!");
+            }
+        } else {
+            throw new DukeException();
+        }
+    }
+
+    public static void deleteCommand(String[] command, ArrayList<Task> tasks) throws DukeException{
+        if(command.length == 2 && checkIfInteger(command[1])){
+            int index = Integer.parseInt(command[1]) - 1;
+            if (0 <= index && index < tasks.size()) {
+                // If the given value to delete is an existing index
+                deleteTaskMessage(tasks, index);
+                tasks.remove(index);
+            } else {
+                System.out.println("The input index that you have selected to delete, "+
                         "is out of the range of existing indexes!");
             }
         } else {
