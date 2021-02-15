@@ -15,7 +15,7 @@ public class Duke {
         String in = sc.nextLine();
         String[] strings = new String[3];
         strings = dc.processInput(in);
-        int count1 = 0;
+        int count1 = tasks.size();
         do {
             int numerate = 0;
             if (in.equals("list")) {

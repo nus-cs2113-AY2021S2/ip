@@ -158,7 +158,7 @@ public class DukeController {
         int numerate;
         numerate = charNumber(in);
         try {
-            if (numerate > tasks.size()) {
+            if (numerate > tasks.size() || numerate <= 0) {
                 throw new NullPointerException("There is no such event in your list");
             }
             System.out.println("--------------------------------------------");
@@ -233,7 +233,7 @@ public class DukeController {
         int numerate;
         numerate = charNumber(in);
         try {
-            if (numerate > tasks.size()) {
+            if (numerate > tasks.size() || numerate <= 0) {
                 throw new NullPointerException("There is no such event in your list");
             }
             System.out.println("--------------------------------------------");
