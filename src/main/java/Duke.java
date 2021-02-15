@@ -1,12 +1,5 @@
-import java.text.NumberFormat;
-import java.util.Locale;
 import java.util.Scanner;
-import java.util.ArrayList;
 import duke.controller.TaskController;
-import duke.exceptions.*;
-import duke.tasks.*;
-
-
 
 public class Duke {
 
@@ -36,6 +29,9 @@ public class Duke {
             }
             else if (task.contains("done")){
                 TaskController.markTaskDone(task);
+            }
+            else if (task.contains("delete")){
+                TaskController.deleteTask(task);
             }
             else {
                 TaskController.addTask(task);

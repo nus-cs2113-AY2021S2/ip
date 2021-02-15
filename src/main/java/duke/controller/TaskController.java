@@ -13,6 +13,7 @@ public class TaskController {
     static final int TODOLENGTH = 4;
     static final int EVENTLENGTH = 5;
     static final int DEADLINELENGTH = 8;
+    static final int DELETELENGTH = 6;
 
 
     public static void printTaskList() {
@@ -108,6 +109,23 @@ public class TaskController {
             System.out.println("OOPS!!! Please choose a valid task index.");
         }
 
+    }
+
+    public static void deleteTask(String task) {
+        try {
+            int idx = Integer.parseInt(String.valueOf(task.charAt(DELETELENGTH+1)));
+            String taskDescription = tasks.get(idx-1).toString();
+            tasks.remove(idx-1);
+            tasksCount--;
+            System.out.println("------------------------------------------");
+            System.out.println("    Noted. I've removed this task: ");
+            System.out.println("    " + taskDescription);
+            System.out.println("    Now you have " + tasksCount + " tasks in the list.");
+        } catch (NumberFormatException e) {
+            System.out.println("OOPS!!! Please enter an integer after 'done'.");
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("OOPS!!! Please choose a valid task index.");
+        }
     }
 
 }
