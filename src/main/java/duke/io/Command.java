@@ -9,4 +9,5 @@ public class Command {
     public static final String EVENT_WORD = "event";
     public static final String EVENT_AT_TOKEN = "/at";
     public static final String DONE_WORD = "done";
+    public static final String DELETE_WORD = "delete";
 }
