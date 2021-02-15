@@ -181,7 +181,7 @@ public class dukeController {
                 writer.write("\n");
             }
             writer.close();
-            System.out.print("Yea cuhhhh... filed saved!");
+            System.out.print("Yea cuhhhh... filed saved!\n");
         } catch (IOException e) {
             System.out.println("Cannot save file my G!");
             e.printStackTrace();
