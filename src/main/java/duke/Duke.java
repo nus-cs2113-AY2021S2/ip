@@ -89,6 +89,7 @@ public class Duke {
 
             case DELETE_COMMAND:
                 runDeleteCommand(input);
+                saveData();
                 break;
 
             default:
