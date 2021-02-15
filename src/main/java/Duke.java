@@ -1,18 +1,28 @@
 import Exceptions.*;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 
 public class Duke {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
 
         TaskList tasks = new TaskList();
         Scanner input = new Scanner(System.in);
+        Storage storage = new Storage();
 
+        File fileName = new File("taskList.txt");
+        if (!fileName.exists()) {
+            fileName.createNewFile();
+        } else {
+            storage.loadFile();
+        }
         while (true) {
             String inputs = input.nextLine();
             try {
@@ -51,6 +61,8 @@ public class Duke {
                 System.out.println("OOPS!!! That input is in the wrong format!");
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
+            } catch (IOException e) {
+                System.out.println("Sorry, something wrong with file");
             }
         }
     }
