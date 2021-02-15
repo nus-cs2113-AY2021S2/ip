@@ -1,29 +1,29 @@
 package duke;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class DukeReader {
     private static Scanner scanner = new Scanner(System.in);
 
-    private static String[] tokenizeInput(String userCommand) {
+    private static ArrayList<String> tokenizeInput(String userCommand) {
         String[] commandTokens = userCommand.split(" ", 2);
         /* Handle empty inputs */
         if (commandTokens.length == 0) {
-            return commandTokens;
+            return new ArrayList<String>();
         }
         /* Make commands case-insensitive */
         commandTokens[0] = commandTokens[0].toLowerCase();
-        String[] commandParsed = commandTokens;
+        ArrayList<String> commandParsed = new ArrayList<String>();
+        commandParsed.add(commandTokens[0]);
         switch (commandTokens[0]) {
         case DukeCommands.DEADLINE_COMMAND:
             if (commandTokens.length < 2) {
                 break;
             }
             String[] commandSplitDeadline = commandTokens[1].split(DukeCommands.DEADLINE_DELIMITER, 2);
-            commandParsed = new String[commandSplitDeadline.length + 1];
-            commandParsed[0] = commandTokens[0];
-            for (int i = 0; i < commandSplitDeadline.length; i++) {
-                commandParsed[i + 1] = commandSplitDeadline[i];
+            for (String argument : commandSplitDeadline) {
+                commandParsed.add(argument);
             }
             break;
         case DukeCommands.EVENT_COMMAND:
@@ -31,10 +31,8 @@ public class DukeReader {
                 break;
             }
             String[] commandSplitEvent = commandTokens[1].split(DukeCommands.EVENT_DELIMITER, 2);
-            commandParsed = new String[commandSplitEvent.length + 1];
-            commandParsed[0] = commandTokens[0];
-            for (int i = 0; i < commandSplitEvent.length; i++) {
-                commandParsed[i + 1] = commandSplitEvent[i];
+            for (String argument : commandSplitEvent) {
+                commandParsed.add(argument);
             }
             break;
         default:
@@ -42,18 +40,21 @@ public class DukeReader {
              * For commands that do not require further tokenization
              * e.g. "todo", "list", "bye"
              */
+            for (int i = 1; i < commandTokens.length; i++) {
+                commandParsed.add(commandTokens[i]);
+            }
             break;
         }
         /* Remove any trailing whitespace from the tokens */
-        for (int i = 0; i < commandParsed.length; i++) {
-            commandParsed[i] = commandParsed[i].trim();
+        for (int i = 0; i < commandParsed.size(); i++) {
+            commandParsed.set(i, commandParsed.get(i).trim());
         }
         return commandParsed;
     }
 
-    public static String[] readUserInput() {
+    public static ArrayList<String> readUserInput() {
         String userInput = scanner.nextLine();
-        String[] userInputTokenized = tokenizeInput(userInput);
+        ArrayList<String> userInputTokenized = tokenizeInput(userInput);
         return userInputTokenized;
     }
 }

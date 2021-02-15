@@ -4,34 +4,42 @@
 	 (Type 'help' for a list of commands)
 	____________________________________________________________
 	____________________________________________________________
-	 You have no tasks right now
-	____________________________________________________________
-	____________________________________________________________
-	 added: [T][ ] complete this project
+	 added: [T][ ] eat
 	 You have 1 task in the list.
 	____________________________________________________________
 	____________________________________________________________
-	 added: [D][ ] CS2113T ip submission (by: before the tutorial)
+	 added: [D][ ] sleep (by: tonight)
 	 You have 2 tasks in the list.
 	____________________________________________________________
 	____________________________________________________________
-	 Here is a list of all your tasks:
-	 1. [T][ ] complete this project
-	 2. [D][ ] CS2113T ip submission (by: before the tutorial)
-	____________________________________________________________
-	____________________________________________________________
-	 Nice! I've marked this task as done:
-	 [T][X] complete this project
-	____________________________________________________________
-	____________________________________________________________
-	 added: [E][ ] CS2101 lecture (on: Tuesdays 10 am)
+	 added: [E][ ] repeat (on: everyday)
 	 You have 3 tasks in the list.
 	____________________________________________________________
 	____________________________________________________________
 	 Here is a list of all your tasks:
-	 1. [T][X] complete this project
-	 2. [D][ ] CS2113T ip submission (by: before the tutorial)
-	 3. [E][ ] CS2101 lecture (on: Tuesdays 10 am)
+	 1. [T][ ] eat
+	 2. [D][ ] sleep (by: tonight)
+	 3. [E][ ] repeat (on: everyday)
+	____________________________________________________________
+	____________________________________________________________
+	 Nice! I've marked this task as done:
+	 [D][X] sleep (by: tonight)
+	____________________________________________________________
+	____________________________________________________________
+	 Here is a list of all your tasks:
+	 1. [T][ ] eat
+	 2. [D][X] sleep (by: tonight)
+	 3. [E][ ] repeat (on: everyday)
+	____________________________________________________________
+	____________________________________________________________
+	 Noted. I've removed this task:
+	 [T][ ] eat
+	 You have 2 tasks in the list.
+	____________________________________________________________
+	____________________________________________________________
+	 Here is a list of all your tasks:
+	 1. [D][X] sleep (by: tonight)
+	 2. [E][ ] repeat (on: everyday)
 	____________________________________________________________
 	____________________________________________________________
 	 Bye. Hope to see you again soon!
