@@ -7,6 +7,8 @@ import duke.task.Task;
 import duke.task.Todo;
 import duke.io.Command;
 
+import java.util.ArrayList;
+
 public class Duke {
 
     private static final String DOUBLE_SPACE_PREFIX_STRING_FORMAT = "  %s";
@@ -28,9 +30,7 @@ public class Duke {
     private static final String ERROR_EMPTY_TASK_STRING_FORMAT = "The description of a %s cannot be empty.";
 
     private static final int MAX_NUMBER_OF_TASKS = 100;
-    private static Task[] tasks = new Task[MAX_NUMBER_OF_TASKS];
-    private static int numberOfTasks = 0;
-
+    private static ArrayList<Task> tasks = new ArrayList<>();
 
     /**
      * Records a new Todo task into the global task array.
@@ -122,11 +122,10 @@ public class Duke {
      * @param task task object to be recorded
      */
     private static void recordTask(Task task) {
-        tasks[numberOfTasks] = task;
-        numberOfTasks++;
+        tasks.add(task);
         TextUI.printStatements(TASK_ADDED_MESSAGE,
                 String.format(DOUBLE_SPACE_PREFIX_STRING_FORMAT, task),
-                String.format(TASK_TOTAL_TASKS_STRING_FORMAT, numberOfTasks));
+                String.format(TASK_TOTAL_TASKS_STRING_FORMAT, tasks.size()));
     }
 
     /**
@@ -134,8 +133,8 @@ public class Duke {
      */
     private static void printAllTasks() {
         TextUI.printStatement(LIST_TASK_MESSAGE);
-        for (int i = 0; i < numberOfTasks; i++) {
-            Task task = tasks[i];
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
             TextUI.printStatement(String.format("%d.%s", i + 1, task));
         }
     }
@@ -144,7 +143,7 @@ public class Duke {
      * Lists all tasks.
      */
     private static void listTasks() {
-        if (numberOfTasks == 0) {
+        if (tasks.size() == 0) {
             TextUI.printStatements(LIST_NO_TASK_MESSAGE);
         } else {
             TextUI.printHorizontalLine();
@@ -163,8 +162,8 @@ public class Duke {
         try {
             int taskNumber = validateTaskDoneArguments(commandArgs);
             int taskIndex = taskNumber - 1;
-            tasks[taskIndex].setDone(true);
-            Task task = tasks[taskIndex];
+            tasks.get(taskIndex).setDone(true);
+            Task task = tasks.get(taskIndex);
             TextUI.printStatements(TASK_MARK_AS_DONE_FORMAT,
                     String.format(DOUBLE_SPACE_PREFIX_STRING_FORMAT, task));
         } catch (NumberFormatException e) {
@@ -185,7 +184,7 @@ public class Duke {
             // -> Upper limit: MAX_NUMBER_OF_TASKS - 1
             throw new DukeException(ERROR_INVALID_TASK_NUMBER_MESSAGE);
         }
-        if (taskNumber <= 0 || taskNumber > numberOfTasks) {
+        if (taskNumber <= 0 || taskNumber > tasks.size()) {
             // Prevents ArrayIndexOutOfBoundsException beyond lower limit:
             // -> Lower limit: 0
             // Prevents NullPointerException beyond index (numberOfTasks - 1).
