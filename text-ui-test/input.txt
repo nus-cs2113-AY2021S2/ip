@@ -25,8 +25,22 @@ done 3
 list
 done 4
 done 3
+delete 250
+delete -1
+delete 3
+list
+delete 4
+list
 help
 hello
 hey
+delete 2
+list
+delete 1
+list
+delete 2
+list
+delete 1
+list
 bye
 

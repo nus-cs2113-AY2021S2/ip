@@ -1,7 +1,9 @@
 package dukehandler;
 
 import exceptions.ExceptionAlreadyTaskMarkedDone;
+import exceptions.ExceptionEmptyList;
 import exceptions.ExceptionIllegalTaskMarkedDone;
+import exceptions.ExceptionIllegalTaskRemoved;
 import exceptions.ExceptionInvalidCommand;
 import exceptions.ExceptionsEmptyCommandDescription;
 
@@ -10,36 +12,94 @@ import taskclasses.Event;
 import taskclasses.Task;
 import taskclasses.ToDo;
 
+import java.util.ArrayList;
+
 public class TaskManager {
-    static Task[] tasks = new Task[100];
-    static int index = 0;
+    static ArrayList<Task> tasks = new ArrayList<>();
 
     public TaskManager() {
+    }
+
+    public static void printAllTasks() {
+        boolean isAllDone = true;
+        if (tasks.isEmpty()) {
+            MessagePrinter.printEmptyListMessage();
+            return;
+        }
+        System.out.println(" Here are the tasks in your list:");
+        for (int i = 1; i < tasks.size() + 1; ++i) {
+            if ((tasks.get(i - 1).getStatusIcon()).equals(" ")) {
+                isAllDone = false;
+            }
+            System.out.println(" " + i + "." + tasks.get(i - 1).toString());
+        }
+        if (isAllDone) {
+            System.out.println(" Woah, all completed! Good job!");
+        }
+    }
+
+    public static void markTaskAsDone(String doneIndexString) {
+        int doneIndexInteger;
+        try {
+            doneIndexInteger = Integer.parseInt(doneIndexString);
+            checkTaskToMarkDone(doneIndexInteger);
+        } catch (ExceptionEmptyList eel) {
+            MessagePrinter.printEmptyListMessage();
+            return;
+        } catch (ExceptionIllegalTaskMarkedDone | NumberFormatException nfe) {
+            MessagePrinter.printDoneOrDeleteTaskErrorMessage("done", tasks.size());
+            return;
+        } catch (ExceptionAlreadyTaskMarkedDone atmd) {
+            System.out.println(" Hey, you've already marked that as done!");
+            return;
+        }
+
+        tasks.get(doneIndexInteger - 1).markAsDone();
+        System.out.println(" Nice! I've marked this task as done:\n "
+                + tasks.get(doneIndexInteger - 1).toString());
+    }
+
+    public static void checkTaskToMarkDone(int doneIndexInt)
+            throws ExceptionIllegalTaskMarkedDone,
+            ExceptionAlreadyTaskMarkedDone,
+            ExceptionEmptyList {
+        if (tasks.isEmpty()) {
+            throw new ExceptionEmptyList();
+        } else if (doneIndexInt < 1 || doneIndexInt > tasks.size()) {
+            throw new ExceptionIllegalTaskMarkedDone();
+        } else if ((tasks.get(doneIndexInt - 1).getStatusIcon()).equals("X")) {
+            throw new ExceptionAlreadyTaskMarkedDone();
+        }
     }
 
     public static void addNewTask(String taskType, String fullCommand) {
         String[] part = fullCommand.split(taskType);
         try {
             checkNewTaskToAdd(taskType, part[1].trim());
+            Task newTask;
             String description = part[1].trim();
             String[] descriptionAndTime;
             String taskName;
             String timeOrDate;
+
             switch (taskType) {
             case "todo":
-                tasks[index] = new ToDo(description);
+                newTask = new ToDo(description);
+                tasks.add(newTask);
                 break;
             case "deadline":
                 descriptionAndTime = description.split("/by");
                 taskName = descriptionAndTime[0].trim();
                 timeOrDate = descriptionAndTime[1].trim();
-                tasks[index] = new Deadline(taskName, timeOrDate);
+                newTask = new Deadline(taskName, timeOrDate);
+                tasks.add(newTask);
                 break;
             case "event":
                 descriptionAndTime = description.split("/at");
                 taskName = descriptionAndTime[0].trim();
                 timeOrDate = descriptionAndTime[1].trim();
-                tasks[index] = new Event(taskName, timeOrDate);
+                newTask = new Event(taskName, timeOrDate);
+                tasks.add(newTask);
                 break;
             }
             printAddedTask();
@@ -72,58 +132,41 @@ public class TaskManager {
 
     public static void printAddedTask() {
         System.out.println(" Got it. I've added this task:");
-        System.out.println("   " + tasks[index].toString());
-        index++;
-        System.out.println(" Now you have " + index + " task"
-                + (index == 1 ? " " : "s ") + "in the list.");
+        System.out.println("   " + tasks.get(tasks.size() - 1).toString());
+        System.out.println(" Now you have " + tasks.size() + " task"
+                + (tasks.size() == 1 ? " " : "s ") + "in the list.");
     }
 
-    public static void markTaskAsDone(String doneIndexString) {
-        int doneIndexInt;
+    public static void removeTask(String removeIndexString) {
+        int removeIndexInt;
         try {
-            doneIndexInt = Integer.parseInt(doneIndexString);
-            checkTaskToMarkDone(doneIndexInt);
-        } catch (NumberFormatException nfe) {
-            MessagePrinter.printDoneTaskErrorMessage("text", 0);
+            removeIndexInt = Integer.parseInt(removeIndexString);
+            checkTaskToRemove(removeIndexInt);
+        } catch (ExceptionIllegalTaskRemoved | NumberFormatException nfe) {
+            MessagePrinter.printDoneOrDeleteTaskErrorMessage("delete", tasks.size());
             return;
-        } catch (ExceptionIllegalTaskMarkedDone itmd) {
-            MessagePrinter.printDoneTaskErrorMessage("number", index);
-            return;
-        } catch (ExceptionAlreadyTaskMarkedDone atmd) {
-            System.out.println(" Hey, you've already marked that as done!");
-            return;
-        }
-
-        tasks[doneIndexInt - 1].markAsDone();
-        System.out.println(" Nice! I've marked this task as done:\n "
-                + tasks[doneIndexInt - 1].toString());
-    }
-
-    public static void checkTaskToMarkDone(int doneIndexInt)
-            throws ExceptionIllegalTaskMarkedDone, ExceptionAlreadyTaskMarkedDone {
-        if (doneIndexInt < 1 || doneIndexInt > index) {
-            throw new ExceptionIllegalTaskMarkedDone();
-        } else if ((tasks[doneIndexInt - 1].getStatusIcon()).equals("X")) {
-            throw new ExceptionAlreadyTaskMarkedDone();
-        }
-    }
-
-    public static void printAllTasks() {
-        boolean isAllDone = true;
-        if (index == 0) {
+        } catch (ExceptionEmptyList eel) {
             MessagePrinter.printEmptyListMessage();
             return;
         }
-        System.out.println(" Here are the tasks in your list:");
-        for (int i = 1; i < index + 1; ++i) {
-            if ((tasks[i - 1].getStatusIcon()).equals(" ")) {
-                isAllDone = false;
-            }
-            System.out.println(" " + i + "." + tasks[i - 1].toString());
-        }
-        if (isAllDone) {
-            System.out.println(" Woah, all completed! Good job!");
+        printRemovedTask(removeIndexInt);
+        tasks.remove(tasks.get(removeIndexInt - 1));
+    }
+    public static void printRemovedTask(int removeIndexInt) {
+        System.out.println(" Noted. I've removed this task:");
+        System.out.println("   " + tasks.get(removeIndexInt - 1).toString());
+        System.out.println(" Now you have " + (tasks.size()-1) + " task"
+                + (tasks.size()-1 == 1 ? " " : "s ") + "in the list.");
+    }
+
+    public static void checkTaskToRemove(int removeIndexInt)
+            throws ExceptionIllegalTaskRemoved, ExceptionEmptyList {
+        if (tasks.isEmpty()) {
+            throw new ExceptionEmptyList();
+        } else if (removeIndexInt < 1 || removeIndexInt > tasks.size()) {
+            throw new ExceptionIllegalTaskRemoved();
         }
     }
-}
 
+
+}

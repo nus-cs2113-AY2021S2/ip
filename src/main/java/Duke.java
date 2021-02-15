@@ -39,6 +39,9 @@ public class Duke {
                 String taskType = partOfCommand[0];
                 TaskManager.addNewTask(taskType, fullCommand);
                 break;
+            case "delete":
+                TaskManager.removeTask(fullCommand.substring(6).trim());
+                break;
             default:
                 MessagePrinter.printGenericErrorMessage();
                 break;

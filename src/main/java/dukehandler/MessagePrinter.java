@@ -53,14 +53,14 @@ public class MessagePrinter {
     }
 
     public static void printInvalidCommandMessage(String taskType) {
-        String invalidCommandMessage = "OOPS!!! The command format for "
+        String invalidCommandMessage = " OOPS!!! The command format for "
                 + taskType + " is wrong.";
         System.out.println(invalidCommandMessage);
         System.out.println(" Type 'help' if you need help.");
     }
 
     public static void printEmptyCommandMessage(String taskType) {
-        String invalidCommandMessage = "OOPS!!! The "
+        String invalidCommandMessage = " OOPS!!! The "
                 + "description or time of a"
                 + (taskType.equals("event") ? "n " : " ")
                 + taskType + " cannot be empty.";
@@ -68,27 +68,14 @@ public class MessagePrinter {
         System.out.println(" Type 'help' if you need help.");
     }
 
-    public static void printDoneTaskErrorMessage(String textOrNumber, int ifNumber) {
-        switch (textOrNumber) {
-        case "text":
-            System.out.println(" Hey, no funny business!\n"
-                    + " Enter a valid command format to"
-                    + " mark a task as complete.\n e.g. done 2");
-            System.out.println(" Type 'help' if you need help.");
-            break;
-        case "number":
-            if (ifNumber == 0) {
-                printEmptyListMessage();
-            } else {
-                System.out.println(" After the 'done' command,\n"
-                        + " enter a valid integer within this range:\n"
-                        + " [1, " + ifNumber + "]\n"
-                        + " Please don't break me:( No tricks!");
-                System.out.println(" Type 'list' to see all the tasks.");
-                System.out.println(" Type 'help' if you need help.");
-            }
-            break;
-        }
+    public static void printDoneOrDeleteTaskErrorMessage(String doneOrDelete, int totalTasks) {
+        System.out.println(" Hey, no funny business!\n"
+                + " After the '" + (doneOrDelete) + "' command,"
+                + " enter a valid integer within this range:\n"
+                + " [1, " + totalTasks + "]\n"
+                + " Please don't break me:( No tricks!");
+        System.out.println(" Type 'list' to see all the tasks.");
+        System.out.println(" Type 'help' if you need help.");
     }
 
     public static void printEmptyListMessage() {
@@ -96,4 +83,5 @@ public class MessagePrinter {
         System.out.println(emptyListMessage);
         System.out.println(" Type 'help' if you need help.");
     }
+
 }
