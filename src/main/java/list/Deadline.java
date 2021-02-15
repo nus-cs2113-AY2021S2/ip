@@ -47,7 +47,8 @@ public class Deadline extends TaskList {
     }
 
     @Override
-    public String getTaskToPrintInFile(){
-        return ("deadline " + this.description + "/" + this.by);
+    public String getTaskToPrintInFile() {
+        return ("deadline " + this.description + "/" + this.by + System.lineSeparator() + this.isDone
+                + System.lineSeparator());
     }
 }

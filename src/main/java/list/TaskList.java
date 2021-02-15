@@ -31,17 +31,21 @@ public class TaskList extends List {
         if (this.isDone) {
             throw new IllegalTaskRedoException();
         }
-        this.isDone = true;
+        setDone();
         System.out.println("Nice! I've marked this task as done:");
         this.printTask();
         this.printDottedLines();
+    }
+
+    public void setDone() {
+        this.isDone = true;
     }
 
     public void printAddedTask() {
         System.out.println("Added " + getTaskDescription());
     }
 
-    public String getTaskToPrintInFile(){
+    public String getTaskToPrintInFile() {
         return "";
     }
 }

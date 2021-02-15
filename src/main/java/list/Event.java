@@ -34,8 +34,10 @@ public class Event extends Deadline {
     public void printAddedTask() {
         System.out.println("Aight Crewmate!! I've got a new event for you!!! (¬‿¬): " + getTaskDescription());
     }
+
     public String getTaskToPrintInFile() {
-        return ("event " + this.description + "/" + this.by);
+        return ("event " + this.description + "/" + this.by + System.lineSeparator() + this.isDone +
+                System.lineSeparator());
     }
 }
 

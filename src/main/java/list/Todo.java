@@ -23,7 +23,7 @@ public class Todo extends TaskList {
     }
 
     @Override
-    public String getTaskToPrintInFile(){
-        return ("todo " + this.description + System.lineSeparator() +this.isDone);
+    public String getTaskToPrintInFile() {
+        return ("todo " + this.description + System.lineSeparator() + this.isDone + System.lineSeparator());
     }
 }

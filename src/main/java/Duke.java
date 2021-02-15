@@ -15,8 +15,9 @@ public class Duke {
 
 
     public static final String CHAT_BOT_NAME = "Arthur";
-    public static final String FILE_PATH = "data/duke.txt";
+    public static final String FILE_PATH = "duke.txt";
     public static ArrayList<TaskList> tasks = new ArrayList<>();
+    public static List dukeList = new List(CHAT_BOT_NAME);
 
     public static void main(String[] args) {
         dukeList.greet();
@@ -24,7 +25,7 @@ public class Duke {
         processCommands();
     }
 
-    public static void loadFromFile(){
+    public static void loadFromFile() {
         try {
             File fd = new File(FILE_PATH); // create a File for the given file path
             Scanner s = new Scanner(fd); // create a Scanner using the File as the source
@@ -32,32 +33,58 @@ public class Duke {
 
             while (s.hasNext()) {
                 selectCommand(s.nextLine());
-                if (s.nextLine().equals("true")){
+                if (s.nextLine().equals("true")) {
                     TaskList t = tasks.get(i);
-                    t.markAsDone();
-                    tasks.set(i,t);
+                    t.setDone();
+                    tasks.set(i, t);
                 }
+                i++;
             }
-        } catch (java.io.IOException e){
-            System.out.println("Your saved data cannot be found or does not exist");
+        } catch (java.io.IOException e) {
+            //System.out.println("Your saved data cannot be found or does not exist");
+            return;
         }
 
     }
 
-    public static void saveToFile(){
-        boolean hasSaved =true;
+    public static void saveToFile() {
+        boolean hasSaved = true;
         do {
             try {
-                FileWriter fw = new FileWriter(FILE_PATH, false);
+                FileWriter fw = new FileWriter(FILE_PATH);
                 for (TaskList t : tasks) {
-                    fw.write(t.getTaskToPrintInFile());
-                    fw.write(t.getIsTaskDone());
+                    if (t instanceof Event) {
+                        Event temp = (Event) t;
+                        try {
+                            fw.write(temp.getTaskToPrintInFile());
+                        } catch (java.io.IOException e) {
+                            temp = null;
+                        }
+
+                    } else if (t instanceof Deadline) {
+                        Deadline temp = (Deadline) t;
+                        try {
+                            fw.write(temp.getTaskToPrintInFile());
+                        } catch (java.io.IOException e) {
+                            temp = null;
+                        }
+
+                    } else if (t instanceof Todo) {
+                        Todo temp = (Todo) t;
+                        try {
+                            fw.write(temp.getTaskToPrintInFile());
+                        } catch (java.io.IOException e) {
+                            temp = null;
+                        }
+                    }
+                    hasSaved = true;
                 }
-                hasSaved = true;
+                fw.close();
             } catch (java.io.IOException e) {
+                File file = new File(FILE_PATH);
                 hasSaved = false;
             }
-        }while (!hasSaved);
+        } while (!hasSaved);
     }
 
 
@@ -142,7 +169,7 @@ public class Duke {
             } catch (IllegalTaskException e) {
                 throw new IllegalTaskException();
             }
-            return;
+            break;
 
         case "todo": {
             addTaskInTodoList(line);
