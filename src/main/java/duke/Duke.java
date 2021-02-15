@@ -1,5 +1,6 @@
 package duke;
 
+import duke.command.CommandType;
 import duke.exception.DukeException;
 import duke.command.UserInput;
 import duke.task.Deadline;
@@ -51,7 +52,10 @@ public class Duke {
             showList(userInput.getArguments());
             break;
         case "done":
-            executeCommandDone(userInput.getArguments());
+            processCommand(userInput.getArguments(), CommandType.done);
+            break;
+        case "delete":
+            processCommand(userInput.getArguments(), CommandType.delete);
             break;
         case "bye":
             isLoop = isEndProgram(userInput.getArguments());
@@ -76,9 +80,9 @@ public class Duke {
         return false;
     }
 
-    private static void executeCommandDone(String[] arguments) {
+    private static void processCommand(String[] arguments, CommandType commandType) {
         if (arguments.length == 0) {
-            System.out.println("Command \"done\" requires an integer argument. Please try again!");
+            System.out.printf("Command \"%s\" requires an integer argument. Please try again!\n", commandType);
             return;
         }
         int targetRecordIndex = -1;
@@ -90,10 +94,29 @@ public class Duke {
         }
 
         if (arguments.length == 1 && isArgumentInteger) {
-            markAsDone(targetRecordIndex);
+            switch (commandType) {
+            case delete:
+                deleteRecord(targetRecordIndex);
+                break;
+            case done:
+                markAsDone(targetRecordIndex);
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid commandType! Program terminated.");
+            }
         } else {
-            System.out.println("Command \"done\" only requires an integer argument. Please try again!");
+            System.out.printf("Command \"%s\" only requires an integer argument. Please try again!\n", commandType);
         }
+    }
+
+    private static void deleteRecord(int index) {
+        if (isIndexOutOfBound(index)) {
+            System.out.println("Invalid input! (Index cannot be out of bounds)");
+            return;
+        }
+        System.out.println("Got it. I've deleted this task:");
+        System.out.println("\t" + records.remove(index));
+        System.out.printf("Now you have %d tasks in the list.\n", records.size());
     }
 
     private static UserInput getUserInput() {
@@ -111,13 +134,17 @@ public class Duke {
     }
 
     private static void markAsDone(int index) {
-        if (index < 0 || index >= records.size()) {
+        if (isIndexOutOfBound(index)) {
             System.out.println("Invalid input! (Index cannot be out of bounds)");
             return;
         }
         records.get(index).setAsDone();
         System.out.println("Nice! I've marked this task as done:");
         System.out.println("\t" + records.get(index));
+    }
+
+    private static boolean isIndexOutOfBound(int index) {
+        return index < 0 || index >= records.size();
     }
 
     private static void addRecord(String[] detailFragments, String taskType) {
@@ -155,7 +182,7 @@ public class Duke {
             }
             break;
         default:
-            throw new IllegalArgumentException("A non-taskType is passed to addRecord.");
+            throw new IllegalArgumentException("A non-taskType is passed to addRecord. Program terminated.");
         }
 
         if (isAdded) {
