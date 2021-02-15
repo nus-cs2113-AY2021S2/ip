@@ -5,6 +5,7 @@ import ip.duke.task.Event;
 import ip.duke.task.Task;
 import ip.duke.task.Todo;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -18,7 +19,7 @@ public class Duke {
         printLine();
         printGreeting();
 
-        Task[] list = new Task[100];
+        ArrayList<Task> list = new ArrayList<>();
         int index = 0;
         int slashPosition = 0;
         Scanner in = new Scanner(System.in);
@@ -27,7 +28,7 @@ public class Duke {
         while (!command.equals("bye")) {
             try {
                 if (command.equals("list")) {
-                    printTasks(list, index);
+                    printTasks(list, list.size());
                 } else if (command.startsWith("todo")) {
                     if (command.length() <= 5) {
                         throw new DukeException("todo");
@@ -68,6 +69,11 @@ public class Duke {
                             throw new DukeException("done");
                         }
                         markDone(list, command);
+                    } else if (command.startsWith("delete")) {
+                        if (command.length() <= 7) {
+                            throw new DukeException("delete");
+                        }
+                        deleteTasks(list, command);
                     } else {
                         printLine();
                         System.out.println("🙁 OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -97,43 +103,54 @@ public class Duke {
         printLine();
     }
 
-    public static void recordTasks(Task[] list, int index, String command, String category) {
+    public static void recordTasks(ArrayList<Task> list, int index, String command, String category) {
         printLine();
         System.out.println("Got it. I've added this task:");
         if (category.equals("todo")) {
-            list[index] = new Todo(command.substring(5));
+            list.add(index, new Todo(command.substring(5)));
         } else {
             String Time = command.substring(command.indexOf("/") + 4);
             if (category.equals("deadline")) {
                 String content = command.substring(9, command.indexOf("/"));
-                list[index] = new Deadline(content, Time);
+                list.add(index, new Deadline(content, Time));
             } else if (category.equals("event")) {
                 String content = command.substring(6, command.indexOf("/"));
-                list[index] = new Event(content, Time);
+                list.add(index, new Event(content, Time));
             }
         }
-        System.out.println(list[index].toString());
+        System.out.println(list.get(index).toString());
         int count = index + 1;
         System.out.println("Now you have " + count + " tasks in the list.");
         printLine();
     }
 
-    public static void markDone(Task[] list, String command) {
+    public static void markDone(ArrayList<Task> list, String command) {
         int i;
         i = Integer.parseInt(command.substring(5));
-        list[i - 1].setDone(true);
+        list.get(i - 1).setDone(true);
         printLine();
         System.out.println("Nice! I've marked this task as done:");
-        System.out.println(" " + " " + list[i - 1].toString());
+        System.out.println(" " + " " + list.get(i - 1).toString());
         printLine();
 
     }
 
-    public static void printTasks(Task[] list, int index) {
+    public static void deleteTasks(ArrayList<Task> list, String command) {
+        printLine();
+        int i = Integer.parseInt(command.substring(7));
+        String content = list.get(i-1).toString();
+        list.remove(i - 1);
+        System.out.println("Noted. I've removed this task: ");
+        System.out.println(content);
+        System.out.println("Now you have " + list.size() + " tasks in the list.");
+        printLine();
+    }
+
+    public static void printTasks(ArrayList<Task> list, int index) {
         printLine();
         System.out.println("Here are the tasks in your list:");
         for (int i = 1; i <= index; i++) {
-            System.out.println(i + "." + list[i - 1].toString());
+            System.out.println(i + "." + list.get(i - 1).toString());
         }
         printLine();
     }
