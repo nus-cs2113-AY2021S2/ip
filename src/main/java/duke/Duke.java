@@ -9,9 +9,6 @@ public class Duke {
     public static final String LINE = "____________________________________________________________";
 
     public static void runProgram(){
-        //TODO
-        // improve this section by making sections more abstract
-        // particularly the switch case block
         Scanner in = new Scanner(System.in);
         String userInput;
         // Instead of using tasks[100], I used an ArrayList.
@@ -114,9 +111,6 @@ public class Duke {
                 // If the given value to set as done is an existing index
                 tasks.get(index).setAsDone();
                 markTaskDoneMessage(tasks, index);
-                //TODO
-                // Currently a task can be marked as done repeatedly.
-                // This does not cause any errors, but may be required to fix
             } else {
                 System.out.println("The input index that you have selected to indicate as done, "+
                         "is out of the range of existing indexes!");
