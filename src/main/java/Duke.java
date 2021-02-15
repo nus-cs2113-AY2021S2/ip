@@ -189,7 +189,10 @@ public class Duke {
             if (input.equalsIgnoreCase("delete")) {
                 throw new WrongFormatException();
             }
-            if (!input.substring(7).matches("[1-9]+")) {
+            if (input.substring(7).matches("0")) {
+                throw new WrongFormatException();
+            }
+            if (!input.substring(7).matches("[0-9]+")) {
                 throw new WrongFormatException();
             }
             int index = Integer.parseInt(input.substring(7)) - 1;
