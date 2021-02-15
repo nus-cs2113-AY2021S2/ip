@@ -59,7 +59,7 @@ public class Duke {
      * Returns if user inputs bye.
      */
     public static void loopCommands() throws IOException {
-        loadData();
+        loadFile();
         Scanner in = new Scanner(System.in);
         while (in.hasNextLine()) {
             String line = in.nextLine();
@@ -368,7 +368,7 @@ public class Duke {
      *
      * @throws IOException if there is IO error.
      */
-    public static void loadData() throws IOException {
+    public static void loadFile() throws IOException {
         File f = new File(FILEPATH);
         f.getParentFile().mkdirs();
         f.createNewFile();
