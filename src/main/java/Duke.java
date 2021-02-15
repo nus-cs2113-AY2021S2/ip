@@ -1,14 +1,13 @@
-package duke;
-
+import java.util.ArrayList;
 import java.util.Scanner;
 import duke.task.*;
 import duke.exception.*;
 
 public class Duke {
     static int taskCount = 0;
-    static Task[] taskList = new Task[100];
+    static ArrayList<Task> taskList = new ArrayList<Task>();
     static final String COMMANDS = "Commands:\n    todo taskName\n    deadline deadlineName /by time\n" 
-            + "    event eventName /at time\n    list\n    done taskNumber\n    help\n    bye\n";
+            + "    event eventName /at time\n    list\n    done taskNumber\n    delete taskNumber\n   help\n    bye\n";
 
     public static void main(String[] args) {
         displayWelcomeMessage();
@@ -82,6 +81,9 @@ public class Duke {
         case "event":
             addEvent(commandArg);
             break;
+        case "delete":
+            deleteTask(commandArg);
+            break;
         default:
             throw new InvalidCommandException(commandType);
         }
@@ -102,6 +104,16 @@ public class Duke {
 
     private static void markTaskAsDone(String commandArg) throws NullCommandArgException, InvalidTaskNumberException {
         checkNullArgs("done", commandArg);
+        int taskNumber = checkNumberValidity(commandArg);
+        
+        Task task = taskList.get(taskNumber - 1);
+        task.setIsDone();
+        String taskSuccessfullyMarkedDoneMessage = "Very nice! I've marked this task as done:\n    " 
+                + task.toString();
+        printWithBorder(taskSuccessfullyMarkedDoneMessage);
+    }
+
+    private static int checkNumberValidity(String commandArg) throws InvalidTaskNumberException {
         int taskNumber;
         try {
             taskNumber = Integer.parseInt(commandArg);
@@ -109,15 +121,10 @@ public class Duke {
             throw new InvalidTaskNumberException(commandArg);
         }
         
-        if (taskNumber < 0 || taskNumber >= taskCount) {
+        if (taskNumber < 1 || taskNumber > taskCount) {
             throw new InvalidTaskNumberException(taskNumber);
         }
-        
-        Task task = taskList[taskNumber - 1];
-        task.setIsDone();
-        String taskSuccessfullyMarkedDoneMessage = "Very nice! I've marked this task as done:\n    " 
-                + task.toString();
-        printWithBorder(taskSuccessfullyMarkedDoneMessage);
+        return taskNumber;
     }
 
     private static void addTodo(String commandArg) throws NullCommandArgException {
@@ -172,12 +179,24 @@ public class Duke {
     }
 
     private static void addTaskToListAndPrintMessage(Task task) {
-        taskList[taskCount] = task;
+        taskList.add(task);
         taskCount += 1;
         String className = task.getClass().getSimpleName();
         String taskSuccessfullyAddedMessage = "Alrighty! I have added this new " + className + ":\n    "
                 + task.toString() + "\nYou now have " + Integer.toString(taskCount) + " tasks in the list.";
         printWithBorder(taskSuccessfullyAddedMessage);
+    }    
+
+    private static void deleteTask(String commandArg) throws NullCommandArgException, InvalidTaskNumberException {
+        checkNullArgs("delete", commandArg);
+        int taskNumber = checkNumberValidity(commandArg);
+
+        Task task = taskList.get(taskNumber - 1);
+        taskList.remove(taskNumber - 1);
+        taskCount -= 1;
+        String taskSuccessfullyDeletedMessage = "Yay! I've successfuly deleted this task:\n    " 
+                + task.toString();
+        printWithBorder(taskSuccessfullyDeletedMessage);
     }
 
     private static void displayExitMessage() {

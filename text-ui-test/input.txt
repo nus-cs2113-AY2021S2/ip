@@ -5,6 +5,10 @@ event lecture /at friday
 list
 done 2
 list
+delete 2
+list
+done 2
+list
 todo
 todo      with a lot of whitespace         
 deadline
@@ -18,5 +22,10 @@ event meeting whitespace         /at            tomorrow
 invalid command test
 done
 done -2
+done 0
 done 21324
+delete
+delete -5
+delete 0
+delete 3498
 bye
