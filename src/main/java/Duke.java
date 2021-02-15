@@ -18,6 +18,7 @@ public class Duke {
     static final int INPUT_CODE_TODO = 4;
     static final int INPUT_CODE_DEADLINE = 5;
     static final int INPUT_CODE_EVENT = 6;
+    static final int INPUT_CODE_DELETE = 7;
 
     // String message constant
     static final String DIVIDER_LINE = "____________________________________________________________";
@@ -121,6 +122,18 @@ public class Duke {
                 System.out.println("Please enter a date or time!");
                 return INPUT_CODE_INVALID;
             }
+        case "delete":
+            try {
+                return validateDeleteCommand(words);
+            } catch (DeleteCommandException e) {
+                taskWarningMessage(userInput);
+                System.out.println("You can not delete a task smaller than 1!");
+                return INPUT_CODE_INVALID;
+            } catch (ArrayIndexOutOfBoundsException e) {
+                taskWarningMessage(userInput);
+                System.out.println("You need a task number behind delete command!!");
+                return INPUT_CODE_INVALID;
+            }
         default:
             return INPUT_CODE_DEFAULT_INVALID;
         }
@@ -158,6 +171,14 @@ public class Duke {
         }
     }
 
+    private static int validateDeleteCommand(String[] words) throws DeleteCommandException {
+        if (Integer.parseInt(words[1]) < 1 || words.length == 1) {
+            throw new DeleteCommandException();
+        } else {
+            return INPUT_CODE_DELETE;
+        }
+    }
+
     // Perform the action give the command
     private static void performAction(int commandCode, String userInput) {
         String taskDescription;
@@ -174,7 +195,7 @@ public class Duke {
             break;
         case INPUT_CODE_DONE:
             System.out.println(DIVIDER_LINE);
-            markTaskAsDone(getDoneIndexFromUserInput(userInput));
+            markTaskAsDone(getIndexFromUserInput(userInput));
             System.out.println(DIVIDER_LINE);
             break;
         case INPUT_CODE_TODO:
@@ -203,6 +224,11 @@ public class Duke {
             taskCount++;
             System.out.println(DIVIDER_LINE);
             break;
+        case INPUT_CODE_DELETE:
+            System.out.println(DIVIDER_LINE);
+            deleteTask(getIndexFromUserInput(userInput));
+            System.out.println(DIVIDER_LINE);
+            break;
         case INPUT_CODE_INVALID:
             System.out.println("Please try again!");
             System.out.println(DIVIDER_LINE);
@@ -218,10 +244,14 @@ public class Duke {
 
     // Print information
     private static void printEntireCollection() {
-        System.out.println(LIST_STARTING_MESSAGE);
-        for(int i = 0; i < taskCount; i++) {
-            System.out.print(i+1 + ".");
-            printTaskDetails(i);
+        if (taskCount == 0) {
+            System.out.println("You have no item in Mushroom Head list!");
+        } else {
+            System.out.println(LIST_STARTING_MESSAGE);
+            for (int i = 0; i < taskCount; i++) {
+                System.out.print(i + 1 + ".");
+                printTaskDetails(i);
+            }
         }
     }
 
@@ -282,25 +312,39 @@ public class Duke {
         return userInputArray[1];
     }
 
-    private static int getDoneIndexFromUserInput(String userInput) {
+    private static int getIndexFromUserInput(String userInput) {
         String[] words = userInput.split(" ");
         int indexResult = Integer.parseInt(words[1]);
         return indexResult;
     }
 
     // Marking the task as completed
-    private static void markTaskAsDone(int doneIndexFromUserInput) {
-        if (doneIndexFromUserInput > taskCount) {
-            System.out.println("There is no task number " + doneIndexFromUserInput + ".");
+    private static void markTaskAsDone(int indexFromUserInput) {
+        if (indexFromUserInput > taskCount) {
+            System.out.println("There is no task number " + indexFromUserInput + " to mark done.");
             System.out.println("Please try again!");
         } else {
-            if (taskArrayList.get(doneIndexFromUserInput-1).isDone()) {
+            if (taskArrayList.get(indexFromUserInput - 1).isDone()) {
                 System.out.println("You have already completed this task.");
             } else {
-                taskArrayList.get(doneIndexFromUserInput-1).setTaskAsDone();
+                taskArrayList.get(indexFromUserInput - 1).setTaskAsDone();
                 System.out.println("Nice! I've marked the task as done:");
-                printTaskDetails(doneIndexFromUserInput-1);
+                printTaskDetails(indexFromUserInput - 1);
             }
+        }
+    }
+
+    // Deleting the task
+    private static void deleteTask(int indexFromUserInput) {
+        if (indexFromUserInput > taskCount) {
+            System.out.println("There is no task number " + indexFromUserInput + " to delete.");
+            System.out.println("Please try again!");
+        } else {
+            System.out.println("Noted. I will remove this task: ");
+            printTaskDetails(indexFromUserInput - 1);
+            taskArrayList.remove(indexFromUserInput - 1);
+            taskCount--;
+            System.out.println("Now you have " + taskCount + " tasks in the list.");
         }
     }
 
