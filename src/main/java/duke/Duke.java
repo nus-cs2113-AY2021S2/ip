@@ -200,9 +200,9 @@ public class Duke {
 
             markJobAsDone(taskList.get(jobNumber));
 
-        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+        } catch (NumberFormatException e) {
             printInvalidInputWarning("");
-        } catch (NullPointerException e) {
+        } catch (NullPointerException | IndexOutOfBoundsException e) {
             printInvalidTaskWarning(jobNumber);
         }
 
@@ -217,7 +217,7 @@ public class Duke {
             return;
         }
 
-        for (int i = 0; i < Task.taskCount; i++) {
+        for (int i = 0; i < taskList.size(); i++) {
             System.out.print(numbering + ". ");
             taskList.get(i).printTask();
             numbering++;
@@ -239,7 +239,7 @@ public class Duke {
 
         Todo newTask = new Todo(job);
 
-        taskList.set(Task.taskCount, newTask);
+        taskList.add(newTask);
         Task.taskCount++;
 
         printTaskAdded(newTask);
@@ -258,7 +258,7 @@ public class Duke {
         }
 
         Deadline newTask = new Deadline(job, by);
-        taskList.set(Task.taskCount, newTask);
+        taskList.add(newTask);
         Task.taskCount++;
 
         printTaskAdded(newTask);
@@ -277,7 +277,7 @@ public class Duke {
         }
 
         Event newTask = new Event(job, at);
-        taskList.set(Task.taskCount, newTask);
+        taskList.add(newTask);
         Task.taskCount++;
 
         printTaskAdded(newTask);

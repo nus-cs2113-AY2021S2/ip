@@ -24,7 +24,8 @@ Added to list:
 Congrats! You've completed: 
    [T][X] some work
 
-Wrong format: ! Enter "help" for a list of available commands and format
+Enter a valid job number. Use the list command to view your current tasks.
+Enter "help" for a list of available commands and format
 
 You don't have that many jobs! Use the list command to view your current tasks.
 Enter "help" for a list of available commands and format
