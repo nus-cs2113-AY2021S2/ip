@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 import duke.model.Deadline;
@@ -19,13 +18,11 @@ public class Repository {
     private static final String filePath = "./tasks.txt";
     private static final String nullValue = "-";
 
-    public static void save(HashMap<Integer, Task> tasks) {
+    public static void save(List<Task> tasks) {
         try {
             FileWriter fw = new FileWriter(filePath);
-            for (Map.Entry<Integer,Task> entry : tasks.entrySet()) {
-                int index = entry.getKey();
-                Task task = entry.getValue();
-                String textInput = convertToFile(index, task);
+            for (Task task : tasks) {
+                String textInput = convertToFile(task);
                 fw.write(textInput + "\n");
             }
             fw.close();
@@ -34,7 +31,7 @@ public class Repository {
         }
     }
 
-    public static HashMap<Integer, Task> read() {
+    public static List<Task> read() {
         List<String> messages = new ArrayList<>();
         try {
             File f = new File(filePath);
@@ -43,13 +40,12 @@ public class Repository {
                 Utils.reply(messages);
             }
             Scanner s = new Scanner(f);
-            HashMap<Integer, Task> tasks = new HashMap<>();
+            List<Task> tasks = new ArrayList<>();
             while (s.hasNext()) {
                 String input = s.nextLine();
                 if (!input.isEmpty()) {
                     Task task = convertToTask(input);
-                    int index = task.getIndex();
-                    tasks.put(index, task);
+                    tasks.add(task);
                 }
             }
             return tasks;
@@ -60,43 +56,39 @@ public class Repository {
         return null;
     }
 
-    private static String convertToFile(int index, Task task) {
-        String stringIndex = Integer.toString(index);
+    private static String convertToFile(Task task) {
         String description = task.getDescription();
         String isDone = task.isTaskDone() ? "T" : "F";
         if (task instanceof Event) {
             String event = ((Event) task).getEvent();
             return String.format(
                 "type:%s," +
-                "index:%s," +
                 "description:%s," +
                 "isDone:%s," +
                 "event:%s," +
                 "deadline:%s",
-                "E",stringIndex, description, isDone, event, nullValue
+                "E", description, isDone, event, nullValue
             );
         }
         if (task instanceof Deadline) {
             String deadline = ((Deadline) task).getDeadline();
             return String.format(
                             "type:%s," +
-                            "index:%s," +
                             "description:%s," +
                             "isDone:%s," +
                             "event:%s," +
                             "deadline:%s",
-                    "D",stringIndex, description, isDone, nullValue, deadline
+                    "D", description, isDone, nullValue, deadline
             );
         }
         if (task instanceof Todo) {
             return String.format(
                             "type:%s," +
-                            "index:%s," +
                             "description:%s," +
                             "isDone:%s," +
                             "event:%s," +
                             "deadline:%s",
-                    "T",stringIndex, description, isDone, nullValue, nullValue
+                    "T",description, isDone, nullValue, nullValue
             );
         }
         return "";
@@ -112,19 +104,18 @@ public class Repository {
             json.put(key,value);
         }
         String type = json.get("type");
-        int index = Integer.parseInt(json.get("index"));
         String description = json.get("description");
         boolean isDone = json.get("isDone").equals("T");
         if (type.equals("T")) {
-            return new Todo(index, description, isDone);
+            return new Todo(description, isDone);
         }
         if (type.equals("E")) {
             String event = json.get("event");
-            return new Event(index, description, isDone, event);
+            return new Event(description, isDone, event);
         }
         if (type.equals("D")) {
             String deadline = json.get("deadline");
-            return new Deadline(index, description, isDone, deadline);
+            return new Deadline(description, isDone, deadline);
         }
         return null;
     }

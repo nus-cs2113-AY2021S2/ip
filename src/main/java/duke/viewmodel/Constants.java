@@ -26,7 +26,7 @@ public class Constants {
     public static final String EVENT_EMPTY_MESSAGE = "Description of a event cannot be empty!";
     public static final String EVENT_EMPTY_TIME_MESSAGE = "Event missing!";
     public static final String TASK_DOES_NOT_EXIST = "Task does not exist!";
-    public static final String INDEX_NUMBER_INPUT_MESSAGE = "Please input a number!";
+    public static final String INDEX_NUMBER_INPUT_MESSAGE = "Please input a valid number!";
 
     public static final int INVALID_COMMAND = 0;
     public static final int EMPTY_TASK_LIST = 100;

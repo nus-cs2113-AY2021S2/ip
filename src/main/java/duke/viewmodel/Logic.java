@@ -60,12 +60,15 @@ public class Logic {
                 break;
             case Constants.DONE:
                 response = taskManager.completeTask(task);
+                taskManager.saveTasksToDisk();
                 break;
             case Constants.DELETE:
                 response = taskManager.deleteTask(task);
+                taskManager.saveTasksToDisk();
                 break;
             default:
                 response = taskManager.addTask(command, task);
+                taskManager.saveTasksToDisk();
             }
             messages.addAll(response);
             Utils.reply(messages);

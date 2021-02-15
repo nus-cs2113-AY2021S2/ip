@@ -1,9 +1,7 @@
 package duke.viewmodel;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import duke.data.Repository;
 import duke.model.Deadline;
@@ -14,7 +12,7 @@ import duke.model.Todo;
 public class TaskManager {
 
     private static TaskManager instance = null;
-    private static HashMap<Integer, Task> storage;
+    private static List<Task> storage;
     private static TaskGenerator taskGenerator;
     
     private TaskManager() {
@@ -43,21 +41,20 @@ public class TaskManager {
     public List<String> addTask(String taskType, String message) throws DukeException {
         List<String> messages = new ArrayList<>();
         Task task;
-        int taskIndex = storage.size() + 1;
         switch (taskType) {
         case Constants.TODO:
-            task = taskGenerator.createTodo(message, taskIndex);
+            task = taskGenerator.createTodo(message);
             break;
         case Constants.DEADLINE:
-            task = taskGenerator.createDeadline(message, taskIndex);
+            task = taskGenerator.createDeadline(message);
             break;
         case Constants.EVENT:
-            task = taskGenerator.createEvent(message, taskIndex);
+            task = taskGenerator.createEvent(message);
             break;
         default:
             throw new DukeException(Constants.INVALID_COMMAND);
         }
-        storage.put(taskIndex, task);
+        storage.add(task);
         messages.add(Constants.ADDED_MESSAGE);
         messages.add(task.getMessage());
         messages.add(String.format("Tasks left: %d",getIncompleteTasksCount()));
@@ -67,13 +64,15 @@ public class TaskManager {
     /**
      * Fetches all previously mentioned messages.
      * @return All tasks in storage.
-     * @throws DukeException When the storage is empty.
+     * @throws DukeException When the storage is empty or index is less than 0.
      */
     public List<String> fetchTasks() throws DukeException {
         List<String> messages = new ArrayList<>();
-        for (Map.Entry<Integer,Task> entry : storage.entrySet()) {
-            Task task = entry.getValue();
-            messages.add(task.toString());
+        int index = 1;
+        for (Task task : storage) {
+            String taskDetail = String.format("%d.%s", index, task.getMessage());
+            messages.add(taskDetail);
+            index++;
         }
         if (messages.isEmpty()) {
             throw new DukeException(Constants.EMPTY_TASK_LIST);
@@ -91,21 +90,21 @@ public class TaskManager {
         try {
             List<String> messages = new ArrayList<>();
             int index = Integer.parseInt(stringIndex);
-            Task task = storage.get(index);
+            Task task = storage.get(index - 1);
             Task completedTask = null;
             if (task instanceof Todo) {
-                completedTask = new Todo(index, task.getDescription(), true);
+                completedTask = new Todo(task.getDescription(), true);
             }
             if (task instanceof Deadline) {
-                completedTask = new Deadline(index, task.getDescription(), true,
+                completedTask = new Deadline(task.getDescription(), true,
                         ((Deadline) task).getDeadline());
             }
             if (task instanceof Event) {
-                completedTask = new Event(index, task.getDescription(), true,
+                completedTask = new Event(task.getDescription(), true,
                         ((Event) task).getEvent());
             }
             if (completedTask != null) {
-                storage.put(index, completedTask);
+                storage.set(index - 1, completedTask);
                 messages.add(Constants.DONE_MESSAGE);
                 messages.add(completedTask.getMessage());
                 messages.add(String.format("Tasks left: %d",getIncompleteTasksCount()));
@@ -113,7 +112,7 @@ public class TaskManager {
             } else {
                 throw new DukeException(Constants.NO_TASK_FOUND);
             }
-        } catch (NumberFormatException numberFormatException) {
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new DukeException(Constants.INDEX_FORMAT_ERROR);
         }
     }
@@ -124,7 +123,7 @@ public class TaskManager {
      */
     public int getIncompleteTasksCount() {
         int count = 0;
-        for (Task task : storage.values()) {
+        for (Task task : storage) {
             if (!task.isTaskDone()) {
                 count++;
             }
@@ -142,7 +141,7 @@ public class TaskManager {
         try {
             int index = Integer.parseInt(stringIndex);
             List<String> messages = new ArrayList<>();
-            Task removedTask = storage.remove(index);
+            Task removedTask = storage.remove(index - 1);
             if (removedTask != null) {
                 messages.add(Constants.DELETED_MESSAGE);
                 messages.add(removedTask.getMessage());
@@ -151,7 +150,7 @@ public class TaskManager {
             } else {
                 throw new DukeException(Constants.NO_TASK_FOUND);
             }
-        } catch (NumberFormatException numberFormatException) {
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new DukeException(Constants.INDEX_FORMAT_ERROR);
         }
     }
