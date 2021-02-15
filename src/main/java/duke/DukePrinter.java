@@ -2,12 +2,31 @@ package duke;
 
 import duke.task.Task;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /* This class handles printing outputs to screen */
 public class DukePrinter {
 
     private static final String LINE_DIVIDER = "\t____________________________________________________________";
+
+    public static void writeToFile(ArrayList<Task> tasks, String directory, String filename) throws IOException {
+        File outputDirectory = new File(directory);
+        if (!outputDirectory.exists()) {
+            outputDirectory.mkdir();
+        }
+        File outputFile = new File(directory + filename);
+        if (!outputFile.exists()) {
+            outputFile.createNewFile();
+        }
+        FileWriter outputWriter = new FileWriter(outputFile);
+        for (Task task : tasks) {
+            outputWriter.write(task.exportAsCSV() + "\n");
+        }
+        outputWriter.close();
+    }
 
     private static void printMessage(String[] messageSentences) {
         /* Print sentences at the correct indentation level, with a line divider at the start and end */
@@ -90,10 +109,28 @@ public class DukePrinter {
         printMessage(invalidArgumentsMessage);
     }
 
-    public static void printErrorMessage(String errorMessage) {
+    public static void printDukeErrorMessage(String errorMessage) {
         String[] errorMessages = {
                 errorMessage,
         };
         printMessage(errorMessages);
+    }
+
+    public static void printExportErrorMessage(String errorMessage) {
+        String[] exportErrorMessages = {
+                "Uh oh! I encountered an error exporting your tasks",
+                "Here are the details:",
+                errorMessage
+        };
+        printMessage(exportErrorMessages);
+    }
+
+    public static void printImportErrorMessage(String errorMessage) {
+        String[] exportErrorMessages = {
+                "Uh oh! I encountered an error importing your tasks",
+                "Here are the details:",
+                errorMessage
+        };
+        printMessage(exportErrorMessages);
     }
 }

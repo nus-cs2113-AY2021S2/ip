@@ -21,4 +21,8 @@ public abstract class Task {
         /* Return X if task is done, and space otherwise */
         return (isDone ? "X" : " ");
     }
+
+    public String exportAsCSV() {
+        return description + "," + isDone;
+    }
 }

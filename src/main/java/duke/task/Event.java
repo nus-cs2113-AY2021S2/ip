@@ -1,6 +1,6 @@
 package duke.task;
 
-public class Event extends Task{
+public class Event extends Task {
     private String eventDate;
 
     public Event(String description, String eventDate) {
@@ -11,5 +11,10 @@ public class Event extends Task{
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (on: " + eventDate + ")";
+    }
+
+    @Override
+    public String exportAsCSV() {
+        return "event," + super.exportAsCSV() + "," + eventDate;
     }
 }
