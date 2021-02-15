@@ -16,7 +16,9 @@ REM no error here, errorlevel == 0
 
 REM run multiple test cases
 REM format (start, step, stop)
-for /l %%x in (1, 1, 2) do (
+for /l %%x in (1, 1, 3) do (
+    echo RUNNING TEST #%%x
+
     REM run the program, feed commands from input file and redirect the output to the ACTUAL.TXT
     java -classpath ..\bin duke.Duke < INPUT_%%x.TXT > ACTUAL.TXT
 

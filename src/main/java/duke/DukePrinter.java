@@ -96,4 +96,21 @@ public class DukePrinter {
         };
         printMessage(errorMessages);
     }
+
+    public static void printTaskMarkedDone(Task task) {
+        String[] taskDoneMessages = {
+                "Nice! I've marked this task as done:",
+                task.toString()
+        };
+        printMessage(taskDoneMessages);
+    }
+
+    public static void printTaskDeleted(Task task, int numberOfTasks) {
+        String[] taskDeletedMessages = {
+                "Noted. I've removed this task:",
+                task.toString(),
+                getNumTasksString(numberOfTasks)
+        };
+        printMessage(taskDeletedMessages);
+    }
 }

@@ -1,0 +1,9 @@
+todo eat
+deadline sleep /by tonight
+event repeat /at everyday
+list
+done 2
+list
+delete 1
+list
+bye
