@@ -150,7 +150,7 @@ public class Jarvis {
     }
 
     // JARVIS main task manager
-    public void performTask() throws InvalidCommandException {
+    public ArrayList<Task> performTask() throws InvalidCommandException {
         String command = in.nextLine();
         if (command.startsWith("bye")) {    // bye
             exitJarvis();
@@ -181,5 +181,6 @@ public class Jarvis {
         } else {    // if invalid command, throw InvalidCommandException
             throw new InvalidCommandException();
         }
+        return tasks;
     }
 }
