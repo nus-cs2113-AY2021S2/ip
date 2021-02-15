@@ -50,15 +50,13 @@ public class Duke {
             sayGoodbye();
             saveFile();
         } catch (IOException e) {
-            System.out.println("IO");
+            System.out.println("IO error.");
             e.printStackTrace();
         }
     }
     /**
      * Loops through all features available.
-     * Returns if user inputs bye or number of tasks exceeds 100.
-     *
-     * @throws IndexOutOfBoundsException if number of tasks exceeds max size.
+     * Returns if user inputs bye.
      */
     public static void loopCommands() throws IOException {
         loadData();
@@ -273,7 +271,7 @@ public class Duke {
             throw new EmptyNameFieldException();
         }
         int index =checkValidDelete(line);
-        if(index == INVALID_INDEX) {
+        if (index == INVALID_INDEX) {
             throw new IllegalAccessException();
         } else {
             Task.totalNumberOfTasks -= 1;
@@ -301,8 +299,7 @@ public class Duke {
         return INVALID_INDEX;
     }
 
-    /* ************************************* Methods used to print stuff **********************************************/
-
+    //************************************** Methods used to print stuff **********************************************/
     /** Method used to print each item for "list" command */
     public static void printListItem(int index, String type, String status, String name, String date) {
         System.out.println(index + ". " + type + "[" + status + "] " + name + " " + date);
@@ -365,8 +362,12 @@ public class Duke {
         }
         printBorderLine();
     }
-
-    /* ********************************************* Methods for File IO **********************************************/
+    //********************************************** Methods for File IO **********************************************/
+    /**
+     * Loads tasks from saved text file. If file does not exist, create a file.
+     *
+     * @throws IOException if there is IO error.
+     */
     public static void loadData() throws IOException {
         File f = new File(FILEPATH);
         f.getParentFile().mkdirs();
@@ -377,6 +378,12 @@ public class Duke {
             Task.totalNumberOfTasks += 1;
         }
     }
+    /**
+     * Converts format of tasks from text file format to program format.
+     *
+     * @param line line from text file.
+     * @return Task in the format of program.
+     */
     public static Task deserializeFile(String line) {
         String[] components = line.split(" \\| ");
         // No fallthrough required
@@ -401,6 +408,11 @@ public class Duke {
         }
         return fileDeadline;
     }
+    /**
+     * Saves all tasks into file after user inputs "bye"
+     *
+     * @throws IOException if there is IO error.
+     */
     public static void saveFile() throws IOException {
         StringBuilder saveText = new StringBuilder();
         for(Task task: Tasks) {
@@ -410,6 +422,13 @@ public class Duke {
         w.write(saveText.toString());
         w.close();
     }
+
+    /**
+     * Convert task from program format to text format to prepare for storage.
+     *
+     * @param task task to convert.
+     * @return converted task.
+     */
     public static String serializeFile(Task task) {
         String serialized = task.getType();
         serialized += " | ";
