@@ -234,9 +234,11 @@ public class Duke {
             return;
         }
 
-        for (int i = 0; i < taskList.size(); i++) {
+        System.out.println("TASK LIST:");
+        
+        for (Task task : taskList) {
             System.out.print(numbering + ". ");
-            taskList.get(i).printTask();
+            task.printTask();
             numbering++;
         }
         System.out.println();
@@ -338,7 +340,7 @@ public class Duke {
 
     private static void printTaskDeleted(int index) {
         System.out.println("Task " + (index + 1) + " has been deleted:");
-        System.out.print("  ");
+        System.out.print("   ");
         taskList.get(index).printTask();
         System.out.println("Tasks remaining: " + (taskList.size()) + "\n");
     }
@@ -387,6 +389,9 @@ public class Duke {
         String commandDeadline = "DEADLINE - \n" +
                 "FORMAT: deadline [(str) job] /by [(str) deadline]";
 
+        String commandDelete = "DELETE - \n" +
+                "FORMAT: delete [(int) index]";
+
 
         System.out.println("COMMAND LIST:");
         System.out.println("-------------");
@@ -394,6 +399,7 @@ public class Duke {
         System.out.println(commandDeadline + '\n');
         System.out.println(commandList + '\n');
         System.out.println(commandDone + '\n');
+        System.out.println(commandDelete + '\n');
         System.out.println("To exit, enter \"bye\"\n");
 
     }

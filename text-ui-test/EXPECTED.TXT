@@ -13,10 +13,15 @@ Added to list:
 [D][ ] some work (by: some time)
 2 tasks in the list
 
+Wrong format: deadline wrong! Enter "help" for a list of available commands and format
+
 Added to list: 
 [E][ ] some work (at: some time)
 3 tasks in the list
 
+Wrong format: event wrong! Enter "help" for a list of available commands and format
+
+TASK LIST:
 1. [T][ ] some work
 2. [D][ ] some work (by: some time)
 3. [E][ ] some work (at: some time)
@@ -30,11 +35,20 @@ Enter "help" for a list of available commands and format
 You don't have that many jobs! Use the list command to view your current tasks.
 Enter "help" for a list of available commands and format
 
-Wrong format: ! Enter "help" for a list of available commands and format
+Wrong format: done abc! Enter "help" for a list of available commands and format
 
+TASK LIST:
 1. [T][X] some work
 2. [D][ ] some work (by: some time)
 3. [E][ ] some work (at: some time)
+
+Task 2 has been deleted:
+   [D][ ] some work (by: some time)
+Tasks remaining: 3
+
+TASK LIST:
+1. [T][X] some work
+2. [E][ ] some work (at: some time)
 
 COMMAND LIST:
 -------------
@@ -49,6 +63,9 @@ FORMAT: list
 
 DONE - 
 FORMAT: done [(int) number]
+
+DELETE - 
+FORMAT: delete [(int) index]
 
 To exit, enter "bye"
 
