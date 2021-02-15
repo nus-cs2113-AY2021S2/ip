@@ -5,21 +5,29 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Duke {
 
     private static final String LINE_DIVIDER = "\t____________________________________________________________";
+    private static final String DUKE_EXPORT_DIRECTORY = "data/";
+    private static final String DUKE_EXPORT_FILENAME = "duke.csv";
 
     public static void main(String[] args) {
+        ArrayList<Task> tasks = new ArrayList<Task>();
+        try {
+            tasks = DukeReader.readFromFile(DUKE_EXPORT_DIRECTORY, DUKE_EXPORT_FILENAME);
+        } catch (IOException ioException) {
+            DukePrinter.printImportErrorMessage(ioException.getMessage());
+        }
         DukePrinter.printWelcomeMessage();
-        interactWithUser();
+        interactWithUser(tasks);
         DukePrinter.printExitMessage();
     }
 
-    private static void interactWithUser() {
-        ArrayList<Task> tasks = new ArrayList<Task>();
+    private static void interactWithUser(ArrayList<Task> tasks) {
         boolean isDoneReadingInputs = false;
         while (!isDoneReadingInputs) {
             ArrayList<String> commandTokens = DukeReader.readUserInput();
@@ -27,16 +35,18 @@ public class Duke {
                 isDoneReadingInputs = executeUserInput(tasks, commandTokens);
             } catch (DukeException dukeException) {
                 String errorMessage = dukeException.getMessage();
-                DukePrinter.printErrorMessage(errorMessage);
+                DukePrinter.printDukeErrorMessage(errorMessage);
             } catch (NumberFormatException numberFormatException) {
                 DukePrinter.printInvalidArgumentsMessage();
+            } catch (IOException ioException) {
+                DukePrinter.printExportErrorMessage(ioException.getMessage());
             }
         }
     }
 
     private static boolean executeUserInput(
             ArrayList<Task> tasks, ArrayList<String> commandTokens)
-            throws DukeException, NumberFormatException {
+            throws DukeException, NumberFormatException, IOException {
         if (commandTokens.size() == 0) {
             throw new DukeException("Please enter a command.\n"
                     + "Try using \"help\" for a list of commands."
@@ -45,6 +55,7 @@ public class Duke {
         boolean isDoneReadingInputs = false;
         switch (commandTokens.get(0)) {
         case DukeCommands.BYE_COMMAND:
+            DukePrinter.writeToFile(tasks, DUKE_EXPORT_DIRECTORY, DUKE_EXPORT_FILENAME);
             isDoneReadingInputs = true;
             break;
         case DukeCommands.LIST_COMMAND:
