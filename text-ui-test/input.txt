@@ -8,11 +8,19 @@ done 3
 list
 deadline return book /by June 6th
 done 500
+done fun
+delete fun
+delete 10
 list
-done
-blah
+delete 3
+list
 blah blah
+
 todo
+deadline
+event
+done
+delete
 deadline return book
 event CS2113 lecture
 bye
