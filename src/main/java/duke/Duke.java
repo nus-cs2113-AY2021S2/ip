@@ -7,6 +7,8 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -53,6 +55,9 @@ public class Duke {
         case "done":
             executeCommandDone(userInput.getArguments());
             break;
+        case "save":
+            saveRecords(userInput.getArguments());
+            break;
         case "bye":
             isLoop = isEndProgram(userInput.getArguments());
             break;
@@ -60,6 +65,24 @@ public class Duke {
             throw new DukeException();
         }
         return isLoop;
+    }
+
+    private static void saveRecords(String[] arguments) {
+        if (arguments.length != 0) {
+            System.out.println("Command \"save\" requires no argument. Please try again!");
+            return;
+        }
+        try {
+            FileWriter save = new FileWriter("Records.txt");
+            for (Task task : records) {
+                save.write(task.getSaveString() + "\n");
+            }
+            save.close();
+            System.out.println("The records are saved into the local disk successfully.");
+        } catch (IOException e) {
+            System.out.println("IOException - File failed to be saved");
+            e.printStackTrace();
+        }
     }
 
     private static void promptUserInputInvalid() {

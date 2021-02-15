@@ -24,4 +24,9 @@ public class Deadline extends Task {
     public String toString() {
         return "[" + TASK_TYPE + "]" + super.toString() + " (by: " + dueDay + ")";
     }
+
+    @Override
+    public String getSaveString() {
+        return TASK_TYPE + super.getSaveString() + "|" + getDueDay();
+    }
 }

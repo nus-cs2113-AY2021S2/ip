@@ -58,6 +58,8 @@ Command entered: done
 Command "done" requires an integer argument. Please try again!
 Command entered: list 2
 Command "list" requires no argument. Please try again!
+Command entered: save
+The records are saved into the local disk successfully.
 Command entered: bye again~
 Command "bye" requires no argument. Please try again!
 Command entered: bye

@@ -28,4 +28,9 @@ abstract public class Task {
         String mark = isDone ? "[X] " : "[ ] ";
         return mark + taskName;
     }
+
+    public String getSaveString() {
+        String mark = isDone ? "|1|" : "|0|";
+        return mark + taskName;
+    }
 }
