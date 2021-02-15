@@ -87,11 +87,7 @@ public class Duke {
         for (int i = index; i < t.length - 1; i++) {
             t[i] = t[i + 1];
         }
-
-
         System.out.println("Now you have " + totalNum() + " task in your list!");
-
-
     }
 
     private static void printFileContents(String filePath) throws FileNotFoundException {
@@ -236,11 +232,10 @@ public class Duke {
         }
 
 
-        System.out.println("____________________________________________________________\n"+
-                "     Bye. Hope to see you again soon!\n"+
+        System.out.println("____________________________________________________________\n" +
+                "     Bye. Hope to see you again soon!\n" +
                 "    ____________________________________________________________");
     }
-
 
 
 }
