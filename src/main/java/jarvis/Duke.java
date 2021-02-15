@@ -61,12 +61,11 @@ public class Duke {
         while (scanner.hasNext()) {
             String line = scanner.nextLine();
             System.out.println("\t\t" + line);
-            toTask(line);
+            toTaskList(line);
         }
-        System.out.println(jarvis.tasks);
     }
 
-    private static void toTask(String line) {
+    private static void toTaskList(String line) {
         int taskIndex = 1;
         int statusIndex = 4;
         int descriptionStartIndex = 7;
