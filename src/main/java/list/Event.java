@@ -13,6 +13,9 @@ public class Event extends Deadline {
         String by;
         try {
             by = lineWords[1];
+            if (by.equals("")) {
+                by = "No Event time!! Noice!!! :)";
+            }
 
         } catch (ArrayIndexOutOfBoundsException e) {
             by = "No Event time!! Noice!!! :)";

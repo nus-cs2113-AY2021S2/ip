@@ -1,9 +1,9 @@
 package list;
 
-public class List {
+public class duke {
     protected String name;
 
-    public List(String name) {
+    public duke(String name) {
         this.name = name;
     }
 
@@ -116,6 +116,22 @@ public class List {
     public void printTraitor() {
         System.out.print("You are abandoning us!!! I trusted you!!!  (　ﾟдﾟ)" + System.lineSeparator());
         printDottedLines();
+    }
+
+    public void printLoading() {
+        System.out.println("Loading your previous data . . . ");
+    }
+
+    public void printEmptyFile() {
+        System.out.println("Your saved file is empty!");
+    }
+
+    public void printNoSavedFile() {
+        System.out.println("Loading New Duke Window . . . ");
+    }
+
+    public void printDeletingTask() {
+        System.out.println(" (o‿∩) Hol' up! I'm deleting this task:");
     }
 
 }

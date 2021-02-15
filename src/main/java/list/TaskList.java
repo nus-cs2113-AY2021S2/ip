@@ -2,7 +2,7 @@ package list;
 
 import exceptions.IllegalTaskRedoException;
 
-public class TaskList extends List {
+public class TaskList extends duke {
     protected String description;
     protected boolean isDone;
 

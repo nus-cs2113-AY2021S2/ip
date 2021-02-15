@@ -26,6 +26,9 @@ public class Deadline extends TaskList {
         String by;
         try {
             by = lineWords[1];
+            if (by.equals("")) {
+                by = "No Deadline!! Hehe! :)";
+            }
 
         } catch (ArrayIndexOutOfBoundsException e) {
             by = "No Deadline!! Hehe! :)";

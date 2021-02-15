@@ -6,8 +6,6 @@ import list.*;
 
 import java.util.ArrayList;
 import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.FileWriter;
 
@@ -17,11 +15,11 @@ public class Duke {
     public static final String CHAT_BOT_NAME = "Arthur";
     public static final String FILE_PATH = "duke.txt";
     public static ArrayList<TaskList> tasks = new ArrayList<>();
-    public static List dukeList = new List(CHAT_BOT_NAME);
+    public static duke dukeList = new duke(CHAT_BOT_NAME);
 
     public static void main(String[] args) {
-        dukeList.greet();
         loadFromFile();
+        dukeList.greet();
         processCommands();
     }
 
@@ -29,70 +27,92 @@ public class Duke {
         try {
             File fd = new File(FILE_PATH); // create a File for the given file path
             Scanner s = new Scanner(fd); // create a Scanner using the File as the source
-            int i = 0;
-
-            while (s.hasNext()) {
-                selectCommand(s.nextLine());
-                if (s.nextLine().equals("true")) {
-                    TaskList t = tasks.get(i);
-                    t.setDone();
-                    tasks.set(i, t);
-                }
-                i++;
-            }
+            readDataFile(s);
+            printOldList();
         } catch (java.io.IOException e) {
-            //System.out.println("Your saved data cannot be found or does not exist");
-            return;
+            dukeList.printNoSavedFile();
         }
+    }
 
+    private static void readDataFile(Scanner s) {
+        int i = 0;
+        dukeList.printLoading();
+        while (s.hasNext()) {
+            selectCommand(s.nextLine());
+            if (s.nextLine().equals("true")) {
+                TaskList t = tasks.get(i);
+                t.setDone();
+                tasks.set(i, t);
+            }
+            i++;
+        }
+    }
+
+    private static void printOldList() {
+        try {
+            printAllLists();
+        } catch (IllegalListException e) {
+            dukeList.printEmptyFile();
+        }
     }
 
     public static void saveToFile() {
         boolean hasSaved = true;
         do {
+            hasSaved = writeToFile(hasSaved);
+        } while (!hasSaved);
+    }
+
+    private static boolean writeToFile(boolean hasSaved) {
+        try {
+            FileWriter fw = new FileWriter(FILE_PATH);
+            hasSaved = true;
+            for (TaskList t : tasks) {
+                hasSaved = writeTaskToFile(fw, t);
+            }
+            fw.close();
+        } catch (java.io.IOException e) {
+            File file = new File(FILE_PATH);
+            hasSaved = false;
+        }
+        return hasSaved;
+    }
+
+    private static boolean writeTaskToFile(FileWriter fw, TaskList t) {
+        boolean hasSaved = true;
+        if (t instanceof Event) {
+            Event temp = (Event) t;
             try {
-                FileWriter fw = new FileWriter(FILE_PATH);
-                for (TaskList t : tasks) {
-                    if (t instanceof Event) {
-                        Event temp = (Event) t;
-                        try {
-                            fw.write(temp.getTaskToPrintInFile());
-                        } catch (java.io.IOException e) {
-                            temp = null;
-                        }
-
-                    } else if (t instanceof Deadline) {
-                        Deadline temp = (Deadline) t;
-                        try {
-                            fw.write(temp.getTaskToPrintInFile());
-                        } catch (java.io.IOException e) {
-                            temp = null;
-                        }
-
-                    } else if (t instanceof Todo) {
-                        Todo temp = (Todo) t;
-                        try {
-                            fw.write(temp.getTaskToPrintInFile());
-                        } catch (java.io.IOException e) {
-                            temp = null;
-                        }
-                    }
-                    hasSaved = true;
-                }
-                fw.close();
+                fw.write(temp.getTaskToPrintInFile());
             } catch (java.io.IOException e) {
-                File file = new File(FILE_PATH);
                 hasSaved = false;
             }
-        } while (!hasSaved);
+
+        } else if (t instanceof Deadline) {
+            Deadline temp = (Deadline) t;
+            try {
+                fw.write(temp.getTaskToPrintInFile());
+            } catch (java.io.IOException e) {
+                hasSaved = false;
+            }
+
+        } else if (t instanceof Todo) {
+            Todo temp = (Todo) t;
+            try {
+                fw.write(temp.getTaskToPrintInFile());
+            } catch (java.io.IOException e) {
+                hasSaved = false;
+            }
+        }
+        return hasSaved;
     }
 
 
     private static void processCommands() {
         String line;
         Scanner in = new Scanner(System.in);
-
         boolean hasToContinue = true;
+
         dukeList.printHelp();
         while (hasToContinue) {
             line = in.nextLine();
@@ -232,6 +252,7 @@ public class Duke {
         }
 
         TaskList t = tasks.get(index - 1);
+        dukeList.printDeletingTask();
         t.printTask();
         tasks.remove(index - 1);
         if (tasks.size() > 0) {
