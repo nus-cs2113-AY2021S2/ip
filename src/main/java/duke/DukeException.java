@@ -1,3 +1,5 @@
+package duke;
+
 public class DukeException {
 
     public static boolean checkTodo(String command) {
