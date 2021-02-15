@@ -2,10 +2,9 @@ ____________________________________________________________
     Hi! I'm Duke (:
     What can I do for you today?
 ____________________________________________________________
-Please enter a task!
 Gotcha! I've added this task:
-[T][ ] borrow book
+[T][ ] read book
 Only 1 task in the list
 Gotcha! I've added this task:
-[D][ ] return book (by: sunday)
-3 tasks left in the list
+[E][ ] eat lunch with friends (at: nus)
+2 tasks left in the list
