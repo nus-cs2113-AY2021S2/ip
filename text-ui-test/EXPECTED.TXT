@@ -58,6 +58,18 @@ Command entered: done
 Command "done" requires an integer argument. Please try again!
 Command entered: list 2
 Command "list" requires no argument. Please try again!
+Command entered: delete
+Command "delete" requires an integer argument. Please try again!
+Command entered: delete 10
+Invalid input! (Index cannot be out of bounds)
+Command entered: delete 2
+Got it. I've deleted this task:
+	[D][X] Task-2 (by: 10:00am)
+Now you have 2 tasks in the list.
+Command entered: list
+Here is your task List:
+1. [T][ ] Task-1
+2. [E][ ] Task-3 (at: tmr)
 Command entered: bye again~
 Command "bye" requires no argument. Please try again!
 Command entered: bye
