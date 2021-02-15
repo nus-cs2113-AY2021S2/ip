@@ -1,5 +1,6 @@
 package duke;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import duke.task.*;
 import duke.error.*;
@@ -11,6 +12,7 @@ public class Duke {
     private static final String COMMAND_EVENT_WORD = "event";
     private static final String COMMAND_MARK_WORD = "done";
     private static final String COMMAND_LIST_WORD = "list";
+    private static final String COMMAND_DELETE_WORD = "delete";
     private static final String COMMAND_EXIT_WORD = "bye";
     
     // Display messages. 
@@ -19,6 +21,7 @@ public class Duke {
     private static final String MESSAGE_ADDED = "Got it. I've added this task: ";
     private static final String MESSAGE_MARKED = "Nice! I've marked this task as done: ";
     private static final String MESSAGE_LIST = "Here are the tasks in your list: ";
+    private static final String MESSAGE_DELETE = "Noted. I have removed this task: ";
     private static final String MESSAGE_EXIT = "Bye. Hope to see you again soon! ";
     private static final String MESSAGE_NUMBER_OF_TASKS = "You have %s task(s) in the list. ";
     private static final String ERROR_INDEX_OUT_OF_RANGE = "Index out of range. ";
@@ -32,6 +35,7 @@ public class Duke {
     private static final String MESSAGE_TODO_SYNTAX = " todo <task name>";
     private static final String MESSAGE_DEADLINE_SYNTAX = " deadline <task name> /by <date>";
     private static final String MESSAGE_EVENT_SYNTAX = " event <task name> /at <date>";
+    private static final String MESSAGE_DELETE_SYNTAX = "delete <task number>";
 
     // Filter words to locate date for deadline and event tasks. 
     private static final String DEADLINE_DATA_PREFIX_BY = "/by";
@@ -39,14 +43,9 @@ public class Duke {
 
 
     // List of all tasks. 
-    private static Task[] tasks;
+    private static ArrayList<Task> tasks;
     private static String userCommand;
-
-    // Maximum number of tasks that can be held. 
-    private static final int MAX_LIST_SIZE = 100;
-
-    // Total number of tasks in task list. 
-    private static int sizeOfTaskList = 0;
+    private static String commandWord;
 
     // Scanner for extracting user input. 
     private static final Scanner SCANNER = new Scanner(System.in);
@@ -58,16 +57,16 @@ public class Duke {
      * @return The task at the index. 
      */
     private static Task getTask(int index) {
-        return tasks[index];
+        return tasks.get(index);
     }
 
     /**
      * Check if list is empty. 
      * 
-     * @return True if sizeOfTaskList is 0 and false if not. 
+     * @return True if task size is 0 and false if not. 
      */
     private static boolean isTaskListEmpty() {
-        return sizeOfTaskList == 0;
+        return tasks.size() == 0;
     }
 
     /**
@@ -86,8 +85,7 @@ public class Duke {
      * Initializes the task list. 
      */
     private static void initTaskList() {
-        tasks = new Task[MAX_LIST_SIZE];
-        sizeOfTaskList = 0;
+        tasks = new ArrayList<Task>();
     }
 
     /**
@@ -126,12 +124,13 @@ public class Duke {
      *  - Add new deadline task to list.
      * COMMAND_EVENT_WORD: 
      *  - Add new event task to list. 
-     * NO_COMMAND:
-     *  - No command detected, display error message. 
+     * COMMAND_DELETE_WORD:
+     *  - Delete a given task from the list. 
      * DEFAULT: 
      *  - Invalid command, display error message. 
      */
     private static void executeCommand() {
+        int taskNumber;
         try {
             switch(getCommand()) {
             case COMMAND_EXIT_WORD:
@@ -142,7 +141,7 @@ public class Duke {
                 executeListAllTasks();
                 return;
             case COMMAND_MARK_WORD:
-                int taskNumber = getTaskNumber();
+                taskNumber = getTaskNumber();
                 if (isTaskNumberValid(taskNumber)) {
                     executeMarkTask(taskNumber);
                     displayMarkTaskSuccessMessage(taskNumber);
@@ -161,6 +160,14 @@ public class Duke {
                 executeAddEvent();
                 displayAddTaskSuccessMessage();
                 return;
+            case COMMAND_DELETE_WORD:
+                taskNumber = getTaskNumber();
+                if (isTaskNumberValid(taskNumber)) {
+                    String deletedTask = executeDeleteTask(taskNumber);
+                    displayDeleteTaskSuccessMessage(deletedTask);
+                    return;
+                }
+                throw new IndexOutOfBoundsException();
             default:
                 throw new IllegalThreadStateException();
             }
@@ -169,30 +176,26 @@ public class Duke {
             displayToUser(ERROR_INVALID_COMMAND_RECEIVED);
         } catch (IndexOutOfBoundsException exception) {
             // If task number input by user is out of range
-            displayToUser(ERROR_INDEX_OUT_OF_RANGE, String.format(MESSAGE_NUMBER_OF_TASKS, sizeOfTaskList));
-        } catch (NumberFormatException exception) {
-            // If task number is not an integer
-            displayToUser(ERROR_INVALID_SYNTAX_RECEIVED, MESSAGE_MARK_SYNTAX);
+            displayToUser(ERROR_INDEX_OUT_OF_RANGE, String.format(MESSAGE_NUMBER_OF_TASKS, tasks.size()));
         } catch (TaskListEmptyException exception) {
             // If task list is empty
             displayToUser(ERROR_EMPTY_LIST);
         } catch (IllegalArgumentException exception) {
-            // If incorrect input parameters given for the task command (deadline or event)
-            displayToUser(ERROR_INVALID_SYNTAX_RECEIVED, exception.getMessage());
+            // If the syntax for the command is invalid
+            displayToUser(ERROR_INVALID_SYNTAX_RECEIVED, getSyntaxMessage());
         }
     }
 
     /**
-     * Extracts the command word from user input. 
-     * Removes command name from userCommand. 
-     * If there are parameters after command word (i.e. length > 4), set userCommand to the parameters. 
-     * Otherwise, set userCommand to null. 
+     * Extracts the command word from user input. Removes command name from
+     * userCommand. If there are parameters after command word (i.e. length > 4),
+     * set userCommand to the parameters. Otherwise, set userCommand to null.
      * 
-     * @return Command word extracted. 
+     * @return Command word extracted.
      */
     private static String getCommand() {
         // First word of userCommand is the task command
-        String commandWord = userCommand.split(" ")[0].toLowerCase();
+        commandWord = userCommand.split(" ")[0].toLowerCase();
         // Removes command name with has 4 letters
         if (userCommand.length() > 4) {
             userCommand = userCommand.substring(userCommand.indexOf(" ") + 1, userCommand.length());
@@ -232,7 +235,7 @@ public class Duke {
      */
     private static int getTaskNumber() throws NumberFormatException, IllegalArgumentException, TaskListEmptyException {
         if (userCommand == null) {
-            throw new IllegalArgumentException(MESSAGE_MARK_SYNTAX);
+            throw new IllegalArgumentException();
         } else if (isTaskListEmpty()) {
             throw new TaskListEmptyException();
         }
@@ -259,7 +262,7 @@ public class Duke {
      * @return True if number is valid and false if invalid. 
      */
     private static boolean isTaskNumberValid(int taskNumber) {
-        return taskNumber >= 0 && taskNumber < sizeOfTaskList;
+        return taskNumber >= 0 && taskNumber < tasks.size();
     }
 
     /**
@@ -268,7 +271,7 @@ public class Duke {
      * @param taskNumber The task number (starting from 1) that was marked as done. 
      */
     private static void executeMarkTask(int taskNumber) {
-        tasks[taskNumber].setTaskStatus();
+        tasks.get(taskNumber).setTaskStatus();
     }
 
     /**
@@ -277,7 +280,7 @@ public class Duke {
      * @param taskNumber The task number (starting from 1) that was marked as done. 
      */
     private static void displayMarkTaskSuccessMessage(int taskNumber) {
-        displayToUser(MESSAGE_MARKED, tasks[taskNumber].toString());
+        displayToUser(MESSAGE_MARKED, tasks.get(taskNumber).toString());
     }
 
     /**
@@ -288,10 +291,9 @@ public class Duke {
      */
     private static void executeAddTodo() throws IllegalArgumentException {
         if (userCommand == null) {
-            throw new IllegalArgumentException(MESSAGE_TODO_SYNTAX);
+            throw new IllegalArgumentException();
         } 
-        tasks[sizeOfTaskList] = new Todo(userCommand);
-        sizeOfTaskList++;
+        tasks.add(new Todo(userCommand));
     }
 
     /**
@@ -304,21 +306,39 @@ public class Duke {
      */
     private static void executeAddDeadline() throws IllegalArgumentException {
         String date = processParameters(DEADLINE_DATA_PREFIX_BY);
-        tasks[sizeOfTaskList] = new Deadline(userCommand, date);
-        sizeOfTaskList++;
+        tasks.add(new Deadline(userCommand, date));
     }
 
     /**
      * Adds a new deadline task to task list. 
-     * Processes the user input to extract date. 
+     * Processes the user input to exit. 
      * If date is not null, create new deadline task.  
      * 
      * @throws IllegalArgumentException If date is not found. 
      */
     private static void executeAddEvent() throws IllegalArgumentException {
         String date = processParameters(EVENT_DATA_PREFIX_AT);
-        tasks[sizeOfTaskList] = new Event(userCommand, date);
-        sizeOfTaskList++;
+        tasks.add(new Event(userCommand, date));
+    }
+
+    /**
+     * Delete a task assigned to the task number. 
+     * 
+     * @param taskNumber The task number (starting from 1) that was marked as done. 
+     */
+    private static String executeDeleteTask(int taskNumber) {
+        String deletedTask = tasks.get(taskNumber).toString();
+        tasks.remove(taskNumber);
+        return deletedTask;
+    }
+
+    /**
+     * Displays the success message after deleting the task. 
+     * 
+     * @param deletedTask The description of deleted task. 
+     */
+    private static void displayDeleteTaskSuccessMessage(String deletedTask) {
+        displayToUser(MESSAGE_DELETE, deletedTask);
     }
 
     /**
@@ -336,20 +356,29 @@ public class Duke {
             userCommand = userCommand.substring(0, indexOfDate - 1);
             return date;
         }
-        throw new IllegalArgumentException(getSyntaxMessage(filterString));
+        throw new IllegalArgumentException();
     }
 
     /**
      * Get the syntax of the commands depending on the one given by the user. 
      * 
-     * @param filterString The string to find in userCommand depending on an event (/at) or deadline (/by). 
      * @return The syntax to task command given by the user. 
      */
-    private static String getSyntaxMessage(String filterString) {
-        if (filterString.equals(DEADLINE_DATA_PREFIX_BY)) {
+    private static String getSyntaxMessage() {
+        switch (commandWord) {
+        case COMMAND_TODO_WORD:
+            return MESSAGE_TODO_SYNTAX;
+        case COMMAND_DEADLINE_WORD: 
             return MESSAGE_DEADLINE_SYNTAX;
+        case COMMAND_EVENT_WORD:
+            return MESSAGE_EVENT_SYNTAX;
+        case COMMAND_MARK_WORD:
+            return MESSAGE_MARK_SYNTAX;
+        case COMMAND_DELETE_WORD:
+            return MESSAGE_DELETE_SYNTAX;
+        default: 
+            return null;
         }
-        return MESSAGE_EVENT_SYNTAX;
     }
 
     /**
@@ -364,7 +393,7 @@ public class Duke {
         // Check if string contains date after filterString 
         // +4 to remove filterString and +1 to convert index to length. Total: +5
         if (userCommand.length() < indexOfDate + 5) {
-            throw new IllegalArgumentException(getSyntaxMessage(filterString));
+            throw new IllegalArgumentException();
         }
         // Add 4 to indexOfDate to remove the "/by " or "/at " filter strings
         return userCommand.substring(indexOfDate + 4);
@@ -374,8 +403,8 @@ public class Duke {
      * Displays success message after adding new task. 
      */
     private static void displayAddTaskSuccessMessage() {
-        displayToUser(MESSAGE_ADDED, "  " + getTask(sizeOfTaskList-1).toString(), String.format(MESSAGE_NUMBER_OF_TASKS,
-                sizeOfTaskList));
+        displayToUser(MESSAGE_ADDED, "  " + getTask(tasks.size()-1).toString(), String.format(MESSAGE_NUMBER_OF_TASKS,
+                tasks.size()));
     }
 
     /**
@@ -397,7 +426,7 @@ public class Duke {
      * 
      * @param tasks Tasks to be listed. 
      */
-    private static void displayToUser(Task[] tasks) {
+    private static void displayToUser(ArrayList<Task> tasks) {
         String listAsString = getDisplayString(tasks);
         displayToUser(listAsString);
     }
@@ -408,10 +437,10 @@ public class Duke {
      * @param tasks Task list used. 
      * @return The list of all items in list, formatted with numberings and the total number of tasks in list. 
      */
-    private static String getDisplayString(Task[] tasks) {
+    private static String getDisplayString(ArrayList<Task> tasks) {
         StringBuilder message = new StringBuilder();
         message.append(String.format("%s", MESSAGE_LIST));
-        for (int i = 0; i < sizeOfTaskList; i++) {
+        for (int i = 0; i < tasks.size(); i++) {
             int displayIndex = i + 1;
             message.append(String.format("\n\t %d. %s", displayIndex, getTask(i).toString()));
         }
