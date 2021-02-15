@@ -1,5 +1,6 @@
 package duke;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -22,7 +23,8 @@ public class Duke {
     }
 
     private static void runUserCommand() {
-        Task[] taskList = new Task[MAX_TASK];
+        //Task[] taskList = new Task[MAX_TASK];
+        ArrayList<Task> taskList = new ArrayList<>();
         Scanner in = new Scanner(System.in);
 
 
@@ -183,7 +185,7 @@ public class Duke {
      * COMMAND RUNNER METHODS
      */
 
-    private static void runDone(Task[] taskList, String input) {
+    private static void runDone(ArrayList<Task> taskList, String input) {
         String[] word = input.split(" ");
         int jobNumber = 0;
 
@@ -196,7 +198,7 @@ public class Duke {
                 return;
             }
 
-            markJobAsDone(taskList[jobNumber]);
+            markJobAsDone(taskList.get(jobNumber));
 
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
             printInvalidInputWarning("");
@@ -206,7 +208,7 @@ public class Duke {
 
     }
 
-    private static void runList(Task[] taskList) {
+    private static void runList(ArrayList<Task> taskList) {
         int numbering = 1;
 
         // error handling - no jobs
@@ -217,14 +219,14 @@ public class Duke {
 
         for (int i = 0; i < Task.taskCount; i++) {
             System.out.print(numbering + ". ");
-            taskList[i].printTask();
+            taskList.get(i).printTask();
             numbering++;
         }
         System.out.println();
 
     }
 
-    private static void runTodo(Task[] taskList, String input) {
+    private static void runTodo(ArrayList<Task> taskList, String input) {
 
         String job;
 
@@ -237,13 +239,13 @@ public class Duke {
 
         Todo newTask = new Todo(job);
 
-        taskList[Task.taskCount] = newTask;
+        taskList.set(Task.taskCount, newTask);
         Task.taskCount++;
 
         printTaskAdded(newTask);
     }
 
-    private static void runDeadline(Task[] taskList, String input) {
+    private static void runDeadline(ArrayList<Task> taskList, String input) {
         String job;
         String by;
 
@@ -256,14 +258,14 @@ public class Duke {
         }
 
         Deadline newTask = new Deadline(job, by);
-        taskList[Task.taskCount] = newTask;
+        taskList.set(Task.taskCount, newTask);
         Task.taskCount++;
 
         printTaskAdded(newTask);
 
     }
 
-    private static void runEvent(Task[] taskList, String input) {
+    private static void runEvent(ArrayList<Task> taskList, String input) {
         String job, at;
 
         try {
@@ -275,7 +277,7 @@ public class Duke {
         }
 
         Event newTask = new Event(job, at);
-        taskList[Task.taskCount] = newTask;
+        taskList.set(Task.taskCount, newTask);
         Task.taskCount++;
 
         printTaskAdded(newTask);
