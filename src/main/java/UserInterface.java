@@ -1,5 +1,3 @@
-package duke;
-
 public class UserInterface {
 
     static final String LINE_DIVIDER = "____________________________________________________________";
