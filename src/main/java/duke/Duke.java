@@ -14,7 +14,8 @@ public class Duke {
     private static final int DEADLINE_COMMAND = 5;
     private static final int EVENTS_COMMAND = 6;
     private static final int UNKNOWN_COMMAND = 7;
-    
+    private static final int DELETE_COMMAND = 8;
+
     public static ArrayList<Task> taskList = new ArrayList<>();
 
     public static void main(String[] args) {
@@ -71,6 +72,10 @@ public class Duke {
                 runEvent(input);
                 break;
 
+            case DELETE_COMMAND:
+                runDeleteCommand(input);
+                break;
+
             default:
                 runUnknownCommand(input);
             }
@@ -117,6 +122,11 @@ public class Duke {
         // EVENTS COMMAND
         else if (startsWith(input, "event")) {
             return EVENTS_COMMAND;
+        }
+
+        //DELETE COMMAND
+        else if (startsWith(input, "delete")) {
+            return DELETE_COMMAND;
         }
 
         // UNKNOWN command
@@ -201,11 +211,18 @@ public class Duke {
             markJobAsDone(taskList.get(jobNumber));
 
         } catch (NumberFormatException e) {
-            printInvalidInputWarning("");
+            printInvalidInputWarning(input);
         } catch (NullPointerException | IndexOutOfBoundsException e) {
-            printInvalidTaskWarning(jobNumber);
+            printInvalidIndexWarning(jobNumber);
         }
 
+    }
+
+    private static void markJobAsDone(Task task) {
+        task.setDone(true);
+        System.out.print("Congrats! You've completed: \n   ");
+        task.printTask();
+        System.out.println();
     }
 
     private static void runList() {
@@ -289,12 +306,23 @@ public class Duke {
         System.out.println("Enter \"help\" for a list of available commands and format\n");
     }
 
-    private static void markJobAsDone(Task task) {
-        task.setDone(true);
-        System.out.print("Congrats! You've completed: \n   ");
-        task.printTask();
-        System.out.println();
+    private static void runDeleteCommand(String input) {
+
+        String[] words = input.split(" ");
+        int index = 0;
+
+        try {
+            index = Integer.parseInt(words[1]) - 1;
+            
+            printTaskDeleted(index);
+            taskList.remove(index);
+        } catch (NumberFormatException e) {
+            printInvalidInputWarning(input);
+        } catch (IndexOutOfBoundsException e) {
+            printInvalidIndexWarning(index);
+        }
     }
+
 
 
     /**
@@ -306,6 +334,13 @@ public class Duke {
         task.printTask();
         printNumTasksLeft();
         System.out.println();
+    }
+
+    private static void printTaskDeleted(int index) {
+        System.out.println("Task " + (index + 1) + " has been deleted:");
+        System.out.print("  ");
+        taskList.get(index).printTask();
+        System.out.println("Tasks remaining: " + (taskList.size()) + "\n");
     }
 
     private static void printNumTasksLeft() {
@@ -321,15 +356,15 @@ public class Duke {
     }
 
     private static void printNoTaskWarning() {
-        System.out.println("You don't have any tasks yet! Enter a task");
+        System.out.println("You don't have any tasks ! Enter a task");
         System.out.println("Enter \"help\" for a list of available commands and format\n");
     }
 
-    private static void printInvalidTaskWarning(int jobNumber) {
+    private static void printInvalidIndexWarning(int jobNumber) {
         String smaller = "Enter a valid job number. Use the list command to view your current tasks.";
         String larger = "You don't have that many jobs! Use the list command to view your current tasks.";
 
-        System.out.println(jobNumber < 0 ? smaller : larger);
+        System.out.println(jobNumber <= 0 ? smaller : larger);
         System.out.println("Enter \"help\" for a list of available commands and format\n");
     }
 
