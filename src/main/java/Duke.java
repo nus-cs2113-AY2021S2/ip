@@ -32,7 +32,7 @@ public class Duke {
     }
 
     public static String getCommandFromUser() {
-        return SCANNER.nextLine().strip();
+        return SCANNER.nextLine().strip().toLowerCase();
     }
 
     public static void handleCommand(String command) {
