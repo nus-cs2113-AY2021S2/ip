@@ -153,6 +153,7 @@ public class Duke {
         case "done":
             try{
                 doneCommand(command, tasks);
+                wrapWriteToDisk(tasks);
             }
             catch (DukeException e){
                 System.out.println("The done command consists of the word done, and an integer.");
