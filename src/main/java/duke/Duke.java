@@ -8,6 +8,8 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -64,6 +66,19 @@ public class Duke {
             throw new DukeException();
         }
         return isLoop;
+    }
+
+    private static void saveRecords() {
+        try {
+            FileWriter save = new FileWriter("Records.txt");
+            for (Task task : records) {
+                save.write(task.getSaveString() + "\n");
+            }
+            save.close();
+        } catch (IOException e) {
+            System.out.println("IOException - File failed to be saved");
+            e.printStackTrace();
+        }
     }
 
     private static void promptUserInputInvalid() {
@@ -141,6 +156,7 @@ public class Duke {
         records.get(index).setAsDone();
         System.out.println("Nice! I've marked this task as done:");
         System.out.println("\t" + records.get(index));
+        saveRecords();
     }
 
     private static boolean isIndexOutOfBound(int index) {
@@ -190,6 +206,7 @@ public class Duke {
             System.out.println("Got it. I've added this task:");
             System.out.println("\t" + records.get(numberOfRecords - 1));
             System.out.printf("Now you have %d tasks in the list.\n", numberOfRecords);
+            saveRecords();
         }
     }
 

@@ -17,4 +17,9 @@ public class Todo extends Task {
     public String toString() {
         return "[" + TASK_TYPE + "]" + super.toString();
     }
+
+    @Override
+    public String getSaveString() {
+        return TASK_TYPE + super.getSaveString();
+    }
 }

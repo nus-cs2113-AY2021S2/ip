@@ -24,4 +24,9 @@ public class Event extends Task {
     public String toString() {
         return "[" + TASK_TYPE + "]" + super.toString() + " (at: " + schedule + ")";
     }
+
+    @Override
+    public String getSaveString() {
+        return TASK_TYPE + super.getSaveString() + "|" + getSchedule();
+    }
 }

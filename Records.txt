@@ -1,0 +1,4 @@
+T|0|cck
+T|1|lla
+D|0|aac|op
+E|0|00p|op
