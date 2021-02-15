@@ -31,7 +31,7 @@ public class Duke {
 
     private static final String ERROR_INDEX_OUT_OF_RANGE = "Index out of range. ";
     private static final String ERROR_INVALID_COMMAND_RECEIVED = "Invalid command. Available commands: "
-            + System.lineSeparator() + "\t  list, done, todo, deadline, event, bye";
+            + System.lineSeparator() + "\t  list, done, todo, deadline, event, delete, bye";
     private static final String ERROR_EMPTY_LIST = "You have no tasks recorded.";
     private static final String ERROR_INVALID_SYNTAX_RECEIVED = "Invalid syntax! Usage: ";
     private static final String ERROR_UPDATING_DATA = "IO Error, please try again. ";
@@ -48,7 +48,6 @@ public class Duke {
     // Filter words to locate date for deadline and event tasks.
     private static final String DEADLINE_DATA_PREFIX_BY = "/by";
     private static final String EVENT_DATA_PREFIX_AT = "/at";
-
 
     // List of all tasks. 
     private static ArrayList<Task> tasks;
