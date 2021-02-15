@@ -5,3 +5,9 @@ E | 1 | meeting |  tmr
 T | 0 | ffff
 T | 0 | gggg
 E | 1 | lfine |  wkpegg
+T | 0 | eat
+T | 1 | sleep
+D | 0 | hw |  Monday
+E | 0 | meeting |  2pm
+T | 0 | eat
+T | 0 | sleep
