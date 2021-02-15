@@ -2,6 +2,7 @@ package Duke;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 // import Duke.Function.*;
 // import Duke.Task.*;
@@ -27,6 +28,7 @@ public class Duke {
     private static final String COMMAND_DELETE_WORD = "delete";
     private static final String BYE = "Bye. Hope to see you again soon!";
     private static final String ERROR_MESSAGE = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+    private static final String FILE_LOCATION = "src/main/java/Duke/Duke.txt";
 
     private static final int CAPACITY = 100;
     private static final int ITEM_DATA_COUNT = 3;
@@ -59,7 +61,7 @@ public class Duke {
     }
 
     private static void readFile() {
-        File file = new File("src/main/java/Duke/Duke.txt");
+        File file = new File(FILE_LOCATION);
         try {
             if (file.createNewFile()) {
                 showToUser("A new file has been created");
@@ -83,11 +85,25 @@ public class Duke {
         }
     }
 
+    private static void writeFile() {
+        try {
+            FileWriter writer = new FileWriter("src/main/java/Duke/Duke.txt",false);
+            for (int i=0; i<count; i++) {
+                writer.write(allItems[i][0]+"-"+allItems[i][1]+"-"+allItems[i][2]);
+                writer.write("\r\n");
+            }
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private static void addItemToItemBook(String commandType, String commandData) {
         allItems[count][0] = commandType;
         allItems[count][1] = UNDO;
         allItems[count][2] = commandData;
         count++;
+        // writeFile(commandType+"-"+UNDO+"-"+commandData);
     }
 
     private static void showWelcomeMessage() {
@@ -204,6 +220,7 @@ public class Duke {
     }
 
     public static void endSystem(){
+        writeFile();
         showToUser(BYE);
     }
 
