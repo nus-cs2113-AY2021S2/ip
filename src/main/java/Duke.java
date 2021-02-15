@@ -13,7 +13,7 @@ public class Duke {
     static int taskCount = 0;
     static ArrayList<Task> taskList = new ArrayList<Task>();
     static final String COMMANDS = "Commands:\n    todo taskName\n    deadline deadlineName /by time\n" 
-            + "    event eventName /at time\n    list\n    done taskNumber\n    delete taskNumber\n   help\n    bye\n";
+            + "    event eventName /at time\n    list\n    done taskNumber\n    delete taskNumber\n    help\n    bye\n";
 
     public static void main(String[] args) {
         displayWelcomeMessage();
