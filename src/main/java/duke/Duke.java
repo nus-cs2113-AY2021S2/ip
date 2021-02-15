@@ -1,7 +1,11 @@
 package duke;
 
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
 
 public class Duke {
     private static final int MAX_TASK = 100;
@@ -14,14 +18,22 @@ public class Duke {
     private static final int DEADLINE_COMMAND = 5;
     private static final int EVENTS_COMMAND = 6;
     private static final int UNKNOWN_COMMAND = 7;
-    
+
+    private static final String DELIM = "-";
+    private static final String PATH = ".\\src\\main\\java\\duke\\data\\duke.txt";
+
     public static ArrayList<Task> taskList = new ArrayList<>();
 
     public static void main(String[] args) {
         printHello();
+        checkSavedData();
         runUserCommand();
         printBye();
     }
+
+    /**
+     * ----------------------------------------------- START OF METHODS -----------------------------------------------
+     */
 
     private static void runUserCommand() {
         //Task[] taskList = new Task[MAX_TASK];
@@ -57,18 +69,22 @@ public class Duke {
 
             case DONE_COMMAND:
                 runDone(input);
+                saveData();
                 break;
 
             case TODO_COMMAND:
                 runTodo(input);
+                saveData();
                 break;
 
             case DEADLINE_COMMAND:
                 runDeadline(input);
+                saveData();
                 break;
 
             case EVENTS_COMMAND:
                 runEvent(input);
+                saveData();
                 break;
 
             default:
@@ -76,6 +92,123 @@ public class Duke {
             }
         }
 
+    }
+    
+
+    /**
+     * FILE IO
+     */
+
+    private static void checkSavedData() {
+        try {
+            readFromFile();
+            System.out.println("Existing records found! Data loaded..." + '\n');
+        } catch (FileNotFoundException e) {
+            System.out.println("No previous records! Starting a new record..." +'\n');
+            createNewFile();
+        }
+    }
+
+    private static void createNewFile()  {
+        File file = new File(PATH);
+        try {
+            if(file.createNewFile()) {
+                System.out.println("New file created!" + '\n');
+            }
+        } catch (IOException e) {
+            System.out.println("Error creating new file...");
+            e.printStackTrace();
+        }
+    }
+
+    private static void saveData() {
+        try {
+            writeToFile();
+        } catch (IOException e) {
+            System.out.println("Something went wrong when saving...");
+        }
+    }
+    
+    private static void readFromFile() throws FileNotFoundException {
+
+        File dataFile = new File(PATH);
+        Scanner reader = new Scanner(dataFile);
+
+        while (reader.hasNext()) {
+            int lineNumber = 0;
+            String line = reader.nextLine();
+            lineNumber++;
+
+            try {
+                Task task = formTask(line);
+                taskList.add(task);
+                Task.taskCount++;
+            } catch (DataErrorException e) {
+                printDataErrorWarning(lineNumber);
+            }
+        }
+    }
+
+    private static void writeToFile() throws IOException {
+        FileWriter writer = new FileWriter(PATH);
+
+        for (Task t : taskList) {
+            writer.write(formLine(t) + '\n');
+        }
+        writer.close();
+    }
+
+    private static String formLine(Task t) {
+        String line = "";
+        
+        if (t instanceof Todo) {
+            line += "T" + DELIM;
+            line += (t.isDone() ? "1" : "0") + DELIM;
+            line += t.job;
+        } else if (t instanceof Deadline) {
+            line += "D" + DELIM;
+            line += (t.isDone() ? "1" : "0") + DELIM;
+            line += t.job + DELIM;
+            line += ((Deadline) t).getBy();
+        } else if (t instanceof Event) {
+            line += "E" + DELIM;
+            line += (t.isDone() ? "1" : "0") + DELIM;
+            line += t.job + DELIM;
+            line += ((Event) t).getAt();
+        }
+        
+        return line;
+    }
+
+    private static Task formTask(String line) throws DataErrorException {
+        String[] words = line.split(DELIM);
+
+        // type of task
+        String type = words[0];
+
+        // done
+        boolean isDone = "1".equals(words[1]);
+
+        // job description
+        String job = words[2];
+
+        Task newTask = null;
+
+        switch (type) {
+        case "D":
+            newTask = new Deadline(job, words[3]);
+            break;
+        case "E":
+            newTask = new Event(job, words[3]);
+            break;
+        case "T":
+            newTask = new Todo(job);
+            break;
+        default:
+            throw new DataErrorException();
+        }
+
+        return newTask;
     }
 
 
@@ -337,6 +470,11 @@ public class Duke {
         System.out.println("List is full!");
         System.out.println("Use the \"list\" command to view your tasks.");
         System.out.println("Enter \"bye\" to exit... \n");
+    }
+
+    private static void printDataErrorWarning(int line) {
+        System.out.println("Error forming task. Check formatting at line " + line + " in data file!");
+        System.out.println();
     }
 
     private static void printHelp() {
