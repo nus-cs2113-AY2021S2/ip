@@ -221,6 +221,15 @@ public class Duke {
         System.out.println(LINE);
     }
 
+    public static void deleteTaskMessage(ArrayList<Task> tasks, int index){
+        int newTaskSize = tasks.size() - 1;
+        System.out.println(LINE);
+        System.out.println("Noted! I've removed this task:");
+        System.out.println(tasks.get(index).toString());
+        System.out.println("Now you have " + newTaskSize + " tasks in the list.");
+        System.out.println(LINE);
+    }
+
     public static void newItemMessage(ArrayList<Task> tasks, Task newItem){
         System.out.println(LINE);
         System.out.println("Got it. I've added this task:");
@@ -240,5 +249,5 @@ public class Duke {
         runProgram();
         goodbyeMessage();
     }
-    
+
 }
