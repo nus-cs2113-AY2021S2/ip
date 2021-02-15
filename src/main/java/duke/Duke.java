@@ -1,5 +1,6 @@
 package duke;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -17,6 +18,45 @@ public class Duke {
 
     public static final String LINE = "____________________________________________________________";
 
+    public static void writeToDisk(ArrayList<Task> tasks) throws IOException{
+        //Each time I want to write to the Disk, I clear away the entire contents of the data file and write everything
+        //Done by deleting the file and creating it again
+        File clear = new File(String.valueOf(dataFileDirectory));
+        clear.delete();
+        createNewFile();
+
+        //To write to the new file, I will append 1 task from the ArrayList at a time
+        FileWriter fw = new FileWriter(String.valueOf(dataFileDirectory), true);
+        for(Task task : tasks){
+            String temp = "";
+
+            if(task.getDoneStatus()){
+                temp += "1|";
+            } else {
+                temp += "0|";
+            }
+            temp += task.getType() + "|" + task.getDescription() + "|" + task.getSeparator() + "|";
+            if(task instanceof Event) {
+                temp += ((Event) task).getAt();
+            } else if(task instanceof Deadline){
+                temp += ((Deadline) task).getBy();
+            } else {
+                temp += "";
+            }
+            temp += "\n";
+            fw.write(temp);
+        }
+        fw.close();
+    }
+
+    public static void wrapWriteToDisk(ArrayList<Task> tasks){
+        try{
+            writeToDisk(tasks);
+        } catch (IOException e) {
+            System.out.println("Issues with writing to .txt file");
+        }
+    }
+
     public static void loadDataFromDisk(ArrayList<Task> tasks) throws FileNotFoundException {
         File dataFile = new File(String.valueOf(dataFileDirectory));
         Scanner s = new Scanner(dataFile);
@@ -32,6 +72,7 @@ public class Duke {
                 tempTask.setAsDone();
             }
         }
+        s.close();
     }
 
     public static void createNewFile() {
@@ -90,8 +131,8 @@ public class Duke {
             Task newItem = populateArrayList(command, tasks);
             if(newItem != null){
                 newItemMessage(tasks, newItem);
+                wrapWriteToDisk(tasks);
             }
-
         } while (!userInput.equals("bye"));
     }
 
@@ -153,6 +194,11 @@ public class Duke {
             }
             catch (Exception e){
                 badUserInputMessage();
+            }
+            break;
+        case "bye":
+            if(command.length>1){
+                System.out.println("I have no such feature!");
             }
             break;
         default:
