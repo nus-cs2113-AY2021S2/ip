@@ -4,8 +4,8 @@ public class Deadline extends Task {
     private static final String TASK_SYMBOL_D = "D";
     private String taskTiming;
 
-    public Deadline(String taskDescrption, String taskTiming) {
-        super(taskDescrption);
+    public Deadline(String taskDescription, String taskTiming) {
+        super(taskDescription);
         this.taskTiming = taskTiming;
     }
 

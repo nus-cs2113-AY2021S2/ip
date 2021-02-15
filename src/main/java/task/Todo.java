@@ -3,8 +3,8 @@ package task;
 public class Todo extends Task {
     private static final String TASK_SYMBOL_TODO = "T";
 
-    public Todo(String taskDescrption) {
-        super(taskDescrption);
+    public Todo(String taskDescription) {
+        super(taskDescription);
     }
 
     @Override

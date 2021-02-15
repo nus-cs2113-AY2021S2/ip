@@ -18,11 +18,11 @@ public class Task {
     }
 
     public String getTaskCompletionStatus() {
-        return(this.completionStatus);
+        return this.completionStatus;
     }
 
     public String getTaskDescription() {
-        return (this.taskDescription);
+        return this.taskDescription;
     }
 
     public String getTaskTiming() {
