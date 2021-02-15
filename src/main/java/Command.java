@@ -21,8 +21,13 @@ public class Command {
                 break;
             case "todo":
                 taskDescription = findTaskDescription(splitTaskInput);
-                Task.addNewTask(new Todo(taskDescription[0]));
-                UI.taskAdded();
+                if (taskDescription[0]!=null) {
+                    System.out.println("I think you missed out your task!");
+                }
+                else{
+                    Task.addNewTask(new Todo(taskDescription[0]));
+                    UI.taskAdded();
+                }
                 break;
             case "list":
                 System.out.println("Here are the tasks in your list:");
