@@ -44,7 +44,7 @@ public class Duke {
             System.out.println("(by:" + by + ")");
             printTotalTasks();
         } catch (IndexOutOfBoundsException e) {
-            DukeErrors.deadlineIsEmpty();
+            DukeException.deadlineIsEmpty();
         }
     }
 
@@ -59,7 +59,7 @@ public class Duke {
             System.out.println("(at:" + at + ")");
             printTotalTasks();
         } catch (IndexOutOfBoundsException e) {
-            DukeErrors.eventIsEmpty();
+            DukeException.eventIsEmpty();
         }
     }
 
@@ -108,12 +108,12 @@ public class Duke {
                 try {
                     listTasks();
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    DukeErrors.listIsEmpty();
+                    DukeException.listIsEmpty();
                 }
             } else if (command.contains("done")) {
                 executeDone(command);
             } else if (command.contains("todo")) {
-                if (!DukeErrors.checkTodo(command)) {
+                if (!DukeException.checkTodo(command)) {
                     executeTodo(command);
                 }
             } else if (command.contains("deadline")) {
@@ -121,10 +121,11 @@ public class Duke {
             } else if (command.contains("event")) {
                 executeEvent(command);
             } else {
-                DukeErrors.commandIsInvalid();
+                DukeException.commandIsInvalid();
             }
-        command = in.nextLine();
-    } while(!command.equals("bye"));
+            command = in.nextLine();
+        } while(!command.equals("bye"));
         UserInterface.printBye();
+    }
 }
-}
+
