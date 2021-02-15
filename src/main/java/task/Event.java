@@ -15,12 +15,11 @@ public class Event extends Task {
     }
 
     @Override
-    public void printTaskDetails() {
-        super.printTaskDetails();
-        this.printTaskTiming();
+    public String getTaskTiming() {
+        return this.printTaskTiming();
     }
 
-    public void printTaskTiming() {
-        System.out.print("(by: " + this.taskTiming + ")");
+    public String printTaskTiming() {
+        return "(by: " + this.taskTiming + ")";
     }
 }
