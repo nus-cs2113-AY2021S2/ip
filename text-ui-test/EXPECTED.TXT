@@ -93,7 +93,7 @@ Alrighty! I have added this new Event:
 You now have 6 tasks in the list.
 _______________________________________________________________________________
 _______________________________________________________________________________
-'invalid command test' is not a valid command!
+'invalid' is not a valid command!
 Commands:
     todo taskName
     deadline deadlineName /by time
