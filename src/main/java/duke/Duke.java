@@ -204,11 +204,13 @@ public class Duke {
         case "delete":
             try{
                 deleteCommand(command, tasks);
+                wrapWriteToDisk(tasks);
             } catch (DukeException e) {
                 System.out.println("The delete command consists of the word delete, and an integer.");
             } catch (Exception e) {
                 badUserInputMessage();
             }
+            break;
         default:
             System.out.println("I have no such feature!");
             break;
