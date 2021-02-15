@@ -10,11 +10,53 @@ import taskclasses.Event;
 import taskclasses.Task;
 import taskclasses.ToDo;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
+
 public class TaskManager {
     static Task[] tasks = new Task[100];
     static int index = 0;
 
     public TaskManager() {
+    }
+    public static void loadTasksFromFile(String filePath) throws FileNotFoundException {
+        File f = new File(filePath); // create a File for the given file path
+        Scanner s = new Scanner(f); // create a Scanner using the File as the source
+        while (s.hasNext()) {
+            String[] part = s.nextLine().split(" ~~ ");
+            switch(part[0]) {
+            case "T":
+                tasks[index] = new ToDo(part[2]);
+                break;
+            case "D":
+                tasks[index] = new Deadline(part[2], part[3]);
+                break;
+            case "E":
+                tasks[index] = new Event(part[2], part[3]);
+                break;
+            }
+            if (part[1].equals("X")) {
+                tasks[index].markAsDone();
+            }
+            ++index;
+        }
+    }
+
+    public static void saveTasksToFile(String filePath) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        for (int i=0; i<index; ++i) {
+            fw.write(tasks[i].getTaskType() + " ~~ "
+                    + tasks[i].getStatusIcon() + " ~~ "
+                    + tasks[i].getTaskName());
+            if (tasks[i].getTaskType().equals("D") || tasks[i].getTaskType().equals("E")) {
+                fw.write(" ~~ " + tasks[i].getTime());
+            }
+            fw.write(System.lineSeparator());
+        }
+        fw.close();
     }
 
     public static void addNewTask(String taskType, String fullCommand) {

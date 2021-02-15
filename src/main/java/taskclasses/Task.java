@@ -9,15 +9,28 @@ public class Task {
         this.isDone = false;
     }
 
+    public String getTaskType() {
+        return "";
+    }
+
     public String getStatusIcon() {
         return (isDone ? "X" : " "); //return X or space symbols
     }
 
     public String toString() {
-        return ("[" + getStatusIcon() + "] " + this.taskName);
+        return ("[" + getStatusIcon() + "] " + getTaskName());
     }
 
     public void markAsDone() {
         this.isDone = true;
     }
+
+    public String getTaskName() {
+        return this.taskName;
+    }
+
+    public String getTime() {
+        return "";
+    }
+
 }
