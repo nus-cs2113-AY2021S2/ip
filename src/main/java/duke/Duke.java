@@ -14,7 +14,8 @@ public class Duke {
     private static final int DEADLINE_COMMAND = 5;
     private static final int EVENTS_COMMAND = 6;
     private static final int UNKNOWN_COMMAND = 7;
-
+    
+    public static ArrayList<Task> taskList = new ArrayList<>();
 
     public static void main(String[] args) {
         printHello();
@@ -24,7 +25,6 @@ public class Duke {
 
     private static void runUserCommand() {
         //Task[] taskList = new Task[MAX_TASK];
-        ArrayList<Task> taskList = new ArrayList<>();
         Scanner in = new Scanner(System.in);
 
 
@@ -48,7 +48,7 @@ public class Duke {
                 return;
 
             case LIST_COMMAND:
-                runList(taskList);
+                runList();
                 break;
 
             case HELP_COMMAND:
@@ -56,19 +56,19 @@ public class Duke {
                 break;
 
             case DONE_COMMAND:
-                runDone(taskList, input);
+                runDone(input);
                 break;
 
             case TODO_COMMAND:
-                runTodo(taskList, input);
+                runTodo(input);
                 break;
 
             case DEADLINE_COMMAND:
-                runDeadline(taskList, input);
+                runDeadline(input);
                 break;
 
             case EVENTS_COMMAND:
-                runEvent(taskList, input);
+                runEvent(input);
                 break;
 
             default:
@@ -171,7 +171,7 @@ public class Duke {
 
 
     private static void checkListCapacity(int command) throws FullListException {
-        if (Task.taskCount == MAX_TASK && !Task.isFull) {
+        if (taskList.size() == MAX_TASK && !Task.isFull) {
             Task.isFull = true;
         }
 
@@ -185,7 +185,7 @@ public class Duke {
      * COMMAND RUNNER METHODS
      */
 
-    private static void runDone(ArrayList<Task> taskList, String input) {
+    private static void runDone(String input) {
         String[] word = input.split(" ");
         int jobNumber = 0;
 
@@ -193,7 +193,7 @@ public class Duke {
             jobNumber = Integer.parseInt(word[1]) - 1;
 
             // error handling - no jobs
-            if (Task.taskCount == 0) {
+            if (taskList.size() == 0) {
                 printNoTaskWarning();
                 return;
             }
@@ -208,11 +208,11 @@ public class Duke {
 
     }
 
-    private static void runList(ArrayList<Task> taskList) {
+    private static void runList() {
         int numbering = 1;
 
         // error handling - no jobs
-        if (Task.taskCount == 0) {
+        if (taskList.size() == 0) {
             printNoTaskWarning();
             return;
         }
@@ -226,7 +226,7 @@ public class Duke {
 
     }
 
-    private static void runTodo(ArrayList<Task> taskList, String input) {
+    private static void runTodo(String input) {
 
         String job;
 
@@ -245,7 +245,7 @@ public class Duke {
         printTaskAdded(newTask);
     }
 
-    private static void runDeadline(ArrayList<Task> taskList, String input) {
+    private static void runDeadline(String input) {
         String job;
         String by;
 
@@ -265,7 +265,7 @@ public class Duke {
 
     }
 
-    private static void runEvent(ArrayList<Task> taskList, String input) {
+    private static void runEvent(String input) {
         String job, at;
 
         try {
@@ -309,8 +309,8 @@ public class Duke {
     }
 
     private static void printNumTasksLeft() {
-        String output = Integer.toString(Task.taskCount);
-        output += (Task.taskCount == 1) ? " task" : " tasks";
+        String output = Integer.toString(taskList.size());
+        output += (taskList.size() == 1) ? " task" : " tasks";
         output += " in the list";
 
         System.out.println(output);
