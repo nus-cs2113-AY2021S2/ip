@@ -1,4 +1,11 @@
-package duke;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
+import error.DeadlineCommandException;
+import error.DoneCommandException;
+import error.EventCommandException;
+import error.TodoCommandException;
 
 import java.util.Scanner;
 

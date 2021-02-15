@@ -1,4 +1,4 @@
-package duke;
+package task;
 
 public class Task {
     protected static final int MAX_TASK_NUM = 100;

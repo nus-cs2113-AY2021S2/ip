@@ -1,4 +1,4 @@
-package duke;
+package error;
 
 public class DeadlineCommandException extends Exception {
     // nothing to add here

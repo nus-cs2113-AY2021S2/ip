@@ -1,17 +1,17 @@
-package duke;
+package task;
 
-public class Deadline extends Task {
-    private static final String TASK_SYMBOL_D = "D";
+public class Event extends Task {
+    private static final String TASK_SYMBOL_EVENT = "E";
     private String taskTiming;
 
-    public Deadline(String taskDescrption, String taskTiming) {
+    public Event(String taskDescrption, String taskTiming) {
         super(taskDescrption);
         this.taskTiming = taskTiming;
     }
 
     @Override
     public String getTaskSymbol() {
-        return TASK_SYMBOL_D;
+        return TASK_SYMBOL_EVENT;
     }
 
     @Override
