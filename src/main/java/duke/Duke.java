@@ -1,11 +1,11 @@
 package duke;
 
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
     private static final int MAX_TASK = 100;
@@ -36,7 +36,6 @@ public class Duke {
      */
 
     private static void runUserCommand() {
-        //Task[] taskList = new Task[MAX_TASK];
         Scanner in = new Scanner(System.in);
 
 
@@ -93,7 +92,7 @@ public class Duke {
         }
 
     }
-    
+
 
     /**
      * FILE IO
@@ -104,15 +103,15 @@ public class Duke {
             readFromFile();
             System.out.println("Existing records found! Data loaded..." + '\n');
         } catch (FileNotFoundException e) {
-            System.out.println("No previous records! Starting a new record..." +'\n');
+            System.out.println("No previous records! Starting a new record..." + '\n');
             createNewFile();
         }
     }
 
-    private static void createNewFile()  {
+    private static void createNewFile() {
         File file = new File(PATH);
         try {
-            if(file.createNewFile()) {
+            if (file.createNewFile()) {
                 System.out.println("New file created!" + '\n');
             }
         } catch (IOException e) {
@@ -128,7 +127,7 @@ public class Duke {
             System.out.println("Something went wrong when saving...");
         }
     }
-    
+
     private static void readFromFile() throws FileNotFoundException {
 
         File dataFile = new File(PATH);
@@ -160,7 +159,7 @@ public class Duke {
 
     private static String formLine(Task t) {
         String line = "";
-        
+
         if (t instanceof Todo) {
             line += "T" + DELIM;
             line += (t.isDone() ? "1" : "0") + DELIM;
@@ -176,7 +175,7 @@ public class Duke {
             line += t.job + DELIM;
             line += ((Event) t).getAt();
         }
-        
+
         return line;
     }
 
