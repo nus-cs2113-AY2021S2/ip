@@ -221,22 +221,24 @@ public class Duke {
     }
 
     private static void addTaskInDeadlineList(String line) {
-        String[] commandWords = (line.split(" ", 2));
-        String description = commandWords[1];
+        String description = getTaskDescription(line);
         Deadline newTask = new Deadline(description);
         tasks.add(newTask);
     }
 
-    private static void addTaskInEventList(String line) {
+    private static String getTaskDescription(String line) {
         String[] commandWords = (line.split(" ", 2));
-        String description = commandWords[1];
+        return commandWords[1];
+    }
+
+    private static void addTaskInEventList(String line) {
+        String description = getTaskDescription(line);
         Event newTask = new Event(description);
         tasks.add(newTask);
     }
 
     private static void addTaskInTodoList(String line) {
-        String[] commandWords = (line.split(" ", 2));
-        String description = commandWords[1];
+        String description = getTaskDescription(line);
         Todo newTask = new Todo(description);
         tasks.add(newTask);
     }
