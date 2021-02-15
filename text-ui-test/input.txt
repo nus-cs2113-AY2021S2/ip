@@ -1,6 +1,7 @@
 blah
 list
 done 1
+delete 4
 todo
 todo borrow book
 deadline
@@ -28,4 +29,14 @@ done 2
 list
 done -1
 done
+delete 3
+list
+delete 3
+list
+delete 3
+list
+delete 2
+list
+delete 1
+list
 bye
