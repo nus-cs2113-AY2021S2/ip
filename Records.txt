@@ -1,4 +1,3 @@
-T|0|cck
-T|1|lla
-D|0|aac|op
-E|0|00p|op
+T|0|aa
+D|0|11|uup
+E|1|1010|100

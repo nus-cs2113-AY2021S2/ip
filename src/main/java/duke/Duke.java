@@ -132,6 +132,7 @@ public class Duke {
         System.out.println("Got it. I've deleted this task:");
         System.out.println("\t" + records.remove(index));
         System.out.printf("Now you have %d tasks in the list.\n", records.size());
+        saveRecords();
     }
 
     private static UserInput getUserInput() {
