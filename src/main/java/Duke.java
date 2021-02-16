@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -33,17 +36,69 @@ public class Duke {
     public static final String INVALID_ARGUMENT_MESSAGE = "Invalid argument!\n";
     public static final String INVALID_COMMAND_MESSAGE = "I am sorry, I do not recognise that command\n"
             + "Please try again\n";
+    public static final String GENERIC_ERROR_MESSAGE = "Something went wrong!\n";
 
     public static void main(String[] args) {
+        ArrayList<Task> list = new ArrayList<>();
+        int taskCount = handleFile(list);
         printWelcome();
-        interact();
+        interact(list, taskCount);
         printBye();
     }
 
-    public static void interact() {
-        Task[] list = new Task[100];
+    public static int handleFile(ArrayList<Task> list) {
         int taskCount = 0;
+        try {
+            File saveData = new File("data.txt");
+            if(saveData.createNewFile()) { //file is created
+                System.out.println("data.txt created");
+            } else { //file already exists
+                Scanner reader = new Scanner(saveData);
+                while (reader.hasNextLine()) {
+                    String line = reader.nextLine();
+                    loadData(list, line);
+                    taskCount++;
+                }
+                System.out.println("data loaded");
+            }
+        } catch (IOException e) {
+            System.out.print(LINE + GENERIC_ERROR_MESSAGE + LINE);
+        }
+        return taskCount;
+    }
 
+    public static void loadData(ArrayList<Task> list, String line) {
+        boolean isDone = true;
+        int indexOfSeparator = 0;
+        String desc = new String();
+        String date = new String();
+
+        if (line.charAt(0) == '0') {
+            isDone = false;
+        }
+
+        switch (line.charAt(1)) {
+        case 'T':
+            desc = line.substring(2);
+            list.add(new ToDo(desc, isDone));
+            break;
+        case 'D':
+            indexOfSeparator = line.indexOf('|');
+            desc = line.substring(2, indexOfSeparator);
+            date = line.substring(indexOfSeparator + 1);
+            list.add(new Deadline(desc, isDone, date));
+            break;
+        case 'E':
+            indexOfSeparator = line.indexOf('|');
+            desc = line.substring(2, indexOfSeparator);
+            date = line.substring(indexOfSeparator + 1);
+            list.add(new Event(desc, isDone, date));
+            break;
+        }
+    }
+
+    public static void interact(ArrayList<Task> list, int taskCount) {
+        
         Scanner scan = new Scanner(System.in);
         String in = scan.nextLine();
 

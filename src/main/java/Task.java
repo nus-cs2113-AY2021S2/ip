@@ -10,6 +10,14 @@ public class Task {
         tasksRemaining++;
     }
 
+    public Task(String desc, boolean isDone) {
+        this.desc = desc;
+        this.isDone = isDone;
+        if (!isDone) {
+            tasksRemaining++;
+        }
+    }
+
     public String getDesc() {
         return desc;
     }
