@@ -3,15 +3,17 @@ package duke.fileHandling;
 import duke.Duke;
 import duke.task.*;
 
+import java.nio.file.Files;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class FileHandler {
-    private static final String FILE_PATH = "src/data/";
+    private static final String FILE_PATH = "data/";
     private static final String FILE_NAME = "tasks.txt";
     private static final String DELIMINATOR = "#";
 
@@ -59,6 +61,16 @@ public class FileHandler {
         return newTask;
     }
 
+    private static void createDataDir() {
+        try {
+            Files.createDirectory(Path.of(FILE_PATH));
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     public static ArrayList<Task> readTasksFromFile() {
         File taskFile = new File(FILE_PATH + FILE_NAME);
         ArrayList<Task> localTasks = null;
@@ -67,6 +79,7 @@ public class FileHandler {
         } catch (FileNotFoundException e) {
             System.out.println(Duke.DIVIDER +
                     " Local task list file is not found.\n A new task list is initialized for you.");
+            createDataDir();
         }
         return localTasks;
     }
