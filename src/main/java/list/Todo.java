@@ -5,7 +5,7 @@ public class Todo extends TaskList {
     private static final String TASK_TITLE = "T";
 
     public Todo(String line) {
-        this.description = line;
+        this.description = line.trim();
         this.isDone = false;
         printAddedTask();
     }

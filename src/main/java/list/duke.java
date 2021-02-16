@@ -85,7 +85,7 @@ public class duke {
     }
 
     public void printCompletedTasks() {
-        System.out.println("Good job Crewmate! You completed all your tasks in  this list! (─‿─)");
+        System.out.println("Good job Crewmate! You completed all your tasks in this list! (─‿─)");
     }
 
     public void printEmptyList() {
@@ -119,7 +119,7 @@ public class duke {
     }
 
     public void printLoading() {
-        System.out.println("Loading your previous data . . . ");
+        System.out.println("Loading your previous data . . .");
     }
 
     public void printEmptyFile() {
@@ -127,7 +127,7 @@ public class duke {
     }
 
     public void printNoSavedFile() {
-        System.out.println("Loading New Duke Window . . . ");
+        System.out.println("Loading New Duke Window . . .");
     }
 
     public void printDeletingTask() {

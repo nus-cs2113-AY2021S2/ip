@@ -1,3 +1,4 @@
+Loading New Duke Window . . .
 Ssshhhhhh!!!!!
              ???????????
  ???????? ?????????????????
@@ -56,7 +57,7 @@ ________________________________________________________________________________
 Nice! I've marked this task as done:
 [T][?]eat
 ____________________________________________________________________________________
-Good job Crewmate! You completed all your tasks in  this list! (???)
+Good job Crewmate! You completed all your tasks in this list! (???)
 ____________________________________________________________________________________
 There's no such command!!! You look SUS!!!  (?_??
 ____________________________________________________________________________________
@@ -65,15 +66,22 @@ ________________________________________________________________________________
 There's no such task?! Focus Crewmate!!  (????)
 ____________________________________________________________________________________
 Nice! I've marked this task as done:
-[D][?]get married (by: mon 23.01.33)
+[D][?]get married(by: mon 23.01.33)
 ____________________________________________________________________________________
-Good job Crewmate! You completed all your tasks in  this list! (???)
+Good job Crewmate! You completed all your tasks in this list! (???)
 ____________________________________________________________________________________
 ATTENTION, Here's your list of tasks Crewmate!!!
 1. [T][?]eat
-2. [D][?]get married (by: mon 23.01.33)
-Good job Crewmate! You completed all your tasks in  this list! (???)
+2. [D][?]get married(by: mon 23.01.33)
+Good job Crewmate! You completed all your tasks in this list! (???)
 ____________________________________________________________________________________
+ (o??) Hol' up! I'm deleting this task:
+[T][?]eat
+Good job Crewmate! You completed all your tasks in this list! (???)
+____________________________________________________________________________________
+ATTENTION, Here's your list of tasks Crewmate!!!
+1. [D][?]get married(by: mon 23.01.33)
+Good job Crewmate! You completed all your tasks in this list! (???)
 ____________________________________________________________________________________
 Thanks for your help Crewmate!!
 We wouldn't have done this without your help!!

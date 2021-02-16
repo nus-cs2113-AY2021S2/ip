@@ -14,7 +14,7 @@ public class Deadline extends TaskList {
 
     private String getDescription(String line) {
         String[] description = line.split("/", 2);
-        return description[0];
+        return description[0].trim();
     }
 
     public String getTaskBy() {
@@ -33,7 +33,7 @@ public class Deadline extends TaskList {
         } catch (ArrayIndexOutOfBoundsException e) {
             by = "No Deadline!! Hehe! :)";
         }
-        return by;
+        return by.trim();
     }
 
     @Override

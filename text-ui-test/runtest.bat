@@ -6,7 +6,8 @@ if not exist ..\bin mkdir ..\bin
 REM delete output from previous run
 if exist ACTUAL.TXT del ACTUAL.TXT
 
-
+REM delete duke.txt from previous previous run
+if exist duke.txt del duke.txt
 
 REM compile the code into the bin folder
 javac  -encoding "UTF-8" -cp ..\src\main\java -Xlint:none -d ..\bin ..\src\main\java\*.java
