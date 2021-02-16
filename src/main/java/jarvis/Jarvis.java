@@ -19,7 +19,7 @@ public class Jarvis {
     public Jarvis() {}
 
     public void printDivider() {
-        String DIVIDER = "------------------------------------------------";
+        String DIVIDER = "--------------------------------------------------------------------------------------------";
         System.out.println(DIVIDER);
     }
 
