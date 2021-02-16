@@ -15,6 +15,7 @@ public class DukeController {
     public static final int EVENT_STRING_LENGTH = 5;
     public static final int DEADLINE_STRING_LENGTH = 8;
     public static final int TODO_STRING_LENGTH = 4;
+    public static final int DELETE_STRING_LENGTH = 6;
     public static ArrayList<Task> tasks = new ArrayList<>();
     public static int taskCount = 0;
 
@@ -27,6 +28,8 @@ public class DukeController {
                 UI.printTaskList(tasks, taskCount);
             } else if (input.contains("done")) {
                 markTaskDone(input);
+            } else if (input.contains("delete")) {
+                deleteTask(input);
             } else {
                 addNewTask(input);
             }
@@ -98,5 +101,19 @@ public class DukeController {
             throw new EmptyTodoException();
         }
         return new ToDo(substr.trim());
+    }
+
+    private static void deleteTask (String input) {
+        String substr = input.substring(DELETE_STRING_LENGTH).trim();
+        int taskIndex = Integer.parseInt(substr) - 1;
+        try {
+            Task taskToDelete = tasks.get(taskIndex);
+            tasks.remove(taskIndex);
+            taskCount--;
+            UI.deleteTaskSuccessfulMessage(taskToDelete, taskCount);
+        } catch (IndexOutOfBoundsException e) {
+            UI.taskIndexOutOfBoundsMessage();
+        }
+
     }
 }
