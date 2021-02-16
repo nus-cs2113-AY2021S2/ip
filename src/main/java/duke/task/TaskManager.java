@@ -3,6 +3,7 @@ package duke.task;
 import duke.command.CommandNotFoundException;
 import duke.command.MainUI;
 
+import java.io.IOException;
 import java.util.Arrays;
 
 public class TaskManager {
@@ -23,8 +24,6 @@ public class TaskManager {
     private static Task[] tasksObjectsArray = new Task[MAX_TASK_SIZE];
 
     public static void handleTask(String input) throws CommandNotFoundException {
-//        String[] commandWords = input.split(" ");
-//        String firstWord = commandWords[0];
         String firstWord = StringManipulator.getFirstWord(input);
         switch (firstWord){
         case DONE_COMMAND:
@@ -40,9 +39,12 @@ public class TaskManager {
                 System.out.println("added: " + taskDescription + "to array");
                 tasksObjectsArray[Task.getTaskCount()-1] = t;
                 printMessageAfterTaskIsAdded(t);
+                MainUI.appendToFile(MainUI.FILE_PATH,t.toString());
             } catch (TaskDescriptionMissingException e) {
                 System.out.println(e.getMessage());
                 MainUI.printDivider();
+            } catch (IOException e) {
+                System.out.println("IOError at TODO_Command");
             }
             break;
         case DEADLINE_COMMAND:
@@ -69,6 +71,7 @@ public class TaskManager {
             throw new CommandNotFoundException();
         }
     }
+
 
     private static void printMessageAfterTaskIsAdded(Task task) {
         MainUI.printDivider();
@@ -105,4 +108,7 @@ public class TaskManager {
         MainUI.printDivider();
     }
 
+    public static void updateDataFile(){
+
+    }
 }
