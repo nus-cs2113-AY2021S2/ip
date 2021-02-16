@@ -5,11 +5,23 @@ import ip.duke.task.Event;
 import ip.duke.task.Task;
 import ip.duke.task.Todo;
 
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+    public static ArrayList<Task> list = new ArrayList<>();
+    public static File filePath = new File("data/duke.txt");
+    public static int index = 0;
+
     public static void main(String[] args) {
+        try {
+            loadData();
+        } catch (IOException e) {
+            System.out.println("IO exception :O");
+        }
+
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -19,9 +31,8 @@ public class Duke {
         printLine();
         printGreeting();
 
-        ArrayList<Task> list = new ArrayList<>();
-        int index = 0;
-        int slashPosition = 0;
+
+        int slashPosition;
         Scanner in = new Scanner(System.in);
         String command = in.nextLine();
 
@@ -94,14 +105,68 @@ public class Duke {
             command = in.nextLine();
 
         }
+
+        try {
+            PrintWriter writer = new PrintWriter("data/duke.txt");
+            writer.print("");
+            writer.close();
+            for (Task presentTask : list) {
+                appendToFile(presentTask.toDataString());
+                appendToFile(System.lineSeparator());
+            }
+        } catch (FileNotFoundException e){
+            System.out.println("File not found");
+        } catch (IOException e) {
+            System.out.println("Unable to write to file");
+        }
         printBye();
     }
+
+    private static void loadData() throws IOException {
+        try {
+            Scanner dataScanner = new Scanner(filePath);
+            while (dataScanner.hasNext()) {
+                String[] dataEntry = dataScanner.nextLine().split("\\|");
+                switch (dataEntry[0]) {
+                case "T":
+                    list.add(new Todo(dataEntry[2]));
+                    break;
+                case "D":
+                    list.add(new Deadline(dataEntry[2], dataEntry[3]));
+                    break;
+                case "E":
+                    list.add(new Event(dataEntry[2], dataEntry[3]));
+                    break;
+                default:
+                    break;
+                }
+                if (dataEntry[1].equals("1")) {
+                    list.get(index).setDone(true);
+                }
+                index++;
+            }
+
+        } catch (FileNotFoundException e) {
+            File dataDirectory = new File("data");
+            dataDirectory.mkdir();
+            File dukeFile = new File("data","duke.txt");
+            dukeFile.createNewFile();
+        }
+    }
+
+    private static void appendToFile(String textToAppend) throws IOException {
+        FileWriter fw = new FileWriter("data/duke.txt", true);
+        fw.write(textToAppend);
+        fw.close();
+    }
+
 
     public static void printGreeting() {
         System.out.println("Hello! I'm ip.taskmaster.Duke");
         System.out.println("What can I do for you?\n");
         printLine();
     }
+
 
     public static void recordTasks(ArrayList<Task> list, int index, String command, String category) {
         printLine();
