@@ -80,7 +80,7 @@ public class MessagePrinter {
     }
 
     public static void printEmptyListMessage() {
-        String emptyListMessage = " The list is empty. Add a task to the list now!";
+        String emptyListMessage = " OOPS!!! The list is empty. Add a task to the list now!";
         System.out.println(emptyListMessage);
         System.out.println(" Type 'help' if you need help.");
     }
