@@ -7,6 +7,7 @@ import task.Event;
 import task.Task;
 import task.ToDo;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class DukeController {
@@ -14,7 +15,7 @@ public class DukeController {
     public static final int EVENT_STRING_LENGTH = 5;
     public static final int DEADLINE_STRING_LENGTH = 8;
     public static final int TODO_STRING_LENGTH = 4;
-    public static Task[] tasks = new Task[100];
+    public static ArrayList<Task> tasks = new ArrayList<>();
     public static int taskCount = 0;
 
     public static void run(Scanner scanner) {
@@ -35,7 +36,7 @@ public class DukeController {
     public static void markTaskDone(String input) {
         String[] parts = input.split(" ");
         int taskIndex = Integer.parseInt(parts[1]) - 1;
-        Task taskToMarkDone = tasks[taskIndex];
+        Task taskToMarkDone = tasks.get(taskIndex);
         taskToMarkDone.markDone();
         UI.taskMarkedAsDoneMessage(taskToMarkDone);
     }
@@ -52,7 +53,7 @@ public class DukeController {
     }
 
     private static void addTaskSuccessful(Task taskToAdd) {
-        tasks[taskCount] = taskToAdd;
+        tasks.add(taskToAdd);
         taskCount++;
         UI.addTaskSuccessfulMessage(taskToAdd, taskCount);
     }

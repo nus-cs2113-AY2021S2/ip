@@ -2,6 +2,7 @@ package duke;
 
 import task.Task;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class UI {
@@ -26,12 +27,11 @@ public class UI {
         System.out.println("____________________________________________________________");
     }
 
-    public static void printTaskList(Task[] tasks, int taskCount) {
-        Task[] taskList = Arrays.copyOf(tasks, taskCount);
+    public static void printTaskList(ArrayList<Task> tasks, int taskCount) {
         System.out.println("____________________________________________________________");
         System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < taskList.length; i++) {
-            System.out.printf("%d. %s%n", i + 1, taskList[i]);
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.printf("%d. %s%n", i + 1, tasks.get(i));
         }
         System.out.println("____________________________________________________________");
     }
