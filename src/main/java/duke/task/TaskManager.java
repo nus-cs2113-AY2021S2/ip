@@ -38,6 +38,7 @@ public class TaskManager {
                 MainUI.printDivider();
             }
             break;
+            
         case DEADLINE_COMMAND:
             try {
                 String dueDate = StringManipulator.getStringAfterSlash(input);
