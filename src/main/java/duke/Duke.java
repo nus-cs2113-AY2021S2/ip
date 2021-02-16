@@ -4,6 +4,11 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.FileWriter;
+import java.io.File;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Duke {
@@ -102,12 +107,32 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
+    public static void saveData() {
+        try {
+            File path = new File("duke.txt");
+            FileWriter fw = new FileWriter(path);
+            for (int i = 0; i < numberOfTasks; ++i) {
+                fw.write(keywords[i] + " | " + tasks[i].getDescription());
+                if (keywords[i] == "E") {
+                    fw.write(" | " + at);
+                } else if (keywords[i] == "D") {
+                    fw.write(" | " + by);
+                }
+                fw.write(System.lineSeparator());
+            }
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("Error occurred in saving");
+        }
+    }
+
+    public static void loadData() throws FileNotFoundException {
         String command;
-        Scanner in = new Scanner(System.in);
-        UserInterface.printHello();
-        command = in.nextLine();
-        do {
+        File f = new File("duke.txt");
+        Scanner input = new Scanner(f);
+        command = input.nextLine();
+
+        while (!command.equals("bye")) {
             // makes the input case-insensitive
             command = command.toLowerCase();
             if (command.equals("list")) {
@@ -129,8 +154,22 @@ public class Duke {
             } else {
                 DukeException.commandIsInvalid();
             }
-            command = in.nextLine();
-        } while(!command.equals("bye"));
+            try {
+                command = input.nextLine();
+            } catch (NoSuchElementException e) {
+                break;
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        UserInterface.printHello();
+        try {
+            loadData();
+        } catch (FileNotFoundException e) {
+            System.out.println("Error in loading");
+        }
+        saveData();
         UserInterface.printBye();
     }
 }
