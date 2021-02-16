@@ -1,19 +1,34 @@
 package duke.command;
 
+import duke.main.DukeException;
 import duke.task.TaskManager;
 
 public class DoneCommand implements Command {
     public DoneCommand(String input) {
     }
 
-    public void execute(String input) {
+    public void execute(String input) throws DukeException {
         String[] command = input.trim().split(" ");
+
+        if (command.length == 1) { //to check if index of task that is done is given
+            throw new DukeException("OOPS!!! You missed out the index of the task you have done.");
+        }
+
         int num = 0;
+
         try {
             num = Integer.parseInt(command[1]);
-            TaskManager.tasks.get(num - 1).setAsDone();
-            System.out.println("Nice! I've marked this task as done: ");
-            System.out.println(TaskManager.tasks.get(num - 1));
+            if (num > TaskManager.tasks.size() || num < 1) {
+                throw new DukeException("Error: no such task index");
+            }
+            if (TaskManager.tasks.get(num - 1).isDone == false) {
+                TaskManager.tasks.get(num - 1).setAsDone();
+                System.out.println("Nice! I've marked this task as done: ");
+                System.out.println(TaskManager.tasks.get(num - 1));
+            }
+            else {
+                System.out.println("Task is already done!");
+            }
         } catch (NumberFormatException e) { //to check if the word after done is a number
             System.out.println("Error: input is not a number.");
         } catch (NullPointerException e) { //to check if the number after done is a valid number for a task

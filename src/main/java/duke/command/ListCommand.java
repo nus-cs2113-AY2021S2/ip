@@ -8,6 +8,7 @@ public class ListCommand implements Command {
     }
 
     public void execute(String input) {
+
         if (TaskManager.numOfTasks == 0) {
             System.out.println("You have no task! :)");
         }
@@ -18,6 +19,7 @@ public class ListCommand implements Command {
                 count++;
             }
         }
+
         end();
     }
 

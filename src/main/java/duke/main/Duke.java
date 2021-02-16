@@ -13,17 +13,12 @@ import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.ClientInfoStatus;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
         greet();
         loadTasks();
         Scanner in = new Scanner(System.in);
@@ -40,11 +35,23 @@ public class Duke {
             saveTasks();
             input = in.nextLine();
         }
+        bye();
 
     }
 
     public static void greet() {
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        System.out.println("Hello from\n" + logo);
         System.out.println("Hello! I'm Duke" + System.lineSeparator() + "What can I do for you?");
+        end();
+    }
+
+    public static void bye() {
+        System.out.println("See you next time! BYE!");
         end();
     }
 
@@ -52,9 +59,12 @@ public class Duke {
         System.out.println("____________________________________________________________" + System.lineSeparator());
     }
 
+    // checks if file path and file to save list exists and creates if not, then write list into file
     public static void saveTasks() {
+
         String dir = System.getProperty("user.dir");
         Path path = Paths.get(dir, "data");
+
         try {
             if (!Files.exists(path)) {
                 Files.createDirectories(path);
@@ -74,19 +84,26 @@ public class Duke {
         }
     }
 
+    // write list to file one by one, line by line
     private static void writeToFile(String filePath, ArrayList<Task> tasks) throws IOException {
+
         FileWriter fileWriter = new FileWriter(filePath);
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+
         for (int i = 0; i < TaskManager.numOfTasks; i++) {
             bufferedWriter.write(tasks.get(i).toString());
             bufferedWriter.write("\n");
         }
+
         bufferedWriter.close();
     }
 
+    //  checks if file path and file to load list exists and creates if not, then load list from file
     public static void loadTasks() {
+
         String dir = System.getProperty("user.dir");
         Path path = Paths.get(dir, "data");
+
         try {
             if (!Files.exists(path)) {
                 Files.createDirectories(path);
@@ -105,7 +122,7 @@ public class Duke {
 
             while (data != null) {
                 Task newTask = toTask(data);
-                TaskManager.tasks.set(TaskManager.numOfTasks, newTask);
+                TaskManager.tasks.add(newTask);
                 TaskManager.numOfTasks++;
                 i++;
                 data = reader.readLine();
@@ -115,22 +132,27 @@ public class Duke {
         }
     }
 
+    // converts line read from file into a Task type
     private static Task toTask(String data) {
+
         String[] read = data.trim().split("]");
+
         if (read[0].contains("T")) {
             Task newTodo = new Todo(read[2].trim());
             if (read[1].contains("X")) {
                 newTodo.setAsDone();
             }
             return newTodo;
-        } else if (read[0].contains("D")) {
+        }
+        else if (read[0].contains("D")) {
             String[] split = read[2].trim().split(" \\(by:");
             Task newDeadline = new Deadline(split[0], split[1].replace(")", ""));
             if (read[1].contains("X")) {
                 newDeadline.setAsDone();
             }
             return newDeadline;
-        } else if (read[0].contains("E")) {
+        }
+        else if (read[0].contains("E")) {
             String[] split = read[2].trim().split(" \\(at:");
             Task newEvent = new Event(split[0], split[1].replace(")", ""));
             if (read[1].contains("X")) {

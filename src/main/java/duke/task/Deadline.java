@@ -3,7 +3,6 @@ package duke.task;
 public class Deadline extends Task {
 
     protected String by;
-   // public String type = "D";
 
     public Deadline(String description, String by) {
         super(description);
