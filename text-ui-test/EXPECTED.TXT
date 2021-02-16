@@ -1,10 +1,29 @@
 ____________________________________________________________
-    Hi! I'm Duke (:
-    What can I do for you today?
+Hi! I'm Duke (:
+What can I do for you today?
 ____________________________________________________________
 Gotcha! I've added this task:
 [T][ ] read book
 Only 1 task in the list
+____________________________________________________________
 Gotcha! I've added this task:
 [E][ ] eat lunch with friends (at: nus)
 2 tasks left in the list
+____________________________________________________________
+1. [T][ ] read book
+2. [E][ ] eat lunch with friends (at: nus)
+____________________________________________________________
+This task has been done. Good job!
+[X] read book
+____________________________________________________________
+1. [T][X] read book
+2. [E][ ] eat lunch with friends (at: nus)
+____________________________________________________________
+The task has been deleted.
+____________________________________________________________
+1. [T][X] read book
+____________________________________________________________
+Invalid command! Please try again.
+____________________________________________________________
+Bye. Hope to see you again soon!
+____________________________________________________________

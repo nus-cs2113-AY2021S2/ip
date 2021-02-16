@@ -1,2 +1,9 @@
 todo read book
 event eat lunch with friends /at nus
+list
+done 1
+list
+delete 2
+list
+abracadabra
+bye
