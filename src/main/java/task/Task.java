@@ -23,6 +23,10 @@ public class Task {
         this.isDone = true;
     }
 
+    public boolean isDone() {
+        return isDone;
+    }
+
     @Override
     public String toString() {
         return String.format("[%s] %s", getStatusIcon(), getDescription());
