@@ -61,9 +61,27 @@ public class todov2 {
         return this.leftoverTasks;
     }
 
+    public int tasksTotal(){
+        return this.totalTasks;
+    }
 
 
-
+    public String tasksUpdate(){
+        String out = "";
+        for (int i = 0; i < totalTasks; i++){
+            if (taskList[i].displayType().equals("[T]")) {
+                out += taskList[i].displayType().substring(1, 2) + "/"
+                        + taskList[i].displayResolved().substring(1, 2) + "/"
+                        + taskList[i].displayDescription() + "/\n";
+            }else{
+                out += taskList[i].displayType().substring(1, 2) + "/"
+                        + taskList[i].displayResolved().substring(1, 2) + "/"
+                        + taskList[i].displayDescription() + "/"
+                        + taskList[i].displayDate().substring(5, taskList[i].displayDate().indexOf(")")) + "\n";
+            }
+        }
+        return out;
+    }
 
 
 

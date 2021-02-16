@@ -1,4 +1,9 @@
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 
 public class Duke {
@@ -27,6 +32,7 @@ public class Duke {
                     + " Try the following: deadline [task] /by [date] ";
                 break;
             }
+
             out = list.addTask(desc, listTypes.deadline, date);
             out += "\nYou now have " + list.tasksLeft() + " task(s) left in the list!";
             break;
@@ -101,9 +107,74 @@ public class Duke {
     }
 
 
+    public static void dukeInitialisation(todov2 list) throws IOException {
+        File importedList = new File("data/duke.txt");
+        Scanner s = new Scanner(importedList);
+        while (s.hasNext()) {
+            String input = s.nextLine();
+            String[] tokens = input.split("/");
+            String command = "";
+            switch(tokens[0]){
+            case "D":
+                command = "deadline " + tokens[2] + " /by " + tokens[3];
+                break;
+            case "E":
+                command = "event " + tokens[2] + " /at " + tokens[3];
+                break;
+            case "T":
+                command = "todo " + tokens[2];
+                break;
+            }
+            command_parser(list, command);
+            if (tokens[1].equals("X")){
+                String  temp = command_parser(list, "done " + list.tasksTotal());
+            }
+        }
+        System.out.println("Task list has been imported! Here are your tasks: \n" + command_parser(list, "list"));
+
+    }
 
 
-    public static void main(String[] args) {
+    public static void writeToFile(String filePath, String addText) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        fw.write(addText);
+        fw.close();
+    }
+
+    private static void appendToFile(String filePath, String textToAppend) throws IOException {
+        FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
+        fw.write(textToAppend);
+        fw.close();
+    }
+
+/*    public static void addToList(String type, String resolved, String description, String date){
+        String file = "data/duke.txt";
+        try {
+            appendToFile(file, type + "|" + resolved + "|" + description + "|" + date + System.lineSeparator());
+        } catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
+    }*/
+
+    public static void updateList(todov2 list) throws IOException{
+        String file = "data/duke.txt";
+        writeToFile(file,"");
+        String out = list.tasksUpdate();
+        try {
+            appendToFile(file, out);
+        } catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
+    }
+
+
+
+
+
+
+
+
+    public static void main(String[] args) throws IOException {
 
         Boolean continueChat = true;
         Scanner in = new Scanner(System.in);
@@ -111,8 +182,9 @@ public class Duke {
         todov2 todoList = new todov2();
 
 
-
         dukeStartup();
+        dukeInitialisation(todoList);
+
         while(continueChat){
             String input = in.nextLine();
             if(input.equals("bye")){
@@ -120,6 +192,7 @@ public class Duke {
                 continueChat = false;
             }else {
                 output = command_parser(todoList,input);
+                updateList(todoList);
             }
             dukeResponse(output);
 
