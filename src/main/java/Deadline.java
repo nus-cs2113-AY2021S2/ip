@@ -1,13 +1,22 @@
 public class Deadline extends Task {
-    protected String dueDate;
+    protected String date;
 
     public Deadline(String desc, String dueDate) {
         super(desc);
-        this.dueDate = dueDate;
+        this.date = dueDate;
+    }
+
+    public Deadline(String desc, boolean isDone, String dueDate) {
+        super(desc, isDone);
+        this.date = dueDate;
     }
 
     @Override
+    public String getDate() {
+        return date;
+    }
+
     public String toString() {
-        return " [D]" + super.toString() + " (by: " + dueDate + ")";
+        return " [D]" + super.toString() + " (by: " + date + ")";
     }
 }

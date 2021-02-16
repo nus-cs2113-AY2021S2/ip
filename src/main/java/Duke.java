@@ -1,3 +1,8 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.lang.StringBuffer;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -36,16 +41,70 @@ public class Duke {
     public static final String INVALID_ARGUMENT_MESSAGE = "Invalid argument!\n";
     public static final String INVALID_COMMAND_MESSAGE = "I am sorry, I do not recognise that command\n"
             + "Please try again\n";
+    public static final String GENERIC_ERROR_MESSAGE = "Something went wrong!\n";
 
     public static void main(String[] args) {
+        ArrayList<Task> list = new ArrayList<>();
+        int taskCount = handleFile(list);
         printWelcome();
-        interact();
+        interact(list, taskCount);
+        saveData(list);
         printBye();
     }
 
-    public static void interact() {
-        ArrayList<Task> list = new ArrayList<Task>();
+    private static int handleFile(ArrayList<Task> list) {
         int taskCount = 0;
+        try {
+            File saveData = new File("data.txt");
+            if(saveData.createNewFile()) { //file is created
+                System.out.println("data.txt created");
+            } else { //file already exists
+                Scanner reader = new Scanner(saveData);
+                while (reader.hasNextLine()) {
+                    String line = reader.nextLine();
+                    loadData(list, line);
+                    taskCount++;
+                }
+                System.out.println("data loaded");
+                System.out.println("tasks: " + taskCount);
+            }
+        } catch (IOException e) {
+            System.out.print(LINE + GENERIC_ERROR_MESSAGE + LINE);
+        }
+        return taskCount;
+    }
+
+    private static void loadData(ArrayList<Task> list, String line) {
+        boolean isDone = true;
+        int indexOfSeparator = 0;
+        String desc = new String();
+        String date = new String();
+
+        if (line.charAt(0) == '0') {
+            isDone = false;
+        }
+
+        switch (line.charAt(1)) {
+        case 'T':
+            desc = line.substring(2);
+            list.add(new ToDo(desc, isDone));
+            break;
+        case 'D':
+            indexOfSeparator = line.indexOf('|');
+            desc = line.substring(2, indexOfSeparator);
+            date = line.substring(indexOfSeparator + 1);
+            list.add(new Deadline(desc, isDone, date));
+            break;
+        case 'E':
+            indexOfSeparator = line.indexOf('|');
+            desc = line.substring(2, indexOfSeparator);
+            date = line.substring(indexOfSeparator + 1);
+            list.add(new Event(desc, isDone, date));
+            break;
+        }
+    }
+
+    public static void interact(ArrayList<Task> list, int taskCount) {
 
         Scanner scan = new Scanner(System.in);
         String in = scan.nextLine();
@@ -100,8 +159,6 @@ public class Duke {
             }
         }
     }
-
-
 
     public static int addToDo(String input, ArrayList<Task> list, int index) {
         if(input==null) {
@@ -232,6 +289,60 @@ public class Duke {
         } catch (Exception e) {
             printInvalidArgumentMessage();
         }
+
+    private static void saveData(ArrayList<Task> list) {
+        try {
+            FileWriter fw = new FileWriter("data.txt");
+            fw.write(composeOutput(list.get(0)) + System.lineSeparator());
+
+            for (int i = 1; i< list.size(); i++) {
+                fw.append(composeOutput(list.get(i))).append(System.lineSeparator());
+            }
+            fw.close();
+
+        } catch (IOException e) {
+            System.out.print(LINE + GENERIC_ERROR_MESSAGE + LINE);
+        }
+    }
+
+    private static String composeOutput(Task data) {
+        boolean isDone = data.getStatus();
+        StringBuilder output = new StringBuilder();
+
+        switch(data.toString().charAt(2)){
+        case 'T':
+            if(!isDone) {
+                output.append("0");
+            } else {
+                output.append("1");
+            }
+            output.append('T');
+            output.append(data.getDesc());
+            break;
+        case 'D':
+            if(!isDone) {
+                output.append("0");
+            } else {
+                output.append("1");
+            }
+            output.append('D');
+            output.append(data.getDesc());
+            output.append('|');
+            output.append(data.getDate());
+            break;
+        case 'E':
+            if(!isDone) {
+                output.append("0");
+            } else {
+                output.append("1");
+            }
+            output.append('E');
+            output.append(data.getDesc());
+            output.append('|');
+            output.append(data.getDate());
+            break;
+        }
+        return output.toString();
     }
 
     private static void printWelcome() {
