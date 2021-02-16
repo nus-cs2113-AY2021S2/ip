@@ -22,4 +22,9 @@ public class Deadline extends Task {
     public String printTaskTiming() {
         return "(by: " + this.taskTiming + ")";
     }
+
+    @Override
+    public String getFileFormat() {
+        return super.getFileFormat() + " | " + taskTiming;
+    }
 }
