@@ -1,5 +1,9 @@
 package duke;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
@@ -15,8 +19,18 @@ public class Duke {
     public static Scanner in = new Scanner(System.in);
     public static String input;
 
+    public static String filepath = "data.txt";
+
     public static void main(String[] args) {
+        try {
+            autoload(filepath);
+        } catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
+
         welcomeMessage();
+
+
 
         input = getString(in);
         Command command;
@@ -50,6 +64,8 @@ public class Duke {
                 System.out.println("OOPS!!! You need to add time for new Deadline with keyword '/by'!!");
             }
 
+            autosave();
+
             System.out.println();
             input = getString(in);
         }
@@ -58,6 +74,85 @@ public class Duke {
         exitMessage();
 
     }
+
+    private static void autosave() {
+        File f = new File(filepath);
+        try {
+            String data = getAllTaskListData();
+            writeToFile(filepath, data);
+        } catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
+        } catch (NullPointerException e) {
+            System.out.println("No items to add to file");
+        }
+    }
+
+    private static void writeToFile(String filePath, String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        fw.write(textToAdd);
+        fw.close();
+    }
+
+    private static void processFileInput(String fileLine){
+        char taskType = fileLine.charAt(1);
+        char isDone = fileLine.charAt(4);
+        String description;
+        incrementTasks();
+
+        switch(taskType) {
+        case ('T'):
+            addNewTodo("todo" + fileLine.substring(6));
+            break;
+        case ('D'):
+            int deadlineIndex = fileLine.indexOf("(by:");
+            description = fileLine.substring(6, deadlineIndex);
+            String deadline = fileLine.substring(deadlineIndex+4, fileLine.length() - 1);
+            addNewDeadline("deadline" + description + "/by" + deadline);
+            break;
+        case ('E'):
+            int eventIndex = fileLine.indexOf("(at:");
+            description = fileLine.substring(6, eventIndex);
+            String event = fileLine.substring(eventIndex+4, fileLine.length() - 1);
+            addNewEvent("event" + description + "/at" + event);
+            break;
+        }
+
+
+        if (isDone == 'Y'){
+            tasks[numTasks].markAsDone();
+        }
+
+    }
+
+    private static void readFileContents(String filePath) throws FileNotFoundException {
+        File f = new File(filePath); // create a File for the given file path
+        Scanner s = new Scanner(f); // create a Scanner using the File as the source
+        while (s.hasNext()) {
+            String line = s.nextLine();
+            processFileInput(line);
+        }
+    }
+
+    private static void autoload(String filepath) throws IOException {
+        File f = new File(filepath);
+        if (f.createNewFile()) {
+            System.out.println("Welcome to Duke. Is this your first time using Duke on this machine?");
+        } else {
+            System.out.println("Your previous Task list from Duke has been loaded! :-)");
+            readFileContents(filepath);
+        }
+        //boolean existingData = f.exists();
+    }
+
+
+    private static String getAllTaskListData() {
+        String data = "";
+        for (int i = 1; i <= numTasks; i++){
+            data = data + (tasks[i].toString()) + "\n";
+        }
+        return data;
+    }
+
 
     public static void executeCommand(String input, Command c) throws InvalidCommandException, EmptyInputException, InvalidEventTimeException, InvalidDeadlineTimeException {
         switch (c) {
@@ -141,11 +236,8 @@ public class Duke {
         completedTaskMessage(completedTaskIndex);
     }
 
-    private static void addNewTask(String input) {
-        tasks[numTasks] = new Task(input);
-    }
-
     private static void addNewDeadline(String input) {
+
         tasks[numTasks] = new Deadline(input.substring(DEADLINE_START, getTimePosition(input)), getTime(input));
     }
 
@@ -191,6 +283,7 @@ public class Duke {
     }
 
     private static void confirmNewTask() {
+        System.out.println("Got it. I've added this task: ");
         System.out.println(tasks[numTasks]);
         System.out.println("Now you have " + numTasks + " tasks in the list.");
     }
