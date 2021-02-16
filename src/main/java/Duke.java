@@ -1,10 +1,8 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.StringBuffer;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.ArrayList;
 
 
 public class Duke {
@@ -281,7 +279,7 @@ public class Duke {
             int taskNo = Integer.parseInt(input);
             if (taskNo <= max && taskNo > 0) {
                 System.out.print(LINE + TASK_DELETED_MESSAGE + list.get(taskNo - 1).toString() + "\n" + LINE);
-                list.get(taskNo-1).remove();
+                list.get(taskNo - 1).remove();
                 list.remove(taskNo - 1);
             } else {
                 printInvalidArgumentMessage();
@@ -289,6 +287,7 @@ public class Duke {
         } catch (Exception e) {
             printInvalidArgumentMessage();
         }
+    }
 
     private static void saveData(ArrayList<Task> list) {
         try {
