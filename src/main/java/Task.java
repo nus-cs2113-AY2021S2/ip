@@ -40,6 +40,12 @@ public class Task {
         }
     }
 
+    public void remove() {
+        if (isDone == false) {
+            tasksRemaining--;
+        }
+    }
+
     public String toString() {
         return getStatusSymbol() + getDesc();
     }

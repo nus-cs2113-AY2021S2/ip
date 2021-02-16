@@ -1,6 +1,6 @@
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.Collections;
+
 
 public class Duke {
 
@@ -32,6 +32,7 @@ public class Duke {
     public static final String ALL_TASKS_CHECKED_MESSAGE = "All remaining tasks have been checked off!\n";
     public static final String TASK_UNCHECKED_MESSAGE = "Task is no longer checked off\n";
     public static final String TASK_NOT_CHECKED_MESSAGE = " is not checked\n";
+    public static final String TASK_DELETED_MESSAGE = "This task has been removed: \n";
     public static final String INVALID_ARGUMENT_MESSAGE = "Invalid argument!\n";
     public static final String INVALID_COMMAND_MESSAGE = "I am sorry, I do not recognise that command\n"
             + "Please try again\n";
@@ -82,6 +83,9 @@ public class Duke {
             case "undo":
                 undoMarkAsDone(list, taskCount, input);
                 break;
+            case "delete":
+                delete(list, taskCount, input);
+                break;
             default:
                 System.out.print(LINE + INVALID_COMMAND_MESSAGE + LINE);
             }
@@ -96,6 +100,8 @@ public class Duke {
             }
         }
     }
+
+
 
     public static int addToDo(String input, ArrayList<Task> list, int index) {
         if(input==null) {
@@ -162,7 +168,7 @@ public class Duke {
                 }
                 System.out.println(i + 1 + list.get(i).toString());
             }
-            System.out.print("There are " + Task.getTasksRemaining() + " task(s) on the list\n" + LINE);
+            System.out.print("There are " + Task.getTasksRemaining() + " undone task(s) on the list\n" + LINE);
         }
     }
 
@@ -211,6 +217,21 @@ public class Duke {
             printInvalidArgumentMessage();
         }
 
+    }
+
+    private static void delete(ArrayList<Task> list, int max, String input) {
+        try {
+            int taskNo = Integer.parseInt(input);
+            if (taskNo <= max && taskNo > 0) {
+                System.out.print(LINE + TASK_DELETED_MESSAGE + list.get(taskNo - 1).toString() + "\n" + LINE);
+                list.get(taskNo-1).remove();
+                list.remove(taskNo - 1);
+            } else {
+                printInvalidArgumentMessage();
+            }
+        } catch (Exception e) {
+            printInvalidArgumentMessage();
+        }
     }
 
     private static void printWelcome() {
