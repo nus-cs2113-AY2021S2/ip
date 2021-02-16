@@ -46,6 +46,6 @@ public class TaskList extends duke {
     }
 
     public String getTaskToPrintInFile() {
-        return "";
+        return getTaskDescription();
     }
 }
