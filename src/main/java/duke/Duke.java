@@ -1,15 +1,13 @@
 package duke;
 
-import java.util.Locale;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
 
-    public static final int MAX_TASK = 100;
+    public static ArrayList<Task> taskList = new ArrayList<>();
 
-    static Task[] taskList = new Task[MAX_TASK];
-
-    static int listCount = 0;
+    //public static int listCount = 0;
 
     public static final Scanner SCANNER = new Scanner(System.in);
 
@@ -40,65 +38,11 @@ public class Duke {
         System.out.println(HORIZONTAL_LINE);
     }
 
-    public static void listTasks() {
-        if (listCount == 0) {
-            System.out.println("There are no tasks in your list");
-            return;
-        }
-        System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < listCount; i++) {
-            Task currentTask = taskList[i];
-            System.out.println(i + 1 + "." + currentTask.toString());
-        }
-    }
-
-    public static void updateTask(int taskIndex) throws DukeException {
-        if (taskIndex >= listCount) {
-            throw new DukeException();
-        }
-        Task currentTask = taskList[taskIndex];
-        if (currentTask.getDone() == true) {
-            System.out.println("This task has already been completed:");
-        } else {
-            currentTask.setDone();
-            System.out.println("Nice! I've marked this task as done:");
-        }
-        System.out.println("  " + currentTask.toString());
-    }
-
-    public static void addTask(DukeCommand taskType, String description) throws DukeException {
-        int dividerPosition;
-        switch (taskType) {
-        case TODO:
-            taskList[listCount++] = new Todo(description);
-            break;
-        case DEADLINE:
-            if (!description.contains("/by")) {
-                throw new DukeException();
-            }
-            dividerPosition = description.indexOf("/by");
-            String by = description.substring(dividerPosition + 4);
-            taskList[listCount++] = new Deadline(description.substring(0, dividerPosition - 1), by);
-            break;
-        case EVENT:
-            if (!description.contains("/at")) {
-                throw new DukeException();
-            }
-            dividerPosition = description.indexOf("/at");
-            String at = description.substring(dividerPosition + 4);
-            taskList[listCount++] = new Event(description.substring(0, dividerPosition - 1), at);
-            break;
-        }
-        System.out.println("Got it. I've added this task:");
-        System.out.println("  " + taskList[listCount - 1].toString());
-        System.out.println("Now you have " + listCount + " tasks in the list.");
-    }
-
     public static void executeCommand(String userInput) {
         String[] words = userInput.split(" ", 2);
-        DukeCommand commandWord = null;
+        DukeCommand commandWord;
         try {
-            commandWord = DukeCommand.valueOf(words[0].toUpperCase(Locale.ROOT));
+            commandWord = DukeCommand.valueOf(words[0].toUpperCase());
         } catch (IllegalArgumentException e) {
             lineBreak();
             System.out.println("I'm sorry, but I don't know what that means.");
@@ -116,10 +60,10 @@ public class Duke {
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("Please enter the index of the task that is done.");
             } catch (NumberFormatException e) {
-                System.out.println("You must enter a integer after done.");
-            } catch (DukeException e) {
+                System.out.println("You must enter an integer after done.");
+            } catch (IndexOutOfBoundsException e) {
                 System.out.println("Task " + words[1] + " does not exist.");
-                System.out.println("There are " + listCount + " tasks in the list.");
+                System.out.println("There are " + taskList.size() + " tasks in the list.");
             }
             break;
         case TODO:
@@ -136,11 +80,82 @@ public class Duke {
                 System.out.println("The format of " + commandWord + " is incorrect.");
             }
             break;
+        case DELETE:
+            try {
+                deleteTask(Integer.parseInt(words[1]) - 1);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("Please enter the index of the task to be deleted.");
+            } catch (NumberFormatException e) {
+                System.out.println("You must enter an integer after delete.");
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Task " + words[1] + " does not exist.");
+                System.out.println("There are " + taskList.size() + " tasks in the list.");
+            }
+            break;
         case BYE:
             exitProgram();
             //Fallthrough
         }
         lineBreak();
+    }
+
+    public static void listTasks() {
+        if (taskList.size() == 0) {
+            System.out.println("There are no tasks in your list");
+            return;
+        }
+        System.out.println("Here are the tasks in your list:");
+        for (int i = 0; i < taskList.size(); i++) {
+            Task currentTask = taskList.get(i);
+            System.out.println(i + 1 + "." + currentTask.toString());
+        }
+    }
+
+    public static void updateTask(int taskIndex) {
+        Task currentTask = taskList.get(taskIndex);
+        if (currentTask.getDone()) {
+            System.out.println("This task has already been completed:");
+        } else {
+            currentTask.setDone();
+            System.out.println("Nice! I've marked this task as done:");
+        }
+        System.out.println("  " + currentTask.toString());
+    }
+
+    public static void addTask(DukeCommand taskType, String description) throws DukeException {
+        int dividerPosition;
+        switch (taskType) {
+        case TODO:
+            taskList.add(new Todo(description));
+            break;
+        case DEADLINE:
+            if (!description.contains("/by")) {
+                throw new DukeException();
+            }
+            dividerPosition = description.indexOf("/by");
+            String by = description.substring(dividerPosition + 4);
+            taskList.add(new Deadline(description.substring(0, dividerPosition - 1), by));
+            break;
+        case EVENT:
+            if (!description.contains("/at")) {
+                throw new DukeException();
+            }
+            dividerPosition = description.indexOf("/at");
+            String at = description.substring(dividerPosition + 4);
+            taskList.add(new Event(description.substring(0, dividerPosition - 1), at));
+            break;
+        }
+        System.out.println("Got it. I've added this task:");
+        System.out.println("  " + taskList.get(taskList.size() - 1).toString());
+        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+    }
+
+    public static void deleteTask(int taskIndex) {
+        Task currentTask = taskList.get(taskIndex);
+        System.out.println("Noted. I've removed this task:");
+        System.out.println("  " + currentTask);
+        taskList.remove(taskIndex);
+        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
     }
 
     public static void exitProgram() {
