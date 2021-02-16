@@ -74,7 +74,7 @@ public class AddCommand implements Command {
     }
 
     private void addTask(Task t) {
-        TaskManager.tasks[TaskManager.numOfTasks] = t;
+        TaskManager.tasks.add(t);
         TaskManager.numOfTasks++;
         System.out.println("Got it. I've added this task:" + System.lineSeparator() + t.toString());
         System.out.println("Now you have " + TaskManager.numOfTasks + " task in the list.");
