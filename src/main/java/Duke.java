@@ -110,8 +110,12 @@ public class Duke {
     }
 
 
-    public static void dukeInitialisation(todov2 list) throws IOException {
+    public static void dukeInitialisation(todo list) throws IOException {
         File importedList = new File("data/duke.txt");
+        if(!importedList.exists()){
+            writeToFile("data/duke.txt", "");
+            return;
+        }
         Scanner s = new Scanner(importedList);
         while (s.hasNext()) {
             String input = s.nextLine();
@@ -133,7 +137,9 @@ public class Duke {
                 String  temp = command_parser(list, "done " + list.tasksTotal());
             }
         }
-        System.out.println("Task list has been imported! Here are your tasks: \n" + command_parser(list, "list"));
+        System.out.println("Task list has been imported! Here are your tasks: \n"
+                + command_parser(list, "list") + "\n"
+                + "____________________________________________________________\n");
 
     }
 
@@ -150,16 +156,8 @@ public class Duke {
         fw.close();
     }
 
-/*    public static void addToList(String type, String resolved, String description, String date){
-        String file = "data/duke.txt";
-        try {
-            appendToFile(file, type + "|" + resolved + "|" + description + "|" + date + System.lineSeparator());
-        } catch (IOException e) {
-            System.out.println("Something went wrong: " + e.getMessage());
-        }
-    }*/
 
-    public static void updateList(todov2 list) throws IOException{
+    public static void updateList(todo list) throws IOException{
         String file = "data/duke.txt";
         writeToFile(file,"");
         String out = list.tasksUpdate();

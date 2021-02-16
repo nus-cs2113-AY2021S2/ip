@@ -88,7 +88,27 @@ public class todo {
 
     }
 
+    public int tasksTotal(){
+        return this.totalTasks;
+    }
 
+
+    public String tasksUpdate(){
+        String out = "";
+        for (int i = 0; i < totalTasks; i++){
+            if (taskList.get(i).displayType().equals("[T]")) {
+                out += taskList.get(i).displayType().substring(1, 2) + "/"
+                        + taskList.get(i).displayResolved().substring(1, 2) + "/"
+                        + taskList.get(i).displayDescription() + "/\n";
+            }else{
+                out += taskList.get(i).displayType().substring(1, 2) + "/"
+                        + taskList.get(i).displayResolved().substring(1, 2) + "/"
+                        + taskList.get(i).displayDescription() + "/"
+                        + taskList.get(i).displayDate().substring(5, taskList.get(i).displayDate().indexOf(")")) + "\n";
+            }
+        }
+        return out;
+    }
 
 
 
