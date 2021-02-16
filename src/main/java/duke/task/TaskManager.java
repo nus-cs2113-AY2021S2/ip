@@ -15,10 +15,15 @@ public class TaskManager {
         this.tasks = new ArrayList<>();
     }
 
+    public int getNumOfTasks() {
+        return tasks.size();
+    }
+
     public void showAddResult(Task t) {
         Duke.showExecuteResult("Got it. I've added this task:\n" + t + "\nNow you have " + tasks.size() + " tasks in the list.");
     }
 
+    // add
     public void addTodo(String content) {
         Task taskAdded = new Todo(content);
         tasks.add(taskAdded);
@@ -37,11 +42,13 @@ public class TaskManager {
         showAddResult(taskAdded);
     }
 
+    // done
     public void markTaskDone(int taskIndexShow) {
         tasks.get(taskIndexShow - 1).setDone(true);
         Duke.showExecuteResult("Nice! I've marked this task as done:\n" + tasks.get(taskIndexShow - 1));
     }
 
+    // list
     public void listAllTasks() {
         System.out.println("____________________________________________________________");
         for(int i=0; i< tasks.size() ; i++) {
@@ -50,9 +57,11 @@ public class TaskManager {
         System.out.println("____________________________________________________________");
     }
 
-    public int getNumOfTasks() {
-        return tasks.size();
+    //delete
+    public void deleteTask(int taskIndexShow) {
+        Task temp = tasks.get(taskIndexShow-1);
+        tasks.remove(taskIndexShow-1);
+        Duke.showExecuteResult("Noted. I've removed this task: \n" + temp + "\nNow you have " + getNumOfTasks() + " tasks in the list.");
+
     }
-
-
 }
