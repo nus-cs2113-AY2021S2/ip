@@ -1,5 +1,7 @@
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.StringBuffer;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -43,10 +45,11 @@ public class Duke {
         int taskCount = handleFile(list);
         printWelcome();
         interact(list, taskCount);
+        saveData(list);
         printBye();
     }
 
-    public static int handleFile(ArrayList<Task> list) {
+    private static int handleFile(ArrayList<Task> list) {
         int taskCount = 0;
         try {
             File saveData = new File("data.txt");
@@ -60,6 +63,7 @@ public class Duke {
                     taskCount++;
                 }
                 System.out.println("data loaded");
+                System.out.println("tasks: " + taskCount);
             }
         } catch (IOException e) {
             System.out.print(LINE + GENERIC_ERROR_MESSAGE + LINE);
@@ -67,7 +71,7 @@ public class Duke {
         return taskCount;
     }
 
-    public static void loadData(ArrayList<Task> list, String line) {
+    private static void loadData(ArrayList<Task> list, String line) {
         boolean isDone = true;
         int indexOfSeparator = 0;
         String desc = new String();
@@ -98,7 +102,7 @@ public class Duke {
     }
 
     public static void interact(ArrayList<Task> list, int taskCount) {
-        
+
         Scanner scan = new Scanner(System.in);
         String in = scan.nextLine();
 
@@ -150,11 +154,11 @@ public class Duke {
         }
     }
 
-    public static int addToDo(String input, Task[] list, int index) {
+    public static int addToDo(String input, ArrayList<Task> list, int index) {
         if(input==null) {
             System.out.print(LINE + NO_DESCRIPTION_MESSAGE + LINE);
         } else {
-            list[index] = new ToDo(input);
+            list.add(new ToDo(input));
             System.out.print(LINE + "\"" + input + "\"" + ADD_MESSAGE + LINE);
             index++;
         }
@@ -162,14 +166,14 @@ public class Duke {
 
     }
 
-    public static int addDeadline(String input, Task[] list, int index) {
+    public static int addDeadline(String input, ArrayList<Task> list, int index) {
         if (input == null) {
             System.out.print(LINE + NO_DESCRIPTION_MESSAGE + LINE);
         } else if(input.toLowerCase().contains("/by")) {
             try {
                 String desc = input.substring(0, input.toLowerCase().indexOf("/by") - 1);
                 String dueDate = input.substring(input.toLowerCase().indexOf("/by") + 4);
-                list[index] = new Deadline(desc, dueDate);
+                list.add(new Deadline(desc, dueDate));
                 System.out.print(LINE + "\"" + desc + "\"" + ADD_MESSAGE +
                         "Please complete by: " + dueDate + "\n" + LINE);
                 index++;
@@ -183,14 +187,14 @@ public class Duke {
         return index;
     }
 
-    public static int addEvent(String input, Task[] list, int taskCount) {
+    public static int addEvent(String input, ArrayList<Task> list, int taskCount) {
         if (input == null) {
             System.out.print(LINE + NO_DESCRIPTION_MESSAGE + LINE);
         } else if(input.toLowerCase().contains("/at")) {
             try {
                 String desc = input.substring(0, input.toLowerCase().indexOf("/at")-1);
                 String date = input.substring(input.toLowerCase().indexOf("/at")+4);
-                list[taskCount] = new Event(desc, date);
+                list.add(new Event(desc, date));
                 System.out.print(LINE + "\"" + desc + "\"" + ADD_MESSAGE +
                         "It occurs at: " + date + "\n" + LINE);
                 taskCount++;
@@ -204,7 +208,7 @@ public class Duke {
         return taskCount;
     }
 
-    public static void printList(Task[] list, int taskCount) {
+    public static void printList(ArrayList<Task> list, int taskCount) {
         if(taskCount == 0) {
             System.out.print(LINE + EMPTY_LIST_MESSAGE + LINE);
         } else {
@@ -213,23 +217,23 @@ public class Duke {
                 if (i < 9) {
                     System.out.print(" ");
                 }
-                System.out.println(i + 1 + list[i].toString());
+                System.out.println(i + 1 + list.get(i).toString());
             }
             System.out.print("There are " + Task.getTasksRemaining() + " task(s) on the list\n" + LINE);
         }
     }
 
-    public static void markAsDone(Task[] list, int max, String input) {
+    public static void markAsDone(ArrayList<Task> list, int max, String input) {
         try {
             int taskNo = Integer.parseInt(input);
             if (taskNo <= max && taskNo > 0) { //no. is valid
-                if (list[taskNo-1].getStatus()) {
-                    System.out.print(LINE + "Task \"" + list[taskNo-1].getDesc() + "\""
+                if (list.get(taskNo-1).getStatus()) {
+                    System.out.print(LINE + "Task \"" + list.get(taskNo-1).getDesc() + "\""
                             + TASK_ALREADY_CHECKED_MESSAGE + LINE);
                 } else {
-                    list[taskNo-1].check();
+                    list.get(taskNo-1).check();
                     System.out.print(LINE + TASK_CHECKED_MESSAGE);
-                    System.out.println("  " + list[taskNo - 1].getStatusSymbol() + list[taskNo - 1].getDesc());
+                    System.out.println("  " + list.get(taskNo - 1).getStatusSymbol() + list.get(taskNo - 1).getDesc());
                     if (Task.getTasksRemaining() == 0) {
                         System.out.print(ALL_TASKS_CHECKED_MESSAGE);
                     }
@@ -244,17 +248,17 @@ public class Duke {
 
     }
 
-    public static void undoMarkAsDone(Task[] list, int max, String input) {
+    public static void undoMarkAsDone(ArrayList<Task> list, int max, String input) {
         try {
             int taskNo = Integer.parseInt(input);
             if (taskNo <= max && taskNo > 0) { //no. is valid
-                if (!list[taskNo-1].getStatus()) {
-                    System.out.print(LINE + "Task \"" + list[taskNo-1].getDesc() + "\""
+                if (!list.get(taskNo-1).getStatus()) {
+                    System.out.print(LINE + "Task \"" + list.get(taskNo-1).getDesc() + "\""
                             + TASK_NOT_CHECKED_MESSAGE + LINE);
                 } else {
-                    list[taskNo-1].uncheck();
+                    list.get(taskNo-1).uncheck();
                     System.out.print(LINE + TASK_UNCHECKED_MESSAGE);
-                    System.out.println("  " + list[taskNo - 1].getStatusSymbol() + list[taskNo - 1].getDesc());
+                    System.out.println("  " + list.get(taskNo - 1).getStatusSymbol() + list.get(taskNo - 1).getDesc());
                     System.out.print(LINE);
                 }
             } else {
@@ -264,6 +268,61 @@ public class Duke {
             printInvalidArgumentMessage();
         }
 
+    }
+
+    private static void saveData(ArrayList<Task> list) {
+        try {
+            FileWriter fw = new FileWriter("data.txt");
+            fw.write(composeOutput(list.get(0)) + System.lineSeparator());
+
+            for (int i = 1; i< list.size(); i++) {
+                fw.append(composeOutput(list.get(i))).append(System.lineSeparator());
+            }
+            fw.close();
+
+        } catch (IOException e) {
+            System.out.print(LINE + GENERIC_ERROR_MESSAGE + LINE);
+        }
+    }
+
+    private static String composeOutput(Task data) {
+        boolean isDone = data.getStatus();
+        StringBuilder output = new StringBuilder();
+
+        switch(data.toString().charAt(2)){
+        case 'T':
+            if(!isDone) {
+                output.append("0");
+            } else {
+                output.append("1");
+            }
+            output.append('T');
+            output.append(data.getDesc());
+            break;
+        case 'D':
+            if(!isDone) {
+                output.append("0");
+            } else {
+                output.append("1");
+            }
+            output.append('D');
+            output.append(data.getDesc());
+            output.append('|');
+            output.append(data.getDate());
+            break;
+        case 'E':
+            if(!isDone) {
+                output.append("0");
+            } else {
+                output.append("1");
+            }
+            output.append('E');
+            output.append(data.getDesc());
+            output.append('|');
+            output.append(data.getDate());
+            break;
+        }
+        return output.toString();
     }
 
     private static void printWelcome() {

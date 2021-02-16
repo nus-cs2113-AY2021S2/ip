@@ -26,6 +26,10 @@ public class Task {
         return isDone;
     }
 
+    public String getDate() {
+        return null;
+    }
+
     public String getStatusSymbol() {
         return (isDone ? " \u2612 " : " \u2610 ");
     }
