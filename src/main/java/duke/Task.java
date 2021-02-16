@@ -2,13 +2,11 @@ package duke;
 
 public class Task {
     private String item;
-    private int index;
     private String status;
     private String type;
 
-    public Task(String item, int index) {
+    public Task(String item) {
         this.item = item;
-        this.index = index;
     }
 
     public void printTask() {
@@ -19,10 +17,6 @@ public class Task {
 
     public String getItem() {
         return item;
-    }
-
-    public int getIndex() {
-        return index;
     }
 
     public String getStatus() {

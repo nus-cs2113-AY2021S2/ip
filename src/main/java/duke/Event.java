@@ -3,8 +3,8 @@ package duke;
 public class Event extends Task {
     private String time;
 
-    public Event(String item, int index, String time) {
-        super(item, index);
+    public Event(String item, String time) {
+        super(item);
         this.time = time;
     }
 
