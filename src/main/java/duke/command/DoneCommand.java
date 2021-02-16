@@ -25,6 +25,7 @@ public class DoneCommand extends Command {
             return;
         }
         task.setDone(true);
+        Task.saveAllTasks(tasks);
         Menu.printText("Nice! I've marked this task as done:"
                 + System.lineSeparator()
                 + "\t"

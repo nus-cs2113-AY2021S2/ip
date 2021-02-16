@@ -20,6 +20,7 @@ public class TodoCommand extends Command {
         }
         Task task = new Todo(commandArgs);
         tasks.add(task);
+        Task.saveAllTasks(tasks);
         Menu.printAddedTask(task);
     }
 }

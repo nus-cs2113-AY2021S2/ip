@@ -21,6 +21,7 @@ public class EventCommand extends Command {
         String[] eventArgs = commandArgs.split("\\s+/at\\s+", 2);
         Task task = new Event(eventArgs[0], eventArgs[1]);
         tasks.add(task);
+        Task.saveAllTasks(tasks);
         Menu.printAddedTask(task);
     }
 }

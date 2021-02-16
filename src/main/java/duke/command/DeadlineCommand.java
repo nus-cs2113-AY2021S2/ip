@@ -21,6 +21,7 @@ public class DeadlineCommand extends Command {
         String[] deadlineArgs = commandArgs.split("\\s+/by\\s+", 2);
         Task task = new Deadline(deadlineArgs[0], deadlineArgs[1]);
         tasks.add(task);
+        Task.saveAllTasks(tasks);
         Menu.printAddedTask(task);
     }
 }
