@@ -12,31 +12,42 @@ What can I do for you?
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
-  [T][ ] Ong Wei Sheng: Answer CS2113 tutorial questions
+  [T][ ] read book
 Now you have 1 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
-  [D][ ] weekly CS2113 quiz (by: Monday 9pm)
+  [D][ ] return book (by: June 6th)
 Now you have 2 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
-Here are the tasks in your list:
-1.[T][ ] Ong Wei Sheng: Answer CS2113 tutorial questions
-2.[D][ ] weekly CS2113 quiz (by: Monday 9pm)
-____________________________________________________________
-____________________________________________________________
 Got it. I've added this task:
-  [E][ ] CS2113 lecture (at: Friday 4 to 6 pm)
+  [E][ ] project meeting (at: Aug 6th 2-4pm)
 Now you have 3 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
-Nice! I've marked this task as done:
-  [T][X] Ong Wei Sheng: Answer CS2113 tutorial questions
+Got it. I've added this task:
+  [T][ ] join sports club
+Now you have 4 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+  [T][ ] borrow book
+Now you have 5 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
-1.[T][X] Ong Wei Sheng: Answer CS2113 tutorial questions
-2.[D][ ] weekly CS2113 quiz (by: Monday 9pm)
-3.[E][ ] CS2113 lecture (at: Friday 4 to 6 pm)
+1.[T][ ] read book
+2.[D][ ] return book (by: June 6th)
+3.[E][ ] project meeting (at: Aug 6th 2-4pm)
+4.[T][ ] join sports club
+5.[T][ ] borrow book
+____________________________________________________________
+____________________________________________________________
+Noted. I've removed this task:
+  [E][ ] project meeting (at: Aug 6th 2-4pm)
+Now you have 4 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Bye. Hope to see you again soon!
 ____________________________________________________________

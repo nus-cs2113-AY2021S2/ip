@@ -6,13 +6,13 @@ import task.Task;
 import task.Todo;
 
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
 
     private static final Scanner SCANNER = new Scanner(System.in);
 
-    private static Task[] taskList = new Task[100];
-    private static int count = 0;
+    private static final ArrayList<Task> taskList = new ArrayList<>();
 
     // These are the prefix strings to define the data type of a command parameter
     private static final String COMMAND_TODO_WORD = "todo";
@@ -21,17 +21,21 @@ public class Duke {
     private static final String COMMAND_LIST_WORD = "list";
     private static final String COMMAND_EXIT_WORD = "bye";
     private static final String COMMAND_DONE_WORD = "done";
+    private static final String COMMAND_DELETE_WORD = "delete";
 
     // error messages
     private static final String MESSAGE_DESCRIPTION_EMPTY_TODO = "The description of a todo cannot be empty.";
     private static final String MESSAGE_DESCRIPTION_EMPTY_DEADLINE = "The description of a deadline cannot be empty.";
     private static final String MESSAGE_DESCRIPTION_EMPTY_EVENT = "The description of a event cannot be empty.";
     private static final String MESSAGE_DESCRIPTION_EMPTY_DONE = "The number of the task to be marked as done cannot be empty.";
+    private static final String MESSAGE_DESCRIPTION_EMPTY_DELETE = "The number of the task to be deleted cannot be empty.";
     private static final String MESSAGE_INVALID_COMMAND = "I'm sorry, but I don't know what that means.";
     private static final String MESSAGE_INVALID_DEADLINE = "No deadline provided or wrong splitter.";
     private static final String MESSAGE_INVALID_EVENT = "No event date and time provided or wrong splitter.";
     private static final String MESSAGE_INVALID_COMMAND_DONE = "Number not provided for the task to be marked as done.";
-    private static final String MESSAGE_INVALID_NUMBER_DONE = "task.Task number does not exist.";
+    private static final String MESSAGE_INVALID_NUMBER_DONE = "Task number does not exist.";
+    private static final String MESSAGE_INVALID_COMMAND_DELETE = "Number not provided for the task to be deleted.";
+    private static final String MESSAGE_INVALID_NUMBER_DELETE = "Task number does not exist.";
 
     /**
      * Main entry point of the application.
@@ -71,8 +75,7 @@ public class Duke {
     }
 
     private static String getUserInput() {
-        String inputLine = SCANNER.nextLine();
-        return inputLine;
+        return SCANNER.nextLine();
     }
 
     /**
@@ -125,6 +128,17 @@ public class Duke {
                 System.out.println(MESSAGE_INVALID_NUMBER_DONE);
             }
             break;
+        case COMMAND_DELETE_WORD:
+            try {
+                executeDelete(commandArgs);
+            } catch (EmptyNumberException e) {
+                System.out.println(MESSAGE_DESCRIPTION_EMPTY_DELETE);
+            } catch (NumberFormatException e) {
+                System.out.println(MESSAGE_INVALID_COMMAND_DELETE);
+            } catch (NullPointerException e) {
+                System.out.println(MESSAGE_INVALID_NUMBER_DELETE);
+            }
+            break;
         case COMMAND_EXIT_WORD:
             executeExit();
             break;
@@ -136,8 +150,8 @@ public class Duke {
 
     /**
      * Splits raw user input into command word and command arguments string
-     * @param rawUserInput
-     * @return size 2 array; first elemetn is the command type and second element is the arguments string
+     * @param rawUserInput what the user inputs
+     * @return size 2 array; first element is the command type and second element is the arguments string
      */
     private static String[] splitCommandWordAndArgs(String rawUserInput) {
         final String[] split = rawUserInput.trim().split(" ", 2);
@@ -146,25 +160,23 @@ public class Duke {
 
     /**
      * Add task under task.Todo class and feedback display message when task.Todo task added
-     * @param commandArgs Description of the task
+     * @param commandArgs Description of the todo task
      */
     private static void executeTodo(String commandArgs) throws EmptyDescriptionException{
-        final String description = commandArgs;
-        if (description.equals("")) {
+        if (commandArgs.equals("")) {
             throw new EmptyDescriptionException();
         } else {
-            Task task = new Todo(description);
-            taskList[count] = task;
-            ++count;
-            getMessageForTodo(task, count);
+            Task task = new Todo(commandArgs);
+            taskList.add(task);
+            getMessageForTodo(task);
         }
     }
 
-    private static void getMessageForTodo(Task task, int count) {
+    private static void getMessageForTodo(Task task) {
         printHorizontalLine();
         showAddTask();
         System.out.println("  " + task.toString());
-        System.out.println("Now you have " + count + " tasks in the list.");
+        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
         printHorizontalLine();
     }
 
@@ -182,30 +194,28 @@ public class Duke {
         } else {
             final String[] descriptionAndDeadline = splitDescriptionAndDeadline(commandArgs);
             Task task = new Deadline(descriptionAndDeadline[0], descriptionAndDeadline[1]);
-            taskList[count] = task;
-            ++count;
-            getMessageForDeadline(task, count);
+            taskList.add(task);
+            getMessageForDeadline(task);
         }
 
     }
 
 
     private static String[] splitDescriptionAndDeadline(String commandArgs) {
-        final String[] split = commandArgs.split(" /by ");
-        return split;
+        return commandArgs.split(" /by ");
     }
 
-    private static void getMessageForDeadline(Task task, int count) {
+    private static void getMessageForDeadline(Task task) {
         printHorizontalLine();
         showAddTask();
         System.out.println("  " + task.toString());
-        System.out.println("Now you have " + count + " tasks in the list.");
+        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
         printHorizontalLine();
     }
 
     /**
      * Add task under task.Event class and feedback display message when task.Event task added
-     * @param commandArgs
+     * @param commandArgs description of the event
      */
     private static void executeEvent(String commandArgs) throws EmptyDescriptionException {
         if (commandArgs.equals("")) {
@@ -213,22 +223,20 @@ public class Duke {
         } else {
             final String[] descriptionAndTime = splitDescriptionAndTime(commandArgs);
             Task task = new Event(descriptionAndTime[0], descriptionAndTime[1]);
-            taskList[count] = task;
-            ++count;
-            getMessageForEvent(task, count);
+            taskList.add(task);
+            getMessageForEvent(task);
         }
     }
 
     private static String[] splitDescriptionAndTime(String commandArgs) {
-        final String[] split = commandArgs.split(" /at ");
-        return split;
+        return commandArgs.split(" /at ");
     }
 
-    private static void getMessageForEvent(Task task, int count) {
+    private static void getMessageForEvent(Task task) {
         printHorizontalLine();
         showAddTask();
         System.out.println("  " + task.toString());
-        System.out.println("Now you have " + count + " tasks in the list.");
+        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
         printHorizontalLine();
     }
 
@@ -241,27 +249,28 @@ public class Duke {
         printHorizontalLine();
     }
 
-    private static void showTasksList(Task[] taskList) {
+    private static void showTasksList(ArrayList<Task> taskList) {
         System.out.println("Here are the tasks in your list:");
-        int descriptionCount = 1;
+        int taskCount = 1;
         for (Task task : taskList) {
             if (task != null) {
-                System.out.println(descriptionCount + "." + task.toString());
-                ++descriptionCount;
+                System.out.println(taskCount + "." + task.toString());
+                ++taskCount;
             }
         }
     }
 
     /**
      * Mark task as done and display message when status of task is changed
-     * @param commandArgs
+     * @param commandArgs number of the task to be marked as done
+     * @throws EmptyNumberException when no number provided along with done command
      */
     private static void executeDone(String commandArgs) throws EmptyNumberException {
         if (commandArgs.equals("")) {
             throw new EmptyNumberException();
         }
         int taskIndex = Integer.parseInt(commandArgs) - 1; // minus 1 to adhere to array indexing
-        Task taskToBeDone = taskList[taskIndex];
+        Task taskToBeDone = taskList.get(taskIndex);
         taskToBeDone.markAsDone();
         showTaskDone(taskToBeDone);
     }
@@ -270,6 +279,30 @@ public class Duke {
         printHorizontalLine();
         System.out.println("Nice! I've marked this task as done:");
         System.out.println("  " + task.toString());
+        printHorizontalLine();
+    }
+
+    /**
+     * Delete task and display message when task is deleted
+     * @param commandArgs number of the task to be deleted
+     * @throws EmptyNumberException when no number provided along with delete command
+     */
+    private static void executeDelete(String commandArgs) throws EmptyNumberException {
+        if (commandArgs.equals("")) {
+            throw new EmptyNumberException();
+        }
+        int taskIndex = Integer.parseInt(commandArgs) - 1; // minus 1 to adhere to array indexing
+        Task taskToBeDeleted = taskList.get(taskIndex);
+        showTaskDelete(taskToBeDeleted);
+        taskList.remove(taskIndex);
+    }
+
+    private static void showTaskDelete(Task task) {
+        printHorizontalLine();
+        System.out.println("Noted. I've removed this task:");
+        System.out.println("  " + task.toString());
+        // (taskList.size() - 1) because task not deleted yet in executeDelete
+        System.out.println("Now you have " + (taskList.size() - 1) + " tasks in the list.");
         printHorizontalLine();
     }
 
