@@ -25,6 +25,6 @@ public class Event extends Task {
 
     @Override
     public String getFileFormat() {
-        return super.getFileFormat() + " | " + taskTiming;
+        return super.getFileFormat() + "| " + taskTiming;
     }
 }
