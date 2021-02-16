@@ -21,7 +21,7 @@ public class Duke {
     private static final int DELETE_COMMAND = 8;
 
     private static final String DELIM = "-";
-    private static final String PATH = ".\\src\\main\\java\\duke\\data\\duke.txt";
+    private static final String PATH = "Duke_userdata.txt";
 
     public static ArrayList<Task> taskList = new ArrayList<>();
 
