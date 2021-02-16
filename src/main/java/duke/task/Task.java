@@ -58,6 +58,7 @@ public class Task {
         System.out.print("  ");
         t.printTaskInformation();
         System.out.println("");
+        taskList.remove(t);
         taskCount--;
         printTaskCount();
     }
