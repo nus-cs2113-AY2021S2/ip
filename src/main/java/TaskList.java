@@ -38,9 +38,8 @@ public class TaskList {
         completeTask(Integer.parseInt(s));
     }
 
-    // Set flag isDone in Task class of index = number - 1
     public void completeTask(int i) {
-        int index = i- 1; // adjust for the list label starting from 1
+        int index = i - 1; // adjust for the list label starting from 1
         tasks.get(index).isDone(true);
         completeTaskMessage(index);
     }
@@ -49,6 +48,24 @@ public class TaskList {
         System.out.print(LINE_STRING);
         System.out.println("Task marked as done, gg ez");
         System.out.println("  " + this.getStatus(index));
+        System.out.println(LINE_STRING);
+    }
+
+    public void deleteTask(String s) {
+        deleteTask(Integer.parseInt(s));
+    }
+
+    public void deleteTask(int i) {
+        int index = i - 1; // adjust for the list label starting from 1
+        deleteTaskMessage(index);
+        tasks.remove(index);
+    }
+
+    private void deleteTaskMessage(int index) {
+        System.out.print(LINE_STRING);
+        System.out.println("You are a quitter 👎 Anyways, I removed this:");
+        System.out.println("  " + this.getStatus(index));
+        System.out.println((tasks.size() - 1) + " tasks left in the list.");
         System.out.println(LINE_STRING);
     }
 

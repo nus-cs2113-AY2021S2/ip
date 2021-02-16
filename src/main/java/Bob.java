@@ -99,6 +99,9 @@ public class Bob {
         case DONE:
             taskList.completeTask(inputStringArr[1]);
             break;
+        case DELETE:
+            taskList.deleteTask(inputStringArr[1]);
+            break;
         case TODO:
             taskList.addTodo(inputString);
             break;
@@ -131,6 +134,9 @@ public class Bob {
             break;
         case "done":
             command = Command.DONE;
+            break;
+        case "delete":
+            command = Command.DELETE;
             break;
         case "todo":
             command = Command.TODO;
