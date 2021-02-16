@@ -100,13 +100,13 @@ public class Bob {
             completeTask(inputStringArr[1]);
             break;
         case TODO:
-            addTodo(inputString);
+            taskList.addTodo(inputString);
             break;
         case DEADLINE:
-            addDeadline(inputString);
+            taskList.addDeadline(inputString);
             break;
         case EVENT:
-            addEvent(inputString);
+            taskList.addEvent(inputString);
             break;
         case BYE:
             isScanning = false;
@@ -156,58 +156,5 @@ public class Bob {
             throw new NoSuchMethodException();
         }
         return command;
-    }
-
-    private static void addTodo(String command) throws NoCommandLabelException {
-        String commandType = Command.TODO.name().toLowerCase();
-        String label = getLabel(command,commandType);
-
-        taskList.addToList(new Todo(label));
-    }
-
-    /**
-     * Phrases command into label and startTime parts
-     * Followed by creating event object
-     */
-    private static void addEvent(String command) throws NoCommandLabelException, NoCommandFormatException {
-        final String TIME_MARKER = "/at";
-        String commandType = Command.EVENT.name().toLowerCase();
-        String[] commandArray = command.split(TIME_MARKER);
-
-        if (commandArray.length < 2) {
-            throw new NoCommandFormatException();
-        }
-
-        String label = getLabel(commandArray[0],commandType);
-        String startTime = commandArray[1].trim();
-
-        taskList.addToList(new Event(label, startTime));
-    }
-
-    /**
-     * Phrases command into label and dueTime parts
-     * Followed by creating Deadline object
-     */
-    private static void addDeadline(String command) throws NoCommandLabelException, NoCommandFormatException {
-        final String TIME_MARKER = "/by";
-        String commandType = Command.DEADLINE.name().toLowerCase();
-        String[] commandArray = command.split(TIME_MARKER);
-
-        if (commandArray.length < 2) {
-            throw new NoCommandFormatException();
-        }
-
-        String label = getLabel(commandArray[0],commandType);
-        String dueTime = commandArray[1].trim();
-
-        taskList.addToList(new Deadline(label, dueTime));
-    }
-
-    private static String getLabel(String string, String commandType) throws NoCommandLabelException {
-        String label = string.replaceFirst(commandType,"").trim();
-        if (label.isEmpty()) {
-            throw new NoCommandLabelException();
-        }
-        return label;
     }
 }
