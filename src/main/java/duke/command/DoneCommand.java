@@ -4,6 +4,8 @@ import duke.exception.InvalidTaskNumberException;
 import duke.ui.Menu;
 import duke.task.Task;
 
+import java.util.ArrayList;
+
 public class DoneCommand extends Command {
 
     public DoneCommand(String commandArgs) {
@@ -11,18 +13,19 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(Task[] tasks) throws InvalidTaskNumberException {
+    public void execute(ArrayList<Task> tasks) throws InvalidTaskNumberException {
         if (!isValidNumber(commandArgs) || !isValidTaskNumber(Integer.parseInt(commandArgs))) {
             throw new InvalidTaskNumberException(commandArgs);
         }
         int taskNumber = Integer.parseInt(commandArgs);
 
-        Task task = tasks[taskNumber - 1];
+        Task task = tasks.get(taskNumber - 1);
         if (task.isDone()) {
             Menu.printText("duke.task.Task already marked as done!");
             return;
         }
         task.setDone(true);
+        Task.saveAllTasks(tasks);
         Menu.printText("Nice! I've marked this task as done:"
                 + System.lineSeparator()
                 + "\t"
