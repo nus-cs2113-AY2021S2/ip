@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
@@ -19,8 +20,12 @@ public class Duke {
     }
 
     public static void taskTracker() {
-        Task[] tasks = new Task[100];
+        Task[] tasks = SaveFileManager.readFromSaveFile();
         int indexOfTask = 0;
+        while (tasks[indexOfTask] != null){
+            indexOfTask++;
+//            System.out.printf("%d items\n",indexOfTask);
+        }
         String userInput;
         Scanner sc = new Scanner(System.in);
 
@@ -43,6 +48,7 @@ public class Duke {
                 System.out.println("\t____________________________________________________________");
                 System.out.println("\tGot it! I've added this task:");
                 System.out.println("\t" + tasks[indexOfTask].toString());
+                System.out.println(tasks[indexOfTask].getClass());
                 indexOfTask++;
                 System.out.printf("\tNow you have %d tasks in the list.\n", indexOfTask);
                 System.out.println("\t____________________________________________________________");
@@ -97,7 +103,6 @@ public class Duke {
                     System.out.printf("\t%d. %s\n", i + 1, tasks[i].toString());
                 }
                 System.out.println("\t____________________________________________________________");
-                indexOfTask++;
                 break;
 
             case ("done"):
@@ -116,6 +121,11 @@ public class Duke {
                 break;
 
             case ("bye"):
+                try {
+                    SaveFileManager.writeToSaveFile(tasks, indexOfTask);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 break running;
 
             default:

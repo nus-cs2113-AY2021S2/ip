@@ -22,4 +22,14 @@ public class Task {
     public String toString(){
         return getStatusIcon() + " " + getDescription();
     }
+
+    public String saveFormatString(){
+        String isDoneBinary = null;
+        if(this.isDone){
+            isDoneBinary = "1";
+        } else {
+            isDoneBinary = "0";
+        }
+        return isDoneBinary + " | " + this.getDescription();
+    }
 }
