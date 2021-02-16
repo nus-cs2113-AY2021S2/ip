@@ -1,14 +1,12 @@
 package duke.task;
 
-public class Task {
+public abstract class Task {
     private String description;
     private boolean isDone;
-    private static int numberOfTasks = 0;
 
     public Task(String description) {
         this.description = description;
         this.isDone = false;
-        numberOfTasks++;
     }
 
     public String getDescription() {
@@ -29,10 +27,6 @@ public class Task {
 
     public String getStatusIcon() {
         return (isDone ? "\u2718" : " ");
-    }
-
-    public static int getNumberOfTasks() {
-        return numberOfTasks;
     }
 
     @Override

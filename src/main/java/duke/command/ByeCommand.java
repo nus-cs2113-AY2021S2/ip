@@ -1,7 +1,10 @@
 package duke.command;
 
+import duke.Duke;
 import duke.ui.Menu;
 import duke.task.Task;
+
+import java.util.ArrayList;
 
 public class ByeCommand extends Command {
 
@@ -10,8 +13,8 @@ public class ByeCommand extends Command {
     }
 
     @Override
-    public void execute(Task[] tasks) {
+    public void execute(ArrayList<Task> tasks) {
+        Duke.setIsRunning(false);
         Menu.printBye();
-        System.exit(0);
     }
 }

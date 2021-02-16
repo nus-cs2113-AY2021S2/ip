@@ -1,5 +1,6 @@
 package duke.ui;
 
+import duke.Duke;
 import duke.task.Task;
 import duke.exception.DukeException;
 
@@ -17,28 +18,30 @@ public class Menu {
     }
 
     public static void printBye() {
-        System.out.println(LINE);
         System.out.println(" Bye. Hope to see you again soon!");
-        System.out.println(LINE);
     }
 
     public static void printText(String text) {
-        System.out.println(LINE);
         System.out.println(text);
-        System.out.println(LINE);
     }
 
     public static void printAddedTask(Task task) {
-        System.out.println(LINE);
         System.out.println("Got it. I've added this task:");
         System.out.println("\t" + task);
-        System.out.println("Now you have " + Task.getNumberOfTasks() + " tasks in the list.");
-        System.out.println(LINE);
+        System.out.println("Now you have " + Duke.getTaskSize() + " tasks in the list.");
     }
 
     public static void printError(DukeException error) {
-        System.out.println(LINE);
         System.out.println(error);
+    }
+
+    public static void printDeleteTask(Task task) {
+        System.out.println("Noted. I've removed this task:");
+        System.out.println("\t" + task);
+        System.out.println("Now you have " + Duke.getTaskSize() + " tasks in the list.");
+    }
+
+    public static void printLine() {
         System.out.println(LINE);
     }
 
