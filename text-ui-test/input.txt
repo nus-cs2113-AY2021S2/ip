@@ -1,11 +1,7 @@
-todo read book
+todo Calvin Low: Answer CS2113 tutorial questions
+deadline weekly CS2113 quiz /by Monday 9pm
+list
+event CS2113 lecture /at Friday 4 to 6pm
 done 1
-deadline return book /by June 6th
-done 2
-event project meeting /at Aug 6th 2-4pm
-todo join sports club
-done 4
-todo borrow book
 list
-delete 3
-list
+^Z
