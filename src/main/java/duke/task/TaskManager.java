@@ -3,7 +3,11 @@ package duke.task;
 import duke.command.CommandNotFoundException;
 import duke.command.MainUI;
 
+
 import java.util.ArrayList;
+
+import java.io.IOException;
+
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -33,9 +37,12 @@ public class TaskManager {
                 t.checkIfToDoDescriptionExists(taskDescription);
                 taskArrayList.add(t);
                 printMessageAfterTaskIsAdded(t);
+                MainUI.appendToFile(MainUI.FILE_PATH,t.toString());
             } catch (TaskDescriptionMissingException e) {
                 System.out.println(e.getMessage());
                 MainUI.printDivider();
+            } catch (IOException e) {
+                System.out.println("IOError at TODO_Command");
             }
             break;
             
@@ -71,6 +78,7 @@ public class TaskManager {
         }
     }
 
+
     private static void printMessageAfterTaskIsAdded(Task task) {
         MainUI.printDivider();
         System.out.println(ADDED_TASK_MESSAGE);
@@ -102,4 +110,7 @@ public class TaskManager {
         MainUI.printDivider();
     }
 
+    public static void updateDataFile(){
+
+    }
 }
