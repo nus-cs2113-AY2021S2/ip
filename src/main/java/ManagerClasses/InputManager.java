@@ -52,6 +52,9 @@ public class InputManager {
                     System.out.println("Error -> Empty task description");
                 }
                 break;
+            case DELETE:
+                taskManager.deleteTask(command.getTaskNum());
+                break;
             default:
                 PrintManager.printHelpMessage();
             }
