@@ -8,12 +8,11 @@ public class Duke {
 
     private static final Scanner SCANNER = new Scanner(System.in);
     private static final char INPUT_COMMENT_MARKER = '#';
-    private static final int CAPACITY = 99;
     private static TaskManager tasks;
 
 
     public static void initTaskManager() {
-         tasks = new TaskManager(CAPACITY);
+         tasks = new TaskManager();
     }
 
     public static void showHello() {
