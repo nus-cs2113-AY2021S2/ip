@@ -1,10 +1,9 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.TaskList;
-import duke.task.Todo;
+import duke.fileHandling.FileHandler;
+import duke.task.*;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 
@@ -97,10 +96,10 @@ public class Duke {
     /**
      * Gets user input and execute corresponding command until the loop is exit.
      *
-     * @param sc       Java Scanner to get user input.
      * @param taskList The list of Task objects.
      */
-    private static void operateMainLoop(Scanner sc, TaskList taskList) {
+    private static void operateMainLoop(TaskList taskList) {
+        Scanner sc = new Scanner(System.in);
         String userInput;
         while (true) {
             userInput = sc.nextLine();
@@ -114,15 +113,19 @@ public class Duke {
                 break;
             case "todo":
                 addTodoTaskToList(taskList, userInput);
+                FileHandler.writeTaskList(taskList);
                 break;
             case "deadline":
                 addDeadlineTaskToList(taskList, userInput);
+                FileHandler.writeTaskList(taskList);
                 break;
             case "event":
                 addEventTaskToList(taskList, userInput);
+                FileHandler.writeTaskList(taskList);
                 break;
             case "done":
                 handleDoneTask(taskList, userInput);
+                FileHandler.writeTaskList(taskList);
                 break;
             case "delete":
                 deleteTask(taskList, userInput);
@@ -130,6 +133,7 @@ public class Duke {
             case "exit":
                 //FALL-THROUGH
             case "bye":
+                FileHandler.writeTaskList(taskList);
                 printExitGreetings();
                 return;
             default:
@@ -277,15 +281,23 @@ public class Duke {
         }
     }
 
+    private static void initializeTaskList(TaskList taskList) {
+        ArrayList<Task> localTasks = FileHandler.readTasksFromFile();
+        if (localTasks != null) {
+            taskList.setTasks(localTasks);
+            taskList.setNumOfTasks(localTasks.size());
+        }
+    }
+
     /**
      * The main method that drives the application.
      *
      * @param args Commandline arguments.
      */
     public static void main(String[] args) {
-        printGreetings();
-        Scanner sc = new Scanner(System.in);
         TaskList taskList = new TaskList();
-        operateMainLoop(sc, taskList);
+        initializeTaskList(taskList);
+        printGreetings();
+        operateMainLoop(taskList);
     }
 }

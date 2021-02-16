@@ -70,15 +70,6 @@ public abstract class Task {
     }
 
     /**
-     * Sets a new type of the task.
-     *
-     * @param taskType the new type of the task.
-     */
-    public void setTaskType(TaskType taskType) {
-        this.taskType = taskType;
-    }
-
-    /**
      * Gets a String of time limit of a Task object, if applicable.
      *
      * @return The time limit of a Task in String.
