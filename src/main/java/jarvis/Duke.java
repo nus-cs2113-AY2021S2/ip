@@ -16,6 +16,7 @@ import java.util.Scanner;
 public class Duke {
     private static final Jarvis jarvis = new Jarvis();
 
+    // MAIN program
     public static void main(String[] args) throws InterruptedException {
         jarvis.startJarvis();
 
@@ -42,16 +43,18 @@ public class Duke {
         }
     }
 
+    // Writing into a text file
     private static void writeToFile(ArrayList<Task> tasks) throws IOException {
-        FileWriter fileWriter = new FileWriter("text-ui-test/jarvis.txt");
+        FileWriter fileWriter = new FileWriter("jarvis.txt");
         for (Task task : tasks) {
             fileWriter.write(task.toString() + System.lineSeparator());
         }
         fileWriter.close();
     }
 
+    // Reading contents in the text file
     private static void printFileContents() throws FileNotFoundException {
-        File file = new File("text-ui-test/jarvis.txt");
+        File file = new File("jarvis.txt");
         Scanner scanner = new Scanner(file);
         if (scanner.hasNext()) {
             System.out.println("\tHere's the tasks in your list, sir: ");
@@ -65,6 +68,7 @@ public class Duke {
         }
     }
 
+    // Method to convert a string to a Task object and add it to the ArrayList
     private static void toTaskList(String line) {
         int taskIndex = 1;
         int statusIndex = 4;
