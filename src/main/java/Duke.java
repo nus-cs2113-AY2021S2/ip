@@ -301,6 +301,8 @@ public class Duke {
 
         } catch (IOException e) {
             System.out.print(LINE + GENERIC_ERROR_MESSAGE + LINE);
+        } catch (IndexOutOfBoundsException e){
+
         }
     }
 

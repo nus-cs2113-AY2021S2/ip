@@ -31,7 +31,7 @@ public class Task {
     }
 
     public String getStatusSymbol() {
-        return (isDone ? " \u2612 " : " \u2610 ");
+        return (isDone ? " [X] " : " [ ] ");
     }
 
     public static int getTasksRemaining() {
