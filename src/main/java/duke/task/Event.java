@@ -26,6 +26,11 @@ public class Event extends Task{
     }
 
     @Override
+    public String getDate() {
+        return this.at;
+    }
+
+    @Override
     public String getTaskType(){
         return ALPHABET_E;
     }

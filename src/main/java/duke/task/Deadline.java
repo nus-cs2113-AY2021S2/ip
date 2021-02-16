@@ -26,6 +26,11 @@ public class Deadline extends Task{
     }
 
     @Override
+    public String getDate() {
+        return this.by;
+    }
+
+    @Override
     public String getTaskType(){
         return ALPHABET_D;
     }
@@ -71,7 +76,6 @@ public class Deadline extends Task{
     }
 
     private boolean isInvalidDate(Deadline d){
-        System.out.println("Debug message 2: " + d);
         String[] splitDate = d.by.trim().split("-");
         // Formatting is incorrect
         if (splitDate.length != 3){

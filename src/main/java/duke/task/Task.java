@@ -6,15 +6,12 @@ import duke.exceptions.InvalidDateInputException;
 import java.util.ArrayList;
 
 public class Task {
-    private static final int MAX_NUMBER_OF_TASKS = 100;
     protected String description;
     private boolean isDone;
-//    private static Task[] taskList = new Task[MAX_NUMBER_OF_TASKS];
     private static ArrayList<Task> taskList = new ArrayList<>();
     private static int taskCount = 0;
-    private static String time;
 
-    // duke.task.Task Constructor
+    // Task Constructor
     public Task(String description){
         this.description = description;
         this.isDone = false;
@@ -22,6 +19,10 @@ public class Task {
 
     public String getStatusIcon(){
         return(this.isDone ? "x" : " ");
+    }
+
+    public void setIsDone(){
+        this.isDone = true;
     }
 
     public static void markAsDone(String i){
@@ -34,7 +35,7 @@ public class Task {
         System.out.println("");
     }
 
-    // Add duke.task.Task to taskList and increment taskCount
+    // Add Task to taskList and increment taskCount
     public void addTask() throws
             EmptyInputException, IncompleteInputException, InvalidDateInputException {
         // Throw Exception if no valid task is detected
@@ -46,8 +47,7 @@ public class Task {
         System.out.print("  ");
         this.printTaskInformation();
         System.out.println("");
-        taskList.add(this);
-        taskCount++;
+        addTaskToArrayList();
         printTaskCount();
     }
 
@@ -64,6 +64,15 @@ public class Task {
     }
 
     private static void printTaskCount() {
+        printSuccessfulTaskAddition();
+    }
+
+    public void addTaskToArrayList() {
+        taskList.add(this);
+        taskCount++;
+    }
+
+    private static void printSuccessfulTaskAddition() {
         if(taskCount == 1) {
             System.out.println("Now you have " + taskCount + " task in the list.");
         }
@@ -98,6 +107,27 @@ public class Task {
 
     public String getTaskType(){
         return "N/A";
+    }
+
+    public static int getTaskCount(){
+        return taskList.size();
+    }
+
+    public String getDate(){
+        return "N/A";
+    }
+
+    public static String getTask(int i){
+        Task t = taskList.get(i);
+        String taskType = t.getTaskType();
+        String statusIcon = (t.getStatusIcon().equals("x") ? "1" : "0");
+        if (t instanceof Todo){
+            return taskType + " | " + statusIcon  + " | " + t.description
+                    + System.lineSeparator();
+        } else {
+            return taskType + " | " + statusIcon + " | " + t.description
+                    + " | " + t.getDate() + System.lineSeparator() ;
+        }
     }
 
     private void printTaskType(){
