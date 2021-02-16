@@ -11,7 +11,7 @@ public class StringManipulator {
     }
 
     public static String getStringAfterSlash(String input){
-        return input.substring(input.indexOf("/")+1+2);
+        return input.substring(input.indexOf("/")+1+2+1);
     }
 
     public static String getIndexOfStringAfterWhiteSpace(String input){

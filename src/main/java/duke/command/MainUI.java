@@ -1,42 +1,105 @@
 package duke.command;
 
-import duke.task.TaskManager;
+import duke.task.*;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
-import static duke.task.TaskManager.taskArrayList;
+
 
 public class MainUI {
     public static final String LIST_COMMAND = "list";
     public static final String BYE_COMMAND = "bye";
     public static final String FILE_PATH = "data/duke.txt";
+    public static final String DIRECTORY_NAME = "data";
     public static boolean isEnding = false;
 
+    public static ArrayList<Task> taskArrayList = new ArrayList<>();
+
+
     public static void displayUI(Scanner in){
-        printWelcomeMessage();
         runProgram(in);
     }
 
-    public static void appendToFile(String filePath, String textToAppend) throws IOException {
-        FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
-        fw.write(textToAppend);
-        fw.close();
+    public static void loadData() throws FileNotFoundException {
+        System.out.println("Loading data from your file, 'duke.txt'...");
+        File data = new File("data/duke.txt");
+        taskArrayList = new ArrayList<>();
+        Scanner sc = new Scanner(data);
+        while (sc.hasNext()) {
+            String taskSentence = sc.nextLine();
+            char taskCategory = taskSentence.charAt(1);
+            boolean isDone = taskSentence.substring(4,5).compareTo("\u2713") == 0;
+            switch (taskCategory) {
+            case 'T':
+                String toDoDescription = taskSentence.substring(7);
+                Todo t = new Todo(toDoDescription);
+                if (isDone){
+                    t.markAsDone();
+                }
+                taskArrayList.add(t);
+                break;
+            case 'D':
+                int dueDateStartingIndex = taskSentence.indexOf("(by:");
+                String dueDate = taskSentence.substring(dueDateStartingIndex + 5, taskSentence.length()-1);
+                String deadlineDescription = taskSentence.substring(7,dueDateStartingIndex);
+//                System.out.println(dueDateStartingIndex+":"+dueDate);
+                Deadline d = new Deadline(deadlineDescription,dueDate);
+                if (isDone){
+                    d.markAsDone();
+                }
+                taskArrayList.add(d);
+                break;
+            case 'E':
+                int durationStartingIndex = taskSentence.indexOf("(at:");
+                String duration = taskSentence.substring(durationStartingIndex + 5, taskSentence.length()-1);
+                String eventDescription = taskSentence.substring(7,durationStartingIndex);
+//                System.out.println(durationStartingIndex+":"+duration);
+                Event e = new Event(eventDescription,duration);
+                if (isDone){
+                    e.markAsDone();
+                }
+                taskArrayList.add(e);
+                break;
+            default:
+                break;
+            }
+        }
+        System.out.println("Done loading the data!");
+        printDivider();
+
     }
 
-
     private static void runProgram(Scanner in) {
-
         try {
-            FileWriter firstLineWriter = new FileWriter(FILE_PATH);
-            firstLineWriter.write("Duke's Task List\n");
-            firstLineWriter.close();
-        } catch (IOException e1) {
-            System.out.println("IP/data folder not found - please ensure that the directory " +
-                    "called 'data' is in your project directory under 'IP'");
-        }
+            File data = new File("data/duke.txt");
+            if (data.createNewFile()) {
+                System.out.println("Your file that stores all your tasks is not found! (data/duke.txt) :(");
+                System.out.println("Creating new file now to store your future tasks! :)");
+                System.out.println("File created: " + data.getName());
+                printDivider();
+            } else {
+                loadData();
+            }
 
+        } catch (IOException e) {
+            System.out.println("We couldn't find the 'data' folder in your directory.");
+            System.out.println("Creating 'data' folder now...");
+            File relativePathFileName = new File(DIRECTORY_NAME);
+            String fullPath = relativePathFileName.getAbsolutePath();
+            File absolutePathFileName = new File(fullPath);
+            boolean bool = absolutePathFileName.mkdirs();
+            if(bool) {
+                System.out.println("'data' folder created successfully");
+            } else {
+                System.out.println("Sorry, couldn't create 'data' folder in your directory");
+            }
+        }
+        printWelcomeMessage();
         while (!isEnding){
             String input = in.nextLine();
             switch (input){

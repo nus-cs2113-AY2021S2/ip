@@ -23,6 +23,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return EVENT_LABEL + super.toString() + "(at:" + eventPeriod + ")";
+        return EVENT_LABEL + super.toString() + "(at: " + eventPeriod + ")";
     }
 }
