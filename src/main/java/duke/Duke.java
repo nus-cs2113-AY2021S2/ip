@@ -1,6 +1,10 @@
 package duke;
 
 import duke.exceptions.DukeException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
@@ -270,7 +274,7 @@ public class Duke {
 
     public static String getTodoDescription(String description) throws DukeException {
         try {
-            /** Task description contains only numbers */
+            /* Task description contains only numbers */
             Long.parseLong(description);
             throw new DukeException();
         } catch (NumberFormatException e) {
