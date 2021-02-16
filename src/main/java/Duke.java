@@ -11,7 +11,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class Duke {
 
@@ -95,12 +94,12 @@ public class Duke {
 
     /**
      * Splits save file input into command done, command word and command arguments string
-     * @param rawUserInput
+     * @param saveFileInput line of input in duke.txt
      * @return size 3 array; [command done, command type, command arguments]
      *
      */
-    private static String[] splitSaveFileInput(String rawUserInput) {
-        return rawUserInput.trim().split(" ", 3);
+    private static String[] splitSaveFileInput(String saveFileInput) {
+        return saveFileInput.trim().split(" ", 3);
     }
 
     /**
@@ -130,7 +129,7 @@ public class Duke {
 
     /**
      * add event from save file
-     * @param commandArgs
+     * @param commandArgs input of event task
      */
     private static void addEvent(String commandDone, String commandArgs) {
         final String[] descriptionAndTime = splitDescriptionAndTime(commandArgs);
