@@ -14,6 +14,11 @@ public class Deadline extends Task {
         System.out.print(" (by: " + this.getDeadline() + ")");
     }
 
+    @Override
+    public String toString() {
+        return super.toString() + " | " + this.getDeadline();
+    }
+
     public String getDeadline() {
         return deadline;
     }
