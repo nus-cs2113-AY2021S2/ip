@@ -1,4 +1,5 @@
 import java.io.FileNotFoundException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
@@ -111,10 +112,21 @@ public class Duke {
 
 
     public static void dukeInitialisation(todo list) throws IOException {
+
+        String path = System.getProperty("user.dir") + "\\data";
+
         File importedList = new File("data/duke.txt");
-        if(!importedList.exists()){
-            writeToFile("data/duke.txt", "");
-            return;
+        try {
+            if (!importedList.exists()) {
+                writeToFile("data/duke.txt", "");
+                return;
+            }
+        }catch(FileNotFoundException e){
+            (new File(path)).mkdir();
+            if (!importedList.exists()) {
+                writeToFile("data/duke.txt", "");
+                return;
+            }
         }
         Scanner s = new Scanner(importedList);
         while (s.hasNext()) {
@@ -140,7 +152,6 @@ public class Duke {
         System.out.println("Task list has been imported! Here are your tasks: \n"
                 + command_parser(list, "list") + "\n"
                 + "____________________________________________________________\n");
-
     }
 
 
