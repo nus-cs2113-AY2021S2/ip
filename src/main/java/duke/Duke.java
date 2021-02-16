@@ -11,7 +11,6 @@ import java.util.Arrays;
 
 public class Duke {
 
-    private static final String LINE_DIVIDER = "\t____________________________________________________________";
     private static final String DUKE_EXPORT_DIRECTORY = "data/";
     private static final String DUKE_EXPORT_FILENAME = "duke.csv";
 

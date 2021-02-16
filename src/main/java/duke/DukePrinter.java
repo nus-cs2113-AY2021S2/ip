@@ -61,16 +61,15 @@ public class DukePrinter {
     public static void printHelpMessage() {
         String[] helpMessage = {
                 "List of valid commands:",
-                "bye - Exits program",
-                "list - Lists all tasks",
-                "done <task_number> - Mark the specified task as done",
-                "todo <task_description> - Create a new task with the specified description",
-                "deadline <task_description> /by <deadline_date> - " +
-                        "Create a new task with the specified description and deadline",
-                "event <task_description> /at <event_date> - " +
-                        "Create a new task with the specified description and event date",
-                "delete <task_number> - delete the specified task",
-                "clear - deletes all tasks"
+                DukeCommands.BYE_HELP_MESSAGE,
+                DukeCommands.HELP_HELP_MESSAGE,
+                DukeCommands.LIST_HELP_MESSAGE,
+                DukeCommands.DONE_HELP_MESSAGE,
+                DukeCommands.TODO_HELP_MESSAGE,
+                DukeCommands.DEADLINE_HELP_MESSAGE,
+                DukeCommands.EVENT_HELP_MESSAGE,
+                DukeCommands.DELETE_HELP_MESSAGE,
+                DukeCommands.CLEAR_HELP_MESSAGE
         };
         printMessage(helpMessage);
     }
