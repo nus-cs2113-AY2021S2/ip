@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -62,6 +63,7 @@ public class Duke {
 
     public static void taskApp() throws DukeExceptionNoTaskMessage, DukeExceptionNoDateBy {
 
+//        ArrayList<Task> taskList = new ArrayList<>();
         while (true) {
 
             System.out.print("Enter command: ");
@@ -129,7 +131,10 @@ public class Duke {
                     System.exit(0);
                     break;
                 case "save":
-//                    save(taskList);
+                    save(taskList);
+                    break;
+                case "load":
+                    loadData();
                     break;
                 default:
                     String defaultMessage =
@@ -143,9 +148,77 @@ public class Duke {
         }
     }
 
+
+    private static void save(ArrayList<Task> taskList) {
+        //write to file
+        if(taskList.isEmpty()){
+            String emptyListMessage =
+                    String.format("%s\tTask list is empty, unable to save the data! Add some tasks first! \n%s",
+                            lineDivider,
+                            lineDivider);
+            System.out.println(emptyListMessage);
+            return;
+        }
+
+        try {
+            FileOutputStream writeData = new FileOutputStream("taskdata.ser");
+            ObjectOutputStream writeStream = new ObjectOutputStream(writeData);
+
+            writeStream.writeObject(taskList);
+            writeStream.flush();
+            writeStream.close();
+
+
+            String saveDataSuccessMessage = String.format("%s\tData saved successfully!" +
+                    "\n\tThis is the tasks that you have saved:\n%s%s",
+                    lineDivider,
+                    getList(taskList),
+                    lineDivider);
+
+            System.out.println(saveDataSuccessMessage);
+
+        } catch (IOException e) {
+            String errorMessage =
+                    String.format("%s\tUnable to save the data! Please contact Admin for help! \n%s",
+                            lineDivider,
+                            lineDivider);
+            System.out.println(errorMessage);
+        }
+    }
+
+    private static void loadData() {
+        try {
+            FileInputStream readData = new FileInputStream("taskdata.ser");
+            ObjectInputStream readStream = new ObjectInputStream(readData);
+
+            taskList = (ArrayList<Task>) readStream.readObject();
+            readStream.close();
+
+            String loadDataSuccessMessage = String.format("%s\tData successfully loaded! " +
+                    "\n\tThis is your current list of tasks:\n%s%s",
+                    lineDivider,
+                    getList(taskList),
+                    lineDivider);
+            System.out.println(loadDataSuccessMessage);
+
+        } catch (FileNotFoundException e1){
+            String fileNotFoundMessage =
+                    String.format("%s\tData not found! Add some tasks to your tasks to save first!\n%s",
+                    lineDivider,
+                    lineDivider);
+            System.out.println(fileNotFoundMessage);
+        } catch (IOException | ClassNotFoundException e) {
+            String loadErrorMessage =
+                    String.format("%s\tUnable to load the data! Please contact Admin for help! \n%s",
+                            lineDivider,
+                            lineDivider);
+            System.out.println(loadErrorMessage);
+        }
+    }
+
     public static void markTaskDone(ArrayList<Task> taskList, String userInput) {
         if (userInput.matches(".*\\d.*")) { // checks if there is a number in done cmd
-            int taskNumber = Integer.parseInt(userInput.replaceAll("\\D+",""));
+            int taskNumber = Integer.parseInt(userInput.replaceAll("\\D+", ""));
             int indexOfTaskToBeMarked = taskNumber - 1;
             if (indexOfTaskToBeMarked < taskList.size()) {
                 taskList.get(indexOfTaskToBeMarked).setDone(true);
@@ -182,7 +255,7 @@ public class Duke {
             StringBuilder sb = new StringBuilder();
             String listAsString;
             for (int i = 0; i < taskList.size(); i++) {
-                sb.append("\t");
+                sb.append("\t\t");
                 sb.append((i + 1));
                 sb.append(". ");
                 sb.append(taskList.get(i).getStatusIcon());
