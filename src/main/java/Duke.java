@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -19,7 +20,7 @@ public class Duke {
     }
 
     public static void taskTracker() {
-        Task[] tasks = new Task[100];
+        ArrayList<Task> tasks = new ArrayList<>(100);
         int indexOfTask = 0;
         String userInput;
         Scanner sc = new Scanner(System.in);
@@ -39,10 +40,10 @@ public class Duke {
                     System.out.println("OOPS!!! The description of a todo cannot be empty.");
                     break;
                 }
-                tasks[indexOfTask] = new Todo(taskDescription);
+                tasks.add(new Todo(taskDescription));
                 System.out.println("\t____________________________________________________________");
                 System.out.println("\tGot it! I've added this task:");
-                System.out.println("\t" + tasks[indexOfTask].toString());
+                System.out.println("\t" + tasks.get(indexOfTask).toString());
                 indexOfTask++;
                 System.out.printf("\tNow you have %d tasks in the list.\n", indexOfTask);
                 System.out.println("\t____________________________________________________________");
@@ -60,10 +61,10 @@ public class Duke {
                 strings = taskDescription.split(" /by ",2);
                 taskDescription = strings[0];
                 String deadlineDate = strings[1];
-                tasks[indexOfTask] = new Deadline(taskDescription, deadlineDate);
+                tasks.add(new Deadline(taskDescription, deadlineDate));
                 System.out.println("\t____________________________________________________________");
                 System.out.println("\tGot it! I've added this task:");
-                System.out.println("\t" + tasks[indexOfTask].toString());
+                System.out.println("\t" + tasks.get(indexOfTask).toString());
                 indexOfTask++;
                 System.out.printf("\tNow you have %d tasks in the list.\n", indexOfTask);
                 System.out.println("\t____________________________________________________________");
@@ -81,10 +82,10 @@ public class Duke {
                 strings = taskDescription.split(" /at ",2);
                 taskDescription = strings[0];
                 String eventDate = strings[1];
-                tasks[indexOfTask] = new Event(taskDescription,eventDate);
+                tasks.add(new Event(taskDescription,eventDate));
                 System.out.println("\t____________________________________________________________");
                 System.out.println("Got it! I've added this task:");
-                System.out.println("\t" + tasks[indexOfTask].toString());
+                System.out.println("\t" + tasks.get(indexOfTask).toString());
                 indexOfTask++;
                 System.out.printf("Now you have %d tasks in the list.\n", indexOfTask);
                 System.out.println("\t____________________________________________________________");
@@ -92,26 +93,58 @@ public class Duke {
 
             case ("list"):
                 System.out.println("\t____________________________________________________________");
-                System.out.println("Here are the tasks in your tasks:");
-                for (int i = 0; i < indexOfTask; i++) {
-                    System.out.printf("\t%d. %s\n", i + 1, tasks[i].toString());
+                if (indexOfTask > 1){
+                    System.out.println("Here are the tasks in your tasks:");
+                    for (int i = 0; i < indexOfTask; i++) {
+                        System.out.printf("\t%d. %s\n", i + 1, tasks.get(i).toString());
+                    }
+                } else {
+                    System.out.println("You have no tasks to complete.");
                 }
                 System.out.println("\t____________________________________________________________");
                 indexOfTask++;
+                break;
+            case ("delete"):
+                try{
+                    taskDescription = strings[1];
+                } catch (ArrayIndexOutOfBoundsException e){
+                    System.out.println("OOPS!!! Please specify task number.");
+                    break;
+                } catch (IndexOutOfBoundsException e){
+                    System.out.println("Task number not recognised.");
+                    break;
+                } catch (NumberFormatException e){
+                    System.out.println("Task number not recognised.");
+                    break;
+                }
+                int indexOfTaskToDelete = Integer.parseInt(taskDescription) - 1;
+                System.out.println("\t____________________________________________________________");
+                System.out.println("Noted. I've removed this task:");
+                System.out.println("\t" + tasks.get(indexOfTaskToDelete).toString());
+                tasks.remove(indexOfTaskToDelete);
+                indexOfTask--;
+                System.out.println("\t____________________________________________________________");
                 break;
 
             case ("done"):
                 try{
                     taskDescription = strings[1];
-                } catch (ArrayIndexOutOfBoundsException missingInput){
+                } catch (ArrayIndexOutOfBoundsException e){
                     System.out.println("OOPS!!! Please specify task number.");
+                    break;
+                } catch (IndexOutOfBoundsException e){
+                    System.out.println("Task number not recognised.");
+                    break;
+                } catch (NumberFormatException e){
+                    System.out.println("Task number not recognised.");
                     break;
                 }
                 int indexOfTaskDone = Integer.parseInt(taskDescription) - 1;
-                tasks[indexOfTaskDone].setDone();
+                tasks.get(indexOfTaskDone).setDone();
                 System.out.println("\t____________________________________________________________");
                 System.out.println("Nice! I've marked this task as done:");
-                System.out.println("\t" + tasks[indexOfTaskDone].toString());
+                System.out.println("\t" + tasks.get(indexOfTaskDone).toString());
+                System.out.printf("Now you have %d tasks in the list.\n", indexOfTask);
                 System.out.println("\t____________________________________________________________");
                 break;
 
