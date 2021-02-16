@@ -94,10 +94,10 @@ public class Bob {
 
         switch (commandType) {
         case LIST:
-            printList();
+            taskList.printList();
             break;
         case DONE:
-            completeTask(inputStringArr[1]);
+            taskList.completeTask(inputStringArr[1]);
             break;
         case TODO:
             taskList.addTodo(inputString);
@@ -115,14 +115,6 @@ public class Bob {
             throw new NoSuchMethodException();
         }
         return isScanning;
-    }
-
-    private static void completeTask(String s) {
-        taskList.completeTask(Integer.parseInt(s));
-    }
-
-    private static void printList() {
-        taskList.printList();
     }
 
     /**

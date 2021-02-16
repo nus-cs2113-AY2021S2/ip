@@ -34,9 +34,13 @@ public class TaskList {
                 " " + tasks.get(index).toString();
     }
 
+    public void completeTask(String s) {
+        completeTask(Integer.parseInt(s));
+    }
+
     // Set flag isDone in Task class of index = number - 1
-    public void completeTask(int number) {
-        int index = number - 1; // adjust for the list label starting from 1
+    public void completeTask(int i) {
+        int index = i- 1; // adjust for the list label starting from 1
         tasks.get(index).isDone(true);
         completeTaskMessage(index);
     }
