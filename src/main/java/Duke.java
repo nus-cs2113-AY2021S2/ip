@@ -1,11 +1,10 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     private static final String DIVIDER = "____________________________________________________________";
     private static final Scanner SCANNER = new Scanner(System.in);
-    private static final int MAX_TASKS_COUNT = 100;
-    private static final Task[] STORED_TASKS = new Task[MAX_TASKS_COUNT];
-    private static int storedTasksCount = 0;
+    private static final ArrayList<Task> STORED_TASKS = new ArrayList<Task>();
 
     public static void main(String[] args) {
         String command;
@@ -47,6 +46,8 @@ public class Duke {
                 displayStoredTasks();
             } else if (command.startsWith("done")) {
                 markTaskAsDone(command);
+            } else if (command.startsWith("delete")) {
+                deleteTask(command);
             } else if (command.equals("bye")) {
                 exitMsg();
             } else {
@@ -59,11 +60,11 @@ public class Duke {
 
     public static void storeTodoTask(String command) throws DukeException {
         if (command.equals("todo")) {
-            throw new DukeException(" ☹ OOPS!!! The description of a todo cannot be empty.");
+            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
         }
 
         if (!command.startsWith("todo ")) {
-            throw new DukeException(" ☹ OOPS!!! The correct syntax for todo command is: 'todo task_description'");
+            throw new DukeException("☹ OOPS!!! The correct syntax for todo command is: 'todo task_description'");
         }
 
         String description = command.substring(5).strip();
@@ -72,18 +73,18 @@ public class Duke {
 
     public static void storeDeadlineTask(String command) throws DukeException {
         if (command.equals("deadline")) {
-            throw new DukeException(" ☹ OOPS!!! The description of a deadline cannot be empty.");
+            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
         }
 
         if (!command.startsWith("deadline ")) {
-            throw new DukeException(" ☹ OOPS!!! The correct syntax for deadline command is: " +
+            throw new DukeException("☹ OOPS!!! The correct syntax for deadline command is: " +
                     "'deadline task_description /by due_date'");
         }
 
         String request = command.substring(9).strip();
         int indexOfBy = request.indexOf(" /by ");
         if (indexOfBy == -1) {
-            throw new DukeException(" ☹ OOPS!!! The correct syntax for deadline command is: " +
+            throw new DukeException("☹ OOPS!!! The correct syntax for deadline command is: " +
                     "'deadline task_description /by due_date'");
         }
 
@@ -94,18 +95,18 @@ public class Duke {
 
     public static void storeEventTask(String command) throws DukeException {
         if (command.equals("event")) {
-            throw new DukeException(" ☹ OOPS!!! The description of an event cannot be empty.");
+            throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
         }
 
         if (!command.startsWith("event ")) {
-            throw new DukeException(" ☹ OOPS!!! The correct syntax for event command is: " +
+            throw new DukeException("☹ OOPS!!! The correct syntax for event command is: " +
                     "'event task_description /at timeframe'");
         }
 
         String request = command.substring(6).strip();
         int indexOfAt = request.indexOf(" /at ");
         if (indexOfAt == -1) {
-            throw new DukeException(" ☹ OOPS!!! The correct syntax for event command is: " +
+            throw new DukeException("☹ OOPS!!! The correct syntax for event command is: " +
                     "'event task_description /at timeframe'");
         }
 
@@ -115,39 +116,38 @@ public class Duke {
     }
 
     public static void storeTask(Task taskToStore) {
-        STORED_TASKS[storedTasksCount] = taskToStore;
-        storedTasksCount++;
+        STORED_TASKS.add(taskToStore);
         System.out.println(DIVIDER);
-        System.out.println("Got it. I've added this task:");
-        System.out.println("  " + taskToStore);
-        System.out.println("Now you have " + storedTasksCount + " tasks in the list.");
+        System.out.println(" Got it. I've added this task:");
+        System.out.println("   " + taskToStore);
+        System.out.println(" Now you have " + STORED_TASKS.size() + " tasks in the list.");
         System.out.println(DIVIDER);
     }
 
     public static void displayStoredTasks() {
-        if (storedTasksCount == 0) {
+        if (STORED_TASKS.size() == 0) {
             System.out.println(DIVIDER);
-            System.out.println("You have no tasks in your list! :)");
+            System.out.println(" You have no tasks in your list! :)");
             System.out.println(DIVIDER);
             return;
         }
 
         System.out.println(DIVIDER);
-        System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < storedTasksCount; i++) {
-            Task currentTask = STORED_TASKS[i];
-            System.out.printf("%d.%s\n", (i + 1), currentTask);
+        System.out.println(" Here are the tasks in your list:");
+        for (int i = 0; i < STORED_TASKS.size(); i++) {
+            Task currentTask = STORED_TASKS.get(i);
+            System.out.printf(" %d.%s\n", (i + 1), currentTask);
         }
         System.out.println(DIVIDER);
     }
 
     public static void markTaskAsDone(String command) throws DukeException {
         if (command.equals("done")) {
-            throw new DukeException(" ☹ OOPS!!! The task number of a done command cannot be empty.");
+            throw new DukeException("☹ OOPS!!! The task number of a done command cannot be empty.");
         }
 
         if (!command.startsWith("done ")) {
-            throw new DukeException(" ☹ OOPS!!! The correct syntax for done command is: 'done task_number'");
+            throw new DukeException("☹ OOPS!!! The correct syntax for done command is: 'done task_number'");
         }
 
         String taskNumber = command.substring(5).strip();
@@ -155,34 +155,64 @@ public class Duke {
         try {
             indexOfTaskToMark = Integer.parseInt(taskNumber) - 1;
         } catch (NumberFormatException e) {
-            throw new DukeException(" ☹ OOPS!!! The correct syntax for done command is: 'done task_number'");
+            throw new DukeException("☹ OOPS!!! The correct syntax for done command is: 'done task_number'");
         }
 
-        if (indexOfTaskToMark >= storedTasksCount || indexOfTaskToMark < 0) {
-            throw new DukeException(" ☹ OOPS!!! You entered an invalid task number!");
+        if (indexOfTaskToMark >= STORED_TASKS.size() || indexOfTaskToMark < 0) {
+            throw new DukeException("☹ OOPS!!! You entered an invalid task number!");
         }
 
-        Task taskToMark = STORED_TASKS[indexOfTaskToMark];
+        Task taskToMark = STORED_TASKS.get(indexOfTaskToMark);
         taskToMark.markAsDone();
         System.out.println(DIVIDER);
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(taskToMark);
+        System.out.println(" Nice! I've marked this task as done:");
+        System.out.println("   " + taskToMark);
+        System.out.println(DIVIDER);
+    }
+
+    public static void deleteTask(String command) throws DukeException {
+        if (command.equals("delete")) {
+            throw new DukeException("☹ OOPS!!! The task number of a delete command cannot be empty.");
+        }
+
+        if (!command.startsWith("delete ")) {
+            throw new DukeException("☹ OOPS!!! The correct syntax for delete command is: 'delete task_number'");
+        }
+
+        String taskNumber = command.substring(7).strip();
+        int indexOfTaskToDelete;
+        try {
+            indexOfTaskToDelete = Integer.parseInt(taskNumber) - 1;
+        } catch (NumberFormatException e) {
+            throw new DukeException("☹ OOPS!!! The correct syntax for delete command is: 'delete task_number'");
+        }
+
+        if (indexOfTaskToDelete >= STORED_TASKS.size() || indexOfTaskToDelete < 0) {
+            throw new DukeException("☹ OOPS!!! You entered an invalid task number!");
+        }
+
+        Task deletedTask = STORED_TASKS.remove(indexOfTaskToDelete);
+        System.out.println(DIVIDER);
+        System.out.println(" Noted. I've removed this task:");
+        System.out.println("   " + deletedTask);
+        System.out.println((STORED_TASKS.size() == 0) ? " Now you have no more tasks left in the list! :)" :
+                " Now you have " + STORED_TASKS.size() + " tasks in the list.");
         System.out.println(DIVIDER);
     }
 
     public static void exitMsg() {
         System.out.println(DIVIDER);
-        System.out.println("Bye. Hope to see you again soon!");
+        System.out.println(" Bye. Hope to see you again soon!");
         System.out.println(DIVIDER);
     }
 
     public static void invalidCommand() throws DukeException {
-        throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
     public static void errorMsg(DukeException e) {
         System.out.println(DIVIDER);
-        System.out.println(e.getMessage());
+        System.out.println(" " + e.getMessage());
         System.out.println(DIVIDER);
     }
 }
