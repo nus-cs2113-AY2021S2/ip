@@ -18,12 +18,18 @@ public class TaskList {
         Output.printUpdated(tasks.get(taskIndex - 1).toString());
     }
 
+
     public void printTaskList() {
         Output.printTaskList(tasks);
     }
 
     public int size() {
         return tasks.size();
+    }
+
+    public void deleteTask(int taskIndex) {
+        Output.printDeleted(tasks.get(taskIndex - 1).toString(), tasks.size() - 1);
+        tasks.remove(taskIndex - 1);
     }
 
 }

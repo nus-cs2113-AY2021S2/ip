@@ -37,6 +37,23 @@ public class Logic {
                 }
                 break;
             }
+            case "delete": {
+                int taskNumber;
+                try {
+                    taskNumber = scan.nextInt();
+                }
+                catch(Exception e) {
+                    Output.printDoneInputError();
+                    break;
+                }
+                if (taskNumber > taskList.size() || taskNumber < 1) {
+                    Output.printDoneRangeError();
+                }
+                else {
+                    taskList.deleteTask(taskNumber);
+                }
+                break;
+            }
             case "todo": {
                 String taskName = scan.nextLine();
                 Todo newTask = new Todo(taskName.trim());
