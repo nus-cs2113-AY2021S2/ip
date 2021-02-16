@@ -109,6 +109,29 @@ public class Duke {
                     System.out.print("I don't quite understand." +  "\n" + "Please enter a number after done command." + "\n");
                     System.out.print(line);
                 }
+            } else if (input.contains("delete")){
+                int dividerPosition = input.indexOf(" ");
+                String taskNo = input.substring(dividerPosition + 1);
+                try{
+                    int taskIndex = Integer.parseInt(taskNo) - 1;
+                    if (taskIndex >=tasks.size()) {
+                        System.out.print(line);
+                        System.out.print("You have no such task." + "\n");
+                        System.out.print(line);
+                    }
+                    else {
+                        System.out.print(line);
+                        System.out.print("Noted. I've removed this task: " + "\n" + tasks.get(taskIndex) + "\n");
+                        tasks.remove(taskIndex);
+                        System.out.print("Now you have " + tasks.size()+ " tasks in the list."+"\n");
+                        System.out.print(line);
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.print(line);
+                    System.out.print("I don't quite understand." +  "\n" + "Please enter a number after done command." + "\n");
+                    System.out.print(line);
+                }
+
             } else {
                 System.out.print(line);
                 System.out.print("Sorry, I didnt get you." + "\n" + "Please enter the command again." + "\n");
