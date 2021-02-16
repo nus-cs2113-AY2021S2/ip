@@ -13,4 +13,14 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
     }
+
+    public String saveToFile() {
+        String done = "1";
+        if (isDone) {
+            done = "1";
+        } else {
+            done = "0";
+        }
+        return done + " deadline " + description + " /by " + by + "\n";
+    }
 }

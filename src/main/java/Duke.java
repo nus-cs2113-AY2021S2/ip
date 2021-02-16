@@ -5,6 +5,11 @@ import task.Event;
 import task.Task;
 import task.Todo;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -36,6 +41,10 @@ public class Duke {
     private static final String MESSAGE_INVALID_NUMBER_DONE = "Task number does not exist.";
     private static final String MESSAGE_INVALID_COMMAND_DELETE = "Number not provided for the task to be deleted.";
     private static final String MESSAGE_INVALID_NUMBER_DELETE = "Task number does not exist.";
+    private static final String MESSAGE_SAVE_FILE_LOADED = "Save file loaded.";
+    private static final String MESSAGE_SAVE_FILE_CREATED = "Save file created.";
+    private static final String MESSAGE_SAVE_FILE_SAVED = "File saved.";
+    private static final String MESSAGE_SAVE_FILE_ERROR = "Error while saving file.";
 
     /**
      * Main entry point of the application.
@@ -44,10 +53,92 @@ public class Duke {
     public static void main(String[] args) {
         showLogo();
         showGreeting();
+        try {
+            loadFile();
+        } catch (FileNotFoundException e) {
+            // do nothing since no file to load
+        }
         while(true) {
             String userCommand = getUserInput();
             executeCommand(userCommand);
         }
+    }
+
+    private static void loadFile() throws FileNotFoundException {
+        printHorizontalLine();
+        File f = new File("duke.txt");
+        if (!f.exists()) { // if file does not exist
+            throw new FileNotFoundException();
+        }
+        Scanner s = new Scanner(f);
+        while (s.hasNext()) {
+            final String input = s.nextLine();
+            final String[] commandDoneAndTypeAndParams = splitSaveFileInput(input);
+            final String commandDone = commandDoneAndTypeAndParams[0];
+            final String commandType = commandDoneAndTypeAndParams[1];
+            final String commandArgs = commandDoneAndTypeAndParams[2];
+            switch (commandType) {
+            case COMMAND_TODO_WORD:
+                addTodo(commandDone, commandArgs);
+                break;
+            case COMMAND_DEADLINE_WORD:
+                addDeadline(commandDone, commandArgs);
+                break;
+            case COMMAND_EVENT_WORD:
+                addEvent(commandDone, commandArgs);
+                break;
+            }
+        }
+        System.out.println(MESSAGE_SAVE_FILE_LOADED);
+        printHorizontalLine();
+    }
+
+    /**
+     * Splits save file input into command done, command word and command arguments string
+     * @param rawUserInput
+     * @return size 3 array; [command done, command type, command arguments]
+     *
+     */
+    private static String[] splitSaveFileInput(String rawUserInput) {
+        return rawUserInput.trim().split(" ", 3);
+    }
+
+    /**
+     * add todo from save file
+     * @param commandArgs input of todo task
+     */
+    private static void addTodo(String commandDone, String commandArgs) {
+        Task task = new Todo(commandArgs);
+        if (commandDone.equals("1")) {
+            task.markAsDone();
+        }
+        taskList.add(task);
+    }
+
+    /**
+     * add deadline from save file
+     * @param commandArgs input of deadline task
+     */
+    private static void addDeadline(String commandDone, String commandArgs) {
+        final String[] descriptionAndDeadline = splitDescriptionAndDeadline(commandArgs);
+        Task task = new Deadline(descriptionAndDeadline[0], descriptionAndDeadline[1]);
+        if (commandDone.equals("1")) {
+            task.markAsDone();
+        }
+        taskList.add(task);
+    }
+
+    /**
+     * add event from save file
+     * @param commandArgs
+     */
+    private static void addEvent(String commandDone, String commandArgs) {
+        final String[] descriptionAndTime = splitDescriptionAndTime(commandArgs);
+        Task task = new Event(descriptionAndTime[0], descriptionAndTime[1]);
+        if (commandDone.equals("1")) {
+            task.markAsDone();
+        }
+        taskList.add(task);
     }
 
     private static void printHorizontalLine() {
@@ -197,7 +288,6 @@ public class Duke {
             taskList.add(task);
             getMessageForDeadline(task);
         }
-
     }
 
 
@@ -253,10 +343,8 @@ public class Duke {
         System.out.println("Here are the tasks in your list:");
         int taskCount = 1;
         for (Task task : taskList) {
-            if (task != null) {
-                System.out.println(taskCount + "." + task.toString());
-                ++taskCount;
-            }
+            System.out.println(taskCount + "." + task.toString());
+            ++taskCount;
         }
     }
 
@@ -310,8 +398,28 @@ public class Duke {
      * exit the program
      */
     private static void executeExit() {
+        try {
+            saveFile();
+        } catch (IOException e) {
+            System.out.println(MESSAGE_SAVE_FILE_ERROR);
+        }
+        printHorizontalLine();
         showGoodbye();
         System.exit(0);
+    }
+
+    private static void saveFile() throws IOException {
+        printHorizontalLine();
+        File f = new File("duke.txt");
+        if (f.createNewFile()) {
+            System.out.println(MESSAGE_SAVE_FILE_CREATED);
+        }
+        FileWriter fw = new FileWriter("duke.txt");
+        for (Task task : taskList) {
+            fw.write(task.saveToFile());
+        }
+        fw.close();
+        System.out.println(MESSAGE_SAVE_FILE_SAVED);
     }
 
     private static void showGoodbye() {
