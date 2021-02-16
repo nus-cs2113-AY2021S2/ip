@@ -19,7 +19,8 @@ public class EmptyDescriptionException extends Exception{
         System.out.println("____________________________________________________________");
         switch (commandType) {
         case DONE:
-            System.out.println("OOPS!!! The task ID that you " + this.commandType + " is invalid");
+        case DELETE:
+            System.out.println("OOPS!!! The task ID that you " + this.commandType + " is invalid.");
             break;
         case TODO:
         case DEADLINE:

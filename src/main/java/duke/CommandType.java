@@ -2,7 +2,7 @@ package duke;
 
 public enum CommandType {
     TODO, DEADLINE, EVENT,
-    DONE,
+    DONE, DELETE,
     LIST,
     EXIT,
     UNDEFINED

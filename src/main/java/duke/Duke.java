@@ -8,12 +8,11 @@ public class Duke {
 
     private static final Scanner SCANNER = new Scanner(System.in);
     private static final char INPUT_COMMENT_MARKER = '#';
-    private static final int CAPACITY = 99;
     private static TaskManager tasks;
 
 
     public static void initTaskManager() {
-         tasks = new TaskManager(CAPACITY);
+         tasks = new TaskManager();
     }
 
     public static void showHello() {
@@ -55,7 +54,9 @@ public class Duke {
             commandType = CommandType.LIST;
         } else if (userInputString.toUpperCase().matches("^(DONE).*$")) {
             commandType = CommandType.DONE;
-        } else if (userInputString.toUpperCase().matches("^(TODO).*$")) {
+        } else if (userInputString.toUpperCase().matches("^(DELETE).*$")) {
+            commandType = CommandType.DELETE;
+        }else if (userInputString.toUpperCase().matches("^(TODO).*$")) {
             commandType = CommandType.TODO;
         } else if (userInputString.toUpperCase().matches("^(DEADLINE).*$")) {
             commandType = CommandType.DEADLINE;
@@ -117,13 +118,27 @@ public class Duke {
 
     public static void executeDone(String userCommand) throws EmptyDescriptionException{
         try{
-            int taskIndexShow = Integer.parseInt(userCommand.replaceAll("[^0-9]", ""));
+            String[] typeIndex = userCommand.split("[Dd][Oo][Nn][Ee]",2);
+            int taskIndexShow = Integer.parseInt(typeIndex[1].trim());
             if(taskIndexShow <= 0 || taskIndexShow > tasks.getNumOfTasks()) {
                 throw new EmptyDescriptionException(CommandType.DONE);
             }
             tasks.markTaskDone(taskIndexShow);
         } catch (NumberFormatException e) {
             throw new EmptyDescriptionException(CommandType.DONE);
+        }
+    }
+
+    public static void executeDELETE(String userCommand) throws EmptyDescriptionException{
+        try{
+            String[] typeIndex = userCommand.split("[Dd][Ee][Ll][Ee][Tt][Ee]",2);
+            int taskIndexShow = Integer.parseInt(typeIndex[1].trim());
+            if(taskIndexShow <= 0 || taskIndexShow > tasks.getNumOfTasks()) {
+                throw new EmptyDescriptionException(CommandType.DELETE);
+            }
+            tasks.deleteTask(taskIndexShow);
+        } catch (NumberFormatException e) {
+            throw new EmptyDescriptionException(CommandType.DELETE);
         }
     }
 
@@ -150,6 +165,9 @@ public class Duke {
                 return;
             case DONE:
                 executeDone(userInputString);
+                return;
+            case DELETE:
+                executeDELETE(userInputString);
                 return;
             case EXIT:
                 executeExitProgramRequest();
