@@ -79,6 +79,11 @@ public class Duke {
                 Task.listTasks();
                 printDividingLine();
                 break;
+            case "delete":
+                printDividingLine();
+                Task.deleteTask(getTaskIndex(userInput));
+                printDividingLine();
+                break;
             case "done":
                 printDividingLine();
                 Task.markAsDone(getTaskIndex(userInput));
