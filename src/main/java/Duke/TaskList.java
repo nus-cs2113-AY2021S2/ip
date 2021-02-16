@@ -10,6 +10,10 @@ public class TaskList {
 
     public void addTask(Task inputTask) {
         tasks.add(inputTask);
+    }
+
+    public void addAndPrint(Task inputTask) {
+        addTask(inputTask);
         Output.printAdded(inputTask, tasks.size());
     }
 
@@ -25,6 +29,10 @@ public class TaskList {
 
     public int size() {
         return tasks.size();
+    }
+
+    public Task getTask(int index) {
+        return tasks.get(index);
     }
 
     public void deleteTask(int taskIndex) {

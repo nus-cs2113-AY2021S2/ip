@@ -1,6 +1,6 @@
 package Duke.Tasks;
 
-public class Task {
+public abstract class Task {
 
     protected String name;
     protected boolean isDone = false;
@@ -12,5 +12,7 @@ public class Task {
     public void setDone() {
         isDone = true;
     }
+
+    public abstract String toStringSave();
 
 }

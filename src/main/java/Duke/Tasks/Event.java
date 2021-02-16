@@ -21,4 +21,17 @@ public class Event extends Task {
         outputString = outputString + " " + name + " (at: " + period + ")";
         return outputString;
     }
+
+    public String toStringSave() {
+        String saveString = "E | ";
+        if (isDone) {
+            saveString += "1 | ";
+        }
+        else {
+            saveString += "0 | ";
+        }
+        saveString = saveString + name + " | " + period;
+        return saveString;
+    }
+
 }
