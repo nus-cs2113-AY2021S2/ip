@@ -29,6 +29,10 @@ public class Task {
         return "";
     }
 
+    public String getFileFormat(){
+        return getTaskSymbol() + " | " + getTaskCompletionStatus() + " | " + getTaskDescription();
+    }
+
     public void setTaskAsDone() {
         this.completionStatus = MARK_DONE;
     }

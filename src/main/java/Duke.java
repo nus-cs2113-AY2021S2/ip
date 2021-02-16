@@ -4,8 +4,13 @@ import task.Event;
 import task.Task;
 import task.Todo;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
+import java.io.IOException;
+import java.util.StringJoiner;
+import java.io.FileWriter;
 
 public class Duke {
 
@@ -23,6 +28,11 @@ public class Duke {
     // String message constant
     static final String DIVIDER_LINE = "____________________________________________________________";
     static final String LIST_STARTING_MESSAGE = "Below are all your list of mushroom points:";
+    static final String FILE_PATH = ".\\src\\main\\task_logs.txt";
+    static final String FILE_LOAD_MESSAGE = "Loading file...";
+    static final String FILE_LOAD_SUCCESS = "Loading Successful!";
+    static final String FILE_LOAD_FAILURE = "File not found! :(";
+    static final String FILE_LOAD_SUCCESS_WELCOME = "What can mushroom boy do for you?";
 
     // Variable Used in this program
     private static ArrayList<Task> taskArrayList = new ArrayList<>();
@@ -48,7 +58,7 @@ public class Duke {
         System.out.println(DIVIDER_LINE);
         System.out.println(logo);
         System.out.println("Welcome Mushroom!");
-        System.out.println("What can Mushroom Head do for you?");
+        System.out.println("Mushroom boy is here to serve you!");
         System.out.println(DIVIDER_LINE);
     }
 
@@ -79,63 +89,83 @@ public class Duke {
         case "list":
             return INPUT_CODE_LIST;
         case "done":
-            try {
-                return validateDoneCommand(words);
-            } catch (DoneCommandException e) {
-                taskWarningMessage(userInput);
-                System.out.println("There is no task smaller than 1!");
-                return INPUT_CODE_INVALID;
-            } catch (ArrayIndexOutOfBoundsException e) {
-                taskWarningMessage(userInput);
-                System.out.println("You need a task number behind done command!!");
-                return INPUT_CODE_INVALID;
-            }
+            return initCheckDone(userInput, words);
         case "todo":
-            try {
-                return validateTodoCommand(words);
-            } catch (TodoCommandException e) {
-                taskWarningMessage(userInput);
-                System.out.println("You need an task behind!");
-                return INPUT_CODE_INVALID;
-            }
+            return initCheckTodo(userInput, words);
         case "deadline":
-            try {
-                extractTaskTiming(userInput);
-                return validateDeadlineCommand(userInput);
-            } catch (DeadlineCommandException e) {
-                taskWarningMessage(userInput);
-                System.out.println("Your format must be [ /by ]!");
-                return INPUT_CODE_INVALID;
-            } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("Please enter a date or time!");
-                return INPUT_CODE_INVALID;
-            }
+            return initCheckDeadline(userInput);
         case "event":
-            try {
-                extractTaskTiming(userInput);
-                return validateEventCommand(userInput);
-            } catch (EventCommandException e) {
-                taskWarningMessage(userInput);
-                System.out.println("Your format must be [ /at ]!");
-                return INPUT_CODE_INVALID;
-            } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("Please enter a date or time!");
-                return INPUT_CODE_INVALID;
-            }
+            return initCheckEvent(userInput);
         case "delete":
-            try {
-                return validateDeleteCommand(words);
-            } catch (DeleteCommandException e) {
-                taskWarningMessage(userInput);
-                System.out.println("You can not delete a task smaller than 1!");
-                return INPUT_CODE_INVALID;
-            } catch (ArrayIndexOutOfBoundsException e) {
-                taskWarningMessage(userInput);
-                System.out.println("You need a task number behind delete command!!");
-                return INPUT_CODE_INVALID;
-            }
+            return initCheckDelete(userInput, words);
         default:
             return INPUT_CODE_DEFAULT_INVALID;
+        }
+    }
+
+    private static int initCheckDelete(String userInput, String[] words) {
+        try {
+            return validateDeleteCommand(words);
+        } catch (DeleteCommandException e) {
+            taskWarningMessage(userInput);
+            System.out.println("You cannot delete a task smaller than 1!");
+            return INPUT_CODE_INVALID;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            taskWarningMessage(userInput);
+            System.out.println("You need a task number behind delete command!");
+            return INPUT_CODE_INVALID;
+        }
+    }
+
+    private static int initCheckEvent(String userInput) {
+        try {
+            extractTaskTiming(userInput);
+            return validateEventCommand(userInput);
+        } catch (EventCommandException e) {
+            taskWarningMessage(userInput);
+            System.out.println("Your format must be [ /at ]!");
+            return INPUT_CODE_INVALID;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Please enter a date or time!");
+            return INPUT_CODE_INVALID;
+        }
+    }
+
+    private static int initCheckDeadline(String userInput) {
+        try {
+            extractTaskTiming(userInput);
+            return validateDeadlineCommand(userInput);
+        } catch (DeadlineCommandException e) {
+            taskWarningMessage(userInput);
+            System.out.println("Your format must be [ /by ]!");
+            return INPUT_CODE_INVALID;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Please enter a date or time!");
+            return INPUT_CODE_INVALID;
+        }
+    }
+
+    private static int initCheckTodo(String userInput, String[] words) {
+        try {
+            return validateTodoCommand(words);
+        } catch (TodoCommandException e) {
+            taskWarningMessage(userInput);
+            System.out.println("You need an task behind!");
+            return INPUT_CODE_INVALID;
+        }
+    }
+
+    private static int initCheckDone(String userInput, String[] words) {
+        try {
+            return validateDoneCommand(words);
+        } catch (DoneCommandException e) {
+            taskWarningMessage(userInput);
+            System.out.println("There is no task smaller than 1!");
+            return INPUT_CODE_INVALID;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            taskWarningMessage(userInput);
+            System.out.println("You need a task number behind done command!!");
+            return INPUT_CODE_INVALID;
         }
     }
 
@@ -181,65 +211,101 @@ public class Duke {
 
     // Perform the action give the command
     private static void performAction(int commandCode, String userInput) {
-        String taskDescription;
-        String taskTiming;
         // No Fallthrough intended in this switch statement
         switch (commandCode) {
         case INPUT_CODE_EXIT:
             printBye();
             break;
         case INPUT_CODE_LIST:
-            System.out.println(DIVIDER_LINE);
-            printEntireCollection();
-            System.out.println(DIVIDER_LINE);
+            performList();
             break;
         case INPUT_CODE_DONE:
-            System.out.println(DIVIDER_LINE);
-            markTaskAsDone(getIndexFromUserInput(userInput));
-            System.out.println(DIVIDER_LINE);
+            performDone(userInput);
             break;
         case INPUT_CODE_TODO:
-            System.out.println(DIVIDER_LINE);
-            taskDescription = extractTaskDescription(userInput);
-            taskArrayList.add(new Todo(taskDescription));
-            printAddedTask(taskCount);
-            taskCount++;
-            System.out.println(DIVIDER_LINE);
+            performTodo(userInput);
             break;
         case INPUT_CODE_DEADLINE:
-            System.out.println(DIVIDER_LINE);
-            taskDescription = extractTaskDescription(userInput);
-            taskTiming = extractTaskTiming(userInput);
-            taskArrayList.add(new Deadline(taskDescription, taskTiming));
-            printAddedTask(taskCount);
-            taskCount++;
-            System.out.println(DIVIDER_LINE);
+            performDeadline(userInput);
             break;
         case INPUT_CODE_EVENT:
-            System.out.println(DIVIDER_LINE);
-            taskDescription = extractTaskDescription(userInput);
-            taskTiming = extractTaskTiming(userInput);
-            taskArrayList.add(new Event(taskDescription, taskTiming));
-            printAddedTask(taskCount);
-            taskCount++;
-            System.out.println(DIVIDER_LINE);
+            performEvent(userInput);
             break;
         case INPUT_CODE_DELETE:
-            System.out.println(DIVIDER_LINE);
-            deleteTask(getIndexFromUserInput(userInput));
-            System.out.println(DIVIDER_LINE);
+            performDelete(userInput);
             break;
         case INPUT_CODE_INVALID:
-            System.out.println("Please try again!");
-            System.out.println(DIVIDER_LINE);
+            performInvalid();
             break;
         default:
-            System.out.println(DIVIDER_LINE);
-            System.out.println("Mushroom head could not recognize your command code!");
-            System.out.println("Please try again!");
-            System.out.println(DIVIDER_LINE);
+            performDefault();
             break;
         }
+    }
+
+    // Perform the actions
+    private static void performDelete(String userInput) {
+        System.out.println(DIVIDER_LINE);
+        deleteTask(getIndexFromUserInput(userInput));
+        System.out.println(DIVIDER_LINE);
+    }
+
+    private static void performEvent(String userInput) {
+        String taskTiming;
+        String taskDescription;
+        System.out.println(DIVIDER_LINE);
+        taskDescription = extractTaskDescription(userInput);
+        taskTiming = extractTaskTiming(userInput);
+        taskArrayList.add(new Event(taskDescription, taskTiming));
+        printAddedTask(taskCount);
+        taskCount++;
+        System.out.println(DIVIDER_LINE);
+    }
+
+    private static void performDeadline(String userInput) {
+        String taskTiming;
+        String taskDescription;
+        System.out.println(DIVIDER_LINE);
+        taskDescription = extractTaskDescription(userInput);
+        taskTiming = extractTaskTiming(userInput);
+        taskArrayList.add(new Deadline(taskDescription, taskTiming));
+        printAddedTask(taskCount);
+        taskCount++;
+        System.out.println(DIVIDER_LINE);
+    }
+
+    private static void performTodo(String userInput) {
+        String taskDescription;
+        System.out.println(DIVIDER_LINE);
+        taskDescription = extractTaskDescription(userInput);
+        taskArrayList.add(new Todo(taskDescription));
+        printAddedTask(taskCount);
+        taskCount++;
+        System.out.println(DIVIDER_LINE);
+    }
+
+    private static void performDone(String userInput) {
+        System.out.println(DIVIDER_LINE);
+        markTaskAsDone(getIndexFromUserInput(userInput));
+        System.out.println(DIVIDER_LINE);
+    }
+
+    private static void performList() {
+        System.out.println(DIVIDER_LINE);
+        printEntireCollection();
+        System.out.println(DIVIDER_LINE);
+    }
+
+    private static void performInvalid() {
+        System.out.println("Please try again!");
+        System.out.println(DIVIDER_LINE);
+    }
+
+    private static void performDefault() {
+        System.out.println(DIVIDER_LINE);
+        System.out.println("Mushroom head could not recognize your command code!");
+        System.out.println("Please try again!");
+        System.out.println(DIVIDER_LINE);
     }
 
     // Print information
@@ -351,13 +417,109 @@ public class Duke {
     public static void main(String[] args) {
         int commandCode;
         String userInput;
-        Scanner in = new Scanner(System.in);
 
         printHelloStatement();
+
+        initFile();
+
+        Scanner userScanner = new Scanner(System.in);
         do {
-            userInput = in.nextLine();
+            userInput = userScanner.nextLine();
             commandCode = getCommandCode(userInput);
             performAction(commandCode, userInput);
         } while (commandCode != INPUT_CODE_EXIT);
+
+        saveFile();
+    }
+
+    private static void saveFile() {
+        try {
+            writeToFiles();
+        } catch (IOException e) {
+            System.out.println("Error in IO!");
+        }
+    }
+
+    private static void writeToFiles() throws IOException {
+        FileWriter fw = new FileWriter(FILE_PATH);
+        fw.write(convertToFileInput());
+        fw.close();
+    }
+
+    private static String convertToFileInput() {
+        StringJoiner joiner = new StringJoiner("\n");
+        for (Task currentTask : taskArrayList) {
+            joiner.add(currentTask.getFileFormat());
+        }
+        return joiner.toString();
+    }
+
+    private static void initFile() {
+        try {
+            System.out.println(FILE_LOAD_MESSAGE);
+            tryRunFile();
+            System.out.println(FILE_LOAD_SUCCESS);
+            System.out.println(DIVIDER_LINE);
+            System.out.println(FILE_LOAD_SUCCESS_WELCOME);
+            System.out.println(DIVIDER_LINE);
+        } catch (IOException e) {
+            System.out.println(FILE_LOAD_FAILURE);
+            System.out.println(DIVIDER_LINE);
+        }
+    }
+
+    private static void tryRunFile() throws IOException {
+        File sourceFile = new File(FILE_PATH);
+        String fileData;
+        if (sourceFile.createNewFile()){
+            throw new IOException();
+        }
+        Scanner fileScanner = new Scanner(sourceFile);
+        while (fileScanner.hasNextLine()) {
+            fileData = fileScanner.nextLine();
+            processFileData(fileData, taskCount + 1);
+            taskCount++;
+        }
+    }
+
+    private static void processFileData(String fileData, int itemNumber) {
+        String[] splitFileData = fileData.split(" \\| ");
+        String fileInput, fileDescription, fileTiming;
+        int argumentLength = splitFileData.length;
+        switch (splitFileData[0]) {
+        case "T":
+            fileInput = extractFileInfo(splitFileData,2, argumentLength);
+            taskArrayList.add(new Todo(fileInput));
+            if (splitFileData[1] == "X") {
+                taskArrayList.get(itemNumber-1).setTaskAsDone();
+            }
+            break;
+        case "D":
+            fileDescription = extractFileInfo(splitFileData, 2, argumentLength - 1);
+            fileTiming = extractFileInfo(splitFileData,argumentLength - 1, argumentLength);
+            taskArrayList.add(new Deadline(fileDescription + " ", fileTiming));
+            if (splitFileData[1].equals("X")) {
+                taskArrayList.get(itemNumber-1).setTaskAsDone();
+            }
+            break;
+        case "E":
+            fileDescription = extractFileInfo(splitFileData, 2, argumentLength - 1);
+            fileTiming = extractFileInfo(splitFileData,argumentLength - 1, argumentLength);
+            taskArrayList.add(new Event(fileDescription + " ", fileTiming));
+            if (splitFileData[1].equals("X")) {
+                taskArrayList.get(itemNumber-1).setTaskAsDone();
+            }
+            break;
+        default:
+            fileInput = "Unknown data";
+        }
+    }
+
+    private static String extractFileInfo(String[] splitFileData, int start, int end) {
+        StringJoiner joiner = new StringJoiner(" ");
+        for(int i = start; i < end; i++) {
+            joiner.add(splitFileData[i]);
+        }
+        return joiner.toString();
     }
 }
