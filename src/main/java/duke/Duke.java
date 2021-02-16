@@ -2,6 +2,7 @@ package duke;
 
 import duke.exceptions.DukeException;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
 
@@ -40,7 +41,7 @@ public class Duke {
 
 
     /** List of tasks being maintained and number of tasks it has */
-    private static Task[] tasks = new Task[100];
+    private static ArrayList<Task> tasks = new ArrayList<>();
     private static int tasksCount = 0;
 
 
@@ -115,9 +116,12 @@ public class Duke {
         System.out.print(BORDER + NEWLINE);
         System.out.print("New task added: " + NEWLINE);
         System.out.print("\t");
-        tasks[tasksCount-1].printTask();
-        System.out.print(NEWLINE);
-        System.out.print("There ");
+        tasks.get(tasksCount-1).printTask();
+        printNumberOfTasks();
+    }
+
+    public static void printNumberOfTasks() {
+        System.out.print(NEWLINE + "There ");
         System.out.print(tasksCount > 1 ? "are " : "is ");
         System.out.print(tasksCount);
         System.out.print(tasksCount > 1 ? " tasks" : " task");
@@ -129,8 +133,8 @@ public class Duke {
         System.out.print(BORDER + NEWLINE);
         System.out.print("Here are the tasks in your list:" + NEWLINE);
         for (int i=0; i<tasksCount; i++) {
-            System.out.print("\t" + tasks[i].getIndex() + ". ");
-            tasks[i].printTask();
+            System.out.print("\t" + (i+1) + ". ");
+            tasks.get(i).printTask();
             System.out.print(NEWLINE);
         }
         System.out.print(BORDER + NEWLINE + NEWLINE);
@@ -139,38 +143,47 @@ public class Duke {
 
     /** Methods that add or modify a task in the list */
     public static void addTodo(String description) {
-        tasks[tasksCount] = new Task(description, tasksCount+1);
-        tasks[tasksCount].setStatus(DEFAULT_STATUS);
-        tasks[tasksCount].setType("T");
+        tasks.add(new Task(description));
+        tasks.get(tasksCount).setStatus(DEFAULT_STATUS);
+        tasks.get(tasksCount).setType("T");
         tasksCount++;
         echo();
     }
 
     public static void addDeadline(String task, String deadline) {
-        tasks[tasksCount] = new Deadline(task, tasksCount+1, deadline);
-        tasks[tasksCount].setStatus(DEFAULT_STATUS);
-        tasks[tasksCount].setType("D");
+        tasks.add(new Deadline(task, deadline));
+        tasks.get(tasksCount).setStatus(DEFAULT_STATUS);
+        tasks.get(tasksCount).setType("D");
         tasksCount++;
         echo();
     }
 
     public static void addEvent(String task, String time) {
-        tasks[tasksCount] = new Event(task, tasksCount+1, time);
-        tasks[tasksCount].setStatus(DEFAULT_STATUS);
-        tasks[tasksCount].setType("E");
+        tasks.add(new Event(task, time));
+        tasks.get(tasksCount).setStatus(DEFAULT_STATUS);
+        tasks.get(tasksCount).setType("E");
         tasksCount++;
         echo();
     }
 
     public static void markInList(int index) {
-        tasks[index-1].setStatus(DONE_STATUS);
+        tasks.get(index-1).setStatus(DONE_STATUS);
         System.out.print(BORDER + NEWLINE);
         System.out.print("Nice! This task is now done:" + NEWLINE);
         System.out.print("\t");
-        tasks[index-1].printTask();
-        System.out.print(NEWLINE + BORDER + NEWLINE + NEWLINE);
+        tasks.get(index-1).printTask();
+        printNumberOfTasks();
     }
 
+    public static void deleteTask(int index) {
+        System.out.print(BORDER + NEWLINE);
+        System.out.print("This task has been removed:" + NEWLINE);
+        System.out.print("\t");
+        tasks.get(index-1).printTask();
+        tasks.remove(index-1);
+        tasksCount--;
+        printNumberOfTasks();
+    }
 
     /** Methods that check if user inputs are valid commands */
     public static void processInput(String userInput) {
@@ -220,6 +233,18 @@ public class Duke {
                 addEvent(words[0], words[1]);
             } catch (ArrayIndexOutOfBoundsException | DukeException e) {
                 printInvalidInputMessage(MISSING_FIELDS_MESSAGE);
+            }
+            break;
+        case "delete":
+            try {
+                int index = getTaskIndex(tokens[1]);
+                deleteTask(index);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                printInvalidInputMessage(MISSING_FIELDS_MESSAGE);
+            } catch (NumberFormatException e) {
+                printInvalidInputMessage(INVALID_INDEX_MESSAGE);
+            } catch (DukeException e) {
+                printInvalidInputMessage(OUTSIDE_RANGE_INDEX_MESSAGE + tokens[1]);
             }
             break;
         default:
