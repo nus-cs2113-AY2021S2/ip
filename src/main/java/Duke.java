@@ -287,7 +287,7 @@ public class Duke {
                         String.format("%s\t Alright! I've removed task %s: \n \t\t%s%s \n\t " +
                                         "Now you have %d tasks remaining in the list! \n%s",
                                 lineDivider,
-                                indexOfTaskToBeDeleted,
+                                taskNumber,
                                 taskList.get(indexOfTaskToBeDeleted).getStatusIcon(),
                                 taskList.get(indexOfTaskToBeDeleted).getDescription(),
                                 taskList.size() - 1,
