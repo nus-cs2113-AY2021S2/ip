@@ -6,20 +6,32 @@ import duke.parser.Parser;
 import duke.task.Task;
 import duke.ui.Menu;
 
+import java.util.ArrayList;
+
 public class Duke {
-    private static final int MAX_TASKS = 100;
-    private static Task[] tasks = new Task[MAX_TASKS];
+    private static ArrayList<Task> tasks = new ArrayList<>();
+    private static boolean isRunning = true;
 
     public static void main(String[] args) {
         Menu.printGreeting();
-        while (true) {
+        while (isRunning) {
             String userInput = Menu.readUserInput();
+            Menu.printLine();
             try {
                 Command command = Parser.parseUserInput(userInput);
                 command.execute(tasks);
             } catch (DukeException e) {
                 Menu.printError(e);
             }
+            Menu.printLine();
         }
+    }
+
+    public static void setIsRunning(boolean isRunning) {
+        Duke.isRunning = isRunning;
+    }
+
+    public static int getTaskSize() {
+        return tasks.size();
     }
 }

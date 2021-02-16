@@ -1,8 +1,11 @@
 package duke.command;
 
 import duke.exception.InvalidTaskNumberException;
+import duke.parser.Parser;
 import duke.ui.Menu;
 import duke.task.Task;
+
+import java.util.ArrayList;
 
 public class DoneCommand extends Command {
 
@@ -11,15 +14,14 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(Task[] tasks) throws InvalidTaskNumberException {
-        if (!isValidNumber(commandArgs) || !isValidTaskNumber(Integer.parseInt(commandArgs))) {
+    public void execute(ArrayList<Task> tasks) throws InvalidTaskNumberException {
+        if (!Parser.isValidTaskNumber(tasks, commandArgs)) {
             throw new InvalidTaskNumberException(commandArgs);
         }
-        int taskNumber = Integer.parseInt(commandArgs);
-
-        Task task = tasks[taskNumber - 1];
+        int taskIndex = Integer.parseInt(commandArgs) - 1;
+        Task task = tasks.get(taskIndex);
         if (task.isDone()) {
-            Menu.printText("duke.task.Task already marked as done!");
+            Menu.printText("Task already marked as done!");
             return;
         }
         task.setDone(true);
@@ -27,18 +29,5 @@ public class DoneCommand extends Command {
                 + System.lineSeparator()
                 + "\t"
                 + task);
-    }
-
-    private static boolean isValidTaskNumber(int taskNumber) {
-        return (taskNumber >= 1 && taskNumber <= Task.getNumberOfTasks());
-    }
-
-    private static boolean isValidNumber(String number) {
-        try {
-            Integer.parseInt(number);
-            return true;
-        } catch (NumberFormatException e){
-            return false;
-        }
     }
 }

@@ -5,6 +5,8 @@ import duke.exception.MissingDescriptionException;
 import duke.task.Task;
 import duke.task.Todo;
 
+import java.util.ArrayList;
+
 public class TodoCommand extends Command {
 
     public TodoCommand(String commandArgs) {
@@ -12,12 +14,12 @@ public class TodoCommand extends Command {
     }
 
     @Override
-    public void execute(Task[] tasks) throws MissingDescriptionException {
+    public void execute(ArrayList<Task> tasks) throws MissingDescriptionException {
         if (commandArgs.length() == 0) {
             throw new MissingDescriptionException(commandType);
         }
         Task task = new Todo(commandArgs);
-        tasks[Task.getNumberOfTasks() - 1] = task;
+        tasks.add(task);
         Menu.printAddedTask(task);
     }
 }

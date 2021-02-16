@@ -3,6 +3,8 @@ package duke.command;
 import duke.ui.Menu;
 import duke.task.Task;
 
+import java.util.ArrayList;
+
 public class ListCommand extends Command {
 
     public ListCommand() {
@@ -11,15 +13,15 @@ public class ListCommand extends Command {
 
 
     @Override
-    public void execute(Task[] tasks) {
+    public void execute(ArrayList<Task> tasks) {
         String outputText;
         outputText = "Here are the tasks in your list:";
-        for (int i = 0; i < Task.getNumberOfTasks(); i++) {
-            String taskNumber = (i + 1) + ".";
+        for (Task task : tasks) {
+            String taskNumber = (tasks.indexOf(task) + 1) + ".";
             outputText += System.lineSeparator() +
                     " " +
                     taskNumber + " " +
-                    tasks[i].toString();
+                    task;
         }
         Menu.printText(outputText);
     }
