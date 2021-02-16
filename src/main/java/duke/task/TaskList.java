@@ -173,17 +173,6 @@ public class TaskList {
     }
 
     /**
-     * Updates the content of a given task object.
-     *
-     * @param itemIndex  the index of the task object in the array list.
-     * @param newContent the new content to be updated.
-     */
-    public void updateTaskContent(int itemIndex, String newContent) {
-        Task itemToUpdate = Tasks.get(itemIndex);
-        itemToUpdate.setTaskContent(newContent);
-    }
-
-    /**
      * Removes a given task object from the current task list.
      *
      * @param itemIndex the index of the task object in the array list.
@@ -203,18 +192,6 @@ public class TaskList {
                 + getNumOfTasksString() + "\n"
                 + Duke.DIVIDER_LINE_ONLY
         );
-    }
-
-    /**
-     * Prints the task object with content and status.
-     *
-     * @param itemIndex the index of the task object in the array list.
-     */
-    public void printTask(int itemIndex) {
-        Task currentItem = Tasks.get(itemIndex);
-        boolean isItemDone = currentItem.isDone();
-        System.out.println("Item content: " + currentItem.getTaskContent());
-        System.out.println("Item status: " + (isItemDone ? "Done" : "Undone"));
     }
 
     /**
