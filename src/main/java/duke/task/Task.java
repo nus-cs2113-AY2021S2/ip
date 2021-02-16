@@ -3,12 +3,14 @@ package duke.task;
 import duke.exceptions.EmptyInputException;
 import duke.exceptions.IncompleteInputException;
 import duke.exceptions.InvalidDateInputException;
+import java.util.ArrayList;
 
 public class Task {
     private static final int MAX_NUMBER_OF_TASKS = 100;
     protected String description;
     private boolean isDone;
-    private static Task[] taskList = new Task[MAX_NUMBER_OF_TASKS];
+//    private static Task[] taskList = new Task[MAX_NUMBER_OF_TASKS];
+    private static ArrayList<Task> taskList = new ArrayList<>();
     private static int taskCount = 0;
     private static String time;
 
@@ -24,7 +26,7 @@ public class Task {
 
     public static void markAsDone(String i){
         int index = Integer.parseInt(i);
-        Task t = taskList[index-1];
+        Task t = taskList.get(index-1);
         t.isDone = true;
         System.out.println("Nice! I've marked this task as done:");
         System.out.print("  ");
@@ -44,12 +46,24 @@ public class Task {
         System.out.print("  ");
         this.printTaskInformation();
         System.out.println("");
-        taskList[taskCount]= this;
+        taskList.add(this);
         taskCount++;
-        printSuccessfulTaskAddition();
+        printTaskCount();
     }
 
-    private void printSuccessfulTaskAddition() {
+    public static void deleteTask(String i){
+        int index = Integer.parseInt(i);
+        Task t = taskList.get(index-1);
+        System.out.println("Noted. I've removed this task:");
+        System.out.print("  ");
+        t.printTaskInformation();
+        System.out.println("");
+        taskList.remove(t);
+        taskCount--;
+        printTaskCount();
+    }
+
+    private static void printTaskCount() {
         if(taskCount == 1) {
             System.out.println("Now you have " + taskCount + " task in the list.");
         }
@@ -113,4 +127,5 @@ public class Task {
                 + userInput + "\n");
         System.out.println("Please enter the command as follows:");
     }
+
 }
