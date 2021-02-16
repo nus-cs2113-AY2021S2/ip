@@ -73,13 +73,8 @@ public class AddCommand implements Command {
         return split[1];
     }
 
-<<<<<<< HEAD
     public static void addTask(Task t) {
         TaskManager.tasks.set(TaskManager.numOfTasks, t);
-=======
-    private void addTask(Task t) {
-        TaskManager.tasks.add(t);
->>>>>>> branch-Level-6
         TaskManager.numOfTasks++;
         System.out.println("Got it. I've added this task:" + System.lineSeparator() + t.toString());
         System.out.println("Now you have " + TaskManager.numOfTasks + " task in the list.");
