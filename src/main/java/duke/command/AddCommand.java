@@ -63,18 +63,18 @@ public class AddCommand implements Command {
                 .trim();
     }
 
-    public String getBy(String input) {
+    public static String getBy(String input) {
         String[] split = input.trim().split("/by");
         return split[1];
     }
 
-    public String getOn(String input) {
+    public static String getOn(String input) {
         String[] split = input.trim().split("/at");
         return split[1];
     }
 
-    private void addTask(Task t) {
-        TaskManager.tasks[TaskManager.numOfTasks] = t;
+    public static void addTask(Task t) {
+        TaskManager.tasks.set(TaskManager.numOfTasks, t);
         TaskManager.numOfTasks++;
         System.out.println("Got it. I've added this task:" + System.lineSeparator() + t.toString());
         System.out.println("Now you have " + TaskManager.numOfTasks + " task in the list.");

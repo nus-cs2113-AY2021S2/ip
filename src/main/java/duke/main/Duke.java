@@ -12,6 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.io.FileWriter;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -71,11 +72,11 @@ public class Duke {
         }
     }
 
-    private static void writeToFile(String filePath, Task[] tasks) throws IOException {
+    private static void writeToFile(String filePath, ArrayList<Task> tasks) throws IOException {
         FileWriter fileWriter = new FileWriter(filePath);
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
         for (int i = 0; i < TaskManager.numOfTasks; i++) {
-            bufferedWriter.write(tasks[i].toString());
+            bufferedWriter.write(tasks.get(i).toString());
             bufferedWriter.write("\n");
         }
         bufferedWriter.close();

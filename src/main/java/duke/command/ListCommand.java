@@ -14,7 +14,7 @@ public class ListCommand implements Command {
         else {
             int count = 0;
             while (count < TaskManager.numOfTasks) {
-                System.out.println(count + 1 + ": " + TaskManager.tasks[count]);
+                System.out.println(count + 1 + ": " + TaskManager.tasks.get(count));
                 count++;
             }
         }
