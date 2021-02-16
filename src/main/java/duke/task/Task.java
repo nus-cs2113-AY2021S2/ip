@@ -24,6 +24,10 @@ public class Task {
         return(this.isDone ? "x" : " ");
     }
 
+    public void setIsDone(){
+        this.isDone = true;
+    }
+
     public static void markAsDone(String i){
         int index = Integer.parseInt(i);
         Task t = taskList.get(index-1);
@@ -46,9 +50,13 @@ public class Task {
         System.out.print("  ");
         this.printTaskInformation();
         System.out.println("");
+        addTaskToArrayList();
+        printSuccessfulTaskAddition();
+    }
+
+    public void addTaskToArrayList() {
         taskList.add(this);
         taskCount++;
-        printSuccessfulTaskAddition();
     }
 
     private void printSuccessfulTaskAddition() {

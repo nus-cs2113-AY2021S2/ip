@@ -10,6 +10,7 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.FileNotFoundException;
 
 public class Duke {
     public static void main(String[] args) {
@@ -34,6 +35,7 @@ public class Duke {
 
         // Load up save file, create file if it's not been created
         loadFile();
+        printDividingLine();
 
         // Scan for input
         Scanner userInputScanner = new Scanner(System.in);
@@ -62,6 +64,7 @@ public class Duke {
                 printDividingLine();
                 addTaskWithValidation(userInput, t);
                 printDividingLine();
+                attemptSaveFile();
                 break;
             case "deadline":
                 by = extractTime(taskName);
@@ -70,6 +73,7 @@ public class Duke {
                 printDividingLine();
                 addTaskWithValidation(userInput, d);
                 printDividingLine();
+                attemptSaveFile();
                 break;
             case "event":
                 at = extractTime(taskName);
@@ -78,6 +82,7 @@ public class Duke {
                 printDividingLine();
                 addTaskWithValidation(userInput, e);
                 printDividingLine();
+                attemptSaveFile();
                 break;
             case "list":
                 printDividingLine();
@@ -88,17 +93,11 @@ public class Duke {
                 printDividingLine();
                 Task.markAsDone(getTaskIndex(userInput));
                 printDividingLine();
+                attemptSaveFile();
                 break;
             default:
                 printCommandErrorMessage();
                 break;
-            }
-
-            try {
-                saveFile("duke.txt");
-            } catch (IOException e){
-                System.out.println("Fail to save file.");
-                e.printStackTrace();
             }
 
             // Scan input again
@@ -118,6 +117,15 @@ public class Duke {
         printByeMessage();
     }
 
+    private static void attemptSaveFile() {
+        try {
+            saveFile("duke.txt");
+        } catch (IOException e){
+            System.out.println("Fail to save file.");
+            e.printStackTrace();
+        }
+    }
+
     // Load the save file and update ArrayList
     private static void loadFile(){
         try {
@@ -125,11 +133,67 @@ public class Duke {
             if (f.createNewFile()){
                 System.out.println("Save file is created: " + f.getName());
             } else {
+                try {
+                    loadList("duke.txt");
+                } catch (FileNotFoundException e){
+                    System.out.println("Save file not found.");
+                    e.printStackTrace();
+                }
                 System.out.println("Save file loaded successfully.");
             }
         } catch (IOException e) {
             System.out.println("Save file creation failed.");
             e.printStackTrace();
+        }
+    }
+
+    // Recreate the ArrayList from save file
+    private static void loadList(String filePath) throws FileNotFoundException{
+        File f = new File(filePath);
+        Scanner s = new Scanner(f);
+        s.nextLine();       // Skip the first line
+        while (s.hasNext()){
+            String listEntry = s.nextLine();
+            Scanner listEntryS = new Scanner(listEntry);
+            String taskType = listEntryS.next();
+            String[] parser;
+            String taskName;
+            String taskStatus;
+            String date;
+            switch (taskType){
+            case "T":
+                parser = listEntry.split("\\|");
+                taskName = parser[2].trim();
+                Task t = new Todo(taskName);
+                t.addTaskToArrayList();
+                taskStatus = parser[1].trim();
+                if (taskStatus.equals("1")){
+                    t.setIsDone();
+                }
+                break;
+            case "D":
+                parser = listEntry.split("\\|");
+                taskName = parser[2].trim();
+                date = parser[3].trim();
+                Task d = new Deadline(taskName, date);
+                d.addTaskToArrayList();
+                taskStatus = parser[1].trim();
+                if (taskStatus.equals("1")){
+                    d.setIsDone();
+                }
+                break;
+            case "E":
+                parser = listEntry.split("\\|");
+                taskName = parser[2].trim();
+                date = parser[3].trim();
+                Task e = new Event(taskName, date);
+                e.addTaskToArrayList();
+                taskStatus = parser[1].trim();
+                if (taskStatus.equals("1")){
+                    e.setIsDone();
+                }
+                break;
+            }
         }
     }
 
@@ -142,10 +206,8 @@ public class Duke {
     private static void saveFile(String filePath) throws IOException{
         FileWriter fw = new FileWriter(filePath);
         fw.write("List of tasks: " + System.lineSeparator());
-        fw.close();
-        FileWriter afw = new FileWriter(filePath, true);
         for (int i = 0; i < Task.getTaskCount(); i++) {
-            afw.append(Task.getTask(i));
+            fw.write(Task.getTask(i));
         }
         fw.close();
     }
