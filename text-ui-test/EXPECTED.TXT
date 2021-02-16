@@ -2,6 +2,10 @@ ____________________________________________________________
 Hello I'm Diuk! 
 What would you like to do today?
 ____________________________________________________________
+No previous records! Starting a new record...
+
+New file created!
+
 No idea what some work means!
 Enter "help" for a list of available commands and format
 
@@ -44,7 +48,7 @@ TASK LIST:
 
 Task 2 has been deleted:
    [D][ ] some work (by: some time)
-Tasks remaining: 3
+Tasks remaining: 2
 
 TASK LIST:
 1. [T][X] some work
@@ -53,10 +57,13 @@ TASK LIST:
 COMMAND LIST:
 -------------
 TODO - 
-FORMAT: todo [(str) job]
+FORMAT: todo [(str) description]
 
 DEADLINE - 
-FORMAT: deadline [(str) job] /by [(str) deadline]
+FORMAT: deadline [(str) description] /by [(str) deadline]
+
+EVENT - 
+FORMAT: event [(str) description] /at [(str) time]
 
 LIST - 
 FORMAT: list
