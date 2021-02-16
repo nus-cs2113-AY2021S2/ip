@@ -28,7 +28,6 @@ public class Duke {
                 break;
             }
             out = list.addTask(desc, listTypes.deadline, date);
-            out += "\nYou now have " + list.tasksLeft() + " task(s) left in the list!";
             break;
         case "event": // If command is event, parse the task and at date, print confirmation
             itemEndIndex = command.indexOf("/at") - 1;
@@ -42,7 +41,6 @@ public class Duke {
                 break;
             }
             out = list.addTask(desc, listTypes.event, date);
-            out += "\nYou now have " + list.tasksLeft() + " task(s) left in the list!";
             break;
         case "todo": // If command is todo, parse the task, print confirmation
 
@@ -52,7 +50,6 @@ public class Duke {
                 break;
             }
             out = list.addTask(desc,listTypes.todo);
-            out += "\nYou now have " + list.tasksLeft() + " task(s) left in the list!";
             break;
         case "done": // If command is done, mark task as done, print confirmation
             try {
@@ -61,8 +58,18 @@ public class Duke {
                 out = "Invalid selection!";
                 break;
             }
-            out += "\nYou now have " + list.tasksLeft() + " task(s) left in the list!";
             break;
+        case "delete": // If command is  delete, delete task entry in list, print confirmation
+            try {
+                out = list.deleteTask(tokens[1]);
+            }catch(IndexOutOfBoundsException e){ // If task number is invalid, catch error
+                out = "Invalid selection!";
+                break;
+            }catch(NumberFormatException e){ // If string is entered instead of task number, catch error
+            out = "Please enter the number of the task!";
+            }
+            break;
+
         default: // If command entered is any other unrecognised command, print invalid command
             out = "Invalid task command!";
         }
@@ -71,10 +78,6 @@ public class Duke {
         return out;
 
     }
-
-
-
-
 
 
 

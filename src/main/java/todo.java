@@ -19,13 +19,15 @@ public class todo {
         taskList.add (new improvedtask(desc, type, date));
         totalTasks++;
         leftoverTasks++;
-        return "Task: [" + desc + "] has been added.";
+        return "Task: [" + desc + "] has been added."
+        + "\nYou now have " + this.tasksLeft() + " task(s) left undone in the list!";
     }
     public String addTask(String desc, listTypes type){
         taskList.add(new improvedtask(desc, type));
         totalTasks++;
         leftoverTasks++;
-        return "Task: [" + desc + "] has been added.";
+        return "Task: [" + desc + "] has been added."
+                + "\nYou now have " + this.tasksLeft() + " task(s) left undone in the list!";
     }
 
     public String listItems(){
@@ -58,12 +60,32 @@ public class todo {
         }
         taskList.get(taskNum).resolve();
         this.leftoverTasks--;
-        return "Great! Task ["+ taskList.get(taskNum).displayDescription() + "] has been marked as done!";
+        return "Great! Task ["+ taskList.get(taskNum).displayDescription() + "] has been marked as done!"
+                + "\nYou now have " + this.tasksLeft() + " task(s) left undone in the list!";
 
     }
 
     public int tasksLeft(){
         return this.leftoverTasks;
+    }
+
+    public String deleteTask(String num){
+
+        Integer taskNum = Integer.parseInt(num) - 1;
+        improvedtask temp = taskList.get(taskNum);
+        taskList.remove(temp);
+        totalTasks--;
+        if(!temp.resolved) {
+            leftoverTasks--;
+        }
+        String out = "Noted. I've removed this task: \n     "
+                   + temp.displayType()
+                   + " " + temp.displayResolved()
+                   + " " + temp.displayDescription()
+                   + " " + temp.displayDate() + "\n"
+                   + "Now you have " + totalTasks + " task(s) total left in the list!";
+        return out;
+
     }
 
 
