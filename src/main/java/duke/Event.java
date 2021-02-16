@@ -14,6 +14,11 @@ public class Event extends Task {
         System.out.print(" (at: " + this.getTime() + ")");
     }
 
+    @Override
+    public String toString() {
+        return super.toString() + " | " + this.getTime();
+    }
+
     public String getTime() {
         return time;
     }

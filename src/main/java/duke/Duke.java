@@ -3,6 +3,10 @@ package duke;
 import duke.exceptions.DukeException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.FileNotFoundException;
 
 public class Duke {
 
@@ -142,28 +146,25 @@ public class Duke {
 
 
     /** Methods that modify the list */
-    public static void addTodo(String description) {
+    public static void addTodo(String description, String status) {
         tasks.add(new Task(description));
-        tasks.get(tasksCount).setStatus(DEFAULT_STATUS);
+        tasks.get(tasksCount).setStatus(status);
         tasks.get(tasksCount).setType("T");
         tasksCount++;
-        echo();
     }
 
-    public static void addDeadline(String task, String deadline) {
+    public static void addDeadline(String task, String status, String deadline) {
         tasks.add(new Deadline(task, deadline));
-        tasks.get(tasksCount).setStatus(DEFAULT_STATUS);
+        tasks.get(tasksCount).setStatus(status);
         tasks.get(tasksCount).setType("D");
         tasksCount++;
-        echo();
     }
 
-    public static void addEvent(String task, String time) {
+    public static void addEvent(String task, String status, String time) {
         tasks.add(new Event(task, time));
-        tasks.get(tasksCount).setStatus(DEFAULT_STATUS);
+        tasks.get(tasksCount).setStatus(status);
         tasks.get(tasksCount).setType("E");
         tasksCount++;
-        echo();
     }
 
     public static void markInList(int index) {
@@ -201,7 +202,8 @@ public class Duke {
         case "todo":
             try {
                 String taskDescription = getTodoDescription(tokens[1]);
-                addTodo(taskDescription);
+                addTodo(taskDescription, DEFAULT_STATUS);
+                echo();
             } catch (ArrayIndexOutOfBoundsException e) {
                 printInvalidInputMessage(MISSING_FIELDS_MESSAGE);
             } catch (DukeException e) {
@@ -211,7 +213,8 @@ public class Duke {
         case "deadline":
             try {
                 String[] words = getDeadlineOrEventDescription(" /by ", tokens[1]);
-                addDeadline(words[0], words[1]);
+                addDeadline(words[0], DEFAULT_STATUS, words[1]);
+                echo();
             } catch (ArrayIndexOutOfBoundsException | DukeException e) {
                 printInvalidInputMessage(MISSING_FIELDS_MESSAGE);
             }
@@ -219,7 +222,8 @@ public class Duke {
         case "event":
             try {
                 String[] words = getDeadlineOrEventDescription(" /at ", tokens[1]);
-                addEvent(words[0], words[1]);
+                addEvent(words[0], DEFAULT_STATUS, words[1]);
+                echo();
             } catch (ArrayIndexOutOfBoundsException | DukeException e) {
                 printInvalidInputMessage(MISSING_FIELDS_MESSAGE);
             }
@@ -266,7 +270,7 @@ public class Duke {
 
     public static String getTodoDescription(String description) throws DukeException {
         try {
-            /* task description contains only numbers */
+            /** Task description contains only numbers */
             Long.parseLong(description);
             throw new DukeException();
         } catch (NumberFormatException e) {
@@ -283,15 +287,102 @@ public class Duke {
     }
 
 
+    /** Methods to load from and save to disk */
+    public static void convertTextToListItem(String line) {
+        line = line.trim();
+        String[] tokens = line.split(" \\| ");
+        switch(tokens[0]) {
+        case "T":
+            if (tokens.length < 3) {
+                return;
+            }
+            try {
+                String status = Integer.parseInt(tokens[1]) == 1 ? DONE_STATUS : DEFAULT_STATUS;
+                addTodo(tokens[2], status);
+            } catch (NumberFormatException e) {
+                return;
+            }
+            break;
+        case "D":
+            if (tokens.length < 4) {
+                return;
+            }
+            try {
+                String status = Integer.parseInt(tokens[1]) == 1 ? DONE_STATUS : DEFAULT_STATUS;
+                addDeadline(tokens[2], status, tokens[3]);
+            } catch (NumberFormatException e) {
+                return;
+            }
+            break;
+        case "E":
+            if (tokens.length < 4) {
+                return;
+            }
+            try {
+                String status = Integer.parseInt(tokens[1]) == 1 ? DONE_STATUS : DEFAULT_STATUS;
+                addEvent(tokens[2], status, tokens[3]);
+            } catch (NumberFormatException e) {
+                return;
+            }
+            break;
+        default:
+            break;
+        }
+    }
+
+    public static void loadFromDisk() {
+        String fileName = "duke.txt";
+        File f = new File(fileName);
+        try {
+            if (!f.exists()) {
+                throw new FileNotFoundException();
+            }
+            Scanner scan = new Scanner(f);
+            while (scan.hasNext()) {
+                convertTextToListItem(scan.nextLine());
+            }
+        } catch (FileNotFoundException e) {
+            //will create the file when saving
+        }
+    }
+
+    public static String convertListToText() {
+        StringBuilder text = new StringBuilder();
+        for (int i=0; i<tasksCount; i++) {
+            text.append(tasks.get(i).toString());
+            text.append("\n");
+        }
+        return text.toString();
+    }
+
+    public static void saveToDisk(String text) {
+        String fileName = "duke.txt";
+        File f = new File(fileName);
+        try {
+            if (!f.exists()) {
+                f.createNewFile();
+            }
+            FileWriter fw = new FileWriter(fileName);
+            fw.write(text);
+            fw.close();
+        } catch (IOException e) {
+            System.out.print("Failed to save to disk." + NEWLINE);
+        }
+    }
+
+
     /** Main method */
     public static void main(String[] args) {
         greet();
+        loadFromDisk();
         Scanner in = new Scanner(System.in);
         String userInput = in.nextLine();
         while (!userInput.equals("bye")) {
             processInput(userInput);
             userInput = in.nextLine();
         }
+        String textToOverwrite = convertListToText();
+        saveToDisk(textToOverwrite);
         goodbye();
     }
 }

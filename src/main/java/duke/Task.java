@@ -15,6 +15,13 @@ public class Task {
                 + this.getItem());
     }
 
+    @Override
+    public String toString() {
+        int statusAsInt = this.getStatus() == "X" ? 1 : 0;
+        return this.getType() + " | " + statusAsInt + " | "
+                + this.getItem();
+    }
+
     public String getItem() {
         return item;
     }
