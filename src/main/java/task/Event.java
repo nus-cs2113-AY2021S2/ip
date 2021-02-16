@@ -13,4 +13,14 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";
     }
+
+    public String saveToFile() {
+        String done = "1";
+        if (isDone) {
+            done = "1";
+        } else {
+            done = "0";
+        }
+        return done + " event " + description + " /at " + at + "\n";
+    }
 }
