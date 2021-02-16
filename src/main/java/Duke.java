@@ -1,11 +1,10 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     private static final String DIVIDER = "____________________________________________________________";
     private static final Scanner SCANNER = new Scanner(System.in);
-    private static final int MAX_TASKS_COUNT = 100;
-    private static final Task[] STORED_TASKS = new Task[MAX_TASKS_COUNT];
-    private static int storedTasksCount = 0;
+    private static final ArrayList<Task> STORED_TASKS = new ArrayList<Task>();
 
     public static void main(String[] args) {
         String command;
@@ -115,17 +114,16 @@ public class Duke {
     }
 
     public static void storeTask(Task taskToStore) {
-        STORED_TASKS[storedTasksCount] = taskToStore;
-        storedTasksCount++;
+        STORED_TASKS.add(taskToStore);
         System.out.println(DIVIDER);
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + taskToStore);
-        System.out.println("Now you have " + storedTasksCount + " tasks in the list.");
+        System.out.println("Now you have " + STORED_TASKS.size() + " tasks in the list.");
         System.out.println(DIVIDER);
     }
 
     public static void displayStoredTasks() {
-        if (storedTasksCount == 0) {
+        if (STORED_TASKS.size() == 0) {
             System.out.println(DIVIDER);
             System.out.println("You have no tasks in your list! :)");
             System.out.println(DIVIDER);
@@ -134,8 +132,8 @@ public class Duke {
 
         System.out.println(DIVIDER);
         System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < storedTasksCount; i++) {
-            Task currentTask = STORED_TASKS[i];
+        for (int i = 0; i < STORED_TASKS.size(); i++) {
+            Task currentTask = STORED_TASKS.get(i);
             System.out.printf("%d.%s\n", (i + 1), currentTask);
         }
         System.out.println(DIVIDER);
@@ -158,11 +156,11 @@ public class Duke {
             throw new DukeException(" ☹ OOPS!!! The correct syntax for done command is: 'done task_number'");
         }
 
-        if (indexOfTaskToMark >= storedTasksCount || indexOfTaskToMark < 0) {
+        if (indexOfTaskToMark >= STORED_TASKS.size() || indexOfTaskToMark < 0) {
             throw new DukeException(" ☹ OOPS!!! You entered an invalid task number!");
         }
 
-        Task taskToMark = STORED_TASKS[indexOfTaskToMark];
+        Task taskToMark = STORED_TASKS.get(indexOfTaskToMark);
         taskToMark.markAsDone();
         System.out.println(DIVIDER);
         System.out.println("Nice! I've marked this task as done:");
