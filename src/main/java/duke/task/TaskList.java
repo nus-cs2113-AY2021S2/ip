@@ -177,12 +177,18 @@ public class TaskList {
      * @param itemIndex the index of the task object in the array list.
      */
     public void removeTaskFromList(int itemIndex) {
-        String itemContent = Tasks.get(itemIndex).getTaskContent();
+        Task currentItem = Tasks.get(itemIndex);
+        String timeString = currentItem.getTimeLimitString();
         Tasks.remove(itemIndex);
         numOfTasks--;
         System.out.println(Duke.DIVIDER
-                + "A task object is removed: "
-                + itemContent + "\n"
+                + "The task below is successfully removed from your task list:)\n\t"
+                + "[" + convertTaskType(currentItem.getTaskType()) + "] "
+                + "[" + (currentItem.isDone() ? "☑️" : "✖️") + "] "
+                + currentItem.getTaskContent()
+                + (currentItem.getTaskType() == TaskType.TODO ? "" : " ")
+                + timeString + "\n"
+                + getNumOfTasksString() + "\n"
                 + Duke.DIVIDER_LINE_ONLY
         );
     }

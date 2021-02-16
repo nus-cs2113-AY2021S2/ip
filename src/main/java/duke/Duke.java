@@ -12,11 +12,11 @@ public class Duke {
     /**
      * A divider (horizontal line).
      */
-    public static final String DIVIDER_LINE_ONLY = "__________________________________________";
+    public static final String DIVIDER_LINE_ONLY = "_____________________________________________________________";
     /**
      * A divider (horizontal line) with line break at the end.
      */
-    public static final String DIVIDER = "__________________________________________\n";
+    public static final String DIVIDER = "_____________________________________________________________\n";
 
     /**
      * Prints greetings when the program starts.
@@ -124,6 +124,9 @@ public class Duke {
             case "done":
                 handleDoneTask(taskList, userInput);
                 break;
+            case "delete":
+                deleteTask(taskList, userInput);
+                break;
             case "exit":
                 //FALL-THROUGH
             case "bye":
@@ -145,7 +148,7 @@ public class Duke {
     private static void handleDoneTask(TaskList taskList, String userInput) {
         try {
             String taskIndexString = getTaskIndexString(userInput);
-            int itemIndex = Integer.parseInt(taskIndexString);
+            int itemIndex = Integer.parseInt(taskIndexString) - 1;
             if (isItemIndexOutOfRange(taskList, itemIndex)) {
                 return;
             }
@@ -184,7 +187,7 @@ public class Duke {
      * @param itemIndex The index of the task object in the task list.
      */
     private static void setTaskAsDone(TaskList taskList, int itemIndex) {
-        taskList.updateTaskStatus(itemIndex - 1, true);
+        taskList.updateTaskStatus(itemIndex, true);
     }
 
     /**
@@ -195,7 +198,7 @@ public class Duke {
      * @return true if the index of the task is out of range.
      */
     private static boolean isItemIndexOutOfRange(TaskList taskList, int itemIndex) {
-        if (!taskList.isIndexInRange(itemIndex - 1)) {
+        if (!taskList.isIndexInRange(itemIndex)) {
             System.out.println(DIVIDER
                     + "The task index input is out of range!\n"
                     + DIVIDER
@@ -220,8 +223,12 @@ public class Duke {
             String taskPeriod = parseResult[1];
             taskList.addEventTask(taskContent, taskPeriod);
         } catch (Exception e) {
-            System.out.println(DIVIDER + e.getMessage() + DIVIDER_LINE_ONLY);
+            printErrorMessage(e);
         }
+    }
+
+    private static void printErrorMessage(Exception e) {
+        System.out.println(DIVIDER + e.getMessage() + "\n" +  DIVIDER_LINE_ONLY);
     }
 
     /**
@@ -238,7 +245,7 @@ public class Duke {
             String taskDeadline = parseResult[1];
             taskList.addDeadlineTask(taskContent, taskDeadline);
         } catch (Exception e) {
-            System.out.println(DIVIDER + e.getMessage() + DIVIDER_LINE_ONLY);
+            printErrorMessage(e);
         }
     }
 
@@ -253,7 +260,20 @@ public class Duke {
             String[] parseResult = Todo.parseTaskContent(userInput);
             taskList.addTodoTask(parseResult[0]);
         } catch (Exception e) {
-            System.out.println(DIVIDER + e.getMessage() + DIVIDER_LINE_ONLY);
+            printErrorMessage(e);
+        }
+    }
+
+    private static void deleteTask(TaskList taskList, String userInput) {
+        try {
+            String taskIndexStr = getTaskIndexString(userInput);
+            int taskIndex = Integer.parseInt(taskIndexStr) - 1;
+            if (isItemIndexOutOfRange(taskList, taskIndex)) {
+                return;
+            }
+            taskList.removeTaskFromList(taskIndex);
+        } catch (Exception e) {
+            printErrorMessage(e);
         }
     }
 
