@@ -20,6 +20,8 @@ public class DukeController {
     public static int taskCount = 0;
 
     public static void run(Scanner scanner) {
+        tasks = DukeReader.getTaskListFromFile();
+        taskCount = tasks.size();
         while (true) {
             String input = scanner.nextLine();
             if (input.equals("bye")) {
