@@ -37,4 +37,8 @@ public class StringManipulator {
     public static int getTaskNumberDone(String input){
         return Integer.parseInt(input.substring(5));
     }
+
+    public static int getTaskNumberDeleted(String input){
+        return Integer.parseInt(input.substring(7));
+    }
 }

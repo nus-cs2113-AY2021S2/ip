@@ -4,6 +4,8 @@ import duke.task.TaskManager;
 
 import java.util.Scanner;
 
+import static duke.task.TaskManager.taskArrayList;
+
 public class MainUI {
     public static final String LIST_COMMAND = "list";
     public static final String BYE_COMMAND = "bye";
@@ -20,7 +22,7 @@ public class MainUI {
             String input = in.nextLine();
             switch (input){
             case LIST_COMMAND:
-                TaskManager.printTaskList();
+                TaskManager.printAllTasks(taskArrayList);
                 break;
             case BYE_COMMAND:
                 stopProgram();
