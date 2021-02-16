@@ -251,7 +251,6 @@ public class Duke {
         }
 
         Task deletedTask = STORED_TASKS.remove(indexOfTaskToDelete);
-        saveDataToFile();
         System.out.println(DIVIDER);
         System.out.println(" Noted. I've removed this task:");
         System.out.println("   " + deletedTask);
