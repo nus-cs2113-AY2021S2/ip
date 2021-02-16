@@ -141,7 +141,7 @@ public class Duke {
     }
 
 
-    /** Methods that add or modify a task in the list */
+    /** Methods that modify the list */
     public static void addTodo(String description) {
         tasks.add(new Task(description));
         tasks.get(tasksCount).setStatus(DEFAULT_STATUS);
@@ -185,6 +185,7 @@ public class Duke {
         printNumberOfTasks();
     }
 
+    
     /** Methods that check if user inputs are valid commands */
     public static void processInput(String userInput) {
         if (userInput.equals("list")) {
@@ -197,18 +198,6 @@ public class Duke {
         userInput = userInput.trim();
         String[] tokens = userInput.split(" ", 2);
         switch(tokens[0]) {
-        case "done":
-            try {
-                int index = getTaskIndex(tokens[1]);
-                markInList(index);
-            } catch (ArrayIndexOutOfBoundsException e) {
-                printInvalidInputMessage(MISSING_FIELDS_MESSAGE);
-            } catch (NumberFormatException e) {
-                printInvalidInputMessage(INVALID_INDEX_MESSAGE);
-            } catch (DukeException e) {
-                printInvalidInputMessage(OUTSIDE_RANGE_INDEX_MESSAGE + tokens[1]);
-            }
-            break;
         case "todo":
             try {
                 String taskDescription = getTodoDescription(tokens[1]);
@@ -233,6 +222,18 @@ public class Duke {
                 addEvent(words[0], words[1]);
             } catch (ArrayIndexOutOfBoundsException | DukeException e) {
                 printInvalidInputMessage(MISSING_FIELDS_MESSAGE);
+            }
+            break;
+        case "done":
+            try {
+                int index = getTaskIndex(tokens[1]);
+                markInList(index);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                printInvalidInputMessage(MISSING_FIELDS_MESSAGE);
+            } catch (NumberFormatException e) {
+                printInvalidInputMessage(INVALID_INDEX_MESSAGE);
+            } catch (DukeException e) {
+                printInvalidInputMessage(OUTSIDE_RANGE_INDEX_MESSAGE + tokens[1]);
             }
             break;
         case "delete":
