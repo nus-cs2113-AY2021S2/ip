@@ -68,7 +68,9 @@ public class DukePrinter {
                 "deadline <task_description> /by <deadline_date> - " +
                         "Create a new task with the specified description and deadline",
                 "event <task_description> /at <event_date> - " +
-                        "Create a new task with the specified description and event date"
+                        "Create a new task with the specified description and event date",
+                "delete <task_number> - delete the specified task",
+                "clear - deletes all tasks"
         };
         printMessage(helpMessage);
     }
