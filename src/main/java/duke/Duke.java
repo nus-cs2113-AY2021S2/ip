@@ -14,6 +14,7 @@ public class Duke {
     public static final int EVENT_START = 6;
     public static final int DEADLINE_START = 9;
     public static final int DELETE_START = 7;
+    public static final int NEW_TASK_INDEX = 6;
 
     public static ArrayList<Task> tasks = new ArrayList<>();
     public static int maxTaskIndex = 0;
@@ -25,7 +26,7 @@ public class Duke {
 
     public static void main(String[] args) {
         try {
-            autoload(filepath);
+            loadData(filepath);
         } catch (IOException e) {
             System.out.println("Something went wrong: " + e.getMessage());
         }
@@ -33,7 +34,7 @@ public class Duke {
         welcomeMessage();
 
 
-        input = getString(in);
+        input = getInput(in);
         Command command;
 
         while (!isBye()) {
@@ -71,95 +72,16 @@ public class Duke {
                 System.out.println("OOPS!!! You need to add valid Task Index to be done or deleted!!");
             }
 
-            autosave();
+            saveData();
 
             System.out.println();
-            input = getString(in);
+            input = getInput(in);
         }
 
 
         exitMessage();
 
     }
-
-    private static void autosave() {
-        File f = new File(filepath);
-        try {
-            String data = getAllTaskListData();
-            writeToFile(filepath, data);
-        } catch (IOException e) {
-            System.out.println("Something went wrong: " + e.getMessage());
-        } catch (NullPointerException e) {
-            System.out.println("No items to add to file");
-        }
-    }
-
-    private static void writeToFile(String filePath, String textToAdd) throws IOException {
-        FileWriter fw = new FileWriter(filePath);
-        fw.write(textToAdd);
-        fw.close();
-    }
-
-    private static void processFileInput(String fileLine) {
-        char taskType = fileLine.charAt(1);
-        char isDone = fileLine.charAt(4);
-        String description;
-        incrementTasks();
-
-        switch (taskType) {
-        case ('T'):
-            addNewTodo("todo" + fileLine.substring(6));
-            break;
-        case ('D'):
-            int deadlineIndex = fileLine.indexOf("(by:");
-            description = fileLine.substring(6, deadlineIndex);
-            String deadline = fileLine.substring(deadlineIndex + 4, fileLine.length() - 1);
-            addNewDeadline("deadline" + description + "/by" + deadline);
-            break;
-        case ('E'):
-            int eventIndex = fileLine.indexOf("(at:");
-            description = fileLine.substring(6, eventIndex);
-            String event = fileLine.substring(eventIndex + 4, fileLine.length() - 1);
-            addNewEvent("event" + description + "/at" + event);
-            break;
-        }
-
-
-        if (isDone == 'Y') {
-            tasks.get(maxTaskIndex-1).markAsDone();
-        }
-
-    }
-
-    private static void readFileContents(String filePath) throws FileNotFoundException {
-        File f = new File(filePath); // create a File for the given file path
-        Scanner s = new Scanner(f); // create a Scanner using the File as the source
-        while (s.hasNext()) {
-            String line = s.nextLine();
-            processFileInput(line);
-        }
-    }
-
-    private static void autoload(String filepath) throws IOException {
-        File f = new File(filepath);
-        if (f.createNewFile()) {
-            System.out.println("Welcome to Duke. Is this your first time using Duke on this machine?");
-        } else {
-            System.out.println("Your previous Task list from Duke has been loaded! :-)");
-            readFileContents(filepath);
-        }
-        //boolean existingData = f.exists();
-    }
-
-
-    private static String getAllTaskListData() {
-        String data = "";
-        for (int i = 0; i < maxTaskIndex; i++) {
-            data = data + (tasks.get(i).toString()) + "\n";
-        }
-        return data;
-    }
-
 
     public static void executeCommand(String input, Command c) throws InvalidCommandException, EmptyInputException, InvalidEventTimeException, InvalidDeadlineTimeException {
         switch (c) {
@@ -198,16 +120,113 @@ public class Duke {
         }
     }
 
+    private static void loadData(String filepath) throws IOException {
+        File f = new File(filepath);
+        if (f.createNewFile()) {
+            System.out.println("Welcome to Duke. Is this your first time using Duke on this machine?");
+        } else {
+            System.out.println("Your previous Task list from Duke has been loaded! :-)");
+            processFileContents(filepath);
+        }
+    }
+
+    private static void saveData() {
+        try {
+            String data = getAllTaskListData();
+            writeToFile(filepath, data);
+        } catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
+        } catch (NullPointerException e) {
+            System.out.println("No items to add to file");
+        }
+    }
+
+    private static void processFileContents(String filePath) throws FileNotFoundException {
+        File f = new File(filePath); // create a File for the given file path
+        Scanner s = new Scanner(f); // create a Scanner using the File as the source
+        while (s.hasNext()) {
+            String line = s.nextLine();
+            processFileInputLines(line);
+        }
+    }
+
+    private static void processFileInputLines(String fileLine) {
+        char taskType = getTaskType(fileLine);
+        char isDone = getDone(fileLine);
+
+        incrementTasks();
+        addNewTaskFromFile(fileLine, taskType);
+        markCompletedTaskFromFile(isDone);
+
+    }
+
+    private static void markCompletedTaskFromFile(char isDone) {
+        if (isDone == 'Y') {
+            tasks.get(maxTaskIndex-1).markAsDone();
+        }
+    }
+
+    private static void addNewTaskFromFile(String fileLine, char taskType) {
+        String description;
+        switch (taskType) {
+        case ('T'):
+            addNewTodo("todo" + fileLine.substring(NEW_TASK_INDEX));
+            break;
+        case ('D'):
+            int deadlineIndex = fileLine.indexOf("(by:");
+            description = fileLine.substring(NEW_TASK_INDEX, deadlineIndex);
+            String deadline = getTimeFromFile(fileLine, deadlineIndex);
+            addNewDeadline("deadline" + description + "/by" + deadline);
+            break;
+        case ('E'):
+            int eventIndex = fileLine.indexOf("(at:");
+            description = fileLine.substring(NEW_TASK_INDEX, eventIndex);
+            String event = getTimeFromFile(fileLine, eventIndex);
+            addNewEvent("event" + description + "/at" + event);
+            break;
+        }
+    }
+
+    private static String getTimeFromFile(String fileLine, int timeIndex) {
+        return fileLine.substring(timeIndex + 4, fileLine.length() - 1);
+    }
+
+    private static void writeToFile(String filePath, String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        fw.write(textToAdd);
+        fw.close();
+    }
+
+    private static String getAllTaskListData() {
+        String data = "";
+        for (int i = 0; i < maxTaskIndex; i++) {
+            data = data + (tasks.get(i).toString()) + "\n";
+        }
+        return data;
+    }
+
+    private static void enumerateTasks() {
+        int currentTaskIndex;
+        for (int i = 0; i < maxTaskIndex; i++) {
+            currentTaskIndex = i + 1;
+            System.out.println(currentTaskIndex + "." + tasks.get(i).toString());
+        }
+    }
+
+    private static void listBeginMessage() {
+        System.out.println("Here are the tasks in your list:");
+    }
+
+    private static void deleteTask(String input) {
+        int taskNumberToDelete = (Integer.parseInt(input.substring(DELETE_START).strip()) - 1);
+        deletedTaskMessage(taskNumberToDelete);
+        tasks.remove(taskNumberToDelete);
+    }
+
     private static void deletedTaskMessage(int deletedTaskIndex) {
         System.out.println("Noted. I've removed this task: ");
         System.out.println(tasks.get(deletedTaskIndex));
         System.out.println("Now you have " + (maxTaskIndex - 1) + " tasks in the list." + "\n");
-    }
-
-    private static void deleteTask(String input) {
-        int taskNumberToDelete = (Integer.parseInt(input.substring(DELETE_START, input.length()).strip()) - 1);
-        deletedTaskMessage(taskNumberToDelete);
-        tasks.remove(taskNumberToDelete);
     }
 
     private static void verifyValidInput(String input, Command c) throws EmptyInputException, InvalidEventTimeException, InvalidDeadlineTimeException {
@@ -242,13 +261,21 @@ public class Duke {
 
     private static boolean isEmptyInput(String input, Command c) {
         return switch (c) {
-            case TODO -> (input.substring(TODO_START, input.length()).strip().equals(""));
+            case TODO -> (input.substring(TODO_START).strip().equals(""));
             case EVENT -> input.substring(EVENT_START, getTimePosition(input)).strip().equals("");
             case DEADLINE -> (input.substring(DEADLINE_START, getTimePosition(input)).strip().equals(""));
             default -> false;
         };
     }
 
+
+    private static char getTaskType(String fileLine) {
+        return fileLine.charAt(1);
+    }
+
+    private static char getDone(String fileLine) {
+        return fileLine.charAt(4);
+    }
 
     private static void markTaskAsDone(String input) {
         int completedTaskIndex = getCompletedTaskIndex(input);
@@ -257,9 +284,7 @@ public class Duke {
     }
 
     private static void addNewDeadline(String input) {
-
         tasks.add(new Deadline(input.substring(DEADLINE_START, getTimePosition(input)), getTime(input)));
-
     }
 
     private static void addNewEvent(String input) {
@@ -267,36 +292,7 @@ public class Duke {
     }
 
     private static void addNewTodo(String input) {
-        tasks.add(new ToDo(input.substring(TODO_START, input.length())));
-    }
-
-    private static int getCompletedTaskIndex(String input) {
-        return (Integer.parseInt(input.substring(DONE_START, input.length())) - 1);
-    }
-
-    private static void enumerateTasks() {
-        int currentTaskIndex;
-        for (int i = 0; i < maxTaskIndex; i++) {
-            currentTaskIndex = i + 1;
-            System.out.println(currentTaskIndex + "." + tasks.get(i).toString());
-        }
-    }
-
-    private static void listBeginMessage() {
-        System.out.println("Here are the tasks in your list:");
-    }
-
-    private static void completedTaskMessage(int completedTaskIndex) {
-        System.out.println("Nice! I've marked this task as done: ");
-        System.out.println("[" + tasks.get(completedTaskIndex).getStatusIcon() + "] " + tasks.get(completedTaskIndex).getDescription() + "\n");
-    }
-
-    private static void incrementTasks() {
-        maxTaskIndex++;
-    }
-
-    private static void decrementTasks() {
-        maxTaskIndex--;
+        tasks.add(new ToDo(input.substring(TODO_START)));
     }
 
     private static int getTimePosition(String input) {
@@ -305,21 +301,36 @@ public class Duke {
 
     private static String getTime(String input) {
         int timePosition = getTimePosition(input);
-        return input.substring(timePosition + 3, input.length());
+        return input.substring(timePosition + 3);
+    }
+
+    private static int getCompletedTaskIndex(String input) {
+        return (Integer.parseInt(input.substring(DONE_START)) - 1);
+    }
+
+    private static void completedTaskMessage(int completedTaskIndex) {
+        System.out.println("Nice! I've marked this task as done: ");
+        System.out.println("[" + tasks.get(completedTaskIndex).getStatusIcon() + "] " + tasks.get(completedTaskIndex).getDescription() + "\n");
     }
 
     private static void confirmNewTask() {
-
         System.out.println("Got it. I've added this task: ");
-        int numTasks = getNumTasks();
         System.out.println(tasks.get(maxTaskIndex));
 
-
+        int numTasks = getNumTasks();
         System.out.println("Now you have " + numTasks + " tasks in the list.");
     }
 
     private static int getNumTasks() {
         return maxTaskIndex + 1;
+    }
+
+    private static void incrementTasks() {
+        maxTaskIndex++;
+    }
+
+    private static void decrementTasks() {
+        maxTaskIndex--;
     }
 
     private static boolean isBye() {
@@ -350,7 +361,7 @@ public class Duke {
         return input.length() > 4 && input.substring(0, 4).equals("done");
     }
 
-    private static String getString(Scanner in) {
+    private static String getInput(Scanner in) {
         String input;
         input = in.nextLine();
         return input;
