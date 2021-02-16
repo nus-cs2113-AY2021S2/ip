@@ -8,7 +8,7 @@ public class TaskList {
     /**
      * Total number of task object in current list.
      */
-    private static int numOfTasks = 0;
+    private int numOfTasks = 0;
     /**
      * The collection of task object in current list.
      */
@@ -26,8 +26,20 @@ public class TaskList {
      *
      * @return the total number of task object.
      */
-    public static int getNumOfTasks() {
+    public int getNumOfTasks() {
         return numOfTasks;
+    }
+
+    public ArrayList<Task> getTasks() {
+        return Tasks;
+    }
+
+    public void setTasks(ArrayList<Task> tasks) {
+        Tasks = tasks;
+    }
+
+    public void setNumOfTasks(int numOfTasks) {
+        this.numOfTasks = numOfTasks;
     }
 
     /**
