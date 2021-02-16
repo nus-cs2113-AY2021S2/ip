@@ -37,6 +37,7 @@ public class Duke {
     private static ArrayList<Task> taskArrayList = new ArrayList<>();
     private static int taskCount = 0;
 
+    // main program
     public static void main(String[] args) {
         printHelloStatement();
         initFile();
