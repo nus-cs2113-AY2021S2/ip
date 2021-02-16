@@ -1,20 +1,77 @@
+import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+    private static final String SAVE_FILE_PATH = "saveFile.txt";
+    private static final File SAVE_FILE = new File(SAVE_FILE_PATH);
     private static final String DIVIDER = "____________________________________________________________";
     private static final Scanner SCANNER = new Scanner(System.in);
     private static final ArrayList<Task> STORED_TASKS = new ArrayList<Task>();
 
     public static void main(String[] args) {
-        String command;
+        loadDataFromFile();
         welcomeMsg();
+
+        String command;
         do {
             command = getCommandFromUser();
             handleCommand(command);
         } while (!command.equals("bye"));
 
         SCANNER.close();
+    }
+
+    public static void loadDataFromFile() {
+        try {
+            Scanner saveFileScanner = new Scanner(SAVE_FILE);
+            while (saveFileScanner.hasNextLine()) {
+                String[] taskInfo = saveFileScanner.nextLine().split(" \\| ");
+                Task currentTask;
+                if (taskInfo[0].equals("T")) {
+                    currentTask = new Todo(taskInfo[2]);
+                    if (taskInfo[1].equals("1")) {
+                        currentTask.markAsDone();
+                    }
+                } else if (taskInfo[0].equals("D")) {
+                    currentTask = new Deadline(taskInfo[2], taskInfo[3]);
+                    if (taskInfo[1].equals("1")) {
+                        currentTask.markAsDone();
+                    }
+                } else {
+                    currentTask = new Event(taskInfo[2], taskInfo[3]);
+                    if (taskInfo[1].equals("1")) {
+                        currentTask.markAsDone();
+                    }
+                }
+                STORED_TASKS.add(currentTask);
+            }
+            saveFileScanner.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println(DIVIDER);
+            System.out.println("oops, something went wrong...");
+            System.out.println(DIVIDER);
+        }
+    }
+
+    public static void saveDataToFile() {
+        try {
+            FileWriter saveFileWriter = new FileWriter(SAVE_FILE);
+            for (int i = 0; i < STORED_TASKS.size(); i++) {
+                Task currentTask = STORED_TASKS.get(i);
+                System.out.println(currentTask.getSaveString());
+                saveFileWriter.write(currentTask.getSaveString() + "\n");
+            }
+            saveFileWriter.flush();
+            saveFileWriter.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println(DIVIDER);
+            System.out.println("oops, something went wrong...");
+            System.out.println(DIVIDER);
+        }
     }
 
     public static void welcomeMsg() {
@@ -117,6 +174,7 @@ public class Duke {
 
     public static void storeTask(Task taskToStore) {
         STORED_TASKS.add(taskToStore);
+        saveDataToFile();
         System.out.println(DIVIDER);
         System.out.println(" Got it. I've added this task:");
         System.out.println("   " + taskToStore);
@@ -164,6 +222,7 @@ public class Duke {
 
         Task taskToMark = STORED_TASKS.get(indexOfTaskToMark);
         taskToMark.markAsDone();
+        saveDataToFile();
         System.out.println(DIVIDER);
         System.out.println(" Nice! I've marked this task as done:");
         System.out.println("   " + taskToMark);
