@@ -24,6 +24,8 @@ public class Duke {
 
     static Scanner sc = new Scanner(System.in);
 
+    public static ArrayList<Task> taskList = new ArrayList<>();
+
     public static String extractTaskMessage(String userInput) throws DukeExceptionNoTaskMessage {
         if (userInput.indexOf(" ") > 0) {
             return userInput.substring(userInput.indexOf(" ") + 1);
@@ -39,7 +41,7 @@ public class Duke {
         if (content.contains("//")) {
 
             // using the limit parameter limits the number outputs the string splits
-            String taskAndDate = content.split("//",2)[1].strip();
+            String taskAndDate = content.split("//", 2)[1].strip();
 
             if (taskAndDate.contains("by") || taskAndDate.contains("at")) {
                 return taskAndDate.substring(taskAndDate.indexOf(" ")).strip();
@@ -59,7 +61,7 @@ public class Duke {
     }
 
     public static void taskApp() throws DukeExceptionNoTaskMessage, DukeExceptionNoDateBy {
-        ArrayList<Task> taskList = new ArrayList<>();
+
         while (true) {
 
             System.out.print("Enter command: ");
@@ -101,7 +103,7 @@ public class Duke {
                     String eventTask = null;
                     String eventDateBy = null;
 
-                    try{
+                    try {
                         content = extractTaskMessage(userInput.strip());
                         eventDateBy = extractDateBy(content);
                         eventTask = content.split("//")[0].toLowerCase();
@@ -119,9 +121,15 @@ public class Duke {
                 case "done":
                     markTaskDone(taskList, userInput);
                     break;
+                case "delete":
+                    deleteTask(taskList, userInput);
+                    break;
                 case "bye":
                     System.out.println(dukeFarewell);
                     System.exit(0);
+                    break;
+                case "save":
+//                    save(taskList);
                     break;
                 default:
                     String defaultMessage =
@@ -188,11 +196,43 @@ public class Duke {
             sb.append(taskList.size());
             sb.append(" tasks in the list. \n");
             sb.append("\tEnter \"done _\" to see mark task as done. \n");
+            sb.append("\tEnter \"delete _\" to see delete task. \n ");
             listAsString = sb.toString();
             return listAsString;
         } else {
-            return "List is empty!";
+            return "\tList is empty!\n";
         }
+    }
+
+    public static void deleteTask(ArrayList<Task> taskList, String userInput) {
+        if (userInput.matches(".*\\d.*")) { // checks if there is a number in delete cmd
+            int taskNumber = Integer.parseInt(userInput.replaceAll("\\D+", ""));
+            int indexOfTaskToBeDeleted = taskNumber - 1;
+
+            if (indexOfTaskToBeDeleted < taskList.size()) {
+                String taskDeletedMessage =
+                        String.format("%s\t Alright! I've removed task %s: \n \t\t%s%s \n\t " +
+                                        "Now you have %d tasks remaining in the list! \n%s",
+                                lineDivider,
+                                indexOfTaskToBeDeleted,
+                                taskList.get(indexOfTaskToBeDeleted).getStatusIcon(),
+                                taskList.get(indexOfTaskToBeDeleted).getDescription(),
+                                taskList.size() - 1,
+                                lineDivider);
+                System.out.println(taskDeletedMessage);
+                taskList.remove(indexOfTaskToBeDeleted);
+            } else {
+                String taskDoesNotExistMessage = String.format("%s\t Task does not exist!\n %s \n", lineDivider, lineDivider);
+                System.out.print(taskDoesNotExistMessage);
+            }
+        } else {
+            // empty list !
+            String doneErrorPrompt = "OOPS!!! Unable to delete task as your input is not in the right format!\n " +
+                    "Which task do you want to mark done?";
+            String printList = String.format("%s%s\n\t%s\n%s", lineDivider, doneErrorPrompt, getList(taskList), lineDivider);
+            System.out.println(printList);
+        }
+
     }
 
     public static void main(String[] args) throws DukeExceptionNoDateBy, DukeExceptionNoTaskMessage {
