@@ -50,4 +50,18 @@ public class UI {
         System.out.println(taskToMarkDone);
         System.out.println("____________________________________________________________");
     }
+
+    static void deleteTaskSuccessfulMessage(Task taskToDelete, int taskCount) {
+        System.out.println("____________________________________________________________");
+        System.out.println("Noted. I've removed this task.");
+        System.out.println(taskToDelete);
+        System.out.println("Now you have " + taskCount + " tasks in the list.");
+        System.out.println("____________________________________________________________");
+    }
+
+    static void taskIndexOutOfBoundsMessage() {
+        System.out.println("____________________________________________________________");
+        System.out.println("The index you entered is out of bounds, please enter a valid index.");
+        System.out.println("____________________________________________________________");
+    }
 }
