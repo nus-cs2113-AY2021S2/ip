@@ -1,24 +1,25 @@
 package duke;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Random;
+
 import duke.task.Task;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
 
 public class Duke {
-    private static Task[] tasks = new Task[100];
-    private static int taskCount = 0;
+    private static final ArrayList<Task> tasks = new ArrayList<>();
 
-    public static void printSeparator() {
+    private static void printSeparator() {
         for(int i = 0; i < 60; i++) {
             System.out.print('-');
         }
         System.out.print('\n');
     }
 
-    public static void exitMethod() {
+    private static void exitMethod() {
         System.out.print("My cover's blown!\n");
         printSeparator();
     }
@@ -28,7 +29,7 @@ public class Duke {
      *
      * @param line User input.
      */
-    public static void mockEcho(String line) {
+    private static void mockEcho(String line) {
         Random rd = new Random();
         for(int i = 0; i < line.length(); i++) {
             if(rd.nextBoolean()) {
@@ -40,44 +41,54 @@ public class Duke {
         System.out.print('\n');
     }
 
-    public static void printTasks() throws DukeException{
-        if (taskCount < 1) {
+    private static void printTasks() throws DukeException{
+        if (tasks.size() < 1) {
             throw new DukeException();
         } else {
-            System.out.print("There are " + taskCount + " tasks in your list:\n");
-            for(int i = 0; i < taskCount; i++) {
-                System.out.print((i+1) + "." + tasks[i] + '\n');
+            System.out.print("There are " + tasks.size() + " tasks in your list:\n");
+            for(int i = 0; i < tasks.size(); i++) {
+                System.out.print((i+1) + "." + tasks.get(i) + '\n');
             }
         }
     }
 
-    public static void addTask(Task t) throws DukeException{
+    private static void addTask(Task t) throws DukeException{
         if (t.getDescription().isEmpty()) {
             throw new DukeException();
         } else {
-            tasks[taskCount++] = t;
+            tasks.add(t);
             System.out.print("Got it. I've added this task:\n" + t.toString() + '\n');
         }
     }
 
-    public static void markIndexDone(int taskIndex) throws DukeException{
+    private static void deleteTask(int taskIndex) throws DukeException{
         try {
-            tasks[taskIndex].setDone();
+            System.out.print("Got it. I've deleted this task:\n" + tasks.get(taskIndex).toString() + '\n');
+            tasks.remove(taskIndex);
         } catch (Exception e) {
             throw new DukeException();
         }
     }
 
-    public static void printHelp() {
+    private static void markIndexDone(int taskIndex) throws DukeException{
+        try {
+            tasks.get(taskIndex).setDone();
+        } catch (Exception e) {
+            throw new DukeException();
+        }
+    }
+
+    private static void printHelp() {
         System.out.print("I can remember your tasks for you!\n\n" +
                 "Available commands:\n" +
                 "\ttodo <description>\n" +
                 "\tdeadline <description> /by <time due>\n" +
-                "\tevent <description> /at <time occuring>\n" +
-                "\tlist\n" + "\tdone <taskIndex>\n");
+                "\tevent <description> /at <time occurring>\n" +
+                "\tlist\n" + "\tdone <task index>\n" +
+                "\tdelete <task index>\n");
     }
 
-    public static void listMode() {
+    private static void listMode() {
         String line;
         String[] lineParts;
         Scanner in = new Scanner(System.in);
@@ -130,6 +141,16 @@ public class Duke {
                     System.out.print("Something went wrong. Please put the event time after /at.\n");
                 } catch (DukeException e) {
                     System.out.print("The description of a event cannot be empty.\n");
+                }
+                break;
+            case "delete":
+                try {
+                    int taskIndex = Integer.parseInt(lineParts[1]) - 1;
+                    deleteTask(taskIndex);
+                } catch (NumberFormatException e) {
+                    System.out.print(lineParts[1] + " is not a valid number.\n");
+                } catch (DukeException e) {
+                    System.out.print("That is not a valid task index, please try again.\n");
                 }
                 break;
             default:
