@@ -1,8 +1,8 @@
 package ip.duke.task;
 
 public class Task {
-    protected String description;
-    protected boolean isDone;
+    public String description;
+    public boolean isDone;
 
     public Task(String description) {
         this.description = description;
@@ -16,8 +16,17 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718");
     }
 
+    public String getStatusNum() {
+        return (isDone ? "1" : "0");
+    }
+
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
     }
+
+    public String toDataString() {
+        return "|" + getStatusNum() + "|" + description;
+    }
+
 }

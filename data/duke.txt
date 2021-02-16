@@ -1,0 +1,6 @@
+T|0|go home
+E|0|project meeting |Sunday night
+D|1|submit a report |Wednesday
+T|0|read book
+D|1|submit reflection |Sunday night
+T|0|go home

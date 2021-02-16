@@ -5,10 +5,22 @@ import ip.duke.task.Event;
 import ip.duke.task.Task;
 import ip.duke.task.Todo;
 
+import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+    public static ArrayList<Task> list = new ArrayList<>();
+    public static File filePath = new File("data/duke.txt");
+    public static int index = 0;
+
     public static void main(String[] args) {
+        try {
+            loadData();
+        } catch (IOException e) {
+            System.out.println("IO exception :O");
+        }
+
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -18,9 +30,8 @@ public class Duke {
         printLine();
         printGreeting();
 
-        Task[] list = new Task[100];
-        int index = 0;
-        int slashPosition = 0;
+
+        int slashPosition;
         Scanner in = new Scanner(System.in);
         String command = in.nextLine();
 
@@ -88,8 +99,61 @@ public class Duke {
             command = in.nextLine();
 
         }
+
+        try {
+            PrintWriter writer = new PrintWriter("data/duke.txt");
+            writer.print("");
+            writer.close();
+            for (Task presentTask : list) {
+                appendToFile(presentTask.toDataString());
+                appendToFile(System.lineSeparator());
+            }
+        } catch (FileNotFoundException e){
+            System.out.println("File not found");
+        } catch (IOException e) {
+            System.out.println("Unable to write to file");
+        }
         printBye();
     }
+
+    private static void loadData() throws IOException {
+        try {
+            Scanner dataScanner = new Scanner(filePath);
+            while (dataScanner.hasNext()) {
+                String[] dataEntry = dataScanner.nextLine().split("\\|");
+                switch (dataEntry[0]) {
+                case "T":
+                    list.add(new Todo(dataEntry[2]));
+                    break;
+                case "D":
+                    list.add(new Deadline(dataEntry[2], dataEntry[3]));
+                    break;
+                case "E":
+                    list.add(new Event(dataEntry[2], dataEntry[3]));
+                    break;
+                default:
+                    break;
+                }
+                if (dataEntry[1].equals("1")) {
+                    list.get(index).setDone(true);
+                }
+                index++;
+            }
+
+        } catch (FileNotFoundException e) {
+            File dataDirectory = new File("data");
+            dataDirectory.mkdir();
+            File dukeFile = new File("data","duke.txt");
+            dukeFile.createNewFile();
+        }
+    }
+
+    private static void appendToFile(String textToAppend) throws IOException {
+        FileWriter fw = new FileWriter("data/duke.txt", true);
+        fw.write(textToAppend);
+        fw.close();
+    }
+
 
     public static void printGreeting() {
         System.out.println("Hello! I'm ip.taskmaster.Duke");
@@ -97,43 +161,43 @@ public class Duke {
         printLine();
     }
 
-    public static void recordTasks(Task[] list, int index, String command, String category) {
+    public static void recordTasks(ArrayList<Task>list, int index, String command, String category) {
         printLine();
         System.out.println("Got it. I've added this task:");
         if (category.equals("todo")) {
-            list[index] = new Todo(command.substring(5));
+            list.add(index, new Todo(command.substring(5)));
         } else {
             String Time = command.substring(command.indexOf("/") + 4);
             if (category.equals("deadline")) {
                 String content = command.substring(9, command.indexOf("/"));
-                list[index] = new Deadline(content, Time);
+                list.add(index, new Deadline(content, Time));
             } else if (category.equals("event")) {
                 String content = command.substring(6, command.indexOf("/"));
-                list[index] = new Event(content, Time);
+                list.add(index, new Event(content, Time));
             }
         }
-        System.out.println(list[index].toString());
+        System.out.println(list.get(index).toString());
         int count = index + 1;
         System.out.println("Now you have " + count + " tasks in the list.");
         printLine();
     }
 
-    public static void markDone(Task[] list, String command) {
+    public static void markDone(ArrayList<Task>list, String command) {
         int i;
         i = Integer.parseInt(command.substring(5));
-        list[i - 1].setDone(true);
+        list.get(i - 1).setDone(true);
         printLine();
         System.out.println("Nice! I've marked this task as done:");
-        System.out.println(" " + " " + list[i - 1].toString());
+        System.out.println(" " + " " + list.get(i - 1).toString());
         printLine();
 
     }
 
-    public static void printTasks(Task[] list, int index) {
+    public static void printTasks(ArrayList<Task>list, int index) {
         printLine();
         System.out.println("Here are the tasks in your list:");
         for (int i = 1; i <= index; i++) {
-            System.out.println(i + "." + list[i - 1].toString());
+            System.out.println(i + "." + list.get(i - 1).toString());
         }
         printLine();
     }
