@@ -1,12 +1,9 @@
 package duke.task;
 
 import duke.Duke;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-
 import java.util.ArrayList;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class TaskManager {
     private ArrayList<Task> tasks;
@@ -19,29 +16,24 @@ public class TaskManager {
         return tasks.size();
     }
 
-    public void showAddResult(Task t) {
-        Duke.showExecuteResult("Got it. I've added this task:\n" + t + "\nNow you have " + tasks.size() + " tasks in the list.");
-    }
-
     // add
-    public void addTodo(String content) {
+    public Todo addTodo(String content) {
         Task taskAdded = new Todo(content);
         tasks.add(taskAdded);
-        showAddResult(taskAdded);
+        return (Todo) taskAdded;
     }
 
-    public void addDeadline(String content, String by) {
+    public Deadline addDeadline(String content, String by) {
         Task taskAdded = new Deadline(content, by);
         tasks.add(taskAdded);
-        showAddResult(taskAdded);
+        return (Deadline) taskAdded;
     }
 
-    public void addEvent(String content, String at) {
+    public Event addEvent(String content, String at) {
         Task taskAdded = new Event(content, at);
         tasks.add(taskAdded);
-        showAddResult(taskAdded);
+        return (Event) taskAdded;
     }
-
     // done
     public void markTaskDone(int taskIndexShow) {
         tasks.get(taskIndexShow - 1).setDone(true);
@@ -58,10 +50,46 @@ public class TaskManager {
     }
 
     //delete
-    public void deleteTask(int taskIndexShow) {
-        Task temp = tasks.get(taskIndexShow-1);
-        tasks.remove(taskIndexShow-1);
+    public void deleteTask(int taskIndexShow){
+        Task temp = tasks.get(taskIndexShow - 1);
+        tasks.remove(taskIndexShow - 1);
         Duke.showExecuteResult("Noted. I've removed this task: \n" + temp + "\nNow you have " + getNumOfTasks() + " tasks in the list.");
+    }
 
+    public void addFromTXT(String line) {
+        String[] tasksInTXT = line.split("\\|");
+        String taskType = tasksInTXT[0].trim();
+        String taskDone = tasksInTXT[1].trim();
+        String taskDescription = tasksInTXT[2].trim();
+        switch (taskType) {
+            case "T":
+                Todo t = addTodo(taskDescription);
+                if(taskDone.equals("1")) {
+                    t.setDone(true);
+                }
+                return;
+            case "D":
+                Deadline d = addDeadline(taskDescription,tasksInTXT[3].trim());
+                if(taskDone.equals("1")) {
+                    d.setDone(true);
+                }
+                return;
+            case "E":
+                Event e = addEvent(taskDescription,tasksInTXT[3].trim());
+                if(taskDone.equals("1")) {
+                    e.setDone(true);
+                }
+                return;
+            }
+
+    }
+
+    public void writeToTxt(String filePath) throws IOException {
+        FileWriter fw = new FileWriter(filePath, false);
+        for(Task t : tasks) {
+            fw.write(t.strAddToTxt());
+            fw.write("\n");
+        }
+        fw.close();
     }
 }

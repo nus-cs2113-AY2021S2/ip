@@ -1,7 +1,13 @@
 package duke;
 
-import duke.task.TaskManager;
+import duke.task.*;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class Duke {
@@ -9,6 +15,7 @@ public class Duke {
     private static final Scanner SCANNER = new Scanner(System.in);
     private static final char INPUT_COMMENT_MARKER = '#';
     private static TaskManager tasks;
+    private static String filePath;
 
 
     public static void initTaskManager() {
@@ -37,6 +44,10 @@ public class Duke {
         System.out.println("____________________________________________________________");
         System.out.println(result);
         System.out.println("____________________________________________________________");
+    }
+
+    public static void showAddResult(Task t) {
+        Duke.showExecuteResult("Got it. I've added this task:\n" + t + "\nNow you have " + (tasks.getNumOfTasks()) + " tasks in the list.");
     }
 
     private static String getUserInput() {
@@ -74,23 +85,27 @@ public class Duke {
         showExecuteResult("OOPS!!! I'm sorry, but I don't know what that means :-(!");
     }
 
-    public static void executeAddTodo(String userCommand) throws EmptyDescriptionException{
+    public static void executeAddTodo(String userCommand) throws EmptyDescriptionException, IOException {
         String[] typeContent = userCommand.split("[Tt][Oo][Dd][Oo]",2);
         if (typeContent[1].equals("")) {
             throw new EmptyDescriptionException(CommandType.TODO);
         }
 
-        tasks.addTodo(typeContent[1].trim());
+        Todo t = tasks.addTodo(typeContent[1].trim());
+        showAddResult(t);
+        tasks.writeToTxt(filePath);
     }
 
-    public static void executeAddDeadline(String userCommand) throws EmptyDescriptionException{
+    public static void executeAddDeadline(String userCommand) throws EmptyDescriptionException, IOException {
         try {
             String[] typeContentBy = userCommand.trim().split("[Dd][Ee][Aa][Dd][Ll][Ii][Nn][Ee]", 2);
             String[] contentBy = typeContentBy[1].trim().split("/[Bb][Yy]", 2);
             if (contentBy[0].trim().equals("") || contentBy[1].trim().equals("")) {
                 throw new EmptyDescriptionException(CommandType.DEADLINE);
             }
-            tasks.addDeadline(contentBy[0].trim(), contentBy[1].trim());
+            Deadline d = tasks.addDeadline(contentBy[0].trim(), contentBy[1].trim());
+            showAddResult(d);
+            tasks.writeToTxt(filePath);
         } catch (ArrayIndexOutOfBoundsException e) {
             showExecuteResult("OOPS!!! No /by founded in the command");
 
@@ -98,14 +113,16 @@ public class Duke {
 
     }
 
-    public static void executeAddEvent(String userCommand) throws EmptyDescriptionException{
+    public static void executeAddEvent(String userCommand) throws EmptyDescriptionException, IOException {
         try {
             String[] typeContentAt= userCommand.trim().split("[Ee][Vv][Ee][Nn][Tt]", 2);
             String[] contentAt = typeContentAt[1].trim().split("/[Aa][Tt]", 2);
             if (contentAt[0].trim().equals("") || contentAt[1].trim().equals("")) {
                 throw new EmptyDescriptionException(CommandType.EVENT);
             }
-            tasks.addEvent(contentAt[0].trim(), contentAt[1].trim());
+            Event e = tasks.addEvent(contentAt[0].trim(), contentAt[1].trim());
+            showAddResult(e);
+            tasks.writeToTxt(filePath);
         } catch (IndexOutOfBoundsException e){
             showExecuteResult("OOPS!!! No /at founded in the command");
         }
@@ -116,7 +133,7 @@ public class Duke {
         tasks.listAllTasks();
     }
 
-    public static void executeDone(String userCommand) throws EmptyDescriptionException{
+    public static void executeDone(String userCommand) throws EmptyDescriptionException, IOException {
         try{
             String[] typeIndex = userCommand.split("[Dd][Oo][Nn][Ee]",2);
             int taskIndexShow = Integer.parseInt(typeIndex[1].trim());
@@ -124,12 +141,13 @@ public class Duke {
                 throw new EmptyDescriptionException(CommandType.DONE);
             }
             tasks.markTaskDone(taskIndexShow);
+            tasks.writeToTxt(filePath);
         } catch (NumberFormatException e) {
             throw new EmptyDescriptionException(CommandType.DONE);
         }
     }
 
-    public static void executeDELETE(String userCommand) throws EmptyDescriptionException{
+    public static void executeDELETE(String userCommand) throws EmptyDescriptionException, IOException {
         try{
             String[] typeIndex = userCommand.split("[Dd][Ee][Ll][Ee][Tt][Ee]",2);
             int taskIndexShow = Integer.parseInt(typeIndex[1].trim());
@@ -137,6 +155,7 @@ public class Duke {
                 throw new EmptyDescriptionException(CommandType.DELETE);
             }
             tasks.deleteTask(taskIndexShow);
+            tasks.writeToTxt(filePath);
         } catch (NumberFormatException e) {
             throw new EmptyDescriptionException(CommandType.DELETE);
         }
@@ -147,7 +166,7 @@ public class Duke {
         System.exit(0);
     }
 
-    public static void executeCommand(String userInputString) {
+    public static void executeCommand(String userInputString) throws IOException {
         CommandType type = getCommandType(userInputString);
         try {
             switch (type) {
@@ -183,12 +202,49 @@ public class Duke {
 
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        File f = loadFile();
         initTaskManager();
+        loadData(f);
         showHello();
         while (true) {
             String userCommand = getUserInput();
             executeCommand(userCommand.trim());
         }
+
+
+    }
+
+    private static void loadData(File f) throws FileNotFoundException {
+        Scanner s = new Scanner(f);
+        while (s.hasNext()){
+            tasks.addFromTXT(s.nextLine());
+        }
+        s.close();
+    }
+
+    private static File loadFile() {
+        String localDir = System.getProperty("user.dir");
+        Path dirPath = Paths.get(localDir, "data");
+
+        if(!Files.exists(dirPath)) {
+            try {
+                Files.createDirectory(dirPath);
+            } catch (IOException e) {
+                System.err.println("Failed to create directory 'data'!" + e.getMessage());
+            }
+        }
+
+        filePath = localDir + File.separator + "data" + File.separator + "duke.txt";
+        File f = new File(filePath);
+
+        if(!f.exists()) {
+            try {
+                f.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return f;
     }
 }
