@@ -87,7 +87,7 @@ public class MainUI {
             }
 
         } catch (IOException e) {
-            System.out.println("We couldn't find the 'data' folder in your directory.");
+            System.out.println("We couldn't find the 'data' folder in your directory. This data folder will store your tasks.");
             System.out.println("Creating 'data' folder now...");
             File relativePathFileName = new File(DIRECTORY_NAME);
             String fullPath = relativePathFileName.getAbsolutePath();
