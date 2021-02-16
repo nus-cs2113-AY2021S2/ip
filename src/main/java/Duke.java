@@ -7,6 +7,9 @@ import duke.task.Task;
 import duke.task.Todo;
 
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
     public static void main(String[] args) {
@@ -28,6 +31,9 @@ public class Duke {
 
         // Print welcome message
         printWelcomeMessage();
+
+        // Load up save file, create file if it's not been created
+        loadFile();
 
         // Scan for input
         Scanner userInputScanner = new Scanner(System.in);
@@ -59,7 +65,6 @@ public class Duke {
                 break;
             case "deadline":
                 by = extractTime(taskName);
-                System.out.println("Debug message 1: " + by);
                 taskName  = extractTaskName(taskName);
                 Task d = new Deadline(taskName, by);
                 printDividingLine();
@@ -89,6 +94,13 @@ public class Duke {
                 break;
             }
 
+            try {
+                saveFile("duke.txt");
+            } catch (IOException e){
+                System.out.println("Fail to save file.");
+                e.printStackTrace();
+            }
+
             // Scan input again
             userInput = userInputScanner.nextLine();
             if(isOneWord(userInput)) {
@@ -104,6 +116,38 @@ public class Duke {
 
         // Print Bye Message
         printByeMessage();
+    }
+
+    // Load the save file and update ArrayList
+    private static void loadFile(){
+        try {
+            File f = new File("duke.txt");
+            if (f.createNewFile()){
+                System.out.println("Save file is created: " + f.getName());
+            } else {
+                System.out.println("Save file loaded successfully.");
+            }
+        } catch (IOException e) {
+            System.out.println("Save file creation failed.");
+            e.printStackTrace();
+        }
+    }
+
+    private static void printFile(){
+        for (int i = 0; i < Task.getTaskCount(); i++) {
+            System.out.print(Task.getTask(i));
+        }
+    }
+
+    private static void saveFile(String filePath) throws IOException{
+        FileWriter fw = new FileWriter(filePath);
+        fw.write("List of tasks: " + System.lineSeparator());
+        fw.close();
+        FileWriter afw = new FileWriter(filePath, true);
+        for (int i = 0; i < Task.getTaskCount(); i++) {
+            afw.append(Task.getTask(i));
+        }
+        fw.close();
     }
 
     private static void addTaskWithValidation(String userInput, Task t) {

@@ -4,11 +4,13 @@ import duke.exceptions.EmptyInputException;
 import duke.exceptions.IncompleteInputException;
 import duke.exceptions.InvalidDateInputException;
 
+import java.util.ArrayList;
+
 public class Task {
     private static final int MAX_NUMBER_OF_TASKS = 100;
     protected String description;
     private boolean isDone;
-    private static Task[] taskList = new Task[MAX_NUMBER_OF_TASKS];
+    private static ArrayList<Task> taskList = new ArrayList<>();
     private static int taskCount = 0;
     private static String time;
 
@@ -24,7 +26,7 @@ public class Task {
 
     public static void markAsDone(String i){
         int index = Integer.parseInt(i);
-        Task t = taskList[index-1];
+        Task t = taskList.get(index-1);
         t.isDone = true;
         System.out.println("Nice! I've marked this task as done:");
         System.out.print("  ");
@@ -44,7 +46,7 @@ public class Task {
         System.out.print("  ");
         this.printTaskInformation();
         System.out.println("");
-        taskList[taskCount]= this;
+        taskList.add(this);
         taskCount++;
         printSuccessfulTaskAddition();
     }
@@ -84,6 +86,27 @@ public class Task {
 
     public String getTaskType(){
         return "N/A";
+    }
+
+    public static int getTaskCount(){
+        return taskList.size();
+    }
+
+    public String getDate(){
+        return "N/A";
+    }
+
+    public static String getTask(int i){
+        Task t = taskList.get(i);
+        String taskType = t.getTaskType();
+        String statusIcon = (t.getStatusIcon().equals("x") ? "1" : "0");
+        if (t instanceof Todo){
+            return taskType + " | " + statusIcon  + " | " + t.description
+                    + System.lineSeparator();
+        } else {
+            return taskType + " | " + statusIcon + " | " + t.description
+                    + " | " + t.getDate() + System.lineSeparator() ;
+        }
     }
 
     private void printTaskType(){
