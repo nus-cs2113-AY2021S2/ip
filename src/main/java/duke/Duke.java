@@ -129,6 +129,7 @@ public class Duke {
                 break;
             case "delete":
                 deleteTask(taskList, userInput);
+                FileHandler.writeTaskList(taskList);
                 break;
             case "exit":
                 //FALL-THROUGH
