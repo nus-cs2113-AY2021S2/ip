@@ -1,13 +1,13 @@
-public class Task {
+public class task {
     protected String description;
     protected boolean resolved;
 
-    public Task(){
+    public task(){
         this.description = "";
         this.resolved = false;
     }
 
-    public Task(String desc){
+    public task(String desc){
         this.description = desc;
         this.resolved = false;
     }

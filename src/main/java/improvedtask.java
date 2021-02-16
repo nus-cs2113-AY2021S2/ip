@@ -1,13 +1,13 @@
-public class Taskv2 extends Task {
+public class improvedtask extends task {
     private listTypes type;
     private String date;
 
-    public Taskv2(String desc, listTypes type, String date){
+    public improvedtask(String desc, listTypes type, String date){
         super(desc);
         this.type = type;
         this.date = date;
     }
-    public Taskv2(String desc, listTypes type){
+    public improvedtask(String desc, listTypes type){
         super(desc);
         this.type = type;
         this.date = "";
