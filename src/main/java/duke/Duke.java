@@ -222,48 +222,25 @@ public class Duke {
      */
 
     private static int parseCommand(String input) {
-        // BYE command
         if (input.equalsIgnoreCase("bye")) {
             return BYE_COMMAND;
         }
 
-        // LIST command
         if (input.equalsIgnoreCase("list")) {
             return LIST_COMMAND;
-        }
-
-        //HELP COMMAND
-        else if (input.equalsIgnoreCase("help")) {
+        } else if (input.equalsIgnoreCase("help")) {
             return HELP_COMMAND;
-        }
-
-        // DONE command
-        else if (startsWith(input, "done")) {
+        } else if (startsWith(input, "done")) {
             return DONE_COMMAND;
-        }
-
-        // TO-DO COMMAND
-        else if (startsWith(input, "todo")) {
+        } else if (startsWith(input, "todo")) {
             return TODO_COMMAND;
-        }
-
-        // DEADLINE COMMAND
-        else if (startsWith(input, "deadline")) {
+        } else if (startsWith(input, "deadline")) {
             return DEADLINE_COMMAND;
-        }
-
-        // EVENTS COMMAND
-        else if (startsWith(input, "event")) {
+        } else if (startsWith(input, "event")) {
             return EVENTS_COMMAND;
-        }
-
-        //DELETE COMMAND
-        else if (startsWith(input, "delete")) {
+        } else if (startsWith(input, "delete")) {
             return DELETE_COMMAND;
-        }
-
-        // UNKNOWN command
-        else {
+        } else {
             return UNKNOWN_COMMAND;
         }
     }
@@ -368,7 +345,7 @@ public class Duke {
         }
 
         System.out.println("TASK LIST:");
-        
+
         for (Task task : taskList) {
             System.out.print(numbering + ". ");
             task.printTask();
@@ -448,16 +425,16 @@ public class Duke {
 
         try {
             index = Integer.parseInt(words[1]) - 1;
-            
-            printTaskDeleted(index);
-            taskList.remove(index);
+            if (taskList.contains(taskList.get(index))) {
+                printTaskDeleted(index);
+                taskList.remove(index);
+            }
         } catch (NumberFormatException e) {
             printInvalidInputWarning(input);
         } catch (IndexOutOfBoundsException e) {
             printInvalidIndexWarning(index);
         }
     }
-
 
 
     /**
@@ -522,10 +499,13 @@ public class Duke {
                 "FORMAT: done [(int) number]";
 
         String commandTodo = "TODO - \n" +
-                "FORMAT: todo [(str) job]";
+                "FORMAT: todo [(str) description]";
 
         String commandDeadline = "DEADLINE - \n" +
-                "FORMAT: deadline [(str) job] /by [(str) deadline]";
+                "FORMAT: deadline [(str) description] /by [(str) deadline]";
+        
+        String commandEvent = "EVENT - \n" +
+                "FORMAT: event [(str) description] /at [(str) time]";
 
         String commandDelete = "DELETE - \n" +
                 "FORMAT: delete [(int) index]";
@@ -535,6 +515,7 @@ public class Duke {
         System.out.println("-------------");
         System.out.println(commandTodo + '\n');
         System.out.println(commandDeadline + '\n');
+        System.out.println(commandEvent + '\n');
         System.out.println(commandList + '\n');
         System.out.println(commandDone + '\n');
         System.out.println(commandDelete + '\n');
