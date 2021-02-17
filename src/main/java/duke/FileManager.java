@@ -4,17 +4,21 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class FileManager {
     private static String home = System.getProperty("user.dir");
+    private static final String directoryPath = home + File.separator + "data";
     private static final String filePath = home + File.separator + "data" + File.separator + "task_list.txt";
 
     public static void createFileIfNotExist() {
         try {
+            File directory = new File(directoryPath);
+            if (! directory.exists()){
+                directory.mkdir();
+            }
+
             File myFile = new File(filePath);
             if (myFile.createNewFile()) {
                 System.out.println("A new task list file is created!");
