@@ -9,12 +9,8 @@ import java.io.FileNotFoundException;
 
 public class Duke {
     private static final String lineSpacing = "\t----------------------------------";
-<<<<<<< HEAD
-    private static ArrayList<Task> tasks = new ArrayList<>();
-=======
     private static ArrayList<Task> tasks = new ArrayList<>();
     private static final String filePath = "./src/main/java/duke/data/tasks.txt";
->>>>>>> branch-Level-7
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
