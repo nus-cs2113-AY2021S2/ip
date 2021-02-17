@@ -5,6 +5,11 @@ import duke.exceptions.InvalidCommandException;
 
 import java.util.Scanner;
 
+import static duke.Storage.loadFile;
+import static duke.Storage.saveFile;
+import static duke.TaskList.getCommand;
+
+
 public class Duke {
     private static final TaskList taskList = new TaskList();
     private static final Scanner in = initialiseInput();
@@ -17,10 +22,12 @@ public class Duke {
      */
     public static void main(String[] args) {
         printInitialMsg();
+        loadFile(taskList);
         do {
             scanInput();
             printReaction();
         } while (canContinue());
+        saveFile(taskList);
     }
 
     private static void printInitialMsg() {
@@ -84,7 +91,8 @@ public class Duke {
 
     private static void processInput(TaskList taskList, String input) {
         try {
-            command = getCommand(input);
+
+            command =  getCommand(input);
             switch (command) {
             case ADD:
                 command = taskList.addTask(input, Command.ADD);
@@ -125,27 +133,6 @@ public class Duke {
         } catch (InvalidCommandException e) {
             System.out.println("Wrong command entered!: " + input);
             command = Command.ERROR;
-        }
-    }
-
-    private static Command getCommand(String input) throws InvalidCommandException {
-        String userInput = input.toLowerCase();
-        if (userInput.equals("list")) {
-            return Command.LIST;
-        } else if (userInput.equals("bye")) {
-            return Command.BYE;
-        } else if (userInput.startsWith("done ")) {
-            return Command.DONE;
-        } else if (userInput.startsWith("todo ")) {
-            return Command.TODO;
-        } else if (userInput.startsWith("deadline ")) {
-            return Command.DEADLINE;
-        } else if (userInput.startsWith("event ")) {
-            return Command.EVENT;
-        } else if (userInput.startsWith("delete ")) {
-            return Command.DELETE;
-        } else {
-            throw new InvalidCommandException();
         }
     }
 

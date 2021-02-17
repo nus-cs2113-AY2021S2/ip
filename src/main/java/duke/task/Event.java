@@ -7,6 +7,10 @@ public class Event extends Task {
         this.eventTime = eventTime;
     }
 
+    public String getEventTime() {
+        return eventTime;
+    }
+
     @Override
     public String getStatusIcon() {
         return "[E]" + super.getStatusIcon();
@@ -14,6 +18,11 @@ public class Event extends Task {
 
     @Override
     public String getDescription() {
-        return super.getDescription() + "(at: " + eventTime + ")";
+        return super.getDescription();
+    }
+
+    @Override
+    public String toString() {
+        return getStatusIcon() + super.getDescription() + "(at: " + eventTime + ")";
     }
 }

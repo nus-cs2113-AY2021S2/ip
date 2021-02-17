@@ -1,6 +1,7 @@
 package duke;
 
 import duke.exceptions.EmptyDescriptionException;
+import duke.exceptions.InvalidCommandException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -13,6 +14,24 @@ public class TaskList {
 
     public TaskList() {
         tasks = new ArrayList<>();
+    }
+
+    public static Command getCommand(String input) throws InvalidCommandException {
+        if (input.equals("list")) {
+            return Command.LIST;
+        } else if (input.equals("bye")) {
+            return Command.BYE;
+        } else if (input.startsWith("done ")) {
+            return Command.DONE;
+        } else if (input.startsWith("todo ")) {
+            return Command.TODO;
+        } else if (input.startsWith("deadline ")) {
+            return Command.DEADLINE;
+        } else if (input.startsWith("event ")) {
+            return Command.EVENT;
+        } else {
+            throw new InvalidCommandException();
+        }
     }
 
     public Command addTask(String description, Command command) {
@@ -89,8 +108,12 @@ public class TaskList {
         tasks.get(taskNum).setDone();
     }
 
-    public String getTask(int taskNum) {
-        return tasks.get(taskNum).toString();
+    public void finishLastTask(){
+        tasks.get(tasks.size() - 1).setDone();
+    }
+
+    public Task getTask(int taskNum) {
+        return tasks.get(taskNum);
     }
 
     // Gets the Last task of tasks array
@@ -106,5 +129,8 @@ public class TaskList {
         String task = tasks.get(taskNum).toString();
         deleteTask(taskNum);
         return task;
+    }
+    public int getSize(){
+        return tasks.size();
     }
 }
