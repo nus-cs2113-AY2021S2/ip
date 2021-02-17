@@ -1,9 +1,12 @@
 package duke.main;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 import duke.exceptions.*;
 import duke.items.*;
+
+import static duke.main.Utils.loadFile;
 
 public class Duke {
     public static void main(String[] args) {
@@ -11,6 +14,11 @@ public class Duke {
         int taskInList = 0;
         Utils.welcomeMessage();
         Utils.printLine();
+        try {
+            loadFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Scanner in = new Scanner(System.in);
         while (true) {
             String line;
@@ -27,6 +35,8 @@ public class Duke {
                 System.out.println(" ☹ OOPS!!! Invalid parameter input for command: " + line.split(" ")[0]);
             } catch (InvalidIndexExceptions e){
                 System.out.println(" ☹ OOPS!!! Index is out of range");
+            } catch (IOException e) {
+                e.printStackTrace();
             }
             Utils.printLine();
         }

@@ -9,14 +9,19 @@ public class Task {
     protected boolean isDone;
     protected static ArrayList<Task> list = new ArrayList<Task>();
 
+
+    public static Task[] getList(){
+        return list;
+    }
+    public static int getNumOfTasks() {
+        return numOfTasks;
+    }
+
     public static void printList(){
         for (int i =0; i<numOfTasks;i++) {
             System.out.print(i+1 + ".");
             list.get(i).print();
         }
-    }
-    public static int getNumOfTasks() {
-        return numOfTasks;
     }
     public static void addTask(Task task) {
         list.add(task);
@@ -60,5 +65,6 @@ public class Task {
     public String getType() {
         return "T";
     }
-
+    public boolean isDone() {return this.isDone;}
+    public void setDone() {this.isDone = true;};
 }

@@ -1,12 +1,16 @@
 package duke.main;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
-
 import duke.exceptions.*;
 import duke.items.*;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
 
 public class Utils {
-    private static String[] VALID_COMMANDS = {"done", "list", "todo", "event", "deadline", "delete"};
+    private static String[] VALID_COMMANDS = {"bye", "done", "list", "todo", "event", "deadline", "delete"};
 
     public static void printLine() {
         System.out.println("____________________________________________________________");
@@ -38,9 +42,83 @@ public class Utils {
         }
         return indexOfSlash;
     }
+    public static void createFile(){
+        try {
+            File myObj = new File("list.txt");
+            if (myObj.createNewFile()) {
+                System.out.println("File created: " + myObj.getName());
+            } else {
+                System.out.println("File already exists.");
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+    public static void writeToFile() throws IOException {
+        createFile();
+        FileWriter fw = new FileWriter("list.txt");
+        for (int i=0; i<Task.getNumOfTasks(); i++) {
+            ArrayList<Task> buffer = Task.getList();
+            switch (buffer.get(i).getType()) {
+
+            case ("T"):
+                fw.write(buffer.get(i).getType() + "\t" + buffer.get(i).isDone() + "\t" + buffer.get(i).getDescription() + "\n");
+                break;
+            case ("D"):
+                Deadline temp1 = (Deadline)(buffer.get(i));
+                fw.write(buffer.get(i).getType() + "\t" + buffer.get(i).isDone() + "\t" + buffer.get(i).getDescription() + "\t" + temp1.getBy() + "\n");
+                break;
+            case ("E"):
+                Event temp2 = (Event) (buffer.get(i));
+                fw.write(buffer.get(i).getType() + "\t" + buffer.get(i).isDone() + "\t" + buffer.get(i).getDescription() + "\t" + temp2.getAt() + "\n");
+                break;
+            }
+        }
+        fw.close();
+    }
+
+    public static void loadFile() throws IOException{
+        File f = new File("list.txt"); // create a File for the given file path
+        Scanner s = new Scanner(f); // create a Scanner using the File as the source
+        while (s.hasNext()) {
+            loadTask(s.nextLine());
+        }
+    }
+
+    public static void loadTask(String line){
+        String[] arr = line.split("\t");
+        switch(arr[0]){
+        case ("T"):
+            Todo current1 = new Todo(arr[2]);
+            if (arr[1].equals("true")) {
+                current1.setDone();
+            }
+            Task.addTask(current1);
+            break;
+
+        case ("D"):
+            Deadline current2 = new Deadline(arr[2], arr[3]);
+            if (arr[1].equals("true")) {
+                current2.setDone();
+            }
+            Task.addTask(current2);
+            break;
+
+        case ("E"):
+            Event current3 = new Event(arr[2], arr[3]);
+            if (arr[1].equals("true")) {
+                current3.setDone();
+            }
+            Task.addTask(current3);
+            break;
+
+        }
+    }
+
 
     public static int commandHandler(String line) throws InvalidCommandExceptions,InvalidParameterLengthExceptions,
-            DeadlineParameterExceptions, EventParameterExceptions, InvalidIndexExceptions {
+            DeadlineParameterExceptions, EventParameterExceptions, InvalidIndexExceptions, IOException {
 
         String[] arr;
         arr = line.split(" ");
@@ -50,6 +128,7 @@ public class Utils {
         switch (arr[0]) {
 
         case ("bye"):
+            writeToFile();
             return -1;
 
         case ("list"):
