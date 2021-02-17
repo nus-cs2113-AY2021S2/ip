@@ -3,8 +3,12 @@ import task.Todo;
 import task.Deadline;
 import task.Event;
 import exceptions.DukeException;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.FileNotFoundException;
 
 public class Duke {
 
@@ -145,11 +149,60 @@ public class Duke {
         }
     }
 
+    private static int loadFile(Task[] tasks) throws FileNotFoundException {
+        File f = new File("duke.txt");
+        if (!f.exists()) {
+            throw new FileNotFoundException();
+        }
+        String input;
+        int taskCount = 0;
+        Scanner s = new Scanner(f);
+
+        while (s.hasNext()) {
+            input = s.nextLine();
+            String[] userInput = input.split(" ", 2);
+            boolean isDone = Boolean.parseBoolean(userInput[0]);
+            if (userInput[1].startsWith("todo")) {
+                try {
+                    taskCount = addTask(tasks, taskCount, userInput[1], COMMAND_TODO);
+                } catch (DukeException e) {
+                }
+            } else if (userInput[1].startsWith("deadline")) {
+                try {
+                    taskCount = addTask(tasks, taskCount, userInput[1], COMMAND_DEADLINE);
+                } catch (DukeException e) {
+                }
+            } else if (userInput[1].startsWith("event")) {
+                try {
+                    taskCount = addTask(tasks, taskCount, userInput[1], COMMAND_EVENT);
+                } catch (DukeException e) {
+                }
+            }
+            tasks[taskCount - 1].markAsDone();
+        }
+        return taskCount;
+    }
+
+    private static void saveFile(String filePath, Task[] tasks, int taskCount) throws IOException {
+        File f = new File(filePath);
+        FileWriter fw = new FileWriter(filePath);
+        for (int i = 0; i < taskCount; i++) {
+            fw.write(tasks[i].saveTask());
+        }
+        System.out.println("File saved");
+        fw.close();
+    }
+
     public static void main(String[] args) {
         String userInput;
         Scanner in = new Scanner(System.in);
 
         printHello();
+
+        try {
+            taskCount = loadFile(tasks);
+        } catch (FileNotFoundException e) {
+        }
 
         while(true) {
             userInput = in.nextLine();
@@ -199,6 +252,10 @@ public class Duke {
             }
             else {
                 System.out.println(UNKNOWN_COMMAND);
+            }
+            try {
+                saveFile("duke.txt", tasks, taskCount);
+            } catch (IOException e) {
             }
         }
     }

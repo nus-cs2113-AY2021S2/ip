@@ -21,4 +21,7 @@ public class Task {
     public void printTask() {
         System.out.println("[ ][" + getStatusIcon() + "] " + description);
     }
+    public String saveTask() {
+        return "";
+    }
 }
