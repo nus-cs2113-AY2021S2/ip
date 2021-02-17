@@ -64,7 +64,6 @@ public class Duke {
     }
 
     private static void loadFile() throws FileNotFoundException {
-        printHorizontalLine();
         File f = new File("duke.txt");
         if (!f.exists()) { // if file does not exist
             throw new FileNotFoundException();
@@ -88,6 +87,7 @@ public class Duke {
                 break;
             }
         }
+        printHorizontalLine();
         System.out.println(MESSAGE_SAVE_FILE_LOADED);
         printHorizontalLine();
     }
