@@ -9,10 +9,10 @@ public class ToDo extends Task {
     @Override
     public String toSaveFormat() {
         if (isDone) {
-            return "T " + "Y " + description;
+            return "T " + "Y " + description + "\n";
         }
         else {
-            return "T " + "N " + description;
+            return "T " + "N " + description + "\n";
         }
     }
 

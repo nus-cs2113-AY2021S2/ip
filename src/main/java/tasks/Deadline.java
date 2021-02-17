@@ -11,10 +11,10 @@ public class Deadline extends Task {
     @Override
     public String toSaveFormat() {
         if (isDone) {
-            return "D " + "Y " + description + "/d" + by;
+            return "D " + "Y " + description + "/d" + by + "\n";
         }
         else {
-            return "D " + "N " + description + "/d" + by;
+            return "D " + "N " + description + "/d" + by + "\n";
         }
     }
 

@@ -11,10 +11,10 @@ public class Event extends Task {
     @Override
     public String toSaveFormat() {
         if (isDone) {
-            return "E " + "Y " + description + "/d" + at;
+            return "E " + "Y " + description + "/d" + at + "\n";
         }
         else {
-            return "E " + "N " + description + "/d" + at;
+            return "E " + "N " + description + "/d" + at + "\n";
         }
     }
 
