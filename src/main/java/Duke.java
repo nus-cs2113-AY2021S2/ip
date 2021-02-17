@@ -1,9 +1,11 @@
 import javax.sound.midi.SysexMessage;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
 
-    static Task[] tasks = new Task[100];
+    static ArrayList<Task> tasks = new ArrayList<Task>();
     static int taskPosition = 0;
     static String description;
     static String by;
@@ -11,12 +13,11 @@ public class Duke {
 
     public static void storeTask(Task t) throws TodoException{
         if (!t.description.isEmpty()){
-            tasks[taskPosition] = t;
-            taskPosition++;
+            tasks.add(t);
             System.out.println("Got it! I've added this task!");
             System.out.println(t.description);
             System.out.println(t.getStatusIcon() + " " + t.getDescription());
-            System.out.println("Now you have " + countArray(tasks) + " tasks!");
+            System.out.println("Now you have " + tasks.size() + " tasks!");
 
         }
         else {
@@ -25,23 +26,13 @@ public class Duke {
 
     }
 
-    public static int countArray(Task[] tasks){
-        int counter = 0;
-        for (Task task:tasks){
-            if (task != null){
-                counter++;
-            }
-        }
-        return counter;
-    }
-
     public static void markAsDone(int taskIndex){
         System.out.println("Nice! I've marked this task as done: ");
-        tasks[taskIndex-1].isDone = true;
+        tasks.get(taskIndex - 1).isDone = true;
         listArray(tasks);
     }
 
-    public static void listArray(Task[] tasks){
+    public static void listArray(ArrayList<Task> tasks){
         int textNumber = 1;
         for(Task t:tasks){
             if(t != null){
@@ -124,9 +115,27 @@ public class Duke {
             case"Done":
             case "done":
             case "DONE":
-                Integer taskIndex = Integer.parseInt(arr[1]);
-                markAsDone(taskIndex);
-                break;
+                try {
+                    Integer taskIndex = Integer.parseInt(arr[1]);
+                    markAsDone(taskIndex);
+                    break;
+                } catch (ArrayIndexOutOfBoundsException e){
+                    System.out.println("What do you want to mark as done?");
+                    break;
+                }
+            case "Delete":
+            case "delete":
+            case "DELETE":
+                try {
+                    Integer taskIndex = Integer.parseInt(arr[1]);
+                    markAsDeleted(taskIndex);
+                    break;
+                } catch (ArrayIndexOutOfBoundsException e){
+                    System.out.println("What do you want to mark as done?");
+                    break;
+                }
+
+
 
             default:
                 System.out.println("Invalid command. Only accepts Todo,List,Event or Deadline!");
@@ -135,5 +144,14 @@ public class Duke {
 
         }
         System.out.println("Bye! Hope to see you again soon!");
+    }
+
+    private static void markAsDeleted(Integer taskIndex) {
+
+        Task t = tasks.get(taskIndex - 1);
+        System.out.println("Noted! I have deleted this task for you: ");
+        System.out.println(taskIndex + "." + t.getStatusIcon() + " " + t.getDescription());
+        tasks.remove(taskIndex - 1);
+        System.out.println("Now you have " + tasks.size() + " tasks in the list!");
     }
 }
