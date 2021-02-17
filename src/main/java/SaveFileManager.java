@@ -6,56 +6,61 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class SaveFileManager {
-	private static final String pathToSaveFile = "./data/duke.txt";
+	private static final String PATH_TO_SAVE_FILE = "./data/duke.txt";
+	private static final String SAVE_FILE_DIRECTORY= "./data";
 	private static final int MAX_TASKS = 100;
-	private static final String stringSeparator = " | ";
 
 	public static ArrayList<Task> readFromSaveFile() {
 		ArrayList<Task> tasks = new ArrayList<>(MAX_TASKS);
-		File saveFile = new File(pathToSaveFile);
-		Scanner sc = null;
 		int indexOfTask = 0;
-		String taskType = null;
+		String taskType;
 		int isDone;
-		String taskDescription = null;
-		String taskBy = null;
-		String taskAt = null;
+		String taskDescription;
+		String taskBy;
+		String taskAt;
 		try {
-			sc = new Scanner(saveFile);
+			File directory = new File(SAVE_FILE_DIRECTORY);
+			File saveFile = new File(PATH_TO_SAVE_FILE);
+			if (!directory.exists()){
+				directory.mkdirs();
+				saveFile.createNewFile();
+			}
+			Scanner sc =  new Scanner(saveFile);
+			while (sc.hasNext()){
+				String savedTaskObject = sc.nextLine();
+				String[] savedTaskSplit = savedTaskObject.split(" \\| ",4);
+				taskType = savedTaskSplit[0];
+				isDone = Integer.parseInt(savedTaskSplit[1]);
+				taskDescription = savedTaskSplit[2];
+				switch (taskType){
+				case ("T"):
+					tasks.add(new Todo(taskDescription));
+					break;
+				case ("D"):
+					taskBy = savedTaskSplit[3];
+					tasks.add(new Deadline(taskDescription,taskBy));
+					break;
+				case ("E"):
+					taskAt = savedTaskSplit[3];
+					tasks.add(new Event(taskDescription,taskAt));
+					break;
+				}
+				if (isDone == 1){
+					tasks.get(indexOfTask).setDone();
+				}
+				indexOfTask++;
+			}
 		} catch (FileNotFoundException e) {
-			System.out.println("Save file not found! Creating one...");
-		}
-		try {
-			saveFile.createNewFile();
+			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		while (sc.hasNext()){
-			String savedTaskObject = sc.nextLine();
-			String[] savedTaskSplit = savedTaskObject.split(" \\| ",4);
-			taskType = savedTaskSplit[0];
-			isDone = Integer.parseInt(savedTaskSplit[1]);
-			taskDescription = savedTaskSplit[2];
-			switch (taskType){
-			case ("T"):
-				tasks.add(new Todo(taskDescription));
-				break;
-			case ("D"):
-				taskBy = savedTaskSplit[3];
-				tasks.add(new Deadline(taskDescription,taskBy));
-				break;
-			case ("E"):
-				taskAt = savedTaskSplit[3];
-				tasks.add(new Event(taskDescription,taskAt));
-				indexOfTask++;
-				break;
-			}
-		}
+
 		return tasks;
 	}
 
 	public static void writeToSaveFile(ArrayList<Task> tasks, int numberOfTasks) throws IOException {
-		FileWriter fw = new FileWriter(pathToSaveFile);
+		FileWriter fw = new FileWriter(PATH_TO_SAVE_FILE);
 		for (int i = 0; i < numberOfTasks; i++) {
 			String taskToSave = tasks.get(i).saveFormatString();
 			fw.write(taskToSave + "\n");

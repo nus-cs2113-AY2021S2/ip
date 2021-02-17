@@ -94,8 +94,8 @@ public class Duke {
 
             case ("list"):
                 System.out.println("\t____________________________________________________________");
-                System.out.println("Here are the tasks in your tasks:");
-                if(indexOfTask > 1) {
+                if(indexOfTask > 0) {
+                    System.out.println("Here are the tasks in your tasks:");
                     for (int i = 0; i < indexOfTask; i++) {
                         System.out.printf("\t%d. %s\n", i + 1, tasks.get(i).toString());
                     }
