@@ -26,15 +26,18 @@ public class Task {
         return (isDone ? "\u2713" : " "); //return tick or X symbols ✘
     }
 
+    public String getAlphabet() {
+        return "T";
+    }
+
     public void setDone() {
         this.isDone = true;
         printDoneTask();
     }
 
     private void printDescription() {
-        Class classType = this.getClass();
         System.out.println("**********************************************************");
-        System.out.println("[" + classType.getName().charAt(0) + "]" + "[" + getStatusIcon() + "] " + this.description + this.time);
+        System.out.println("[" + this.getAlphabet() + "]" + "[" + getStatusIcon() + "] " + this.description + this.time);
         System.out.println("Now you have " + taskCount + " tasks in the list.");
         System.out.println("**********************************************************");
     }

@@ -48,26 +48,26 @@ public class Duke { //implement toString() next
                 } catch (StringIndexOutOfBoundsException e) {
                     System.out.println("☹ OOPS!!! The description is invalid, please try again.");
                 }
+            } else if (commandInput.startsWith("delete")) {
+
             } else {
                 System.out.println("Invalid command entered, please try again.");
             }
             commandInput = in.nextLine();
         }
-
         exitMessage();
     }
 
     private static void printList(Task[] taskList, int taskCount) {
         System.out.println("************************************************************");
-        if (taskCount > 0) {
+        if (taskCount == 0){
+            System.out.println("You have not entered any tasks at the moment! :)");
+        } else {
             System.out.println("Here are the tasks in your list:");
             for (int i = 0; i < taskCount; ++i) {
-                Class classType = taskList[i].getClass();
-                System.out.print(i + 1 + ". [" + classType.getName().charAt(0) + "]");
+                System.out.print(i + 1 + ". [" + taskList[i].getAlphabet() + "]");
                 System.out.println("[" + taskList[i].getStatusIcon() + "] " + taskList[i].description + taskList[i].time);
             }
-        } else {
-            System.out.println("You have not entered any tasks at the moment! :)");
         }
         System.out.println("************************************************************");
 
