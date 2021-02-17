@@ -40,6 +40,10 @@ public class DukeController {
                 add();
                 break;
             }
+            case DukeCommands.DELETE:{
+                delete();
+                break;
+            }
             default: {
                 System.out.println("Unknown error has occurred! Please try again.");
             }
@@ -52,6 +56,31 @@ public class DukeController {
             System.out.printf("%d.", i+1);
             tasks[i].printTask();
         }
+    }
+
+    public static void delete(){
+        // ensure task index to delete is in range
+        int taskNumberToDelete = Integer.parseInt(input.substring(7));
+        if(taskNumberToDelete>currentTaskLength || taskNumberToDelete < 1) {
+            System.out.println("The task number is out of range! Please check the " +
+                    "current tasks using the list command and enter a valid task number.");
+            return;
+        }
+        // delete the task
+        Task[] copy = new Task[100];
+        for (int i = 0, j = 0; i < currentTaskLength; i++) {
+            if (i != taskNumberToDelete - 1) {
+                copy[j++] = tasks[i];
+            }else{
+                System.out.println("Noted. I've removed this task:");
+                System.out.println("  ["
+                        + tasks[i].getStatusIcon() + "] "
+                        + tasks[i].getDescription());
+            }
+        }
+        tasks = copy;
+        currentTaskLength--;
+        System.out.printf("Now you have %d tasks in the list.\n", currentTaskLength);
     }
 
     public static void done(){

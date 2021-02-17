@@ -7,6 +7,7 @@ public class DukeCommandValidator {
     static int MINIMUN_TODO_LENGTH = 6;
     static int MINIMUM_EVENT_LENGTH = 12;
     static int MINIMUM_DEADLINE_LENGTH = 15;
+    static int MINIMUM_DELETE_LENGTH = 8;
 
     public static int getCommand(String input){
         if(input.equals("bye")){
@@ -21,6 +22,9 @@ public class DukeCommandValidator {
         if(isAddCommandValid(input) == true) {
             return DukeCommands.ADD;
         }
+        if(isDeleteCommandValid(input) == true) {
+            return DukeCommands.DELETE;
+        }
         return DukeCommands.INVALID_COMMAND;
     }
 
@@ -31,6 +35,21 @@ public class DukeCommandValidator {
             }
         }
         return false;
+    }
+
+    public static boolean isDeleteCommandValid(String input){
+        if(input.length()<MINIMUM_DELETE_LENGTH){
+            return false;
+        }
+        if(!input.substring(0,7).equals("delete ")){
+            return false;
+        }
+        // valid string after "delete "
+        String indexToDelete = input.substring(7);
+        if(!isInteger(indexToDelete)){
+            return false;
+        }
+        return true;
     }
 
     public static boolean isDeadlineValid(String input){

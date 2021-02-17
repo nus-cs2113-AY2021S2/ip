@@ -18,6 +18,7 @@ public class DukeUI {
                 "todo TASK_DESCRIPTION\n" +
                 "deadline TASK_DESCRIPTION /KEYWORD DATE_TIME\n" +
                 "event TASK_DESCRIPTION /KEYWORD DATE_TIME\n" +
+                "delete TASK_NUMBER\n" +
                 "bye: Exit\n" +
                 "(KEYWORD: any single word such as before, by, after...)\n\n");
     }
