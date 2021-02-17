@@ -24,6 +24,7 @@ public class DeleteCommand extends Command {
         }
         int taskIndex = Integer.parseInt(commandArgs) - 1;
         Task taskRemoved = tasks.remove(taskIndex);
+        Task.saveAllTasks(tasks);
         Menu.printDeleteTask(taskRemoved);
     }
 }
