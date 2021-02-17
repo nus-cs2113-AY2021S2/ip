@@ -1,25 +1,29 @@
 package duke;
-import duke.myExceptions.*;
-import duke.myTasks.*;
 
+import duke.myExceptions.InvalidInput;
+import duke.myExceptions.NoContent;
+import duke.myExceptions.NoTime;
+import duke.myTasks.Deadline;
+import duke.myTasks.Event;
+import duke.myTasks.Todo;
+
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
-import java.nio.file.FileAlreadyExistsException;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Scanner;
 import java.util.ArrayList;
-import java.io.File;
-import java.io.IOException;
-import java.io.FileNotFoundException;
+import java.util.Scanner;
 
-
+//built JAR file
 public class Duke {
 
     public static ArrayList<Todo> list = new ArrayList<>();
     public static int index = 0;
     public static boolean isRunning = true;
-    public static String filePath = "data/savefile.txt";
+    public static String filePath = "savefile.txt";
 
     public static void addToList(Todo task) {
         list.add(task);
@@ -86,8 +90,8 @@ public class Duke {
     public static void checkSave() {
         Path path = Paths.get(filePath); //creates Path instance
         try {
-            Path p= Files.createFile(path);     //creates file at specified location
-            System.out.println("File Created at Path: "+p);
+            Path p = Files.createFile(path);     //creates file at specified location
+
         } catch (IOException e) {
             loadSave();
         }

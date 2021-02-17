@@ -1,0 +1,3 @@
+[T][ ] eat
+[D][ ] sleep(by: 10pm)
+[E][ ] tutorial(at: 10am)
