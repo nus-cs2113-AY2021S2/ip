@@ -34,7 +34,7 @@ public class FileSaver {
     }
 
     public static void saveFile() {
-        String filePath = "data/duke.txt";
+        String filePath = "src/data/duke.txt";
         try {
             writeToFile(filePath);
             System.out.print("Data is saved\n");

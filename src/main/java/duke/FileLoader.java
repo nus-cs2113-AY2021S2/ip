@@ -22,7 +22,7 @@ public class FileLoader {
     private static final String DEADLINE_TYPE = "[D]";
     private static final String TODO_TYPE = "[T]";
 
-    private static final String FILE_DIRECTORY = "data";
+    private static final String FILE_DIRECTORY = "src/data";
 
 
     public static void readFileContents(String filePath) throws FileNotFoundException {
@@ -81,7 +81,7 @@ public class FileLoader {
     }
 
     public static void loadFile() {
-        String filePath = "data/duke.txt";
+        String filePath = "src/data/duke.txt";
         System.out.print("Loading last saved data...\n\n");
         try {
             readFileContents(filePath);
