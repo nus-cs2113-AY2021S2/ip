@@ -5,11 +5,12 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
 
-    private static Task[] tasks = new Task[100];
+    private static ArrayList<Task> tasks = new ArrayList<>();
     private static Scanner sc = new Scanner(System.in);
 
     public static void listTasks() {
@@ -17,28 +18,52 @@ public class Duke {
             System.out.println("No tasks yet!");
         } else {
             for (int i = 0; i < Task.totalTasks; i++) {
-                System.out.printf("%d.%s\n", i+1, tasks[i].toString());
+                System.out.printf("%d.%s\n", i+1, tasks.get(i).toString());
             }
         }
     }
 
-    public static void markTasksAsDone(String input) {
+    public static ArrayList<Integer> cleanInput(String input, String keyword) {
         String[] inputArray = input.split(" ");
+        ArrayList<Integer> indexes = new ArrayList<>();
 
         //completedIndex holds the index of valid integer(s) in inputArray (indicating index in tasklist)
         int completedIndex;
         for (String word: inputArray) {
-            if (word.equals("done")) {
+            if (word.equals(keyword)) {
                 continue;
             } else {
                 completedIndex = Integer.parseInt(word);
                 //ensure that the index given is valid
                 if (completedIndex > 0 && completedIndex <= Task.totalTasks){
-                    tasks[completedIndex - 1].markAsDone();
+//                    tasks.get(completedIndex - 1).markAsDone();
+                    indexes.add(completedIndex-1);
                 } else {
-                    System.out.printf("duke.task.Task %d does not exist! Enter 'list' to view tasklist :)\n", completedIndex);
+                    System.out.printf("Task %d does not exist! Enter 'list' to view tasklist :)\n", completedIndex);
                 }
             }
+        }
+
+        return indexes;
+    }
+
+    public static void markTasksAsDone(ArrayList<Integer> indexes) {
+        for (Integer index : indexes) {
+            tasks.get(index).markAsDone();
+        }
+    }
+
+    public static void printNumTasks() {
+        System.out.println("You now have " + Task.totalTasks + " tasks in your tasklist.");
+    }
+
+    public static void deleteTasks(ArrayList<Integer> indexes) {
+        for (Integer index : indexes) {
+            System.out.println("Okay, I've deleted this task:");
+            System.out.println(tasks.get(index).toString());
+            Task.totalTasks -= 1;
+            tasks.remove(index);
+            printNumTasks();
         }
     }
 
@@ -77,28 +102,28 @@ public class Duke {
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException(TaskType.DEADLINE);
             }
-            tasks[Task.totalTasks] = new Deadline(inputArray[0], inputArray[1]);
+            tasks.add(Task.totalTasks, new Deadline(inputArray[0], inputArray[1]));
         } else if (input.contains("event")) {
             try {
                 inputArray = extractDetailsFromInput(input, "event");
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException(TaskType.EVENT);
             }
-            tasks[Task.totalTasks] = new Event(inputArray[0], inputArray[1]);
+            tasks.add(Task.totalTasks, new Event(inputArray[0], inputArray[1]));
         } else if (input.contains("todo")){
             try {
                 inputArray = extractDetailsFromInput(input, "todo");
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException(TaskType.TODO);
             }
-            tasks[Task.totalTasks] = new Todo(inputArray[0]);
+            tasks.add(Task.totalTasks, new Todo(inputArray[0]));
         } else {
             throw new DukeException(TaskType.INVALID);
         }
 
         System.out.println("I have added this task:" );
-        System.out.println(tasks[Task.totalTasks-1].toString());
-        System.out.println("You now have " + Task.totalTasks + " tasks in your tasklist.");
+        System.out.println(tasks.get(Task.totalTasks-1).toString());
+        printNumTasks();
     }
 
     public static void main(String[] args) {
@@ -112,11 +137,20 @@ public class Duke {
         System.out.println("What can I do for you today?");
 
         String input = sc.nextLine();
+
         while (!input.equals("bye")) {
             if (input.equals("list")) {
                 listTasks();
             } else if (input.contains("done")) {
-                markTasksAsDone(input);
+                //this keeps track of indexes that user calls for actions on
+                ArrayList<Integer> indexes = new ArrayList<>();
+                indexes = cleanInput(input, "done");
+                markTasksAsDone(indexes);
+            } else if (input.contains("delete")) {
+                //this keeps track of indexes that user calls for actions on
+                ArrayList<Integer> indexes = new ArrayList<>();
+                indexes = cleanInput(input, "delete");
+                deleteTasks(indexes);
             } else {
                 try {
                     addTask(input);

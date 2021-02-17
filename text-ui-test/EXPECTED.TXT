@@ -26,4 +26,10 @@ Great! I've marked this task as done:
 2.[D][X] return book (by: Sunday)
 3.[E][ ] project meeting (at: Mon 2-4pm)
 Task 6 does not exist! Enter 'list' to view tasklist :)
+Task 6 does not exist! Enter 'list' to view tasklist :)
+Okay, I've deleted this task:
+[E][ ] project meeting (at: Mon 2-4pm)
+You now have 2 tasks in your tasklist.
+1.[T][ ] borrow book
+2.[D][X] return book (by: Sunday)
 Goodbye. See you again soon :)
