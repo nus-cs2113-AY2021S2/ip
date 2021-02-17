@@ -21,7 +21,7 @@ public class Duke {
         Task[] anArray = new Task[100];
         while (!line.equals("bye")) {
             while(!line.equals("list")) {
-                if (line.contains("done")){
+                if (line.startsWith("done")){
                     int i=Integer.parseInt(line.substring(line.length()-1));
                     anArray[i-1].markAsDone();
                     System.out.println("____________________________________________________________\n");
@@ -29,38 +29,64 @@ public class Duke {
                     System.out.println(anArray[i-1].toString() + "\n");
                     System.out.println("____________________________________________________________\n");
                 }
-                else if (line.contains("todo")) {
-                    System.out.println("____________________________________________________________\n");
-                    Todo t = new Todo(line.replace("todo ",""));
-                    anArray[index] = t;
-                    index++;
-                    System.out.println("Got it. I've added this task:\n");
-                    System.out.println(t.toString() + "\n");
-                    System.out.println("Now you have " + index + " tasks in the list.\n");
-                    System.out.println("____________________________________________________________\n");
+                else if (line.startsWith("todo")) {
+                    try {
+                        line.substring(line.indexOf(" "));
+                        System.out.println("____________________________________________________________\n");
+                        Todo t = new Todo(line.replace("todo ", ""));
+                        anArray[index] = t;
+                        index++;
+                        System.out.println("Got it. I've added this task:\n");
+                        System.out.println(t.toString() + "\n");
+                        System.out.println("Now you have " + index + " tasks in the list.\n");
+                        System.out.println("____________________________________________________________\n");
+                    } catch (java.lang.StringIndexOutOfBoundsException e) {
+                        System.out.println("____________________________________________________________\n");
+                        System.out.println("☹ OOPS!!! The description of a " + line + " cannot be empty.\n");
+                        System.out.println("____________________________________________________________\n");
+                    }
                 }
-                else if (line.contains("event")) {
-                    System.out.println("____________________________________________________________\n");
-                    line = line.replace("event", "");
-                    String[] parts = line.split("/at");
-                    Event t = new Event(parts[0].trim(), parts[1].trim());
-                    anArray[index] = t;
-                    index++;
-                    System.out.println("Got it. I've added this task:\n");
-                    System.out.println(t.toString() + "\n");
-                    System.out.println("Now you have " + index + " tasks in the list.\n");
-                    System.out.println("____________________________________________________________\n");
+                else if (line.startsWith("event")) {
+                    try {
+                        line.substring(line.indexOf(" "));
+                        System.out.println("____________________________________________________________\n");
+                        line = line.replace("event", "");
+                        String[] parts = line.split("/at");
+                        Event t = new Event(parts[0].trim(), parts[1].trim());
+                        anArray[index] = t;
+                        index++;
+                        System.out.println("Got it. I've added this task:\n");
+                        System.out.println(t.toString() + "\n");
+                        System.out.println("Now you have " + index + " tasks in the list.\n");
+                        System.out.println("____________________________________________________________\n");
+                    } catch (java.lang.StringIndexOutOfBoundsException e) {
+                        System.out.println("____________________________________________________________\n");
+                        System.out.println("☹ OOPS!!! The description of a " + line + " cannot be empty.\n");
+                        System.out.println("____________________________________________________________\n");
+                    }
                 }
-                else if (line.contains("deadline")) {
+                else if (line.startsWith("deadline")) {
+                    try {
+                        line.substring(line.indexOf(" "));
+                        System.out.println("____________________________________________________________\n");
+                        line = line.replace("deadline", "");
+                        String[] parts = line.split("/by");
+                        Deadline t = new Deadline(parts[0].trim(), parts[1].trim());
+                        anArray[index] = t;
+                        index++;
+                        System.out.println("Got it. I've added this task:\n");
+                        System.out.println(t.toString() + "\n");
+                        System.out.println("Now you have " + index + " tasks in the list.\n");
+                        System.out.println("____________________________________________________________\n");
+                    } catch (java.lang.StringIndexOutOfBoundsException e) {
+                        System.out.println("____________________________________________________________\n");
+                        System.out.println("☹ OOPS!!! The description of a " + line + " cannot be empty.\n");
+                        System.out.println("____________________________________________________________\n");
+                        }
+                }
+                else{
                     System.out.println("____________________________________________________________\n");
-                    line = line.replace("deadline", "");
-                    String[] parts = line.split("/by");
-                    Deadline t = new Deadline(parts[0].trim(), parts[1].trim());
-                    anArray[index] = t;
-                    index++;
-                    System.out.println("Got it. I've added this task:\n");
-                    System.out.println(t.toString() + "\n");
-                    System.out.println("Now you have " + index + " tasks in the list.\n");
+                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
                     System.out.println("____________________________________________________________\n");
                 }
                 line = in.nextLine();
