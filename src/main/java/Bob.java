@@ -8,7 +8,12 @@ import java.util.Scanner;
 
 public class Bob {
     public static final String LINE_STRING = "____________________________________________________________\n";
+    public static final String DATA_DELIMITER = " @_@ ";
+    public static final String DATA_DIRECTORY = "data";
+    public static final String SAVE_FILE_NAME = "duke.txt";
+    public static final String DIRECTORY_HOME = System.getProperty("user.home");
     public static TaskList taskList = new TaskList();
+
 
     public static void main(String[] args) {
         welcomeMessage();
@@ -26,22 +31,21 @@ public class Bob {
     }
 
     private static void loadFile() {
-        String home = System.getProperty("user.home");
-        createDataDirectory(home);
-        openFile(home);
+        createDataDirectory();
+        openFile();
     }
 
-    private static void createDataDirectory(String home) {
-        Path path = Paths.get(home, "data");
+    private static void createDataDirectory() {
+        Path path = Paths.get(DIRECTORY_HOME, "data");
         try {
             Files.createDirectory(path);
         } catch (IOException e) {
-            // printIOException();
+            // printIOException(); TODO: figure out why IO Exception is triggered here
         }
     }
 
-    private static void openFile(String home) {
-        Path path = Paths.get(home, "data", "duke.txt");
+    private static void openFile() {
+        Path path = Paths.get(DIRECTORY_HOME, DATA_DIRECTORY, SAVE_FILE_NAME);
         try {
             Files.createFile(path);
         } catch (FileAlreadyExistsException  e) {
@@ -67,7 +71,7 @@ public class Bob {
     }
 
     private static void loadTask(String taskString) throws NoSuchMethodException, NumberFormatException{
-        String[] taskStringArray = taskString.split(" @_@ ");
+        String[] taskStringArray = taskString.split(DATA_DELIMITER);
         Command command = getCommandType(taskStringArray[0]);
         String isDone = taskStringArray[1];
         String label = taskStringArray[2];
@@ -90,27 +94,17 @@ public class Bob {
         }
     }
 
-    /*
-     * Converts a task to the file data format
-     */
-//    private static String saveTask(Task task) {
-//        String
-//    }
-
-    private static void printNumberFormatException() {
-        String exceptionMessage = LINE_STRING +
-                " 😥 Number format exception encountered! Input may be corrupted\n" +
-                LINE_STRING;
-        System.out.println(exceptionMessage);
+    private static void saveData() {
+        Path path = Paths.get(DIRECTORY_HOME, DATA_DIRECTORY, SAVE_FILE_NAME);
+        try {
+            Files.deleteIfExists(path);
+            Files.createFile(path);
+            List<String> taskStrings = taskList.saveTaskList();
+            Files.write(path, taskStrings);
+        } catch (IOException e) {
+            printIOException();
+        }
     }
-
-    private static void printIOException() {
-        String exceptionMessage = LINE_STRING +
-                " 😥 IO issue encountered! Unable to read file\n" +
-                LINE_STRING;
-        System.out.println(exceptionMessage);
-    }
-
 
     private static void scanInput() {
         Scanner in = new Scanner(System.in);
@@ -135,6 +129,7 @@ public class Bob {
                 inputString = in.nextLine();
                 commandType = getCommandType(inputString);
                 isScanning = scanSwitch(inputString, commandType);
+                saveData();
             } catch (java.util.InputMismatchException e) {
                 printInputMismatch();
             } catch (NoSuchMethodException  e) {
@@ -145,6 +140,20 @@ public class Bob {
                 printNoCommandFormat(commandType);
             }
         }
+    }
+
+    private static void printNumberFormatException() {
+        String exceptionMessage = LINE_STRING +
+                " 😥 Number format exception encountered! Input may be corrupted\n" +
+                LINE_STRING;
+        System.out.println(exceptionMessage);
+    }
+
+    private static void printIOException() {
+        String exceptionMessage = LINE_STRING +
+                " 😥 IO issue encountered! Unable to read file\n" +
+                LINE_STRING;
+        System.out.println(exceptionMessage);
     }
 
     private static void printInputMismatch() {

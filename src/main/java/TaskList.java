@@ -1,7 +1,8 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class TaskList {
-    private ArrayList<Task> tasks;
+    private final ArrayList<Task> tasks;
     protected static final String LINE_STRING = "____________________________________________________________\n";
 
     public TaskList() {
@@ -66,5 +67,13 @@ public class TaskList {
         System.out.println("Task marked as done, gg ez");
         System.out.println("  " + this.getStatus(index));
         System.out.println(LINE_STRING);
+    }
+
+    public List<String> saveTaskList() {
+        List<String> taskStrings = new ArrayList<>();
+        for (Task task: tasks) {
+            taskStrings.add(task.formatSaveTask());
+        }
+        return taskStrings;
     }
 }
