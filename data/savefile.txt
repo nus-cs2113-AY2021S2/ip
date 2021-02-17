@@ -1,0 +1,5 @@
+[T][ ] eat
+[T][ ] sleep
+[D][ ] eat(by: time))
+[E][ ] sleep(at: time1))
+[D][ ] study(by: 10pm))

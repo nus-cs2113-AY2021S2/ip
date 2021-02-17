@@ -1,8 +1,17 @@
 package duke;
 import duke.myExceptions.*;
 import duke.myTasks.*;
+
+import java.io.FileWriter;
+import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.IOException;
+import java.io.FileNotFoundException;
 
 
 public class Duke {
@@ -10,6 +19,7 @@ public class Duke {
     public static ArrayList<Todo> list = new ArrayList<>();
     public static int index = 0;
     public static boolean isRunning = true;
+    public static String filePath = "data/savefile.txt";
 
     public static void addToList(Todo task) {
         list.add(task);
@@ -40,6 +50,7 @@ public class Duke {
         switch (command) {
         case "bye":
             isRunning = false;
+            save();
             break;
         case "list":
             printList();
@@ -72,6 +83,60 @@ public class Duke {
         }
     }
 
+    public static void checkSave() {
+        Path path = Paths.get(filePath); //creates Path instance
+        try {
+            Path p= Files.createFile(path);     //creates file at specified location
+            System.out.println("File Created at Path: "+p);
+        } catch (IOException e) {
+            loadSave();
+        }
+    }
+
+    public static void loadSave() {
+        File f = new File(filePath);
+        try {Scanner s = new Scanner(f); // create a Scanner using the File as the source
+            while (s.hasNext()) {
+                String line = s.nextLine();
+                switch(line.charAt(1)) {
+                case 'T':
+                    Todo todo = new Todo(line.substring(7));
+                    addToList(todo);
+                    break;
+                case 'D':
+                    int add = line.indexOf(':') - 3;
+                    Deadline deadline = new Deadline(line.substring(7, add + 1) + "/by" + line.substring(add + 4));
+                    addToList(deadline);
+                    break;
+                case 'E':
+                    int add1 = line.indexOf(':') - 3;
+                    Event event = new Event(line.substring(7, add1 + 1) + "/at" + line.substring(add1 + 4));
+                    addToList(event);
+                    break;
+                default:
+                    break;
+                }
+            }
+        } catch (FileNotFoundException | NoContent | NoTime e) {
+            System.out.println("error loading save");
+        }
+    }
+
+    public static void save() {
+        try {
+            FileWriter fw = new FileWriter(filePath);
+            fw.write("");//clear file
+            fw.close();
+            FileWriter f = new FileWriter(filePath, true); // create a FileWriter in append mode
+            for (int i = 0; i < index; i++) {
+                f.write(list.get(i).toString() + "\n");
+            }
+            f.close();
+        } catch (IOException e) {
+            System.out.println("cannot write to file");
+        }
+    }
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -80,6 +145,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         System.out.println("What can I do for you?");
+        checkSave();
         Scanner in = new Scanner(System.in);
         String input;
         do {
