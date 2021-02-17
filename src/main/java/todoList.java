@@ -1,36 +1,32 @@
 import java.util.ArrayList;
 
-public class todo {
+public class todoList {
 
-
-    private ArrayList<improvedtask> taskList = new ArrayList<>();
-
+    private ArrayList<improvedTask> taskList = new ArrayList<>();
     private int totalTasks;
     private int leftoverTasks;
 
-
-
-    public todo(){
+    public todoList(){
         this.totalTasks = 0;
         this.leftoverTasks = 0;
     }
 
-    public String addTask(String desc, listTypes type, String date){
-        taskList.add (new improvedtask(desc, type, date));
+    public String addTask(String desc, listTypes type, String date){ // adds deadline or event type task and returns confirmation
+        taskList.add (new improvedTask(desc, type, date));
         totalTasks++;
         leftoverTasks++;
         return "Task: [" + desc + "] has been added."
         + "\nYou now have " + this.tasksLeft() + " task(s) left undone in the list!";
     }
-    public String addTask(String desc, listTypes type){
-        taskList.add(new improvedtask(desc, type));
+    public String addTask(String desc, listTypes type){ // adds todo type task and returns confirmation
+        taskList.add(new improvedTask(desc, type));
         totalTasks++;
         leftoverTasks++;
         return "Task: [" + desc + "] has been added."
                 + "\nYou now have " + this.tasksLeft() + " task(s) left undone in the list!";
     }
 
-    public String listItems(){
+    public String listItems(){ // lists all current tasks
         String output = "";
         if(this.totalTasks == 0){
             return "Great! There are no tasks to show!";
@@ -53,7 +49,7 @@ public class todo {
         return output;
     }
 
-    public String resolveTask(String num){
+    public String resolveTask(String num){ // resolves task and returns confirmation if task is not resolved
         Integer taskNum = Integer.parseInt(num) - 1;
         if (taskList.get(taskNum).resolved){
             return "Task is already done!";
@@ -65,14 +61,17 @@ public class todo {
 
     }
 
-    public int tasksLeft(){
+    public int tasksLeft(){ // returns number of undone tasks
         return this.leftoverTasks;
     }
 
-    public String deleteTask(String num){
+    public int tasksTotal(){ // returns total tasks in list
+        return this.totalTasks;
+    }
 
+    public String deleteTask(String num){ // delete the specified task
         Integer taskNum = Integer.parseInt(num) - 1;
-        improvedtask temp = taskList.get(taskNum);
+        improvedTask temp = taskList.get(taskNum);
         taskList.remove(temp);
         totalTasks--;
         if(!temp.resolved) {
@@ -85,15 +84,9 @@ public class todo {
                    + " " + temp.displayDate() + "\n"
                    + "Now you have " + totalTasks + " task(s) total left in the list!";
         return out;
-
     }
 
-    public int tasksTotal(){
-        return this.totalTasks;
-    }
-
-
-    public String tasksUpdate(){
+    public String tasksUpdate(){ // returns current lists of tasks that can be parsed by updateFile method
         String out = "";
         for (int i = 0; i < totalTasks; i++){
             if (taskList.get(i).displayType().equals("[T]")) {
@@ -109,9 +102,4 @@ public class todo {
         }
         return out;
     }
-
-
-
-
-
 }

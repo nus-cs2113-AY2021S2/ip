@@ -1,19 +1,19 @@
-public class improvedtask extends task {
+public class improvedTask extends task {
     private listTypes type;
     private String date;
 
-    public improvedtask(String desc, listTypes type, String date){
+    public improvedTask(String desc, listTypes type, String date){
         super(desc);
         this.type = type;
         this.date = date;
     }
-    public improvedtask(String desc, listTypes type){
+    public improvedTask(String desc, listTypes type){
         super(desc);
         this.type = type;
         this.date = "";
     }
 
-    public String displayType(){
+    public String displayType(){ // method to show the type of task
         String out = "";
         switch(this.type){
         case todo:
@@ -30,7 +30,7 @@ public class improvedtask extends task {
         return  out;
     }
 
-    public String displayDate(){
+    public String displayDate(){ // method to show formatted date
         String out = "";
         switch (this.type){
         case deadline:
@@ -45,10 +45,10 @@ public class improvedtask extends task {
         return out;
     }
 
-    public String displayDescription(){
+    public String displayDescription(){ // method to access description
         return description;
     }
-    public String displayResolved(){
+    public String displayResolved(){ // method to show if task is resolved
 
         if (this.resolved) {
             return "[X]";
