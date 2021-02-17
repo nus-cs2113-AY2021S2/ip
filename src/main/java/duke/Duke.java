@@ -5,6 +5,7 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -15,8 +16,9 @@ public class Duke {
     private static final int EVENT_LENGTH = 6;
     private static final int BY_LENGTH = 3;
     private static final int AT_LENGTH = 3;
+    private static final int DELETE_LENGTH = 7;
     private static String exceptionGreeting = "\ud83d\ude16 OOPS!!! ";
-    private static Task[] tasks = new Task[100];
+    private static ArrayList<Task> tasks = new ArrayList<>();
     private static int taskCounter = 0;
 
     public static void main(String[] args) {
@@ -42,9 +44,23 @@ public class Duke {
                 addNewDeadline(line);
             } else if (line.startsWith("event")) {
                 addNewEvent(line);
+            } else if (line.startsWith("delete")) {
+                removeTask(line);
             } else {
                 printInvalidInput();
             }
+        }
+    }
+
+    private static void removeTask(String line) {
+        try {
+            int index = Integer.parseInt(line.substring(DELETE_LENGTH)) - 1;
+            Task deleted = tasks.get(index);
+            tasks.remove(index);
+            taskCounter--;
+            printRemoveTask(deleted);
+        } catch (IndexOutOfBoundsException e) {
+            printInvalidTask();
         }
     }
 
@@ -60,7 +76,7 @@ public class Duke {
             String description = line.substring(EVENT_LENGTH, index - 1);
             String at = line.substring(index + AT_LENGTH).trim();
             Task newTask = new Event(description, at);
-            tasks[taskCounter] = newTask;
+            tasks.add(newTask);
             taskCounter++;
             printNewTask();
         } catch (StringIndexOutOfBoundsException e) {
@@ -74,7 +90,7 @@ public class Duke {
             String description = line.substring(DEADLINE_LENGTH, index - 1);
             String by = line.substring(index + BY_LENGTH).trim();
             Task newTask = new Deadline(description, by);
-            tasks[taskCounter] = newTask;
+            tasks.add(newTask);
             taskCounter++;
             printNewTask();
         } catch (StringIndexOutOfBoundsException e) {
@@ -86,7 +102,7 @@ public class Duke {
         try {
             String description = line.substring(TODO_LENGTH);
             Task newTask = new ToDo(description);
-            tasks[taskCounter] = newTask;
+            tasks.add(newTask);
             taskCounter++;
             printNewTask();
         } catch (StringIndexOutOfBoundsException e) {
@@ -103,9 +119,9 @@ public class Duke {
     private static void markAsDone(String line) {
         try {
             int index = Integer.parseInt(line.substring(DONE_LENGTH)) - 1;
-            tasks[index].markAsDone();
+            tasks.get(index).markAsDone();
             printDoneTask(index);
-        } catch (NullPointerException e) {
+        } catch (IndexOutOfBoundsException e) {
             printInvalidTask();
         }
     }
@@ -120,7 +136,20 @@ public class Duke {
         printHorizontalLine();
         System.out.println("\tNice! I've marked this task as done:");
         System.out.print("\t  ");
-        System.out.println(tasks[index]);
+        System.out.println(tasks.get(index));
+        printHorizontalLine();
+    }
+
+    private static void printRemoveTask(Task t) {
+        printHorizontalLine();
+        System.out.println("\tNoted. I've removed this task:");
+        System.out.print("\t  ");
+        System.out.println(t);
+        if (taskCounter == 1) {
+            System.out.println("\tNow you have " + taskCounter + " task in the list.");
+        } else {
+            System.out.println("\tNow you have " + taskCounter + " tasks in the list.");
+        }
         printHorizontalLine();
     }
 
@@ -129,7 +158,7 @@ public class Duke {
         System.out.println("\tHere are the tasks in your list:");
         for (int i = 1; i <= taskCounter; i++) {
             System.out.print("\t" + i + ". ");
-            System.out.println(tasks[i - 1]);
+            System.out.println(tasks.get(i - 1));
         }
         printHorizontalLine();
     }
@@ -137,7 +166,7 @@ public class Duke {
     private static void printNewTask() {
         printHorizontalLine();
         System.out.println("\tGot it. I've added this task:");
-        System.out.println("\t  " + tasks[taskCounter - 1]);
+        System.out.println("\t  " + tasks.get(taskCounter - 1));
         if (taskCounter == 1) {
             System.out.println("\tNow you have " + taskCounter + " task in the list.");
         } else {
