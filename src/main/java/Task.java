@@ -20,10 +20,14 @@ public abstract class Task {
         isDone = true;
     }
     public abstract String getType();
+    public String getStatusNum() { return (isDone ? "1" : "0");}
 
 
     public String toString(){
         return "description: " + description;
     }
+    public String toFileString(){
+        return null;
+    };
 
 }

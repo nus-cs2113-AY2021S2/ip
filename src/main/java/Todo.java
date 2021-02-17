@@ -21,4 +21,9 @@ public class Todo extends Task {
     public String toString() {
         return "[" + getType() + "]" + "[" + getStatusIcon() + "] " + description;
     }
+
+    @Override
+    public String toFileString() {
+        return getType() + " | " + getStatusNum() +" | " + description;
+    }
 }
