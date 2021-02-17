@@ -1,3 +1,8 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import tasks.Task;
 import tasks.Deadline;
@@ -5,21 +10,19 @@ import tasks.Event;
 import tasks.ToDo;
 
 public class Duke {
-    public static void printList(Task[] Tasks, Integer totalTasks){
-        for (Integer i=0; i<totalTasks; ++i){
-            Task task = Tasks[i];
+    public static void printList(ArrayList<Task> Tasks){
+        for (int i=0; i<Tasks.size(); ++i){
+            Task task = Tasks.get(i);
             Integer taskNumber = i+1;
             System.out.println(taskNumber + "." + task.toString());
         }
     }
 
-    public static int printTaskAdded(Task[] Tasks, Integer totalTasks){
+    public static void printTaskAdded(ArrayList<Task> Tasks){
         printDashLine();
-        System.out.println(" Got it. I've added this task:\n" + Tasks[totalTasks].toString());
-        totalTasks++;
-        System.out.println("Now you have " + totalTasks + " tasks in the list.");
+        System.out.println(" Got it. I've added this task:\n" + Tasks.get(Tasks.size()-1).toString());
+        System.out.println("Now you have " + Tasks.size() + " tasks in the list.");
         printDashLine();
-        return totalTasks;
     }
 
     public static void printDashLine(){
@@ -32,7 +35,8 @@ public class Duke {
         boolean isTodo = words[0].equals("todo");
         boolean isDeadline = words[0].equals("deadline");
         boolean isEvent = words[0].equals("event");
-        boolean invalidCommand = !(isList || isDone || isTodo || isDeadline || isEvent);
+        boolean isDelete = words[0].equals("delete");
+        boolean invalidCommand = !(isList || isDone || isTodo || isDeadline || isEvent || isDelete);
         if(invalidCommand) {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
@@ -52,9 +56,49 @@ public class Duke {
         }
     }
 
+    public static void loadFile(ArrayList<Task> tasks) throws FileNotFoundException {
+        File f = new File("tasks.txt");
+        if (!f.exists()) {
+            throw new FileNotFoundException();
+        }
+        Scanner s = new Scanner(f);
+        while (s.hasNext()) {
+            String input = s.nextLine();
+            String[] words = input.split(" ");
+            boolean isTodo = words[0].equals("T");
+            boolean isDeadline = words[0].equals("D");
+            boolean isEvent = words[0].equals("E");
+            boolean isDone = words[1].equals("Y");
+            input = input.substring(4);
+            words = input.split("/d");
+            if (isDeadline) {
+                Deadline deadline = new Deadline(words[0], words[1]);
+                tasks.add(deadline);
+            }
+            else if (isEvent) {
+                Event event = new Event(words[0], words[1]);
+                tasks.add(event);
+            }
+            else if (isTodo) {
+                ToDo toDo = new ToDo(words[0]);
+                tasks.add(toDo);
+            }
+            if (isDone) {
+                tasks.get(tasks.size()-1).taskComplete();
+            }
+        }
+    }
+
+    public static void saveFile(String filepath, ArrayList<Task> tasks) throws IOException {
+        FileWriter fw = new FileWriter(filepath);
+        for (Task task: tasks) {
+            fw.write(task.toSaveFormat());
+        }
+        fw.close();
+    }
+
     public static void main(String[] args) {
-        Integer totalTasks = 0;
-        Task[] Tasks =  new Task[100];
+        ArrayList<Task> Tasks =  new ArrayList<Task>();
         String line;
         String INTRO_MESSAGE = " Hello! I'm Duke\n" + " What can I do for you?";
         String OUTRO_MESSAGE = "Bye. Hope to see you again soon!";
@@ -62,6 +106,12 @@ public class Duke {
         printDashLine();
         System.out.println(INTRO_MESSAGE);
         printDashLine();
+        try {
+            loadFile(Tasks);
+        } catch (FileNotFoundException e) {
+            System.out.println("File Not Found");
+            System.out.println("Creating new file...");
+        }
         line = Input.nextLine();
         boolean inSystem = !line.equals("bye");
         while(inSystem){
@@ -71,6 +121,7 @@ public class Duke {
             boolean isTodo = words[0].equals("todo");
             boolean isDeadline = words[0].equals("deadline");
             boolean isEvent = words[0].equals("event");
+            boolean isDelete = words[0].equals("delete");
             try {
                 validateInput(words);
             } catch (Exception e){
@@ -90,14 +141,22 @@ public class Duke {
                 }
                 printDashLine();
                 System.out.println("Here are the tasks in your list:");
-                printList(Tasks, totalTasks);
+                printList(Tasks);
                 printDashLine();
             }
             else if(isDone) {
                 int taskNumber = Integer.parseInt(words[1]) - 1;
-                Tasks[taskNumber].taskComplete();
+                Tasks.get(taskNumber).taskComplete();
                 printDashLine();
-                System.out.println("Nice! I've marked this task as done:\n" + " " + Tasks[taskNumber].getStatus() + " " + Tasks[taskNumber].getDescription());
+                System.out.println("Nice! I've marked this task as done:\n" + " " + Tasks.get(taskNumber).toString());
+                printDashLine();
+            }
+            else if(isDelete) {
+                int taskNumber = Integer.parseInt(words[1]) - 1;
+                printDashLine();
+                System.out.println("Noted. I've removed this task:\n" + Tasks.get(taskNumber).toString());
+                Tasks.remove(taskNumber);
+                System.out.println("Now you have " + Tasks.size() + " tasks in the list.");
                 printDashLine();
             }
             else if (isTodo){
@@ -111,25 +170,31 @@ public class Duke {
                 }
                 line = line.replace("todo ", "");
                 ToDo toDo = new ToDo(line);
-                Tasks[totalTasks] = toDo;
-                totalTasks = printTaskAdded(Tasks,totalTasks);
+                Tasks.add(toDo);
+                printTaskAdded(Tasks);
             }
             else if (isDeadline){
                 line = line.replace("deadline ", "");
                 words = line.split("/by ");
                 Deadline deadline = new Deadline(words[0], words[1]);
-                Tasks[totalTasks] = deadline;
-                totalTasks = printTaskAdded(Tasks,totalTasks);
+                Tasks.add(deadline);
+                printTaskAdded(Tasks);
             }
             else if (isEvent) {
                 line = line.replace("event ", "");
                 words = line.split("/at ");
                 Event event = new Event(words[0], words[1]);
-                Tasks[totalTasks] = event;
-                totalTasks = printTaskAdded(Tasks, totalTasks);
+                Tasks.add(event);
+                printTaskAdded(Tasks);
             }
             line = Input.nextLine();
             inSystem = !line.equals("bye");
+        }
+        String file = "tasks.txt";
+        try{
+            saveFile(file, Tasks);
+        } catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
         }
         printDashLine();
         System.out.println(OUTRO_MESSAGE);

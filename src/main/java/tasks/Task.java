@@ -25,6 +25,10 @@ public class Task {
         return getStatus() + " " + getDescription();
     }
 
+    public String toSaveFormat() {
+        return description;
+    }
+
     public void taskComplete() {
         isDone = true;
     }
