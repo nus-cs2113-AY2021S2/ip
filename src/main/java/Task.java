@@ -1,6 +1,7 @@
 public class Task {
     private String description;
     private boolean isDone;
+    public String natureOfTask;
 
     public Task(String description){
         this.description = description;
@@ -17,6 +18,18 @@ public class Task {
 
     public void markAsDone(){
         this.isDone = true;
+    }
+
+    public String getNatureOfTask(){
+        return this.natureOfTask;
+    }
+
+    public Boolean getIsDone(){
+        return this.isDone;
+    }
+
+    public String getSpecialDescription(){
+        return "";
     }
 
     public String toString(){
