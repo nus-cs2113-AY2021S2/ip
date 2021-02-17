@@ -24,4 +24,6 @@ public abstract class Task {
     public void setIsCompleted(boolean isCompleted) { this.isCompleted = isCompleted; }
 
     public abstract void printTask();
+
+    public abstract String formatTaskToWrite();
 }
