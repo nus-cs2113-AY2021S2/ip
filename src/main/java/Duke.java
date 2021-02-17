@@ -5,11 +5,12 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
 
-    private static Task[] tasks = new Task[100];
+    private static ArrayList<Task> tasks = new ArrayList<>();
     private static Scanner sc = new Scanner(System.in);
 
     public static void listTasks() {
@@ -17,7 +18,7 @@ public class Duke {
             System.out.println("No tasks yet!");
         } else {
             for (int i = 0; i < Task.totalTasks; i++) {
-                System.out.printf("%d.%s\n", i+1, tasks[i].toString());
+                System.out.printf("%d.%s\n", i+1, tasks.get(i).toString());
             }
         }
     }
@@ -34,9 +35,9 @@ public class Duke {
                 completedIndex = Integer.parseInt(word);
                 //ensure that the index given is valid
                 if (completedIndex > 0 && completedIndex <= Task.totalTasks){
-                    tasks[completedIndex - 1].markAsDone();
+                    tasks.get(completedIndex - 1).markAsDone();
                 } else {
-                    System.out.printf("duke.task.Task %d does not exist! Enter 'list' to view tasklist :)\n", completedIndex);
+                    System.out.printf("Task %d does not exist! Enter 'list' to view tasklist :)\n", completedIndex);
                 }
             }
         }
@@ -77,27 +78,27 @@ public class Duke {
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException(TaskType.DEADLINE);
             }
-            tasks[Task.totalTasks] = new Deadline(inputArray[0], inputArray[1]);
+            tasks.add(Task.totalTasks, new Deadline(inputArray[0], inputArray[1]));
         } else if (input.contains("event")) {
             try {
                 inputArray = extractDetailsFromInput(input, "event");
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException(TaskType.EVENT);
             }
-            tasks[Task.totalTasks] = new Event(inputArray[0], inputArray[1]);
+            tasks.add(Task.totalTasks, new Event(inputArray[0], inputArray[1]));
         } else if (input.contains("todo")){
             try {
                 inputArray = extractDetailsFromInput(input, "todo");
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException(TaskType.TODO);
             }
-            tasks[Task.totalTasks] = new Todo(inputArray[0]);
+            tasks.add(Task.totalTasks, new Todo(inputArray[0]));
         } else {
             throw new DukeException(TaskType.INVALID);
         }
 
         System.out.println("I have added this task:" );
-        System.out.println(tasks[Task.totalTasks-1].toString());
+        System.out.println(tasks.get(Task.totalTasks-1).toString());
         System.out.println("You now have " + Task.totalTasks + " tasks in your tasklist.");
     }
 
