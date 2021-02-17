@@ -10,6 +10,7 @@ public class Todo extends Task {
         System.out.println("[T][" + getStatusIcon() + "] " + description);
     }
     public String saveTask() {
-        return isDone + " todo " + description;
+        String done = String.valueOf(isDone);
+        return done + " todo " + description + "\n";
     }
 }

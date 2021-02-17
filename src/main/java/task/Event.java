@@ -13,6 +13,7 @@ public class Event extends Task {
         System.out.println("[E][" + getStatusIcon() + "] " + description + "(at:" + eventDate +")");
     }
     public String saveTask() {
-        return isDone + " event " + description + " /by " + eventDate;
+        String done = String.valueOf(isDone);
+        return done + " event " + description + " /by " + eventDate + "\n";
     }
 }

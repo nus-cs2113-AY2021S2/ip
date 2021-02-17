@@ -23,6 +23,9 @@ public class Duke {
     static final String INVALID_EVENT = "OOPS!!! Invalid event description\n" + DIVIDER_LINE;
     static final String LIST_EMPTY = "The list is currently empty!\n" + DIVIDER_LINE;
     static final String LIST_FULL = "The list is currently full!\n" + DIVIDER_LINE;
+    static final String FILE_SAVED = "File has been saved!\n" + DIVIDER_LINE;
+    static final String FILE_NOT_FOUND = "No save file found!\n" + DIVIDER_LINE;
+    static final String FILE_LOADED = "Save file has been loaded!\n" + DIVIDER_LINE;
 
     private static ArrayList<Task> tasks = new ArrayList<>();
 
@@ -44,7 +47,6 @@ public class Duke {
     }
     // Prints bye message
     public static void printBye() {
-        printDividerLine();
         System.out.println("Bye. Hope to see you again soon!");
         printDividerLine();
     }
@@ -64,7 +66,7 @@ public class Duke {
         printDividerLine();
     }
     // Adds task to list
-    public static void addTask(String userInput, int command) throws DukeException {
+    public static void addTask(String userInput, int command, boolean printTask) throws DukeException {
         String description;
         String date;
         int indexOfSlash = userInput.indexOf("/");
@@ -72,7 +74,6 @@ public class Duke {
         int indexOfSpace = userInput.indexOf(" ");
         int taskCount = tasks.size();
 
-        printDividerLine();
         if (taskCount == 100) {
             System.out.println(LIST_FULL);
             throw new DukeException();
@@ -110,13 +111,16 @@ public class Duke {
         default:
         }
 
-        taskCount = tasks.size();
-        System.out.print("Got it. I've added this task:\n  ");
-        tasks.get(taskCount-1).printTask();
-        System.out.println("Now you have " + taskCount + " tasks in the list.");
-        printDividerLine();
+        if (printTask) {
+            printDividerLine();
+            taskCount = tasks.size();
+            System.out.print("Got it. I've added this task:\n  ");
+            tasks.get(taskCount - 1).printTask();
+            System.out.println("Now you have " + taskCount + " tasks in the list.");
+            printDividerLine();
+        }
     }
-    // Deletes task
+    // Deletes task from list
     public static void deleteTask(String userInput) throws DukeException {
         String number = userInput.substring(7);
         int taskCount = tasks.size();
@@ -148,8 +152,8 @@ public class Duke {
             throw new DukeException();
         }
     }
-
-    private static int loadFile(Task[] tasks) throws FileNotFoundException {
+    // Loads save file if available
+    private static int loadFile() throws FileNotFoundException {
         File f = new File("duke.txt");
         if (!f.exists()) {
             throw new FileNotFoundException();
@@ -164,32 +168,35 @@ public class Duke {
             boolean isDone = Boolean.parseBoolean(userInput[0]);
             if (userInput[1].startsWith("todo")) {
                 try {
-                    taskCount = addTask(tasks, taskCount, userInput[1], COMMAND_TODO);
+                    addTask(userInput[1], COMMAND_TODO, false);
                 } catch (DukeException e) {
                 }
             } else if (userInput[1].startsWith("deadline")) {
                 try {
-                    taskCount = addTask(tasks, taskCount, userInput[1], COMMAND_DEADLINE);
+                    addTask(userInput[1], COMMAND_DEADLINE, false);
                 } catch (DukeException e) {
                 }
             } else if (userInput[1].startsWith("event")) {
                 try {
-                    taskCount = addTask(tasks, taskCount, userInput[1], COMMAND_EVENT);
+                    addTask(userInput[1], COMMAND_EVENT, false);
                 } catch (DukeException e) {
                 }
             }
-            tasks[taskCount - 1].markAsDone();
+            if (isDone) {
+                tasks.get(taskCount++).markAsDone();
+            }
         }
+        System.out.println(FILE_LOADED);
         return taskCount;
     }
-
-    private static void saveFile(String filePath, Task[] tasks, int taskCount) throws IOException {
+    // Saves file
+    private static void saveFile(String filePath) throws IOException {
         File f = new File(filePath);
         FileWriter fw = new FileWriter(filePath);
-        for (int i = 0; i < taskCount; i++) {
-            fw.write(tasks[i].saveTask());
+        for (Task task : tasks) {
+            fw.write(task.saveTask());
         }
-        System.out.println("File saved");
+        System.out.println(FILE_SAVED);
         fw.close();
     }
 
@@ -200,13 +207,18 @@ public class Duke {
         printHello();
 
         try {
-            taskCount = loadFile(tasks);
+            loadFile();
         } catch (FileNotFoundException e) {
+            System.out.println(FILE_NOT_FOUND);
         }
 
         while(true) {
             userInput = in.nextLine();
             if (userInput.equals("bye")) {
+                try {
+                    saveFile("duke.txt");
+                } catch (IOException e) {
+                }
                 printBye();
                 break;
             } else if (userInput.equals("list")) {
@@ -225,12 +237,12 @@ public class Duke {
                 }
             } else if (userInput.startsWith("todo")) {
                 try {
-                    addTask(userInput, COMMAND_TODO);
+                    addTask(userInput, COMMAND_TODO, true);
                 } catch (DukeException e) {
                 }
             } else if (userInput.startsWith("deadline")) {
                 try {
-                    addTask(userInput, COMMAND_DEADLINE);
+                    addTask(userInput, COMMAND_DEADLINE, true);
                 } catch (DukeException e) {
                 }
                 catch (StringIndexOutOfBoundsException e) {
@@ -238,7 +250,7 @@ public class Duke {
                 }
             } else if (userInput.startsWith("event")) {
                 try {
-                    addTask(userInput, COMMAND_EVENT);
+                    addTask(userInput, COMMAND_EVENT, true);
                 } catch (DukeException e) {
                 } catch (StringIndexOutOfBoundsException e) {
                     System.out.println(INVALID_EVENT);
@@ -252,10 +264,6 @@ public class Duke {
             }
             else {
                 System.out.println(UNKNOWN_COMMAND);
-            }
-            try {
-                saveFile("duke.txt", tasks, taskCount);
-            } catch (IOException e) {
             }
         }
     }
