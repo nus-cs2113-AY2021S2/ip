@@ -1,35 +1,44 @@
 package duke.items;
 
+import java.util.ArrayList;
 import duke.exceptions.InvalidIndexExceptions;
 
 public class Task {
     private static int numOfTasks = 0;
     protected String description;
     protected boolean isDone;
-    protected static Task[] list = new Task[100];
+    protected static ArrayList<Task> list = new ArrayList<Task>();
 
     public static void printList(){
         for (int i =0; i<numOfTasks;i++) {
             System.out.print(i+1 + ".");
-            list[i].print();
+            list.get(i).print();
         }
     }
     public static int getNumOfTasks() {
         return numOfTasks;
     }
     public static void addTask(Task task) {
-        list[numOfTasks] = task;
+        list.add(task);
         numOfTasks++;
+    }
+    public static void deleteTask(int index) {
+        numOfTasks--;
+        System.out.println("Noted. I've removed this task: ");
+        System.out.print("  ");
+        list.get(index).print();
+        list.remove(index);
+        System.out.println("Now you have " + numOfTasks + " tasks in the list.");
+
     }
     public static void setDone(int index) throws InvalidIndexExceptions{
         if (index >= numOfTasks){
             throw new InvalidIndexExceptions();
         }
-        list[index].isDone = true;
+        list.get(index).isDone = true;
         System.out.println("Nice! I've marked this task as done: ");
-        System.out.println("[\u2713] " + list[index].getDescription());
+        System.out.println("[\u2713] " + list.get(index).getDescription());
     }
-
 
     public Task(String description) {
         this.description = description;

@@ -6,7 +6,7 @@ import duke.exceptions.*;
 import duke.items.*;
 
 public class Utils {
-    private static String[] VALID_COMMANDS = {"done", "list", "todo", "event", "deadline"};
+    private static String[] VALID_COMMANDS = {"done", "list", "todo", "event", "deadline", "delete"};
 
     public static void printLine() {
         System.out.println("____________________________________________________________");
@@ -58,6 +58,9 @@ public class Utils {
             break;
         case ("done"):
             Task.setDone(Integer.parseInt(line.split(" ")[1]) - 1);
+            break;
+        case ("delete"):
+            Task.deleteTask(Integer.parseInt(line.split(" ")[1]) - 1);
             break;
         default:
             int indexOfSpace = line.indexOf(" ");
