@@ -82,6 +82,17 @@ public class Duke {
                 System.out.print(DIVLINE);
             }
             break;
+        case "delete":
+            try {
+                int taskIndex = Integer.parseInt(prompt.substring(7)) - 1;
+                deleteFromList(taskIndex);
+            } catch (NumberFormatException e) {
+                System.out.println(DIVLINE + "\t:( OOPS!!! You are not specifying a valid task number.");
+                System.out.print(DIVLINE);
+            } catch (DukeException e) {
+                System.out.println(DIVLINE + "Target task does not exist or you have specified nothing.");
+                System.out.print(DIVLINE);
+            }
         default:
             throw new DukeException("Illegal keyword.");
         }
@@ -152,6 +163,14 @@ public class Duke {
         System.out.print(DIVLINE);
     }
 
+    private static void printDeleteSuccessMessage(Task task) {
+        System.out.print(DIVLINE);
+        System.out.println("\tNoted. I've removed this task: \n" +
+                "\t  " + task.toString());
+        System.out.println("\tNow you have " + (taskCount-1) + " tasks in the list.");
+        System.out.print(DIVLINE);
+    }
+
     private static void completeTask(int taskIndex) throws DukeException {
         if (tasks[taskIndex].getIsDone()){
             throw new DukeException("Task has already been marked done.");
@@ -161,6 +180,16 @@ public class Duke {
         System.out.println("\tNice! I've marked this task as done: \n" +
                 "\t" + tasks[taskIndex].toString());
         System.out.print(DIVLINE);
+    }
+
+    private static void deleteFromList(int taskIndex) throws DukeException {
+        if (taskIndex > taskCount) {
+            throw new DukeException("Task does not exist");
+        }
+        Task toBeDeleted = tasks[taskIndex];
+        // Some manipulation here
+        taskCount--;
+        printDeleteSuccessMessage(toBeDeleted);
     }
 
     public static void main(String[] args) {
