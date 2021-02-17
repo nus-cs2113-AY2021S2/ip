@@ -22,7 +22,7 @@ public class Duke {
     private static int tasksCount = 0;
     private static ArrayList<Task> tasks = new ArrayList<>();
     private static String line = "*********************************************";
-    private static final String FILE_PATH = "data/tasks.txt";
+    private static final String FILE_PATH = "tasks.txt";
 
     private static void helloMessage() {
         System.out.println(line);
@@ -66,7 +66,7 @@ public class Duke {
                 System.out.println(scanner.nextLine());
             }
         } catch(FileNotFoundException f){
-            Files.createFile(Paths.get("data/tasks.txt"));
+            Files.createFile(Paths.get("tasks.txt"));
         } catch(IOException e){
             System.out.println(e.getMessage());
         }
