@@ -49,18 +49,25 @@ public class TaskList {
             throw new EmptyDescriptionException();
         }
         switch (command) {
-        case DONE:
-            if (description.replace("done ", "").equals("")) {
-                throw new EmptyDescriptionException();
-            }
-            break;
         case TODO:
             break;
         case DEADLINE:
             break;
         case EVENT:
             break;
+        case DONE:
+            if (!description.replace("done ", "").equals("")) {
+                break;
+            }
+        case DELETE:
+            if (!description.replace("delete ", "").equals("")) {
+                break;
+            }
+        default:
+            throw new EmptyDescriptionException();
         }
+
+
     }
 
     @Override
@@ -89,5 +96,15 @@ public class TaskList {
     // Gets the Last task of tasks array
     public String getLastTask() {
         return tasks.get(tasks.size() - 1).toString();
+    }
+
+    public void deleteTask(int taskNum) {
+        tasks.remove(taskNum);
+    }
+
+    public String getDeletedTask(int taskNum) {
+        String task = tasks.get(taskNum).toString();
+        deleteTask(taskNum);
+        return task;
     }
 }
