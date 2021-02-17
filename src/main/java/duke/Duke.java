@@ -8,6 +8,10 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
@@ -25,6 +29,15 @@ public class Duke {
         String[] description;
         String command;
         int numberOfTasks = 0;
+        String filePath = new File("").getAbsolutePath();
+
+        try {
+            tasks = loadfromFile(filePath + "/duke.txt");
+            numberOfTasks = loadNumberOfTasks(filePath + "/duke.txt"); //correct
+        } catch (FileNotFoundException e) {
+            System.out.println("I've created a text file at " + filePath + " to save your tasks!");
+            printHorizontalLine();
+        }
 
         while (!(command = userInput.nextLine().trim()).equals("bye")) {
 
@@ -98,8 +111,98 @@ public class Duke {
             printHorizontalLine();
         }
 
+        saveToFile(tasks, numberOfTasks);
+
         printByeMessage();
 
+    }
+
+    public static void saveToFile(Task[] tasks, int numberOfTasks) {
+        String filePath = new File("").getAbsolutePath();
+        File file = new File(filePath + "/duke.txt");
+
+        try {
+            FileWriter fw = new FileWriter(filePath + "/duke.txt");
+            for (int i = 0; i < numberOfTasks; i++) {
+                String taskDoneStatus = tasks[i].getStatus().trim();
+                String task = "";
+                switch (tasks[i].getTaskType()) {
+                case "todo":
+                    task = "todo" + "||" + taskDoneStatus + "||" + tasks[i].getDescription();
+                    break;
+                case "deadline":
+                    Deadline deadline = (Deadline) tasks[i];
+                    task = "deadline" + "||" + taskDoneStatus + "||" + tasks[i].getDescription() + "||" + deadline.getBy();
+                    break;
+                case "event":
+                    Event event = (Event) tasks[i];
+                    task = "event" + "||" + taskDoneStatus + "||" + tasks[i].getDescription() + "||" + event.getAt();
+                    break;
+                }
+                fw.write(task + "\n");
+            }
+            fw.close();
+        } catch (IOException e) {
+                System.out.println("ERROR: something went wrong! :(");
+        }
+    }
+
+    private static void writeToFile(String filePath, String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        fw.write(textToAdd);
+        fw.close();
+    }
+
+    public static Task[] loadfromFile(String filePath) throws FileNotFoundException {
+        //creates a file for filepath
+        File file = new File(filePath);
+        Scanner s = new Scanner(file);
+        Task[] tasks = new Task[100];
+        int numberOfTasks = 0;
+
+        while (s.hasNext()) {
+            String line = s.nextLine();
+            String[] taskDetails = line.split("\\|\\|");
+            String doneStatus = taskDetails[1];
+            switch (taskDetails[0]) {
+            case "todo":
+                ToDo todo = new ToDo(taskDetails[2]);
+                tasks[numberOfTasks] = todo;
+                if (doneStatus.equals("[X]")) {
+                    tasks[numberOfTasks].markAsDone();
+                }
+                break;
+            case "deadline":
+                Deadline deadline = new Deadline(taskDetails[2], taskDetails[3]);
+                tasks[numberOfTasks] = deadline;
+                if (doneStatus.equals("[X]")) {
+                    tasks[numberOfTasks].markAsDone();
+                }
+                break;
+            case "event":
+                Event event = new Event(taskDetails[2], taskDetails[3]);
+                tasks[numberOfTasks] = event;
+                if (doneStatus.equals("[X]")) {
+                    tasks[numberOfTasks].markAsDone();
+                }
+                break;
+            }
+            numberOfTasks++;
+        }
+        return tasks;
+    }
+
+    public static int loadNumberOfTasks(String filePath) throws FileNotFoundException {
+        File file = new File(filePath);
+        Scanner s = new Scanner(file);
+        int numberOfTasks = 0;
+
+        while (s.hasNext()) {
+            numberOfTasks++;
+            s.nextLine();
+        }
+
+        return numberOfTasks;
     }
 
     public static void printHorizontalLine() {
@@ -122,7 +225,7 @@ public class Duke {
     public static void printListMessage(Task[] tasks, int numberOfTasks) {
         System.out.println(" Here are the tasks in your list:");
         for (int i = 0; i < numberOfTasks; i++) {
-            System.out.println(" " + (i + 1) + "." + tasks[i].toString());
+            System.out.println(" " + (i + 1) + "." + tasks[i]); //+ tasks[i].toString()
         }
     }
 
