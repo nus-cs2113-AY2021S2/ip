@@ -56,7 +56,7 @@ public class Duke {
     public static void markTaskAsDone(String taskDescription){
         // Marks one of the tasks as done.
         System.out.println("\t Nice! I've marked this task as done: ");
-        String[] input = taskDescription.split(" ");
+        String[] input = taskDescription.split(" ");        // input = ["Done", taskIndex]
         int taskIndex = Integer.parseInt(input[1]);
         tasks.get(taskIndex - 1).markAsDone();
         String output = String.format("%02d. [%s] %s", taskIndex, tasks.get(taskIndex - 1).getStatusIcon(), tasks.get(taskIndex - 1).getDescription());
