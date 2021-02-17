@@ -57,10 +57,14 @@ public class Duke {
             System.out.println(taskList);
             break;
         case DONE:
-            int taskNum = getTaskNum(input);
+            int taskNum = getTaskNum(input, Command.DONE);
             System.out.println("Nice! I've marked this task as done:" + System.lineSeparator() +
                     taskList.getTask(taskNum - 1));
             break;
+        case DELETE:
+            taskNum = getTaskNum(input, Command.DELETE);
+            System.out.println("Noted. I've removed this task:"+ System.lineSeparator() +
+                    taskList.getDeletedTask(taskNum - 1));
         case ERROR:
             break;
         }
@@ -80,7 +84,7 @@ public class Duke {
 
     private static void processInput(TaskList taskList, String input) {
         try {
-            command =  getCommand(input);
+            command = getCommand(input);
             switch (command) {
             case ADD:
                 command = taskList.addTask(input, Command.ADD);
@@ -98,12 +102,22 @@ public class Duke {
                 try {
                     taskList.validateDescription(input, Command.DONE);
                 } catch (EmptyDescriptionException e) {
-                    System.out.println("Done command needs task number!");;
+                    System.out.println("Done command needs task number!");
+                    ;
                     command = Command.ERROR;
                     break;
                 }
-                int taskNum = getTaskNum(input);
+                int taskNum = getTaskNum(input, Command.DONE);
                 taskList.finishTask(taskNum - 1);
+                break;
+            case DELETE:
+                try {
+                    taskList.validateDescription(input, Command.DELETE);
+                } catch (EmptyDescriptionException e) {
+                    System.out.println("Delete command needs task number!");
+                    command = Command.ERROR;
+                    break;
+                }
                 break;
             default:
                 break;
@@ -115,24 +129,34 @@ public class Duke {
     }
 
     private static Command getCommand(String input) throws InvalidCommandException {
-        if (input.equals("list")) {
+        String userInput = input.toLowerCase();
+        if (userInput.equals("list")) {
             return Command.LIST;
-        } else if (input.equals("bye")) {
+        } else if (userInput.equals("bye")) {
             return Command.BYE;
-        } else if (input.startsWith("done ")) {
+        } else if (userInput.startsWith("done ")) {
             return Command.DONE;
-        } else if (input.startsWith("todo ")) {
+        } else if (userInput.startsWith("todo ")) {
             return Command.TODO;
-        } else if (input.startsWith("deadline ")) {
+        } else if (userInput.startsWith("deadline ")) {
             return Command.DEADLINE;
-        } else if (input.startsWith("event ")) {
+        } else if (userInput.startsWith("event ")) {
             return Command.EVENT;
+        } else if (userInput.startsWith("delete ")) {
+            return Command.DELETE;
         } else {
             throw new InvalidCommandException();
         }
     }
 
-    private static int getTaskNum(String input) {
-        return Integer.parseInt(input.replaceFirst("done ", ""));
+    private static int getTaskNum(String input, Command command) {
+        switch (command) {
+        case DONE:
+            return Integer.parseInt(input.replaceFirst("done ", ""));
+        case DELETE:
+            return Integer.parseInt(input.replaceFirst("delete ", ""));
+        default:
+            return -1;
+        }
     }
 }
