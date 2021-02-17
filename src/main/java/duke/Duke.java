@@ -1,7 +1,12 @@
 package duke;
 
 import duke.tasks.*;
+
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class Duke {
     public static Task[] tasks = new Task[100];
@@ -11,15 +16,59 @@ public class Duke {
         System.out.println("\t________________________________________\n");
     }
 
+    public static void loadData() {
+        try {
+            File dataFile = new File("data/duke.txt");
+            if (true) {
+                Scanner fileReader = new Scanner(dataFile);
+                while (fileReader.hasNextLine()) {
+                    String line = fileReader.nextLine();
+                    String[] splitLine = line.split("\\s\\|\\s");
+                    if (line.startsWith("T")) {
+                        String todo = splitLine[2];
+                        Todo t = new Todo(todo);
+                        tasks[currentTask] = t;
+                        currentTask++;
+                        if (splitLine[1].equals("1")) {
+                            t.markAsDone();
+                        }
+                    } else if (line.startsWith("E")) {
+                        String description = splitLine[2];
+                        String date = splitLine[3];
+                        Event t = new Event(description, date);
+                        tasks[currentTask] = t;
+                        currentTask++;
+                        if (splitLine[1].equals("1")) {
+                            t.markAsDone();
+                        }
+                    } else if (line.startsWith("D")) {
+                        String description = splitLine[2];
+                        String date = splitLine[3];
+                        Deadline t = new Deadline(description, date);
+                        tasks[currentTask] = t;
+                        currentTask++;
+                        if (splitLine[1].equals("1")) {
+                            t.markAsDone();
+                        }
+                    }
+                }
+                fileReader.close();
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("file not found");
+        }
+    }
+
+
     public static void takeInput() {
-        Scanner scannerObject = new Scanner(System.in);
-        while (scannerObject.hasNextLine()) {
-            String command = scannerObject.nextLine();
+        Scanner userInput = new Scanner(System.in);
+        while (userInput.hasNextLine()) {
+            String command = userInput.nextLine();
             if (command.equals("bye")) {
                 dividerLine();
                 exitDuke();
                 dividerLine();
-                scannerObject.close();
+                userInput.close();
                 break;
             } else if (command.equals("list")) {
                 dividerLine();
@@ -172,6 +221,16 @@ public class Duke {
     }
 
     public static void exitDuke() {
+        try {
+            FileWriter fileWriter = new FileWriter("data/duke.txt");
+            for (int i=0; i<currentTask; i++) {
+                fileWriter.write(tasks[i].getType() + " | " + ((tasks[i].isDone()) ? "1" : "0") + " | "
+                        + tasks[i].getDescription() + " | " + tasks[i].getDate() + '\n');
+            }
+            fileWriter.close();
+        } catch (IOException e) {
+            System.out.println("\tAn error occurred while saving your data.");
+        }
         System.out.println("\tBye, hope to see you again soon!");
     }
 
@@ -180,6 +239,7 @@ public class Duke {
         System.out.println("\tHello! I'm Duke");
         System.out.println("\tWhat can I do for you?");
         dividerLine();
+        loadData();
         takeInput();
     }
 }
