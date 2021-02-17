@@ -13,8 +13,8 @@ public class Command {
     public Command(String userInput) {
         try {
             setCommandFromInput(userInput);
-        } catch(EmptyByOrAtWhenException ignored) {
-
+        } catch(EmptyByOrAtWhenException e) {
+            System.out.println("Empty 'by' or 'at' when field");
         }
     }
 
@@ -58,7 +58,7 @@ public class Command {
                 when = null;
             }
         }
-        if (commandType == CommandEnum.DONE) {
+        if (commandType == CommandEnum.DONE || commandType == CommandEnum.DELETE) {
             // Split user input by " " to separate 'done' and task number according to the format.
             try {
                 String[] args = input.split(" ");
@@ -91,6 +91,8 @@ public class Command {
             return CommandEnum.EVENT;
         } else if (args[0].equals("todo")) {
             return CommandEnum.TODO;
+        } else if (args[0].equals("delete")) {
+            return CommandEnum.DELETE;
         }
         return CommandEnum.INVALID;
     }

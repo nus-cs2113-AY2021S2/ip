@@ -7,5 +7,6 @@ public enum CommandEnum {
     DEADLINE,
     EVENT,
     TODO,
-    INVALID
+    DELETE,
+    INVALID;
 }

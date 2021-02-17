@@ -28,12 +28,13 @@ public class PrintManager {
     }
 
     public static void printHelpMessage() {
-        System.out.print("Input not recognised, please follow the format:\n"
+        System.out.print("Help message:\n"
                 + "* Add deadline -> 'deadline <description> /by <when>'\n"
                 + "* Add event -> 'event <description> /at <when>'\n"
                 + "* Add todo task -> 'todo <description>'\n"
                 + "* Show list -> 'list'\n"
                 + "* Mark as done -> 'done <task number>'\n"
+                + "* Delete task -> 'delete <task number>'\n"
                 + "* Exit -> 'bye'\n");
     }
 }

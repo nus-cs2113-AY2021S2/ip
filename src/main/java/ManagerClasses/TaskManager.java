@@ -17,7 +17,7 @@ public class TaskManager {
 
     public void printTasks() {
         if (tasks.size() == 0) {
-            System.out.println("Oops, it seems like you have no tasks in your list");
+            System.out.println("Oops, it seems like you don't have any tasks.");
         } else {
             int taskId = 1;
             System.out.println("Here are the tasks in your list:");
@@ -37,6 +37,22 @@ public class TaskManager {
                 task.setAsDone();
                 System.out.println("Nice! I've marked this task as done:");
                 System.out.println(task.toString());
+            }
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Error -> Cannot find task with the specified task number " + taskIdNum + ".");
+        }
+    }
+
+    public void deleteTask (Integer taskIdNum) {
+        try {
+            if (taskIdNum != null) {
+                int taskListIndexNum = taskIdNum - 1;
+                Task task = tasks.get(taskListIndexNum);
+                String taskDescription = task.toString();
+                tasks.remove(taskListIndexNum);
+                System.out.println("Nice! I've removed this task:");
+                System.out.println(taskDescription);
+                printNumberOfTasks();
             }
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Error -> Cannot find task with the specified task number " + taskIdNum + ".");
