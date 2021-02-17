@@ -9,7 +9,7 @@ public class Deadline extends Task{
 
     @Override
     public void printTaskInfo() {
-        if(super.getTaskDone()){
+        if(super.getDone()){
             System.out.println(String.format(TASK_INFO_FORMAT,"X",taskName,doBefore));
         } else {
             System.out.println(String.format(TASK_INFO_FORMAT," ",taskName,doBefore));

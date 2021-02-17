@@ -9,19 +9,19 @@ public class Task {
         taskDone = done;
     }
 
-    public String getTaskName() {
+    public String getName() {
         return taskName;
     }
 
-    public boolean getTaskDone() {
+    public boolean getDone() {
         return taskDone;
     }
 
-    public void setTaskName(String name) {
+    public void setName(String name) {
         taskName = name;
     }
 
-    public void setTaskDone(boolean done){
+    public void setDone(boolean done){
         taskDone = done;
     }
 
