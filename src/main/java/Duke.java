@@ -1,5 +1,9 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
     static final String SECTION_DIVIDER = "____________________________________________________________";
@@ -97,26 +101,6 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
-        greetUser();
-
-        String line;
-        Scanner in = new Scanner(System.in);
-        line = in.nextLine();
-        while(line.toLowerCase().equals("bye") != true){
-            System.out.println("\t" + SECTION_DIVIDER);
-            try {
-                handleInput(line);
-            } catch (IllegalCommandWordException e){
-                System.out.print("\tInvalid input! Please start with a valid command word!\n");
-            } finally {
-                System.out.println("\t" + SECTION_DIVIDER);
-                line = in.nextLine();
-            }
-        }
-        signOff();
-    }
-
     private static void handleInput(String line) throws IllegalCommandWordException {
         line = line.trim();
         String[] wordsEntered = line.split(" ");
@@ -143,5 +127,28 @@ public class Duke {
                 System.out.print("\tSorry, please indicate a valid event time!\n");
             }
         }
+    }
+
+
+
+
+    public static void main(String[] args) {
+        greetUser();
+
+        String line;
+        Scanner in = new Scanner(System.in);
+        line = in.nextLine();
+        while(line.toLowerCase().equals("bye") != true){
+            System.out.println("\t" + SECTION_DIVIDER);
+            try {
+                handleInput(line);
+            } catch (IllegalCommandWordException e){
+                System.out.print("\tInvalid input! Please start with a valid command word!\n");
+            } finally {
+                System.out.println("\t" + SECTION_DIVIDER);
+                line = in.nextLine();
+            }
+        }
+        signOff();
     }
 }
