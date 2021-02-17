@@ -87,18 +87,30 @@
     event event name /at time of the event
     ____________________________________________________________
     ____________________________________________________________
-    Nice! I've marked this task as done:
-        [D][X]return a book (by: Sunday 10am)
+    Invalid input format for delete command.
+    Input format for delete: delete + task index    eg. delete 1
+    ____________________________________________________________
+    ____________________________________________________________
+    Noted! I've removed this task:
+        [T][X]read a book
+    Now you have 2 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
     Nice! I've marked this task as done:
         [E][X]tutorial (at: Feb 5 10am)
     ____________________________________________________________
     ____________________________________________________________
+    Noted! I've removed this task:
+        [E][X]tutorial (at: Feb 5 10am)
+    Now you have 1 tasks in the list.
+    ____________________________________________________________
+    ____________________________________________________________
+    Nice! I've marked this task as done:
+        [D][X]return a book (by: Sunday 10am)
+    ____________________________________________________________
+    ____________________________________________________________
     Here are the tasks in your list:
-    1.[T][X]read a book
-    2.[D][X]return a book (by: Sunday 10am)
-    3.[E][X]tutorial (at: Feb 5 10am)
+    1.[D][X]return a book (by: Sunday 10am)
     ____________________________________________________________
     ____________________________________________________________
     Bye. Hope to see you again soon!

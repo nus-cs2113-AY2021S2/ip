@@ -4,6 +4,8 @@ import Exception.TaskFormatException;
 import Exception.TodoFormatException;
 import Exception.EventFormatException;
 import Exception.TaskAlreadyDoneException;
+import Exception.DoneFormatException;
+import Exception.DeleteFormatException;
 
 public class Duke {
     private static final String LOGO = " ____        _\n"
@@ -32,7 +34,16 @@ public class Duke {
                 String[] inputParts = userInput.trim().split("\\s+",2);
                 switch (inputParts[0]){
                 case "done":
+                    if(inputParts.length == 1) {
+                        throw new DoneFormatException();
+                    }
                     tasks.setTaskDone(inputParts[1]);
+                    break;
+                case "delete":
+                    if(inputParts.length == 1) {
+                        throw new DeleteFormatException();
+                    }
+                    tasks.deleteTask(inputParts[1]);
                     break;
                 case "todo":
                     if(inputParts.length < 2) {
@@ -73,14 +84,15 @@ public class Duke {
                             "\n    event event name /at time of the event\n" + LINE_SEPERATOR);
                     break;
                 }
-            } catch (NumberFormatException e) {
-                System.out.println(LINE_SEPERATOR + "\n    Invalid input format.");
-                System.out.println("    Input format for done:done + event index    eg. done 1\n" + LINE_SEPERATOR);
+            } catch (DoneFormatException e) {
+                System.out.println(LINE_SEPERATOR + e.toString() + LINE_SEPERATOR);
             } catch (TaskAlreadyDoneException e) {
                 System.out.println(LINE_SEPERATOR + "\n    The task is done already.\n" + LINE_SEPERATOR);
             } catch (IndexOutOfBoundsException e) {
-                System.out.println(LINE_SEPERATOR + "\n    The task index is out of bound.\n" + LINE_SEPERATOR);
+                System.out.println(LINE_SEPERATOR + "\n    Invalid input.\n    The task index is out of bound.\n" + LINE_SEPERATOR);
             } catch (TaskFormatException e) {
+                System.out.println(LINE_SEPERATOR + "\n" + e.toString() + LINE_SEPERATOR);
+            } catch (DeleteFormatException e) {
                 System.out.println(LINE_SEPERATOR + "\n" + e.toString() + LINE_SEPERATOR);
             }
             userInput = sc.nextLine();
