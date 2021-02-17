@@ -1,9 +1,13 @@
 import java.util.Scanner;
 import duke.controller.TaskController;
 
+
+
 public class Duke {
 
     public static void main(String[] args) {
+
+        TaskController.readFile();
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -21,6 +25,7 @@ public class Duke {
         while (toContinueAddingTask) {
             if (task.equalsIgnoreCase("bye")) {
                 toContinueAddingTask = false;
+                TaskController.saveFile();
                 break;
             }
             else if (task.equalsIgnoreCase("list")) {

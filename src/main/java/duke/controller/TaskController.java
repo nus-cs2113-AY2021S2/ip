@@ -3,7 +3,10 @@ package duke.controller;
 import duke.exceptions.DukeException;
 import duke.exceptions.ErrorHandler;
 import duke.tasks.*;
+
+import java.io.*;
 import java.util.ArrayList;
+
 
 public class TaskController {
 
@@ -15,7 +18,61 @@ public class TaskController {
     static final int DEADLINELENGTH = 8;
     static final int DELETELENGTH = 6;
 
+    public static Task processFile(String line) {
+        Task t = null;
+        int idx;
+        String description, at , by;
 
+        if (line.charAt(1) == 'T') {
+            t = new Todo(line.substring(7));
+        } else if (line.charAt(1) == 'E') {
+            idx = line.indexOf('(');
+            description = line.substring(7, idx);
+            at = line.substring(idx+3, line.length()-1);
+            t = new Event(description, at);
+        } else if (line.charAt(1) == 'D') {
+            idx = line.indexOf('(');
+            description = line.substring(7, idx);
+            by = line.substring(idx+3, line.length()-1);
+            t = new Deadline(description, by);
+        }
+        // check if task isDone
+        if (line.contains("\u2713")) {
+            t.markAsDone();
+        }
+        return t;
+    }
+    public static void readFile() {
+        try {
+            FileReader reader = new FileReader("Duke.txt");
+            BufferedReader bufferedReader = new BufferedReader(reader);
+
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                Task t = processFile(line);
+                tasks.add(t);
+                tasksCount++;
+            }
+
+        } catch (FileNotFoundException e) {
+            // do nothing start with an empty file (empty taskArray)
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void saveFile() {
+        try {
+            FileWriter writer = new FileWriter("Duke.txt", false);
+            for (Task t : tasks) {
+                String task = t.toString() + "\n";
+                writer.write(task);
+            }
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     public static void printTaskList() {
         System.out.println("Here are the tasks in your list: ");
         for (int i=0; i<tasks.size(); i++) {
