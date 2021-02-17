@@ -23,4 +23,17 @@ public class Event extends Task {
         output += " (at: " + timeConstraint + ")";
         System.out.println(output);
     }
+
+    @Override
+    public String formatTaskToWrite() {
+        String formattedTask;
+        formattedTask = String.join(
+                "<separator>",
+                taskType,
+                taskName,
+                timeConstraint,
+                String.valueOf(isCompleted)
+        );
+        return formattedTask;
+    }
 }

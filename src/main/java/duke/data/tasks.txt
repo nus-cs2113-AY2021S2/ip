@@ -1,0 +1,3 @@
+todo<separator>Say Hi to Sheryll<separator>false
+event<separator>drink water<separator>tonight<separator>true
+deadline<separator>finish homework<separator>tonight as well<separator>false

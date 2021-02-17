@@ -16,5 +16,17 @@ public class ToDo extends Task {
         }
         System.out.println(output);
     }
+
+    @Override
+    public String formatTaskToWrite() {
+        String formattedTask;
+        formattedTask = String.join(
+                "<separator>",
+                taskType,
+                taskName,
+                String.valueOf(isCompleted)
+        );
+        return formattedTask;
+    }
 }
 
