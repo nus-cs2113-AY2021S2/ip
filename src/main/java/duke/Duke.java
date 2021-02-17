@@ -2,22 +2,23 @@ package duke;
 import duke.myExceptions.*;
 import duke.myTasks.*;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 
 public class Duke {
 
-    public static Todo[] list = new Todo[100];
+    public static ArrayList<Todo> list = new ArrayList<>();
     public static int index = 0;
     public static boolean isRunning = true;
 
     public static void addToList(Todo task) {
-        list[index] = task;
+        list.add(task);
         index++;
     }
 
     public static void printList() {
         for (int i = 0; i < index; i++) {
-            System.out.println((i + 1) + ". " + list[i].toString());
+            System.out.println((i + 1) + ". " + list.get(i).toString());
         }
     }
 
@@ -36,9 +37,9 @@ public class Duke {
             printList();
             break;
         case "done":
-            list[Integer.parseInt(content) - 1].markDone();
+            list.get(Integer.parseInt(content) - 1).markDone();
             System.out.println("Nice! I've marked this task as done:");
-            System.out.println(list[Integer.parseInt(content) - 1].toString());
+            System.out.println(list.get(Integer.parseInt(content) - 1).toString());
             break;
         case "todo":
             Todo todo = new Todo(content);
@@ -88,7 +89,7 @@ public class Duke {
                 System.out.println("Needs a name");
             } catch (NoTime e) {
                 System.out.println("Needs time. Add \"/by <time>\" to command.");
-            } catch (NullPointerException | ArrayIndexOutOfBoundsException e) {
+            } catch (NullPointerException | IndexOutOfBoundsException e) {
                 System.out.println("You have inputted an invalid index number");
             } catch (NumberFormatException e) {
                 System.out.println("Specify which task to mark as done");
