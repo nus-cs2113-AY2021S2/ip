@@ -1,18 +1,21 @@
 package duke;
 
 import java.util.ArrayList;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
+import java.io.File;
 
 public class Duke {
 
     public static ArrayList<Task> taskList = new ArrayList<>();
 
-    //public static int listCount = 0;
-
     public static final Scanner SCANNER = new Scanner(System.in);
 
     public static void main(String[] args) {
         greet();
+        loadFile();
         while (true) {
             String userInput = SCANNER.nextLine();
             executeCommand(userInput);
@@ -36,6 +39,45 @@ public class Duke {
     public static void lineBreak() {
         final String HORIZONTAL_LINE = "____________________________________________________________";
         System.out.println(HORIZONTAL_LINE);
+    }
+
+    public static void loadFile() {
+        File f = new File ("duke.txt");
+        Scanner s;
+        try {
+            s = new Scanner(f);
+        } catch (FileNotFoundException e) {
+            System.out.println("Data file does not exist");
+            lineBreak();
+            return;
+        }
+        System.out.println("Loading saved data");
+        lineBreak();
+        while (s.hasNext()) {
+            String line = s.nextLine();
+            int dividerPosition;
+            char taskType = line.charAt(1);
+            switch (taskType) {
+            case 'T':
+                taskList.add(new Todo(line.substring(7)));
+                break;
+            case 'D':
+                dividerPosition = line.indexOf("(by:");
+                taskList.add(new Deadline(line.substring(7, dividerPosition - 1),
+                        line.substring(dividerPosition + 5, line.length() - 1)));
+                break;
+            case 'E':
+                dividerPosition = line.indexOf("(at:");
+                taskList.add(new Event(line.substring(7, dividerPosition - 1),
+                        line.substring(dividerPosition + 5, line.length() - 1)));
+                break;
+            default:
+                System.out.println("Unknown task type found: " + taskType);
+            }
+            if (line.charAt(4) == '\u2713') {
+                taskList.get(taskList.size() - 1).setDone();
+            }
+        }
     }
 
     public static void executeCommand(String userInput) {
@@ -120,6 +162,12 @@ public class Duke {
             System.out.println("Nice! I've marked this task as done:");
         }
         System.out.println("  " + currentTask.toString());
+        try {
+            saveFile();
+        } catch (IOException e) {
+            System.out.println("Oops something went wrong with saving the file");
+            e.printStackTrace();
+        }
     }
 
     public static void addTask(DukeCommand taskType, String description) throws DukeException {
@@ -148,6 +196,12 @@ public class Duke {
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + taskList.get(taskList.size() - 1).toString());
         System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+        try {
+            saveFile();
+        } catch (IOException e) {
+            System.out.println("Oops something went wrong with saving the file");
+            e.printStackTrace();
+        }
     }
 
     public static void deleteTask(int taskIndex) {
@@ -156,6 +210,27 @@ public class Duke {
         System.out.println("  " + currentTask);
         taskList.remove(taskIndex);
         System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+        try {
+            saveFile();
+        } catch (IOException e) {
+            System.out.println("Oops something went wrong with saving the file");
+            e.printStackTrace();
+        }
+    }
+
+    private static void saveFile() throws IOException {
+        File f = new File("duke.txt");
+        if (f.createNewFile()) {
+            System.out.println("File created: " + f.getName());
+        }
+        FileWriter fw = new FileWriter("duke.txt");
+
+        for (Task task : taskList) {
+            if (task != null) {
+                fw.write(task.toString() + "\n");
+            }
+        }
+        fw.close();
     }
 
     public static void exitProgram() {
