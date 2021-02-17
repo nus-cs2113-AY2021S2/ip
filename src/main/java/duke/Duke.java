@@ -5,7 +5,12 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
+
+import static duke.FileManager.createFileIfNotExist;
+import static duke.FileManager.readFile;
 
 public class Duke {
     /**
@@ -163,7 +168,10 @@ public class Duke {
         System.out.print(DIVLINE);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
+        createFileIfNotExist();
+        ArrayList<String> fileInput = readFile();
+        initializeTaskList(fileInput);
         System.out.print(DIVLINE + GREETINGS + DIVLINE);
         Scanner in = new Scanner(System.in);
         while (!isExiting) {
@@ -176,6 +184,12 @@ public class Duke {
             }
         }
         System.out.println(DIVLINE + PARTINGS + DIVLINE);
+    }
+
+    private static void initializeTaskList(ArrayList<String> fileInput) {
+        for (int i=0; i<fileInput.size(); i++) {
+            //create tasklist according to file storage
+        }
     }
 
 
