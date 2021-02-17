@@ -1,6 +1,6 @@
 package duke.task;
 
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -30,6 +30,7 @@ public class Task {
         return isDone;
     }
 
+    public abstract String toText(int number);
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + getDescription();
