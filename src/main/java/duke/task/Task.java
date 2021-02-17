@@ -5,6 +5,9 @@ public class Task {
     protected boolean isDone;
     protected String taskType;
 
+    protected static int TRUE = 1;
+    protected static int FALSE = 0;
+
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -25,5 +28,17 @@ public class Task {
 
     public String toString() {
         return taskType + "[" + getStatusIcon() + "] " + description;
+    }
+
+    public String getTaskType() {
+        return taskType;
+    }
+
+    public String getDate() {
+        return null;
+    }
+
+    public int getIsDone() {
+        return isDone ? TRUE : FALSE ;
     }
 }

@@ -1,10 +1,8 @@
 package duke.task;
 
-import java.util.ArrayList;
-import java.util.List;
+import static duke.Duke.taskList;
 
 public class TaskManager {
-    private final List<Task> taskList = new ArrayList<>();
     private static final String BORDER = "\t________________________________________________________________\n";
 
     private static final int ARRAY_INDEX_FOR_DESCRIPTION = 0;
@@ -19,7 +17,7 @@ public class TaskManager {
 
     public void addDeadline (String[] taskAndDeadline) {
         String description = taskAndDeadline[ARRAY_INDEX_FOR_DESCRIPTION];
-        String by = taskAndDeadline[ARRAY_INDEX_FOR_DATE];
+        String by = taskAndDeadline[ARRAY_INDEX_FOR_DATE].trim();
         Task task = new Deadline(description, by);
         taskList.add(task);
         printAddTaskMessage(task);
@@ -27,7 +25,7 @@ public class TaskManager {
 
     public void addEvent (String[] eventAndDate) {
         String taskEvent = eventAndDate[ARRAY_INDEX_FOR_DESCRIPTION];
-        String at = eventAndDate[ARRAY_INDEX_FOR_DATE];
+        String at = eventAndDate[ARRAY_INDEX_FOR_DATE].trim();
         Task task = new Event(taskEvent, at);
         taskList.add(task);
         printAddTaskMessage(task);
