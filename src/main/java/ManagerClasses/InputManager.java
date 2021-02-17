@@ -14,6 +14,7 @@ public class InputManager {
     }
 
     public void manageInput() {
+        taskManager.importTasksFromTxt();
         while(true) {
             String input = getUserInput();
             Command command = new Command(input);
@@ -26,10 +27,12 @@ public class InputManager {
                 break;
             case DONE:
                 taskManager.markDone(command.getTaskNum());
+                taskManager.saveTasksInTxt();
                 break;
             case DEADLINE:
                 try {
                     taskManager.addDeadlineToList(command.getDescription(), command.getWhen());
+                    taskManager.saveTasksInTxt();
                 } catch (EmptyTaskDescriptionException e) {
                     System.out.println("Error -> Empty task description");
                 } catch (EmptyByOrAtWhenException | NullPointerException e) {
@@ -39,6 +42,7 @@ public class InputManager {
             case EVENT:
                 try {
                     taskManager.addEventToList(command.getDescription(), command.getWhen());
+                    taskManager.saveTasksInTxt();
                 } catch (EmptyTaskDescriptionException e) {
                     System.out.println("Error -> Empty task description");
                 } catch (EmptyByOrAtWhenException | NullPointerException e) {
@@ -48,6 +52,7 @@ public class InputManager {
             case TODO:
                 try {
                     taskManager.addTodoToList(command.getDescription());
+                    taskManager.saveTasksInTxt();
                 } catch (EmptyTaskDescriptionException e) {
                     System.out.println("Error -> Empty task description");
                 }

@@ -5,8 +5,13 @@ public abstract class Task {
     protected boolean isDone;
 
     public Task(String description) {
-        this.description = description;
         this.isDone = false;
+        this.description = description;
+    }
+
+    public Task(Boolean isDone, String description) {
+        this.isDone = isDone;
+        this.description = description;
     }
 
     public String getStatusIcon() {
@@ -19,5 +24,9 @@ public abstract class Task {
 
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
+    }
+
+    public String toSaveFormat() {
+        return " | " + isDone + " | " + description;
     }
 }
