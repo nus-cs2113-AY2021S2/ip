@@ -17,40 +17,35 @@ public class Duke {
     /** Constants used for displaying messages */
     private static final String BORDER = "____________________________________________________________";
     private static final String NEWLINE = System.lineSeparator();
-    public static final String LOGO = """
-                                                          ,::::,
-                                              ,,,,:::::::':::::::
-                            ,::::.     ..:::~~           \\::::::
-                           ::::::::::~''      ':       __     ':.
-                           ::::/          __    .o.. : u ::     ':.
-                             ::,        :: u :.' '. ' ':::'     '::    ,, .::,,
-                              `::       ':::' /.  : .\\         .::   ::::::::::
-                              ::.               '':'            ::'  :::,'''.:::'
-                              `::                  :          ,::'  ,:::',,,':::'
-                               `::,                 .     ..::::,, ::::::::::::'
-                                  '::::;,,...       :..::::~     ':::::::::::'
-                                  :::::::::::::::::'~   .         ''::::::'
-                                  ::::::::::::::::::.      .         `::::'
-                                  ::::::::::::::::::::,     .          ::
-                                   ::::::::::::::::::::      :         ::
-                                     ::::::::::::::::'      .       .::'
-                                    :: '::::::::::::'       .     .:':
-                                     ::    ~~::::''        . ,,,:::::::::::::
-                                      :::,,,,,,,,,,,....::::::::::::::::::::::
-                                      :::::::::::::::::: :::::::::::::::::::::
-                                     .::::::::::::::::::,  :::::::::::::::::''
-                                    .:::::::::::::::::::::,  :::::::::::::'
-                                    `::::::::::::::::::::::' """;
+    public static final String LOGO =
+                      "                                      ,::::," + "\n"
+                    + "                          ,,,,:::::::':::::::" + "\n"
+                    + "        ,::::.     ..:::~~           \\::::::" + "\n"
+                    + "       ::::::::::~''      ':       __     ':." + "\n"
+                    + "       ::::::/        __    .o.. : u ::     ':." + "\n"
+                    + "         :::,       :: u :.' '. ' ':::'     '::    ,, .::,," + "\n"
+                    + "          `::       ':::' /.  : .\\         .::   ::::::::::" + "\n"
+                    + "          ::.               '':'            ::'  :::,'''.:::'" + "\n"
+                    + "          `::                  :          ,::'  ,:::',,,':::'" + "\n"
+                    + "           `::,                 .     ..:::.   ::::::::::::'" + "\n"
+                    + "              ':::::,,,....     :..::::~    ``:::::::::::'" + "\n"
+                    + "              :::::::::::::::::'~   .          ''::::::'" + "\n"
+                    + "              ::::::::::::::::::.      .         `::::'" + "\n"
+                    + "              ::::::::::::::::::::,     .          ::" + "\n"
+                    + "               ::::::::::::::::::::      :         ::" + "\n"
+                    + "                  ::::::::::::::::'      .       .::'" + "\n"
+                    + "                  :: '::::::::::::'       .     .:':" + "\n"
+                    + "                   ::    ~~::::''        . ,,,::::,,:::::" + "\n"
+                    + "                   :::,,,,,,,,,,,....:::::::::::::::::::::" + "\n"
+                    + "                  :::::::::::::::::   :::::::::::::::::::::" + "\n"
+                    + "                 .:::::::::::::::::,,  :::::::::::::::::''" + "\n"
+                    + "                .::::::::::::::::::::,   :::::::::::::'" + "\n"
+                    + "                `:::::::::::::::::::::,'" + "\n";
 
 
     /** Constants used to set status of a task */
     private static final String DEFAULT_STATUS = " ";
     private static final String DONE_STATUS = "X";
-
-
-    /** List of tasks being maintained and number of tasks it has */
-    private static ArrayList<Task> tasks = new ArrayList<>();
-    private static int tasksCount = 0;
 
 
     /** Invalid input messages */
@@ -66,6 +61,11 @@ public class Duke {
             = "Squeal... Are you sure that is a task?";
 
 
+    /** List of tasks being maintained and number of tasks it has */
+    private static ArrayList<Task> tasks = new ArrayList<>();
+    private static int tasksCount = 0;
+
+
     /** Methods that display messages */
     public static void greet() {
         String greetString = BORDER + NEWLINE
@@ -79,7 +79,7 @@ public class Duke {
 
     public static void goodbye() {
         String goodbyeString = BORDER + NEWLINE
-                + "Alright, goodbye!" + NEWLINE
+                + "Alright! Goodbye :)" + NEWLINE
                 + BORDER + NEWLINE;
         System.out.print(goodbyeString);
     }
