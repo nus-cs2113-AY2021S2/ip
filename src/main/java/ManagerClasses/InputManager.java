@@ -59,6 +59,7 @@ public class InputManager {
                 break;
             case DELETE:
                 taskManager.deleteTask(command.getTaskNum());
+                taskManager.saveTasksInTxt();
                 break;
             default:
                 PrintManager.printHelpMessage();
