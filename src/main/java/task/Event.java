@@ -12,4 +12,7 @@ public class Event extends Task {
     public void printTask() {
         System.out.println("[E][" + getStatusIcon() + "] " + description + "(at:" + eventDate +")");
     }
+    public String saveTask() {
+        return isDone + " event " + description + " /by " + eventDate;
+    }
 }

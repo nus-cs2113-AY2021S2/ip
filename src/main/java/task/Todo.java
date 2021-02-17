@@ -9,4 +9,7 @@ public class Todo extends Task {
     public void printTask() {
         System.out.println("[T][" + getStatusIcon() + "] " + description);
     }
+    public String saveTask() {
+        return isDone + " todo " + description;
+    }
 }
