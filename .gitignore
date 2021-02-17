@@ -17,4 +17,5 @@ bin/
 text-ui-test/EXPECTED-UNIX.TXT
 
 # data file
-/src/main/java/duke/data/task_list.txt
+/data/task_list.txt
+/src/main/java/META-INF/

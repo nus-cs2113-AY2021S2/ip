@@ -216,6 +216,7 @@ public class Duke {
     }
 
     public static void main(String[] args) throws IOException {
+        createFileIfNotExist();
         ArrayList<String> textInput = readFile();
         initializeTaskList(textInput);
         System.out.print(DIVLINE + GREETINGS + DIVLINE);

@@ -4,11 +4,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class FileManager {
-    private static final String filePath = "./src/main/java/duke/data/task_list.txt";
+    private static String home = System.getProperty("user.dir");
+    private static final String filePath = home + File.separator + "data" + File.separator + "task_list.txt";
+
     public static void createFileIfNotExist() {
         try {
             File myFile = new File(filePath);
@@ -24,11 +28,8 @@ public class FileManager {
 
     public static ArrayList<String> readFile() throws FileNotFoundException {
         File f = new File(filePath); // create a File for the given file path
-        if (!f.exists()) {
-            createFileIfNotExist();
-        }
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
-        ArrayList<String> list = new ArrayList<String>();
+        ArrayList<String> list = new ArrayList<>();
         while (s.hasNextLine()) {
             list.add(s.nextLine());
         }
