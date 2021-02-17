@@ -3,12 +3,15 @@ package duke;
 import duke.exception.EmptyDateException;
 import duke.exception.EmptyDescriptionException;
 import duke.exception.EmptyOrWrongInputException;
+
 import duke.task.TaskManager;
+
+import static duke.Duke.isRun;
 
 public class CommandManager {
 
-    protected String command;
-    protected String description;
+    public String command;
+    public String description;
 
     public static final String TODO_COMMAND = "todo";
     public static final String DEADLINE_COMMAND = "deadline";
@@ -74,8 +77,9 @@ public class CommandManager {
         return descriptionAndDate;
     }
 
-    public static void executeCommand(String command, String description, TaskManager taskManager)
+    public static void executeCommand(String command, String description)
             throws EmptyOrWrongInputException, EmptyDescriptionException, EmptyDateException {
+        TaskManager taskManager = new TaskManager();
         switch (command) {
         case TODO_COMMAND:
             checkDescriptionIsValid(description);
@@ -95,7 +99,7 @@ public class CommandManager {
             break;
         case EXIT_COMMAND:
             taskManager.printExitMessage();
-            System.exit(0);
+            isRun = false;
             break;
         case LIST_COMMAND:
             taskManager.listTasks();

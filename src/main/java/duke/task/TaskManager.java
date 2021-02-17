@@ -1,10 +1,8 @@
 package duke.task;
 
-import java.util.ArrayList;
-import java.util.List;
+import static duke.Duke.taskList;
 
 public class TaskManager {
-    private final List<Task> taskList = new ArrayList<>();
     private static final String BORDER = "\t____________________________________________________________\n";
 
     private static final int ARRAY_INDEX_FOR_DESCRIPTION = 0;

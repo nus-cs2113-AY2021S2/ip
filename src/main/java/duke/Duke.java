@@ -3,13 +3,18 @@ package duke;
 import duke.exception.EmptyDateException;
 import duke.exception.EmptyDescriptionException;
 import duke.exception.EmptyOrWrongInputException;
-import duke.task.TaskManager;
 
+import duke.task.Task;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
     private static final Scanner SCANNER = new Scanner(System.in);
     private static final String BORDER = "\t____________________________________________________________\n";
+    public static final List<Task> taskList = new ArrayList<>();
+    public static boolean isRun = true;
 
     public static void showGreetings () {
         System.out.print("Hello there! This is Jack. Welcome to Task Tracker!\n");
@@ -19,9 +24,9 @@ public class Duke {
         return SCANNER.nextLine();
     }
 
-    public static void runCommand(String command, String description, TaskManager taskManager) {
+    public static void runCommand(String command, String description) {
         try {
-            CommandManager.executeCommand(command, description, taskManager);
+            CommandManager.executeCommand(command, description);
         } catch (IndexOutOfBoundsException | NumberFormatException errorToMarkAsDone) {
             System.out.print(BORDER +
                     "\t☹ OOPS!!! It seems that you have entered an invalid number.\n"
@@ -42,16 +47,15 @@ public class Duke {
     }
 
     public static void main(String[] args) {
+        FileLoader.loadFile();
         showGreetings();
-        boolean isRun = true;
-        TaskManager taskManager = new TaskManager();
 
         while (isRun) {
             String userInput = getUserInput();
             CommandManager commandManager = new CommandManager(userInput);
-            String command = commandManager.getCommand();
-            String description = commandManager.getDescription();
-            runCommand(command, description, taskManager);
+            runCommand(commandManager.getCommand(), commandManager.getDescription());
+
         }
+        FileSaver.saveFile();
     }
 }
