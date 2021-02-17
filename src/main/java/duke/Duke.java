@@ -69,6 +69,8 @@ public class Duke {
             } catch (DukeException e) {
                 System.out.println(DIVLINE + e.getIllegalDeadlineMessage());
                 System.out.print(DIVLINE);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
             break;
         case "event":
@@ -77,6 +79,8 @@ public class Duke {
             } catch (DukeException e) {
                 System.out.println(DIVLINE + e.getIllegalEventMessage());
                 System.out.print(DIVLINE);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
             break;
         case "todo":
@@ -85,6 +89,8 @@ public class Duke {
             } catch (DukeException e) {
                 System.out.println(DIVLINE + e.getIllegalTodoMessage());
                 System.out.print(DIVLINE);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
             break;
         case "delete":
@@ -97,6 +103,8 @@ public class Duke {
             } catch (DukeException e) {
                 System.out.println(DIVLINE + "Target task does not exist or you have specified nothing.");
                 System.out.print(DIVLINE);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
             break;
         default:
@@ -124,7 +132,7 @@ public class Duke {
         System.out.print(DIVLINE);
     }
 
-    private static void addDeadlineToList(String description) throws DukeException {
+    private static void addDeadlineToList(String description) throws DukeException, IOException {
         if (description.startsWith(" ")){
             String ddlDscp = description.substring(1);
             int splitPoint = ddlDscp.indexOf("/by");
@@ -134,13 +142,14 @@ public class Duke {
             Deadline newDdl = new Deadline(ddlDscp.substring(0, splitPoint - 1),
                     ddlDscp.substring(splitPoint + 4));
             taskList.add(newDdl);
+            writeToFile(initializeTextToWrite());
             printAddSuccessMessage(newDdl);
         } else {
             throw new DukeException("Illegal Deadline prompt detected.");
         }
     }
 
-    private static void addEventToList(String description) throws DukeException {
+    private static void addEventToList(String description) throws DukeException, IOException {
         if (description.startsWith(" ")){
             String evtDscp = description.substring(1);
             int splitPoint = evtDscp.indexOf("/at");
@@ -150,16 +159,18 @@ public class Duke {
             Event newEvt = new Event(evtDscp.substring(0, splitPoint - 1),
                     evtDscp.substring(splitPoint + 4));
             taskList.add(newEvt);
+            writeToFile(initializeTextToWrite());
             printAddSuccessMessage(newEvt);
         } else {
             throw new DukeException("Illegal Event prompt detected.");
         }
     }
 
-    private static void addTodoToList(String description) throws DukeException {
+    private static void addTodoToList(String description) throws DukeException, IOException {
         if (description.startsWith(" ")) {
             Task newTodo = new Todo(description.substring(1));
             taskList.add(newTodo);
+            writeToFile(initializeTextToWrite());
             printAddSuccessMessage(newTodo);
         } else {
             throw new DukeException("Illegal Todo Prompt detected.");
@@ -193,13 +204,14 @@ public class Duke {
         System.out.print(DIVLINE);
     }
 
-    private static void deleteFromList(int taskIndex) throws DukeException {
+    private static void deleteFromList(int taskIndex) throws DukeException, IOException {
         if (taskIndex >= taskList.size()) {
             throw new DukeException("Task does not exist");
         }
         Task toBeDeleted = taskList.get(taskIndex);
         // Some manipulation here
         taskList.remove(taskIndex);
+        writeToFile(initializeTextToWrite());
         printDeleteSuccessMessage(toBeDeleted);
     }
 
@@ -217,7 +229,7 @@ public class Duke {
                 System.out.print(DIVLINE);
             }
         }
-        writeToFile(initializeTextToWrite());
+        // writeToFile(initializeTextToWrite());
         System.out.println(DIVLINE + PARTINGS + DIVLINE);
     }
 
