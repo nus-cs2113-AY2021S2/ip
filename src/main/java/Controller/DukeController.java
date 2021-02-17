@@ -68,19 +68,20 @@ public class DukeController {
             FileWriter myWriter = new FileWriter("duke.txt");
             for (Task task : tasks) {
                 if (task instanceof Deadline) {
-                    myWriter.write(((Deadline) task).getType() + " | " + task.getDone() + " | " + task.getDescription() + " | " + ((Deadline) task).getBy());
+                    myWriter.write(((Deadline) task).getType() + " / " + task.getDone() + " / " + task.getDescription() + " / " + ((Deadline) task).getBy());
                 }
                 else if (task instanceof Event) {
-                    myWriter.write(((Event) task).getType() + " | " + task.getDone() + " | " + task.getDescription() + " | " + ((Event) task).getAt());
+                    myWriter.write(((Event) task).getType() + " / " + task.getDone() + " / " + task.getDescription() + " / " + ((Event) task).getAt());
                 }
                 else if (task instanceof ToDo) {
-                    myWriter.write(((ToDo) task).getType() + " | " + task.getDone() + " | " + task.getDescription());
+                    myWriter.write(((ToDo) task).getType() + " / " + task.getDone() + " / " + task.getDescription());
                 }
                 //myWriter.write(((Deadline) task).getBy());
                 myWriter.write("\n");
             }
             myWriter.close();
             System.out.println("Successfully wrote to the file.");
+            System.out.println("--------------------------------------------");
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
@@ -94,10 +95,10 @@ public class DukeController {
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
-                String[] strings = data.split(" | ");
+                String[] strings = data.split(" / ");
                 if (strings[0].equals("T")) {
-                    Task task = new ToDo(strings[4]);
-                    if (strings[2].equals("1")) {
+                    Task task = new ToDo(strings[2]);
+                    if (strings[1].equals("1")) {
                         task.setDone(true);
                     }
                     else {
@@ -106,8 +107,8 @@ public class DukeController {
                     tasks.add(task);
                 }
                 else if (strings[0].equals("D")) {
-                    Task task = new Deadline(strings[4], strings[6]);
-                    if (strings[2].equals("1")) {
+                    Task task = new Deadline(strings[2], strings[3]);
+                    if (strings[1].equals("1")) {
                         task.setDone(true);
                     }
                     else {
@@ -116,8 +117,9 @@ public class DukeController {
                     tasks.add(task);
                 }
                 else if (strings[0].equals("E")) {
-                    Task task = new Event(strings[4], strings[6]);
-                    if (strings[2].equals("1")) {
+                    //System.out.println(strings[4]);
+                    Task task = new Event(strings[2], strings[3]);
+                    if (strings[1].equals("1")) {
                         task.setDone(true);
                     }
                     else {
