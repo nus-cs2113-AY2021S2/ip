@@ -7,6 +7,16 @@ public class ToDo extends Task {
     }
 
     @Override
+    public String toSaveFormat() {
+        if (isDone) {
+            return "T " + "Y " + description;
+        }
+        else {
+            return "T " + "N " + description;
+        }
+    }
+
+    @Override
     public String toString() {
         return "[T]" + super.getStatus() + " " + super.getDescription();
     }

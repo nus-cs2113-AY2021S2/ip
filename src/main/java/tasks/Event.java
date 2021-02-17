@@ -9,6 +9,16 @@ public class Event extends Task {
     }
 
     @Override
+    public String toSaveFormat() {
+        if (isDone) {
+            return "E " + "Y " + description + "/d" + at;
+        }
+        else {
+            return "E " + "N " + description + "/d" + at;
+        }
+    }
+
+    @Override
     public String toString() {
         return "[E]" + super.getStatus() + " " + super.getDescription() + " (at: " + at + ")";
     }

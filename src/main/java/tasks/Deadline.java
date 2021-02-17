@@ -9,6 +9,16 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String toSaveFormat() {
+        if (isDone) {
+            return "D " + "Y " + description + "/d" + by;
+        }
+        else {
+            return "D " + "N " + description + "/d" + by;
+        }
+    }
+
+    @Override
     public String toString() {
         return "[D]" + super.getStatus() + " " + super.getDescription() + " (by: " + by + ")";
     }

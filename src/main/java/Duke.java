@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import tasks.Task;
@@ -52,6 +56,47 @@ public class Duke {
         }
     }
 
+    public static void loadFile(ArrayList<Task> tasks) throws FileNotFoundException {
+        File f = new File("tasks.txt");
+        if (!f.exists()) {
+            throw new FileNotFoundException();
+        }
+        Scanner s = new Scanner(f);
+        while (s.hasNext()) {
+            String input = s.nextLine();
+            String[] words = input.split(" ");
+            boolean isTodo = words[0].equals("T");
+            boolean isDeadline = words[0].equals("D");
+            boolean isEvent = words[0].equals("E");
+            boolean isDone = words[1].equals("Y");
+            input = input.substring(4);
+            words = input.split("/d");
+            if (isDeadline) {
+                Deadline deadline = new Deadline(words[0], words[1]);
+                tasks.add(deadline);
+            }
+            else if (isEvent) {
+                Event event = new Event(words[0], words[1]);
+                tasks.add(event);
+            }
+            else if (isTodo) {
+                ToDo toDo = new ToDo(words[0]);
+                tasks.add(toDo);
+            }
+            if (isDone) {
+                tasks.get(tasks.size()-1).taskComplete();
+            }
+        }
+    }
+
+    public static void saveFile(String filepath, ArrayList<Task> tasks) throws IOException {
+        FileWriter fw = new FileWriter(filepath);
+        for (Task task: tasks) {
+            fw.write(task.toSaveFormat());
+        }
+        fw.close();
+    }
+
     public static void main(String[] args) {
         ArrayList<Task> Tasks =  new ArrayList<Task>();
         String line;
@@ -61,6 +106,12 @@ public class Duke {
         printDashLine();
         System.out.println(INTRO_MESSAGE);
         printDashLine();
+        try {
+            loadFile(Tasks);
+        } catch (FileNotFoundException e) {
+            System.out.println("File Not Found");
+            System.out.println("Creating new file...");
+        }
         line = Input.nextLine();
         boolean inSystem = !line.equals("bye");
         while(inSystem){
@@ -138,6 +189,12 @@ public class Duke {
             }
             line = Input.nextLine();
             inSystem = !line.equals("bye");
+        }
+        String file = "tasks.txt";
+        try{
+            saveFile(file, Tasks);
+        } catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
         }
         printDashLine();
         System.out.println(OUTRO_MESSAGE);
