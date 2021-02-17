@@ -8,10 +8,18 @@ public class TaskList {
         this.tasks = new ArrayList<>();
     }
 
-    // Adds task to list and prints the input in console
+    /*
+     * Prints out message by default unless supplied with 2nd arg false
+     */
     public void addToList(Task newTask) {
+        this.addToList(newTask,true);
+    }
+
+    public void addToList(Task newTask, Boolean isPrinting) {
         tasks.add(newTask);
-        addToListMessage(tasks.size()-1);
+        if (isPrinting) {
+            addToListMessage(tasks.size() - 1);
+        }
     }
 
     private void addToListMessage(int index) {
@@ -36,11 +44,21 @@ public class TaskList {
                 " " + tasks.get(index).toString();
     }
 
-    // Set flag isDone in Task class of index = number - 1
+    public int getSize() {
+        return tasks.size();
+    }
+
+
     public void completeTask(int number) {
+        completeTask(number, true);
+    }
+
+    public void completeTask(int number, boolean isPrinting) {
         int index = number - 1; // adjust for the list label starting from 1
         tasks.get(index).isDone(true);
-        completeTaskMessage(index);
+        if (isPrinting) {
+            completeTaskMessage(index);
+        }
     }
 
     private void completeTaskMessage(int index) {

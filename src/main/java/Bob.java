@@ -1,3 +1,9 @@
+import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
 import java.util.Scanner;
 
 public class Bob {
@@ -6,6 +12,7 @@ public class Bob {
 
     public static void main(String[] args) {
         welcomeMessage();
+        loadFile();
         scanInput();
         goodbyeMessage();
     }
@@ -16,6 +23,85 @@ public class Bob {
                 " If you need anything hit me up fam 😌\n" +
                 LINE_STRING;
         System.out.print(welcome);
+    }
+
+    private static void loadFile() {
+        String home = System.getProperty("user.home");
+        createDataDirectory(home);
+        openFile(home);
+    }
+
+    private static void createDataDirectory(String home) {
+        Path path = Paths.get(home, "data");
+        try {
+            Files.createDirectory(path);
+        } catch (IOException e) {
+            // printIOException();
+        }
+    }
+
+    private static void openFile(String home) {
+        Path path = Paths.get(home, "data", "duke.txt");
+        try {
+            Files.createFile(path);
+        } catch (FileAlreadyExistsException  e) {
+            loadDataFile(path);
+        } catch (IOException e) {
+            printIOException();
+        }
+    }
+
+    private static void loadDataFile(Path path) {
+        try {
+            List<String> taskStrings = Files.readAllLines(path);
+            for (String taskString: taskStrings) {
+                loadTask(taskString);
+            }
+        } catch (IOException e) {
+            printIOException();
+        } catch (NoSuchMethodException e) {
+            printNoSuchMethod();
+        } catch (NumberFormatException e) {
+            printNumberFormatException();
+        }
+    }
+
+    private static void loadTask(String taskString) throws NoSuchMethodException, NumberFormatException{
+        String[] taskStringArray = taskString.split(" @_@ ");
+        Command command = getCommandType(taskStringArray[0]);
+        String isDone = taskStringArray[1];
+        String label = taskStringArray[2];
+        String time = taskStringArray[3];
+
+        switch (command) {
+        case TODO:
+            taskList.addToList(new Todo(label),false);
+            break;
+        case DEADLINE:
+            taskList.addToList(new Deadline(label, time),false);
+            break;
+        case EVENT:
+            taskList.addToList(new Event(label, time),false);
+            break;
+        }
+
+        if (Integer.parseInt(isDone) == 1) {
+            taskList.completeTask(taskList.getSize(), false);
+        }
+    }
+
+    private static void printNumberFormatException() {
+        String exceptionMessage = LINE_STRING +
+                " 😥 Number format exception encountered! Input may be corrupted\n" +
+                LINE_STRING;
+        System.out.println(exceptionMessage);
+    }
+
+    private static void printIOException() {
+        String exceptionMessage = LINE_STRING +
+                " 😥 IO issue encountered! Unable to read file\n" +
+                LINE_STRING;
+        System.out.println(exceptionMessage);
     }
 
 
@@ -34,7 +120,7 @@ public class Bob {
      */
     private static void scanLoop(Scanner in) {
         boolean isScanning = true;
-        String inputString = "";
+        String inputString;
         Command commandType = null;
 
         while (isScanning) {
@@ -63,7 +149,7 @@ public class Bob {
 
     private static void printNoSuchMethod() {
         String exceptionMessage = LINE_STRING +
-                " 😥 I don't quite get what you mean dude\n" +
+                " 😥 I don't quite get what the command means\n" +
                 LINE_STRING;
         System.out.println(exceptionMessage);
     }
