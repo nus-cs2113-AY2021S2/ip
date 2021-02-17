@@ -1,14 +1,24 @@
 package Duke;
 
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.FileNotFoundException;
 
 public class Duke { //implement toString() next
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         welcomeMessage();
 
         Task[] taskList = new Task[100];
         int taskCount = 0;
+
+        File dataFile = new File("data/tasks.txt");
+        if (!dataFile.createNewFile()) {
+            taskCount = downloadTasks(dataFile, taskList, taskCount);
+        }
+
         Scanner in = new Scanner(System.in);
         String commandInput = in.nextLine();
 
@@ -54,7 +64,48 @@ public class Duke { //implement toString() next
             commandInput = in.nextLine();
         }
 
+        UploadTasks(taskList, taskCount);
+
         exitMessage();
+    }
+
+    private static void UploadTasks(Task[] taskList, int taskCount) throws java.io.IOException {
+        FileWriter fw = new FileWriter("data/tasks.txt");
+        for (int i = 0; i < taskCount; ++i) {
+            int taskStatus = taskList[i].isDone ? 1 : 0;
+            if (taskList[i].getClass().getName().equals("Duke.Todo")) {
+                fw.write("T | " + taskStatus + " | " + taskList[i].description + System.lineSeparator());
+            } else if (taskList[i].getClass().getName().equals("Duke.Deadline")) {
+                fw.write("D | " + taskStatus + " | " + taskList[i].description + taskList[i].time + System.lineSeparator());
+            } else if (taskList[i].getClass().getName().equals("Duke.Event")) {
+                fw.write("E | " + taskStatus + " | " + taskList[i].description + taskList[i].time + System.lineSeparator());
+            }
+        }
+        fw.close();
+    }
+
+    private static int downloadTasks(File file, Task[] taskList, int taskCount) throws FileNotFoundException {
+        Scanner s = new Scanner(file);
+        while (s.hasNext()) {
+            String commandInput = s.nextLine();
+            if (commandInput.startsWith("T")) {
+                String description = commandInput.substring(8);
+                taskList[taskCount] = new Todo(description);
+            } else if (commandInput.startsWith("D")) {
+                int timeIndex = commandInput.indexOf("(by");
+                String description = commandInput.substring(8, timeIndex);
+                taskList[taskCount] = new Deadline(description, commandInput.substring(timeIndex + 1));
+            } else if (commandInput.startsWith("E")) {
+                int timeIndex = commandInput.indexOf("(at");
+                String description = commandInput.substring(8, timeIndex);
+                taskList[taskCount] = new Deadline(description, commandInput.substring(timeIndex + 1));
+            }
+            if (commandInput.charAt(4) == '1') {
+                taskList[taskCount].setDone();
+            }
+            taskCount++;
+        }
+        return taskCount;
     }
 
     private static void printList(Task[] taskList, int taskCount) {
