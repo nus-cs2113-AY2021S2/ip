@@ -1,13 +1,11 @@
 package duke;
 
 import duke.command.Command;
-import duke.dao.TaskDaoImpl;
 import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.task.Task;
 import duke.ui.Menu;
 
-import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class Duke {
