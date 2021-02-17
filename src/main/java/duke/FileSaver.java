@@ -7,8 +7,6 @@ import static duke.Duke.taskList;
 
 public class FileSaver {
 
-    private static final String FILE_DIRECTORY = "data";
-
     private static void writeToFile(String filePath) throws IOException {
         FileWriter fileWriter = new FileWriter(filePath);
         for (int i = 0; i < taskList.size(); ++i) {
@@ -34,12 +32,13 @@ public class FileSaver {
     }
 
     public static void saveFile() {
-        String filePath = "src/data/duke.txt";
+        String userDirectory = System.getProperty("user.dir");
+        String filePath = userDirectory + "/data/duke.txt";
         try {
             writeToFile(filePath);
             System.out.print("Data is saved\n");
         } catch (IOException ioException) {
-            System.out.print("Something went wrong" + ioException.getMessage());
+            System.out.print("Something went wrong " + ioException.getMessage() + "\n");
         }
     }
 

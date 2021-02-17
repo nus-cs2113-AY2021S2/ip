@@ -22,9 +22,6 @@ public class FileLoader {
     private static final String DEADLINE_TYPE = "[D]";
     private static final String TODO_TYPE = "[T]";
 
-    private static final String FILE_DIRECTORY = "src/data";
-
-
     public static void readFileContents(String filePath) throws FileNotFoundException {
         File file = new File(filePath);
         Scanner scanner = new Scanner(file);
@@ -81,15 +78,19 @@ public class FileLoader {
     }
 
     public static void loadFile() {
-        String filePath = "src/data/duke.txt";
         System.out.print("Loading last saved data...\n\n");
+
+        String userDirectory = System.getProperty("user.dir");
+        String fileDirectory = userDirectory + "/data";
+        String filePath = userDirectory + "/data/duke.txt";
+
         try {
             readFileContents(filePath);
             System.out.print("Load successful ☺\n\n");
         } catch (FileNotFoundException fileNotFoundException) {
             System.out.print("Load failed... System unable to find last saved data ☹\n\n"
                     + "Proceed application without loading...\n\n");
-            createDirectory(FILE_DIRECTORY);
+            createDirectory(fileDirectory);
         }
     }
 
