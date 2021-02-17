@@ -50,6 +50,7 @@ public class Command {
 
         // Remove the command word (eg. deadline, event, etc.) from the description.
         description = arguments[0].substring(arguments[0].indexOf(' ')+1);
+        description = description.trim();
 
         if (commandType == CommandEnum.DEADLINE || commandType == CommandEnum.EVENT) {
             // Extract and remove the '/by' or '/at' from the 'when' argument
