@@ -5,6 +5,10 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class Duke {
@@ -99,6 +103,29 @@ public class Duke {
         System.out.println("I have added this task:" );
         System.out.println(tasks[Task.totalTasks-1].toString());
         System.out.println("You now have " + Task.totalTasks + " tasks in your tasklist.");
+        writeTasklistToFile();
+    }
+
+    private static void writeTasklistToFile() {
+        try {
+            String filePath = "data/duke.txt";
+            // check if the directory and file exists
+            if (Files.notExists(Paths.get("data/"))) {
+                Files.createDirectory(Paths.get("data/"));
+            } else if (Files.notExists(Paths.get("data/duke.txt"))) {
+                Files.createFile(Paths.get("data/duke.txt"));
+            }
+
+            FileWriter fw = new FileWriter(filePath);
+            //Task task : tasks for arraylist
+            for (int i = 0; i < Task.totalTasks; i++) {
+                fw.write(tasks[i].toString() + System.lineSeparator());
+            }
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("Exception occurred when writing tasklist to file! :(");
+        }
+
     }
 
     public static void main(String[] args) {
@@ -117,6 +144,7 @@ public class Duke {
                 listTasks();
             } else if (input.contains("done")) {
                 markTasksAsDone(input);
+                writeTasklistToFile();
             } else {
                 try {
                     addTask(input);
