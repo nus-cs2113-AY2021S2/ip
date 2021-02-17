@@ -1,6 +1,8 @@
+package Duke.todoList.task;
+
 public class improvedTask extends task {
-    private listTypes type;
-    private String date;
+    protected listTypes type;
+    protected String date;
 
     public improvedTask(String desc, listTypes type, String date){
         super(desc);
@@ -56,6 +58,10 @@ public class improvedTask extends task {
             return "[ ]";
         }
 
+    }
+
+    public boolean isResolved(){
+        return this.resolved;
     }
 
 

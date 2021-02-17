@@ -1,3 +1,8 @@
+package Duke.todoList;
+
+import Duke.todoList.task.improvedTask;
+import Duke.todoList.task.listTypes;
+
 import java.util.ArrayList;
 
 public class todoList {
@@ -51,7 +56,7 @@ public class todoList {
 
     public String resolveTask(String num){ // resolves task and returns confirmation if task is not resolved
         Integer taskNum = Integer.parseInt(num) - 1;
-        if (taskList.get(taskNum).resolved){
+        if (taskList.get(taskNum).isResolved()){
             return "Task is already done!";
         }
         taskList.get(taskNum).resolve();
@@ -74,7 +79,7 @@ public class todoList {
         improvedTask temp = taskList.get(taskNum);
         taskList.remove(temp);
         totalTasks--;
-        if(!temp.resolved) {
+        if(!temp.isResolved()) {
             leftoverTasks--;
         }
         String out = "Noted. I've removed this task: \n     "

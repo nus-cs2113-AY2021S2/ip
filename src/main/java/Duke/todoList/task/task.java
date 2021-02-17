@@ -1,3 +1,7 @@
+package Duke.todoList.task;
+
+import Duke.Duke;
+
 public class task {
     protected String description;
     protected boolean resolved;
