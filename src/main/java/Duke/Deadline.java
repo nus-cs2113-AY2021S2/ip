@@ -7,7 +7,7 @@ public class Deadline extends Task {
         super(description, time);
     }
 
-    public String getAlphabet(){
+    public String getAlphabet() {
         return "D";
     }
 
