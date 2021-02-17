@@ -6,7 +6,8 @@ public class Deadline extends Task{
         this.dueTime = dueTime;
     }
 
-    public String getDueTime() {
+    @Override
+    public String getTime() {
         return dueTime;
     }
 

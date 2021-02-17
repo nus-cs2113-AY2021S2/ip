@@ -6,7 +6,8 @@ public class Event extends Task{
         this.startTime = startTime;
     }
 
-    public String getStartTime() {
+    @Override
+    public String getTime() {
         return startTime;
     }
 

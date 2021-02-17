@@ -15,6 +15,10 @@ public abstract class Task {
         return label;
     }
 
+    public String getTime() {
+        return "";
+    }
+
     @Override
     public String toString() {
         return getLabel();

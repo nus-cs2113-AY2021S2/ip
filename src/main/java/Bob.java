@@ -90,6 +90,13 @@ public class Bob {
         }
     }
 
+    /*
+     * Converts a task to the file data format
+     */
+//    private static String saveTask(Task task) {
+//        String
+//    }
+
     private static void printNumberFormatException() {
         String exceptionMessage = LINE_STRING +
                 " 😥 Number format exception encountered! Input may be corrupted\n" +
