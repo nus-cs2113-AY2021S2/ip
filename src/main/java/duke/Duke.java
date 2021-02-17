@@ -12,6 +12,7 @@ public class Duke {
     private static Scanner in = new Scanner(System.in);
     //Array of object
     private static Task[] tasks = new Task[100];
+    //Array list to store the task objects
     private static ArrayList<Task> taskArrayList = new ArrayList<Task>();
 
 
