@@ -79,6 +79,7 @@ public class Duke {
                     System.out.println("Noted. I've removed this task:");
                     taskArrayList.get(index - 1).printStatus();
                     taskArrayList.remove(index-1);
+                    count = count -1 ; //update count value after deleting
                     System.out.println("Now you have "+ taskArrayList.size() +" tasks in the list.");
                 }
             }catch(DukeException e){
