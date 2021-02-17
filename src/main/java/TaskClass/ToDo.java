@@ -1,4 +1,8 @@
-public class ToDo extends Task{
+package TaskClass;
+
+import TaskClass.Task;
+
+public class ToDo extends Task {
     public static final String TASK_INFO_FORMAT = "[T][%s]%s";
 
     public ToDo(String name, boolean isDone){
@@ -18,5 +22,14 @@ public class ToDo extends Task{
     public void newTaskOutput(){
         System.out.print(LINE_SEPERATOR + "\n    ToDo added:\n      ");
         this.printTaskInfo();
+    }
+
+    @Override
+    public String toFile(){
+        if(taskDone) {
+            return "T | 1 | " + taskName;
+        } else {
+            return "T | 0 | " +taskName;
+        }
     }
 }

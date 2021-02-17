@@ -1,4 +1,6 @@
-public class Deadline extends Task{
+package TaskClass;
+
+public class Deadline extends Task {
     public static final String TASK_INFO_FORMAT = "[D][%s]%s (by: %s)";
     private String doBefore;
 
@@ -18,7 +20,16 @@ public class Deadline extends Task{
 
     @Override
     public void newTaskOutput(){
-        System.out.print(LINE_SEPERATOR + "\n    Deadline added:\n      ");
+        System.out.print(Task.LINE_SEPERATOR + "\n    Deadline added:\n      ");
         this.printTaskInfo();
+    }
+
+    @Override
+    public String toFile(){
+        if(taskDone) {
+            return "D | 1 | " + taskName + " | " + doBefore;
+        } else {
+            return "D | 0 | " + taskName + " | " + doBefore;
+        }
     }
 }

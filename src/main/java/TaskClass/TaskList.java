@@ -1,10 +1,23 @@
+package TaskClass;
+
 import Exception.TaskAlreadyDoneException;
+import TaskClass.Task;
+
 import java.util.ArrayList;
 
 public class TaskList {
-    private ArrayList<Task> tasks = new ArrayList<>();
-    private int taskCount = 0;
+    private ArrayList<Task> tasks;
+    private int taskCount;
     public static final String LINE_SEPERATOR = "    ____________________________________________________________";
+
+    public TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
+        taskCount = tasks.size();
+    }
+
+    public ArrayList<Task> getTasks(){
+        return tasks;
+    }
 
     public int getTaskCount(){
         return taskCount;
@@ -47,7 +60,7 @@ public class TaskList {
 
     public void printTaskList(){
         System.out.println(LINE_SEPERATOR + "\n    Here are the tasks in your list:");
-        for(int i=0; i<taskCount; i++){
+        for(int i=0; i<tasks.size(); i++){
             System.out.print("    " + (i+1) + ".");
             tasks.get(i).printTaskInfo();
         }
