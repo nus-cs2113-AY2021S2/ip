@@ -5,6 +5,15 @@ public class Deadline extends Task{
     public Deadline(String description, String by){
         super(description);
         this.by = by;
+        this.natureOfTask = "D";
+    }
+
+    public String getDeadline(){
+        return this.by;
+    }
+
+    public String getSpecialDescription(){
+        return this.getDeadline();
     }
 
     public String toString() {

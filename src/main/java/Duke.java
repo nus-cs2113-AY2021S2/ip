@@ -129,11 +129,93 @@ public class Duke {
         }
     }
 
+    private static void writeToFile(String filePath, String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        fw.write(textToAdd);
+        fw.close();
+    }
 
+    private static void appendToFile(String filePath, String textToAppend) throws IOException {
+        FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
+        fw.write(textToAppend);
+        fw.close();
+    }
 
+    private static void setupTasks() throws FileNotFoundException,
+            MissingDeadlineException, MissingEventTimeException {
+        // Reads in current tasks when main() starts running.
+        File f = new File("duke.txt");
+        if (!f.exists()) {
+            try{
+                writeToFile("duke.txt", "");
+            } catch (IOException e) {
+                System.out.println("Something went wrong: " + e.getMessage());
+            }
+        } else {
+            // Reads in inputs from the file and update tasks
+            Scanner s = new Scanner(f);
+            while (s.hasNext()){
+                String line = s.nextLine();
+                String[] contents = line.split(" | ");
+                String taskDescription = contents[4];
+
+                switch (contents[0]){
+                case "T":{
+                    Todo t = new Todo(taskDescription);
+                    if (contents[2].contains("1")) {
+                        t.markAsDone();
+                    }
+                    tasks.add(t);
+                    break;
+                }
+                case "D":{
+                    Deadline d = new Deadline(taskDescription, contents[contents.length -1]);
+                    if (contents[2].contains("1")) {
+                        d.markAsDone();
+                    }
+                    tasks.add(d);
+                    break;
+                }
+                case "E":{
+                    Event e = new Event(taskDescription, contents[contents.length -1]);
+                    if (contents[2].contains("1")) {
+                        e.markAsDone();
+                    }
+                    tasks.add(e);
+                    break;
+                }
+                }
+            }
+        }
+    }
+
+    private static void saveTasksToFile(){
+        // Saves the tasks from lists to duke.txt
+        try{
+            writeToFile("duke.txt", "");
+        } catch (IOException e) {
+            System.out.println("Something went wrong when attempting to reset duke.txt: " + e.getMessage());
+        }
+        for (Task t : tasks) {
+            try {
+                String lineToWrite = t.getNatureOfTask() + " | " + ((t.getIsDone())?"1":"0") +
+                        " | " + t.getDescription() + " | " + t.getSpecialDescription();
+                appendToFile("duke.txt", lineToWrite + System.lineSeparator());
+            } catch (IOException e) {
+                System.out.println("Something went wrong when attempting to write duke.txt: " + e.getMessage());
+            }
+        }
+    }
 
     public static void main(String[] args) {
         greetUser();
+
+        try {
+            setupTasks();
+        } catch (FileNotFoundException | StringIndexOutOfBoundsException |
+                MissingDeadlineException | MissingEventTimeException e) {
+            System.out.println("Error when attempting to read duke.txt. No data will be read.");
+        }
 
         String line;
         Scanner in = new Scanner(System.in);
@@ -150,5 +232,7 @@ public class Duke {
             }
         }
         signOff();
+
+        saveTasksToFile();
     }
 }
