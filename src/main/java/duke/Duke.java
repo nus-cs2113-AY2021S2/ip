@@ -5,6 +5,14 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -18,10 +26,78 @@ public class Duke {
     private static String exceptionGreeting = "\ud83d\ude16 OOPS!!! ";
     private static Task[] tasks = new Task[100];
     private static int taskCounter = 0;
+    public static final String ROOT_PATH = System.getProperty("user.dir");
+    public static final Path FOLDER_PATH = Paths.get(ROOT_PATH, "data");
+    public static final Path FILE_PATH = Paths.get(ROOT_PATH, "data", "duke.txt");
 
     public static void main(String[] args) {
+        createFile();
+        loadFile();
         showWelcomeMessage();
         inputLoop();
+        saveToFile();
+    }
+
+    private static void loadFile() {
+        try {
+            List<String> lines = Files.readAllLines(FILE_PATH);
+            for (String line : lines) {
+                String[] components = line.split("/");
+                System.out.println(components[2]);
+                Task newTask = new Task(components[2]);
+                switch (components[0]) {
+                case "T":
+                    newTask = new ToDo(components[2]);
+                    break;
+                case "D":
+                    newTask = new Deadline(components[2], components[3]);
+                    break;
+                case "E":
+                    newTask = new Event(components[2], components[3]);
+                }
+                if (components[1].equals("1")) {
+                    newTask.markAsDone();
+                }
+                tasks[taskCounter] = newTask;
+                taskCounter++;
+            }
+        } catch (IOException e) {
+        }
+    }
+
+    private static void createFile() {
+        try {
+            Files.createDirectory(FOLDER_PATH);
+        } catch (FileAlreadyExistsException e) {
+        } catch (IOException e) {
+        }
+
+        try {
+            Files.createFile(FILE_PATH);
+        } catch (FileAlreadyExistsException e) {
+        } catch (IOException e) {
+        }
+    }
+
+    private static void saveToFile() {
+        try {
+            FileWriter fw = new FileWriter(FILE_PATH.toString());
+            for (int i = 1; i <= taskCounter; i++) {
+                String description = tasks[i-1].getDescription();
+                String done = (tasks[i-1].isDone()) ? "1" : "0";
+                if (tasks[i-1] instanceof ToDo) {
+                    fw.write("T" + "/" + done + "/" + description + System.lineSeparator());
+                } else if (tasks[i-1] instanceof Deadline) {
+                    String by = ((Deadline) tasks[i-1]).getBy();
+                    fw.write("D" + "/" + done + "/" + description + "/" + by + System.lineSeparator());
+                } else if (tasks[i-1] instanceof Event) {
+                    String at = ((Event) tasks[i-1]).getAt();
+                    fw.write("E" + "/" + done + "/" + description + "/" + at + System.lineSeparator());
+                }
+            }
+            fw.close();
+        } catch (IOException e) {
+        }
     }
 
     private static void inputLoop() {

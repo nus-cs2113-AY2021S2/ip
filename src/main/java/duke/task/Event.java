@@ -8,6 +8,10 @@ public class Event extends Task {
         this.at = at;
     }
 
+    public String getAt() {
+        return at;
+    }
+
     @Override
     public String getStatusIcon() {
         return (isDone ? "\u2713" : " ");
