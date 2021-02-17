@@ -1,4 +1,6 @@
 public abstract class Task {
+    protected static final String DATA_DELIMITER = " @_@ ";
+
     protected boolean isDone;
     protected String label;
 
@@ -13,6 +15,22 @@ public abstract class Task {
 
     public String getLabel() {
         return label;
+    }
+
+    public String getTime() {
+        return " ";
+    }
+
+    /*
+     * Converts a task to the file data format
+     */
+    public String formatSaveTask() {
+        String taskType = this.getClass().getSimpleName().toLowerCase();
+        String isDone = this.isDone() ? "1" : "0";
+        String label = this.getLabel();
+        String time = this.getTime();
+
+        return taskType + DATA_DELIMITER + isDone + DATA_DELIMITER + label + DATA_DELIMITER + time;
     }
 
     @Override

@@ -1,11 +1,23 @@
+import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
 import java.util.Scanner;
 
 public class Bob {
     public static final String LINE_STRING = "____________________________________________________________\n";
+    public static final String DATA_DELIMITER = " @_@ ";
+    public static final String DATA_DIRECTORY = "data";
+    public static final String SAVE_FILE_NAME = "duke.txt";
+    public static final String DIRECTORY_HOME = System.getProperty("user.home");
     public static TaskList taskList = new TaskList();
+
 
     public static void main(String[] args) {
         welcomeMessage();
+        loadFile();
         scanInput();
         goodbyeMessage();
     }
@@ -18,6 +30,81 @@ public class Bob {
         System.out.print(welcome);
     }
 
+    private static void loadFile() {
+        createDataDirectory();
+        openFile();
+    }
+
+    private static void createDataDirectory() {
+        Path path = Paths.get(DIRECTORY_HOME, "data");
+        try {
+            Files.createDirectory(path);
+        } catch (IOException e) {
+            // printIOException(); TODO: figure out why IO Exception is triggered here
+        }
+    }
+
+    private static void openFile() {
+        Path path = Paths.get(DIRECTORY_HOME, DATA_DIRECTORY, SAVE_FILE_NAME);
+        try {
+            Files.createFile(path);
+        } catch (FileAlreadyExistsException  e) {
+            loadDataFile(path);
+        } catch (IOException e) {
+            printIOException();
+        }
+    }
+
+    private static void loadDataFile(Path path) {
+        try {
+            List<String> taskStrings = Files.readAllLines(path);
+            for (String taskString: taskStrings) {
+                loadTask(taskString);
+            }
+        } catch (IOException e) {
+            printIOException();
+        } catch (NoSuchMethodException e) {
+            printNoSuchMethod();
+        } catch (NumberFormatException e) {
+            printNumberFormatException();
+        }
+    }
+
+    private static void loadTask(String taskString) throws NoSuchMethodException, NumberFormatException{
+        String[] taskStringArray = taskString.split(DATA_DELIMITER);
+        Command command = getCommandType(taskStringArray[0]);
+        String isDone = taskStringArray[1];
+        String label = taskStringArray[2];
+        String time = taskStringArray[3];
+
+        switch (command) {
+        case TODO:
+            taskList.addToList(new Todo(label),false);
+            break;
+        case DEADLINE:
+            taskList.addToList(new Deadline(label, time),false);
+            break;
+        case EVENT:
+            taskList.addToList(new Event(label, time),false);
+            break;
+        }
+
+        if (Integer.parseInt(isDone) == 1) {
+            taskList.completeTask(taskList.getSize(), false);
+        }
+    }
+
+    private static void saveData() {
+        Path path = Paths.get(DIRECTORY_HOME, DATA_DIRECTORY, SAVE_FILE_NAME);
+        try {
+            Files.deleteIfExists(path);
+            Files.createFile(path);
+            List<String> taskStrings = taskList.saveTaskList();
+            Files.write(path, taskStrings);
+        } catch (IOException e) {
+            printIOException();
+        }
+    }
 
     private static void scanInput() {
         Scanner in = new Scanner(System.in);
@@ -34,7 +121,7 @@ public class Bob {
      */
     private static void scanLoop(Scanner in) {
         boolean isScanning = true;
-        String inputString = "";
+        String inputString;
         Command commandType = null;
 
         while (isScanning) {
@@ -42,6 +129,7 @@ public class Bob {
                 inputString = in.nextLine();
                 commandType = getCommandType(inputString);
                 isScanning = scanSwitch(inputString, commandType);
+                saveData();
             } catch (java.util.InputMismatchException e) {
                 printInputMismatch();
             } catch (NoSuchMethodException  e) {
@@ -54,6 +142,20 @@ public class Bob {
         }
     }
 
+    private static void printNumberFormatException() {
+        String exceptionMessage = LINE_STRING +
+                " 😥 Number format exception encountered! Input may be corrupted\n" +
+                LINE_STRING;
+        System.out.println(exceptionMessage);
+    }
+
+    private static void printIOException() {
+        String exceptionMessage = LINE_STRING +
+                " 😥 IO issue encountered! Unable to read file\n" +
+                LINE_STRING;
+        System.out.println(exceptionMessage);
+    }
+
     private static void printInputMismatch() {
         String exceptionMessage = LINE_STRING +
                 " 😥 There is some issue with getting you input\n" +
@@ -63,7 +165,7 @@ public class Bob {
 
     private static void printNoSuchMethod() {
         String exceptionMessage = LINE_STRING +
-                " 😥 I don't quite get what you mean dude\n" +
+                " 😥 I don't quite get what the command means\n" +
                 LINE_STRING;
         System.out.println(exceptionMessage);
     }

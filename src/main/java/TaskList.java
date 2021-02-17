@@ -1,7 +1,8 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class TaskList {
-    private ArrayList<Task> tasks;
+    private final ArrayList<Task> tasks;
     protected static final String LINE_STRING = "____________________________________________________________\n";
 
     public TaskList() {
@@ -9,8 +10,14 @@ public class TaskList {
     }
 
     public void addToList(Task newTask) {
+        this.addToList(newTask,true);
+    }
+
+    public void addToList(Task newTask, Boolean isPrinting) {
         tasks.add(newTask);
-        addToListMessage(tasks.size()-1);
+        if (isPrinting) {
+            addToListMessage(tasks.size() - 1);
+        }
     }
 
     private void addToListMessage(int index) {
@@ -35,13 +42,23 @@ public class TaskList {
     }
 
     public void completeTask(String s) {
-        completeTask(Integer.parseInt(s));
+        completeTask(Integer.parseInt(s), true);
     }
 
-    public void completeTask(int i) {
-        int index = i - 1; // adjust for the list label starting from 1
+    public int getSize() {
+        return tasks.size();
+    }
+
+    public void completeTask(int number) {
+        completeTask(number, true);
+    }
+
+    public void completeTask(int number, boolean isPrinting) {
+        int index = number - 1; // adjust for the list label starting from 1
         tasks.get(index).isDone(true);
-        completeTaskMessage(index);
+        if (isPrinting) {
+            completeTaskMessage(index);
+        }
     }
 
     private void completeTaskMessage(int index) {
@@ -115,10 +132,18 @@ public class TaskList {
     }
 
     private static String getLabel(String string, String commandType) throws NoCommandLabelException {
-        String label = string.replaceFirst(commandType,"").trim();
+        String label = string.replaceFirst(commandType, "").trim();
         if (label.isEmpty()) {
             throw new NoCommandLabelException();
         }
         return label;
+    }
+
+    public List<String> saveTaskList() {
+        List<String> taskStrings = new ArrayList<>();
+        for (Task task: tasks) {
+            taskStrings.add(task.formatSaveTask());
+        }
+        return taskStrings;
     }
 }
