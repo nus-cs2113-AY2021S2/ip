@@ -199,6 +199,7 @@ public class Duke {
             }
             index++;
             System.out.println(s.nextLine());
+            
         }
     }
 
