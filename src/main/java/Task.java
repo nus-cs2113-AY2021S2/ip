@@ -12,6 +12,7 @@ public class Task {
         Task.taskCount = taskCount;
     }
 
+
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -36,5 +37,10 @@ public class Task {
     @Override
     public String toString(){
         return "[" + this.getStatusIcon() +"]" + this.description;
+    }
+
+    public void loadStatus(String s) {
+        if (s.equals("\u2713"))
+            isDone = true;
     }
 }

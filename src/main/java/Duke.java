@@ -13,10 +13,39 @@ public class Duke {
         File f = new File(filePath); // create a File for the given file path
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
         while (s.hasNext()) {
-            System.out.println(s.nextLine());
+            String nextItem = s.nextLine();
+            loadItem(nextItem);
+            System.out.println(nextItem);
         }
     }
 
+    private static void loadItem(String item) {
+        char type = item.charAt(1);
+        Task task;
+        String description;
+        switch (type){
+        case 'T':
+            task = new Todo(item.substring(6));
+            task.loadStatus(item.substring(4,5));
+            break;
+        case 'E':
+            description = item.substring(6, item.indexOf(" (at:"));
+            String at = item.substring(item.indexOf(" (at:") + 6 , item.indexOf(")"));
+            task = new Event(description, at);
+            task.loadStatus(item.substring(4,5));
+            break;
+        case 'D':
+            description = item.substring(6, item.indexOf(" (by:"));
+            String by = item.substring(item.indexOf(" (by:") + 6 , item.indexOf(")"));
+            task = new Deadline(description, by);
+            task.loadStatus(item.substring(4,5));
+            break;
+        default:
+            System.out.println("no tasks");
+            task = null;
+        }
+        tasks.add(task);
+    }
     private static void writeToFile(String filePath) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         //System.out.println(tasks.length);
