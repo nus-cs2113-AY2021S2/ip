@@ -1,9 +1,19 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class Delete {
-    public static void main(String[] args) {
+
+    private static void writeToFile(String filePath, String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        fw.write(textToAdd);
+        fw.close();
+    }
+
+    public static void main(String[] args) throws IOException {
 
         String line;
         String elem;
@@ -119,6 +129,18 @@ public class Delete {
                         "\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
                         "\tPlease start with the following title:\n\t[T][ ]todo\n\t[D][ ]deadline\n\t[E][ ]event\n" +
                         "\t____________________________________________________________\n");
+            }
+            Files.delete(Paths.get("D:/OneDrive - National University of Singapore/Study/NUS/Year 2/Semester 2/CS2101/ip/list.txt"));
+            FileWriter list = new FileWriter("D:/OneDrive - National University of Singapore/Study/NUS/Year 2/Semester 2/CS2101/ip/list.txt",true);
+            try {
+                int number = 1;
+                for (Task t : tasks) {
+                    list.write("\t" + number + "." + t + "\n");
+                    number++;
+                }
+                list.close();
+            } catch (IOException e) {
+                System.out.println("Something went wrong: " + e.getMessage());
             }
         }
     }
