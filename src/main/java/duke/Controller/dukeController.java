@@ -172,11 +172,11 @@ public class dukeController {
             FileWriter writer = new FileWriter("saveDuke.txt");
             for (Task task : tasks) {
                 if (task instanceof toDo) {
-                    writer.write("T" + " | " + task.getSaveDone() + " | " + task.getDescription());
+                    writer.write("T" + " / " + task.getSaveDone() + " / " + task.getDescription());
                 } else if (task instanceof Deadline) {
-                    writer.write("D" + " | " + task.getSaveDone() + " | " + task.getDescription() + " | " + ((Deadline) task).getByDate());
+                    writer.write("D" + " / " + task.getSaveDone() + " / " + task.getDescription() + " / " + ((Deadline) task).getByDate());
                 } else if (task instanceof Event) {
-                    writer.write("E" + " | " + task.getSaveDone() + " | " + task.getDescription() + " | " + ((Event) task).getAtDate());
+                    writer.write("E" + " / " + task.getSaveDone() + " / " + task.getDescription() + " / " + ((Event) task).getAtDate());
                 }
                 writer.write("\n");
             }
@@ -195,26 +195,26 @@ public class dukeController {
             Scanner fileReader = new Scanner(saveDuke);
             while (fileReader.hasNext()) {
                 String line = fileReader.nextLine();
-                String[] stringSplit = line.split(" | ");
+                String[] stringSplit = line.split(" / ");
                 if (stringSplit[0].equals("T")) {
-                    Task task = new toDo(stringSplit[4]);
-                    if (stringSplit[2].equals("0")) {
+                    Task task = new toDo(stringSplit[3]);
+                    if (stringSplit[1].equals("0")) {
                         task.setAsDone(false);
                     } else {
                         task.setAsDone(true);
                     }
                     tasks.add(task);
                 } else if (stringSplit[0].equals("E")) {
-                    Task task = new Event(stringSplit[4], stringSplit[6]);
-                    if (stringSplit[2].equals("0")) {
+                    Task task = new Event(stringSplit[2], stringSplit[3]);
+                    if (stringSplit[1].equals("0")) {
                         task.setAsDone(false);
                     } else {
                         task.setAsDone(true);
                     }
                     tasks.add(task);
                 } else if (stringSplit[0].equals("D")) {
-                    Task task = new Deadline(stringSplit[4], stringSplit[6]);
-                    if (stringSplit[2].equals("0")) {
+                    Task task = new Deadline(stringSplit[2], stringSplit[3]);
+                    if (stringSplit[1].equals("0")) {
                         task.setAsDone(false);
                     } else {
                         task.setAsDone(true);
@@ -227,6 +227,7 @@ public class dukeController {
             System.out.println("Cannot load file...you are clapped! Churn up new list please.");
             return null;
         }
+        System.out.println("File loaded boiiiiii!");
         return tasks;
     }
 }
