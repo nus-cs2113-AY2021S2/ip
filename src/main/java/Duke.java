@@ -31,7 +31,7 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello! I'm Duke!\n" + logo);
+        System.out.println("Hello! I'm Duke!!\n" + logo);
         System.out.println("What can I do for you?\n" + "List of commands: todo, deadline, event, done, bye");
         printDividerLine();
     }
