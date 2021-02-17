@@ -24,6 +24,8 @@ public class Deadline extends Task {
         return "[" + getType() + "]" + "[" + getStatusIcon() + "] " +
                 description + " (by: " + by + ")";
     }
+    public String toFileString() {
+        return getType() + " | " + getStatusNum() + " | " + description + " | " + by;}
 }
 
 

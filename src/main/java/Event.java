@@ -22,8 +22,10 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[" + getType() + "]" + "[" + getStatusIcon() + "] " +
-                description + " (at: " + at + ")";
-    }
+                description + " (at: " + at + ")"; }
+
+    public String toFileString() {
+        return getType() + " | " + getStatusNum() + " | " + description + " | " + at;}
 
 
 }

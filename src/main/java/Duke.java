@@ -1,7 +1,19 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.*;
+
 public class Duke {
     private static final String line = "____________________________________________________________\n";
+    public static File filePath = new File("data/duke.txt");
+    public static ArrayList<Task> tasks = new ArrayList<>();
+    public static int index = 0;
+
+
+    private static void appendToFile(String textToAppend) throws IOException {
+        FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
+        fw.write(textToAppend);
+        fw.close();
+    }
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -10,7 +22,17 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
-        System.out.println("Hello from\n" + logo);
+
+        try {
+            printFileContents(filePath);
+        } catch (FileNotFoundException e) {
+            System.out.println("no file found");
+            File dataDirectory = new File("data");
+//            dataDirectory.mkdir();
+//            File dukeFile = new File("data","duke.txt");
+//            dukeFile.createNewFile();
+
+        }
 
 
         String greet = "____________________________________________________________\n" +
@@ -139,7 +161,46 @@ public class Duke {
             }
             input = userInput.nextLine();
         }
+        try {
+            PrintWriter writer = new PrintWriter("Data/Duke.txt");
+            writer.print("");
+            for (Task i : tasks) {
+                appendToFile(i.toFileString());
+                appendToFile(System.lineSeparator());
+            }
+        } catch (FileNotFoundException e){
+            System.out.println("File not found");
+        } catch (IOException e) {
+            System.out.println("Unable to write to file");
+        }
         System.out.println(exit);
         
     }
+
+    private static void printFileContents(File filePath) throws FileNotFoundException {
+        Scanner s = new Scanner(filePath); // create a Scanner using the File as the source
+        while (s.hasNext()) {
+            String[] dataEntry = s.nextLine().split("\\|");
+            switch (dataEntry[0]) {
+            case "T":
+                tasks.add(new Todo(dataEntry[2]));
+                break;
+            case "D":
+                tasks.add(new Deadline(dataEntry[2], dataEntry[3]));
+                break;
+            case "E":
+                tasks.add(new Event(dataEntry[2], dataEntry[3]));
+                break;
+            default:
+                break;
+            }
+            if (dataEntry[1].equals("1")) {
+                tasks.get(index).getStatusNum();
+            }
+            index++;
+            System.out.println(s.nextLine());
+        }
+    }
+
+
 }
