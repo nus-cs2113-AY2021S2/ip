@@ -5,6 +5,10 @@ import duke.exceptions.InvalidCommandException;
 
 import java.util.Scanner;
 
+import static duke.Storage.loadFile;
+import static duke.Storage.saveFile;
+
+
 public class Duke {
     private static final TaskList taskList = new TaskList();
     private static final Scanner in = initialiseInput();
@@ -17,10 +21,12 @@ public class Duke {
      */
     public static void main(String[] args) {
         printInitialMsg();
+        loadFile(taskList);
         do {
             scanInput();
             printReaction();
         } while (canContinue());
+        saveFile(taskList);
     }
 
     private static void printInitialMsg() {
@@ -80,7 +86,7 @@ public class Duke {
 
     private static void processInput(TaskList taskList, String input) {
         try {
-            command =  getCommand(input);
+            command =  TaskList.getCommand(input);
             switch (command) {
             case ADD:
                 command = taskList.addTask(input, Command.ADD);
@@ -111,24 +117,6 @@ public class Duke {
         } catch (InvalidCommandException e) {
             System.out.println("Wrong command entered!: " + input);
             command = Command.ERROR;
-        }
-    }
-
-    private static Command getCommand(String input) throws InvalidCommandException {
-        if (input.equals("list")) {
-            return Command.LIST;
-        } else if (input.equals("bye")) {
-            return Command.BYE;
-        } else if (input.startsWith("done ")) {
-            return Command.DONE;
-        } else if (input.startsWith("todo ")) {
-            return Command.TODO;
-        } else if (input.startsWith("deadline ")) {
-            return Command.DEADLINE;
-        } else if (input.startsWith("event ")) {
-            return Command.EVENT;
-        } else {
-            throw new InvalidCommandException();
         }
     }
 

@@ -7,6 +7,10 @@ public class Deadline extends Task {
         this.endTime = endTime;
     }
 
+    public String getEndTime() {
+        return endTime;
+    }
+
     @Override
     public String getStatusIcon() {
         return "[D]" + super.getStatusIcon();
@@ -14,6 +18,11 @@ public class Deadline extends Task {
 
     @Override
     public String getDescription() {
-        return super.getDescription() + "(by: " + endTime + ")";
+        return super.getDescription();
+    }
+
+    @Override
+    public String toString() {
+        return getStatusIcon() + super.getDescription() + "(by: " + endTime + ")";
     }
 }
