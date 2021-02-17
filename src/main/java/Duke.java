@@ -4,13 +4,14 @@ import commands.Todo;
 import commands.Deadline;
 import commands.Event;
 import exceptions.DukeException;
+import java.util.ArrayList;
 
 public class Duke {
     public static final int maxTasks = 100;
     private static final String border = "    ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――";
-    private static Task[] tasks = new Task[maxTasks];
 
     public static void main(String[] args) {
+        ArrayList<Task> tasks = new ArrayList<Task>();
         welcomeMessage();
         Scanner in = new Scanner(System.in);
         boolean isOn = true;
@@ -44,10 +45,11 @@ public class Duke {
                                 description = description + word + " ";
                             }
                         }
-                        tasks[n] = new Todo(description);
+                        Todo todo = new Todo(description);
+                        tasks.add(todo);
                         System.out.println(border);
                         System.out.println("    Got it. I've added this task:");
-                        System.out.println("      "+tasks[n]);
+                        System.out.println("      "+tasks.get(n));
                         n++;
                         System.out.println("    Now you have " + n +" tasks in the list.");
                         System.out.println(" ");
@@ -83,10 +85,11 @@ public class Duke {
                                 description = description + word + " ";
                             }
                         }
-                        tasks[n] = new Deadline(description,by);
+                        Deadline deadline = new Deadline(description,by);
+                        tasks.add(deadline);
                         System.out.println(border);
                         System.out.println("    Got it. I've added this task:");
-                        System.out.println("      "+tasks[n]);
+                        System.out.println("      "+tasks.get(n));
                         n++;
                         System.out.println("    Now you have " + n +" tasks in the list.");
                         System.out.println(" ");
@@ -123,10 +126,11 @@ public class Duke {
                                 description = description + word + " ";
                             }
                         }
-                        tasks[n] = new Event(description,at);
+                        Event event = new Event(description,at);
+                        tasks.add(event);
                         System.out.println(border);
                         System.out.println("    Got it. I've added this task:");
-                        System.out.println("      "+tasks[n]);
+                        System.out.println("      "+tasks.get(n));
                         n++;
                         System.out.println("    Now you have " + n +" tasks in the list.");
                         System.out.println(" ");
@@ -139,21 +143,31 @@ public class Duke {
 
                 } else if(words[0].equals("done")){
                     int taskNum = Integer.parseInt(words[1])-1;
-                    tasks[taskNum].markAsDone();
+                    tasks.get(taskNum).markAsDone();
                     System.out.println(border);
                     System.out.println("    Nice! I've marked this task as done:");
-                    System.out.println("      " + tasks[taskNum]);
+                    System.out.println("      " + tasks.get(taskNum));
                     System.out.println(" ");
                     System.out.println(border);
                 } else if(line.equals("list")){
                     System.out.println(border);
                     System.out.println("    Here are the tasks in your list:");
                     for(int i=0;i<n;i++){
-                        System.out.println("    "+(i + 1) + "." + tasks[i]);
+                        System.out.println("    "+(i + 1) + "." + tasks.get(i));
                     }
                     System.out.println(" ");
                     System.out.println(border);
-                } else {
+                } else if(words[0].equals("delete")){
+                    int taskNum = Integer.parseInt(words[1])-1;
+                    System.out.println(border);
+                    System.out.println("    Noted. I've removed this task:");
+                    System.out.println("      " + tasks.get(taskNum));
+                    System.out.println(" ");
+                    System.out.println(border);
+                    tasks.remove(taskNum);
+                    n--;
+                }
+                else {
                     throw new DukeException("unrecognized_input");
                 }
             }catch(DukeException e){
