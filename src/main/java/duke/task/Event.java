@@ -16,6 +16,6 @@ public class Event extends Task {
 
     @Override
     public String toText(int number) {
-        return "E | " + number + " | " + description + " | " + at;
+        return "E|" + number + "|" + description + "|" + at;
     }
 }

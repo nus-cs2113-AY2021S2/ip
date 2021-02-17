@@ -13,6 +13,6 @@ public class Todo extends Task {
 
     @Override
     public String toText(int number) {
-        return "T | " + number + " | " + description;
+        return "T|" + number + "|" + description;
     }
 }

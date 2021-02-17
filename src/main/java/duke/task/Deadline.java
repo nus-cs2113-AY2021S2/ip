@@ -17,6 +17,6 @@ public class Deadline extends Task {
 
     @Override
     public String toText(int number) {
-        return "D | " + number + " | " + description + " | " + by;
+        return "D|" + number + "|" + description + "|" + by;
     }
 }

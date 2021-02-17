@@ -6,11 +6,11 @@ import duke.task.Task;
 import duke.task.Todo;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static duke.FileManager.createFileIfNotExist;
-import static duke.FileManager.readFile;
+import static duke.FileManager.*;
 
 public class Duke {
     /**
@@ -168,7 +168,7 @@ public class Duke {
         System.out.print(DIVLINE);
     }
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws IOException {
         createFileIfNotExist();
         ArrayList<String> fileInput = readFile();
         initializeTaskList(fileInput);
@@ -183,12 +183,37 @@ public class Duke {
                 System.out.print(DIVLINE);
             }
         }
+        writeToFile(initializeTextToWrite());
         System.out.println(DIVLINE + PARTINGS + DIVLINE);
+    }
+
+    private static String initializeTextToWrite() {
+        String text = "";
+        for (int i=0; i<taskCount; i++) {
+            text = text + tasks[i].toText(i+1)+ System.lineSeparator();
+        }
+        return text;
     }
 
     private static void initializeTaskList(ArrayList<String> fileInput) {
         for (int i=0; i<fileInput.size(); i++) {
             //create tasklist according to file storage
+            String[] arr = fileInput.get(i).split("\\|");
+            switch (arr[0]) {
+                case "T":
+                    tasks[i] = new Todo(arr[2]);
+                    taskCount++;
+                    break;
+                case "D":
+                    tasks[i] = new Deadline(arr[2], arr[3]);
+                    taskCount++;
+                    break;
+                case "E":
+                    tasks[i] = new Event(arr[2], arr[3]);
+                    taskCount++;
+                    break;
+                default:
+            }
         }
     }
 
