@@ -203,7 +203,9 @@ public class Duke {
         printDeleteSuccessMessage(toBeDeleted);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        ArrayList<String> textInput = readFile();
+        initializeTaskList(textInput);
         System.out.print(DIVLINE + GREETINGS + DIVLINE);
         Scanner in = new Scanner(System.in);
         while (!isExiting) {
@@ -221,8 +223,8 @@ public class Duke {
 
     private static String initializeTextToWrite() {
         String text = "";
-        for (int i=0; i<taskCount; i++) {
-            text = text + tasks[i].toText(i+1)+ System.lineSeparator();
+        for (int i=0; i<taskList.size(); i++) {
+            text = text + taskList.get(i).toText(i+1)+ System.lineSeparator();
         }
         return text;
     }
@@ -233,16 +235,13 @@ public class Duke {
             String[] arr = fileInput.get(i).split("\\|");
             switch (arr[0]) {
                 case "T":
-                    tasks[i] = new Todo(arr[2]);
-                    taskCount++;
+                    taskList.add(new Todo(arr[2]));
                     break;
                 case "D":
-                    tasks[i] = new Deadline(arr[2], arr[3]);
-                    taskCount++;
+                    taskList.add(new Deadline(arr[2], arr[3]));
                     break;
                 case "E":
-                    tasks[i] = new Event(arr[2], arr[3]);
-                    taskCount++;
+                    taskList.add(new Event(arr[2], arr[3]));
                     break;
                 default:
             }
