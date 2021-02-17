@@ -1,13 +1,16 @@
 package duke;
 
-import duke.command.CommandType;
+import duke.Input.CommandType;
+import duke.Input.InputData;
+import duke.Input.InputType;
 import duke.exception.DukeException;
-import duke.command.UserInput;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,13 +24,13 @@ import java.util.Scanner;
  * @author NgManSing
  */
 public class Duke {
-    private static final ArrayList<Task> records = new ArrayList<>();
-    private static final Scanner scan = new Scanner(System.in);
+    private static ArrayList<Task> records = new ArrayList<>();
+    private static Scanner scan = new Scanner(System.in);
+    static final String NAME = "Happy";
 
     public static void main(String[] args) {
+        initializeDuke();
         boolean isLoop = true;
-
-        printWelcomeMsg();
         while (isLoop) {
             try {
                 isLoop = receiveCommand();
@@ -37,30 +40,54 @@ public class Duke {
         }
     }
 
+    private static void initializeDuke() {
+        System.out.print("Initializing " + NAME + "...");
+        readRecords();
+        System.out.println(" Completed!");
+        printWelcomeMsg();
+    }
+
+    private static void readRecords() {
+        try {
+            File myObj = new File("records.txt");
+            Scanner recordReader = new Scanner(myObj);
+            while (recordReader.hasNextLine()) {
+                InputData data = new InputData(recordReader.nextLine(), InputType.recordInput);
+                addRecordToCollection(data.getOtherArguments(), data.getFirstArgument());
+                if (data.isDone()) {
+                    records.get(records.size() - 1).setAsDone();
+                }
+            }
+            recordReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("No record found.");
+        }
+    }
+
     private static boolean receiveCommand() throws DukeException {
         boolean isLoop = true;
-        UserInput userInput = getUserInput();
-        switch (userInput.getCommand()) {
+        InputData userInput = getUserInput();
+        switch (userInput.getFirstArgument()) {
         case "todo":
-            addRecord(userInput.getArguments(), Todo.TASK_TYPE);
+            addRecord(userInput.getOtherArguments(), Todo.TASK_TYPE);
             break;
         case "deadline":
-            addRecord(userInput.getArguments(), Deadline.TASK_TYPE);
+            addRecord(userInput.getOtherArguments(), Deadline.TASK_TYPE);
             break;
         case "event":
-            addRecord(userInput.getArguments(), Event.TASK_TYPE);
+            addRecord(userInput.getOtherArguments(), Event.TASK_TYPE);
             break;
         case "list":
-            showList(userInput.getArguments());
+            showList(userInput.getOtherArguments());
             break;
         case "done":
-            processCommand(userInput.getArguments(), CommandType.done);
+            processCommand(userInput.getOtherArguments(), CommandType.done);
             break;
         case "delete":
-            processCommand(userInput.getArguments(), CommandType.delete);
+            processCommand(userInput.getOtherArguments(), CommandType.delete);
             break;
         case "bye":
-            isLoop = isEndProgram(userInput.getArguments());
+            isLoop = isEndProgram(userInput.getOtherArguments());
             break;
         default:
             throw new DukeException();
@@ -135,17 +162,17 @@ public class Duke {
         saveRecords();
     }
 
-    private static UserInput getUserInput() {
+    private static InputData getUserInput() {
         String userInput = "dummy";
         if (scan.hasNextLine()) {
             userInput = scan.nextLine();
         }
         System.out.println("Command entered: " + userInput);
-        return new UserInput(userInput);
+        return new InputData(userInput, InputType.userInput);
     }
 
     private static void printWelcomeMsg() {
-        System.out.println("Hello! I am Happy :)");
+        System.out.printf("Hello! I am %s :)\n", NAME);
         System.out.println("What can I do for you?");
     }
 
@@ -165,9 +192,21 @@ public class Duke {
     }
 
     private static void addRecord(String[] detailFragments, String taskType) {
-        String[] details;
-        String taskName;
+        boolean isAdded = addRecordToCollection(detailFragments, taskType);
+
+        if (isAdded) {
+            int numberOfRecords = records.size();
+            System.out.println("Got it. I've added this task:");
+            System.out.println("\t" + records.get(numberOfRecords - 1));
+            System.out.printf("Now you have %d tasks in the list.\n", numberOfRecords);
+            saveRecords();
+        }
+    }
+
+    private static boolean addRecordToCollection(String[] detailFragments, String taskType) {
         String date;
+        String taskName;
+        String[] details;
         boolean isAdded = false;
 
         switch (taskType) {
@@ -201,14 +240,7 @@ public class Duke {
         default:
             throw new IllegalArgumentException("A non-taskType is passed to addRecord. Program terminated.");
         }
-
-        if (isAdded) {
-            int numberOfRecords = records.size();
-            System.out.println("Got it. I've added this task:");
-            System.out.println("\t" + records.get(numberOfRecords - 1));
-            System.out.printf("Now you have %d tasks in the list.\n", numberOfRecords);
-            saveRecords();
-        }
+        return isAdded;
     }
 
     private static void showInvalidEmptyDescription() {

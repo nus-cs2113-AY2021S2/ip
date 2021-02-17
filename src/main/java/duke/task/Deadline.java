@@ -27,6 +27,6 @@ public class Deadline extends Task {
 
     @Override
     public String getSaveString() {
-        return TASK_TYPE + super.getSaveString() + "|" + getDueDay();
+        return TASK_TYPE + super.getSaveString() + " /by " + getDueDay();
     }
 }

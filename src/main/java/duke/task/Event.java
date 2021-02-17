@@ -27,6 +27,6 @@ public class Event extends Task {
 
     @Override
     public String getSaveString() {
-        return TASK_TYPE + super.getSaveString() + "|" + getSchedule();
+        return TASK_TYPE + super.getSaveString() + " /at " + getSchedule();
     }
 }

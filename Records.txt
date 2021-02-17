@@ -1,3 +1,4 @@
-T|0|aa
-D|0|11|uup
-E|1|1010|100
+T|0|0 aa
+T|1|aac
+E|0|llo /at pol
+D|1|1234 /by al
