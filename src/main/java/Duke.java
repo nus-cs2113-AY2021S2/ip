@@ -136,6 +136,9 @@ public class Duke {
                 case "load":
                     loadData();
                     break;
+                case "clear":
+                    deleteData("taskdata.ser");
+                    break;
                 default:
                     String defaultMessage =
                             String.format("%s \t Command word not recognised - please start command with\n " +
@@ -151,7 +154,7 @@ public class Duke {
 
     private static void save(ArrayList<Task> taskList) {
         //write to file
-        if(taskList.isEmpty()){
+        if (taskList.isEmpty()) {
             String emptyListMessage =
                     String.format("%s\tTask list is empty, unable to save the data! Add some tasks first! \n%s",
                             lineDivider,
@@ -170,7 +173,7 @@ public class Duke {
 
 
             String saveDataSuccessMessage = String.format("%s\tData saved successfully!" +
-                    "\n\tThis is the tasks that you have saved:\n%s%s",
+                            "\n\tThis is the tasks that you have saved:\n%s%s",
                     lineDivider,
                     getList(taskList),
                     lineDivider);
@@ -186,6 +189,16 @@ public class Duke {
         }
     }
 
+
+    private static void deleteData(String filename) {
+        File f = new File(filename);
+        if (f.delete()) {
+            System.out.println(lineDivider + "\t" + filename + " deleted sucessfully...\n" + lineDivider);
+        } else {
+            System.out.println(lineDivider + "\t" + filename + " deletion failed!\n" + lineDivider);
+        }
+    }
+
     private static void loadData() {
         try {
             FileInputStream readData = new FileInputStream("taskdata.ser");
@@ -195,17 +208,17 @@ public class Duke {
             readStream.close();
 
             String loadDataSuccessMessage = String.format("%s\tData successfully loaded! " +
-                    "\n\tThis is your current list of tasks:\n%s%s",
+                            "\n\tThis is your current list of tasks:\n%s%s",
                     lineDivider,
                     getList(taskList),
                     lineDivider);
             System.out.println(loadDataSuccessMessage);
 
-        } catch (FileNotFoundException e1){
+        } catch (FileNotFoundException e1) {
             String fileNotFoundMessage =
                     String.format("%s\tData not found! Add some tasks to your tasks to save first!\n%s",
-                    lineDivider,
-                    lineDivider);
+                            lineDivider,
+                            lineDivider);
             System.out.println(fileNotFoundMessage);
         } catch (IOException | ClassNotFoundException e) {
             String loadErrorMessage =
