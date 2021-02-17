@@ -15,8 +15,6 @@ public class Duke {
                         "What can I do for you?\n"+
                         "____________________________________________________________");
         Scanner sc = new Scanner(System.in);
-        int i=0;
-//        Task[] tasks = new Task[100];
 
         while(true){
             String command = sc.nextLine();
@@ -36,20 +34,17 @@ public class Duke {
                 System.out.println("____________________________________________________________");
                 todoTask(command);
                 System.out.println("____________________________________________________________");
-                i++;
             }else if (command.contains("deadline")) {
                 System.out.println("____________________________________________________________");
                 deadlineTasks(command);
                 System.out.println("____________________________________________________________");
-                i++;
             }else if (command.contains("event")) {
                 System.out.println("____________________________________________________________");
                 eventTask(command);
                 System.out.println("____________________________________________________________");
-                i++;
             }else if (command.contains("delete")) {
                 System.out.println("____________________________________________________________");
-                //eventTask(i, tasks, command);
+                deleteTask(command);
                 System.out.println("____________________________________________________________");
 
             } else {
@@ -107,6 +102,20 @@ public class Duke {
             int doneNumber=Integer.parseInt(command.substring(5));
             System.out.println("Nice! I've marked this task as done: ");
             tasks.get(doneNumber-1).markAsDone();
+        } catch (NumberFormatException e) {
+            System.out.println("OOPS!!! A number is expected after command done");
+        }catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("OOPS!!! Please select from the task list.");
+        }
+    }
+
+    private static void deleteTask(String command) {
+        try {
+            int deleteNumber=Integer.parseInt(command.substring(7));
+            System.out.println("Noted. I've removed this task: ");
+            System.out.println(tasks.get(deleteNumber-1));
+            tasks.remove(deleteNumber-1);
+            System.out.println("Now you have "+ Task.getTaskCount() +" task(s) in the list.");
         } catch (NumberFormatException e) {
             System.out.println("OOPS!!! A number is expected after command done");
         }catch (ArrayIndexOutOfBoundsException e) {
