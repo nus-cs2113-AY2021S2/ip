@@ -89,6 +89,7 @@ public class Duke {
             tasks.remove(taskIndex - 1);
             System.out.println("\t Noted. I have removed this task. ");
             System.out.println("\t" + taskInformation);
+            System.out.println("\t You now have " + tasks.size() + "tasks in the list.");
         } catch (IndexOutOfBoundsException e) {
             System.out.println("\t Invalid task number!");
         } catch (NumberFormatException e) {
