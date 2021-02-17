@@ -1,4 +1,4 @@
-package duke;
+package duke.data;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -29,6 +29,8 @@ public class DataManager {
             file.getParentFile().mkdirs();
             if (!file.exists()) {
                 file.createNewFile();
+            }else{
+                System.out.println("loading existing data...");
             }
             scanner = new Scanner(file);
         } catch (IOException e) {

@@ -1,12 +1,12 @@
-package duke;
+package duke.task;
 
 import duke.exception.EmptyDescriptionException;
 import duke.exception.InvalidCommandException;
+import duke.exception.LoadDataException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
-
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -119,22 +119,45 @@ public class TaskManager {
 
 
     public void setData(Scanner scanner) {
+        if(!scanner.hasNext()){
+            return;
+        }
+
         try {
             while (scanner.hasNext()) {
                 String line = scanner.nextLine();
-                String[] tokens = line.split(";", 3);
-                String taskType = tokens[0].toLowerCase();
-                boolean done = tokens[1].equals("1");
-                String taskName = tokens[2];
+                String[] parsedLine = line.split(";", 3);
+                char taskType = parsedLine[0].charAt(0);
+                boolean taskIsDone = parsedLine[1].equals("1");
+                String taskDescription = parsedLine[2];
+                switch (taskType) {
+                case 'T':
+                    tasks.add(new Todo(taskDescription));
+                    break;
+                case 'D': {
+                    String[] nameAndDate = taskDescription.split(";", 2);
+                    tasks.add(new Deadline(nameAndDate[0], nameAndDate[1]));
+                    break;
+                }
+                case 'E': {
+                    String[] nameAndDate = taskDescription.split(";", 2);
+                    tasks.add(new Event(nameAndDate[0], nameAndDate[1]));
+                    break;
+                }
+                default:
+                    throw new LoadDataException();
+                }
 
-                addTask(taskType, taskName);
-                if (done) {
+                if(taskIsDone){
                     doneTask(tasks.size());
                 }
             }
+            System.out.println("Data loaded sucessfully...");
         } catch (Exception e) {
+            tasks.clear();
             System.out.println("Error loading old data...");
             System.out.println("Data will be overridden...");
         }
     }
+
 }

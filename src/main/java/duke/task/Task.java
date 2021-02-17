@@ -24,11 +24,5 @@ public abstract class Task {
         return String.format("[%c] %s", doneChar, taskName);
     }
 
-    public String getData() {
-        return getTaskChar() + ";" +
-                (isDone ? 1 : 0) + ";" +
-                taskName;
-    }
-
-    public abstract char getTaskChar();
+    public abstract String getData();
 }

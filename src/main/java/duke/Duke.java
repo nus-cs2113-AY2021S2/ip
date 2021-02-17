@@ -1,5 +1,9 @@
 package duke;
 
+import duke.data.DataManager;
+import duke.task.TaskManager;
+import duke.user_interface.UserInterface;
+
 public class Duke {
 
     private static final String dataFilePath = "data/data.txt";

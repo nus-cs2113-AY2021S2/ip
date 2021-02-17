@@ -14,7 +14,11 @@ public class Event extends Task {
     }
 
     @Override
-    public char getTaskChar() {
+    public String getData() {
+        return String.format("%c;%d;%s;%s", getTaskChar(), (isDone?1:0), taskName, date);
+    }
+
+    public static char getTaskChar() {
         return 'E';
     }
 }

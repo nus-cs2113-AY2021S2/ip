@@ -12,7 +12,11 @@ public class Todo extends Task {
     }
 
     @Override
-    public char getTaskChar() {
+    public String getData() {
+        return String.format("%c;%d;%s", getTaskChar(), (isDone?1:0), taskName);
+    }
+
+    public static char getTaskChar() {
         return 'T';
     }
 }
