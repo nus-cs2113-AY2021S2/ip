@@ -8,6 +8,7 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -18,41 +19,41 @@ public class Duke {
 
         printStartingMessage();
 
-        Task[] tasks = new Task[100];
+        ArrayList<Task> tasks = new ArrayList<>();
         Task task;
-        ToDo toDo;
-        String[] splitCommand;
         String[] description;
-        String command;
-        int numberOfTasks = 0;
+        String inputLine;
+        int COMMAND_TASK_SEPARATOR = 2;
 
-        while (!(command = userInput.nextLine().trim()).equals("bye")) {
+        while (!(inputLine = userInput.nextLine().trim()).equals("bye")) {
 
             printHorizontalLine();
 
-            if (command.equals("list")) {
-                printListMessage(tasks, numberOfTasks);
-                printHorizontalLine();
-                continue;
-            }
+            String[] command = inputLine.split(" ", COMMAND_TASK_SEPARATOR);
 
-            String[] tokens = command.split(" ");
-
-            switch (tokens[0]) {
+            switch (command[0].toLowerCase()) {
+            case "list":
+                printListMessage(tasks);
+                break;
             case "done":
-                int taskNumber = Integer.parseInt(tokens[1]);
-                task = tasks[taskNumber - 1];
-                task.markAsDone();
-                printDoneMessage(task);
+                try {
+                    int doneTaskNumber = Integer.parseInt(command[1]);
+                    task = tasks.get(doneTaskNumber - 1);
+                    task.markAsDone();
+                    printDoneMessage(task);
+                } catch (IndexOutOfBoundsException e) {
+                    printNonExistentTaskMessage();
+                } catch (NumberFormatException e) {
+                    printNotANumberMessage();
+                }
                 break;
             case "deadline":
                 try {
-                    splitCommand = command.split(" ", 2);
-                    description = splitCommand[1].split("/by", 2);
+                    description = command[1].split("/by", COMMAND_TASK_SEPARATOR);
                     checkForValidDeadlineInput(description);
                     Deadline deadline = new Deadline(description[0].trim(), description[1].trim());
-                    tasks[numberOfTasks] = deadline;
-                    printDeadlineMessage(deadline, ++numberOfTasks);
+                    tasks.add(deadline);
+                    printAddedMessage(tasks, deadline);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     printMissingFieldsMessage();
                 } catch (DescriptionFieldEmptyException e) {
@@ -65,12 +66,11 @@ public class Duke {
                 break;
             case "event":
                 try {
-                    splitCommand = command.split(" ", 2);
-                    description = splitCommand[1].split("/at", 2);
+                    description = command[1].split("/at", COMMAND_TASK_SEPARATOR);
                     checkForValidEventInput(description);
                     Event event = new Event(description[0].trim(), description[1].trim());
-                    tasks[numberOfTasks] = event;
-                    printEventMessage(event, ++numberOfTasks);
+                    tasks.add(event);
+                    printAddedMessage(tasks, event);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     printMissingFieldsMessage();
                 } catch (DescriptionFieldEmptyException e) {
@@ -83,11 +83,23 @@ public class Duke {
                 break;
             case "todo":
                 try {
-                    toDo = new ToDo(tokens[1]);
-                    tasks[numberOfTasks] = toDo;
-                    printToDoMessage(toDo, ++numberOfTasks);
+                    ToDo toDo = new ToDo(command[1]);
+                    tasks.add(toDo);
+                    printAddedMessage(tasks, toDo);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     printMissingFieldsMessage();
+                }
+                break;
+            case "delete":
+                try {
+                    int deleteTaskNumber = Integer.parseInt(command[1]);
+                    Task deletedTask = tasks.get(deleteTaskNumber - 1);
+                    tasks.remove(deletedTask);
+                    printDeletedMessage(tasks, deletedTask);
+                } catch (IndexOutOfBoundsException e) {
+                    printNonExistentTaskMessage();
+                } catch (NumberFormatException e) {
+                    printNotANumberMessage();
                 }
                 break;
             default:
@@ -114,15 +126,15 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n");
         printHorizontalLine();
-        System.out.println(" Hello! I'm duke.Duke");
+        System.out.println(" Hello! I'm Duke.");
         System.out.println(" What can I do for you?");
         printHorizontalLine();
     }
 
-    public static void printListMessage(Task[] tasks, int numberOfTasks) {
+    public static void printListMessage(ArrayList<Task> tasks) {
         System.out.println(" Here are the tasks in your list:");
-        for (int i = 0; i < numberOfTasks; i++) {
-            System.out.println(" " + (i + 1) + "." + tasks[i].toString());
+        for (Task task: tasks) {
+            System.out.println(" " + (tasks.indexOf(task) + 1) + "." + task.toString());
         }
     }
 
@@ -131,22 +143,18 @@ public class Duke {
         System.out.println("   " + task.toString());
     }
 
-    public static void printDeadlineMessage(Deadline deadline, int numberOfTasks) {
-        System.out.println(" Alright, I've added this task:\n   " + deadline.toString() + "\n"
-                + " Now you have " + numberOfTasks + " tasks in your list.");
+    public static void printAddedMessage(ArrayList<Task> tasks, Task task) {
+        System.out.println(" Alright, I've added this task:\n   " + task.toString() + "\n"
+                + " Now you have " + tasks.size() + " tasks in your list.");
     }
 
-    public static void printEventMessage(Event event, int numberOfTasks) {
-        System.out.println(" Alright, I've added this task:\n   " + event.toString() + "\n"
-                + " Now you have " + numberOfTasks + " tasks in your list.");
-    }
-
-    public static void printToDoMessage(ToDo toDo, int numberOfTasks) {
-        System.out.println(" Alright, I've added this task:\n   " + toDo.toString() + "\n"
-                + " Now you have " + numberOfTasks + " tasks in your list.");
+    public static void printDeletedMessage(ArrayList<Task> tasks, Task task) {
+        System.out.println(" Alright, I've deleted this task:\n   " + task.toString() + "\n"
+                + " Now you have " + tasks.size() + " tasks in your list.");
     }
 
     public static void printByeMessage() {
+        printHorizontalLine();
         System.out.println(" Bye. Hope to see you again soon!");
         printHorizontalLine();
     }
@@ -166,7 +174,6 @@ public class Duke {
     public static void checkForValidEventInput(String[] input) throws DescriptionFieldEmptyException,
             TimeFieldEmptyException,
             MultipleTimeFieldsException {
-
         if (input[0].trim().equals("")) {
             throw new DescriptionFieldEmptyException();
         } else if (input[1].contains("/at")) {
@@ -174,7 +181,6 @@ public class Duke {
         } else if (input[1].trim().equals("")) {
             throw new TimeFieldEmptyException();
         }
-
     }
 
     public static void printDescriptionFieldEmptyMessage() {
@@ -195,6 +201,14 @@ public class Duke {
 
     public static void printCommandDoesNotExistMessage() {
         System.out.println(" ERROR: there is no such command, try again!");
+    }
+
+    public static void printNonExistentTaskMessage() {
+        System.out.println(" ERROR: this task number doesn't exist!");
+    }
+
+    public static void printNotANumberMessage() {
+        System.out.println(" ERROR: this is not a task number!");
     }
 
 }
