@@ -12,10 +12,13 @@ public class Duke {
         String userInput = "";
         Output.printStart();
 
+        Storage.readFile(tasks);
+
         while (true) {
             userInput = SCANNER.nextLine();
             Output.printBorder();
             if (userInput.trim().equals("bye")) {
+                Storage.writeToFile(tasks);
                 Output.printBye();
                 break;
             } else if (userInput.startsWith("list")) {
