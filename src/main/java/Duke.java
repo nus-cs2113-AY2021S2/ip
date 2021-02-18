@@ -1,9 +1,17 @@
-import javax.sound.midi.SysexMessage;
+import myexceptions.InvalidCommandException;
+import myexceptions.InvalidDateException;
+import myexceptions.TodoException;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
+
+
 
     static ArrayList<Task> tasks = new ArrayList<Task>();
     static int taskPosition = 0;
@@ -11,11 +19,30 @@ public class Duke {
     static String by;
     static int indexOfBy;
 
-    public static void storeTask(Task t) throws TodoException{
+
+    private static void writeToFile(String filePath, ArrayList<Task> tasks) throws IOException{
+        FileWriter fw = new FileWriter(filePath);
+
+        for(Task t:tasks) {
+            fw.write( t.getStatusIcon() + " " + t.getDescription() + "\n");
+
+        }
+        fw.close();
+    }
+
+    private static void restoreFileContents(String filePath) throws FileNotFoundException {
+        File f = new File(filePath);
+        Scanner s = new Scanner(f);
+        while (s.hasNext()) {
+            System.out.println(s.nextLine());
+        }
+    }
+
+    public static void storeTask(Task t) throws TodoException {
         if (!t.description.isEmpty()){
             tasks.add(t);
             System.out.println("Got it! I've added this task!");
-            System.out.println(t.description);
+            //System.out.println(t.description);
             System.out.println(t.getStatusIcon() + " " + t.getDescription());
             System.out.println("Now you have " + tasks.size() + " tasks!");
 
@@ -35,18 +62,22 @@ public class Duke {
     public static void listArray(ArrayList<Task> tasks){
         int textNumber = 1;
         for(Task t:tasks){
-            if(t != null){
-                System.out.println(textNumber + "." + t.getStatusIcon() +" " + t.getDescription());
-                textNumber++;
-            }
+            System.out.println(textNumber + "." + t.getStatusIcon() + " " + t.getDescription());
+            textNumber++;
         }
+
     }
 
-    public static void main(String[] args) throws InvalidCommandException, InvalidDateException{
+    public static void main(String[] args) throws InvalidCommandException, InvalidDateException, FileNotFoundException {
         System.out.println("Hello! I'm 343 Guilty Spark! You may call me Spark!");
         System.out.println("What can I do for you?");
         String text = "hi";
 
+        try{
+            restoreFileContents("Duke.txt");
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found!");
+        }
         while(!text.equalsIgnoreCase("Bye")){
             Scanner in = new Scanner(System.in);
             text = in.nextLine();
@@ -58,14 +89,17 @@ public class Duke {
             case "deadline":
             case "Deadline":
             case "DEADLINE":
+                try {
                 int indexOfBy = text.indexOf('/');
                 description = text.substring(9,indexOfBy-1);
                 by = text.substring(indexOfBy + 1);
                 Deadline deadlineTask = new Deadline(description,by);
-                try {
+
                     storeTask(deadlineTask);
                 } catch (TodoException e) {
                     e.printStackTrace();
+                } catch (StringIndexOutOfBoundsException e){
+                    System.out.println("Date required!");
                 }
                 break;
             case "todo":
@@ -140,8 +174,12 @@ public class Duke {
             default:
                 System.out.println("Invalid command. Only accepts Todo,List,Event or Deadline!");
             }
-
-
+            String file2 = "Duke.txt";
+            try {
+                writeToFile(file2, tasks);
+            } catch (IOException e) {
+                System.out.println("Something went wrong: " + e.getMessage());
+            }
         }
         System.out.println("Bye! Hope to see you again soon!");
     }
