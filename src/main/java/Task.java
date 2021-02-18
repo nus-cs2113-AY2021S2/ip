@@ -1,10 +1,13 @@
+import java.util.ArrayList;
+
 public class Task {
     protected String taskDescription;
     protected boolean isDone;
     private static int taskNumber = 0;
     private static int numberOfCompletedTasks =0;
-    private static Task[] tasks = new Task[100];
-    private static int taskNumberCompleted =0;
+    private static ArrayList<Task> tasks = new ArrayList<>();
+    private static int completedTaskCounter =0;
+    private static Task newestTask;
 
     public Task(String task) {
         this.taskDescription = task;
@@ -31,26 +34,26 @@ public class Task {
         return taskNumber - numberOfCompletedTasks;
     }
 
-    public static Task[] getTaskList(){
+    public static ArrayList<Task> getTaskList(){
         return tasks;
     }
 
     public static void addNewTask(Task newTask) {
-        tasks[taskNumber] = newTask;
+        tasks.add(newTask);
         taskNumber++;
     }
 
     public static void completeTask(int taskNumber) {
-        tasks[taskNumber].markAsDone();
-        taskNumberCompleted = taskNumber;
+        tasks.get(taskNumber).markAsDone();
+        completedTaskCounter = taskNumber;
         numberOfCompletedTasks++;
     }
 
-    public static Task getLatestTask(boolean getCompletedTask) {
-        if (getCompletedTask) {
-            return tasks[taskNumberCompleted];
+    public static Task getLatestTask(boolean adjustedTask) {
+        if (adjustedTask) {
+            return newestTask;
         } else {
-            return tasks[getTaskNumber() - 1];
+            return tasks.get(getTaskNumber()-1);
         }
     }
 
@@ -59,4 +62,13 @@ public class Task {
         return this.getStatusIcon() + " " + this.getTaskDescription();
     }
 
+    public static void deleteTask(int task){
+        newestTask = tasks.get(task);
+        if (tasks.get(task).isDone) {
+            numberOfCompletedTasks--;
+        }
+        tasks.remove(task);
+        System.out.println("The deleted task is : " + newestTask);
+        taskNumber--;
+    }
 }

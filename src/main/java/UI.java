@@ -10,4 +10,11 @@ public class UI {
         System.out.println(Task.getLatestTask(true));
         System.out.println("You still have " + Task.getNumberOfRemainingTasks() + " tasks to complete in your list!");
     }
+
+    public static void taskDeleted(){
+        System.out.println("Noted. I've removed this task:");
+        boolean getDeletedTask = true;
+        System.out.println(Task.getLatestTask(getDeletedTask));
+        System.out.println("You still have " + Task.getNumberOfRemainingTasks() + " tasks to complete in your list!");
+    }
 }
