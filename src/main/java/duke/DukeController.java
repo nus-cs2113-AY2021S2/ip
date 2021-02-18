@@ -44,7 +44,9 @@ public class DukeController {
                 break;
             }
             case DukeCommands.DELETE:{
+                DukeIO.readDukeData();
                 delete();
+                DukeIO.writeDukeData();
                 break;
             }
             default: {

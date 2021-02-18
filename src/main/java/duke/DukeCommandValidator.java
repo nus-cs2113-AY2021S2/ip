@@ -1,7 +1,5 @@
 package duke;
 
-import duke.DukeCommands;
-
 public class DukeCommandValidator {
     static int MINIMUM_DONE_LENGTH = 5;
     static int MINIMUN_TODO_LENGTH = 6;

@@ -1,8 +1,2 @@
-1   [T][1] todo hahaha
-2   [T][1] todo 666
-3   [D][1] deadline i died /by 29990930
-4   [E][0] event i revived /on 29991001
-5   [T][0] todo haaaaaaaaaaaaaaaaaaaaaaa
-6   [T][0] todo 7
-7   [T][0] todo 777
-8   [D][0] deadline 22 /geg rwegewg
+1   [T][1] todo 1
+2   [E][0] event 5 /6 7
