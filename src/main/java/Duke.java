@@ -33,9 +33,13 @@ public class Duke {
                 runLoop = false;
             } else if (userInput.equalsIgnoreCase("list")) {
                 listTasks(tasks);
-            } else if (userInput.split(" ")[0].equals("done")) {
+            } else if (userInput.split(" ")[0].equalsIgnoreCase("done")) {
                 markTask(userInput, tasks);
-            } else {
+            }
+            else if (userInput.split(" ")[0].equalsIgnoreCase("delete")) {
+                deleteTask(userInput, tasks);
+            }
+            else {
                 addTask(userInput, tasks);
             }
         }
@@ -65,13 +69,14 @@ public class Duke {
         System.out.println("\t__________________________________________\n");
     }
 
-    public static void markTask(String userInput, ArrayList<Task> tasks) {
+    public static void markTask(String userInput, ArrayList<Task> tasks) throws NumberFormatException,
+            IndexOutOfBoundsException {
         // check if task exists
         System.out.println("\t------------------------------------------");
         try {
             int taskIndex = Integer.parseInt(userInput.split(" ")[1]) - 1;
             if (taskIndex > tasks.size()-1) {
-                System.out.println("\tClasses.Task " + taskIndex + 1 + " does not exist! Please try again.");
+                System.out.println("\tTask " + ++taskIndex + " does not exist! Please try again.");
             }
             else {
                 // sets a task as done
@@ -94,7 +99,7 @@ public class Duke {
     public static void addTask(String userInput, ArrayList<Task> tasks) throws StringIndexOutOfBoundsException {
         // adds a task to the list
         System.out.println("\t------------------------------------------");
-        switch(userInput.split(" ")[0]) {
+        switch(userInput.split(" ")[0].toLowerCase()) {
         case "todo":
             // adds to-do tasks
             try {
@@ -144,5 +149,32 @@ public class Duke {
             System.out.println("\tOOPS! I'm sorry, but I don't know what that means! :-(");
         }
         System.out.println("\t__________________________________________\n");
+    }
+
+    public static void deleteTask(String userInput, ArrayList<Task> tasks) throws StringIndexOutOfBoundsException {
+        System.out.println("\t------------------------------------------");
+        try {
+            int taskIndex = Integer.parseInt(userInput.split(" ")[1]) - 1;
+            if (taskIndex > tasks.size()-1) {
+                System.out.println("\tTask " + ++taskIndex + " does not exist! Please try again.");
+            }
+            else {
+                // sets a task as done
+                Task task = tasks.get(taskIndex);
+                System.out.println("\tNoted, I've removed this task: ");
+                System.out.println("\t" + task.toString());
+                tasks.remove(task);
+                System.out.println("\tNow you have " + tasks.size() + " tasks in the list.");
+            }
+        }
+        catch (NumberFormatException e) {
+            System.out.println("\tOOPS!! To delete task, you have to enter an integer following the work delete " +
+                    "in this format e.g. 'delete 3'.");
+        }
+        catch (IndexOutOfBoundsException e) {
+            System.out.println("\tOOPS!! Invalid task input!");
+        }
+        System.out.println("\t__________________________________________\n");
+
     }
 }
