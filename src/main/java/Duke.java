@@ -8,7 +8,6 @@ import java.util.Scanner;
 
 public class Duke {
     public static int num_of_goals = 0;
-
     public static Scanner in = new Scanner(System.in);
     public static String user_input;
     public static Task t[] = new Task[100];
@@ -35,7 +34,6 @@ public class Duke {
     public static void show_exit_msg() {
         System.out.println("Bye. Hope to see you again soon!\n");
     }
-
 
     private static String getString(Scanner in) {
         String user_input;
@@ -316,14 +314,14 @@ public class Duke {
             System.out.println("Something went wrong: " + e.getMessage());
         }
 
-            for (int i = 1; i < num; i++) {
-                try {
-                    appendToFile("/Users/chenlingcui/Desktop/CS2113/duke.txt", "[" + t[i].getStatusIcon() + "] " + t[i].getDescription() + "\n");
-                    //appendToFile("/Users/chenlingcui/Desktop/CS2113/duke.txt", "\n");
-                } catch (IOException e) {
-                    System.out.println("Something went wrong: " + e.getMessage());
-                }
+        for (int i = 1; i < num; i++) {
+            try {
+                appendToFile("/Users/chenlingcui/Desktop/CS2113/duke.txt", "[" + t[i].getStatusIcon() + "] " + t[i].getDescription() + "\n");
+                //appendToFile("/Users/chenlingcui/Desktop/CS2113/duke.txt", "\n");
+            } catch (IOException e) {
+                System.out.println("Something went wrong: " + e.getMessage());
             }
+        }
 
     }
 
