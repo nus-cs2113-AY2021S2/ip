@@ -220,9 +220,14 @@ public class Duke {
                       //  System.out.println("What do you want to mark as done?");
                         //break;
                     //}
+                case "Bye":
+                case "bye":
+                case"BYE":
+                    break;
 
 
                 default:
+
                     throw new InvalidCommandException();
                 }
             } catch (ArrayIndexOutOfBoundsException e){
