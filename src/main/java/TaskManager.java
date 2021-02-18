@@ -7,6 +7,22 @@ public class TaskManager {
     public TaskManager() {
     }
 
+    public static int getCount() {
+        return count;
+    }
+
+    public static Task[] getTasks() {
+        return tasks;
+    }
+
+    public static void setTasks(Task[] tasks) {
+        TaskManager.tasks = tasks;
+    }
+
+    public static void setCount(int count) {
+        TaskManager.count = count;
+    }
+
     public static void printList() {
         MessagePrinter.printBorder();
         System.out.println("     Here are the tasks in your list:");

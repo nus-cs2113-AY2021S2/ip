@@ -1,8 +1,15 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
         MessagePrinter.showWelcomeMessage();
+
+        try {
+            FileManager.loadFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         while (true) {
             String fullCommand = getUserInput();
