@@ -70,6 +70,15 @@ public class Duke {
         return false;
     }
 
+    private static boolean isDelete() {
+        if (user_input.length() > 6) {
+            if (user_input.substring(0, 6).equals("delete")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private static boolean isEvent() {
         if (user_input.length() > 5) {
             if (user_input.substring(0, 5).equals("event")) {
@@ -98,12 +107,32 @@ public class Duke {
 
     private static void repeatTaskAdded() {
         System.out.println(t[num_of_goals]);
-        System.out.println("Now you have" + num_of_goals + " tasks in the list.");
+        System.out.println("Now you have " + num_of_goals + " tasks in the list.");
     }
 
     private static int getDeadlineIndex(String input) {
         int index = user_input.indexOf('/');
         return index;
+    }
+
+    private static void deleteTask() {
+        if (isDelete()) {
+            int spaceIndex = user_input.indexOf(' ');
+            String deleteString = user_input.substring(spaceIndex + 1);
+            int deleteIndex = Integer.parseInt(deleteString);
+            System.out.println("I have deleted this task for you: ");
+            System.out.println("[" + t[deleteIndex].getStatusIcon() + "] " + t[deleteIndex].getDescription() + "\n");
+
+            if (deleteIndex == 0 && num_of_goals == 1) {
+                t[0] = t[1];
+            } else {
+                for (int i = 0; i < t.length - 1; i++) {
+                    t[i] = t[i + 1];
+                }
+            }
+            num_of_goals--;
+
+        }
     }
 
     private static String getDeadline(String user_input) {
@@ -234,12 +263,14 @@ public class Duke {
                 addNewDeadline(input);
                 repeatTaskAdded();
                 break;
+            case DELETE:
+                deleteTask();
+                break;
             case INVALID:
                 throw new InvalidCommandException();
 
         }
     }
-
 
 
     public static void main(String[] args) {
@@ -259,7 +290,10 @@ public class Duke {
                 command = Command.EVENT;
             } else if (isDeadline()) {
                 command = Command.DEADLINE;
-            } else {
+            } else if(isDelete()){
+                command =Command.DELETE;
+            }
+            else {
                 command = Command.INVALID;
             }
 
@@ -285,8 +319,3 @@ public class Duke {
         show_exit_msg();
     }
 }
-
-
-
-
-
