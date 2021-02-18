@@ -1,8 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-import Duke.TodoException;
-import Duke.InvalidCommandException;
-import Duke.Task;
+import Duke.*;
 
 public class Duke {
     private static final Scanner scanner = new Scanner(System.in);
