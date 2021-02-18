@@ -13,7 +13,7 @@ import java.util.Scanner;
 /**
  * Implements file storage.
  *
- * @author Audrey Felicio Anwar
+ * @author Leonardo Irvin Pratama
  */
 public class Storage {
     private final File data;

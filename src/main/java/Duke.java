@@ -27,7 +27,7 @@ public class Duke {
         final String BYE_MESSAGE = " Bye. Hope to see you again soon!";
         final String ERROR_MESSAGE = " Sorry, I can't recognize your input.";
         final String ADD_TASK = " Got it. I've added this task:";
-        final String FILE = "./ip/src/main/java/db/tasks.txt";
+        final String FILE = "./tasks.txt";
 
         Storage storage = new Storage(FILE);
         ArrayList<Task> inputs = new ArrayList<>(storage.loadTasks());
