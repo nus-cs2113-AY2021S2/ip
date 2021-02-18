@@ -7,7 +7,6 @@ import Duke.Task;
 public class Duke {
     private static final Scanner scanner = new Scanner(System.in);
     private static final ArrayList<Task> tasksList = new ArrayList<Task>();
-    private static int tasksCount = 0;
     public static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
