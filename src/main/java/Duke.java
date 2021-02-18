@@ -1,10 +1,10 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.*;
 
 public class Duke {
 
-
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -97,7 +97,8 @@ public class Duke {
                     System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
                     System.out.println("____________________________________________________________\n");
                 }
-                line = in.nextLine();
+                break;
+
             }
             while(line.equals("list")){
                 System.out.println("____________________________________________________________\n");
@@ -106,13 +107,27 @@ public class Duke {
                     System.out.println(i+1 + ". " + Tasks.get(i).toString() + "\n");
                 }
                 System.out.println("____________________________________________________________\n");
-                line = "";
+                break;
 
             }
-
+            line = in.nextLine();
         }
         System.out.println("____________________________________________________________\n");
         System.out.println(" Bye. Hope to see you again soon!\n");
         System.out.println("____________________________________________________________\n");
+        FileWriter writer = new FileWriter("src/main/java/duke.txt",false);
+        for (Task t : Tasks) {
+            if (t instanceof Todo) {
+                writer.write("T | " + t.getStatusNumber().trim() + " | " + t.getDescription().trim());
+            }
+            else if(t instanceof Event){
+                writer.write("E | " + t.getStatusNumber().trim() + " | " + t.getDescription().trim() + " | " + t.getTime().trim());
+            }
+            else if(t instanceof Deadline){
+                writer.write("D | " + t.getStatusNumber().trim() + " | " + t.getDescription().trim() + " | " + t.getTime().trim());
+            }
+            writer.write("\r\n");
+        }
+        writer.close();
     }
 }

@@ -10,6 +10,10 @@ public class Task {
     public String getStatusIcon() {
         return (isDone ? "X" : " ");
     }
+    public String getStatusNumber() {
+        return (isDone ? "1" : "0");
+    }
+
     public void markAsDone() {
         this.isDone = true;
     }
@@ -21,5 +25,11 @@ public class Task {
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.getDescription();
     }
+
+    public String getTime(){
+        return null;
+    }
+
+
 
 }
