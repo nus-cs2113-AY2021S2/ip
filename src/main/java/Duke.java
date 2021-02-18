@@ -205,7 +205,7 @@ public class Duke {
         FileWriter fw = new FileWriter(filePath, true);
         String description = tasks.getDescription();
         String status = tasks.getStatusIcon();
-        String taskType = tasks.getTaskType();
+        String taskType = tasks.getTaskTypeInWords();
         fw.write(description + status + taskType + "\n");
         fw.close();
     }

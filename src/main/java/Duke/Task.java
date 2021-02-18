@@ -37,6 +37,8 @@ public class Task {
         }
     }
 
+    public String getTaskTypeInWords() {return this.taskType;}
+
     public String getDescription() {
         return this.description;
     }
