@@ -28,4 +28,8 @@ public class Task {
         return null;
     }
 
+    public boolean hasDateTime() {
+        return false;
+    }
+
 }

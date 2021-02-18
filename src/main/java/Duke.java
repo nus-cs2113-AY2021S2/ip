@@ -1,4 +1,12 @@
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 
 public class Duke {
 
@@ -6,6 +14,7 @@ public class Duke {
     public static Task[] tasks = new Task[101];
 
     public static void goodbye() {
+        saveData();
         System.out.println("\n" +
                 "░██████╗░░█████╗░░█████╗░██████╗░██████╗░██╗░░░██╗███████╗\n" +
                 "██╔════╝░██╔══██╗██╔══██╗██╔══██╗██╔══██╗╚██╗░██╔╝██╔════╝\n" +
@@ -63,8 +72,14 @@ public class Duke {
         if (taskCount > 1) {
             System.out.println("Here are the tasks in your list:");
             for (int i = 1; i < taskCount; i++) {
-                System.out.println(i + ". " + tasks[i].getTaskType() + tasks[i].getStatusIcon() + " "
-                        + tasks[i].getDescription() + tasks[i].getDateTime());
+                System.out.print(i + ". " + tasks[i].getTaskType() + tasks[i].getStatusIcon() + " "
+                        + tasks[i].getDescription());
+                if (tasks[i].getTaskType() == "[D]")
+                    System.out.print(" (by: " + tasks[i].getDateTime() + ")");
+                else if (tasks[i].getTaskType() == "[E]") {
+                    System.out.print(" (at: " + tasks[i].getDateTime() + ")");
+                }
+                System.out.print("\n");
             }
         } else {
             System.out.println("Please input a task.");
@@ -90,7 +105,7 @@ public class Duke {
             tasks[taskCount] = t;
             System.out.println("Got it. I've added this task:");
             System.out.println(t.getTaskType() + t.getStatusIcon() + " " + t.getDescription());
-            System.out.println("Now you have" + taskCount + " tasks in the list.");
+            System.out.println("Now you have " + taskCount + " tasks in the list.");
             taskCount++;
         } catch (DukeException | IndexOutOfBoundsException e) {
             printInvalidMessage("todo");
@@ -106,7 +121,8 @@ public class Duke {
             Event e = new Event(description, dateTime);
             tasks[taskCount] = e;
             System.out.println("Got it. I've added this task:");
-            System.out.println(e.getTaskType() + e.getStatusIcon() + " " + e.getDescription() + " " + e.getDateTime());
+            System.out.println(e.getTaskType() + e.getStatusIcon() + " " + e.getDescription() + " at(: "
+                    + e.getDateTime() + ")");
             System.out.println("Now you have " + taskCount + " tasks in the list.");
             taskCount++;
         } catch (DukeException | IndexOutOfBoundsException e) {
@@ -123,13 +139,83 @@ public class Duke {
             Deadline d = new Deadline(description, dateTime);
             tasks[taskCount] = d;
             System.out.println("Got it. I've added this task:");
-            System.out.println(d.getTaskType() + d.getStatusIcon() + " " + d.getDescription() + " " + d.getDateTime());
+            System.out.println(d.getTaskType() + d.getStatusIcon() + " " + d.getDescription() + " (by: "
+                    + d.getDateTime() + ")");
             System.out.println("Now you have " + taskCount + " tasks in the list.");
             taskCount++;
         } catch (DukeException | IndexOutOfBoundsException e) {
             printInvalidMessage("deadline");
         }
     }
+
+    public static void loadData() {
+        try {
+            Path dataFilePath = Paths.get("data/");
+            Files.createDirectories(dataFilePath);
+            File data = new File ("data/duke.txt");
+            Scanner readFile = new Scanner (data);
+            while (readFile.hasNextLine()) {
+
+                String input = readFile.nextLine();
+                //split string by whitespace + "|" + whitespace
+                String[] taskSplit = input.split("\\s\\|\\s");
+                if (taskSplit[0].equals("[D]")) {
+                    Deadline d = new Deadline (taskSplit[2], taskSplit[3]);
+                    tasks[taskCount] = d;
+                    taskCount++;
+                    if (taskSplit[1].equals("1")) {
+                        d.setDone();
+                    }
+                } else if (taskSplit[0].equals("[T]")) {
+                    Todo t = new Todo (taskSplit[2]);
+                    tasks[taskCount] = t;
+                    taskCount++;
+                    if (taskSplit[1].equals("1")) {
+                        t.setDone();
+                    }
+                } else if (taskSplit[0].equals("[E]")) {
+                    Event e = new Event (taskSplit[2], taskSplit[3]);
+                    tasks[taskCount] = e;
+                    taskCount++;
+                    if (taskSplit[1].equals("1")) {
+                        e.setDone();
+                    }
+                }
+            }
+            readFile.close();
+        } catch (IOException e) {
+            System.out.println("Error when creating data directory. Please try again.");
+        }
+    }
+
+    public static boolean saveData() {
+        try {
+            System.out.println("Saving your data...");
+            FileWriter fileWriter = new FileWriter("data/duke.txt");
+            for (int i = 1; i < taskCount; i++) {
+                fileWriter.write(tasks[i].getTaskType() + " | " + ((tasks[i].isDone) ? "1" : "0") + " | "
+                        + tasks[i].getDescription() + ((tasks[i].hasDateTime()) ? " | " + tasks[i].getDateTime() : "")
+                            + "\n" );
+            }
+            fileWriter.close();
+            System.out.println("Data saved");
+            return true;
+        } catch (IOException e) {
+            System.out.println("Error occurred when saving your data. Please try again.");
+            return false;
+        }
+    }
+
+//    public String printByType (String type) {
+//        switch(type) {
+//        case "T":
+//            return [task description];
+//        case "E":
+//            return " /at e"
+//        case "D":
+//        }
+//        return null;
+//    }
 
     public static void getInput() {
         while (true) {
@@ -140,6 +226,8 @@ public class Duke {
             } else if (inputCommand.equals("bye")) {
                 goodbye();
                 break;
+            } else if (inputCommand.equals("save")) {
+                saveData();
             } else {
                 try {
                     String taskToAdd = inputCommand.split(" ", 2)[1];
@@ -164,6 +252,7 @@ public class Duke {
 
     public static void main(String[] args) {
         welcome();
+        loadData();
         getInput();
     }
 }
