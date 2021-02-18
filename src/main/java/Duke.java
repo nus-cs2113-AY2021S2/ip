@@ -115,7 +115,7 @@ public class Duke {
                     break;
                 }
             } catch (DoneFormatException e) {
-                System.out.println(LINE_SEPERATOR + e.toString() + LINE_SEPERATOR);
+                System.out.println(LINE_SEPERATOR + "\n" + e.toString() + LINE_SEPERATOR);
             } catch (TaskAlreadyDoneException e) {
                 System.out.println(LINE_SEPERATOR + "\n    The task is done already.\n" + LINE_SEPERATOR);
             } catch (IndexOutOfBoundsException e) {
