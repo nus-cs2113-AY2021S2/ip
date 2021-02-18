@@ -87,9 +87,7 @@ public class Duke {
                 break;
             }
         }
-        printHorizontalLine();
         System.out.println(MESSAGE_SAVE_FILE_LOADED);
-        printHorizontalLine();
     }
 
     /**
@@ -140,13 +138,9 @@ public class Duke {
         taskList.add(task);
     }
 
-    private static void printHorizontalLine() {
-        System.out.println("____________________________________________________________");
-    }
 
     private static void showLogo() {
         // logo/loading
-        printHorizontalLine();
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -158,10 +152,8 @@ public class Duke {
 
     private static void showGreeting() {
         // greeting
-        printHorizontalLine();
         String greeting = "Hello! I'm Duke\n" + "What can I do for you?";
         System.out.println(greeting);
-        printHorizontalLine();
     }
 
     private static String getUserInput() {
@@ -263,11 +255,9 @@ public class Duke {
     }
 
     private static void getMessageForTodo(Task task) {
-        printHorizontalLine();
         showAddTask();
         System.out.println("  " + task.toString());
         System.out.println("Now you have " + taskList.size() + " tasks in the list.");
-        printHorizontalLine();
     }
 
     public static void showAddTask() {
@@ -295,11 +285,9 @@ public class Duke {
     }
 
     private static void getMessageForDeadline(Task task) {
-        printHorizontalLine();
         showAddTask();
         System.out.println("  " + task.toString());
         System.out.println("Now you have " + taskList.size() + " tasks in the list.");
-        printHorizontalLine();
     }
 
     /**
@@ -322,20 +310,16 @@ public class Duke {
     }
 
     private static void getMessageForEvent(Task task) {
-        printHorizontalLine();
         showAddTask();
         System.out.println("  " + task.toString());
         System.out.println("Now you have " + taskList.size() + " tasks in the list.");
-        printHorizontalLine();
     }
 
     /**
      * Generate feedback for list of task and task status
      */
     private static void executeList() {
-        printHorizontalLine();
         showTasksList(taskList);
-        printHorizontalLine();
     }
 
     private static void showTasksList(ArrayList<Task> taskList) {
@@ -363,10 +347,8 @@ public class Duke {
     }
 
     private static void showTaskDone(Task task) {
-        printHorizontalLine();
         System.out.println("Nice! I've marked this task as done:");
         System.out.println("  " + task.toString());
-        printHorizontalLine();
     }
 
     /**
@@ -385,12 +367,10 @@ public class Duke {
     }
 
     private static void showTaskDelete(Task task) {
-        printHorizontalLine();
         System.out.println("Noted. I've removed this task:");
         System.out.println("  " + task.toString());
         // (taskList.size() - 1) because task not deleted yet in executeDelete
         System.out.println("Now you have " + (taskList.size() - 1) + " tasks in the list.");
-        printHorizontalLine();
     }
 
     /**
@@ -402,13 +382,11 @@ public class Duke {
         } catch (IOException e) {
             System.out.println(MESSAGE_SAVE_FILE_ERROR);
         }
-        printHorizontalLine();
         showGoodbye();
         System.exit(0);
     }
 
     private static void saveFile() throws IOException {
-        printHorizontalLine();
         File f = new File("duke.txt");
         if (f.createNewFile()) {
             System.out.println(MESSAGE_SAVE_FILE_CREATED);
@@ -422,9 +400,7 @@ public class Duke {
     }
 
     private static void showGoodbye() {
-        printHorizontalLine();
         System.out.println("Bye. Hope to see you again soon!");
-        printHorizontalLine();
     }
 
 }
