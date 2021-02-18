@@ -133,17 +133,13 @@ public class Duke {
 
     public static void parseData(String line) {
         String[] tokens = line.split("#");
-        for (int i = 0; i < tokens.length; i++) {
-            System.out.println(tokens[i]);
-        }
 
         switch (tokens[0]) {
         case "T":
             try {
                 boolean isDone = Integer.parseInt(tokens[1]) == 1;
-                String command = "todo " + tokens[2];
-                System.out.println(command);
-                inputCommand(command, tasks);
+                Todo todo = new Todo(tokens[2], isDone);
+                tasks.add(todo);
             } catch (NumberFormatException e) {
                 return;
             }
@@ -151,9 +147,8 @@ public class Duke {
         case "D":
             try {
                 boolean isDone = Integer.parseInt(tokens[1]) == 1;
-                String command = "deadline " + tokens[2] + " /by " + tokens[3];
-                System.out.println(command);
-                inputCommand(command, tasks);
+                Deadline deadline = new Deadline(tokens[2], tokens[3], isDone);
+                tasks.add(deadline);
             } catch (NumberFormatException e) {
                 return;
             }
@@ -161,9 +156,8 @@ public class Duke {
         case "E":
             try {
                 boolean isDone = Integer.parseInt(tokens[1]) == 1;
-                String command = "event " + tokens[2] + " /at " + tokens[3];
-                System.out.println(command);
-                inputCommand(command, tasks);
+                Event event = new Event(tokens[2], tokens[3], isDone);
+                tasks.add(event);
             } catch (NumberFormatException e) {
                 return;
             }
