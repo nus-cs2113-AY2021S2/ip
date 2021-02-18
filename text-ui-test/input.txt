@@ -1,5 +1,6 @@
 todo read book
 deadline do homework /by Sunday
 event project meeting /at Mon 2-4pm
+event
 list
 bye
