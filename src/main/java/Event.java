@@ -25,7 +25,7 @@ public class Event extends Task {
                 description + " (at: " + at + ")"; }
 
     public String toFileString() {
-        return getType() + " | " + getStatusNum() + " | " + description + " | " + at;}
+        return getType() + " |" + getStatusNum() + " |" + description + " |" + at;}
 
 
 }

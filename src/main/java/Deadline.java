@@ -25,7 +25,7 @@ public class Deadline extends Task {
                 description + " (by: " + by + ")";
     }
     public String toFileString() {
-        return getType() + " | " + getStatusNum() + " | " + description + " | " + by;}
+        return getType() + " |" + getStatusNum() + " |" + description + " |" + by;}
 }
 
 

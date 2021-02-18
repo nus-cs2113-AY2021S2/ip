@@ -24,6 +24,6 @@ public class Todo extends Task {
 
     @Override
     public String toFileString() {
-        return getType() + " | " + getStatusNum() +" | " + description;
+        return getType() + " |" + getStatusNum() +" |" + description;
     }
 }

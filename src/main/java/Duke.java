@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.*;
+import java.io.IOException;
 
 public class Duke {
     private static final String line = "____________________________________________________________\n";
@@ -10,7 +11,7 @@ public class Duke {
 
 
     private static void appendToFile(String textToAppend) throws IOException {
-        FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
+        FileWriter fw = new FileWriter("data/duke.txt", true); // create a FileWriter in append mode
         fw.write(textToAppend);
         fw.close();
     }
@@ -28,9 +29,9 @@ public class Duke {
         } catch (FileNotFoundException e) {
             System.out.println("no file found");
             File dataDirectory = new File("data");
-//            dataDirectory.mkdir();
-//            File dukeFile = new File("data","duke.txt");
-//            dukeFile.createNewFile();
+            dataDirectory.mkdir();
+            File dukeFile = new File("data/duke.txt");
+            //dukeFile.createNewFile();
 
         }
 
@@ -49,7 +50,6 @@ public class Duke {
         String input;
         Scanner userInput = new Scanner(System.in);
         input = userInput.nextLine();
-        ArrayList<Task> tasks = new ArrayList<>();
 
         while (!input.equals("bye")) {
 
@@ -162,11 +162,11 @@ public class Duke {
             input = userInput.nextLine();
         }
         try {
-            PrintWriter writer = new PrintWriter("Data/Duke.txt");
+            PrintWriter writer = new PrintWriter("data/duke.txt");
             writer.print("");
+            writer.close();
             for (Task i : tasks) {
-                appendToFile(i.toFileString());
-                appendToFile(System.lineSeparator());
+                appendToFile(i.toFileString()+"\n");
             }
         } catch (FileNotFoundException e){
             System.out.println("File not found");
@@ -181,25 +181,18 @@ public class Duke {
         Scanner s = new Scanner(filePath); // create a Scanner using the File as the source
         while (s.hasNext()) {
             String[] dataEntry = s.nextLine().split("\\|");
-            switch (dataEntry[0]) {
-            case "T":
+            if (dataEntry[0].contains("T")) {
                 tasks.add(new Todo(dataEntry[2]));
-                break;
-            case "D":
-                tasks.add(new Deadline(dataEntry[2], dataEntry[3]));
-                break;
-            case "E":
+            } else if (dataEntry[0].contains("D")) {
+                tasks.add(new Deadline(dataEntry[2],dataEntry[3]));
+            } else if (dataEntry[0].contains("E")) {
                 tasks.add(new Event(dataEntry[2], dataEntry[3]));
-                break;
-            default:
-                break;
             }
             if (dataEntry[1].equals("1")) {
-                tasks.get(index).getStatusNum();
+                tasks.get(index).markAsDone();
             }
             index++;
-            System.out.println(s.nextLine());
-            
+
         }
     }
 
