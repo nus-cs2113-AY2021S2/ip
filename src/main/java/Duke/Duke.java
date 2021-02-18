@@ -7,7 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 
-public class Duke { //implement toString() next
+public class Duke {
 
     public static void main(String[] args) throws IOException {
         welcomeMessage();
@@ -15,6 +15,8 @@ public class Duke { //implement toString() next
         ArrayList<Task> taskList = new ArrayList<>();
         int taskCount = 0;
 
+        File dataDir = new File("data");
+        dataDir.mkdir();
         File dataFile = new File("data/tasks.txt");
         if (!dataFile.createNewFile()) {
             taskCount = downloadTasks(dataFile, taskList, taskCount);
@@ -48,7 +50,7 @@ public class Duke { //implement toString() next
             } else if (commandInput.startsWith("event")) {
                 try {
                     int timeIndex = commandInput.indexOf("/at");
-                    taskList.add(new Event(commandInput.substring(6, timeIndex), commandInput.substring(timeIndex + 3)));
+                    taskList.add(new Event(commandInput.substring(6, timeIndex - 1), commandInput.substring(timeIndex + 4)));
                     taskList.get(taskCount).printDescription();
                     taskCount++;
                 } catch (StringIndexOutOfBoundsException e) {
@@ -57,7 +59,7 @@ public class Duke { //implement toString() next
             } else if (commandInput.startsWith("deadline")) {
                 try {
                     int timeIndex = commandInput.indexOf("/by");
-                    taskList.add(new Deadline(commandInput.substring(9, timeIndex), commandInput.substring(timeIndex + 3)));
+                    taskList.add(new Deadline(commandInput.substring(9, timeIndex - 1), commandInput.substring(timeIndex + 4)));
                     taskList.get(taskCount).printDescription();
                     taskCount++;
                 } catch (StringIndexOutOfBoundsException e) {
@@ -80,12 +82,12 @@ public class Duke { //implement toString() next
             commandInput = in.nextLine();
         }
 
-        UploadTasks(taskList, taskCount);
+        uploadTasks(taskList, taskCount);
 
         exitMessage();
     }
 
-    private static void UploadTasks(ArrayList<Task> taskList, int taskCount) throws java.io.IOException {
+    private static void uploadTasks(ArrayList<Task> taskList, int taskCount) throws java.io.IOException {
         FileWriter fw = new FileWriter("data/tasks.txt");
         for (int i = 0; i < taskCount; ++i) {
             int taskStatus = taskList.get(i).isDone ? 1 : 0;
@@ -106,10 +108,14 @@ public class Duke { //implement toString() next
             if (commandInput.startsWith("T")) {
                 String description = commandInput.substring(8);
                 taskList.add(new Todo(description));
-            } else {
+            } else if (commandInput.startsWith("D")) {
                 int timeIndex = commandInput.lastIndexOf("| ");
-                String description = commandInput.substring(8, timeIndex);
+                String description = commandInput.substring(8, timeIndex - 1);
                 taskList.add(new Deadline(description, commandInput.substring(timeIndex + 2)));
+            } else if (commandInput.startsWith("E")) {
+                int timeIndex = commandInput.lastIndexOf("| ");
+                String description = commandInput.substring(8, timeIndex - 1);
+                taskList.add(new Event(description, commandInput.substring(timeIndex + 2)));
             }
             if (commandInput.charAt(4) == '1') {
                 taskList.get(taskCount).setDone();
@@ -127,7 +133,7 @@ public class Duke { //implement toString() next
             System.out.println("Here are the tasks in your list:");
             for (int i = 0; i < taskCount; ++i) {
                 System.out.print(i + 1 + ". [" + taskList.get(i).getAlphabet() + "]");
-                System.out.println("[" + taskList.get(i).getStatusIcon() + "] " + taskList.get(i).description + taskList.get(i).time);
+                System.out.println("[" + taskList.get(i).getStatusIcon() + "] " + taskList.get(i).toString());
             }
         }
         System.out.println("************************************************************");
