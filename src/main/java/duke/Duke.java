@@ -2,10 +2,10 @@ package duke;
 
 import duke.tasks.*;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
-    public static Task[] tasks = new Task[100];
-    public static int currentTask = 0;
+    public static ArrayList<Task> tasks = new ArrayList<>();
 
     public static void dividerLine() {
         System.out.println("\t________________________________________\n");
@@ -15,7 +15,7 @@ public class Duke {
         Scanner scannerObject = new Scanner(System.in);
         while (scannerObject.hasNextLine()) {
             String command = scannerObject.nextLine();
-            if (command.equals("bye")) {
+            if (command.equals("bye") || command.equals("exit")) {
                 dividerLine();
                 exitDuke();
                 dividerLine();
@@ -41,6 +41,10 @@ public class Duke {
                 dividerLine();
                 addDeadline(command);
                 dividerLine();
+            } else if (command.startsWith("delete")) {
+                dividerLine();
+                deleteTask(command);
+                dividerLine();
             } else {
                 dividerLine();
                 unknownCommand();
@@ -59,6 +63,8 @@ public class Duke {
             return "deadline [task description] /by [due date]";
         case "done":
             return "done [index of task]";
+        case "delete":
+            return "delete [index of task]";
         default:
             return null;
         }
@@ -69,13 +75,15 @@ public class Duke {
     }
     
     public static void list() {
-        if (currentTask==0) {
+        if (tasks.size()==0) {
             System.out.println("\tYou have no tasks in your list");
         } else {
             System.out.println("\tHere are the tasks in your list:");
-            for (int i=0; i<currentTask; i++) {
-                System.out.println("\t" + Integer.toString(i+1) + ".[" + tasks[i].getType() + "]["
-                        + tasks[i].getStatusIcon() + "] " + tasks[i].getDescription() + " " + tasks[i].getDate());
+            for (int i=0; i<tasks.size(); i++) {
+                Task currentTask = tasks.get(i);
+                System.out.println("\t" + Integer.toString(i+1) + ".[" + currentTask.getType() + "]["
+                        + currentTask.getStatusIcon() + "] " + currentTask.getDescription() + " " 
+                        + currentTask.getDate());
             }
         }
     }
@@ -88,14 +96,13 @@ public class Duke {
         } else {
             String todo = splitCommand[1];
             Todo t = new Todo(todo);
-            tasks[currentTask] = t;
-            currentTask++;
+            tasks.add(t);
             System.out.println("\tGot it. I've added this task:");
             System.out.println("\t   [" + t.getType() + "][" + t.getStatusIcon() + "] " + t.getDescription());
-            if (currentTask==1) {
+            if (tasks.size()==1) {
                 System.out.println("\tNow you have 1 task in the list.");
             } else {
-                System.out.println("\tNow you have " + Integer.toString(currentTask) + " tasks in the list.");
+                System.out.println("\tNow you have " + Integer.toString(tasks.size()) + " tasks in the list.");
             }
         }
     }
@@ -110,12 +117,11 @@ public class Duke {
                 String description = splitCommand[1].split("/at")[0].strip();
                 String date = splitCommand[1].split("/at")[1].strip();
                 Event t = new Event(description, date);
-                tasks[currentTask] = t;
-                currentTask++;
+                tasks.add(t);
                 System.out.println("\tGot it. I've added this task:");
                 System.out.println("\t   [" + t.getType() + "][" + t.getStatusIcon() + "] "
                         + t.getDescription() + " " + t.getDate());
-                System.out.println("\tNow you have " + Integer.toString(currentTask) + " tasks in the list.");
+                System.out.println("\tNow you have " + Integer.toString(tasks.size()) + " tasks in the list.");
             }
             catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("\t!!! Please specify event date !!!");
@@ -134,12 +140,11 @@ public class Duke {
                 String description = splitCommand[1].split("/by")[0].strip();
                 String date = splitCommand[1].split("/by")[1].strip();
                 Deadline t = new Deadline(description, date);
-                tasks[currentTask] = t;
-                currentTask++;
+                tasks.add(t);
                 System.out.println("\tGot it. I've added this task:");
                 System.out.println("\t   [" + t.getType() + "][" + t.getStatusIcon() + "] "
                         + t.getDescription() + " " + t.getDate());
-                System.out.println("\tNow you have " + Integer.toString(currentTask) + " tasks in the list.");
+                System.out.println("\tNow you have " + Integer.toString(tasks.size()) + " tasks in the list.");
             }
             catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("\t!!! Please specify the task due date !!!");
@@ -155,18 +160,45 @@ public class Duke {
             System.out.println("\tUsage: " + printUsage("done"));
         } else {
             int itemIndex = Integer.parseInt(splitCommand[1])-1;
-            if (itemIndex >= currentTask || itemIndex < 0) {
+            if (itemIndex >= tasks.size() || itemIndex < 0) {
                 System.out.println("\t!!! Item does not exist !!!");
                 list();
-            } else if (tasks[itemIndex].isDone()) {
+            } else if (tasks.get(itemIndex).isDone()) {
                 System.out.println("\tThis task is already done :)");
-                System.out.println("\t  [" + tasks[itemIndex].getType() + "][" + tasks[itemIndex].getStatusIcon() + "] "
-                        + tasks[itemIndex].getDescription());
+                Task currentTask = tasks.get(itemIndex);
+                System.out.println("\t  [" + currentTask.getType() + "][" + currentTask.getStatusIcon() + "] "
+                        + currentTask.getDescription());
             } else {
-                tasks[itemIndex].markAsDone();
+                tasks.get(itemIndex).markAsDone();
                 System.out.println("\tNice! I've marked this task as done:");
-                System.out.println("\t  [" + tasks[itemIndex].getType() + "][" + tasks[itemIndex].getStatusIcon() + "] "
-                        + tasks[itemIndex].getDescription());
+                Task currenTask = tasks.get(itemIndex);
+                System.out.println("\t  [" + currenTask.getType() + "][" + currenTask.getStatusIcon() + "] "
+                        + currenTask.getDescription());
+            }
+        }
+    }
+
+    public static void deleteTask(String command) {
+        String[] splitCommand = command.split(" ", 2);
+        if (splitCommand.length==1) {
+            System.out.println("\t!!! Please specify the index of the task to be deleted !!!");
+            System.out.println("\tUsage: " + printUsage("delete"));
+        } else {
+            int itemIndex = Integer.parseInt(splitCommand[1])-1;
+            if (itemIndex >= tasks.size() || itemIndex < 0) {
+                System.out.println("\t!!! Item does not exist !!!");
+                list();
+            } else {
+                System.out.println("\tNoted. I've removed this task:");
+                Task currentTask = tasks.get(itemIndex);
+                System.out.println("\t  [" + currentTask.getType() + "][" + currentTask.getStatusIcon() + "] "
+                        + currentTask.getDescription());
+                tasks.remove(itemIndex);
+                if (tasks.size()==1) {
+                    System.out.println("\tNow you have 1 task in the list.");
+                } else {
+                    System.out.println("\tNow you have " + Integer.toString(tasks.size()) + " tasks in the list.");
+                }
             }
         }
     }
