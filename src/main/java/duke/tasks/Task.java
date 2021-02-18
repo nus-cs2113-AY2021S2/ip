@@ -18,6 +18,15 @@ public class Task {
         return (isDone ? "[X]":"[ ]");
     }
 
+    public boolean getIsDone() {
+        if (isDone) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
     public void setDone(){
         isDone = true;
     }
@@ -28,6 +37,10 @@ public class Task {
 
     public String getTaskType() {
         return null;
+    }
+
+    public boolean hasDateTime() {
+        return false;
     }
 
 }

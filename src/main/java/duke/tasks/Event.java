@@ -15,7 +15,12 @@ public class Event extends Task {
 
     @Override
     public String getDateTime() {
-        return "(at: " + dateTime + ")";
+        return dateTime;
+    }
+
+    @Override
+    public boolean hasDateTime() {
+        return true;
     }
 
 }
