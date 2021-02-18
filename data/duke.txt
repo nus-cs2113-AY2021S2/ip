@@ -1,7 +1,0 @@
-todo |1|I want to learn a new language
-deadline |1|cs3235 quiz  /by this friday
-event |1|cs2113t meeting  /at this sunday 10am
-todo |1|sleep early everyday
-todo |1|eat properly
-deadline |1|homework  /by tonight
-event |1|lecture  /at tmr

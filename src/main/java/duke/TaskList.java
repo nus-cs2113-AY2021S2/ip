@@ -29,6 +29,8 @@ public class TaskList {
             return Command.DEADLINE;
         } else if (input.startsWith("event ")) {
             return Command.EVENT;
+        } else if (input.startsWith("delete ")) {
+            return Command.DELETE;
         } else {
             throw new InvalidCommandException();
         }
