@@ -5,6 +5,8 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -66,7 +68,7 @@ public class Duke {
             System.out.println("Okay, I've deleted this task:");
             System.out.println(tasks.get(index).toString());
             Task.totalTasks -= 1;
-            tasks.remove(index);
+            tasks.remove(index.intValue());
             printNumTasks();
         }
     }
@@ -131,6 +133,37 @@ public class Duke {
         writeTasklistToFile();
     }
 
+    private static void loadTasklist() {
+        try {
+            String filePath = "data/duke.txt";
+            // check if the directory and file exists
+            if (Files.exists(Paths.get("data/duke.txt"))) {
+                File f = new File(filePath);
+                Scanner sc = new Scanner(f);
+                while (sc.hasNext()) {
+                    String taskString = sc.nextLine();
+                    if (taskString.startsWith("[E]")) {
+                        String description = taskString.substring(7, taskString.indexOf('(')-1);
+                        String timing = taskString.substring(taskString.indexOf('(') + 5, taskString.indexOf(')'));
+                        tasks.add(Task.totalTasks, new Event(description, timing));
+                    } else if (taskString.startsWith("[D]")) {
+                        String description = taskString.substring(7, taskString.indexOf('(')-1);
+                        String timing = taskString.substring(taskString.indexOf('(') + 5, taskString.indexOf(')'));
+                        tasks.add(Task.totalTasks, new Deadline(description, timing));
+                    } else if (taskString.startsWith("[T]")) {
+                        String description = taskString.substring(7);
+                        tasks.add(Task.totalTasks, new Todo(description));
+                    }
+                    if (taskString.contains("[X]")) {
+                        tasks.get(Task.totalTasks - 1).markAsDone();
+                    }
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Tasklist file not found! :(");
+        }
+    }
+
     private static void writeTasklistToFile() {
         try {
             String filePath = "data/duke.txt";
@@ -152,6 +185,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
+        loadTasklist();
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
