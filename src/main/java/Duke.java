@@ -22,6 +22,13 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String phrase;
 
+        try {
+            loadFile();
+            System.out.println("Save data loaded!");
+        } catch (Exception e) {
+            System.out.println("No save files found.");
+        }
+
         DukePrint.printDivider();
         System.out.println("What's up! I'm Duke");
         System.out.println("What can I do for you?");
@@ -43,6 +50,12 @@ public class Duke {
         case ("bye"):
             // Exits program
             System.out.println("Alright cheers mate!");
+            // Saves task list
+            try {
+                saveFile();
+            } catch (Exception e) {
+                System.out.println("Failed to save file!");
+            }
             break;
         case ("list"):
             // List all tasks
@@ -118,6 +131,50 @@ public class Duke {
         }
     }
 
+    public static void parseData(String line) {
+        String[] tokens = line.split("#");
+        for (int i = 0; i < tokens.length; i++) {
+            System.out.println(tokens[i]);
+        }
+
+        switch (tokens[0]) {
+        case "T":
+            try {
+                boolean isDone = Integer.parseInt(tokens[1]) == 1;
+                String command = "todo " + tokens[2];
+                System.out.println(command);
+                inputCommand(command, tasks);
+            } catch (NumberFormatException e) {
+                return;
+            }
+            break;
+        case "D":
+            try {
+                boolean isDone = Integer.parseInt(tokens[1]) == 1;
+                String command = "deadline " + tokens[2] + " /by " + tokens[3];
+                System.out.println(command);
+                inputCommand(command, tasks);
+            } catch (NumberFormatException e) {
+                return;
+            }
+            break;
+        case "E":
+            try {
+                boolean isDone = Integer.parseInt(tokens[1]) == 1;
+                String command = "event " + tokens[2] + " /at " + tokens[3];
+                System.out.println(command);
+                inputCommand(command, tasks);
+            } catch (NumberFormatException e) {
+                return;
+            }
+            break;
+        default:
+            System.out.println("Invalid data!");
+            break;
+        }
+    }
+
+
     public static void saveFile() throws IOException {
         File path = new File("tasks.txt");
         if (!path.exists()) {
@@ -141,8 +198,8 @@ public class Duke {
         Scanner scanner = new Scanner(path);
         try {
             while (scanner.hasNext()) {
-                String input = scanner.nextLine();
-                inputCommand(input, tasks);
+                String line = scanner.nextLine();
+                parseData(line);
             }
         } catch (Exception e) {
             System.out.println("Failed to load!");

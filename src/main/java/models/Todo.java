@@ -19,6 +19,6 @@ public class Todo extends Task {
         } else {
             done = 0;
         }
-        return "T" + " | " + done + " | " + description;
+        return "T" + "|" + done + "|" + description + "\n";
     }
 }

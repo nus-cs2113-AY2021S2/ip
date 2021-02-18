@@ -22,6 +22,6 @@ public class Deadline extends Task {
         } else {
             done = 0;
         }
-        return "D" + " | " + done + " | " + description;
+        return "D" + "|" + done + "|" + description + "|" + by + "\n";
     }
 }
