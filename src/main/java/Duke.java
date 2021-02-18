@@ -7,7 +7,6 @@ import Duke.Task;
 public class Duke {
     private static final Scanner scanner = new Scanner(System.in);
     private static final ArrayList<Task> tasksList = new ArrayList<Task>();
-    private static int tasksCount = 0;
     public static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
@@ -28,6 +27,8 @@ public class Duke {
                 listOutTasks();
             } else if (userCommand.equalsIgnoreCase("done" )) {
                 markTaskAsDone(inputDetails);
+            } else if (userCommand.equalsIgnoreCase("delete" )) {
+                deleteTask(inputDetails);
             } else  {
                 if (!isValidCommand(userCommand)) {
                     continue;
@@ -129,5 +130,15 @@ public class Duke {
             i++;
             System.out.println(i + ". " + selectedTask.getTaskType() + selectedTask.getStatusIcon() + " " + selectedTask.getDescription());
         }
+    }
+
+    private static void deleteTask(String s) {
+        int taskNumber = Integer.parseInt(s);
+        taskNumber--;
+        Task selectedTask = tasksList.get(taskNumber);
+        System.out.println("Noted. I've removed this task");
+        System.out.println("\t" + selectedTask.getTaskType() + selectedTask.getStatusIcon() + " " + selectedTask.getDescription());
+        tasksList.remove(taskNumber);
+        System.out.println("Now you have " + tasksList.size() + " tasks in the list.");
     }
 }
