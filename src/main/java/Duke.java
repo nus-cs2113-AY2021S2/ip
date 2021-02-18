@@ -82,7 +82,7 @@ public class Duke {
                 System.out.println("Got it! I've added this task:");
                 tasks.add(deadline);
                 System.out.println(deadline);
-                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                DukePrint.printTaskSize(tasks);
             } catch (StringIndexOutOfBoundsException e) {
                 System.out.println("\uD83D\uDE2D Please enter deadline in the format: 'deadline <name> /by <day> <time>'");
             }
@@ -96,10 +96,18 @@ public class Duke {
                 System.out.println("Got it! I've added this task:");
                 tasks.add(event);
                 System.out.println(event);
-                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                DukePrint.printTaskSize(tasks);
             } catch (StringIndexOutOfBoundsException e) {
                 System.out.println("\uD83D\uDE2D Please enter event in the format: 'event <name> /at <day> <time>'");
             }
+            break;
+        case ("delete"):
+            // Deletes a task
+            int toDelete = Integer.parseInt(subStrings[1]) - 1;
+            System.out.println("Noted. I've removed this task:");
+            System.out.println(tasks.get(toDelete).toString());
+            tasks.remove(toDelete);
+            DukePrint.printTaskSize(tasks);
             break;
         default:
             // Invalid models.Task
