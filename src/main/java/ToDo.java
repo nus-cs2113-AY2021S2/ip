@@ -1,4 +1,4 @@
-public class ToDo extends Task{
+public class ToDo extends Task {
 
 
     public ToDo(String taskDescription) {
@@ -7,7 +7,7 @@ public class ToDo extends Task{
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return super.toString();
     }
 }
