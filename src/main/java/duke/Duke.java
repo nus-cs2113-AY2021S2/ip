@@ -7,6 +7,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Duke {
     public static Task[] tasks = new Task[100];
@@ -18,48 +21,51 @@ public class Duke {
 
     public static void loadData() {
         try {
+            Path dataFilePath = Paths.get("data/");
+            Files.createDirectories(dataFilePath);
             File dataFile = new File("data/duke.txt");
-            if (true) {
-                Scanner fileReader = new Scanner(dataFile);
-                while (fileReader.hasNextLine()) {
-                    String line = fileReader.nextLine();
-                    String[] splitLine = line.split("\\s\\|\\s");
-                    if (line.startsWith("T")) {
-                        String todo = splitLine[2];
-                        Todo t = new Todo(todo);
-                        tasks[currentTask] = t;
-                        currentTask++;
-                        if (splitLine[1].equals("1")) {
-                            t.markAsDone();
-                        }
-                    } else if (line.startsWith("E")) {
-                        String description = splitLine[2];
-                        String date = splitLine[3];
-                        Event t = new Event(description, date);
-                        tasks[currentTask] = t;
-                        currentTask++;
-                        if (splitLine[1].equals("1")) {
-                            t.markAsDone();
-                        }
-                    } else if (line.startsWith("D")) {
-                        String description = splitLine[2];
-                        String date = splitLine[3];
-                        Deadline t = new Deadline(description, date);
-                        tasks[currentTask] = t;
-                        currentTask++;
-                        if (splitLine[1].equals("1")) {
-                            t.markAsDone();
-                        }
+            Scanner fileReader = new Scanner(dataFile);
+            while (fileReader.hasNextLine()) {
+                String line = fileReader.nextLine();
+                String[] splitLine = line.split("\\s\\|\\s");
+                if (line.startsWith("T")) {
+                    String todo = splitLine[2];
+                    Todo t = new Todo(todo);
+                    tasks[currentTask] = t;
+                    currentTask++;
+                    if (splitLine[1].equals("1")) {
+                        t.markAsDone();
+                    }
+                } else if (line.startsWith("E")) {
+                    String description = splitLine[2];
+                    String date = splitLine[3];
+                    Event t = new Event(description, date);
+                    tasks[currentTask] = t;
+                    currentTask++;
+                    if (splitLine[1].equals("1")) {
+                        t.markAsDone();
+                    }
+                } else if (line.startsWith("D")) {
+                    String description = splitLine[2];
+                    String date = splitLine[3];
+                    Deadline t = new Deadline(description, date);
+                    tasks[currentTask] = t;
+                    currentTask++;
+                    if (splitLine[1].equals("1")) {
+                        t.markAsDone();
                     }
                 }
-                fileReader.close();
             }
+            fileReader.close();
         } catch (FileNotFoundException e) {
-            System.out.println("file not found");
+            ;
+        } catch (IOException e) {
+            System.out.println("\tAn error occured while trying to create a data directory :(");
+            //System.out.println(e.getMessage());
         }
     }
 
-    public static void saveData() {
+    public static boolean saveData() {
         try {
             System.out.println("\tSaving your data...");
             FileWriter fileWriter = new FileWriter("data/duke.txt");
@@ -69,8 +75,10 @@ public class Duke {
             }
             fileWriter.close();
             System.out.println("\tData saved");
+            return true;
         } catch (IOException e) {
-            System.out.println("\tAn error occurred while saving your data.");
+            System.out.println("\tAn error occurred while saving your data :(");
+            return false;
         }
     }
 
@@ -80,10 +88,12 @@ public class Duke {
             String command = userInput.nextLine();
             if (command.equals("bye")) {
                 dividerLine();
-                exitDuke();
+                if (exitDuke()) {
+                    dividerLine();
+                    userInput.close();
+                    break;
+                }
                 dividerLine();
-                userInput.close();
-                break;
             } else if (command.equals("list")) {
                 dividerLine();
                 list();
@@ -238,9 +248,13 @@ public class Duke {
         }
     }
 
-    public static void exitDuke() {
-        saveData();
-        System.out.println("\tBye, hope to see you again soon!");
+    public static boolean exitDuke() {
+        if (saveData()) {
+            System.out.println("\tBye, hope to see you again soon!");
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public static void main(String[] args) {
