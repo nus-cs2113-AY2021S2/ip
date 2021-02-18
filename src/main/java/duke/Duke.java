@@ -88,6 +88,22 @@ public class Duke {
                 tasks.add(newTask);
                 System.out.println("  " + newTask.toString());
                 System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            } else if (userInput.split(" ")[0].equals("delete")) {
+                if(userInput.length() < 8) {
+                    Output.printEmptyCommand("delete");
+                    continue;
+                } else {
+                    int processedInput;
+                    processedInput = Integer.parseInt(userInput.replaceAll("[^0-9]", "")) - 1;
+                    if(processedInput <= 0 || processedInput > tasks.size()) {
+                        System.out.println("No index found. Please key an appropriate index");
+                        continue;
+                    }
+                    System.out.println("Noted. I've removed this task: ");
+                    System.out.println("  " + tasks.get(processedInput));
+                    tasks.remove(processedInput);
+                    System.out.println("Now you have " + tasks.size()+ " tasks in the list.");
+                }
             } else {
                 Output.printWrongCommand();
             }
