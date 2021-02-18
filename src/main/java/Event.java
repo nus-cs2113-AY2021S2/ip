@@ -15,4 +15,8 @@ public class Event extends Task {
     public String getStatusIcon() {
         return "[E]"+ super.getStatusIcon();
     }
+
+    public String getAt() {
+        return at;
+    }
 }

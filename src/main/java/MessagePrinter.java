@@ -20,6 +20,7 @@ public class MessagePrinter {
 
     public static void showByeMessage() {
         printBorder();
+        FileManager.saveFile();
         System.out.println("     Bye. Hope to see you again soon!");
         printBorder();
     }
