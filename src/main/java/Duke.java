@@ -6,14 +6,28 @@ import io.DukePrint;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
+
+    private static final ArrayList<Task> tasks = new ArrayList<>();
+    private static int taskCount = 0;
+
     public static void main(String[] args) {
         DukePrint.printLogo();
 
         Scanner sc = new Scanner(System.in);
         String phrase;
-        ArrayList<Task> tasks = new ArrayList<Task>();
+
+        try {
+            loadFile();
+            System.out.println("Save data loaded!");
+        } catch (Exception e) {
+            System.out.println("No save files found.");
+        }
 
         DukePrint.printDivider();
         System.out.println("What's up! I'm Duke");
@@ -36,6 +50,12 @@ public class Duke {
         case ("bye"):
             // Exits program
             System.out.println("Alright cheers mate!");
+            // Saves task list
+            try {
+                saveFile();
+            } catch (Exception e) {
+                System.out.println("Failed to save file!");
+            }
             break;
         case ("list"):
             // List all tasks
@@ -68,7 +88,8 @@ public class Duke {
                 System.out.println("Got it! I've added this task:");
                 tasks.add(todo);
                 System.out.println(todo);
-                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                taskCount++;
+                System.out.println("Now you have " + taskCount + " tasks in the list.");
             } catch (StringIndexOutOfBoundsException e) {
                 System.out.println("\uD83D\uDE2D Description of To-Do cannot be empty!");
             }
@@ -83,6 +104,8 @@ public class Duke {
                 tasks.add(deadline);
                 System.out.println(deadline);
                 DukePrint.printTaskSize(tasks);
+                taskCount++;
+                System.out.println("Now you have " + taskCount + " tasks in the list.");
             } catch (StringIndexOutOfBoundsException e) {
                 System.out.println("\uD83D\uDE2D Please enter deadline in the format: 'deadline <name> /by <day> <time>'");
             }
@@ -97,6 +120,8 @@ public class Duke {
                 tasks.add(event);
                 System.out.println(event);
                 DukePrint.printTaskSize(tasks);
+                taskCount++;
+                System.out.println("Now you have " + taskCount + " tasks in the list.");
             } catch (StringIndexOutOfBoundsException e) {
                 System.out.println("\uD83D\uDE2D Please enter event in the format: 'event <name> /at <day> <time>'");
             }
@@ -116,4 +141,75 @@ public class Duke {
         }
     }
 
+    public static void parseData(String line) {
+        String[] tokens = line.split("#");
+
+        switch (tokens[0]) {
+        case "T":
+            try {
+                boolean isDone = Integer.parseInt(tokens[1]) == 1;
+                Todo todo = new Todo(tokens[2], isDone);
+                tasks.add(todo);
+            } catch (NumberFormatException e) {
+                return;
+            }
+            break;
+        case "D":
+            try {
+                boolean isDone = Integer.parseInt(tokens[1]) == 1;
+                Deadline deadline = new Deadline(tokens[2], tokens[3], isDone);
+                tasks.add(deadline);
+            } catch (NumberFormatException e) {
+                return;
+            }
+            break;
+        case "E":
+            try {
+                boolean isDone = Integer.parseInt(tokens[1]) == 1;
+                Event event = new Event(tokens[2], tokens[3], isDone);
+                tasks.add(event);
+            } catch (NumberFormatException e) {
+                return;
+            }
+            break;
+        default:
+            System.out.println("Invalid data!");
+            break;
+        }
+    }
+
+
+    public static void saveFile() throws IOException {
+        File path = new File("tasks.txt");
+        if (!path.exists()) {
+            if (!path.createNewFile()) {
+                throw new IOException();
+            }
+        }
+        FileWriter fileWriter = new FileWriter(path);
+        for (int i = 0; i < taskCount; i++) {
+            fileWriter.write(tasks.get(i).formatData());
+        }
+        fileWriter.flush();
+        fileWriter.close();
+    }
+
+    public static void loadFile() throws FileNotFoundException {
+        File path = new File("tasks.txt");
+        if (!path.exists()) {
+            throw new FileNotFoundException();
+        }
+        Scanner scanner = new Scanner(path);
+        try {
+            while (scanner.hasNext()) {
+                String line = scanner.nextLine();
+                parseData(line);
+            }
+        } catch (Exception e) {
+            System.out.println("Failed to load!");
+            taskCount = 0;
+            tasks.clear();
+        }
+
+    }
 }

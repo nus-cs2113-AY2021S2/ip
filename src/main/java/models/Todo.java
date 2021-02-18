@@ -6,9 +6,23 @@ public class Todo extends Task {
         super(description);
     }
 
+    public Todo(String description, boolean isDone) {
+        super(description, isDone);
+    }
+
     @Override
     public String toString() {
         return "[T]" + super.toString();
     }
 
+    @Override
+    public String formatData() {
+        int done;
+        if (isDone) {
+            done = 1;
+        } else {
+            done = 0;
+        }
+        return "T" + "#" + done + "#" + description + "\n";
+    }
 }
