@@ -1,15 +1,18 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 import Duke.*;
 
 public class Duke {
     private static final Scanner scanner = new Scanner(System.in);
-    private static final ArrayList<Task> tasksList = new ArrayList<Task>();
+    private static final ArrayList<Task> tasksList = new ArrayList<>();
     public static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
+    public static final String FILE_PATH_TO_SAVE_TASKS = "duke.txt";
+
     public static void main(String[] args) {
         sendWelcomeMessage();
         printLine();
@@ -18,7 +21,11 @@ public class Duke {
             String userCommand = listOfUserInputs[0];
             String inputDetails = listOfUserInputs[1];
             if (userCommand.equalsIgnoreCase("bye")){
-                exitDuke();
+                try {
+                    exitDuke();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 break;
             }
             if (userCommand.equalsIgnoreCase("list")){
@@ -68,10 +75,55 @@ public class Duke {
     }
 
     private static void sendWelcomeMessage() {
+        String fileName = FILE_PATH_TO_SAVE_TASKS;
+        PrintWriter f = null;
+        File fForCheck = new File(FILE_PATH_TO_SAVE_TASKS);
+        creatingPrinterWriterObject(fileName);
+        if (!fForCheck.exists()) {
+            createNewFile(fForCheck);
+        } else {
+            FileWriter fw = null;
+            fw = createFileWriterObject(fileName, fw);
+            writeEmptyStringToFile(fw);
+        }
         System.out.println("Hello from\n" + LOGO);
         printLine();
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
+    }
+
+    private static void creatingPrinterWriterObject(String fileName) {
+        PrintWriter f;
+        try {
+            f = new PrintWriter(fileName);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void createNewFile(File fForCheck) {
+        try {
+            fForCheck.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static FileWriter createFileWriterObject(String fileName, FileWriter fw) {
+        try {
+            fw = new FileWriter(fileName);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return fw;
+    }
+
+    private static void writeEmptyStringToFile(FileWriter fw) {
+        try {
+            fw.write("");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private static void processUserRequest(String userCommand, String inputDetails) throws TodoException {
@@ -100,10 +152,19 @@ public class Duke {
         System.out.println("[X] " + selectedTask.getDescription());
     }
 
-    private static void exitDuke() {
+    private static void exitDuke() throws IOException {
         printLine();
+        String fileName = FILE_PATH_TO_SAVE_TASKS;
+        for (Task task : tasksList) {
+            try {
+                writeToFile(fileName, task);
+            } catch (IOException e) {
+                System.out.println("Something went wrong: " + e.getMessage());
+            }
+        }
         System.out.println("Bye. Hope to see you again soon!");
     }
+
 
     private static void printLine() {
         System.out.println("---------------------------------------------------");
@@ -139,4 +200,15 @@ public class Duke {
         tasksList.remove(taskNumber);
         System.out.println("Now you have " + tasksList.size() + " tasks in the list.");
     }
+
+    private static void writeToFile(String filePath, Task tasks) throws IOException {
+        FileWriter fw = new FileWriter(filePath, true);
+        String description = tasks.getDescription();
+        String status = tasks.getStatusIcon();
+        String taskType = tasks.getTaskType();
+        fw.write(description + status + taskType + "\n");
+        fw.close();
+    }
+
+
 }
