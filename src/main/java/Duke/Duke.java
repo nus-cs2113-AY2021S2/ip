@@ -1,16 +1,25 @@
 package Duke;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.FileNotFoundException;
 
 public class Duke { //implement toString() next
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         welcomeMessage();
 
         ArrayList<Task> taskList = new ArrayList<>();
         int taskCount = 0;
+
+        File dataFile = new File("data/tasks.txt");
+        if (!dataFile.createNewFile()) {
+            taskCount = downloadTasks(dataFile, taskList, taskCount);
+        }
+
         Scanner in = new Scanner(System.in);
         String commandInput = in.nextLine();
 
@@ -22,6 +31,7 @@ public class Duke { //implement toString() next
                 try {
                     int taskNumber = Integer.parseInt(commandInput.substring(5, 6));
                     taskList.get(taskNumber - 1).setDone();
+                    taskList.get(taskNumber - 1).printDoneTask();
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println("☹ OOPS!!! No task number detected, please try again.");
                 } catch (NullPointerException e) {
@@ -30,6 +40,7 @@ public class Duke { //implement toString() next
             } else if (commandInput.startsWith("todo")) {
                 try {
                     taskList.add(new Todo(commandInput.substring(5)));
+                    taskList.get(taskCount).printDescription();
                     taskCount++;
                 } catch (StringIndexOutOfBoundsException e) {
                     System.out.println("☹ OOPS!!! The description is empty, please try again.");
@@ -37,7 +48,8 @@ public class Duke { //implement toString() next
             } else if (commandInput.startsWith("event")) {
                 try {
                     int timeIndex = commandInput.indexOf("/at");
-                    taskList.add(new Event(commandInput.substring(6, timeIndex), commandInput.substring(timeIndex + 1)));
+                    taskList.add(new Event(commandInput.substring(6, timeIndex), commandInput.substring(timeIndex + 3)));
+                    taskList.get(taskCount).printDescription();
                     taskCount++;
                 } catch (StringIndexOutOfBoundsException e) {
                     System.out.println("☹ OOPS!!! The description is invalid, please try again.");
@@ -45,7 +57,8 @@ public class Duke { //implement toString() next
             } else if (commandInput.startsWith("deadline")) {
                 try {
                     int timeIndex = commandInput.indexOf("/by");
-                    taskList.add(new Deadline(commandInput.substring(9, timeIndex), commandInput.substring(timeIndex + 1)));
+                    taskList.add(new Deadline(commandInput.substring(9, timeIndex), commandInput.substring(timeIndex + 3)));
+                    taskList.get(taskCount).printDescription();
                     taskCount++;
                 } catch (StringIndexOutOfBoundsException e) {
                     System.out.println("☹ OOPS!!! The description is invalid, please try again.");
@@ -66,7 +79,44 @@ public class Duke { //implement toString() next
             }
             commandInput = in.nextLine();
         }
+
+        UploadTasks(taskList, taskCount);
+
         exitMessage();
+    }
+
+    private static void UploadTasks(ArrayList<Task> taskList, int taskCount) throws java.io.IOException {
+        FileWriter fw = new FileWriter("data/tasks.txt");
+        for (int i = 0; i < taskCount; ++i) {
+            int taskStatus = taskList.get(i).isDone ? 1 : 0;
+            if (taskList.get(i).getAlphabet().equals("T")) {
+                fw.write("T | " + taskStatus + " | " + taskList.get(i).description + System.lineSeparator());
+            } else {
+                fw.write(taskList.get(i).getAlphabet() + " | " + taskStatus + " | " +
+                        taskList.get(i).description + " | " + taskList.get(i).time + System.lineSeparator());
+            }
+        }
+        fw.close();
+    }
+
+    private static int downloadTasks(File file, ArrayList<Task> taskList, int taskCount) throws FileNotFoundException {
+        Scanner s = new Scanner(file);
+        while (s.hasNext()) {
+            String commandInput = s.nextLine();
+            if (commandInput.startsWith("T")) {
+                String description = commandInput.substring(8);
+                taskList.add(new Todo(description));
+            } else {
+                int timeIndex = commandInput.lastIndexOf("| ");
+                String description = commandInput.substring(8, timeIndex);
+                taskList.add(new Deadline(description, commandInput.substring(timeIndex + 2)));
+            }
+            if (commandInput.charAt(4) == '1') {
+                taskList.get(taskCount).setDone();
+            }
+            taskCount++;
+        }
+        return taskCount;
     }
 
     private static void printList(ArrayList<Task> taskList, int taskCount) {

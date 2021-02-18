@@ -11,15 +11,13 @@ public class Task {
         this.isDone = false;
         this.time = "";
         taskCount++;
-        printDescription();
     }
 
     public Task(String description, String time) {
         this.description = description;
         this.isDone = false;
-        this.time = "(" + time.substring(0, 2) + ":" + time.substring(2) + ")";
+        this.time = time;
         taskCount++;
-        printDescription();
     }
 
     public String getStatusIcon() {
@@ -32,21 +30,19 @@ public class Task {
 
     public void setDone() {
         this.isDone = true;
-        printDoneTask();
     }
 
-    private void printDescription() {
+    public void printDescription() {
         System.out.println("**********************************************************");
-        System.out.println("[" + this.getAlphabet() + "]" + "[" + getStatusIcon() + "] " + this.description + this.time);
+        System.out.println("[" + this.getAlphabet() + "]" + "[" + getStatusIcon() + "] " + this.toString());
         System.out.println("Now you have " + taskCount + " tasks in the list.");
         System.out.println("**********************************************************");
     }
 
-    private void printDoneTask() {
-        Class classType = this.getClass();
+    public void printDoneTask() {
         System.out.println("**********************************************************");
         System.out.println("Awesome! I have marked this task as done: ");
-        System.out.println("[" + classType.getName().charAt(0) + "]" + "[" + getStatusIcon() + "] " + this.description);
+        System.out.println("[" + this.getAlphabet() + "]" + "[" + getStatusIcon() + "] " + this.toString());
         System.out.println("**********************************************************");
     }
 }

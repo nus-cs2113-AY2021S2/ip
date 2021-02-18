@@ -1,7 +1,6 @@
 package Duke;
 
 public class Event extends Task {
-    protected String time;
 
     public Event(String description, String time) {
         super(description, time);
@@ -10,5 +9,9 @@ public class Event extends Task {
     @Override
     public String getAlphabet() {
         return "E";
+    }
+
+    public String toString(){
+        return this.description + " (at: " + this.time + ")" ;
     }
 }

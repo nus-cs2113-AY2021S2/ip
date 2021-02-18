@@ -8,7 +8,12 @@ public class Todo extends Task {
         super(description);
     }
 
+    @Override
     public String getAlphabet() {
         return "T";
+    }
+
+    public String toString(){
+        return this.description;
     }
 }
