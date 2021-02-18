@@ -11,11 +11,11 @@ public class TaskManager {
         return count;
     }
 
-    public static Task[] getTasks() {
+    public static ArrayList<Task> getTasks() {
         return tasks;
     }
 
-    public static void setTasks(Task[] tasks) {
+    public static void setTasks(ArrayList<Task> tasks) {
         TaskManager.tasks = tasks;
     }
 
