@@ -1,9 +1,6 @@
 package duke;
 
-import duke.Deadline;
-import duke.DukeCommandValidator;
-import duke.DukeCommands;
-
+import java.io.IOException;
 import java.util.Scanner;
 
 public class DukeController {
@@ -14,11 +11,12 @@ public class DukeController {
     private static String input;
     private static int currentCommand;
 
-    public static void run(){
+
+    public static void run() throws IOException {
+        DukeIO.initialize();
         while (true){
             input = sc.nextLine();
             currentCommand = DukeCommandValidator.getCommand(input);
-
             switch (currentCommand){
             case DukeCommands.INVALID_COMMAND:{
                 System.out.println("Please enter a valid command!");
@@ -26,6 +24,7 @@ public class DukeController {
                 break;
             }
             case DukeCommands.LIST:{
+                DukeIO.readDukeData();
                 list();
                 break;
             }
@@ -33,11 +32,15 @@ public class DukeController {
                 return;
             }
             case DukeCommands.DONE:{
+                DukeIO.readDukeData();
                 done();
+                DukeIO.writeDukeData();
                 break;
             }
             case DukeCommands.ADD:{
+                DukeIO.readDukeData();
                 add();
+                DukeIO.writeDukeData();
                 break;
             }
             case DukeCommands.DELETE:{
@@ -117,4 +120,19 @@ public class DukeController {
         currentTaskLength++;
     }
 
+    public static int getCurrentTaskLength(){
+        return currentTaskLength;
+    }
+
+    public static void setCurrentTaskLength(int newlength){
+        currentTaskLength = newlength;
+    }
+
+    public static Task[] getTasks(){
+        return tasks;
+    }
+
+    public static void setTasks(Task[] newTasks){
+        tasks = newTasks;
+    }
 }
