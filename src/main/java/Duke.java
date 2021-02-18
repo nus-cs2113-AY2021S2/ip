@@ -15,10 +15,42 @@ public class Duke {
         System.out.println(" Hello! I'm Duke\n" +
                 " What can I do for you?");
         System.out.println("____________________________________________________________\n");
+
+        ArrayList<Task> Tasks = new ArrayList<Task>();
+        FileInputStream data = new FileInputStream("C:\\Users\\Xinjia\\Desktop\\cs2113t\\ip\\src\\main\\java\\duke.txt");
+        Scanner sc = new Scanner(data);
+
+        while (sc.hasNextLine()) {
+            String line = sc.nextLine();
+            String[] parts = line.split("\\|");
+            String type = parts[0].trim();
+            String status = parts[1].trim();
+            String name = parts[2].trim();
+            if (type.equals("T")) {
+                Task t = new Todo(name);
+                Tasks.add(t);
+                if (status.equals("1")) {
+                    t.markAsDone();
+                }
+            } else if (type.equals("D")) {
+                String time = parts[3].trim();
+                Deadline t = new Deadline(name, time);
+                Tasks.add(t);
+                if (status.equals("1")) {
+                    t.markAsDone();
+                }
+            } else if (type.equals("E")){
+                String time = parts[3].trim();
+                Event t = new Event(name, time);
+                Tasks.add(t);
+                if (status.equals("1")) {
+                    t.markAsDone();
+                }
+            }
+        }
         String line;
         Scanner in = new Scanner(System.in);
         line = in.nextLine();
-        ArrayList<Task> Tasks = new ArrayList<Task>();
         while (!line.equals("bye")) {
             while(!line.equals("list")) {
                 if (line.startsWith("done")){
@@ -115,7 +147,7 @@ public class Duke {
         System.out.println("____________________________________________________________\n");
         System.out.println(" Bye. Hope to see you again soon!\n");
         System.out.println("____________________________________________________________\n");
-        FileWriter writer = new FileWriter("src/main/java/duke.txt",false);
+        FileWriter writer = new FileWriter("C:\\Users\\Xinjia\\Desktop\\cs2113t\\ip\\src\\main\\java\\duke.txt",false);
         for (Task t : Tasks) {
             if (t instanceof Todo) {
                 writer.write("T | " + t.getStatusNumber().trim() + " | " + t.getDescription().trim());

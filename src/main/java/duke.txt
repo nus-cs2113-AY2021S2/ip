@@ -1,2 +1,1 @@
-D | 1 | 123 | 123
-T | 0 | 456
+E | 0 | Xinjia attend CS2113 lecture | Friday 19 Feb 2021 from 4-6pm
