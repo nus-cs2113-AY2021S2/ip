@@ -22,6 +22,6 @@ public class Task {
     }
 
     public String saveTask() {
-        return " | " + isDone + " | " + description;
+        return "|" + isDone + "|" + description;
     }
 }

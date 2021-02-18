@@ -15,6 +15,6 @@ public class Event extends Task {
     }
 
     public String saveTask() {
-        return "E" + super.saveTask() + " | " + at;
+        return "E" + super.saveTask() + "|" + at;
     }
 }

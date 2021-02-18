@@ -24,31 +24,33 @@ public class Duke {
             System.out.println(e.getMessage());
         }
 
-        Scanner in = new Scanner(System.in);
+        Scanner scannerIn = new Scanner(System.in);
 
         while (true) {
-            String line = in.nextLine();
+            String line = scannerIn.nextLine();
+            String[] words = line.split(" ", 2);
+            String command = words[0];
             String taskType = "";
 
             try {
-                if (line.equals("list")) {
+                if (command.equals("list")) {
                     printList();
-                } else if (line.equals("bye")) {
+                } else if (command.equals("bye")) {
                     printBye();
                     break;
-                } else if (line.contains("done")) {
+                } else if (command.equals("done")) {
                     taskType = "done";
                     markDone(line);
-                } else if (line.contains("todo")) {
+                } else if (command.equals("todo")) {
                     taskType = "todo";
                     addTodo(line);
-                } else if (line.contains("deadline")) {
+                } else if (command.equals("deadline")) {
                     taskType = "deadline";
                     addDeadline(line);
-                } else if (line.contains("event")) {
+                } else if (command.equals("event")) {
                     taskType = "event";
                     addEvent(line);
-                } else if (line.contains("delete")) {
+                } else if (command.equals("delete")) {
                     taskType = "delete";
                     deleteTask(line);
                 } else {
@@ -145,38 +147,40 @@ public class Duke {
     }
 
     private static void loadTasks() throws IOException {
-        File f = new File("data/duke.txt");
-        f.getParentFile().mkdir();
-        f.createNewFile();
-        Scanner s = new Scanner(f);
-        while (s.hasNext()) {
-            loadData(s.nextLine());
+        File file = new File("data/duke.txt");
+        file.getParentFile().mkdir();
+        file.createNewFile();
+        Scanner scanner = new Scanner(file);
+        while (scanner.hasNext()) {
+            loadData(scanner.nextLine());
         }
     }
 
     private static void loadData(String nextLine) {
-        if (nextLine.contains("T")) {
-            String[] words = nextLine.split(" | ", 5);
-            String taskStatus = words[2];
-            String taskDescription = words[4];
+        String[] commandWords = nextLine.split("\\|");
+        String commandType = commandWords[0];
+        if (commandType.equals("T")) {
+            String[] words = nextLine.split("\\|");
+            String taskStatus = words[1];
+            String taskDescription = words[2];
             tasks.add(new Todo(taskDescription));
             if (taskStatus.equals("true")) {
                 tasks.get(tasks.size() - 1).markAsDone();
             }
-        } else if (nextLine.contains("D")) {
-            String[] words = nextLine.split(" | ", 7);
-            String taskStatus = words[2];
-            String taskDescription = words[4];
-            String taskBy = words[6];
+        } else if (commandType.equals("D")) {
+            String[] words = nextLine.split("\\|");
+            String taskStatus = words[1];
+            String taskDescription = words[2];
+            String taskBy = words[3];
             tasks.add(new Deadline(taskDescription, taskBy));
             if (taskStatus.equals("true")) {
                 tasks.get(tasks.size() - 1).markAsDone();
             }
-        } else if (nextLine.contains("E")) {
-            String[] words = nextLine.split(" | ", 7);
-            String taskStatus = words[2];
-            String taskDescription = words[4];
-            String taskAt = words[6];
+        } else if (commandType.equals("E")) {
+            String[] words = nextLine.split("\\|");
+            String taskStatus = words[1];
+            String taskDescription = words[2];
+            String taskAt = words[3];
             tasks.add(new Event(taskDescription, taskAt));
             if (taskStatus.equals("true")) {
                 tasks.get(tasks.size() - 1).markAsDone();
@@ -186,12 +190,13 @@ public class Duke {
 
     private static void saveTasks() throws IOException {
         int index = 0;
-        FileWriter fw = new FileWriter("data/duke.txt", true);
+        FileWriter fileWriter = new FileWriter("data/duke.txt");
+        fileWriter.write("");
         while (index < tasks.size()) {
-            fw.write(tasks.get(index).saveTask() + System.lineSeparator());
+            fileWriter.write(tasks.get(index).saveTask() + System.lineSeparator());
             index++;
         }
-        fw.close();
+        fileWriter.close();
     }
 
 }

@@ -15,6 +15,6 @@ public class Deadline extends Task {
     }
 
     public String saveTask() {
-        return "D" + super.saveTask() + " | " + by;
+        return "D" + super.saveTask() + "|" + by;
     }
 }
