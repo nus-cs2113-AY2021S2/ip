@@ -1,6 +1,0 @@
-T|0|go home
-D|1|submit a report |Wednesday
-T|0|read book
-D|1|submit reflection |Sunday night
-T|0|go home
-T|0|eat lunch
