@@ -11,4 +11,8 @@ public class Event extends Task {
     public String toString() {
         return super.toString() + "(at: " + eventTime + ")";
     }
+    @Override
+    public String taskToText() {
+        return "E|" + super.completed + "|" + super.taskDescription + "|" + eventTime;
+    }
 }

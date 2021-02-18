@@ -31,4 +31,10 @@ public class DukeException {
                 + WARNING_DIVIDER);
     }
 
+    protected static void invalidTask(){
+        System.out.print(WARNING_DIVIDER
+                + "Please enter a valid task!\n"
+                + WARNING_DIVIDER);
+    }
+
 }

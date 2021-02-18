@@ -1,8 +1,19 @@
 import java.util.Scanner;
 
 public class Duke {
+    protected static FileManager storage;
 
-    public static void main(String[] args) {
+    public Duke() {
+        // set up the things needed to start Duke
+        FileManager.createFolder();
+        storage = new FileManager();
+        if (storage.retrieveTextFile()) {
+            storage.loadData();
+        }
+    }
+
+    public void run() {
+
         DukeCommandHandler.greeting();
         Scanner in = new Scanner(System.in);
         String input;
@@ -13,6 +24,8 @@ public class Duke {
                 DukeCommandHandler.listTask();
             } else if (input.contains("done")) {
                 DukeCommandHandler.markTaskDone(input);
+            } else if (input.contains("delete")) {
+                DukeCommandHandler.deleteTask(input);
             } else if (input.contains("add")) {
                 DukeCommandHandler.addTask(input);
             } else if (input.contains("todo")) {
@@ -31,4 +44,9 @@ public class Duke {
         in.close();
 
     }
+
+    public static void main(String[] args) {
+        new Duke().run();
+    }
+
 }

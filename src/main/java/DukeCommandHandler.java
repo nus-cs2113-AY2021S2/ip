@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class DukeCommandHandler {
     private static final String DIVIDER = "\t_______________________________\n";
-    private static final ArrayList<Task> tasks = new ArrayList<>();
+    protected static final ArrayList<Task> tasks = new ArrayList<>();
     private static final String LOGO =
             "▒▒▒▒▒▒▒█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█\n"
                     + "▒▒▒▒▒▒▒█░▒▒▒▒▒▒▒▓▒▒▓▒▒▒▒▒▒▒░█\n"
@@ -45,6 +45,13 @@ public class DukeCommandHandler {
     protected static void markTaskDone(String input) {
         //task number can be found on 5th index of input
         int taskNumber = Integer.parseInt(input.substring(5));
+
+        //to check if tasks exists
+        if(taskNumber<1 || taskNumber>tasks.size()){
+            DukeException.invalidTask();
+            return;
+        }
+
         Task currentTask = tasks.get(taskNumber - 1);
         currentTask.markAsDone();
         System.out.print(DIVIDER + "\tNice! I've marked this task as done:" +
@@ -147,6 +154,26 @@ public class DukeCommandHandler {
         System.out.println(DIVIDER + "\tGot it. I've added this task:\n\t\t" +
                 currentTask.toString());
         System.out.print("\tNow you have " + tasks.size() + checkSingular() + "in your list.\n" + DIVIDER);
+
+    }
+
+    protected static void deleteTask(String input) {
+        //to add exception
+        //task number can be found on 7th index of input
+        int taskNumber = Integer.parseInt(input.substring(7));
+
+        //to  check if task to delete exists
+        if(taskNumber<1 || taskNumber>tasks.size()){
+            DukeException.invalidTask();
+            return;
+        }
+
+        Task currentTask = tasks.get(taskNumber - 1);
+        tasks.remove(taskNumber-1);
+        System.out.print(DIVIDER + "\tNoted. I've removed this task:" +
+                "\n\t" + currentTask.toString() + "\n"
+                + DIVIDER);
+        System.out.print("\tNow you have " + (tasks.size()) + checkSingular() + "in your list.\n" + DIVIDER);
 
     }
 
