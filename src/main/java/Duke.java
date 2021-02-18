@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.util.Vector;
 
 public class Duke {
-    public static String lineDivider = "    ----------------------------------------------";
+    public static String lineDivider = "    --------------------------------------------------------------------------";
 
     public static void addMessage(Task task,int size){
         System.out.println("     Got it. I've added this task:");
@@ -12,7 +12,7 @@ public class Duke {
         System.out.println("     Now you have " + size + " tasks in this list.");
     }
 
-    public static void takeCommand(String command,List<Task> tasks){
+    public static void takeCommand(String command,List<Task> tasks) throws UnknownCommand, EmptyDescription {
         String[] subStrings = command.split(" ");
         String description = "";
         int slashIndex = command.indexOf('/');
@@ -25,19 +25,27 @@ public class Duke {
             System.out.println("     Bye. Hope to see you again soon!");
             break;
         case "done":
-            int taskNo = Integer.parseInt(subStrings[1]);
-            Task taskDone = tasks.get(taskNo-1);
-            taskDone.markAsDone();
-            System.out.println("     Nice! I've marked this task as done:");
-            System.out.println("      [" + taskDone.getStatusIcon() + "] " +
-                    taskDone.description);
-            tasks.set(taskNo-1, taskDone);
+            if(subStrings.length > 1){
+                int taskNo = Integer.parseInt(subStrings[1]);
+                Task taskDone = tasks.get(taskNo-1);
+                taskDone.markAsDone();
+                System.out.println("     Nice! I've marked this task as done:");
+                System.out.println("      [" + taskDone.getStatusIcon() + "] " +
+                        taskDone.description);
+                tasks.set(taskNo-1, taskDone);
+            } else {
+                throw new EmptyDescription("done");
+            }
             break;
         case "todo":
-            description = command.substring(5);
-            Todo todo = new Todo(description);
-            tasks.add(todo);
-            addMessage(todo,tasks.size());
+            if(subStrings.length > 2){
+                description = command.substring(5);
+                Todo todo = new Todo(description);
+                tasks.add(todo);
+                addMessage(todo,tasks.size());
+            } else {
+                throw new EmptyDescription("todo");
+            }
             break;
         case "deadline":
             if(slashIndex != -1) {
@@ -46,6 +54,8 @@ public class Duke {
                 Deadline deadline = new Deadline(description, by);
                 tasks.add(deadline);
                 addMessage(deadline,tasks.size());
+            } else {
+                throw new EmptyDescription("deadline");
             }
             break;
         case "event":
@@ -55,10 +65,12 @@ public class Duke {
                 Event event = new Event(description, at);
                 tasks.add(event);
                 addMessage(event,tasks.size());
+            } else {
+                throw new EmptyDescription("event");
             }
             break;
         default:
-            break;
+            throw new UnknownCommand();
         }
     }
 
@@ -81,7 +93,13 @@ public class Duke {
         do{
             command = in.nextLine();
             System.out.println(lineDivider);
-            takeCommand(command,tasks);
+            try{
+                takeCommand(command,tasks);
+            } catch (UnknownCommand e) {
+                System.out.println("     Oops!!! I'm sorry, but I have no idea what that means =(");
+            } catch (EmptyDescription e) {
+                System.out.println("     Oops!!! The description of " + e.TaskName() + " cannot be empty.");
+            }
             System.out.println(lineDivider);
         }while(!command.equals("bye"));
     }
