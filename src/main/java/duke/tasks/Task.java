@@ -22,6 +22,10 @@ public class Task {
     }
 
     public String getDate() {
+        return null;
+    }
+
+    public String printDate() {
         return "";
     }
 
@@ -31,6 +35,10 @@ public class Task {
 
     public boolean isDone() {
         return this.isDone;
+    }
+
+    public boolean hasDate() {
+        return false;
     }
 
 }

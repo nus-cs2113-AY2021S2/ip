@@ -1,8 +1,16 @@
 package duke;
 
 import duke.tasks.*;
+
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Duke {
     public static ArrayList<Task> tasks = new ArrayList<>();
@@ -11,16 +19,79 @@ public class Duke {
         System.out.println("\t________________________________________\n");
     }
 
+    public static void loadData() {
+        try {
+            Path dataFilePath = Paths.get("data/");
+            Files.createDirectories(dataFilePath);
+            File dataFile = new File("data/duke.txt");
+            Scanner fileReader = new Scanner(dataFile);
+            while (fileReader.hasNextLine()) {
+                String line = fileReader.nextLine();
+                String[] splitLine = line.split("\\s\\|\\s");
+                if (line.startsWith("T")) {
+                    String todo = splitLine[2];
+                    Todo t = new Todo(todo);
+                    tasks.add(t);
+                    if (splitLine[1].equals("1")) {
+                        t.markAsDone();
+                    }
+                } else if (line.startsWith("E")) {
+                    String description = splitLine[2];
+                    String date = splitLine[3];
+                    Event t = new Event(description, date);
+                    tasks.add(t);
+                    if (splitLine[1].equals("1")) {
+                        t.markAsDone();
+                    }
+                } else if (line.startsWith("D")) {
+                    String description = splitLine[2];
+                    String date = splitLine[3];
+                    Deadline t = new Deadline(description, date);
+                    tasks.add(t);
+                    if (splitLine[1].equals("1")) {
+                        t.markAsDone();
+                    }
+                }
+            }
+            fileReader.close();
+        } catch (FileNotFoundException e) {
+            ;
+        } catch (IOException e) {
+            System.out.println("\tAn error occured while trying to create a data directory :(");
+            //System.out.println(e.getMessage());
+        }
+    }
+
+    public static boolean saveData() {
+        try {
+            System.out.println("\tSaving your data...");
+            FileWriter fileWriter = new FileWriter("data/duke.txt");
+            for (int i=0; i<tasks.size(); i++) {
+                Task currentTask = tasks.get(i);
+                fileWriter.write(currentTask.getType() + " | " + ((currentTask.isDone()) ? "1" : "0") + " | "
+                        + currentTask.getDescription() + ((currentTask.hasDate()) ? " | " + currentTask.getDate() : "") + '\n' );
+            }
+            fileWriter.close();
+            System.out.println("\tData saved");
+            return true;
+        } catch (IOException e) {
+            System.out.println("\tAn error occurred while saving your data :(");
+            return false;
+        }
+    }
+
     public static void takeInput() {
-        Scanner scannerObject = new Scanner(System.in);
-        while (scannerObject.hasNextLine()) {
-            String command = scannerObject.nextLine();
+        Scanner userInput = new Scanner(System.in);
+        while (userInput.hasNextLine()) {
+            String command = userInput.nextLine();
             if (command.equals("bye") || command.equals("exit")) {
                 dividerLine();
-                exitDuke();
+                if (exitDuke()) {
+                    dividerLine();
+                    userInput.close();
+                    break;
+                }
                 dividerLine();
-                scannerObject.close();
-                break;
             } else if (command.equals("list")) {
                 dividerLine();
                 list();
@@ -44,6 +115,10 @@ public class Duke {
             } else if (command.startsWith("delete")) {
                 dividerLine();
                 deleteTask(command);
+                dividerLine();
+            } else if (command.equals("save")) {
+                dividerLine();
+                saveData();
                 dividerLine();
             } else {
                 dividerLine();
@@ -83,7 +158,7 @@ public class Duke {
                 Task currentTask = tasks.get(i);
                 System.out.println("\t" + Integer.toString(i+1) + ".[" + currentTask.getType() + "]["
                         + currentTask.getStatusIcon() + "] " + currentTask.getDescription() + " " 
-                        + currentTask.getDate());
+                        + currentTask.printDate());
             }
         }
     }
@@ -167,13 +242,13 @@ public class Duke {
                 System.out.println("\tThis task is already done :)");
                 Task currentTask = tasks.get(itemIndex);
                 System.out.println("\t  [" + currentTask.getType() + "][" + currentTask.getStatusIcon() + "] "
-                        + currentTask.getDescription());
+                        + currentTask.getDescription() + " " + currentTask.printDate());
             } else {
                 tasks.get(itemIndex).markAsDone();
                 System.out.println("\tNice! I've marked this task as done:");
-                Task currenTask = tasks.get(itemIndex);
-                System.out.println("\t  [" + currenTask.getType() + "][" + currenTask.getStatusIcon() + "] "
-                        + currenTask.getDescription());
+                Task currentTask = tasks.get(itemIndex);
+                System.out.println("\t  [" + currentTask.getType() + "][" + currentTask.getStatusIcon() + "] "
+                        + currentTask.getDescription() + " " + currentTask.printDate());
             }
         }
     }
@@ -203,8 +278,13 @@ public class Duke {
         }
     }
 
-    public static void exitDuke() {
-        System.out.println("\tBye, hope to see you again soon!");
+    public static boolean exitDuke() {
+        if (saveData()) {
+            System.out.println("\tBye, hope to see you again soon!");
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public static void main(String[] args) {
@@ -212,6 +292,7 @@ public class Duke {
         System.out.println("\tHello! I'm Duke");
         System.out.println("\tWhat can I do for you?");
         dividerLine();
+        loadData();
         takeInput();
     }
 }
