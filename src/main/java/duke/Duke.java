@@ -98,7 +98,7 @@ public class Duke {
                 } else {
                     int processedInput;
                     processedInput = Integer.parseInt(userInput.replaceAll("[^0-9]", "")) - 1;
-                    if(processedInput <= 0 || processedInput > tasks.size()) {
+                    if(processedInput < 0 || processedInput > tasks.size()) {
                         System.out.println("No index found. Please key an appropriate index");
                         continue;
                     }
