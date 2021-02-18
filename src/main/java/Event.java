@@ -14,6 +14,6 @@ public class Event extends Task{
 
     @Override
     public String getDescription() {
-        return super.getDescription() + " " + "(" + by + ")";
+        return super.getDescription() + " " + "--" + by + "--";
     }
 }
