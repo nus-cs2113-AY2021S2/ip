@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -49,12 +50,15 @@ public class Duke {
     }
     public static void writeFile(){
         try{
-            FileWriter fw = new FileWriter(FILE_PATH,false);
+            FileWriter fw = new FileWriter(FILE_PATH);
+            if(Files.notExists(Path.of(FILE_PATH))){
+                Files.createFile(Path.of(FILE_PATH));
+            }
             for(int i=0; i<tasksCount;i++){
-                fw.write(tasks.get(i).toString());
+                fw.write(tasks.get(i).toString()+System.lineSeparator());
             }
             fw.close();
-        }catch (IOException e){
+        }catch(IOException e){
             System.out.println(e.getMessage());
         }
     }
@@ -63,12 +67,35 @@ public class Duke {
             File f = new File(FILE_PATH); // create a File for the given file path
             Scanner scanner = new Scanner(f); // create a Scanner using the File as the source
             while (scanner.hasNext()) {
-                System.out.println(scanner.nextLine());
+                String text = scanner.nextLine();
+                System.out.println(text);
+                if(text.startsWith("[D]")){
+                    String dueDate = text.substring(text.indexOf("(by:")+5, text.length()-1);
+                    String getDescription = text.substring(7,text.indexOf("(")-1);
+                    Deadline deadline = new Deadline(getDescription,dueDate);
+                    tasks.add(tasksCount,deadline);
+                    if(text.contains("[X]")){
+                        tasks.get(tasksCount-1).markAsDone();
+                    }
+                } else if(text.startsWith("[E]")){
+                    String timing = text.substring(text.indexOf("(at:")+5, text.length()-1);
+                    String getDescription = text.substring(7,text.indexOf("(")-1);
+                    Event event = new Event(getDescription,timing);
+                    tasks.add(tasksCount,event);
+                    if(text.contains("[X]")){
+                        tasks.get(tasksCount-1).markAsDone();
+                    }
+                } else if(text.startsWith("[T]")){
+                    String getDescription = text.substring(7);
+                    Todo todo = new Todo(getDescription);
+                    tasks.add(tasksCount,todo);
+                    if(text.contains("[X]")){
+                        tasks.get(tasksCount-1).markAsDone();
+                    }
+                }
             }
-        } catch(FileNotFoundException f){
-            Files.createFile(Paths.get("tasks.txt"));
-        } catch(IOException e){
-            System.out.println(e.getMessage());
+        }catch(FileNotFoundException e){
+            System.out.println(Files.createFile(Paths.get("tasks.txt")));
         }
     }
 
@@ -78,10 +105,11 @@ public class Duke {
             if (newNum >= tasksCount || newNum < 0) {
                 throw new ArrayIndexOutOfBoundsException();
             }
-            System.out.println("Noted. I've removed this task:" + "\n"+ tasks.get(newNum - 1));
+            System.out.println("Noted. I've removed this task:" + "\n"+ tasks.get(newNum - 1).toString());
             tasks.remove(newNum-1);
             tasksCount--;
             System.out.println("Now you have "+ tasksCount +" tasks in the list.");
+            writeFile();
         }catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("☹ OOPS!!! The task number is invalid!");
             System.out.println(line);
@@ -95,8 +123,8 @@ public class Duke {
                 throw new ArrayIndexOutOfBoundsException();
             }
             System.out.println("Nice! I've marked this task as done:");
-            tasks.get(newNum-1).markAsDone();
-            System.out.println(tasks.get(newNum-1).toString());
+            tasks.get(newNum - 1).markAsDone();
+            System.out.println(tasks.get(newNum - 1).toString());
             System.out.println(line);
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("☹ OOPS!!! The task number is invalid!");
@@ -114,7 +142,6 @@ public class Duke {
             tasksCount++;
             System.out.println(todo.toString());
             printTotalTasks();
-            writeFile();
         } catch (StringIndexOutOfBoundsException e) {
             System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
             System.out.println(line);
@@ -128,7 +155,6 @@ public class Duke {
         tasksCount++;
         System.out.println(deadline.toString());
         printTotalTasks();
-        writeFile();
 
     }
     public static void printTotalTasks(){
@@ -144,7 +170,6 @@ public class Duke {
         tasksCount++;
         System.out.println(event.toString());
         printTotalTasks();
-        writeFile();
     }
 
     public static void main(String[] args) throws IOException {
@@ -160,23 +185,25 @@ public class Duke {
                 printList(tasks);
             } else if(input.startsWith("done")) {
                 markAsDone(input);
+                writeFile();
             } else if(input.startsWith("todo")){
                 addTodo(input);
             } else if(input.startsWith("deadline")){
                 input = input.substring(DEADLINE_LENGTH);
                 addDeadline(input);
+                writeFile();
             } else if(input.startsWith("event")){
                 input = input.substring(EVENT_LENGTH);
                 addEvent(input);
+                writeFile();
             } else if(input.startsWith("delete")){
                 deleteTask(input);
+                writeFile();
             } else{
                 System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 System.out.println(line);
             }
-
         }
-
     }
 
 
