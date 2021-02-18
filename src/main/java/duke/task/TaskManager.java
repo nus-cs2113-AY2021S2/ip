@@ -55,7 +55,6 @@ public class TaskManager {
             try {
                 String dueDate = StringManipulator.getStringAfterSlash(input);
                 String taskDescription = StringManipulator.getStringAfterWhiteSpaceAndBeforeSlash(input);
-                System.out.println("deadline's dueDate: "+ dueDate);
                 Deadline d = new Deadline(taskDescription,dueDate);
                 d.checkIfDeadlineDescriptionExists(taskDescription);
                 taskArrayList.add(d);
@@ -72,7 +71,6 @@ public class TaskManager {
             try {
                 String eventPeriod = StringManipulator.getStringAfterSlash(input);
                 String taskDescription = StringManipulator.getStringAfterWhiteSpaceAndBeforeSlash(input);
-                System.out.println("event's dueDate: "+ eventPeriod);
                 Event e = new Event(taskDescription,eventPeriod);
                 taskArrayList.add(e);
                 printMessageAfterTaskIsAdded(e);
