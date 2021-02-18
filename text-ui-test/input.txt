@@ -12,7 +12,10 @@ done 1
 blah
 list
 todo
+delete
+delete 1
 done 2
-done 3
+delete 2
+done 1
 list
 bye
