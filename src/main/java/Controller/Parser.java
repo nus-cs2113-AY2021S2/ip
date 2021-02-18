@@ -1,6 +1,7 @@
 package Controller;
 
 public class Parser {
+
     public String[] processInput(String in) {
         String[] strings = new String[2];
         int index = in.indexOf(" ");

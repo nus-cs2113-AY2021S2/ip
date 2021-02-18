@@ -45,19 +45,22 @@ public class UI {
             }
 
             else if (in.contains("todo")) {
-                dc.printTodo(tasks, in, strings, count1);
-                count1++;
-
+                if (!dc.printTodo(tasks, in, strings, count1)) {
+                    count1++;
+                }
             }
 
             else if (in.contains("deadline")) {
-                dc.printDeadline(tasks, in, strings, count1);
-                count1++;
+                if (!dc.printDeadline(tasks, in, strings, count1)) {
+                    count1++;
+                }
             }
 
             else if (in.contains("event")) {
-                dc.printEvent(tasks, in, strings, count1);
-                count1++;
+                //dc.printEvent(tasks, in, strings, count1);
+                if (!dc.printEvent(tasks, in, strings, count1)) {
+                    count1++;
+                }
             }
 
             else if (in.contains("save")) {

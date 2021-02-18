@@ -1,5 +1,7 @@
 package Controller;
 import Tasks.*;
+
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class DukeController {
@@ -43,48 +45,67 @@ public class DukeController {
         }
     }
 
-    public void printTodo(ArrayList<Task> tasks, String in, String[] strings, int count1) {
+    public boolean printTodo(ArrayList<Task> tasks, String in, String[] strings, int count1) {
+        boolean Error = false;
         try{
-            if (in.equals("todo")) {
+            if (in.trim().equals("todo") ) {
                 throw new DukeException("todo");
             }
             Task task = new ToDo(strings[0]);
             tasks.add(task);
             printTask(tasks, count1);
+            return Error;
         }
         catch(DukeException e) {
             System.out.println(e.getMessage());
             System.out.println("--------------------------------------------");
+            return Error = true;
         }
     }
 
-    public void printDeadline(ArrayList<Task> tasks, String in, String[] strings, int count1) {
+    public boolean printDeadline(ArrayList<Task> tasks, String in, String[] strings, int count1) {
+        boolean Error = false;
         try{
-            if (in.equals("deadline")) {
+            if (in.trim().equals("deadline")) {
                 throw new DukeException("deadline");
             }
             Task task = new Deadline(strings[0], strings[1]);
             tasks.add(task);
             printTask(tasks, count1);
+            return Error;
         }
         catch (DukeException e) {
             System.out.println(e.getMessage());
             System.out.println("--------------------------------------------");
+            return Error = true;
+        }
+        catch (DateTimeParseException e) {
+            System.out.println("Please key in within specified format yyyy-MM-dd HH:mm");
+            System.out.println("--------------------------------------------");
+            return Error = true;
         }
     }
 
-    public void printEvent(ArrayList<Task> tasks, String in, String[] strings, int count1) {
+    public boolean printEvent(ArrayList<Task> tasks, String in, String[] strings, int count1) {
+        boolean Error = false;
         try{
-            if (in.equals("event")) {
+            if (in.trim().equals("event")) {
                 throw new DukeException("event");
             }
             Task task = new Event(strings[0], strings[1]);
             tasks.add(task);
             printTask(tasks, count1);
+            return Error;
         }
         catch (DukeException e) {
             System.out.println(e.getMessage());
             System.out.println("--------------------------------------------");
+            return Error = true;
+        }
+        catch (DateTimeParseException e) {
+            System.out.println("Please key in within specified format yyyy-MM-dd HH:mm");
+            System.out.println("--------------------------------------------");
+            return Error = true;
         }
     }
 
