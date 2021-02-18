@@ -1,3 +1,8 @@
+import Classes.Deadline;
+import Classes.Event;
+import Classes.Task;
+import Classes.Todo;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -66,7 +71,7 @@ public class Duke {
         try {
             int taskIndex = Integer.parseInt(userInput.split(" ")[1]) - 1;
             if (taskIndex > tasks.size()-1) {
-                System.out.println("\tTask " + taskIndex + 1 + " does not exist! Please try again.");
+                System.out.println("\tClasses.Task " + taskIndex + 1 + " does not exist! Please try again.");
             }
             else {
                 // sets a task as done
@@ -78,7 +83,7 @@ public class Duke {
         }
         catch (NumberFormatException e) {
             System.out.println("\tOOPS!! To mark task, you have to enter an integer following the work done " +
-                    "such as in this example: 'done 3'.");
+                    "in this format e.g. 'done 3'.");
         }
         catch (IndexOutOfBoundsException e) {
             System.out.println("\tOOPS!! Invalid task input!");
@@ -100,7 +105,8 @@ public class Duke {
                 System.out.println("\tNow you have " + tasks.size() + " tasks in the list.");
             }
             catch (StringIndexOutOfBoundsException e) {
-                System.out.println("\tOOPS!!! The description of a todo cannot be empty!");
+                System.out.println("\tOOPS!!! The description of a todo cannot be empty! It must be in the following" +
+                        " format e.g. 'todo Homework");
             }
             break;
         case "deadline":
@@ -114,8 +120,8 @@ public class Duke {
                 System.out.println("\tNow you have " + tasks.size() + " tasks in the list.");
             }
             catch (StringIndexOutOfBoundsException e) {
-                System.out.println("\tOOPS!!! The description of a deadline is required in the following format " +
-                                ": 'deadline CS2113 Project /by Thursday 9pm'.");
+                System.out.println("\tOOPS!!! The description of a deadline is required in the following format e.g." +
+                                " 'deadline CS2113 Project /by Thursday 9pm'.");
             }
             break;
         case "event":
@@ -129,14 +135,14 @@ public class Duke {
                 System.out.println("\tNow you have " + tasks.size() + " tasks in the list.");
             }
             catch (StringIndexOutOfBoundsException e) {
-            System.out.println("\tOOPS!!! The description of an event is required in the following format " +
-                    ": 'event CS2113 Meeting /at Monday 1pm'.");
+            System.out.println("\tOOPS!!! The description of an event is required in the following format e.g." +
+                    " 'event CS2113 Meeting /at Monday 1pm'.");
             }
             break;
         default:
             // invalid command
             System.out.println("\tOOPS! I'm sorry, but I don't know what that means! :-(");
-        }S
+        }
         System.out.println("\t__________________________________________\n");
     }
 }
