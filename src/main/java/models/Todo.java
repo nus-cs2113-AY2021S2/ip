@@ -11,4 +11,14 @@ public class Todo extends Task {
         return "[T]" + super.toString();
     }
 
+    @Override
+    public String formatData() {
+        int done;
+        if (isDone) {
+            done = 1;
+        } else {
+            done = 0;
+        }
+        return "T" + " | " + done + " | " + description;
+    }
 }
