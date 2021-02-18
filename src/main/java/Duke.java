@@ -27,6 +27,8 @@ public class Duke {
                 listOutTasks();
             } else if (userCommand.equalsIgnoreCase("done" )) {
                 markTaskAsDone(inputDetails);
+            } else if (userCommand.equalsIgnoreCase("delete" )) {
+                deleteTask(inputDetails);
             } else  {
                 if (!isValidCommand(userCommand)) {
                     continue;
@@ -128,5 +130,15 @@ public class Duke {
             i++;
             System.out.println(i + ". " + selectedTask.getTaskType() + selectedTask.getStatusIcon() + " " + selectedTask.getDescription());
         }
+    }
+
+    private static void deleteTask(String s) {
+        int taskNumber = Integer.parseInt(s);
+        taskNumber--;
+        Task selectedTask = tasksList.get(taskNumber);
+        System.out.println("Noted. I've removed this task");
+        System.out.println("\t" + selectedTask.getTaskType() + selectedTask.getStatusIcon() + " " + selectedTask.getDescription());
+        tasksList.remove(taskNumber);
+        System.out.println("Now you have " + tasksList.size() + " tasks in the list.");
     }
 }
