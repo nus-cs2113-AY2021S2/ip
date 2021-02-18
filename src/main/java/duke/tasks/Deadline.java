@@ -1,19 +1,22 @@
-public class Event extends Task {
+package duke.tasks;
+
+public class Deadline extends Task {
+
     protected String dateTime;
 
-    public Event (String description, String dateTime) {
+    public Deadline(String description, String dateTime) {
         super(description);
         this.dateTime = dateTime;
     }
 
     @Override
     public String getTaskType() {
-        return "[E]";
+        return "[D]";
     }
 
     @Override
     public String getDateTime() {
-        return "(at: " + dateTime + ")";
+        return "(by:" + dateTime + ")";
     }
-
 }
+
