@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
 
@@ -17,16 +18,16 @@ public class Duke {
         String line;
         Scanner in = new Scanner(System.in);
         line = in.nextLine();
-        int index = 0;
-        Task[] anArray = new Task[100];
+        ArrayList<Task> Tasks = new ArrayList<Task>();
         while (!line.equals("bye")) {
             while(!line.equals("list")) {
                 if (line.startsWith("done")){
-                    int i=Integer.parseInt(line.substring(line.length()-1));
-                    anArray[i-1].markAsDone();
+                    String[] parts = line.split(" ");
+                    int i=Integer.parseInt(parts[1].trim());
+                    Tasks.get(i-1).markAsDone();
                     System.out.println("____________________________________________________________\n");
                     System.out.println("Nice! I've marked this task as done:\n ");
-                    System.out.println(anArray[i-1].toString() + "\n");
+                    System.out.println(Tasks.get(i-1).toString() + "\n");
                     System.out.println("____________________________________________________________\n");
                 }
                 else if (line.startsWith("todo")) {
@@ -34,11 +35,10 @@ public class Duke {
                         line.substring(line.indexOf(" "));
                         System.out.println("____________________________________________________________\n");
                         Todo t = new Todo(line.replace("todo ", ""));
-                        anArray[index] = t;
-                        index++;
+                        Tasks.add(t);
                         System.out.println("Got it. I've added this task:\n");
                         System.out.println(t.toString() + "\n");
-                        System.out.println("Now you have " + index + " tasks in the list.\n");
+                        System.out.println("Now you have " + Tasks.size() + " tasks in the list.\n");
                         System.out.println("____________________________________________________________\n");
                     } catch (java.lang.StringIndexOutOfBoundsException e) {
                         System.out.println("____________________________________________________________\n");
@@ -53,11 +53,10 @@ public class Duke {
                         line = line.replace("event", "");
                         String[] parts = line.split("/at");
                         Event t = new Event(parts[0].trim(), parts[1].trim());
-                        anArray[index] = t;
-                        index++;
+                        Tasks.add(t);
                         System.out.println("Got it. I've added this task:\n");
                         System.out.println(t.toString() + "\n");
-                        System.out.println("Now you have " + index + " tasks in the list.\n");
+                        System.out.println("Now you have " + Tasks.size() + " tasks in the list.\n");
                         System.out.println("____________________________________________________________\n");
                     } catch (java.lang.StringIndexOutOfBoundsException e) {
                         System.out.println("____________________________________________________________\n");
@@ -72,11 +71,10 @@ public class Duke {
                         line = line.replace("deadline", "");
                         String[] parts = line.split("/by");
                         Deadline t = new Deadline(parts[0].trim(), parts[1].trim());
-                        anArray[index] = t;
-                        index++;
+                        Tasks.add(t);
                         System.out.println("Got it. I've added this task:\n");
                         System.out.println(t.toString() + "\n");
-                        System.out.println("Now you have " + index + " tasks in the list.\n");
+                        System.out.println("Now you have " + Tasks.size() + " tasks in the list.\n");
                         System.out.println("____________________________________________________________\n");
                     } catch (java.lang.StringIndexOutOfBoundsException e) {
                         System.out.println("____________________________________________________________\n");
@@ -84,7 +82,17 @@ public class Duke {
                         System.out.println("____________________________________________________________\n");
                         }
                 }
-                else{
+                else if (line.startsWith("delete")) {
+                    System.out.println("____________________________________________________________\n");
+                    String[] parts = line.split(" ");
+                    int i=Integer.parseInt(parts[1].trim());
+                    System.out.println("Noted. I've removed this task: \n");
+                    System.out.println(Tasks.get(i-1).toString() + "\n");
+                    Tasks.remove(i-1);
+                    System.out.println("Now you have " + Tasks.size() + " tasks in the list.\n");
+                    System.out.println("____________________________________________________________\n");
+                }
+                else if (!line.equals("")){
                     System.out.println("____________________________________________________________\n");
                     System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
                     System.out.println("____________________________________________________________\n");
@@ -94,8 +102,8 @@ public class Duke {
             while(line.equals("list")){
                 System.out.println("____________________________________________________________\n");
                 System.out.println("Here are the tasks in your list:\n");
-                for (int i = 0; i < index; i++){
-                    System.out.println(i+1 + ". " + anArray[i].toString() + "\n");
+                for (int i = 0; i < Tasks.size(); i++){
+                    System.out.println(i+1 + ". " + Tasks.get(i).toString() + "\n");
                 }
                 System.out.println("____________________________________________________________\n");
                 line = "";
