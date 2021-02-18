@@ -36,6 +36,7 @@ public class Duke {
         System.out.println("Bye. Hope to see you again soon!\n");
     }
 
+
     private static String getString(Scanner in) {
         String user_input;
         user_input = in.nextLine();
@@ -273,11 +274,67 @@ public class Duke {
     }
 
 
+    private static void printFileContents(String filePath) throws FileNotFoundException {
+        File f = new File(filePath); // create a File for the given file path
+        Scanner s = new Scanner(f); // create a Scanner using the File as the source
+        while (s.hasNext()) {
+            System.out.println(s.nextLine());
+        }
+    }
+
+    public static void loadFile() {
+        try {
+            printFileContents("/Users/chenlingcui/Desktop/CS2113/duke.txt");
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
+    }
+
+//private static void appendToFile(String filePath, String textToAppend) throws IOException {
+//  FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
+//fw.write(textToAppend);
+//fw.close();
+//}
+
+    private static void writeToFile(String filePath, String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        fw.write(textToAdd);
+        fw.close();
+    }
+
+    private static void appendToFile(String filePath, String textToAppend) throws IOException {
+        FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
+        fw.write(textToAppend);
+        fw.close();
+    }
+
+    public static void changeFile(int num) {
+        try {
+            writeToFile("/Users/chenlingcui/Desktop/CS2113/duke.txt", "[" + t[1].getStatusIcon() + "] " + t[1].getDescription() + "\n");
+            //appendToFile("/Users/chenlingcui/Desktop/CS2113/duke.txt", "\n");
+        } catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
+
+            for (int i = 1; i < num; i++) {
+                try {
+                    appendToFile("/Users/chenlingcui/Desktop/CS2113/duke.txt", "[" + t[i].getStatusIcon() + "] " + t[i].getDescription() + "\n");
+                    //appendToFile("/Users/chenlingcui/Desktop/CS2113/duke.txt", "\n");
+                } catch (IOException e) {
+                    System.out.println("Something went wrong: " + e.getMessage());
+                }
+            }
+
+    }
+
+
     public static void main(String[] args) {
         show_welcome_msg();
 
         user_input = getString(in);
         Command command;
+        loadFile();
+
 
         while (!isBye()) {
             if (isList()) {
@@ -290,10 +347,9 @@ public class Duke {
                 command = Command.EVENT;
             } else if (isDeadline()) {
                 command = Command.DEADLINE;
-            } else if(isDelete()){
-                command =Command.DELETE;
-            }
-            else {
+            } else if (isDelete()) {
+                command = Command.DELETE;
+            } else {
                 command = Command.INVALID;
             }
 
@@ -311,8 +367,9 @@ public class Duke {
                 System.out.println("OOPS!!! You need to add time for new Deadline with keyword '/by'!!");
             }
 
-            System.out.println();
+            System.out.println(num_of_goals);
             user_input = getString(in);
+            changeFile(num_of_goals);
         }
 
 
