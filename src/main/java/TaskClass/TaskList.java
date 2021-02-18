@@ -1,11 +1,25 @@
+package TaskClass;
+
 import Exception.TaskAlreadyDoneException;
+
 import Exception.DoneFormatException;
 import Exception.DeleteFormatException;
 import java.util.ArrayList;
 
+
 public class TaskList {
-    private ArrayList<Task> tasks = new ArrayList<>();
+    private ArrayList<Task> tasks;
+    private int taskCount;
     public static final String LINE_SEPERATOR = "    ____________________________________________________________";
+
+    public TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
+        taskCount = tasks.size();
+    }
+
+    public ArrayList<Task> getTasks(){
+        return tasks;
+    }
 
     public int getTaskCount(){
         return tasks.size();

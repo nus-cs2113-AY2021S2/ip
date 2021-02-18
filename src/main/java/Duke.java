@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 import Exception.DeadlineFormatException;
 import Exception.TaskFormatException;
@@ -6,6 +10,13 @@ import Exception.EventFormatException;
 import Exception.TaskAlreadyDoneException;
 import Exception.DoneFormatException;
 import Exception.DeleteFormatException;
+import FileHandler.FileHandler;
+import FileHandler.FileTaskWriter;
+import TaskClass.Deadline;
+import TaskClass.Event;
+import TaskClass.TaskList;
+import TaskClass.ToDo;
+
 
 public class Duke {
     private static final String LOGO = " ____        _\n"
@@ -15,14 +26,33 @@ public class Duke {
             + "|____/ \\__,_|_|\\_\\___|\n";
     private static final String LINE_SEPERATOR = "    ____________________________________________________________";
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         System.out.println("    Hello from\n" + LOGO);
         System.out.println(LINE_SEPERATOR +
                 "\n    Hello! I'm Duke\n" +
                 "    What can I do for you?\n" +
                 LINE_SEPERATOR);
         Scanner sc = new Scanner(System.in);
-        TaskList tasks = new TaskList();
+        String sourceFilePath = "data" + File.separator + "task.txt";
+        File source = new File(sourceFilePath);
+        //FileHandler fileHandler;
+        //FileTaskWriter fileTaskWriter;
+        FileTaskWriter fileTaskWriter = new FileTaskWriter(sourceFilePath);
+        try {
+            if(!source.exists()) {
+                if (!source.getParentFile().exists()) {
+                    source.getParentFile().mkdirs();
+                    source.createNewFile();
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println(LINE_SEPERATOR + "    Duke can't find the task list.\n" + LINE_SEPERATOR);
+        }
+        FileHandler fileHandler = new FileHandler(source);
+        TaskList tasks = new TaskList(fileHandler.parseToArraylist());
+        //FileWriter sourceToWrite = new FileWriter(sourceFilePath);
+        //fileTaskWriter = new FileTaskWriter(sourceFilePath);
         String userInput = sc.nextLine();
         while (!userInput.equals("bye")) {
             try {
@@ -95,6 +125,7 @@ public class Duke {
             } catch (DeleteFormatException e) {
                 System.out.println(LINE_SEPERATOR + "\n" + e.toString() + LINE_SEPERATOR);
             }
+            fileTaskWriter.storeToFile(tasks);
             userInput = sc.nextLine();
         }
         System.out.print(LINE_SEPERATOR +

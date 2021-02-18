@@ -1,6 +1,8 @@
+package TaskClass;
+
 public class Task {
-    public String taskName;
-    public boolean taskDone;
+    protected String taskName;
+    protected boolean taskDone;
     public static final String TASK_INFO_FORMAT = "[ ][%s]%s";
     public static final String LINE_SEPERATOR = "    ____________________________________________________________";
 
@@ -30,4 +32,8 @@ public class Task {
     public void getDoneOutput(){};
 
     public void newTaskOutput(){};
+
+    public String toFile(){
+        return "";
+    }
 }
