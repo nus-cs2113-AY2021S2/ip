@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 import Duke.TodoException;
 import Duke.InvalidCommandException;
@@ -5,7 +6,7 @@ import Duke.Task;
 
 public class Duke {
     private static final Scanner scanner = new Scanner(System.in);
-    private static final Task[] tasksList = new Task[100];
+    private static final ArrayList<Task> tasksList = new ArrayList<Task>();
     private static int tasksCount = 0;
     public static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -80,22 +81,21 @@ public class Duke {
         }
         printLine();
         printLine();
-        tasksList[tasksCount] = new Task(inputDetails, userCommand);
-        Task selectedTask = tasksList[tasksCount];
-        tasksCount++;
-        notifyUser(selectedTask);
+        Task newTask = new Task(inputDetails, userCommand);
+        tasksList.add(newTask);
+        notifyUser(newTask);
     }
 
     private static void notifyUser(Task selectedTask) {
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + selectedTask.getTaskType() + selectedTask.getStatusIcon() + " " + selectedTask.getDescription());
-        System.out.println("Now you have " + tasksCount + " tasks in the list.");
+        System.out.println("Now you have " + tasksList.size() + " tasks in the list.");
     }
 
     private static void markTaskAsDone(String s) {
         int taskNumber = Integer.parseInt(s);
         taskNumber--;
-        Task selectedTask = tasksList[taskNumber];
+        Task selectedTask = tasksList.get(taskNumber);
         selectedTask.markAsDone();
         System.out.println("Nice! Following task is now marked as done:");
         System.out.println("[X] " + selectedTask.getDescription());
@@ -124,8 +124,8 @@ public class Duke {
     private static void listOutTasks() {
         printLine();
         int i = 0;
-        while (i < tasksCount) {
-            Task selectedTask = tasksList[i];
+        while (i < tasksList.size()) {
+            Task selectedTask = tasksList.get(i);
             i++;
             System.out.println(i + ". " + selectedTask.getTaskType() + selectedTask.getStatusIcon() + " " + selectedTask.getDescription());
         }
