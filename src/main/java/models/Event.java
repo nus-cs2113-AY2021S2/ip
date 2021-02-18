@@ -22,6 +22,6 @@ public class Event extends Task {
         } else {
             done = 0;
         }
-        return "E" + "|" + done + "|" + description + "|" + eventTime + "\n";
+        return "E" + "#" + done + "#" + description + "#" + eventTime + "\n";
     }
 }
