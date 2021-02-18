@@ -88,4 +88,19 @@ public class DukeController {
         currentTaskLength++;
     }
 
+    public static int getCurrentTaskLength(){
+        return currentTaskLength;
+    }
+
+    public static void setCurrentTaskLength(int newlength){
+        currentTaskLength = newlength;
+    }
+
+    public static Task[] getTasks(){
+        return tasks;
+    }
+
+    public static void setTasks(Task[] newTasks){
+        tasks = newTasks;
+    }
 }
