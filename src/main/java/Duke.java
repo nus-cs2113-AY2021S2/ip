@@ -29,6 +29,8 @@ public class Duke {
                     System.out.println("     ☹ OOPS!!! This task is already marked as done");
                     MessagePrinter.printBorder();
                 }
+            } else if (fullCommand.contains("delete")){
+                TaskManager.deleteTask(Integer.parseInt(partOfCommand[1]));
             } else {
                 TaskManager.addNewTask(partOfCommand, fullCommand);
             }

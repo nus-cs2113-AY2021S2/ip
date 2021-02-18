@@ -1,7 +1,7 @@
-import java.util.Arrays;
+import java.util.ArrayList;
 
 public class TaskManager {
-    static Task[] tasks = new Task[100];
+    private static ArrayList<Task> tasks = new ArrayList<>();
     static int count = 0;
 
     public TaskManager() {
@@ -12,22 +12,33 @@ public class TaskManager {
         System.out.println("     Here are the tasks in your list:");
         for (int i = 0; i < count; i++) {
             System.out.print("     " + (i + 1));
-            System.out.println(". " + tasks[i]);
+            System.out.println(". " + tasks.get(i));
         }
         MessagePrinter.printBorder();
     }
 
     public static void displayTaskDone(int index) throws DukeException {
-        if (tasks[index - 1].isDone()) {
+        if ((tasks.get(index-1)).isDone()) {
             throw new DukeException();
         } else {
-            tasks[index - 1].markAsDone();
+            (tasks.get(index-1)).markAsDone();
             MessagePrinter.printBorder();
             System.out.println("      Nice! I've marked this task as done: ");
             System.out.print("       ");
-            System.out.println(tasks[index - 1]);
+            System.out.println((tasks.get(index-1)));
             MessagePrinter.printBorder();
         }
+    }
+
+    public static void deleteTask(int index) {
+            Task temp = tasks.get(index - 1);
+            tasks.remove(index-1);
+            MessagePrinter.printBorder();
+            System.out.println("      Noted. I've removed this task:  ");
+            System.out.print("       ");
+            System.out.println(temp);
+            MessagePrinter.printBorder();
+            count--;
     }
 
     public static void addNewTask(String[] partOfCommand, String fullCommand) {
@@ -37,7 +48,7 @@ public class TaskManager {
         case ("todo"):
             try {
                 Task a = new Todo(fullCommand.substring(5));
-                addTaskToArray(a);
+                addTaskToArrayList(a);
                 System.out.println("     Now you have " + count + " tasks in the list.");
             } catch (IndexOutOfBoundsException oob) {
                 System.out.println("     ☹ OOPS!!! The description of a todo cannot be empty.");
@@ -46,7 +57,7 @@ public class TaskManager {
         case ("deadline"):
             try {
                 Task b = new Deadline(fullCommand.substring(9, fullCommand.indexOf("/by")), fullCommand.substring(fullCommand.indexOf("/by") + 4));
-                addTaskToArray(b);
+                addTaskToArrayList(b);
                 System.out.println("     Now you have " + count + " tasks in the list.");
             } catch (IndexOutOfBoundsException oob) {
                 System.out.println("     ☹ OOPS!!! The description of a deadline cannot be empty.");
@@ -55,7 +66,7 @@ public class TaskManager {
         case ("event"):
             try {
                 Task c = new Event(fullCommand.substring(6, fullCommand.indexOf("/at")), fullCommand.substring(fullCommand.indexOf("/at") + 4));
-                addTaskToArray(c);
+                addTaskToArrayList(c);
                 System.out.println("     Now you have " + count + " tasks in the list.");
             } catch (IndexOutOfBoundsException oob) {
                 System.out.println("     ☹ OOPS!!! The description of a event cannot be empty.");
@@ -68,9 +79,9 @@ public class TaskManager {
         MessagePrinter.printBorder();
     }
 
-    private static void addTaskToArray(Task a) {
+    private static void addTaskToArrayList(Task a) {
         System.out.println("     Got it. I've added this task: ");
-        tasks[count] = a;
+        tasks.add(a);
         count++;
         System.out.println("      " + a);
     }
