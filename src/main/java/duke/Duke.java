@@ -24,19 +24,21 @@ public class Duke {
     private static final int BY_LENGTH = 3;
     private static final int AT_LENGTH = 3;
     private static final int DELETE_LENGTH = 7;
+
     private static final String exceptionGreeting = "\ud83d\ude16 OOPS!!! ";
+
     private static ArrayList<Task> tasks = new ArrayList<>();
     private static int taskCounter = 0;
-    public static final String ROOT_PATH = System.getProperty("user.dir");
-    public static final Path FOLDER_PATH = Paths.get(ROOT_PATH, "data");
-    public static final Path FILE_PATH = Paths.get(ROOT_PATH, "data", "duke.txt");
+
+    private static final String ROOT_PATH = System.getProperty("user.dir");
+    private static final Path FOLDER_PATH = Paths.get(ROOT_PATH, "data");
+    private static final Path FILE_PATH = Paths.get(ROOT_PATH, "data", "duke.txt");
 
     public static void main(String[] args) {
         createFile();
         loadFile();
         showWelcomeMessage();
         inputLoop();
-        saveToFile();
     }
 
     private static void loadFile() {
@@ -44,25 +46,30 @@ public class Duke {
             List<String> lines = Files.readAllLines(FILE_PATH);
             for (String line : lines) {
                 String[] components = line.split("/");
-                System.out.println(components[2]);
-                Task newTask = new Task(components[2]);
-                switch (components[0]) {
+                String taskType = components[0];
+                String done = components[1];
+                String description = components[2];
+                Task newTask = new Task(description);
+                switch (taskType) {
                 case "T":
-                    newTask = new ToDo(components[2]);
+                    newTask = new ToDo(description);
                     break;
                 case "D":
-                    newTask = new Deadline(components[2], components[3]);
+                    String by = components[3];
+                    newTask = new Deadline(description, by);
                     break;
                 case "E":
-                    newTask = new Event(components[2], components[3]);
+                    String at = components[3];
+                    newTask = new Event(description, at);
                 }
-                if (components[1].equals("1")) {
+                if (done.equals("1")) {
                     newTask.markAsDone();
                 }
                 tasks.add(newTask);
                 taskCounter++;
             }
         } catch (IOException e) {
+            System.out.println("\t" + exceptionGreeting + "I've encountered an error loading your data :-(");
         }
     }
 
@@ -71,12 +78,14 @@ public class Duke {
             Files.createDirectory(FOLDER_PATH);
         } catch (FileAlreadyExistsException e) {
         } catch (IOException e) {
+            System.out.println("\t" + exceptionGreeting + "I've encountered an error while creating a directory :-(");
         }
 
         try {
             Files.createFile(FILE_PATH);
         } catch (FileAlreadyExistsException e) {
         } catch (IOException e) {
+            System.out.println("\t" + exceptionGreeting + "I've encountered an error while creating a data file :-(");
         }
     }
 
@@ -98,6 +107,7 @@ public class Duke {
             }
             fw.close();
         } catch (IOException e) {
+            System.out.println("\t" + exceptionGreeting + "I've encountered an error saving your data :-(");
         }
     }
 
@@ -113,14 +123,19 @@ public class Duke {
                 printTasksList();
             } else if (line.startsWith("done")) {
                 markAsDone(line);
+                saveToFile();
             } else if (line.startsWith("todo")) {
                 addNewTodo(line);
+                saveToFile();
             } else if (line.startsWith("deadline")) {
                 addNewDeadline(line);
+                saveToFile();
             } else if (line.startsWith("event")) {
                 addNewEvent(line);
+                saveToFile();
             } else if (line.startsWith("delete")) {
                 removeTask(line);
+                saveToFile();
             } else {
                 printInvalidInput();
             }
