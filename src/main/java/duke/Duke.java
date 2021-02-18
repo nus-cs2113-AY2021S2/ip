@@ -59,6 +59,20 @@ public class Duke {
         }
     }
 
+    public static void saveData() {
+        try {
+            System.out.println("\tSaving your data...");
+            FileWriter fileWriter = new FileWriter("data/duke.txt");
+            for (int i=0; i<currentTask; i++) {
+                fileWriter.write(tasks[i].getType() + " | " + ((tasks[i].isDone()) ? "1" : "0") + " | "
+                        + tasks[i].getDescription() + ((tasks[i].hasDate()) ? " | " + tasks[i].getDate() : "") + '\n' );
+            }
+            fileWriter.close();
+            System.out.println("\tData saved");
+        } catch (IOException e) {
+            System.out.println("\tAn error occurred while saving your data.");
+        }
+    }
 
     public static void takeInput() {
         Scanner userInput = new Scanner(System.in);
@@ -89,6 +103,10 @@ public class Duke {
             } else if (command.startsWith("deadline")) {
                 dividerLine();
                 addDeadline(command);
+                dividerLine();
+            } else if (command.equals("save")) {
+                dividerLine();
+                saveData();
                 dividerLine();
             } else {
                 dividerLine();
@@ -124,7 +142,7 @@ public class Duke {
             System.out.println("\tHere are the tasks in your list:");
             for (int i=0; i<currentTask; i++) {
                 System.out.println("\t" + Integer.toString(i+1) + ".[" + tasks[i].getType() + "]["
-                        + tasks[i].getStatusIcon() + "] " + tasks[i].getDescription() + " " + tasks[i].getDate());
+                        + tasks[i].getStatusIcon() + "] " + tasks[i].getDescription() + " " + tasks[i].printDate());
             }
         }
     }
@@ -163,7 +181,7 @@ public class Duke {
                 currentTask++;
                 System.out.println("\tGot it. I've added this task:");
                 System.out.println("\t   [" + t.getType() + "][" + t.getStatusIcon() + "] "
-                        + t.getDescription() + " " + t.getDate());
+                        + t.getDescription() + " " + t.printDate());
                 System.out.println("\tNow you have " + Integer.toString(currentTask) + " tasks in the list.");
             }
             catch (ArrayIndexOutOfBoundsException e) {
@@ -187,7 +205,7 @@ public class Duke {
                 currentTask++;
                 System.out.println("\tGot it. I've added this task:");
                 System.out.println("\t   [" + t.getType() + "][" + t.getStatusIcon() + "] "
-                        + t.getDescription() + " " + t.getDate());
+                        + t.getDescription() + " " + t.printDate());
                 System.out.println("\tNow you have " + Integer.toString(currentTask) + " tasks in the list.");
             }
             catch (ArrayIndexOutOfBoundsException e) {
@@ -210,27 +228,18 @@ public class Duke {
             } else if (tasks[itemIndex].isDone()) {
                 System.out.println("\tThis task is already done :)");
                 System.out.println("\t  [" + tasks[itemIndex].getType() + "][" + tasks[itemIndex].getStatusIcon() + "] "
-                        + tasks[itemIndex].getDescription());
+                        + tasks[itemIndex].getDescription() + " " + tasks[itemIndex].printDate());
             } else {
                 tasks[itemIndex].markAsDone();
                 System.out.println("\tNice! I've marked this task as done:");
                 System.out.println("\t  [" + tasks[itemIndex].getType() + "][" + tasks[itemIndex].getStatusIcon() + "] "
-                        + tasks[itemIndex].getDescription());
+                        + tasks[itemIndex].getDescription() + " " + tasks[itemIndex].printDate());
             }
         }
     }
 
     public static void exitDuke() {
-        try {
-            FileWriter fileWriter = new FileWriter("data/duke.txt");
-            for (int i=0; i<currentTask; i++) {
-                fileWriter.write(tasks[i].getType() + " | " + ((tasks[i].isDone()) ? "1" : "0") + " | "
-                        + tasks[i].getDescription() + " | " + tasks[i].getDate() + '\n');
-            }
-            fileWriter.close();
-        } catch (IOException e) {
-            System.out.println("\tAn error occurred while saving your data.");
-        }
+        saveData();
         System.out.println("\tBye, hope to see you again soon!");
     }
 
