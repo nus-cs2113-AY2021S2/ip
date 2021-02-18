@@ -30,14 +30,6 @@ public class Duke {
         index++;
     }
 
-    public static void deleteFromList(int i) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.println("  " + list.get(i - 1).toString());
-        list.remove(i - 1);
-        index--;
-        System.out.println("Now you have " + index + " tasks in the list.");
-    }
-
     public static void printList() {
         for (int i = 0; i < index; i++) {
             System.out.println((i + 1) + ". " + list.get(i).toString());
@@ -78,9 +70,6 @@ public class Duke {
             Deadline deadline = new Deadline(content);
             addToList(deadline);
             printAddMessage(deadline);
-            break;
-        case "delete":
-            deleteFromList(Integer.parseInt(content));
             break;
         default:
             throw new InvalidInput();
@@ -173,7 +162,7 @@ public class Duke {
             } catch (NullPointerException | IndexOutOfBoundsException e) {
                 System.out.println("You have inputted an invalid index number");
             } catch (NumberFormatException e) {
-                System.out.println("Specify the index of tht task");
+                System.out.println("Specify which task to mark as done");
             }
         } while (isRunning);
         System.out.println("Bye. Hope to see you again soon!");
