@@ -1,8 +1,4 @@
-import java.io.FileNotFoundException;
 import java.util.Scanner;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 
 
 public class Duke {
@@ -211,7 +207,7 @@ public class Duke {
         Scanner in = new Scanner(System.in);
         String output;
         dukeStartup();
-        while(true){
+        /*while(true){
             String input = in.nextLine();
             if(input.equals("bye")){
                 System.out.println("Bye. Hope to see you again soon!");
@@ -222,7 +218,8 @@ public class Duke {
                 CommandResult result = executeCommand(command);
                 consoleOutput(result);
             }
-        }
+        }*/
+        runCommandLoopUntilExitCommand();
 
     }
 
@@ -240,6 +237,16 @@ public class Duke {
         System.out.println(String.format(format, input.feedbackToUser));
     }
 
+    private static void runCommandLoopUntilExitCommand() {
+        Command command;
+        do {
+            Scanner in = new Scanner(System.in);
+            String userCommandText = in.nextLine();
+            command = new Parser().parseCommand(userCommandText);
+            CommandResult result = executeCommand(command);
+            consoleOutput(result);
+        } while (!byeCommand.isBye(command));
+    }
 
 
 
