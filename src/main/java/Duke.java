@@ -76,19 +76,21 @@ public class Duke {
     }
 
     private static void sendWelcomeMessage() {
-        String fileName = FILE_PATH_TO_SAVE_TASKS;
+        System.out.println("Hello from\n" + LOGO);
+        printLine();
+        System.out.println("Hello! I'm Duke");
+        System.out.println("What can I do for you?");
+    }
+
+    private static void createNewFile() {
         File fForCheck = new File(FILE_PATH_TO_SAVE_TASKS);
         if (!fForCheck.exists()) {
             createNewFile(fForCheck);
         } else {
             FileWriter fw = null;
-            fw = createFileWriterObject(fileName, fw);
+            fw = createFileWriterObject(null);
             writeEmptyStringToFile(fw);
         }
-        System.out.println("Hello from\n" + LOGO);
-        printLine();
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
     }
 
 
@@ -100,9 +102,9 @@ public class Duke {
         }
     }
 
-    private static FileWriter createFileWriterObject(String fileName, FileWriter fw) {
+    private static FileWriter createFileWriterObject(FileWriter fw) {
         try {
-            fw = new FileWriter(fileName);
+            fw = new FileWriter(FILE_PATH_TO_SAVE_TASKS);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -150,10 +152,9 @@ public class Duke {
 
     private static void exitDuke() throws IOException {
         printLine();
-        String fileName = FILE_PATH_TO_SAVE_TASKS;
         for (Task task : tasksList) {
             try {
-                writeToFile(fileName, task);
+                writeToFile(task);
             } catch (IOException e) {
                 System.out.println("Something went wrong: " + e.getMessage());
             }
@@ -201,8 +202,8 @@ public class Duke {
         System.out.println("Now you have " + tasksList.size() + " tasks in the list.");
     }
 
-    private static void writeToFile(String filePath, Task tasks) throws IOException {
-        FileWriter fw = new FileWriter(filePath, true);
+    private static void writeToFile(Task tasks) throws IOException {
+        FileWriter fw = new FileWriter(FILE_PATH_TO_SAVE_TASKS, true);
         String description = tasks.getDescriptionWithoutBrackets();
         String taskType = tasks.getTaskTypeInWords();
         Boolean status = tasks.getStatusInWords();
@@ -215,6 +216,7 @@ public class Duke {
     }
 
     private static void initializeData() {
+        createNewFile();
         File f = new File(FILE_PATH_TO_SAVE_TASKS);
         System.out.println("Initializing data");
         try {
@@ -224,8 +226,6 @@ public class Duke {
                 String userCommand = listOfDataFromFile[0];
                 String inputDetails = listOfDataFromFile[1];
                 processSavedData(userCommand, inputDetails);
-                System.out.println(userCommand);
-                System.out.println(inputDetails);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
