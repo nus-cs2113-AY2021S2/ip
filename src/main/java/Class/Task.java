@@ -10,7 +10,7 @@ public class Task {
     }
 
     public String getDescription() {
-        return description;
+        return this.description;
     }
 
     public String getStatusIcon() {
@@ -19,5 +19,25 @@ public class Task {
 
     public void markAsDone(){
         this.isDone = true;
+    }
+
+    public String getType(){
+        return "task";
+    }
+
+    public String getTime(){
+        return "nothing";
+    }
+
+    public String getTaskName(){
+        return this.description;
+    }
+
+    public int isDone(){
+        if(this.isDone){
+            return 1;
+        } else {
+            return 0;
+        }
     }
 }

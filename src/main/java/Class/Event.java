@@ -12,4 +12,12 @@ public class Event extends Task {
     public String getDescription() {
         return "[E][" + super.getStatusIcon() + "] " + super.getDescription() + " (at: " + at + ")";
     }
+
+    public String getType(){
+        return "event";
+    }
+
+    public String getTime(){
+        return " /at " + this.at;
+    }
 }

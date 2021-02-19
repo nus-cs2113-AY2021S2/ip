@@ -9,4 +9,12 @@ public class Todo extends Task {
     public String getDescription() {
         return "[T][" + super.getStatusIcon() + "] " + super.getDescription();
     }
+
+    public String getType(){
+        return "todo";
+    }
+
+    public String getTime(){
+        return "";
+    }
 }

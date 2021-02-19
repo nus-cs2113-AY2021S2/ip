@@ -1,7 +1,9 @@
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Vector;
+import java.io.File;
+import java.io.IOException;
 
 import Class.*;
 import ErrorHandling.*;
@@ -33,15 +35,14 @@ public class Duke {
                 Task taskDone = tasks.get(taskNo-1);
                 taskDone.markAsDone();
                 System.out.println("     Nice! I've marked this task as done:");
-                System.out.println("      [" + taskDone.getStatusIcon() + "] " +
-                        taskDone.getDescription());
+                System.out.println("      " + taskDone.getDescription());
                 tasks.set(taskNo-1, taskDone);
             } else {
                 throw new EmptyDescription("done");
             }
             break;
         case "todo":
-            if(subStrings.length > 2){
+            if(subStrings.length > 1){
                 description = command.substring(5);
                 Todo todo = new Todo(description);
                 tasks.add(todo);
@@ -86,10 +87,57 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
+    public static void readFile(List<Task> tasks) throws IOException, UnknownCommand, EmptyDescription {
+        try {
+            File saveFolder = new File("data");
+            if(!saveFolder.exists()){
+                saveFolder.mkdir();
+            }
+            File saveFile = new File("data/tasks.txt");
+            if(!saveFile.exists()){
+                saveFile.createNewFile();
+            }
+
+            Scanner s = new Scanner(saveFile);
+            String command,input;
+            int isDone,taskNo = 0;
+
+            while(s.hasNext()) {
+                input = s.nextLine();
+                isDone = Character.getNumericValue(input.charAt(0));
+                command = input.substring(2);
+                takeCommand(command,tasks);
+                ++taskNo;
+                if(isDone == 1){
+                    takeCommand("done " + taskNo,tasks);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred when accessing the save file.");
+            e.printStackTrace();
+        }
+    }
+
+    public static void writeFile(List<Task> tasks) throws IOException {
+        try {
+            FileWriter fw = new FileWriter("data/tasks.txt");
+            for(Task task:tasks){
+                fw.write(task.isDone() + " " + task.getType() + " " + task.getTaskName() + task.getTime()
+                        + System.lineSeparator());
+            }
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("An error occurred when writing to the save file.");
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) throws IOException, UnknownCommand, EmptyDescription {
         Scanner in = new Scanner(System.in).useDelimiter(" ");
         String command = "";
         List<Task> tasks = new ArrayList<Task>();
+
+        readFile(tasks);
 
         System.out.println("Hello! I'm Duke\n" +
                 "What can I do for you?");
@@ -105,5 +153,7 @@ public class Duke {
             }
             System.out.println(lineDivider);
         }while(!command.equals("bye"));
+
+        writeFile(tasks);
     }
 }
