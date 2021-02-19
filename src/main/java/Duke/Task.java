@@ -23,6 +23,8 @@ public class Task {
         return (isDone ? "[X]" : "[ ]");
     }
 
+    public String getStatusInWords() { return String.valueOf(this.isDone);}
+
     public void markAsDone() {
         this.isDone = true;
     }
@@ -50,6 +52,20 @@ public class Task {
             return "/by";
         } else {
             return null;
+        }
+    }
+
+    public String getDescriptionWithoutBrackets() {
+        if (this.taskType.equalsIgnoreCase("deadline")) {
+            String descriptionCleaned = this.description.replaceAll("\\(", "/");
+            String descriptionCleaned2 = descriptionCleaned.replaceAll(":", "");
+            return descriptionCleaned2.substring(0, descriptionCleaned2.length() - 1);
+        } else if (this.taskType.equalsIgnoreCase("event")) {
+            String descriptionCleaned = this.description.replaceAll("\\(", "/");
+            String descriptionCleaned2 = descriptionCleaned.replaceAll(":", "");
+            return descriptionCleaned2.substring(0, descriptionCleaned2.length() - 1);
+        } else {
+            return this.description;
         }
     }
 }
