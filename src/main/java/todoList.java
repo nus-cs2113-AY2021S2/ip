@@ -25,6 +25,13 @@ public class todoList {
         return "Task: [" + desc + "] has been added."
                 + "\nYou now have " + this.tasksLeft() + " task(s) left undone in the list!";
     }
+    public String addTask(improvedTask newTask){ // adds todo type task and returns confirmation
+        taskList.add(newTask);
+        totalTasks++;
+        leftoverTasks++;
+        return "Task: [" + newTask.description + "] has been added."
+                + "\nYou now have " + this.tasksLeft() + " task(s) left undone in the list!";
+    }
 
     public String listItems(){ // lists all current tasks
         String output = "";

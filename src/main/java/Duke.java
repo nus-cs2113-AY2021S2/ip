@@ -7,7 +7,9 @@ import java.io.IOException;
 
 public class Duke {
 
-    public static void dukeStartup(){
+    private static todoList inputList = new todoList();
+
+    public static void dukeStartup() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -18,18 +20,12 @@ public class Duke {
         System.out.println("____________________________________________________________\n" +
                 " Hello! I'm Duke\n" +
                 " What can I do for you?\n" +
-                "____________________________________________________________\n" );
-
-    }
-
-    public static void dukeResponse(String output){
-        System.out.println("____________________________________________________________\n" +
-                output + "\n" +
                 "____________________________________________________________\n");
 
     }
 
-    public static String command_parser(todoList list, String command){
+
+/*    public static String command_parser(todoList list, String command){
         String[] tokens = command.split(" ");
         int itemStartIndex = command.indexOf(" ") + 1;
         int itemEndIndex;
@@ -98,10 +94,10 @@ public class Duke {
             out = "Invalid task command!";
         }
         return out;
-    }
+    }*/
 
 
-    public static void importParsing(todoList list, String input){ // Parses the inputted line and executes the respective commands to import the tasks through command parser
+/*    public static void importParsing(todoList list, String input){ // Parses the inputted line and executes the respective commands to import the tasks through command parser
         String[] tokens = input.split("/");
         String command = "";
         switch(tokens[0]){
@@ -177,11 +173,13 @@ public class Duke {
         } catch (IOException e) {
             System.out.println("Something went wrong: " + e.getMessage());
         }
-    }
+    }*/
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
 
-        boolean continueChat = true;
+
+
+/*        boolean continueChat = true;
         Scanner in = new Scanner(System.in);
         String output = "";
         todoList list = new todoList();
@@ -204,5 +202,48 @@ public class Duke {
             }
             dukeResponse(output);
         }
+    }*/
+
+
+
+
+
+        Scanner in = new Scanner(System.in);
+        String output;
+        dukeStartup();
+        while(true){
+            String input = in.nextLine();
+            if(input.equals("bye")){
+                System.out.println("Bye. Hope to see you again soon!");
+                break;
+            }else {
+                Command command;
+                command = new Parser().parseCommand(input);
+                CommandResult result = executeCommand(command);
+                consoleOutput(result);
+            }
+        }
+
     }
+
+
+    private static CommandResult executeCommand(Command command) {
+            command.setData(inputList);
+            CommandResult result = command.execute();
+            return result;
+    }
+
+    private static void consoleOutput(CommandResult input){
+        String format = "____________________________________________________________\n" +
+                "%s" + "\n" +
+                "____________________________________________________________\n";
+        System.out.println(String.format(format, input.feedbackToUser));
+    }
+
+
+
+
+
 }
+
+
