@@ -167,4 +167,20 @@ public class DukeController {
             System.out.println("--------------------------------------------");
         }
     }
+
+    public void findbyDescription(ArrayList<Task> tasks, String[] strings) {
+        boolean found = false;
+        for (Task task : tasks) {
+            if (task.getDescription().contains(strings[0])) {
+                System.out.println(task.getPrintedLine());
+                found = true;
+            }
+        }
+        System.out.println("--------------------------------------------");
+
+        if (!found) {
+            System.out.println("No activity found!");
+            System.out.println("--------------------------------------------");
+        }
+    }
 }
