@@ -1,12 +1,40 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
     //public static Task[] tasks = new Task[100];
-    public static int size = 0;
     public static ArrayList<Task> tasks = new ArrayList<>();
     public static void main(String[] args) {
-        printWelcomeMessage();
+
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+
+        // print welcome message
+        System.out.println("Hello from\n" + logo);
+        System.out.println("-".repeat(50));
+        System.out.println("\tHello! I'm Duke");
+        System.out.println("\tWhat can I do for you?");
+        printDash();
+        String pathOfFile = new File("").getAbsolutePath();
+        File tasksFile = new File(pathOfFile + "/duke.txt");
+        try {
+            if (tasksFile.createNewFile()) {
+                System.out.println("\tTo save your task locally,\n" +
+                        "\tA new file has been created at:\n\t" +
+                        tasksFile.getAbsolutePath() + "\n");
+            }
+            uploadTasks(tasksFile.getAbsolutePath());
+        } catch (IOException e) {
+            System.out.println("\tThere was an I/O error:\nBye!\n");
+            e.printStackTrace();
+        }
         Scanner myObj = new Scanner(System.in);
         String command = myObj.nextLine();
 
@@ -31,24 +59,39 @@ public class Duke {
         printDash();
         System.out.println("Bye. Hope to see you again soon!");
         printDash();
+        try {
+            saveTasks(tasksFile.getAbsolutePath());
+        } catch (IOException e) {
+            System.out.println("No file was saved due to an I/O error.\n");
+        }
+
     }
+    public static void uploadTasks(String pathOfFile) throws FileNotFoundException {
+        File f = new File(pathOfFile);
+        Scanner s = new Scanner(f);
+        while (s.hasNext()) {
+            String[] task = s.nextLine().split(" ==> ");
+            if (task[0].equals("T")) {
+                tasks.add(new Todo(task[2]));
+            } else if (task[0].equals("D")) {
+                tasks.add(new Deadline(task[2], task[3]));
+            } else {
+                tasks.add(new Event(task[2], task[3]));
+            }
 
-    public static void printWelcomeMessage() {
-
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-
-        // print welcome message
-        System.out.println("Hello from\n" + logo);
-        printDash();
-        System.out.println("\tHello! I'm Duke");
-        System.out.println("\tWhat can I do for you?");
-        printDash();
+            if (task[1].equals("[X]")) {
+                tasks.get(tasks.size()-1).markAsDone();
+            }
+        }
     }
-
+    public static void saveTasks(String pathOfFile) throws IOException {
+        FileWriter fw = new FileWriter(pathOfFile);
+        for (Task task : tasks) {
+            fw.write(task.stringToSave());
+            fw.write(System.lineSeparator());
+        }
+        fw.close();
+    }
     public static void addTasks(String description) {
         printDash();
         System.out.println("\tGot it. I've added this task: ");

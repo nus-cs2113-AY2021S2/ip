@@ -5,11 +5,18 @@ public class Event extends Task{
         this.by = by;
     }
     @Override
-    public String getStatusIcon() {
-        return "[E]" + super.getStatusIcon() + " " ;
+    public String toString() {
+        return "\t[E]" + super.toString() + "(" + "at:" + by + ")";
+    }
+    public String getDescription() {
+        return this.description;
+    }
+    public String getBy() {
+        return this.by;
     }
     @Override
-    public String toString() {
-        return "\t " + super.toString() + "(" + "at:" + by + ")";
+
+    public String stringToSave() {
+        return "E ==> " + getStatusIcon() + " ==> " + getDescription() + " ==> " + getBy();
     }
 }
