@@ -18,6 +18,7 @@ public class Storage {
             }
         }
         fileReader.close();
+
     }
 
     public void writeToFile(String textToAdd) throws IOException {

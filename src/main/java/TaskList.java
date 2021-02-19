@@ -24,11 +24,11 @@ public class TaskList {
     }
 
     public void addEvent(String inputs) throws WrongEventFormatException, IOException {
-        if (!inputs.matches("\".+/at.+\"")) throw new WrongEventFormatException();
+        if (!inputs.matches(".+/at.+")) throw new WrongEventFormatException();
 
         String command = inputs.substring(inputs.indexOf(" ") + 1);
         String title = command.substring(0, command.indexOf("/") - 1);
-        String date = inputs.substring(inputs.indexOf("at") + 3);
+        String date = inputs.substring(inputs.indexOf("/at") + 3);
 
         Event newEvent = new Event(title, date);
         storage.writeToFile(inputs);
@@ -36,11 +36,11 @@ public class TaskList {
     }
 
     public void addDeadline(String inputs) throws WrongDeadlineFormatException, IOException {
-        if (!inputs.matches("\".+/by.+\"")) throw new WrongDeadlineFormatException();
+        if (!inputs.matches(".+/by.+")) throw new WrongDeadlineFormatException();
 
         String command = inputs.substring(inputs.indexOf(" ") + 1);
         String title = command.substring(0, command.indexOf("/") - 1);
-        String date = inputs.substring(inputs.indexOf("at") + 3);
+        String date = inputs.substring(inputs.indexOf("/by") + 3);
 
         Deadline newDeadline = new Deadline(title, date);
         storage.writeToFile(inputs);
