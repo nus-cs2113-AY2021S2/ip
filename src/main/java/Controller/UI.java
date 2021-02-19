@@ -2,8 +2,11 @@ package Controller;
 
 import Tasks.Task;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.LocalDateTime;
 
 public class UI {
 
@@ -65,6 +68,17 @@ public class UI {
 
             else if (in.contains("save")) {
                 store.saveOutput(tasks);
+            }
+
+            else if (in.contains("date")) {
+                try {
+                    LocalDate date = parse.processString(strings);
+                    dc.findbyDate(tasks, date);
+                }
+                catch (DateTimeParseException e) {
+                    System.out.println("Please key in within specified format yyyy-MM-dd");
+                    System.out.println("--------------------------------------------");
+                }
             }
 
             else {

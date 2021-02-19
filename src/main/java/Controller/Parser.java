@@ -1,5 +1,10 @@
 package Controller;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.LocalDate;
+
 public class Parser {
 
     public String[] processInput(String in) {
@@ -20,6 +25,12 @@ public class Parser {
             strings[1] = subString4;
             return strings;
         }
+    }
+
+    public LocalDate processString(String[] strings) throws DateTimeParseException {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate datetime = LocalDate.parse(strings[0], formatter);
+        return datetime;
     }
 
 
