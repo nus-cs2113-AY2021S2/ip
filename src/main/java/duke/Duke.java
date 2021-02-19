@@ -63,7 +63,7 @@ public class Duke {
     public static void printAddTaskMessage(Task task) {
         System.out.println("Got it. I've added this task:");
         System.out.println(task.toString());
-        System.out.println("Now you have " + taskCount + " tasks in the list");
+        System.out.println("Now you have " + tasks.size() + " tasks in the list");
     }
 
     public static void addTodo(String line) {
@@ -72,7 +72,7 @@ public class Duke {
             String description = line.substring(descriptionStart);
             tasks.add(new Todo(description));
             taskCount++;
-            printAddTaskMessage(tasks.get(taskCount - 1));
+            printAddTaskMessage(tasks.get(tasks.size() - 1));
         } catch (StringIndexOutOfBoundsException e) {
             System.out.println("OOPS!!! The description of a todo cannot be empty.");
         }
@@ -87,7 +87,7 @@ public class Duke {
             String by = line.substring(byStart);
             tasks.add(new Deadline(description, by));
             taskCount++;
-            printAddTaskMessage(tasks.get(taskCount - 1));
+            printAddTaskMessage(tasks.get(tasks.size() - 1));
         } catch (StringIndexOutOfBoundsException e) {
             System.out.println("OOPS!!! The description of a deadline cannot be empty.");
         }
@@ -102,7 +102,7 @@ public class Duke {
             String at = line.substring(atStart);
             tasks.add(new Event(description, at));
             taskCount++;
-            printAddTaskMessage(tasks.get(taskCount - 1));
+            printAddTaskMessage(tasks.get(tasks.size() - 1));
         } catch (StringIndexOutOfBoundsException e) {
             System.out.println("OOPS!!! The description of an event cannot be empty.");
         }
@@ -131,7 +131,7 @@ public class Duke {
             taskCount--;
             System.out.println("Noted. I've removed this task:");
             System.out.println(toBeDeleted.toString());
-            System.out.println("Now you have " + taskCount + " tasks in the list");
+            System.out.println("Now you have " + tasks.size() + " tasks in the list");
         } catch (StringIndexOutOfBoundsException e) {
             System.out.println("OOPS!!! The index of the task to be deleted cannot be empty.");
         } catch (IndexOutOfBoundsException e) {
