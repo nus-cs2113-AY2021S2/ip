@@ -27,39 +27,38 @@ public class Duke {
     private static final int ADD_DEADLINE = 5;
     private static final int ADD_EVENT = 6;
 
-    private static final String GREETING_MESSAGE = "Wagwan! I is Ali G. West side.\nWhat is we chattin' bout today?";
-    private static final String GOODBYE_MESSAGE = "Goodbye, big up yourself, keep it real, respekt.";
-    private static final String BORDER_LINE = "___________________________________________________________";
     private static final String LIST_ITEMS_MESSAGE = "Eez are the tings you added to the list";
-    private static final String EXCEED_CAPACITY_MESSAGE = "Maximum capacity reached";
     private static final String ADDED_TO_LIST_MESSAGE = "Wicked. This ting is now on da list.";
-    private static final String SET_TO_DONE_MESSAGE = " set to done. You're well smart innit?";
-    private static final String OUT_OF_BOUNDS_MESSAGE = "You are accessing something that doesn't exist! Stop being an ignoranus.";
-    private static final String WRONG_FORMAT_MESSAGE = "Are you spasticated? The format is wrong!";
     private static final String TOTAL_TASK_MESSAGE = "You is having %d task(s) on your list";
-    private static final String NO_NAME_MESSAGE = "Why you be trying to find something with no name? Ave' you been smoking me special stash?";
     private static final String DELETED_MESSAGE = "This ting has been deleted. I could've done that task, you stupid.";
     private static final String FILEPATH = "tasklogs/tasks.txt";
 
     public static ArrayList<Task> Tasks = new ArrayList<>();
 
-    public static void main(String[] args) {
+    private final Storage storage;
+    private final Ui ui;
+
+    public Duke() {
+        storage = new Storage(FILEPATH);
+        ui = new Ui();
         try {
-            printGreeting();
+            storage.loadFile(Tasks);
+            ui.printGreeting();
             loopCommands();
-            sayGoodbye();
-            saveFile();
+            ui.sayGoodbye();
+            storage.saveFile(Tasks);
         } catch (IOException e) {
             System.out.println("IO error.");
-            e.printStackTrace();
         }
+    }
+    public static void main(String[] args) {
+        new Duke();
     }
     /**
      * Loops through all features available.
      * Returns if user inputs bye.
      */
-    public static void loopCommands() throws IOException {
-        loadFile();
+    public void loopCommands() throws IOException {
         Scanner in = new Scanner(System.in);
         while (in.hasNextLine()) {
             String line = in.nextLine();
@@ -87,11 +86,11 @@ public class Duke {
                     return;
                 }
             } catch (IndexOutOfBoundsException e) {
-                printError(ERR_MAX_CAPACITY);
+                ui.printError(ERR_MAX_CAPACITY);
             } catch (IllegalAccessException e) {
-                printError(ERR_OUT_OF_BOUNDS_MESSAGE);
+                ui.printError(ERR_OUT_OF_BOUNDS_MESSAGE);
             } catch (EmptyNameFieldException e) {
-                printError(ERR_NO_NAME);
+                ui.printError(ERR_NO_NAME);
             }
         }
     }
@@ -126,7 +125,7 @@ public class Duke {
      * @throws IllegalAccessException if index given is out of bounds.
      * @throws EmptyNameFieldException if index is not given.
      */
-    public static void markAsDone(String line) throws IllegalAccessException, EmptyNameFieldException {
+    public void markAsDone(String line) throws IllegalAccessException, EmptyNameFieldException {
         if (line.length() < 6) {
             throw new EmptyNameFieldException();
         }
@@ -136,9 +135,9 @@ public class Duke {
         } else {
             listNum -= 1;
             Tasks.get(listNum).setDone();
-            printMarkedDone(Tasks.get(listNum).getName());
+            ui.printMarkedDone(Tasks.get(listNum).getName());
         }
-        printBorderLine();
+        ui.printBorderLine();
     }
     /**
      * Checks for presence of number on index 5 of input.
@@ -163,7 +162,7 @@ public class Duke {
      *
      * @param line raw input given by user.
      */
-    public static void addItem(String line) {
+    public void addItem(String line) {
         try {
             String prefix = line.split(" ")[0];
             int itemType = getItemType(prefix);
@@ -178,11 +177,11 @@ public class Duke {
             case ADD_EVENT:
                 addEvent(line);
             }
-            printBorderLine();
+            ui.printBorderLine();
         } catch (WrongFormatException e) {
-            printError(ERR_WRONG_FORMAT_MESSAGE);
+            ui.printError(ERR_WRONG_FORMAT_MESSAGE);
         } catch (EmptyNameFieldException e) {
-            printError(ERR_NO_NAME);
+            ui.printError(ERR_NO_NAME);
         }
     }
     /**
@@ -251,13 +250,13 @@ public class Duke {
         }
     }
     /** Lists all items that were added to the list. */
-    public static void listItems() {
+    public void listItems() {
         System.out.println(LIST_ITEMS_MESSAGE);
         for(int i = 0; i < Task.totalNumberOfTasks; i++) {
-            printListItem(i+1, Tasks.get(i).getType(), Tasks.get(i).getStatusIcon(),
+            ui.printListItem(i+1, Tasks.get(i).getType(), Tasks.get(i).getStatusIcon(),
                     Tasks.get(i).getName(), Tasks.get(i).getDate());
         }
-        printBorderLine();
+        ui.printBorderLine();
     }
     /**
      * Deletes item from task list if input format is correct.
@@ -266,7 +265,7 @@ public class Duke {
      * @throws EmptyNameFieldException if index to delete is not given.
      * @throws IllegalAccessException if index is out of bounds.
      */
-    public static void deleteItem(String line) throws EmptyNameFieldException, IllegalAccessException {
+    public void deleteItem(String line) throws EmptyNameFieldException, IllegalAccessException {
         if (line.length() < 8) {
             throw new EmptyNameFieldException();
         }
@@ -278,7 +277,7 @@ public class Duke {
             printDeletedTask(index-1);
             Tasks.remove(index-1);
         }
-        printBorderLine();
+        ui.printBorderLine();
     }
     /**
      * Checks for presence of number on index 7 of input.
@@ -298,26 +297,7 @@ public class Duke {
         }
         return INVALID_INDEX;
     }
-
     //************************************** Methods used to print stuff **********************************************/
-    /** Method used to print each item for "list" command */
-    public static void printListItem(int index, String type, String status, String name, String date) {
-        System.out.println(index + ". " + type + "[" + status + "] " + name + " " + date);
-    }
-    public static void printMarkedDone(String name) {
-        System.out.println(name + SET_TO_DONE_MESSAGE);
-    }
-    public static void printGreeting() {
-        System.out.println(GREETING_MESSAGE);
-        printBorderLine();
-    }
-    public static void printBorderLine() {
-        System.out.println(BORDER_LINE);
-    }
-    public static void sayGoodbye() {
-        System.out.println(GOODBYE_MESSAGE);
-        printBorderLine();
-    }
     /**
      * Prints message for deletion of task
      *
@@ -339,110 +319,5 @@ public class Duke {
     }
     public static void printTotalTasks() {
         System.out.println(String.format(TOTAL_TASK_MESSAGE, Task.totalNumberOfTasks));
-    }
-    /**
-     * Prints appropriate error message according to error type.
-     *
-     * @param type type of error thrown.
-     */
-    public static void printError(int type) {
-        // No fallthrough required
-        switch (type) {
-        case ERR_OUT_OF_BOUNDS_MESSAGE:
-            System.out.println(OUT_OF_BOUNDS_MESSAGE);
-            break;
-        case ERR_WRONG_FORMAT_MESSAGE:
-            System.out.println(WRONG_FORMAT_MESSAGE);
-            break;
-        case ERR_NO_NAME:
-            System.out.println(NO_NAME_MESSAGE);
-            break;
-        case ERR_MAX_CAPACITY:
-            System.out.println(EXCEED_CAPACITY_MESSAGE);
-        }
-        printBorderLine();
-    }
-    //********************************************** Methods for File IO **********************************************/
-    /**
-     * Loads tasks from saved text file. If file does not exist, create a file.
-     *
-     * @throws IOException if there is IO error.
-     */
-    public static void loadFile() throws IOException {
-        File f = new File(FILEPATH);
-        f.getParentFile().mkdirs();
-        f.createNewFile();
-        Scanner s = new Scanner(f);
-        while(s.hasNext()) {
-            Tasks.add(deserializeFile(s.nextLine()));
-            Task.totalNumberOfTasks += 1;
-        }
-    }
-    /**
-     * Converts format of tasks from text file format to program format.
-     *
-     * @param line line from text file.
-     * @return Task in the format of program.
-     */
-    public static Task deserializeFile(String line) {
-        String[] components = line.split(" \\| ");
-        // No fallthrough required
-        switch(components[0]) {
-        case "[T]":
-            Task fileTodo = new Todo(components[2]);
-            if (components[1].equals("1")) {
-                fileTodo.setDone();
-            }
-            return fileTodo;
-        case "[E]":
-            Task fileEvent = new Event(components[2], components[3]);
-            if (components[1].equals("1")) {
-                fileEvent.setDone();
-            }
-            return fileEvent;
-        }
-        // Case where task is deadline
-        Task fileDeadline = new Deadline(components[2], components[3]);
-        if (components[1].equals("1")) {
-            fileDeadline.setDone();
-        }
-        return fileDeadline;
-    }
-    /**
-     * Saves all tasks into file after user inputs "bye"
-     *
-     * @throws IOException if there is IO error.
-     */
-    public static void saveFile() throws IOException {
-        StringBuilder saveText = new StringBuilder();
-        for(Task task: Tasks) {
-            saveText.append(serializeFile(task));
-        }
-        FileWriter w = new FileWriter(FILEPATH);
-        w.write(saveText.toString());
-        w.close();
-    }
-
-    /**
-     * Convert task from program format to text format to prepare for storage.
-     *
-     * @param task task to convert.
-     * @return converted task.
-     */
-    public static String serializeFile(Task task) {
-        String serialized = task.getType();
-        serialized += " | ";
-        if (task.checkDone()) {
-            serialized += "1 | ";
-        } else {
-            serialized += "0 | ";
-        }
-        serialized += task.getName();
-        if (!(task instanceof Todo)) {
-            serialized += " | ";
-        }
-        serialized += task.getTime();
-
-        return serialized + "\n";
     }
 }
