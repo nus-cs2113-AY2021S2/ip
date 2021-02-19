@@ -1,3 +1,5 @@
+package commands;
+
 public class incorrectCommand extends Command{
 
     public final String feedbackToUser;

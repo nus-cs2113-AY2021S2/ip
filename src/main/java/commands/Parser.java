@@ -1,3 +1,7 @@
+package commands;
+
+import duke.IncorrectFormatException;
+
 public class Parser {
     private String input;
 

@@ -1,3 +1,9 @@
+package duke;
+
+import static duke.listTypes.todo;
+import static duke.listTypes.deadline;
+import static duke.listTypes.event;
+
 public class improvedTask extends task {
     private listTypes type;
     private String date;

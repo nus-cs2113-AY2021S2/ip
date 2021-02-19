@@ -1,3 +1,7 @@
+package commands;
+
+import duke.todoList;
+
 public class Command {
 
     protected todoList inputList;

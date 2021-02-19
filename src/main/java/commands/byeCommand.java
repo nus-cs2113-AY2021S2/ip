@@ -1,3 +1,5 @@
+package commands;
+
 public class byeCommand extends Command{
 
     public static final String COMMAND_WORD = "bye";

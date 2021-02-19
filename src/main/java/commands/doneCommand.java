@@ -1,3 +1,7 @@
+package commands;
+
+import duke.IncorrectFormatException;
+
 public class doneCommand extends Command{
     public static final String COMMAND_WORD = "done";
     protected static String num;

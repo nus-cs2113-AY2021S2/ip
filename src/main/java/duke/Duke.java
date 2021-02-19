@@ -1,9 +1,17 @@
+package duke;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+import commands.Command;
+import commands.CommandResult;
+import commands.Parser;
+import commands.byeCommand;
+import commands.listCommand;
+
 
 
 public class Duke {

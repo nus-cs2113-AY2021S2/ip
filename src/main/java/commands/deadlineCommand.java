@@ -1,3 +1,9 @@
+package commands;
+
+import duke.IncorrectFormatException;
+import duke.improvedTask;
+import duke.listTypes;
+
 public class deadlineCommand extends Command{
     public static final String COMMAND_WORD = "deadline";
     protected static improvedTask task;
@@ -14,7 +20,7 @@ public class deadlineCommand extends Command{
     @Override
     public CommandResult execute() {
         inputList.addTask(task);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, task.description));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, task.displayDescription()));
     }
 
 

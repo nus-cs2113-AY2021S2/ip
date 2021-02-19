@@ -1,3 +1,7 @@
+package commands;
+
+import duke.IncorrectFormatException;
+
 public class deleteCommand extends Command{
     public static final String COMMAND_WORD = "delete";
     protected static String num;

@@ -1,3 +1,9 @@
+package commands;
+
+import duke.improvedTask;
+import duke.listTypes;
+import duke.task;
+
 public class todoCommand extends Command{
     public static final String COMMAND_WORD = "todo";
 
@@ -12,7 +18,7 @@ public class todoCommand extends Command{
     @Override
     public CommandResult execute() {
             inputList.addTask(task);
-            return new CommandResult(String.format(MESSAGE_SUCCESS, task.description));
+            return new CommandResult(String.format(MESSAGE_SUCCESS, task.displayDescription()));
     }
 
 

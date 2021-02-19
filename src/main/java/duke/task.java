@@ -1,3 +1,5 @@
+package duke;
+
 public class task {
     protected String description;
     protected boolean resolved;

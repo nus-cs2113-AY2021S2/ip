@@ -1,3 +1,8 @@
+package commands;
+
+import duke.improvedTask;
+import duke.listTypes;
+
 public class eventCommand extends Command{
     public static final String COMMAND_WORD = "event";
     protected static improvedTask task;
@@ -11,7 +16,7 @@ public class eventCommand extends Command{
     @Override
     public CommandResult execute() {
         inputList.addTask(task);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, task.description));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, task.displayDescription()));
     }
 
 }
