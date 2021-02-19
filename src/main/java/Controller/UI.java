@@ -81,6 +81,10 @@ public class UI {
                 }
             }
 
+            else if (in.contains("find")) {
+                dc.findbyDescription(tasks, strings);
+            }
+
             else {
                 dc.printDK(in);
             }
