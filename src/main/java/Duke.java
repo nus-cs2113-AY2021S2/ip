@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class Duke {
     //public static Task[] tasks = new Task[100];
     public static ArrayList<Task> tasks = new ArrayList<>();
+
     public static void main(String[] args) {
 
         String logo = " ____        _        \n"
@@ -47,15 +48,19 @@ public class Duke {
             } else if (command.contains("done")) {
                 taskCompleted(command);
 
+
                 // adds tasks into list
             } else if (command.contains("delete")) {
                 deleteTasks(command);
+
+                // add tasks to list
+
             } else {
                 addTasks(command);
             }
             command = myObj.nextLine();
         }
-        // exit program when input=bye
+        // exit program
         printDash();
         System.out.println("Bye. Hope to see you again soon!");
         printDash();
@@ -94,20 +99,39 @@ public class Duke {
     }
     public static void addTasks(String description) {
         printDash();
-        System.out.println("\tGot it. I've added this task: ");
         if (description.contains("todo")) {
-            description = description.replace("todo", "");
-            description = description.strip();
-            runTodo(description);
+            try {
+                description = description.substring(5);
+                runTodo(description);
+            } catch (StringIndexOutOfBoundsException e) {
+                System.out.println("\tOOPS!!! The description of a todo cannot be empty.");
+                printDash();
+                return;
+            }
         } else if (description.contains("deadline")) {
-            description = description.replace("deadline", "");
-            description = description.strip();
-            runDeadline(description);
+            try {
+                description = description.substring(9);
+                runDeadline(description);
+            } catch (StringIndexOutOfBoundsException e) {
+                System.out.println("\tOOPS!!! The description of a deadline cannot be empty.");
+                printDash();
+                return;
+            }
         } else if (description.contains("event")) {
-            description = description.replace("event", "");
-            description = description.strip();
-            runEvent(description);
+            try {
+                description = description.substring(6);
+                runEvent(description);
+            } catch (StringIndexOutOfBoundsException e) {
+                System.out.println("\tOOPS!!! The description of a event cannot be empty");
+                printDash();
+                return;
+            }
+        } else {
+            System.out.println("\tOOPS!!! I'm sorry, but I don't know what that means :-(");
+            printDash();
+            return;
         }
+        System.out.println("\tGot it. I've added this task: ");
         System.out.println(tasks.get(tasks.size()-1).toString());
         System.out.println("\tNow you have " + tasks.size() + " tasks in the list");
         printDash();
@@ -126,17 +150,31 @@ public class Duke {
     }
 
     public static void taskCompleted(String command) {
+        int count = 0;
         // remove done from string
         command = command.replace("done", " ");
         command = command.strip();
-
-        int count = Integer.parseInt(command);
+        count = Integer.parseInt(command);
         --count; // array starts from 0
         tasks.get(count).markAsDone();
 
-        printDash();
-        System.out.println("\tNice! I've marked this task as done: ");
-        System.out.println(tasks.get(count).toString());
+        try {
+            count = Integer.parseInt(command); // convert string 2 into int 2
+        } catch (NumberFormatException e) {
+            System.out.println("\tOOPS!!! Please indicate task number");
+            printDash();
+            return;
+        }
+        try {
+            --count; // array starts from 0
+            tasks.get(count).markAsDone();
+            System.out.println("\tNice! I've marked this task as done: ");
+            System.out.println(tasks.get(count).toString());
+        } catch (NullPointerException e) {
+            System.out.println("\tOOPS!!! Please enter valid task number");
+            printDash();
+            return;
+        }
         printDash();
     }
 
@@ -169,7 +207,7 @@ public class Duke {
     }
 
     public static void printDash() {
-        System.out.println("-".repeat(50));
+        System.out.println("-".repeat(80));
     }
 
 }

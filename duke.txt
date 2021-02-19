@@ -1,1 +1,1 @@
-T ==> [X] ==> be happy
+T ==> [ ] ==> be happy
