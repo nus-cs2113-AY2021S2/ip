@@ -155,10 +155,9 @@ public class Duke {
 
     private static void exitDuke() throws IOException {
         printLine();
-        String fileName = FILE_PATH_TO_SAVE_TASKS;
         for (Task task : tasksList) {
             try {
-                writeToFile(fileName, task);
+                writeToFile(FILE_PATH_TO_SAVE_TASKS, task);
             } catch (IOException e) {
                 System.out.println("Something went wrong: " + e.getMessage());
             }
