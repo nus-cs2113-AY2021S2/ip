@@ -10,7 +10,7 @@ public class AddDeadlineCommand extends Command {
     private final String input;
 
     public AddDeadlineCommand(String input) {
-        this.input = input;
+        this.input = input.substring(constants.COMMAND_DEADLINE.length());
     }
 
 
@@ -24,7 +24,7 @@ public class AddDeadlineCommand extends Command {
             if (!input.contains(constants.KEYWORD_BY)) {
                 throw new MissingKeywordException();
             }
-            String[] inputSplit = input.substring(constants.COMMAND_DEADLINE.length()).split(constants.KEYWORD_BY);
+            String[] inputSplit = input.split(constants.KEYWORD_BY);
             if (taskManager.getTaskCount() >= constants.MAX_SIZE) {
                 //Array full
                 throw new ListFullException();

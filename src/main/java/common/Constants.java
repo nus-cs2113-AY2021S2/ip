@@ -28,9 +28,19 @@ public class Constants {
             "            oooooooooo           oooooooooo\n";
     public final String KEYWORD_AT = " /at ";
     public final String KEYWORD_BY = " /by ";
+
+
+    //Commands
+    public final String COMMAND_QUIT = "bye";
+    public final String COMMAND_HELP = "help";
+    public final String COMMAND_LIST = "list";
     public final String COMMAND_TODO = "todo ";
     public final String COMMAND_DEADLINE = "deadline ";
     public final String COMMAND_EVENT = "event ";
+    public final String COMMAND_DELETE = "delete ";
+    public final String COMMAND_DONE = "done ";
+    public final String COMMAND_UNDO = "undo ";
+    public final String COMMAND_FIND = "find ";
 
 
     //Messages
@@ -55,6 +65,10 @@ public class Constants {
     public final String MESSAGE_DELETED = LINE + "\nDeleted:";
     public final String MESSAGE_FILE_LOADED = LINE + "\n"
             + "File loaded successfully.\n" + LINE;
+    public final String MESSAGE_FILE_NOT_FOUND = LINE + "\n"
+            + "File not found. New file will be created.\n" + LINE;
+    public final String MESSAGE_TASK_NOT_FOUND = LINE + "\n"
+            + "No task found.\n" + LINE;
 
 
     //Errors
@@ -71,6 +85,5 @@ public class Constants {
             + "8K: Failed to save.\n" + LINE;
     public final String MESSAGE_LOAD_ERROR = LINE + "\n"
             + "8K: Failed to load.\n" + LINE;
-    public final String MESSAGE_FILE_NOT_FOUND = LINE + "\n"
-            + "File not found. New file will be created.\n" + LINE;
+
 }

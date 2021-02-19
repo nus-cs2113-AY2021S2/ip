@@ -11,6 +11,7 @@ list
 undo 2
 list
 done 0
+find app
 delete 1 3
 list
 delete 2

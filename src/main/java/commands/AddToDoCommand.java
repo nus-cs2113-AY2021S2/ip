@@ -5,10 +5,10 @@ import tasks.ToDoTask;
 
 public class AddToDoCommand extends Command {
 
-    private String input;
+    private final String input;
 
     public AddToDoCommand(String input) {
-        this.input = input;
+        this.input = input.substring(constants.COMMAND_TODO.length());
     }
 
 
@@ -22,7 +22,6 @@ public class AddToDoCommand extends Command {
                 //Array full
                 throw new ListFullException();
             }
-            input = input.substring(constants.COMMAND_TODO.length());
             taskManager.addTask(new ToDoTask(input));
             taskManager.setTaskCount(taskManager.getTaskCount()+1);
             printAddedContent(input);

@@ -10,7 +10,7 @@ public class AddEventCommand extends Command {
     private final String input;
 
     public AddEventCommand(String input) {
-        this.input = input;
+        this.input = input.substring(constants.COMMAND_EVENT.length());
     }
 
 
@@ -24,7 +24,7 @@ public class AddEventCommand extends Command {
             if (!input.contains(constants.KEYWORD_AT)) {
                 throw new MissingKeywordException();
             }
-            String[] inputSplit = input.substring(constants.COMMAND_EVENT.length()).split(constants.KEYWORD_AT);
+            String[] inputSplit = input.split(constants.KEYWORD_AT);
             if (taskManager.getTaskCount() >= constants.MAX_SIZE) {
                 //Array full
                 throw new ListFullException();

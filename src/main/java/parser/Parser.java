@@ -24,19 +24,19 @@ public class Parser {
      * @param input Input value by user.
      */
     public void processInput(String input) {
-        if (input.equals("bye")) {
+        if (input.equals(constants.COMMAND_QUIT)) {
             //Ends program
             endProgram();
-        } else if (input.equals("list")) {
+        } else if (input.equals(constants.COMMAND_LIST)) {
             //Shows saved tasks
             new PrintListCommand().execute();
-        } else if (input.equals("help")) {
+        } else if (input.equals(constants.COMMAND_HELP)) {
             //Shows all commands
             System.out.println(constants.MESSAGE_HELP);
-        } else if (input.startsWith("done ")) {
+        } else if (input.startsWith(constants.COMMAND_DONE)) {
             //Marks item as done
             new SetDoneStatusCommand(input, true).execute();
-        } else if (input.startsWith("undo ")) {
+        } else if (input.startsWith(constants.COMMAND_UNDO)) {
             //Marks item as undone
             new SetDoneStatusCommand(input,false).execute();
         } else if (input.startsWith(constants.COMMAND_TODO)) {
@@ -48,9 +48,12 @@ public class Parser {
         } else if (input.startsWith(constants.COMMAND_DEADLINE)) {
             //Adds new DeadlineTask
             new AddDeadlineCommand(input).execute();
-        } else if (input.startsWith("delete ")) {
+        } else if (input.startsWith(constants.COMMAND_DELETE)) {
             //Delete specified tasks
             new DeleteTaskCommand(input).execute();
+        } else if (input.startsWith(constants.COMMAND_FIND)) {
+            //Find tasks matching keyword
+            new FindCommand(input).execute();
         } else {
             //unrecognized command
             printError();
