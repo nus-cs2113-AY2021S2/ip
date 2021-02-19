@@ -1,16 +1,18 @@
+import common.Constants;
+
 public class Parser {
 
     private static final Constants constants = new Constants();
     private static final TaskManager taskManager = new TaskManager();
 
-    private static boolean endProgramNow = false;
+    private static boolean isEndProgram = false;
 
 
     /**
      * Returns end program status.
      */
     public boolean isEndProgramNow() {
-        return endProgramNow;
+        return isEndProgram;
     }
 
 
@@ -35,13 +37,13 @@ public class Parser {
         } else if (input.startsWith("undo ")) {
             //Marks item as undone
             taskManager.setDoneStatus(input,false);
-        } else if (input.startsWith("todo ")) {
+        } else if (input.startsWith(constants.COMMAND_TODO)) {
             //Adds new ToDoTask
             taskManager.addToDo(input);
-        } else if (input.startsWith("event ")) {
+        } else if (input.startsWith(constants.COMMAND_EVENT)) {
             //Adds new EventTask
             taskManager.addEvent(input);
-        } else if (input.startsWith("deadline ")) {
+        } else if (input.startsWith(constants.COMMAND_DEADLINE)) {
             //Adds new DeadlineTask
             taskManager.addDeadline(input);
         } else if (input.startsWith("delete ")) {
@@ -59,7 +61,7 @@ public class Parser {
      */
     private void endProgram() {
         System.out.println(constants.MESSAGE_BYE);
-        endProgramNow = true;
+        isEndProgram = true;
     }
 
 

@@ -1,3 +1,4 @@
+import common.Constants;
 import errors.DescriptionSplitException;
 import errors.ListFullException;
 import errors.MissingKeywordException;
@@ -55,7 +56,7 @@ public class TaskManager {
                 //Array full
                 throw new ListFullException();
             }
-            input = input.substring(constants.LENGTH_OF_WORD_TODO + 1);
+            input = input.substring(constants.COMMAND_TODO.length());
             tasks.add(new ToDoTask(input));
             taskCount++;
             printAddedContent(input);
@@ -74,14 +75,14 @@ public class TaskManager {
      */
     public void addEvent(String input) {
         try {
-            if (!input.contains(" /at ")) {
+            if (!input.contains(constants.KEYWORD_AT)) {
                 throw new MissingKeywordException();
             }
-            String[] inputSplit = input.substring(constants.LENGTH_OF_WORD_EVENT + 1).split(" /at ");
+            String[] inputSplit = input.substring(constants.COMMAND_EVENT.length()).split(constants.KEYWORD_AT);
             if (taskCount >= constants.MAX_SIZE) {
                 //Array full
                 throw new ListFullException();
-            } else if (inputSplit.length < 2) {
+            } else if (inputSplit.length < constants.MIN_SPLIT_SUCCESS_COUNT) {
                 //Invalid input
                 throw new DescriptionSplitException();
             }
@@ -107,14 +108,14 @@ public class TaskManager {
      */
     public void addDeadline(String input) {
         try {
-            if (!input.contains(" /by ")) {
+            if (!input.contains(constants.KEYWORD_BY)) {
                 throw new MissingKeywordException();
             }
-            String[] inputSplit = input.substring(constants.LENGTH_OF_WORD_DEADLINE + 1).split(" /by ");
+            String[] inputSplit = input.substring(constants.COMMAND_DEADLINE.length()).split(constants.KEYWORD_BY);
             if (taskCount >= constants.MAX_SIZE) {
                 //Array full
                 throw new ListFullException();
-            } else if (inputSplit.length < 2) {
+            } else if (inputSplit.length < constants.MIN_SPLIT_SUCCESS_COUNT) {
                 //Invalid input
                 throw new DescriptionSplitException();
             }
@@ -140,7 +141,7 @@ public class TaskManager {
     public void deleteTasks(String input) {
         try {
             String[] indices = input.split(" ");
-            if (indices.length < 2) {
+            if (indices.length < constants.MIN_SPLIT_SUCCESS_COUNT) {
                 throw new DescriptionSplitException();
             }
             TreeSet<Integer> validIndices = new TreeSet<>();

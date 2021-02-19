@@ -1,11 +1,11 @@
+package common;
+
 public class Constants {
 
     //Values
     public final int MAX_SIZE = 100;
-    public final int LENGTH_OF_WORD_EVENT = 5;
-    public final int LENGTH_OF_WORD_DEADLINE = 8;
-    public final int LENGTH_OF_WORD_TODO = 4;
     public final int INVALID_INDEX = -1;
+    public final int MIN_SPLIT_SUCCESS_COUNT = 2;
 
 
     //Miscellaneous Strings
@@ -26,6 +26,11 @@ public class Constants {
             "        ooooo        ooooo   ooooo        ooooo\n" +
             "         oooooooooooooooo     oooooooooooooooo\n" +
             "            oooooooooo           oooooooooo\n";
+    public final String KEYWORD_AT = " /at ";
+    public final String KEYWORD_BY = " /by ";
+    public final String COMMAND_TODO = "todo ";
+    public final String COMMAND_DEADLINE = "deadline ";
+    public final String COMMAND_EVENT = "event ";
 
 
     //Messages

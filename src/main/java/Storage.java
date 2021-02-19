@@ -1,3 +1,5 @@
+import common.Constants;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -41,13 +43,13 @@ public class Storage {
         try {
             while (scanner.hasNext()) {
                 String input = scanner.nextLine();
-                if (input.startsWith("todo ")) {
+                if (input.startsWith(constants.COMMAND_TODO)) {
                     //Adds new ToDoTask
                     taskManager.addToDo(input);
-                } else if (input.startsWith("event ")) {
+                } else if (input.startsWith(constants.COMMAND_EVENT)) {
                     //Adds new EventTask
                     taskManager.addEvent(input);
-                } else if (input.startsWith("deadline ")) {
+                } else if (input.startsWith(constants.COMMAND_DEADLINE)) {
                     //Adds new DeadlineTask
                     taskManager.addDeadline(input);
                 }
