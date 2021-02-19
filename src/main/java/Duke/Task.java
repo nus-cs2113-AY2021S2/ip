@@ -71,25 +71,26 @@ public class Task {
         return this.description;
     }
 
-    public String getSeperator() {
-        if (this.taskType.equalsIgnoreCase("event")) {
-            return "/at";
-        } else if (this.taskType.equals("deadline")) {
-            return "/by";
-        } else {
-            return null;
-        }
-    }
 
     public String getDescriptionWithoutBrackets() {
         if (this.taskType.equalsIgnoreCase("deadline")) {
             String descriptionCleaned = this.description.replaceAll("\\(", "/");
             String descriptionCleaned2 = descriptionCleaned.replaceAll(":", "");
-            return descriptionCleaned2.substring(0, descriptionCleaned2.length() - 1);
+            String descriptionCleaned3 = descriptionCleaned2.replaceAll("   ", " ");
+            String output =  descriptionCleaned3.substring(0, descriptionCleaned3.length() - 1);
+            System.out.println(descriptionCleaned);
+            System.out.println(descriptionCleaned2);
+            System.out.println(output);
+            return output;
         } else if (this.taskType.equalsIgnoreCase("event")) {
             String descriptionCleaned = this.description.replaceAll("\\(", "/");
             String descriptionCleaned2 = descriptionCleaned.replaceAll(":", "");
-            return descriptionCleaned2.substring(0, descriptionCleaned2.length() - 1);
+            String descriptionCleaned3 = descriptionCleaned2.replaceAll("   ", "");
+            String output =  descriptionCleaned3.substring(0, descriptionCleaned3.length() - 1);
+            System.out.println(descriptionCleaned);
+            System.out.println(descriptionCleaned2);
+            System.out.println(output);
+            return output;
         } else {
             return this.description;
         }

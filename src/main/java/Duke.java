@@ -14,6 +14,7 @@ public class Duke {
     public static final String FILE_PATH_TO_SAVE_TASKS = "duke.txt";
 
     public static void main(String[] args) {
+        initializeData();
         sendWelcomeMessage();
         printLine();
         while(true) {
@@ -127,6 +128,11 @@ public class Duke {
         notifyUser(newTask);
     }
 
+    private static void processSavedData(String userCommand, String inputDetails) {
+        Task newTask = new Task(inputDetails, userCommand);
+        tasksList.add(newTask);
+    }
+
     private static void notifyUser(Task selectedTask) {
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + selectedTask.getTaskType() + selectedTask.getStatusIcon() + " " + selectedTask.getDescription());
@@ -163,6 +169,10 @@ public class Duke {
 
     private static String[] getUserInput() {
         String userInput = scanner.nextLine();
+        return splitInputIntoString(userInput);
+    }
+
+    private static String[] splitInputIntoString(String userInput) {
         String[] listOfInputs = userInput.split(" ", 2);
         if (listOfInputs.length == 1) {
             listOfInputs = new String[]{userInput, "filler"};
@@ -202,6 +212,25 @@ public class Duke {
             fw.write(taskType + ' ' + description + "\n");
         }
         fw.close();
+    }
+
+    private static void initializeData() {
+        File f = new File(FILE_PATH_TO_SAVE_TASKS);
+        System.out.println("Initializing data");
+        try {
+            Scanner s = new Scanner(f);
+            while(s.hasNext()) {
+                String[] listOfDataFromFile = splitInputIntoString(s.nextLine());
+                String userCommand = listOfDataFromFile[0];
+                String inputDetails = listOfDataFromFile[1];
+                processSavedData(userCommand, inputDetails);
+                System.out.println(userCommand);
+                System.out.println(inputDetails);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
     }
 
 
