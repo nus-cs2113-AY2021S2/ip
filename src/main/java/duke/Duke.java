@@ -5,7 +5,7 @@ import duke.viewmodel.Logic;
 public class Duke {
 
     /**
-     * Main function of Duke version 0.1. 
+     * Main function of Duke version 0.1.0. 
      */
     public static void main(String[] args) {
         Logic logic = Logic.getInstance();
