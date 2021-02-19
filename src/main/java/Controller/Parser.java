@@ -1,16 +1,23 @@
-package Controller;
+package controller;
 
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.LocalDate;
 
+/**
+ * Parser class that parses the string input by the user.
+ */
 public class Parser {
 
-    public String[] processInput(String in) {
+    /**
+     * Method that parses string input by user to separate them into different substrings.
+     * @param input String input by user.
+     * @return Substrings of string input.
+     */
+    public String[] processInput(String input) {
         String[] strings = new String[2];
-        int index = in.indexOf(" ");
-        String subString1 = in.substring(index+1);
+        int index = input.indexOf(" ");
+        String subString1 = input.substring(index+1);
         if (!subString1.contains("/")) {
             strings[0] = subString1;
             return strings;
@@ -27,6 +34,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Method that parses string input to LocalDate.
+     * @param strings String input by user.
+     * @return LocalDate.
+     * @throws DateTimeParseException
+     */
     public LocalDate processString(String[] strings) throws DateTimeParseException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate datetime = LocalDate.parse(strings[0], formatter);
@@ -34,17 +47,22 @@ public class Parser {
     }
 
 
-    public int charNumber(String in) {
+    /**
+     * Return integer from 1-99 by parsing through string input by user.
+     * @param input String input by user.
+     * @return integer from 1-99.
+     */
+    public int charNumber(String input) {
         char ch1, ch2;
-        for (int i = 0; i <in.length(); i++){
-            ch1 = in.charAt(i);
+        for (int i = 0; i < input.length(); i++){
+            ch1 = input.charAt(i);
             int index = i;
-            if (++index == in.length()){
+            if (++index == input.length()){
                 if(Character.isDigit(ch1)) {
                     return Character.getNumericValue(ch1);
                 }
             }
-            ch2 = in.charAt(index);
+            ch2 = input.charAt(index);
             if(Character.isDigit(ch1)&&Character.isDigit(ch2)) {
                 return Character.getNumericValue(ch1)*10 + Character.getNumericValue(ch2);
             }

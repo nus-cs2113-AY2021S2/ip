@@ -1,13 +1,15 @@
-package Controller;
+package controller;
 
-import Tasks.Task;
+import tasks.Task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.time.LocalDateTime;
 
+/**
+ * UI class deals with the user interface with the user.
+ */
 public class UI {
 
     private DukeController dc = new DukeController();
@@ -16,6 +18,9 @@ public class UI {
 
     public UI() {};
 
+    /**
+     * Welcome Message.
+     */
     public void welcomeMessage() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -28,49 +33,52 @@ public class UI {
         System.out.println("--------------------------------------------");
     }
 
+    /**
+     * Schedule Timetabling.
+     * @param tasks Task list.
+     */
     public void scheduleTimetable(ArrayList<Task> tasks) {
         Scanner sc = new Scanner(System.in);
-        String in = sc.nextLine();
+        String input = sc.nextLine();
         String[] strings = new String[3];
-        strings = parse.processInput(in);
+        strings = parse.processInput(input);
         int count1 = tasks.size();
         do {
-            if (in.equals("list")) {
+            if (input.equals("list")) {
                 dc.printList(tasks);
             }
 
-            else if (in.contains("delete")) {
-                dc.deleteTask(tasks, in);
+            else if (input.contains("delete")) {
+                dc.deleteTask(tasks, input);
             }
 
-            else if (in.contains("done")) {
-                dc.printDone(tasks, in);
+            else if (input.contains("done")) {
+                dc.printDone(tasks, input);
             }
 
-            else if (in.contains("todo")) {
-                if (!dc.printTodo(tasks, in, strings, count1)) {
+            else if (input.contains("todo")) {
+                if (!dc.printTodo(tasks, input, strings, count1)) {
                     count1++;
                 }
             }
 
-            else if (in.contains("deadline")) {
-                if (!dc.printDeadline(tasks, in, strings, count1)) {
+            else if (input.contains("deadline")) {
+                if (!dc.printDeadline(tasks, input, strings, count1)) {
                     count1++;
                 }
             }
 
-            else if (in.contains("event")) {
-                //dc.printEvent(tasks, in, strings, count1);
-                if (!dc.printEvent(tasks, in, strings, count1)) {
+            else if (input.contains("event")) {
+                if (!dc.printEvent(tasks, input, strings, count1)) {
                     count1++;
                 }
             }
 
-            else if (in.contains("save")) {
+            else if (input.contains("save")) {
                 store.saveOutput(tasks);
             }
 
-            else if (in.contains("date")) {
+            else if (input.contains("date")) {
                 try {
                     LocalDate date = parse.processString(strings);
                     dc.findbyDate(tasks, date);
@@ -81,17 +89,17 @@ public class UI {
                 }
             }
 
-            else if (in.contains("find")) {
+            else if (input.contains("find")) {
                 dc.findbyDescription(tasks, strings);
             }
 
             else {
-                dc.printDK(in);
+                dc.printUnidentified(input);
             }
-            in = sc.nextLine();
-            strings = parse.processInput(in);
+            input = sc.nextLine();
+            strings = parse.processInput(input);
 
-        } while (!in.equals("bye"));
+        } while (!input.equals("bye"));
 
         System.out.println("--------------------------------------------");
         System.out.println("Bye. Hope to see you again soon!");

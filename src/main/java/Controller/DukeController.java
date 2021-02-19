@@ -1,15 +1,26 @@
-package Controller;
-import Tasks.*;
+package controller;
 
-import java.time.format.DateTimeFormatter;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.ToDo;
+
 import java.time.format.DateTimeParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * Controller class that contains all methods involving adding, deleting, marking as done, find, save and load.
+ */
 public class DukeController {
     private Parser parse = new Parser();
     public DukeController() {};
 
+    /**
+     * printTask prints the task description as well as the total number of tasks.
+     * @param tasks task list.
+     * @param count task specified index.
+     */
     public void printTask(ArrayList<Task> tasks, int count) {
         System.out.println("--------------------------------------------");
         System.out.println("Got it. I've added this task: ");
@@ -18,6 +29,10 @@ public class DukeController {
         System.out.println("--------------------------------------------");
     }
 
+    /**
+     * Prints all the tasks in the task list.
+     * @param tasks task list.
+     */
     public void printList(ArrayList<Task> tasks) {
         int count = 1;
         System.out.println("--------------------------------------------");
@@ -29,12 +44,17 @@ public class DukeController {
         System.out.println("--------------------------------------------");
     }
 
-    public void printDone(ArrayList<Task> tasks, String in) {
+    /**
+     * Mark a task as done base on index.
+     * @param tasks task list.
+     * @param input string input by user.
+     */
+    public void printDone(ArrayList<Task> tasks, String input) {
         int numerate;
-        numerate = parse.charNumber(in);
+        numerate = parse.charNumber(input);
         try {
             if (numerate > tasks.size() || numerate == 0) {
-                throw new NullPointerException("There is no such event in your list");
+                throw new NullPointerException("There is no such event input your list");
             }
             System.out.println("--------------------------------------------");
             tasks.get(numerate-1).markAsDone();
@@ -47,73 +67,101 @@ public class DukeController {
         }
     }
 
-    public boolean printTodo(ArrayList<Task> tasks, String in, String[] strings, int count1) {
-        boolean Error = false;
+    /**
+     * Adds a todo task in the list and prints the task description out.
+     * @param tasks task list.
+     * @param input String input by user.
+     * @param strings Substrings of string input by user.
+     * @param count1 Specified Index.
+     * @return True if error is found.
+     */
+    public boolean printTodo(ArrayList<Task> tasks, String input, String[] strings, int count1) {
+        boolean foundError = false;
         try{
-            if (in.trim().equals("todo") ) {
+            if (input.trim().equals("todo") ) {
                 throw new DukeException("todo");
             }
             Task task = new ToDo(strings[0]);
             tasks.add(task);
             printTask(tasks, count1);
-            return Error;
+            return foundError;
         }
         catch(DukeException e) {
             System.out.println(e.getMessage());
             System.out.println("--------------------------------------------");
-            return Error = true;
+            return foundError = true;
         }
     }
 
-    public boolean printDeadline(ArrayList<Task> tasks, String in, String[] strings, int count1) {
-        boolean Error = false;
+    /**
+     * Adds a Deadline task in the list and prints the task description out.
+     * @param tasks task list.
+     * @param input String input by user.
+     * @param strings Substrings of string input by user.
+     * @param count1 Specified Index.
+     * @return True if error is found.
+     */
+    public boolean printDeadline(ArrayList<Task> tasks, String input, String[] strings, int count1) {
+        boolean foundError = false;
         try{
-            if (in.trim().equals("deadline")) {
+            if (input.trim().equals("deadline")) {
                 throw new DukeException("deadline");
             }
             Task task = new Deadline(strings[0], strings[1]);
             tasks.add(task);
             printTask(tasks, count1);
-            return Error;
+            return foundError;
         }
         catch (DukeException e) {
             System.out.println(e.getMessage());
             System.out.println("--------------------------------------------");
-            return Error = true;
+            return foundError = true;
         }
         catch (DateTimeParseException e) {
-            System.out.println("Please key in within specified format yyyy-MM-dd HH:mm");
+            System.out.println("Please key input within specified format yyyy-MM-dd HH:mm");
             System.out.println("--------------------------------------------");
-            return Error = true;
+            return foundError = true;
         }
     }
 
-    public boolean printEvent(ArrayList<Task> tasks, String in, String[] strings, int count1) {
-        boolean Error = false;
+    /**
+     * Adds a Event task in the list and prints the task description out.
+     * @param tasks task list.
+     * @param input String input by user.
+     * @param strings Substrings of string input by user.
+     * @param count1 Specified Index.
+     * @return True if error is found.
+     */
+    public boolean printEvent(ArrayList<Task> tasks, String input, String[] strings, int count1) {
+        boolean foundError = false;
         try{
-            if (in.trim().equals("event")) {
+            if (input.trim().equals("event")) {
                 throw new DukeException("event");
             }
             Task task = new Event(strings[0], strings[1]);
             tasks.add(task);
             printTask(tasks, count1);
-            return Error;
+            return foundError;
         }
         catch (DukeException e) {
             System.out.println(e.getMessage());
             System.out.println("--------------------------------------------");
-            return Error = true;
+            return foundError = true;
         }
         catch (DateTimeParseException e) {
-            System.out.println("Please key in within specified format yyyy-MM-dd HH:mm");
+            System.out.println("Please key input within specified format yyyy-MM-dd HH:mm");
             System.out.println("--------------------------------------------");
-            return Error = true;
+            return foundError = true;
         }
     }
 
-    public void printDK(String in) {
+    /**
+     * Print error message if user did not call any method.
+     * @param input String input by user.
+     */
+    public void printUnidentified(String input) {
         try {
-            if (!in.contains("deadline") || !in.contains("event") || !in.contains("todo")) {
+            if (!input.contains("deadline") || !input.contains("event") || !input.contains("todo")) {
                 throw new DukeException();
             }
         }
@@ -123,18 +171,23 @@ public class DukeController {
         }
     }
 
-    public void deleteTask(ArrayList<Task> tasks, String in){
+    /**
+     * Delete task base on index.
+     * @param tasks Task list.
+     * @param input String input by user.
+     */
+    public void deleteTask(ArrayList<Task> tasks, String input){
         int numerate;
-        numerate = parse.charNumber(in);
+        numerate = parse.charNumber(input);
         try {
             if (numerate > tasks.size() || numerate == 0) {
-                throw new NullPointerException("There is no such event in your list");
+                throw new NullPointerException("There is no such event input your list");
             }
             System.out.println("--------------------------------------------");
             System.out.println("Noted. I've removed this task: ");
             System.out.println(tasks.get(numerate-1).getPrintedLine());
             tasks.remove(numerate-1);
-            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            System.out.println("Now you have " + tasks.size() + " tasks input the list.");
             System.out.println("--------------------------------------------");
 
         }
@@ -144,21 +197,21 @@ public class DukeController {
         }
     }
 
+    /**
+     * Find all task that is due by a specific date.
+     * @param tasks Task list.
+     * @param date Date input by user.
+     */
     public void findbyDate(ArrayList<Task> tasks, LocalDate date) {
         boolean found = false;
         for (Task task : tasks) {
-            if (task instanceof Deadline) {
-
-                if (((Deadline) task).getDatetime().toLocalDate().isEqual(date)) {
-                    found = true;
-                    System.out.println(((Deadline) task).getPrintedLine());
-                }
+            if (task instanceof Deadline && ((Deadline) task).getDatetime().toLocalDate().isEqual(date)) {
+                found = true;
+                System.out.println(((Deadline) task).getPrintedLine());
             }
-            else if (task instanceof Event) {
-                if (((Event) task).getDatetime().toLocalDate().isEqual(date)) {
-                    found = true;
-                    System.out.println(((Event) task).getPrintedLine());
-                }
+            else if (task instanceof Event && ((Event) task).getDatetime().toLocalDate().isEqual(date)) {
+                found = true;
+                System.out.println(((Event) task).getPrintedLine());
             }
         }
         System.out.println("--------------------------------------------");
@@ -168,6 +221,11 @@ public class DukeController {
         }
     }
 
+    /**
+     * Find all task by searching for a keyword.
+     * @param tasks Task list.
+     * @param strings String input by user.
+     */
     public void findbyDescription(ArrayList<Task> tasks, String[] strings) {
         boolean found = false;
         for (Task task : tasks) {
