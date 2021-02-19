@@ -33,15 +33,14 @@ public class Duke {
                 Task taskDone = tasks.get(taskNo-1);
                 taskDone.markAsDone();
                 System.out.println("     Nice! I've marked this task as done:");
-                System.out.println("      [" + taskDone.getStatusIcon() + "] " +
-                        taskDone.getDescription());
+                System.out.println("       " + taskDone.getDescription());
                 tasks.set(taskNo-1, taskDone);
             } else {
                 throw new EmptyDescription("done");
             }
             break;
         case "todo":
-            if(subStrings.length > 2){
+            if(subStrings.length > 1){
                 description = command.substring(5);
                 Todo todo = new Todo(description);
                 tasks.add(todo);
@@ -70,6 +69,16 @@ public class Duke {
                 addMessage(event,tasks.size());
             } else {
                 throw new EmptyDescription("event");
+            }
+            break;
+        case "delete":
+            if(subStrings.length > 1){
+                int taskNo = Integer.parseInt(subStrings[1]);
+                Task taskDelete = tasks.get(taskNo-1);
+                System.out.println("     Noted. I've removed this task:");
+                System.out.println("       " + taskDelete.getDescription());
+                tasks.remove(taskNo-1);
+                System.out.println("     Now you have " + tasks.size() + " tasks in this list.");
             }
             break;
         default:
