@@ -1,11 +1,13 @@
 package duke.main;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
 import duke.exceptions.*;
 import duke.items.*;
 
+import static duke.main.Utils.createFile;
 import static duke.main.Utils.loadFile;
 
 public class Duke {
@@ -16,8 +18,8 @@ public class Duke {
         Utils.printLine();
         try {
             loadFile();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            createFile();
         }
         Scanner in = new Scanner(System.in);
         while (true) {
