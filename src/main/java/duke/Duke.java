@@ -120,6 +120,8 @@ public class Duke {
                     System.out.print(lineParts[1] + " is not a valid number.\n");
                 } catch (DukeException e) {
                     System.out.print("That is not a valid task index, please try again.\n");
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.print("That is not a valid command. Please enter a number after the word.\n");
                 }
                 break;
             case "todo":
@@ -174,7 +176,7 @@ public class Duke {
         try {
             File f = new File(path.toString());
             if (f.createNewFile()) {
-                System.out.println("File created: " + f.getName());
+                System.out.println("File created: " + path.toAbsolutePath());
             } else {
                 System.out.println("File already exists.\nLoading...");
                 Scanner s = new Scanner(f); // create a Scanner using the File as the source
@@ -241,7 +243,7 @@ public class Duke {
         listMode();
         try {
             writeToFile(path);
-            System.out.print("File saved successfully.\n");
+            System.out.print("File saved successfully at " + path.toAbsolutePath() + "\n");
         } catch (IOException e) {
             System.out.print("Something went wrong: " + e.getMessage() + "\n");
         }
