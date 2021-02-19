@@ -1,3 +1,5 @@
+package Duke;
+
 public class EmptyDescription extends Exception{
     String task;
     public EmptyDescription(String task){
