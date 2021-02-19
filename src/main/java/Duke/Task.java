@@ -9,21 +9,47 @@ public class Task {
         if (taskType.equalsIgnoreCase("event")) {
             String[] listOfInputs = description.split("/at",2);
             description = listOfInputs[0] + " (at:" + listOfInputs[1] + ")";
+            this.isDone = false;
+            this.taskType = taskType;
         }
-        if (taskType.equalsIgnoreCase("deadline")) {
+        else if (taskType.equalsIgnoreCase("deadline")) {
             String[] listOfInputs = description.split("/by",2);
             description = listOfInputs[0] + " (by:" + listOfInputs[1] + ")";
+            this.isDone = false;
+            this.taskType = taskType;
+        }
+        else {
+            String removeDone = taskType.substring(0, taskType.length() - 4);
+            if (taskType.equalsIgnoreCase("deadlinedone")) {
+                String[] listOfInputs = description.split("/by",2);
+                description = listOfInputs[0] + " (by:" + listOfInputs[1] + ")";
+                this.isDone = true;
+                this.taskType = removeDone;
+            }
+            else if (taskType.equalsIgnoreCase("eventdone")) {
+                String[] listOfInputs = description.split("/by",2);
+                description = listOfInputs[0] + " (by:" + listOfInputs[1] + ")";
+                this.isDone = true;
+                this.taskType = removeDone;
+            }
+            else if (taskType.equalsIgnoreCase("tododone")) {
+                String[] listOfInputs = description.split("/by",2);
+                description = listOfInputs[0] + " (by:" + listOfInputs[1] + ")";
+                this.isDone = true;
+                this.taskType = removeDone;
+            } else {
+                this.isDone = false;
+                this.taskType = taskType;
+            }
         }
         this.description = description;
-        this.isDone = false;
-        this.taskType = taskType;
     }
 
     public String getStatusIcon() {
         return (isDone ? "[X]" : "[ ]");
     }
 
-    public String getStatusInWords() { return String.valueOf(this.isDone);}
+    public Boolean getStatusInWords() { return this.isDone;}
 
     public void markAsDone() {
         this.isDone = true;

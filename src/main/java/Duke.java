@@ -194,10 +194,13 @@ public class Duke {
     private static void writeToFile(String filePath, Task tasks) throws IOException {
         FileWriter fw = new FileWriter(filePath, true);
         String description = tasks.getDescriptionWithoutBrackets();
-        String status = tasks.getStatusInWords();
         String taskType = tasks.getTaskTypeInWords();
-        fw.write(taskType + " " + description + " /status " + status + "\n");
-        System.out.println(description +"\n");
+        Boolean status = tasks.getStatusInWords();
+        if (status) {
+            fw.write(taskType + "done " + description + "\n");
+        } else {
+            fw.write(taskType + ' ' + description + "\n");
+        }
         fw.close();
     }
 
