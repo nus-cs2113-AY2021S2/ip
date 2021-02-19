@@ -14,6 +14,7 @@ public class Duke {
     public static final String FILE_PATH_TO_SAVE_TASKS = "duke.txt";
 
     public static void main(String[] args) {
+        createFileIfThereIsNone();
         initializeData();
         sendWelcomeMessage();
         printLine();
@@ -82,15 +83,17 @@ public class Duke {
         System.out.println("What can I do for you?");
     }
 
-    private static void createNewFile() {
+    private static void createFileIfThereIsNone() {
         File fForCheck = new File(FILE_PATH_TO_SAVE_TASKS);
         if (!fForCheck.exists()) {
             createNewFile(fForCheck);
-        } else {
-            FileWriter fw = null;
-            fw = createFileWriterObject(null);
-            writeEmptyStringToFile(fw);
         }
+    }
+
+    private static void emptyFileAfterInitializing() {
+        FileWriter fw = null;
+        fw = createFileWriterObject(null);
+        writeEmptyStringToFile(fw);
     }
 
 
@@ -230,7 +233,7 @@ public class Duke {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
+        emptyFileAfterInitializing();
     }
 
 
