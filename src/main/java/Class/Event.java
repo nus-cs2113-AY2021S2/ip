@@ -1,4 +1,4 @@
-package Duke;
+package Class;
 
 public class Event extends Task {
     protected String at;

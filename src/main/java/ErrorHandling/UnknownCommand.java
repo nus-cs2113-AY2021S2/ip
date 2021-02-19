@@ -1,4 +1,4 @@
-package Duke;
+package ErrorHandling;
 
 public class UnknownCommand extends Exception{
     public UnknownCommand(){

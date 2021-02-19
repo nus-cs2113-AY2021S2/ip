@@ -1,4 +1,4 @@
-package Duke;
+package Class;
 
 public class Todo extends Task {
     public Todo(String description) {

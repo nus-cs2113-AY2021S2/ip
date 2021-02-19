@@ -1,14 +1,15 @@
-package Duke;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Vector;
 
+import Class.*;
+import ErrorHandling.*;
+
 public class Duke {
     public static String lineDivider = "    --------------------------------------------------------------------------";
 
-    public static void addMessage(Task task,int size){
+    public static void addMessage(Task task, int size){
         System.out.println("     Got it. I've added this task:");
         System.out.println("     " + task.getDescription());
         System.out.println("     Now you have " + size + " tasks in this list.");
@@ -33,7 +34,7 @@ public class Duke {
                 taskDone.markAsDone();
                 System.out.println("     Nice! I've marked this task as done:");
                 System.out.println("      [" + taskDone.getStatusIcon() + "] " +
-                        taskDone.description);
+                        taskDone.getDescription());
                 tasks.set(taskNo-1, taskDone);
             } else {
                 throw new EmptyDescription("done");

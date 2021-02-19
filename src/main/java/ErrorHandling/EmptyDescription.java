@@ -1,4 +1,4 @@
-package Duke;
+package ErrorHandling;
 
 public class EmptyDescription extends Exception{
     String task;
