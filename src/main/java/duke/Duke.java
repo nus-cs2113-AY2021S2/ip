@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents a Personal Assistant Chatbot that helps a person to keep track of various things.
+ */
 public class Duke {
     private static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -72,6 +75,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Delete a task stored in Duke.
+     *
+     * @param line Command input from the user.
+     */
     private static void deleteTask(String line) {
         String[] words = line.split(" ", 2);
         int deleteIndex = Integer.parseInt(words[1]);
@@ -81,6 +89,11 @@ public class Duke {
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
     }
 
+    /**
+     * Add an event to Duke.
+     *
+     * @param line Command input from the user.
+     */
     private static void addEvent(String line) {
         String[] words = line.split(" ", 2);
         String detailWords = words[1];
@@ -93,6 +106,11 @@ public class Duke {
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
     }
 
+    /**
+     * Add a deadline to Duke.
+     *
+     * @param line Command input from the user.
+     */
     private static void addDeadline(String line) {
         String[] words = line.split(" ", 2);
         String detailWords = words[1];
@@ -105,6 +123,11 @@ public class Duke {
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
     }
 
+    /**
+     * Add a todo task to Duke.
+     *
+     * @param line Command input from the user.
+     */
     private static void addTodo(String line) {
         String[] words = line.split(" ", 2);
         String taskDescription = words[1];
@@ -114,6 +137,11 @@ public class Duke {
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
     }
 
+    /**
+     * Mark the status of a task in Duke as done.
+     *
+     * @param line Command input from the user.
+     */
     private static void markDone(String line) {
         String[] words = line.split(" ", 2);
         int doneIndex = Integer.parseInt(words[1]);
@@ -123,6 +151,9 @@ public class Duke {
         System.out.println(doneTask.toString());
     }
 
+    /**
+     * List all the tasks store in Duke.
+     */
     private static void printList() {
         System.out.println("Here are the tasks in your list: ");
         int index = 0;
@@ -146,6 +177,12 @@ public class Duke {
                 "____________________________________________________________\n");
     }
 
+    /**
+     * Load the tasks from the hard disk when Duke starts up.
+     *
+     * @throws IOException
+     * If there is a failure during reading, writing and searching file or directory operations.
+     */
     private static void loadTasks() throws IOException {
         File file = new File("data/duke.txt");
         file.getParentFile().mkdir();
@@ -156,6 +193,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Load the data from the hard disk and store them as tasks in Duke.
+     *
+     * @param nextLine Data from the file.
+     */
     private static void loadData(String nextLine) {
         String[] commandWords = nextLine.split("\\|");
         String commandType = commandWords[0];
@@ -188,6 +230,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Save the tasks in the hard disk automatically whenever the task list changes.
+     *
+     * @throws IOException
+     * If there is a failure during reading, writing and searching file or directory operations.
+     */
     private static void saveTasks() throws IOException {
         int index = 0;
         FileWriter fileWriter = new FileWriter("data/duke.txt");
