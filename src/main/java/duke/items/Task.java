@@ -10,7 +10,7 @@ public class Task {
     protected static ArrayList<Task> list = new ArrayList<Task>();
 
 
-    public static Task[] getList(){
+    public static ArrayList getList(){
         return list;
     }
     public static int getNumOfTasks() {
