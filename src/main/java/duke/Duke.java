@@ -195,7 +195,7 @@ public class Duke {
                 tasks.add(t);
                 System.out.println("\tGot it. I've added this task:");
                 System.out.println("\t   [" + t.getType() + "][" + t.getStatusIcon() + "] "
-                        + t.getDescription() + " " + t.getDate());
+                        + t.getDescription() + " " + t.printDate());
                 System.out.println("\tNow you have " + Integer.toString(tasks.size()) + " tasks in the list.");
             }
             catch (ArrayIndexOutOfBoundsException e) {
@@ -218,7 +218,7 @@ public class Duke {
                 tasks.add(t);
                 System.out.println("\tGot it. I've added this task:");
                 System.out.println("\t   [" + t.getType() + "][" + t.getStatusIcon() + "] "
-                        + t.getDescription() + " " + t.getDate());
+                        + t.getDescription() + " " + t.printDate());
                 System.out.println("\tNow you have " + Integer.toString(tasks.size()) + " tasks in the list.");
             }
             catch (ArrayIndexOutOfBoundsException e) {
@@ -267,7 +267,7 @@ public class Duke {
                 System.out.println("\tNoted. I've removed this task:");
                 Task currentTask = tasks.get(itemIndex);
                 System.out.println("\t  [" + currentTask.getType() + "][" + currentTask.getStatusIcon() + "] "
-                        + currentTask.getDescription());
+                        + currentTask.getDescription() + ((currentTask.hasDate()) ? " " + currentTask.printDate() : ""));
                 tasks.remove(itemIndex);
                 if (tasks.size()==1) {
                     System.out.println("\tNow you have 1 task in the list.");
