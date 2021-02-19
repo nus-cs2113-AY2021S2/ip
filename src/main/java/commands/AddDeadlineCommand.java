@@ -53,6 +53,14 @@ public class AddDeadlineCommand extends Command {
     }
 
 
+    /**
+     * Returns LocalDate of input date.
+     * Throws an exception if input date is invalid.
+     *
+     * @param input Raw date input.
+     * @return LocalDate from raw date input.
+     * @throws DateTimeParseException Invalid date.
+     */
     private LocalDate extractDate(String input) throws DateTimeParseException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(constants.DATE_IO_FORMAT);
         return LocalDate.parse(input, formatter);
