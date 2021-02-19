@@ -6,6 +6,7 @@ public class ToDoTask extends Task {
         super(name);
     }
 
+
     /**
      * Prints task status.
      */
@@ -14,6 +15,7 @@ public class ToDoTask extends Task {
         System.out.print("[T]");
         super.printStatus();
     }
+
 
     /**
      * Outputs formatted data for saving.

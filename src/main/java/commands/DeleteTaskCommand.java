@@ -10,7 +10,7 @@ public class DeleteTaskCommand extends Command {
     private final String input;
 
     public DeleteTaskCommand(String input) {
-        this.input = input;
+        this.input = input.substring(constants.COMMAND_DELETE.length());
     }
 
 
@@ -25,8 +25,8 @@ public class DeleteTaskCommand extends Command {
                 throw new DescriptionSplitException();
             }
             TreeSet<Integer> validIndices = new TreeSet<>();
-            for (int i = 1; i < indices.length; i++) {
-                int index = processIndex(indices[i]);
+            for (String rawIndex : indices) {
+                int index = processIndex(rawIndex);
                 if (index != constants.INVALID_INDEX) {
                     validIndices.add(index);
                 }
