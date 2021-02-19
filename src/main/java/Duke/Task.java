@@ -76,21 +76,13 @@ public class Task {
         if (this.taskType.equalsIgnoreCase("deadline")) {
             String descriptionCleaned = this.description.replaceAll("\\(", "/");
             String descriptionCleaned2 = descriptionCleaned.replaceAll(":", "");
-            String descriptionCleaned3 = descriptionCleaned2.replaceAll("   ", "");
-            String output =  descriptionCleaned3.substring(0, descriptionCleaned3.length() - 1);
-            System.out.println(descriptionCleaned);
-            System.out.println(descriptionCleaned2);
-            System.out.println(output);
-            return output;
+            String descriptionCleaned3 = descriptionCleaned2.replaceAll("  ", "");
+            return descriptionCleaned3.substring(0, descriptionCleaned3.length() - 1);
         } else if (this.taskType.equalsIgnoreCase("event")) {
             String descriptionCleaned = this.description.replaceAll("\\(", "/");
             String descriptionCleaned2 = descriptionCleaned.replaceAll(":", "");
-            String descriptionCleaned3 = descriptionCleaned2.replaceAll("   ", "");
-            String output =  descriptionCleaned3.substring(0, descriptionCleaned3.length() - 1);
-            System.out.println(descriptionCleaned);
-            System.out.println(descriptionCleaned2);
-            System.out.println(output);
-            return output;
+            String descriptionCleaned3 = descriptionCleaned2.replaceAll("  ", "");
+            return descriptionCleaned3.substring(0, descriptionCleaned3.length() - 1);
         } else {
             return this.description;
         }

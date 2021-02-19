@@ -229,8 +229,6 @@ public class Duke {
                 String userCommand = listOfDataFromFile[0];
                 String inputDetails = listOfDataFromFile[1];
                 processSavedData(userCommand, inputDetails);
-                System.out.println(userCommand);
-                System.out.println(inputDetails);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
