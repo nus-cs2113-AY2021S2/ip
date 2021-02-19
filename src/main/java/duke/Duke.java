@@ -75,10 +75,14 @@ public class Duke {
                 break;
             case "DONE":
                 errand = getSubstring(userInput);
-                Task.markDone(errand); // In this case, errand is the index of the item
+                Task.markDone(errand); // In this case, errand is the index of the task
                 break;
             case "BYE":
                 printGoodbyeMessage();
+                break;
+            case "DELETE":
+                errand = getSubstring(userInput);
+                Task.deleteTask(errand); // In this case, errand is the index of the task
                 break;
             default:
                 throw new IllegalTaskCommandException("Unacceptable Command!");
