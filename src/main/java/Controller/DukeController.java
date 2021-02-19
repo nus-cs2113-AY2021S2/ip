@@ -1,7 +1,9 @@
 package Controller;
 import Tasks.*;
 
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class DukeController {
@@ -138,6 +140,30 @@ public class DukeController {
         }
         catch (NullPointerException e) {
             System.out.println(e.getMessage());
+            System.out.println("--------------------------------------------");
+        }
+    }
+
+    public void findbyDate(ArrayList<Task> tasks, LocalDate date) {
+        boolean found = false;
+        for (Task task : tasks) {
+            if (task instanceof Deadline) {
+
+                if (((Deadline) task).getDatetime().toLocalDate().isEqual(date)) {
+                    found = true;
+                    System.out.println(((Deadline) task).getPrintedLine());
+                }
+            }
+            else if (task instanceof Event) {
+                if (((Event) task).getDatetime().toLocalDate().isEqual(date)) {
+                    found = true;
+                    System.out.println(((Event) task).getPrintedLine());
+                }
+            }
+        }
+        System.out.println("--------------------------------------------");
+        if (!found) {
+            System.out.println("No activity on that date specified");
             System.out.println("--------------------------------------------");
         }
     }

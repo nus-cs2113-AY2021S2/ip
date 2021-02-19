@@ -30,6 +30,6 @@ public class Deadline extends Task {
     }
 
     public String getPrintedLine() {
-        return "[D]" + super.getPrintedLine() + " (by: " + datetime.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[D]" + super.getPrintedLine() + " (by: " + datetime.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a")) + ")";
     }
 }

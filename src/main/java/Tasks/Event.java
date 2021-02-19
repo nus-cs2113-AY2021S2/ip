@@ -30,6 +30,6 @@ public class Event extends Task {
     }
 
     public String getPrintedLine() {
-        return "[E]" + super.getPrintedLine() + " (at: " + datetime.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm")) + ")";
+        return "[E]" + super.getPrintedLine() + " (at: " + datetime.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm a")) + ")";
     }
 }
