@@ -17,4 +17,8 @@ public class Task {
         isDone = true;
     }
 
+    public String stringToSave() {
+        return "";
+    }
+
 }
