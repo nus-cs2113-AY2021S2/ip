@@ -1,11 +1,8 @@
 package tasks;
 
-import common.Constants;
-
 public class DeadlineTask extends Task {
 
     private String dueDate;
-    private static final Constants constants = new Constants();
 
     public DeadlineTask(String name, String dueDate) {
         super(name);
@@ -31,7 +28,7 @@ public class DeadlineTask extends Task {
      */
     @Override
     public String formatData() {
-        return "deadline " + getName() + constants.KEYWORD_BY + dueDate + "\n"
+        return constants.COMMAND_DEADLINE + getName() + constants.KEYWORD_BY + dueDate + "\n"
                 + getDone() + "\n";
     }
 }

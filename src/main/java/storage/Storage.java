@@ -1,3 +1,7 @@
+package storage;
+
+import parser.Parser;
+import tasks.TaskManager;
 import common.Constants;
 
 import java.io.File;
@@ -10,6 +14,7 @@ public class Storage {
 
     private static final TaskManager taskManager = new TaskManager();
     private static final Constants constants = new Constants();
+    private static final Parser parser = new Parser();
 
 
     /**
@@ -43,18 +48,9 @@ public class Storage {
         try {
             while (scanner.hasNext()) {
                 String input = scanner.nextLine();
-                if (input.startsWith(constants.COMMAND_TODO)) {
-                    //Adds new ToDoTask
-                    taskManager.addToDo(input);
-                } else if (input.startsWith(constants.COMMAND_EVENT)) {
-                    //Adds new EventTask
-                    taskManager.addEvent(input);
-                } else if (input.startsWith(constants.COMMAND_DEADLINE)) {
-                    //Adds new DeadlineTask
-                    taskManager.addDeadline(input);
-                }
+                parser.processInput(input);
                 if (scanner.nextLine().equals("true")) {
-                    taskManager.setDoneStatus("done " + taskManager.getTaskCount(), true);
+                    parser.processInput("done " + taskManager.getTaskCount());
                 }
             }
         } catch (Exception e) {

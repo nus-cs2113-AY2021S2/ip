@@ -1,11 +1,8 @@
 package tasks;
 
-import common.Constants;
-
 public class EventTask extends Task {
 
     private String eventInfo;
-    private static final Constants constants = new Constants();
 
     public EventTask(String name, String dateTime) {
         super(name);
@@ -31,7 +28,7 @@ public class EventTask extends Task {
      */
     @Override
     public String formatData() {
-        return "event " + getName() + constants.KEYWORD_AT + eventInfo + "\n"
+        return constants.COMMAND_EVENT + getName() + constants.KEYWORD_AT + eventInfo + "\n"
                 + getDone() + "\n";
     }
 }

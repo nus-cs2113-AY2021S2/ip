@@ -20,7 +20,7 @@ public class ToDoTask extends Task {
      */
     @Override
     public String formatData() {
-        return "todo " + getName() + "\n"
+        return constants.COMMAND_TODO + getName() + "\n"
                 + getDone() + "\n";
     }
 }

@@ -1,6 +1,10 @@
 package tasks;
 
+import common.Constants;
+
 public abstract class Task {
+
+    protected static final Constants constants = new Constants();
 
     private final String name;
     private boolean isDone;
