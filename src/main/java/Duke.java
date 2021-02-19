@@ -147,6 +147,7 @@ public class Duke {
                 boolean isDone = Integer.parseInt(tokens[1]) == 1;
                 Todo todo = new Todo(tokens[2], isDone);
                 tasks.add(todo);
+                taskCount++;
             } catch (NumberFormatException e) {
                 return;
             }
@@ -156,6 +157,7 @@ public class Duke {
                 boolean isDone = Integer.parseInt(tokens[1]) == 1;
                 Deadline deadline = new Deadline(tokens[2], tokens[3], isDone);
                 tasks.add(deadline);
+                taskCount++;
             } catch (NumberFormatException e) {
                 return;
             }
@@ -165,6 +167,7 @@ public class Duke {
                 boolean isDone = Integer.parseInt(tokens[1]) == 1;
                 Event event = new Event(tokens[2], tokens[3], isDone);
                 tasks.add(event);
+                taskCount++;
             } catch (NumberFormatException e) {
                 return;
             }
@@ -174,7 +177,6 @@ public class Duke {
             break;
         }
     }
-
 
     public static void saveFile() throws IOException {
         File path = new File("tasks.txt");
