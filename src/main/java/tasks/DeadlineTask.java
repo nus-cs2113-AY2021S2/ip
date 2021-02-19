@@ -1,15 +1,23 @@
 package tasks;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class DeadlineTask extends Task {
 
-    private String dueDate;
+    private LocalDate dueDate;
 
-    public DeadlineTask(String name, String dueDate) {
+    public DeadlineTask(String name, LocalDate dueDate) {
         super(name);
         setDueDate(dueDate);
     }
 
-    public void setDueDate(String dueDate) {
+    /**
+     * Changes due date.
+     *
+     * @param dueDate New due date.
+     */
+    public void setDueDate(LocalDate dueDate) {
         this.dueDate = dueDate;
     }
 
@@ -18,9 +26,10 @@ public class DeadlineTask extends Task {
      */
     @Override
     public void printStatus() {
+        String formattedDate = dueDate.format(DateTimeFormatter.ofPattern(constants.DATE_PRINT_FORMAT));
         System.out.print("[D]");
         super.printStatus();
-        System.out.print(" (by: " + dueDate + ")");
+        System.out.print(" (by: " + formattedDate + ")");
     }
 
     /**
@@ -28,7 +37,8 @@ public class DeadlineTask extends Task {
      */
     @Override
     public String formatData() {
-        return constants.COMMAND_DEADLINE + getName() + constants.KEYWORD_BY + dueDate + "\n"
+        String formattedDate = dueDate.format(DateTimeFormatter.ofPattern(constants.DATE_IO_FORMAT));
+        return constants.COMMAND_DEADLINE + getName() + constants.KEYWORD_BY + formattedDate + "\n"
                 + getDone() + "\n";
     }
 }

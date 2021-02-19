@@ -31,6 +31,8 @@ public class Constants {
     public final String COMMAND_TODO = "todo ";
     public final String COMMAND_DEADLINE = "deadline ";
     public final String COMMAND_EVENT = "event ";
+    public final String DATE_IO_FORMAT = "d-MM-yyyy";
+    public final String DATE_PRINT_FORMAT = "d MMM yyyy";
 
 
     //Messages
@@ -46,7 +48,7 @@ public class Constants {
             + "    list - Show list of saved values.\n"
             + "    todo <name> - Creates new todo task.\n"
             + "    event <name> /at <info> - Creates new event.\n"
-            + "    deadline <name> /by <date> - Creates new deadline.\n"
+            + "    deadline <name> /by <DD-MM-YYYY> - Creates new deadline.\n"
             + "    delete <indices> - Deletes selected tasks.\n"
             + "    done n - Mark nth item as done.\n"
             + "    undo n - Mark nth item as not done.\n" + LINE;
@@ -64,13 +66,15 @@ public class Constants {
             + "8K: List is full." + "\n" + LINE;
     public final String MESSAGE_EMPTY_LIST = "<< List is empty >>\n" + LINE;
     public final String MESSAGE_MISSING_AT_KEYWORD = LINE + "\n"
-            + "8K: Please follow the format \"event <name> /at <info>\" to create event.\n" + LINE;
+            + "8K: Please use format \"event <name> /at <info>\" to create event.\n" + LINE;
     public final String MESSAGE_MISSING_BY_KEYWORD = LINE + "\n"
-            + "8K: Please follow the format \"deadline <name> /by <date>\" to create deadline.\n" + LINE;
+            + "8K: Please use format \"deadline <name> /by <DD-MM-YYYY>\" to create deadline.\n" + LINE;
     public final String MESSAGE_SAVE_ERROR = LINE + "\n"
             + "8K: Failed to save.\n" + LINE;
     public final String MESSAGE_LOAD_ERROR = LINE + "\n"
             + "8K: Failed to load.\n" + LINE;
     public final String MESSAGE_FILE_NOT_FOUND = LINE + "\n"
             + "File not found. New file will be created.\n" + LINE;
+    public final String MESSAGE_INVALID_DATE = LINE + "\n"
+            + "Invalid date. Please use format DD-MM-YYYY.\n" + LINE;
 }
