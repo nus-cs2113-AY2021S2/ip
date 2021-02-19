@@ -18,6 +18,6 @@ public class Event extends Task {
     }
 
     public String getTime(){
-        return " /at " + this.at;
+        return this.at;
     }
 }

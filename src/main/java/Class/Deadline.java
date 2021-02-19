@@ -18,6 +18,6 @@ public class Deadline extends Task {
     }
 
     public String getTime(){
-        return " /by " + this.by;
+        return this.by;
     }
 }

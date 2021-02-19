@@ -17,7 +17,7 @@ public class Duke {
         System.out.println("     Now you have " + size + " tasks in this list.");
     }
 
-    public static void takeCommand(String command,List<Task> tasks) throws UnknownCommand, EmptyDescription {
+    public static void takeCommand(String command,List<Task> tasks) throws UnknownCommand, EmptyDescription, OutOfBound {
         String[] subStrings = command.split(" ");
         String description = "";
         int slashIndex = command.indexOf('/');
@@ -32,11 +32,15 @@ public class Duke {
         case "done":
             if(subStrings.length > 1){
                 int taskNo = Integer.parseInt(subStrings[1]);
-                Task taskDone = tasks.get(taskNo-1);
-                taskDone.markAsDone();
-                System.out.println("     Nice! I've marked this task as done:");
-                System.out.println("      " + taskDone.getDescription());
-                tasks.set(taskNo-1, taskDone);
+                if(taskNo > tasks.size()){
+                    throw new OutOfBound();
+                } else {
+                    Task taskDone = tasks.get(taskNo-1);
+                    taskDone.markAsDone();
+                    System.out.println("     Nice! I've marked this task as done:");
+                    System.out.println("      " + taskDone.getDescription());
+                    tasks.set(taskNo-1, taskDone);
+                }
             } else {
                 throw new EmptyDescription("done");
             }
@@ -99,17 +103,38 @@ public class Duke {
             }
 
             Scanner s = new Scanner(saveFile);
-            String command,input;
-            int isDone,taskNo = 0;
+            int isDone;
 
             while(s.hasNext()) {
-                input = s.nextLine();
+                String input = s.nextLine();
+                String description = input.substring(2, input.indexOf('|')-1);
+                String time = input.substring(input.indexOf('|') + 2);
                 isDone = Character.getNumericValue(input.charAt(0));
-                command = input.substring(2);
-                takeCommand(command,tasks);
-                ++taskNo;
-                if(isDone == 1){
-                    takeCommand("done " + taskNo,tasks);
+                String[] subStrings = input.split(" ");
+                switch (subStrings[1]){
+                case "todo":
+                    Todo todo = new Todo(description);
+                    if(isDone == 1){
+                        todo.markAsDone();
+                    }
+                    tasks.add(todo);
+                    break;
+                case "event":
+                    Event event = new Event(description, time);
+                    if(isDone == 1){
+                        event.markAsDone();
+                    }
+                    tasks.add(event);
+                    break;
+                case "deadline":
+                    Deadline deadline = new Deadline(description, time);
+                    if(isDone == 1){
+                        deadline.markAsDone();
+                    }
+                    tasks.add(deadline);
+                    break;
+                default:
+                    break;
                 }
             }
         } catch (IOException e) {
@@ -122,7 +147,7 @@ public class Duke {
         try {
             FileWriter fw = new FileWriter("data/tasks.txt");
             for(Task task:tasks){
-                fw.write(task.isDone() + " " + task.getType() + " " + task.getTaskName() + task.getTime()
+                fw.write(task.isDone() + " " + task.getType() + " " + task.getTaskName() + " | " + task.getTime()
                         + System.lineSeparator());
             }
             fw.close();
@@ -132,7 +157,7 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) throws IOException, UnknownCommand, EmptyDescription {
+    public static void main(String[] args) throws IOException, UnknownCommand, EmptyDescription, OutOfBound {
         Scanner in = new Scanner(System.in).useDelimiter(" ");
         String command = "";
         List<Task> tasks = new ArrayList<Task>();
@@ -150,6 +175,8 @@ public class Duke {
                 System.out.println("     Oops!!! I'm sorry, but I have no idea what that means =(");
             } catch (EmptyDescription e) {
                 System.out.println("     Oops!!! The description of " + e.TaskName() + " cannot be empty.");
+            } catch (OutOfBound e) {
+                System.out.println("     Oops!!! I think you are trying to access things that aren't even there yet!");
             }
             System.out.println(lineDivider);
         }while(!command.equals("bye"));
