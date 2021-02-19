@@ -76,19 +76,17 @@ public class Duke {
     }
 
     private static void sendWelcomeMessage() {
-        String fileName = FILE_PATH_TO_SAVE_TASKS;
-        File fForCheck = new File(FILE_PATH_TO_SAVE_TASKS);
-        if (!fForCheck.exists()) {
-            createNewFile(fForCheck);
-        } else {
-            FileWriter fw = null;
-            fw = createFileWriterObject(fileName, fw);
-            writeEmptyStringToFile(fw);
-        }
         System.out.println("Hello from\n" + LOGO);
         printLine();
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
+    }
+
+    private static void createFileIfThereIsNone() {
+        File fForCheck = new File(FILE_PATH_TO_SAVE_TASKS);
+        if (!fForCheck.exists()) {
+            createNewFile(fForCheck);
+        }
     }
 
 
@@ -215,6 +213,7 @@ public class Duke {
     }
 
     private static void initializeData() {
+        createFileIfThereIsNone();
         File f = new File(FILE_PATH_TO_SAVE_TASKS);
         System.out.println("Initializing data");
         try {
