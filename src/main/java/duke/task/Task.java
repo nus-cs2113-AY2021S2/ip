@@ -2,12 +2,12 @@ package duke.task;
 
 import duke.exception.IllegalTaskCommandException;
 
+import java.util.ArrayList;
+
 public class Task {
     protected String description;
     protected boolean isDone;
-    protected static int taskIndex = 0;
-    protected static final int MAX_ARRAY_SIZE = 100;
-    protected static Task[] taskArray = new Task[MAX_ARRAY_SIZE];
+    protected static ArrayList<Task> taskArray = new ArrayList<>();
 
     public Task(String description) {
         this.description = description;
@@ -15,21 +15,15 @@ public class Task {
     }
 
     public static void printList() {
-        int index = 0;
         printTaskHeader();
-        for(Task task: taskArray) {
-            // Empty array
-            if(index >= taskIndex){
-                break;
-            }
-            task.printTaskIndex(index);
-            task.printTaskType();
-            task.printCompletionStatus();
-            task.printTaskItem();
-            System.out.println();
-            index++;
+        for(Task t: taskArray) {
+            printTaskIndex(taskArray.indexOf(t));
+            t.printTaskType();
+            t.printCompletionStatus();
+            t.printTaskItem();
+            System.out.println("");
         }
-        System.out.println("\n");
+        System.out.println("");
     }
 
     private static void printTaskHeader() {
@@ -42,7 +36,7 @@ public class Task {
         System.out.println(tasksTemplate);
     }
 
-    private void printTaskIndex(int taskIndex) {
+    private static void printTaskIndex(int taskIndex) {
         System.out.print("[" + (taskIndex + 1) + "]");
     }
 
@@ -68,9 +62,8 @@ public class Task {
     }
 
     public void addToTaskList(String errand, String timestamp) {
+        taskArray.add(this);
         echoInput(errand, timestamp);
-        taskArray[taskIndex] = this;
-        taskIndex++;
     }
 
     public void echoInput(String errand, String timestamp) {
@@ -93,8 +86,8 @@ public class Task {
         System.out.println(echoBottom);
     }
 
-    private void printTaskCount() {
-        String taskCountMessage = "There are now " + (taskIndex + 1)
+    private static void printTaskCount() {
+        String taskCountMessage = "There are now " + taskArray.size()
                 + " mission objectives, Commander.";
         System.out.println(taskCountMessage);
     }
@@ -109,12 +102,13 @@ public class Task {
             return; // Ends the method here as invalid input is entered
         }
 
-        if (indexOfTask < 0) {
+        if (indexOfTask < 0 || taskArray.size() == 0) {
             throw new IllegalTaskCommandException("There is no such task, Commander!");
-        } else if (indexOfTask >= taskIndex) {
+        } else if (indexOfTask >= taskArray.size()) {
             throw new IllegalTaskCommandException("Unacceptable location Commander!");
         }
-        taskArray[indexOfTask].isDone = true;
+
+        taskArray.get(indexOfTask).isDone = true;
         printMarkDonePrompt(indexOfTask);
     }
 
@@ -124,10 +118,50 @@ public class Task {
         String doneTextBottom = "______________________________________________________\n";
 
         System.out.println(doneTextTop);
-        taskArray[taskIndex].printTaskType();
-        taskArray[taskIndex].printCompletionStatus();
-        taskArray[taskIndex].printTaskItem();
+        taskArray.get(taskIndex).printTaskType();
+        taskArray.get(taskIndex).printCompletionStatus();
+        taskArray.get(taskIndex).printTaskItem();
         System.out.println();
         System.out.println(doneTextBottom);
+    }
+
+    private static void printDeletedTaskCount() {
+        String taskCountMessage = "There are now " + (taskArray.size() - 1)
+                + " mission objectives, Commander.";
+        System.out.println(taskCountMessage);
+    }
+
+    private static void printDeletePrompt(int taskIndex) {
+        String doneTextTop = "______________________________________________________\n"
+                + "[Objective Successfully Removed]:\n";
+        String doneTextBottom = "______________________________________________________\n";
+
+        System.out.println(doneTextTop);
+        taskArray.get(taskIndex).printTaskType();
+        taskArray.get(taskIndex).printCompletionStatus();
+        taskArray.get(taskIndex).printTaskItem();
+        System.out.println("\n");
+        printDeletedTaskCount();
+        System.out.println(doneTextBottom);
+    }
+
+    public static void deleteTask(String index) throws IllegalTaskCommandException {
+        int indexOfTask;
+        try {
+            indexOfTask = Integer.parseInt(index) - 1;
+        } catch (NumberFormatException e) {
+            IllegalTaskCommandException.printErrorLogo();
+            System.out.println("Only numbers are allowed commander!");
+            return; // Ends the method here as invalid input is entered
+        }
+
+        if (indexOfTask < 0 || taskArray.size() == 0) {
+            throw new IllegalTaskCommandException("There is no such task, Commander!");
+        } else if (indexOfTask >= taskArray.size()) {
+            throw new IllegalTaskCommandException("Unacceptable location Commander!");
+        }
+
+        printDeletePrompt(indexOfTask);
+        taskArray.remove(indexOfTask);
     }
 }
