@@ -1,4 +1,4 @@
-package duke.Controller;
+package duke.controller;
 
 public class Parser {
 

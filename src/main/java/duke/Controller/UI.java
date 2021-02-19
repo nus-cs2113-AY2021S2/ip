@@ -1,8 +1,7 @@
-package duke.Controller;
+package duke.controller;
 
-import duke.Tasks.Task;
+import duke.tasks.Task;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -24,7 +23,7 @@ public class UI {
         System.out.println("Ay yo homie! You lookin PENGGGGGGGG today!\nIt's ya boi Duke the Dawg. What can I do for ma G?\n");
     }
 
-    public void handleTasklist(ArrayList<Task> tasks) throws IOException {
+    public void handleTasklist(ArrayList<Task> tasks) {
         Scanner sc = new Scanner(System.in);
         Boolean isSame = true;
         while (isSame) {

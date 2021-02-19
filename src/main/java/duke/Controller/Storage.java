@@ -1,9 +1,9 @@
-package duke.Controller;
+package duke.controller;
 
-import duke.Tasks.Deadline;
-import duke.Tasks.Event;
-import duke.Tasks.Task;
-import duke.Tasks.toDo;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.toDo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -72,7 +72,7 @@ public class Storage {
             fileReader.close();
         } catch (FileNotFoundException e) {
             System.out.println("Cannot load file...you are clapped! Churn up new list please.");
-            return null;
+            return tasks;
         }
         System.out.println("File loaded boi...lets gooooooo!");
         return tasks;

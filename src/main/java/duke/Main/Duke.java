@@ -1,7 +1,8 @@
-package duke.Main;
+package duke.main;
 
-import duke.Tasks.*;
-import duke.Controller.*;
+import duke.tasks.Task;
+import duke.controller.UI;
+import duke.controller.Storage;
 
 import java.io.IOException;
 import java.util.ArrayList;
