@@ -42,4 +42,14 @@ public class Task {
     public String getDescription() {
         return this.description;
     }
+
+    public String getSeperator() {
+        if (this.taskType.equalsIgnoreCase("event")) {
+            return "/at";
+        } else if (this.taskType.equals("deadline")) {
+            return "/by";
+        } else {
+            return null;
+        }
+    }
 }

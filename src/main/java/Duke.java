@@ -76,9 +76,7 @@ public class Duke {
 
     private static void sendWelcomeMessage() {
         String fileName = FILE_PATH_TO_SAVE_TASKS;
-        PrintWriter f = null;
         File fForCheck = new File(FILE_PATH_TO_SAVE_TASKS);
-        creatingPrinterWriterObject(fileName);
         if (!fForCheck.exists()) {
             createNewFile(fForCheck);
         } else {
@@ -92,14 +90,6 @@ public class Duke {
         System.out.println("What can I do for you?");
     }
 
-    private static void creatingPrinterWriterObject(String fileName) {
-        PrintWriter f;
-        try {
-            f = new PrintWriter(fileName);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
 
     private static void createNewFile(File fForCheck) {
         try {
@@ -206,7 +196,7 @@ public class Duke {
         String description = tasks.getDescription();
         String status = tasks.getStatusIcon();
         String taskType = tasks.getTaskTypeInWords();
-        fw.write(description + status + taskType + "\n");
+        fw.write(description +  status + taskType + "\n");
         fw.close();
     }
 
