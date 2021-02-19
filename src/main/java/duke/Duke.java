@@ -56,6 +56,9 @@ public class Duke {
                 } else if (command.equals("delete")) {
                     taskType = "delete";
                     deleteTask(line);
+                } else if (command.equals("find")) {
+                    taskType = "find";
+                    findTask(line);
                 } else {
                     throw new DukeException();
                 }
@@ -72,6 +75,24 @@ public class Duke {
             saveTasks();
         } catch (IOException e) {
             System.out.println(e.getMessage());
+        }
+    }
+
+    /**
+     * Find a task stored in Duke.
+     *
+     * @param line Command input from the user.
+     */
+    private static void findTask(String line) {
+        String[] words = line.split(" ", 2);
+        String keyword = words[1];
+        System.out.println("Here are the matching tasks in your list: ");
+        int index = 0;
+        while (index < tasks.size()) {
+            if (tasks.get(index).toString().contains(keyword)) {
+                System.out.println((index + 1) + "." + tasks.get(index).toString());
+            }
+            index++;
         }
     }
 
@@ -239,7 +260,6 @@ public class Duke {
     private static void saveTasks() throws IOException {
         int index = 0;
         FileWriter fileWriter = new FileWriter("data/duke.txt");
-        fileWriter.write("");
         while (index < tasks.size()) {
             fileWriter.write(tasks.get(index).saveTask() + System.lineSeparator());
             index++;
