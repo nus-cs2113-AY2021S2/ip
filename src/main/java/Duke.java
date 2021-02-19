@@ -89,7 +89,6 @@ public class Duke {
                 tasks.add(todo);
                 System.out.println(todo);
                 taskCount++;
-                System.out.println("Now you have " + taskCount + " tasks in the list.");
             } catch (StringIndexOutOfBoundsException e) {
                 System.out.println("\uD83D\uDE2D Description of To-Do cannot be empty!");
             }
@@ -105,7 +104,6 @@ public class Duke {
                 System.out.println(deadline);
                 DukePrint.printTaskSize(tasks);
                 taskCount++;
-                System.out.println("Now you have " + taskCount + " tasks in the list.");
             } catch (StringIndexOutOfBoundsException e) {
                 System.out.println("\uD83D\uDE2D Please enter deadline in the format: 'deadline <name> /by <day> <time>'");
             }
@@ -121,7 +119,6 @@ public class Duke {
                 System.out.println(event);
                 DukePrint.printTaskSize(tasks);
                 taskCount++;
-                System.out.println("Now you have " + taskCount + " tasks in the list.");
             } catch (StringIndexOutOfBoundsException e) {
                 System.out.println("\uD83D\uDE2D Please enter event in the format: 'event <name> /at <day> <time>'");
             }
