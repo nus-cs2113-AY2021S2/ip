@@ -26,6 +26,7 @@ public abstract class Task {
         return isDone;
     }
 
+
     /**
      * Prints task status.
      */
@@ -36,6 +37,7 @@ public abstract class Task {
             System.out.print("[ ] " + name);
         }
     }
+
 
     /**
      * Outputs formatted data for saving.

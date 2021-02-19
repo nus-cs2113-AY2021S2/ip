@@ -13,6 +13,7 @@ public class EventTask extends Task {
         this.eventInfo = eventInfo;
     }
 
+
     /**
      * Prints task status.
      */
@@ -22,6 +23,7 @@ public class EventTask extends Task {
         super.printStatus();
         System.out.print(" (at: " + eventInfo + ")");
     }
+
 
     /**
      * Outputs formatted data for saving.

@@ -13,6 +13,7 @@ public class DeadlineTask extends Task {
         this.dueDate = dueDate;
     }
 
+
     /**
      * Prints task status.
      */
@@ -22,6 +23,7 @@ public class DeadlineTask extends Task {
         super.printStatus();
         System.out.print(" (by: " + dueDate + ")");
     }
+
 
     /**
      * Outputs formatted data for saving.

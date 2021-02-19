@@ -11,6 +11,9 @@ public class FindCommand extends Command {
     }
 
 
+    /**
+     * Prints all tasks that matches keyword.
+     */
     @Override
     public void execute() {
         System.out.println(constants.LINE);
