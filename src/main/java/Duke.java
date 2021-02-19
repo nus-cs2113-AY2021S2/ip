@@ -1,3 +1,8 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 
@@ -21,109 +26,6 @@ public class Duke {
     }
 
 
-/*    public static String command_parser(todoList list, String command){
-        String[] tokens = command.split(" ");
-        int itemStartIndex = command.indexOf(" ") + 1;
-        int itemEndIndex;
-        int dateStartIndex;
-        String out = "";
-        String desc = "";
-        String date = "";
-        switch(tokens[0]){
-        case "list": // If command is list, print all tasks in list
-            out = list.listItems();
-            break;
-        case "deadline": // If command is deadline, parse the task and by date, print confirmation
-            itemEndIndex = command.indexOf("/by") - 1;
-            dateStartIndex = itemEndIndex + 5;
-            try {
-                desc = command.substring(itemStartIndex, itemEndIndex);
-                date = command.substring(dateStartIndex);
-            }catch(StringIndexOutOfBoundsException e) { // if task or by date was not entered, catch error
-                out = "Invalid deadline task format!"
-                    + " Try the following: deadline [task] /by [date] ";
-                break;
-            }
-            out = list.addTask(desc, listTypes.deadline, date);
-            break;
-        case "event": // If command is event, parse the task and at date, print confirmation
-            itemEndIndex = command.indexOf("/at") - 1;
-            dateStartIndex = itemEndIndex + 5;
-            try { // if task or at date was not entered, catch error
-                desc = command.substring(itemStartIndex, itemEndIndex);
-                date = command.substring(dateStartIndex);
-            }catch(StringIndexOutOfBoundsException e) {
-                out = "Invalid command format!"
-                    + " Try the following: event [task] /at [date] ";
-                break;
-            }
-            out = list.addTask(desc, listTypes.event, date);
-            break;
-        case "todo": // If command is todo, parse the task, print confirmation
-            desc = command.substring(itemStartIndex);
-            if(desc.equals("todo")){ // if task was not entered, catch error
-                out = "Invalid todo task!";
-                break;
-            }
-            out = list.addTask(desc,listTypes.todo);
-            break;
-        case "done": // If command is done, mark task as done, print confirmation
-            try {
-                out = list.resolveTask(tokens[1]);
-            }catch(ArrayIndexOutOfBoundsException e){
-                out = "Invalid selection!";
-                break;
-            }
-            break;
-        case "delete": // If command is  delete, delete task entry in list, print confirmation
-            try {
-                out = list.deleteTask(tokens[1]);
-            }catch(IndexOutOfBoundsException e){ // If task number is invalid, catch error
-                out = "Invalid selection!";
-                break;
-            }catch(NumberFormatException e){ // If string is entered instead of task number, catch error
-                out = "Please enter the number of the task!";
-            }
-            break;
-
-        default: // If command entered is any other unrecognised command, print invalid command
-            out = "Invalid task command!";
-        }
-        return out;
-    }*/
-
-
-/*    public static void importParsing(todoList list, String input){ // Parses the inputted line and executes the respective commands to import the tasks through command parser
-        String[] tokens = input.split("/");
-        String command = "";
-        switch(tokens[0]){
-        case "D":
-            command = "deadline " + tokens[2] + " /by " + tokens[3];
-            break;
-        case "E":
-            command = "event " + tokens[2] + " /at " + tokens[3];
-            break;
-        case "T":
-            command = "todo " + tokens[2];
-            break;
-        }
-        command_parser(list, command);
-        if (tokens[1].equals("X")){
-            String  temp = command_parser(list, "done " + list.tasksTotal());
-        }
-    }
-
-    public static void importData(todoList list, File importedList) throws FileNotFoundException { // Takes the imported file and runs importParsing method while entries still exist. Imported tasks are listed once done
-        Scanner s = new Scanner(importedList);
-        while (s.hasNext()) {
-            String input = s.nextLine();
-            importParsing(list, input);
-        }
-        System.out.println("Task List has been imported! Here are your tasks: \n"
-                + command_parser(list, "list") + "\n"
-                + "____________________________________________________________\n");
-    }
-
     public static void createDataFile(String path, File importedList) throws IOException { // Checks if data file exists and if not, creates the directory and file if required.
         if (!importedList.exists()){
             try{
@@ -138,17 +40,23 @@ public class Duke {
         }
     }
 
-    public static void dukeInitialisation(todoList list) throws IOException { // Tries to import data from the default path using importData if available. If not, creates data file using createDataFile
+    public static void dukeInitialisation(todoList list){ // Tries to import data from the default path using importData if available. If not, creates data file using createDataFile
         String path = System.getProperty("user.dir") + "\\data";
         File importedList = new File("data/duke.txt");
         try{
-            importData(list, importedList);
+            runImportLoopUntilEOF();
         }catch(FileNotFoundException e){
-            createDataFile(path, importedList);
+            try {
+                createDataFile(path, importedList);
+            } catch (IOException ioException) {
+                System.out.println("Unable to create data file!");
+            }
+        }catch(IncorrectFormatException e){
+            System.out.println("Error importing data!");
         }
     }
 
-    public static void writeToFile(String filePath, String addText) throws IOException { // Creates file at provided path and writes provided string to file.
+    public static void writeToFile(String filePath, String addText) throws IOException, IOException { // Creates file at provided path and writes provided string to file.
         FileWriter fw = new FileWriter(filePath);
         fw.write(addText);
         fw.close();
@@ -169,65 +77,11 @@ public class Duke {
         } catch (IOException e) {
             System.out.println("Something went wrong: " + e.getMessage());
         }
-    }*/
-
-    public static void main(String[] args) {
-
-
-
-/*        boolean continueChat = true;
-        Scanner in = new Scanner(System.in);
-        String output = "";
-        todoList list = new todoList();
-
-        dukeStartup();
-        try {
-            dukeInitialisation(list);
-        }catch(IOException e){
-            System.out.println("An error occurred when initialising data file! Error: " + e.getMessage());
-            System.out.println("Task List was not imported!");
-        }
-        while(continueChat){
-            String input = in.nextLine();
-            if(input.equals("bye")){
-                output = "Bye. Hope to see you again soon!";
-                continueChat = false;
-            }else {
-                output = command_parser(list,input);
-                updateFile(list);
-            }
-            dukeResponse(output);
-        }
-    }*/
-
-
-
-
-
-        Scanner in = new Scanner(System.in);
-        String output;
-        dukeStartup();
-        /*while(true){
-            String input = in.nextLine();
-            if(input.equals("bye")){
-                System.out.println("Bye. Hope to see you again soon!");
-                break;
-            }else {
-                Command command;
-                command = new Parser().parseCommand(input);
-                CommandResult result = executeCommand(command);
-                consoleOutput(result);
-            }
-        }*/
-        runCommandLoopUntilExitCommand();
-
     }
-
-
     private static CommandResult executeCommand(Command command) {
-            command.setData(inputList);
-            CommandResult result = command.execute();
-            return result;
+        command.setData(inputList);
+        CommandResult result = command.execute();
+        return result;
     }
 
     private static void consoleOutput(CommandResult input){
@@ -236,17 +90,65 @@ public class Duke {
                 "____________________________________________________________\n";
         System.out.println(String.format(format, input.feedbackToUser));
     }
+    private static void consoleOutput(CommandResult input, String arg){
+        String format = "____________________________________________________________\n" +
+                "%s" + "\n" +
+                "____________________________________________________________\n";
+        System.out.println(String.format(format, arg + input.feedbackToUser));
+    }
 
     private static void runCommandLoopUntilExitCommand() {
-        Command command;
+        Command command = null;
         do {
             Scanner in = new Scanner(System.in);
             String userCommandText = in.nextLine();
-            command = new Parser().parseCommand(userCommandText);
+            try {
+                command = new Parser().parseCommand(userCommandText);
+            }catch(IncorrectFormatException e){
+                System.out.println(e.getMessage()); ;
+                continue;
+            }
             CommandResult result = executeCommand(command);
             consoleOutput(result);
+            try {
+                updateFile(inputList);
+            } catch (IOException e) {
+                System.out.println("Unable to save to data file!");
+            }
         } while (!byeCommand.isBye(command));
     }
+
+    private static void runImportLoopUntilEOF() throws FileNotFoundException, IncorrectFormatException {
+        Command command;
+        String path = System.getProperty("user.dir") + "\\data";
+        File importedList = new File("data/duke.txt");
+        Scanner s = new Scanner(importedList);
+        try {
+            do {
+                String userCommandText = s.nextLine();
+                command = new Parser().parseImportTasks(userCommandText);
+                CommandResult result = executeCommand(command);
+            } while (s.hasNext());
+        }catch(NoSuchElementException ignored){
+
+        }
+        String MESSAGE_LIST_IMPORTED = "Task List has been imported! Here are your tasks: \n";
+        CommandResult result = executeCommand(new listCommand());
+        consoleOutput(result, MESSAGE_LIST_IMPORTED);
+    }
+
+    public static void main(String[] args) {
+
+        Scanner in = new Scanner(System.in);
+        String output;
+        dukeStartup();
+        dukeInitialisation(inputList);
+        runCommandLoopUntilExitCommand();
+
+    }
+
+
+
 
 
 

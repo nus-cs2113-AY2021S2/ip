@@ -4,7 +4,10 @@ public class deadlineCommand extends Command{
 
     public static final String MESSAGE_SUCCESS = "Task: [%s] has been added.";
 
-    public deadlineCommand(String desc, String date){
+    public deadlineCommand(String desc, String date) throws IncorrectFormatException {
+        if (desc.isEmpty() || date.isEmpty()){
+            throw new IncorrectFormatException("Deadline command format is incorrect!");
+        }
         this.task = new improvedTask(desc, listTypes.deadline, date);
     }
 

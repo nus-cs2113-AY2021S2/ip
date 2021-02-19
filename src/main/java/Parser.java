@@ -1,7 +1,7 @@
 public class Parser {
     private String input;
 
-    public Command parseCommand(String input){
+    public Command parseCommand(String input) throws IncorrectFormatException {
         String[] tokens = input.split(" ",2);
         String commandWord = tokens[0];
         if (tokens.length == 0) {
@@ -30,22 +30,46 @@ public class Parser {
             return new incorrectCommand("Incorrect command word was entered!");
         }
     }
+    public Command parseImportTasks(String input) throws IncorrectFormatException {
+        String[] tokens = input.split("/");
+        String command = "";
+        switch(tokens[0]){
+        case "D":
+            command = "deadline " + tokens[2] + " /by " + tokens[3];
+            break;
+        case "E":
+            command = "event " + tokens[2] + " /at " + tokens[3];
+            break;
+        case "T":
+            command = "todo " + tokens[2];
+            break;
+        }
+        return parseCommand(command);
+    }
+    public Command parseDoneTasks(String input){
+        String[] tokens = input.split("/");
+        String command = "";
+        if (tokens[1].equals("X")){
+            return new doneCommand();
+        }
+        return new Command();
+    }
 
 
-    private Command prepareDeadlineCommand(String args){
+    private Command prepareDeadlineCommand(String args) throws IncorrectFormatException {
         String[] parts = args.split("/by");
         // Validate arg string format
         if (parts.length != 2) {
-            return new incorrectCommand("Invalid deadline command format!");
+            throw new IncorrectFormatException("Deadline command format is incorrect!");
         }
         return new deadlineCommand(parts[0].trim(), parts[1].trim());
     }
 
-    private Command prepareEventCommand(String args){
+    private Command prepareEventCommand(String args) throws IncorrectFormatException {
         String[] parts = args.split("/at");
         // Validate arg string format
         if (parts.length != 2) {
-            return new incorrectCommand("Invalid event command format!");
+            throw new IncorrectFormatException("Event command format is incorrect!");
         }
         return new eventCommand(parts[0].trim(), parts[1].trim());
     }
