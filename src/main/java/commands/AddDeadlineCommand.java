@@ -5,6 +5,10 @@ import errors.ListFullException;
 import errors.MissingKeywordException;
 import tasks.DeadlineTask;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class AddDeadlineCommand extends Command {
 
     private final String input;
@@ -32,7 +36,8 @@ public class AddDeadlineCommand extends Command {
                 //Invalid input
                 throw new DescriptionSplitException();
             }
-            taskManager.addTask(new DeadlineTask(inputSplit[0], inputSplit[1]));
+            LocalDate dueDate = extractDate(inputSplit[1]);
+            taskManager.addTask(new DeadlineTask(inputSplit[0], dueDate));
             taskManager.setTaskCount(taskManager.getTaskCount()+1);
             printAddedContent(inputSplit[0]);
             updateFile();
@@ -40,8 +45,16 @@ public class AddDeadlineCommand extends Command {
             System.out.println(constants.MESSAGE_LIST_FULL);
         } catch (MissingKeywordException e) {
             System.out.println(constants.MESSAGE_MISSING_BY_KEYWORD);
+        } catch (DateTimeParseException e) {
+            System.out.println(constants.MESSAGE_INVALID_DATE);
         } catch (Exception e) {
             System.out.println(constants.MESSAGE_UNRECOGNIZED_COMMAND);
         }
+    }
+
+
+    private LocalDate extractDate(String input) throws DateTimeParseException {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(constants.DATE_IO_FORMAT);
+        return LocalDate.parse(input, formatter);
     }
 }
