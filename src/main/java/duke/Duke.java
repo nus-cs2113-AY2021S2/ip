@@ -141,10 +141,14 @@ public class Duke {
         }
     }
 
-    public static void loadData() throws FileNotFoundException {
+    public static void loadData() throws FileNotFoundException, NoSuchElementException {
         String command;
+        System.out.println("Loading data....");
         File f = new File("duke.txt");
         Scanner input = new Scanner(f);
+        if (!input.hasNextLine()) {
+            return;
+        }
         command = input.nextLine();
 
         while (!command.equals("bye")) {
@@ -154,7 +158,7 @@ public class Duke {
                 try {
                     listTasks();
                 } catch (IndexOutOfBoundsException e) {
-                    DukeException.listIsEmpty();
+                    System.out.println("List is empty!");
                 }
             } else if (command.contains("done")) {
                 executeDone(command);
@@ -181,13 +185,55 @@ public class Duke {
         }
     }
 
+    public static void processCommands() {
+        String command;
+        Scanner in = new Scanner(System.in);
+        if (!in.hasNextLine()) {
+            return;
+        }
+        command = in.nextLine();
+
+        while (!command.equals("bye")) {
+            // makes the input case-insensitive
+            command = command.toLowerCase();
+            if (command.equals("list")) {
+                try {
+                    listTasks();
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("List is empty!");
+                }
+            } else if (command.contains("done")) {
+                executeDone(command);
+            } else if (command.contains("delete")) {
+                executeDelete(command);
+            }
+            else if (command.contains("todo")) {
+                if (!DukeException.checkTodo(command)) {
+                    executeTodo(command);
+                }
+            } else if (command.contains("deadline")) {
+                executeDeadline(command);
+            } else if (command.contains("event")) {
+                executeEvent(command);
+            } else {
+                DukeException.commandIsInvalid();
+            }
+            try {
+                command = in.nextLine();
+            } catch (NoSuchElementException e) {
+                break;
+            }
+        }
+    }
+
     public static void main(String[] args) {
         UserInterface.printHello();
         try {
             loadData();
-        } catch (FileNotFoundException e) {
+        } catch (NoSuchElementException  | FileNotFoundException e) {
             System.out.println("Error in loading");
         }
+        processCommands();
         saveData();
         UserInterface.printBye();
     }
