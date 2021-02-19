@@ -1,18 +1,21 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
-import Duke.TodoException;
-import Duke.InvalidCommandException;
-import Duke.Task;
+import Duke.*;
 
 public class Duke {
     private static final Scanner scanner = new Scanner(System.in);
-    private static final ArrayList<Task> tasksList = new ArrayList<Task>();
+    private static final ArrayList<Task> tasksList = new ArrayList<>();
     public static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
+    public static final String FILE_PATH_TO_SAVE_TASKS = "duke.txt";
+
     public static void main(String[] args) {
+        createFileIfThereIsNone();
+        initializeData();
         sendWelcomeMessage();
         printLine();
         while(true) {
@@ -20,7 +23,11 @@ public class Duke {
             String userCommand = listOfUserInputs[0];
             String inputDetails = listOfUserInputs[1];
             if (userCommand.equalsIgnoreCase("bye")){
-                exitDuke();
+                try {
+                    exitDuke();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 break;
             }
             if (userCommand.equalsIgnoreCase("list")){
@@ -76,6 +83,45 @@ public class Duke {
         System.out.println("What can I do for you?");
     }
 
+    private static void createFileIfThereIsNone() {
+        File fForCheck = new File(FILE_PATH_TO_SAVE_TASKS);
+        if (!fForCheck.exists()) {
+            createNewFile(fForCheck);
+        }
+    }
+
+    private static void emptyFileAfterInitializing() {
+        FileWriter fw = null;
+        fw = createFileWriterObject(null);
+        writeEmptyStringToFile(fw);
+    }
+
+
+    private static void createNewFile(File fForCheck) {
+        try {
+            fForCheck.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static FileWriter createFileWriterObject(FileWriter fw) {
+        try {
+            fw = new FileWriter(FILE_PATH_TO_SAVE_TASKS);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return fw;
+    }
+
+    private static void writeEmptyStringToFile(FileWriter fw) {
+        try {
+            fw.write("");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private static void processUserRequest(String userCommand, String inputDetails) throws TodoException {
         if (inputDetails.equalsIgnoreCase("filler") & userCommand.equalsIgnoreCase("todo")) {
             throw new TodoException();
@@ -85,6 +131,11 @@ public class Duke {
         Task newTask = new Task(inputDetails, userCommand);
         tasksList.add(newTask);
         notifyUser(newTask);
+    }
+
+    private static void processSavedData(String userCommand, String inputDetails) {
+        Task newTask = new Task(inputDetails, userCommand);
+        tasksList.add(newTask);
     }
 
     private static void notifyUser(Task selectedTask) {
@@ -102,10 +153,18 @@ public class Duke {
         System.out.println("[X] " + selectedTask.getDescription());
     }
 
-    private static void exitDuke() {
+    private static void exitDuke() throws IOException {
         printLine();
+        for (Task task : tasksList) {
+            try {
+                writeToFile(FILE_PATH_TO_SAVE_TASKS, task);
+            } catch (IOException e) {
+                System.out.println("Something went wrong: " + e.getMessage());
+            }
+        }
         System.out.println("Bye. Hope to see you again soon!");
     }
+
 
     private static void printLine() {
         System.out.println("---------------------------------------------------");
@@ -114,6 +173,10 @@ public class Duke {
 
     private static String[] getUserInput() {
         String userInput = scanner.nextLine();
+        return splitInputIntoString(userInput);
+    }
+
+    private static String[] splitInputIntoString(String userInput) {
         String[] listOfInputs = userInput.split(" ", 2);
         if (listOfInputs.length == 1) {
             listOfInputs = new String[]{userInput, "filler"};
@@ -141,4 +204,36 @@ public class Duke {
         tasksList.remove(taskNumber);
         System.out.println("Now you have " + tasksList.size() + " tasks in the list.");
     }
+
+    private static void writeToFile(String filePath, Task tasks) throws IOException {
+        FileWriter fw = new FileWriter(filePath, true);
+        String description = tasks.getDescriptionWithoutBrackets();
+        String taskType = tasks.getTaskTypeInWords();
+        Boolean status = tasks.getStatusInWords();
+        if (status) {
+            fw.write(taskType + "done " + description + "\n");
+        } else {
+            fw.write(taskType + ' ' + description + "\n");
+        }
+        fw.close();
+    }
+
+    private static void initializeData() {
+        File f = new File(FILE_PATH_TO_SAVE_TASKS);
+        System.out.println("Initializing data");
+        try {
+            Scanner s = new Scanner(f);
+            while(s.hasNext()) {
+                String[] listOfDataFromFile = splitInputIntoString(s.nextLine());
+                String userCommand = listOfDataFromFile[0];
+                String inputDetails = listOfDataFromFile[1];
+                processSavedData(userCommand, inputDetails);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        emptyFileAfterInitializing();
+    }
+
+
 }
