@@ -5,19 +5,32 @@
 * Types of tasks
 * Quick start
 * Features
-  * View all commands : 'help'
-  * List all tasks : 'list'
-  * Add todo : 'todo'
-  * Add event : 'event'
-  * Add deadline : 'deadline'
-  * Delete task : 'delete'
-  * Mark as done : 'done'
-  * Mark as undone : 'undo'
-  * Search keyword : 'find'
-  * Exit : 'bye'
+  * View all commands : `help`
+  * List all tasks : `list`
+  * Add todo : `todo`
+  * Add event : `event`
+  * Add deadline : `deadline`
+  * Delete task : `delete`
+  * Mark as done : `done`
+  * Mark as undone : `undo`
+  * Search keyword : `find`
+  * Exit : `bye`
 * Storage
 * Command summary
 * Credits
+
+
+## Quick start
+Download from here: https://github.com/8kdesign/ip/releases
+
+**Requirement:** 
+1. Java 11 and above
+
+**Usage:**
+1. Transfer the program to a folder of your liking. (Note: Data from the app will be stored in the same folder)
+2. Double-click to start.
+3. Type in command and press enter to execute.
+For more information about commands, please refer to the list below.
 
 
 ## Types of tasks
@@ -27,20 +40,35 @@
 1. Deadline - Task with checkbox and due date field.
 
 
-## Quick start
-Download from here: https://github.com/8kdesign/ip/releases
+## Features
 
-Requirement: 
-1. Java 11 and above
+### View all commands : `help`
+List out list of commands and how to use them.
 
-Usage:
-1. Transfer the program to a folder of your liking. (Note: Data from the app will be stored in the same folder)
-2. Double-click to start.
-3. Type in command and press enter to execute.
-For more information about commands, please refer to the list below.
+### List all tasks : `list`
+List out all the tasks currently in your task list.
 
+### Add todo : `todo`
+Adds a todo with specified name into task list.
 
+### Add event : `event`
+Adds an event with specified name and information to your task list.
 
+### Add deadline : `deadline`
+Adds a deadline with specified name and due date to your task list.
+
+### Delete task : `delete`
+Removes task at specified indices from the task list.
+
+### Mark as done : `done`
+Marks task at specified indices in the task list as done.
+
+### Mark as undone : `undo`
+Marks task at specified indices in the task list as not done.
+
+### Search keyword : `find`
+List out all tasks that contains keyword in name. 
+Index relative to task list is shown for easier deletion / mark as done.
 
 
 
