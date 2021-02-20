@@ -18,9 +18,12 @@
 * Storage
 * Command summary
 * Credits
-<br>
-<br>
-<br>
+
+
+
+
+
+
 ## Quick start
 Download from here: https://github.com/8kdesign/ip/releases
 
@@ -32,17 +35,23 @@ Download from here: https://github.com/8kdesign/ip/releases
 2. Double-click to start.
 3. Type in command and press enter to execute.
 For more information about commands, please refer to the list below.
-<br>
-<br>
-<br>
+
+
+
+
+
+
 ## Types of tasks
 8K's Task Planner comes with 3 type of tasks are available:
 1. ToDo - Basic task with checkbox.
 1. Event - Task with checkbox and information field.
 1. Deadline - Task with checkbox and due date field.
-<br>
-<br>
-<br>
+
+
+
+
+
+
 ## Features
 
 ### View all commands : `help`
