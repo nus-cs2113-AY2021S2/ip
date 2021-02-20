@@ -3,6 +3,11 @@ package duke.inputhandlers;
 import duke.exception.InvalidCommandException;
 import static duke.constants.ProgramInts.*;
 
+/**
+ * Parse user input to determine command to be executed.
+ * Also parses task details where applicable.
+ * */
+
 public class Parser {
 
     public static int parseCommand(String input) {

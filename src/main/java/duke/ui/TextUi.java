@@ -9,11 +9,15 @@ import java.util.Scanner;
 import static duke.Duke.taskList;
 import static duke.constants.UiStrings.*;
 
+/**
+ * Text UI of the Duke application
+ */
+
 
 public class TextUi {
 
-    private final Scanner in;
-    private final PrintStream out;
+    protected final Scanner in;
+    protected final PrintStream out;
     
     public TextUi() {
         this(System.in, System.out);
@@ -23,6 +27,8 @@ public class TextUi {
         this.in = new Scanner(in);
         this.out = out;
     }
+    
+    // METHODS
 
     public void printTaskAdded(Task task) {
         System.out.println("Added to list: ");

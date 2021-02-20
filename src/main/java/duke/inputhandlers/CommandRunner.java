@@ -2,6 +2,7 @@ package duke.inputhandlers;
 
 import duke.exception.FullListException;
 import duke.exception.InvalidCommandException;
+import duke.storage.FileManager;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
@@ -9,6 +10,12 @@ import duke.tasks.Todo;
 
 import static duke.Duke.*;
 import static duke.constants.ProgramInts.*;
+
+/**
+ * Runs the commands entered by the user.
+ * Also handles when the list is full by only allowing "list" and "bye" command.
+ * TODO: allow delete command
+ * */
 
 public class CommandRunner {
 
@@ -24,23 +31,23 @@ public class CommandRunner {
             break;
         case DONE_COMMAND:
             runDone(input);
-            saveData();
+            FileManager.saveData();
             break;
         case TODO_COMMAND:
             runTodo(input);
-            saveData();
+            FileManager.saveData();
             break;
         case DEADLINE_COMMAND:
             runDeadline(input);
-            saveData();
+            FileManager.saveData();
             break;
         case EVENTS_COMMAND:
             runEvent(input);
-            saveData();
+            FileManager.saveData();
             break;
         case DELETE_COMMAND:
             runDeleteCommand(input);
-            saveData();
+            FileManager.saveData();
             break;
         default:
             runUnknownCommand(input);
