@@ -1,5 +1,6 @@
 package duke.controller;
 
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
@@ -69,18 +70,40 @@ public class TaskList {
     }
 
     public void printDeadline(ArrayList<Task> tasks, String input, String description, String date) {
-        Task deadline = new Deadline(description, date);
-        tasks.add(deadline);
-        System.out.println("Ayy I got you my brother. I've added this ting: ");
-        System.out.println(deadline.printDescription());
-        System.out.println("Jeeeeeeez! You have " + tasks.size() + " mad tings in the list.");
+        try{
+            Task deadline = new Deadline(description, date);
+            tasks.add(deadline);
+            System.out.println("Ayy I got you my brother. I've added this ting: ");
+            System.out.println(deadline.printDescription());
+            System.out.println("Jeeeeeeez! You have " + tasks.size() + " mad tings in the list.");
+        } catch (DateTimeParseException e) {
+            System.out.println("Oi you gotta key input in specified format dd-MM-yyyy HH:mm");
+        }
     }
 
     public void printEvent(ArrayList<Task> tasks, String input, String description, String date) {
-        Task event = new Event(description, date);
-        tasks.add(event);
-        System.out.println("Ayy I got you my brother. I've added this ting: ");
-        System.out.println(event.printDescription());
-        System.out.println("I feer! You have " + tasks.size() + " mad tings in the list.");
+        try {
+            Task event = new Event(description, date);
+            tasks.add(event);
+            System.out.println("Ayy I got you my brother. I've added this ting: ");
+            System.out.println(event.printDescription());
+            System.out.println("I feer! You have " + tasks.size() + " mad tings in the list.");
+        } catch (DateTimeParseException e) {
+            System.out.println("Oi you gotta key input in specified format dd-MM-yyyy HH:mm!");
+        }
     }
+
+    public void findTask(ArrayList<Task> tasks, String keyword) {
+        boolean isFound = false;
+        for (Task task : tasks) {
+            if (task.getDescription().contains(keyword) && !isFound) {
+                System.out.print("Here are the search results: \n");
+                System.out.println(task.printDescription());
+                isFound = true;
+            } else {
+                System.out.println("No such task!");
+            }
+        }
+    }
+
 }

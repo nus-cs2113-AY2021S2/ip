@@ -23,25 +23,27 @@ public class UI {
         System.out.println("Ay yo homie! You lookin PENGGGGGGGG today!\nIt's ya boi Duke the Dawg. What can I do for ma G?\n");
     }
 
+    public void displayCommands() {
+        String instructions = "1. todo TASKNAME : adds a todo task to the list.\n" +
+            "2. event TASKNAME /at TASKDATETIME* : adds a event task to the list.\n" +
+            "3. deadline TASKNAME /by TASKDATETIME* : adds a deadline task to the list.\n" +
+            "4. list : displays list of tasks.\n" +
+            "5. done NUMBER : checks task as done.\n" +
+            "6. delete NUMBER : removes task from list.\n" +
+            "7. save : save task list in a seperate text file.\n" +
+            "8. find KEYWORD : Displays tasks containing keyword.\n" +
+            "9. bye : exits system.\n" +
+            "\n*TASKDATETIME must be keyed in the following format dd-MM-yyyy HH:mm.\n";
+        System.out.println(instructions);
+    }
+
     public void handleTasklist(ArrayList<Task> tasks) {
         Scanner sc = new Scanner(System.in);
         Boolean isSame = true;
         while (isSame) {
             String input = sc.nextLine();
-            String stringTask = parser.extractTask(input);
-            String stringDate = parser.extractDate(input);
-
-             /* If input is "bye", system exits with message.
-             If input is "list", list of tasks will be displayed.
-             If input is "done", the task number to be marked as done.
-                - Exception handling for "done" includes not indicating task number and input task number out of range.
-             If input is "delete", the task number is removed from the list.
-                - Exception handling for "delete" includes not indicating task number and input task number out of range.
-             If input is "save", the task list is save in a seperate txt file.
-             If input is "todo", classify task as ToDo.
-             If input is "Deadline", classify task as Deadline.
-             If input is "Event", classify task as Event.
-             If there is no task specified after specifying the type of task, system will prompt for another input*/
+            String stringTask = parser.sortTask(input);
+            String stringDate = parser.sortDate(input);
             if (stringTask.contains("retry")) {
                 System.out.println("Hoi allow it fam! Why you got no tasks? Are you dumb? Try again... you melon!");
                 continue;
@@ -66,7 +68,10 @@ public class UI {
                 tasklist.printDeadline(tasks, input, stringTask, stringDate);
             } else if (input.contains("event")) {
                 tasklist.printEvent(tasks, input, stringTask, stringDate);
-            } else if (input.contains("save")){
+            } else if (input.contains("find")) {
+                String keyword = parser.extractKeyword(input);
+                tasklist.findTask(tasks, keyword);
+            } else if (input.contains("save")) {
                 store.saveFile(tasks);
             } else {
                 System.out.println("What are you tryna say to me? Chatting nonsense yea?");

@@ -21,6 +21,7 @@ public class Duke {
 
     public void run() throws IOException {
         ui.displayWelcome();
+        ui.displayCommands();
         load();
         ui.handleTasklist(tasks);
     }
