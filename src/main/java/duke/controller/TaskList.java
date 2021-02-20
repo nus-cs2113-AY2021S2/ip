@@ -8,11 +8,20 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.toDo;
 
+/**
+ * Task list controller class that contains all methods such as save, load, print, adding, deleting, mark as done and find.
+ */
 public class TaskList {
 
-    public TaskList() {
-    }
+    /**
+     * Creates task list.
+     */
+    public TaskList() {}
 
+    /**
+     * Prints the task list containing task type, check box to be marked as done and the task description.
+     * @param tasks Array list of tasks.
+     */
     public void printTaskList(ArrayList<Task> tasks) {
         int number = 1;
         System.out.println("Here are the tings in yo list: ");
@@ -22,6 +31,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Marks the task as done based on the user specified number.
+     * @param tasks Array list of tasks.
+     * @param input User input.
+     */
     public void showDone(ArrayList<Task> tasks, String input) {
         int indexSpace = input.indexOf(" ");
         if (indexSpace == -1) {
@@ -42,6 +56,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Deletes task that the user has indicated.
+      * @param tasks Array list of tasks.
+     * @param input User input.
+     */
     public void deleteTask(ArrayList<Task> tasks, String input) {
         int indexSpace = input.indexOf(" ");
         if (indexSpace == -1) {
@@ -63,7 +82,12 @@ public class TaskList {
         }
     }
 
-    public void printToDo(ArrayList<Task> tasks, String input, String description) {
+    /**
+     * Adds a todo task into the list.
+     * @param tasks Array list of tasks.
+     * @param description Task description.
+     */
+    public void printToDo(ArrayList<Task> tasks, String description) {
         Task todo = new toDo(description);
         tasks.add(todo);
         System.out.println("Ayy I got you my brother. I've added this ting: ");
@@ -71,7 +95,13 @@ public class TaskList {
         System.out.println("Dayuum son! You have " + tasks.size() + " mad tings in the list.");
     }
 
-    public void printDeadline(ArrayList<Task> tasks, String input, String description, String date) {
+    /**
+     * Adds a deadline task into the list.
+     * @param tasks Array list of tasks.
+     * @param description Task description.
+     * @param date Date and time in which task is due.
+     */
+    public void printDeadline(ArrayList<Task> tasks, String description, String date) {
         try {
             Task deadline = new Deadline(description, date);
             tasks.add(deadline);
@@ -83,7 +113,13 @@ public class TaskList {
         }
     }
 
-    public void printEvent(ArrayList<Task> tasks, String input, String description, String date) {
+    /**
+     * Adds an event task into the list.
+     * @param tasks Array list of tasks.
+     * @param description Task description.
+     * @param date Date and time in which task is due.
+     */
+    public void printEvent(ArrayList<Task> tasks, String description, String date) {
         try {
             Task event = new Event(description, date);
             tasks.add(event);
@@ -95,6 +131,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Finds and display tasks containing the keyword indicated by user.
+     * @param tasks Array list of tasks.
+     * @param keyword Keyword used for search.
+     */
     public void findTask(ArrayList<Task> tasks, String keyword) {
         System.out.print("Here are the search results:\n");
         for (Task task : tasks) {
@@ -104,6 +145,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Finds and display tasks containing the date indicated by user.
+     * @param tasks Array list of tasks.
+     * @param date Date used for search.
+     */
     public void findByDate(ArrayList<Task> tasks, LocalDate date) {
         System.out.print("Here are the search results:\n");
         for (Task task : tasks) {

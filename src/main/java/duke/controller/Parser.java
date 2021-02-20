@@ -4,14 +4,16 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Parser class that processes the input of the user.
+ */
 public class Parser {
 
-    /*Methods to process the input of the user.
-If input is not valid, returns string nonsense.
-The type of task is indicated by the first substring and the task description is found after the first blank space.
-If a forward slash present,  ths substring is split into the task and the end date which is indicated by the slash.
-Exception handling includes cases where no tasks are specified, invalid inputs, no date or time being specified (for event and deadline)*/
-
+    /**
+     * Sorts input of the user to obtain the task.
+     * @param input User input.
+     * @return Command strings (list, done, bye, delete, save, date), and keyword and task processed from the input.
+     */
     public String sortTask(String input) {
         if (input.equalsIgnoreCase("list")) {
             return "list";
@@ -36,6 +38,11 @@ Exception handling includes cases where no tasks are specified, invalid inputs, 
         }
     }
 
+    /**
+     * Extracts the task from the user input.
+     * @param input User input.
+     * @return Task extracted from input.
+     */
     public String extractTask(String input) {
         String task;
         int indexOfSpace = input.indexOf(" ");
@@ -53,6 +60,11 @@ Exception handling includes cases where no tasks are specified, invalid inputs, 
         }
     }
 
+    /**
+     * Sorts input from the user to obtain the date and time.
+     * @param input User input.
+     * @return Command strings (list, done, bye, delete, save, todo), and date and time processed from the input.
+     */
     public String sortDate(String input) {
         if (input.equalsIgnoreCase("list")) {
             return "list";
@@ -74,12 +86,22 @@ Exception handling includes cases where no tasks are specified, invalid inputs, 
         }
     }
 
+    /**
+     * Extracts date from the user input for search by date.
+     * @param dateTime Date which the task is due.
+     * @return Date in which task is due.
+     */
     public String extractDate(String dateTime) {
         int indexOfSpace = dateTime.indexOf(" ");
         String date = dateTime.substring(indexOfSpace+1);
         return date;
     }
 
+    /**
+     * Extracts date and time from user input.
+     * @param input User input.
+     * @return Date and time in which task is due.
+     */
     public String extractDateTime(String input) {
         String date;
         int indexOfSpace = input.indexOf(" ");
@@ -99,12 +121,23 @@ Exception handling includes cases where no tasks are specified, invalid inputs, 
         }
     }
 
+    /**
+     * Processese the date and time of input into DateTime format.
+     * @param dateTime Date and time of task.
+     * @return Date and time in DateTime format.
+     * @throws DateTimeParseException
+     */
     public LocalDate processSearch(String dateTime) throws DateTimeParseException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDate datetime = LocalDate.parse(dateTime, formatter);
         return datetime;
     }
 
+    /**
+     * Extracts keyword from user input for search task by keyword.
+     * @param input User input.
+     * @return Keyword.
+     */
     public String extractKeyword(String input) {
         String keyword;
         int indexOfSpace = input.indexOf(" ");

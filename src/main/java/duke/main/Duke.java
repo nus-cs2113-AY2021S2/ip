@@ -7,26 +7,49 @@ import duke.controller.Storage;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Main duke class.
+ */
 public class Duke {
 
+    /**
+     * Creates new static UI object.
+     */
     private static UI ui = new UI();
+
+    /**
+     * Creates new static Storage object.
+     */
     private static Storage storage = new Storage();
+
+    /**
+     * Creates ArrayList tasks.
+     */
     private ArrayList<Task> tasks = new ArrayList<Task>();
 
+    /**
+     * Duke constructor.
+     */
     public Duke() {}
 
+    /**
+     * Loads save file.
+     */
     public void load() {
         tasks = storage.printFileContents();
     }
 
-    public void run() throws IOException {
+    /**
+     * Run duke app.
+     */
+    public void run() {
         ui.displayWelcome();
         ui.displayCommands();
         load();
         ui.handleTasklist(tasks);
     }
 
-    public static void main(String[] args) throws IOException{
+    public static void main(String[] args) {
         Duke duke = new Duke();
         duke.run();
     }

@@ -7,14 +7,34 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * UI class that handles the user interface commands.
+ */
 public class UI {
 
+    /**
+     * Creates new task list object.
+     */
     private TaskList tasklist = new TaskList();
+
+    /**
+     * Creates parser object.
+     */
     private Parser parser = new Parser();
+
+    /**
+     * Creates storage object.
+     */
     private Storage store = new Storage();
 
+    /**
+     * Creates UI.
+     */
     public UI() {};
 
+    /**
+     * Displays welcome message.
+     */
     public void displayWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -25,6 +45,9 @@ public class UI {
         System.out.println("Ay yo homie! You lookin PENGGGGGGGG today!\nIt's ya boi Duke the Dawg. What can I do for ma G?\n");
     }
 
+    /**
+     * Displays all available commands for user input.
+     */
     public void displayCommands() {
         String instructions = "1. todo TASKNAME : adds a todo task to the list.\n" +
             "2. event TASKNAME /at TASKDATETIME* : adds a event task to the list.\n" +
@@ -41,6 +64,10 @@ public class UI {
         System.out.println(instructions);
     }
 
+    /**
+     * Handles user input and provides the desired output for each command.
+     * @param tasks Array list of tasks.
+     */
     public void handleTasklist(ArrayList<Task> tasks) {
         Scanner sc = new Scanner(System.in);
         Boolean isSame = true;
@@ -67,11 +94,11 @@ public class UI {
             } else if (input.contains("delete")) {
                 tasklist.deleteTask(tasks, input);
             } else if (input.contains("todo")) {
-                tasklist.printToDo(tasks, input, stringTask);
+                tasklist.printToDo(tasks, stringTask);
             } else if (input.contains("deadline")) {
-                tasklist.printDeadline(tasks, input, stringTask, stringDate);
+                tasklist.printDeadline(tasks, stringTask, stringDate);
             } else if (input.contains("event")) {
-                tasklist.printEvent(tasks, input, stringTask, stringDate);
+                tasklist.printEvent(tasks, stringTask, stringDate);
             } else if (input.contains("find")) {
                 String keyword = parser.extractKeyword(input);
                 tasklist.findTask(tasks, keyword);
