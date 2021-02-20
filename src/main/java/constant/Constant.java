@@ -11,6 +11,7 @@ public class Constant {
     public final int INPUT_CODE_DEADLINE = 5;
     public final int INPUT_CODE_EVENT = 6;
     public final int INPUT_CODE_DELETE = 7;
+    public final int INPUT_CODE_FIND = 8;
 
     // String message constants
     public final String DIVIDER_LINE = "____________________________________________________________";

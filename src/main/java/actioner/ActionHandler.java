@@ -30,13 +30,23 @@ public class ActionHandler {
             performEvent(userInput);
         } else if (commandCode == constant.INPUT_CODE_DELETE) {
             performDelete(userInput);
+        } else if (commandCode == constant.INPUT_CODE_FIND) {
+            performFind(userInput);
         } else if (commandCode == constant.INPUT_CODE_INVALID) {
             performInvalid();
         } else if (commandCode == constant.INPUT_CODE_DEFAULT_INVALID) {
             performDefault();
         } else {
             System.out.println("Unknown Operation!");
+            System.out.println(constant.DIVIDER_LINE);
         }
+    }
+
+    private static void performFind(String userInput) {
+        System.out.println(constant.DIVIDER_LINE);
+        String keyWord = parser.extractTaskDescription(userInput);
+        taskHandler.findByWord(keyWord);
+        System.out.println(constant.DIVIDER_LINE);
     }
 
     private static void performList() {

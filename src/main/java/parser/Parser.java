@@ -35,6 +35,9 @@ public class Parser {
             return initCheckEvent(userInput);
         case "delete":
             return initCheckDelete(userInput, words);
+        case "find":
+            System.out.println("testing only la chill");
+            return initCheckFind(userInput, words);
         default:
             return constant.INPUT_CODE_DEFAULT_INVALID;
         }
@@ -49,7 +52,7 @@ public class Parser {
             return constant.INPUT_CODE_INVALID;
         } catch (ArrayIndexOutOfBoundsException e) {
             printer.printTaskWarningMessage(userInput);
-            System.out.println("You need a task number behind done command!!");
+            System.out.println("You need a task number behind done command!");
             return constant.INPUT_CODE_INVALID;
         }
     }
@@ -118,6 +121,16 @@ public class Parser {
         }
     }
 
+    private static int initCheckFind(String userInput, String[] words) {
+        try {
+            return validateFindCommand(words);
+        } catch (FindCommandException e) {
+            printer.printTaskWarningMessage(userInput);
+            System.out.println("You need a key word to search!");
+            return constant.INPUT_CODE_INVALID;
+        }
+    }
+
     private static int validateDoneCommand(String[] words) throws DoneCommandException {
         if (Integer.parseInt(words[1]) < 1 || words.length == 1) {
             throw new DoneCommandException();
@@ -178,6 +191,14 @@ public class Parser {
             throw new DeleteCommandException();
         } else {
             return constant.INPUT_CODE_DELETE;
+        }
+    }
+
+    private static int validateFindCommand(String[] words) throws FindCommandException {
+        if (words.length == 1) {
+            throw new FindCommandException();
+        } else {
+            return constant.INPUT_CODE_FIND;
         }
     }
 
