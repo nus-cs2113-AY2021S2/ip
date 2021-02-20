@@ -15,7 +15,7 @@ public class Ui {
     private static final String WRONG_FORMAT_MESSAGE = "Are you spasticated? The format is wrong!";
     private static final String NO_NAME_MESSAGE = "Why you be trying to find something with no name? Ave' you been smoking me special stash?";
     private static final String EXCEED_CAPACITY_MESSAGE = "Maximum capacity reached";
-    private static final String SET_TO_DONE_MESSAGE = " set to done. You're well smart innit?";
+    private static final String TOTAL_TASK_MESSAGE = "You is having %d task(s) on your list";
 
     public void printGreeting() {
         System.out.println(GREETING_MESSAGE);
@@ -28,13 +28,8 @@ public class Ui {
         System.out.println(GOODBYE_MESSAGE);
         printBorderLine();
     }
-
-    /** Method used to print each item for "list" command */
-    public void printListItem(int index, String type, String status, String name, String date) {
-        System.out.println(index + ". " + type + "[" + status + "] " + name + " " + date);
-    }
-    public void printMarkedDone(String name) {
-        System.out.println(name + SET_TO_DONE_MESSAGE);
+    public void printTotalTasks() {
+        System.out.println(String.format(TOTAL_TASK_MESSAGE, Task.totalNumberOfTasks));
     }
     /**
      * Prints appropriate error message according to error type.
