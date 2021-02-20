@@ -16,6 +16,11 @@ public class Deadline extends Task {
     }
 
     @Override
+    public Boolean isSameDate(DateTime dateTime) {
+        return by.isSameDate(dateTime);
+    };
+
+    @Override
     public String toString() {
         return super.toString() + String.format(" (by: %s)", by);
     }

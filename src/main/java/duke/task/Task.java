@@ -2,11 +2,13 @@ package duke.task;
 
 import java.io.Serializable;
 
+import duke.DateTime;
 import duke.exception.InvalidInputException;
 import duke.exception.InvalidInputException.InputExceptionType;
 
-@SuppressWarnings("serial")
 public abstract class Task implements Serializable {
+    public static final long serialVersionUID = 1L;
+
     // We set the default type icon to be *, which should be overwritten for child classes
     protected String typeIcon = "*";
 
@@ -40,6 +42,9 @@ public abstract class Task implements Serializable {
     public void markAsDone() {
         isDone = true;
     }
+
+    // Check whether this task falls on a specific date
+    public abstract Boolean isSameDate(DateTime dateTime);
 
     public String toString() {
         return String.format("[%s][%s] %s", getTypeIcon(), getStatusIcon(), getDescription());

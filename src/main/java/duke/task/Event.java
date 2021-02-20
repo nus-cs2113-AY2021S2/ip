@@ -16,6 +16,11 @@ public class Event extends Task {
     }
 
     @Override
+    public Boolean isSameDate(DateTime dateTime) {
+        return at.isSameDate(dateTime);
+    };
+
+    @Override
     public String toString() {
         return super.toString() + String.format(" (at: %s)", at);
     }

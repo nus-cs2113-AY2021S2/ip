@@ -15,21 +15,25 @@ public class DateTime implements Serializable {
     protected static String datePattern = "dd/MM/yyyy";
     protected static String timePattern = "HH:mm";
 
-    protected LocalDateTime datetime;
+    protected LocalDateTime dateTime;
 
     public DateTime(String dateTimeString) {
         try {
-            datetime =
+            dateTime =
                     LocalDateTime.parse(dateTimeString, DateTimeFormatter.ofPattern(datePattern + " " + timePattern));
         } catch (DateTimeParseException e) {
-            // Fail to parse a datetime - try to parse a date (without time)
+            // Fail to parse a datetime - try to parse a date (with time set at 12 PM noon)
             LocalDate date = LocalDate.parse(dateTimeString, DateTimeFormatter.ofPattern(datePattern));
-            datetime = LocalDateTime.of(date, LocalTime.parse("00:00"));
+            dateTime = LocalDateTime.of(date, LocalTime.parse("12:00"));
         }
+    }
+
+    public Boolean isSameDate(DateTime dateTime) {
+        return this.dateTime.toLocalDate().isEqual(dateTime.dateTime.toLocalDate());
     }
 
     @Override
     public String toString() {
-        return datetime.format(DateTimeFormatter.ofPattern(datePattern + " " + timePattern));
+        return dateTime.format(DateTimeFormatter.ofPattern(datePattern + " " + timePattern));
     }
 }
