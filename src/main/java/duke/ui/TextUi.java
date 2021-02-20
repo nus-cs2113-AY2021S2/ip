@@ -61,7 +61,7 @@ public class TextUi {
         System.out.println(ENTER_HELP_FOR_LIST_OF_COMMANDS);
     }
 
-    private static void printListFullWarning() {
+    public void printListFullWarning() {
         System.out.println(LIST_FULL_WARNING);
         System.out.println(PROMPT_ENTER_BYE_TO_EXIT);
     }
