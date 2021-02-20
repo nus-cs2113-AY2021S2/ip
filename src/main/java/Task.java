@@ -9,7 +9,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return "[T][" + getStatusIcon() + "] " + description;
+        return ("[T][" + getStatusIcon() + "] " + description);
     }
 
     public String getDescription() {
@@ -22,5 +22,9 @@ public class Task {
 
     public void markAsDone() {
         isDone = true;
+    }
+
+    public String toFormat() {
+        return (description);
     }
 }
