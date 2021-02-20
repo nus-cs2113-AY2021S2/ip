@@ -9,6 +9,8 @@ ____________________________________________________________
  Hello! I'm Duke.
  What can I do for you?
 ____________________________________________________________
+ I've created a text file at C:\Users\zelle\Documents\NUS\AY2021 S2\CS2113T\ip\text-ui-test to save your tasks!
+____________________________________________________________
 ____________________________________________________________
  Alright, I've added this task:
    [T][ ] borrow book

@@ -28,7 +28,7 @@ public class Duke {
         String filePath = new File("").getAbsolutePath();
 
         try {
-            tasks = loadfromFile(filePath + "/duke.txt");
+            tasks = loadFromFile(filePath + "/duke.txt");
         } catch (FileNotFoundException e) {
             System.out.println(" I've created a text file at " + filePath + " to save your tasks!");
             printHorizontalLine();
@@ -49,19 +49,19 @@ public class Duke {
                 printListMessage(tasks);
                 break;
             case "done":
-                markTaskAsDone(tasks, command[1]);
+                markTaskAsDone(tasks, command);
                 break;
             case "deadline":
-                addDeadline(tasks, COMMAND_TASK_SEPARATOR, command[1]);
+                addDeadline(tasks, COMMAND_TASK_SEPARATOR, command);
                 break;
             case "event":
-                addEvent(tasks, COMMAND_TASK_SEPARATOR, command[1]);
+                addEvent(tasks, COMMAND_TASK_SEPARATOR, command);
                 break;
             case "todo":
-                addToDo(tasks, command[1]);
+                addToDo(tasks, command);
                 break;
             case "delete":
-                deleteTask(tasks, command[1]);
+                deleteTask(tasks, command);
                 break;
             default:
                 printCommandDoesNotExistMessage();
@@ -105,8 +105,7 @@ public class Duke {
         }
     }
 
-    public static ArrayList<Task> loadfromFile(String filePath) throws FileNotFoundException {
-        //creates a file for filepath
+    public static ArrayList<Task> loadFromFile(String filePath) throws FileNotFoundException {
         File file = new File(filePath);
         Scanner s = new Scanner(file);
         ArrayList<Task> tasks = new ArrayList<>();
@@ -166,10 +165,10 @@ public class Duke {
         }
     }
 
-    public static void markTaskAsDone(ArrayList<Task> tasks, String s) {
+    public static void markTaskAsDone(ArrayList<Task> tasks, String[] command) {
         Task task;
         try {
-            int doneTaskNumber = Integer.parseInt(s);
+            int doneTaskNumber = Integer.parseInt(command[1]);
             task = tasks.get(doneTaskNumber - 1);
             task.markAsDone();
             printDoneMessage(task);
@@ -185,10 +184,10 @@ public class Duke {
         System.out.println("   " + task.toString());
     }
 
-    public static void addDeadline(ArrayList<Task> tasks, int COMMAND_TASK_SEPARATOR, String s) {
+    public static void addDeadline(ArrayList<Task> tasks, int COMMAND_TASK_SEPARATOR, String[] command) {
         String[] description;
         try {
-            description = s.split("/by", COMMAND_TASK_SEPARATOR);
+            description = command[1].split("/by", COMMAND_TASK_SEPARATOR);
             checkForValidDeadlineInput(description);
             Deadline deadline = new Deadline(description[0].trim(), description[1].trim());
             tasks.add(deadline);
@@ -204,10 +203,10 @@ public class Duke {
         }
     }
 
-    public static void addEvent(ArrayList<Task> tasks, int COMMAND_TASK_SEPARATOR, String s) {
+    public static void addEvent(ArrayList<Task> tasks, int COMMAND_TASK_SEPARATOR, String[] command) {
         String[] description;
         try {
-            description = s.split("/at", COMMAND_TASK_SEPARATOR);
+            description = command[1].split("/at", COMMAND_TASK_SEPARATOR);
             checkForValidEventInput(description);
             Event event = new Event(description[0].trim(), description[1].trim());
             tasks.add(event);
@@ -223,9 +222,9 @@ public class Duke {
         }
     }
 
-    public static void addToDo(ArrayList<Task> tasks, String description1) {
+    public static void addToDo(ArrayList<Task> tasks, String[] command) {
         try {
-            ToDo toDo = new ToDo(description1);
+            ToDo toDo = new ToDo(command[1]);
             tasks.add(toDo);
             printAddedMessage(tasks, toDo);
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -238,10 +237,10 @@ public class Duke {
                 + " Now you have " + tasks.size() + " tasks in your list.");
     }
 
-    public static void deleteTask(ArrayList<Task> tasks, String s) {
+    public static void deleteTask(ArrayList<Task> tasks, String[] command) {
         try {
-            int deleteTaskNumber = Integer.parseInt(s);
-            Task deletedTask = tasks.get(deleteTaskNumber - 1);
+            int taskNumberToBeDeleted = Integer.parseInt(command[1]);
+            Task deletedTask = tasks.get(taskNumberToBeDeleted - 1);
             tasks.remove(deletedTask);
             printDeletedMessage(tasks, deletedTask);
         } catch (IndexOutOfBoundsException e) {
