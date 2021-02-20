@@ -17,7 +17,7 @@ public class Storage {
 
     // load new file
     public static void initFile() {
-        printer.printHelloStatement();
+        printer.printWelcomeMessage();
         try {
             System.out.println(constant.FILE_LOAD_MESSAGE);
             tryRunFile();

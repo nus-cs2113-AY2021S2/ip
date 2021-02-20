@@ -17,7 +17,7 @@ public class ActionHandler {
     // Perform the action give the command
     public static void performAction(int commandCode, String userInput) {
         if (commandCode == constant.INPUT_CODE_EXIT) {
-            printer.printBye();
+            printer.printExitMessage();
         } else if (commandCode == constant.INPUT_CODE_LIST) {
             performList();
         } else if (commandCode == constant.INPUT_CODE_DONE) {

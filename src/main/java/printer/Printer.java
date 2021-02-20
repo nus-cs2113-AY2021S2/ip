@@ -7,7 +7,7 @@ public class Printer {
     private static final Constant constant = new Constant();
     private static final TaskHandler taskHandler = new TaskHandler();
 
-    public static void printHelloStatement() {
+    public static void printWelcomeMessage() {
         String logo = "           ____\n" +
                 "       _.-'78o `\"`--._\n" +
                 "   ,o888o.  .o888o,   ''-.\n" +
@@ -31,7 +31,7 @@ public class Printer {
         System.out.println(constant.DIVIDER_LINE);
     }
 
-    public static void printBye() {
+    public static void printExitMessage() {
         System.out.println(constant.DIVIDER_LINE);
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println(constant.DIVIDER_LINE);
