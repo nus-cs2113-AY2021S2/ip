@@ -12,8 +12,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Storage class that handles saving and loading of the file.
+ */
 public class Storage {
 
+    /**
+     * Saves the output task list into a txt file.
+     * @param tasks Array list of tasks.
+     */
     public void saveFile(ArrayList<Task> tasks) {
         try {
             FileWriter writer = new FileWriter("saveDuke.txt");
@@ -35,6 +42,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads task list containing saved tasks from the txt file.
+     * @return Task list.
+     */
     public ArrayList<Task> printFileContents() {
         ArrayList<Task> tasks = new ArrayList<Task>();
         try {
