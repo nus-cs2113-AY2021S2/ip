@@ -186,6 +186,7 @@ If the file isn't found, a new one will be created upon changes.
 
 ## Command summary
 List of commands in 8K's Task Planner.
+
 | Command | Format |
 | --------- | ------------------------------------------------------- |
 | help | help |
