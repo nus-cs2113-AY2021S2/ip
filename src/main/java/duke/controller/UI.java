@@ -79,7 +79,7 @@ public class UI {
                     LocalDate Date = parser.processSearch(date);
                     tasklist.findByDate(tasks, Date);
                 } catch (DateTimeParseException e) {
-                    System.out.println("Please key in specified format yyyy-MM-dd.");
+                    System.out.println("Please key in specified format dd-MM-yyyy.");
                 }
             } else if (input.contains("save")) {
                 store.saveFile(tasks);
