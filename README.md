@@ -133,7 +133,7 @@ Invalid indices will be skipped.<br>
 | | Result |
 | --------- | ------------------------------------------------------- |
 | Input | done 1 2 |
-| Output | Marked as done:<br>[D][✓] task1 (by: 12 Dec 2020)<br>[D][✓] task2 (by: 20 Feb 2021) |
+| Output | Marked as done:<br>[D][X] task1 (by: 12 Dec 2020)<br>[D][X] task2 (by: 20 Feb 2021) |
 | Action | Mark first and second task in task list as done |
 
 &nbsp;
