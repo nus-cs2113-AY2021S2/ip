@@ -5,6 +5,7 @@ public class InvalidInputException extends Exception {
     public static enum InputExceptionType {
         UNKNOWN_COMMAND,
         EMPTY_DESCRIPTION,
+        EMPTY_INDEX,
         NO_BY_DATE,
         NO_AT_DATE,
         NOT_INTEGER,
@@ -25,6 +26,8 @@ public class InvalidInputException extends Exception {
             return "Command given is not recognized as a valid one.";
         case EMPTY_DESCRIPTION:
             return "You will need to provide a description.";
+        case EMPTY_INDEX:
+            return "An integer index must follow the command";
         case NO_BY_DATE:
             return "You must specify a deadline date following /by keyword.";
         case NO_AT_DATE:

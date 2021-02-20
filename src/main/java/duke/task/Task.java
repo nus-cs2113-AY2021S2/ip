@@ -16,7 +16,7 @@ public abstract class Task implements Serializable {
     protected boolean isDone;
 
     public Task(String description) throws InvalidInputException {
-        if (description.isEmpty()) {
+        if (description == null || description.isEmpty()) {
             throw new InvalidInputException(InputExceptionType.EMPTY_DESCRIPTION);
         }
         this.description = description;

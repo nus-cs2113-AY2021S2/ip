@@ -1,86 +1,59 @@
 package duke;
 
-import java.util.Arrays;
-import java.util.Scanner;
-import java.util.Vector;
-
-import duke.exception.InvalidInputException;
-import duke.exception.InvalidInputException.InputExceptionType;
-import duke.task.Task;
+import duke.command.Command;
 
 public class Duke {
-    public static final String LONG_LINE = "------------------------------------------------------------";
-    public static final String SAVE_PATH = "duke.save";
+    public static final String DEFAULT_SAVE_PATH = "duke.save";
 
-    public static void main(String[] args) {
-        // Initialize a vector to store all the tasks
-        Vector<Task> tasks = null;
+    protected TaskList tasks;
+    protected Ui ui;
+    protected Parser parser;
+
+    public Duke(String filepath) {
+        ui = new Ui();
+        Storage storage = new Storage(filepath);
         try {
-            tasks = Helper.loadList(SAVE_PATH);
+            tasks = storage.load();
         } catch (Exception e) {
-            Helper.printlnWithIndent("Got a problem when loading save file at " + SAVE_PATH + ": " + e.getMessage());
-            Helper.printlnWithIndent("An empty list will be used instead!");
-        } finally {
-            if (tasks == null) {
-                tasks = new Vector<>();
-            }
+            ui.printLoadSaveException(filepath, e);
+            tasks = new TaskList(storage);
         }
+        parser = new Parser(ui, tasks);
+    }
 
-        ActionHandler.greetingHandler();
-        Helper.printlnWithIndent(LONG_LINE);
+    public void run() {
+        ui.printWelcome();
 
-        Scanner in = new Scanner(System.in);
-        Boolean isExit = false;
-
-        while (!isExit) {
-            String line = in.nextLine();
-            // Split the line by any whitespaces characters (including spaces, tabs etc.)
-            String[] arguments = line.split("\\s+");
-            // If first argument (command) is empty, there are empty spaces typed in at the front - so we remove it
-            if (arguments[0].isEmpty()) {
-                arguments = Arrays.copyOfRange(arguments, 1, arguments.length);
+        while (true) {
+            String fullCommand = ui.read();
+            if (fullCommand == null) {
+                // Reach EOF, exit the program
+                break;
             }
-
-            Helper.printlnWithIndent(LONG_LINE);
-
+            ui.printLine();
             try {
-                switch(arguments[0]) {
-                case "bye":
-                    ActionHandler.byeHandler();
-                    isExit = true;
+                Command cmd = parser.parse(fullCommand);
+                cmd.execute();
+                if (cmd.isExit()) {
                     break;
-                case "list":
-                    ActionHandler.listHandler(tasks);
-                    break;
-                case "done":
-                    ActionHandler.doneHandler(tasks, arguments);
-                    Helper.saveList(SAVE_PATH, tasks);
-                    break;
-                case "delete":
-                    ActionHandler.deleteHandler(tasks, arguments);
-                    Helper.saveList(SAVE_PATH, tasks);
-                    break;
-                case "deadline":
-                    ActionHandler.deadlineHandler(tasks, arguments);
-                    Helper.saveList(SAVE_PATH, tasks);
-                    break;
-                case "event":
-                    ActionHandler.eventHandler(tasks, arguments);
-                    Helper.saveList(SAVE_PATH, tasks);
-                    break;
-                case "todo":
-                    ActionHandler.todoHandler(tasks, arguments);
-                    Helper.saveList(SAVE_PATH, tasks);
-                    break;
-                default:
-                    throw new InvalidInputException(InputExceptionType.UNKNOWN_COMMAND);
                 }
             } catch (Exception e) {
-                Helper.printlnWithIndent("Oops! " + e.getMessage());
+                ui.printException(e);
+            } finally {
+                ui.printLine();
             }
-
-            Helper.printlnWithIndent(LONG_LINE);
         }
-        in.close();
+
+        // Close Ui instance to release resources (such as Scanner instance)
+        ui.close();
+    }
+
+    public static void main(String[] args) {
+        String filepath = DEFAULT_SAVE_PATH;
+        if (args.length > 0) {
+            // If additional argument is provided, take 1st argument as the save filepath
+            filepath = args[0];
+        }
+        new Duke(filepath).run();
     }
 }

@@ -1,5 +1,7 @@
-	Got a problem when loading save file at duke.save: No save file is found at the given path.
+	Oops! No save file is found at the given path.
+	Got a problem when loading save file at 'duke.save'.
 	An empty list will be used instead!
+	------------------------------------------------------------
 	Hello! I'm Duke.
 	What can I do for you?
 	------------------------------------------------------------
