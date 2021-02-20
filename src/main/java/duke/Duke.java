@@ -20,15 +20,11 @@ public class Duke {
 
     public static void main(String[] args) {
 
-        Scanner userInput = new Scanner(System.in);
-
         printStartingMessage();
 
+        Scanner userInput = new Scanner(System.in);
         ArrayList<Task> tasks = new ArrayList<>();
-        Task task;
-        String[] description;
-        String inputLine;
-        int COMMAND_TASK_SEPARATOR = 2;
+        final int COMMAND_TASK_SEPARATOR = 2;
         String filePath = new File("").getAbsolutePath();
 
         try {
@@ -38,95 +34,45 @@ public class Duke {
             printHorizontalLine();
         }
 
-        while (!(inputLine = userInput.nextLine().trim()).equals("bye")) {
+        while (true) {
+            String inputLine = userInput.nextLine().trim();
 
-            printHorizontalLine();
+            if (inputLine.equals("bye")) {
+                break;
+            }
 
             String[] command = inputLine.split(" ", COMMAND_TASK_SEPARATOR);
+            printHorizontalLine();
 
             switch (command[0].toLowerCase()) {
             case "list":
                 printListMessage(tasks);
                 break;
             case "done":
-                try {
-                    int doneTaskNumber = Integer.parseInt(command[1]);
-                    task = tasks.get(doneTaskNumber - 1);
-                    task.markAsDone();
-                    printDoneMessage(task);
-                } catch (IndexOutOfBoundsException e) {
-                    printNonExistentTaskMessage();
-                } catch (NumberFormatException e) {
-                    printNotANumberMessage();
-                }
+                markTaskAsDone(tasks, command[1]);
                 break;
             case "deadline":
-                try {
-                    description = command[1].split("/by", COMMAND_TASK_SEPARATOR);
-                    checkForValidDeadlineInput(description);
-                    Deadline deadline = new Deadline(description[0].trim(), description[1].trim());
-                    tasks.add(deadline);
-                    printAddedMessage(tasks, deadline);
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    printMissingFieldsMessage();
-                } catch (DescriptionFieldEmptyException e) {
-                    printDescriptionFieldEmptyMessage();
-                } catch (TimeFieldEmptyException e) {
-                    printTimeFieldEmptyMessage();
-                } catch (MultipleTimeFieldsException e) {
-                    printTooManyTimeFieldsMessage();
-                }
+                addDeadline(tasks, COMMAND_TASK_SEPARATOR, command[1]);
                 break;
             case "event":
-                try {
-                    description = command[1].split("/at", COMMAND_TASK_SEPARATOR);
-                    checkForValidEventInput(description);
-                    Event event = new Event(description[0].trim(), description[1].trim());
-                    tasks.add(event);
-                    printAddedMessage(tasks, event);
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    printMissingFieldsMessage();
-                } catch (DescriptionFieldEmptyException e) {
-                    printDescriptionFieldEmptyMessage();
-                } catch (TimeFieldEmptyException e) {
-                    printTimeFieldEmptyMessage();
-                } catch (MultipleTimeFieldsException e) {
-                    printTooManyTimeFieldsMessage();
-                }
+                addEvent(tasks, COMMAND_TASK_SEPARATOR, command[1]);
                 break;
             case "todo":
-                try {
-                    ToDo toDo = new ToDo(command[1]);
-                    tasks.add(toDo);
-                    printAddedMessage(tasks, toDo);
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    printMissingFieldsMessage();
-                }
+                addToDo(tasks, command[1]);
                 break;
             case "delete":
-                try {
-                    int deleteTaskNumber = Integer.parseInt(command[1]);
-                    Task deletedTask = tasks.get(deleteTaskNumber - 1);
-                    tasks.remove(deletedTask);
-                    printDeletedMessage(tasks, deletedTask);
-                } catch (IndexOutOfBoundsException e) {
-                    printNonExistentTaskMessage();
-                } catch (NumberFormatException e) {
-                    printNotANumberMessage();
-                }
+                deleteTask(tasks, command[1]);
                 break;
             default:
                 printCommandDoesNotExistMessage();
                 break;
             }
-
             printHorizontalLine();
         }
 
         saveToFile(tasks);
 
         printByeMessage();
-
     }
 
     public static void saveToFile(ArrayList<Task> tasks) {
@@ -220,14 +166,89 @@ public class Duke {
         }
     }
 
+    public static void markTaskAsDone(ArrayList<Task> tasks, String s) {
+        Task task;
+        try {
+            int doneTaskNumber = Integer.parseInt(s);
+            task = tasks.get(doneTaskNumber - 1);
+            task.markAsDone();
+            printDoneMessage(task);
+        } catch (IndexOutOfBoundsException e) {
+            printNonExistentTaskMessage();
+        } catch (NumberFormatException e) {
+            printNotANumberMessage();
+        }
+    }
+
     public static void printDoneMessage(Task task) {
         System.out.println(" Nice! I've marked this task as done:");
         System.out.println("   " + task.toString());
     }
 
+    public static void addDeadline(ArrayList<Task> tasks, int COMMAND_TASK_SEPARATOR, String s) {
+        String[] description;
+        try {
+            description = s.split("/by", COMMAND_TASK_SEPARATOR);
+            checkForValidDeadlineInput(description);
+            Deadline deadline = new Deadline(description[0].trim(), description[1].trim());
+            tasks.add(deadline);
+            printAddedMessage(tasks, deadline);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            printMissingFieldsMessage();
+        } catch (DescriptionFieldEmptyException e) {
+            printDescriptionFieldEmptyMessage();
+        } catch (TimeFieldEmptyException e) {
+            printTimeFieldEmptyMessage();
+        } catch (MultipleTimeFieldsException e) {
+            printTooManyTimeFieldsMessage();
+        }
+    }
+
+    public static void addEvent(ArrayList<Task> tasks, int COMMAND_TASK_SEPARATOR, String s) {
+        String[] description;
+        try {
+            description = s.split("/at", COMMAND_TASK_SEPARATOR);
+            checkForValidEventInput(description);
+            Event event = new Event(description[0].trim(), description[1].trim());
+            tasks.add(event);
+            printAddedMessage(tasks, event);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            printMissingFieldsMessage();
+        } catch (DescriptionFieldEmptyException e) {
+            printDescriptionFieldEmptyMessage();
+        } catch (TimeFieldEmptyException e) {
+            printTimeFieldEmptyMessage();
+        } catch (MultipleTimeFieldsException e) {
+            printTooManyTimeFieldsMessage();
+        }
+    }
+
+    public static void addToDo(ArrayList<Task> tasks, String description1) {
+        try {
+            ToDo toDo = new ToDo(description1);
+            tasks.add(toDo);
+            printAddedMessage(tasks, toDo);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            printMissingFieldsMessage();
+        }
+    }
+
     public static void printAddedMessage(ArrayList<Task> tasks, Task task) {
         System.out.println(" Alright, I've added this task:\n   " + task.toString() + "\n"
                 + " Now you have " + tasks.size() + " tasks in your list.");
+    }
+
+    public static void deleteTask(ArrayList<Task> tasks, String s) {
+        try {
+            int deleteTaskNumber = Integer.parseInt(s);
+            Task deletedTask = tasks.get(deleteTaskNumber - 1);
+            tasks.remove(deletedTask);
+            printDeletedMessage(tasks, deletedTask);
+        } catch (IndexOutOfBoundsException e) {
+            printNonExistentTaskMessage();
+        } catch (NumberFormatException e) {
+            printNotANumberMessage();
+        }
     }
 
     public static void printDeletedMessage(ArrayList<Task> tasks, Task task) {
