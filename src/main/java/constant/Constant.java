@@ -1,6 +1,7 @@
 package constant;
 
 public class Constant {
+
     // Commands code constants
     public final int INPUT_CODE_EXIT = -1;
     public final int INPUT_CODE_DEFAULT_INVALID = 0;

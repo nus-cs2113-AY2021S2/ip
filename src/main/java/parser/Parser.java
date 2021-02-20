@@ -10,6 +10,12 @@ public class Parser {
     private static final Constant constant = new Constant();
     private static final Printer printer = new Printer();
 
+    /**
+     * Parse the input from the user to the respective commands.
+     *
+     * @param userInput is the input from the console terminal.
+     * @return A fixed constant tagged to the respective command.
+     */
     public static int getCommandCode(String userInput) {
         String[] words = userInput.split(" ");
         try {
@@ -34,13 +40,19 @@ public class Parser {
         case "delete":
             return initCheckDelete(userInput, words);
         case "find":
-            System.out.println("testing only la chill");
             return initCheckFind(userInput, words);
         default:
             return constant.INPUT_CODE_DEFAULT_INVALID;
         }
     }
 
+    /**
+     * Try-catch validation block for printing error messages of 'done' command.
+     *
+     * @param userInput is the input from the console terminal.
+     * @param words contains the individual words from userInput.
+     * @return valid or invalid command code for 'done' command.
+     */
     private static int initCheckDone(String userInput, String[] words) {
         try {
             return validateDoneCommand(words);
@@ -55,16 +67,29 @@ public class Parser {
         }
     }
 
+    /**
+     * Try-catch validation block for printing error messages of 'todo' command.
+     *
+     * @param userInput is the input from the console terminal.
+     * @param words contains the individual words from userInput.
+     * @return valid or invalid command code for 'todo' command.
+     */
     private static int initCheckTodo(String userInput, String[] words) {
         try {
             return validateTodoCommand(words);
-        } catch (TodoCommandException e) {
+        } catch (EmptyTaskDescriptionException e) {
             printer.printTaskWarningMessage(userInput);
             System.out.println("You need an task behind!");
             return constant.INPUT_CODE_INVALID;
         }
     }
 
+    /**
+     * Try-catch validation block for printing error messages of 'todo' command.
+     *
+     * @param userInput is the input from the console terminal.
+     * @return valid or invalid command code for 'deadline' command.
+     */
     private static int initCheckDeadline(String userInput) {
         try {
             return validateDeadlineCommand(userInput);
@@ -87,6 +112,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Try-catch validation block for printing error messages of 'event' command.
+     *
+     * @param userInput is the input from the console terminal.
+     * @return valid or invalid command code for 'event' command.
+     */
     private static int initCheckEvent(String userInput) {
         try {
             return validateEventCommand(userInput);
@@ -105,6 +136,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Try-catch validation block for printing error messages of 'delete' command.
+     *
+     * @param userInput is the input from the console terminal.
+     * @param words contains the individual words from userInput.
+     * @return valid or invalid command code for 'delete' command.
+     */
     private static int initCheckDelete(String userInput, String[] words) {
         try {
             return validateDeleteCommand(words);
@@ -119,6 +157,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Try-catch validation block for printing error messages of 'find' command.
+     *
+     * @param userInput is the input from the console terminal.
+     * @param words contains the individual words from userInput.
+     * @return valid or invalid command code for 'find' command.
+     */
     private static int initCheckFind(String userInput, String[] words) {
         try {
             return validateFindCommand(words);
@@ -129,7 +174,16 @@ public class Parser {
         }
     }
 
-    private static int validateDoneCommand(String[] words) throws DoneCommandException {
+    /**
+     * Check if the input is in correct format.
+     *
+     * @param words contains the individual words from userInput.
+     * @throws DoneCommandException if the task number given is smaller than 1.
+     * @throws ArrayIndexOutOfBoundsException if there is no task number given.
+     * @return valid or invalid command code for 'done' command.
+     */
+    private static int validateDoneCommand(String[] words) throws DoneCommandException,
+            ArrayIndexOutOfBoundsException {
         if (Integer.parseInt(words[1]) < 1 || words.length == 1) {
             throw new DoneCommandException();
         } else {
@@ -137,14 +191,31 @@ public class Parser {
         }
     }
 
-    private static int validateTodoCommand(String[] words) throws TodoCommandException {
+    /**
+     * Check if the input is in correct format.
+     *
+     * @param words contains the individual words from userInput.
+     * @throws EmptyTaskDescriptionException if the task description is empty.
+     * @return valid or invalid command code for 'todo' command.
+     */
+    private static int validateTodoCommand(String[] words) throws EmptyTaskDescriptionException {
         if (words.length <= 1) {
-            throw new TodoCommandException();
+            throw new EmptyTaskDescriptionException();
         } else {
             return constant.INPUT_CODE_TODO;
         }
     }
 
+    /**
+     * Check if the input is in correct format.
+     *
+     * @param userInput is the input from the console terminal.
+     * @throws DeadlineCommandException if the deadline identifier format is wrong.
+     * @throws EmptyTimeDescriptionException if the time field is empty.
+     * @throws EmptyTaskDescriptionException if the task description is empty.
+     * @throws DateTimeParseException if the time field format is wrong.
+     * @return valid or invalid command code for 'deadline' command.
+     */
     private static int validateDeadlineCommand(String userInput) throws DeadlineCommandException,
             EmptyTimeDescriptionException, EmptyTaskDescriptionException, DateTimeParseException {
         if (!userInput.contains(" /by ")) {
@@ -165,6 +236,16 @@ public class Parser {
         return constant.INPUT_CODE_DEADLINE;
     }
 
+    /**
+     * Check if the input is in correct format.
+     *
+     * @param userInput is the input from the console terminal.
+     * @throws EventCommandException if the event identifier format is wrong.
+     * @throws EmptyTimeDescriptionException if the time field is empty.
+     * @throws EmptyTaskDescriptionException if the task description is empty.
+     * @throws DateTimeParseException if the time field format is wrong.
+     * @return valid or invalid command code for 'event' command.
+     */
     private static int validateEventCommand(String userInput) throws EventCommandException,
             EmptyTimeDescriptionException, EmptyTaskDescriptionException, DateTimeParseException {
         if (!userInput.contains(" /at ")) {
@@ -184,7 +265,16 @@ public class Parser {
         return constant.INPUT_CODE_EVENT;
     }
 
-    private static int validateDeleteCommand(String[] words) throws DeleteCommandException {
+    /**
+     * Check if the input is in correct format.
+     *
+     * @param words contains the individual words from userInput.
+     * @throws DeleteCommandException if the task number given is smaller than 1.
+     * @throws ArrayIndexOutOfBoundsException if there is no task number given.
+     * @return valid or invalid command code for 'delete' command.
+     */
+    private static int validateDeleteCommand(String[] words) throws DeleteCommandException,
+            ArrayIndexOutOfBoundsException {
         if (Integer.parseInt(words[1]) < 1 || words.length == 1) {
             throw new DeleteCommandException();
         } else {
@@ -192,6 +282,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Check if the input is in correct format.
+     *
+     * @param words contains the individual words from userInput.
+     * @throws DeleteCommandException if the task number given is smaller than 1.
+     * @throws ArrayIndexOutOfBoundsException if there is no task number given.
+     * @return valid or invalid command code for 'delete' command.
+     */
     private static int validateFindCommand(String[] words) throws FindCommandException {
         if (words.length == 1) {
             throw new FindCommandException();
@@ -200,6 +298,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Extract the task timing from the input.
+     *
+     * @param userInput is the input from the console terminal.
+     * @return a string containing the task timing.
+     */
     public static String extractTaskTiming(String userInput) {
         String unfilteredTaskTiming = removeCommandCode(userInput);
         String[] taskTiming = unfilteredTaskTiming.split("/", 2);
@@ -207,11 +311,23 @@ public class Parser {
         return taskTiming[1];
     }
 
+    /**
+     * Remove the command code from the input.
+     *
+     * @param userInput is the input from the console terminal.
+     * @return a string without the command code.
+     */
     private static String removeCommandCode(String userInput) {
         String[] userInputArray= userInput.split(" ", 2);
         return userInputArray[1];
     }
 
+    /**
+     * Extract the task description from the input.
+     *
+     * @param userInput is the input from the console terminal.
+     * @return a string containing the task description.
+     */
     public static String extractTaskDescription(String userInput) {
         String taskDescription = removeCommandCode(userInput);
         if (taskDescription.contains("/")) {
@@ -220,11 +336,23 @@ public class Parser {
         return taskDescription;
     }
 
+    /**
+     * Remove the date and time from the input.
+     *
+     * @param unfilteredDescription is the input without the command code.
+     * @return a string without the time and date.
+     */
     private static String removeDateAndTime(String unfilteredDescription) {
         String[] unfilteredDescriptionArray= unfilteredDescription.split("/", 2);
         return unfilteredDescriptionArray[0];
     }
 
+    /**
+     * Extract the task number from the input.
+     *
+     * @param userInput is the input from the console terminal.
+     * @return a int of the task number.
+     */
     public static int getIndexFromUserInput(String userInput) {
         String[] words = userInput.split(" ");
         int indexResult = Integer.parseInt(words[1]);

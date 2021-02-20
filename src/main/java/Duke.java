@@ -12,10 +12,9 @@ public class Duke {
 
     /**
      * This is the start of the main program.
-     * Function found here are
-     * 1. inifFile() will load any existing file if found
-     * 2. looper() will prompt the user for the commands to take action on
-     * 3. saveFile() will save any current data into a text file named tasks_log.txt
+     * 1. inifFile() will load any existing file if found.
+     * 2. looper() will prompt the user for the commands to take action on.
+     * 3. saveFile() will save any current data into a text file named tasks_log.txt.
      */
     public static void main(String[] args) {
         storage.initFile();
@@ -24,9 +23,9 @@ public class Duke {
     }
 
     /**
-     * looper() will prompt the user for the commands to take action on
-     * looper() takes in the command from console terminal and execute the command
-     * looper() only stop when it detects the exit command
+     * Prompt the user for the commands to take action on,
+     * takes in the command from console terminal and execute the command,
+     * stop only when it detects the exit command.
      */
     private static void looper() {
         int commandCode;
