@@ -34,8 +34,10 @@ public class UI {
             "6. delete NUMBER : removes task from list.\n" +
             "7. save : save task list in a seperate text file.\n" +
             "8. find KEYWORD : Displays tasks containing keyword.\n" +
-            "9. bye : exits system.\n" +
-            "\n*TASKDATETIME must be keyed in the following format dd-MM-yyyy HH:mm.\n";
+            "9. date DATE** : Displays tasks matched with date.\n" +
+            "10. bye : exits system.\n" +
+            "\n*TASKDATETIME must be keyed in the following format dd-MM-yyyy HH:mm.\n" +
+            "**DATE must be keyed in the following format dd-MM-yyyy.\n";
         System.out.println(instructions);
     }
 
