@@ -3,7 +3,6 @@ package storage;
 import task.*;
 import constant.Constant;
 import printer.Printer;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -15,7 +14,6 @@ public class Storage {
     private static final Printer printer = new Printer();
     private static final TaskHandler taskHandler = new TaskHandler();
 
-    // load new file
     public static void initFile() {
         printer.printWelcomeMessage();
         try {
@@ -86,7 +84,6 @@ public class Storage {
         return joiner.toString();
     }
 
-    // save current file
     public static void saveFile() {
         try {
             tryWriteToFiles();

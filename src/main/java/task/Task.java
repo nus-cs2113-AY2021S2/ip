@@ -4,7 +4,6 @@ public class Task {
     protected static final String MARK_DONE = "X";
     protected static final String MARK_UNDONE = " ";
     protected static final String TASK_SYMBOL_NA = " ";
-
     protected String taskStatus;
     protected String taskDescription;
 

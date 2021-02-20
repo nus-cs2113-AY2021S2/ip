@@ -2,13 +2,11 @@ package parser;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-
 import constant.Constant;
 import error.*;
 import printer.Printer;
 
 public class Parser {
-
     private static final Constant constant = new Constant();
     private static final Printer printer = new Printer();
 

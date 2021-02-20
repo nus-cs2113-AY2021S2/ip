@@ -14,7 +14,6 @@ public class ActionHandler {
     private static final TaskHandler taskHandler = new TaskHandler();
     private static final Parser parser = new Parser();
 
-    // Perform the action give the command
     public static void performAction(int commandCode, String userInput) {
         if (commandCode == constant.INPUT_CODE_EXIT) {
             printer.printExitMessage();
@@ -44,8 +43,8 @@ public class ActionHandler {
 
     private static void performFind(String userInput) {
         System.out.println(constant.DIVIDER_LINE);
-        String keyWord = parser.extractTaskDescription(userInput);
-        taskHandler.findByWord(keyWord);
+        String keyword = parser.extractTaskDescription(userInput);
+        taskHandler.findByWord(keyword);
         System.out.println(constant.DIVIDER_LINE);
     }
 

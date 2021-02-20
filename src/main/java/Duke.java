@@ -5,13 +5,11 @@ import storage.Storage;
 import java.util.Scanner;
 
 public class Duke {
-    // Variable Used in this program
     private static final Constant constant = new Constant();
     private static final Storage storage = new Storage();
     private static final Parser parser = new Parser();
     private static final ActionHandler actionHandler = new ActionHandler();
 
-    // main program
     public static void main(String[] args) {
         storage.initFile();
         looper();
