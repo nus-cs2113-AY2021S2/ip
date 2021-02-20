@@ -13,7 +13,7 @@ public class Duke {
 
     public static void main(String[] args) {
         printWelcome();
-        Parser.newInstance();
+        Parser.Instance();
         printGoodbye();
     }
 

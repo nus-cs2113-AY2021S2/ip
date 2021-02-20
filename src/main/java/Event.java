@@ -10,4 +10,7 @@ public class Event extends Task{
     public String toString() {
         return "[E]" + super.getDescription() + " (at: " + at + ")";
     }
+
+    @Override
+    public String toFormat() { return (" " + super.toFormat() + " | " + at); }
 }
