@@ -190,14 +190,7 @@ List of commands in 8K's Task Planner.
 | --------- | ------------------------------------------------------- |
 | help | help |
 | list | list |
-| todo | todo ❮name❯ |
-| event | event ❮name❯ /at ❮additional info❯ |
-| deadline | deadline ❮name❯ /by ❮DD-MM-YYYY❯ |
-| delete | delete ❮index 1❯ ❮index 2❯ ... ❮index n❯ |
-| done | done ❮index 1❯ ❮index 2❯ ❮index n❯ |
-| undo | undo ❮index 1❯ ❮index 2❯ ❮index n❯ |
-| find | find ❮keyword❯ |
-| bye | bye |
+
 
 &nbsp;
 &nbsp;
