@@ -6,20 +6,17 @@ public class List {
 
     public void addTaskFromSave(String inputTask) {
         Task userTask = new Task(inputTask.trim());
-        TaskList[numItems] = userTask;
-        addTaskNum();
+        TaskList.add(userTask);
     }
 
     public void addDeadlineFromSave(String description, String date) {
         Deadline deadline = new Deadline(description.trim(), date.trim());
-        TaskList[numItems] = deadline;
-        addTaskNum();
+        TaskList.add(deadline);
     }
 
     public void addEventFromSave(String desciptiion, String date) {
         Event event = new Event(desciptiion.trim(), date.trim());
-        TaskList[numItems] = event;
-        addTaskNum();
+        TaskList.add(event);
     }
 
     public void addTask(String inputTask) {
@@ -68,7 +65,7 @@ public class List {
     }
 
     public void markDoneFromSave(int index) {
-        TaskList[index-1].markAsDone();
+        TaskList.get(index-1).markAsDone();
     }
 
     private void taskAddedMessage(Task inputTask) {
@@ -77,7 +74,7 @@ public class List {
     }
 
     public String taskType(int index) {
-        String[] taskView = TaskList[index].toString().split("]");
+        String[] taskView = TaskList.get(index).toString().split("]");
         String simpletype = taskView[0];
         String isDone = taskView[1];
         String formattedDesc = taskView[2];
@@ -97,7 +94,7 @@ public class List {
         if (taskFormat[0].equals("todo")) {
             taskFormat[2] = formattedDesc;
         } else if (taskFormat[0].equals("deadline") || taskFormat[0].equals("event")) {
-            taskFormat[2] = TaskList[index].toFormat();
+            taskFormat[2] = TaskList.get(index).toFormat();
         }
         return (taskFormat[0] + " | " + taskFormat[1] + " | " + taskFormat[2]);
     }

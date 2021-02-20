@@ -99,6 +99,7 @@ public class Parser {
                     case "delete":
                         try {
                             list.deleteTask(Integer.parseInt(stringTokens[1]));
+                            saveNumber--;
                         } catch(ArrayIndexOutOfBoundsException e) {
                             System.out.println("☹ OOPS!!! Please provide an index :-(");
                         }
