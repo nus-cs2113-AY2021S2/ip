@@ -181,8 +181,8 @@ Format: `bye`
 &nbsp;
 
 ## Storage
-Changes to task is autosaved to file data.txt.
-This file will be located in the same directory as `TaskManager.jar`.
+Changes to task is autosaved to file data.txt.<br>
+This file will be located in the same directory as `TaskManager.jar`.<br>
 If the file isn't found, a new one will be created upon changes.
 
 &nbsp;
@@ -191,6 +191,7 @@ If the file isn't found, a new one will be created upon changes.
 
 ## Command summary
 | Command | Format |
+| --------- | ------------------------------------------------------- |
 | help | `help` |
 | list | `list` |
 | todo | `todo <name>` |
@@ -207,5 +208,5 @@ If the file isn't found, a new one will be created upon changes.
 &nbsp;
 
 ## Credits
-Based on Duke.
-
+Based on Duke.<br>
+https://github.com/nus-cs2113-AY2021S2/ip
