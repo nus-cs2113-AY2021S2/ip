@@ -1,73 +1,63 @@
-import dukehandler.MessagePrinter;
+import ui.ErrorMessagePrinter;
+import dukehandler.FileManager;
+import ui.SuccessMessagePrinter;
 import dukehandler.TaskManager;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
-    static String dottedLine = "____________________________________________________________";
+    static final String DOTTED_LINE = "____________________________________________________________";
 
     public static void main(String[] args) {
-        MessagePrinter.printGreetMessage();
-        String fullCommand;
-        String filePath = new File("").getAbsolutePath();
-        File f = new File(filePath+"/tasks.txt");
-        try {
-            if (f.createNewFile()) {
-                System.out.println(" I have created a file at this location:\n "
-                                + f.getAbsolutePath() + "\n"
-                                + " to store all your tasks!");
-            }
-            TaskManager.loadTasksFromFile(f.getAbsolutePath());
-        } catch (IOException e) {
-            MessagePrinter.printIOErrorMessage();
-        }
+        SuccessMessagePrinter.printGreetMessage();
 
-        Scanner in = new Scanner(System.in); // when typing input manually
+        File f = FileManager.loadFileOnStartup();
+
+        String fullCommand;
+        Scanner in = new Scanner(System.in);
         while (true) {
             fullCommand = in.nextLine();
             if (fullCommand.equals("bye")) {
-                try {
-                    TaskManager.saveTasksToFile(f.getAbsolutePath());
-                } catch (IOException e) {
-                    MessagePrinter.printIOErrorMessage();
-                }
                 break;
             }
-            System.out.println(dottedLine);
-
-            String[] partOfCommand = fullCommand.split(" ");
-
-            switch (partOfCommand[0]) {
-            case "help":
-                MessagePrinter.printHelpMessage();
-                break;
-            case "list":
-                TaskManager.printAllTasks();
-                break;
-            case "done":
-                TaskManager.markTaskAsDone(fullCommand.substring(4).trim());
-                break;
-            case "hey":
-            case "hello":
-                MessagePrinter.printHelloMessage();
-                break;
-            case "todo":
-            case "deadline":
-            case "event":
-                String taskType = partOfCommand[0];
-                TaskManager.addNewTask(taskType, fullCommand);
-                break;
-            case "delete":
-                TaskManager.removeTask(fullCommand.substring(6).trim());
-                break;
-            default:
-                MessagePrinter.printGenericErrorMessage();
-                break;
-            }
-            System.out.println(dottedLine);
+            System.out.println(DOTTED_LINE);
+            readUserCommands(fullCommand);
+            System.out.println(DOTTED_LINE);
         }
-        MessagePrinter.printByeMessage();
+
+        FileManager.endOfProgramRoutine(f);
     }
+
+    private static void readUserCommands(String fullCommand) {
+        String[] partOfCommand = fullCommand.split(" ");
+        switch (partOfCommand[0]) {
+        case "help":
+            SuccessMessagePrinter.printHelpMessage();
+            break;
+        case "list":
+            TaskManager.printAllTasks();
+            break;
+        case "done":
+            TaskManager.markTaskAsDone(fullCommand.substring(4).trim());
+            break;
+        case "hey":
+        case "hello":
+            SuccessMessagePrinter.printHelloMessage();
+            break;
+        case "todo":
+        case "deadline":
+        case "event":
+            String taskType = partOfCommand[0];
+            TaskManager.addNewTask(taskType, fullCommand);
+            break;
+        case "delete":
+            TaskManager.removeTask(fullCommand.substring(6).trim());
+            break;
+        default:
+            ErrorMessagePrinter.printGenericErrorMessage();
+            break;
+        }
+    }
+
 }
