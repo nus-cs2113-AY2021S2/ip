@@ -4,6 +4,12 @@ package duke;
 import exceptions.DukeException;
 import tasks.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Parser {
     static final int TODOLENGTH = 4;
     static final int EVENTLENGTH = 5;
@@ -35,6 +41,10 @@ public class Parser {
             int idx = userInput.indexOf('/');
             description =userInput.substring(0, idx);
             by = userInput.substring(idx+3).trim();
+            LocalDate date = processDatesTimes(by);
+            if (date != null) {
+                return new Deadline(description, date);
+            }
         }
         else {
             description =userInput;
@@ -53,6 +63,10 @@ public class Parser {
             int idx = userInput.indexOf('/');
             description =userInput.substring(0, idx);
             at = userInput.substring(idx+3).trim();
+            LocalDate date = processDatesTimes(at);
+            if (date != null) {
+                return new Event(description, date);
+            }
         }
         else {
             description =userInput;
@@ -68,5 +82,21 @@ public class Parser {
         }
         String description = userInput.substring(TODOLENGTH+1);
         return new Todo(description);
+    }
+
+    public static LocalDate processDatesTimes(String dateString) {
+        LocalDate date = null;
+        Pattern patt = Pattern.compile("2[0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]");
+        Matcher matcher = patt.matcher(dateString);
+        boolean matchFound = matcher.find();
+        if (matchFound) {
+            try {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                date = LocalDate.parse(dateString.substring(matcher.start(), matcher.start()+10), formatter);
+            } catch (DateTimeParseException e) {
+                System.out.println("Unable to parse date ...");
+            }
+        }
+        return date;
     }
 }
