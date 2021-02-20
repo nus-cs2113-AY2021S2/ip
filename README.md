@@ -24,7 +24,7 @@
 &nbsp;
 
 ## Quick start
-Download `TaskManager.jar` from here: https://github.com/8kdesign/ip/releases
+Download `TaskManager.jar` from here: [https://github.com/8kdesign/ip/releases](https://github.com/8kdesign/ip/releases)
 
 **Requirement:** 
 1. Java 11 and above
@@ -187,16 +187,16 @@ If the file isn't found, a new one will be created upon changes.
 ## Command summary
 | Command | Format |
 | --------- | ------------------------------------------------------- |
-| help | `help` |
-| list | `list` |
-| todo | `todo <name>` |
-| event | `event <name> /at <additional info>` |
-| deadline | `deadline <name> /by <DD-MM-YYYY>` |
-| delete | `delete <index 1> <index 2> ... <index n>` |
-| done | `done <index 1> <index 2> ... <index n>` |
-| undo | `undo <index 1> <index 2> ... <index n>` |
-| find | `find <keyword>` |
-| bye | `bye` |
+| help | *help* |
+| list | *list* |
+| todo | *todo <name>* |
+| event | *event <name> /at <additional info>* |
+| deadline | *deadline <name> /by <DD-MM-YYYY>* |
+| delete | *delete <index 1> <index 2> ... <index n>* |
+| done | *done <index 1> <index 2> ... <index n>* |
+| undo | *undo <index 1> <index 2> ... <index n>* |
+| find | *find <keyword>* |
+| bye | *bye* |
 
 &nbsp;
 &nbsp;
@@ -204,4 +204,4 @@ If the file isn't found, a new one will be created upon changes.
 
 ## Credits
 Based on Duke Project Template.<br>
-https://github.com/nus-cs2113-AY2021S2/ip
+[https://github.com/nus-cs2113-AY2021S2/ip](https://github.com/nus-cs2113-AY2021S2/ip)
