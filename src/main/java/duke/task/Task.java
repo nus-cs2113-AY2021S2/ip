@@ -2,6 +2,8 @@ package duke.task;
 
 import duke.exception.IllegalTaskCommandException;
 
+import java.util.StringJoiner;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -129,5 +131,23 @@ public class Task {
         taskArray[taskIndex].printTaskItem();
         System.out.println();
         System.out.println(doneTextBottom);
+    }
+
+    public static String convertToFileInput() {
+        StringJoiner string = new StringJoiner("\n");
+
+        for (int i = 0; i < taskIndex; i++) {
+            string.add(getFileInput(i));
+        }
+
+        return string.toString();
+    }
+
+    private static String getFileInput(int i) {
+        String taskType = taskArray[i].getTaskType();
+        String statusIcon = taskArray[i].getStatusIcon();
+        String description = taskArray[i].description;
+
+        return  taskType + " , " + statusIcon + " , " + description;
     }
 }
