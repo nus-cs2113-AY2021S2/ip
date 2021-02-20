@@ -28,8 +28,9 @@ public class Constants {
             "            oooooooooo           oooooooooo\n";
     public final String KEYWORD_AT = " /at ";
     public final String KEYWORD_BY = " /by ";
-    public final String DATE_IO_FORMAT = "d-MM-yyyy";
+    public final String DATE_IO_FORMAT = "d-M-yyyy";
     public final String DATE_PRINT_FORMAT = "d MMM yyyy";
+    public final String FILE_NAME = "tasks.txt";
 
     //Commands
     public final String COMMAND_QUIT = "bye";
@@ -59,8 +60,8 @@ public class Constants {
             + "    event <name> /at <info> - Creates new event.\n"
             + "    deadline <name> /by <DD-MM-YYYY> - Creates new deadline.\n"
             + "    delete <indices> - Deletes selected tasks.\n"
-            + "    done n - Mark nth item as done.\n"
-            + "    undo n - Mark nth item as not done.\n" + LINE;
+            + "    done <indices> - Mark selected tasks as done.\n"
+            + "    undo <indices> - Mark selected tasks as not done.\n" + LINE;
     public final String MESSAGE_MARK_DONE =  LINE + "\nMarked as done:";
     public final String MESSAGE_MARK_UNDONE = LINE + "\nMarked as undone:";
     public final String MESSAGE_DELETED = LINE + "\nDeleted:";
@@ -69,7 +70,7 @@ public class Constants {
     public final String MESSAGE_FILE_NOT_FOUND = LINE + "\n"
             + "File not found. New file will be created.\n" + LINE;
     public final String MESSAGE_TASK_NOT_FOUND = LINE + "\n"
-            + "No task found.\n" + LINE;
+            + "Task not found.\n" + LINE;
 
 
     //Errors

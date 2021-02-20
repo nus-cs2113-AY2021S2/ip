@@ -21,7 +21,7 @@ public class Storage {
      * Saves tasks into file.
      */
     public void saveFile() throws IOException {
-        File path = new File("tasks.txt");
+        File path = new File(constants.FILE_NAME);
         if (!path.exists()) {
             if (!path.createNewFile()) {
                 throw new IOException();
@@ -40,7 +40,7 @@ public class Storage {
      * Loads tasks from file.
      */
     public void loadFile() throws FileNotFoundException {
-        File path = new File("tasks.txt");
+        File path = new File(constants.FILE_NAME);
         if (!path.exists()) {
             throw new FileNotFoundException();
         }
@@ -50,7 +50,7 @@ public class Storage {
                 String input = scanner.nextLine();
                 parser.processInput(input);
                 if (scanner.nextLine().equals("true")) {
-                    parser.processInput("done " + taskManager.getTaskCount());
+                    parser.processInput(constants.COMMAND_DONE + taskManager.getTaskCount());
                 }
             }
         } catch (Exception e) {

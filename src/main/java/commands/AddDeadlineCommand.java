@@ -26,6 +26,7 @@ public class AddDeadlineCommand extends Command {
     public void execute() {
         try {
             if (!input.contains(constants.KEYWORD_BY)) {
+                //Due date not specified in input
                 throw new MissingKeywordException();
             }
             String[] inputSplit = input.split(constants.KEYWORD_BY);
@@ -38,7 +39,6 @@ public class AddDeadlineCommand extends Command {
             }
             LocalDate dueDate = extractDate(inputSplit[1]);
             taskManager.addTask(new DeadlineTask(inputSplit[0], dueDate));
-            taskManager.setTaskCount(taskManager.getTaskCount()+1);
             printAddedContent(inputSplit[0]);
             updateFile();
         } catch (ListFullException e) {

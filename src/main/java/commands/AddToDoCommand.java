@@ -23,7 +23,6 @@ public class AddToDoCommand extends Command {
                 throw new ListFullException();
             }
             taskManager.addTask(new ToDoTask(input));
-            taskManager.setTaskCount(taskManager.getTaskCount()+1);
             printAddedContent(input);
             updateFile();
         } catch (ListFullException e) {

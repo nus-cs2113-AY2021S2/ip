@@ -1,12 +1,18 @@
 package commands;
 
+import java.util.TreeSet;
+
 public class SetDoneStatusCommand extends Command {
 
     private final String input;
     private final Boolean isDone;
 
     public SetDoneStatusCommand(String input, Boolean isDone) {
-        this.input = input;
+        if (isDone) {
+            this.input = input.substring(constants.COMMAND_DONE.length());
+        } else {
+            this.input = input.substring(constants.COMMAND_UNDO.length());
+        }
         this.isDone = isDone;
     }
 
@@ -18,22 +24,24 @@ public class SetDoneStatusCommand extends Command {
     @Override
     public void execute() {
         try {
-            int position = Integer.parseInt(input.split(" ")[1]) - 1;
-            if (position >= taskManager.getTaskCount() || position < 0) {
-                //Out of bounds
+            TreeSet<Integer> validIndices = processMultipleIndices(input);
+            if (validIndices.size() < 1) {
                 throw new IndexOutOfBoundsException();
             }
-            taskManager.getTask(position).setDone(isDone);
             if (isDone) {
                 System.out.println(constants.MESSAGE_MARK_DONE);
             } else {
                 System.out.println(constants.MESSAGE_MARK_UNDONE);
             }
-            taskManager.getTask(position).printStatus();
-            System.out.println("\n" + constants.LINE);
+            for (int index : validIndices) {
+                taskManager.getTask(index).setDone(isDone);
+                taskManager.getTask(index).printStatus();
+                System.out.println();
+            }
+            System.out.println(constants.LINE);
             updateFile();
-        } catch (Exception e) {
-            System.out.println(constants.MESSAGE_UNRECOGNIZED_COMMAND);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println(constants.MESSAGE_TASK_NOT_FOUND);
         }
     }
 

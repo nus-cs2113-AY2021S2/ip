@@ -22,6 +22,7 @@ public class AddEventCommand extends Command {
     public void execute() {
         try {
             if (!input.contains(constants.KEYWORD_AT)) {
+                //Event info not specified in input
                 throw new MissingKeywordException();
             }
             String[] inputSplit = input.split(constants.KEYWORD_AT);
@@ -33,7 +34,6 @@ public class AddEventCommand extends Command {
                 throw new DescriptionSplitException();
             }
             taskManager.addTask(new EventTask(inputSplit[0], inputSplit[1]));
-            taskManager.setTaskCount(taskManager.getTaskCount()+1);
             printAddedContent(inputSplit[0]);
             updateFile();
         } catch (ListFullException e) {

@@ -4,6 +4,8 @@ import common.Constants;
 import storage.Storage;
 import tasks.TaskManager;
 
+import java.util.TreeSet;
+
 public abstract class Command {
 
     protected static final TaskManager taskManager = new TaskManager();
@@ -38,7 +40,8 @@ public abstract class Command {
 
 
     /**
-     * Processes index task from list. Returns -1 if invalid.
+     * Processes index task from list.
+     * Returns INVALID_INDEX if invalid.
      *
      * @param stringIndex Index of task to remove.
      */
@@ -54,6 +57,22 @@ public abstract class Command {
             //Invalid index
             return constants.INVALID_INDEX;
         }
+    }
+
+
+    /**
+     * Returns valid index set.
+     */
+    protected static TreeSet<Integer> processMultipleIndices(String input) {
+        String[] indices = input.split(" ");
+        TreeSet<Integer> validIndices = new TreeSet<>();
+        for (String rawIndex : indices) {
+            int index = processIndex(rawIndex);
+            if (index != constants.INVALID_INDEX) {
+                validIndices.add(index);
+            }
+        }
+        return validIndices;
     }
 
 }

@@ -1,7 +1,5 @@
 package commands;
 
-import errors.DescriptionSplitException;
-
 import java.util.NavigableSet;
 import java.util.TreeSet;
 
@@ -20,17 +18,7 @@ public class DeleteTaskCommand extends Command {
     @Override
     public void execute() {
         try {
-            String[] indices = input.split(" ");
-            if (indices.length < constants.MIN_SPLIT_SUCCESS_COUNT) {
-                throw new DescriptionSplitException();
-            }
-            TreeSet<Integer> validIndices = new TreeSet<>();
-            for (String rawIndex : indices) {
-                int index = processIndex(rawIndex);
-                if (index != constants.INVALID_INDEX) {
-                    validIndices.add(index);
-                }
-            }
+            TreeSet<Integer> validIndices = processMultipleIndices(input);
             if (validIndices.size() < 1) {
                 throw new IndexOutOfBoundsException();
             }
@@ -40,12 +28,12 @@ public class DeleteTaskCommand extends Command {
                 taskManager.getTask(index).printStatus();
                 System.out.println();
                 taskManager.deleteTask(index);
-                taskManager.setTaskCount(taskManager.getTaskCount()-1);
             }
             System.out.println(constants.LINE);
             updateFile();
-        } catch (Exception e) {
-            System.out.println(constants.MESSAGE_UNRECOGNIZED_COMMAND);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println(constants.MESSAGE_TASK_NOT_FOUND);
         }
     }
+
 }

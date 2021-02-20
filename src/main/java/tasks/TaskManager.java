@@ -17,16 +17,6 @@ public class TaskManager {
 
 
     /**
-     * Changes task count.
-     *
-     * @param value New task count.
-     */
-    public void setTaskCount(int value) {
-        taskCount = value;
-    }
-
-
-    /**
      * Returns task at index.
      */
     public Task getTask(int index) {
@@ -41,6 +31,7 @@ public class TaskManager {
      */
     public void addTask(Task task) {
         tasks.add(task);
+        taskCount++;
     }
 
 
@@ -51,6 +42,7 @@ public class TaskManager {
      */
     public void deleteTask(int index) {
         tasks.remove(index);
+        taskCount--;
     }
 
 
