@@ -1,13 +1,59 @@
-T | 1 | sleep
-T | 0 | eat
+E | 0 | shuwen attend CS2113 Lecture |  Friday 19 Feb 2021 from 4-6pm
+
+T | 1 | eat
+D | 1 | hw |  TMW
+E | 0 | meeting |  today
+T | 1 | eat
 D | 1 | hw |  Monday
-E | 1 | meeting |  tmr
-T | 0 | ffff
-T | 0 | gggg
-E | 1 | lfine |  wkpegg
-T | 0 | eat
-T | 1 | sleep
-D | 0 | hw |  Monday
-E | 0 | meeting |  2pm
-T | 0 | eat
+E | 0 | meeting |  today
+T | 0 | hehe
+D | 0 | assesment |  Next Monday
+E | 0 | meeting |  weekend
+T | 0 | deat
 T | 0 | sleep
+T | 0 | tuition
+T | 1 | eat
+T | 1 | eat
+T | 1 | eat
+D | 1 | hw |  Monday
+E | 0 | meeting |  tmr
+T | 0 | 1
+T | 0 | 2
+T | 0 | 3
+T | 0 | 4
+T | 0 | 1
+T | 0 | 2
+T | 0 | 3
+T | 0 | 4
+T | 0 | 5
+T | 0 | 1
+T | 0 | 2
+T | 0 | 3
+T | 0 | 4
+T | 0 | 1
+T | 0 | 2
+T | 0 | 3
+T | 0 | 4
+D | 1 | hw |  monday
+T | 0 | 1
+T | 0 | 2
+T | 0 | 3
+T | 1 | eat
+T | 0 | sleep
+D | 1 | Assesment |  24th Feb
+E | 1 | assignment 1 |  Next Wednesday
+T | 0 | 1
+T | 0 | 2
+T | 0 | 4
+T | 0 | 5
+T | 0 | 1
+T | 0 | 2
+T | 0 | 3
+T | 0 | 4
+T | 0 | 1
+T | 0 | 2
+T | 0 | 3
+T | 0 | 1
+T | 0 | 2
+T | 0 | 3
+T | 0 | 4
