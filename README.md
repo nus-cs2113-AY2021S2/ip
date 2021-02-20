@@ -189,13 +189,13 @@ If the file isn't found, a new one will be created upon changes.
 | --------- | ------------------------------------------------------- |
 | help | help |
 | list | list |
-| todo | todo <name> |
-| event | event <name> /at <additional info> |
-| deadline | deadline <name> /by <DD-MM-YYYY> |
-| delete | delete <index 1> <index 2> ... <index n> |
-| done | done <index 1> <index 2> ... <index n> |
-| undo | undo <index 1> <index 2> ... <index n> |
-| find | find <keyword> |
+| todo | todo ᐸnameᐳ |
+| event | event ᐸnameᐳ /at ᐸadditional infoᐳ |
+| deadline | deadline ᐸnameᐳ /by ᐸDD-MM-YYYYᐳ |
+| delete | delete ᐸindex 1ᐳ ᐸindex 2ᐳ ... ᐸindex nᐳ |
+| done | done ᐸindex 1ᐳ ᐸindex 2ᐳ ... ᐸindex nᐳ |
+| undo | undo ᐸindex 1ᐳ ᐸindex 2ᐳ ... ᐸindex nᐳ |
+| find | find ᐸkeywordᐳ |
 | bye | bye |
 
 &nbsp;
