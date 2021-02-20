@@ -22,7 +22,7 @@ public class FindCommand extends Command {
             Task task = taskManager.getTask(i);
             if (task.getName().toLowerCase().contains(input.toLowerCase())) {
                 count++;
-                System.out.print(count + ".");
+                System.out.print((i+1) + ".");
                 task.printStatus();
                 System.out.println();
             }
