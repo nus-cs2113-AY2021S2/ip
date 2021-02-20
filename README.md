@@ -47,27 +47,27 @@ List out list of commands and how to use them.
 Format: `help`
 **Example:**
 | | Result |
-| --------- | -------------------------------------------------------|
-| Input | `help` |
-| Output | `8K: bye - Exit programme.<br>    help - Show list of commands.<br>    list - Show list of saved values.<br>    todo <name> - Creates new todo task.<br>    event <name> /at <info> - Creates new event.<br>    deadline <name> /by <DD-MM-YYYY> - Creates new deadline.<br>    delete <indices> - Deletes selected tasks.<br>    done <indices> - Mark selected tasks as done.<br>    undo <indices> - Mark selected tasks as not done.`|
+| --------- | ------------------------------------------------------- |
+| Input | help |
+| Output | 8K: bye - Exit programme.<br>    help - Show list of commands.<br>    list - Show list of saved values.<br>    todo <name> - Creates new todo task.<br>    event <name> /at <info> - Creates new event.<br>    deadline <name> /by <DD-MM-YYYY> - Creates new deadline.<br>    delete <indices> - Deletes selected tasks.<br>    done <indices> - Mark selected tasks as done.<br>    undo <indices> - Mark selected tasks as not done.|
 
 ### List all tasks : `list`
 List out all the tasks currently in your task list.
 Format: `list`
 **Example:**
 | | Result |
-| --------- | -------------------------------------------------------|
-| Input | `list` |
-| Output | `1.[T][ ] apple<br>2.[E][ ] apple (at: pear)<br>3.[D][ ] apple (by: 24 Jun 1999)` |
+| --------- | ------------------------------------------------------- |
+| Input | list |
+| Output | 1.[T][ ] apple<br>2.[E][ ] apple (at: pear)<br>3.[D][ ] apple (by: 24 Jun 1999) |
 
 ### Add todo : `todo`
 Adds a todo with specified name into task list.
 Format: `todo <name>`
 **Example:**
 | | Result |
-| --------- | -------------------------------------------------------|
-| Input | `todo CS2113T Homework` |
-| Output | `8K: Added "CS2113T Homework" to list.` |
+| --------- | ------------------------------------------------------- |
+| Input | todo CS2113T Homework |
+| Output | 8K: Added "CS2113T Homework" to list. |
 | Action | Add toDo "CS2113T Homework" to task list |
 
 ### Add event : `event`
@@ -75,28 +75,65 @@ Adds an event with specified name and information to your task list.
 Format: `event <name> /at <additional info>`
 **Example:**
 | | Result |
-| --------- | -------------------------------------------------------|
-| Input | `event OP2 Meeting /at COM2` |
-| Output | `8K: Added "OP2 Meeting" to list.` |
+| --------- | ------------------------------------------------------- |
+| Input | event OP2 Meeting /at COM2 |
+| Output | 8K: Added "OP2 Meeting" to list. |
 | Action | Add event "OP2 Meeting" to task list |
 
 ### Add deadline : `deadline`
 Adds a deadline with specified name and due date to your task list.
+Format: `deadline <name> /by <DD-MM-YYYY>`
+**Example:**
+| | Result |
+| --------- | ------------------------------------------------------- |
+| Input | deadline Wk6 Quiz /by 19-2-2020 |
+| Output | 8K: Added "Wk6 Quiz" to list. |
+| Action | Add deadline "Wk6 Quiz" to task list |
 
 ### Delete task : `delete`
 Removes task at specified indices from the task list.
+Seperate multiple indices with a space.
+Invalid indices will be skipped.
+Format: `delete <index 1> <index 2> ... <index n>`
+**Example:**
+| | Result |
+| --------- | ------------------------------------------------------- |
+| Input | delete 1 2 |
+| Output | Deleted:<br>[T][ ] task3<br>[T][ ] task1 |
+| Action | Delete first and second task in task list |
 
 ### Mark as done : `done`
 Marks task at specified indices in the task list as done.
+Seperate multiple indices with a space.
+Invalid indices will be skipped.
+Format: `done <index 1> <index 2> ... <index n>`
+**Example:**
+| | Result |
+| --------- | ------------------------------------------------------- |
+| Input | done 1 2 |
+| Output | Marked as done:<br>[D][✓] task1 (by: 12 Dec 2020)<br>[D][✓] task2 (by: 20 Feb 2021) |
+| Action | Mark first and second task in task list as done |
 
 ### Mark as undone : `undo`
 Marks task at specified indices in the task list as not done.
+Seperate multiple indices with a space.
+Invalid indices will be skipped.
+Format: `undo <index 1> <index 2> ... <index n>`
+**Example:**
+| | Result |
+| --------- | ------------------------------------------------------- |
+| Input | undo 1 2 |
+| Output | Marked as undone:<br>[D][ ] task1 (by: 12 Dec 2020)<br>[D][ ] task2 (by: 20 Feb 2021) |
+| Action | Mark first and second task in task list as not done |
 
 ### Search keyword : `find`
 List out all tasks that contains keyword in name. 
 Index relative to task list is shown for easier deletion / mark as done.
-
-
+Format: `find <keyword>`
+| | Result |
+| --------- | ------------------------------------------------------- |
+| Input | Find quiz |
+| Output | 3.[T][ ] CS2113T Quiz |
 
 
 
