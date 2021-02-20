@@ -43,8 +43,8 @@ For more information about commands, please refer to the list below.
 ## Features
 
 ### View all commands : `help`
-List out list of commands and how to use them.
-Format: `help`
+List out list of commands and how to use them.<br>
+Format: `help`<br>
 **Example:**
 | | Result |
 | --------- | ------------------------------------------------------- |
@@ -52,8 +52,8 @@ Format: `help`
 | Output | 8K: bye - Exit programme.<br>    help - Show list of commands.<br>    list - Show list of saved values.<br>    todo <name> - Creates new todo task.<br>    event <name> /at <info> - Creates new event.<br>    deadline <name> /by <DD-MM-YYYY> - Creates new deadline.<br>    delete <indices> - Deletes selected tasks.<br>    done <indices> - Mark selected tasks as done.<br>    undo <indices> - Mark selected tasks as not done.|
 
 ### List all tasks : `list`
-List out all the tasks currently in your task list.
-Format: `list`
+List out all the tasks currently in your task list.<br>
+Format: `list`<br>
 **Example:**
 | | Result |
 | --------- | ------------------------------------------------------- |
@@ -61,8 +61,8 @@ Format: `list`
 | Output | 1.[T][ ] apple<br>2.[E][ ] apple (at: pear)<br>3.[D][ ] apple (by: 24 Jun 1999) |
 
 ### Add todo : `todo`
-Adds a todo with specified name into task list.
-Format: `todo <name>`
+Adds a todo with specified name into task list.<br>
+Format: `todo <name>`<br>
 **Example:**
 | | Result |
 | --------- | ------------------------------------------------------- |
@@ -71,8 +71,8 @@ Format: `todo <name>`
 | Action | Add toDo "CS2113T Homework" to task list |
 
 ### Add event : `event`
-Adds an event with specified name and information to your task list.
-Format: `event <name> /at <additional info>`
+Adds an event with specified name and information to your task list.<br>
+Format: `event <name> /at <additional info>`<br>
 **Example:**
 | | Result |
 | --------- | ------------------------------------------------------- |
@@ -81,8 +81,8 @@ Format: `event <name> /at <additional info>`
 | Action | Add event "OP2 Meeting" to task list |
 
 ### Add deadline : `deadline`
-Adds a deadline with specified name and due date to your task list.
-Format: `deadline <name> /by <DD-MM-YYYY>`
+Adds a deadline with specified name and due date to your task list.<br>
+Format: `deadline <name> /by <DD-MM-YYYY>`<br>
 **Example:**
 | | Result |
 | --------- | ------------------------------------------------------- |
@@ -91,10 +91,10 @@ Format: `deadline <name> /by <DD-MM-YYYY>`
 | Action | Add deadline "Wk6 Quiz" to task list |
 
 ### Delete task : `delete`
-Removes task at specified indices from the task list.
-Seperate multiple indices with a space.
-Invalid indices will be skipped.
-Format: `delete <index 1> <index 2> ... <index n>`
+Removes task at specified indices from the task list.<br>
+Seperate multiple indices with a space.<br>
+Invalid indices will be skipped.<br>
+Format: `delete <index 1> <index 2> ... <index n>`<br>
 **Example:**
 | | Result |
 | --------- | ------------------------------------------------------- |
@@ -103,10 +103,10 @@ Format: `delete <index 1> <index 2> ... <index n>`
 | Action | Delete first and second task in task list |
 
 ### Mark as done : `done`
-Marks task at specified indices in the task list as done.
-Seperate multiple indices with a space.
-Invalid indices will be skipped.
-Format: `done <index 1> <index 2> ... <index n>`
+Marks task at specified indices in the task list as done.<br>
+Seperate multiple indices with a space.<br>
+Invalid indices will be skipped.<br>
+Format: `done <index 1> <index 2> ... <index n>`<br>
 **Example:**
 | | Result |
 | --------- | ------------------------------------------------------- |
@@ -115,10 +115,10 @@ Format: `done <index 1> <index 2> ... <index n>`
 | Action | Mark first and second task in task list as done |
 
 ### Mark as undone : `undo`
-Marks task at specified indices in the task list as not done.
-Seperate multiple indices with a space.
-Invalid indices will be skipped.
-Format: `undo <index 1> <index 2> ... <index n>`
+Marks task at specified indices in the task list as not done.<br>
+Seperate multiple indices with a space.<br>
+Invalid indices will be skipped.<br>
+Format: `undo <index 1> <index 2> ... <index n>`<br>
 **Example:**
 | | Result |
 | --------- | ------------------------------------------------------- |
@@ -127,9 +127,9 @@ Format: `undo <index 1> <index 2> ... <index n>`
 | Action | Mark first and second task in task list as not done |
 
 ### Search keyword : `find`
-List out all tasks that contains keyword in name. 
-Index relative to task list is shown for easier deletion / mark as done.
-Format: `find <keyword>`
+List out all tasks that contains keyword in name. <br>
+Index relative to task list is shown for easier deletion / mark as done.<br>
+Format: `find <keyword>`<br>
 | | Result |
 | --------- | ------------------------------------------------------- |
 | Input | Find quiz |
