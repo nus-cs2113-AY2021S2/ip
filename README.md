@@ -59,7 +59,8 @@ List out list of commands and how to use them.<br>
 &nbsp;
 
 ### List all tasks : `list`
-List out all the tasks currently in your task list.<br>
+List out all the tasks currently in your task list.
+
 > First `[]` shows task type.<br>
 > `[T]` -> Todo<br>
 > `[E]` -> Event<br>
@@ -67,6 +68,7 @@ List out all the tasks currently in your task list.<br>
 > Second `[]` shows done status.<br>
 > `[X]` -> Done<br>
 > `[ ]` -> Not done<br>
+
 **Format:** `list`
 
 | | Result |
