@@ -181,7 +181,7 @@ Exits from application.<br>
 &nbsp;
 
 ## Storage
-Changes to task is autosaved to file data.txt.<br>
+Changes to task is autosaved to file `data.txt`.<br>
 This file will be located in the same directory as `TaskManager.jar`.<br>
 If the file isn't found, a new one will be created upon changes.
 
