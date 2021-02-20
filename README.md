@@ -32,7 +32,7 @@ Download `TaskManager.jar` from here: https://github.com/8kdesign/ip/releases
 **Usage:**
 1. Transfer the program to a folder of your liking. (Note: Data from the app will be stored in the same folder)
 2. Double-click to start.
-3. Type in command and press enter to execute.
+3. Type in command and press enter to execute.<br>
 For more information about commands, please refer to the list below.
 
 &nbsp;
