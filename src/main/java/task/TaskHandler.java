@@ -1,11 +1,22 @@
 package task;
 
+import printer.Printer;
 import java.util.ArrayList;
 import java.util.StringJoiner;
 
 public class TaskHandler {
     private static ArrayList<Task> taskArrayList = new ArrayList<>();
     private static int taskCount = 0;
+    private static final Printer printer = new Printer();
+
+    public void findByWord(String keyWord) {
+        for (int i = 0; i < taskCount; i++) {
+            if (taskArrayList.get(i).getTaskDescription().toLowerCase().contains(keyWord.toLowerCase())) {
+                System.out.print((i+1) + ".");
+                printer.printTaskDetails(i);
+            }
+        }
+    }
 
     public void addTask(Task task) {
         taskArrayList.add(task);
