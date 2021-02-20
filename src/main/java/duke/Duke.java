@@ -1,11 +1,9 @@
 package duke;
 
-import java.util.Scanner;
-
 import duke.command.Command;
 
 public class Duke {
-    public static final String SAVE_PATH = "duke.save";
+    public static final String DEFAULT_SAVE_PATH = "duke.save";
 
     protected TaskList tasks;
     protected Ui ui;
@@ -26,26 +24,36 @@ public class Duke {
     public void run() {
         ui.printWelcome();
 
-        Scanner in = new Scanner(System.in);
-        Boolean isExit = false;
-
-        while (!isExit && in.hasNextLine()) {
-            String fullCommand = in.nextLine();
+        while (true) {
+            String fullCommand = ui.read();
+            if (fullCommand == null) {
+                // Reach EOF, exit the program
+                break;
+            }
             ui.printLine();
             try {
                 Command cmd = parser.parse(fullCommand);
                 cmd.execute();
-                isExit = cmd.isExit();
+                if (cmd.isExit()) {
+                    break;
+                }
             } catch (Exception e) {
                 ui.printException(e);
             } finally {
                 ui.printLine();
             }
         }
-        in.close();
+
+        // Close Ui instance to release resources (such as Scanner instance)
+        ui.close();
     }
 
     public static void main(String[] args) {
-        new Duke(SAVE_PATH).run();
+        String filepath = DEFAULT_SAVE_PATH;
+        if (args.length > 0) {
+            // If additional argument is provided, take 1st argument as the save filepath
+            filepath = args[0];
+        }
+        new Duke(filepath).run();
     }
 }

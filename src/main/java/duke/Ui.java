@@ -1,6 +1,8 @@
 package duke;
 
-public class Ui {
+import java.util.Scanner;
+
+public class Ui implements AutoCloseable {
     public static final String LONG_LINE = "------------------------------------------------------------";
     // Default indentation is 8 whitespaces
     public static final char DEFAULT_INDENT_CHARACTER = '\t';
@@ -9,6 +11,7 @@ public class Ui {
     public static final String INTERNAL_INDENT = "\t";
 
     protected String indent;
+    protected Scanner scanner;
 
     public Ui() {
         this(DEFAULT_INDENT_CHARACTER, DEFAULT_INDENT_COUNT);
@@ -16,6 +19,20 @@ public class Ui {
 
     public Ui(char indentCharacter, int indentCount) {
         indent = new String(new char[indentCount]).replace('\0', indentCharacter);
+        scanner = new Scanner(System.in);
+    }
+
+    @Override
+    public void close() {
+        scanner.close();
+        scanner = null;
+    }
+
+    public String read() {
+        if (scanner == null || !scanner.hasNextLine()) {
+            return null;
+        }
+        return scanner.nextLine();
     }
 
     public void print(String text) {
