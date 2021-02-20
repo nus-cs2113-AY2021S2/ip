@@ -10,6 +10,7 @@ import java.time.format.DateTimeFormatter;
 public class Duke {
 
     static final int BY_AT_INDEX = 4;
+    static final int FIND_INDEX = 5;
     static final int TODO_INDEX = 5;
     static final int EVENT_INDEX = 6;
     static final int DELETE_INDEX = 7;
@@ -111,7 +112,11 @@ public class Duke {
                     tl.removeTask(delete_index, index, tasks);
                 }  catch (StringIndexOutOfBoundsException e) {
                     ui.deleteIndexError();
-                } } else { ui.showErrorMessage(); }
+                }
+            } else if (task.contains("find")) {
+                String find_task = task.substring(FIND_INDEX);
+                tl.findTasks(index, find_task, tasks);
+            } else { ui.showErrorMessage(); }
             task = b.nextLine();
         }
     }
