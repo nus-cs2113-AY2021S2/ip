@@ -7,7 +7,6 @@ import duke.task.Todo;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Duke {
 
@@ -16,11 +15,11 @@ public class Duke {
 
     public static void main(String[] args) {
         ArrayList<Task> tasks = new ArrayList<Task>();
-        try {
-            tasks = DukeReader.readFromFile(DUKE_EXPORT_DIRECTORY, DUKE_EXPORT_FILENAME);
-        } catch (IOException ioException) {
-            DukePrinter.printImportErrorMessage(ioException.getMessage());
-        }
+//        try {
+//            tasks = DukeReader.readFromFile(DUKE_EXPORT_DIRECTORY, DUKE_EXPORT_FILENAME);
+//        } catch (IOException ioException) {
+//            DukePrinter.printImportErrorMessage(ioException.getMessage());
+//        }
         DukePrinter.printWelcomeMessage();
         interactWithUser(tasks);
         DukePrinter.printExitMessage();
@@ -54,7 +53,7 @@ public class Duke {
         boolean isDoneReadingInputs = false;
         switch (commandTokens.get(0)) {
         case DukeCommands.BYE_COMMAND:
-            DukePrinter.writeToFile(tasks, DUKE_EXPORT_DIRECTORY, DUKE_EXPORT_FILENAME);
+//            DukePrinter.writeToFile(tasks, DUKE_EXPORT_DIRECTORY, DUKE_EXPORT_FILENAME);
             isDoneReadingInputs = true;
             break;
         case DukeCommands.CLEAR_COMMAND:

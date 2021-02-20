@@ -5,16 +5,17 @@ public class Deadline extends Task{
 
     public Deadline(String description, String dueDate) {
         super(description);
+        super.setTaskType('D');
         this.dueDate = dueDate;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + dueDate + ")";
+        return super.toString() + " (by: " + dueDate + ")";
     }
 
     @Override
     public String exportAsCSV() {
-        return "deadline," + super.exportAsCSV() + "," + dueDate;
+        return super.exportAsCSV() + "," + dueDate;
     }
 }

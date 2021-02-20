@@ -5,16 +5,17 @@ public class Event extends Task {
 
     public Event(String description, String eventDate) {
         super(description);
+        super.setTaskType('E');
         this.eventDate = eventDate;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (on: " + eventDate + ")";
+        return super.toString() + " (on: " + eventDate + ")";
     }
 
     @Override
     public String exportAsCSV() {
-        return "event," + super.exportAsCSV() + "," + eventDate;
+        return super.exportAsCSV() + "," + eventDate;
     }
 }

@@ -3,10 +3,16 @@ package duke.task;
 public abstract class Task {
     private String description;
     private boolean isDone;
+    private char taskType;
 
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.taskType = ' ';
+    }
+
+    public void setTaskType(char taskType) {
+        this.taskType = taskType;
     }
 
     public void markAsDone() {
@@ -14,7 +20,7 @@ public abstract class Task {
     }
 
     public String toString() {
-        return "[" + getStatusIcon() + "] " + description;
+        return "[" + taskType + "]" + "[" + getStatusIcon() + "] " + description;
     }
 
     private String getStatusIcon() {
@@ -23,6 +29,9 @@ public abstract class Task {
     }
 
     public String exportAsCSV() {
-        return description + "," + isDone;
+        /*
+         * TODO: Use a proper CSV export library to handle exporting, so that we can deal with special characters
+         */
+        return isDone + "," + taskType + "," + description;
     }
 }
