@@ -58,4 +58,16 @@ public class Ui {
     public void printException(Exception e) {
         print("Oops! " + e.getMessage());
     }
+
+    public void printWelcome() {
+        print(
+                "Hello! I'm Duke.\n"
+                + "What can I do for you?"
+        );
+        printLine();
+    }
+
+    public void printGoodbye() {
+        print("Bye. Hope to see you again soon!");
+    }
 }
