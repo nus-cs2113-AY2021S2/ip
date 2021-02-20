@@ -20,11 +20,14 @@ public class Parser {
         if (task.equalsIgnoreCase("list")) {
             Ui.printTaskList();
         }
-        else if (task.contains("done")){
+        else if (task.contains("done")) {
             TaskList.markTaskDone(task);
         }
-        else if (task.contains("delete")){
+        else if (task.contains("delete")) {
             TaskList.deleteTask(task);
+        }
+        else if (task.contains("find")) {
+            Ui.printMatchingTasks(task);
         }
         else {
             TaskList.addTask(task);

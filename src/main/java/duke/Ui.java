@@ -33,12 +33,21 @@ public class Ui {
         System.out.println("    Bye. Hope to see you again soon!");
     }
 
-    public static void printTaskList() {
-        ArrayList<Task> tasks = TaskList.getTasks();
-        System.out.println("    Here are the tasks in your list: ");
+    public static void printTasks(ArrayList<Task> tasks) {
         for (int i=0; i<tasks.size(); i++) {
             System.out.println("    " + (i+1) + ". " + tasks.get(i));
         }
+    }
+
+    public static void printTaskList() {
+        System.out.println("    Here are the tasks in your list: ");
+        printTasks(TaskList.getTasks());
+        showLine();
+    }
+
+    public static void printMatchingTasks(String task) {
+        System.out.println("    Here are the matching tasks in your list: ");
+        printTasks(TaskList.findTask(task));
         showLine();
     }
 
