@@ -7,27 +7,27 @@ import duke.exception.InvalidInputException;
 import duke.exception.InvalidInputException.InputExceptionType;
 
 public class Duke {
-    public static final String LONG_LINE = "------------------------------------------------------------";
     public static final String SAVE_PATH = "duke.save";
 
-    public static void main(String[] args) {
-        // Initialize a vector to store all the tasks
-        TaskList tasks = null;
-        Storage storage = new Storage(SAVE_PATH);
+    protected TaskList tasks;
+    protected Ui ui;
+    protected ActionHandler actionHandler;
+
+    public Duke(String filepath) {
+        ui = new Ui();
+        Storage storage = new Storage(filepath);
         try {
             tasks = storage.load();
         } catch (Exception e) {
-            Helper.printlnWithIndent("Got a problem when loading save file at " + SAVE_PATH + ": " + e.getMessage());
-            Helper.printlnWithIndent("An empty list will be used instead!");
-            Helper.printlnWithIndent(LONG_LINE);
-        } finally {
-            if (tasks == null) {
-                tasks = new TaskList(storage);
-            }
+            ui.printLoadSaveException(filepath, e);
+            tasks = new TaskList(storage);
         }
+        actionHandler = new ActionHandler(ui, tasks);
+    }
 
-        ActionHandler.greetingHandler();
-        Helper.printlnWithIndent(LONG_LINE);
+    public void run() {
+        actionHandler.greetingHandler();
+        ui.printLine();
 
         Scanner in = new Scanner(System.in);
         Boolean isExit = false;
@@ -41,41 +41,45 @@ public class Duke {
                 arguments = Arrays.copyOfRange(arguments, 1, arguments.length);
             }
 
-            Helper.printlnWithIndent(LONG_LINE);
+            ui.printLine();
 
             try {
                 switch(arguments[0]) {
                 case "bye":
-                    ActionHandler.byeHandler();
+                    actionHandler.byeHandler();
                     isExit = true;
                     break;
                 case "list":
-                    ActionHandler.listHandler(tasks);
+                    actionHandler.listHandler();
                     break;
                 case "done":
-                    ActionHandler.doneHandler(tasks, arguments);
+                    actionHandler.doneHandler(arguments);
                     break;
                 case "delete":
-                    ActionHandler.deleteHandler(tasks, arguments);
+                    actionHandler.deleteHandler(arguments);
                     break;
                 case "deadline":
-                    ActionHandler.deadlineHandler(tasks, arguments);
+                    actionHandler.deadlineHandler(arguments);
                     break;
                 case "event":
-                    ActionHandler.eventHandler(tasks, arguments);
+                    actionHandler.eventHandler(arguments);
                     break;
                 case "todo":
-                    ActionHandler.todoHandler(tasks, arguments);
+                    actionHandler.todoHandler(arguments);
                     break;
                 default:
                     throw new InvalidInputException(InputExceptionType.UNKNOWN_COMMAND);
                 }
             } catch (Exception e) {
-                Helper.printlnWithIndent("Oops! " + e.getMessage());
+                ui.printException(e);
             }
 
-            Helper.printlnWithIndent(LONG_LINE);
+            ui.printLine();
         }
         in.close();
+    }
+
+    public static void main(String[] args) {
+        new Duke(SAVE_PATH).run();
     }
 }
