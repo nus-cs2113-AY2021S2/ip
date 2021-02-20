@@ -5,16 +5,16 @@
 * [Quick start](#quick-start)
 * [Types of tasks](#types-of-tasks)
 * [Features](#features)
-  * [View all commands : `help`](#view-all-command----help-)
-  * List all tasks : `list`
-  * Add todo : `todo`
-  * Add event : `event`
-  * Add deadline : `deadline`
-  * Delete task : `delete`
-  * Mark as done : `done`
-  * Mark as undone : `undo`
-  * Search keyword : `find`
-  * Exit : `bye`
+  * [View all commands : `help`](#view-all-commands--help)
+  * [List all tasks : `list`](#list-all-tasks--list)
+  * [Add todo : `todo`](#add-todo--todo)
+  * [Add event : `event`](#add-event--event)
+  * [Add deadline : `deadline`](#add-deadline--deadline)
+  * [Delete task : `delete`](#delete-task--delete)
+  * [Mark as done : `done`](#mark-as-done--done)
+  * [Mark as undone : `undo`](#mark-as-undone--undo)
+  * [Search keyword : `find`](#search-keyword--find)
+  * [Exit : `bye`](#exit--bye)
 * [Storage](#storage)
 * [Command summary](#command-summary)
 * [Credits](#credits)
