@@ -37,11 +37,11 @@ public class Printer {
         System.out.println(constant.DIVIDER_LINE);
     }
 
-    public static void taskWarningMessage(String invalidUserInput) {
+    public static void printTaskWarningMessage(String invalidUserInput) {
         System.out.println(constant.DIVIDER_LINE);
         System.out.println("Invalid command: " + invalidUserInput);
     }
-    
+
     public static void printAddedTask(int index) {
         System.out.println("Got it. I've added this task:");
         printTaskDetails(index);
