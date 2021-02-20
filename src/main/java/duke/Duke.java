@@ -1,5 +1,13 @@
 package duke;
 
+import duke.exception.DataErrorException;
+import duke.exception.FullListException;
+import duke.exception.InvalidCommandException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
@@ -169,16 +177,16 @@ public class Duke {
         if (t instanceof Todo) {
             line += "T" + DELIM;
             line += (t.isDone() ? "1" : "0") + DELIM;
-            line += t.job;
+            line += t.getJob();
         } else if (t instanceof Deadline) {
             line += "D" + DELIM;
             line += (t.isDone() ? "1" : "0") + DELIM;
-            line += t.job + DELIM;
+            line += t.getJob() + DELIM;
             line += ((Deadline) t).getBy();
         } else if (t instanceof Event) {
             line += "E" + DELIM;
             line += (t.isDone() ? "1" : "0") + DELIM;
-            line += t.job + DELIM;
+            line += t.getJob() + DELIM;
             line += ((Event) t).getAt();
         }
 
@@ -224,9 +232,7 @@ public class Duke {
     private static int parseCommand(String input) {
         if (input.equalsIgnoreCase("bye")) {
             return BYE_COMMAND;
-        }
-
-        if (input.equalsIgnoreCase("list")) {
+        } else if (input.equalsIgnoreCase("list")) {
             return LIST_COMMAND;
         } else if (input.equalsIgnoreCase("help")) {
             return HELP_COMMAND;
@@ -391,7 +397,6 @@ public class Duke {
         Task.taskCount++;
 
         printTaskAdded(newTask);
-
     }
 
     private static void runEvent(String input) {
