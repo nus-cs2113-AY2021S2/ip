@@ -1,5 +1,5 @@
 package duke;
 
 public class DukeException extends Exception{
-    //catching all errors
+    //catching errors for unrecognized input and empty todo
 }
