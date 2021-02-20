@@ -3,8 +3,7 @@ package duke.tasks;
 public abstract class Task {
     protected String job;
     protected boolean isDone;
-
-    public static int taskCount = 0;
+    
     public static boolean isFull = false;
 
     public Task() {

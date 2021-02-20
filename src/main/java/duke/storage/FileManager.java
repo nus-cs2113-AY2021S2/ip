@@ -7,7 +7,7 @@ import duke.tasks.Task;
 import duke.tasks.Todo;
 
 import static duke.constants.FileIOStrings.*;
-import static duke.Duke.taskList;
+import static duke.Duke.tasks;
 import static duke.Duke.ui;
 
 import java.io.File;
@@ -65,8 +65,7 @@ public class FileManager {
 
             try {
                 Task task = formTask(line);
-                taskList.add(task);
-                Task.taskCount++;
+                tasks.add(task);
             } catch (DataErrorException e) {
                 ui.printDataErrorWarning(lineNumber);
             }
@@ -76,7 +75,7 @@ public class FileManager {
     private static void writeToFile() throws IOException {
         FileWriter writer = new FileWriter(PATH);
 
-        for (Task t : taskList) {
+        for (Task t : tasks.getTasks()) {
             writer.write(formLine(t) + '\n');
         }
         writer.close();

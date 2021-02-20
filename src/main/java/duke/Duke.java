@@ -5,6 +5,7 @@ import duke.exception.FullListException;
 import duke.inputhandlers.CommandRunner;
 import duke.inputhandlers.Parser;
 import duke.storage.FileManager;
+import duke.storage.TaskList;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
@@ -20,8 +21,10 @@ import java.io.IOException;
 
 
 public class Duke {
-    public static ArrayList<Task> taskList = new ArrayList<>();
+    //public static ArrayList<Task> taskList = new ArrayList<>();
+    public static TaskList tasks = new TaskList();
     public static TextUi ui = new TextUi();
+    
 
     public static void main(String[] args) {
         ui.printHello();

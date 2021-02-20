@@ -6,7 +6,7 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
-import static duke.Duke.taskList;
+import static duke.Duke.tasks;
 import static duke.constants.UiStrings.*;
 
 /**
@@ -40,13 +40,13 @@ public class TextUi {
     public void printTaskDeleted(int index) {
         System.out.println("Task " + (index + 1) + " has been deleted:");
         System.out.print(INDENT);
-        taskList.get(index).printTask();
-        System.out.println("Tasks remaining: " + (taskList.size() - 1) + "\n");
+        tasks.get(index).printTask();
+        System.out.println("Tasks remaining: " + (tasks.getCount() - 1) + "\n");
     }
 
     private static void printNumTasksLeft() {
-        String output = Integer.toString(taskList.size());
-        output += (taskList.size() == 1) ? " task" : " tasks";
+        String output = Integer.toString(tasks.getCount());
+        output += (tasks.getCount() == 1) ? " task" : " tasks";
         output += " in the list";
 
         System.out.println(output);

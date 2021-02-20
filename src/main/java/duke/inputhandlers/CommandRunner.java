@@ -8,7 +8,8 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.Todo;
 
-import static duke.Duke.*;
+import static duke.Duke.tasks;
+import static duke.Duke.ui;
 import static duke.constants.ProgramInts.*;
 
 /**
@@ -68,12 +69,12 @@ public class CommandRunner {
             jobNumber = Integer.parseInt(word[1]) - 1;
 
             // error handling - no jobs
-            if (taskList.size() == 0) {
+            if (tasks.getCount() == 0) {
                 ui.printNoTaskWarning();
                 return;
             }
 
-            markJobAsDone(taskList.get(jobNumber));
+            markJobAsDone(tasks.get(jobNumber));
 
         } catch (NumberFormatException e) {
             ui.printInvalidInputWarning(input);
@@ -94,14 +95,14 @@ public class CommandRunner {
         int numbering = 1;
 
         // error handling - no jobs
-        if (taskList.size() == 0) {
+        if (tasks.getCount() == 0) {
             ui.printNoTaskWarning();
             return;
         }
 
         System.out.println("TASK LIST:");
 
-        for (Task task : taskList) {
+        for (Task task : tasks.getTasks()) {
             System.out.print(numbering + ". ");
             task.printTask();
             numbering++;
@@ -122,10 +123,7 @@ public class CommandRunner {
         }
 
         Todo newTask = new Todo(job);
-
-        taskList.add(newTask);
-        Task.taskCount++;
-
+        tasks.add(newTask);
         ui.printTaskAdded(newTask);
     }
 
@@ -142,9 +140,7 @@ public class CommandRunner {
         }
 
         Deadline newTask = new Deadline(job, by);
-        taskList.add(newTask);
-        Task.taskCount++;
-
+        tasks.add(newTask);
         ui.printTaskAdded(newTask);
     }
 
@@ -160,11 +156,8 @@ public class CommandRunner {
         }
 
         Event newTask = new Event(job, at);
-        taskList.add(newTask);
-        Task.taskCount++;
-
+        tasks.add(newTask);
         ui.printTaskAdded(newTask);
-
     }
 
     private static void runUnknownCommand(String input) {
@@ -179,9 +172,9 @@ public class CommandRunner {
 
         try {
             index = Integer.parseInt(words[1]) - 1;
-            if (taskList.contains(taskList.get(index))) {
+            if (tasks.contains(tasks.get(index))) {
                 ui.printTaskDeleted(index);
-                taskList.remove(index);
+                tasks.remove(index);
             }
         } catch (NumberFormatException e) {
             ui.printInvalidInputWarning(input);
@@ -199,7 +192,7 @@ public class CommandRunner {
 
 
     public void checkListCapacity(int command) throws FullListException {
-        if (taskList.size() == MAX_TASK && !Task.isFull) {
+        if (tasks.getCount() == MAX_TASK && !Task.isFull) {
             Task.isFull = true;
         }
 
