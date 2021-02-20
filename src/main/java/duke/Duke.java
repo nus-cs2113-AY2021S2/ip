@@ -2,11 +2,9 @@ package duke;
 
 import java.util.Arrays;
 import java.util.Scanner;
-import java.util.Vector;
 
 import duke.exception.InvalidInputException;
 import duke.exception.InvalidInputException.InputExceptionType;
-import duke.task.Task;
 
 public class Duke {
     public static final String LONG_LINE = "------------------------------------------------------------";
@@ -14,15 +12,17 @@ public class Duke {
 
     public static void main(String[] args) {
         // Initialize a vector to store all the tasks
-        Vector<Task> tasks = null;
+        TaskList tasks = null;
+        Storage storage = new Storage(SAVE_PATH);
         try {
-            tasks = Helper.loadList(SAVE_PATH);
+            tasks = storage.load();
         } catch (Exception e) {
             Helper.printlnWithIndent("Got a problem when loading save file at " + SAVE_PATH + ": " + e.getMessage());
             Helper.printlnWithIndent("An empty list will be used instead!");
+            Helper.printlnWithIndent(LONG_LINE);
         } finally {
             if (tasks == null) {
-                tasks = new Vector<>();
+                tasks = new TaskList(storage);
             }
         }
 
@@ -54,23 +54,18 @@ public class Duke {
                     break;
                 case "done":
                     ActionHandler.doneHandler(tasks, arguments);
-                    Helper.saveList(SAVE_PATH, tasks);
                     break;
                 case "delete":
                     ActionHandler.deleteHandler(tasks, arguments);
-                    Helper.saveList(SAVE_PATH, tasks);
                     break;
                 case "deadline":
                     ActionHandler.deadlineHandler(tasks, arguments);
-                    Helper.saveList(SAVE_PATH, tasks);
                     break;
                 case "event":
                     ActionHandler.eventHandler(tasks, arguments);
-                    Helper.saveList(SAVE_PATH, tasks);
                     break;
                 case "todo":
                     ActionHandler.todoHandler(tasks, arguments);
-                    Helper.saveList(SAVE_PATH, tasks);
                     break;
                 default:
                     throw new InvalidInputException(InputExceptionType.UNKNOWN_COMMAND);
