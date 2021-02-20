@@ -1,31 +1,78 @@
-# Duke project template
+# 8K's Task Planner
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+8K's Task Planner is a Command Line Interface (CLI) app for planning of tasks. 
 
-## Setting up in Intellij
-
-Prerequisites: JDK 11, update Intellij to the most recent version.
-
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first)
-1. Set up the correct JDK version, as follows:
-   1. Click `Configure` > `Structure for New Projects` and then `Project Settings` > `Project` > `Project SDK`
-   1. If JDK 11 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 11
-   1. Click `OK`
-1. Import the project into Intellij as follows:
-   1. Click `Open or Import`.
-   1. Select the project directory, and click `OK`
-   1. If there are any further prompts, accept the defaults.
-1. After the importing is complete, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the below:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+* Types of tasks
+* Quick start
+* Features
+  * View all commands : `help`
+  * List all tasks : `list`
+  * Add todo : `todo`
+  * Add event : `event`
+  * Add deadline : `deadline`
+  * Delete task : `delete`
+  * Mark as done : `done`
+  * Mark as undone : `undo`
+  * Search keyword : `find`
+  * Exit : `bye`
+* Storage
+* Command summary
+* Credits
 
 
-Acknowledgements
+## Quick start
+Download from here: https://github.com/8kdesign/ip/releases
+
+**Requirement:** 
+1. Java 11 and above
+
+**Usage:**
+1. Transfer the program to a folder of your liking. (Note: Data from the app will be stored in the same folder)
+2. Double-click to start.
+3. Type in command and press enter to execute.
+For more information about commands, please refer to the list below.
+
+
+## Types of tasks
+8K's Task Planner comes with 3 type of tasks are available:
+1. ToDo - Basic task with checkbox.
+1. Event - Task with checkbox and information field.
+1. Deadline - Task with checkbox and due date field.
+
+
+## Features
+
+### View all commands : `help`
+List out list of commands and how to use them.
+
+### List all tasks : `list`
+List out all the tasks currently in your task list.
+
+### Add todo : `todo`
+Adds a todo with specified name into task list.
+
+### Add event : `event`
+Adds an event with specified name and information to your task list.
+
+### Add deadline : `deadline`
+Adds a deadline with specified name and due date to your task list.
+
+### Delete task : `delete`
+Removes task at specified indices from the task list.
+
+### Mark as done : `done`
+Marks task at specified indices in the task list as done.
+
+### Mark as undone : `undo`
+Marks task at specified indices in the task list as not done.
+
+### Search keyword : `find`
+List out all tasks that contains keyword in name. 
+Index relative to task list is shown for easier deletion / mark as done.
+
+
+
+
+
 
 
