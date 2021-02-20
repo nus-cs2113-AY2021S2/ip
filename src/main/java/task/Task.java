@@ -5,20 +5,20 @@ public class Task {
     protected static final String MARK_UNDONE = " ";
     protected static final String TASK_SYMBOL_NA = " ";
 
-    protected String completionStatus;
+    protected String taskStatus;
     protected String taskDescription;
 
     public Task(String taskDescription) {
         this.taskDescription = taskDescription;
-        this.completionStatus = MARK_UNDONE;
+        this.taskStatus = MARK_UNDONE;
     }
 
     public String getTaskSymbol() {
         return TASK_SYMBOL_NA;
     }
 
-    public String getTaskCompletionStatus() {
-        return this.completionStatus;
+    public String getTaskStatus() {
+        return this.taskStatus;
     }
 
     public String getTaskDescription() {
@@ -30,15 +30,15 @@ public class Task {
     }
 
     public String getFileFormat(){
-        return getTaskSymbol() + " | " + getTaskCompletionStatus() + " | " + getTaskDescription();
+        return getTaskSymbol() + " | " + getTaskStatus() + " | " + getTaskDescription();
     }
 
     public void setTaskAsDone() {
-        this.completionStatus = MARK_DONE;
+        this.taskStatus = MARK_DONE;
     }
 
     public boolean isDone() {
-        if (this.completionStatus == MARK_DONE) {
+        if (this.taskStatus == MARK_DONE) {
             return true;
         } else {
             return false;
