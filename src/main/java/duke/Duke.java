@@ -6,9 +6,14 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
+import java.util.StringJoiner;
 
 public class Duke {
+    public static final String FILE_PATH = "Duke_Tasks.txt";
 
     private static void initialiseWelcomeMessage() {
         String logo
@@ -88,7 +93,7 @@ public class Duke {
                 throw new IllegalTaskCommandException("Unacceptable Command!");
             }
         } catch (IllegalTaskCommandException e) {
-            e.printErrorLogo();
+            IllegalTaskCommandException.printErrorLogo();
             System.out.println(e.getMessage());
         }
 
@@ -150,8 +155,63 @@ public class Duke {
         } while (!command.equals("BYE"));
     }
 
-    public static void main(String[] args) throws IllegalTaskCommandException {
+    public static void main(String[] args) throws IllegalTaskCommandException, IOException {
         initialiseWelcomeMessage();
+        loadTasks();
         runTaskManager();
+        saveTasks();
     }
+
+    private static void saveTasks() throws IOException {
+        File file = new File(FILE_PATH);
+        file.createNewFile();
+
+        FileWriter writer = new FileWriter(file);
+        writer.write(Task.convertToFileInput());
+        writer.close();
+    }
+
+    private static void loadTasks() throws IOException, IllegalTaskCommandException {
+        File file = new File(FILE_PATH);
+
+        if (file.exists()) {
+            int counter = 1;
+            Scanner scanner = new Scanner(file);
+            while (scanner.hasNext()) {
+                String [] fileInput = scanner.nextLine().split(",");
+                String commandCode;
+                switch (fileInput[0].strip()) {
+                case "T":
+                    commandCode = "TODO";
+                    break;
+                case "D":
+                    commandCode = "DEADLINE";
+                    break;
+                case "E":
+                    commandCode = "EVENT";
+                    break;
+                default:
+                    commandCode = "";
+                    break;
+                }
+                StringJoiner command = new StringJoiner(" ");
+                for (int i = 0; i < fileInput.length; i++) {
+                    if (i == 1) {
+                        continue; // Skips the done
+                    }
+                    command.add(fileInput[i].strip());
+                }
+
+                executeCommand(commandCode, command.toString());
+
+                if(fileInput[1].strip().equals("X")) {
+                    Task.markDone(String.valueOf(counter));
+                }
+                counter++;
+            }
+        } else {
+            System.out.println("Archive not found, Commander!");
+        }
+    }
+
 }
