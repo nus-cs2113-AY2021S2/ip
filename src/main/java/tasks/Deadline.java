@@ -1,7 +1,6 @@
-package duke.tasks;
+package tasks;
 
 public class Deadline extends Task {
-
     String by = "";
 
     public Deadline(String description, String by) {
@@ -13,4 +12,3 @@ public class Deadline extends Task {
         return String.format("[D][" + getStatusIcon() + "] " + description + " (by: " + by + ")");
     }
 }
-

@@ -1,4 +1,4 @@
-package duke.tasks;
+package tasks;
 
 public class Task {
     protected String description;
@@ -24,5 +24,4 @@ public class Task {
     public void markAsDone() {
         this.isDone = true;
     }
-
 }

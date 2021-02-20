@@ -1,7 +1,6 @@
-package duke.tasks;
+package tasks;
 
 public class Event extends Task {
-
     String at = "";
 
     public Event(String description, String at) {
