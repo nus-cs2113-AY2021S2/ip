@@ -44,20 +44,41 @@ For more information about commands, please refer to the list below.
 
 ### View all commands : `help`
 List out list of commands and how to use them.
+Format: `help`
+**Example:**
 | | Result |
 | --------- | -------------------------------------------------------|
-| Input | help |
-| --------- | -------------------------------------------------------|
-| Output | 8K: bye - Exit programme.<br>    help - Show list of commands.<bt>    list - Show list of saved values.<br>    todo <name> - Creates new todo task.<br>    event <name> /at <info> - Creates new event.<br>    deadline <name> /by <DD-MM-YYYY> - Creates new deadline.<br>    delete <indices> - Deletes selected tasks.<br>    done <indices> - Mark selected tasks as done.<br>    undo <indices> - Mark selected tasks as not done.|
+| Input | `help` |
+| Output | `8K: bye - Exit programme.<br>    help - Show list of commands.<br>    list - Show list of saved values.<br>    todo <name> - Creates new todo task.<br>    event <name> /at <info> - Creates new event.<br>    deadline <name> /by <DD-MM-YYYY> - Creates new deadline.<br>    delete <indices> - Deletes selected tasks.<br>    done <indices> - Mark selected tasks as done.<br>    undo <indices> - Mark selected tasks as not done.`|
 
 ### List all tasks : `list`
 List out all the tasks currently in your task list.
+Format: `list`
+**Example:**
+| | Result |
+| --------- | -------------------------------------------------------|
+| Input | `list` |
+| Output | `1.[T][ ] apple<br>2.[E][ ] apple (at: pear)<br>3.[D][ ] apple (by: 24 Jun 1999)` |
 
 ### Add todo : `todo`
 Adds a todo with specified name into task list.
+Format: `todo <name>`
+**Example:**
+| | Result |
+| --------- | -------------------------------------------------------|
+| Input | `todo CS2113T Homework` |
+| Output | `8K: Added "CS2113T Homework" to list.` |
+| Action | Add toDo "CS2113T Homework" to task list |
 
 ### Add event : `event`
 Adds an event with specified name and information to your task list.
+Format: `event <name> /at <additional info>`
+**Example:**
+| | Result |
+| --------- | -------------------------------------------------------|
+| Input | `event OP2 Meeting /at COM2` |
+| Output | `8K: Added "OP2 Meeting" to list.` |
+| Action | Add event "OP2 Meeting" to task list |
 
 ### Add deadline : `deadline`
 Adds a deadline with specified name and due date to your task list.
