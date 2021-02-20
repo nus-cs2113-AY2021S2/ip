@@ -2,8 +2,8 @@
 
 8K's Task Planner is a Command Line Interface (CLI) app for planning of tasks. 
 
-* Quick start
-* Types of tasks
+* [Quick start](#quick-start)
+* [Types of tasks](#types-of-tasks)
 * Features
   * View all commands : `help`
   * List all tasks : `list`
@@ -53,7 +53,7 @@ For more information about commands, please refer to the list below.
 
 ### View all commands : `help`
 List out list of commands and how to use them.<br>
-Format: `help`
+**Format:** `help`
 
 | | Result |
 | --------- | ------------------------------------------------------- |
@@ -65,7 +65,7 @@ Format: `help`
 
 ### List all tasks : `list`
 List out all the tasks currently in your task list.<br>
-Format: `list`
+**Format:** `list`
 
 | | Result |
 | --------- | ------------------------------------------------------- |
@@ -77,7 +77,7 @@ Format: `list`
 
 ### Add todo : `todo`
 Adds a todo with specified name into task list.<br>
-Format: `todo <name>`
+**Format:** `todo <name>`
 
 | | Result |
 | --------- | ------------------------------------------------------- |
@@ -90,7 +90,7 @@ Format: `todo <name>`
 
 ### Add event : `event`
 Adds an event with specified name and information to your task list.<br>
-Format: `event <name> /at <additional info>`
+**Format:** `event <name> /at <additional info>`
 
 | | Result |
 | --------- | ------------------------------------------------------- |
@@ -103,7 +103,7 @@ Format: `event <name> /at <additional info>`
 
 ### Add deadline : `deadline`
 Adds a deadline with specified name and due date to your task list.<br>
-Format: `deadline <name> /by <DD-MM-YYYY>`
+**Format:** `deadline <name> /by <DD-MM-YYYY>`
 
 | | Result |
 | --------- | ------------------------------------------------------- |
@@ -118,7 +118,7 @@ Format: `deadline <name> /by <DD-MM-YYYY>`
 Removes task at specified indices from the task list.<br>
 Seperate multiple indices with a space.<br>
 Invalid indices will be skipped.<br>
-Format: `delete <index 1> <index 2> ... <index n>`
+**Format:** `delete <index 1> <index 2> ... <index n>`
 
 | | Result |
 | --------- | ------------------------------------------------------- |
@@ -133,7 +133,7 @@ Format: `delete <index 1> <index 2> ... <index n>`
 Marks task at specified indices in the task list as done.<br>
 Seperate multiple indices with a space.<br>
 Invalid indices will be skipped.<br>
-Format: `done <index 1> <index 2> ... <index n>`
+**Format:** `done <index 1> <index 2> ... <index n>`
 
 | | Result |
 | --------- | ------------------------------------------------------- |
@@ -148,7 +148,7 @@ Format: `done <index 1> <index 2> ... <index n>`
 Marks task at specified indices in the task list as not done.<br>
 Seperate multiple indices with a space.<br>
 Invalid indices will be skipped.<br>
-Format: `undo <index 1> <index 2> ... <index n>`
+**Format:** `undo <index 1> <index 2> ... <index n>`
 
 | | Result |
 | --------- | ------------------------------------------------------- |
@@ -162,7 +162,7 @@ Format: `undo <index 1> <index 2> ... <index n>`
 ### Search keyword : `find`
 List out all tasks that contains keyword in name.<br>
 Index relative to task list is shown for easier deletion / mark as done.<br>
-Format: `find <keyword>`
+**Format:** `find <keyword>`
 
 | | Result |
 | --------- | ------------------------------------------------------- |
@@ -174,7 +174,7 @@ Format: `find <keyword>`
 
 ### Exit : `bye`
 Exits from application.<br>
-Format: `bye`
+**Format:** `bye`
 
 &nbsp;
 &nbsp;
@@ -208,5 +208,5 @@ If the file isn't found, a new one will be created upon changes.
 &nbsp;
 
 ## Credits
-Based on Duke.<br>
+Based on Duke Project Template.<br>
 https://github.com/nus-cs2113-AY2021S2/ip
