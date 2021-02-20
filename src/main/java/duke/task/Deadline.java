@@ -12,17 +12,22 @@ public class Deadline extends Task {
     }
 
     @Override
-    protected String getTaskType() {
+    public String getTaskType() {
         return DEADLINE_TYPE;
     }
 
     @Override
-    protected void printTaskItem() {
+    public void printTaskItem() {
         super.printTaskItem();
         this.printBy();
     }
 
-    private void printBy() {
+    @Override
+    public String getTaskItem() {
+        return this.description + " /" + this.timestampHeader + " " + this.by;
+    }
+
+    public void printBy() {
         String trialingBy = " (" + timestampHeader + ": " + by + ")";
         System.out.print(trialingBy);
     }

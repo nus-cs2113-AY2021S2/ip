@@ -12,14 +12,19 @@ public class Event extends Task {
     }
 
     @Override
-    protected String getTaskType() {
+    public String getTaskType() {
         return EVENT_TYPE;
     }
 
     @Override
-    protected void printTaskItem() {
+    public void printTaskItem() {
         super.printTaskItem();
         this.printAt();
+    }
+
+    @Override
+    public String getTaskItem() {
+        return this.description + " /" + this.timestampHeader + " " + this.at;
     }
 
     private void printAt() {

@@ -8,7 +8,7 @@ import java.util.StringJoiner;
 public class Task {
     protected String description;
     protected boolean isDone;
-    protected static ArrayList<Task> taskArray = new ArrayList<>();
+    private static ArrayList<Task> taskArray = new ArrayList<>();
 
     public Task(String description) {
         this.description = description;
@@ -27,7 +27,7 @@ public class Task {
         System.out.println("");
     }
 
-    private static void printTaskHeader() {
+    public static void printTaskHeader() {
         String tasksTemplate
                 = "******************************************************\n"
                 + "*                                                    *\n"
@@ -37,19 +37,19 @@ public class Task {
         System.out.println(tasksTemplate);
     }
 
-    private static void printTaskIndex(int taskIndex) {
+    public static void printTaskIndex(int taskIndex) {
         System.out.print("[" + (taskIndex + 1) + "]");
     }
 
-    private void printTaskType() {
+    public void printTaskType() {
         System.out.print("[" + getTaskType() + "]");
     }
 
-    protected String getTaskType() {
+    public String getTaskType() {
         return null;
     }
 
-    private void printCompletionStatus() {
+    public void printCompletionStatus() {
         System.out.print("[" + getStatusIcon() + "]");
     }
 
@@ -57,7 +57,11 @@ public class Task {
         return (isDone ? "X" : " ");
     }
 
-    protected void printTaskItem() {
+    public String getTaskItem() {
+        return this.description;
+    }
+
+    public void printTaskItem() {
         String item = " " + this.description;
         System.out.print(item);
     }
@@ -87,7 +91,7 @@ public class Task {
         System.out.println(echoBottom);
     }
 
-    private static void printTaskCount() {
+    public static void printTaskCount() {
         String taskCountMessage = "There are now " + taskArray.size()
                 + " mission objectives, Commander.";
         System.out.println(taskCountMessage);
@@ -113,7 +117,7 @@ public class Task {
         printMarkDonePrompt(indexOfTask);
     }
 
-    private static void printMarkDonePrompt(int taskIndex) {
+    public static void printMarkDonePrompt(int taskIndex) {
         String doneTextTop = "______________________________________________________\n"
                 + "[Objective Completed]:\n";
         String doneTextBottom = "______________________________________________________\n";
@@ -126,13 +130,13 @@ public class Task {
         System.out.println(doneTextBottom);
     }
 
-    private static void printDeletedTaskCount() {
+    public static void printDeletedTaskCount() {
         String taskCountMessage = "There are now " + (taskArray.size() - 1)
                 + " mission objectives, Commander.";
         System.out.println(taskCountMessage);
     }
 
-    private static void printDeletePrompt(int taskIndex) {
+    public static void printDeletePrompt(int taskIndex) {
         String doneTextTop = "______________________________________________________\n"
                 + "[Objective Successfully Removed]:\n";
         String doneTextBottom = "______________________________________________________\n";
@@ -169,22 +173,18 @@ public class Task {
     public static String convertToFileInput() {
         StringJoiner string = new StringJoiner("\n");
 
-        /*
-        for (int i = 0; i < taskIndex; i++) {
-            string.add(getFileInput(i));
+        for (Task t: taskArray) {
+            string.add(t.getFileInput());
         }
-         */
 
         return string.toString();
     }
 
-    /*
-    private static String getFileInput(int i) {
-        String taskType = taskArray[i].getTaskType();
-        String statusIcon = taskArray[i].getStatusIcon();
-        String description = taskArray[i].description;
-        return  taskType + " , " + statusIcon + " , " + description;
-
+    public String getFileInput() {
+        if (this.getTaskType().equals("T")) {
+            return this.getTaskType() + " , " + this.getStatusIcon() + " , " + this.description;
+        } else {
+            return this.getTaskType() + " , " + this.getStatusIcon() + " , " + this.getTaskItem();
+        }
     }
-     */
 }

@@ -13,7 +13,7 @@ import java.util.Scanner;
 import java.util.StringJoiner;
 
 public class Duke {
-    public static final String FILE_PATH = "Duke_Tasks.txt";
+    private static final String FILE_PATH = "Duke_Tasks.txt";
 
     private static void initialiseWelcomeMessage() {
         String logo
@@ -49,7 +49,7 @@ public class Duke {
         return command.toUpperCase();
     }
 
-    private static void executeCommand(String command, String userInput) throws IllegalTaskCommandException {
+    private static void executeCommand(String command, String userInput) throws IOException {
         String errand;
         String timestamp;
         String timestampHeader;
@@ -97,6 +97,7 @@ public class Duke {
             System.out.println(e.getMessage());
         }
 
+        saveTasks();
     }
 
     private static String getSubstring(String userInput) throws IllegalTaskCommandException {
@@ -137,29 +138,6 @@ public class Duke {
         int spacePosition = timestamp.indexOf(" ");
         timestamp = timestamp.substring(spacePosition);
         return timestamp.trim();
-    }
-
-    /**
-     * Starts the Task Manager program.
-     * <p>Runs an infinite loop until "BYE" is called</p>
-     */
-    private static void runTaskManager() throws IllegalTaskCommandException {
-        String userInput;
-        String command;
-        Scanner in = new Scanner(System.in);
-
-        do {
-            userInput = in.nextLine();
-            command = getCommand(userInput);
-            executeCommand(command, userInput);
-        } while (!command.equals("BYE"));
-    }
-
-    public static void main(String[] args) throws IllegalTaskCommandException, IOException {
-        initialiseWelcomeMessage();
-        loadTasks();
-        runTaskManager();
-        saveTasks();
     }
 
     private static void saveTasks() throws IOException {
@@ -214,4 +192,25 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts the Task Manager program.
+     * <p>Runs an infinite loop until "BYE" is called</p>
+     */
+    private static void runTaskManager() throws IOException {
+        String userInput;
+        String command;
+        Scanner in = new Scanner(System.in);
+
+        do {
+            userInput = in.nextLine();
+            command = getCommand(userInput);
+            executeCommand(command, userInput);
+        } while (!command.equals("BYE"));
+    }
+
+    public static void main(String[] args) throws IllegalTaskCommandException, IOException {
+        initialiseWelcomeMessage();
+        loadTasks();
+        runTaskManager();
+    }
 }
