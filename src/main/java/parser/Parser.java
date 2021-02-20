@@ -1,5 +1,8 @@
 package parser;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 import constant.Constant;
 import error.*;
 import printer.Printer;
@@ -63,28 +66,40 @@ public class Parser {
 
     private static int initCheckDeadline(String userInput) {
         try {
-            extractTaskTiming(userInput);
             return validateDeadlineCommand(userInput);
         } catch (DeadlineCommandException e) {
             printer.taskWarningMessage(userInput);
             System.out.println("Your format must be [ /by ]!");
             return constant.INPUT_CODE_INVALID;
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Please enter a date or time!");
+        } catch (EmptyTimeDescriptionException e) {
+            printer.taskWarningMessage(userInput);
+            System.out.println("Please enter a date!");
+            return constant.INPUT_CODE_INVALID;
+        } catch (EmptyTaskDescriptionException e) {
+            printer.taskWarningMessage(userInput);
+            System.out.println("Please enter a task description!");
+            return constant.INPUT_CODE_INVALID;
+        } catch (DateTimeParseException e) {
+            printer.taskWarningMessage(userInput);
+            System.out.println("Your date format is wrong!");
             return constant.INPUT_CODE_INVALID;
         }
     }
 
     private static int initCheckEvent(String userInput) {
         try {
-            extractTaskTiming(userInput);
             return validateEventCommand(userInput);
         } catch (EventCommandException e) {
             printer.taskWarningMessage(userInput);
             System.out.println("Your format must be [ /at ]!");
             return constant.INPUT_CODE_INVALID;
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (EmptyTimeDescriptionException e) {
+            printer.taskWarningMessage(userInput);
             System.out.println("Please enter a date or time!");
+            return constant.INPUT_CODE_INVALID;
+        } catch (EmptyTaskDescriptionException e) {
+            printer.taskWarningMessage(userInput);
+            System.out.println("Please enter a task description!");
             return constant.INPUT_CODE_INVALID;
         }
     }
@@ -119,20 +134,43 @@ public class Parser {
         }
     }
 
-    private static int validateDeadlineCommand(String userInput) throws DeadlineCommandException {
-        if (userInput.contains(" /by ")) {
-            return constant.INPUT_CODE_DEADLINE;
-        } else {
+    private static int validateDeadlineCommand(String userInput) throws DeadlineCommandException,
+            EmptyTimeDescriptionException, EmptyTaskDescriptionException, DateTimeParseException {
+        if (!userInput.contains(" /by ")) {
             throw new DeadlineCommandException();
         }
+
+        String[] splitUserInput = userInput.split(" /by ", 2);
+        if (splitUserInput[1].isEmpty()) {
+            throw new EmptyTimeDescriptionException();
+        }
+
+        String taskDescription = splitUserInput[0].replaceAll("deadline", "");
+        if (taskDescription.isEmpty()) {
+            throw new EmptyTaskDescriptionException();
+        }
+
+        LocalDate.parse(splitUserInput[1]);
+        return constant.INPUT_CODE_DEADLINE;
     }
 
-    private static int validateEventCommand(String userInput) throws EventCommandException {
-        if (userInput.contains(" /at ")) {
-            return constant.INPUT_CODE_EVENT;
-        } else {
+    private static int validateEventCommand(String userInput) throws EventCommandException,
+            EmptyTimeDescriptionException, EmptyTaskDescriptionException, DateTimeParseException {
+        if (!userInput.contains(" /at ")) {
             throw new EventCommandException();
         }
+
+        String[] splitUserInput = userInput.split(" /at ", 2);
+        if (splitUserInput[1].isEmpty()) {
+            throw new EmptyTimeDescriptionException();
+        }
+
+        String taskDescription = splitUserInput[0].replaceAll("event", "");
+        if (taskDescription.isEmpty()) {
+            throw new EmptyTaskDescriptionException();
+        }
+
+        return constant.INPUT_CODE_EVENT;
     }
 
     private static int validateDeleteCommand(String[] words) throws DeleteCommandException {
