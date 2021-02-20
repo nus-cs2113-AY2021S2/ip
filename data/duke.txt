@@ -1,4 +1,10 @@
 T | Y | read book
-D | N | return book | June 6th
-E | N | project meeting | Aug 6th 2-4pm
 T | Y | join sports club
+T | N | borrow book
+T | N | hi
+T | N | hi
+T | Y | hi
+T | N | hi
+T | N | dmksm
+T | N | isas
+T | N | saosoa

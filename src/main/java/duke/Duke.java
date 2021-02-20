@@ -154,14 +154,19 @@ public class Duke {
                 printList();
             } else if (line.startsWith("todo")) {
                 addTodo(line);
+                saveFile();
             } else if (line.startsWith("deadline")) {
                 addDeadline(line);
+                saveFile();
             } else if (line.startsWith("event")) {
                 addEvent(line);
+                saveFile();
             } else if (line.startsWith("done")) {
                 markDone(line);
+                saveFile();
             } else if (line.startsWith("delete")) {
                 deleteTask(line);
+                saveFile();
             } else {
                 System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
