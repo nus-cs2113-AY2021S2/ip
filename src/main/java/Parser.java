@@ -7,7 +7,7 @@ public class Parser {
     static Scanner scanner = new Scanner(System.in);
     static String LINEBREAK = "____________________________________________________________\n";
     static ArrayList<String> commandList = new ArrayList<String>(
-            Arrays.asList("bye", "list", "done", "todo", "deadline", "event")
+            Arrays.asList("bye", "list", "done", "todo", "deadline", "event", "delete")
     );
     static String EXITCOMMAND = "bye";
 
@@ -39,7 +39,14 @@ public class Parser {
                         try {
                             list.markDone(Integer.parseInt(stringTokens[1]));
                         } catch(ArrayIndexOutOfBoundsException e) {
-                            System.out.println("☹ OOPS!!! The description of a todo cannot be empty :-(");
+                            System.out.println("☹ OOPS!!! Please provide an index :-(");
+                        }
+                        break;
+                    case "delete":
+                        try {
+                            list.deleteTask(Integer.parseInt(stringTokens[1]));
+                        } catch(ArrayIndexOutOfBoundsException e) {
+                            System.out.println("☹ OOPS!!! Please provide an index :-(");
                         }
                         break;
                     case "todo":
