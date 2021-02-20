@@ -151,7 +151,6 @@ public class Duke {
         } while (!command.equals("BYE"));
     }
 
-    public static void main(String[] args) throws IllegalTaskCommandException {
     public static void main(String[] args) throws IllegalTaskCommandException, IOException {
         initialiseWelcomeMessage();
         loadTasks();
