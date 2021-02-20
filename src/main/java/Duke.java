@@ -4,10 +4,12 @@ import duke.Deadline;
 import duke.Task;
 import duke.Event;
 import duke.Todo;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
 
-    static final int BY_AT_INDEX = 3;
+    static final int BY_AT_INDEX = 4;
     static final int TODO_INDEX = 5;
     static final int EVENT_INDEX = 6;
     static final int DELETE_INDEX = 7;
@@ -68,6 +70,10 @@ public class Duke {
                     int slash_sign = task.indexOf("/");
                     String ddl_taskName = task.substring(DEADLINE_INDEX, slash_sign - 1);
                     String by = task.substring(slash_sign + BY_AT_INDEX);
+                    if (by.contains("-")) {
+                        LocalDate date = LocalDate.parse(by);
+                        by = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+                    }
                     tasks[index] = new Deadline(ddl_taskName, 'D', by);
                     index = tl.addTaskMessage(index, tasks[index]);
                     String textToAppend = "D | 0 | " + ddl_taskName + " | " + by;
