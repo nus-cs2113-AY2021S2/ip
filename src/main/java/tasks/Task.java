@@ -32,7 +32,7 @@ public abstract class Task {
      */
     public void printStatus() {
         if (isDone) {
-            System.out.print("[✓] " + name);
+            System.out.print("[X] " + name);
         } else {
             System.out.print("[ ] " + name);
         }
