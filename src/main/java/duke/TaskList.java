@@ -5,6 +5,7 @@ import exceptions.ErrorHandler;
 import tasks.Task;
 
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -14,6 +15,7 @@ public class TaskList {
 
     static final int DONELENGTH = 4;
     static final int DELETELENGTH = 6;
+    static final int FINDLENGTH = 4;
 
 
     public TaskList(ArrayList<Task> tasks) {
@@ -80,6 +82,17 @@ public class TaskList {
         } catch (IndexOutOfBoundsException e) {
             System.out.println("OOPS!!! Please choose a valid task index.");
         }
+    }
+
+    public static ArrayList<Task> findTask(String task) {
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+        String searchDescription = task.substring(FINDLENGTH+1).trim();
+        for (Task t: tasks) {
+            if (t.getDescription().contains(searchDescription)){
+                matchingTasks.add(t);
+            }
+        }
+        return matchingTasks;
     }
 
     public static void addTaskFromData(Task t) {
