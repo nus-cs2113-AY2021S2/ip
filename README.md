@@ -2,8 +2,8 @@
 
 8K's Task Planner is a Command Line Interface (CLI) app for planning of tasks. 
 
-* Types of tasks
 * Quick start
+* Types of tasks
 * Features
   * View all commands : `help`
   * List all tasks : `list`
@@ -24,7 +24,7 @@
 &nbsp;
 
 ## Quick start
-Download from here: https://github.com/8kdesign/ip/releases
+Download `TaskManager.jar` from here: https://github.com/8kdesign/ip/releases
 
 **Requirement:** 
 1. Java 11 and above
@@ -176,4 +176,36 @@ Format: `find <keyword>`
 Exits from application.<br>
 Format: `bye`
 
+&nbsp;
+&nbsp;
+&nbsp;
+
+## Storage
+Changes to task is autosaved to file data.txt.
+This file will be located in the same directory as `TaskManager.jar`.
+If the file isn't found, a new one will be created upon changes.
+
+&nbsp;
+&nbsp;
+&nbsp;
+
+## Command summary
+| Command | Format |
+| help | `help` |
+| list | `list` |
+| todo | `todo <name>` |
+| event | `event <name> /at <additional info>` |
+| deadline | `deadline <name> /by <DD-MM-YYYY>` |
+| delete | `delete <index 1> <index 2> ... <index n>` |
+| done | `done <index 1> <index 2> ... <index n>` |
+| undo | `undo <index 1> <index 2> ... <index n>` |
+| find | `find <keyword>` |
+| bye | `bye` |
+
+&nbsp;
+&nbsp;
+&nbsp;
+
+## Credits
+Based on Duke.
 
