@@ -52,7 +52,7 @@ public class Task {
     }
 
     public String taskToText() {
-        return "";
+        return "A|" + completed + "|" + taskDescription;
     }
 
 }

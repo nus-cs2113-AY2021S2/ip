@@ -54,6 +54,7 @@ public class DukeCommandHandler {
 
         Task currentTask = tasks.get(taskNumber - 1);
         currentTask.markAsDone();
+        Duke.storage.saveData();
         System.out.print(DIVIDER + "\tNice! I've marked this task as done:" +
                 "\n\t" + currentTask.toString() + "\n" + DIVIDER);
     }
@@ -76,6 +77,7 @@ public class DukeCommandHandler {
         }
         Task currentTask = new Task(taskInfo);
         tasks.add(currentTask);
+        Duke.storage.saveData();
         System.out.print(DIVIDER + "\tadded " + currentTask.taskDescription + "\n" + DIVIDER);
     }
 
@@ -98,6 +100,7 @@ public class DukeCommandHandler {
 
         Task currentTask = new ToDo(taskInfo);
         tasks.add(currentTask);
+        Duke.storage.saveData();
         System.out.println(DIVIDER + "\tGot it. I've added this task:\n" +
                 "\t\t" + currentTask.toString());
         System.out.print("\tNow you have " + tasks.size() + checkSingular() + "in your list." + "\n" + DIVIDER);
@@ -125,6 +128,7 @@ public class DukeCommandHandler {
         String deadline = splitTaskInfo[1].trim();
         Task currentTask = new Deadline(taskDescription, deadline);
         tasks.add(currentTask);
+        Duke.storage.saveData();
         System.out.println(DIVIDER + "\tGot it. I've added this task:\n\t\t" +
                 currentTask.toString());
         System.out.print("\tNow you have " + tasks.size() + checkSingular() + "in your list.\n" + DIVIDER);
@@ -151,6 +155,7 @@ public class DukeCommandHandler {
         String timeDetails = splitTaskInfo[1].trim();
         Task currentTask = new Event(taskDescription, timeDetails);
         tasks.add(currentTask);
+        Duke.storage.saveData();
         System.out.println(DIVIDER + "\tGot it. I've added this task:\n\t\t" +
                 currentTask.toString());
         System.out.print("\tNow you have " + tasks.size() + checkSingular() + "in your list.\n" + DIVIDER);
@@ -170,6 +175,7 @@ public class DukeCommandHandler {
 
         Task currentTask = tasks.get(taskNumber - 1);
         tasks.remove(taskNumber-1);
+        Duke.storage.saveData();
         System.out.print(DIVIDER + "\tNoted. I've removed this task:" +
                 "\n\t" + currentTask.toString() + "\n"
                 + DIVIDER);
