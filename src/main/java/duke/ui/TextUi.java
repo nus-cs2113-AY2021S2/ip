@@ -7,8 +7,11 @@ import java.io.PrintStream;
 import java.util.Scanner;
 
 import static duke.Duke.taskList;
+import static duke.constants.UiStrings.*;
+
 
 public class TextUi {
+
     private final Scanner in;
     private final PrintStream out;
     
@@ -30,7 +33,7 @@ public class TextUi {
 
     public void printTaskDeleted(int index) {
         System.out.println("Task " + (index + 1) + " has been deleted:");
-        System.out.print("   ");
+        System.out.print(INDENT);
         taskList.get(index).printTask();
         System.out.println("Tasks remaining: " + (taskList.size() - 1) + "\n");
     }
@@ -44,26 +47,23 @@ public class TextUi {
     }
 
     public void printInvalidInputWarning(String input) {
-        System.out.println("Wrong format: " + input + "! Enter \"help\" for a list of available commands and format\n");
+        System.out.println("Wrong format: \"" + input + "\" !");
+        System.out.println(ENTER_HELP_FOR_LIST_OF_COMMANDS);
     }
 
     public void printNoTaskWarning() {
         System.out.println("You don't have any tasks ! Enter a task");
-        System.out.println("Enter \"help\" for a list of available commands and format\n");
+        System.out.println(ENTER_HELP_FOR_LIST_OF_COMMANDS);
     }
 
     public void printInvalidIndexWarning(int jobNumber) {
-        String smaller = "Enter a valid job number. Use the list command to view your current tasks.";
-        String larger = "You don't have that many jobs! Use the list command to view your current tasks.";
-
-        System.out.println(jobNumber <= 0 ? smaller : larger);
-        System.out.println("Enter \"help\" for a list of available commands and format\n");
+        System.out.println(jobNumber <= 0 ? JOB_NUMBER_TOO_SMALL : JOB_NUMBER_TOO_BIG);
+        System.out.println(ENTER_HELP_FOR_LIST_OF_COMMANDS);
     }
 
     private static void printListFullWarning() {
-        System.out.println("List is full!");
-        System.out.println("Use the \"list\" command to view your tasks.");
-        System.out.println("Enter \"bye\" to exit... \n");
+        System.out.println(LIST_FULL_WARNING);
+        System.out.println(PROMPT_ENTER_BYE_TO_EXIT);
     }
 
     public void printDataErrorWarning(int line) {
@@ -72,54 +72,29 @@ public class TextUi {
     }
 
     public void printHelp() {
-        String commandList = "LIST - \n" +
-                "FORMAT: list";
-
-        String commandDone = "DONE - \n" +
-                "FORMAT: done [(int) number]";
-
-        String commandTodo = "TODO - \n" +
-                "FORMAT: todo [(str) description]";
-
-        String commandDeadline = "DEADLINE - \n" +
-                "FORMAT: deadline [(str) description] /by [(str) deadline]";
-
-        String commandEvent = "EVENT - \n" +
-                "FORMAT: event [(str) description] /at [(str) time]";
-
-        String commandDelete = "DELETE - \n" +
-                "FORMAT: delete [(int) index]";
-
-
+        System.out.println(SHORT_LINE);
         System.out.println("COMMAND LIST:");
-        System.out.println("-------------");
-        System.out.println(commandTodo + '\n');
-        System.out.println(commandDeadline + '\n');
-        System.out.println(commandEvent + '\n');
-        System.out.println(commandList + '\n');
-        System.out.println(commandDone + '\n');
-        System.out.println(commandDelete + '\n');
-        System.out.println("To exit, enter \"bye\"\n");
-
+        System.out.println(SHORT_LINE);
+        System.out.println(TODO_COMMAND_FORMAT + '\n');
+        System.out.println(DEADLINE_COMMAND_FORMAT + '\n');
+        System.out.println(EVENT_COMMAND_FORMAT + '\n');
+        System.out.println(LIST_COMMAND_FORMAT + '\n');
+        System.out.println(DONE_COMMAND_FORMAT + '\n');
+        System.out.println(DELETE_COMMAND_FORMAT + '\n');
+        System.out.println(PROMPT_ENTER_BYE_TO_EXIT);
+        System.out.println(SHORT_LINE + '\n');
     }
 
     public void printHello() {
-        // Start - Greets user
-        String line = "____________________________________________________________\n";
-        String hello_message = "Hello I'm Diuk! \nWhat would you like to do today?\n";
-
-        System.out.print(line);
-        System.out.print(hello_message);
-        System.out.print(line);
+        System.out.println(STRAIGHT_LINE);
+        System.out.print(ALLO_MESSAGE);
+        System.out.println(STRAIGHT_LINE);
     }
 
     public void printBye() {
-        String line = "____________________________________________________________\n";
-        String bye_message = "Bye! Hit me up if you feel like being productive again ;)\n";
-
-        System.out.print(line);
-        System.out.print(bye_message);
-        System.out.print(line);
+        System.out.println(STRAIGHT_LINE);
+        System.out.print(BYE_MESSAGE);
+        System.out.println(STRAIGHT_LINE);
     }
     
 }
