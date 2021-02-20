@@ -36,6 +36,7 @@ public class ActionHandler {
             performDefault();
         } else {
             System.out.println("Unknown Operation!");
+            System.out.println(constant.DIVIDER_LINE);
         }
     }
 
