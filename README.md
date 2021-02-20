@@ -5,7 +5,7 @@
 * [Quick start](#quick-start)
 * [Types of tasks](#types-of-tasks)
 * [Features](#features)
-  * [View all commands : `help`](#view-all-command)
+  * [View all commands : `help`](#view-all-command----help-)
   * List all tasks : `list`
   * Add todo : `todo`
   * Add event : `event`
@@ -15,9 +15,9 @@
   * Mark as undone : `undo`
   * Search keyword : `find`
   * Exit : `bye`
-* [Storage](storage)
-* [Command summary](command-summary)
-* [Credits](credits)
+* [Storage](#storage)
+* [Command summary](#command-summary)
+* [Credits](#credits)
 
 &nbsp;
 &nbsp;
