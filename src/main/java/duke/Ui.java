@@ -79,7 +79,8 @@ public class Ui implements AutoCloseable {
     public void printWelcome() {
         print(
                 "Hello! I'm Duke.\n"
-                + "What can I do for you?"
+                + "What can I do for you?\n"
+                + "Note: When input a date (& time), please use format like '" + new DateTime("31/01/2021 23:59") + "'."
         );
         printLine();
     }

@@ -8,6 +8,7 @@ public class InvalidInputException extends Exception {
         EMPTY_INDEX,
         NO_BY_DATE,
         NO_AT_DATE,
+        MALFORMED_DATE,
         NOT_INTEGER,
         INDEX_OUT_OF_BOUND
     }
@@ -32,6 +33,8 @@ public class InvalidInputException extends Exception {
             return "You must specify a deadline date following /by keyword.";
         case NO_AT_DATE:
             return "You must specify an event date following /at keyword.";
+        case MALFORMED_DATE:
+            return "Date (and time) specified cannot be parsed.";
         case NOT_INTEGER:
             return "Only integer is accepted as the argument.";
         case INDEX_OUT_OF_BOUND:
