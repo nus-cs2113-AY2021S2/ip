@@ -1,14 +1,16 @@
 package duke;
 
-import duke.viewmodel.Logic;
+import java.util.Scanner;
+
+import duke.parser.Parser;
 
 public class Duke {
 
     /**
-     * Main function of Duke version 0.1.0. 
+     * Entry point of the application.
      */
     public static void main(String[] args) {
-        Logic logic = Logic.getInstance();
-        logic.handleMessage();
+        Scanner scanner = new Scanner(System.in);
+        Parser.handleCommand(scanner);
     }
 }

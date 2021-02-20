@@ -1,24 +1,24 @@
-package duke.model;
+package duke.data;
 
-public class Deadline implements Task {
+public class Event implements Task {
     private final String description;
     private final boolean isDone;
     private final String message;
-    private final String deadline;
+    private final String event;
 
     /**
-     * Constructs a Deadline task.
+     * Constructs an Event task.
      * @param description Name of task.
      * @param isDone True if this task is completed.
-     * @param deadline Date/time this task expires.
+     * @param event Date/time this task expires.
      */
-    public Deadline(String description, boolean isDone, String deadline) {
-        String fullDescription = String.format("%s (by: %s)", description, deadline);
+    public Event(String description, boolean isDone, String event) {
+        String fullDescription = String.format("%s (at: %s)", description, event);
         this.description = description.trim();
-        this.deadline = deadline;
+        this.event = event;
         this.isDone = isDone;
         this.message = String.format(
-            "[D][%s] %s",
+            "[E][%s] %s",
             isDone ? "X" : " ",
             fullDescription
         );
@@ -36,7 +36,7 @@ public class Deadline implements Task {
         return message;
     }
 
-    public String getDeadline() {
-        return deadline;
+    public String getEvent() {
+        return event;
     }
 }

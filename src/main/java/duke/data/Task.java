@@ -1,4 +1,4 @@
-package duke.model;
+package duke.data;
 
 public interface Task {
     

@@ -1,8 +1,10 @@
-package duke.viewmodel;
+package duke.ui;
 
 import java.util.List;
 
-public class Utils {
+import duke.common.Strings;
+
+public class Ui {
 
     /**
      * Wraps replies with horizontal lines and indentation.
@@ -23,9 +25,9 @@ public class Utils {
         System.out.println(
             String.format(
                 "%s\n%s%s\n",
-                Constants.HORIZONTAL_LINE,
+                Strings.HORIZONTAL_LINE,
                     allMessages.toString(),
-                Constants.HORIZONTAL_LINE
+                Strings.HORIZONTAL_LINE
             )
         );
         messages.clear();
@@ -40,9 +42,9 @@ public class Utils {
         System.out.println(
             String.format(
                 "%s\n%s\n%s\n",
-                Constants.HORIZONTAL_LINE,
+                Strings.HORIZONTAL_LINE,
                 output,
-                Constants.HORIZONTAL_LINE
+                Strings.HORIZONTAL_LINE
             )
         );
     }

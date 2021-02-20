@@ -1,8 +1,10 @@
-package duke.viewmodel;
+package duke.taskActions;
 
-import duke.model.Deadline;
-import duke.model.Event;
-import duke.model.Todo;
+import duke.data.Deadline;
+import duke.data.exception.DukeException;
+import duke.data.Event;
+import duke.data.Todo;
+import duke.data.exception.DukeExceptionKey;
 
 public class TaskGenerator {
 
@@ -12,9 +14,9 @@ public class TaskGenerator {
      * @return An undone Todo task.
      * @throws DukeException When task name is not given.
      */
-    public Todo createTodo(String details) throws DukeException {
+    public static Todo createTodo(String details) throws DukeException {
         if (details.isEmpty()) {
-            throw new DukeException(Constants.EMPTY_TODO);
+            throw new DukeException(DukeExceptionKey.EMPTY_TODO);
         }
         return new Todo(details, false);
     }
@@ -25,9 +27,9 @@ public class TaskGenerator {
      * @return An undone Deadline task.
      * @throws DukeException When task name or deadline not given.
      */
-    public Deadline createDeadline(String details) throws DukeException {
+    public static Deadline createDeadline(String details) throws DukeException {
         if (details.isEmpty()) {
-            throw new DukeException(Constants.EMPTY_DEADLINE);
+            throw new DukeException(DukeExceptionKey.EMPTY_DEADLINE);
         }
         try {
             String[] deadlineTask = details.split(" /by ");
@@ -35,7 +37,7 @@ public class TaskGenerator {
             String deadline = deadlineTask[1].trim();
             return new Deadline(description, false, deadline);
         } catch (ArrayIndexOutOfBoundsException exception) {
-            throw new DukeException(Constants.EMPTY_DEADLINE_TIME);
+            throw new DukeException(DukeExceptionKey.EMPTY_DEADLINE_TIME);
         }
     }
 
@@ -45,9 +47,9 @@ public class TaskGenerator {
      * @return An undone Event task.
      * @throws DukeException When task name or event not given.
      */
-    public Event createEvent(String details) throws DukeException {
+    public static Event createEvent(String details) throws DukeException {
         if (details.isEmpty()) {
-            throw new DukeException(Constants.EMPTY_EVENT);
+            throw new DukeException(DukeExceptionKey.EMPTY_EVENT);
         }
         try {
             String[] eventTask = details.split(" /at ");
@@ -55,7 +57,7 @@ public class TaskGenerator {
             String event = eventTask[1].trim();
             return new Event(description, false, event);
         } catch (ArrayIndexOutOfBoundsException exception) {
-            throw new DukeException(Constants.EMPTY_EVENT_TIME);
+            throw new DukeException(DukeExceptionKey.EMPTY_EVENT_TIME);
         }
     }
 }

@@ -1,6 +1,6 @@
-package duke.viewmodel;
+package duke.common;
 
-public class Constants {
+public class Strings {
     public static final String HORIZONTAL_LINE = "    ___________________________________________";
     public static final String HELLO_MESSAGE = "Hello! I'm Duke";
     public static final String ASSIST_MESSAGE = "What can I do for you?";
@@ -27,15 +27,4 @@ public class Constants {
     public static final String EVENT_EMPTY_TIME_MESSAGE = "Event missing!";
     public static final String TASK_DOES_NOT_EXIST = "Task does not exist!";
     public static final String INDEX_NUMBER_INPUT_MESSAGE = "Please input a valid number!";
-
-    public static final int INVALID_COMMAND = 0;
-    public static final int EMPTY_TASK_LIST = 100;
-    public static final int EMPTY_TASK_COMPLETE_LIST = 200;
-    public static final int EMPTY_TODO = 1;
-    public static final int EMPTY_DEADLINE = 2;
-    public static final int EMPTY_DEADLINE_TIME = 21;
-    public static final int EMPTY_EVENT = 3;
-    public static final int EMPTY_EVENT_TIME = 31;
-    public static final int NO_TASK_FOUND = 4;
-    public static final int INDEX_FORMAT_ERROR = 41;
 }
