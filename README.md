@@ -44,6 +44,17 @@ For more information about commands, please refer to the list below.
 
 ### View all commands : `help`
 List out list of commands and how to use them.
+| Input | help |
+| ---------| -------------------------------------------------------|
+| Output | 8K: bye - Exit programme.
+    help - Show list of commands.
+    list - Show list of saved values.
+    todo <name> - Creates new todo task.
+    event <name> /at <info> - Creates new event.
+    deadline <name> /by <DD-MM-YYYY> - Creates new deadline.
+    delete <indices> - Deletes selected tasks.
+    done <indices> - Mark selected tasks as done.
+    undo <indices> - Mark selected tasks as not done.|
 
 ### List all tasks : `list`
 List out all the tasks currently in your task list.
