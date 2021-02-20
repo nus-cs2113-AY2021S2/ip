@@ -20,7 +20,7 @@ public class Event extends Task {
         return atDate;
     }
 
-    public LocalDateTime getDatetime() {
+    public LocalDateTime getDateTime() {
         return dateTime;
     }
 
