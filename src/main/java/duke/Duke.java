@@ -1,5 +1,6 @@
 package duke;
 
+import com.sun.tools.javac.Main;
 import duke.exception.DataErrorException;
 import duke.exception.FullListException;
 import duke.exception.InvalidCommandException;
@@ -7,6 +8,7 @@ import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.Todo;
+import duke.ui.TextUi;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -32,13 +34,15 @@ public class Duke {
     private static final String PATH = "Duke_userdata.txt";
 
     public static ArrayList<Task> taskList = new ArrayList<>();
+    public static TextUi ui = new TextUi();
 
     public static void main(String[] args) {
-        printHello();
+        ui.printHello();
         checkSavedData();
         runUserCommand();
-        printBye();
+        ui.printBye();
     }
+    
 
     /**
      * ----------------------------------------------- START OF METHODS -----------------------------------------------
@@ -59,7 +63,7 @@ public class Duke {
             try {
                 checkListCapacity(command);
             } catch (FullListException e) {
-                printListFullWarning();
+                ui.printHello();
                 continue;
             }
 
@@ -72,7 +76,7 @@ public class Duke {
                 break;
 
             case HELP_COMMAND:
-                printHelp();
+                ui.printHelp();
                 break;
 
             case DONE_COMMAND:
@@ -157,7 +161,7 @@ public class Duke {
                 taskList.add(task);
                 Task.taskCount++;
             } catch (DataErrorException e) {
-                printDataErrorWarning(lineNumber);
+                ui.printDataErrorWarning(lineNumber);
             }
         }
     }
@@ -320,16 +324,16 @@ public class Duke {
 
             // error handling - no jobs
             if (taskList.size() == 0) {
-                printNoTaskWarning();
+                ui.printNoTaskWarning();
                 return;
             }
 
             markJobAsDone(taskList.get(jobNumber));
 
         } catch (NumberFormatException e) {
-            printInvalidInputWarning(input);
+            ui.printInvalidInputWarning(input);
         } catch (NullPointerException | IndexOutOfBoundsException e) {
-            printInvalidIndexWarning(jobNumber);
+            ui.printInvalidIndexWarning(jobNumber);
         }
 
     }
@@ -346,7 +350,7 @@ public class Duke {
 
         // error handling - no jobs
         if (taskList.size() == 0) {
-            printNoTaskWarning();
+            ui.printNoTaskWarning();
             return;
         }
 
@@ -368,7 +372,7 @@ public class Duke {
         try {
             job = parseJob(input, "");
         } catch (InvalidCommandException e) {
-            printInvalidInputWarning(input);
+            ui.printInvalidInputWarning(input);
             return;
         }
 
@@ -377,7 +381,7 @@ public class Duke {
         taskList.add(newTask);
         Task.taskCount++;
 
-        printTaskAdded(newTask);
+        ui.printTaskAdded(newTask);
     }
 
     private static void runDeadline(String input) {
@@ -388,7 +392,7 @@ public class Duke {
             job = parseJob(input, "/by");
             by = parseDate(input, "/by");
         } catch (InvalidCommandException e) {
-            printInvalidInputWarning(input);
+            ui.printInvalidInputWarning(input);
             return;
         }
 
@@ -396,7 +400,7 @@ public class Duke {
         taskList.add(newTask);
         Task.taskCount++;
 
-        printTaskAdded(newTask);
+        ui.printTaskAdded(newTask);
     }
 
     private static void runEvent(String input) {
@@ -406,7 +410,7 @@ public class Duke {
             job = parseJob(input, "/at");
             at = parseDate(input, "/at");
         } catch (InvalidCommandException e) {
-            printInvalidInputWarning(input);
+            ui.printInvalidInputWarning(input);
             return;
         }
 
@@ -414,7 +418,7 @@ public class Duke {
         taskList.add(newTask);
         Task.taskCount++;
 
-        printTaskAdded(newTask);
+        ui.printTaskAdded(newTask);
 
     }
 
@@ -431,13 +435,13 @@ public class Duke {
         try {
             index = Integer.parseInt(words[1]) - 1;
             if (taskList.contains(taskList.get(index))) {
-                printTaskDeleted(index);
+                ui.printTaskDeleted(index);
                 taskList.remove(index);
             }
         } catch (NumberFormatException e) {
-            printInvalidInputWarning(input);
+            ui.printInvalidInputWarning(input);
         } catch (IndexOutOfBoundsException e) {
-            printInvalidIndexWarning(index);
+            ui.printInvalidIndexWarning(index);
         }
     }
 
@@ -445,105 +449,105 @@ public class Duke {
     /**
      * PRINTING METHODS
      */
-
-    private static void printTaskAdded(Task task) {
-        System.out.println("Added to list: ");
-        task.printTask();
-        printNumTasksLeft();
-        System.out.println();
-    }
-
-    private static void printTaskDeleted(int index) {
-        System.out.println("Task " + (index + 1) + " has been deleted:");
-        System.out.print("   ");
-        taskList.get(index).printTask();
-        System.out.println("Tasks remaining: " + (taskList.size() - 1) + "\n");
-    }
-
-    private static void printNumTasksLeft() {
-        String output = Integer.toString(taskList.size());
-        output += (taskList.size() == 1) ? " task" : " tasks";
-        output += " in the list";
-
-        System.out.println(output);
-    }
-
-    private static void printInvalidInputWarning(String input) {
-        System.out.println("Wrong format: " + input + "! Enter \"help\" for a list of available commands and format\n");
-    }
-
-    private static void printNoTaskWarning() {
-        System.out.println("You don't have any tasks ! Enter a task");
-        System.out.println("Enter \"help\" for a list of available commands and format\n");
-    }
-
-    private static void printInvalidIndexWarning(int jobNumber) {
-        String smaller = "Enter a valid job number. Use the list command to view your current tasks.";
-        String larger = "You don't have that many jobs! Use the list command to view your current tasks.";
-
-        System.out.println(jobNumber <= 0 ? smaller : larger);
-        System.out.println("Enter \"help\" for a list of available commands and format\n");
-    }
-
-    private static void printListFullWarning() {
-        System.out.println("List is full!");
-        System.out.println("Use the \"list\" command to view your tasks.");
-        System.out.println("Enter \"bye\" to exit... \n");
-    }
-
-    private static void printDataErrorWarning(int line) {
-        System.out.println("Error forming task. Check formatting at line " + line + " in data file!");
-        System.out.println();
-    }
-
-    private static void printHelp() {
-        String commandList = "LIST - \n" +
-                "FORMAT: list";
-
-        String commandDone = "DONE - \n" +
-                "FORMAT: done [(int) number]";
-
-        String commandTodo = "TODO - \n" +
-                "FORMAT: todo [(str) description]";
-
-        String commandDeadline = "DEADLINE - \n" +
-                "FORMAT: deadline [(str) description] /by [(str) deadline]";
-        
-        String commandEvent = "EVENT - \n" +
-                "FORMAT: event [(str) description] /at [(str) time]";
-
-        String commandDelete = "DELETE - \n" +
-                "FORMAT: delete [(int) index]";
-
-
-        System.out.println("COMMAND LIST:");
-        System.out.println("-------------");
-        System.out.println(commandTodo + '\n');
-        System.out.println(commandDeadline + '\n');
-        System.out.println(commandEvent + '\n');
-        System.out.println(commandList + '\n');
-        System.out.println(commandDone + '\n');
-        System.out.println(commandDelete + '\n');
-        System.out.println("To exit, enter \"bye\"\n");
-
-    }
-
-    private static void printHello() {
-        // Start - Greets user
-        String line = "____________________________________________________________\n";
-        String hello_message = "Hello I'm Diuk! \nWhat would you like to do today?\n";
-
-        System.out.print(line);
-        System.out.print(hello_message);
-        System.out.print(line);
-    }
-
-    private static void printBye() {
-        String line = "____________________________________________________________\n";
-        String bye_message = "Bye! Hit me up if you feel like being productive again ;)\n";
-
-        System.out.print(line);
-        System.out.print(bye_message);
-        System.out.print(line);
-    }
+//
+//    private static void printTaskAdded(Task task) {
+//        System.out.println("Added to list: ");
+//        task.printTask();
+//        printNumTasksLeft();
+//        System.out.println();
+//    }
+//
+//    private static void printTaskDeleted(int index) {
+//        System.out.println("Task " + (index + 1) + " has been deleted:");
+//        System.out.print("   ");
+//        taskList.get(index).printTask();
+//        System.out.println("Tasks remaining: " + (taskList.size() - 1) + "\n");
+//    }
+//
+//    private static void printNumTasksLeft() {
+//        String output = Integer.toString(taskList.size());
+//        output += (taskList.size() == 1) ? " task" : " tasks";
+//        output += " in the list";
+//
+//        System.out.println(output);
+//    }
+//
+//    private static void printInvalidInputWarning(String input) {
+//        System.out.println("Wrong format: " + input + "! Enter \"help\" for a list of available commands and format\n");
+//    }
+//
+//    private static void printNoTaskWarning() {
+//        System.out.println("You don't have any tasks ! Enter a task");
+//        System.out.println("Enter \"help\" for a list of available commands and format\n");
+//    }
+//
+//    private static void printInvalidIndexWarning(int jobNumber) {
+//        String smaller = "Enter a valid job number. Use the list command to view your current tasks.";
+//        String larger = "You don't have that many jobs! Use the list command to view your current tasks.";
+//
+//        System.out.println(jobNumber <= 0 ? smaller : larger);
+//        System.out.println("Enter \"help\" for a list of available commands and format\n");
+//    }
+//
+//    private static void printListFullWarning() {
+//        System.out.println("List is full!");
+//        System.out.println("Use the \"list\" command to view your tasks.");
+//        System.out.println("Enter \"bye\" to exit... \n");
+//    }
+//
+//    private static void printDataErrorWarning(int line) {
+//        System.out.println("Error forming task. Check formatting at line " + line + " in data file!");
+//        System.out.println();
+//    }
+//
+//    private static void printHelp() {
+//        String commandList = "LIST - \n" +
+//                "FORMAT: list";
+//
+//        String commandDone = "DONE - \n" +
+//                "FORMAT: done [(int) number]";
+//
+//        String commandTodo = "TODO - \n" +
+//                "FORMAT: todo [(str) description]";
+//
+//        String commandDeadline = "DEADLINE - \n" +
+//                "FORMAT: deadline [(str) description] /by [(str) deadline]";
+//        
+//        String commandEvent = "EVENT - \n" +
+//                "FORMAT: event [(str) description] /at [(str) time]";
+//
+//        String commandDelete = "DELETE - \n" +
+//                "FORMAT: delete [(int) index]";
+//
+//
+//        System.out.println("COMMAND LIST:");
+//        System.out.println("-------------");
+//        System.out.println(commandTodo + '\n');
+//        System.out.println(commandDeadline + '\n');
+//        System.out.println(commandEvent + '\n');
+//        System.out.println(commandList + '\n');
+//        System.out.println(commandDone + '\n');
+//        System.out.println(commandDelete + '\n');
+//        System.out.println("To exit, enter \"bye\"\n");
+//
+//    }
+//
+//    private static void printHello() {
+//        // Start - Greets user
+//        String line = "____________________________________________________________\n";
+//        String hello_message = "Hello I'm Diuk! \nWhat would you like to do today?\n";
+//
+//        System.out.print(line);
+//        System.out.print(hello_message);
+//        System.out.print(line);
+//    }
+//
+//    private static void printBye() {
+//        String line = "____________________________________________________________\n";
+//        String bye_message = "Bye! Hit me up if you feel like being productive again ;)\n";
+//
+//        System.out.print(line);
+//        System.out.print(bye_message);
+//        System.out.print(line);
+//    }
 }
