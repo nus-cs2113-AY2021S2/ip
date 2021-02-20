@@ -65,6 +65,7 @@ List out all the tasks currently in your task list.
 > `[T]` -> Todo<br>
 > `[E]` -> Event<br>
 > `[D]` -> Deadline<br>
+> 
 > **Second `[]` shows done status.**<br>
 > `[X]` -> Done<br>
 > `[ ]` -> Not done<br>
@@ -73,8 +74,8 @@ List out all the tasks currently in your task list.
 
 | | Result |
 | --------- | ------------------------------------------------------- |
-| Input | list |
-| Output | 1.[T][ ] apple<br>2.[E][ ] apple (at: pear)<br>3.[D][ ] apple (by: 24 Jun 1999) |
+| Input | `list` |
+| Output | `1.[T][ ] apple<br>2.[E][ ] apple (at: pear)<br>3.[D][ ] apple (by: 24 Jun 1999)` |
 
 &nbsp;
 &nbsp;
@@ -85,8 +86,8 @@ Adds a todo with specified name into task list.<br>
 
 | | Result |
 | --------- | ------------------------------------------------------- |
-| Input | todo CS2113T Homework |
-| Output | 8K: Added "CS2113T Homework" to list. |
+| Input | `todo CS2113T Homework` |
+| Output | `8K: Added "CS2113T Homework" to list.` |
 | Action | Add toDo "CS2113T Homework" to task list |
 
 &nbsp;
@@ -98,8 +99,8 @@ Adds an event with specified name and information to your task list.<br>
 
 | | Result |
 | --------- | ------------------------------------------------------- |
-| Input | event OP2 Meeting /at COM2 |
-| Output | 8K: Added "OP2 Meeting" to list. |
+| Input | `event OP2 Meeting /at COM2` |
+| Output | `8K: Added "OP2 Meeting" to list.` |
 | Action | Add event "OP2 Meeting" to task list |
 
 &nbsp;
@@ -111,8 +112,8 @@ Adds a deadline with specified name and due date to your task list.<br>
 
 | | Result |
 | --------- | ------------------------------------------------------- |
-| Input | deadline Wk6 Quiz /by 19-2-2020 |
-| Output | 8K: Added "Wk6 Quiz" to list. |
+| Input | `deadline Wk6 Quiz /by 19-2-2020` |
+| Output | `8K: Added "Wk6 Quiz" to list.` |
 | Action | Add deadline "Wk6 Quiz" to task list |
 
 &nbsp;
@@ -126,8 +127,8 @@ Invalid indices will be skipped.<br>
 
 | | Result |
 | --------- | ------------------------------------------------------- |
-| Input | delete 1 2 |
-| Output | Deleted:<br>[T][ ] task3<br>[T][ ] task1 |
+| Input | `delete 1 2` |
+| Output | `Deleted:<br>[T][ ] task3<br>[T][ ] task1` |
 | Action | Delete first and second task in task list |
 
 &nbsp;
@@ -141,8 +142,8 @@ Invalid indices will be skipped.<br>
 
 | | Result |
 | --------- | ------------------------------------------------------- |
-| Input | done 1 2 |
-| Output | Marked as done:<br>[D][X] task1 (by: 12 Dec 2020)<br>[D][X] task2 (by: 20 Feb 2021) |
+| Input | `done 1 2` |
+| Output | `Marked as done:<br>[D][X] task1 (by: 12 Dec 2020)<br>[D][X] task2 (by: 20 Feb 2021)` |
 | Action | Mark first and second task in task list as done |
 
 &nbsp;
@@ -156,8 +157,8 @@ Invalid indices will be skipped.<br>
 
 | | Result |
 | --------- | ------------------------------------------------------- |
-| Input | undo 1 2 |
-| Output | Marked as undone:<br>[D][ ] task1 (by: 12 Dec 2020)<br>[D][ ] task2 (by: 20 Feb 2021) |
+| Input | `undo 1 2` |
+| Output | `Marked as undone:<br>[D][ ] task1 (by: 12 Dec 2020)<br>[D][ ] task2 (by: 20 Feb 2021)` |
 | Action | Mark first and second task in task list as not done |
 
 &nbsp;
@@ -170,8 +171,8 @@ Index relative to task list is shown for easier deletion / mark as done.<br>
 
 | | Result |
 | --------- | ------------------------------------------------------- |
-| Input | Find quiz |
-| Output | 3.[T][ ] CS2113T Quiz |
+| Input | `Find quiz` |
+| Output | `3.[T][ ] CS2113T Quiz` |
 
 &nbsp;
 &nbsp;
