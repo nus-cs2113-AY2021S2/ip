@@ -23,9 +23,11 @@ public class Parser {
         }
         int index = Integer.parseInt(separatedWords[1]);
         switch (commandType) {
+            case MARK:
             case DONE:
                 command = new DoneCommand(index);
                 break;
+            case REMOVE:
             case DELETE:
                 command = new DeleteCommand(index);
                 break;
@@ -69,6 +71,17 @@ public class Parser {
         return command;
     }
 
+    private static Command handleFind(String[] separatedWords) {
+        Command command = null;
+        if (CHECK_LENGTH.apply(separatedWords, 1)) {
+            errorMessage = " Keyword cannot be empty!";
+            return command;
+        }
+        String keyword = separatedWords[1];
+        command = new FindCommand(keyword);
+        return command;
+    }
+
     /**
      * Parses user input into command.
      *
@@ -80,7 +93,7 @@ public class Parser {
         try {
             String[] separatedWords = input.split("\\s+");
             Commands commandType = Commands.valueOf(separatedWords[0].toUpperCase());
-            Command command = null;
+            Command command;
             switch (commandType) {
                 case BYE:
                     command = new GoodbyeCommand();
@@ -88,7 +101,9 @@ public class Parser {
                 case LIST:
                     command = new ListCommand();
                     break;
+                case MARK:
                 case DONE:
+                case REMOVE:
                 case DELETE:
                     command = handleDoneOrDelete(commandType, separatedWords);
                     break;
@@ -100,6 +115,9 @@ public class Parser {
                     break;
                 case EVENT:
                     command = handleAddTask(commandType, input, "/at");
+                    break;
+                case FIND:
+                    command = handleFind(separatedWords);
                     break;
                 default:
                     throw new DukeException(" Command type not found");
@@ -123,9 +141,12 @@ public class Parser {
         BYE,
         LIST,
         DONE,
+        MARK,
         DELETE,
+        REMOVE,
         TODO,
         DEADLINE,
-        EVENT
+        EVENT,
+        FIND
     }
 }

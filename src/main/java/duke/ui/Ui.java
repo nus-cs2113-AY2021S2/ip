@@ -25,7 +25,7 @@ public class Ui {
             " '----------------'  '----------------' ";
     final String DECO_LINE = "____________________________________________________________";
     final String HELLO_MESSAGE = " Hello! I'm 9%.";
-    final String ASK_MESSAGE = " What can I do for you? (todo/deadline/event/list/done/remove/bye)";
+    final String ASK_MESSAGE = " What can I do for you? \n(todo/deadline/event/list/find/done/remove/bye)";
     final String BYE_MESSAGE = " Bye. Hope to see you again soon!";
     private ArrayList<String> accumulatedResponses;
 

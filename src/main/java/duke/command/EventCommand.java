@@ -11,7 +11,7 @@ import duke.ui.Ui;
 /**
  * Implements event command objects.
  *
- * @author Audrey Felicio Anwar
+ * @author Leonardo Irvin Pratama
  */
 public class EventCommand extends Command {
     private final String description;

@@ -33,7 +33,7 @@ public class Duke {
     }
 
     /**
-     * Starts MySTARS.
+     * Starts Duke.
      *
      * @param args Command line argument.
      */
