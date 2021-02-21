@@ -3,19 +3,21 @@ package jarvis;
 import jarvis.exception.HandleException;
 import jarvis.exception.InvalidCommandException;
 import jarvis.storage.TextManager;
+import jarvis.ui.JarvisUi;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class Duke {
 
-    public static final Jarvis jarvis = new Jarvis();
+    public static final JarvisUi jarvis = new JarvisUi();
 
     /**
      * Entry point of the JARVIS application.
      * Initialises JARVIS and starts the interaction with the user.
      */
     public static void main(String[] args) throws InterruptedException {
+
         jarvis.startJarvis();
 
         try {

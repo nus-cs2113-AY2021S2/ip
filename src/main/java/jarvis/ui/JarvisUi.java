@@ -1,4 +1,4 @@
-package jarvis;
+package jarvis.ui;
 
 import jarvis.commands.Command;
 import jarvis.exception.EmptyListException;
@@ -15,11 +15,11 @@ import java.util.concurrent.TimeUnit;
 /**
  * UI of JARVIS application.
  */
-public class Jarvis {
+public class JarvisUi {
 
     private final Scanner in = new Scanner(System.in);    // create Scanner object
 
-    public Jarvis() {}
+    public JarvisUi() {}
 
     public void printDivider() {
         String DIVIDER = "--------------------------------------------------------------------------------------------";
