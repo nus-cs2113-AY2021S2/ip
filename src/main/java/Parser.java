@@ -80,6 +80,16 @@ public class Parser {
             return false;
         }
     }
+
+    public static boolean isFind(String user_input){
+        if (user_input.length() > 4) {
+            if (user_input.substring(0, 4).equals("find")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static int getDeadlineIndex(String user_input) {
         int index = user_input.indexOf('/');
         return index;

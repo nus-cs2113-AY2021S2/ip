@@ -64,4 +64,16 @@ public class TaskList {
             System.out.println((i + 1) + "." + t[i + 1].toString());
         }
     }
+
+    protected static void findTasks(String user_input){
+        if(parser.isFind(user_input)){
+            String taskname = user_input.substring(ui.FIND_START, user_input.length());
+            System.out.println("Here are the matching tasks in your list:");
+            for (int i=1;i<=ui.num_of_goals;i++){
+                if(t[i].getDescription().contains(taskname)){
+                    System.out.println((i) + "." + t[i].toString());
+                }
+            }
+        }
+    }
 }

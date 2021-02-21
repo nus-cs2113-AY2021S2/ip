@@ -67,6 +67,10 @@ public class Duke {
             case DELETE:
                 tasks.deleteTask(user_input);
                 break;
+            case FIND:
+                tasks.findTasks(user_input);
+                break;
+
             case INVALID:
                 throw new InvalidCommandException();
 
@@ -94,6 +98,8 @@ public class Duke {
                 command = Command.DEADLINE;
             } else if (parser.isDelete(user_input)) {
                 command = Command.DELETE;
+            } else if (parser.isFind(user_input)){
+                command =Command.FIND;
             } else {
                 command = Command.INVALID;
             }
