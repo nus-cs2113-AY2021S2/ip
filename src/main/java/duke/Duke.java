@@ -1,73 +1,146 @@
 package duke;
 
 import duke.data.DataManager;
+import duke.exception.EmptyDescriptionException;
+import duke.exception.InvalidCommandException;
+import duke.parser.CommandParser;
+import duke.task.Task;
 import duke.task.TaskManager;
 import duke.user_interface.UserInterface;
 
+import java.util.ArrayList;
+
 public class Duke {
 
-    private static final String dataFilePath = "data/data.txt";
+    private static final String DATA_FILE_PATH = "data/data.txt";
 
-    private static final UserInterface ui = new UserInterface();
-    private static final TaskManager taskManager = new TaskManager();
-    private static final DataManager dataManager = new DataManager(dataFilePath);
+    private static UserInterface ui;
+    private static TaskManager taskManager;
+    private static DataManager dataManager;
+    private static CommandParser parser;
 
     public static void main(String[] args) {
 
+        ui = new UserInterface();
+        taskManager = new TaskManager();
+        dataManager = new DataManager(DATA_FILE_PATH);
+        parser = new CommandParser();
+
         ui.showWelcomeMessage();
 
-        taskManager.setData(dataManager.loadData());
+        ArrayList<Task> taskList = dataManager.loadData();
+        taskManager.setData(taskList);
 
         while (true) {
             String input = ui.getUserInput();
-            String feedback = executeCommand(input);
-            dataManager.saveData(taskManager.getData());
+            String feedback;
+            try {
+                feedback = executeCommand(input);
+            } catch (InvalidCommandException e) {
+                feedback = "OOPS!!! I'm sorry, but I don't know what that means :(";
+            }
             ui.printFeedback(feedback);
+            ArrayList<Task> data = taskManager.getData();
+            dataManager.saveData(data);
         }
     }
 
-    private static String executeCommand(String input) {
-        String[] parsedInput = parseInput(input);
-        String command = parsedInput[0].toLowerCase();
-        String feedback = null;
+    private static String executeCommand(String input) throws InvalidCommandException {
+
+        String[] parsedInput = parser.parseCommand(input);
+
+        String command = parsedInput[0];
+        String description = parsedInput[1];
+
+        String feedback = "";
 
         switch (command) {
         case "bye":
-            ui.showExitMessage();
-            System.exit(0);
+            exitProgram();
             break;
         case "list":
-            feedback = taskManager.listTask();
+            feedback = listTask();
             break;
         case "done":
-            try {
-                int taskNumber = Integer.parseInt(parsedInput[1]) - 1;
-                feedback = taskManager.doneTask(taskNumber);
-            } catch (NumberFormatException e) {
-                feedback = "OOPS!!! Task number has to be a number";
-            }
+            feedback = setTaskAsDone(description);
             break;
         case "delete":
-            try {
-                int taskNumber = Integer.parseInt(parsedInput[1]) - 1;
-                feedback = taskManager.deleteTask(taskNumber);
-            } catch (NumberFormatException e) {
-                feedback = "OOPS!!! Task number has to be a number";
-            }
+            feedback = deleteTask(description);
+            break;
+        case "todo":
+            feedback = addTodo(description);
+            break;
+        case "deadline":
+            feedback = addDeadline(description);
+            break;
+        case "event":
+            feedback = addEvent(description);
             break;
         default:
-            feedback = taskManager.addTask(command, parsedInput[1]);
+            throw new InvalidCommandException();
         }
 
         return feedback;
     }
 
-    public static String[] parseInput(String input) {
-        String[] split = input.split(" ", 2);
-        if (split.length == 2) {
-            return split;
-        } else {
-            return new String[]{split[0], ""};
+    private static String listTask() {
+        return taskManager.listTask();
+    }
+
+    private static String setTaskAsDone(String description) {
+        String feedback;
+        try {
+            int taskNumber = Integer.parseInt(description) - 1;
+            feedback = taskManager.doneTask(taskNumber);
+        } catch (NumberFormatException e) {
+            feedback = "OOPS!!! Task number has to be a number";
         }
+        return feedback;
+    }
+
+    private static String deleteTask(String description) {
+        String feedback;
+        try {
+            int taskNumber = Integer.parseInt(description) - 1;
+            feedback = taskManager.deleteTask(taskNumber);
+        } catch (NumberFormatException e) {
+            feedback = "OOPS!!! Task number has to be a number";
+        }
+        return feedback;
+    }
+
+    private static String addTodo(String description) {
+        String feedback;
+        try {
+            feedback = taskManager.addTodo(description);
+        } catch (EmptyDescriptionException e) {
+            feedback = "OOPS!!! The description of a todo cannot be empty.";
+        }
+        return feedback;
+    }
+
+    private static String addDeadline(String description) {
+        String feedback;
+        try {
+            feedback = taskManager.addDeadline(description);
+        } catch (EmptyDescriptionException e) {
+            feedback = "OOPS!!! The description of a deadline cannot be empty.";
+        }
+        return feedback;
+    }
+
+    private static String addEvent(String description) {
+        String feedback;
+        try {
+            feedback = taskManager.addEvent(description);
+        } catch (EmptyDescriptionException e) {
+            feedback = "OOPS!!! The description of an event cannot be empty.";
+        }
+        return feedback;
+    }
+
+    private static void exitProgram() {
+        ui.showExitMessage();
+        System.exit(0);
     }
 }

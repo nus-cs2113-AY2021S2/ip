@@ -1,26 +1,17 @@
 package duke.task;
 
 import duke.exception.EmptyDescriptionException;
-import duke.exception.InvalidCommandException;
-import duke.exception.LoadDataException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
+import duke.parser.CommandParser;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class TaskManager {
 
-    private final ArrayList<Task> tasks = new ArrayList<>();
+    private ArrayList<Task> tasks = new ArrayList<>();
+    private CommandParser parser = new CommandParser();
 
-    public String getData() {
-        StringBuilder data = new StringBuilder();
-        for (Task task : tasks) {
-            data.append(task.getData()).append(System.lineSeparator());
-        }
-        return data.toString();
+    public ArrayList<Task> getData() {
+        return tasks;
     }
 
     public String listTask() {
@@ -37,62 +28,6 @@ public class TaskManager {
         }
 
         return feedback.toString();
-    }
-
-    public String addTask(String taskType, String description) {
-        try {
-            checkValidInput(taskType, description);
-        } catch (InvalidCommandException e) {
-            return "OOPS!!! I'm sorry, but I don't know what that means :(";
-        } catch (EmptyDescriptionException e) {
-            return "OOPS!!! The description of a " + taskType + " cannot be empty.";
-        }
-
-        switch (taskType) {
-        case "todo":
-        case "t":
-            tasks.add(new Todo(description));
-            break;
-        case "deadline":
-        case "d": {
-            String[] nameAndDate = parseDescription(description, " /by ");
-            tasks.add(new Deadline(nameAndDate[0], nameAndDate[1]));
-            break;
-        }
-        case "event":
-        case "e": {
-            String[] nameAndDate = parseDescription(description, " /at ");
-            tasks.add(new Event(nameAndDate[0], nameAndDate[1]));
-            break;
-        }
-        }
-
-        return "Got it. I've added this task:" + System.lineSeparator()
-                + tasks.get(tasks.size() - 1) + System.lineSeparator()
-                + "Now you have " + tasks.size() + " tasks in the list.";
-    }
-
-    private boolean isValidTaskType(String taskType) {
-        return taskType.equals("todo") || taskType.equals("deadline") || taskType.equals("event") ||
-                taskType.equals("t") || taskType.equals("d") || taskType.equals("e");
-    }
-
-    private void checkValidInput(String taskType, String description) throws InvalidCommandException, EmptyDescriptionException {
-        if (!isValidTaskType(taskType)) {
-            throw new InvalidCommandException();
-        }
-        if (description.isEmpty()) {
-            throw new EmptyDescriptionException();
-        }
-    }
-
-    private String[] parseDescription(String description, String regex) {
-        final String[] split = description.split(regex);
-        if (split.length == 2) {
-            return split;
-        } else {
-            return new String[]{split[0], ""};
-        }
     }
 
     public String doneTask(int taskNum) {
@@ -118,46 +53,51 @@ public class TaskManager {
     }
 
 
-    public void setData(Scanner scanner) {
-        if(!scanner.hasNext()){
-            return;
-        }
-
-        try {
-            while (scanner.hasNext()) {
-                String line = scanner.nextLine();
-                String[] parsedLine = line.split(";", 3);
-                char taskType = parsedLine[0].charAt(0);
-                boolean taskIsDone = parsedLine[1].equals("1");
-                String taskDescription = parsedLine[2];
-                switch (taskType) {
-                case 'T':
-                    tasks.add(new Todo(taskDescription));
-                    break;
-                case 'D': {
-                    String[] nameAndDate = taskDescription.split(";", 2);
-                    tasks.add(new Deadline(nameAndDate[0], nameAndDate[1]));
-                    break;
-                }
-                case 'E': {
-                    String[] nameAndDate = taskDescription.split(";", 2);
-                    tasks.add(new Event(nameAndDate[0], nameAndDate[1]));
-                    break;
-                }
-                default:
-                    throw new LoadDataException();
-                }
-
-                if(taskIsDone){
-                    doneTask(tasks.size());
-                }
-            }
-            System.out.println("Data loaded sucessfully...");
-        } catch (Exception e) {
-            tasks.clear();
-            System.out.println("Error loading old data...");
-            System.out.println("Data will be overridden...");
-        }
+    public void setData(ArrayList<Task> tasks) {
+        this.tasks = tasks;
     }
 
+    public String addTodo(String description) throws EmptyDescriptionException {
+
+        if(description.isEmpty()){
+            throw new EmptyDescriptionException();
+        }
+
+        Todo todo = new Todo(description);
+        tasks.add(todo);
+
+        return addTaskSuccessMessage(todo);
+    }
+
+    public String addDeadline(String description) throws EmptyDescriptionException {
+
+        if(description.isEmpty()){
+            throw new EmptyDescriptionException();
+        }
+
+        String[] parsedDescription = parser.parseDeadline(description);
+        Deadline deadline = new Deadline(parsedDescription[0], parsedDescription[1]);
+        tasks.add(deadline);
+
+        return addTaskSuccessMessage(deadline);
+    }
+
+    public String addEvent(String description) throws EmptyDescriptionException {
+
+        if(description.isEmpty()){
+            throw new EmptyDescriptionException();
+        }
+
+        String[] parsedDescription = parser.parseEvent(description);
+        Event event = new Event(parsedDescription[0], parsedDescription[1]);
+        tasks.add(event);
+
+        return addTaskSuccessMessage(event);
+    }
+
+    private String addTaskSuccessMessage(Task task) {
+        return "Got it. I've added this task:" + System.lineSeparator()
+                + task + System.lineSeparator()
+                + "Now you have " + tasks.size() + " tasks in the list.";
+    }
 }
