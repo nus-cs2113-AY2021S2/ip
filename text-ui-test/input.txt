@@ -25,6 +25,9 @@ delete -1
 delete Not_A_Number
 delete 1000
 list
+find Task
+find Deadline
+find A
 delete 1
 delete 2
 delete 1
