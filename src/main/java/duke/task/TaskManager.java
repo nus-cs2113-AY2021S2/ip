@@ -5,15 +5,22 @@ import duke.parser.CommandParser;
 
 import java.util.ArrayList;
 
+/**
+ * Stores and handles the list of tasks in the program
+ */
 public class TaskManager {
 
-    private ArrayList<Task> tasks = new ArrayList<>();
+    private ArrayList<Task> tasks;
     private CommandParser parser = new CommandParser();
 
     public ArrayList<Task> getData() {
         return tasks;
     }
 
+    /**
+     * Gets all the tasks' description.
+     * @return tasks' information
+     */
     public String listTask() {
 
         if(tasks.isEmpty()) {
@@ -30,6 +37,11 @@ public class TaskManager {
                 + String.join(System.lineSeparator(), taskStrings);
     }
 
+    /**
+     * Marks the task as done in the task list.
+     * @param taskNum 1-based index of the task that has been done.
+     * @return Feedback of whether the process has been successful.
+     */
     public String doneTask(int taskNum) {
         try {
             tasks.get(taskNum).setAsDone();
@@ -40,6 +52,11 @@ public class TaskManager {
                 + tasks.get(taskNum);
     }
 
+    /**
+     * Removes the task from the task list.
+     * @param taskNumber 1-based index of the task to be removed.
+     * @return Feedback of whether the process has been successful.
+     */
     public String deleteTask(int taskNumber) {
         String task = tasks.get(taskNumber).toString();
         try {
@@ -52,11 +69,20 @@ public class TaskManager {
                 "Now you have " + tasks.size() + " tasks in the list.";
     }
 
-
+    /**
+     * Loads the tasks into the task list.
+     * @param tasks The task list to be loaded.
+     */
     public void setData(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
+    /**
+     * Add todo task into the task list.
+     * @param description Name of the todo task.
+     * @return Feedback of whether the process has been successful.
+     * @throws EmptyDescriptionException On missing todo description.
+     */
     public String addTodo(String description) throws EmptyDescriptionException {
 
         if(description.isEmpty()){
@@ -69,6 +95,12 @@ public class TaskManager {
         return addTaskSuccessMessage(todo);
     }
 
+    /**
+     * Add deadline task into the task list.
+     * @param description Name of the deadline task.
+     * @return Feedback of whether the process has been successful.
+     * @throws EmptyDescriptionException On missing deadline description.
+     */
     public String addDeadline(String description) throws EmptyDescriptionException {
 
         if(description.isEmpty()){
@@ -82,6 +114,12 @@ public class TaskManager {
         return addTaskSuccessMessage(deadline);
     }
 
+    /**
+     * Add event task into the task list.
+     * @param description Name of the event task.
+     * @return Feedback of whether the process has been successful.
+     * @throws EmptyDescriptionException On missing event description.
+     */
     public String addEvent(String description) throws EmptyDescriptionException {
 
         if(description.isEmpty()){
@@ -94,6 +132,7 @@ public class TaskManager {
 
         return addTaskSuccessMessage(event);
     }
+
 
     private String addTaskSuccessMessage(Task task) {
         return "Got it. I've added this task:" + System.lineSeparator()

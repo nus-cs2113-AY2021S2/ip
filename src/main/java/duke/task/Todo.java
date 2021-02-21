@@ -1,7 +1,15 @@
 package duke.task;
 
+/**
+ * Task that has to be done without any specified
+ * deadline.
+ */
 public class Todo extends Task {
 
+    /**
+     * Constructor
+     * @param taskName Name of task.
+     */
     public Todo(String taskName) {
         super(taskName);
     }
@@ -13,10 +21,6 @@ public class Todo extends Task {
 
     @Override
     public String getData() {
-        return String.format("%c;%d;%s", getTaskChar(), (isDone?1:0), taskName);
-    }
-
-    public static char getTaskChar() {
-        return 'T';
+        return String.format("T;%d;%s", (isDone?1:0), taskName);
     }
 }

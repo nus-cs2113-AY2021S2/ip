@@ -1,8 +1,16 @@
 package duke.task;
 
+/**
+ * Task that has o be done by a certain date/time.
+ */
 public class Deadline extends Task {
     private final String date;
 
+    /**
+     * Constructor
+     * @param taskName Name of task.
+     * @param date Date/time where the task must be done by.
+     */
     public Deadline(String taskName, String date) {
         super(taskName);
         this.date = date;
@@ -15,10 +23,6 @@ public class Deadline extends Task {
 
     @Override
     public String getData() {
-        return String.format("%c;%d;%s;%s", getTaskChar(), (isDone ? 1 : 0), taskName, date);
-    }
-
-    public static char getTaskChar() {
-        return 'D';
+        return String.format("D;%d;%s;%s", (isDone ? 1 : 0), taskName, date);
     }
 }

@@ -10,6 +10,15 @@ import duke.user_interface.UserInterface;
 
 import java.util.ArrayList;
 
+/**
+ * The Duke program implements an application
+ * that allow users to keep track of their task
+ *
+ * @author Jalvin Chan Jia Xiang
+ * @version 0.2
+ * @since 16 Jan 2021
+ */
+
 public class Duke {
 
     private static final String DATA_FILE_PATH = "data/data.txt";

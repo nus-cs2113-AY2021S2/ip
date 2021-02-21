@@ -11,16 +11,28 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.util.ArrayList;
 
+/**
+ * Manages the storing and loading of data
+ * into/from the hard disk.
+ */
 public class DataManager {
 
     private final String FILEPATH;
     private DataParser parser;
 
+    /**
+     * Constructor
+     * @param FILEPATH Path where the data is stored.
+     */
     public DataManager(String FILEPATH) {
         this.FILEPATH = FILEPATH;
         parser = new DataParser();
     }
 
+    /**
+     * Saves the tasks' data into the hard disk.
+     * @param tasks list of tasks to be saved.
+     */
     public void saveData(ArrayList<Task> tasks) {
 
         StringBuilder data = new StringBuilder();
@@ -40,6 +52,10 @@ public class DataManager {
         }
     }
 
+    /**
+     * loads the task's data from the hard disk.
+     * @return List of tasks extracted from hard disk.
+     */
     public ArrayList<Task> loadData() {
 
         File file = new File(FILEPATH);
