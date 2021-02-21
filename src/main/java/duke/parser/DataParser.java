@@ -8,8 +8,20 @@ import duke.task.Todo;
 
 import java.util.ArrayList;
 
+/**
+ * Converts between Task and String data types.
+ * Task objects are used in the program while String
+ * is used to store in the hard disk.
+ */
 public class DataParser {
 
+    /**
+     * Converts tasks' data extracted from hard disk into a list
+     * of Task objects for the program to use.
+     * @param taskStringList Data extracted from hard disk.
+     * @return List of Task objects converted from hard disk data.
+     * @throws LoadDataException On corrupted data.
+     */
     public ArrayList<Task> parseTaskString(ArrayList<String> taskStringList) throws LoadDataException {
 
         ArrayList<Task> taskList = new ArrayList<>();
@@ -57,6 +69,12 @@ public class DataParser {
         return task;
     }
 
+    /**
+     * Converts task data into String format so as to be
+     * stored inside hard disk.
+     * @param task Task object to be converted.
+     * @return task data in String format.
+     */
     public String parseTaskToString(Task task) {
         return task.getData();
     }

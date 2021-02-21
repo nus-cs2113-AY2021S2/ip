@@ -2,6 +2,9 @@ package duke.user_interface;
 
 import java.util.Scanner;
 
+/**
+ * Handles input and output to the command line.
+ */
 public class UserInterface {
 
     private static final String DIVIDER = "____________________________________________________________";
@@ -14,6 +17,10 @@ public class UserInterface {
 
     private static final Scanner scanner = new Scanner(System.in);
 
+    /**
+     * Displays the welcome message when the user
+     * open the program.
+     */
     public void showWelcomeMessage() {
         System.out.println("Hello from\n" + LOGO);
         printDivider();
@@ -22,6 +29,10 @@ public class UserInterface {
         printDivider();
     }
 
+    /**
+     * Takes in the user input and sends it to the program.
+     * @return user input
+     */
     public String getUserInput() {
         String input;
         do {
@@ -35,10 +46,17 @@ public class UserInterface {
         System.out.println(DIVIDER);
     }
 
+    /**
+     * Displays the exit message when the user ends the program.
+     */
     public void showExitMessage() {
         System.out.println(EXIT_MESSAGE);
     }
 
+    /**
+     * Displays the output from the execution of command to the user.
+     * @param feedback To be shown to the user.
+     */
     public void printFeedback(String feedback) {
         if (feedback != null) {
             System.out.println(feedback);
