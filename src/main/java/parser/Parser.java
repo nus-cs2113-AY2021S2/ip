@@ -18,13 +18,14 @@ public class Parser {
      */
     public static int getCommandCode(String userInput) {
         String[] words = userInput.split(" ");
+        String commandCode;
         try {
-            words[0].toLowerCase();
+            commandCode = words[0].toLowerCase();
         } catch (ArrayIndexOutOfBoundsException e) {
             return constant.INPUT_CODE_DEFAULT_INVALID;
         }
         // No Fallthrough intended in this switch statement
-        switch (words[0].toLowerCase()) {
+        switch (commandCode) {
         case "bye":
             return constant.INPUT_CODE_EXIT;
         case "list":
@@ -85,7 +86,7 @@ public class Parser {
     }
 
     /**
-     * Try-catch validation block for printing error messages of 'todo' command.
+     * Try-catch validation block for printing error messages of 'deadline' command.
      *
      * @param userInput is the input from the console terminal.
      * @return valid or invalid command code for 'deadline' command.
@@ -95,7 +96,7 @@ public class Parser {
             return validateDeadlineCommand(userInput);
         } catch (DeadlineCommandException e) {
             printer.printTaskWarningMessage(userInput);
-            System.out.println("Your format must be [ /by ]!");
+            System.out.println("Please use a correct format with ' /by '!");
             return constant.INPUT_CODE_INVALID;
         } catch (EmptyTimeDescriptionException e) {
             printer.printTaskWarningMessage(userInput);
@@ -123,7 +124,7 @@ public class Parser {
             return validateEventCommand(userInput);
         } catch (EventCommandException e) {
             printer.printTaskWarningMessage(userInput);
-            System.out.println("Your format must be [ /at ]!");
+            System.out.println("Please use a correct format with ' /at '!");
             return constant.INPUT_CODE_INVALID;
         } catch (EmptyTimeDescriptionException e) {
             printer.printTaskWarningMessage(userInput);
@@ -243,11 +244,10 @@ public class Parser {
      * @throws EventCommandException if the event identifier format is wrong.
      * @throws EmptyTimeDescriptionException if the time field is empty.
      * @throws EmptyTaskDescriptionException if the task description is empty.
-     * @throws DateTimeParseException if the time field format is wrong.
      * @return valid or invalid command code for 'event' command.
      */
     private static int validateEventCommand(String userInput) throws EventCommandException,
-            EmptyTimeDescriptionException, EmptyTaskDescriptionException, DateTimeParseException {
+            EmptyTimeDescriptionException, EmptyTaskDescriptionException {
         if (!userInput.contains(" /at ")) {
             throw new EventCommandException();
         }
@@ -286,9 +286,8 @@ public class Parser {
      * Check if the input is in correct format.
      *
      * @param words contains the individual words from userInput.
-     * @throws DeleteCommandException if the task number given is smaller than 1.
-     * @throws ArrayIndexOutOfBoundsException if there is no task number given.
-     * @return valid or invalid command code for 'delete' command.
+     * @throws FindCommandException if no keyword is given.
+     * @return valid or invalid command code for 'find' command.
      */
     private static int validateFindCommand(String[] words) throws FindCommandException {
         if (words.length == 1) {
@@ -318,7 +317,7 @@ public class Parser {
      * @return a string without the command code.
      */
     private static String removeCommandCode(String userInput) {
-        String[] userInputArray= userInput.split(" ", 2);
+        String[] userInputArray = userInput.split(" ", 2);
         return userInputArray[1];
     }
 
@@ -343,7 +342,7 @@ public class Parser {
      * @return a string without the time and date.
      */
     private static String removeDateAndTime(String unfilteredDescription) {
-        String[] unfilteredDescriptionArray= unfilteredDescription.split("/", 2);
+        String[] unfilteredDescriptionArray = unfilteredDescription.split("/", 2);
         return unfilteredDescriptionArray[0];
     }
 
@@ -351,7 +350,7 @@ public class Parser {
      * Extract the task number from the input.
      *
      * @param userInput is the input from the console terminal.
-     * @return a int of the task number.
+     * @return a integer of the task number.
      */
     public static int getIndexFromUserInput(String userInput) {
         String[] words = userInput.split(" ");
