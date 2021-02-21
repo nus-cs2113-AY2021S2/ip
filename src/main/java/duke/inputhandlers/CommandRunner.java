@@ -8,6 +8,8 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.Todo;
 
+import java.util.Scanner;
+
 import static duke.Duke.tasks;
 import static duke.Duke.ui;
 import static duke.constants.ProgramInts.*;
@@ -20,7 +22,34 @@ import static duke.constants.ProgramInts.*;
 
 public class CommandRunner {
 
-    public boolean selectCommandToRun(int command, String input) {
+    public void receiveUserInput() {
+        Scanner in = new Scanner(System.in);
+        boolean isExit = false;
+
+        //Loop to receive response.
+        while (!isExit) {
+            String input = in.nextLine();
+            int command = Parser.parseCommand(input);
+
+            // If list is full, will only allow LIST and BYE command to pass
+            try {
+                checkListCapacity(command);
+            } catch (FullListException e) {
+                ui.printListFullWarning();
+                continue;
+            }
+
+            isExit = selectCommandToRun(command, input);
+        }
+    }
+
+    /**
+     * PRIVATE COMMAND RUNNERS
+     * 
+     * 
+     */
+
+    private boolean selectCommandToRun(int command, String input) {
         switch (command) {
         case BYE_COMMAND:
             return true;
@@ -53,15 +82,11 @@ public class CommandRunner {
         default:
             runUnknownCommand(input);
         }
-        
+
         return false;
     }
 
-    /**
-     * COMMAND RUNNERS
-     */
-
-    private static void runDone(String input) {
+    private void runDone(String input) {
         String[] word = input.split(" ");
         int jobNumber = 0;
 
@@ -84,14 +109,14 @@ public class CommandRunner {
 
     }
 
-    private static void markJobAsDone(Task task) {
+    private void markJobAsDone(Task task) {
         task.setDone(true);
         System.out.print("Congrats! You've completed: \n   ");
         task.printTask();
         System.out.println();
     }
 
-    private static void runList() {
+    private void runList() {
         int numbering = 1;
 
         // error handling - no jobs
@@ -111,7 +136,7 @@ public class CommandRunner {
 
     }
 
-    private static void runTodo(String input) {
+    private void runTodo(String input) {
 
         String job;
 
@@ -127,7 +152,7 @@ public class CommandRunner {
         ui.printTaskAdded(newTask);
     }
 
-    private static void runDeadline(String input) {
+    private void runDeadline(String input) {
         String job;
         String by;
 
@@ -144,7 +169,7 @@ public class CommandRunner {
         ui.printTaskAdded(newTask);
     }
 
-    private static void runEvent(String input) {
+    private void runEvent(String input) {
         String job, at;
 
         try {
@@ -160,12 +185,11 @@ public class CommandRunner {
         ui.printTaskAdded(newTask);
     }
 
-    private static void runUnknownCommand(String input) {
-        System.out.println("No idea what " + input + " means!");
-        System.out.println("Enter \"help\" for a list of available commands and format\n");
+    private void runUnknownCommand(String input) {
+        ui.printUnknownCommandWarning(input);
     }
 
-    private static void runDeleteCommand(String input) {
+    private void runDeleteCommand(String input) {
 
         String[] words = input.split(" ");
         int index = 0;
@@ -186,12 +210,12 @@ public class CommandRunner {
     /**
      * CHECK LIST CAPACITY
      */
-    public boolean isAllowedWhenListFull(int command) {
+    private boolean isAllowedWhenListFull(int command) {
         return (command == LIST_COMMAND || command == BYE_COMMAND);
     }
 
 
-    public void checkListCapacity(int command) throws FullListException {
+    private void checkListCapacity(int command) throws FullListException {
         if (tasks.getCount() == MAX_TASK && !Task.isFull) {
             Task.isFull = true;
         }

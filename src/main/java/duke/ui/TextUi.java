@@ -52,6 +52,11 @@ public class TextUi {
         System.out.println(output);
     }
 
+    public void printUnknownCommandWarning(String input) {
+        System.out.println("No idea what \"" + input + "\" means!");
+        System.out.println(ENTER_HELP_FOR_LIST_OF_COMMANDS);
+    }
+
     public void printInvalidInputWarning(String input) {
         System.out.println("Wrong format: \"" + input + "\" !");
         System.out.println(ENTER_HELP_FOR_LIST_OF_COMMANDS);

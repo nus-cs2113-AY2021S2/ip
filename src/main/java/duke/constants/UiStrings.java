@@ -29,7 +29,7 @@ public class UiStrings {
     public static final String INDENT = "   ";
     
     // Messages for program start and exit
-    public static final String ALLO_MESSAGE = "Hello I'm Diuk!\n" + "What would you like to do today?\n";
+    public static final String ALLO_MESSAGE = "Hello I'm Duke!\n" + "What would you like to do today?\n";
     public static final String BYE_MESSAGE = "Bye! Hit me up if you feel like being productive again ;)\n";
     
     
