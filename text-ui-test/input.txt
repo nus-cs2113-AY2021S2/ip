@@ -1,25 +1,32 @@
-ride down to town to party :D
-todo read book
+todo testinput file
+deadline submit UG /by 2020-03-05
+event 2113t lecture /at friday
 list
-done
-done 0
-done 1
-deadline return book /by Sunday
-done 3
+todo testdelete todo
+deadline testdelete deadline /by 2020-02-02
+event testfind event /at monday
 list
-done 2
-event project meeting /at Mon 2-4pm
-done 3
-done 4
-list
-delete
-delete -1
+find test
+find testdelete
+find jackma
+find find
 delete 0
-delete 2
 list
-delete 3
+delete 7
+done 4
+done 5
 list
-delete 2
-delete 1
+delete 4
+delete 4
+list
+done -1
+done 7
+list
+todo test invalid format for command code
+deadline /by 2019-01-01
+deadline purposely wrong date /by 2019-30-30
+deadline purposely wrong identifier format /at 2019-01-01
+deadline purposely wrong identifier format/by2019-01-01
+deadline purpose no identifier format
 list
 bye
