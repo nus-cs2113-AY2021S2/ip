@@ -26,8 +26,9 @@ public class Storage {
                 fw.write(textInput + "\n");
             }
             fw.close();
-        } catch (IOException ioException) {
-            System.out.println(ioException.getMessage());
+        } catch (IOException | NullPointerException exception) {
+            // Exception will be thrown when user immediately
+            // exits the app on the first run.
         }
     }
 
@@ -53,9 +54,8 @@ public class Storage {
                 }
             }
             return tasks;
-        } catch (IOException fileNotFoundException) {
-            messages.add(fileNotFoundException.getMessage());
-            Ui.reply(messages);
+        } catch (IOException | NullPointerException exception) {
+            Ui.notifyError(exception.getMessage());
         }
         return null;
     }
