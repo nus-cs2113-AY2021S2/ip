@@ -24,6 +24,7 @@ public class Duke {
         Storage.read();
         List<String> messages = new ArrayList<>();
         messages.add(Messages.HELLO_MESSAGE);
+        messages.add(Messages.VERSION_MESSAGE);
         messages.add(Messages.ASSIST_MESSAGE);
         Ui.reply(messages);
     }
