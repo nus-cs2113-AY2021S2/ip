@@ -8,9 +8,13 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class Duke {
+
     public static final Jarvis jarvis = new Jarvis();
 
-    // MAIN program
+    /**
+     * Entry point of the JARVIS application.
+     * Initialises JARVIS and starts the interaction with the user.
+     */
     public static void main(String[] args) throws InterruptedException {
         jarvis.startJarvis();
 
