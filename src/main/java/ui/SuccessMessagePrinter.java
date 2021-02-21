@@ -4,6 +4,10 @@ import dukehandler.TaskManager;
 
 import java.io.File;
 
+/**
+ * Prints all messages that are non-errors.
+ * Includes Greeting and Farewell Messages.
+ */
 public class SuccessMessagePrinter {
     public SuccessMessagePrinter() {
     }

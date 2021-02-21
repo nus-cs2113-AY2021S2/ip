@@ -114,6 +114,7 @@ public class TaskManager {
             return;
         } catch (ArrayIndexOutOfBoundsException a) {
             ErrorMessagePrinter.printEmptyCommandMessage("find command");
+            return;
         }
         System.out.println(" Here are the matching tasks in your list:");
         int[] i = {1};
