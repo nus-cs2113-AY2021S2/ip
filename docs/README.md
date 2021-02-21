@@ -10,14 +10,14 @@ Duke is a desktop app for managing user's tasks based on the Command Line Interf
 1. Double-click the file to start the app.
 1. Type the command in the command box and press Enter to execute it. e.g. typing list and pressing Enter will list all the tasks.
 1. Some example commands you can try:
-    1. todo
-    1. deadline 
-    1. event
-    1. done
-    1. list
-    1. find
-    1. delete
-    1. bye
+    1. [todo](https://jalvinchan.github.io/ip/#todo---add-todo)
+    1. [deadline](https://jalvinchan.github.io/ip/#deadline---add-deadline) 
+    1. [event](https://jalvinchan.github.io/ip/#event---add-event)
+    1. [list](https://jalvinchan.github.io/ip/#list---list-all-tasks)
+    1. [done](https://jalvinchan.github.io/ip/#done---mark-task-as-done)
+    1. [delete](https://jalvinchan.github.io/ip/#delete---deletes-a-task)
+    1. [find](https://jalvinchan.github.io/ip/#find---finds-tasks)
+    1. [bye](https://jalvinchan.github.io/ip/#bye---exits-program)
 1. Refer to the Usage below for details of each command.
 
 ## Usage
