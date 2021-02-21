@@ -9,6 +9,9 @@ import duke.exception.InvalidInputException.InputExceptionType;
 public abstract class Task implements Serializable {
     public static final long serialVersionUID = 1L;
 
+    public static final String CROSS_ICON = "\u2718";
+    public static final String TICK_ICON = "\u2713";
+
     // We set the default type icon to be *, which should be overwritten for child classes
     protected String typeIcon = "*";
 
@@ -27,7 +30,7 @@ public abstract class Task implements Serializable {
 
     public String getStatusIcon() {
         // Return tick when done, or 'X' symbol when it is not done
-        return (isDone ? "\u2713" : "\u2718");
+        return (isDone ? TICK_ICON : CROSS_ICON);
     }
     //@@author
 

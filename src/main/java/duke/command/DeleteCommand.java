@@ -22,20 +22,19 @@ public class DeleteCommand extends Command {
         if (indexString == null) {
             // An index must be provided for the task to be marked "done"
             throw new InvalidInputException(InputExceptionType.EMPTY_INDEX);
-        } else {
-            try {
-                int index = Integer.parseInt(indexString);
-                if (index > tasks.size() || index < 1) {
-                    // This index is out of the boundary of our database
-                    throw new InvalidInputException(InputExceptionType.INDEX_OUT_OF_BOUND);
-                }
-
-                Task task = tasks.remove(index - 1);
-                ui.print("Sure! I've removed this task:");
-                ui.print("\t" + task);
-            } catch (NumberFormatException e) {
-                throw new InvalidInputException(InputExceptionType.NOT_INTEGER, e);
+        }
+        try {
+            int index = Integer.parseInt(indexString);
+            if (index > tasks.size() || index < 1) {
+                // This index is out of the boundary of our database
+                throw new InvalidInputException(InputExceptionType.INDEX_OUT_OF_BOUND);
             }
+
+            Task task = tasks.remove(index - 1);
+            ui.print("Sure! I've removed this task:");
+            ui.print("\t" + task);
+        } catch (NumberFormatException e) {
+            throw new InvalidInputException(InputExceptionType.NOT_INTEGER, e);
         }
     }
 }

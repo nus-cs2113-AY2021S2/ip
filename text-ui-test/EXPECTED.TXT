@@ -1,4 +1,4 @@
-	Oops! No save file is found at the given path.
+	[We have a problem!] duke.exception.SaveException: No save file is found at the given path.
 	Got a problem when loading save file at 'duke.save'.
 	An empty list will be used instead!
 	------------------------------------------------------------
@@ -7,7 +7,7 @@
 	Note: When input a date (& time), please use format like '31/01/2021 23:59'.
 	------------------------------------------------------------
 	------------------------------------------------------------
-	Oops! You will need to provide a description.
+	[We have a problem!] duke.exception.InvalidInputException: You will need to provide a description.
 	------------------------------------------------------------
 	------------------------------------------------------------
 	Great. We added a new task:
@@ -29,17 +29,17 @@
 	You have in total 3 tasks
 	------------------------------------------------------------
 	------------------------------------------------------------
-	Oops! Date (and time) specified cannot be parsed.
+	[We have a problem!] duke.exception.InvalidInputException: Date (and time) specified cannot be parsed.
 	------------------------------------------------------------
 	------------------------------------------------------------
 	Sure! I've removed this task:
 		[E][✘] Event A-2 (at: 01/04/2021 12:00)
 	------------------------------------------------------------
 	------------------------------------------------------------
-	Oops! You must specify an event date following /at keyword.
+	[We have a problem!] duke.exception.InvalidInputException: You must specify an event date following /at keyword.
 	------------------------------------------------------------
 	------------------------------------------------------------
-	Oops! You must specify an event date following /at keyword.
+	[We have a problem!] duke.exception.InvalidInputException: You must specify an event date following /at keyword.
 	------------------------------------------------------------
 	------------------------------------------------------------
 	Here are the tasks in your list:
@@ -52,10 +52,10 @@
 	You have in total 3 tasks
 	------------------------------------------------------------
 	------------------------------------------------------------
-	Oops! You must specify a deadline date following /by keyword.
+	[We have a problem!] duke.exception.InvalidInputException: You must specify a deadline date following /by keyword.
 	------------------------------------------------------------
 	------------------------------------------------------------
-	Oops! You must specify a deadline date following /by keyword.
+	[We have a problem!] duke.exception.InvalidInputException: You must specify a deadline date following /by keyword.
 	------------------------------------------------------------
 	------------------------------------------------------------
 	Here are the tasks in your list:
@@ -64,7 +64,7 @@
 	3.	[D][✘] Deadline A (by: 01/08/2021 12:00)
 	------------------------------------------------------------
 	------------------------------------------------------------
-	Oops! Command given is not recognized as a valid one.
+	[We have a problem!] duke.exception.InvalidInputException: Command given is not recognized as a valid one.
 	------------------------------------------------------------
 	------------------------------------------------------------
 	Here are the tasks in your list:
@@ -101,13 +101,13 @@
 	3.	[D][✓] Deadline A (by: 01/08/2021 12:00)
 	------------------------------------------------------------
 	------------------------------------------------------------
-	Oops! We don't have an existing entry with this index.
+	[We have a problem!] duke.exception.InvalidInputException: We don't have an existing entry with this index.
 	------------------------------------------------------------
 	------------------------------------------------------------
-	Oops! Only integer is accepted as the argument.
+	[We have a problem!] duke.exception.InvalidInputException: Only integer is accepted as the argument.
 	------------------------------------------------------------
 	------------------------------------------------------------
-	Oops! We don't have an existing entry with this index.
+	[We have a problem!] duke.exception.InvalidInputException: We don't have an existing entry with this index.
 	------------------------------------------------------------
 	------------------------------------------------------------
 	Here are the tasks in your list:
@@ -116,13 +116,13 @@
 	3.	[D][✓] Deadline A (by: 01/08/2021 12:00)
 	------------------------------------------------------------
 	------------------------------------------------------------
-	Oops! We don't have an existing entry with this index.
+	[We have a problem!] duke.exception.InvalidInputException: We don't have an existing entry with this index.
 	------------------------------------------------------------
 	------------------------------------------------------------
-	Oops! Only integer is accepted as the argument.
+	[We have a problem!] duke.exception.InvalidInputException: Only integer is accepted as the argument.
 	------------------------------------------------------------
 	------------------------------------------------------------
-	Oops! We don't have an existing entry with this index.
+	[We have a problem!] duke.exception.InvalidInputException: We don't have an existing entry with this index.
 	------------------------------------------------------------
 	------------------------------------------------------------
 	Here are the tasks in your list:

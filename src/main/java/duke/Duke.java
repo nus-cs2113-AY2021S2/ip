@@ -15,7 +15,7 @@ public class Duke {
         try {
             tasks = storage.load();
         } catch (Exception e) {
-            ui.printLoadSaveException(filepath, e);
+            ui.printSaveException(filepath, e);
             tasks = new TaskList(storage);
         }
         parser = new Parser(ui, tasks);
