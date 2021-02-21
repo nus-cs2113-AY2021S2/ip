@@ -18,6 +18,11 @@ public class Event extends Task {
         return "event";
     }
 
+    @Override
+    public String getTaskDate() {
+        return at;
+    }
+
     /**
      * Returns the string format for file storing. 
      */

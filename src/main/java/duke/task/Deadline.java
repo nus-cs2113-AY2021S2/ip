@@ -18,6 +18,11 @@ public class Deadline extends Task {
         return "deadline";
     }
 
+    @Override
+    public String getTaskDate() {
+        return by;
+    }
+
     /**
      * Returns the string format for file storing. 
      */

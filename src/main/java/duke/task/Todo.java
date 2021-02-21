@@ -13,6 +13,11 @@ public class Todo extends Task {
     public String getTaskType() {
         return "todo";
     }
+
+    @Override
+    public String getTaskDate() {
+        return null;
+    }
  
     /**
      * Returns the string format for file storing. 
