@@ -1,5 +1,8 @@
 package Duke.Task;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class EventTask extends Task {
 
     protected String time;
@@ -11,16 +14,21 @@ public class EventTask extends Task {
 
     @Override
     public String getTaskType() {
-        return "E";
+        return "[E]";
     }
 
     @Override
     public String getTaskTime(){
-        return time;
+        try {
+            LocalDate d1 = LocalDate.parse(time);
+            return d1.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        } catch (Exception e) {
+            return time;
+        }
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + time + ")";
+        return getTaskType() + super.toString() + " (at: " + getTaskTime() + ")";
     }
 }

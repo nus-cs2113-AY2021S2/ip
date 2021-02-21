@@ -1,4 +1,4 @@
-package Duke.Functions;
+package Duke.Commands;
 
 import Duke.Duke;
 import Duke.Exceptions.DukeException;
@@ -14,10 +14,10 @@ public class AddToList extends Duke {
     } else if (taskDescription.contains("/")) {
             String[] taskAndTime = taskDescription.split("/", 2);
             if (taskType.equalsIgnoreCase("deadline")) {
-                lists.add(new DeadlineTask(taskAndTime[0], taskAndTime[1]));
+                lists.add(new DeadlineTask(taskAndTime[0].trim(), taskAndTime[1].trim()));
                 taskAddedText();
             } else if (taskType.equalsIgnoreCase("event")) {
-                lists.add(new EventTask(taskAndTime[0], taskAndTime[1]));
+                lists.add(new EventTask(taskAndTime[0].trim(), taskAndTime[1].trim()));
                 taskAddedText();
             }
         } else {
@@ -27,7 +27,7 @@ public class AddToList extends Duke {
 
     public static void taskAddedText() {
         System.out.println(" Task added! ^_^");
-        printList(taskCount, taskCount + 1);
+        PrintList.printList(taskCount, taskCount + 1);
         ++taskCount;
     }
 
