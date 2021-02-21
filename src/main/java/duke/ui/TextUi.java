@@ -32,6 +32,7 @@ public class TextUi {
 
     public void printTaskAdded(Task task) {
         System.out.println("Added to list: ");
+        System.out.print(INDENT);
         task.printTask();
         printNumTasksLeft();
         System.out.println();
@@ -44,12 +45,21 @@ public class TextUi {
         System.out.println("Tasks remaining: " + (tasks.getCount() - 1) + "\n");
     }
 
+    public void printTaskAsList(int numbering, Task task) {
+        System.out.print(numbering + ". ");
+        task.printTask();
+    }
+
     private static void printNumTasksLeft() {
         String output = Integer.toString(tasks.getCount());
         output += (tasks.getCount() == 1) ? " task" : " tasks";
         output += " in the list";
 
         System.out.println(output);
+    }
+
+    public void printSearchResultsHeader(String keyword) {
+        System.out.println("SEARCH RESULTS FOR \"" + keyword + "\":");
     }
 
     public void printUnknownCommandWarning(String input) {
@@ -75,6 +85,11 @@ public class TextUi {
     public void printListFullWarning() {
         System.out.println(LIST_FULL_WARNING);
         System.out.println(PROMPT_ENTER_BYE_TO_EXIT);
+    }
+
+    public void printNoMatchWarning(String keyword) {
+        System.out.println(NO_MATCH_WARNING);
+        System.out.println(INDENT + keyword + '\n');
     }
 
     public void printDataErrorWarning(int line) {
@@ -107,5 +122,4 @@ public class TextUi {
         System.out.print(BYE_MESSAGE);
         System.out.println(STRAIGHT_LINE);
     }
-    
 }

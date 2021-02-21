@@ -26,7 +26,9 @@ Added to list:
 Wrong format: "event wrong" !
 Enter "help" for a list of available commands and format
 
+-------------
 TASK LIST:
+-------------
 1. [T][ ] some work
 2. [D][ ] some work (by: some time)
 3. [E][ ] some work (at: some time)
@@ -43,7 +45,9 @@ Enter "help" for a list of available commands and format
 Wrong format: "done abc" !
 Enter "help" for a list of available commands and format
 
+-------------
 TASK LIST:
+-------------
 1. [T][X] some work
 2. [D][ ] some work (by: some time)
 3. [E][ ] some work (at: some time)
@@ -52,7 +56,9 @@ Task 2 has been deleted:
    [D][ ] some work (by: some time)
 Tasks remaining: 2
 
+-------------
 TASK LIST:
+-------------
 1. [T][X] some work
 2. [E][ ] some work (at: some time)
 

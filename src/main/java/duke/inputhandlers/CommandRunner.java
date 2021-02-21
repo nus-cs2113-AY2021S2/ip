@@ -8,17 +8,19 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.Todo;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import static duke.Duke.tasks;
 import static duke.Duke.ui;
 import static duke.constants.ProgramInts.*;
+import static duke.constants.UiStrings.*;
 
 /**
  * Runs the commands entered by the user.
  * Also handles when the list is full by only allowing "list" and "bye" command.
  * TODO: allow delete command
- * */
+ */
 
 public class CommandRunner {
 
@@ -45,8 +47,6 @@ public class CommandRunner {
 
     /**
      * PRIVATE COMMAND RUNNERS
-     * 
-     * 
      */
 
     private boolean selectCommandToRun(int command, String input) {
@@ -78,6 +78,9 @@ public class CommandRunner {
         case DELETE_COMMAND:
             runDeleteCommand(input);
             FileManager.saveData();
+            break;
+        case FIND_COMMAND:
+            runFindCommand(input);
             break;
         default:
             runUnknownCommand(input);
@@ -125,19 +128,19 @@ public class CommandRunner {
             return;
         }
 
+        System.out.println(SHORT_LINE);
         System.out.println("TASK LIST:");
+        System.out.println(SHORT_LINE);
 
         for (Task task : tasks.getTasks()) {
-            System.out.print(numbering + ". ");
-            task.printTask();
+            ui.printTaskAsList(numbering, task);
             numbering++;
         }
         System.out.println();
-
     }
 
-    private void runTodo(String input) {
 
+    private void runTodo(String input) {
         String job;
 
         try {
@@ -205,6 +208,35 @@ public class CommandRunner {
         } catch (IndexOutOfBoundsException e) {
             ui.printInvalidIndexWarning(index);
         }
+    }
+    
+    private void runFindCommand(String input) {
+        ArrayList<Task> matches = new ArrayList<>();
+        int numbering = 1;
+        
+        // parse keyword from user input
+        String keyword = Parser.parseKeyword(input);
+        
+        // collect tasks which match keyword
+        for (Task t : tasks.getTasks()) {
+            if (t.getJob().contains(keyword)) {
+                matches.add(t);
+            }
+        }
+        
+        // check if no matches
+        if (matches.size() == 0) {
+            ui.printNoMatchWarning(keyword);
+            return;
+        }
+        
+        // else print the matching tasks
+        ui.printSearchResultsHeader(keyword);
+        for (Task t : matches) {
+            ui.printTaskAsList(numbering, t);
+            numbering++;
+        }
+        System.out.println();
     }
 
     /**

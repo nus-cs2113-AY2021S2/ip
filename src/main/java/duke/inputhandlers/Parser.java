@@ -1,12 +1,15 @@
 package duke.inputhandlers;
 
 import duke.exception.InvalidCommandException;
+
+import java.util.Arrays;
+
 import static duke.constants.ProgramInts.*;
 
 /**
  * Parse user input to determine command to be executed.
  * Also parses task details where applicable.
- * */
+ */
 
 public class Parser {
 
@@ -27,6 +30,8 @@ public class Parser {
             return EVENTS_COMMAND;
         } else if (startsWith(input, "delete")) {
             return DELETE_COMMAND;
+        } else if (startsWith(input, "find")) {
+            return FIND_COMMAND;
         } else {
             return UNKNOWN_COMMAND;
         }
@@ -52,6 +57,21 @@ public class Parser {
         }
 
         return words[1].trim();
+    }
+
+    public static String parseKeyword(String input) {
+
+        String[] words = input.split(" ");
+        String[] keywords = Arrays.copyOfRange(words, 1, words.length);
+
+        String keywordString = "";
+
+        for (String eachWord : keywords) {
+            keywordString += eachWord;
+            keywordString += " ";
+        }
+        
+        return keywordString.trim();
     }
 
     private static String getJobString(String[] words, String delimiter) {
