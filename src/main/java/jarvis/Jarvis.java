@@ -1,16 +1,14 @@
 package jarvis;
 
 import jarvis.exception.EmptyListException;
+import jarvis.exception.HandleException;
 import jarvis.exception.InvalidCommandException;
 import jarvis.exception.InvalidTaskException;
-import jarvis.task.Deadline;
-import jarvis.task.Event;
 import jarvis.task.Task;
-import jarvis.task.Todo;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
-import java.util.ArrayList;
 
 public class Jarvis {
     private final Scanner in = new Scanner(System.in);    // create Scanner object
@@ -18,7 +16,7 @@ public class Jarvis {
 
     public Jarvis() {}
 
-    // adds a task into the ArrayList when reading text file
+    // adds a task into the ArrayList
     public void addToTasks(Task task) {
         tasks.add(task);
     }
@@ -66,32 +64,23 @@ public class Jarvis {
     }
 
     // adds Todo task to the ArrayList
-    public void runTodo(String command) {
-        String description = command.replaceFirst("todo ", "");
-        Task todo = new Todo(description);
-        tasks.add(todo);
+    public void runTodo(String userInput) {
+        Task todo = Parser.parseStringToTodo(userInput);
+        addToTasks(todo);
         addSuccess(todo);
     }
 
     // adds Deadline task to the ArrayList
-    public void runDeadline(String command) {
-        String task = command.replaceFirst("deadline ", "");
-        String[] details = task.split("/by", 2);
-        String description = details[0];
-        String by = details[1];
-        Task deadline = new Deadline(description, by);
-        tasks.add(deadline);
+    public void runDeadline(String userInput) {
+        Task deadline = Parser.parseStringToDeadline(userInput);
+        addToTasks(deadline);
         addSuccess(deadline);
     }
 
     // adds Event task to the ArrayList
-    public void runEvent(String command) {
-        String task = command.replaceFirst("event ", "");
-        String[] details = task.split("/at", 2);
-        String description = details[0];
-        String at = details[1];
-        Task event = new Event(description, at);
-        tasks.add(event);
+    public void runEvent(String userInput) {
+        Task event = Parser.parseStringToEvent(userInput);
+        addToTasks(event);
         addSuccess(event);
     }
 
@@ -122,20 +111,6 @@ public class Jarvis {
         } else {    // if the task is not in the ArrayList, throw InvalidTaskException
             throw new InvalidTaskException();
         }
-    }
-
-    // handles InvalidTaskException
-    public void handleInvalidTaskException() {
-        System.out.println("\tSorry, sir.");
-        System.out.println("\tNo such task was found in the list.");
-        System.out.println("\tWould you like to add the task instead?");
-        printDivider();
-    }
-
-    // handles EmptyListException
-    public void handleEmptyListException() {
-        System.out.println("\tYou do not have any pending task, sir.");
-        printDivider();
     }
 
     // removes the task from the list if exist
@@ -169,19 +144,19 @@ public class Jarvis {
             try {
                 runList();
             } catch (EmptyListException exception) {
-                handleEmptyListException();
+                HandleException.handleEmptyListException();
             }
         } else if (command.startsWith("done")) {    // done
             try {
                 runDone(command);
             } catch (InvalidTaskException exception) {
-                handleInvalidTaskException();
+                HandleException.handleInvalidTaskException();
             }
         } else if (command.startsWith("delete")) {
             try {
                 runDelete(command);
             } catch (InvalidTaskException exception) {
-                handleInvalidTaskException();
+                HandleException.handleInvalidTaskException();
             }
         } else {    // if invalid command, throw InvalidCommandException
             throw new InvalidCommandException();

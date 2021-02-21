@@ -1,5 +1,6 @@
 package jarvis;
 
+import jarvis.exception.HandleException;
 import jarvis.exception.InvalidCommandException;
 import jarvis.storage.TextManager;
 
@@ -17,18 +18,14 @@ public class Duke {
             TextManager.printFileContents();
             jarvis.printDivider();
         } catch (FileNotFoundException exception) {
-            System.out.println("\tUnfortunately, I could not detect any files in the database!");
-            System.out.println("\tBut don't worry sir.");
-            System.out.println("\tI will create the files you might be needing later.");
-            jarvis.printDivider();
+            HandleException.handleFileNotFoundException();
         }
 
         while (true) {
             try {
                 TextManager.writeToFile(jarvis.performTask());
             } catch (InvalidCommandException exception) {
-                System.out.println("\tSorry, sir. I do not recognise this command.");
-                jarvis.printDivider();
+                HandleException.handleInvalidCommandException();
             } catch (IOException exception) {
                 System.out.println("\tSomething went wrong: " + exception.getMessage());
                 jarvis.printDivider();

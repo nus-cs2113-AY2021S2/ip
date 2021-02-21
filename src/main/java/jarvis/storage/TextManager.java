@@ -11,14 +11,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Manages the writing and reading of the text file
+ * Manages the writing and reading of the text file.
  */
 public class TextManager {
 
     /**
-     * Print contents in the text file and adds into {@code tasks}
+     * Print contents in the text file and adds into {@code tasks}.
      *
-     * @throws FileNotFoundException if file is not found
+     * @throws FileNotFoundException if file is not found.
      */
     public static void printFileContents() throws FileNotFoundException {
         File file = new File("jarvis.txt");
@@ -36,10 +36,10 @@ public class TextManager {
     }
 
     /**
-     * Write contents in the {@code tasks} list into the text file
+     * Write contents in the {@code tasks} list into the text file.
      *
-     * @param tasks the list of tasks to write into the text file
-     * @throws IOException if an input or output exception occurred
+     * @param tasks the list of tasks to write into the text file.
+     * @throws IOException if an input or output exception occurred.
      */
     public static void writeToFile(ArrayList<Task> tasks) throws IOException {
         FileWriter fileWriter = new FileWriter("jarvis.txt");

@@ -6,7 +6,7 @@ import jarvis.task.Task;
 import jarvis.task.Todo;
 
 /**
- * Decodes the text file into a {@code Task} object
+ * Decodes the text file into a {@code Task} object.
  */
 public class TextDecoder {
 
@@ -15,10 +15,10 @@ public class TextDecoder {
     private static final int TASK_DESCRIPTION_START_INDEX = 7;
 
     /**
-     * Decodes the text into a {@code Task} object
+     * Decodes the text into a {@code Task} object.
      *
-     * @param encodedTask task details in String format
-     * @return {@code Task} object
+     * @param encodedTask task details in String format.
+     * @return {@code Task} object.
      */
     public static Task decodeTaskFromString(String encodedTask){
         String taskDescription = encodedTask.substring(TASK_DESCRIPTION_START_INDEX);
