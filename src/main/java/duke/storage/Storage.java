@@ -14,7 +14,7 @@ public class Storage {
     private static final String filePath = "./tasks.txt";
 
     /**
-     * Saves all tasks in memory to a local text file.
+     * Saves all tasks in memory to local text file.
      * File found at file path.
      * @param tasks Tasks in memory.
      */
