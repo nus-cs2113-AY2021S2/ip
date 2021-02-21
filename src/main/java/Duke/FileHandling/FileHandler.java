@@ -21,9 +21,9 @@ public class FileHandler extends Duke{
             String localDir = System.getProperty("user.dir");
             File file = new File(localDir + "/Duke.txt");
             if (file.createNewFile()) {
-                System.out.println("A new file has been created! ^_^\nIt could be found at " + localDir);
+                System.out.println(" A new file[" + file.getName()+ "] has been created! ^_^\nIt could be found at " + localDir);
             } else {
-                System.out.println("Reading saved Task Lists ^_^\nIt could be found at " + localDir);
+                System.out.println(" Reading saved Task Lists from [" + file.getName()+ "]^_^\nIt could be found at " + localDir);
                 Scanner readingFile = new Scanner(file);
                 while (readingFile.hasNextLine()) {
                     String line = readingFile.nextLine();
@@ -31,26 +31,25 @@ public class FileHandler extends Duke{
                     String type = parts[0];
                     String isDone = parts[1];
                     String task = parts[2];
-                    if (type.equals("T")) {
-                        Task taskInFile = new ToDoTask(task);
-                        lists.add(taskInFile);
-                        if (isDone.equals("true")) {
-                            taskInFile.markAsDone();
-                        }
-                    } else if (type.equals("D")) {
-                        String time = parts[3];
-                        DeadlineTask taskInFile = new DeadlineTask(task, time);
-                        lists.add(taskInFile);
-                        if (isDone.equals("true")) {
-                            taskInFile.markAsDone();
-                        }
-                    } else {
-                        String time = parts[3];
-                        EventTask taskInFile = new EventTask(task, time);
-                        lists.add(taskInFile);
-                        if (isDone.equals("true")) {
-                            taskInFile.markAsDone();
-                        }
+                    Task taskInFile = new Task(task);
+                    switch (type) {
+                        case "[T]":
+                            taskInFile = new ToDoTask(task);
+                            lists.add(taskInFile);
+                            break;
+                        case "[D]":
+                            String time = parts[3];
+                            taskInFile = new DeadlineTask(task, time);
+                            lists.add(taskInFile);
+                            break;
+                        case "[E]":
+                            time = parts[3];
+                            taskInFile = new EventTask(task, time);
+                            lists.add(taskInFile);
+                            break;
+                    }
+                    if (isDone.equals("true")) {
+                        taskInFile.markAsDone();
                     }
                 }
                 taskCount = lists.size();
@@ -66,13 +65,13 @@ public class FileHandler extends Duke{
             String localDir = System.getProperty("user.dir");
             FileWriter writer = new FileWriter(localDir + "/Duke.txt",false);
             for (Task taskInList : lists) {
-                if (taskInList instanceof ToDoTask) {
-                    writer.write(taskInList.getTaskType() + "|" + taskInList.isDone() + "|" + taskInList.getTask().trim());
-                } else {
-                    writer.write(taskInList.getTaskType() + "|" + taskInList.isDone() + "|" + taskInList.getTask().trim() + "|" + taskInList.getTaskTime().trim());
+                writer.write(taskInList.getTaskType() + "|" + taskInList.isDone() + "|" + taskInList.getTask().trim());
+                if (!(taskInList instanceof ToDoTask)) {
+                    writer.write("|" + taskInList.getTaskTime().trim()); //if it's a deadline task or event task, there's time info
                 }
                 writer.write("\r\n");
             }
+            System.out.println(" File saved!");
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();

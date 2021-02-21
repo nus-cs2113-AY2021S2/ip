@@ -25,9 +25,14 @@ public class UI extends Duke{
         System.out.println("Here's what I could do for you ^_^\n"
                 + "help: print help menu\n"
                 + "list: see saved tasks in the list\n"
-                + "add: add tasks into the list [tip: enter date as YYYY-MM-DD to help duke understand better!]\n"
+                + "todo: add todo task into the list\n"
+                + "event: add event into the list\n"
+                + "deadline: add deadline into the list\n"
+                + "[tip: enter date as YYYY-MM-DD to help duke understand better!]\n"
                 + "done: mark a task in the list as done\n"
                 + "delete: delete a task from the list\n"
+                + "date: search saved tasks on a specific day\n"
+                + "find: search saved tasks by keywords\n"
                 + "bye: exit Duke\n"
                 );
     }

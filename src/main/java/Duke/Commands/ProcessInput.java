@@ -15,7 +15,6 @@ public class ProcessInput extends Duke {
             System.out.println(LINE);
             switch (inputStringSplit[0]) {
                 case "bye":
-                    System.out.println("a");
                     return;
                 case "done":
                     if (inputStringSplit.length > 1) {
