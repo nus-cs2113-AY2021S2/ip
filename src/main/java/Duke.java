@@ -1,4 +1,5 @@
 
+import java.awt.*;
 import java.util.*;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -7,15 +8,16 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Duke {
-    public static int num_of_goals = 0;
-    public static Scanner in = new Scanner(System.in);
-    public static String user_input;
-    public static Task t[] = new Task[100];
-    public static final int DONE_START = 5;
-    public static final int TODO_START = 5;
-    public static final int EVENT_START = 6;
-    public static final int DEADLINE_START = 9;
 
+
+    //public static String user_input;
+
+    private static Ui ui = new Ui();
+    private static TaskList tasks = new TaskList();
+    private static Parser parser = new Parser();
+    private static Storage storage = new Storage();
+
+    public static String user_input;
 
     public static void show_welcome_msg() {
         String logo = " ____        _        \n"
@@ -35,235 +37,35 @@ public class Duke {
         System.out.println("Bye. Hope to see you again soon!\n");
     }
 
-    private static String getString(Scanner in) {
-        String user_input;
-        user_input = in.nextLine();
-        return user_input;
-
-    }
-
-
-    private static boolean isList() {
-        if (user_input.equals("list")) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    private static boolean isTodo() {
-        if (user_input.length() > 4) {
-            if (user_input.substring(0, 4).equals("todo")) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private static boolean isDone() {
-        if (user_input.length() > 4) {
-            if (user_input.substring(0, 4).equals("done")) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private static boolean isDelete() {
-        if (user_input.length() > 6) {
-            if (user_input.substring(0, 6).equals("delete")) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private static boolean isEvent() {
-        if (user_input.length() > 5) {
-            if (user_input.substring(0, 5).equals("event")) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private static boolean isDeadline() {
-        if (user_input.length() > 8) {
-            if (user_input.substring(0, 8).equals("deadline")) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private static boolean isBye() {
-        if (user_input.equals("bye")) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    private static void repeatTaskAdded() {
-        System.out.println(t[num_of_goals]);
-        System.out.println("Now you have " + num_of_goals + " tasks in the list.");
-    }
-
-    private static int getDeadlineIndex(String input) {
-        int index = user_input.indexOf('/');
-        return index;
-    }
-
-    private static void deleteTask() {
-        if (isDelete()) {
-            int spaceIndex = user_input.indexOf(' ');
-            String deleteString = user_input.substring(spaceIndex + 1);
-            int deleteIndex = Integer.parseInt(deleteString);
-            System.out.println("I have deleted this task for you: ");
-            System.out.println("[" + t[deleteIndex].getStatusIcon() + "] " + t[deleteIndex].getDescription() + "\n");
-
-            if (deleteIndex == 0 && num_of_goals == 1) {
-                t[0] = t[1];
-            } else {
-                for (int i = 0; i < t.length - 1; i++) {
-                    t[i] = t[i + 1];
-                }
-            }
-            num_of_goals--;
-
-        }
-    }
-
-    private static String getDeadline(String user_input) {
-        int timeIndex = getDeadlineIndex(user_input);
-        String deadline = user_input.substring(timeIndex + 3, user_input.length());
-        return deadline;
-    }
-
-    private static void plusNumOfGoals() {
-        num_of_goals++;
-    }
-
-    private static void doneMessage(int taskIndex) {
-        System.out.println("Nice! I've marked this task as done: ");
-        System.out.println("[" + t[taskIndex].getStatusIcon() + "] " + t[taskIndex].getDescription() + "\n");
-    }
-
-    private static void listTaskMsg() {
-        System.out.println("Here are the tasks in your list:");
-    }
-
-    private static void enumerateTasks() {
-        for (int i = 0; i < num_of_goals; i++) {
-            System.out.println((i + 1) + "." + t[i + 1].toString());
-        }
-    }
-
-    private static int getDoneTaskIndex(String user_input) {
-        int taskIndex = Integer.parseInt(user_input.substring(DONE_START, user_input.length()));
-        return taskIndex;
-    }
-
-    private static void markAsDone(String user_input) {
-        int doneTaskIndex = getDoneTaskIndex(user_input);
-        t[doneTaskIndex].markAsDone();
-        doneMessage(doneTaskIndex);
-    }
-
-    private static void addNewTask(String user_input) {
-        t[num_of_goals] = new Task(user_input);
-    }
-
-    private static void addNewDeadline(String user_input) {
-        t[num_of_goals] = new Deadline(user_input.substring(DEADLINE_START, getDeadlineIndex(user_input)), getDeadline(user_input));
-    }
-
-    private static void addNewEvent(String user_input) {
-        t[num_of_goals] = new Event(user_input.substring(EVENT_START, getDeadlineIndex(user_input)), getDeadline(user_input));
-    }
-
-    private static void addNewTodo(String user_input) {
-        t[num_of_goals] = new Todo(user_input.substring(TODO_START, user_input.length()));
-    }
-
-    private static boolean emptyInput(String user_input, Command command) {
-        switch (command) {
-            case TODO:
-                return (user_input.substring(TODO_START, user_input.length()).strip().equals(""));
-            case EVENT:
-                return user_input.substring(EVENT_START, getDeadlineIndex(user_input)).strip().equals("");
-            case DEADLINE:
-                return (user_input.substring(DEADLINE_START, getDeadlineIndex(user_input)).strip().equals(""));
-        }
-        return false;
-    }
-
-    private static boolean validEventTime(String user_input) throws InvalidEventException {
-        if (user_input.substring(getDeadlineIndex(user_input), getDeadlineIndex(user_input) + 3).equals("/at")) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    private static boolean validDeadlineTime(String user_input) throws InvalidDeadlineException {
-        if (user_input.substring(getDeadlineIndex(user_input), getDeadlineIndex(user_input) + 3).equals("/by")) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    private static void checkValidInput(String user_input, Command command) throws EmptyInputException, InvalidEventException, InvalidDeadlineException {
-        if (emptyInput(user_input, command)) {
-            throw new EmptyInputException();
-        }
-
-        switch (command) {
-            case EVENT:
-                if (validEventTime(user_input)) {
-                    break;
-                } else {
-                    throw new InvalidEventException();
-                }
-            case DEADLINE:
-                if (validDeadlineTime(user_input)) {
-                    break;
-                } else {
-                    throw new InvalidDeadlineException();
-                }
-        }
-    }
-
     public static void executeCommand(String input, Command c) throws InvalidCommandException, EmptyInputException, InvalidEventException, InvalidDeadlineException {
         switch (c) {
             case LIST:
-                listTaskMsg();
-                enumerateTasks();
+                tasks.listTaskMsg();
+                tasks.enumerateTasks();
                 break;
             case DONE:
-                markAsDone(input);
+                tasks.markAsDone(input);
                 break;
             case TODO:
-                checkValidInput(input, c);
-                plusNumOfGoals();
-                addNewTodo(input);
-                repeatTaskAdded();
+                parser.checkValidInput(input, c);
+                ui.plusNumOfGoals();
+                tasks.addNewTodo(input);
+                tasks.repeatTaskAdded();
                 break;
             case EVENT:
-                checkValidInput(input, c);
-                plusNumOfGoals();
-                addNewEvent(input);
-                repeatTaskAdded();
+                parser.checkValidInput(input, c);
+                ui.plusNumOfGoals();
+                tasks.addNewEvent(input);
+                tasks.repeatTaskAdded();
                 break;
             case DEADLINE:
-                checkValidInput(input, c);
-                plusNumOfGoals();
-                addNewDeadline(input);
-                repeatTaskAdded();
+                parser.checkValidInput(input, c);
+                ui.plusNumOfGoals();
+                tasks.addNewDeadline(input);
+                tasks.repeatTaskAdded();
                 break;
             case DELETE:
-                deleteTask();
+                tasks.deleteTask(user_input);
                 break;
             case INVALID:
                 throw new InvalidCommandException();
@@ -271,81 +73,26 @@ public class Duke {
         }
     }
 
-
-    private static void printFileContents(String filePath) throws FileNotFoundException {
-        File f = new File(filePath); // create a File for the given file path
-        Scanner s = new Scanner(f); // create a Scanner using the File as the source
-        while (s.hasNext()) {
-            System.out.println(s.nextLine());
-        }
-    }
-
-    public static void loadFile() {
-        try {
-            printFileContents("/Users/chenlingcui/Desktop/CS2113/duke.txt");
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found");
-        }
-    }
-
-//private static void appendToFile(String filePath, String textToAppend) throws IOException {
-//  FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
-//fw.write(textToAppend);
-//fw.close();
-//}
-
-    private static void writeToFile(String filePath, String textToAdd) throws IOException {
-        FileWriter fw = new FileWriter(filePath);
-        fw.write(textToAdd);
-        fw.close();
-    }
-
-    private static void appendToFile(String filePath, String textToAppend) throws IOException {
-        FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
-        fw.write(textToAppend);
-        fw.close();
-    }
-
-    public static void changeFile(int num) {
-        try {
-            writeToFile("/Users/chenlingcui/Desktop/CS2113/duke.txt", "[" + t[1].getStatusIcon() + "] " + t[1].getDescription() + "\n");
-            //appendToFile("/Users/chenlingcui/Desktop/CS2113/duke.txt", "\n");
-        } catch (IOException e) {
-            System.out.println("Something went wrong: " + e.getMessage());
-        }
-
-        for (int i = 1; i < num; i++) {
-            try {
-                appendToFile("/Users/chenlingcui/Desktop/CS2113/duke.txt", "[" + t[i].getStatusIcon() + "] " + t[i].getDescription() + "\n");
-                //appendToFile("/Users/chenlingcui/Desktop/CS2113/duke.txt", "\n");
-            } catch (IOException e) {
-                System.out.println("Something went wrong: " + e.getMessage());
-            }
-        }
-
-    }
-
-
     public static void main(String[] args) {
         show_welcome_msg();
-
-        user_input = getString(in);
         Command command;
-        loadFile();
+        storage.loadFile();
+        Scanner in = new Scanner(System.in);
+        user_input = ui.getString(in);
 
 
-        while (!isBye()) {
-            if (isList()) {
+        while (!parser.isBye(user_input)) {
+            if (parser.isList(user_input)) {
                 command = Command.LIST;
-            } else if (isDone()) {
+            } else if (parser.isDone(user_input)) {
                 command = Command.DONE;
-            } else if (isTodo()) {
+            } else if (parser.isTodo(user_input)) {
                 command = Command.TODO;
-            } else if (isEvent()) {
+            } else if (parser.isEvent(user_input)) {
                 command = Command.EVENT;
-            } else if (isDeadline()) {
+            } else if (parser.isDeadline(user_input)) {
                 command = Command.DEADLINE;
-            } else if (isDelete()) {
+            } else if (parser.isDelete(user_input)) {
                 command = Command.DELETE;
             } else {
                 command = Command.INVALID;
@@ -365,9 +112,9 @@ public class Duke {
                 System.out.println("OOPS!!! You need to add time for new Deadline with keyword '/by'!!");
             }
 
-            System.out.println(num_of_goals);
-            user_input = getString(in);
-            changeFile(num_of_goals);
+            System.out.println(ui.num_of_goals);
+            user_input = ui.getString(in);
+            storage.changeFile(ui.num_of_goals);
         }
 
 
