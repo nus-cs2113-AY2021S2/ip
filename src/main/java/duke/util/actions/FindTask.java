@@ -21,6 +21,22 @@ public class FindTask {
         if (keyword.isEmpty()) {
             throw new DukeException(DukeExceptionKey.EMPTY_KEYWORD);
         }
+
+        List<String> matchingTasks = getMatchingTasks(keyword);
+        List<String> messages = new ArrayList<>();
+
+        if (matchingTasks.isEmpty()) {
+            messages.add(Messages.NO_MATCHING_TASKS + keyword);
+        }
+
+        if (!matchingTasks.isEmpty()) {
+            messages.add(Messages.FOUND_TASK_MESSAGE);
+            messages.addAll(matchingTasks);
+        }
+        return messages;
+    }
+
+    private static List<String> getMatchingTasks(String keyword) {
         List<Task> storage = TaskList.getStorage();
         List<String> matchingTasks = new ArrayList<>();
         int index = 1;
@@ -32,13 +48,6 @@ public class FindTask {
             }
             index++;
         }
-        List<String> messages = new ArrayList<>();
-        if (matchingTasks.isEmpty()) {
-            messages.add(Messages.NO_MATCHING_TASKS + keyword);
-        } else {
-            messages.add(Messages.FOUND_TASK_MESSAGE);
-            messages.addAll(matchingTasks);
-        }
-        return messages;
+        return matchingTasks;
     }
 }
