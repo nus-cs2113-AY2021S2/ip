@@ -22,7 +22,9 @@ public class Constants {
             "     ooo    oooooooooo           oooooooooo\n" +
             "   ooo   oooooooooooooooo     oooooooooooooooo\n" +
             "        ooooo        ooooo   ooooo        ooooo\n" +
+            "       ooooo          ooooo ooooo          ooooo\n" +
             "       oooo            ooooooooo            oooo\n" +
+            "       ooooo          ooooo ooooo          ooooo\n" +
             "        ooooo        ooooo   ooooo        ooooo\n" +
             "         oooooooooooooooo     oooooooooooooooo\n" +
             "            oooooooooo           oooooooooo\n";
@@ -31,6 +33,7 @@ public class Constants {
     public final String DATE_IO_FORMAT = "d-M-yyyy";
     public final String DATE_PRINT_FORMAT = "d MMM yyyy";
     public final String FILE_NAME = "tasks.txt";
+
 
     //Commands
     public final String COMMAND_QUIT = "bye";

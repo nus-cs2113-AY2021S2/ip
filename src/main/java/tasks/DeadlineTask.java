@@ -12,11 +12,6 @@ public class DeadlineTask extends Task {
         setDueDate(dueDate);
     }
 
-    /**
-     * Changes due date.
-     *
-     * @param dueDate New due date.
-     */
     public void setDueDate(LocalDate dueDate) {
         this.dueDate = dueDate;
     }

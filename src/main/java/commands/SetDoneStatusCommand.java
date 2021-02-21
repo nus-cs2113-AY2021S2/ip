@@ -26,6 +26,7 @@ public class SetDoneStatusCommand extends Command {
         try {
             TreeSet<Integer> validIndices = processMultipleIndices(input);
             if (validIndices.size() < 1) {
+                //No valid index identified
                 throw new IndexOutOfBoundsException();
             }
             if (isDone) {

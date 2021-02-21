@@ -19,7 +19,7 @@ public class Parser {
 
 
     /**
-     * Processes input.
+     * Processes input and executes command.
      *
      * @param input Input value by user.
      */
@@ -62,7 +62,7 @@ public class Parser {
 
 
     /**
-     * Ends while-loop to exit program.
+     * Sets isEndProgram as true to end while-loop and exit program.
      */
     private void endProgram() {
         System.out.println(constants.MESSAGE_BYE);
@@ -71,7 +71,7 @@ public class Parser {
 
 
     /**
-     * Prints error message
+     * Prints error message.
      */
     private void printError() {
         System.out.println(constants.MESSAGE_UNRECOGNIZED_COMMAND);

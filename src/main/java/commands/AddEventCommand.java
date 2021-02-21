@@ -27,7 +27,7 @@ public class AddEventCommand extends Command {
             }
             String[] inputSplit = input.split(constants.KEYWORD_AT);
             if (taskManager.getTaskCount() >= constants.MAX_SIZE) {
-                //Array full
+                //List is full
                 throw new ListFullException();
             } else if (inputSplit.length < constants.MIN_SPLIT_SUCCESS_COUNT) {
                 //Invalid input

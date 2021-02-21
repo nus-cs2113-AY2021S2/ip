@@ -7,17 +7,13 @@ public class TaskManager {
     private static final ArrayList<Task> tasks = new ArrayList<>();
     private static int taskCount = 0;
 
-
-    /**
-     * Returns task count.
-     */
     public int getTaskCount() {
         return taskCount;
     }
 
 
     /**
-     * Returns task at index.
+     * Returns task at specified index.
      */
     public Task getTask(int index) {
         return tasks.get(index);

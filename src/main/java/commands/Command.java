@@ -49,7 +49,7 @@ public abstract class Command {
         try {
             int intIndex = Integer.parseInt(stringIndex) - 1;
             if (intIndex >= taskManager.getTaskCount() || intIndex < 0) {
-                //Out of bounds
+                //Specified index out of bounds
                 throw new IndexOutOfBoundsException();
             }
             return intIndex;
@@ -69,6 +69,7 @@ public abstract class Command {
         for (String rawIndex : indices) {
             int index = processIndex(rawIndex);
             if (index != constants.INVALID_INDEX) {
+                //Add index to set if valid
                 validIndices.add(index);
             }
         }

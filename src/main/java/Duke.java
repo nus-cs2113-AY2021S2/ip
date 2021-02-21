@@ -18,6 +18,7 @@ public class Duke {
             storage.loadFile();
             System.out.println(constants.MESSAGE_FILE_LOADED);
         } catch (Exception e) {
+            //File does not exist
             System.out.println(constants.MESSAGE_FILE_NOT_FOUND);
         }
         System.out.println(constants.MESSAGE_WELCOME);

@@ -9,6 +9,7 @@ public class PrintListCommand extends Command {
     public void execute() {
         System.out.println(constants.LINE);
         if (taskManager.getTaskCount() == 0) {
+            //List is empty
             System.out.println(constants.MESSAGE_EMPTY_LIST);
             return;
         }

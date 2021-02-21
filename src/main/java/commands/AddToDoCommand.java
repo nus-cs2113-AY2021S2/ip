@@ -19,7 +19,7 @@ public class AddToDoCommand extends Command {
     public void execute() {
         try {
             if (taskManager.getTaskCount() >= constants.MAX_SIZE) {
-                //Array full
+                //List is full
                 throw new ListFullException();
             }
             taskManager.addTask(new ToDoTask(input));

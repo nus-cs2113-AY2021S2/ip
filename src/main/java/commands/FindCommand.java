@@ -28,6 +28,7 @@ public class FindCommand extends Command {
             }
         }
         if (count == 0) {
+            //No matching task
             System.out.println(constants.MESSAGE_TASK_NOT_FOUND);
         }
         System.out.println(constants.LINE);

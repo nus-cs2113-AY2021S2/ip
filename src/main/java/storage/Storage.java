@@ -23,6 +23,7 @@ public class Storage {
     public void saveFile() throws IOException {
         File path = new File(constants.FILE_NAME);
         if (!path.exists()) {
+            //File does not exist, create new one
             if (!path.createNewFile()) {
                 throw new IOException();
             }
@@ -42,6 +43,7 @@ public class Storage {
     public void loadFile() throws FileNotFoundException {
         File path = new File(constants.FILE_NAME);
         if (!path.exists()) {
+            //File does not exist
             throw new FileNotFoundException();
         }
         Scanner scanner = new Scanner(path);
@@ -54,6 +56,7 @@ public class Storage {
                 }
             }
         } catch (Exception e) {
+            //Failed to load properly, clear loaded tasks
             System.out.println(constants.MESSAGE_LOAD_ERROR);
             taskManager.reset();
         }
