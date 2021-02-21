@@ -6,10 +6,13 @@ if not exist ..\bin mkdir ..\bin
 REM delete output from previous run
 if exist ACTUAL.TXT del ACTUAL.TXT
 del /q ..\bin\*
-del /q "Duke_userdata.txt"
+del /q "duke_data.txt"
 
 REM compile the code into the bin folder
-javac  -cp ..\src\main\java -Xlint:none -d ..\bin ..\src\main\java\duke\*.java
+javac  -cp ..\src\main\java -Xlint:none -d ..\bin ..\src\main\java\duke\*.java ..\src\main\java\duke\constants\*.java^
+ ..\src\main\java\duke\exception\*.java ..\src\main\java\duke\inputhandlers\*.java ..\src\main\java\duke\storage\*.java^
+ ..\src\main\java\duke\tasks\*.java ..\src\main\java\duke\ui\*.java
+
 IF ERRORLEVEL 1 (
     echo ********** BUILD FAILURE **********
     exit /b 1

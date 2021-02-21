@@ -1,12 +1,11 @@
 ____________________________________________________________
-Hello I'm Diuk! 
+Hello I'm Duke!
 What would you like to do today?
 ____________________________________________________________
 No previous records! Starting a new record...
-
 New file created!
 
-No idea what some work means!
+No idea what "some work" means!
 Enter "help" for a list of available commands and format
 
 Added to list: 
@@ -17,13 +16,15 @@ Added to list:
 [D][ ] some work (by: some time)
 2 tasks in the list
 
-Wrong format: deadline wrong! Enter "help" for a list of available commands and format
+Wrong format: "deadline wrong" !
+Enter "help" for a list of available commands and format
 
 Added to list: 
 [E][ ] some work (at: some time)
 3 tasks in the list
 
-Wrong format: event wrong! Enter "help" for a list of available commands and format
+Wrong format: "event wrong" !
+Enter "help" for a list of available commands and format
 
 TASK LIST:
 1. [T][ ] some work
@@ -39,7 +40,8 @@ Enter "help" for a list of available commands and format
 You don't have that many jobs! Use the list command to view your current tasks.
 Enter "help" for a list of available commands and format
 
-Wrong format: done abc! Enter "help" for a list of available commands and format
+Wrong format: "done abc" !
+Enter "help" for a list of available commands and format
 
 TASK LIST:
 1. [T][X] some work
@@ -54,6 +56,7 @@ TASK LIST:
 1. [T][X] some work
 2. [E][ ] some work (at: some time)
 
+-------------
 COMMAND LIST:
 -------------
 TODO - 
@@ -75,6 +78,7 @@ DELETE -
 FORMAT: delete [(int) index]
 
 To exit, enter "bye"
+-------------
 
 ____________________________________________________________
 Bye! Hit me up if you feel like being productive again ;)
