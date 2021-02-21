@@ -1,12 +1,15 @@
 package Duke.Tasks;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task {
 
-    private String endTime;
+    LocalDate deadline;
 
-    public Deadline(String nameInit, String time) {
+    public Deadline(String nameInit, LocalDate deadline) {
         super(nameInit);
-        this.endTime = time;
+        this.deadline = deadline;
     }
 
     @Override
@@ -18,7 +21,9 @@ public class Deadline extends Task {
         else {
             outputString += "[\u2715]";
         }
-        outputString = outputString + " " + name + " (by: " + endTime + ")";
+        DateTimeFormatter formatObject = DateTimeFormatter.ofPattern("MMM dd yyyy");
+        String formattedDeadline = deadline.format(formatObject);
+        outputString = outputString + " " + name + " (by: " + formattedDeadline + ")";
         return outputString;
     }
 
@@ -30,8 +35,12 @@ public class Deadline extends Task {
         else {
             saveString += "0 | ";
         }
-        saveString = saveString + name + " | " + endTime;
+        saveString = saveString + name + " | " + deadline;
         return saveString;
+    }
+
+    public LocalDate getDate() {
+        return deadline;
     }
 
 }
