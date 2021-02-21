@@ -1,5 +1,10 @@
 package duke.task;
 
+/**
+ * Implements the Deadline class.
+ *
+ * @author Leonardo Irvin Pratama
+ */
 public class Deadline extends duke.task.Task {
 
     protected String dueDate;

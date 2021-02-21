@@ -10,6 +10,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
 /**
  * Implements file storage.
  *
@@ -17,16 +18,16 @@ import java.util.Scanner;
  */
 public class Storage {
     private final File data;
+    private final String FILE = "./ip/src/main/java/db/tasks.txt";
 
     /**
      * Intializes a Storage object.
      *
-     * @param filePath The location of the storage.
      * @throws DukeException If directory not found.
      */
-    public Storage(String filePath) throws DukeException {
+    public Storage() throws DukeException {
         try {
-            File data = new File(filePath);
+            File data = new File(FILE);
             if (!data.exists()) {
                 data.createNewFile();
                 assert data.exists() : " Directory cannot be made";

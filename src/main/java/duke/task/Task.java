@@ -1,5 +1,10 @@
 package duke.task;
 
+/**
+ * Implements the Task class.
+ *
+ * @author Leonardo Irvin Pratama
+ */
 public class Task {
     protected String description;
     protected boolean isDone;

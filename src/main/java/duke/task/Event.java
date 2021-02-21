@@ -1,5 +1,10 @@
 package duke.task;
 
+/**
+ * Implements the Event class.
+ *
+ * @author Leonardo Irvin Pratama
+ */
 public class Event extends duke.task.Task {
 
     protected String date;

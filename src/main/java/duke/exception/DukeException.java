@@ -1,7 +1,9 @@
 package duke.exception;
 
 /**
- * Throws exceptions relating to MySTARS.
+ * Throw exceptions related to Duke.
+ *
+ * @author Leonardo Irvin Pratama
  */
 public class DukeException extends Exception {
 

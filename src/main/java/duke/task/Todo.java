@@ -1,5 +1,10 @@
 package duke.task;
 
+/**
+ * Implements the Todo class.
+ *
+ * @author Leonardo Irvin Pratama
+ */
 public class Todo extends duke.task.Task {
 
     public Todo(String description, boolean isDone) {
