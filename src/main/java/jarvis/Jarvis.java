@@ -14,9 +14,14 @@ import java.util.ArrayList;
 
 public class Jarvis {
     private final Scanner in = new Scanner(System.in);    // create Scanner object
-    ArrayList<Task> tasks = new ArrayList<>();   // create ArrayList to store all the tasks
+    private final ArrayList<Task> tasks = new ArrayList<>();   // create ArrayList to store all the tasks
 
     public Jarvis() {}
+
+    // adds a task into the ArrayList when reading text file
+    public void addToTasks(Task task) {
+        tasks.add(task);
+    }
 
     public void printDivider() {
         String DIVIDER = "--------------------------------------------------------------------------------------------";
