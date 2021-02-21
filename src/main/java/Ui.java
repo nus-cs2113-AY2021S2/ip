@@ -8,6 +8,8 @@ public class Ui {
     public static final int TODO_START = 5;
     public static final int EVENT_START = 6;
     public static final int DEADLINE_START = 9;
+    public static final int FIND_START =5;
+
     public TaskList tasks = new TaskList();
 
     public Ui() {
