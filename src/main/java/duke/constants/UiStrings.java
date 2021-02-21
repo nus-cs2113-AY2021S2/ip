@@ -15,11 +15,7 @@ public class UiStrings {
     public static final String JOB_NUMBER_TOO_BIG = "You don't have that many jobs! Use the list command to view your current tasks.";
     public static final String LIST_FULL_WARNING = "List is full!" +'\n'+"Use the \"list\" command to view your tasks." + '\n';
     public static final String NO_MATCH_WARNING = "No tasks match your search query:";
-
-    // Messages for ... todo
     public static final String PROMPT_ENTER_BYE_TO_EXIT = "To exit, enter \"bye\"";
-    
-    
     
     // Command formats for help message
     public static final String LIST_COMMAND_FORMAT = "LIST - \n" + "FORMAT: list";

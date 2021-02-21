@@ -12,5 +12,8 @@ done abc
 list
 delete 2
 list
+deadline quiz homework /by 24/3/2021
+find quiz
+find
 help
 bye
