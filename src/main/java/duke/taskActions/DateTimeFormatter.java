@@ -7,10 +7,16 @@ import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class DeriveDateTime {
+public class DateTimeFormatter {
     private static final Pattern datePattern = Pattern.compile("\\d{4}-\\d{2}-\\d{2}");
     private static final Pattern timePattern = Pattern.compile("\\d{2}.\\d{2}");
 
+    /**
+     * Format given deadline and events into standardized patterns.
+     * @param dateTime Deadline / Event date and time.
+     * @return YYYY-MM-DD, HH.MM AmPm
+     * @throws DateTimeException When date / time not given or is an invalid date / time.
+     */
     public static String deriveDateTime(String dateTime) throws DateTimeException {
         Matcher dateMatcher = datePattern.matcher(dateTime);
         if (!dateMatcher.find()) {

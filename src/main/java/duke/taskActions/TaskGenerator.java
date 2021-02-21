@@ -36,7 +36,7 @@ public class TaskGenerator {
         try {
             String[] deadlineTask = details.split(" /by ");
             String description = deadlineTask[0].trim();
-            String deadline = DeriveDateTime.deriveDateTime(deadlineTask[1].trim());
+            String deadline = DateTimeFormatter.deriveDateTime(deadlineTask[1].trim());
             return new Deadline(description, false, deadline);
         } catch (ArrayIndexOutOfBoundsException exception) {
             throw new DukeException(DukeExceptionKey.EMPTY_DEADLINE_TIME);
@@ -58,7 +58,7 @@ public class TaskGenerator {
         try {
             String[] eventTask = details.split(" /at ");
             String description = eventTask[0].trim();
-            String event = DeriveDateTime.deriveDateTime(eventTask[1].trim());
+            String event = DateTimeFormatter.deriveDateTime(eventTask[1].trim());
             return new Event(description, false, event);
         } catch (ArrayIndexOutOfBoundsException exception) {
             throw new DukeException(DukeExceptionKey.EMPTY_EVENT_TIME);
