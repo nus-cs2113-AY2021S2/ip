@@ -4,6 +4,8 @@ public class Task {
     protected String description;
     protected boolean isDone;
     protected char taskType;
+    private static char NOT_DONE_SYMBOL = '\u2718';
+    private static char DONE_SYMBOL = '\u2713';
 
     public Task(String description) {
         this.description = description;
@@ -26,8 +28,8 @@ public class Task {
      * return the task status icon, either ✓(Done=True) or X(Not Done=False)
      * @return the respective status icon
      */
-    public String getStatusIcon() {
-        return (isDone ? "✓" : "✘"); //return ✓ or X symbols
+    public char getStatusIcon() {
+        return (isDone ? DONE_SYMBOL : NOT_DONE_SYMBOL); //return Yes or No symbols
     }
     public void setTaskType(char taskType){
         this.taskType = taskType;
