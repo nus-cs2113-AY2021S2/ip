@@ -1,3 +1,0 @@
-T | N | read book
-D | N | project | tomorrow
-E | N | dinner | 6pm
