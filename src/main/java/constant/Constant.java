@@ -1,7 +1,7 @@
 package constant;
 
 /**
- * Main class containing the fixed constants.
+ * Constant class containing the fixed constants.
  */
 public class Constant {
     /**

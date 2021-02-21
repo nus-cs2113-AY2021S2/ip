@@ -6,6 +6,9 @@ import constant.Constant;
 import error.*;
 import printer.Printer;
 
+/**
+ * Parser class in charge of parsing, validating, and extraction of input.
+ */
 public class Parser {
     private static final Constant constant = new Constant();
     private static final Printer printer = new Printer();
