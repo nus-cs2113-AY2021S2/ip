@@ -10,6 +10,10 @@ public class TaskList extends Vector<Task> {
     public static final long serialVersionUID = 1L;
     protected Storage storage;
 
+    public TaskList() {
+        this(null);
+    }
+
     public TaskList(Storage storage) {
         super();
         setStorage(storage);

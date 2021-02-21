@@ -25,7 +25,7 @@ public class SearchdateCommand extends Command {
         }
         try {
             DateTime dateTime = new DateTime(payload);
-            TaskList result = new TaskList(null);
+            TaskList result = new TaskList();
             for (Task task : tasks) {
                 if (task.isSameDate(dateTime)) {
                     result.add(task);

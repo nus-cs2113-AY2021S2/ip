@@ -28,6 +28,9 @@ delete -1
 delete Not_A_Number
 delete 1000
 list
+find Task
+find Deadline
+find A
 searchdate 01/08/2021
 searchdate 01/04/2021
 delete 1

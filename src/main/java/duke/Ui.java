@@ -53,19 +53,19 @@ public class Ui implements AutoCloseable {
     }
 
     public void printTaskList(TaskList tasks) {
-        printTaskList(tasks, null);
+        printTaskList(tasks, "");
     }
 
     public void printTaskList(TaskList tasks, DateTime dateTime) {
+        printTaskList(tasks, " at/by " + dateTime);
+    }
+
+    public void printTaskList(TaskList tasks, String additionalText) {
         if (tasks.size() == 0) {
-            print("You don't have a task in your list!");
+            print("You don't have a task in your list" + additionalText + "!");
             return;
         }
-        if (dateTime == null) {
-            print("Here are the tasks in your list:");
-        } else {
-            print("Here are the tasks in your list at/by " + dateTime);
-        }
+        print("Here are the tasks in your list" + additionalText + ":");
         for (int i = 0; i < tasks.size(); i += 1) {
             print(String.format("%d.%s%s", i + 1, INTERNAL_INDENT, tasks.get(i)));
         }
