@@ -17,5 +17,6 @@ public enum DukeExceptionKey {
     INVALID_DEADLINE,
     INVALID_EVENT,
     MISSING_DEADLINE,
-    MISSING_EVENT
+    MISSING_EVENT,
+    TASK_ALREADY_DONE
 }

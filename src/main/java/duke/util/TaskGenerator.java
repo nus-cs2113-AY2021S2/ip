@@ -1,4 +1,4 @@
-package duke.taskActions;
+package duke.util;
 
 import duke.data.Deadline;
 import duke.data.Event;

@@ -30,4 +30,5 @@ public class Messages {
     public static final String INVALID_DEADLINE_MESSAGE = "Please set time as YYYY-MM-DD HH.MM";
     public static final String INVALID_EVENT_MESSAGE = "Please set time as YYYY-MM-DD HH.MM-HH.MM";
     public static final String CORRUPTED_SAVE_FILE_MESSAGE = "Save file is corrupted.";
+    public static final String TASK_ALREADY_DONE_MESSAGE = "This task was already completed";
 }

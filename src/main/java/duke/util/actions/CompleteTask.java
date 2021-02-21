@@ -1,4 +1,4 @@
-package duke.taskActions;
+package duke.util.actions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +10,7 @@ import duke.data.Event;
 import duke.data.Task;
 import duke.data.Todo;
 import duke.data.exception.DukeExceptionKey;
+import duke.util.TaskList;
 
 public class CompleteTask {
 
@@ -26,6 +27,9 @@ public class CompleteTask {
             int index = Integer.parseInt(stringIndex);
             Task task = storage.get(index - 1);
             Task completedTask = null;
+            if (task.isTaskDone()) {
+                throw new DukeException(DukeExceptionKey.TASK_ALREADY_DONE);
+            }
             if (task instanceof Todo) {
                 completedTask = new Todo(task.getDescription(), true);
             }

@@ -53,6 +53,8 @@ public class DukeException extends Exception {
             return Messages.MISSING_DEADLINE_MESSAGE;
         case MISSING_EVENT:
             return Messages.MISSING_EVENT_MESSAGE;
+        case TASK_ALREADY_DONE:
+            return Messages.TASK_ALREADY_DONE_MESSAGE;
         }
         return Messages.INTERNAL_ERROR_MESSAGE;
     }

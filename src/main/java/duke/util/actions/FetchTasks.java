@@ -1,4 +1,4 @@
-package duke.taskActions;
+package duke.util.actions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,6 +6,7 @@ import java.util.List;
 import duke.data.exception.DukeException;
 import duke.data.Task;
 import duke.data.exception.DukeExceptionKey;
+import duke.util.TaskList;
 
 public class FetchTasks {
 

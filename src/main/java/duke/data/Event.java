@@ -1,7 +1,7 @@
 package duke.data;
 
 import duke.data.exception.DukeException;
-import duke.taskActions.DateTimeFormatter;
+import duke.util.DateTimeFormatter;
 
 public class Event implements Task {
     private final String description;

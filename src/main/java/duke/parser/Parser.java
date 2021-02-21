@@ -6,15 +6,15 @@ import java.util.List;
 import java.util.Scanner;
 
 import duke.common.Commands;
-import duke.taskActions.AddTask;
-import duke.taskActions.CompleteTask;
-import duke.taskActions.DeleteTask;
-import duke.taskActions.FetchTasks;
-import duke.taskActions.FindTask;
+import duke.util.actions.AddTask;
+import duke.util.actions.CompleteTask;
+import duke.util.actions.DeleteTask;
+import duke.util.actions.FetchTasks;
+import duke.util.actions.FindTask;
 import duke.ui.Ui;
 import duke.common.Messages;
 import duke.data.exception.DukeException;
-import duke.taskActions.TaskList;
+import duke.util.TaskList;
 
 public class Parser {
 

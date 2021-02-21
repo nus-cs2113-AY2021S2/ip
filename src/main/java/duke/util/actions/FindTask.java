@@ -1,4 +1,4 @@
-package duke.taskActions;
+package duke.util.actions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +7,7 @@ import duke.common.Messages;
 import duke.data.Task;
 import duke.data.exception.DukeException;
 import duke.data.exception.DukeExceptionKey;
+import duke.util.TaskList;
 
 public class FindTask {
 
@@ -17,7 +18,7 @@ public class FindTask {
      * @throws DukeException When no keyword is provided by user.
      */
     public static List<String> findTask(String keyword) throws DukeException {
-        if (keyword.isEmpty() || keyword == null) {
+        if (keyword.isEmpty()) {
             throw new DukeException(DukeExceptionKey.EMPTY_KEYWORD);
         }
         List<Task> storage = TaskList.getStorage();

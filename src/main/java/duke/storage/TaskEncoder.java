@@ -49,6 +49,6 @@ public class TaskEncoder {
                     "T",description, isDone, nullValue, nullValue
             );
         }
-        return "";
+        return null;
     }
 }
