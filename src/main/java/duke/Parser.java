@@ -1,15 +1,11 @@
 package duke;
 
-import duke.error.EmptyNameFieldException;
-import duke.error.IllegalAccessException;
+import duke.command.*;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 public class Parser {
     private static final int ERR_MAX_CAPACITY = -5;
-    private static final int ERR_NO_NAME = -4;
-    private static final int ERR_OUT_OF_BOUNDS_MESSAGE = -3;
     private static final int COMMAND_EXIT = 0;
     private static final int COMMAND_LIST = 1;
     private static final int COMMAND_MARK = 2;
@@ -28,41 +24,32 @@ public class Parser {
      * Loops through all features available.
      * Returns if user inputs bye.
      */
-    public void parseCommands() throws IOException {
-        Scanner in = new Scanner(System.in);
-        while (in.hasNextLine()) {
-            String line = in.nextLine();
-            try {
-                int command = getCommand(line);
-                // No fallthrough required
-                switch (command) {
-                // If user wants to mark a task as done
-                case COMMAND_MARK:
-                    tasks.markAsDone(line);
-                    break;
-                // If user wants to list all tasks
-                case COMMAND_LIST:
-                    tasks.listItems();
-                    break;
-                // If user wants to add an item
-                case COMMAND_ADD:
-                    tasks.addItem(line);
-                    break;
-                // If user wants to delete an item
-                case COMMAND_DELETE:
-                    tasks.deleteItem(line);
-                    break;
-                case COMMAND_EXIT:
-                    return;
-                }
-            } catch (IndexOutOfBoundsException e) {
-                ui.printError(ERR_MAX_CAPACITY);
-            } catch (IllegalAccessException e) {
-                ui.printError(ERR_OUT_OF_BOUNDS_MESSAGE);
-            } catch (EmptyNameFieldException e) {
-                ui.printError(ERR_NO_NAME);
+
+    public Command parseCommands(String line) throws IOException {
+        try {
+            int command = getCommand(line);
+            // No fallthrough required
+            switch (command) {
+            // If user wants to mark a task as done
+            case COMMAND_MARK:
+                return new MarkCommand(line, this.tasks, this.ui);
+            // If user wants to list all tasks
+            case COMMAND_LIST:
+                return new ListCommand(line, this.tasks, this.ui);
+            // If user wants to add an item
+            case COMMAND_ADD:
+                return new AddCommand(line, this.tasks, this.ui);
+            // If user wants to delete an item
+            case COMMAND_DELETE:
+                return new DeleteCommand(line, this.tasks, this.ui);
+            // IF user wants to exit program
+            case COMMAND_EXIT:
+                return new ByeCommand();
             }
+        } catch (IndexOutOfBoundsException e) {
+                ui.printError(ERR_MAX_CAPACITY);
         }
+        return null; // To make compiler happy :D
     }
     /**
      * Parses the command that user has keyed in.

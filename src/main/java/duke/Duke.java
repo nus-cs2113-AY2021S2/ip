@@ -1,5 +1,8 @@
 package duke;
 
+import duke.command.ByeCommand;
+import duke.command.Command;
+
 import java.io.*;
 
 public class Duke {
@@ -11,6 +14,7 @@ public class Duke {
     private Ui ui;
     private TaskList taskList;
     private Parser parser;
+    private Object ByeCommand;
 
     public Duke() {
         storage = new Storage(FILEPATH);
@@ -26,7 +30,14 @@ public class Duke {
     public void run() {
         try {
             ui.printGreeting();
-            parser.parseCommands();
+            while(true) {
+                String command = ui.getCommand();
+                Command parsedCommand = parser.parseCommands(command);
+                if (parsedCommand instanceof ByeCommand) {
+                    break;
+                }
+                parsedCommand.execute(ui);
+            }
             ui.sayGoodbye();
             storage.saveFile(taskList.getTasks());
         } catch (IOException e) {
