@@ -16,6 +16,10 @@ public abstract class Task {
         isDone = false;
     }
 
+    public String getDescription(){
+        return taskName;
+    }
+
     /**
      * Marks this task as done.
      */
