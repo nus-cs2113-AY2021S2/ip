@@ -8,12 +8,21 @@ import task.Event;
 import task.TaskHandler;
 import task.Todo;
 
+/**
+ * ActionHandler class for handling the related command operation.
+ */
 public class ActionHandler {
     private static final Constant constant = new Constant();
     private static final Printer printer = new Printer();
     private static final TaskHandler taskHandler = new TaskHandler();
     private static final Parser parser = new Parser();
 
+    /**
+     * Identify the operations and proceed to perform the required action.
+     *
+     * @param commandCode is the verified operation/command code extracted from calling method.
+     * @param userInput is the input from the console terminal.
+     */
     public static void performAction(int commandCode, String userInput) {
         if (commandCode == constant.INPUT_CODE_EXIT) {
             printer.printExitMessage();
@@ -41,37 +50,41 @@ public class ActionHandler {
         }
     }
 
-    private static void performFind(String userInput) {
-        System.out.println(constant.DIVIDER_LINE);
-        String keyword = parser.extractTaskDescription(userInput);
-        taskHandler.findByWord(keyword);
-        System.out.println(constant.DIVIDER_LINE);
-    }
-
+    /**
+     * Perform the list all task in task list operation.
+     */
     private static void performList() {
         System.out.println(constant.DIVIDER_LINE);
         printer.printEntireCollection();
         System.out.println(constant.DIVIDER_LINE);
     }
 
+    /**
+     * Perform the mark as done operation.
+     *
+     * @param userInput is the input from the console terminal.
+     */
     private static void performDone(String userInput) {
         System.out.println(constant.DIVIDER_LINE);
         int indexFromUserInput = parser.getIndexFromUserInput(userInput);
         if (indexFromUserInput > taskHandler.getTaskCount()) {
             System.out.println("There is no task number " + indexFromUserInput + " to mark done.");
             System.out.println("Please try again!");
+        } else if (taskHandler.checkStatus(indexFromUserInput - 1)) {
+            System.out.println("You have already completed this task.");
         } else {
-            if (taskHandler.checkStatus(indexFromUserInput - 1)) {
-                System.out.println("You have already completed this task.");
-            } else {
-                taskHandler.markDone(indexFromUserInput - 1);
-                System.out.println("Nice! I've marked the task as done:");
-                printer.printTaskDetails(indexFromUserInput - 1);
-            }
+            taskHandler.markDone(indexFromUserInput - 1);
+            System.out.println("Nice! I've marked the task as done:");
+            printer.printTaskDetails(indexFromUserInput - 1);
         }
         System.out.println(constant.DIVIDER_LINE);
     }
 
+    /**
+     * Perform the todo operation by adding a todo task to the task list.
+     *
+     * @param userInput is the input from the console terminal.
+     */
     private static void performTodo(String userInput) {
         System.out.println(constant.DIVIDER_LINE);
         String taskDescription = parser.extractTaskDescription(userInput);
@@ -81,9 +94,13 @@ public class ActionHandler {
         System.out.println(constant.DIVIDER_LINE);
     }
 
+    /**
+     * Perform the deadline operation by adding a deadline task to the task list.
+     *
+     * @param userInput is the input from the console terminal.
+     */
     private static void performDeadline(String userInput) {
-        String taskTiming;
-        String taskDescription;
+        String taskDescription, taskTiming;
         System.out.println(constant.DIVIDER_LINE);
         taskDescription = parser.extractTaskDescription(userInput);
         taskTiming = parser.extractTaskTiming(userInput);
@@ -93,9 +110,13 @@ public class ActionHandler {
         System.out.println(constant.DIVIDER_LINE);
     }
 
+    /**
+     * Perform the event operation by adding a event task to the task list.
+     *
+     * @param userInput is the input from the console terminal.
+     */
     private static void performEvent(String userInput) {
-        String taskTiming;
-        String taskDescription;
+        String taskDescription, taskTiming;
         System.out.println(constant.DIVIDER_LINE);
         taskDescription = parser.extractTaskDescription(userInput);
         taskTiming = parser.extractTaskTiming(userInput);
@@ -105,6 +126,11 @@ public class ActionHandler {
         System.out.println(constant.DIVIDER_LINE);
     }
 
+    /**
+     * Perform the delete operation by deleting a task from the task list.
+     *
+     * @param userInput is the input from the console terminal.
+     */
     private static void performDelete(String userInput) {
         System.out.println(constant.DIVIDER_LINE);
         int indexFromUserInput = parser.getIndexFromUserInput(userInput);
@@ -121,11 +147,31 @@ public class ActionHandler {
         System.out.println(constant.DIVIDER_LINE);
     }
 
-    private static void performInvalid() {
-        System.out.println("Please try again!");
+    /**
+     * Perform the find operation by using the keyword from user input.
+     *
+     * @param userInput is the input from the console terminal.
+     */
+    private static void performFind(String userInput) {
+        System.out.println(constant.DIVIDER_LINE);
+        String keyword = parser.extractTaskDescription(userInput);
+        taskHandler.findByWord(keyword);
         System.out.println(constant.DIVIDER_LINE);
     }
 
+    /**
+     * Perform the invalid operation.
+     * Prints the try again message to inform the user of wrong format.
+     */
+    private static void performInvalid() {
+        System.out.println("Please try again with correct format!");
+        System.out.println(constant.DIVIDER_LINE);
+    }
+
+    /**
+     * Perform the default invalid operation.
+     * Prints the unrecognizable message to inform the user of invalid command code.
+     */
     private static void performDefault() {
         System.out.println(constant.DIVIDER_LINE);
         System.out.println("Mushroom head could not recognize your command code!");
