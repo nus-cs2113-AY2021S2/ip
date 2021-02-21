@@ -76,6 +76,9 @@ public class Duke {
         case "event":
             feedback = addEvent(description);
             break;
+        case "find":
+            feedback = findTask(description);
+            break;
         default:
             throw new InvalidCommandException();
         }
@@ -110,33 +113,35 @@ public class Duke {
     }
 
     private static String addTodo(String description) {
-        String feedback;
         try {
-            feedback = taskManager.addTodo(description);
+            return taskManager.addTodo(description);
         } catch (EmptyDescriptionException e) {
-            feedback = "OOPS!!! The description of a todo cannot be empty.";
+            return "OOPS!!! The description of a todo cannot be empty.";
         }
-        return feedback;
     }
 
     private static String addDeadline(String description) {
-        String feedback;
         try {
-            feedback = taskManager.addDeadline(description);
+            return taskManager.addDeadline(description);
         } catch (EmptyDescriptionException e) {
-            feedback = "OOPS!!! The description of a deadline cannot be empty.";
+            return "OOPS!!! The description of a deadline cannot be empty.";
         }
-        return feedback;
     }
 
     private static String addEvent(String description) {
-        String feedback;
         try {
-            feedback = taskManager.addEvent(description);
+            return taskManager.addEvent(description);
         } catch (EmptyDescriptionException e) {
-            feedback = "OOPS!!! The description of an event cannot be empty.";
+            return "OOPS!!! The description of an event cannot be empty.";
         }
-        return feedback;
+    }
+
+    private static String findTask(String description) {
+        try{
+            return taskManager.findTask(description);
+        }catch (EmptyDescriptionException e){
+            return "OOPS!!! The description of a find cannot be empty.";
+        }
     }
 
     private static void exitProgram() {
