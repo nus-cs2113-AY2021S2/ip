@@ -23,16 +23,8 @@ public class Deadline extends Task {
         return deadline;
     }
 
-    public void setDeadline(String deadline) {
-        this.deadline = deadline;
-    }
-
     public String getKeyWordBeforeDeadline() {
         return keyWordBeforeDeadline;
-    }
-
-    public void setKeyWordBeforeDeadline(String keyWordBeforeDeadline) {
-        this.keyWordBeforeDeadline = keyWordBeforeDeadline;
     }
 
     @Override

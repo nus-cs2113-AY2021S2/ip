@@ -7,6 +7,5 @@ public class Duke {
         DukeUI.printWelcomeMessage();
         DukeUI.printMenu();
         DukeController.run();
-        DukeUI.printExitMessage();
     }
 }

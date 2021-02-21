@@ -6,31 +6,38 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class DukeIO {
+public class DukeStorage {
 
-    private static final String DUKEDATADIR = "data";
-    private static final String DUKEDATA = "data/dukeData.txt";
+    private static final String DUKE_DATA_DIR = "data";
+    private static final String DUKE_DATA_TXT = "data/dukeData.txt";
+    private static final int MAXIMUM_LENGTH_OF_TASK_NUMBER = "100".length();
+    private static final int INDEX_OF_IS_DONE_VALUE = "1   [T][X".indexOf('X');
+    private static final int INDEX_OF_TASK_TYPE = "1   [T".indexOf('T');
+    private static final int FIRST_INDEX_OF_TASK_DESCRIPTION = "1   [T][X] S".indexOf('S');
 
     // create file and directory if they are not created yet
     public static void initialize() throws IOException {
-        File dataDirectory = new File(DUKEDATADIR);
+        File dataDirectory = new File(DUKE_DATA_DIR);
         if (!dataDirectory.exists()){
             dataDirectory.mkdirs();
         }
-        File dukeData = new File(DUKEDATA);
+        File dukeData = new File(DUKE_DATA_TXT);
         if(!dukeData.exists()){
             dukeData.createNewFile();
         }
     }
 
-    public static void writeDukeData() throws IOException {
-        // clear existing data in the txt file
-        File file = new File(DUKEDATA);
+    private static void emptyFileContent() throws IOException {
+        File file = new File(DUKE_DATA_TXT);
         if(file.exists()){
             file.delete();
         }
         file.createNewFile();
-        FileWriter fw = new FileWriter(DUKEDATA);
+    }
+
+    public static void writeDukeData() throws IOException {
+        emptyFileContent();
+        FileWriter fw = new FileWriter(DUKE_DATA_TXT);
 
         String line; //string to write to the txt file(per line)
         String taskNum; //task number
@@ -47,7 +54,7 @@ public class DukeIO {
         for(int i=0; i<currentTaskLength; i++){
             //common formatting for the 3 task types
             taskNum = String.valueOf(i+1);
-            padding = 3 - taskNum.length();
+            padding = MAXIMUM_LENGTH_OF_TASK_NUMBER - taskNum.length();
             for(int j=0; j<padding; j++){
                 taskNum =  taskNum + " ";
             }
@@ -86,21 +93,21 @@ public class DukeIO {
         Task[] tasks = new Task[100];
         Task task;
         int currentTaskLength = 0;
-        File dukeData = new File(DUKEDATA); // create a File for the given file path
+        File dukeData = new File(DUKE_DATA_TXT); // create a File for the given file path
         Scanner sc = new Scanner(dukeData); // create a Scanner using the File as the source
         while (sc.hasNextLine()) {
             line = sc.nextLine();
             // identify the task object and create the object according to each line of the txt file
-            if(line.substring(4,7).equals("[T]")){
-                task = new ToDo(line.substring(11));
+            if(line.substring(INDEX_OF_TASK_TYPE,INDEX_OF_TASK_TYPE+1).equals("T")){
+                task = new ToDo(line.substring(FIRST_INDEX_OF_TASK_DESCRIPTION));
 
-            }else if(line.substring(4,7).equals("[D]")){
-                task = new Deadline(line.substring(11));
+            }else if(line.substring(INDEX_OF_TASK_TYPE,INDEX_OF_TASK_TYPE+1).equals("D")){
+                task = new Deadline(line.substring(FIRST_INDEX_OF_TASK_DESCRIPTION));
             }else{
-                task = new Event(line.substring(11));
+                task = new Event(line.substring(FIRST_INDEX_OF_TASK_DESCRIPTION));
             }
             // get the isDone value of the object from the txt file
-            if(line.substring(8,9).equals("0")) {
+            if(line.substring(INDEX_OF_IS_DONE_VALUE,INDEX_OF_IS_DONE_VALUE+1).equals("0")) {
                 task.setIsDone(false);
             } else {
                 task.setIsDone(true);

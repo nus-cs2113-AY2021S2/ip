@@ -1,69 +1,28 @@
 package duke;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Scanner;
 
 public class DukeController {
 
     private static Task[] tasks = new Task[100];
     private static int currentTaskLength = 0;
-    private static Scanner sc = new Scanner(System.in);
-    private static String input;
-    private static int currentCommand;
-
 
     public static void run() throws IOException {
-        DukeIO.initialize();
-        while (true){
-            input = sc.nextLine();
-            currentCommand = DukeCommandValidator.getCommand(input);
-            switch (currentCommand){
-            case DukeCommands.INVALID_COMMAND:{
-                System.out.println("Please enter a valid command!");
-                DukeUI.printMenu();
-                break;
-            }
-            case DukeCommands.LIST:{
-                DukeIO.readDukeData();
-                list();
-                break;
-            }
-            case DukeCommands.EXIT:{
-                return;
-            }
-            case DukeCommands.DONE:{
-                DukeIO.readDukeData();
-                done();
-                DukeIO.writeDukeData();
-                break;
-            }
-            case DukeCommands.ADD:{
-                DukeIO.readDukeData();
-                add();
-                DukeIO.writeDukeData();
-                break;
-            }
-            case DukeCommands.DELETE:{
-                DukeIO.readDukeData();
-                delete();
-                DukeIO.writeDukeData();
-                break;
-            }
-            default: {
-                System.out.println("Unknown error has occurred! Please try again.");
-            }
-            }
-        }
+        DukeStorage.initialize();
+        DukeUI.run();
     }
 
-    public static void list(){
+    public static void listTasks() throws FileNotFoundException {
+        DukeStorage.readDukeData();
         for(int i=0; i<currentTaskLength; i++){
             System.out.printf("%d.", i+1);
             tasks[i].printTask();
         }
     }
 
-    public static void delete(){
+    public static void deleteTask(String input) throws IOException {
+        DukeStorage.readDukeData();
         // ensure task index to delete is in range
         int taskNumberToDelete = Integer.parseInt(input.substring(7));
         if(taskNumberToDelete>currentTaskLength || taskNumberToDelete < 1) {
@@ -86,9 +45,11 @@ public class DukeController {
         tasks = copy;
         currentTaskLength--;
         System.out.printf("Now you have %d tasks in the list.\n", currentTaskLength);
+        DukeStorage.writeDukeData();
     }
 
-    public static void done(){
+    public static void markAsDone(String input) throws IOException {
+        DukeStorage.readDukeData();
         int taskIndex = Integer.parseInt(input.substring(5)) - 1;
         if(taskIndex >= currentTaskLength || taskIndex < 0){
             System.out.println("The task index you have entered is out of bound!");
@@ -101,10 +62,11 @@ public class DukeController {
                     + tasks[taskIndex].getStatusIcon() + "] "
                     + tasks[taskIndex].getDescription());
         }
-
+        DukeStorage.writeDukeData();
     }
 
-    public static void add(){
+    public static void addTask(String input) throws IOException {
+        DukeStorage.readDukeData();
         if(DukeCommandValidator.isToDoValid(input)==true){
             tasks[currentTaskLength] = new ToDo(input);
         }else if(DukeCommandValidator.isDeadlineValid(input)==true){
@@ -120,14 +82,15 @@ public class DukeController {
         tasks[currentTaskLength].printTask();
         System.out.printf("Now you have %d tasks in the list.\n", currentTaskLength + 1);
         currentTaskLength++;
+        DukeStorage.writeDukeData();
     }
 
     public static int getCurrentTaskLength(){
         return currentTaskLength;
     }
 
-    public static void setCurrentTaskLength(int newlength){
-        currentTaskLength = newlength;
+    public static void setCurrentTaskLength(int newLength){
+        currentTaskLength = newLength;
     }
 
     public static Task[] getTasks(){

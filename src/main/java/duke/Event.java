@@ -23,16 +23,8 @@ public class Event extends Task {
         return duration;
     }
 
-    public void setDuration(String duration) {
-        this.duration = duration;
-    }
-
     public String getKeyWordBeforeDuration() {
         return keyWordBeforeDuration;
-    }
-
-    public void setKeyWordBeforeDuration(String keyWordBeforeDuration) {
-        this.keyWordBeforeDuration = keyWordBeforeDuration;
     }
 
     @Override

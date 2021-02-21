@@ -1,6 +1,50 @@
 package duke;
 
+import java.io.IOException;
+import java.util.Scanner;
+
 public class DukeUI {
+
+    private static Scanner sc = new Scanner(System.in);
+    private static String input;
+    private static int currentCommand;
+
+    public static void run() throws IOException {
+        while (true){
+            input = sc.nextLine();
+            currentCommand = DukeCommandValidator.getCommand(input);
+            switch (currentCommand){
+            case DukeCommands.INVALID_COMMAND:{
+                System.out.println("Please enter a valid command!");
+                DukeUI.printMenu();
+                break;
+            }
+            case DukeCommands.LIST:{
+                DukeController.listTasks();
+                break;
+            }
+            case DukeCommands.EXIT:{
+                DukeUI.printExitMessage();
+                return;
+            }
+            case DukeCommands.DONE:{
+                DukeController.markAsDone(input);
+                break;
+            }
+            case DukeCommands.ADD:{
+                DukeController.addTask(input);
+                break;
+            }
+            case DukeCommands.DELETE:{
+                DukeController.deleteTask(input);
+                break;
+            }
+            default: {
+                System.out.println("Unknown error has occurred! Please try again.");
+            }
+            }
+        }
+    }
 
     public static void printWelcomeMessage(){
         System.out.printf("Hello! I'm Duke\n" +
