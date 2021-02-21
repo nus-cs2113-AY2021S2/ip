@@ -1,0 +1,4 @@
+T | Y | read book
+D | N | return book | June 6th
+T | Y | join sports club
+T | N | borrow book
