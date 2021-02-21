@@ -9,6 +9,9 @@ import java.time.format.DateTimeFormatter;
 
 public class Duke {
 
+    /**
+     * final integer to represents various index to indicate task name and deadline/event date
+     */
     static final int BY_AT_INDEX = 4;
     static final int FIND_INDEX = 5;
     static final int TODO_INDEX = 5;
@@ -17,17 +20,25 @@ public class Duke {
     static final int DEADLINE_INDEX = 9;
     static final int MAX_NO_OF_TASKS = 100;
 
-    final private Ui ui;
+    private Ui ui;
     private TaskList tl;
-    private static Storage storage;
+    private Storage storage;
     final private static Task[] tasks = new Task[MAX_NO_OF_TASKS];
-    final private static String filePath = "C:/Users/XPS/Desktop/Uni drives me crazy/Y2S2/NUS exchange/CS2113 Software Engineering/ip/duke.txt";
+    final private static String filePath = "C:/duke.txt";
 
+    /**
+     * Initiate the Ui Class and Storage Class with the default filepath
+     * @param filePath an default filepath to store duke.txt
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
     }
 
+    /**
+     * main method to run Duke, use if else statement to differentiate different
+     * command entered by the user
+     */
     public void run() {
         int index = 0;
         String task;
@@ -42,7 +53,7 @@ public class Duke {
             } else if (task.contains("done")) {
                 try {
                     String taskNo = task.substring(TODO_INDEX);
-                    int new_taskNo = Parser.parserToInteger(taskNo);
+                    int new_taskNo = Parser.parseInt(taskNo);
                     tasks[new_taskNo - 1].setTaskStatus(true);
                     tl.markAsDone(new_taskNo-1, tasks);
                     storage.replaceTXT(tasks[new_taskNo - 1].getDescription());
@@ -106,7 +117,7 @@ public class Duke {
                 }
             } else if (task.contains("delete")) {
                 try {
-                    int delete_index = Parser.parserToInteger(task.substring(DELETE_INDEX));
+                    int delete_index = Parser.parseInt(task.substring(DELETE_INDEX));
                     Task delete_task = tasks[delete_index - 1];
                     tl.removeTaskMessage(index, delete_task);
                     tl.removeTask(delete_index, index, tasks);
@@ -121,6 +132,11 @@ public class Duke {
         }
     }
 
+    /**
+     * main method to run the program, initiate a new Duke Class with the specified
+     * filepath to store task data and run the program
+     * @param args contains the command-line arguments passed to the Duke program upon invocation
+     */
     public static void main(String[] args) {
         new Duke(filePath).run();
     }
