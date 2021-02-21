@@ -9,6 +9,7 @@ public class Messages {
     public static final String DONE_MESSAGE = "Nice! I've marked this task as done:";
     public static final String ADDED_MESSAGE = "Got it. I've added this task:";
     public static final String DELETED_MESSAGE = "Noted. I've removed this task:";
+    public static final String FOUND_TASK_MESSAGE = "Here are the matching tasks in your list:";
 
     public static final String INTERNAL_ERROR_MESSAGE = "Duke has malfunctioned...";
     public static final String INVALID_COMMAND_MESSAGE = "Do not understand your command.";
@@ -21,5 +22,8 @@ public class Messages {
     public static final String EVENT_EMPTY_TIME_MESSAGE = "Event missing!";
     public static final String TASK_DOES_NOT_EXIST = "Task does not exist!";
     public static final String INDEX_NUMBER_INPUT_MESSAGE = "Please input a valid number!";
+
+    public static final String EMPTY_KEYWORD_MESSAGE = "Please input a keyword";
+    public static final String NO_MATCHING_TASKS = "There are no matching task with: ";
     public static final String INVALID_DATETIME_MESSAGE = "Use valid date time (yyyy-mm-dd hh.mm)";
 }

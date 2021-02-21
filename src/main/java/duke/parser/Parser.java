@@ -10,6 +10,7 @@ import duke.taskActions.AddTask;
 import duke.taskActions.CompleteTask;
 import duke.taskActions.DeleteTask;
 import duke.taskActions.FetchTasks;
+import duke.taskActions.FindTask;
 import duke.ui.Ui;
 import duke.common.Messages;
 import duke.data.exception.DukeException;
@@ -33,26 +34,29 @@ public class Parser {
 
         try {
             switch (command) {
-                case Commands.BYE:
-                    messages.add(Messages.BYE_MESSAGE);
-                    Ui.reply(messages);
-                    TaskList.saveTasksToTextFile();
-                    scanner.close();
-                    return;
-                case Commands.LIST:
-                    response = FetchTasks.fetchTasks();
-                    break;
-                case Commands.DONE:
-                    response = CompleteTask.completeTask(task);
-                    TaskList.saveTasksToTextFile();
-                    break;
-                case Commands.DELETE:
-                    response = DeleteTask.deleteTask(task);
-                    TaskList.saveTasksToTextFile();
-                    break;
-                default:
-                    response = AddTask.addTask(command, task);
-                    TaskList.saveTasksToTextFile();
+            case Commands.BYE:
+                messages.add(Messages.BYE_MESSAGE);
+                Ui.reply(messages);
+                TaskList.saveTasksToTextFile();
+                scanner.close();
+                return;
+            case Commands.LIST:
+                response = FetchTasks.fetchTasks();
+                break;
+            case Commands.DONE:
+                response = CompleteTask.completeTask(task);
+                TaskList.saveTasksToTextFile();
+                break;
+            case Commands.DELETE:
+                response = DeleteTask.deleteTask(task);
+                TaskList.saveTasksToTextFile();
+                break;
+            case Commands.FIND:
+                response = FindTask.findTask(task);
+                break;
+            default:
+                response = AddTask.addTask(command, task);
+                TaskList.saveTasksToTextFile();
             }
             messages.addAll(response);
             Ui.reply(messages);
