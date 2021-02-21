@@ -4,9 +4,15 @@ import dukehandler.TaskList;
 
 import java.io.File;
 
+/**
+ * Prints all messages that are non-errors.
+ * Includes Greeting and Farewell Messages.
+ */
+
 public class SuccessMessagePrinter {
     private final TaskList taskList;
     static final String DOTTED_LINE = "____________________________________________________________";
+
     public SuccessMessagePrinter(TaskList taskList) {
         this.taskList = taskList;
     }

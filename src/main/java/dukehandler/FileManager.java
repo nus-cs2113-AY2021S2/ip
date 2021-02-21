@@ -21,7 +21,12 @@ public class FileManager {
         this.taskList = taskList;
         this.successMessagePrinter = smp;
     }
-    
+
+    /**
+     * Checks if file exists, or creates new file if it doesn't already exist.
+     *
+     * @return File where the tasks list will be saved at end of program.
+     */
     public File loadFileOnStartup() {
         String filePath = new File("").getAbsolutePath();
         File f = new File(filePath + "/tasks.txt");
@@ -36,6 +41,12 @@ public class FileManager {
         return f;
     }
 
+    /**
+     * Loads the contents from file (tasks.txt) into tasks ArrayList
+     *
+     * @param filePath path of the tasks.txt file
+     * @throws FileNotFoundException if tasks.txt file cannot be accessed.
+     */
     public void loadTasksFromFile(String filePath)
             throws FileNotFoundException {
         File f = new File(filePath); // create a File for the given file path
@@ -59,6 +70,13 @@ public class FileManager {
         }
     }
 
+    /**
+     * Checks if contents of tasks ArrayList can be saved onto tasks.txt file.
+     * If file can be accessed, the contents will be saved.
+     * Called when 'bye' command is given to end the program after saving tasks contents
+     *
+     * @param f tasks.txt File where tasks ArrayList contents are saved
+     */
     public void endOfProgramRoutine(File f) {
         try {
             saveTasksToFile(f.getAbsolutePath());
@@ -68,6 +86,13 @@ public class FileManager {
         successMessagePrinter.printByeMessage();
     }
 
+    /**
+     * Writes tasks ArrayList data into tasks.txt file on computer
+     * Delimiter is ' ~~ '
+     *
+     * @param filePath path of tasks.txt file
+     * @throws IOException if tasks.txt file cannot be accessed.
+     */
     public void saveTasksToFile(String filePath) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         for (Task task : taskList.tasks) {
