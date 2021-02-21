@@ -10,6 +10,12 @@ import duke.data.exception.DukeExceptionKey;
 
 public class FindTask {
 
+    /**
+     * Allows user to search for tasks by keyword.
+     * @param keyword Query keyword.
+     * @return List of tasks matching the keyword.
+     * @throws DukeException When no keyword is provided by user.
+     */
     public static List<String> findTask(String keyword) throws DukeException {
         if (keyword.isEmpty() || keyword == null) {
             throw new DukeException(DukeExceptionKey.EMPTY_KEYWORD);
