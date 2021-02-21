@@ -10,7 +10,7 @@ import duke.data.exception.DukeExceptionKey;
 public class FetchTasks {
 
     /**
-     * Fetches all previously mentioned messages.
+     * Fetches all previously created tasks.
      * @return All tasks in storage.
      * @throws DukeException When the storage is empty or index is less than 0.
      */

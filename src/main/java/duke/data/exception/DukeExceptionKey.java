@@ -11,6 +11,6 @@ public enum DukeExceptionKey {
     EMPTY_EVENT_TIME,
     NO_TASK_FOUND,
     INDEX_FORMAT_ERROR,
-    EMPTY_KEYWORD
+    EMPTY_KEYWORD,
     INVALID_DATETIME
 }
