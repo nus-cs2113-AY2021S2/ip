@@ -7,18 +7,19 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+/**
+ * Represents the main class Duke.
+ */
 public class Duke {
-
-
-    //public static String user_input;
-
     private static Ui ui = new Ui();
     private static TaskList tasks = new TaskList();
     private static Parser parser = new Parser();
     private static Storage storage = new Storage();
+    private static String user_input;
 
-    public static String user_input;
-
+    /**
+     * Prints out the welcome message.
+     */
     public static void show_welcome_msg() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -33,10 +34,22 @@ public class Duke {
                 "____________________________________________________________\n");
     }
 
+    /**
+     * Prints out the bye message.
+     */
     public static void show_exit_msg() {
         System.out.println("Bye. Hope to see you again soon!\n");
     }
 
+    /**
+     * Ensembles all methods that each user-command requires.
+     * @param input user input
+     * @param c class command
+     * @throws InvalidCommandException
+     * @throws EmptyInputException
+     * @throws InvalidEventException
+     * @throws InvalidDeadlineException
+     */
     public static void executeCommand(String input, Command c) throws InvalidCommandException, EmptyInputException, InvalidEventException, InvalidDeadlineException {
         switch (c) {
             case LIST:
@@ -77,6 +90,10 @@ public class Duke {
         }
     }
 
+    /**
+     * main method
+     * @param args
+     */
     public static void main(String[] args) {
         show_welcome_msg();
         Command command;

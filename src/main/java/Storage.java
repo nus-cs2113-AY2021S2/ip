@@ -4,10 +4,17 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * File handling
+ */
 public class Storage {
     private static TaskList tasks = new TaskList();
     private static Task[] t = tasks.getTasks();
     private static Ui ui = new Ui();
+
+    /**
+     * constructor of the class
+     */
     public Storage(){}
     private static void printFileContents(String filePath) throws FileNotFoundException {
         File f = new File(filePath); // create a File for the given file path
@@ -18,6 +25,9 @@ public class Storage {
     }
 
 
+    /**
+     * Load file from local drive
+     */
     public static void loadFile() {
         try {
             printFileContents("/Users/chenlingcui/Desktop/totestduke/testduke.txt");
@@ -39,6 +49,10 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Write to file or append to file
+     * @param num total number of tasks
+     */
     public static void changeFile(int num) {
         try {
             writeToFile("/Users/chenlingcui/Desktop/totestduke/testduke.txt", "[" + t[1].getStatusIcon() + "] " + t[1].getDescription() + "\n");
