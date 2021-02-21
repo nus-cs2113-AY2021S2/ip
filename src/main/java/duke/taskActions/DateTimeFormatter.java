@@ -4,8 +4,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import duke.common.Messages;
+import duke.ui.Ui;
 
 public class DateTimeFormatter {
     private static final Pattern datePattern = Pattern.compile("\\d{4}-\\d{2}-\\d{2}");
@@ -69,8 +73,14 @@ public class DateTimeFormatter {
         String[] eventTimes = event.split("-");
         try{
             SimpleDateFormat twelveHourTimeFormat = new SimpleDateFormat("hh.mm aa");
-            String eventStart = twelveHourTimeFormat.format(timeFormat.parse(eventTimes[0]));
-            String eventEnd = twelveHourTimeFormat.format(timeFormat.parse(eventTimes[1]));
+            Date startTime = timeFormat.parse(eventTimes[0]);
+            Date endTime = timeFormat.parse(eventTimes[1]);
+            if (startTime.after(endTime)) {
+                Ui.notifyError(Messages.INVALID_EVENT_MESSAGE);
+                throw new DateTimeException("Invalid time given");
+            }
+            String eventStart = twelveHourTimeFormat.format(startTime);
+            String eventEnd = twelveHourTimeFormat.format(endTime);
             return eventStart + " - " + eventEnd;
         } catch (ParseException e){
             throw new DateTimeException("Invalid time given");
