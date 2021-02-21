@@ -4,6 +4,9 @@ import parser.Parser;
 import storage.Storage;
 import java.util.Scanner;
 
+/**
+ * Main class for Mushroom Head.
+ */
 public class Duke {
     private static final Constant constant = new Constant();
     private static final Storage storage = new Storage();
@@ -12,7 +15,7 @@ public class Duke {
 
     /**
      * This is the start of the main program.
-     * 1. inifFile() will load any existing file if found.
+     * 1. initFile() will load any existing file if found.
      * 2. looper() will prompt the user for the commands to take action on.
      * 3. saveFile() will save any current data into a text file named tasks_log.txt.
      */

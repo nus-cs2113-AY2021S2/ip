@@ -1,8 +1,12 @@
 package constant;
 
+/**
+ * Main class containing the fixed constants.
+ */
 public class Constant {
-
-    // Commands code constants
+    /**
+     * Constants used to represent each individual common code.
+     */
     public final int INPUT_CODE_EXIT = -1;
     public final int INPUT_CODE_DEFAULT_INVALID = 0;
     public final int INPUT_CODE_LIST = 1;
@@ -14,7 +18,9 @@ public class Constant {
     public final int INPUT_CODE_DELETE = 7;
     public final int INPUT_CODE_FIND = 8;
 
-    // String message constants
+    /**
+     * Constants used for printing repetitive messages.
+     */
     public final String DIVIDER_LINE = "____________________________________________________________";
     public final String LIST_STARTING_MESSAGE = "Below are all your list of mushroom points:";
     public final String FILE_PATH = "task_logs.txt";
