@@ -1,6 +1,6 @@
 package jarvis.storage;
 
-import jarvis.Duke;
+import jarvis.tasklist.TaskList;
 import jarvis.task.Task;
 
 import java.io.File;
@@ -31,7 +31,7 @@ public class TextManager {
         while (scanner.hasNext()) {
             String encodedTask = scanner.nextLine();
             System.out.println("\t\t" + encodedTask);
-            Duke.jarvis.addToTasks(TextDecoder.decodeTaskFromString(encodedTask));
+            TaskList.addToTasks(TextDecoder.decodeTaskFromString(encodedTask));
         }
     }
 
