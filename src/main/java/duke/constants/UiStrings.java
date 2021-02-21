@@ -28,6 +28,7 @@ public class UiStrings {
     public static final String DEADLINE_COMMAND_FORMAT = "DEADLINE - \n" + "FORMAT: deadline [(str) description] /by [(str) deadline]";
     public static final String EVENT_COMMAND_FORMAT = "EVENT - \n" + "FORMAT: event [(str) description] /at [(str) time]";
     public static final String DELETE_COMMAND_FORMAT = "DELETE - \n" + "FORMAT: delete [(int) index]";
+    public static final String FIND_COMMAND_FORMAT = "FIND - \n" + "FORMAT: find [(string) search keywords]";
     
     // Output formatting
     public static final String STRAIGHT_LINE = "____________________________________________________________";

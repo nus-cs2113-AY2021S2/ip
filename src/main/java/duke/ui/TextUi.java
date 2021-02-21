@@ -107,6 +107,7 @@ public class TextUi {
         System.out.println(LIST_COMMAND_FORMAT + '\n');
         System.out.println(DONE_COMMAND_FORMAT + '\n');
         System.out.println(DELETE_COMMAND_FORMAT + '\n');
+        System.out.println(FIND_COMMAND_FORMAT + '\n');
         System.out.println(PROMPT_ENTER_BYE_TO_EXIT);
         System.out.println(SHORT_LINE + '\n');
     }

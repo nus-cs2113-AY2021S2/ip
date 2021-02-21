@@ -59,9 +59,13 @@ public class Parser {
         return words[1].trim();
     }
 
-    public static String parseKeyword(String input) {
+    public static String parseKeyword(String input) throws InvalidCommandException{
 
         String[] words = input.split(" ");
+        if (words.length <2) {
+            throw new InvalidCommandException();
+        }
+        
         String[] keywords = Arrays.copyOfRange(words, 1, words.length);
 
         String keywordString = "";

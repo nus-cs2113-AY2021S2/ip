@@ -213,10 +213,16 @@ public class CommandRunner {
     private void runFindCommand(String input) {
         ArrayList<Task> matches = new ArrayList<>();
         int numbering = 1;
-        
+        String keyword = null;
+
         // parse keyword from user input
-        String keyword = Parser.parseKeyword(input);
-        
+        try {
+            keyword = Parser.parseKeyword(input);
+        } catch (InvalidCommandException e) {
+            ui.printInvalidInputWarning(input);
+            return;
+        }
+
         // collect tasks which match keyword
         for (Task t : tasks.getTasks()) {
             if (t.getJob().contains(keyword)) {
