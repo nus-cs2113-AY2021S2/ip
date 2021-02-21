@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 public class TaskManager {
     public static ArrayList<Task> tasks = new ArrayList<>();
+
     public TaskManager() {
     }
 
@@ -60,7 +61,6 @@ public class TaskManager {
         tasks.get(doneIndexInteger - 1).markAsDone();
         SuccessMessagePrinter.printTaskMarkedDone(doneIndexInteger - 1);
     }
-
 
     public static void addNewTask(String taskType, String fullCommand) {
         String[] part = fullCommand.split(taskType);
@@ -119,7 +119,7 @@ public class TaskManager {
         int[] i = {1};
         tasks.stream()
                 .filter((t) -> t.getTaskName().trim().contains(keyword.trim()))
-                .forEach((t)->System.out.println(" " + (i[0]++) + ". " + t));
+                .forEach((t) -> System.out.println(" " + (i[0]++) + ". " + t));
     }
 
 }
