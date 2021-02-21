@@ -2,14 +2,25 @@ package ui;
 
 import dukehandler.TaskManager;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import java.io.File;
 
 public class SuccessMessagePrinter {
+    static final String DOTTED_LINE
+            = "____________________________________________________________";
+
     public SuccessMessagePrinter() {
     }
 
-    public static void showDottedLine() {
-        System.out.println("____________________________________________________________");
+    public static void printCurrentTimeAndDate() {
+        String time = " Local Time: ";
+        LocalDateTime dateToday = LocalDateTime.now();
+        time += dateToday.format(DateTimeFormatter.ofPattern("d MMM yyyy HH:mm"));
+        System.out.println("\n  " + "-".repeat(time.length()) + "\n "
+                + time + "\n  " + "-".repeat(time.length()));
+
     }
 
     public static void printGreetMessage() {
@@ -18,20 +29,20 @@ public class SuccessMessagePrinter {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        showDottedLine();
         String greetMessage = " Hello! I'm Duke :D" + " Be nice to me:)\n";
 
         System.out.println("Hello from\n" + LOGO);
+        System.out.println(DOTTED_LINE);
         System.out.println(greetMessage);
         printHelpMessage();
-        showDottedLine();
+        System.out.println(DOTTED_LINE);
     }
 
     public static void printNewFileCreatedMessage(File f) {
         System.out.println(" I have created a file at this location:\n "
                 + f.getAbsolutePath() + "\n"
                 + " to store all your tasks!");
-        showDottedLine();
+        System.out.println(DOTTED_LINE);
     }
 
     public static void printHelloMessage() {
@@ -43,9 +54,11 @@ public class SuccessMessagePrinter {
 
     public static void printHelpMessage() {
         String helpMessage = " Try entering commands like : help, list, done, bye,\n"
-                + " todo <taskName>\n"
-                + " || deadline <taskName> /by <time>\n"
-                + " || event <taskName> /at <time> ||\n"
+                + " add new todo <taskName>\n"
+                + " || deadline <taskName> /by <date YYYY-MM-DD> <time hh:mm>\n"
+                + " || event <taskName>    /at <date YYYY-MM-DD> <time hh:mm>\n"
+                + " print type <task type> to filter based on type\n"
+                + " print date <task date> to filter based on date\n"
                 + " Remember: be nice!";
         System.out.println(helpMessage);
     }
@@ -70,11 +83,11 @@ public class SuccessMessagePrinter {
     }
 
     public static void printByeMessage() {
-        showDottedLine();
+        System.out.println(DOTTED_LINE);
         String byeMessage = " I learnt more about you, kind human!\n"
                 + " I won't forget you when I take over the world one day:)";
         System.out.println(byeMessage);
-        showDottedLine();
+        System.out.println(DOTTED_LINE);
     }
 
 }

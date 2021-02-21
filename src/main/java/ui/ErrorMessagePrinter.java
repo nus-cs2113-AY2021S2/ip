@@ -2,6 +2,7 @@ package ui;
 
 public class ErrorMessagePrinter {
     static final String DOTTED_LINE = "____________________________________________________________";
+
     public ErrorMessagePrinter() {
     }
 
@@ -38,6 +39,7 @@ public class ErrorMessagePrinter {
         System.out.println(" Type 'list' to see all the tasks.");
         System.out.println(" Type 'help' if you need help.");
     }
+
     public static void printTaskAlreadyMarkedDone() {
         System.out.println(" Hey, you've already marked that as done!");
     }
@@ -52,5 +54,15 @@ public class ErrorMessagePrinter {
         String IOErrorMessage = DOTTED_LINE + "\n OOPS!!! I couldn't access your file\n" +
                 " because of an IO Error. Sorry!\n" + DOTTED_LINE;
         System.out.println(IOErrorMessage);
+    }
+
+    public static void printTimeParseErrorMessage() {
+        System.out.println(" OOPS!!! The date or time you entered could not be parsed.\n" +
+                " Please try again.");
+    }
+
+    public static void printTaskStreamError(String typeOrDate) {
+        System.out.println(" OOPS!!! You did not enter the task "
+                + typeOrDate + " correctly!\n Please try again:(");
     }
 }

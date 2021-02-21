@@ -1,6 +1,5 @@
 package dukehandler;
 
-import org.jetbrains.annotations.NotNull;
 import taskclasses.Deadline;
 import taskclasses.Event;
 import taskclasses.Task;
@@ -15,7 +14,6 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class FileManager {
-    @NotNull
     public static File loadFileOnStartup() {
         String filePath = new File("").getAbsolutePath();
         File f = new File(filePath + "/tasks.txt");
@@ -35,19 +33,19 @@ public class FileManager {
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
         while (s.hasNext()) {
             String[] part = s.nextLine().split(" ~~ ");
-            switch(part[0]) {
+            switch (part[0]) {
             case "T":
                 TaskManager.tasks.add(new ToDo(part[2]));
                 break;
             case "D":
-                TaskManager.tasks.add(new Deadline(part[2], part[3]));
+                TaskManager.tasks.add(new Deadline(part[2], part[3], part[4]));
                 break;
             case "E":
-                TaskManager.tasks.add(new Event(part[2], part[3]));
+                TaskManager.tasks.add(new Event(part[2], part[3], part[4]));
                 break;
             }
             if (part[1].equals("X")) {
-                TaskManager.tasks.get(TaskManager.tasks.size()-1).markAsDone();
+                TaskManager.tasks.get(TaskManager.tasks.size() - 1).markAsDone();
             }
         }
     }
@@ -68,7 +66,7 @@ public class FileManager {
                     + task.getStatusIcon() + " ~~ "
                     + task.getTaskName());
             if (task.getTaskType().equals("D") || task.getTaskType().equals("E")) {
-                fw.write(" ~~ " + task.getTime());
+                fw.write(" ~~ " + task.getDate() + " ~~ " + task.getTime());
             }
             fw.write(System.lineSeparator());
         }

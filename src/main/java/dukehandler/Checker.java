@@ -1,14 +1,11 @@
 package dukehandler;
 
-import exceptions.EmptyCommandDescriptionException;
-import exceptions.EmptyListException;
-import exceptions.IllegalTaskMarkedDoneException;
-import exceptions.IllegalTaskRemovedException;
-import exceptions.InvalidCommandException;
-import exceptions.TaskAlreadyMarkedException;
+import exceptions.*;
 
 public class Checker {
-    public Checker() {}
+    public Checker() {
+    }
+
     public static void checkTaskToMarkDone(int doneIndexInt)
             throws IllegalTaskMarkedDoneException,
             TaskAlreadyMarkedException,
@@ -50,5 +47,14 @@ public class Checker {
             throw new IllegalTaskRemovedException();
         }
     }
+
+    public static void checkTaskTypeStreamToPrint(String taskTypeInput) throws StreamErrorException {
+        if (!taskTypeInput.equals("d")
+                && !taskTypeInput.equals("e")
+                && !taskTypeInput.equals("t")) {
+            throw new StreamErrorException();
+        }
+    }
+
 
 }
