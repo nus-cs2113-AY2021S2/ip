@@ -98,4 +98,19 @@ public class TaskList {
 
     }
 
+    public void findTask(String line) {
+        try {
+            String keyword = line.substring(5);
+            int count = 1;
+            System.out.println("Here are the matching tasks in your list:");
+            for (Task task : tasks) {
+                if (task.getDescription().contains(keyword)) {
+                    System.out.println(count + "." + task.toString());
+                }
+            }
+        } catch (StringIndexOutOfBoundsException e) {
+            System.out.println("OOPS!!! There was no keyword to search for");
+        }
+    }
+
 }

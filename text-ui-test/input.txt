@@ -8,6 +8,7 @@ todo borrow book
 list
 delete 3
 list
+find book
 edqdboqwhubo
 delete
 delete 5
