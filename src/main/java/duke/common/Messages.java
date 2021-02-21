@@ -2,9 +2,8 @@ package duke.common;
 
 public class Messages {
 
-    public static final String VERSION_MESSAGE = "Duke is currently version 0.1";
     public static final String HORIZONTAL_LINE = "    ___________________________________________";
-    public static final String HELLO_MESSAGE = "Hello! I'm Duke";
+    public static final String HELLO_MESSAGE = "Hello! I'm Duke [Version 0.1]";
     public static final String ASSIST_MESSAGE = "What can I do for you?";
     public static final String BYE_MESSAGE = "Bye. Hope to see you again soon!";
     public static final String DONE_MESSAGE = "Nice! I've marked this task as done:";
