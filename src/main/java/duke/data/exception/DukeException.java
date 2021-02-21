@@ -41,8 +41,18 @@ public class DukeException extends Exception {
             return Messages.INDEX_NUMBER_INPUT_MESSAGE;
         case EMPTY_KEYWORD:
             return Messages.EMPTY_KEYWORD_MESSAGE;
-        case INVALID_DATETIME:
+        case INVALID_TIME_ORDER:
+            return Messages.INVALID_TIME_ORDER_MESSAGE;
+        case INVALID_DEADLINE:
+            return Messages.INVALID_DEADLINE_MESSAGE;
+        case INVALID_EVENT:
+            return Messages.INVALID_EVENT_MESSAGE;
+        case EMPTY_DATETIME:
             return Messages.INVALID_DATETIME_MESSAGE;
+        case MISSING_DEADLINE:
+            return Messages.MISSING_DEADLINE_MESSAGE;
+        case MISSING_EVENT:
+            return Messages.MISSING_EVENT_MESSAGE;
         }
         return Messages.INTERNAL_ERROR_MESSAGE;
     }

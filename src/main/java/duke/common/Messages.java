@@ -25,6 +25,10 @@ public class Messages {
     public static final String EMPTY_KEYWORD_MESSAGE = "Please input a keyword";
     public static final String NO_MATCHING_TASKS = "There are no matching task with: ";
     public static final String INVALID_DATETIME_MESSAGE = "Please use valid date time";
-    public static final String INVALID_EVENT_MESSAGE = "Start time must be before end time!";
+    public static final String MISSING_DEADLINE_MESSAGE = "Please specify a deadline";
+    public static final String MISSING_EVENT_MESSAGE = "Please specify the event time period";
+    public static final String INVALID_TIME_ORDER_MESSAGE = "Start time must be before end time!";
+    public static final String INVALID_DEADLINE_MESSAGE = "Please set time as YYYY-MM-DD HH.MM";
+    public static final String INVALID_EVENT_MESSAGE = "Please set time as YYYY-MM-DD HH.MM-HH.MM";
     public static final String CORRUPTED_SAVE_FILE_MESSAGE = "Save file is corrupted.";
 }
