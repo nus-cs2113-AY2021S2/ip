@@ -5,12 +5,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+import duke.common.Commands;
 import duke.taskActions.AddTask;
 import duke.taskActions.CompleteTask;
 import duke.taskActions.DeleteTask;
 import duke.taskActions.FetchTasks;
 import duke.ui.Ui;
-import duke.common.Strings;
+import duke.common.Messages;
 import duke.data.exception.DukeException;
 import duke.taskActions.TaskList;
 
@@ -32,20 +33,20 @@ public class Parser {
 
         try {
             switch (command) {
-                case Strings.BYE:
-                    messages.add(Strings.BYE_MESSAGE);
+                case Commands.BYE:
+                    messages.add(Messages.BYE_MESSAGE);
                     Ui.reply(messages);
                     TaskList.saveTasksToTextFile();
                     scanner.close();
                     return;
-                case Strings.LIST:
+                case Commands.LIST:
                     response = FetchTasks.fetchTasks();
                     break;
-                case Strings.DONE:
+                case Commands.DONE:
                     response = CompleteTask.completeTask(task);
                     TaskList.saveTasksToTextFile();
                     break;
-                case Strings.DELETE:
+                case Commands.DELETE:
                     response = DeleteTask.deleteTask(task);
                     TaskList.saveTasksToTextFile();
                     break;

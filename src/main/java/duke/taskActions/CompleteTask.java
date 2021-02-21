@@ -3,7 +3,7 @@ package duke.taskActions;
 import java.util.ArrayList;
 import java.util.List;
 
-import duke.common.Strings;
+import duke.common.Messages;
 import duke.data.Deadline;
 import duke.data.exception.DukeException;
 import duke.data.Event;
@@ -39,7 +39,7 @@ public class CompleteTask {
             }
             if (completedTask != null) {
                 storage.set(index - 1, completedTask);
-                messages.add(Strings.DONE_MESSAGE);
+                messages.add(Messages.DONE_MESSAGE);
                 messages.add(completedTask.getMessage());
                 messages.add(String.format("Tasks left: %d",
                     TaskList.getIncompleteTasksCount()));

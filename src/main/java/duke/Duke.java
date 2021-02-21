@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import duke.common.Strings;
+import duke.common.Messages;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.ui.Ui;
@@ -23,8 +23,8 @@ public class Duke {
     private static void greetUser() {
         Storage.read();
         List<String> messages = new ArrayList<>();
-        messages.add(Strings.HELLO_MESSAGE);
-        messages.add(Strings.ASSIST_MESSAGE);
+        messages.add(Messages.HELLO_MESSAGE);
+        messages.add(Messages.ASSIST_MESSAGE);
         Ui.reply(messages);
     }
 }

@@ -2,7 +2,7 @@ package duke.ui;
 
 import java.util.List;
 
-import duke.common.Strings;
+import duke.common.Messages;
 
 public class Ui {
 
@@ -25,9 +25,9 @@ public class Ui {
         System.out.println(
             String.format(
                 "%s\n%s%s\n",
-                Strings.HORIZONTAL_LINE,
+                Messages.HORIZONTAL_LINE,
                     allMessages.toString(),
-                Strings.HORIZONTAL_LINE
+                Messages.HORIZONTAL_LINE
             )
         );
         messages.clear();
@@ -42,9 +42,9 @@ public class Ui {
         System.out.println(
             String.format(
                 "%s\n%s\n%s\n",
-                Strings.HORIZONTAL_LINE,
+                Messages.HORIZONTAL_LINE,
                 output,
-                Strings.HORIZONTAL_LINE
+                Messages.HORIZONTAL_LINE
             )
         );
     }

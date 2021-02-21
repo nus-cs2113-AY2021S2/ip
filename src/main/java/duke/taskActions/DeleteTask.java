@@ -3,7 +3,7 @@ package duke.taskActions;
 import java.util.ArrayList;
 import java.util.List;
 
-import duke.common.Strings;
+import duke.common.Messages;
 import duke.data.exception.DukeException;
 import duke.data.Task;
 import duke.data.exception.DukeExceptionKey;
@@ -23,7 +23,7 @@ public class DeleteTask {
             List<String> messages = new ArrayList<>();
             Task removedTask = storage.remove(index - 1);
             if (removedTask != null) {
-                messages.add(Strings.DELETED_MESSAGE);
+                messages.add(Messages.DELETED_MESSAGE);
                 messages.add(removedTask.getMessage());
                 messages.add(String.format("Tasks left: %d",
                     TaskList.getIncompleteTasksCount()));
