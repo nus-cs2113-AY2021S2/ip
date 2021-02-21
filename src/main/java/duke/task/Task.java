@@ -9,6 +9,11 @@ public abstract class Task {
         isDone = false;
     }
 
+    public abstract String getData();
+
+    public String getDescription(){
+        return taskName;
+    }
     public void setAsDone() {
         isDone = true;
     }
@@ -23,6 +28,4 @@ public abstract class Task {
         }
         return String.format("[%c] %s", doneChar, taskName);
     }
-
-    public abstract String getData();
 }

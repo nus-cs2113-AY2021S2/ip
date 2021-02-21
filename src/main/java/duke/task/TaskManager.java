@@ -15,19 +15,19 @@ public class TaskManager {
     }
 
     public String listTask() {
-        StringBuilder feedback = new StringBuilder();
 
-        feedback.append("Here are the tasks in your list:").append(System.lineSeparator());
-        for (int i = 0; i < tasks.size() - 1; ++i) {
-            feedback.append(String.format("%d: %s", (i + 1), tasks.get(i))).append(System.lineSeparator());
-        }
-        if (tasks.size() > 0) {
-            feedback.append(String.format("%d: %s", (tasks.size()), tasks.get(tasks.size() - 1)));
-        } else {
-            feedback.append("Your task list is empty... ):");
+        if(tasks.isEmpty()) {
+            return "Your task list is empty... ):";
         }
 
-        return feedback.toString();
+        ArrayList<String> taskStrings = new ArrayList<>();
+
+        for (int i = 0; i < tasks.size(); ++i) {
+            taskStrings.add(String.format("%d: %s", (i + 1), tasks.get(i)));
+        }
+
+        return "Here are the tasks in your list:" + System.lineSeparator()
+                + String.join(System.lineSeparator(), taskStrings);
     }
 
     public String doneTask(int taskNum) {
@@ -99,5 +99,26 @@ public class TaskManager {
         return "Got it. I've added this task:" + System.lineSeparator()
                 + task + System.lineSeparator()
                 + "Now you have " + tasks.size() + " tasks in the list.";
+    }
+
+    public String findTask(String description) throws EmptyDescriptionException {
+
+        if(description.isEmpty()){
+            throw new EmptyDescriptionException();
+        }
+
+        ArrayList<String> foundTasks = new ArrayList<>();
+        for(Task task: tasks){
+            String taskDescription = task.getDescription();
+            if(taskDescription.contains(description)){
+                foundTasks.add(task.toString());
+            }
+        }
+
+        if(foundTasks.isEmpty()){
+            return "OOPS!!! Couldn't find task with \"" + description + "\"";
+        }
+
+        return String.join(System.lineSeparator(), foundTasks);
     }
 }
