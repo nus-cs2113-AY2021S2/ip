@@ -1,23 +1,33 @@
 package dukehandler;
 
-import exceptions.*;
+import exceptions.EmptyCommandDescriptionException;
+import exceptions.EmptyListException;
+import exceptions.IllegalTaskMarkedDoneException;
+import exceptions.IllegalTaskRemovedException;
+import exceptions.InvalidCommandException;
+import exceptions.TaskAlreadyMarkedException;
 
 public class Checker {
-    public Checker() {}
-    public static void checkTaskToMarkDone(int doneIndexInt)
+    private final TaskList taskList;
+
+    public Checker(TaskList taskList) {
+        this.taskList = taskList;
+    }
+
+    public void checkTaskToMarkDone(int doneIndexInt)
             throws IllegalTaskMarkedDoneException,
             TaskAlreadyMarkedException,
             EmptyListException {
-        if (TaskManager.tasks.isEmpty()) {
+        if (taskList.tasks.isEmpty()) {
             throw new EmptyListException();
-        } else if (doneIndexInt < 1 || doneIndexInt > TaskManager.tasks.size()) {
+        } else if (doneIndexInt < 1 || doneIndexInt > taskList.tasks.size()) {
             throw new IllegalTaskMarkedDoneException();
-        } else if ((TaskManager.tasks.get(doneIndexInt - 1).getStatusIcon()).equals("X")) {
+        } else if ((taskList.tasks.get(doneIndexInt - 1).getStatusIcon()).equals("X")) {
             throw new TaskAlreadyMarkedException();
         }
     }
 
-    public static void checkNewTaskToAdd(String taskType, String description)
+    public void checkNewTaskToAdd(String taskType, String description)
             throws InvalidCommandException, EmptyCommandDescriptionException {
         if (taskType.equals("deadline") && !description.contains("/by")
                 || taskType.equals("event") && !description.contains("/at")) {
@@ -37,11 +47,11 @@ public class Checker {
         }
     }
 
-    public static void checkTaskToRemove(int removeIndexInt)
+    public void checkTaskToRemove(int removeIndexInt)
             throws IllegalTaskRemovedException, EmptyListException {
-        if (TaskManager.tasks.isEmpty()) {
+        if (taskList.tasks.isEmpty()) {
             throw new EmptyListException();
-        } else if (removeIndexInt < 1 || removeIndexInt > TaskManager.tasks.size()) {
+        } else if (removeIndexInt < 1 || removeIndexInt > taskList.tasks.size()) {
             throw new IllegalTaskRemovedException();
         }
     }

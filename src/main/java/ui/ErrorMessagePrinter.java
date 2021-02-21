@@ -2,6 +2,7 @@ package ui;
 
 public class ErrorMessagePrinter {
     static final String DOTTED_LINE = "____________________________________________________________";
+
     public ErrorMessagePrinter() {
     }
 
@@ -38,6 +39,7 @@ public class ErrorMessagePrinter {
         System.out.println(" Type 'list' to see all the tasks.");
         System.out.println(" Type 'help' if you need help.");
     }
+
     public static void printTaskAlreadyMarkedDone() {
         System.out.println(" Hey, you've already marked that as done!");
     }
