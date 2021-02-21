@@ -18,6 +18,8 @@ deadline return books /by
 deadline return books /by
 deadline /by tomorrow 5pm
 deadline return books /by tomorrow 5pm
+find
+find book
 list
 done 4
 list

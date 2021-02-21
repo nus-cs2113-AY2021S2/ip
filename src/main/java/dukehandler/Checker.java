@@ -46,4 +46,9 @@ public class Checker {
         }
     }
 
+    public static void checkTasksToFind(String keyword) throws InvalidCommandException {
+        if (keyword.isEmpty()) {
+            throw new InvalidCommandException();
+        }
+    }
 }

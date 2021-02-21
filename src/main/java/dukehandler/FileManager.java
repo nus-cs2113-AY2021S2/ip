@@ -1,6 +1,5 @@
 package dukehandler;
 
-import org.jetbrains.annotations.NotNull;
 import taskclasses.Deadline;
 import taskclasses.Event;
 import taskclasses.Task;
@@ -15,7 +14,6 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class FileManager {
-    @NotNull
     public static File loadFileOnStartup() {
         String filePath = new File("").getAbsolutePath();
         File f = new File(filePath + "/tasks.txt");

@@ -14,6 +14,9 @@ import taskclasses.ToDo;
 import ui.ErrorMessagePrinter;
 import ui.SuccessMessagePrinter;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class TaskManager {
@@ -101,6 +104,22 @@ public class TaskManager {
         }
         SuccessMessagePrinter.printRemovedTask(removeIndexInt);
         tasks.remove(tasks.get(removeIndexInt - 1));
+    }
+
+    public static void printTasksWithKeywords(String keyword) {
+        try {
+            Checker.checkTasksToFind(keyword.trim());
+        } catch (InvalidCommandException i) {
+            ErrorMessagePrinter.printInvalidCommandMessage("'find'");
+            return;
+        } catch (ArrayIndexOutOfBoundsException a) {
+            ErrorMessagePrinter.printEmptyCommandMessage("find command");
+        }
+        System.out.println(" Here are the matching tasks in your list:");
+        int[] i = {1};
+        tasks.stream()
+                .filter((t) -> t.getTaskName().trim().contains(keyword.trim()))
+                .forEach((t)->System.out.println(" " + (i[0]++) + ". " + t));
     }
 
 }

@@ -18,10 +18,11 @@ public class SuccessMessagePrinter {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        showDottedLine();
+
         String greetMessage = " Hello! I'm Duke :D" + " Be nice to me:)\n";
 
         System.out.println("Hello from\n" + LOGO);
+        showDottedLine();
         System.out.println(greetMessage);
         printHelpMessage();
         showDottedLine();

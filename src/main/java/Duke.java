@@ -54,6 +54,9 @@ public class Duke {
         case "delete":
             TaskManager.removeTask(fullCommand.substring(6).trim());
             break;
+        case "find":
+            TaskManager.printTasksWithKeywords(fullCommand.substring(4).trim());
+            break;
         default:
             ErrorMessagePrinter.printGenericErrorMessage();
             break;
