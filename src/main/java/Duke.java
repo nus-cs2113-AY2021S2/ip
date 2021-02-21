@@ -24,7 +24,7 @@ public class Duke {
     private TaskList tl;
     private Storage storage;
     final private static Task[] tasks = new Task[MAX_NO_OF_TASKS];
-    final private static String filePath = "C:/duke.txt";
+    final private static String filePath = "C:/Users/XPS/Desktop/duke.txt";
 
     /**
      * Initiate the Ui Class and Storage Class with the default filepath
