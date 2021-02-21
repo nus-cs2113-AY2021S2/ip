@@ -14,51 +14,77 @@ public class Ui {
         System.out.println("Please enter the task you want to add in to the task list.");
     }
 
+    /**
+     * show Good-bye message when user exit the program
+     */
     public void showExitMessage() {
-        System.out.println("Thank you for using Tasks function, " +
-                "you can now choose other function :)");
+        System.out.println("Thank you for using Duke function, " +
+                "Hope to see you again :)");
     }
 
-    public void fileErrorMessage() {
-        System.out.println(":( OOps!! The file you are looking for does not exist.");
-    }
-
-    public void exceptionMessage() {
-        System.out.println(":( OOps!! Something went wrong: ");
-    }
-
+    /**
+     * Show error message when user entered invalid command
+     */
     public void showErrorMessage() {
         System.out.println(":( OOps!! I'm sorry, " +
                 "but i don't know what that means...");
     }
 
+    /**
+     * Show StringIndexOutOfBoundsException error message when todo task is added without description
+     */
     public void todoIndexError() {
         System.out.println(":( OOps!! The description of a" +
                 "todo cannot be empty");
     }
 
+    /**
+     * Show StringIndexOutOfBoundsException error message when event task is added without description
+     */
     public void eventIndexError() {
         System.out.println(":( OOps!! The description of a" +
                 "event cannot be empty");
     }
 
+    /**
+     * Show StringIndexOutOfBoundsException error message when deadline task is added without description
+     */
     public void deadlineIndexError() {
         System.out.println(":( OOps!! The description of a" +
                 "deadline cannot be empty");
     }
 
+    /**
+     * Show StringIndexOutOfBoundsException error message when user didn't enter which task index
+     * to be mark as done
+     */
     public void doneIndexError() {
         System.out.println(":( OOps!! The index of task to be done" +
                 "cannot be empty");
     }
 
+    /**
+     * Show StringIndexOutOfBoundsException error message when user didn't enter which task index
+     * to be deleted
+     */
     public void deleteIndexError() {
         System.out.println(":( OOps!! The index of task to be deleted" +
                 "cannot be empty");
     }
 
-    public void showLoadingError() {
-        System.out.println(":( OOps!! Seems there's something wrong with" +
-                "loading Duke");
+    /**
+     * Show FileNotFoundException error message whe user add a task
+     */
+    public void fileErrorMessage() {
+          System.out.println(":( OOps!! The file you are looking for does"+
+                  "not exist...");
+    }
+
+    /**
+     * Show IOException error message when when the program successfully opened
+     * the file, but is unable to read the duke.txt file
+     */
+    public void exceptionMessage() {
+        System.out.println(":( OOps!! Something is wrong when reading the file...");
     }
 }

@@ -3,17 +3,37 @@ import java.io.*;
 public class Storage {
     private final String filePath;
 
+    /**
+     * Constructor for Storage Class
+     * @param filePath default filepath to store duke.txt file
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Crate a FileWriter object that appends to the file Duke.txt
+     * with the specific task description each time a new task is created
+     * @param filePath the default filepath for duke.txt
+     * @param textToAppend the description of the new task added
+     * @throws IOException throw the IOException when the program successfully opened
+     * the file but is unable to read the duke.txt file
+     */
     protected static void appendToFile(String filePath, String textToAppend) throws IOException {
         FileWriter fw = new FileWriter(filePath, true);
         fw.write(textToAppend + "\n");
         fw.close();
     }
+
+    /**
+     * Read the content of existing file and replace task status of a task from 0 to 1 when it's mark as done.
+     * Finally crate a FileWriter object to rewrite the file with replaced text and unchanged texts.
+     * @param name The description of the task that is marked as done
+     * @throws IOException throw the IOException when the program successfully opened
+     * the file, but is unable to read the duke.txt file
+     */
     public static void replaceTXT(String name) throws IOException {
-        File file = new File("C:/Users/XPS/Desktop/Uni drives me crazy/Y2S2/NUS exchange/CS2113 Software Engineering/ip/duke.txt");
+        File file = new File("C:/duke.txt");
         BufferedReader reader = new BufferedReader(new FileReader(file));
         String line = "";
         String oldtext = "";
@@ -21,9 +41,9 @@ public class Storage {
             oldtext += line + "\r\n";
         }
         reader.close();
-        String replacedtext = oldtext.replace("0 | " + name , "1 | " + name);
-        FileWriter writer = new FileWriter("C:/Users/XPS/Desktop/Uni drives me crazy/Y2S2/NUS exchange/CS2113 Software Engineering/ip/duke.txt");
-        writer.write(replacedtext);
+        String replaced_text = oldtext.replace("0 | " + name , "1 | " + name);
+        FileWriter writer = new FileWriter("C:/duke.txt");
+        writer.write(replaced_text);
         writer.close();
     }
 

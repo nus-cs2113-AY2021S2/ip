@@ -13,9 +13,19 @@ public class Task {
         this.description = description;
     }
     public String getDescription() {return description;}
+
+    /**
+     * formulate the complete task description in task list
+     * @return the task status and description in the task list
+     */
     public String toString(){
         return "[" + getStatusIcon() + "] " + description;
     }
+
+    /**
+     * return the task status icon, either ✓(Done=True) or X(Not Done=False)
+     * @return the respective status icon
+     */
     public String getStatusIcon() {
         return (isDone ? "✓" : "✘"); //return ✓ or X symbols
     }
@@ -25,6 +35,11 @@ public class Task {
     public char getTaskType(){
         return taskType;
     }
+
+    /**
+     * change the task status
+     * @param Done set the done status of a task to be true/false
+     */
     public void setTaskStatus(boolean Done){
         this.isDone = Done;
     }
