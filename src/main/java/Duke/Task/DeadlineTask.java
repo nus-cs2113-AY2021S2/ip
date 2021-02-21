@@ -1,5 +1,9 @@
 package Duke.Task;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
 public class DeadlineTask extends Task {
 
     protected String time;
@@ -11,16 +15,21 @@ public class DeadlineTask extends Task {
 
     @Override
     public String getTaskTime() {
-        return time;
+        try {
+            LocalDate d1 = LocalDate.parse(time);
+            return d1.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        } catch (Exception e) {
+            return time;
+        }
     }
 
     @Override
     public String getTaskType() {
-        return "D";
+        return "[D]";
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + time + ")";
+        return getTaskType() + super.toString() + " (by: " + getTaskTime() + ")";
     }
 }

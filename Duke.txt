@@ -1,0 +1,9 @@
+[E]|true|1|1
+[E]|false|1|2019-02-2
+[E]|false|1|Jan 1 2020
+[E]|false|1|2020-02-2
+[E]|false|1|2022-01-2
+[E]|false|2|Jan 1 2020
+[E]|true|1|Jan 1 2020
+[D]|false|haha|1
+[T]|false|hahaaja 1

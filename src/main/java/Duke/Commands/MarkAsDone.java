@@ -1,4 +1,4 @@
-package Duke.Functions;
+package Duke.Commands;
 
 import Duke.Duke;
 import Duke.Exceptions.DukeException;
@@ -10,12 +10,12 @@ public class MarkAsDone extends Duke {
             if (doneTaskIndex < taskCount && doneTaskIndex >= 0) {
                 System.out.println(" Yay! This task is done!");
                 lists.get(doneTaskIndex).markAsDone();
-                printList(doneTaskIndex, doneTaskIndex + 1);
+                PrintList.printList(doneTaskIndex, doneTaskIndex + 1);
             } else {
                 DukeException.exceedListLength(doneTaskIndex + 1);
             }
         } catch (Exception e) {
-            DukeException.doneWithoutNo();
+            DukeException.noIndexInput();
         }
     }
 }
