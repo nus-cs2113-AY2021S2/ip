@@ -82,10 +82,7 @@ public class Duke {
                     int slash_sign = task.indexOf("/");
                     String ddl_taskName = task.substring(DEADLINE_INDEX, slash_sign - 1);
                     String by = task.substring(slash_sign + BY_AT_INDEX);
-                    if (by.contains("-")) {
-                        LocalDate date = LocalDate.parse(by);
-                        by = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-                    }
+                    if (by.contains("-")) { Parser.parseDate(by); }
                     tasks[index] = new Deadline(ddl_taskName, 'D', by);
                     index = tl.addTaskMessage(index, tasks[index]);
                     String textToAppend = "D | 0 | " + ddl_taskName + " | " + by;
