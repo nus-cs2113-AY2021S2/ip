@@ -21,4 +21,5 @@ public class Messages {
     public static final String EVENT_EMPTY_TIME_MESSAGE = "Event missing!";
     public static final String TASK_DOES_NOT_EXIST = "Task does not exist!";
     public static final String INDEX_NUMBER_INPUT_MESSAGE = "Please input a valid number!";
+    public static final String INVALID_DATETIME_MESSAGE = "Use valid date time (yyyy-mm-dd hh.mm)";
 }
