@@ -20,6 +20,9 @@ public class Storage {
      * @param tasks Tasks in memory.
      */
     public static void save(List<Task> tasks) {
+        if (tasks == null) {
+            tasks = new ArrayList<>();
+        }
         try {
             FileWriter fw = new FileWriter(filePath);
             for (Task task : tasks) {

@@ -6,7 +6,6 @@ import java.util.Scanner;
 
 import duke.common.Messages;
 import duke.parser.Parser;
-import duke.storage.Storage;
 import duke.ui.Ui;
 
 public class Duke {
@@ -21,7 +20,6 @@ public class Duke {
     }
 
     private static void greetUser() {
-        Storage.read();
         List<String> messages = new ArrayList<>();
         messages.add(Messages.HELLO_MESSAGE);
         messages.add(Messages.ASSIST_MESSAGE);
