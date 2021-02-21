@@ -21,6 +21,8 @@ public class Parser {
             command = new DoneCommand(line);
         } else if (line.startsWith("delete")) {
             command = new DeleteCommand(line);
+        } else if (line.startsWith("find")) {
+            command = new FindCommand(line);
         } else {
             throw new InvalidCommandException();
         }
