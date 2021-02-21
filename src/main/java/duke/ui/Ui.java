@@ -1,4 +1,4 @@
-package duke;
+package duke.ui;
 
 import duke.task.Task;
 
@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
+
+    public static final String DIVIDER_LINE = "---------------------------------------------------------";
 
     private Scanner in;
 
@@ -17,6 +19,10 @@ public class Ui {
         return in.nextLine();
     }
 
+    public void showLine() {
+        System.out.println(DIVIDER_LINE);
+    }
+
     public void greet() {
         String logo = " ____        _\n"
                 + "|  _ \\ _   _| | _____\n"
@@ -24,17 +30,15 @@ public class Ui {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
-        System.out.println("---------------------------------------------------------");
+        System.out.println(DIVIDER_LINE);
         System.out.println(logo);
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
-        System.out.println("---------------------------------------------------------");
+        System.out.println(DIVIDER_LINE);
     }
 
     public void bidGoodbye() {
-        System.out.println("---------------------------------------------------------");
         System.out.println("Bye. Hope to see you again soon!");
-        System.out.println("---------------------------------------------------------");
     }
 
     /**
@@ -57,6 +61,10 @@ public class Ui {
         System.out.println("Got it. I've added this task:");
         System.out.println(tasks.get(tasks.size() - 1).toString());
         System.out.println("Now you have " + tasks.size() + " tasks in the list");
+    }
+
+    public void printInvalidCommandMessage() {
+        System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
 

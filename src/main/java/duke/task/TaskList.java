@@ -1,10 +1,6 @@
-package duke;
+package duke.task;
 
-
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
+import duke.ui.Ui;
 
 import java.util.ArrayList;
 
@@ -23,6 +19,10 @@ public class TaskList {
 
     public ArrayList<Task> getTasks() {
         return this.tasks;
+    }
+
+    public void printList() {
+        ui.printList(tasks);
     }
 
 
