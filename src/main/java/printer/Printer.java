@@ -3,10 +3,16 @@ package printer;
 import constant.Constant;
 import task.TaskHandler;
 
+/**
+ * Printer class for handling the UI.
+ */
 public class Printer {
     private static final Constant constant = new Constant();
     private static final TaskHandler taskHandler = new TaskHandler();
 
+    /**
+     * Prints the welcome message.
+     */
     public static void printWelcomeMessage() {
         String logo = "           ____\n" +
                 "       _.-'78o `\"`--._\n" +
@@ -31,35 +37,56 @@ public class Printer {
         System.out.println(constant.DIVIDER_LINE);
     }
 
+    /**
+     * Prints the exit message.
+     */
     public static void printExitMessage() {
         System.out.println(constant.DIVIDER_LINE);
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println(constant.DIVIDER_LINE);
     }
 
+    /**
+     * Prints the invalid command.
+     *
+     * @param invalidUserInput is the input from the console terminal entered by the user.
+     */
     public static void printTaskWarningMessage(String invalidUserInput) {
         System.out.println(constant.DIVIDER_LINE);
         System.out.println("Invalid command: " + invalidUserInput);
     }
 
+    /**
+     * Prints the task added to the list.
+     *
+     * @param index is the index of the task in the task list.
+     */
     public static void printAddedTask(int index) {
         System.out.println("Got it. I've added this task:");
         printTaskDetails(index);
         System.out.println("Now you have " + (index + 1) + " tasks in the list.");
     }
 
+    /**
+     * Prints all the task found in the task list.
+     */
     public static void printEntireCollection() {
         if (taskHandler.getTaskCount() == 0) {
             System.out.println("You have no item in Mushroom Head list!");
         } else {
             System.out.println(constant.LIST_STARTING_MESSAGE);
             for (int i = 0; i < taskHandler.getTaskCount(); i++) {
-                System.out.print(i + 1 + ".");
+                System.out.print((i + 1) + ".");
                 printTaskDetails(i);
             }
         }
     }
 
+    /**
+     * Prints the task details such as type, completion status and description.
+     *
+     * @param index is the index of the task in the task list.
+     */
     public static void printTaskDetails(int index) {
         printTaskSymbol(index);
         printTaskCompletionStatus(index);
@@ -68,14 +95,29 @@ public class Printer {
         System.out.println(taskHandler.extractTaskTiming(index));
     }
 
+    /**
+     * Prints the task type.
+     *
+     * @param index is the index of the task in the task list.
+     */
     private static void printTaskSymbol(int index) {
         System.out.print("[" + taskHandler.extractTaskSymbol(index) + "]");
     }
 
+    /**
+     * Prints the task completion status.
+     *
+     * @param index is the index of the task in the task list.
+     */
     private static void printTaskCompletionStatus(int index) {
         System.out.print("[" + taskHandler.extractTaskStatus(index) + "]");
     }
 
+    /**
+     * Prints the task description.
+     *
+     * @param index is the index of the task in the task list.
+     */
     private static void printTaskDescription(int index) {
         System.out.print(taskHandler.extractTaskDescription(index));
     }
