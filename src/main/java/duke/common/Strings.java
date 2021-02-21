@@ -1,13 +1,6 @@
 package duke.common;
 
 public class Strings {
-    public static final String HORIZONTAL_LINE = "    ___________________________________________";
-    public static final String HELLO_MESSAGE = "Hello! I'm Duke";
-    public static final String ASSIST_MESSAGE = "What can I do for you?";
-    public static final String BYE_MESSAGE = "Bye. Hope to see you again soon!";
-    public static final String DONE_MESSAGE = "Nice! I've marked this task as done:";
-    public static final String ADDED_MESSAGE = "Got it. I've added this task:";
-    public static final String DELETED_MESSAGE = "Noted. I've removed this task:";
     public static final String BYE = "bye";
     public static final String LIST = "list";
     public static final String DONE = "done";
@@ -15,6 +8,14 @@ public class Strings {
     public static final String DEADLINE = "deadline";
     public static final String EVENT = "event";
     public static final String DELETE = "delete";
+
+    public static final String HORIZONTAL_LINE = "    ___________________________________________";
+    public static final String HELLO_MESSAGE = "Hello! I'm Duke";
+    public static final String ASSIST_MESSAGE = "What can I do for you?";
+    public static final String BYE_MESSAGE = "Bye. Hope to see you again soon!";
+    public static final String DONE_MESSAGE = "Nice! I've marked this task as done:";
+    public static final String ADDED_MESSAGE = "Got it. I've added this task:";
+    public static final String DELETED_MESSAGE = "Noted. I've removed this task:";
 
     public static final String INTERNAL_ERROR_MESSAGE = "Duke has malfunctioned...";
     public static final String INVALID_COMMAND_MESSAGE = "Do not understand your command.";
