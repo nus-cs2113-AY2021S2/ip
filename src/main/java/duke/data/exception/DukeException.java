@@ -39,6 +39,8 @@ public class DukeException extends Exception {
             return Messages.TASK_DOES_NOT_EXIST;
         case INDEX_FORMAT_ERROR:
             return Messages.INDEX_NUMBER_INPUT_MESSAGE;
+        case EMPTY_KEYWORD:
+            return Messages.EMPTY_KEYWORD_MESSAGE;
         }
         return Messages.INTERNAL_ERROR_MESSAGE;
     }
