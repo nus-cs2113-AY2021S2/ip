@@ -26,6 +26,6 @@ public class FindCommand extends Command {
                 result.add(task);
             }
         }
-        ui.printTaskList(result);
+        ui.printTaskList(result, " related to '" + needle + "'");
     }
 }
