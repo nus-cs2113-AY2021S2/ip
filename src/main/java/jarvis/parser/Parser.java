@@ -1,4 +1,4 @@
-package jarvis;
+package jarvis.parser;
 
 import jarvis.task.Deadline;
 import jarvis.task.Event;
