@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Contains all Duke Commands encoded as 4 digit integers.
+ */
 public class DukeCommands {
     public static final int INVALID_COMMAND = 6386;
     public static final int LIST = 2535;
