@@ -9,15 +9,19 @@ import java.util.regex.Pattern;
 
 public class DateTimeFormatter {
     private static final Pattern datePattern = Pattern.compile("\\d{4}-\\d{2}-\\d{2}");
-    private static final Pattern timePattern = Pattern.compile("\\d{2}.\\d{2}");
+    private static final Pattern deadlineTimePattern = Pattern.compile("\\d{2}.\\d{2}");
+    private static final Pattern eventTimePattern = Pattern.compile("\\d{2}.\\d{2}-\\d{2}.\\d{2}");
 
     /**
      * Format given deadline and events into standardized patterns.
      * @param dateTime Deadline / Event date and time.
+     * @param isEvent True if is event, false if is deadline
      * @return YYYY-MM-DD, HH.MM AmPm
      * @throws DateTimeException When date / time not given or is an invalid date / time.
      */
-    public static String deriveDateTime(String dateTime) throws DateTimeException {
+    public static String deriveDateTime(
+        String dateTime, boolean isEvent) throws DateTimeException {
+
         Matcher dateMatcher = datePattern.matcher(dateTime);
         if (!dateMatcher.find()) {
             throw new DateTimeException("No matching date format");
@@ -29,7 +33,19 @@ public class DateTimeFormatter {
         String year = Integer.toString(date.getYear());
 
         String timeString = dateTime.replaceAll(dateMatcher.group(), "");
-        Matcher timeMatcher = timePattern.matcher(timeString);
+        String time = "";
+        if (isEvent) {
+            time = deriveEvent(timeString);
+        }
+
+        if (!isEvent) {
+            time = deriveDeadline(timeString);
+        }
+        return String.format("%s %s %s, %s", month, day, year, time);
+    }
+
+    private static String deriveDeadline(String deadline) throws DateTimeException {
+        Matcher timeMatcher = deadlineTimePattern.matcher(deadline);
         if (!timeMatcher.find()) {
             throw new DateTimeException("No matching time format");
         }
@@ -37,8 +53,25 @@ public class DateTimeFormatter {
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH.mm");
         try{
             SimpleDateFormat twelveHourTimeFormat = new SimpleDateFormat("hh.mm aa");
-            String time = twelveHourTimeFormat.format(timeFormat.parse(timeString));
-            return String.format("%s %s %s, %s", month, day, year, time);
+            return twelveHourTimeFormat.format(timeFormat.parse(deadline));
+        } catch (ParseException e){
+            throw new DateTimeException("Invalid time given");
+        }
+    }
+
+    private static String deriveEvent(String event) throws DateTimeException {
+        Matcher timeMatcher = eventTimePattern.matcher(event);
+        if (!timeMatcher.find()) {
+            throw new DateTimeException("No matching time format");
+        }
+
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH.mm");
+        String[] eventTimes = event.split("-");
+        try{
+            SimpleDateFormat twelveHourTimeFormat = new SimpleDateFormat("hh.mm aa");
+            String eventStart = twelveHourTimeFormat.format(timeFormat.parse(eventTimes[0]));
+            String eventEnd = twelveHourTimeFormat.format(timeFormat.parse(eventTimes[1]));
+            return eventStart + " - " + eventEnd;
         } catch (ParseException e){
             throw new DateTimeException("Invalid time given");
         }

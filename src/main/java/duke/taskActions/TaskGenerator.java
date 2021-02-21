@@ -1,11 +1,9 @@
 package duke.taskActions;
 
-import java.time.DateTimeException;
-
 import duke.data.Deadline;
-import duke.data.exception.DukeException;
 import duke.data.Event;
 import duke.data.Todo;
+import duke.data.exception.DukeException;
 import duke.data.exception.DukeExceptionKey;
 
 public class TaskGenerator {
@@ -36,12 +34,10 @@ public class TaskGenerator {
         try {
             String[] deadlineTask = details.split(" /by ");
             String description = deadlineTask[0].trim();
-            String deadline = DateTimeFormatter.deriveDateTime(deadlineTask[1].trim());
+            String deadline = deadlineTask[1].trim();
             return new Deadline(description, false, deadline);
         } catch (ArrayIndexOutOfBoundsException exception) {
             throw new DukeException(DukeExceptionKey.EMPTY_DEADLINE_TIME);
-        } catch (DateTimeException dateTimeException) {
-            throw new DukeException(DukeExceptionKey.INVALID_DATETIME);
         }
     }
 
@@ -58,12 +54,10 @@ public class TaskGenerator {
         try {
             String[] eventTask = details.split(" /at ");
             String description = eventTask[0].trim();
-            String event = DateTimeFormatter.deriveDateTime(eventTask[1].trim());
+            String event = eventTask[1].trim();
             return new Event(description, false, event);
         } catch (ArrayIndexOutOfBoundsException exception) {
             throw new DukeException(DukeExceptionKey.EMPTY_EVENT_TIME);
-        } catch (DateTimeException dateTimeException) {
-            throw new DukeException(DukeExceptionKey.INVALID_DATETIME);
         }
     }
 }
