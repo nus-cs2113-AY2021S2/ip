@@ -1,4 +1,5 @@
 import java.io.*;
+import java.io.File;
 
 public class Storage {
     private final String filePath;
@@ -10,6 +11,7 @@ public class Storage {
     public Storage(String filePath) {
         this.filePath = filePath;
     }
+
 
     /**
      * Crate a FileWriter object that appends to the file Duke.txt
@@ -33,7 +35,7 @@ public class Storage {
      * the file, but is unable to read the duke.txt file
      */
     public static void replaceTXT(String name) throws IOException {
-        File file = new File("C:/duke.txt");
+        File file = new File("C:/Users/XPS/Desktop/duke.txt");
         BufferedReader reader = new BufferedReader(new FileReader(file));
         String line = "";
         String oldtext = "";
@@ -42,7 +44,7 @@ public class Storage {
         }
         reader.close();
         String replaced_text = oldtext.replace("0 | " + name , "1 | " + name);
-        FileWriter writer = new FileWriter("C:/duke.txt");
+        FileWriter writer = new FileWriter("C:/Users/XPS/Desktop/duke.txt");
         writer.write(replaced_text);
         writer.close();
     }

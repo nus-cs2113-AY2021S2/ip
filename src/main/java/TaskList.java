@@ -78,11 +78,15 @@ public class TaskList {
      * @param tasks the original task list that the use has inputted so far
      */
     protected static void findTasks(int index, String keyword, Task[] tasks) {
-        System.out.println("Here are the matching tasks in your list: ");
-        for (int i = 0; i < index; i++) {
-            if (tasks[i].getDescription().contains(keyword)) {
-                System.out.println((i + 1) + "." + tasks[i].toString());
+        try {
+            System.out.println("Here are the matching tasks in your list: ");
+            for (int i = 0; i < index; i++) {
+                if (tasks[i].toString().contains(keyword)) {
+                    System.out.println((i + 1) + "." + tasks[i].toString());
+                }
             }
+        } catch (NullPointerException e) {
+            //
         }
     }
 }
