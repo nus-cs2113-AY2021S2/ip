@@ -1,8 +1,10 @@
 package duke.command;
 
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 
+import duke.DateTime;
 import duke.TaskList;
 import duke.Ui;
 import duke.exception.InvalidInputException;
@@ -19,10 +21,14 @@ public class DeadlineCommand extends Command {
     public void execute() throws InvalidInputException, IOException, SaveException {
         String by = arguments.get("by");
         if (by == null || by.length() == 0) {
-            // Either /at is not found at all, or no dates are following /at
+            // Either /by is not found at all, or no dates are following /by
             throw new InvalidInputException(InputExceptionType.NO_BY_DATE);
         }
-        tasks.addTask(new Deadline(arguments.get("payload"), by));
-        ui.printNewTask(tasks);
+        try {
+            tasks.addTask(new Deadline(arguments.get("payload"), new DateTime(by)));
+            ui.printNewTask(tasks);
+        } catch (DateTimeParseException e) {
+            throw new InvalidInputException(InputExceptionType.MALFORMED_DATE);
+        }
     }
 }

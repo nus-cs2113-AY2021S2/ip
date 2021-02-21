@@ -2,6 +2,7 @@ package duke;
 
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 import duke.command.Command;
@@ -9,7 +10,7 @@ import duke.exception.InvalidInputException;
 import duke.exception.InvalidInputException.InputExceptionType;
 
 public class Parser {
-    // Delimiter for tokenization is a single whitespace
+    // Delimiter for string join is a single whitespace (for string split, it is any number of whitespaces)
     public static final String DELIMITER = " ";
 
     protected Ui ui;
@@ -22,7 +23,11 @@ public class Parser {
 
     public Command parse(String fullCommand) throws InvalidInputException {
         HashMap<String, String> arguments = new HashMap<>();
-        String[] tokens = fullCommand.split(DELIMITER);
+        String[] tokens = fullCommand.split("\\s+");
+        // If first token (command) is empty, there are empty spaces typed in at the front - so we remove it
+        if (tokens[0].isEmpty()) {
+            tokens = Arrays.copyOfRange(tokens, 1, tokens.length);
+        }
         if (tokens.length == 0) {
             throw new InvalidInputException(InputExceptionType.UNKNOWN_COMMAND);
         }

@@ -1,11 +1,14 @@
 todo
 todo Task A
 list
-event Event A /at 1 Apr 2021
+event Event A /at 01/04/2021 10:00
+event Event A-2 /at 01/04/2021
+event Event A-3 /at Some_Malformed_Date
+delete 3
 event Event B Missing 'at' Type A
 event Event B Missing 'at' Type B /at
 list
-deadline Deadline A /by 1 Aug 2021
+deadline Deadline A /by 01/08/2021
 deadline Deadline B Missing 'by' Type A
 deadline Deadline B Missing 'by' Type B /by
 list
@@ -25,6 +28,8 @@ delete -1
 delete Not_A_Number
 delete 1000
 list
+searchdate 01/08/2021
+searchdate 01/04/2021
 delete 1
 delete 2
 delete 1
