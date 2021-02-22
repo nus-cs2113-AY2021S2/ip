@@ -1,4 +1,4 @@
-# Duke project template
+# Duke User Guide
 
 This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
 
@@ -24,3 +24,14 @@ Prerequisites: JDK 11, update IntelliJ to the most recent version.
    | |_| | |_| |   <  __/
    |____/ \__,_|_|\_\___|
    ```
+### User guide
+#### Features
+1. **todo** --> to add a *todo* task into a task list, no date/time needed.
+2. **event** --> to add a *event* task into a task list, date/time needs to be specified in the format of [event description]/at [date/time].
+3. **deadline** --> to add a *deadline* task into a task list, date/time needs to be specified in the format of [deadline description]/by [date/time],
+4. **delete** --> to delete a task in the task list that the user previously added in. Format: delete [task number].
+5. **done** --> to mark a task as done, this will be reflected as a tick. Format: done [task number].
+6. **list** --> to list out all available tasks that the user has added inside.
+7. **find** --> to search for all tasks in the list and find the task that contains the user's input keyword. Format: find [keyword].
+8. **bye** --> to end the program 
+
