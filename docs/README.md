@@ -24,6 +24,7 @@ Format: list
 Marks an exisitng task as completed.
 
 Format: done x
+
 Example: 
 * done 1
 
@@ -31,6 +32,7 @@ Example:
 Deletes an existing task.
 
 Format: delete x
+
 Example: 
 * delete 2
 
@@ -38,6 +40,7 @@ Example:
 Finds tasks which the task descriptions contain a particular keyword.
 
 Format: find keyword:
+
 Example:
 * find task 3
 
@@ -45,6 +48,7 @@ Example:
 Adds a task without a specific deadline or duration.
 
 Format: todo TASK_DESCRIPTION
+
 Example:
 * todo book out on sunday
 
@@ -52,6 +56,7 @@ Example:
 Adds a task with a specific deadline.
 
 Format: deadline TASK_DESCRIPTION /KEYWORD DATE_TIME_DESCRIPTION
+
 Example:
 * deadline Finish ip /by tmr at 23:59 
 * deadline I must finish my IP /by tmr
@@ -60,6 +65,7 @@ Example:
 Adds a task with a specific duration.
 
 Format: event TASK_DESCRIPTION /KEYWORD DATE_TIME_DESCRIPTION
+
 Example:
 * event CS2113 meeting /from 2/22/2021 2pm to 3pm
 * event meeting /from 2-3
@@ -74,48 +80,76 @@ Format: bye
 Here is a short demonstration on how to use the prorgam.
 
 **todo sample task 1**
+
 Got it. I've added this task:
+
   [T][0] sample task 1
+  
 Now you have 1 tasks in the list.
 
+
 **event sample task 2 /from xxx-xxx**
+
 Got it. I've added this task:
+
   [E][0] sample task 2  (from: xxx-xxx)
+  
 Now you have 2 tasks in the list.
 
+
 **deadline sample task 3 /by xxx**
+
 Got it. I've added this task:
+
   [D][0] sample task 3  (by: xxx)
+  
 Now you have 3 tasks in the list.
 
+
 **list**
+
 1.[T][0] sample task 1
 2.[E][0] sample task 2  (from: xxx-xxx)
 3.[D][0] sample task 3  (by: xxx)
 
+
 **done 1**
+
 Nice! I've marked this task as done: 
+
 [1] todo sample task 1
 
 **list**
+
 1.[T][1] sample task 1
 2.[E][0] sample task 2  (from: xxx-xxx)
 3.[D][0] sample task 3  (by: xxx)
 
+
 **delete 2**
+
 Noted. I've removed this task:
+
   [0] event sample task 2
+  
 Now you have 2 tasks in the list.
 
+
 **list**
+
 1.[T][1] sample task 1
 2.[D][0] sample task 3  (by: xxx)
 
+
 **find task 3**
+
 Here are the matching tasks in your list:
+
 2.[D][0] sample task 3  (by: xxx)
 
+
 **bye**
+
 Bye. Hope to see you again soon!
 
 
