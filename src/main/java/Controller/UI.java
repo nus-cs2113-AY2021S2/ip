@@ -100,6 +100,7 @@ public class UI {
             strings = parse.processInput(input);
 
         } while (!input.equals("bye"));
+
         System.out.println("--------------------------------------------");
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println("--------------------------------------------");
