@@ -13,8 +13,6 @@ Duke is a personal assistant chatbot that helps a person to keep track of variou
 
 ## Features
 
-Below contains both the a description of all the program features and a demonstration of using the program .
-
 ### Listing all tasks: list
 Shows a list of all tasks in Duke.
 Format: list
