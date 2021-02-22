@@ -1,7 +1,8 @@
-import CommandParser.Parser;
-import FileStorage.Storage;
-import UserInterface.UI;
+import command.parser.Parser;
+import file.storage.Storage;
+import ui.UI;
 import list.*;
+import task.list.TaskList;
 
 import java.util.ArrayList;
 

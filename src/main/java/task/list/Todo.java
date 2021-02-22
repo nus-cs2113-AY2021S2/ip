@@ -1,4 +1,4 @@
-package list;
+package task.list;
 
 public class Todo extends TaskList {
 

@@ -1,6 +1,6 @@
-package list;
+package task.list;
 
-import UserInterface.UI;
+import ui.UI;
 import exceptions.IllegalTaskRedoException;
 
 public class TaskList {

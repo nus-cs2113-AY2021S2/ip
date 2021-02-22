@@ -1,16 +1,16 @@
-package FileStorage;
+package file.storage;
 import exceptions.IllegalListException;
-import UserInterface.UI;
-import list.Deadline;
-import list.Event;
-import list.TaskList;
-import list.Todo;
+import ui.UI;
+import task.list.Deadline;
+import task.list.Event;
+import task.list.TaskList;
+import task.list.Todo;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import CommandParser.Parser;
+import command.parser.Parser;
 
 public class Storage {
 

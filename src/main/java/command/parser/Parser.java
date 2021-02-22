@@ -1,15 +1,15 @@
-package CommandParser;
+package command.parser;
 
-import FileStorage.Storage;
-import UserInterface.UI;
+import file.storage.Storage;
+import ui.UI;
 import exceptions.IllegalCommandException;
 import exceptions.IllegalListException;
 import exceptions.IllegalTaskException;
 import exceptions.IllegalTaskRedoException;
-import list.Deadline;
-import list.Event;
-import list.TaskList;
-import list.Todo;
+import task.list.Deadline;
+import task.list.Event;
+import task.list.TaskList;
+import task.list.Todo;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -34,7 +34,7 @@ public class Parser {
         case "bye":
             exit(tasks);
             return false;
-        case "list":
+        case "task/list":
             try {
                 printAllLists(tasks);
             } catch (IllegalListException e) {

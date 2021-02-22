@@ -1,4 +1,4 @@
-package list;
+package task.list;
 
 public class Deadline extends Todo {
     private static final String TASK_TITLE = "D";

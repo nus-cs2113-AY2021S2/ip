@@ -1,6 +1,6 @@
-package UserInterface;
+package ui;
 
-import list.TaskList;
+import task.list.TaskList;
 
 import java.util.ArrayList;
 
