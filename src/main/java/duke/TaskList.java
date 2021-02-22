@@ -1,12 +1,6 @@
 package duke;
 
-import duke.error.EmptyNameFieldException;
-import duke.error.IllegalAccessException;
-import duke.error.WrongFormatException;
-import duke.task.Deadline;
-import duke.task.Event;
 import duke.task.Task;
-import duke.task.Todo;
 
 import java.util.ArrayList;
 

@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.TaskList;
 import duke.Ui;
+import duke.error.EmptyDateException;
 import duke.error.EmptyNameFieldException;
 import duke.error.WrongFormatException;
 import duke.task.Deadline;
@@ -9,11 +10,18 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class AddCommand extends Command {
+    private static final int ERR_NO_DATE = -5;
     private static final int ERR_NO_NAME = -4;
     private static final int ERR_WRONG_FORMAT_MESSAGE = -2;
+    private static final int ERR_WRONG_DATE_FORMAT = -1;
     private static final int ADD_TODO = 4;
     private static final int ADD_DEADLINE = 5;
     private static final int ADD_EVENT = 6;
@@ -58,6 +66,10 @@ public class AddCommand extends Command {
             ui.printError(ERR_WRONG_FORMAT_MESSAGE);
         } catch (EmptyNameFieldException e) {
             ui.printError(ERR_NO_NAME);
+        } catch (EmptyDateException | ArrayIndexOutOfBoundsException e) {
+            ui.printError(ERR_NO_DATE);
+        } catch (DateTimeException e) {
+            ui.printError(ERR_WRONG_DATE_FORMAT);
         }
     }
     /**
@@ -79,50 +91,132 @@ public class AddCommand extends Command {
         }
         throw new WrongFormatException();
     }
+
+    /**
+     * Adds a task of type Todo into the list after checking validity of the input.
+     *
+     * @param line user input.
+     * @param tasks ArrayList containing all tasks.
+     * @throws EmptyNameFieldException if task name is not given.
+     */
     public void addTodo(String line, ArrayList<Task> tasks) throws EmptyNameFieldException {
-        if (line.length() < 6) {
-            throw new EmptyNameFieldException();
-        }
+        validateTodo(line);
         int current = Task.totalNumberOfTasks;
         String nameOfTask = line.substring(5);
         tasks.add(new Todo(nameOfTask));
         Task.totalNumberOfTasks += 1;
         this.ui.printAddedToList(current, tasks);
     }
-    public void addDeadline(String line, ArrayList<Task> tasks) throws EmptyNameFieldException, WrongFormatException {
-        if (line.length() < 10) {
+
+    /**
+     * Validates user input for task type Todo.
+     *
+     * @param line user input.
+     * @throws EmptyNameFieldException if task name is not given or all whitespace.
+     */
+    public void validateTodo(String line) throws EmptyNameFieldException {
+        // Checks if name field is blank or all whitespace
+        if (line.length() < 6 || line.substring(5).trim().length() == 0) {
             throw new EmptyNameFieldException();
-        }
-        if (line.contains("/by")) {
-            int current = Task.totalNumberOfTasks;
-            // Details of task starts at index 9 of input
-            String nameAndDeadline = line.substring(9);
-            String[] split = nameAndDeadline.split(" /by ");
-            String name = split[0];
-            String deadline = split[1];
-            tasks.add(new Deadline(name, deadline));
-            Task.totalNumberOfTasks += 1;
-            this.ui.printAddedToList(current, tasks);
-        } else {
-            throw new WrongFormatException();
         }
     }
-    public void addEvent(String nameOfTask, ArrayList<Task> tasks) throws EmptyNameFieldException, WrongFormatException {
-        if (nameOfTask.length() < 7) {
-            throw new EmptyNameFieldException();
-        }
-        if (nameOfTask.contains("/at")) {
-            int current = Task.totalNumberOfTasks;
-            // Details of task starts at index 6 of input
-            String nameAndTime = nameOfTask.substring(6);
-            String[] split = nameAndTime.split(" /at ");
-            String name = split[0];
-            String time = split[1];
-            tasks.add(new Event(name, time));
-            Task.totalNumberOfTasks += 1;
-            this.ui.printAddedToList(current, tasks);
-        } else {
+
+    /**
+     * Adds a task of type deadline into the list after checking validity of input.
+     *
+     * @param line user input.
+     * @param tasks ArrayList of tasks.
+     * @throws EmptyNameFieldException if task name is not given or all whitespace.
+     * @throws WrongFormatException if task name does not contain substring "/by"
+     * @throws EmptyDateException if date is not given or full of whitespace.
+     * @throws DateTimeException if date given cannot be parsed as LocalDate.
+     * @throws ArrayIndexOutOfBoundsException if there is nothing after the "/by".
+     */
+    public void addDeadline(String line, ArrayList<Task> tasks) throws EmptyNameFieldException,
+            WrongFormatException, EmptyDateException, DateTimeException, ArrayIndexOutOfBoundsException {
+        String[] components = extractDeadlineComponents(line);
+        int current = Task.totalNumberOfTasks;
+        tasks.add(new Deadline(components[0], components[1]));
+        Task.totalNumberOfTasks += 1;
+        this.ui.printAddedToList(current, tasks);
+    }
+
+    /**
+     * Extracts the name and date of the deadline after validating input.
+     * @param line user input.
+     * @return split, a string array with 2 elements: name and date.
+     * @throws EmptyNameFieldException if task name is not given or is all whitespace.
+     * @throws WrongFormatException if task name does not contain substring "/by"
+     * @throws EmptyDateException if date is not given or is all whitespace.
+     * @throws DateTimeException if date given cannot be parsed as LocalDate.
+     * @throws ArrayIndexOutOfBoundsException if there is nothing after the "/by".
+     */
+    public String[] extractDeadlineComponents(String line) throws EmptyNameFieldException,
+            WrongFormatException, EmptyDateException, DateTimeException, ArrayIndexOutOfBoundsException {
+        if (!line.contains("/by")) {
             throw new WrongFormatException();
         }
+        String nameAndDate = line.substring(9);
+        String[] split = nameAndDate.split(" /by ");
+        String name = split[0];
+        String date = split[1];
+        if (name.trim().length() == 0) {
+            throw new EmptyNameFieldException();
+        }
+        if(date.trim().length() == 0) {
+            throw new EmptyDateException();
+        }
+        LocalDate.parse(date);
+        return split;
+    }
+
+    /**
+     * Adds a task of type event into the list after checking validity of input.
+     *
+     * @param line user input.
+     * @param tasks ArrayList of tasks.
+     * @throws EmptyNameFieldException if task name is not given or all whitespace.
+     * @throws WrongFormatException if input does not contain substring "/at".
+     * @throws EmptyDateException if date is not given or all whitespace.
+     * @throws DateTimeException if date cannot be parsed as LocalDate.
+     * @throws ArrayIndexOutOfBoundsException if there is nothing after the "/by".
+     */
+    public void addEvent(String line, ArrayList<Task> tasks) throws EmptyNameFieldException,
+            WrongFormatException, EmptyDateException, DateTimeException, ArrayIndexOutOfBoundsException {
+        String[] components = extractEventComponents(line);
+        int current = Task.totalNumberOfTasks;
+        tasks.add(new Event(components[0], components[1]));
+        Task.totalNumberOfTasks += 1;
+        this.ui.printAddedToList(current, tasks);
+    }
+
+    /**
+     * Extracts name and date of task after checking validity of input.
+     *
+     * @param line user input.
+     * @return split, a String array with 2 elements: name and date.
+     * @throws WrongFormatException if task does not contain substring "/at".
+     * @throws EmptyNameFieldException if task name is not given or all whitespace.
+     * @throws EmptyDateException if date is not given or all whitespace.
+     * @throws DateTimeException if date cannot be parsed as LocalDate.
+     * @throws ArrayIndexOutOfBoundsException if there is nothing after the "/at".
+     */
+    public String[] extractEventComponents(String line) throws WrongFormatException,
+            EmptyNameFieldException, EmptyDateException, DateTimeException, ArrayIndexOutOfBoundsException {
+        if (!line.contains("/at")) {
+            throw new WrongFormatException();
+        }
+        String nameAndDate = line.substring(6);
+        String[] split = nameAndDate.split(" /at ");
+        String name = split[0];
+        String date = split[1];
+        if (name.trim().length() == 0) {
+            throw new EmptyNameFieldException();
+        }
+        if(date.trim().length() == 0) {
+            throw new EmptyDateException();
+        }
+        LocalDate.parse(date);
+        return split;
     }
 }

@@ -6,18 +6,20 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
-    private static final int ERR_MAX_CAPACITY = -5;
+    private static final int ERR_NO_DATE = -5;
     private static final int ERR_NO_NAME = -4;
     private static final int ERR_OUT_OF_BOUNDS_MESSAGE = -3;
     private static final int ERR_WRONG_FORMAT_MESSAGE = -2;
+    private static final int ERR_WRONG_DATE_FORMAT = -1;
 
     private static final String GREETING_MESSAGE = "Wagwan! I is Ali G. West side.\nWhat is we chattin' bout today?";
     private static final String GOODBYE_MESSAGE = "Goodbye, big up yourself, keep it real, respekt.";
     private static final String BORDER_LINE = "___________________________________________________________";
     private static final String OUT_OF_BOUNDS_MESSAGE = "You are accessing something that doesn't exist! Stop being an ignoranus.";
-    private static final String WRONG_FORMAT_MESSAGE = "Are you spasticated? The format is wrong!";
+    private static final String WRONG_FORMAT_MESSAGE = "I don't think you are cleverer enough to know that the format is wrong!";
     private static final String NO_NAME_MESSAGE = "Why you be trying to find something with no name? Ave' you been smoking me special stash?";
-    private static final String EXCEED_CAPACITY_MESSAGE = "Maximum capacity reached";
+    private static final String NO_DATE_MESSAGE = "Ave' you got no understanding of a date? Like Monday the 25th or something like that?";
+    private static final String WRONG_DATE_FORMAT_MESSAGE = "Are you spasticated? The date format is wrong! It should be like YY-DDDD-MM or sumting like that...";
     private static final String TOTAL_TASK_MESSAGE = "You is having %d task(s) on your list";
     private static final String SET_TO_DONE_MESSAGE = " set to done. You're well smart innit?";
     private static final String ADDED_TO_LIST_MESSAGE = "Wicked. This ting is now on da list.";
@@ -25,8 +27,7 @@ public class Ui {
 
     public String getCommand() {
         Scanner in = new Scanner(System.in);
-        String line = in.nextLine();
-        return line;
+        return in.nextLine();
     }
     public void printGreeting() {
         System.out.println(GREETING_MESSAGE);
@@ -59,6 +60,13 @@ public class Ui {
         printDetailsOfTask(index, tasks);
         printTotalTasks();
     }
+
+    /**
+     * Prints the type, status, name and date of a given task.
+     *
+     * @param index index of task to query.
+     * @param tasks ArrayList containing all tasks.s
+     */
     public void printDetailsOfTask(int index, ArrayList<Task> tasks) {
         Task task = tasks.get(index);
         System.out.println(task.getType() + "[" + task.getStatusIcon() + "] " + task.getName() + " " + task.getDate());
@@ -85,8 +93,11 @@ public class Ui {
         case ERR_NO_NAME:
             System.out.println(NO_NAME_MESSAGE);
             break;
-        case ERR_MAX_CAPACITY:
-            System.out.println(EXCEED_CAPACITY_MESSAGE);
+        case ERR_NO_DATE:
+            System.out.println(NO_DATE_MESSAGE);
+            break;
+        case ERR_WRONG_DATE_FORMAT:
+            System.out.println(WRONG_DATE_FORMAT_MESSAGE);
         }
         printBorderLine();
     }
