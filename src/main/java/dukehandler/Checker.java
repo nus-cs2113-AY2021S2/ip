@@ -5,6 +5,7 @@ import exceptions.EmptyListException;
 import exceptions.IllegalTaskMarkedDoneException;
 import exceptions.IllegalTaskRemovedException;
 import exceptions.InvalidCommandException;
+import exceptions.StreamErrorException;
 import exceptions.TaskAlreadyMarkedException;
 
 /**
@@ -20,6 +21,7 @@ public class Checker {
      * @throws TaskAlreadyMarkedException If task is already marked as done
      * @throws EmptyListException If list is empty
      */
+
     public static void checkTaskToMarkDone(int doneIndexInt)
             throws IllegalTaskMarkedDoneException,
             TaskAlreadyMarkedException,
@@ -83,6 +85,14 @@ public class Checker {
     public static void checkTasksToFind(String keyword) throws InvalidCommandException {
         if (keyword.isEmpty()) {
             throw new InvalidCommandException();
+        }
+    }
+
+    public static void checkTaskTypeStreamToPrint(String taskTypeInput) throws StreamErrorException {
+        if (!taskTypeInput.equals("d")
+                && !taskTypeInput.equals("e")
+                && !taskTypeInput.equals("t")) {
+            throw new StreamErrorException();
         }
     }
 }

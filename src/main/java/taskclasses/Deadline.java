@@ -1,16 +1,17 @@
 package taskclasses;
 
 public class Deadline extends Task {
-    protected String by;
-
-    public Deadline(String taskName, String by) {
+    protected String date;
+    protected String time;
+    public Deadline(String taskName, String date, String time) {
         super(taskName);
-        this.by = by;
+        this.date = date;
+        this.time = time;
     }
 
     @Override
     public String toString() {
-        return ("[" + getTaskType() + "]" + super.toString() + " (by: " + getTime() + ")");
+        return ("[" + getTaskType() + "]" + super.toString() + " (by: " + getDate() + " " + getTime() + ")");
     }
 
     @Override
@@ -19,6 +20,9 @@ public class Deadline extends Task {
     }
 
     public String getTime() {
-        return this.by;
+        return this.time;
+    }
+    public String getDate() {
+        return this.date;
     }
 }

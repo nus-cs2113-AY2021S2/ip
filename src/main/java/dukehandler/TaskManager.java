@@ -1,16 +1,19 @@
 package dukehandler;
 
-import exceptions.TaskAlreadyMarkedException;
+import exceptions.DateTimeErrorException;
+import exceptions.EmptyCommandDescriptionException;
 import exceptions.EmptyListException;
 import exceptions.IllegalTaskMarkedDoneException;
 import exceptions.IllegalTaskRemovedException;
 import exceptions.InvalidCommandException;
-import exceptions.EmptyCommandDescriptionException;
+import exceptions.StreamErrorException;
+import exceptions.TaskAlreadyMarkedException;
 
 import taskclasses.Deadline;
 import taskclasses.Event;
 import taskclasses.Task;
 import taskclasses.ToDo;
+
 import ui.ErrorMessagePrinter;
 import ui.SuccessMessagePrinter;
 
@@ -18,6 +21,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class TaskManager {
     public static ArrayList<Task> tasks = new ArrayList<>();
@@ -31,6 +35,7 @@ public class TaskManager {
             ErrorMessagePrinter.printEmptyListMessage();
             return;
         }
+        SuccessMessagePrinter.printCurrentTimeAndDate();
         System.out.println(" Here are the tasks in your list:");
         for (int i = 1; i < tasks.size() + 1; ++i) {
             if ((tasks.get(i - 1).getStatusIcon()).equals(" ")) {
@@ -67,19 +72,14 @@ public class TaskManager {
         try {
             Checker.checkNewTaskToAdd(taskType, part[1].trim());
             String description = part[1].trim();
-            String[] descriptionAndTime;
 
             switch (taskType) {
             case "todo":
                 tasks.add(new ToDo(description));
                 break;
             case "deadline":
-                descriptionAndTime = description.split("/by");
-                tasks.add(new Deadline(descriptionAndTime[0].trim(), descriptionAndTime[1].trim()));
-                break;
             case "event":
-                descriptionAndTime = description.split("/at");
-                tasks.add(new Event(descriptionAndTime[0].trim(), descriptionAndTime[1].trim()));
+                parseTaskToAdd(taskType, description);
                 break;
             }
             SuccessMessagePrinter.printAddedTask();
@@ -87,7 +87,29 @@ public class TaskManager {
             ErrorMessagePrinter.printInvalidCommandMessage(taskType);
         } catch (ArrayIndexOutOfBoundsException | EmptyCommandDescriptionException oob) {
             ErrorMessagePrinter.printEmptyCommandMessage(taskType);
+        } catch (DateTimeErrorException dtee) {
+            ErrorMessagePrinter.printTimeParseErrorMessage();
         }
+    }
+
+    public static void parseTaskToAdd(String taskType, String fullInput) throws DateTimeErrorException {
+        String[] descriptionAndTime;
+        descriptionAndTime = (taskType.equals("deadline") ? fullInput.split("/by")
+                : fullInput.split("/at"));
+        String taskName = descriptionAndTime[0].trim();
+        String[] time = descriptionAndTime[1].trim().split(" ");
+        String dateToString;
+        String timeToString;
+        try {
+            LocalDate d = LocalDate.parse(time[0].trim());
+            LocalTime t = LocalTime.parse(time[1].trim());
+            dateToString = d.format(DateTimeFormatter.ofPattern("d MMM yyyy"));
+            timeToString = t.format(DateTimeFormatter.ofPattern("HH:mm"));
+        } catch (DateTimeParseException dtpe) {
+            throw new DateTimeErrorException();
+        }
+        tasks.add(taskType.equals("deadline") ? new Deadline(taskName, dateToString, timeToString)
+                : new Event(taskName, dateToString, timeToString));
     }
 
     public static void removeTask(String removeIndexString) {
@@ -121,6 +143,33 @@ public class TaskManager {
         tasks.stream()
                 .filter((t) -> t.getTaskName().trim().contains(keyword.trim()))
                 .forEach((t) -> System.out.println(" " + (i[0]++) + ". " + t));
+    }
+  
+  public static void printOneTaskTypeWithStreams(String taskTypeInput) {
+        try {
+            Checker.checkTaskTypeStreamToPrint(taskTypeInput.trim());
+        } catch (StreamErrorException e) {
+            ErrorMessagePrinter.printTaskStreamError("type");
+            return;
+        }
+        tasks.stream()
+                .filter((t) -> t.getTaskType().trim().equals(taskTypeInput.toUpperCase()))
+                .forEach(System.out::println);
+    }
+
+    public static void printOneTaskDateWithStreams(String dateInput) {
+        String dateToString;
+        try {
+            LocalDate d = LocalDate.parse(dateInput.trim());
+            dateToString = d.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
+        } catch (DateTimeParseException s) {
+            ErrorMessagePrinter.printTaskStreamError("date");
+            return;
+        }
+        final String date = dateToString;
+        tasks.stream()
+                .filter((t) -> t.getDate().trim().equals(date))
+                .forEach(System.out::println);
     }
 
 }

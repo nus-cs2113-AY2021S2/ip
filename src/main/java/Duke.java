@@ -7,7 +7,8 @@ import java.io.File;
 import java.util.Scanner;
 
 public class Duke {
-    static final String DOTTED_LINE = "____________________________________________________________";
+    static final String DOTTED_LINE
+            = "____________________________________________________________";
 
     public static void main(String[] args) {
         SuccessMessagePrinter.printGreetMessage();
@@ -18,7 +19,8 @@ public class Duke {
         Scanner in = new Scanner(System.in);
         while (true) {
             fullCommand = in.nextLine();
-            if (fullCommand.equals("bye")) {
+            if (fullCommand.equals("bye")
+                    || fullCommand.equals("exit")) {
                 break;
             }
             System.out.println(DOTTED_LINE);
@@ -57,6 +59,15 @@ public class Duke {
         case "find":
             TaskManager.printTasksWithKeywords(fullCommand.substring(4).trim());
             break;
+        case "print":
+            if (partOfCommand[1].trim().equals("type")){
+                TaskManager.printOneTaskTypeWithStreams(fullCommand.substring(11,12).trim());
+                break;
+            }
+            else if (partOfCommand[1].trim().equals("date")){
+                TaskManager.printOneTaskDateWithStreams(partOfCommand[2].trim());
+                break;
+            }
         default:
             ErrorMessagePrinter.printGenericErrorMessage();
             break;
