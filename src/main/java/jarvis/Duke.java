@@ -1,7 +1,9 @@
 package jarvis;
 
+import jarvis.exception.EmptyListException;
 import jarvis.exception.HandleException;
 import jarvis.exception.InvalidCommandException;
+import jarvis.exception.InvalidTaskException;
 import jarvis.storage.TextManager;
 import jarvis.ui.JarvisUi;
 
@@ -35,6 +37,10 @@ public class Duke {
             } catch (IOException exception) {
                 System.out.println("\tSomething went wrong: " + exception.getMessage());
                 jarvis.printDivider();
+            } catch (EmptyListException exception) {
+                HandleException.handleEmptyListException();
+            } catch (InvalidTaskException exception) {
+                HandleException.handleInvalidTaskException();
             }
         }
     }

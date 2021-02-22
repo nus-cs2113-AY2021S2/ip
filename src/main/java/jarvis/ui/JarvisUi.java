@@ -2,7 +2,6 @@ package jarvis.ui;
 
 import jarvis.commands.Command;
 import jarvis.exception.EmptyListException;
-import jarvis.exception.HandleException;
 import jarvis.exception.InvalidCommandException;
 import jarvis.exception.InvalidTaskException;
 import jarvis.task.Task;
@@ -48,7 +47,7 @@ public class JarvisUi {
         printDivider();
     }
 
-    public ArrayList<Task> performTask() throws InvalidCommandException {
+    public ArrayList<Task> performTask() throws InvalidCommandException, EmptyListException, InvalidTaskException {
         String userInput = in.nextLine();
         if (userInput.startsWith("bye")) {    // bye
             Command.exitJarvis();
@@ -59,23 +58,11 @@ public class JarvisUi {
         } else if (userInput.startsWith("event")) {    // event
             Command.runEvent(userInput);
         } else if (userInput.startsWith("list")) {    // list
-            try {
-                Command.runList();
-            } catch (EmptyListException exception) {
-                HandleException.handleEmptyListException();
-            }
+            Command.runList();
         } else if (userInput.startsWith("done")) {    // done
-            try {
-                Command.runDone(userInput);
-            } catch (InvalidTaskException exception) {
-                HandleException.handleInvalidTaskException();
-            }
+            Command.runDone(userInput);
         } else if (userInput.startsWith("delete")) {  // delete
-            try {
-                Command.runDelete(userInput);
-            } catch (InvalidTaskException exception) {
-                HandleException.handleInvalidTaskException();
-            }
+            Command.runDelete(userInput);
         } else {    // if invalid command, throw InvalidCommandException
             throw new InvalidCommandException();
         }
