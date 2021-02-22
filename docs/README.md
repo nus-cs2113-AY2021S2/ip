@@ -54,7 +54,7 @@ The **Duke** app is run via a file with the extension `.jar`. The following step
 1. If the `tasks.txt` file does not already exist in the _home folder_ that you are in currently, **Duke** will tell you the file path where the `tasks.txt` file is saved. It will be saved in your _home folder_ where your `.jar` file is located.
 
 
-   #### Command: `help`
+#### Command: `help`
    Prints the command formats that **Duke** will respond to.
 
 #### Command: `hello`, `hey`
