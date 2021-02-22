@@ -2,6 +2,11 @@ package task.list;
 
 public class Event extends Deadline {
     private static final String TASK_TITLE = "E";
+    public static final int BY_INDEX = 1;
+    public static final String NEW_EVENT = "Aight Crewmate!! I've got a new event for you!!! (¬‿¬): ";
+    public static final String COMMAND_HEADER = "event ";
+    public static final String BY_HEADER = "(by: ";
+    public static final String NO_BY = "No Event time!! Noice!!! :)";
 
     public Event(String line) {
         super(line);
@@ -12,35 +17,31 @@ public class Event extends Deadline {
         String[] lineWords = line.split("/", 2);
         String by;
         try {
-            by = lineWords[1];
+            by = lineWords[BY_INDEX];
             if (by.equals("")) {
-                by = "No Event time!! Noice!!! :)";
+                by = NO_BY;
             }
-
         } catch (ArrayIndexOutOfBoundsException e) {
-            by = "No Event time!! Noice!!! :)";
+            by = NO_BY;
         }
-
         return by;
-
     }
 
     @Override
     public void printTask() {
         String phrase = "[" + TASK_TITLE + "]" + "[" + getStatusIcon() + "]"
-                + getTaskDescription() + "(by: "
+                + getTaskDescription() + BY_HEADER
                 + getTaskBy() + ")";
         System.out.println(phrase);
     }
 
     @Override
     public void printAddedTask() {
-        System.out.println("Aight Crewmate!! I've got a new event for you!!! (¬‿¬): " + getTaskDescription());
+        System.out.println(NEW_EVENT + getTaskDescription());
     }
 
     public String getTaskToPrintInFile() {
-        return ("event " + this.description + "/" + this.by + System.lineSeparator() + this.isDone +
+        return (COMMAND_HEADER + this.description + "/" + this.by + System.lineSeparator() + this.isDone +
                 System.lineSeparator());
     }
 }
-

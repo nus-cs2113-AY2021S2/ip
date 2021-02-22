@@ -4,16 +4,19 @@ import ui.UI;
 import exceptions.IllegalTaskRedoException;
 
 public class TaskList {
+
+    public static final String TICK = "\u2713";
+    public static final String CROSS = "\u2718";
+    public static final String MARKED_AS_DONE = "Nice! I've marked this task as done:";
     protected String description;
     protected boolean isDone;
-
 
     public void printTask() {
         System.out.println("[" + getStatusIcon() + "]" + getTaskDescription());
     }
 
     public String getStatusIcon() {
-        return ((getIsTaskDone()) ? "\u2713" : "\u2718"); //return tick or X symbols
+        return ((getIsTaskDone()) ? TICK : CROSS); //return tick or X symbols
     }
 
     public boolean getIsTaskDone() {
@@ -29,7 +32,7 @@ public class TaskList {
             throw new IllegalTaskRedoException();
         }
         setDone();
-        System.out.println("Nice! I've marked this task as done:");
+        System.out.println(MARKED_AS_DONE);
         this.printTask();
         UI.printDottedLines();
     }

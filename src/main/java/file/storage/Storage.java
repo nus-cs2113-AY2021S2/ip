@@ -18,21 +18,21 @@ public class Storage {
 
     public static void loadFromFile(ArrayList<TaskList> tasks) {
         try {
-            File fd = new File(FILE_PATH); // create a File for the given file path
-            Scanner s = new Scanner(fd); // create a Scanner using the File as the source
-            readDataFile(s, tasks);
+            File fileDescriptor = new File(FILE_PATH); // create a File for the given file path
+            Scanner input = new Scanner(fileDescriptor); // create a Scanner using the File as the source
+            readDataFile(input, tasks);
             printOldList(tasks);
         } catch (java.io.IOException e) {
             UI.printNoSavedFile();
         }
     }
 
-    private static void readDataFile(Scanner s, ArrayList<TaskList> tasks) {
+    private static void readDataFile(Scanner input, ArrayList<TaskList> tasks) {
         int i = 0;
         UI.printLoading();
-        while (s.hasNext()) {
-            Parser.selectCommand(s.nextLine(), tasks);
-            if (s.nextLine().equals("true")) {
+        while (input.hasNext()) {
+            Parser.selectCommand(input.nextLine(), tasks);
+            if (input.nextLine().equals("true")) {
                 TaskList t = tasks.get(i);
                 t.setDone();
                 tasks.set(i, t);
@@ -59,40 +59,40 @@ public class Storage {
     private static boolean writeToFile(ArrayList<TaskList> tasks) {
         boolean hasSaved = false;
         try {
-            FileWriter fw = new FileWriter(FILE_PATH);
+            FileWriter fileWriter = new FileWriter(FILE_PATH);
             hasSaved = true;
-            for (TaskList t : tasks) {
-                hasSaved = writeTaskToFile(fw, t);
+            for (TaskList task : tasks) {
+                hasSaved = hasWrittenToFile(fileWriter, task);
             }
-            fw.close();
+            fileWriter.close();
         } catch (java.io.IOException e) {
             File file = new File(FILE_PATH);
         }
         return hasSaved;
     }
 
-    private static boolean writeTaskToFile(FileWriter fw, TaskList t) {
+    private static boolean hasWrittenToFile(FileWriter fileWriter, TaskList task) {
         boolean hasSaved = true;
-        if (t instanceof Event) {
-            Event temp = (Event) t;
+        if (task instanceof Event) {
+            Event temp = (Event) task;
             try {
-                fw.write(temp.getTaskToPrintInFile());
+                fileWriter.write(temp.getTaskToPrintInFile());
             } catch (java.io.IOException e) {
                 hasSaved = false;
             }
 
-        } else if (t instanceof Deadline) {
-            Deadline temp = (Deadline) t;
+        } else if (task instanceof Deadline) {
+            Deadline temp = (Deadline) task;
             try {
-                fw.write(temp.getTaskToPrintInFile());
+                fileWriter.write(temp.getTaskToPrintInFile());
             } catch (java.io.IOException e) {
                 hasSaved = false;
             }
 
-        } else if (t instanceof Todo) {
-            Todo temp = (Todo) t;
+        } else if (task instanceof Todo) {
+            Todo temp = (Todo) task;
             try {
-                fw.write(temp.getTaskToPrintInFile());
+                fileWriter.write(temp.getTaskToPrintInFile());
             } catch (java.io.IOException e) {
                 hasSaved = false;
             }

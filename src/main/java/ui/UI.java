@@ -12,7 +12,6 @@ public class UI {
             phrase = "This job was already completed!!!!" + System.lineSeparator()
                     + "Good job Crewmate! You completed all your tasks in this list! (─‿─)" + System.lineSeparator();
 
-
         } else {
             phrase = "What are you doing??? This job was already completed!! (;¬_¬)" + System.lineSeparator()
                     + "You still have " + getNumberOfTaskRemaining(tasks)
@@ -88,7 +87,6 @@ public class UI {
 
     }
 
-
     public static void printHelp() {
         String help = "           help           :prints list of all commands" + System.lineSeparator()
                 + "           list           :prints all lists ordered by category" + System.lineSeparator()
@@ -100,9 +98,7 @@ public class UI {
 
         System.out.println(help);
         printDottedLines();
-
     }
-
 
     public static void printListName() {
         System.out.println("ATTENTION, Here's your list of tasks Crewmate!!!");
@@ -111,7 +107,6 @@ public class UI {
     public static void printDottedLines() {
         System.out.println("____________________________________________________________________________________");
     }
-
 
     public static void printCommandDoesNotExist() {
         System.out.println("There's no such command!!! You look SUS!!!  (ー_ーゞ");
@@ -125,7 +120,6 @@ public class UI {
         System.out.println("There's no such task?! Focus Crewmate!!  (╬⓪益⓪)");
     }
 
-
     public static void printNoTasksDone() {
         System.out.println("Are you really a Crewmate??? You haven't done any work in this list! （○｀Ｏ´○）");
     }
@@ -138,7 +132,6 @@ public class UI {
         System.out.println("This list is empty!!! YEEEEEEET!!!");
         printDottedLines();
     }
-
 
     public static void printSomeTasksRemaining(int counter) {
         System.out.println("You still have "

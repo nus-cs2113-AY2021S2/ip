@@ -3,6 +3,8 @@ package task.list;
 public class Todo extends TaskList {
 
     private static final String TASK_TITLE = "T";
+    public static final String NEW_TASK = "Aight Crewmate!! I've got a new task for you to do!!! (¬‿¬): ";
+    public static final String COMMAND_HEADER = "todo ";
 
     public Todo(String line) {
         this.description = line.trim();
@@ -10,12 +12,13 @@ public class Todo extends TaskList {
         printAddedTask();
     }
 
+    // This method is used for constructor overloading
     public Todo() {
     }
 
     @Override
     public void printAddedTask() {
-        System.out.println("Aight Crewmate!! I've got a new task for you to do!!! (¬‿¬): " + getTaskDescription());
+        System.out.println(NEW_TASK + getTaskDescription());
     }
 
     @Override
@@ -27,6 +30,6 @@ public class Todo extends TaskList {
 
     @Override
     public String getTaskToPrintInFile() {
-        return ("todo " + this.description + System.lineSeparator() + this.isDone + System.lineSeparator());
+        return (COMMAND_HEADER + this.description + System.lineSeparator() + this.isDone + System.lineSeparator());
     }
 }

@@ -10,23 +10,26 @@ import task.list.Deadline;
 import task.list.Event;
 import task.list.TaskList;
 import task.list.Todo;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Parser {
 
+    public static final int EMPTY = 0;
+    public static final int NUMBER_OF_COMMAND_ARGUMENTS = 2;
+    public static final int DESCRIPTION_INDEX_IN_COMMANDS = 1;
+    public static final int WRONG_INDEX = -1;
+    public static final int COMMAND_KEYWORD_POSITION = 0;
+
     public static void processCommands(ArrayList<TaskList> tasks) {
         String line;
         Scanner in = new Scanner(System.in);
         boolean hasToContinue = true;
-
         UI.printHelp();
         while (hasToContinue) {
             line = in.nextLine();
             hasToContinue = selectCommand(line, tasks);
         }
-
     }
 
     public static boolean selectCommand(String line, ArrayList<TaskList> tasks) {
@@ -34,7 +37,7 @@ public class Parser {
         case "bye":
             exit(tasks);
             return false;
-        case "task/list":
+        case "list":
             try {
                 printAllLists(tasks);
             } catch (IllegalListException e) {
@@ -44,7 +47,6 @@ public class Parser {
         case "help":
             UI.printHelp();
             break;
-
         default:
             handleAmendList(line, tasks);
             break;
@@ -67,7 +69,7 @@ public class Parser {
 
     public static void printAllLists(ArrayList<TaskList> tasks) throws IllegalListException {
         int i = 1;
-        if (tasks.size() == 0) {
+        if (tasks.size() == EMPTY) {
             throw new IllegalListException();
         }
         UI.printListName();
@@ -83,10 +85,10 @@ public class Parser {
     private static void amendList(String line, ArrayList<TaskList> tasks) throws IllegalCommandException,
             IllegalTaskException, IllegalTaskRedoException {
         String[] sentence = line.split(" ");
-        if (sentence.length < 2) {
+        if (sentence.length < NUMBER_OF_COMMAND_ARGUMENTS) {
             throw new IllegalCommandException();
         }
-        switch (sentence[0]) {
+        switch (sentence[COMMAND_KEYWORD_POSITION]) {
         case "done":
             try {
                 markTaskAsDone(sentence, tasks);
@@ -98,7 +100,6 @@ public class Parser {
                 throw new IllegalTaskException();
             }
             break;
-
         case "todo": {
             addTaskInTodoList(line, tasks);
             break;
@@ -119,7 +120,6 @@ public class Parser {
             } catch (IllegalTaskException e) {
                 throw new IllegalTaskException();
             }
-
             break;
         }
         default:
@@ -135,8 +135,8 @@ public class Parser {
     }
 
     private static String getTaskDescription(String line) {
-        String[] commandWords = (line.split(" ", 2));
-        return commandWords[1];
+        String[] commandWords = (line.split(" ", NUMBER_OF_COMMAND_ARGUMENTS));
+        return commandWords[DESCRIPTION_INDEX_IN_COMMANDS];
     }
 
     private static void addTaskInEventList(String line, ArrayList<TaskList> tasks) {
@@ -166,14 +166,14 @@ public class Parser {
         UI.printDeletingTask();
         t.printTask();
         tasks.remove(index - 1);
-        if (tasks.size() > 0) {
+        if (tasks.size() > EMPTY) {
             printNumberOfTasksLeft(tasks);
         }
     }
 
     private static int getIndex(String[] sentence, ArrayList<TaskList> tasks) throws IllegalCommandException,
             IllegalTaskException {
-        if (sentence.length > 2) {
+        if (sentence.length > NUMBER_OF_COMMAND_ARGUMENTS) {
             throw new IllegalCommandException();
         }
         int index = getIndexFromCommand(sentence[1]);
@@ -209,15 +209,14 @@ public class Parser {
         try {
             return Integer.parseInt(index);
         } catch (NumberFormatException nfe) {
-            return -1;
+            return WRONG_INDEX;
         }
-
     }
 
     public static void printNumberOfTasksLeft(ArrayList<TaskList> tasks) {
-        if (UI.getAreAllTasksDone(tasks) && tasks.size() > 0) {
+        if (UI.getAreAllTasksDone(tasks) && tasks.size() > EMPTY) {
             UI.printCompletedTasks();
-        } else if (UI.getAreAllTasksNotDone(tasks) && tasks.size() > 0) {
+        } else if (UI.getAreAllTasksNotDone(tasks) && tasks.size() > EMPTY) {
             UI.printNoTasksDone();
         } else {
             int tasksLeft = UI.getNumberOfTaskRemaining(tasks);
@@ -225,11 +224,10 @@ public class Parser {
         }
     }
 
-
     public static void exit(ArrayList<TaskList> tasks) {
-        if (tasks.size() > 0 && UI.getAreAllTasksDone(tasks)) {
+        if (tasks.size() > EMPTY && UI.getAreAllTasksDone(tasks)) {
             UI.printGoodEnding();
-        } else if (tasks.size() > 0 && UI.getAreAllTasksNotDone(tasks)) {
+        } else if (tasks.size() > EMPTY && UI.getAreAllTasksNotDone(tasks)) {
             UI.printBadEnding();
         } else {
             UI.printTraitor();

@@ -2,6 +2,11 @@ package task.list;
 
 public class Deadline extends Todo {
     private static final String TASK_TITLE = "D";
+    public static final int BY_INDEX = 1;
+    public static final int DESCRIPTION_INDEX = 0;
+    public static final String NO_BY = "No Deadline!! Hehe! :)";
+    public static final String NEW_DEADLINE = "Aight Crewmate!! I've got a new deadline for you!!! (¬‿¬): ";
+    public static final String BY_HEADER = "(by: ";
     protected String by;
 
 
@@ -14,7 +19,7 @@ public class Deadline extends Todo {
 
     private String getDescription(String line) {
         String[] description = line.split("/", 2);
-        return description[0].trim();
+        return description[DESCRIPTION_INDEX].trim();
     }
 
     public String getTaskBy() {
@@ -25,12 +30,12 @@ public class Deadline extends Todo {
         String[] lineWords = line.split("/", 2);
         String by;
         try {
-            by = lineWords[1];
+            by = lineWords[BY_INDEX];
             if (by.equals("")) {
-                by = "No Deadline!! Hehe! :)";
+                by = NO_BY;
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            by = "No Deadline!! Hehe! :)";
+            by = NO_BY;
         }
         return by.trim();
     }
@@ -38,14 +43,14 @@ public class Deadline extends Todo {
     @Override
     public void printTask() {
         String phrase = "[" + TASK_TITLE + "]" + "[" + getStatusIcon() + "]"
-                + getTaskDescription() + "(by: "
+                + getTaskDescription() + BY_HEADER
                 + getTaskBy() + ")";
         System.out.println(phrase);
     }
 
     @Override
     public void printAddedTask() {
-        System.out.println("Aight Crewmate!! I've got a new deadline for you!!! (¬‿¬): " + getTaskDescription());
+        System.out.println(NEW_DEADLINE + getTaskDescription());
     }
 
     @Override
