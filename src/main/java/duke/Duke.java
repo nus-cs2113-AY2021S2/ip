@@ -2,6 +2,7 @@ package duke;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 
 import duke.error.*;
 import duke.command.*;
@@ -49,6 +50,8 @@ public class Duke {
                 ui.displayToUser(Constants.ERROR_IO);
             } catch (NullPointerException exception) {
                 ui.displayToUser(Constants.ERROR_IO);
+            } catch (DateTimeParseException exception) {
+                ui.displayToUser(Constants.ERROR_INVALID_DATE_RECEIVED);
             }
         }
     }

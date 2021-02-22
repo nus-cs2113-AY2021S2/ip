@@ -1,7 +1,10 @@
 package duke.task;
 
+import duke.Constants;
+import duke.Date;
+
 public class Event extends Task {
-    protected String at;
+    protected Date at;
 
     /**
      * Creates an Event object. 
@@ -11,7 +14,7 @@ public class Event extends Task {
      */
     public Event(String description, String at) {
         super(description);
-        this.at = at;
+        this.at = new Date(at);
     }
 
     public String getTaskType() {
@@ -19,20 +22,12 @@ public class Event extends Task {
     }
 
     @Override
-    public String getTaskDate() {
-        return at;
-    }
-
-    /**
-     * Returns the string format for file storing. 
-     */
-    @Override
-    public String toStorageString() {
-        return super.toStorageString() + ", " + at;
+    public String getTaskDate(String dateFormat) {
+        return at.formatDateWithDelimeter(dateFormat);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at: " + getTaskDate(Constants.DATE_FORMAT) + ")";
     }
 }
