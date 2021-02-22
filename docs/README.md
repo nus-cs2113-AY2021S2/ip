@@ -36,7 +36,7 @@ Format: delete x
 Example: 
 * delete 2
 
-### locate tasks by keyword: find
+### Locate tasks by keyword: find
 Finds tasks which the task descriptions contain a particular keyword.
 
 Format: find keyword:
