@@ -22,7 +22,6 @@ public class ListCommand extends Command {
         ArrayList<Task> tasks = this.taskList.getTasks();
         listItems(tasks);
     }
-
     /** Lists all items that were added to the list. */
     public void listItems(ArrayList<Task> tasks) {
         System.out.println(LIST_ITEMS_MESSAGE);
