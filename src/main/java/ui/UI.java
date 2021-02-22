@@ -88,16 +88,24 @@ public class UI {
     }
 
     public static void printHelp() {
-        String help = "           help           :prints list of all commands" + System.lineSeparator()
-                + "           list           :prints all lists ordered by category" + System.lineSeparator()
-                + "           exit           :shuts down Arthur" + System.lineSeparator()
-                + "       todo <task>        :add task to To Do list" + System.lineSeparator()
-                + "   event <task> /<time>   :add task to Event List with time" + System.lineSeparator()
-                + "   deadline <task /<by>   :add task to Deadline List" + System.lineSeparator()
-                + "       done  <index>      :mark task <index> as done in List" + System.lineSeparator();
+        String help = "               help                :prints list of all commands" + System.lineSeparator()
+                + "               list                :prints all lists ordered by category" + System.lineSeparator()
+                + "               exit                :shuts down Arthur" + System.lineSeparator()
+                + "            todo <task>            :add task to To Do list" + System.lineSeparator()
+                + "  event <task> // yyyy/MM/dd HHmm  :add task to Event List with time" + System.lineSeparator()
+                + " deadline <task // yyyy/MM/dd HHmm :add task to Deadline List" + System.lineSeparator()
+                + "            done  <index>          :mark task <index> as done in List" + System.lineSeparator()
+                + "            delete  <index>        :delete task <index> in List" + System.lineSeparator()
+                + "            find  <task>           :mark task <index> as done in List" + System.lineSeparator()
+                + "         search YYYY/MM/DD         :add task to Deadline List" + System.lineSeparator();
 
         System.out.println(help);
         printDottedLines();
+    }
+
+    // Prompts the user to input date
+    public static void printInsertCorrectDate() {
+        System.out.println("Please re-enter date in this format yyyy/MM/dd HHmm");
     }
 
     public static void printListName() {
