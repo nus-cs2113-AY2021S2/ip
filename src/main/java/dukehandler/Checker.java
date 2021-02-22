@@ -5,29 +5,27 @@ import exceptions.EmptyListException;
 import exceptions.IllegalTaskMarkedDoneException;
 import exceptions.IllegalTaskRemovedException;
 import exceptions.InvalidCommandException;
+import exceptions.StreamErrorException;
 import exceptions.TaskAlreadyMarkedException;
 
 public class Checker {
-    private final TaskList taskList;
-
-    public Checker(TaskList taskList) {
-        this.taskList = taskList;
+    public Checker() {
     }
 
-    public void checkTaskToMarkDone(int doneIndexInt)
+    public static void checkTaskToMarkDone(int doneIndexInt)
             throws IllegalTaskMarkedDoneException,
             TaskAlreadyMarkedException,
             EmptyListException {
-        if (taskList.tasks.isEmpty()) {
+        if (TaskManager.tasks.isEmpty()) {
             throw new EmptyListException();
-        } else if (doneIndexInt < 1 || doneIndexInt > taskList.tasks.size()) {
+        } else if (doneIndexInt < 1 || doneIndexInt > TaskManager.tasks.size()) {
             throw new IllegalTaskMarkedDoneException();
-        } else if ((taskList.tasks.get(doneIndexInt - 1).getStatusIcon()).equals("X")) {
+        } else if ((TaskManager.tasks.get(doneIndexInt - 1).getStatusIcon()).equals("X")) {
             throw new TaskAlreadyMarkedException();
         }
     }
 
-    public void checkNewTaskToAdd(String taskType, String description)
+    public static void checkNewTaskToAdd(String taskType, String description)
             throws InvalidCommandException, EmptyCommandDescriptionException {
         if (taskType.equals("deadline") && !description.contains("/by")
                 || taskType.equals("event") && !description.contains("/at")) {
@@ -47,13 +45,22 @@ public class Checker {
         }
     }
 
-    public void checkTaskToRemove(int removeIndexInt)
+    public static void checkTaskToRemove(int removeIndexInt)
             throws IllegalTaskRemovedException, EmptyListException {
-        if (taskList.tasks.isEmpty()) {
+        if (TaskManager.tasks.isEmpty()) {
             throw new EmptyListException();
-        } else if (removeIndexInt < 1 || removeIndexInt > taskList.tasks.size()) {
+        } else if (removeIndexInt < 1 || removeIndexInt > TaskManager.tasks.size()) {
             throw new IllegalTaskRemovedException();
         }
     }
+
+    public static void checkTaskTypeStreamToPrint(String taskTypeInput) throws StreamErrorException {
+        if (!taskTypeInput.equals("d")
+                && !taskTypeInput.equals("e")
+                && !taskTypeInput.equals("t")) {
+            throw new StreamErrorException();
+        }
+    }
+
 
 }
