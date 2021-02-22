@@ -1,2 +1,4 @@
-0 todo haha
-1 todo hehe
+1 todo todo read book | 
+0 deadline deadline return book | June 6th
+0 event event project meeting | Aug 6th 2-4pm
+1 todo todo join sports club | 
