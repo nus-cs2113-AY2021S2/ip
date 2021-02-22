@@ -1,4 +1,4 @@
-package duke;
+package duke.data.exceptions;
 
 public class InvalidFieldException extends Exception {
     public InvalidFieldException() {

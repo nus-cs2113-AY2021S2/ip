@@ -1,4 +1,4 @@
-package duke.io;
+package duke.commands;
 
 public class Command {
     public static final String LIST_WORD = "list";

@@ -1,12 +1,13 @@
 package duke;
 
-import duke.io.FileIO;
-import duke.io.TextUI;
-import duke.io.Command;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
+import duke.data.exceptions.DukeException;
+import duke.storage.FileIO;
+import duke.ui.TextUI;
+import duke.commands.Command;
+import duke.data.task.Deadline;
+import duke.data.task.Event;
+import duke.data.task.Task;
+import duke.data.task.Todo;
 
 import java.util.ArrayList;
 

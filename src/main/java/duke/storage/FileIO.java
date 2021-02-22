@@ -1,10 +1,10 @@
-package duke.io;
+package duke.storage;
 
-import duke.InvalidFieldException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
+import duke.data.exceptions.InvalidFieldException;
+import duke.data.task.Deadline;
+import duke.data.task.Event;
+import duke.data.task.Task;
+import duke.data.task.Todo;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -20,8 +20,8 @@ public class FileIO {
     private static final Path DATA_DIRECTORY_PATH = Paths.get(".", "data");
     private static final Path DATA_FILE_PATH = DATA_DIRECTORY_PATH.resolve("duke.txt");
     private static final String TODO_REGEX_PATTERN = "[T]\\s\\|\\s[01]\\s\\|\\s.+";
-    private static final String DEADLINE_REGEX_PATTERN = "[D]\\s\\|\\s[01]\\s\\|\\s[^\\|]+\\s\\|\\s.+";
-    private static final String EVENT_REGEX_PATTERN = "[E]\\s\\|\\s[01]\\s\\|\\s[^\\|]+\\s\\|\\s.+";
+    private static final String DEADLINE_REGEX_PATTERN = "[D]\\s\\|\\s[01]\\s\\|\\s[^|]+\\s\\|\\s.+";
+    private static final String EVENT_REGEX_PATTERN = "[E]\\s\\|\\s[01]\\s\\|\\s[^|]+\\s\\|\\s.+";
 
     private static boolean directoryExists(Path path) {
         return Files.exists(path);
