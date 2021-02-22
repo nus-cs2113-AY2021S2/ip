@@ -7,6 +7,8 @@ import jarvis.parser.Parser;
 import jarvis.task.Task;
 import jarvis.tasklist.TaskList;
 
+import java.util.ArrayList;
+
 /**
  * Contains methods to run the commands
  */
@@ -90,5 +92,21 @@ public class Command {
         } else {    // if the task is not in the ArrayList, throw InvalidTaskException
             throw new InvalidTaskException();
         }
+    }
+
+    // finds task that contains the keyword in the description
+    public static void runFind(String command) {
+        String keyword = Parser.parseFindCommand(command);
+        ArrayList<Task> matchingTasks = TaskList.getTasksWithKeyword(keyword);
+        if (matchingTasks.size() != 0) {
+            System.out.println("\tHere are the matching tasks in your list sir:");
+            for (int i = 0; i < matchingTasks.size(); i++) {
+                Task task = TaskList.getTaskWithIndex(i);
+                System.out.println(String.format("\t\t%d. ", i + 1) + task.toString());
+            }
+        } else {
+            System.out.println("\tUnfortunately, I could not find any tasks containing " + "\""+keyword+"\".");
+        }
+        Duke.jarvis.printDivider();
     }
 }

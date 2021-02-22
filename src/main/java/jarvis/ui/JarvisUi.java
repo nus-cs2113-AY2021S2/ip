@@ -63,6 +63,8 @@ public class JarvisUi {
             Command.runDone(userInput);
         } else if (userInput.startsWith("delete")) {  // delete
             Command.runDelete(userInput);
+        } else if (userInput.startsWith("find")) {
+            Command.runFind(userInput);
         } else {    // if invalid command, throw InvalidCommandException
             throw new InvalidCommandException();
         }
