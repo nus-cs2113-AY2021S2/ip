@@ -1,0 +1,20 @@
+list
+todo read book
+todo buy flowers
+todo take the trash out
+list
+deadline return book /mon
+deadline do assignment
+list
+event attend birthday /26.12
+event give gf flowers
+list
+done 3
+done 5
+done 6
+list
+done 3
+done 4
+done 6
+list
+bye
