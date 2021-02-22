@@ -81,7 +81,7 @@ public class DukeController {
             if (input.trim().equals("todo") ) {
                 throw new DukeException("todo");
             }
-            Task task = new ToDo(strings[0]);
+            Task task = new ToDo(strings[1]);
             tasks.add(task);
             printTask(tasks, count1);
             return foundError;
@@ -107,7 +107,7 @@ public class DukeController {
             if (input.trim().equals("deadline")) {
                 throw new DukeException("deadline");
             }
-            Task task = new Deadline(strings[0], strings[1]);
+            Task task = new Deadline(strings[1], strings[2]);
             tasks.add(task);
             printTask(tasks, count1);
             return foundError;
@@ -138,7 +138,7 @@ public class DukeController {
             if (input.trim().equals("event")) {
                 throw new DukeException("event");
             }
-            Task task = new Event(strings[0], strings[1]);
+            Task task = new Event(strings[1], strings[2]);
             tasks.add(task);
             printTask(tasks, count1);
             return foundError;
@@ -229,7 +229,7 @@ public class DukeController {
     public void findbyDescription(ArrayList<Task> tasks, String[] strings) {
         boolean found = false;
         for (Task task : tasks) {
-            if (task.getDescription().contains(strings[0])) {
+            if (task.getDescription().contains(strings[1])) {
                 System.out.println(task.getPrintedLine());
                 found = true;
             }

@@ -5,6 +5,7 @@ import tasks.Task;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 /**
@@ -44,41 +45,42 @@ public class UI {
         strings = parse.processInput(input);
         int count1 = tasks.size();
         do {
-            if (input.equals("list")) {
+            if (strings[0].equalsIgnoreCase("list")) {
                 dc.printList(tasks);
             }
 
-            else if (input.contains("delete")) {
+            else if (strings[0].equalsIgnoreCase("delete")) {
                 dc.deleteTask(tasks, input);
+                count1--;
             }
 
-            else if (input.contains("done")) {
+            else if (strings[0].equalsIgnoreCase("done")) {
                 dc.printDone(tasks, input);
             }
 
-            else if (input.contains("todo")) {
+            else if (strings[0].equalsIgnoreCase("todo")) {
                 if (!dc.printTodo(tasks, input, strings, count1)) {
                     count1++;
                 }
             }
 
-            else if (input.contains("deadline")) {
+            else if (strings[0].equalsIgnoreCase("deadline")) {
                 if (!dc.printDeadline(tasks, input, strings, count1)) {
                     count1++;
                 }
             }
 
-            else if (input.contains("event")) {
+            else if (strings[0].equalsIgnoreCase("event")) {
                 if (!dc.printEvent(tasks, input, strings, count1)) {
                     count1++;
                 }
             }
 
-            else if (input.contains("save")) {
+            else if (strings[0].equalsIgnoreCase("save")) {
                 store.saveOutput(tasks);
             }
 
-            else if (input.contains("date")) {
+            else if (strings[0].equalsIgnoreCase("date")) {
                 try {
                     LocalDate date = parse.processString(strings);
                     dc.findbyDate(tasks, date);
@@ -89,7 +91,7 @@ public class UI {
                 }
             }
 
-            else if (input.contains("find")) {
+            else if (strings[0].equalsIgnoreCase("find")) {
                 dc.findbyDescription(tasks, strings);
             }
 
@@ -99,7 +101,7 @@ public class UI {
             input = sc.nextLine();
             strings = parse.processInput(input);
 
-        } while (!input.equals("bye"));
+        } while (!strings[0].equalsIgnoreCase("bye"));
 
         System.out.println("--------------------------------------------");
         System.out.println("Bye. Hope to see you again soon!");

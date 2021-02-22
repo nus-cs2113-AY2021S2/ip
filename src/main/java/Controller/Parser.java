@@ -15,11 +15,17 @@ public class Parser {
      * @return Substrings of string input.
      */
     public String[] processInput(String input) {
-        String[] strings = new String[2];
+        String[] strings = new String[3];
+        input = input.trim();
+        if (!input.contains(" ")) {
+            strings[0] = input;
+            return strings;
+        }
         int index = input.indexOf(" ");
         String subString1 = input.substring(index+1);
+        strings[0] = input.substring(0,index);
         if (!subString1.contains("/")) {
-            strings[0] = subString1;
+            strings[1] = subString1;
             return strings;
         }
         else {
@@ -28,8 +34,8 @@ public class Parser {
             String subString3 = subString1.substring(index1);
             int index2 = subString3.indexOf(" ");
             String subString4 = subString3.substring(index2+1);
-            strings[0] = subString2;
-            strings[1] = subString4;
+            strings[1] = subString2;
+            strings[2] = subString4;
             return strings;
         }
     }
@@ -42,7 +48,7 @@ public class Parser {
      */
     public LocalDate processString(String[] strings) throws DateTimeParseException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate datetime = LocalDate.parse(strings[0], formatter);
+        LocalDate datetime = LocalDate.parse(strings[1], formatter);
         return datetime;
     }
 
