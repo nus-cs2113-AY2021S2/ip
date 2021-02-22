@@ -1,5 +1,5 @@
 # Duke Project
-###By Nikhila Ravikumar
+### By Nikhila Ravikumar
 
 This project is named after the Java mascot _Duke_. Given below are instructions on how to use it.
 
