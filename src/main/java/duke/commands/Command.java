@@ -1,6 +1,7 @@
 package duke.commands;
 
 import duke.exception.EmptyCommandArgException;
+import duke.exception.InvalidCommandException;
 import duke.exception.InvalidCommandTimeException;
 import duke.exception.InvalidTaskNumberException;
 import duke.task.TaskList;
@@ -22,7 +23,8 @@ public abstract class Command {
         isExit = false;
     }
 
-    public abstract void execute(TaskList taskList, Ui ui) throws EmptyCommandArgException, InvalidCommandTimeException, InvalidTaskNumberException;
+    public abstract void execute(TaskList taskList, Ui ui) throws EmptyCommandArgException,
+            InvalidCommandTimeException, InvalidTaskNumberException, InvalidCommandException;
 
     public boolean isEmptyArgument(String commandArg) {
         return commandArg.length() == 0;

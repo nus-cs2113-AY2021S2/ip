@@ -1,7 +1,5 @@
 package duke.util;
 
-import java.util.Scanner;
-
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -39,13 +37,6 @@ public class Ui {
         String errorMessage = "ERROR retrieving data!\n" + e.getLocalizedMessage();
         printWithBorder(errorMessage);
 	}
-
-    public String readCommand() {
-        Scanner scanner = new Scanner(System.in);
-        String fullCommand = scanner.nextLine();
-        scanner.close();
-        return fullCommand;
-    }
 
     public void printHelpMessage() {
         printWithBorder(COMMANDS);
