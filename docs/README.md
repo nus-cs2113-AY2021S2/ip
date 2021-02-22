@@ -88,6 +88,7 @@ Got it. I've added this task:
 Now you have 1 tasks in the list.
 
 
+
 **event sample task 2 /from xxx-xxx**
 
 Got it. I've added this task:
@@ -95,6 +96,7 @@ Got it. I've added this task:
   [E][0] sample task 2  (from: xxx-xxx)
   
 Now you have 2 tasks in the list.
+
 
 
 **deadline sample task 3 /by xxx**
@@ -106,11 +108,15 @@ Got it. I've added this task:
 Now you have 3 tasks in the list.
 
 
+
 **list**
 
 1.[T][0] sample task 1
+
 2.[E][0] sample task 2  (from: xxx-xxx)
+
 3.[D][0] sample task 3  (by: xxx)
+
 
 
 **done 1**
@@ -119,11 +125,16 @@ Nice! I've marked this task as done:
 
 [1] todo sample task 1
 
+
+
 **list**
 
 1.[T][1] sample task 1
+
 2.[E][0] sample task 2  (from: xxx-xxx)
+
 3.[D][0] sample task 3  (by: xxx)
+
 
 
 **delete 2**
@@ -135,10 +146,13 @@ Noted. I've removed this task:
 Now you have 2 tasks in the list.
 
 
+
 **list**
 
 1.[T][1] sample task 1
+
 2.[D][0] sample task 3  (by: xxx)
+
 
 
 **find task 3**
@@ -146,6 +160,7 @@ Now you have 2 tasks in the list.
 Here are the matching tasks in your list:
 
 2.[D][0] sample task 3  (by: xxx)
+
 
 
 **bye**
