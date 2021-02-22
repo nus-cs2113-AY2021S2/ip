@@ -1,83 +1,93 @@
 package ui;
 
-import dukehandler.TaskList;
+import dukehandler.TaskManager;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import java.io.File;
 
 public class SuccessMessagePrinter {
-    private final TaskList taskList;
-    static final String DOTTED_LINE = "____________________________________________________________";
-    public SuccessMessagePrinter(TaskList taskList) {
-        this.taskList = taskList;
+    static final String DOTTED_LINE
+            = "____________________________________________________________";
+
+    public SuccessMessagePrinter() {
     }
 
-    public void showDottedLine() {
-        System.out.println("____________________________________________________________");
+    public static void printCurrentTimeAndDate() {
+        String time = " Local Time: ";
+        LocalDateTime dateToday = LocalDateTime.now();
+        time += dateToday.format(DateTimeFormatter.ofPattern("d MMM yyyy HH:mm"));
+        System.out.println("\n  " + "-".repeat(time.length()) + "\n "
+                + time + "\n  " + "-".repeat(time.length()));
+
     }
 
-    public void printGreetMessage() {
+    public static void printGreetMessage() {
         final String LOGO = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-
         String greetMessage = " Hello! I'm Duke :D" + " Be nice to me:)\n";
 
         System.out.println("Hello from\n" + LOGO);
         System.out.println(DOTTED_LINE);
         System.out.println(greetMessage);
         printHelpMessage();
-        showDottedLine();
+        System.out.println(DOTTED_LINE);
     }
 
-    public void printNewFileCreatedMessage(File f) {
+    public static void printNewFileCreatedMessage(File f) {
         System.out.println(" I have created a file at this location:\n "
                 + f.getAbsolutePath() + "\n"
                 + " to store all your tasks!");
-        showDottedLine();
+        System.out.println(DOTTED_LINE);
     }
 
-    public void printHelloMessage() {
+    public static void printHelloMessage() {
         String helloMessage = " Hello to you too. I'm here to help you:)\n" +
                 " Give me something to do!";
         System.out.println(helloMessage);
         System.out.println(" Type 'help' if you need help.");
     }
 
-    public void printHelpMessage() {
+    public static void printHelpMessage() {
         String helpMessage = " Try entering commands like : help, list, done, bye,\n"
-                + " todo <taskName>\n"
-                + " || deadline <taskName> /by <time>\n"
-                + " || event <taskName> /at <time> ||\n"
+                + " add new todo <taskName>\n"
+                + " || deadline <taskName> /by <date YYYY-MM-DD> <time hh:mm>\n"
+                + " || event <taskName>    /at <date YYYY-MM-DD> <time hh:mm>\n"
+                + " print type <task type> to filter based on type\n"
+                + " print date <task date> to filter based on date\n"
                 + " Remember: be nice!";
         System.out.println(helpMessage);
     }
 
-    public void printAddedTask() {
+    public static void printAddedTask() {
         System.out.println(" Got it. I've added this task:");
-        System.out.println("   " + (taskList.tasks.get(taskList.tasks.size() - 1)).toString());
-        System.out.println(" Now you have " + taskList.tasks.size() + " task"
-                + (taskList.tasks.size() == 1 ? " " : "s ") + "in the list.");
+        System.out.println("   " + (TaskManager.tasks.get(TaskManager.tasks.size() - 1)).toString());
+        System.out.println(" Now you have " + TaskManager.tasks.size() + " task"
+                + (TaskManager.tasks.size() == 1 ? " " : "s ") + "in the list.");
     }
 
-    public void printTaskMarkedDone(int index) {
+    public static void printTaskMarkedDone(int index) {
         System.out.println(" Nice! I've marked this task as done:\n "
-                + taskList.tasks.get(index).toString());
+                + TaskManager.tasks.get(index).toString());
     }
 
-    public void printRemovedTask(int removeIndexInt) {
+    public static void printRemovedTask(int removeIndexInt) {
         System.out.println(" Noted. I've removed this task:");
-        System.out.println("   " + taskList.tasks.get(removeIndexInt - 1).toString());
-        System.out.println(" Now you have " + (taskList.tasks.size() - 1) + " task"
-                + (taskList.tasks.size() - 1 == 1 ? " " : "s ") + "in the list.");
+        System.out.println("   " + TaskManager.tasks.get(removeIndexInt - 1).toString());
+        System.out.println(" Now you have " + (TaskManager.tasks.size() - 1) + " task"
+                + (TaskManager.tasks.size() - 1 == 1 ? " " : "s ") + "in the list.");
     }
 
-    public void printByeMessage() {
+    public static void printByeMessage() {
+        System.out.println(DOTTED_LINE);
         String byeMessage = " I learnt more about you, kind human!\n"
                 + " I won't forget you when I take over the world one day:)";
         System.out.println(byeMessage);
-        showDottedLine();
+        System.out.println(DOTTED_LINE);
     }
 
 }

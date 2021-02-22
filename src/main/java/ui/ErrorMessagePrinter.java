@@ -55,4 +55,14 @@ public class ErrorMessagePrinter {
                 " because of an IO Error. Sorry!\n" + DOTTED_LINE;
         System.out.println(IOErrorMessage);
     }
+
+    public static void printTimeParseErrorMessage() {
+        System.out.println(" OOPS!!! The date or time you entered could not be parsed.\n" +
+                " Please try again.");
+    }
+
+    public static void printTaskStreamError(String typeOrDate) {
+        System.out.println(" OOPS!!! You did not enter the task "
+                + typeOrDate + " correctly!\n Please try again:(");
+    }
 }

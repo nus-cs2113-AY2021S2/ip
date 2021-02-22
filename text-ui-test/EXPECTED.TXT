@@ -9,9 +9,11 @@ ____________________________________________________________
  Hello! I'm Duke :D Be nice to me:)
 
  Try entering commands like : help, list, done, bye,
- todo <taskName>
- || deadline <taskName> /by <time>
- || event <taskName> /at <time> ||
+ add new todo <taskName>
+ || deadline <taskName> /by <date YYYY-MM-DD> <time hh:mm>
+ || event <taskName>    /at <date YYYY-MM-DD> <time hh:mm>
+ print type <task type> to filter based on type
+ print date <task date> to filter based on date
  Remember: be nice!
 ____________________________________________________________
  I have created a file at this location:
@@ -70,12 +72,12 @@ ____________________________________________________________
 ____________________________________________________________
 ____________________________________________________________
  Got it. I've added this task:
-   [E][ ] meeting (at: 2pm tomorrow)
+   [E][ ] meeting (at: 21 Feb 2021 23:59)
  Now you have 2 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
  Got it. I've added this task:
-   [D][ ] homework (by: tonight 2359)
+   [D][ ] homework (by: 23 Feb 2021 23:59)
  Now you have 3 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
@@ -83,20 +85,28 @@ ____________________________________________________________
  [T][X] be happy
 ____________________________________________________________
 ____________________________________________________________
+
+  ------------------------------
+  Local Time: 21 Feb 2021 20:48
+  ------------------------------
  Here are the tasks in your list:
  1.[T][X] be happy
- 2.[E][ ] meeting (at: 2pm tomorrow)
- 3.[D][ ] homework (by: tonight 2359)
+ 2.[E][ ] meeting (at: 21 Feb 2021 23:59)
+ 3.[D][ ] homework (by: 23 Feb 2021 23:59)
 ____________________________________________________________
 ____________________________________________________________
  Nice! I've marked this task as done:
- [E][X] meeting (at: 2pm tomorrow)
+ [E][X] meeting (at: 21 Feb 2021 23:59)
 ____________________________________________________________
 ____________________________________________________________
+
+  ------------------------------
+  Local Time: 21 Feb 2021 20:48
+  ------------------------------
  Here are the tasks in your list:
  1.[T][X] be happy
- 2.[E][X] meeting (at: 2pm tomorrow)
- 3.[D][ ] homework (by: tonight 2359)
+ 2.[E][X] meeting (at: 21 Feb 2021 23:59)
+ 3.[D][ ] homework (by: 23 Feb 2021 23:59)
 ____________________________________________________________
 ____________________________________________________________
  OOPS!!! The command format for deadline is wrong.
@@ -116,49 +126,105 @@ ____________________________________________________________
 ____________________________________________________________
 ____________________________________________________________
  Got it. I've added this task:
-   [D][ ] return books (by: tomorrow 5pm)
+   [D][ ] return books (by: 22 Feb 2021 23:59)
  Now you have 4 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
+ Got it. I've added this task:
+   [D][ ] buy new books (by: 23 Feb 2021 08:00)
+ Now you have 5 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+ Got it. I've added this task:
+   [E][ ] selling new books (at: 23 Feb 2021 10:00)
+ Now you have 6 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+
+  ------------------------------
+  Local Time: 21 Feb 2021 20:48
+  ------------------------------
  Here are the tasks in your list:
  1.[T][X] be happy
- 2.[E][X] meeting (at: 2pm tomorrow)
- 3.[D][ ] homework (by: tonight 2359)
- 4.[D][ ] return books (by: tomorrow 5pm)
+ 2.[E][X] meeting (at: 21 Feb 2021 23:59)
+ 3.[D][ ] homework (by: 23 Feb 2021 23:59)
+ 4.[D][ ] return books (by: 22 Feb 2021 23:59)
+ 5.[D][ ] buy new books (by: 23 Feb 2021 08:00)
+ 6.[E][ ] selling new books (at: 23 Feb 2021 10:00)
 ____________________________________________________________
 ____________________________________________________________
  Nice! I've marked this task as done:
- [D][X] return books (by: tomorrow 5pm)
+ [D][X] return books (by: 22 Feb 2021 23:59)
 ____________________________________________________________
 ____________________________________________________________
+
+  ------------------------------
+  Local Time: 21 Feb 2021 20:48
+  ------------------------------
  Here are the tasks in your list:
  1.[T][X] be happy
- 2.[E][X] meeting (at: 2pm tomorrow)
- 3.[D][ ] homework (by: tonight 2359)
- 4.[D][X] return books (by: tomorrow 5pm)
+ 2.[E][X] meeting (at: 21 Feb 2021 23:59)
+ 3.[D][ ] homework (by: 23 Feb 2021 23:59)
+ 4.[D][X] return books (by: 22 Feb 2021 23:59)
+ 5.[D][ ] buy new books (by: 23 Feb 2021 08:00)
+ 6.[E][ ] selling new books (at: 23 Feb 2021 10:00)
 ____________________________________________________________
 ____________________________________________________________
  Nice! I've marked this task as done:
- [D][X] homework (by: tonight 2359)
+ [D][X] homework (by: 23 Feb 2021 23:59)
 ____________________________________________________________
 ____________________________________________________________
+
+  ------------------------------
+  Local Time: 21 Feb 2021 20:48
+  ------------------------------
  Here are the tasks in your list:
  1.[T][X] be happy
- 2.[E][X] meeting (at: 2pm tomorrow)
- 3.[D][X] homework (by: tonight 2359)
- 4.[D][X] return books (by: tomorrow 5pm)
- Woah, all completed! Good job!
+ 2.[E][X] meeting (at: 21 Feb 2021 23:59)
+ 3.[D][X] homework (by: 23 Feb 2021 23:59)
+ 4.[D][X] return books (by: 22 Feb 2021 23:59)
+ 5.[D][ ] buy new books (by: 23 Feb 2021 08:00)
+ 6.[E][ ] selling new books (at: 23 Feb 2021 10:00)
 ____________________________________________________________
 ____________________________________________________________
  Hey, you've already marked that as done!
 ____________________________________________________________
 ____________________________________________________________
  Hey, you've already marked that as done!
+____________________________________________________________
+____________________________________________________________
+[D][X] homework (by: 23 Feb 2021 23:59)
+[D][X] return books (by: 22 Feb 2021 23:59)
+[D][ ] buy new books (by: 23 Feb 2021 08:00)
+____________________________________________________________
+____________________________________________________________
+[D][X] homework (by: 23 Feb 2021 23:59)
+[D][X] return books (by: 22 Feb 2021 23:59)
+[D][ ] buy new books (by: 23 Feb 2021 08:00)
+____________________________________________________________
+____________________________________________________________
+[E][X] meeting (at: 21 Feb 2021 23:59)
+[E][ ] selling new books (at: 23 Feb 2021 10:00)
+____________________________________________________________
+____________________________________________________________
+[E][X] meeting (at: 21 Feb 2021 23:59)
+[E][ ] selling new books (at: 23 Feb 2021 10:00)
+____________________________________________________________
+____________________________________________________________
+[T][X] be happy
+____________________________________________________________
+____________________________________________________________
+[T][X] be happy
+____________________________________________________________
+____________________________________________________________
+[D][X] homework (by: 23 Feb 2021 23:59)
+[D][ ] buy new books (by: 23 Feb 2021 08:00)
+[E][ ] selling new books (at: 23 Feb 2021 10:00)
 ____________________________________________________________
 ____________________________________________________________
  Hey, no funny business!
  After the 'delete' command, enter a valid integer within this range:
- [1, 4]
+ [1, 6]
  Please don't break me:( No tricks!
  Type 'list' to see all the tasks.
  Type 'help' if you need help.
@@ -166,43 +232,51 @@ ____________________________________________________________
 ____________________________________________________________
  Hey, no funny business!
  After the 'delete' command, enter a valid integer within this range:
- [1, 4]
+ [1, 6]
  Please don't break me:( No tricks!
  Type 'list' to see all the tasks.
  Type 'help' if you need help.
 ____________________________________________________________
 ____________________________________________________________
  Noted. I've removed this task:
-   [D][X] homework (by: tonight 2359)
- Now you have 3 tasks in the list.
+   [D][X] homework (by: 23 Feb 2021 23:59)
+ Now you have 5 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
+
+  ------------------------------
+  Local Time: 21 Feb 2021 20:48
+  ------------------------------
  Here are the tasks in your list:
  1.[T][X] be happy
- 2.[E][X] meeting (at: 2pm tomorrow)
- 3.[D][X] return books (by: tomorrow 5pm)
- Woah, all completed! Good job!
+ 2.[E][X] meeting (at: 21 Feb 2021 23:59)
+ 3.[D][X] return books (by: 22 Feb 2021 23:59)
+ 4.[D][ ] buy new books (by: 23 Feb 2021 08:00)
+ 5.[E][ ] selling new books (at: 23 Feb 2021 10:00)
 ____________________________________________________________
 ____________________________________________________________
- Hey, no funny business!
- After the 'delete' command, enter a valid integer within this range:
- [1, 3]
- Please don't break me:( No tricks!
- Type 'list' to see all the tasks.
- Type 'help' if you need help.
+ Noted. I've removed this task:
+   [D][ ] buy new books (by: 23 Feb 2021 08:00)
+ Now you have 4 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
+
+  ------------------------------
+  Local Time: 21 Feb 2021 20:48
+  ------------------------------
  Here are the tasks in your list:
  1.[T][X] be happy
- 2.[E][X] meeting (at: 2pm tomorrow)
- 3.[D][X] return books (by: tomorrow 5pm)
- Woah, all completed! Good job!
+ 2.[E][X] meeting (at: 21 Feb 2021 23:59)
+ 3.[D][X] return books (by: 22 Feb 2021 23:59)
+ 4.[E][ ] selling new books (at: 23 Feb 2021 10:00)
 ____________________________________________________________
 ____________________________________________________________
  Try entering commands like : help, list, done, bye,
- todo <taskName>
- || deadline <taskName> /by <time>
- || event <taskName> /at <time> ||
+ add new todo <taskName>
+ || deadline <taskName> /by <date YYYY-MM-DD> <time hh:mm>
+ || event <taskName>    /at <date YYYY-MM-DD> <time hh:mm>
+ print type <task type> to filter based on type
+ print date <task date> to filter based on date
  Remember: be nice!
 ____________________________________________________________
 ____________________________________________________________
@@ -217,41 +291,50 @@ ____________________________________________________________
 ____________________________________________________________
 ____________________________________________________________
  Noted. I've removed this task:
-   [E][X] meeting (at: 2pm tomorrow)
- Now you have 2 tasks in the list.
+   [E][X] meeting (at: 21 Feb 2021 23:59)
+ Now you have 3 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
+
+  ------------------------------
+  Local Time: 21 Feb 2021 20:48
+  ------------------------------
  Here are the tasks in your list:
  1.[T][X] be happy
- 2.[D][X] return books (by: tomorrow 5pm)
- Woah, all completed! Good job!
+ 2.[D][X] return books (by: 22 Feb 2021 23:59)
+ 3.[E][ ] selling new books (at: 23 Feb 2021 10:00)
 ____________________________________________________________
 ____________________________________________________________
  Noted. I've removed this task:
    [T][X] be happy
+ Now you have 2 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+
+  ------------------------------
+  Local Time: 21 Feb 2021 20:48
+  ------------------------------
+ Here are the tasks in your list:
+ 1.[D][X] return books (by: 22 Feb 2021 23:59)
+ 2.[E][ ] selling new books (at: 23 Feb 2021 10:00)
+____________________________________________________________
+____________________________________________________________
+ Noted. I've removed this task:
+   [E][ ] selling new books (at: 23 Feb 2021 10:00)
  Now you have 1 task in the list.
 ____________________________________________________________
 ____________________________________________________________
+
+  ------------------------------
+  Local Time: 21 Feb 2021 20:48
+  ------------------------------
  Here are the tasks in your list:
- 1.[D][X] return books (by: tomorrow 5pm)
- Woah, all completed! Good job!
-____________________________________________________________
-____________________________________________________________
- Hey, no funny business!
- After the 'delete' command, enter a valid integer within this range:
- [1, 1]
- Please don't break me:( No tricks!
- Type 'list' to see all the tasks.
- Type 'help' if you need help.
-____________________________________________________________
-____________________________________________________________
- Here are the tasks in your list:
- 1.[D][X] return books (by: tomorrow 5pm)
+ 1.[D][X] return books (by: 22 Feb 2021 23:59)
  Woah, all completed! Good job!
 ____________________________________________________________
 ____________________________________________________________
  Noted. I've removed this task:
-   [D][X] return books (by: tomorrow 5pm)
+   [D][X] return books (by: 22 Feb 2021 23:59)
  Now you have 0 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________

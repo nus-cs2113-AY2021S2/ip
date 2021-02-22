@@ -10,7 +10,7 @@ public class Task {
     }
 
     public String getTaskType() {
-        return "";
+        return "-";
     }
 
     public String getStatusIcon() {
@@ -33,4 +33,7 @@ public class Task {
         return "";
     }
 
+    public String getDate() {
+        return "";
+    }
 }
