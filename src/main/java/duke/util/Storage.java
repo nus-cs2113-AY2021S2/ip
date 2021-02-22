@@ -5,7 +5,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -33,6 +32,7 @@ public class Storage {
             }
         } catch (Exception e) {
             ui.showLoadingError(e);
+            System.exit(1);
         }
     }
 

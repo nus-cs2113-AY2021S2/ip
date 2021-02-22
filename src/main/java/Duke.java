@@ -1,4 +1,3 @@
-import java.util.Scanner;
 import duke.commands.Command;
 import duke.task.TaskList;
 import duke.util.Parser;
@@ -20,8 +19,8 @@ public class Duke {
 
     public static void main(String[] args) {
         new Duke();
-        ui.displayWelcomeMessage();
         storage.loadHistory(home, taskList);
+        ui.displayWelcomeMessage();
         run();
         storage.saveHistory(home, taskList);
         ui.displayExitMessage();
@@ -29,9 +28,9 @@ public class Duke {
 
     public static void run() {
 	    boolean isExit = false;
-	    Scanner scanner = new Scanner(System.in);
+        ui.openScanner();
 	    while (!isExit) {
-            String fullCommand = scanner.nextLine();
+            String fullCommand = ui.readLine();
             Parser parser = new Parser(fullCommand);
 	        Command command = parser.getCommand();
 	        try {
@@ -41,6 +40,6 @@ public class Duke {
 	            ui.printErrorMessage(e);
 	        }
 	    }
-	    scanner.close();
+        ui.closeScanner();
 	}
 }

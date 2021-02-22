@@ -1,5 +1,0 @@
-Todo~false~team project
-Event~true~lecture~friday
-Todo~false~with a lot of whitespace
-Deadline~false~project whitespace~tomorrow
-Event~false~meeting whitespace~tomorrow

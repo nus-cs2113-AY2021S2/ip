@@ -1,10 +1,12 @@
 package duke.util;
 
+import java.util.Scanner;
 import duke.task.Task;
 import duke.task.TaskList;
 
 public class Ui {
     
+    public static Scanner scanner;
     public static final String COMMANDS = 
             "Commands:\n"
             + "    todo taskName\n"
@@ -37,6 +39,19 @@ public class Ui {
         String errorMessage = "ERROR retrieving data!\n" + e.getLocalizedMessage();
         printWithBorder(errorMessage);
 	}
+
+    public void openScanner() {
+        scanner = new Scanner(System.in);
+    }
+
+    public String readLine() {
+        String line = scanner.nextLine();
+        return line;
+    }
+
+    public void closeScanner() {
+        scanner.close();
+    }
 
     public void printHelpMessage() {
         printWithBorder(COMMANDS);
