@@ -1,14 +1,14 @@
 package duke;
 
 public class DukeCommandValidator {
-    static final int MINIMUM_DONE_COMMAND_LENGTH = "done x".length();
-    static final int MINIMUM_TODO_COMMAND_LENGTH = "todo x".length();
-    static final int MINIMUM_FIND_COMMAND_LENGTH = "find x".length();
-    static final int MINIMUM_EVENT_COMMAND_LENGTH = "event x /x x".length();
-    static final int MINIMUM_INDEX_OF_BACKSLASH_FOR_EVENT = "event x /".indexOf('/');
-    static final int MINIMUM_DEADLINE_COMMAND_LENGTH = "deadline x /x x".length();
-    static final int MINIMUM_INDEX_OF_BACKSLASH_FOR_DEADLINE = "deadline x /".indexOf('/');
-    static final int MINIMUM_DELETE_COMMAND_LENGTH = "delete x".length();
+    private static final int MINIMUM_DONE_COMMAND_LENGTH = "done x".length();
+    private static final int MINIMUM_TODO_COMMAND_LENGTH = "todo x".length();
+    private static final int MINIMUM_FIND_COMMAND_LENGTH = "find x".length();
+    private static final int MINIMUM_EVENT_COMMAND_LENGTH = "event x /x x".length();
+    private static final int MINIMUM_INDEX_OF_BACKSLASH_FOR_EVENT = "event x /".indexOf('/');
+    private static final int MINIMUM_DEADLINE_COMMAND_LENGTH = "deadline x /x x".length();
+    private static final int MINIMUM_INDEX_OF_BACKSLASH_FOR_DEADLINE = "deadline x /".indexOf('/');
+    private static final int MINIMUM_DELETE_COMMAND_LENGTH = "delete x".length();
 
     public static int getCommand(String input){
         if(input.equals("bye")){
