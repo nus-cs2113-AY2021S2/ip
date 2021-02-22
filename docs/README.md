@@ -54,46 +54,45 @@ The **Duke** app is run via a file with the extension `.jar`. The following step
 1. If the `tasks.txt` file does not already exist in the _home folder_ that you are in currently, **Duke** will tell you the file path where the `tasks.txt` file is saved. It will be saved in your _home folder_ where your `.jar` file is located.
 
 
+   #### Command: `help`
+   Prints the command formats that **Duke** will respond to.
 
-
-#### Command: `help`
-- Prints the command formats that **Duke** will respond to.
 #### Command: `hello`, `hey`
-- Prints a message
+   Prints a message
 #### Command `todo <task name>`
-- Adds a To-Do to your list
-- indicated by `[T]` symbol
-- **e.g.** `todo be happy`
+   Adds a To-Do to your list
+   indicated by `[T]` symbol
+   **e.g.** `todo be happy`
 #### Command `deadline <task name> /by <YYYY-MM-DD> <HH:MM>`
-- Adds a Deadline to your list
-- indicated by `[D]` symbol
-- Time should be entered in 24-hour clock format
-- **e.g.** `deadline finish homework /by 2021-02-23 23:59`
+   Adds a Deadline to your list
+   indicated by `[D]` symbol
+   Time should be entered in 24-hour clock format
+   **e.g.** `deadline finish homework /by 2021-02-23 23:59`
 #### Command `event <task name> /at <YYYY-MM-DD> <HH:MM>`
-- Adds an Event to your list
-- indicated by `[E]` symbol
-- Time should be entered in 24-hour clock format
-- **e.g.** `event birthday party /at 2020-02-28 23:59`
+   Adds an Event to your list
+   indicated by `[E]` symbol
+   Time should be entered in 24-hour clock format
+   **e.g.** `event birthday party /at 2020-02-28 23:59`
 #### Command `list`
-- Prints all the current tasks along with dates and times
-- Prints current time and date for reference
+   Prints all the current tasks along with dates and times
+   Prints current time and date for reference
 #### Command `done <task number`
-- Marks a task at task number in list as '_done_'
-    - indicated by `[X]` in field beside task
-- **e.g.** `done 2`
+   Marks a task at task number in list as '_done_'
+      indicated by `[X]` in field beside task
+   **e.g.** `done 2`
 #### Command `delete <task number`
-- Removes a task at task number from list
-    - **_NOTE:_** This action changes the numbering of tasks in the list.
-- **e.g.** `delete 2`
+   Removes a task at task number from list
+      **_NOTE:_** This action changes the numbering of tasks in the list.
+   **e.g.** `delete 2`
 #### Command `find <common keyword in tasks>`
-- Finds and filters out the tasks with a desired keyword
-- **e.g.** `find book` - this would print out all tasks (to-dos/deadlines/events) that contain the word `book`
+   Finds and filters out the tasks with a desired keyword
+   **e.g.** `find book` - this would print out all tasks (to-dos/deadlines/events) that contain the word `book`
 #### Command `print type <task type>`
-- Prints out all tasks of a certain kind (e.g. deadlines, etc.)
-- **e.g.** `print type event` - this would print out all the events _in the same order of tasks entered_
+   Prints out all tasks of a certain kind (e.g. deadlines, etc.)
+   **e.g.** `print type event` - this would print out all the events _in the same order of tasks entered_
 #### Command `print date <task date YYYY-MM-DD>`
-- Prints out all tasks with a certain date (e.g. 2020-02-28)
-- **e.g.** `print date 2020-02-28` - this would print out all the tasks (deadlines and events only) with this particular date
+   Prints out all tasks with a certain date (e.g. 2020-02-28)
+   **e.g.** `print date 2020-02-28` - this would print out all the tasks (deadlines and events only) with this particular date
 
 ### Saving of tasks list locally on your computer
 When the command `bye` is given to **Duke**, it will automatically save the current task list from the **Duke** program in the `tasks.txt` file (located in your _home folder_ ; file path specified at beginning for the first time)
