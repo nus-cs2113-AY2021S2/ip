@@ -1,14 +1,10 @@
-import java.util.ArrayList;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
 import java.util.Scanner;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
+import duke.util.Storage;
 import duke.util.Ui;
 import duke.exception.EmptyCommandArgException;
 import duke.exception.InvalidCommandException;
@@ -16,67 +12,25 @@ import duke.exception.InvalidCommandTimeException;
 import duke.exception.InvalidTaskNumberException;
 
 public class Duke {
-    private static Ui ui;
-    private static TaskList taskList;
+    public static Ui ui;
+    public static TaskList taskList;
+    private static Storage storage;
+    private static String home;
 
     public Duke() {
         ui = new Ui();
         taskList = new TaskList();
+        storage = new Storage(ui);
+        home = System.getProperty("user.dir");
     }
 
     public static void main(String[] args) {
         new Duke();
         ui.displayWelcomeMessage();
-        loadHistory();
+        storage.loadHistory(home, taskList);
         inputAndExecuteCommand();
-        saveHistory();
+        storage.saveHistory(home, taskList);
         ui.displayExitMessage();
-    }
-
-
-    public static void loadHistory() {
-        String home = System.getProperty("user.dir");
-        loadDataFile(home);
-    }
-
-    public static void loadDataFile(String home) {
-        Path path = Paths.get(home, "data", "duke.txt");
-        if (!Files.exists(path)) {
-            return;
-        }
-        try {
-            List<String> data = Files.readAllLines(path);
-            for (String line : data) {
-                loadTask(line);
-            }
-        } catch (Exception e) {
-            ui.showLoadingError(e);
-        }
-    }
-
-    public static void loadTask(String line) {
-        String[] tokens = line.split("~");
-        String taskType = tokens[0];
-        String isDone = tokens[1];
-        String description = tokens[2];
-        Task task = new Task(description);
-        switch (taskType) {
-        case "Todo":
-            task = new Todo(description);
-            break;
-        case "Deadline":
-            String by = tokens[3];
-            task = new Deadline(description, by);
-            break;
-        case "Event":
-            String at = tokens[3];
-            task = new Event(description, at);
-            break;
-        }
-        if (isDone == String.valueOf(true)) {
-            task.setIsDone();
-        }
-        taskList.addTask(task);
     }
 
     public static void inputAndExecuteCommand() {
@@ -226,23 +180,5 @@ public class Duke {
 
     public static boolean isEmptyArgument(String commandArg) {
         return commandArg.length() == 0;
-    }
-
-    public static void saveHistory() {
-        String home = System.getProperty("user.dir");
-        try {
-            Path directoryPath = Paths.get(home, "data");
-            if (Files.notExists(directoryPath)) {
-                Files.createDirectory(directoryPath);
-            }
-
-            Path filePath = Paths.get(home, "data", "duke.txt");
-            Files.deleteIfExists(filePath);
-            Files.createFile(filePath);
-            ArrayList<String> listOfTaskDetails = taskList.getListOfTaskDetails();
-            Files.write(filePath, listOfTaskDetails);
-        } catch (Exception e) {
-            ui.showSavingError(e);
-        }
     }
 }
