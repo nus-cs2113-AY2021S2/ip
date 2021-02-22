@@ -35,6 +35,10 @@ public class AmendListsCommands extends Command {
             CommandsHandler.handleDelete(tasks, sentence);
             break;
         }
+        case "search": {
+            CommandsHandler.handleSearch(tasks, sentence);
+            break;
+        }
         default:
             UI.printCommandDoesNotExist();
         }

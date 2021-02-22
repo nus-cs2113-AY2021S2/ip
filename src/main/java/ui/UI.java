@@ -97,15 +97,30 @@ public class UI {
                 + "            done  <index>          :mark task <index> as done in List" + System.lineSeparator()
                 + "            delete  <index>        :delete task <index> in List" + System.lineSeparator()
                 + "            find  <task>           :mark task <index> as done in List" + System.lineSeparator()
-                + "         search YYYY/MM/DD         :add task to Deadline List" + System.lineSeparator();
+                + "         search yyyy/MM/dd         :add task to Deadline List" + System.lineSeparator();
 
         System.out.println(help);
         printDottedLines();
     }
 
-    // Prompts the user to input date
-    public static void printInsertCorrectDate() {
+    // Prompts the user to input date for new task
+    public static void printInsertCorrectDateTask() {
         System.out.println("Please re-enter date in this format yyyy/MM/dd HHmm");
+    }
+
+    // Prompts the user to input date for search command
+    public static void printInsertCorrectDateSearch() {
+        System.out.println("Please re-enter date in this format yyyy/MM/dd:");
+    }
+
+    // Prints search command has been completed
+    public static void printSearchComplete(){
+        System.out.println("Search has been completed!! (￣^￣)ゞ");
+    }
+
+    // Prints no match found
+    public static void printNoMatchFound(){
+        System.out.println("No match found!! （／．＼）");
     }
 
     public static void printListName() {
