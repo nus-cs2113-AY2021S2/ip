@@ -1,3 +1,4 @@
+import FileStorage.FileStorage;
 import exceptions.IllegalCommandException;
 import exceptions.IllegalListException;
 import exceptions.IllegalTaskException;
@@ -7,7 +8,6 @@ import list.*;
 import java.util.ArrayList;
 import java.io.File;
 import java.util.Scanner;
-import java.io.FileWriter;
 
 public class Duke {
 
@@ -16,6 +16,7 @@ public class Duke {
     public static final String FILE_PATH = "duke.txt";
     public static ArrayList<TaskList> tasks = new ArrayList<>();
     public static duke dukeList = new duke(CHAT_BOT_NAME);
+    public static FileStorage fileHandler = new FileStorage();
 
     public static void main(String[] args) {
         loadFromFile();
@@ -55,58 +56,6 @@ public class Duke {
             dukeList.printEmptyFile();
         }
     }
-
-    public static void saveToFile() {
-        boolean hasSaved = true;
-        do {
-            hasSaved = writeToFile(hasSaved);
-        } while (!hasSaved);
-    }
-
-    private static boolean writeToFile(boolean hasSaved) {
-        try {
-            FileWriter fw = new FileWriter(FILE_PATH);
-            hasSaved = true;
-            for (TaskList t : tasks) {
-                hasSaved = writeTaskToFile(fw, t);
-            }
-            fw.close();
-        } catch (java.io.IOException e) {
-            File file = new File(FILE_PATH);
-            hasSaved = false;
-        }
-        return hasSaved;
-    }
-
-    private static boolean writeTaskToFile(FileWriter fw, TaskList t) {
-        boolean hasSaved = true;
-        if (t instanceof Event) {
-            Event temp = (Event) t;
-            try {
-                fw.write(temp.getTaskToPrintInFile());
-            } catch (java.io.IOException e) {
-                hasSaved = false;
-            }
-
-        } else if (t instanceof Deadline) {
-            Deadline temp = (Deadline) t;
-            try {
-                fw.write(temp.getTaskToPrintInFile());
-            } catch (java.io.IOException e) {
-                hasSaved = false;
-            }
-
-        } else if (t instanceof Todo) {
-            Todo temp = (Todo) t;
-            try {
-                fw.write(temp.getTaskToPrintInFile());
-            } catch (java.io.IOException e) {
-                hasSaved = false;
-            }
-        }
-        return hasSaved;
-    }
-
 
     private static void processCommands() {
         String line;
@@ -217,7 +166,7 @@ public class Duke {
         default:
             throw new IllegalCommandException();
         }
-        saveToFile();
+        fileHandler.saveToFile(tasks);
     }
 
     private static void addTaskInDeadlineList(String line) {
