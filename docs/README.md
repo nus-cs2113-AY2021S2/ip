@@ -2,6 +2,7 @@
 
 Duke is a personal assistant chatbot that helps a person to keep track of various tasks via a Command Line Interface (CLI).
 
+
 ## Quick Start
 
 1. Ensure you have Java 11 or above installed in your Computer.
@@ -11,38 +12,45 @@ Duke is a personal assistant chatbot that helps a person to keep track of variou
 5. Type *java -jar <filename>.jar* to launch the program.
 6. Refer to the instruction that is displayed automatically when the program is launched to start using the program. 
 
+
 ## Features
 
 ### Listing all tasks: list
 Shows a list of all tasks in Duke.
+
 Format: list
 
 ### Marking a task as completed: done
 Marks an exisitng task as completed.
+
 Format: done x
 Example: 
 * done 1
 
 ### Deleting a task: delete
 Deletes an existing task.
+
 Format: delete x
 Example: 
 * delete 2
 
 ### locate tasks by keyword: find
 Finds tasks which the task descriptions contain a particular keyword.
+
 Format: find keyword:
 Example:
 * find task 3
 
 ### Adding a ToDo task: todo
 Adds a task without a specific deadline or duration.
+
 Format: todo TASK_DESCRIPTION
 Example:
 * todo book out on sunday
 
 ### Adding a Deadline task: deadline
 Adds a task with a specific deadline.
+
 Format: deadline TASK_DESCRIPTION /KEYWORD DATE_TIME_DESCRIPTION
 Example:
 * deadline Finish ip /by tmr at 23:59 
@@ -50,6 +58,7 @@ Example:
 
 ### Adding an Event task: event
 Adds a task with a specific duration.
+
 Format: event TASK_DESCRIPTION /KEYWORD DATE_TIME_DESCRIPTION
 Example:
 * event CS2113 meeting /from 2/22/2021 2pm to 3pm
@@ -57,6 +66,7 @@ Example:
 
 ### Exiting the program : bye
 Exits the program.
+
 Format: bye
 
 
