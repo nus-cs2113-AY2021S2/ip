@@ -29,6 +29,9 @@ public class TaskManager {
     public TaskManager() {
     }
 
+    /**
+     * If 'list' command is given
+     */
     public static void printAllTasks() {
         boolean isAllDone = true;
         if (tasks.isEmpty()) {
@@ -48,6 +51,10 @@ public class TaskManager {
         }
     }
 
+    /**
+     * If 'done' command is given
+     * @param doneIndexString input index to be verified by Checker
+     */
     public static void markTaskAsDone(String doneIndexString) {
         int doneIndexInteger;
         try {
@@ -67,6 +74,11 @@ public class TaskManager {
         SuccessMessagePrinter.printTaskMarkedDone(doneIndexInteger - 1);
     }
 
+    /**
+     * If any one of the tasks are called to be added
+     * @param taskType deadline, todo, or event
+     * @param fullCommand full string input to be parsed later for description
+     */
     public static void addNewTask(String taskType, String fullCommand) {
         String[] part = fullCommand.split(taskType);
         try {
@@ -112,6 +124,10 @@ public class TaskManager {
                 : new Event(taskName, dateToString, timeToString));
     }
 
+    /**
+     * If 'delete' command is given
+     * @param removeIndexString input index to be verified by Checker
+     */
     public static void removeTask(String removeIndexString) {
         int removeIndexInt;
         try {

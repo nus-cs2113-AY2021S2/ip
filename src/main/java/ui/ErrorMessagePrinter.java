@@ -1,5 +1,8 @@
 package ui;
 
+/**
+ * Prints all error messages.
+ */
 public class ErrorMessagePrinter {
     static final String DOTTED_LINE = "____________________________________________________________";
 

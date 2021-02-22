@@ -22,6 +22,15 @@ public class Checker {
      * @throws EmptyListException If list is empty
      */
 
+    /**
+     * Checks if index to mark done is valid.
+     *
+     * @param doneIndexInt the index of the task to be marked done
+     * @throws IllegalTaskMarkedDoneException If index is out of bounds
+     * @throws TaskAlreadyMarkedException     If task is already marked as done
+     * @throws EmptyListException             If list is empty
+     */
+
     public static void checkTaskToMarkDone(int doneIndexInt)
             throws IllegalTaskMarkedDoneException,
             TaskAlreadyMarkedException,
@@ -37,9 +46,10 @@ public class Checker {
 
     /**
      * Checks if new task input is in the correct format
-     * @param taskType whether it is deadline, event, or todo
+     *
+     * @param taskType    whether it is deadline, event, or todo
      * @param description the name of the task (may include time and/or date)
-     * @throws InvalidCommandException if command cannot be parsed (wrong input).
+     * @throws InvalidCommandException          if command cannot be parsed (wrong input).
      * @throws EmptyCommandDescriptionException if command is followed by an invalid character.
      */
     public static void checkNewTaskToAdd(String taskType, String description)
@@ -64,9 +74,10 @@ public class Checker {
 
     /**
      * Checks if index to remove is valid.
+     *
      * @param removeIndexInt the index of the task to be removed
      * @throws IllegalTaskRemovedException if index is out of bounds
-     * @throws EmptyListException if list is empty
+     * @throws EmptyListException          if list is empty
      */
     public static void checkTaskToRemove(int removeIndexInt)
             throws IllegalTaskRemovedException, EmptyListException {
