@@ -1,5 +1,7 @@
 package duke;
 
+import java.time.format.DateTimeParseException;
+
 import duke.error.*;
 
 /**
@@ -13,8 +15,10 @@ public class Parser {
      * 
      * @return Array containing parsed parameters including command, task status, task description and task date.
      */
-    protected String[] getCommand(TaskList tasks, String fullCommand) throws InvalidSyntaxException, 
-            TaskListEmptyException, IndexOutOfBoundsException, IllegalCommandException {
+    protected String[] getCommand(TaskList tasks, String fullCommand) throws NumberFormatException, 
+            InvalidSyntaxException, TaskListEmptyException, IndexOutOfBoundsException, 
+            IllegalCommandException, DateTimeParseException {
+
         // Split command according to first instance of " "
         String[] extractedCommands = fullCommand.split(" ", 2);
 
@@ -30,7 +34,7 @@ public class Parser {
      * @return Array containing parsed parameters including command, task status, task description and task date.
      */
     private String[] parseCommand(TaskList tasks, String command, String[] extractedCommands) 
-            throws InvalidSyntaxException, IndexOutOfBoundsException, 
+            throws InvalidSyntaxException, IndexOutOfBoundsException, NumberFormatException, 
             TaskListEmptyException, IllegalCommandException {
         switch (command) {
         case Constants.COMMAND_LIST_WORD:
@@ -47,7 +51,7 @@ public class Parser {
             checkCommandValidity(extractedCommands, command);
             // Check remaining parameters for valid index (i.e. task number)
             // Add valid index to array, otherwise invoke error
-            int taskNumber = getTaskNumber(command, tasks, extractedCommands[1]);
+            int taskNumber = getTaskNumber(command, tasks, extractedCommands[1].trim());
             if (!isTaskNumberValid(tasks, taskNumber)) {
                 throw new IndexOutOfBoundsException();
             }
@@ -55,7 +59,7 @@ public class Parser {
         case Constants.COMMAND_DEADLINE_WORD:
         case Constants.COMMAND_EVENT_WORD:
             checkCommandValidity(extractedCommands, command);
-            String[] processCommandParameters = processParameters(command, extractedCommands[1]);
+            String[] processCommandParameters = processParameters(command, extractedCommands[1].trim());
             // In parsedCommandParameters, first index contains task description and the second contains task date
             return setCommandParameters(command, processCommandParameters[0], processCommandParameters[1]);
         default:
@@ -143,7 +147,8 @@ public class Parser {
      * @return The date extracted from userCommand.
      * @throws InvalidSyntaxException If date is not found.
      */
-    private String[] processParameters(String command, String commandParameter) throws InvalidSyntaxException {
+    private String[] processParameters(String command, String commandParameter) 
+            throws InvalidSyntaxException, DateTimeParseException {
         String filterString;
         if (command.equals(Constants.COMMAND_DEADLINE_WORD)) {
             filterString = Constants.DEADLINE_DATA_PREFIX_BY;
@@ -162,9 +167,10 @@ public class Parser {
      * @return Date specified in user input (userCommand).
      * @throws InvalidSyntaxException If no date is detected after the /by parameter.
      */
-    private String[] getDate(String command, String commandParameter, String filterString) throws InvalidSyntaxException {
+    private String[] getDate(String command, String commandParameter, String filterString) 
+            throws InvalidSyntaxException, DateTimeParseException {
         int indexOfDate = commandParameter.indexOf(filterString);
-        if (indexOfDate < 0) {
+        if (indexOfDate <= 0) {
             Ui ui = new Ui();
             throw new InvalidSyntaxException(ui.getSyntaxMessage(command));
         }
@@ -177,9 +183,10 @@ public class Parser {
         }
 
         // Add 3 to indexOfDate to remove the "/by" or "/at" filter strings
-        String date = commandParameter.substring(indexOfDate + 3).trim();
+        String dateString = commandParameter.substring(indexOfDate + 3).trim();
+        Date.checkValidDate(dateString);
         String taskDescription = commandParameter.substring(0, indexOfDate).trim();
-        
-        return new String[]{taskDescription, date};
+        return new String[]{taskDescription, dateString};
     }
+
 }

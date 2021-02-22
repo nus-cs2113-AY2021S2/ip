@@ -24,7 +24,7 @@ public class Todo extends Task {
      * Returns null as date is absent from todo tasks. 
      */
     @Override
-    public String getTaskDate() {
+    public String getTaskDate(String dateFormat) {
         return null;
     }
  

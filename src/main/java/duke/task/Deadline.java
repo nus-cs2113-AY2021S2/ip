@@ -3,8 +3,11 @@ package duke.task;
 /**
  * Represents the deadline task. An Deadline object corresponds to the task with a due date input by the user. 
  */
+import duke.Constants;
+import duke.Date;
+
 public class Deadline extends Task {
-    protected String by;
+    protected Date by;
 
     /**
      * Creates a Deadline object. 
@@ -14,7 +17,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by) {
         super(description);
-        this.by = by;
+        this.by = new Date(by);
     }
 
     /**
@@ -25,18 +28,15 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns the date specified in the dealdine object. 
-     */
-    @Override
-    public String getTaskDate() {
-        return by;
-    }
-
-    /**
      * Returns the formatted deadline task for display. 
      */
     @Override
+    public String getTaskDate(String dateFormat) {
+        return by.formatDateWithDelimeter(dateFormat);
+    }
+
+    @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + getTaskDate(Constants.DATE_FORMAT) + ")";
     }
 }

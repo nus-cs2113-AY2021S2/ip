@@ -3,8 +3,11 @@ package duke.task;
 /**
  * Represents the event task. An Event object corresponds to the task with a set date input by the user. 
  */
+import duke.Constants;
+import duke.Date;
+
 public class Event extends Task {
-    protected String at;
+    protected Date at;
 
     /**
      * Creates an Event object. 
@@ -14,7 +17,7 @@ public class Event extends Task {
      */
     public Event(String description, String at) {
         super(description);
-        this.at = at;
+        this.at = new Date(at);
     }
 
     /**
@@ -25,18 +28,15 @@ public class Event extends Task {
     }
 
     /**
-     * Returns the date specified in the event object. 
-     */
-    @Override
-    public String getTaskDate() {
-        return at;
-    }
-
-    /**
      * Returns the formatted event task for display. 
      */
     @Override
+    public String getTaskDate(String dateFormat) {
+        return at.formatDateWithDelimeter(dateFormat);
+    }
+
+    @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at: " + getTaskDate(Constants.DATE_FORMAT) + ")";
     }
 }

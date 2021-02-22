@@ -5,7 +5,6 @@ package duke.task;
  */
 public abstract class Task {
     protected String description;
-    /** Boolean to track if task is completed */
     protected boolean isDone;
 
     /**
@@ -71,7 +70,7 @@ public abstract class Task {
      * 
      * @return Task date for deadline and event tasks, null for todo. 
      */
-    public abstract String getTaskDate();
+    public abstract String getTaskDate(String dateFormat);
 
     /**
      * Returns the status icon depending on isDone boolean. 
@@ -96,7 +95,7 @@ public abstract class Task {
      *         Date is null for todo tasks. 
      */
     public String toStorageString() {
-        return String.format("%s, %s, %s, %s", getTaskType(), String.valueOf(getTaskStatus()), getTaskDescription(), getTaskDate());
+        return String.format("%s, %s, %s, %s", getTaskType(), String.valueOf(getTaskStatus()), getTaskDescription(), getTaskDate("yyyy-MM-dd"));
     }
 
     /**

@@ -2,6 +2,7 @@ package duke;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 
 import duke.error.*;
 import duke.command.*;
@@ -34,6 +35,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the program. 
+     * Gets user input and parses command.
+     * Executes the program according to the command input.  
+     */
     public void run() {
         ui.displayWelcomeMessage();
         while (true) {
@@ -59,6 +65,10 @@ public class Duke {
                 ui.displayToUser(Constants.ERROR_IO);
             } catch (NullPointerException exception) {
                 ui.displayToUser(Constants.ERROR_IO);
+            } catch (DateTimeParseException exception) {
+                ui.displayToUser(Constants.ERROR_INVALID_DATE_RECEIVED);
+            } catch (NumberFormatException exception) {
+                ui.displayToUser(Constants.ERROR_INVALID_NUMBER);
             }
         }
     }
