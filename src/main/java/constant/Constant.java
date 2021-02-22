@@ -22,10 +22,10 @@ public class Constant {
      * Constants used for printing repetitive messages.
      */
     public static final String DIVIDER_LINE = "____________________________________________________________";
-    public static final String LIST_STARTING_MESSAGE = "Below are all your list of mushroom points:";
+    public static final String LIST_STARTING_MESSAGE = "Below are all your task:";
     public static final String FILE_PATH = "task_logs.txt";
     public static final String FILE_LOAD_MESSAGE = "Loading file...";
     public static final String FILE_LOAD_SUCCESS = "Loading Successful!";
-    public static final String FILE_LOAD_FAILURE = "File not found! :(";
-    public static final String FILE_LOAD_SUCCESS_WELCOME = "What can mushroom boy do for you?";
+    public static final String FILE_LOAD_FAILURE = "Loading Failed - Unable to detect file.";
+    public static final String FILE_LOAD_SUCCESS_WELCOME = "What can Mushroom Tracker do for you?";
 }

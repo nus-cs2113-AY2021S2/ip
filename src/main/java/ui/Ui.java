@@ -31,8 +31,8 @@ public class Ui {
                 "          `-----`---'\n";
         System.out.println(Constant.DIVIDER_LINE);
         System.out.println(logo);
-        System.out.println("Welcome Mushroom!");
-        System.out.println("Mushroom boy is here to serve you!");
+        System.out.println("Welcome to Track-The-Mushroom!");
+        System.out.println("Mushroom Tracker is here to serve you!");
         System.out.println(Constant.DIVIDER_LINE);
     }
 
@@ -41,7 +41,7 @@ public class Ui {
      */
     public static void printExitMessage() {
         System.out.println(Constant.DIVIDER_LINE);
-        System.out.println("Bye. Hope to see you again soon!");
+        System.out.println("Goodbye! Hope to see you again soon!");
         System.out.println(Constant.DIVIDER_LINE);
     }
 
@@ -71,7 +71,7 @@ public class Ui {
      */
     public static void printEntireCollection() {
         if (taskHandler.getTaskCount() == 0) {
-            System.out.println("You have no item in Mushroom Head list!");
+            System.out.println("You have no item in the task list!");
         } else {
             System.out.println(Constant.LIST_STARTING_MESSAGE);
             for (int i = 0; i < taskHandler.getTaskCount(); i++) {
