@@ -37,12 +37,11 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
     3. If there are any further prompts, accept the defaults.
 4. After the importing is complete, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see a welcome message:
 
-____________________________________________________________
-
+```
 Welcome to Track-The-Mushroom!
 
 Mushroom Tracker is here to serve you!
-____________________________________________________________
+```
 
 ## 3. Features
 ### 3.1 Add a Todo task: `todo`
@@ -145,7 +144,7 @@ Search is complete!
 ### 3.8 Exit the program: `bye`
 This operation will exit the program.
 
-Format: `exit`
+Format: `bye`
 
 Expected Output:
 ```
