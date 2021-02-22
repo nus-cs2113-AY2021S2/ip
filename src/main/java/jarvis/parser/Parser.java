@@ -10,10 +10,10 @@ import jarvis.task.Todo;
 public class Parser {
 
     /**
-     * Parses user input into {@code Todo} object.
+     * Parses user input into a Todo object.
      *
      * @param userInput command entered by the user.
-     * @return a {@code Todo} object.
+     * @return a Todo object.
      */
     public static Todo parseStringToTodo(String userInput) {
         String description = userInput.replaceFirst("todo ", "");
@@ -21,10 +21,10 @@ public class Parser {
     }
 
     /**
-     * Parses user input into {@code Deadline} object
+     * Parses user input into a Deadline object
      *
      * @param userInput command entered by the user.
-     * @return a {@code Deadline} object.
+     * @return a Deadline object.
      */
     public static Deadline parseStringToDeadline(String userInput) {
         String task = userInput.replaceFirst("deadline ", "");
@@ -35,10 +35,10 @@ public class Parser {
     }
 
     /**
-     * Parses user input into {@code Event} object.
+     * Parses user input into an Event object.
      *
      * @param userInput command entered by the user.
-     * @return a {@code Event} object.
+     * @return an Event object.
      */
     public static Event parseStringToEvent(String userInput) {
         String task = userInput.replaceFirst("event ", "");

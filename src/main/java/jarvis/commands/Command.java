@@ -14,6 +14,7 @@ import java.util.ArrayList;
  */
 public class Command {
 
+    /** Prints a message when a task is added to the list */
     private static void addSuccessMessage(Task task) {
         System.out.println("\tGot it. I've added this task:");
         System.out.println("\t\t" + task.toString());
@@ -21,35 +22,35 @@ public class Command {
         Duke.jarvis.printDivider();
     }
 
-    // Terminates JARVIS program
+    /** Terminates JARVIS program */
     public static void exitJarvis() {
         System.out.println("\tGoodbye, sir.");
         Duke.jarvis.printDivider();
         System.exit(1);
     }
 
-    // adds Todo task to the ArrayList
+    /** Adds a todo task to the list */
     public static void runTodo(String userInput) {
         Task todo = Parser.parseStringToTodo(userInput);
         TaskList.addToTasks(todo);
         addSuccessMessage(todo);
     }
 
-    // adds Deadline task to the ArrayList
+    /** Adds a deadline task to the list */
     public static void runDeadline(String userInput) {
         Task deadline = Parser.parseStringToDeadline(userInput);
         TaskList.addToTasks(deadline);
         addSuccessMessage(deadline);
     }
 
-    // adds Event task to the ArrayList
+    /** Adds an event task to the list */
     public static void runEvent(String userInput) {
         Task event = Parser.parseStringToEvent(userInput);
         TaskList.addToTasks(event);
         addSuccessMessage(event);
     }
 
-    // prints out the entire list of tasks
+    /** Prints out all the tasks in the list */
     public static void runList() throws EmptyListException {
         if (TaskList.getSize() != 0) {
             System.out.println("\tHere are the tasks in your list, sir:");
@@ -63,7 +64,7 @@ public class Command {
         }
     }
 
-    // marks the task as done if the task exist
+    /** Marks a task as done if it exist */
     public static void runDone(String command) throws InvalidTaskException {
         String description = command.replaceFirst("done ", "");
         int taskNumber = Integer.parseInt(description.substring(0, 1));
@@ -78,7 +79,7 @@ public class Command {
         }
     }
 
-    // removes the task from the list if exist
+    /** Removes a task from the list if it exist */
     public static void runDelete(String command) throws InvalidTaskException {
         String description = command.replaceFirst("delete ", "");
         int taskNumber = Integer.parseInt(description.substring(0, 1));
