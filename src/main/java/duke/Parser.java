@@ -1,5 +1,7 @@
 package duke;
 
+import java.time.format.DateTimeParseException;
+
 import duke.error.*;
 
 public class Parser {
@@ -14,7 +16,7 @@ public class Parser {
      * 
      * @return Command word extracted.
      */
-    protected String[] getCommand(TaskList tasks, String fullCommand) throws NumberFormatException, InvalidSyntaxException, TaskListEmptyException, IndexOutOfBoundsException, IllegalCommandException {
+    protected String[] getCommand(TaskList tasks, String fullCommand) throws NumberFormatException, InvalidSyntaxException, TaskListEmptyException, IndexOutOfBoundsException, IllegalCommandException, DateTimeParseException {
         String[] parsedCommands = new String[4];
 
         // Split command according to first instance of " "
@@ -124,7 +126,8 @@ public class Parser {
      * @return The date extracted from userCommand.
      * @throws InvalidSyntaxException If date is not found.
      */
-    private String[] processParameters(String command, String commandParameter) throws InvalidSyntaxException {
+    private String[] processParameters(String command, String commandParameter) 
+            throws InvalidSyntaxException, DateTimeParseException {
         String filterString;
         if (command.equals(Constants.COMMAND_DEADLINE_WORD)) {
             filterString = Constants.DEADLINE_DATA_PREFIX_BY;
@@ -146,7 +149,8 @@ public class Parser {
      * @throws InvalidSyntaxException If no date is detected after the /by
      *                     parameter.
      */
-    private String[] getDate(String command, String commandParameter, String filterString) throws InvalidSyntaxException {
+    private String[] getDate(String command, String commandParameter, String filterString) 
+            throws InvalidSyntaxException, DateTimeParseException {
         int indexOfDate = commandParameter.indexOf(filterString);
         if (indexOfDate < 0) {
             Ui ui = new Ui();
@@ -160,9 +164,11 @@ public class Parser {
             throw new InvalidSyntaxException(ui.getSyntaxMessage(command));
         }
 
-        String date = commandParameter.substring(indexOfDate + 3).trim();
+        String dateString = commandParameter.substring(indexOfDate + 3).trim();
+        Date.checkValidDate(dateString);
         String taskDescription = commandParameter.substring(0, indexOfDate).trim();
         // Add 3 to indexOfDate to remove the "/by" or "/at" filter strings
-        return new String[]{taskDescription, date};
+        return new String[]{taskDescription, dateString};
     }
+
 }

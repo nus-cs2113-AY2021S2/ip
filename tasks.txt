@@ -1,7 +1,0 @@
-event, true, task, hgj, hgj
-todo, false, haha, null
-event, false, aha, haha, haha
-deadline, false, purposely no date field, d, d
-deadline, false, purposely no date field, h, h
-deadline, false, purposely no date field, h, h
-deadline, false, purposely no date field, h, h

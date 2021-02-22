@@ -31,7 +31,7 @@ public abstract class Task {
         isDone = true;
     }
 
-    public abstract String getTaskDate();
+    public abstract String getTaskDate(String dateFormat);
 
     /**
      * Returns the status icon depending on isDone boolean. 
@@ -50,7 +50,7 @@ public abstract class Task {
     public abstract String getTaskType();
 
     public String toStorageString() {
-        return String.format("%s, %s, %s, %s", getTaskType(), String.valueOf(getTaskStatus()), getTaskDescription(), getTaskDate());
+        return String.format("%s, %s, %s, %s", getTaskType(), String.valueOf(getTaskStatus()), getTaskDescription(), getTaskDate("yyyy-MM-dd"));
     }
 
     public String toString() {
