@@ -3,6 +3,7 @@ package duke;
 public class DukeCommandValidator {
     static final int MINIMUM_DONE_COMMAND_LENGTH = "done x".length();
     static final int MINIMUM_TODO_COMMAND_LENGTH = "todo x".length();
+    static final int MINIMUM_FIND_COMMAND_LENGTH = "find x".length();
     static final int MINIMUM_EVENT_COMMAND_LENGTH = "event x /x x".length();
     static final int MINIMUM_INDEX_OF_BACKSLASH_FOR_EVENT = "event x /".indexOf('/');
     static final int MINIMUM_DEADLINE_COMMAND_LENGTH = "deadline x /x x".length();
@@ -18,6 +19,9 @@ public class DukeCommandValidator {
         }
         if(isDoneCommandValid(input) == true){
             return DukeCommands.DONE;
+        }
+        if(isFindCommandValid(input) == true){
+            return DukeCommands.FIND;
         }
         if(isAddCommandValid(input) == true) {
             return DukeCommands.ADD;
@@ -77,6 +81,15 @@ public class DukeCommandValidator {
     public static boolean isToDoValid(String input){
         if(input.length()>= MINIMUM_TODO_COMMAND_LENGTH) {
             if (input.substring(0, MINIMUM_TODO_COMMAND_LENGTH - 1).equals("todo ")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean isFindCommandValid(String input){
+        if(input.length()>= MINIMUM_FIND_COMMAND_LENGTH) {
+            if (input.substring(0, MINIMUM_FIND_COMMAND_LENGTH - 1).equals("find ")) {
                 return true;
             }
         }

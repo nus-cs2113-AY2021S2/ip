@@ -31,6 +31,10 @@ public class DukeUI {
                 DukeController.markAsDone(input);
                 break;
             }
+            case DukeCommands.FIND:{
+                DukeController.findKeyword(input);
+                break;
+            }
             case DukeCommands.ADD:{
                 DukeController.addTask(input);
                 break;

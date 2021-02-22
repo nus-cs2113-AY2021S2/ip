@@ -11,7 +11,7 @@ public class Deadline extends Task {
 
     private void preprocessInput(String input){
         int indexOfBackslash = input.indexOf("/");
-        this.description = input.substring(0,indexOfBackslash);
+        this.description = input.substring(0,indexOfBackslash-1);
         String stringAfterBackslash = input.substring(indexOfBackslash+1);
         int indexFirstSpaceAfterBackslash = stringAfterBackslash.indexOf(" ");
         this.keyWordBeforeDeadline =
@@ -29,7 +29,7 @@ public class Deadline extends Task {
 
     @Override
     public void printTask() {
-        System.out.printf("[D][%s] %s (%s: %s)\n",
+        System.out.printf("[D][%s] %s  (%s: %s)\n",
                 super.getStatusIcon(), super.getDescription().substring(9),
                 getKeyWordBeforeDeadline(), getDeadline());
     }
