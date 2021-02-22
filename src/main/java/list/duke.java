@@ -58,7 +58,7 @@ public class duke {
         return areAllTasksDone;
     }
 
-    public void greet() {
+    public static void greet() {
         String logo = getLogo();
         System.out.println("Ssshhhhhh!!!!!" + System.lineSeparator() + logo);
         String greetings = "____________________________________________________________________________________"
@@ -94,7 +94,7 @@ public class duke {
     }
 
 
-    public void printHelp() {
+    public static void printHelp() {
         String help = "           help           :prints list of all commands" + System.lineSeparator()
                 + "           list           :prints all lists ordered by category" + System.lineSeparator()
                 + "           exit           :shuts down Arthur" + System.lineSeparator()
@@ -109,48 +109,48 @@ public class duke {
     }
 
 
-    public void printListName() {
+    public static void printListName() {
         System.out.println("ATTENTION, Here's your list of tasks Crewmate!!!");
     }
 
-    public void printDottedLines() {
+    public static void printDottedLines() {
         System.out.println("____________________________________________________________________________________");
     }
 
 
-    public void printCommandDoesNotExist() {
+    public static void printCommandDoesNotExist() {
         System.out.println("There's no such command!!! You look SUS!!!  (ー_ーゞ");
     }
 
-    public void printWrongTaskDoneName() {
+    public static void printWrongTaskDoneName() {
         System.out.println("This task has already been completed crewmate!! Watchu doin??? (¬_¬)");
     }
 
-    public void printInvalidTaskPhrase() {
+    public static void printInvalidTaskPhrase() {
         System.out.println("There's no such task?! Focus Crewmate!!  (╬⓪益⓪)");
     }
 
 
-    public void printNoTasksDone() {
+    public static void printNoTasksDone() {
         System.out.println("Are you really a Crewmate??? You haven't done any work in this list! （○｀Ｏ´○）");
     }
 
-    public void printCompletedTasks() {
+    public static void printCompletedTasks() {
         System.out.println("Good job Crewmate! You completed all your tasks in this list! (─‿─)");
     }
 
-    public void printEmptyList() {
+    public static void printEmptyList() {
         System.out.println("This list is empty!!! YEEEEEEET!!!");
         printDottedLines();
     }
 
 
-    public void printSomeTasksRemaining(int counter) {
+    public static void printSomeTasksRemaining(int counter) {
         System.out.println("You still have "
                 + counter + " task(s) left in your Lists ! Hurry up!! ＼(｀0´)／");
     }
 
-    public void printGoodEnding() {
+    public static void printGoodEnding() {
         System.out.print("Thanks for your help Crewmate!!" + System.lineSeparator()
                 + "We wouldn't have done this without your help!!" + System.lineSeparator()
                 + "Goodbye!!!! (￣▽￣)ノ" + System.lineSeparator());
@@ -158,30 +158,30 @@ public class duke {
 
     }
 
-    public void printBadEnding() {
+    public static void printBadEnding() {
         System.out.print("You have been kicked out! Bye Impostor!!!  (๑>ᴗ<๑)" + System.lineSeparator());
         printDottedLines();
 
     }
 
-    public void printTraitor() {
+    public static void printTraitor() {
         System.out.print("You are abandoning us!!! I trusted you!!!  (　ﾟдﾟ)" + System.lineSeparator());
         printDottedLines();
     }
 
-    public void printLoading() {
+    public static void printLoading() {
         System.out.println("Loading your previous data . . .");
     }
 
-    public void printEmptyFile() {
+    public static void printEmptyFile() {
         System.out.println("Your saved file is empty!");
     }
 
-    public void printNoSavedFile() {
+    public static void printNoSavedFile() {
         System.out.println("Loading New Duke Window . . .");
     }
 
-    public void printDeletingTask() {
+    public static void printDeletingTask() {
         System.out.println(" (o‿∩) Hol' up! I'm deleting this task:");
     }
 
