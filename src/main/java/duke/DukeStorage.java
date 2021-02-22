@@ -6,6 +6,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Manages all I/O operations.
+ */
 public class DukeStorage {
 
     private static final String DUKE_DATA_DIR = "data";
@@ -15,7 +18,12 @@ public class DukeStorage {
     private static final int INDEX_OF_TASK_TYPE = "1   [T".indexOf('T');
     private static final int FIRST_INDEX_OF_TASK_DESCRIPTION = "1   [T][X] S".indexOf('S');
 
-    // create file and directory if they are not created yet
+    /**
+     * Creates the required text file and the required directory to store the text file in case
+     * they are not created yet.
+     *
+     * @throws IOException If a particular file is not found in the database.
+     */
     public static void initialize() throws IOException {
         File dataDirectory = new File(DUKE_DATA_DIR);
         if (!dataDirectory.exists()){
@@ -27,6 +35,11 @@ public class DukeStorage {
         }
     }
 
+    /**
+     * Clears all the current contents in the text file.
+     *
+     * @throws IOException If a particular file is not found in the database.
+     */
     private static void emptyFileContent() throws IOException {
         File file = new File(DUKE_DATA_TXT);
         if(file.exists()){
@@ -35,6 +48,12 @@ public class DukeStorage {
         file.createNewFile();
     }
 
+    /**
+     * Copy all data regarding the user's tasks from the running program and
+     * save them into the text file.
+     *
+     * @throws IOException If a particular file is not found in the database.
+     */
     public static void writeDukeData() throws IOException {
         emptyFileContent();
         FileWriter fw = new FileWriter(DUKE_DATA_TXT);
@@ -88,6 +107,12 @@ public class DukeStorage {
         fw.close();
     }
 
+    /**
+     * Copy all data regarding the user's tasks from the text file and
+     * store them into the running program.
+     *
+     * @throws FileNotFoundException If a particular file is not found in the database.
+     */
     public static void readDukeData() throws FileNotFoundException {
         String line; //string to read from the txt file(per line)
         Task[] tasks = new Task[100];
