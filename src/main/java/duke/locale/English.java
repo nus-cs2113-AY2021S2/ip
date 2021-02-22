@@ -28,9 +28,9 @@ public class English {
     public static final String TASK_LIST_EMPTY =
             "You don't have a task in your list%s!";
     
-    // No args
+    // %s: at/by DateTime object
     public static final String TASK_LIST_AT_BY =
-            " at/by ";
+            " at/by %s";
     
     // %s: Latest added task
     // %d: Task counts

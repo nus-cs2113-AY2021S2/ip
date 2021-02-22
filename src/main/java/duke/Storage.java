@@ -17,14 +17,14 @@ public class Storage {
         this.filepath = filepath;
     }
 
-    protected TaskList load() throws IOException, SaveException {
+    public TaskList load() throws IOException, SaveException {
         TaskList tasks = null;
-        FileInputStream fs = null;
-        ObjectInputStream os = null;
+        FileInputStream fileIn = null;
+        ObjectInputStream objIn = null;
         try {
-            fs = new FileInputStream(this.filepath);
-            os = new ObjectInputStream(fs);
-            Object obj = os.readObject();
+            fileIn = new FileInputStream(this.filepath);
+            objIn = new ObjectInputStream(fileIn);
+            Object obj = objIn.readObject();
 
             if (obj instanceof TaskList) {
                 tasks = (TaskList) obj;
@@ -38,37 +38,37 @@ public class Storage {
             throw new SaveException(SaveExceptionType.INVALID_SAVE, e);
         } finally {
             // Close all open file and object handles
-            if (os != null) {
-                os.close();
+            if (objIn != null) {
+                objIn.close();
             }
-            if (fs != null) {
-                fs.close();
+            if (fileIn != null) {
+                fileIn.close();
             }
         }
         return tasks;
     }
 
-    protected void save(TaskList tasks) throws IOException, SaveException {
-        FileOutputStream fs = null;
-        ObjectOutputStream os = null;
+    public void save(TaskList tasks) throws IOException, SaveException {
+        FileOutputStream fileOut = null;
+        ObjectOutputStream objOut = null;
         try {
-            fs = new FileOutputStream(this.filepath);
-            os = new ObjectOutputStream(fs);
+            fileOut = new FileOutputStream(this.filepath);
+            objOut = new ObjectOutputStream(fileOut);
 
             // Nullify storage attribute before saving
             tasks.setStorage(null);
-            os.writeObject(tasks);
+            objOut.writeObject(tasks);
             tasks.setStorage(this);
         } catch (FileNotFoundException e) {
             // Thrown by `new FileOutputStream`, usually when `file` is a folder or cannot be created
             throw new SaveException(SaveExceptionType.INVALID_PATH);
         } finally {
             // Close all open file and object handles
-            if (os != null) {
-                os.close();
+            if (objOut != null) {
+                objOut.close();
             }
-            if (fs != null) {
-                fs.close();
+            if (fileOut != null) {
+                fileOut.close();
             }
         }
     }

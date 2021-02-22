@@ -37,13 +37,13 @@ public class Ui implements AutoCloseable {
         }
     }
 
-    protected String getLocaleText(String key) {
+    protected String getLocaleText(String key, Object ... args) {
         try {
-            return (String) locale.getDeclaredField(key).get(null);
+            return String.format((String) locale.getDeclaredField(key).get(null), args);
         } catch (Exception e) {
             // If it fails, fall back to default locale
             try {
-                return (String) DEFAULT_LOCALE_CLASS.getDeclaredField(key).get(null);
+                return String.format((String) DEFAULT_LOCALE_CLASS.getDeclaredField(key).get(null), args);
             } catch (Exception ex) {
                 // Critical error - we cannot even get this key from the default locale
                 // Print out the error and return an empty string
@@ -77,7 +77,7 @@ public class Ui implements AutoCloseable {
     // Print a message for a successful insertion of task
     public void printNewTask(TaskList tasks) {
         int size = tasks.size();
-        print(getLocaleText("NEW_TASK"), INTERNAL_INDENT + tasks.get(size - 1), size);
+        print(getLocaleText("NEW_TASK", INTERNAL_INDENT + tasks.get(size - 1), size));
     }
 
     public void printTaskList(TaskList tasks) {
@@ -85,15 +85,15 @@ public class Ui implements AutoCloseable {
     }
 
     public void printTaskList(TaskList tasks, DateTime dateTime) {
-        printTaskList(tasks, getLocaleText("TASK_LIST_AT_BY") + dateTime);
+        printTaskList(tasks, getLocaleText("TASK_LIST_AT_BY", dateTime));
     }
 
     public void printTaskList(TaskList tasks, String additionalText) {
         if (tasks.size() == 0) {
-            print(getLocaleText("TASK_LIST_EMPTY"), additionalText);
+            print(getLocaleText("TASK_LIST_EMPTY", additionalText));
             return;
         }
-        print(getLocaleText("TASK_LIST"), additionalText);
+        print(getLocaleText("TASK_LIST", additionalText));
         for (int i = 0; i < tasks.size(); i += 1) {
             print("%d.%s%s", i + 1, INTERNAL_INDENT, tasks.get(i));
         }
@@ -105,16 +105,16 @@ public class Ui implements AutoCloseable {
 
     public void printSaveException(String filepath, Exception e) {
         printException(e);
-        print(getLocaleText("SAVE_EXCEPTION"), filepath);
+        print(getLocaleText("SAVE_EXCEPTION", filepath));
         printLine();
     }
 
     public void printException(Exception e) {
-        print(getLocaleText("EXCEPTION"), e);
+        print(getLocaleText("EXCEPTION", e));
     }
 
     public void printWelcome() {
-        print(getLocaleText("GREETING"), new DateTime("31/01/2021 23:59"));
+        print(getLocaleText("GREETING", new DateTime("31/01/2021 23:59")));
         printLine();
     }
 
