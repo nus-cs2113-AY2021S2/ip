@@ -10,18 +10,19 @@ import jarvis.ui.JarvisUi;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+/**
+ * Entry point of the JARVIS program.
+ * Initialises the program and starts the interaction with the user.
+ */
 public class Duke {
 
     public static final JarvisUi jarvis = new JarvisUi();
 
-    /**
-     * Entry point of the JARVIS application.
-     * Initialises JARVIS and starts the interaction with the user.
-     */
     public static void main(String[] args) throws InterruptedException {
 
         jarvis.startJarvis();
 
+        // Reads jarvis.txt file if it exists in the folder
         try {
             TextManager.printFileContents();
             jarvis.printDivider();
@@ -29,6 +30,10 @@ public class Duke {
             HandleException.handleFileNotFoundException();
         }
 
+        /*
+          JARVIS program gets commands from user and executes it.
+          jarvis.txt file is written whenever the list is updated.
+         */
         while (true) {
             try {
                 TextManager.writeToFile(jarvis.performTask());

@@ -16,7 +16,7 @@ import java.util.Scanner;
 public class TextManager {
 
     /**
-     * Print contents in the text file and adds into {@code tasks}.
+     * Print contents in the text file and adds into list.
      *
      * @throws FileNotFoundException if file is not found.
      */
@@ -36,7 +36,7 @@ public class TextManager {
     }
 
     /**
-     * Write contents in the {@code tasks} list into the text file.
+     * Write contents in the list into the text file.
      *
      * @param tasks the list of tasks to write into the text file.
      * @throws IOException if an input or output exception occurred.
