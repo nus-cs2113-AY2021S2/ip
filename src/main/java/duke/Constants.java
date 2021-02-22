@@ -35,6 +35,7 @@ public final class Constants {
     public static final String ERROR_IMPORT_TASK = "Failed to import some tasks. ";
     public static final String ERROR_FILE_NOT_FOUND = "File not found, loading new tasklist.";
     public static final String ERROR_NO_MATCH_FOUND = "No matches found. Please refine your search";
+    public static final String ERROR_INVALID_DATE_RECEIVED = "Invalid date received. Format: yyyy-mm-dd";
 
     // Syntax messages for the commands.
     public static final String MESSAGE_MARK_SYNTAX = " done <task number>";
@@ -54,6 +55,9 @@ public final class Constants {
     
     // Index specific to deadline and event tasks 
     public static final int TASK_DATE_INDEX = 3;
+
+    // Format to display dates
+    public static final String DATE_FORMAT = "dd MMM yyyy";
 
     // Filter words to locate date for deadline and event tasks.
     public static final String DEADLINE_DATA_PREFIX_BY = "/by";

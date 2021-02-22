@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.Date;
+
 public class Todo extends Task {
     /**
      * Creates a Todo object. 
@@ -15,7 +17,7 @@ public class Todo extends Task {
     }
 
     @Override
-    public String getTaskDate() {
+    public String getTaskDate(String dateFormat) {
         return null;
     }
  
