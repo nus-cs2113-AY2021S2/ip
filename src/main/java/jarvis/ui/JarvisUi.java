@@ -75,7 +75,7 @@ public class JarvisUi {
             Command.runDelete(userInput);
         } else if (userInput.startsWith("find")) {
             Command.runFind(userInput);
-        } else {    // if invalid command, throw InvalidCommandException
+        } else {
             throw new InvalidCommandException();
         }
         return TaskList.getTaskList();

@@ -50,7 +50,11 @@ public class Command {
         addSuccessMessage(event);
     }
 
-    /** Prints out all the tasks in the list */
+    /**
+     * Prints out all the tasks in the list
+     *
+     * @throws EmptyListException if there is no task in the list
+     */
     public static void runList() throws EmptyListException {
         if (TaskList.getSize() != 0) {
             System.out.println("\tHere are the tasks in your list, sir:");
@@ -59,12 +63,17 @@ public class Command {
                 System.out.println(String.format("\t\t%d. ", i + 1) + task.toString());
             }
             Duke.jarvis.printDivider();
-        } else {    // if there is no task in the ArrayList, throw EmptyListException
+        } else {
             throw new EmptyListException();
         }
     }
 
-    /** Marks a task as done if it exist */
+    /**
+     * Marks a task as done if it exist
+     *
+     * @param command command entered by the user
+     * @throws InvalidTaskException if the task is not in the list
+     */
     public static void runDone(String command) throws InvalidTaskException {
         String description = command.replaceFirst("done ", "");
         int taskNumber = Integer.parseInt(description.substring(0, 1));
@@ -74,12 +83,17 @@ public class Command {
             System.out.println("\tWell done, sir! I've marked this task as done:");
             System.out.println("\t\t" + task.toString());
             Duke.jarvis.printDivider();
-        } else {    // if the task is not in the ArrayList, throw InvalidTaskException
+        } else {
             throw new InvalidTaskException();
         }
     }
 
-    /** Removes a task from the list if it exist */
+    /**
+     * Removes a task from the list if it exist
+     *
+     * @param command command entered by the user
+     * @throws InvalidTaskException if the task is not in the list
+     */
     public static void runDelete(String command) throws InvalidTaskException {
         String description = command.replaceFirst("delete ", "");
         int taskNumber = Integer.parseInt(description.substring(0, 1));
@@ -90,12 +104,16 @@ public class Command {
             System.out.println("\t\t" + task.toString());
             System.out.println("\tNow you have " + TaskList.getSize() + " tasks in the list.");
             Duke.jarvis.printDivider();
-        } else {    // if the task is not in the ArrayList, throw InvalidTaskException
+        } else {
             throw new InvalidTaskException();
         }
     }
 
-    // finds task that contains the keyword in the description
+    /**
+     * Searches for the tasks in the list that contain the keyword in the description
+     *
+     * @param command command entered by the user
+     */
     public static void runFind(String command) {
         String keyword = Parser.parseFindCommand(command);
         ArrayList<Task> matchingTasks = TaskList.getTasksWithKeyword(keyword);

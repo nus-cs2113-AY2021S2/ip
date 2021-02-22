@@ -52,7 +52,7 @@ public class Parser {
      * Parses user input to obtain the keyword for finding tasks
      *
      * @param userInput command entered by the user.
-     * @return the keyword
+     * @return the keyword that is used to search in the list
      */
     public static String parseFindCommand(String userInput) {
         return userInput.replaceFirst("find ", "");

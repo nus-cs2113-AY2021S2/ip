@@ -37,7 +37,12 @@ public class TaskList {
         return tasks.size();
     }
 
-    // returns an ArrayList that has tasks that matches the keyword
+    /**
+     * Searches the list for related tasks with a given keyword
+     *
+     * @param keyword word used to search for a related task in the list
+     * @return a new list that contains all the matching tasks
+     */
     public static ArrayList<Task> getTasksWithKeyword(String keyword) {
         ArrayList<Task> matchingTasks = new ArrayList<>();
         for (Task task : tasks) {
