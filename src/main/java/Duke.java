@@ -1,15 +1,18 @@
 import java.util.Scanner;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
+
+import duke.commands.ByeCommand;
+import duke.commands.Command;
+import duke.commands.DeadlineCommand;
+import duke.commands.DeleteCommand;
+import duke.commands.DoneCommand;
+import duke.commands.EventCommand;
+import duke.commands.HelpCommand;
+import duke.commands.ListCommand;
+import duke.commands.TodoCommand;
+import duke.exception.InvalidCommandException;
 import duke.task.TaskList;
-import duke.task.Todo;
 import duke.util.Storage;
 import duke.util.Ui;
-import duke.exception.EmptyCommandArgException;
-import duke.exception.InvalidCommandException;
-import duke.exception.InvalidCommandTimeException;
-import duke.exception.InvalidTaskNumberException;
 
 public class Duke {
     public static Ui ui;
@@ -34,151 +37,61 @@ public class Duke {
     }
 
     public static void inputAndExecuteCommand() {
-        String line;
+        boolean isExit = false;
         Scanner scanner = new Scanner(System.in);
-        
-        while (true) {
-            line = scanner.nextLine();
-            String[] commandTypeAndArg = line.split(" ", 2);
+        String fullCommand;
+        while (!isExit) {
+            fullCommand = scanner.nextLine();
+            String[] commandTypeAndArg = fullCommand.split(" ", 2);
             String commandType = commandTypeAndArg[0].trim();
             String commandArg = "";
             if (commandTypeAndArg.length > 1) {
                 commandArg = commandTypeAndArg[1].trim();
             }
 
-            if (commandType.equals("bye")) {
-                scanner.close();
-                return;
-            }
-            
+            Command command;
             try {
-                executeCommand(commandType, commandArg);
-            } catch (EmptyCommandArgException | InvalidCommandTimeException
-                    | InvalidCommandException | InvalidTaskNumberException e) {
+                command = getCommand(commandType, commandArg);
+                command.execute(taskList, ui);
+                isExit = command.isExit();
+            } catch (Exception e) {
                 ui.printErrorMessage(e);
                 continue;
             }
         }
+        scanner.close();
     }
-    
-    public static void executeCommand(String commandType, String commandArg) throws EmptyCommandArgException,
-    InvalidCommandTimeException, InvalidCommandException, InvalidTaskNumberException {
+
+    public static Command getCommand(String commandType, String commandArg) throws InvalidCommandException {
+        Command command;
         switch (commandType) {
         case "help":
-            ui.printHelpMessage();
+            command = new HelpCommand();
             break;
         case "list":
-            ui.listAllTasks(taskList);
+            command = new ListCommand();
             break;
         case "done":
-            markTaskAsDone(commandArg);
+            command = new DoneCommand(commandArg);
             break;
         case "todo":
-            addTodo(commandArg);
+            command = new TodoCommand(commandArg);
             break;
         case "deadline":
-            addDeadline(commandArg);
+            command = new DeadlineCommand(commandArg);
             break;
         case "event":
-            addEvent(commandArg);
+            command = new EventCommand(commandArg);
             break;
         case "delete":
-            deleteTask(commandArg);
+            command = new DeleteCommand(commandArg);
+            break;
+        case "bye":
+            command = new ByeCommand();
             break;
         default:
             throw new InvalidCommandException(commandType);
         }
-    }
-
-    public static String[] splitCommandArg(String commandType, String commandArg) throws InvalidCommandTimeException {
-        String[] taskDescriptionAndTime;
-        String delimiter = null;
-        switch (commandType) {
-        case "deadline":
-            delimiter = "/by";
-            break;
-        case "event":
-            delimiter = "/at";
-            break;
-        }
-        taskDescriptionAndTime = commandArg.split(delimiter, 2);
-        if (taskDescriptionAndTime.length == 1 || taskDescriptionAndTime[1].equals("")) {
-            throw new InvalidCommandTimeException(commandType);
-        }
-        taskDescriptionAndTime[0] = taskDescriptionAndTime[0].trim();
-        taskDescriptionAndTime[1] = taskDescriptionAndTime[1].trim();
-
-        return taskDescriptionAndTime;
-    }
-
-    public static void markTaskAsDone(String commandArg) throws EmptyCommandArgException, InvalidTaskNumberException {
-        if (isEmptyArgument(commandArg)) {
-            throw new EmptyCommandArgException("done");
-        }
-        int taskNumber = getTaskNumber(commandArg);
-        Task task = taskList.getTask(taskNumber - 1);
-        task.setIsDone();
-        ui.printSuccessfullyMarkedDoneMessage(task);
-    }
-
-    public static int getTaskNumber(String commandArg) throws InvalidTaskNumberException {
-        int taskNumber;
-        try {
-            taskNumber = Integer.parseInt(commandArg);
-        } catch (NumberFormatException e) {
-            throw new InvalidTaskNumberException(commandArg);
-        }
-
-        if (taskNumber < 1 || taskNumber > taskList.getListSize()) {
-            throw new InvalidTaskNumberException(taskNumber);
-        }
-        return taskNumber;
-    }
-
-    public static void addTodo(String commandArg) throws EmptyCommandArgException {
-        if (isEmptyArgument(commandArg)) {
-            throw new EmptyCommandArgException("todo");
-        }
-        Todo task = new Todo(commandArg);
-        taskList.addTask(task);
-        ui.printTaskSuccessfullyAddedMessage(task, taskList.getListSize());
-    }
-
-    public static void addDeadline(String commandArg) throws EmptyCommandArgException, InvalidCommandTimeException {
-        if (isEmptyArgument(commandArg)) {
-            throw new EmptyCommandArgException("deadline");
-        }
-        String[] taskDescriptionAndBy = splitCommandArg("deadline", commandArg);  
-        String description = taskDescriptionAndBy[0];
-        String by = taskDescriptionAndBy[1];
-        Deadline task = new Deadline(description, by);
-        taskList.addTask(task);
-        ui.printTaskSuccessfullyAddedMessage(task, taskList.getListSize());
-    }
-
-    public static void addEvent(String commandArg) throws EmptyCommandArgException, InvalidCommandTimeException {
-        if (isEmptyArgument(commandArg)) {
-            throw new EmptyCommandArgException("event");
-        }
-        String[] taskDescriptionAndAt = splitCommandArg("event", commandArg);       
-        String description = taskDescriptionAndAt[0];
-        String at = taskDescriptionAndAt[1];
-        Event task = new Event(description, at);
-        taskList.addTask(task);
-        ui.printTaskSuccessfullyAddedMessage(task, taskList.getListSize());
-    }
-
-    public static void deleteTask(String commandArg) throws EmptyCommandArgException, InvalidTaskNumberException {
-        if (isEmptyArgument(commandArg)) {
-            throw new EmptyCommandArgException("delete");
-        }
-        int taskNumber = getTaskNumber(commandArg);
-        Task task = taskList.getTask(taskNumber - 1);
-        taskList.deleteTask(taskNumber - 1);
-        ui.printTaskSuccessfullyDeletedMessage(task);
-    }
-
-    public static boolean isEmptyArgument(String commandArg) {
-        return commandArg.length() == 0;
+        return command;
     }
 }

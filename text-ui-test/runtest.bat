@@ -12,6 +12,7 @@ javac -cp ..\src\main\java -Xlint:none -d ..\bin ..\src\main\java\*.java
 javac -cp ..\src\main\java -Xlint:none -d ..\bin ..\src\main\java\duke\task\*.java
 javac -cp ..\src\main\java -Xlint:none -d ..\bin ..\src\main\java\duke\exception\*.java
 javac -cp ..\src\main\java -Xlint:none -d ..\bin ..\src\main\java\duke\util\*.java
+javac -cp ..\src\main\java -Xlint:none -d ..\bin ..\src\main\java\duke\commands\*.java
 IF ERRORLEVEL 1 (
     echo ********** BUILD FAILURE **********
     exit /b 1
