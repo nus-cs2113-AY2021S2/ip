@@ -1,17 +1,13 @@
 package duke;
 
-import java.util.Scanner;
-
 import duke.error.TaskListEmptyException;
 import duke.task.Task;
 
+/**
+ * Represents the user interface of the application. A Ui objects corresponds to all the messages 
+ * displayed to a user. Also includes getting input from the user. 
+ */
 public class Ui {
-    // Scanner for extracting user input.
-    private static final Scanner SCANNER = new Scanner(System.in);
-
-    public Ui() { 
-    }
-
     /**
      * Displays the welcome message.
      */
@@ -19,6 +15,9 @@ public class Ui {
         displayToUser(Constants.MESSAGE_WELCOME);
     }
 
+    /**
+     * Displays the message border. 
+     */
     public void displayMessageBorder () {
         System.out.println(Constants.MESSAGE_BORDER);
     }
@@ -37,15 +36,16 @@ public class Ui {
 
     /**
      * Obtains user input from console. Input stored into userCommand.
+     * Removes trailing sapces before returning. 
+     * 
+     * @return Input from user. 
      */
     protected String getUserInput() {
-        // Remove trailing spaces
-        return SCANNER.nextLine().trim();
+        return Constants.SCANNER.nextLine().trim();
     }
 
     /**
-     * Displays the list of tasks to the user. The list will be numbered, starting
-     * from 1.
+     * Displays the list of tasks to the user. The list will be numbered, starting from 1. 
      * 
      * @param tasks Tasks to be listed.
      */
@@ -60,8 +60,8 @@ public class Ui {
      * 
      * @param tasks Tasks to be listed.
      */
-    public void displayToUser(TaskList tasks, String searchString) throws TaskListEmptyException {
-        String listAsString = getDisplayString(tasks, searchString);
+    public void displayToUser(TaskList tasks, String keyword) throws TaskListEmptyException {
+        String listAsString = getDisplayString(tasks, keyword);
         displayToUser(Constants.MESSAGE_FIND, listAsString);
     }
 
@@ -69,8 +69,8 @@ public class Ui {
      * Displays success message after adding new task.
      */
     public void displayAddTaskSuccessMessage(TaskList tasks) {
-        displayToUser(Constants.MESSAGE_ADDED, "  " + tasks.getTask(tasks.getSize()-1).toString(), String.format(Constants.MESSAGE_NUMBER_OF_TASKS,
-                tasks.getSize()));
+        displayToUser(Constants.MESSAGE_ADDED, "  " + tasks.getTask(tasks.getSize()-1).toString(), 
+                String.format(Constants.MESSAGE_NUMBER_OF_TASKS, tasks.getSize()));
     }
 
     /**
@@ -93,6 +93,7 @@ public class Ui {
 
     /**
      * Returns the display string representation of the list of tasks.
+     * For displaying the entire task list. 
      * 
      * @param tasks Task list used.
      * @return The list of all items in list, formatted with numberings and the
@@ -107,12 +108,21 @@ public class Ui {
         return message.toString();
     }
 
-    public String getDisplayString(TaskList tasks, String searchString) throws TaskListEmptyException {
+    /**
+     * Returns the display string representation of the list of tasks.
+     * For displaying a selection of the task list (i.e. tasks that macthes the keyword). 
+     * 
+     * @param tasks Task list used.
+     * @return The list of all items in list, formatted with numberings and the
+     *         total number of tasks in list.
+     * @throws TaskListEmptyException If the filtered list is empty (i.e. no matches found). 
+     */
+    public String getDisplayString(TaskList tasks, String keyword) throws TaskListEmptyException {
         StringBuilder message = new StringBuilder();
         int matchNumber = 0;
         for (int i = 0; i < tasks.getSize(); i++) {
             Task task = tasks.getTask(i);
-            if (task.getTaskDescription().contains(searchString)) {
+            if (task.getTaskDescription().contains(keyword)) {
                 matchNumber++;
                 message.append(System.lineSeparator() + String.format("\t %d. %s", matchNumber, task.toString()));
             }
@@ -125,7 +135,7 @@ public class Ui {
     }
     
     /**
-     * Get the syntax of the commands depending on the one given by the user.
+     * Gets the syntax of the commands depending on the one given by the user.
      * 
      * @param filterString The string to find in userCommand depending on an event
      *                     (/at) or deadline (/by).

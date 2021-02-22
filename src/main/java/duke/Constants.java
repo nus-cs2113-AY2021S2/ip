@@ -1,10 +1,8 @@
 package duke;
 
+import java.util.Scanner;
+
 public final class Constants {
-    public Constants() {
-
-    }
-
     // Words for commands.
     public static final String COMMAND_TODO_WORD = "todo";
     public static final String COMMAND_DEADLINE_WORD = "deadline";
@@ -26,6 +24,7 @@ public final class Constants {
     public static final String MESSAGE_EXIT = "Bye. Hope to see you again soon! ";
     public static final String MESSAGE_NUMBER_OF_TASKS = "You have %s task(s) in the list. "; 
 
+    // Error messages
     public static final String ERROR_INDEX_OUT_OF_RANGE = "Index out of range. ";
     public static final String ERROR_INVALID_COMMAND_RECEIVED = "Invalid command. Available commands: "
             + System.lineSeparator() + "\t  list, done, todo, deadline, event, delete, find, bye";
@@ -51,11 +50,12 @@ public final class Constants {
     public static final int COMMAND_INDEX = 0;
     public static final int MARK_INDEX = 1;
     public static final int TASK_DESCRIPTION_INDEX = 2;
-    
-    // Index specific to deadline and event tasks 
     public static final int TASK_DATE_INDEX = 3;
 
     // Filter words to locate date for deadline and event tasks.
     public static final String DEADLINE_DATA_PREFIX_BY = "/by";
     public static final String EVENT_DATA_PREFIX_AT = "/at";
+
+    // Scanner for extracting user input.
+    public static final Scanner SCANNER = new Scanner(System.in);
 }

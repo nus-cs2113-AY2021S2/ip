@@ -11,7 +11,8 @@ import duke.task.*;
 import duke.command.*;
 
 /**
- * Deals with loading tasks from the file and saving tasks in the file. 
+ * Represents an instance of a storage. An Storage object corresponds to the saving 
+ * and loading of stored data for an application. 
  */
 public class Storage {
     protected String filePath;
@@ -19,10 +20,12 @@ public class Storage {
     public Storage(String filePath) {
         this.filePath = filePath;
     }
+
     /**
-     * Read the file contents and add tasks to task list.
+     * Reads the file contents and add tasks to task list. 
+     * Sets the task status depending on status data in storage file. 
      * 
-     * @throws IOException           If there is an error opening file.
+     * @throws IOException If there is an error opening file.
      * @throws FileNotFoundException If the file is not found.
      */
     protected ArrayList<Task> readFromFile() throws ImportTaskException, FileNotFoundException {
@@ -36,7 +39,7 @@ public class Storage {
         while (fileScanner.hasNextLine()) {
             String[] extractedTaskParameters = fileScanner.nextLine().split(", ");
             Task importedTask = createTask(extractedTaskParameters);
-            importedTask = markTask(importedTask, extractedTaskParameters[Constants.MARK_INDEX]);
+            importedTask.setTaskStatus(extractedTaskParameters[Constants.MARK_INDEX]);
             importedTasks.add(importedTask);
         }
         fileScanner.close();
@@ -56,7 +59,7 @@ public class Storage {
     }
 
     /**
-     * Writes the new task list into file.
+     * Writes the task list into file.
      * 
      * @throws IOException If there is an error writing to file.
      */
@@ -67,7 +70,7 @@ public class Storage {
     }
 
     /**
-     * Converts the task list into storage format.
+     * Converts the task list into a string in the storage format.
      */
     private String convertToFileFormat(TaskList tasks) {
         StringBuilder message = new StringBuilder();
@@ -77,36 +80,22 @@ public class Storage {
         return message.toString();
     }
 
-    
     /**
-     * Adds the tasks from storage to the task list. 
+     * Adds the tasks from storage to the task list according to the type of task. 
      * 
      * @param data List of parameters in storage file. 
      */
     private Task createTask(String[] extractedTaskParameters) throws ImportTaskException {
-        Task importedTask;
         AddCommand addCommand = new AddCommand(extractedTaskParameters);
         switch(extractedTaskParameters[Constants.COMMAND_INDEX]) {
         case "todo":
-            importedTask = addCommand.addTodoFromStorage();
-            break;
+            return addCommand.addTodoFromStorage();
         case "deadline":
-            importedTask = addCommand.addDeadlineFromStorage();
-            break;
+            return addCommand.addDeadlineFromStorage();
         case "event":
-            importedTask = addCommand.addEventFromStorage();
-            break;
+            return addCommand.addEventFromStorage();
         default:
             throw new ImportTaskException();
         }
-
-        return importedTask;
-    }
-
-    private Task markTask(Task importedTask, String isDone) {
-        if (isDone.equals("true")) {
-            importedTask.setTaskStatus();
-        }
-        return importedTask;
     }
 }
