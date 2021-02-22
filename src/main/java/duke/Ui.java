@@ -17,10 +17,11 @@ public class Ui {
     private static final String BORDER_LINE = "___________________________________________________________";
     private static final String OUT_OF_BOUNDS_MESSAGE = "You are accessing something that doesn't exist! Stop being an ignoranus.";
     private static final String WRONG_FORMAT_MESSAGE = "I don't think you are cleverer enough to know that the format is wrong!";
-    private static final String NO_NAME_MESSAGE = "Why you be trying to find something with no name? Ave' you been smoking me special stash?";
-    private static final String NO_DATE_MESSAGE = "Ave' you got no understanding of a date? Like Monday the 25th or something like that?";
-    private static final String WRONG_DATE_FORMAT_MESSAGE = "Are you spasticated? The date format is wrong! It should be like YY-DDDD-MM or sumting like that...";
-    private static final String TOTAL_TASK_MESSAGE = "You is having %d task(s) on your list";
+    private static final String NO_NAME_MESSAGE = "Why you be trying to tell me something with no name? Ave' you been smoking me special stash?";
+    private static final String NO_DATE_MESSAGE = "Ave' you got no understanding of a date? Like Monday the 41th or sumting like that?";
+    private static final String WRONG_DATE_FORMAT_MESSAGE = "Are you spasticated? The date format is wrong! It should be" +
+            " like YY-DDDD-M or sumting like that...\nNo wait, its YYYY-MM-DD. I'm bare smart innit?";
+    private static final String TOTAL_TASK_MESSAGE = "You is having %d task(s) on your list.";
     private static final String SET_TO_DONE_MESSAGE = " set to done. You're well smart innit?";
     private static final String ADDED_TO_LIST_MESSAGE = "Wicked. This ting is now on da list.";
     private static final String DELETED_MESSAGE = "This ting has been deleted. I could've done that task, you stupid.";

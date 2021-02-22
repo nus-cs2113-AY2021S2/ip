@@ -77,7 +77,6 @@ public class Storage {
         w.write(saveText.toString());
         w.close();
     }
-
     /**
      * Convert task from program format to text format to prepare for storage.
      *

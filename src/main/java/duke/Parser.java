@@ -24,7 +24,6 @@ public class Parser {
      * Loops through all features available.
      * Returns if user inputs bye.
      */
-
     public Command parseCommands(String line) throws IOException {
         try {
             int command = getCommand(line);

@@ -35,7 +35,6 @@ public class AddCommand extends Command {
         this.taskList = taskList;
         this.ui = ui;
     }
-
     @Override
     public void execute(Ui ui) {
         ArrayList<Task> Tasks = taskList.getTasks();
@@ -91,7 +90,6 @@ public class AddCommand extends Command {
         }
         throw new WrongFormatException();
     }
-
     /**
      * Adds a task of type Todo into the list after checking validity of the input.
      *
@@ -107,7 +105,6 @@ public class AddCommand extends Command {
         Task.totalNumberOfTasks += 1;
         this.ui.printAddedToList(current, tasks);
     }
-
     /**
      * Validates user input for task type Todo.
      *
@@ -120,7 +117,6 @@ public class AddCommand extends Command {
             throw new EmptyNameFieldException();
         }
     }
-
     /**
      * Adds a task of type deadline into the list after checking validity of input.
      *
@@ -140,9 +136,9 @@ public class AddCommand extends Command {
         Task.totalNumberOfTasks += 1;
         this.ui.printAddedToList(current, tasks);
     }
-
     /**
      * Extracts the name and date of the deadline after validating input.
+     *
      * @param line user input.
      * @return split, a string array with 2 elements: name and date.
      * @throws EmptyNameFieldException if task name is not given or is all whitespace.
@@ -156,7 +152,7 @@ public class AddCommand extends Command {
         if (!line.contains("/by")) {
             throw new WrongFormatException();
         }
-        String nameAndDate = line.substring(9);
+        String nameAndDate = line.substring(8);
         String[] split = nameAndDate.split(" /by ");
         String name = split[0];
         String date = split[1];
@@ -166,10 +162,10 @@ public class AddCommand extends Command {
         if(date.trim().length() == 0) {
             throw new EmptyDateException();
         }
+        // Checks if date is of correct format
         LocalDate.parse(date);
         return split;
     }
-
     /**
      * Adds a task of type event into the list after checking validity of input.
      *
@@ -189,7 +185,6 @@ public class AddCommand extends Command {
         Task.totalNumberOfTasks += 1;
         this.ui.printAddedToList(current, tasks);
     }
-
     /**
      * Extracts name and date of task after checking validity of input.
      *
@@ -206,7 +201,7 @@ public class AddCommand extends Command {
         if (!line.contains("/at")) {
             throw new WrongFormatException();
         }
-        String nameAndDate = line.substring(6);
+        String nameAndDate = line.substring(5);
         String[] split = nameAndDate.split(" /at ");
         String name = split[0];
         String date = split[1];
@@ -216,6 +211,7 @@ public class AddCommand extends Command {
         if(date.trim().length() == 0) {
             throw new EmptyDateException();
         }
+        // Checks if date is of correct format
         LocalDate.parse(date);
         return split;
     }
