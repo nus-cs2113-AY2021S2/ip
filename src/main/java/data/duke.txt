@@ -1,4 +1,3 @@
-Todo~0~first
-Deadline~0~second
-Event~0~third
-Deadline~0~test
+Todo~false~test todo function
+Deadline~false~test deadline function~today
+Event~false~test event function~tomorrow

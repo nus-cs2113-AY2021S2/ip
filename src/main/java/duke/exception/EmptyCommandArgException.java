@@ -1,10 +1,10 @@
 package duke.exception;
 
-public class NullCommandArgException extends Exception {
+public class EmptyCommandArgException extends Exception {
     private String errorMessage;
     private String commandType;
 
-    public NullCommandArgException(String commandType) {
+    public EmptyCommandArgException(String commandType) {
         this.commandType = commandType;
     }
 

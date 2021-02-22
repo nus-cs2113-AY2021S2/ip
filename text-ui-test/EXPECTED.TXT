@@ -12,7 +12,7 @@ Commands:
     list
     done taskNumber
     delete taskNumber
-   help
+    help
     bye
 
 _______________________________________________________________________________
@@ -23,7 +23,7 @@ Commands:
     list
     done taskNumber
     delete taskNumber
-   help
+    help
     bye
 
 _______________________________________________________________________________

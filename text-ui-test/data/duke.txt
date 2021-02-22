@@ -1,6 +1,5 @@
-Todo~0~team project
-Deadline~1~individual project~before tutorial
-Event~0~lecture~friday
-Todo~0~with a lot of whitespace
-Deadline~0~project whitespace~tomorrow
-Event~0~meeting whitespace~tomorrow
+Todo~false~team project
+Event~true~lecture~friday
+Todo~false~with a lot of whitespace
+Deadline~false~project whitespace~tomorrow
+Event~false~meeting whitespace~tomorrow
