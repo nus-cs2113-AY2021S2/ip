@@ -80,13 +80,14 @@ public class DukeUI {
      */
     public static void printMenu() {
         System.out.printf("\n\n--------User Menu--------\n" +
-                "list: list current tasks and completion status\n" +
+                "list: list all tasks and their completion status\n" +
                 "done x: Mark task x as completed\n" +
-                "todo TASK_DESCRIPTION\n" +
-                "deadline TASK_DESCRIPTION /KEYWORD DATE_TIME\n" +
-                "event TASK_DESCRIPTION /KEYWORD DATE_TIME\n" +
-                "delete TASK_NUMBER\n" +
-                "bye: Exit\n" +
-                "(KEYWORD: any single word such as before, by, after...)\n\n");
+                "delete x: Delete task x\n" +
+                "find KEYWORD: List all tasks with the KEYWORD in the tasks' description\n" +
+                "todo TASK_DESCRIPTION: Add a task without a specific deadline or duration\n" +
+                "deadline TASK_DESCRIPTION /KEYWORD DATE_TIME_DESCRIPTION: Add a task with a deadline\n" +
+                "event TASK_DESCRIPTION /KEYWORD DATE_TIME_DESCRIPTION: Add a task with a duration\n" +
+                "bye: Exit from the program\n" +
+                "(An example for adding a task: event CS2113 meeting /from 2/22/2021 2pm to 3pm)\n\n");
     }
 }
