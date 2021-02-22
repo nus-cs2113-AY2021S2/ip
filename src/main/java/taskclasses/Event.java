@@ -1,16 +1,18 @@
 package taskclasses;
 
 public class Event extends Task {
-    protected String by;
+    protected String date;
+    protected String time;
 
-    public Event(String taskName, String by) {
+    public Event(String taskName, String date, String time) {
         super(taskName);
-        this.by = by;
+        this.date = date;
+        this.time = time;
     }
 
     @Override
     public String toString() {
-        return ("[E]" + super.toString() + " (at: " + getTime() + ")");
+        return ("[E]" + super.toString() + " (at: " + getDate() + " " + getTime() + ")");
     }
 
     @Override
@@ -19,7 +21,11 @@ public class Event extends Task {
     }
 
     public String getTime() {
-        return this.by;
+        return this.time;
+    }
+
+    public String getDate() {
+        return this.date;
     }
 
 }
