@@ -1,7 +1,7 @@
 package duke.util;
 
-import java.util.ArrayList; 
 import duke.task.Task;
+import duke.task.TaskList;
 
 public class Ui {
     
@@ -42,10 +42,10 @@ public class Ui {
         printWithBorder(COMMANDS);
     }
 
-    public void listAllTasks(ArrayList<Task> taskList) {
+    public void listAllTasks(TaskList taskList) {
         String listOfTasksString = "Here are the tasks in your list:";
-        for (int i = 0; i < taskList.size(); i += 1) {
-            Task task = taskList.get(i);
+        for (int i = 0; i < taskList.getListSize(); i += 1) {
+            Task task = taskList.getTask(i);
             listOfTasksString += ("\n    " + Integer.toString(i + 1) + ". " + task.toString());
         }
         printWithBorder(listOfTasksString);
