@@ -1,6 +1,4 @@
-import myexceptions.InvalidCommandException;
-import myexceptions.InvalidDateException;
-import myexceptions.TodoException;
+import myexceptions.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -31,7 +29,7 @@ public class Duke {
         fw.close();
     }
 
-    private static void restoreFileContents(String filePath) throws FileNotFoundException, TodoException {
+    private static void restoreFileContents(String filePath) throws FileNotFoundException, BlankDescriptionException {
         File f = new File(filePath);
         Scanner s = new Scanner(f);
         while (s.hasNext()) {
@@ -39,62 +37,63 @@ public class Duke {
         }
     }
 
-    private static void inputToTasks(String nextLine) throws TodoException {
+    private static void inputToTasks(String nextLine) throws BlankDescriptionException {
         int taskStatusIndex = 1;
         int taskDescriptionIndex = 7;
 
         char taskType = nextLine.charAt(1);
         String taskStatus = nextLine.substring(4,5);
         String taskDescription = nextLine.substring(7);
-
-        switch (taskType){
-        case 'T':
-            description = taskDescription;
-            Todo todoTask = new Todo(description);
-            if (taskStatus.equalsIgnoreCase("1")) {
-                todoTask.isDone = true;
+        try {
+            switch (taskType) {
+            case 'T':
+                description = taskDescription;
+                Todo todoTask = new Todo(description);
+                if (taskStatus.equalsIgnoreCase("1")) {
+                    todoTask.isDone = true;
+                }
+                storeTask(todoTask);
+                break;
+            case 'E':
+                int indexOfBy = taskDescription.indexOf("--");
+                description = taskDescription.substring(0, indexOfBy - 1);
+                by = taskDescription.substring(indexOfBy + 1, taskDescription.lastIndexOf("--"));
+                Event eventTask = new Event(description, by);
+                if (taskStatus.equalsIgnoreCase("1")) {
+                    eventTask.isDone = true;
+                }
+                storeTask(eventTask);
+                break;
+            case 'D':
+                indexOfBy = taskDescription.indexOf("--");
+                description = taskDescription.substring(0, indexOfBy - 1);
+                by = taskDescription.substring(indexOfBy + 2, taskDescription.lastIndexOf("--"));
+                Deadline deadlineTask = new Deadline(description, by);
+                if (taskStatus.equalsIgnoreCase("1")) {
+                    deadlineTask.isDone = true;
+                }
+                storeTask(deadlineTask);
+                break;
             }
-            storeTask(todoTask);
-            break;
-        case 'E':
-            int indexOfBy = taskDescription.indexOf("--");
-            description = taskDescription.substring(0, indexOfBy - 1);
-            by = taskDescription.substring(indexOfBy + 1, taskDescription.lastIndexOf("--"));
-            Event eventTask = new Event(description,by);
-            if (taskStatus.equalsIgnoreCase("1")) {
-                eventTask.isDone = true;
-            }
-            storeTask(eventTask);
-            break;
-        case 'D':
-            indexOfBy = taskDescription.indexOf("--");
-            description = taskDescription.substring(0, indexOfBy - 1);
-            by = taskDescription.substring(indexOfBy + 2, taskDescription.lastIndexOf("--"));
-            Deadline deadlineTask = new Deadline(description,by);
-            if (taskStatus.equalsIgnoreCase("1")) {
-                deadlineTask.isDone = true;
-            }
-            storeTask(deadlineTask);
-            break;
-
-
+        } catch (BlankDescriptionException e) {
         }
+
+
+
 
     }
 
-    public static void storeTask(Task t) throws TodoException {
-        if (!t.description.isEmpty()){
+    public static void storeTask(Task t) throws BlankDescriptionException{
+        if (t.description.isBlank()) {
+            throw new BlankDescriptionException();
+        }
+        else {
             tasks.add(t);
             System.out.println("Got it! I've added this task!");
             //System.out.println(t.description);
             System.out.println(t.getStatusIcon() + " " + t.getDescription());
             System.out.println("Now you have " + tasks.size() + " tasks!");
-
         }
-        else {
-            throw new TodoException();
-        }
-
     }
 
     public static void markAsDone(int taskIndex){
@@ -112,19 +111,21 @@ public class Duke {
 
     }
 
-    public static void main(String[] args) throws InvalidCommandException, InvalidDateException, FileNotFoundException {
+    public static void main(String[] args) throws InvalidCommandException, InvalidDateException, FileNotFoundException, BlankDescriptionException {
         System.out.println("Hello! I'm 343 Guilty Spark! You may call me Spark!");
         System.out.println("What can I do for you?");
         String text = "hi";
 
         try{
             restoreFileContents("Duke.txt");
-        } catch (FileNotFoundException | TodoException e) {
+        } catch (FileNotFoundException e) {
             System.out.println("File not found!");
         }
+
         while(!text.equalsIgnoreCase("Bye")){
             Scanner in = new Scanner(System.in);
             text = in.nextLine();
+
             //Task t = new Task(text);
             try {
                 String[] arr = text.split(" "); //split command input into words
@@ -136,16 +137,19 @@ public class Duke {
                 case "Deadline":
                 case "DEADLINE":
                     try {
+                        if(!text.contains("/") && !text.substring(9).isBlank()){
+                            throw new MissingDateException();
+                        }
                         int indexOfBy = text.indexOf('/');
                         description = text.substring(9, indexOfBy - 1);
                         by = text.substring(indexOfBy + 1);
                         Deadline deadlineTask = new Deadline(description, by);
 
                         storeTask(deadlineTask);
-                    } catch (TodoException e) {
-                        e.printStackTrace();
-                    } catch (StringIndexOutOfBoundsException e) {
-                        System.out.println("Date required!");
+                    } catch (StringIndexOutOfBoundsException | BlankDescriptionException e) {
+                        System.out.println("Description cannot be blank!");
+                    } catch (MissingDateException e){
+                        System.out.println("Missing date! Utilise '/' to key in your date!");
                     }
                     break;
                 case "todo":
@@ -153,15 +157,15 @@ public class Duke {
                 case "TODO":
 
                     try {
+                        if(text.substring(4).isBlank()){
+                            throw new BlankDescriptionException();
+                        }
                         description = text.substring(5);
                         Todo todoTask = new Todo(description);
                         storeTask(todoTask);
                         break;
-                    } catch (TodoException e) {
+                    } catch (BlankDescriptionException e) {
                         System.out.println("Todo cannot be empty");
-                        break;
-                    } catch (IndexOutOfBoundsException e) {
-                        System.out.println("Todo list cannot be empty! Try again!");
                         break;
                     }
 
@@ -171,8 +175,8 @@ public class Duke {
                 case "EVENT":
 
                     try {
-                        if (!text.contains("/")) {
-                            throw new InvalidDateException();
+                        if(!text.contains("/") && !text.substring(6).isBlank()){
+                            throw new MissingDateException();
                         }
                         indexOfBy = text.indexOf('/');
 
@@ -180,9 +184,9 @@ public class Duke {
                         String by = text.substring(indexOfBy + 1);
                         Event eventTask = new Event(description, by);
                         storeTask(eventTask);
-                    } catch (TodoException e) {
+                    } catch (IndexOutOfBoundsException | BlankDescriptionException e) {
                         System.out.println("Event description cannot be empty! Try again!");
-                    } catch (InvalidDateException e) {
+                    } catch (MissingDateException e){
                         System.out.println("Event must have a date! Try again!");
                     }
                     break;
@@ -216,9 +220,14 @@ public class Duke {
                       //  System.out.println("What do you want to mark as done?");
                         //break;
                     //}
+                case "Bye":
+                case "bye":
+                case"BYE":
+                    break;
 
 
                 default:
+
                     throw new InvalidCommandException();
                 }
             } catch (ArrayIndexOutOfBoundsException e){
