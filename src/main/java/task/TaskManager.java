@@ -22,6 +22,15 @@ public class TaskManager {
                 "Enter next command: ");
     }
 
+    public void deleteTask(int taskNoDelete){
+        Task task = taskList.get(taskNoDelete-1);
+        taskList.remove(taskNoDelete-1);
+        ui.printMessage("Got it I have deleted this task");
+        ui.print(taskNoDelete + ":" +  task.toString());
+        ui.printMessage(ui.DIVIDER,
+                "Enter next command: ");
+    }
+
     public void markDone(int taskNoDone){
         taskList.get(taskNoDone-1).setDone();
         ui.printMessage("I have marked this task as done: " +
@@ -29,8 +38,6 @@ public class TaskManager {
                 ui.DIVIDER,
                 "Enter next command: ");
     }
-
-
 
     public int getNoOfTasks() {
         return taskList.size();

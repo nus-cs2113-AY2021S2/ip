@@ -16,7 +16,9 @@ public class Parser {
             cmd = new ByeCommand();
         }else if (userInput.contains("DONE")){
             cmd = new DoneCommand();
-        } else if (!userInput.contains("BYE")) {
+        }else if(userInput.contains("DELETE")){
+            cmd = new DeleteCommand();
+        }else if (!userInput.contains("BYE")) {
             cmd = new AddCommand();
         }
         return cmd;
@@ -29,6 +31,12 @@ public class Parser {
         return taskNoDone;
     }
 
+    public static int getTaskNoToBeMarkDelete(String userInput){
+        String[] inputSplit = userInput.split("DELETE ");
+        System.out.println(inputSplit[1]);
+        int taskNoDelete = Integer.parseInt(inputSplit[1]);
+        return taskNoDelete;
+    }
 
     public static Task getTask(String userInput){
         Task taskToAdd = null;
