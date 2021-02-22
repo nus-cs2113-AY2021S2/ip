@@ -14,12 +14,16 @@ import java.util.ArrayList;
 
 public class Duke {
 
-    static final String LINE_DIVIDER = "____________________________________________________________";
     static String by;
     static String at;
-    static ArrayList <Task> tasks = new ArrayList<>();
-    static ArrayList <String> keywords = new ArrayList<>();
     static int numberOfTasks = 0;
+    static ArrayList<Task> tasks = new ArrayList<>();
+    static ArrayList<String> keywords = new ArrayList<>();
+    public static final String LINE_DIVIDER = "____________________________________________________________";
+    static final int START_INDEX_OF_BY = 3;
+    static final int START_INDEX_OF_AT = 3;
+    static final int START_INDEX_OF_EVENT = 5;
+    static final int START_INDEX_OF_DEADLINE = 8;
 
     public static void printDone(int description) {
         System.out.println("This task has been done. Good job!");
@@ -42,19 +46,22 @@ public class Duke {
     }
 
     public static void executeTodo(String command) {
+        if (command.length() == 4) {
+            System.out.println("Woopies! The description of a todo cannot be empty.");
+            return;
+        }
         tasks.add(new Todo(command.replaceFirst("todo", "")));
         Todo.printTodoDescription();
         keywords.add("T");
         tasks.get(numberOfTasks++).printDescription();
         System.out.print("\n");
         printTotalTasks();
-
     }
 
     public static void executeDeadline(String command) {
         try {
-            by = command.substring(command.indexOf("/") + 3);
-            command = command.substring(8, command.indexOf("/"));
+            by = command.substring(command.indexOf("/") + START_INDEX_OF_BY);
+            command = command.substring(START_INDEX_OF_DEADLINE, command.indexOf("/"));
             tasks.add(new Deadline(command, by));
             Deadline.printDeadlineDescription();
             keywords.add("D");
@@ -62,14 +69,14 @@ public class Duke {
             System.out.println("(by:" + by + ")");
             printTotalTasks();
         } catch (IndexOutOfBoundsException e) {
-            DukeException.deadlineIsEmpty();
+            DukeException.printDeadlineIsEmpty();
         }
     }
 
     public static void executeEvent(String command) {
         try {
-            at = command.substring(command.indexOf("/") + 3);
-            command = command.substring(5, command.indexOf("/"));
+            at = command.substring(command.indexOf("/") + START_INDEX_OF_AT);
+            command = command.substring(START_INDEX_OF_EVENT, command.indexOf("/"));
             tasks.add(new Event(command, at));
             Event.printEventDescription();
             keywords.add("E");
@@ -77,7 +84,7 @@ public class Duke {
             System.out.println("(at:" + at + ")");
             printTotalTasks();
         } catch (IndexOutOfBoundsException e) {
-            DukeException.eventIsEmpty();
+            DukeException.printEventIsEmpty();
         }
     }
 
@@ -117,6 +124,9 @@ public class Duke {
                 tasks.get(i - 1).printDescription();
                 System.out.println("(at:" + at + ")");
                 break;
+            default:
+                System.out.println("Oops! An error occurred");
+                break;
             }
         }
         System.out.println(LINE_DIVIDER);
@@ -124,105 +134,72 @@ public class Duke {
 
     public static void saveData() {
         try {
-            File path = new File("duke.txt");
+            File path = new File("dukeSave.txt");
             FileWriter fw = new FileWriter(path);
-            for (int i = 0; i < numberOfTasks; ++i) {
-                fw.write(keywords.get(i) + " | " + tasks.get(i).getDescription());
-                if (keywords.get(i) == "E") {
-                    fw.write(" | " + at);
-                } else if (keywords.get(i) == "D") {
-                    fw.write(" | " + by);
-                }
-                fw.write(System.lineSeparator());
-            }
+            writeData(fw);
             fw.close();
         } catch (IOException e) {
             System.out.println("Error occurred in saving");
         }
     }
 
-    public static void loadData() throws FileNotFoundException, NoSuchElementException {
-        String command;
-        System.out.println("Loading data....");
-        File f = new File("duke.txt");
-        Scanner input = new Scanner(f);
-        if (!input.hasNextLine()) {
-            return;
-        }
-        command = input.nextLine();
-
-        while (!command.equals("bye")) {
-            // makes the input case-insensitive
-            command = command.toLowerCase();
-            if (command.equals("list")) {
-                try {
-                    listTasks();
-                } catch (IndexOutOfBoundsException e) {
-                    System.out.println("List is empty!");
-                }
-            } else if (command.contains("done")) {
-                executeDone(command);
-            } else if (command.contains("delete")) {
-                executeDelete(command);
+    public static void writeData(FileWriter fw) throws IOException {
+        for (int i = 0; i < tasks.size(); ++i) {
+            fw.write(keywords.get(i) + " | " + tasks.get(i).getDescription());
+            if (keywords.get(i) == "E") {
+                fw.write(" | " + at);
+            } else if (keywords.get(i) == "D") {
+                fw.write(" | " + by);
             }
-            else if (command.contains("todo")) {
-                if (!DukeException.checkTodo(command)) {
-                    executeTodo(command);
-                }
-            } else if (command.contains("deadline")) {
-                executeDeadline(command);
-            } else if (command.contains("event")) {
-                executeEvent(command);
-            } else {
-                DukeException.commandIsInvalid();
-            }
-
-            try {
-                command = input.nextLine();
-            } catch (NoSuchElementException e) {
-                break;
-            }
+            fw.write(System.lineSeparator());
         }
     }
 
-    public static void processCommands() {
-        String command;
-        Scanner in = new Scanner(System.in);
-        if (!in.hasNextLine()) {
-            return;
-        }
-        command = in.nextLine();
+    public static void loadData() throws FileNotFoundException, NoSuchElementException {
+        String loadedCommand;
+        System.out.println("Loading data....");
+        File f = new File("dukeLoad.txt");
+        Scanner input = new Scanner(f);
 
-        while (!command.equals("bye")) {
-            // makes the input case-insensitive
-            command = command.toLowerCase();
-            if (command.equals("list")) {
-                try {
-                    listTasks();
-                } catch (IndexOutOfBoundsException e) {
-                    System.out.println("List is empty!");
-                }
-            } else if (command.contains("done")) {
-                executeDone(command);
-            } else if (command.contains("delete")) {
-                executeDelete(command);
-            }
-            else if (command.contains("todo")) {
-                if (!DukeException.checkTodo(command)) {
-                    executeTodo(command);
-                }
-            } else if (command.contains("deadline")) {
-                executeDeadline(command);
-            } else if (command.contains("event")) {
-                executeEvent(command);
-            } else {
-                DukeException.commandIsInvalid();
-            }
+        loadedCommand = input.nextLine();
+        filterCommands(loadedCommand);
+        while (input.hasNextLine()) {
+            loadedCommand = input.nextLine();
+            filterCommands(loadedCommand);
+        }
+    }
+
+    public static void processUserData() {
+        String userCommand;
+        Scanner input = new Scanner(System.in);
+        userCommand = input.nextLine();
+        while (!userCommand.equals("bye")) {
+            filterCommands(userCommand);
+            userCommand = input.nextLine();
+        }
+    }
+
+    public static void filterCommands(String command) {
+        // makes the input case-insensitive
+        command = command.toLowerCase();
+        if (command.equals("list")) {
             try {
-                command = in.nextLine();
-            } catch (NoSuchElementException e) {
-                break;
+                listTasks();
+            } catch (IndexOutOfBoundsException e) {
+                DukeException.listIsEmpty();
             }
+        } else if (command.contains("done")) {
+            executeDone(command);
+        } else if (command.contains("delete")) {
+            executeDelete(command);
+        } else if (command.contains("todo")) {
+            executeTodo(command);
+        } else if (command.contains("deadline")) {
+            executeDeadline(command);
+        } else if (command.contains("event")) {
+            executeEvent(command);
+        } else {
+            DukeException.printCommandIsInvalid();
         }
     }
 
@@ -230,10 +207,14 @@ public class Duke {
         UserInterface.printHello();
         try {
             loadData();
-        } catch (NoSuchElementException  | FileNotFoundException e) {
-            System.out.println("Error in loading");
+        } catch (FileNotFoundException e) {
+            System.out.println("Error in loading. File not found");
+            System.out.println(LINE_DIVIDER);
+        } catch (NoSuchElementException e) {
+            System.out.println("The loaded file is empty. Please enter an input");
+            System.out.println(LINE_DIVIDER);
         }
-        processCommands();
+        processUserData();
         saveData();
         UserInterface.printBye();
     }

@@ -1,8 +1,8 @@
 package duke;
 
-public class UserInterface {
+import static duke.Duke.LINE_DIVIDER;
 
-    static final String LINE_DIVIDER = "____________________________________________________________";
+public class UserInterface {
 
     public static void printBye() {
         System.out.println("Bye. Hope to see you again soon!");
@@ -10,7 +10,8 @@ public class UserInterface {
     }
 
     public static void printHello() {
-        System.out.println("Hi! I'm Duke (:");
+        System.out.println(LINE_DIVIDER);
+        System.out.println("Hi! I'm Duke UwU");
         System.out.println("What can I do for you today?");
         System.out.println(LINE_DIVIDER);
     }

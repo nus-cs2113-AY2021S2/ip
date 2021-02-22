@@ -1,9 +1,9 @@
 todo read book
-event eat lunch with friends /at nus
+event eat lunch /at nus
+deadline math hw /by wed
 list
 done 1
 list
-delete 2
+delete 3
 list
-abracadabra
 bye
