@@ -9,7 +9,7 @@ Duke is a personal assistant chatbot that helps a person to keep track of variou
 2. Download the latest ip.jar from **lihaoyangML/ip**'s Github Page.
 3. Copy the file to the folder you want to use as the home folder.
 4. Launch Command Prompt and goto the folder.
-5. Type *java -jar <filename>.jar* to launch the program.
+5. Type java -jar <filename>.jar to launch the program.
 6. Refer to the instruction that is displayed automatically when the program is launched to start using the program. 
 
 
