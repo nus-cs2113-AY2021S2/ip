@@ -1,6 +1,12 @@
 package dukehandler;
 
-import exceptions.*;
+import exceptions.EmptyCommandDescriptionException;
+import exceptions.EmptyListException;
+import exceptions.IllegalTaskMarkedDoneException;
+import exceptions.IllegalTaskRemovedException;
+import exceptions.InvalidCommandException;
+import exceptions.StreamErrorException;
+import exceptions.TaskAlreadyMarkedException;
 
 public class Checker {
     public Checker() {
