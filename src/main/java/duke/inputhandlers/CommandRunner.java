@@ -8,6 +8,7 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.Todo;
 
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 import static duke.Duke.tasks;
@@ -18,7 +19,7 @@ import static duke.constants.ProgramInts.*;
  * Runs the commands entered by the user.
  * Also handles when the list is full by only allowing "list" and "bye" command.
  * TODO: allow delete command
- * */
+ */
 
 public class CommandRunner {
 
@@ -45,8 +46,6 @@ public class CommandRunner {
 
     /**
      * PRIVATE COMMAND RUNNERS
-     * 
-     * 
      */
 
     private boolean selectCommandToRun(int command, String input) {
@@ -162,6 +161,9 @@ public class CommandRunner {
         } catch (InvalidCommandException e) {
             ui.printInvalidInputWarning(input);
             return;
+        } catch (DateTimeParseException e) {
+            ui.printInvalidDateFormatWarning();
+            return;
         }
 
         Deadline newTask = new Deadline(job, by);
@@ -177,6 +179,9 @@ public class CommandRunner {
             at = Parser.parseDate(input, "/at");
         } catch (InvalidCommandException e) {
             ui.printInvalidInputWarning(input);
+            return;
+        } catch (DateTimeParseException e) {
+            ui.printInvalidDateFormatWarning();
             return;
         }
 
