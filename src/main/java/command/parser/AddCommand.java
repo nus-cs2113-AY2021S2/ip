@@ -15,7 +15,7 @@ public class AddCommand extends Command {
         tasks.add(newTask);
     }
 
-    private static String getTaskDescription(String line) {
+    public static String getTaskDescription(String line) {
         String[] commandWords = (line.split(" ", NUMBER_OF_COMMAND_ARGUMENTS));
         return commandWords[DESCRIPTION_INDEX_IN_COMMANDS];
     }

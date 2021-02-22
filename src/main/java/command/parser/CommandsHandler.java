@@ -39,4 +39,15 @@ public class CommandsHandler {
             UI.printEmptyList();
         }
     }
+
+    // handles exceptions that can occur when user inputs find command
+    public static void handleFind(String line, ArrayList<TaskList> tasks) {
+        try {
+            FindCommand.findTask(line, tasks);
+        } catch (IllegalTaskException e) {
+            UI.printInvalidTaskPhrase();
+        } catch (IllegalCommandException e) {
+            UI.printCommandDoesNotExist();
+        }
+    }
 }
