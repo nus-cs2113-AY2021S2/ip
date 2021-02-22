@@ -47,4 +47,14 @@ public class Parser {
         String at = details[1];
         return new Event(description, at);
     }
+
+    /**
+     * Parses user input to obtain the keyword for finding tasks
+     *
+     * @param userInput command entered by the user.
+     * @return the keyword
+     */
+    public static String parseFindCommand(String userInput) {
+        return userInput.replaceFirst("find ", "");
+    }
 }
