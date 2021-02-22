@@ -7,7 +7,6 @@ import task.TaskHandler;
  * Ui class for handling the UI printing.
  */
 public class Ui {
-    private static final Constant constant = new Constant();
     private static final TaskHandler taskHandler = new TaskHandler();
 
     /**
@@ -30,20 +29,20 @@ public class Ui {
                 "         | /     |  |\n" +
                 "         \\|     /   |akn\n" +
                 "          `-----`---'\n";
-        System.out.println(constant.DIVIDER_LINE);
+        System.out.println(Constant.DIVIDER_LINE);
         System.out.println(logo);
         System.out.println("Welcome Mushroom!");
         System.out.println("Mushroom boy is here to serve you!");
-        System.out.println(constant.DIVIDER_LINE);
+        System.out.println(Constant.DIVIDER_LINE);
     }
 
     /**
      * Prints the exit message.
      */
     public static void printExitMessage() {
-        System.out.println(constant.DIVIDER_LINE);
+        System.out.println(Constant.DIVIDER_LINE);
         System.out.println("Bye. Hope to see you again soon!");
-        System.out.println(constant.DIVIDER_LINE);
+        System.out.println(Constant.DIVIDER_LINE);
     }
 
     /**
@@ -52,7 +51,7 @@ public class Ui {
      * @param invalidUserInput is the input from the console terminal entered by the user.
      */
     public static void printTaskWarningMessage(String invalidUserInput) {
-        System.out.println(constant.DIVIDER_LINE);
+        System.out.println(Constant.DIVIDER_LINE);
         System.out.println("Invalid command: " + invalidUserInput);
     }
 
@@ -74,7 +73,7 @@ public class Ui {
         if (taskHandler.getTaskCount() == 0) {
             System.out.println("You have no item in Mushroom Head list!");
         } else {
-            System.out.println(constant.LIST_STARTING_MESSAGE);
+            System.out.println(Constant.LIST_STARTING_MESSAGE);
             for (int i = 0; i < taskHandler.getTaskCount(); i++) {
                 System.out.print((i + 1) + ".");
                 printTaskDetails(i);

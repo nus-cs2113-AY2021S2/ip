@@ -10,7 +10,6 @@ import java.util.StringJoiner;
 public class TaskHandler {
     private static ArrayList<Task> taskArrayList = new ArrayList<>();
     private static int taskCount = 0;
-    private static final Ui ui = new Ui();
 
     /**
      * Add a task to the collection.
@@ -84,7 +83,7 @@ public class TaskHandler {
         for (int i = 0; i < taskCount; i++) {
             if (taskArrayList.get(i).getTaskDescription().toLowerCase().contains(keyword.toLowerCase())) {
                 System.out.print((i+1) + ".");
-                ui.printTaskDetails(i);
+                Ui.printTaskDetails(i);
                 isFound = true;
             }
         }

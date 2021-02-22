@@ -13,8 +13,6 @@ import java.util.StringJoiner;
  * Storage class for handling the loading and storing of file to the hard disk.
  */
 public class Storage {
-    private static final Constant constant = new Constant();
-    private static final Ui ui = new Ui();
     private static final TaskHandler taskHandler = new TaskHandler();
 
     /**
@@ -22,17 +20,17 @@ public class Storage {
      * Print the relevant welcome message and file loading status.
      */
     public static void initFile() {
-        ui.printWelcomeMessage();
+        Ui.printWelcomeMessage();
         try {
-            System.out.println(constant.FILE_LOAD_MESSAGE);
+            System.out.println(Constant.FILE_LOAD_MESSAGE);
             tryRunFile();
-            System.out.println(constant.FILE_LOAD_SUCCESS);
-            System.out.println(constant.DIVIDER_LINE);
-            System.out.println(constant.FILE_LOAD_SUCCESS_WELCOME);
-            System.out.println(constant.DIVIDER_LINE);
+            System.out.println(Constant.FILE_LOAD_SUCCESS);
+            System.out.println(Constant.DIVIDER_LINE);
+            System.out.println(Constant.FILE_LOAD_SUCCESS_WELCOME);
+            System.out.println(Constant.DIVIDER_LINE);
         } catch (IOException e) {
-            System.out.println(constant.FILE_LOAD_FAILURE);
-            System.out.println(constant.DIVIDER_LINE);
+            System.out.println(Constant.FILE_LOAD_FAILURE);
+            System.out.println(Constant.DIVIDER_LINE);
         }
     }
 
@@ -42,7 +40,7 @@ public class Storage {
      * @throws IOException if the file is unable to load.
      */
     private static void tryRunFile() throws IOException {
-        File sourceFile = new File(constant.FILE_PATH);
+        File sourceFile = new File(Constant.FILE_PATH);
         String fileData;
         if (sourceFile.createNewFile()){
             throw new IOException();
@@ -135,7 +133,7 @@ public class Storage {
      * @throws IOException if an error if error an occur during the writing to file process.
      */
     private static void tryWriteToFiles() throws IOException {
-        FileWriter fw = new FileWriter(constant.FILE_PATH);
+        FileWriter fw = new FileWriter(Constant.FILE_PATH);
         fw.write(convertToFileInput());
         fw.close();
     }
