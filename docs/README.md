@@ -1,5 +1,5 @@
 # Duke Project
-##### By Nikhila Ravikumar
+###By Nikhila Ravikumar
 
 This project is named after the Java mascot _Duke_. Given below are instructions on how to use it.
 
@@ -52,6 +52,12 @@ The **Duke** app is run via a file with the extension `.jar`. The following step
    |____/ \__,_|_|\_\___|
    ```
 1. If the `tasks.txt` file does not already exist in the _home folder_ that you are in currently, **Duke** will tell you the file path where the `tasks.txt` file is saved. It will be saved in your _home folder_ where your `.jar` file is located.
+
+
+
+
+
+
 
 
 #### Command: `help`
