@@ -1,20 +1,18 @@
 package FileStorage;
-
 import exceptions.IllegalListException;
-import list.duke;
+import UserInterface.UI;
 import list.Deadline;
 import list.Event;
 import list.TaskList;
 import list.Todo;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import list.Commands;
+import CommandParser.Parser;
 
-public class FileStorage {
+public class Storage {
 
     public static final String FILE_PATH = "duke.txt";
 
@@ -25,15 +23,15 @@ public class FileStorage {
             readDataFile(s, tasks);
             printOldList(tasks);
         } catch (java.io.IOException e) {
-            duke.printNoSavedFile();
+            UI.printNoSavedFile();
         }
     }
 
     private static void readDataFile(Scanner s, ArrayList<TaskList> tasks) {
         int i = 0;
-        duke.printLoading();
+        UI.printLoading();
         while (s.hasNext()) {
-            Commands.selectCommand(s.nextLine(), tasks);
+            Parser.selectCommand(s.nextLine(), tasks);
             if (s.nextLine().equals("true")) {
                 TaskList t = tasks.get(i);
                 t.setDone();
@@ -45,9 +43,9 @@ public class FileStorage {
 
     private static void printOldList(ArrayList<TaskList> tasks) {
         try {
-            Commands.printAllLists(tasks);
+            Parser.printAllLists(tasks);
         } catch (IllegalListException e) {
-            duke.printEmptyFile();
+            UI.printEmptyFile();
         }
     }
 

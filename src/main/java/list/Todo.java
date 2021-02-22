@@ -10,6 +10,9 @@ public class Todo extends TaskList {
         printAddedTask();
     }
 
+    public Todo() {
+    }
+
     @Override
     public void printAddedTask() {
         System.out.println("Aight Crewmate!! I've got a new task for you to do!!! (¬‿¬): " + getTaskDescription());

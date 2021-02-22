@@ -1,15 +1,10 @@
-package list;
+package UserInterface;
 
-// This is the UI class
+import list.TaskList;
 
 import java.util.ArrayList;
 
-public class duke {
-    protected String name;
-
-    public duke(String name) {
-        this.name = name;
-    }
+public class UI {
 
     public static void printTaskAlreadyCompletedPhrase(ArrayList<TaskList> tasks) {
         String phrase;
@@ -184,5 +179,4 @@ public class duke {
     public static void printDeletingTask() {
         System.out.println(" (o‿∩) Hol' up! I'm deleting this task:");
     }
-
 }

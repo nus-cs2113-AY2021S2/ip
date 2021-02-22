@@ -1,22 +1,27 @@
-package list;
+package CommandParser;
 
-import FileStorage.FileStorage;
+import FileStorage.Storage;
+import UserInterface.UI;
 import exceptions.IllegalCommandException;
 import exceptions.IllegalListException;
 import exceptions.IllegalTaskException;
 import exceptions.IllegalTaskRedoException;
+import list.Deadline;
+import list.Event;
+import list.TaskList;
+import list.Todo;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Commands {
+public class Parser {
 
     public static void processCommands(ArrayList<TaskList> tasks) {
         String line;
         Scanner in = new Scanner(System.in);
         boolean hasToContinue = true;
 
-        duke.printHelp();
+        UI.printHelp();
         while (hasToContinue) {
             line = in.nextLine();
             hasToContinue = selectCommand(line, tasks);
@@ -33,11 +38,11 @@ public class Commands {
             try {
                 printAllLists(tasks);
             } catch (IllegalListException e) {
-                duke.printEmptyList();
+                UI.printEmptyList();
             }
             break;
         case "help":
-            duke.printHelp();
+            UI.printHelp();
             break;
 
         default:
@@ -51,13 +56,13 @@ public class Commands {
         try {
             amendList(line, tasks);
         } catch (IllegalCommandException e) {
-            duke.printCommandDoesNotExist();
+            UI.printCommandDoesNotExist();
         } catch (IllegalTaskException e) {
-            duke.printInvalidTaskPhrase();
+            UI.printInvalidTaskPhrase();
         } catch (IllegalTaskRedoException e) {
-            duke.printTaskAlreadyCompletedPhrase(tasks);
+            UI.printTaskAlreadyCompletedPhrase(tasks);
         }
-        duke.printDottedLines();
+        UI.printDottedLines();
     }
 
     public static void printAllLists(ArrayList<TaskList> tasks) throws IllegalListException {
@@ -65,14 +70,14 @@ public class Commands {
         if (tasks.size() == 0) {
             throw new IllegalListException();
         }
-        duke.printListName();
+        UI.printListName();
         for (TaskList t : tasks) {
             System.out.print(i + ". ");
             t.printTask();
             i++;
         }
         printNumberOfTasksLeft(tasks);
-        duke.printDottedLines();
+        UI.printDottedLines();
     }
 
     private static void amendList(String line, ArrayList<TaskList> tasks) throws IllegalCommandException,
@@ -120,7 +125,7 @@ public class Commands {
         default:
             throw new IllegalCommandException();
         }
-        FileStorage.saveToFile(tasks);
+        Storage.saveToFile(tasks);
     }
 
     private static void addTaskInDeadlineList(String line, ArrayList<TaskList> tasks) {
@@ -158,7 +163,7 @@ public class Commands {
         }
 
         TaskList t = tasks.get(index - 1);
-        duke.printDeletingTask();
+        UI.printDeletingTask();
         t.printTask();
         tasks.remove(index - 1);
         if (tasks.size() > 0) {
@@ -210,26 +215,24 @@ public class Commands {
     }
 
     public static void printNumberOfTasksLeft(ArrayList<TaskList> tasks) {
-        if (duke.getAreAllTasksDone(tasks) && tasks.size() > 0) {
-            duke.printCompletedTasks();
-        } else if (duke.getAreAllTasksNotDone(tasks) && tasks.size() > 0) {
-            duke.printNoTasksDone();
+        if (UI.getAreAllTasksDone(tasks) && tasks.size() > 0) {
+            UI.printCompletedTasks();
+        } else if (UI.getAreAllTasksNotDone(tasks) && tasks.size() > 0) {
+            UI.printNoTasksDone();
         } else {
-            int tasksLeft = duke.getNumberOfTaskRemaining(tasks);
-            duke.printSomeTasksRemaining(tasksLeft);
+            int tasksLeft = UI.getNumberOfTaskRemaining(tasks);
+            UI.printSomeTasksRemaining(tasksLeft);
         }
     }
 
 
     public static void exit(ArrayList<TaskList> tasks) {
-        if (tasks.size() > 0 && duke.getAreAllTasksDone(tasks)) {
-            duke.printGoodEnding();
-        } else if (tasks.size() > 0 && duke.getAreAllTasksNotDone(tasks)) {
-            duke.printBadEnding();
+        if (tasks.size() > 0 && UI.getAreAllTasksDone(tasks)) {
+            UI.printGoodEnding();
+        } else if (tasks.size() > 0 && UI.getAreAllTasksNotDone(tasks)) {
+            UI.printBadEnding();
         } else {
-            duke.printTraitor();
+            UI.printTraitor();
         }
     }
-
-
 }

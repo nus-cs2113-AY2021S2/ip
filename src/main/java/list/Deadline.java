@@ -1,6 +1,6 @@
 package list;
 
-public class Deadline extends TaskList {
+public class Deadline extends Todo {
     private static final String TASK_TITLE = "D";
     protected String by;
 
@@ -29,7 +29,6 @@ public class Deadline extends TaskList {
             if (by.equals("")) {
                 by = "No Deadline!! Hehe! :)";
             }
-
         } catch (ArrayIndexOutOfBoundsException e) {
             by = "No Deadline!! Hehe! :)";
         }

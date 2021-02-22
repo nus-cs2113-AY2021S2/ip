@@ -1,15 +1,12 @@
 package list;
 
+import UserInterface.UI;
 import exceptions.IllegalTaskRedoException;
 
-public class TaskList extends duke {
+public class TaskList {
     protected String description;
     protected boolean isDone;
 
-
-    public TaskList() {
-        super(null);
-    }
 
     public void printTask() {
         System.out.println("[" + getStatusIcon() + "]" + getTaskDescription());
@@ -34,7 +31,7 @@ public class TaskList extends duke {
         setDone();
         System.out.println("Nice! I've marked this task as done:");
         this.printTask();
-        this.printDottedLines();
+        UI.printDottedLines();
     }
 
     public void setDone() {
