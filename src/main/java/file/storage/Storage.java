@@ -1,4 +1,5 @@
 package file.storage;
+import command.parser.ListCommand;
 import exceptions.IllegalListException;
 import ui.UI;
 import task.list.Deadline;
@@ -43,7 +44,7 @@ public class Storage {
 
     private static void printOldList(ArrayList<TaskList> tasks) {
         try {
-            Parser.printAllLists(tasks);
+            ListCommand.printAllLists(tasks);
         } catch (IllegalListException e) {
             UI.printEmptyFile();
         }
