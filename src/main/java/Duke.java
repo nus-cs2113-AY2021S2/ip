@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class Duke {
     private static String lineDivider = "    --------------------------------------------------------------------------";
 
-    public static void main(String[] args) throws IOException, UnknownCommand, EmptyDescription, OutOfBound {
+    public static void main(String[] args) throws UnknownCommand, EmptyDescription, IOException {
         Scanner in = new Scanner(System.in).useDelimiter(" ");
         String command = "";
         List<Task> tasks = new ArrayList<Task>();
