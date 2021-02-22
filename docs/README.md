@@ -156,14 +156,14 @@ Goodbye! Hope to see you again soon!
 * Expected Outcome if successful:
 ```
 Loading file...
-Loading Successful!
+Loading successful!
 ```
    
 * Expected outcome if not successful:
      
 ```
 Loading file...
-Loading Failed - Unable to detect file.
+Loading failed - Unable to detect file.
 ```
 #### 3.9.2 Automatically save the current task list to a file.
 * After enter `bye`, program will automatically store all the tasks into a task_logs.txt file.
