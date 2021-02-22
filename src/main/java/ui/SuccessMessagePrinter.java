@@ -7,6 +7,10 @@ import java.time.format.DateTimeFormatter;
 
 import java.io.File;
 
+/**
+ * Prints all messages that are non-errors.
+ * Includes Greeting and Farewell Messages.
+ */
 public class SuccessMessagePrinter {
     static final String DOTTED_LINE
             = "____________________________________________________________";
@@ -29,10 +33,12 @@ public class SuccessMessagePrinter {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
+
         String greetMessage = " Hello! I'm Duke :D" + " Be nice to me:)\n";
 
         System.out.println("Hello from\n" + LOGO);
         System.out.println(DOTTED_LINE);
+
         System.out.println(greetMessage);
         printHelpMessage();
         System.out.println(DOTTED_LINE);

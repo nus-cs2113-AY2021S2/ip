@@ -56,6 +56,9 @@ public class Duke {
         case "delete":
             TaskManager.removeTask(fullCommand.substring(6).trim());
             break;
+        case "find":
+            TaskManager.printTasksWithKeywords(fullCommand.substring(4).trim());
+            break;
         case "print":
             if (partOfCommand[1].trim().equals("type")){
                 TaskManager.printOneTaskTypeWithStreams(fullCommand.substring(11,12).trim());

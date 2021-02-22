@@ -16,6 +16,10 @@ list
 deadline return books
 deadline return books /by
 deadline return books /by
+deadline /by tomorrow 5pm
+deadline return books /by tomorrow 5pm
+find
+find book
 deadline /by 2021-02-25 23:59
 deadline return books /by 2021-02-22 23:59
 deadline buy new books /by 2021-02-23 08:00
