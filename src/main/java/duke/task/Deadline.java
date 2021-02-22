@@ -23,14 +23,6 @@ public class Deadline extends Task {
         return by;
     }
 
-    /**
-     * Returns the string format for file storing. 
-     */
-    @Override
-    public String toStorageString() {
-        return super.toStorageString() + ", " + by;
-    }
-
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";

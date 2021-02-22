@@ -23,14 +23,6 @@ public class Event extends Task {
         return at;
     }
 
-    /**
-     * Returns the string format for file storing. 
-     */
-    @Override
-    public String toStorageString() {
-        return super.toStorageString() + ", " + at;
-    }
-
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";
