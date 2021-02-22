@@ -1,12 +1,12 @@
 package Command;
 
+import Class.Deadline;
+import Class.Event;
+import Class.Task;
+import Class.Todo;
 import ErrorHandling.EmptyDescription;
 import ErrorHandling.OutOfBound;
 import ErrorHandling.UnknownCommand;
-import Class.Task;
-import Class.Todo;
-import Class.Deadline;
-import Class.Event;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -15,12 +15,12 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Command {
-    private static String setDescription(String[] subStrings, int slashIndex){
+    private static String setDescription(String[] subStrings, int startIndex, int slashIndex) {
         String description = "";
         // Input the description of the task
-        for(int i = 1;i < slashIndex;++i){
+        for (int i = startIndex; i < slashIndex; ++i) {
             description += subStrings[i];
-            if(i != slashIndex-1){
+            if (i != slashIndex - 1) {
                 description += " ";
             }
         }
@@ -28,12 +28,12 @@ public class Command {
         return description;
     }
 
-    private static String setTime(String[] subStrings, int slashIndex){
+    private static String setTime(String[] subStrings, int slashIndex) {
         String time = "";
         // Input the time for the task (will be skipped if there is no time parameter)
         for (int i = slashIndex + 1; i < subStrings.length; ++i) {
             time += subStrings[i];
-            if(i != subStrings.length-1){
+            if (i != subStrings.length - 1) {
                 time += " ";
             }
         }
@@ -66,23 +66,8 @@ public class Command {
                         break;
                     }
                 }
-                String description = "", time = "";
-
-                // Input the description of the task
-                for(int i = 1;i < slashIndex;++i){
-                    description += subStrings[i];
-                    if(i != slashIndex-1){
-                        description += " ";
-                    }
-                }
-
-                // Input the time for the task (will be skipped if there is no time parameter)
-                for (int i = slashIndex + 1; i < subStrings.length; ++i) {
-                    time += subStrings[i];
-                    if(i != subStrings.length-1){
-                        time += " ";
-                    }
-                }
+                String description = setDescription(subStrings, 2, slashIndex);
+                String time = setTime(subStrings, slashIndex);
 
                 // Check if the task is done
                 isDone = Character.getNumericValue(input.charAt(0));
@@ -147,8 +132,8 @@ public class Command {
                 break;
             }
         }
-        String description = setDescription(subStrings,slashIndex);
-        String time = setTime(subStrings,slashIndex);
+        String description = setDescription(subStrings, 1, slashIndex);
+        String time = setTime(subStrings, slashIndex);
 
         switch (subStrings[0]) {
         case "list":
@@ -183,7 +168,7 @@ public class Command {
             }
             break;
         case "deadline":
-            if (slashIndex != -1) {
+            if (!time.equals("") && !description.equals("")) {
                 Deadline deadline = new Deadline(description, time);
                 tasks.add(deadline);
                 addMessage(deadline, tasks.size());
@@ -192,7 +177,7 @@ public class Command {
             }
             break;
         case "event":
-            if (slashIndex != -1) {
+            if (!time.equals("") && !description.equals("")) {
                 Event event = new Event(description, time);
                 tasks.add(event);
                 addMessage(event, tasks.size());
