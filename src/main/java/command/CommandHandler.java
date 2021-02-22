@@ -20,7 +20,7 @@ public class CommandHandler {
      * @param commandCode is the verified operation/command code extracted from calling method.
      * @param userInput is the input from the console terminal.
      */
-    public void performAction(int commandCode, String userInput) {
+    public static void performAction(int commandCode, String userInput) {
         if (commandCode == Constant.INPUT_CODE_EXIT) {
             Ui.printExitMessage();
         } else if (commandCode == Constant.INPUT_CODE_LIST) {

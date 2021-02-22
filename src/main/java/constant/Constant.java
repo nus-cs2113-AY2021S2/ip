@@ -25,7 +25,7 @@ public class Constant {
     public static final String LIST_STARTING_MESSAGE = "Below are all your task:";
     public static final String FILE_PATH = "task_logs.txt";
     public static final String FILE_LOAD_MESSAGE = "Loading file...";
-    public static final String FILE_LOAD_SUCCESS = "Loading Successful!";
-    public static final String FILE_LOAD_FAILURE = "Loading Failed - Unable to detect file.";
+    public static final String FILE_LOAD_SUCCESS = "Loading successful!";
+    public static final String FILE_LOAD_FAILURE = "Loading failed - Unable to detect file.";
     public static final String FILE_LOAD_SUCCESS_WELCOME = "What can Mushroom Tracker do for you?";
 }

@@ -44,7 +44,7 @@ public class Event extends Task {
      * @return the event task timing.
      */
     public String printTaskTiming() {
-        return "(by: " + this.taskTiming + ")";
+        return "(at: " + this.taskTiming + ")";
     }
 
     /**

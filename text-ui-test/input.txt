@@ -1,7 +1,10 @@
-todo testinput file
-deadline submit UG /by 2020-03-05
-event 2113t lecture /at friday
+todo Grow Mushroom
+deadline Plant Mushroom /by 2020-02-25
+event Mushroom Concert /at Sunday
 list
+done 2
+delete 2
+find mushroom
 todo testdelete todo
 deadline testdelete deadline /by 2020-02-02
 event testfind event /at monday
