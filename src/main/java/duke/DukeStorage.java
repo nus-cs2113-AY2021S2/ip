@@ -88,11 +88,11 @@ public class DukeStorage {
                 taskDescription = tasks[i].getDescription();
                 line = taskNum + " [T]" + taskIsDone + taskDescription;
             }else if(tasks[i] instanceof Deadline){
-                taskDescription = tasks[i].getDescription() + "/" + ((Deadline) tasks[i]).getKeyWordBeforeDeadline()
+                taskDescription = tasks[i].getDescription() + " /" + ((Deadline) tasks[i]).getKeyWordBeforeDeadline()
                         + " " + ((Deadline) tasks[i]).getDeadline();
                 line = taskNum + " [D]" + taskIsDone + taskDescription;
             }else{
-                taskDescription = tasks[i].getDescription() + "/" + ((Event) tasks[i]).getKeyWordBeforeDuration()
+                taskDescription = tasks[i].getDescription() + " /" + ((Event) tasks[i]).getKeyWordBeforeDuration()
                         + " " + ((Event) tasks[i]).getDuration();
                 line = taskNum + " [E]" + taskIsDone + taskDescription;
             }

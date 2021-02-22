@@ -7,7 +7,10 @@ public class DukeController {
 
     private static Task[] tasks = new Task[100];
     private static int currentTaskLength = 0;
-    private static final int KEYWORD_STARTING_INDEX_IN_FIND = "find x".indexOf('x');
+    private static final int STARTING_INDEX_OF_KEYWORD_IN_FIND = "find x".indexOf('x');
+    private static final int STARTING_INDEX_OF_TODO_DESCRIPTION = "todo x".indexOf('x');
+    private static final int STARTING_INDEX_OF_EVENT_DESCRIPTION = "event x".indexOf('x');
+    private static final int STARTING_INDEX_OF_DEADLINE_DESCRIPTION = "deadline x".indexOf('x');
 
     public static void run() throws IOException {
         DukeStorage.initialize();
@@ -16,12 +19,17 @@ public class DukeController {
 
     public static void findKeyword(String input) throws FileNotFoundException {
         DukeStorage.readDukeData();
-        String keyword = input.substring(KEYWORD_STARTING_INDEX_IN_FIND);
-        String taskStringToCompare = "";
+        String keyword = input.substring(STARTING_INDEX_OF_KEYWORD_IN_FIND);
+        String taskStringToCompare;
         System.out.println("Here are the matching tasks in your list:");
         for(int i=0; i<currentTaskLength; i++){
-            // substring(1) is called because the first index of getDescription() is " "
-            taskStringToCompare = tasks[i].getDescription().substring(1);
+            if(tasks[i] instanceof ToDo){
+                taskStringToCompare = tasks[i].getDescription().substring(STARTING_INDEX_OF_TODO_DESCRIPTION);
+            }else if(tasks[i] instanceof Deadline){
+                taskStringToCompare = tasks[i].getDescription().substring(STARTING_INDEX_OF_DEADLINE_DESCRIPTION);
+            }else{
+                taskStringToCompare = tasks[i].getDescription().substring(STARTING_INDEX_OF_EVENT_DESCRIPTION);
+            }
             if(taskStringToCompare.contains(keyword)){
                 System.out.printf("%d.", i+1);
                 tasks[i].printTask();
