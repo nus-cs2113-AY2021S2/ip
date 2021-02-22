@@ -17,9 +17,10 @@ public class Duke {
 
     private static final ArrayList<Task> tasks = new ArrayList<>();
     private static final String FILE_SEPARATOR = "CHOPCHOP";
+    private static final int SEPARATOR_LENGTH = 60;
 
     private static void printSeparator() {
-        for(int i = 0; i < 60; i++) {
+        for(int i = 0; i < SEPARATOR_LENGTH; i++) {
             System.out.print('-');
         }
         System.out.print('\n');
@@ -37,8 +38,8 @@ public class Duke {
      */
     private static void mockEcho(String line) {
         Random rd = new Random();
-        for(int i = 0; i < line.length(); i++) {
-            if(rd.nextBoolean()) {
+        for (int i = 0; i < line.length(); i++) {
+            if (rd.nextBoolean()) {
                 System.out.print(Character.toUpperCase(line.charAt(i)));
             } else {
                 System.out.print(Character.toLowerCase(line.charAt(i)));
@@ -52,7 +53,7 @@ public class Duke {
             throw new DukeException();
         } else {
             System.out.print("There are " + tasks.size() + " tasks in your list:\n");
-            for(int i = 0; i < tasks.size(); i++) {
+            for (int i = 0; i < tasks.size(); i++) {
                 System.out.print((i+1) + "." + tasks.get(i) + '\n');
             }
         }
@@ -64,6 +65,30 @@ public class Duke {
         } else {
             tasks.add(t);
             System.out.print("Got it. I've added this task:\n" + t.toString() + '\n');
+        }
+    }
+
+    private static void addTodo(Todo todo) {
+        try {
+            addTask(todo);
+        } catch (DukeException e) {
+            System.out.print("The description of a todo cannot be empty.\n");
+        }
+    }
+
+    private static void addDeadline(Deadline deadline) {
+        try {
+            addTask(deadline);
+        } catch (DukeException e) {
+            System.out.print("The description of a deadline cannot be empty.\n");
+        }
+    }
+
+    private static void addEvent(Event event) {
+        try {
+            addTask(event);
+        } catch (DukeException e) {
+            System.out.print("The description of an event cannot be empty.\n");
         }
     }
 
@@ -94,77 +119,73 @@ public class Duke {
                 "\tdelete <task index>\n");
     }
 
+    private static void executeCommand(String line) {
+        String[] lineParts;
+        lineParts = line.split(" ");
+        switch(lineParts[0]) {
+        case "-h":
+            printHelp();
+            break;
+        case "list":
+            try {
+                printTasks();
+            } catch (DukeException e) {
+                System.out.print("You don't have any tasks currently!\n");
+            }
+            break;
+        case "done":
+            try {
+                int taskIndex = Integer.parseInt(lineParts[1]) - 1;
+                markIndexDone(taskIndex);
+            } catch (NumberFormatException e) {
+                System.out.print(lineParts[1] + " is not a valid number.\n");
+            } catch (DukeException e) {
+                System.out.print("That is not a valid task index, please try again.\n");
+            } catch (IndexOutOfBoundsException e) {
+                System.out.print("That is not a valid command. Please enter a number after the word.\n");
+            }
+            break;
+        case "todo":
+            addTodo(new Todo(line.replace("todo", "").trim(), false));
+            break;
+        case "deadline":
+            try {
+                int byIndex = line.indexOf("/by");
+                addDeadline(new Deadline(line.substring(9, byIndex), line.substring(byIndex + 4), false));
+            } catch (IndexOutOfBoundsException e) {
+                System.out.print("Something went wrong. Please put the due date after /by.\n");
+            }
+            break;
+        case "event":
+            try {
+                int atIndex = line.indexOf("/at");
+                addEvent(new Event(line.substring(6, atIndex), line.substring(atIndex + 4), false));
+            } catch (IndexOutOfBoundsException e) {
+                System.out.print("Something went wrong. Please put the event time after /at.\n");
+            }
+            break;
+        case "delete":
+            try {
+                int taskIndex = Integer.parseInt(lineParts[1]) - 1;
+                deleteTask(taskIndex);
+            } catch (NumberFormatException e) {
+                System.out.print(lineParts[1] + " is not a valid number.\n");
+            } catch (DukeException e) {
+                System.out.print("That is not a valid task index, please try again.\n");
+            }
+            break;
+        default:
+            mockEcho(line);
+            System.out.print("Use -h for list of available commands.\n");
+        }
+    }
+
     private static void listMode() {
         String line;
-        String[] lineParts;
         Scanner in = new Scanner(System.in);
         line = in.nextLine();
         while (!line.equals("bye")){
-            lineParts = line.split(" ");
-            switch(lineParts[0]) {
-            case "-h":
-                printHelp();
-                break;
-            case "list":
-                try {
-                    printTasks();
-                } catch (DukeException e) {
-                    System.out.print("You don't have any tasks currently!\n");
-                }
-                break;
-            case "done":
-                try {
-                    int taskIndex = Integer.parseInt(lineParts[1]) - 1;
-                    markIndexDone(taskIndex);
-                } catch (NumberFormatException e) {
-                    System.out.print(lineParts[1] + " is not a valid number.\n");
-                } catch (DukeException e) {
-                    System.out.print("That is not a valid task index, please try again.\n");
-                } catch (IndexOutOfBoundsException e) {
-                    System.out.print("That is not a valid command. Please enter a number after the word.\n");
-                }
-                break;
-            case "todo":
-                try {
-                    addTask(new Todo(line.replace("todo", "").trim(), false));
-                } catch (DukeException e) {
-                    System.out.print("The description of a todo cannot be empty.\n");
-                }
-                break;
-            case "deadline":
-                try {
-                    int byIndex = line.indexOf("/by");
-                    addTask(new Deadline(line.substring(9, byIndex), line.substring(byIndex + 4), false));
-                } catch (IndexOutOfBoundsException e) {
-                    System.out.print("Something went wrong. Please put the due date after /by.\n");
-                } catch (DukeException e) {
-                    System.out.print("The description of a deadline cannot be empty.\n");
-                }
-                break;
-            case "event":
-                try {
-                    int atIndex = line.indexOf("/at");
-                    addTask(new Event(line.substring(6, atIndex), line.substring(atIndex + 4), false));
-                } catch (IndexOutOfBoundsException e) {
-                    System.out.print("Something went wrong. Please put the event time after /at.\n");
-                } catch (DukeException e) {
-                    System.out.print("The description of a event cannot be empty.\n");
-                }
-                break;
-            case "delete":
-                try {
-                    int taskIndex = Integer.parseInt(lineParts[1]) - 1;
-                    deleteTask(taskIndex);
-                } catch (NumberFormatException e) {
-                    System.out.print(lineParts[1] + " is not a valid number.\n");
-                } catch (DukeException e) {
-                    System.out.print("That is not a valid task index, please try again.\n");
-                }
-                break;
-            default:
-                mockEcho(line);
-                System.out.print("Use -h for list or available commands.\n");
-            }
+            executeCommand(line);
             printSeparator();
             line = in.nextLine();
         }
@@ -172,44 +193,29 @@ public class Duke {
     }
 
     private static void loadFile(Path path) {
+        System.out.print("Looking for existing data...\n");
         //java.nio.file.Files.exists(path)
         try {
             File f = new File(path.toString());
-            if (f.createNewFile()) {
-                System.out.println("File created: " + path.toAbsolutePath());
-            } else {
+            if (!f.createNewFile()) {
                 System.out.println("File already exists.\nLoading...");
                 Scanner s = new Scanner(f); // create a Scanner using the File as the source
                 while (s.hasNext()) {
                     String[] lineParts = s.nextLine().split(FILE_SEPARATOR);
                     switch(lineParts[0]) {
                     case "Todo":
-                        try {
-                            addTask(new Todo(lineParts[2], Boolean.parseBoolean(lineParts[1])));
-                        } catch (DukeException e) {
-                            System.out.print("The description of a todo cannot be empty.\n");
-                        }
+                        addTodo(new Todo(lineParts[2], Boolean.parseBoolean(lineParts[1])));
                         break;
                     case "Deadline":
-                        try {
-                            addTask(new Deadline(lineParts[2], lineParts[3], Boolean.parseBoolean(lineParts[1])));
-                        } catch (IndexOutOfBoundsException e) {
-                            System.out.print("Something went wrong. Please put the due date after /by.\n");
-                        } catch (DukeException e) {
-                            System.out.print("The description of a deadline cannot be empty.\n");
-                        }
+                        addDeadline(new Deadline(lineParts[2], lineParts[3], Boolean.parseBoolean(lineParts[1])));
                         break;
                     case "Event":
-                        try {
-                            addTask(new Event(lineParts[2], lineParts[3], Boolean.parseBoolean(lineParts[1])));
-                        } catch (IndexOutOfBoundsException e) {
-                            System.out.print("Something went wrong. Please put the event time after /at.\n");
-                        } catch (DukeException e) {
-                            System.out.print("The description of a event cannot be empty.\n");
-                        }
+                        addEvent(new Event(lineParts[2], lineParts[3], Boolean.parseBoolean(lineParts[1])));
                         break;
                     }
                 }
+            } else {
+                System.out.println("File created: " + path.toAbsolutePath());
             }
         } catch (IOException e) {
             System.out.println("An error occurred.");
@@ -235,7 +241,6 @@ public class Duke {
         String home = System.getProperty("user.home");
         Path path = Paths.get(home, "Documents","duke.txt");
         printSeparator();
-        System.out.print("Looking for existing data...\n");
         loadFile(path);
         printSeparator();
         System.out.print("Greetings, fellow humans!\nI am CI.\nHow may I help you?\n");
