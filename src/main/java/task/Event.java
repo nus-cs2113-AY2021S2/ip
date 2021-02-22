@@ -1,4 +1,4 @@
-package model;
+package task;
 
 public class Event extends Task {
     protected String at;
