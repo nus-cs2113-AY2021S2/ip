@@ -152,7 +152,7 @@ public class Duke {
         } catch (IllegalTaskException e) {
             dukeList.printInvalidTaskPhrase();
         } catch (IllegalTaskRedoException e) {
-            printTaskAlreadyCompletedPhrase();
+            duke.printTaskAlreadyCompletedPhrase(tasks);
         }
         dukeList.printDottedLines();
     }
@@ -305,69 +305,21 @@ public class Duke {
     }
 
     public static void printNumberOfTasksLeft() {
-        if (getAreAllTasksDone() && tasks.size() > 0) {
+        if (duke.getAreAllTasksDone(tasks) && tasks.size() > 0) {
             dukeList.printCompletedTasks();
-        } else if (getAreAllTasksNotDone() && tasks.size() > 0) {
+        } else if (duke.getAreAllTasksNotDone(tasks) && tasks.size() > 0) {
             dukeList.printNoTasksDone();
         } else {
-            int tasksLeft = getNumberOfTaskRemaining();
+            int tasksLeft = duke.getNumberOfTaskRemaining(tasks);
             dukeList.printSomeTasksRemaining(tasksLeft);
         }
     }
 
-    public static boolean getAreAllTasksDone() {
-        boolean areAllTasksDone = true;
-        for (TaskList t : tasks) {
-            if (!t.getIsTaskDone()) {
-                areAllTasksDone = false;
-                break;
-            }
-        }
-        return areAllTasksDone;
-    }
-
-    public static boolean getAreAllTasksNotDone() {
-        boolean areAllTasksNotDone = true;
-        for (TaskList t : tasks) {
-            if (t.getIsTaskDone()) {
-                areAllTasksNotDone = false;
-                break;
-            }
-        }
-        return areAllTasksNotDone;
-    }
-
-
-    private static int getNumberOfTaskRemaining() {
-        int counter = 0;
-        for (TaskList t : tasks) {
-            if (!t.getIsTaskDone()) {
-                counter++;
-            }
-        }
-        return counter;
-    }
-
-    public static void printTaskAlreadyCompletedPhrase() {
-        String phrase;
-        if (getAreAllTasksDone()) {
-            phrase = "This job was already completed!!!!" + System.lineSeparator()
-                    + "Good job Crewmate! You completed all your tasks in this list! (─‿─)" + System.lineSeparator();
-
-
-        } else {
-            phrase = "What are you doing??? This job was already completed!! (;¬_¬)" + System.lineSeparator()
-                    + "You still have " + getNumberOfTaskRemaining()
-                    + " tasks left in this list Crewmate! Hurry up!! ＼(｀0´)／";
-        }
-        System.out.println(phrase);
-    }
-
 
     public static void exit() {
-        if (tasks.size() > 0 && getAreAllTasksDone()) {
+        if (tasks.size() > 0 && duke.getAreAllTasksDone(tasks)) {
             dukeList.printGoodEnding();
-        } else if (tasks.size() > 0 && getAreAllTasksNotDone()) {
+        } else if (tasks.size() > 0 && duke.getAreAllTasksNotDone(tasks)) {
             dukeList.printBadEnding();
         } else {
             dukeList.printTraitor();

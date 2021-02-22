@@ -1,10 +1,61 @@
 package list;
 
+// This is the UI class
+
+import java.util.ArrayList;
+
 public class duke {
     protected String name;
 
     public duke(String name) {
         this.name = name;
+    }
+
+    public static void printTaskAlreadyCompletedPhrase(ArrayList<TaskList> tasks) {
+        String phrase;
+        if (getAreAllTasksDone(tasks)) {
+            phrase = "This job was already completed!!!!" + System.lineSeparator()
+                    + "Good job Crewmate! You completed all your tasks in this list! (─‿─)" + System.lineSeparator();
+
+
+        } else {
+            phrase = "What are you doing??? This job was already completed!! (;¬_¬)" + System.lineSeparator()
+                    + "You still have " + getNumberOfTaskRemaining(tasks)
+                    + " tasks left in this list Crewmate! Hurry up!! ＼(｀0´)／";
+        }
+        System.out.println(phrase);
+    }
+
+    public static int getNumberOfTaskRemaining(ArrayList<TaskList> tasks) {
+        int counter = 0;
+        for (TaskList t : tasks) {
+            if (!t.getIsTaskDone()) {
+                counter++;
+            }
+        }
+        return counter;
+    }
+
+    public static boolean getAreAllTasksNotDone(ArrayList<TaskList> tasks) {
+        boolean areAllTasksNotDone = true;
+        for (TaskList t : tasks) {
+            if (t.getIsTaskDone()) {
+                areAllTasksNotDone = false;
+                break;
+            }
+        }
+        return areAllTasksNotDone;
+    }
+
+    public static boolean getAreAllTasksDone(ArrayList<TaskList> tasks) {
+        boolean areAllTasksDone = true;
+        for (TaskList t : tasks) {
+            if (!t.getIsTaskDone()) {
+                areAllTasksDone = false;
+                break;
+            }
+        }
+        return areAllTasksDone;
     }
 
     public void greet() {
