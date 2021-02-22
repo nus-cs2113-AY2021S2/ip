@@ -1,8 +1,11 @@
-package Duke.Exceptions;
+package Duke.Errors;
 
 import Duke.Duke;
 
-public class DukeException extends Duke {
+public class Errors extends Duke {
+    /**
+     * Error messages for invalid inputs
+     */
     public static void taskDescriptionEmpty(){
         System.out.println(" No task description :(\n Ahh what's the task here?");
     }

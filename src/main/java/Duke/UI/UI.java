@@ -1,8 +1,11 @@
 package Duke.UI;
 
+import Duke.Commands.PrintListCommand;
 import Duke.Duke;
 
 public class UI extends Duke{
+
+    public static final String LINE = "____________________________________________________________";
 
     public UI(){
         greetings();
@@ -36,4 +39,16 @@ public class UI extends Duke{
                 + "bye: exit Duke\n"
                 );
     }
+    public static void taskAddedText() {
+        System.out.println(" Task added! ^_^");
+        PrintListCommand.printList(taskCount, taskCount + 1);
+    }
+    public static void taskDeleted() {
+        System.out.println(" Yay! This task is deleted!");
+    }
+
+    public static void taskDone() {
+        System.out.println(" Yay! This task is done!");
+    }
+
 }

@@ -1,3 +1,4 @@
-[D]|false|1|1
-[E]|false|1|1
-[E]|false|1|Feb 1 2000
+[D]|true|1|1
+[T]|false|1
+[D]|false|1|
+[T]|false|math class

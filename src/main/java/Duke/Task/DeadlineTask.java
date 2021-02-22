@@ -2,7 +2,6 @@ package Duke.Task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 
 public class DeadlineTask extends Task {
 
@@ -23,6 +22,10 @@ public class DeadlineTask extends Task {
         }
     }
 
+    /**
+     * Print task type
+     * @return [D]
+     */
     @Override
     public String getTaskType() {
         return "[D]";

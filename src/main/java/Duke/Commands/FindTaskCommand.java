@@ -1,14 +1,17 @@
 package Duke.Commands;
 
-import Duke.Exceptions.DukeException;
+import Duke.Errors.Errors;
 import Duke.Task.Task;
 import Duke.Duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import static Duke.Duke.lists;
-
-public class FindTask extends Duke {
+public class FindTaskCommand extends Duke {
+    /**
+     * Find tasks on a specific date
+     * show error if theres no task on the date
+     * @param date
+     */
     public static void FindWithDate(String date) {
         try {
             LocalDate d1 = LocalDate.parse(date);
@@ -19,10 +22,15 @@ public class FindTask extends Duke {
                 }
             }
         } catch (Exception e) {
-            DukeException.cannotRecognise(date);
+            Errors.cannotRecognise(date);
         }
     }
 
+    /**
+     * Find tasks with a specific keyword
+     * show error if theres no task on the date
+     * @param keyword
+     */
     public static void FindWithKeyword(String keyword) {
         try {
             for (Task t : lists) {
@@ -31,7 +39,7 @@ public class FindTask extends Duke {
                 }
             }
         } catch (Exception e) {
-            DukeException.cannotRecognise(keyword);
+            Errors.cannotRecognise(keyword);
         }
     }
 }
