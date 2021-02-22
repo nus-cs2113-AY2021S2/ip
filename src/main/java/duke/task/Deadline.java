@@ -1,7 +1,10 @@
 package duke.task;
 
+import duke.Constants;
+import duke.Date;
+
 public class Deadline extends Task {
-    protected String by;
+    protected Date by;
 
     /**
      * Creates a Deadline object. 
@@ -11,7 +14,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by) {
         super(description);
-        this.by = by;
+        this.by = new Date(by);
     }
 
     public String getTaskType() {
@@ -19,12 +22,12 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String getTaskDate() {
-        return by;
+    public String getTaskDate(String dateFormat) {
+        return by.formatDateWithDelimeter(dateFormat);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + getTaskDate(Constants.DATE_FORMAT) + ")";
     }
 }
