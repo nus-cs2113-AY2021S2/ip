@@ -2,7 +2,7 @@ package storage;
 
 import task.*;
 import constant.Constant;
-import printer.Printer;
+import ui.Ui;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -14,7 +14,7 @@ import java.util.StringJoiner;
  */
 public class Storage {
     private static final Constant constant = new Constant();
-    private static final Printer printer = new Printer();
+    private static final Ui ui = new Ui();
     private static final TaskHandler taskHandler = new TaskHandler();
 
     /**
@@ -22,7 +22,7 @@ public class Storage {
      * Print the relevant welcome message and file loading status.
      */
     public static void initFile() {
-        printer.printWelcomeMessage();
+        ui.printWelcomeMessage();
         try {
             System.out.println(constant.FILE_LOAD_MESSAGE);
             tryRunFile();

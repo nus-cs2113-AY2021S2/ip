@@ -1,12 +1,12 @@
-package printer;
+package ui;
 
 import constant.Constant;
 import task.TaskHandler;
 
 /**
- * Printer class for handling the UI.
+ * Ui class for handling the UI printing.
  */
-public class Printer {
+public class Ui {
     private static final Constant constant = new Constant();
     private static final TaskHandler taskHandler = new TaskHandler();
 

@@ -1,4 +1,4 @@
-import actioner.ActionHandler;
+import command.CommandHandler;
 import constant.Constant;
 import parser.Parser;
 import storage.Storage;
@@ -11,7 +11,7 @@ public class Duke {
     private static final Constant constant = new Constant();
     private static final Storage storage = new Storage();
     private static final Parser parser = new Parser();
-    private static final ActionHandler actionHandler = new ActionHandler();
+    private static final CommandHandler commandHandler = new CommandHandler();
 
     /**
      * This is the start of the main program.
@@ -37,7 +37,7 @@ public class Duke {
         do {
             userInput = userScanner.nextLine();
             commandCode = parser.getCommandCode(userInput);
-            actionHandler.performAction(commandCode, userInput);
+            commandHandler.performAction(commandCode, userInput);
         } while (commandCode != constant.INPUT_CODE_EXIT);
     }
 }

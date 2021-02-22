@@ -1,19 +1,19 @@
-package actioner;
+package command;
 
 import parser.Parser;
 import constant.Constant;
-import printer.Printer;
+import ui.Ui;
 import task.Deadline;
 import task.Event;
 import task.TaskHandler;
 import task.Todo;
 
 /**
- * ActionHandler class for handling the related command operation.
+ * CommandHandler class for handling the related command operation.
  */
-public class ActionHandler {
+public class CommandHandler {
     private static final Constant constant = new Constant();
-    private static final Printer printer = new Printer();
+    private static final Ui ui = new Ui();
     private static final TaskHandler taskHandler = new TaskHandler();
     private static final Parser parser = new Parser();
 
@@ -25,7 +25,7 @@ public class ActionHandler {
      */
     public static void performAction(int commandCode, String userInput) {
         if (commandCode == constant.INPUT_CODE_EXIT) {
-            printer.printExitMessage();
+            ui.printExitMessage();
         } else if (commandCode == constant.INPUT_CODE_LIST) {
             performList();
         } else if (commandCode == constant.INPUT_CODE_DONE) {
@@ -55,7 +55,7 @@ public class ActionHandler {
      */
     private static void performList() {
         System.out.println(constant.DIVIDER_LINE);
-        printer.printEntireCollection();
+        ui.printEntireCollection();
         System.out.println(constant.DIVIDER_LINE);
     }
 
@@ -75,7 +75,7 @@ public class ActionHandler {
         } else {
             taskHandler.markDone(indexFromUserInput - 1);
             System.out.println("Nice! I've marked the task as done:");
-            printer.printTaskDetails(indexFromUserInput - 1);
+            ui.printTaskDetails(indexFromUserInput - 1);
         }
         System.out.println(constant.DIVIDER_LINE);
     }
@@ -89,7 +89,7 @@ public class ActionHandler {
         System.out.println(constant.DIVIDER_LINE);
         String taskDescription = parser.extractTaskDescription(userInput);
         taskHandler.addTask(new Todo(taskDescription));
-        printer.printAddedTask(taskHandler.getTaskCount());
+        ui.printAddedTask(taskHandler.getTaskCount());
         taskHandler.increaseTaskCount();
         System.out.println(constant.DIVIDER_LINE);
     }
@@ -105,7 +105,7 @@ public class ActionHandler {
         taskDescription = parser.extractTaskDescription(userInput);
         taskTiming = parser.extractTaskTiming(userInput);
         taskHandler.addTask(new Deadline(taskDescription, taskTiming));
-        printer.printAddedTask(taskHandler.getTaskCount());
+        ui.printAddedTask(taskHandler.getTaskCount());
         taskHandler.increaseTaskCount();
         System.out.println(constant.DIVIDER_LINE);
     }
@@ -121,7 +121,7 @@ public class ActionHandler {
         taskDescription = parser.extractTaskDescription(userInput);
         taskTiming = parser.extractTaskTiming(userInput);
         taskHandler.addTask(new Event(taskDescription, taskTiming));
-        printer.printAddedTask(taskHandler.getTaskCount());
+        ui.printAddedTask(taskHandler.getTaskCount());
         taskHandler.increaseTaskCount();
         System.out.println(constant.DIVIDER_LINE);
     }
@@ -139,7 +139,7 @@ public class ActionHandler {
             System.out.println("Please try again!");
         } else {
             System.out.println("Noted. I will remove this task:");
-            printer.printTaskDetails(indexFromUserInput - 1);
+            ui.printTaskDetails(indexFromUserInput - 1);
             taskHandler.deleteTask(indexFromUserInput - 1);
             taskHandler.decreaseTaskCount();
             System.out.println("Now you have " + taskHandler.getTaskCount() + " tasks in the list.");

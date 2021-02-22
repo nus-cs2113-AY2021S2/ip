@@ -4,14 +4,14 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import constant.Constant;
 import error.*;
-import printer.Printer;
+import ui.Ui;
 
 /**
  * Parser class in charge of parsing, validating, and extraction of input.
  */
 public class Parser {
     private static final Constant constant = new Constant();
-    private static final Printer printer = new Printer();
+    private static final Ui ui = new Ui();
 
     /**
      * Parse the input from the user to the respective commands.
@@ -61,11 +61,11 @@ public class Parser {
         try {
             return validateDoneCommand(words);
         } catch (DoneCommandException e) {
-            printer.printTaskWarningMessage(userInput);
+            ui.printTaskWarningMessage(userInput);
             System.out.println("There is no task smaller than 1!");
             return constant.INPUT_CODE_INVALID;
         } catch (ArrayIndexOutOfBoundsException e) {
-            printer.printTaskWarningMessage(userInput);
+            ui.printTaskWarningMessage(userInput);
             System.out.println("You need a task number behind done command!");
             return constant.INPUT_CODE_INVALID;
         }
@@ -82,7 +82,7 @@ public class Parser {
         try {
             return validateTodoCommand(words);
         } catch (EmptyTaskDescriptionException e) {
-            printer.printTaskWarningMessage(userInput);
+            ui.printTaskWarningMessage(userInput);
             System.out.println("You need an task behind!");
             return constant.INPUT_CODE_INVALID;
         }
@@ -98,19 +98,19 @@ public class Parser {
         try {
             return validateDeadlineCommand(userInput);
         } catch (DeadlineCommandException e) {
-            printer.printTaskWarningMessage(userInput);
+            ui.printTaskWarningMessage(userInput);
             System.out.println("Please use a correct format with ' /by '!");
             return constant.INPUT_CODE_INVALID;
         } catch (EmptyTimeDescriptionException e) {
-            printer.printTaskWarningMessage(userInput);
+            ui.printTaskWarningMessage(userInput);
             System.out.println("Please enter a date!");
             return constant.INPUT_CODE_INVALID;
         } catch (EmptyTaskDescriptionException e) {
-            printer.printTaskWarningMessage(userInput);
+            ui.printTaskWarningMessage(userInput);
             System.out.println("Please enter a task description!");
             return constant.INPUT_CODE_INVALID;
         } catch (DateTimeParseException e) {
-            printer.printTaskWarningMessage(userInput);
+            ui.printTaskWarningMessage(userInput);
             System.out.println("Your date format is wrong!");
             return constant.INPUT_CODE_INVALID;
         }
@@ -126,15 +126,15 @@ public class Parser {
         try {
             return validateEventCommand(userInput);
         } catch (EventCommandException e) {
-            printer.printTaskWarningMessage(userInput);
+            ui.printTaskWarningMessage(userInput);
             System.out.println("Please use a correct format with ' /at '!");
             return constant.INPUT_CODE_INVALID;
         } catch (EmptyTimeDescriptionException e) {
-            printer.printTaskWarningMessage(userInput);
+            ui.printTaskWarningMessage(userInput);
             System.out.println("Please enter a date or time!");
             return constant.INPUT_CODE_INVALID;
         } catch (EmptyTaskDescriptionException e) {
-            printer.printTaskWarningMessage(userInput);
+            ui.printTaskWarningMessage(userInput);
             System.out.println("Please enter a task description!");
             return constant.INPUT_CODE_INVALID;
         }
@@ -151,11 +151,11 @@ public class Parser {
         try {
             return validateDeleteCommand(words);
         } catch (DeleteCommandException e) {
-            printer.printTaskWarningMessage(userInput);
+            ui.printTaskWarningMessage(userInput);
             System.out.println("You cannot delete a task smaller than 1!");
             return constant.INPUT_CODE_INVALID;
         } catch (ArrayIndexOutOfBoundsException e) {
-            printer.printTaskWarningMessage(userInput);
+            ui.printTaskWarningMessage(userInput);
             System.out.println("You need a task number behind delete command!");
             return constant.INPUT_CODE_INVALID;
         }
@@ -172,7 +172,7 @@ public class Parser {
         try {
             return validateFindCommand(words);
         } catch (FindCommandException e) {
-            printer.printTaskWarningMessage(userInput);
+            ui.printTaskWarningMessage(userInput);
             System.out.println("You need a key word to search!");
             return constant.INPUT_CODE_INVALID;
         }
