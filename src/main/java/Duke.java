@@ -8,6 +8,7 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
+import duke.util.Ui;
 import duke.exception.EmptyCommandArgException;
 import duke.exception.InvalidCommandException;
 import duke.exception.InvalidCommandTimeException;
@@ -16,35 +17,21 @@ import duke.exception.InvalidTaskNumberException;
 public class Duke {
     static int taskCount = 0;
     static ArrayList<Task> taskList = new ArrayList<Task>();
-    static final String COMMANDS = 
-            "Commands:\n"
-            + "    todo taskName\n"
-            + "    deadline deadlineName /by time\n" 
-            + "    event eventName /at time\n"
-            + "    list\n"
-            + "    done taskNumber\n"
-            + "    delete taskNumber\n"
-            + "    help\n"
-            + "    bye\n";
+    private static Ui ui;
+
+    public Duke() {
+        ui = new Ui();
+    }
 
     public static void main(String[] args) {
-        displayWelcomeMessage();
+        new Duke();
+        ui.displayWelcomeMessage();
         loadHistory();
         inputAndExecuteCommand();
         saveHistory();
-        displayExitMessage();
+        ui.displayExitMessage();
     }
 
-    private static void displayWelcomeMessage() {
-        String logo = "         __    _    _              ____        __           \n"
-                +"        / /_  (_)  (_)___ ___     / __ \\__  __/ /_____      \n"
-                +"       / __ \\/ /  / / __ `__ \\   / / / / / / / //_/ _ \\     \n"
-                +"      / / / / /  / / / / / / /  / /_/ / /_/ / ,< /  __/     \n"
-                +"     /_/ /_/_/  /_/_/ /_/ /_/  /_____/\\__,_/_/|_|\\___/     \n";
-        System.out.print(logo + "\n");
-        System.out.print("What do you have to do today?\n");
-        System.out.print(COMMANDS + "\n");
-    }
 
     private static void loadHistory() {
         String home = System.getProperty("user.dir");
@@ -62,8 +49,7 @@ public class Duke {
                 loadTask(line);
             }
         } catch (Exception e) {
-            String errorMessage = "ERROR retrieving data!\n" + e.getLocalizedMessage();
-            printWithBorder(errorMessage);
+            ui.showLoadingError(e);
         }
     }
 
@@ -93,12 +79,6 @@ public class Duke {
         taskCount += 1;
     }
 
-    public static void printWithBorder(String line) {
-        System.out.print("_______________________________________________________________________________\n");
-        System.out.print(line + "\n");
-        System.out.print("_______________________________________________________________________________\n");
-    }
-
     private static void inputAndExecuteCommand() {
         String line;
         Scanner scanner = new Scanner(System.in);
@@ -120,8 +100,8 @@ public class Duke {
             try {
                 executeCommand(commandType, commandArg);
             } catch (EmptyCommandArgException | InvalidCommandTimeException
-            | InvalidCommandException | InvalidTaskNumberException e) {
-                printWithBorder(e.getMessage());
+                    | InvalidCommandException | InvalidTaskNumberException e) {
+                ui.printErrorMessage(e);
                 continue;
             }
         }
@@ -131,10 +111,10 @@ public class Duke {
     InvalidCommandTimeException, InvalidCommandException, InvalidTaskNumberException {
         switch (commandType) {
         case "help":
-            printWithBorder(COMMANDS);
+            ui.printHelpMessage();
             break;
         case "list":
-            listAllTasks();
+            ui.listAllTasks(taskList);
             break;
         case "done":
             markTaskAsDone(commandArg);
@@ -156,15 +136,6 @@ public class Duke {
         }
     }
 
-    private static void listAllTasks() {
-        String listOfTasksString = "Here are the tasks in your list:";
-        for (int i = 0; i < taskList.size(); i += 1) {
-            Task task = taskList.get(i);
-            listOfTasksString += ("\n    " + Integer.toString(i + 1) + ". " + task.toString());
-        }
-        printWithBorder(listOfTasksString);
-    }
-
     private static void markTaskAsDone(String commandArg) throws EmptyCommandArgException, InvalidTaskNumberException {
         if (isEmptyArgument(commandArg)) {
             throw new EmptyCommandArgException("done");
@@ -172,8 +143,7 @@ public class Duke {
         int taskNumber = getTaskNumber(commandArg);
         Task task = taskList.get(taskNumber - 1);
         task.setIsDone();
-        String taskSuccessfullyMarkedDoneMessage = "Very nice! I've marked this task as done:\n    " + task.toString();
-        printWithBorder(taskSuccessfullyMarkedDoneMessage);
+        ui.printSuccessfullyMarkedDoneMessage(task);
     }
 
     private static int getTaskNumber(String commandArg) throws InvalidTaskNumberException {
@@ -196,7 +166,7 @@ public class Duke {
         }
         Todo task = new Todo(commandArg);
         addTaskToList(task);
-        printTaskSuccessfullyAddedMessage(task);
+        ui.printTaskSuccessfullyAddedMessage(task, taskCount);
     }
 
     private static void addDeadline(String commandArg) throws EmptyCommandArgException, InvalidCommandTimeException {
@@ -208,7 +178,7 @@ public class Duke {
         String by = taskDescriptionAndBy[1];
         Deadline task = new Deadline(description, by);
         addTaskToList(task);
-        printTaskSuccessfullyAddedMessage(task);
+        ui.printTaskSuccessfullyAddedMessage(task, taskCount);
     }
 
     private static void addEvent(String commandArg) throws EmptyCommandArgException, InvalidCommandTimeException {
@@ -220,7 +190,7 @@ public class Duke {
         String at = taskDescriptionAndAt[1];
         Event task = new Event(description, at);
         addTaskToList(task);
-        printTaskSuccessfullyAddedMessage(task);
+        ui.printTaskSuccessfullyAddedMessage(task, taskCount);
     }
 
     private static String[] splitCommandArg(String commandType, String commandArg) throws InvalidCommandTimeException {
@@ -252,15 +222,6 @@ public class Duke {
         taskList.add(task);
         taskCount += 1;
     }
-    
-    private static void printTaskSuccessfullyAddedMessage(Task task) {
-        String className = task.getClass().getSimpleName();
-        String taskSuccessfullyAddedMessage = 
-                "Alrighty! I have added this new " + className + ":\n"
-                + "    " + task.toString() + "\n"
-                + "You now have " + Integer.toString(taskCount) + " tasks in the list.";
-        printWithBorder(taskSuccessfullyAddedMessage);
-    }  
 
     private static void deleteTask(String commandArg) throws EmptyCommandArgException, InvalidTaskNumberException {
         if (isEmptyArgument(commandArg)) {
@@ -270,9 +231,7 @@ public class Duke {
         Task task = taskList.get(taskNumber - 1);
         taskList.remove(taskNumber - 1);
         taskCount -= 1;
-        String taskSuccessfullyDeletedMessage = "Yay! I've successfuly deleted this task:\n    " 
-                + task.toString();
-        printWithBorder(taskSuccessfullyDeletedMessage);
+        ui.printTaskSuccessfullyDeletedMessage(task);
     }
 
     private static void saveHistory() {
@@ -289,8 +248,7 @@ public class Duke {
             ArrayList<String> listOfTaskDetails = getListOfTaskDetails();
             Files.write(filePath, listOfTaskDetails);
         } catch (Exception e) {
-            String errorMessage = "ERROR saving data!\n" + e.getLocalizedMessage() + e.toString();
-            printWithBorder(errorMessage);
+            ui.showSavingError(e);
         }
     }
 
@@ -322,10 +280,5 @@ public class Duke {
             taskDetails += "~" + at;
         }
         return taskDetails;
-    }
-
-    private static void displayExitMessage() {
-        String exitMessage = "Sad to see you go! ): See you soon!";
-        printWithBorder(exitMessage);
     }
 }
