@@ -15,7 +15,7 @@ public class Ui {
     }
 
     /**
-     * show Good-bye message when user exit the program
+     * send Good-bye message when user exit the program
      */
     public void showExitMessage() {
         System.out.println("Thank you for using Duke function, " +
@@ -23,7 +23,7 @@ public class Ui {
     }
 
     /**
-     * Show error message when user entered invalid command
+     * Send error message when user entered invalid command
      */
     public void showErrorMessage() {
         System.out.println(":( OOps!! I'm sorry, " +
@@ -31,7 +31,7 @@ public class Ui {
     }
 
     /**
-     * Show StringIndexOutOfBoundsException error message when todo task is added without description
+     * Send StringIndexOutOfBoundsException error message when todo task is added without description
      */
     public void todoIndexError() {
         System.out.println(":( OOps!! The description of a" +
@@ -39,7 +39,7 @@ public class Ui {
     }
 
     /**
-     * Show StringIndexOutOfBoundsException error message when event task is added without description
+     * Send StringIndexOutOfBoundsException error message when event task is added without description
      */
     public void eventIndexError() {
         System.out.println(":( OOps!! The description of a" +
@@ -47,7 +47,7 @@ public class Ui {
     }
 
     /**
-     * Show StringIndexOutOfBoundsException error message when deadline task is added without description
+     * Send StringIndexOutOfBoundsException error message when deadline task is added without description
      */
     public void deadlineIndexError() {
         System.out.println(":( OOps!! The description of a" +
@@ -55,7 +55,7 @@ public class Ui {
     }
 
     /**
-     * Show StringIndexOutOfBoundsException error message when user didn't enter which task index
+     * Send StringIndexOutOfBoundsException error message when user didn't enter which task index
      * to be mark as done
      */
     public void doneIndexError() {
@@ -64,7 +64,7 @@ public class Ui {
     }
 
     /**
-     * Show StringIndexOutOfBoundsException error message when user didn't enter which task index
+     * Send StringIndexOutOfBoundsException error message when user didn't enter which task index
      * to be deleted
      */
     public void deleteIndexError() {
@@ -73,7 +73,7 @@ public class Ui {
     }
 
     /**
-     * Show FileNotFoundException error message whe user add a task
+     * Send FileNotFoundException error message whe user add a task
      */
     public void fileErrorMessage() {
           System.out.println(":( OOps!! The file you are looking for does"+
@@ -81,7 +81,7 @@ public class Ui {
     }
 
     /**
-     * Show IOException error message when when the program successfully opened
+     * Send IOException error message when when the program successfully opened
      * the file, but is unable to read the duke.txt file
      */
     public void exceptionMessage() {

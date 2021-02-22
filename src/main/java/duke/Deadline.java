@@ -12,7 +12,7 @@ public class Deadline extends Task{
     public String getBy() {return by;}
 
     /**
-     * formulate the complete deadline task Description in task list
+     * Returns the complete deadline task Description in task list
      * @return the task type, status and description in the task list
      */
     @Override

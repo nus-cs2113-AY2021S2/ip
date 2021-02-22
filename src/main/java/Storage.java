@@ -38,14 +38,14 @@ public class Storage {
         File file = new File("C:/Users/XPS/Desktop/duke.txt");
         BufferedReader reader = new BufferedReader(new FileReader(file));
         String line = "";
-        String oldtext = "";
+        String oldText = "";
         while ((line = reader.readLine()) != null) {
-            oldtext += line + "\r\n";
+            oldText += line + "\r\n";
         }
         reader.close();
-        String replaced_text = oldtext.replace("0 | " + name , "1 | " + name);
+        String replacedText = oldText.replace("0 | " + name , "1 | " + name);
         FileWriter writer = new FileWriter("C:/Users/XPS/Desktop/duke.txt");
-        writer.write(replaced_text);
+        writer.write(replacedText);
         writer.close();
     }
 

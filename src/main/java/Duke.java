@@ -53,10 +53,10 @@ public class Duke {
             } else if (task.contains("done")) {
                 try {
                     String taskNo = task.substring(TODO_INDEX);
-                    int new_taskNo = Parser.parseInt(taskNo);
-                    tasks[new_taskNo - 1].setTaskStatus(true);
-                    tl.markAsDone(new_taskNo-1, tasks);
-                    storage.replaceTXT(tasks[new_taskNo - 1].getDescription());
+                    int newTaskNo = Parser.parseInt(taskNo);
+                    tasks[newTaskNo - 1].setTaskStatus(true);
+                    tl.markAsDone(newTaskNo-1, tasks);
+                    storage.replaceTXT(tasks[newTaskNo - 1].getDescription());
                 } catch (StringIndexOutOfBoundsException e) {
                     ui.doneIndexError();
                 } catch (IOException e) {
@@ -79,13 +79,13 @@ public class Duke {
                 }
             } else if (task.contains("deadline")) {
                 try {
-                    int slash_sign = task.indexOf("/");
-                    String ddl_taskName = task.substring(DEADLINE_INDEX, slash_sign - 1);
-                    String by = task.substring(slash_sign + BY_AT_INDEX);
+                    int slashSign = task.indexOf("/");
+                    String ddlTaskName = task.substring(DEADLINE_INDEX, slashSign - 1);
+                    String by = task.substring(slashSign + BY_AT_INDEX);
                     if (by.contains("-")) { Parser.parseDate(by); }
-                    tasks[index] = new Deadline(ddl_taskName, 'D', by);
+                    tasks[index] = new Deadline(ddlTaskName, 'D', by);
                     index = tl.addTaskMessage(index, tasks[index]);
-                    String textToAppend = "D | 0 | " + ddl_taskName + " | " + by;
+                    String textToAppend = "D | 0 | " + ddlTaskName + " | " + by;
                     Storage.appendToFile(filePath, textToAppend);
                 } catch (StringIndexOutOfBoundsException e) {
                     ui.deadlineIndexError();
@@ -97,12 +97,12 @@ public class Duke {
                 }
             } else if (task.contains("event")) {
                 try {
-                    int slash_sign = task.indexOf("/");
-                    String event_taskName = task.substring(EVENT_INDEX, slash_sign - 1);
-                    String at = task.substring(slash_sign + BY_AT_INDEX);
-                    tasks[index] = new Event(event_taskName, 'E', at);
+                    int slashSign = task.indexOf("/");
+                    String eventTaskName = task.substring(EVENT_INDEX, slashSign - 1);
+                    String at = task.substring(slashSign + BY_AT_INDEX);
+                    tasks[index] = new Event(eventTaskName, 'E', at);
                     index = tl.addTaskMessage(index, tasks[index]);
-                    String textToAppend = "E | 0 | " + event_taskName + " | " + at;
+                    String textToAppend = "E | 0 | " + eventTaskName + " | " + at;
                     storage.appendToFile(filePath, textToAppend);
                 } catch (StringIndexOutOfBoundsException e) {
                     ui.eventIndexError();
@@ -114,16 +114,16 @@ public class Duke {
                 }
             } else if (task.contains("delete")) {
                 try {
-                    int delete_index = Parser.parseInt(task.substring(DELETE_INDEX));
-                    Task delete_task = tasks[delete_index - 1];
+                    int deleteIndex = Parser.parseInt(task.substring(DELETE_INDEX));
+                    Task delete_task = tasks[deleteIndex - 1];
                     tl.removeTaskMessage(index, delete_task);
-                    tl.removeTask(delete_index, index, tasks);
+                    tl.removeTask(deleteIndex, index, tasks);
                 }  catch (StringIndexOutOfBoundsException e) {
                     ui.deleteIndexError();
                 }
             } else if (task.contains("find")) {
-                String find_task = task.substring(FIND_INDEX);
-                tl.findTasks(index, find_task, tasks);
+                String findTask = task.substring(FIND_INDEX);
+                tl.findTasks(index, findTask, tasks);
             } else { ui.showErrorMessage(); }
             task = b.nextLine();
         }

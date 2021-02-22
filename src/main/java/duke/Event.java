@@ -12,7 +12,7 @@ public class Event extends Task{
     public String getAt() {return at;}
 
     /**
-     * formulate the complete Event task description in task list
+     * Returns the complete Event task description in task list
      * @return the task type, status and description in the task list
      */
     @Override

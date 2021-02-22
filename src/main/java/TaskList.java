@@ -2,15 +2,15 @@ import duke.Task;
 
 public class TaskList {
     /**
-     * Function to delete certain task when user use the delete command
-     * @param delete_index the task index that user entered to be deleted
+     * Delete certain task when user use the delete command
+     * @param deleteIndex the task index that user entered to be deleted
      * @param index the maximum index number of the current task list
      * @param tasks the original task list that the user has inputted so far
      */
-    protected static void removeTask(int delete_index, int index, Task[] tasks) {
-        if (delete_index - 1 == index) {
+    protected static void removeTask(int deleteIndex, int index, Task[] tasks) {
+        if (deleteIndex - 1 == index) {
         } else {
-            for (int i = delete_index - 1; i <= index; i++) {
+            for (int i = deleteIndex - 1; i <= index; i++) {
                 tasks[i] = tasks[i + 1];
             }
         }
@@ -31,7 +31,7 @@ public class TaskList {
     }
 
     /**
-     * Print message to inform the user that the task has been added
+     * Send message to inform the user that the task has been added
      * message include task description, task type and its by/at date time
      * and update the number of tasks in the list.
      * @param index the maximum index number of the current task list
@@ -47,7 +47,7 @@ public class TaskList {
     }
 
     /**
-     * Print message to inform the user that the task has been marked as done
+     * Send message to inform the user that the task has been marked as done
      * @param index the index of the task to be marked as done
      * @param tasks the original task list that the user has inputted so far
      */

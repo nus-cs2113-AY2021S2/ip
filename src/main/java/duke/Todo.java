@@ -7,7 +7,7 @@ public class Todo extends Task{
     }
 
     /**
-     * formulate the complete Todo task description in task list
+     * Returns the complete Todo task description in task list
      * @return the task type, status and description in the task list
      */
     @Override
