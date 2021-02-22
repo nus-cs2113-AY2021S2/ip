@@ -70,7 +70,6 @@ public class FileManager {
      * Called when 'bye' command is given to end the program after saving tasks contents
      *
      * @param f tasks.txt File where tasks ArrayList contents are saved
-     * @param f tasks.txt File where tasks ArrayList contents are saved
      */
     public static void endOfProgramRoutine(File f) {
         try {

@@ -16,21 +16,12 @@ public class Checker {
 
     /**
      * Checks if index to mark done is valid.
-     * @param doneIndexInt the index of the task to be marked done
-     * @throws IllegalTaskMarkedDoneException If index is out of bounds
-     * @throws TaskAlreadyMarkedException If task is already marked as done
-     * @throws EmptyListException If list is empty
-     */
-
-    /**
-     * Checks if index to mark done is valid.
      *
      * @param doneIndexInt the index of the task to be marked done
      * @throws IllegalTaskMarkedDoneException If index is out of bounds
      * @throws TaskAlreadyMarkedException     If task is already marked as done
      * @throws EmptyListException             If list is empty
      */
-
     public static void checkTaskToMarkDone(int doneIndexInt)
             throws IllegalTaskMarkedDoneException,
             TaskAlreadyMarkedException,
