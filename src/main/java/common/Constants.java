@@ -14,4 +14,5 @@ public class Constants {
     public static final String COMMAND_DONE_WORD = "done";
     public static final String COMMAND_DELETE_WORD = "delete";
     public static final String COMMAND_HELP_WORD = "help";
+    public static final String COMMAND_FIND_WORD = "find";
 }

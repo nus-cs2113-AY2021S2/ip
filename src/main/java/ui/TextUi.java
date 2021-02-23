@@ -37,6 +37,7 @@ public class TextUi {
                     + constants.INDENTATION + "list - List all tasks\n"
                     + constants.INDENTATION + "done <index> - Mark task number _ as done\n"
                     + constants.INDENTATION + "delete <index> - Delete task number _ \n"
+                    + constants.INDENTATION + "find <keyword> - Search for task with keyword in description\n"
                     + constants.INDENTATION + "exit - Save tasks list and exit program";
         System.out.println(helpMessage);
     }
