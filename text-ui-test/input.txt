@@ -1,7 +1,7 @@
 help
 todo team project
-deadline individual project /by before tutorial
-event lecture /at friday
+deadline individual project /by 09/03/2021 2359
+event lecture /at 28/10/2021 1200
 list
 done 2
 list
@@ -14,11 +14,13 @@ todo      with a lot of whitespace
 deadline
 deadline project but no by
 deadline project but invalid /by           
-deadline project whitespace         /by            tomorrow
+deadline project whitespace         /by            02/06/2021 2300
+deadline project bad date         /by            02062021 2300
+deadline project bad date         /by            02 06 2021 2300
 event
 event meeting but no by
 event meeting but invalid /at           
-event meeting whitespace         /at            tomorrow
+event meeting whitespace         /at            09/03/2021 0000
 invalid command test
 done
 done -2

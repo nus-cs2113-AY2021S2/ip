@@ -7,19 +7,21 @@
 What do you have to do today?
 Commands:
     todo taskName
-    deadline deadlineName /by time
-    event eventName /at time
+    deadline deadlineName /by dd/mm/yyyy hhmm
+    event eventName /at dd/mm/yyyy hhmm
     list
     done taskNumber
     delete taskNumber
     help
     bye
-
+_______________________________________________________________________________
+Here are the tasks in your list:
+_______________________________________________________________________________
 _______________________________________________________________________________
 Commands:
     todo taskName
-    deadline deadlineName /by time
-    event eventName /at time
+    deadline deadlineName /by dd/mm/yyyy hhmm
+    event eventName /at dd/mm/yyyy hhmm
     list
     done taskNumber
     delete taskNumber
@@ -34,51 +36,51 @@ You now have 1 tasks in the list.
 _______________________________________________________________________________
 _______________________________________________________________________________
 Alrighty! I have added this new Deadline:
-    [DL][ ] individual project (by: before tutorial)
+    [DL][ ] individual project (by: 09/03/2021 2359)
 You now have 2 tasks in the list.
 _______________________________________________________________________________
 _______________________________________________________________________________
 Alrighty! I have added this new Event:
-    [EV][ ] lecture (at: friday)
+    [EV][ ] lecture (at: 28/10/2021 1200)
 You now have 3 tasks in the list.
 _______________________________________________________________________________
 _______________________________________________________________________________
 Here are the tasks in your list:
     1. [TD][ ] team project
-    2. [DL][ ] individual project (by: before tutorial)
-    3. [EV][ ] lecture (at: friday)
+    2. [DL][ ] individual project (by: 09/03/2021 2359)
+    3. [EV][ ] lecture (at: 28/10/2021 1200)
 _______________________________________________________________________________
 _______________________________________________________________________________
 Very nice! I've marked this task as done:
-    [DL][X] individual project (by: before tutorial)
+    [DL][X] individual project (by: 09/03/2021 2359)
 _______________________________________________________________________________
 _______________________________________________________________________________
 Here are the tasks in your list:
     1. [TD][ ] team project
-    2. [DL][X] individual project (by: before tutorial)
-    3. [EV][ ] lecture (at: friday)
+    2. [DL][X] individual project (by: 09/03/2021 2359)
+    3. [EV][ ] lecture (at: 28/10/2021 1200)
 _______________________________________________________________________________
 _______________________________________________________________________________
 Yay! I've successfuly deleted this task:
-    [DL][X] individual project (by: before tutorial)
+    [DL][X] individual project (by: 09/03/2021 2359)
 _______________________________________________________________________________
 _______________________________________________________________________________
 Here are the tasks in your list:
     1. [TD][ ] team project
-    2. [EV][ ] lecture (at: friday)
+    2. [EV][ ] lecture (at: 28/10/2021 1200)
 _______________________________________________________________________________
 _______________________________________________________________________________
 Very nice! I've marked this task as done:
-    [EV][X] lecture (at: friday)
+    [EV][X] lecture (at: 28/10/2021 1200)
 _______________________________________________________________________________
 _______________________________________________________________________________
 Here are the tasks in your list:
     1. [TD][ ] team project
-    2. [EV][X] lecture (at: friday)
+    2. [EV][X] lecture (at: 28/10/2021 1200)
 _______________________________________________________________________________
 _______________________________________________________________________________
 There was an ERROR!
-ERROR!!! Command type of 'todo' must have a description! ):
+Command type of 'todo' must have a description! ):
 _______________________________________________________________________________
 _______________________________________________________________________________
 Alrighty! I have added this new Todo:
@@ -87,36 +89,56 @@ You now have 3 tasks in the list.
 _______________________________________________________________________________
 _______________________________________________________________________________
 There was an ERROR!
-ERROR!!! Command type of 'deadline' must have a description! ):
+Command type of 'deadline' must have a description! ):
 _______________________________________________________________________________
 _______________________________________________________________________________
 There was an ERROR!
-ERROR!!! Command type of 'deadline' must define a time using '/by'! ):
+Command type of 'deadline' must define a time using:
+   deadline taskName /by dd/mm/yyyy hhmm
+Text '' could not be parsed at index 0
 _______________________________________________________________________________
 _______________________________________________________________________________
 There was an ERROR!
-ERROR!!! Command type of 'deadline' must define a time using '/by'! ):
+Command type of 'deadline' must define a time using:
+   deadline taskName /by dd/mm/yyyy hhmm
+Text '' could not be parsed at index 0
 _______________________________________________________________________________
 _______________________________________________________________________________
 Alrighty! I have added this new Deadline:
-    [DL][ ] project whitespace (by: tomorrow)
+    [DL][ ] project whitespace (by: 02/06/2021 2300)
 You now have 4 tasks in the list.
 _______________________________________________________________________________
 _______________________________________________________________________________
 There was an ERROR!
-ERROR!!! Command type of 'event' must have a description! ):
+Command type of 'deadline' must define a time using:
+   deadline taskName /by dd/mm/yyyy hhmm
+Text '02062021 2300' could not be parsed at index 2
 _______________________________________________________________________________
 _______________________________________________________________________________
 There was an ERROR!
-ERROR!!! Command type of 'event' must define a time using '/at'! ):
+Command type of 'deadline' must define a time using:
+   deadline taskName /by dd/mm/yyyy hhmm
+Text '02 06 2021 2300' could not be parsed at index 2
 _______________________________________________________________________________
 _______________________________________________________________________________
 There was an ERROR!
-ERROR!!! Command type of 'event' must define a time using '/at'! ):
+Command type of 'event' must have a description! ):
+_______________________________________________________________________________
+_______________________________________________________________________________
+There was an ERROR!
+Command type of 'event' must define a time using:
+   event taskName /at dd/mm/yyyy hhmm
+Text '' could not be parsed at index 0
+_______________________________________________________________________________
+_______________________________________________________________________________
+There was an ERROR!
+Command type of 'event' must define a time using:
+   event taskName /at dd/mm/yyyy hhmm
+Text '' could not be parsed at index 0
 _______________________________________________________________________________
 _______________________________________________________________________________
 Alrighty! I have added this new Event:
-    [EV][ ] meeting whitespace (at: tomorrow)
+    [EV][ ] meeting whitespace (at: 09/03/2021 0000)
 You now have 5 tasks in the list.
 _______________________________________________________________________________
 _______________________________________________________________________________
@@ -134,7 +156,7 @@ Commands:
 _______________________________________________________________________________
 _______________________________________________________________________________
 There was an ERROR!
-ERROR!!! Command type of 'done' must have a description! ):
+Command type of 'done' must have a description! ):
 _______________________________________________________________________________
 _______________________________________________________________________________
 There was an ERROR!
@@ -150,7 +172,7 @@ There was an ERROR!
 _______________________________________________________________________________
 _______________________________________________________________________________
 There was an ERROR!
-ERROR!!! Command type of 'delete' must have a description! ):
+Command type of 'delete' must have a description! ):
 _______________________________________________________________________________
 _______________________________________________________________________________
 There was an ERROR!
