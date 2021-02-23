@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.common.Messages;
 import duke.common.Utils;
 import duke.exception.DukeException;
 import duke.storage.Storage;
@@ -39,7 +40,7 @@ public class DateCommand extends Command {
             .filter(e -> e.getDatetime().toLocalDate().equals(date.toLocalDate()))
             .collect(toList()));
         if (matches.size() == 0) {
-            ui.printText("No deadlines/events found on given date: " + commandArgs);
+            ui.printText(Messages.MESSAGE_NOT_FOUND_DATES + commandArgs);
             return;
         }
 
