@@ -15,12 +15,12 @@ public class UI {
         String phrase;
         if (getAreAllTasksDone(tasks)) {
             phrase = "This job was already completed!!!!" + System.lineSeparator()
-                    + "Good job Crewmate! You completed all your tasks in this list! ^_^" + System.lineSeparator();
+                    + "Good job Crewmate! You completed all your tasks in this list! ( ^ _ ^ )" + System.lineSeparator();
 
         } else {
-            phrase = "What are you doing??? This job was already completed!! (;¬_¬)" + System.lineSeparator()
+            phrase = "What are you doing??? This job was already completed!! ( O . o )" + System.lineSeparator()
                     + "You still have " + getNumberOfTaskRemaining(tasks)
-                    + " tasks left in this list Crewmate! Hurry up!! ＼(｀0´)／";
+                    + " tasks left in this list Crewmate! Hurry up!! ( X _ X )\"";
         }
         System.out.println(phrase);
     }
@@ -118,8 +118,8 @@ public class UI {
                 + "            **  **             ** ** ** ** ** *        * **" + System.lineSeparator()
                 + "             **  **             ** **     * ** *       * **" + System.lineSeparator()
                 + "              *  **             ** **     ** **        * **" + System.lineSeparator()
-                + "                 **             ** **      ** **		* **" + System.lineSeparator()
-                + "                  **            ** **		* **        * **" + System.lineSeparator()
+                + "               **             ** **      ** **		* **" + System.lineSeparator()
+                + "               **            ** **		* **        * **" + System.lineSeparator()
                 + "				  *            ** **          **        * **" + System.lineSeparator()
                 + "				   **         ** *            **        **" + System.lineSeparator()
                 + "				    * ** ** ** *               ** ** ** **" + System.lineSeparator()
@@ -191,7 +191,7 @@ public class UI {
 
     // prints no tasks have been done
     public static void printNoTasksDone() {
-        System.out.println("Are you really a Crewmate??? You haven't done any work in this list! ( X _ X ' ）");
+        System.out.println("Are you really a Crewmate??? You haven't done any work in this list! ( X _ X ' )");
     }
 
     // prints all tasks have been completed
@@ -229,7 +229,7 @@ public class UI {
 
     // prints a normal ending
     public static void printTraitor() {
-        System.out.print("You are abandoning us!!! I trusted you!!!  ( O . o ' ) " + System.lineSeparator());
+        System.out.print("You are abandoning us!!! I trusted you!!!  ( O . o ' )" + System.lineSeparator());
         printDottedLines();
     }
 

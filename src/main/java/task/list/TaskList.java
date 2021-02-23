@@ -8,8 +8,8 @@ import exceptions.IllegalTaskRedoException;
  */
 public class TaskList {
 
-    public static final String TICK = "\u2713";
-    public static final String CROSS = "\u2718";
+    public static final String DONE_ICON = "OK";
+    public static final String NOT_DONE_ICON = "XX";
     public static final String MARKED_AS_DONE = "Nice! I've marked this task as done:";
     protected String description;
     protected boolean isDone;
@@ -21,7 +21,7 @@ public class TaskList {
 
     // returns the done status icon for a task
     public String getStatusIcon() {
-        return ((getIsTaskDone()) ? TICK : CROSS); //return tick or X symbols
+        return ((getIsTaskDone()) ? DONE_ICON : NOT_DONE_ICON); //return tick or X symbols
     }
 
     // gets isDone for a task

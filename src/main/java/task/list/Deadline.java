@@ -13,7 +13,7 @@ public class Deadline extends Todo {
     public static final int BY_INDEX = 1;
     public static final int DESCRIPTION_INDEX = 0;
     public static final String NO_BY = "No Deadline!! Hehe! :)";
-    public static final String NEW_DEADLINE = "Aight Crewmate!! I've got a new deadline for you!!! (¬‿¬): ";
+    public static final String NEW_DEADLINE = "Aight Crewmate!! I've got a new deadline for you!!! ( ^ _ ^ ): ";
     public static final String BY_HEADER = "(by: ";
     public static final int NUMBER_OF_ATTRIBUTES = 2;
     protected String by;
