@@ -193,8 +193,8 @@ public class CommandRunner {
         String by;
 
         try {
-            job = Parser.parseDescription(input, "/by");
-            by = Parser.parseDate(input, "/by");
+            job = Parser.parseDescription(input,    DEADLINE_DELIM);
+            by = Parser.parseDate(input, DEADLINE_DELIM);
         } catch (InvalidCommandException e) {
             ui.printInvalidInputWarning(input);
             return;
@@ -218,8 +218,8 @@ public class CommandRunner {
         String job, at;
 
         try {
-            job = Parser.parseDescription(input, "/at");
-            at = Parser.parseDate(input, "/at");
+            job = Parser.parseDescription(input, EVENT_DELIM);
+            at = Parser.parseDate(input, EVENT_DELIM);
         } catch (InvalidCommandException e) {
             ui.printInvalidInputWarning(input);
             return;

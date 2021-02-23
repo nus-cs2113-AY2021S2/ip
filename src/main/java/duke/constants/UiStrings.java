@@ -31,6 +31,12 @@ public class UiStrings {
     public static final String PROMPT_ENTER_BYE_TO_EXIT = "To exit, enter \"bye\"";
     public static final String PROMPT_TASK_DONE = "Congrats! You've completed: \n   ";
     
+    // Parser string constants
+    public static final String INPUT_DATE_FORMAT = "d-M-yyyy";
+    public static final String OUTPUT_DATE_FORMAT = "d MMMM, yyyy";
+    public static final String EVENT_DELIM = "/at";
+    public static final String DEADLINE_DELIM = "/by";
+    
     
     // Output formatting
     public static final String STRAIGHT_LINE = "____________________________________________________________";
