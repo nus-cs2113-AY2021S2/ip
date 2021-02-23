@@ -12,10 +12,7 @@ import duke.task.Todo;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class AddCommand extends Command {
     private static final int ERR_NO_DATE = -5;
@@ -37,31 +34,10 @@ public class AddCommand extends Command {
     }
     @Override
     public void execute(Ui ui) {
-        ArrayList<Task> Tasks = taskList.getTasks();
-        addItem(this.input, Tasks);
-    }
-    /**
-     * Parses type of item to add and calls appropriate method.
-     *
-     * @param line raw input given by user.
-     */
-    public void addItem(String line, ArrayList<Task> Tasks) {
         try {
-            String prefix = line.split(" ")[0];
-            int itemType = getItemType(prefix);
-            // No fallthrough required
-            switch (itemType) {
-            case ADD_TODO:
-                addTodo(line, Tasks);
-                break;
-            case ADD_DEADLINE:
-                addDeadline(line, Tasks);
-                break;
-            case ADD_EVENT:
-                addEvent(line, Tasks);
-            }
-            ui.printBorderLine();
-        } catch (WrongFormatException e) {
+            ArrayList<Task> Tasks = taskList.getTasks();
+            addItem(this.input, Tasks);
+        }  catch (WrongFormatException e) {
             ui.printError(ERR_WRONG_FORMAT_MESSAGE);
         } catch (EmptyNameFieldException e) {
             ui.printError(ERR_NO_NAME);
@@ -69,6 +45,27 @@ public class AddCommand extends Command {
             ui.printError(ERR_NO_DATE);
         } catch (DateTimeException e) {
             ui.printError(ERR_WRONG_DATE_FORMAT);
+        }
+    }
+    /**
+     * Parses type of item to add and calls appropriate method.
+     *
+     * @param line raw input given by user.
+     */
+    public void addItem(String line, ArrayList<Task> Tasks) throws WrongFormatException, EmptyNameFieldException,
+            EmptyDateException {
+        String prefix = line.split(" ")[0];
+        int itemType = getItemType(prefix);
+        // No fallthrough required
+        switch (itemType) {
+        case ADD_TODO:
+            addTodo(line, Tasks);
+            break;
+        case ADD_DEADLINE:
+            addDeadline(line, Tasks);
+            break;
+        case ADD_EVENT:
+            addEvent(line, Tasks);
         }
     }
     /**
@@ -98,7 +95,7 @@ public class AddCommand extends Command {
      * @throws EmptyNameFieldException if task name is not given.
      */
     public void addTodo(String line, ArrayList<Task> tasks) throws EmptyNameFieldException {
-        validateTodo(line);
+        validateTodoFormat(line);
         int current = Task.totalNumberOfTasks;
         String nameOfTask = line.substring(5);
         tasks.add(new Todo(nameOfTask));
@@ -111,7 +108,7 @@ public class AddCommand extends Command {
      * @param line user input.
      * @throws EmptyNameFieldException if task name is not given or all whitespace.
      */
-    public void validateTodo(String line) throws EmptyNameFieldException {
+    public void validateTodoFormat(String line) throws EmptyNameFieldException {
         // Checks if name field is blank or all whitespace
         if (line.length() < 6 || line.substring(5).trim().length() == 0) {
             throw new EmptyNameFieldException();
@@ -137,7 +134,7 @@ public class AddCommand extends Command {
         this.ui.printAddedToList(current, tasks);
     }
     /**
-     * Extracts the name and date of the deadline after validating input.
+     * Extracts the name and date of the deadline after checking validity of input.
      *
      * @param line user input.
      * @return split, a string array with 2 elements: name and date.
@@ -154,16 +151,18 @@ public class AddCommand extends Command {
         }
         String nameAndDate = line.substring(8);
         String[] split = nameAndDate.split(" /by ");
-        String name = split[0];
+        String name = split[0].trim();
         String date = split[1];
         if (name.trim().length() == 0) {
             throw new EmptyNameFieldException();
         }
-        if(date.trim().length() == 0) {
+        if (date.trim().length() == 0) {
             throw new EmptyDateException();
         }
         // Checks if date is of correct format
         LocalDate.parse(date);
+        split[0] = split[0].trim();
+
         return split;
     }
     /**
@@ -208,11 +207,13 @@ public class AddCommand extends Command {
         if (name.trim().length() == 0) {
             throw new EmptyNameFieldException();
         }
-        if(date.trim().length() == 0) {
+        if (date.trim().length() == 0) {
             throw new EmptyDateException();
         }
         // Checks if date is of correct format
         LocalDate.parse(date);
+        split[0] = split[0].trim();
+
         return split;
     }
 }

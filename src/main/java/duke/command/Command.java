@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.Ui;
+import duke.error.EmptyNameFieldException;
 
 public abstract class Command {
 

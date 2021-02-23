@@ -11,6 +11,7 @@ public class ListCommand extends Command {
 
     private final String input;
     private final TaskList taskList;
+    private final Ui ui;
 
     public ListCommand(String input, TaskList taskList, Ui ui) {
         this.input = input;

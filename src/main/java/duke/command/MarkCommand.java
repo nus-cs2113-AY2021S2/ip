@@ -15,6 +15,7 @@ public class MarkCommand extends Command {
 
     private final String input;
     private final TaskList taskList;
+    private final Ui ui;
 
     public MarkCommand(String input, TaskList taskList, Ui ui) {
         this.input = input;
@@ -28,11 +29,10 @@ public class MarkCommand extends Command {
             ArrayList<Task> tasks = this.taskList.getTasks();
             markAsDone(input, tasks);
         } catch (IllegalAccessException e) {
-            ui.printError(ERR_OUT_OF_BOUNDS_MESSAGE);
+            this.ui.printError(ERR_OUT_OF_BOUNDS_MESSAGE);
         } catch (EmptyNameFieldException e) {
-            ui.printError(ERR_NO_NAME);
+            this.ui.printError(ERR_NO_NAME);
         }
-
     }
     /**
      * Marks a task as done.

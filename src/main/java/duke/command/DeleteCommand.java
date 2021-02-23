@@ -29,9 +29,9 @@ public class DeleteCommand extends Command {
             ArrayList<Task> tasks = this.taskList.getTasks();
             deleteItem(this.input, tasks);
         } catch (IllegalAccessException e) {
-            ui.printError(ERR_OUT_OF_BOUNDS_MESSAGE);
+            this.ui.printError(ERR_OUT_OF_BOUNDS_MESSAGE);
         } catch (EmptyNameFieldException e) {
-            ui.printError(ERR_NO_NAME);
+            this.ui.printError(ERR_NO_NAME);
         }
 
     }

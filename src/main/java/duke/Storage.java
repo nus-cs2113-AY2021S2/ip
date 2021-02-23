@@ -21,6 +21,7 @@ public class Storage {
     /**
      * Loads tasks from saved text file. If file does not exist, create a file.
      *
+     * @param tasks The ArrayList to store all existing tasks from saved text file.
      * @throws IOException if there is IO error.
      */
     public void loadFile(ArrayList<Task> tasks) throws IOException {
@@ -43,29 +44,33 @@ public class Storage {
         String[] components = line.split(" \\| ");
         // No fallthrough required
         switch(components[0]) {
+        // Case where task is Todo
         case "[T]":
             Task fileTodo = new Todo(components[2]);
             if (components[1].equals("1")) {
                 fileTodo.setDone();
             }
             return fileTodo;
+        // Case where task is Event
         case "[E]":
             Task fileEvent = new Event(components[2], components[3]);
             if (components[1].equals("1")) {
                 fileEvent.setDone();
             }
             return fileEvent;
-        }
         // Case where task is deadline
-        Task fileDeadline = new Deadline(components[2], components[3]);
-        if (components[1].equals("1")) {
-            fileDeadline.setDone();
+        default:
+            Task fileDeadline = new Deadline(components[2], components[3]);
+            if (components[1].equals("1")) {
+                fileDeadline.setDone();
+            }
+            return fileDeadline;
         }
-        return fileDeadline;
     }
     /**
-     * Saves all tasks into file after user inputs "bye"
+     * Saves all tasks into file after user inputs "bye".
      *
+     * @param tasks The ArrayList containing the tasks to save.
      * @throws IOException if there is IO error.
      */
     public void saveFile(ArrayList<Task> tasks) throws IOException {

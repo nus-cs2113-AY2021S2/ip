@@ -1,7 +1,6 @@
 [T] | 0 | change amp
-[E] | 1 | write guitar part | 2019-02-02
-[E] | 1 | live gig | 2019-02-02
+[E] | 1 | write guitar part | 2020-05-04
 [T] | 0 | logos/sublunary
 [T] | 1 | baby blue
-[E] | 0 | join band | 2019-02-02
-[D] | 0 | join band | 2019-01-03
+[E] | 1 | join band | 2020-05-04
+[D] | 0 | join band | 2020-06-12
