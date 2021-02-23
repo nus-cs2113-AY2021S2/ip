@@ -7,6 +7,7 @@ public class Event extends Task {
     public Event(String description, String atInput) {
         super(description);
         this.at = atInput;
+
     }
     public void setAt(String atInput) {
         this.at = atInput;
