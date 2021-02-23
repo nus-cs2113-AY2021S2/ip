@@ -70,9 +70,9 @@ dos2unix ACTUAL.TXT EXPECTED-UNIX.TXT
 diff ACTUAL.TXT EXPECTED-UNIX.TXT
 # shellcheck disable=SC2181
 if [ $? -eq 0 ]; then
-    echo "Test result: PASSED"
+    echo "Test 3 result: PASSED"
 else
-    echo "Test result: FAILED"
+    echo "Test 3 result: FAILED"
 fi
 
 # run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
@@ -86,8 +86,8 @@ dos2unix ACTUAL.TXT EXPECTED-UNIX.TXT
 diff ACTUAL.TXT EXPECTED-UNIX.TXT
 # shellcheck disable=SC2181
 if [ $? -eq 0 ]; then
-    echo "Test result: PASSED"
+    echo "Test 4 result: PASSED"
 else
-    echo "Test result: FAILED"
+    echo "Test 4 result: FAILED"
 fi
 exit 0
