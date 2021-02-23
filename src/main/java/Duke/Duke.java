@@ -30,41 +30,36 @@ public class Duke {
     private static final String ERROR_MESSAGE = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
     private static final String FILE_LOCATION = "src/main/java/Duke/Duke.txt";
 
-    private static final int CAPACITY = 100;
-    private static final int ITEM_DATA_COUNT = 3;
+    // private static final String LEFTPAR = "[";
+    // private static final String RIGHTPAR = "] ";
 
-    private static final String LEFTPAR = "[";
-    private static final String RIGHTPAR = "] ";
-
-    private static String[][] allItems;
     private static int count;
 
-    private static String DONE = "done";
-    private static String UNDO = "undo";
+    // private static String DONE = "done";
+    // private static String UNDO = "undo";
 
     public static List<Task> lists = new ArrayList<Task>();
 
     public static void main(String[] args) {
         showWelcomeMessage();
         readFile(lists);
-        // initItemBook();
-        // showWelcomeMessage();
-        // while (true) {
-        //     String userCommand = getUserInput();
-        //     echoUserCommand(userCommand);
-        //     int returnValue = executeCommand(userCommand);
-        //     if (returnValue == 0)
-        //         break;
-        // }
+        showWelcomeMessage();
+        while (true) {
+            String userCommand = getUserInput();
+            echoUserCommand(userCommand);
+            int returnValue = executeCommand(userCommand);
+            if (returnValue == 0)
+                break;
+        }
     }
 
     private static void readFile(List<Task> lists){
         try {
-            File file = new File("src/main/java/Duke/Duke.txt");
+            File file = new File(FILE_LOCATION);
             if (file.createNewFile()) {
-                System.out.println("A new file has been created! ^_^");
+                System.out.println("A new file has been created!");
             } else {
-                System.out.println("Reading saved Task Lists ^_^");
+                System.out.println("Reading saved Task Lists!");
                 Scanner readingFile = new Scanner(file);
                 while (readingFile.hasNextLine()) {
                     String line = readingFile.nextLine();
@@ -94,6 +89,7 @@ public class Duke {
                             taskInFile.markAsDone();
                         }
                     }
+                    count++;
                 }
         }
     } catch (IOException e) {
@@ -103,7 +99,7 @@ public class Duke {
 
     private static void writeFile(List<Task> lists) {
         try {
-            FileWriter writer = new FileWriter("src/main/java/Duke/Duke.txt",false);
+            FileWriter writer = new FileWriter(FILE_LOCATION,false);
             for (Task taskInList : lists) {
                 writer.write(taskInList.getTaskType() + "-" + taskInList.isDone() + "-" + taskInList.getTask());
                 writer.write("\r\n");
@@ -112,14 +108,6 @@ public class Duke {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    private static void addItemToItemBook(String commandType, String commandData) {
-        allItems[count][0] = commandType;
-        allItems[count][1] = UNDO;
-        allItems[count][2] = commandData;
-        count++;
-        // writeFile(commandType+"-"+UNDO+"-"+commandData);
     }
 
     private static void showWelcomeMessage() {
@@ -149,25 +137,33 @@ public class Duke {
     private static int executeCommand(String userInputString) {
         final String[] commandTypeAndParams = splitCommandWordAndArgs(userInputString);
         final String commandType = commandTypeAndParams[0];
-        final String commandArgs = commandTypeAndParams[1];
-        Task taskInFile;
+        String commandArgs = commandTypeAndParams[1];
+        Task taskInput;
         switch (commandType) {
         case COMMAND_TODO_WORD:
-            taskInFile = new TodoTask(commandArgs);
-            lists.add(taskInFile);
-            // addTodoItem(commandArgs);
+            taskInput = new TodoTask(commandArgs);
+            lists.add(taskInput);
+            count++;
             return 1;
         case COMMAND_EVENT_WORD:
-            taskInFile = new EventTask(commandArgs);
-            lists.add(taskInFile);
-            // addEventItem(commandArgs);
+            checkError(commandArgs);
+            commandArgs = commandArgs.replace("/", "(");
+            commandArgs = commandArgs.replace("at", "at:");
+            commandArgs = commandArgs+")";
+            taskInput = new EventTask(commandArgs);
+            lists.add(taskInput);
+            count++;
             return 1;
         case COMMAND_DEADLINE_WORD:
-            taskInFile = new DeadlineTask(commandArgs);
-            lists.add(taskInFile);
+            commandArgs = commandArgs.replace("/", "(");
+            commandArgs = commandArgs.replace("by", "by:");
+            commandArgs = commandArgs+")";
+            taskInput = new DeadlineTask(commandArgs);
+            lists.add(taskInput);
+            count++;
             return 1;
         case COMMAND_LIST_WORD:
-            showListItem();
+            printList(0,count);
             return 1;
         case COMMAND_DONE_WORD:
             doneItem(commandArgs);
@@ -189,42 +185,24 @@ public class Duke {
         return split.length == 2 ? split : new String[] { split[0] , "" }; // else case: no parameters
     }
 
-
-    public static void showListItem(){
-        for (int i = 0; i<count; i++){
-            int index = i+1;
-            showToUser(index+". "+LEFTPAR+allItems[i][0]+RIGHTPAR+LEFTPAR+allItems[i][1]+RIGHTPAR+allItems[i][2]);}
+    public static void printList(int startIndex, int endIndex) {
+        if (endIndex == 0) {
+            System.out.println("List is empty :o\n" + "\n");
+        } else {
+            for(int i = startIndex; i < endIndex; ++i) {
+                System.out.println(" " + (i + 1) + ": " + lists.get(i).toString());
+            }
+        }
     }
 
     public static void showError(){
         showToUser(ERROR_MESSAGE,DIVIDER);
     }
 
-    public static void addDeadlineItem(String commandArgs){
-        checkError(commandArgs);
-        commandArgs = commandArgs.replace("/", "(");
-        commandArgs = commandArgs.replace("by", "by:");
-        commandArgs = commandArgs+")";
-        addItemToItemBook(COMMAND_DEADLINE_WORD,commandArgs);
-    }
-
-    public static void addTodoItem(String commandArgs){
-        checkError(commandArgs);
-        addItemToItemBook(COMMAND_TODO_WORD,commandArgs);
-    }
-
-    public static void addEventItem(String commandArgs){
-        checkError(commandArgs);
-        commandArgs = commandArgs.replace("/", "(");
-        commandArgs = commandArgs.replace("at", "at:");
-        commandArgs = commandArgs+")";
-        addItemToItemBook(COMMAND_EVENT_WORD,commandArgs);
-    }
-
     public static void doneItem(String doneStringNumber){
         checkError(doneStringNumber);
         int doneInteger = Integer.parseInt(doneStringNumber)-1;
-        allItems[doneInteger][1] = DONE;
+        lists.get(doneInteger).markAsDone();
     }
 
     public static void deleteItem(String deleteStringNumber){
@@ -232,17 +210,13 @@ public class Duke {
         if(Integer.parseInt(deleteStringNumber)>=count){
             showError();
         } else{
-            for(int i=Integer.parseInt(deleteStringNumber)-1;i<=count;i++){
-                allItems[i][0]=allItems[i+1][0];
-                allItems[i][1]=allItems[i+1][1];
-                allItems[i][2]=allItems[i+1][2];
-            }
+            lists.remove(Integer.parseInt(deleteStringNumber)-1);
             count--;
         }
     }
 
     public static void endSystem(){
-        writeFile();
+        writeFile(lists);
         showToUser(BYE);
     }
 

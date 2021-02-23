@@ -1,2 +1,2 @@
-deadline-done-return book (by: Sunday)
-event-undo-project meeting (at: Mon 2-4pm)
+deadline-true-return book (by: Sunday)
+event-true-project meeting (at: Mon 2-4pm)
