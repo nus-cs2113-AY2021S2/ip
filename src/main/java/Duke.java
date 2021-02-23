@@ -60,11 +60,10 @@ public class Duke {
             TaskManager.printTasksWithKeywords(fullCommand.substring(4).trim());
             break;
         case "print":
-            if (partOfCommand[1].trim().equals("type")){
-                TaskManager.printOneTaskTypeWithStreams(fullCommand.substring(11,12).trim());
+            if (partOfCommand[1].trim().equals("type")) {
+                TaskManager.printOneTaskTypeWithStreams(fullCommand.substring(11, 12).trim());
                 break;
-            }
-            else if (partOfCommand[1].trim().equals("date")){
+            } else if (partOfCommand[1].trim().equals("date")) {
                 TaskManager.printOneTaskDateWithStreams(partOfCommand[2].trim());
                 break;
             }

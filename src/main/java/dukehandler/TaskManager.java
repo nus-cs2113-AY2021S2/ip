@@ -30,7 +30,7 @@ public class TaskManager {
     }
 
     /**
-     * If 'list' command is given
+     * Prints all the tasks, task types, status (done or not) and date and time.
      */
     public static void printAllTasks() {
         boolean isAllDone = true;
@@ -52,7 +52,8 @@ public class TaskManager {
     }
 
     /**
-     * If 'done' command is given
+     * Marks specified task as done.
+     *
      * @param doneIndexString input index to be verified by Checker
      */
     public static void markTaskAsDone(String doneIndexString) {
@@ -75,8 +76,9 @@ public class TaskManager {
     }
 
     /**
-     * If any one of the tasks are called to be added
-     * @param taskType deadline, todo, or event
+     * Adds a new task if any one of the task types is specified
+     *
+     * @param taskType    deadline, todo, or event
      * @param fullCommand full string input to be parsed later for description
      */
     public static void addNewTask(String taskType, String fullCommand) {
@@ -104,6 +106,13 @@ public class TaskManager {
         }
     }
 
+    /**
+     * Adds new task if command input is valid
+     *
+     * @param taskType  deadline or events
+     * @param fullInput the full user command input
+     * @throws DateTimeErrorException if date and time is entered in the wrong format
+     */
     public static void parseTaskToAdd(String taskType, String fullInput) throws DateTimeErrorException {
         String[] descriptionAndTime;
         descriptionAndTime = (taskType.equals("deadline") ? fullInput.split("/by")
@@ -125,7 +134,8 @@ public class TaskManager {
     }
 
     /**
-     * If 'delete' command is given
+     * Removes the specified task from the list.
+     *
      * @param removeIndexString input index to be verified by Checker
      */
     public static void removeTask(String removeIndexString) {
@@ -144,6 +154,11 @@ public class TaskManager {
         tasks.remove(tasks.get(removeIndexInt - 1));
     }
 
+    /**
+     * Prints all the tasks that contain a given keyword.
+     *
+     * @param keyword the search word that user inputs
+     */
     public static void printTasksWithKeywords(String keyword) {
         try {
             Checker.checkTasksToFind(keyword.trim());
@@ -160,8 +175,14 @@ public class TaskManager {
                 .filter((t) -> t.getTaskName().trim().contains(keyword.trim()))
                 .forEach((t) -> System.out.println(" " + (i[0]++) + ". " + t));
     }
-  
-  public static void printOneTaskTypeWithStreams(String taskTypeInput) {
+
+    /**
+     * Filters out all the tasks of a desired task type
+     * e.g. prints all deadlines
+     *
+     * @param taskTypeInput the search task type that user inputs
+     */
+    public static void printOneTaskTypeWithStreams(String taskTypeInput) {
         try {
             Checker.checkTaskTypeStreamToPrint(taskTypeInput.trim());
         } catch (StreamErrorException e) {
@@ -173,6 +194,11 @@ public class TaskManager {
                 .forEach(System.out::println);
     }
 
+    /**
+     * Filters out all the tasks of a desired date included
+     *
+     * @param dateInput the search date that user inputs
+     */
     public static void printOneTaskDateWithStreams(String dateInput) {
         String dateToString;
         try {

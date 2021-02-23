@@ -3,6 +3,7 @@ package taskclasses;
 public class Deadline extends Task {
     protected String date;
     protected String time;
+
     public Deadline(String taskName, String date, String time) {
         super(taskName);
         this.date = date;
@@ -22,6 +23,7 @@ public class Deadline extends Task {
     public String getTime() {
         return this.time;
     }
+
     public String getDate() {
         return this.date;
     }

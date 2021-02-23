@@ -12,7 +12,8 @@ import exceptions.TaskAlreadyMarkedException;
  * Checks if task command can be parsed correctly
  */
 public class Checker {
-    public Checker() {}
+    public Checker() {
+    }
 
     /**
      * Checks if index to mark done is valid.
@@ -81,6 +82,7 @@ public class Checker {
 
     /**
      * Checks if input is a valid keyword
+     *
      * @param keyword the word used to search through the tasks list
      * @throws InvalidCommandException if keyword is missing
      */
