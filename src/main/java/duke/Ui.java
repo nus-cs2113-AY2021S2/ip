@@ -106,4 +106,8 @@ public class Ui {
     public void showDoneEmptyError() {
         System.out.print("That is not a valid command. Please enter a number after the word.\n");
     }
+
+    public void showDateTimeHint(String format) {
+        System.out.print("That is invalid. The date-time format should be: " + format + "\n");
+    }
 }
