@@ -1,7 +1,87 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+============================================================
+Welcome to Duke v1.5 ----------- Latest Update: 6/2/21
+Developed by: Oscar Lai
+============================================================
+Good Day, I'm Alfred.
+⊂_ ヽ
+　 ＼ ＼ ^^^^^^
+　　 ＼ ( ͡° ͜ʖ ͡°) ...what can I do for you?
+　　　 >　   ⌒ ヽ
+　　　/ 　 へ   ＼
+　　 / # /　 ＼ ＼...check out my six pack tho.
+　　(　  (ヽ　　ヽ _ つ
+   |  　| \
+　  | 丿 ＼ ⌒)...Enter HELP for command list!
+　  | |　　) /
+   ノ )　　Lﾉ
+  (_／
+============================================================
+ HELP COMMANDS
+todo: adds to list
+ Example: todo sleep
 
+deadline: adds to list
+ Example: deadline homework /by tomorrow
+
+event: adds to list
+ Example: event block event /at tuesday
+
+List: view list
+ Example: list
+
+Help: view help commands
+ Example: Help
+
+Done: check task as done
+ Example: Done 2
+
+Bye:  terminate program
+ Example: bye
+
+============================================================
+¯\_(ツ)_/¯ That is an invalid command!
+Enter "HELP" for commands!
+============================================================
+Your list is empty! Add something!
+============================================================
+¯\_(ツ)_/¯ That is an invalid format!
+Enter HELP for commands!
+============================================================
+I have added [T][ ] "sleep" to the List!
+You have 1 task in total!
+============================================================
+I have added [D][ ] "homework (by: tomorrow)" to the List!
+You have 2 tasks in total!
+============================================================
+I have added [E][ ] "birthday (at: friday)" to the List!
+You have 3 tasks in total!
+============================================================
+Error! You must enter an integer after "done"!
+============================================================
+Good Job, I will mark this as done!
+[D] [✓] homework (by: tomorrow)
+============================================================
+You have already marked it as Done!
+============================================================
+Error! You do not have that many items in your list!
+============================================================
+ LIST
+1. [T] [ ] sleep
+2. [D] [✓] homework (by: tomorrow)
+3. [E] [ ] birthday (at: friday)
+============================================================
+Pleasure serving you...
+ __      __
+( _\    /_ )
+ \ _\  /_ /
+  \ _\/_ /_ _
+  |_____/_/ /|
+  (  (_)__)J-)
+  (  /`.,   /
+   \/  ;   /
+    | === |See you again!
+
+============================================================
+Developed by: Oscar Lai
+Version 1.5
+============================================================
