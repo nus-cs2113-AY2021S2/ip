@@ -15,6 +15,7 @@ If you can type fast, Duke can get do task management faster than traditional Gr
   * [Search task by keyword: `find`](#search-task-by-keyword-find)
   * [Exit the program: `exit`](#exit-the-program-bye)
   * [Save task list](#save-task-list)
+- [FAQ](#faq)    
 - [Command Summary](#command-summary)
     
 ## Quick start
