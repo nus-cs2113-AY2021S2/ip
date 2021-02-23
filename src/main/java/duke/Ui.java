@@ -79,10 +79,14 @@ public class Ui {
             System.out.print("I can remember your tasks for you!\n\n" +
                     "Available commands:\n" +
                     "\ttodo <description>\n" +
-                    "\tdeadline <description> /by <time due>\n" +
-                    "\tevent <description> /at <time occurring>\n" +
-                    "\tlist\n" + "\tdone <task index>\n" +
-                    "\tdelete <task index>\n");
+                    "\tdeadline <description> /by <date and time due>\n" +
+                    "\tevent <description> /at <date and time occurring>\n" +
+                    "\tlist\n" +
+                    "\tdone <task index>\n" +
+                    "\tdelete <task index>\n" +
+                    "\tfind <keyword>\n" +
+                    "\tbye\n"
+                    );
     }
 
     public void showNoTasks() {
