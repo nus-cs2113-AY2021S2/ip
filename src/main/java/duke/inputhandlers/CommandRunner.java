@@ -20,7 +20,6 @@ import static duke.constants.UiStrings.*;
 /**
  * Runs the commands entered by the user.
  * Also handles when the list is full by only allowing "list" and "bye" command.
- * TODO: allow delete command
  */
 
 public class CommandRunner {
@@ -216,7 +215,7 @@ public class CommandRunner {
             ui.printInvalidIndexWarning(index);
         }
     }
-    
+
     private void runFindCommand(String input) {
         ArrayList<Task> matches = new ArrayList<>();
         int numbering = 1;
@@ -236,13 +235,13 @@ public class CommandRunner {
                 matches.add(t);
             }
         }
-        
+
         // check if no matches
         if (matches.size() == 0) {
             ui.printNoMatchWarning(keyword);
             return;
         }
-        
+
         // else print the matching tasks
         ui.printSearchResultsHeader(keyword);
         for (Task t : matches) {
@@ -256,15 +255,14 @@ public class CommandRunner {
      * CHECK LIST CAPACITY
      */
     private boolean isAllowedWhenListFull(int command) {
-        return (command == LIST_COMMAND || command == BYE_COMMAND);
+        boolean isAllowed;
+        isAllowed = !(command == TODO_COMMAND || command == DEADLINE_COMMAND || command == EVENTS_COMMAND);
+        return isAllowed;
     }
 
 
     private void checkListCapacity(int command) throws FullListException {
-        if (tasks.getCount() == MAX_TASK && !Task.isFull) {
-            Task.isFull = true;
-        }
-
+        Task.isFull = (tasks.getCount() == MAX_TASK);
         if (Task.isFull && !isAllowedWhenListFull(command)) {
             throw new FullListException();
         }

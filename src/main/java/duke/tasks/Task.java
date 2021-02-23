@@ -46,7 +46,6 @@ public abstract class Task {
     }
 
     public abstract String addEnd(String s);
-
     public abstract String addLabel(String s);
 
 }
