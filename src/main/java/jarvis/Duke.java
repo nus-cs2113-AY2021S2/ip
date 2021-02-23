@@ -1,9 +1,6 @@
 package jarvis;
 
-import jarvis.exception.EmptyListException;
-import jarvis.exception.HandleException;
-import jarvis.exception.InvalidCommandException;
-import jarvis.exception.InvalidTaskException;
+import jarvis.exception.*;
 import jarvis.storage.TextManager;
 import jarvis.ui.JarvisUi;
 
@@ -22,12 +19,12 @@ public class Duke {
 
         jarvis.startJarvis();
 
-        // Reads jarvis.txt file if it exists in the folder
+        /* Reads jarvis.txt file if it exists in the folder */
         try {
             TextManager.printFileContents();
             jarvis.printDivider();
         } catch (FileNotFoundException exception) {
-            HandleException.handleFileNotFoundException();
+            ExceptionHandler.handleFileNotFoundException();
         }
 
         /*
@@ -38,14 +35,21 @@ public class Duke {
             try {
                 TextManager.writeToFile(jarvis.performTask());
             } catch (InvalidCommandException exception) {
-                HandleException.handleInvalidCommandException();
+                ExceptionHandler.handleInvalidCommandException();
             } catch (IOException exception) {
-                System.out.println("\tSomething went wrong: " + exception.getMessage());
-                jarvis.printDivider();
+                ExceptionHandler.handleIOException(exception);
             } catch (EmptyListException exception) {
-                HandleException.handleEmptyListException();
+                ExceptionHandler.handleEmptyListException();
             } catch (InvalidTaskException exception) {
-                HandleException.handleInvalidTaskException();
+                ExceptionHandler.handleInvalidTaskException();
+            } catch (EmptyDescriptionException exception) {
+                ExceptionHandler.handleEmptyDescriptionException();
+            } catch (EmptyKeywordException exception) {
+                ExceptionHandler.handleEmptyKeywordException();
+            } catch (NoMatchException exception) {
+                ExceptionHandler.handleNoMatchException();
+            } catch (EmptyTaskIdException exception) {
+                ExceptionHandler.handleEmptyTaskIdException();
             }
         }
     }

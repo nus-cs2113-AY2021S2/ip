@@ -1,11 +1,9 @@
 package jarvis.ui;
 
-import jarvis.commands.Command;
-import jarvis.exception.EmptyListException;
-import jarvis.exception.InvalidCommandException;
-import jarvis.exception.InvalidTaskException;
+import jarvis.commands.*;
+import jarvis.exception.*;
 import jarvis.task.Task;
-import jarvis.tasklist.TaskList;
+import jarvis.task.TaskList;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -50,31 +48,36 @@ public class JarvisUi {
     }
 
     /**
-     * Executes the command depending on the user inputs
+     * Executes the command depending on user input
      *
      * @return the list of tasks
-     * @throws InvalidCommandException if the command is invalid
+     * @throws InvalidCommandException if the command provided by the user is invalid
      * @throws EmptyListException if the list is empty
      * @throws InvalidTaskException if the task is not in the list
+     * @throws EmptyDescriptionException if the task description is not given by the user
+     * @throws EmptyTaskIdException if the task number is not given by the user
+     * @throws NoMatchException if no tasks in the list matches the keyword provided by the user
+     * @throws EmptyKeywordException if the keyword is not provided by the user
      */
-    public ArrayList<Task> performTask() throws InvalidCommandException, EmptyListException, InvalidTaskException {
+    public ArrayList<Task> performTask() throws InvalidCommandException, EmptyListException, InvalidTaskException,
+            EmptyDescriptionException, EmptyTaskIdException, NoMatchException, EmptyKeywordException {
         String userInput = in.nextLine();
         if (userInput.startsWith("bye")) {
-            Command.exitJarvis();
+            ExitJarvis.execute();
         } else if (userInput.startsWith("todo")) {
-            Command.runTodo(userInput);
+            AddTodo.execute(userInput);
         } else if (userInput.startsWith("deadline")) {
-            Command.runDeadline(userInput);
+            AddDeadline.execute(userInput);
         } else if (userInput.startsWith("event")) {
-            Command.runEvent(userInput);
+            AddEvent.execute(userInput);
         } else if (userInput.startsWith("list")) {
-            Command.runList();
+            ListTasks.execute();
         } else if (userInput.startsWith("done")) {
-            Command.runDone(userInput);
+            Done.execute(userInput);
         } else if (userInput.startsWith("delete")) {
-            Command.runDelete(userInput);
+            Delete.execute(userInput);
         } else if (userInput.startsWith("find")) {
-            Command.runFind(userInput);
+            Find.execute(userInput);
         } else {
             throw new InvalidCommandException();
         }

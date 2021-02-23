@@ -1,14 +1,11 @@
 package jarvis.task;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 /**
  * Represents a deadline task
  */
 public class Deadline extends Task {
 
-    protected  String by;   // yyyy-mm-dd format
+    protected  String by;
 
     /**
      * Constructor for a deadline task

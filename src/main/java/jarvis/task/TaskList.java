@@ -1,6 +1,4 @@
-package jarvis.tasklist;
-
-import jarvis.task.Task;
+package jarvis.task;
 
 import java.util.ArrayList;
 
@@ -35,21 +33,5 @@ public class TaskList {
     /** returns the size of the tasks list */
     public static int getSize() {
         return tasks.size();
-    }
-
-    /**
-     * Searches the list for related tasks with a given keyword
-     *
-     * @param keyword word used to search for a related task in the list
-     * @return a new list that contains all the matching tasks
-     */
-    public static ArrayList<Task> getTasksWithKeyword(String keyword) {
-        ArrayList<Task> matchingTasks = new ArrayList<>();
-        for (Task task : tasks) {
-            if (task.getTaskDescription().contains(keyword)) {
-                matchingTasks.add(task);
-            }
-        }
-        return matchingTasks;
     }
 }
