@@ -7,6 +7,9 @@ import commands.*;
 import exceptions.EmptyDescriptionException;
 import exceptions.EmptyNumberException;
 
+/**
+ * process user inputs
+ */
 public class Parser {
 
     public static final Constants constants = new Constants();
@@ -30,6 +33,12 @@ public class Parser {
         return commandArgs.split(" at ");
     }
 
+    /**
+     * process input from save file
+     * @param commandDone whether command is done or not
+     * @param commandType type of command
+     * @param commandArgs description of the command
+     */
     public static void processFileInput(String commandDone, String commandType, String commandArgs) {
         if (commandType.equals(constants.COMMAND_TODO_WORD)) {
             new AddTodoFromFile().execute(commandDone, commandArgs);
@@ -43,6 +52,10 @@ public class Parser {
         }
     }
 
+    /**
+     * process input from user
+     * @param userInput input from user
+     */
     public static void processUserInput(String userInput) {
         final String[] commandTypeAndParams = splitCommandWordAndArgs(userInput);
         final String commandType = commandTypeAndParams[0];

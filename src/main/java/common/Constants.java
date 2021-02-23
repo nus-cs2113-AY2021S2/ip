@@ -1,5 +1,8 @@
 package common;
 
+/**
+ * All constants being used throughout the program
+ */
 public class Constants {
 
     public static final int ARRAY_OFFSET = 1;

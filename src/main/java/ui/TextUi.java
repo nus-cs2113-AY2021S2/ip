@@ -2,6 +2,9 @@ package ui;
 
 import common.Constants;
 
+/**
+ * Contain methods to be shown to user when using the program
+ */
 public class TextUi {
 
     public static final Constants constants = new Constants();

@@ -4,6 +4,9 @@ import java.io.IOException;
 
 public class ExitProgram extends Command{
 
+    /**
+     * execute necessary process to exit the program
+     */
     public static void execute() {
         try {
             storage.saveFile();

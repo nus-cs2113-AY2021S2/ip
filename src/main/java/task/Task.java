@@ -17,6 +17,9 @@ public abstract class Task {
         this.isDone = true;
     }
 
+    /**
+     * @return partial display message when task added
+     */
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
     }

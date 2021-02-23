@@ -6,18 +6,23 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 import parser.Parser;
-import common.Constants;
 import common.Messages;
 import task.Task;
 import task.TaskManager;
 
+/**
+ * load, save and create save file
+ */
 public class Storage {
 
     public static final Parser parser = new Parser();
-    public static final Constants constants = new Constants();
     public static final Messages messages = new Messages();
     public static final TaskManager taskManager = new TaskManager();
 
+    /**
+     * load save file
+     * @throws FileNotFoundException when no save file found
+     */
     public static void loadFile() throws FileNotFoundException {
         File f = new File("duke.txt");
         if (!f.exists()) {
@@ -35,6 +40,10 @@ public class Storage {
         System.out.println(messages.MESSAGE_SAVE_FILE_LOADED);
     }
 
+    /**
+     * create or save save file
+     * @throws IOException when error occurs when saving file
+     */
     public static void saveFile() throws IOException {
         File f = new File("duke.txt");
         if (f.createNewFile()) {

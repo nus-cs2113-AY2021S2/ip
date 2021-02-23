@@ -5,6 +5,11 @@ import exceptions.EmptyNumberException;
 
 public class DeleteTask extends Command{
 
+    /**
+     * delete task given index
+     * @param commandArgs index given in String
+     * @throws EmptyNumberException when no index provided
+     */
     public static void execute(String commandArgs) throws EmptyNumberException {
         if (commandArgs.equals("")) {
             throw new EmptyNumberException();
@@ -15,6 +20,10 @@ public class DeleteTask extends Command{
         showTaskDeleted(taskToBeDeleted);
     }
 
+    /**
+     * display message when task deleted
+     * @param task details of task deleted
+     */
     public static void showTaskDeleted(Task task) {
         System.out.println(messages.MESSAGE_TASK_REMOVED);
         System.out.println(constants.INDENTATION + task.toString());
