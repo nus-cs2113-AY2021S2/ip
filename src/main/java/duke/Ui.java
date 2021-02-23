@@ -28,7 +28,7 @@ public class Ui {
     /**
      * Reads user input from command line using the scanner object.
      *
-     * @return Scanner object consisting the user input.
+     * @return User input read from scanner object.
      */
     public String readCommand() {
         Scanner input = new Scanner(System.in);
