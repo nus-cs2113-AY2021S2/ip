@@ -1,10 +1,16 @@
+import command.parser.Parser;
+import file.storage.Storage;
+import ui.UI;
+import task.list.TaskList;
+
+import java.util.ArrayList;
+
 public class Duke {
+    public static ArrayList<TaskList> tasks = new ArrayList<>();
+
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        Storage.loadFromFile(tasks);
+        UI.greet();
+        Parser.processCommands(tasks);
     }
 }
