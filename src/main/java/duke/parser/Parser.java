@@ -4,11 +4,13 @@ import java.util.Scanner;
 
 public class Parser {
 
+    /** Gets user input */
     public String getUserInput() {
         Scanner in = new Scanner(System.in);
         return in.nextLine();
     }
 
+    /** Returns the command of user */
     public String getFirstWord(String text) {
         int index = text.indexOf(' ');
 
@@ -22,6 +24,7 @@ public class Parser {
         }
     }
 
+    /** Returns index of task if delete/done command is inputted */
     public int getIndexOfTask(String line) {
         String[] parts = line.split("(?<=\\D)(?=\\d)");
         return Integer.parseInt(parts[1]) - 1;

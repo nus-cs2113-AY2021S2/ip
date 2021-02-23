@@ -14,6 +14,10 @@ import duke.ui.TextUI;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Entry point of the Duke application.
+ * Initializes the application and starts the interaction with the user.
+ */
 public class Duke {
 
     private TextUI ui;
@@ -27,11 +31,15 @@ public class Duke {
         new Duke().run();
     }
 
+    /** Runs the program until termination */
     public void run() {
         start();
         runCommandLoopUntilExit();
     }
 
+    /**
+     * Sets up the required objects, loads up the data from the storage file, and prints the welcome message.
+     */
     private void start() {
         this.ui = new TextUI();
         this.parser = new Parser();
@@ -42,6 +50,7 @@ public class Duke {
         storage.load(tasks);
     }
 
+    /** Reads the user command and executes it, until exit command is issued */
     private void runCommandLoopUntilExit() {
         int taskCounter = tasks.size();
         boolean isOn = true;

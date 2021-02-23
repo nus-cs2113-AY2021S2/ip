@@ -8,6 +8,7 @@ import java.util.List;
 
 public class TaskActions {
 
+    /** Prints all tasks */
     public void listTasks(List<Task> tasks) {
         int i = 0;
         if (tasks.size() == 0) {
@@ -22,6 +23,7 @@ public class TaskActions {
         }
     }
 
+    /** Marks specific task as done */
     public void markAsDone(List<Task> tasks, int index) throws EmptyListException, TaskDoneException {
         if (tasks.size() == 0) {
             throw new EmptyListException();
@@ -34,6 +36,7 @@ public class TaskActions {
         }
     }
 
+    /** Deletes specific task */
     public void deleteTask(List<Task> tasks, int index) {
         tasks.remove(index);
         System.out.println("\tDone! One less worry for you :)");
