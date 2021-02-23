@@ -1,14 +1,17 @@
 package duke;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import duke.task.*;
 
+/**
+ * Represents a list of tasks. A TaskList object corresponds to a list of tasks represented by 
+ * their type e.g. todo, deadline and event. 
+ */
 public class TaskList {
     public ArrayList<Task> tasks;
 
     /**
-     * If data found, create a lit with stored data. 
+     * Creates a list with the given data. 
      * 
      * @param tasks List containing all tasks retrieved form storage. 
      */
@@ -17,14 +20,14 @@ public class TaskList {
     }
 
     /**
-     * If Storage data not found, create an empty list. 
+     * Creates an empty list. 
      */
     public TaskList() {
         this.tasks = new ArrayList<Task>();
     }
 
     /**
-     * Check if list is empty.
+     * Checks if list is empty.
      * 
      * @return True if sizeOfTaskList is 0 and false if not.
      */
@@ -42,16 +45,30 @@ public class TaskList {
         return tasks.get(index);
     }
 
+    /**
+     * Gets the length of task list. 
+     * 
+     * @return Length of task list. 
+     */
     public int getSize() {
         return tasks.size();
     }
 
-    public void removeTask(int taskNumber) throws IOException{
+    /**
+     * Removes a task from the task list. 
+     * 
+     * @param taskNumber Number of the task in the task list to delete (starts with 1). 
+     */
+    public void removeTask(int taskNumber) {
         tasks.remove(taskNumber);
     }
 
-	public void addToTaskList(Task task) throws IOException{
+    /**
+     * Adds a task to the task list. 
+     * 
+     * @param task Task to add. 
+     */
+	public void addToTaskList(Task task) {
         tasks.add(task);
     }
-
 }

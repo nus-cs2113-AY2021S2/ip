@@ -1,10 +1,17 @@
 package duke.command;
 
+import java.io.IOException;
 import duke.Constants;
 import duke.error.ImportTaskException;
 import duke.error.InvalidSyntaxException;
 import duke.task.*;
+import duke.TaskList;
+import duke.Ui;
+import duke.Storage;
 
+/**
+ * Represents the add command. An AddCommand object corresponds to the add command input by the user. 
+ */
 public class AddCommand extends Command {
     private String taskDescription;
     private String taskDate;
@@ -16,68 +23,92 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Adds a new todo task to task list. If userCommand does not contain task
-     * description, throw invalid command syntax error.
-     * Used for user input commands. 
+     * Adds a new todo task to task list. 
+     * Save to storage and display success message. 
+     * Applies to user input commands. 
      * 
-     * @throws InvalidSyntaxException If userCommand is null.
+     * @throws InvalidSyntaxException If userCommand does not contain task description.  
      */
-    public Todo executeAddTodo() throws InvalidSyntaxException {
+    public void executeAddTodo(TaskList tasks, Ui ui, Storage storage) 
+            throws InvalidSyntaxException, IOException {
         if (taskDescription == null) {
             throw new InvalidSyntaxException(Constants.MESSAGE_TODO_SYNTAX);
-        } 
-        return new Todo(taskDescription);
+        }
+        tasks.addToTaskList(new Todo(taskDescription));
+        storage.saveToFile(tasks);
+        ui.displayAddTaskSuccessMessage(tasks);
     }
 
+    /**
+     * Retrieves and adds todo task from storage. 
+     * 
+     * @return A new instance of Todo task based on task description. 
+     * @throws ImportTaskException If the task description is invalid. 
+     */
     public Todo addTodoFromStorage() throws ImportTaskException {
         if (taskDescription == null) {
             throw new ImportTaskException();
         }
-
         return new Todo(taskDescription);
     }
 
     /**
-     * Adds a new deadline task to task list. Processes the user input to extract
-     * date. If date is not null, create new deadline task. Otherwise, throw invalid
-     * command syntax error.
+     * Adds a new deadline task to task list.
+     * Save to storage and display success message.
+     * Applies to user input commands. 
      * 
-     * @throws IllegalArgumentException If date is not found.
+     * @throws InvalidSyntaxException If date is not found.
      */
-    public Deadline executeAddDeadline() throws InvalidSyntaxException {
+    public void executeAddDeadline(TaskList tasks, Ui ui, Storage storage) 
+            throws InvalidSyntaxException, IOException {
         if (taskDescription == null | taskDate == null) {
             throw new InvalidSyntaxException(Constants.MESSAGE_DEADLINE_SYNTAX);
         }
-        return new Deadline(taskDescription, taskDate);
+        tasks.addToTaskList(new Deadline(taskDescription, taskDate));
+        storage.saveToFile(tasks);
+        ui.displayAddTaskSuccessMessage(tasks);
     }
 
+    /**
+     * Retrieves and adds deadline task from storage. 
+     * 
+     * @return A new instance of Deadline task based on task description. 
+     * @throws ImportTaskException If description or date is not found. 
+     */
     public Deadline addDeadlineFromStorage() throws ImportTaskException {
         if (taskDescription == null | taskDate == null) {
             throw new ImportTaskException();
         }
-
         return new Deadline(taskDescription, taskDate);
     }
 
     /**
-     * Adds a new deadline task to task list. 
-     * Processes the user input to exit. 
-     * If date is not null, create new deadline task.  
+     * Adds a new event task to task list. 
+     * Save to storage and display success message.
+     * Applies to user input commands.
      * 
-     * @throws IllegalArgumentException If date is not found.
+     * @throws InvalidSyntaxException If description or date is not found. 
      */
-    public Event executeAddEvent() throws InvalidSyntaxException {
+    public void executeAddEvent(TaskList tasks, Ui ui, Storage storage) 
+            throws InvalidSyntaxException, IOException {
         if (taskDescription == null | taskDate == null) {
             throw new InvalidSyntaxException(Constants.MESSAGE_EVENT_SYNTAX);
         }
-        return new Event(taskDescription, taskDate);
+        tasks.addToTaskList(new Event(taskDescription, taskDate));
+        storage.saveToFile(tasks);
+        ui.displayAddTaskSuccessMessage(tasks);
     }
 
+    /**
+     * Retrieves and adds deadline task from storage. 
+     * 
+     * @return A new instance of Event task based on task description. 
+     * @throws ImportTaskException If description or date is not found. 
+     */
     public Event addEventFromStorage() throws ImportTaskException {
         if (taskDescription == null | taskDate== null) {
             throw new ImportTaskException();
         }
-
         return new Event(taskDescription, taskDate);
     }
 }

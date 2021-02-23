@@ -3,15 +3,24 @@ package duke;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
-
 import duke.error.*;
 import duke.command.*;
 
+/**
+ * Represents an instance of the program. A Duke object refers to one run of the application. 
+ */
 public class Duke {
     private Storage storage;
     private Ui ui;
     private TaskList tasks;
 
+    /**
+     * Constructor for the Duke class. 
+     * Retrieves data from storage and add to task list. 
+     * If no is data found, display fil to import message and load an empty task list. 
+     * 
+     * @param filePath Location of the storage file. 
+     */
     public Duke (String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -25,6 +34,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the program. 
+     * Gets user input and parses command.
+     * Executes the program according to the command input.  
+     */
     public void run() {
         ui.displayWelcomeMessage();
         while (true) {
@@ -45,13 +59,15 @@ public class Duke {
                 ui.displayToUser(Constants.ERROR_EMPTY_LIST);
             } catch (InvalidSyntaxException exception) {
                 // If the syntax for the command is invalid
-                ui.displayToUser(Constants.ERROR_INVALID_SYNTAX_RECEIVED, exception.getMessage()); // add syntax message here
+                ui.displayToUser(Constants.ERROR_INVALID_SYNTAX_RECEIVED, exception.getMessage());
             } catch (IOException exception) { 
                 ui.displayToUser(Constants.ERROR_IO);
             } catch (NullPointerException exception) {
                 ui.displayToUser(Constants.ERROR_IO);
             } catch (DateTimeParseException exception) {
                 ui.displayToUser(Constants.ERROR_INVALID_DATE_RECEIVED);
+            } catch (NumberFormatException exception) {
+                ui.displayToUser(Constants.ERROR_INVALID_NUMBER);
             }
         }
     }
