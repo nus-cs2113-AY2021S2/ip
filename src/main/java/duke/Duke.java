@@ -14,7 +14,6 @@ public class Duke {
     private Ui ui;
     private TaskList taskList;
     private Parser parser;
-    private Object ByeCommand;
 
     public Duke() {
         storage = new Storage(FILEPATH);

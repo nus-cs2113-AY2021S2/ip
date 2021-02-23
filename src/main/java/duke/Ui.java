@@ -22,9 +22,11 @@ public class Ui {
     private static final String WRONG_DATE_FORMAT_MESSAGE = "Are you spasticated? The date format is wrong! It should be" +
             " like YY-DDDD-M or sumting like that...\nNo wait, its YYYY-MM-DD. I'm bare smart innit?";
     private static final String TOTAL_TASK_MESSAGE = "You is having %d task(s) on your list.";
-    private static final String SET_TO_DONE_MESSAGE = " set to done. You're well smart innit?";
+    private static final String SET_TO_DONE_MESSAGE = " set to done. You is well smart innit?";
     private static final String ADDED_TO_LIST_MESSAGE = "Wicked. This ting is now on da list.";
     private static final String DELETED_MESSAGE = "This ting has been deleted. I could've done that task, you stupid.";
+    private static final String FIND_MESSAGE = "Here are all the tings I cound find.";
+    private static final String NO_SEARCH_RESULTS = "Wait, I can't find anyting with that name on the list. Are you chatting rubbish?";
 
     public String getCommand() {
         Scanner in = new Scanner(System.in);
@@ -41,13 +43,15 @@ public class Ui {
         System.out.println(GOODBYE_MESSAGE);
         printBorderLine();
     }
+    /** Prints total number of tasks in the list. */
     public void printTotalTasks() {
         System.out.println(String.format(TOTAL_TASK_MESSAGE, Task.totalNumberOfTasks));
     }
-    /** Method used to print each item for "list" command */
+    /** Method used to print each item for "list" command. */
     public void printListItem(int index, String type, String status, String name, String date) {
         System.out.println(index + ". " + type + "[" + status + "] " + name + " " + date);
     }
+    /** Prints name of item that was set to done. */
     public void printMarkedDone(String name) {
         System.out.println(name + SET_TO_DONE_MESSAGE);
     }
@@ -62,6 +66,26 @@ public class Ui {
         printTotalTasks();
     }
 
+    /**
+     * Prints all items in the list that contains a substring in its name.
+     *
+     * @param substring substring to query.
+     * @param tasks ArrayList of tasks.
+     */
+    public void printFoundItems(String substring, ArrayList<Task> tasks) {
+        System.out.println(FIND_MESSAGE);
+        int foundCounter = 0;
+        for(int i = 0; i < Task.totalNumberOfTasks; i++) {
+            if (tasks.get(i).getName().contains(substring)) {
+                printDetailsOfTask(i, tasks);
+                foundCounter += 1;
+            }
+        }
+        if (foundCounter == 0) {
+            System.out.println(NO_SEARCH_RESULTS);
+        }
+        printBorderLine();
+    }
     /**
      * Prints the type, status, name and date of a given task.
      *
