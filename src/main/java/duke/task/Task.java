@@ -17,10 +17,6 @@ public class Task {
         return (isDone ? "[X] " : "[ ] ");
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public void markAsDone() {
         this.isDone = true;
     }
