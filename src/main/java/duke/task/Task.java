@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.time.LocalDateTime;
+
 public class Task {
 
     protected String description;
@@ -34,8 +36,8 @@ public class Task {
         return "Task";
     }
 
-    public String getDate() {
-        return "";
+    public LocalDateTime getDate() {
+        return null;
     }
 
     @Override
