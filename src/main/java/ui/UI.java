@@ -4,6 +4,9 @@ import task.list.TaskList;
 
 import java.util.ArrayList;
 
+/**
+ * Represents UI
+ */
 public class UI {
 
 
