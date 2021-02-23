@@ -182,9 +182,9 @@ public class Duke {
         case COMMAND_DELETE_WORD:
             deleteItem(commandArgs);
             return 1;
-        case COMMAND_FIND_WORD:
-            findKeyword(commandArgs);
-            return 1;
+        // case COMMAND_FIND_WORD:
+        //     findKeyword(commandArgs);
+        //     return 1;
         default:
             showError();
             return 1;
@@ -244,12 +244,12 @@ public class Duke {
     }
 
     // Find keyword function
-    public static void findKeyword(String keyword){
-        for(int i = 0; i < count; ++i){
-            if(lists.get(i).toString().contains(keyword)){
-                showToUser(lists.get(i).toString());
-            }
-        }
-    }
+    // public static void findKeyword(String keyword){
+    //     for(int i = 0; i < count; ++i){
+    //         if(lists.get(i).toString().contains(keyword)){
+    //             showToUser(lists.get(i).toString());
+    //         }
+    //     }
+    // }
     
 }
