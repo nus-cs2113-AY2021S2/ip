@@ -1,9 +1,9 @@
-package duke.Command;
+package duke.command;
 
-import duke.Input.InputData;
-import duke.Input.InputType;
-import duke.Record.Record;
-import duke.Exception.DukeException;
+import duke.input.InputData;
+import duke.input.InputType;
+import duke.record.Record;
+import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;

@@ -1,4 +1,4 @@
-package duke.Input;
+package duke.input;
 
 import java.util.Arrays;
 

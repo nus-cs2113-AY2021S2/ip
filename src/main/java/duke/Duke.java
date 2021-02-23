@@ -1,8 +1,8 @@
 package duke;
 
-import duke.Command.Command;
-import duke.Record.Record;
-import duke.Exception.DukeException;
+import duke.command.Command;
+import duke.record.Record;
+import duke.exception.DukeException;
 
 /**
  * This class is to build a personal assistant chatbot called "Happy"

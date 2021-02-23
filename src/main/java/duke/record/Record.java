@@ -1,8 +1,8 @@
-package duke.Record;
+package duke.record;
 
 import duke.Duke;
-import duke.Input.InputData;
-import duke.Input.InputType;
+import duke.input.InputData;
+import duke.input.InputType;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
