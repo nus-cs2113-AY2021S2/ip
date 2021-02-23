@@ -1,5 +1,7 @@
 package duke;
 
+import duke.task.Task;
+
 import java.io.File;
 import java.util.Random;
 import java.util.Scanner;
@@ -105,5 +107,21 @@ public class Ui {
 
     public void showDoneEmptyError() {
         System.out.print("That is not a valid command. Please enter a number after the word.\n");
+    }
+
+    public void showListSize(int size) {
+        System.out.print("There are " + size + " tasks in your list:\n");
+    }
+
+    public void printTask(int index, Task task) {
+        System.out.print(index+ "." + task + '\n');
+    }
+
+    public void showNoTasksFound(String keyword) {
+        System.out.print("There are no tasks with \"" + keyword +"\".\n");
+    }
+
+    public void showFindLoading(String keyword) {
+        System.out.print("Finding tasks with \"" + keyword +"\" in their description...\n");
     }
 }

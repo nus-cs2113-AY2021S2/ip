@@ -12,6 +12,7 @@ public class Parser {
     public String keyCommand;
     public String taskDescription;
     public String taskDate;
+    public String keyword;
     public int taskIndex;
 
     public void extractInfo(String fullLine) {
@@ -62,6 +63,9 @@ public class Parser {
             } catch (Exception e) {
                 ui.showError(e);
             }
+        case "find":
+            keyword = fullLine.replace("find", "").trim();
+            break;
         }
     }
 
@@ -93,8 +97,12 @@ public class Parser {
         case "delete":
             command = new DeleteCommand(taskIndex);
             break;
+        case "find":
+            command = new FindCommand(keyword);
+            break;
         case "bye":
             command = new ExitCommand();
+            break;
         }
         return command;
     }
