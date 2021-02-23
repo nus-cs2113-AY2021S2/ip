@@ -24,12 +24,14 @@ public class ProgramStrings {
     public static final String JOB_NUMBER_TOO_SMALL = "Enter a valid job number. Use the list command to view your current tasks.";
     public static final String JOB_NUMBER_TOO_BIG = "You don't have that many jobs! Use the list command to view your current tasks.";
     public static final String LIST_FULL_WARNING = "List is full!" +'\n'+"Use the \"list\" command to view your tasks." + '\n';
+    public static final String LIST_FULL_WARNING_2 = "Unable to add new tasks until some tasks are deleted." + '\n';
     public static final String NO_MATCH_WARNING = "No tasks match your search query:";
     public static final String INVALID_DATE_FORMAT_WARNING = "Invalid date/ wrong date format. " + DATE_FORMAT;
     
     /** Messages to prompt user. */
     public static final String PROMPT_ENTER_BYE_TO_EXIT = "To exit, enter \"bye\"";
     public static final String PROMPT_TASK_DONE = "Congrats! You've completed: \n   ";
+    public static final String PROMPT_TASK_ADDED = "Added to list: ";
     
     /** String constants for Parser. */
     public static final String INPUT_DATE_FORMAT = "d-M-yyyy";
