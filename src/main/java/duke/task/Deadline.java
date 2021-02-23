@@ -10,17 +10,17 @@ public class Deadline extends Task {
     // This value indicates the version of this class when doing serialization
     public static final long serialVersionUID = 2L;
 
-    protected DateTime by;
+    protected DateTime byDateTime;
 
     /**
      * Initialize the deadline task and set the typeIcon to 'D'
      * @param description Description of the task, cannot be empty
-     * @param by The date and time this task has to be done before
+     * @param byDateTime The date and time this task has to be done before
      * @throws InvalidInputException This is thrown if the task description is null or an empty string
      */
-    public Deadline(String description, DateTime by) throws InvalidInputException {
+    public Deadline(String description, DateTime byDateTime) throws InvalidInputException {
         super(description);
-        this.by = by;
+        this.byDateTime = byDateTime;
         typeIcon = "D";
     }
 
@@ -31,7 +31,7 @@ public class Deadline extends Task {
      */
     @Override
     public Boolean isSameDate(DateTime dateTime) {
-        return by.isSameDate(dateTime);
+        return byDateTime.isSameDate(dateTime);
     };
 
     /**
@@ -39,6 +39,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return super.toString() + String.format(" (by: %s)", by);
+        return super.toString() + String.format(" (by: %s)", byDateTime);
     }
 }

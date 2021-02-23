@@ -10,17 +10,17 @@ public class Event extends Task {
     // This value indicates the version of this class when doing serialization
     public static final long serialVersionUID = 2L;
 
-    protected DateTime at;
+    protected DateTime atDateTime;
 
     /**
      * Initialize the event task and set the typeIcon to 'E'
      * @param description Description of the task, cannot be empty
-     * @param at The date and time this event falls at
+     * @param atDateTime The date and time this event falls at
      * @throws InvalidInputException This is thrown if the task description is null or an empty string
      */
-    public Event(String description, DateTime at) throws InvalidInputException {
+    public Event(String description, DateTime atDateTime) throws InvalidInputException {
         super(description);
-        this.at = at;
+        this.atDateTime = atDateTime;
         typeIcon = "E";
     }
 
@@ -31,7 +31,7 @@ public class Event extends Task {
      */
     @Override
     public Boolean isSameDate(DateTime dateTime) {
-        return at.isSameDate(dateTime);
+        return atDateTime.isSameDate(dateTime);
     };
 
     /**
@@ -39,6 +39,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return super.toString() + String.format(" (at: %s)", at);
+        return super.toString() + String.format(" (at: %s)", atDateTime);
     }
 }

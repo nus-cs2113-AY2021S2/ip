@@ -80,9 +80,8 @@ public class Parser {
         }
 
         // Store the last k-v pair
-        if (!values.isEmpty()) {
-            arguments.put(key, String.join(DELIMITER, values));
-        }
+        // Store even when `values` is empty, as that indicates an empty string
+        arguments.put(key, String.join(DELIMITER, values));
 
         // Initialize a respective class from the command (by capitalize first character)
         String className = tokens[0] + "Command";
