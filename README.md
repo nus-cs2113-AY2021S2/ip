@@ -24,3 +24,14 @@ Prerequisites: JDK 11, update IntelliJ to the most recent version.
    | |_| | |_| |   <  __/
    |____/ \__,_|_|\_\___|
    ```
+#### How to use it
+
+It has the function of save and read users activities including event activity, deadline activity and todo activity.
+You can start by typing:
+ **list** to view **The list of activities**
+ **event xxx** to add **A new event**
+ **deadline xxx /by** to add **A new deadline**
+ **todo xxx /at** to add **A new todo**
+ **delete xxx** to delete **An activity**
+ **done xxx** to mark **One activity as done**
+ **bye** to end **The system**
