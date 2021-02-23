@@ -112,7 +112,7 @@ public class Ui {
         printBorderLine();
     }
     /**
-     * Prints appropriate error message according to error type.
+     * Prints appropriate error message according to the error type.
      *
      * @param type type of error thrown.
      */
