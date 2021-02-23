@@ -68,7 +68,7 @@ public class Parser {
     }
 
     /**
-     * (Overload of parseDescription method)
+     * (Overload of {@code parseDescription} method)
      * Parse the description of a task from the user input string.
      * Delimiter is used to mark the end of task description in the user input, applicable for commands which have
      * further fields.
@@ -113,7 +113,7 @@ public class Parser {
 
     /**
      * Parse time/date from user input.
-     * Reformats date entered as "d-M-yyyy" into "dd MMMM, yyyy".
+     * Reformats date entered as {@code d-M-yyyy} into {@code dd MMMM, yyyy}.
      * 
      * @param input full user input string
      * @param delimiter string sequence marking the start of the date/time field
@@ -141,8 +141,8 @@ public class Parser {
     }
 
     /**
-     * Reformats given date string to a different format (OUTPUT_DATE_FORMAT).
-     * Date string is valid only if it follows specified format (INPUT_DATE_FORMAT)
+     * Reformats given date string to a different format: {@code OUTPUT_DATE_FORMAT}.
+     * Date string is valid only if it follows specified format: {@code INPUT_DATE_FORMAT}.
      * 
      * @param string date string from parsed from user input
      * @return reformatted date string
