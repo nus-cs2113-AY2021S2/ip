@@ -27,6 +27,19 @@ public class TaskList {
         task.markAsDone(true);
     }
 
+    public TaskList find(String keyword) {
+        TaskList matchedTasks = new TaskList();
+
+        for (Task task : tasks) {
+            String lowercaseTaskDescription = task.getDescription().toLowerCase();
+            if (lowercaseTaskDescription.contains(keyword)) {
+                matchedTasks.add(task);
+            }
+        }
+
+        return matchedTasks;
+    }
+
     public ArrayList<Task> getTasks() {
         return tasks;
     }
