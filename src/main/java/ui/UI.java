@@ -99,16 +99,39 @@ public class UI {
 
     // prints help message
     public static void printHelp() {
-        String help = "           help           :prints list of all commands" + System.lineSeparator()
-                + "           list           :prints all lists ordered by category" + System.lineSeparator()
-                + "           exit           :shuts down Arthur" + System.lineSeparator()
-                + "       todo <task>        :add task to To Do list" + System.lineSeparator()
-                + "   event <task> /<time>   :add task to Event List with time" + System.lineSeparator()
-                + "   deadline <task /<by>   :add task to Deadline List" + System.lineSeparator()
-                + "       done  <index>      :mark task <index> as done in List" + System.lineSeparator();
+        String help = "               help                :prints list of all commands" + System.lineSeparator()
+                + "               list                :prints all lists ordered by category" + System.lineSeparator()
+                + "               exit                :shuts down Arthur" + System.lineSeparator()
+                + "            todo <task>            :add task to To Do list" + System.lineSeparator()
+                + "  event <task> // yyyy/MM/dd HHmm  :add task to Event List with time" + System.lineSeparator()
+                + " deadline <task // yyyy/MM/dd HHmm :add task to Deadline List" + System.lineSeparator()
+                + "            done  <index>          :mark task <index> as done in List" + System.lineSeparator()
+                + "            delete  <index>        :delete task <index> in List" + System.lineSeparator()
+                + "            find  <task>           :mark task <index> as done in List" + System.lineSeparator()
+                + "         search yyyy/MM/dd         :add task to Deadline List" + System.lineSeparator();
 
         System.out.println(help);
         printDottedLines();
+    }
+
+    // Prompts the user to input date for new task
+    public static void printInsertCorrectDateTask() {
+        System.out.println("Please re-enter date in this format yyyy/MM/dd HHmm");
+    }
+
+    // Prompts the user to input date for search command
+    public static void printInsertCorrectDateSearch() {
+        System.out.println("Please re-enter date in this format yyyy/MM/dd:");
+    }
+
+    // Prints search command has been completed
+    public static void printSearchComplete(){
+        System.out.println("Search has been completed!! (￣^￣)ゞ");
+    }
+
+    // Prints no match found
+    public static void printNoMatchFound(){
+        System.out.println("No match found!! （／．＼）");
     }
 
     // prints list's title
@@ -178,6 +201,11 @@ public class UI {
     public static void printTraitor() {
         System.out.print("You are abandoning us!!! I trusted you!!!  (　ﾟдﾟ)" + System.lineSeparator());
         printDottedLines();
+    }
+
+    // notifies user when find is completed
+    public static void printFindComplete(){
+        System.out.println("Your search has been completed Crewmate! ( ´ ▽ ` )ﾉ");
     }
 
     // prints loading duke.txt when Duke is started

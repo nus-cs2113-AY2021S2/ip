@@ -1,8 +1,13 @@
 package task.list;
 
+
 /**
  * Represents a deadline
  */
+
+import duke.date.DukeDate;
+
+
 public class Deadline extends Todo {
     private static final String TASK_TITLE = "D";
     public static final int BY_INDEX = 1;
@@ -10,6 +15,7 @@ public class Deadline extends Todo {
     public static final String NO_BY = "No Deadline!! Hehe! :)";
     public static final String NEW_DEADLINE = "Aight Crewmate!! I've got a new deadline for you!!! (¬‿¬): ";
     public static final String BY_HEADER = "(by: ";
+    public static final int NUMBER_OF_ATTRIBUTES = 2;
     protected String by;
 
 
@@ -23,7 +29,7 @@ public class Deadline extends Todo {
 
     // gets description from the user input
     private String getDescription(String line) {
-        String[] description = line.split("/", 2);
+        String[] description = line.split("//", NUMBER_OF_ATTRIBUTES);
         return description[DESCRIPTION_INDEX].trim();
     }
 
@@ -34,12 +40,14 @@ public class Deadline extends Todo {
 
     // gets by from the user input
     public String getBy(String line) {
-        String[] lineWords = line.split("/", 2);
+        String[] lineWords = line.split("//", NUMBER_OF_ATTRIBUTES);
         String by;
         try {
             by = lineWords[BY_INDEX];
             if (by.equals("")) {
                 by = NO_BY;
+            } else {
+                by = DukeDate.reformatInput(by);
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             by = NO_BY;
@@ -62,7 +70,7 @@ public class Deadline extends Todo {
 
     @Override
     public String getTaskToPrintInFile() {
-        return ("deadline " + this.description + "/" + this.by + System.lineSeparator() + this.isDone
-                + System.lineSeparator());
+        return ("deadline " + this.description + "//" + DukeDate.reformatOutput(this.by) + System.lineSeparator()
+                + this.isDone + System.lineSeparator());
     }
 }

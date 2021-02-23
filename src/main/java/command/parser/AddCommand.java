@@ -18,9 +18,9 @@ public class AddCommand extends Command {
         Deadline newTask = new Deadline(description);
         tasks.add(newTask);
     }
-
+    
     // gets the task description from input line
-    private static String getTaskDescription(String line) {
+    public static String getTaskDescription(String line) {
         String[] commandWords = (line.split(" ", NUMBER_OF_COMMAND_ARGUMENTS));
         return commandWords[DESCRIPTION_INDEX_IN_COMMANDS];
     }

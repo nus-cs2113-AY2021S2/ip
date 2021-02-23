@@ -16,10 +16,15 @@ public class AmendListsCommands extends Command {
         String[] sentence = line.split(" ");
         if (sentence.length < NUMBER_OF_COMMAND_ARGUMENTS) {
             UI.printCommandDoesNotExist();
+            UI.printDottedLines();
+            return;
         }
         switch (sentence[COMMAND_KEYWORD_POSITION]) {
         case "done":
             CommandsHandler.handleMarkAsDone(tasks, sentence);
+            break;
+        case "find":
+            CommandsHandler.handleFind(line, tasks);
             break;
         case "todo": {
             AddCommand.addTaskInTodoList(line, tasks);
@@ -35,6 +40,10 @@ public class AmendListsCommands extends Command {
         }
         case "delete": {
             CommandsHandler.handleDelete(tasks, sentence);
+            break;
+        }
+        case "search": {
+            CommandsHandler.handleSearch(tasks, sentence);
             break;
         }
         default:
