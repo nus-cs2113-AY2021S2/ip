@@ -1,23 +1,23 @@
 package duke.task;
 
 public class Event extends Task {
-    protected String at;
+    protected String time;
 
-    public Event(String description, String at) {
+    public Event(String description, String time) {
         super(description);
-        this.at = at;
+        this.time = time;
     }
 
-    public String getAt() {
-        return at;
+    public String getTime() {
+        return time;
     }
 
-    public void setAt(String at) {
-        this.at = at;
+    public void setTime(String time) {
+        this.time = time;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at: " + time + ")";
     }
 }

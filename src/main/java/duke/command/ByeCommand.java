@@ -1,20 +1,22 @@
 package duke.command;
 
-import duke.Duke;
-import duke.ui.Menu;
-import duke.task.Task;
-
-import java.util.ArrayList;
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
 
 public class ByeCommand extends Command {
-
     public ByeCommand() {
         super(CommandType.BYE);
     }
 
     @Override
-    public void execute(ArrayList<Task> tasks) {
-        Duke.setIsRunning(false);
-        Menu.printBye();
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        ui.printBye();
+    }
+
+    @Override
+    public boolean isExit() {
+        return true;
     }
 }

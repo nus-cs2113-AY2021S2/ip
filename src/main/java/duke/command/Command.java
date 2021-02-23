@@ -1,9 +1,9 @@
 package duke.command;
 
 import duke.exception.DukeException;
-import duke.task.Task;
-
-import java.util.ArrayList;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
 
 public abstract class Command {
     protected CommandType commandType;
@@ -18,5 +18,7 @@ public abstract class Command {
         this.commandArgs = commandArgs;
     }
 
-    public abstract void execute(ArrayList<Task> tasks) throws DukeException;
+    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+
+    public abstract boolean isExit();
 }

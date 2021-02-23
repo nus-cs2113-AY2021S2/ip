@@ -1,8 +1,6 @@
 package duke.task;
 
-import duke.dao.TaskDaoImpl;
-
-import java.util.ArrayList;
+import duke.common.Messages;
 
 public abstract class Task {
     private String description;
@@ -11,14 +9,6 @@ public abstract class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public boolean isDone() {
@@ -30,17 +20,7 @@ public abstract class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "\u2718" : " ");
-    }
-
-    public static ArrayList<Task> loadAllTasks() {
-        TaskDaoImpl taskDao = new TaskDaoImpl();
-        return taskDao.loadAllTasks();
-    }
-
-    public static void saveAllTasks(ArrayList<Task> tasks) {
-        TaskDaoImpl taskDao = new TaskDaoImpl();
-        taskDao.saveAllTasks(tasks);
+        return (isDone ? Messages.ICON_DONE : " ");
     }
 
     @Override

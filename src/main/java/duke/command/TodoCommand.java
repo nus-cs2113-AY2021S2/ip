@@ -1,26 +1,32 @@
 package duke.command;
 
-import duke.ui.Menu;
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
 import duke.exception.MissingDescriptionException;
 import duke.task.Task;
 import duke.task.Todo;
 
-import java.util.ArrayList;
-
 public class TodoCommand extends Command {
-
     public TodoCommand(String commandArgs) {
         super(CommandType.TODO, commandArgs);
     }
 
     @Override
-    public void execute(ArrayList<Task> tasks) throws MissingDescriptionException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (commandArgs.length() == 0) {
             throw new MissingDescriptionException(commandType);
         }
         Task task = new Todo(commandArgs);
-        tasks.add(task);
-        Task.saveAllTasks(tasks);
-        Menu.printAddedTask(task);
+        tasks.addTask(task);
+        storage.save(tasks.getTasks());
+        ui.printAddedTask(task);
+        ui.printTotalTasks(tasks.getTasks());
+    }
+
+    @Override
+    public boolean isExit() {
+        return false;
     }
 }

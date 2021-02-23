@@ -1,34 +1,37 @@
 package duke.command;
 
+import duke.common.Messages;
+import duke.common.Utils;
+import duke.exception.DukeException;
 import duke.exception.InvalidTaskNumberException;
-import duke.parser.Parser;
-import duke.ui.Menu;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
 import duke.task.Task;
 
-import java.util.ArrayList;
-
 public class DoneCommand extends Command {
-
     public DoneCommand(String commandArgs) {
         super(CommandType.DONE, commandArgs);
     }
 
     @Override
-    public void execute(ArrayList<Task> tasks) throws InvalidTaskNumberException {
-        if (!Parser.isValidTaskNumber(tasks, commandArgs)) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        if (!Utils.isValidTaskNumber(tasks.getTasks(), commandArgs)) {
             throw new InvalidTaskNumberException(commandArgs);
         }
         int taskIndex = Integer.parseInt(commandArgs) - 1;
-        Task task = tasks.get(taskIndex);
+        Task task = tasks.getTaskByIndex(taskIndex);
         if (task.isDone()) {
-            Menu.printText("Task already marked as done!");
+            ui.printText(Messages.MESSAGE_TASK_ALREADY_MARKED);
             return;
         }
         task.setDone(true);
-        Task.saveAllTasks(tasks);
-        Menu.printText("Nice! I've marked this task as done:"
-                + System.lineSeparator()
-                + "\t"
-                + task);
+        storage.save(tasks.getTasks());
+        ui.printText(Messages.MESSAGE_TASK_MARKED + task);
+    }
+
+    @Override
+    public boolean isExit() {
+        return false;
     }
 }

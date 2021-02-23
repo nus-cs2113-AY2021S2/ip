@@ -3,35 +3,45 @@ package duke;
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.parser.Parser;
-import duke.task.Task;
-import duke.ui.Menu;
-
-import java.util.ArrayList;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
 
 public class Duke {
-    private static ArrayList<Task> tasks = Task.loadAllTasks();
-    private static boolean isRunning = true;
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
 
-    public static void main(String[] args) {
-        Menu.printGreeting();
-        while (isRunning) {
-            String userInput = Menu.readUserInput();
-            Menu.printLine();
-            try {
-                Command command = Parser.parseUserInput(userInput);
-                command.execute(tasks);
-            } catch (DukeException e) {
-                Menu.printError(e);
-            }
-            Menu.printLine();
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.printError(e);
+            tasks = new TaskList();
         }
     }
 
-    public static void setIsRunning(boolean isRunning) {
-        Duke.isRunning = isRunning;
+    public void run() {
+        ui.printGreeting();
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String userInput = ui.readUserInput();
+                ui.printLine();
+                Command command = Parser.parseUserInput(userInput);
+                command.execute(tasks, ui, storage);
+                isExit = command.isExit();
+            } catch (DukeException e) {
+                ui.printError(e);
+            } finally {
+                ui.printLine();
+            }
+        }
     }
 
-    public static int getTaskSize() {
-        return tasks.size();
+    public static void main(String[] args) {
+        new Duke("data/tasks.txt").run();
     }
 }

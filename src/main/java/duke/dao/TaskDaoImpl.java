@@ -1,5 +1,8 @@
 package duke.dao;
 
+import duke.common.Messages;
+import duke.exception.DukeException;
+import duke.exception.LoadingException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -15,10 +18,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TaskDaoImpl implements TaskDao {
-    private static Path taskDataPath = Paths.get(System.getProperty("user.dir"), "data", "task.txt");
-    private static File taskFile = new File(String.valueOf(taskDataPath));
+    private File taskFile;
 
-    public TaskDaoImpl() {
+    public TaskDaoImpl(String filePath) {
+        Path taskDataPath = Paths.get(System.getProperty("user.dir"), filePath);
+        taskFile = new File(String.valueOf(taskDataPath));
         try {
             taskFile.getParentFile().mkdirs();
             taskFile.createNewFile();
@@ -28,7 +32,7 @@ public class TaskDaoImpl implements TaskDao {
     }
 
     @Override
-    public ArrayList<Task> loadAllTasks() {
+    public ArrayList<Task> loadAllTasks() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
 
         try {
@@ -36,39 +40,33 @@ public class TaskDaoImpl implements TaskDao {
             while (sc.hasNext()) {
                 String line = sc.nextLine();
                 char taskType = line.charAt(1);
-                boolean isDone = (String.valueOf(line.charAt(4)).compareTo("\u2718") == 0) ? true : false;
+                boolean isDone = (String.valueOf(line.charAt(4)).compareTo(Messages.ICON_DONE) == 0) ? true : false;
                 String commandArgs = line.substring(7);
-                Task task;
 
+                Task task;
                 switch (taskType) {
                 case 'T':
                     task = new Todo(commandArgs);
-                    if (isDone) {
-                        task.setDone(true);
-                    }
+                    task.setDone(isDone);
                     tasks.add(task);
                     break;
                 case 'D':
                     String[] deadlineArgs = commandArgs.split("\\s+\\(by:\\s+", 2);
                     task = new Deadline(deadlineArgs[0], deadlineArgs[1].substring(0, deadlineArgs[1].length() - 1));
-                    if (isDone) {
-                        task.setDone(true);
-                    }
+                    task.setDone(isDone);
                     tasks.add(task);
                     break;
                 case 'E':
                     String[] eventArgs = commandArgs.split("\\s+\\(at:\\s+", 2);
                     task = new Event(eventArgs[0], eventArgs[1].substring(0, eventArgs[1].length() - 1));
-                    if (isDone) {
-                        task.setDone(true);
-                    }
+                    task.setDone(isDone);
                     tasks.add(task);
                     break;
                 default:
                 }
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            throw new LoadingException();
         }
 
         return tasks;
