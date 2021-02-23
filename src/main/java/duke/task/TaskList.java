@@ -3,11 +3,11 @@ package duke.task;
 import duke.exception.DescriptionFieldEmptyException;
 import duke.exception.MultipleTimeFieldsException;
 import duke.exception.TimeFieldEmptyException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 /**
@@ -51,10 +51,9 @@ public class TaskList {
      * @param command Index of task to be marked as done.
      */
     public void markTaskAsDone(String[] command) {
-        Task task;
         try {
             int doneTaskNumber = Integer.parseInt(command[1]);
-            task = tasks.get(doneTaskNumber - 1);
+            Task task = tasks.get(doneTaskNumber - 1);
             task.markAsDone();
             printDoneMessage(task);
         } catch (IndexOutOfBoundsException e) {
@@ -80,12 +79,17 @@ public class TaskList {
      * @param command User input for Deadline task description and time.
      */
     public void addDeadline(String[] command) {
-        String[] description;
         try {
-            description = command[1].split("/by", COMMAND_TASK_SEPARATOR);
+            String[] description = command[1].split("/by", COMMAND_TASK_SEPARATOR);
+            String[] splitDateAndTime = description[1].trim().split(" ");
+
             checkForValidDeadlineInput(description);
-            Deadline deadline = new Deadline(description[0].trim(), description[1].trim());
+            String formattedDateAndTime = checkForValidDateAndTime(
+                    splitDateAndTime[0], splitDateAndTime[1]);
+
+            Deadline deadline = new Deadline(description[0].trim(), formattedDateAndTime.trim());
             tasks.add(deadline);
+
             printAddedMessage(deadline);
         } catch (ArrayIndexOutOfBoundsException e) {
             printMissingFieldsMessage();
@@ -95,6 +99,8 @@ public class TaskList {
             printTimeFieldEmptyMessage();
         } catch (MultipleTimeFieldsException e) {
             printTooManyTimeFieldsMessage();
+        } catch (DateTimeParseException e) {
+            printInvalidDateAndTimeFormat();
         }
     }
 
@@ -104,12 +110,17 @@ public class TaskList {
      * @param command User input for Event task description and time.
      */
     public void addEvent(String[] command) {
-        String[] description;
         try {
-            description = command[1].split("/at", COMMAND_TASK_SEPARATOR);
+            String[] description = command[1].split("/at", COMMAND_TASK_SEPARATOR);
+            String[] splitDateAndTime = description[1].trim().split(" ");
+
             checkForValidEventInput(description);
-            Event event = new Event(description[0].trim(), description[1].trim());
+            String formattedDateAndTime = checkForValidDateAndTime(
+                    splitDateAndTime[0], splitDateAndTime[1]);
+
+            Event event = new Event(description[0].trim(), formattedDateAndTime.trim());
             tasks.add(event);
+
             printAddedMessage(event);
         } catch (ArrayIndexOutOfBoundsException e) {
             printMissingFieldsMessage();
@@ -119,6 +130,8 @@ public class TaskList {
             printTimeFieldEmptyMessage();
         } catch (MultipleTimeFieldsException e) {
             printTooManyTimeFieldsMessage();
+        } catch (DateTimeParseException e) {
+            printInvalidDateAndTimeFormat();
         }
     }
 
@@ -215,6 +228,17 @@ public class TaskList {
         }
     }
 
+    public String checkForValidDateAndTime(String date, String time) throws DateTimeParseException {
+        LocalDate taskDate = LocalDate.parse(date);
+        String formattedDate = taskDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+
+        LocalTime taskTime = LocalTime.parse(time);
+        String formattedTime = taskTime.format(DateTimeFormatter.ofPattern("hh:mm a"));
+
+        String formattedDateAndTime = formattedDate + ", " + formattedTime;
+        return formattedDateAndTime;
+    }
+
     public void printDescriptionFieldEmptyMessage() {
         System.out.println(" ERROR: the description field of a task cannot be empty :(");
     }
@@ -224,7 +248,7 @@ public class TaskList {
     }
 
     public void printMissingFieldsMessage() {
-        System.out.println(" ERROR: make sure that you've input a description and time field!");
+        System.out.println(" ERROR: make sure that you've input a description, day and time field!");
     }
 
     public void printTooManyTimeFieldsMessage() {
@@ -237,5 +261,9 @@ public class TaskList {
 
     public void printNotANumberMessage() {
         System.out.println(" ERROR: this is not a task number!");
+    }
+
+    public void printInvalidDateAndTimeFormat() {
+        System.out.println(" ERROR: Invalid date and time format :( Try again!");
     }
 }
