@@ -13,10 +13,6 @@ public abstract class Task {
         return (isDone ? "X" : " "); //return X if done else empty space
     }
 
-    public String getDescription() {
-        return description;
-    }
-
     public void markAsDone() {
         this.isDone = true;
     }

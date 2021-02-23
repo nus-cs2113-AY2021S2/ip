@@ -8,8 +8,6 @@ import common.Messages;
 import ui.TextUi;
 import storage.Storage;
 
-import java.sql.SQLOutput;
-
 public abstract class Command {
 
     public static final TaskManager taskManager = new TaskManager();
