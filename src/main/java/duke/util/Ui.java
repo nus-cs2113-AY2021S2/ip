@@ -1,12 +1,13 @@
 package duke.util;
 
+import java.io.InputStream;
 import java.util.Scanner;
 import duke.task.Task;
 import duke.task.TaskList;
 
 public class Ui {
     
-    public static Scanner scanner;
+    public final Scanner scanner;
     public static final String COMMANDS = 
             "Commands:\n"
             + "    todo taskName\n"
@@ -18,6 +19,14 @@ public class Ui {
             + "    help\n"
             + "    bye\n";
     
+    public Ui() {
+        this(System.in);
+    }
+
+    public Ui(InputStream in) {
+        this.scanner = new Scanner(in);
+    }
+
     public void displayWelcomeMessage() {
         String logo = "         __    _    _              ____        __           \n"
                 + "        / /_  (_)  (_)___ ___     / __ \\__  __/ /_____      \n"
@@ -40,17 +49,9 @@ public class Ui {
         printWithBorder(errorMessage);
 	}
 
-    public void openScanner() {
-        scanner = new Scanner(System.in);
-    }
-
     public String readLine() {
         String line = scanner.nextLine();
         return line;
-    }
-
-    public void closeScanner() {
-        scanner.close();
     }
 
     public void printHelpMessage() {

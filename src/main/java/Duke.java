@@ -28,7 +28,6 @@ public class Duke {
 
     public static void run() {
 	    boolean isExit = false;
-        ui.openScanner();
 	    while (!isExit) {
             String fullCommand = ui.readLine();
             Parser parser = new Parser(fullCommand);
@@ -40,6 +39,5 @@ public class Duke {
 	            ui.printErrorMessage(e);
 	        }
 	    }
-        ui.closeScanner();
 	}
 }
