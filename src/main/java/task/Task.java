@@ -1,13 +1,19 @@
 package task;
 
-import java.util.ArrayList;
-
 public class Task {
     protected String description;
     protected boolean isDone;
     public Task(String Description) {
         this.description = Description;
         this.isDone = false;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public boolean isDone() {
+        return isDone;
     }
 
     public String getStatusIcon() {

@@ -1,15 +1,18 @@
 import command.Command;
 import parser.Parser;
+import storage.Storage;
 import task.TaskManager;
 import ui.Ui;
 
 public class Duke {
     private Ui ui;
     private TaskManager taskList;
+    private Storage storage;
 
     public Duke(){
         ui = new Ui();
         taskList = new TaskManager();
+        storage = new Storage();
     }
 
     public void run() {
@@ -28,8 +31,7 @@ public class Duke {
 
     public static class Main {
         public static void main(String[] args) {
-            Duke dk = new Duke();
-            dk.run();
+            new Duke().run();
         }
     }
 }

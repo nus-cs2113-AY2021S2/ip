@@ -1,21 +1,35 @@
 package task;
 
-import task.Task;
+import storage.Storage;
 import ui.Ui;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class TaskManager {
-    public final ArrayList<Task> taskList;
+    public ArrayList<Task> taskList;
     private Ui ui;
+    private Storage storage;
 
     public TaskManager() {
-        taskList = new ArrayList<>();
+        storage = new Storage();
+        try {
+            taskList = storage.loadFile();
+        } catch (FileNotFoundException e) {
+            taskList = new ArrayList<>();
+        }
         ui = new Ui();
+
     }
 
     public void addTask(Task task) {
         taskList.add(task);
+        try {
+            storage.saveTaskListToFile(taskList);
+        }catch (IOException e){
+                ui.printMessage(e.getMessage());
+        }
         ui.printMessage("Got it I have added this task",
                 task.toString(),
                 ui.DIVIDER,
@@ -29,8 +43,6 @@ public class TaskManager {
                 ui.DIVIDER,
                 "Enter next command: ");
     }
-
-
 
     public int getNoOfTasks() {
         return taskList.size();
