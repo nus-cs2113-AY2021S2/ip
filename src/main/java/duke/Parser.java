@@ -12,16 +12,27 @@ import java.time.format.DateTimeParseException;
 public class Parser {
 
     public Ui ui = new Ui();
-    public String[] lineParts;
+    /** Main command to execute */
     public String keyCommand;
+    /** Description of the task to add*/
     public String taskDescription;
+    /** Keyword to find among the task list */
     public String keyword;
+    /** Date and time for deadlines and events */
     public LocalDateTime taskDate;
+    /** The task index to mark as done or delete */
     public int taskIndex;
     public String dateTimeFormat = "yyyy-MM-dd HH:mm";
     public DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateTimeFormat);
 
+    /**
+     * Extracts information from the full user input depending on what the main command is.
+     * The information is stored in class variables which can be utilised in the parse method.
+     *
+     * @param fullLine  Full input from user
+     */
     public void extractInfo(String fullLine) {
+        String[] lineParts;
         lineParts = fullLine.split(" ");
         keyCommand = lineParts[0];
         switch (keyCommand) {
@@ -75,6 +86,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns the command to execute based on the user input.
+     *
+     * @param fullLine Full input from user.
+     * @return Command to execute
+     */
     public Command parse(String fullLine) {
         Command command = new DefaultCommand(fullLine);
         extractInfo(fullLine);

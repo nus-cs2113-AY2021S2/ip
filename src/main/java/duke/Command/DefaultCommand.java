@@ -14,6 +14,5 @@ public class DefaultCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.mockEcho(input);
-        ui.showHint();
     }
 }

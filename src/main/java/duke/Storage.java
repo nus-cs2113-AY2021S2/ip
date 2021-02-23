@@ -17,6 +17,7 @@ public class Storage {
 
     public Ui ui = new Ui();
     public Path filePath;
+    /** String that is used to separate the line into the different details */
     private static final String FILE_SEPARATOR = "CHOPCHOP";
     public String dateTimeFormat = "yyyy-MM-dd HH:mm";
     public DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateTimeFormat);
@@ -25,6 +26,12 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Writes all the details of the tasks on the task list to a file.
+     *
+     * @param tasks  X coordinate of position.
+     * @throws IOException  If an error occurs while writing the data.
+     */
     public void writeToFile(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter(filePath.toString());
         for (Task t: tasks.tasks) {
@@ -39,6 +46,12 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Returns a task list with initial data (if any) extracted from a file.
+     *
+     * @return Task list
+     * @throws DukeException If there is no existing data and a new file is created.
+     */
     public TaskList loadFile() throws DukeException {
         TaskList tasks = new TaskList();
         try {

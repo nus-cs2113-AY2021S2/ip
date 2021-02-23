@@ -8,9 +8,8 @@ import java.util.Scanner;
 
 public class Ui {
 
-    private static final int SEPARATOR_LENGTH = 60;
-    private String input;
-    private Scanner in = new Scanner(System.in);
+    /** Number of dashes for the separator */
+    private static final int SEPARATOR_LENGTH = 80;
 
     public void showSeparator() {
         for(int i = 0; i < SEPARATOR_LENGTH; i++) {
@@ -47,6 +46,7 @@ public class Ui {
 
     /**
      * Echoes the user input with random upper and lower case for mockery.
+     * Shows the command the user may input for help after.
      *
      * @param line User input.
      */
@@ -60,6 +60,7 @@ public class Ui {
             }
         }
         System.out.print('\n');
+        showHint();
     }
 
     public void showError(Exception e) {
@@ -67,8 +68,8 @@ public class Ui {
     }
 
     public String readCommand() {
-        input = in.nextLine();
-        return input;
+        Scanner in = new Scanner(System.in);
+        return in.nextLine();
     }
 
     public void showHint() {

@@ -9,12 +9,18 @@ import duke.Command.Command;
 
 public class Duke {
 
-    private TaskList tasks;
+    private static TaskList tasks;
     private final Ui ui = new Ui();
+    /** Variables for the file-saving process */
     private final String home = System.getProperty("user.home");
     private final Path filePath = Paths.get(home, "Documents","duke.txt");
     private final Storage storage = new Storage(filePath);
 
+    /**
+     * Attempts to load data from an existing file into the task list.
+     * Otherwise, it will create a new file and task list.
+     *
+     */
     public Duke() {
         try {
             ui.showLoading();
@@ -25,6 +31,16 @@ public class Duke {
         }
     }
 
+    /**
+     * Main code to run.
+     * Reads user input.
+     * Parses the input.
+     * Execute the command.
+     * Loops until an exit command is given.
+     *
+     * Saves to a file after.
+     *
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
