@@ -1,4 +1,5 @@
 # Track-The-Mushroom User Guide
+
 By: `Lee Han Yong Andy` Since: `February 2021`
 
 ![logo](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1LaKa9rD5VVLnenXNNu_K41jslGmqFI6amA&usqp=CAU)
@@ -19,11 +20,12 @@ By: `Lee Han Yong Andy` Since: `February 2021`
     * [4. Frequently Asked Question (FAQ)](#4-faq)
     * [5. Command Summary](#5-command-summary)
 
-
 ## 1. Introduction 
+
 Track-The-Mushroom is a beginner-friendly console application to manage all your track.
 
 ## 2. Quick Start in Intellij
+
 Prerequisites: JDK 11, update Intellij to the most recent version.
 
 1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first)
@@ -44,7 +46,9 @@ Mushroom Tracker is here to serve you!
 ```
 
 ## 3. Features
+
 ### 3.1 Add a Todo task: `todo`
+
 This operation will add a Todo task to the task list.
 
 Format: `todo <Task Description>`
@@ -58,6 +62,7 @@ Got it. I've added this task:
 Now you have 1 tasks in the list.
 ```
 ### 3.2 Add a Deadline task: `deadline`
+
 This operation will add a Deadline task to the task list.
 
 Format: `deadline <Task Description> /by <yyyy/MM/dd>`
@@ -72,6 +77,7 @@ Now you have 2 tasks in the list.
 ```
 
 ### 3.3 Add an Event task: `Event`
+
 This operation will add an Event task to the task list.
 
 Format: `event <Task Description> /at <Date or Day>`
@@ -86,6 +92,7 @@ Now you have 3 tasks in the list.
 ```
 
 ### 3.4 List all the tasks: `list`
+
 This operation will list all the tasks found in the task list.
 
 Format: `list`
@@ -99,6 +106,7 @@ Below are all your task:
 ```
 
 ### 3.5 Complete a task: `done`
+
 This operation will mark the task as completed.
 
 Format: `done <Task Number>`
@@ -112,6 +120,7 @@ Nice! I've marked the task as done:
 ```
 
 ### 3.6 Delete a task: `delete`
+
 This operation will delete a task from the task list.
 
 Format: `delete <Task Number>`
@@ -126,6 +135,7 @@ Now you have 2 tasks in the list.
 ```
 
 ### 3.7 Search task by keyword: `find`
+
 This operation will search all the tasks with the keyword found in the task description.
 The keyword is case insensitive.
 
@@ -142,6 +152,7 @@ Search is complete!
 ```
 
 ### 3.8 Exit the program: `bye`
+
 This operation will exit the program.
 
 Format: `bye`
@@ -152,7 +163,9 @@ Goodbye! Hope to see you again soon!
 ```
 
 ### 3.9 Task Storage
+
 #### 3.9.1 Automatically load data from an existing file to the program.
+
 * Expected Outcome if successful:
 ```
 Loading file...
@@ -166,9 +179,11 @@ Loading file...
 Loading failed - Unable to detect file.
 ```
 #### 3.9.2 Automatically save the current task list to a file.
+
 * After entering `bye`, program will automatically store all the tasks into a task_logs.txt file.
 
 ## 4. FAQ
+
 **Q1**: Where is the task_logs.txt stored after I exit the program?
 
 > The file `task_logs.txt` is stored in the directory you ran the program in.
@@ -178,13 +193,14 @@ Loading failed - Unable to detect file.
 > No. The `task_logs.txt` will be automatically created for you if you do not have the file.
 
 ## 5. Command Summary
-| Command | Format & Example |
-| ------- | -------------- | 
-| todo | `todo <Task Description>` , `todo Grow Mushroom` |
-| deadline | `deadline <Task Description> /by <yyyy/MM/dd>` , `deadline Plant Mushroom /by 2020-02-25` |
-| event | `event <Task Description> /at <Date or Day>`      , `event Mushroom Concert /at Sunday` |
-| list | `list` , `list` |
-| done | `done <Task Number>` , `done 2` |
-| delete | `delete <Task Number>` , `delete 2` |
-| find | `find <KeywordD>` , `find mushroom` |
-| bye | `bye` , `bye` |
+
+Command | Format & Example |
+------- | -------------- | 
+todo | `todo <Task Description>` , `todo Grow Mushroom` |
+deadline | `deadline <Task Description> /by <yyyy/MM/dd>` , `deadline Plant Mushroom /by 2020-02-25` |
+event | `event <Task Description> /at <Date or Day>`      , `event Mushroom Concert /at Sunday` |
+list | `list` , `list` |
+done | `done <Task Number>` , `done 2` |
+delete | `delete <Task Number>` , `delete 2` |
+find | `find <KeywordD>` , `find mushroom` |
+bye | `bye` , `bye` |
