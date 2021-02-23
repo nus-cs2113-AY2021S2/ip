@@ -107,7 +107,7 @@ public class Ui {
     }
 
     public void showInvalidTaskIndex(int taskIndex) {
-        System.out.print(taskIndex + " is not a valid task index, please try again.\n");
+        System.out.print((taskIndex+1) + " is not a valid task index, please try again.\n");
     }
 
     public void showDoneEmptyError() {
