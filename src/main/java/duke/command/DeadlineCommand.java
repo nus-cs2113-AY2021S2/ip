@@ -11,7 +11,7 @@ import duke.ui.Ui;
 import duke.exception.MissingDescriptionException;
 import duke.task.Task;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
 public class DeadlineCommand extends Command {
@@ -26,7 +26,7 @@ public class DeadlineCommand extends Command {
         }
         String[] deadlineArgs = commandArgs.split("\\s+/by\\s+", 2);
 
-        LocalDate date = Utils.getDateFromUserInput(deadlineArgs[1]);
+        LocalDateTime date = Utils.getDateFromUserInput(deadlineArgs[1]);
         if (!Utils.isValidDeadline(date)) {
             throw new InvalidDeadlineException();
         }

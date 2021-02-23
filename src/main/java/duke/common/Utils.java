@@ -2,7 +2,6 @@ package duke.common;
 
 import duke.exception.InvalidDateFormatException;
 import duke.exception.InvalidDateTimeFormatException;
-import duke.exception.InvalidDeadlineException;
 import duke.task.Task;
 
 import java.time.LocalDate;
@@ -10,9 +9,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Utility methods
@@ -47,18 +43,18 @@ public class Utils {
         return true;
     }
 
-    public static LocalDate getDateFromUserInput(String userInput) throws InvalidDateFormatException {
+    public static LocalDateTime getDateFromUserInput(String userInput) throws InvalidDateFormatException {
         try {
             DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("d/M/yyyy");
-            LocalDate date = LocalDate.parse(userInput, dateTimeFormatter);
+            LocalDateTime date = LocalDate.parse(userInput, dateTimeFormatter).atStartOfDay();
             return date;
         } catch (DateTimeParseException e) {
             throw new InvalidDateFormatException();
         }
     }
 
-    public static boolean isValidDeadline(LocalDate date) {
-        if (date.isBefore(LocalDate.now())) {
+    public static boolean isValidDeadline(LocalDateTime date) {
+        if (date.toLocalDate().isBefore(LocalDateTime.now().toLocalDate())) {
             return false;
         }
         return true;

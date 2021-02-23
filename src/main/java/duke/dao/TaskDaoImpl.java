@@ -56,7 +56,7 @@ public class TaskDaoImpl implements TaskDao {
                 case 'D':
                     String[] deadlineArgs = commandArgs.split("\\s+\\(by:\\s+", 2);
                     String deadlineDate = deadlineArgs[1].substring(0, deadlineArgs[1].length() - 1);
-                    LocalDate date = LocalDate.parse(deadlineDate);
+                    LocalDateTime date = LocalDateTime.parse(deadlineDate);
                     task = new Deadline(deadlineArgs[0], date);
                     task.setDone(isDone);
                     tasks.add(task);

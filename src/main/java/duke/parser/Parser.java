@@ -2,6 +2,7 @@ package duke.parser;
 
 import duke.command.ByeCommand;
 import duke.command.Command;
+import duke.command.DateCommand;
 import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
@@ -45,6 +46,8 @@ public class Parser {
             return new EventCommand(commandArgs);
         case "delete":
             return new DeleteCommand(commandArgs);
+        case "date":
+            return new DateCommand(commandArgs);
         default:
             throw new UnknownCommandException();
         }
