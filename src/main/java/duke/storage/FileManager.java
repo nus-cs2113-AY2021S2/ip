@@ -117,7 +117,7 @@ public class FileManager {
             line += "D" + DELIM;
             line += (t.isDone() ? "1" : "0") + DELIM;
             line += t.getDescription() + DELIM;
-            line += ((Deadline) t).getBy();
+            line += ((Deadline) t).getDue();
         } else if (t instanceof Event) {
             line += "E" + DELIM;
             line += (t.isDone() ? "1" : "0") + DELIM;
