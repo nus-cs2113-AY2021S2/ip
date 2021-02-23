@@ -189,12 +189,9 @@ public class TaskList {
     }
 
     /**
-     * Checks for valid input for Deadline task.
+     * Finds task containing a keyword given by user.
      *
-     * @param input User input for Deadline task description and time.
-     * @throws DescriptionFieldEmptyException If description field of task is empty.
-     * @throws TimeFieldEmptyException If time field of task is empty.
-     * @throws MultipleTimeFieldsException If there are multiple time fields for task.
+     * @param command User input for keyword to search.
      */
     public void findTask(String[] command) {
         try {
@@ -207,6 +204,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Lists all tasks containing the keyword.
+     *
+     * @param command Keyword to search for.
+     * @param hasTask True if tasks with the keyword exists.
+     * @return If there exists at least one task containing keyword.
+     */
     public boolean listKeywordTasks(String command, boolean hasTask) {
         for (Task task: tasks) {
             String keyword = command.trim();
@@ -237,6 +241,14 @@ public class TaskList {
         System.out.println(" There are no tasks with that keyword!");
     }
 
+    /**
+     * Checks for valid input for Deadline task.
+     *
+     * @param input User input for Deadline task description and time.
+     * @throws DescriptionFieldEmptyException If description field of task is empty.
+     * @throws TimeFieldEmptyException If time field of task is empty.
+     * @throws MultipleTimeFieldsException If there are multiple time fields for task.
+     */
     public void checkForValidDeadlineInput(String[] input) throws DescriptionFieldEmptyException,
             TimeFieldEmptyException,
             MultipleTimeFieldsException {
