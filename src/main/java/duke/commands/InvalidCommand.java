@@ -2,6 +2,7 @@ package duke.commands;
 
 import duke.exception.InvalidCommandException;
 import duke.task.TaskList;
+import duke.util.Parser;
 import duke.util.Ui;
 
 public class InvalidCommand extends Command {
@@ -11,7 +12,7 @@ public class InvalidCommand extends Command {
     }
     
     @Override
-    public void execute(TaskList taskList, Ui ui) throws InvalidCommandException {
+    public void execute(TaskList taskList, Ui ui, Parser parser) throws InvalidCommandException {
         throw new InvalidCommandException(commandArg);
     }
 }

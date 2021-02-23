@@ -9,18 +9,20 @@ public class Duke {
     public static TaskList taskList;
     private static Storage storage;
     private static String home;
+    private static Parser parser;
 
     public Duke() {
         ui = new Ui();
         taskList = new TaskList();
         storage = new Storage(ui);
         home = System.getProperty("user.dir");
+        parser = new Parser();
     }
 
     public static void main(String[] args) {
         new Duke();
-        storage.loadHistory(home, taskList);
-        ui.displayWelcomeMessage();
+        storage.loadHistory(home, taskList, parser);
+        ui.displayWelcomeMessage(taskList, ui, parser);
         run();
         storage.saveHistory(home, taskList);
         ui.displayExitMessage();
@@ -30,10 +32,9 @@ public class Duke {
 	    boolean isExit = false;
 	    while (!isExit) {
             String fullCommand = ui.readLine();
-            Parser parser = new Parser(fullCommand);
-	        Command command = parser.getCommand();
+	        Command command = parser.getCommand(fullCommand);
 	        try {
-	            command.execute(taskList, ui);
+	            command.execute(taskList, ui, parser);
 	            isExit = command.isExit();
 	        } catch (Exception e) {
 	            ui.printErrorMessage(e);

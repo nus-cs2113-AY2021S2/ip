@@ -2,6 +2,7 @@ package duke.commands;
 
 import duke.task.TaskList;
 import duke.task.Todo;
+import duke.util.Parser;
 import duke.util.Ui;
 import duke.exception.EmptyCommandArgException;
 
@@ -12,7 +13,7 @@ public class TodoCommand extends Command {
     }
     
     @Override
-    public void execute(TaskList taskList, Ui ui) throws EmptyCommandArgException {
+    public void execute(TaskList taskList, Ui ui, Parser parser) throws EmptyCommandArgException {
         if (isEmptyArgument(commandArg)) {
             throw new EmptyCommandArgException("todo");
         }

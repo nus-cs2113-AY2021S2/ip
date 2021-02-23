@@ -3,22 +3,26 @@ package duke.exception;
 public class InvalidCommandTimeException extends Exception {
     private String errorMessage;
     private String commandType;
+    private String parseErrorMessage;
 
-    public InvalidCommandTimeException(String commandType) {
+    public InvalidCommandTimeException(String commandType, Exception e) {
         this.commandType = commandType;
+        this.parseErrorMessage = e.getLocalizedMessage();
     }
 
     public String getMessage() {
         String timeCommand = null;
         switch (this.commandType) {
         case "deadline":
-            timeCommand = "'/by'";
+            timeCommand = "/by";
             break;
         case "event":
-            timeCommand = "'/at'";
+            timeCommand = "/at";
             break;
         }
-        errorMessage = "ERROR!!! Command type of \'" + this.commandType + "\' must define a time using " + timeCommand + "! ):";
+        errorMessage = "Command type of \'" + this.commandType + "\' must define a time using:\n   "
+                + this.commandType + " taskName " + timeCommand + " dd/mm/yyyy hhmm\n"
+                + parseErrorMessage;
         return errorMessage;
     }
 }
