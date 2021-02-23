@@ -1,5 +1,8 @@
 package command.parser;
 
+/**
+ * Represents commands that the user will input
+ */
 public abstract class Command {
     public static final int NUMBER_OF_COMMAND_ARGUMENTS = 2;
     public static final int COMMAND_KEYWORD_POSITION = 0;

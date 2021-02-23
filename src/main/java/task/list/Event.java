@@ -1,5 +1,8 @@
 package task.list;
 
+/**
+ * Represents an Event
+ */
 public class Event extends Deadline {
     private static final String TASK_TITLE = "E";
     public static final int BY_INDEX = 1;
@@ -8,6 +11,7 @@ public class Event extends Deadline {
     public static final String BY_HEADER = "(by: ";
     public static final String NO_BY = "No Event time!! Noice!!! :)";
 
+    // creates an event
     public Event(String line) {
         super(line);
     }
