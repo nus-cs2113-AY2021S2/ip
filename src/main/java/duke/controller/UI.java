@@ -28,7 +28,7 @@ public class UI {
     private Storage store = new Storage();
 
     /**
-     * Creates UI.
+     * Creates UI object.
      */
     public UI() {};
 
@@ -66,6 +66,7 @@ public class UI {
 
     /**
      * Handles user input and provides the desired output for each command.
+     * If user does not input any task or date, returns an error message.
      * @param tasks Array list of tasks.
      */
     public void handleTasklist(ArrayList<Task> tasks) {

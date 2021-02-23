@@ -4,7 +4,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 
 /**
- * Represent a deadline class.
+ * Represents a deadline class. Deadline inherits task, in which the user can input and indicated by deadline TASKNAME /by dd-MM-yyyy HH:mm.
  */
 public class Deadline extends Task {
     /**
@@ -17,7 +17,7 @@ public class Deadline extends Task {
     protected LocalDateTime dateTime;
 
     /**
-     * Deadline constructor. Deadline is a task that the user can input.
+     * Creates an deadline task object to be added into the task list.
      * @param description Deadline description.
      * @param by Date and time which deadline is by.
      */
@@ -45,7 +45,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Prints description of deadline.
+     * Prints details of deadline.
      * @return Task type D, description, and date time.
      */
     public String printDescription() {

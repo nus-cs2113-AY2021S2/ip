@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Main duke class.
+ * Represents the main duke class.
  */
 public class Duke {
 
@@ -28,7 +28,7 @@ public class Duke {
     private ArrayList<Task> tasks = new ArrayList<Task>();
 
     /**
-     * Duke constructor.
+     * Creates a duke object.
      */
     public Duke() {}
 

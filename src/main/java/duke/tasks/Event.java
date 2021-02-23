@@ -4,7 +4,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 
 /**
- * Represents an event class.
+ * Represents an event class. Event inherits task, in which the user can input and indicated by event TASKNAME /at dd-MM-yyyy HH:mm.
  */
 public class Event extends Task {
     /**
@@ -17,7 +17,7 @@ public class Event extends Task {
     protected LocalDateTime dateTime;
 
     /**
-     * Event constructor. Event is a task that the user can input.
+     * Creates an Event task object to be added into the task list.
      * @param description Event task description.
      * @param at Date and time of event.
      */
@@ -45,7 +45,7 @@ public class Event extends Task {
     }
 
     /**
-     * Prints description of event.
+     * Prints details of event.
      * @return Task type E, description, and date time.
      */
     public String printDescription() {

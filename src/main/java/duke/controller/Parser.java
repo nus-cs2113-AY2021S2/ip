@@ -10,7 +10,7 @@ import java.time.format.DateTimeParseException;
 public class Parser {
 
     /**
-     * Sorts input of the user to obtain the task.
+     * Sorts input of the user to perform the specific commands.
      * @param input User input.
      * @return Command strings (list, done, bye, delete, save, date), and keyword and task processed from the input.
      */
@@ -88,7 +88,7 @@ public class Parser {
 
     /**
      * Extracts date from the user input for search by date.
-     * @param dateTime Date which the task is due.
+     * @param dateTime Date which the task is due as a string.
      * @return Date in which task is due.
      */
     public String extractDate(String dateTime) {
@@ -99,6 +99,7 @@ public class Parser {
 
     /**
      * Extracts date and time from user input.
+     * If no date and time present, returns a "missing" statement that will prompt an error message in the user interface.
      * @param input User input.
      * @return Date and time in which task is due.
      */
@@ -122,7 +123,7 @@ public class Parser {
     }
 
     /**
-     * Processese the date and time of input into DateTime format.
+     * Processes the date and time of input into DateTime format.
      * @param dateTime Date and time of task.
      * @return Date and time in DateTime format.
      * @throws DateTimeParseException
@@ -135,6 +136,7 @@ public class Parser {
 
     /**
      * Extracts keyword from user input for search task by keyword.
+     * If no keyword present, returns a "retry" statement that will prompt an error message in the user interface.
      * @param input User input.
      * @return Keyword.
      */

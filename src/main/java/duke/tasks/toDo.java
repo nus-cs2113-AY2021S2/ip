@@ -1,12 +1,12 @@
 package duke.tasks;
 
 /**
- * Represents a todo task.
+ * Represents a todo class. toDo inherits task, in which the user can input and indicated by todo TASKNAME.
  */
 public class toDo extends Task {
 
     /**
-     * toDo constructer.
+     * Creates todo task to be added into the task list.
      * @param description
      */
     public toDo(String description) {
@@ -14,7 +14,7 @@ public class toDo extends Task {
     }
 
     /**
-     * Prints Task description.
+     * Prints details of todo.
      * @return Task type T and description.
      */
     public String printDescription() {

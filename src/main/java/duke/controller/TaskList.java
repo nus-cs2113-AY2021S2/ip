@@ -9,12 +9,13 @@ import duke.tasks.Task;
 import duke.tasks.toDo;
 
 /**
- * Task list controller class that contains all methods such as save, load, print, adding, deleting, mark as done and find.
+ * Task list is a controller class that contains all methods such as
+ * save, load, print, adding, deleting, mark as done and find by keyword or date.
  */
 public class TaskList {
 
     /**
-     * Creates task list.
+     * Creates task list object.
      */
     public TaskList() {}
 
@@ -33,6 +34,8 @@ public class TaskList {
 
     /**
      * Marks the task as done based on the user specified number.
+     * If the user does not enter a task number, an error message will be displayed.
+     * If the user keys in a task number not in the list index, an error message will be displayed.
      * @param tasks Array list of tasks.
      * @param input User input.
      */
@@ -57,8 +60,10 @@ public class TaskList {
     }
 
     /**
-     * Deletes task that the user has indicated.
-      * @param tasks Array list of tasks.
+     * Deletes task based on the task number that the user has indicated.
+     * If the user does not enter a task number, an error message will be displayed.
+     * If the user keys in a task number not in the list index, an error message will be displayed.
+     * @param tasks Array list of tasks.
      * @param input User input.
      */
     public void deleteTask(ArrayList<Task> tasks, String input) {
@@ -84,6 +89,7 @@ public class TaskList {
 
     /**
      * Adds a todo task into the list.
+     * Displays a confirmation message with the task details and current number of tasks in the list.
      * @param tasks Array list of tasks.
      * @param description Task description.
      */
@@ -97,6 +103,7 @@ public class TaskList {
 
     /**
      * Adds a deadline task into the list.
+     * Displays a confirmation message with the task details and current number of tasks in the list.
      * @param tasks Array list of tasks.
      * @param description Task description.
      * @param date Date and time in which task is due.
@@ -115,6 +122,7 @@ public class TaskList {
 
     /**
      * Adds an event task into the list.
+     * Displays a confirmation message with the task details and current number of tasks in the list.
      * @param tasks Array list of tasks.
      * @param description Task description.
      * @param date Date and time in which task is due.
@@ -133,6 +141,7 @@ public class TaskList {
 
     /**
      * Finds and display tasks containing the keyword indicated by user.
+     * If the keyword not found in any tasks, returns an empty search.
      * @param tasks Array list of tasks.
      * @param keyword Keyword used for search.
      */
@@ -147,6 +156,7 @@ public class TaskList {
 
     /**
      * Finds and display tasks containing the date indicated by user.
+     * If the date is not found in any tasks, returns an empty search.
      * @param tasks Array list of tasks.
      * @param date Date used for search.
      */

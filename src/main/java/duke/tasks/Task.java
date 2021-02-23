@@ -1,7 +1,7 @@
 package duke.tasks;
 
 /**
- * Task class.
+ * Represents a Task class. A task can be indicated as an event, deadline or todo.
  */
 public class Task{
     /**
@@ -9,17 +9,12 @@ public class Task{
      */
     protected String description;
     /**
-     * Boolean expression for whether task is done.
+     * Boolean expression for whether task is done or not.
      */
     protected boolean isDone;
 
     /**
-     * Task constructor.
-     */
-    public Task() {}
-
-    /**
-     * Task constructor that represents task that the user can input. A task can be todo, event or deadline.
+     * Creates a Task object. that represents task that the user can input. A task can be todo, event or deadline.
      * @param description Task description.
      */
     public Task(String description) {
@@ -44,7 +39,7 @@ public class Task{
     }
 
     /**
-     * Marks task as done.
+     * Marks task as done and returns the boolean isDone as true.
      */
     public void markAsDone() {
         isDone = true;

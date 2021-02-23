@@ -19,6 +19,7 @@ public class Storage {
 
     /**
      * Saves the output task list into a txt file.
+     * If IOException occurs, returns an error message.
      * @param tasks Array list of tasks.
      */
     public void saveFile(ArrayList<Task> tasks) {
@@ -44,6 +45,7 @@ public class Storage {
 
     /**
      * Loads task list containing saved tasks from the txt file.
+     * If task list cannot be loaded, returns an error message and user is required to make a new list.
      * @return Task list.
      */
     public ArrayList<Task> printFileContents() {
