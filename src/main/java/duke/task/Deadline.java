@@ -28,13 +28,18 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns the formatted deadline task for display. 
+     * Formats the date according to the dateFormat provided.
+     * 
+     * @return Formatted date. 
      */
     @Override
     public String getTaskDate(String dateFormat) {
         return by.formatDateWithDelimeter(dateFormat);
     }
 
+    /**
+     * Returns the formatted deadline task for display. 
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + getTaskDate(Constants.DATE_FORMAT) + ")";

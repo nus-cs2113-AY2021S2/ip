@@ -28,13 +28,20 @@ public class Event extends Task {
     }
 
     /**
-     * Returns the formatted event task for display. 
+     * Formats the date according to the dateFormat provided.
+     * 
+     * @return Formatted date. 
      */
     @Override
     public String getTaskDate(String dateFormat) {
         return at.formatDateWithDelimeter(dateFormat);
     }
 
+    /**
+     * Returns the formatted event task for display. 
+     * 
+     * @return Formatted display string. 
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + getTaskDate(Constants.DATE_FORMAT) + ")";

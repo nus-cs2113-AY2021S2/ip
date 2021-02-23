@@ -39,7 +39,7 @@ public class Storage {
         while (fileScanner.hasNextLine()) {
             String[] extractedTaskParameters = fileScanner.nextLine().split(", ");
             Task importedTask = createTask(extractedTaskParameters);
-            importedTask.setTaskStatus(extractedTaskParameters[Constants.MARK_INDEX]);
+            importedTask.setTaskStatus();
             importedTasks.add(importedTask);
         }
         fileScanner.close();
