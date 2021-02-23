@@ -1,7 +1,6 @@
 package duke.commands;
 
 import duke.task.TaskList;
-import duke.util.Parser;
 import duke.util.Ui;
 
 public class ByeCommand extends Command {
@@ -11,7 +10,7 @@ public class ByeCommand extends Command {
     }
     
     @Override
-    public void execute(TaskList taskList, Ui ui, Parser parser) {
+    public void execute(TaskList taskList, Ui ui) {
         setExit(true);
     }
 }

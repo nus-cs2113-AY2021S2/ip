@@ -9,7 +9,7 @@ public class EmptyCommandArgException extends Exception {
     }
 
     public String getMessage() {
-        errorMessage = "Command type of '" + this.commandType + "' must have a description! ):";
+        errorMessage = "ERROR!!! Command type of '" + this.commandType + "' must have a description! ):";
         return errorMessage;
     }
     

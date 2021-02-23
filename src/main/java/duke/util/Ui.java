@@ -2,9 +2,6 @@ package duke.util;
 
 import java.io.InputStream;
 import java.util.Scanner;
-
-import duke.commands.Command;
-import duke.commands.ListCommand;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -14,8 +11,8 @@ public class Ui {
     public static final String COMMANDS = 
             "Commands:\n"
             + "    todo taskName\n"
-            + "    deadline deadlineName /by dd/mm/yyyy hhmm\n" 
-            + "    event eventName /at dd/mm/yyyy hhmm\n"
+            + "    deadline deadlineName /by time\n" 
+            + "    event eventName /at time\n"
             + "    list\n"
             + "    done taskNumber\n"
             + "    delete taskNumber\n"
@@ -30,7 +27,7 @@ public class Ui {
         this.scanner = new Scanner(in);
     }
 
-    public void displayWelcomeMessage(TaskList taskList, Ui ui, Parser parser) {
+    public void displayWelcomeMessage() {
         String logo = "         __    _    _              ____        __           \n"
                 + "        / /_  (_)  (_)___ ___     / __ \\__  __/ /_____      \n"
                 + "       / __ \\/ /  / / __ `__ \\   / / / / / / / //_/ _ \\     \n"
@@ -38,13 +35,7 @@ public class Ui {
                 + "     /_/ /_/_/  /_/_/ /_/ /_/  /_____/\\__,_/_/|_|\\___/     \n";
         System.out.print(logo + "\n");
         System.out.print("What do you have to do today?\n");
-        System.out.print(COMMANDS);
-        Command listCommand = new ListCommand();
-        try {
-            listCommand.execute(taskList, ui, parser);
-        } catch (Exception e) {
-            printErrorMessage(e);
-        }
+        System.out.print(COMMANDS + "\n");
     }
 
     public void printWithBorder(String line) {
@@ -77,7 +68,7 @@ public class Ui {
     }
 
     public void printErrorMessage(Exception e) {
-        String errorMessage = "There was an ERROR!\n" + e.getLocalizedMessage();
+        String errorMessage = "There was an ERROR!\n" + e.getMessage();
         printWithBorder(errorMessage);
 	}
 
