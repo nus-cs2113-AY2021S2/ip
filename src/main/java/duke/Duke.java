@@ -20,7 +20,7 @@ public class Duke {
      * Program runs until "bye" command
      * Duke.txt is saved again
      */
-    public static void duke() {
+    public static void main(String[] args) {
         storage = new Storage();
         list = new TaskList();
         ui = new Ui();
@@ -40,10 +40,6 @@ public class Duke {
         } catch (IOException e) {
             Ui.checkError("FILE_NOT_FOUND");
         }
-    }
-
-    public static void main(String[] args) {
-         duke();
     }
 
 }

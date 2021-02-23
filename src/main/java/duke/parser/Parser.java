@@ -1,5 +1,6 @@
 package duke.parser;
 
+import duke.error.WrongFormatException;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 import duke.commands.Commands;
@@ -36,10 +37,12 @@ public class Parser {
                 Commands.addEvent(input,list);
             } else if (input.toLowerCase().startsWith("delete")){
                 Commands.deleteTask(input,list);
+            } else if (input.toLowerCase().startsWith("find")){
+                Commands.findTask(input,list);
             } else {
                 Ui.checkError("INVALID_COMMAND");
             }
-        } catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException | WrongFormatException e) {
             Ui.checkError("LIST_FULL");
         }
     }

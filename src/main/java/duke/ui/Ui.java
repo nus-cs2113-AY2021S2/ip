@@ -92,6 +92,42 @@ public class Ui {
         Ui.printBorder();
     }
 
+    /**
+     * Prints Added Task
+     * @param index - Index of task in List
+     * @param list - ArrayList
+     */
+    public static void printAddedTask(int index, ArrayList<Task> list) {
+        Task t = list.get(index);
+        System.out.println("I have added [" + t.getType() + "]["
+            + t.getStatusIcon() + "] \""
+            + t.getName() + t.getDate() + "\"" + " to the List!");
+        Ui.printNoOfTask(list);
+    }
+
+    /**
+     * Prints task found that matches substring searchItem
+     * Returns NONEXISTENT_TASK_ERROR message if no such item found
+     * @param searchItem - item that is finding
+     * @param list - ArrayList
+     */
+    public static void printFindTask(String searchItem, ArrayList<Task> list) {
+        System.out.println("I have found the follow items: ");
+        int foundCounter = 0;
+        for(int i = 0; i < list.size(); i++) {
+            if(list.get(i).getName().contains(searchItem)) {
+                Task t = list.get(i);
+                System.out.println(foundCounter+1 + ". " + "[" + t.getType() + "]["
+                    + t.getStatusIcon() + "] \""
+                    + t.getName() + t.getDate() + "\"" );
+                foundCounter += 1;
+            }
+        }
+        if(foundCounter == 0 )  {
+            checkError("NONEXISTENT_TASK_ERROR");
+        }
+        printBorder();
+    }
 
     /**
      * Check Error Method
@@ -140,6 +176,9 @@ public class Ui {
                 System.out.println("¯\\_(ツ)_/¯ That is an invalid command!");
                 System.out.println("Enter \"HELP\" for commands!");
                 printBorder();
+                break;
+            case "NONEXISTENT_TASK_ERROR":
+                System.out.println("Error! No such task found!");
                 break;
             case "FILE_NOT_FOUND":
                 System.out.println("Duke.txt not found in directory. "

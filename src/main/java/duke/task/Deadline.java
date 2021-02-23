@@ -2,11 +2,11 @@ package duke.task;
 
 public class Deadline extends Task {
 
-    protected String by;
+    protected String deadlineTime;
 
     public Deadline(String description, String by) {
         super(description);
-        this.by = by;
+        this.deadlineTime = by;
     }
 
     @Override
@@ -16,11 +16,11 @@ public class Deadline extends Task {
 
     @Override
     public String getDate() {
-        return " (by: " + by + ")";
+        return " (by: " + deadlineTime + ")";
     }
 
     @Override
     public String outputData() {
-        return "[" + getStatusIcon() + "] " + "deadline " + getName() + " /by " + by;
+        return "[" + getStatusIcon() + "] " + "deadline " + getName() + " /by " + deadlineTime;
     }
 }
