@@ -2,7 +2,7 @@ package Duke.Task;
 
 public class TodoTask extends Task {
 
-    private static final String COMMAND_TODO_WORD = "event";
+    private static final String COMMAND_TODO_WORD = "todo";
 
     public TodoTask(String taskDetail) {
         super(taskDetail);

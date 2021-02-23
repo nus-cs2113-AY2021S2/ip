@@ -29,6 +29,7 @@ public class Duke {
     private static final String BYE = "Bye. Hope to see you again soon!";
     private static final String ERROR_MESSAGE = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
     private static final String FILE_LOCATION = "src/main/java/Duke/Duke.txt";
+    private static final String COMMAND_FIND_WORD = "find";
 
     // private static final String LEFTPAR = "[";
     // private static final String RIGHTPAR = "] ";
@@ -174,6 +175,9 @@ public class Duke {
         case COMMAND_DELETE_WORD:
             deleteItem(commandArgs);
             return 1;
+        case COMMAND_FIND_WORD:
+            findKeyword(commandArgs);
+            return 1;
         default:
             showError();
             return 1;
@@ -223,6 +227,14 @@ public class Duke {
     public static void checkError(String commandArgs){
         if (commandArgs.isEmpty()){
             showError();}
+    }
+
+    public static void findKeyword(String keyword){
+        for(int i = 0; i < count; ++i){
+            if(lists.get(i).toString().contains(keyword)){
+                showToUser(lists.get(i).toString());
+            }
+        }
     }
     
 }
