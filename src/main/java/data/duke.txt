@@ -1,3 +1,3 @@
-Todo~false~test todo function
-Deadline~false~test deadline function~today
-Event~false~test event function~tomorrow
+Todo~false~homework 1
+Deadline~false~assignment 1~09/03/1999 23:59
+Event~false~my birthday~09/03/1999 00:00
