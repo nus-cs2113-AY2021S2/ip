@@ -126,6 +126,10 @@ public class Ui {
     }
 
     public void showFindLoading(String keyword) {
-        System.out.print("Finding tasks with \"" + keyword +"\" in their description...\n");
+        System.out.print("Finding tasks with \"" + keyword + "\" in their description...\n");
+    }
+
+    public void showDateTimeHint(String dateTimeFormat) {
+        System.out.print("That is invalid. The date-time format should be: " + dateTimeFormat + "\n");
     }
 }
