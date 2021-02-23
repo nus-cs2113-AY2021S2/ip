@@ -5,15 +5,12 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import duke.exceptions.*;
-import duke.items.*;
 
 import static duke.main.Utils.createFile;
 import static duke.main.Utils.loadFile;
 
 public class Duke {
     public static void main(String[] args) {
-        Task[] list = new Task[100];
-        int taskInList = 0;
         Utils.welcomeMessage();
         Utils.printLine();
         try {

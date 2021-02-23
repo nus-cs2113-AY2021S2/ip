@@ -1,13 +1,13 @@
 package duke.items;
 
 import java.util.ArrayList;
-import duke.exceptions.InvalidIndexExceptions;
+import duke.exceptions.*;
 
 public class Task {
     private static int numOfTasks = 0;
     protected String description;
     protected boolean isDone;
-    protected static ArrayList<Task> list = new ArrayList<Task>();
+    protected static ArrayList<Task> list = new ArrayList<>();
 
 
     public static ArrayList getList(){
@@ -66,5 +66,5 @@ public class Task {
         return "T";
     }
     public boolean isDone() {return this.isDone;}
-    public void setDone() {this.isDone = true;};
+    public void setDone() {this.isDone = true;}
 }
