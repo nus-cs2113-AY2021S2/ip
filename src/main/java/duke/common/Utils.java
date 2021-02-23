@@ -1,8 +1,18 @@
 package duke.common;
 
+import duke.exception.InvalidDateFormatException;
+import duke.exception.InvalidDateTimeFormatException;
+import duke.exception.InvalidDeadlineException;
 import duke.task.Task;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Utility methods
@@ -32,6 +42,40 @@ public class Utils {
         } catch (NumberFormatException e){
             return false;
         } catch (IndexOutOfBoundsException e){
+            return false;
+        }
+        return true;
+    }
+
+    public static LocalDate getDateFromUserInput(String userInput) throws InvalidDateFormatException {
+        try {
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("d/M/yyyy");
+            LocalDate date = LocalDate.parse(userInput, dateTimeFormatter);
+            return date;
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateFormatException();
+        }
+    }
+
+    public static boolean isValidDeadline(LocalDate date) {
+        if (date.isBefore(LocalDate.now())) {
+            return false;
+        }
+        return true;
+    }
+
+    public static LocalDateTime getDateTimeFromUserInput(String userInput) throws InvalidDateTimeFormatException {
+        try {
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+            LocalDateTime dateTime = LocalDateTime.parse(userInput, dateTimeFormatter);
+            return dateTime;
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateTimeFormatException();
+        }
+    }
+
+    public static boolean isValidEvent(LocalDateTime dateTime) {
+        if (dateTime.isBefore(LocalDateTime.now())) {
             return false;
         }
         return true;

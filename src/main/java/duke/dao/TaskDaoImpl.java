@@ -3,6 +3,7 @@ package duke.dao;
 import duke.common.Messages;
 import duke.exception.DukeException;
 import duke.exception.LoadingException;
+import duke.parser.Parser;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -14,6 +15,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -52,13 +55,17 @@ public class TaskDaoImpl implements TaskDao {
                     break;
                 case 'D':
                     String[] deadlineArgs = commandArgs.split("\\s+\\(by:\\s+", 2);
-                    task = new Deadline(deadlineArgs[0], deadlineArgs[1].substring(0, deadlineArgs[1].length() - 1));
+                    String deadlineDate = deadlineArgs[1].substring(0, deadlineArgs[1].length() - 1);
+                    LocalDate date = LocalDate.parse(deadlineDate);
+                    task = new Deadline(deadlineArgs[0], date);
                     task.setDone(isDone);
                     tasks.add(task);
                     break;
                 case 'E':
                     String[] eventArgs = commandArgs.split("\\s+\\(at:\\s+", 2);
-                    task = new Event(eventArgs[0], eventArgs[1].substring(0, eventArgs[1].length() - 1));
+                    String eventDateTime = eventArgs[1].substring(0, eventArgs[1].length() - 1);
+                    LocalDateTime dateTime = LocalDateTime.parse(eventDateTime);
+                    task = new Event(eventArgs[0], dateTime);
                     task.setDone(isDone);
                     tasks.add(task);
                     break;
@@ -77,7 +84,7 @@ public class TaskDaoImpl implements TaskDao {
         try {
             FileWriter fw = new FileWriter(taskFile, false);
             for (Task task : tasks) {
-                fw.write(task.toString() + "\n");
+                fw.write(task.toFileOutput() + "\n");
             }
             fw.close();
         } catch (IOException e) {
