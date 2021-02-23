@@ -196,6 +196,47 @@ public class TaskList {
      * @throws TimeFieldEmptyException If time field of task is empty.
      * @throws MultipleTimeFieldsException If there are multiple time fields for task.
      */
+    public void findTask(String[] command) {
+        try {
+            boolean hasTask = false;
+            printMatchingTaskList();
+            hasTask = listKeywordTasks(command[1].trim(), hasTask);
+            keywordTaskListEmpty(hasTask);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            printFindTaskKeywordEmptyMessage();
+        }
+    }
+
+    public boolean listKeywordTasks(String command, boolean hasTask) {
+        for (Task task: tasks) {
+            String keyword = command.trim();
+            if (!task.getDescription().contains(keyword)) {
+                continue;
+            }
+            printFoundTaskMessage(task);
+            hasTask = true;
+        }
+        return hasTask;
+    }
+
+    public void printFoundTaskMessage(Task task) {
+        System.out.println(" " + (tasks.indexOf(task) + 1) + "." + task.toString());
+    }
+
+    private void keywordTaskListEmpty(boolean hasTask) {
+        if (!hasTask) {
+            printKeywordNotFoundMessage();
+        }
+    }
+
+    public void printMatchingTaskList() {
+        System.out.println(" Here are the matching tasks in your list:");
+    }
+
+    public void printKeywordNotFoundMessage() {
+        System.out.println(" There are no tasks with that keyword!");
+    }
+
     public void checkForValidDeadlineInput(String[] input) throws DescriptionFieldEmptyException,
             TimeFieldEmptyException,
             MultipleTimeFieldsException {
@@ -261,6 +302,10 @@ public class TaskList {
 
     public void printNotANumberMessage() {
         System.out.println(" ERROR: this is not a task number!");
+    }
+
+    public void printFindTaskKeywordEmptyMessage() {
+        System.out.println(" ERROR: please input a keyword to find!");
     }
 
     public void printInvalidDateAndTimeFormat() {
