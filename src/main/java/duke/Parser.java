@@ -6,6 +6,7 @@ import duke.command.DeadlineCommand;
 import duke.command.DoneCommand;
 import duke.command.EventCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
 
@@ -25,6 +26,8 @@ public class Parser {
             return new ListCommand();
         } else if (command.equals("done")) {
             return new DoneCommand(getIndexNumber(argument));
+        } else if (command.equals("find")) {
+            return new FindCommand(argument);
         } else if (command.equals("todo")) {
             return new TodoCommand(argument);
         } else if (command.equals("event")) {
