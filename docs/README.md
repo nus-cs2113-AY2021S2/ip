@@ -1,7 +1,9 @@
 # Da Ali G task helper
 By: `Xia Fuxi` Latest update: `24 Feb 2021`
+
 ![logo](./ali-g.png)
-- [Da Ali G task helper](#Da Ali G task helper)
+
+- [Da Ali G task helper](#da-ali-g-task-helper)
   * [1. Introduction](#1-introduction)
   * [2. Quick Start](#2-quick-start)
   * [3. Features](#3-features)
