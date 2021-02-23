@@ -31,7 +31,7 @@ public class FindCommand extends Command {
         if (counter == EMPTY) {
             throw new IllegalTaskException();
         } else if (counter > EMPTY) {
-            UI.printSearchComplete();
+            UI.printFindComplete();
         }
     }
 

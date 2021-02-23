@@ -50,4 +50,13 @@ public class CommandsHandler {
             UI.printCommandDoesNotExist();
         }
     }
+
+    // handles exceptions when searching for a task based on the date provided
+    public static void handleSearch(ArrayList<TaskList> tasks, String[] sentence) {
+        try {
+            SearchCommand.searchTasksDates(tasks, sentence);
+        } catch (IllegalCommandException e) {
+            UI.printCommandDoesNotExist();
+        }
+    }
 }

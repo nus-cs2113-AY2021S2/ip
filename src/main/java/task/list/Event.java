@@ -1,5 +1,7 @@
 package task.list;
 
+import duke.date.DukeDate;
+
 public class Event extends Deadline {
     private static final String TASK_TITLE = "E";
     public static final int BY_INDEX = 1;
@@ -14,12 +16,14 @@ public class Event extends Deadline {
 
     @Override
     public String getBy(String line) {
-        String[] lineWords = line.split("/", 2);
+        String[] lineWords = line.split("//", 2);
         String by;
         try {
             by = lineWords[BY_INDEX];
             if (by.equals("")) {
                 by = NO_BY;
+            } else {
+                by = DukeDate.reformatInput(by);
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             by = NO_BY;
@@ -41,7 +45,8 @@ public class Event extends Deadline {
     }
 
     public String getTaskToPrintInFile() {
-        return (COMMAND_HEADER + this.description + "/" + this.by + System.lineSeparator() + this.isDone +
+        return (COMMAND_HEADER + this.description + "//" + DukeDate.reformatOutput(this.by) + System.lineSeparator()
+                + this.isDone +
                 System.lineSeparator());
     }
 }
