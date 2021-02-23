@@ -178,13 +178,13 @@ Loading failed - Unable to detect file.
 > No. The `task_logs.txt` will be automatically created for you if you do not have the file.
 
 ## 5. Command Summary
-| Command | Format | Example |
-| ------- | ------- | ------- | 
-| todo | `todo <Task Description>` | `todo Grow Mushroom` |
-| deadline | `deadline <Task Description> /by <yyyy/MM/dd>` | `deadline Plant Mushroom /by 2020-02-25` |
-| event | `event <Task Description> /at <Date or Day>`      | `event Mushroom Concert /at Sunday` |
-| list | `list` | `list` |
-| done | `done <Task Number>` | `done 2` |
-| delete | `delete <Task Number>` | `delete 2` |
-| find | `find <KeywordD>` | `find mushroom` |
-| bye | `bye` | `bye` |
+| Command | Format & Example |
+| ------- | -------------- | 
+| todo | `todo <Task Description>` , `todo Grow Mushroom` |
+| deadline | `deadline <Task Description> /by <yyyy/MM/dd>` , `deadline Plant Mushroom /by 2020-02-25` |
+| event | `event <Task Description> /at <Date or Day>`      , `event Mushroom Concert /at Sunday` |
+| list | `list` , `list` |
+| done | `done <Task Number>` , `done 2` |
+| delete | `delete <Task Number>` , `delete 2` |
+| find | `find <KeywordD>` , `find mushroom` |
+| bye | `bye` , `bye` |
