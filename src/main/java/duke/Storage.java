@@ -17,7 +17,6 @@ public class Storage {
     public Storage(String filePath) {
         this.filePath = filePath;
     }
-
     /**
      * Loads tasks from saved text file. If file does not exist, create a file.
      *

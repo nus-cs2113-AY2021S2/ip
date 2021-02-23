@@ -46,7 +46,7 @@ public class DeleteCommand extends Command {
         if (line.length() < 8) {
             throw new EmptyNameFieldException();
         }
-        int index =checkValidDelete(line);
+        int index = checkValidDelete(line);
         if (index == INVALID_INDEX) {
             throw new IllegalAccessException();
         } else {
@@ -64,8 +64,8 @@ public class DeleteCommand extends Command {
      * @return index of item to mark as done if valid, -1 otherwise.
      */
     public int checkValidDelete(String line) {
-        if (line.substring(7).matches("[0-9]+")) {
-            int listNum = Integer.parseInt(line.substring(7));
+        if (line.substring(7).trim().matches("[0-9]+")) {
+            int listNum = Integer.parseInt(line.substring(7).trim());
             // Check for illegal access to out of bounds index
             if (listNum > Task.totalNumberOfTasks || listNum == 0) {
                 return INVALID_INDEX;

@@ -32,6 +32,7 @@ public class AddCommand extends Command {
         this.taskList = taskList;
         this.ui = ui;
     }
+
     @Override
     public void execute(Ui ui) {
         try {
@@ -69,7 +70,7 @@ public class AddCommand extends Command {
         }
     }
     /**
-     * Parses the type of task to add to list.
+     * Parses the type of task to add to list. Returns a constant integer representing type of task.
      *
      * @param line input from user.
      * @return Type of task to add if valid input, error otherwise.
@@ -88,7 +89,7 @@ public class AddCommand extends Command {
         throw new WrongFormatException();
     }
     /**
-     * Adds a task of type Todo into the list after checking validity of the input.
+     * Adds a task of type todo into the list after checking validity of the input.
      *
      * @param line user input.
      * @param tasks ArrayList containing all tasks.
@@ -151,7 +152,7 @@ public class AddCommand extends Command {
         }
         String nameAndDate = line.substring(8);
         String[] split = nameAndDate.split(" /by ");
-        String name = split[0].trim();
+        String name = split[0];
         String date = split[1];
         if (name.trim().length() == 0) {
             throw new EmptyNameFieldException();
@@ -161,6 +162,7 @@ public class AddCommand extends Command {
         }
         // Checks if date is of correct format
         LocalDate.parse(date);
+        // Removes any leading whitespace from name.
         split[0] = split[0].trim();
 
         return split;
@@ -212,6 +214,7 @@ public class AddCommand extends Command {
         }
         // Checks if date is of correct format
         LocalDate.parse(date);
+        // Removes any leading whitespace from name.
         split[0] = split[0].trim();
 
         return split;

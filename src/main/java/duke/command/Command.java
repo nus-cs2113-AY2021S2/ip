@@ -7,6 +7,6 @@ public abstract class Command {
 
     protected Ui ui;
 
-    // To be overriden
+    /** To be overriden. Executes command. */
     public abstract void execute(Ui ui);
 }

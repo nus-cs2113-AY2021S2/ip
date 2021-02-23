@@ -39,6 +39,7 @@ public class Ui {
     public void printBorderLine() {
         System.out.println(BORDER_LINE);
     }
+    /** Prints goodbye message after user inputs "bye". */
     public void sayGoodbye() {
         System.out.println(GOODBYE_MESSAGE);
         printBorderLine();
@@ -90,12 +91,20 @@ public class Ui {
      * Prints the type, status, name and date of a given task.
      *
      * @param index index of task to query.
-     * @param tasks ArrayList containing all tasks.s
+     * @param tasks ArrayList containing all tasks.
      */
     public void printDetailsOfTask(int index, ArrayList<Task> tasks) {
         Task task = tasks.get(index);
         System.out.println(task.getType() + "[" + task.getStatusIcon() + "] " + task.getName() + " " + task.getDate());
     }
+
+    /**
+     * Prints message sequence after a task has been added to list.
+     * Message includes details of task added and total number of tasks.
+     *
+     * @param current index of the most recent addition to the list.
+     * @param tasks ArrayList of tasks.
+     */
     public void printAddedToList(int current, ArrayList<Task> tasks) {
         System.out.println(ADDED_TO_LIST_MESSAGE);
         printDetailsOfTask(current, tasks);

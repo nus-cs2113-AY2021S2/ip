@@ -7,7 +7,6 @@ import java.io.*;
 
 public class Duke {
 
-
     private static final String FILEPATH = "tasklogs/tasks.txt";
 
     private Storage storage;
@@ -26,6 +25,7 @@ public class Duke {
             System.out.println("IO error.");
         }
     }
+
     public void run() {
         try {
             ui.printGreeting();
@@ -43,7 +43,6 @@ public class Duke {
             System.out.println("IO error.");
         }
     }
-
     public static void main(String[] args) {
         new Duke().run();
     }

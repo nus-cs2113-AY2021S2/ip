@@ -30,10 +30,25 @@ public class FindCommand extends Command {
         }
     }
 
+    /**
+     * Searches the list for tasks containing a substring given by the user and prints the tasks found.
+     *
+     * @param line  user input.
+     * @param tasks ArrayList of tasks.
+     * @throws EmptyNameFieldException if name is not given or is all whitespace.
+     */
     public void findItems(String line, ArrayList<Task> tasks) throws EmptyNameFieldException {
         String searchName = extractSearchName(line);
         this.ui.printFoundItems(searchName, tasks);
     }
+
+    /**
+     * Extracts the substring user wants to search from the entire input.
+     *
+     * @param line user input.
+     * @return substring to search.
+     * @throws EmptyNameFieldException if name is not given or is all whitespce.
+     */
     public String extractSearchName(String line) throws EmptyNameFieldException {
         String searchName = line.substring(4).trim();
         if (searchName.length() == 0) {

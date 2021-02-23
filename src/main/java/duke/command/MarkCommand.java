@@ -64,8 +64,8 @@ public class MarkCommand extends Command {
      * @return index of item to mark as done if valid, -1 otherwise.
      */
     public static int checkValidDone(String line) {
-        if (line.substring(5).matches("[0-9]+")) {
-            int listNum = Integer.parseInt(line.substring(5));
+        if (line.substring(5).trim().matches("[0-9]+")) {
+            int listNum = Integer.parseInt(line.substring(5).trim());
             // Check for illegal access to out of bounds index
             if (listNum > Task.totalNumberOfTasks || listNum == 0) {
                 return INVALID_INDEX;
