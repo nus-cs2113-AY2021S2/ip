@@ -2,6 +2,7 @@ package parser;
 
 import common.Constants;
 import common.Messages;
+import exceptions.NoResultException;
 import ui.TextUi;
 import commands.*;
 import exceptions.EmptyDescriptionException;
@@ -90,6 +91,14 @@ public class Parser {
                 System.out.println(messages.MESSAGE_INVALID_COMMAND_DELETE);
             } catch (NullPointerException e) {
                 System.out.println(messages.MESSAGE_INVALID_NUMBER_DELETE);
+            }
+        } else if (commandType.equals(constants.COMMAND_FIND_WORD)) {
+            try {
+                new Find().execute(commandArgs);
+            } catch (EmptyDescriptionException e) {
+                System.out.println(messages.MESSAGE_KEYWORD_EMPTY_FIND);
+            } catch (NoResultException e) {
+                System.out.println(messages.MESSAGE_KEYWORD_INVALID_FIND);
             }
         } else if (commandType.equals(constants.COMMAND_HELP_WORD)) {
             new Help().execute();

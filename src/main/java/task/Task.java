@@ -24,4 +24,8 @@ public abstract class Task {
     public String saveToFile() {
         return null;
     }
+
+    public String getDescription() {
+        return description;
+    }
 }

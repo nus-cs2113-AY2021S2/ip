@@ -23,4 +23,7 @@ public class Messages {
     public static final String MESSAGE_TASK_DONE = "Nice! I've marked this task as done:";
     public static final String MESSAGE_TASK_REMOVED = "Noted. I've removed this task:";
     public static final String MESSAGE_INVALID_FILE_LINE_INPUT = "Invalid line in file. Check save file to make sure correct format.";
+    public static final String MESSAGE_SHOW_MATCHING_LIST = "Here are the matching tasks in your list:";
+    public static final String MESSAGE_KEYWORD_EMPTY_FIND = "The keyword cannot be empty.";
+    public static final String MESSAGE_KEYWORD_INVALID_FIND = "No matching tasks found.";
 }
