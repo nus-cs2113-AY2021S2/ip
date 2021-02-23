@@ -10,6 +10,9 @@ import ui.UI;
 
 import java.util.ArrayList;
 
+/**
+ * Represents the search command
+ */
 public class SearchCommand extends Command {
 
     // search events and dates that matches date input in search command
