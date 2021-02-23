@@ -9,13 +9,17 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class Storage {
 
+    public Ui ui = new Ui();
     public Path filePath;
     private static final String FILE_SEPARATOR = "CHOPCHOP";
+    public String dateTimeFormat = "yyyy-MM-dd HH:mm";
+    public DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateTimeFormat);
 
     public Storage(Path filePath) {
         this.filePath = filePath;
@@ -29,7 +33,7 @@ public class Storage {
                         + t.getDescription() + "\n");
             } else {
                 fw.write(t.getTaskType() + FILE_SEPARATOR + t.getDone() + FILE_SEPARATOR
-                        + t.getDescription() + FILE_SEPARATOR  + t.getDate() + "\n");
+                        + t.getDescription() + FILE_SEPARATOR  + t.getDate().format(formatter) + "\n");
             }
         }
         fw.close();
@@ -48,19 +52,21 @@ public class Storage {
                         tasks.addTodo(new Todo(lineParts[2], Boolean.parseBoolean(lineParts[1])));
                         break;
                     case "Deadline":
-                        tasks.addDeadline(new Deadline(lineParts[2], lineParts[3], Boolean.parseBoolean(lineParts[1])));
+                        tasks.addDeadline(new Deadline(lineParts[2], LocalDateTime.parse(lineParts[3], formatter),
+                                Boolean.parseBoolean(lineParts[1])));
                         break;
                     case "Event":
-                        tasks.addEvent(new Event(lineParts[2], lineParts[3], Boolean.parseBoolean(lineParts[1])));
+                        tasks.addEvent(new Event(lineParts[2], LocalDateTime.parse(lineParts[3], formatter),
+                                Boolean.parseBoolean(lineParts[1])));
                         break;
                     }
                 }
+                ui.showLoadingSuccess();
             } else {
                 throw new DukeException();
             }
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
+        } catch (Exception e) {
+            ui.showError(e);
         }
         return tasks;
     }

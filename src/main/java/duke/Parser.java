@@ -1,9 +1,20 @@
 package duke;
 
-import duke.Command.*;
+import duke.Command.AddCommand;
+import duke.Command.Command;
+import duke.Command.DefaultCommand;
+import duke.Command.DeleteCommand;
+import duke.Command.DoneCommand;
+import duke.Command.ExitCommand;
+import duke.Command.HelpCommand;
+import duke.Command.ListCommand;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Parser {
 
@@ -11,8 +22,10 @@ public class Parser {
     public String[] lineParts;
     public String keyCommand;
     public String taskDescription;
-    public String taskDate;
+    public LocalDateTime taskDate;
     public int taskIndex;
+    public String dateTimeFormat = "yyyy-MM-dd HH:mm";
+    public DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateTimeFormat);
 
     public void extractInfo(String fullLine) {
         lineParts = fullLine.split(" ");
@@ -26,22 +39,22 @@ public class Parser {
                 int byIndex = fullLine.indexOf("/by");
                 // takes the description from the start of the description to where /by is
                 taskDescription = fullLine.substring(9, byIndex);
-                taskDate = fullLine.substring(byIndex + 4);
+                taskDate = LocalDateTime.parse(fullLine.substring(byIndex + 4), formatter);
             } catch (IndexOutOfBoundsException e) {
                 ui.showDeadlineByError();
-            } catch (Exception e) {
-                ui.showError(e);
+            } catch (DateTimeParseException e) {
+                ui.showDateTimeHint(dateTimeFormat);
             }
             break;
         case "event":
             try {
                 int atIndex = fullLine.indexOf("/at");
                 taskDescription = fullLine.substring(6, atIndex);
-                taskDate = fullLine.substring(atIndex + 4);
+                taskDate = LocalDateTime.parse(fullLine.substring(atIndex + 4), formatter);
             } catch (IndexOutOfBoundsException e) {
                 ui.showEventAtError();
-            } catch (Exception e) {
-                ui.showError(e);
+            } catch (DateTimeParseException e) {
+                ui.showDateTimeHint(dateTimeFormat);
             }
             break;
         case "done":
