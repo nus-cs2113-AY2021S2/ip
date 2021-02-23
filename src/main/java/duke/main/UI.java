@@ -2,10 +2,14 @@ package duke.main;
 
 import duke.items.Task;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class UI {
-    private static String DEADLINE_TEMPLATE = "deadline read book /by 2/12/2019 1800";
-    private static String EVENT_TEMPLATE = "event read book /at 2/12/2019 1800";
-    private static String TODO_TEMPLATE = "todo read book";
+    private static final String DEADLINE_TEMPLATE = "deadline <task> /by <YYYY-MM-DD>";
+    private static final String EVENT_TEMPLATE = "event <task> /at <YYYY-MM-DD>";
+    private static final String TODO_TEMPLATE = "todo read book";
+    private static final String DATE_TEMPLATE = "<YYYY-MM-DD>";
     public static void printLine() {
         System.out.println("____________________________________________________________");
     }
@@ -55,6 +59,12 @@ public class UI {
             break;
         }
     }
+    public static void InvalidDateErrorMessage(String line){
+        String[] arr = line.split(" ");
+        System.out.println(" ☹ OOPS!!! Invalid format for date: " + arr[arr.length-1]);
+        System.out.println(" Input format:");
+        System.out.println(" \t " + DATE_TEMPLATE);
+    }
 
     public static void EventParameterErrorMessage(){
         System.out.println(" ☹ OOPS!!! For \"event\" command please input \"/at\"");
@@ -69,6 +79,12 @@ public class UI {
     public static void byeMessage(){
         System.out.println("Bye. Hope to see you again soon!");
         UI.printLine();
+    }
+
+    public static String convertDateFormat(String date){
+        LocalDate myDateObj = LocalDate.parse(date);
+        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("MMM-dd-yyyy ");
+        return myDateObj.format(myFormatObj);
     }
 
 }

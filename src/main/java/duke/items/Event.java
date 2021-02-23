@@ -1,15 +1,19 @@
 package duke.items;
 
+import static duke.main.UI.convertDateFormat;
 
 public class Event extends Task {
     private String at;
 
+
     public Event(String description, String atInput) {
         super(description);
-        this.at = atInput;
+        this.at = convertDateFormat(atInput);
+
     }
+
     public void setAt(String atInput) {
-        this.at = atInput;
+        this.at = convertDateFormat(atInput);
     }
     public String getAt() {
         return this.at;
