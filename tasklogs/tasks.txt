@@ -1,8 +1,2 @@
-[T] | 0 | change amp
-[E] | 1 | write guitar part | 2020-03-24
-[T] | 0 | logos/sublunary
-[T] | 1 | baby blue
-[E] | 1 | join band | 2020-03-24
-[D] | 0 | join band | 2020-04-23
-[E] | 0 | look up | 2020-03-24
-[D] | 0 | keep up | 2020-04-23
+[D] | 1 | remaster guitar track | 2020-02-27
+[E] | 0 | live gig | 2020-03-05
