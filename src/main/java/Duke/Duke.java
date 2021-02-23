@@ -53,7 +53,8 @@ public class Duke {
                 break;
         }
     }
-
+    
+    // Before running the system, read the file which contains the information which user type inside before 
     private static void readFile(List<Task> lists){
         try {
             File file = new File(FILE_LOCATION);
@@ -98,6 +99,7 @@ public class Duke {
         }
     }
 
+    // Before ened the system, write all thelist information inside the file
     private static void writeFile(List<Task> lists) {
         try {
             FileWriter writer = new FileWriter(FILE_LOCATION,false);
@@ -111,16 +113,19 @@ public class Duke {
         }
     }
 
+    //Show welcome message to the user
     private static void showWelcomeMessage() {
         showToUser(DIVIDER, DIVIDER, VERSION, LOGO, GREETING, DIVIDER);
     }
 
+    // Show information to the user
     private static void showToUser(String... message) {
         for (String m : message) {
             System.out.println(m);
         }
     }
 
+    // Recieve users input
     private static String getUserInput() {
         System.out.print("Enter command: ");
         String inputLine = SCANNER.nextLine();
@@ -131,10 +136,12 @@ public class Duke {
         return inputLine;
     }
 
+    // Repeat users command after user input
     private static void echoUserCommand(String userCommand) {
         showToUser("[Command entered:" + userCommand + "]", DIVIDER);
     }
 
+    // Run the users input
     private static int executeCommand(String userInputString) {
         final String[] commandTypeAndParams = splitCommandWordAndArgs(userInputString);
         final String commandType = commandTypeAndParams[0];
@@ -184,11 +191,13 @@ public class Duke {
         }
     }
 
+    // Splite the content with some logic
     private static String[] splitCommandWordAndArgs(String rawUserInput) {
         final String[] split = rawUserInput.trim().split("\\s+", 2);
         return split.length == 2 ? split : new String[] { split[0] , "" }; // else case: no parameters
     }
 
+    // Print the list when user type list
     public static void printList(int startIndex, int endIndex) {
         if (endIndex == 0) {
             System.out.println("List is empty :o\n" + "\n");
@@ -199,16 +208,19 @@ public class Duke {
         }
     }
 
+    // Show error message
     public static void showError(){
         showToUser(ERROR_MESSAGE,DIVIDER);
     }
 
+    // mark one item as done
     public static void doneItem(String doneStringNumber){
         checkError(doneStringNumber);
         int doneInteger = Integer.parseInt(doneStringNumber)-1;
         lists.get(doneInteger).markAsDone();
     }
 
+    // delete one of the item 
     public static void deleteItem(String deleteStringNumber){
         checkError(deleteStringNumber);
         if(Integer.parseInt(deleteStringNumber)>=count){
@@ -219,16 +231,19 @@ public class Duke {
         }
     }
 
+    // End the system
     public static void endSystem(){
         writeFile(lists);
         showToUser(BYE);
     }
 
+    // Check error function
     public static void checkError(String commandArgs){
         if (commandArgs.isEmpty()){
             showError();}
     }
 
+    // Find keyword function
     public static void findKeyword(String keyword){
         for(int i = 0; i < count; ++i){
             if(lists.get(i).toString().contains(keyword)){
