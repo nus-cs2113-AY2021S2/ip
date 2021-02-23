@@ -7,8 +7,12 @@ import task.list.TaskList;
 
 import java.util.ArrayList;
 
+/**
+ * Represents the add command
+ */
 public class DoneCommand extends Command {
 
+    // mark the task indicated by the index inputted by the user as done
     public static void markTaskAsDone(String[] sentence, ArrayList<TaskList> tasks) throws IllegalCommandException, IllegalTaskException,
             IllegalTaskRedoException {
         int index;
@@ -30,6 +34,7 @@ public class DoneCommand extends Command {
         ListCommand.printNumberOfTasksLeft(tasks);
     }
 
+    // tries to get index from the input
     public static int getIndex(String[] sentence, ArrayList<TaskList> tasks) throws IllegalCommandException,
             IllegalTaskException {
         if (sentence.length > NUMBER_OF_COMMAND_ARGUMENTS) {
@@ -42,6 +47,7 @@ public class DoneCommand extends Command {
         return index;
     }
 
+    // gets index from the input
     public static int getIndexFromCommand(String index) {
         try {
             return Integer.parseInt(index);

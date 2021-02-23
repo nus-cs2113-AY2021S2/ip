@@ -9,7 +9,12 @@ import ui.UI;
 
 import java.util.ArrayList;
 
+/**
+ * Represents an exception handler that deals with incorrect user inputs
+ */
 public class CommandsHandler {
+
+    // handles exceptions when user uses the delete command
     public static void handleDelete(ArrayList<TaskList> tasks, String[] sentence) {
         try {
             DeleteCommand.deleteTask(sentence, tasks);
@@ -20,6 +25,7 @@ public class CommandsHandler {
         }
     }
 
+    // handles exceptions when the user uses the done command
     public static void handleMarkAsDone(ArrayList<TaskList> tasks, String[] sentence) {
         try {
             DoneCommand.markTaskAsDone(sentence, tasks);
@@ -32,6 +38,7 @@ public class CommandsHandler {
         }
     }
 
+    // handles exceptions when the user uses the list command
     public static void handleList(ArrayList<TaskList> tasks) {
         try {
             ListCommand.printAllLists(tasks);

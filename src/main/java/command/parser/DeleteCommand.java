@@ -7,8 +7,12 @@ import ui.UI;
 
 import java.util.ArrayList;
 
+/**
+ * Represents the delete command
+ */
 public class DeleteCommand extends Command {
 
+    // deletes the tasks indicated by the index that the user inputted
     public static void deleteTask(String[] sentence, ArrayList<TaskList> tasks) throws IllegalCommandException,
             IllegalTaskException {
         int index;

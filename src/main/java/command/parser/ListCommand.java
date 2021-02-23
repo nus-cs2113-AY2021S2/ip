@@ -6,8 +6,12 @@ import ui.UI;
 
 import java.util.ArrayList;
 
+/**
+ * Represents the list command
+ */
 public class ListCommand extends Command {
 
+    // prints all tasks in the list
     public static void printAllLists(ArrayList<TaskList> tasks) throws IllegalListException {
         int i = 1;
         if (tasks.size() == EMPTY) {
@@ -23,6 +27,7 @@ public class ListCommand extends Command {
         UI.printDottedLines();
     }
 
+    // prints the number of tasks in the list that hasn't been done yet
     public static void printNumberOfTasksLeft(ArrayList<TaskList> tasks) {
         if (UI.getAreAllTasksDone(tasks) && tasks.size() > EMPTY) {
             UI.printCompletedTasks();

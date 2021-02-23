@@ -3,6 +3,9 @@ package task.list;
 import ui.UI;
 import exceptions.IllegalTaskRedoException;
 
+/**
+ * Represents a task in the list
+ */
 public class TaskList {
 
     public static final String TICK = "\u2713";
@@ -11,22 +14,27 @@ public class TaskList {
     protected String description;
     protected boolean isDone;
 
+    // prints a task from the list
     public void printTask() {
         System.out.println("[" + getStatusIcon() + "]" + getTaskDescription());
     }
 
+    // returns the done status icon for a task
     public String getStatusIcon() {
         return ((getIsTaskDone()) ? TICK : CROSS); //return tick or X symbols
     }
 
+    // gets isDone for a task
     public boolean getIsTaskDone() {
         return (this.isDone);
     }
 
+    // gets description for a task
     public String getTaskDescription() {
         return (this.description);
     }
 
+    // marks a task as done
     public void markAsDone() throws IllegalTaskRedoException {
         if (this.isDone) {
             throw new IllegalTaskRedoException();
@@ -37,14 +45,17 @@ public class TaskList {
         UI.printDottedLines();
     }
 
+    // sets isDone as done for a task
     public void setDone() {
         this.isDone = true;
     }
 
+    // prints the appropriate line when a task is added to the list
     public void printAddedTask() {
         System.out.println("Added " + getTaskDescription());
     }
 
+    // returns the appropriate task format to write to duke.txt
     public String getTaskToPrintInFile() {
         return getTaskDescription();
     }

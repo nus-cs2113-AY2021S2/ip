@@ -1,18 +1,22 @@
 package task.list;
 
+/**
+ * Represents a todo task in the list
+ */
 public class Todo extends TaskList {
 
     private static final String TASK_TITLE = "T";
     public static final String NEW_TASK = "Aight Crewmate!! I've got a new task for you to do!!! (¬‿¬): ";
     public static final String COMMAND_HEADER = "todo ";
 
+    // creates a todo task
     public Todo(String line) {
         this.description = line.trim();
         this.isDone = false;
         printAddedTask();
     }
 
-    // This method is used for constructor overloading
+    // overloads constructor as subclasses will not have the same constructor
     public Todo() {
     }
 
