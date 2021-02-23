@@ -10,6 +10,9 @@ import ui.UI;
 
 import java.util.ArrayList;
 
+/**
+ * Represents the find command
+ */
 public class FindCommand extends Command {
 
     public static final String TASK_COUNTER_SENTENCE = "Here is task number: ";
