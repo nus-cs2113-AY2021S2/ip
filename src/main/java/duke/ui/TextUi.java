@@ -7,7 +7,7 @@ import java.io.PrintStream;
 import java.util.Scanner;
 
 import static duke.Duke.tasks;
-import static duke.constants.UiStrings.*;
+import static duke.constants.ProgramStrings.*;
 
 /**
  * Text UI of the Duke application

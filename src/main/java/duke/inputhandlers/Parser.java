@@ -2,8 +2,8 @@ package duke.inputhandlers;
 
 import duke.exception.InvalidCommandException;
 import static duke.constants.ProgramInts.*;
-import static duke.constants.UiStrings.INPUT_DATE_FORMAT;
-import static duke.constants.UiStrings.OUTPUT_DATE_FORMAT;
+import static duke.constants.ProgramStrings.INPUT_DATE_FORMAT;
+import static duke.constants.ProgramStrings.OUTPUT_DATE_FORMAT;
 
 import java.util.Arrays;
 import java.time.LocalDate;

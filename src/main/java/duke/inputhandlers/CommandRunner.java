@@ -15,7 +15,7 @@ import java.util.Scanner;
 import static duke.Duke.tasks;
 import static duke.Duke.ui;
 import static duke.constants.ProgramInts.*;
-import static duke.constants.UiStrings.*;
+import static duke.constants.ProgramStrings.*;
 
 /**
  * This class receives user input, sends it to the parser, then runs the commands chosen by the user.
