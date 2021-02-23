@@ -26,7 +26,11 @@ public class UiStrings {
     public static final String LIST_FULL_WARNING = "List is full!" +'\n'+"Use the \"list\" command to view your tasks." + '\n';
     public static final String NO_MATCH_WARNING = "No tasks match your search query:";
     public static final String INVALID_DATE_FORMAT_WARNING = "Invalid date/ wrong date format. " + DATE_FORMAT;
+    
+    // User prompts
     public static final String PROMPT_ENTER_BYE_TO_EXIT = "To exit, enter \"bye\"";
+    public static final String PROMPT_TASK_DONE = "Congrats! You've completed: \n   ";
+    
     
     // Output formatting
     public static final String STRAIGHT_LINE = "____________________________________________________________";

@@ -87,16 +87,16 @@ public class FileManager {
         if (t instanceof Todo) {
             line += "T" + DELIM;
             line += (t.isDone() ? "1" : "0") + DELIM;
-            line += t.getJob();
+            line += t.getDescription();
         } else if (t instanceof Deadline) {
             line += "D" + DELIM;
             line += (t.isDone() ? "1" : "0") + DELIM;
-            line += t.getJob() + DELIM;
+            line += t.getDescription() + DELIM;
             line += ((Deadline) t).getBy();
         } else if (t instanceof Event) {
             line += "E" + DELIM;
             line += (t.isDone() ? "1" : "0") + DELIM;
-            line += t.getJob() + DELIM;
+            line += t.getDescription() + DELIM;
             line += ((Event) t).getAt();
         }
         return line;

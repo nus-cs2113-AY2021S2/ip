@@ -1,27 +1,27 @@
 package duke.tasks;
 
 public abstract class Task {
-    protected String job;
+    protected String description;
     protected boolean isDone;
     
     public static boolean isFull = false;
 
     public Task() {
-        this.job = null;
+        this.description = null;
         this.isDone = false;
     }
 
     public Task(String inputJob) {
-        this.job = inputJob;
+        this.description = inputJob;
         this.isDone = false;
     }
 
-    public String getJob() {
-        return job;
+    public String getDescription() {
+        return description;
     }
 
-    public void setJob(String job) {
-        this.job = job;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public boolean isDone() {
@@ -37,7 +37,7 @@ public abstract class Task {
         String emptyBox = "[ ] ";
 
         String output = this.isDone ? doneBox : emptyBox;
-        output += this.job;
+        output += this.description;
 
         output = addLabel(output);
         output = addEnd(output);
