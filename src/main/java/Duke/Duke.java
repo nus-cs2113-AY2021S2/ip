@@ -4,10 +4,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-// import Duke.Function.*;
-// import Duke.Task.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
-// import java.util.List;
+import Duke.Task.*;
 
 public class Duke {
     private static final String VERSION = "Duke - Version 1.0";
@@ -42,54 +42,70 @@ public class Duke {
     private static String DONE = "done";
     private static String UNDO = "undo";
 
+    public static List<Task> lists = new ArrayList<Task>();
+
     public static void main(String[] args) {
-        initItemBook();
         showWelcomeMessage();
-        while (true) {
-            String userCommand = getUserInput();
-            echoUserCommand(userCommand);
-            int returnValue = executeCommand(userCommand);
-            if (returnValue == 0)
-                break;
-        }
+        readFile(lists);
+        // initItemBook();
+        // showWelcomeMessage();
+        // while (true) {
+        //     String userCommand = getUserInput();
+        //     echoUserCommand(userCommand);
+        //     int returnValue = executeCommand(userCommand);
+        //     if (returnValue == 0)
+        //         break;
+        // }
     }
 
-    private static void initItemBook() {
-        allItems = new String[CAPACITY][ITEM_DATA_COUNT];
-        count = 0;
-        readFile();
-    }
-
-    private static void readFile() {
-        File file = new File(FILE_LOCATION);
+    private static void readFile(List<Task> lists){
         try {
+            File file = new File("src/main/java/Duke/Duke.txt");
             if (file.createNewFile()) {
-                showToUser("A new file has been created");
+                System.out.println("A new file has been created! ^_^");
             } else {
+                System.out.println("Reading saved Task Lists ^_^");
                 Scanner readingFile = new Scanner(file);
                 while (readingFile.hasNextLine()) {
                     String line = readingFile.nextLine();
-                    String[] part = line.split("-", 3);
-                    allItems[count][0] = part[0];
-                    allItems[count][1] = part[1];
-                    allItems[count][2] = part[2];
-                    count++;
+                    String[] parts = line.split("-", 3);
+                    String type = parts[0];
+                    String isDone = parts[1];
+                    String task = parts[2];
+                    if (type.equals(COMMAND_EVENT_WORD)) {
+                        Task taskInFile = new EventTask(task);
+                        lists.add(taskInFile);
+                        showToUser(taskInFile.toString());
+                        if (isDone.equals("true")) {
+                            taskInFile.markAsDone();
+                        }
+                    }else if (type.equals(COMMAND_DEADLINE_WORD)) {
+                        Task taskInFile = new DeadlineTask(task);
+                        lists.add(taskInFile);
+                        showToUser(taskInFile.toString());
+                        if (isDone.equals("true")) {
+                            taskInFile.markAsDone();
+                        }
+                    }else if (type.equals(COMMAND_TODO_WORD)) {
+                        Task taskInFile = new TodoTask(task);
+                        lists.add(taskInFile);
+                        showToUser(taskInFile.toString());
+                        if (isDone.equals("true")) {
+                            taskInFile.markAsDone();
+                        }
+                    }
                 }
-            }
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
+        }
+    } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private static void writeFile() {
+    private static void writeFile(List<Task> lists) {
         try {
             FileWriter writer = new FileWriter("src/main/java/Duke/Duke.txt",false);
-            for (int i=0; i<count; i++) {
-                writer.write(allItems[i][0]+"-"+allItems[i][1]+"-"+allItems[i][2]);
+            for (Task taskInList : lists) {
+                writer.write(taskInList.getTaskType() + "-" + taskInList.isDone() + "-" + taskInList.getTask());
                 writer.write("\r\n");
             }
             writer.close();
@@ -134,15 +150,21 @@ public class Duke {
         final String[] commandTypeAndParams = splitCommandWordAndArgs(userInputString);
         final String commandType = commandTypeAndParams[0];
         final String commandArgs = commandTypeAndParams[1];
+        Task taskInFile;
         switch (commandType) {
         case COMMAND_TODO_WORD:
-            addTodoItem(commandArgs);
+            taskInFile = new TodoTask(commandArgs);
+            lists.add(taskInFile);
+            // addTodoItem(commandArgs);
             return 1;
         case COMMAND_EVENT_WORD:
-            addEventItem(commandArgs);
+            taskInFile = new EventTask(commandArgs);
+            lists.add(taskInFile);
+            // addEventItem(commandArgs);
             return 1;
         case COMMAND_DEADLINE_WORD:
-            addDeadlineItem(commandArgs);
+            taskInFile = new DeadlineTask(commandArgs);
+            lists.add(taskInFile);
             return 1;
         case COMMAND_LIST_WORD:
             showListItem();
