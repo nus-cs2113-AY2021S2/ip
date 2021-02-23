@@ -33,8 +33,6 @@ public class Task {
         System.out.print("  ");
         list.get(index).print();
         list.remove(index);
-        System.out.println("Now you have " + numOfTasks + " tasks in the list.");
-
     }
     public static void setDone(int index) throws InvalidIndexExceptions{
         if (index >= numOfTasks){
