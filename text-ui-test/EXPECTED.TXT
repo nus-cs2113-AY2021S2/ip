@@ -9,24 +9,26 @@ No idea what "some work" means!
 Enter "help" for a list of available commands and format
 
 Added to list: 
-[T][ ] some work
+   [T][ ] some work
 1 task in the list
 
 Added to list: 
-[D][ ] some work (by: some time)
+   [D][ ] some work (by: some time)
 2 tasks in the list
 
 Wrong format: "deadline wrong" !
 Enter "help" for a list of available commands and format
 
 Added to list: 
-[E][ ] some work (at: some time)
+   [E][ ] some work (at: some time)
 3 tasks in the list
 
 Wrong format: "event wrong" !
 Enter "help" for a list of available commands and format
 
+-------------
 TASK LIST:
+-------------
 1. [T][ ] some work
 2. [D][ ] some work (by: some time)
 3. [E][ ] some work (at: some time)
@@ -43,7 +45,9 @@ Enter "help" for a list of available commands and format
 Wrong format: "done abc" !
 Enter "help" for a list of available commands and format
 
+-------------
 TASK LIST:
+-------------
 1. [T][X] some work
 2. [D][ ] some work (by: some time)
 3. [E][ ] some work (at: some time)
@@ -52,9 +56,21 @@ Task 2 has been deleted:
    [D][ ] some work (by: some time)
 Tasks remaining: 2
 
+-------------
 TASK LIST:
+-------------
 1. [T][X] some work
 2. [E][ ] some work (at: some time)
+
+Added to list: 
+   [D][ ] quiz homework (by: 24/3/2021)
+3 tasks in the list
+
+SEARCH RESULTS FOR "quiz":
+1. [D][ ] quiz homework (by: 24/3/2021)
+
+Wrong format: "find" !
+Enter "help" for a list of available commands and format
 
 -------------
 COMMAND LIST:
@@ -76,6 +92,9 @@ FORMAT: done [(int) number]
 
 DELETE - 
 FORMAT: delete [(int) index]
+
+FIND - 
+FORMAT: find [(string) search keywords]
 
 To exit, enter "bye"
 -------------

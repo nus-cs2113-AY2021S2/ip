@@ -1,10 +1,9 @@
 package duke.inputhandlers;
 
 import duke.exception.InvalidCommandException;
-
-import static duke.Duke.ui;
 import static duke.constants.ProgramInts.*;
 
+import java.util.Arrays;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -33,6 +32,8 @@ public class Parser {
             return EVENTS_COMMAND;
         } else if (startsWith(input, "delete")) {
             return DELETE_COMMAND;
+        } else if (startsWith(input, "find")) {
+            return FIND_COMMAND;
         } else {
             return UNKNOWN_COMMAND;
         }
@@ -84,6 +85,25 @@ public class Parser {
         String[] words = string.split("-");
         
         return (words.length == 3);
+    }
+
+    public static String parseKeyword(String input) throws InvalidCommandException{
+
+        String[] words = input.split(" ");
+        if (words.length <2) {
+            throw new InvalidCommandException();
+        }
+        
+        String[] keywords = Arrays.copyOfRange(words, 1, words.length);
+
+        String keywordString = "";
+
+        for (String eachWord : keywords) {
+            keywordString += eachWord;
+            keywordString += " ";
+        }
+        
+        return keywordString.trim();
     }
 
     private static String getJobString(String[] words, String delimiter) {

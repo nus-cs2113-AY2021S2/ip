@@ -12,5 +12,4 @@ public class FileIOStrings {
     public static final String NO_FILE_FOUND_MESSAGE = "No previous records! Starting a new record...";
     public static final String CREATE_FILE_SUCCESS = "New file created!" + '\n';
     public static final String CREATE_FILE_ERROR = "Error creating new file..." + '\n';
-    
 }
