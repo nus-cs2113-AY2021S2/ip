@@ -1,13 +1,6 @@
 package duke;
 
-import duke.Command.AddCommand;
-import duke.Command.Command;
-import duke.Command.DefaultCommand;
-import duke.Command.DeleteCommand;
-import duke.Command.DoneCommand;
-import duke.Command.ExitCommand;
-import duke.Command.HelpCommand;
-import duke.Command.ListCommand;
+import duke.Command.*;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
@@ -22,6 +15,7 @@ public class Parser {
     public String[] lineParts;
     public String keyCommand;
     public String taskDescription;
+    public String keyword;
     public LocalDateTime taskDate;
     public int taskIndex;
     public String dateTimeFormat = "yyyy-MM-dd HH:mm";
@@ -75,6 +69,9 @@ public class Parser {
             } catch (Exception e) {
                 ui.showError(e);
             }
+        case "find":
+            keyword = fullLine.replace("find", "").trim();
+            break;
         }
     }
 
@@ -106,8 +103,12 @@ public class Parser {
         case "delete":
             command = new DeleteCommand(taskIndex);
             break;
+        case "find":
+            command = new FindCommand(keyword);
+            break;
         case "bye":
             command = new ExitCommand();
+            break;
         }
         return command;
     }
