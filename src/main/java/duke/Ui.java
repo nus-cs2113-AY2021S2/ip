@@ -1,5 +1,7 @@
 package duke;
 
+import duke.task.Task;
+
 import java.io.File;
 import java.util.Random;
 import java.util.Scanner;
@@ -77,10 +79,14 @@ public class Ui {
             System.out.print("I can remember your tasks for you!\n\n" +
                     "Available commands:\n" +
                     "\ttodo <description>\n" +
-                    "\tdeadline <description> /by <time due>\n" +
-                    "\tevent <description> /at <time occurring>\n" +
-                    "\tlist\n" + "\tdone <task index>\n" +
-                    "\tdelete <task index>\n");
+                    "\tdeadline <description> /by <date and time due>\n" +
+                    "\tevent <description> /at <date and time occurring>\n" +
+                    "\tlist\n" +
+                    "\tdone <task index>\n" +
+                    "\tdelete <task index>\n" +
+                    "\tfind <keyword>\n" +
+                    "\tbye\n"
+                    );
     }
 
     public void showNoTasks() {
@@ -107,7 +113,23 @@ public class Ui {
         System.out.print("That is not a valid command. Please enter a number after the word.\n");
     }
 
-    public void showDateTimeHint(String format) {
-        System.out.print("That is invalid. The date-time format should be: " + format + "\n");
+    public void showListSize(int size) {
+        System.out.print("There are " + size + " tasks in your list:\n");
+    }
+
+    public void printTask(int index, Task task) {
+        System.out.print(index+ "." + task + '\n');
+    }
+
+    public void showNoTasksFound(String keyword) {
+        System.out.print("There are no tasks with \"" + keyword +"\".\n");
+    }
+
+    public void showFindLoading(String keyword) {
+        System.out.print("Finding tasks with \"" + keyword + "\" in their description...\n");
+    }
+
+    public void showDateTimeHint(String dateTimeFormat) {
+        System.out.print("That is invalid. The date-time format should be: " + dateTimeFormat + "\n");
     }
 }

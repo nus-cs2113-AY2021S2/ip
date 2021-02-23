@@ -10,28 +10,29 @@ import java.util.ArrayList;
 public class TaskList {
 
     public static ArrayList<Task> tasks;
+    private static Ui ui = new Ui();
 
     public TaskList() {
         tasks = new ArrayList<Task>();
     }
 
     public void printTasks() throws DukeException{
-        if (tasks.size() < 1) {
-            throw new DukeException();
-        } else {
-            System.out.print("There are " + tasks.size() + " tasks in your list:\n");
+        if (tasks.size() >= 1) {
+            ui.showListSize(tasks.size());
             for (int i = 0; i < tasks.size(); i++) {
-                System.out.print((i+1) + "." + tasks.get(i) + '\n');
+                ui.printTask(i+1, tasks.get(i));
             }
+        } else {
+            throw new DukeException();
         }
     }
 
     public void addTask(Task t) throws DukeException{
-        if (t.getDescription().isEmpty()) {
-            throw new DukeException();
-        } else {
+        if (!t.getDescription().isEmpty()) {
             tasks.add(t);
             System.out.print("Got it. I've added this task:\n" + t.toString() + '\n');
+        } else {
+            throw new DukeException();
         }
     }
 
@@ -72,6 +73,20 @@ public class TaskList {
         try {
             tasks.get(taskIndex).setDone();
         } catch (Exception e) {
+            throw new DukeException();
+        }
+    }
+
+    public static void findTasks(String keyword) throws DukeException{
+        ui.showFindLoading(keyword);
+        int foundTaskCount = 0;
+        for (int i = 0; i < tasks.size(); i++) {
+            if(tasks.get(i).getDescription().contains(keyword)) {
+                ui.printTask(i+1, tasks.get(i));
+                foundTaskCount++;
+            }
+        }
+        if (foundTaskCount == 0) {
             throw new DukeException();
         }
     }
