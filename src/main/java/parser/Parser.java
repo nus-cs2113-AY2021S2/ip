@@ -31,7 +31,7 @@ public class Parser {
     }
 
     public static String[] splitDescriptionAndTime(String commandArgs) {
-        return commandArgs.split(" at ");
+        return commandArgs.split(" /at ");
     }
 
     /**

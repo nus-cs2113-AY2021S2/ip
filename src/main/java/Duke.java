@@ -17,7 +17,6 @@ public class Duke {
      * Initializes the application and starts the interaction with the user.
      */
     public static void main(String[] args) {
-        textUi.showLogo();
         textUi.showGreeting();
         try {
             storage.loadFile();

@@ -24,6 +24,6 @@ public abstract class Command {
     public static void printAddTask(Task task) {
         textUi.showAddTask();
         System.out.println(constants.INDENTATION + task.toString());
-        System.out.println("Now you have " + taskManager.getTaskCount() + " tasks in the list");
+        System.out.println("Now you have " + taskManager.getTaskCount() + " tasks in the list.");
     }
 }
