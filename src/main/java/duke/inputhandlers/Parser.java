@@ -2,6 +2,8 @@ package duke.inputhandlers;
 
 import duke.exception.InvalidCommandException;
 import static duke.constants.ProgramInts.*;
+import static duke.constants.UiStrings.INPUT_DATE_FORMAT;
+import static duke.constants.UiStrings.OUTPUT_DATE_FORMAT;
 
 import java.util.Arrays;
 import java.time.LocalDate;
@@ -15,6 +17,12 @@ import java.time.format.DateTimeParseException;
 
 public class Parser {
 
+    /**
+     * Parse user input into specified command.
+     * 
+     * @param input full user input string
+     * @return an integer representing the command parsed
+     */
     public static int parseCommand(String input) {
         if (input.equalsIgnoreCase("bye")) {
             return BYE_COMMAND;
@@ -39,54 +47,140 @@ public class Parser {
         }
     }
 
-    public static String parseJob(String input, String delimiter) throws InvalidCommandException {
-
+    /**
+     * Parses the description of a task from the user input string.
+     * 
+     * @param input full user input string
+     * @return task description string
+     * @throws InvalidCommandException if input does not contain a description
+     */
+    public static String parseDescription(String input) throws InvalidCommandException {
+        
+        // split the input string into individual words
         String[] words = input.split(" ");
 
+        // if true, indicates that input string does not have any other words other than the original command
         if (words.length < 2) {
             throw new InvalidCommandException();
         }
 
-        return getJobString(words, delimiter);
+        return getDescriptionString(words, "");
     }
 
+    /**
+     * (Overload of parseDescription method)
+     * Parse the description of a task from the user input string.
+     * Delimiter is used to mark the end of task description in the user input, applicable for commands which have
+     * further fields.
+     * 
+     * @param input full user input string
+     * @param delimiter string sequence to indicate end of task description
+     * @return task description string up till delimiter
+     * @throws InvalidCommandException if input does not contain a description
+     */
+    public static String parseDescription(String input, String delimiter) throws InvalidCommandException {
+
+        // split the input string into individual words
+        String[] words = input.split(" ");
+
+        // if true, indicates that input string does not have any other words other than the original command
+        if (words.length < 2) {
+            throw new InvalidCommandException();
+        }
+
+        return getDescriptionString(words, delimiter);
+    }
+
+    /**
+     * Obtains entire task description from user input.
+     * 
+     * @param words array of strings consisting of user input split into individual words
+     * @param delimiter specifies the end of task description
+     * @return task description as a single string
+     */
+    private static String getDescriptionString(String[] words, String delimiter) {
+
+        String description = words[1];
+
+        for (int i = 2; i < words.length; i++) {
+            if (words[i].equalsIgnoreCase(delimiter)) {
+                break;
+            }
+            description += " " + words[i];
+        }
+        return description;
+    }
+
+    /**
+     * Parse time/date from user input.
+     * Reformats date entered as "d-M-yyyy" into "dd MMMM, yyyy".
+     * 
+     * @param input full user input string
+     * @param delimiter string sequence marking the start of the date/time field
+     * @return date/time string
+     * @throws InvalidCommandException if specified delimiter is not found
+     */
     public static String parseDate(String input, String delimiter) throws InvalidCommandException {
-        // deadline job job /by 29-01-2021
+        // splits user input using delimiter, date/time string starts after delimiter
         String[] words = input.split(delimiter);
 
+        // delimiter not found
         if (words.length == 1) {
             throw new InvalidCommandException();
         }
 
         String dateString = words[1].trim();
 
+        // reformats date string if it can be parsed (contains three "-")
         if (isDate(dateString)) {
             return convertToDate(dateString);
         }
-
+        
+        // returns string as entered by user
         return dateString;
     }
 
-
+    /**
+     * Reformats given date string to a different format (OUTPUT_DATE_FORMAT).
+     * Date string is valid only if it follows specified format (INPUT_DATE_FORMAT)
+     * 
+     * @param string date string from parsed from user input
+     * @return reformatted date string
+     * @throws DateTimeParseException if given date is invalid / wrong string format / values given are invalid
+     */
     public static String convertToDate(String string) throws DateTimeParseException {
         // specifies the format that user has to follow
-        DateTimeFormatter parseFormat = DateTimeFormatter.ofPattern("d-M-yyyy");
+        DateTimeFormatter parseFormat = DateTimeFormatter.ofPattern(INPUT_DATE_FORMAT);
         LocalDate dateObj = LocalDate.parse(string, parseFormat);
 
         // specifies the format that date will be printed out
-        DateTimeFormatter stringFormat = DateTimeFormatter.ofPattern("d MMMM, yyyy");
+        DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern(OUTPUT_DATE_FORMAT);
         //noinspection UnnecessaryLocalVariable
-        String formattedString = dateObj.format(stringFormat);
+        String formattedString = dateObj.format(outputFormat);
 
         return formattedString;
     }
 
+    /**
+     * Checks if given string can be parsed as a formatted date.
+     * Does not guarantee validity of date string.
+     * 
+     * @param string date string parsed from user input
+     * @return true if date string can be parsed
+     */
     private static boolean isDate(String string) {
         String[] words = string.split("-");
         
         return (words.length == 3);
     }
 
+    /**
+     * Parses search keyword from user input string.
+     * 
+     * @param input full user input string
+     * @return keyword string
+     * @throws InvalidCommandException if no keyword is found
+     */
     public static String parseKeyword(String input) throws InvalidCommandException{
 
         String[] words = input.split(" ");
@@ -106,19 +200,13 @@ public class Parser {
         return keywordString.trim();
     }
 
-    private static String getJobString(String[] words, String delimiter) {
-
-        String job = words[1];
-
-        for (int i = 2; i < words.length; i++) {
-            if (words[i].equalsIgnoreCase(delimiter)) {
-                break;
-            }
-            job += " " + words[i];
-        }
-        return job;
-    }
-
+    /**
+     * Tests if user input string starts with a particular command string.
+     * 
+     * @param input full user input string
+     * @param command string sequence of command being checked
+     * @return true if user input starts with command string
+     */
     private static boolean startsWith(String input, String command) {
         return input.toUpperCase().startsWith(command.toUpperCase());
     }
