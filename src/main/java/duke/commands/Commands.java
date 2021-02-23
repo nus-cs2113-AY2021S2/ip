@@ -8,7 +8,6 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
 import duke.task.Task;
-
 import java.util.ArrayList;
 
 public class Commands {
@@ -27,10 +26,8 @@ public class Commands {
             }
             Todo t = new Todo(command);
             list.add(t);
-            System.out.println("I have added [" + t.getType() + "]["
-                + t.getStatusIcon() + "] \""
-                + t.getName() + "\" " + "to the List!");
-            Ui.printNoOfTask(list);
+            int index = list.indexOf(t);
+            Ui.printAddedTask(index,list);
         } catch(WrongFormatException e) {
             Ui.checkError("INVALID_FORMAT");
         }
@@ -54,10 +51,8 @@ public class Commands {
             String date = parts[1];
             Deadline t = new Deadline(description,date);
             list.add(t);
-            System.out.println("I have added [" + t.getType() + "]["
-                + t.getStatusIcon() + "] \""
-                + t.getName() + t.getDate() + "\"" + " to the List!");
-            Ui.printNoOfTask(list);
+            int index = list.indexOf(t);
+            Ui.printAddedTask(index,list);
         } catch (WrongFormatException e) {
             Ui.checkError("INVALID_FORMAT");
         }
@@ -67,7 +62,7 @@ public class Commands {
      * Add event to list
      * @param input - add event
      */
-    public static void addEvent(String input,ArrayList<Task> list){
+    public static void addEvent(String input,ArrayList<Task> list)  {
         try {
             if (input.equals("event")) {
                 throw new WrongFormatException();
@@ -81,10 +76,8 @@ public class Commands {
             String date = parts[1];
             Event t = new Event(description,date);
             list.add(t);
-            System.out.println("I have added [" + t.getType() + "]["
-                + t.getStatusIcon() + "] \""
-                + t.getName() + t.getDate() + "\"" + " to the List!");
-            Ui.printNoOfTask(list);
+            int index = list.indexOf(t);
+            Ui.printAddedTask(index,list);
         } catch (WrongFormatException e) {
             Ui.checkError("INVALID_FORMAT");
         }
@@ -169,6 +162,7 @@ public class Commands {
 
     /**
      * Print List
+     * @param list ArrayList of task
      */
     public static void printList(ArrayList<Task> list){
         try {
@@ -185,5 +179,18 @@ public class Commands {
         } catch (ListEmptyException e) {
             Ui.checkError("EMPTY_LIST");
         }
+    }
+
+    public static void findTask(String input, ArrayList<Task> list) throws WrongFormatException {
+        try {
+            String searchItem = input.substring(5);
+            if(searchItem.length() == 0 ) {
+                throw new WrongFormatException();
+            }
+            Ui.printFindTask(searchItem,list);
+        } catch (WrongFormatException e) {
+            Ui.checkError("INVALID_FORMAT");
+        }
+
     }
 }
