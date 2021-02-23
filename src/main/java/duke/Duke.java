@@ -5,12 +5,20 @@ import duke.command.Command;
 import java.io.File;
 import java.nio.file.Paths;
 
+/**
+ * Duke program
+ */
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Instantiates Storage, TaskList and Ui components of the program
+     *
+     * @param filePath
+     */
     public Duke(File filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -22,6 +30,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs Duke program
+     */
     public void run() {
         ui.showGreeting();
         boolean isExit = false;

@@ -1,5 +1,9 @@
 package duke;
 
+/**
+ * An exception class used to handle all exceptions within Duke program.
+ * A standardised header is attached to every exception message.
+ */
 public class DukeException extends Exception {
 
     private static final String HEADER = "☹ OOPS!!! ";
