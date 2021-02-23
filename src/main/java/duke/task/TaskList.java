@@ -10,19 +10,34 @@ import duke.task.ToDo;
 
 import java.util.ArrayList;
 
+/**
+ * Tasklist to store current task list and contains methods to
+ * add, delete, find and mark ToDo, Event, Deadline tasks as done.
+ */
 public class TaskList {
 
     private ArrayList<Task> tasks;
     private final int COMMAND_TASK_SEPARATOR = 2;
 
+    /**
+     * Constructs TaskList.
+     */
     public TaskList() {
         tasks = new ArrayList<>();
     }
 
+    /**
+     * Gets tasks.
+     *
+     * @return Current tasks.
+     */
     public ArrayList<Task> getTaskList() {
         return tasks;
     }
 
+    /**
+     * Prints every task in tasks.
+     */
     public void printListMessage() {
         System.out.println(" Here are the tasks in your list:");
         for (Task task: tasks) {
@@ -30,6 +45,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Marks task as done.
+     *
+     * @param command Index of task to be marked as done.
+     */
     public void markTaskAsDone(String[] command) {
         Task task;
         try {
@@ -44,11 +64,21 @@ public class TaskList {
         }
     }
 
+    /**
+     * Prints message when task is marked as done.
+     *
+     * @param task Task that was marked as done.
+     */
     public static void printDoneMessage(Task task) {
         System.out.println(" Nice! I've marked this task as done:");
         System.out.println("   " + task.toString());
     }
 
+    /**
+     * Adds a Deadline task to tasks
+     *
+     * @param command User input for Deadline task description and time.
+     */
     public void addDeadline(String[] command) {
         String[] description;
         try {
@@ -68,6 +98,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds an Event task to tasks
+     *
+     * @param command User input for Event task description and time.
+     */
     public void addEvent(String[] command) {
         String[] description;
         try {
@@ -87,6 +122,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds a ToDo task to tasks
+     *
+     * @param command User input for ToDo task description and time.
+     */
     public void addToDo(String[] command) {
         try {
             ToDo toDo = new ToDo(command[1]);
@@ -97,12 +137,22 @@ public class TaskList {
         }
     }
 
-    public  void printAddedMessage(Task task) {
+    /**
+     * Prints message when task is added.
+     *
+     * @param task Task to be printed.
+     */
+    public void printAddedMessage(Task task) {
         System.out.println(" Alright, I've added this task:\n   " + task.toString() + "\n"
                 + " Now you have " + tasks.size() + " tasks in your list.");
     }
 
-    public  void deleteTask(String[] command) {
+    /**
+     * Deletes task.
+     *
+     * @param command Index of task to be deleted.
+     */
+    public void deleteTask(String[] command) {
         try {
             int taskNumberToBeDeleted = Integer.parseInt(command[1]);
             Task deletedTask = tasks.get(taskNumberToBeDeleted - 1);
@@ -115,11 +165,24 @@ public class TaskList {
         }
     }
 
+    /**
+     * Prints task that was deleted
+     *
+     * @param task Task that was deleted.
+     */
     public void printDeletedMessage(Task task) {
         System.out.println(" Alright, I've deleted this task:\n   " + task.toString() + "\n"
                 + " Now you have " + tasks.size() + " tasks in your list.");
     }
 
+    /**
+     * Checks for valid input for Deadline task.
+     *
+     * @param input User input for Deadline task description and time.
+     * @throws DescriptionFieldEmptyException If description field of task is empty.
+     * @throws TimeFieldEmptyException If time field of task is empty.
+     * @throws MultipleTimeFieldsException If there are multiple time fields for task.
+     */
     public void checkForValidDeadlineInput(String[] input) throws DescriptionFieldEmptyException,
             TimeFieldEmptyException,
             MultipleTimeFieldsException {
@@ -132,6 +195,14 @@ public class TaskList {
         }
     }
 
+    /**
+     * Checks for valid input for Event task.
+     *
+     * @param input User input for Event task description and time.
+     * @throws DescriptionFieldEmptyException If description field of task is empty.
+     * @throws TimeFieldEmptyException If time field of task is empty.
+     * @throws MultipleTimeFieldsException If there are multiple time field for task.
+     */
     public void checkForValidEventInput(String[] input) throws DescriptionFieldEmptyException,
             TimeFieldEmptyException,
             MultipleTimeFieldsException {

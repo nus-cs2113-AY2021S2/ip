@@ -8,6 +8,9 @@ import duke.ui.Ui;
 import java.io.File;
 import java.io.FileNotFoundException;
 
+/**
+ * Starts Duke for user.
+ */
 public class Duke {
 
     private final Storage storage;
@@ -20,6 +23,11 @@ public class Duke {
         new Duke(filePath).run();
     }
 
+    /**
+     * Determines if duke.txt should be created.
+     *
+     * @param filePath File path of duke.txt.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage();
@@ -34,6 +42,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs Duke and takes in user input until exit command is called.
+     */
     public void run() {
         ui.printStartingMessage();
         boolean isExit = false;

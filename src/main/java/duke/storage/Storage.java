@@ -9,8 +9,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Loads tasks from duke.txt or creates duke.txt if it doesn't exist
+ * and saves tasks to duke.txt.
+ */
 public class Storage {
 
+    /**
+     * Saves tasks to duke.txt.
+     *
+     * @param taskList List of current tasks.
+     */
     public void saveToFile(TaskList taskList) {
         String filePath = new File("").getAbsolutePath();
 
@@ -41,6 +50,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads tasks from duke.txt.
+     *
+     * @param filePath File path of duke.txt.
+     * @param taskList List of tasks in duke.txt
+     * @throws FileNotFoundException If duke.txt does not exist.
+     */
     public void loadFromFile(String filePath, TaskList taskList) throws FileNotFoundException {
         File file = new File(filePath);
         Scanner s = new Scanner(file);
