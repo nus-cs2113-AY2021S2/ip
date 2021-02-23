@@ -73,7 +73,7 @@ Example of Usage:
 
 `deadline CS2113T Assignment /by 2021-03-05 23:59`
 
-:warning: The format of deadline should be `YYYY-MM-DD HH:MM`.
+**Note**: The format of deadline should be `YYYY-MM-DD HH:MM`.
 
 Expected Outcome:
 
