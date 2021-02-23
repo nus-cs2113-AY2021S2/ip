@@ -14,6 +14,7 @@ import java.util.Scanner;
 
 public class StorageFile {
 
+    /** Creates new file */
     private static void createFile() {
         try {
             File file = new File("duke.txt");
@@ -23,6 +24,7 @@ public class StorageFile {
         }
     }
 
+    /** Reads contents of file and processes it */
     private static void readFile(List<Task> tasks) {
         try {
             FileInputStream file = new FileInputStream("duke.txt");
@@ -61,6 +63,7 @@ public class StorageFile {
         }
     }
 
+    /** Modifies textfile */
     public void writeToFile(List<Task> tasks) {
         try {
             File file = new File("duke.txt");
