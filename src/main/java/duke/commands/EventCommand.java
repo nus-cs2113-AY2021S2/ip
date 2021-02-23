@@ -2,11 +2,7 @@ package duke.commands;
 
 import duke.task.Event;
 import duke.task.TaskList;
-import duke.util.Parser;
 import duke.util.Ui;
-
-import java.time.LocalDateTime;
-
 import duke.exception.EmptyCommandArgException;
 import duke.exception.InvalidCommandTimeException;
 
@@ -17,14 +13,13 @@ public class EventCommand extends Command {
     }
     
     @Override
-    public void execute(TaskList taskList, Ui ui, Parser parser)
-            throws EmptyCommandArgException, InvalidCommandTimeException {
-        String commandType = "event";
+    public void execute(TaskList taskList, Ui ui) throws EmptyCommandArgException, InvalidCommandTimeException {
         if (isEmptyArgument(commandArg)) {
-            throw new EmptyCommandArgException(commandType);
+            throw new EmptyCommandArgException("event");
         }
-        String description = parser.getDescription(commandType, commandArg);
-        LocalDateTime at = parser.getDateTime(commandType, commandArg);
+        String[] taskDescriptionAndAt = splitCommandArg("event", commandArg);       
+        String description = taskDescriptionAndAt[0];
+        String at = taskDescriptionAndAt[1];
         Event task = new Event(description, at);
         taskList.addTask(task);
         ui.printTaskSuccessfullyAddedMessage(task, taskList.getListSize());

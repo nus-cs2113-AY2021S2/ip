@@ -2,11 +2,7 @@ package duke.commands;
 
 import duke.task.Deadline;
 import duke.task.TaskList;
-import duke.util.Parser;
 import duke.util.Ui;
-
-import java.time.LocalDateTime;
-
 import duke.exception.EmptyCommandArgException;
 import duke.exception.InvalidCommandTimeException;
 
@@ -17,14 +13,13 @@ public class DeadlineCommand extends Command {
     }
     
     @Override
-    public void execute(TaskList taskList, Ui ui, Parser parser)
-            throws EmptyCommandArgException, InvalidCommandTimeException {
-        String commandType = "deadline";
+    public void execute(TaskList taskList, Ui ui) throws EmptyCommandArgException, InvalidCommandTimeException {
         if (isEmptyArgument(commandArg)) {
-            throw new EmptyCommandArgException(commandType);
+            throw new EmptyCommandArgException("deadline");
         }
-        String description = parser.getDescription(commandType, commandArg);
-        LocalDateTime by = parser.getDateTime(commandType, commandArg);
+        String[] taskDescriptionAndBy = splitCommandArg("deadline", commandArg);  
+        String description = taskDescriptionAndBy[0];
+        String by = taskDescriptionAndBy[1];
         Deadline task = new Deadline(description, by);
         taskList.addTask(task);
         ui.printTaskSuccessfullyAddedMessage(task, taskList.getListSize());
