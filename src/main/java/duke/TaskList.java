@@ -57,6 +57,25 @@ public class TaskList {
     }
 
     /**
+     * Find tasks that contains user entered keyword.
+     *
+     * @param keyword Keyword to be searched in task descriptions.
+     * @return Task list containing all tasks that contains keyword.
+     */
+    public TaskList find(String keyword) {
+        TaskList matchedTasks = new TaskList();
+
+        for (Task task : tasks) {
+            String lowercaseTaskDescription = task.getDescription().toLowerCase();
+            if (lowercaseTaskDescription.contains(keyword)) {
+                matchedTasks.add(task);
+            }
+        }
+
+        return matchedTasks;
+    }
+
+    /**
      * Retrieves and returns the underlying ArrayList for storing tasks.
      *
      * @return The task list used for storing all tasks.

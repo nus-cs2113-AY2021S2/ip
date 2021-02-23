@@ -67,6 +67,18 @@ public class Ui {
     }
 
     /**
+     * Print all tasks that contains user entered keyword.
+     *
+     * @param taskList Tasks that contains user entered keyword.
+     */
+    public void showMatchingTasks(TaskList taskList) {
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < taskList.size(); i++) {
+            System.out.println(i + 1 + ". " + taskList.get(i));
+        }
+    }
+
+    /**
      * Prints message after task is marked as done.
      *
      * @param task Task that is marked as done.
