@@ -28,10 +28,10 @@ Prerequisites: JDK 11, update IntelliJ to the most recent version.
 
 It has the function of save and read users activities including event activity, deadline activity and todo activity.
 You can start by typing:
- 1. **list** to view **The list of activities**
- 2. **event xxx** to add **A new event**
- 3. **deadline xxx /by** to add **A new deadline**
- 4. **todo xxx /at** to add **A new todo**
- 5. **delete xxx** to delete **An activity**
- 6. **done xxx** to mark **One activity as done**
- 7. **bye** to end **The system**
+ **list** to view **The list of activities**
+ **event xxx** to add **A new event**
+ **deadline xxx /by** to add **A new deadline**
+ **todo xxx /at** to add **A new todo**
+ **delete xxx** to delete **An activity**
+ **done xxx** to mark **One activity as done**
+ **bye** to end **The system**
