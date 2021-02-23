@@ -18,22 +18,26 @@ import static duke.constants.ProgramInts.*;
 import static duke.constants.UiStrings.*;
 
 /**
- * Runs the commands entered by the user.
- * Also handles when the list is full by only allowing "list" and "bye" command.
+ * This class receives user input, sends it to the parser, then runs the commands chosen by the user.
+ * Also handles situation where user input is invalid or list is full.
  */
 
 public class CommandRunner {
 
+    /**
+     * Loops indefinitely, receiving user input until "bye" command is received.
+     * Checks list capacity at each iteration. 
+     * When list is full, user cannot add new tasks until tasks are deleted.
+     * User can still list tasks, enter a find query, mark tasks as done or print the help manual.
+     */
     public void receiveUserInput() {
         Scanner in = new Scanner(System.in);
         boolean isExit = false;
-
-        //Loop to receive response.
+        
         while (!isExit) {
             String input = in.nextLine();
             int command = Parser.parseCommand(input);
-
-            // If list is full, will only allow LIST and BYE command to pass
+            
             try {
                 checkListCapacity(command);
             } catch (FullListException e) {
@@ -46,9 +50,12 @@ public class CommandRunner {
     }
 
     /**
-     * PRIVATE COMMAND RUNNERS
+     * Selects the method to run based on the command entered.
+     * 
+     * @param command the integer representation of the command parsed from user input
+     * @param input full user input string
+     * @return false only when exit command is given. Calls the respective method for other commands
      */
-
     private boolean selectCommandToRun(int command, String input) {
         switch (command) {
         case BYE_COMMAND:
@@ -89,6 +96,11 @@ public class CommandRunner {
         return false;
     }
 
+    /**
+     * Marks the task specified by user as 'done'
+     * 
+     * @param input full user input string
+     */
     private void runDone(String input) {
         String[] word = input.split(" ");
         int jobNumber = 0;
@@ -96,12 +108,11 @@ public class CommandRunner {
         try {
             jobNumber = Integer.parseInt(word[1]) - 1;
 
-            // error handling - no jobs
+            // returns when there is no jobs in the list
             if (tasks.getCount() == 0) {
                 ui.printNoTaskWarning();
                 return;
             }
-
             markJobAsDone(tasks.get(jobNumber));
 
         } catch (NumberFormatException e) {
@@ -112,17 +123,28 @@ public class CommandRunner {
 
     }
 
+    /**
+     * Sets the done property of given task to true.
+     * Prints prompt on screen displaying the task that was marked.
+     * 
+     * @param task the task to be marked
+     */
     private void markJobAsDone(Task task) {
         task.setDone(true);
-        System.out.print("Congrats! You've completed: \n   ");
+        System.out.print(PROMPT_TASK_DONE);
         task.printTask();
         System.out.println();
     }
 
+
+    /**
+     * Prints every task in the list.
+     * Displays warning message if task list is empty, does not print empty list.
+     */
     private void runList() {
         int numbering = 1;
 
-        // error handling - no jobs
+        // prints warning message when task list is empty
         if (tasks.getCount() == 0) {
             ui.printNoTaskWarning();
             return;
@@ -139,7 +161,12 @@ public class CommandRunner {
         System.out.println();
     }
 
-
+    /**
+     * Adds a task of type Todo into the task list.
+     * Task description is parsed from user input.
+     * 
+     * @param input full user input string
+     */
     private void runTodo(String input) {
         String job;
 
@@ -155,6 +182,12 @@ public class CommandRunner {
         ui.printTaskAdded(newTask);
     }
 
+    /**
+     * Adds a task of type Deadline into the task list.
+     * Task description and deadline is parsed from user input.
+     * 
+     * @param input full user input string
+     */
     private void runDeadline(String input) {
         String job;
         String by;
@@ -175,6 +208,12 @@ public class CommandRunner {
         ui.printTaskAdded(newTask);
     }
 
+    /**
+     * Adds a task of type Event into the task list.
+     * Task description and event time is parsed from user input.
+     * 
+     * @param input full user input string
+     */
     private void runEvent(String input) {
         String job, at;
 
@@ -194,10 +233,21 @@ public class CommandRunner {
         ui.printTaskAdded(newTask);
     }
 
+    /**
+     * Handles unrecognized input by printing error message.
+     * 
+     * @param input full user input string
+     */
     private void runUnknownCommand(String input) {
         ui.printUnknownCommandWarning(input);
     }
 
+    /**
+     * Deletes a task specified by the user.
+     * Task index is parsed from user input.
+     * 
+     * @param input full user input string
+     */
     private void runDeleteCommand(String input) {
 
         String[] words = input.split(" ");
@@ -216,6 +266,13 @@ public class CommandRunner {
         }
     }
 
+    /**
+     * Prints tasks which contain the keyword specified by user.
+     * Search keyword is parsed from user input.
+     * Prints warning message if no matches are found.
+     * 
+     * @param input full user input string
+     */
     private void runFindCommand(String input) {
         ArrayList<Task> matches = new ArrayList<>();
         int numbering = 1;
@@ -231,7 +288,7 @@ public class CommandRunner {
 
         // collect tasks which match keyword
         for (Task t : tasks.getTasks()) {
-            if (t.getJob().contains(keyword)) {
+            if (t.getDescription().contains(keyword)) {
                 matches.add(t);
             }
         }
@@ -252,19 +309,30 @@ public class CommandRunner {
     }
 
     /**
-     * CHECK LIST CAPACITY
+     * Checks list capacity before a command is ran.
+     * 
+     * @param command command selected to run
+     * @throws FullListException if list is full and selected command is not allowed when list is full.
      */
-    private boolean isAllowedWhenListFull(int command) {
-        boolean isAllowed;
-        isAllowed = !(command == TODO_COMMAND || command == DEADLINE_COMMAND || command == EVENTS_COMMAND);
-        return isAllowed;
-    }
-
-
     private void checkListCapacity(int command) throws FullListException {
         Task.isFull = (tasks.getCount() == MAX_TASK);
         if (Task.isFull && !isAllowedWhenListFull(command)) {
             throw new FullListException();
         }
+    }
+
+    /**
+     * Checks if given command is allowed to run when list is full.
+     * User is not allowed to add more tasks when list is full.
+     * i.e. "todo", "deadline" and "event" commands are not allowed.
+     * User is still allowed to view list, mark tasks as done, delete tasks, and find tasks with keywords.
+     * 
+     * @param command command to be checked
+     * @return true if command is allowed when list is full
+     */
+    private boolean isAllowedWhenListFull(int command) {
+        boolean isAllowed;
+        isAllowed = !(command == TODO_COMMAND || command == DEADLINE_COMMAND || command == EVENTS_COMMAND);
+        return isAllowed;
     }
 }
