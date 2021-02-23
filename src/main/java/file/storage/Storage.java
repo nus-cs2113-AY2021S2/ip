@@ -62,18 +62,18 @@ public class Storage {
     public static void saveToFile(ArrayList<TaskList> tasks) {
         boolean hasSaved;
         do {
-            hasSaved = writeToFile(tasks);
+            hasSaved = hasWrittenToFile(tasks);
         } while (!hasSaved);
     }
 
     // ensures that all tasks in list have been to the duke.txt file
-    private static boolean writeToFile(ArrayList<TaskList> tasks) {
+    private static boolean hasWrittenToFile(ArrayList<TaskList> tasks) {
         boolean hasSaved = false;
         try {
             FileWriter fileWriter = new FileWriter(FILE_PATH);
             hasSaved = true;
             for (TaskList task : tasks) {
-                hasSaved = hasWrittenToFile(fileWriter, task);
+                hasSaved = hasWrittenTaskToFile(fileWriter, task);
             }
             fileWriter.close();
         } catch (java.io.IOException e) {
@@ -83,7 +83,7 @@ public class Storage {
     }
 
     // ensures that one task has been written to the duke.txt file
-    private static boolean hasWrittenToFile(FileWriter fileWriter, TaskList task) {
+    private static boolean hasWrittenTaskToFile(FileWriter fileWriter, TaskList task) {
         boolean hasSaved = true;
         if (task instanceof Event) {
             Event temp = (Event) task;

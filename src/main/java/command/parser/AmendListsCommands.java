@@ -11,38 +11,47 @@ import java.util.ArrayList;
  */
 public class AmendListsCommands extends Command {
 
+    public static final String DONE_COMMAND = "done";
+    public static final String FIND_COMMAND = "find";
+    public static final String TODO_COMMAND = "todo";
+    public static final String DEADLINE_COMMAND = "deadline";
+    public static final String EVENT_COMMAND = "event";
+    public static final String DELETE_COMMAND = "delete";
+    public static final String SEARCH_COMMAND = "search";
+    public static final String COMMAND_DELIMITER = " ";
+
     // parses commands that need to manipulate data in the list
     public static void amendList(String line, ArrayList<TaskList> tasks) {
-        String[] sentence = line.split(" ");
+        String[] sentence = line.split(COMMAND_DELIMITER);
         if (sentence.length < NUMBER_OF_COMMAND_ARGUMENTS) {
             UI.printCommandDoesNotExist();
             UI.printDottedLines();
             return;
         }
         switch (sentence[COMMAND_KEYWORD_POSITION]) {
-        case "done":
+        case DONE_COMMAND:
             CommandsHandler.handleMarkAsDone(tasks, sentence);
             break;
-        case "find":
+        case FIND_COMMAND:
             CommandsHandler.handleFind(line, tasks);
             break;
-        case "todo": {
+        case TODO_COMMAND: {
             AddCommand.addTaskInTodoList(line, tasks);
             break;
         }
-        case "deadline": {
+        case DEADLINE_COMMAND: {
             AddCommand.addTaskInDeadlineList(line, tasks);
             break;
         }
-        case "event": {
+        case EVENT_COMMAND: {
             AddCommand.addTaskInEventList(line, tasks);
             break;
         }
-        case "delete": {
+        case DELETE_COMMAND: {
             CommandsHandler.handleDelete(tasks, sentence);
             break;
         }
-        case "search": {
+        case SEARCH_COMMAND: {
             CommandsHandler.handleSearch(tasks, sentence);
             break;
         }

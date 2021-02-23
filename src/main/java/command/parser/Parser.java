@@ -11,6 +11,10 @@ import java.util.Scanner;
  */
 public class Parser {
 
+    public static final String EXIT_COMMAND = "bye";
+    public static final String LIST_COMMAND = "list";
+    public static final String HELP_COMMAND = "help";
+
     // reads command that the user has inputted
     public static void processCommands(ArrayList<TaskList> tasks) {
         String line;
@@ -26,13 +30,13 @@ public class Parser {
     // selects the appropriate command based on user input
     public static boolean selectCommand(String line, ArrayList<TaskList> tasks) {
         switch (line) {
-        case "bye":
+        case EXIT_COMMAND:
             ExitCommand.exit(tasks);
             return false;
-        case "list":
+        case LIST_COMMAND:
             CommandsHandler.handleList(tasks);
             break;
-        case "help":
+        case HELP_COMMAND:
             UI.printHelp();
             break;
         default:

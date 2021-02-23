@@ -16,11 +16,12 @@ import java.util.ArrayList;
 public class FindCommand extends Command {
 
     public static final String TASK_COUNTER_SENTENCE = "Here is task number: ";
+    public static final int INCORRECT_LENGTH = 1;
 
     // finds task from list of tasks
     public static void findTask(String line, ArrayList<TaskList> tasks) throws IllegalCommandException,
             IllegalTaskException {
-        if (line.length() == 1) {
+        if (line.length() == INCORRECT_LENGTH) {
             throw new IllegalCommandException();
         }
         String description = AddCommand.getTaskDescription(line).trim();

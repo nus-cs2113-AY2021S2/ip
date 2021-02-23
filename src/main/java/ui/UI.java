@@ -15,7 +15,7 @@ public class UI {
         String phrase;
         if (getAreAllTasksDone(tasks)) {
             phrase = "This job was already completed!!!!" + System.lineSeparator()
-                    + "Good job Crewmate! You completed all your tasks in this list! (─‿─)" + System.lineSeparator();
+                    + "Good job Crewmate! You completed all your tasks in this list! ^_^" + System.lineSeparator();
 
         } else {
             phrase = "What are you doing??? This job was already completed!! (;¬_¬)" + System.lineSeparator()
@@ -66,7 +66,7 @@ public class UI {
         System.out.println("Ssshhhhhh!!!!!" + System.lineSeparator() + logo);
         String greetings = "____________________________________________________________________________________"
                 + System.lineSeparator()
-                + "Hello Crewmate! I'm Arthur, ( ͡°͜ ʖ ͡°)" + System.lineSeparator()
+                + "Hello Crewmate! I'm Arthur, ( = ^ _ ^ = )" + System.lineSeparator()
                 + "Please assign me my tasks to complete!" + System.lineSeparator()
                 + "____________________________________________________________________________________"
                 + System.lineSeparator();
@@ -74,26 +74,56 @@ public class UI {
     }
 
     // gets Duke's logo
-    private static String getLogo() {
-        return "             ⣠⣤⣤⣤⣤⣤⣶⣦⣤⣄⡀" + System.lineSeparator()
-                + " ⠀⠀⠀⠀⠀⠀⠀⠀ ⢀⣴⣿⡿⠛⠉⠙⠛⠛⠛⠛⠻⢿⣿⣷⣤⡀" + System.lineSeparator()
-                + " ⠀⠀⠀⠀⠀⠀⠀⠀ ⣼⣿⠋⠀⠀⠀⠀⠀⠀⠀  ⢀⣀⣀⠈⢻⣿⣿⡄" + System.lineSeparator()
-                + " ⠀⠀⠀⠀⠀⠀⠀ ⣸⣿⡏⠀⠀⠀ ⣠⣶⣾⣿⣿⣿⠿⠿⠿⢿⣿⣿⣿⣄" + System.lineSeparator()
-                + " ⠀⠀⠀⠀⠀⠀⠀ ⣿⣿⠁⠀⠀ ⢰⣿⣿⣯⠁⠀⠀⠀⠀⠀⠀⠀ ⠈⠙⢿⣷⡄" + System.lineSeparator()
-                + " ⠀⠀⣀⣤⣴⣶⣶⣿⡟⠀⠀⠀ ⢸⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  ⣿⣷" + System.lineSeparator()
-                + " ⠀⢰⣿⡟⠋⠉⣹⣿⡇⠀⠀⠀ ⠘⣿⣿⣿⣿⣷⣦⣤⣤⣤⣶⣶⣶⣶⣿⣿⣿" + System.lineSeparator()
-                + " ⠀⢸⣿⡇⠀⠀⣿⣿⡇⠀⠀⠀⠀ ⠹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠃" + System.lineSeparator()
-                + " ⠀⣸⣿⡇⠀⠀⣿⣿⡇⠀⠀⠀⠀⠀ ⠉⠻⠿⣿⣿⣿⣿⡿⠿⠿⠛⢻⣿⡇" + System.lineSeparator()
-                + " ⠀⣿⣿⠁⠀⠀⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀   ⢸⣿⣧" + System.lineSeparator()
-                + " ⠀⣿⣿⠀⠀⠀⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  ⢸⣿⣿" + System.lineSeparator()
-                + " ⠀⣿⣿⠀⠀⠀⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  ⢸⣿⣿" + System.lineSeparator()
-                + " ⠀⢿⣿⡆⠀⠀⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  ⢸⣿⡇" + System.lineSeparator()
-                + " ⠀⠸⣿⣧⡀⠀⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  ⣿⣿⠃" + System.lineSeparator()
-                + " ⠀⠀⠛⢿⣿⣿⣿⣿⣇⠀⠀⠀⠀⠀⣰⣿⣿⣷⣶⣶⣶⣶⠶⠀⢠⣿⣿" + System.lineSeparator()
-                + " ⠀⠀⠀⠀⠀⠀⠀⣿⣿⠀⠀⠀⠀⠀⣿⣿⡇⠀⣽⣿⡏⠁⠀⠀  ⢸⣿⡇" + System.lineSeparator()
-                + " ⠀⠀⠀⠀⠀⠀⠀⣿⣿⠀⠀⠀⠀⠀⣿⣿⡇⠀⢹⣿⡆⠀⠀⠀  ⣸⣿⠇" + System.lineSeparator()
-                + " ⠀⠀⠀⠀⠀⠀⠀⢿⣿⣦⣄⣀⣠⣴⣿⣿⠁⠀⠈⠻⣿⣿⣿⣿⡿⠏" + System.lineSeparator()
-                + " ⠀⠀⠀⠀⠀⠀⠀⠈⠛⠻⠿⠿⠿⠿⠋⠁" + System.lineSeparator();
+    public static String getLogo() {
+        return "                             * ** ** ** ** ** ** ** *" + System.lineSeparator()
+                + "                         ** ** ** ** ** ** ** ** ** ** *" + System.lineSeparator()
+                + "                        ** ** ** ** ** ** ** ** ** ** ** ** *" + System.lineSeparator()
+                + "                      * ** ** ** * ** ** ** ** ** ** ** ** **" + System.lineSeparator()
+                + "                    ** ** **                     * ** ** ** **" + System.lineSeparator()
+                + "                   ** ** *                         * ** ** ** *" + System.lineSeparator()
+                + "                  ** **                                * ** ** **" + System.lineSeparator()
+                + "                 * ** *                                   ** ** **" + System.lineSeparator()
+                + "                ** **                                      * ** ** *" + System.lineSeparator()
+                + "               ** **                           * ** ** ** * * ** ** *" + System.lineSeparator()
+                + "              * ** **                    * ** ** ** ** ** ** ** ** ** **" + System.lineSeparator()
+                + "              * ** *                 ** ** ** ** ** ** ** ** ** ** ** **" + System.lineSeparator()
+                + "              * ** *               * ** ** ** ** ** ** ** ** ** ** ** ** *" + System.lineSeparator()
+                + "              * ** *               ** ** ** ** **  *  *  *  *  ** * ** ** **" + System.lineSeparator()
+                + "              * ** *              ** ** ** *                       * ** ** *" + System.lineSeparator()
+                + "              * **              * ** ** *                           * ** **" + System.lineSeparator()
+                + "              * **              * ** ** **                          ** ** *" + System.lineSeparator()
+                + "            ** **              * ** ** **                         * ** *" + System.lineSeparator()
+                + "            *  **              ** ** ** **                      ** ** *" + System.lineSeparator()
+                + "           **  **               * ** ** ** *                * * ** **" + System.lineSeparator()
+                + "        ** **  **                * ** ** ** ** ** ** ** ** ** ** ** *" + System.lineSeparator()
+                + "     ** ** **  **                  * ** ** ** ** ** ** ** ** *" + System.lineSeparator()
+                + "  ** ** ** **  **                                        ** **" + System.lineSeparator()
+                + "  ** **    **  **                                        ** **" + System.lineSeparator()
+                + "  ** *     **  **                                      * ** **" + System.lineSeparator()
+                + "  ** *     **  **                                     * ** **" + System.lineSeparator()
+                + "  ** *     **  **                                     ** ** *" + System.lineSeparator()
+                + "  ** *     **  **                                     ** ** *" + System.lineSeparator()
+                + "  ** *     **  **                                     ** ** *" + System.lineSeparator()
+                + "  ** *     **  **                                     ** ** *" + System.lineSeparator()
+                + "  ** *     **  **                                   * ** ** *" + System.lineSeparator()
+                + "  ** *     **  **                                   * ** ** *" + System.lineSeparator()
+                + "  ** *     **  **                                   * ** ** *" + System.lineSeparator()
+                + "  ** *     **  **                                   * ** ** *" + System.lineSeparator()
+                + "  ** *    **  **                                    * ** ** *" + System.lineSeparator()
+                + "  ** ** ** **  **                                   * ** ** *" + System.lineSeparator()
+                + "  ** ** ** **  **                                   * ** ** *" + System.lineSeparator()
+                + "      * ** **  **                                   * ** ** *" + System.lineSeparator()
+                + "        ** **  **                                   * ** ** *" + System.lineSeparator()
+                + "         ** **  *              ** ** ** ** ** *        * **" + System.lineSeparator()
+                + "            **  **             ** ** ** ** ** *        * **" + System.lineSeparator()
+                + "             **  **             ** **     * ** *       * **" + System.lineSeparator()
+                + "              *  **             ** **     ** **        * **" + System.lineSeparator()
+                + "                 **             ** **      ** **		* **" + System.lineSeparator()
+                + "                  **            ** **		* **        * **" + System.lineSeparator()
+                + "				  *            ** **          **        * **" + System.lineSeparator()
+                + "				   **         ** *            **        **" + System.lineSeparator()
+                + "				    * ** ** ** *               ** ** ** **" + System.lineSeparator()
+                + "				      ** ** ***                  * ** **" + System.lineSeparator();
 
     }
 
@@ -125,13 +155,13 @@ public class UI {
     }
 
     // Prints search command has been completed
-    public static void printSearchComplete(){
-        System.out.println("Search has been completed!! (￣^￣)ゞ");
+    public static void printSearchComplete() {
+        System.out.println("Search has been completed!!");
     }
 
     // Prints no match found
-    public static void printNoMatchFound(){
-        System.out.println("No match found!! （／．＼）");
+    public static void printNoMatchFound() {
+        System.out.println("No match found!! （/ . \\）");
     }
 
     // prints list's title
@@ -146,27 +176,27 @@ public class UI {
 
     // prints command does not exist
     public static void printCommandDoesNotExist() {
-        System.out.println("There's no such command!!! You look SUS!!!  (ー_ーゞ");
+        System.out.println("There's no such command!!! You look SUS!!!  ( O . o )");
     }
 
     // prints cannot perform a done task again
     public static void printWrongTaskDoneName() {
-        System.out.println("This task has already been completed crewmate!! Watchu doin??? (¬_¬)");
+        System.out.println("This task has already been completed crewmate!! Watchu doin??? ( O . o )");
     }
 
     // prints task does not exist
     public static void printInvalidTaskPhrase() {
-        System.out.println("There's no such task?! Focus Crewmate!!  (╬⓪益⓪)");
+        System.out.println("There's no such task?! Focus Crewmate!!  ( X _ X )\"");
     }
 
     // prints no tasks have been done
     public static void printNoTasksDone() {
-        System.out.println("Are you really a Crewmate??? You haven't done any work in this list! （○｀Ｏ´○）");
+        System.out.println("Are you really a Crewmate??? You haven't done any work in this list! ( X _ X ' ）");
     }
 
     // prints all tasks have been completed
     public static void printCompletedTasks() {
-        System.out.println("Good job Crewmate! You completed all your tasks in this list! (─‿─)");
+        System.out.println("Good job Crewmate! You completed all your tasks in this list! ( ^ _ ^ )");
     }
 
     // prints the list is empty
@@ -178,34 +208,34 @@ public class UI {
     // prints number of tasks which have not been done
     public static void printSomeTasksRemaining(int counter) {
         System.out.println("You still have "
-                + counter + " task(s) left in your Lists ! Hurry up!! ＼(｀0´)／");
+                + counter + " task(s) left in your Lists ! Hurry up!! ( X _ X )");
     }
 
     // prints a good ending
     public static void printGoodEnding() {
         System.out.print("Thanks for your help Crewmate!!" + System.lineSeparator()
                 + "We wouldn't have done this without your help!!" + System.lineSeparator()
-                + "Goodbye!!!! (￣▽￣)ノ" + System.lineSeparator());
+                + "Goodbye!!!! (^ . ^)" + System.lineSeparator());
         printDottedLines();
 
     }
 
     // prints a bad ending
     public static void printBadEnding() {
-        System.out.print("You have been kicked out! Bye Impostor!!!  (๑>ᴗ<๑)" + System.lineSeparator());
+        System.out.print("You have been kicked out! Bye Impostor!!!  ( X _ X \" )" + System.lineSeparator());
         printDottedLines();
 
     }
 
     // prints a normal ending
     public static void printTraitor() {
-        System.out.print("You are abandoning us!!! I trusted you!!!  (　ﾟдﾟ)" + System.lineSeparator());
+        System.out.print("You are abandoning us!!! I trusted you!!!  ( O . o ' ) " + System.lineSeparator());
         printDottedLines();
     }
 
     // notifies user when find is completed
-    public static void printFindComplete(){
-        System.out.println("Your search has been completed Crewmate! ( ´ ▽ ` )ﾉ");
+    public static void printFindComplete() {
+        System.out.println("Your search has been completed Crewmate! ( ^ _ ^ )");
     }
 
     // prints loading duke.txt when Duke is started
@@ -225,6 +255,6 @@ public class UI {
 
     // prints a message when a task is deleted
     public static void printDeletingTask() {
-        System.out.println(" (o‿∩) Hol' up! I'm deleting this task:");
+        System.out.println(" ( o . ^ ) Hol' up! I'm deleting this task:");
     }
 }

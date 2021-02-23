@@ -8,7 +8,7 @@ import duke.date.DukeDate;
 public class Event extends Deadline {
     private static final String TASK_TITLE = "E";
     public static final int BY_INDEX = 1;
-    public static final String NEW_EVENT = "Aight Crewmate!! I've got a new event for you!!! (¬‿¬): ";
+    public static final String NEW_EVENT = "Aight Crewmate!! I've got a new event for you!!! ^_^: ";
     public static final String COMMAND_HEADER = "event ";
     public static final String BY_HEADER = "(by: ";
     public static final String NO_BY = "No Event time!! Noice!!! :)";

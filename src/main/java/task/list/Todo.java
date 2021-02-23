@@ -6,7 +6,7 @@ package task.list;
 public class Todo extends TaskList {
 
     private static final String TASK_TITLE = "T";
-    public static final String NEW_TASK = "Aight Crewmate!! I've got a new task for you to do!!! (¬‿¬): ";
+    public static final String NEW_TASK = "Aight Crewmate!! I've got a new task for you to do!!! ^_^: ";
     public static final String COMMAND_HEADER = "todo ";
 
     // creates a todo task

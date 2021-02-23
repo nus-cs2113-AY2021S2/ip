@@ -12,6 +12,8 @@ import java.util.ArrayList;
  */
 public class DoneCommand extends Command {
 
+    public static final int INDEX_POSITION = 1;
+
     // mark the task indicated by the index inputted by the user as done
     public static void markTaskAsDone(String[] sentence, ArrayList<TaskList> tasks) throws IllegalCommandException, IllegalTaskException,
             IllegalTaskRedoException {
@@ -40,7 +42,7 @@ public class DoneCommand extends Command {
         if (sentence.length > NUMBER_OF_COMMAND_ARGUMENTS) {
             throw new IllegalCommandException();
         }
-        int index = getIndexFromCommand(sentence[1]);
+        int index = getIndexFromCommand(sentence[INDEX_POSITION]);
         if (index > tasks.size() || index == -1) {
             throw new IllegalTaskException();
         }
