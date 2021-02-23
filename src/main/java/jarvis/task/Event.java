@@ -1,5 +1,8 @@
 package jarvis.task;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Represents an event task
  */
@@ -19,6 +22,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at:" + at + ")";
+        return "[E]" + super.toString() + "(at: " + at + ")";
     }
 }

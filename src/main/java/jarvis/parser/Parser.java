@@ -28,7 +28,7 @@ public class Parser {
      */
     public static Deadline parseStringToDeadline(String userInput) {
         String task = userInput.replaceFirst("deadline ", "");
-        String[] details = task.split("/by", 2);
+        String[] details = task.split("/by ", 2);
         String description = details[0];
         String by = details[1];
         return new Deadline(description, by);
@@ -42,7 +42,7 @@ public class Parser {
      */
     public static Event parseStringToEvent(String userInput) {
         String task = userInput.replaceFirst("event ", "");
-        String[] details = task.split("/at", 2);
+        String[] details = task.split("/at ", 2);
         String description = details[0];
         String at = details[1];
         return new Event(description, at);

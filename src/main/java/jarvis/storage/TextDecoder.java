@@ -30,14 +30,14 @@ public class TextDecoder {
             task.setTaskStatus(encodedTask.charAt(TASK_STATUS_INDEX) != ' ');
             break;
         case 'D':
-            String[] detailsDeadline = taskDescription.split("\\(by:", 2);
+            String[] detailsDeadline = taskDescription.split("\\(by: ", 2);
             String descriptionDeadline = detailsDeadline[0];
             String by = detailsDeadline[1].replace(")", "");
             task = new Deadline(descriptionDeadline, by);
             task.setTaskStatus(encodedTask.charAt(TASK_STATUS_INDEX) != ' ');
             break;
         case 'E':
-            String[] detailsEvent = taskDescription.split("\\(at:", 2);
+            String[] detailsEvent = taskDescription.split("\\(at: ", 2);
             String descriptionEvent = detailsEvent[0];
             String at = detailsEvent[1].replace(")", "");
             task = new Event(descriptionEvent, at);

@@ -4,6 +4,7 @@ import jarvis.Duke;
 import jarvis.exception.EmptyListException;
 import jarvis.exception.InvalidTaskException;
 import jarvis.parser.Parser;
+import jarvis.task.Deadline;
 import jarvis.task.Task;
 import jarvis.tasklist.TaskList;
 
