@@ -3,47 +3,67 @@ import duke.tasks.Task;
 
 import java.util.ArrayList;
 
+/**
+ * Represents the entire task list used to store user tasks for this program.
+ * Encapsulates the methods and variables complementing the task list.
+ */
 
 public class TaskList {
     private ArrayList<Task> taskList;
-    private int count = 0;
-    
+
+    /**
+     * Creates a new, empty task list.
+     */
     public TaskList() {
         this.taskList = new ArrayList<>();
     }
-
-    // GETTERS & SETTERS
+    
     public ArrayList<Task> getTasks() {
         return taskList;
     }
 
+    /**
+     * Constructs a task list with the given data.
+     * 
+     * @param tasks an array list of {@code Tasks}
+     */
     public void setTasks(ArrayList<Task> tasks) {
         this.taskList = tasks;
     }
 
+    /**
+     * Fetches the current number of tasks in the task list.
+     * 
+     * @return the number of tasks currently in the list
+     */
     public int getCount() {
-        return count;
+        return taskList.size();
     }
 
-    public void setCount(int count) {
-        this.count = count;
-    }
-
-    // METHODS
+    /**
+     * Adds a task to the task list.
+     */
     public void add(Task t) {
         taskList.add(t);
-        this.count = taskList.size();
     }
-    
+
+    /**
+     * Returns the task at the specified index of the task list.
+     */
     public Task get(int index) {
         return taskList.get(index);
     }
-    
+
+    /**
+     * Removes the task at the specified index from the task list.
+     */
     public void remove(int index) {
         taskList.remove(index);
-        this.count = taskList.size();
     }
-    
+
+    /**
+     * Returns true if the {@code Task} is present in the task list.
+     */
     public boolean contains(Task t) {
         return taskList.contains(t);
     }
