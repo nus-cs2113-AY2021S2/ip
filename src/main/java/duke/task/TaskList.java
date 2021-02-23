@@ -28,4 +28,8 @@ public class TaskList {
     public Task deleteTaskByIndex(int taskIndex) {
         return tasks.remove(taskIndex);
     }
+
+    public int getTaskNumber(Task task) {
+        return tasks.indexOf(task) + 1;
+    }
 }

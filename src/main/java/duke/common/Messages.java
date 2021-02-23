@@ -16,6 +16,7 @@ public class Messages {
     public static final String MESSAGE_ADDED_TASK = "Got it. I've added this task:" + System.lineSeparator() + "\t";
     public static final String MESSAGE_DELETED_TASK = "Got it. I've added this task:" + System.lineSeparator() + "\t";
     public static final String MESSAGE_LIST_TASKS = "Here are the tasks in your list:";
+    public static final String MESSAGE_FOUND_TASKS = "Here are the matching tasks in your list:";
     public static final String ICON_DONE = "\u2718";
 
 }
