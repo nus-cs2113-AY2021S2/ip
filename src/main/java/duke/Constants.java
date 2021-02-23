@@ -12,6 +12,7 @@ public final class Constants {
     public static final String COMMAND_MARK_WORD = "done";
     public static final String COMMAND_LIST_WORD = "list";
     public static final String COMMAND_DELETE_WORD = "delete";
+    public static final String COMMAND_FIND_WORD = "find";
     public static final String COMMAND_EXIT_WORD = "bye";
 
     // Display messages.
@@ -21,13 +22,14 @@ public final class Constants {
     public static final String MESSAGE_MARKED = "Nice! I've marked this task as done: ";
     public static final String MESSAGE_LIST = "Here are the tasks in your list: ";
     public static final String MESSAGE_DELETE = "Noted. I have removed this task: ";
+    public static final String MESSAGE_FIND = "Here are some of the tasks in your list: ";
     public static final String MESSAGE_EXIT = "Bye. Hope to see you again soon! ";
     public static final String MESSAGE_NUMBER_OF_TASKS = "You have %s task(s) in the list. "; 
 
     public static final String ERROR_INDEX_OUT_OF_RANGE = "Index out of range. ";
     public static final String ERROR_INVALID_COMMAND_RECEIVED = "Invalid command. Available commands: "
-            + System.lineSeparator() + "\t  list, done, todo, deadline, event, delete, bye";
-    public static final String ERROR_EMPTY_LIST = "You have no tasks recorded.";
+            + System.lineSeparator() + "\t  list, done, todo, deadline, event, delete, find, bye";
+    public static final String ERROR_EMPTY_LIST = "No tasks found.";
     public static final String ERROR_INVALID_SYNTAX_RECEIVED = "Invalid syntax! Usage: ";
     public static final String ERROR_IO = "IO Error, please try again. ";
     public static final String ERROR_IMPORT_TASK = "Failed to import some tasks. ";
@@ -41,6 +43,7 @@ public final class Constants {
     public static final String MESSAGE_DEADLINE_SYNTAX = " deadline <task name> /by <date>";
     public static final String MESSAGE_EVENT_SYNTAX = " event <task name> /at <date>";
     public static final String MESSAGE_DELETE_SYNTAX = " delete <task number>";
+    public static final String MESSAGE_FIND_SYNTAX = " find <keyword>";
 
     // File path location
     public static final String FILE_PATH = "Duke.txt";

@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.Date;
+
 public abstract class Task {
     protected String description;
     /** Boolean to track if task is completed */

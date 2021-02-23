@@ -32,8 +32,10 @@ public class Parser {
             // No further parsing needed, return immediately
             break;
         case Constants.COMMAND_TODO_WORD:
+        case Constants.COMMAND_FIND_WORD:
             if (extractedCommands.length < 2) {
-                throw new InvalidSyntaxException(Constants.MESSAGE_TODO_SYNTAX);
+                Ui ui = new Ui();
+                throw new InvalidSyntaxException(ui.getSyntaxMessage(parsedCommands[Constants.COMMAND_INDEX]));
             }
             // Add remaining parameters to array (i.e. task description)
             parsedCommands[Constants.TASK_DESCRIPTION_INDEX] = extractedCommands[1];

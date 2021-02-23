@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.Date;
+
 public class Todo extends Task {
     /**
      * Creates a Todo object. 

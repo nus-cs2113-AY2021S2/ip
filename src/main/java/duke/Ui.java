@@ -2,6 +2,9 @@ package duke;
 
 import java.util.Scanner;
 
+import duke.error.TaskListEmptyException;
+import duke.task.Task;
+
 public class Ui {
     // Scanner for extracting user input.
     private static final Scanner SCANNER = new Scanner(System.in);
@@ -52,6 +55,17 @@ public class Ui {
     }
 
     /**
+     * Displays the list of tasks to the user. The list will be numbered, starting
+     * from 1.
+     * 
+     * @param tasks Tasks to be listed.
+     */
+    public void displayToUser(TaskList tasks, String searchString) throws TaskListEmptyException {
+        String listAsString = getDisplayString(tasks, searchString);
+        displayToUser(Constants.MESSAGE_FIND, listAsString);
+    }
+
+    /**
      * Displays success message after adding new task.
      */
     public void displayAddTaskSuccessMessage(TaskList tasks) {
@@ -93,6 +107,22 @@ public class Ui {
         return message.toString();
     }
 
+    public String getDisplayString(TaskList tasks, String searchString) throws TaskListEmptyException {
+        StringBuilder message = new StringBuilder();
+        int matchNumber = 0;
+        for (int i = 0; i < tasks.getSize(); i++) {
+            Task task = tasks.getTask(i);
+            if (task.getTaskDescription().contains(searchString)) {
+                matchNumber++;
+                message.append(System.lineSeparator() + String.format("\t %d. %s", matchNumber, task.toString()));
+            }
+        }
+
+        if (matchNumber == 0) {
+            throw new TaskListEmptyException();
+        }
+        return message.toString();
+    }
     
     /**
      * Get the syntax of the commands depending on the one given by the user.
@@ -113,6 +143,8 @@ public class Ui {
             return Constants.MESSAGE_MARK_SYNTAX;
         case Constants.COMMAND_DELETE_WORD:
             return Constants.MESSAGE_DELETE_SYNTAX;
+        case Constants.COMMAND_FIND_WORD:
+            return Constants.MESSAGE_FIND_SYNTAX;
         default:
             return null;
         }

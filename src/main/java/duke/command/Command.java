@@ -92,6 +92,10 @@ public class Command {
             storage.saveToFile(tasks);
             ui.displayDeleteTaskSuccessMessage(deletedTask);
             return;
+        case Constants.COMMAND_FIND_WORD:
+            FindCommand findCommand = new FindCommand(commands);
+            findCommand.executeFindTask(tasks, ui);
+            return;
         default:
             throw new IllegalCommandException();
         }
