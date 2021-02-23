@@ -1,2 +1,2 @@
-deadline,sleep,true,tonight
-event,repeat,false,everyday
+true,D,sleep,tonight
+false,E,repeat,everyday

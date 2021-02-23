@@ -12,24 +12,7 @@ public class DukePrinter {
 
     private static final String LINE_DIVIDER = "\t____________________________________________________________";
 
-    public static void writeToFile(ArrayList<Task> tasks, String directory, String filename) throws IOException {
-        File outputDirectory = new File(directory);
-        if (!outputDirectory.exists()) {
-            outputDirectory.mkdir();
-        }
-        File outputFile = new File(directory + filename);
-        if (!outputFile.exists()) {
-            outputFile.createNewFile();
-        }
-        FileWriter outputWriter = new FileWriter(outputFile);
-        for (Task task : tasks) {
-            outputWriter.write(task.exportAsCSV() + "\n");
-        }
-        outputWriter.close();
-    }
-
-    private static void printMessage(String[] messageSentences) {
-        /* Print sentences at the correct indentation level, with a line divider at the start and end */
+    public static void printMessage(String... messageSentences) {
         System.out.println(LINE_DIVIDER);
         for (int i = 0; i < messageSentences.length; i++) {
             System.out.println("\t " + messageSentences[i]);
@@ -87,10 +70,10 @@ public class DukePrinter {
         printMessage(taskMessage);
     }
 
-    public static void printTaskAdded(ArrayList<Task> tasks, Task task) {
+    public static void printTaskAdded(Task task, int numberOfTasks) {
         String[] taskAddedMessage = {
                 "added: " + task.toString(),
-                getNumTasksString(tasks.size())
+                getNumTasksString(numberOfTasks)
         };
         printMessage(taskAddedMessage);
     }
