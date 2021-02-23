@@ -19,6 +19,9 @@ public class AmendListsCommands extends Command {
         case "done":
             CommandsHandler.handleMarkAsDone(tasks, sentence);
             break;
+        case "find":
+            CommandsHandler.handleFind(line, tasks);
+            break;
         case "todo": {
             AddCommand.addTaskInTodoList(line, tasks);
             break;

@@ -180,6 +180,11 @@ public class UI {
         printDottedLines();
     }
 
+    // notifies user when find is completed
+    public static void printFindComplete(){
+        System.out.println("Your search has been completed Crewmate! ( ´ ▽ ` )ﾉ");
+    }
+
     public static void printLoading() {
         System.out.println("Loading your previous data . . .");
     }

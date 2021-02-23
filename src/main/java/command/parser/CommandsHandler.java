@@ -40,6 +40,17 @@ public class CommandsHandler {
         }
     }
 
+    // handles exceptions that can occur when user inputs find command
+    public static void handleFind(String line, ArrayList<TaskList> tasks) {
+        try {
+            FindCommand.findTask(line, tasks);
+        } catch (IllegalTaskException e) {
+            UI.printInvalidTaskPhrase();
+        } catch (IllegalCommandException e) {
+            UI.printCommandDoesNotExist();
+        }
+    }
+
     // handles exceptions when searching for a task based on the date provided
     public static void handleSearch(ArrayList<TaskList> tasks, String[] sentence) {
         try {
