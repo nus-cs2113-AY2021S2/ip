@@ -29,8 +29,9 @@ public class Ui {
         System.out.println("------------------------------------------");
     }
 
-    public static void printExitMessage() {
+    public static void printExitMessage(boolean isExit) {
         System.out.println("    Bye. Hope to see you again soon!");
+        isExit = true;
     }
 
     public static void printTasks(ArrayList<Task> tasks) {

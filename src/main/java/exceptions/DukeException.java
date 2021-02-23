@@ -14,4 +14,8 @@ public class DukeException extends Exception {
         System.out.println("OOPS!!! The description of a " + TASKTYPE.toString().toLowerCase() + " cannot be empty.");
     }
 
+    public void getErrorSearchCannotBeEmpty() {
+        System.out.println("OOPS!!! The search description cannot be empty. ");
+    }
+
 }

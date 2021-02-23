@@ -3,19 +3,15 @@ package duke;
 import exceptions.DukeException;
 import exceptions.ErrorHandler;
 import tasks.Task;
+import tasks.TaskType;
 
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class TaskList {
 
     private static ArrayList<Task> tasks;
     private static int tasksCount;
-
-    static final int DONELENGTH = 4;
-    static final int DELETELENGTH = 6;
-    static final int FINDLENGTH = 4;
 
 
     public TaskList(ArrayList<Task> tasks) {
@@ -31,17 +27,20 @@ public class TaskList {
         return tasks;
     }
 
-
+    /**
+     *
+     * @param userInput User command
+     */
     public static void addTask(String userInput) {
         try {
             Task t;
-            if (userInput.toLowerCase().startsWith("deadline")){
+            if (userInput.toLowerCase().startsWith(TaskType.DEADLINE.toString().toLowerCase())){
                 t = Parser.processAddDeadline(userInput);
             }
-            else if (userInput.toLowerCase().startsWith("event")){
+            else if (userInput.toLowerCase().startsWith(TaskType.EVENT.toString().toLowerCase())){
                 t = Parser.processAddEvent(userInput);
             }
-            else if (userInput.toLowerCase().startsWith("todo")){
+            else if (userInput.toLowerCase().startsWith(TaskType.TODO.toString().toLowerCase())){
                 t = Parser.processAddTodo(userInput);
             }
             else {
@@ -58,35 +57,31 @@ public class TaskList {
 
     public static void markTaskDone(String task) {
         try {
-            int idx = Integer.parseInt(String.valueOf(task.charAt(DONELENGTH+1)));
+            int idx = Parser.processTaskDone(task);
             Task taskDone = tasks.get(idx-1);
             taskDone.markAsDone();
             Ui.printMarkTaskDoneMessage(taskDone);
-        } catch (NumberFormatException e) {
-            System.out.println("OOPS!!! Please enter an integer after 'done'.");
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("OOPS!!! Please choose a valid task index.");
+            ErrorHandler.printErrorMsgIndexCannotBeEmpty();
         }
-
     }
 
     public static void deleteTask(String task) {
         try {
-            int idx = Integer.parseInt(String.valueOf(task.charAt(DELETELENGTH+1)));
+            int idx = Parser.processDeleteTask(task);
             Task taskDeleted = tasks.get(idx-1);
             tasks.remove(idx-1);
             tasksCount--;
             Ui.printDeleteTaskMessage(taskDeleted, tasksCount);
-        } catch (NumberFormatException e) {
-            System.out.println("OOPS!!! Please enter an integer after 'delete'.");
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("OOPS!!! Please choose a valid task index.");
+            ErrorHandler.printErrorMsgIndexCannotBeEmpty();
         }
+
     }
 
     public static ArrayList<Task> findTask(String task) {
         ArrayList<Task> matchingTasks = new ArrayList<>();
-        String searchDescription = task.substring(FINDLENGTH+1).trim();
+        String searchDescription = Parser.processFindTask(task);
         for (Task t: tasks) {
             if (t.getDescription().contains(searchDescription)){
                 matchingTasks.add(t);

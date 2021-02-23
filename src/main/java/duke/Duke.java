@@ -19,8 +19,7 @@ public class Duke {
         while (!isExit) {
             String fullCommand = ui.readCommand();
             if (fullCommand.equalsIgnoreCase("bye")) {
-                isExit = true;
-                Ui.printExitMessage();
+                Ui.printExitMessage(isExit);
                 Storage.saveFile();
                 break;
             }
