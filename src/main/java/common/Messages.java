@@ -1,5 +1,8 @@
 package common;
 
+/**
+ * all messages used in the program
+ */
 public class Messages {
 
     // Messages

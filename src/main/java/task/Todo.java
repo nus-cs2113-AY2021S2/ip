@@ -7,10 +7,17 @@ public class Todo extends Task {
     }
 
     @Override
+    /**
+     * @return partial display message when todo added
+     */
     public String toString() {
         return "[T]" + super.toString();
     }
 
+    /**
+     * format to save todo into save file
+     * @return String to save todo into save file
+     */
     public String saveToFile() {
         String done = "1";
         if (isDone) {

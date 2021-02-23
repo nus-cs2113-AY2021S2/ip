@@ -10,10 +10,17 @@ public class Deadline extends Task {
     }
 
     @Override
+    /**
+     * @return partial display message when deadline added
+     */
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
     }
 
+    /**
+     * format to save deadline to save file
+     * @return String to save deadline into save file
+     */
     public String saveToFile() {
         String done = "1";
         if (isDone) {

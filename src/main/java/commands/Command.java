@@ -17,6 +17,10 @@ public abstract class Command {
     public static final TextUi textUi = new TextUi();
     public static final Storage storage = new Storage();
 
+    /**
+     * display message when task added
+     * @param task details of task added
+     */
     public static void printAddTask(Task task) {
         textUi.showAddTask();
         System.out.println(constants.INDENTATION + task.toString());

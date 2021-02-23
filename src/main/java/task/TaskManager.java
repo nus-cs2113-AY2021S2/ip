@@ -2,6 +2,9 @@ package task;
 
 import java.util.ArrayList;
 
+/**
+ * Manage task list manipulation commands
+ */
 public class TaskManager {
 
     private static final ArrayList<Task> taskList = new ArrayList<>();
