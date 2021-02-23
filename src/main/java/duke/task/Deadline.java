@@ -1,23 +1,31 @@
 package duke.task;
 
-public class Deadline extends Task {
-    protected String deadline;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-    public Deadline(String description, String deadline) {
+public class Deadline extends Task {
+    private LocalDateTime deadline;
+
+    public Deadline(String description, LocalDateTime deadline) {
         super(description);
         this.deadline = deadline;
     }
 
-    public String getDeadline() {
+    public LocalDateTime getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(String deadline) {
+    public void setDeadline(LocalDateTime deadline) {
         this.deadline = deadline;
     }
 
     @Override
     public String toString() {
+        return "[D]" + super.toString() + " (by: " + deadline.format(DateTimeFormatter.ofPattern("d MMM yyyy")) +")";
+    }
+
+    @Override
+    public String toFileOutput() {
         return "[D]" + super.toString() + " (by: " + deadline + ")";
     }
 }
