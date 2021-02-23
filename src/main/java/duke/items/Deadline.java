@@ -7,10 +7,10 @@ public class Deadline extends Task {
 
     public Deadline(String description, String byInput) {
         super(description);
-        this.by = convertDateFormat(byInput);
+        this.by = byInput;
     }
     public void setBy(String byInput) {
-        this.by = convertDateFormat(byInput);
+        this.by = byInput;
     }
 
     public String getBy() {

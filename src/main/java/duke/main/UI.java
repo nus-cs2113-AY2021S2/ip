@@ -2,8 +2,11 @@ package duke.main;
 
 import duke.items.Task;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 public class UI {
     private static final String DEADLINE_TEMPLATE = "deadline <task> /by <YYYY-MM-DD>";
@@ -14,9 +17,17 @@ public class UI {
         System.out.println("____________________________________________________________");
     }
 
-    public static void list() {
+    public static void listPreamble() {
         if (Task.getNumOfTasks() != 0){
             System.out.println("Here are the tasks in your list:");
+        }
+    }
+    public static void findPreamble() {
+        if (Task.getNumOfTasks() != 0){
+            System.out.println("Here are the matching tasks in your list:");
+        }
+        else {
+            System.out.println("There are no matching task in your list:");
         }
     }
 
@@ -85,6 +96,12 @@ public class UI {
         LocalDate myDateObj = LocalDate.parse(date);
         DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("MMM-dd-yyyy ");
         return myDateObj.format(myFormatObj);
+    }
+
+    public static LocalDate stringPatternToDate(String input) throws ParseException {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM-d-yyyy ");
+        LocalDate localDate = LocalDate.parse(input, formatter);
+        return localDate;
     }
 
 }

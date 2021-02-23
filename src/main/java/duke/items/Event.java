@@ -8,12 +8,12 @@ public class Event extends Task {
 
     public Event(String description, String atInput) {
         super(description);
-        this.at = convertDateFormat(atInput);
+        this.at = atInput;
 
     }
 
     public void setAt(String atInput) {
-        this.at = convertDateFormat(atInput);
+        this.at = atInput;
     }
     public String getAt() {
         return this.at;

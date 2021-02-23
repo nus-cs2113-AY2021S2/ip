@@ -1,7 +1,11 @@
 package duke.items;
 
+import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import duke.exceptions.*;
+
+import static duke.main.UI.stringPatternToDate;
 
 
 public class Task {
@@ -27,6 +31,44 @@ public class Task {
     public static void addTask(Task task) {
         list.add(task);
         numOfTasks++;
+    }
+    public static void findTask(String find) {
+        int counter = 1;
+        for (int i =0; i<numOfTasks;i++) {
+            if (list.get(i).description.contains(find)) {
+                System.out.print(counter + ".");
+                list.get(i).print();
+                counter++;
+            }
+        }
+    }
+    public static void findAt(String find) {
+        int counter = 1;
+        for (int i =0; i<numOfTasks;i++) {
+            if ( !(list.get(i) instanceof Event)){
+                continue;
+            }
+            if (((Event)list.get(i)).getAt().contains(find)) {
+                System.out.print(counter + ".");
+                list.get(i).print();
+                counter++;
+            }
+        }
+    }
+    public static void findBy(String find) throws ParseException {
+        int counter = 1;
+        for (int i =0; i<numOfTasks;i++) {
+            if ( !(list.get(i) instanceof Deadline)){
+                continue;
+            }
+            LocalDate inputDate = LocalDate.parse(find);
+            LocalDate current = stringPatternToDate(((Deadline)list.get(i)).getBy());
+            if (!(inputDate.isBefore(current))){
+                System.out.print(counter + ".");
+                list.get(i).print();
+                counter++;
+            }
+        }
     }
     public static void deleteTask(int index) {
         numOfTasks--;
