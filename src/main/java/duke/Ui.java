@@ -109,6 +109,7 @@ public class Ui {
         System.out.println(ADDED_TO_LIST_MESSAGE);
         printDetailsOfTask(current, tasks);
         printTotalTasks();
+        printBorderLine();
     }
     /**
      * Prints appropriate error message according to error type.

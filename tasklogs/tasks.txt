@@ -1,2 +1,5 @@
-[D] | 1 | remaster guitar track | 2020-02-27
-[E] | 0 | live gig | 2020-03-05
+[D] | 1 | remaster guitar track | 2020-04-09
+[E] | 0 | live gig | 2020-03-29
+[T] | 0 | restring guitar
+[E] | 0 | guitar | 2020-03-29
+[D] | 0 | guitar lesson | 2020-04-09
