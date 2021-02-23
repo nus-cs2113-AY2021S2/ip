@@ -1,4 +1,5 @@
-Hello! I am Kaman :)
+Initializing Happy... Completed!
+Hello! I am Happy :)
 What can I do for you?
 Command entered: Testing
 I don't understand your input! Please try again!
@@ -7,10 +8,13 @@ The description of a task cannot be empty.
 Command entered: todo Task-1
 Got it. I've added this task:
 	[T][ ] Task-1
-Now you have 1 tasks in the list.
+Now you have 4 tasks in the list.
 Command entered: list
 Here is your task List:
-1. [T][ ] Task-1
+1. [T][X] Task-1
+2. [D][ ] Task-2 (by: 10:00am)
+3. [E][ ] Task-3 (at: tmr)
+4. [T][ ] Task-1
 Command entered: deadline Task-2
 Invalid argument! It may be resulted from:
 1. No date/time provided
@@ -22,11 +26,14 @@ Invalid argument! It may be resulted from:
 Command entered: deadline Task-2 /by 10:00am
 Got it. I've added this task:
 	[D][ ] Task-2 (by: 10:00am)
-Now you have 2 tasks in the list.
+Now you have 5 tasks in the list.
 Command entered: list
 Here is your task List:
-1. [T][ ] Task-1
+1. [T][X] Task-1
 2. [D][ ] Task-2 (by: 10:00am)
+3. [E][ ] Task-3 (at: tmr)
+4. [T][ ] Task-1
+5. [D][ ] Task-2 (by: 10:00am)
 Command entered: event Task-3
 Invalid argument! It may be resulted from:
 1. No date/time provided
@@ -38,12 +45,15 @@ Invalid argument! It may be resulted from:
 Command entered: event Task-3 /at tmr
 Got it. I've added this task:
 	[E][ ] Task-3 (at: tmr)
-Now you have 3 tasks in the list.
+Now you have 6 tasks in the list.
 Command entered: list
 Here is your task List:
-1. [T][ ] Task-1
+1. [T][X] Task-1
 2. [D][ ] Task-2 (by: 10:00am)
 3. [E][ ] Task-3 (at: tmr)
+4. [T][ ] Task-1
+5. [D][ ] Task-2 (by: 10:00am)
+6. [E][ ] Task-3 (at: tmr)
 Command entered: done 0
 Invalid input! (Index cannot be out of bounds)
 Command entered: done 2
@@ -51,9 +61,12 @@ Nice! I've marked this task as done:
 	[D][X] Task-2 (by: 10:00am)
 Command entered: list
 Here is your task List:
-1. [T][ ] Task-1
+1. [T][X] Task-1
 2. [D][X] Task-2 (by: 10:00am)
 3. [E][ ] Task-3 (at: tmr)
+4. [T][ ] Task-1
+5. [D][ ] Task-2 (by: 10:00am)
+6. [E][ ] Task-3 (at: tmr)
 Command entered: done
 Command "done" requires an integer argument. Please try again!
 Command entered: list 2
@@ -65,11 +78,14 @@ Invalid input! (Index cannot be out of bounds)
 Command entered: delete 2
 Got it. I've deleted this task:
 	[D][X] Task-2 (by: 10:00am)
-Now you have 2 tasks in the list.
+Now you have 5 tasks in the list.
 Command entered: list
 Here is your task List:
-1. [T][ ] Task-1
+1. [T][X] Task-1
 2. [E][ ] Task-3 (at: tmr)
+3. [T][ ] Task-1
+4. [D][ ] Task-2 (by: 10:00am)
+5. [E][ ] Task-3 (at: tmr)
 Command entered: bye again~
 Command "bye" requires no argument. Please try again!
 Command entered: bye

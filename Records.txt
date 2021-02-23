@@ -1,4 +1,4 @@
-T|0|0 aa
-T|1|aac
 E|0|llo /at pol
-D|1|1234 /by al
+D|1|opp /by 10
+T|0|hiking
+D|0|oopak /by ui

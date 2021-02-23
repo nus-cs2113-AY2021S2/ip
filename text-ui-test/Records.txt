@@ -1,3 +1,7 @@
+T|1|Task-1
 T|0|Task-1
-D|1|Task-2|10:00am
-E|0|Task-3|tmr
+D|0|Task-2 /by 10:00am
+E|0|Task-3 /at tmr
+T|0|Task-1
+D|0|Task-2 /by 10:00am
+E|0|Task-3 /at tmr

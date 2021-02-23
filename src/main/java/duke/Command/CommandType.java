@@ -1,4 +1,4 @@
-package duke.Input;
+package duke.Command;
 
 public enum CommandType {
     delete, done;
