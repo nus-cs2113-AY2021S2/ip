@@ -37,6 +37,8 @@ Example:
 Adds a task of type 'deadline' into the task list.
 
 Format: `deadline <description> /by <date> <timing>`
+* Format for date: `yyyy-mm-dd`
+* Format for time: `hh:mm`
 
 Example:
 * Input: `deadline submit assignment /by 2021-02-24 23:00`
@@ -53,6 +55,8 @@ Example:
 Adds a task of type 'event' into the task list.
 
 Format: `event <description> /at <date> <timing>`
+* Format for date: `yyyy-mm-dd`
+* Format for time: `hh:mm`
 
 Example:
 * Input: `event project meeting /at 2019-05-23 13:00`
