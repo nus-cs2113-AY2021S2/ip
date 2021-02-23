@@ -8,7 +8,9 @@ import duke.exception.InvalidInputException;
 import duke.exception.InvalidInputException.InputExceptionType;
 import duke.task.Task;
 
-// Find a task in the tasklist
+/**
+ * Find a task in the tasklist
+ */
 public class FindCommand extends Command {
     public FindCommand(Ui ui, TaskList tasks, HashMap<String, String> arguments) {
         super(ui, tasks, arguments);

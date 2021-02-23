@@ -7,6 +7,10 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * A wrapper class for LocalDateTime, used for storing and formatting of dates and times
+ * @see LocalDateTime
+ */
 public class DateTime implements Serializable {
     public static final long serialVersionUID = 1L;
 
@@ -17,6 +21,11 @@ public class DateTime implements Serializable {
 
     protected LocalDateTime dateTime;
 
+    /**
+     * Construct a dateTime object with a string. The string must be following the
+     * format given in datePattern and timePattern attribute of this class.
+     * @param dateTimeString A string contain the date (and time) to be parsed
+     */
     public DateTime(String dateTimeString) {
         try {
             dateTime =
@@ -28,10 +37,18 @@ public class DateTime implements Serializable {
         }
     }
 
+    /**
+     * Check whether this dateTime instance falls on a same date as the other dateTime instance
+     * @param dateTime DateTime instance used for comparison
+     * @return True for same date
+     */
     public Boolean isSameDate(DateTime dateTime) {
         return this.dateTime.toLocalDate().isEqual(dateTime.dateTime.toLocalDate());
     }
 
+    /**
+     * Format this dateTime instance to a string, using format defined in datePattern and timePattern
+     */
     @Override
     public String toString() {
         return dateTime.format(DateTimeFormatter.ofPattern(datePattern + " " + timePattern));

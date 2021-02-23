@@ -12,6 +12,9 @@ import duke.exception.InvalidInputException.InputExceptionType;
 import duke.exception.SaveException;
 import duke.task.Event;
 
+/**
+ * Add an event task into the task list
+ */
 public class EventCommand extends Command {
     public EventCommand(Ui ui, TaskList tasks, HashMap<String, String> arguments) {
         super(ui, tasks, arguments);

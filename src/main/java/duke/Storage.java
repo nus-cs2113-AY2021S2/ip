@@ -10,13 +10,26 @@ import java.io.ObjectOutputStream;
 import duke.exception.SaveException;
 import duke.exception.SaveException.SaveExceptionType;
 
+/**
+ * Storage class for handling the loading and writing of local save file
+ */
 public class Storage {
     protected String filepath;
 
+    /**
+     * Construct a storage instance by setting the filepath attribute with the given value
+     * @param filepath Filepath of the save file
+     */
     public Storage(String filepath) {
         this.filepath = filepath;
     }
 
+    /**
+     * Load a task list from the save file
+     * @return The task list loaded from the file
+     * @throws IOException This is thrown when object reading encounters an error
+     * @throws SaveException This is thrown when save file is missing, or a task list cannot be retrieved
+     */
     public TaskList load() throws IOException, SaveException {
         TaskList tasks = null;
         FileInputStream fileIn = null;
@@ -48,6 +61,12 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Save the task list to the save file
+     * @param tasks Task list to be saved
+     * @throws IOException This is thrown when object writing encounters an error
+     * @throws SaveException This is thrown when being failed to open the save file
+     */
     public void save(TaskList tasks) throws IOException, SaveException {
         FileOutputStream fileOut = null;
         ObjectOutputStream objOut = null;

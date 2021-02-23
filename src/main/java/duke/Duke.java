@@ -2,6 +2,9 @@ package duke;
 
 import duke.command.Command;
 
+/**
+ * Main class of the program with the entry function
+ */
 public class Duke {
     public static final String DEFAULT_SAVE_PATH = "duke.save";
 
@@ -9,7 +12,7 @@ public class Duke {
     protected Ui ui;
     protected Parser parser;
 
-    public Duke(String filepath) {
+    protected Duke(String filepath) {
         ui = new Ui();
         Storage storage = new Storage(filepath);
         try {
@@ -21,7 +24,7 @@ public class Duke {
         parser = new Parser(ui, tasks);
     }
 
-    public void run() {
+    protected void run() {
         ui.printWelcome();
 
         while (true) {
@@ -48,6 +51,10 @@ public class Duke {
         ui.close();
     }
 
+    /**
+     * Program entry point
+     * @param args Command line arguments provided
+     */
     public static void main(String[] args) {
         String filepath = DEFAULT_SAVE_PATH;
         if (args.length > 0) {

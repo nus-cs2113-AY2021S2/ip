@@ -21,3 +21,6 @@ duke.save
 
 # Generated jar files
 *.jar
+
+# Generated javadoc
+javadoc
