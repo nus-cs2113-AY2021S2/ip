@@ -22,7 +22,7 @@ public class FindCommand extends Command {
                 .filter((t) -> t.getDescription().contains(commandArgs))
                 .collect(toList());
         if (matches.size() == 0) {
-            ui.printText("No tasks found with given keyword: " + commandArgs);
+            ui.printText(Messages.MESSAGE_NOT_FOUND_TASKS + commandArgs);
             return;
         }
         ui.printText(Messages.MESSAGE_FOUND_TASKS);

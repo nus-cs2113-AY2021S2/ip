@@ -1,12 +1,18 @@
 package duke.command;
 
+import duke.common.Utils;
 import duke.exception.DukeException;
+import duke.exception.InvalidDeadlineException;
+import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.task.TaskList;
 import duke.ui.Ui;
 import duke.exception.MissingDescriptionException;
 import duke.task.Task;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 
 public class DeadlineCommand extends Command {
     public DeadlineCommand(String commandArgs) {
@@ -19,7 +25,13 @@ public class DeadlineCommand extends Command {
             throw new MissingDescriptionException(commandType);
         }
         String[] deadlineArgs = commandArgs.split("\\s+/by\\s+", 2);
-        Task task = new Deadline(deadlineArgs[0], deadlineArgs[1]);
+
+        LocalDateTime date = Utils.getDateFromUserInput(deadlineArgs[1]);
+        if (!Utils.isValidDeadline(date)) {
+            throw new InvalidDeadlineException();
+        }
+
+        Task task = new Deadline(deadlineArgs[0], date);
         tasks.addTask(task);
         storage.save(tasks.getTasks());
         ui.printAddedTask(task);
