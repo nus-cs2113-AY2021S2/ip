@@ -10,7 +10,9 @@ import duke.exception.InvalidInputException;
 import duke.exception.InvalidInputException.InputExceptionType;
 import duke.task.Task;
 
-// Find tasks at a specific date and print out the list
+/**
+ * Find tasks at a specific date and print out the list
+ */
 public class SearchdateCommand extends Command {
     public SearchdateCommand(Ui ui, TaskList tasks, HashMap<String, String> arguments) {
         super(ui, tasks, arguments);

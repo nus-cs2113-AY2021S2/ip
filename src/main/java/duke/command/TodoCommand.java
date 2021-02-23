@@ -9,7 +9,9 @@ import duke.exception.InvalidInputException;
 import duke.exception.SaveException;
 import duke.task.ToDo;
 
-// Create a todo task
+/**
+ * Create a todo task and add it to the list
+ */
 public class TodoCommand extends Command {
     public TodoCommand(Ui ui, TaskList tasks, HashMap<String, String> arguments) {
         super(ui, tasks, arguments);

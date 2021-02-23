@@ -9,6 +9,9 @@ import duke.command.Command;
 import duke.exception.InvalidInputException;
 import duke.exception.InvalidInputException.InputExceptionType;
 
+/**
+ * Parser for parsing the line of command to tokens and construct the command class
+ */
 public class Parser {
     // Delimiter for string join is a single whitespace (for string split, it is any number of whitespaces)
     public static final String DELIMITER = " ";
@@ -16,11 +19,38 @@ public class Parser {
     protected Ui ui;
     protected TaskList tasks;
 
+    /**
+     * Constructor of the Parser class
+     * @param ui Ui instance that will be passed to the command instances
+     * @param tasks TaskList instance will be passed to the command instances
+     */
     public Parser(Ui ui, TaskList tasks) {
         this.ui = ui;
         this.tasks = tasks;
     }
 
+    /**
+     * Parse a line of command, put it into a hash map, then construct a command instance
+     * Segments are splitted by '/'
+     * Example: commandX some_description /optY Y_description Y_description_1 /optZ Z_description
+     * Output argument hashmap:
+     * |   key   |             value             |
+     * |---------|-------------------------------|
+     * | command | commandX                      |
+     * | payload | some_description              |
+     * | optY    | Y_description Y_description_1 |
+     * | optZ    | Z_description                 |
+     *
+     * Then, ui, tasks and this argument hashmap will be passed to initialize a command class.
+     *
+     * The command class is determined by the 1st token of the command string. For example, for a command string 'find',
+     * command class 'duke.command.FindCommand' will be initialized.
+     * @param fullCommand The line of command to be parsed
+     * @return A Command instance which is ready to be executed
+     * @throws InvalidInputException This is thrown when command cannot be recognized (respective Command class cannot
+     * be constructed)
+     * @see Command
+     */
     public Command parse(String fullCommand) throws InvalidInputException {
         HashMap<String, String> arguments = new HashMap<>();
         String[] tokens = fullCommand.split("\\s+");
@@ -50,9 +80,8 @@ public class Parser {
         }
 
         // Store the last k-v pair
-        if (!values.isEmpty()) {
-            arguments.put(key, String.join(DELIMITER, values));
-        }
+        // Store even when `values` is empty, as that indicates an empty string
+        arguments.put(key, String.join(DELIMITER, values));
 
         // Initialize a respective class from the command (by capitalize first character)
         String className = tokens[0] + "Command";

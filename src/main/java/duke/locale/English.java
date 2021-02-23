@@ -1,5 +1,8 @@
 package duke.locale;
 
+/**
+ * English locale file (translation) of the program's UI messages
+ */
 public class English {
     // %s: A sample date
     public static final String GREETING =
@@ -27,11 +30,11 @@ public class English {
     // %s: Additional text
     public static final String TASK_LIST_EMPTY =
             "You don't have a task in your list%s!";
-    
+
     // %s: at/by DateTime object
     public static final String TASK_LIST_AT_BY =
             " at/by %s";
-    
+
     // %s: Latest added task
     // %d: Task counts
     public static final String NEW_TASK =

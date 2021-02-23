@@ -12,6 +12,9 @@ import duke.exception.InvalidInputException.InputExceptionType;
 import duke.exception.SaveException;
 import duke.task.Deadline;
 
+/**
+ * Insert a deadline task into the task list
+ */
 public class DeadlineCommand extends Command {
     public DeadlineCommand(Ui ui, TaskList tasks, HashMap<String, String> arguments) {
         super(ui, tasks, arguments);

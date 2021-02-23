@@ -10,7 +10,9 @@ import duke.exception.InvalidInputException.InputExceptionType;
 import duke.exception.SaveException;
 import duke.task.Task;
 
-// Mark a task in the task list as done
+/**
+ * Mark a task in the task list as done
+ */
 public class DoneCommand extends Command {
     public DoneCommand(Ui ui, TaskList tasks, HashMap<String, String> arguments) {
         super(ui, tasks, arguments);

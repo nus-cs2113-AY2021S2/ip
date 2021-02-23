@@ -8,6 +8,9 @@ import duke.Ui;
 import duke.exception.InvalidInputException;
 import duke.exception.SaveException;
 
+/**
+ * Base class of all the commands, providing necessary interfaces and methods for implementation
+ */
 public abstract class Command {
     protected Ui ui;
     protected TaskList tasks;

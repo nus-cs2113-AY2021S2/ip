@@ -10,7 +10,9 @@ import duke.exception.InvalidInputException.InputExceptionType;
 import duke.exception.SaveException;
 import duke.task.Task;
 
-// Delete a task from the task list
+/**
+ * Delete a task from the task list
+ */
 public class DeleteCommand extends Command {
     public DeleteCommand(Ui ui, TaskList tasks, HashMap<String, String> arguments) {
         super(ui, tasks, arguments);
