@@ -9,6 +9,7 @@ import duke.tasks.Task;
 import duke.tasks.Todo;
 
 import java.util.ArrayList;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 import static duke.Duke.tasks;
@@ -165,6 +166,9 @@ public class CommandRunner {
         } catch (InvalidCommandException e) {
             ui.printInvalidInputWarning(input);
             return;
+        } catch (DateTimeParseException e) {
+            ui.printInvalidDateFormatWarning();
+            return;
         }
 
         Deadline newTask = new Deadline(job, by);
@@ -180,6 +184,9 @@ public class CommandRunner {
             at = Parser.parseDate(input, "/at");
         } catch (InvalidCommandException e) {
             ui.printInvalidInputWarning(input);
+            return;
+        } catch (DateTimeParseException e) {
+            ui.printInvalidDateFormatWarning();
             return;
         }
 

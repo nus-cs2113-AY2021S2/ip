@@ -1,10 +1,12 @@
 package duke.inputhandlers;
 
 import duke.exception.InvalidCommandException;
+import static duke.constants.ProgramInts.*;
 
 import java.util.Arrays;
-
-import static duke.constants.ProgramInts.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Parse user input to determine command to be executed.
@@ -49,14 +51,40 @@ public class Parser {
     }
 
     public static String parseDate(String input, String delimiter) throws InvalidCommandException {
-
+        // deadline job job /by 29-01-2021
         String[] words = input.split(delimiter);
 
         if (words.length == 1) {
             throw new InvalidCommandException();
         }
 
-        return words[1].trim();
+        String dateString = words[1].trim();
+
+        if (isDate(dateString)) {
+            return convertToDate(dateString);
+        }
+
+        return dateString;
+    }
+
+
+    public static String convertToDate(String string) throws DateTimeParseException {
+        // specifies the format that user has to follow
+        DateTimeFormatter parseFormat = DateTimeFormatter.ofPattern("d-M-yyyy");
+        LocalDate dateObj = LocalDate.parse(string, parseFormat);
+
+        // specifies the format that date will be printed out
+        DateTimeFormatter stringFormat = DateTimeFormatter.ofPattern("d MMMM, yyyy");
+        //noinspection UnnecessaryLocalVariable
+        String formattedString = dateObj.format(stringFormat);
+
+        return formattedString;
+    }
+
+    private static boolean isDate(String string) {
+        String[] words = string.split("-");
+        
+        return (words.length == 3);
     }
 
     public static String parseKeyword(String input) throws InvalidCommandException{

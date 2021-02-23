@@ -102,8 +102,10 @@ public class TextUi {
         System.out.println("COMMAND LIST:");
         System.out.println(SHORT_LINE);
         System.out.println(TODO_COMMAND_FORMAT + '\n');
-        System.out.println(DEADLINE_COMMAND_FORMAT + '\n');
-        System.out.println(EVENT_COMMAND_FORMAT + '\n');
+        System.out.println(DEADLINE_COMMAND_FORMAT);
+        System.out.println(DATE_FORMAT + '\n');
+        System.out.println(EVENT_COMMAND_FORMAT);
+        System.out.println(DATE_FORMAT + '\n');
         System.out.println(LIST_COMMAND_FORMAT + '\n');
         System.out.println(DONE_COMMAND_FORMAT + '\n');
         System.out.println(DELETE_COMMAND_FORMAT + '\n');
@@ -122,5 +124,10 @@ public class TextUi {
         System.out.println(STRAIGHT_LINE);
         System.out.print(BYE_MESSAGE);
         System.out.println(STRAIGHT_LINE);
+    }
+
+    public void printInvalidDateFormatWarning() {
+        System.out.println(INVALID_DATE_FORMAT_WARNING);
+        System.out.println(ENTER_HELP_FOR_LIST_OF_COMMANDS);
     }
 }
