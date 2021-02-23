@@ -1,0 +1,152 @@
+Loading your previous data . . .
+Your saved file is empty!
+Ssshhhhhh!!!!!
+                             * ** ** ** ** ** ** ** *
+                         ** ** ** ** ** ** ** ** ** ** *
+                        ** ** ** ** ** ** ** ** ** ** ** ** *
+                      * ** ** ** * ** ** ** ** ** ** ** ** **
+                    ** ** **                     * ** ** ** **
+                   ** ** *                         * ** ** ** *
+                  ** **                                * ** ** **
+                 * ** *                                   ** ** **
+                ** **                                      * ** ** *
+               ** **                           * ** ** ** * * ** ** *
+              * ** **                    * ** ** ** ** ** ** ** ** ** **
+              * ** *                 ** ** ** ** ** ** ** ** ** ** ** **
+              * ** *               * ** ** ** ** ** ** ** ** ** ** ** ** *
+              * ** *               ** ** ** ** **  *  *  *  *  ** * ** ** **
+              * ** *              ** ** ** *                       * ** ** *
+              * **              * ** ** *                           * ** **
+              * **              * ** ** **                          ** ** *
+            ** **              * ** ** **                         * ** *
+            *  **              ** ** ** **                      ** ** *
+           **  **               * ** ** ** *                * * ** **
+        ** **  **                * ** ** ** ** ** ** ** ** ** ** ** *
+     ** ** **  **                  * ** ** ** ** ** ** ** ** *
+  ** ** ** **  **                                        ** **
+  ** **    **  **                                        ** **
+  ** *     **  **                                      * ** **
+  ** *     **  **                                     * ** **
+  ** *     **  **                                     ** ** *
+  ** *     **  **                                     ** ** *
+  ** *     **  **                                     ** ** *
+  ** *     **  **                                     ** ** *
+  ** *     **  **                                   * ** ** *
+  ** *     **  **                                   * ** ** *
+  ** *     **  **                                   * ** ** *
+  ** *     **  **                                   * ** ** *
+  ** *    **  **                                    * ** ** *
+  ** ** ** **  **                                   * ** ** *
+  ** ** ** **  **                                   * ** ** *
+      * ** **  **                                   * ** ** *
+        ** **  **                                   * ** ** *
+         ** **  *              ** ** ** ** ** *        * **
+            **  **             ** ** ** ** ** *        * **
+             **  **             ** **     * ** *       * **
+              *  **             ** **     ** **        * **
+               **             ** **      ** **		* **
+               **            ** **		* **        * **
+				  *            ** **          **        * **
+				   **         ** *            **        **
+				    * ** ** ** *               ** ** ** **
+				      ** ** ***                  * ** **
+
+____________________________________________________________________________________
+Hello Crewmate! I'm Arthur, ( = ^ _ ^ = )
+Please assign me my tasks to complete!
+____________________________________________________________________________________
+
+               help                :prints list of all commands
+               list                :prints all lists ordered by category
+               exit                :shuts down Arthur
+            todo <task>            :add task to To Do list
+  event <task> // yyyy/MM/dd HHmm  :add task to Event List with time
+ deadline <task // yyyy/MM/dd HHmm :add task to Deadline List
+            done  <index>          :mark task <index> as done in List
+            delete  <index>        :delete task <index> in List
+            find  <task>           :mark task <index> as done in List
+         search yyyy/MM/dd         :add task to Deadline List
+
+____________________________________________________________________________________
+There's no such command!!! You look SUS!!!  ( O . o )
+____________________________________________________________________________________
+               help                :prints list of all commands
+               list                :prints all lists ordered by category
+               exit                :shuts down Arthur
+            todo <task>            :add task to To Do list
+  event <task> // yyyy/MM/dd HHmm  :add task to Event List with time
+ deadline <task // yyyy/MM/dd HHmm :add task to Deadline List
+            done  <index>          :mark task <index> as done in List
+            delete  <index>        :delete task <index> in List
+            find  <task>           :mark task <index> as done in List
+         search yyyy/MM/dd         :add task to Deadline List
+
+____________________________________________________________________________________
+Aight Crewmate!! I've got a new task for you to do!!! ( ^ _ ^ ): eat
+____________________________________________________________________________________
+Aight Crewmate!! I've got a new task for you to do!!! ( ^ _ ^ ): drink
+____________________________________________________________________________________
+Aight Crewmate!! I've got a new task for you to do!!! ( ^ _ ^ ): dance
+____________________________________________________________________________________
+Aight Crewmate!! I've got a new deadline for you!!! ( ^ _ ^ ): assignment
+____________________________________________________________________________________
+Aight Crewmate!! I've got a new deadline for you!!! ( ^ _ ^ ): project
+____________________________________________________________________________________
+Aight Crewmate!! I've got a new deadline for you!!! ( ^ _ ^ ): presentation
+____________________________________________________________________________________
+Aight Crewmate!! I've got a new event for you!!! ( ^ _ ^ ): wedding
+____________________________________________________________________________________
+Aight Crewmate!! I've got a new event for you!!! ( ^ _ ^ ): reception
+____________________________________________________________________________________
+Aight Crewmate!! I've got a new event for you!!! ( ^ _ ^ ): divorce
+____________________________________________________________________________________
+ATTENTION, Here's your list of tasks Crewmate!!!
+1. [T][XX]eat
+2. [T][XX]drink
+3. [T][XX]dance
+4. [D][XX]assignment(by: No Deadline!! Hehe! :))
+5. [D][XX]project(by: No Deadline!! Hehe! :))
+6. [D][XX]presentation(by: 04-05-2021 18:00)
+7. [E][XX]wedding(by: No Event time!! Noice!!! :))
+8. [E][XX]reception(by: No Event time!! Noice!!! :))
+9. [E][XX]divorce(by: 02-28-2021 05:00)
+Are you really a Crewmate??? You haven't done any work in this list! ( X _ X ' )
+____________________________________________________________________________________
+Nice! I've marked this task as done:
+[T][OK]eat
+____________________________________________________________________________________
+You still have 8 task(s) left in your Lists ! Hurry up!! ( X _ X )
+____________________________________________________________________________________
+What are you doing??? This job was already completed!! ( O . o )
+You still have 8 tasks left in this list Crewmate! Hurry up!! ( X _ X )"
+____________________________________________________________________________________
+Nice! I've marked this task as done:
+[D][OK]project(by: No Deadline!! Hehe! :))
+____________________________________________________________________________________
+You still have 7 task(s) left in your Lists ! Hurry up!! ( X _ X )
+____________________________________________________________________________________
+What are you doing??? This job was already completed!! ( O . o )
+You still have 7 tasks left in this list Crewmate! Hurry up!! ( X _ X )"
+____________________________________________________________________________________
+Nice! I've marked this task as done:
+[E][OK]divorce(by: 02-28-2021 05:00)
+____________________________________________________________________________________
+You still have 6 task(s) left in your Lists ! Hurry up!! ( X _ X )
+____________________________________________________________________________________
+What are you doing??? This job was already completed!! ( O . o )
+You still have 6 tasks left in this list Crewmate! Hurry up!! ( X _ X )"
+____________________________________________________________________________________
+ATTENTION, Here's your list of tasks Crewmate!!!
+1. [T][OK]eat
+2. [T][XX]drink
+3. [T][XX]dance
+4. [D][XX]assignment(by: No Deadline!! Hehe! :))
+5. [D][OK]project(by: No Deadline!! Hehe! :))
+6. [D][XX]presentation(by: 04-05-2021 18:00)
+7. [E][XX]wedding(by: No Event time!! Noice!!! :))
+8. [E][XX]reception(by: No Event time!! Noice!!! :))
+9. [E][OK]divorce(by: 02-28-2021 05:00)
+You still have 6 task(s) left in your Lists ! Hurry up!! ( X _ X )
+____________________________________________________________________________________
+You are abandoning us!!! I trusted you!!!  ( O . o ' )
+____________________________________________________________________________________

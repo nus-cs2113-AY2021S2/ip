@@ -1,0 +1,20 @@
+help me
+help
+todo eat
+todo drink
+todo dance
+deadline assignment
+deadline project //
+deadline presentation // 2021/04/05 1800
+event wedding
+event reception //
+event divorce // 2021/02/28 0500
+list
+done 1
+done 1
+done 5
+done 5
+done 9
+done 9
+list
+bye

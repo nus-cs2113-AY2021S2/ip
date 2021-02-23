@@ -1,0 +1,13 @@
+find eat
+delete 1
+delete 4
+delete 5
+list
+find eat
+deadline pay bills // 2021/02/28 1359
+event party // 2021/04/05 2359
+list
+search 2021/02/28
+search 2021/04/05
+delete 6
+bye

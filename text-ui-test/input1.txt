@@ -1,0 +1,14 @@
+list
+aaaaaaaa
+^^^^^^^^^^^^^^
+done
+done 1
+deadline
+event
+todo
+find
+find 2
+search
+delete
+delete 4
+bye

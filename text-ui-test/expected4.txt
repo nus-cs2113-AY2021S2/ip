@@ -1,0 +1,149 @@
+Loading your previous data . . .
+Aight Crewmate!! I've got a new task for you to do!!! ( ^ _ ^ ): drink
+____________________________________________________________________________________
+Aight Crewmate!! I've got a new task for you to do!!! ( ^ _ ^ ): dance
+____________________________________________________________________________________
+Aight Crewmate!! I've got a new deadline for you!!! ( ^ _ ^ ): assignment
+____________________________________________________________________________________
+Aight Crewmate!! I've got a new deadline for you!!! ( ^ _ ^ ): presentation
+____________________________________________________________________________________
+Aight Crewmate!! I've got a new event for you!!! ( ^ _ ^ ): reception
+____________________________________________________________________________________
+Aight Crewmate!! I've got a new deadline for you!!! ( ^ _ ^ ): pay bills
+____________________________________________________________________________________
+Aight Crewmate!! I've got a new event for you!!! ( ^ _ ^ ): party
+____________________________________________________________________________________
+ATTENTION, Here's your list of tasks Crewmate!!!
+1. [T][XX]drink
+2. [T][XX]dance
+3. [D][XX]assignment(by: No Deadline!! Hehe! :))
+4. [D][XX]presentation(by: 04-05-2021 18:00)
+5. [E][XX]reception(by: No Event time!! Noice!!! :))
+6. [D][XX]pay bills(by: 02-28-2021 13:59)
+7. [E][XX]party(by: 04-05-2021 23:59)
+Are you really a Crewmate??? You haven't done any work in this list! ( X _ X ' )
+____________________________________________________________________________________
+Ssshhhhhh!!!!!
+                             * ** ** ** ** ** ** ** *
+                         ** ** ** ** ** ** ** ** ** ** *
+                        ** ** ** ** ** ** ** ** ** ** ** ** *
+                      * ** ** ** * ** ** ** ** ** ** ** ** **
+                    ** ** **                     * ** ** ** **
+                   ** ** *                         * ** ** ** *
+                  ** **                                * ** ** **
+                 * ** *                                   ** ** **
+                ** **                                      * ** ** *
+               ** **                           * ** ** ** * * ** ** *
+              * ** **                    * ** ** ** ** ** ** ** ** ** **
+              * ** *                 ** ** ** ** ** ** ** ** ** ** ** **
+              * ** *               * ** ** ** ** ** ** ** ** ** ** ** ** *
+              * ** *               ** ** ** ** **  *  *  *  *  ** * ** ** **
+              * ** *              ** ** ** *                       * ** ** *
+              * **              * ** ** *                           * ** **
+              * **              * ** ** **                          ** ** *
+            ** **              * ** ** **                         * ** *
+            *  **              ** ** ** **                      ** ** *
+           **  **               * ** ** ** *                * * ** **
+        ** **  **                * ** ** ** ** ** ** ** ** ** ** ** *
+     ** ** **  **                  * ** ** ** ** ** ** ** ** *
+  ** ** ** **  **                                        ** **
+  ** **    **  **                                        ** **
+  ** *     **  **                                      * ** **
+  ** *     **  **                                     * ** **
+  ** *     **  **                                     ** ** *
+  ** *     **  **                                     ** ** *
+  ** *     **  **                                     ** ** *
+  ** *     **  **                                     ** ** *
+  ** *     **  **                                   * ** ** *
+  ** *     **  **                                   * ** ** *
+  ** *     **  **                                   * ** ** *
+  ** *     **  **                                   * ** ** *
+  ** *    **  **                                    * ** ** *
+  ** ** ** **  **                                   * ** ** *
+  ** ** ** **  **                                   * ** ** *
+      * ** **  **                                   * ** ** *
+        ** **  **                                   * ** ** *
+         ** **  *              ** ** ** ** ** *        * **
+            **  **             ** ** ** ** ** *        * **
+             **  **             ** **     * ** *       * **
+              *  **             ** **     ** **        * **
+               **             ** **      ** **		* **
+               **            ** **		* **        * **
+				  *            ** **          **        * **
+				   **         ** *            **        **
+				    * ** ** ** *               ** ** ** **
+				      ** ** ***                  * ** **
+
+____________________________________________________________________________________
+Hello Crewmate! I'm Arthur, ( = ^ _ ^ = )
+Please assign me my tasks to complete!
+____________________________________________________________________________________
+
+               help                :prints list of all commands
+               list                :prints all lists ordered by category
+               exit                :shuts down Arthur
+            todo <task>            :add task to To Do list
+  event <task> // yyyy/MM/dd HHmm  :add task to Event List with time
+ deadline <task // yyyy/MM/dd HHmm :add task to Deadline List
+            done  <index>          :mark task <index> as done in List
+            delete  <index>        :delete task <index> in List
+            find  <task>           :mark task <index> as done in List
+         search yyyy/MM/dd         :add task to Deadline List
+
+____________________________________________________________________________________
+Nice! I've marked this task as done:
+[T][OK]drink
+____________________________________________________________________________________
+You still have 6 task(s) left in your Lists ! Hurry up!! ( X _ X )
+____________________________________________________________________________________
+Nice! I've marked this task as done:
+[T][OK]dance
+____________________________________________________________________________________
+You still have 5 task(s) left in your Lists ! Hurry up!! ( X _ X )
+____________________________________________________________________________________
+Nice! I've marked this task as done:
+[D][OK]assignment(by: No Deadline!! Hehe! :))
+____________________________________________________________________________________
+You still have 4 task(s) left in your Lists ! Hurry up!! ( X _ X )
+____________________________________________________________________________________
+Nice! I've marked this task as done:
+[D][OK]presentation(by: 04-05-2021 18:00)
+____________________________________________________________________________________
+You still have 3 task(s) left in your Lists ! Hurry up!! ( X _ X )
+____________________________________________________________________________________
+Nice! I've marked this task as done:
+[E][OK]reception(by: No Event time!! Noice!!! :))
+____________________________________________________________________________________
+You still have 2 task(s) left in your Lists ! Hurry up!! ( X _ X )
+____________________________________________________________________________________
+Nice! I've marked this task as done:
+[D][OK]pay bills(by: 02-28-2021 13:59)
+____________________________________________________________________________________
+You still have 1 task(s) left in your Lists ! Hurry up!! ( X _ X )
+____________________________________________________________________________________
+Nice! I've marked this task as done:
+[E][OK]party(by: 04-05-2021 23:59)
+____________________________________________________________________________________
+Good job Crewmate! You completed all your tasks in this list! ( ^ _ ^ )
+____________________________________________________________________________________
+This job was already completed!!!!
+Good job Crewmate! You completed all your tasks in this list! ( ^ _ ^ )
+
+____________________________________________________________________________________
+ ( o . ^ ) Hol' up! I'm deleting this task:
+[T][OK]drink
+Good job Crewmate! You completed all your tasks in this list! ( ^ _ ^ )
+____________________________________________________________________________________
+ATTENTION, Here's your list of tasks Crewmate!!!
+1. [T][OK]dance
+2. [D][OK]assignment(by: No Deadline!! Hehe! :))
+3. [D][OK]presentation(by: 04-05-2021 18:00)
+4. [E][OK]reception(by: No Event time!! Noice!!! :))
+5. [D][OK]pay bills(by: 02-28-2021 13:59)
+6. [E][OK]party(by: 04-05-2021 23:59)
+Good job Crewmate! You completed all your tasks in this list! ( ^ _ ^ )
+____________________________________________________________________________________
+Thanks for your help Crewmate!!
+We wouldn't have done this without your help!!
+Goodbye!!!! (^ . ^)
+____________________________________________________________________________________
