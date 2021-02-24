@@ -6,9 +6,17 @@ import java.text.ParseException;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import duke.exceptions.*;
-import duke.items.*;
+import duke.items.Deadline;
+import duke.items.Event;
+import duke.items.Task;
+import duke.items.Todo;
+
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 import java.util.Scanner;
+
 
 import static duke.main.Storage.createFile;
 import static duke.main.Storage.loadFile;
@@ -27,12 +35,12 @@ public class Parser {
         }
     }
 
-    public static void validateTodoParameter(String line) throws InvalidParameterLengthExceptions {
+    public static void validateTodoCommand(String line) throws InvalidParameterLengthExceptions {
         if (line.split(" ").length < 2){
             throw new InvalidParameterLengthExceptions();
         }
     }
-    public static int validateDeadlineParameter(String line) throws DeadlineParameterExceptions, InvalidParameterLengthExceptions {
+    public static int validateDeadlineCommand(String line) throws DeadlineParameterExceptions, InvalidParameterLengthExceptions {
         int indexOfSlash;
         if (line.split(" ").length < 4){
             throw new InvalidParameterLengthExceptions();
@@ -43,7 +51,7 @@ public class Parser {
         }
         return indexOfSlash;
     }
-    public static int validateEventParameter(String line) throws EventParameterExceptions, InvalidParameterLengthExceptions {
+    public static int validateEventCommand(String line) throws EventParameterExceptions, InvalidParameterLengthExceptions {
         int indexOfSlash;
         if (line.split(" ").length < 4){
             throw new InvalidParameterLengthExceptions();
@@ -97,13 +105,10 @@ public class Parser {
             UI.findPreamble();
             Task.findBy(line.split(" ")[1]);
             break;
-
         case ("todo"):
 
-            int indexOfSpace = line.indexOf(" ");
-            validateTodoParameter(line);
+            validateTodoCommand(line);
             System.out.println("Got it. I've added this task: ");
-
             Todo todo = new Todo(line.substring(line.indexOf(" ") + 1));
             Task.addTask(todo);
             System.out.print("  ");
@@ -112,11 +117,10 @@ public class Parser {
             break;
 
         case ("deadline"):
-            int indexOfSlash = validateDeadlineParameter(line);
+            int indexOfSlash = validateDeadlineCommand(line);
             System.out.println("Got it. I've added this task: ");
             String item = line.substring(line.indexOf(" ") + 1, indexOfSlash - 1);
             String extra = line.substring(indexOfSlash + 4);
-
             Deadline deadline = new Deadline(item, convertDateFormat(extra));
             Task.addTask(deadline);
             System.out.print("  ");
@@ -125,11 +129,10 @@ public class Parser {
             break;
 
         case ("event"):
-            indexOfSlash = validateEventParameter(line);
+            indexOfSlash = validateEventCommand(line);
             System.out.println("Got it. I've added this task: ");
             item = line.substring(line.indexOf(" ") + 1, indexOfSlash - 1);
             extra = line.substring(indexOfSlash + 4);
-
             Event event = new Event(item, convertDateFormat(extra));
             Task.addTask(event);
             System.out.print("  ");

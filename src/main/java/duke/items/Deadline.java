@@ -1,16 +1,18 @@
 package duke.items;
 
+import static duke.main.UI.convertDateFormat;
+
 public class Deadline extends Task {
     protected String by;
 
     public Deadline(String description, String byInput) {
         super(description);
-        this.by = byInput;
+        this.by = convertDateFormat(byInput);
+    }
+    public void setBy(String byInput) {
+        this.by = convertDateFormat(byInput);
     }
 
-    public void setBy(String byInput) {
-        this.by = byInput;
-    }
     public String getBy() {
         return this.by;
     }

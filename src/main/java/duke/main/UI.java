@@ -2,14 +2,18 @@ package duke.main;
 
 import duke.items.Task;
 
+<<<<<<< HEAD
 import java.text.ParseException;
+=======
+>>>>>>> master
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class UI {
-    private static String DEADLINE_TEMPLATE = "deadline read book /by 2/12/2019 1800";
-    private static String EVENT_TEMPLATE = "event read book /at 2/12/2019 1800";
-    private static String TODO_TEMPLATE = "todo read book";
+    private static final String DEADLINE_TEMPLATE = "deadline <task> /by <YYYY-MM-DD>";
+    private static final String EVENT_TEMPLATE = "event <task> /at <YYYY-MM-DD>";
+    private static final String TODO_TEMPLATE = "todo read book";
+    private static final String DATE_TEMPLATE = "<YYYY-MM-DD>";
     public static void printLine() {
         System.out.println("____________________________________________________________");
     }
@@ -67,6 +71,12 @@ public class UI {
             break;
         }
     }
+    public static void InvalidDateErrorMessage(String line){
+        String[] arr = line.split(" ");
+        System.out.println(" ☹ OOPS!!! Invalid format for date: " + arr[arr.length-1]);
+        System.out.println(" Input format:");
+        System.out.println(" \t " + DATE_TEMPLATE);
+    }
 
     public static void EventParameterErrorMessage(){
         System.out.println(" ☹ OOPS!!! For \"event\" command please input \"/at\"");
@@ -89,10 +99,13 @@ public class UI {
         return myDateObj.format(myFormatObj);
     }
 
+<<<<<<< HEAD
     public static LocalDate stringPatternToDate(String input) throws ParseException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM-d-yyyy ");
         LocalDate localDate = LocalDate.parse(input, formatter);
         return localDate;
     }
 
+=======
+>>>>>>> master
 }
