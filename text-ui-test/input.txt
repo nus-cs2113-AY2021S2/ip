@@ -7,6 +7,9 @@ urgent
 done 1
 list
 urgent
+find project
+find oesinr
+find
 delete 1
 list
 done 2

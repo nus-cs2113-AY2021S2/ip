@@ -13,6 +13,7 @@ Commands:
     event eventName /at dd/mm/yyyy hhmm
     done taskNumber
     delete taskNumber
+    find searchString
     help
     bye
 _______________________________________________________________________________
@@ -27,6 +28,7 @@ Commands:
     event eventName /at dd/mm/yyyy hhmm
     done taskNumber
     delete taskNumber
+    find searchString
     help
     bye
 
@@ -68,6 +70,18 @@ Here are the tasks in your list:
 _______________________________________________________________________________
 _______________________________________________________________________________
 Yay! You have no urgent task due in the next week!
+_______________________________________________________________________________
+_______________________________________________________________________________
+Here are the matching tasks in your list:
+    1. [TD][ ] team project
+    2. [DL][X] individual project (by: 09/03/2021 2359)
+_______________________________________________________________________________
+_______________________________________________________________________________
+Your search for 'oesinr' returned no results. ):
+_______________________________________________________________________________
+_______________________________________________________________________________
+There was an ERROR!
+Command type of 'find' must have a description! ):
 _______________________________________________________________________________
 _______________________________________________________________________________
 Yay! I've successfuly deleted this task:

@@ -20,6 +20,7 @@ public class Ui {
             + "    event eventName /at dd/mm/yyyy hhmm\n"
             + "    done taskNumber\n"
             + "    delete taskNumber\n"
+            + "    find searchString\n"
             + "    help\n"
             + "    bye\n";
     
@@ -126,5 +127,17 @@ public class Ui {
     public void displayUrgentTasks(String listOfTasksString) {
         String urgentTasksMessage = "Here are the urgent tasks due in the next week:" + listOfTasksString;
         printWithBorder(urgentTasksMessage);
+    public void displayNoResultsFoundMessage(String commandArg) {
+        String noResultsFoundMessage = "Your search for '" + commandArg + "' returned no results. ):";
+        printWithBorder(noResultsFoundMessage);
+	}
+
+    public void printFindCommandResults(TaskList taskList) {
+        String listOfTasksString = "Here are the matching tasks in your list:";
+        for (int i = 0; i < taskList.getListSize(); i += 1) {
+            Task task = taskList.getTask(i);
+            listOfTasksString += ("\n    " + Integer.toString(i + 1) + ". " + task.toString());
+        }
+        printWithBorder(listOfTasksString);
 	}
 }
