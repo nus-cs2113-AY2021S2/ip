@@ -1,14 +1,14 @@
 package duke.constants;
 
 /**
- * Container for constant integers to be used by the program
+ * Container for integer constants used throughout the program.
  */
 
 public class ProgramInts {
     /** Maximum number of tasks allowed in the list. */
     public static final int MAX_TASK = 100;
     
-    /** Each constant refers to a command. */
+    /** Each integer is used to represent a particular command. */
     public static final int BYE_COMMAND = 0;
     public static final int LIST_COMMAND = 1;
     public static final int HELP_COMMAND = 2;

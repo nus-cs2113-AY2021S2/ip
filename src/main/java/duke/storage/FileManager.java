@@ -17,12 +17,14 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
- * File operations to read and store data locally
+ * Manages file operations to read and store data locally.
  */
 
 public class FileManager {
-    
-    // METHODS
+
+    /**
+     * Reads from existing data file if present. If no existing data is found, a new file will be created.
+     */
     public static void checkSavedData() {
         try {
             readFromFile();
@@ -33,6 +35,9 @@ public class FileManager {
         }
     }
 
+    /**
+     * Writes existing tasks in the list into data file. Overwrites existing file data.
+     */
     public static void saveData() {
         try {
             writeToFile();
@@ -40,7 +45,10 @@ public class FileManager {
             System.out.println(SAVE_FILE_ERROR_MESSAGE);
         }
     }
-    
+
+    /**
+     * Creates a new data file (.txt) at specified {@code PATH}.
+     */
     private static void createNewFile() {
         File file = new File(PATH);
         try {
@@ -53,6 +61,12 @@ public class FileManager {
         }
     }
 
+    /**
+     * Reads input from data file line by line until EOF, converting each line into a task 
+     * and adding the task to the task list.
+     * 
+     * @throws FileNotFoundException if data file specified by {@code PATH} does not exist.
+     */
     private static void readFromFile() throws FileNotFoundException {
 
         File dataFile = new File(PATH);
@@ -72,6 +86,11 @@ public class FileManager {
         }
     }
 
+    /**
+     * Converts each task in the task list to a string and writing it to the data file.
+     * 
+     * @throws IOException if an IO error is encountered when writing to the file.
+     */
     private static void writeToFile() throws IOException {
         FileWriter writer = new FileWriter(PATH);
 
@@ -81,27 +100,40 @@ public class FileManager {
         writer.close();
     }
 
+    /**
+     * Encodes the given task into a decodable and readable string representation for storage.
+     * 
+     * @param t task to be encoded
+     * @return string representation of the given task
+     */
     private static String formLine(Task t) {
         String line = "";
 
         if (t instanceof Todo) {
             line += "T" + DELIM;
             line += (t.isDone() ? "1" : "0") + DELIM;
-            line += t.getJob();
+            line += t.getDescription();
         } else if (t instanceof Deadline) {
             line += "D" + DELIM;
             line += (t.isDone() ? "1" : "0") + DELIM;
-            line += t.getJob() + DELIM;
-            line += ((Deadline) t).getBy();
+            line += t.getDescription() + DELIM;
+            line += ((Deadline) t).getDue();
         } else if (t instanceof Event) {
             line += "E" + DELIM;
             line += (t.isDone() ? "1" : "0") + DELIM;
-            line += t.getJob() + DELIM;
+            line += t.getDescription() + DELIM;
             line += ((Event) t).getAt();
         }
         return line;
     }
 
+    /**
+     * Decodes given string into a {@code Task} object.
+     * 
+     * @param line string to be decoded
+     * @return {@code Task} object formed from given string
+     * @throws DataErrorException if string cannot be decoded properly
+     */
     private static Task formTask(String line) throws DataErrorException {
         String[] words = line.split(DELIM);
 
