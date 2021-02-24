@@ -134,7 +134,7 @@ public class UI {
      * @param date date in the YYYY-MM-DD format
      * @return String in the MMM-DD-YYYY date format
      */
-    public static String convertDateToStringFormat(String date){
+    public static String convertDateToStringFormat(String date) throws ParseException{
         LocalDate myDateObj = LocalDate.parse(date);
         DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("MMM-dd-yyyy ");
         return myDateObj.format(myFormatObj);
@@ -148,8 +148,7 @@ public class UI {
      */
     public static LocalDate stringPatternToDate(String input) throws ParseException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM-d-yyyy ");
-        LocalDate localDate = LocalDate.parse(input, formatter);
-        return localDate;
+        return LocalDate.parse(input, formatter);
     }
 
 }

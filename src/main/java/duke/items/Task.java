@@ -75,13 +75,10 @@ public class Task {
      *
      * @param find date to search
      */
-    public static void findAt(String find) {
+    public static void findAt(String find){
         int counter = 1;
         for (int i =0; i<numOfTasks;i++) {
-            if ( !(list.get(i) instanceof Event)){
-                continue;
-            }
-            if (((Event)list.get(i)).getAt().contains(find)) {
+            if ( (list.get(i) instanceof Event) && ((Event) list.get(i)).getAt().equals(find)){
                 System.out.print(counter + ".");
                 list.get(i).print();
                 counter++;

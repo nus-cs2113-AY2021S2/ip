@@ -1,21 +1,18 @@
 package duke.main;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
+import java.util.Scanner;
+
 import duke.exceptions.*;
 import duke.items.Deadline;
 import duke.items.Event;
 import duke.items.Task;
 import duke.items.Todo;
 
-import java.io.IOException;
-import java.text.ParseException;
-import java.time.format.DateTimeParseException;
-import java.util.Arrays;
-import java.util.Scanner;
+
 
 import static duke.main.UI.convertDateToStringFormat;
 
