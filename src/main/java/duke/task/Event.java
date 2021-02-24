@@ -2,15 +2,14 @@ package duke.task;
 
 public class Event extends Task {
 
-    String by;
+    private static String at;
 
-    public Event(String description, String by) {
+    public Event(String description, String at) {
         super(description);
-        this.by = by;
+        this.at = at;
     }
 
-    public static void printEventDescription() {
-        System.out.println("Gotcha! I've added this task:");
-        System.out.print("[E]");
+    public static String getAt() {
+        return at;
     }
 }
