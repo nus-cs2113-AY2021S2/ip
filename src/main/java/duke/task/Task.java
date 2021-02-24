@@ -19,6 +19,17 @@ public class Task {
         isDone = false;
     }
 
+    public static ArrayList<Task> find(String query) {
+        ArrayList<Task> matches = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.getDescription().contains(query)) {
+                matches.add(task);
+            }
+        }
+        return matches;
+    }
+    
+
     public boolean isDone() {
         return isDone;
     }

@@ -4,6 +4,7 @@ import duke.datamanager.FileManager;
 import duke.task.Task;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class UI {
     public static String logo = " ____        _        \n"
@@ -89,6 +90,16 @@ public class UI {
         System.out.println("You still have " + Task.getRemainingTasks() + " tasks to complete in your list!");
         showSaveDataScreen();
         UI.requestInput();
+    }
+
+    public static void tasksFound(String query, ArrayList<Task> tasks) {
+        System.out.println("We found these tasks matching the query: " + query);
+        for (int i = 0; i < tasks.size(); i++) {
+            int displayedNumber = i + 1;
+            System.out.println(displayedNumber + ". " + tasks.get(i));
+        }
+        UI.requestInput();
+
     }
 
     public static void showFarewellScreen() {
