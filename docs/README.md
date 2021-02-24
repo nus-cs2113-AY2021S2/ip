@@ -54,14 +54,14 @@ Example of usage:
 Expected outcome:
 
 `Here are the tasks in your list:
-	-1. [T][✘] 1
-	-2. [T][✘] 3
-	-3. [E][✘] 4 (at: Wednesday)
-	-4. [D][✘] return book (by: June 6th)
-	-5. [E][✘] project meeting (at: Sunday)
-	-6. [T][✘] run
-	-7. [T][✘] study book
-	-8. [T][✘] read book`
+1. [T][✘] 1
+2. 2. [T][✘] 3
+3. 3. [E][✘] 4 (at: Wednesday)
+4. 4. [D][✘] return book (by: June 6th)
+5. 5. [E][✘] project meeting (at: Sunday)
+6. 6. [T][✘] run
+7. 7. [T][✘] study book
+8. 8. [T][✘] read book`
 
 ### 4. Marking task as done
 To signal that task is completed
