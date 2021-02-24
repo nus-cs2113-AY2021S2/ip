@@ -4,13 +4,13 @@ public class Parser {
 
     public static void scanInput(Ui ui, TaskList tasks, Storage storage) {
         Scanner scanner = new Scanner(System.in);
-        scanLoop(scanner,ui,tasks, storage);
+        scanLoop(scanner, tasks, storage, ui);
     }
 
     /**
      * Scanner loop until bye command
      */
-    private static void scanLoop(Scanner scanner, Ui ui, TaskList tasks, Storage storage) {
+    private static void scanLoop(Scanner scanner, TaskList tasks, Storage storage, Ui ui) {
         boolean isScanning = true;
         String inputString;
         Command commandType = null;
@@ -40,8 +40,9 @@ public class Parser {
     /**
      * String before first space taken as command rest as args
      */
-    static boolean scanSwitch(String inputString, Command commandType, TaskList tasks) throws NoSuchMethodException,
-            NoCommandLabelException, NoCommandFormatException, NoTaskSpecifiedException, IndexOutOfBoundsException {
+    public static boolean scanSwitch(String inputString, Command commandType, TaskList tasks) throws
+            NoSuchMethodException, NoCommandLabelException, NoCommandFormatException, NoTaskSpecifiedException,
+            IndexOutOfBoundsException {
         String[] inputStringArr = inputString.split(" ");
         boolean isScanning = true;
 

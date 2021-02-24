@@ -2,7 +2,29 @@ public class Ui {
 
     public static final String LINE_STRING = "____________________________________________________________\n";
 
-    void welcomeMessage() {
+    public void addToListMessage(int size, String status) {
+        System.out.print(LINE_STRING);
+        System.out.println("Say no more fam. The task is added:\n  " + status);
+        System.out.println(size + " tasks in the list.");
+        System.out.println(LINE_STRING);
+    }
+
+    public void completeTaskMessage(String status) {
+        System.out.print(LINE_STRING);
+        System.out.println("Task.Task marked as done, gg ez");
+        System.out.println("  " + status);
+        System.out.println(LINE_STRING);
+    }
+
+    public void deleteTaskMessage(String status, int size) throws IndexOutOfBoundsException {
+        System.out.print(LINE_STRING);
+        System.out.println("You are a quitter 👎 Anyways, I removed this:");
+        System.out.println("  " + status);
+        System.out.println(size + " tasks left in the list.");
+        System.out.println(LINE_STRING);
+    }
+
+    public void welcomeMessage() {
         String welcome = LINE_STRING +
                 " Hello! I'm Bob 😀\n" +
                 " If you need anything hit me up fam 😌\n" +
@@ -10,12 +32,12 @@ public class Ui {
         System.out.print(welcome);
     }
 
-    void goodbyeMessage() {
+    public void goodbyeMessage() {
         String goodbye = LINE_STRING + " Chao 👌\n" + LINE_STRING;
         System.out.print(goodbye);
     }
 
-    void printNoCommandFormat(Command commandType) {
+    public void printNoCommandFormat(Command commandType) {
         String commandName = commandType.name().toLowerCase();
         String exceptionMessage = LINE_STRING +
                 " 😥 You gotta use the time marker for " + commandName + "\n" +
@@ -24,7 +46,7 @@ public class Ui {
         System.out.println(exceptionMessage);
     }
 
-    void printNoCommandLabel(Command commandType) {
+    public void printNoCommandLabel(Command commandType) {
         String commandName = commandType.name().toLowerCase();
         String exceptionMessage = LINE_STRING +
                 " 😥 You gotta tell me what is the task for " + commandName + "\n" +
@@ -32,35 +54,35 @@ public class Ui {
         System.out.println(exceptionMessage);
     }
 
-    void printNoSuchMethod() {
+    public void printNoSuchMethod() {
         String exceptionMessage = LINE_STRING +
                 " 😥 I don't quite get what the command means\n" +
                 LINE_STRING;
         System.out.println(exceptionMessage);
     }
 
-    void printInputMismatch() {
+    public void printInputMismatch() {
         String exceptionMessage = LINE_STRING +
                 " 😥 There is some issue with getting you input\n" +
                 LINE_STRING;
         System.out.println(exceptionMessage);
     }
 
-    void printIOException() {
+    public void printIOException() {
         String exceptionMessage = LINE_STRING +
                 " 😥 IO issue encountered! Unable to read file\n" +
                 LINE_STRING;
         System.out.println(exceptionMessage);
     }
 
-    void printNumberFormatException() {
+    public void printNumberFormatException() {
         String exceptionMessage = LINE_STRING +
                 " 😥 Number format exception encountered! Input may be corrupted\n" +
                 LINE_STRING;
         System.out.println(exceptionMessage);
     }
 
-    void printNoTaskSpecified() {
+    public void printNoTaskSpecified() {
         String exceptionMessage = LINE_STRING +
                 " 😥 Tell me what task are you referring to\n" +
                 LINE_STRING;

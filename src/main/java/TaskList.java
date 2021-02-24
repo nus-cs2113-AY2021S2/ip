@@ -8,15 +8,12 @@ import java.util.List;
 
 public class TaskList {
     private final ArrayList<Task> tasks;
-    protected static final String LINE_STRING = "____________________________________________________________\n";
-
-    public TaskList() {
-        this.tasks = new ArrayList<>();
-    }
+    private Ui ui;
 
     public TaskList(List<String> taskStrings, Ui ui) {
         this.tasks = new ArrayList<>();
-        load(taskStrings, ui);
+        this.ui = ui;
+        load(taskStrings);
     }
 
     public void addToList(Task newTask) {
@@ -26,23 +23,16 @@ public class TaskList {
     public void addToList(Task newTask, Boolean isPrinting) {
         tasks.add(newTask);
         if (isPrinting) {
-            addToListMessage(tasks.size() - 1);
+            ui.addToListMessage(tasks.size(), getStatus(tasks.size() - 1));
         }
-    }
-
-    private void addToListMessage(int index) {
-        System.out.print(LINE_STRING);
-        System.out.println("Say no more fam. The task is added:\n  " + this.getStatus(index));
-        System.out.println((index + 1) + " tasks in the list.");
-        System.out.println(LINE_STRING);
     }
 
     public void printList() {
-        System.out.print(LINE_STRING);
+        System.out.print(Ui.LINE_STRING);
         for (int i = 0; i < tasks.size(); i++) {
             System.out.println((i+1) + "." + this.getStatus(i));
         }
-        System.out.println(LINE_STRING);
+        System.out.println(Ui.LINE_STRING);
     }
 
 
@@ -68,15 +58,8 @@ public class TaskList {
         int index = number - 1; // adjust for the list label starting from 1
         tasks.get(index).isDone(true);
         if (isPrinting) {
-            completeTaskMessage(index);
+            ui.completeTaskMessage(getStatus(index));
         }
-    }
-
-    private void completeTaskMessage(int index) {
-        System.out.print(LINE_STRING);
-        System.out.println("Task.Task marked as done, gg ez");
-        System.out.println("  " + this.getStatus(index));
-        System.out.println(LINE_STRING);
     }
 
     public void deleteTask(String s) throws IndexOutOfBoundsException {
@@ -87,15 +70,7 @@ public class TaskList {
         int index = i - 1; // adjust for the list label starting from 1
         String status = getStatus(index);
         tasks.remove(index);
-        deleteTaskMessage(status);
-    }
-
-    private void deleteTaskMessage(String status) throws IndexOutOfBoundsException {
-        System.out.print(LINE_STRING);
-        System.out.println("You are a quitter 👎 Anyways, I removed this:");
-        System.out.println("  " + status);
-        System.out.println(tasks.size() + " tasks left in the list.");
-        System.out.println(LINE_STRING);
+        ui.deleteTaskMessage(status, this.getSize());
     }
 
     public void addTodo(String command) throws NoCommandLabelException {
@@ -151,7 +126,7 @@ public class TaskList {
         return label;
     }
 
-    private void load(List<String> taskStrings, Ui ui) {
+    private void load(List<String> taskStrings) {
         try {
             for (String taskString: taskStrings) {
                 loadTask(taskString);

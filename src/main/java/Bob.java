@@ -6,7 +6,7 @@ public class Bob {
 
     public Bob(String filePath) {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage(filePath, ui);
         tasks = new TaskList(storage.load(), ui);
     }
 

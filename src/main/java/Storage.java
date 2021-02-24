@@ -13,9 +13,11 @@ public class Storage {
     public static final String SAVE_FILE_NAME = "duke.txt";
 
     protected String filePath;
+    protected Ui ui;
 
-    public Storage(String filePath) {
+    public Storage(String filePath, Ui ui) {
         this.filePath = filePath;
+        this.ui = ui;
     }
 
     public List<String> load() {
@@ -28,7 +30,7 @@ public class Storage {
         try {
             Files.createDirectory(path);
         } catch (IOException e) {
-            // printIOException(); TODO: figure out why IO Exception is triggered here
+            //ui.printIOException();
         }
     }
 
@@ -41,7 +43,7 @@ public class Storage {
         } catch (FileAlreadyExistsException e) {
             taskStrings = readFile(path);
         } catch (IOException e) {
-            new Ui().printIOException();
+            ui.printIOException();
         }
 
         return taskStrings;
@@ -53,7 +55,7 @@ public class Storage {
         try {
             taskStrings = loadDataFile(path);
         } catch (IOException e) {
-            new Ui().printIOException();
+            ui.printIOException();
         }
         return taskStrings;
     }
@@ -70,7 +72,7 @@ public class Storage {
             List<String> taskStrings = tasks.saveTaskList();
             Files.write(path, taskStrings);
         } catch (IOException e) {
-            new Ui().printIOException();
+            ui.printIOException();
         }
     }
 }
