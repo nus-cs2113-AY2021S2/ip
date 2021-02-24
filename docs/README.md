@@ -252,6 +252,7 @@ Expected outcome:
 ---
 ## Command summary
 
+
 Action | Format, Examples
 --- | ---
 Add Todo | `todo TASK_DESCRIPTION` e.g. `todo read book`
