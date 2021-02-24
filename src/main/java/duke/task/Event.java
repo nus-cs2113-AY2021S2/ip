@@ -1,22 +1,21 @@
 package duke.task;
 
 public class Event extends Task{
+    protected String date;
 
-    protected String at;
-
-    public Event (String description, String at) {
+    public Event (String description, String date) {
         super(description);
-        this.at = at;
+        this.date = date;
         this.taskType = "[E]";
     }
 
     @Override
     public String getDate () {
-        return at;
+        return date;
     }
 
     @Override
     public String toString() {
-        return super.toString() + " (at:" + at + ")";
+        return super.toString() + "(at: " + date + ")";
     }
 }

@@ -1,23 +1,22 @@
 package duke.task;
 
 public class Deadline extends Task {
+    protected String date;
 
-    protected String by;
-
-    public Deadline (String description, String by) {
+    public Deadline (String description, String date) {
         super(description);
-        this.by = by;
+        this.date = date;
         this.taskType = "[D]";
     }
 
     @Override
     public String getDate () {
-        return by;
+        return date;
     }
 
     @Override
     public String toString() {
-        return super.toString() + " (by:" + by + ")";
+        return super.toString() + "(by: " + date + ")";
     }
 
 }
