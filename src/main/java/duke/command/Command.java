@@ -40,6 +40,9 @@ public class Command {
         case "delete":
             processCommand(userInput.getOtherArguments(), CommandType.delete);
             break;
+        case "find":
+            findRecords(userInput.getOtherArguments());
+            break;
         case "bye":
             isLoop = isEndProgram(userInput.getOtherArguments());
             break;
@@ -47,6 +50,14 @@ public class Command {
             throw new DukeException();
         }
         return isLoop;
+    }
+
+    private void findRecords(String[] arguments) {
+        if (arguments.length != 1) {
+            System.out.println("Command \"find\" requires 1 argument as keyword. Please try again!");
+            return;
+        }
+        record.findRecords(arguments[0]);
     }
 
     private void processCommand(String[] arguments, CommandType commandType) {
