@@ -10,6 +10,9 @@ import duke.task.Task;
 import duke.task.Todo;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 public class DukeTaskList {
     private static final int MINIMUM_NUM_ARGS_IMPORT = 3;
@@ -68,12 +71,7 @@ public class DukeTaskList {
             }
         }
         if (!warnings.isEmpty()) {
-            String[] warningsArr = new String[warnings.size() + 1];
-            warningsArr[0] = "Warning: Failed to import " + Integer.toString(warnings.size()) + " task(s)";
-            for (int i = 0; i < warnings.size(); i++) {
-                warningsArr[i + 1] = warnings.get(i);
-            }
-            DukePrinter.printWarnings(warningsArr);
+            DukePrinter.printWarnings(warnings);
         }
     }
 
@@ -121,5 +119,13 @@ public class DukeTaskList {
             taskStrings.add(taskString);
         }
         return taskStrings;
+    }
+
+    public ArrayList<String> findTasks(String searchExpression) {
+        ArrayList<String> matchingTasks = (ArrayList<String>) tasks.stream()
+                .filter((task) -> task.getDescription().contains(searchExpression))
+                .map((task) -> task.toString())
+                .collect(toList());
+        return matchingTasks;
     }
 }

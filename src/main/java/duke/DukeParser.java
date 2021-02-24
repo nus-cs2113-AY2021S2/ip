@@ -19,6 +19,7 @@ public class DukeParser {
     public static final String EVENT_COMMAND = "event";
     public static final String DELETE_COMMAND = "delete";
     public static final String CLEAR_COMMAND = "clear";
+    public static final String FIND_COMMAND = "find";
 
     /* List of command delimiters, e.g. "/by" for "deadline" */
     public static final String DEADLINE_DELIMITER = "/by";
@@ -131,6 +132,9 @@ public class DukeParser {
             break;
         case DELETE_COMMAND:
             command = new DeleteCommand(commandTokens, dukeTaskList);
+            break;
+        case FIND_COMMAND:
+            command = new FindCommand(commandTokens, dukeTaskList);
             break;
         default:
             command = new DefaultCommand(commandTokens, dukeTaskList);
