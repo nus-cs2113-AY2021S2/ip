@@ -1,11 +1,6 @@
 package duke.controller;
 
-import duke.exception.InvalidInputException;
-import duke.exception.MissingDueDateException;
-import duke.exception.TaskNotExistException;
-import duke.exception.MissingEventDurationException;
-import duke.exception.MissingTaskDescriptionException;
-import duke.exception.TaskAlreadyCompletedException;
+import duke.exception.*;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -61,6 +56,9 @@ public class TaskManager {
         } catch (MissingTaskDescriptionException e) {
             System.out.println(e.getMessage());
             UI.requestInput();
+        } catch (InvalidDateTimeException e) {
+            System.out.println(e.getMessage());
+            UI.requestInput();
         }
     }
 
@@ -75,6 +73,9 @@ public class TaskManager {
             System.out.println(e.getMessage());
             UI.requestInput();
         } catch (MissingTaskDescriptionException e) {
+            System.out.println(e.getMessage());
+            UI.requestInput();
+        } catch (InvalidDateTimeException e) {
             System.out.println(e.getMessage());
             UI.requestInput();
         }
