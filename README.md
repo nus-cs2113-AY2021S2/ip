@@ -14,7 +14,7 @@
   * [Mark as done : `done`](#mark-as-done--done)
   * [Mark as undone : `undo`](#mark-as-undone--undo)
   * [Search keyword : `find`](#search-keyword--find)
-  * [Search date : `search`](#search-date--find)
+  * [Search date : `search`](#search-date--search)
   * [Exit : `bye`](#exit--bye)
 * [Storage](#storage)
 * [Command summary](#command-summary)
