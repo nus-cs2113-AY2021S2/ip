@@ -6,6 +6,8 @@ import duke.DukeTaskList;
 import duke.task.Deadline;
 import duke.task.Todo;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class DeadlineCommand extends Command {
@@ -36,7 +38,14 @@ public class DeadlineCommand extends Command {
             throw new DukeException("Please specify a deadline for the task.");
         }
 
-        Deadline deadline = new Deadline(description, date);
+        LocalDate parsedDate = null;
+        try {
+            parsedDate = LocalDate.parse(date);
+        } catch (DateTimeParseException dateTimeParseException) {
+            throw new DukeException("That's not a valid date!");
+        }
+
+        Deadline deadline = new Deadline(description, parsedDate);
         dukeTaskList.addTask(deadline);
         if (printMessage) {
             int numberOfTasks = dukeTaskList.getNumberOfTasks();

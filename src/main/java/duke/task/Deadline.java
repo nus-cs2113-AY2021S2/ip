@@ -1,9 +1,12 @@
 package duke.task;
 
-public class Deadline extends Task{
-    private String dueDate;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-    public Deadline(String description, String dueDate) {
+public class Deadline extends Task{
+    private LocalDate dueDate;
+
+    public Deadline(String description, LocalDate dueDate) {
         super(description);
         super.setTaskType('D');
         this.dueDate = dueDate;
@@ -11,11 +14,12 @@ public class Deadline extends Task{
 
     @Override
     public String toString() {
-        return super.toString() + " (by: " + dueDate + ")";
+        String formattedDate = dueDate.format((DateTimeFormatter.ofPattern("MMM d yyyy")));
+        return super.toString() + " (by: " + formattedDate + ")";
     }
 
     @Override
     public String exportAsCSV() {
-        return super.exportAsCSV() + "," + dueDate;
+        return super.exportAsCSV() + "," + dueDate.toString();
     }
 }
