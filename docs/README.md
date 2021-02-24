@@ -1,26 +1,26 @@
 # User Guide
 
-## Features 
-
- - [Adding tasks](#a)
-	- [todo ](#a)
-	- [deadline](#b)
-	- [event](#c)
-- [Listing all tasks](#d)
-- [Completing a task](#e)
-- [Find](#f)
-	- [Description](#f)
-	 - [Date](#g)
-- [Save and exit](#i)
+-  [Features](#a) 
+   - [Adding tasks](#a)
+    	- [todo](#a)
+    	- [deadline](#b)
+	 - [event](#c)
+   - [Listing all tasks](#d)
+   - [Completing a task](#e)
+   - [Find](#f)
+	 - [Description](#f)
+	  - [Date](#g)
+   - [Save and exit](#i)
 
 ***
 Notes: 
 
 The square brackets specifies that user input is required
 `command [variable input]`
-
 ***
-### <a name="a"></a> Adding tasks: Todo
+## Features
+***
+## <a name="a"></a> Adding tasks: Todo
 **Description:**
 
 Adding a simple task using the todo command
@@ -50,7 +50,7 @@ ____________________________________________________________
 ```
 
 ***
-### <a name="b"></a> Adding tasks: Deadline
+## <a name="b"></a> Adding tasks: Deadline
 
 **Description:**
 
@@ -60,7 +60,7 @@ ____________________________________________________________
 
 **Formatting:**
 
-`&nbsp;&nbsp;&nbsp;&nbsp; deadline [task description] /by [date in format YYYY-MM-DD]`
+&nbsp;&nbsp;&nbsp;&nbsp; 'deadline [task description] /by [date in format YYYY-MM-DD]`
 
 **Examples**
 
@@ -83,7 +83,7 @@ ____________________________________________________________
 ```
 ***
 
-### <a name="c"></a> Adding tasks: Event
+## <a name="c"></a> Adding tasks: Event
 **Description:**
 
 &nbsp;&nbsp;&nbsp;&nbsp; Adding an event task using the `event` command.
@@ -115,7 +115,7 @@ ____________________________________________________________
 ```
 
 
-### <a name="d"></a> Listing all tasks
+## <a name="d"></a> Listing all tasks
 **Description:**
 
 &nbsp;&nbsp;&nbsp;&nbsp;List all tasks (todo, deadline, event)
@@ -136,7 +136,7 @@ ____________________________________________________________
 ```
 ***
 
-### <a name="e"></a> Completing a task
+## <a name="e"></a> Completing a task
 **Description:**
 
 &nbsp;&nbsp;&nbsp;&nbsp;Set the task to be done.
@@ -170,7 +170,7 @@ Here are the tasks in your list:
 ____________________________________________________________
 ```
 
-### <a name="f"></a> Find tasks: Description
+## <a name="f"></a> Find tasks: Description
 **Description:**
 
 &nbsp;&nbsp;&nbsp;&nbsp;Find specific tasks based on similar descriptions.
@@ -199,7 +199,7 @@ Here are the matching tasks in your list:
 ____________________________________________________________
 ```
 
-### <a name="g"></a> Find tasks: Date
+## <a name="g"></a> Find tasks: Date
 **Description:**
 
 &nbsp;&nbsp;&nbsp;&nbsp;Find specific tasks based on date input.
@@ -246,7 +246,7 @@ Here are the matching tasks in your list:
 2.[D][✘] watch wandaVision (by: Mar-10-2021 )
 ```
 
-### <a name="i"></a> Save and exit
+## <a name="i"></a> Save and exit
 **Description:**
 
 &nbsp;&nbsp;&nbsp;&nbsp;Save all tasks in file and exits
