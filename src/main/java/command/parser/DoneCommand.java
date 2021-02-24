@@ -43,7 +43,7 @@ public class DoneCommand extends Command {
             throw new IllegalCommandException();
         }
         int index = getIndexFromCommand(sentence[INDEX_POSITION]);
-        if (index > tasks.size() || index == -1) {
+        if (index > tasks.size() || index < 1) {
             throw new IllegalTaskException();
         }
         return index;
