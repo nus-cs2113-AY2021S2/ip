@@ -5,7 +5,7 @@ import exceptions.IllegalCommandException;
 
 import task.list.Deadline;
 import task.list.Event;
-import task.list.TaskList;
+import task.list.Task;
 import ui.UI;
 
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class SearchCommand extends Command {
 
     // search events and dates that matches date input in search command
-    public static void searchTasksDates(ArrayList<TaskList> tasks, String[] sentence) throws IllegalCommandException {
+    public static void searchTasksDates(ArrayList<Task> tasks, String[] sentence) throws IllegalCommandException {
         if (sentence.length != NUMBER_OF_COMMAND_ARGUMENTS) {
             throw new IllegalCommandException();
         }
@@ -26,8 +26,8 @@ public class SearchCommand extends Command {
     }
 
     // Prints matches obtained
-    private static void printMatchFound(ArrayList<TaskList> tasks, String date, int counter) {
-        for (TaskList task : tasks) {
+    private static void printMatchFound(ArrayList<Task> tasks, String date, int counter) {
+        for (Task task : tasks) {
             counter = incrementCounter(date, counter, task);
         }
         if (counter == EMPTY) {
@@ -38,7 +38,7 @@ public class SearchCommand extends Command {
     }
 
     // Increments counter if a match is found
-    private static int incrementCounter(String date, int counter, TaskList task) {
+    private static int incrementCounter(String date, int counter, Task task) {
         String taskDate;
         if (task instanceof Event) {
             Event temp = (Event) task;

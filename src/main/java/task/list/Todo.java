@@ -3,7 +3,7 @@ package task.list;
 /**
  * Represents a todo task in the list
  */
-public class Todo extends TaskList {
+public class Todo extends Task {
 
     private static final String TASK_TITLE = "T";
     public static final String NEW_TASK = "Aight Crewmate!! I've got a new task for you to do!!! ( ^ _ ^ ): ";

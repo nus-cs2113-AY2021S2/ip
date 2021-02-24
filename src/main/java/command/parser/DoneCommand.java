@@ -3,7 +3,7 @@ package command.parser;
 import exceptions.IllegalCommandException;
 import exceptions.IllegalTaskException;
 import exceptions.IllegalTaskRedoException;
-import task.list.TaskList;
+import task.list.Task;
 
 import java.util.ArrayList;
 
@@ -15,7 +15,7 @@ public class DoneCommand extends Command {
     public static final int INDEX_POSITION = 1;
 
     // mark the task indicated by the index inputted by the user as done
-    public static void markTaskAsDone(String[] sentence, ArrayList<TaskList> tasks) throws IllegalCommandException, IllegalTaskException,
+    public static void markTaskAsDone(String[] sentence, ArrayList<Task> tasks) throws IllegalCommandException, IllegalTaskException,
             IllegalTaskRedoException {
         int index;
         try {
@@ -26,7 +26,7 @@ public class DoneCommand extends Command {
             throw new IllegalTaskException();
         }
 
-        TaskList t = tasks.get(index - 1);
+        Task t = tasks.get(index - 1);
         try {
             t.markAsDone();
         } catch (IllegalTaskRedoException e) {
@@ -37,7 +37,7 @@ public class DoneCommand extends Command {
     }
 
     // tries to get index from the input
-    public static int getIndex(String[] sentence, ArrayList<TaskList> tasks) throws IllegalCommandException,
+    public static int getIndex(String[] sentence, ArrayList<Task> tasks) throws IllegalCommandException,
             IllegalTaskException {
         if (sentence.length > NUMBER_OF_COMMAND_ARGUMENTS) {
             throw new IllegalCommandException();

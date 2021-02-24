@@ -1,7 +1,7 @@
 package command.parser;
 
 import exceptions.IllegalListException;
-import task.list.TaskList;
+import task.list.Task;
 import ui.UI;
 
 import java.util.ArrayList;
@@ -12,13 +12,13 @@ import java.util.ArrayList;
 public class ListCommand extends Command {
 
     // prints all tasks in the list
-    public static void printAllLists(ArrayList<TaskList> tasks) throws IllegalListException {
+    public static void printAllLists(ArrayList<Task> tasks) throws IllegalListException {
         int i = 1;
         if (tasks.size() == EMPTY) {
             throw new IllegalListException();
         }
         UI.printListName();
-        for (TaskList t : tasks) {
+        for (Task t : tasks) {
             System.out.print(i + ". ");
             t.printTask();
             i++;
@@ -28,7 +28,7 @@ public class ListCommand extends Command {
     }
 
     // prints the number of tasks in the list that hasn't been done yet
-    public static void printNumberOfTasksLeft(ArrayList<TaskList> tasks) {
+    public static void printNumberOfTasksLeft(ArrayList<Task> tasks) {
         if (UI.getAreAllTasksDone(tasks) && tasks.size() > EMPTY) {
             UI.printCompletedTasks();
         } else if (UI.getAreAllTasksNotDone(tasks) && tasks.size() > EMPTY) {

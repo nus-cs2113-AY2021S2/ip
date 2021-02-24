@@ -1,6 +1,6 @@
 package ui;
 
-import task.list.TaskList;
+import task.list.Task;
 
 import java.util.ArrayList;
 
@@ -11,7 +11,7 @@ public class UI {
 
 
     // prints appropriate phrase when user tries to mark a task, which was already done, as done again
-    public static void printTaskAlreadyCompletedPhrase(ArrayList<TaskList> tasks) {
+    public static void printTaskAlreadyCompletedPhrase(ArrayList<Task> tasks) {
         String phrase;
         if (getAreAllTasksDone(tasks)) {
             phrase = "This job was already completed!!!!" + System.lineSeparator()
@@ -26,9 +26,9 @@ public class UI {
     }
 
     // returns the number of tasks which have not been done
-    public static int getNumberOfTaskRemaining(ArrayList<TaskList> tasks) {
+    public static int getNumberOfTaskRemaining(ArrayList<Task> tasks) {
         int counter = 0;
-        for (TaskList t : tasks) {
+        for (Task t : tasks) {
             if (!t.getIsTaskDone()) {
                 counter++;
             }
@@ -37,9 +37,9 @@ public class UI {
     }
 
     // verifies if all tasks have not been done
-    public static boolean getAreAllTasksNotDone(ArrayList<TaskList> tasks) {
+    public static boolean getAreAllTasksNotDone(ArrayList<Task> tasks) {
         boolean areAllTasksNotDone = true;
-        for (TaskList t : tasks) {
+        for (Task t : tasks) {
             if (t.getIsTaskDone()) {
                 areAllTasksNotDone = false;
                 break;
@@ -49,9 +49,9 @@ public class UI {
     }
 
     // verifies if all tasks have been done
-    public static boolean getAreAllTasksDone(ArrayList<TaskList> tasks) {
+    public static boolean getAreAllTasksDone(ArrayList<Task> tasks) {
         boolean areAllTasksDone = true;
-        for (TaskList t : tasks) {
+        for (Task t : tasks) {
             if (!t.getIsTaskDone()) {
                 areAllTasksDone = false;
                 break;

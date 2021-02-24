@@ -1,7 +1,7 @@
 package command.parser;
 
 import file.storage.Storage;
-import task.list.TaskList;
+import task.list.Task;
 import ui.UI;
 
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ public class AmendListsCommands extends Command {
     public static final String COMMAND_DELIMITER = " ";
 
     // parses commands that need to manipulate data in the list
-    public static void amendList(String line, ArrayList<TaskList> tasks) {
+    public static void amendList(String line, ArrayList<Task> tasks) {
         String[] sentence = line.split(COMMAND_DELIMITER);
         if (sentence.length < NUMBER_OF_COMMAND_ARGUMENTS) {
             UI.printCommandDoesNotExist();

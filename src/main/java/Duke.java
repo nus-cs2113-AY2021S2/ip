@@ -1,12 +1,12 @@
 import command.parser.Parser;
 import file.storage.Storage;
 import ui.UI;
-import task.list.TaskList;
+import task.list.Task;
 
 import java.util.ArrayList;
 
 public class Duke {
-    public static ArrayList<TaskList> tasks = new ArrayList<>();
+    public static ArrayList<Task> tasks = new ArrayList<>();
 
     public static void main(String[] args) {
         Storage.loadFromFile(tasks);

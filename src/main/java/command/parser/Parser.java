@@ -1,7 +1,7 @@
 package command.parser;
 
 import ui.UI;
-import task.list.TaskList;
+import task.list.Task;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -16,7 +16,7 @@ public class Parser {
     public static final String HELP_COMMAND = "help";
 
     // reads command that the user has inputted
-    public static void processCommands(ArrayList<TaskList> tasks) {
+    public static void processCommands(ArrayList<Task> tasks) {
         String line;
         Scanner in = new Scanner(System.in);
         boolean hasToContinue = true;
@@ -28,7 +28,7 @@ public class Parser {
     }
 
     // selects the appropriate command based on user input
-    public static boolean selectCommand(String line, ArrayList<TaskList> tasks) {
+    public static boolean selectCommand(String line, ArrayList<Task> tasks) {
         switch (line) {
         case EXIT_COMMAND:
             ExitCommand.exit(tasks);

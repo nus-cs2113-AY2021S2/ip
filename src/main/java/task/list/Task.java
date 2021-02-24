@@ -6,7 +6,7 @@ import exceptions.IllegalTaskRedoException;
 /**
  * Represents a task in the list
  */
-public class TaskList {
+public class Task {
 
     public static final String DONE_ICON = "OK";
     public static final String NOT_DONE_ICON = "XX";

@@ -5,7 +5,7 @@ import exceptions.IllegalListException;
 import ui.UI;
 import task.list.Deadline;
 import task.list.Event;
-import task.list.TaskList;
+import task.list.Task;
 import task.list.Todo;
 
 import java.io.File;
@@ -23,7 +23,7 @@ public class Storage {
     public static final String FILE_PATH = "duke.txt";
 
     // opens duke.txt to read
-    public static void loadFromFile(ArrayList<TaskList> tasks) {
+    public static void loadFromFile(ArrayList<Task> tasks) {
         try {
             File fileDescriptor = new File(FILE_PATH); // create a File for the given file path
             Scanner input = new Scanner(fileDescriptor); // create a Scanner using the File as the source
@@ -35,13 +35,13 @@ public class Storage {
     }
 
     // reads all lines from duke.txt and adds then to the list
-    private static void readDataFile(Scanner input, ArrayList<TaskList> tasks) {
+    private static void readDataFile(Scanner input, ArrayList<Task> tasks) {
         int i = 0;
         UI.printLoading();
         while (input.hasNext()) {
             Parser.selectCommand(input.nextLine(), tasks);
             if (input.nextLine().equals("true")) {
-                TaskList t = tasks.get(i);
+                Task t = tasks.get(i);
                 t.setDone();
                 tasks.set(i, t);
             }
@@ -50,7 +50,7 @@ public class Storage {
     }
 
     // prints the list of tasks obtained when the file is read after Duke has started
-    private static void printOldList(ArrayList<TaskList> tasks) {
+    private static void printOldList(ArrayList<Task> tasks) {
         try {
             ListCommand.printAllLists(tasks);
         } catch (IllegalListException e) {
@@ -59,7 +59,7 @@ public class Storage {
     }
 
     // initiates saving list into duke.txt file
-    public static void saveToFile(ArrayList<TaskList> tasks) {
+    public static void saveToFile(ArrayList<Task> tasks) {
         boolean hasSaved;
         do {
             hasSaved = hasWrittenToFile(tasks);
@@ -67,12 +67,12 @@ public class Storage {
     }
 
     // ensures that all tasks in list have been to the duke.txt file
-    private static boolean hasWrittenToFile(ArrayList<TaskList> tasks) {
+    private static boolean hasWrittenToFile(ArrayList<Task> tasks) {
         boolean hasSaved = false;
         try {
             FileWriter fileWriter = new FileWriter(FILE_PATH);
             hasSaved = true;
-            for (TaskList task : tasks) {
+            for (Task task : tasks) {
                 hasSaved = hasWrittenTaskToFile(fileWriter, task);
             }
             fileWriter.close();
@@ -83,7 +83,7 @@ public class Storage {
     }
 
     // ensures that one task has been written to the duke.txt file
-    private static boolean hasWrittenTaskToFile(FileWriter fileWriter, TaskList task) {
+    private static boolean hasWrittenTaskToFile(FileWriter fileWriter, Task task) {
         boolean hasSaved = true;
         if (task instanceof Event) {
             Event temp = (Event) task;

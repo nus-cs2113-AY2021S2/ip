@@ -4,7 +4,7 @@ import exceptions.IllegalCommandException;
 import exceptions.IllegalTaskException;
 import task.list.Deadline;
 import task.list.Event;
-import task.list.TaskList;
+import task.list.Task;
 import task.list.Todo;
 import ui.UI;
 
@@ -19,14 +19,14 @@ public class FindCommand extends Command {
     public static final int INCORRECT_LENGTH = 1;
 
     // finds task from list of tasks
-    public static void findTask(String line, ArrayList<TaskList> tasks) throws IllegalCommandException,
+    public static void findTask(String line, ArrayList<Task> tasks) throws IllegalCommandException,
             IllegalTaskException {
         if (line.length() == INCORRECT_LENGTH) {
             throw new IllegalCommandException();
         }
         String description = AddCommand.getTaskDescription(line).trim();
         int counter = 0;
-        for (TaskList task : tasks) {
+        for (Task task : tasks) {
             counter = updateCounter(description, counter, task);
         }
         if (counter == EMPTY) {
@@ -37,7 +37,7 @@ public class FindCommand extends Command {
     }
 
     // Updates counter when a match is found 
-    private static int updateCounter(String description, int counter, TaskList task) {
+    private static int updateCounter(String description, int counter, Task task) {
         if (task.getTaskDescription().equals(description)) {
             counter++;
             printTask(task, counter);
@@ -46,7 +46,7 @@ public class FindCommand extends Command {
     }
 
     // prints task(s) that the user is looking for
-    public static void printTask(TaskList task, int counter) {
+    public static void printTask(Task task, int counter) {
         System.out.println(TASK_COUNTER_SENTENCE + counter);
         if (task instanceof Event) {
             Event temp = (Event) task;
