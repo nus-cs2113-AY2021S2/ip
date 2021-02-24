@@ -1,3 +1,8 @@
+import Task.Deadline;
+import Task.Event;
+import Task.Task;
+import Task.Todo;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,7 +69,7 @@ public class TaskList {
 
     private void completeTaskMessage(int index) {
         System.out.print(LINE_STRING);
-        System.out.println("Task marked as done, gg ez");
+        System.out.println("Task.Task marked as done, gg ez");
         System.out.println("  " + this.getStatus(index));
         System.out.println(LINE_STRING);
     }
@@ -115,7 +120,7 @@ public class TaskList {
 
     /**
      * Phrases command into label and dueTime parts
-     * Followed by creating Deadline object
+     * Followed by creating Task.Deadline object
      */
     public void addDeadline(String command) throws NoCommandLabelException, NoCommandFormatException {
         final String TIME_MARKER = "/by";

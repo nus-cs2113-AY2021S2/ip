@@ -1,3 +1,5 @@
+package Task;
+
 public abstract class Task {
     protected static final String DATA_DELIMITER = " @_@ ";
 
@@ -47,7 +49,7 @@ public abstract class Task {
         return this.isDone() ? "[✔]":"[❌]";
     }
 
-    // Returns a string depending on type of Task
+    // Returns a string depending on type of Task.Task
     public String getTypeString() {
         return "[ ]";
     }
