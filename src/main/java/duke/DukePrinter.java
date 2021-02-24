@@ -14,9 +14,11 @@ public class DukePrinter {
     public static final String TODO_HELP_MESSAGE =
             "todo <TASK_DESCRIPTION> - Create a new task with the specified description";
     public static final String DEADLINE_HELP_MESSAGE =
-            "deadline <TASK_DESCRIPTION> /by <DEADLINE_DATE> - Create a new task with the specified description and deadline";
+            "deadline <TASK_DESCRIPTION> /by <DEADLINE_DATE> - Create a new task with the specified description and deadline\n" +
+                    "\t\tFormat for DEADLINE_DATE: YYYY-MM-DD";
     public static final String EVENT_HELP_MESSAGE =
-            "event <TASK_DESCRIPTION> /at <EVENT_DATE> - Create a new task with the specified description and event date";
+            "event <TASK_DESCRIPTION> /at <EVENT_DATE> - Create a new task with the specified description and event date\n" +
+                    "\t\tFormat for EVENT_DATE: YYYY-MM-DD";
     public static final String DELETE_HELP_MESSAGE = "delete <TASK_NUMBER> - delete the specified task";
     public static final String CLEAR_HELP_MESSAGE = "clear - deletes all tasks";
     public static final String FIND_HELP_MESSAGE =

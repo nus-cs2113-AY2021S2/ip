@@ -1,9 +1,12 @@
 package duke.task;
 
-public class Event extends Task {
-    private String eventDate;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-    public Event(String description, String eventDate) {
+public class Event extends Task {
+    private LocalDate eventDate;
+
+    public Event(String description, LocalDate eventDate) {
         super(description);
         super.setTaskType('E');
         this.eventDate = eventDate;
@@ -11,11 +14,12 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return super.toString() + " (on: " + eventDate + ")";
+        String formattedDate = eventDate.format((DateTimeFormatter.ofPattern("MMM d yyyy")));
+        return super.toString() + " (on: " + formattedDate + ")";
     }
 
     @Override
     public String exportAsCSV() {
-        return super.exportAsCSV() + "," + eventDate;
+        return super.exportAsCSV() + "," + eventDate.toString();
     }
 }

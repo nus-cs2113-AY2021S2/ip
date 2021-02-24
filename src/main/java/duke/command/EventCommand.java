@@ -6,6 +6,8 @@ import duke.DukeTaskList;
 import duke.task.Deadline;
 import duke.task.Event;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class EventCommand extends Command {
@@ -36,7 +38,14 @@ public class EventCommand extends Command {
             throw new DukeException("Please specify a date for the event.");
         }
 
-        Event event = new Event(description, date);
+        LocalDate parsedDate = null;
+        try {
+            parsedDate = LocalDate.parse(date);
+        } catch (DateTimeParseException dateTimeParseException) {
+            throw new DukeException("That's not a valid date!");
+        }
+
+        Event event = new Event(description, parsedDate);
         dukeTaskList.addTask(event);
         if (printMessage) {
             int numberOfTasks = dukeTaskList.getNumberOfTasks();
