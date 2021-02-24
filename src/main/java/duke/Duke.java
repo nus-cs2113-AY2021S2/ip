@@ -49,6 +49,9 @@ public class Duke {
                 TaskListOperation.deleteTask(taskList, userInput);
                 FileHandler.writeTaskList(taskList);
                 break;
+            case "find":
+                TaskListOperation.searchTaskByString(taskList, userInput);
+                break;
             case "exit":
                 //FALL-THROUGH
             case "bye":

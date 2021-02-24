@@ -75,9 +75,9 @@ public class TaskList {
         } else {
             for (int i = 0; i < listSize; i++) {
                 Task currentItem = Tasks.get(i);
-                String timeLimitFormatted = getTimeLimitFormatted(currentItem);
+                String timeLimitFormatted = UI.getTimeLimitFormatted(currentItem);
                 System.out.println((i + 1) + ". "
-                        + "[" + convertTaskType(currentItem.getTaskType()) + "] "
+                        + "[" + UI.convertTaskType(currentItem.getTaskType()) + "] "
                         + "[" + (currentItem.isDone() ? "☑️" : "✖️") + "] "
                         + currentItem.getTaskContent()
                         + (currentItem.getTaskType() == TaskType.TODO ? "" : " ")
@@ -87,24 +87,6 @@ public class TaskList {
         }
     }
 
-    private String getTimeLimitFormatted(Task currentItem) {
-        String timeLimitFormatted = "";
-        if (currentItem.getTaskType().equals(TaskType.TODO)) {
-            return timeLimitFormatted;
-        }
-        LocalDate timeLimitInDate = LocalDate.parse(currentItem.getTimeLimitString());
-        timeLimitFormatted = timeLimitInDate.getDayOfWeek().toString() + ", "
-                + timeLimitInDate.getDayOfMonth() + " "
-                + timeLimitInDate.getMonth() + " "
-                + timeLimitInDate.getYear();
-
-        if (currentItem.getTaskType().equals(TaskType.EVENT)) {
-            timeLimitFormatted = "(at: " + timeLimitFormatted + ")";
-        } else if (currentItem.getTaskType().equals(TaskType.DEADLINE)) {
-            timeLimitFormatted = "(by: " + timeLimitFormatted + ")";
-        }
-        return timeLimitFormatted;
-    }
 
     /**
      * Prints warning message if the list is empty.
@@ -117,24 +99,6 @@ public class TaskList {
         );
     }
 
-    /**
-     * Converts the enum type to string.
-     *
-     * @param type the type of the task.
-     * @return the type of the task in string.
-     */
-    private String convertTaskType(TaskType type) {
-        switch (type) {
-        case TODO:
-            return "T";
-        case EVENT:
-            return "E";
-        case DEADLINE:
-            return "D";
-        default:
-            return "Unknown task type";
-        }
-    }
 
     /**
      * Adds a new to-do task to the current task list.
@@ -212,7 +176,7 @@ public class TaskList {
         numOfTasks--;
         System.out.println(UI.DIVIDER
                 + "The task below is successfully removed from your task list:)\n\t"
-                + "[" + convertTaskType(currentItem.getTaskType()) + "] "
+                + "[" + UI.convertTaskType(currentItem.getTaskType()) + "] "
                 + "[" + (currentItem.isDone() ? "☑️" : "✖️") + "] "
                 + currentItem.getTaskContent()
                 + (currentItem.getTaskType() == TaskType.TODO ? "" : " ")
@@ -260,4 +224,5 @@ public class TaskList {
     public boolean isIndexInRange(int index) {
         return !(index < 0 || index >= numOfTasks);
     }
+
 }

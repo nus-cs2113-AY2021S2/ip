@@ -1,5 +1,10 @@
 package duke.ui;
 
+import duke.task.Task;
+import duke.task.TaskType;
+
+import java.time.LocalDate;
+
 public class UI {
 
     /**
@@ -64,15 +69,21 @@ public class UI {
                 + " e.g. 'todo read book' will add \"read book\" to your task list\n"
                 + " 'deadline' : Add a new deadline task\n\t"
                 + " e.g. 'deadline read book /by YYYY-DD-MM' will"
-                + " add \"read book\" to your task list with deadline task by date in format YYYY-DD-MM.\n"
-                + " 'event' : Add a new event task\n\t"
+                + " add \"read book\" to your task list with deadline task by date in format YYYY-DD-MM\n"
+                + " 'event'    : Add a new event task\n\t"
                 + " e.g. 'event read book /at YYYY-DD-MM' will"
-                + " add \"read book\" to your task list with an event task at date in format YYYY-DD-MM.\n";
+                + " add \"read book\" to your task list with an event task at date in format YYYY-DD-MM\n"
+                + " 'delete'   : Delete a task using the index\n\t"
+                + " e.g. 'delete 1' will"
+                + " delete the task with index of 1\n"
+                + " 'find'     : Search tasks using strings\n\t"
+                + " e.g. 'find eat' will"
+                + " display a list of tasks that contains the string 'eat'\n";
 
         System.out.println(
-                DIVIDER_LINE_ONLY + DIVIDER
+                DIVIDER_LINE_ONLY + DIVIDER_LINE_ONLY + DIVIDER
                         + helpMessage
-                        + DIVIDER_LINE_ONLY + DIVIDER_LINE_ONLY
+                        + DIVIDER_LINE_ONLY + DIVIDER_LINE_ONLY + DIVIDER_LINE_ONLY
         );
     }
 
@@ -97,5 +108,43 @@ public class UI {
                 + "The time format you input is incorrect or out of range!\n"
                 + "The format is in YYYY-MM-DD. Please try again.\n"
                 + DIVIDER_LINE_ONLY);
+    }
+
+    public static String getTimeLimitFormatted(Task currentItem) {
+        String timeLimitFormatted = "";
+        if (currentItem.getTaskType().equals(TaskType.TODO)) {
+            return timeLimitFormatted;
+        }
+        LocalDate timeLimitInDate = LocalDate.parse(currentItem.getTimeLimitString());
+        timeLimitFormatted = timeLimitInDate.getDayOfWeek().toString() + ", "
+                + timeLimitInDate.getDayOfMonth() + " "
+                + timeLimitInDate.getMonth() + " "
+                + timeLimitInDate.getYear();
+
+        if (currentItem.getTaskType().equals(TaskType.EVENT)) {
+            timeLimitFormatted = "(at: " + timeLimitFormatted + ")";
+        } else if (currentItem.getTaskType().equals(TaskType.DEADLINE)) {
+            timeLimitFormatted = "(by: " + timeLimitFormatted + ")";
+        }
+        return timeLimitFormatted;
+    }
+
+    /**
+     * Converts the enum type to string.
+     *
+     * @param type the type of the task.
+     * @return the type of the task in string.
+     */
+    public static String convertTaskType(TaskType type) {
+        switch (type) {
+        case TODO:
+            return "T";
+        case EVENT:
+            return "E";
+        case DEADLINE:
+            return "D";
+        default:
+            return "Unknown task type";
+        }
     }
 }
