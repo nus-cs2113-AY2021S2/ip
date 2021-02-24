@@ -10,6 +10,7 @@ import java.io.FileWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -17,6 +18,7 @@ public class FileHandler {
     private static final String FILE_PATH = "data/";
     private static final String FILE_NAME = "tasks.txt";
     private static final String DELIMINATOR = "#";
+    private static final String PADDING_TIME = "NO_TIME_LIMIT";
 
     private static void writeFile(String content) throws IOException {
         FileWriter fw = new FileWriter(FILE_PATH + FileHandler.FILE_NAME);
@@ -42,7 +44,10 @@ public class FileHandler {
         String type = taskWords[0];
         boolean isDone = Boolean.parseBoolean(taskWords[1]);
         String content = taskWords[2];
-        String time = taskWords[3];
+        LocalDate time = null;
+        if (!taskWords[3].equals(PADDING_TIME)){
+             time = LocalDate.parse(taskWords[3]);
+        }
         Task newTask;
         switch (type) {
         case "TODO":
@@ -103,7 +108,7 @@ public class FileHandler {
             TaskType type = task.getTaskType();
             String timeLimit;
             if (type.equals(TaskType.TODO)) {
-                timeLimit = "NO_TIME_LIMIT";
+                timeLimit = PADDING_TIME;
             } else {
                 timeLimit = task.getTimeLimitString();
             }

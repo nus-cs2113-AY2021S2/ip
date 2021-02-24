@@ -8,6 +8,7 @@ import duke.task.Task;
 import duke.task.Todo;
 import duke.ui.UI;
 
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class TaskListOperation {
@@ -72,6 +73,8 @@ public class TaskListOperation {
             String taskContent = eventTaskContent[0];
             String taskPeriod = eventTaskContent[1];
             taskList.addEventTask(taskContent, taskPeriod);
+        } catch (DateTimeParseException e) {
+            UI.printParseDateError();
         } catch (Exception e) {
             UI.printErrorMessage(e);
         }
@@ -90,6 +93,8 @@ public class TaskListOperation {
             String taskContent = deadlineTaskContent[0];
             String taskDeadline = deadlineTaskContent[1];
             taskList.addDeadlineTask(taskContent, taskDeadline);
+        } catch (DateTimeParseException e) {
+            UI.printParseDateError();
         } catch (Exception e) {
             UI.printErrorMessage(e);
         }

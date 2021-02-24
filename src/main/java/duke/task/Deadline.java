@@ -2,10 +2,12 @@ package duke.task;
 
 import duke.parser.Parser;
 
-public class Deadline extends Task {
-    private String deadline;
+import java.time.LocalDate;
 
-    public Deadline(String content, String deadline) {
+public class Deadline extends Task {
+    private LocalDate deadline;
+
+    public Deadline(String content, LocalDate deadline) {
         super(content);
         this.taskType = TaskType.DEADLINE;
         this.deadline = deadline;
@@ -30,12 +32,12 @@ public class Deadline extends Task {
     }
 
 
-    public String getDeadline() {
+    public LocalDate getDeadline() {
         return deadline;
     }
 
     public String getTimeLimitString() {
-        return "(by: " + deadline + ")";
+        return deadline.toString();
     }
 
 }

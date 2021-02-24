@@ -2,13 +2,15 @@ package duke.task;
 
 import duke.parser.Parser;
 
-public class Event extends Task {
-    private String period;
+import java.time.LocalDate;
 
-    public Event(String listContent, String period) {
+public class Event extends Task {
+    private LocalDate eventTime;
+
+    public Event(String listContent, LocalDate period) {
         super(listContent);
         this.taskType = TaskType.EVENT;
-        this.period = period;
+        this.eventTime = period;
     }
 
     public static void isEventCommandValid(String userInput) throws Exception {
@@ -29,11 +31,11 @@ public class Event extends Task {
         return Parser.parseTaskContentAndTime(words, indexOfAtWord);
     }
 
-    public String getPeriod() {
-        return period;
+    public LocalDate getEventTime() {
+        return eventTime;
     }
 
     public String getTimeLimitString() {
-        return "(at: " + period + ")";
+        return eventTime.toString();
     }
 }
