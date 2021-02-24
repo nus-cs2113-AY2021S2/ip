@@ -148,7 +148,7 @@ public class UI {
     public static void printInsertCorrectDateTask() {
         System.out.println("Wrong Date format Crewmate!!" + System.lineSeparator()
                 + "Please re-enter the date ONLY in this format yyyy/MM/dd HHmm" + System.lineSeparator()
-                + "PS: No need to use event or deadline command again");
+                + "PS: NO NEED to use event <task> nor deadline command <task> again!!");
     }
 
     // Prompts the user to input date for search command
