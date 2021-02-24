@@ -10,6 +10,11 @@ import duke.ui.UI;
 import java.util.ArrayList;
 
 public class TaskManager {
+    /**
+     * processTask is the main class which redirects and classifies various inputs
+     * @param input is the raw user input
+     * @throws InvalidInputException in the event that an invalid command is issued
+     */
     public static void processTask(String input) throws InvalidInputException {
         String[] inputData = input.split(" ");
         String[] taskDetails;
@@ -127,6 +132,12 @@ public class TaskManager {
         }
     }
 
+
+    /**
+     * This method seeks to separate and organize user input
+     * @param inputData is the raw user input data, separated by space
+     * @return the separated data ready to create the respective Task objects
+     */
     public static String[] parseTaskDetails(String[] inputData) {
         String[] parsedData = new String[2];
         String prefix = "";

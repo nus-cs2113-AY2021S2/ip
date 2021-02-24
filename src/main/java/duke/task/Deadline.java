@@ -4,13 +4,20 @@ import duke.exception.InvalidDateTimeException;
 import duke.exception.MissingDueDateException;
 import duke.exception.MissingTaskDescriptionException;
 
+
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+
 public class Deadline extends Task {
     protected LocalDateTime dueDate;
 
+    /**
+     * Deadline constructor method
+     * @param task is the task description
+     * @param dueDate is he task due date - specific to deadlines
+     */
     public Deadline(String task, String dueDate) {
         super(task);
         this.dueDate = parseDateTime(dueDate);

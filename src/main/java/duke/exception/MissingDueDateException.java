@@ -1,5 +1,8 @@
 package duke.exception;
 
+/**
+ * This exception is thrown when a deadline is created without a valid due date
+ */
 public class MissingDueDateException extends Exception {
     @Override
     public String getMessage() {
