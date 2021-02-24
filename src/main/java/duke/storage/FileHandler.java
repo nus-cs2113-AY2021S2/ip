@@ -14,6 +14,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * This class contains methods for read/write the task list of the application.
+ */
 public class FileHandler {
     private static final String FILE_PATH = "data/";
     private static final String FILE_NAME = "tasks.txt";
@@ -45,8 +48,8 @@ public class FileHandler {
         boolean isDone = Boolean.parseBoolean(taskWords[1]);
         String content = taskWords[2];
         LocalDate time = null;
-        if (!taskWords[3].equals(PADDING_TIME)){
-             time = LocalDate.parse(taskWords[3]);
+        if (!taskWords[3].equals(PADDING_TIME)) {
+            time = LocalDate.parse(taskWords[3]);
         }
         Task newTask;
         switch (type) {
@@ -77,31 +80,6 @@ public class FileHandler {
         }
     }
 
-    public static ArrayList<Task> readTasksFromFile() {
-        File taskFile = new File(FILE_PATH + FILE_NAME);
-        ArrayList<Task> localTasks = null;
-        try {
-            localTasks = getTasksFromText(taskFile);
-        } catch (FileNotFoundException e) {
-            System.out.println(UI.DIVIDER +
-                    " Local task list file is not found.\n A new task list is initialized for you.");
-            createDataDir();
-        }
-        return localTasks;
-    }
-
-    public static void writeTaskList(TaskList taskListToWrite) {
-        ArrayList<Task> tasks = taskListToWrite.getTasks();
-        String taskInText = convertTaskToText(tasks);
-        try {
-            writeFile(taskInText);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            System.out.println(UI.DIVIDER + e.getMessage() + "\n" + UI.DIVIDER_LINE_ONLY);
-        }
-    }
-
     private static String convertTaskToText(ArrayList<Task> tasks) {
         StringBuilder taskInText = new StringBuilder();
         for (Task task : tasks) {
@@ -120,4 +98,41 @@ public class FileHandler {
         }
         return taskInText.toString();
     }
+
+    /**
+     * Reads a text file in a fixed file path and converts the text to task objects.
+     *
+     * @return an ArrayList of task objects.
+     */
+    public static ArrayList<Task> readTasksFromFile() {
+        File taskFile = new File(FILE_PATH + FILE_NAME);
+        ArrayList<Task> localTasks = null;
+        try {
+            localTasks = getTasksFromText(taskFile);
+        } catch (FileNotFoundException e) {
+            System.out.println(UI.DIVIDER +
+                    " Local task list file is not found.\n A new task list is initialized for you.");
+            createDataDir();
+        }
+        return localTasks;
+    }
+
+    /**
+     * Writes the current task list into a text file in a fixed file path.
+     *
+     * @param taskListToWrite the task list that will be written into the text file.
+     */
+    public static void writeTaskList(TaskList taskListToWrite) {
+        ArrayList<Task> tasks = taskListToWrite.getTasks();
+        String taskInText = convertTaskToText(tasks);
+        try {
+            writeFile(taskInText);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            System.out.println(UI.DIVIDER + e.getMessage() + "\n" + UI.DIVIDER_LINE_ONLY);
+        }
+    }
+
+
 }

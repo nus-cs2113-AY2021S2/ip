@@ -1,5 +1,10 @@
 package duke.task;
 
+/**
+ * Represents the concept of a task.
+ * Abstract as it is a high level concept.
+ * Contains the basic attributes and methods of an ideal task.
+ */
 public abstract class Task {
     /**
      * The status of the task.
