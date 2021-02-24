@@ -1,15 +1,17 @@
 package duke;
+
 import duke.tasks.Task;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Todo;
 import duke.tasks.DukeException;
 
+//import java.io.PrintWriter;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.FileWriter;
-import java.io.FileNotFoundException;
+//import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -20,7 +22,7 @@ public class Duke {
     public static ArrayList<Task> tasks = new ArrayList<>();
 
     public static void goodbye() {
-        saveData();
+//        saveData();
         System.out.println("\n" +
                 "░██████╗░░█████╗░░█████╗░██████╗░██████╗░██╗░░░██╗███████╗\n" +
                 "██╔════╝░██╔══██╗██╔══██╗██╔══██╗██╔══██╗╚██╗░██╔╝██╔════╝\n" +
@@ -54,7 +56,7 @@ public class Duke {
         System.out.println("\uD83D\uDE1E OOPS! " + type + " is not valid, please try again!");
     }
 
-    public static void validateInput (String input, String type) throws DukeException {
+    public static void validateInput(String input, String type) throws DukeException {
         try {
             if (type.equals("done") && (!(input.strip()).matches("[-+]?\\\\d*\\\\.?\\\\d+\n"))) {
                 throw new DukeException();
@@ -64,8 +66,8 @@ public class Duke {
                 if (!input.contains("/")) {
                     if (type.equals("deadline")) {
                         throw new DukeException();
-                    } else if (type.equals("event")){
-                        throw new DukeException ();
+                    } else if (type.equals("event")) {
+                        throw new DukeException();
                     }
                 }
             }
@@ -79,11 +81,11 @@ public class Duke {
             System.out.println("Here are the tasks in your list:");
             for (int i = 0; i < tasks.size(); i++) {
                 Task currentTask = tasks.get(i);
-                System.out.print(i+1 + ". " + currentTask.getTaskType() + currentTask.getStatusIcon() + " "
-                    + currentTask.getDescription());
-                if (currentTask.getTaskType() == "[D]")
+                System.out.print(i + 1 + ". " + currentTask.getTaskType() + currentTask.getStatusIcon() + " "
+                        + currentTask.getDescription());
+                if (currentTask.getTaskType().equals("[D]"))
                     System.out.print(" (by: " + currentTask.getDateTime() + ")");
-                else if (currentTask.getTaskType() == "[E]") {
+                else if (currentTask.getTaskType().equals("[E]")) {
                     System.out.print(" (at: " + currentTask.getDateTime() + ")");
                 }
                 System.out.print("\n");
@@ -94,15 +96,21 @@ public class Duke {
     }
 
     public static void markAsDone(String taskDone) {
-        int taskIndex = Integer.parseInt(taskDone) - 1;
-        if (taskIndex >= tasks.size() || taskIndex < 0){
-            System.out.println("You have not added task " + taskIndex + " yet! Please try again.");
-        } else {
-            tasks.get(taskIndex - 1).setDone();
-            System.out.println("Nice! I've marked this task as done:");
-            Task currentTask = tasks.get(taskIndex);
-            System.out.println(currentTask.getTaskType() + currentTask.getStatusIcon()
-                    + currentTask.getDescription());
+        try {
+            int taskIndex = Integer.parseInt(taskDone) - 1;
+            if (taskIndex >= tasks.size() || taskIndex < 0) {
+                System.out.println("You have not added task " + taskIndex + " yet! Please try again.");
+            } else if (tasks.get(taskIndex).getIsDone() == true) {
+                System.out.println("Task have already been set as done before. Please try to complete other tasks.");
+            } else {
+                tasks.get(taskIndex).setDone();
+                System.out.println("Nice! I've marked this task as done:");
+                Task currentTask = tasks.get(taskIndex);
+                System.out.println(currentTask.getTaskType() + currentTask.getStatusIcon()
+                        + " " + currentTask.getDescription());
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println(e + "invalid! Please try again");
         }
     }
 
@@ -116,7 +124,7 @@ public class Duke {
             if (tasks.size() > 1) {
                 System.out.println("Now you have " + tasks.size() + " tasks in the list.");
             } else {
-                System.out.println("Now you have " +tasks.size() + " task in the list.");
+                System.out.println("Now you have " + tasks.size() + " task in the list.");
             }
         } catch (DukeException | IndexOutOfBoundsException e) {
             printInvalidMessage("todo");
@@ -140,7 +148,7 @@ public class Duke {
         }
     }
 
-    public static void addDeadline(String taskToAdd){
+    public static void addDeadline(String taskToAdd) {
         try {
             validateInput(taskToAdd, "deadline");
             int splitIndex = taskToAdd.indexOf('/');
@@ -152,7 +160,6 @@ public class Duke {
             System.out.println(d.getTaskType() + d.getStatusIcon() + " " + d.getDescription() + " (by: "
                     + d.getDateTime() + ")");
             System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-
         } catch (DukeException | IndexOutOfBoundsException e) {
             printInvalidMessage("deadline");
         }
@@ -170,7 +177,7 @@ public class Duke {
             tasks.remove(taskIndex);
             if (tasks.size() > 1) {
                 System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-            } else  {
+            } else {
                 System.out.println("Now you have " + tasks.size() + " task in the list.");
             }
         }
@@ -180,26 +187,29 @@ public class Duke {
         try {
             Path dataFilePath = Paths.get("data/");
             Files.createDirectories(dataFilePath);
-            File data = new File ("data/duke.txt");
-            Scanner readFile = new Scanner (data);
+            File data = new File("data/duke.txt");
+            Scanner readFile = new Scanner(data);
             while (readFile.hasNextLine()) {
                 String input = readFile.nextLine();
                 //split string by whitespace + "|" + whitespace
                 String[] taskSplit = input.split("\\s\\|\\s");
-                if (taskSplit[0].equals("[D]")) {
-                    Deadline d = new Deadline (taskSplit[2], taskSplit[3]);
+                switch (taskSplit[0]) {
+                case "[D]":
+                    Deadline d = new Deadline(taskSplit[2], taskSplit[3]);
                     tasks.add(d);
                     if (taskSplit[1].equals("1")) {
                         d.setDone();
                     }
-                } else if (taskSplit[0].equals("[T]")) {
-                    Todo t = new Todo (taskSplit[2]);
+                    break;
+                case "[T]":
+                    Todo t = new Todo(taskSplit[2]);
                     tasks.add(t);
                     if (taskSplit[1].equals("1")) {
                         t.setDone();
                     }
-                } else if (taskSplit[0].equals("[E]")) {
-                    Event e = new Event (taskSplit[2], taskSplit[3]);
+                    break;
+                case "[E]":
+                    Event e = new Event(taskSplit[2], taskSplit[3]);
                     tasks.add(e);
                     if (taskSplit[1].equals("1")) {
                         e.setDone();
@@ -216,12 +226,14 @@ public class Duke {
         try {
 
             System.out.println("Saving your data...");
+            File file = new File("duke.txt");
             FileWriter fileWriter = new FileWriter("data/duke.txt");
-            for (int i = 1; i < tasks.size(); i++) {
+
+            for (int i = 0; i < tasks.size(); i++) {
                 Task currentTask = tasks.get(i);
                 fileWriter.write(currentTask.getTaskType() + " | " + ((currentTask.getIsDone()) ? "1" : "0") + " | "
                         + currentTask.getDescription() + ((currentTask.hasDateTime()) ? " | "
-                        + currentTask.getDateTime() : "") + "\n" );
+                        + currentTask.getDateTime() : "") + "\n");
             }
             fileWriter.close();
             System.out.println("Data saved");
@@ -233,17 +245,22 @@ public class Duke {
     }
 
     public static void getInput() {
-        while (true) {
+        boolean isExit = false;
+        while (!isExit) {
             Scanner sc = new Scanner(System.in);
             String inputCommand = sc.nextLine();
-            if (inputCommand.equals("list")) {
+            switch (inputCommand) {
+            case "list":
                 showList();
-            } else if (inputCommand.equals("bye")) {
-                goodbye();
                 break;
-            } else if (inputCommand.equals("save")) {
+            case "bye":
+                goodbye();
+                isExit = true;
+                break;
+            case "save":
                 saveData();
-            } else {
+                break;
+            default:
                 try {
                     String taskToHandle = inputCommand.split(" ", 2)[1];
                     if (inputCommand.startsWith("done")) {
