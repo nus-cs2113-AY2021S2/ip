@@ -13,6 +13,7 @@ import duke.commands.HelpCommand;
 import duke.commands.InvalidCommand;
 import duke.commands.ListCommand;
 import duke.commands.TodoCommand;
+import duke.commands.UrgentCommand;
 import duke.exception.InvalidCommandTimeException;
 import duke.exception.InvalidTaskNumberException;
 import duke.task.Deadline;
@@ -49,7 +50,10 @@ public class Parser {
 	        break;
 	    case "delete":
 	        command = new DeleteCommand(commandArg);
-	        break;
+            break;
+        case "urgent":
+            command = new UrgentCommand();
+            break;
 	    case "bye":
 	        command = new ByeCommand();
 	        break;

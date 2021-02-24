@@ -6,10 +6,11 @@
 
 What do you have to do today?
 Commands:
+    list
+    urgent
     todo taskName
     deadline deadlineName /by dd/mm/yyyy hhmm
     event eventName /at dd/mm/yyyy hhmm
-    list
     done taskNumber
     delete taskNumber
     help
@@ -19,10 +20,11 @@ Here are the tasks in your list:
 _______________________________________________________________________________
 _______________________________________________________________________________
 Commands:
+    list
+    urgent
     todo taskName
     deadline deadlineName /by dd/mm/yyyy hhmm
     event eventName /at dd/mm/yyyy hhmm
-    list
     done taskNumber
     delete taskNumber
     help
@@ -36,47 +38,54 @@ You now have 1 tasks in the list.
 _______________________________________________________________________________
 _______________________________________________________________________________
 Alrighty! I have added this new Deadline:
-    [DL][ ] individual project (by: 09/03/2021 2359)
+    [DL][ ] individual project (by: 09/03/2022 2359)
 You now have 2 tasks in the list.
 _______________________________________________________________________________
 _______________________________________________________________________________
 Alrighty! I have added this new Event:
-    [EV][ ] lecture (at: 28/10/2021 1200)
+    [EV][ ] lecture (at: 28/10/2022 1200)
 You now have 3 tasks in the list.
 _______________________________________________________________________________
 _______________________________________________________________________________
 Here are the tasks in your list:
     1. [TD][ ] team project
-    2. [DL][ ] individual project (by: 09/03/2021 2359)
-    3. [EV][ ] lecture (at: 28/10/2021 1200)
+    2. [DL][ ] individual project (by: 09/03/2022 2359)
+    3. [EV][ ] lecture (at: 28/10/2022 1200)
+_______________________________________________________________________________
+_______________________________________________________________________________
+Here are the urgent tasks due in the next week:
+    1. [TD][ ] team project
 _______________________________________________________________________________
 _______________________________________________________________________________
 Very nice! I've marked this task as done:
-    [DL][X] individual project (by: 09/03/2021 2359)
+    [TD][X] team project
 _______________________________________________________________________________
 _______________________________________________________________________________
 Here are the tasks in your list:
-    1. [TD][ ] team project
-    2. [DL][X] individual project (by: 09/03/2021 2359)
-    3. [EV][ ] lecture (at: 28/10/2021 1200)
+    1. [TD][X] team project
+    2. [DL][ ] individual project (by: 09/03/2022 2359)
+    3. [EV][ ] lecture (at: 28/10/2022 1200)
+_______________________________________________________________________________
+_______________________________________________________________________________
+Yay! You have no urgent task due in the next week!
 _______________________________________________________________________________
 _______________________________________________________________________________
 Yay! I've successfuly deleted this task:
-    [DL][X] individual project (by: 09/03/2021 2359)
+    [TD][X] team project
 _______________________________________________________________________________
 _______________________________________________________________________________
 Here are the tasks in your list:
-    1. [TD][ ] team project
-    2. [EV][ ] lecture (at: 28/10/2021 1200)
+    1. [DL][ ] individual project (by: 09/03/2022 2359)
+    2. [EV][ ] lecture (at: 28/10/2022 1200)
 _______________________________________________________________________________
 _______________________________________________________________________________
 Very nice! I've marked this task as done:
-    [EV][X] lecture (at: 28/10/2021 1200)
+    [EV][X] lecture (at: 28/10/2022 1200)
 _______________________________________________________________________________
 _______________________________________________________________________________
 Here are the tasks in your list:
-    1. [TD][ ] team project
-    2. [EV][X] lecture (at: 28/10/2021 1200)
+    1. [DL][ ] individual project (by: 09/03/2022 2359)
+    2. [EV][X] lecture (at: 28/10/2022 1200)
 _______________________________________________________________________________
 _______________________________________________________________________________
 There was an ERROR!
@@ -145,11 +154,13 @@ _______________________________________________________________________________
 There was an ERROR!
 'invalid' is not a valid command!
 Commands:
-    todo taskName
-    deadline deadlineName /by time
-    event eventName /at time
     list
+    urgent
+    todo taskName
+    deadline deadlineName /by dd/mm/yyyy hhmm
+    event eventName /at dd/mm/yyyy hhmm
     done taskNumber
+    delete taskNumber
     help
     bye
 

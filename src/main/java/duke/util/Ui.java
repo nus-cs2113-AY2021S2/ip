@@ -13,10 +13,11 @@ public class Ui {
     public final Scanner scanner;
     public static final String COMMANDS = 
             "Commands:\n"
+            + "    list\n"
+            + "    urgent\n"
             + "    todo taskName\n"
             + "    deadline deadlineName /by dd/mm/yyyy hhmm\n" 
             + "    event eventName /at dd/mm/yyyy hhmm\n"
-            + "    list\n"
             + "    done taskNumber\n"
             + "    delete taskNumber\n"
             + "    help\n"
@@ -68,12 +69,18 @@ public class Ui {
     }
 
     public void listAllTasks(TaskList taskList) {
-        String listOfTasksString = "Here are the tasks in your list:";
+        String listAllTasksMessage = "Here are the tasks in your list:";
+        listAllTasksMessage += getListOfTasksString(taskList);
+        printWithBorder(listAllTasksMessage);
+    }
+
+    public String getListOfTasksString(TaskList taskList) {
+        String listOfTasksString = "";
         for (int i = 0; i < taskList.getListSize(); i += 1) {
             Task task = taskList.getTask(i);
             listOfTasksString += ("\n    " + Integer.toString(i + 1) + ". " + task.toString());
         }
-        printWithBorder(listOfTasksString);
+        return listOfTasksString;
     }
 
     public void printErrorMessage(Exception e) {
@@ -110,4 +117,14 @@ public class Ui {
         String exitMessage = "Sad to see you go! ): See you soon!";
         printWithBorder(exitMessage);
     }
+
+    public void displayNoUrgentTasksMessage() {
+        String noUrgentTasksMessage = "Yay! You have no urgent task due in the next week!";
+        printWithBorder(noUrgentTasksMessage);
+	}
+
+    public void displayUrgentTasks(String listOfTasksString) {
+        String urgentTasksMessage = "Here are the urgent tasks due in the next week:" + listOfTasksString;
+        printWithBorder(urgentTasksMessage);
+	}
 }

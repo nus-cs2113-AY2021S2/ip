@@ -1,5 +1,5 @@
-Todo~false~team project
-Event~true~lecture~28/10/2021 1200
+Deadline~false~individual project~09/03/2022 2359
+Event~true~lecture~28/10/2022 1200
 Todo~false~with a lot of whitespace
 Deadline~false~project whitespace~02/06/2021 2300
 Event~false~meeting whitespace~09/03/2021 0000

@@ -33,7 +33,7 @@ public class Duke {
 	    while (!isExit) {
             String fullCommand = ui.readLine();
 	        Command command = parser.getCommand(fullCommand);
-	        try {
+            try {
 	            command.execute(taskList, ui, parser);
 	            isExit = command.isExit();
 	        } catch (Exception e) {
