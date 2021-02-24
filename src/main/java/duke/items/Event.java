@@ -8,6 +8,7 @@ public class Event extends Task {
 
     public Event(String description, String atInput) {
         super(description);
+        this.at = atInput;
         this.at = convertDateFormat(atInput);
 
     }

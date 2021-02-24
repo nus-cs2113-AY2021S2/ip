@@ -2,6 +2,10 @@ package duke.main;
 
 import duke.items.Task;
 
+<<<<<<< HEAD
+import java.text.ParseException;
+=======
+>>>>>>> master
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -14,9 +18,17 @@ public class UI {
         System.out.println("____________________________________________________________");
     }
 
-    public static void list() {
+    public static void listPreamble() {
         if (Task.getNumOfTasks() != 0){
             System.out.println("Here are the tasks in your list:");
+        }
+    }
+    public static void findPreamble() {
+        if (Task.getNumOfTasks() != 0){
+            System.out.println("Here are the matching tasks in your list:");
+        }
+        else {
+            System.out.println("There are no matching task in your list:");
         }
     }
 
@@ -87,4 +99,13 @@ public class UI {
         return myDateObj.format(myFormatObj);
     }
 
+<<<<<<< HEAD
+    public static LocalDate stringPatternToDate(String input) throws ParseException {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM-d-yyyy ");
+        LocalDate localDate = LocalDate.parse(input, formatter);
+        return localDate;
+    }
+
+=======
+>>>>>>> master
 }
