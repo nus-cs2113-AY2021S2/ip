@@ -64,8 +64,8 @@ ________________________________________________________________________________
  deadline <task> // yyyy/MM/dd HHmm :add task to Deadline List
             done  <index>           :mark task <index> as done in List
             delete  <index>         :delete task <index> in List
-            find  <task>            :Lookup for task(s) based on their description
-         search yyyy/MM/dd          :Lookup for task(s) based on their date
+            find  <task>            :find task(s) based on their description
+         search yyyy/MM/dd          :search for task(s) based on their date
 
 ____________________________________________________________________________________
 There's no such command!!! You look SUS!!!  ( O . o )
@@ -78,8 +78,8 @@ ________________________________________________________________________________
  deadline <task> // yyyy/MM/dd HHmm :add task to Deadline List
             done  <index>           :mark task <index> as done in List
             delete  <index>         :delete task <index> in List
-            find  <task>            :Lookup for task(s) based on their description
-         search yyyy/MM/dd          :Lookup for task(s) based on their date
+            find  <task>            :find task(s) based on their description
+         search yyyy/MM/dd          :search for task(s) based on their date
 
 ____________________________________________________________________________________
 Aight Crewmate!! I've got a new task for you to do!!! ( ^ _ ^ ): eat

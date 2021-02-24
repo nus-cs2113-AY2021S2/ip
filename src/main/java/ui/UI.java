@@ -137,9 +137,9 @@ public class UI {
                 + " deadline <task> // yyyy/MM/dd HHmm :add task to Deadline List" + System.lineSeparator()
                 + "            done  <index>           :mark task <index> as done in List" + System.lineSeparator()
                 + "            delete  <index>         :delete task <index> in List" + System.lineSeparator()
-                + "            find  <task>            :Lookup for task(s) based on their description"
+                + "            find  <task>            :find task(s) based on their description"
                 + System.lineSeparator()
-                + "         search yyyy/MM/dd          :Lookup for task(s) based on their date"
+                + "         search yyyy/MM/dd          :search for task(s) based on their date"
                 + System.lineSeparator();
 
         System.out.println(help);
