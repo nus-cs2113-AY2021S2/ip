@@ -41,12 +41,13 @@ public class TaskList {
                 " " + tasks.get(index).toString();
     }
 
-    public void completeTask(String s) {
-        completeTask(Integer.parseInt(s), true);
-    }
 
     public int getSize() {
         return tasks.size();
+    }
+
+    public void completeTask(String s) {
+        completeTask(Integer.parseInt(s), true);
     }
 
     public void completeTask(int number) {

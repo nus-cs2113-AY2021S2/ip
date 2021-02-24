@@ -1,2 +1,2 @@
-public class NoCommandLabelException extends Exception{
+public class NoCommandLabelException extends Exception {
 }

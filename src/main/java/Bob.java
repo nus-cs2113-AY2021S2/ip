@@ -73,7 +73,7 @@ public class Bob {
     private static void loadTask(String taskString) throws NoSuchMethodException, NumberFormatException{
         String[] taskStringArray = taskString.split(DATA_DELIMITER);
         Command command = getCommandType(taskStringArray[0]);
-        String isDone = taskStringArray[1];
+        boolean isDone = Integer.parseInt(taskStringArray[1]) == 1;
         String label = taskStringArray[2];
         String time = taskStringArray[3];
 
@@ -89,7 +89,7 @@ public class Bob {
             break;
         }
 
-        if (Integer.parseInt(isDone) == 1) {
+        if (isDone) {
             taskList.completeTask(taskList.getSize(), false);
         }
     }
