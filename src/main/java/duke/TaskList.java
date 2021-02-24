@@ -27,7 +27,7 @@ public class TaskList {
         return tasks.size();
     }
 
-    public Task get (int taskIndex) {
+    public Task get(int taskIndex) {
         return tasks.get(taskIndex);
     }
 
