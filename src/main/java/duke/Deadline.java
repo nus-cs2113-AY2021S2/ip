@@ -1,5 +1,9 @@
 package duke;
 
+/**
+ * Represents a Deadline subclass object that contains description, whether Task is done,
+ * and also Deadline Time which is inputted with keyword "/by"
+ */
 public class Deadline extends Task {
 
     protected String by;

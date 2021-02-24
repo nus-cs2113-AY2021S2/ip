@@ -1,6 +1,9 @@
 package duke;
 
-public class ToDo extends Task{
+/**
+ * Represents a Todo subclass object that is similar to the Task object.
+ */
+public class ToDo extends Task {
 
     public ToDo(String description) {
         super(description);
