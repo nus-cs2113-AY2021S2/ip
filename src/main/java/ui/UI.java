@@ -146,12 +146,16 @@ public class UI {
 
     // Prompts the user to input date for new task
     public static void printInsertCorrectDateTask() {
-        System.out.println("Please re-enter date in this format yyyy/MM/dd HHmm");
+        System.out.println("Wrong Date format Crewmate!!" + System.lineSeparator()
+                + "Please re-enter the date ONLY in this format yyyy/MM/dd HHmm" + System.lineSeparator()
+                + "PS: No need to use event or deadline command again");
     }
 
     // Prompts the user to input date for search command
     public static void printInsertCorrectDateSearch() {
-        System.out.println("Please re-enter date in this format yyyy/MM/dd:");
+        System.out.println("Wrong Date format Crewmate!!" + System.lineSeparator()
+                + "Please re-enter the date ONLY in this format yyyy/MM/dd HHmm" + System.lineSeparator()
+                + "PS: No need to use search command again");
     }
 
     // Prints search command has been completed
