@@ -129,16 +129,18 @@ public class UI {
 
     // prints help message
     public static void printHelp() {
-        String help = "               help                :prints list of all commands" + System.lineSeparator()
-                + "               list                :prints all lists ordered by category" + System.lineSeparator()
-                + "               exit                :shuts down Arthur" + System.lineSeparator()
-                + "            todo <task>            :add task to To Do list" + System.lineSeparator()
-                + "  event <task> // yyyy/MM/dd HHmm  :add task to Event List with time" + System.lineSeparator()
-                + " deadline <task // yyyy/MM/dd HHmm :add task to Deadline List" + System.lineSeparator()
-                + "            done  <index>          :mark task <index> as done in List" + System.lineSeparator()
-                + "            delete  <index>        :delete task <index> in List" + System.lineSeparator()
-                + "            find  <task>           :mark task <index> as done in List" + System.lineSeparator()
-                + "         search yyyy/MM/dd         :add task to Deadline List" + System.lineSeparator();
+        String help = "               help                 :prints list of all commands" + System.lineSeparator()
+                + "               list                 :prints all lists ordered by category" + System.lineSeparator()
+                + "               exit                 :shuts down Arthur" + System.lineSeparator()
+                + "            todo <task>             :add task to To Do list" + System.lineSeparator()
+                + "  event <task> // yyyy/MM/dd HHmm   :add task to Event List with time" + System.lineSeparator()
+                + " deadline <task> // yyyy/MM/dd HHmm :add task to Deadline List" + System.lineSeparator()
+                + "            done  <index>           :mark task <index> as done in List" + System.lineSeparator()
+                + "            delete  <index>         :delete task <index> in List" + System.lineSeparator()
+                + "            find  <task>            :Lookup for task(s) based on their description"
+                + System.lineSeparator()
+                + "         search yyyy/MM/dd          :Lookup for task(s) based on their date"
+                + System.lineSeparator();
 
         System.out.println(help);
         printDottedLines();

@@ -85,16 +85,16 @@ Hello Crewmate! I'm Arthur, ( = ^ _ ^ = )
 Please assign me my tasks to complete!
 ____________________________________________________________________________________
 
-               help                :prints list of all commands
-               list                :prints all lists ordered by category
-               exit                :shuts down Arthur
-            todo <task>            :add task to To Do list
-  event <task> // yyyy/MM/dd HHmm  :add task to Event List with time
- deadline <task // yyyy/MM/dd HHmm :add task to Deadline List
-            done  <index>          :mark task <index> as done in List
-            delete  <index>        :delete task <index> in List
-            find  <task>           :mark task <index> as done in List
-         search yyyy/MM/dd         :add task to Deadline List
+               help                 :prints list of all commands
+               list                 :prints all lists ordered by category
+               exit                 :shuts down Arthur
+            todo <task>             :add task to To Do list
+  event <task> // yyyy/MM/dd HHmm   :add task to Event List with time
+ deadline <task> // yyyy/MM/dd HHmm :add task to Deadline List
+            done  <index>           :mark task <index> as done in List
+            delete  <index>         :delete task <index> in List
+            find  <task>            :Lookup for task(s) based on their description
+         search yyyy/MM/dd          :Lookup for task(s) based on their date
 
 ____________________________________________________________________________________
 Here is task number: 1
