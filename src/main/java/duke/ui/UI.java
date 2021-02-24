@@ -5,6 +5,9 @@ import duke.task.TaskType;
 
 import java.time.LocalDate;
 
+/**
+ * This class contains methods that print prompt information of the user interface.
+ */
 public class UI {
 
     /**
@@ -99,10 +102,18 @@ public class UI {
         );
     }
 
+    /**
+     * Prints the error message of a given exception object.
+     *
+     * @param e the exception object
+     */
     public static void printErrorMessage(Exception e) {
         System.out.println(DIVIDER + e.getMessage() + "\n" + DIVIDER_LINE_ONLY);
     }
 
+    /**
+     * Prints the error message to notify the date input cannot be parsed.
+     */
     public static void printParseDateError() {
         System.out.println(DIVIDER
                 + "The time format you input is incorrect or out of range!\n"
@@ -110,20 +121,26 @@ public class UI {
                 + DIVIDER_LINE_ONLY);
     }
 
-    public static String getTimeLimitFormatted(Task currentItem) {
+    /**
+     * Returns the time limit of a task in format WEEKDAY, DAY MONTH YEAR.
+     *
+     * @param task a task object.
+     * @return a string of formatted time limit of a task.
+     */
+    public static String getTimeLimitFormatted(Task task) {
         String timeLimitFormatted = "";
-        if (currentItem.getTaskType().equals(TaskType.TODO)) {
+        if (task.getTaskType().equals(TaskType.TODO)) {
             return timeLimitFormatted;
         }
-        LocalDate timeLimitInDate = LocalDate.parse(currentItem.getTimeLimitString());
+        LocalDate timeLimitInDate = LocalDate.parse(task.getTimeLimitString());
         timeLimitFormatted = timeLimitInDate.getDayOfWeek().toString() + ", "
                 + timeLimitInDate.getDayOfMonth() + " "
                 + timeLimitInDate.getMonth() + " "
                 + timeLimitInDate.getYear();
 
-        if (currentItem.getTaskType().equals(TaskType.EVENT)) {
+        if (task.getTaskType().equals(TaskType.EVENT)) {
             timeLimitFormatted = "(at: " + timeLimitFormatted + ")";
-        } else if (currentItem.getTaskType().equals(TaskType.DEADLINE)) {
+        } else if (task.getTaskType().equals(TaskType.DEADLINE)) {
             timeLimitFormatted = "(by: " + timeLimitFormatted + ")";
         }
         return timeLimitFormatted;

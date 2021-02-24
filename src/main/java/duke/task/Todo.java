@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Represents a to-do task.
+ */
 public class Todo extends Task {
     public static String[] getTodoTaskContent(String userInput) throws Exception {
         String[] parseResult = new String[1];

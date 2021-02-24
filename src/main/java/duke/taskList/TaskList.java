@@ -7,6 +7,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
+/**
+ * Represents a list that stores tasks.
+ */
 public class TaskList {
     /**
      * Total number of task object in current list.
@@ -33,14 +36,29 @@ public class TaskList {
         return numOfTasks;
     }
 
+    /**
+     * Gets all tasks in an ArrayList.
+     *
+     * @return an ArrayList that stores all task objects.
+     */
     public ArrayList<Task> getTasks() {
         return Tasks;
     }
 
+    /**
+     * Sets tasks in an ArrayList to the current task list.
+     *
+     * @param tasks an ArrayList that stores all task objects to be set.
+     */
     public void setTasks(ArrayList<Task> tasks) {
         Tasks = tasks;
     }
 
+    /**
+     * Sets the total number of task objects in a taskList object.
+     *
+     * @param numOfTasks the total number of task objects.
+     */
     public void setNumOfTasks(int numOfTasks) {
         this.numOfTasks = numOfTasks;
     }

@@ -8,6 +8,9 @@ import duke.ui.UI;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
+/**
+ * This class contains methods of operations upon a taskList object.
+ */
 public class TaskListOperation {
     /**
      * Marks a task with a given integer index as done, if the index is not out of range.
@@ -112,6 +115,12 @@ public class TaskListOperation {
         }
     }
 
+    /**
+     * Deletes a task from the taskList.
+     *
+     * @param taskList  the taskList object that contains the list of tasks.
+     * @param userInput User's keyboard input in String.
+     */
     public static void deleteTask(TaskList taskList, String userInput) {
         try {
             String taskIndexStr = Parser.getTaskIndexString(userInput);
@@ -125,6 +134,11 @@ public class TaskListOperation {
         }
     }
 
+    /**
+     * Initializes the taskList object from a text file.
+     *
+     * @param taskList the current taskList in use.
+     */
     public static void initializeTaskList(TaskList taskList) {
         ArrayList<Task> localTasks = FileHandler.readTasksFromFile();
         if (localTasks != null) {
@@ -133,6 +147,12 @@ public class TaskListOperation {
         }
     }
 
+    /**
+     * Searches tasks that contains keywords input by the user.
+     *
+     * @param taskList  the taskList object that contains the list of tasks.
+     * @param userInput User's keyboard input in String.
+     */
     public static void searchTaskByString(TaskList taskList, String userInput) {
         ArrayList<Task> searchResult = new ArrayList<>();
         String keyword = Parser.getSearchKeyword(userInput);
@@ -144,6 +164,11 @@ public class TaskListOperation {
         printSearchResult(searchResult);
     }
 
+    /**
+     * Prints tasks found using keywords.
+     *
+     * @param resultList an ArrayList that stores task objects that contain keywords input by the user.
+     */
     private static void printSearchResult(ArrayList<Task> resultList) {
         int listSize = resultList.size();
         System.out.println(UI.DIVIDER + "Here are the matching tasks in your list:");

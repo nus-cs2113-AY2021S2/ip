@@ -8,9 +8,22 @@ import duke.ui.UI;
 
 import java.util.Scanner;
 
-
+/**
+ * <h1>Hi, this is Friday, your personal assistant!</h1>
+ * This application is designed for managing tasks. The
+ * user can add, delete, search, and mark tasks as done.
+ * It is developed using the basic framework known as
+ * Duke.
+ *
+ * @author Song Yu
+ * @version 1.0
+ * @since 2021-02-24
+ */
 public class Duke {
 
+    /**
+     * The list that stores all tasks of the user.
+     */
     private static final TaskList taskList = new TaskList();
 
     /**
