@@ -1,0 +1,19 @@
+some work
+todo some work
+deadline some work /by some time
+deadline wrong
+event some work /at some time
+event wrong
+list
+done 1
+done -1
+done 10
+done abc
+list
+delete 2
+list
+deadline quiz homework /by 24/3/2021
+find quiz
+find
+help
+bye
