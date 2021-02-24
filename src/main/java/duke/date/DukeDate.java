@@ -1,18 +1,27 @@
 package duke.date;
 
+import exceptions.IllegalDateException;
 import task.list.Deadline;
 import task.list.Event;
 import ui.UI;
 
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.chrono.IsoChronology;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
+import java.time.temporal.ChronoField;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
 
 public class DukeDate {
     public static final String EMPTY_STRING = "";
     public static String INITIAL_FORMAT = "yyyy/MM/dd HHmm";
-    public static String FINAL_FORMAT = "MM-dd-yyy HH:mm";
+    public static String FINAL_FORMAT = "MM-dd-yyyy HH:mm";
     public static String SEARCH_FORMAT = "yyyy/MM/dd";
 
     // reformats date to store as by
@@ -23,10 +32,11 @@ public class DukeDate {
         Date inputDate;
         do {
             try {
+                isDateValid(by.trim());
                 inputDate = formatter.parse(by.trim());
                 formatter.applyPattern(FINAL_FORMAT);
                 return formatter.format(inputDate);
-            } catch (ParseException e) {
+            } catch (ParseException | IllegalDateException e) {
                 UI.printInsertCorrectDateTask();
                 UI.printDottedLines();
                 Scanner in = new Scanner(System.in);
@@ -92,5 +102,26 @@ public class DukeDate {
         }
         formatter.applyPattern(SEARCH_FORMAT);
         return formatter.format(dateParsed);
+    }
+
+    public static void isDateValid(String input) throws IllegalDateException {
+        DateTimeFormatter formatter = new DateTimeFormatterBuilder()
+                .appendValue(ChronoField.YEAR, 4)
+                .appendLiteral("/")
+                .appendValue(ChronoField.MONTH_OF_YEAR, 2)
+                .appendLiteral("/")
+                .appendValue(ChronoField.DAY_OF_MONTH, 2)
+                .appendLiteral(" ")
+                .appendValue(ChronoField.HOUR_OF_DAY, 2)
+                .appendValue(ChronoField.MINUTE_OF_HOUR, 2)
+                .toFormatter()
+                .withResolverStyle(ResolverStyle.STRICT)
+                .withChronology(IsoChronology.INSTANCE);
+        ;
+        try {
+            LocalDate.parse(input, formatter);
+        } catch (DateTimeParseException e) {
+            throw new IllegalDateException();
+        }
     }
 }
