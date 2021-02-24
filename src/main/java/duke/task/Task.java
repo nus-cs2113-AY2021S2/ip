@@ -11,6 +11,10 @@ public abstract class Task {
         this.taskType = ' ';
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public void setTaskType(char taskType) {
         this.taskType = taskType;
     }
