@@ -16,7 +16,7 @@ If you can type fast, _JARVIS_ can manage your tasks faster than traditional Gra
     - [Marking a task as done : `done`](README.md#marking-a-task-as-done--done)
     - [Viewing all the tasks : `list`](README.md#viewing-all-the-tasks--list)
     - [Searching tasks by a keyword : `find`](README.md#searching-tasks-by-a-keyword--find)
-    - [Exiting JARVIS : `bye`](README.md#exiting-jarvis--bye)
+    - [Exiting _JARVIS_ : `bye`](README.md#exiting-jarvis--bye)
 * [FAQ](README.md#faq)
 * [Command summary](README.md#command-summary)
 
@@ -50,12 +50,14 @@ Set up _JARVIS_ as follows:
    ```
 1. Type the command in the command window and press Enter to execute it. Refer to 
    [Features](README.md#features) below for details of each command.   
+
 ### For existing user
 Open _JARVIS_ as follows:
 1. Open a command window to the _home folder_ where you have copied `JARVIS.jar`.
 1. Run the command `java -jar JARVIS.jar` (i.e, run the command in the same folder as the jar file).
 1. If you already have a `jarvis.txt` in the folder containing the jar file, you should see something like the output 
   below after approximately 5 seconds.
+   
    ```
    --------------------------------------------------------------------------------------------
    Importing all preferences from home interface.
@@ -73,6 +75,7 @@ Open _JARVIS_ as follows:
    ```
    However, if you do not have a `jarvis.txt` in the folder containing the jar file, you should see something like the
    output below after approximately 5 seconds.
+   
    ```
    --------------------------------------------------------------------------------------------
    Importing all preferences from home interface.
