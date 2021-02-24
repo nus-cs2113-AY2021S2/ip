@@ -12,7 +12,27 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Class in charge of file IO
+ */
 public class Storage {
+
+    /**
+     * Handles the file IO process
+     */
+    public static void fileHandling(){
+        try {
+            loadFile();
+        } catch (FileNotFoundException e) {
+            createFile();
+        }
+    }
+
+    /**
+     * Obtains past list records from list.txt to load them into current list of tasks
+     *
+     * @param line  Each line in saved records (list.txt)
+     */
     public static void loadTask(String line){
         String[] arr = line.split("\t");
         switch(arr[0]){
@@ -41,6 +61,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads input from the file list.txt
+     *
+     * @throws FileNotFoundException  If file does not exist
+     */
     public static void loadFile() throws FileNotFoundException {
         File f = new File("list.txt"); // create a File for the given file path
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
@@ -49,6 +74,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Write every task that exists within the Task list into the given format in list.txt
+     *
+     * @throws IOException  If write errors occurs
+     */
     public static void writeToFile() throws IOException {
         createFile();
         FileWriter fw = new FileWriter("list.txt");
@@ -72,6 +102,11 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Creates file if file does not exist
+     *
+     * @throws IllegalArgumentException  If input errors occur
+     */
     public static void createFile(){
         try {
             File myObj = new File("list.txt");
