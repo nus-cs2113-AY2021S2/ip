@@ -4,7 +4,7 @@ Synchronising from the cloud.
 Systems are now fully operational.
 Initialising...
 --------------------------------------------------------------------------------------------
-	Hello, sir. J.A.R.V.I.S at your service.
+	Hello, sir. J.A.R.V.I.S. at your service.
 --------------------------------------------------------------------------------------------
 	Unfortunately, I could not detect any files in the database!
 	But don't worry sir.

@@ -43,7 +43,7 @@ public class JarvisUi {
         }
         System.out.println();
         printDivider();
-        System.out.println("\tHello, sir. J.A.R.V.I.S at your service.");
+        System.out.println("\tHello, sir. J.A.R.V.I.S. at your service.");
         printDivider();
     }
 

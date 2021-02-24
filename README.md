@@ -1,6 +1,6 @@
-# _JARVIS_
+# _J.A.R.V.I.S._
 
-_JARVIS_ is a **cross-platform desktop task manager app, optimized for use via a Command Line Interface (CLI)**. 
+_J.A.R.V.I.S._ (_JARVIS_) is a **cross-platform desktop task manager app, optimized for use via a Command Line Interface (CLI)**. 
 If you can type fast, _JARVIS_ can manage your tasks faster than traditional Graphical User Interface (GUI) apps.
 
 ## Setting up _JARVIS_
@@ -21,7 +21,7 @@ If you can type fast, _JARVIS_ can manage your tasks faster than traditional Gra
    Systems are now fully operational.
    Initialising...
    --------------------------------------------------------------------------------------------
-       Hello, sir. J.A.R.V.I.S at your service.
+       Hello, sir. J.A.R.V.I.S. at your service.
    --------------------------------------------------------------------------------------------
 	   Unfortunately, I could not detect any files in the database!
 	   But don't worry sir.
