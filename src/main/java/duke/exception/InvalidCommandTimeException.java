@@ -1,5 +1,9 @@
 package duke.exception;
 
+/**
+ * Represents the Exception when the user does not provide a valid date and time.
+ * This applies to the 'deadline' and 'event' commands.
+ */
 public class InvalidCommandTimeException extends Exception {
     private String errorMessage;
     private String commandType;

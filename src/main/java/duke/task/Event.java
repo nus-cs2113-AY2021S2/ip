@@ -3,6 +3,10 @@ package duke.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents an event created by the user. An <code>Event</code> corresponds to
+ * a task description, its completed status, and its due date.
+ */
 public class Event extends Task {
     
     protected LocalDateTime at;

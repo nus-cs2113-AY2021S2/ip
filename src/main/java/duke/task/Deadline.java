@@ -3,6 +3,10 @@ package duke.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a deadline created by the user. A <code>Deadline</code> corresponds to
+ * a task description, its completed status, and its due date.
+ */
 public class Deadline extends Task {
     
     protected LocalDateTime by;

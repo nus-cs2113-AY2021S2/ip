@@ -7,6 +7,9 @@ import duke.util.Ui;
 import duke.exception.EmptyCommandArgException;
 import duke.exception.InvalidTaskNumberException;
 
+/**
+ * Represents the delete command given by the user.
+ */
 public class DeleteCommand extends Command {
 
     public DeleteCommand(String commandArg) {

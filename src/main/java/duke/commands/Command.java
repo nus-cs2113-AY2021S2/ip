@@ -8,6 +8,9 @@ import duke.task.TaskList;
 import duke.util.Parser;
 import duke.util.Ui;
 
+/**
+ * Represents a command given by the user.
+ */
 public abstract class Command {
     protected static Ui ui;
     protected String commandArg;

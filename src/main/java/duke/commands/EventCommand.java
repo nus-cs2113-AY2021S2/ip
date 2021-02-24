@@ -1,15 +1,17 @@
 package duke.commands;
 
+import java.time.LocalDateTime;
+
+import duke.exception.EmptyCommandArgException;
+import duke.exception.InvalidCommandTimeException;
 import duke.task.Event;
 import duke.task.TaskList;
 import duke.util.Parser;
 import duke.util.Ui;
 
-import java.time.LocalDateTime;
-
-import duke.exception.EmptyCommandArgException;
-import duke.exception.InvalidCommandTimeException;
-
+/**
+ * Represents the event command given by the user.
+ */
 public class EventCommand extends Command {
 
     public EventCommand(String commandArg) {

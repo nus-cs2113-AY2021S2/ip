@@ -5,6 +5,9 @@ import duke.task.TaskList;
 import duke.util.Parser;
 import duke.util.Ui;
 
+/**
+ * Represents the command given by the user if it does not match any of the default commands.
+ */
 public class InvalidCommand extends Command {
 
     public InvalidCommand(String commandArg) {

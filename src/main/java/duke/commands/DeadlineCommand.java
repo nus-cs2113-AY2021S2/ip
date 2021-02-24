@@ -1,15 +1,17 @@
 package duke.commands;
 
+import java.time.LocalDateTime;
+
+import duke.exception.EmptyCommandArgException;
+import duke.exception.InvalidCommandTimeException;
 import duke.task.Deadline;
 import duke.task.TaskList;
 import duke.util.Parser;
 import duke.util.Ui;
 
-import java.time.LocalDateTime;
-
-import duke.exception.EmptyCommandArgException;
-import duke.exception.InvalidCommandTimeException;
-
+/**
+ * Represents the deadline command given by the user.
+ */
 public class DeadlineCommand extends Command {
 
     public DeadlineCommand(String commandArg) {
