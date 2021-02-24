@@ -16,6 +16,9 @@ public class DeadlineTask extends Task {
         this.dueDate = dueDate;
     }
 
+    public LocalDate getDueDate() {
+        return dueDate;
+    }
 
     /**
      * Prints task status.

@@ -46,6 +46,7 @@ public class Constants {
     public final String COMMAND_DONE = "done ";
     public final String COMMAND_UNDO = "undo ";
     public final String COMMAND_FIND = "find ";
+    public final String COMMAND_SEARCH = "search ";
 
 
     //Messages
@@ -59,6 +60,8 @@ public class Constants {
             + "8K: bye - Exit programme.\n"
             + "    help - Show list of commands.\n"
             + "    list - Show list of saved values.\n"
+            + "    find <keyword> - Show tasks that match keyword.\n"
+            + "    search <DD-MM-YYYY> - Show deadlines due on specified date.\n"
             + "    todo <name> - Creates new todo task.\n"
             + "    event <name> /at <info> - Creates new event.\n"
             + "    deadline <name> /by <DD-MM-YYYY> - Creates new deadline.\n"

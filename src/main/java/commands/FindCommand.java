@@ -16,21 +16,24 @@ public class FindCommand extends Command {
      */
     @Override
     public void execute() {
-        System.out.println(constants.LINE);
         int count = 0;
         for (int i = 0; i < taskManager.getTaskCount(); i++) {
             Task task = taskManager.getTask(i);
-            if (task.getName().toLowerCase().contains(input.toLowerCase())) {
-                count++;
-                System.out.print((i+1) + ".");
-                task.printStatus();
-                System.out.println();
+            if (!task.getName().toLowerCase().contains(input.toLowerCase())) {
+                continue;
+            } else if (count == 0) {
+                System.out.println(constants.LINE);
             }
+            count++;
+            System.out.print((i+1) + ".");
+            task.printStatus();
+            System.out.println();
         }
         if (count == 0) {
             //No matching task
             System.out.println(constants.MESSAGE_TASK_NOT_FOUND);
+        } else {
+            System.out.println(constants.LINE);
         }
-        System.out.println(constants.LINE);
     }
 }

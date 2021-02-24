@@ -54,6 +54,9 @@ public class Parser {
         } else if (input.startsWith(constants.COMMAND_FIND)) {
             //Find tasks matching keyword
             new FindCommand(input).execute();
+        } else if (input.startsWith(constants.COMMAND_SEARCH)) {
+            //Search task that matches date
+            new SearchCommand(input).execute();
         } else {
             //unrecognized command
             printError();
