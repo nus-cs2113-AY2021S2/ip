@@ -30,4 +30,8 @@ public class Task {
     public String toString() {
         return "[" + getStatusIcon() + "]" + " " + getDescription();
     }
+    
+    public boolean isUrgent() {
+        return !this.isDone();
+    }
 }

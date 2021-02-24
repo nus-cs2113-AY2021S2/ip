@@ -1,11 +1,13 @@
 help
 todo team project
-deadline individual project /by 09/03/2021 2359
-event lecture /at 28/10/2021 1200
+deadline individual project /by 09/03/2022 2359
+event lecture /at 28/10/2022 1200
 list
-done 2
+urgent
+done 1
 list
-delete 2
+urgent
+delete 1
 list
 done 2
 list

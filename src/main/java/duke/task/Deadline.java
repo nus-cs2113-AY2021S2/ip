@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
     
-    protected LocalDateTime by;
+    public LocalDateTime by;
 
     public Deadline(String description, LocalDateTime by) {
         super(description);
@@ -21,5 +21,14 @@ public class Deadline extends Task {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         String byString = this.by.format(formatter);
         return byString;
+    }
+
+    @Override
+    public boolean isUrgent() {
+        if (this.isDone()) {
+            return false;
+        }
+        LocalDateTime weekDateTime = LocalDateTime.now().plusDays(7);
+        return this.by.isBefore(weekDateTime);
     }
 }

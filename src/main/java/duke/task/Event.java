@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
     
-    protected LocalDateTime at;
+    public LocalDateTime at;
 
     public Event(String description, LocalDateTime at) {
         super(description);
@@ -21,5 +21,14 @@ public class Event extends Task {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         String atString = this.at.format(formatter);
         return atString;
+    }
+
+    @Override
+    public boolean isUrgent() {
+        if (this.isDone()) {
+            return false;
+        }
+        LocalDateTime weekDateTime = LocalDateTime.now().plusDays(7);
+        return this.at.isBefore(weekDateTime);
     }
 }
