@@ -1,6 +1,6 @@
 package duke;
 
-import exception.EmptyTodoException;
+import exception.EmptyCommandException;
 import exception.UnknownCommandException;
 import task.Deadline;
 import task.Event;
@@ -16,6 +16,10 @@ public class DukeController {
     public static final int DEADLINE_STRING_LENGTH = 8;
     public static final int TODO_STRING_LENGTH = 4;
     public static final int DELETE_STRING_LENGTH = 6;
+    public static final String STRING_COMMAND_BYE = "bye";
+    public static final String STRING_COMMAND_LIST = "list";
+    public static final String STRING_COMMAND_DONE = "done";
+    public static final String STRING_COMMAND_DELETE = "delete";
     public static ArrayList<Task> tasks = new ArrayList<>();
     public static int taskCount = 0;
 
@@ -24,13 +28,13 @@ public class DukeController {
         taskCount = tasks.size();
         while (true) {
             String input = scanner.nextLine();
-            if (input.equals("bye")) {
+            if (input.equals(STRING_COMMAND_BYE)) {
                 return;
-            } else if (input.equals("list")) {
+            } else if (input.equals(STRING_COMMAND_LIST)) {
                 UI.printTaskList(tasks, taskCount);
-            } else if (input.contains("done")) {
+            } else if (input.contains(STRING_COMMAND_DONE)) {
                 markTaskDone(input);
-            } else if (input.contains("delete")) {
+            } else if (input.contains(STRING_COMMAND_DELETE)) {
                 deleteTask(input);
             } else {
                 addNewTask(input);
@@ -74,33 +78,39 @@ public class DukeController {
             } else {
                 throw new UnknownCommandException();
             }
-        } catch (EmptyTodoException e) {
+        } catch (EmptyCommandException e) {
             System.out.println(e.getMessage());
             return null;
         }
 
     }
 
-    private static Event processEvent(String input) {
+    private static Event processEvent(String input) throws EmptyCommandException{
         String substr = input.substring(EVENT_STRING_LENGTH);
+        if (substr.isBlank()) {
+            throw new EmptyCommandException("Event");
+        }
         String[] parts = substr.split("/at");
         String description = parts[0].trim();
         String at = parts[1].trim();
         return new Event(description, at);
     }
 
-    private static Deadline processDeadline(String input) {
+    private static Deadline processDeadline(String input) throws EmptyCommandException {
         String substr = input.substring(DEADLINE_STRING_LENGTH);
+        if (substr.isBlank()) {
+            throw new EmptyCommandException("Deadline");
+        }
         String[] parts = substr.split("/by");
         String description = parts[0].trim();
         String by = parts[1].trim();
         return new Deadline(description, by);
     }
 
-    private static ToDo processToDo(String input) throws EmptyTodoException {
+    private static ToDo processToDo(String input) throws EmptyCommandException {
         String substr = input.substring(TODO_STRING_LENGTH);
-        if (substr.length() == 0) {
-            throw new EmptyTodoException();
+        if (substr.isBlank()) {
+            throw new EmptyCommandException("ToDo");
         }
         return new ToDo(substr.trim());
     }

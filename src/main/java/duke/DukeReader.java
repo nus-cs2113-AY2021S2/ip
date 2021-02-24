@@ -7,6 +7,7 @@ import task.ToDo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -17,15 +18,17 @@ public class DukeReader {
     public static void readFromFile() {
         try {
             File f = new File("duke.txt");
+            if (!f.exists()) {
+                f.createNewFile();
+            }
             Scanner scanner = new Scanner(f);
             while (scanner.hasNext()) {
                 createTask(scanner.nextLine());
             }
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             System.out.println("File not found");
             e.printStackTrace();
         }
-
     }
 
     private static void createTask(String input) {
