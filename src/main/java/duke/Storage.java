@@ -5,17 +5,35 @@ import tasks.Task;
 import tasks.Todo;
 import tasks.Event;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.FileWriter;
 import java.util.ArrayList;
 
+/**
+ * Deals with loading tasks from the file and saving task in the file.
+ */
 public class Storage {
 
     private static String filePath;
 
+    /**
+     * Contructor for Storage.
+     * Initialise the file path.
+     * @param filePath
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Process task object from a line in the loaded file.
+     * Determine task type, description, isDone, at (for event), by (for deadline)x.
+     * @param line A line in the loaded file.
+     * @return Task object to be added to the arraylist
+     */
     public static Task processFile(String line) {
         Task t = null;
         int idx;
@@ -41,6 +59,10 @@ public class Storage {
         return t;
     }
 
+    /**
+     * Read line by line from the file as specified by the file path.
+     * @return Arraylist containing all the tasks loaded from the file
+     */
     public static ArrayList<Task> readFile() {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
@@ -64,6 +86,9 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Write the updated arraylist back into the file path specified.
+     */
     public static void saveFile() {
         try {
             FileWriter writer = new FileWriter(filePath, false);

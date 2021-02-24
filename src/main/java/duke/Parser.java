@@ -6,10 +6,12 @@ import tasks.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Deals with processing user commands.
+ */
 public class Parser {
     static final int TODO_LENGTH = 4;
     static final int EVENT_LENGTH = 5;
@@ -25,6 +27,10 @@ public class Parser {
         FIND
     }
 
+    /**
+     * Process user's request to determine if the user wants to list, delete, find or mark a task done
+     * @param task User's full command input
+     */
     public static void processUserRequest(String task) {
         if (task.equalsIgnoreCase(UserCommands.LIST.toString().toLowerCase())) {
             Ui.printTaskList();
@@ -43,6 +49,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Process user's command for adding deadline.
+     * Determine the description of the deadline and when the deadline has to be completed.
+     * @param userInput User's full command input
+     * @return deadline object (with 'description' and 'by' initialised)
+     * @throws DukeException if description of deadline is empty
+     */
     public static Deadline processAddDeadline(String userInput) throws DukeException {
         if (userInput.length() == DEADLINE_LENGTH ) {
             throw new DukeException(TaskType.DEADLINE);
@@ -65,6 +78,13 @@ public class Parser {
         return new Deadline(description, by);
     }
 
+    /**
+     * Process user's command for adding event.
+     * Determine the description of the event and when the event will be conducted.
+     * @param userInput User's full command input
+     * @return event object (with 'description' and 'at' initialised)
+     * @throws DukeException if description of event is empty
+     */
     public static Event processAddEvent(String userInput) throws DukeException {
         if (userInput.length() == EVENT_LENGTH) {
             throw new DukeException(TaskType.EVENT);
@@ -88,6 +108,13 @@ public class Parser {
         return new Event(description, at);
     }
 
+    /**
+     * Process user's command for adding todo.
+     * Determine the description of the todo.
+     * @param userInput User's full command input
+     * @return todo object (with description initialised)
+     * @throws DukeException if description of todo is empty
+     */
     public static Todo processAddTodo(String userInput) throws DukeException {
         if (userInput.length() == TODO_LENGTH) {
             throw new DukeException(TaskType.TODO);
@@ -96,6 +123,12 @@ public class Parser {
         return new Todo(description);
     }
 
+    /**
+     * Convert date string into date data type only if date string pattern match is found.
+     * If there is date string pattern match found, return null.
+     * @param dateString Date string entered by the user
+     * @return date of date data type
+     */
     public static LocalDate processDatesTimes(String dateString) {
         LocalDate date = null;
         Pattern patt = Pattern.compile("2[0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]");
@@ -112,6 +145,13 @@ public class Parser {
         return date;
     }
 
+    /**
+     * Process user's command for marking task done.
+     * Get the index of the task to be mark done.
+     * If no index is indicated by user/ index is invalid, print error message.
+     * @param userInput User's command
+     * @return The index of the task to be mark done + 1
+     */
     public static int processTaskDone(String userInput) {
         if (userInput.length() == DONE_LENGTH) {
             throw new IndexOutOfBoundsException();
@@ -127,6 +167,13 @@ public class Parser {
         return idx;
     }
 
+    /**
+     * Process user's command for deleting a task.
+     * Get the index of the task to be deleted.
+     * If no index is indicated by user/ index is invalid, print error message.
+     * @param userInput User's command
+     * @return The index of the task to be deleted + 1
+     */
     public static int processDeleteTask(String userInput) {
         if (userInput.length() == DELETE_LENGTH) {
             throw new IndexOutOfBoundsException();
@@ -141,7 +188,13 @@ public class Parser {
         }
         return idx;
     }
-
+    /**
+     * Process user's command for finding tasks that match specified search description.
+     * Get the search description that the user specified.
+     * If there is no search description, return an empty string.
+     * @param userInput User's command
+     * @return The search dscription
+     */
     public static String processFindTask(String userInput) {
         // when the user did not enter search description
         if (userInput.length() == FIND_LENGTH) {

@@ -6,14 +6,22 @@ import tasks.Task;
 import tasks.TaskType;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
+/**
+ * Contains the task list and tracks the number of tasks in the list.
+ * Deals with tasks-related operations, such as add tasks, delete tasks, find tasks and marking a task done.
+ */
 public class TaskList {
 
     private static ArrayList<Task> tasks;
     private static int tasksCount;
 
-
+    /**
+     * Constructor for TaskList
+     * Initialises 'tasks' arraylist and the number of tasks.
+     * If 'tasks' is null, create an empty 'tasks' arraylist and set number of tasks to 0.
+     * @param tasks ArrayList containing all the tasks
+     */
     public TaskList(ArrayList<Task> tasks) {
         if (tasks == null) {
             tasks = new ArrayList<>();
@@ -23,13 +31,19 @@ public class TaskList {
         this.tasksCount = tasks.size();
     }
 
+    /**
+     * Return 'tasks' arraylist.
+     * @return tasks ArrayList containing all the tasks
+     */
     public static ArrayList<Task> getTasks() {
         return tasks;
     }
 
     /**
-     *
-     * @param userInput User command
+     * Add new task (todo/ event/ deadline) into 'tasks' arraylist
+     * If description of task is empty, print error message indicating that description of task cannot be empty.
+     * If user command does not contain ('todo'/ 'event'/ 'deadline'), print error message indicating invalid command.
+     * @param userInput User's description of task to be added
      */
     public static void addTask(String userInput) {
         try {
@@ -55,6 +69,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Mark the task, as specified by the user, as done.
+     * If no index is indicated, print error message indicating invalid index.
+     * @param task User's input
+     */
     public static void markTaskDone(String task) {
         try {
             int idx = Parser.processTaskDone(task);
@@ -66,6 +85,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Delete the task, as specified by the user, from the arraylist.
+     * If no index is indicated, print error message indicating invalid index.
+     * @param task User's input
+     */
     public static void deleteTask(String task) {
         try {
             int idx = Parser.processDeleteTask(task);
@@ -79,6 +103,12 @@ public class TaskList {
 
     }
 
+    /**
+     * Returns tasks which contains substring that matches user's indicated search description
+     * If no match is found, return nothing.
+     * @param task ArrayList containing all the tasks
+     * @return
+     */
     public static ArrayList<Task> findTask(String task) {
         ArrayList<Task> matchingTasks = new ArrayList<>();
         String searchDescription = Parser.processFindTask(task);
@@ -90,11 +120,4 @@ public class TaskList {
         return matchingTasks;
     }
 
-    public static void addTaskFromData(Task t) {
-        tasks.add(t);
-    }
-
-    public static void incrementTaskCount() {
-        tasksCount++;
-    }
 }
