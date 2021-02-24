@@ -1,3 +1,3 @@
-todo<separator>Say Hi to Sheryll<separator>false
-event<separator>drink water<separator>tonight<separator>true
-deadline<separator>finish homework<separator>tonight as well<separator>false
+todo<separator>say hello<separator>false
+event<separator>sleep<separator>1<separator>false
+deadline<separator>finish this<separator>tmr<separator>false
