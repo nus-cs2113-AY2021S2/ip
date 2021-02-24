@@ -29,4 +29,5 @@ Set up _JARVIS_ as follows:
 	   I will create the files you might be needing later.
    --------------------------------------------------------------------------------------------
    ```
-1. Type the command in the command window and press Enter to execute it. Refer [here](link) for a detailed user guide.
+1. Type the command in the command window and press Enter to execute it. Refer [here](https://iamakilahamed.github.io/ip/) 
+   for a detailed user guide.

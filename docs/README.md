@@ -5,20 +5,20 @@ If you can type fast, _JARVIS_ can manage your tasks faster than traditional Gra
 
 ----
 ### Table of Contents
-* [Quick start](link)
-    - [For first time users](link)
-    - [For existing users](link)
-* [Features](link)
-    - [Adding a todo task : `todo`](link)
-    - [Adding a deadline task : `deadline`](link)
-    - [Adding an event task : `event`](link)
-    - [Deleting a task : `delete`](link)
-    - [Marking a task as done : `done`](link)
-    - [Viewing all the tasks : `list`](link)
-    - [Searching tasks by a keyword : `find`](link)
-    - [Exiting JARVIS : `bye`](link)
-* [FAQ](link)
-* [Command summary](link)
+* [Quick start](https://github.com/iamakilahamed/ip/tree/master/docs#quick-start)
+    - [For first time users](https://github.com/iamakilahamed/ip/tree/master/docs#for-first-time-user)
+    - [For existing users](https://github.com/iamakilahamed/ip/tree/master/docs#for-existing-user)
+* [Features](https://github.com/iamakilahamed/ip/tree/master/docs#features)
+    - [Adding a todo task : `todo`](https://github.com/iamakilahamed/ip/tree/master/docs#adding-a-todo-task--todo)
+    - [Adding a deadline task : `deadline`](https://github.com/iamakilahamed/ip/tree/master/docs#adding-a-deadline-task--deadline)
+    - [Adding an event task : `event`](https://github.com/iamakilahamed/ip/tree/master/docs#adding-an-event-task--event)
+    - [Deleting a task : `delete`](https://github.com/iamakilahamed/ip/tree/master/docs#deleting-a-task--delete)
+    - [Marking a task as done : `done`](https://github.com/iamakilahamed/ip/tree/master/docs#marking-a-task-as-done--done)
+    - [Viewing all the tasks : `list`](https://github.com/iamakilahamed/ip/tree/master/docs#viewing-all-the-tasks--list)
+    - [Searching tasks by a keyword : `find`](https://github.com/iamakilahamed/ip/tree/master/docs#searching-tasks-by-a-keyword--find)
+    - [Exiting JARVIS : `bye`](https://github.com/iamakilahamed/ip/tree/master/docs#exiting-jarvis--bye)
+* [FAQ](https://github.com/iamakilahamed/ip/tree/master/docs#faq)
+* [Command summary](https://github.com/iamakilahamed/ip/tree/master/docs#command-summary)
 
 ---
 ## Quick start
@@ -46,8 +46,8 @@ Set up _JARVIS_ as follows:
 	   I will create the files you might be needing later.
    --------------------------------------------------------------------------------------------
    ```
-1. Type the command in the command window and press Enter to execute it. Refer to [Features](link) below for details of
-each command.   
+1. Type the command in the command window and press Enter to execute it. Refer to 
+   [Features](https://github.com/iamakilahamed/ip/tree/master/docs#features) below for details of each command.   
 ### For existing user
 Open _JARVIS_ as follows:
 1. Open a command window to the _home folder_ where you have copied `JARVIS.jar`.
@@ -83,8 +83,8 @@ Open _JARVIS_ as follows:
 	   You do not have any pending task, sir.
    --------------------------------------------------------------------------------------------
    ```
-1. Type the command in the command window and press Enter to execute it. Refer to [Features](link) below for details of
-each command.
+1. Type the command in the command window and press Enter to execute it. Refer to 
+   [Features](https://github.com/iamakilahamed/ip/tree/master/docs#features) below for details of each command.
    
 --- 
 ## Features
