@@ -6,6 +6,9 @@ import duke.util.Parser;
 import duke.util.Ui;
 import duke.exception.EmptyCommandArgException;
 
+/**
+ * Represents the todo command given by the user.
+ */
 public class TodoCommand extends Command {
 
     public TodoCommand(String commandArg) {

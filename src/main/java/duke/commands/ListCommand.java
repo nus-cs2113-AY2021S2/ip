@@ -4,6 +4,9 @@ import duke.task.TaskList;
 import duke.util.Parser;
 import duke.util.Ui;
 
+/**
+ * Represents the list command given by the user.
+ */
 public class ListCommand extends Command {
 
     public ListCommand() {

@@ -9,14 +9,25 @@ import java.util.List;
 import duke.task.Task;
 import duke.task.TaskList;
 
+/**
+ * Represents an object that deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
 
     private static Ui ui;
 
     public Storage(Ui uiObject) {
         ui = uiObject;
-	}
+    }
 
+    /**
+     * Loads previously saved tasks in a text file in user's local memory.
+     * Tasks are loaded from <home_directory>/data/duke.txt
+     * 
+     * @param home string containing user's home path
+     * @param taskList <code>TaskList</code> object to add tasks to
+     * @param parser <code>Parser</code> object
+     */
     public void loadHistory(String home, TaskList taskList, Parser parser) {
         Path path = Paths.get(home, "data", "duke.txt");
         if (!Files.exists(path)) {
@@ -34,6 +45,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Saved tasks into text file in user's local memory.
+     * Tasks are saved into <home_directory>/data/duke.txt
+     * 
+     * @param home string containing user's home path
+     * @param taskList <code>TaskList</code> object to save tasks from
+     */
     public void saveHistory(String home, TaskList taskList) {
 	    try {
 	        Path directoryPath = Paths.get(home, "data");

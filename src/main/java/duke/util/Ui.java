@@ -8,6 +8,9 @@ import duke.commands.ListCommand;
 import duke.task.Task;
 import duke.task.TaskList;
 
+/**
+ * Represents an object that deals with interactions with the user.
+ */
 public class Ui {
     
     public final Scanner scanner;
@@ -32,6 +35,13 @@ public class Ui {
         this.scanner = new Scanner(in);
     }
 
+    /**
+     * Displays the welcome message and lists all existing tasks.
+     * 
+     * @param taskList <code>TaskList</code> object
+     * @param ui <code>Ui</code> object
+     * @param parser <code>Ui</code> object
+     */
     public void displayWelcomeMessage(TaskList taskList, Ui ui, Parser parser) {
         String logo = "         __    _    _              ____        __           \n"
                 + "        / /_  (_)  (_)___ ___     / __ \\__  __/ /_____      \n"
@@ -69,6 +79,11 @@ public class Ui {
         printWithBorder(COMMANDS);
     }
 
+    /**
+     * Lists all existing tasks with a numerical index
+     * 
+     * @param taskList <code>TaskList</code> object
+     */
     public void listAllTasks(TaskList taskList) {
         String listAllTasksMessage = "Here are the tasks in your list:";
         listAllTasksMessage += getListOfTasksString(taskList);
@@ -92,8 +107,15 @@ public class Ui {
     public void printSuccessfullyMarkedDoneMessage(Task task) {
         String taskSuccessfullyMarkedDoneMessage = "Very nice! I've marked this task as done:\n    " + task.toString();
         printWithBorder(taskSuccessfullyMarkedDoneMessage);
-	}
-    
+    }
+
+    /**
+     * Displays a message to inform user that the task has been successfully added.
+     * Displays the total count of tasks in the user's list.
+     * 
+     * @param task
+     * @param taskCount
+     */
     public void printTaskSuccessfullyAddedMessage(Task task, int taskCount) {
         String className = task.getClass().getSimpleName();
         String taskSuccessfullyAddedMessage = 

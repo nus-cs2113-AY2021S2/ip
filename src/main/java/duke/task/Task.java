@@ -1,5 +1,9 @@
 package duke.task;
 
+/**
+ * Represents a task created by the user. A <code>Task</code> corresponds to
+ * a task description and its completed status.
+ */
 public class Task {
     
     protected String description;
