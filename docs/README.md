@@ -2,18 +2,16 @@
 
 ## Features 
 
- **Adding tasks**
-	- [todo](#a)
+ - [Adding tasks](#a)
+	- [todo ](#a)
 	- [deadline](#b)
 	- [event](#c)
-- **Completing a task**
-- **Listing all tasks**
--  **Find**
-	  - todo
-	  - events
-	  - deadline
-
-5. **Save and exit**
+- [Listing all tasks](#d)
+- [Completing a task](#e)
+- [Find](#f)
+	- [Description](#f)
+	 - [Date](#g)
+- [Save and exit](#i)
 
 ***
 Notes: 
@@ -23,66 +21,246 @@ The square brackets specifies that user input is required
 
 ***
 ### <a name="a"></a> Adding tasks: Todo
-**_Description:_**
+**Description:**
+
 Adding a simple task using the todo command
 
-**_Formatting:_**
+**Formatting:**
+
 `todo` [task description]
 
-**_Examples_**
+**Examples**
+
 &nbsp;&nbsp;&nbsp;&nbsp; Adding the task "read shakespeare"
-&nbsp;&nbsp;&nbsp;&nbsp; `todo read shakespeare`
+
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; `todo read shakespeare`
 
 &nbsp;&nbsp;&nbsp;&nbsp; Adding the task "finish java quiz"
-&nbsp;&nbsp;&nbsp;&nbsp; `todo finish java quiz`
+
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; `todo finish java quiz`
+
+**Example output**
+```
+todo read shakespeare
+____________________________________________________________
+Got it. I've added this task: 
+  [T][✘] read shakespeare
+Now you have 1 tasks in the list.
+____________________________________________________________
+```
 
 ***
 ### <a name="b"></a> Adding tasks: Deadline
-**_Description:_**
-Adding a deadline task using the `deadline` command.
-A deadline consist of a **description** and a **date**
 
-**_Formatting:_**
-`deadline [task description] /by [date in format YYYY-MM-DD]`
+**Description:**
 
-**_Examples_**
-Adding the deadline "read shakespeare by 8 Mar 2021"
-&nbsp;&nbsp;&nbsp;&nbsp; `deadline read shakespeare /by 2021-03-08`
+&nbsp;&nbsp;&nbsp;&nbsp; Adding a deadline task using the `deadline` command.
 
-Adding the deadline "finish java quiz by 16 Nov 2021"
-&nbsp;&nbsp;&nbsp;&nbsp; `deadline finish java quiz /by 2021-11-16`
+&nbsp;&nbsp;&nbsp;&nbsp; A deadline consist of a **description** and a **date**.
 
+**Formatting:**
+
+`&nbsp;&nbsp;&nbsp;&nbsp; deadline [task description] /by [date in format YYYY-MM-DD]`
+
+**Examples**
+
+&nbsp;&nbsp;&nbsp;&nbsp; Adding the deadline "read shakespeare by 8 Mar 2021"
+
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; `deadline read shakespeare /by 2021-03-08`
+
+&nbsp;&nbsp;&nbsp;&nbsp; Adding the deadline "finish java quiz by 16 Nov 2021"
+
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; `deadline finish java quiz /by 2021-11-16`
+
+**Example output**
+```
+deadline read shakespeare /by 2021-03-08
+____________________________________________________________
+Got it. I've added this task: 
+  [D][✘] read shakespeare (by: Mar-08-2021 )
+Now you have 1 tasks in the list.
+____________________________________________________________
+```
 ***
 
 ### <a name="c"></a> Adding tasks: Event
-**_Description:_**
-Adding an event task using the `event` command.
-An event consist of a **description** and a **date**
+**Description:**
 
-**_Formatting:_**
-`event [task description] /at [date in format YYYY-MM-DD]`
+&nbsp;&nbsp;&nbsp;&nbsp; Adding an event task using the `event` command.
 
-**_Examples_**
-Adding the event "read shakespeare by 8 Mar 2021"
-&nbsp;&nbsp;&nbsp;&nbsp; `event shakespeare's play /at 2021-03-08`
+&nbsp;&nbsp;&nbsp;&nbsp; An event consist of a **description** and a **date**.
 
-Adding the event "java quiz by 16 Nov 2021"
-&nbsp;&nbsp;&nbsp;&nbsp; `event java quiz /at 2021-11-16`
+**Formatting:**
+
+&nbsp;&nbsp;&nbsp;&nbsp; `event [task description] /at [date in format YYYY-MM-DD]`
+
+**Examples**
+
+&nbsp;&nbsp;&nbsp;&nbsp; Adding the event "read shakespeare by 8 Mar 2021"
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `event shakespeare's play /at 2021-03-08`
+
+&nbsp;&nbsp;&nbsp;&nbsp; Adding the event "java quiz by 16 Nov 2021"
+
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; `event java quiz /at 2021-11-16`
+
+**Example output**
+```
+event shakespeare's play /at 2021-03-08
+____________________________________________________________
+Got it. I've added this task: 
+  [E][✘] shakespeare's play (by: Mar-08-2021 )
+Now you have 1 tasks in the list.
+____________________________________________________________
+```
 
 
+### <a name="d"></a> Listing all tasks
+**Description:**
 
+&nbsp;&nbsp;&nbsp;&nbsp;List all tasks (todo, deadline, event)
 
+**Formatting:**
 
-## Usage
+&nbsp;&nbsp;&nbsp;&nbsp;`list`
 
-### `Keyword` - Describe action
+**Example output**
+```
+list
+____________________________________________________________
+Here are the tasks in your list:
+1.[T][✘] read shakespeare
+2.[D][✘] read shakespeare (by: Mar-08-2021 )
+3.[E][✘] shakespeare's play (at: Mar-08-2021 )
+____________________________________________________________
+```
+***
 
-Describe action and its outcome.
+### <a name="e"></a> Completing a task
+**Description:**
 
-Example of usage: 
+&nbsp;&nbsp;&nbsp;&nbsp;Set the task to be done.
 
-`keyword (optional arguments)`
+**Formatting:**
 
-Expected outcome:
+&nbsp;&nbsp;&nbsp;&nbsp;`done [index]`
 
-`outcome`
+**Examples**
+
+&nbsp;&nbsp;&nbsp;&nbsp;`done 1`
+
+**Example output**
+```
+Here are the tasks in your list:
+1.[T][✘] read shakespeare
+2.[D][✘] read shakespeare (by: Mar-08-2021 )
+3.[E][✘] shakespeare's play (at: Mar-08-2021 )
+____________________________________________________________
+done 1
+____________________________________________________________
+Nice! I've marked this task as done: 
+[✓] read shakespeare
+____________________________________________________________
+list
+____________________________________________________________
+Here are the tasks in your list:
+1.[T][✓] read shakespeare
+2.[D][✘] read shakespeare (by: Mar-08-2021 )
+3.[E][✘] shakespeare's play (at: Mar-08-2021 )
+____________________________________________________________
+```
+
+### <a name="f"></a> Find tasks: Description
+**Description:**
+
+&nbsp;&nbsp;&nbsp;&nbsp;Find specific tasks based on similar descriptions.
+
+**Formatting:**
+
+&nbsp;&nbsp;&nbsp;&nbsp;`find [task description]`
+
+**Examples**
+
+&nbsp;&nbsp;&nbsp;&nbsp; Find any tasks with the phrase "read shakespeare" in description
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `find read shakespeare`
+
+&nbsp;&nbsp;&nbsp;&nbsp;Find any tasks with the word book description
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`find book`
+
+**Example output**
+```
+find read shakespeare
+____________________________________________________________
+Here are the matching tasks in your list:
+1.[T][✓] read shakespeare
+2.[D][✘] read shakespeare (by: Mar-08-2021 )
+____________________________________________________________
+```
+
+### <a name="g"></a> Find tasks: Date
+**Description:**
+
+&nbsp;&nbsp;&nbsp;&nbsp;Find specific tasks based on date input.
+
+**Formatting:**
+
+&nbsp;&nbsp;&nbsp;&nbsp; Find all events that occur on a specific date
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `findAt [Date with format YYYY-MM-DD]`
+
+&nbsp;&nbsp;&nbsp;&nbsp; Find all deadlines that occurs before a specific date
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `findBy [Date with format YYYY-MM-DD]`
+
+**Examples**
+
+&nbsp;&nbsp;&nbsp;&nbsp; Find events on 
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `findAt 2021-03-0`
+
+&nbsp;&nbsp;&nbsp;&nbsp; Find any tasks with the word book description
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `findBy 2021-03-10`
+
+**Example output**
+```
+Here are the tasks in your list:
+1.[T][✓] read shakespeare
+2.[D][✘] read shakespeare (by: Mar-08-2021 )
+3.[E][✘] shakespeare's play (at: Mar-08-2021 )
+4.[D][✘] watch wandaVision (by: Mar-10-2021 )
+5.[E][✘] homework submission (at: Mar-08-2021 )
+____________________________________________________________
+findAt 2021-03-08
+____________________________________________________________
+Here are the matching tasks in your list:
+1.[E][✘] shakespeare's play (at: Mar-08-2021 )
+2.[E][✘] homework submission (at: Mar-08-2021 )
+____________________________________________________
+findBy 2021-03-10
+____________________________________________________________
+Here are the matching tasks in your list:
+1.[D][✘] read shakespeare (by: Mar-08-2021 )
+2.[D][✘] watch wandaVision (by: Mar-10-2021 )
+```
+
+### <a name="i"></a> Save and exit
+**Description:**
+
+&nbsp;&nbsp;&nbsp;&nbsp;Save all tasks in file and exits
+
+**Formatting:**
+
+&nbsp;&nbsp;&nbsp;&nbsp;`bye`
+
+**Example output**
+```
+bye
+____________________________________________________________
+File is overwritten.
+Bye. Hope to see you again soon!
+____________________________________________________________
+```
+
