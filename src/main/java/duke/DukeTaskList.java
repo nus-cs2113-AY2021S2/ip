@@ -27,6 +27,10 @@ public class DukeTaskList {
         this.tasks = new ArrayList<Task>();
     }
 
+    public void addTask(Task task) {
+        tasks.add(task);
+    }
+
     public void addTask(ArrayList<String> taskInfo) throws DukeException {
         if (taskInfo.size() < MINIMUM_NUM_ARGS_IMPORT) {
             throw new DukeException("Insufficient Arguments");
@@ -65,18 +69,13 @@ public class DukeTaskList {
                 addTask(taskInfo);
             } catch (DukeException dukeException) {
                 warnings.add("Error importing line #" + Integer.toString(i + 1) +
-                                ": " + dukeException.getMessage());
+                        ": " + dukeException.getMessage());
             }
         }
     }
 
     public void clearTasks() {
         tasks.clear();
-        DukePrinter.printTasksClearedMessage();
-    }
-
-    public void printTasks() {
-        DukePrinter.printTasks(tasks);
     }
 
     public Todo addTodo(ArrayList<String> commandTokens) throws DukeException {
@@ -139,23 +138,23 @@ public class DukeTaskList {
         taskNumber = taskNumber - 1;
         Task removedTask = tasks.get(taskNumber);
         tasks.remove(taskNumber);
-        DukePrinter.printTaskDeleted(removedTask, tasks.size());
+        DukePrinter.printTaskDeleted(removedTask.toString(), tasks.size());
     }
 
-    public void markTaskAsDone(ArrayList<String> commandTokens) throws DukeException {
-        if (commandTokens.size() != NUM_ARGS_DONE) {
-            throw new DukeException("Please give me more details about the task!");
-        }
-        String taskNumberString = commandTokens.get(TASK_NUMBER);
-        int taskNumber = Integer.parseInt(taskNumberString);
-        if (taskNumber < 1 || taskNumber > tasks.size()) {
-            throw new DukeException("That's an invalid task number!");
-        }
+    public Task deleteTask(int taskNumber) {
+        /* Change from 1-based indexing to 0-based indexing */
+        taskNumber = taskNumber - 1;
+        Task deletedTask = tasks.get(taskNumber);
+        tasks.remove(taskNumber);
+        return deletedTask;
+    }
+
+    public Task markTaskAsDone(int taskNumber) {
         /* Change from 1-based indexing to 0-based indexing */
         taskNumber = taskNumber - 1;
         Task doneTask = tasks.get(taskNumber);
         doneTask.markAsDone();
-        DukePrinter.printTaskMarkedDone(doneTask);
+        return doneTask;
     }
 
     public ArrayList<String> exportCSV() {
@@ -169,5 +168,14 @@ public class DukeTaskList {
 
     public int getNumberOfTasks() {
         return tasks.size();
+    }
+
+    public ArrayList<String> getTasksAsString() {
+        ArrayList<String> taskStrings = new ArrayList<String>();
+        for (Task task : tasks) {
+            String taskString = task.toString();
+            taskStrings.add(taskString);
+        }
+        return taskStrings;
     }
 }

@@ -37,7 +37,7 @@ public class DukeFileManager {
         }
     }
 
-    public ArrayList<String> readFromFile() throws IOException{
+    public ArrayList<String> readFromFile() throws IOException {
         reader = new Scanner(file);
         ArrayList<String> taskStrings = new ArrayList<String>();
         while (reader.hasNext()) {
@@ -48,7 +48,7 @@ public class DukeFileManager {
         return taskStrings;
     }
 
-    public void writeToFile(ArrayList<String> tasksAsCSV) throws IOException{
+    public void writeToFile(ArrayList<String> tasksAsCSV) throws IOException {
         writer = new FileWriter(file);
         for (String taskCSV : tasksAsCSV) {
             writer.write(taskCSV + "\n");

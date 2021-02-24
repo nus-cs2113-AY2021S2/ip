@@ -1,21 +1,29 @@
 package duke;
 
-import duke.task.Task;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 
-/* This class handles printing outputs to screen */
 public class DukePrinter {
 
     private static final String LINE_DIVIDER = "\t____________________________________________________________";
 
-    public static void printMessage(String... messageSentences) {
+    /* List of help messages for each command*/
+    public static final String BYE_HELP_MESSAGE = "bye - Exits program";
+    public static final String HELP_HELP_MESSAGE = "help - Prints this help message";
+    public static final String LIST_HELP_MESSAGE = "list - Lists all tasks";
+    public static final String DONE_HELP_MESSAGE = "done <TASK_NUMBER> - Mark the specified task as done";
+    public static final String TODO_HELP_MESSAGE =
+            "todo <TASK_DESCRIPTION> - Create a new task with the specified description";
+    public static final String DEADLINE_HELP_MESSAGE =
+            "deadline <TASK_DESCRIPTION> /by <DEADLINE_DATE> - Create a new task with the specified description and deadline";
+    public static final String EVENT_HELP_MESSAGE =
+            "event <TASK_DESCRIPTION> /at <EVENT_DATE> - Create a new task with the specified description and event date";
+    public static final String DELETE_HELP_MESSAGE = "delete <TASK_NUMBER> - delete the specified task";
+    public static final String CLEAR_HELP_MESSAGE = "clear - deletes all tasks";
+
+    private static void printMessage(String... messages) {
         System.out.println(LINE_DIVIDER);
-        for (int i = 0; i < messageSentences.length; i++) {
-            System.out.println("\t " + messageSentences[i]);
+        for (String message : messages) {
+            System.out.println("\t " + message);
         }
         System.out.println(LINE_DIVIDER);
     }
@@ -28,117 +36,89 @@ public class DukePrinter {
     }
 
     public static void printWelcomeMessage() {
-        String[] welcomeMessage = {
-                "Hello! I'm Duke",
+        printMessage("Hello! I'm Duke",
                 "What can I do for you?",
-                "(Type 'help' for a list of commands)"};
-        printMessage(welcomeMessage);
+                "(Type 'help' for a list of commands)");
     }
 
     public static void printExitMessage() {
-        String[] exitMessage = {
-                "Bye. Hope to see you again soon!"};
-        printMessage(exitMessage);
+        printMessage("Bye. Hope to see you again soon!");
     }
 
     public static void printHelpMessage() {
-        String[] helpMessage = {
-                "List of valid commands:",
-                DukeCommands.BYE_HELP_MESSAGE,
-                DukeCommands.HELP_HELP_MESSAGE,
-                DukeCommands.LIST_HELP_MESSAGE,
-                DukeCommands.DONE_HELP_MESSAGE,
-                DukeCommands.TODO_HELP_MESSAGE,
-                DukeCommands.DEADLINE_HELP_MESSAGE,
-                DukeCommands.EVENT_HELP_MESSAGE,
-                DukeCommands.DELETE_HELP_MESSAGE,
-                DukeCommands.CLEAR_HELP_MESSAGE
-        };
-        printMessage(helpMessage);
+        printMessage("List of valid commands:",
+                BYE_HELP_MESSAGE,
+                HELP_HELP_MESSAGE,
+                LIST_HELP_MESSAGE,
+                DONE_HELP_MESSAGE,
+                TODO_HELP_MESSAGE,
+                DEADLINE_HELP_MESSAGE,
+                EVENT_HELP_MESSAGE,
+                DELETE_HELP_MESSAGE,
+                CLEAR_HELP_MESSAGE);
     }
 
-    public static void printTasks(ArrayList<Task> tasks) {
-        String[] taskMessage = new String[tasks.size() + 1];
-        if (tasks.size() == 0) {
+    public static void printTasks(ArrayList<String> taskStrings) {
+        int numberOfTasks = taskStrings.size();
+        String[] taskMessage = new String[numberOfTasks + 1];
+        if (taskStrings.size() == 0) {
             taskMessage[0] = "You have no tasks right now";
         } else {
             taskMessage[0] = "Here is a list of all your tasks:";
-            for (int i = 0; i < tasks.size(); i++) {
-                taskMessage[i + 1] = Integer.toString(i + 1) + ". " + tasks.get(i);
+            for (int i = 0; i < taskStrings.size(); i++) {
+                taskMessage[i + 1] = Integer.toString(i + 1) + ". " + taskStrings.get(i);
             }
         }
         printMessage(taskMessage);
     }
 
-    public static void printTaskAdded(Task task, int numberOfTasks) {
-        String[] taskAddedMessage = {
-                "added: " + task.toString(),
-                getNumTasksString(numberOfTasks)
-        };
-        printMessage(taskAddedMessage);
+    public static void printTaskAdded(String taskString, int numberOfTasks) {
+        printMessage("added: " + taskString,
+                getNumTasksString(numberOfTasks));
     }
 
     public static void printFallbackMessage() {
-        String[] fallbackMessage = {
-                "I didn't quite catch what you were saying. Please try again.",
-                "Try using \"help\" for a list of commands."
-        };
-        printMessage(fallbackMessage);
+        printMessage("I didn't quite catch what you were saying. Please try again.",
+                "Try using \"help\" for a list of commands.");
     }
 
     public static void printInvalidArgumentsMessage() {
-        String[] invalidArgumentsMessage = {
-                "That's an invalid task number!"
-        };
-        printMessage(invalidArgumentsMessage);
+        printMessage("That's an invalid task number!");
     }
 
     public static void printDukeErrorMessage(String errorMessage) {
-        String[] errorMessages = {
-                errorMessage,
-        };
-        printMessage(errorMessages);
+        printMessage(errorMessage);
     }
 
-    public static void printTaskMarkedDone(Task task) {
-        String[] taskDoneMessages = {
-                "Nice! I've marked this task as done:",
-                task.toString()
-        };
-        printMessage(taskDoneMessages);
+    public static void printTaskMarkedDone(String taskString) {
+        printMessage("Nice! I've marked this task as done:",
+                taskString);
     }
 
-    public static void printTaskDeleted(Task task, int numberOfTasks) {
-        String[] taskDeletedMessages = {
-                "Noted. I've removed this task:",
-                task.toString(),
-                getNumTasksString(numberOfTasks)
-        };
-        printMessage(taskDeletedMessages);
-    }
-
-    public static void printExportErrorMessage(String errorMessage) {
-        String[] exportErrorMessages = {
-                "Uh oh! I encountered an error exporting your tasks",
-                "Here are the details:",
-                errorMessage
-        };
-        printMessage(exportErrorMessages);
+    public static void printTaskDeleted(String taskString, int numberOfTasks) {
+        printMessage("Noted. I've removed this task:",
+                taskString,
+                getNumTasksString(numberOfTasks));
     }
 
     public static void printImportErrorMessage(String errorMessage) {
-        String[] exportErrorMessages = {
-                "Uh oh! I encountered an error importing your tasks",
-                "Here are the details:",
-                errorMessage
-        };
-        printMessage(exportErrorMessages);
+        printMessage("Uh oh! I encountered an error importing your tasks",
+                "Here are the details:" + errorMessage,
+                "Exiting Duke now...");
+    }
+
+    public static void printExportErrorMessage(String errorMessage) {
+        printMessage("Uh oh! I encountered an error exporting your tasks",
+                "Here are the details: " + errorMessage,
+                "Enter `bye` to try again, or `exit` to exit without saving");
     }
 
     public static void printTasksClearedMessage() {
-        String[] taskClearedMessages = {
-                "All tasks removed!"
-        };
-        printMessage(taskClearedMessages);
+        printMessage("All tasks removed!");
+    }
+
+    public static void printForceQuitErrorMessage() {
+        printMessage("I didn't quite catch what you were saying. Please try again.",
+                "Enter `bye` to try again, or `exit` to exit without saving");
     }
 }

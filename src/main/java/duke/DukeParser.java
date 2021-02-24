@@ -1,12 +1,31 @@
 package duke;
 
+import duke.command.*;
 import duke.task.Task;
 
 import java.util.ArrayList;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class DukeParser {
+    /* List of all commands that Duke accepts */
+    public static final String BYE_COMMAND = "bye";
+    public static final String LIST_COMMAND = "list";
+    public static final String HELP_COMMAND = "help";
+    public static final String DONE_COMMAND = "done";
+    public static final String TODO_COMMAND = "todo";
+    public static final String DEADLINE_COMMAND = "deadline";
+    public static final String EVENT_COMMAND = "event";
+    public static final String DELETE_COMMAND = "delete";
+    public static final String CLEAR_COMMAND = "clear";
+
+    /* List of command delimiters, e.g. "/by" for "deadline" */
+    public static final String DEADLINE_DELIMITER = "/by";
+    public static final String EVENT_DELIMITER = "/at";
+
+    private static final int ADDITIONAL_ARGUMENTS_LIMIT = 2;
+
     private static Scanner scanner = new Scanner(System.in);
 
     private static ArrayList<String> tokenizeInput(String userCommand) {
@@ -20,39 +39,38 @@ public class DukeParser {
         ArrayList<String> commandParsed = new ArrayList<String>();
         commandParsed.add(commandTokens[0]);
 
+        ArrayList<String> additionalArgs = new ArrayList<String>();
         switch (commandTokens[0]) {
-        case DukeCommands.DEADLINE_COMMAND:
+        case DEADLINE_COMMAND:
             if (commandTokens.length < 2) {
                 break;
             }
-            String[] commandSplitDeadline = commandTokens[1].split(DukeCommands.DEADLINE_DELIMITER, 2);
-            for (String argument : commandSplitDeadline) {
-                commandParsed.add(argument);
-            }
+            additionalArgs = splitAdditonalArgs(commandTokens[1], DEADLINE_DELIMITER);
             break;
-        case DukeCommands.EVENT_COMMAND:
+        case EVENT_COMMAND:
             if (commandTokens.length < 2) {
                 break;
             }
-            String[] commandSplitEvent = commandTokens[1].split(DukeCommands.EVENT_DELIMITER, 2);
-            for (String argument : commandSplitEvent) {
-                commandParsed.add(argument);
-            }
+            additionalArgs = splitAdditonalArgs(commandTokens[1], EVENT_DELIMITER);
             break;
         default:
             for (int i = 1; i < commandTokens.length; i++) {
-                commandParsed.add(commandTokens[i]);
+                additionalArgs.add(commandTokens[i]);
             }
             break;
         }
 
-        for (int i = 0; i < commandParsed.size(); i++) {
-            String trimmedArg = commandParsed.get(i);
-            trimmedArg = trimmedArg.trim();
-            commandParsed.set(i, trimmedArg);
+        for (String additionalArg : additionalArgs) {
+            String trimmedArg = additionalArg.trim();
+            commandParsed.add(trimmedArg);
         }
-
         return commandParsed;
+    }
+
+    private static ArrayList<String> splitAdditonalArgs(String commandToken, String delimiter) {
+        String[] additionalArgs = commandToken.split(delimiter, ADDITIONAL_ARGUMENTS_LIMIT);
+        ArrayList<String> additionalArgsList = new ArrayList<String>(Arrays.asList(additionalArgs));
+        return additionalArgsList;
     }
 
     public static ArrayList<String> readUserInput() {
@@ -82,42 +100,44 @@ public class DukeParser {
                     + "Try using \"help\" for a list of commands."
             );
         }
+
         boolean isDoneReadingInputs = false;
-        Task task = null;
-        switch (commandTokens.get(0)) {
-        case DukeCommands.BYE_COMMAND:
+        Command command = null;
+        String baseCommand = commandTokens.get(0);
+        switch (baseCommand) {
+        case BYE_COMMAND:
             isDoneReadingInputs = true;
             break;
-        case DukeCommands.CLEAR_COMMAND:
-            dukeTaskList.clearTasks();
+        case CLEAR_COMMAND:
+            command = new ClearCommand(commandTokens, dukeTaskList);
             break;
-        case DukeCommands.LIST_COMMAND:
-            dukeTaskList.printTasks();
+        case LIST_COMMAND:
+            command = new ListCommand(commandTokens, dukeTaskList);
             break;
-        case DukeCommands.HELP_COMMAND:
-            DukePrinter.printHelpMessage();
+        case HELP_COMMAND:
+            command = new HelpCommand(commandTokens, dukeTaskList);
             break;
-        case DukeCommands.DONE_COMMAND:
-            dukeTaskList.markTaskAsDone(commandTokens);
+        case DONE_COMMAND:
+            command = new DoneCommand(commandTokens, dukeTaskList);
             break;
-        case DukeCommands.TODO_COMMAND:
-            task = dukeTaskList.addTodo(commandTokens);
-            DukePrinter.printTaskAdded(task, dukeTaskList.getNumberOfTasks());
+        case TODO_COMMAND:
+            command = new TodoCommand(commandTokens, dukeTaskList);
             break;
-        case DukeCommands.DEADLINE_COMMAND:
-            task = dukeTaskList.addDeadline(commandTokens);
-            DukePrinter.printTaskAdded(task, dukeTaskList.getNumberOfTasks());
+        case DEADLINE_COMMAND:
+            command = new DeadlineCommand(commandTokens, dukeTaskList);
             break;
-        case DukeCommands.EVENT_COMMAND:
-            task = dukeTaskList.addEvent(commandTokens);
-            DukePrinter.printTaskAdded(task, dukeTaskList.getNumberOfTasks());
+        case EVENT_COMMAND:
+            command = new EventCommand(commandTokens, dukeTaskList);
             break;
-        case DukeCommands.DELETE_COMMAND:
-            dukeTaskList.deleteTask(commandTokens);
+        case DELETE_COMMAND:
+            command = new DeleteCommand(commandTokens, dukeTaskList);
             break;
         default:
-            DukePrinter.printFallbackMessage();
+            command = new DefaultCommand(commandTokens, dukeTaskList);
             break;
+        }
+        if (command != null) {
+            command.execute();
         }
         return isDoneReadingInputs;
     }
