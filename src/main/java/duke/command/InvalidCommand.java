@@ -26,9 +26,9 @@ public class InvalidCommand extends Command {
         } else if (error instanceof IndexOutOfBoundsException) {
             message = "☹ OOPS!!! The number " + description + " is not in the list.\n";
         } else if (error instanceof EmptyStringException) {
-            message = "☹ OOPS!!! The description of a " + commandWord + " must comes with a date.\n";
+            message = "☹ OOPS!!! The description of " + commandWord + " must comes with a date.\n";
         } else if (error instanceof EmptyDescriptionException) {
-            message = "☹ OOPS!!! The description of a " + commandWord + " cannot be empty.\n";
+            message = "☹ OOPS!!! The description of " + commandWord + " cannot be empty.\n";
         } else {
             message = "☹ OOPS!!! Sorry I don't understand what you mean.\n";
         }

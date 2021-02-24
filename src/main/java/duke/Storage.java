@@ -14,9 +14,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
-    private static String filePath;
-    private static String USER_DIRECTORY = System.getProperty("user.dir");
-    private static String FILE_DIRECTORY = USER_DIRECTORY + "/src/data";
+    private final String filePath;
+    private static final String USER_DIRECTORY = System.getProperty("user.dir");
+    private static final String FILE_DIRECTORY = USER_DIRECTORY + "/src/data";
 
     private static final int TASK_TYPE_INDEX = 0;
     private static final int DONE_INDEX = 1;
@@ -55,13 +55,13 @@ public class Storage {
 
         switch(taskType) {
         case EVENT_TYPE:
-            String at = contents[DATE_INDEX];
+            String at = contents[DATE_INDEX].trim();
             Task event = new Event(description, at);
             checkIsDone(isDone, event);
             tasksData.add(event);
             break;
         case DEADLINE_TYPE:
-            String by = contents[DATE_INDEX];
+            String by = contents[DATE_INDEX].trim();
             Task deadline = new Deadline(description, by);
             checkIsDone(isDone, deadline);
             tasksData.add(deadline);
@@ -107,7 +107,7 @@ public class Storage {
                 tasks.get(i).getDate();
                 fileWriter.write(tasks.get(i).getTaskType() + " | "
                         + tasks.get(i).getIsDone() + " | "
-                        + tasks.get(i).getDescription() + "| "
+                        + tasks.get(i).getDescription() + " | "
                         + tasks.get(i).getDate()
                         + System.lineSeparator());
                 break;
