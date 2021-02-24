@@ -1,13 +1,17 @@
 package duke.task;
 
+import duke.exception.InvalidDateTimeException;
 import duke.exception.MissingDueDateException;
 import duke.exception.MissingTaskDescriptionException;
 
-/**
- * This class is for Tasks containing a due date
- */
+
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+
 public class Deadline extends Task {
-    protected String dueDate;
+    protected LocalDateTime dueDate;
 
     /**
      * Deadline constructor method
@@ -16,11 +20,23 @@ public class Deadline extends Task {
      */
     public Deadline(String task, String dueDate) {
         super(task);
-        this.dueDate = dueDate;
+        this.dueDate = parseDateTime(dueDate);
     }
 
-    public String getDateTime(){
-        return this.dueDate;
+    public LocalDateTime parseDateTime(String dueDate){
+        DateTimeFormatter parseFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm a");
+
+        return LocalDateTime.parse(dueDate, parseFormatter);
+    }
+
+    public String writeDateTime() {
+        DateTimeFormatter parseFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm a");
+        return parseFormatter.format(dueDate);
+    }
+
+    public String printDateTime() {
+        DateTimeFormatter printFormatter = DateTimeFormatter.ofPattern("E, d MMM yyyy hh:mm a");
+        return printFormatter.format(dueDate);
     }
 
     public String toBaseString(){
@@ -29,18 +45,25 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "Deadline : " + toBaseString() + " || Due by: " + this.getDateTime();
+        return "Deadline : " + toBaseString() + " || Due by: " + this.printDateTime();
     }
 
     // Exceptions
 
-    public static void checkDeadlineInput(String[] taskDetails) throws MissingDueDateException, MissingTaskDescriptionException {
+    public static void checkDeadlineInput(String[] taskDetails) throws MissingDueDateException, MissingTaskDescriptionException, InvalidDateTimeException {
+        try {
+            DateTimeFormatter parseFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm a");
+            LocalDateTime.parse(taskDetails[1], parseFormatter);
+        } catch (DateTimeException e) {
+            throw new InvalidDateTimeException();
+        }
         if (taskDetails[0] == null){
             throw new MissingTaskDescriptionException();
         }
         if (taskDetails[1] == null) {
             throw new MissingDueDateException();
         }
+
 
     }
 }

@@ -147,7 +147,7 @@ public class FileManager {
                 isDoneWriter(deadline) +
                 deadline.getDescription() +
                 " || " +
-                deadline.getDateTime();
+                deadline.writeDateTime();
 
     }
 
@@ -160,7 +160,7 @@ public class FileManager {
                 isDoneWriter(event) +
                 event.getDescription() +
                 " || " +
-                event.getDateTime();
+                event.writeDateTime();
     }
 
     /**
