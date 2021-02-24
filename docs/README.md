@@ -2,7 +2,7 @@
 
 ## Features 
 
-1. Adding tasks
+### 1. [Adding tasks](#abcd)
   - todo
   - event
   - deadline
@@ -18,7 +18,7 @@
 
 
 ### Feature 1 
-### Adding tasks
+### <a name="abcd"></a> Adding tasks
 
 
 ## Usage
