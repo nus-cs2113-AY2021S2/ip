@@ -3,6 +3,8 @@ package duke.taskList;
 import duke.task.*;
 import duke.ui.UI;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -73,16 +75,35 @@ public class TaskList {
         } else {
             for (int i = 0; i < listSize; i++) {
                 Task currentItem = Tasks.get(i);
-                String timeString = currentItem.getTimeLimitString();
+                String timeLimitFormatted = getTimeLimitFormatted(currentItem);
                 System.out.println((i + 1) + ". "
                         + "[" + convertTaskType(currentItem.getTaskType()) + "] "
                         + "[" + (currentItem.isDone() ? "☑️" : "✖️") + "] "
                         + currentItem.getTaskContent()
                         + (currentItem.getTaskType() == TaskType.TODO ? "" : " ")
-                        + timeString
+                        + timeLimitFormatted
                 );
             }
         }
+    }
+
+    private String getTimeLimitFormatted(Task currentItem) {
+        String timeLimitFormatted = "";
+        if (currentItem.getTaskType().equals(TaskType.TODO)) {
+            return timeLimitFormatted;
+        }
+        LocalDate timeLimitInDate = LocalDate.parse(currentItem.getTimeLimitString());
+        timeLimitFormatted = timeLimitInDate.getDayOfWeek().toString() + ", "
+                + timeLimitInDate.getDayOfMonth() + " "
+                + timeLimitInDate.getMonth() + " "
+                + timeLimitInDate.getYear();
+
+        if (currentItem.getTaskType().equals(TaskType.EVENT)) {
+            timeLimitFormatted = "(at: " + timeLimitFormatted + ")";
+        } else if (currentItem.getTaskType().equals(TaskType.DEADLINE)) {
+            timeLimitFormatted = "(by: " + timeLimitFormatted + ")";
+        }
+        return timeLimitFormatted;
     }
 
     /**
@@ -141,7 +162,8 @@ public class TaskList {
      * @param deadline the deadline of the new deadline task object.
      */
     public void addDeadlineTask(String content, String deadline) {
-        Deadline newTask = new Deadline(content, deadline);
+        LocalDate timeLimit = getTimeLimitInDate(deadline);
+        Deadline newTask = new Deadline(content, timeLimit);
         Tasks.add(newTask);
         numOfTasks++;
         System.out.println(UI.DIVIDER
@@ -153,6 +175,10 @@ public class TaskList {
         );
     }
 
+    private LocalDate getTimeLimitInDate(String timeLimit) throws DateTimeParseException {
+        return LocalDate.parse(timeLimit);
+    }
+
     /**
      * Adds a new event task to the current task list.
      * The content of the new list will be printed.
@@ -161,13 +187,14 @@ public class TaskList {
      * @param period  the period of the new event task object.
      */
     public void addEventTask(String content, String period) {
-        Event newTask = new Event(content, period);
+        LocalDate timeLimit = getTimeLimitInDate(period);
+        Event newTask = new Event(content, timeLimit);
         Tasks.add(newTask);
         numOfTasks++;
         System.out.println(UI.DIVIDER
                 + "A new event task is added:\n"
                 + "Task content  :" + newTask.getTaskContent() + "\n"
-                + "Task period   :" + newTask.getPeriod() + "\n"
+                + "Task period   :" + newTask.getEventTime() + "\n"
                 + getNumOfTasksString() + "\n"
                 + UI.DIVIDER_LINE_ONLY
         );

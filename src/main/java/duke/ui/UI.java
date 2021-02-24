@@ -63,11 +63,11 @@ public class UI {
                 + " 'todo'     : Add a new todo task\n\t"
                 + " e.g. 'todo read book' will add \"read book\" to your task list\n"
                 + " 'deadline' : Add a new deadline task\n\t"
-                + " e.g. 'deadline read book /by Sunday' will"
-                + " add \"read book\" to your task list with deadline \"Sunday\"\n"
+                + " e.g. 'deadline read book /by YYYY-DD-MM' will"
+                + " add \"read book\" to your task list with deadline task by date in format YYYY-DD-MM.\n"
                 + " 'event' : Add a new event task\n\t"
-                + " e.g. 'event read book /at Mon 2-4pm' will"
-                + " add \"read book\" to your task list with period  \"Mon 2-4pm\"\n";
+                + " e.g. 'event read book /at YYYY-DD-MM' will"
+                + " add \"read book\" to your task list with an event task at date in format YYYY-DD-MM.\n";
 
         System.out.println(
                 DIVIDER_LINE_ONLY + DIVIDER
@@ -90,5 +90,12 @@ public class UI {
 
     public static void printErrorMessage(Exception e) {
         System.out.println(DIVIDER + e.getMessage() + "\n" + DIVIDER_LINE_ONLY);
+    }
+
+    public static void printParseDateError() {
+        System.out.println(DIVIDER
+                + "The time format you input is incorrect or out of range!\n"
+                + "The format is in YYYY-MM-DD. Please try again.\n"
+                + DIVIDER_LINE_ONLY);
     }
 }

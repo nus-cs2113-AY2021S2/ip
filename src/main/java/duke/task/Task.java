@@ -52,15 +52,6 @@ public abstract class Task {
     }
 
     /**
-     * Sets a new content of the task.
-     *
-     * @param taskContent the new content of the task.
-     */
-    public void setTaskContent(String taskContent) {
-        this.taskContent = taskContent;
-    }
-
-    /**
      * Returns the type of the task.
      *
      * @return the type of the task.
