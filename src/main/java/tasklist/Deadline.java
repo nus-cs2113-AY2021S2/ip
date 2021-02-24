@@ -1,14 +1,19 @@
-public class Event extends Task{
+package tasklist;
 
-    protected String by;
-    public Event(String description, String by) {
+import tasklist.Task;
+
+public class Deadline extends Task {
+
+    public String by;
+
+    public Deadline(String description, String by){
         super(description);
         this.by = by;
     }
 
 
     public String getStatusIcon() {
-        return "[E]" + "[" + super.getStatusIcon() +"]";
+        return "[D]" + "[" + super.getStatusIcon() +"]";
     }
 
 
@@ -16,4 +21,8 @@ public class Event extends Task{
     public String getDescription() {
         return super.getDescription() + " " + "--" + by + "--";
     }
+
+
+
+
 }

@@ -1,17 +1,23 @@
+import commands.*;
 import myexceptions.*;
+import parser.Parser;
+import tasklist.Deadline;
+import tasklist.Event;
+import tasklist.Task;
+import tasklist.Todo;
+import ui.TextUI;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static common.Messages.EMPTY_LIST_EXCEPTION_MESSAGE;
 public class Duke {
 
-
-
+/*
     static ArrayList<Task> tasks = new ArrayList<Task>();
     static int taskPosition = 0;
     static String description;
@@ -19,17 +25,17 @@ public class Duke {
     static int indexOfBy;
 
 
-    private static void writeToFile(String filePath, ArrayList<Task> tasks) throws IOException{
+    public static void writeToFile(String filePath, ArrayList<Task> tasks) throws IOException {
         FileWriter fw = new FileWriter(filePath);
 
-        for(Task t:tasks) {
-            fw.write( t.getStatusIcon() + " " + t.getDescription() + "\n");
+        for (Task t : tasks) {
+            fw.write(t.getStatusIcon() + " " + t.getDescription() + "\n");
 
         }
         fw.close();
     }
 
-    private static void restoreFileContents(String filePath) throws FileNotFoundException, BlankDescriptionException {
+    public static void restoreFileContents(String filePath) throws FileNotFoundException, BlankDescriptionException {
         File f = new File(filePath);
         Scanner s = new Scanner(f);
         while (s.hasNext()) {
@@ -37,12 +43,13 @@ public class Duke {
         }
     }
 
-    private static void inputToTasks(String nextLine) throws BlankDescriptionException {
+
+    public static void inputToTasks(String nextLine) throws BlankDescriptionException {
         int taskStatusIndex = 1;
         int taskDescriptionIndex = 7;
 
         char taskType = nextLine.charAt(1);
-        String taskStatus = nextLine.substring(4,5);
+        String taskStatus = nextLine.substring(4, 5);
         String taskDescription = nextLine.substring(7);
         try {
             switch (taskType) {
@@ -79,15 +86,12 @@ public class Duke {
         }
 
 
-
-
     }
 
-    public static void storeTask(Task t) throws BlankDescriptionException{
+    public static void storeTask(Task t) throws BlankDescriptionException {
         if (t.description.isBlank()) {
             throw new BlankDescriptionException();
-        }
-        else {
+        } else {
             tasks.add(t);
             System.out.println("Got it! I've added this task!");
             //System.out.println(t.description);
@@ -96,24 +100,71 @@ public class Duke {
         }
     }
 
-    public static void markAsDone(int taskIndex){
+    public static void markAsDone(int taskIndex) {
         tasks.get(taskIndex - 1).isDone = true;
         System.out.println("Nice! I've marked this task as done: ");
         listArray(tasks);
     }
 
-    public static void listArray(ArrayList<Task> tasks){
+    public static void listArray(ArrayList<Task> tasks) {
         int textNumber = 1;
-        for(Task t:tasks){
+        for (Task t : tasks) {
             System.out.println(textNumber + "." + t.getStatusIcon() + " " + t.getDescription());
             textNumber++;
         }
 
     }
+*/
+    //--------------------------------------------------------------------------------
+    private TextUI ui;
 
-    public static void main(String[] args) throws InvalidCommandException, InvalidDateException, FileNotFoundException, BlankDescriptionException {
-        System.out.println("Hello! I'm 343 Guilty Spark! You may call me Spark!");
-        System.out.println("What can I do for you?");
+    private static void runCommandLoopUntilExitCommand() throws BlankDescriptionException, EmptyListException, MissingDateException {
+        boolean isExit = false;
+        do {
+            TextUI ui = new TextUI();
+
+            String fullInputCommand = ui.getUserCommand();
+
+            String[] command = Parser.splitText(fullInputCommand);
+            switch (command[0]) {
+            case "todo":
+                AddTodo.execute(fullInputCommand);
+                break;
+            case "deadline":
+                AddDeadline.execute(fullInputCommand);
+                break;
+            case "event":
+                AddEvent.execute(fullInputCommand);
+                break;
+            case "list":
+                try{
+                    ListTasks.execute();
+                    break;
+                } catch (EmptyListException e) {
+                    System.out.println(EMPTY_LIST_EXCEPTION_MESSAGE);
+                    break;
+                }
+
+            case "bye":
+                SystemExit.execute();
+                isExit = true;
+                break;
+            default:
+                System.out.println("No valid command detected! Try again!");
+            }
+        }
+        while (!isExit);
+    }
+
+
+    public static void main(String[] args) throws InvalidCommandException, InvalidDateException, FileNotFoundException, BlankDescriptionException, EmptyListException, MissingDateException {
+
+
+        runCommandLoopUntilExitCommand();
+
+
+
+        /*
         String text = "hi";
 
         try{
@@ -126,7 +177,7 @@ public class Duke {
             Scanner in = new Scanner(System.in);
             text = in.nextLine();
 
-            //Task t = new Task(text);
+            //tasklist.Task t = new tasklist.Task(text);
             try {
                 String[] arr = text.split(" "); //split command input into words
                 String command = arr[0];
@@ -134,7 +185,7 @@ public class Duke {
 
                 switch (command) {
                 case "deadline":
-                case "Deadline":
+                case "tasklist.Deadline":
                 case "DEADLINE":
                     try {
                         if(!text.contains("/") && !text.substring(9).isBlank()){
@@ -153,7 +204,7 @@ public class Duke {
                     }
                     break;
                 case "todo":
-                case "Todo":
+                case "tasklist.Todo":
                 case "TODO":
 
                     try {
@@ -165,13 +216,13 @@ public class Duke {
                         storeTask(todoTask);
                         break;
                     } catch (BlankDescriptionException e) {
-                        System.out.println("Todo cannot be empty");
+                        System.out.println("tasklist.Todo cannot be empty");
                         break;
                     }
 
 
                 case "event":
-                case "Event":
+                case "tasklist.Event":
                 case "EVENT":
 
                     try {
@@ -185,9 +236,9 @@ public class Duke {
                         Event eventTask = new Event(description, by);
                         storeTask(eventTask);
                     } catch (IndexOutOfBoundsException | BlankDescriptionException e) {
-                        System.out.println("Event description cannot be empty! Try again!");
+                        System.out.println("tasklist.Event description cannot be empty! Try again!");
                     } catch (MissingDateException e){
-                        System.out.println("Event must have a date! Try again!");
+                        System.out.println("tasklist.Event must have a date! Try again!");
                     }
                     break;
                 case "List":
@@ -256,5 +307,8 @@ public class Duke {
         System.out.println(taskIndex + "." + t.getStatusIcon() + " " + t.getDescription());
         tasks.remove(taskIndex - 1);
         System.out.println("Now you have " + tasks.size() + " tasks in the list!");
+    }
+    */
+
     }
 }

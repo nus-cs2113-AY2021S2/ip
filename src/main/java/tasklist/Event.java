@@ -1,17 +1,18 @@
-import javax.sound.midi.SysexMessage;
+package tasklist;
 
-public class Deadline extends Task {
+import tasklist.Task;
 
-    protected String by;
+public class Event extends Task {
 
-    public Deadline(String description, String by){
+    public String by;
+    public Event(String description, String by) {
         super(description);
         this.by = by;
     }
 
 
     public String getStatusIcon() {
-        return "[D]" + "[" + super.getStatusIcon() +"]";
+        return "[E]" + "[" + super.getStatusIcon() +"]";
     }
 
 
@@ -19,8 +20,4 @@ public class Deadline extends Task {
     public String getDescription() {
         return super.getDescription() + " " + "--" + by + "--";
     }
-
-
-
-
 }
