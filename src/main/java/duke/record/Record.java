@@ -7,6 +7,7 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
+import duke.task.dateTime.DateTime;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,6 +15,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Record {
@@ -43,7 +45,12 @@ public class Record {
     }
 
     public void addRecord(String[] detailFragments, String taskType) {
-        boolean isAdded = addRecordToCollection(detailFragments, taskType);
+        boolean isAdded = false;
+        try {
+            isAdded = addRecordToCollection(detailFragments, taskType);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
 
         if (isAdded) {
             int numberOfRecords = records.size();
@@ -167,5 +174,16 @@ public class Record {
 
     private void showInvalidEmptyDescription() {
         System.out.println("The description of a task cannot be empty.");
+    }
+
+    public void findDate(String date) {
+        int counter = 1;
+        DateTime dateTime = new DateTime(date);
+        System.out.printf("Here is your task in %s:\n", date);
+        for (Task task : records) {
+            if(task.getDate().equals(dateTime.getDate())){
+                System.out.println(counter++ + ". " + task);
+            }
+        }
     }
 }
