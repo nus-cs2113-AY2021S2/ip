@@ -1,5 +1,10 @@
 package duke.main;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.text.ParseException;
+import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 import duke.exceptions.*;
 import duke.items.Deadline;
 import duke.items.Event;
@@ -143,7 +148,6 @@ public class Parser {
             UI.findPreamble();
             Task.findBy(line.split(" ")[1]);
             break;
-
         case ("todo"):
 
             validateTodoCommand(line);

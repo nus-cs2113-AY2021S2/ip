@@ -26,10 +26,6 @@ public class UI {
             System.out.println("Here are the tasks in your list:");
         }
     }
-
-    /**
-     * Printing the output when using the find function
-     */
     public static void findPreamble() {
         if (Task.getNumOfTasks() != 0){
             System.out.println("Here are the matching tasks in your list:");
@@ -38,6 +34,7 @@ public class UI {
             System.out.println("There are no matching task in your list:");
         }
     }
+
 
     /**
      * Prints the updated number of tasks in list
