@@ -118,12 +118,12 @@ public class UI {
                 + "            **  **             ** ** ** ** ** *        * **" + System.lineSeparator()
                 + "             **  **             ** **     * ** *       * **" + System.lineSeparator()
                 + "              *  **             ** **     ** **        * **" + System.lineSeparator()
-                + "               **             ** **      ** **		* **" + System.lineSeparator()
-                + "               **            ** **		* **        * **" + System.lineSeparator()
-                + "				  *            ** **          **        * **" + System.lineSeparator()
-                + "				   **         ** *            **        **" + System.lineSeparator()
-                + "				    * ** ** ** *               ** ** ** **" + System.lineSeparator()
-                + "				      ** ** ***                  * ** **" + System.lineSeparator();
+                + "               **             ** **       ** **        * **" + System.lineSeparator()
+                + "                **            ** **        * **        * **" + System.lineSeparator()
+                + "                *            ** **          **        * **" + System.lineSeparator()
+                + "                 **         ** *            **        **" + System.lineSeparator()
+                + "                  * ** ** ** *               ** ** ** **" + System.lineSeparator()
+                + "                   ** ** ***                  * ** **" + System.lineSeparator();
 
     }
 
