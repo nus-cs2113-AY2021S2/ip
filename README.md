@@ -7,6 +7,7 @@ If you can type fast, _JARVIS_ can manage your tasks faster than traditional Gra
 
 **Prerequisites:** Ensure that you have **Java 11** or above installed in your Computer.
 
+Set up _JARVIS_ as follows:
 1. Create an empty folder you want to use as the _home folder_ for _JARVIS_.
 1. Download the latest `JARVIS.jar` from [here](https://github.com/iamakilahamed/ip/releases).
 1. Copy the jar file to the folder you created earlier.
