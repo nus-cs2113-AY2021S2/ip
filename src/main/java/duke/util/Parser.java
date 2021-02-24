@@ -9,6 +9,7 @@ import duke.commands.DeadlineCommand;
 import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
 import duke.commands.EventCommand;
+import duke.commands.FindCommand;
 import duke.commands.HelpCommand;
 import duke.commands.InvalidCommand;
 import duke.commands.ListCommand;
@@ -49,7 +50,10 @@ public class Parser {
 	        break;
 	    case "delete":
 	        command = new DeleteCommand(commandArg);
-	        break;
+            break;
+        case "find":
+            command = new FindCommand(commandArg);
+            break;
 	    case "bye":
 	        command = new ByeCommand();
 	        break;

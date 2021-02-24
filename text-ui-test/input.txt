@@ -5,6 +5,9 @@ event lecture /at 28/10/2021 1200
 list
 done 2
 list
+find project
+find oesinr
+find
 delete 2
 list
 done 2

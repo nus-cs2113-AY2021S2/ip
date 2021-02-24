@@ -19,6 +19,7 @@ public class Ui {
             + "    list\n"
             + "    done taskNumber\n"
             + "    delete taskNumber\n"
+            + "    find searchString\n"
             + "    help\n"
             + "    bye\n";
     
@@ -110,4 +111,18 @@ public class Ui {
         String exitMessage = "Sad to see you go! ): See you soon!";
         printWithBorder(exitMessage);
     }
+
+    public void displayNoResultsFoundMessage(String commandArg) {
+        String noResultsFoundMessage = "Your search for '" + commandArg + "' returned no results. ):";
+        printWithBorder(noResultsFoundMessage);
+	}
+
+    public void printFindCommandResults(TaskList taskList) {
+        String listOfTasksString = "Here are the matching tasks in your list:";
+        for (int i = 0; i < taskList.getListSize(); i += 1) {
+            Task task = taskList.getTask(i);
+            listOfTasksString += ("\n    " + Integer.toString(i + 1) + ". " + task.toString());
+        }
+        printWithBorder(listOfTasksString);
+	}
 }
