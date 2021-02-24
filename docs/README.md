@@ -251,8 +251,9 @@ Expected outcome:
 
 ---
 ## Command summary
+
 Action | Format, Examples
---------------- | ----------------------------------------------------------------------------------------------------
+--- | ---
 Add Todo | `todo TASK_DESCRIPTION` e.g. `todo read book`
 Add Deadline | `deadline TASK_DESCRIPTION /by DETAILS` e.g. `deadline complete assignment /by 6 March 2021, 2359` 
 Add Event | `event TASK_DESCRIPTION /at DETAILS` e.g. `event project meeting /at NUS, 25 Feb 2021, 2-4pm`
