@@ -62,7 +62,7 @@ public class AddCommand extends Command {
             Ui.printAtDescription();
             Ui.printTaskSize();
         } else if (fullCommand.contains("deadline")) {
-            by = fullCommand.substring(fullCommand.indexOf("/") + START_INDEX_OF_BY);
+            by = fullCommand.substring((fullCommand.indexOf("/") + 1) + START_INDEX_OF_BY);
             fullCommand = fullCommand.substring(START_INDEX_OF_DEADLINE, fullCommand.indexOf("/"));
             Deadline deadline = new Deadline(fullCommand, by);
             taskList.addTask(deadline);
