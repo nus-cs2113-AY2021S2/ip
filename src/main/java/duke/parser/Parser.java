@@ -22,6 +22,10 @@ public class Parser {
         return userInput.split(" ")[1];
     }
 
+    public static String getSearchKeyword(String userInput) {
+        return userInput.split(" ")[1];
+    }
+
     public static String[] parseTaskContentAndTime(String[] words, int indexOfTimeLimitIdentifier) throws Exception {
         String content = getTaskContentString(words, indexOfTimeLimitIdentifier);
         String timeLimit = getTaskTimeLimitString(words, indexOfTimeLimitIdentifier);

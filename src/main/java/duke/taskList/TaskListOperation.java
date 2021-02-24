@@ -2,10 +2,7 @@ package duke.taskList;
 
 import duke.parser.Parser;
 import duke.storage.FileHandler;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
+import duke.task.*;
 import duke.ui.UI;
 
 import java.time.format.DateTimeParseException;
@@ -134,5 +131,37 @@ public class TaskListOperation {
             taskList.setTasks(localTasks);
             taskList.setNumOfTasks(localTasks.size());
         }
+    }
+
+    public static void searchTaskByString(TaskList taskList, String userInput) {
+        ArrayList<Task> searchResult = new ArrayList<>();
+        String keyword = Parser.getSearchKeyword(userInput);
+        for (Task task : taskList.getTasks()) {
+            if (task.getTaskContent().contains(keyword)) {
+                searchResult.add(task);
+            }
+        }
+        printSearchResult(searchResult);
+    }
+
+    private static void printSearchResult(ArrayList<Task> resultList) {
+        int listSize = resultList.size();
+        System.out.println(UI.DIVIDER + "Here are the matching tasks in your list:");
+        if (listSize == 0) {
+            System.out.println("No data found. Try some other keywords.");
+        } else {
+            for (int i = 0; i < listSize; i++) {
+                Task currentItem = resultList.get(i);
+                String timeLimitFormatted = UI.getTimeLimitFormatted(currentItem);
+                System.out.println((i + 1) + ". "
+                        + "[" + UI.convertTaskType(currentItem.getTaskType()) + "] "
+                        + "[" + (currentItem.isDone() ? "☑️" : "✖️") + "] "
+                        + currentItem.getTaskContent()
+                        + (currentItem.getTaskType() == TaskType.TODO ? "" : " ")
+                        + timeLimitFormatted
+                );
+            }
+        }
+        System.out.println(UI.DIVIDER_LINE_ONLY);
     }
 }
