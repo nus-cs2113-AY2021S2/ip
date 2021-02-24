@@ -1,26 +1,30 @@
-# Duke project template
+# _JARVIS_
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+_JARVIS_ is a **cross-platform desktop task manager app, optimized for use via a Command Line Interface (CLI)**. 
+If you can type fast, _JARVIS_ can manage your tasks faster than traditional Graphical User Interface (GUI) apps.
 
-## Setting up in Intellij
+## Setting up _JARVIS_
 
-Prerequisites: JDK 11, update IntelliJ to the most recent version.
+**Prerequisites:** Ensure that you have **Java 11** or above installed in your Computer.
 
-### On IntelliJ version 2020.3.1 (latest) and beyond
-
-1. Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Import the project into IntelliJ as follows:
-   1. Click `Open`
-   1. Select the project directory, and click `OK`
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).
-1. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the output below.
+1. Create an empty folder you want to use as the _home folder_ for _JARVIS_.
+1. Download the latest `JARVIS.jar` from [here](https://github.com/iamakilahamed/ip/releases).
+1. Copy the jar file to the folder you created earlier.
+1. Open a command window to that folder.
+1. Run the command `java -jar JARVIS.jar` (i.e., run the command in the same folder as the jar file).
+1. If the setup is correct, you should see something like the output below after approximately 4.5 seconds.
 
    ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
+   --------------------------------------------------------------------------------------------
+   Importing all preferences from home interface.
+   Synchronising from the cloud.
+   Systems are now fully operational.
+   Initialising...
+   --------------------------------------------------------------------------------------------
+       Hello, sir. J.A.R.V.I.S at your service.
+   --------------------------------------------------------------------------------------------
+	   Unfortunately, I could not detect any files in the database!
+	   But don't worry sir.
+	   I will create the files you might be needing later.
+   --------------------------------------------------------------------------------------------
    ```
