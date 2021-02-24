@@ -1,6 +1,7 @@
-package duke.task;
+package duke.taskList;
 
-import duke.Duke;
+import duke.task.*;
+import duke.ui.UI;
 
 import java.util.ArrayList;
 
@@ -56,9 +57,9 @@ public class TaskList {
      * Prints the current list with dividers.
      */
     public void printCurrentList() {
-        System.out.println(Duke.DIVIDER);
+        System.out.println(UI.DIVIDER);
         printList();
-        System.out.println(Duke.DIVIDER_LINE_ONLY);
+        System.out.println(UI.DIVIDER_LINE_ONLY);
     }
 
     /**
@@ -124,11 +125,11 @@ public class TaskList {
         Todo newTask = new Todo(content);
         Tasks.add(newTask);
         numOfTasks++;
-        System.out.println(Duke.DIVIDER
+        System.out.println(UI.DIVIDER
                 + "A new to-do task is added:\n"
                 + "Task content  :" + newTask.getTaskContent() + "\n"
                 + getNumOfTasksString() + "\n"
-                + Duke.DIVIDER_LINE_ONLY
+                + UI.DIVIDER_LINE_ONLY
         );
     }
 
@@ -143,12 +144,12 @@ public class TaskList {
         Deadline newTask = new Deadline(content, deadline);
         Tasks.add(newTask);
         numOfTasks++;
-        System.out.println(Duke.DIVIDER
+        System.out.println(UI.DIVIDER
                 + "A new deadline task is added:\n"
                 + "Task content  :" + newTask.getTaskContent() + "\n"
                 + "Task deadline :" + newTask.getDeadline() + "\n"
                 + getNumOfTasksString() + "\n"
-                + Duke.DIVIDER_LINE_ONLY
+                + UI.DIVIDER_LINE_ONLY
         );
     }
 
@@ -163,12 +164,12 @@ public class TaskList {
         Event newTask = new Event(content, period);
         Tasks.add(newTask);
         numOfTasks++;
-        System.out.println(Duke.DIVIDER
+        System.out.println(UI.DIVIDER
                 + "A new event task is added:\n"
                 + "Task content  :" + newTask.getTaskContent() + "\n"
                 + "Task period   :" + newTask.getPeriod() + "\n"
                 + getNumOfTasksString() + "\n"
-                + Duke.DIVIDER_LINE_ONLY
+                + UI.DIVIDER_LINE_ONLY
         );
     }
 
@@ -182,7 +183,7 @@ public class TaskList {
         String timeString = currentItem.getTimeLimitString();
         Tasks.remove(itemIndex);
         numOfTasks--;
-        System.out.println(Duke.DIVIDER
+        System.out.println(UI.DIVIDER
                 + "The task below is successfully removed from your task list:)\n\t"
                 + "[" + convertTaskType(currentItem.getTaskType()) + "] "
                 + "[" + (currentItem.isDone() ? "☑️" : "✖️") + "] "
@@ -190,7 +191,7 @@ public class TaskList {
                 + (currentItem.getTaskType() == TaskType.TODO ? "" : " ")
                 + timeString + "\n"
                 + getNumOfTasksString() + "\n"
-                + Duke.DIVIDER_LINE_ONLY
+                + UI.DIVIDER_LINE_ONLY
         );
     }
 
@@ -205,7 +206,7 @@ public class TaskList {
         currentItem.setDone(isDone);
         printUpdatedTaskStatus(isDone, currentItem);
         printList();
-        System.out.println(Duke.DIVIDER_LINE_ONLY);
+        System.out.println(UI.DIVIDER_LINE_ONLY);
     }
 
     /**
@@ -215,7 +216,7 @@ public class TaskList {
      * @param currentTask The current Task object whose status is updated.
      */
     private void printUpdatedTaskStatus(boolean isDone, Task currentTask) {
-        System.out.println(Duke.DIVIDER
+        System.out.println(UI.DIVIDER
                 + "The task object: \n"
                 + " | " + currentTask.getTaskContent() + " |\n"
                 + "is marked as "

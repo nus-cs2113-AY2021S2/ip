@@ -1,7 +1,7 @@
 package duke.task;
 
 public class Todo extends Task {
-    public static String[] parseTaskContent(String userInput) throws Exception {
+    public static String[] getTodoTaskContent(String userInput) throws Exception {
         String[] parseResult = new String[1];
         String contentStr = userInput.substring(5).trim();
         if (contentStr.length() < 1) {

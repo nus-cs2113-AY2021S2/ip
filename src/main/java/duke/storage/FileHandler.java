@@ -1,7 +1,8 @@
-package duke.fileHandling;
+package duke.storage;
 
-import duke.Duke;
 import duke.task.*;
+import duke.taskList.TaskList;
+import duke.ui.UI;
 
 import java.nio.file.Files;
 import java.io.File;
@@ -17,18 +18,18 @@ public class FileHandler {
     private static final String FILE_NAME = "tasks.txt";
     private static final String DELIMINATOR = "#";
 
-    private static void writeFile(String fileName, String content) throws IOException {
-        FileWriter fw = new FileWriter(FILE_PATH + fileName);
+    private static void writeFile(String content) throws IOException {
+        FileWriter fw = new FileWriter(FILE_PATH + FileHandler.FILE_NAME);
         fw.write(content);
         fw.close();
     }
 
-    private static ArrayList<Task> parseTasks(File taskFile) throws FileNotFoundException {
+    private static ArrayList<Task> getTasksFromText(File taskFile) throws FileNotFoundException {
         ArrayList<Task> tasks = new ArrayList<>();
         Scanner sc = new Scanner(taskFile);
         while (sc.hasNext()) {
             String taskStr = sc.nextLine();
-            Task newTask = parseTaskObject(taskStr);
+            Task newTask = convertStringToTaskObject(taskStr);
             if (newTask != null) {
                 tasks.add(newTask);
             }
@@ -36,7 +37,7 @@ public class FileHandler {
         return tasks;
     }
 
-    private static Task parseTaskObject(String taskStr) {
+    private static Task convertStringToTaskObject(String taskStr) {
         String[] taskWords = taskStr.split(DELIMINATOR);
         String type = taskWords[0];
         boolean isDone = Boolean.parseBoolean(taskWords[1]);
@@ -75,9 +76,9 @@ public class FileHandler {
         File taskFile = new File(FILE_PATH + FILE_NAME);
         ArrayList<Task> localTasks = null;
         try {
-            localTasks = parseTasks(taskFile);
+            localTasks = getTasksFromText(taskFile);
         } catch (FileNotFoundException e) {
-            System.out.println(Duke.DIVIDER +
+            System.out.println(UI.DIVIDER +
                     " Local task list file is not found.\n A new task list is initialized for you.");
             createDataDir();
         }
@@ -88,11 +89,11 @@ public class FileHandler {
         ArrayList<Task> tasks = taskListToWrite.getTasks();
         String taskInText = convertTaskToText(tasks);
         try {
-            writeFile(FILE_NAME, taskInText);
+            writeFile(taskInText);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (Exception e) {
-            System.out.println(Duke.DIVIDER + e.getMessage() + "\n" + Duke.DIVIDER_LINE_ONLY);
+            System.out.println(UI.DIVIDER + e.getMessage() + "\n" + UI.DIVIDER_LINE_ONLY);
         }
     }
 
