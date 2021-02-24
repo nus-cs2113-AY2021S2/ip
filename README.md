@@ -13,7 +13,7 @@ Set up _JARVIS_ as follows:
 1. Copy the jar file to the folder you created earlier.
 1. Open a command window to that folder.
 1. Run the command `java -jar JARVIS.jar` (i.e., run the command in the same folder as the jar file).
-1. If the setup is correct, you should see something like the output below after approximately 4.5 seconds.
+1. If the setup is correct, you should see something like the output below after approximately 5 seconds.
 
    ```
    --------------------------------------------------------------------------------------------
@@ -29,3 +29,4 @@ Set up _JARVIS_ as follows:
 	   I will create the files you might be needing later.
    --------------------------------------------------------------------------------------------
    ```
+1. Type the command in the command window and press Enter to execute it. Refer [here](link) for a detailed user guide.
