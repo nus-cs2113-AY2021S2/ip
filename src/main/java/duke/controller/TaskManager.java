@@ -12,6 +12,8 @@ import duke.task.Task;
 import duke.task.Todo;
 import duke.ui.UI;
 
+import java.util.ArrayList;
+
 public class TaskManager {
     public static void processTask(String input) throws InvalidInputException {
         String[] inputData = input.split(" ");
@@ -30,9 +32,23 @@ public class TaskManager {
             case "todo":
                 processTodoTask(inputData);
                 break;
+            case "find":
+                processFindTask(inputData);
+                break;
             default:
                 throw new InvalidInputException();
         }
+    }
+
+    private static void processFindTask(String[] inputData) {
+        try {
+            ArrayList<Task> matches = Task.find(inputData[1]);
+            UI.tasksFound(inputData[1], matches);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Please enter a search query");
+            UI.requestInput();
+        }
+
     }
 
     private static void processTodoTask(String[] inputData) {
