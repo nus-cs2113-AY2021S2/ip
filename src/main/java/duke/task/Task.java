@@ -67,7 +67,6 @@ public class Task {
     public static void completeTask(int taskNumber) {
         tasks.get(taskNumber).markAsDone();
         recentTask = tasks.get(taskNumber);
-        // completedTaskIndex = taskNumber;
         completedTaskCounter -= -1;
     }
 

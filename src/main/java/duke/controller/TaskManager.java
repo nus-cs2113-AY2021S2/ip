@@ -1,8 +1,16 @@
 package duke.controller;
 
-import duke.exception.*;
-import duke.task.*;
-import duke.ui.*;
+import duke.exception.InvalidInputException;
+import duke.exception.MissingDueDateException;
+import duke.exception.TaskNotExistException;
+import duke.exception.MissingEventDurationException;
+import duke.exception.MissingTaskDescriptionException;
+import duke.exception.TaskAlreadyCompletedException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+import duke.ui.UI;
 
 public class TaskManager {
     public static void processTask(String input) throws InvalidInputException {
@@ -11,78 +19,94 @@ public class TaskManager {
         switch (inputData[0]) {
             case "done":
             case "delete":
-                try {
-                    int taskIndex = Integer.parseInt(input.split(" ")[1]);
-                    taskIndex--;
-                    Task.checkTaskIndex(taskIndex);
-                    if (inputData[0].equals("done")) {
-                        Task.checkTaskComplete(taskIndex);
-                        Task.completeTask(taskIndex);
-                        UI.taskCompletedSuccessfully();
-                    }
-                    else {
-                        Task.deleteTask(taskIndex);
-                        UI.taskDeletedSuccessfully();
-                    }
-
-                } catch (NumberFormatException e) {
-                    System.out.println("That didn't work...please enter a valid number");
-                    UI.requestInput();
-                } catch (TaskAlreadyCompletedException e) {
-                    System.out.println(e.getMessage());
-                    UI.requestInput();
-                } catch (TaskNotExistException e) {
-                    System.out.println(e.getMessage());
-                    UI.requestInput();
-                } catch (IndexOutOfBoundsException e) {
-                    System.out.println("Please input the correct number of the task you wish to interact with");
-                    UI.requestInput();
-                }
+                processDoneOrDeletedTask(inputData);
                 break;
             case "deadline":
-                try {
-                    taskDetails = parseTaskDetails(inputData);
-                    Deadline.checkDeadlineInput(taskDetails);
-                    Task.addNewTask(new Deadline(taskDetails[0], taskDetails[1]));
-                    UI.taskAddedSuccessfully();
-                    break;
-                } catch (MissingDueDateException e) {
-                    System.out.println(e.getMessage());
-                    UI.requestInput();
-                } catch (MissingTaskDescriptionException e) {
-                    System.out.println(e.getMessage());
-                    UI.requestInput();
-                }
+                processDeadlineTask(inputData);
                 break;
             case "event":
-                try {
-                    taskDetails = parseTaskDetails(inputData);
-                    Event.checkEventInput(taskDetails);
-                    Task.addNewTask(new Event(taskDetails[0], taskDetails[1]));
-                    UI.taskAddedSuccessfully();
-                    break;
-                } catch (MissingEventDurationException e) {
-                    System.out.println(e.getMessage());
-                    UI.requestInput();
-                } catch (MissingTaskDescriptionException e) {
-                    System.out.println(e.getMessage());
-                    UI.requestInput();
-                }
+                processEventTask(inputData);
                 break;
             case "todo":
-                try {
-                    taskDetails = parseTaskDetails(inputData);
-                    Todo.checkTodoInput(taskDetails);
-                    Task.addNewTask(new Todo(taskDetails[0]));
-                    UI.taskAddedSuccessfully();
-                    break;
-                } catch (MissingTaskDescriptionException e) {
-                    System.out.println(e.getMessage());
-                    UI.requestInput();
-                }
+                processTodoTask(inputData);
                 break;
             default:
                 throw new InvalidInputException();
+        }
+    }
+
+    private static void processTodoTask(String[] inputData) {
+        String[] taskDetails;
+        try {
+            taskDetails = parseTaskDetails(inputData);
+            Todo.checkTodoInput(taskDetails);
+            Task.addNewTask(new Todo(taskDetails[0]));
+            UI.taskAddedSuccessfully();
+        } catch (MissingTaskDescriptionException e) {
+            System.out.println(e.getMessage());
+            UI.requestInput();
+        }
+    }
+
+    private static void processEventTask(String[] inputData) {
+        String[] taskDetails;
+        try {
+            taskDetails = parseTaskDetails(inputData);
+            Event.checkEventInput(taskDetails);
+            Task.addNewTask(new Event(taskDetails[0], taskDetails[1]));
+            UI.taskAddedSuccessfully();
+        } catch (MissingEventDurationException e) {
+            System.out.println(e.getMessage());
+            UI.requestInput();
+        } catch (MissingTaskDescriptionException e) {
+            System.out.println(e.getMessage());
+            UI.requestInput();
+        }
+    }
+
+    private static void processDeadlineTask(String[] inputData) {
+        String[] taskDetails;
+        try {
+            taskDetails = parseTaskDetails(inputData);
+            Deadline.checkDeadlineInput(taskDetails);
+            Task.addNewTask(new Deadline(taskDetails[0], taskDetails[1]));
+            UI.taskAddedSuccessfully();
+        } catch (MissingDueDateException e) {
+            System.out.println(e.getMessage());
+            UI.requestInput();
+        } catch (MissingTaskDescriptionException e) {
+            System.out.println(e.getMessage());
+            UI.requestInput();
+        }
+    }
+
+    private static void processDoneOrDeletedTask(String[] inputData) {
+        try {
+            int taskIndex = Integer.parseInt(inputData[1]);
+            taskIndex--;
+            Task.checkTaskIndex(taskIndex);
+            if (inputData[0].equals("done")) {
+                Task.checkTaskComplete(taskIndex);
+                Task.completeTask(taskIndex);
+                UI.taskCompletedSuccessfully();
+            }
+            else {
+                Task.deleteTask(taskIndex);
+                UI.taskDeletedSuccessfully();
+            }
+
+        } catch (NumberFormatException e) {
+            System.out.println("That didn't work...please enter a valid number");
+            UI.requestInput();
+        } catch (TaskAlreadyCompletedException e) {
+            System.out.println(e.getMessage());
+            UI.requestInput();
+        } catch (TaskNotExistException e) {
+            System.out.println(e.getMessage());
+            UI.requestInput();
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Please input the correct number of the task you wish to interact with");
+            UI.requestInput();
         }
     }
 
@@ -92,7 +116,6 @@ public class TaskManager {
         StringBuilder inputDueDate = new StringBuilder();
         StringBuilder inputDescription = new StringBuilder();
         int separatorIndex = -1;
-        // we start with '1' so we don't see the user-input category again
         for (int i = 1; i < inputData.length; i++) {
             if (inputData[i].equals("||")) {
                 separatorIndex = i;
@@ -106,16 +129,13 @@ public class TaskManager {
         if (parsedData[0].equals("")) {
             parsedData[0] = null;
         }
-        // in case there is no indicative '||'
         if (separatorIndex != -1) {
             prefix = "";
             for (int j = separatorIndex + 1; j < inputData.length; j++) {
                 inputDueDate.append(prefix).append(inputData[j]);
                 prefix = " ";
             }
-            // even if '||' is present in the input, but nothing follows is
             parsedData[1] = inputDueDate.toString();
-            // validating data input would go here
             if (parsedData[1].equals("")) {
                 parsedData[1] = null;
             }

@@ -1,7 +1,7 @@
 package duke.controller;
 
 import duke.exception.InvalidInputException;
-import duke.ui.*;
+import duke.ui.UI;
 
 import java.util.Scanner;
 
@@ -12,6 +12,13 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String input;
 
+        runProgramLoop(sc);
+
+
+    }
+
+    private static void runProgramLoop(Scanner sc) {
+        String input;
         do {
             input = sc.nextLine();
             switch (input) {
@@ -31,7 +38,5 @@ public class Duke {
 
             }
         } while (!input.equals("bye"));
-
-
     }
 }

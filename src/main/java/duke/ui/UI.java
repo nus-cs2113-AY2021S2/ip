@@ -52,12 +52,16 @@ public class UI {
 
     public static void showAllTasks() {
         System.out.println("This is your current list:");
+        showTaskList();
+        System.out.println("Of these tasks, you still have " + Task.getRemainingTasks() + " to complete!");
+        UI.requestInput();
+    }
+
+    private static void showTaskList() {
         for (int i = 0; i < Task.getTaskCounter(); i++){
             int displayedTask = i + 1;
             System.out.println(displayedTask + ". " + Task.getTaskList().get(i));
         }
-        System.out.println("Of these tasks, you still have " + Task.getRemainingTasks() + " to complete!");
-        UI.requestInput();
     }
 
     public static void taskAddedSuccessfully() {
