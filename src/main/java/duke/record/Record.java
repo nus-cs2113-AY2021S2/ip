@@ -176,7 +176,7 @@ public class Record {
         System.out.println("The description of a task cannot be empty.");
     }
 
-    public void findDate(String date) {
+    public void searchDate(String date) {
         int counter = 1;
         DateTime dateTime = new DateTime(date);
         System.out.printf("Here is your task in %s:\n", date);
