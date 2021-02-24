@@ -246,7 +246,7 @@ Expected outcome:
 
 **A:** The `jarvis.txt` is a text file and can be easily transferred from one computer to another through cloud-based 
        storage platforms like Google Drive for example. To install JARVIS, follow steps 1 to 3 of 
-       [For new users](README.md#for-new-user) or you can directly download the latest `JARVIS.jar` 
+       [For new user](README.md#for-new-user) or you can directly download the latest `JARVIS.jar` 
        [here](https://github.com/iamakilahamed/ip/releases) if you are an experienced JARVIS user.
 
 ---
