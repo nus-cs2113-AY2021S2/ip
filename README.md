@@ -1,5 +1,5 @@
 # Hi, I am Friday, your personal assistant.
-## (A task management applictaion based on the Duke project)
+**_(A task management applictaion based on the Duke project)_**  
 
 This is a project based on the template for a greenfield Java project. It's named after the Java mascot _Duke_. 
 Given below are instructions on how to use it.
