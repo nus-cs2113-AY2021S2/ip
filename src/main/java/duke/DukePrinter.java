@@ -19,6 +19,8 @@ public class DukePrinter {
             "event <TASK_DESCRIPTION> /at <EVENT_DATE> - Create a new task with the specified description and event date";
     public static final String DELETE_HELP_MESSAGE = "delete <TASK_NUMBER> - delete the specified task";
     public static final String CLEAR_HELP_MESSAGE = "clear - deletes all tasks";
+    public static final String FIND_HELP_MESSAGE =
+            "find <SEARCH_EXPRESSION> - finds all tasks containing the required expression";
 
     private static void printMessage(String... messages) {
         System.out.println(LINE_DIVIDER);
@@ -55,7 +57,8 @@ public class DukePrinter {
                 DEADLINE_HELP_MESSAGE,
                 EVENT_HELP_MESSAGE,
                 DELETE_HELP_MESSAGE,
-                CLEAR_HELP_MESSAGE);
+                CLEAR_HELP_MESSAGE,
+                FIND_HELP_MESSAGE);
     }
 
     public static void printTasks(ArrayList<String> taskStrings) {
@@ -122,7 +125,21 @@ public class DukePrinter {
                 "Enter `bye` to try again, or `exit` to exit without saving");
     }
 
-    public static void printWarnings(String[] warningsArr) {
+    public static void printWarnings(ArrayList<String> warnings) {
+        String[] warningsArr = new String[warnings.size() + 1];
+        warningsArr[0] = "Warning: Failed to import " + Integer.toString(warnings.size()) + " task(s)";
+        for (int i = 0; i < warnings.size(); i++) {
+            warningsArr[i + 1] = warnings.get(i);
+        }
         printMessage(warningsArr);
+    }
+
+    public static void printMatchingTasks(ArrayList<String> matchingTasks) {
+        String[] matchingTaskArr = new String[matchingTasks.size() + 1];
+        matchingTaskArr[0] = "Here are the matching tasks in your list:";
+        for (int i = 0; i < matchingTasks.size(); i++) {
+            matchingTaskArr[i + 1] = Integer.toString(i + 1) + ". " + matchingTasks.get(i);
+        }
+        printMessage(matchingTaskArr);
     }
 }
