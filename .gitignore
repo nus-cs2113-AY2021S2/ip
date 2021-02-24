@@ -15,4 +15,9 @@ bin/
 
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
+
+# User data
 data.txt
+
+# .jar manifest
+src/main/java/META-INF
