@@ -23,6 +23,8 @@ If you can type fast, _JARVIS_ can manage your tasks faster than traditional Gra
 ---
 ## Quick start
 > **Prerequisites:** Ensure that you have **Java 11** or above installed in your Computer.
+
+
 ### For new user
 Set up _JARVIS_ as follows:
 1. Create an empty folder you want to use as the _home folder_ for _JARVIS_.
