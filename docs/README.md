@@ -2,7 +2,7 @@
 
 ## Features 
 
-###1. Adding todos, deadlines and events
+### 1. Adding todos, deadlines and events
 Duke allows the user to quickly track events and reminders through CLI
 
 ## Usage
@@ -21,7 +21,7 @@ Expected outcome:
 	[T][✘] read book
 Now you have 8 tasks in the list.`
 
-###2. Deleting todos, deadlines and events
+### 2. Deleting todos, deadlines and events
 Should a user want to remove a task, deletion can be done
 
 ## Usage
