@@ -3,6 +3,9 @@ package duke.task;
 import duke.exception.MissingEventDurationException;
 import duke.exception.MissingTaskDescriptionException;
 
+/**
+ * Event class builds upon the Deadline class; they both have a duedate field
+ */
 public class Event extends Deadline {
 
     public Event(String description, String eventDuration) {

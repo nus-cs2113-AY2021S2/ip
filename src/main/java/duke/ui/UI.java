@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class UI {
+    /**
+     * Prints the logo for Duke
+     */
     public static String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
@@ -15,6 +18,9 @@ public class UI {
 
     public static String divider = "-----------------------------------";
 
+    /**
+     * Combines the logo and dividers to generate a complete welcome screen
+     */
     public static void showWelcomeScreen() {
         System.out.println("Hello from\n" + logo);
         System.out.println(divider);
@@ -24,6 +30,9 @@ public class UI {
         System.out.println(divider);
     }
 
+    /**
+     * This reads the saved data file and indicates success or failure
+     */
     public static void showLoadDataScreen() {
         System.out.println("Searching for saved data...");
         try {
@@ -35,6 +44,9 @@ public class UI {
         }
     }
 
+    /**
+     * Displays feedback that data is being saved, while performing the data saving too
+     */
     public static void showSaveDataScreen() {
         System.out.println("Saving data...");
         try {
@@ -45,12 +57,18 @@ public class UI {
         }
     }
 
+    /**
+     * A user-friendly request for input
+     */
     public static void requestInput() {
         System.out.println(divider);
         System.out.println("What is thy bidding, my master?");
         System.out.println(divider);
     }
 
+    /**
+     * Formats the printing of a list of all tasks
+     */
     public static void showAllTasks() {
         System.out.println("This is your current list:");
         showTaskList();
@@ -58,6 +76,9 @@ public class UI {
         UI.requestInput();
     }
 
+    /**
+     * Generates a list of the tasks
+     */
     private static void showTaskList() {
         for (int i = 0; i < Task.getTaskCounter(); i++){
             int displayedTask = i + 1;
@@ -65,6 +86,9 @@ public class UI {
         }
     }
 
+    /**
+     * Informs user that task has been added to list successfully
+     */
     public static void taskAddedSuccessfully() {
         System.out.println("Roger Roger. The following task has been added:");
         boolean getCompletedTask = false;
@@ -74,6 +98,9 @@ public class UI {
         UI.requestInput();
     }
 
+    /**
+     * Informs user that task has been successfully marked as completed
+     */
     public static void taskCompletedSuccessfully() {
         System.out.println("The Force is with you! The following task has been marked as done:");
         boolean getCompletedTask = true;
@@ -83,6 +110,9 @@ public class UI {
         UI.requestInput();
     }
 
+    /**
+     * Informs user that task has been deleted successfully
+     */
     public static void taskDeletedSuccessfully() {
         System.out.println("I am altering the deal. The following task has been deleted:");
         boolean getDeletedTask = true;
@@ -92,6 +122,11 @@ public class UI {
         UI.requestInput();
     }
 
+    /**
+     * This method seeks to match a user query with matching task (and their corresponding descriptions)
+     * @param query is the user input to be matched with the task description
+     * @param tasks is the list of tasks which match the abovementioned query
+     */
     public static void tasksFound(String query, ArrayList<Task> tasks) {
         System.out.println("We found these tasks matching the query: " + query);
         for (int i = 0; i < tasks.size(); i++) {
@@ -102,6 +137,9 @@ public class UI {
 
     }
 
+    /**
+     * Simple farewell screen before the application exits
+     */
     public static void showFarewellScreen() {
         System.out.println(UI.divider);
         System.out.println("Bye! Hope to hear from you again soon!");
