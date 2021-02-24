@@ -9,23 +9,44 @@ public class TaskList {
     private ArrayList<Task> tasks;
     private Ui ui = new Ui();
 
+    /**
+     * Constructor of new TaskList
+     */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * Constructor of loading a TaskList
+     *
+     * @param tasks ArrayList of Tasks that was previously saved
+     */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
+    /**
+     * Returns all the tasks in ArrayList
+     *
+     * @return ArrayList of tasks
+     */
     public ArrayList<Task> getTasks() {
         return this.tasks;
     }
 
+    /**
+     * Prints a list of all tasks currently in TaskList
+     */
     public void printList() {
         ui.printList(tasks);
     }
 
 
+    /**
+     * Adds a Todo task to the TaskList
+     *
+     * @param line user input containing description of task
+     */
     public void addTodo(String line) {
         try {
             int descriptionStart = 5;
@@ -37,6 +58,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds a Deadline task to the TaskList
+     *
+     * @param line user input containing description and due date
+     */
     public void addDeadline(String line) {
         try {
             int descriptionStart = 9;
@@ -51,6 +77,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds an Event task to the TaskList
+     *
+     * @param line user input containing description and date of event
+     */
     public void addEvent(String line) {
         try {
             int descriptionStart = 6;
@@ -65,6 +96,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Marks a task as done
+     *
+     * @param line user input containing index of task in TaskList
+     */
     public void markDone(String line) {
         try {
             int itemNum = Integer.parseInt(line.substring(5));
@@ -80,6 +116,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Deletes a task from the TaskList
+     *
+     * @param line user input containing index of task to be deleted
+     */
     public void deleteTask(String line) {
         try {
             int itemNum = Integer.parseInt(line.substring(7));
@@ -98,6 +139,11 @@ public class TaskList {
 
     }
 
+    /**
+     * Searches for task in TaskList based on description
+     *
+     * @param line user input containing description to be filtered
+     */
     public void findTask(String line) {
         try {
             String keyword = line.substring(5);

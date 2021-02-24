@@ -17,6 +17,10 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor for Duke Class
+     * Initialises UI, Storage and TaskList
+     */
     public Duke() {
         ui = new Ui();
         storage = new Storage();
@@ -27,6 +31,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs Duke
+     * Reads in commands and executes them
+     */
     public void run() {
         ui.greet();
         boolean isExit = false;
@@ -45,6 +53,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs an instance of Duke
+     *
+     * @param args arguments from command line (if any)
+     */
     public static void main(String[] args) {
         new Duke().run();
     }

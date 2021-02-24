@@ -10,6 +10,12 @@ public class Deadline extends Task {
     protected LocalDate date;
     protected boolean hasDate = false;
 
+    /**
+     * Constructor for Deadline Class
+     *
+     * @param description String description of task
+     * @param by due date or time of task
+     */
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
@@ -21,6 +27,12 @@ public class Deadline extends Task {
     }
 
 
+    /**
+     * Returns a LocalDate object parsed from input String
+     *
+     * @param line String of date
+     * @return LocalDate object parsed
+     */
     public LocalDate parseDate(String line) {
         LocalDate parsedDate = null;
         try {
@@ -32,11 +44,20 @@ public class Deadline extends Task {
     }
 
 
-
+    /**
+     * Returns the due date of the task
+     *
+     * @return String of by parameter
+     */
     public String getBy() {
         return this.by;
     }
 
+    /**
+     * Returns a String representation of the task including the status icon, description and due date
+     *
+     * @return String representation of task
+     */
     @Override
     public String toString() {
         if (hasDate) {
