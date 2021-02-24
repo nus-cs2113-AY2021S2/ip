@@ -26,7 +26,7 @@ public class DukeFileManager {
         this.reader = null;
     }
 
-    public void openFile() throws IOException {
+    private void openFile() throws IOException {
         File fileDirectory = new File(directory);
         if (!fileDirectory.exists()) {
             fileDirectory.mkdir();
@@ -38,6 +38,7 @@ public class DukeFileManager {
     }
 
     public ArrayList<String> readFromFile() throws IOException {
+        openFile();
         reader = new Scanner(file);
         ArrayList<String> taskStrings = new ArrayList<String>();
         while (reader.hasNext()) {
@@ -49,6 +50,7 @@ public class DukeFileManager {
     }
 
     public void writeToFile(ArrayList<String> tasksAsCSV) throws IOException {
+        openFile();
         writer = new FileWriter(file);
         for (String taskCSV : tasksAsCSV) {
             writer.write(taskCSV + "\n");

@@ -38,7 +38,7 @@ public class DukePrinter {
     public static void printWelcomeMessage() {
         printMessage("Hello! I'm Duke",
                 "What can I do for you?",
-                "(Type 'help' for a list of commands)");
+                "(Type `help` for a list of commands)");
     }
 
     public static void printExitMessage() {
@@ -79,7 +79,7 @@ public class DukePrinter {
 
     public static void printFallbackMessage() {
         printMessage("I didn't quite catch what you were saying. Please try again.",
-                "Try using \"help\" for a list of commands.");
+                "Try using `help` for a list of commands.");
     }
 
     public static void printInvalidArgumentsMessage() {
@@ -120,5 +120,9 @@ public class DukePrinter {
     public static void printForceQuitErrorMessage() {
         printMessage("I didn't quite catch what you were saying. Please try again.",
                 "Enter `bye` to try again, or `exit` to exit without saving");
+    }
+
+    public static void printWarnings(String[] warningsArr) {
+        printMessage(warningsArr);
     }
 }

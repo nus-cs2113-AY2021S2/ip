@@ -13,8 +13,12 @@ public class EventCommand extends Command {
     private static final int TASK_DESCRIPTION = 1;
     private static final int TASK_DATE = 2;
 
-    public EventCommand(ArrayList<String> arguments, DukeTaskList dukeTaskList) {
+    private boolean printMessage, isDone;
+
+    public EventCommand(ArrayList<String> arguments, DukeTaskList dukeTaskList, boolean printMessage, boolean isDone) {
         super(arguments, dukeTaskList);
+        this.printMessage = printMessage;
+        this.isDone = isDone;
     }
 
     @Override
@@ -34,7 +38,12 @@ public class EventCommand extends Command {
 
         Event event = new Event(description, date);
         dukeTaskList.addTask(event);
-        int numberOfTasks = dukeTaskList.getNumberOfTasks();
-        DukePrinter.printTaskAdded(event.toString(), numberOfTasks);
+        if (printMessage) {
+            int numberOfTasks = dukeTaskList.getNumberOfTasks();
+            DukePrinter.printTaskAdded(event.toString(), numberOfTasks);
+        }
+        if (isDone) {
+            event.markAsDone();
+        }
     }
 }

@@ -1,7 +1,7 @@
 	____________________________________________________________
 	 Hello! I'm Duke
 	 What can I do for you?
-	 (Type 'help' for a list of commands)
+	 (Type `help` for a list of commands)
 	____________________________________________________________
 	____________________________________________________________
 	 All tasks removed!

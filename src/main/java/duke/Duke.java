@@ -31,9 +31,8 @@ public class Duke {
 
     private void importFromFile() {
         try {
-            dukeFileManager.openFile();
             ArrayList<String> taskInfo = dukeFileManager.readFromFile();
-            ArrayList<ArrayList<String>> parsedTaskInfo = DukeParser.parseTaskInfo(taskInfo);
+            ArrayList<ArrayList<String>> parsedTaskInfo = DukeParser.parseCSV(taskInfo);
             dukeTaskList.importTaskInfo(parsedTaskInfo);
         } catch (IOException ioException) {
             DukePrinter.printImportErrorMessage(ioException.getMessage());

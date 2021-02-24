@@ -11,8 +11,12 @@ public class TodoCommand extends Command {
     private static final int REQUIRED_NUMBER_OF_ARGS = 2;
     private static final int TASK_DESCRIPTION = 1;
 
-    public TodoCommand(ArrayList<String> arguments, DukeTaskList dukeTaskList) {
+    private boolean printMessage, isDone;
+
+    public TodoCommand(ArrayList<String> arguments, DukeTaskList dukeTaskList, boolean printMessage, boolean isDone) {
         super(arguments, dukeTaskList);
+        this.printMessage = printMessage;
+        this.isDone = isDone;
     }
 
     @Override
@@ -28,7 +32,12 @@ public class TodoCommand extends Command {
 
         Todo todo = new Todo(description);
         dukeTaskList.addTask(todo);
-        int numberOfTasks = dukeTaskList.getNumberOfTasks();
-        DukePrinter.printTaskAdded(todo.toString(), numberOfTasks);
+        if (printMessage) {
+            int numberOfTasks = dukeTaskList.getNumberOfTasks();
+            DukePrinter.printTaskAdded(todo.toString(), numberOfTasks);
+        }
+        if (isDone) {
+            todo.markAsDone();
+        }
     }
 }

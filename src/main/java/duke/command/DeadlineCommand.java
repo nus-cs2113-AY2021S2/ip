@@ -13,8 +13,12 @@ public class DeadlineCommand extends Command {
     private static final int TASK_DESCRIPTION = 1;
     private static final int TASK_DATE = 2;
 
-    public DeadlineCommand(ArrayList<String> arguments, DukeTaskList dukeTaskList) {
+    private boolean printMessage, isDone;
+
+    public DeadlineCommand(ArrayList<String> arguments, DukeTaskList dukeTaskList, boolean printMessage, boolean isDone) {
         super(arguments, dukeTaskList);
+        this.printMessage = printMessage;
+        this.isDone = isDone;
     }
 
     @Override
@@ -34,7 +38,12 @@ public class DeadlineCommand extends Command {
 
         Deadline deadline = new Deadline(description, date);
         dukeTaskList.addTask(deadline);
-        int numberOfTasks = dukeTaskList.getNumberOfTasks();
-        DukePrinter.printTaskAdded(deadline.toString(), numberOfTasks);
+        if (printMessage) {
+            int numberOfTasks = dukeTaskList.getNumberOfTasks();
+            DukePrinter.printTaskAdded(deadline.toString(), numberOfTasks);
+        }
+        if (isDone) {
+            deadline.markAsDone();
+        }
     }
 }

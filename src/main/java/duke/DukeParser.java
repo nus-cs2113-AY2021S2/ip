@@ -79,13 +79,13 @@ public class DukeParser {
         return userInputTokenized;
     }
 
-    public static ArrayList<ArrayList<String>> parseTaskInfo(ArrayList<String> taskInfo) {
+    public static ArrayList<ArrayList<String>> parseCSV(ArrayList<String> taskInfo) {
         ArrayList<ArrayList<String>> parsedTaskInfo = new ArrayList<ArrayList<String>>();
         for (String taskString : taskInfo) {
             ArrayList<String> parsedTaskString = new ArrayList<String>();
             String[] tokenizedTaskString = taskString.split(",");
             for (String token : tokenizedTaskString) {
-                parsedTaskString.add(token.trim());
+                parsedTaskString.add(token);
             }
             parsedTaskInfo.add(parsedTaskString);
         }
@@ -121,13 +121,13 @@ public class DukeParser {
             command = new DoneCommand(commandTokens, dukeTaskList);
             break;
         case TODO_COMMAND:
-            command = new TodoCommand(commandTokens, dukeTaskList);
+            command = new TodoCommand(commandTokens, dukeTaskList, true, false);
             break;
         case DEADLINE_COMMAND:
-            command = new DeadlineCommand(commandTokens, dukeTaskList);
+            command = new DeadlineCommand(commandTokens, dukeTaskList, true, false);
             break;
         case EVENT_COMMAND:
-            command = new EventCommand(commandTokens, dukeTaskList);
+            command = new EventCommand(commandTokens, dukeTaskList, true, false);
             break;
         case DELETE_COMMAND:
             command = new DeleteCommand(commandTokens, dukeTaskList);
