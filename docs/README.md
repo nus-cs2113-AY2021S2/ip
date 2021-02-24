@@ -41,9 +41,9 @@ Set up _JARVIS_ as follows:
    --------------------------------------------------------------------------------------------
        Hello, sir. J.A.R.V.I.S. at your service.
    --------------------------------------------------------------------------------------------
-	      Unfortunately, I could not detect any files in the database!
-	      But don't worry sir.
-	      I will create the files you might be needing later.
+       Unfortunately, I could not detect any files in the database!
+       But don't worry sir.
+       I will create the files you might be needing later.
    --------------------------------------------------------------------------------------------
    ```
 1. Type the command in the command window and press Enter to execute it. Refer to 
@@ -63,10 +63,10 @@ Open _JARVIS_ as follows:
    --------------------------------------------------------------------------------------------
        Hello, sir. J.A.R.V.I.S. at your service.
    --------------------------------------------------------------------------------------------
-	      Here's the tasks in your list, sir: 
-		        [T][ ] task 1
-		        [D][ ] task 2 (by: date and time)
-		        [E][ ] task 3 (at: location, date and time)
+       Here's the tasks in your list, sir: 
+           [T][ ] task 1
+           [D][ ] task 2 (by: date and time)
+           [E][ ] task 3 (at: location, date and time)
    --------------------------------------------------------------------------------------------
    ```
    However, if you do not have a `jarvis.txt` in the folder containing the jar file, you should see something like the
@@ -80,7 +80,7 @@ Open _JARVIS_ as follows:
    --------------------------------------------------------------------------------------------
        Hello, sir. J.A.R.V.I.S. at your service.
    --------------------------------------------------------------------------------------------
-	      You do not have any pending task, sir.
+       You do not have any pending task, sir.
    --------------------------------------------------------------------------------------------
    ```
 1. Type the command in the command window and press Enter to execute it. Refer to 
@@ -118,7 +118,7 @@ Example: `todo read book`
 Expected outcome:
 ```
     Got it. I've added this task:
-	[T][ ] read book
+        [T][ ] read book
     Now you have 1 tasks in the list.
 --------------------------------------------------------------------------------------------
 ```
@@ -134,7 +134,7 @@ Example: `deadline complete assignment /by 6 March 2021, 2359`
 Expected outcome:
 ```
     Got it. I've added this task:
-	[D][ ] complete assignment (by: 6 March 2021, 2359)
+        [D][ ] complete assignment (by: 6 March 2021, 2359)
     Now you have 2 tasks in the list.
 --------------------------------------------------------------------------------------------
 ```
@@ -150,7 +150,7 @@ Example: `event project meeting /at NUS, 25 Feb 2021, 2-4pm`
 Expected outcome:
 ```
     Got it. I've added this task:
-	[E][ ] project meeting (at: NUS, 25 Feb 2021, 2-4pm)
+        [E][ ] project meeting (at: NUS, 25 Feb 2021, 2-4pm)
     Now you have 3 tasks in the list.
 --------------------------------------------------------------------------------------------
 ```
@@ -168,7 +168,7 @@ Example: `delete 2`
 Expected outcome:
 ```
     Noted, sir! I've removed this task:
-	[D][ ] complete assignment (by: 6 March 2021, 2359)
+        [D][ ] complete assignment (by: 6 March 2021, 2359)
     Now you have 2 tasks in the list.
 --------------------------------------------------------------------------------------------
 ```
@@ -186,7 +186,7 @@ Example: `done 2`
 Expected outcome:
 ```
     Well done, sir! I've marked this task as done:
-	[E][X] project meeting (at: NUS, 25 Feb 2021, 2-4pm)
+        [E][X] project meeting (at: NUS, 25 Feb 2021, 2-4pm)
 --------------------------------------------------------------------------------------------
 ```
 
@@ -200,8 +200,8 @@ Example: `list`
 Expected outcome:
 ```
     Here are the tasks in your list, sir:
-	1. [T][ ] read book
-	2. [E][X] project meeting (at: NUS, 25 Feb 2021, 2-4pm)
+        1. [T][ ] read book
+        2. [E][X] project meeting (at: NUS, 25 Feb 2021, 2-4pm)
 --------------------------------------------------------------------------------------------
 ```
 

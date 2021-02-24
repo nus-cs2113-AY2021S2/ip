@@ -24,9 +24,9 @@ Set up _JARVIS_ as follows:
    --------------------------------------------------------------------------------------------
        Hello, sir. J.A.R.V.I.S. at your service.
    --------------------------------------------------------------------------------------------
-	   Unfortunately, I could not detect any files in the database!
-	   But don't worry sir.
-	   I will create the files you might be needing later.
+       Unfortunately, I could not detect any files in the database!
+       But don't worry sir.
+       I will create the files you might be needing later.
    --------------------------------------------------------------------------------------------
    ```
 1. Type the command in the command window and press Enter to execute it. Refer [here](https://iamakilahamed.github.io/ip/) 
