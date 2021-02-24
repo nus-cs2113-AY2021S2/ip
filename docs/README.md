@@ -6,8 +6,8 @@ If you can type fast, _JARVIS_ can manage your tasks faster than traditional Gra
 ----
 ### Table of Contents
 * [Quick start](README.md#quick-start)
-    - [For new users](README.md#for-new-user)
-    - [For existing users](README.md#for-existing-user)
+    - [For new user](README.md#for-new-user)
+    - [For existing user](README.md#for-existing-user)
 * [Features](README.md#features)
     - [Adding a todo task : `todo`](README.md#adding-a-todo-task--todo)
     - [Adding a deadline task : `deadline`](README.md#adding-a-deadline-task--deadline)
