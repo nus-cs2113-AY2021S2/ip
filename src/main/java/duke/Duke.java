@@ -16,6 +16,8 @@ public class Duke {
             tasks = new TaskList(storage.loadTasks());
         } catch (FileNotFoundException e) {
             ui.printLoadError();
+        } catch (IndexOutOfBoundsException e) {
+            ui.listIsEmpty();
         }
     }
 
@@ -31,8 +33,6 @@ public class Duke {
                 isExit = c.isExit();
             } catch (FileNotFoundException e) {
                 ui.showError(e.getMessage());
-            } catch (IndexOutOfBoundsException e) {
-                ui.listIsEmpty();
             } finally {
                 ui.showLine();
             }

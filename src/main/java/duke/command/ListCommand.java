@@ -25,28 +25,33 @@ public class ListCommand extends Command {
         }
         for (int i = 1; i <= TaskList.getListSize(); ++i) {
             System.out.print(i + ". ");
-            switch (Keyword.getKeywords(i - 1)) {
-            case "T":
-                System.out.print("[T]");
-                taskList.getTaskAtIndex(i - 1).printDescription();
-                System.out.print("\n");
-                break;
-            case "D":
-                System.out.print("[D]");
-                taskList.getTaskAtIndex(i - 1).printDescription();
-                System.out.println("by:" + Deadline.getBy() + ")");
-                break;
-            case "E":
-                System.out.print("[E]");
-                taskList.getTaskAtIndex(i - 1).printDescription();
-                System.out.println("(at:" + Event.getAt() + ")");
-                break;
-            default:
-                System.out.println("Oops! An error occurred");
-                break;
-            }
+            printList(taskList, i);
         }
     }
+
+    public static void printList(TaskList taskList, int index) {
+        switch (Keyword.getKeywords(index - 1)) {
+        case "T":
+            System.out.print("[T]");
+            taskList.getTaskAtIndex(index - 1).printDescription();
+            System.out.print("\n");
+            break;
+        case "D":
+            System.out.print("[D]");
+            taskList.getTaskAtIndex(index - 1).printDescription();
+            System.out.println("by:" + Deadline.getBy() + ")");
+            break;
+        case "E":
+            System.out.print("[E]");
+            taskList.getTaskAtIndex(index - 1).printDescription();
+            System.out.println("(at:" + Event.getAt() + ")");
+            break;
+        default:
+            System.out.println("Oops! An error occurred");
+            break;
+        }
+    }
+
 
     @Override
     public boolean isValidInput() {
