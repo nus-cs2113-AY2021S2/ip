@@ -1,4 +1,4 @@
-package duke;
+package storage;
 
 import task.Deadline;
 import task.Event;
