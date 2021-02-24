@@ -14,6 +14,7 @@
   * [Mark as done : `done`](#mark-as-done--done)
   * [Mark as undone : `undo`](#mark-as-undone--undo)
   * [Search keyword : `find`](#search-keyword--find)
+  * [Search date : `search`](#search-date--find)
   * [Exit : `bye`](#exit--bye)
 * [Storage](#storage)
 * [Command summary](#command-summary)
@@ -171,8 +172,21 @@ Index relative to task list is shown for easier deletion / mark as done.<br>
 
 | | Result |
 | --------- | ------------------------------------------------------- |
-| Input | `Find quiz` |
+| Input | `find quiz` |
 | Output | `3.[T][ ] CS2113T Quiz` |
+
+&nbsp;
+&nbsp;
+
+### Search date : `search`
+List out all deadlines due on specified date.<br>
+Index relative to task list is shown for easier deletion / mark as done.<br>
+**Format:** `search <DD_MM_YYYY>`
+
+| | Result |
+| --------- | ------------------------------------------------------- |
+| Input | `search 24-6-1999` |
+| Output | `3.[D][ ] Wake up (by: 24 Jun 1999)` |
 
 &nbsp;
 &nbsp;
@@ -207,6 +221,7 @@ If the file isn't found, a new one will be created upon changes.
 | done | `done <index 1> <index 2> ... <index n>` |
 | undo | `undo <index 1> <index 2> ... <index n>` |
 | find | `find <keyword>` |
+| search | `search <DD-MM-YYYY>` |
 | bye | `bye` |
 
 &nbsp;
