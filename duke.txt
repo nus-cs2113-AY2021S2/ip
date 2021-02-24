@@ -1,0 +1,96 @@
+E | 0 | shuwen attend CS2113 Lecture |  Friday 19 Feb 2021 from 4-6pm
+
+T | 1 | eat
+D | 1 | hw |  TMW
+E | 0 | meeting |  today
+T | 1 | eat
+D | 1 | hw |  Monday
+E | 0 | meeting |  today
+T | 0 | hehe
+D | 0 | assesment |  Next Monday
+E | 0 | meeting |  weekend
+T | 0 | deat
+T | 0 | sleep
+T | 0 | tuition
+T | 1 | eat
+T | 1 | eat
+T | 1 | eat
+D | 1 | hw |  Monday
+E | 0 | meeting |  tmr
+T | 0 | 1
+T | 0 | 2
+T | 0 | 3
+T | 0 | 4
+T | 0 | 1
+T | 0 | 2
+T | 0 | 3
+T | 0 | 4
+T | 0 | 5
+T | 0 | 1
+T | 0 | 2
+T | 0 | 3
+T | 0 | 4
+T | 0 | 1
+T | 0 | 2
+T | 0 | 3
+T | 0 | 4
+D | 1 | hw |  monday
+T | 0 | 1
+T | 0 | 2
+T | 0 | 3
+T | 1 | eat
+T | 0 | sleep
+D | 1 | Assesment |  24th Feb
+E | 1 | assignment 1 |  Next Wednesday
+T | 0 | 1
+T | 0 | 2
+T | 0 | 4
+T | 0 | 5
+T | 0 | 1
+T | 0 | 2
+T | 0 | 3
+T | 0 | 4
+T | 0 | 1
+T | 0 | 2
+T | 0 | 3
+T | 0 | 1
+T | 0 | 2
+T | 0 | 3
+T | 0 | 4
+D | 0 | hw |  2021-02-24
+T | 1 | eat
+D | 0 | hw |  monday
+D | 0 | hw | Mondsy
+E | 0 | hw | monday
+D | 0 | sw | Monday
+D | 0 | assessment | 2021-02-24
+D | 0 | aw | 2021-02-24
+D | 0 | hw | 2020-02-24
+D | 0 | hw | 2020-02-24
+D | 0 | assessment | 2æœ? 24 2021
+T | 0 | read
+T | 0 | read book
+D | 0 | buy book | tmr
+E | 0 | book eicket | tmr
+T | 0 | read
+T | 0 | read book
+D | 0 | by book | moday
+E | 0 | book ticket | monsy
+T | 1 | eat
+T | 0 | read
+T | 0 | book
+D | 0 | book hw | monrda
+E | 0 | ticket book | sunday
+T | 0 | read
+T | 0 | book readk
+T | 0 | read book
+T | 0 | book
+T | 0 | read
+T | 0 | book read
+T | 0 | read
+T | 0 | book
+T | 0 | read book
+T | 0 | read
+D | 0 | book read | Monday
+E | 0 | booking | sundaing
+T | 1 | eat
