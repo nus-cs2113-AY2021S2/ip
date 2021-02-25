@@ -74,12 +74,23 @@ public class DukeParser {
         return additionalArgsList;
     }
 
+    /**
+     * Read user input from standard input, and tokenize it accordingly.
+     *
+     * @return an ArrayList of Strings containing the tokens of the user's input
+     */
     public static ArrayList<String> readUserInput() {
         String userInput = scanner.nextLine();
         ArrayList<String> userInputTokenized = tokenizeInput(userInput);
         return userInputTokenized;
     }
 
+    /**
+     * Parse CSV data that has been imported from a file.
+     *
+     * @param taskInfo an ArrayList of Strings containing each line of the CSV file
+     * @return an ArrayList of ArrayLists of Strings containing the tokens of each line of the CSV file
+     */
     public static ArrayList<ArrayList<String>> parseCSV(ArrayList<String> taskInfo) {
         ArrayList<ArrayList<String>> parsedTaskInfo = new ArrayList<ArrayList<String>>();
         for (String taskString : taskInfo) {
@@ -93,6 +104,15 @@ public class DukeParser {
         return parsedTaskInfo;
     }
 
+    /**
+     * Execute the user's command as per the command specified in commandTokens.
+     * Returns a boolean value to indicate if the program should exit after it has finished executing the
+     * previous command.
+     * 
+     * @param dukeTaskList list of tasks to operate on
+     * @param commandTokens tokenized user input
+     * @return a boolean value to indicate if the program should exit
+     */
     public static boolean executeCommand(
             DukeTaskList dukeTaskList, ArrayList<String> commandTokens)
             throws DukeException {

@@ -218,7 +218,7 @@ public class DukePrinter {
     }
 
     /**
-     * Prints an enumerated list of tasks that match the user's search criteria
+     * Prints an enumerated list of tasks that match the user's search criteria.
      * If the user has no matching tasks (i.e. the ArrayList is empty), this method will print a message to inform them
      * that they have no matching tasks.
      *
