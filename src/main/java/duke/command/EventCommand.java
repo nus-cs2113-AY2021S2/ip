@@ -10,14 +10,27 @@ import duke.ui.Ui;
 import duke.exception.MissingDescriptionException;
 import duke.task.Task;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+/**
+ * Command to add event task
+ */
 public class EventCommand extends Command {
+    /**
+     * Constructor for EventCommand. Takes in command arguments, sets the command type and arguments.
+     * @param commandArgs
+     */
     public EventCommand(String commandArgs) {
         super(CommandType.EVENT, commandArgs);
     }
 
+    /**
+     * Handles adding event task, saving and printing output information.
+     * @param tasks
+     * @param ui
+     * @param storage
+     * @throws DukeException
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (commandArgs.length() == 0) {
@@ -36,6 +49,9 @@ public class EventCommand extends Command {
         ui.printTotalTasks(tasks.getTasks());
     }
 
+    /**
+     * @return boolean result if Duke should exit after execution of command
+     */
     @Override
     public boolean isExit() {
         return false;

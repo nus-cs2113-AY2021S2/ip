@@ -43,6 +43,12 @@ public class Utils {
         return true;
     }
 
+    /**
+     * Takes in user input string and parses it to a LocalDateTime object if it matches the pattern.
+     * @param userInput
+     * @return LocalDateTime object with date specified in user input string.
+     * @throws InvalidDateFormatException
+     */
     public static LocalDateTime getDateFromUserInput(String userInput) throws InvalidDateFormatException {
         try {
             DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("d/M/yyyy");
@@ -53,6 +59,11 @@ public class Utils {
         }
     }
 
+    /**
+     * Checks if deadline specified is before current date.
+     * @param date
+     * @return validity of deadline.
+     */
     public static boolean isValidDeadline(LocalDateTime date) {
         if (date.toLocalDate().isBefore(LocalDateTime.now().toLocalDate())) {
             return false;
@@ -60,6 +71,12 @@ public class Utils {
         return true;
     }
 
+    /**
+     * Takes in user input string and parses it to a LocalDateTime object if it matches the pattern.
+     * @param userInput
+     * @return LocalDateTime object with date and time specified in user input string.
+     * @throws InvalidDateTimeFormatException
+     */
     public static LocalDateTime getDateTimeFromUserInput(String userInput) throws InvalidDateTimeFormatException {
         try {
             DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
@@ -70,6 +87,11 @@ public class Utils {
         }
     }
 
+    /**
+     * Checks if event specified is before current date and time.
+     * @param dateTime
+     * @return validity of event.
+     */
     public static boolean isValidEvent(LocalDateTime dateTime) {
         if (dateTime.isBefore(LocalDateTime.now())) {
             return false;

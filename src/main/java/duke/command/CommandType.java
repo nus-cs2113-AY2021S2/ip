@@ -11,7 +11,8 @@ package duke.command;
  * DELETE: delete tasks
  * FIND: find tasks based on keyword(s) of task description
  * BYE: exit program
+ * HELP: prints usage information for Duke
  */
 public enum CommandType {
-    LIST, DONE, BYE, TODO, DEADLINE, EVENT, DELETE, DATE, FIND;
+    LIST, DONE, BYE, TODO, DEADLINE, EVENT, DELETE, DATE, FIND, HELP;
 }

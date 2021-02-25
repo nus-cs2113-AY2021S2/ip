@@ -8,11 +8,25 @@ import duke.exception.MissingDescriptionException;
 import duke.task.Task;
 import duke.task.Todo;
 
+/**
+ * Command to add a todo task
+ */
 public class TodoCommand extends Command {
+    /**
+     * Constructor for TodoCommand. Takes in command arguments, sets command type and arguments.
+     * @param commandArgs
+     */
     public TodoCommand(String commandArgs) {
         super(CommandType.TODO, commandArgs);
     }
 
+    /**
+     * Handles adding todo tasks, saving and printing output information.
+     * @param tasks
+     * @param ui
+     * @param storage
+     * @throws DukeException
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (commandArgs.length() == 0) {
@@ -25,6 +39,9 @@ public class TodoCommand extends Command {
         ui.printTotalTasks(tasks.getTasks());
     }
 
+    /**
+     * @return boolean result if Duke should exit after execution of command
+     */
     @Override
     public boolean isExit() {
         return false;
