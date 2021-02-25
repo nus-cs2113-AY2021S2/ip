@@ -54,7 +54,7 @@ public class DukeController {
         numerate = parse.charNumber(input);
         try {
             if (numerate > tasks.size() || numerate == 0) {
-                throw new NullPointerException("There is no such event input your list");
+                throw new NullPointerException("There is no such task in your list");
             }
             System.out.println("--------------------------------------------");
             tasks.get(numerate-1).markAsDone();
@@ -112,6 +112,11 @@ public class DukeController {
             printTask(tasks, count1);
             return foundError;
         }
+        catch (NullPointerException e) {
+            System.out.println("Please key in using this format: deadline <description> /by <date and time>");
+            System.out.println("--------------------------------------------");
+            return foundError = true;
+        }
         catch (DukeException e) {
             System.out.println(e.getMessage());
             System.out.println("--------------------------------------------");
@@ -142,6 +147,11 @@ public class DukeController {
             tasks.add(task);
             printTask(tasks, count1);
             return foundError;
+        }
+        catch (NullPointerException e) {
+            System.out.println("Please key in using this format: event <description> /at <date and time>");
+            System.out.println("--------------------------------------------");
+            return foundError = true;
         }
         catch (DukeException e) {
             System.out.println(e.getMessage());
@@ -181,7 +191,7 @@ public class DukeController {
         numerate = parse.charNumber(input);
         try {
             if (numerate > tasks.size() || numerate == 0) {
-                throw new NullPointerException("There is no such event input your list");
+                throw new NullPointerException("There is no such task in your list");
             }
             System.out.println("--------------------------------------------");
             System.out.println("Noted. I've removed this task: ");
