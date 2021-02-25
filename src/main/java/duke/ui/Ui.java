@@ -11,18 +11,32 @@ public class Ui {
 
     private Scanner in;
 
+    /**
+     * Constructor of Ui Class
+     */
     public Ui() {
         in = new Scanner(System.in);
     }
 
+    /**
+     * Returns String of next line of user input
+     *
+     * @return String of user input
+     */
     public String readInput() {
         return in.nextLine();
     }
 
+    /**
+     * Prints divider line made of dashes
+     */
     public void showLine() {
         System.out.println(DIVIDER_LINE);
     }
 
+    /**
+     * Prints Duke logo and welcome message
+     */
     public void greet() {
         String logo = " ____        _\n"
                 + "|  _ \\ _   _| | _____\n"
@@ -37,12 +51,17 @@ public class Ui {
         System.out.println(DIVIDER_LINE);
     }
 
+    /**
+     * Prints farewell message when exiting Duke
+     */
     public void bidGoodbye() {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
     /**
-     * Lists the tasks in order
+     * Prints out tasks in TaskList
+     *
+     * @param tasks ArrayList of tasks
      */
     public void printList(ArrayList<Task> tasks) {
         System.out.println("Here are the tasks in your list:");
@@ -53,9 +72,9 @@ public class Ui {
     }
 
     /**
-     * Confirms task has been added
+     * Prints confirm message that task has been added
      *
-     * @param tasks ArrayList<Task>
+     * @param tasks ArrayList of tasks
      */
     public void printAddTaskMessage(ArrayList<Task> tasks) {
         System.out.println("Got it. I've added this task:");
@@ -63,6 +82,9 @@ public class Ui {
         System.out.println("Now you have " + tasks.size() + " tasks in the list");
     }
 
+    /**
+     * Prints warning message if user input does not contain valid command
+     */
     public void printInvalidCommandMessage() {
         System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
     }

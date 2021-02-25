@@ -20,6 +20,11 @@ public class Storage {
     private static final Path filePath = Paths.get(root, "data", "duke.txt");
     private static final Path dirPath = Paths.get(root, "data");
 
+    /**
+     * Constructor
+     *
+     * Creates new directory and file based on dirPath and filePath if not found
+     */
     public Storage() {
         File fileDirectory = new File(dirPath.toString());
 
@@ -34,6 +39,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads saved TaskList from file
+     *
+     * @return ArrayList of tasks saved in file
+     * @throws FileNotFoundException when pathname does not exist
+     */
     public ArrayList<Task> loadFile() throws FileNotFoundException {
 
         ArrayList<Task> tasks = new ArrayList<>();
@@ -72,6 +83,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves tasks to file
+     *
+     * @param tasks ArrayList of tasks to be saved
+     */
     public void saveFile(ArrayList<Task> tasks) {
         try {
             FileWriter writer = new FileWriter(filePath.toString());
