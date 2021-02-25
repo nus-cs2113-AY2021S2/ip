@@ -12,13 +12,12 @@ public class ListCommand implements Command {
 
     public void execute(String input) {
 
-        if (TaskList.numOfTasks <= 0) {
+        if (TaskList.numOfTasks == 0) {
             System.out.println("You have no task! :)");
         }
         else {
             int count = 0;
             while (count < TaskList.numOfTasks) {
-                System.out.println(TaskList.numOfTasks);
                 System.out.println(count + 1 + ": " + TaskList.getTask(count));
                 count++;
             }

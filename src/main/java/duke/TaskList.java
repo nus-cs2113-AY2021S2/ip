@@ -24,8 +24,14 @@ public class TaskList {
         numOfTasks -= 1;
    }
 
+    public static boolean findTask(String input, int index) {
+        Task task = taskList.get(index);
+        return task.description.contains(input);
+    }
    public static Task getTask(int index) {
         Task task = taskList.get(index);
         return task;
    }
+
+
 }
