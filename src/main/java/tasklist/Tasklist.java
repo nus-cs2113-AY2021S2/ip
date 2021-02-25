@@ -28,4 +28,8 @@ public class Tasklist {
         //System.out.println(GETSIZE_MESSAGE);
         return tasks.size();
     }
+
+    public static ArrayList<Task> getTaskList() {
+        return tasks;
+    }
 }

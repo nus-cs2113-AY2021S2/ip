@@ -1,18 +1,14 @@
 import commands.*;
 import myexceptions.*;
 import parser.Parser;
-import tasklist.Deadline;
-import tasklist.Event;
-import tasklist.Task;
-import tasklist.Todo;
+import storage.FileManager;
+import tasklist.*;
 import ui.TextUI;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import static common.Messages.EMPTY_LIST_EXCEPTION_MESSAGE;
 public class Duke {
@@ -118,8 +114,9 @@ public class Duke {
     //--------------------------------------------------------------------------------
     private TextUI ui;
 
-    private static void runCommandLoopUntilExitCommand() throws BlankDescriptionException, EmptyListException, MissingDateException {
+    private static void runCommandLoopUntilExitCommand() throws BlankDescriptionException, EmptyListException, MissingDateException, IOException {
         boolean isExit = false;
+        FileManager.restoreFileContents("Duke.txt");
         do {
             TextUI ui = new TextUI();
 
@@ -146,18 +143,19 @@ public class Duke {
                 }
 
             case "bye":
+                FileManager.writeToFile("Duke.txt", Tasklist.getTaskList());
                 SystemExit.execute();
                 isExit = true;
                 break;
             default:
                 System.out.println("No valid command detected! Try again!");
             }
-        }
-        while (!isExit);
+
+        } while (!isExit);
     }
 
 
-    public static void main(String[] args) throws InvalidCommandException, InvalidDateException, FileNotFoundException, BlankDescriptionException, EmptyListException, MissingDateException {
+    public static void main(String[] args) throws InvalidCommandException, InvalidDateException, IOException, BlankDescriptionException, EmptyListException, MissingDateException {
 
 
         runCommandLoopUntilExitCommand();
