@@ -1,16 +1,21 @@
 package duke.command;
 
-import duke.task.Task;
-import duke.task.TaskList;
-
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Represents the object that handles input from the user
+ * Parses the user input into something the program can understand
+ */
 public class Parser {
-    private static final String lineSpacing = "\t----------------------------------";
-
     public Parser() { }
 
+    /**
+     * Parses the command from the user
+     * @param line The input from the user
+     * @return The executor for a particular statement from the user
+     * @throws DukeExceptions
+     */
     public static Command parse(String line) throws DukeExceptions{
         if (line.equals("")){
             throw new DukeExceptions();

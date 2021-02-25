@@ -4,17 +4,30 @@ import duke.storage.Storage;
 import duke.task.*;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
+/**
+ * Represents the executor to update a list of tasks as completed
+ */
 public class UpdateCommand extends Command {
     List<String> indexList;
 
+    /**
+     * Constructor of the class. Initializes the indexes of tasks to be updated
+     * @param indexList The list of indexes provided by the user
+     */
     public UpdateCommand(List<String> indexList) {
         super();
         this.indexList = indexList;
     }
 
+    /**
+     * Updates tasks specified by the user to completed
+     * @param taskList TaskList object that stores all current tasks
+     * @param storage Storage object that communicates with database
+     * @param ui Ui object that handles the interaction with user
+     * @throws DukeExceptions if invalid indexes provided
+     */
     @Override
     public void execute(TaskList taskList, Storage storage, Ui ui) throws DukeExceptions {
         ArrayList<Integer> integerIndexList = new ArrayList<>();
@@ -35,6 +48,10 @@ public class UpdateCommand extends Command {
         ui.showUpdatedTasks(updatedTaskList);
     }
 
+    /**
+     * Checks if we want to exit the program
+     * @return whether or not to exit the program
+     */
     @Override
     public boolean isExit() {
         return exit;

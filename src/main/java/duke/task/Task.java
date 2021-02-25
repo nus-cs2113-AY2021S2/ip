@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Base abstract class for all tasks
+ */
 public abstract class Task {
     protected String taskName;
     protected String taskType;

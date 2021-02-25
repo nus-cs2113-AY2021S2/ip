@@ -6,15 +6,26 @@ import duke.task.TaskList;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents the object that handles interactions with user
+ * Mainly prints statements and requests for inputs from the user
+ */
 public class Ui {
     private static final String lineSpacing = "\t----------------------------------";
     private String line;
     private Scanner in;
 
+    /**
+     * Constructor of this class. Initializes a scanner to read user inputs
+     */
     public Ui() {
         in = new Scanner(System.in);
     }
 
+    /**
+     * Reads the user commands
+     * @return The input given by the user as a string
+     */
     public String readCommand() {
         line = in.nextLine();
         return line;
