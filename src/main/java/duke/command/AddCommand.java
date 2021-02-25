@@ -8,6 +8,10 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
 
+/**
+ * To handle todo, event and deadline commands
+ * Add them to the task list and the time if applicable
+ */
 public class AddCommand extends Command {
 
     String at;
@@ -24,6 +28,10 @@ public class AddCommand extends Command {
         super(fullCommand);
     }
 
+    /**
+     * Checks for the error case where the input is only the command
+     * @return false if the fullCommand is only the command, without description
+     */
     public boolean isValidInput() {
         if (fullCommand.contains("todo") && fullCommand.length() != LENGTH_OF_TODO) {
             return true;
@@ -37,6 +45,12 @@ public class AddCommand extends Command {
         return false;
     }
 
+    /**
+     * Add todo, event or deadline task to tasklist when command matches
+     * Prints invalid command when command is invalid
+     * @param taskList the Task List object which has the current tasks
+     * @param ui The Ui object for user to interact with
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         if (!isValidInput()) {
@@ -47,7 +61,7 @@ public class AddCommand extends Command {
             Todo todo = new Todo(fullCommand.replaceFirst("todo", ""));
             taskList.addTask(todo);
             Keyword.setKeywords("T");
-            Ui.printTodoDescription();
+            ui.printTodoDescription();
             todo.printDescription();
             System.out.println("\n");
             Ui.printTaskSize();

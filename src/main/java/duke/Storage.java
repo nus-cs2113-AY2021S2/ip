@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+/**
+ * This class deals with loading tasks from the file and saving tasks in the file
+ */
 public class Storage {
 
     private static String path;
@@ -20,6 +23,13 @@ public class Storage {
         this.path = path;
     }
 
+    /**
+     * Reads the user's files and loads the task list with the tasks found in the files.
+     *
+     * @return the loaded task list
+     * @throws FileNotFoundException  If the file does not exist
+     * @throws NoSuchElementException If the file is empty
+     */
     public static ArrayList<Task> loadTasks() throws FileNotFoundException, NoSuchElementException {
         ArrayList<Task> tasks = new ArrayList<>();
         String loadedCommand;
@@ -29,9 +39,6 @@ public class Storage {
 
         do {
             loadedCommand = input.nextLine();
-            if (loadedCommand == null) {
-                return null;
-            }
             words = loadedCommand.split(",");
 
             if (loadedCommand.charAt(0) == 'T') {
@@ -50,6 +57,12 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Writes the tasks into a formatted txt file
+     * @param fw the FileWriter object created by using the Filewriter constructor, which took the
+     *           path of the saved file as the parameter
+     * @throws IOException If the file path provided is invalid
+     */
     public static void writeData(FileWriter fw) throws IOException {
         for (int i = 0; i < TaskList.getListSize(); ++i) {
             String keyword = Keyword.getKeywords(i);

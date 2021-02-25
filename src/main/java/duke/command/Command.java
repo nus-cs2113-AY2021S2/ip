@@ -4,6 +4,9 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
+/**
+ * Abstract class so that the methods can be implemented according to the command
+ */
 public abstract class Command {
     protected String fullCommand;
 

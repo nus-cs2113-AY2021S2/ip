@@ -6,6 +6,9 @@ import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
 
+/**
+ * Class to handle the delete command
+ */
 public class DeleteCommand extends Command{
 
     final int LENGTH_OF_DELETE = 6;
@@ -14,6 +17,11 @@ public class DeleteCommand extends Command{
         super(fullCommand);
     }
 
+    /**
+     * Removes the selected task from the task list
+     * @param taskList the Task List object which has the current tasks
+     * @param ui The Ui object for user to interact with
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         if (!isValidInput()) {
@@ -27,6 +35,11 @@ public class DeleteCommand extends Command{
         Keyword.removeKeyword(Integer.valueOf(indexOfDeletedTask));
         Ui.printDeleted();
     }
+
+    /**
+     * Checks for the error case where the input is the command without description
+     * @return false if the command is invalid
+     */
 
     @Override
     public boolean isValidInput() {
