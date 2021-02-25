@@ -1,321 +1,41 @@
 package duke;
 
-import duke.data.exceptions.DukeException;
-import duke.storage.FileIO;
+import duke.commands.CommandParser;
+import duke.data.exceptions.InvalidCommandException;
+import duke.storage.Storage;
 import duke.ui.TextUI;
 import duke.commands.Command;
-import duke.data.task.Deadline;
-import duke.data.task.Event;
-import duke.data.task.Task;
-import duke.data.task.Todo;
+import duke.data.task.TaskList;
 
-import java.util.ArrayList;
-
-import java.io.IOException;
+import static duke.common.Messages.ERROR_COMMAND_MESSAGE;
 
 public class Duke {
+    private TaskList tasks;
+    private Storage storage;
+    private TextUI ui;
 
-    private static final String DOUBLE_SPACE_PREFIX_STRING_FORMAT = "  %s";
-    private static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
-    private static final String LIST_TASK_MESSAGE = "Here are the tasks in your list:";
-    private static final String LIST_NO_TASK_MESSAGE = "No task in record.";
-    private static final String TASK_ADDED_MESSAGE = "Got it. I've added this task:";
-    private static final String TASK_REMOVED_MESSAGE = "Noted. I've removed this task:";
-    private static final String TASK_TOTAL_TASKS_STRING_FORMAT = "Now you have %d tasks in the list.";
-    private static final String TASK_MARK_AS_DONE_MESSAGE = "Nice! I've marked this task as done:";
-    private static final String ERROR_COMMAND_MESSAGE = "I'm sorry, but I don't know what that means :-(";
-    private static final String ERROR_EMPTY_DEADLINE_BY_MESSAGE = "The deadline's /by argument cannot be empty.";
-    private static final String ERROR_EMPTY_EVENT_AT_MESSAGE = "The event's /at argument cannot be empty.";
-    private static final String ERROR_WRITE_TO_FILE_MESSAGE = "Unable to write to file. :<(";
-
-    private static final String ERROR_EMPTY_TASK_NUMBER_MESSAGE = "Missing task number,"
-            + "please specify a valid task number.";
-    private static final String ERROR_INVALID_TASK_NUMBER_MESSAGE = "The task number you've entered is invalid.";
-    private static final String ERROR_NOT_A_TASK_NUMBER_MESSAGE =
-            "Please enter a valid positive integer for a task number.";
-    private static final String ERROR_EMPTY_TASK_STRING_FORMAT = "The description of a %s cannot be empty.";
-
-    private static ArrayList<Task> tasks = new ArrayList<>();
-
-    /**
-     * Records a new Todo task into the global task array.
-     * Ensures the task description is given in {@code commandArgs}
-     * Fails if task description argument value is invalid.
-     *
-     * @param commandArgs this should contain task description
-     * @see #validateTodoArguments(String) 
-     */
-    private static void recordTodo(String commandArgs) {
-        try {
-            String taskDescription = validateTodoArguments(commandArgs);
-            recordTask(new Todo(taskDescription));
-        } catch (DukeException e) {
-            TextUI.printError(e.getMessage());
-        }
+    public Duke() {
+        storage = new Storage();
+        tasks = new TaskList(storage.retrieveTasksFromFile());
+        ui = new TextUI();
     }
 
-    private static String validateTodoArguments(String commandArgs) throws DukeException {
-        String taskDescription = parseArgument(commandArgs, null);
-        if (isArgumentValueEmpty(taskDescription)) {
-            throw new DukeException(String.format(ERROR_EMPTY_TASK_STRING_FORMAT, "todo"));
+    public void run() {
+        ui.printWelcomeMessage();
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String userInput = ui.getUserInput();
+                Command c = CommandParser.parse(userInput);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
+            } catch (InvalidCommandException e) {
+                ui.printError(ERROR_COMMAND_MESSAGE);
+            }
         }
-        return taskDescription;
-    }
-
-    /**
-     * Records a new Deadline task into the global task array.
-     * Ensures the task description and deadline-by is given in {@code commandArgs}
-     * Fails if any argument value is invalid.
-     *
-     * @param commandArgs this should contain task description and deadline-by
-     * @see #validateDeadlineArguments(String) 
-     */
-    private static void recordDeadline(String commandArgs) {
-        try {
-            String[] deadlineArgValues = validateDeadlineArguments(commandArgs);
-            recordTask(new Deadline(deadlineArgValues[0], deadlineArgValues[1]));
-        } catch (DukeException e) {
-            TextUI.printError(e.getMessage());
-        }
-    }
-
-    private static String[] validateDeadlineArguments(String commandArgs) throws DukeException {
-        String taskDescription = parseArgument(commandArgs, null);
-        String deadlineBy = parseArgument(commandArgs, Command.DEADLINE_BY_TOKEN);
-        if (isArgumentValueEmpty(taskDescription)) {
-            throw new DukeException(String.format(ERROR_EMPTY_TASK_STRING_FORMAT, "deadline"));
-        }
-        if (isArgumentValueEmpty(deadlineBy)) {
-            throw new DukeException(ERROR_EMPTY_DEADLINE_BY_MESSAGE);
-        }
-        return new String[] {taskDescription, deadlineBy};
-    }
-
-    /**
-     * Records a new Event task into the global task array.
-     * Ensures the task description and event-at is given in {@code commandArgs}
-     * Fails if any argument value is invalid.
-     *
-     * @param commandArgs this should contain task description and event-at
-     * @see #validateEventArguments(String) 
-     */
-    private static void recordEvent(String commandArgs) {
-        try {
-            String[] eventArgValues = validateEventArguments(commandArgs);
-            recordTask(new Event(eventArgValues[0], eventArgValues[1]));
-        } catch (DukeException e) {
-            TextUI.printError(e.getMessage());
-        }
-    }
-
-    private static String[] validateEventArguments(String commandArgs) throws DukeException {
-        String taskDescription = parseArgument(commandArgs, null);
-        String eventAt = parseArgument(commandArgs, Command.EVENT_AT_TOKEN);
-        if (isArgumentValueEmpty(taskDescription)) {
-            throw new DukeException(String.format(ERROR_EMPTY_TASK_STRING_FORMAT, "event"));
-        }
-        if (isArgumentValueEmpty(eventAt)) {
-            throw new DukeException(ERROR_EMPTY_EVENT_AT_MESSAGE);
-        }
-        return new String[] {taskDescription, eventAt};
-    }
-
-    /**
-     * Records the given task into the global task array.
-     * Increments the global task count.
-     *
-     * @param task task object to be recorded
-     */
-    private static void recordTask(Task task) {
-        tasks.add(task);
-        TextUI.printStatements(TASK_ADDED_MESSAGE,
-                String.format(DOUBLE_SPACE_PREFIX_STRING_FORMAT, task),
-                String.format(TASK_TOTAL_TASKS_STRING_FORMAT, tasks.size()));
-        try {
-            FileIO.writeTasksToFile(tasks);
-        } catch (IOException e) {
-            TextUI.printError(ERROR_WRITE_TO_FILE_MESSAGE);
-        }
-    }
-
-    /**
-     * Prints all tasks (tasks are numbered based on addition).
-     */
-    private static void printAllTasks() {
-        TextUI.printStatement(LIST_TASK_MESSAGE);
-        for (int i = 0; i < tasks.size(); i++) {
-            Task task = tasks.get(i);
-            TextUI.printStatement(String.format("%d.%s", i + 1, task));
-        }
-    }
-
-    /**
-     * Lists all tasks.
-     */
-    private static void listTasks() {
-        if (tasks.size() == 0) {
-            TextUI.printStatements(LIST_NO_TASK_MESSAGE);
-        } else {
-            TextUI.printHorizontalLine();
-            printAllTasks();
-            TextUI.printHorizontalLine();
-        }
-    }
-
-    /**
-     * Marks a task as done based on the order of the list.
-     *
-     * @param commandArgs this should contain the task number to mark as done
-     * @see #validateTaskNumber(String)
-     */
-    private static void markTaskDone(String commandArgs) {
-        try {
-            int taskNumber = validateTaskNumber(commandArgs);
-            int taskIndex = taskNumber - 1;
-            tasks.get(taskIndex).setDone(true);
-            Task task = tasks.get(taskIndex);
-            TextUI.printStatements(TASK_MARK_AS_DONE_MESSAGE,
-                    String.format(DOUBLE_SPACE_PREFIX_STRING_FORMAT, task));
-            FileIO.writeTasksToFile(tasks);
-        } catch (NumberFormatException e) {
-            TextUI.printError(ERROR_NOT_A_TASK_NUMBER_MESSAGE);
-        } catch (DukeException e) {
-            TextUI.printError(e.getMessage());
-        } catch (IOException e) {
-            TextUI.printError(ERROR_WRITE_TO_FILE_MESSAGE);
-        }
-    }
-
-    private static int validateTaskNumber(String commandArgs) throws DukeException, NumberFormatException {
-        String argValue = parseArgument(commandArgs, null);
-        if (argValue == null) {
-            throw new DukeException(ERROR_EMPTY_TASK_NUMBER_MESSAGE);
-        }
-        int taskNumber = Integer.parseInt(argValue);
-        if (taskNumber <= 0 || taskNumber > tasks.size()) {
-            // Prevents the throwing of IndexOutOfBoundsException in the caller
-            throw new DukeException(ERROR_INVALID_TASK_NUMBER_MESSAGE);
-        }
-        return taskNumber;
-    }
-
-    private static void deleteTask(String commandArgs) {
-        try {
-            int taskNumber = validateTaskNumber(commandArgs);
-            int taskIndex = taskNumber - 1;
-            Task task = tasks.remove(taskIndex);
-            TextUI.printStatements(TASK_REMOVED_MESSAGE,
-                    String.format(DOUBLE_SPACE_PREFIX_STRING_FORMAT, task),
-                    String.format(TASK_TOTAL_TASKS_STRING_FORMAT, tasks.size()));
-            FileIO.writeTasksToFile(tasks);
-        } catch (NumberFormatException e) {
-            TextUI.printError(ERROR_NOT_A_TASK_NUMBER_MESSAGE);
-        } catch (DukeException e) {
-            TextUI.printError(e.getMessage());
-        } catch (IOException e) {
-            TextUI.printError(ERROR_WRITE_TO_FILE_MESSAGE);
-        }
-    }
-
-    private static void exitProgram() {
-        TextUI.printStatements(EXIT_MESSAGE);
-        System.exit(0);
-    }
-
-    /**
-     * Parses the user input and attempts to execute the command
-     * with the arguments.
-     */
-    private static void executeCommand(String userInput) {
-        String[] commandAndArgs = parseCommand(userInput);
-        String commandName = commandAndArgs[0];
-        String commandArgs = commandAndArgs[1];
-
-        switch (commandName) {
-        case Command.LIST_WORD:
-            listTasks();
-            break;
-        case Command.TODO_WORD:
-            recordTodo(commandArgs);
-            break;
-        case Command.DEADLINE_WORD:
-            recordDeadline(commandArgs);
-            break;
-        case Command.EVENT_WORD:
-            recordEvent(commandArgs);
-            break;
-        case Command.DONE_WORD:
-            markTaskDone(commandArgs);
-            break;
-        case Command.DELETE_WORD:
-            deleteTask(commandArgs);
-            break;
-        case Command.BYE_WORD:
-            // Does not fallthrough, exits program instead.
-            exitProgram();
-        default:
-            TextUI.printError(ERROR_COMMAND_MESSAGE);
-        }
-    }
-
-    /**
-     * Splits the user input into a command word and command arguments string.
-     *
-     * @return an array of size 2; first element is the command word
-     *         and second element is the arguments string
-     */
-    private static String[] parseCommand(String userInput) {
-        final String[] commandAndArgs = userInput.trim().split("\\s+", 2);
-        // parsedCommand's length after split will always be more than zero.
-        if (commandAndArgs.length == 1) {
-            return new String[] {commandAndArgs[0], ""};
-        }
-        return commandAndArgs;
-    }
-
-    /**
-     * Parses an argument value after a given token.
-     * Reads until a next token or the end of commandArgs string.
-     * If token is null, read from the start of the string until
-     * a next token or the end of commandArgs string.
-     *
-     * @param commandArgs a full string of command arguments
-     * @param token a string representing an option portion of an argument e.g. "/by"
-     * @return the argument value after the given token
-     */
-    private static String parseArgument(String commandArgs, String token) {
-        int readFromIndex = 0;
-        int readUntilIndex = commandArgs.length();
-        boolean hasToken = (token != null) && (commandArgs.contains(token));
-        boolean hasMissingToken = (token != null) && !(commandArgs.contains(token));
-        if (hasToken) {
-            readFromIndex = commandArgs.indexOf(token) + token.length();
-        } else if (hasMissingToken) {
-            return null;
-        }
-        int result = commandArgs.indexOf("/", readFromIndex);
-        if (result != -1) {
-            readUntilIndex = result;
-        }
-        return commandArgs.substring(readFromIndex, readUntilIndex).trim();
-    }
-
-    /**
-     * Checks if argument value string is empty.
-     *
-     * @param argValue argument value of a command argument
-     * @return true if empty, false if not empty
-     */
-    private static boolean isArgumentValueEmpty(String argValue) {
-        return (argValue == null) || (argValue.length() == 0);
     }
 
     public static void main(String[] args) {
-        TextUI.printWelcomeMessage();
-        tasks = FileIO.retrieveTasksFromFile();
-        while (true) {
-            String userCommand = TextUI.getUserInput();
-            executeCommand(userCommand);
-        }
+        new Duke().run();
     }
 }
