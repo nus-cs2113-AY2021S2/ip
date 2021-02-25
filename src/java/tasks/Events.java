@@ -1,6 +1,8 @@
-package duke;
+package tasks;
 
-public class Events extends Task{
+import tasks.Task;
+
+public class Events extends Task {
 
     private String by;
 

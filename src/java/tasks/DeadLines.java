@@ -1,6 +1,8 @@
-package duke;
+package tasks;
 
-public class DeadLines extends Task{
+import tasks.Task;
+
+public class DeadLines extends Task {
 
     private String by;
 

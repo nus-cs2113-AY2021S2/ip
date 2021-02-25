@@ -1,15 +1,31 @@
-package duke;
+package storage;
 
-import java.io.*;
+import tasks.DeadLines;
+import tasks.Events;
+import tasks.Task;
+import tasks.ToDos;
 
-public class Read extends Duke{
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.util.ArrayList;
 
-    static String home = System.getProperty("user.home");
-    static String sentence;
-    static String[] words;
-    public Read(){
+public class Storage {
+
+    public static Task[] tasks = new Task[100];
+    //Array list to store the task objects
+    public static ArrayList<Task> taskArrayList = new ArrayList<Task>();
+    //to store all the task in string and write to file
+    public static ArrayList<String> taskSentences = new ArrayList<String>();
+    public static int count = 0;
+    private static String home = System.getProperty("user.home");
+    private static String sentence;
+    private static String[] words;
+
+    public Storage(){
+
     }
-
 
     public static void readFile(){
 
@@ -47,12 +63,22 @@ public class Read extends Duke{
                         break;
                 }
             }
-
+            br.close();
         }catch(Exception ex){
             System.out.println("No file at the moment");
         }
-
     }
+
+    public static void writeFile(){
+        try{
+            BufferedWriter bw = new BufferedWriter(new FileWriter(home+"/tasklist.txt")); //write to this file
+            for(String s:taskSentences){
+                bw.write(s+"\n");
+            }
+            bw.close();
+        }catch(Exception ex){
+            System.out.println("Error writing to file");
+        }
+    }
+
 }
-
-
