@@ -6,6 +6,9 @@ import duke.task.Task;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+/**
+ * Class to deal with interactions with the user
+ */
 public class Ui {
 
     public  void printBye() {
@@ -93,5 +96,9 @@ public class Ui {
 
     public void showError(String message) {
         System.out.println("Warning! Error: " + message);
+    }
+
+    public void fileIsEmpty() {
+        System.out.println("File loaded is empty!");
     }
 }

@@ -7,12 +7,22 @@ import duke.Ui;
 import duke.task.Deadline;
 import duke.task.Event;
 
+/**
+ * Class to handle the list command
+ */
 public class ListCommand extends Command {
 
     public ListCommand(String fullCommand) {
         super(fullCommand);
     }
 
+    /**
+     * Carries out the list command and prints out all the tasks in the list
+     * And whether the tasks have been completed
+     * @param taskList the Task List object which has the current tasks
+     * @param ui The Ui object for user to interact with
+     * @throws IndexOutOfBoundsException If the user entered "list" when it is empty
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws IndexOutOfBoundsException {
 

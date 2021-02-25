@@ -4,7 +4,10 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
-public class ByeCommand extends Command{
+/**
+ * Class to handle the bye command
+ */
+public class ByeCommand extends Command {
 
     public ByeCommand(String fullCommand) {
         super(fullCommand);
@@ -20,6 +23,9 @@ public class ByeCommand extends Command{
         return false;
     }
 
+    /**
+     * @return true when user inputs bye to terminate the duke object
+     */
     @Override
     public boolean isExit() {
         return true;

@@ -5,6 +5,9 @@ import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
 
+/**
+ * Class to handle the done command
+ */
 public class DoneCommand extends Command {
 
     final int LENGTH_OF_DONE = 4;
@@ -13,6 +16,11 @@ public class DoneCommand extends Command {
         super(fullCommand);
     }
 
+    /**
+     * Carries out the done command and marks the specified task as done in the task list
+     * @param taskList the Task List object which has the current tasks
+     * @param ui The Ui object for user to interact with
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         if (!isValidInput()) {
@@ -25,6 +33,10 @@ public class DoneCommand extends Command {
         Ui.printDone(doneObj);
     }
 
+    /**
+     * Checks for the error case where the input is the command without description
+     * @return false if the command is invalid
+     */
     @Override
     public boolean isValidInput() {
         if (fullCommand.length() == LENGTH_OF_DONE) {
