@@ -7,7 +7,7 @@ import duke.Ui;
 /**
  * Class to handle the bye command
  */
-public class ByeCommand extends Command{
+public class ByeCommand extends Command {
 
     public ByeCommand(String fullCommand) {
         super(fullCommand);
