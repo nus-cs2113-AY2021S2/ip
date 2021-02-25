@@ -12,6 +12,10 @@ import java.io.FileWriter;
 import duke.command.DukeExceptions;
 import duke.task.*;
 
+/**
+ * Represents a platform for communication with the database
+ * Database in this case is a txt file
+ */
 public class Storage {
     public String storageFilePath;
 
@@ -19,6 +23,11 @@ public class Storage {
         this.storageFilePath = storageFilePath;
     }
 
+    /**
+     * Loads the past entries stored in the database
+     * @return An arraylist of tasks
+     * @throws DukeExceptions if any DukeExceptions are caught
+     */
     public ArrayList<Task> load() throws DukeExceptions{
         ArrayList<Task> taskList = new ArrayList<>();
         try {
@@ -38,6 +47,10 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Saves all tasks in the task list
+     * @param taskList The list of tasks to be saved
+     */
     public void save(TaskList taskList) {
         try {
             FileWriter fw = new FileWriter(storageFilePath);
@@ -51,6 +64,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads the stored task and create Task objects
+     * @param task The stored task
+     * @return The task object to be added into TaskList
+     * @throws DukeExceptions If the stored tasks has issues
+     */
     public Task initializeTask(String task) throws DukeExceptions{
         List<String> taskProperties = Arrays.asList(task.split("<separator>"));
         String taskType = taskProperties.get(0);

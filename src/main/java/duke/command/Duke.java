@@ -2,6 +2,9 @@ package duke.command;
 import duke.storage.Storage;
 import duke.task.*;
 
+/**
+ * Main class to be run.
+ */
 public class Duke {
     private final Storage storage;
     private TaskList taskList;
