@@ -1,5 +1,8 @@
 package exception;
 
+/**
+ * Represents a custom checked exception that occurs when the description of the command is empty.
+ */
 public class EmptyCommandException extends Throwable{
     private final String command;
     public EmptyCommandException(String command) {

@@ -1,5 +1,8 @@
 package exception;
 
+/**
+ * Represents a custom checked exception that occurs when the command that was input is unknown.
+ */
 public class UnknownCommandException extends Throwable {
     @Override
     public String getMessage() {
