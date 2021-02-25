@@ -5,7 +5,6 @@ import command.DeleteTask;
 import command.DoneTask;
 import command.FindTask;
 import constant.Constants;
-import exception.EmptyCommandException;
 import storage.DukeReader;
 import task.TaskList;
 import ui.Printer;
@@ -22,7 +21,7 @@ public class CommandParser implements Parser{
             if (input.equals(Constants.STRING_COMMAND_BYE)) {
                 return;
             } else if (input.equals(Constants.STRING_COMMAND_LIST)) {
-                Printer.printTaskList(TaskList.tasks, TaskList.taskCount);
+                Printer.printTaskList(TaskList.tasks);
             } else if (input.contains(Constants.STRING_COMMAND_DONE)) {
                 DoneTask.markTaskDone(input);
             } else if (input.contains(Constants.STRING_COMMAND_DELETE)) {

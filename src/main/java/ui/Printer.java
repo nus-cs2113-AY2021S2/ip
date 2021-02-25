@@ -3,7 +3,6 @@ package ui;
 import task.Task;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Printer {
 
@@ -27,7 +26,7 @@ public class Printer {
         System.out.println("____________________________________________________________");
     }
 
-    public static void printTaskList(ArrayList<Task> tasks, int taskCount) {
+    public static void printTaskList(ArrayList<Task> tasks) {
         System.out.println("____________________________________________________________");
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {

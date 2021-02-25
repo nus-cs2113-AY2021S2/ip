@@ -1,6 +1,5 @@
 package command;
 import constant.Constants;
-import exception.EmptyCommandException;
 import task.Task;
 import task.TaskList;
 import ui.Printer;
