@@ -4,15 +4,15 @@ deadline individual project /by 09/03/2022 2359
 event lecture /at 28/10/2022 1200
 list
 urgent
-done 1
+done 2
 list
 urgent
 find project
 find oesinr
 find
-delete 1
+delete 2
 list
-done 2
+done 1
 list
 todo
 todo      with a lot of whitespace         

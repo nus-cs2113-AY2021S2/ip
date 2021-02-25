@@ -16,16 +16,16 @@ public class Ui {
     public final Scanner scanner;
     public static final String COMMANDS = 
             "Commands:\n"
-            + "    list\n"
-            + "    urgent\n"
             + "    todo taskName\n"
             + "    deadline deadlineName /by dd/mm/yyyy hhmm\n" 
             + "    event eventName /at dd/mm/yyyy hhmm\n"
+            + "    list\n"
+            + "    urgent\n"
             + "    done taskNumber\n"
-            + "    delete taskNumber\n"
             + "    find searchString\n"
+            + "    delete taskNumber\n"
             + "    help\n"
-            + "    bye\n";
+            + "    bye";
     
     public Ui() {
         this(System.in);
@@ -50,7 +50,7 @@ public class Ui {
                 + "     /_/ /_/_/  /_/_/ /_/ /_/  /_____/\\__,_/_/|_|\\___/     \n";
         System.out.print(logo + "\n");
         System.out.print("What do you have to do today?\n");
-        System.out.print(COMMANDS);
+        System.out.print(COMMANDS + "\n");
         Command listCommand = new ListCommand();
         try {
             listCommand.execute(taskList, ui, parser);
@@ -149,6 +149,8 @@ public class Ui {
     public void displayUrgentTasks(String listOfTasksString) {
         String urgentTasksMessage = "Here are the urgent tasks due in the next week:" + listOfTasksString;
         printWithBorder(urgentTasksMessage);
+    }
+
     public void displayNoResultsFoundMessage(String commandArg) {
         String noResultsFoundMessage = "Your search for '" + commandArg + "' returned no results. ):";
         printWithBorder(noResultsFoundMessage);

@@ -6,14 +6,14 @@
 
 What do you have to do today?
 Commands:
-    list
-    urgent
     todo taskName
     deadline deadlineName /by dd/mm/yyyy hhmm
     event eventName /at dd/mm/yyyy hhmm
+    list
+    urgent
     done taskNumber
-    delete taskNumber
     find searchString
+    delete taskNumber
     help
     bye
 _______________________________________________________________________________
@@ -21,17 +21,16 @@ Here are the tasks in your list:
 _______________________________________________________________________________
 _______________________________________________________________________________
 Commands:
-    list
-    urgent
     todo taskName
     deadline deadlineName /by dd/mm/yyyy hhmm
     event eventName /at dd/mm/yyyy hhmm
+    list
+    urgent
     done taskNumber
-    delete taskNumber
     find searchString
+    delete taskNumber
     help
     bye
-
 _______________________________________________________________________________
 _______________________________________________________________________________
 Alrighty! I have added this new Todo:
@@ -60,21 +59,22 @@ Here are the urgent tasks due in the next week:
 _______________________________________________________________________________
 _______________________________________________________________________________
 Very nice! I've marked this task as done:
-    [TD][X] team project
+    [DL][X] individual project (by: 09/03/2022 2359)
 _______________________________________________________________________________
 _______________________________________________________________________________
 Here are the tasks in your list:
-    1. [TD][X] team project
-    2. [DL][ ] individual project (by: 09/03/2022 2359)
+    1. [TD][ ] team project
+    2. [DL][X] individual project (by: 09/03/2022 2359)
     3. [EV][ ] lecture (at: 28/10/2022 1200)
 _______________________________________________________________________________
 _______________________________________________________________________________
-Yay! You have no urgent task due in the next week!
+Here are the urgent tasks due in the next week:
+    1. [TD][ ] team project
 _______________________________________________________________________________
 _______________________________________________________________________________
 Here are the matching tasks in your list:
     1. [TD][ ] team project
-    2. [DL][X] individual project (by: 09/03/2021 2359)
+    2. [DL][X] individual project (by: 09/03/2022 2359)
 _______________________________________________________________________________
 _______________________________________________________________________________
 Your search for 'oesinr' returned no results. ):
@@ -85,21 +85,21 @@ Command type of 'find' must have a description! ):
 _______________________________________________________________________________
 _______________________________________________________________________________
 Yay! I've successfuly deleted this task:
-    [TD][X] team project
+    [DL][X] individual project (by: 09/03/2022 2359)
 _______________________________________________________________________________
 _______________________________________________________________________________
 Here are the tasks in your list:
-    1. [DL][ ] individual project (by: 09/03/2022 2359)
+    1. [TD][ ] team project
     2. [EV][ ] lecture (at: 28/10/2022 1200)
 _______________________________________________________________________________
 _______________________________________________________________________________
 Very nice! I've marked this task as done:
-    [EV][X] lecture (at: 28/10/2022 1200)
+    [TD][X] team project
 _______________________________________________________________________________
 _______________________________________________________________________________
 Here are the tasks in your list:
-    1. [DL][ ] individual project (by: 09/03/2022 2359)
-    2. [EV][X] lecture (at: 28/10/2022 1200)
+    1. [TD][X] team project
+    2. [EV][ ] lecture (at: 28/10/2022 1200)
 _______________________________________________________________________________
 _______________________________________________________________________________
 There was an ERROR!
@@ -168,16 +168,16 @@ _______________________________________________________________________________
 There was an ERROR!
 'invalid' is not a valid command!
 Commands:
-    list
-    urgent
     todo taskName
     deadline deadlineName /by dd/mm/yyyy hhmm
     event eventName /at dd/mm/yyyy hhmm
+    list
+    urgent
     done taskNumber
+    find searchString
     delete taskNumber
     help
     bye
-
 _______________________________________________________________________________
 _______________________________________________________________________________
 There was an ERROR!

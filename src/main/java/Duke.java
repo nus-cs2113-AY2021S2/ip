@@ -9,7 +9,7 @@ import duke.util.Ui;
  * The Duke program acts as a calendar that saves user's to-dos, deadlines, and events.
  * 
  * @author kwokyto
- * @version v1.0
+ * @version v0.2
  */
 public class Duke {
     public static Ui ui;
