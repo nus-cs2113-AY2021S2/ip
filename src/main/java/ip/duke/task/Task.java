@@ -1,5 +1,6 @@
 package ip.duke.task;
 
+
 public class Task {
     public String description;
     public boolean isDone;
@@ -8,6 +9,7 @@ public class Task {
         this.description = description;
         this.isDone = false;
     }
+
     public void setDone(boolean isDone) {
         this.isDone = isDone;
     }
@@ -26,7 +28,7 @@ public class Task {
     }
 
     public String toDataString() {
-        return "|" + getStatusNum() + "|" + description;
+        return " | " + getStatusNum() + " | " + description;
     }
 
 }

@@ -1,0 +1,2 @@
+D | 1 | submit a report | Sunday
+E | 0 | project meeting | Monday
