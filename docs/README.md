@@ -2,8 +2,15 @@
 
 ## Features 
 
-### Feature 1 
-Description of feature.
+### Adding a Todo: 'todo'
+
+Adds a Todo task to the TaskList
+
+Format: 'todo TASK_DESCRIPTION'
+
+Examples:
+* todo read book
+* todo return book
 
 ## Usage
 
