@@ -1,12 +1,22 @@
 package duke.command;
 
 import duke.TaskList;
+import duke.Ui;
 import duke.main.DukeException;
 
+/**
+ * Mark task requested as done
+ */
 public class DoneCommand implements Command {
     public DoneCommand(String input) {
     }
 
+    /**
+     * Mark task requested as done
+     *
+     * @param input command enter by user, eg done 1
+     * @throws DukeException
+     */
     public void execute(String input) throws DukeException {
         String[] command = input.trim().split(" ");
 
@@ -34,10 +44,7 @@ public class DoneCommand implements Command {
         } catch (NullPointerException e) { //to check if the number after done is a valid number for a task
             System.out.println("Error: input is invalid");
         }
-        end();
+        Ui.commandDone();
     }
 
-    public static void end() {
-        System.out.println("____________________________________________________________" + System.lineSeparator());
-    }
 }

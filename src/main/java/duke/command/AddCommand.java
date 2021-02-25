@@ -6,6 +6,9 @@ import duke.task.*;
 import duke.main.*;
 import java.util.Arrays;
 
+/**
+ * Add task to taskList
+ */
 public class AddCommand implements Command {
     public AddCommand(String input) {
     }
@@ -14,6 +17,12 @@ public class AddCommand implements Command {
     private static final String DEADLINE = "deadline";
     private static final String EVENT = "event";
 
+    /**
+     * Add task to task list
+     *
+     * @param input
+     * @throws DukeException
+     */
     public void execute(String input) throws DukeException {
 
         String[] command = input.trim().split(" ");
@@ -43,10 +52,13 @@ public class AddCommand implements Command {
                 System.out.println("This function is not recognized!");
         }
 
-        end();
+        Ui.commandDone();
     }
 
-    // get the descriptions of the tasks
+    /**
+     * Get the descriptions of the tasks
+     */
+
     public String getDescription(String input) {
         if (input.contains("/")) {
             String[] split = input.trim().split("/");
@@ -58,7 +70,12 @@ public class AddCommand implements Command {
         }
     }
 
-    // split the command to get Description of the tasks
+    /**
+     * Split the command to get description of the tasks
+     *
+     * @param commandPlusDescription
+     * @return description of the task
+     */
     private String splitCommand(String[] commandPlusDescription) {
 
         String[] description = new String[commandPlusDescription.length - 1];
@@ -73,7 +90,12 @@ public class AddCommand implements Command {
                 .trim();
     }
 
-    // get the deadline for Deadline tasks
+    /**
+     * Get the deadline for Deadline tasks
+     *
+     * @param input description of task
+     * @return deadline for Deadline tasks
+     */
     public static String getBy(String input) {
 
         String[] split = input.trim().split("/by");
@@ -81,7 +103,12 @@ public class AddCommand implements Command {
         return split[1];
     }
 
-    // get the on for Event tasks
+    /**
+     * Get the on date for Event tasks
+     *
+     * @param input description of task
+     * @return on date for Event tasks
+     */
     public static String getOn(String input) {
 
         String[] split = input.trim().split("/at");
@@ -89,21 +116,22 @@ public class AddCommand implements Command {
         return split[1];
     }
 
-    // adds task to the ArrayList of tasks
-    public static void addTask(Task t) throws DukeException {
+    /**
+     * Adds task to the ArrayList of tasks
+     *
+     * @param task
+     * @throws DukeException
+     */
+    public static void addTask(Task task) throws DukeException {
 
         // checks if there is already the same task in the list
         for (int i = 0; i < TaskList.numOfTasks; i++) {
-            if (TaskList.getTask(i).toString().equals(t.toString())) {
+            if (TaskList.getTask(i).toString().equals(task.toString())) {
                 throw new DukeException("Task already exists!");
             }
         }
 
-        TaskList.addTask(t);
-        Ui.taskAdded(t);
-    }
-
-    public static void end() {
-        System.out.println("____________________________________________________________" + System.lineSeparator());
+        TaskList.addTask(task);
+        Ui.taskAdded(task);
     }
 }

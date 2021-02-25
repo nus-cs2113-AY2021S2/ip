@@ -9,17 +9,27 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
+/**
+ * Store and load the taskList as a txt file
+ */
 public class Storage {
 
     public static String dir;
 
+    /**
+     * Create Storage object
+     *
+     * @param dir
+     */
     public Storage(String dir) {
         this.dir = dir;
     }
 
 
-
-    // checks if file path and file to save list exists and creates if not, then write list into file
+    /**
+     * Checks if file path and file to save list exists.
+     * Creates if it do not exist, then write list into file.
+     */
     public static void saveTasks() {
 
         Path path = Paths.get(dir, "data");
@@ -43,7 +53,13 @@ public class Storage {
         }
     }
 
-    // write list to file one by one, line by line
+    /**
+     * Write list to file one by one, line by line.
+     *
+     * @param filePath
+     * @param tasks
+     * @throws IOException
+     */
     private static void writeToFile(String filePath, ArrayList<Task> tasks) throws IOException {
 
         FileWriter fileWriter = new FileWriter(filePath);
@@ -57,7 +73,10 @@ public class Storage {
         bufferedWriter.close();
     }
 
-    //  checks if file path and file to load list exists and creates if not, then load list from file
+    /**
+     * Checks if file path and file to load list exists.
+     * Creates if it does not exist, then load list from file.
+     */
     public static void loadTasks() {
 
         //String dir = System.getProperty("user.dir");
@@ -90,7 +109,12 @@ public class Storage {
         }
     }
 
-    // converts line read from file into a Task type
+    /**
+     * Converts line read from file into a Task object
+     *
+     * @param data
+     * @return Task
+     */
     private static Task toTask(String data) {
 
         String[] read = data.trim().split("]");

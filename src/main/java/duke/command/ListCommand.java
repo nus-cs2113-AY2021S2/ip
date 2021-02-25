@@ -4,12 +4,19 @@ import com.sun.source.util.TaskListener;
 import duke.TaskList;
 import duke.Ui;
 
-
+/**
+ * Lists all the tasks in the taskList
+ */
 public class ListCommand implements Command {
 
     public ListCommand(String input) {
     }
 
+    /**
+     * List all the tasks in the taskList
+     *
+     * @param input
+     */
     public void execute(String input) {
 
         if (TaskList.numOfTasks == 0) {

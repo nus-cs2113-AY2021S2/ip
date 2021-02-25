@@ -5,10 +5,19 @@ import duke.main.DukeException;
 import duke.task.Task;
 import duke.TaskList;
 
+/**
+ * Delete task requested from taskList
+ */
 public class DeleteCommand implements Command {
     public DeleteCommand(String input) {
     }
 
+    /**
+     * Delete task requested from taskList
+     *
+     * @param input
+     * @throws DukeException
+     */
     public void execute(String input) throws DukeException {
 
         String[] command = input.trim().split(" ");
@@ -26,8 +35,7 @@ public class DeleteCommand implements Command {
                 throw new DukeException("Error: no such task index");
             }
 
-            Task task = TaskList.getTask(num - 1);
-            TaskList.deleteTask(task);
+            Task task = TaskList.deleteTask(num - 1);
             Ui.taskDeleted(task);
         } catch (NumberFormatException e) { //to check if the word after done is a number
             System.out.println("Error: input is not a number.");
@@ -35,11 +43,7 @@ public class DeleteCommand implements Command {
             System.out.println("Error: input is invalid");
         }
 
-        end();
-    }
-
-    public static void end() {
-        System.out.println("____________________________________________________________" + System.lineSeparator());
+        Ui.commandDone();
     }
 }
 

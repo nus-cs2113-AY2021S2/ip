@@ -3,11 +3,21 @@ package duke.command;
 import duke.TaskList;
 import duke.Ui;
 
+
+/**
+ * Find out whether there are tasks in the taskList with the given keyword
+ */
 public class FindCommand implements Command {
 
     public FindCommand(String input){
     }
 
+    /**
+     * Find out whether there are tasks in the taskList with the given keyword
+     * Prints the tasks if any or no such tasks found if there is none
+     *
+     * @param input This is the command input by the user eg. find read book
+     */
     public void execute(String input) {
         String[] keyword = input.split(" ", 2);
         if (TaskList.numOfTasks == 0) {

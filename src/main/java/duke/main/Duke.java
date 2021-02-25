@@ -17,12 +17,23 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Duke is a CLI application that can read and save tasks
+ * that the user inputs.
+ * It allows user to edit their list of tasks as wells as marking them
+ * as done when they are done.
+ */
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Create Duke object
+     *
+     * @param filePath
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -30,6 +41,9 @@ public class Duke {
         Storage.loadTasks();
     }
 
+    /**
+     * Run the program
+     */
     private void run() {
         Ui.greet();
         Scanner in = new Scanner(System.in);
@@ -48,6 +62,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Start the program
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }

@@ -1,11 +1,17 @@
 package duke;
 
 import duke.task.Task;
-import duke.TaskList;
 
+/**
+ * Prints responses to user input
+ */
 public class Ui {
 
     private final static String END = "____________________________________________________________";
+
+    /**
+     * Greet user when first start of application.
+     */
     public static void greet() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -18,24 +24,40 @@ public class Ui {
 
     }
 
+    /**
+     * Say good bye to user.
+     */
     public static void bye() {
         System.out.println("See you next time! BYE!");
         System.out.println(END);
     }
 
 
+    /**
+     * Show loading error
+     */
     public void showLoadingError() {
         System.out.println("ERROR!!!");
         System.out.println(END);
     }
 
 
+    /**
+     * Tell user that task has been added.
+     *
+     * @param task
+     */
     public static void taskAdded(Task task) {
         System.out.println("Got it. I've added this task:" + System.lineSeparator() + task.toString());
         System.out.println("Now you have " + TaskList.numOfTasks + " task in the list.");
         System.out.println(END);
     }
 
+    /**
+     * Tell user that task has been deleted.
+     *
+     * @param task
+     */
     public static void taskDeleted(Task task) {
         System.out.println("Noted. I've removed this task: ");
         System.out.println(task);
@@ -43,12 +65,19 @@ public class Ui {
         System.out.println(END);
     }
 
+    /**
+     * Tell user that task has been marked as done.
+     * @param task
+     */
     public static void taskDone(Task task) {
         System.out.println("Nice! I've marked this task as done: ");
         System.out.println(task);
         System.out.println(END);
     }
 
+    /**
+     * End of every command done.
+     */
     public static void commandDone() {
         System.out.println(END);
     }
