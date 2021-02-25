@@ -1,5 +1,8 @@
 package constant;
 
+/**
+ * Represents a class containing all the constants used by other classes.
+ */
 public class Constants {
     public static final int EVENT_STRING_LENGTH = 5;
     public static final int DEADLINE_STRING_LENGTH = 8;

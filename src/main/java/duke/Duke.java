@@ -9,6 +9,9 @@ import java.util.Scanner;
 
 import static task.TaskList.tasks;
 
+/**
+ * Represents the main class, which is the entry point of the program.
+ */
 public class Duke {
 
     public static void main(String[] args) {

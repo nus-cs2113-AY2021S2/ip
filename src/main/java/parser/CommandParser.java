@@ -11,8 +11,15 @@ import ui.Printer;
 
 import java.util.Scanner;
 
+/**
+ * Represents a class that parses the input by the user so that a command can be performed.
+ */
 public class CommandParser implements Parser{
-
+    /**
+     * Runs the command parser indefinitely, calls on other classes to perform the
+     * command, ends when the command is bye.
+     * @param scanner The Scanner object to be used for all user input.
+     */
     public static void parse(Scanner scanner) {
         TaskList.tasks = DukeReader.getTaskListFromFile();
         TaskList.taskCount = TaskList.tasks.size();

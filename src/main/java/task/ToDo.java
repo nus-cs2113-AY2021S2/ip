@@ -1,5 +1,8 @@
 package task;
 
+/**
+ * Represents a ToDo that contains a description.
+ */
 public class ToDo extends Task {
 
     public ToDo(String description) {

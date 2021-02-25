@@ -6,8 +6,14 @@ import task.Task;
 import task.TaskList;
 import ui.Printer;
 
+/**
+ * Represents the add command, has static methods that are called to add a new task to task list.
+ */
 public class AddTask {
-
+    /**
+     * Checks whether the task can be added successfully to the task list and does so if so.
+     * @param input The full entered by the user.
+     */
     public static void addNewTask(String input) {
         try {
             Task taskToAdd = TaskParser.processTaskToAdd(input);
@@ -19,6 +25,10 @@ public class AddTask {
         }
     }
 
+    /**
+     * Adds a task to the task list
+     * @param taskToAdd The task to add to the task list
+     */
     public static void addTaskSuccessful(Task taskToAdd) {
         TaskList.tasks.add(taskToAdd);
         TaskList.taskCount++;

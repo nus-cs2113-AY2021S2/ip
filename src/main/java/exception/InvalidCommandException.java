@@ -1,5 +1,8 @@
 package exception;
 
+/**
+ * Represents a custom checked exception that occurs when the command is invalid due to invalid description.
+ */
 public class InvalidCommandException extends Throwable {
     private final String command;
     public InvalidCommandException(String command) {
