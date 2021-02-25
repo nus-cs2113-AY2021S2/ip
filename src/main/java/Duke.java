@@ -1,7 +1,4 @@
-import models.Deadline;
-import models.Event;
-import models.Task;
-import models.Todo;
+import models.*;
 import io.DukePrint;
 
 import java.util.ArrayList;
@@ -13,11 +10,16 @@ import java.io.IOException;
 
 public class Duke {
 
-    private static final ArrayList<Task> tasks = new ArrayList<>();
     private static int taskCount = 0;
+    private TaskList taskList;
+    private DukePrint dukePrint;
+
+    public Duke() {
+        dukePrint = new DukePrint();
+    }
 
     public static void main(String[] args) {
-        DukePrint.printLogo();
+        dukePrint.printLogo();
 
         Scanner sc = new Scanner(System.in);
         String phrase;
