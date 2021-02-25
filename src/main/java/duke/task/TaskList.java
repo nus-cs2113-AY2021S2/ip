@@ -152,6 +152,7 @@ public class TaskList {
             for (Task task : tasks) {
                 if (task.getDescription().contains(keyword)) {
                     System.out.println(count + "." + task.toString());
+                    count++;
                 }
             }
         } catch (StringIndexOutOfBoundsException e) {
