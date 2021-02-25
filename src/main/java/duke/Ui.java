@@ -45,6 +45,10 @@ public class Ui {
         }
     }
 
+    public static void printMatchedIndex(int index) {
+        System.out.print(index + ".");
+    }
+
     public static void printTodoDescription() {
         System.out.println("Gotcha! I've added this task:");
         System.out.print("[T]");
