@@ -2,6 +2,9 @@ package duke.exception;
 
 import duke.command.CommandType;
 
+/**
+ * Exception for user input commands with missing description for the task
+ */
 public class MissingDescriptionException extends DukeException {
     private CommandType commandType;
 

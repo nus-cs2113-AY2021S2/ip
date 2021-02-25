@@ -1,23 +1,24 @@
 package duke.command;
 
+import duke.common.Messages;
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
 /**
- * Command to terminate Duke
+ * Command to list usage information
  */
-public class ByeCommand extends Command {
+public class HelpCommand extends Command {
     /**
-     * Constructor for ByeCommand. Sets the command type.
+     * Constructor for HelpCommand. Sets the command type.
      */
-    public ByeCommand() {
-        super(CommandType.BYE);
+    public HelpCommand() {
+        super(CommandType.HELP);
     }
 
     /**
-     * Executes printing of bye message.
+     * Handles printing usage information.
      * @param tasks
      * @param ui
      * @param storage
@@ -25,7 +26,7 @@ public class ByeCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.printBye();
+        ui.printText(Messages.INFO_HELP);
     }
 
     /**
@@ -33,6 +34,6 @@ public class ByeCommand extends Command {
      */
     @Override
     public boolean isExit() {
-        return true;
+        return false;
     }
 }

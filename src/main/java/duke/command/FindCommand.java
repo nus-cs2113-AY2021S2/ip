@@ -9,27 +9,40 @@ import duke.ui.Ui;
 
 import java.util.ArrayList;
 
-import static java.util.stream.Collectors.toList;
-
+/**
+ * Command to find tasks by keyword
+ */
 public class FindCommand extends Command {
+    /**
+     * Constructor for FindCommand. Takes in command arguments, sets command type and arguments.
+     * @param commandArgs command arguments from user input
+     */
     public FindCommand(String commandArgs) {
         super(CommandType.FIND, commandArgs);
     }
 
+    /**
+     * Handles finding tasks that match the keyword, and printing output information.
+     * @param tasks
+     * @param ui
+     * @param storage
+     * @throws DukeException
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ArrayList<Task> matches = (ArrayList<Task>) tasks.getTasks().stream()
-                .filter((t) -> t.getDescription().contains(commandArgs))
-                .collect(toList());
+        ArrayList<Task> matches = tasks.findTasksByKeyword(commandArgs);
         if (matches.size() == 0) {
-            ui.printText(Messages.MESSAGE_NOT_FOUND_TASKS + commandArgs);
+            ui.printText(Messages.INFO_TASKS_NOT_FOUND + commandArgs);
             return;
         }
-        ui.printText(Messages.MESSAGE_FOUND_TASKS);
+        ui.printText(Messages.INFO_FOUND_TASKS);
         matches.stream()
                 .forEach((m) -> ui.printText(" " + tasks.getTaskNumber(m) + ". " + m));
     }
 
+    /**
+     * @return boolean result if Duke should exit after execution of command
+     */
     @Override
     public boolean isExit() {
         return false;

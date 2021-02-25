@@ -1,5 +1,8 @@
 package duke.exception;
 
+/**
+ * Exception for invalid task number given by user
+ */
 public class InvalidTaskNumberException extends DukeException {
     private String taskNumber;
 
