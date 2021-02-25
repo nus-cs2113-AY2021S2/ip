@@ -42,4 +42,9 @@ Prerequisites: JDK 11, update IntelliJ to the most recent version.
 #### to search for all tasks in the list and find the task that contains the user's input keyword. Format: find [keyword].
 ### **bye**
 #### to end the program 
+### to take note: 
+#### 1.the file is loaded automatically everytime the user runs the program
+#### 2.the tasks added throughout the run of the program will be stored into the file 
+#### 3.after the user inputs "bye", the file is automatically cleared to a blank text file, and the user needs to rerun the program
+#### 4.feel free to explore all functions of Duke! 
 
