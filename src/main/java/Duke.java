@@ -6,7 +6,10 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    //public static Task[] tasks = new Task[100];
+    static int TODO_LENGTH = 5;
+    static int DEADLINE_LENGTH = 9;
+    static int EVENT_LENGTH = 6;
+
     public static ArrayList<Task> tasks = new ArrayList<>();
 
     public static void main(String[] args) {
@@ -48,13 +51,11 @@ public class Duke {
             } else if (command.contains("done")) {
                 taskCompleted(command);
 
-
                 // adds tasks into list
             } else if (command.contains("delete")) {
                 deleteTasks(command);
 
                 // add tasks to list
-
             } else {
                 addTasks(command);
             }
@@ -71,6 +72,7 @@ public class Duke {
         }
 
     }
+
     public static void uploadTasks(String pathOfFile) throws FileNotFoundException {
         File f = new File(pathOfFile);
         Scanner s = new Scanner(f);
@@ -83,7 +85,6 @@ public class Duke {
             } else {
                 tasks.add(new Event(task[2], task[3]));
             }
-
             if (task[1].equals("[X]")) {
                 tasks.get(tasks.size()-1).markAsDone();
             }
@@ -101,7 +102,7 @@ public class Duke {
         printDash();
         if (description.contains("todo")) {
             try {
-                description = description.substring(5);
+                description = description.substring(TODO_LENGTH);
                 runTodo(description);
             } catch (StringIndexOutOfBoundsException e) {
                 System.out.println("\tOOPS!!! The description of a todo cannot be empty.");
@@ -110,7 +111,7 @@ public class Duke {
             }
         } else if (description.contains("deadline")) {
             try {
-                description = description.substring(9);
+                description = description.substring(DEADLINE_LENGTH);
                 runDeadline(description);
             } catch (StringIndexOutOfBoundsException e) {
                 System.out.println("\tOOPS!!! The description of a deadline cannot be empty.");
@@ -119,7 +120,7 @@ public class Duke {
             }
         } else if (description.contains("event")) {
             try {
-                description = description.substring(6);
+                description = description.substring(EVENT_LENGTH);
                 runEvent(description);
             } catch (StringIndexOutOfBoundsException e) {
                 System.out.println("\tOOPS!!! The description of a event cannot be empty");
@@ -136,8 +137,9 @@ public class Duke {
         System.out.println("\tNow you have " + tasks.size() + " tasks in the list");
         printDash();
     }
-    public static void deleteTasks(String command) {
 
+    // remove tasks from list
+    public static void deleteTasks(String command) {
         command = command.replace("delete", " ");
         command = command.strip();
 
@@ -149,6 +151,7 @@ public class Duke {
         System.out.println("\tNow you have " + tasks.size() + " tasks in the list");
     }
 
+    // update list when tasks are done
     public static void taskCompleted(String command) {
         int count = 0;
         // remove done from string

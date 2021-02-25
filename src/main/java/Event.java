@@ -3,20 +3,23 @@ public class Event extends Task{
     public Event(String description, String by) {
         super(description);
         this.by = by;
+        this.SYMBOL = "E";
     }
-    @Override
-    public String toString() {
-        return "\t[E]" + super.toString() + "(" + "at:" + by + ")";
-    }
+
     public String getDescription() {
         return this.description;
     }
     public String getBy() {
         return this.by;
     }
-    @Override
 
+    @Override
+    public String toString() {
+        return "\t[" + SYMBOL + "]" + super.toString() + "(" + "at:" + by + ")";
+    }
+
+    @Override
     public String stringToSave() {
-        return "E ==> " + getStatusIcon() + " ==> " + getDescription() + " ==> " + getBy();
+        return SYMBOL + ARROW + getStatusIcon() + ARROW + getDescription() + ARROW + getBy();
     }
 }
