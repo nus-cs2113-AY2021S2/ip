@@ -1,4 +1,0 @@
-T | N | read book
-T | N | play
-T | N | sleep
-T | N | return book

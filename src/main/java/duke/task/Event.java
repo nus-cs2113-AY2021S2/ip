@@ -10,6 +10,12 @@ public class Event extends Task {
     protected LocalDate date;
     protected boolean hasDate = false;
 
+    /**
+     * Constructor for Event Class
+     *
+     * @param description String description of task
+     * @param at date which task takes place
+     */
     public Event(String description, String at) {
         super(description);
         this.at = at;
@@ -20,6 +26,12 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Returns a LocalDate object parsed from input String
+     *
+     * @param line String of date
+     * @return LocalDate object parsed
+     */
     public LocalDate parseDate(String line) {
         LocalDate parsedDate = null;
         try {
@@ -30,10 +42,20 @@ public class Event extends Task {
         return parsedDate;
     }
 
+    /**
+     * Returns the date which task takes place
+     *
+     * @return String of at parameter
+     */
     public String getAt() {
         return this.at;
     }
 
+    /**
+     * Returns a String representation of the task including the status icon, description and date which it happens
+     *
+     * @return String representation of task
+     */
     @Override
     public String toString() {
         if (hasDate) {
