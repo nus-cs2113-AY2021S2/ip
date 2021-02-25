@@ -1,5 +1,7 @@
 package duke.command;
 
+import duke.TaskList;
+import duke.Ui;
 import duke.task.*;
 import duke.main.*;
 import java.util.Arrays;
@@ -91,16 +93,14 @@ public class AddCommand implements Command {
     public static void addTask(Task t) throws DukeException {
 
         // checks if there is already the same task in the list
-        for (int i = 0; i < TaskManager.numOfTasks; i++) {
-            if (TaskManager.tasks.get(i).toString().equals(t.toString())) {
+        for (int i = 0; i < TaskList.numOfTasks; i++) {
+            if (TaskList.getTask(i).toString().equals(t.toString())) {
                 throw new DukeException("Task already exists!");
             }
         }
 
-        TaskManager.tasks.add(t);
-        TaskManager.numOfTasks++;
-        System.out.println("Got it. I've added this task:" + System.lineSeparator() + t.toString());
-        System.out.println("Now you have " + TaskManager.numOfTasks + " task in the list.");
+        TaskList.addTask(t);
+        Ui.taskAdded(t);
     }
 
     public static void end() {

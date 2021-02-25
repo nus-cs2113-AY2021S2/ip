@@ -1,6 +1,9 @@
 package duke.command;
 
-import duke.task.TaskManager;
+import com.sun.source.util.TaskListener;
+import duke.TaskList;
+import duke.Ui;
+
 
 public class ListCommand implements Command {
 
@@ -9,21 +12,17 @@ public class ListCommand implements Command {
 
     public void execute(String input) {
 
-        if (TaskManager.numOfTasks == 0) {
+        if (TaskList.numOfTasks <= 0) {
             System.out.println("You have no task! :)");
         }
         else {
             int count = 0;
-            while (count < TaskManager.numOfTasks) {
-                System.out.println(count + 1 + ": " + TaskManager.tasks.get(count));
+            while (count < TaskList.numOfTasks) {
+                System.out.println(TaskList.numOfTasks);
+                System.out.println(count + 1 + ": " + TaskList.getTask(count));
                 count++;
             }
         }
-
-        end();
-    }
-
-    public static void end() {
-        System.out.println("____________________________________________________________" + System.lineSeparator());
+        Ui.commandDone();
     }
 }

@@ -1,7 +1,7 @@
 package duke.command;
 
+import duke.TaskList;
 import duke.main.DukeException;
-import duke.task.TaskManager;
 
 public class DoneCommand implements Command {
     public DoneCommand(String input) {
@@ -18,13 +18,13 @@ public class DoneCommand implements Command {
 
         try {
             num = Integer.parseInt(command[1]);
-            if (num > TaskManager.tasks.size() || num < 1) {
+            if (num > TaskList.numOfTasks || num < 1) {
                 throw new DukeException("Error: no such task index");
             }
-            if (TaskManager.tasks.get(num - 1).isDone == false) {
-                TaskManager.tasks.get(num - 1).setAsDone();
+            if (TaskList.getTask(num - 1).isDone == false) {
+                TaskList.getTask(num - 1).setAsDone();
                 System.out.println("Nice! I've marked this task as done: ");
-                System.out.println(TaskManager.tasks.get(num - 1));
+                System.out.println(TaskList.getTask(num - 1));
             }
             else {
                 System.out.println("Task is already done!");

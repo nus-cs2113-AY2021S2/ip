@@ -1,8 +1,9 @@
 package duke.command;
 
+import duke.Ui;
 import duke.main.DukeException;
 import duke.task.Task;
-import duke.task.TaskManager;
+import duke.TaskList;
 
 public class DeleteCommand implements Command {
     public DeleteCommand(String input) {
@@ -21,16 +22,13 @@ public class DeleteCommand implements Command {
         try {
             num = Integer.parseInt(command[1]);
 
-            if (num > TaskManager.tasks.size() || num < 1) {
+            if (num > TaskList.numOfTasks || num < 1) {
                 throw new DukeException("Error: no such task index");
             }
 
-            Task task = TaskManager.tasks.get(num - 1);
-            TaskManager.tasks.remove(num - 1);
-            System.out.println("Noted. I've removed this task: ");
-            System.out.println(task);
-            TaskManager.numOfTasks -= 1;
-            System.out.println("Now you have " + TaskManager.numOfTasks + " tasks in the list.");
+            Task task = TaskList.getTask(num - 1);
+            TaskList.deleteTask(task);
+            Ui.taskDeleted(task);
         } catch (NumberFormatException e) { //to check if the word after done is a number
             System.out.println("Error: input is not a number.");
         } catch (NullPointerException e) { //to check if the number after done is a valid number for a task
