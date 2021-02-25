@@ -5,6 +5,13 @@ import duke.command.*;
 
 public class Parser {
 
+    /**
+     * Returns the corresponding Command object based on user input
+     *
+     * @param line user input to be parsed
+     * @return Command object
+     * @throws InvalidCommandException If given line does not have a valid command
+     */
     public static Command parse(String line) throws InvalidCommandException {
         Command command = null;
         if (line.equals("bye")) {
