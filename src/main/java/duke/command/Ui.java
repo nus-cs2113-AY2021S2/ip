@@ -84,4 +84,13 @@ public class Ui {
             task.printTask();
         }
     }
+
+    public void showFoundTasks(ArrayList<Task> foundTasks) {
+        Integer counter = 1;
+        System.out.println("Here are the matching tasks in your list:");
+        for (Task task: foundTasks) {
+            System.out.print("\t" + counter + ".");
+            task.printTask();
+        }
+    }
 }
