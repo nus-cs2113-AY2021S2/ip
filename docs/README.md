@@ -80,7 +80,7 @@ Format: `event TASK_DESCRIPTION /at DATETIME`
 
 Examples:
 * `event project meeting /at Aug 6th 2-4pm`
-* `event date ;-) /at 8am`
+* `event a REAL date :'''-) /at 8am`
 
 Expected Outcome:
 ```
@@ -173,16 +173,15 @@ Bye. Hope to see you again soon!
 ------------------------------------------------------------
 ```
 
-## Usage
+## Command Summary
 
-### `Keyword` - Describe action
-
-Describe action and its outcome.
-
-Example of usage: 
-
-`keyword (optional arguments)`
-
-Expected outcome:
-
-`outcome`
+Action | Format, Examples
+--------|------------------
+**Todo** | `todo TASK_DESCRIPTION` <br> e.g., `todo read book`
+**Deadline** | `deadline TASK_DESCRIPTION /by DATETIME` <br> e.g., `deadline return book /by June 6th`
+**Event** | `event TASK_DESCRIPTION /at DATETIME` <br> e.g., `event project meeting /at Aug 6th 2-4pm`
+**List** | `list`
+**Done** | `done INDEX`<br> e.g., `done 1`
+**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Find** | `find KEYWORD`<br> e.g., `find book`
+**Exit** | `bye`
