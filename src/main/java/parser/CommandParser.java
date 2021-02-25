@@ -3,7 +3,9 @@ package parser;
 import command.AddTask;
 import command.DeleteTask;
 import command.DoneTask;
+import command.FindTask;
 import constant.Constants;
+import exception.EmptyCommandException;
 import storage.DukeReader;
 import task.TaskList;
 import ui.Printer;
@@ -25,6 +27,8 @@ public class CommandParser implements Parser{
                 DoneTask.markTaskDone(input);
             } else if (input.contains(Constants.STRING_COMMAND_DELETE)) {
                 DeleteTask.deleteTask(input);
+            } else if (input.contains(Constants.STRING_COMMAND_FIND)) {
+                FindTask.findTask(input);
             } else {
                 AddTask.addNewTask(input);
             }
