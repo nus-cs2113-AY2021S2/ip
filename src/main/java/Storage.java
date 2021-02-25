@@ -25,6 +25,7 @@ public class Storage {
     }
 
 
+
     /**
      * Load file from local drive
      */
@@ -37,6 +38,14 @@ public class Storage {
     }
 
 
+    public static void clearFile(){
+        try{
+            writeToFile("/Users/chenlingcui/Desktop/totestduke/testduke.txt", " ");
+        }catch(IOException e){
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
+
+    }
     private static void writeToFile(String filePath, String textToAdd) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         fw.write(textToAdd);
@@ -48,6 +57,7 @@ public class Storage {
         fw.write(textToAppend);
         fw.close();
     }
+
 
     /**
      * Write to file or append to file

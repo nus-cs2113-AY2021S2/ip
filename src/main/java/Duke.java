@@ -142,5 +142,6 @@ public class Duke {
 
 
         show_exit_msg();
+        storage.clearFile();
     }
 }

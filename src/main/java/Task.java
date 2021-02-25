@@ -22,6 +22,18 @@ public class Task {
     public String getStatusIcon() {
         return (isDone ? "Y" : "N");
     }
+    public void setStatusIcon(String status){
+        if(status.equals("Y")){
+            this.isDone = true;
+        }
+        else{
+            this.isDone = false;
+        }
+    }
+
+    public void setDescription(String description){
+        this.description = description;
+    }
 
     /**
      * @return description of the task
