@@ -49,7 +49,7 @@ public class ListCommand extends Command {
         case "D":
             System.out.print("[D]");
             taskList.getTaskAtIndex(index - 1).printDescription();
-            System.out.println("by:" + Deadline.getBy() + ")");
+            System.out.println("(by:" + Deadline.getBy() + ")");
             break;
         case "E":
             System.out.print("[E]");
