@@ -47,10 +47,7 @@ public class CommandParser {
             result = new ListCommand(taskList, dukePrint);
             break;
         case "done":
-            result = new DoneCommand(
-                    taskList,
-                    Integer.parseInt(subStrings[1]),
-                    dukePrint);
+            result = new DoneCommand(taskList, Integer.parseInt(subStrings[1]), dukePrint);
             break;
         case "todo":
             result = new AddToDoCommand(taskList, dukePrint, command.substring(4).trim());
