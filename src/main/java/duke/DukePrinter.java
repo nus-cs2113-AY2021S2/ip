@@ -2,6 +2,9 @@ package duke;
 
 import java.util.ArrayList;
 
+/**
+ * Handles printing program output and error messages to the screen.
+ */
 public class DukePrinter {
 
     private static final String LINE_DIVIDER = "\t____________________________________________________________";

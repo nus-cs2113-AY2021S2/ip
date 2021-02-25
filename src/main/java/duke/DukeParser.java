@@ -1,13 +1,25 @@
 package duke;
 
-import duke.command.*;
-import duke.task.Task;
+import duke.command.ClearCommand;
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DefaultCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.FindCommand;
+import duke.command.HelpCommand;
+import duke.command.ListCommand;
+import duke.command.TodoCommand;
 
 import java.util.ArrayList;
 
 import java.util.Arrays;
 import java.util.Scanner;
 
+/**
+ * Handles the parsing of user input and imported data from files. This class also handles the execution of commands.
+ */
 public class DukeParser {
     /* List of all commands that Duke accepts */
     public static final String BYE_COMMAND = "bye";
@@ -108,7 +120,7 @@ public class DukeParser {
      * Execute the user's command as per the command specified in commandTokens.
      * Returns a boolean value to indicate if the program should exit after it has finished executing the
      * previous command.
-     * 
+     *
      * @param dukeTaskList list of tasks to operate on
      * @param commandTokens tokenized user input
      * @return a boolean value to indicate if the program should exit

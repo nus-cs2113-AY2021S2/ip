@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Manages reading and writing data to and from files.
+ */
 public class DukeFileManager {
     private final static int MINIMUM_NUMBER_OF_ARGS = 3;
     private final static int OPTIONAL_NUMBER_OF_ARGS = 4;
@@ -20,6 +23,12 @@ public class DukeFileManager {
     private Scanner reader;
     private FileWriter writer;
 
+    /**
+     * Creates a new DukeFileManager object pointing to the specified filepath
+     *
+     * @param directory the directory to read/write the file from
+     * @param filename the file to be read/written to.
+     */
     public DukeFileManager(String directory, String filename) {
         this.directory = directory;
         this.filename = filename;
@@ -37,6 +46,11 @@ public class DukeFileManager {
         }
     }
 
+    /**
+     * Reads task data from the specified CSV file, and returns the imported data as an ArrayList of Strings
+     *
+     * @return an ArrayList of Strings containing each line from the input file
+     */
     public ArrayList<String> readFromFile() throws IOException {
         openFile();
         reader = new Scanner(file);
@@ -49,6 +63,11 @@ public class DukeFileManager {
         return taskStrings;
     }
 
+    /**
+     * Writes task data to the specified CSV file.
+     *
+     * @param tasksAsCSV an ArrayList of Strings containing task information.
+     */
     public void writeToFile(ArrayList<String> tasksAsCSV) throws IOException {
         openFile();
         writer = new FileWriter(file);
