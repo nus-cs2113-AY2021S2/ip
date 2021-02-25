@@ -41,6 +41,8 @@ public class Duke {
             + "Please try again\n";
     public static final String GENERIC_ERROR_MESSAGE = "Something went wrong!\n";
 
+    public static final String FILENAME = "data.txt";
+
     public static void main(String[] args) {
         ArrayList<Task> list = new ArrayList<>();
         int taskCount = handleFile(list);
@@ -53,7 +55,7 @@ public class Duke {
     private static int handleFile(ArrayList<Task> list) {
         int taskCount = 0;
         try {
-            File saveData = new File("data.txt");
+            File saveData = new File(FILENAME);
             if(saveData.createNewFile()) { //file is created
                 System.out.println("data.txt created");
             } else { //file already exists
@@ -159,7 +161,7 @@ public class Duke {
     }
 
     public static int addToDo(String input, ArrayList<Task> list, int index) {
-        if(input==null) {
+        if(input == null) {
             System.out.print(LINE + NO_DESCRIPTION_MESSAGE + LINE);
         } else {
             list.add(new ToDo(input));
@@ -231,11 +233,11 @@ public class Duke {
         try {
             int taskNo = Integer.parseInt(input);
             if (taskNo <= max && taskNo > 0) { //no. is valid
-                if (list.get(taskNo-1).getStatus()) {
-                    System.out.print(LINE + "Task \"" + list.get(taskNo-1).getDesc() + "\""
+                if (list.get(taskNo - 1).getStatus()) {
+                    System.out.print(LINE + "Task \"" + list.get(taskNo - 1).getDesc() + "\""
                             + TASK_ALREADY_CHECKED_MESSAGE + LINE);
                 } else {
-                    list.get(taskNo-1).check();
+                    list.get(taskNo - 1).check();
                     System.out.print(LINE + TASK_CHECKED_MESSAGE);
                     System.out.println("  " + list.get(taskNo - 1).getStatusSymbol() + list.get(taskNo - 1).getDesc());
                     if (Task.getTasksRemaining() == 0) {
@@ -256,11 +258,11 @@ public class Duke {
         try {
             int taskNo = Integer.parseInt(input);
             if (taskNo <= max && taskNo > 0) { //no. is valid
-                if (!list.get(taskNo-1).getStatus()) {
-                    System.out.print(LINE + "Task \"" + list.get(taskNo-1).getDesc() + "\""
+                if (!list.get(taskNo - 1).getStatus()) {
+                    System.out.print(LINE + "Task \"" + list.get(taskNo - 1).getDesc() + "\""
                             + TASK_NOT_CHECKED_MESSAGE + LINE);
                 } else {
-                    list.get(taskNo-1).uncheck();
+                    list.get(taskNo - 1).uncheck();
                     System.out.print(LINE + TASK_UNCHECKED_MESSAGE);
                     System.out.println("  " + list.get(taskNo - 1).getStatusSymbol() + list.get(taskNo - 1).getDesc());
                     System.out.print(LINE);
@@ -291,7 +293,7 @@ public class Duke {
 
     private static void saveData(ArrayList<Task> list) {
         try {
-            FileWriter fw = new FileWriter("data.txt");
+            FileWriter fw = new FileWriter("FILENAME");
             fw.write(composeOutput(list.get(0)) + System.lineSeparator());
 
             for (int i = 1; i< list.size(); i++) {
