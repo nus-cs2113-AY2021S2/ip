@@ -34,6 +34,8 @@ public class Parser {
             newCommand = new DeleteCommand(userCommands.subList(1, userCommands.size()));
         } else if (userCommands.get(0).equals("bye")) {
             newCommand = new ExitCommand();
+        } else if (userCommands.get(0).equals("find")) {
+            newCommand = new FindCommand(String.join(" ", userCommands.subList(1, userCommands.size())));
         } else if (userCommands.get(0).equals("todo")) {
             String taskType = userCommands.get(0);
             String taskNameTodo = String.join(" ", userCommands.subList(1, userCommands.size()));
