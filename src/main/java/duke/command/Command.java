@@ -40,6 +40,9 @@ public class Command {
         case "delete":
             processCommand(userInput.getOtherArguments(), CommandType.delete);
             break;
+        case "search":
+            searchDate(userInput.getOtherArguments());
+            break;
         case "bye":
             isLoop = isEndProgram(userInput.getOtherArguments());
             break;
@@ -49,8 +52,16 @@ public class Command {
         return isLoop;
     }
 
+    private void searchDate(String[] arguments) {
+        if (arguments.length != 1) {
+            System.out.printf("Command \"%s\" requires a date argument. Please try again!\n", "find");
+            return;
+        }
+        record.searchDate(arguments[0]);
+    }
+
     private void processCommand(String[] arguments, CommandType commandType) {
-        if (arguments.length == 0) {
+        if (arguments.length != 1) {
             System.out.printf("Command \"%s\" requires an integer argument. Please try again!\n", commandType);
             return;
         }
@@ -62,7 +73,7 @@ public class Command {
             isArgumentInteger = false;
         }
 
-        if (arguments.length == 1 && isArgumentInteger) {
+        if (isArgumentInteger) {
             switch (commandType) {
             case delete:
                 record.deleteRecord(targetRecordIndex);
