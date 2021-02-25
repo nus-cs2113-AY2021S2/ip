@@ -4,18 +4,20 @@ import storage.Storage;
 import task.TaskManager;
 import ui.Ui;
 
+import java.io.FileNotFoundException;
+
 public class Duke {
     private Ui ui;
     private TaskManager taskList;
     private Storage storage;
 
-    public Duke(){
+    public Duke() throws FileNotFoundException {
         ui = new Ui();
         taskList = new TaskManager();
         storage = new Storage();
     }
 
-    public void run() {
+    public void run(){
         boolean isBye = false;
         ui.printMenu();
         do{
@@ -30,7 +32,7 @@ public class Duke {
 
 
     public static class Main {
-        public static void main(String[] args) {
+        public static void main(String[] args) throws FileNotFoundException {
             new Duke().run();
         }
     }

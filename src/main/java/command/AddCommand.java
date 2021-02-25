@@ -6,8 +6,8 @@ import task.TaskManager;
 
 public class AddCommand extends Command{
     @Override
-    public void executeCommand(String userInput, TaskManager taskManager) {
+    public void executeCommand(String userInput, TaskManager taskList){
         Task taskToAdd = Parser.getTask(userInput);
-        taskManager.addTask(taskToAdd);
+        taskList.addTask(taskToAdd);
     }
 }
