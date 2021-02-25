@@ -77,9 +77,9 @@ public class Duke {
                 Task currentTask = tasks.get(i);
                 System.out.print(i + 1 + ". " + currentTask.getTaskType() + currentTask.getStatusIcon() + " "
                         + currentTask.getDescription());
-                if (currentTask.getTaskType().equals("[D]"))
+                if (currentTask.getTaskType().equals("[D]")) {
                     System.out.print(" (by: " + currentTask.getDateTime() + ")");
-                else if (currentTask.getTaskType().equals("[E]")) {
+                } else if (currentTask.getTaskType().equals("[E]")) {
                     System.out.print(" (at: " + currentTask.getDateTime() + ")");
                 }
                 System.out.print("\n");
