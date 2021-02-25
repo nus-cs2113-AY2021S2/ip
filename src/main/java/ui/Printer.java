@@ -64,4 +64,25 @@ public class Printer {
         System.out.println("The index you entered is out of bounds, please enter a valid index.");
         System.out.println("____________________________________________________________");
     }
+
+    public static void keyWordCannotBeEmptyMessage() {
+        System.out.println("____________________________________________________________");
+        System.out.println("Keyword for find command cannot be empty");
+        System.out.println("____________________________________________________________");
+    }
+
+    public static void printNoMatchingTasks(String keyword) {
+        System.out.println("____________________________________________________________");
+        System.out.println("No tasks matching with " + keyword + " was found in your task list.");
+        System.out.println("____________________________________________________________");
+    }
+
+    public static void printMatchingTaskList(ArrayList<Task> matchingTasks) {
+        System.out.println("____________________________________________________________");
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < matchingTasks.size(); i++) {
+            System.out.printf("%d. %s%n", i + 1, matchingTasks.get(i));
+        }
+        System.out.println("____________________________________________________________");
+    }
 }
