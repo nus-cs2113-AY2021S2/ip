@@ -9,7 +9,7 @@ public class PrepareDeadline extends Storage {
         String task = userInput.substring(9, userInput.indexOf("/")-1);
         String by = userInput.substring(userInput.indexOf("/") + 4, userInput.length());
         tasks[count] = new DeadLines(task, by);
-        taskArrayList.add(tasks[count]); //store in array for deleting
+        taskArrayList.add(tasks[count]); //store in array list for easy deleting
         taskSentences.add("D"+"|"+tasks[count].getDone()+"|"+task+"|"+by); //store in array list for writing
         System.out.println("Got it. I've added this task:");
         System.out.print("  ");

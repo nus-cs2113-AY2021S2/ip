@@ -46,7 +46,7 @@ public class Storage {
                     case "D":
                         tasks[count] = new DeadLines(words[2],words[3]); //create new deadline object
                         taskArrayList.add(tasks[count]);   //add deadline object to arraylist
-                        taskSentences.add("D"+"|"+words[1]+"|"+words[2]+words[3]); //update the task array list
+                        taskSentences.add("D"+"|"+words[1]+"|"+words[2]+"|"+words[3]); //update the task array list
                         if(words[1].equals("true")){     //if read from file is done set the object as done
                             tasks[count].setDone(true);
                         }
@@ -55,7 +55,7 @@ public class Storage {
                     case "E":
                         tasks[count] = new Events(words[2],words[3]); //create new events object
                         taskArrayList.add(tasks[count]);   //add event object to arraylist
-                        taskSentences.add("E"+"|"+words[1]+"|"+words[2]+words[3]); //update the task array list
+                        taskSentences.add("E"+"|"+words[1]+"|"+words[2]+"|"+words[3]); //update the task array list
                         if(words[1].equals("true")){     //if read from file is done set the object as done
                             tasks[count].setDone(true);
                         }
