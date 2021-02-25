@@ -14,7 +14,7 @@ public class Command {
     private final Record record;
     private final Scanner scan = new Scanner(System.in);
 
-    public Command(Record record){
+    public Command(Record record) {
         this.record = record;
     }
 
@@ -40,6 +40,9 @@ public class Command {
         case "delete":
             processCommand(userInput.getOtherArguments(), CommandType.delete);
             break;
+        case "find":
+            findRecords(userInput.getOtherArguments());
+            break;
         case "search":
             searchDate(userInput.getOtherArguments());
             break;
@@ -50,6 +53,15 @@ public class Command {
             throw new DukeException();
         }
         return isLoop;
+    }
+
+
+    private void findRecords(String[] arguments) {
+        if (arguments.length != 1) {
+            System.out.println("Command \"find\" requires 1 argument as keyword. Please try again!");
+            return;
+        }
+        record.findRecords(arguments[0]);
     }
 
     private void searchDate(String[] arguments) {

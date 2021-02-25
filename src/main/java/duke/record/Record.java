@@ -162,9 +162,28 @@ public class Record {
     }
 
     public void showList() {
+        boolean hasRecord = false;
         System.out.println("Here is your task List:");
         for (int i = 0; i < records.size(); i++) {
             System.out.println((i + 1) + ". " + records.get(i));
+            hasRecord = true;
+        }
+        if (!hasRecord) {
+            System.out.println("(Null)");
+        }
+    }
+
+    public void findRecords(String keyword) {
+        boolean hasRecord = false;
+        System.out.printf("Here is your task List with keyword %s:\n", keyword);
+        for (int i = 0; i < records.size(); i++) {
+            if (records.get(i).getTaskName().contains(keyword)) {
+                System.out.println((i + 1) + ". " + records.get(i));
+                hasRecord = true;
+            }
+        }
+        if (!hasRecord) {
+            System.out.println("(Null)");
         }
     }
 
