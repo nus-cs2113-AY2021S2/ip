@@ -33,9 +33,6 @@ public abstract class Task {
     }
 
     public String exportAsCSV() {
-        /*
-         * TODO: Use a proper CSV export library to handle exporting, so that we can deal with special characters
-         */
         return isDone + "," + taskType + "," + description;
     }
 }

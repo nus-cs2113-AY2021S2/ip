@@ -3,7 +3,6 @@ package duke.command;
 import duke.DukeException;
 import duke.DukePrinter;
 import duke.DukeTaskList;
-import duke.task.Task;
 
 import java.util.ArrayList;
 
@@ -23,11 +22,7 @@ public class DoneCommand extends Command {
 
         String taskNumberString = arguments.get(TASK_NUMBER);
         int taskNumber = Integer.parseInt(taskNumberString);
-        if (taskNumber < 1 || taskNumber > dukeTaskList.getNumberOfTasks()) {
-            throw new DukeException("That's an invalid task number!");
-        }
-
-        Task doneTask = dukeTaskList.markTaskAsDone(taskNumber);
-        DukePrinter.printTaskMarkedDone(doneTask.toString());
+        String doneTaskString = dukeTaskList.markTaskAsDone(taskNumber);
+        DukePrinter.printTaskMarkedDone(doneTaskString);
     }
 }

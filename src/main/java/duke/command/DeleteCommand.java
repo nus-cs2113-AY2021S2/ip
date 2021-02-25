@@ -3,7 +3,6 @@ package duke.command;
 import duke.DukeException;
 import duke.DukePrinter;
 import duke.DukeTaskList;
-import duke.task.Task;
 
 import java.util.ArrayList;
 
@@ -16,19 +15,15 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute() throws DukeException {
+    public void execute() throws DukeException, NumberFormatException{
         if (arguments.size() != REQUIRED_NUMBER_OF_ARGS) {
             throw new DukeException("Please give me more details about the task!");
         }
 
         String taskNumberString = arguments.get(TASK_NUMBER);
         int taskNumber = Integer.parseInt(taskNumberString);
-        if (taskNumber < 1 || taskNumber > dukeTaskList.getNumberOfTasks()) {
-            throw new DukeException("That's an invalid task number!");
-        }
-
-        Task deletedTask = dukeTaskList.deleteTask(taskNumber);
+        String deletedTaskString = dukeTaskList.deleteTask(taskNumber);
         int numberOfTasks = dukeTaskList.getNumberOfTasks();
-        DukePrinter.printTaskDeleted(deletedTask.toString(), numberOfTasks);
+        DukePrinter.printTaskDeleted(deletedTaskString, numberOfTasks);
     }
 }
