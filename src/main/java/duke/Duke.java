@@ -44,11 +44,11 @@ public class Duke {
 
     public static ArrayList<Task> tasks = new ArrayList<>();
 
-    public static void goodbye() {
+    public static void printGoodbyeMessage() {
         System.out.println(GOODBYE_MESSAGE);
     }
 
-    public static void welcome() {
+    public static void printWelcomeMessage() {
         System.out.println(WELCOME_MESSAGE);
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
         System.out.println(LINE);
@@ -60,18 +60,10 @@ public class Duke {
 
     public static void validateInput(String input, String type) throws DukeException {
         try {
-            if (type.equals("done") && (!(input.strip()).matches("[-+]?\\\\d*\\\\.?\\\\d+\n"))) {
+            if (type.equals("done") && (!(input.strip()).matches("[-+]?\\\\d*\\\\.?\\\\d+\n"))
+                || (type.equals("todo") && (input.strip().length() <= 0))
+                    || (!input.contains("/") && (type.equals("deadline") || type.equals("event")))) {
                 throw new DukeException();
-            } else if (type.equals("todo") && (input.strip().length() <= 0)) {
-                throw new DukeException();
-            } else {
-                if (!input.contains("/")) {
-                    if (type.equals("deadline")) {
-                        throw new DukeException();
-                    } else if (type.equals("event")) {
-                        throw new DukeException();
-                    }
-                }
             }
         } catch (IndexOutOfBoundsException e) {
             printInvalidMessage(type);
@@ -256,7 +248,7 @@ public class Duke {
                 showList();
                 break;
             case "bye":
-                goodbye();
+                printGoodbyeMessage();
                 isExit = true;
                 break;
             case "save":
@@ -287,7 +279,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        welcome();
+        printWelcomeMessage();
         loadData();
         getInput();
     }
