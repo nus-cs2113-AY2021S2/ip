@@ -1,5 +1,9 @@
 package duke.task;
 
+import duke.task.dateTime.DateTime;
+
+import java.time.LocalDate;
+
 abstract public class Task {
     private final String taskName;
     private boolean isDone;
@@ -8,6 +12,8 @@ abstract public class Task {
         this.taskName = taskName;
         this.isDone = false;
     }
+
+    abstract public LocalDate getDate();
 
     public void setAsDone() {
         isDone = true;

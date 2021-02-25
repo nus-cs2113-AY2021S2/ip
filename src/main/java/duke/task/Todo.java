@@ -1,11 +1,18 @@
 package duke.task;
 
+import java.time.LocalDate;
+
 public class Todo extends Task {
 
     public static final String TASK_TYPE = "T";
 
     public Todo(String taskName) {
         super(taskName);
+    }
+
+    @Override
+    public LocalDate getDate() {
+        return null;
     }
 
     @Override
