@@ -4,7 +4,9 @@ import duke.tasks.Task;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Todo;
-import duke.tasks.DukeException;
+import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.tasklist.TaskList;
 
 //import java.io.PrintWriter;
 import java.util.Scanner;
@@ -234,38 +236,38 @@ public class Duke {
         }
     }
 
-    public static void getInput() {
-        boolean isExit = false;
-        while (!isExit) {
-            Scanner sc = new Scanner(System.in);
-            String inputCommand = sc.nextLine();
-            if (inputCommand.startsWith("done")) {
-                markAsDone(inputCommand);
-            } else if (inputCommand.startsWith("todo")) {
-                addToDo(inputCommand);
-            } else if (inputCommand.startsWith("deadline")) {
-                addDeadline(inputCommand);
-            } else if (inputCommand.startsWith("event")) {
-                addEvent(inputCommand);
-            } else if (inputCommand.startsWith("delete")) {
-                deleteTask(inputCommand);
-            } else if (inputCommand.equals("list")) {
-                showList();
-            } else if (inputCommand.equals("bye")) {
-                printGoodbyeMessage();
-                isExit = true;
-            } else if (inputCommand.equals("save")) {
-                saveData();
-            } else {
-                printInvalidMessage(inputCommand);
-            }
-            System.out.println(LINE);
-        }
-    }
+//    public static void getInput() {
+//        boolean isExit = false;
+//        while (!isExit) {
+//            Scanner sc = new Scanner(System.in);
+//            String inputCommand = sc.nextLine();
+//            if (inputCommand.startsWith("done")) {
+//                markAsDone(inputCommand);
+//            } else if (inputCommand.startsWith("todo")) {
+//                addToDo(inputCommand);
+//            } else if (inputCommand.startsWith("deadline")) {
+//                addDeadline(inputCommand);
+//            } else if (inputCommand.startsWith("event")) {
+//                addEvent(inputCommand);
+//            } else if (inputCommand.startsWith("delete")) {
+//                deleteTask(inputCommand);
+//            } else if (inputCommand.equals("list")) {
+//                showList();
+//            } else if (inputCommand.equals("bye")) {
+//                printGoodbyeMessage();
+//                isExit = true;
+//            } else if (inputCommand.equals("save")) {
+//                saveData();
+//            } else {
+//                printInvalidMessage(inputCommand);
+//            }
+//            System.out.println(LINE);
+//        }
+//    }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException{
         printWelcomeMessage();
         loadData();
-        getInput();
+        Parser.getInput();
     }
 }
