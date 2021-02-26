@@ -2,6 +2,12 @@ package duke;
 
 import java.io.IOException;
 
+/**
+ * The main driver for the Duke program
+ * a to-do list tracker that allows users to input 3 types of tasks:
+ * Todos, Events, and Deadlines
+ * as well as the functions to delete, find, or mark a task as done.
+ */
 public class Duke {
 
     public static void main(String[] args) {

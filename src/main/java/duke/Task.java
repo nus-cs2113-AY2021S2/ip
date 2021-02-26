@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Represents a Task superclass object that contains a description, and whether the Task is Done.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;

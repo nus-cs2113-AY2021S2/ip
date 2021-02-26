@@ -1,6 +1,10 @@
 package duke;
 
-public class Event extends Task{
+/**
+ * Represents a Event subclass object that contains description, whether Task is done,
+ * and also Event Time which is inputted with keyword "/at"
+ */
+public class Event extends Task {
     protected String at;
 
     public Event(String description, String at) {
