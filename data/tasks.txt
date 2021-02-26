@@ -1,3 +1,2 @@
-[T][✘] run
 [T][✘] read book
-[D][ ]  read (by: Sunday)
+[D][✘]  return book (by:h)
