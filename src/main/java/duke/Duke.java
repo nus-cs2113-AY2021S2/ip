@@ -2,6 +2,7 @@ package duke;
 
 import duke.exception.IllegalTaskCommandException;
 import duke.parser.Parser;
+import duke.storage.Storage;
 import duke.task.*;
 import duke.ui.Ui;
 
@@ -27,14 +28,14 @@ public class Duke {
                 timestampHeader = Parser.getTimestampHeader(userInput);
                 timestamp = Parser.getTimestamp(userInput);
                 Task event = new Event(errand, timestamp, timestampHeader);
-                //TaskList.addToTaskList(event);
+                TaskList.addToTaskList(event);
                 break;
             case "DEADLINE":
                 errand = Parser.getErrand(userInput);
                 timestampHeader = Parser.getTimestampHeader(userInput);
                 timestamp = Parser.getTimestamp(userInput);
                 Task deadline = new Deadline(errand, timestamp, timestampHeader);
-                //TaskList.addToTaskList(deadline);
+                TaskList.addToTaskList(deadline);
                 break;
             case "LIST":
                 TaskList.printList();
@@ -55,8 +56,14 @@ public class Duke {
                 break;
             case "DELETE":
                 errand = Parser.getSubstring(userInput);
-                System.out.println("DELETE WAS ENTERED!");
-                //TaskList.deleteTask(errand); // In this case, errand is the index of the task
+                index = Validator.validateIndex(errand);
+                if (index == -1) {
+                    throw new IllegalTaskCommandException("There is no such task, Commander!");
+                } else if (index == -2) {
+                    throw new IllegalTaskCommandException("Only numbers are allowed commander!");
+                } else {
+                    TaskList.deleteTask(index);
+                }
                 break;
             default:
                 throw new IllegalTaskCommandException("Unacceptable Command!");
@@ -66,7 +73,7 @@ public class Duke {
             System.out.println(e.getMessage());
         }
 
-        //Storage.saveTasks();
+        Storage.saveTasks();
     }
 
     /**

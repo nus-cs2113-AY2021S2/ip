@@ -15,7 +15,9 @@ public class Storage {
 
     public static void saveTasks() throws IOException {
         File file = new File(FILE_PATH);
-        file.createNewFile(); // If file exists, no new file will be made
+        if (file.createNewFile()) {
+            System.out.println("Archive successfully created, Commander!");
+        }
 
         FileWriter writer = new FileWriter(file);
         writer.write(TaskList.convertToFileInput());

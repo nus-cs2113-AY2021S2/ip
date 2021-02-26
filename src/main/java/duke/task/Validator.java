@@ -1,8 +1,5 @@
 package duke.task;
 
-import duke.exception.IllegalTaskCommandException;
-import duke.ui.Ui;
-
 public class Validator {
     public static int validateIndex(String index) {
         int indexOfTask = -1;

@@ -1,6 +1,5 @@
 package duke.ui;
 
-import duke.task.Task;
 import duke.task.TaskList;
 
 public class Ui {
@@ -46,18 +45,17 @@ public class Ui {
         System.out.println(tasksTemplate);
     }
 
-    public static void echoInput(Task task, int index) {
-        String taskString;
+    public static void echoInput(int index) {
         String echoTop = "______________________________________________________\n"
                 + "[Orders received]:\n";
         String echoBottom = "______________________________________________________\n";
 
         System.out.println(echoTop);
-        TaskList.printTaskType(index);
-        TaskList.printCompletionStatus(index);
-        TaskList.printTaskItem(index);
+        System.out.print("[" + TaskList.returnTaskType(index) + "]");
+        printCompletionStatus(index);
+        System.out.println(" " + TaskList.returnTaskItem(index));
         System.out.println();
-        TaskList.printTaskCount();
+        System.out.println("There are now " + TaskList.returnTaskCount() + " mission objective(s), Commander.");
         System.out.println(echoBottom);
     }
 
@@ -67,10 +65,31 @@ public class Ui {
         String doneTextBottom = "______________________________________________________\n";
 
         System.out.println(doneTextTop);
-        TaskList.printTaskType(index);
-        TaskList.printCompletionStatus(index);
-        TaskList.printTaskItem(index);
-        System.out.println();
+        System.out.print("[" + TaskList.returnTaskType(index) + "]");
+        printCompletionStatus(index);
+        System.out.println(" " + TaskList.returnTaskItem(index));
         System.out.println(doneTextBottom);
+    }
+
+    public static void printDeletePrompt(int taskIndex) {
+        String doneTextTop = "______________________________________________________\n"
+                + "[Objective Successfully Removed]:\n";
+        String doneTextBottom = "______________________________________________________\n";
+
+        System.out.println(doneTextTop);
+        System.out.print("[" + TaskList.returnTaskType(taskIndex) + "]");
+        printCompletionStatus(taskIndex);
+        System.out.println(" " + TaskList.returnTaskItem(taskIndex));
+        System.out.println();
+        System.out.println("There are now " + (TaskList.returnTaskCount() - 1) + " mission objective(s), Commander.");
+        System.out.println(doneTextBottom);
+    }
+
+    public static void printTaskIndex(int taskIndex) {
+        System.out.print("[" + (taskIndex + 1) + "]");
+    }
+
+    public static void printCompletionStatus(int index) {
+        System.out.print("[" + TaskList.returnStatusIcon(index) + "]");
     }
 }
