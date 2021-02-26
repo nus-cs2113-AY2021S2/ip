@@ -1,6 +1,7 @@
 package duke;
 
 import duke.task.*;
+import duke.parser.Parser;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -45,6 +46,8 @@ public class Duke {
     public static final String GENERIC_ERROR_MESSAGE = "Something went wrong!\n";
 
     public static final String FILENAME = "data.txt";
+
+    private static Parser parser = new Parser();
 
     public static void main(String[] args) {
         ArrayList<Task> list = new ArrayList<>();
@@ -110,20 +113,15 @@ public class Duke {
     public static void interact(ArrayList<Task> list, int taskCount) {
 
         Scanner scan = new Scanner(System.in);
-        String in = scan.nextLine();
+        String input = scan.nextLine();
 
-        String cmd;
-        String input;
-        if (in.contains(" ")) {
-            cmd = in.substring(0, in.indexOf(" ")); //if there is no " ", index returned is -1
-            input = in.substring(in.indexOf(" ") + 1);
-        } else {
-            cmd = in;
-            input = null;
-        }
 
-        while (!cmd.equalsIgnoreCase("bye")) {
-            switch (cmd.toLowerCase()) {
+        String[] parsedInput = parser.inputParser(input);
+        String command = parsedInput[0];
+        String arguments = parsedInput[1];
+
+        while (!command.equalsIgnoreCase("bye")) {
+            switch (command.toLowerCase()) {
             case "help":
                 System.out.print(LINE + HELP_MESSAGE + LINE); //we should probably write an entire method for help
                 break;
@@ -131,35 +129,31 @@ public class Duke {
                 printList(list, taskCount);
                 break;
             case "todo":
-                taskCount = addToDo(input, list, taskCount);
+                taskCount = addToDo(arguments, list, taskCount);
                 break;
             case "deadline":
-                taskCount = addDeadline(input, list, taskCount);
+                taskCount = addDeadline(arguments, list, taskCount);
                 break;
             case "event":
-                taskCount = addEvent(input, list, taskCount);
+                taskCount = addEvent(arguments, list, taskCount);
                 break;
             case "done":
-                markAsDone(list, taskCount, input);
+                markAsDone(list, taskCount, arguments);
                 break;
             case "undo":
-                undoMarkAsDone(list, taskCount, input);
+                undoMarkAsDone(list, taskCount, arguments);
                 break;
             case "delete":
-                delete(list, taskCount, input);
+                delete(list, taskCount, arguments);
                 break;
             default:
                 System.out.print(LINE + INVALID_COMMAND_MESSAGE + LINE);
             }
-            in = scan.nextLine();
+            input = scan.nextLine();
 
-            if (in.contains(" ")) {
-                cmd = in.substring(0, in.indexOf(" ")); //if there is no space, taskCount returned is -1
-                input = in.substring(in.indexOf(" ") + 1);
-            } else {
-                cmd = in;
-                input = null;
-            }
+            parsedInput = parser.inputParser(input);
+            command = parsedInput[0];
+            arguments = parsedInput[1];
         }
     }
 
@@ -296,7 +290,7 @@ public class Duke {
 
     private static void saveData(ArrayList<Task> list) {
         try {
-            FileWriter fw = new FileWriter("FILENAME");
+            FileWriter fw = new FileWriter(FILENAME);
             fw.write(composeOutput(list.get(0)) + System.lineSeparator());
 
             for (int i = 1; i< list.size(); i++) {
