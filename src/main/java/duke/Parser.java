@@ -1,12 +1,13 @@
 package duke;
 
 import duke.command.AddCommand;
-import duke.command.ExitCommand;
-import duke.command.DeleteCommand;
-import duke.command.ListCommand;
-import duke.command.DoneCommand;
-import duke.command.InvalidCommand;
 import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.InvalidCommand;
 
 import duke.exception.EmptyDescriptionException;
 import duke.exception.EmptyStringException;
@@ -20,6 +21,7 @@ import static duke.command.AddCommand.EVENT_COMMAND;
 import static duke.command.DeleteCommand.DELETE_COMMAND;
 import static duke.command.DoneCommand.DONE_COMMAND;
 import static duke.command.ExitCommand.EXIT_COMMAND;
+import static duke.command.FindCommand.FIND_COMMAND;
 import static duke.command.ListCommand.LIST_COMMAND;
 
 /**
@@ -68,6 +70,12 @@ public class Parser {
             //Fallthrough
         case DELETE_COMMAND:
             return prepareDoneAndDeleteCommand(commandWord, description);
+        case FIND_COMMAND:
+            try {
+                return new FindCommand(description);
+            } catch (EmptyDescriptionException emptyDescriptionException) {
+                return new InvalidCommand(commandWord, description, emptyDescriptionException);
+            }
         case LIST_COMMAND:
             return new ListCommand();
         case EXIT_COMMAND:
@@ -104,6 +112,7 @@ public class Parser {
         }
     }
 
+
     /**
      * Parse the description string into description of task and date for deadline subclass.
      *
@@ -113,7 +122,7 @@ public class Parser {
      */
     public Deadline parseDeadline(String description) throws EmptyStringException {
         String[] words = description.trim().split("/by", SPLIT_SIZE);
-        String extractedDescription = words[FIRST_WORD];
+        String extractedDescription = words[FIRST_WORD].trim();
 
         if (words.length == ONE_WORD_SIZE) {
             throw new EmptyStringException();
@@ -132,7 +141,7 @@ public class Parser {
      */
     public Event parseEvent(String description) throws EmptyStringException {
         String[] words = description.trim().split("/at", SPLIT_SIZE);
-        String extractedDescription = words[FIRST_WORD];
+        String extractedDescription = words[FIRST_WORD].trim();
 
         if (words.length == ONE_WORD_SIZE) {
             throw new EmptyStringException();

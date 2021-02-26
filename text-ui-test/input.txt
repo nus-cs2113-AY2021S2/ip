@@ -7,8 +7,11 @@ todo read book
 done 3
 list
 deadline return book /by June 6th
+find book
 done 500
 done fun
+find
+find abcdefg
 delete fun
 delete 10
 list
