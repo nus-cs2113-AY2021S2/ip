@@ -195,7 +195,7 @@ public class TaskList {
         System.out.println(UI.DIVIDER
                 + "The task below is successfully removed from your task list:)\n\t"
                 + "[" + UI.convertTaskType(currentItem.getTaskType()) + "] "
-                + "[" + (currentItem.isDone() ? "X" : " ️") + "] "
+                + "[" + (currentItem.isDone() ? "X" : " ") + "] "
                 + currentItem.getTaskContent()
                 + (currentItem.getTaskType() == TaskType.TODO ? "" : " ")
                 + timeLimitFormatted + "\n"
