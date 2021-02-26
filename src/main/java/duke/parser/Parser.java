@@ -1,13 +1,6 @@
 package duke.parser;
 
-import duke.command.Command;
-import duke.command.DeadlineCommand;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.EventCommand;
-import duke.command.ExitCommand;
-import duke.command.ListCommand;
-import duke.command.ToDoCommand;
+import duke.command.*;
 import duke.exception.InvalidCommandException;
 
 public class Parser {
@@ -27,6 +20,8 @@ public class Parser {
             command = new EventCommand(fullCommand);
         } else if (fullCommand.startsWith("delete")) {
             command = new DeleteCommand(fullCommand);
+        } else if (fullCommand.startsWith("find")) {
+            command = new FindCommand(fullCommand);
         } else {
             throw new InvalidCommandException();
         }
