@@ -26,18 +26,18 @@ public class CommandRunner {
 
     /**
      * Loops indefinitely, receiving user input until "bye" command is received.
-     * Checks list capacity at each iteration. 
+     * Checks list capacity at each iteration.
      * When list is full, user cannot add new tasks until tasks are deleted.
      * User can still list tasks, enter a find query, mark tasks as done or print the help manual.
      */
     public void receiveUserInput() {
         Scanner in = new Scanner(System.in);
         boolean isExit = false;
-        
+
         while (!isExit) {
             String input = in.nextLine();
             int command = Parser.parseCommand(input);
-            
+
             try {
                 checkListCapacity(command);
             } catch (FullListException e) {
@@ -51,9 +51,9 @@ public class CommandRunner {
 
     /**
      * Selects the method to run based on the command entered.
-     * 
+     *
      * @param command the integer representation of the command parsed from user input
-     * @param input full user input string
+     * @param input   full user input string
      * @return false only when exit command is given. Calls the respective method for other commands
      */
     private boolean selectCommandToRun(int command, String input) {
@@ -102,7 +102,7 @@ public class CommandRunner {
 
     /**
      * Marks the task specified by user as 'done'
-     * 
+     *
      * @param input full user input string
      */
     private void runDone(String input) {
@@ -125,10 +125,10 @@ public class CommandRunner {
             ui.printInvalidIndexWarning(jobNumber);
         }
     }
-    
+
     /**
      * Marks the task specified by user as 'not done'.
-     * 
+     *
      * @param input full user input string
      */
     private void runUndoCommand(String input) {
@@ -151,11 +151,11 @@ public class CommandRunner {
             ui.printInvalidIndexWarning(jobNumber);
         }
     }
-    
+
     /**
      * Sets the done property of given task to true.
      * Prints prompt on screen displaying the task that was marked.
-     * 
+     *
      * @param task the task to be marked
      */
     private void markJobAsDone(Task task) {
@@ -168,7 +168,7 @@ public class CommandRunner {
     /**
      * Sets the done property of a given task to false.
      * Prints prompt on screen displaying the task that was unmarked.
-     * 
+     *
      * @param task the task to be marked
      */
     private void markJobAsUndone(Task task) {
@@ -206,7 +206,7 @@ public class CommandRunner {
     /**
      * Adds a task of type Todo into the task list.
      * Task description is parsed from user input.
-     * 
+     *
      * @param input full user input string
      */
     private void runTodo(String input) {
@@ -227,7 +227,7 @@ public class CommandRunner {
     /**
      * Adds a task of type Deadline into the task list.
      * Task description and deadline is parsed from user input.
-     * 
+     *
      * @param input full user input string
      */
     private void runDeadline(String input) {
@@ -235,7 +235,7 @@ public class CommandRunner {
         String by;
 
         try {
-            job = Parser.parseDescription(input,    DEADLINE_DELIM);
+            job = Parser.parseDescription(input, DEADLINE_DELIM);
             by = Parser.parseDate(input, DEADLINE_DELIM);
         } catch (InvalidCommandException e) {
             ui.printInvalidInputWarning(input);
@@ -253,7 +253,7 @@ public class CommandRunner {
     /**
      * Adds a task of type Event into the task list.
      * Task description and event time is parsed from user input.
-     * 
+     *
      * @param input full user input string
      */
     private void runEvent(String input) {
@@ -277,7 +277,7 @@ public class CommandRunner {
 
     /**
      * Handles unrecognized input by printing error message.
-     * 
+     *
      * @param input full user input string
      */
     private void runUnknownCommand(String input) {
@@ -287,7 +287,7 @@ public class CommandRunner {
     /**
      * Deletes a task specified by the user.
      * Task index is parsed from user input.
-     * 
+     *
      * @param input full user input string
      */
     private void runDeleteCommand(String input) {
@@ -312,7 +312,7 @@ public class CommandRunner {
      * Prints tasks which contain the keyword specified by user.
      * Search keyword is parsed from user input.
      * Prints warning message if no matches are found.
-     * 
+     *
      * @param input full user input string
      */
     private void runFindCommand(String input) {
@@ -352,7 +352,7 @@ public class CommandRunner {
 
     /**
      * Checks list capacity before a command is ran.
-     * 
+     *
      * @param command command selected to run
      * @throws FullListException if list is full and selected command is not allowed when list is full.
      */
@@ -368,7 +368,7 @@ public class CommandRunner {
      * User is not allowed to add more tasks when list is full.
      * i.e. "todo", "deadline" and "event" commands are not allowed.
      * User is still allowed to view list, mark tasks as done, delete tasks, and find tasks with keywords.
-     * 
+     *
      * @param command command to be checked
      * @return true if command is allowed when list is full
      */

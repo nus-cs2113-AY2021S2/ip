@@ -18,6 +18,7 @@ public class ProgramStrings {
     public static final String DELETE_COMMAND_FORMAT = "DELETE - \n" + "FORMAT: delete [(int) index]";
     public static final String FIND_COMMAND_FORMAT = "FIND - \n" + "FORMAT: find [(string) search keywords]";
     public static final String DATE_FORMAT = "Date FORMAT: dd-mm-yyyy";
+    public static final String UNDO_COMMAND_FORMAT = "UNDO - \n" + "FORMAT: undo [(int) number]";
 
     /** Messages for announcing user error. */
     public static final String ENTER_HELP_FOR_LIST_OF_COMMANDS = "Enter \"help\" for a list of available commands and format\n";
