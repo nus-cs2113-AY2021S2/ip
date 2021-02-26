@@ -60,30 +60,30 @@ Expected Output:
 ### 3.2. Add a deadline task: `deadline`
 This operation adds a deadline task to the task list. 
 
-Format: `deadline <task description> /by <date>`
+Format: `deadline <task description> /by <yyyy-MM-dd>`
 
-Example: `deadline submit homework /by Monday`
+Example: `deadline submit homework /by 2021-02-10`
 
 Expected Output: 
 ```
 -=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=-
          Got it. I've added this task: 
-           [D][ ] submit homework (by: Monday)
+           [D][ ] submit homework (by: 10 Feb 2021)
          You have 1 task(s) in the list.
 ```
 
 ### 3.3. Add an event task: `event`
 This operation adds an evvent to the task list. 
 
-Format: `event <task description> /at <date>`
+Format: `event <task description> /at <yyyy-MM-dd>`
 
-Example: `event book club meeting /at 12 March`
+Example: `event book club meeting /at 2021-02-10`
 
 Expected Output:
 ```
 -=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=-
          Got it. I've added this task: 
-           [E][ ] book club meeting (at: 12 March)
+           [E][ ] book club meeting (at: 10 Feb 2021)
          You have 1 task(s) in the list.
 ```
 
@@ -187,8 +187,8 @@ Name of save file: _**tasks.txt**_
  Command     | Format                                   | Example   
  ----------- | ---------------------------------------- | --------------------------------------
  todo        | `todo <task description>`                  | `todo read a book`
- deadline    | `deadline <task description> /by <date>`   | `deadline submit homework /by Monday`
- event       | `event <task description> /at <date>`      | `event book club meeting /at 12 March`
+ deadline    | `deadline <task description> /by <yyyy-MM-dd>`   | `deadline submit homework /by 2021-02-10`
+ event       | `event <task description> /at <yyyy-MM-dd>`      | `event book club meeting /at 2021-02-10`
  list        | `list`                                     | `list`
  done        | `done <task number>`                       | `done 1`
  delete      | `delete <task number>`                     | `delete 2`
