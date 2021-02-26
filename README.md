@@ -4,6 +4,9 @@
 This is a project based on the template for a greenfield Java project. It's named after the Java mascot _Duke_. 
 Given below are instructions on how to use it.
 
+## Check the Friday User Guide
+Read the user guide [here](https://song0180.github.io/ip/) to know about how to use this application
+
 ## Run the application using the ip.jar file
 
 Prerequisites: Java 11.  
