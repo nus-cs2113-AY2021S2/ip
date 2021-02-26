@@ -130,7 +130,8 @@ public class TaskListOperation {
             }
             taskList.removeTaskFromList(taskIndex);
         } catch (Exception e) {
-            UI.printErrorMessage(e);
+            System.out.println(UI.DIVIDER +
+                    "Invalid input! The parameter must be an integer!\n" + UI.DIVIDER_LINE_ONLY);
         }
     }
 
