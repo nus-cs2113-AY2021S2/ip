@@ -16,7 +16,8 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return super.toString() + " | " + this.getDeadline();
+        return super.toString() + " | "
+                + this.getDeadline();
     }
 
     public String getDeadline() {

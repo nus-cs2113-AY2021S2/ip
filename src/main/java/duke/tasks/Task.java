@@ -20,7 +20,8 @@ public class Task {
     @Override
     public String toString() {
         int statusAsInt = this.getStatus().equals("X") ? DONE_STATUS_AS_INT : DEFAULT_STATUS_AS_INT;
-        return this.getType() + " | " + statusAsInt + " | "
+        return this.getType() + " | "
+                + statusAsInt + " | "
                 + this.getItem();
     }
 

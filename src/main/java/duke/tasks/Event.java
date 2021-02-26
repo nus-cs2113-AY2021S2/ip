@@ -16,7 +16,8 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return super.toString() + " | " + this.getTime();
+        return super.toString() + " | "
+                + this.getTime();
     }
 
     public String getTime() {

@@ -90,17 +90,12 @@ public class Duke {
             = "Squeal... Are you sure that is a task?";
 
 
-    /** List of tasks being maintained and number of tasks it has */
-    private static ArrayList<Task> tasks = new ArrayList<>();
-    private static int tasksCount = 0;
-
-
     /** Methods that display messages */
-    public static void greet() {
+    public static void printGreeting() {
         System.out.print(GREET_MESSAGE);
     }
 
-    public static void goodbye() {
+    public static void printGoodbye() {
         System.out.print(GOODBYE_MESSAGE);
     }
 
@@ -113,9 +108,14 @@ public class Duke {
         System.out.print(BORDER + message + closeString);
     }
 
-    public static void help() {
+    public static void printHelpPage() {
         System.out.print(HELP_PAGE);
     }
+
+
+    /** List of tasks being maintained and number of tasks it has */
+    private static ArrayList<Task> tasks = new ArrayList<>();
+    private static int tasksCount = 0;
 
 
     /** Methods that print part of or full list */
@@ -190,75 +190,97 @@ public class Duke {
     }
 
     
-    /** Methods that check if user inputs are valid commands */
+    /** Parses user's input and determines command to be run */
     public static void processInput(String userInput) {
         if (userInput.equals("list")) {
             printList();
             return;
         }
         if (userInput.equals("help")) {
-            help();
+            printHelpPage();
             return;
         }
         userInput = userInput.trim();
         String[] tokens = userInput.split(" ", 2);
         switch(tokens[0]) {
         case "todo":
-            try {
-                String taskDescription = getTodoDescription(tokens[1]);
-                addTodo(taskDescription, DEFAULT_STATUS);
-                echo();
-            } catch (ArrayIndexOutOfBoundsException e) {
-                printInvalidInputMessage(MISSING_FIELDS_MESSAGE);
-            } catch (DukeException e) {
-                printInvalidInputMessage(INVALID_TASK_MESSAGE);
-            }
+            runTodoCommand(tokens[1]);
             break;
         case "deadline":
-            try {
-                String[] words = getDeadlineOrEventDescription(" /by ", tokens[1]);
-                addDeadline(words[0], DEFAULT_STATUS, words[1]);
-                echo();
-            } catch (ArrayIndexOutOfBoundsException | DukeException e) {
-                printInvalidInputMessage(MISSING_FIELDS_MESSAGE);
-            }
+            runDeadlineCommand(tokens[1]);
             break;
         case "event":
-            try {
-                String[] words = getDeadlineOrEventDescription(" /at ", tokens[1]);
-                addEvent(words[0], DEFAULT_STATUS, words[1]);
-                echo();
-            } catch (ArrayIndexOutOfBoundsException | DukeException e) {
-                printInvalidInputMessage(MISSING_FIELDS_MESSAGE);
-            }
+            runEventCommand(tokens[1]);
             break;
         case "done":
-            try {
-                int index = getTaskIndex(tokens[1]);
-                markInList(index);
-            } catch (ArrayIndexOutOfBoundsException e) {
-                printInvalidInputMessage(MISSING_FIELDS_MESSAGE);
-            } catch (NumberFormatException e) {
-                printInvalidInputMessage(INVALID_INDEX_MESSAGE);
-            } catch (DukeException e) {
-                printInvalidInputMessage(OUTSIDE_RANGE_INDEX_MESSAGE + tokens[1]);
-            }
+            runDoneCommand(tokens[1]);
             break;
         case "delete":
-            try {
-                int index = getTaskIndex(tokens[1]);
-                deleteTask(index);
-            } catch (ArrayIndexOutOfBoundsException e) {
-                printInvalidInputMessage(MISSING_FIELDS_MESSAGE);
-            } catch (NumberFormatException e) {
-                printInvalidInputMessage(INVALID_INDEX_MESSAGE);
-            } catch (DukeException e) {
-                printInvalidInputMessage(OUTSIDE_RANGE_INDEX_MESSAGE + tokens[1]);
-            }
+            runDeleteCommand(tokens[1]);
             break;
         default:
             printInvalidInputMessage(null);
             break;
+        }
+    }
+
+
+    /** Methods that run commands */
+    public static void runTodoCommand(String description) {
+        try {
+            String taskDescription = getTodoDescription(description);
+            addTodo(taskDescription, DEFAULT_STATUS);
+            echo();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            printInvalidInputMessage(MISSING_FIELDS_MESSAGE);
+        } catch (DukeException e) {
+            printInvalidInputMessage(INVALID_TASK_MESSAGE);
+        }
+    }
+
+    public static void runDeadlineCommand(String description) {
+        try {
+            String[] words = getDeadlineOrEventDescription(" /by ", description);
+            addDeadline(words[0], DEFAULT_STATUS, words[1]);
+            echo();
+        } catch (ArrayIndexOutOfBoundsException | DukeException e) {
+            printInvalidInputMessage(MISSING_FIELDS_MESSAGE);
+        }
+    }
+
+    public static void runEventCommand(String description) {
+        try {
+            String[] words = getDeadlineOrEventDescription(" /at ", description);
+            addEvent(words[0], DEFAULT_STATUS, words[1]);
+            echo();
+        } catch (ArrayIndexOutOfBoundsException | DukeException e) {
+            printInvalidInputMessage(MISSING_FIELDS_MESSAGE);
+        }
+    }
+
+    public static void runDoneCommand (String description) {
+        try {
+            int index = getTaskIndex(description);
+            markInList(index);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            printInvalidInputMessage(MISSING_FIELDS_MESSAGE);
+        } catch (NumberFormatException e) {
+            printInvalidInputMessage(INVALID_INDEX_MESSAGE);
+        } catch (DukeException e) {
+            printInvalidInputMessage(OUTSIDE_RANGE_INDEX_MESSAGE + description);
+        }
+    }
+
+    public static void runDeleteCommand (String description) {
+        try {
+            int index = getTaskIndex(description);
+            deleteTask(index);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            printInvalidInputMessage(MISSING_FIELDS_MESSAGE);
+        } catch (NumberFormatException e) {
+            printInvalidInputMessage(INVALID_INDEX_MESSAGE);
+        } catch (DukeException e) {
+            printInvalidInputMessage(OUTSIDE_RANGE_INDEX_MESSAGE + description);
         }
     }
 
@@ -292,48 +314,6 @@ public class Duke {
 
 
     /** Methods to load from and save to disk */
-    public static void convertTextToListItem(String line) {
-        line = line.trim();
-        String[] tokens = line.split(" \\| ");
-        switch(tokens[0]) {
-        case "T":
-            if (tokens.length < 3) {
-                return;
-            }
-            try {
-                String status = Integer.parseInt(tokens[1]) == 1 ? DONE_STATUS : DEFAULT_STATUS;
-                addTodo(tokens[2], status);
-            } catch (NumberFormatException e) {
-                return;
-            }
-            break;
-        case "D":
-            if (tokens.length < 4) {
-                return;
-            }
-            try {
-                String status = Integer.parseInt(tokens[1]) == 1 ? DONE_STATUS : DEFAULT_STATUS;
-                addDeadline(tokens[2], status, tokens[3]);
-            } catch (NumberFormatException e) {
-                return;
-            }
-            break;
-        case "E":
-            if (tokens.length < 4) {
-                return;
-            }
-            try {
-                String status = Integer.parseInt(tokens[1]) == 1 ? DONE_STATUS : DEFAULT_STATUS;
-                addEvent(tokens[2], status, tokens[3]);
-            } catch (NumberFormatException e) {
-                return;
-            }
-            break;
-        default:
-            break;
-        }
-    }
-
     public static void loadFromDisk() {
         String fileName = "duke.txt";
         File f = new File(fileName);
@@ -350,13 +330,37 @@ public class Duke {
         }
     }
 
-    public static String convertListToText() {
-        StringBuilder text = new StringBuilder();
-        for (int i=0; i<tasksCount; i++) {
-            text.append(tasks.get(i).toString());
-            text.append("\n");
+    public static void convertTextToListItem(String line) {
+        line = line.trim();
+        String[] tokens = line.split(" \\| ");
+        switch(tokens[0]) {
+        case "T":
+            try {
+                String status = Integer.parseInt(tokens[1]) == 1 ? DONE_STATUS : DEFAULT_STATUS;
+                addTodo(tokens[2], status);
+            } catch (NumberFormatException e) {
+                return;
+            }
+            break;
+        case "D":
+            try {
+                String status = Integer.parseInt(tokens[1]) == 1 ? DONE_STATUS : DEFAULT_STATUS;
+                addDeadline(tokens[2], status, tokens[3]);
+            } catch (NumberFormatException e) {
+                return;
+            }
+            break;
+        case "E":
+            try {
+                String status = Integer.parseInt(tokens[1]) == 1 ? DONE_STATUS : DEFAULT_STATUS;
+                addEvent(tokens[2], status, tokens[3]);
+            } catch (NumberFormatException e) {
+                return;
+            }
+            break;
+        default:
+            break;
         }
-        return text.toString();
     }
 
     public static void saveToDisk(String text) {
@@ -374,10 +378,19 @@ public class Duke {
         }
     }
 
+    public static String convertListToText() {
+        StringBuilder text = new StringBuilder();
+        for (int i=0; i<tasksCount; i++) {
+            text.append(tasks.get(i).toString());
+            text.append(NEWLINE);
+        }
+        return text.toString();
+    }
+
 
     /** Main method */
     public static void main(String[] args) {
-        greet();
+        printGreeting();
         loadFromDisk();
         Scanner in = new Scanner(System.in);
         String userInput = in.nextLine();
@@ -387,6 +400,6 @@ public class Duke {
         }
         String textToOverwrite = convertListToText();
         saveToDisk(textToOverwrite);
-        goodbye();
+        printGoodbye();
     }
 }
