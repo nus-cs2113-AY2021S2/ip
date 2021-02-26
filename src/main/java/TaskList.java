@@ -17,7 +17,7 @@ public class TaskList {
         System.out.println("____________________________________________________________\n");
     }
 
-    public static void showRemoveTasks(ArrayList<Task> Tasks,String line){
+    public static void RemoveTasks(ArrayList<Task> Tasks,String line){
         System.out.println("____________________________________________________________\n");
         String[] parts = line.split(" ");
         int i=Parser.parserToInteger(parts[1].trim());
@@ -32,6 +32,15 @@ public class TaskList {
         System.out.println("____________________________________________________________\n");
         System.out.println("Here are the tasks in your list:\n");
         for (int i = 0; i < Tasks.size(); i++){
+            System.out.println(i+1 + ". " + Tasks.get(i).toString() + "\n");
+        }
+        System.out.println("____________________________________________________________\n");
+    }
+    public static void findTasks(ArrayList<Task> Tasks, String line){
+        System.out.println("____________________________________________________________\n");
+        System.out.println("Here are the matching tasks in your list:\n");
+        for (int i = 0; i < Tasks.size(); i++){
+            if(Tasks.get(i).getDescription().contains(line))
             System.out.println(i+1 + ". " + Tasks.get(i).toString() + "\n");
         }
         System.out.println("____________________________________________________________\n");

@@ -57,7 +57,23 @@ public class Duke {
                         }
                 }
                 else if (line.startsWith("delete")) {
-                    TaskList.showRemoveTasks(Tasks, line);
+                    try {
+                        line.substring(line.indexOf(" "));
+                        TaskList.RemoveTasks(Tasks, line);
+                    } catch (java.lang.StringIndexOutOfBoundsException e) {
+                        Ui.showEmptyDescriptionException(line);
+                    }
+                }
+
+                else if (line.startsWith("find")){
+                    try {
+                        line.substring(line.indexOf(" "));
+                        line = line.replace("find ", "");
+                        TaskList.findTasks(Tasks, line);
+                    } catch (java.lang.StringIndexOutOfBoundsException e) {
+                        Ui.showEmptyDescriptionException(line);
+                    }
+
                 }
                 else if (!line.equals("")){
                     Ui.showException();
