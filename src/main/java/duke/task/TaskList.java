@@ -1,34 +1,13 @@
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
+package duke.task;
+
+import duke.exception.DukeException;
+import duke.storage.Storage;
 
 import java.util.ArrayList;
 
-public class DukeCommandHandler {
+public class TaskList {
     private static final String DIVIDER = "\t_______________________________\n";
-    protected static final ArrayList<Task> tasks = new ArrayList<>();
-    private static final String LOGO =
-            "▒▒▒▒▒▒▒█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█\n"
-                    + "▒▒▒▒▒▒▒█░▒▒▒▒▒▒▒▓▒▒▓▒▒▒▒▒▒▒░█\n"
-                    + "▒▒▒▒▒▒▒█░▒▒▓▒▒▒▒▒▒▒▒▒▄▄▒▓▒▒░█░▄▄\n"
-                    + "▒▒▄▀▀▄▄█░▒▒▒▒▒▒▓▒▒▒▒█░░▀▄▄▄▄▄▀░░█\n"
-                    + "▒▒█░░░░█░▒▒▒▒▒▒▒▒▒▒▒█░░░░░░░░░░░█\n"
-                    + "▒▒▒▀▀▄▄█░▒▒▒▒▓▒▒▒▓▒█░░░█▒░░░░█▒░░█\n"
-                    + "▒▒▒▒▒▒▒█░▒▓▒▒▒▒▓▒▒▒█░░░░░░░▀░░░░░█\n"
-                    + "▒▒▒▒▒▄▄█░▒▒▒▓▒▒▒▒▒▒▒█░░█▄▄█▄▄█░░█\n"
-                    + "▒▒▒▒█░░░█▄▄▄▄▄▄▄▄▄▄█░█▄▄▄▄▄▄▄▄▄█\n"
-                    + "▒▒▒▒█▄▄█░░█▄▄█░░░░░░█▄▄█░░█▄▄█\n"
-                    + " ____        _        \n"
-                    + "|  _ \\ _   _| | _____ \n"
-                    + "| | | | | | | |/ / _ \\\n"
-                    + "| |_| | |_| |   <  __/\n"
-                    + "|____/ \\__,_|_|\\_\\___|\n";
-
-    protected static void greeting() {
-        System.out.print(LOGO);
-        System.out.print("Hello! I'm Duke\nWhat can I do for you?\n");
-    }
+    public static final ArrayList<Task> tasks = new ArrayList<>();
 
     protected static String checkSingular() {
         if (tasks.size() > 1) {
@@ -37,7 +16,7 @@ public class DukeCommandHandler {
         return " task ";
     }
 
-    protected static void listTask() {
+    public static void listTask() {
         System.out.print(DIVIDER);
         System.out.println("\tHere are the tasks in your list:");
         for (int i = 0; i < tasks.size(); ++i) {
@@ -47,7 +26,7 @@ public class DukeCommandHandler {
         System.out.print(DIVIDER);
     }
 
-    protected static void markTaskDone(String input) {
+    public static void markTaskDone(String input) {
         //task number can be found on 5th index of input
         int taskNumber = Integer.parseInt(input.substring(5));
 
@@ -59,12 +38,12 @@ public class DukeCommandHandler {
 
         Task currentTask = tasks.get(taskNumber - 1);
         currentTask.markAsDone();
-        Duke.storage.saveData();
+        Storage.saveData();
         System.out.print(DIVIDER + "\tNice! I've marked this task as done:" +
                 "\n\t" + currentTask.toString() + "\n" + DIVIDER);
     }
 
-    protected static void addTask(String input)
+    public static void addTask(String input)
             throws ArrayIndexOutOfBoundsException {
         String[] splitInput = input.split("add");
         String taskInfo;
@@ -82,11 +61,11 @@ public class DukeCommandHandler {
         }
         Task currentTask = new Task(taskInfo);
         tasks.add(currentTask);
-        Duke.storage.saveData();
+        Storage.saveData();
         System.out.print(DIVIDER + "\tadded " + currentTask.toString() + "\n" + DIVIDER);
     }
 
-    protected static void addToDo(String input) throws ArrayIndexOutOfBoundsException {
+    public static void addToDo(String input) throws ArrayIndexOutOfBoundsException {
         String[] splitInput = input.split("todo");
         String taskInfo;
         try {
@@ -105,13 +84,13 @@ public class DukeCommandHandler {
 
         Task currentTask = new ToDo(taskInfo);
         tasks.add(currentTask);
-        Duke.storage.saveData();
+        Storage.saveData();
         System.out.println(DIVIDER + "\tGot it. I've added this task:\n" +
                 "\t\t" + currentTask.toString());
         System.out.print("\tNow you have " + tasks.size() + checkSingular() + "in your list." + "\n" + DIVIDER);
     }
 
-    protected static void addDeadline(String input) throws ArrayIndexOutOfBoundsException {
+    public static void addDeadline(String input) throws ArrayIndexOutOfBoundsException {
         String[] splitInput = input.split("deadline");
         String taskInfo;
         try {
@@ -133,13 +112,13 @@ public class DukeCommandHandler {
         String deadline = splitTaskInfo[1].trim();
         Task currentTask = new Deadline(taskDescription, deadline);
         tasks.add(currentTask);
-        Duke.storage.saveData();
+        Storage.saveData();
         System.out.println(DIVIDER + "\tGot it. I've added this task:\n\t\t" +
                 currentTask.toString());
         System.out.print("\tNow you have " + tasks.size() + checkSingular() + "in your list.\n" + DIVIDER);
     }
 
-    protected static void addEvent(String input) throws ArrayIndexOutOfBoundsException {
+    public static void addEvent(String input) throws ArrayIndexOutOfBoundsException {
         String[] splitInput = input.split("event");
         String taskInfo;
         try {
@@ -160,14 +139,14 @@ public class DukeCommandHandler {
         String timeDetails = splitTaskInfo[1].trim();
         Task currentTask = new Event(taskDescription, timeDetails);
         tasks.add(currentTask);
-        Duke.storage.saveData();
+        Storage.saveData();
         System.out.println(DIVIDER + "\tGot it. I've added this task:\n\t\t" +
                 currentTask.toString());
         System.out.print("\tNow you have " + tasks.size() + checkSingular() + "in your list.\n" + DIVIDER);
 
     }
 
-    protected static void deleteTask(String input) {
+    public static void deleteTask(String input) {
         //to add exception
         //task number can be found on 7th index of input
         int taskNumber = Integer.parseInt(input.substring(7));
@@ -180,16 +159,12 @@ public class DukeCommandHandler {
 
         Task currentTask = tasks.get(taskNumber - 1);
         tasks.remove(taskNumber-1);
-        Duke.storage.saveData();
+        Storage.saveData();
         System.out.print(DIVIDER + "\tNoted. I've removed this task:" +
                 "\n\t" + currentTask.toString() + "\n"
                 + DIVIDER);
         System.out.print("\tNow you have " + (tasks.size()) + checkSingular() + "in your list.\n" + DIVIDER);
 
-    }
-
-    protected static void exitDuke() {
-        System.out.print("Bye. Hope to see you again soon!\n");
     }
 
 }
