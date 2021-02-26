@@ -15,32 +15,61 @@ import java.io.FileNotFoundException;
 public class Duke {
 
     /** Constants used for displaying messages */
-    private static final String BORDER = "____________________________________________________________";
     private static final String NEWLINE = System.lineSeparator();
+    private static final String BORDER = "____________________________________________________________" + NEWLINE;
     public static final String LOGO =
-                      "                                      ,::::," + "\n"
-                    + "                          ,,,,:::::::':::::::" + "\n"
-                    + "        ,::::.     ..:::~~           \\::::::" + "\n"
-                    + "       ::::::::::~''      ':       __     ':." + "\n"
-                    + "       ::::::/        __    .o.. : u ::     ':." + "\n"
-                    + "         :::,       :: u :.' '. ' ':::'     '::    ,, .::,," + "\n"
-                    + "          `::       ':::' /.  : .\\         .::   ::::::::::" + "\n"
-                    + "          ::.               '':'            ::'  :::,'''.:::'" + "\n"
-                    + "          `::                  :          ,::'  ,:::',,,':::'" + "\n"
-                    + "           `::,                 .     ..:::.   ::::::::::::'" + "\n"
-                    + "              ':::::,,,....     :..::::~    ``:::::::::::'" + "\n"
-                    + "              :::::::::::::::::'~   .          ''::::::'" + "\n"
-                    + "              ::::::::::::::::::.      .         `::::'" + "\n"
-                    + "              ::::::::::::::::::::,     .          ::" + "\n"
-                    + "               ::::::::::::::::::::      :         ::" + "\n"
-                    + "                  ::::::::::::::::'      .       .::'" + "\n"
-                    + "                  :: '::::::::::::'       .     .:':" + "\n"
-                    + "                   ::    ~~::::''        . ,,,::::,,:::::" + "\n"
-                    + "                   :::,,,,,,,,,,,....:::::::::::::::::::::" + "\n"
-                    + "                  :::::::::::::::::   :::::::::::::::::::::" + "\n"
-                    + "                 .:::::::::::::::::,,  :::::::::::::::::''" + "\n"
-                    + "                .::::::::::::::::::::,   :::::::::::::'" + "\n"
-                    + "                `:::::::::::::::::::::,'" + "\n";
+            "                                      ,::::," + "\n"
+            + "                          ,,,,:::::::':::::::" + "\n"
+            + "        ,::::.     ..:::~~           \\::::::" + "\n"
+            + "       ::::::::::~''      ':       __     ':." + "\n"
+            + "       ::::::/        __    .o.. : u ::     ':." + "\n"
+            + "         :::,       :: u :.' '. ' ':::'     '::    ,, .::,," + "\n"
+            + "          `::       ':::' /.  : .\\         .::   ::::::::::" + "\n"
+            + "          ::.               '':'            ::'  :::,'''.:::'" + "\n"
+            + "          `::                  :          ,::'  ,:::',,,':::'" + "\n"
+            + "           `::,                 .     ..:::.   ::::::::::::'" + "\n"
+            + "              ':::::,,,....     :..::::~    ``:::::::::::'" + "\n"
+            + "              :::::::::::::::::'~   .          ''::::::'" + "\n"
+            + "              ::::::::::::::::::.      .         `::::'" + "\n"
+            + "              ::::::::::::::::::::,     .          ::" + "\n"
+            + "               ::::::::::::::::::::      :         ::" + "\n"
+            + "                  ::::::::::::::::'      .       .::'" + "\n"
+            + "                  :: '::::::::::::'       .     .:':" + "\n"
+            + "                   ::    ~~::::''        . ,,,::::,,:::::" + "\n"
+            + "                   :::,,,,,,,,,,,....:::::::::::::::::::::" + "\n"
+            + "                  :::::::::::::::::   :::::::::::::::::::::" + "\n"
+            + "                 .:::::::::::::::::,,  :::::::::::::::::''" + "\n"
+            + "                .::::::::::::::::::::,   :::::::::::::'" + "\n"
+            + "                `:::::::::::::::::::::,'" + "\n";
+    public static final String GREET_MESSAGE = BORDER
+            + LOGO + NEWLINE
+            + "Hello, I'm Panda!" + NEWLINE
+            + "What would you like to do today?" + NEWLINE
+            + "Tip: use \"help\" to view all valid commands" + NEWLINE
+            + BORDER + NEWLINE;
+    public static final String GOODBYE_MESSAGE = BORDER
+            + "Alright! Goodbye :)" + NEWLINE
+            + BORDER;
+    public static final String HELP_PAGE = BORDER
+            + "HELP PAGE" + NEWLINE
+            + "This is the list of all valid commands:" + NEWLINE + NEWLINE
+            + "\thelp" + NEWLINE
+            + "\t - displays all valid commands" + NEWLINE + NEWLINE
+            +"\tbye" + NEWLINE
+            + "\t- stops the task manager" + NEWLINE + NEWLINE
+            + "\tlist" + NEWLINE
+            + "\t- displays all tasks in the list" + NEWLINE + NEWLINE
+            + "\ttodo     | <task>" + NEWLINE
+            + "\t- adds specified task to the list" + NEWLINE + NEWLINE
+            + "\tdeadline | <task>  | /by | <deadline>" + NEWLINE
+            + "\t- adds specified task and deadline and to the list" + NEWLINE + NEWLINE
+            + "\tevent    | <task>  | /at | <timing>" + NEWLINE
+            + "\t- adds specified task and timing to the list" + NEWLINE + NEWLINE
+            + "\tdone     | <index>" + NEWLINE
+            + "\t- marks existing task matching the specified index"
+            + "as completed in the list" + NEWLINE  + NEWLINE
+            + "<> indicates an input field and | is a field separator." + NEWLINE
+            + BORDER + NEWLINE;
 
 
     /** Constants used to set status of a task */
@@ -68,60 +97,30 @@ public class Duke {
 
     /** Methods that display messages */
     public static void greet() {
-        String greetString = BORDER + NEWLINE
-                + LOGO + NEWLINE
-                + "Hello, I'm Panda!" + NEWLINE
-                + "What would you like to do today?" + NEWLINE
-                + "Tip: use \"help\" to view all valid commands" + NEWLINE
-                + BORDER + NEWLINE + NEWLINE;
-        System.out.print(greetString);
+        System.out.print(GREET_MESSAGE);
     }
 
     public static void goodbye() {
-        String goodbyeString = BORDER + NEWLINE
-                + "Alright! Goodbye :)" + NEWLINE
-                + BORDER + NEWLINE;
-        System.out.print(goodbyeString);
+        System.out.print(GOODBYE_MESSAGE);
     }
 
     public static void printInvalidInputMessage(String message) {
-        String openString = BORDER + NEWLINE;
-        String closeString = NEWLINE + BORDER + NEWLINE + NEWLINE;
-        if (message != null) {
-            System.out.print(openString + message + closeString);
+        String closeString = NEWLINE + BORDER + NEWLINE;
+        if (message == null) {
+            System.out.print(BORDER + DEFAULT_INVALID_MESSAGE + closeString);
             return;
         }
-        System.out.print(openString + DEFAULT_INVALID_MESSAGE + closeString);
+        System.out.print(BORDER + message + closeString);
     }
 
     public static void help() {
-        String helpString = BORDER + NEWLINE
-                + "HELP PAGE" + NEWLINE
-                + "This is the list of all valid commands:" + NEWLINE + NEWLINE
-                + "\thelp" + NEWLINE
-                + "\t - displays all valid commands" + NEWLINE + NEWLINE
-                +"\tbye" + NEWLINE
-                + "\t- stops the task manager" + NEWLINE + NEWLINE
-                + "\tlist" + NEWLINE
-                + "\t- displays all tasks in the list" + NEWLINE + NEWLINE
-                + "\ttodo     | <task>" + NEWLINE
-                + "\t- adds specified task to the list" + NEWLINE + NEWLINE
-                + "\tdeadline | <task>  | /by | <deadline>" + NEWLINE
-                + "\t- adds specified task and deadline and to the list" + NEWLINE + NEWLINE
-                + "\tevent    | <task>  | /at | <timing>" + NEWLINE
-                + "\t- adds specified task and timing to the list" + NEWLINE + NEWLINE
-                + "\tdone     | <index>" + NEWLINE
-                + "\t- marks existing task matching the specified index"
-                + "as completed in the list" + NEWLINE  + NEWLINE
-                + "<> indicates an input field and | is a field separator." + NEWLINE
-                + BORDER + NEWLINE + NEWLINE;
-        System.out.print(helpString);
+        System.out.print(HELP_PAGE);
     }
 
 
     /** Methods that print part of or full list */
     public static void echo() {
-        System.out.print(BORDER + NEWLINE);
+        System.out.print(BORDER);
         System.out.print("New task added: " + NEWLINE);
         System.out.print("\t");
         tasks.get(tasksCount-1).printTask();
@@ -134,18 +133,18 @@ public class Duke {
         System.out.print(tasksCount);
         System.out.print(tasksCount > 1 ? " tasks" : " task");
         System.out.print(" in your list." + NEWLINE);
-        System.out.print(BORDER + NEWLINE + NEWLINE);
+        System.out.print(BORDER + NEWLINE);
     }
 
     public static void printList() {
-        System.out.print(BORDER + NEWLINE);
+        System.out.print(BORDER);
         System.out.print("Here are the tasks in your list:" + NEWLINE);
         for (int i=0; i<tasksCount; i++) {
-            System.out.print("\t" + (i+1) + ". ");
+            System.out.print("\t" + (i + 1) + ". ");
             tasks.get(i).printTask();
             System.out.print(NEWLINE);
         }
-        System.out.print(BORDER + NEWLINE + NEWLINE);
+        System.out.print(BORDER + NEWLINE);
     }
 
 
@@ -173,7 +172,7 @@ public class Duke {
 
     public static void markInList(int index) {
         tasks.get(index-1).setStatus(DONE_STATUS);
-        System.out.print(BORDER + NEWLINE);
+        System.out.print(BORDER);
         System.out.print("Nice! This task is now done:" + NEWLINE);
         System.out.print("\t");
         tasks.get(index-1).printTask();
@@ -181,7 +180,7 @@ public class Duke {
     }
 
     public static void deleteTask(int index) {
-        System.out.print(BORDER + NEWLINE);
+        System.out.print(BORDER);
         System.out.print("This task has been removed:" + NEWLINE);
         System.out.print("\t");
         tasks.get(index-1).printTask();
@@ -196,7 +195,8 @@ public class Duke {
         if (userInput.equals("list")) {
             printList();
             return;
-        } else if (userInput.equals("help")) {
+        }
+        if (userInput.equals("help")) {
             help();
             return;
         }
