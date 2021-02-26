@@ -4,6 +4,7 @@ import storage.Storage;
 import ui.TextUi;
 import parser.Parser;
 
+
 /**
  * Entry point of the Duke application.
  * Initializes the application and starts the interaction with the user.
