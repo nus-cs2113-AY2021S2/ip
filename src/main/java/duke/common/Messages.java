@@ -16,12 +16,14 @@ public class Messages {
     public static final String TASK_REMOVED_MESSAGE = "Noted. I've removed this task:";
     public static final String TASK_TOTAL_TASKS_STRING_FORMAT = "Now you have %d tasks in the list.";
     public static final String TASK_MARK_AS_DONE_MESSAGE = "Nice! I've marked this task as done:";
+    public static final String FOUND_DATE_TASK_STRING_FORMAT = "Found %d Deadline(s) and %d Event(s) on the %s.";
     public static final String ERROR_PREFIX_MESSAGE = "ERROR: ";
     public static final String ERROR_EMPTY_DEADLINE_BY_MESSAGE = "The deadline's /by argument cannot be empty.";
     public static final String ERROR_EMPTY_EVENT_AT_MESSAGE = "The event's /at argument cannot be empty.";
     public static final String ERROR_WRITE_TO_FILE_MESSAGE = "Unable to write to file. :<(";
+    public static final String ERROR_MISSING_DATE_MESSAGE = "Missing date, please specify a valid date.";
     public static final String ERROR_COMMAND_MESSAGE = "I'm sorry, but I don't know what that means :-(";
-
+    public static final String ERROR_INVALID_DATE_MESSAGE = "Invalid date input. Please enter a valid date.";
     public static final String ERROR_EMPTY_TASK_NUMBER_MESSAGE = "Missing task number,"
             + "please specify a valid task number.";
     public static final String ERROR_INVALID_TASK_NUMBER_MESSAGE = "The task number you've entered is invalid.";

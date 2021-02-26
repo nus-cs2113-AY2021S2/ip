@@ -5,9 +5,8 @@ import duke.storage.Storage;
 import duke.ui.TextUI;
 
 public abstract class Command {
+    protected boolean isExit;
     public abstract void execute(TaskList tasks, TextUI ui, Storage storage);
-
-    private boolean isExit;
 
     public Command() {
         isExit = false;
@@ -15,9 +14,5 @@ public abstract class Command {
 
     public boolean isExit() {
         return isExit;
-    }
-
-    public void setExit(boolean exit) {
-        isExit = exit;
     }
 }

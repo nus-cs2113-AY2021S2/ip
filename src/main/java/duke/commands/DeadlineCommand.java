@@ -41,8 +41,8 @@ public class DeadlineCommand extends Command {
     }
 
     private String[] validateDeadlineArguments(String commandArgs) throws DukeException {
-        String taskDescription = parseArgument(commandArgs, null);
-        String deadlineBy = parseArgument(commandArgs, DEADLINE_BY_TOKEN);
+        String taskDescription = parseArgument(commandArgs, null, DEADLINE_BY_TOKEN);
+        String deadlineBy = parseArgument(commandArgs, DEADLINE_BY_TOKEN, null);
         if (isArgumentValueEmpty(taskDescription)) {
             throw new DukeException(String.format(ERROR_EMPTY_TASK_STRING_FORMAT, "deadline"));
         }
