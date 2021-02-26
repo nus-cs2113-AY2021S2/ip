@@ -98,8 +98,8 @@ Expected Output:
          Here are the tasks in your list: 
 
          1. [T][ ] read a book
-         2. [D][ ] submit homework (by: Monday)
-         3. [E][ ] book club meeting (at: 12 March)
+         2. [D][ ] submit homework (by: 10 Feb 2021)
+         3. [E][ ] book club meeting (at: 10 Feb 2021)
 ```
 
 ### 3.5. Mark a task as complete: `done`
@@ -127,7 +127,7 @@ Expected Output:
 ```
 -=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=-
          Noted. I have removed this task:
-         [D][ ] submit homework (by: Monday)
+         [D][ ] submit homework (by: 10 Feb 2021)
 ```
 
 ### 3.7. Search task by keyword: `find`
@@ -143,7 +143,7 @@ Expected Output:
          Here are some of the tasks in your list:
 
          1. [T][ ] read a book
-         2. [E][ ] book club meeting (at: 12 March)
+         2. [E][ ] book club meeting (at: 10 Feb 2021)
 ```
 
 ### 3.8. Exit the program: `bye`
