@@ -39,6 +39,8 @@ public class CommandParser {
             return new DoneCommand(commandArgs);
         case DeleteCommand.DELETE_WORD:
             return new DeleteCommand(commandArgs);
+        case FindCommand.FIND_WORD:
+            return new FindCommand(commandArgs);
         case ByeCommand.BYE_WORD:
             return new ByeCommand();
         default:
