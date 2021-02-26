@@ -1,4 +1,4 @@
-public class Event extends Todo {
+public class Event extends Task {
 
     protected String at;
 
@@ -18,7 +18,7 @@ public class Event extends Todo {
     @Override
     public String toString() {
         return "[D] ["+ (this.isDone ? "X" : " ") + "] "
-                + this.description + "(at: " + getAt() + ")";
+                + this.getDescription() + "(at: " + getAt() + ")";
     }
 
 

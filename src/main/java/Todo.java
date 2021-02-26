@@ -1,22 +1,15 @@
-public class Todo {
-    protected String description;
-    protected boolean isDone;
-
+public class Todo extends Task {
     public Todo(String description) {
-        this.description = description;
-        this.isDone = false;
+        super(description);
     }
 
     public void setDone(boolean isDone){
         this.isDone = isDone;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
+    @Override
     public String toString() {
         return "[T] ["+ (this.isDone ? "X" : " ") + "] "
-                + this.description;
+                + this.getDescription() ;
     }
 }

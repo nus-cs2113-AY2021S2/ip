@@ -1,4 +1,4 @@
-public class Deadline extends Todo {
+public class Deadline extends Task {
 
     protected String by;
 
@@ -18,7 +18,7 @@ public class Deadline extends Todo {
     @Override
     public String toString() {
         return "[D] ["+ (this.isDone ? "X" : " ") + "] "
-                + this.description + " (by: " + this.by + ")";
+                + this.getDescription()  + " (by: " + this.by + ")";
     }
 
 }

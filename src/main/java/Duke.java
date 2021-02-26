@@ -1,3 +1,4 @@
+import java.util.Locale;
 import java.util.Scanner;
 // git add .
 // git tag level-3
@@ -5,6 +6,7 @@ import java.util.Scanner;
 // git push origin --tags
 
 public class Duke {
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -18,76 +20,83 @@ public class Duke {
         System.out.println("____________________________________________________________");
 
         Scanner scanner = new Scanner(System.in);
-        String text = "";
+        String input = "";
         Boolean isContinue = true;
-
-        Todo[] todos = new Todo[100];
-        Integer index = 0;
+        Task[] tasks = new Task[100];
+        Integer numberOfTask = 0;
 
         while (isContinue) {
-            text = scanner.nextLine();
-            if (text.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
-                isContinue = false;
-            } else if (text.equals("list")) {
-                System.out.println("____________________________________________________________");
-                System.out.println("Here are the tasks in your list:");
-                for (int i = 0; i < index; i++){
-                    int number = i+1;
-                    System.out.println( number + "." + todos[i]);
-                }
-                System.out.println("____________________________________________________________");
+            input = scanner.nextLine();
+            String[] splittedCommand = input.split("\\s+",2);
+            String commandType = splittedCommand[0].toUpperCase();
 
-            } else {
-                String[] arr = text.split(" ", 2);
-                String action = arr[0];
-                String input = arr[1];
-
-                if (action.equals("done")){
-                    int setAsDone =Integer.parseInt(input) ;
-                    setAsDone--;
-                    todos[setAsDone].setDone(true);
+            switch (commandType) {
+                case "BYE":
+                    System.out.println("Bye. Hope to see you again soon!");
+                    isContinue = false;
+                    break;
+                case "LIST":
+                    System.out.println("____________________________________________________________");
+                    System.out.println("Here are the tasks in your list:");
+                    for (int i = 0; i < numberOfTask; i++){
+                        int number = i+1;
+                        System.out.println( number + "." + tasks[i]);
+                    }
+                    System.out.println("____________________________________________________________");
+                    break;
+                case "DONE":
+                    int taskIndex =Integer.parseInt(splittedCommand[1]) ;
+                    taskIndex--;
+                    tasks[taskIndex].setDone(true);
 
                     System.out.println("____________________________________________________________");
-                    System.out.println(todos[setAsDone]);
+                    System.out.println(tasks[taskIndex]);
                     System.out.println("____________________________________________________________");
-
-                } else if (action.equals("todo")) {
-                    Todo newTodo = new Todo(input);
-                    todos[index++] = newTodo;
+                    break;
+                case "TODO":
+                    String description = splittedCommand[1];
+                    if(description == ""){
+                        System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+                    }
+                    Todo newTodo = new Todo(description);
+                    tasks[numberOfTask++] = newTodo;
 
                     System.out.println("____________________________________________________________");
                     System.out.println("Got it. I've added this task: ");
-                    System.out.println(todos[index - 1]);
-                    System.out.println("Now you have " + index + " tasks in the list.");
+                    System.out.println(tasks[numberOfTask - 1]);
+                    System.out.println("Now you have " + numberOfTask + " tasks in the list.");
                     System.out.println("____________________________________________________________");
-
-                } else if (action.equals("deadline")) {
-                    String[] inputs = input.split(" /by ", 2);
-                    Deadline newDeadline = new Deadline(inputs[0], inputs[1]);
-                    todos[index++] = newDeadline;
-
-                    System.out.println("____________________________________________________________");
-                    System.out.println("Got it. I've added this task: " + input);
-                    System.out.println(todos[index - 1]);
-                    System.out.println("Now you have " + index + " tasks in the list.");
-                    System.out.println("____________________________________________________________");
-
-                } else if (action.equals("event")) {
-                    String[] inputs = input.split(" /at ", 2);
-                    Event newEvent = new Event(inputs[0], inputs[1]);
-                    todos[index++] = newEvent;
+                    break;
+                case "DEADLINE":
+                    String deadlineDescription = splittedCommand[1];
+                    if(deadlineDescription == ""){
+                        System.out.println("☹ OOPS!!! The description of a deadline cannot be empty.");
+                    }
+                    String[] deadline = deadlineDescription.split(" /by ", 2);
+                    Deadline newDeadline = new Deadline(deadline[0], deadline[1]);
+                    tasks[numberOfTask++] = newDeadline;
 
                     System.out.println("____________________________________________________________");
-                    System.out.println("Got it. I've added this task: " + input);
-                    System.out.println(todos[index - 1]);
-                    System.out.println("Now you have " + index + " tasks in the list.");
+                    System.out.println("Got it. I've added this task: " + splittedCommand[1]);
+                    System.out.println(tasks[numberOfTask - 1]);
+                    System.out.println("Now you have " + numberOfTask + " tasks in the list.");
                     System.out.println("____________________________________________________________");
-
-                } else {
-                    System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
-                }
+                    break;
+                case "EVENT":
+                    String[] eventDescription = splittedCommand[1].split(" /at ", 2);
+                    Event newEvent = new Event(eventDescription[0], eventDescription[1]);
+                    tasks[numberOfTask++] = newEvent;
+                    System.out.println("____________________________________________________________");
+                    System.out.println("Got it. I've added this task: " + splittedCommand[1]);
+                    System.out.println(tasks[numberOfTask - 1]);
+                    System.out.println("Now you have " + numberOfTask + " tasks in the list.");
+                    System.out.println("____________________________________________________________");
+                    break;
+                default:
+                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
+
+
 
         }
 
