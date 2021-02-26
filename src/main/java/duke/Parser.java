@@ -24,6 +24,9 @@ import static duke.command.ExitCommand.EXIT_COMMAND;
 import static duke.command.FindCommand.FIND_COMMAND;
 import static duke.command.ListCommand.LIST_COMMAND;
 
+/**
+ * Parses user input.
+ */
 public class Parser {
     private static final int FIRST_WORD = 0;
     private static final int SECOND_WORD = 1;
@@ -32,14 +35,19 @@ public class Parser {
     public static final int EMPTY_WORD_SIZE = 0;
     public static final int ONE_WORD_SIZE = 1;
 
-    private static final String DEADLINE_REGEX = "/by";
-    private static final String EVENT_REGEX = "/at";
     private static final String EMPTY_STRING = "";
-    private static final String WHITE_SPACE_REGEX = "\\s+";
 
+    /**
+     * Parses user input into command and description for execution.
+     *
+     * @param userInput user input string.
+     * @param tasks a list of task store together.
+     * @return the command based on the user input.
+     * @throws EmptyStringException if the user input an empty string.
+     */
     public Command parseInput(String userInput, TaskList tasks) throws EmptyStringException {
 
-        String[] words = userInput.trim().split(WHITE_SPACE_REGEX, SPLIT_SIZE);
+        String[] words = userInput.trim().split("\\s+", SPLIT_SIZE);
         String commandWord = words[FIRST_WORD].toLowerCase();
         String description = userInput.replaceFirst(commandWord, EMPTY_STRING).trim();
 
@@ -53,13 +61,21 @@ public class Parser {
         case DEADLINE_COMMAND:
             //Fallthrough
         case EVENT_COMMAND:
-            return addTask(commandWord, description, tasks);
+            try {
+                return new AddCommand(commandWord, description, tasks);
+            } catch (EmptyDescriptionException emptyDescriptionException) {
+                return new InvalidCommand(commandWord, description, emptyDescriptionException);
+            }
         case DONE_COMMAND:
-            return doneTask(commandWord, description);
+            //Fallthrough
         case DELETE_COMMAND:
-            return deleteTask(commandWord, description);
+            return prepareDoneAndDeleteCommand(commandWord, description);
         case FIND_COMMAND:
-            return findTask(commandWord, description);
+            try {
+                return new FindCommand(description);
+            } catch (EmptyDescriptionException emptyDescriptionException) {
+                return new InvalidCommand(commandWord, description, emptyDescriptionException);
+            }
         case LIST_COMMAND:
             return new ListCommand();
         case EXIT_COMMAND:
@@ -69,18 +85,26 @@ public class Parser {
         }
     }
 
-    public Command addTask(String commandWord, String description, TaskList tasks) {
-        try {
-            return new AddCommand(commandWord, description, tasks);
-        } catch (EmptyDescriptionException emptyDescriptionException) {
-            return new InvalidCommand(commandWord, description, emptyDescriptionException);
-        }
-    }
-
-    public Command doneTask(String commandWord, String description) {
+    /**
+     * Parses the description from string to integer for done and delete command.
+     *
+     * @param commandWord the command based on the user input.
+     * @param description the description of string based on user input.
+     * @return the prepared command.
+     * @throws NumberFormatException if the description is not an integer.
+     * @throws IndexOutOfBoundsException if the number given by user is not found in the array list.
+     */
+    public Command prepareDoneAndDeleteCommand(String commandWord, String description) {
         try {
             int task_number = Integer.parseInt(description);
-            return new DoneCommand(task_number);
+            switch (commandWord) {
+            case DONE_COMMAND:
+                return new DoneCommand(task_number);
+            case DELETE_COMMAND:
+                return new DeleteCommand(task_number);
+            default:
+                return null;
+            }
         } catch (NumberFormatException numberFormatException) {
             return new InvalidCommand(commandWord, description, numberFormatException);
         } catch (IndexOutOfBoundsException indexOutOfBoundsException) {
@@ -88,27 +112,16 @@ public class Parser {
         }
     }
 
-    public Command deleteTask(String commandWord, String description) {
-        try {
-            int task_number = Integer.parseInt(description);
-            return new DeleteCommand(task_number);
-        } catch (NumberFormatException numberFormatException) {
-            return new InvalidCommand(commandWord, description, numberFormatException);
-        } catch (IndexOutOfBoundsException indexOutOfBoundsException) {
-            return new InvalidCommand(commandWord, description, indexOutOfBoundsException);
-        }
-    }
 
-    public Command findTask(String commandWord, String description) {
-        try {
-            return new FindCommand(description);
-        } catch (EmptyDescriptionException emptyDescriptionException) {
-            return new InvalidCommand(commandWord, description, emptyDescriptionException);
-        }
-    }
-
+    /**
+     * Parse the description string into description of task and date for deadline subclass.
+     *
+     * @param description the description of string based on user input.
+     * @return the task in deadline format.
+     * @throws EmptyStringException if the description does not contain the required regex.
+     */
     public Deadline parseDeadline(String description) throws EmptyStringException {
-        String[] words = description.trim().split(DEADLINE_REGEX, SPLIT_SIZE);
+        String[] words = description.trim().split("/by", SPLIT_SIZE);
         String extractedDescription = words[FIRST_WORD].trim();
 
         if (words.length == ONE_WORD_SIZE) {
@@ -119,8 +132,15 @@ public class Parser {
         return new Deadline(extractedDescription,date);
     }
 
+    /**
+     * Parse the description string into description of task and date for event subclass.
+     *
+     * @param description the description of string based on user input.
+     * @return the task in event format.
+     * @throws EmptyStringException if the description does not contain the required regex.
+     */
     public Event parseEvent(String description) throws EmptyStringException {
-        String[] words = description.trim().split(EVENT_REGEX, SPLIT_SIZE);
+        String[] words = description.trim().split("/at", SPLIT_SIZE);
         String extractedDescription = words[FIRST_WORD].trim();
 
         if (words.length == ONE_WORD_SIZE) {

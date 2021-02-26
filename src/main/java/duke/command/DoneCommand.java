@@ -1,11 +1,18 @@
 package duke.command;
 
+/**
+ * Represent a command to mark the Task in TaskList as done.
+ */
 public class DoneCommand extends Command {
     private final int indexFromList;
 
     private static final int LIST_INITIAL_INDEX = 1;
     public static final String DONE_COMMAND = "done";
 
+    /**
+     * Construct DoneCommand using task number.
+     * @param taskNumber the position of Task to be mark as done in TaskList.
+     */
     public DoneCommand(int taskNumber) {
         super();
         this.indexFromList = taskNumber - LIST_INITIAL_INDEX;

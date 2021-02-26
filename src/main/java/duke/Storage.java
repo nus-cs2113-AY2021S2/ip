@@ -13,8 +13,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents a data handler to save and load a list of task in a specific format.
+ */
 public class Storage {
+
     private final String filePath;
+
     private static final String USER_DIRECTORY = System.getProperty("user.dir");
     private static final String FILE_DIRECTORY = USER_DIRECTORY + "/src/data";
 
@@ -28,17 +33,49 @@ public class Storage {
     private static final String DEADLINE_TYPE = "[D]";
     private static final String TODO_TYPE = "[T]";
 
+    /**
+     * Construct Storage using a file path.
+     *
+     * @param filePath the file path specify by the user.
+     */
     public Storage (String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Returns a list of task load from a specific file location.
+     *
+     * @return a list of task.
+     * @throws FileNotFoundException if data is not found in the file path.
+     */
     public ArrayList<Task> load() throws FileNotFoundException {
         ArrayList<Task> tasksData = new ArrayList<>();
         readFileContents(tasksData);
         return tasksData;
     }
 
-    public void readFileContents(ArrayList<Task> tasksData) throws FileNotFoundException {
+    /**
+     * Save the TaskList into a local file.
+     *
+     * @param tasks the supply data to be saved.
+     */
+    public void save(TaskList tasks) {
+        try {
+            writeToFile(tasks);
+        } catch (IOException ioException) {
+            System.out.print("Something went wrong... System unable to find directory\n");
+        }
+    }
+
+    /**
+     * Creates a directory from the specific file directory.
+     * if the directory already exist, then no action is done.
+     */
+    public void createDirectory() {
+        new File(FILE_DIRECTORY).mkdir();
+    }
+
+    private void readFileContents(ArrayList<Task> tasksData) throws FileNotFoundException {
         File file = new File(filePath);
         Scanner scanner = new Scanner(file);
         while(scanner.hasNext()){
@@ -47,7 +84,7 @@ public class Storage {
         }
     }
 
-    public void addFileContents(String data, ArrayList<Task> tasksData) {
+    private void addFileContents(String data, ArrayList<Task> tasksData) {
         String[] contents  = splitContent(data);
         String taskType = contents[TASK_TYPE_INDEX].trim();
         String isDone = contents[DONE_INDEX].trim();
@@ -74,25 +111,13 @@ public class Storage {
         }
     }
 
-    public String[] splitContent(String content) {
+    private String[] splitContent(String content) {
         return content.split("\\|");
     }
 
-    public void checkIsDone(String isDone, Task task) {
+    private void checkIsDone(String isDone, Task task) {
         if (isDone.equals(IS_DONE)) {
             task.setAsDone();
-        }
-    }
-
-    public void createDirectory() {
-        new File(FILE_DIRECTORY).mkdir();
-    }
-
-    public void save(TaskList tasks) {
-        try {
-            writeToFile(tasks);
-        } catch (IOException ioException) {
-            System.out.print("Something went wrong... System unable to find directory\n");
         }
     }
 
@@ -101,9 +126,9 @@ public class Storage {
         FileWriter fileWriter = new FileWriter(fileDestination);
         for (int i = 0; i < tasks.size(); ++i) {
             switch (tasks.get(i).getTaskType()) {
-            case "[E]":
+            case EVENT_TYPE:
                 //Fallthrough
-            case "[D]":
+            case DEADLINE_TYPE:
                 tasks.get(i).getDate();
                 fileWriter.write(tasks.get(i).getTaskType() + " | "
                         + tasks.get(i).getIsDone() + " | "
@@ -111,7 +136,7 @@ public class Storage {
                         + tasks.get(i).getDate()
                         + System.lineSeparator());
                 break;
-            case "[T]":
+            case TODO_TYPE:
                 fileWriter.write(tasks.get(i).getTaskType() + " | "
                         + tasks.get(i).getIsDone() + " | "
                         + tasks.get(i).getDescription()
