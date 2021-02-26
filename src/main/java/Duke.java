@@ -1,16 +1,23 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
     protected static FileManager storage;
 
     public Duke() {
-        // set up the things needed to start Duke
+//         set up the things needed to start Duke
+
         FileManager.createFolder();
         storage = new FileManager();
         if (storage.retrieveTextFile()) {
             storage.loadData();
         }
+
     }
+
 
     public void run() {
 
@@ -46,6 +53,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
+
         new Duke().run();
     }
 

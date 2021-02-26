@@ -14,6 +14,6 @@ public class Deadline extends Task {
 
     @Override
     public String taskToText() {
-        return "D|" + super.completed + "|" + super.taskDescription + "|" + deadline;
+        return "D|" + super.completed + "| " + super.taskDescription + "|" + deadline;
     }
 }

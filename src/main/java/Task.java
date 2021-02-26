@@ -27,26 +27,23 @@ public class Task {
 
     public static Task textToTask(String text) {
         String[] task = text.split("\\|");
-        Task existingTask = null;
+        Task existingTask;
+
         switch (task[0]) {
         case "T":
             existingTask = new ToDo(task[2]);
-            if (task[1].equals("1")) {
-                existingTask.markAsDone();
-            }
             break;
         case "D":
             existingTask = new Deadline(task[2], task[3]);
-            if (task[1].equals("1")) {
-                existingTask.markAsDone();
-            }
             break;
         case "E":
             existingTask = new Event(task[2], task[3]);
-            if (task[1].equals("1")) {
-                existingTask.markAsDone();
-            }
             break;
+        default:    //case "A"
+            existingTask = new Task(task[2]);
+        }
+        if (task[1].equals("1")) {
+            existingTask.markAsDone();
         }
         return existingTask;
     }
