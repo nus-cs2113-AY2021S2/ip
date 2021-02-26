@@ -1,7 +1,7 @@
 # Friday - User Guide
 **Hi, I am Friday, your personal assistant.**  \
 \
-Friday is a desktop task management applictaion based on the Duke project, which is a greenfield Java project named after the Java mascot Duke. It is designed for use via **Command Line Interface (CLI)**.\
+Friday is a desktop task management applictaion based on the Duke project, which is a greenfield Java project named after the Java mascot Duke. It is designed for use via **Command Line Interface (CLI)**.
 
 
 ---
