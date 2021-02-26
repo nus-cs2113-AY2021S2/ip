@@ -14,7 +14,7 @@ Friday is a desktop task management applictaion based on the Duke project, which
     - [Viewing all tasks currently in the task list : `list`](README.md#viewing-all-tasks-currently-in-the-task-list--list)
     - [Marking a task as done : `done`](README.md#marking-a-task-as-done--done)
     - [Deleting a task from the task list : `delete`](README.md#deleting-a-task-from-the-task-list--delete)
-    - [Searching a task in the task list : `find`](README.md#Searching-a-task-in-the-task-list--find)
+    - [Searching a task in the task list : `find`](README.md#searching-a-task-in-the-task-list--find)
     - [Exiting the application : `bye` & `exit`](README.md#exiting-the-application--exit-or-bye)
 * [Command summary](README.md#command-summary)
 
@@ -121,7 +121,7 @@ _____________________________________________________________
 ```
 
 
-### Adding a event type of task : `event`
+### Adding an event type of task : `event`
 Adds a event type of task to the task list.
 
 Format: `event TASK_CONTENT /at EVENT_DATE`
