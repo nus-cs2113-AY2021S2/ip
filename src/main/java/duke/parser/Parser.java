@@ -5,12 +5,25 @@ import duke.exception.IllegalTaskCommandException;
 import java.util.StringJoiner;
 
 public class Parser {
+    /**
+     * Parses raw userInput to extract the command string.
+     *
+     * @param userInput is the raw input from the console.
+     * @return command string in upper case.
+     */
     public static String getCommand(String userInput) {
         String[] inputArray = userInput.split(" ");
         String command = inputArray[0];
         return command.toUpperCase();
     }
 
+    /**
+     * Parses raw userInput to return the Task segment.
+     *
+     * @param userInput is the raw input from the console.
+     * @return Task segment from the userInput.
+     * @throws IllegalTaskCommandException when there is no trailing Task segment.
+     */
     public static String getSubstring(String userInput) throws IllegalTaskCommandException {
         String cleanUserInput = userInput.strip(); // Removes any leading and trailing spaces
         int spacePosition = cleanUserInput.indexOf(" ");
@@ -20,6 +33,13 @@ public class Parser {
         return cleanUserInput.substring(spacePosition + 1);
     }
 
+    /**
+     * Parses raw userInput to return the Task description.
+     * 
+     * @param userInput is the raw input from the console.
+     * @return Description of the Task.
+     * @throws IllegalTaskCommandException when Tasks is expected to have a date/time segment.
+     */
     public static String getErrand(String userInput) throws IllegalTaskCommandException {
         String inputSubstring = getSubstring(userInput);
         int slashPosition = inputSubstring.indexOf("/");
@@ -30,6 +50,13 @@ public class Parser {
         return errand.trim();
     }
 
+    /**
+     * Parses raw userInput to return the Task description.
+     *
+     * @param userInput is the raw input from the console.
+     * @return Timestamp header of the Task.
+     * @throws IllegalTaskCommandException when Tasks is expected to have a date/time header.
+     */
     public static String getTimestampHeader(String userInput) throws IllegalTaskCommandException {
         String inputSubstring = getSubstring(userInput);
         int slashPosition = inputSubstring.indexOf("/");
@@ -42,6 +69,12 @@ public class Parser {
         return timestampHeader;
     }
 
+    /**
+     * Parses raw userInput to return the Task description.
+     *
+     * @param userInput is the raw input from the console.
+     * @return Timestamp of the Task.
+     */
     public static String getTimestamp(String userInput) throws IllegalTaskCommandException {
         String inputSubstring = getSubstring(userInput);
         int slashPosition = inputSubstring.indexOf("/");
@@ -51,6 +84,13 @@ public class Parser {
         return timestamp.trim();
     }
 
+    /**
+     * Loads the commands from the file into an input format that is
+     * recognised by the CommandHandler.
+     *
+     * @param fileInput is the raw input from the loaded save file
+     * @return A string of command that is recognised by the CommandHandler.
+     */
     public static String getLoadedCommand(String[] fileInput) {
         StringJoiner commandString = new StringJoiner(" ");
         for (int i = 0; i < fileInput.length; i++) {
