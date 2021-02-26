@@ -2,7 +2,6 @@ package duke;
 
 import duke.command.Command;
 import duke.command.CommandResult;
-import duke.exception.EmptyStringException;
 
 import java.io.FileNotFoundException;
 
@@ -57,7 +56,7 @@ public class Duke {
                 CommandResult result = command.execute();
                 ui.showMessage(result.messageToUser);
                 isExit = command.isExit();
-            } catch (EmptyStringException emptyStringException) {
+            } catch (Exception exception) {
                 ui.showErrorMessage();
             }
         }
