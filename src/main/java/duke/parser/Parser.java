@@ -13,4 +13,33 @@ public class Parser {
         }
         return new String[]{command, arguments};
     }
+
+    public static Object[] dataParser(String data) {
+        String desc;
+        boolean isDone = true;
+        String date;
+
+        if (data.charAt(0) == '0') {
+            isDone = false;
+        }
+
+        int indexOfSeparator = 0;
+        switch (data.charAt(1)) {
+        case 'T':
+            desc = data.substring(2);
+            date = null;
+            break;
+        case 'D':
+        case 'E':
+            indexOfSeparator = data.indexOf('|');
+            desc = data.substring(2, indexOfSeparator);
+            date = data.substring(indexOfSeparator + 1);
+            break;
+        default:
+            desc = null;
+            date = null;
+        }
+
+        return new Object[]{desc, isDone, date};
+    }
 }

@@ -81,30 +81,19 @@ public class Duke {
     }
 
     private static void loadData(ArrayList<Task> list, String line) {
-        boolean isDone = true;
-        int indexOfSeparator = 0;
-        String desc = new String();
-        String date = new String();
-
-        if (line.charAt(0) == '0') {
-            isDone = false;
-        }
+        Object[] parsedData = parser.dataParser(line);
+        String desc = (String)parsedData[0];
+        boolean isDone = (boolean)parsedData[1];
+        String date = (String)parsedData[2];
 
         switch (line.charAt(1)) {
         case 'T':
-            desc = line.substring(2);
             list.add(new ToDo(desc, isDone));
             break;
         case 'D':
-            indexOfSeparator = line.indexOf('|');
-            desc = line.substring(2, indexOfSeparator);
-            date = line.substring(indexOfSeparator + 1);
             list.add(new Deadline(desc, isDone, date));
             break;
         case 'E':
-            indexOfSeparator = line.indexOf('|');
-            desc = line.substring(2, indexOfSeparator);
-            date = line.substring(indexOfSeparator + 1);
             list.add(new Event(desc, isDone, date));
             break;
         }
