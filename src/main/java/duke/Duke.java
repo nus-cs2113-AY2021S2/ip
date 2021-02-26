@@ -26,6 +26,7 @@ public class Duke {
     private TaskActions actions;
 
     List<Task> tasks = new ArrayList<Task>();
+    List<Task> findTasks = new ArrayList<Task>();
 
     public static void main(String[] args) {
         new Duke().run();
@@ -35,6 +36,7 @@ public class Duke {
     public void run() {
         start();
         runCommandLoopUntilExit();
+        exit();
     }
 
     /**
@@ -63,8 +65,6 @@ public class Duke {
             String command = parser.getFirstWord(line);
 
             if (line.equals("bye")) {
-                storage.writeToFile(tasks);
-                ui.showExitMessage();
                 isOn = false;
             } else if (line.equals("list")) {
                 actions.listTasks(tasks);
@@ -122,9 +122,17 @@ public class Duke {
                 } catch (StringIndexOutOfBoundsException e) {
                     System.out.println("\tAre you sure you have nothing going on? :)");
                 }
+            } else if (command.equals("find")){
+                String search = line.substring(commandIndex + 1);
+                actions.findTask(tasks, findTasks, search);
             } else {
                 System.out.println("\tI am afraid a computer program is not able to understand what you're saying!");
             }
         }
+    }
+
+    private void exit() {
+        storage.writeToFile(tasks);
+        ui.showExitMessage();
     }
 }

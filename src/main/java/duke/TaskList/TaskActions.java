@@ -41,4 +41,25 @@ public class TaskActions {
         tasks.remove(index);
         System.out.println("\tDone! One less worry for you :)");
     }
+
+    /** Finds and prints all tasks with user specified keyword */
+    public void findTask(List<Task> tasks, List<Task> findTasks, String word) {
+        int i = 0;
+        findTasks.clear();
+        for (Task t : tasks) {
+            if (t.getTask().contains(word)) {
+                findTasks.add(t);
+            }
+        }
+        if (findTasks.size() == 0) {
+            System.out.println("No matching tasks found!");
+        } else {
+            System.out.println("\tHere are the matching tasks in your list:");
+            while (i < findTasks.size()) {
+                int num = i + 1;
+                System.out.println("\t" + num + ". " + findTasks.get(i).toString());
+                i++;
+            }
+        }
+    }
 }
