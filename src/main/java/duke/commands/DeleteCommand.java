@@ -17,6 +17,15 @@ public class DeleteCommand extends Command {
         this.commandArgs = commandArgs;
     }
 
+    /**
+     * Deletes a task from the TaskList object based on its task number.
+     * Fails if the argument value is missing or is not a number.
+     *
+     * @param tasks the TaskList object that contains the list of tasks.
+     * @param ui the TextUI object that that engages user input and program output.
+     * @param storage the Storage object that writes/retrieves to/from file.
+     * @see TaskList#deleteTask(int, TextUI, Storage)
+     */
     private void deleteTask(TaskList tasks, TextUI ui, Storage storage) {
         try {
             int taskNumber = parseNumberFromArgument(commandArgs);

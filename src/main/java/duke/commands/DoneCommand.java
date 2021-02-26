@@ -17,6 +17,15 @@ public class DoneCommand extends Command {
         this.commandArgs = commandArgs;
     }
 
+    /**
+     * Marks a task as done in the TaskList object based on its task number.
+     * Fails if the argument value is missing or is not a number.
+     *
+     * @param tasks the TaskList object that contains the list of tasks.
+     * @param ui the TextUI object that that engages user input and program output.
+     * @param storage the Storage object that writes/retrieves to/from file.
+     * @see TaskList#markTaskDone(int, TextUI, Storage)
+     */
     private void markTaskDone(TaskList tasks, TextUI ui, Storage storage) {
         try {
             int taskNumber = parseNumberFromArgument(commandArgs);

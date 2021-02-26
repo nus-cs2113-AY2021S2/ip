@@ -10,7 +10,10 @@ public class ListCommand extends Command {
     public static final String LIST_WORD = "list";
 
     /**
-     * Lists all tasks.
+     * Lists all tasks in the TaskList object.
+     *
+     * @param tasks the TaskList object that contains the list of tasks.
+     * @param ui the TextUI object that that engages user input and program output.
      */
     private void listTasks(TaskList tasks, TextUI ui) {
         if (tasks.isEmpty()) {

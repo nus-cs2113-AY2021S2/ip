@@ -22,6 +22,16 @@ public class DateCommand extends Command {
         this.commandArgs = commandArgs;
     }
 
+    /**
+     * Searches for the matching tasks date in TaskList object and prints
+     * them out.
+     * Fails if dateInput is not a parsable into a LocalDateTime.
+     *
+     * @param tasks the TaskList object that contains the list of tasks.
+     * @param ui the TextUI object that that engages user input and program output.
+     * @see #validateDateArguments(String)
+     * @see TaskList#printTasksByDate(LocalDateTime, TextUI)
+     */
     private void searchDate(TaskList tasks, TextUI ui) {
         try {
             String dateInput = validateDateArguments(commandArgs);
@@ -36,6 +46,15 @@ public class DateCommand extends Command {
         }
     }
 
+    /**
+     * Extracts the dateInput value and validates if it is not empty.
+     * Returns the string containing the dateInput.
+     * Throws an exception if the argument value is missing.
+     *
+     * @param commandArgs a string containing the command's arguments.
+     * @return a string containing the dateInput parsed from the commandArgs.
+     * @throws DukeException If the argument is empty.
+     */
     private String validateDateArguments(String commandArgs) throws DukeException {
         String dateInput = parseArgument(commandArgs, null, null);
         if (isArgumentValueEmpty(dateInput)) {

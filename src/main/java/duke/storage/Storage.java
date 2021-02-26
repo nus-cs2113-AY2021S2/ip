@@ -43,6 +43,13 @@ public class Storage {
         return directoryExists(dirPath) && Files.exists(filePath);
     }
 
+    /**
+     * Writes (Overwrites) all the tasks to file stored at dataFilePath.
+     * Creates a directory if directory does not exist.
+     *
+     * @param tasks an ArrayList of Task objects
+     * @throws IOException If an I/O error occurs
+     */
     public void writeTasksToFile(ArrayList<Task> tasks) throws IOException {
         if (!directoryExists(dataDirectoryPath)) {
             Files.createDirectories(dataDirectoryPath);
@@ -54,6 +61,14 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Retrieve all tasks from file stored at dataFilePath.
+     * Rejects any corrupted line in the file (line that does not
+     * match regex pattern).
+     *
+     * @return a Task ArrayList retrieved from file.
+     * @see #matchAndParseTask(String)
+     */
     public ArrayList<Task> retrieveTasksFromFile() {
         ArrayList<Task> tasks = new ArrayList<>();
         if (!fileExists(dataDirectoryPath, dataFilePath)) {
@@ -64,7 +79,7 @@ public class Storage {
             Scanner sc = new Scanner(taskFile);
             while (sc.hasNextLine()) {
                 String line = sc.nextLine();
-                Task task = parseAndMatchTask(line);
+                Task task = matchAndParseTask(line);
                 if (task != null) {
                     tasks.add(task);
                 }
@@ -75,6 +90,17 @@ public class Storage {
         }
     }
 
+    /**
+     * Extracts data from a data field based on the fieldIndex.
+     * The line contains a set of data fields.
+     * An example of a line is: "D | 1 | math hw | 27-02-2021 00:50"
+     * Each data field is separated by the pipe symbol.
+     *
+     * @param fieldIndex the index in the field to read from.
+     * @param line a string containing a set of data fields.
+     * @return a string of data extracted from the data field.
+     * @throws InvalidFieldException If field is corrupted or missing.
+     */
     private String extractDataField(int fieldIndex, String line) throws InvalidFieldException {
         String[] fields = line.split("\\|");
         if (fieldIndex >= 0 && fieldIndex < fields.length) {
@@ -83,16 +109,37 @@ public class Storage {
         throw new InvalidFieldException();
     }
 
+    /**
+     * Extracts the isDone boolean from the data field (index 1).
+     *
+     * @param line a string containing a set of data fields.
+     * @return the extracted boolean from the data field
+     * @throws InvalidFieldException If field is corrupted or missing.
+     */
     private boolean extractIsDone(String line) throws InvalidFieldException {
         return extractDataField(1, line).equals("1");
     }
 
+    /**
+     * Extracts the information required for creating a Todo object.
+     *
+     * @param line a string containing a set of data fields.
+     * @return the created Todo object
+     * @throws InvalidFieldException If field is corrupted or missing.
+     */
     private Todo extractTodo(String line) throws InvalidFieldException {
         boolean isDone = extractIsDone(line);
         String description = extractDataField(2, line);
         return new Todo(description, isDone);
     }
 
+    /**
+     * Extracts the information required for creating a Deadline object.
+     *
+     * @param line a string containing a set of data fields.
+     * @return the created Deadline object
+     * @throws InvalidFieldException If field is corrupted or missing.
+     */
     private Deadline extractDeadline(String line) throws InvalidFieldException {
         boolean isDone = extractIsDone(line);
         String description = extractDataField(2, line);
@@ -100,6 +147,13 @@ public class Storage {
         return new Deadline(description, isDone, by);
     }
 
+    /**
+     * Extracts the information required for creating a Event object.
+     *
+     * @param line a string containing a set of data fields.
+     * @return the created Event object
+     * @throws InvalidFieldException If field is corrupted or missing.
+     */
     private Event extractEvent(String line) throws InvalidFieldException {
         boolean isDone = extractIsDone(line);
         String description = extractDataField(2, line);
@@ -107,7 +161,19 @@ public class Storage {
         return new Event(description, isDone, at);
     }
 
-    public Task parseAndMatchTask(String line) {
+    /**
+     * Performs a regex pattern match on the line consisting of
+     * data fields. Each correct match yields either a Todo object,
+     * Deadline object or Event object. All are returned as a Task
+     * object.
+     * Returns null if pattern does not match or data cannot be
+     * extracted.
+     *
+     * @param line a string consisting of data fields
+     * @return a Task object if matching and data extraction is
+     *         successful.
+     */
+    public Task matchAndParseTask(String line) {
         try {
             if (Pattern.matches(TODO_REGEX_PATTERN, line)) {
                 return extractTodo(line);
@@ -121,5 +187,4 @@ public class Storage {
         }
         return null;
     }
-
 }

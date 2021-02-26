@@ -36,6 +36,14 @@ public class Utils {
         return commandArgs.substring(readFromIndex, readUntilIndex).trim();
     }
 
+    /**
+     * Returns an in parsed from the commandArgs string.
+     *
+     * @param commandArgs a full string of command arguments.
+     * @return an integer parsed from the commandArgs string.
+     * @throws DukeException If command argument value is empty.
+     * @throws NumberFormatException If command argument value is not an integer.
+     */
     public static int parseNumberFromArgument(String commandArgs) throws DukeException, NumberFormatException {
         String argValue = parseArgument(commandArgs, null, null);
         if (argValue == null) {
@@ -49,10 +57,12 @@ public class Utils {
     /**
      * Checks if argument value string is empty.
      *
-     * @param argValue argument value of a command argument
-     * @return true if empty, false if not empty
+     * @param argValue an argument value of a command argument
+     * @return true if null or empty, false if not empty.
      */
     public static boolean isArgumentValueEmpty(String argValue) {
-        return (argValue == null) || (argValue.length() == 0);
+        boolean isNull = (argValue == null);
+        boolean isEmpty = isNull || (argValue.length() == 0);
+        return isEmpty;
     }
 }
