@@ -28,7 +28,7 @@ public class FindCommand extends Command {
     }
 
     private String validateFindKeywordArguments(String commandArgs) throws DukeException {
-        String keyword = parseArgument(commandArgs, null);
+        String keyword = parseArgument(commandArgs, null, null);
         if (isArgumentValueEmpty(keyword)) {
             throw new DukeException(ERROR_MISSING_KEYWORD_MESSAGE);
         }

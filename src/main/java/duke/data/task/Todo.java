@@ -1,8 +1,11 @@
 package duke.data.task;
 
 public class Todo extends Task {
+    private static final String PRINT_STRING_FORMAT = "[T]%s";
+    private static final String FILE_OUTPUT_STRING_FORMAT = "%c %s";
+
     public Todo(String description) {
-        super(description);
+        this(description, false);
     }
 
     public Todo(String description, boolean isDone) {
@@ -11,11 +14,11 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        return String.format("[%c]%s", 'T', super.toString());
+        return String.format(PRINT_STRING_FORMAT, super.toString());
     }
 
     @Override
     public String toFileEntry() {
-        return String.format("%c %s", 'T', super.toFileEntry());
+        return String.format(FILE_OUTPUT_STRING_FORMAT, 'T', super.toFileEntry());
     }
 }

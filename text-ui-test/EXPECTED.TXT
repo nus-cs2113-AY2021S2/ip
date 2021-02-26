@@ -24,7 +24,7 @@
 	_________________________________________________________________
 	_________________________________________________________________
 	 Got it. I've added this task:
-	   [T][?] borrow book
+	   [T][ ] borrow book
 	 Now you have 1 tasks in the list.
 	_________________________________________________________________
 	_________________________________________________________________
@@ -44,14 +44,14 @@
 	_________________________________________________________________
 	_________________________________________________________________
 	 Got it. I've added this task:
-	   [D][?] return book (by: Sunday)
+	   [D][ ] return book (by: Sunday)
 	 Now you have 2 tasks in the list.
 	_________________________________________________________________
 	_________________________________________________________________
 	 ERROR:  The description of a event cannot be empty.
 	_________________________________________________________________
 	_________________________________________________________________
-	 ERROR:  The description of a event cannot be empty.
+	 ERROR:  The event's /at argument cannot be empty.
 	_________________________________________________________________
 	_________________________________________________________________
 	 ERROR:  The description of a event cannot be empty.
@@ -64,12 +64,12 @@
 	_________________________________________________________________
 	_________________________________________________________________
 	 Got it. I've added this task:
-	   [E][?] project meeting (at: Mon 2-4pm)
+	   [E][ ] project meeting (at: Mon 2-4pm)
 	 Now you have 3 tasks in the list.
 	_________________________________________________________________
 	_________________________________________________________________
 	 Got it. I've added this task:
-	   [T][?] write essay for GES
+	   [T][ ] write essay for GES
 	 Now you have 4 tasks in the list.
 	_________________________________________________________________
 	_________________________________________________________________
@@ -83,40 +83,40 @@
 	_________________________________________________________________
 	_________________________________________________________________
 	 Nice! I've marked this task as done:
-	   [T][?] borrow book
+	   [T][X] borrow book
 	_________________________________________________________________
 	_________________________________________________________________
 	 Nice! I've marked this task as done:
-	   [T][?] write essay for GES
+	   [T][X] write essay for GES
 	_________________________________________________________________
 	_________________________________________________________________
 	 Here are the tasks in your list:
-	 1.[T][?] borrow book
-	 2.[D][?] return book (by: Sunday)
-	 3.[E][?] project meeting (at: Mon 2-4pm)
-	 4.[T][?] write essay for GES
+	 1.[T][X] borrow book
+	 2.[D][ ] return book (by: Sunday)
+	 3.[E][ ] project meeting (at: Mon 2-4pm)
+	 4.[T][X] write essay for GES
 	_________________________________________________________________
 	_________________________________________________________________
 	 Nice! I've marked this task as done:
-	   [E][?] project meeting (at: Mon 2-4pm)
+	   [E][X] project meeting (at: Mon 2-4pm)
 	_________________________________________________________________
 	_________________________________________________________________
 	 Here are the tasks in your list:
-	 1.[T][?] borrow book
-	 2.[D][?] return book (by: Sunday)
-	 3.[E][?] project meeting (at: Mon 2-4pm)
-	 4.[T][?] write essay for GES
+	 1.[T][X] borrow book
+	 2.[D][ ] return book (by: Sunday)
+	 3.[E][X] project meeting (at: Mon 2-4pm)
+	 4.[T][X] write essay for GES
 	_________________________________________________________________
 	_________________________________________________________________
 	 Nice! I've marked this task as done:
-	   [D][?] return book (by: Sunday)
+	   [D][X] return book (by: Sunday)
 	_________________________________________________________________
 	_________________________________________________________________
 	 Here are the tasks in your list:
-	 1.[T][?] borrow book
-	 2.[D][?] return book (by: Sunday)
-	 3.[E][?] project meeting (at: Mon 2-4pm)
-	 4.[T][?] write essay for GES
+	 1.[T][X] borrow book
+	 2.[D][X] return book (by: Sunday)
+	 3.[E][X] project meeting (at: Mon 2-4pm)
+	 4.[T][X] write essay for GES
 	_________________________________________________________________
 	_________________________________________________________________
 	 ERROR:  The task number you've entered is invalid.
@@ -126,45 +126,96 @@
 	_________________________________________________________________
 	_________________________________________________________________
 	 Noted. I've removed this task:
-	   [E][?] project meeting (at: Mon 2-4pm)
+	   [E][X] project meeting (at: Mon 2-4pm)
 	 Now you have 3 tasks in the list.
 	_________________________________________________________________
 	_________________________________________________________________
 	 Here are the tasks in your list:
-	 1.[T][?] borrow book
-	 2.[D][?] return book (by: Sunday)
-	 3.[T][?] write essay for GES
+	 1.[T][X] borrow book
+	 2.[D][X] return book (by: Sunday)
+	 3.[T][X] write essay for GES
 	_________________________________________________________________
 	_________________________________________________________________
 	 Noted. I've removed this task:
-	   [T][?] write essay for GES
+	   [T][X] write essay for GES
 	 Now you have 2 tasks in the list.
 	_________________________________________________________________
 	_________________________________________________________________
 	 Here are the tasks in your list:
-	 1.[T][?] borrow book
-	 2.[D][?] return book (by: Sunday)
+	 1.[T][X] borrow book
+	 2.[D][X] return book (by: Sunday)
 	_________________________________________________________________
 	_________________________________________________________________
 	 ERROR:  The task number you've entered is invalid.
 	_________________________________________________________________
 	_________________________________________________________________
 	 Here are the tasks in your list:
-	 1.[T][?] borrow book
-	 2.[D][?] return book (by: Sunday)
+	 1.[T][X] borrow book
+	 2.[D][X] return book (by: Sunday)
 	_________________________________________________________________
 	_________________________________________________________________
 	 Noted. I've removed this task:
-	   [D][?] return book (by: Sunday)
+	   [D][X] return book (by: Sunday)
 	 Now you have 1 tasks in the list.
 	_________________________________________________________________
 	_________________________________________________________________
 	 Here are the tasks in your list:
-	 1.[T][?] borrow book
+	 1.[T][X] borrow book
 	_________________________________________________________________
 	_________________________________________________________________
 	 Noted. I've removed this task:
-	   [T][?] borrow book
+	   [T][X] borrow book
+	 Now you have 0 tasks in the list.
+	_________________________________________________________________
+	_________________________________________________________________
+	 No task in record.
+	_________________________________________________________________
+	_________________________________________________________________
+	 Got it. I've added this task:
+	   [E][ ] 5th project meeting (at: Mar 01, 2020 16:00)
+	 Now you have 1 tasks in the list.
+	_________________________________________________________________
+	_________________________________________________________________
+	 Got it. I've added this task:
+	   [E][ ] Test briefing (at: Mar 01, 2020 18:00)
+	 Now you have 2 tasks in the list.
+	_________________________________________________________________
+	_________________________________________________________________
+	 Got it. I've added this task:
+	   [D][ ] iP submission (by: Mar 05, 2020 23:59)
+	 Now you have 3 tasks in the list.
+	_________________________________________________________________
+	_________________________________________________________________
+	 Here are the tasks in your list:
+	 1.[E][ ] 5th project meeting (at: Mar 01, 2020 16:00)
+	 2.[E][ ] Test briefing (at: Mar 01, 2020 18:00)
+	 3.[D][ ] iP submission (by: Mar 05, 2020 23:59)
+	_________________________________________________________________
+	_________________________________________________________________
+	 ERROR:  Invalid date input. Please enter a valid date.
+	_________________________________________________________________
+	_________________________________________________________________
+	 Found 0 Deadline(s) and 0 Event(s) on the Mar 01, 1990.
+	_________________________________________________________________
+	_________________________________________________________________
+	 Found 0 Deadline(s) and 2 Event(s) on the Mar 01, 2020.
+	 Events(s):
+	 1.[E][ ] 5th project meeting (at: Mar 01, 2020 16:00)
+	 2.[E][ ] Test briefing (at: Mar 01, 2020 18:00)
+	_________________________________________________________________
+	_________________________________________________________________
+	 Noted. I've removed this task:
+	   [E][ ] 5th project meeting (at: Mar 01, 2020 16:00)
+	 Now you have 2 tasks in the list.
+	_________________________________________________________________
+	_________________________________________________________________
+	 Noted. I've removed this task:
+	   [E][ ] Test briefing (at: Mar 01, 2020 18:00)
+	 Now you have 1 tasks in the list.
+	_________________________________________________________________
+	_________________________________________________________________
+	 Noted. I've removed this task:
+	   [D][ ] iP submission (by: Mar 05, 2020 23:59)
 	 Now you have 0 tasks in the list.
 	_________________________________________________________________
 	_________________________________________________________________

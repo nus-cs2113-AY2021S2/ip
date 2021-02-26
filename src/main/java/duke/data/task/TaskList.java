@@ -5,8 +5,10 @@ import duke.storage.Storage;
 import duke.ui.TextUI;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import static duke.common.Utils.OUTPUT_DATE_FORMAT;
 import static duke.common.Messages.LIST_TASK_MESSAGE;
 import static duke.common.Messages.TASK_ADDED_MESSAGE;
 import static duke.common.Messages.TASK_REMOVED_MESSAGE;
@@ -17,6 +19,7 @@ import static duke.common.Messages.ERROR_INVALID_TASK_NUMBER_MESSAGE;
 import static duke.common.Messages.ERROR_TASK_NO_MATCH_MESSAGE;
 import static duke.common.Messages.DOUBLE_SPACE_PREFIX_STRING_FORMAT;
 import static duke.common.Messages.TASK_TOTAL_TASKS_STRING_FORMAT;
+import static duke.common.Messages.FOUND_DATE_TASK_STRING_FORMAT;
 
 public class TaskList {
     private ArrayList<Task> tasks;
@@ -57,11 +60,10 @@ public class TaskList {
      * Prints all tasks (tasks are numbered based on addition).
      */
     public void printAllTasks(TextUI ui) {
+        ui.printHorizontalLine();
         ui.printStatement(LIST_TASK_MESSAGE);
-        for (int i = 0; i < tasks.size(); i++) {
-            Task task = tasks.get(i);
-            ui.printStatement(String.format("%d.%s", i + 1, task));
-        }
+        printTaskArray(tasks, ui);
+        ui.printHorizontalLine();
     }
 
     /**
@@ -88,6 +90,13 @@ public class TaskList {
         }
     }
 
+    private void validateTaskNumber(int taskNumber) throws DukeException {
+        if (taskNumber <= 0 || taskNumber > tasks.size()) {
+            // Prevents the throwing of IndexOutOfBoundsException in the caller
+            throw new DukeException(ERROR_INVALID_TASK_NUMBER_MESSAGE);
+        }
+    }
+
     public void deleteTask(int taskNumber, TextUI ui, Storage storage) {
         try {
             validateTaskNumber(taskNumber);
@@ -104,10 +113,46 @@ public class TaskList {
         }
     }
 
-    private void validateTaskNumber(int taskNumber) throws DukeException {
-        if (taskNumber <= 0 || taskNumber > tasks.size()) {
-            // Prevents the throwing of IndexOutOfBoundsException in the caller
-            throw new DukeException(ERROR_INVALID_TASK_NUMBER_MESSAGE);
+    private void printMatchedDateTasks(ArrayList<Task> deadlines, ArrayList<Task> events,
+                                       TextUI ui, String date) {
+        ui.printHorizontalLine();
+        ui.printStatement(String.format(FOUND_DATE_TASK_STRING_FORMAT,
+                deadlines.size(), events.size(), date));
+        if (deadlines.size() > 0) {
+            ui.printStatement("Deadline(s):");
+            printTaskArray(deadlines, ui);
+        }
+        if (events.size() > 0) {
+            ui.printStatement("Events(s):");
+            printTaskArray(events, ui);
+        }
+        ui.printHorizontalLine();
+    }
+
+    public void printTasksByDate(LocalDateTime dateTime, TextUI ui) {
+        ArrayList<Task> deadlines = new ArrayList<>();
+        ArrayList<Task> events = new ArrayList<>();
+        for (Task t : tasks) {
+            if (t instanceof TaskWithDateTime) {
+                TaskWithDateTime dateTask = (TaskWithDateTime) t;
+                copyIfDateMatch(deadlines, events, dateTask, dateTime);
+            }
+        }
+        printMatchedDateTasks(deadlines, events, ui, dateTime.format(OUTPUT_DATE_FORMAT));
+    }
+
+    private void copyIfDateMatch(ArrayList<Task> deadlines, ArrayList<Task> events,
+                                 TaskWithDateTime dateTask, LocalDateTime dateTime) {
+        boolean hasDate = (dateTask.hasDateTime()) && (dateTask.getDateTime() != null);
+        boolean dateMatched = hasDate && dateTask.getDateTime()
+                                                 .toLocalDate()
+                                                 .isEqual(dateTime.toLocalDate());
+        if (dateMatched) {
+            if (dateTask instanceof Deadline) {
+                deadlines.add(dateTask);
+            } else {
+                events.add(dateTask);
+            }
         }
     }
 
