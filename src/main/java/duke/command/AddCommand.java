@@ -9,12 +9,23 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
+/**
+ * Add a task to TaskList.
+ */
 public class AddCommand extends Command {
     public static final String TODO_COMMAND = "todo";
     public static final String DEADLINE_COMMAND = "deadline";
     public static final String EVENT_COMMAND = "event";
     private static final String EMPTY_DESCRIPTION = "";
 
+    /**
+     * Construct AddCommand using input values after being parsed.
+     *
+     * @param commandWord the command to identify the type of task.
+     * @param description the description to be added to the TaskList.
+     * @param tasks the TaskList for data to be stored into.
+     * @throws EmptyDescriptionException if description entered by user are empty.
+     */
     public AddCommand(String commandWord, String description, TaskList tasks) throws EmptyDescriptionException {
         super();
 
@@ -54,19 +65,19 @@ public class AddCommand extends Command {
         return null;
     }
 
-    protected void addTodo(ToDo todo) {
+    private void addTodo(ToDo todo) {
         tasks.addTask(todo);
     }
 
-    protected void addDeadline(Deadline deadline) {
+    private void addDeadline(Deadline deadline) {
         tasks.addTask(deadline);
     }
 
-    protected void addEvent(Event event) {
+    private void addEvent(Event event) {
         tasks.addTask(event);
     }
 
-    protected String addMessage (Task task) {
+    private String addMessage (Task task) {
         String addMessage = "Got it. I've added this task:\n"
                 + "  " + task + "\n"
                 + "Now you have " + tasks.size() + " tasks in the list.\n";

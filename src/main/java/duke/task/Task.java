@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Represent a task.
+ */
 public class Task {
     protected final String description;
     protected boolean isDone;
@@ -14,7 +17,7 @@ public class Task {
         this.taskType = "[]";
     }
 
-    public String getStatusIcon() {
+    protected String getStatusIcon() {
         return (isDone ? "X" : " "); //return space or tick symbols
     }
 

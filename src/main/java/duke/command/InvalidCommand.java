@@ -3,11 +3,21 @@ package duke.command;
 import duke.exception.EmptyDescriptionException;
 import duke.exception.EmptyStringException;
 
+/**
+ * Represent a invalid command entered the user.
+ */
 public class InvalidCommand extends Command {
     private String commandWord;
     private String description;
     private Exception error;
 
+    /**
+     * Construct InvalidCommand using the commandWord, description and the exception occur.
+     *
+     * @param commandWord the command that error occur.
+     * @param description the description that error occur.
+     * @param exception the error type that has occurred.
+     */
     public InvalidCommand(String commandWord, String description, Exception exception) {
         this.commandWord = commandWord;
         this.description = description;

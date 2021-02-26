@@ -5,12 +5,23 @@ import duke.task.Task;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a list of tasks.
+ */
 public class TaskList {
     private List<Task> tasks = new ArrayList<>();
 
+    /**
+     * Constructs empty list of task.
+     */
     public TaskList () {
     }
 
+    /**
+     * Constructs a list of task using stored values.
+     *
+     * @param tasksData the supply data of a list of task.
+     */
     public TaskList(ArrayList<Task> tasksData) {
         this.tasks = tasksData;
     }

@@ -1,11 +1,18 @@
 package duke.command;
 
+/**
+ * Represent a command to delete the Task in TaskList.
+ */
 public class DeleteCommand extends Command {
     private final int indexFromList;
 
     private static final int LIST_INITIAL_INDEX = 1;
     public static final String DELETE_COMMAND = "delete";
 
+    /**
+     * Construct DeleteCommand using task number
+     * @param taskNumber the position of Task to be deleted in TaskList.
+     */
     public DeleteCommand(int taskNumber) {
         super();
         this.indexFromList = taskNumber - LIST_INITIAL_INDEX;

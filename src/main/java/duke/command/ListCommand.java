@@ -1,5 +1,8 @@
 package duke.command;
 
+/**
+ * Represent a command to list the items in TaskList.
+ */
 public class ListCommand extends Command {
     public static final String LIST_COMMAND = "list";
 

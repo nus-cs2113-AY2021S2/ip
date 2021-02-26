@@ -1,5 +1,8 @@
 package duke.command;
 
+/**
+ * Represent a command to exit the application.
+ */
 public class ExitCommand extends Command {
     public static final String EXIT_COMMAND = "bye";
 
@@ -9,11 +12,11 @@ public class ExitCommand extends Command {
         return new CommandResult(exitMessage());
     }
 
-    public void setExitCommand () {
+    protected void setExitCommand () {
         this.isExit = true;
     }
 
-    public String exitMessage () {
+    protected String exitMessage () {
         String message = "Exiting task tracker...\n";
         return message;
     }
