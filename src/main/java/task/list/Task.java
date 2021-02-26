@@ -11,12 +11,13 @@ public class Task {
     public static final String DONE_ICON = "OK";
     public static final String NOT_DONE_ICON = "XX";
     public static final String MARKED_AS_DONE = "Nice! I've marked this task as done:";
+    public static final String SPACE = " ";
     protected String description;
     protected boolean isDone;
 
     // prints a task from the list
     public void printTask() {
-        System.out.println("[" + getStatusIcon() + "]" + getTaskDescription());
+        System.out.println("[" + getStatusIcon() + "]" + SPACE + getTaskDescription());
     }
 
     // returns the done status icon for a task

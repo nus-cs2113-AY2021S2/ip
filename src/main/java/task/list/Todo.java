@@ -27,7 +27,7 @@ public class Todo extends Task {
 
     @Override
     public void printTask() {
-        String phrase = "[" + TASK_TITLE + "]" + "[" + getStatusIcon() + "]"
+        String phrase = "[" + TASK_TITLE + "]" + "[" + getStatusIcon() + "]" + SPACE
                 + getTaskDescription();
         System.out.println(phrase);
     }

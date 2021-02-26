@@ -37,8 +37,8 @@ public class Event extends Deadline {
 
     @Override
     public void printTask() {
-        String phrase = "[" + TASK_TITLE + "]" + "[" + getStatusIcon() + "]"
-                + getTaskDescription() + BY_HEADER
+        String phrase = "[" + TASK_TITLE + "]" + "[" + getStatusIcon() + "]" + SPACE
+                + getTaskDescription() + " " + BY_HEADER
                 + getTaskBy() + ")";
         System.out.println(phrase);
     }

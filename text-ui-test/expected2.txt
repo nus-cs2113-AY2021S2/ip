@@ -101,19 +101,19 @@ ________________________________________________________________________________
 Aight Crewmate!! I've got a new event for you!!! ( ^ _ ^ ): divorce
 ____________________________________________________________________________________
 ATTENTION, Here's your list of tasks Crewmate!!!
-1. [T][XX]eat
-2. [T][XX]drink
-3. [T][XX]dance
-4. [D][XX]assignment(by: No Deadline!! Hehe! :))
-5. [D][XX]project(by: No Deadline!! Hehe! :))
-6. [D][XX]presentation(by: 04-05-2021 18:00)
-7. [E][XX]wedding(by: No Event time!! Noice!!! :))
-8. [E][XX]reception(by: No Event time!! Noice!!! :))
-9. [E][XX]divorce(by: 02-28-2021 05:00)
+1. [T][XX] eat
+2. [T][XX] drink
+3. [T][XX] dance
+4. [D][XX] assignment (by: No Deadline!! Hehe! :))
+5. [D][XX] project (by: No Deadline!! Hehe! :))
+6. [D][XX] presentation (by: 04-05-2021 18:00)
+7. [E][XX] wedding (by: No Event time!! Noice!!! :))
+8. [E][XX] reception (by: No Event time!! Noice!!! :))
+9. [E][XX] divorce (by: 02-28-2021 05:00)
 Are you really a Crewmate??? You haven't done any work in this list! ( X _ X ' )
 ____________________________________________________________________________________
 Nice! I've marked this task as done:
-[T][OK]eat
+[T][OK] eat
 ____________________________________________________________________________________
 You still have 8 task(s) left in your Lists ! Hurry up!! ( X _ X )
 ____________________________________________________________________________________
@@ -121,7 +121,7 @@ What are you doing??? This job was already completed!! ( O . o )
 You still have 8 tasks left in this list Crewmate! Hurry up!! ( X _ X )"
 ____________________________________________________________________________________
 Nice! I've marked this task as done:
-[D][OK]project(by: No Deadline!! Hehe! :))
+[D][OK] project (by: No Deadline!! Hehe! :))
 ____________________________________________________________________________________
 You still have 7 task(s) left in your Lists ! Hurry up!! ( X _ X )
 ____________________________________________________________________________________
@@ -129,7 +129,7 @@ What are you doing??? This job was already completed!! ( O . o )
 You still have 7 tasks left in this list Crewmate! Hurry up!! ( X _ X )"
 ____________________________________________________________________________________
 Nice! I've marked this task as done:
-[E][OK]divorce(by: 02-28-2021 05:00)
+[E][OK] divorce (by: 02-28-2021 05:00)
 ____________________________________________________________________________________
 You still have 6 task(s) left in your Lists ! Hurry up!! ( X _ X )
 ____________________________________________________________________________________
@@ -137,15 +137,15 @@ What are you doing??? This job was already completed!! ( O . o )
 You still have 6 tasks left in this list Crewmate! Hurry up!! ( X _ X )"
 ____________________________________________________________________________________
 ATTENTION, Here's your list of tasks Crewmate!!!
-1. [T][OK]eat
-2. [T][XX]drink
-3. [T][XX]dance
-4. [D][XX]assignment(by: No Deadline!! Hehe! :))
-5. [D][OK]project(by: No Deadline!! Hehe! :))
-6. [D][XX]presentation(by: 04-05-2021 18:00)
-7. [E][XX]wedding(by: No Event time!! Noice!!! :))
-8. [E][XX]reception(by: No Event time!! Noice!!! :))
-9. [E][OK]divorce(by: 02-28-2021 05:00)
+1. [T][OK] eat
+2. [T][XX] drink
+3. [T][XX] dance
+4. [D][XX] assignment (by: No Deadline!! Hehe! :))
+5. [D][OK] project (by: No Deadline!! Hehe! :))
+6. [D][XX] presentation (by: 04-05-2021 18:00)
+7. [E][XX] wedding (by: No Event time!! Noice!!! :))
+8. [E][XX] reception (by: No Event time!! Noice!!! :))
+9. [E][OK] divorce (by: 02-28-2021 05:00)
 You still have 6 task(s) left in your Lists ! Hurry up!! ( X _ X )
 ____________________________________________________________________________________
 You are abandoning us!!! I trusted you!!!  ( O . o ' )

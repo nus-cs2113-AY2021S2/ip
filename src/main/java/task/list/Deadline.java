@@ -57,8 +57,8 @@ public class Deadline extends Todo {
 
     @Override
     public void printTask() {
-        String phrase = "[" + TASK_TITLE + "]" + "[" + getStatusIcon() + "]"
-                + getTaskDescription() + BY_HEADER
+        String phrase = "[" + TASK_TITLE + "]" + "[" + getStatusIcon() + "]" + SPACE
+                + getTaskDescription() + SPACE + BY_HEADER
                 + getTaskBy() + ")";
         System.out.println(phrase);
     }
