@@ -45,12 +45,13 @@ public class Duke {
                     System.out.println("____________________________________________________________");
                     break;
                 case "DONE":
-                    int taskIndex =Integer.parseInt(splittedCommand[1]) ;
-                    taskIndex--;
-                    tasks[taskIndex].setDone(true);
+                    int doneTaskIndex =Integer.parseInt(splittedCommand[1]) ;
+                    doneTaskIndex--;
+                    tasks[doneTaskIndex].setDone(true);
 
                     System.out.println("____________________________________________________________");
-                    System.out.println(tasks[taskIndex]);
+                    System.out.println("Nice! I've marked this task as done:");
+                    System.out.println(tasks[doneTaskIndex]);
                     System.out.println("____________________________________________________________");
                     break;
                 case "TODO":
@@ -90,6 +91,17 @@ public class Duke {
                     System.out.println("Got it. I've added this task: " + splittedCommand[1]);
                     System.out.println(tasks[numberOfTask - 1]);
                     System.out.println("Now you have " + numberOfTask + " tasks in the list.");
+                    System.out.println("____________________________________________________________");
+                    break;
+                case "DELETE":
+                    int deleteTaskIndex =Integer.parseInt(splittedCommand[1]) ;
+                    deleteTaskIndex--;
+                    System.out.println("____________________________________________________________");
+                    System.out.println("Noted. I have removed this task: ");
+                    System.out.println(tasks[deleteTaskIndex]);
+                    System.arraycopy(tasks, deleteTaskIndex + 1, tasks, deleteTaskIndex, tasks.length - deleteTaskIndex - 1);
+                    numberOfTask--;
+                    System.out.println(" Now you have " + numberOfTask +" tasks in the list.");
                     System.out.println("____________________________________________________________");
                     break;
                 default:
