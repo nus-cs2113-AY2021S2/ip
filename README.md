@@ -30,8 +30,9 @@ Prerequisites: JDK 11, update IntelliJ to the most recent version.
    ```
    _____________________________________________________________
     Welcome.
-    I am your assistant Friday. ✧ʕ̢̣̣̣̣̩̩̩̩·͡˔·ོɁ̡̣̣̣̣̩̩̩̩✧
+    I am your assistant Friday :)
     Just FYI, I am developed by Song Yu.
     May I know what I can help you?
    _____________________________________________________________
+
    ```
