@@ -15,6 +15,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 
+/**
+ * Handles data from text file.
+ */
 public class Storage {
     private static String filePath = "data/tasks.txt";
 
@@ -22,6 +25,11 @@ public class Storage {
         this.filePath = filepath;
     }
 
+    /**
+     * @return an arraylist of tasks.
+     * loads the saved text file.
+     * Error message is printed if file is not found.
+     */
     public ArrayList <Task> load() {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
@@ -63,6 +71,10 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * writes user's input onto a text file
+     * An error message is printed if file is unable to be written
+     */
     public static void writeFile() {
         try {
             if (Files.notExists(Paths.get("data/"))) {
