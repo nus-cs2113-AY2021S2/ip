@@ -3,6 +3,38 @@ package duke.ui;
 import duke.task.TaskList;
 
 public class Ui {
+    public static void printSuccessfulLoad() {
+        String loaded = "******************************************************\n"
+                + "*       Archive Successfully Loaded, Commander!      *\n"
+                + "******************************************************\n";
+
+        System.out.println(loaded);
+    }
+
+    public static void printUnsuccessfulLoad() {
+        String notLoaded = "******************************************************\n"
+                + "*Archive not found commander. Starting new archive...*\n"
+                + "******************************************************\n";
+
+        System.out.println(notLoaded);
+    }
+
+    public static void printUnsuccessfulCreation() {
+        String failedCreation = "******************************************************\n"
+                + "*     Archive creation was corrupted! Aborting...    *\n"
+                + "******************************************************\n";
+
+        System.out.println(failedCreation);
+    }
+
+    public static void printSuccessfulCreation() {
+        String successCreation = "******************************************************\n"
+                + "*      Archive successfully created, Commander!      *\n"
+                + "******************************************************\n";
+
+        System.out.println(successCreation);
+    }
+
     public static void initialiseWelcomeMessage() {
         String logo
                 = "******************************************************\n"

@@ -20,4 +20,9 @@ public class Deadline extends Task {
     public String getTaskItem() {
         return this.description + " (" + this.timestampHeader + ": " + this.timestamp + ")";
     }
+
+    @Override
+    public String getFileFormat() {
+        return this.description + " /" + this.timestampHeader + " " + this.timestamp;
+    }
 }

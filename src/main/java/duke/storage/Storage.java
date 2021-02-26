@@ -1,23 +1,21 @@
 package duke.storage;
 
-import duke.Duke;
+import duke.commands.CommandHandler;
 import duke.exception.IllegalTaskCommandException;
+import duke.parser.Parser;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
-import java.util.StringJoiner;
 
 public class Storage {
     private static final String FILE_PATH = "Duke_Tasks.txt";
 
     public static void saveTasks() throws IOException {
         File file = new File(FILE_PATH);
-        if (file.createNewFile()) {
-            System.out.println("Archive successfully created, Commander!");
-        }
 
         FileWriter writer = new FileWriter(file);
         writer.write(TaskList.convertToFileInput());
@@ -28,43 +26,41 @@ public class Storage {
         File file = new File(FILE_PATH);
 
         if (file.exists()) {
-            int counter = 1;
             Scanner scanner = new Scanner(file);
+
             while (scanner.hasNext()) {
-                String [] fileInput = scanner.nextLine().split(",");
-                String commandCode;
+                String[] fileInput = scanner.nextLine().split(",");
+                String loadedCommand = Parser.getLoadedCommand(fileInput);
+
                 switch (fileInput[0].strip()) {
                 case "T":
-                    commandCode = "TODO";
+                    CommandHandler.executeTodo(loadedCommand);
+                    CommandHandler.executeLoadMarkDone(fileInput);
                     break;
                 case "D":
-                    commandCode = "DEADLINE";
+                    CommandHandler.executeDeadline(loadedCommand);
+                    CommandHandler.executeLoadMarkDone(fileInput);
                     break;
                 case "E":
-                    commandCode = "EVENT";
-                    break;
-                default:
-                    commandCode = "";
+                    CommandHandler.executeEvent(loadedCommand);
+                    CommandHandler.executeLoadMarkDone(fileInput);
                     break;
                 }
-                StringJoiner command = new StringJoiner(" ");
-                for (int i = 0; i < fileInput.length; i++) {
-                    if (i == 1) {
-                        continue; // Skips the done
-                    }
-                    command.add(fileInput[i].strip());
-                }
-
-                Duke.executeCommand(commandCode, command.toString());
-
-                if(fileInput[1].strip().equals("X")) {
-                    //TaskList.markDone(String.valueOf(counter));
-                    System.out.println("Placeholder!");
-                }
-                counter++;
             }
+            Ui.printSuccessfulLoad();
         } else {
-            System.out.println("Archive not found, Commander!");
+            Ui.printUnsuccessfulLoad();
+            initSaveFile();
+        }
+    }
+
+    private static void initSaveFile() throws IOException {
+        File newFile = new File(FILE_PATH);
+        if (newFile.createNewFile()) {
+            Ui.printSuccessfulCreation();
+        } else {
+            Ui.printUnsuccessfulCreation();
+            System.exit(-1);
         }
     }
 }

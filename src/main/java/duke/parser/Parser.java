@@ -2,6 +2,8 @@ package duke.parser;
 
 import duke.exception.IllegalTaskCommandException;
 
+import java.util.StringJoiner;
+
 public class Parser {
     public static String getCommand(String userInput) {
         String[] inputArray = userInput.split(" ");
@@ -47,5 +49,16 @@ public class Parser {
         int spacePosition = timestamp.indexOf(" ");
         timestamp = timestamp.substring(spacePosition);
         return timestamp.trim();
+    }
+
+    public static String getLoadedCommand(String[] fileInput) {
+        StringJoiner commandString = new StringJoiner(" ");
+        for (int i = 0; i < fileInput.length; i++) {
+            if (i == 1) {
+                continue; // Skips the completion status
+            }
+            commandString.add(fileInput[i].strip());
+        }
+        return commandString.toString();
     }
 }

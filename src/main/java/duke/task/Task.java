@@ -20,4 +20,8 @@ public class Task {
     public String getTaskItem() {
         return this.description;
     }
+
+    public String getFileFormat() {
+        return this.description;
+    }
 }

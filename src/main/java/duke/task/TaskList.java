@@ -8,6 +8,10 @@ import java.util.StringJoiner;
 public class TaskList {
     protected static ArrayList<Task> taskArray = new ArrayList<>();
 
+    public static int returnTaskCount() {
+        return taskArray.size();
+    }
+
     public static String returnTaskType(int index) {
         return taskArray.get(index).getTaskType();
     }
@@ -20,14 +24,8 @@ public class TaskList {
         return taskArray.get(index).getStatusIcon();
     }
 
-    public static int returnTaskCount() {
-        return taskArray.size();
-    }
-
-    public static void addToTaskList(Task task) {
-        taskArray.add(task);
-        int index = taskArray.indexOf(task);
-        Ui.echoInput(index);
+    public static String returnFileFormat(int index) {
+        return taskArray.get(index).getFileFormat();
     }
 
     public static void printList() {
@@ -45,12 +43,16 @@ public class TaskList {
 
     public static void markDone(int index) {
         taskArray.get(index).isDone = true;
-        Ui.printMarkDonePrompt(index);
     }
 
     public static void deleteTask(int index) {
         Ui.printDeletePrompt(index);
         taskArray.remove(index);
+    }
+
+    public static int addToTaskList(Task task) {
+        taskArray.add(task);
+        return taskArray.indexOf(task);
     }
 
     public static String convertToFileInput() {
@@ -65,6 +67,6 @@ public class TaskList {
     }
 
     public static String getFileInput(int index) {
-        return returnTaskType(index) + " , " + returnStatusIcon(index) + " , " + returnTaskItem(index);
+        return returnTaskType(index) + " , " + returnStatusIcon(index) + " , " + returnFileFormat(index);
     }
 }
