@@ -35,6 +35,13 @@ public class Utils {
             DateTimeFormatter.ofPattern("yyyy/M/d")
     };
 
+    /**
+     * Parses dateInput into a LocalDateTime object.
+     * Returns null if dateInput cannot be parsed into a LocalDateTime object.
+     *
+     * @param dateInput a string containing the date supplied from the user.
+     * @return a LocalDateTime object or null if failed to parse dateInput.
+     */
     public static LocalDateTime parseDate(String dateInput) {
         for (DateTimeFormatter dtf : POSSIBLE_DATE_FORMATS) {
             try {
@@ -47,6 +54,14 @@ public class Utils {
         return null;
     }
 
+    /**
+     * Parses dateTimeInput into a LocalDateTime object.
+     * Returns null if dateTimeInput cannot be parsed into a LocalDateTime object.
+     *
+     * @param dateTimeInput a string containing the date supplied from the user.
+     * @return a LocalDateTime object or null if failed to parse dateTimeInput.
+     * @see #parseDate(String)
+     */
     public static LocalDateTime parseDateTime(String dateTimeInput) {
         for (DateTimeFormatter dtf : POSSIBLE_DATETIME_FORMATS) {
             try {
@@ -59,6 +74,13 @@ public class Utils {
         return parseDate(dateTimeInput);
     }
 
+    /**
+     * Returns a datetime formatted string of the LocalDateTime object.
+     * Example of string is "Oct 22, 2019 18:00".
+     *
+     * @param dateTime a LocalDateTime object.
+     * @return a datetime string represented using OUTPUT_DATETIME_FORMAT
+     */
     public static String outputDateTime(LocalDateTime dateTime) {
         return dateTime.format(OUTPUT_DATETIME_FORMAT);
     }
