@@ -24,7 +24,7 @@ public class TaskList {
         return taskArray.get(index).getStatusIcon();
     }
 
-    public static String returnFileFormat(int index) {
+    private static String returnFileFormat(int index) {
         return taskArray.get(index).getFileFormat();
     }
 
@@ -33,10 +33,7 @@ public class TaskList {
         for (Task t : taskArray) {
             int index = taskArray.indexOf(t);
             Ui.printTaskIndex(index);
-            System.out.print("[" + returnTaskType(index) + "]");
-            Ui.printCompletionStatus(index);
-            System.out.print(" " + returnTaskItem(index));
-            System.out.println();
+            Ui.printTaskItem(index);
         }
         System.out.println();
     }
@@ -66,7 +63,29 @@ public class TaskList {
         return string.toString();
     }
 
-    public static String getFileInput(int index) {
+    private static String getFileInput(int index) {
         return returnTaskType(index) + " , " + returnStatusIcon(index) + " , " + returnFileFormat(index);
+    }
+
+    public static void searchWord(String keyWord) {
+        boolean isFound = false;
+        Ui.printSearchHeader();
+        for (Task t : taskArray) {
+            String currentDescription = t.getTaskItem().toUpperCase();
+            if (currentDescription.contains(keyWord.toUpperCase())) {
+                isFound = true;
+                printSearchedTasks(t);
+            }
+        }
+        if (!isFound) {
+            Ui.printNullSearch();
+        }
+    }
+
+    private static void printSearchedTasks(Task t) {
+        int index = taskArray.indexOf(t);
+        System.out.print("[" + (index + 1) + "]");
+        Ui.printTaskItem(index);
+        System.out.println();
     }
 }

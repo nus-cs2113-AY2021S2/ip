@@ -83,9 +83,7 @@ public class Ui {
         String echoBottom = "______________________________________________________\n";
 
         System.out.println(echoTop);
-        System.out.print("[" + TaskList.returnTaskType(index) + "]");
-        printCompletionStatus(index);
-        System.out.println(" " + TaskList.returnTaskItem(index));
+        printTaskItem(index);
         System.out.println();
         System.out.println("There are now " + TaskList.returnTaskCount() + " mission objective(s), Commander.");
         System.out.println(echoBottom);
@@ -97,10 +95,15 @@ public class Ui {
         String doneTextBottom = "______________________________________________________\n";
 
         System.out.println(doneTextTop);
+        printTaskItem(index);
+        System.out.println(doneTextBottom);
+    }
+
+    public static void printTaskItem(int index) {
         System.out.print("[" + TaskList.returnTaskType(index) + "]");
         printCompletionStatus(index);
-        System.out.println(" " + TaskList.returnTaskItem(index));
-        System.out.println(doneTextBottom);
+        System.out.print(" " + TaskList.returnTaskItem(index));
+        System.out.println();
     }
 
     public static void printDeletePrompt(int taskIndex) {
@@ -109,9 +112,7 @@ public class Ui {
         String doneTextBottom = "______________________________________________________\n";
 
         System.out.println(doneTextTop);
-        System.out.print("[" + TaskList.returnTaskType(taskIndex) + "]");
-        printCompletionStatus(taskIndex);
-        System.out.println(" " + TaskList.returnTaskItem(taskIndex));
+        printTaskItem(taskIndex);
         System.out.println();
         System.out.println("There are now " + (TaskList.returnTaskCount() - 1) + " mission objective(s), Commander.");
         System.out.println(doneTextBottom);
@@ -123,5 +124,19 @@ public class Ui {
 
     public static void printCompletionStatus(int index) {
         System.out.print("[" + TaskList.returnStatusIcon(index) + "]");
+    }
+
+    public static void printSearchHeader() {
+        String searchHeader = "******************************************************\n"
+                + "*          Processing all objectives now...          *\n"
+                + "******************************************************\n";
+
+        System.out.println(searchHeader);
+    }
+
+    public static void printNullSearch() {
+        printErrorLogo();
+        System.out.println("No matching objectives found, Commander!");
+        System.out.println();
     }
 }

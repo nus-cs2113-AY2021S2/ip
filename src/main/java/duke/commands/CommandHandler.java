@@ -38,6 +38,9 @@ public class CommandHandler {
             case "DELETE":
                 executeDelete(userInput);
                 break;
+            case "SEARCH":
+                executeSearch(userInput);
+                break;
             default:
                 throw new IllegalTaskCommandException("Unacceptable Command!");
             }
@@ -47,6 +50,11 @@ public class CommandHandler {
         }
 
         Storage.saveTasks();
+    }
+
+    private static void executeSearch(String userInput) throws IllegalTaskCommandException {
+        String keyWord = Parser.getSubstring(userInput);
+        TaskList.searchWord(keyWord);
     }
 
     public static void executeDelete(String userInput) throws IllegalTaskCommandException {
@@ -93,8 +101,7 @@ public class CommandHandler {
     }
 
     public static int executeTodo(String userInput) throws IllegalTaskCommandException {
-        String errand;
-        errand = Parser.getSubstring(userInput);
+        String errand = Parser.getSubstring(userInput);
         Task todo = new Todo(errand);
         return TaskList.addToTaskList(todo);
     }
