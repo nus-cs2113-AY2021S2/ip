@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 
 
-public class Duke {
+public class Duke implements BasicCommands {
 
     public static void displayInitialMessage(){
         String logo = " ____        _        \n"
