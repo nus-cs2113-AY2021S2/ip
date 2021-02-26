@@ -4,7 +4,6 @@ import java.io.IOException;
 
 public class Ui {
 
-    private static final String DIVIDER = "\t_______________________________\n";
     private static final String LOGO =
             "▒▒▒▒▒▒▒█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█\n"
                     + "▒▒▒▒▒▒▒█░▒▒▒▒▒▒▒▓▒▒▓▒▒▒▒▒▒▒░█\n"
@@ -31,7 +30,7 @@ public class Ui {
     }
 
     public static void printFolderExistsMessage() {
-        System.out.println("Folder already exists");
+        System.out.println("Folder already exists.");
     }
 
     public static void printErrorMessage(IOException e) {
@@ -43,14 +42,18 @@ public class Ui {
         System.out.println("Text file already exists.");
     }
 
+    public static void printSearchWordNotFoundMessage() {
+        System.out.println("No matches found! Please try again.");
+    }
+
     public void printGreeting() {
         System.out.print(LOGO);
         System.out.print("Hello! I'm Duke\nWhat can I do for you?\n");
     }
+
     public void printExitMessage() {
         System.out.print("Bye. Hope to see you again soon!\n");
     }
-
 
 
 }

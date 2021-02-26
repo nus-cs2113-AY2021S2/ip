@@ -5,8 +5,16 @@ import duke.task.TaskList;
 
 import java.util.Scanner;
 
+/**
+ * Handles Duke's commands.
+ */
 public class Parser {
 
+    /**
+     * Determines the command from user input.
+     *
+     * @return Command to exit program.
+     */
     public static void determineCommand() {
         Scanner in = new Scanner(System.in);
         String input;
@@ -27,6 +35,8 @@ public class Parser {
                 TaskList.addDeadline(input);
             } else if (input.startsWith("event")) {
                 TaskList.addEvent(input);
+            } else if (input.startsWith("find")) {
+                TaskList.findTask(input);
             } else if (input.equals("bye")) {
                 break;
             } else {
