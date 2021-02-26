@@ -96,7 +96,7 @@ public class TaskList {
                 String timeLimitFormatted = UI.getTimeLimitFormatted(currentItem);
                 System.out.println((i + 1) + ". "
                         + "[" + UI.convertTaskType(currentItem.getTaskType()) + "] "
-                        + "[" + (currentItem.isDone() ? "☑️" : "✖️") + "] "
+                        + "[" + (currentItem.isDone() ? "X" : " ") + "] "
                         + currentItem.getTaskContent()
                         + (currentItem.getTaskType() == TaskType.TODO ? "" : " ")
                         + timeLimitFormatted
@@ -151,7 +151,7 @@ public class TaskList {
         System.out.println(UI.DIVIDER
                 + "A new deadline task is added:\n"
                 + "Task content  :" + newTask.getTaskContent() + "\n"
-                + "Task deadline :" + newTask.getDeadline() + "\n"
+                + "Task deadline :" + UI.getTimeLimitFormatted(newTask) + "\n"
                 + getNumOfTasksString() + "\n"
                 + UI.DIVIDER_LINE_ONLY
         );
@@ -176,7 +176,7 @@ public class TaskList {
         System.out.println(UI.DIVIDER
                 + "A new event task is added:\n"
                 + "Task content  :" + newTask.getTaskContent() + "\n"
-                + "Task period   :" + newTask.getEventTime() + "\n"
+                + "Task period   :" + UI.getTimeLimitFormatted(newTask) + "\n"
                 + getNumOfTasksString() + "\n"
                 + UI.DIVIDER_LINE_ONLY
         );
@@ -189,16 +189,16 @@ public class TaskList {
      */
     public void removeTaskFromList(int itemIndex) {
         Task currentItem = Tasks.get(itemIndex);
-        String timeString = currentItem.getTimeLimitString();
         Tasks.remove(itemIndex);
         numOfTasks--;
+        String timeLimitFormatted = UI.getTimeLimitFormatted(currentItem);
         System.out.println(UI.DIVIDER
                 + "The task below is successfully removed from your task list:)\n\t"
                 + "[" + UI.convertTaskType(currentItem.getTaskType()) + "] "
-                + "[" + (currentItem.isDone() ? "☑️" : "✖️") + "] "
+                + "[" + (currentItem.isDone() ? "X" : " ️") + "] "
                 + currentItem.getTaskContent()
                 + (currentItem.getTaskType() == TaskType.TODO ? "" : " ")
-                + timeString + "\n"
+                + timeLimitFormatted + "\n"
                 + getNumOfTasksString() + "\n"
                 + UI.DIVIDER_LINE_ONLY
         );

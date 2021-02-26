@@ -26,7 +26,7 @@ public class UI {
         System.out.println(
                 DIVIDER
                         + " Welcome.\n"
-                        + " I am your assistant Friday. ✧ʕ̢̣̣̣̣̩̩̩̩·͡˔·ོɁ̡̣̣̣̣̩̩̩̩✧\n"
+                        + " I am your assistant Friday :)\n"
                         + " Just FYI, I am developed by Song Yu.\n"
                         + " May I know what I can help you?\n"
                         + DIVIDER_LINE_ONLY
@@ -41,7 +41,7 @@ public class UI {
                 DIVIDER
                         + " Thank you for getting in touch.\n"
                         + " See you next time.\n"
-                        + "✧( ु•⌄• )◞ᴴᴬᵛᴱ ᴬ ᴳᴼᴼᴰ ᵀᴵᴹᴱ\n"
+                        + " Have a nice day :)\n"
                         + DIVIDER_LINE_ONLY
         );
     }

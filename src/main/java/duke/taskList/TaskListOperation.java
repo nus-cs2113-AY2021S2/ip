@@ -180,7 +180,7 @@ public class TaskListOperation {
                 String timeLimitFormatted = UI.getTimeLimitFormatted(currentItem);
                 System.out.println((i + 1) + ". "
                         + "[" + UI.convertTaskType(currentItem.getTaskType()) + "] "
-                        + "[" + (currentItem.isDone() ? "☑️" : "✖️") + "] "
+                        + "[" + (currentItem.isDone() ? "X️" : " ") + "] "
                         + currentItem.getTaskContent()
                         + (currentItem.getTaskType() == TaskType.TODO ? "" : " ")
                         + timeLimitFormatted
