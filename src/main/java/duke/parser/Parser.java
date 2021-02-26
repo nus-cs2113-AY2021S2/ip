@@ -29,7 +29,10 @@ public class Parser {
         } else if(input.startsWith("delete")){
             TaskList.deleteTask(input);
             Storage.writeFile();
-        } else{
+        } else if (input.startsWith("find")) {
+            TaskList.find(input);
+            Storage.writeFile();
+        } else {
             System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             Ui.showLine();
         }
