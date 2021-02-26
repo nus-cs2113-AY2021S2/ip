@@ -52,7 +52,11 @@ public class TaskActions {
             }
         }
         if (findTasks.size() == 0) {
+<<<<<<< HEAD
             System.out.println("\tNo matching tasks found!");
+=======
+            System.out.println("No matching tasks found!");
+>>>>>>> branch-Level-9
         } else {
             System.out.println("\tHere are the matching tasks in your list:");
             while (i < findTasks.size()) {
