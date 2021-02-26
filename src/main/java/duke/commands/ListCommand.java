@@ -16,9 +16,7 @@ public class ListCommand extends Command {
         if (tasks.isEmpty()) {
             ui.printStatements(LIST_NO_TASK_MESSAGE);
         } else {
-            ui.printHorizontalLine();
             tasks.printAllTasks(ui);
-            ui.printHorizontalLine();
         }
     }
 

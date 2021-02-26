@@ -9,7 +9,7 @@ public class ByeCommand extends Command {
     private static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
 
     public void execute(TaskList tasks, TextUI ui, Storage storage) {
-        setExit(true);
+        isExit = true;
         ui.printStatements(EXIT_MESSAGE);
     }
 }

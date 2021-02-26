@@ -42,8 +42,8 @@ public class EventCommand extends Command {
     }
 
     private String[] validateEventArguments(String commandArgs) throws DukeException {
-        String taskDescription = parseArgument(commandArgs, null);
-        String eventAt = parseArgument(commandArgs, EVENT_AT_TOKEN);
+        String taskDescription = parseArgument(commandArgs, null, EVENT_AT_TOKEN);
+        String eventAt = parseArgument(commandArgs, EVENT_AT_TOKEN, null);
         if (isArgumentValueEmpty(taskDescription)) {
             throw new DukeException(String.format(ERROR_EMPTY_TASK_STRING_FORMAT, "event"));
         }
