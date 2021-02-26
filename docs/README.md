@@ -169,7 +169,14 @@ _____________________________________________________________
 ```
 Expected outcome 2 (When there is no task in the task list):
 ```
+_____________________________________________________________
 
+This is your current task list:
+ - The list is empty!
+ - You can try add task object by input what
+   you want to do.
+ - check 'help' for more.
+_____________________________________________________________
 ```
 
 
