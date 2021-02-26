@@ -4,24 +4,32 @@ import exceptions.DukeException;
 import storage.Storage;
 import tasks.ToDos;
 
+/**
+ * Parses argument in the context of the add todo task command
+ *
+ * parameter "userInput" contains full command args string
+ * parameter "task" contains the task
+ */
 public class PrepareTodo extends Storage {
-    private String words [];
+    private final String[] words;
 
-    public PrepareTodo (String userInput){
+    public PrepareTodo(String userInput) {
         words = userInput.split(" ");
+
         try {
-            if (words.length==1) {
+            if (words.length == 1) {
                 throw new DukeException();
             }
-            String task = userInput.substring(5, userInput.length());
-            tasks[count] = new ToDos(task);
-            taskArrayList.add(tasks[count]); //store in array list for deleting
-            taskSentences.add("T"+"|"+tasks[count].getDone()+"|"+task); //store in array list for writing
+            String task = userInput.substring(5);
+
+            tasks[taskCount] = new ToDos(task);
+            taskArrayList.add(tasks[taskCount]);
+            taskSentences.add("T" + "|" + tasks[taskCount].getDone() + "|" + task);  //add task in string format
             System.out.println("Got it. I've added this task");
             System.out.print("  ");
-            tasks[count++].printStatus();
-            System.out.println("Now you have " + count + " tasks in the list");
-            Storage.writeFile(); // update file
+            tasks[taskCount++].printStatus();
+            System.out.println("Now you have " + taskCount + " tasks in the list");
+            Storage.writeFile();                                                 // update file
         } catch (DukeException e) {
             System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
         }

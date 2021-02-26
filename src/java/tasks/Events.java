@@ -1,19 +1,26 @@
 package tasks;
 
-import tasks.Task;
-
+/**
+ * Represents a event Task
+ */
 public class Events extends Task {
 
-    private String by;
+    private final String at;
 
-    public Events(String task,String by){
+    /**
+     * @param task contains the task
+     * @param dateAndTime contains the date and time
+     */
+    public Events(String task, String dateAndTime) {
         super(task);
-        this.by=by;
+        this.at = dateAndTime;
     }
 
+    /** Prints the task with its current status */
+    @Override
     public void printStatus() {
         System.out.print("[E]");
         super.printStatus();
-        System.out.println("(at: "+by+")");
+        System.out.println("(at: " + at + ")");
     }
 }

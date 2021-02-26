@@ -11,72 +11,93 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
 
+
+/**
+ * Functions that stores the task data by reading and writing the task data
+ */
 public class Storage {
 
     public static Task[] tasks = new Task[100];
     //Array list to store the task objects
     public static ArrayList<Task> taskArrayList = new ArrayList<Task>();
-    //to store all the task in string and write to file
+    //Array list in string for writing to file
     public static ArrayList<String> taskSentences = new ArrayList<String>();
-    public static int count = 0;
-    private static String home = System.getProperty("user.home");
+    public static int taskCount = 0;
+    private static final String home = System.getProperty("user.home");
+    //store each line from file
     private static String sentence;
+    //used to spilt each sentence from file
     private static String[] words;
 
-    public Storage(){
-
+    public Storage() {
     }
 
-    public static void readFile(){
+    /**
+     * Represents the file and method used to read task data.
+     * @throws Exception if file does not exist.
+     */
+    public static void readFile() {
 
-        try{
-            BufferedReader br = new BufferedReader(new FileReader(home+"/tasklist.txt")); //Read from this file
-            while((sentence=br.readLine())!=null){
+        try {
+            //Read from this file
+            BufferedReader br = new BufferedReader(new FileReader(home + "/tasklist.txt"));
+
+            while ((sentence = br.readLine()) != null) {
                 words = sentence.split("\\|");
-                switch(words[0]){
+
+                switch (words[0]) {
                     case "T":
-                        tasks[count] = new ToDos(words[2]); //create new todo object
-                        taskArrayList.add(tasks[count]);   //add todo object to arraylist
-                        taskSentences.add("T"+"|"+words[1]+"|"+words[2]); //update the task array list
-                        if(words[1].equals("true")){     //if read from file is done set the object as done
-                            tasks[count].setDone(true);
+                        //create new todo object
+                        tasks[taskCount] = new ToDos(words[2]);
+                        //add todo object to arraylist
+                        taskArrayList.add(tasks[taskCount]);
+                        //update the task array list
+                        taskSentences.add("T" + "|" + words[1] + "|" + words[2]);
+                        //if status from file is true set the object as done
+                        if (words[1].equals("true")) {
+                            tasks[taskCount].setDone(true);
                         }
-                        count++;                          //increment count
+                        taskCount++;
                         break;
                     case "D":
-                        tasks[count] = new DeadLines(words[2],words[3]); //create new deadline object
-                        taskArrayList.add(tasks[count]);   //add deadline object to arraylist
-                        taskSentences.add("D"+"|"+words[1]+"|"+words[2]+"|"+words[3]); //update the task array list
-                        if(words[1].equals("true")){     //if read from file is done set the object as done
-                            tasks[count].setDone(true);
+                        tasks[taskCount] = new DeadLines(words[2], words[3]);
+                        taskArrayList.add(tasks[taskCount]);
+                        taskSentences.add("D" + "|" + words[1] + "|" + words[2] + "|" + words[3]);
+                        if (words[1].equals("true")) {
+                            tasks[taskCount].setDone(true);
                         }
-                        count++;                          //increment count
+                        taskCount++;
                         break;
                     case "E":
-                        tasks[count] = new Events(words[2],words[3]); //create new events object
-                        taskArrayList.add(tasks[count]);   //add event object to arraylist
-                        taskSentences.add("E"+"|"+words[1]+"|"+words[2]+"|"+words[3]); //update the task array list
-                        if(words[1].equals("true")){     //if read from file is done set the object as done
-                            tasks[count].setDone(true);
+                        tasks[taskCount] = new Events(words[2], words[3]);
+                        taskArrayList.add(tasks[taskCount]);
+                        taskSentences.add("E" + "|" + words[1] + "|" + words[2] + "|" + words[3]);
+                        if (words[1].equals("true")) {
+                            tasks[taskCount].setDone(true);
                         }
-                        count++;                          //increment count
+                        taskCount++;
                         break;
                 }
             }
             br.close();
-        }catch(Exception ex){
-            System.out.println("No file at the moment");
+        } catch (Exception e) {
+            System.out.println("No file exist");
         }
     }
 
-    public static void writeFile(){
-        try{
-            BufferedWriter bw = new BufferedWriter(new FileWriter(home+"/tasklist.txt")); //write to this file
-            for(String s:taskSentences){
-                bw.write(s+"\n");
+    /**
+     * Represents the file and method used to write task data.
+     * @throws Exception if unable to write to file
+     */
+    public static void writeFile() {
+        try {
+            //write to this file
+            BufferedWriter bw = new BufferedWriter(new FileWriter(home + "/tasklist.txt"));
+            for (String s : taskSentences) {
+                bw.write(s + "\n");
             }
             bw.close();
-        }catch(Exception ex){
+        } catch (Exception ex) {
             System.out.println("Error writing to file");
         }
     }
