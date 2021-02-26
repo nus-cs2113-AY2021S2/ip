@@ -6,16 +6,25 @@ import preparetask.PrepareEvent;
 import preparetask.PrepareTodo;
 import tasklist.TaskList;
 
+/**
+ * Parses user input into command for task objection creation.
+ */
 public class Parser {
 
-    public static void parseCommand(String userInput){
+    /**
+     * @param userInput contains the full user input
+     * @throws Exception if user input does not contains
+     * "bye","todo","deadline","event","list","done","delete","find"
+     */
+    public static void parseCommand(String userInput) {
 
         try {
-            if(!(userInput.contains("bye")||userInput.contains("todo")||userInput.contains("deadline")||userInput.contains("event")
-                    ||userInput.contains("list")||userInput.contains("done")||userInput.contains("delete")||userInput.contains("find"))){
+            if (!(userInput.contains("bye") || userInput.contains("todo") || userInput.contains("deadline") ||
+                    userInput.contains("event") || userInput.contains("list") || userInput.contains("done") ||
+                    userInput.contains("delete") || userInput.contains("find"))){
                 throw new DukeException();
             }
-            if (userInput.contains("todo")) { //prepareTodo
+            if (userInput.contains("todo")) {
                 new PrepareTodo(userInput);
             } else if (userInput.contains("deadline")) {
                 new PrepareDeadline(userInput);
@@ -25,12 +34,12 @@ public class Parser {
                 TaskList.list();
             } else if (userInput.contains("done")) {
                 TaskList.done(userInput);
-            } else if (userInput.contains("delete")){
+            } else if (userInput.contains("delete")) {
                 TaskList.delete(userInput);
-            } else if(userInput.contains("find")){
+            } else if (userInput.contains("find")) {
                 TaskList.find(userInput);
             }
-        }catch(DukeException e){
+        } catch (DukeException e) {
             System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
 
