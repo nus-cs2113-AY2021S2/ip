@@ -9,6 +9,17 @@ import java.util.ArrayList;
 public class TaskList {
     public static ArrayList<Task> tasks = new ArrayList<>();
     public static int maxTaskIndex = 0;
+  
+    static void findTasks(String input) {
+        String keyword = Parser.getTaskToFind(input);
+        int currentTaskIndex;
+        for (int i = 0; i < maxTaskIndex; i++) {
+            currentTaskIndex = i + 1;
+            if (tasks.get(i).description.contains(keyword)) {
+                System.out.println(currentTaskIndex + "." + tasks.get(i).toString());
+            }
+        }
+    }
 
     static void enumerateTasks() {
         int currentTaskIndex;

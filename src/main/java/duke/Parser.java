@@ -9,6 +9,7 @@ import java.util.Scanner;
  */
 public class Parser {
     public static final int DONE_START = 5;
+    public static final int FIND_START = 5;
     public static final int TODO_START = 5;
     public static final int EVENT_START = 6;
     public static final int DEADLINE_START = 9;
@@ -39,6 +40,10 @@ public class Parser {
             break;
         case DONE:
             TaskList.markTaskAsDone(input);
+            break;
+        case FIND:
+            Ui.findTaskMessage();
+            TaskList.findTasks(input);
             break;
         case DELETE:
             TaskList.deleteTask(input);
@@ -175,6 +180,10 @@ public class Parser {
         return (Integer.parseInt(input.substring(DONE_START)) - 1);
     }
 
+    static String getTaskToFind(String input) {
+        return input.substring(FIND_START);
+    }
+
     static boolean isBye() {
         return input.equals("bye");
     }
@@ -189,6 +198,10 @@ public class Parser {
 
     static boolean isTodo() {
         return input.length() > 4 && input.substring(0, 4).equals("todo");
+    }
+
+    static boolean isFind() {
+        return input.length() > 4 && input.substring(0, 4).equals("find");
     }
 
     static boolean isList() {

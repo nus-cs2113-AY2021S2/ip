@@ -30,6 +30,8 @@ public class Duke {
                 command = Command.DONE;
             } else if (Parser.isTodo()) {
                 command = Command.TODO;
+            } else if (Parser.isFind()) {
+                command = Command.FIND;
             } else if (Parser.isEvent()) {
                 command = Command.EVENT;
             } else if (Parser.isDelete()) {
