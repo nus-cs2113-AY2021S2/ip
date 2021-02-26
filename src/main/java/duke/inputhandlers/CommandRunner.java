@@ -173,7 +173,7 @@ public class CommandRunner {
      */
     private void markJobAsUndone(Task task) {
         task.setDone(false);
-        System.out.println(PROMPT_TASK_UNDONE);
+        System.out.print(PROMPT_TASK_UNDONE);
         task.printTask();
         System.out.println();
     }
