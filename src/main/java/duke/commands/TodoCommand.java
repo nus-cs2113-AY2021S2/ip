@@ -20,13 +20,13 @@ public class TodoCommand extends Command {
     }
 
     /**
-     * Records a new Todo task into the global task array.
-     * Ensures the task description is given in {@code commandArgs}
+     * Records a new Todo task into the TaskList object.
+     * Ensures the task description is in the commandArgs string.
      * Fails if task description argument value is invalid.
      *
-     * @param tasks
-     * @param ui
-     * @param storage
+     * @param tasks the TaskList object that contains the list of tasks.
+     * @param ui the TextUI object that that engages user input and program output.
+     * @param storage the Storage object that writes/retrieves to/from file.
      * @see #validateTodoArguments(String)
      */
     private void recordTodo(TaskList tasks, TextUI ui, Storage storage) {
@@ -38,6 +38,15 @@ public class TodoCommand extends Command {
         }
     }
 
+    /**
+     * Validates the argument for the task description.
+     * Returns the extracted argument value as a string.
+     * Throws an exception if the task description argument is missing.
+     *
+     * @param commandArgs a string containing the command's argument.
+     * @return the task description
+     * @throws DukeException If any of the arguments is empty.
+     */
     private String validateTodoArguments(String commandArgs) throws DukeException {
         String taskDescription = parseArgument(commandArgs, null);
         if (isArgumentValueEmpty(taskDescription)) {

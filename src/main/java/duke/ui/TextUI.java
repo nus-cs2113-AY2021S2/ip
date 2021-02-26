@@ -41,6 +41,9 @@ public class TextUI {
      * Prints a statement with a tab and spacing character.
      * Can print multiple lines if the statement string has line
      * breaks in it.
+     *
+     * @param statement a string containing sentence or paragraph
+     *                  of sentences.
      */
     public void printStatement(String statement) {
         String[] fragments = statement.split("\\R");
@@ -51,6 +54,9 @@ public class TextUI {
 
     /**
      * Prints statements within horizontal line borders.
+     *
+     * @param statement one or more string(s) containing sentence
+     *                  or paragraph of sentences.
      */
     public void printStatements(String... statement) {
         printHorizontalLine();
@@ -60,6 +66,13 @@ public class TextUI {
         printHorizontalLine();
     }
 
+    /**
+     * Prints the error prefix and the subsequent error message.
+     *
+     * @param errorDescription a description of an error or
+     *                         message pertaining to something
+     *                         that failed to be processed.
+     */
     public void printError(String errorDescription) {
         printHorizontalLine();
         printStatement(String.format("%s %s", ERROR_PREFIX_MESSAGE, errorDescription));
