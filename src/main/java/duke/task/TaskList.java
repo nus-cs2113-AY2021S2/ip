@@ -105,8 +105,7 @@ public class TaskList {
         try {
             int itemNum = Integer.parseInt(line.substring(5));
             tasks.get(itemNum - 1).setAsDone();
-            System.out.println("Nice! I've marked this task as done:");
-            System.out.println(tasks.get(itemNum - 1).toString());
+            ui.printMarkDoneMessage(tasks, itemNum);
         } catch (StringIndexOutOfBoundsException e) {
             System.out.println("OOPS!!! The index of the task to be marked as done cannot be empty.");
         } catch (IndexOutOfBoundsException e) {
@@ -126,9 +125,7 @@ public class TaskList {
             int itemNum = Integer.parseInt(line.substring(7));
             Task toBeDeleted = tasks.get(itemNum - 1);
             tasks.remove(itemNum - 1);
-            System.out.println("Noted. I've removed this task:");
-            System.out.println(toBeDeleted.toString());
-            System.out.println("Now you have " + tasks.size() + " tasks in the list");
+            ui.printDeleteTaskMessage(tasks, toBeDeleted);
         } catch (StringIndexOutOfBoundsException e) {
             System.out.println("OOPS!!! The index of the task to be deleted cannot be empty.");
         } catch (IndexOutOfBoundsException e) {

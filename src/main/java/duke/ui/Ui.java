@@ -83,10 +83,34 @@ public class Ui {
     }
 
     /**
-     * Prints warning message if user input does not contain valid command
+     * Prints confirm message that task has been marked as done
+     *
+     * @param tasks ArrayList of tasks
+     * @param itemNum index of task that was marked done
      */
-    public void printInvalidCommandMessage() {
-        System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
+    public void printMarkDoneMessage(ArrayList<Task> tasks, int itemNum) {
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println(tasks.get(itemNum - 1).toString());
+    }
+
+    /**
+     * Prints confirm message that task has been deleted
+     *
+     * @param tasks ArrayList of tasks
+     * @param justDeleted task that was deleted
+     */
+    public void printDeleteTaskMessage(ArrayList<Task> tasks, Task justDeleted) {
+        System.out.println("Noted. I've removed this task:");
+        System.out.println(justDeleted.toString());
+        System.out.println("Now you have " + tasks.size() + " tasks in the list");
+    }
+    /**
+     * Prints the corresponding error message
+     *
+     * @param errorMessage error message returned from exception
+     */
+    public void showError(String errorMessage) {
+        System.out.println(errorMessage);
     }
 
 

@@ -1,5 +1,7 @@
 # User Guide
 
+Duke is a desktop app for managing tasks, optimized for use via a Command Line Interface (CLI).
+
 ## Features
 
 ### Add a Task
@@ -109,7 +111,7 @@ Here are the tasks in your list:
 
 ### Marking a Task as Done: `done`
 
-Marks a task in the task list with the corresponding index as done.
+Marks a task in the task list at the specified index as done.
 
 Format: `done INDEX`
 
@@ -162,7 +164,7 @@ Here are the matching tasks in your list:
 
 ### Exiting Duke: `bye`
 
-Exits the application with a goodby message
+Exits the application with a goodbye message.
 
 Format: `bye`
 
