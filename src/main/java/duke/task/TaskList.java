@@ -1,15 +1,18 @@
 package duke.task;
 import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.ui.Ui;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-
-
-import static duke.ui.Ui.showLine;
+import static duke.ui.Ui.*;
 
 public class TaskList {
     private static final int DONE_LENGTH = 5;
     private static final int TODO_LENGTH = 5;
     private static final int DELETE_LENGTH = 7;
+    private static final int FIND_LENGTH = 5;
     private static ArrayList<Task> tasks;
     public static int tasksCount =0;
 
@@ -92,6 +95,24 @@ public class TaskList {
         System.out.println(event.toString());
         printTotalTasks();
     }
+    public static void find(String input){
+        input = input.substring(FIND_LENGTH);
+        ArrayList<Task> foundTasks = new ArrayList<Task>();
+        int foundCount =0;
+        System.out.println("Here are the matching tasks in your list: ");
+        for(Task t:tasks){
+            if(t.description.contains(input)){
+                foundTasks.add(t);
+                System.out.println((foundCount+1)+"."+t.toString());
+                foundCount++;
+            }
+
+        }
+
+
+
+    }
+
 
 
 }
