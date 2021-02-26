@@ -179,11 +179,11 @@ Bye. Hope to see you again soon!
 
 Action | Format, Examples
 --------|------------------
-**Todo** | `todo TASK_DESCRIPTION` <br> e.g., `todo read book`
-**Deadline** | `deadline TASK_DESCRIPTION /by DATETIME` <br> e.g., `deadline return book /by June 6th`
-**Event** | `event TASK_DESCRIPTION /at DATETIME` <br> e.g., `event project meeting /at Aug 6th 2-4pm`
+**Todo** | `todo TASK_DESCRIPTION` <br> e.g. `todo read book`
+**Deadline** | `deadline TASK_DESCRIPTION /by DATETIME` <br> e.g. `deadline return book /by June 6th`
+**Event** | `event TASK_DESCRIPTION /at DATETIME` <br> e.g. `event project meeting /at Aug 6th 2-4pm`
 **List** | `list`
-**Done** | `done INDEX`<br> e.g., `done 1`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Find** | `find KEYWORD`<br> e.g., `find book`
+**Done** | `done INDEX`<br> e.g. `done 1`
+**Delete** | `delete INDEX`<br> e.g. `delete 3`
+**Find** | `find KEYWORD`<br> e.g. `find book`
 **Exit** | `bye`
