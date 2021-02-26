@@ -13,7 +13,7 @@ public class Duke {
 
     /**
      * Starts the Task Manager program.
-     * <p>Runs an infinite loop until "BYE" is called</p>
+     * Runs an infinite loop until "BYE" is called.
      */
     private static void runTaskManager() throws IOException {
         String userInput;
