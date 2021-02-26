@@ -7,8 +7,6 @@ import jarvis.task.Deadline;
 import jarvis.task.Event;
 import jarvis.task.Todo;
 
-import java.util.Locale;
-
 /**
  * Parses user input.
  */

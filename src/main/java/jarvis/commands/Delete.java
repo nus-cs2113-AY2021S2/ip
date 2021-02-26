@@ -8,6 +8,7 @@ import jarvis.task.Task;
 import jarvis.task.TaskList;
 
 public class Delete extends Command{
+
     /**
      * Removes a task from the list if it exist
      *

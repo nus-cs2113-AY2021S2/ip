@@ -1,4 +1,7 @@
 package jarvis.exception;
 
-public class EmptyDescriptionException extends Exception{
+/**
+ * Signals that the user did not provide any description after entering the todo, deadline or event command
+ */
+public class EmptyDescriptionException extends Exception {
 }

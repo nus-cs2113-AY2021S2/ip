@@ -8,6 +8,7 @@ import jarvis.task.Task;
 import jarvis.task.TaskList;
 
 public class Done extends Command {
+
     /**
      * Marks a task as done if it exists
      *

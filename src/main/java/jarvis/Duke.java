@@ -28,8 +28,8 @@ public class Duke {
         }
 
         /*
-          JARVIS program gets commands from user and executes it.
-          jarvis.txt file is written whenever the list is updated.
+         * JARVIS program gets commands from user and executes it.
+         * jarvis.txt file is written whenever the list is updated.
          */
         while (true) {
             try {

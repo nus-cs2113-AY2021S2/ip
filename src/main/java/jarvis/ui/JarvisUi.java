@@ -16,10 +16,8 @@ public class JarvisUi {
 
     private final Scanner in = new Scanner(System.in);
 
-    /** Constructor for JarvisUi */
     public JarvisUi() {}
 
-    /** Prints a divider */
     public void printDivider() {
         String DIVIDER = "--------------------------------------------------------------------------------------------";
         System.out.println(DIVIDER);

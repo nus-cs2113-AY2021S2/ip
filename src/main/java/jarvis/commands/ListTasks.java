@@ -6,6 +6,7 @@ import jarvis.task.Task;
 import jarvis.task.TaskList;
 
 public class ListTasks extends Command {
+
     /**
      * Prints out all the tasks in the list
      *
