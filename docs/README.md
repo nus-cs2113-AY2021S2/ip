@@ -115,7 +115,7 @@ Expected outcome:
 _____________________________________________________________
 A new deadline task is added:
 Task content  :Submit Lab report
-Task deadline :2021-02-27
+Task deadline :(by: SATURDAY, 27 FEBRUARY 2021)
 Now you have 2 tasks in the list.
 _____________________________________________________________
 ```
@@ -135,7 +135,7 @@ Expected outcome:
 _____________________________________________________________
 A new event task is added:
 Task content  :Graduation ceremony
-Task period   :2023-05-10
+Task period   :(at: WEDNESDAY, 10 MAY 2023)
 Now you have 3 tasks in the list.
 _____________________________________________________________
 ```
@@ -150,8 +150,8 @@ Displays all tasks currently the task list, along with the task type and task st
 > * `E` - event type of task  
 
 > There are 2 status of task:  
-> * `✖️` - the task is not done yet  
-> * `☑️` - the task is marked as done  
+> * `  ` - the task is not done yet  
+> * `X` - the task is marked as done  
 
 Format: `list`
 
@@ -162,9 +162,9 @@ Expected outcome 1:
 _____________________________________________________________
 
 This is your current task list:
-1. [T] [✖️] Order food for dinner
-2. [D] [✖️] Submit Lab report (by: SATURDAY, 27 FEBRUARY 2021)
-3. [E] [✖️] Graduation ceremony (at: WEDNESDAY, 10 MAY 2023)
+1. [T] [ ] Order food for dinner
+2. [D] [ ] Submit Lab report (by: SATURDAY, 27 FEBRUARY 2021)
+3. [E] [ ] Graduation ceremony (at: WEDNESDAY, 10 MAY 2023)
 _____________________________________________________________
 ```
 Expected outcome 2 (When there is no task in the task list):
@@ -197,9 +197,9 @@ The task object:
 is marked as done.
 
 This is your current task list:
-1. [T] [☑️] Order food for dinner
-2. [D] [✖️] Submit Lab report (by: SATURDAY, 27 FEBRUARY 2021)
-3. [E] [✖️] Graduation ceremony (at: WEDNESDAY, 10 MAY 2023)
+1. [T] [X] Order food for dinner
+2. [D] [ ] Submit Lab report (by: SATURDAY, 27 FEBRUARY 2021)
+3. [E] [ ] Graduation ceremony (at: WEDNESDAY, 10 MAY 2023)
 _____________________________________________________________
 ```
 
@@ -217,7 +217,7 @@ Expected outcome:
 ```
 _____________________________________________________________
 The task below is successfully removed from your task list:)
-	[T] [☑️] Order food for dinner
+	[T] [X] Order food for dinner
 Now you have 2 tasks in the list.
 _____________________________________________________________
 ```
@@ -236,7 +236,7 @@ Expected outcome:
 ```
 _____________________________________________________________
 Here are the matching tasks in your list:
-1. [D] [✖️] Submit Lab report (by: SATURDAY, 27 FEBRUARY 2021)
+1. [D] [ ] Submit Lab report (by: SATURDAY, 27 FEBRUARY 2021)
 _____________________________________________________________
 ```
 
@@ -256,7 +256,7 @@ Expected outcome:
 _____________________________________________________________
  Thank you for getting in touch.
  See you next time.
-✧( ु•⌄• )◞ᴴᴬᵛᴱ ᴬ ᴳᴼᴼᴰ ᵀᴵᴹᴱ
+ Have a nice day :)
 _____________________________________________________________
 ```
 
