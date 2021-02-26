@@ -48,17 +48,20 @@ public class Duke {
 
         dukePrint.printWelcome();
 
-        try {
-            do {
+        do {
+            try {
                 phrase = sc.nextLine();
                 dukePrint.printDivider();
                 command = parser.parse(phrase);
                 command.execute();
                 dukePrint.printEndDivider();
                 fileManager.saveFile(tasks.getTaskList());
-            } while (!phrase.equals("bye"));
-        } catch (MissingInfoException | UnknownCommandException | UnknownFormatException | ParseException | IOException e) {
-            System.out.println(e.getMessage());
-        }
+                if (phrase.equals("bye")) {
+                    break;
+                }
+            } catch (MissingInfoException | UnknownCommandException | UnknownFormatException | ParseException | IOException e) {
+                System.out.println(e.getMessage());
+            }
+        } while (true);
     }
 }

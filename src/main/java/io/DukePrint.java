@@ -3,8 +3,6 @@ package io;
 import models.Task;
 import models.TaskList;
 
-import java.util.ArrayList;
-
 public class DukePrint {
     private static final String LOGO =
             " ____        _        \n"
@@ -67,7 +65,7 @@ public class DukePrint {
 
     public void printList(TaskList taskList) {
         System.out.println(LIST_MESSAGE);
-        if (taskList != null) {
+        if (taskList.getSize() != 0) {
             int i = 0;
             for (Task task : taskList.getTaskList()) {
                 System.out.println(++i + ". " + task.toString());

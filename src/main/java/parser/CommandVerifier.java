@@ -11,21 +11,20 @@ import java.text.SimpleDateFormat;
 public class CommandVerifier {
 
     private static final String MISSING_INFO_MESSAGE =
-            "\uD83D\uDE2D %s of a %s cannot be empty.";
+            "\uD83D\uDE2D %s of the %s is missing.";
     private static final String UNKNOWN_COMMAND_MESSAGE =
             "\uD83D\uDE2D Sorry mate I do not understand your request. Please specify task";
     private static final String UNKNOWN_FORMAT_MESSAGE =
-            "\uD83D\uDE2D Format for %s is invalid!";
-
+            "\uD83D\uDE2D Format for %s is invalid! (Date format: dd/MM/yyyy HHmm)";
+    private final DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
     private String[] subStrings;
     private String command;
-    private DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
 
     public void verify(String command) throws UnknownCommandException, MissingInfoException {
 
         this.command = command;
         subStrings = command.split(" ");
-        if (!isKnownCommand(subStrings[0])) {
+        if (!validCommand(subStrings[0])) {
             throw new UnknownCommandException(UNKNOWN_COMMAND_MESSAGE);
         }
 
@@ -50,7 +49,7 @@ public class CommandVerifier {
         }
     }
 
-    private boolean isKnownCommand(String firstWord) {
+    private boolean validCommand(String firstWord) {
         return firstWord.equals("todo")
                 || firstWord.equals("list")
                 || firstWord.equals("deadline")
@@ -76,21 +75,21 @@ public class CommandVerifier {
     }
 
     private void checkDeadline() {
-        checkFlagExists("by", "/by");
-        String[] subStringsByFlag = command.split("/by");
+        checkKeywordExists("by", "/by");
+        String[] subStringsByKeyword = command.split("/by");
 
-        if (subStringsByFlag.length < 2 || subStringsByFlag[1].trim().equals("")) {
+        if (subStringsByKeyword.length < 2 || subStringsByKeyword[1].trim().equals("")) {
             throw new MissingInfoException(
-                    String.format(MISSING_INFO_MESSAGE, "by", subStrings[0]));
+                    String.format(MISSING_INFO_MESSAGE, "The keyword /by", subStrings[0]));
         }
 
-        if (subStringsByFlag[0].substring(8).trim().equals("")) {
+        if (subStringsByKeyword[0].substring(8).trim().equals("")) {
             throw new MissingInfoException(
-                    String.format(MISSING_INFO_MESSAGE, "description", subStrings[0]));
+                    String.format(MISSING_INFO_MESSAGE, "The description", subStrings[0]));
         }
 
         try {
-            dateFormat.parse(subStringsByFlag[1].trim());
+            dateFormat.parse(subStringsByKeyword[1].trim());
         } catch (ParseException e) {
             throw new UnknownFormatException(
                     String.format(UNKNOWN_FORMAT_MESSAGE, "date"));
@@ -98,26 +97,26 @@ public class CommandVerifier {
     }
 
     private void checkEvent() {
-        checkFlagExists("at", "/at");
-        String[] subStringsByFlag = command.split("/at");
-        if (subStringsByFlag.length < 2 || subStringsByFlag[1].trim().equals("")) {
+        checkKeywordExists("at", "/at");
+        String[] subStringsByKeyword = command.split("/at");
+        if (subStringsByKeyword.length < 2 || subStringsByKeyword[1].trim().equals("")) {
             throw new MissingInfoException(
-                    String.format(MISSING_INFO_MESSAGE, "at", subStrings[0]));
+                    String.format(MISSING_INFO_MESSAGE, "The keyword /at", subStrings[0]));
         }
-        if (subStringsByFlag[0].substring(5).trim().equals("")) {
+        if (subStringsByKeyword[0].substring(5).trim().equals("")) {
             throw new MissingInfoException(
                     String.format(MISSING_INFO_MESSAGE, "description", subStrings[0]));
         }
         try {
-            dateFormat.parse(subStringsByFlag[1].trim());
+            dateFormat.parse(subStringsByKeyword[1].trim());
         } catch (ParseException e) {
             throw new UnknownFormatException(
                     String.format(UNKNOWN_FORMAT_MESSAGE, "date"));
         }
     }
 
-    private void checkFlagExists(String infoMissing, String flag) {
-        if (!command.contains(flag)) {
+    private void checkKeywordExists(String infoMissing, String keyword) {
+        if (!command.contains(keyword)) {
             throw new MissingInfoException(
                     String.format(MISSING_INFO_MESSAGE, infoMissing, subStrings[0]));
         }
@@ -126,7 +125,7 @@ public class CommandVerifier {
     private void checkValidRange() {
         if (subStrings.length < 2) {
             throw new MissingInfoException(
-                    String.format(MISSING_INFO_MESSAGE, "number", subStrings[0]));
+                    String.format(MISSING_INFO_MESSAGE, "Index", subStrings[0]));
         }
         checkValidNumber();
     }
@@ -136,7 +135,7 @@ public class CommandVerifier {
             Integer.parseInt(subStrings[1]);
         } catch (NumberFormatException e) {
             throw new UnknownFormatException(
-                    String.format(UNKNOWN_FORMAT_MESSAGE, subStrings[0]));
+                    String.format(UNKNOWN_FORMAT_MESSAGE, "index: " + subStrings[0]));
         }
     }
 }

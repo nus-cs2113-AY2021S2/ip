@@ -1,17 +1,16 @@
 package parser;
 
-import commands.AddToDoCommand;
 import commands.AddDeadlineCommand;
 import commands.AddEventCommand;
+import commands.AddToDoCommand;
+import commands.Command;
 import commands.DeleteCommand;
 import commands.DoneCommand;
 import commands.ExitCommand;
-import commands.Command;
 import commands.ListCommand;
 import exceptions.MissingInfoException;
 import exceptions.UnknownCommandException;
 import io.DukePrint;
-import io.FileManager;
 import models.TaskList;
 
 import java.text.ParseException;
@@ -21,12 +20,8 @@ public class CommandParser {
     private final CommandVerifier verifier;
     private final TaskList taskList;
     private final DukePrint dukePrint;
-    private FileManager fileManager;
 
     public CommandParser(TaskList taskList, DukePrint dukePrint) {
-        assert taskList != null;
-        assert dukePrint != null;
-
         verifier = new CommandVerifier();
         this.taskList = taskList;
         this.dukePrint = dukePrint;
@@ -55,14 +50,14 @@ public class CommandParser {
             result = new AddToDoCommand(taskList, dukePrint, command.substring(4).trim());
             break;
         case "deadline":
-            String[] splitByFlag = command.split("/by");
+            String[] splitByKeyword = command.split("/by");
             result = new AddDeadlineCommand(taskList, dukePrint,
-                    splitByFlag[0].substring(9).trim(), splitByFlag[1].trim());
+                    splitByKeyword[0].substring(9).trim(), splitByKeyword[1].trim());
             break;
         case "event":
-            splitByFlag = command.split("/at");
+            splitByKeyword = command.split("/at");
             result = new AddEventCommand(taskList, dukePrint,
-                    splitByFlag[0].substring(6).trim(), splitByFlag[1].trim());
+                    splitByKeyword[0].substring(6).trim(), splitByKeyword[1].trim());
             break;
         case "delete":
             result = new DeleteCommand(taskList, Integer.parseInt(subStrings[1]), dukePrint);
