@@ -48,7 +48,7 @@ public class TodoCommand extends Command {
      * @throws DukeException If any of the arguments is empty.
      */
     private String validateTodoArguments(String commandArgs) throws DukeException {
-        String taskDescription = parseArgument(commandArgs, null);
+        String taskDescription = parseArgument(commandArgs, null, null);
         if (isArgumentValueEmpty(taskDescription)) {
             throw new DukeException(String.format(ERROR_EMPTY_TASK_STRING_FORMAT, "todo"));
         }

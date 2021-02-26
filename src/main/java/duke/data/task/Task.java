@@ -1,13 +1,13 @@
 package duke.data.task;
 
 public class Task {
-
+    private static final String PRINT_STRING_FORMAT = "[%s] %s";
+    private static final String FILE_OUTPUT_STRING_FORMAT = "| %d | %s";
     protected String description;
     protected boolean isDone;
 
     public Task(String description) {
-        this.description = description;
-        this.isDone = false;
+        this(description, false);
     }
 
     public Task(String description, boolean isDone) {
@@ -32,15 +32,15 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718");
+        return (isDone ? "X" : " ");
     }
 
     @Override
     public String toString() {
-        return String.format("[%s] %s", getStatusIcon(), description);
+        return String.format(PRINT_STRING_FORMAT, getStatusIcon(), description);
     }
 
     public String toFileEntry() {
-        return String.format("| %d | %s", isDone ? 1 : 0, description);
+        return String.format(FILE_OUTPUT_STRING_FORMAT, isDone ? 1 : 0, description);
     }
 }
