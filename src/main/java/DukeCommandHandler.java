@@ -1,3 +1,8 @@
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 import java.util.ArrayList;
 
 public class DukeCommandHandler {
@@ -78,7 +83,7 @@ public class DukeCommandHandler {
         Task currentTask = new Task(taskInfo);
         tasks.add(currentTask);
         Duke.storage.saveData();
-        System.out.print(DIVIDER + "\tadded " + currentTask.taskDescription + "\n" + DIVIDER);
+        System.out.print(DIVIDER + "\tadded " + currentTask.toString() + "\n" + DIVIDER);
     }
 
     protected static void addToDo(String input) throws ArrayIndexOutOfBoundsException {
