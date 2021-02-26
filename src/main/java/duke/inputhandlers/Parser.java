@@ -1,6 +1,7 @@
 package duke.inputhandlers;
 
 import duke.exception.InvalidCommandException;
+
 import static duke.constants.ProgramInts.*;
 import static duke.constants.ProgramStrings.INPUT_DATE_FORMAT;
 import static duke.constants.ProgramStrings.OUTPUT_DATE_FORMAT;
@@ -19,7 +20,7 @@ public class Parser {
 
     /**
      * Parse user input into specified command.
-     * 
+     *
      * @param input full user input string
      * @return an integer representing the command parsed
      */
@@ -42,6 +43,8 @@ public class Parser {
             return DELETE_COMMAND;
         } else if (startsWith(input, "find")) {
             return FIND_COMMAND;
+        } else if (startsWith(input, "undo")) {
+            return UNDO_COMMAND;
         } else {
             return UNKNOWN_COMMAND;
         }
@@ -49,13 +52,13 @@ public class Parser {
 
     /**
      * Parses the description of a task from the user input string.
-     * 
+     *
      * @param input full user input string
      * @return task description string
      * @throws InvalidCommandException if input does not contain a description
      */
     public static String parseDescription(String input) throws InvalidCommandException {
-        
+
         // split the input string into individual words
         String[] words = input.split(" ");
 
@@ -72,8 +75,8 @@ public class Parser {
      * Parse the description of a task from the user input string.
      * Delimiter is used to mark the end of task description in the user input, applicable for commands which have
      * further fields.
-     * 
-     * @param input full user input string
+     *
+     * @param input     full user input string
      * @param delimiter string sequence to indicate end of task description
      * @return task description string up till delimiter
      * @throws InvalidCommandException if input does not contain a description
@@ -93,8 +96,8 @@ public class Parser {
 
     /**
      * Obtains entire task description from user input.
-     * 
-     * @param words array of strings consisting of user input split into individual words
+     *
+     * @param words     array of strings consisting of user input split into individual words
      * @param delimiter specifies the end of task description
      * @return task description as a single string
      */
@@ -114,8 +117,8 @@ public class Parser {
     /**
      * Parse time/date from user input.
      * Reformats date entered as {@code d-M-yyyy} into {@code dd MMMM, yyyy}.
-     * 
-     * @param input full user input string
+     *
+     * @param input     full user input string
      * @param delimiter string sequence marking the start of the date/time field
      * @return date/time string
      * @throws InvalidCommandException if specified delimiter is not found
@@ -135,7 +138,7 @@ public class Parser {
         if (isDate(dateString)) {
             return convertToDate(dateString);
         }
-        
+
         // returns string as entered by user
         return dateString;
     }
@@ -143,7 +146,7 @@ public class Parser {
     /**
      * Reformats given date string to a different format: {@code OUTPUT_DATE_FORMAT}.
      * Date string is valid only if it follows specified format: {@code INPUT_DATE_FORMAT}.
-     * 
+     *
      * @param string date string from parsed from user input
      * @return reformatted date string
      * @throws DateTimeParseException if given date is invalid / wrong string format / values given are invalid
@@ -164,30 +167,30 @@ public class Parser {
     /**
      * Checks if given string can be parsed as a formatted date.
      * Does not guarantee validity of date string.
-     * 
+     *
      * @param string date string parsed from user input
      * @return true if date string can be parsed
      */
     private static boolean isDate(String string) {
         String[] words = string.split("-");
-        
+
         return (words.length == 3);
     }
 
     /**
      * Parses search keyword from user input string.
-     * 
+     *
      * @param input full user input string
      * @return keyword string
      * @throws InvalidCommandException if no keyword is found
      */
-    public static String parseKeyword(String input) throws InvalidCommandException{
+    public static String parseKeyword(String input) throws InvalidCommandException {
 
         String[] words = input.split(" ");
-        if (words.length <2) {
+        if (words.length < 2) {
             throw new InvalidCommandException();
         }
-        
+
         String[] keywords = Arrays.copyOfRange(words, 1, words.length);
 
         String keywordString = "";
@@ -196,14 +199,14 @@ public class Parser {
             keywordString += eachWord;
             keywordString += " ";
         }
-        
+
         return keywordString.trim();
     }
 
     /**
      * Tests if user input string starts with a particular command string.
-     * 
-     * @param input full user input string
+     *
+     * @param input   full user input string
      * @param command string sequence of command being checked
      * @return true if user input starts with command string
      */

@@ -31,6 +31,7 @@ public class ProgramStrings {
     /** Messages to prompt user. */
     public static final String PROMPT_ENTER_BYE_TO_EXIT = "To exit, enter \"bye\"";
     public static final String PROMPT_TASK_DONE = "Congrats! You've completed: \n   ";
+    public static final String PROMPT_TASK_UNDONE = "Marked undone! Looks like you're not quite done with: \n   ";
     public static final String PROMPT_TASK_ADDED = "Added to list: ";
     
     /** String constants for Parser. */

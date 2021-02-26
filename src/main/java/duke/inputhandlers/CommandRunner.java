@@ -89,6 +89,10 @@ public class CommandRunner {
         case FIND_COMMAND:
             runFindCommand(input);
             break;
+        case UNDO_COMMAND:
+            runUndoCommand(input);
+            FileManager.saveData();
+            break;
         default:
             runUnknownCommand(input);
         }
@@ -120,9 +124,34 @@ public class CommandRunner {
         } catch (NullPointerException | IndexOutOfBoundsException e) {
             ui.printInvalidIndexWarning(jobNumber);
         }
-
     }
+    
+    /**
+     * Marks the task specified by user as 'not done'.
+     * 
+     * @param input full user input string
+     */
+    private void runUndoCommand(String input) {
+        String[] word = input.split(" ");
+        int jobNumber = 0;
 
+        try {
+            jobNumber = Integer.parseInt(word[1]) - 1;
+
+            // returns when there is no jobs in the list
+            if (tasks.getCount() == 0) {
+                ui.printNoTaskWarning();
+                return;
+            }
+            markJobAsUndone(tasks.get(jobNumber));
+
+        } catch (NumberFormatException e) {
+            ui.printInvalidInputWarning(input);
+        } catch (NullPointerException | IndexOutOfBoundsException e) {
+            ui.printInvalidIndexWarning(jobNumber);
+        }
+    }
+    
     /**
      * Sets the done property of given task to true.
      * Prints prompt on screen displaying the task that was marked.
@@ -132,6 +161,19 @@ public class CommandRunner {
     private void markJobAsDone(Task task) {
         task.setDone(true);
         System.out.print(PROMPT_TASK_DONE);
+        task.printTask();
+        System.out.println();
+    }
+
+    /**
+     * Sets the done property of a given task to false.
+     * Prints prompt on screen displaying the task that was unmarked.
+     * 
+     * @param task the task to be marked
+     */
+    private void markJobAsUndone(Task task) {
+        task.setDone(false);
+        System.out.println(PROMPT_TASK_UNDONE);
         task.printTask();
         System.out.println();
     }

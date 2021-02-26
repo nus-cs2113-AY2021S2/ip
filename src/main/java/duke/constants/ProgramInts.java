@@ -19,4 +19,5 @@ public class ProgramInts {
     public static final int UNKNOWN_COMMAND = 7;
     public static final int DELETE_COMMAND = 8;
     public static final int FIND_COMMAND = 9;
+    public static final int UNDO_COMMAND = 10;
 }
