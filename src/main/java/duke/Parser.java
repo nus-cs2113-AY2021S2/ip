@@ -180,6 +180,13 @@ public class Parser {
         return (Integer.parseInt(input.substring(DONE_START)) - 1);
     }
 
+    /**
+     * Returns the string that should be found after the "Find" command
+     * that represents the keyword to be searched for.
+     *
+     * @param input the user input from Duke
+     * @return keyword to be searched for
+     */
     static String getTaskToFind(String input) {
         return input.substring(FIND_START);
     }

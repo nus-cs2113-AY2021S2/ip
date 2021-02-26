@@ -15,10 +15,16 @@ public class Ui {
         System.out.println("Here are the tasks in your list:");
     }
 
+    /**
+     * Prints Ui message when user calls "Find"
+     */
     static void findTaskMessage() {
         System.out.println("Here are the matching tasks in your list:");
     }
 
+    /**
+     * Prints Ui message when user deletes a task
+     */
     static void deletedTaskMessage(int deletedTaskIndex) {
         System.out.println("Noted. I've removed this task: ");
         System.out.println(TaskList.tasks.get(deletedTaskIndex));

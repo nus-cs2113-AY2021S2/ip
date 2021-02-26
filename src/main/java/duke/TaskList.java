@@ -9,7 +9,13 @@ import java.util.ArrayList;
 public class TaskList {
     public static ArrayList<Task> tasks = new ArrayList<>();
     public static int maxTaskIndex = 0;
-  
+
+    /**
+     * Prints tasks that match the keyword that the user wishes to search for
+     * Along with their Task index in the Task List
+     *
+     * @param input the user input from Duke
+     */
     static void findTasks(String input) {
         String keyword = Parser.getTaskToFind(input);
         int currentTaskIndex;
@@ -21,6 +27,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Prints all tasks in the Task List
+     * Along with their Task index
+     */
     static void enumerateTasks() {
         int currentTaskIndex;
         for (int i = 0; i < maxTaskIndex; i++) {
