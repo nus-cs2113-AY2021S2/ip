@@ -4,6 +4,9 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 import duke.parser.Parser;
 
+/**
+ * Main class
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
@@ -14,6 +17,10 @@ public class Duke {
         tasks = new TaskList(storage.load());
 
     }
+
+    /**
+     * executes the program
+     */
     public void run(){
         Ui.helloMessage();
         boolean isExit = false;
@@ -30,7 +37,7 @@ public class Duke {
 
         }
     }
-
+    
     public static void main(String[] args){
         new Duke("data/tasks.txt").run();
 

@@ -1,13 +1,13 @@
 package duke.task;
 import duke.exception.DukeException;
-import duke.parser.Parser;
-import duke.ui.Ui;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-import static duke.ui.Ui.*;
+import static duke.ui.Ui.showLine;
 
+/**
+ * Contains the task list and has operations to add/delete tasks in list.
+ */
 public class TaskList {
     private static final int DONE_LENGTH = 5;
     private static final int TODO_LENGTH = 5;
@@ -16,18 +16,35 @@ public class TaskList {
     private static ArrayList<Task> tasks;
     public static int tasksCount =0;
 
+    /**
+     * @param tasks is the arraylist of tasks.
+     * constructor for TaskList.
+     */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
+
+    /**
+     * @return arraylist of tasks.
+     */
     public static ArrayList<Task> getTasks(){
         return tasks;
     }
 
+    /**
+     * @param i index of tasks.
+     * @return returns the task at the given index.
+     */
     public static Task get(int i){
         return tasks.get(i);
     }
 
 
+    /**
+     * @param input user's input.
+     * marks task as done.
+     * if task number is invalid, error message is printed.
+     */
     public static void markTaskAsDone(String input) {
         try {
             int newNum = Integer.parseInt(input.substring(DONE_LENGTH));
@@ -42,6 +59,12 @@ public class TaskList {
         }
 
     }
+
+    /**
+     * @param input user's input.
+     * deletes tasks.
+     * if task number is invalid, an error message is printed.
+     */
     public static void deleteTask(String input){
         try {
             int newNum = Integer.parseInt(input.substring(DELETE_LENGTH));
@@ -59,6 +82,12 @@ public class TaskList {
             showLine();
         }
     }
+
+    /**
+     * @param newTask user's input.
+     *  adds a todo task.
+     *  if description is empty, error message is printed.
+     */
     public static void addTodo(String newTask) {
         try {
             newTask = newTask.substring(TODO_LENGTH);
@@ -73,6 +102,11 @@ public class TaskList {
             showLine();
         }
     }
+
+    /**
+     * @param input user's input.
+     * adds a deadline.
+     */
     public static void addDeadline(String input) {
         String[] split = input.split(" /by");
         System.out.println("Got it. I've added this task: ");
@@ -83,9 +117,18 @@ public class TaskList {
         printTotalTasks();
 
     }
+
+    /**
+     * prints a message that describes the number of tasks in the list.
+     */
     public static void printTotalTasks(){
         System.out.println("Now you have "+ tasksCount+ " tasks in the list.");
     }
+
+    /**
+     * @param input user's input.
+     * adds an event.
+     */
     public static void addEvent(String input) {
         String[] split = input.split(" /at");
         System.out.println("Got it. I've added this task: ");
@@ -95,6 +138,11 @@ public class TaskList {
         System.out.println(event.toString());
         printTotalTasks();
     }
+
+    /**
+     * @param input user's input.
+     * finds if the description entered by the user is already in database.
+     */
     public static void find(String input){
         input = input.substring(FIND_LENGTH);
         ArrayList<Task> foundTasks = new ArrayList<Task>();
@@ -106,13 +154,6 @@ public class TaskList {
                 System.out.println((foundCount+1)+"."+t.toString());
                 foundCount++;
             }
-
         }
-
-
-
     }
-
-
-
 }

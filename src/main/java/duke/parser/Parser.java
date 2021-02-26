@@ -4,11 +4,18 @@ import duke.ui.Ui;
 import duke.task.TaskList;
 
 
-
-
+/**
+ * Handles users' input.
+ */
 public class Parser {
     private static final int EVENT_LENGTH = 5;
     private static final int DEADLINE_LENGTH = 8;
+
+    /**
+     * Determines user's input and carry out the program.
+     * @param input User's input.
+     * if user's input is not recognised in the program, an error message is printed.
+     */
     public static void parse(String input){
         if(input.equalsIgnoreCase("list")){
             Ui.printList();
