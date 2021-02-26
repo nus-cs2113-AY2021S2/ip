@@ -5,17 +5,17 @@ import models.Task;
 import models.TaskList;
 
 public class AddCommand extends Command {
-    TaskList taskList;
+    TaskList tasks;
     Task taskToAdd;
 
-    public AddCommand(TaskList taskList, DukePrint dukePrint) {
+    public AddCommand(TaskList tasks, DukePrint dukePrint) {
         super(dukePrint);
-        this.taskList = taskList;
+        this.tasks = tasks;
     }
 
     @Override
     public void execute() {
-        taskList.add(taskToAdd);
-        dukePrint.printAdd(taskToAdd);
+        tasks.add(taskToAdd);
+        dukePrint.printAdd(taskToAdd, tasks.getSize());
     }
 }

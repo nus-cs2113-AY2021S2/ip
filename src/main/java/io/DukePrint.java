@@ -35,21 +35,29 @@ public class DukePrint {
         System.out.println(END_DIVIDER);
     }
 
-    public void printTaskSize(ArrayList<Task> tasks) {
-        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+    public void printTaskSize(int numTasks) {
+        System.out.println("Now you have " + numTasks + " tasks in the list.");
     }
 
     public void printLogo() {
-        System.out.println("Hello from\n" + LOGO + "\nHow may I help you?\n");
+        System.out.println("Hello from\n" + LOGO);
+    }
+
+    public void printWelcome() {
+        printDivider();
+        System.out.println("What's up! I'm Duke");
+        System.out.println("What can I do for you?");
+        printEndDivider();
     }
 
     public void printBye() {
         System.out.println(BYE_MESSAGE);
     }
 
-    public void printAdd(Task addedTask) {
+    public void printAdd(Task addedTask, int numTasks) {
         System.out.println(ADD_MESSAGE);
         System.out.println(addedTask);
+        printTaskSize(numTasks);
     }
 
     public void printDelete(Task deletedTask) {
@@ -59,9 +67,13 @@ public class DukePrint {
 
     public void printList(TaskList taskList) {
         System.out.println(LIST_MESSAGE);
-        int i = 0;
-        for (Task task : taskList.getTaskList()) {
-            System.out.println(++i + ". " + task.toString());
+        if (taskList != null) {
+            int i = 0;
+            for (Task task : taskList.getTaskList()) {
+                System.out.println(++i + ". " + task.toString());
+            }
+        } else {
+            System.out.println("--(Task list is empty)--");
         }
     }
 

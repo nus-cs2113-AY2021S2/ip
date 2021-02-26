@@ -11,6 +11,7 @@ import commands.ListCommand;
 import exceptions.MissingInfoException;
 import exceptions.UnknownCommandException;
 import io.DukePrint;
+import io.FileManager;
 import models.TaskList;
 
 import java.text.ParseException;
@@ -20,6 +21,7 @@ public class CommandParser {
     private final CommandVerifier verifier;
     private final TaskList taskList;
     private final DukePrint dukePrint;
+    private FileManager fileManager;
 
     public CommandParser(TaskList taskList, DukePrint dukePrint) {
         assert taskList != null;
