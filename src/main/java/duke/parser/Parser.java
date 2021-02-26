@@ -35,7 +35,7 @@ public class Parser {
 
     /**
      * Parses raw userInput to return the Task description.
-     * 
+     *
      * @param userInput is the raw input from the console.
      * @return Description of the Task.
      * @throws IllegalTaskCommandException when Tasks is expected to have a date/time segment.
@@ -88,7 +88,7 @@ public class Parser {
      * Loads the commands from the file into an input format that is
      * recognised by the CommandHandler.
      *
-     * @param fileInput is the raw input from the loaded save file
+     * @param fileInput is the raw input from the loaded save file.
      * @return A string of command that is recognised by the CommandHandler.
      */
     public static String getLoadedCommand(String[] fileInput) {
