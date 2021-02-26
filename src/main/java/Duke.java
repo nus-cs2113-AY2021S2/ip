@@ -1,4 +1,8 @@
 import java.util.Scanner;
+// git add .
+// git tag level-3
+// git commit -m ""
+// git push origin --tags
 
 public class Duke {
     public static void main(String[] args) {
@@ -22,7 +26,10 @@ public class Duke {
 
         while (isContinue) {
             text = scanner.nextLine();
-            if (text.equals("list")) {
+            if (text.equals("bye")) {
+                System.out.println("Bye. Hope to see you again soon!");
+                isContinue = false;
+            } else if (text.equals("list")) {
                 System.out.println("____________________________________________________________");
                 System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < index; i++){
@@ -78,13 +85,14 @@ public class Duke {
                     System.out.println("____________________________________________________________");
 
                 } else {
-                    System.out.println("Sorry, I do not know what you mean.");
+                    System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
                 }
             }
 
         }
 
         scanner.close();
+
 
     }
 }
