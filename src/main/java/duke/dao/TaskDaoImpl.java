@@ -51,6 +51,11 @@ public class TaskDaoImpl implements TaskDao {
             Scanner sc = new Scanner(taskFile);
             while (sc.hasNext()) {
                 String line = sc.nextLine();
+
+                // check if line of task is valid length
+                if (line.length() < 8) {
+                    continue;
+                }
                 char taskType = line.charAt(1);
                 boolean isDone = String.valueOf(line.charAt(4)).compareTo(Messages.ICON_DONE) == 0;
                 String commandArgs = line.substring(7);
@@ -78,7 +83,7 @@ public class TaskDaoImpl implements TaskDao {
                 default:
                 }
             }
-        } catch (FileNotFoundException e) {
+        } catch (Exception e) {
             throw new LoadingException();
         }
 
