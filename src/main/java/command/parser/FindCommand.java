@@ -52,7 +52,7 @@ public class FindCommand extends Command {
      * @return new value of counter
      */
     private static int updateCounter(String description, int counter, Task task) {
-        if (task.getTaskDescription().equals(description)) {
+        if (task.getTaskDescription().contains(description)) {
             counter++;
             printTask(task, counter);
         }

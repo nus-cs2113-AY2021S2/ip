@@ -5,7 +5,7 @@ import task.list.Task;
 
 import java.util.ArrayList;
 
-public class Duke {
+public class Arthur {
     public static ArrayList<Task> tasks = new ArrayList<>();
 
     public static void main(String[] args) {

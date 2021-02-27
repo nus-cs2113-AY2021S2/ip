@@ -1,6 +1,6 @@
 package command.parser;
 
-import duke.date.DukeDate;
+import arthur.date.ArthurDate;
 import exceptions.IllegalCommandException;
 
 import task.list.Deadline;
@@ -26,7 +26,7 @@ public class SearchCommand extends Command {
         if (sentence.length != NUMBER_OF_COMMAND_ARGUMENTS) {
             throw new IllegalCommandException();
         }
-        String date = DukeDate.getSearchDateFormat(sentence[DESCRIPTION_INDEX_IN_COMMANDS]);
+        String date = ArthurDate.getSearchDateFormat(sentence[DESCRIPTION_INDEX_IN_COMMANDS]);
         int counter = 0;
         printMatchFound(tasks, date, counter);
     }
@@ -61,7 +61,7 @@ public class SearchCommand extends Command {
         String taskDate;
         if (task instanceof Event) {
             Event temp = (Event) task;
-            taskDate = DukeDate.reformatsSearch(temp.getTaskBy());
+            taskDate = ArthurDate.reformatsSearch(temp.getTaskBy());
             if (taskDate.equals(date)) {
                 counter++;
                 temp.printTask();
@@ -69,7 +69,7 @@ public class SearchCommand extends Command {
 
         } else if (task instanceof Deadline) {
             Deadline temp = (Deadline) task;
-            taskDate = DukeDate.reformatsSearch(temp.getTaskBy());
+            taskDate = ArthurDate.reformatsSearch(temp.getTaskBy());
             if (taskDate.equals(date)) {
                 counter++;
                 temp.printTask();

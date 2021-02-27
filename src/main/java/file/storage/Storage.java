@@ -19,14 +19,14 @@ import java.util.TimerTask;
 import command.parser.Parser;
 
 /**
- * Implements the loading and saving of the list from and to the duke.txt file
+ * Implements the loading and saving of the list from and to the arthur.txt file
  */
 public class Storage {
 
-    public static final String FILE_PATH = "duke.txt";
+    public static final String FILE_PATH = "arthur.txt";
 
     /**
-     * opens duke.txt to read
+     * opens arthur.txt to read
      *
      * @param tasks is the list of tasks
      */
@@ -42,7 +42,7 @@ public class Storage {
     }
 
     /**
-     * reads all lines from duke.txt and adds then to the list
+     * reads all lines from arthur.txt and adds then to the list
      *
      * @param input is the scanner reading from the file
      * @param tasks is the list of tasks
@@ -62,7 +62,7 @@ public class Storage {
     }
 
     /**
-     * prints the list of tasks obtained when the file is read after Duke has started
+     * prints the list of tasks obtained when the file is read after arthur has started
      *
      * @param tasks is the list of tasks
      */
@@ -75,7 +75,7 @@ public class Storage {
     }
 
     /**
-     * initiates saving list into duke.txt file
+     * initiates saving list into arthur.txt file
      *
      * @param tasks is the list of tasks
      */
@@ -87,7 +87,7 @@ public class Storage {
     }
 
     /**
-     * ensures that all tasks in list have been to the duke.txt file
+     * ensures that all tasks in list have been to the arthur.txt file
      *
      * @param tasks is the list of tasks
      * @return whether all tasks have been saved
@@ -108,7 +108,7 @@ public class Storage {
     }
 
     /**
-     * ensures that one task has been written to the duke.txt file
+     * ensures that one task has been written to the arthur.txt file
      *
      * @param fileWriter is the file descriptor
      * @param task       is one task from the line

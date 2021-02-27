@@ -27,7 +27,7 @@ ATTENTION, Here's your list of tasks Crewmate!!!
 7. [E][XX] wedding (by: No Event time!! Noice!!! :))
 8. [E][XX] reception (by: No Event time!! Noice!!! :))
 9. [E][OK] divorce (by: 02-28-2021 05:00)
-You still have 6 task(s) left in your Lists ! Hurry up!! ( X _ X )
+You still have 6 task(s) left on your list! Hurry up!! ( X _ X )
 ____________________________________________________________________________________
 Ssshhhhhh!!!!!
                              * ** ** ** ** ** ** ** *
@@ -86,13 +86,13 @@ Please assign me my tasks to complete!
 ____________________________________________________________________________________
 
                help                 :prints list of all commands
-               list                 :prints all lists ordered by category
-               exit                 :shuts down Arthur
-            todo <task>             :add task to To Do list
-  event <task> // yyyy/MM/dd HHmm   :add task to Event List with time
- deadline <task> // yyyy/MM/dd HHmm :add task to Deadline List
-            done  <index>           :mark task <index> as done in List
-            delete  <index>         :delete task <index> in List
+               list                 :prints all lists on list
+               bye                  :shuts down Arthur
+            todo <task>             :add a todo task to list
+  event <task> // yyyy/MM/dd HHmm   :add an event to the list
+ deadline <task> // yyyy/MM/dd HHmm :add a task with a deadline to the list
+            done  <index>           :mark task <index> as done on the list
+            delete  <index>         :delete task <index> on the list
             find  <task>            :find task(s) based on their description
          search yyyy/MM/dd          :search for task(s) based on their date
 
@@ -103,15 +103,15 @@ Your search has been completed Crewmate! ( ^ _ ^ )
 ____________________________________________________________________________________
  ( o . ^ ) Hol' up! I'm deleting this task:
 [T][OK] eat
-You still have 6 task(s) left in your Lists ! Hurry up!! ( X _ X )
+You still have 6 task(s) left on your list! Hurry up!! ( X _ X )
 ____________________________________________________________________________________
  ( o . ^ ) Hol' up! I'm deleting this task:
 [D][OK] project (by: No Deadline!! Hehe! :))
-You still have 6 task(s) left in your Lists ! Hurry up!! ( X _ X )
+You still have 6 task(s) left on your list! Hurry up!! ( X _ X )
 ____________________________________________________________________________________
  ( o . ^ ) Hol' up! I'm deleting this task:
 [E][XX] wedding (by: No Event time!! Noice!!! :))
-You still have 5 task(s) left in your Lists ! Hurry up!! ( X _ X )
+You still have 5 task(s) left on your list! Hurry up!! ( X _ X )
 ____________________________________________________________________________________
 ATTENTION, Here's your list of tasks Crewmate!!!
 1. [T][XX] drink
@@ -120,7 +120,7 @@ ATTENTION, Here's your list of tasks Crewmate!!!
 4. [D][XX] presentation (by: 04-05-2021 18:00)
 5. [E][XX] reception (by: No Event time!! Noice!!! :))
 6. [E][OK] divorce (by: 02-28-2021 05:00)
-You still have 5 task(s) left in your Lists ! Hurry up!! ( X _ X )
+You still have 5 task(s) left on your list! Hurry up!! ( X _ X )
 ____________________________________________________________________________________
 There's no such task?! Focus Crewmate!!  ( X _ X )"
 ____________________________________________________________________________________
@@ -137,7 +137,7 @@ ATTENTION, Here's your list of tasks Crewmate!!!
 6. [E][OK] divorce (by: 02-28-2021 05:00)
 7. [D][XX] pay bills (by: 02-28-2021 13:59)
 8. [E][XX] party (by: 04-05-2021 23:59)
-You still have 7 task(s) left in your Lists ! Hurry up!! ( X _ X )
+You still have 7 task(s) left on your list! Hurry up!! ( X _ X )
 ____________________________________________________________________________________
 [E][OK] divorce (by: 02-28-2021 05:00)
 [D][XX] pay bills (by: 02-28-2021 13:59)
@@ -149,7 +149,7 @@ Search has been completed!!
 ____________________________________________________________________________________
  ( o . ^ ) Hol' up! I'm deleting this task:
 [E][OK] divorce (by: 02-28-2021 05:00)
-Are you really a Crewmate??? You haven't done any work in this list! ( X _ X ' )
+Are you really a Crewmate??? You haven't done any work on this list! ( X _ X ' )
 ____________________________________________________________________________________
 You have been kicked out! Bye Impostor!!!  ( X _ X " )
 ____________________________________________________________________________________

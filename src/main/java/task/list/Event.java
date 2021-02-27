@@ -1,6 +1,6 @@
 package task.list;
 
-import duke.date.DukeDate;
+import arthur.date.ArthurDate;
 
 /**
  * Represents an Event
@@ -31,7 +31,7 @@ public class Event extends Deadline {
             if (by.equals(EMPTY_STRING)) {
                 by = NO_BY;
             } else {
-                by = DukeDate.reformatInput(by);
+                by = ArthurDate.reformatInput(by);
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             by = NO_BY;
@@ -54,7 +54,7 @@ public class Event extends Deadline {
 
     @Override
     public String getTaskToPrintInFile() {
-        return (COMMAND_HEADER + this.description + DELIMITER + DukeDate.reformatOutput(this.by) +
+        return (COMMAND_HEADER + this.description + DELIMITER + ArthurDate.reformatOutput(this.by) +
                 System.lineSeparator() + this.isDone + System.lineSeparator());
     }
 }

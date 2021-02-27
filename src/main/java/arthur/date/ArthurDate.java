@@ -1,4 +1,4 @@
-package duke.date;
+package arthur.date;
 
 import exceptions.IllegalDateException;
 import task.list.Deadline;
@@ -18,9 +18,9 @@ import java.util.Date;
 import java.util.Scanner;
 
 /**
- * represents duke's date format
+ * represents arthur's date format
  */
-public class DukeDate {
+public class ArthurDate {
     public static final String EMPTY_STRING = "";
     public static String INITIAL_FORMAT = "yyyy/MM/dd HHmm";
     public static String FINAL_FORMAT = "MM-dd-yyyy HH:mm";

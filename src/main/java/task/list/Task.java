@@ -79,7 +79,7 @@ public class Task {
     }
 
     /**
-     * returns the appropriate task format to write to duke.txt
+     * returns the appropriate task format to write to arthur.txt
      *
      * @return task description to input in file
      */

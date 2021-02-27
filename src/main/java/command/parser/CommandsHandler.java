@@ -95,7 +95,7 @@ public class CommandsHandler {
     }
 
     /**
-     * handles corrupted duke.txt file
+     * handles corrupted arthur.txt file
      *
      * @param input is the scanner that reads from the file
      * @param tasks is the list of tasks

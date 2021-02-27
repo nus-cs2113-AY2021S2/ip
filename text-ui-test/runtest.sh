@@ -14,10 +14,10 @@ then
     rm ACTUAL.TXT
 fi
 
-# delete previous duke file if exists
-if [ -e "./duke.txt" ]
+# delete previous arthur file if exists
+if [ -e "./arthur.txt" ]
 then
-    rm duke.txt
+    rm arthur.txt
 fi
 
 # compile the code into the bin folder, terminates if error occurred
@@ -28,7 +28,7 @@ then
 fi
 
 # run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
-java -classpath ../bin Duke < input1.txt > ACTUAL.TXT
+java -classpath ../bin Arthur < input1.txt > ACTUAL.TXT
 
 # convert to UNIX format
 cp expected1.txt EXPECTED-UNIX.TXT
@@ -44,7 +44,7 @@ else
 fi
 
 # run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
-java -classpath ../bin Duke < input2.txt > ACTUAL.TXT
+java -classpath ../bin Arthur < input2.txt > ACTUAL.TXT
 
 # convert to UNIX format
 cp expected2.txt EXPECTED-UNIX.TXT
@@ -60,7 +60,7 @@ else
 fi
 
 # run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
-java -classpath ../bin Duke < input3.txt > ACTUAL.TXT
+java -classpath ../bin Arthur < input3.txt > ACTUAL.TXT
 
 # convert to UNIX format
 cp expected3.txt EXPECTED-UNIX.TXT
@@ -76,7 +76,7 @@ else
 fi
 
 # run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
-java -classpath ../bin Duke < input4.txt > ACTUAL.TXT
+java -classpath ../bin Arthur < input4.txt > ACTUAL.TXT
 
 # convert to UNIX format
 cp expected4.txt EXPECTED-UNIX.TXT

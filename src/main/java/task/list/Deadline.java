@@ -5,7 +5,7 @@ package task.list;
  * Represents a deadline
  */
 
-import duke.date.DukeDate;
+import arthur.date.ArthurDate;
 
 
 public class Deadline extends Todo {
@@ -68,7 +68,7 @@ public class Deadline extends Todo {
             if (by.equals(EMPTY_STRING)) {
                 by = NO_BY;
             } else {
-                by = DukeDate.reformatInput(by);
+                by = ArthurDate.reformatInput(by);
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             by = NO_BY;
@@ -91,7 +91,7 @@ public class Deadline extends Todo {
 
     @Override
     public String getTaskToPrintInFile() {
-        return ("deadline " + this.description + DELIMITER + DukeDate.reformatOutput(this.by) + System.lineSeparator()
+        return ("deadline " + this.description + DELIMITER + ArthurDate.reformatOutput(this.by) + System.lineSeparator()
                 + this.isDone + System.lineSeparator());
     }
 }

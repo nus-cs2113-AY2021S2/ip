@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class ExitCommand extends Command {
 
     /**
-     * exits DUKE
+     * exits Arthur
      *
      * @param tasks is the list of tasks
      */

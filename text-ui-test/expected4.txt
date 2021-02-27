@@ -21,7 +21,7 @@ ATTENTION, Here's your list of tasks Crewmate!!!
 5. [E][XX] reception (by: No Event time!! Noice!!! :))
 6. [D][XX] pay bills (by: 02-28-2021 13:59)
 7. [E][XX] party (by: 04-05-2021 23:59)
-Are you really a Crewmate??? You haven't done any work in this list! ( X _ X ' )
+Are you really a Crewmate??? You haven't done any work on this list! ( X _ X ' )
 ____________________________________________________________________________________
 Ssshhhhhh!!!!!
                              * ** ** ** ** ** ** ** *
@@ -80,13 +80,13 @@ Please assign me my tasks to complete!
 ____________________________________________________________________________________
 
                help                 :prints list of all commands
-               list                 :prints all lists ordered by category
-               exit                 :shuts down Arthur
-            todo <task>             :add task to To Do list
-  event <task> // yyyy/MM/dd HHmm   :add task to Event List with time
- deadline <task> // yyyy/MM/dd HHmm :add task to Deadline List
-            done  <index>           :mark task <index> as done in List
-            delete  <index>         :delete task <index> in List
+               list                 :prints all lists on list
+               bye                  :shuts down Arthur
+            todo <task>             :add a todo task to list
+  event <task> // yyyy/MM/dd HHmm   :add an event to the list
+ deadline <task> // yyyy/MM/dd HHmm :add a task with a deadline to the list
+            done  <index>           :mark task <index> as done on the list
+            delete  <index>         :delete task <index> on the list
             find  <task>            :find task(s) based on their description
          search yyyy/MM/dd          :search for task(s) based on their date
 
@@ -94,45 +94,45 @@ ________________________________________________________________________________
 Nice! I've marked this task as done:
 [T][OK] drink
 ____________________________________________________________________________________
-You still have 6 task(s) left in your Lists ! Hurry up!! ( X _ X )
+You still have 6 task(s) left on your list! Hurry up!! ( X _ X )
 ____________________________________________________________________________________
 Nice! I've marked this task as done:
 [T][OK] dance
 ____________________________________________________________________________________
-You still have 5 task(s) left in your Lists ! Hurry up!! ( X _ X )
+You still have 5 task(s) left on your list! Hurry up!! ( X _ X )
 ____________________________________________________________________________________
 Nice! I've marked this task as done:
 [D][OK] assignment (by: No Deadline!! Hehe! :))
 ____________________________________________________________________________________
-You still have 4 task(s) left in your Lists ! Hurry up!! ( X _ X )
+You still have 4 task(s) left on your list! Hurry up!! ( X _ X )
 ____________________________________________________________________________________
 Nice! I've marked this task as done:
 [D][OK] presentation (by: 04-05-2021 18:00)
 ____________________________________________________________________________________
-You still have 3 task(s) left in your Lists ! Hurry up!! ( X _ X )
+You still have 3 task(s) left on your list! Hurry up!! ( X _ X )
 ____________________________________________________________________________________
 Nice! I've marked this task as done:
 [E][OK] reception (by: No Event time!! Noice!!! :))
 ____________________________________________________________________________________
-You still have 2 task(s) left in your Lists ! Hurry up!! ( X _ X )
+You still have 2 task(s) left on your list! Hurry up!! ( X _ X )
 ____________________________________________________________________________________
 Nice! I've marked this task as done:
 [D][OK] pay bills (by: 02-28-2021 13:59)
 ____________________________________________________________________________________
-You still have 1 task(s) left in your Lists ! Hurry up!! ( X _ X )
+You still have 1 task(s) left on your list! Hurry up!! ( X _ X )
 ____________________________________________________________________________________
 Nice! I've marked this task as done:
 [E][OK] party (by: 04-05-2021 23:59)
 ____________________________________________________________________________________
-Good job Crewmate! You completed all your tasks in this list! ( ^ _ ^ )
+Good job Crewmate! You completed all your tasks on this list! ( ^ _ ^ )
 ____________________________________________________________________________________
 This job was already completed!!!!
-Good job Crewmate! You completed all your tasks in this list! ( ^ _ ^ )
+Good job Crewmate! You completed all your tasks on this list! ( ^ _ ^ )
 
 ____________________________________________________________________________________
  ( o . ^ ) Hol' up! I'm deleting this task:
 [T][OK] drink
-Good job Crewmate! You completed all your tasks in this list! ( ^ _ ^ )
+Good job Crewmate! You completed all your tasks on this list! ( ^ _ ^ )
 ____________________________________________________________________________________
 ATTENTION, Here's your list of tasks Crewmate!!!
 1. [T][OK] dance
@@ -141,7 +141,7 @@ ATTENTION, Here's your list of tasks Crewmate!!!
 4. [E][OK] reception (by: No Event time!! Noice!!! :))
 5. [D][OK] pay bills (by: 02-28-2021 13:59)
 6. [E][OK] party (by: 04-05-2021 23:59)
-Good job Crewmate! You completed all your tasks in this list! ( ^ _ ^ )
+Good job Crewmate! You completed all your tasks on this list! ( ^ _ ^ )
 ____________________________________________________________________________________
 Thanks for your help Crewmate!!
 We wouldn't have done this without your help!!

@@ -8,11 +8,13 @@ import java.util.ArrayList;
  * Represents UI
  */
 public class UI extends Dialogues {
+
+
     /**
      * prints corrupted files
      */
     public static void printCorruptedFile() {
-        System.out.println("Corrupted Data File!!!!!" + System.lineSeparator() + "Please reboot Arthur!!");
+        System.out.println(CORRUPTED_FILE);
     }
 
     /**
@@ -100,7 +102,7 @@ public class UI extends Dialogues {
     }
 
     /**
-     * gets Duke's logo
+     * gets arthur's logo
      *
      * @return logo
      */
@@ -245,21 +247,21 @@ public class UI extends Dialogues {
     }
 
     /**
-     * prints loading duke.txt when Duke is started
+     * prints loading arthur.txt when Arthur is started
      */
     public static void printLoading() {
         System.out.println(LOADING_FILE);
     }
 
     /**
-     * prints a message to indicate that duke.txt is empty
+     * prints a message to indicate that arthur.txt is empty
      */
     public static void printEmptyFile() {
         System.out.println(FILE_IS_EMPTY);
     }
 
     /**
-     * prints a message to indicate that duke.txt does not exist
+     * prints a message to indicate that arthur.txt does not exist
      */
     public static void printNoSavedFile() {
         System.out.println(LOADING_WINDOW);

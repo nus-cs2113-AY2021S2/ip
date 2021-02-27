@@ -1,4 +1,4 @@
-Loading New Duke Window . . .
+Loading New Arthur Window . . .
 Ssshhhhhh!!!!!
                              * ** ** ** ** ** ** ** *
                          ** ** ** ** ** ** ** ** ** ** *
@@ -56,13 +56,13 @@ Please assign me my tasks to complete!
 ____________________________________________________________________________________
 
                help                 :prints list of all commands
-               list                 :prints all lists ordered by category
-               exit                 :shuts down Arthur
-            todo <task>             :add task to To Do list
-  event <task> // yyyy/MM/dd HHmm   :add task to Event List with time
- deadline <task> // yyyy/MM/dd HHmm :add task to Deadline List
-            done  <index>           :mark task <index> as done in List
-            delete  <index>         :delete task <index> in List
+               list                 :prints all lists on list
+               bye                  :shuts down Arthur
+            todo <task>             :add a todo task to list
+  event <task> // yyyy/MM/dd HHmm   :add an event to the list
+ deadline <task> // yyyy/MM/dd HHmm :add a task with a deadline to the list
+            done  <index>           :mark task <index> as done on the list
+            delete  <index>         :delete task <index> on the list
             find  <task>            :find task(s) based on their description
          search yyyy/MM/dd          :search for task(s) based on their date
 
