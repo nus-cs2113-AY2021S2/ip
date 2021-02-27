@@ -24,7 +24,11 @@ public class Task {
         isDone = true;
     }
 
-    public String toFormat() {
+    public void setIsDone(String isDone) {
+        this.isDone = isDone.equals("1");
+    }
+
+    public String toSaveFormat() {
         return (description);
     }
 }

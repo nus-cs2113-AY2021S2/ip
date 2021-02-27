@@ -94,7 +94,7 @@ public class List {
         if (taskFormat[0].equals("todo")) {
             taskFormat[2] = formattedDesc;
         } else if (taskFormat[0].equals("deadline") || taskFormat[0].equals("event")) {
-            taskFormat[2] = TaskList.get(index).toFormat();
+            taskFormat[2] = TaskList.get(index).toSaveFormat();
         }
         return (taskFormat[0] + " | " + taskFormat[1] + " | " + taskFormat[2]);
     }

@@ -12,5 +12,5 @@ public class Event extends Task{
     }
 
     @Override
-    public String toFormat() { return (" " + super.toFormat() + " | " + at); }
+    public String toSaveFormat() { return (super.toSaveFormat() + " | " + at); }
 }

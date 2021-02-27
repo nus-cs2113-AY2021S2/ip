@@ -1,28 +1,40 @@
 public class Duke {
 
-    static String LINEBREAK = "____________________________________________________________\n";
-    static String LOGO = "Hello from\n"
-            + " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
-    static String GREETING =  " Hello! I'm Duke\n"
-            + " What can I do for you?\n";
-    static String GOODBYE = "Bye, Hope to see you again soon!\n";
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+    static final String FILE_PATH = "data/saveTaskList.txt";
+
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
+    }
+
+    public void run() {
+        ui.showWelcome();
+        boolean isExit = false;
+        while (!isExit) {
+            String fullCommand = ui.readCommand();
+            ui.showLine(); // show the divider line ("_______")
+            Command c = Parser.parse(fullCommand);
+            c.execute(tasks, ui, storage);
+            isExit = c.isExit();
+            if (isExit) {
+                ui.showGoodbye();
+            }
+            ui.showLine();
+        }
+        storage.store(tasks);
+    }
 
     public static void main(String[] args) {
-        printWelcome();
-        Parser.Instance();
-        printGoodbye();
-    }
-
-    public static void printWelcome() {
-        System.out.println(LOGO);
-        System.out.println(LINEBREAK + GREETING + LINEBREAK);
-    }
-
-    public static void printGoodbye() {
-        System.out.println(LINEBREAK + GOODBYE + LINEBREAK);
+        new Duke(FILE_PATH).run();
     }
 }
+
