@@ -71,8 +71,9 @@ public class Duke {
                 } catch (DukeException e) {
                     System.out.println(Ui.INVALID_NUMBER);
                 }
-            }
-            else {
+            } else if (userInput.startsWith("find")) {
+                tasks.find(userInput);
+            } else {
                 System.out.println(Ui.UNKNOWN_COMMAND);
             }
         }
