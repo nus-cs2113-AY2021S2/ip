@@ -5,7 +5,7 @@ public class TextUi {
         System.out.println("_____________________________________________________");
     }
 
-    public static void showLogo(){
+    public static void showLogo() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"

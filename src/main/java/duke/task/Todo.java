@@ -5,15 +5,15 @@ package duke.task;
  * A Todo
  * object contains what a Task object has.
  */
-public class Todo extends Task{
+public class Todo extends Task {
     private static final String ALPHABET_T = "T";
 
-    public Todo(String d){
+    public Todo(String d) {
         super(d);
     }
 
     @Override
-    public String getTaskType(){
+    public String getTaskType() {
         return ALPHABET_T;
     }
 

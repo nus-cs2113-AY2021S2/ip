@@ -19,7 +19,7 @@ public class Parser {
      * @param userInput Original user input.
      * @return An array list containing task type and task name.
      */
-    public static ArrayList<String> parseInput(String userInput){
+    public static ArrayList<String> parseInput(String userInput) {
         String taskType;
         String taskName;
         Scanner splitInputScanner;
@@ -30,8 +30,7 @@ public class Parser {
         if(Util.isOneWord(userInput)) {
             taskType = userInput;
             taskName = "";
-        }
-        else{
+        } else {
             splitInputScanner = new Scanner(userInput);
             // Extract task type
             taskType = splitInputScanner.next().toLowerCase();
@@ -80,7 +79,7 @@ public class Parser {
      * @return An array of String containing the current
      * month, day and year.
      */
-    public static String[] parseCurrentDate(String date){
+    public static String[] parseCurrentDate(String date) {
         String[] splitDate = date.trim().split("-");
         String[] arrangedSplitDate = new String[3];
 
@@ -98,7 +97,7 @@ public class Parser {
      *
      * @param parsedList Array list to be emptied.
      */
-    public static void emptyList(ArrayList<String> parsedList){
+    public static void emptyList(ArrayList<String> parsedList) {
         for(String item : parsedList) {
             parsedList.remove(item);
         }

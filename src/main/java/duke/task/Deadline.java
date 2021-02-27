@@ -10,11 +10,11 @@ import duke.exceptions.InvalidDateInputException;
  * A Deadline object contains what a Task object has and
  * a date.
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
     private static final String ALPHABET_D = "D";
     private String byTime;
 
-    public Deadline(String d, String by){
+    public Deadline(String d, String by) {
         super(d);
         this.byTime = by;
     }
@@ -25,17 +25,17 @@ public class Deadline extends Task{
     }
 
     @Override
-    public String getTaskType(){
+    public String getTaskType() {
         return ALPHABET_D;
     }
 
     @Override
-    public void printTaskInformation(){
+    public void printTaskInformation() {
         super.printTaskInformation();
         this.printTime();
     }
 
-    public void printTime(){
+    public void printTime() {
         System.out.print(" (by:" + this.byTime + ")");
     }
 
@@ -71,10 +71,10 @@ public class Deadline extends Task{
     @Override
     public void addTask() throws EmptyInputException, IncompleteInputException, InvalidDateInputException {
         // Check if date field is valid
-        if (Date.isIncompleteDate(this)){
+        if (Date.isIncompleteDate(this)) {
             throw new IncompleteInputException();
         }
-        if (Date.isInvalidDate(this)){
+        if (Date.isInvalidDate(this)) {
             throw new InvalidDateInputException();
         }
         super.addTask();

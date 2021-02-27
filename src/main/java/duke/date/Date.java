@@ -41,11 +41,11 @@ public class Date {
      * @param t Task object being validated.
      * @return true if date is invalid, false otherwise.
      */
-    public static boolean isInvalidDate(Task t){
+    public static boolean isInvalidDate(Task t) {
         LocalDate currentDate = LocalDate.now();
         String[] splitDate = t.getDate().trim().split("-");
 
-        if (isIncorrectFormatDate(splitDate)){
+        if (isIncorrectFormatDate(splitDate)) {
             return true;
         }
 
@@ -77,18 +77,18 @@ public class Date {
     }
 
     private static boolean isOutOfRangeDay(String month, String day, String year) {
-        if (Integer.parseInt(day) < 1){
+        if (Integer.parseInt(day) < 1) {
             return true;
         }
 
-        switch(month){
+        switch(month) {
         case FEB:
-            if (isLeapYear(Integer.parseInt(year))){
-                if (Integer.parseInt(day) > 29){
+            if (isLeapYear(Integer.parseInt(year))) {
+                if (Integer.parseInt(day) > 29) {
                     return true;
                 }
             } else {
-                if (Integer.parseInt(day) > 28){
+                if (Integer.parseInt(day) > 28) {
                     return true;
                 }
             }
@@ -99,21 +99,21 @@ public class Date {
         case AUG:
         case OCT:
         case DEC:
-            if (Integer.parseInt(day) > 31){
+            if (Integer.parseInt(day) > 31) {
                 return true;
             }
         case APR:
         case JUN:
         case SEP:
         case NOV:
-            if (Integer.parseInt(day) > 30){
+            if (Integer.parseInt(day) > 30) {
                 return true;
             }
         }
         return false;
     }
 
-    public static boolean isIncompleteDate(Task t){
+    public static boolean isIncompleteDate(Task t) {
         return t.getDate().equals("");
     }
 
@@ -137,7 +137,7 @@ public class Date {
         return splitDate.length != 3;
     }
 
-    private static boolean isLeapYear(int year){
+    private static boolean isLeapYear(int year) {
         return (year % 4 == 0);
     }
 }

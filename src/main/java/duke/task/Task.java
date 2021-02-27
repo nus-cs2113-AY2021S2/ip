@@ -16,7 +16,7 @@ public class Task {
     private static ArrayList<Task> taskList = new ArrayList<>();
     private static int taskCount = 0;
 
-    public Task(String description){
+    public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
@@ -71,7 +71,7 @@ public class Task {
      * @param i
      * @param userInput
      */
-    public static void deleteTaskWithValidation(String i, String userInput){
+    public static void deleteTaskWithValidation(String i, String userInput) {
         try {
             deleteTask(i, userInput);
         } catch (IncompleteInputException e) {
@@ -97,11 +97,11 @@ public class Task {
         }
     }
 
-    private String getStatusIcon(){
+    private String getStatusIcon() {
         return(this.isDone ? "x" : " ");
     }
 
-    public void setIsDone(){
+    public void setIsDone() {
         this.isDone = true;
     }
 
@@ -117,7 +117,7 @@ public class Task {
     public void addTask() throws
             EmptyInputException, IncompleteInputException, InvalidDateInputException {
         // Throw Exception if no valid task is detected
-        if (isEmpty(this)){
+        if (isEmpty(this)) {
             throw new EmptyInputException();
         }
 
@@ -141,12 +141,12 @@ public class Task {
      * @throws InvalidInputException If i <= 0 or i > taskCount.
      */
     public static void markAsDone(String i, String userInput) throws
-            IncompleteInputException, InvalidInputException{
+            IncompleteInputException, InvalidInputException {
 
-        if (isIncompleteIndexInput(userInput)){
+        if (isIncompleteIndexInput(userInput)) {
             throw new IncompleteInputException();
         }
-        if (isInvalidIndexInput(userInput)){
+        if (isInvalidIndexInput(userInput)) {
             throw new InvalidInputException();
         }
 
@@ -174,10 +174,10 @@ public class Task {
     public static void deleteTask(String i, String userInput) throws
             IncompleteInputException, InvalidInputException {
 
-        if (isIncompleteIndexInput(userInput)){
+        if (isIncompleteIndexInput(userInput)) {
             throw new IncompleteInputException();
         }
-        if (isInvalidIndexInput(userInput)){
+        if (isInvalidIndexInput(userInput)) {
             throw new InvalidInputException();
         }
 
@@ -202,12 +202,12 @@ public class Task {
      */
     public static void findTask(String userInput) throws
             IncompleteInputException {
-        if (userInput.equals("")){
+        if (userInput.equals("")) {
             throw new IncompleteInputException();
         }
         int matchingTaskCount = 0;
-        for(Task t : taskList){
-            if (isMatchingTask(userInput, t)){
+        for(Task t : taskList) {
+            if (isMatchingTask(userInput, t)) {
                 matchingTaskCount++;
             }
         }
@@ -218,8 +218,8 @@ public class Task {
         } else if(matchingTaskCount > 1) {
             System.out.println("Here are the matching tasks in your list:");
         }
-        for(Task t : taskList){
-            if (isMatchingTask(userInput, t)){
+        for(Task t : taskList) {
+            if (isMatchingTask(userInput, t)) {
                 System.out.print((taskList.indexOf(t) + 1) + ". ");
                 t.printTaskInformation();
                 System.out.println("");
@@ -245,8 +245,7 @@ public class Task {
     private static void printSuccessfulTaskAddition() {
         if(taskCount == 1) {
             System.out.println("Now you have " + taskCount + " task in the list.");
-        }
-        else{
+        } else {
             System.out.println("Now you have " + taskCount + " tasks in the list.");
         }
     }
@@ -256,7 +255,7 @@ public class Task {
      * The index number (starting from 1), task type
      * symbol and task completion status symbol is shown.
      */
-    public static void listTasks(){
+    public static void listTasks() {
         int index = 1;
         System.out.println("Here are the tasks in your list:");
         for(Task t : taskList){
@@ -274,21 +273,21 @@ public class Task {
         System.out.print(Integer.toString(index) + ".");
     }
 
-    public void printTaskInformation(){
+    public void printTaskInformation() {
         this.printTaskType();
         this.printStatusIcon();
         this.printTaskName();
     }
 
-    public String getTaskType(){
+    public String getTaskType() {
         return "N/A";
     }
 
-    public static int getTaskCount(){
+    public static int getTaskCount() {
         return taskList.size();
     }
 
-    public String getDate(){
+    public String getDate() {
         return "N/A";
     }
 
@@ -300,11 +299,11 @@ public class Task {
      * @param i Index number of the array list.
      * @return Formatted entry to be saved in a file.
      */
-    public static String getTask(int i){
+    public static String getTask(int i) {
         Task t = taskList.get(i);
         String taskType = t.getTaskType();
         String statusIcon = (t.getStatusIcon().equals("x") ? "1" : "0");
-        if (t instanceof Todo){
+        if (t instanceof Todo) {
             return taskType + " | " + statusIcon  + " | " + t.description
                     + System.lineSeparator();
         } else {
@@ -317,27 +316,27 @@ public class Task {
         printSuccessfulTaskAddition();
     }
 
-    private void printTaskType(){
+    private void printTaskType() {
         System.out.print("[" + this.getTaskType() + "]");
     }
 
-    private void printStatusIcon(){
+    private void printStatusIcon() {
         System.out.print("[" + this.getStatusIcon() + "] ");
     }
 
-    private void printTaskName(){
+    private void printTaskName() {
         System.out.print(this.description);
     }
 
-    private boolean isEmpty(Task t){
+    private boolean isEmpty(Task t) {
         return t.description.equals("");
     }
 
-    private static boolean isIncompleteIndexInput(String userInput){
+    private static boolean isIncompleteIndexInput(String userInput) {
         return Util.getTaskIndex(userInput).equals("-1");
     }
 
-    private static boolean isInvalidIndexInput(String userInput){
+    private static boolean isInvalidIndexInput(String userInput) {
         return Util.getTaskIndex(userInput).equals("0");
     }
 
@@ -353,7 +352,7 @@ public class Task {
         System.out.println("Please enter the command as follows:");
     }
 
-    private static void printIncompleteDoneInputErrorMessage(String userInput){
+    private static void printIncompleteDoneInputErrorMessage(String userInput) {
         System.out.println("The command entered is INCOMPLETE: " +
                 userInput + "\n");
         System.out.println("Please enter the command as follows:");

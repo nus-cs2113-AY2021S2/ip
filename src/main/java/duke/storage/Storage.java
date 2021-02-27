@@ -11,8 +11,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Represents a storage area where you can save
+ * and load files from.
+ */
 public class Storage {
-
     /**
      * Loads a previously saved file or creates a new save
      * file if it doesn't exist.
@@ -23,10 +26,10 @@ public class Storage {
      * If the save file creation failed, th exception thrown
      * will be captured.
      */
-    public static void loadFile(){
+    public static void loadFile() {
         try {
             File f = new File("duke.txt");
-            if (f.createNewFile()){
+            if (f.createNewFile()) {
                 System.out.println("Save file is created: " + f.getName());
             } else {
                 try {
@@ -44,13 +47,13 @@ public class Storage {
     }
 
     // Recreate the ArrayList from save file
-    private static void loadList(String filePath) throws FileNotFoundException{
+    private static void loadList(String filePath) throws FileNotFoundException {
         File f = new File(filePath);
         Scanner s = new Scanner(f);
         if(s.hasNext()) {
             s.nextLine();       // Skip the first line
         }
-        while (s.hasNext()){
+        while (s.hasNext()) {
             String listEntry = s.nextLine();
             Scanner listEntryS = new Scanner(listEntry);
             String taskType = listEntryS.next();
@@ -58,7 +61,8 @@ public class Storage {
             String taskName;
             String taskStatus;
             String date;
-            switch (taskType){
+
+            switch (taskType) {
             case "T":
                 parser = listEntry.split("\\|");
                 taskName = parser[2].trim();
@@ -111,7 +115,7 @@ public class Storage {
         }
     }
 
-    private static void saveFile(String filePath) throws IOException{
+    private static void saveFile(String filePath) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         fw.write("List of tasks: " + System.lineSeparator());
         for (int i = 0; i < Task.getTaskCount(); i++) {

@@ -5,7 +5,7 @@ import duke.task.Task;
 import java.util.Scanner;
 
 public class Util {
-    public static boolean isEmpty(String s){
+    public static boolean isEmpty(String s) {
         return s.equals("");
     }
 
@@ -21,7 +21,7 @@ public class Util {
      * @param s User input with task type removed.
      * @return Date from user input.
      */
-    public static String extractTime(String s){
+    public static String extractTime(String s) {
         // If s is empty
         if (isEmpty(s)){
             return "";
@@ -30,12 +30,12 @@ public class Util {
         String[] splitArray = s.split("/");
 
         // If there is no date field
-        if (splitArray.length < 2){
+        if (splitArray.length < 2) {
             return "";
         }
 
         // If s is invalid input
-        if (splitArray[1].trim().split(" ").length != 2){
+        if (splitArray[1].trim().split(" ").length != 2) {
             return "";
         }
 
@@ -52,9 +52,9 @@ public class Util {
      * @param s User input with task type removed.
      * @return Task name from user input.
      */
-    public static String extractTaskName(String s){
+    public static String extractTaskName(String s) {
         // If s is empty
-        if (isEmpty(s)){
+        if (isEmpty(s)) {
             return "";
         }
 
@@ -82,10 +82,10 @@ public class Util {
         } else {
             return "-1";
         }
-        if(!isInteger(taskIndex)){
+        if(!isInteger(taskIndex)) {
             return "0";
         }
-        if(isNegative(taskIndex) || isOutOfRange(taskIndex)){
+        if(isNegative(taskIndex) || isOutOfRange(taskIndex)) {
             return "0";
         }
         return taskIndex;
@@ -95,7 +95,7 @@ public class Util {
         return Integer.parseInt(taskIndex) <= 0;
     }
 
-    private static boolean isInteger(String taskIndex){
+    private static boolean isInteger(String taskIndex) {
         try {
             Integer.parseInt(taskIndex);
         } catch (NumberFormatException e) {
@@ -104,7 +104,7 @@ public class Util {
         return true;
     }
 
-    private static boolean isOutOfRange(String taskIndex){
+    private static boolean isOutOfRange(String taskIndex) {
         return Task.getTaskCount() < Integer.parseInt(taskIndex);
     }
 
