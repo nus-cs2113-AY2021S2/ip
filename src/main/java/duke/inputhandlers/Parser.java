@@ -97,7 +97,7 @@ public class Parser {
     /**
      * Obtains entire task description from user input until end of input.
      *
-     * @param words     array of strings consisting of user input split into individual words
+     * @param words array of strings consisting of user input split into individual words
      * @return task description as a single string
      */
     private static String getDescriptionString(String[] words) {
@@ -110,7 +110,7 @@ public class Parser {
 
         return description;
     }
-    
+
     /**
      * Obtains entire task description from user input until it reaches a delimiter.
      *
@@ -128,12 +128,12 @@ public class Parser {
             }
             description += " " + words[i];
         }
-        
+
         // handles case where user input does not contain task description
         if (description.contains(delimiter)) {
             throw new InvalidCommandException();
         }
-        
+
         return description;
     }
 

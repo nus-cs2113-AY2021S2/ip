@@ -68,12 +68,11 @@ public class FileManager {
      * @throws FileNotFoundException if data file specified by {@code PATH} does not exist.
      */
     private static void readFromFile() throws FileNotFoundException {
-
+        int lineNumber = 0;
         File dataFile = new File(PATH);
         Scanner reader = new Scanner(dataFile);
 
         while (reader.hasNext()) {
-            int lineNumber = 0;
             String line = reader.nextLine();
             lineNumber++;
 
