@@ -26,18 +26,18 @@
 	 You have 1 task in the list.
 	____________________________________________________________
 	____________________________________________________________
-	 added: [D][ ] a proper deadline (by: right now)
+	 added: [D][ ] a proper deadline (by: Apr 20 2021)
 	 You have 2 tasks in the list.
 	____________________________________________________________
 	____________________________________________________________
-	 added: [E][ ] exit this program (on: shortly later)
+	 added: [E][ ] exit this program (on: Apr 20 2021)
 	 You have 3 tasks in the list.
 	____________________________________________________________
 	____________________________________________________________
 	 Here is a list of all your tasks:
 	 1. [T][ ] add a proper task
-	 2. [D][ ] a proper deadline (by: right now)
-	 3. [E][ ] exit this program (on: shortly later)
+	 2. [D][ ] a proper deadline (by: Apr 20 2021)
+	 3. [E][ ] exit this program (on: Apr 20 2021)
 	____________________________________________________________
 	____________________________________________________________
 	 Bye. Hope to see you again soon!

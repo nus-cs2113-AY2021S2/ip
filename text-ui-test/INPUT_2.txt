@@ -5,7 +5,7 @@ event       how about some trailing spaces /at
 deadline
 event
 todo add a proper task
-deadline a proper deadline /by right now
-event exit this program /at shortly later
+deadline a proper deadline /by 2021-04-20
+event exit this program /at 2021-04-20
 list
 bye
