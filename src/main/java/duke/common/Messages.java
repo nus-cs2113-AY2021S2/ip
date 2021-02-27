@@ -33,4 +33,22 @@ public class Messages {
     public static final String ERROR_NOT_A_TASK_NUMBER_MESSAGE =
             "Please enter a valid positive integer for a task number.";
     public static final String ERROR_EMPTY_TASK_STRING_FORMAT = "The description of a %s cannot be empty.";
+    public static final String HELP_USAGE_MESSAGE = "List of commands and their description:\n\n"
+            + "help      - displays the list of commands and their description.\n"
+            + "list      - lists all the tasks (Todos, Deadlines & Events).\n"
+            + "todo <description>      - records the task name.\n"
+            + "deadline <description> /by <datetime>  - records the task name and\n"
+            + "                                         datetime of deadline.\n"
+            + "event <description> /at <datetime>     - records the task (event)\n"
+            + "                                         name and datetime of event.\n"
+            + "done <task number>      - marks a task as done based on its task\n"
+            + "                          number in the list.\n"
+            + "delete <task number>    - deletes a task record based on its task\n"
+            + "                          number in the list.\n"
+            + "find <keyword>          - find tasks with a specific keyword.\n"
+            + "date <date>             - search for deadlines or events that have a\n"
+            + "                          date in the format of either:\n"
+            + "                          -  DDMMYYYY or DD/MM/YYYY or YYYY.MM.DD or\n"
+            + "                             DD-MM-YYYY.\n"
+            + "bye      - exits the application.\n";
 }

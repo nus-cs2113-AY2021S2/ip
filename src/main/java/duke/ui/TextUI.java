@@ -8,7 +8,7 @@ import static duke.common.Messages.LOGO;
 import static duke.common.Messages.WELCOME_MESSAGE;
 
 public class TextUI {
-    private static final String HORIZONTAL_LINE = "_".repeat(65);
+    private static final String HORIZONTAL_LINE = "_".repeat(70);
     private final Scanner input;
 
     public TextUI() {

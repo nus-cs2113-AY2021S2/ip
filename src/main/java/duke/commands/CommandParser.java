@@ -35,6 +35,8 @@ public class CommandParser {
             return new FindCommand(commandArgs);
         case DateCommand.DATE_WORD:
             return new DateCommand(commandArgs);
+        case HelpCommand.HELP_WORD:
+            return new HelpCommand();
         case ByeCommand.BYE_WORD:
             return new ByeCommand();
         default:

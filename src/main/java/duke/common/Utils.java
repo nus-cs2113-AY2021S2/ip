@@ -10,9 +10,11 @@ public class Utils {
     public static final DateTimeFormatter OUTPUT_DATE_FORMAT = DateTimeFormatter.ofPattern("MMM dd, yyyy");
 
     private static final DateTimeFormatter[] POSSIBLE_DATETIME_FORMATS = {
+            DateTimeFormatter.ofPattern("ddMMyyyy HH:mm"),
             DateTimeFormatter.ofPattern("d.M.yyyy HH:mm"),
             DateTimeFormatter.ofPattern("d-M-yyyy HH:mm"),
             DateTimeFormatter.ofPattern("d/M/yyyy HH:mm"),
+            DateTimeFormatter.ofPattern("ddMMyyyy HHmm"),
             DateTimeFormatter.ofPattern("d.M.yyyy HHmm"),
             DateTimeFormatter.ofPattern("d-M-yyyy HHmm"),
             DateTimeFormatter.ofPattern("d/M/yyyy HHmm"),
