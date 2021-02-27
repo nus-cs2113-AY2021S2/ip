@@ -1,6 +1,6 @@
 # Duke _the task manager_
 #### by, *Ivan Chong Zhi En*
-#### _Last updated:_ `26 February 2021`
+#### _Last updated:_ `27 February 2021`
 Duke is a Command Line Interface (CLI) app for managing your day-to-day tasks.
 If you work faster by typing, managing tasks using Duke will be a breeze.
 
