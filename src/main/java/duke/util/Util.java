@@ -25,7 +25,7 @@ public class Util {
         }
 
         // If s is invalid input
-        if (splitArray[1].split(" ").length != 2){
+        if (splitArray[1].trim().split(" ").length != 2){
             return "";
         }
 

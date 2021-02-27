@@ -44,6 +44,17 @@ public class Parser {
         return parsedList.get(1);
     }
 
+    public static String[] parseCurrentDate(String date){
+        String[] splitDate = date.trim().split("-");
+        String[] arrangedSplitDate = new String[3];
+
+        arrangedSplitDate[0] = splitDate[1];
+        arrangedSplitDate[1] = splitDate[2];
+        arrangedSplitDate[2] = splitDate[0];
+
+        return arrangedSplitDate;
+    }
+
     public static void emptyList(ArrayList<String> parsedList){
         for(String item : parsedList) {
             parsedList.remove(item);
