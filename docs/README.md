@@ -143,13 +143,13 @@ Words in UPPER_CASE are the parameters to be supplied by the user.
 __________________________
 
 ### Command Summary
-Action | Format, Examples
------------- | -------------
-List | `list`
-Todo | `todo TODO`<br />e.g. `todo task 1`
-Deadline | `deadline DEADLINE /by BYTIME`<br />e.g. `deadline task 2 /by today`
-Event | `event EVENT /at ATTIME`<br />e.g. `event task 3 /at tomorrow`
-Delete | `delete INDEX`<br />e.g. `delete 1`
-Done | `done INDEX`<br />e.g. `done 1`
-Find | `find KEYWORD`<br />e.g. `find task`
-Bye | `bye`
+Action | Format | Examples
+------------ | ------------- | -------------
+List | `list` | 
+Todo | `todo TODO` | e.g. `todo task 1`
+Deadline | `deadline DEADLINE /by BYTIME` | e.g. `deadline task 2 /by today`
+Event | `event EVENT /at ATTIME` | e.g. `event task 3 /at tomorrow`
+Delete | `delete INDEX` | e.g. `delete 1`
+Done | `done INDEX` | e.g. `done 1`
+Find | `find KEYWORD` | e.g. `find task`
+Bye | `bye` | 
