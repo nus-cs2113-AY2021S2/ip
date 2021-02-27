@@ -59,13 +59,13 @@ Expected Output:
 ```
 Got it. I've added this task:
 [T][ ] Grow Mushroom
-Now you have 1 tasks in the list.
+Now you have 1 task(s) in the list.
 ```
 ### 3.2 Add a Deadline task: `deadline`
 
 This operation will add a Deadline task to the task list.
 
-Format: `deadline <Task Description> /by <yyyy/MM/dd>`
+Format: `deadline <Task Description> /by <yyyy-MM-dd>`
 
 Example: `deadline Plant Mushroom /by 2020-02-25`
 
@@ -73,7 +73,7 @@ Expected Output:
 ```
 Got it. I've added this task:
 [D][ ] Plant Mushroom (by: 2020-02-25)
-Now you have 2 tasks in the list.
+Now you have 2 task(s) in the list.
 ```
 
 ### 3.3 Add an Event task: `Event`
@@ -88,7 +88,7 @@ Expected Output:
 ```
 Got it. I've added this task:
 [E][ ] Mushroom Concert (at: Sunday)
-Now you have 3 tasks in the list.
+Now you have 3 task(s) in the list.
 ```
 
 ### 3.4 List all the tasks: `list`
@@ -99,7 +99,7 @@ Format: `list`
 
 Expected Output:
 ```
-Below are all your task:
+Below are all your task(s):
 1.[T][ ] Grow Mushroom
 2.[D][ ] Plant Mushroom (by: 2020-02-25)
 3.[E][ ] Mushroom Concert (at: Sunday)
@@ -131,10 +131,10 @@ Expected Output:
 ```
 Noted. I will remove this task:
 [D][X] Plant Mushroom (by: 2020-02-25)
-Now you have 2 tasks in the list.
+Now you have 2 task(s) in the list.
 ```
 
-### 3.7 Search task by keyword: `find`
+### 3.7 Search task for keyword: `find`
 
 This operation will search all the tasks with the keyword found in the task description.
 The keyword is case insensitive.
@@ -197,10 +197,10 @@ Loading failed - Unable to detect file.
 Command | Format | Example |
 ------- | ------- | ------- | 
 todo | `todo <Task Description>` | `todo Grow Mushroom` |
-deadline | `deadline <Task Description> /by <yyyy/MM/dd>` | `deadline Plant Mushroom /by 2020-02-25` |
+deadline | `deadline <Task Description> /by <yyyy-MM-dd>` | `deadline Plant Mushroom /by 2020-02-25` |
 event | `event <Task Description> /at <Date or Day>`      | `event Mushroom Concert /at Sunday` |
 list | `list` | `list` |
 done | `done <Task Number>` | `done 2` |
 delete | `delete <Task Number>` | `delete 2` |
-find | `find <KeywordD>` | `find mushroom` |
+find | `find <Keyword>` | `find mushroom` |
 bye | `bye` | `bye` |

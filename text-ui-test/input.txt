@@ -13,6 +13,8 @@ find test
 find testdelete
 find jackma
 find find
+delete jackma
+done jackma
 delete 0
 list
 delete 7

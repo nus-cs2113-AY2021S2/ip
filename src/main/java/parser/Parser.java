@@ -66,6 +66,10 @@ public class Parser {
             Ui.printTaskWarningMessage(userInput);
             System.out.println("You need a task number behind done command!");
             return Constant.INPUT_CODE_INVALID;
+        } catch (NumberFormatException e) {
+            Ui.printTaskWarningMessage(userInput);
+            System.out.println("You need task number not a word!");
+            return Constant.INPUT_CODE_INVALID;
         }
     }
 
@@ -156,6 +160,10 @@ public class Parser {
             Ui.printTaskWarningMessage(userInput);
             System.out.println("You need a task number behind delete command!");
             return Constant.INPUT_CODE_INVALID;
+        } catch (NumberFormatException e) {
+            Ui.printTaskWarningMessage(userInput);
+            System.out.println("You need task number not a word!");
+            return Constant.INPUT_CODE_INVALID;
         }
     }
 
@@ -185,7 +193,7 @@ public class Parser {
      * @return valid or invalid command code for 'done' command.
      */
     private static int validateDoneCommand(String[] words) throws DoneCommandException,
-            ArrayIndexOutOfBoundsException {
+            ArrayIndexOutOfBoundsException, NumberFormatException {
         if (Integer.parseInt(words[1]) < 1) {
             throw new DoneCommandException();
         } else {
@@ -275,7 +283,7 @@ public class Parser {
      * @return valid or invalid command code for 'delete' command.
      */
     private static int validateDeleteCommand(String[] words) throws DeleteCommandException,
-            ArrayIndexOutOfBoundsException {
+            ArrayIndexOutOfBoundsException, NumberFormatException {
         if (Integer.parseInt(words[1]) < 1) {
             throw new DeleteCommandException();
         } else {

@@ -25,20 +25,20 @@ ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
 [T][ ] Grow Mushroom
-Now you have 1 tasks in the list.
+Now you have 1 task(s) in the list.
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
 [D][ ] Plant Mushroom (by: 2020-02-25)
-Now you have 2 tasks in the list.
+Now you have 2 task(s) in the list.
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
 [E][ ] Mushroom Concert (at: Sunday)
-Now you have 3 tasks in the list.
+Now you have 3 task(s) in the list.
 ____________________________________________________________
 ____________________________________________________________
-Below are all your task:
+Below are all your task(s):
 1.[T][ ] Grow Mushroom
 2.[D][ ] Plant Mushroom (by: 2020-02-25)
 3.[E][ ] Mushroom Concert (at: Sunday)
@@ -61,20 +61,20 @@ ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
 [T][ ] testdelete todo
-Now you have 3 tasks in the list.
+Now you have 3 task(s) in the list.
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
 [D][ ] testdelete deadline (by: 2020-02-02)
-Now you have 4 tasks in the list.
+Now you have 4 task(s) in the list.
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
 [E][ ] testfind event (at: monday)
-Now you have 5 tasks in the list.
+Now you have 5 task(s) in the list.
 ____________________________________________________________
 ____________________________________________________________
-Below are all your task:
+Below are all your task(s):
 1.[T][ ] Grow Mushroom
 2.[E][ ] Mushroom Concert (at: Sunday)
 3.[T][ ] testdelete todo
@@ -104,12 +104,22 @@ Processing keyword searches, please wait.
 Search is complete!
 ____________________________________________________________
 ____________________________________________________________
+Invalid command: delete jackma
+You need task number not a word!
+Please try again with correct format!
+____________________________________________________________
+____________________________________________________________
+Invalid command: done jackma
+You need task number not a word!
+Please try again with correct format!
+____________________________________________________________
+____________________________________________________________
 Invalid command: delete 0
 You cannot delete a task smaller than 1!
 Please try again with correct format!
 ____________________________________________________________
 ____________________________________________________________
-Below are all your task:
+Below are all your task(s):
 1.[T][ ] Grow Mushroom
 2.[E][ ] Mushroom Concert (at: Sunday)
 3.[T][ ] testdelete todo
@@ -129,7 +139,7 @@ Nice! I've marked the task as done:
 [E][X] testfind event (at: monday)
 ____________________________________________________________
 ____________________________________________________________
-Below are all your task:
+Below are all your task(s):
 1.[T][ ] Grow Mushroom
 2.[E][ ] Mushroom Concert (at: Sunday)
 3.[T][ ] testdelete todo
@@ -147,7 +157,7 @@ Noted. I will remove this task:
 Now you have 3 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
-Below are all your task:
+Below are all your task(s):
 1.[T][ ] Grow Mushroom
 2.[E][ ] Mushroom Concert (at: Sunday)
 3.[T][ ] testdelete todo
@@ -162,7 +172,7 @@ There is no task number 7 to mark done.
 Please try again!
 ____________________________________________________________
 ____________________________________________________________
-Below are all your task:
+Below are all your task(s):
 1.[T][ ] Grow Mushroom
 2.[E][ ] Mushroom Concert (at: Sunday)
 3.[T][ ] testdelete todo
@@ -170,7 +180,7 @@ ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
 [T][ ] test invalid format for command code
-Now you have 4 tasks in the list.
+Now you have 4 task(s) in the list.
 ____________________________________________________________
 ____________________________________________________________
 Invalid command: deadline /by 2019-01-01
@@ -198,7 +208,7 @@ Please use a correct format with ' /by '!
 Please try again with correct format!
 ____________________________________________________________
 ____________________________________________________________
-Below are all your task:
+Below are all your task(s):
 1.[T][ ] Grow Mushroom
 2.[E][ ] Mushroom Concert (at: Sunday)
 3.[T][ ] testdelete todo

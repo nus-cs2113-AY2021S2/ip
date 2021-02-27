@@ -63,7 +63,7 @@ public class Ui {
     public static void printAddedTask(int index) {
         System.out.println("Got it. I've added this task:");
         printTaskDetails(index);
-        System.out.println("Now you have " + (index + 1) + " tasks in the list.");
+        System.out.println("Now you have " + (index + 1) + " task(s) in the list.");
     }
 
     /**
