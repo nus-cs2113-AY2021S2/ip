@@ -17,6 +17,16 @@ public class Task {
         this.isDone = false;
     }
 
+    public static void addTaskWithValidation(String userInput, Task t) {
+        try {
+            t.addTask();
+        } catch (EmptyInputException | IncompleteInputException e){
+            t.printInputErrorMessage(userInput);
+        } catch (InvalidDateInputException e){
+            t.printInvalidDateInputMessage(userInput);
+        }
+    }
+
     public String getStatusIcon(){
         return(this.isDone ? "x" : " ");
     }
@@ -63,9 +73,6 @@ public class Task {
         printTaskCount();
     }
 
-    private static void printTaskCount() {
-        printSuccessfulTaskAddition();
-    }
 
     public void addTaskToArrayList() {
         taskList.add(this);
@@ -128,6 +135,10 @@ public class Task {
             return taskType + " | " + statusIcon + " | " + t.description
                     + " | " + t.getDate() + System.lineSeparator() ;
         }
+    }
+
+    private static void printTaskCount() {
+        printSuccessfulTaskAddition();
     }
 
     private void printTaskType(){

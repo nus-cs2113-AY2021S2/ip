@@ -6,7 +6,7 @@ import duke.exceptions.InvalidDateInputException;
 
 public class Deadline extends Task{
     private static final String ALPHABET_D = "D";
-    private String by;
+    private String byTime;
     private static final String JAN = "01";
     private static final String FEB = "02";
     private static final String MAR = "03";
@@ -22,12 +22,12 @@ public class Deadline extends Task{
 
     public Deadline(String d, String by){
         super(d);
-        this.by = by;
+        this.byTime = by;
     }
 
     @Override
     public String getDate() {
-        return this.by;
+        return this.byTime;
     }
 
     @Override
@@ -42,7 +42,7 @@ public class Deadline extends Task{
     }
 
     public void printTime(){
-        System.out.print(" (by:" + this.by + ")");
+        System.out.print(" (by:" + this.byTime + ")");
     }
 
     @Override
@@ -72,11 +72,11 @@ public class Deadline extends Task{
     }
 
     private boolean isIncomplete(Deadline d){
-        return d.by.equals("");
+        return d.byTime.equals("");
     }
 
     private boolean isInvalidDate(Deadline d){
-        String[] splitDate = d.by.trim().split("-");
+        String[] splitDate = d.byTime.trim().split("-");
         // Formatting is incorrect
         if (splitDate.length != 3){
             return true;
