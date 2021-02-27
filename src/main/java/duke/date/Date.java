@@ -31,6 +31,16 @@ public class Date {
         return splitDate[0];
     }
 
+    /**
+     * Returns true if the date is invalid,
+     * false otherwise.
+     * The date is invalid if it is in the incorrect
+     * format, out of range or not a future date,
+     * it's valid otherwise.
+     *
+     * @param t Task object being validated.
+     * @return true if date is invalid, false otherwise.
+     */
     public static boolean isInvalidDate(Task t){
         LocalDate currentDate = LocalDate.now();
         String[] splitDate = t.getDate().trim().split("-");
@@ -67,12 +77,10 @@ public class Date {
     }
 
     private static boolean isOutOfRangeDay(String month, String day, String year) {
-        // Check day lower limit
         if (Integer.parseInt(day) < 1){
             return true;
         }
 
-        // Check day upper limit according to month
         switch(month){
         case FEB:
             if (isLeapYear(Integer.parseInt(year))){
@@ -105,6 +113,10 @@ public class Date {
         return false;
     }
 
+    public static boolean isIncompleteDate(Task t){
+        return t.getDate().equals("");
+    }
+
     private static boolean isOutOfRangeMonth(String month) {
         return Integer.parseInt(month) < 1 || Integer.parseInt(month) > 12;
     }
@@ -125,11 +137,7 @@ public class Date {
         return splitDate.length != 3;
     }
 
-    public static boolean isIncompleteDate(Task t){
-        return t.getDate().equals("");
-    }
-
-    public static boolean isLeapYear(int year){
+    private static boolean isLeapYear(int year){
         return (year % 4 == 0);
     }
 }

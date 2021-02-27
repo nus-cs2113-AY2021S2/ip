@@ -5,6 +5,11 @@ import duke.exceptions.EmptyInputException;
 import duke.exceptions.IncompleteInputException;
 import duke.exceptions.InvalidDateInputException;
 
+/**
+ * Represents a <code>Deadline</code> in the real world.
+ * A Deadline object contains what a Task object has and
+ * a date.
+ */
 public class Deadline extends Task{
     private static final String ALPHABET_D = "D";
     private String byTime;
@@ -52,6 +57,17 @@ public class Deadline extends Task{
         System.out.println("3. In incorrect format.");
     }
 
+    /**
+     * Adds task to array list as per parent class.
+     *
+     * Throws additional exceptions on incomplete and
+     * invalid dates.
+     *
+     * @throws EmptyInputException If task.description is empty.
+     * @throws IncompleteInputException If parameter provided for date
+     * is insufficient.
+     * @throws InvalidDateInputException If date is in invalid format.
+     */
     @Override
     public void addTask() throws EmptyInputException, IncompleteInputException, InvalidDateInputException {
         // Check if date field is valid

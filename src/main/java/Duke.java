@@ -10,16 +10,14 @@ import duke.parser.Parser;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents a smart bot that creates a task
+ * list which includes todos, deadlines and events
+ */
 public class Duke {
-    public Duke(){
-    }
-
-    public void run(){
+    private void run(){
         String taskType;
         String taskName;
-        String by = "";
-        String at = "";
-        Scanner splitInputScanner;
         ArrayList<String> parsedList;
 
         TextUi.showLogo();

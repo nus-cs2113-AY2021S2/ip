@@ -5,18 +5,34 @@ import duke.util.Util;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a task in the real world.
+ * A <code>Task</code> object contains the
+ * task name and its completion status.
+ */
 public class Task {
     protected String description;
     private boolean isDone;
     private static ArrayList<Task> taskList = new ArrayList<>();
     private static int taskCount = 0;
 
-    // Task Constructor
     public Task(String description){
         this.description = description;
         this.isDone = false;
     }
 
+    /**
+     * Validates the @param of <code>addTask</code> method.
+     *
+     * Input error message will be shown if the parameters
+     * provided are insufficient.
+     *
+     * Invalid date input error message will be shown if the
+     * date is invalid.
+     *
+     * @param userInput Original user input.
+     * @param t Task object to be added and validated.
+     */
     public static void addTaskWithValidation(String userInput, Task t) {
         try {
             t.addTask();
@@ -27,6 +43,18 @@ public class Task {
         }
     }
 
+    /**
+     * Validates the @param of <code>markAsDone</code> method.
+     *
+     * Incomplete done input error message will be shown if
+     * the parameters provided are insufficient.
+     *
+     * Invalid done input error message will be shown if the
+     * input fields are invalid.
+     *
+     * @param i Number shown on the list of interested task.
+     * @param userInput Original user input.
+     */
     public static void markAsDoneWithValidation(String i, String userInput) {
         try {
             markAsDone(i, userInput);
@@ -37,6 +65,14 @@ public class Task {
         }
     }
 
+    /**
+     * Validates the @param of <code>findTask</code> method.
+     *
+     * Incomplete find input error message will be shown if
+     * the parameters provided are insufficient.
+     *
+     * @param userInput Search keyword.
+     */
     public static void findTaskWithValidation(String userInput) {
         try {
             findTask(userInput);
@@ -45,7 +81,7 @@ public class Task {
         }
     }
 
-    public String getStatusIcon(){
+    private String getStatusIcon(){
         return(this.isDone ? "x" : " ");
     }
 
@@ -53,6 +89,41 @@ public class Task {
         this.isDone = true;
     }
 
+    /**
+     * Adds corresponding task object to the array list.
+     * Shows the task added upon successful addition to the list,
+     * throws an exception otherwise.
+     *
+     * @throws EmptyInputException If task.description is empty.
+     * @throws IncompleteInputException If some fields of a command is missing.
+     * @throws InvalidDateInputException If date is not adhering to specified format.
+     */
+    public void addTask() throws
+            EmptyInputException, IncompleteInputException, InvalidDateInputException {
+        // Throw Exception if no valid task is detected
+        if (isEmpty(this)){
+            throw new EmptyInputException();
+        }
+
+        System.out.println("Got it, I've added this task:");
+        System.out.print("  ");
+        this.printTaskInformation();
+        System.out.println("");
+        addTaskToArrayList();
+        printTaskCount();
+    }
+
+    /**
+     * Sets the completion status of a task object to 1.
+     * Shows the task marked as done upon successful execution,
+     * throws an exception otherwise.
+     *
+     * @param i Number shown on the list of interested task.
+     * @param userInput Original user input.
+     * @throws IncompleteDoneInputException If insufficient parameters were
+     * given in the command.
+     * @throws InvalidDoneInputException If i <= 0 or i > taskCount.
+     */
     public static void markAsDone(String i, String userInput) throws
             IncompleteDoneInputException, InvalidDoneInputException{
 
@@ -72,22 +143,13 @@ public class Task {
         System.out.println("");
     }
 
-    // Add Task to taskList and increment taskCount
-    public void addTask() throws
-            EmptyInputException, IncompleteInputException, InvalidDateInputException {
-        // Throw Exception if no valid task is detected
-        if (isEmpty(this)){
-            throw new EmptyInputException();
-        }
-
-        System.out.println("Got it, I've added this task:");
-        System.out.print("  ");
-        this.printTaskInformation();
-        System.out.println("");
-        addTaskToArrayList();
-        printTaskCount();
-    }
-
+    /**
+     * Removes a task object from the array list
+     * corresponding to index = i-1.
+     * Shows the task removed upon successful deletion.
+     *
+     * @param i Number shown on the list of interested task.
+     */
     public static void deleteTask(String i){
         int index = Integer.parseInt(i);
         Task t = taskList.get(index-1);
@@ -100,6 +162,14 @@ public class Task {
         printTaskCount();
     }
 
+    /**
+     * Shows a list of tasks that matches the search keyword.
+     * Shows no match is found when no tasks matches the
+     * search keyword.
+     *
+     * @param userInput Search keyword
+     * @throws IncompleteFindInputException If userInput is empty.
+     */
     public static void findTask(String userInput) throws
             IncompleteFindInputException {
         if (userInput.equals("")){
@@ -132,6 +202,11 @@ public class Task {
         return taskName.contains(userInput.toLowerCase());
     }
 
+    /**
+     * Adds task object to the array list.
+     *
+     * Increments the global variable taskCount.
+     */
     public void addTaskToArrayList() {
         taskList.add(this);
         taskCount++;
@@ -146,6 +221,11 @@ public class Task {
         }
     }
 
+    /**
+     * Shows the list of tasks added and not removed.
+     * The index number (starting from 1), task type
+     * symbol and task completion status symbol is shown.
+     */
     public static void listTasks(){
         int index = 1;
         System.out.println("Here are the tasks in your list:");
@@ -182,6 +262,14 @@ public class Task {
         return "N/A";
     }
 
+    /**
+     * Returns a task entry in a specific format to be saved
+     * in a file.
+     * Task entries are formatted according to its task type.
+     *
+     * @param i Index number of the array list.
+     * @return Formatted entry to be saved in a file.
+     */
     public static String getTask(int i){
         Task t = taskList.get(i);
         String taskType = t.getTaskType();
@@ -235,7 +323,7 @@ public class Task {
         System.out.println("Please enter the command as follows:");
     }
 
-    public static void printIncompleteDoneInputErrorMessage(String userInput){
+    private static void printIncompleteDoneInputErrorMessage(String userInput){
         System.out.println("The command entered is INCOMPLETE: " +
                 userInput + "\n");
         System.out.println("Please enter the command as follows:");
@@ -243,7 +331,7 @@ public class Task {
         System.out.println("    e.g. done 3");
     }
 
-    public static void printInvalidDoneInputErrorMessage(String userInput) {
+    private static void printInvalidDoneInputErrorMessage(String userInput) {
         System.out.println("The command entered is INVALID: " +
                 userInput + "\n");
         System.out.println("Please enter the command as follows:");

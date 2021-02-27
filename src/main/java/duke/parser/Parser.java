@@ -8,9 +8,17 @@ import java.util.ArrayList;
 
 public class Parser {
 
-    public Parser(){
-    }
-
+    /**
+     * Returns an array list containing task type
+     * and task name.
+     * The task name is stored in index = 0.
+     * The task type is stored in index = 1.
+     * The task name is "" if the a one-word-command
+     * is parsed.
+     *
+     * @param userInput Original user input.
+     * @return An array list containing task type and task name.
+     */
     public static ArrayList<String> parseInput(String userInput){
         String taskType;
         String taskName;
@@ -35,15 +43,43 @@ public class Parser {
         return parsedList;
     }
 
-
+    /**
+     * Returns task name.
+     * The task name is stored in index = 0
+     * of the parsedList.
+     *
+     * @param parsedList Array list containing task name and task type.
+     * @return Task name.
+     */
     public static String parseTaskName(ArrayList<String> parsedList) {
         return parsedList.get(0).trim();
     }
 
+    /**
+     * Returns task type.
+     * The task type is stored in index = 1
+     * of the parsedList.
+     *
+     * @param parsedList Array list containing task name and task type.
+     * @return Task type.
+     */
     public static String parseTaskType(ArrayList<String> parsedList) {
         return parsedList.get(1).trim();
     }
 
+    /**
+     * Returns an array of String containing the
+     * current month, day and year.
+     * The current date format parsed in is
+     * YYYY-MM-DD.
+     * The month is stored in index = 0.
+     * The day is stored in index = 1.
+     * The year is stored in index = 2.
+     *
+     * @param date Current date
+     * @return An array of String containing the current
+     * month, day and year.
+     */
     public static String[] parseCurrentDate(String date){
         String[] splitDate = date.trim().split("-");
         String[] arrangedSplitDate = new String[3];
@@ -55,6 +91,13 @@ public class Parser {
         return arrangedSplitDate;
     }
 
+    /**
+     * Removes all contents of the array list of strings.
+     * This method empties the array list so that it can
+     * be reused for parsing purposes.
+     *
+     * @param parsedList Array list to be emptied.
+     */
     public static void emptyList(ArrayList<String> parsedList){
         for(String item : parsedList) {
             parsedList.remove(item);

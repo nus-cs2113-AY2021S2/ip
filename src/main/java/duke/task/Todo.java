@@ -1,5 +1,10 @@
 package duke.task;
 
+/**
+ * Represents something to be done in the real world.
+ * A Todo
+ * object contains what a Task object has.
+ */
 public class Todo extends Task{
     private static final String ALPHABET_T = "T";
 

@@ -13,10 +13,16 @@ import java.util.Scanner;
 
 public class Storage {
 
-    public Storage(){
-    }
-
-    // Load the save file and update ArrayList
+    /**
+     * Loads a previously saved file or creates a new save
+     * file if it doesn't exist.
+     *
+     * If the save file is unable to be located even though
+     * it exists, the exception thrown will be captured.
+     *
+     * If the save file creation failed, th exception thrown
+     * will be captured.
+     */
     public static void loadFile(){
         try {
             File f = new File("duke.txt");
@@ -38,7 +44,7 @@ public class Storage {
     }
 
     // Recreate the ArrayList from save file
-    public static void loadList(String filePath) throws FileNotFoundException{
+    private static void loadList(String filePath) throws FileNotFoundException{
         File f = new File(filePath);
         Scanner s = new Scanner(f);
         if(s.hasNext()) {
@@ -89,6 +95,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Calls the method <code>saveFile</code> and
+     * attempts to save the file.
+     *
+     * If the file saving process fails, the exception
+     * thrown will be captured.
+     */
     public static void attemptSaveFile() {
         try {
             Storage.saveFile("duke.txt");
@@ -98,7 +111,7 @@ public class Storage {
         }
     }
 
-    public static void saveFile(String filePath) throws IOException{
+    private static void saveFile(String filePath) throws IOException{
         FileWriter fw = new FileWriter(filePath);
         fw.write("List of tasks: " + System.lineSeparator());
         for (int i = 0; i < Task.getTaskCount(); i++) {

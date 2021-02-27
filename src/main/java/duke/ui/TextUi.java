@@ -1,10 +1,6 @@
 package duke.ui;
 
 public class TextUi {
-
-    public TextUi(){
-    }
-
     public static void showDividingLine() {
         System.out.println("_____________________________________________________");
     }
