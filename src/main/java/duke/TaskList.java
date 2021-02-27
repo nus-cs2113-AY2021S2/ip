@@ -46,7 +46,7 @@ public class TaskList {
         } else if(input.toLowerCase().contains("/by")) {
             try {
                 String desc = input.substring(0, input.toLowerCase().indexOf("/by") - 1);
-                String dueDate = input.substring(input.toLowerCase().indexOf("/by") + 4);
+                String dueDate = convertDate(input.substring(input.toLowerCase().indexOf("/by") + 4));
                 list.add(new Deadline(desc, dueDate));
                 Ui.printDeadlineAdded(desc, dueDate);
                 index++;
@@ -66,9 +66,9 @@ public class TaskList {
         } else if(input.toLowerCase().contains("/at")) {
             try {
                 String description = input.substring(0, input.toLowerCase().indexOf("/at")-1);
-                String time = input.substring(input.toLowerCase().indexOf("/at")+4);
-                list.add(new Event(description, time));
-                Ui.printEventAdded(description, time);
+                String date = convertDate(input.substring(input.toLowerCase().indexOf("/at")+4));
+                list.add(new Event(description, date));
+                Ui.printEventAdded(description, date);
                 taskCount++;
             } catch (Exception e) {
                 Ui.printGenericErrorMessage();
@@ -132,4 +132,15 @@ public class TaskList {
         }
     }
 
+    private static String convertDate(String date) {
+        try {
+            LocalDate parsedDate = LocalDate.parse(date);
+            return String.valueOf(parsedDate.getDayOfMonth()) +
+                    ' ' + parsedDate.getMonth() +
+                    ' ' + parsedDate.getYear();
+        } catch (DateTimeParseException e) {
+            return date;
+        }
+
+    }
 }
