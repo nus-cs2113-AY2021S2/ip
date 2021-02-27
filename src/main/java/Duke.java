@@ -21,7 +21,7 @@ public class Duke {
     /**
      * executes the program
      */
-    public void run(){
+    public void run() {
         Ui.helloMessage();
         boolean isExit = false;
         while(!isExit){

@@ -107,15 +107,19 @@ public class TaskList {
      * @param input user's input.
      * adds a deadline.
      */
-    public static void addDeadline(String input) {
-        String[] split = input.split(" /by");
-        System.out.println("Got it. I've added this task: ");
-        Deadline deadline = new Deadline(split[0], split[1]);
-        tasks.add(deadline);
-        tasksCount++;
-        System.out.println(deadline.toString());
-        printTotalTasks();
+    public static void addDeadline(String input){
+        try{
+            String[] split = input.split(" /by");
+            Deadline deadline = new Deadline(split[0], split[1]);
+            System.out.println("Got it. I've added this task: ");
+            tasks.add(deadline);
+            tasksCount++;
+            System.out.println(deadline.toString());
+            printTotalTasks();
 
+        } catch(ArrayIndexOutOfBoundsException e){
+            System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }
     }
 
     /**
@@ -130,13 +134,18 @@ public class TaskList {
      * adds an event.
      */
     public static void addEvent(String input) {
-        String[] split = input.split(" /at");
-        System.out.println("Got it. I've added this task: ");
-        Event event = new Event(split[0], split[1]);
-        tasks.add(event);
-        tasksCount++;
-        System.out.println(event.toString());
-        printTotalTasks();
+        try{
+            String[] split = input.split(" /at");
+            Event event = new Event(split[0], split[1]);
+            System.out.println("Got it. I've added this task: ");
+            tasks.add(event);
+            tasksCount++;
+            System.out.println(event.toString());
+            printTotalTasks();
+        } catch(ArrayIndexOutOfBoundsException e){
+            System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }
+
     }
 
     /**
@@ -146,8 +155,8 @@ public class TaskList {
     public static void find(String input){
         input = input.substring(FIND_LENGTH);
         ArrayList<Task> foundTasks = new ArrayList<Task>();
-        int foundCount =0;
         System.out.println("Here are the matching tasks in your list: ");
+        int foundCount =0;
         for(Task t:tasks){
             if(t.description.contains(input)){
                 foundTasks.add(t);

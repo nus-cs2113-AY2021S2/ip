@@ -1,4 +1,5 @@
 package duke.parser;
+import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.ui.Ui;
 import duke.task.TaskList;
@@ -41,7 +42,6 @@ public class Parser {
             Storage.writeFile();
         } else {
             System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-            Ui.showLine();
         }
 
     }
