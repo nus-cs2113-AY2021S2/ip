@@ -1,8 +1,8 @@
 package duke.task;
 
-import duke.exceptions.EmptyInputException;
-import duke.exceptions.IncompleteInputException;
-import duke.exceptions.InvalidDateInputException;
+import duke.exceptions.*;
+import duke.util.Util;
+
 import java.util.ArrayList;
 
 public class Task {
@@ -20,10 +20,20 @@ public class Task {
     public static void addTaskWithValidation(String userInput, Task t) {
         try {
             t.addTask();
-        } catch (EmptyInputException | IncompleteInputException e){
+        } catch (EmptyInputException | IncompleteInputException e) {
             t.printInputErrorMessage(userInput);
-        } catch (InvalidDateInputException e){
+        } catch (InvalidDateInputException e) {
             t.printInvalidDateInputMessage(userInput);
+        }
+    }
+
+    public static void markAsDoneWithValidation(String i, String userInput) {
+        try {
+            markAsDone(i, userInput);
+        } catch (IncompleteDoneInputException e) {
+            printIncompleteDoneInputErrorMessage(userInput);
+        } catch (InvalidDoneInputException e) {
+            printInvalidDoneInputErrorMessage(userInput);
         }
     }
 
@@ -35,7 +45,16 @@ public class Task {
         this.isDone = true;
     }
 
-    public static void markAsDone(String i){
+    public static void markAsDone(String i, String userInput) throws
+            IncompleteDoneInputException, InvalidDoneInputException{
+
+        if (isIncompleteDoneInput(userInput)){
+            throw new IncompleteDoneInputException();
+        }
+        if (isInvalidDoneInput(userInput)){
+            throw new InvalidDoneInputException();
+        }
+
         int index = Integer.parseInt(i);
         Task t = taskList.get(index-1);
         t.isDone = true;
@@ -157,16 +176,43 @@ public class Task {
         return t.description.equals("");
     }
 
+    private static boolean isIncompleteDoneInput(String userInput){
+        return Util.getTaskIndex(userInput).equals("-1");
+    }
+
+    private static boolean isInvalidDoneInput(String userInput){
+        return Util.getTaskIndex(userInput).equals("0");
+    }
+
     public void printInputErrorMessage(String userInput) {
-        System.out.println("This command entered is incomplete: "
+        System.out.println("The command entered is INCOMPLETE: "
                 + userInput + "\n");
         System.out.println("Please enter the command as follows:");
     }
 
     public void printInvalidDateInputMessage(String userInput) {
-        System.out.println("The date entered is invalid: "
+        System.out.println("The date entered is INVALID: "
                 + userInput + "\n");
         System.out.println("Please enter the command as follows:");
+    }
+
+    public static void printIncompleteDoneInputErrorMessage(String userInput){
+        System.out.println("The command entered is INCOMPLETE: " +
+                userInput + "\n");
+        System.out.println("Please enter the command as follows:");
+        System.out.println("  done [task number]");
+        System.out.println("    e.g. done 3");
+    }
+
+    public static void printInvalidDoneInputErrorMessage(String userInput) {
+        System.out.println("The command entered is INVALID: " +
+                userInput + "\n");
+        System.out.println("Please enter the command as follows:");
+        System.out.println("  done [task number]");
+        System.out.println("    e.g. done 3" + "\n");
+        System.out.println("[task number] field must be:");
+        System.out.println("1. Within range (according to number of items in the list).");
+        System.out.println("2. An integer greater than 0.");
     }
 
 }

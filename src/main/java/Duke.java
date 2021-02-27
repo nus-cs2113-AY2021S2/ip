@@ -96,7 +96,7 @@ public class Duke {
                 break;
             case "done":
                 TextUi.showDividingLine();
-                Task.markAsDone(Util.getTaskIndex(userInput));
+                Task.markAsDoneWithValidation(Util.getTaskIndex(userInput), userInput);
                 TextUi.showDividingLine();
                 Storage.attemptSaveFile();
                 break;
