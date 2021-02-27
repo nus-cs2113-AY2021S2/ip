@@ -20,6 +20,8 @@ Interface_ (CLI).
 * [Saving the data](#saving-the-data)
 
 * [Transferring save data](#transferring-save-data)
+
+* [Command summary](#command-summary)
    
 ---
 
