@@ -1,6 +1,8 @@
 package duke.command;
 
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
+
 import duke.Constants;
 import duke.error.ImportTaskException;
 import duke.error.InvalidSyntaxException;
@@ -75,7 +77,7 @@ public class AddCommand extends Command {
      * @return A new instance of Deadline task based on task description. 
      * @throws ImportTaskException If description or date is not found. 
      */
-    public Deadline addDeadlineFromStorage() throws ImportTaskException {
+    public Deadline addDeadlineFromStorage() throws ImportTaskException, DateTimeParseException {
         if (taskDescription == null | taskDate == null) {
             throw new ImportTaskException();
         }
@@ -105,7 +107,7 @@ public class AddCommand extends Command {
      * @return A new instance of Event task based on task description. 
      * @throws ImportTaskException If description or date is not found. 
      */
-    public Event addEventFromStorage() throws ImportTaskException {
+    public Event addEventFromStorage() throws ImportTaskException, DateTimeParseException {
         if (taskDescription == null | taskDate== null) {
             throw new ImportTaskException();
         }

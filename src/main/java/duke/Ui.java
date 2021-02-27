@@ -122,7 +122,7 @@ public class Ui {
         int matchNumber = 0;
         for (int i = 0; i < tasks.getSize(); i++) {
             Task task = tasks.getTask(i);
-            if (task.getTaskDescription().contains(keyword)) {
+            if (task.getTaskDescription().toLowerCase().contains(keyword)) {
                 matchNumber++;
                 message.append(System.lineSeparator() + String.format("\t %d. %s", matchNumber, task.toString()));
             }

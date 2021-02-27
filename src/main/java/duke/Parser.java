@@ -23,7 +23,7 @@ public class Parser {
         String[] extractedCommands = fullCommand.split(" ", 2);
 
         // First index (i.e. 0) contains command word, next index contains parameters if any 
-        String command = extractedCommands[Constants.COMMAND_INDEX].toLowerCase();
+        String command = extractedCommands[Constants.COMMAND_INDEX].toLowerCase().trim();
         return parseCommand(tasks, command, extractedCommands);
     }
 
@@ -51,7 +51,7 @@ public class Parser {
             checkCommandValidity(extractedCommands, command);
             // Check remaining parameters for valid index (i.e. task number)
             // Add valid index to array, otherwise invoke error
-            int taskNumber = getTaskNumber(command, tasks, extractedCommands[1].trim());
+            int taskNumber = getTaskNumber(command, tasks, extractedCommands[1]);
             if (!isTaskNumberValid(tasks, taskNumber)) {
                 throw new IndexOutOfBoundsException();
             }
@@ -90,6 +90,7 @@ public class Parser {
      * @param command Command word. 
      * @param taskDescription The description of task. The task description is task number for "mark" and "delete" 
      *                        commands. 
+     *                        The value is case insensitive and in lower case. 
      * @param taskDate Task date. Task date is valid only for "event" and "deadline" commands. 
      *                          Returns null for the other commands. 
      * @return Array containing parsed parameters including command, task status, task description and task date.
@@ -122,21 +123,10 @@ public class Parser {
             throw new TaskListEmptyException();
         }
         // Since user input task number starts from 1, remove 1 from taskNumber to reflect the correct index in tasks.
-        int taskNumber = Integer.parseInt(getTaskNumberString(commandParameter)) - 1;
+        int taskNumber = Integer.parseInt(commandParameter) - 1;
         return taskNumber;
     }
-
-    /**
-     * Gets task number in string.
-     * 
-     * @return Task number.
-     */
-    private String getTaskNumberString(String commandParameter) {
-        // Gets the taskNumber from the index of the first " "
-        // Adds 1 to the index remove the " " from string
-        return commandParameter.substring(commandParameter.indexOf(" ") + 1);
-    }
-
+    
     /**
      * Finds the location of the filters and locate the date from the task. Removes
      * the task date information from userCommand, keeping only the task name in
@@ -169,7 +159,7 @@ public class Parser {
      */
     private String[] getDate(String command, String commandParameter, String filterString) 
             throws InvalidSyntaxException, DateTimeParseException {
-        int indexOfDate = commandParameter.indexOf(filterString);
+        int indexOfDate = commandParameter.toLowerCase().indexOf(filterString);
         if (indexOfDate <= 0) {
             Ui ui = new Ui();
             throw new InvalidSyntaxException(ui.getSyntaxMessage(command));
@@ -184,7 +174,6 @@ public class Parser {
 
         // Add 3 to indexOfDate to remove the "/by" or "/at" filter strings
         String dateString = commandParameter.substring(indexOfDate + 3).trim();
-        Date.checkValidDate(dateString);
         String taskDescription = commandParameter.substring(0, indexOfDate).trim();
         return new String[]{taskDescription, dateString};
     }

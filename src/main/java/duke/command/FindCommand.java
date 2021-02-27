@@ -13,7 +13,7 @@ public class FindCommand extends Command {
 
     public FindCommand(String[] commands) {
         super(commands);
-        this.keyword = commands[Constants.TASK_DESCRIPTION_INDEX];
+        this.keyword = commands[Constants.TASK_DESCRIPTION_INDEX].toLowerCase().trim();
     }
 
     /**

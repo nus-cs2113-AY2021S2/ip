@@ -7,6 +7,8 @@ import java.io.FileWriter;
 import duke.error.*;
 import java.util.Scanner;
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
+
 import duke.task.*;
 import duke.command.*;
 
@@ -37,9 +39,9 @@ public class Storage {
         Scanner fileScanner = new Scanner(file);
         ArrayList<Task> importedTasks = new ArrayList<Task>();
         while (fileScanner.hasNextLine()) {
-            String[] extractedTaskParameters = fileScanner.nextLine().split(", ");
+            String[] extractedTaskParameters = fileScanner.nextLine().split("`` ");
             Task importedTask = createTask(extractedTaskParameters);
-            importedTask.setTaskStatus();
+            importedTask.setTaskStatus(extractedTaskParameters[1]);
             importedTasks.add(importedTask);
         }
         fileScanner.close();
@@ -85,7 +87,7 @@ public class Storage {
      * 
      * @param data List of parameters in storage file. 
      */
-    private Task createTask(String[] extractedTaskParameters) throws ImportTaskException {
+    private Task createTask(String[] extractedTaskParameters) throws ImportTaskException, DateTimeParseException {
         AddCommand addCommand = new AddCommand(extractedTaskParameters);
         switch(extractedTaskParameters[Constants.COMMAND_INDEX]) {
         case "todo":

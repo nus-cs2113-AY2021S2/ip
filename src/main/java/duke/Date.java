@@ -28,8 +28,10 @@ public class Date {
     /**
      * Converts given date into LocalDate and sets the Date class. 
      * 
+     * @param date Date to be set. 
+     * @throws DateTimeParseException If dateString is not a valid date.
      */
-    public void setDate(String date) {
+    public void setDate(String date) throws DateTimeParseException {
         this.date = LocalDate.parse(date);
     }
 
@@ -42,15 +44,5 @@ public class Date {
      */
     public String formatDateWithDelimeter(String dateFormat) {
         return date.format(DateTimeFormatter.ofPattern(dateFormat));
-    }
-
-    /**
-     * Checks if string is a valid date. 
-     * 
-     * @param dateString String to be verified. 
-     * @throws DateTimeParseException If dateString is not a valid date. 
-     */
-    protected static void checkValidDate(String dateString) throws DateTimeParseException {
-        LocalDate.parse(dateString);
     }
 }

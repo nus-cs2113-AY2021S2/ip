@@ -95,7 +95,7 @@ public abstract class Task {
      *         Date is null for todo tasks. 
      */
     public String toStorageString() {
-        return String.format("%s, %s, %s, %s", getTaskType(), String.valueOf(getTaskStatus()), getTaskDescription(), getTaskDate("yyyy-MM-dd"));
+        return String.format("%s`` %s`` %s`` %s", getTaskType(), String.valueOf(getTaskStatus()), getTaskDescription(), getTaskDate("yyyy-MM-dd"));
     }
 
     /**

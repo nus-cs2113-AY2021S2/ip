@@ -15,7 +15,7 @@ public class MarkCommand extends Command {
 
     public MarkCommand(String[] commands) {
         super(commands);
-        this.taskNumber = Integer.parseInt(commands[Constants.TASK_DESCRIPTION_INDEX]);
+        this.taskNumber = Integer.parseInt(commands[Constants.TASK_DESCRIPTION_INDEX].trim());
     }
 
     /**

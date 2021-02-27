@@ -14,7 +14,7 @@ public class DeleteCommand extends Command {
 
     public DeleteCommand(String[] commands) {
         super(commands);
-        this.taskNumber = Integer.parseInt(commands[Constants.TASK_DESCRIPTION_INDEX]);
+        this.taskNumber = Integer.parseInt(commands[Constants.TASK_DESCRIPTION_INDEX].trim());
     }
 
     /**
