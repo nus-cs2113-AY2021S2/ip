@@ -68,8 +68,8 @@ public class Storage {
     }
 
     /**
-     * Called by the loadTasks method, this method will only be called
-     * when the file does not exist.
+     * Called by the loadTasks method, this method will only be
+     * called when the file does not exist.
      *
      * @throws IOException when the file is corrupted.
      */
