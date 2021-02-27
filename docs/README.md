@@ -22,7 +22,7 @@ By: `Lee Han Yong Andy` Since: `February 2021`
 
 ## 1. Introduction 
 
-Track-The-Mushroom is a beginner-friendly console application to manage all your track.
+Track-The-Mushroom is a beginner-friendly console application to manage all your tasks.
 
 ## 2. Quick Start in Intellij
 
@@ -173,7 +173,6 @@ Loading successful!
 ```
    
 * Expected outcome if not successful:
-     
 ```
 Loading file...
 Loading failed - Unable to detect file.
