@@ -1,7 +1,7 @@
 clear
 todo eat
-deadline sleep /by tonight
-event repeat /at everyday
+deadline sleep /by 2021-04-20
+event repeat /at 2021-04-20
 list
 done 2
 list
