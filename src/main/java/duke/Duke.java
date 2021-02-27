@@ -33,25 +33,31 @@ public class Duke {
                 Ui.printHelpMessage();
                 break;
             case "list":
-                Tasklist.printList(list, taskCount);
+                TaskList.printList(list, taskCount);
                 break;
             case "todo":
-                taskCount = Tasklist.addToDo(arguments, list, taskCount);
+                taskCount = TaskList.addToDo(arguments, list, taskCount);
+                DataStorage.writeSaveData(list);
                 break;
             case "deadline":
-                taskCount = Tasklist.addDeadline(arguments, list, taskCount);
+                taskCount = TaskList.addDeadline(arguments, list, taskCount);
+                DataStorage.writeSaveData(list);
                 break;
             case "event":
-                taskCount = Tasklist.addEvent(arguments, list, taskCount);
+                taskCount = TaskList.addEvent(arguments, list, taskCount);
+                DataStorage.writeSaveData(list);
                 break;
             case "done":
-                Tasklist.markAsDone(list, taskCount, arguments);
+                TaskList.markAsDone(list, taskCount, arguments);
+                DataStorage.writeSaveData(list);
                 break;
             case "undo":
-                Tasklist.undoMarkAsDone(list, taskCount, arguments);
+                TaskList.undoMarkAsDone(list, taskCount, arguments);
+                DataStorage.writeSaveData(list);
                 break;
             case "delete":
-                Tasklist.delete(list, taskCount, arguments);
+                TaskList.delete(list, taskCount, arguments);
+                DataStorage.writeSaveData(list);
                 break;
             default:
                 Ui.printInvalidCommandMessage();

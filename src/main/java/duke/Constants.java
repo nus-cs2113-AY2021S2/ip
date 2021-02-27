@@ -23,7 +23,7 @@ public class Constants {
     public static final String TASK_CHECKED_MESSAGE = "Task %d checked off!\n    %s %s";
     public static final String TASK_ALREADY_CHECKED_MESSAGE = "Task %d: \"%s\" is already checked off";
     public static final String ALL_TASKS_CHECKED_MESSAGE = "All remaining tasks have been checked off!";
-    public static final String TASK_UNCHECKED_MESSAGE = "Task %d is no longer checked off\n    $s %s";
+    public static final String TASK_UNCHECKED_MESSAGE = "Task %d is no longer checked off\n    %s %s";
     public static final String TASK_NOT_CHECKED_MESSAGE = "Task %d: \"%s\" is not checked";
     public static final String TASK_DOES_NOT_EXIST_MESSAGE = "Task %d does not exist!";
     public static final String TASK_DELETED_MESSAGE = "Task %d:%s has been removed";

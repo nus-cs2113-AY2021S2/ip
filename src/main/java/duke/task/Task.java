@@ -41,21 +41,25 @@ public class Task {
     }
 
     public void check() {
-        if (isDone == false) {
+        if (!isDone) {
             isDone = true;
             tasksRemaining--;
         }
     }
 
     public void uncheck() {
-        if (isDone == true) {
+        if (isDone) {
             isDone = false;
             tasksRemaining++;
         }
     }
 
+    private String convertDate(String date) {
+        return null;
+    }
+
     public void remove() {
-        if (isDone == false) {
+        if (!isDone) {
             tasksRemaining--;
         }
     }
