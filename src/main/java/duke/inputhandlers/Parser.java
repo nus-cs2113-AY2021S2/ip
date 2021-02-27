@@ -67,7 +67,7 @@ public class Parser {
             throw new InvalidCommandException();
         }
 
-        return getDescriptionString(words, "");
+        return getDescriptionString(words);
     }
 
     /**
@@ -95,7 +95,24 @@ public class Parser {
     }
 
     /**
-     * Obtains entire task description from user input.
+     * Obtains entire task description from user input until end of input.
+     *
+     * @param words     array of strings consisting of user input split into individual words
+     * @return task description as a single string
+     */
+    private static String getDescriptionString(String[] words) {
+
+        String description = words[1];
+
+        for (int i = 2; i < words.length; i++) {
+            description += " " + words[i];
+        }
+
+        return description;
+    }
+    
+    /**
+     * Obtains entire task description from user input until it reaches a delimiter.
      *
      * @param words     array of strings consisting of user input split into individual words
      * @param delimiter specifies the end of task description
@@ -119,6 +136,7 @@ public class Parser {
         
         return description;
     }
+
 
     /**
      * Parse time/date from user input.
