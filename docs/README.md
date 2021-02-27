@@ -25,17 +25,17 @@ their data will be retrieved from this text file and shown to the user upon requ
 * [FAQ](#faq)
 
 ##Quick Start
-1) Ensure that you have java version JDK 11 or later to sure proper function of the application.
+1. Ensure that you have java version JDK 11 or later to sure proper function of the application.
    
-2) Download the latest jar file from [here](https://github.com/JoviYeung92/ip/releases)
+2. Download the latest jar file from [here](https://github.com/JoviYeung92/ip/releases)
    
-3) Save the file to your preferred folder.
+3. Save the file to your preferred folder.
 
-4) Open your windows command prompt then type **java -jar c:`jarfilepath.jar`"** then following image will be shown.
+4. Open your windows command prompt then type **java -jar c:`jarfilepath.jar`"** then following image will be shown.
 
-      ![](images/Start.jpg)
+      ![](images/start.jpg)
 
-5)  Begin using the application by typing the command in the command box and press Enter to execute it.
+5.  Begin using the application by typing the command in the command box and press Enter to execute it.
     e.g. typing `list` and pressing Enter, it will display all tasks stored in the data.
     Some example commands are given below:
     
