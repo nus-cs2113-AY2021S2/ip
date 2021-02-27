@@ -55,7 +55,24 @@ public class Duke {
         String userQueryReturn = "";
 
         while(!userQuery.equalsIgnoreCase("bye")){
-            if(userQuery.contains("done")) {
+            if(userQuery.contains("find")) {
+                String findKeyword = userQuery.substring(5);
+                ArrayList<Task> matchingItems = new ArrayList<Task>();
+                int matchingCount = 0;
+                for(int i=0; i<itemCount; i++){
+                    if(taskItems.get(i).getDescription().contains(findKeyword)){
+                        matchingItems.add(taskItems.get(i));
+                        matchingCount++;
+                    }
+                }
+                System.out.println("____________________________________________________________");
+                System.out.println(" Here are the matching tasks in your list: ");
+                for(int i=0; i<matchingCount; i++){
+                    System.out.println(" "+String.valueOf(i+1)+".["+matchingItems.get(i).getTypeIcon()+"]["+matchingItems.get(i).getStatusIcon()+"] "+matchingItems.get(i).getDescription());
+                }
+                System.out.println("____________________________________________________________\n");
+                userQuery = stringScanner.nextLine();
+            }else if(userQuery.contains("done")) {
                 int doneIndex = Integer.parseInt(userQuery.substring(5));
                 taskItems.get(doneIndex - 1).setStatus(true);
                 userQueryReturn = "____________________________________________________________\n"
