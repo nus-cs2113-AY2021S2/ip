@@ -14,6 +14,11 @@ import java.util.Scanner;
 public class Storage {
     private static final String FILE_PATH = "Duke_Tasks.txt";
 
+    /**
+     * Writes the ArrayList to a file specified by the FILE_PATH.
+     *
+     * @throws IOException when the file is corrupted.
+     */
     public static void saveTasks() throws IOException {
         File file = new File(FILE_PATH);
 
@@ -22,6 +27,14 @@ public class Storage {
         writer.close();
     }
 
+    /**
+     * Loads the content of the file specified by the FILE_PATH
+     * into the ArrayList.
+     *
+     * @throws IOException when the file is corrupted.
+     * @throws IllegalTaskCommandException when the content of the
+     * file is not recognised by the program.
+     */
     public static void loadTasks() throws IOException, IllegalTaskCommandException {
         File file = new File(FILE_PATH);
 
@@ -54,6 +67,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Called by the loadTasks method, this method will only be called
+     * when the file does not exist.
+     *
+     * @throws IOException when the file is corrupted.
+     */
     private static void initSaveFile() throws IOException {
         File newFile = new File(FILE_PATH);
         if (newFile.createNewFile()) {
