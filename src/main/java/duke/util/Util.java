@@ -1,5 +1,8 @@
 package duke.util;
 
+import duke.task.Task;
+
+import java.util.Formatter;
 import java.util.Scanner;
 
 public class Util {
@@ -49,8 +52,35 @@ public class Util {
         String[] userInputSplitted;
         String taskIndex;
         userInputSplitted = userInput.split(" ");
-        taskIndex = userInputSplitted[1];
+        if(userInputSplitted.length == 2) {
+            taskIndex = userInputSplitted[1];
+        } else {
+            return "-1";
+        }
+        if(!isInteger(taskIndex)){
+            return "0";
+        }
+        if(isNegative(taskIndex) || isOutOfRange(taskIndex)){
+            return "0";
+        }
         return taskIndex;
+    }
+
+    private static boolean isNegative(String taskIndex) {
+        return Integer.parseInt(taskIndex) <= 0;
+    }
+
+    private static boolean isInteger(String taskIndex){
+        try {
+            Integer.parseInt(taskIndex);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return true;
+    }
+
+    private static boolean isOutOfRange(String taskIndex){
+        return Task.getTaskCount() < Integer.parseInt(taskIndex);
     }
 
     public static boolean isBye(String taskType) {

@@ -37,11 +37,11 @@ public class Parser {
 
 
     public static String parseTaskName(ArrayList<String> parsedList) {
-        return parsedList.get(0);
+        return parsedList.get(0).trim();
     }
 
     public static String parseTaskType(ArrayList<String> parsedList) {
-        return parsedList.get(1);
+        return parsedList.get(1).trim();
     }
 
     public static String[] parseCurrentDate(String date){
