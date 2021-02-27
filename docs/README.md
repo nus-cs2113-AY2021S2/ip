@@ -23,8 +23,10 @@ their data will be retrieved from this text file and shown to the user upon requ
     -[Message errors](#file-errors)   
 * [Command summary](#command-summary)
 * [FAQ](#faq)
-
+<br/>
+  
 ##Quick Start
+
 1. Ensure that you have java version JDK 11 or later to sure proper function of the application.
    
 2. Download the latest jar file from [here](https://github.com/JoviYeung92/ip/releases)
