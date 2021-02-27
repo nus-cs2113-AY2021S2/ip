@@ -95,6 +95,7 @@ Or if the file is in a recognisable format by Adjutant.
 ---
 
 ## Command Summary
+
 Command | Format | Example
 --- | --- | ---
 Add | `[taskType] [description] /[timestamp] [timestampheader]` | `event Coronation /on Year 2488`
