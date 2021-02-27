@@ -11,6 +11,7 @@ import duke.Tasks.Todo;
 import duke.Ui;
 
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 
 public class AddCommand extends Command {
 
@@ -36,8 +37,8 @@ public class AddCommand extends Command {
             try {
                 String by = description.substring(dividerPosition + 4);
                 taskList.addToTaskList(new Deadline(description.substring(0, dividerPosition - 1), by));
-            } catch (StringIndexOutOfBoundsException e) {
-                throw new EventFormatException();
+            } catch (StringIndexOutOfBoundsException | DateTimeParseException e) {
+                throw new DeadlineFormatException();
             }
             break;
         case "event":
@@ -48,7 +49,7 @@ public class AddCommand extends Command {
             try {
                 String at = description.substring(dividerPosition + 4);
                 taskList.addToTaskList(new Event(description.substring(0, dividerPosition - 1), at));
-            } catch (StringIndexOutOfBoundsException e) {
+            } catch (StringIndexOutOfBoundsException | DateTimeParseException e) {
                 throw new EventFormatException();
             }
             break;
