@@ -5,9 +5,10 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
+import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class TaskList {
     public static void printList(ArrayList<Task> list, int taskCount) {
@@ -132,6 +133,26 @@ public class TaskList {
         }
     }
 
+<<<<<<< HEAD
+    public static void find(ArrayList<Task> list, String keyword) {
+        List<Task> filteredList = new ArrayList<>();
+        filteredList = list.stream().filter(str -> str.contains(keyword)).collect(Collectors.toList());
+
+        ArrayList<String> taskList = new ArrayList<>();
+        taskList.add(String.format(Constants.TASKS_CONTAINING_KEYWORD_MESSAGE, filteredList.size(), keyword));
+        StringBuilder task = new StringBuilder();
+        for (int i = 0; i < filteredList.size(); i++) {
+            if (i < 9) {
+                task.append(" ");
+            }
+            task.append(i+1).append(filteredList.get(i).toString());
+            taskList.add(task.toString());
+            task.setLength(0);
+        }
+        Ui.dukePrinter(taskList);
+    }
+
+=======
     private static String convertDate(String date) {
         try {
             LocalDate parsedDate = LocalDate.parse(date);
@@ -143,4 +164,5 @@ public class TaskList {
         }
 
     }
+>>>>>>> master
 }
