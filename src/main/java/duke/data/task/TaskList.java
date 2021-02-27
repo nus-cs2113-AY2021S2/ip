@@ -4,7 +4,6 @@ import duke.data.exceptions.DukeException;
 import duke.storage.Storage;
 import duke.ui.TextUI;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -47,7 +46,8 @@ public class TaskList {
                 String.format(TASK_TOTAL_TASKS_STRING_FORMAT, tasks.size()));
         try {
             storage.writeTasksToFile(tasks);
-        } catch (IOException e) {
+        } catch (Exception e) {
+            // Unable to write to file, reflect error to user.
             ui.printError(ERROR_WRITE_TO_FILE_MESSAGE);
         }
     }
@@ -92,8 +92,10 @@ public class TaskList {
                     String.format(DOUBLE_SPACE_PREFIX_STRING_FORMAT, task));
             storage.writeTasksToFile(tasks);
         } catch (DukeException e) {
+            // Invalid task number, reflect error to user.
             ui.printError(e.getMessage());
-        } catch (IOException e) {
+        } catch (Exception e) {
+            // Unable to write to file, reflect error to user.
             ui.printError(ERROR_WRITE_TO_FILE_MESSAGE);
         }
     }
@@ -118,8 +120,10 @@ public class TaskList {
                     String.format(TASK_TOTAL_TASKS_STRING_FORMAT, tasks.size()));
             storage.writeTasksToFile(tasks);
         } catch (DukeException e) {
+            // Invalid task number, reflect error to user.
             ui.printError(e.getMessage());
-        } catch (IOException e) {
+        } catch (Exception e) {
+            // Unable to write to file, reflect error to user.
             ui.printError(ERROR_WRITE_TO_FILE_MESSAGE);
         }
     }

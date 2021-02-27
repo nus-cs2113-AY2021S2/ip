@@ -34,6 +34,7 @@ public class TodoCommand extends Command {
             String taskDescription = validateTodoArguments(commandArgs);
             tasks.recordTask(new Todo(taskDescription), ui, storage);
         } catch (DukeException e) {
+            // taskDescription is a empty string, reflect error to user.
             ui.printError(e.getMessage());
         }
     }

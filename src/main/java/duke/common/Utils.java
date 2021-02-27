@@ -43,17 +43,24 @@ public class Utils {
      *
      * @param dateInput a string containing the date supplied from the user.
      * @return a LocalDateTime object or null if failed to parse dateInput.
+     * @see #parseDateString(DateTimeFormatter, String)
      */
     public static LocalDateTime parseDate(String dateInput) {
         for (DateTimeFormatter dtf : POSSIBLE_DATE_FORMATS) {
-            try {
-                return LocalDate.parse(dateInput, dtf).atStartOfDay();
-            } catch (DateTimeParseException e) {
-                // Used to catch errors from parsing date.
-                // Try next possible date format until loop ends.
+            LocalDateTime dateTime = parseDateString(dtf, dateInput);
+            if (dateTime != null) {
+                return dateTime;
             }
         }
         return null;
+    }
+
+    private static LocalDateTime parseDateString(DateTimeFormatter format, String dateInput) {
+        try {
+            return LocalDate.parse(dateInput, format).atStartOfDay();
+        } catch (DateTimeParseException e) {
+            return null;
+        }
     }
 
     /**
@@ -62,18 +69,25 @@ public class Utils {
      *
      * @param dateTimeInput a string containing the date supplied from the user.
      * @return a LocalDateTime object or null if failed to parse dateTimeInput.
+     * @see #parseDateTimeString(DateTimeFormatter, String)
      * @see #parseDate(String)
      */
     public static LocalDateTime parseDateTime(String dateTimeInput) {
         for (DateTimeFormatter dtf : POSSIBLE_DATETIME_FORMATS) {
-            try {
-                return LocalDateTime.parse(dateTimeInput, dtf);
-            } catch (DateTimeParseException e) {
-                // Used to catch errors from parsing datetime.
-                // Try next possible date format until loop ends.
+            LocalDateTime dateTime = parseDateTimeString(dtf, dateTimeInput);
+            if (dateTime != null) {
+                return dateTime;
             }
         }
         return parseDate(dateTimeInput);
+    }
+
+    private static LocalDateTime parseDateTimeString(DateTimeFormatter format, String dateTimeInput) {
+        try {
+            return LocalDateTime.parse(dateTimeInput, format);
+        } catch (DateTimeParseException e) {
+            return null;
+        }
     }
 
     /**

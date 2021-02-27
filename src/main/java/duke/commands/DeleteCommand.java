@@ -31,8 +31,10 @@ public class DeleteCommand extends Command {
             int taskNumber = parseNumberFromArgument(commandArgs);
             tasks.deleteTask(taskNumber, ui, storage);
         } catch (DukeException e) {
+            // taskNumber is an empty string, reflect error to user.
             ui.printError(e.getMessage());
         } catch (NumberFormatException e) {
+            // taskNumber is not a parsable to an integer, reflect error to user.
             ui.printError(ERROR_NOT_A_TASK_NUMBER_MESSAGE);
         }
     }

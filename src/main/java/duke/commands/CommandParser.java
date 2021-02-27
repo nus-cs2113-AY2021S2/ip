@@ -20,7 +20,7 @@ public class CommandParser {
 
         switch (commandName) {
         case ListCommand.LIST_WORD:
-            return new ListCommand();
+            return new ListCommand(commandArgs);
         case TodoCommand.TODO_WORD:
             return new TodoCommand(commandArgs);
         case DeadlineCommand.DEADLINE_WORD:
@@ -36,9 +36,9 @@ public class CommandParser {
         case DateCommand.DATE_WORD:
             return new DateCommand(commandArgs);
         case HelpCommand.HELP_WORD:
-            return new HelpCommand();
+            return new HelpCommand(commandArgs);
         case ByeCommand.BYE_WORD:
-            return new ByeCommand();
+            return new ByeCommand(commandArgs);
         default:
             throw new InvalidCommandException();
         }

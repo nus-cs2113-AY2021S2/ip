@@ -42,6 +42,7 @@ public class DateCommand extends Command {
                 throw new DukeException(ERROR_INVALID_DATE_MESSAGE);
             }
         } catch (DukeException e) {
+            // dateInput is not a parsable, reflect error to user.
             ui.printError(e.getMessage());
         }
     }

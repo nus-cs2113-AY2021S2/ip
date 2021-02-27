@@ -36,6 +36,7 @@ public class DeadlineCommand extends Command {
             String[] deadlineArgValues = validateDeadlineArguments(commandArgs);
             tasks.recordTask(new Deadline(deadlineArgValues[0], deadlineArgValues[1]), ui, storage);
         } catch (DukeException e) {
+            // An argument value is missing, reflect error to user.
             ui.printError(e.getMessage());
         }
     }

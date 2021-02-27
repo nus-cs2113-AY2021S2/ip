@@ -8,7 +8,6 @@ import duke.data.task.Todo;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -48,9 +47,9 @@ public class Storage {
      * Creates a directory if directory does not exist.
      *
      * @param tasks an ArrayList of Task objects
-     * @throws IOException If an I/O error occurs
+     * @throws Exception If file access/writing related exception occurs.
      */
-    public void writeTasksToFile(ArrayList<Task> tasks) throws IOException {
+    public void writeTasksToFile(ArrayList<Task> tasks) throws Exception {
         if (!directoryExists(dataDirectoryPath)) {
             Files.createDirectories(dataDirectoryPath);
         }
@@ -86,6 +85,7 @@ public class Storage {
             }
             return tasks;
         } catch (Exception e) {
+            // Scanner cannot open taskFile or if taskFile is missing.
             return tasks;
         }
     }
@@ -183,6 +183,7 @@ public class Storage {
                 return extractEvent(line);
             }
         } catch (InvalidFieldException e) {
+            // line supplied is corrupted.
             return null;
         }
         return null;

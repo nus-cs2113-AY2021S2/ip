@@ -33,6 +33,7 @@ public class FindCommand extends Command {
             String keyword = validateFindKeywordArguments(commandArgs).toLowerCase();
             tasks.findKeyword(keyword, ui);
         } catch (DukeException e) {
+            // keyword is a empty string, reflect error to user.
             ui.printError(e.getMessage());
         }
     }

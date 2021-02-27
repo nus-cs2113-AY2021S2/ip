@@ -37,6 +37,7 @@ public class EventCommand extends Command {
             String[] eventArgValues = validateEventArguments(commandArgs);
             tasks.recordTask(new Event(eventArgValues[0], eventArgValues[1]), ui, storage);
         } catch (DukeException e) {
+            // An argument value is missing, reflect error to user.
             ui.printError(e.getMessage());
         }
     }
