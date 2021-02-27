@@ -17,6 +17,7 @@ public class Ui {
 
     /**
      * Prints each string in the ArrayList as a new line, in between 2 dashed lines
+     *
      * @param messages Arraylist containing messages that are to be printed
      */
     public static void dukePrinter(ArrayList<String> messages) {
@@ -102,6 +103,7 @@ public class Ui {
 
     /**
      * Prints an invalid argument message along with the reason
+     *
      * @param reason Reason the argument is invalid
      */
     public static void printInvalidArgumentMessage(String reason) {

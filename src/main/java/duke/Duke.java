@@ -19,6 +19,7 @@ public class Duke {
 
     /**
      * Reads user input and executes commands accordingly
+     *
      * @param list ArrayList containing all tasks
      */
     public static void interact(ArrayList<Task> list) {
