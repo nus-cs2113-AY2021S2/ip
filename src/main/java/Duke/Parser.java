@@ -25,14 +25,17 @@ public class Parser {
                 break;
             }
             case "done": {
-                int taskNumber;
                 try {
+                    int taskNumber;
                     taskNumber = scan.nextInt();
+                    if (scan.hasNext()) {
+                        throw new DoneInputError();
+                    }
+                    currentCommand = new DoneCommand(taskNumber);
+                    break;
                 } catch (Exception e) {
                     throw new DoneInputError();
                 }
-                currentCommand = new DoneCommand(taskNumber);
-                break;
             }
             case "todo": {
                 try {
@@ -83,14 +86,17 @@ public class Parser {
                 }
             }
             case "delete": {
-                int taskNumber;
                 try {
+                    int taskNumber;
                     taskNumber = scan.nextInt();
+                    if (scan.hasNext()) {
+                        throw new DeleteInputError();
+                    }
+                    currentCommand = new DeleteCommand(taskNumber);
+                    break;
                 } catch (Exception e) {
                     throw new DeleteInputError();
                 }
-                currentCommand = new DeleteCommand(taskNumber);
-                break;
             }
             case "save": {
                 currentCommand = new SaveCommand();
@@ -104,6 +110,18 @@ public class Parser {
                     break;
                 } catch (Exception e) {
                     throw new DateInputError();
+                }
+            }
+            case "find": {
+                try {
+                    String keyword = scan.next();
+                    if (scan.hasNext()) {
+                        throw new FindInputError();
+                    }
+                    currentCommand = new FindCommand(keyword);
+                    break;
+                } catch (Exception e) {
+                    throw new FindInputError();
                 }
             }
             default: {
