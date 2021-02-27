@@ -10,107 +10,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static common.Messages.EMPTY_LIST_EXCEPTION_MESSAGE;
+import static common.Messages.*;
+
 public class Duke {
 
-/*
-    static ArrayList<Task> tasks = new ArrayList<Task>();
-    static int taskPosition = 0;
-    static String description;
-    static String by;
-    static int indexOfBy;
 
-
-    public static void writeToFile(String filePath, ArrayList<Task> tasks) throws IOException {
-        FileWriter fw = new FileWriter(filePath);
-
-        for (Task t : tasks) {
-            fw.write(t.getStatusIcon() + " " + t.getDescription() + "\n");
-
-        }
-        fw.close();
-    }
-
-    public static void restoreFileContents(String filePath) throws FileNotFoundException, BlankDescriptionException {
-        File f = new File(filePath);
-        Scanner s = new Scanner(f);
-        while (s.hasNext()) {
-            inputToTasks(s.nextLine());
-        }
-    }
-
-
-    public static void inputToTasks(String nextLine) throws BlankDescriptionException {
-        int taskStatusIndex = 1;
-        int taskDescriptionIndex = 7;
-
-        char taskType = nextLine.charAt(1);
-        String taskStatus = nextLine.substring(4, 5);
-        String taskDescription = nextLine.substring(7);
-        try {
-            switch (taskType) {
-            case 'T':
-                description = taskDescription;
-                Todo todoTask = new Todo(description);
-                if (taskStatus.equalsIgnoreCase("1")) {
-                    todoTask.isDone = true;
-                }
-                storeTask(todoTask);
-                break;
-            case 'E':
-                int indexOfBy = taskDescription.indexOf("--");
-                description = taskDescription.substring(0, indexOfBy - 1);
-                by = taskDescription.substring(indexOfBy + 1, taskDescription.lastIndexOf("--"));
-                Event eventTask = new Event(description, by);
-                if (taskStatus.equalsIgnoreCase("1")) {
-                    eventTask.isDone = true;
-                }
-                storeTask(eventTask);
-                break;
-            case 'D':
-                indexOfBy = taskDescription.indexOf("--");
-                description = taskDescription.substring(0, indexOfBy - 1);
-                by = taskDescription.substring(indexOfBy + 2, taskDescription.lastIndexOf("--"));
-                Deadline deadlineTask = new Deadline(description, by);
-                if (taskStatus.equalsIgnoreCase("1")) {
-                    deadlineTask.isDone = true;
-                }
-                storeTask(deadlineTask);
-                break;
-            }
-        } catch (BlankDescriptionException e) {
-        }
-
-
-    }
-
-    public static void storeTask(Task t) throws BlankDescriptionException {
-        if (t.description.isBlank()) {
-            throw new BlankDescriptionException();
-        } else {
-            tasks.add(t);
-            System.out.println("Got it! I've added this task!");
-            //System.out.println(t.description);
-            System.out.println(t.getStatusIcon() + " " + t.getDescription());
-            System.out.println("Now you have " + tasks.size() + " tasks!");
-        }
-    }
-
-    public static void markAsDone(int taskIndex) {
-        tasks.get(taskIndex - 1).isDone = true;
-        System.out.println("Nice! I've marked this task as done: ");
-        listArray(tasks);
-    }
-
-    public static void listArray(ArrayList<Task> tasks) {
-        int textNumber = 1;
-        for (Task t : tasks) {
-            System.out.println(textNumber + "." + t.getStatusIcon() + " " + t.getDescription());
-            textNumber++;
-        }
-
-    }
-*/
     //--------------------------------------------------------------------------------
     private TextUI ui;
 
@@ -147,6 +51,21 @@ public class Duke {
                 SystemExit.execute();
                 isExit = true;
                 break;
+            case "delete":
+                try {
+                    DeleteTask.execute(fullInputCommand);
+                } catch (BlankDescriptionException e) {
+                    System.out.println(BLANK_EXCEPTION_MESSAGE);
+                } catch (NumberFormatException e){
+                    System.out.println(INVALID_NUMBER_MESSAGE);
+                } catch (OutOfRangeException e) {
+                    System.out.println(OUT_OF_RANGE_MESSAGE);
+                } catch (EmptyListException e) {
+                    System.out.println("There's nothing to delete!");
+                    System.out.println(EMPTY_LIST_EXCEPTION_MESSAGE);
+                }
+                break;
+
             default:
                 System.out.println("No valid command detected! Try again!");
             }

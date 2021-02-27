@@ -29,6 +29,14 @@ public class Tasklist {
         return tasks.size();
     }
 
+    public static boolean isEmpty() {
+        if (Tasklist.getSize() == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public static ArrayList<Task> getTaskList() {
         return tasks;
     }

@@ -1,10 +1,15 @@
 package parser;
 
 import myexceptions.BlankDescriptionException;
+import myexceptions.EmptyListException;
 import myexceptions.MissingDateException;
+import myexceptions.OutOfRangeException;
 import tasklist.Deadline;
 import tasklist.Event;
+import tasklist.Tasklist;
 import tasklist.Todo;
+
+import java.util.Enumeration;
 
 public class Parser {
 
@@ -32,8 +37,7 @@ public class Parser {
         String[] descriptionArray = description.split("/",2);
         if (descriptionArray[0].isBlank()) {
             throw new BlankDescriptionException();
-        }
-        else if (descriptionArray.length <= 1 || descriptionArray[1].isBlank()) {
+        } else if (descriptionArray.length <= 1 || descriptionArray[1].isBlank()) {
             throw new MissingDateException();
         }
         description = descriptionArray[0];
@@ -54,13 +58,29 @@ public class Parser {
         String[] descriptionArray = description.split("/",2);
         if (descriptionArray[0].isBlank()){
             throw new BlankDescriptionException();
-        }
-        else if (descriptionArray.length <= 1 || descriptionArray[1].isBlank()) {
+        } else if (descriptionArray.length <= 1 || descriptionArray[1].isBlank()) {
             throw new MissingDateException();
         }
         description = descriptionArray[0];
         String by = descriptionArray[1];
 
         return new Event(description,by);
+    }
+
+    public static int parsingDeleteCommand(String userInput) throws BlankDescriptionException, OutOfRangeException, EmptyListException {
+        int taskNumber;
+        String[] textArray = splitText(userInput);
+        if (textArray.length <= 1) {
+            throw new BlankDescriptionException();
+        }
+        taskNumber = Integer.parseInt(textArray[1]);
+        if (Tasklist.isEmpty()) {
+            throw new EmptyListException();
+        } else if (taskNumber > Tasklist.getSize() || taskNumber <= 0) {
+            throw new OutOfRangeException();
+        }
+
+        return taskNumber - 1;
+
     }
 }

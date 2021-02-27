@@ -10,4 +10,7 @@ public class Messages {
             = "Looks like there isn't a date/time set! Use a '/' as a prefix!!";
     public static final String EMPTY_LIST_EXCEPTION_MESSAGE = "Looks like your list is currently empty!" +
             " Populate it!";
+    public static final String DELETE_TASK_MESSAGE = "Task has been deleted from list!";
+    public static final String INVALID_NUMBER_MESSAGE = "Invalid value detected. Please input a number!";
+    public static final String OUT_OF_RANGE_MESSAGE = "Your number is out of the range of the list! Try again!";
 }
