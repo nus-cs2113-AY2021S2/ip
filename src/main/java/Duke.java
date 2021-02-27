@@ -2,6 +2,10 @@ import java.io.*;
 import java.util.*;
 
 public class Duke {
+    /**
+     * This method saves the ArrayList of tasks to duke.txt
+     * @param taskItems
+     */
     public static void saveToFile(ArrayList<Task> taskItems){
         String filename = "duke.txt";
 
@@ -20,6 +24,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Main method of this project.
+     * @param args
+     */
     public static void main(String[] args) {
         ArrayList<Task> taskItems = new ArrayList<Task>();
         int itemCount = 0;
