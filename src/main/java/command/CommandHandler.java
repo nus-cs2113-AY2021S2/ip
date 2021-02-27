@@ -42,8 +42,7 @@ public class CommandHandler {
         } else if (commandCode == Constant.INPUT_CODE_DEFAULT_INVALID) {
             performDefault();
         } else {
-            System.out.println("Unknown Operation!");
-            System.out.println(Constant.DIVIDER_LINE);
+            Ui.printUnknownOperationMessage();
         }
     }
 
@@ -67,13 +66,17 @@ public class CommandHandler {
         if (indexFromUserInput > taskHandler.getTaskCount()) {
             System.out.println("There is no task number " + indexFromUserInput + " to mark done.");
             System.out.println("Please try again!");
-        } else if (taskHandler.checkStatus(indexFromUserInput - 1)) {
-            System.out.println("You have already completed this task.");
-        } else {
-            taskHandler.markDone(indexFromUserInput - 1);
-            System.out.println("Nice! I've marked the task as done:");
-            Ui.printTaskDetails(indexFromUserInput - 1);
+            System.out.println(Constant.DIVIDER_LINE);
+            return;
         }
+        if (taskHandler.checkStatus(indexFromUserInput - 1)) {
+            System.out.println("You have already completed this task.");
+            System.out.println(Constant.DIVIDER_LINE);
+            return;
+        }
+        taskHandler.markDone(indexFromUserInput - 1);
+        System.out.println("Nice! I've marked the task as done:");
+        Ui.printTaskDetails(indexFromUserInput - 1);
         System.out.println(Constant.DIVIDER_LINE);
     }
 
@@ -83,8 +86,8 @@ public class CommandHandler {
      * @param userInput is the input from the console terminal.
      */
     private static void performTodo(String userInput) {
-        System.out.println(Constant.DIVIDER_LINE);
         String taskDescription = Parser.extractTaskDescription(userInput);
+        System.out.println(Constant.DIVIDER_LINE);
         taskHandler.addTask(new Todo(taskDescription));
         Ui.printAddedTask(taskHandler.getTaskCount());
         taskHandler.increaseTaskCount();
@@ -97,10 +100,9 @@ public class CommandHandler {
      * @param userInput is the input from the console terminal.
      */
     private static void performDeadline(String userInput) {
-        String taskDescription, taskTiming;
+        String taskDescription = Parser.extractTaskDescription(userInput);
+        String taskTiming = Parser.extractTaskTiming(userInput);
         System.out.println(Constant.DIVIDER_LINE);
-        taskDescription = Parser.extractTaskDescription(userInput);
-        taskTiming = Parser.extractTaskTiming(userInput);
         taskHandler.addTask(new Deadline(taskDescription, taskTiming));
         Ui.printAddedTask(taskHandler.getTaskCount());
         taskHandler.increaseTaskCount();
@@ -113,10 +115,9 @@ public class CommandHandler {
      * @param userInput is the input from the console terminal.
      */
     private static void performEvent(String userInput) {
-        String taskDescription, taskTiming;
+        String taskDescription = Parser.extractTaskDescription(userInput);
+        String taskTiming = Parser.extractTaskTiming(userInput);
         System.out.println(Constant.DIVIDER_LINE);
-        taskDescription = Parser.extractTaskDescription(userInput);
-        taskTiming = Parser.extractTaskTiming(userInput);
         taskHandler.addTask(new Event(taskDescription, taskTiming));
         Ui.printAddedTask(taskHandler.getTaskCount());
         taskHandler.increaseTaskCount();
@@ -161,8 +162,7 @@ public class CommandHandler {
      * Prints the try again message to inform the user of wrong format.
      */
     private static void performInvalid() {
-        System.out.println("Please try again with correct format!");
-        System.out.println(Constant.DIVIDER_LINE);
+        Ui.printDefaultMessage();
     }
 
     /**
@@ -170,9 +170,6 @@ public class CommandHandler {
      * Prints the unrecognizable message to inform the user of invalid command code.
      */
     private static void performDefault() {
-        System.out.println(Constant.DIVIDER_LINE);
-        System.out.println("Mushroom head could not recognize your command code!");
-        System.out.println("Please try again!");
-        System.out.println(Constant.DIVIDER_LINE);
+        Ui.printDefaultInvalidMessage();
     }
 }

@@ -46,6 +46,32 @@ public class Ui {
     }
 
     /**
+     * Prints the message for unknown command code.
+     */
+    public static void printUnknownOperationMessage() {
+        System.out.println("Unknown Operation!");
+        System.out.println(Constant.DIVIDER_LINE);
+    }
+
+    /**
+     * Prints the message for default command code.
+     */
+    public static void printDefaultMessage() {
+        System.out.println("Please try again with correct format!");
+        System.out.println(Constant.DIVIDER_LINE);
+    }
+
+    /**
+     * Prints the message for default command code.
+     */
+    public static void printDefaultInvalidMessage() {
+        System.out.println(Constant.DIVIDER_LINE);
+        System.out.println("Mushroom head could not recognize your command code!");
+        System.out.println("Please try again!");
+        System.out.println(Constant.DIVIDER_LINE);
+    }
+
+    /**
      * Prints the invalid command.
      *
      * @param invalidUserInput is the input from the console terminal entered by the user.
@@ -74,10 +100,10 @@ public class Ui {
             System.out.println("You have no item in the task list!");
         } else {
             System.out.println(Constant.LIST_STARTING_MESSAGE);
-            for (int i = 0; i < taskHandler.getTaskCount(); i++) {
-                System.out.print((i + 1) + ".");
-                printTaskDetails(i);
-            }
+        }
+        for (int i = 0; i < taskHandler.getTaskCount(); i++) {
+            System.out.print((i + 1) + ".");
+            printTaskDetails(i);
         }
     }
 
