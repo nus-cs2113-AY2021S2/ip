@@ -66,6 +66,22 @@ public class Task {
     }
 
     /**
+     *
+     *
+     * @param i
+     * @param userInput
+     */
+    public static void deleteTaskWithValidation(String i, String userInput){
+        try {
+            deleteTask(i, userInput);
+        } catch (IncompleteInputException e) {
+            printIncompleteDeleteInputErrorMessage(userInput);
+        } catch (InvalidInputException e) {
+            printInvalidDeleteInputErrorMessage(userInput);
+        }
+    }
+
+    /**
      * Validates the @param of <code>findTask</code> method.
      *
      * Incomplete find input error message will be shown if
@@ -127,10 +143,10 @@ public class Task {
     public static void markAsDone(String i, String userInput) throws
             IncompleteInputException, InvalidInputException{
 
-        if (isIncompleteDoneInput(userInput)){
+        if (isIncompleteIndexInput(userInput)){
             throw new IncompleteInputException();
         }
-        if (isInvalidDoneInput(userInput)){
+        if (isInvalidIndexInput(userInput)){
             throw new InvalidInputException();
         }
 
@@ -146,11 +162,25 @@ public class Task {
     /**
      * Removes a task object from the array list
      * corresponding to index = i-1.
-     * Shows the task removed upon successful deletion.
+     * Shows the task removed upon successful deletion,
+     * throws an exception otherwise.
      *
      * @param i Number shown on the list of interested task.
+     * @param userInput Original user input.
+     * @throws IncompleteInputException If insufficient parameters were
+     * given in the command.
+     * @throws InvalidInputException If i <= 0 or i > taskCount.
      */
-    public static void deleteTask(String i){
+    public static void deleteTask(String i, String userInput) throws
+            IncompleteInputException, InvalidInputException {
+
+        if (isIncompleteIndexInput(userInput)){
+            throw new IncompleteInputException();
+        }
+        if (isInvalidIndexInput(userInput)){
+            throw new InvalidInputException();
+        }
+
         int index = Integer.parseInt(i);
         Task t = taskList.get(index-1);
         System.out.println("Noted. I've removed this task:");
@@ -303,11 +333,11 @@ public class Task {
         return t.description.equals("");
     }
 
-    private static boolean isIncompleteDoneInput(String userInput){
+    private static boolean isIncompleteIndexInput(String userInput){
         return Util.getTaskIndex(userInput).equals("-1");
     }
 
-    private static boolean isInvalidDoneInput(String userInput){
+    private static boolean isInvalidIndexInput(String userInput){
         return Util.getTaskIndex(userInput).equals("0");
     }
 
@@ -350,4 +380,22 @@ public class Task {
         System.out.println("    e.g. find project");
     }
 
+    private static void printIncompleteDeleteInputErrorMessage(String userInput) {
+        System.out.println("The command entered is INCOMPLETE: " +
+                userInput + "\n");
+        System.out.println("Please enter the command as follows:");
+        System.out.println("  delete [task number]");
+        System.out.println("    e.g. delete 3");
+    }
+
+    private static void printInvalidDeleteInputErrorMessage(String userInput) {
+        System.out.println("The command entered is INVALID: " +
+                userInput + "\n");
+        System.out.println("Please enter the command as follows:");
+        System.out.println("  delete [task number]");
+        System.out.println("    e.g. delete 3" + "\n");
+        System.out.println("[task number] field must be:");
+        System.out.println("1. Within range (according to number of items in the list).");
+        System.out.println("2. An integer greater than 0.");
+    }
 }

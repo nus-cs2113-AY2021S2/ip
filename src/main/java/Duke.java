@@ -88,7 +88,7 @@ public class Duke {
                 break;
             case "delete":
                 TextUi.showDividingLine();
-                Task.deleteTask(Util.getTaskIndex(userInput));
+                Task.deleteTaskWithValidation(Util.getTaskIndex(userInput), userInput);
                 TextUi.showDividingLine();
                 Storage.attemptSaveFile();
                 break;
