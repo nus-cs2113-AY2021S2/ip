@@ -125,4 +125,16 @@ public class Printer {
         }
         System.out.println("____________________________________________________________");
     }
+
+    public static void invalidDeleteFormatMessage() {
+        System.out.println("____________________________________________________________");
+        System.out.println("Invalid format! Format the delete command like this \"delete [index]\"");
+        System.out.println("____________________________________________________________");
+    }
+
+    public static void invalidDoneFormatMessage() {
+        System.out.println("____________________________________________________________");
+        System.out.println("Invalid format! Format the done command like this \"done [index]\"");
+        System.out.println("____________________________________________________________");
+    }
 }

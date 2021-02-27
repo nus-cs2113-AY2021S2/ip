@@ -14,13 +14,15 @@ public class DoneTask {
      */
     public static void markTaskDone(String input) {
         String[] parts = input.split(" ");
-        int taskIndex = Integer.parseInt(parts[1]) - 1;
         try {
-            Task taskToMarkDone = TaskList.tasks.get(taskIndex);
+            int taskIndex = Integer.parseInt(parts[1]) - 1;
+            Task taskToMarkDone = TaskList.getTask(taskIndex);
             taskToMarkDone.markDone();
             Printer.taskMarkedAsDoneMessage(taskToMarkDone);
         } catch (IndexOutOfBoundsException e) {
             Printer.taskIndexOutOfBoundsMessage();
+        } catch (NumberFormatException e) {
+            Printer.invalidDoneFormatMessage();
         }
     }
 }

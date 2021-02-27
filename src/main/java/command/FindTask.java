@@ -22,7 +22,7 @@ public class FindTask {
             return;
         }
         ArrayList<Task> matchingTasks = new ArrayList<>();
-        for (Task task: TaskList.tasks) {
+        for (Task task: TaskList.getTasks()) {
             if (task.getDescription().contains(keyword)) {
                 matchingTasks.add(task);
             }

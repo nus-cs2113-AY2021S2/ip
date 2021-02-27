@@ -30,8 +30,7 @@ public class AddTask {
      * @param taskToAdd The task to add to the task list
      */
     public static void addTaskSuccessful(Task taskToAdd) {
-        TaskList.tasks.add(taskToAdd);
-        TaskList.taskCount++;
-        Printer.addTaskSuccessfulMessage(taskToAdd, TaskList.taskCount);
+        TaskList.addTask(taskToAdd);
+        Printer.addTaskSuccessfulMessage(taskToAdd, TaskList.getTaskCount());
     }
 }
