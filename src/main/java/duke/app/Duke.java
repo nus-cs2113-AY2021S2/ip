@@ -1,18 +1,54 @@
 package duke.app;
 
-import duke.file.FileOperation;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-
-import java.util.ArrayList;
-import  java.util.Scanner;
+import duke.commands.Command;
+import duke.parser.Parser;
+import duke.exception.DukeException;
+import duke.file.Storage;
+import duke.task.TaskList;
 
 public class Duke {
 
-    static final int MAX_NO_OF_TASKS = 100;
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
 
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
+    }
+
+    public void run() {
+        ui.showWelcome();
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                ui.showLine(); // show the divider line ("_______")
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks, storage);
+                isExit = c.isExit();
+            } catch (DukeException e) {
+                ui.showError(e.getMessage());
+            } finally {
+                ui.showLine();
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        new Duke("duke.txt").run();
+    }
+}
+
+    /*
+
+    static final int MAX_NO_OF_TASKS = 100;
     public static void main(String[] args) {
         showWelcomeMessage();
 
@@ -163,3 +199,5 @@ public class Duke {
         System.out.println("Now you have " + noOfTasks + " tasks in the list. ");
     }
 }
+
+     */

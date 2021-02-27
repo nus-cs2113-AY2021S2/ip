@@ -1,20 +1,25 @@
 package duke.file;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
+import duke.exception.DukeException;
+import duke.task.*;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
-public class FileOperation {
-    public static String relativeFileName = "duke.txt";
-    public static final String SEPARATOR = "|";
+public class Storage {
+    protected String relativeFileName;
+    protected ArrayList<Task> userTasks;
+    protected final String SEPARATOR = "|";
 
-    public static void readFile(ArrayList<Task> userTasks){
+    public Storage(String filePath) {
+        relativeFileName = filePath;
+        userTasks = new ArrayList<>();
+    }
+
+    public ArrayList<Task> load() throws DukeException{
         char taskSelection;
         try {
             File myObj = new File(relativeFileName);
@@ -40,16 +45,17 @@ public class FileOperation {
                 }
             }
             myReader.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
+        }catch (FileNotFoundException e) {
+            throw new DukeException("File cannot be found.");
         }catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
+            throw new DukeException("I/O Operations got errors");
+        }catch (NoSuchElementException e) {
+            throw new DukeException("The file is empty.");
         }
+        return userTasks;
     }
 
-    private static void createEventTask(ArrayList<Task> userTasks, StringTokenizer tokens) {
+    private void createEventTask(ArrayList<Task> userTasks, StringTokenizer tokens) {
         boolean isDone = Boolean.parseBoolean(tokens.nextToken());
         String description = tokens.nextToken();
         String eventLocation = tokens.nextToken();
@@ -57,7 +63,7 @@ public class FileOperation {
         userTasks.get(userTasks.size()-1).setTaskStatus(isDone);
     }
 
-    private static void createDeadlineTask(ArrayList<Task> userTasks, StringTokenizer tokens) {
+    private void createDeadlineTask(ArrayList<Task> userTasks, StringTokenizer tokens) {
         boolean isDone = Boolean.parseBoolean(tokens.nextToken());
         String description = tokens.nextToken();
         String deadlineDate = tokens.nextToken();
@@ -65,18 +71,18 @@ public class FileOperation {
         userTasks.get(userTasks.size()-1).setTaskStatus(isDone);
     }
 
-    private static void createTodoTask(ArrayList<Task> userTasks, StringTokenizer tokens) {
+    private void createTodoTask(ArrayList<Task> userTasks, StringTokenizer tokens) {
         boolean isDone = Boolean.parseBoolean(tokens.nextToken());
         String description = tokens.nextToken();
         userTasks.add(new Todo(description));
         userTasks.get(userTasks.size()-1).setTaskStatus(isDone);
     }
 
-    public static void writeFile(ArrayList<Task> userTasks){
+    public void dump(TaskList userCurrentTasks){
         String newLineToBeInserted = null;
         try {
             FileWriter myWriter = new FileWriter(relativeFileName);
-            for(Task userTask : userTasks){
+            for(Task userTask : userCurrentTasks.getUserTasks()){
                 switch(userTask.getTaskType()){
                 case 't':
                 case 'T':
@@ -101,19 +107,19 @@ public class FileOperation {
         }
     }
 
-    private static String convertEventDetailsToString(Task userTask) {
+    private String convertEventDetailsToString(Task userTask) {
         Event event = (Event) userTask;
         return event.getTaskType() + "|" + event.getTaskStatus() + "|" +
                 event.getDescription() + "|" + event.getEventLocation();
     }
 
-    private static String convertDeadlineDetailsToString(Task userTask) {
+    private String convertDeadlineDetailsToString(Task userTask) {
         Deadline deadline = (Deadline) userTask;
         return deadline.getTaskType() + "|" + deadline.getTaskStatus() + "|" +
                 deadline.getDescription() + "|" + deadline.getDeadlineDate();
     }
 
-    private static String convertTodoDetailsToString(Task userTask) {
+    private String convertTodoDetailsToString(Task userTask) {
         return userTask.getTaskType() + "|" + userTask.getTaskStatus() + "|" + 
                 userTask.getDescription();
     }
