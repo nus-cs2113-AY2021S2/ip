@@ -12,7 +12,6 @@ import java.util.Scanner;
 public class Duke {
 
     /**
-     * Starts the Task Manager program.
      * Runs an infinite loop until "BYE" is called.
      */
     private static void runTaskManager() throws IOException {
