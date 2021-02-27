@@ -9,14 +9,20 @@ public class Todo extends Task {
     public static final String NEW_TASK = "Aight Crewmate!! I've got a new task for you to do!!! ( ^ _ ^ ): ";
     public static final String COMMAND_HEADER = "todo ";
 
-    // creates a todo task
+    /**
+     * creates a todo task
+     *
+     * @param line is the inputted line
+     */
     public Todo(String line) {
         this.description = line.trim();
         this.isDone = false;
         printAddedTask();
     }
 
-    // overloads constructor as subclasses will not have the same constructor
+    /**
+     * overloads constructor as subclasses will not have the same constructor
+     */
     public Todo() {
     }
 

@@ -1,5 +1,6 @@
 package file.storage;
 
+import command.parser.CommandsHandler;
 import command.parser.ListCommand;
 import exceptions.IllegalListException;
 import ui.UI;
@@ -12,6 +13,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import command.parser.Parser;
 
@@ -22,7 +25,11 @@ public class Storage {
 
     public static final String FILE_PATH = "duke.txt";
 
-    // opens duke.txt to read
+    /**
+     * opens duke.txt to read
+     *
+     * @param tasks is the list of tasks
+     */
     public static void loadFromFile(ArrayList<Task> tasks) {
         try {
             File fileDescriptor = new File(FILE_PATH); // create a File for the given file path
@@ -34,13 +41,18 @@ public class Storage {
         }
     }
 
-    // reads all lines from duke.txt and adds then to the list
+    /**
+     * reads all lines from duke.txt and adds then to the list
+     *
+     * @param input is the scanner reading from the file
+     * @param tasks is the list of tasks
+     */
     private static void readDataFile(Scanner input, ArrayList<Task> tasks) {
         int i = 0;
         UI.printLoading();
         while (input.hasNext()) {
-            Parser.selectCommand(input.nextLine(), tasks);
-            if (input.nextLine().equals("true")) {
+            CommandsHandler.handleCorruptedFile(input, tasks);
+            if (input.nextLine().equals("true") && i < tasks.size()) {
                 Task t = tasks.get(i);
                 t.setDone();
                 tasks.set(i, t);
@@ -49,7 +61,11 @@ public class Storage {
         }
     }
 
-    // prints the list of tasks obtained when the file is read after Duke has started
+    /**
+     * prints the list of tasks obtained when the file is read after Duke has started
+     *
+     * @param tasks is the list of tasks
+     */
     private static void printOldList(ArrayList<Task> tasks) {
         try {
             ListCommand.printAllLists(tasks);
@@ -58,7 +74,11 @@ public class Storage {
         }
     }
 
-    // initiates saving list into duke.txt file
+    /**
+     * initiates saving list into duke.txt file
+     *
+     * @param tasks is the list of tasks
+     */
     public static void saveToFile(ArrayList<Task> tasks) {
         boolean hasSaved;
         do {
@@ -66,7 +86,12 @@ public class Storage {
         } while (!hasSaved);
     }
 
-    // ensures that all tasks in list have been to the duke.txt file
+    /**
+     * ensures that all tasks in list have been to the duke.txt file
+     *
+     * @param tasks is the list of tasks
+     * @return whether all tasks have been saved
+     */
     private static boolean hasWrittenToFile(ArrayList<Task> tasks) {
         boolean hasSaved = false;
         try {
@@ -82,7 +107,13 @@ public class Storage {
         return hasSaved;
     }
 
-    // ensures that one task has been written to the duke.txt file
+    /**
+     * ensures that one task has been written to the duke.txt file
+     *
+     * @param fileWriter is the file descriptor
+     * @param task       is one task from the line
+     * @return whether the task has been wriiten
+     */
     private static boolean hasWrittenTaskToFile(FileWriter fileWriter, Task task) {
         boolean hasSaved = true;
         if (task instanceof Event) {

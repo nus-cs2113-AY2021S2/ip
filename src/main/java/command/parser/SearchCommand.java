@@ -15,7 +15,13 @@ import java.util.ArrayList;
  */
 public class SearchCommand extends Command {
 
-    // search events and dates that matches date input in search command
+    /**
+     * search events and dates that matches date input in search command
+     *
+     * @param tasks    is the list of tasks
+     * @param sentence is the inputted line in array format
+     * @throws IllegalCommandException if command is in incorrect format
+     */
     public static void searchTasksDates(ArrayList<Task> tasks, String[] sentence) throws IllegalCommandException {
         if (sentence.length != NUMBER_OF_COMMAND_ARGUMENTS) {
             throw new IllegalCommandException();
@@ -25,7 +31,13 @@ public class SearchCommand extends Command {
         printMatchFound(tasks, date, counter);
     }
 
-    // Prints matches obtained
+    /**
+     * prints matches obtained
+     *
+     * @param tasks   is the list of tasks
+     * @param date    is the date inputted
+     * @param counter is the current number of matches found
+     */
     private static void printMatchFound(ArrayList<Task> tasks, String date, int counter) {
         for (Task task : tasks) {
             counter = incrementCounter(date, counter, task);
@@ -37,7 +49,14 @@ public class SearchCommand extends Command {
         }
     }
 
-    // Increments counter if a match is found
+    /**
+     * Increments counter if a match is found
+     *
+     * @param date    is the inputted date
+     * @param counter is the current number of matches found
+     * @param task    is one task in the list
+     * @return is the updated number of matches found
+     */
     private static int incrementCounter(String date, int counter, Task task) {
         String taskDate;
         if (task instanceof Event) {

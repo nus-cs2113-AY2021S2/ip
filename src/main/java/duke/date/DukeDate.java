@@ -14,21 +14,28 @@ import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 import java.time.temporal.ChronoField;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
 
+/**
+ * represents duke's date format
+ */
 public class DukeDate {
     public static final String EMPTY_STRING = "";
     public static String INITIAL_FORMAT = "yyyy/MM/dd HHmm";
     public static String FINAL_FORMAT = "MM-dd-yyyy HH:mm";
     public static String SEARCH_FORMAT = "yyyy/MM/dd";
 
-    // reformats date to store as by
+    /**
+     * reformats date to store as by
+     *
+     * @param by is the initial by attribute of a task
+     * @return final by attribute
+     */
     public static String reformatInput(String by) {
         SimpleDateFormat formatter = new SimpleDateFormat(INITIAL_FORMAT);
 
-        boolean isFormatInCorrect;
+        boolean isFormatIncorrect;
         Date inputDate;
         do {
             try {
@@ -41,13 +48,18 @@ public class DukeDate {
                 UI.printDottedLines();
                 Scanner in = new Scanner(System.in);
                 by = in.nextLine();
-                isFormatInCorrect = true;
+                isFormatIncorrect = true;
             }
-        } while (isFormatInCorrect);
+        } while (isFormatIncorrect);
         return EMPTY_STRING;
     }
 
-    // reformats by to store as date in file
+    /**
+     * reformats by to store as date in file
+     *
+     * @param by is the final by attribute
+     * @return initial by attribute of a task
+     */
     public static String reformatOutput(String by) {
         if (by.equals(Deadline.NO_BY) || by.equals(Event.NO_BY)) {
             return EMPTY_STRING;
@@ -68,7 +80,12 @@ public class DukeDate {
 
     }
 
-    // returns correct format of the date to search
+    /**
+     * returns correct format of the date to search
+     *
+     * @param date is the date inputted by user
+     * @return validates date inputted as correct
+     */
     public static String getSearchDateFormat(String date) {
         SimpleDateFormat formatter = new SimpleDateFormat(SEARCH_FORMAT);
         boolean isFormatInCorrect;
@@ -88,7 +105,12 @@ public class DukeDate {
         return EMPTY_STRING;
     }
 
-    // reformats date of task to that needed by search command
+    /**
+     * reformats date of task to that needed by search command
+     *
+     * @param date is the bye attribute of a task
+     * @return the search format for that task to compare with the inputted one
+     */
     public static String reformatsSearch(String date) {
         if (date.equals(Deadline.NO_BY) || date.equals(Event.NO_BY)) {
             return EMPTY_STRING;
@@ -104,6 +126,10 @@ public class DukeDate {
         return formatter.format(dateParsed);
     }
 
+    /**
+     * @param input takes in a date
+     * @throws IllegalDateException if date is in invalid format
+     */
     public static void isDateValid(String input) throws IllegalDateException {
         DateTimeFormatter formatter = new DateTimeFormatterBuilder()
                 .appendValue(ChronoField.YEAR, 4)

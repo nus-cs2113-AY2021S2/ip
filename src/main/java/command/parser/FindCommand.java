@@ -18,7 +18,14 @@ public class FindCommand extends Command {
     public static final String TASK_COUNTER_SENTENCE = "Here is task number: ";
     public static final int INCORRECT_LENGTH = 1;
 
-    // finds task from list of tasks
+    /**
+     * finds task from list of tasks
+     *
+     * @param line  is the inputted line
+     * @param tasks is the list of tasks
+     * @throws IllegalCommandException if command is in wrong format
+     * @throws IllegalTaskException    if task does not exist
+     */
     public static void findTask(String line, ArrayList<Task> tasks) throws IllegalCommandException,
             IllegalTaskException {
         if (line.length() == INCORRECT_LENGTH) {
@@ -36,7 +43,14 @@ public class FindCommand extends Command {
         }
     }
 
-    // Updates counter when a match is found 
+    /**
+     * Updates counter when a match is found
+     *
+     * @param description is the task description from input
+     * @param counter     is the number of matches found
+     * @param task        is one task from the list
+     * @return new value of counter
+     */
     private static int updateCounter(String description, int counter, Task task) {
         if (task.getTaskDescription().equals(description)) {
             counter++;
@@ -45,7 +59,12 @@ public class FindCommand extends Command {
         return counter;
     }
 
-    // prints task(s) that the user is looking for
+    /**
+     * prints task(s) that the user is looking for
+     *
+     * @param task    is the task found
+     * @param counter is the task index in the search list
+     */
     public static void printTask(Task task, int counter) {
         System.out.println(TASK_COUNTER_SENTENCE + counter);
         if (task instanceof Event) {

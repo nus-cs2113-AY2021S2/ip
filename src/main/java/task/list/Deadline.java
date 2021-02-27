@@ -16,10 +16,17 @@ public class Deadline extends Todo {
     public static final String NEW_DEADLINE = "Aight Crewmate!! I've got a new deadline for you!!! ( ^ _ ^ ): ";
     public static final String BY_HEADER = "(by: ";
     public static final int NUMBER_OF_ATTRIBUTES = 2;
+    public static final String DELIMITER = "//";
+    public static final String EMPTY_STRING = "";
     protected String by;
 
 
-    // creates a task which has a deadline
+    /**
+     * creates a task which has a deadline
+     *
+     * @param line takes in user input
+     */
+
     public Deadline(String line) {
         this.isDone = false;
         this.description = getDescription(line);
@@ -27,24 +34,38 @@ public class Deadline extends Todo {
         printAddedTask();
     }
 
-    // gets description from the user input
+    /**
+     * gets description from the user input
+     *
+     * @param line command line
+     * @return description from the command line
+     */
     private String getDescription(String line) {
-        String[] description = line.split("//", NUMBER_OF_ATTRIBUTES);
+        String[] description = line.split(DELIMITER, NUMBER_OF_ATTRIBUTES);
         return description[DESCRIPTION_INDEX].trim();
     }
 
-    // returns by
+    /**
+     * returns by
+     *
+     * @return by attribute
+     */
     public String getTaskBy() {
         return this.by;
     }
 
-    // gets by from the user input
+    /**
+     * gets by from the user input
+     *
+     * @param line takes in user input
+     * @return by from the inputted line
+     */
     public String getBy(String line) {
-        String[] lineWords = line.split("//", NUMBER_OF_ATTRIBUTES);
+        String[] lineWords = line.split(DELIMITER, NUMBER_OF_ATTRIBUTES);
         String by;
         try {
             by = lineWords[BY_INDEX];
-            if (by.equals("")) {
+            if (by.equals(EMPTY_STRING)) {
                 by = NO_BY;
             } else {
                 by = DukeDate.reformatInput(by);
@@ -70,7 +91,7 @@ public class Deadline extends Todo {
 
     @Override
     public String getTaskToPrintInFile() {
-        return ("deadline " + this.description + "//" + DukeDate.reformatOutput(this.by) + System.lineSeparator()
+        return ("deadline " + this.description + DELIMITER + DukeDate.reformatOutput(this.by) + System.lineSeparator()
                 + this.isDone + System.lineSeparator());
     }
 }

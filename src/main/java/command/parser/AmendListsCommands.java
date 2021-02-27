@@ -20,7 +20,12 @@ public class AmendListsCommands extends Command {
     public static final String SEARCH_COMMAND = "search";
     public static final String COMMAND_DELIMITER = " ";
 
-    // parses commands that need to manipulate data in the list
+    /**
+     * parses commands that need to manipulate data in the list
+     *
+     * @param line  is the inputted line
+     * @param tasks is the list of tasks
+     */
     public static void amendList(String line, ArrayList<Task> tasks) {
         String[] sentence = line.split(COMMAND_DELIMITER);
         if (sentence.length < NUMBER_OF_COMMAND_ARGUMENTS) {

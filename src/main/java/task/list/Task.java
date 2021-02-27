@@ -15,27 +15,45 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
-    // prints a task from the list
+    /**
+     * prints a task from the list
+     */
     public void printTask() {
         System.out.println("[" + getStatusIcon() + "]" + SPACE + getTaskDescription());
     }
 
-    // returns the done status icon for a task
+    /**
+     * returns the done status icon for a task
+     *
+     * @return appropriate status icon
+     */
     public String getStatusIcon() {
         return ((getIsTaskDone()) ? DONE_ICON : NOT_DONE_ICON); //return tick or X symbols
     }
 
-    // gets isDone for a task
+    /**
+     * gets isDone for a task
+     *
+     * @return isDone for a task
+     */
     public boolean getIsTaskDone() {
         return (this.isDone);
     }
 
-    // gets description for a task
+    /**
+     * gets description for a task
+     *
+     * @return task description
+     */
     public String getTaskDescription() {
         return (this.description);
     }
 
-    // marks a task as done
+    /**
+     * marks a task as done
+     *
+     * @throws IllegalTaskRedoException for wrong input
+     */
     public void markAsDone() throws IllegalTaskRedoException {
         if (this.isDone) {
             throw new IllegalTaskRedoException();
@@ -46,17 +64,25 @@ public class Task {
         UI.printDottedLines();
     }
 
-    // sets isDone as done for a task
+    /**
+     * sets isDone as done for a task
+     */
     public void setDone() {
         this.isDone = true;
     }
 
-    // prints the appropriate line when a task is added to the list
+    /**
+     * prints the appropriate line when a task is added to the list
+     */
     public void printAddedTask() {
         System.out.println("Added " + getTaskDescription());
     }
 
-    // returns the appropriate task format to write to duke.txt
+    /**
+     * returns the appropriate task format to write to duke.txt
+     *
+     * @return task description to input in file
+     */
     public String getTaskToPrintInFile() {
         return getTaskDescription();
     }

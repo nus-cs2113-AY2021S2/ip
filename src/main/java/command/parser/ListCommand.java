@@ -11,7 +11,12 @@ import java.util.ArrayList;
  */
 public class ListCommand extends Command {
 
-    // prints all tasks in the list
+    /**
+     * prints all tasks in the list
+     *
+     * @param tasks is the list of task
+     * @throws IllegalListException if list is empty
+     */
     public static void printAllLists(ArrayList<Task> tasks) throws IllegalListException {
         int i = 1;
         if (tasks.size() == EMPTY) {
@@ -27,7 +32,11 @@ public class ListCommand extends Command {
         UI.printDottedLines();
     }
 
-    // prints the number of tasks in the list that hasn't been done yet
+    /**
+     * prints the number of tasks in the list that hasn't been done yet
+     *
+     * @param tasks is the list of tasks
+     */
     public static void printNumberOfTasksLeft(ArrayList<Task> tasks) {
         if (UI.getAreAllTasksDone(tasks) && tasks.size() > EMPTY) {
             UI.printCompletedTasks();

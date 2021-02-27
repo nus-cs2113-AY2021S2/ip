@@ -12,7 +12,14 @@ import java.util.ArrayList;
  */
 public class DeleteCommand extends Command {
 
-    // deletes the tasks indicated by the index that the user inputted
+    /**
+     * deletes the tasks indicated by the index that the user inputted
+     *
+     * @param sentence is the input line in array format
+     * @param tasks    is the list of tasks
+     * @throws IllegalCommandException if delete does not have enough arguments
+     * @throws IllegalTaskException    if task cannot be found
+     */
     public static void deleteTask(String[] sentence, ArrayList<Task> tasks) throws IllegalCommandException,
             IllegalTaskException {
         int index;

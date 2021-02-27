@@ -14,7 +14,15 @@ public class DoneCommand extends Command {
 
     public static final int INDEX_POSITION = 1;
 
-    // mark the task indicated by the index inputted by the user as done
+    /**
+     * mark the task indicated by the index inputted by the user as done
+     *
+     * @param sentence is the inputted line in array format
+     * @param tasks    is the lists of task
+     * @throws IllegalCommandException  if done does not have enough arguments
+     * @throws IllegalTaskException     if task does not exist
+     * @throws IllegalTaskRedoException if task was already marked as done
+     */
     public static void markTaskAsDone(String[] sentence, ArrayList<Task> tasks) throws IllegalCommandException, IllegalTaskException,
             IllegalTaskRedoException {
         int index;
@@ -36,7 +44,15 @@ public class DoneCommand extends Command {
         ListCommand.printNumberOfTasksLeft(tasks);
     }
 
-    // tries to get index from the input
+    /**
+     * tries to get index from the input
+     *
+     * @param sentence is the inputted line in array format
+     * @param tasks    is the list of tasks
+     * @return index from input
+     * @throws IllegalCommandException if command is in invalid format
+     * @throws IllegalTaskException    task does not exist
+     */
     public static int getIndex(String[] sentence, ArrayList<Task> tasks) throws IllegalCommandException,
             IllegalTaskException {
         if (sentence.length > NUMBER_OF_COMMAND_ARGUMENTS) {
@@ -49,7 +65,12 @@ public class DoneCommand extends Command {
         return index;
     }
 
-    // gets index from the input
+    /**
+     * gets index from the input
+     *
+     * @param index is the index from the command
+     * @return validated index
+     */
     public static int getIndexFromCommand(String index) {
         try {
             return Integer.parseInt(index);

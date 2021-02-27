@@ -10,7 +10,11 @@ import java.util.ArrayList;
  */
 public class ExitCommand extends Command {
 
-    // exits DUKE
+    /**
+     * exits DUKE
+     *
+     * @param tasks is the list of tasks
+     */
     public static void exit(ArrayList<Task> tasks) {
         if (tasks.size() > EMPTY && UI.getAreAllTasksDone(tasks)) {
             UI.printGoodEnding();
