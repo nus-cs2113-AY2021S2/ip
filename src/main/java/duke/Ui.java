@@ -15,6 +15,11 @@ public class Ui {
         Ui.messages.clear();
     }
 
+    /**
+     * Prints each string in the ArrayList as a new line, in between 2 dashed lines
+     *
+     * @param messages Arraylist containing messages that are to be printed
+     */
     public static void dukePrinter(ArrayList<String> messages) {
         System.out.print(Constants.LINE);
         for (String message: messages) {
@@ -97,6 +102,11 @@ public class Ui {
         dukePrinter();
     }
 
+    /**
+     * Prints an invalid argument message along with the reason
+     *
+     * @param reason Reason the argument is invalid
+     */
     public static void printInvalidArgumentMessage(String reason) {
         messages.add(Constants.INVALID_ARGUMENT_MESSAGE);
         if (reason != null) {

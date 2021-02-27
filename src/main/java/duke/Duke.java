@@ -10,14 +10,19 @@ public class Duke {
 
     public static void main(String[] args) {
         ArrayList<Task> list = new ArrayList<>();
-        int taskCount = DataStorage.readFile(list);
+        DataStorage.readFile(list);
         Ui.printWelcomeMessage();
-        interact(list, taskCount);
+        interact(list);
         DataStorage.writeSaveData(list);
         Ui.printByeMessage();
     }
 
-    public static void interact(ArrayList<Task> list, int taskCount) {
+    /**
+     * Reads user input and executes commands accordingly
+     *
+     * @param list ArrayList containing all tasks
+     */
+    public static void interact(ArrayList<Task> list) {
 
         Scanner scan = new Scanner(System.in);
         String input = scan.nextLine();
@@ -33,30 +38,30 @@ public class Duke {
                 Ui.printHelpMessage();
                 break;
             case "list":
-                TaskList.printList(list, taskCount);
+                TaskList.printList(list);
                 break;
             case "todo":
-                taskCount = TaskList.addToDo(arguments, list, taskCount);
+                TaskList.addToDo(arguments, list);
                 DataStorage.writeSaveData(list);
                 break;
             case "deadline":
-                taskCount = TaskList.addDeadline(arguments, list, taskCount);
+                TaskList.addDeadline(arguments, list);
                 DataStorage.writeSaveData(list);
                 break;
             case "event":
-                taskCount = TaskList.addEvent(arguments, list, taskCount);
+                TaskList.addEvent(arguments, list);
                 DataStorage.writeSaveData(list);
                 break;
             case "done":
-                TaskList.markAsDone(list, taskCount, arguments);
+                TaskList.markAsDone(list, arguments);
                 DataStorage.writeSaveData(list);
                 break;
             case "undo":
-                TaskList.undoMarkAsDone(list, taskCount, arguments);
+                TaskList.undoMarkAsDone(list, arguments);
                 DataStorage.writeSaveData(list);
                 break;
             case "delete":
-                TaskList.delete(list, taskCount, arguments);
+                TaskList.delete(list, arguments);
                 DataStorage.writeSaveData(list);
                 break;
             case "find":

@@ -1,6 +1,13 @@
 package duke;
 
 public class Parser {
+
+    /**
+     * Parses the user input into the command and arguments
+     *
+     * @param input User input with both command and arguments
+     * @return String array containing 2 items: command and arguments
+     */
     public static String[] inputParser(String input) {
         String command;
         String arguments;
@@ -14,6 +21,12 @@ public class Parser {
         return new String[]{command, arguments};
     }
 
+    /**
+     * Parses save data from data.txt
+     *
+     * @param data A line of save data
+     * @return Array containing task description, boolean indicating if the task is done and a date (null if no date)
+     */
     public static Object[] dataParser(String data) {
         String desc;
         boolean isDone = true;
