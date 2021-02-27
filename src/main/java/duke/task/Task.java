@@ -58,9 +58,9 @@ public class Task {
     public static void markAsDoneWithValidation(String i, String userInput) {
         try {
             markAsDone(i, userInput);
-        } catch (IncompleteDoneInputException e) {
+        } catch (IncompleteInputException e) {
             printIncompleteDoneInputErrorMessage(userInput);
-        } catch (InvalidDoneInputException e) {
+        } catch (InvalidInputException e) {
             printInvalidDoneInputErrorMessage(userInput);
         }
     }
@@ -76,7 +76,7 @@ public class Task {
     public static void findTaskWithValidation(String userInput) {
         try {
             findTask(userInput);
-        } catch (IncompleteFindInputException e) {
+        } catch (IncompleteInputException e) {
             printIncompleteFindInputErrorMessage(userInput);
         }
     }
@@ -120,18 +120,18 @@ public class Task {
      *
      * @param i Number shown on the list of interested task.
      * @param userInput Original user input.
-     * @throws IncompleteDoneInputException If insufficient parameters were
+     * @throws IncompleteInputException If insufficient parameters were
      * given in the command.
-     * @throws InvalidDoneInputException If i <= 0 or i > taskCount.
+     * @throws InvalidInputException If i <= 0 or i > taskCount.
      */
     public static void markAsDone(String i, String userInput) throws
-            IncompleteDoneInputException, InvalidDoneInputException{
+            IncompleteInputException, InvalidInputException{
 
         if (isIncompleteDoneInput(userInput)){
-            throw new IncompleteDoneInputException();
+            throw new IncompleteInputException();
         }
         if (isInvalidDoneInput(userInput)){
-            throw new InvalidDoneInputException();
+            throw new InvalidInputException();
         }
 
         int index = Integer.parseInt(i);
@@ -168,12 +168,12 @@ public class Task {
      * search keyword.
      *
      * @param userInput Search keyword
-     * @throws IncompleteFindInputException If userInput is empty.
+     * @throws IncompleteInputException If userInput is empty.
      */
     public static void findTask(String userInput) throws
-            IncompleteFindInputException {
+            IncompleteInputException {
         if (userInput.equals("")){
-            throw new IncompleteFindInputException();
+            throw new IncompleteInputException();
         }
         int matchingTaskCount = 0;
         for(Task t : taskList){
