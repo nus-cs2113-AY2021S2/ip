@@ -10,8 +10,8 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class TaskList {
-    public static void printList(ArrayList<Task> list, int taskCount) {
-        if(taskCount == 0) {
+    public static void printList(ArrayList<Task> list) {
+        if(list.size() == 0) {
             Ui.printEmptyListMessage();
         } else {
             ArrayList<String> taskList = new ArrayList<>();
@@ -29,18 +29,16 @@ public class TaskList {
         }
     }
 
-    public static int addToDo(String input, ArrayList<Task> list, int index) {
+    public static void addToDo(String input, ArrayList<Task> list) {
         if(input == null) {
             Ui.printInvalidArgumentMessage(Constants.NO_DESCRIPTION_MESSAGE);
         } else {
             list.add(new ToDo(input));
             Ui.printToDoAdded(input);
-            index++;
         }
-        return index;
     }
 
-    public static int addDeadline(String input, ArrayList<Task> list, int index) {
+    public static void addDeadline(String input, ArrayList<Task> list) {
         if (input == null) {
             Ui.printInvalidArgumentMessage(Constants.NO_DESCRIPTION_MESSAGE);
         } else if(input.toLowerCase().contains("/by")) {
@@ -49,18 +47,15 @@ public class TaskList {
                 String dueDate = input.substring(input.toLowerCase().indexOf("/by") + 4);
                 list.add(new Deadline(desc, dueDate));
                 Ui.printDeadlineAdded(desc, dueDate);
-                index++;
             } catch (Exception e) {
                 Ui.printGenericErrorMessage();
             }
         } else {
             Ui.printInvalidArgumentMessage(Constants.NO_DEADLINE_MESSAGE);
         }
-
-        return index;
     }
 
-    public static int addEvent(String input, ArrayList<Task> list, int taskCount) {
+    public static void addEvent(String input, ArrayList<Task> list) {
         if (input == null) {
             Ui.printInvalidArgumentMessage(Constants.NO_DESCRIPTION_MESSAGE);
         } else if(input.toLowerCase().contains("/at")) {
@@ -69,20 +64,19 @@ public class TaskList {
                 String time = input.substring(input.toLowerCase().indexOf("/at")+4);
                 list.add(new Event(description, time));
                 Ui.printEventAdded(description, time);
-                taskCount++;
+
             } catch (Exception e) {
                 Ui.printGenericErrorMessage();
             }
         } else {
             Ui.printInvalidArgumentMessage(Constants.NO_TIME_MESSAGE);
         }
-        return taskCount;
     }
 
-    public static void markAsDone(ArrayList<Task> list, int max, String input) {
+    public static void markAsDone(ArrayList<Task> list, String input) {
         try {
             int taskNo = Integer.parseInt(input);
-            if (taskNo <= max && taskNo > 0) { //no. is valid
+            if (taskNo <= list.size() + 1 && taskNo > 0) { //no. is valid
                 if (list.get(taskNo - 1).getStatus()) {
                     Ui.printTaskAlreadyCheckedMessage(taskNo, list.get(taskNo - 1).getDesc());
                 } else {
@@ -98,10 +92,10 @@ public class TaskList {
         }
     }
 
-    public static void undoMarkAsDone(ArrayList<Task> list, int max, String input) {
+    public static void undoMarkAsDone(ArrayList<Task> list, String input) {
         try {
             int taskNo = Integer.parseInt(input);
-            if (taskNo <= max && taskNo > 0) { //no. is valid
+            if (taskNo <= list.size() + 1 && taskNo > 0) { //no. is valid
                 if (!list.get(taskNo - 1).getStatus()) {
                     Ui.printTaskNotCheckedMessage(taskNo, list.get(taskNo - 1).getDesc());
                 } else {
@@ -117,10 +111,10 @@ public class TaskList {
         }
     }
 
-    public static void delete(ArrayList<Task> list, int max, String input) {
+    public static void delete(ArrayList<Task> list, String input) {
         try {
             int taskNo = Integer.parseInt(input);
-            if (taskNo <= max && taskNo > 0) {
+            if (taskNo <= list.size() + 1 && taskNo > 0) {
                 Ui.printTaskDeleted(taskNo, list.get(taskNo - 1).toString());
                 list.get(taskNo - 1).remove();
                 list.remove(taskNo - 1);
