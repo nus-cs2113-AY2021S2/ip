@@ -1,8 +1,9 @@
 package duke.tasks;
 
+import static duke.common.Constants.DEFAULT_STATUS_AS_INT;
+import static duke.common.Constants.DONE_STATUS_AS_INT;
+
 public class Task {
-    private final int DEFAULT_STATUS_AS_INT = 0;
-    private final int DONE_STATUS_AS_INT = 1;
     private String item;
     private String status;
     private String type;
