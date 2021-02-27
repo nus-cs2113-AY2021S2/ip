@@ -34,22 +34,19 @@ Example of usage:
 
 Expected outcome:
 
-1. 
-   `Got it. I've added this task:`\
+1. `Got it. I've added this task:`\
    `[T][ ] borrow book`\
    `Now you have 1 tasks in the list.`
 
 
-2.
-    `Got it. I've added this task:`\
-    `[D][ ] return book (by: June 6th)`\
-    `Now you have 2 tasks in the list.`
+2. `Got it. I've added this task:`\
+   `[D][ ] return book (by: June 6th)`\
+   `Now you have 2 tasks in the list.`
 
 
-3.
-    `Got it. I've added this task:`\
-    `[E][ ] attend party (at: Friday 4 to 6 pm)`\
-    `Now you have 3 tasks in the list.`
+3. `Got it. I've added this task:`\
+   `[E][ ] attend party (at: Friday 4 to 6 pm)`\
+   `Now you have 3 tasks in the list.`
 
 ## Listing all the task: `list`
 Return the list of task with their task type in the list..
@@ -65,11 +62,10 @@ Example of usage:
 
 Expected outcome:
 
-*
-    `Here are the task in your list:`\
-    `1.[T][ ] borrow book`\
-    `2.[D][ ] return book (by: June 6th)`\
-    `3.[E][ ] attend party (at: Friday 4 to 6 pm)`
+* `Here are the task in your list:`\
+  `1.[T][ ] borrow book`\
+  `2.[D][ ] return book (by: June 6th)`\
+  `3.[E][ ] attend party (at: Friday 4 to 6 pm)`
     
 
 ## Mark as done: `done`
@@ -86,9 +82,8 @@ Example of usage:
 
 Expected outcome:
 
-*
-    `Nice! I've marked this as done:`\
-    `1.[T][X] borrow book`
+* `Nice! I've marked this as done:`\
+  `1.[T][X] borrow book`
 
 ## Locating the tasks by a keyword: `find`
 Find the list of item that contain the key word and return the item that contain it.
@@ -104,10 +99,9 @@ Example of usage:
 
 Expected outcome:
 
-*
-    `Here are the matching tasks in your list:`\
-    `1.[T][X] borrow book`\
-    `2.[D][ ] return book (by: June 6th)`
+* `Here are the matching tasks in your list:`\
+  `1.[T][X] borrow book`\
+  `2.[D][ ] return book (by: June 6th)`
 
 ## Deleting a task: `delete`
 Delete a specific item in the list and return the number of item left in the list.
@@ -123,10 +117,9 @@ Example of usage:
 
 Expected outcome:
 
-*
-    `Noted! I've removed this task:`\
-    `[D][ ] return book (by: June 6th)`\
-    `Now you have 1 tasks in the list`
+* `Noted! I've removed this task:`\
+  `[D][ ] return book (by: June 6th)`\
+  `Now you have 1 tasks in the list`
 
 ## Exiting the application: `bye`- Close the application
 Exits the program.
@@ -142,11 +135,9 @@ Example of usage:
 
 Expected outcome:
 
-*
-    `Exiting task tracker...`\
-    `Good Bye. Hope to see you again soon!`
+* `Exiting task tracker...`\
+  `Good Bye. Hope to see you again soon!`
     
-
 ## Loading the data
 Task tracker automatically load data from the hard disk.
 
