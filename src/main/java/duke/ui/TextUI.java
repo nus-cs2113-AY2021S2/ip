@@ -1,0 +1,100 @@
+package duke.ui;
+
+import static duke.common.Messages.WELCOME_MESSAGE;
+import static duke.common.Messages.EXIT_MESSAGE;
+import static duke.common.Messages.UNKNOWN_MESSAGE;
+import static duke.common.Messages.LOGO;
+import static duke.common.Messages.DIVIDER;
+import static duke.tasks.Task.NO_DESCRIPTION;
+import static duke.tasks.Task.NO_DATE;
+import static duke.tasks.Task.NO_INDEX;
+import static duke.tasks.Task.TODO_USAGE;
+import static duke.tasks.Task.DEADLINE_USAGE;
+import static duke.tasks.Task.EVENT_USAGE;
+import static duke.tasks.Task.DONE_USAGE;
+import static duke.tasks.Task.DELETE_USAGE;
+
+import java.io.InputStream;
+import java.io.PrintStream;
+import java.util.Scanner;
+
+public class TextUI {
+
+    private final Scanner in;
+    private final PrintStream out;
+
+    public TextUI() {
+        this(System.in, System.out);
+    }
+
+    public TextUI(InputStream in, PrintStream out) {
+        this.in = new Scanner(in);
+        this.out = out;
+    }
+
+    public void showWelcomeMessage() {
+        printToScreen(DIVIDER, LOGO, WELCOME_MESSAGE, DIVIDER);
+    }
+
+    public void showExitMessage() {
+        printToScreen(EXIT_MESSAGE);
+    }
+
+    public void showUnknownMessage() {
+        printToScreen(DIVIDER, UNKNOWN_MESSAGE, DIVIDER);
+    }
+
+    public void printToScreen(String... message) {
+        for (String m : message) {
+            out.println("\t" + m);
+        }
+    }
+
+    public String readCommand() {
+        String command = in.nextLine();
+        return command;
+    }
+
+    public void noDescription(String type) {
+        printToScreen(DIVIDER);
+        printToScreen(NO_DESCRIPTION);
+        printUsage(type);
+        printToScreen(DIVIDER);
+    }
+
+    public void noDate(String type) {
+        printToScreen(DIVIDER);
+        printToScreen(NO_DATE);
+        printUsage(type);
+        printToScreen(DIVIDER);
+    }
+
+    public void noIndex(String type) {
+        printToScreen(DIVIDER);
+        printToScreen(NO_INDEX);
+        printUsage(type);
+        printToScreen(DIVIDER);
+    }
+
+    public void printUsage(String type) {
+        switch(type) {
+        case "todo":
+            printToScreen("Usage: " + TODO_USAGE);
+            break;
+        case "event":
+            printToScreen("Usage: " + EVENT_USAGE);
+            break;
+        case "deadline":
+            printToScreen("Usage: " + DEADLINE_USAGE);
+            break;
+        case "done":
+            printToScreen("Usage: " + DONE_USAGE);
+            break;
+        case "delete":
+            printToScreen("Usage: " + DELETE_USAGE);
+            break;
+        default:
+            ;
+        }
+    }
+}

@@ -18,12 +18,16 @@ public class Deadline extends Task {
 	}
 
     public String printDate() {
-        return "(by: " + date + ")";
+        return " (by: " + date + ")";
     }
 
     @Override
     public boolean hasDate() {
         return true;
+    }
+
+    public String getDetails() {
+        return "[" + getType() + "][" + getStatusIcon() + "] " + getDescription() + printDate();
     }
 
 }
