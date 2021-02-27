@@ -1,2 +1,5 @@
 E | 1 | three | 2019-03-03
-D | 0 | two | 2018-01-01
+D | 1 | two | 2018-01-01
+T | 1 | borrow book
+T | 1 | return book
+D | 0 | submission | 2019-03-05

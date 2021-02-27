@@ -15,6 +15,10 @@ public abstract class Task {
         isDone = true;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public abstract String toStringSave();
 
     public abstract LocalDate getDate();
