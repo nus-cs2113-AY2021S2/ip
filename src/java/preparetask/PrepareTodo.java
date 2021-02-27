@@ -5,14 +5,17 @@ import storage.Storage;
 import tasks.ToDos;
 
 /**
- * Parses argument in the context of the add todo task command
- *
- * parameter "userInput" contains full command args string
- * parameter "task" contains the task
+ * Parses argument in the context of the add todo task command.
+ * Take the argument and create todo object
  */
 public class PrepareTodo extends Storage {
     private final String[] words;
 
+    /**
+     * @param userInput contains full command args string
+     *
+     * @throws DukeException if todo is empty
+     */
     public PrepareTodo(String userInput) {
         words = userInput.split(" ");
 

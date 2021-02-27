@@ -10,26 +10,30 @@ import java.time.format.DateTimeParseException;
  */
 public class DeadLines extends Task {
 
-    private final String by;
+    private final String dateAndTime;
 
-    public DeadLines(String task, String dateAndTime) {
+    public DeadLines(String task, String by) {
         super(task);
-        this.by = dateAndTime;
+        this.dateAndTime = by;
     }
 
-    /** Prints the task with its current status in addition with the specified time format */
+    /**
+     * Prints the task with its current status in addition with the specified time format
+     * @throws DateTimeParseException if wrong date format is entered. It will then just prints
+     * whatever date and time the user inputted.
+     * */
     @Override
     public void printStatus() {
         System.out.print("[D]");
         super.printStatus();
         try {
-            String[] words = by.split(" ");
+            String[] words = dateAndTime.split(" ");
             String date = words[0];
             String time = words[1];
             LocalDate d1 = LocalDate.parse(date);
             System.out.println("(by: " + d1.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ", " + time + ")");
         } catch (DateTimeParseException e) {
-            System.out.println("(by: " + by + ")");
+            System.out.println("(by: " + dateAndTime + ")");
         }
     }
 }

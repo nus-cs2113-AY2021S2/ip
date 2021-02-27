@@ -2,6 +2,7 @@ package tasklist;
 
 import exceptions.DukeException;
 import storage.Storage;
+import ui.TextUi;
 
 /**
  * Contains the list of operations such as list,done,delete and find
@@ -10,11 +11,19 @@ public class TaskList extends Storage {
 
     /**
      * Lists all task in the task list to the user.
+     * @throws DukeException if there is no task in the list
      */
     public static void list() {
-        for (int i = 0; i < taskArrayList.size(); i++) {
-            System.out.print(i + 1 + ".");
-            taskArrayList.get(i).printStatus();
+        try {
+            if(taskArrayList.size()==0){
+                throw new DukeException();
+            }
+            for (int i = 0; i < taskArrayList.size(); i++) {
+                System.out.print(i + 1 + ".");
+                taskArrayList.get(i).printStatus();
+            }
+        } catch (DukeException e){
+            System.out.println("There is no task at the moment, please add a new task.");
         }
     }
 
@@ -69,6 +78,7 @@ public class TaskList extends Storage {
     /**
      * Finds all task related to the keyword as given by the user
      * @param userInput contains the full user input
+     * If no match is found, prints "No matching task found."
      */
     public static void find(String userInput) {
 

@@ -5,6 +5,7 @@ import preparetask.PrepareDeadline;
 import preparetask.PrepareEvent;
 import preparetask.PrepareTodo;
 import tasklist.TaskList;
+import ui.TextUi;
 
 /**
  * Parses user input into command for task objection creation.
@@ -26,21 +27,29 @@ public class Parser {
             }
             if (userInput.contains("todo")) {
                 new PrepareTodo(userInput);
+                System.out.println(TextUi.DIVIDER);
             } else if (userInput.contains("deadline")) {
                 new PrepareDeadline(userInput);
+                System.out.println(TextUi.DIVIDER);
             } else if (userInput.contains("event")) {
                 new PrepareEvent(userInput);
+                System.out.println(TextUi.DIVIDER);
             } else if (userInput.contains("list")) {
                 TaskList.list();
+                System.out.println(TextUi.DIVIDER);
             } else if (userInput.contains("done")) {
                 TaskList.done(userInput);
+                System.out.println(TextUi.DIVIDER);
             } else if (userInput.contains("delete")) {
                 TaskList.delete(userInput);
+                System.out.println(TextUi.DIVIDER);
             } else if (userInput.contains("find")) {
                 TaskList.find(userInput);
+                System.out.println(TextUi.DIVIDER);
             }
         } catch (DukeException e) {
             System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            System.out.println(TextUi.DIVIDER);
         }
 
     }

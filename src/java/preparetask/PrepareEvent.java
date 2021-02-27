@@ -1,19 +1,26 @@
 package preparetask;
 
+import exceptions.DukeException;
 import storage.Storage;
 import tasks.Events;
 
 /**
- * Parses argument in the context of the add event task command
- * @throws StringIndexOutOfBoundsException if event is empty
+ * Parses argument in the context of the add event task command.
+ * Take the argument and create event object
  */
 public class PrepareEvent extends Storage {
 
     /**
      * @param userInput contains full command args string
+     *
+     * @throws StringIndexOutOfBoundsException if event is empty
+     * @throws DukeException if format is wrong
      */
     public PrepareEvent(String userInput) {
         try {
+            if (!(userInput.contains("/at"))) {
+                throw new DukeException();
+            }
             String task = userInput.substring(6, userInput.indexOf("/") - 1);
             String at = userInput.substring(userInput.indexOf("/") + 4);
 
@@ -26,7 +33,10 @@ public class PrepareEvent extends Storage {
             System.out.println("Now you have " + taskCount + " tasks in the list:");
             Storage.writeFile();                                                            //update file
         } catch(StringIndexOutOfBoundsException e){
-            System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+            System.out.println("☹ OOPS!!! The description of a event task cannot be empty.");
+        } catch(DukeException ex){
+            System.out.println("Please re-enter. Format of deadline task is wrong. " +
+                    "E.g., event DESCRIPTION /at DATE/TIME, LOCATION");
         }
     }
 }

@@ -1,19 +1,17 @@
 package storage;
 
+import ui.TextUi;
 import tasks.DeadLines;
 import tasks.Events;
 import tasks.Task;
 import tasks.ToDos;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.*;
 import java.util.ArrayList;
 
 
 /**
- * Functions that stores the task data by reading and writing the task data
+ * Contains functions that stores the task data by reading and writing the task data
  */
 public class Storage {
 
@@ -34,7 +32,8 @@ public class Storage {
 
     /**
      * Represents the file and method used to read task data.
-     * @throws Exception if file does not exist.
+     * @throws IOException if file does not exist.
+     * @throws ArrayIndexOutOfBoundsException if file is corrupted.
      */
     public static void readFile() {
 
@@ -79,9 +78,16 @@ public class Storage {
                         break;
                 }
             }
+            System.out.println("File processed successfully! Type `list` to show current available tasks.");
+            System.out.println(TextUi.DIVIDER);
             br.close();
-        } catch (Exception e) {
-            System.out.println("No file exist");
+        } catch (IOException e) {
+            System.out.println("No file exist, new file `tasklist.txt` created in home directory.");
+        } catch(ArrayIndexOutOfBoundsException ex){
+            System.out.println("File corrupted! Please delete `tasklist.txt` in the home directory " +
+                    "and reboot the application." );
+            //ends the program to prevent more file being corrupted
+            System.exit(0);
         }
     }
 
@@ -98,7 +104,7 @@ public class Storage {
             }
             bw.close();
         } catch (Exception ex) {
-            System.out.println("Error writing to file");
+            System.out.println("Error writing to file, please reboot.");
         }
     }
 
