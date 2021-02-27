@@ -18,13 +18,13 @@ their data will be retrieved from this text file and shown to the user upon requ
     - [Find tasks wth keyword: `find`](#find-tasks-with-keyword-find)
     - [Delete a task: `delete`](#delete-a-task-delete)
     - [Exit The Program: `bye`](#exit-the-program-exit)
-* [ERRORS](#errors)    
+* [Errors](#errors)    
     -[Command errors](#command-errors)
     -[Message errors](#file-errors)   
 * [Command summary](#command-summary)
 * [FAQ](#faq)
 
-##quick-start
+##Quick Start
 1) Ensure that you have java version JDK 11 or later to sure proper function of the application.
    
 2) Download the latest jar file from [here](https://github.com/JoviYeung92/ip/releases)
@@ -33,7 +33,7 @@ their data will be retrieved from this text file and shown to the user upon requ
 
 4) Open your windows command prompt then type **java -jar c:`jarfilepath.jar`"** then following image will be shown.
 
-      ![](images/Start%20Image.jpg)
+      ![](images/Start.jpg)
 
 5)  Begin using the application by typing the command in the command box and press Enter to execute it.
     e.g. typing `list` and pressing Enter, it will display all tasks stored in the data.
@@ -64,7 +64,7 @@ Example:
 -`todo watch video lecture 1`
 -`todo do tutorial 1`
 
-   [](images/todo%20Image.jpg)
+   [](images/todo.jpg)
 <br/><br/>
 
 ### Add a deadline task: `deadline` 
@@ -77,7 +77,7 @@ Example:
 -`deadline return book /by mon 6pm`
 -`deadline submit report /by 2021-02-21 1800`
 
-   [](images/deadline%20Image.jpg)
+   [](images/deadline.jpg)
 <br/><br/>
 
 ### Add an event task: `event` 
@@ -90,7 +90,7 @@ Example:
 -`event marathon /at 2021-05-23 1800, raffles place`
 -`event meeting /at NUS`
 
-   [](images/event%20Image.jpg)
+   [](images/event.jpg)
 <br/><br/>
 
 ### List all tasks: `list` 
@@ -98,7 +98,7 @@ Example:
 
 Format: `list`
 
-   [](images/list%20Image.jpg)
+   [](images/list.jpg)
 <br/><br/>
 
 ### Mark a task as done: `done`
@@ -109,7 +109,7 @@ Format: `done INDEX`
 Example: 
 -`done 1`
 
-   [](images/done%20Image.jpg)
+   [](images/done.jpg)
 <br/><br/>
 
 ### Find tasks with keyword: `find`
@@ -120,7 +120,7 @@ Format: `find KEYWORD`
 Example: 
 -`find marathon` 
 
-   [](images/find%20Image.jpg)
+   [](images/find.jpg)
 <br/><br/>
 
 ### Delete a task: `delete`
@@ -131,7 +131,7 @@ Format: `delete INDEX`
 Example: 
 -`delete 1`
 
-   [](images/delete%20Image.jpg)
+   [](images/delete.jpg)
 <br/><br/>
 
 ### Exit the program: `exit`
@@ -139,7 +139,7 @@ Exits the program at any point of time.
 
 Format: `bye`
 
-   [](images/bye%20Image.jpg)
+   [](images/bye.jpg)
 
 ## Errors 
 Almost all errors are captured by the systems and will be displayed to the user to correct them. Below are the all 
@@ -148,7 +148,7 @@ the known errors with their description.
 ### Command errors
 | Message | Description |
 |---------|-------------|
-|`☹ OOPS!!! I'm sorry, but I don't know what that means :-(` | Input not recognized, press "help" to see the list of inputs available.|
+|`☹ OOPS!!! I'm sorry, but I don't know what that means :-(` | Input not recognized.|
 |`☹ OOPS!!! The description of a todo cannot be empty.`| Todo task is empty, enter the description.|
 |`☹ OOPS!!! The description of a deadline task cannot be empty.` | Deadline task is empty, enter the description.|
 |`Please re-enter. Format of deadline task is wrong. E.g., deadline DESCRIPTION /by DATETIME"`| Format of deadline task is wrong.|
@@ -160,8 +160,8 @@ the known errors with their description.
 ### File Errors
 | Message | Description |
 |---------|-------------|
-|`No file exist, new file `tasklist.txt` created in home directory.`| When the app is used for the first time there is no existing data file. Hence, app will create a new file.|
-|`File corrupted! Please delete `tasklist.txt` in the home directory and reboot the application. `| Data is corrupted due to undesired changes in the file.|
+|`No file exist, new file "tasklist.txt" created in home directory.`| When the app is used for the first time there is no existing data file. Hence, app will create a new file.|
+|`File corrupted! Please delete "tasklist.txt" in the home directory and reboot the application. `| Data is corrupted due to undesired changes in the file.|
 |`Error writing to file, please reboot.`| Unexpected error when writing to the file that rarely occurs.|
 
 ## Command summary
@@ -179,15 +179,17 @@ the known errors with their description.
 
 
 
-## faq
+## FAQ
 Question 1 - Is the data transferable if i change computer?
+<br/>
 Answer 1 - Yes, simply locate the `tasklist.txt` file in the home directory and copy that file to another computer.
 
 Question 2 - If the system crashes mid-way will the new tasks that are added be lost?
-Answer 2 - No, The list of tasks will auto-save upon every entry, even when the system crashes midway all
-           data will be saved and retrieve again when the application reboots.
+Answer 2 - No, The list of tasks will auto-save upon every entry, even when the system crashes midway all data will be saved and retrieve again when the application reboots.
+<br/>
 
-Question 3 - Can I add and edit from the text file directly? 
+Question 3 - Can I add and edit from the text file directly?
+<br/>
 Answer 3 - Yes, but this is not recommended because a single mistake will cause the file to be corrupted.
 
 
