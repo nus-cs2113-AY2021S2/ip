@@ -78,6 +78,7 @@ public class Ui {
         messages.add(Constants.DONE_INFO);
         messages.add(Constants.UNDO_INFO);
         messages.add(Constants.DELETE_INFO);
+        messages.add(Constants.FIND_INFO);
         messages.add(Constants.BYE_INFO);
         dukePrinter();
     }

@@ -27,6 +27,7 @@ public class Constants {
     public static final String TASK_NOT_CHECKED_MESSAGE = "Task %d: \"%s\" is not checked";
     public static final String TASK_DOES_NOT_EXIST_MESSAGE = "Task %d does not exist!";
     public static final String TASK_DELETED_MESSAGE = "Task %d:%s has been removed";
+    public static final String TASKS_CONTAINING_KEYWORD_MESSAGE = "%d tasks containing keyword \"%s\" found:";
     public static final String INVALID_ARGUMENT_MESSAGE = "Invalid argument!";
     public static final String INVALID_COMMAND_MESSAGE = "I am sorry, I do not recognise that command\n"
             + "Please try again";
@@ -66,6 +67,11 @@ public class Constants {
             + "     Argument(s): task index (as seen from list)\n"
             + "     Usage: delete <task index>\n"
             + "     Example: delete 3\n";
+    public static final String FIND_INFO = "Find tasks which contain the keyword in the description:\n"
+            + "     Command prefix: find\n"
+            + "     Argument(s): keyword(s)\n"
+            + "     Usage: find <keyword(s)>\n"
+            + "     Example: find read\n";
     public static final String BYE_INFO = "Exit Duke:\n"
             + "     Command: bye\n"
             + "     Usage: bye";
