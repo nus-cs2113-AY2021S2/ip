@@ -50,7 +50,7 @@ ____________________________________________________________
 ____________________________________________________________
 Noted. I will remove this task:
 [D][X] Plant Mushroom (by: 2020-02-25)
-Now you have 2 tasks in the list.
+Now you have 2 task(s) in the list.
 ____________________________________________________________
 ____________________________________________________________
 Processing keyword searches, please wait.
@@ -149,12 +149,12 @@ ____________________________________________________________
 ____________________________________________________________
 Noted. I will remove this task:
 [D][X] testdelete deadline (by: 2020-02-02)
-Now you have 4 tasks in the list.
+Now you have 4 task(s) in the list.
 ____________________________________________________________
 ____________________________________________________________
 Noted. I will remove this task:
 [E][X] testfind event (at: monday)
-Now you have 3 tasks in the list.
+Now you have 3 task(s) in the list.
 ____________________________________________________________
 ____________________________________________________________
 Below are all your task(s):

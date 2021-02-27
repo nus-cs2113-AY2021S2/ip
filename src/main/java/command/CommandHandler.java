@@ -139,7 +139,7 @@ public class CommandHandler {
             Ui.printTaskDetails(indexFromUserInput - 1);
             taskHandler.deleteTask(indexFromUserInput - 1);
             taskHandler.decreaseTaskCount();
-            System.out.println("Now you have " + taskHandler.getTaskCount() + " tasks in the list.");
+            System.out.println("Now you have " + taskHandler.getTaskCount() + " task(s) in the list.");
         }
         System.out.println(Constant.DIVIDER_LINE);
     }
