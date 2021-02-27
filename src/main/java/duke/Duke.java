@@ -59,6 +59,9 @@ public class Duke {
                 TaskList.delete(list, taskCount, arguments);
                 DataStorage.writeSaveData(list);
                 break;
+            case "find":
+                TaskList.find(list, arguments);
+                break;
             default:
                 Ui.printInvalidCommandMessage();
             }

@@ -54,8 +54,11 @@ public class Task {
         }
     }
 
-    private String convertDate(String date) {
-        return null;
+    public boolean contains(String keyword) {
+        if (desc.indexOf(keyword) != -1) {
+            return true;
+        }
+        return false;
     }
 
     public void remove() {
