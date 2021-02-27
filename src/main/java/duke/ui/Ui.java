@@ -137,6 +137,5 @@ public class Ui {
     public static void printNullSearch() {
         printErrorLogo();
         System.out.println("No matching objectives found, Commander!");
-        System.out.println();
     }
 }

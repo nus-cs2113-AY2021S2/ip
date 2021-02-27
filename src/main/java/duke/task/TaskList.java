@@ -146,6 +146,7 @@ public class TaskList {
         if (!isFound) {
             Ui.printNullSearch();
         }
+        System.out.println();
     }
 
     /**
@@ -157,6 +158,5 @@ public class TaskList {
         int index = taskArray.indexOf(t);
         System.out.print("[" + (index + 1) + "]");
         Ui.printTaskItem(index);
-        System.out.println();
     }
 }
