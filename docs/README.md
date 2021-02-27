@@ -4,13 +4,15 @@
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest `ip.jar` from [here](https://github.com/brandonfoong/ip/releases/download/A-Jar/ip.jar).
+2. Download the latest `ip.jar` from [here](https://github.com/brandonfoong/ip/releases/), under `Assets > ip.jar`.
 
 3. Copy the file to the folder you want to use as the home folder for Duke.
 
 4. Open an instance of your Terminal/Command Prompt/Powershell. In Windows 10, this can be done by right clicking an empty space in the File Manager, then selecting "Open Powershell window here".
 
 5. Copy the following command into your terminal and press Enter to start Duke: `java -jar ip.jar`
+    - Duke will automatically try to import a previous session's task information from the file `./data/duke.csv`.
+    - If Duke is unable to open the file for reading, it will immediately terminate. To prevent this from happening, please ensure that you do not have the `./data/duke.csv` open in other programs (e.g. Excel).
 
 6. You will see a welcome message, and Duke will prompt you to enter a command. A list of commands can be found by typing **`help`** and then pressing Enter. Some sample commands you can try:
     - `list`: Lists all tasks that you've added
@@ -175,7 +177,7 @@ If we run `find ea` in the sample instance in the `list` command above, it will 
 
 ### `bye` - Exits the program
 
-Exits the program, saving all tasks in the list to `data\duke.csv`
+Exits the program, saving all tasks in the list to `./data/duke.csv`. If Duke encounters any issues while saving the file, it will give you the choice to try re-exporting the file, or to exit without saving.
 
 Format:
 
