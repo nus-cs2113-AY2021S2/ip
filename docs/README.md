@@ -25,7 +25,7 @@ Arthur is an interactive task-manager. He can be *sceptical* from time to time. 
     * [Exit : `bye`](#exit--bye)
 * [Cheat Sheet](#cheat-sheet)
 * [Troubleshoot](#troubleshoot)
-* [Contributor(s)](#contributor(s))
+* [Contributor(s)](#contributors)
 
 &nbsp;
 
@@ -482,5 +482,5 @@ If your saved file gets corrupted, Arthur will handle the error and close the ap
 &nbsp;
 
 * [H-horizon](https://github.com/H-horizon)
-
-  &nbsp;
+  
+&nbsp;

@@ -8,24 +8,24 @@ Arthur is an interactive task-manager. He can be *sceptical* from time to time. 
 ## Table of Contents
 * [Welcome](#welcome)
 * [About](#about)
-   * [How to use guide](#how-to-use-guide)
-   * [Tasks classification](#tasks-classification)
-   * [Storage](#storage)
+    * [How to use guide](#how-to-use-guide)
+    * [Tasks classification](#tasks-classification)
+    * [Storage](#storage)
 * [Getting Started](#getting-started)
 * [Features](#features)
-   * [Need help : `help`](#need-help--help)
-   * [List all tasks : `list`](#list-all-tasks--list)
-   * [Add a todo task : `todo`](#add-a-todo-task--todo)
-   * [Add an event : `event`](#add-an-event--event)
-   * [Add a task with a deadline : `deadline`](#add-a-task-with-a-deadline--deadline)
-   * [Delete a task : `delete`](#delete-a-task--delete)
-   * [Mark a task as done : `done`](#mark-a-task-as-done--done)
-   * [Find a task based on its description : `find`](#find-a-task-based-on-its-description--find)
-   * [Search a task based on its date : `search`](#search-a-task-based-on-its-date--search)
-   * [Exit : `bye`](#exit--bye)
+    * [Need help : `help`](#need-help--help)
+    * [List all tasks : `list`](#list-all-tasks--list)
+    * [Add a todo task : `todo`](#add-a-todo-task--todo)
+    * [Add an event : `event`](#add-an-event--event)
+    * [Add a task with a deadline : `deadline`](#add-a-task-with-a-deadline--deadline)
+    * [Delete a task : `delete`](#delete-a-task--delete)
+    * [Mark a task as done : `done`](#mark-a-task-as-done--done)
+    * [Find a task based on its description : `find`](#find-a-task-based-on-its-description--find)
+    * [Search a task based on its date : `search`](#search-a-task-based-on-its-date--search)
+    * [Exit : `bye`](#exit--bye)
 * [Cheat Sheet](#cheat-sheet)
 * [Troubleshoot](#troubleshoot)
-* [Contributor(s)](#contributor(s))
+* [Contributor(s)](#contributors)
 
 &nbsp;
 
@@ -107,26 +107,26 @@ Please assign me my tasks to complete!
 
 A task can be classified into three different categories:
 1. To do task:
-   * Can be found based on its description.
-   * Can be marked as done.
-   * Can be deleted.
-   * Can be printed from the list.
-   * Does NOT have a due date attribute.
-   * CANNOT be searched based on date.
+    * Can be found based on its description.
+    * Can be marked as done.
+    * Can be deleted.
+    * Can be printed from the list.
+    * Does NOT have a due date attribute.
+    * CANNOT be searched based on date.
 2. Deadline
-   * Can be found based on its description.
-   * Can be marked as done.
-   * Can be deleted.
-   * Can be printed from the list.
-   * Has a due date attribute.
-   * Can be searched based on date.
+    * Can be found based on its description.
+    * Can be marked as done.
+    * Can be deleted.
+    * Can be printed from the list.
+    * Has a due date attribute.
+    * Can be searched based on date.
 3. Event
 * Can be found based on its description.
-   * Can be marked as done.
-   * Can be deleted.
-   * Can be printed from the list.
-   * Has a due date attribute.
-   * Can be searched based on date.
+    * Can be marked as done.
+    * Can be deleted.
+    * Can be printed from the list.
+    * Has a due date attribute.
+    * Can be searched based on date.
 
 &nbsp;
 ### Storage
@@ -483,4 +483,4 @@ If your saved file gets corrupted, Arthur will handle the error and close the ap
 
 * [H-horizon](https://github.com/H-horizon)
 
-  &nbsp;
+&nbsp;
