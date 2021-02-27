@@ -18,6 +18,7 @@ Here are the tasks in your list:
 Marks a task at a specific index as completed
 
 #### Format: `done INDEX`
+
 Expected outcome:
 ```text
 Nice! I've marked this task as done:
@@ -27,6 +28,7 @@ Nice! I've marked this task as done:
 Add a todo task to the task list
 
 #### Format: `todo DESCRIPTION`
+
 Expected outcome:
 ```text
 Got it. I've added this task: 
@@ -37,6 +39,7 @@ Now you have 1 tasks in the list.
 Add a deadline task to the task list
 
 #### Format: `deadline DESCRIPTION /by TIME`
+
 Expected outcome:
 ```text
 Got it. I've added this task: 
@@ -47,6 +50,7 @@ Now you have 4 tasks in the list.
 Add an event task to the task list
 
 #### Format: `event DESCRIPTION /at TIME`
+
 Expected outcome:
 ```text
 Got it. I've added this task: 
@@ -57,6 +61,7 @@ Now you have 5 tasks in the list.
 Find a task from the task list
 
 #### Format: `find DESCRIPTION`
+
 Expected outcome:
 ```text
 Here are the matching tasks in your list: 
