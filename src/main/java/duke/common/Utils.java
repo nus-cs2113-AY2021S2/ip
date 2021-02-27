@@ -19,7 +19,7 @@ public class Utils {
      * Takes in user input and splits it into 2 as long as there is whitespace
      * character in the middle.
      * Reused from Lecture Week 4 Contacts program.
-     * @param userInput
+     * @param userInput user input string
      * @return Array of command type and command arguments
      */
     public static String[] getCommandAndArgs(String userInput) {
