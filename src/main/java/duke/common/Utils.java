@@ -28,6 +28,18 @@ public class Utils {
     }
 
     /**
+     * Takes in user input and splits it into 2 following the regex pattern given.
+     * Generalized version of commandAndArgs.
+     * @param userInput user input string
+     * @param regex pattern to match and split string
+     * @return Array of 2 strings
+     */
+    public static String[] splitUserInputByRegex(String userInput, String regex) {
+        String[] split = userInput.split(regex, 2);
+        return split.length == 2 ? split : new String[] {split[0], "" };
+    }
+
+    /**
      * Checks if input task number is valid.
      * @param tasks, number
      * @return validity of input.
