@@ -68,6 +68,7 @@ public class Duke {
             }else if(userQuery.contains("delete")){
                 int doneIndex = Integer.parseInt(userQuery.substring(7));
                 Task removedItem = taskItems.remove(doneIndex);
+                itemCount--;
                 userQueryReturn = "____________________________________________________________\n"
                         + " Noted. I've removed this task: \n"
                         + "   [" + removedItem.getTypeIcon() + "][" + removedItem.getStatusIcon() + "] " + removedItem.getDescription() + "\n"
