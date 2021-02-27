@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+# delete data folder
+if [ -e "./data" ]
+then 
+    rm -rf ./data
+fi
+
 # create bin directory if it doesn't exist
 if [ ! -d "../bin" ]
 then
@@ -13,7 +19,7 @@ then
 fi
 
 # compile the code into the bin folder, terminates if error occurred
-if ! javac -cp ../src/main/java/duke -Xlint:none -d ../bin ../src/main/java/duke/*.java ../src/main/java/duke/tasks/*.java
+if ! javac -cp ../src/main/java/duke -Xlint:none -d ../bin ../src/main/java/duke/*.java ../src/main/java/duke/tasks/*.java ../src/main/java/duke/commands/*.java ../src/main/java/duke/common/*.java ../src/main/java/duke/parser/*.java ../src/main/java/duke/storage/*.java ../src/main/java/duke/ui/*.java
 then
     echo "********** BUILD FAILURE **********"
     exit 1
