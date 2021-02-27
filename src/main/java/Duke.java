@@ -20,15 +20,10 @@ public class Duke {
         String taskName;
         ArrayList<String> parsedList;
 
-        TextUi.showLogo();
-        TextUi.showDividingLine();
+        showLogo();
 
-        // Print welcome message
-        TextUi.showDividingLine();
-        TextUi.showWelcomeMessage();
-        TextUi.showDividingLine();
+        showWelcomeMessage();
 
-        // Load up save file, create file if it's not been created
         Storage.loadFile();
         TextUi.showDividingLine();
 
@@ -42,71 +37,44 @@ public class Duke {
 
         processCommands(taskType, taskName, userInput);
 
-        // Print Bye Message
-        TextUi.showDividingLine();
-        TextUi.showByeMessage();
-        TextUi.showDividingLine();
+        showByeMessage();
     }
 
     private void processCommands(String taskType, String taskName, String userInput) {
         Scanner userInputScanner = new Scanner(System.in);
-        String byTime;
-        String atTime;
         ArrayList<String> parsedList = new ArrayList<>();
+
         // Loop for user input until "bye" is inputted
         while(!Util.isBye(taskType)) {
             switch (taskType) {
             case "todo":
-                Task t = new Todo(taskName);
-                TextUi.showDividingLine();
-                Task.addTaskWithValidation(userInput, t);
-                TextUi.showDividingLine();
+                addTodo(taskName, userInput);
                 Storage.attemptSaveFile();
                 break;
             case "deadline":
-                byTime = Util.extractTime(taskName);
-                taskName = Util.extractTaskName(taskName);
-                Task d = new Deadline(taskName, byTime);
-                TextUi.showDividingLine();
-                Task.addTaskWithValidation(userInput, d);
-                TextUi.showDividingLine();
+                addDeadline(taskName, userInput);
                 Storage.attemptSaveFile();
                 break;
             case "event":
-                atTime = Util.extractTime(taskName);
-                taskName = Util.extractTaskName(taskName);
-                Task e = new Event(taskName, atTime);
-                TextUi.showDividingLine();
-                Task.addTaskWithValidation(userInput, e);
-                TextUi.showDividingLine();
+                addEvent(taskName, userInput);
                 Storage.attemptSaveFile();
                 break;
             case "list":
-                TextUi.showDividingLine();
-                Task.listTasks();
-                TextUi.showDividingLine();
+                list();
                 break;
             case "delete":
-                TextUi.showDividingLine();
-                Task.deleteTaskWithValidation(Util.getTaskIndex(userInput), userInput);
-                TextUi.showDividingLine();
+                delete(userInput);
                 Storage.attemptSaveFile();
                 break;
             case "done":
-                TextUi.showDividingLine();
-                Task.markAsDoneWithValidation(Util.getTaskIndex(userInput), userInput);
-                TextUi.showDividingLine();
+                done(userInput);
                 Storage.attemptSaveFile();
                 break;
             case "find":
-                TextUi.showDividingLine();
-                Task.findTaskWithValidation(taskName);
-                TextUi.showDividingLine();
+                find(taskName);
                 break;
             default:
-                TextUi.showDividingLine();
-                TextUi.showUnrecognizedCommandError();
-                TextUi.showDividingLine();
+                showErrorMessage();
                 break;
             }
 
@@ -117,6 +85,80 @@ public class Duke {
             taskType = Parser.parseTaskType(parsedList);
             taskName = Parser.parseTaskName(parsedList);
         }
+    }
+
+    private void showLogo() {
+        TextUi.showLogo();
+        TextUi.showDividingLine();
+    }
+
+    private void showWelcomeMessage() {
+        TextUi.showDividingLine();
+        TextUi.showWelcomeMessage();
+        TextUi.showDividingLine();
+    }
+
+    private void showByeMessage() {
+        TextUi.showDividingLine();
+        TextUi.showByeMessage();
+        TextUi.showDividingLine();
+    }
+
+    private void showErrorMessage() {
+        TextUi.showDividingLine();
+        TextUi.showUnrecognizedCommandError();
+        TextUi.showDividingLine();
+    }
+
+    private void find(String taskName) {
+        TextUi.showDividingLine();
+        Task.findTaskWithValidation(taskName);
+        TextUi.showDividingLine();
+    }
+
+    private void done(String userInput) {
+        TextUi.showDividingLine();
+        Task.markAsDoneWithValidation(Util.getTaskIndex(userInput), userInput);
+        TextUi.showDividingLine();
+    }
+
+    private void delete(String userInput) {
+        TextUi.showDividingLine();
+        Task.deleteTaskWithValidation(Util.getTaskIndex(userInput), userInput);
+        TextUi.showDividingLine();
+    }
+
+    private void list() {
+        TextUi.showDividingLine();
+        Task.listTasks();
+        TextUi.showDividingLine();
+    }
+
+    private void addEvent(String taskName, String userInput) {
+        String atTime;
+        atTime = Util.extractTime(taskName);
+        taskName = Util.extractTaskName(taskName);
+        Task e = new Event(taskName, atTime);
+        TextUi.showDividingLine();
+        Task.addTaskWithValidation(userInput, e);
+        TextUi.showDividingLine();
+    }
+
+    private void addDeadline(String taskName, String userInput) {
+        String byTime;
+        byTime = Util.extractTime(taskName);
+        taskName = Util.extractTaskName(taskName);
+        Task d = new Deadline(taskName, byTime);
+        TextUi.showDividingLine();
+        Task.addTaskWithValidation(userInput, d);
+        TextUi.showDividingLine();
+    }
+
+    private void addTodo(String taskName, String userInput) {
+        Task t = new Todo(taskName);
+        TextUi.showDividingLine();
+        Task.addTaskWithValidation(userInput, t);
+        TextUi.showDividingLine();
     }
 
     public static void main(String[] args) {
