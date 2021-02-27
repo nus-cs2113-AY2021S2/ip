@@ -68,7 +68,7 @@ Added to list:
 ###    b. Deadline
 Deadline has an additional field to include details on when a task is due.
 
-**Format:** `deadline [description]... /by[due]`
+**Format:** `deadline [description]... /by [due]`
 
 * _description:_ _**String**_ task description
 
@@ -89,7 +89,7 @@ Added to list:
 ###    c. Event
 Event has an additional field to include details on when described event happening.
 
-**Format:** `event [description]... /at[time/date]`
+**Format:** `event [description]... /at [time/date]`
 
 * _description:_ _**String**_ event description
 
@@ -188,8 +188,8 @@ List tasks which contain the given keyword.
 * search is case-sensitive, _eg:_ `john` will not match `John`.
 * only tasks descriptions containing the entire keyword string will be matched, _eg:_ `birthday party`
       will match `John's birhtday party` but **not** `Alice's birthday`.
-* Only finds matches within task description. Task details (_due date, time etc._) will not be searched.  
-* Index of search results are not the same as the `list` index. For other operations, follow the `list` index.
+* Only find matches within task description. Task details (_due date, time etc._) will not be searched.  
+* Index of search results are the same as index of `list`.
 
 **Format:** `find [keyword]`
 * _keyword:_ _**String**_ tasks will be checked if they contain this string.

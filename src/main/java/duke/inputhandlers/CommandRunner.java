@@ -119,9 +119,9 @@ public class CommandRunner {
             }
             markJobAsDone(tasks.get(jobNumber));
 
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException | NullPointerException e) {
             ui.printInvalidInputWarning(input);
-        } catch (NullPointerException | IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             ui.printInvalidIndexWarning(jobNumber);
         }
     }
@@ -316,8 +316,8 @@ public class CommandRunner {
      * @param input full user input string
      */
     private void runFindCommand(String input) {
-        ArrayList<Task> matches = new ArrayList<>();
         int numbering = 1;
+        int matches = 0;
         String keyword = null;
 
         // parse keyword from user input
@@ -331,21 +331,16 @@ public class CommandRunner {
         // collect tasks which match keyword
         for (Task t : tasks.getTasks()) {
             if (t.getDescription().contains(keyword)) {
-                matches.add(t);
+                matches++;
+                ui.printTaskAsList(numbering, t);
             }
+            numbering++;
         }
 
         // check if no matches
-        if (matches.size() == 0) {
+        if (matches == 0) {
             ui.printNoMatchWarning(keyword);
             return;
-        }
-
-        // else print the matching tasks
-        ui.printSearchResultsHeader(keyword);
-        for (Task t : matches) {
-            ui.printTaskAsList(numbering, t);
-            numbering++;
         }
         System.out.println();
     }
