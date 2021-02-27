@@ -150,6 +150,7 @@ Almost all errors are captured by the systems and will be displayed to the user 
 the known errors with their description.
 
 ### Command errors
+
 | Message | Description |
 |---------|-------------|
 |`☹ OOPS!!! I'm sorry, but I don't know what that means :-(` | Input not recognized.|
@@ -162,6 +163,7 @@ the known errors with their description.
 |`No matching task found.`| when 'find' function is entered and no task related to the keyword is found. |
 
 ### File Errors
+
 | Message | Description |
 |---------|-------------|
 |`No file exist, new file "tasklist.txt" created in home directory.`| When the app is used for the first time there is no existing data file. Hence, app will create a new file.|
