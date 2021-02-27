@@ -36,8 +36,7 @@ their data will be retrieved from this text file and shown to the user upon requ
 3) Save the file to your preferred folder.
 
 4) Open your windows command prompt then type **java -jar c:`jarfilepath.jar`"** then following image will be shown.
-
-      ![](images/start.jpg)
+   ![](images/start.jpg)
 
 5)  Begin using the application by typing the command in the command box and press Enter to execute it.
     e.g. typing `list` and pressing Enter, it will display all tasks stored in the data.
@@ -68,7 +67,7 @@ Example:
 -`todo watch video lecture 1`
 -`todo do tutorial 1`
 
-   [](images/todo.jpg)
+   ![](images/todo.jpg)
 <br/><br/>
 
 ### Add a deadline task: `deadline` 
@@ -81,7 +80,7 @@ Example:
 -`deadline return book /by mon 6pm`
 -`deadline submit report /by 2021-02-21 1800`
 
-   [](images/deadline.jpg)
+   ![](images/deadline.jpg)
 <br/><br/>
 
 ### Add an event task: `event` 
@@ -94,7 +93,7 @@ Example:
 -`event marathon /at 2021-05-23 1800, raffles place`
 -`event meeting /at NUS`
 
-   [](images/event.jpg)
+   ![](images/event.jpg)
 <br/><br/>
 
 ### List all tasks: `list` 
@@ -102,7 +101,7 @@ Example:
 
 Format: `list`
 
-   [](images/list.jpg)
+   ![](images/list.jpg)
 <br/><br/>
 
 ### Mark a task as done: `done`
@@ -113,7 +112,7 @@ Format: `done INDEX`
 Example: 
 -`done 1`
 
-   [](images/done.jpg)
+   ![](images/done.jpg)
 <br/><br/>
 
 ### Find tasks with keyword: `find`
@@ -124,7 +123,7 @@ Format: `find KEYWORD`
 Example: 
 -`find marathon` 
 
-   [](images/find.jpg)
+   ![](images/find.jpg)
 <br/><br/>
 
 ### Delete a task: `delete`
@@ -135,7 +134,7 @@ Format: `delete INDEX`
 Example: 
 -`delete 1`
 
-   [](images/delete.jpg)
+   ![](images/delete.jpg)
 <br/><br/>
 
 ### Exit the program: `exit`
@@ -143,7 +142,8 @@ Exits the program at any point of time.
 
 Format: `bye`
 
-   [](images/bye.jpg)
+   ![](images/bye.jpg)
+<br/><br/>
 
 ## Errors 
 Almost all errors are captured by the systems and will be displayed to the user to correct them. Below are the all 
