@@ -453,6 +453,7 @@ Goodbye!!!! (^ . ^)
 
 &nbsp;
 ## Cheat Sheet
+
 &nbsp;
 
 | Command | Format |
@@ -467,6 +468,7 @@ Goodbye!!!! (^ . ^)
 | find | `find  <task>` |
 | search | `search yyyy/MM/dd>` |
 | bye | `bye` |
+
 &nbsp;
 
 ## Troubleshoot
