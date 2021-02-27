@@ -92,6 +92,33 @@ public class Task {
         printTaskCount();
     }
 
+    public static void findTask(String userInput){
+        int matchingTaskCount = 0;
+        for(Task t : taskList){
+            if (isMatchingTask(userInput, t)){
+                matchingTaskCount++;
+            }
+        }
+        if(matchingTaskCount == 0) {
+            System.out.println("No match found :<");
+        } else if(matchingTaskCount == 1) {
+            System.out.println("Here is the matching task in your list:");
+        } else if(matchingTaskCount > 1) {
+            System.out.println("Here are the matching tasks in your list:");
+        }
+        for(Task t : taskList){
+            if (isMatchingTask(userInput, t)){
+                System.out.print((taskList.indexOf(t) + 1) + ". ");
+                t.printTaskInformation();
+                System.out.println("");
+            }
+        }
+    }
+
+    private static boolean isMatchingTask(String userInput, Task t) {
+        String taskName = t.description.toLowerCase();
+        return taskName.contains(userInput.toLowerCase());
+    }
 
     public void addTaskToArrayList() {
         taskList.add(this);

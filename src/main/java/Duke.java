@@ -100,6 +100,11 @@ public class Duke {
                 TextUi.showDividingLine();
                 Storage.attemptSaveFile();
                 break;
+            case "find":
+                TextUi.showDividingLine();
+                Task.findTask(taskName);
+                TextUi.showDividingLine();
+                break;
             default:
                 TextUi.showDividingLine();
                 TextUi.showUnrecognizedCommandError();
