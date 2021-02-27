@@ -13,8 +13,14 @@ import java.util.Scanner;
 
 public class DataStorage {
 
-    public static int readFile(ArrayList<Task> list) {
-        int taskCount = 0;
+    /**
+     * Reads data.txt line by line and passes each line of save data
+     * as a string to loadData()
+     * Creates a new file named data.txt if it does not exist
+     *
+     * @param list Empty ArrayList to be passed to loadData()
+     */
+    public static void readFile(ArrayList<Task> list) {
         try {
             File saveData = new File(Constants.FILENAME);
             if(saveData.createNewFile()) { //file is created
@@ -24,17 +30,19 @@ public class DataStorage {
                 while (reader.hasNextLine()) {
                     String line = reader.nextLine();
                     loadData(list, line);
-                    taskCount++;
                 }
-                System.out.println("data loaded");
-                System.out.println("tasks: " + taskCount);
             }
         } catch (IOException e) {
             System.out.print(Constants.LINE + Constants.GENERIC_ERROR_MESSAGE + Constants.LINE);
         }
-        return taskCount;
     }
 
+    /**
+     * Reads the line of sava data and adds tasks accordingly to the ArrayList containing tasks
+     *
+     * @param list Arraylist which tasks are to be added as they are parsed
+     * @param line line of save data
+     */
     private static void loadData(ArrayList<Task> list, String line) {
         Object[] parsedData = Parser.dataParser(line);
         String desc = (String)parsedData[0];
@@ -54,6 +62,11 @@ public class DataStorage {
         }
     }
 
+    /**
+     * Writes save data to data.txt
+     *
+     * @param list ArrayList containing tasks
+     */
     public static void writeSaveData(ArrayList<Task> list) {
         try {
             FileWriter fw = new FileWriter(Constants.FILENAME);
@@ -69,6 +82,12 @@ public class DataStorage {
         }
     }
 
+    /**
+     * Composes a line of save data for the task passed
+     *
+     * @param data Task to be saved
+     * @return String of save data to be written into data.txt
+     */
     private static String composeOutput(Task data) {
         boolean isDone = data.getStatus();
         StringBuilder output = new StringBuilder();
