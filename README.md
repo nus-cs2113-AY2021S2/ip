@@ -472,10 +472,15 @@ Goodbye!!!! (^ . ^)
 &nbsp;
 
 ## Troubleshoot
+
 &nbsp;
 
 If your saved file gets corrupted, Arthur will handle the error and close the application. You can load a backup file to Arthur's directory. Remember to rename it to `arthur.txt` before continuing. You will then need to restart the application.
 &nbsp;
+
 ## Contributor(s)
+&nbsp;
+
 * [H-horizon](https://github.com/H-horizon)
+
   &nbsp;
