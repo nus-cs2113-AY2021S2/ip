@@ -25,11 +25,6 @@
 
 ## Features 
 
-### Feature 1 
-Description of feature.
-
-## Usage
-
 ### `help` - Show a help message
 
 Shows a message listing all valid commands and their formats.
