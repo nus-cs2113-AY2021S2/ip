@@ -1,26 +1,157 @@
-# Duke project template
+# Duke User Guide
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+Duke is a desktop app for managing tasks, optimized for use via a Command Line Interface (CLI). 
+If you can type fast, Duke can get your task management done faster than traditional GUI apps.
 
-## Setting up in Intellij
+__________________________
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+### Quick start
+   1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first)
-1. Set up the correct JDK version, as follows:
-   1. Click `Configure` > `Structure for New Projects` and then `Project Settings` > `Project` > `Project SDK`
-   1. If JDK 11 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 11
-   1. Click `OK`
-1. Import the project into Intellij as follows:
-   1. Click `Open or Import`.
-   1. Select the project directory, and click `OK`
-   1. If there are any further prompts, accept the defaults.
-1. After the importing is complete, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the below:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+
+   2. Download the latest `duke.jar` from [here](https://github.com/Tyuanyuan/ip/releases).
+      
+
+   3. Copy the file to the folder you want to use as the *home folder* for your Duke.
+      
+
+   4. Double-click the file to start the app. The commands similar to the below should appear in a few seconds.
+      
+      ![](welcome.PNG)
+      
+
+   5. Type the command in the command box and press Enter to execute it.
+      
+      Some example commands you can try:
+      * `list` : Lists all tasks.
+      * `todo task 1` : Add a todo task to task list.
+      * `deadline task 2 /by today` : Add a deadline task to task list.
+      * `event task 3 /at tomorrow` : Add an event task to task list.
+      * `delete 1` : Delete the task in the task list that has task number 1.
+      * `done 1` : Mark the task in the task list that has task number 1 as done.
+      * `find task` : Find the tasks in the task list that contain the keyword.
+      * `bye` : Exits the app.
+       
+
+   6. Refer to the Features below for details of each command.
+
+__________________________
+
+### Features
+
+<span style="color:green">
+Notes about the command format: <br>
+Words in UPPER_CASE are the parameters to be supplied by the user. 
+</span>
+
+   1. Listing all tasks : `list`
+
+      Shows a list of all tasks in the task list.
+
+      Format: `list`
+    
+  
+   2. Adding a todo task: `todo`
+      
+      Adds a todo task to the task list.
+      
+      Format: `todo TODO` 
+
+      Example:
+
+      * `todo task 1`
+
+
+3. Adding a deadline task: `deadline`
+
+   Adds a deadline task to the task list.
+
+   Format: `deadline DEADLINE /by BYTIME`
+
+   Example:
+
+      * `deadline task 2 /by today`
+
+
+4. Adding an event task : `event`
+
+   Adds an event task to the task list.
+
+   Format: `event EVENT /at ATTIME`
+
+   Example:
+
+      * `event task 3 /at tomorrow`
+    
+      
+5. Deleting a task : `delete`
+
+   Deletes the specified task from the task list.
+
+   Format: `delete INDEX`
+
+   * Deletes the task at the specified `INDEX`.
+   * The index refers to the task number shown in the displayed task list.
+
+   Examples:
+
+   * `list` followed by `delete 1` deletes the task that has task number 1.  
+   * `find task` followed by `delete 2` deletes the task in the results of the `find` command that has task number 2.
+
+
+6. Marking a task as done : `done`
+
+   Marks the specified task from the task list as done.
+
+   Format: `done INDEX`
+
+      * Marks the task at the specified `INDEX` as done.
+      * The index refers to the task number shown in the displayed task list.
+
+   Examples:
+
+      * `list` followed by `done 1` marks the task that has task number 1 as done.
+      * `find task` followed by `done 2` marks the task in the results of the `find` command that has task number 2 as done.
+
+
+7. Locating tasks by task name : `find`
+
+   Finds tasks whose task names contain any of the given keywords.
+
+   Format: `find KEYWORD`
+
+      * The search is case-sensitive. e.g. `task` will not match `Task`.
+      * The order of the keywords matters. e.g. `task 1` will not match `1 task`.
+      * The task names, by time and at time can all be searched.
+      * Partial keywords can be matched with full keywords. e.g. `task` will match `task 1`.
+
+   Examples:
+
+      * `find task` returns `task 1` and `task 2`.
+      * `find today` returns `task 1 (at: today)`.
+    
+
+8. Exiting the program : `bye`
+
+   Shows goodbye quotes and exits the program.
+
+   Format: `bye`
+
+
+9. Saving the data
+
+   Duke data are saved in the hard disk automatically after exiting the program properly. There is no need to save manually.
+
+__________________________
+
+### Command Summary
+Action | Format, Examples
+------------ | -------------
+List | `list`
+Todo | `todo TODO`<br />e.g. `todo task 1`
+Deadline | `deadline DEADLINE /by BYTIME`<br />e.g. `deadline task 2 /by today`
+Event | `event EVENT /at ATTIME`<br />e.g. `event task 3 /at tomorrow`
+Delete | `delete INDEX`<br />e.g. `delete 1`
+Done | `done INDEX`<br />e.g. `done 1`
+Find | `find KEYWORD`<br />e.g. `find task`
+Bye | `bye`
