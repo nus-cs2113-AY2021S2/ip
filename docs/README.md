@@ -4,6 +4,7 @@
 
 ### View tasks in list: `list`
 Lists down the tasks that has been added.
+
 ###Format: `list`
 
 Expected outcome:
@@ -15,6 +16,7 @@ Here are the tasks in your list:
 ```
 ### Mark task as completed: `done`
 Marks a task at a specific index as completed
+
 ###Format: `done INDEX`
 Expected outcome:
 ```text
@@ -23,6 +25,7 @@ Nice! I've marked this task as done:
 ```
 ### Add a todo task: `todo`
 Add a todo task to the task list
+
 ###Format: `todo DESCRIPTION`
 Expected outcome:
 ```text
@@ -32,6 +35,7 @@ Now you have 1 tasks in the list.
 ```
 ### Add a deadline task: `deadline`
 Add a deadline task to the task list
+
 ###Format: `deadline DESCRIPTION /by TIME`
 Expected outcome:
 ```text
@@ -41,6 +45,7 @@ Now you have 4 tasks in the list.
 ```
 ### Add an event task: `event`
 Add an event task to the task list
+
 ###Format: `event DESCRIPTION /at TIME`
 Expected outcome:
 ```text
@@ -50,6 +55,7 @@ Now you have 5 tasks in the list.
 ```
 ### Find a task: `find`
 Find a task from the task list
+
 ###Format: `find DESCRIPTION`
 Expected outcome:
 ```text
