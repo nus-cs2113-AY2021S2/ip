@@ -37,6 +37,14 @@ public class Task {
         }
     }
 
+    public static void findTaskWithValidation(String userInput) {
+        try {
+            findTask(userInput);
+        } catch (IncompleteFindInputException e) {
+            printIncompleteFindInputErrorMessage(userInput);
+        }
+    }
+
     public String getStatusIcon(){
         return(this.isDone ? "x" : " ");
     }
@@ -92,7 +100,11 @@ public class Task {
         printTaskCount();
     }
 
-    public static void findTask(String userInput){
+    public static void findTask(String userInput) throws
+            IncompleteFindInputException {
+        if (userInput.equals("")){
+            throw new IncompleteFindInputException();
+        }
         int matchingTaskCount = 0;
         for(Task t : taskList){
             if (isMatchingTask(userInput, t)){
@@ -240,6 +252,14 @@ public class Task {
         System.out.println("[task number] field must be:");
         System.out.println("1. Within range (according to number of items in the list).");
         System.out.println("2. An integer greater than 0.");
+    }
+
+    private static void printIncompleteFindInputErrorMessage(String userInput) {
+        System.out.println("The command entered has insufficient parameters."
+                + "\n");
+        System.out.println("Please enter the command as follows:");
+        System.out.println("  find [search keyword]");
+        System.out.println("    e.g. find project");
     }
 
 }

@@ -102,7 +102,7 @@ public class Duke {
                 break;
             case "find":
                 TextUi.showDividingLine();
-                Task.findTask(taskName);
+                Task.findTaskWithValidation(taskName);
                 TextUi.showDividingLine();
                 break;
             default:
