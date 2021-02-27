@@ -57,12 +57,14 @@ public abstract class Task {
     }
 
     /**
-     * Returns the fields of a task (is done flag, task type and description)
-     * Fields are separated by commas for exporting to a CSV file
+     * Returns the fields of a task (is done flag, task type and description).
+     * Fields are separated by commas for exporting to a CSV file.
+     * If the user has used any commas in the description, it will be sanitized and replaced with spaces.
      *
      * @return CSV-formatted representation of a Task
      */
     public String exportAsCSV() {
-        return isDone + "," + taskType + "," + description;
+        String sanitizedDescription = description.replace(',', ' ');
+        return isDone + "," + taskType + "," + sanitizedDescription;
     }
 }
