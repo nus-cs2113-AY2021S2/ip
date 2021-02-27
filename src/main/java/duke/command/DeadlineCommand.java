@@ -36,7 +36,7 @@ public class DeadlineCommand extends Command {
         if (commandArgs.length() == 0) {
             throw new MissingDescriptionException(commandType);
         }
-        String[] deadlineArgs = commandArgs.split("\\s+/by\\s+", 2);
+        String[] deadlineArgs = Utils.splitUserInputByRegex(commandArgs, "\\s+/by\\s+");
 
         LocalDateTime date = Utils.getDateFromUserInput(deadlineArgs[1]);
         if (!Utils.isValidDeadline(date)) {

@@ -36,7 +36,7 @@ public class EventCommand extends Command {
         if (commandArgs.length() == 0) {
             throw new MissingDescriptionException(commandType);
         }
-        String[] eventArgs = commandArgs.split("\\s+/at\\s+", 2);
+        String[] eventArgs = Utils.splitUserInputByRegex(commandArgs, "\\s+/at\\s+");
 
         LocalDateTime dateTime = Utils.getDateTimeFromUserInput(eventArgs[1]);
         if (!Utils.isValidEvent(dateTime)) {
