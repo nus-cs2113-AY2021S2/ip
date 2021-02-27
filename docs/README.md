@@ -15,7 +15,7 @@ __________________________
 3. Copy the file to the folder you want to use as the *home folder* for your Duke.
 
 
-4. Double-click the file to start the app. The commands similar to the below should appear in a few seconds.
+4. Double-click the file to start the app. 
 
 
 5. Type the command in the command box and press Enter to execute it.
