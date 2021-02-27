@@ -101,7 +101,7 @@ public class Parser {
      * @param delimiter specifies the end of task description
      * @return task description as a single string
      */
-    private static String getDescriptionString(String[] words, String delimiter) {
+    private static String getDescriptionString(String[] words, String delimiter) throws InvalidCommandException {
 
         String description = words[1];
 
@@ -111,6 +111,12 @@ public class Parser {
             }
             description += " " + words[i];
         }
+        
+        // handles case where user input does not contain task description
+        if (description.contains(delimiter)) {
+            throw new InvalidCommandException();
+        }
+        
         return description;
     }
 

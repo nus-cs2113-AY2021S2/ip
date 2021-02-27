@@ -80,7 +80,7 @@ public class FileManager {
             try {
                 Task task = formTask(line);
                 tasks.add(task);
-            } catch (DataErrorException e) {
+            } catch (DataErrorException | ArrayIndexOutOfBoundsException e) {
                 ui.printDataErrorWarning(lineNumber);
             }
         }
