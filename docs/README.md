@@ -36,7 +36,7 @@ their data will be retrieved from this text file and shown to the user upon requ
 3) Save the file to your preferred folder.
 
 4) Open your windows command prompt then type **java -jar c:`jarfilepath.jar`"** then following image will be shown.
-   ![](images/start.jpg)
+   ![](images/start%20.jpg)
 
 5)  Begin using the application by typing the command in the command box and press Enter to execute it.
     e.g. typing `list` and pressing Enter, it will display all tasks stored in the data.
@@ -67,7 +67,7 @@ Example:
 -`todo watch video lecture 1`
 -`todo do tutorial 1`
 
-   ![](images/todo.jpg)
+   ![](images/todo%20.jpg)
 <br/><br/>
 
 ### Add a deadline task: `deadline` 
@@ -80,7 +80,7 @@ Example:
 -`deadline return book /by mon 6pm`
 -`deadline submit report /by 2021-02-21 1800`
 
-   ![](images/deadline.jpg)
+   ![](images/deadline%20.jpg)
 <br/><br/>
 
 ### Add an event task: `event` 
