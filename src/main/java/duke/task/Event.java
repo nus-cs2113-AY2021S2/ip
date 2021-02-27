@@ -1,5 +1,6 @@
 package duke.task;
 
+import duke.date.Date;
 import duke.exceptions.EmptyInputException;
 import duke.exceptions.IncompleteInputException;
 import duke.exceptions.InvalidDateInputException;
@@ -7,18 +8,6 @@ import duke.exceptions.InvalidDateInputException;
 public class Event extends Task{
     private static final String ALPHABET_E = "E";
     private String atTime;
-    private static final String JAN = "01";
-    private static final String FEB = "02";
-    private static final String MAR = "03";
-    private static final String APR = "04";
-    private static final String MAY = "05";
-    private static final String JUN = "06";
-    private static final String JUL = "07";
-    private static final String AUG = "08";
-    private static final String SEP = "09";
-    private static final String OCT = "10";
-    private static final String NOV = "11";
-    private static final String DEC = "12";
 
     public Event(String d, String at){
         super(d);
@@ -57,81 +46,21 @@ public class Event extends Task{
         super.printInvalidDateInputMessage(userInput);
         System.out.println("  event [event name] /at [MM-DD-YYYY]\n"
                 + "    e.g. event project meeting /at 03-28-2021");
+        System.out.println("Please check if date is:");
+        System.out.println("1. Out of range.");
+        System.out.println("2. Not a future date.");
+        System.out.println("3. In incorrect format.");
     }
 
     @Override
     public void addTask() throws EmptyInputException, IncompleteInputException, InvalidDateInputException {
         // Check if date field is valid
-        if (isIncomplete(this)){
+        if (Date.isIncompleteDate(this)){
             throw new IncompleteInputException();
         }
-        if (isInvalidDate(this)){
+        if (Date.isInvalidDate(this)){
             throw new InvalidDateInputException();
         }
         super.addTask();
     }
-
-    private boolean isIncomplete(Event e){
-        return e.atTime.equals("");
-    }
-
-    private boolean isInvalidDate(Event e){
-        String[] splitDate = e.atTime.trim().split("-");
-        // Formatting is incorrect
-        if (splitDate.length != 3){
-            return true;
-        }
-        // Check if date is within valid range
-        String month = splitDate[0];
-        String day = splitDate[1];
-        String year = splitDate[2];
-
-        if (Integer.parseInt(month) < 1 || Integer.parseInt(month) > 12){
-            return true;
-        }
-        if (Integer.parseInt(year) < 2021){
-            return true;
-        }
-        // Check day lower limit
-        if (Integer.parseInt(day) < 1){
-            return true;
-        }
-
-        // Check day upper limit according to month
-        switch(month){
-        case FEB:
-            if (isLeapYear(Integer.parseInt(year))){
-                if (Integer.parseInt(day) > 29){
-                    return true;
-                }
-            } else {
-                if (Integer.parseInt(day) > 28){
-                    return true;
-                }
-            }
-        case JAN:
-        case MAR:
-        case MAY:
-        case JUL:
-        case AUG:
-        case OCT:
-        case DEC:
-            if (Integer.parseInt(day) > 31){
-                return true;
-            }
-        case APR:
-        case JUN:
-        case SEP:
-        case NOV:
-            if (Integer.parseInt(day) > 30){
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean isLeapYear(int year){
-        return (year % 4 == 0);
-    }
-
 }
