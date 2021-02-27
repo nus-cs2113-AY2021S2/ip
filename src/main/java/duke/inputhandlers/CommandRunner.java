@@ -119,9 +119,9 @@ public class CommandRunner {
             }
             markJobAsDone(tasks.get(jobNumber));
 
-        } catch (NumberFormatException | NullPointerException e) {
+        } catch (NumberFormatException e) {
             ui.printInvalidInputWarning(input);
-        } catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException | NullPointerException e) {
             ui.printInvalidIndexWarning(jobNumber);
         }
     }
