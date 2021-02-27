@@ -67,7 +67,7 @@ Example:
 -`todo watch video lecture 1`
 -`todo do tutorial 1`
 
-   ![](images/todo.jpg=399x200)
+   ![](images/todo.jpg)
 <br/><br/>
 
 ### Add a deadline task: `deadline` 
@@ -80,7 +80,7 @@ Example:
 -`deadline return book /by mon 6pm`
 -`deadline submit report /by 2021-02-21 1800`
 
-   ![](images/deadline.jpg=399x200)
+   ![](images/deadline.jpg)
 <br/><br/>
 
 ### Add an event task: `event` 
