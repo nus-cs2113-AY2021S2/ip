@@ -1,7 +1,7 @@
 # Arthur User Guide
 &nbsp;
 
-Arthur is an interactive task-manager. He can be *sceptical* from time to time. Nevertheless, if you manage to earn his trust, he will be *amiable* towards you. :wink:
+Arthur is an interactive task-manager. He can be *sceptical* from time to time. Nevertheless, if you manage to earn his trust, he will be *amiable* towards you.
 
 &nbsp;
 
@@ -482,5 +482,5 @@ If your saved file gets corrupted, Arthur will handle the error and close the ap
 &nbsp;
 
 * [H-horizon](https://github.com/H-horizon)
-  
+
 &nbsp;
