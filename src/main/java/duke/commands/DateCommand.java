@@ -10,8 +10,8 @@ import java.time.LocalDateTime;
 import static duke.commands.Utils.isArgumentValueEmpty;
 import static duke.commands.Utils.parseArgument;
 import static duke.common.Utils.parseDate;
-import static duke.common.Messages.ERROR_MISSING_DATE_MESSAGE;
-import static duke.common.Messages.ERROR_INVALID_DATE_MESSAGE;
+import static duke.common.Messages.MESSAGE_ERROR_MISSING_DATE;
+import static duke.common.Messages.MESSAGE_ERROR_INVALID_DATE;
 
 public class DateCommand extends Command {
     public static final String DATE_WORD = "date";
@@ -39,7 +39,7 @@ public class DateCommand extends Command {
             if (date != null) {
                 tasks.printTasksByDate(date, ui);
             } else {
-                throw new DukeException(ERROR_INVALID_DATE_MESSAGE);
+                throw new DukeException(MESSAGE_ERROR_INVALID_DATE);
             }
         } catch (DukeException e) {
             // dateInput is not a parsable, reflect error to user.
@@ -59,11 +59,12 @@ public class DateCommand extends Command {
     private String validateDateArguments(String commandArgs) throws DukeException {
         String dateInput = parseArgument(commandArgs, null, null);
         if (isArgumentValueEmpty(dateInput)) {
-            throw new DukeException(ERROR_MISSING_DATE_MESSAGE);
+            throw new DukeException(MESSAGE_ERROR_MISSING_DATE);
         }
         return dateInput;
     }
 
+    @Override
     public void execute(TaskList tasks, TextUI ui, Storage storage) {
         searchDate(tasks, ui);
     }

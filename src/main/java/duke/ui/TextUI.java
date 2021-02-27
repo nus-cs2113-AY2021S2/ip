@@ -3,9 +3,9 @@ package duke.ui;
 import java.io.InputStream;
 import java.util.Scanner;
 
-import static duke.common.Messages.ERROR_PREFIX_MESSAGE;
+import static duke.common.Messages.MESSAGE_ERROR_PREFIX;
 import static duke.common.Messages.LOGO;
-import static duke.common.Messages.WELCOME_MESSAGE;
+import static duke.common.Messages.MESSAGE_WELCOME;
 
 public class TextUI {
     private static final String HORIZONTAL_LINE = "_".repeat(70);
@@ -75,11 +75,11 @@ public class TextUI {
      */
     public void printError(String errorDescription) {
         printHorizontalLine();
-        printStatement(String.format("%s %s", ERROR_PREFIX_MESSAGE, errorDescription));
+        printStatement(String.format("%s %s", MESSAGE_ERROR_PREFIX, errorDescription));
         printHorizontalLine();
     }
 
     public void printWelcomeMessage() {
-        printStatements(LOGO, WELCOME_MESSAGE);
+        printStatements(LOGO, MESSAGE_WELCOME);
     }
 }

@@ -8,7 +8,7 @@ import duke.ui.TextUI;
 
 import static duke.commands.Utils.isArgumentValueEmpty;
 import static duke.commands.Utils.parseArgument;
-import static duke.common.Messages.ERROR_EMPTY_TASK_STRING_FORMAT;
+import static duke.common.Messages.SF_ERROR_EMPTY_DESCRIPTION;
 
 public class TodoCommand extends Command {
     public static final String TODO_WORD = "todo";
@@ -51,11 +51,12 @@ public class TodoCommand extends Command {
     private String validateTodoArguments(String commandArgs) throws DukeException {
         String taskDescription = parseArgument(commandArgs, null, null);
         if (isArgumentValueEmpty(taskDescription)) {
-            throw new DukeException(String.format(ERROR_EMPTY_TASK_STRING_FORMAT, "todo"));
+            throw new DukeException(String.format(SF_ERROR_EMPTY_DESCRIPTION, "todo"));
         }
         return taskDescription;
     }
 
+    @Override
     public void execute(TaskList tasks, TextUI ui, Storage storage) {
         recordTodo(tasks, ui, storage);
     }

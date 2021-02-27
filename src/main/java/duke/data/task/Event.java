@@ -5,6 +5,7 @@ import static duke.common.Utils.outputDateTime;
 
 public class Event extends TaskWithDateTime {
     private static final String PRINT_STRING_FORMAT = "[E]%s (at: %s)";
+    private static final char EVENT_SYMBOL = 'E';
 
     private String at;
 
@@ -38,6 +39,6 @@ public class Event extends TaskWithDateTime {
 
     @Override
     public String toFileEntry() {
-        return String.format(FILE_OUTPUT_STRING_FORMAT, 'E', super.toFileEntry(), at);
+        return String.format(FILE_OUTPUT_STRING_FORMAT, EVENT_SYMBOL, super.toFileEntry(), at);
     }
 }

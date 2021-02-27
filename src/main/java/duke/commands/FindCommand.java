@@ -7,7 +7,7 @@ import duke.ui.TextUI;
 
 import static duke.commands.Utils.isArgumentValueEmpty;
 import static duke.commands.Utils.parseArgument;
-import static duke.common.Messages.ERROR_MISSING_KEYWORD_MESSAGE;
+import static duke.common.Messages.MESSAGE_ERROR_MISSING_KEYWORD;
 
 public class FindCommand extends Command {
     public static final String FIND_WORD = "find";
@@ -50,11 +50,12 @@ public class FindCommand extends Command {
     private String validateFindKeywordArguments(String commandArgs) throws DukeException {
         String keyword = parseArgument(commandArgs, null, null);
         if (isArgumentValueEmpty(keyword)) {
-            throw new DukeException(ERROR_MISSING_KEYWORD_MESSAGE);
+            throw new DukeException(MESSAGE_ERROR_MISSING_KEYWORD);
         }
         return keyword;
     }
 
+    @Override
     public void execute(TaskList tasks, TextUI ui, Storage storage) {
         findKeyword(tasks, ui);
     }

@@ -8,13 +8,15 @@ import duke.ui.TextUI;
 
 import static duke.commands.Utils.isArgumentValueEmpty;
 import static duke.commands.Utils.parseArgument;
-import static duke.common.Messages.ERROR_EMPTY_EVENT_AT_MESSAGE;
-import static duke.common.Messages.ERROR_EMPTY_TASK_STRING_FORMAT;
+import static duke.common.Messages.MESSAGE_ERROR_EMPTY_EVENT_AT;
+import static duke.common.Messages.SF_ERROR_EMPTY_DESCRIPTION;
 
 
 public class EventCommand extends Command {
     public static final String EVENT_WORD = "event";
     public static final String EVENT_AT_TOKEN = "/at";
+    private static final int DESCRIPTION_INDEX = 0;
+    private static final int BY_INDEX = 1;
 
     private String commandArgs;
 
@@ -35,7 +37,10 @@ public class EventCommand extends Command {
     private void recordEvent(TaskList tasks, TextUI ui, Storage storage) {
         try {
             String[] eventArgValues = validateEventArguments(commandArgs);
-            tasks.recordTask(new Event(eventArgValues[0], eventArgValues[1]), ui, storage);
+            Event event = new Event(
+                    eventArgValues[DESCRIPTION_INDEX],
+                    eventArgValues[BY_INDEX]);
+            tasks.recordTask(event, ui, storage);
         } catch (DukeException e) {
             // An argument value is missing, reflect error to user.
             ui.printError(e.getMessage());
@@ -56,14 +61,15 @@ public class EventCommand extends Command {
         String taskDescription = parseArgument(commandArgs, null, EVENT_AT_TOKEN);
         String eventAt = parseArgument(commandArgs, EVENT_AT_TOKEN, null);
         if (isArgumentValueEmpty(taskDescription)) {
-            throw new DukeException(String.format(ERROR_EMPTY_TASK_STRING_FORMAT, "event"));
+            throw new DukeException(String.format(SF_ERROR_EMPTY_DESCRIPTION, "event"));
         }
         if (isArgumentValueEmpty(eventAt)) {
-            throw new DukeException(ERROR_EMPTY_EVENT_AT_MESSAGE);
+            throw new DukeException(MESSAGE_ERROR_EMPTY_EVENT_AT);
         }
         return new String[] {taskDescription, eventAt};
     }
 
+    @Override
     public void execute(TaskList tasks, TextUI ui, Storage storage) {
         recordEvent(tasks, ui, storage);
     }

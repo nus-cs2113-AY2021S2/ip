@@ -2,7 +2,7 @@ package duke.commands;
 
 import duke.data.exceptions.DukeException;
 
-import static duke.common.Messages.ERROR_EMPTY_TASK_NUMBER_MESSAGE;
+import static duke.common.Messages.MESSAGE_ERROR_EMPTY_TASK_NUMBER;
 
 public class Utils {
     /**
@@ -47,7 +47,7 @@ public class Utils {
     public static int parseNumberFromArgument(String commandArgs) throws DukeException, NumberFormatException {
         String argValue = parseArgument(commandArgs, null, null);
         if (argValue == null) {
-            throw new DukeException(ERROR_EMPTY_TASK_NUMBER_MESSAGE);
+            throw new DukeException(MESSAGE_ERROR_EMPTY_TASK_NUMBER);
         }
         int number = Integer.parseInt(argValue);
 

@@ -8,17 +8,17 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import static duke.common.Utils.OUTPUT_DATE_FORMAT;
-import static duke.common.Messages.LIST_TASK_MESSAGE;
-import static duke.common.Messages.TASK_ADDED_MESSAGE;
-import static duke.common.Messages.TASK_REMOVED_MESSAGE;
-import static duke.common.Messages.TASK_MARK_AS_DONE_MESSAGE;
-import static duke.common.Messages.TASK_MATCH_FOUND_MESSAGE;
-import static duke.common.Messages.ERROR_WRITE_TO_FILE_MESSAGE;
-import static duke.common.Messages.ERROR_INVALID_TASK_NUMBER_MESSAGE;
-import static duke.common.Messages.ERROR_TASK_NO_MATCH_MESSAGE;
-import static duke.common.Messages.DOUBLE_SPACE_PREFIX_STRING_FORMAT;
-import static duke.common.Messages.TASK_TOTAL_TASKS_STRING_FORMAT;
-import static duke.common.Messages.FOUND_DATE_TASK_STRING_FORMAT;
+import static duke.common.Messages.MESSAGE_LIST_TASK;
+import static duke.common.Messages.MESSAGE_TASK_ADDED;
+import static duke.common.Messages.MESSAGE_TASK_REMOVED;
+import static duke.common.Messages.MESSAGE_TASK_MARK_AS_DONE;
+import static duke.common.Messages.MESSAGE_TASK_MATCH_FOUND;
+import static duke.common.Messages.MESSAGE_ERROR_WRITE_TO_FILE;
+import static duke.common.Messages.MESSAGE_ERROR_INVALID_TASK_NUMBER;
+import static duke.common.Messages.MESSAGE_NO_MATCH_FOUND;
+import static duke.common.Messages.SF_DOUBLE_SPACE_PREFIX;
+import static duke.common.Messages.SF_TASK_TOTAL_TASKS;
+import static duke.common.Messages.SF_FOUND_DATE_TASK;
 
 public class TaskList {
     private ArrayList<Task> tasks;
@@ -41,14 +41,14 @@ public class TaskList {
      */
     public void recordTask(Task task, TextUI ui, Storage storage) {
         tasks.add(task);
-        ui.printStatements(TASK_ADDED_MESSAGE,
-                String.format(DOUBLE_SPACE_PREFIX_STRING_FORMAT, task),
-                String.format(TASK_TOTAL_TASKS_STRING_FORMAT, tasks.size()));
+        ui.printStatements(MESSAGE_TASK_ADDED,
+                String.format(SF_DOUBLE_SPACE_PREFIX, task),
+                String.format(SF_TASK_TOTAL_TASKS, tasks.size()));
         try {
             storage.writeTasksToFile(tasks);
         } catch (Exception e) {
             // Unable to write to file, reflect error to user.
-            ui.printError(ERROR_WRITE_TO_FILE_MESSAGE);
+            ui.printError(MESSAGE_ERROR_WRITE_TO_FILE);
         }
     }
 
@@ -67,7 +67,7 @@ public class TaskList {
      */
     public void printAllTasks(TextUI ui) {
         ui.printHorizontalLine();
-        ui.printStatement(LIST_TASK_MESSAGE);
+        ui.printStatement(MESSAGE_LIST_TASK);
         printTaskArray(tasks, ui);
         ui.printHorizontalLine();
     }
@@ -88,15 +88,15 @@ public class TaskList {
             int taskIndex = taskNumber - 1;
             tasks.get(taskIndex).setDone(true);
             Task task = tasks.get(taskIndex);
-            ui.printStatements(TASK_MARK_AS_DONE_MESSAGE,
-                    String.format(DOUBLE_SPACE_PREFIX_STRING_FORMAT, task));
+            ui.printStatements(MESSAGE_TASK_MARK_AS_DONE,
+                    String.format(SF_DOUBLE_SPACE_PREFIX, task));
             storage.writeTasksToFile(tasks);
         } catch (DukeException e) {
             // Invalid task number, reflect error to user.
             ui.printError(e.getMessage());
         } catch (Exception e) {
             // Unable to write to file, reflect error to user.
-            ui.printError(ERROR_WRITE_TO_FILE_MESSAGE);
+            ui.printError(MESSAGE_ERROR_WRITE_TO_FILE);
         }
     }
 
@@ -115,23 +115,23 @@ public class TaskList {
             validateTaskNumber(taskNumber);
             int taskIndex = taskNumber - 1;
             Task task = tasks.remove(taskIndex);
-            ui.printStatements(TASK_REMOVED_MESSAGE,
-                    String.format(DOUBLE_SPACE_PREFIX_STRING_FORMAT, task),
-                    String.format(TASK_TOTAL_TASKS_STRING_FORMAT, tasks.size()));
+            ui.printStatements(MESSAGE_TASK_REMOVED,
+                    String.format(SF_DOUBLE_SPACE_PREFIX, task),
+                    String.format(SF_TASK_TOTAL_TASKS, tasks.size()));
             storage.writeTasksToFile(tasks);
         } catch (DukeException e) {
             // Invalid task number, reflect error to user.
             ui.printError(e.getMessage());
         } catch (Exception e) {
             // Unable to write to file, reflect error to user.
-            ui.printError(ERROR_WRITE_TO_FILE_MESSAGE);
+            ui.printError(MESSAGE_ERROR_WRITE_TO_FILE);
         }
     }
 
     private void validateTaskNumber(int taskNumber) throws DukeException {
         if (taskNumber <= 0 || taskNumber > tasks.size()) {
             // Prevents the throwing of IndexOutOfBoundsException in the caller.
-            throw new DukeException(ERROR_INVALID_TASK_NUMBER_MESSAGE);
+            throw new DukeException(MESSAGE_ERROR_INVALID_TASK_NUMBER);
         }
     }
 
@@ -184,7 +184,7 @@ public class TaskList {
     private void printMatchedDateTasks(ArrayList<Task> deadlines, ArrayList<Task> events,
                                        TextUI ui, String date) {
         ui.printHorizontalLine();
-        ui.printStatement(String.format(FOUND_DATE_TASK_STRING_FORMAT,
+        ui.printStatement(String.format(SF_FOUND_DATE_TASK,
                 deadlines.size(), events.size(), date));
         if (deadlines.size() > 0) {
             ui.printStatement("Deadline(s):");
@@ -243,11 +243,11 @@ public class TaskList {
     private void printMatchedTasks(ArrayList<Task> matches, TextUI ui) {
         if (matches.size() > 0) {
             ui.printHorizontalLine();
-            ui.printStatement(TASK_MATCH_FOUND_MESSAGE);
+            ui.printStatement(MESSAGE_TASK_MATCH_FOUND);
             printTaskArray(matches, ui);
             ui.printHorizontalLine();
         } else {
-            ui.printStatements(ERROR_TASK_NO_MATCH_MESSAGE);
+            ui.printStatements(MESSAGE_NO_MATCH_FOUND);
         }
 
     }

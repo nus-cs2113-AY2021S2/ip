@@ -6,7 +6,7 @@ import duke.storage.Storage;
 import duke.ui.TextUI;
 
 import static duke.commands.Utils.parseNumberFromArgument;
-import static duke.common.Messages.ERROR_NOT_A_TASK_NUMBER_MESSAGE;
+import static duke.common.Messages.MESSAGE_ERROR_NOT_A_TASK_NUMBER;
 
 public class DoneCommand extends Command {
     public static final String DONE_WORD = "done";
@@ -35,10 +35,11 @@ public class DoneCommand extends Command {
             ui.printError(e.getMessage());
         } catch (NumberFormatException e) {
             // taskNumber is not a parsable to an integer, reflect error to user.
-            ui.printError(ERROR_NOT_A_TASK_NUMBER_MESSAGE);
+            ui.printError(MESSAGE_ERROR_NOT_A_TASK_NUMBER);
         }
     }
 
+    @Override
     public void execute(TaskList tasks, TextUI ui, Storage storage) {
         markTaskDone(tasks, ui, storage);
     }

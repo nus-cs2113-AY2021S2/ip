@@ -8,12 +8,14 @@ import duke.ui.TextUI;
 
 import static duke.commands.Utils.isArgumentValueEmpty;
 import static duke.commands.Utils.parseArgument;
-import static duke.common.Messages.ERROR_EMPTY_DEADLINE_BY_MESSAGE;
-import static duke.common.Messages.ERROR_EMPTY_TASK_STRING_FORMAT;
+import static duke.common.Messages.MESSAGE_ERROR_EMPTY_DEADLINE_BY;
+import static duke.common.Messages.SF_ERROR_EMPTY_DESCRIPTION;
 
 public class DeadlineCommand extends Command {
     public static final String DEADLINE_WORD = "deadline";
     public static final String DEADLINE_BY_TOKEN = "/by";
+    private static final int DESCRIPTION_INDEX = 0;
+    private static final int BY_INDEX = 1;
 
     private String commandArgs;
 
@@ -34,7 +36,10 @@ public class DeadlineCommand extends Command {
     private void recordDeadline(TaskList tasks, TextUI ui, Storage storage) {
         try {
             String[] deadlineArgValues = validateDeadlineArguments(commandArgs);
-            tasks.recordTask(new Deadline(deadlineArgValues[0], deadlineArgValues[1]), ui, storage);
+            Deadline deadline = new Deadline(
+                    deadlineArgValues[DESCRIPTION_INDEX],
+                    deadlineArgValues[BY_INDEX]);
+            tasks.recordTask(deadline, ui, storage);
         } catch (DukeException e) {
             // An argument value is missing, reflect error to user.
             ui.printError(e.getMessage());
@@ -55,14 +60,15 @@ public class DeadlineCommand extends Command {
         String taskDescription = parseArgument(commandArgs, null, DEADLINE_BY_TOKEN);
         String deadlineBy = parseArgument(commandArgs, DEADLINE_BY_TOKEN, null);
         if (isArgumentValueEmpty(taskDescription)) {
-            throw new DukeException(String.format(ERROR_EMPTY_TASK_STRING_FORMAT, "deadline"));
+            throw new DukeException(String.format(SF_ERROR_EMPTY_DESCRIPTION, "deadline"));
         }
         if (isArgumentValueEmpty(deadlineBy)) {
-            throw new DukeException(ERROR_EMPTY_DEADLINE_BY_MESSAGE);
+            throw new DukeException(MESSAGE_ERROR_EMPTY_DEADLINE_BY);
         }
         return new String[] {taskDescription, deadlineBy};
     }
 
+    @Override
     public void execute(TaskList tasks, TextUI ui, Storage storage) {
         recordDeadline(tasks, ui, storage);
     }

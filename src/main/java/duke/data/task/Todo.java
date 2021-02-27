@@ -3,6 +3,7 @@ package duke.data.task;
 public class Todo extends Task {
     private static final String PRINT_STRING_FORMAT = "[T]%s";
     private static final String FILE_OUTPUT_STRING_FORMAT = "%c %s";
+    private static final char TODO_SYMBOL = 'T';
 
     public Todo(String description) {
         this(description, false);
@@ -19,6 +20,6 @@ public class Todo extends Task {
 
     @Override
     public String toFileEntry() {
-        return String.format(FILE_OUTPUT_STRING_FORMAT, 'T', super.toFileEntry());
+        return String.format(FILE_OUTPUT_STRING_FORMAT, TODO_SYMBOL, super.toFileEntry());
     }
 }

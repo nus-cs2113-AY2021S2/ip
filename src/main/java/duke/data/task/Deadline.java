@@ -5,6 +5,7 @@ import static duke.common.Utils.outputDateTime;
 
 public class Deadline extends TaskWithDateTime {
     private static final String PRINT_STRING_FORMAT = "[D]%s (by: %s)";
+    private static final char DEADLINE_SYMBOL = 'D';
 
     private String by;
 
@@ -38,6 +39,6 @@ public class Deadline extends TaskWithDateTime {
 
     @Override
     public String toFileEntry() {
-        return String.format(FILE_OUTPUT_STRING_FORMAT, 'D', super.toFileEntry(), by);
+        return String.format(FILE_OUTPUT_STRING_FORMAT, DEADLINE_SYMBOL, super.toFileEntry(), by);
     }
 }

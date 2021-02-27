@@ -5,7 +5,7 @@ import duke.data.task.TaskList;
 import duke.storage.Storage;
 import duke.ui.TextUI;
 
-import static duke.common.Messages.LIST_NO_TASK_MESSAGE;
+import static duke.common.Messages.MESSAGE_LIST_TASK_NONE;
 
 public class ListCommand extends Command {
     public static final String LIST_WORD = "list";
@@ -25,12 +25,13 @@ public class ListCommand extends Command {
      */
     private void listTasks(TaskList tasks, TextUI ui) {
         if (tasks.isEmpty()) {
-            ui.printStatements(LIST_NO_TASK_MESSAGE);
+            ui.printStatements(MESSAGE_LIST_TASK_NONE);
         } else {
             tasks.printAllTasks(ui);
         }
     }
 
+    @Override
     public void execute(TaskList tasks, TextUI ui, Storage storage) {
         listTasks(tasks, ui);
     }
