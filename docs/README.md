@@ -103,7 +103,7 @@ List | `list` | `list`
 Done | `done [index]` | `done 1`
 Delete | `delete [index]` | `delete 2`
 Search | `search [keyword]` | `search Marine`
-Exit | `bye` | `bye
+Exit | `bye` | `bye`
 
 ---
 _[Updated: 27th Feb 2021]_
