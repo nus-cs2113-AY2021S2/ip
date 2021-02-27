@@ -1,8 +1,8 @@
-#Duke
+# Duke
 Duke is a personal assistant chatbot that helps keep track of tasks, deadlines and events via a _Command Line 
 Interface_ (CLI).
 
-##User Guide
+## User Guide
 * [Getting started with Duke](#getting-started-with-duke)
   
 * [Features](#features)
@@ -40,76 +40,76 @@ Interface_ (CLI).
 
 ---
 
-###Features
+### Features
 > Command format:
 >  * Words in angle brackets are required arguments\
 >  e.g. in `todo <DESCRIPTION>`, `<DESCRIPTION>` is an argument which can be used as `todo Install Java 11`
 >  * Commands can be typed in upper or lower case, or even a mix of both.\
 >  Be aware that string arguments are saved as is.
 
-####Viewing help: `help`
+#### Viewing help: `help`
 Prints all currently implemented commands, along with how to use them.\
 Usage: `help`
 
-####Adding a to do: `todo`
+#### Adding a to do: `todo`
 Adds a to do to the current lists of tasks.\
 Usage: `todo <DESCRIPTION>`\
 Example: `todo Complete CS2113T java exercises`
 
-####Adding a deadline: `deadline`
+#### Adding a deadline: `deadline`
 Adds a deadline to the current lists of tasks.\
 Usage: `deadline <DESCRIPTION> /by <DATE>`\
 Example: `deadline Submit final version of Duke /by 2021-3-5`, `deadline submit quiz /by today 6pm`
 
-####Adding an event: `event`
+#### Adding an event: `event`
 Adds an event to the current lists of tasks.\
 Usage: `event <DESCRIPTION> /at <DATE>`\
 Example: `event CS2113T Finals /at 2021-4-29`, `dinner with beanpod /at later tonight`
 
-####Viewing all tasks: `list`
+#### Viewing all tasks: `list`
 Prints the list containing all tasks, along with the type and status of the task.\
 Usage: `list`
 
-####Checking a task off as done: `done`
+#### Checking a task off as done: `done`
 Checks off the indicated task as done.\
 Usage: `done <TASK_NUMBER>`\
 Example: `done 3`
 
-####Undoing a checked task: `undo`
+#### Undoing a checked task: `undo`
 Unchecks the indicated task that was previously checked off as done.\
 Usage: `undo <TASK_NUMBER>`\
 Example: `undo 3`
 
-####Removing a task: `delete`
+#### Removing a task: `delete`
 Removes the indicated task.\
 Usage: `delete <TASK_NUMBER>`\
 Example: `delete 5`
 > ! Note that deleting a task will cause the task numbers of tasks after it to change
 
-####Finding tasks by description: `find`
+#### Finding tasks by description: `find`
 Finds and lists tasks that contain the keyword(s) in the description.\
 Usage: `find <KEYWORD(S)>`\
 Example: `find CS2113T`, `find CS2113T ip`
 
-####Exiting Duke: `bye`
+#### Exiting Duke: `bye`
 Exits Duke\
 Usage: `bye`
 
 ---
 
-###Saving the data
+### Saving the data
 Task data is saved automatically in `data.txt` after every command that modifies the task list.\
 There is no need for manual saving.
 
 ---
 
-###Transferring save data
+### Transferring save data
 When transferring data to another device, just place `data.txt` in the same directory as `ip.jar`.
 > ! Please do not modify `data.txt` directly
 
 ---
 
-###Command summary
+### Command summary
 Listed below are all currently implemented commands in alphabetical order.\
 Click on the commands to navigate to specific feature details.
 
