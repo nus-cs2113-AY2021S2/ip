@@ -5,11 +5,15 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class TaskList {
+
+    /**
+     * Prints all tasks in the list
+     *
+     * @param list ArrayList containing all tasks
+     */
     public static void printList(ArrayList<Task> list) {
         if(list.size() == 0) {
             Ui.printEmptyListMessage();
@@ -29,6 +33,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds a new To Do to the list of tasks
+     *
+     * @param input String containing the description of the To Do
+     * @param list Arraylist containing all tasks
+     */
     public static void addToDo(String input, ArrayList<Task> list) {
         if(input == null) {
             Ui.printInvalidArgumentMessage(Constants.NO_DESCRIPTION_MESSAGE);
@@ -38,6 +48,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds a new Deadline to the list of tasks
+     *
+     * @param input String containing the description amd dueDate of the Deadline
+     * @param list ArrayList containing all tasks
+     */
     public static void addDeadline(String input, ArrayList<Task> list) {
         if (input == null) {
             Ui.printInvalidArgumentMessage(Constants.NO_DESCRIPTION_MESSAGE);
@@ -55,6 +71,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds a new Event to the list of tasks
+     *
+     * @param input String containing the description and date of the Event
+     * @param list ArrayList containing all tasks
+     */
     public static void addEvent(String input, ArrayList<Task> list) {
         if (input == null) {
             Ui.printInvalidArgumentMessage(Constants.NO_DESCRIPTION_MESSAGE);
@@ -73,9 +95,15 @@ public class TaskList {
         }
     }
 
-    public static void markAsDone(ArrayList<Task> list, String input) {
+    /**
+     * Checks a task off as done
+     *
+     * @param list ArrayList containing all tasks
+     * @param argument Task number of task to be checked off
+     */
+    public static void markAsDone(ArrayList<Task> list, String argument) {
         try {
-            int taskNo = Integer.parseInt(input);
+            int taskNo = Integer.parseInt(argument);
             if (taskNo <= list.size() + 1 && taskNo > 0) { //no. is valid
                 if (list.get(taskNo - 1).getStatus()) {
                     Ui.printTaskAlreadyCheckedMessage(taskNo, list.get(taskNo - 1).getDesc());
@@ -92,6 +120,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Unchecks a previously checked task
+     *
+     * @param list ArrayList containing all tasks
+     * @param input Task number of task to be unchecked
+     */
     public static void undoMarkAsDone(ArrayList<Task> list, String input) {
         try {
             int taskNo = Integer.parseInt(input);
@@ -111,6 +145,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Deletes a task
+     * @param list ArrayList containing all tasks
+     * @param input Task number of task to be deleted
+     */
     public static void delete(ArrayList<Task> list, String input) {
         try {
             int taskNo = Integer.parseInt(input);
