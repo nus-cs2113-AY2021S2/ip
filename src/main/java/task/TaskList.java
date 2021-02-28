@@ -151,6 +151,7 @@ public class TaskList {
             input = s.nextLine();
             String[] userInput = input.split(" ", 2);
             boolean isDone = Boolean.parseBoolean(userInput[0]);
+
             if (userInput[1].startsWith("todo")) {
                 try {
                     addTask(userInput[1], COMMAND_TODO, false);
@@ -168,8 +169,9 @@ public class TaskList {
                 }
             }
             if (isDone) {
-                tasks.get(taskCount++).markAsDone();
+                tasks.get(taskCount).markAsDone();
             }
+            taskCount++;
         }
         System.out.println(Ui.FILE_LOADED);
     }

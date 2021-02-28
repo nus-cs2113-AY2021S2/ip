@@ -12,7 +12,7 @@ public class Duke {
     public static final int COMMAND_DEADLINE = 1;
     public static final int COMMAND_EVENT = 2;
 
-    public Duke() {
+    public static void run() {
         String userInput;
         Scanner in = new Scanner(System.in);
         TaskList tasks = new TaskList();
@@ -80,6 +80,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke();
+        run();
     }
 }
