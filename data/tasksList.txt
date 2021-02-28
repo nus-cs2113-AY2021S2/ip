@@ -1,2 +1,2 @@
-T | 1 | books
 D | 1 | return book | Sunday
+T | 0 | other

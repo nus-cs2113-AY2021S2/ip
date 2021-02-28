@@ -37,6 +37,9 @@ public class Parser {
                 int num = Integer.parseInt(numStr);
                 taskList.deleteTask(num);
 
+            } else if (inputs.contains("find")) {
+                taskList.findTasks(inputs);
+
             } else {
                 System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }

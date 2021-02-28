@@ -16,4 +16,9 @@ public class Deadline extends Task {
     public String saveTask() {
         return "D | " + (isDone ? 1 : 0) + " | " + description + " | " + by;
     }
+
+    @Override
+    public String getDescription() {
+        return description;
+    }
 }

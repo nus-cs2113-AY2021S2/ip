@@ -93,4 +93,17 @@ public class TaskList {
     public Task get(int index) {
         return tasksLists.get(index);
     }
+
+    public String findTasks(String inputs) {
+        String keyWord = inputs.substring(inputs.indexOf(" ") + 1);
+
+        ArrayList<Task> foundTasks = new ArrayList<>();
+        for (Task task : tasksLists) {
+            if (task.getDescription().contains(keyWord)) {
+                foundTasks.add(task);
+            }
+        }
+        Ui.printFind(foundTasks);
+        return "Task found!";
+    }
 }

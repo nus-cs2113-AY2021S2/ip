@@ -1,5 +1,7 @@
 package Duke.Tasks;
 
+import java.util.Collection;
+
 public abstract class Task {
     protected String description;
     protected String by;
@@ -23,5 +25,7 @@ public abstract class Task {
     }
 
     public abstract String saveTask();
+
+    public abstract String getDescription();
 
 }

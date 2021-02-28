@@ -59,4 +59,15 @@ public class Ui {
             }
         }
     }
+
+    public static void printFind(ArrayList<Task> tasksLists) {
+        if (tasksLists.size() == 0) {
+            System.out.println("Could not find task matching search word!");
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+            for (int i = 0; i < tasksLists.size(); i++) {
+                System.out.println((i + 1) + ". " + tasksLists.get(i));
+            }
+        }
+    }
 }

@@ -16,4 +16,9 @@ public class Event extends Task {
     public String saveTask() {
         return "E | " + (isDone ? 1 : 0) + " | " + description + " | " + at;
     }
+
+    @Override
+    public String getDescription() {
+        return description;
+    }
 }
