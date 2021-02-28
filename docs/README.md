@@ -21,7 +21,7 @@ If you can type fast, Duke can get do task management faster than traditional Gr
 ## Quick start
 
 1. Ensure you have Java 11 or above installed in your Computer.
-2. Download the latest Duke.jar from [here](github./ongweisheng/ip/releases/tag/A-Release).
+2. Download the latest Duke.jar from [here](https://github.com/ongweisheng/ip/releases/tag/A-Release).
 3. Copy the file to the folder you want to use as the home folder for your Duke.
 4. Open up a terminal/command window at the location where Duke.jar
 5. Run the command `java -jar Duke.jar`
