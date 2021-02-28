@@ -16,7 +16,7 @@ import java.io.ObjectOutputStream;
  */
 public class Storage {
     /**
-     * File object use for loading and storing Duke program task data.
+     * File object used for loading and storing Duke program task data.
      */
     private final File DUKE_FILE;
 

@@ -17,7 +17,7 @@ public class Duke {
     /**
      * Instantiates Storage, TaskList and Ui components of the program
      *
-     * @param filePath
+     * @param filePath The file path at which duke data file is located, if exists.
      */
     public Duke(File filePath) {
         ui = new Ui();

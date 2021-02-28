@@ -57,7 +57,7 @@ public class Parser {
     }
 
     /**
-     * Split raw user input into command type and parameter.
+     * Splits raw user input into command type and parameter.
      * The split is done based on the first space encountered in user input.
      *
      * @param input Raw user input.
@@ -92,7 +92,7 @@ public class Parser {
     }
 
     /**
-     * Validate whether the input string is a number and returns boolean value as result.
+     * Validates if the input string is a number and returns boolean value as result.
      *
      * @param input String parameter that will be parsed into integer.
      * @return A boolean value indicating whether the input string is a number.
@@ -113,7 +113,7 @@ public class Parser {
     }
 
     /**
-     * Check whether an input string is empty
+     * Checks whether an input string is empty
      *
      * @param input String parameter obtained for "done" and "delete" command.
      * @throws DukeException If input string is empty.
@@ -146,7 +146,7 @@ public class Parser {
     }
 
     /**
-     * Validate whether the number of parameters in string array matches minimum amount requirements.
+     * Validates if the number of parameters in string array matches minimum amount requirements.
      *
      * @param parameters String array consisting of split parameters.
      * @param numberOfParameters The number of parameters required for command to work.

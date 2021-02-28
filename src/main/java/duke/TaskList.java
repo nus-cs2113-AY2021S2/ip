@@ -21,7 +21,7 @@ public class TaskList {
     }
 
     /**
-     * Assign the existing ArrayList with task data as the task storage.
+     * Assigns the existing ArrayList with task data as the task storage.
      *
      * @param tasks ArrayList consists of existing task data.
      */
@@ -30,7 +30,7 @@ public class TaskList {
     }
 
     /**
-     * Add new task to the task storage.
+     * Adds new task to the task storage.
      *
      * @param task Task to be added into the task list.
      */
@@ -39,7 +39,7 @@ public class TaskList {
     }
 
     /**
-     * Remove specified task from the task storage.
+     * Removes specified task from the task storage.
      *
      * @param task Task to be removed from the task list.
      */
@@ -48,7 +48,7 @@ public class TaskList {
     }
 
     /**
-     * Mark the specified task as done.
+     * Marks the specified task as done.
      *
      * @param task Task to be marked as done.
      */

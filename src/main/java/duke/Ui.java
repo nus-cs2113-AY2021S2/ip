@@ -67,7 +67,7 @@ public class Ui {
     }
 
     /**
-     * Print all tasks that contains user entered keyword.
+     * Prints all tasks that contains user entered keyword.
      *
      * @param taskList Tasks that contains user entered keyword.
      */
