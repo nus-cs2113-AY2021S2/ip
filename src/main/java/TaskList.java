@@ -94,7 +94,8 @@ public class TaskList {
         }
 
         String label = getLabel(commandArray[0],commandType);
-        String startTime = commandArray[1].trim();
+        String commandTime = commandArray[1].trim();
+        String startTime = DateParser.readTime(commandTime);
 
         addToList(new Event(label, startTime));
     }
@@ -113,7 +114,8 @@ public class TaskList {
         }
 
         String label = getLabel(commandArray[0],commandType);
-        String dueTime = commandArray[1].trim();
+        String commandTime = commandArray[1].trim();
+        String dueTime = DateParser.readTime(commandTime);
 
         addToList(new Deadline(label, dueTime));
     }
