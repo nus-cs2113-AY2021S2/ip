@@ -24,16 +24,12 @@
 7. Find
 8. Bye
 
-<br>
-
 
 ## Feature 1: Todo
 Adds a Todo task in your task list
 ### Usage: <code> todo descriptionOfTodo </code>
 ### Example of usage: <code> todo to go and buy groceries
 ### Examples of outcome:
-
-<br></br>
 
 
 ## Feature 2: Deadline
