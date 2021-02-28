@@ -33,7 +33,8 @@ watchful protector, a dark knight.
 
 ## 2. Quick Start
 Prerequisites: JDK11, the latest version of IntelliJ
-###2.1 Quick Start by downloading the latest jar file
+
+### 2.1 Quick Start by downloading the latest jar file
 1. Ensure you have Java `11` installed in your computer.
 2. Download the latest `Duke.jar` from [here](https://github.com/oscarlai1998/ip/releases).
 3. Copy the file to a new folder you want to run `Duke` in.
