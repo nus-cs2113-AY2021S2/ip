@@ -53,7 +53,7 @@ Format: `event DESCRIPTION /at TIME`
 Examples:
 - `event meeting /at 2pm` adds a Event with the description of meeting and time of 2pm.
   ![img_2.png](screenshots/img_2.png)
-- `event ` will cause Duke to produce an error message that the description and /at cannot be empty
+- `event ` will cause Duke to produce an error message that the description and /at cannot be empty  
   ![img_3.png](screenshots/img_3.png)
 - `event meeting` will cause Duke to produce an error message to give the correct form.
   ![img_4.png](screenshots/img_4.png)
@@ -97,7 +97,7 @@ Format: `find SEARCH_TERM`
 Examples:
 - `find book` returns all the tasks that match with "book".  
   ![img_10.png](screenshots/img_10.png)  
-- `find` returns an error message to say the search term canntot be empty.  
+- `find` returns an error message to say the search term cannot be empty.  
   ![img_11.png](screenshots/img_11.png)  
 
 ### Delete a task: `delete`
@@ -151,22 +151,22 @@ Examples:
 **A**: Place the storage text file in the same folder as `ip.jar` when running on another computer
   
 ## Command Summary:  
-Command | Format, Examples
---------|------------------
-**Add Todo** |`todo DESCRIPTION` <br/>e.g. `todo read book`
-**Add Event** | `event DESCRIPTION /at TIME` <br/>e.g. `event meeting /at 4pm`
-**Add Deadline** | `deadline DESCRIPTION /by TIME` <br/> e.g. `return book /by Sunday`
-**List** | `list`
-**Find** | `find SEARCH_TERM` <br/> e.g `find book`
-**Delete** | `delete INDEX` <br/> e.g. `delete 2`
-**Done** | `done INDEX` <br/> e.g. `done 1`
-**Exit** | `bye`
+Command | Format, Examples|
+--------|------------------|
+**Add Todo** |`todo DESCRIPTION` <br/>e.g. `todo read book`|
+**Add Event** | `event DESCRIPTION /at TIME` <br/>e.g. `event meeting /at 4pm`|
+**Add Deadline** | `deadline DESCRIPTION /by TIME` <br/> e.g. `return book /by Sunday`|
+**List** | `list`|
+**Find** | `find SEARCH_TERM` <br/> e.g `find book`|
+**Delete** | `delete INDEX` <br/> e.g. `delete 2`|
+**Done** | `done INDEX` <br/> e.g. `done 1`|
+**Exit** | `bye`|
 
 ## Contributors:
 Feel free to contact the developers if you want to contribute or if there are any issues or
 bugs that you would like to report. Alternatively, you can use GitHub Issues for this as well!
 
-Name | Role| Contact:
-----| ---- | ----
-Sean | Main Developer | [@seangoats](https://www.github.com/seangoats)
+Name | Role| Contact:|
+----| ---- | ----|
+Sean | Main Developer | [@seangoats](https://www.github.com/seangoats)|
 
