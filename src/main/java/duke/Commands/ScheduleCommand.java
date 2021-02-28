@@ -3,6 +3,7 @@ package duke.Commands;
 import duke.Storage;
 import duke.TaskList;
 import duke.Tasks.Task;
+import duke.Tasks.Todo;
 import duke.Ui;
 
 import java.time.LocalDate;
@@ -28,7 +29,7 @@ public class ScheduleCommand extends Command {
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         ArrayList<Task> filteredTaskList = new ArrayList<>();
         for (Task task : taskList.getTaskList()) {
-            if (task.getDateTime().format(outputFormatter).equals(date.format(outputFormatter))) {
+            if (!(task instanceof Todo) && task.getDateTime().format(outputFormatter).equals(date.format(outputFormatter))) {
                 filteredTaskList.add(task);
             }
         }
