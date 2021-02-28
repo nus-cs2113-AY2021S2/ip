@@ -33,6 +33,9 @@ public class Parser {
         case "delete":
             parseDeleteCommand(commandContent);
             break;
+        case "find":
+            parseFindCommand(commandContent);
+            break;
         default:
             break;
         }
@@ -68,5 +71,9 @@ public class Parser {
     private static void parseDeleteCommand(String commandContent) {
         int deletedIndex = Integer.parseInt(commandContent);
         TaskList.deleteTask(deletedIndex);
+    }
+
+    private static void parseFindCommand(String commandContent) {
+        TaskList.getFoundTask(commandContent);
     }
 }
