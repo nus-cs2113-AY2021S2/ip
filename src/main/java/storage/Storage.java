@@ -19,8 +19,7 @@ public class Storage {
     private static final TaskHandler taskHandler = new TaskHandler();
 
     /**
-     * Try-catch block for attempting to load a file if it exist.
-     * Print the relevant welcome message and file loading status.
+     * Print the welcome and file loading message status.
      */
     public static void initFile() {
         Ui.printWelcomeMessage();
@@ -38,7 +37,7 @@ public class Storage {
     }
 
     /**
-     * Load and read the file input and then add them to the task list.
+     * Load and read the file input and add them to the task list.
      *
      * @throws IOException if the file is unable to load.
      */
@@ -52,41 +51,42 @@ public class Storage {
         while (fileScanner.hasNextLine()) {
             fileData = fileScanner.nextLine();
             processFileData(fileData, taskHandler.getTaskCount());
-            taskHandler.increaseTaskCount();
         }
     }
 
     /**
-     * Add the type of task to the task list based on the input record.
-     * Default print out any unexpected data found during the process.
+     * Check the type of tasks and add to the task list.
      *
      * @param fileData is the record of 1 task from the file.
      * @param taskNumber is the current index in the task list managed by taskHandler.
      */
     private static void processFileData(String fileData, int taskNumber) {
         String[] splitFileData = fileData.split(" \\| ");
-        String fileInput, fileDescription, fileTiming;
+        String fileDescription, fileTiming;
         int argumentLength = splitFileData.length;
         switch (splitFileData[0]) {
         case "T":
-            fileInput = extractFileInfo(splitFileData,2, argumentLength);
-            taskHandler.addTask(new Todo(fileInput));
+            fileDescription = extractFileInfo(splitFileData,2, argumentLength);
+            taskHandler.addTask(new Todo(fileDescription));
             checkFileInputDoneStatus(taskNumber, splitFileData);
+            taskHandler.increaseTaskCount();
             break;
         case "D":
             fileDescription = extractFileInfo(splitFileData, 2, argumentLength - 1);
             fileTiming = extractFileInfo(splitFileData,argumentLength - 1, argumentLength);
             taskHandler.addTask(new Deadline(fileDescription + " ", fileTiming));
             checkFileInputDoneStatus(taskNumber, splitFileData);
+            taskHandler.increaseTaskCount();
             break;
         case "E":
             fileDescription = extractFileInfo(splitFileData, 2, argumentLength - 1);
             fileTiming = extractFileInfo(splitFileData,argumentLength - 1, argumentLength);
             taskHandler.addTask(new Event(fileDescription + " ", fileTiming));
             checkFileInputDoneStatus(taskNumber, splitFileData);
+            taskHandler.increaseTaskCount();
             break;
         default:
-            System.out.println("Unknown file data");
+            System.out.println("Unknown file data at line: " + (taskNumber+1));
         }
     }
 
@@ -119,8 +119,7 @@ public class Storage {
     }
 
     /**
-     * Try-catch block for attempting to save the current task list into a file.
-     * Prints an error if error an occur during the saving process.
+     * Save the task list to the hard disk.
      */
     public static void saveFile() {
         try {
@@ -142,9 +141,9 @@ public class Storage {
     }
 
     /**
-     * Convert the task list to the saving format.
+     * Convert the task list to the saving format for hard disk writing.
      *
-     * @return a string containing the format for writing in the file by calling method.
+     * @return a string in file saving format
      */
     private static String convertToFileInput() {
         return taskHandler.toFileFormat();

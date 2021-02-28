@@ -159,7 +159,7 @@ public class CommandHandler {
 
     /**
      * Perform the invalid operation.
-     * Prints the try again message to inform the user of wrong format.
+     * Prints the try again message.
      */
     private static void performInvalid() {
         Ui.printDefaultMessage();
@@ -167,7 +167,7 @@ public class CommandHandler {
 
     /**
      * Perform the default invalid operation.
-     * Prints the unrecognizable message to inform the user of invalid command code.
+     * Prints the unrecognizable message for invalid command code.
      */
     private static void performDefault() {
         Ui.printDefaultInvalidMessage();

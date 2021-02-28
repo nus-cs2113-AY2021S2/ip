@@ -55,7 +55,7 @@ public class Parser {
     }
 
     /**
-     * Try-catch validation block for printing error messages of 'done' command.
+     * Returns the done command code if valid or prints the error message if invalid.
      *
      * @param userInput is the input from the console terminal.
      * @param words contains the individual words from userInput.
@@ -80,7 +80,7 @@ public class Parser {
     }
 
     /**
-     * Try-catch validation block for printing error messages of 'todo' command.
+     * Returns the todo command code if valid or prints the error message if invalid.
      *
      * @param userInput is the input from the console terminal.
      * @param words contains the individual words from userInput.
@@ -97,7 +97,7 @@ public class Parser {
     }
 
     /**
-     * Try-catch validation block for printing error messages of 'deadline' command.
+     * Returns the deadline command code if valid or prints the error message if invalid.
      *
      * @param userInput is the input from the console terminal.
      * @return valid or invalid command code for 'deadline' command.
@@ -125,7 +125,7 @@ public class Parser {
     }
 
     /**
-     * Try-catch validation block for printing error messages of 'event' command.
+     * Returns the event command code if valid or prints the error message if invalid.
      *
      * @param userInput is the input from the console terminal.
      * @return valid or invalid command code for 'event' command.
@@ -149,7 +149,7 @@ public class Parser {
     }
 
     /**
-     * Try-catch validation block for printing error messages of 'delete' command.
+     * Returns the delete command code if valid or prints the error message if invalid.
      *
      * @param userInput is the input from the console terminal.
      * @param words contains the individual words from userInput.
@@ -174,7 +174,7 @@ public class Parser {
     }
 
     /**
-     * Try-catch validation block for printing error messages of 'find' command.
+     * Returns the find command code if valid or prints the error message if invalid.
      *
      * @param userInput is the input from the console terminal.
      * @param words contains the individual words from userInput.
@@ -191,7 +191,7 @@ public class Parser {
     }
 
     /**
-     * Check if the input is in correct format.
+     * Validate that the done command is in correct format.
      *
      * @param words contains the individual words from userInput.
      * @throws DoneCommandException if the task number given is smaller than 1.
@@ -208,7 +208,7 @@ public class Parser {
     }
 
     /**
-     * Check if the input is in correct format.
+     * Validate that the todo command is in correct format.
      *
      * @param words contains the individual words from userInput.
      * @throws EmptyTaskDescriptionException if the task description is empty.
@@ -223,7 +223,7 @@ public class Parser {
     }
 
     /**
-     * Check if the input is in correct format.
+     * Validate that the deadline command is in correct format.
      *
      * @param userInput is the input from the console terminal.
      * @throws DeadlineCommandException if the deadline identifier format is wrong.
@@ -253,7 +253,7 @@ public class Parser {
     }
 
     /**
-     * Check if the input is in correct format.
+     * Validate that the event command is in correct format.
      *
      * @param userInput is the input from the console terminal.
      * @throws EventCommandException if the event identifier format is wrong.
@@ -281,7 +281,7 @@ public class Parser {
     }
 
     /**
-     * Check if the input is in correct format.
+     * Validate that the delete command is in correct format.
      *
      * @param words contains the individual words from userInput.
      * @throws DeleteCommandException if the task number given is smaller than 1.
@@ -298,7 +298,7 @@ public class Parser {
     }
 
     /**
-     * Check if the input is in correct format.
+     * Validate that the find command is in correct format.
      *
      * @param words contains the individual words from userInput.
      * @throws FindCommandException if no keyword is given.

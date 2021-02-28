@@ -48,7 +48,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Return the task information for writing to hard disk.
+     * Return the output format for writing to hard disk.
      *
      * @return a string in correct file format for writing.
      */

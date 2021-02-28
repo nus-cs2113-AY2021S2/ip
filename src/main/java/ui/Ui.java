@@ -72,7 +72,7 @@ public class Ui {
     }
 
     /**
-     * Prints the invalid command.
+     * Prints the invalid input entered by the user.
      *
      * @param invalidUserInput is the input from the console terminal entered by the user.
      */

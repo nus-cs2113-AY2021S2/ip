@@ -73,7 +73,7 @@ public class Task {
     }
 
     /**
-     * Return the true or false based on the completion status of the task.
+     * Return true or false based on the completion status of the task.
      *
      * @return true if done, false if undone.
      */
