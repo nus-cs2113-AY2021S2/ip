@@ -1,38 +1,40 @@
 import command.Command;
+import exception.DukeException;
 import parser.Parser;
-import storage.Storage;
 import task.TaskManager;
 import ui.Ui;
 
 import java.io.FileNotFoundException;
 
+
+
 public class Duke {
     private Ui ui;
     private TaskManager taskList;
-    private Storage storage;
 
-    public Duke() throws FileNotFoundException {
+    public Duke() throws FileNotFoundException, DukeException {
         ui = new Ui();
         taskList = new TaskManager();
-        storage = new Storage();
     }
 
-    public void run(){
-        boolean isBye = false;
+    /***
+     * Runs the duke program
+     */
+    public void run() {
+        boolean isBye;
         ui.printMenu();
-        do{
+        do {
             String userInput = ui.getUserInput();
             String newUserInput = userInput.toUpperCase();
             Command command = Parser.parseCommand(newUserInput.toUpperCase());
             command.executeCommand(newUserInput, taskList);
             isBye = ui.sayGoodBye(newUserInput);
-        }while(!isBye);
+        } while (!isBye);
     }
 
 
-
     public static class Main {
-        public static void main(String[] args) throws FileNotFoundException {
+        public static void main(String[] args) throws FileNotFoundException, DukeException {
             new Duke().run();
         }
     }
