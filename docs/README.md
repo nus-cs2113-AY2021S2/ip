@@ -2,7 +2,7 @@
 By: `Oscar Lai` Latest Update: `28-Feb-2021`
 
 
-![logo](./docs/alfred-meme.png)
+![logo](./alfred-meme.png)
 
 - [Alfred Guide](#alfred-user-guide)
    * [1. Introduction](#1-introduction)
