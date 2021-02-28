@@ -1,28 +1,21 @@
 package duke.task;
 
-<<<<<<< HEAD
-/**
- * Subclass of Task that is used to represent Deadline tasks created by user
- */
-=======
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
->>>>>>> 6ac82591c9ac6bd152a793df7e203a11f55898b6
+/**
+ * Subclass of Task that is used to represent Deadline tasks created by user
+ */
 public class Deadline extends Task {
     protected LocalDateTime by;
 
-<<<<<<< HEAD
     /**
      * Constructor method for Deadline class
      *
      * @param description Description of the deadline
      * @param by Date and time (deadline) that the task needs to be completed by
      */
-    public Deadline(String description, String by) {
-=======
     public Deadline(String description, LocalDateTime by) {
->>>>>>> 6ac82591c9ac6bd152a793df7e203a11f55898b6
         super(description);
         this.by = by;
     }

@@ -1,28 +1,21 @@
 package duke.task;
 
-<<<<<<< HEAD
-/**
- * Subclass of Task that is used to represent Event tasks created by user
- */
-=======
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
->>>>>>> 6ac82591c9ac6bd152a793df7e203a11f55898b6
+/**
+ * Subclass of Task that is used to represent Event tasks created by user
+ */
 public class Event extends Task {
     protected LocalDateTime at;
 
-<<<<<<< HEAD
     /**
      * Constructor method for Event class
      *
      * @param description Description of the event
      * @param at Date and time that the event is at
      */
-    public Event(String description, String at) {
-=======
     public Event(String description, LocalDateTime at) {
->>>>>>> 6ac82591c9ac6bd152a793df7e203a11f55898b6
         super(description);
         this.at = at;
     }
