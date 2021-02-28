@@ -42,7 +42,7 @@ public class Ui {
             + BORDER;
     public static final String HELP_PAGE = BORDER
             + "HELP PAGE" + NEWLINE
-            + "This is the list of all valid commands:" + NEWLINE + NEWLINE
+            + "Here are all the valid commands:" + NEWLINE + NEWLINE
             + "\thelp" + NEWLINE
             + "\t - displays all valid commands" + NEWLINE + NEWLINE
             +"\tbye" + NEWLINE
@@ -51,13 +51,17 @@ public class Ui {
             + "\t- displays all tasks in the list" + NEWLINE + NEWLINE
             + "\ttodo     | <task>" + NEWLINE
             + "\t- adds specified task to the list" + NEWLINE + NEWLINE
-            + "\tdeadline | <task>  | /by | <deadline>" + NEWLINE
-            + "\t- adds specified task and deadline and to the list" + NEWLINE + NEWLINE
+            + "\tdeadline | <task>  | /by | <yyyy-mm-ddTHH:mm>" + NEWLINE
+            + "\t- adds specified task and deadline to the list" + NEWLINE
+            + "\t- note: date (yyyy-mm-dd) and time (HH:mm) should be" + NEWLINE
+            + "\t  separated by \"T\" in deadline (second input field)" + NEWLINE
+            + "\t- example: to represent the deadline \"2 Dec 2021, 6PM\"" + NEWLINE
+            + "\t  second input field should be 2021-12-02T18:00" + NEWLINE + NEWLINE
             + "\tevent    | <task>  | /at | <timing>" + NEWLINE
             + "\t- adds specified task and timing to the list" + NEWLINE + NEWLINE
             + "\tdone     | <index>" + NEWLINE
-            + "\t- marks existing task matching the specified index"
-            + "as completed in the list" + NEWLINE  + NEWLINE
+            + "\t- marks existing task matching the specified index" + NEWLINE
+            + "\t  as completed in the list" + NEWLINE  + NEWLINE
             + "<> indicates an input field and | is a field separator." + NEWLINE
             + BORDER + NEWLINE;
 
@@ -73,9 +77,12 @@ public class Ui {
             = "Squeal? There is no task in the list with index ";
     public static final String INVALID_TASK_MESSAGE
             = "Squeal... Are you sure that is a task?";
+    public static final String INVALID_DATE_FORMAT_MESSAGE
+            = "Squeal, date format is invalid!" + NEWLINE
+            + "Use \"help\" for more info.";
 
 
-    /** Other error messages */
+    /** File storage error messages */
     public static final String LOADING_ERROR_MESSAGE
             = "Failed to load from disk, creating a new file!";
     public static final String SAVING_ERROR_MESSAGE

@@ -2,6 +2,8 @@ package duke.commands;
 
 import static duke.common.Constants.DEADLINE_TASK_TYPE;
 
+import java.time.LocalDateTime;
+
 import duke.TaskList;
 import duke.tasks.Deadline;
 import duke.tasks.Task;
@@ -9,9 +11,9 @@ import duke.tasks.Task;
 public class DeadlineCommand extends Command {
     private String taskDescription;
     private String taskStatus;
-    private String taskDeadline;
+    private LocalDateTime taskDeadline;
 
-    public DeadlineCommand(TaskList tasks, String taskDescription, String taskStatus, String taskDeadline) {
+    public DeadlineCommand(TaskList tasks, String taskDescription, String taskStatus, LocalDateTime taskDeadline) {
         super.tasks = tasks;
         this.taskDescription = taskDescription;
         this.taskStatus = taskStatus;
