@@ -62,9 +62,17 @@ Adds a todo task to the task list.
 
 Format: `todo <task>`
 
-Examples:
+Sample input: `todo Update Duke User Guide`
 
-* `todo Update Duke User Guide`
+Expected output:
+
+```
+────────────────────────────────────────────────────────────
+Got it. I've added this task:
+        [T][ ] Update Duke User Guide
+Now you have 1 tasks in the list.
+────────────────────────────────────────────────────────────
+```
 
 ### Adding a deadline: `deadline`
 
@@ -72,15 +80,52 @@ Adds a deadline task to the task list.
 
 Format: `deadline <task> /by <deadline date>`
 
+Sample input: `deadline Publish Final Version /by 2/3/2021`
+
+Expected output:
+
+```
+────────────────────────────────────────────────────────────
+Got it. I've added this task:
+        [D][ ] Publish Final Version (by: 2 Mar 2021)
+Now you have 2 tasks in the list.
+────────────────────────────────────────────────────────────
+```
+
 ### Adding an event: `event`
 
 Adds an event task to the task list.
 
 Format: `event <task> /at <event date> <event time>`
 
+Sample input: `event CS2113T Tutorial /at 3/3/2021 0900`
+
+Expected output:
+
+```
+────────────────────────────────────────────────────────────
+Got it. I've added this task:
+        [E][ ] CS2113T Tutorial (at: 3 Mar 2021 09:00 AM)
+Now you have 3 tasks in the list.
+────────────────────────────────────────────────────────────
+```
+
 ### Listing all tasks: `list`
 
 Shows a list of all tasks in the task list.
+
+Format: `list`
+
+Expected output:
+
+```
+────────────────────────────────────────────────────────────
+Here are the tasks in your list:
+ 1. [T][ ] Update Duke User Guide
+ 2. [D][ ] Publish Final Version (by: 2 Mar 2021)
+ 3. [E][ ] CS2113T Tutorial (at: 3 Mar 2021 09:00 AM)
+────────────────────────────────────────────────────────────
+```
 
 ### Marking a task as done: `done`
 
@@ -90,6 +135,17 @@ Format: `done <task number>`
 
 * Requires knowledge of the task number to be set done. Use `list`.
 
+Sample input: `done 1`
+
+Expected output:
+
+```
+────────────────────────────────────────────────────────────
+Nice! I've marked this task as done:
+        [T][✘] Update Duke User Guide
+────────────────────────────────────────────────────────────
+```
+
 ### Deleting a task: `delete`
 
 Deletes the task specified from the task list.
@@ -98,13 +154,33 @@ Format: `delete <task nunber>`
 
 * Requires knowledge of the task number to be deleted. Use `list`.
 
+Sample input: `delete 3`
+
+Expected output:
+
+```
+────────────────────────────────────────────────────────────
+Got it. I've deleted this task:
+        [E][ ] CS2113T Tutorial (at: 3 Mar 2021 09:00 AM)
+────────────────────────────────────────────────────────────
+```
+
 ### Finding tasks by keyword: `find`
 
 Finds tasks with task description that contain the keyword.
 
 Format: `find <keyword>`
 
-Example: `find book`
+Sample input: `find Final`
+
+Expected output:
+
+```
+────────────────────────────────────────────────────────────
+Here are the matching tasks in your list:
+ 2. [D][ ] Publish Final Version (by: 2 Mar 2021)
+────────────────────────────────────────────────────────────
+```
 
 ### Finding tasks by date: `date`
 
@@ -112,13 +188,30 @@ Finds events/deadlines that is due/occur at the given date.
 
 Format: `date <dd/MM/yyyy>`
 
-Example: `find 5/3/2021`
+Sample input: `find 2/3/2021`
+
+Expected output:
+
+```
+────────────────────────────────────────────────────────────
+Here are deadlines/events on 2 Mar 2021:
+ 2. [D][ ] Publish Final Version (by: 2 Mar 2021)
+────────────────────────────────────────────────────────────
+```
 
 ### Exiting the program: `bye`
 
 Exits the program.
 
 Format: `bye`
+
+Expected output:
+
+```
+────────────────────────────────────────────────────────────
+ Bye. Hope to see you again soon!
+────────────────────────────────────────────────────────────
+```
 
 ### Saving the data
 
@@ -130,14 +223,13 @@ Editing of the data file is possible but not recommended although Duke tries to 
 
 ## Command summary
 
-| Action | Format, Examples                                                                            |
-| ------ | ------------------------------------------------------------------------------------------- |
-| Add    | `todo/deadline/event <task>` e.g., `deadline Duke Command Summary /by 1/3/2021` |
-| List   | `list`                                                                                      |
-| Done   | `done <task number>` e.g. `done 3`                                                          |
-| Delete | `delete <task number>` e.g., `delete 1`                                                     |
-| Find   | `find <keyword>` e.g., `find CS2113T`                                                       |
-| Date   | `date <dd/MM/yyyy>` e.g., `date 28/2/2021`                                                  |
-| Bye    | `bye`                                                                                       |
-| Help   | `help`                                                                                      |
-
+| Action | Format                       | Examples                                     |
+| ------ | ---------------------------- | -------------------------------------------- |
+| Add    | `todo/deadline/event <task>` | `deadline Duke Command Summary /by 1/3/2021` |
+| List   | `list`                       | `list`                                       |
+| Done   | `done <task number>`         | `done 3`                                     |
+| Delete | `delete <task number>`       | `delete 1`                                   |
+| Find   | `find <keyword>`             | `find CS2113T`                               |
+| Date   | `date <dd/MM/yyyy>`          | `date 28/2/2021`                             |
+| Bye    | `bye`                        | `bye`                                        |
+| Help   | `help`                       | `help`                                       |
