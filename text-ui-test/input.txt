@@ -1,13 +1,13 @@
 help
-blah
-list
-todo
-todo sleep
+todo eat
 deadline homework /by tomorrow
-event birthday /at friday
-done
-done 2
-done 2
-done 4
+list
+event party /at friday 2pm
+done 1
+done 1
+done 5
+delete 1
+find party
+blah
 list
 bye

@@ -1,8 +1,8 @@
 package duke.ui;
 
 import duke.task.Task;
-
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 
@@ -14,24 +14,26 @@ public class Ui {
 
     public static final String BORDER = "============================================================";
     public static final String HELP_MESSAGE = " HELP COMMANDS\n"
-        + "todo: adds to list\n"
+        + "todo: adds a todo task to the list\n"
         + " Example: todo sleep\n\n"
-        + "deadline: adds to list\n"
+        + "deadline: adds a deadline task to the list\n"
         + " Example: deadline homework /by tomorrow\n\n"
-        + "event: adds to list\n"
-        + " Example: event block event /at tuesday\n\n"
+        + "event: adds an event task to the list\n"
+        + " Example: event birthday party /at tuesday\n\n"
         + "List: view list\n"
         + " Example: list\n\n"
         + "Help: view help commands\n"
         + " Example: Help\n\n"
-        + "Done: check task as done\n"
+        + "Done: mark a task as done\n"
         + " Example: Done 2\n\n"
-        + "Delete: deletes task from list\n"
+        + "Delete: deletes a task from list\n"
         + " Example: delete 2\n\n"
+        + "Find: find task that contains substring of input\n"
+        + " Example: find birthday\n\n"
         + "Duke.txt Format: \n"
         + "[✓] todo gym\n"
-        + "[✓] deadline project meeting /by 21st feb\n"
-        + "[ ] event football /at friday 2pm\n\n"
+        + "[✓] deadline project meeting by 21st feb\n"
+        + "[ ] event football at friday 2pm\n\n"
         + "Bye:  terminate program\n"
         + " Example: bye\n\n"
         + BORDER;
@@ -50,13 +52,14 @@ public class Ui {
             + "   ノ )　　Lﾉ\n"
             + "  (_／";
         printBorder();
-        System.out.println("Welcome to Duke v1.0 ----------- Latest Update: 23/2/21");
+        System.out.println("Welcome to Duke v1.1 ----------- Latest Update: 28/2/21");
         System.out.println("Developed by: Oscar Lai");
         printBorder();
         System.out.println("Good Day, I'm Alfred.\n" + alfred);
         printBorder();
     }
 
+    /** Prints exit message after user inputs "bye". */
     public static void printExit() {
         String wave = " __      __\n"
             + "( _\\    /_ )\n"
@@ -71,7 +74,7 @@ public class Ui {
         System.out.println("Duke.txt file Updated!");
         printBorder();
         System.out.println("Developed by: Oscar Lai\n"
-            + "Version 1.0");
+                + "Version 1.1");
         printBorder();
     }
 
@@ -80,8 +83,9 @@ public class Ui {
     }
 
     /**
-     * Print the number of task in list
-     * @param list - ArrayList
+     * Print the number of task in the list.
+     *
+     * @param list The ArrayList to store all existing tasks from Duke.txt
      */
     public static void printNoOfTask(ArrayList<Task> list) {
         System.out.print("You have " + list.size() + " task");
@@ -93,33 +97,34 @@ public class Ui {
     }
 
     /**
-     * Prints Added Task
-     * @param index - Index of task in List
-     * @param list - ArrayList
+     * Prints the task that has been added to list
+     *
+     * @param index Index of task in List
+     * @param list The ArrayList to store all existing tasks from Duke.txt
      */
     public static void printAddedTask(int index, ArrayList<Task> list) {
         Task t = list.get(index);
         System.out.println("I have added [" + t.getType() + "]["
-            + t.getStatusIcon() + "] \""
-            + t.getName() + t.getDate() + "\"" + " to the List!");
+                + t.getStatusIcon() + "] \""
+                + t.getName() + t.getDate() + "\"" + " to the List!");
         Ui.printNoOfTask(list);
     }
 
     /**
-     * Prints task found that matches substring searchItem
-     * Returns NONEXISTENT_TASK_ERROR message if no such item found
-     * @param searchItem - item that is finding
-     * @param list - ArrayList
+     * Prints all task in list that contains substring in its input
+     *
+     * @param searchItem Input that wants to be searched
+     * @param list The ArrayList to store all existing tasks from Duke.txt
      */
     public static void printFindTask(String searchItem, ArrayList<Task> list) {
         System.out.println("I have found the follow items: ");
         int foundCounter = 0;
         for(int i = 0; i < list.size(); i++) {
-            if(list.get(i).getName().contains(searchItem)) {
+            if(list.get(i).getName().toLowerCase().contains(searchItem)) {
                 Task t = list.get(i);
                 System.out.println(foundCounter+1 + ". " + "[" + t.getType() + "]["
-                    + t.getStatusIcon() + "] \""
-                    + t.getName() + t.getDate() + "\"" );
+                        + t.getStatusIcon() + "] \""
+                        + t.getName() + t.getDate() + "\"" );
                 foundCounter += 1;
             }
         }
@@ -130,60 +135,63 @@ public class Ui {
     }
 
     /**
-     * Check Error Method
-     * Returns error code message
-     * @param ERROR_MESSAGE - Error Message
+     * Prints error message according to error type
+     *
+     * @param ERROR_MESSAGE type of Error
      */
     public static void checkError(String ERROR_MESSAGE) {
         switch (ERROR_MESSAGE) {
-            case "WRONG_DONE_FORMAT":
-                System.out.println("Error! You must enter an integer after"
+        case "WRONG_DONE_FORMAT":
+            //Done command is not followed by an integer
+            System.out.println("Error! You must enter an integer after"
                     + " \"done\"!");
-                printBorder();
-                break;
-            case "INDEX_EXCEEDS_LIST":
-                System.out.println("Error! You do not have that "
-                    + "many items in your list!");
-                printBorder();
-                break;
-            case "EMPTY_LIST":
-                System.out.println("Your list is empty! Add something!");
-                printBorder();
-                break;
-            case "DONE_CHECKED_ERROR":
-                System.out.println("You have already marked it as Done!");
-                printBorder();
-                break;
-            case "INVALID_FORMAT":
-                System.out.println("¯\\_(ツ)_/¯ That is an invalid format!");
-                System.out.println("Enter HELP for commands!");
-                printBorder();
-                break;
-            case "LIST_FULL":
-                System.out.println("List is full!");
-                printBorder();
-                break;
-            case "WRONG_DELETE_FORMAT":
-                System.out.println("Error! You must enter a valid integer after"
+            printBorder();
+            break;
+        case "INDEX_EXCEEDS_LIST":
+            // Trying to mark a task that does note list
+            System.out.println("Error! You do not have that "
+                    + "many tasks in your list!");
+            printBorder();
+            break;
+        case "EMPTY_LIST":
+            System.out.println("Your list is empty! Add something!");
+            printBorder();
+            break;
+        case "DONE_CHECKED_ERROR":
+            // Task has already been marked done
+            System.out.println("You have already marked it as Done!");
+            printBorder();
+            break;
+        case "INVALID_FORMAT":
+            System.out.println("¯\\_(ツ)_/¯ That is an invalid format! "
+                    + "Enter \"HELP\" for commands!");
+            printBorder();
+            break;
+        case "LIST_FULL":
+            System.out.println("List is full!");
+            printBorder();
+            break;
+        case "WRONG_DELETE_FORMAT":
+            // Delete is not followed by a integer
+            System.out.println("Error! You must enter a valid integer after"
                     + " \"delete\"!");
-                printBorder();
-                break;
-            case "DELETE_EMPTY_LIST":
-                System.out.println("Error! You cannot delete what does not exist!");
-                printBorder();
-                break;
-            case "INVALID_COMMAND":
-                System.out.println("¯\\_(ツ)_/¯ That is an invalid command!");
-                System.out.println("Enter \"HELP\" for commands!");
-                printBorder();
-                break;
-            case "NONEXISTENT_TASK_ERROR":
-                System.out.println("Error! No such task found!");
-                break;
-            case "FILE_NOT_FOUND":
-                System.out.println("Duke.txt not found in directory. "
-                    + "Please try again!");
-                printBorder();
+            printBorder();
+            break;
+        case "DELETE_EMPTY_LIST":
+            System.out.println("Error! You cannot delete what does not exist!");
+            printBorder();
+            break;
+        case "INVALID_COMMAND":
+            System.out.println("¯\\_(ツ)_/¯ That is an invalid command! "
+                    + "Enter \"HELP\" for commands!");
+            printBorder();
+            break;
+        case "NONEXISTENT_TASK_ERROR":
+            System.out.println("Error! No such task found!");
+            break;
+        case "IO Error":
+            System.out.println("IO Error: Please try again!");
+            printBorder();
         }
     }
 

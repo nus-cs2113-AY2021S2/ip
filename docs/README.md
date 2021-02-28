@@ -1,13 +1,14 @@
 # Alfred User Guide
 By: `Oscar Lai` Latest Update: `28-Feb-2021`
 
+
 ![logo](./alfred-meme.png)
 
 - [Alfred Guide](#alfred-user-guide)
    * [1. Introduction](#1-introduction)
    * [2. Quick Start](#2-quick-start)
       + [2.1. Quick start using latest jar file](#21-quick-start-by-downloading-the-latest-jar-file)
-      + [2.2. Quick start using IntelliJ](#22--quick-start-on-intellij-version-202032-latest-and-beyond)
+      + [2.2. Quick start using IntelliJ](#22-quick-start-on-intellij-version-202032-latest-and-beyond)
    * [3. Features](#3-features)
       + [3.1. Todo](#31-add-a-todo-task-todo)
       + [3.2. Deadline](#32-add-a-deadline-task-deadline)
@@ -23,6 +24,35 @@ By: `Oscar Lai` Latest Update: `28-Feb-2021`
          - [3.10.2. Saving Data](#3102-saving-data)
    * [4. FAQ](#4-faq)
    * [5. Command Summary](#5-command-summary)
+
+## 1. Introduction 
+Who is Gotham's true saviour? Is it the Dark Knight? Is it Robin or is it Batgirl? The true
+answer is none other than Alfred Pennyworth. Alfred will help you keep track of your busy schedule noting your
+todo, events and deadlines, optimized for use via a **Command Line Interface** CLI. He will mark it as done and remind you the tasks you have left. He is the silent guardian, the
+watchful protector, a dark knight.
+
+## 2. Quick Start 
+Prerequisites: JDK11, the latest version of IntelliJ
+###2.1 Quick Start by downloading the latest jar file
+1. Ensure you have Java `11` installed in your computer.
+2. Download the latest `Duke.jar` from [here](https://github.com/oscarlai1998/ip/releases).
+3. Copy the file to a new folder you want to run `Duke` in.
+4. For Windows User, open **Command Prompt**.
+
+   For Mac Users, open **Terminal**.
+
+   Navigate to the directory containing `Duke.jar` file.
+
+   i.e. `cd <FILEPATH>`
+5. Run Duke.jar file by using the command `java -jar Duke.jar`.
+
+### 2.2  Quick start on IntelliJ version 2020.3.2 (latest) and beyond
+1. Clone the latest version of the project to your local computer from [here](https://github.com/oscarlai1998/ip).
+2. Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
+3. Import the project by:
+   
+   i. Click `Open`
+
 
 ## 1. Introduction 
 Who is Gotham's true saviour? Is it the Dark Knight? Is it Robin or is it Batgirl? The true

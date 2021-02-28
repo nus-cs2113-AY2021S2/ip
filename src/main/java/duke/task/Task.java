@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Task class - object corresponds to a task represented by name and check mark.
+ */
 public abstract class Task {
     private final String name;
     protected boolean isDone;
@@ -30,7 +33,8 @@ public abstract class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : " "); //return tick as done and empty as not done
+        //return tick as done and empty as not done
+        return (isDone ? "\u2713" : " ");
     }
 
     abstract public String outputData();

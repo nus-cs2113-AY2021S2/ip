@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Deadline class - object corresponds to a Deadline task represented by name and time
+ */
 public class Deadline extends Task {
 
     protected String deadlineTime;
@@ -16,11 +19,11 @@ public class Deadline extends Task {
 
     @Override
     public String getDate() {
-        return " (by: " + deadlineTime + ")";
+        return " (By: " + deadlineTime + ")";
     }
 
     @Override
     public String outputData() {
-        return "[" + getStatusIcon() + "] " + "deadline " + getName() + " /by " + deadlineTime;
+        return "[" + getStatusIcon() + "] " + "deadline " + getName() + " by " + deadlineTime;
     }
 }

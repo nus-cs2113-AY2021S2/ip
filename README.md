@@ -1,28 +1,29 @@
 # Alfred User Guide
 By: `Oscar Lai` Latest Update: `28-Feb-2021`
 
+
 ![logo](./docs/alfred-meme.png)
 
 - [Alfred Guide](#alfred-user-guide)
-    * [1. Introduction](#1-introduction)
-    * [2. Quick Start](#2-quick-start)
-        + [2.1. Quick start using latest jar file](#21-quick-start-by-downloading-the-latest-jar-file)
-        + [2.2. Quick start using IntelliJ](#22--quick-start-on-intellij-version-202032-latest-and-beyond)
-    * [3. Features](#3-features)
-        + [3.1. Todo](#31-add-a-todo-task-todo)
-        + [3.2. Deadline](#32-add-a-deadline-task-deadline)
-        + [3.3. Event](#33-add-an-event-task-event)
-        + [3.4. List](#34-list-all-tasks-list)
-        + [3.5. Done](#35-mark-a-task-as-done-done)
-        + [3.6. Delete](#36-delete-a-task-delete)
-        + [3.7. Find](#37-search-task-by-a-keyword-find)
-        + [3.8. Help](#38-find-list-of-commands-help)
-        + [3.9. Bye](#39-exit-program-bye)
-        + [3.10 Task Storage](#310-task-storage)
-            - [3.10.1. Loading Data](#3101-loading-data)
-            - [3.10.2. Saving Data](#3102-saving-data)
-    * [4. FAQ](#4-faq)
-    * [5. Command Summary](#5-command-summary)
+   * [1. Introduction](#1-introduction)
+   * [2. Quick Start](#2-quick-start)
+      + [2.1. Quick start using latest jar file](#21-quick-start-by-downloading-the-latest-jar-file)
+      + [2.2. Quick start using IntelliJ](#22--quick-start-on-intellij-version-202032-latest-and-beyond)
+   * [3. Features](#3-features)
+      + [3.1. Todo](#31-add-a-todo-task-todo)
+      + [3.2. Deadline](#32-add-a-deadline-task-deadline)
+      + [3.3. Event](#33-add-an-event-task-event)
+      + [3.4. List](#34-list-all-tasks-list)
+      + [3.5. Done](#35-mark-a-task-as-done-done)
+      + [3.6. Delete](#36-delete-a-task-delete)
+      + [3.7. Find](#37-search-task-by-a-keyword-find)
+      + [3.8. Help](#38-find-list-of-commands-help)
+      + [3.9. Bye](#39-exit-program-bye)
+      + [3.10 Task Storage](#310-task-storage)
+         - [3.10.1. Loading Data](#3101-loading-data)
+         - [3.10.2. Saving Data](#3102-saving-data)
+   * [4. FAQ](#4-faq)
+   * [5. Command Summary](#5-command-summary)
 
 ## 1. Introduction
 Who is Gotham's true saviour? Is it the Dark Knight? Is it Robin or is it Batgirl? The true
