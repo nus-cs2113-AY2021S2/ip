@@ -1,11 +1,18 @@
 package duke.task;
 
+<<<<<<< HEAD
 /**
  * Subclass of Task that is used to represent Deadline tasks created by user
  */
-public class Deadline extends Task {
-    protected String by;
+=======
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
+>>>>>>> 6ac82591c9ac6bd152a793df7e203a11f55898b6
+public class Deadline extends Task {
+    protected LocalDateTime by;
+
+<<<<<<< HEAD
     /**
      * Constructor method for Deadline class
      *
@@ -13,11 +20,19 @@ public class Deadline extends Task {
      * @param by Date and time (deadline) that the task needs to be completed by
      */
     public Deadline(String description, String by) {
+=======
+    public Deadline(String description, LocalDateTime by) {
+>>>>>>> 6ac82591c9ac6bd152a793df7e203a11f55898b6
         super(description);
         this.by = by;
     }
 
     public String getBy() {
+        String byString = by.format(DateTimeFormatter.ofPattern("d MMM yyyy HH:mm"));
+        return byString;
+    }
+
+    public LocalDateTime getByForSaving() {
         return by;
     }
 
@@ -38,6 +53,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + getBy() + ")";
     }
 }

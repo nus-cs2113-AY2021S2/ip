@@ -5,6 +5,9 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 import duke.task.Event;
 import duke.task.Task;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * EventCommand is called when user wants to add a new Event
@@ -42,13 +45,17 @@ public class EventCommand extends Command {
         try {
             int index = fullCommand.indexOf("/");
             String description = fullCommand.substring(EVENT_LENGTH, index - 1);
-            String at = fullCommand.substring(index + AT_LENGTH).trim();
+            String atString = fullCommand.substring(index + AT_LENGTH).trim();
+            DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+            LocalDateTime at = LocalDateTime.parse(atString, inputFormat);
             Task newTask = new Event(description, at);
             tasks.addTask(newTask);
             ui.printNewTask(newTask, tasks.getTaskCount());
             storage.saveToFile(tasks);
         } catch (StringIndexOutOfBoundsException e) {
             ui.printEmptyDescription("event");
+        } catch (DateTimeParseException e) {
+            ui.printDateError();
         }
     }
 }

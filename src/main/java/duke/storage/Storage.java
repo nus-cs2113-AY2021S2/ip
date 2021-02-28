@@ -9,6 +9,7 @@ import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,11 +69,11 @@ public class Storage {
                     newTask = new ToDo(description);
                     break;
                 case "D":
-                    String by = components[3];
+                    LocalDateTime by = LocalDateTime.parse(components[3]);
                     newTask = new Deadline(description, by);
                     break;
                 case "E":
-                    String at = components[3];
+                    LocalDateTime at = LocalDateTime.parse(components[3]);
                     newTask = new Event(description, at);
                 }
                 if (done.equals("1")) {
@@ -101,10 +102,10 @@ public class Storage {
                 if (t instanceof ToDo) {
                     fw.write("T" + "/" + done + "/" + description + System.lineSeparator());
                 } else if (t instanceof Deadline) {
-                    String by = ((Deadline) t).getBy();
+                    LocalDateTime by = ((Deadline) t).getByForSaving();
                     fw.write("D" + "/" + done + "/" + description + "/" + by + System.lineSeparator());
                 } else if (t instanceof Event) {
-                    String at = ((Event) t).getAt();
+                    LocalDateTime at = ((Event) t).getAtForSaving();
                     fw.write("E" + "/" + done + "/" + description + "/" + at + System.lineSeparator());
                 }
             }
