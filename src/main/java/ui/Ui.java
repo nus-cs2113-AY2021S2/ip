@@ -14,7 +14,9 @@ public class Ui {
     public static final String SAVE_ERROR = "File is not able to be saved!\n" + DIVIDER_LINE;
     public static final String FILE_NOT_FOUND = "No save file found!\n" + DIVIDER_LINE;
     public static final String FILE_LOADED = "Save file has been loaded!\n" + DIVIDER_LINE;
-    // Prints hello message
+    /**
+     * Prints hello message
+     */
     public static void hello() {
         System.out.println(DIVIDER_LINE);
         String logo = " ____        _        \n"
@@ -26,7 +28,9 @@ public class Ui {
         System.out.println("What can I do for you?\n" + "List of commands: todo, deadline, event, done, bye");
         System.out.println(DIVIDER_LINE);
     }
-    // Prints bye message
+    /**
+     * Prints bye message
+     */
     public static void bye() {
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println(DIVIDER_LINE);

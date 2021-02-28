@@ -12,6 +12,7 @@ public class Event extends Task {
     public void printTask() {
         System.out.println("[E][" + getStatusIcon() + "] " + description + "(at:" + eventDate +")");
     }
+    @Override
     public String saveTask() {
         String done = String.valueOf(isDone);
         return done + " event " + description + " /by " + eventDate + "\n";

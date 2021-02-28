@@ -1,5 +1,4 @@
 package task;
-
 import ui.Ui;
 import exceptions.DukeException;
 import java.io.File;
@@ -16,7 +15,10 @@ public class TaskList {
     public static final int COMMAND_EVENT = 2;
 
     public static ArrayList<Task> tasks = new ArrayList<>();
-    // prints list of tasks
+    /**
+     * Prints list of tasks
+     * @throws DukeException when list is empty
+     */
     public static void list() throws DukeException {
         System.out.println(Ui.DIVIDER_LINE);
         int taskNumber = 1;
@@ -31,7 +33,13 @@ public class TaskList {
         }
         System.out.println(Ui.DIVIDER_LINE);
     }
-    // Adds task to list
+    /**
+     * Adds tasks to list
+     * @param userInput input given by user
+     * @param command type of task
+     * @param printTask flag on whether to print added task
+     * @throws DukeException
+     */
     public static void addTask(String userInput, int command, boolean printTask) throws DukeException {
         String description;
         String date;
@@ -86,7 +94,11 @@ public class TaskList {
             System.out.println(Ui.DIVIDER_LINE);
         }
     }
-    // Deletes task from list
+    /**
+     * Deletes task from list
+     * @param userInput input given by user
+     * @throws DukeException when user gives an invalid task number
+     */
     public static void delete(String userInput) throws DukeException {
         String number = userInput.substring(7);
         int taskCount = tasks.size();
@@ -102,7 +114,11 @@ public class TaskList {
             throw new DukeException();
         }
     }
-    // Marks task as done
+    /**
+     * Marks task as done
+     * @param userInput input given by user
+     * @throws DukeException when user gives an invalid task number
+     */
     public static void mark(String userInput) throws DukeException {
         String number = userInput.substring(5);
         int taskCount = tasks.size();
@@ -136,7 +152,10 @@ public class TaskList {
         }
         System.out.println(Ui.DIVIDER_LINE);
     }
-    // Loads list of tasks from save file
+   /**
+     * Loads list of tasks from save file
+     * @throws FileNotFoundException when file is not found
+     */
     public static void load() throws FileNotFoundException {
 
         File f = new File("duke.txt");
@@ -175,7 +194,11 @@ public class TaskList {
         }
         System.out.println(Ui.FILE_LOADED);
     }
-    // Saves list of tasks
+    /**
+     * Saves list of tasks
+     * @param filePath name of the file
+     * @throws IOException when an I/O exception has occurred
+     */
     public static void save(String filePath) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         for (Task task : tasks) {
