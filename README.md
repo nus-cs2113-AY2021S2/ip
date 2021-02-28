@@ -76,7 +76,7 @@ Find the task with matching keyword
 
 ## Feature 8: Bye
 Exits the program
-### Usage: <code> bye </bye>
+### Usage: <code> bye </code>
 ### Examples of outcome:
 
 
