@@ -7,7 +7,7 @@ upcoming events. There are multiple functions such as **"list", "delete",
 "done","find"** to help user better manage their tasks. 
 
 Whatever changes in the data will be automatically saved and updated into a text file. When the user reboots the application all 
-their data will be retrieved from this text file and shown to the user upon request.
+their data will be retrieved from this text file and shown to the user upon request. Be aware that all commands are **case sensitive**.
 
 ## Table of Contents
 * [Quick start](#quick-start)
@@ -39,7 +39,7 @@ their data will be retrieved from this text file and shown to the user upon requ
    ![](images/start.jpg)
 
 5)  Begin using the application by typing the command in the command box and press Enter to execute it.
-    e.g. typing `list` and pressing Enter, it will display all tasks stored in the data.
+    e.g. typing `list` and pressing Enter, it will display all the tasks currently stored in the list.
     Some example commands are given below:
     
     * `todo watch video lecture`
@@ -166,7 +166,7 @@ the known errors with their description.
 
 | Message | Description |
 |---------|-------------|
-|`No file exist, new file "tasklist.txt" created in home directory.`| When the app is used for the first time there is no existing data file. Hence, app will create a new file.|
+|`No file exist, new file "tasklist.txt" created in home directory.`| When the app is used for the first time there is no existing data file. Hence, the app will create a new file automatically.|
 |`File corrupted! Please delete "tasklist.txt" in the home directory and reboot the application. `| Data is corrupted due to undesired changes in the file.|
 |`Error writing to file, please reboot.`| Unexpected error when writing to the file that rarely occurs.|
 
@@ -188,11 +188,12 @@ the known errors with their description.
 ## FAQ
 Question 1 - Is the data transferable if i change computer?
 <br/>
-Answer 1 - Yes, simply locate the `tasklist.txt` file in the home directory and copy that file to another computer.
+Answer 1 - Yes, simply locate the `tasklist.txt` file in the home directory and copy that file to the home directory of another computer.
 
 Question 2 - If the system crashes mid-way will the new tasks that are added be lost?
-Answer 2 - No, The list of tasks will auto-save upon every entry, even when the system crashes midway all data will be saved and retrieve again when the application reboots.
 <br/>
+Answer 2 - No, The list of tasks will auto-save upon every entry, even when the system crashes midway all data will be saved and retrieve again when the application reboots.
+
 
 Question 3 - Can I add and edit from the text file directly?
 <br/>
