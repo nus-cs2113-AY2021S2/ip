@@ -33,6 +33,8 @@ Adds a Todo task in your task list
 ### Example of usage: <code> todo to go and buy groceries
 ### Examples of outcome:
 
+<br></br>
+
 
 ## Feature 2: Deadline
 Adds a Deadline task in your task list
