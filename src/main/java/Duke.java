@@ -1,6 +1,14 @@
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
+
+/**
+ * The Duke Program is an application
+ * which stores a list of tasks for the user
+ *
+ * @author Calvin
+ * @version 0.2
+ * @since 2021-02-28
+ */
 
 public class Duke {
 
@@ -11,11 +19,21 @@ public class Duke {
     public static void main(String[] args) {
         new Duke().run();
     }
+    /**
+     * Constructor for the Duke Object
+     * Creates Ui object for application as well as reads from storage file.
+     */
     public Duke(){
         ui = new Ui();
         storage = new Storage();
         tasks = Storage.readFromSaveFile();
     }
+
+    /**
+     * Duke application main function
+     * Consists of a switch which calls the appropriate methods
+     * based on user input
+     */
     public void run() {
         ui.startupMessage();
         Parser userInput;

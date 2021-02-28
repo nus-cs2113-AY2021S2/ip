@@ -2,14 +2,25 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * This class handles all reading and writing of data from the save file.
+ *
+ * @author Calvin
+ * @version 0.2
+ * @since 2021-02-28
+ */
 public class Storage {
 	private static final String PATH_TO_SAVE_FILE = "./data/duke.txt";
 	private static final String SAVE_FILE_DIRECTORY= "./data";
 	private static final int MAX_TASKS = 100;
 
+	/**
+	 *  Reads user's saved data from previous session.
+	 *
+	 * @return ArrayList of task objects from user's previous session from a txt file.
+	 */
 	public static TaskList readFromSaveFile() {
 
 		TaskList tasks = new TaskList();
@@ -60,6 +71,13 @@ public class Storage {
 		return tasks;
 	}
 
+	/**
+	 * Writes Array list of task from user's current session into a txt file for future sessions.
+	 *
+	 * @param tasks TaskList object created and used during the session.
+	 * @param numberOfTasks Number of tasks in the TaskList object.
+	 * @throws IOException
+	 */
 	public static void writeToSaveFile(TaskList tasks, int numberOfTasks) throws IOException {
 		FileWriter fw = new FileWriter(PATH_TO_SAVE_FILE);
 		for (int i = 0; i < numberOfTasks; i++) {
