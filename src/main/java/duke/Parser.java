@@ -4,7 +4,11 @@ import static duke.Ui.INVALID_INDEX_MESSAGE;
 import static duke.Ui.INVALID_TASK_MESSAGE;
 import static duke.Ui.MISSING_FIELDS_MESSAGE;
 import static duke.Ui.OUTSIDE_RANGE_INDEX_MESSAGE;
+import static duke.Ui.INVALID_DATE_FORMAT_MESSAGE;
 import static duke.common.Constants.DEFAULT_STATUS;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 
 import duke.commands.ByeCommand;
 import duke.commands.Command;
@@ -93,9 +97,12 @@ public class Parser {
     public Command prepareDeadlineCommand(String description) {
         try {
             String[] words = getDeadlineOrEventDescription(" /by ", description);
-            return new DeadlineCommand(tasks, words[0], DEFAULT_STATUS, words[1]);
+            LocalDateTime deadline = LocalDateTime.parse(words[1]);
+            return new DeadlineCommand(tasks, words[0], DEFAULT_STATUS, deadline);
         } catch (ArrayIndexOutOfBoundsException | DukeException e) {
             return new InvalidCommand(MISSING_FIELDS_MESSAGE);
+        } catch (DateTimeParseException e) {
+            return new InvalidCommand(INVALID_DATE_FORMAT_MESSAGE);
         }
     }
 
