@@ -28,7 +28,6 @@ public abstract class Task {
         return description;
     }
 
-    public abstract String getDate();
 
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718");
