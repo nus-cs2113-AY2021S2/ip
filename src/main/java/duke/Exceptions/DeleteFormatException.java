@@ -1,5 +1,8 @@
 package duke.Exceptions;
 
+/**
+ * Formatting errors when using <code>DeleteCommand</code>
+ */
 public class DeleteFormatException extends DukeException {
 
     public DeleteFormatException() {

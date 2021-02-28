@@ -1,5 +1,8 @@
 package duke.Exceptions;
 
+/**
+ * Formatting errors when using <code>FindCommand</code>
+ */
 public class FindFormatException extends DukeException {
 
     public FindFormatException() {

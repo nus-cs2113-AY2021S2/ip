@@ -2,6 +2,9 @@ package duke.Tasks;
 
 import java.time.LocalDateTime;
 
+/**
+ * Extending the <code>Task</code> class that includes a <code>LocalDateTime</code> Deadline by
+ */
 public class Deadline extends Task {
 
     protected LocalDateTime by;

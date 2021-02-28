@@ -1,5 +1,8 @@
 package duke.Exceptions;
 
+/**
+ * Formatting errors when using <code>DeadlineCommand</code>
+ */
 public class DeadlineFormatException extends DukeException {
 
     public DeadlineFormatException() {

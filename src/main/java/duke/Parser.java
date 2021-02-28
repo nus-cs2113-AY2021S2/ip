@@ -10,6 +10,14 @@ public class Parser {
     public Parser() {
     }
 
+    /**
+     * Full line of user input as input
+     * Returns a <code>Command</code> that corresponds to the user input and parses its arguments
+     * Catches formatting and input errors and throws DukeExceptions
+     * @param userInput The input that is obtained from the user
+     * @return A <code>Command</code> object that corresponds to the user input
+     * @throws DukeException When there are formatting issues or unknown commands in the user input
+     */
     public static Command parse(String userInput) throws DukeException {
         final String[] words = userInput.split(" ", 2);
         final String commandWord = words[0].toLowerCase();

@@ -1,5 +1,8 @@
 package duke.Exceptions;
 
+/**
+ * Formatting errors when using <code>EventCommand</code>
+ */
 public class EventFormatException extends DukeException {
 
     public EventFormatException() {

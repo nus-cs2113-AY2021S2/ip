@@ -3,6 +3,9 @@ package duke.Tasks;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * An abstract class representing the task objects
+ */
 public abstract class Task {
     protected String description;
     protected boolean isDone;

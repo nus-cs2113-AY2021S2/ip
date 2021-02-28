@@ -24,6 +24,11 @@ public class Storage {
         taskList = new ArrayList<>();
     }
 
+    /**
+     * Loads the data from the specified FILEPATH
+     * @return Returns an <code>ArrayList</code> with data from the loaded file
+     * @throws DukeException If file at <code>FILEPATH</code> is not found or if incorrect Task Type in file
+     */
     public ArrayList<Task> load() throws DukeException {
 
         File f = new File(FILEPATH);
@@ -63,6 +68,11 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Saves the changed <code>TaskList</code> to the file specified at <code>FILEPATH</code>
+     * @param saveList <code>TaskList</code> of data to be saved
+     * @throws IOException If there are errors during the saving process
+     */
     public void save(TaskList saveList) throws IOException {
         taskList = saveList.getTaskList();
         File f = new File(FILEPATH);

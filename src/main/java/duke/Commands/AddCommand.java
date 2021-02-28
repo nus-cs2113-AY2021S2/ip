@@ -22,6 +22,13 @@ public class AddCommand extends Command {
         this.description = description;
     }
 
+    /**
+     * Adds a <code>Task</code> as specified by the user to the <code>taskList</code>
+     * @param taskList The list of tasks stored in Duke
+     * @param ui The <code>Ui</code> object that shows the output to the user
+     * @param storage The <code>Storage</code> object that saves the updated tasks to the file
+     * @throws DukeException if there are formatting errors in the user input
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         int dividerPosition;

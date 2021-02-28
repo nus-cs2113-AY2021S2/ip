@@ -110,6 +110,11 @@ public class Ui {
         }
     }
 
+    /**
+     * Shows the tasks that contains the <code>keyword</code>
+     * @param taskList The filtered list of Tasks that match the keyword
+     * @param keyword keyword to search for
+     */
     public void showFindTasks(ArrayList<Task> taskList, String keyword) {
         if (taskList.size() == 0) {
             System.out.println("There are no tasks matching the keyword: " + keyword);
@@ -121,6 +126,11 @@ public class Ui {
         }
     }
 
+    /**
+     * Shows the tasks that occur on a specified <code>dateTime</code>
+     * @param taskList The filtered list of Tasks that happen at the specified <code>dateTime</code>
+     * @param dateTime The date to check which tasks are on
+     */
     public void showSchedule(ArrayList<Task> taskList, String dateTime) {
         if (taskList.size() == 0) {
             System.out.println("There are no tasks on " + dateTime);

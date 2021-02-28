@@ -1,5 +1,8 @@
 package duke.Exceptions;
 
+/**
+ * Formatting errors when using <code>ScheduleCommand</code>
+ */
 public class ScheduleFormatException extends DukeException {
 
     public ScheduleFormatException() {

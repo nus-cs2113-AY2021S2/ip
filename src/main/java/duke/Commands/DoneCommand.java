@@ -15,6 +15,12 @@ public class DoneCommand extends Command {
         this.taskIndex = taskIndex;
     }
 
+    /**
+     * Updates a <code>Task</code> as specified by the user from the <code>taskList</code> to complete
+     * @param taskList The list of tasks stored in Duke
+     * @param ui The <code>Ui</code> object that shows the output to the user
+     * @param storage The <code>Storage</code> object that saves the updated tasks to the file
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         try {
