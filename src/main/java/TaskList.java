@@ -15,6 +15,10 @@ public class TaskList {
         this.ui = ui;
     }
 
+    public boolean isEmpty() {
+        return tasks.isEmpty();
+    }
+
     public void addToList(Task newTask) {
         this.addToList(newTask,true);
     }
@@ -27,7 +31,11 @@ public class TaskList {
     }
 
     public void printList() {
-        ui.printList(this);
+        if (this.isEmpty()) {
+            ui.printNoResultsFound();
+        } else {
+            ui.printList(this);
+        }
     }
 
     public String getStatus(int index) {
@@ -75,8 +83,8 @@ public class TaskList {
             }
         }
 
-        if (tasks.isEmpty()) {
-
+        if (results.isEmpty()) {
+            ui.printNoResultsFound();
         } else {
             ui.printDeleteTask(results, query);
         }

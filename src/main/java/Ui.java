@@ -50,6 +50,12 @@ public class Ui {
         System.out.print(LINE_STRING);
     }
 
+    public void printNoResultsFound() {
+        System.out.println(LINE_STRING);
+        System.out.println("No tasks found!");
+        System.out.println(LINE_STRING);
+    }
+
     public void welcomeMessage() {
         String welcome = LINE_STRING +
                 " Hello! I'm Bob 😀\n" +
