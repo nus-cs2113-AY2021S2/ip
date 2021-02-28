@@ -65,14 +65,25 @@ public class Date {
             return true;
         }
 
-        if (!isFutureYear(year, currentYear)) {
-            return true;
-        } else if (!isFutureMonth(month, currentMonth)) {
-            return true;
-        } else if (!isFutureDay(day, currentDay)) {
+        if (!isFutureYear(year, currentYear) && !isSameYear(year, currentYear)) {
             return true;
         }
-
+        if (isFutureYear(year, currentYear)) {
+            return false;
+        }
+        if (isSameYear(year, currentYear)) {
+            if (!isFutureMonth(month, currentMonth) && !isSameMonth(month, currentMonth)) {
+                return true;
+            }
+            if (isFutureMonth(month, currentMonth)) {
+                return false;
+            }
+        }
+        if (isSameYear(year, currentYear) && isSameMonth(month, currentMonth)) {
+            if (!isFutureDay(day, currentDay)) {
+                return true;
+            }
+        }
         return false;
     }
 
@@ -125,8 +136,16 @@ public class Date {
         return Integer.parseInt(year) > Integer.parseInt(currentYear);
     }
 
+    private static boolean isSameYear(String year, String currentYear) {
+        return Integer.parseInt(year) == Integer.parseInt(currentYear);
+    }
+
     private static boolean isFutureMonth(String month, String currentMonth) {
         return Integer.parseInt(month) > Integer.parseInt(currentMonth);
+    }
+
+    private static boolean isSameMonth(String month, String currentMonth) {
+        return Integer.parseInt(month) == Integer.parseInt(currentMonth);
     }
 
     private static boolean isFutureDay(String day, String currentDay) {
