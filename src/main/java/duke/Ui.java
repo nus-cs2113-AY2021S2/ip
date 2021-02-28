@@ -49,28 +49,32 @@ public class Ui {
             + "\t- stops the task manager" + NEWLINE + NEWLINE
             + "\tlist" + NEWLINE
             + "\t- displays all tasks in the list" + NEWLINE + NEWLINE
-            + "\ttodo     | <task>" + NEWLINE
+            + "\ttodo     |    <task>" + NEWLINE
             + "\t- adds specified task to the list" + NEWLINE + NEWLINE
-            + "\tdeadline | <task>  | /by | <yyyy-mm-ddTHH:mm>" + NEWLINE
-            + "\t- adds specified task and deadline to the list" + NEWLINE
-            + "\t- note: date (yyyy-mm-dd) and time (HH:mm) should be" + NEWLINE
-            + "\t  separated by \"T\" in deadline (second input field)" + NEWLINE
-            + "\t- example: to represent the deadline \"2 Dec 2021, 6PM\"" + NEWLINE
-            + "\t  second input field should be 2021-12-02T18:00" + NEWLINE + NEWLINE
-            + "\tevent    | <task>  | /at | <timing>" + NEWLINE
-            + "\t- adds specified task and timing to the list" + NEWLINE + NEWLINE
+            + "\tdeadline |    <task>    | /by | <yyyy-mm-dd> | <HH:mm>" + NEWLINE
+            + "\t- adds specified task with date and time to the list" + NEWLINE
+            + "\t- example: add task with deadline \"2 Dec 2021, 6PM\":" + NEWLINE
+            + "\t  deadline final essay /by 2021-12-02 18:00" + NEWLINE + NEWLINE
+            + "\tevent    |    <task>    | /at | <details>" + NEWLINE
+            + "\t- adds specified task with details to the list" + NEWLINE + NEWLINE
+            + "\tfilter   | <yyyy-mm-dd>" + NEWLINE
+            + "\t- displays any deadlines in the list that match specified date" + NEWLINE + NEWLINE
             + "\tdone     | <index>" + NEWLINE
             + "\t- marks existing task matching the specified index" + NEWLINE
             + "\t  as completed in the list" + NEWLINE  + NEWLINE
+            + "\tdelete   | <index>" + NEWLINE
+            + "\t- deletes existing task matching the specified index from the list" + NEWLINE + NEWLINE
             + "<> indicates an input field and | is a field separator." + NEWLINE
             + BORDER + NEWLINE;
+    public static final String PRINT_FULL_LIST_STATEMENT
+            = BORDER + "Here are the tasks in your list:" + NEWLINE;
 
 
     /** Invalid command error messages */
     public static final String DEFAULT_INVALID_MESSAGE
             = "I'm sorry, I don't quite understand :( Could you try again?";
     public static final String MISSING_FIELDS_MESSAGE
-            = "I think you missed some fields! Try again?";
+            = "Panda thinks you missed some fields! Try again?";
     public static final String INVALID_INDEX_MESSAGE
             = "Squeal! Second field must be a number.";
     public static final String OUTSIDE_RANGE_INDEX_MESSAGE
@@ -80,6 +84,8 @@ public class Ui {
     public static final String INVALID_DATE_FORMAT_MESSAGE
             = "Squeal, date format is invalid!" + NEWLINE
             + "Use \"help\" for more info.";
+    public static final String FILTERED_NO_RESULTS_MESSAGE
+            = "Hmm, Panda couldn't find tasks in your list with that date...";
 
 
     /** File storage error messages */
@@ -122,10 +128,19 @@ public class Ui {
     /** Methods that print part of or full list */
     public void echo(TaskList tasks) {
         System.out.print(BORDER);
-        System.out.print("New task added: " + NEWLINE);
+        System.out.print("New task added:" + NEWLINE);
         System.out.print("\t");
-        tasks.getTaskAtIndex(tasks.getTasksCount()-1).printTask();
+        tasks.getTaskAtIndex(tasks.getTasksCount() - 1).printTask();
         printNumberOfTasks(tasks.getTasksCount());
+    }
+
+    public void printDeadlinesWithTargetDate(TaskList tasks) {
+        System.out.print("Deadlines on this day:" + NEWLINE);
+        for (int i=0; i<tasks.getTasksCount(); i++) {
+            tasks.getTaskAtIndex(i).printCondensedTask();
+            System.out.print(NEWLINE);
+        }
+        System.out.print(BORDER + NEWLINE);
     }
 
     public void printNumberOfTasks(int tasksCount) {
@@ -137,9 +152,8 @@ public class Ui {
         System.out.print(BORDER + NEWLINE);
     }
 
-    public void printList(TaskList tasks) {
-        System.out.print(BORDER);
-        System.out.print("Here are the tasks in your list:" + NEWLINE);
+    public void printList(TaskList tasks, String openingStatement) {
+        System.out.print(openingStatement);
         for (int i=0; i<tasks.getTasksCount(); i++) {
             System.out.print("\t" + (i + 1) + ". ");
             tasks.getTaskAtIndex(i).printTask();
