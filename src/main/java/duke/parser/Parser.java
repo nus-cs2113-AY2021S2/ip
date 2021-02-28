@@ -1,11 +1,11 @@
 package duke.parser;
 
+import duke.error.ListFullException;
 import duke.error.WrongFormatException;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 import duke.commands.Commands;
 import duke.task.Task;
-
 import java.util.ArrayList;
 
 
@@ -14,16 +14,19 @@ public class Parser {
     private Ui ui;
 
     /**
-     * Loop through all possible commands
-     * Possible Commands:
-     * Todo, event, Deadline, help, list, done, bye
+     * Parses the command user wants to execute and executes said command
+     *
+     * @param input input from Duke.txt
+     * @param list The ArrayList to store all existing tasks from Duke.txt
      */
     public static void parseCommand(String input, ArrayList<Task> list) {
         try{
             if (list.size()>=100) {
-                throw new IndexOutOfBoundsException();
+                throw new ListFullException();
             }
-            if (input.equalsIgnoreCase("help")) {
+            if (input.equalsIgnoreCase("bye")) {
+                return;
+            } else if (input.equalsIgnoreCase("help")) {
                 System.out.println(Ui.HELP_MESSAGE);
             } else if (input.toLowerCase().startsWith("done")) {
                 Commands.doneTask(input,list);
@@ -42,7 +45,7 @@ public class Parser {
             } else {
                 Ui.checkError("INVALID_COMMAND");
             }
-        } catch (IndexOutOfBoundsException | WrongFormatException e) {
+        } catch (ListFullException | WrongFormatException e) {
             Ui.checkError("LIST_FULL");
         }
     }

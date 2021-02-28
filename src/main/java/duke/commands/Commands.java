@@ -12,8 +12,10 @@ import java.util.ArrayList;
 
 public class Commands {
     /**
-     * Add new task to Timetable
-     * @param input - name of task
+     * Add a todo task to the list
+     *
+     * @param input Task description
+     * @param list The ArrayList to store all existing tasks from Duke.txt
      */
     public static void addTodo(String input, ArrayList<Task> list) {
         try{
@@ -34,8 +36,10 @@ public class Commands {
     }
 
     /**
-     * Add deadline to list
-     * @param input - add Deadline
+     * Add a deadline task to the list
+     *
+     * @param input - add Task description
+     * @param list The ArrayList to store all existing tasks from Duke.txt
      */
     public static void addDeadline(String input, ArrayList<Task> list) {
         try{
@@ -59,8 +63,10 @@ public class Commands {
     }
 
     /**
-     * Add event to list
-     * @param input - add event
+     * Add an event task to the list
+     *
+     * @param input Task description
+     * @param list The ArrayList to store all existing tasks from Duke.txt
      */
     public static void addEvent(String input,ArrayList<Task> list)  {
         try {
@@ -84,8 +90,11 @@ public class Commands {
     }
 
     /**
-     * Check if done command is valid
-     * @param input - index of task
+     * Check if Done command is valid
+     * Checks if task exists and presence of a numerical value after done command
+     *
+     * @param input Command executed
+     * @param list The ArrayList to store all existing tasks from Duke.txt
      */
     public static void doneTask(String input,ArrayList<Task> list) {
         try{
@@ -108,8 +117,34 @@ public class Commands {
     }
 
     /**
+     * Marks task as done via a tick
+     * Checks if task has already been marked done
+     *
+     * @param index Command executed
+     * @param list The ArrayList to store all existing tasks from Duke.txt
+     */
+    private static void checkTask(int index,ArrayList<Task> list){
+        try{
+            if (list.get(index).checkIsDone()) {
+                throw new DoneCheckedException();
+            }
+            System.out.println("Good Job, I will mark this as done!");
+            list.get(index).markAsDone();
+            System.out.println("[" + list.get(index).getType() + "] ["
+                    + list.get(index).getStatusIcon() + "] " + list.get(index).getName()
+                    + list.get(index).getDate());
+            Ui.printBorder();
+        } catch (DoneCheckedException e) {
+            Ui.checkError("DONE_CHECKED_ERROR");
+        }
+    }
+
+    /**
      * Delete task from the list
-     * @param input - Command
+     * Checks if task exists and presence of a numerical value after delete command
+     *
+     * @param input Command executed
+     * @param list The ArrayList to store all existing tasks from Duke.txt
      */
     public static void deleteTask(String input,ArrayList<Task> list){
         try {
@@ -129,8 +164,8 @@ public class Commands {
 
             System.out.println("Noted! I will delete this at once!");
             System.out.println("[" + list.get(index).getType() + "] ["
-                + list.get(index).getStatusIcon() + "] " + list.get(index).getName()
-                + list.get(index).getDate());
+                    + list.get(index).getStatusIcon() + "] " + list.get(index).getName()
+                    + list.get(index).getDate());
             list.remove(index);
             Ui.printNoOfTask(list);
         } catch (WrongFormatException e) {
@@ -141,28 +176,9 @@ public class Commands {
     }
 
     /**
-     * Check respective task as done
-     * @param index - index of list
-     */
-    private static void checkTask(int index,ArrayList<Task> list){
-        try{
-            if (list.get(index).checkIsDone()) {
-                throw new DoneCheckedException();
-            }
-            System.out.println("Good Job, I will mark this as done!");
-            list.get(index).markAsDone();
-            System.out.println("[" + list.get(index).getType() + "] ["
-                + list.get(index).getStatusIcon() + "] " + list.get(index).getName()
-                + list.get(index).getDate());
-            Ui.printBorder();
-        } catch (DoneCheckedException e) {
-            Ui.checkError("DONE_CHECKED_ERROR");
-        }
-    }
-
-    /**
-     * Print List
-     * @param list ArrayList of task
+     * List all task items in the list
+     *
+     * @param list The ArrayList to store all existing tasks from Duke.txt
      */
     public static void printList(ArrayList<Task> list){
         try {
@@ -172,8 +188,8 @@ public class Commands {
             System.out.println(" LIST");
             for (int i = 0; i < list.size(); i++) {
                 System.out.println(i + 1 +  ". [" + list.get(i).getType() +  "] " + "["
-                    + list.get(i).getStatusIcon() + "] " + list.get(i).getName()
-                    + list.get(i).getDate());
+                        + list.get(i).getStatusIcon() + "] " + list.get(i).getName()
+                        + list.get(i).getDate());
             }
             Ui.printBorder();
         } catch (ListEmptyException e) {
@@ -181,6 +197,13 @@ public class Commands {
         }
     }
 
+    /**
+     * Searches the list for all tasks that contains the substring of the input given by user
+     *
+     * @param input user input
+     * @param list The ArrayList to store all existing tasks from Duke.txt
+     * @throws WrongFormatException if no substring found or is whitespace after find command
+     */
     public static void findTask(String input, ArrayList<Task> list) throws WrongFormatException {
         try {
             String searchItem = input.substring(5);
