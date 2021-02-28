@@ -25,7 +25,7 @@ for users who can type fast.
 ```bash
 java -jar ip.jar
 ```
-***
+***  
 ## Commands
 
 ### Adding a Todo: `todo` 
@@ -39,7 +39,7 @@ Format: `todo DESCRIPTION`
 Examples: 
 - `todo read book` adds a Todo with the description of read book
 ![img.png](screenshots/img.png)
-- `todo ` will cause Duke to produce an error message that the description cannot be empty
+- `todo ` will cause Duke to produce an error message that the description cannot be empty  
 ![img_1.png](screenshots/img_1.png)
 
 ### Adding a Event: `event`
@@ -67,9 +67,9 @@ Format: `deadline DESCRIPTION /by TIME`
 
 
 Examples:
-- `deadline report /by 4 March` adds a Deadline with the description of meeting and time of 4 March.
+- `deadline report /by 4 March` adds a Deadline with the description of meeting and time of 4 March.  
   ![img_5.png](screenshots/img_5.png)
-- `deadline` will cause Duke to produce an error message that the description and /by cannot be empty
+- `deadline` will cause Duke to produce an error message that the description and /by cannot be empty  
   ![img_6.png](screenshots/img_6.png)
 - `deadline report` will cause Duke to produce an error message to give the correct input format.
   ![img_7.png](screenshots/img_7.png)
@@ -107,7 +107,7 @@ Format: `delete INDEX`
 - Index provided is based on index in list from `list` command.
 - Index must be provided.
 
-Examples:
+Examples:  
 ![img_12.png](screenshots/img_12.png)
 - `delete 2` will delete the task `[T][✘] this` from the task list.
   ![img_13.png](screenshots/img_13.png)
@@ -152,15 +152,15 @@ Examples:
   
 ## Command Summary:  
 Command | Format, Examples
------------- | -------------
-Add Todo |`todo DESCRIPTION` <br/>e.g. `todo read book`
-Add Event | `event DESCRIPTION /at TIME` <br/>e.g. `event meeting /at 4pm`
-Add Deadline | `deadline DESCRIPTION /by TIME` <br/> e.g. `return book /by Sunday`
-List | `list`
-Find | `find SEARCH_TERM` <br/> e.g `find book`
-Delete | `delete INDEX` <br/> e.g. `delete 2`
-Done | `done INDEX` <br/> e.g. `done 1`
-Exit | `bye`
+--------|------------------
+**Add Todo** |`todo DESCRIPTION` <br/>e.g. `todo read book`
+**Add Event** | `event DESCRIPTION /at TIME` <br/>e.g. `event meeting /at 4pm`
+**Add Deadline** | `deadline DESCRIPTION /by TIME` <br/> e.g. `return book /by Sunday`
+**List** | `list`
+**Find** | `find SEARCH_TERM` <br/> e.g `find book`
+**Delete** | `delete INDEX` <br/> e.g. `delete 2`
+**Done** | `done INDEX` <br/> e.g. `done 1`
+**Exit** | `bye`
 
 ## Contributors:
 Feel free to contact the developers if you want to contribute or if there are any issues or
