@@ -1,5 +1,9 @@
 package ip.duke.task;
 
+/**
+ * Represents a type of task with description and a deadline (date or time)
+ * status is undone unless marked done by the user
+ */
 public class Deadline extends Task {
     protected String by;
 

@@ -1,5 +1,9 @@
 package ip.duke.task;
 
+/**
+ * Represents a type of task with description and a startTime (date or time)
+ * status is undone by default unless marked done by the user
+ */
 public class Event extends Task {
     protected String at;
 

@@ -1,2 +1,3 @@
 D | 1 | submit a report | Sunday
 T | 0 | complete the report
+E | 0 | project meeting | Monday afternoon
