@@ -39,6 +39,11 @@ public class Ui {
         System.out.print(tasks);
     }
 
+    public void printQueryList(String listOfTasks) {
+        System.out.println("\tHere are the matching tasks in your list:");
+        System.out.print(listOfTasks);
+    }
+
     public String readCommand() {
         String fullCommand = in.nextLine();
         return fullCommand;
@@ -79,6 +84,9 @@ public class Ui {
         System.out.println("\t" + exceptionGreeting + "The description of a " + type + " cannot be empty.");
     }
 
+    public void printEmptyQuery() {
+        System.out.println("\t" + exceptionGreeting + "The query cannot be empty.");
+    }
 
     public void printInvalidTask() {
         System.out.println("\t" + exceptionGreeting + "That task number does not exist.");
