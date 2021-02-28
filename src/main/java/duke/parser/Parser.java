@@ -66,7 +66,7 @@ public class Parser {
             return command;
         }
         if (CHECK_LENGTH.apply(separatedWords, 1) && !commandType.equals(Commands.TODO)) {
-            errorMessage = " Date cannot be empty!";
+            errorMessage = " Time cannot be empty!";
             return command;
         }
         for (int i = 1; i < getDescription.length; i++) {
@@ -153,9 +153,7 @@ public class Parser {
         } catch (NumberFormatException error) {
             throw new DukeException(" Task index must be an integer!");
         } catch (IllegalArgumentException error) {
-            throw new DukeException(" Command not recognized :(");
-        } catch (DateTimeParseException error) {
-            throw new DukeException(" I cannot recognize the date you put in.");
+            throw new DukeException(" Command not recognized");
         } finally {
             errorMessage = null;
         }

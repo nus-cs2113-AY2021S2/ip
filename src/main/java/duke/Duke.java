@@ -52,7 +52,7 @@ public class Duke {
                 c.executeCommand(tasks, ui, storage);
                 isExit = c.isExit();
             } catch (DukeException e) {
-                ui.showLoadingError();
+                ui.showToUser(e.getMessage());
             } finally {
                 ui.showLine();
             }

@@ -34,7 +34,7 @@ public class Storage {
             }
             this.data = data;
         } catch (IOException error) {
-            throw new DukeException(" I cannot find the directory :(");
+            throw new DukeException(" I cannot find the directory");
         }
     }
 
@@ -86,7 +86,7 @@ public class Storage {
             }
             writer.close();
         } catch (IOException error) {
-            throw new DukeException(" I cannot save your tasks :(");
+            throw new DukeException(" I cannot save your tasks.");
         }
     }
 }

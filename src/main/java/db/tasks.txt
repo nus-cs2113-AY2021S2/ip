@@ -1,3 +1,0 @@
-T | 1 | revise CS2113 first half
-D | 0 | CS2113 weekly quiz | Friday 11pm
-E | 0 | CS2113 tutorial | Thursday 10am
