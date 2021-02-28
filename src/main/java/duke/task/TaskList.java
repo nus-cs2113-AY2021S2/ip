@@ -118,6 +118,9 @@ public class TaskList {
         }
     }
 
+    /*
+    Function displays all tasks that contains the keyword
+    */
     public void findTask(String keyword) {
         System.out.println("Here are the matching tasks in your list:");
         for (int counter = 0; counter < userTasks.size(); counter++) {

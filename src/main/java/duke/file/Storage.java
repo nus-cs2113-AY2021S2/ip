@@ -36,11 +36,11 @@ public class Storage {
     public ArrayList<Task> load() throws DukeException{
         char taskSelection;
         try {
-            File myObj = new File(relativeFileName);
-            if (myObj.createNewFile()) {
-                System.out.println("File created: " + myObj.getName());
+            File dukeFileRead = new File(relativeFileName);
+            if (dukeFileRead.createNewFile()) {
+                System.out.println("File created: " + dukeFileRead.getName());
             }
-            Scanner myReader = new Scanner(myObj);
+            Scanner myReader = new Scanner(dukeFileRead);
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
                 StringTokenizer tokens = new StringTokenizer(data , SEPARATOR);
@@ -98,7 +98,7 @@ public class Storage {
     public void dump(TaskList userCurrentTasks){
         String newLineToBeInserted = null;
         try {
-            FileWriter myWriter = new FileWriter(relativeFileName);
+            FileWriter dukeFileWrite = new FileWriter(relativeFileName);
             for(Task userTask : userCurrentTasks.getUserTasks()){
                 switch(userTask.getTaskType()){
                 case 't':
@@ -114,9 +114,9 @@ public class Storage {
                     newLineToBeInserted = convertEventDetailsToString(userTask);
                     break;
                 }
-                myWriter.write(newLineToBeInserted + "\n");
+                dukeFileWrite.write(newLineToBeInserted + "\n");
             }
-            myWriter.close();
+            dukeFileWrite.close();
             System.out.println("Successfully updated the file.");
         } catch (IOException e) {
             System.out.println("An error occurred.");

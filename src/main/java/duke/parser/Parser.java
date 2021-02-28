@@ -1,12 +1,7 @@
 package duke.parser;
 
 
-import duke.commands.AddCommand;
-import duke.commands.Command;
-import duke.commands.DeleteCommand;
-import duke.commands.DoneCommand;
-import duke.commands.ExitCommand;
-import duke.commands.ListCommand;
+import duke.commands.*;
 
 /*
 Class Parser for making sense of user input
