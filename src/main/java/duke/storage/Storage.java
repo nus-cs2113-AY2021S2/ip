@@ -12,6 +12,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Storage class is used to load tasks from the data file and save tasks to the data file
+ */
 public class Storage {
     private static final String ROOT_PATH = System.getProperty("user.dir");
     private static final Path FOLDER_PATH = Paths.get(ROOT_PATH, "data");
@@ -19,6 +22,12 @@ public class Storage {
 
     private Ui ui;
 
+    /**
+     * Constructor method for the Storage class
+     * Creates a file directory and data file inside of it unless it already exists
+     *
+     * @param ui Takes in a Ui object, used to print error messages
+     */
     public Storage(Ui ui) {
         this.ui = ui;
         try {
@@ -38,6 +47,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads Task data saved in the data file
+     * Task data is converted into an ArrayList<Task>
+     *
+     * @return ArrayList<TasK> that were saved in the data file
+     */
     public ArrayList<Task> loadFile() {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
@@ -71,6 +86,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves all tasks in TaskList to the data file
+     *
+     * @param tasks TaskList object containing all existing
+     */
     public void saveToFile(TaskList tasks) {
         try {
             FileWriter fw = new FileWriter(FILE_PATH.toString());

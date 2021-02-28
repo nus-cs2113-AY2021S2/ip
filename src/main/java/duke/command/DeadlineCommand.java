@@ -6,12 +6,20 @@ import duke.ui.Ui;
 import duke.task.Deadline;
 import duke.task.Task;
 
+/**
+ * DeadlineCommand is called when user wants to add a new Deadline
+ */
 public class DeadlineCommand extends Command {
     private boolean isExit;
     private String fullCommand;
     private static final int DEADLINE_LENGTH = 9;
     private static final int BY_LENGTH = 3;
 
+    /**
+     * Constructor method of DeadlineCommand which stores the user input
+     *
+     * @param fullCommand String of user input for adding a new Deadline
+     */
     public DeadlineCommand(String fullCommand) {
         this.fullCommand = fullCommand;
         isExit = false;
@@ -21,6 +29,14 @@ public class DeadlineCommand extends Command {
         return isExit;
     }
 
+    /**
+     * Adds new Deadline to the TaskList tasks
+     * Prints output confirming addition to user
+     * Saves changes to data file
+     * @param tasks TaskList containing all tasks
+     * @param ui User Interface
+     * @param storage Storage to save all tasks, updating the data file
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
