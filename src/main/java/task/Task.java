@@ -9,18 +9,29 @@ public class Task {
         this.description = description;
         this.isDone = false;
     }
-    // Returns status icon
+    /**
+     * Returns status icon
+     * @return tick or X symbol
+     */
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : " "); //return tick or X symbols
+        return (isDone ? "\u2713" : " ");
     }
-    // Marks task as done
+    /**
+     * Marks task as done
+     */
     public void markAsDone() {
         this.isDone = true;
     }
-    // Prints task
+    /**
+     * Prints task
+     */
     public void printTask() {
         System.out.println("[ ][" + getStatusIcon() + "] " + description);
     }
+    /**
+     * Saves task
+     * @return empty string
+     */
     public String saveTask() {
         return "";
     }

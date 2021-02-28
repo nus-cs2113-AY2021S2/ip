@@ -12,6 +12,7 @@ public class Deadline extends Task {
     public void printTask() {
         System.out.println("[D][" + getStatusIcon() + "] " + description + "(by:" + deadlineDate +")");
     }
+    @Override
     public String saveTask() {
         String done = String.valueOf(isDone);
         return done + " deadline " + description + " /at " + deadlineDate + "\n";

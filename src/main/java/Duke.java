@@ -1,7 +1,6 @@
 import exceptions.DukeException;
 import task.TaskList;
 import ui.Ui;
-
 import java.io.IOException;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
@@ -16,15 +15,15 @@ public class Duke {
         String userInput;
         Scanner in = new Scanner(System.in);
         TaskList tasks = new TaskList();
-
+        // Prints hello message
         Ui.hello();
-
+        // Attempts to find and load file
         try {
             TaskList.load();
         } catch (FileNotFoundException e) {
             System.out.println(Ui.FILE_NOT_FOUND);
         }
-
+        // Runs command handler
         while(true) {
             userInput = in.nextLine();
             if (userInput.equals("bye")) {
