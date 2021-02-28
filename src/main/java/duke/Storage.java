@@ -46,12 +46,12 @@ public class Storage {
             case 'D':
                 dividerPosition = line.indexOf("(by:");
                 taskList.add(new Deadline(line.substring(7, dividerPosition - 1),
-                        line.substring(dividerPosition + 5, line.length() - 1)));
+                        line.substring(dividerPosition + 5, line.length() - 1), true));
                 break;
             case 'E':
                 dividerPosition = line.indexOf("(at:");
                 taskList.add(new Event(line.substring(7, dividerPosition - 1),
-                        line.substring(dividerPosition + 5, line.length() - 1)));
+                        line.substring(dividerPosition + 5, line.length() - 1), true));
                 break;
             default:
                 throw new TaskTypeNotFoundException();

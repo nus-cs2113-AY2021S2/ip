@@ -2,6 +2,7 @@ package duke;
 
 import duke.Tasks.Task;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -106,6 +107,17 @@ public class Ui {
         for (int i = 0; i < taskList.getSize(); i++) {
             Task currentTask = taskList.getTaskAtIndex(i);
             System.out.println(i + 1 + "." + currentTask.toString());
+        }
+    }
+
+    public void showSchedule(ArrayList<Task> taskList, String dateTime) {
+        if (taskList.size() == 0) {
+            System.out.println("There are no tasks on " + dateTime);
+            return;
+        }
+        System.out.println("Here are the tasks on " + dateTime);
+        for (Task task : taskList) {
+            System.out.println(task);
         }
     }
 }
