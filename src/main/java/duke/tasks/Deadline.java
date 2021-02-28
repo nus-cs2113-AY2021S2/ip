@@ -1,12 +1,9 @@
 package duke.tasks;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 public class Deadline extends Task {
-    private LocalDateTime deadline;
+    private String deadline;
 
-    public Deadline(String item, LocalDateTime deadline) {
+    public Deadline(String item, String deadline) {
         super(item);
         this.deadline = deadline;
     }
@@ -14,7 +11,7 @@ public class Deadline extends Task {
     @Override
     public void printTask() {
         super.printTask();
-        System.out.print(" (by: " + this.getFormattedDeadline() + ")");
+        System.out.print(" (by: " + this.getDeadline() + ")");
     }
 
     @Override
@@ -23,11 +20,8 @@ public class Deadline extends Task {
                 + this.getDeadline();
     }
 
-    public LocalDateTime getDeadline() {
+    public String getDeadline() {
         return deadline;
     }
 
-    public String getFormattedDeadline() {
-        return deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy, h.mm a"));
-    }
 }
