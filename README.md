@@ -48,7 +48,7 @@ Adds an Event task in your task list
 
 ##  Feature 4: List
 Lists all task current task in Duke
-### Usage: <code> list </bye><code> list </bye>
+### Usage: <code> list <\code>
 ### Examples of outcome:
 
 
@@ -64,7 +64,7 @@ Marks the task as done
 ## Feature 6: Delete
 Deletes the task
 ### Usage: <code> Delete index </code>
-### Example of usage:  <code> Delete 2 </code>
+### Example of usage: <code> Delete 2 </code>
 ### Examples of outcome:
 
 ## Feature 7: Find
