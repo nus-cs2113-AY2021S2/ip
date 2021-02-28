@@ -7,7 +7,7 @@ for users who can type fast.
 - [Adding a todo: `todo`](#adding-a-todo-todo)
 - [Adding an event: `event`](#adding-a-event-event)
 - [Adding a deadline: `deadline`](#adding-a-deadline-deadline)
-- [Listing tasks: `lisk`](#listing-tasks-list)
+- [Listing tasks: `list`](#listing-tasks-list)
 - [Finding tasks by name: `find`](#finding-tasks-by-name-find)
 - [Deleting tasks: `delete`](#delete-a-task-delete)
 - [Marking tasks as done: `done`](#marking-a-task-as-done-done)
@@ -94,7 +94,7 @@ Format: `find SEARCH_TERM`
 - Finds and lists all tasks that match with the search term.
 - Search term must be provided, otherwise error message occurs.
 
-#### Examples:
+Examples:
 - `find book` returns all the tasks that match with "book".  
   ![img_10.png](screenshots/img_10.png)  
 - `find` returns an error message to say the search term canntot be empty.  
@@ -107,7 +107,7 @@ Format: `delete INDEX`
 - Index provided is based on index in list from `list` command.
 - Index must be provided.
 
-#### Examples:
+Examples:
 ![img_12.png](screenshots/img_12.png)
 - `delete 2` will delete the task `[T][✘] this` from the task list.
   ![img_13.png](screenshots/img_13.png)
