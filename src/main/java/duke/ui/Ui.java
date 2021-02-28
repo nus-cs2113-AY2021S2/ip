@@ -57,6 +57,12 @@ public class Ui {
         System.out.print(tasks);
     }
 
+
+    public void printQueryList(String listOfTasks) {
+        System.out.println("\tHere are the matching tasks in your list:");
+        System.out.print(listOfTasks);
+    }
+
     /**
      * Returns String of next line of user's input
      *
@@ -127,6 +133,10 @@ public class Ui {
      */
     public void printEmptyDescription(String type) {
         System.out.println("\t" + exceptionGreeting + "The description of a " + type + " cannot be empty.");
+    }
+
+    public void printEmptyQuery() {
+        System.out.println("\t" + exceptionGreeting + "The query cannot be empty.");
     }
 
     /**

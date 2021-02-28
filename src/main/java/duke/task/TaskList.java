@@ -47,6 +47,19 @@ public class TaskList {
         return tasks.size();
     }
 
+    public String getTasksByKeyword(String keyword) {
+        String list = "";
+        int taskCounter = 1;
+        for (Task t: tasks) {
+            if (t.getDescription().contains(keyword)) {
+                list += ("\t" + taskCounter + ". ");
+                list += (t + "\n");
+                taskCounter++;
+            }
+        }
+        return list;
+    }
+
     /**
      * Returns a String to represent the tasks in TaskList as an ordered list
      *
