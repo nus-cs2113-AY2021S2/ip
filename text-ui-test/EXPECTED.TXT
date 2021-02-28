@@ -1,5 +1,5 @@
 ============================================================
-Welcome to Duke v1.5 ----------- Latest Update: 6/2/21
+Welcome to Duke v1.1 ----------- Latest Update: 28/2/21
 Developed by: Oscar Lai
 ============================================================
 Good Day, I'm Alfred.
@@ -16,15 +16,17 @@ Good Day, I'm Alfred.
    ノ )　　Lﾉ
   (_／
 ============================================================
+Duke.txt successfully synced!
+============================================================
  HELP COMMANDS
-todo: adds to list
+todo: adds a todo task to the list
  Example: todo sleep
 
-deadline: adds to list
+deadline: adds a deadline task to the list
  Example: deadline homework /by tomorrow
 
-event: adds to list
- Example: event block event /at tuesday
+event: adds an event task to the list
+ Example: event birthday party /at tuesday
 
 List: view list
  Example: list
@@ -32,43 +34,51 @@ List: view list
 Help: view help commands
  Example: Help
 
-Done: check task as done
+Done: mark a task as done
  Example: Done 2
+
+Delete: deletes a task from list
+ Example: delete 2
+
+Find: find task that contains substring of input
+ Example: find birthday
+
+Duke.txt Format:
+[✓] todo gym
+[✓] deadline project meeting by 21st feb
+[ ] event football at friday 2pm
 
 Bye:  terminate program
  Example: bye
 
 ============================================================
-¯\_(ツ)_/¯ That is an invalid command!
-Enter "HELP" for commands!
-============================================================
-Your list is empty! Add something!
-============================================================
-¯\_(ツ)_/¯ That is an invalid format!
-Enter HELP for commands!
-============================================================
-I have added [T][ ] "sleep" to the List!
+I have added [D][ ] "homework (By: tomorrow)" to the List!
 You have 1 task in total!
 ============================================================
-I have added [D][ ] "homework (by: tomorrow)" to the List!
+ LIST
+1. [D] [ ] homework (By: tomorrow)
+============================================================
+I have added [E][ ] "party (At: friday 2pm)" to the List!
 You have 2 tasks in total!
 ============================================================
-I have added [E][ ] "birthday (at: friday)" to the List!
-You have 3 tasks in total!
-============================================================
-Error! You must enter an integer after "done"!
-============================================================
 Good Job, I will mark this as done!
-[D] [✓] homework (by: tomorrow)
+[D] [✓] homework (By: tomorrow)
 ============================================================
 You have already marked it as Done!
 ============================================================
-Error! You do not have that many items in your list!
+Error! You do not have that many tasks in your list!
+============================================================
+Noted! I will delete this at once!
+[D] [✓] homework (By: tomorrow)
+You have 1 task in total!
+============================================================
+I have found the follow items:
+1. [E][ ] "party (At: friday 2pm)"
+============================================================
+¯\_(ツ)_/¯ That is an invalid command! Enter "HELP" for commands!
 ============================================================
  LIST
-1. [T] [ ] sleep
-2. [D] [✓] homework (by: tomorrow)
-3. [E] [ ] birthday (at: friday)
+1. [E] [ ] party (At: friday 2pm)
 ============================================================
 Pleasure serving you...
  __      __
@@ -81,7 +91,9 @@ Pleasure serving you...
    \/  ;   /
     | === |See you again!
 
+Duke.txt file Updated!
 ============================================================
 Developed by: Oscar Lai
-Version 1.5
+Version 1.1
 ============================================================
+
