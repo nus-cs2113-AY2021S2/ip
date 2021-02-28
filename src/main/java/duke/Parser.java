@@ -12,6 +12,7 @@ import duke.commands.DeadlineCommand;
 import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
 import duke.commands.EventCommand;
+import duke.commands.FindCommand;
 import duke.commands.HelpCommand;
 import duke.commands.InvalidCommand;
 import duke.commands.ListCommand;
@@ -42,7 +43,7 @@ public class Parser {
         try {
             userCommand = prepareCommand(userInput);
         } catch (DukeException e) {
-            return new InvalidCommand(null);
+            return new InvalidCommand(MISSING_FIELDS_MESSAGE);
         }
         switch(userCommand[0]) {
         case "todo":
@@ -55,6 +56,8 @@ public class Parser {
             return prepareDoneCommand(userCommand[1]);
         case "delete":
             return prepareDeleteCommand(userCommand[1]);
+        case "find":
+            return new FindCommand(tasks, userCommand[1]);
         default:
             return new InvalidCommand(null);
         }

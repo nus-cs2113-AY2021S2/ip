@@ -1,5 +1,7 @@
 package duke.commands;
 
+import static duke.Ui.PRINT_FULL_LIST_STATEMENT;
+
 import duke.TaskList;
 
 public class ListCommand extends Command {
@@ -10,6 +12,6 @@ public class ListCommand extends Command {
 
     @Override
     public void execute() {
-        ui.printList(tasks);
+        ui.printList(tasks, PRINT_FULL_LIST_STATEMENT);
     }
 }

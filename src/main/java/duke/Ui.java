@@ -60,6 +60,10 @@ public class Ui {
             + "as completed in the list" + NEWLINE  + NEWLINE
             + "<> indicates an input field and | is a field separator." + NEWLINE
             + BORDER + NEWLINE;
+    public static final String PRINT_FULL_LIST_STATEMENT
+            = BORDER + "Here are the tasks in your list:" + NEWLINE;
+    public static final String PRINT_TARGET_LIST_STATEMENT
+            = BORDER + "Tasks matching this keyword:" + NEWLINE;
 
 
     /** Invalid command error messages */
@@ -73,7 +77,8 @@ public class Ui {
             = "Squeal? There is no task in the list with index ";
     public static final String INVALID_TASK_MESSAGE
             = "Squeal... Are you sure that is a task?";
-
+    public static final String FOUND_NO_RESULTS_MESSAGE
+            = "Panda can't find tasks in your list with that keyword...";
 
     /** Other error messages */
     public static final String LOADING_ERROR_MESSAGE
@@ -130,9 +135,8 @@ public class Ui {
         System.out.print(BORDER + NEWLINE);
     }
 
-    public void printList(TaskList tasks) {
-        System.out.print(BORDER);
-        System.out.print("Here are the tasks in your list:" + NEWLINE);
+    public void printList(TaskList tasks, String openingStatement) {
+        System.out.print(openingStatement);
         for (int i=0; i<tasks.getTasksCount(); i++) {
             System.out.print("\t" + (i + 1) + ". ");
             tasks.getTaskAtIndex(i).printTask();
