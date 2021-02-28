@@ -1,28 +1,36 @@
 package task;
 
+import exception.DukeException;
 import storage.Storage;
 import ui.Ui;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 public class TaskManager {
     public ArrayList<Task> taskList;
     private Ui ui;
     private Storage storage;
+    private Task task;
 
-    public TaskManager() {
+    /**
+     * Constructor for TaskManager
+     * @throws FileNotFoundException
+     * @throws DukeException
+     */
+    public TaskManager() throws FileNotFoundException, DukeException {
         storage = new Storage();
-        try {
-            taskList = storage.loadFile();
-        } catch (FileNotFoundException e) {
-            taskList = new ArrayList<>();
-        }
+        taskList = storage.loadFile();
         ui = new Ui();
 
     }
 
+    /**
+     * Adds a task to the ArrayList
+     * @param task Task object to be added
+     */
     public void addTask(Task task) {
         taskList.add(task);
         try {
@@ -36,6 +44,10 @@ public class TaskManager {
                 "Enter next command: ");
     }
 
+    /**
+     * Deletes the task from the arrayList based on the index given
+     * @param taskNoDelete task number to be deleted
+     */
     public void deleteTask(int taskNoDelete){
         Task task = taskList.get(taskNoDelete-1);
         taskList.remove(taskNoDelete-1);
@@ -45,6 +57,10 @@ public class TaskManager {
                 "Enter next command: ");
     }
 
+    /**
+     * Marks the task as done base on the index given
+     * @param taskNoDone task number to be marked done
+     */
     public void markDone(int taskNoDone){
         taskList.get(taskNoDone-1).setDone();
         ui.printMessage("I have marked this task as done: " +
@@ -53,14 +69,38 @@ public class TaskManager {
                 "Enter next command: ");
     }
 
+    /**
+     * Returns the size of the arrayList
+     * @return number of tasks in arrayOfTasks
+     */
     public int getNoOfTasks() {
         return taskList.size();
     }
 
+    /**
+     * Print all items inside the arrayList
+     */
     public void printTaskItems(){
             System.out.println("You have " + getNoOfTasks() + " task(s) in the list." );
             for(int i = 0; i < taskList.size(); i++) {
                 System.out.println( (i + 1) + ": " + taskList.get(i));
             }
+    }
+
+    /**
+     * Search and print tasks with descriptions that contains the keyword(s)
+     * @param keywordToFind keyword to find among the tasks
+     */
+    public void findTask(String keywordToFind) {
+        System.out.println("Here are the matching tasks found:");
+        ui.printMessage(ui.DIVIDER, ui.FOUNDLINE, ui.DIVIDER, "");
+        for(Task task: taskList){
+            String taskDescription = task.getDescription();
+            if (taskDescription.contains(keywordToFind)){
+                System.out.println(task);
+            }
+        }
+        ui.printMessage("", ui.DIVIDER, ui.FOUNDLINE, ui.DIVIDER);
+        ui.printMessage("\nEnter next command: ");
     }
 }

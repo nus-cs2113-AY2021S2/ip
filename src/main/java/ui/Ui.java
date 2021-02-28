@@ -10,6 +10,7 @@ public class Ui {
             + "|____/ \\__,_|_|\\_\\___|\n";
     public static final String DIVIDER = "===================================================";
     private final String ERROR_DIVIDER_LINE = "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
+    public static final String FOUNDLINE ="FOUND!!!FOUND!!!FOUND!!!FOUND!!!";
 
     public static void printMenu() {
         System.out.println("Hello! Im Duke\n" + logo + "What can I do for you?");
