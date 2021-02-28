@@ -3,7 +3,7 @@ This Duke program is for tracking tasks - *todo, event and deadline*. It is opti
 
 ## Quick Start
 1. Download and install Java 11 or above in your device.
-2. Get the latest version of the `ip.jar` from HERE (insert link)
+2. Get the latest version of the `ip.jar` from <a href="https://github.com/s-t-e-f/ip/releases/tag/v2.0">HERE</a>
 3. To execute the JAR file from Windows Command Prompt
    * Input the following command : `java -jar file_Path` , where **file_path** is the location of the jar file.
 4. Start using the app by entering commands to the user interface. 
