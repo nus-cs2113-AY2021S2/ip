@@ -7,6 +7,7 @@
    ```
 # Duke User Guide
 
+
 ## Setting up Duke
 1. Open Terminal(on mac) or Command Prompt(on Window)
 2. Change directory to the folder where ip.jar is stored
@@ -73,10 +74,9 @@ Find the task with matching keyword
 ### Examples of outcome:
 
 
-## Feature 8: Find
+## Feature 8: Bye
 Exits the program
 ### Usage: <code> bye </bye>
-### Example of usage: <code> Find party </code>
 ### Examples of outcome:
 
 
