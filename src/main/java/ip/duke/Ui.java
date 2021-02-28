@@ -97,6 +97,17 @@ public class Ui {
     }
 
     /**
+     * Prints the list of tasks that matches the find input.
+     *
+     * @param dateList the list of tasks that contains the finding keyword
+     */
+    public static void printDateList(ArrayList<Task> dateList) {
+        printLine();
+        System.out.println("Here are the tasks occurring on this specific date: ");
+        printList(dateList);
+    }
+
+    /**
      * Prints a message to confirm marking a task as done successfully by printing the formatted task
      * and the updated task status.
      *
@@ -128,8 +139,18 @@ public class Ui {
      */
     public static void printEmptyMessage() {
         printLine();
-        System.out.println("🙁 OOPS!!! The is no matching task in your list.");
+        System.out.println("There is no matching task in your list.");
         System.out.println("Please input another keyword! :)");
+        printLine();
+    }
+
+    /**
+     * Prints an error message if the task matches the find input cannot be found.
+     */
+    public static void printNoMessage() {
+        printLine();
+        System.out.println("There is no task occurring on this specific date.");
+        System.out.println("Please input another date! :)");
         printLine();
     }
 

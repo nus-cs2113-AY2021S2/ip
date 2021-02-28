@@ -1,11 +1,14 @@
 package ip.duke.task;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Represents a type of task with description and a deadline (date or time)
  * status is undone unless marked done by the user
  */
 public class Deadline extends Task {
-    protected String by;
+    String by;
 
     public Deadline(String description, String by) {
         super(description);
@@ -19,5 +22,9 @@ public class Deadline extends Task {
 
     public String toDataString() {
         return "D" + super.toDataString() + " | " + by;
+    }
+
+    public String getDate() {
+        return by;
     }
 }

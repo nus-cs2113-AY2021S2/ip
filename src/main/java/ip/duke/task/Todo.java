@@ -19,4 +19,8 @@ public class Todo extends Task {
     public String toDataString() {
         return "T" + super.toDataString();
     }
+
+    public String getDate() {
+        return null;
+    }
 }

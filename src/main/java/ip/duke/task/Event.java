@@ -5,7 +5,7 @@ package ip.duke.task;
  * status is undone by default unless marked done by the user
  */
 public class Event extends Task {
-    protected String at;
+    String at;
 
     public Event(String description, String at) {
         super(description);
@@ -20,5 +20,9 @@ public class Event extends Task {
 
     public String toDataString() {
         return "E" + super.toDataString() + " | " + at;
+    }
+
+    public String getDate() {
+        return at;
     }
 }
