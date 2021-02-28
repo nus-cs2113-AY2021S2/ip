@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Event class - object corresponds to a Event task represented by name and time
+ */
 public class Event extends Task {
 
     protected String eventTime;
@@ -16,11 +19,11 @@ public class Event extends Task {
 
     @Override
     public String getDate() {
-        return " (at: " + eventTime + ")";
+        return " (At: " + eventTime + ")";
     }
 
     @Override
     public String outputData() {
-        return "[" + getStatusIcon() + "] " + "event " + getName() + " /at " + eventTime;
+        return "[" + getStatusIcon() + "] " + "event " + getName() + " at " + eventTime;
     }
 }
