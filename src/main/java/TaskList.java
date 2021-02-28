@@ -10,10 +10,9 @@ public class TaskList {
     private final ArrayList<Task> tasks;
     private Ui ui;
 
-    public TaskList(List<String> taskStrings, Ui ui) {
+    public TaskList(Ui ui) {
         this.tasks = new ArrayList<>();
         this.ui = ui;
-        load(taskStrings);
     }
 
     public void addToList(Task newTask) {
@@ -28,19 +27,13 @@ public class TaskList {
     }
 
     public void printList() {
-        System.out.print(Ui.LINE_STRING);
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.println((i+1) + "." + this.getStatus(i));
-        }
-        System.out.println(Ui.LINE_STRING);
+        ui.printList(this);
     }
 
-
-    private String getStatus(int index) {
+    public String getStatus(int index) {
         return tasks.get(index).getTypeString() + tasks.get(index).getCheckbox() +
                 " " + tasks.get(index).toString();
     }
-
 
     public int getSize() {
         return tasks.size();
@@ -71,6 +64,21 @@ public class TaskList {
         String status = getStatus(index);
         tasks.remove(index);
         ui.deleteTaskMessage(status, this.getSize());
+    }
+
+    public void findTask(String query) {
+        TaskList results = new TaskList(ui);
+        for (Task task: tasks) {
+            if (task.getLabel().contains(query)) {
+                results.addToList(task,false);
+            }
+        }
+        if (tasks.isEmpty()) {
+
+        } else {
+            ui.printDeleteTask(results, query);
+        }
+
     }
 
     public void addTodo(String command) throws NoCommandLabelException {
@@ -126,7 +134,7 @@ public class TaskList {
         return label;
     }
 
-    private void load(List<String> taskStrings) {
+    public void load(List<String> taskStrings) {
         try {
             for (String taskString: taskStrings) {
                 loadTask(taskString);

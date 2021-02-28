@@ -56,6 +56,8 @@ public class Parser {
         case DELETE:
             deleteTask(tasks, inputStringArr);
             break;
+        case FIND:
+            break;
         case TODO:
             tasks.addTodo(inputString);
             break;
@@ -109,6 +111,9 @@ public class Parser {
             break;
         case "delete":
             command = Command.DELETE;
+            break;
+        case "find":
+            command = Command.FIND;
             break;
         case "todo":
             command = Command.TODO;
