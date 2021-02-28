@@ -24,10 +24,12 @@ public class Ui {
 
     /**
      * Prints Ui message when user deletes a task
+     * Note that the first line cannot be split into two,
+     *  otherwise a Ui bug would be introduced into the program.
+     * Exception is thrown if task index is invalid.
      */
     static void deletedTaskMessage(int deletedTaskIndex) {
-        System.out.println("Noted. I've removed this task: ");
-        System.out.println(TaskList.tasks.get(deletedTaskIndex));
+        System.out.println("Noted. I've removed this task: \n" + TaskList.tasks.get(deletedTaskIndex));
         System.out.println("Now you have " + (TaskList.maxTaskIndex - 1) + " tasks in the list." + "\n");
     }
 

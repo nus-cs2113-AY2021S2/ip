@@ -32,7 +32,7 @@ public class Parser {
      */
     public static void executeCommand(String input, Command c)
             throws InvalidCommandException, EmptyInputException, InvalidEventTimeException,
-                    InvalidDeadlineTimeException {
+            InvalidDeadlineTimeException {
         switch (c) {
         case LIST:
             Ui.listBeginMessage();
@@ -137,12 +137,21 @@ public class Parser {
      * @return Nothing.
      */
     private static boolean isEmptyInput(String input, Command c) {
-        return switch (c) {
-            case TODO -> (input.substring(TODO_START).strip().equals(""));
-            case EVENT -> input.substring(EVENT_START, getTimePosition(input)).strip().equals("");
-            case DEADLINE -> (input.substring(DEADLINE_START, getTimePosition(input)).strip().equals(""));
-            default -> false;
-        };
+        boolean isEmpty;
+        switch (c) {
+        case TODO:
+            isEmpty = input.substring(TODO_START).strip().equals("");
+            break;
+        case EVENT:
+            isEmpty = input.substring(EVENT_START, getTimePosition(input)).strip().equals("");
+            break;
+        case DEADLINE:
+            isEmpty = input.substring(DEADLINE_START, getTimePosition(input)).strip().equals("");
+            break;
+        default:
+            isEmpty = false;
+        }
+        return isEmpty;
     }
 
     /**
