@@ -7,10 +7,10 @@ import duke.Ui;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
+import java.time.format.DateTimeParseException;
 
 /**
- * To handle todo, event and deadline commands
- * Add them to the task list and the time if applicable
+ * To handle todo, event and deadline commands Add them to the task list and the time if applicable
  */
 public class AddCommand extends Command {
 
@@ -46,13 +46,14 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Add todo, event or deadline task to tasklist when command matches
-     * Prints invalid command when command is invalid
+     * Add todo, event or deadline task to tasklist when command matches Prints invalid command when
+     * command is invalid
      * @param taskList the Task List object which has the current tasks
      * @param ui The Ui object for user to interact with
+     * @throws DateTimeParseException if the user inputs a date format that is invalid
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DateTimeParseException {
         if (!isValidInput()) {
             Ui.printCommandIsInvalid();
             return;
@@ -78,7 +79,7 @@ public class AddCommand extends Command {
         } else if (fullCommand.contains("deadline")) {
             by = fullCommand.substring((fullCommand.indexOf("/") + 1) + START_INDEX_OF_BY);
             fullCommand = fullCommand.substring(START_INDEX_OF_DEADLINE, fullCommand.indexOf("/"));
-            Deadline deadline = new Deadline(fullCommand, by);
+            Deadline deadline = new Deadline(fullCommand, Deadline.formatDeadline(by));
             taskList.addTask(deadline);
             Keyword.setKeywords("D");
             Ui.printDeadlineDescription();

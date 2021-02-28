@@ -25,7 +25,6 @@ public class Storage {
 
     /**
      * Reads the user's files and loads the task list with the tasks found in the files.
-     *
      * @return the loaded task list
      * @throws FileNotFoundException  If the file does not exist
      * @throws NoSuchElementException If the file is empty
@@ -60,7 +59,7 @@ public class Storage {
     /**
      * Writes the tasks into a formatted txt file
      * @param fw the FileWriter object created by using the Filewriter constructor, which took the
-     *           path of the saved file as the parameter
+     * path of the saved file as the parameter
      * @throws IOException If the file path provided is invalid
      */
     public static void writeData(FileWriter fw) throws IOException {

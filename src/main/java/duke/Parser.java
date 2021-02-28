@@ -37,8 +37,7 @@ public class Parser {
         } else if (command.contains("bye")) {
             return new ByeCommand(command);
         } else {
-            Ui.printCommandIsInvalid();
-            return null;
+            throw new NullPointerException();
         }
     }
 }

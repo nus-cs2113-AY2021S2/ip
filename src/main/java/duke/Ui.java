@@ -11,6 +11,14 @@ import java.util.Scanner;
  */
 public class Ui {
 
+    public static void printTimeParseError() {
+        System.out.println("Please enter the time format as YYYY-MM-DD!");
+    }
+
+    public static void printNoMatchedTasks() {
+        System.out.println("No matching results found");
+    }
+
     public  void printBye() {
         System.out.println("Bye. Hope to see you again soon!");
     }
@@ -36,7 +44,7 @@ public class Ui {
         System.out.println("Invalid command! Please try again.");
     }
 
-    public static void listIsEmpty() {
+    public static void printListIsEmpty() {
         System.out.println("List is empty!");
     }
 

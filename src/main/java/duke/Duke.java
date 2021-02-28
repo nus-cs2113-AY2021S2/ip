@@ -4,6 +4,7 @@ import duke.command.Command;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
+import java.time.format.DateTimeParseException;
 
 /**
  * Class to create the duke object.
@@ -50,8 +51,12 @@ public class Duke {
                 isExit = c.isExit();
             } catch (FileNotFoundException e) {
                 ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
+            } catch (DateTimeParseException e) {
+                Ui.printTimeParseError();
+            } catch (IndexOutOfBoundsException e) {
+                Ui.printListIsEmpty();
+            } catch (NullPointerException e) {
+                Ui.printCommandIsInvalid();
             }
         }
     }
