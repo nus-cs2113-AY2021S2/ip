@@ -7,12 +7,14 @@
    ```
 # Duke User Guide
 
+<br>
 
 ## Setting up Duke
 1. Open Terminal(on mac) or Command Prompt(on Window)
 2. Change directory to the folder where ip.jar is stored
 3. Type in <code> java -jar ip.jar </code> to run Duke
 
+<br>
 
 ## Features
 1. Todo
@@ -24,6 +26,7 @@
 7. Find
 8. Bye
 
+<br>
 
 ## Feature 1: Todo
 Adds a Todo task in your task list
@@ -31,6 +34,7 @@ Adds a Todo task in your task list
 ### Example of usage: <code> todo to go and buy groceries
 ### Examples of outcome:
 
+<br>
 
 ## Feature 2: Deadline
 Adds a Deadline task in your task list
@@ -38,6 +42,7 @@ Adds a Deadline task in your task list
 ### Example of usage: <code> deadline English Essay submission /by tomorrow 23:59 </code>
 ### Examples of outcome:
 
+<br>
 
 ## Feature 3: Event
 Adds an Event task in your task list
@@ -45,13 +50,14 @@ Adds an Event task in your task list
 ### Examples of usage: <code> Event Jamie birthday party /at 23 Feb 2021 </code>
 ### Examples of outcome:
 
-
+<br>
 
 ##  Feature 4: List
 Lists all task current task in Duke
 ### Usage: <code> list <\code>
 ### Examples of outcome:
 
+<br>
 
 ## Feature 5: Done 
 Marks the task as done
@@ -59,6 +65,7 @@ Marks the task as done
 ### Example of usage: <code> Done 2 </code>
 ### Examples of outcome:
 
+<br>
 
 ## Feature 6: Delete
 Deletes the task
@@ -66,6 +73,7 @@ Deletes the task
 ### Example of usage: <code> Delete 2 </code>
 ### Examples of outcome:
 
+<br>
 
 ## Feature 7: Find
 Find the task with matching keyword
@@ -73,6 +81,7 @@ Find the task with matching keyword
 ### Example of usage: <code> Find party </code>
 ### Examples of outcome:
 
+<br>
 
 ## Feature 8: Bye
 Exits the program
