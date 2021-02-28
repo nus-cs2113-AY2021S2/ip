@@ -5,13 +5,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class SaveFileManager {
+public class Storage {
 	private static final String PATH_TO_SAVE_FILE = "./data/duke.txt";
 	private static final String SAVE_FILE_DIRECTORY= "./data";
 	private static final int MAX_TASKS = 100;
 
-	public static ArrayList<Task> readFromSaveFile() {
-		ArrayList<Task> tasks = new ArrayList<>(MAX_TASKS);
+	public static TaskList readFromSaveFile() {
+
+		TaskList tasks = new TaskList();
 		int indexOfTask = 0;
 		String taskType;
 		int isDone;
@@ -59,7 +60,7 @@ public class SaveFileManager {
 		return tasks;
 	}
 
-	public static void writeToSaveFile(ArrayList<Task> tasks, int numberOfTasks) throws IOException {
+	public static void writeToSaveFile(TaskList tasks, int numberOfTasks) throws IOException {
 		FileWriter fw = new FileWriter(PATH_TO_SAVE_FILE);
 		for (int i = 0; i < numberOfTasks; i++) {
 			String taskToSave = tasks.get(i).saveFormatString();
