@@ -11,7 +11,10 @@ public class eventCommand extends Command{
 
     public static final String MESSAGE_SUCCESS = "Task: [%s] has been added.";
 
-    public eventCommand(String desc, String date){
+    public eventCommand(String desc, String date) throws IncorrectFormatException {
+        if (desc.isEmpty() || date.isEmpty()){
+            throw new IncorrectFormatException("Event command format is incorrect!");
+        }
         this.task = new improvedTask(desc, listTypes.event, date);
     }
 

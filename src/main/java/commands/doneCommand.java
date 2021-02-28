@@ -13,7 +13,7 @@ public class doneCommand extends Command{
 
     public doneCommand(String number) throws IncorrectFormatException {
         if (number.isEmpty()){
-            throw new IncorrectFormatException("Delete command format is incorrect!");
+            throw new IncorrectFormatException("Done command format is incorrect!");
         }
         try{
             int temp = Integer.parseInt(number);
