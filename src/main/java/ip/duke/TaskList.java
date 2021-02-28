@@ -10,29 +10,59 @@ import java.util.ArrayList;
 public class TaskList {
     public static ArrayList<Task> list;
 
+    /**
+     * Constructs a new task list if there is no data stored in the given address.
+     */
     public TaskList() {
         list = new ArrayList<>();
     }
 
+    /**
+     * Constructs a task list by reading from the file in the given address.
+     *
+     * @param list the task list that is read from the file in the given address
+     */
     public TaskList(ArrayList<Task> list) {
         TaskList.list = list;
     }
 
+    /**
+     * Updates a todo type task into the task list and confirms the operation by printing a message
+     *
+     * @param description the description of this todo task obtained by parsing the user's input command
+     */
     public static void updateTodo(String description) {
         list.add(new Todo(description));
         Ui.printRecordMessage(list.get(list.size() - 1));
     }
 
+    /**
+     * Updates a deadline type task into the task list and confirms the operation by printing a message
+     *
+     * @param description the description of this deadline task obtained by parsing the user's input command
+     * @param byTime      the latest time of this task should be done obtain by parsing the user's input command
+     */
     public static void updateDeadline(String description, String byTime) {
         list.add(new Deadline(description, byTime));
         Ui.printRecordMessage(list.get(list.size() - 1));
     }
 
+    /**
+     * Updates an event type task into the task list and confirms the operation by printing a message
+     *
+     * @param description the description of this deadline task obtained by parsing the user's input command
+     * @param atTime      the start time of this task obtain by parsing the user's input command
+     */
     public static void updateEvent(String description, String atTime) {
         list.add(new Event(description, atTime));
         Ui.printRecordMessage(list.get(list.size() - 1));
     }
 
+    /**
+     * Marks the indicated user's input task as done and confirms the marking operation by printing a message.
+     *
+     * @param doneIndex the index of the task that to be marked as done
+     */
     public static void markDone(int doneIndex) {
         Task doneTask = list.get(doneIndex - 1);
         doneTask.setDone(true);
@@ -40,6 +70,11 @@ public class TaskList {
         Ui.printDoneMessage(doneTask);
     }
 
+    /**
+     * Deletes the indicated user's input task from the task list and confirms the marking operation by printing a message.
+     *
+     * @param deletedIndex the index of the task that to be deleted
+     */
     public static void deleteTask(int deletedIndex) {
         Task deletedTask = list.get(deletedIndex - 1);
         Ui.printDeletedMessage(deletedTask);
@@ -58,6 +93,13 @@ public class TaskList {
         Ui.printList(list);
     }
 
+    /**
+     * Obtains the tasks that contains the keyword that inputs by the user and stores them in another task list.
+     * Prints the new list obtained before
+     * Prints the warning message if there is no matching task in the new task list
+     *
+     * @param keywordToFind the keyword that the user want all the matching tasks to contain
+     */
     public static void getFoundTask(String keywordToFind) {
         ArrayList<Task> foundList = new ArrayList<>();
         for (Task task : list) {

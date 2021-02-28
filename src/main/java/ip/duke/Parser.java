@@ -1,7 +1,15 @@
 package ip.duke;
 
 public class Parser {
-
+    /**
+     * Parses the user's input into a format that can be recognized by the Duke project program.
+     * Apart from "help" "list" and "bye" commands, all other valid commands must be followed by further information.
+     * If the input is not an acceptable command or cannot be recognized correctly by this program
+     * it will throw a DukeException.
+     *
+     * @param input the string input by user, which is regarded as a command
+     * @throws DukeException an exception that occurs when an invalid command is input
+     */
     public static void parseCommand(String input) throws DukeException {
         int lengthOfCommandType = 0;
         String commandType;
