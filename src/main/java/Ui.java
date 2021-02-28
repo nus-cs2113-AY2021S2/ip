@@ -43,7 +43,7 @@ public class Ui {
 
     public void printDeleteTask(TaskList results, String query) {
         System.out.print(LINE_STRING);
-        System.out.println("Here are the tasks in your list that match 「" + query + "」:");
+        System.out.println("Here are the tasks in your list that match「" + query + "」:");
         for (int i = 0; i < results.getSize(); i++) {
             System.out.println((i+1) + "." + results.getStatus(i));
         }
@@ -118,6 +118,13 @@ public class Ui {
     public void printIndexOutOfBounds() {
         String exceptionMessage = LINE_STRING +
                 " 😥 Index out of bounds\n" +
+                LINE_STRING;
+        System.out.println(exceptionMessage);
+    }
+
+    public void printNoSearchQuery() {
+        String exceptionMessage = LINE_STRING +
+                " 😥 Please tell me what you are finding for\n" +
                 LINE_STRING;
         System.out.println(exceptionMessage);
     }

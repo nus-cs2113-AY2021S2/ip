@@ -68,11 +68,13 @@ public class TaskList {
 
     public void findTask(String query) {
         TaskList results = new TaskList(ui);
+
         for (Task task: tasks) {
             if (task.getLabel().contains(query)) {
                 results.addToList(task,false);
             }
         }
+
         if (tasks.isEmpty()) {
 
         } else {

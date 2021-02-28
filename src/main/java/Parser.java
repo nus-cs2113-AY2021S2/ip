@@ -33,6 +33,8 @@ public class Parser {
                 ui.printNoTaskSpecified();
             } catch (IndexOutOfBoundsException e) {
                 ui.printIndexOutOfBounds();
+            } catch (NoSearchQueryException e) {
+                ui.printNoSearchQuery();
             }
         }
     }
@@ -42,7 +44,7 @@ public class Parser {
      */
     public static boolean scanSwitch(String inputString, Command commandType, TaskList tasks) throws
             NoSuchMethodException, NoCommandLabelException, NoCommandFormatException, NoTaskSpecifiedException,
-            IndexOutOfBoundsException {
+            IndexOutOfBoundsException, NoSearchQueryException {
         String[] inputStringArr = inputString.split(" ");
         boolean isScanning = true;
 
@@ -57,6 +59,7 @@ public class Parser {
             deleteTask(tasks, inputStringArr);
             break;
         case FIND:
+            findTask(tasks, inputString, inputStringArr.length);
             break;
         case TODO:
             tasks.addTodo(inputString);
@@ -91,6 +94,17 @@ public class Parser {
             tasks.deleteTask(inputStringArr[1]);
         } else {
             throw new NoTaskSpecifiedException();
+        }
+    }
+
+    private static void findTask(TaskList tasks, String inputString, int length)
+            throws NoSearchQueryException {
+        String commandType = Command.FIND.name().toLowerCase();
+        if (length >= 2) {
+            String query = inputString.replaceFirst(commandType, "").trim();
+            tasks.findTask(query);
+        } else {
+            throw new NoSearchQueryException();
         }
     }
 

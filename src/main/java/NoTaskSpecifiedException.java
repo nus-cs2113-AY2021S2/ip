@@ -1,2 +1,2 @@
-public class NoTaskSpecifiedException extends Exception{
+public class NoTaskSpecifiedException extends Exception {
 }
