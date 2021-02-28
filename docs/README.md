@@ -132,7 +132,7 @@ Format: `find SEARCH_KEYWORD`
 * `SEARCH_KEYWORD` must not be left empty.
 
 Examples: 
-* `find wash` returns the following results:\
+* `find CS2113T` returns the following results:\
   ![find example output](https://github.com/tzexern/ip/blob/master/docs/img/Find%20Example%20Output.png?raw=true)
   
 ### 2.8 Exiting the program: `bye`
