@@ -26,7 +26,7 @@ public class TaskList {
     public void addToList(Task newTask, Boolean isPrinting) {
         tasks.add(newTask);
         if (isPrinting) {
-            ui.addToListMessage(tasks.size(), getStatus(tasks.size() - 1));
+            ui.printAddToList(tasks.size(), getStatus(tasks.size() - 1));
         }
     }
 
@@ -59,7 +59,7 @@ public class TaskList {
         int index = number - 1; // adjust for the list label starting from 1
         tasks.get(index).isDone(true);
         if (isPrinting) {
-            ui.completeTaskMessage(getStatus(index));
+            ui.printCompleteTask(getStatus(index));
         }
     }
 
@@ -71,7 +71,7 @@ public class TaskList {
         int index = i - 1; // adjust for the list label starting from 1
         String status = getStatus(index);
         tasks.remove(index);
-        ui.deleteTaskMessage(status, this.getSize());
+        ui.printDeleteTask(status, this.getSize());
     }
 
     public void findTask(String query) {
@@ -86,7 +86,7 @@ public class TaskList {
         if (results.isEmpty()) {
             ui.printNoResultsFound();
         } else {
-            ui.printDeleteTask(results, query);
+            ui.printFindTask(results, query);
         }
 
     }

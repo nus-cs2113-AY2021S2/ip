@@ -6,7 +6,7 @@ public class Ui {
         System.out.println(LINE_STRING);
     }
 
-    public void addToListMessage(int size, String status) {
+    public void printAddToList(int size, String status) {
         printLine();
         System.out.println("Say no more fam. The task is added:\n  " + status);
         System.out.println(size + " tasks in the list.");
@@ -21,14 +21,14 @@ public class Ui {
         printLine();
     }
 
-    public void completeTaskMessage(String status) {
+    public void printCompleteTask(String status) {
         printLine();
         System.out.println("Task.Task marked as done, gg ez");
         System.out.println("  " + status);
         printLine();
     }
 
-    public void deleteTaskMessage(String status, int size) throws IndexOutOfBoundsException {
+    public void printDeleteTask(String status, int size) throws IndexOutOfBoundsException {
         printLine();
         System.out.println("You are a quitter 👎 Anyways, I removed this:");
         System.out.println("  " + status);
@@ -36,7 +36,7 @@ public class Ui {
         printLine();
     }
 
-    public void printDeleteTask(TaskList results, String query) {
+    public void printFindTask(TaskList results, String query) {
         printLine();
         System.out.println("Here are the tasks in your list that match「" + query + "」:");
         for (int i = 0; i < results.getSize(); i++) {
@@ -51,7 +51,7 @@ public class Ui {
         printLine();
     }
 
-    public void welcomeMessage() {
+    public void printWelcome() {
         String welcome = LINE_STRING +
                 " Hello! I'm Bob 😀\n" +
                 " If you need anything hit me up fam 😌\n" +
@@ -59,7 +59,7 @@ public class Ui {
         System.out.print(welcome);
     }
 
-    public void goodbyeMessage() {
+    public void printGoodbye() {
         String goodbye = LINE_STRING + " Chao 👌\n" + LINE_STRING;
         System.out.print(goodbye);
     }

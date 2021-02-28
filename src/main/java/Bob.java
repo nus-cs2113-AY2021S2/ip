@@ -16,9 +16,9 @@ public class Bob {
 
     private void run() {
         tasks.load(storage.load());
-        ui.welcomeMessage();
-        Parser.scanInput(ui, tasks, storage);
-        ui.goodbyeMessage();
+        ui.printWelcome();
+        Parser.scanInput(tasks, storage, ui);
+        ui.printGoodbye();
     }
 
 }
