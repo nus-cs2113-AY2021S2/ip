@@ -29,6 +29,8 @@ public class Parser {
             return new doneCommand(arguments);
         case deleteCommand.COMMAND_WORD: // If command is  delete, delete task entry in list, print confirmation
             return new deleteCommand(arguments);
+        case findCommand.COMMAND_WORD:
+            return new findCommand(arguments);
         case byeCommand.COMMAND_WORD:
             return new byeCommand();
         default: // If command entered is any other unrecognised command, print invalid command

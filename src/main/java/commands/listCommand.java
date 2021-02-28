@@ -8,6 +8,7 @@ public class listCommand extends Command{
 
     @Override
     public CommandResult execute() {
+
         MESSAGE_SUCCESS = inputList.listItems();
         return new CommandResult(MESSAGE_SUCCESS);
     }

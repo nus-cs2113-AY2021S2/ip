@@ -116,4 +116,14 @@ public class todoList {
         }
         return out;
     }
+
+    public ArrayList<improvedTask> findTasksWithKeyword(String keyword){
+        ArrayList<improvedTask> tasksWithKeyword = new ArrayList<>();
+        for (improvedTask task : taskList) {
+            if(task.description.contains(keyword)){
+                tasksWithKeyword.add(task);
+            }
+        }
+        return tasksWithKeyword;
+    }
 }
