@@ -58,4 +58,18 @@ public class TaskList {
         Ui.printList(list);
     }
 
+    public static void getFoundTask(String keywordToFind) {
+        ArrayList<Task> foundList = new ArrayList<>();
+        for (Task task : list) {
+            if (task.getDescription().contains(keywordToFind)) {
+                foundList.add(task);
+            }
+        }
+        if (foundList.size() != 0) {
+            Ui.printFoundList(foundList);
+        } else {
+            Ui.printEmptyMessage();
+        }
+    }
+
 }

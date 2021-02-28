@@ -63,6 +63,12 @@ public class Ui {
         printLine();
     }
 
+    public static void printFoundList(ArrayList<Task> foundList) {
+        printLine();
+        System.out.println("Here are the matching tasks in your list: ");
+        printList(foundList);
+    }
+
     public static void printDoneMessage(Task task) {
         printLine();
         System.out.println("Nice! I've marked this task as done: ");
@@ -75,6 +81,13 @@ public class Ui {
         System.out.println("Noted. I've removed this task: ");
         System.out.println(task.toString());
         System.out.println("Now you have " + (TaskList.getSize() - 1) + " tasks in the list.");
+        printLine();
+    }
+
+    public static void printEmptyMessage() {
+        printLine();
+        System.out.println("🙁 OOPS!!! The is no matching task in your list.");
+        System.out.println("Please input another keyword! :)");
         printLine();
     }
 
