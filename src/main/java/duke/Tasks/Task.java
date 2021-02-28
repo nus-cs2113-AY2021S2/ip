@@ -1,8 +1,13 @@
 package duke.Tasks;
 
-public class Task {
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+public abstract class Task {
     protected String description;
     protected boolean isDone;
+    protected DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+    protected DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy, h:mm a");
 
     public Task(String description) {
         this.description = description;
@@ -20,6 +25,8 @@ public class Task {
     public String getDescription() {
         return description;
     }
+
+    public abstract LocalDateTime getDateTime();
 
     @Override
     public String toString() {

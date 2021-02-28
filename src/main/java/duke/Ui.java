@@ -120,4 +120,15 @@ public class Ui {
             System.out.println(task);
         }
     }
+
+    public void showSchedule(ArrayList<Task> taskList, String dateTime) {
+        if (taskList.size() == 0) {
+            System.out.println("There are no tasks on " + dateTime);
+            return;
+        }
+        System.out.println("Here are the tasks on " + dateTime);
+        for (Task task : taskList) {
+            System.out.println(task);
+        }
+    }
 }

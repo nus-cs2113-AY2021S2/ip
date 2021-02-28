@@ -3,6 +3,8 @@ package duke;
 import duke.Commands.*;
 import duke.Exceptions.*;
 
+import java.time.format.DateTimeParseException;
+
 public class Parser {
 
     public Parser() {
@@ -44,6 +46,13 @@ public class Parser {
                 command = new AddCommand(commandWord, commandDescription);
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new AddFormatException(commandWord);
+            }
+            break;
+        case "schedule":
+            try {
+                command = new ScheduleCommand(words[1]);
+            } catch (ArrayIndexOutOfBoundsException | DateTimeParseException e) {
+                throw new ScheduleFormatException();
             }
             break;
         case "delete":
