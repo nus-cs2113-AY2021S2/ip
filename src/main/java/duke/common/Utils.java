@@ -27,7 +27,6 @@ public class Utils {
     };
 
     private static final DateTimeFormatter[] POSSIBLE_DATE_FORMATS = {
-            DateTimeFormatter.BASIC_ISO_DATE,
             DateTimeFormatter.ofPattern("ddMMyyyy"),
             DateTimeFormatter.ofPattern("d.M.yyyy"),
             DateTimeFormatter.ofPattern("d-M-yyyy"),
