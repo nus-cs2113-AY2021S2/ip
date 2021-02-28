@@ -42,6 +42,21 @@ public class TaskList {
         }
     }
 
+    public void findTasks(String stringToFind) {
+        boolean tasksFound = false;
+        Ui.foundListMessage();
+        for (int i = 0; i < tasks.size(); i++) {
+            String description = TaskList.tasks.get(i).getDescription();
+            if (description.contains(stringToFind)) {
+                Ui.foundTasks(i+1, TaskList.tasks.get(i).toString());
+                tasksFound = true;
+            }
+        }
+        if (!tasksFound) {
+            Ui.noMatchingTasks();
+        }
+    }
+
     public void markDone(TaskList tasks, Ui ui, Storage storage, int index) {
         this.tasks.get(index-1).markAsDone();
         Ui.markAsDoneMessage(this.tasks.get(index-1).toString());
@@ -51,24 +66,6 @@ public class TaskList {
         Task toBeDeleted = this.tasks.get(index-1);
         this.tasks.remove(index-1);
         Ui.deleteTaskMessage(toBeDeleted.toString(), index);
-    }
-
-    public void addTaskFromSave(String isDone, String description) {
-        Task task = new Task(description.trim());
-        tasks.add(task);
-        markDoneFromSave(isDone);
-    }
-
-    public void addDeadlineFromSave(String isDone, String description, String date) {
-        Deadline deadline = new Deadline(description.trim(), date.trim());
-        tasks.add(deadline);
-        markDoneFromSave(isDone);
-    }
-
-    public void addEventFromSave(String isDone, String description, String date) {
-        Event event = new Event(description.trim(), date.trim());
-        tasks.add(event);
-        markDoneFromSave(isDone);
     }
 
     public void markDoneFromSave(String isDone) {

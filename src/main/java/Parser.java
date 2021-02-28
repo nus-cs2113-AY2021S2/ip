@@ -1,11 +1,4 @@
-import java.util.Arrays;
-import java.util.ArrayList;
-
 public class Parser {
-
-    static ArrayList<String> commandList = new ArrayList<String>(
-            Arrays.asList("bye", "list", "done", "todo", "deadline", "event", "delete")
-    );
 
     public static void lengthCheck(int numberOfTokens, String command) throws DukeException {
         if (numberOfTokens < 2) {
@@ -29,19 +22,23 @@ public class Parser {
                     break;
                 case "todo":
                     lengthCheck(numberOfTokens, command);
-                    c = new AddTodoCommand(stringTokens[1]);
+                    c = new AddTodoCommand(stringTokens[1].trim());
                     break;
                 case "event":
                     lengthCheck(numberOfTokens, command);
-                    c = new AddEventCommand(stringTokens[1]);
+                    c = new AddEventCommand(stringTokens[1].trim());
                     break;
                 case "deadline":
                     lengthCheck(numberOfTokens, command);
-                    c = new AddDeadlineCommand(stringTokens[1]);
+                    c = new AddDeadlineCommand(stringTokens[1].trim());
                     break;
                 case "delete":
                     lengthCheck(numberOfTokens, command);
                     c = new DeleteTaskCommand(Integer.parseInt(stringTokens[1].trim()));
+                    break;
+                case "find":
+                    lengthCheck(numberOfTokens, command);
+                    c = new FindCommand(stringTokens[1].trim());
                     break;
                 case "help":
                     c = new ShowHelpCommand();
