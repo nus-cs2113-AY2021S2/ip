@@ -29,6 +29,9 @@ public class Deadline extends Task {
         return ALPHABET_D;
     }
 
+    /**
+     * Prints the date after the task information.
+     */
     @Override
     public void printTaskInformation() {
         super.printTaskInformation();

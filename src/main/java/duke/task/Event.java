@@ -29,6 +29,9 @@ public class Event extends Task {
         return ALPHABET_E;
     }
 
+    /**
+     * Prints the date after the task information.
+     */
     @Override
     public void printTaskInformation() {
         super.printTaskInformation();
