@@ -7,7 +7,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
-
+/** Sets up the todolist for importing and writing to data file.
+ * */
 public class Storage {
 
     protected static String path = System.getProperty("user.dir") + "\\data";
@@ -38,19 +39,25 @@ public class Storage {
         writeToFile("data/duke.txt", "");
         return "No Data file found!\nData file created at: " + path;
     }
-    //writes the provided string to the indicated file
+    /**writes the provided string to the indicated file
+     * @param filePath indicates the file
+     * @param addText the string to write to file
+    */
     public static void writeToFile(String filePath, String addText) throws IOException { // Creates file at provided path and writes provided string to file.
         FileWriter fw = new FileWriter(filePath);
         fw.write(addText);
         fw.close();
     }
-    //Appends the provided string to the indicated file
+    /**Appends the provided string to the indicated file
+     * @param filePath indicates the fil
+     * @param textToAppend string to write to file
+     */
     private static void appendToFile(String filePath, String textToAppend) throws IOException { // Appends to file at provided path
         FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
         fw.write(textToAppend);
         fw.close();
     }
-    //rewrite the data file everytime the method is called
+    /**rewrite the data file everytime the method is called*/
     public static void updateFile() { // Updates data file with current list of tasks
         String file = "data/duke.txt";
         String out = inputList.tasksUpdate();
@@ -61,7 +68,7 @@ public class Storage {
             System.out.println("Something went wrong: " + e.getMessage());
         }
     }
-    //sets the data file to be imported and parts the imported file into executable commands. Execute the commands to add tasks and status.
+    /**sets the data file to be imported and parts the imported file into executable commands. Execute the commands to add tasks and status.*/
     private static String runImportLoopUntilEOF() throws FileNotFoundException, IncorrectFormatException {
         Command command;
         File importedList = new File("data/duke.txt");
@@ -82,7 +89,9 @@ public class Storage {
         CommandResult result = executeCommand(new listCommand());
         return MESSAGE_LIST_IMPORTED + result.feedbackToUser;
     }
-    //Executes command and returns resultant message in CommandResult form
+    /**Executes command and returns resultant message in CommandResult form
+     * @param command the command to be executed
+     */
     private static CommandResult executeCommand(Command command) {
         command.setData(inputList);
         try {
@@ -91,7 +100,7 @@ public class Storage {
             return new CommandResult(e.getMessage());
         }
     }
-    //Tries to import tasks data and creates data file if not present.
+    /**Tries to import tasks data and creates data file if not present.*/
     public static String initialiseStorage() throws IncorrectFormatException {
         try{
             return runImportLoopUntilEOF();

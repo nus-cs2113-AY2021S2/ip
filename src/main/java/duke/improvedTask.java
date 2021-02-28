@@ -5,6 +5,7 @@ import static duke.listTypes.todo;
 import static duke.listTypes.deadline;
 import static duke.listTypes.event;
 
+/**Stores the type of task, if the task is resolved, the description of the task and the date of the task if applicable*/
 public class improvedTask extends task {
     protected listTypes type;
     protected String date;
@@ -19,7 +20,7 @@ public class improvedTask extends task {
         this.type = type;
         this.date = "";
     }
-
+    /**Method displays the type of the task*/
     public String displayType(){ // method to show the type of task
         String out = "";
         switch(this.type){
@@ -36,7 +37,7 @@ public class improvedTask extends task {
 
         return  out;
     }
-
+    /**Method displays the date of the task*/
     public String displayDate(){ // method to show formatted date
         String out = "";
         switch (this.type){
@@ -51,7 +52,7 @@ public class improvedTask extends task {
         };
         return out;
     }
-
+    /**Method displays the description of the task*/
     public String displayDescription(){ // method to access description
         return description;
     }
@@ -64,7 +65,7 @@ public class improvedTask extends task {
         }
 
     }
-
+    /**Method displays the resolution status of the task*/
     public boolean isResolved(){
         return this.resolved;
     }

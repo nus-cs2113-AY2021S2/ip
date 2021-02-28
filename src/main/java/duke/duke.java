@@ -10,6 +10,9 @@ public class duke {
 
     private static todoList inputList = new todoList();
 
+    /**Sets the command to act on the current list of tasks and executes the input command.
+     * @param command the command to be executed
+     */
     private static CommandResult executeCommand(Command command) {
         command.setData(inputList);
         CommandResult result;
@@ -20,7 +23,9 @@ public class duke {
         }
         return result;
     }
-
+    /**Loops until bye command is detected. Write to storage every time command is entered
+     * @param Data the storage instance to update
+     */
     private static void runCommandLoopUntilExitCommand(Storage Data) {
         Command command = null;
         Ui ui = new Ui();
