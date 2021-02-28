@@ -1,12 +1,29 @@
+import Task.Task;
+
+import java.util.ArrayList;
+
 public class Ui {
 
+    // TODO: Make a method to print line
     public static final String LINE_STRING = "____________________________________________________________\n";
 
     public void addToListMessage(int size, String status) {
         System.out.print(LINE_STRING);
         System.out.println("Say no more fam. The task is added:\n  " + status);
         System.out.println(size + " tasks in the list.");
+        printLine();
+    }
+
+    private void printLine() {
         System.out.println(LINE_STRING);
+    }
+
+    public void printList(TaskList tasks) {
+        System.out.print(Ui.LINE_STRING);
+        for (int i = 0; i < tasks.getSize(); i++) {
+            System.out.println((i+1) + "." + tasks.getStatus(i));
+        }
+        System.out.println(Ui.LINE_STRING);
     }
 
     public void completeTaskMessage(String status) {
@@ -21,6 +38,21 @@ public class Ui {
         System.out.println("You are a quitter 👎 Anyways, I removed this:");
         System.out.println("  " + status);
         System.out.println(size + " tasks left in the list.");
+        System.out.println(LINE_STRING);
+    }
+
+    public void printDeleteTask(TaskList results, String query) {
+        System.out.print(LINE_STRING);
+        System.out.println("Here are the tasks in your list that match「" + query + "」:");
+        for (int i = 0; i < results.getSize(); i++) {
+            System.out.println((i+1) + "." + results.getStatus(i));
+        }
+        System.out.print(LINE_STRING);
+    }
+
+    public void printNoResultsFound() {
+        System.out.println(LINE_STRING);
+        System.out.println("No tasks found!");
         System.out.println(LINE_STRING);
     }
 
@@ -92,6 +124,13 @@ public class Ui {
     public void printIndexOutOfBounds() {
         String exceptionMessage = LINE_STRING +
                 " 😥 Index out of bounds\n" +
+                LINE_STRING;
+        System.out.println(exceptionMessage);
+    }
+
+    public void printNoSearchQuery() {
+        String exceptionMessage = LINE_STRING +
+                " 😥 Please tell me what you are finding for\n" +
                 LINE_STRING;
         System.out.println(exceptionMessage);
     }

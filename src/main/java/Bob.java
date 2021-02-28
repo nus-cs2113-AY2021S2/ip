@@ -7,7 +7,7 @@ public class Bob {
     public Bob(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath, ui);
-        tasks = new TaskList(storage.load(), ui);
+        tasks = new TaskList(ui);
     }
 
     public static void main(String[] args) {
@@ -15,6 +15,7 @@ public class Bob {
     }
 
     private void run() {
+        tasks.load(storage.load());
         ui.welcomeMessage();
         Parser.scanInput(ui, tasks, storage);
         ui.goodbyeMessage();

@@ -33,6 +33,8 @@ public class Parser {
                 ui.printNoTaskSpecified();
             } catch (IndexOutOfBoundsException e) {
                 ui.printIndexOutOfBounds();
+            } catch (NoSearchQueryException e) {
+                ui.printNoSearchQuery();
             }
         }
     }
@@ -42,7 +44,7 @@ public class Parser {
      */
     public static boolean scanSwitch(String inputString, Command commandType, TaskList tasks) throws
             NoSuchMethodException, NoCommandLabelException, NoCommandFormatException, NoTaskSpecifiedException,
-            IndexOutOfBoundsException {
+            IndexOutOfBoundsException, NoSearchQueryException {
         String[] inputStringArr = inputString.split(" ");
         boolean isScanning = true;
 
@@ -55,6 +57,9 @@ public class Parser {
             break;
         case DELETE:
             deleteTask(tasks, inputStringArr);
+            break;
+        case FIND:
+            findTask(tasks, inputString, inputStringArr.length);
             break;
         case TODO:
             tasks.addTodo(inputString);
@@ -92,6 +97,17 @@ public class Parser {
         }
     }
 
+    private static void findTask(TaskList tasks, String inputString, int length)
+            throws NoSearchQueryException {
+        String commandType = Command.FIND.name().toLowerCase();
+        if (length >= 2) {
+            String query = inputString.replaceFirst(commandType, "").trim();
+            tasks.findTask(query);
+        } else {
+            throw new NoSearchQueryException();
+        }
+    }
+
     /**
      * Takes a string and returns a enum Command
      * Treats an unknown command as regular task
@@ -109,6 +125,9 @@ public class Parser {
             break;
         case "delete":
             command = Command.DELETE;
+            break;
+        case "find":
+            command = Command.FIND;
             break;
         case "todo":
             command = Command.TODO;
