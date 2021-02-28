@@ -134,7 +134,10 @@ public class TaskList {
             throw new DukeException();
         }
     }
-    // Finds tasks using keyword
+    /**
+     * Finds tasks using keyword
+     * @param userInput input given by user
+     */
     public static void find(String userInput) {
         int taskCount = 1;
         boolean keywordFound = false;
@@ -152,7 +155,7 @@ public class TaskList {
         }
         System.out.println(Ui.DIVIDER_LINE);
     }
-   /**
+    /**
      * Loads list of tasks from save file
      * @throws FileNotFoundException when file is not found
      */
