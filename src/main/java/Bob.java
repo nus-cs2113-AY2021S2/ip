@@ -1,9 +1,16 @@
-public class Bob {
+/**
+ * Main class of the Bob task assistant
+ */
 
+public class Bob {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Initialises a Bob class and assign a file path to its storage
+     * @param filePath File path which the files will be stored at
+     */
     public Bob(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath, ui);
