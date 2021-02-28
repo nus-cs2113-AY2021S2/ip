@@ -2,6 +2,7 @@ package duke.ui;
 
 import duke.task.Task;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 
@@ -119,7 +120,7 @@ public class Ui {
         System.out.println("I have found the follow items: ");
         int foundCounter = 0;
         for(int i = 0; i < list.size(); i++) {
-            if(list.get(i).getName().contains(searchItem)) {
+            if(list.get(i).getName().toLowerCase().contains(searchItem)) {
                 Task t = list.get(i);
                 System.out.println(foundCounter+1 + ". " + "[" + t.getType() + "]["
                         + t.getStatusIcon() + "] \""
