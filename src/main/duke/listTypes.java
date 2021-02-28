@@ -1,6 +1,6 @@
-package Duke.todoList.task;
 
-import Duke.Duke;
+package duke;
+
 
 public enum listTypes {
     todo,deadline,event
