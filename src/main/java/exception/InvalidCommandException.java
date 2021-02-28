@@ -5,6 +5,7 @@ package exception;
  */
 public class InvalidCommandException extends Throwable {
     private final String command;
+
     public InvalidCommandException(String command) {
         this.command = command;
     }

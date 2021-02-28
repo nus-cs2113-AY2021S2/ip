@@ -17,12 +17,13 @@ import java.util.ArrayList;
 public class DukeWriter {
     /**
      * Writes the tasks in the task list to the storage text file.
+     *
      * @param tasks The task list.
      */
     public static void writeToFile(ArrayList<Task> tasks) {
         try {
             java.io.FileWriter fw = new java.io.FileWriter("duke.txt");
-            for (Task task: tasks) {
+            for (Task task : tasks) {
                 fw.write(getTaskAsWritableStr(task));
                 fw.write(System.lineSeparator());
             }
@@ -36,6 +37,7 @@ public class DukeWriter {
     /**
      * Returns a writable String based on the Task subclass identified based
      * so that it can be written to the storage text file.
+     *
      * @param task The Task subclass to be identified.
      * @return The writable String.
      */
@@ -50,10 +52,12 @@ public class DukeWriter {
         }
         return writable;
     }
+
     /**
      * Returns a writable String based
      * on the provided task identified as a ToDo.
      * so that it can be written to the storage text file.
+     *
      * @param task The ToDo identified.
      * @return The writable String.
      */
@@ -65,10 +69,12 @@ public class DukeWriter {
         writable = String.join(" | ", type, isDone, description);
         return writable;
     }
+
     /**
      * Returns a writable String based
      * on the provided task identified as a DeadLine.
      * so that it can be written to the storage text file.
+     *
      * @param task The DeadLine identified.
      * @return The writable String.
      */
@@ -81,10 +87,12 @@ public class DukeWriter {
         writable = String.join(" | ", type, isDone, description, by);
         return writable;
     }
+
     /**
      * Returns a writable String based
      * on the provided task identified as a Event.
      * so that it can be written to the storage text file.
+     *
      * @param task The Event identified.
      * @return The writable String.
      */

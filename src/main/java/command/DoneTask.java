@@ -10,6 +10,7 @@ import ui.Printer;
 public class DoneTask {
     /**
      * Checks whether the task index is valid, marks the task as done if so.
+     *
      * @param input The full input the user has entered.
      */
     public static void markTaskDone(String input) {

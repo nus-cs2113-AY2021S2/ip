@@ -14,6 +14,7 @@ public class Event extends Task {
 
     /**
      * Returns the date or time the Event is conducted at.
+     *
      * @return The date or time the Event is conducted at.
      */
     public String getAt() {

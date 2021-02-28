@@ -39,6 +39,7 @@ public class DukeReader {
 
     /**
      * Reads the input from the text file and creates a Task subclass to add to the task list.
+     *
      * @param input A line of input read from the text file.
      */
     private static void createTask(String input) {
@@ -60,9 +61,11 @@ public class DukeReader {
             break;
         }
     }
+
     /**
      * Reads the input from the text file and creates a Event to add to the task list
      * with corresponding description and done status.
+     *
      * @param input A line of input read from the text file.
      */
     private static void createEvent(boolean isDone, String description, String at) {
@@ -72,9 +75,11 @@ public class DukeReader {
         }
         tasks.add(event);
     }
+
     /**
      * Reads the input from the text file and creates a DeadLine to add to the task list
      * with corresponding description and done status.
+     *
      * @param input A line of input read from the text file.
      */
     private static void createDeadline(boolean isDone, String description, String by) {
@@ -84,9 +89,11 @@ public class DukeReader {
         }
         tasks.add(deadline);
     }
+
     /**
      * Reads the input from the text file and creates a ToDo to add to the task list
      * with corresponding description and done status.
+     *
      * @param input A line of input read from the text file.
      */
     private static void createToDo(boolean isDone, String description) {
@@ -100,6 +107,7 @@ public class DukeReader {
     /**
      * Returns the task list loaded from reading the file.
      * If no file exists, the task list returned is empty.
+     *
      * @return The task list loaded from reading the file.
      */
     public static ArrayList<Task> getTaskListFromFile() {

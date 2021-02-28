@@ -9,7 +9,6 @@ import ui.Printer;
 import java.util.Scanner;
 
 
-
 /**
  * Represents the main class, which is the entry point of the program.
  */

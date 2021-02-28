@@ -12,11 +12,12 @@ import ui.Printer;
 public class AddTask {
     /**
      * Checks whether the task can be added successfully to the task list and does so if so.
+     *
      * @param input The full entered by the user.
      */
     public static void addNewTask(String input) {
         try {
-            Task taskToAdd = TaskParser.processTaskToAdd(input);
+            Task taskToAdd = TaskParser.parse(input);
             if (taskToAdd != null) {
                 addTaskSuccessful(taskToAdd);
             }
@@ -27,6 +28,7 @@ public class AddTask {
 
     /**
      * Adds a task to the task list
+     *
      * @param taskToAdd The task to add to the task list
      */
     public static void addTaskSuccessful(Task taskToAdd) {

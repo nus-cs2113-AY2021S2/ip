@@ -16,6 +16,7 @@ public class Task {
 
     /**
      * Returns the status icon of the task based on its done status.
+     *
      * @return The status icon of the task based on its done status.
      */
     public String getStatusIcon() {
@@ -24,6 +25,7 @@ public class Task {
 
     /**
      * Returns the description of the task.
+     *
      * @return The description of the task.
      */
     public String getDescription() {
@@ -39,6 +41,7 @@ public class Task {
 
     /**
      * Returns the done status of the task.
+     *
      * @return The done status of the task.
      */
     public boolean isDone() {

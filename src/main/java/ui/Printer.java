@@ -37,6 +37,7 @@ public class Printer {
 
     /**
      * Prints the tasks in the task list.
+     *
      * @param tasks The task list.
      */
     public static void printTaskList(ArrayList<Task> tasks) {
@@ -50,6 +51,7 @@ public class Printer {
 
     /**
      * Prints a message to tell the user the task has been added successfully to the task list.
+     *
      * @param taskToAdd The task that to be added.
      * @param taskCount The number of tasks in the task list.
      */
@@ -63,6 +65,7 @@ public class Printer {
 
     /**
      * Prints a message to tell the user the task has been marked as done successfully in the task list.
+     *
      * @param taskToMarkDone The task to be marked as done.
      */
     public static void taskMarkedAsDoneMessage(Task taskToMarkDone) {
@@ -74,8 +77,9 @@ public class Printer {
 
     /**
      * Prints a message to tell the user the task has been deleted successfully from the task list.
+     *
      * @param taskToDelete The task to be deleted from the task list.
-     * @param taskCount The number of tasks in the task list.
+     * @param taskCount    The number of tasks in the task list.
      */
     public static void deleteTaskSuccessfulMessage(Task taskToDelete, int taskCount) {
         System.out.println("____________________________________________________________");
@@ -105,6 +109,7 @@ public class Printer {
 
     /**
      * Prints a message to tell the user that no matching tasks with the given keyword are found in the task list.
+     *
      * @param keyword The keyword to be matched.
      */
     public static void printNoMatchingTasks(String keyword) {
@@ -115,6 +120,7 @@ public class Printer {
 
     /**
      * Prints the matching tasks in the task list that match the keyword.
+     *
      * @param matchingTasks A list containing the tasks in the task list that match with they keyword.
      */
     public static void printMatchingTaskList(ArrayList<Task> matchingTasks) {
