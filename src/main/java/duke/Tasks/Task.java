@@ -22,6 +22,10 @@ public abstract class Task {
         return isDone;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public abstract LocalDateTime getDateTime();
 
     @Override

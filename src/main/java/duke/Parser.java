@@ -18,6 +18,13 @@ public class Parser {
         case "list":
             command = new ListCommand();
             break;
+        case "find":
+            try {
+                command = new FindCommand(words[1]);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new FindFormatException();
+            }
+            break;
         case "done":
             try {
                 command = new DoneCommand(Integer.parseInt(words[1]) - 1);
