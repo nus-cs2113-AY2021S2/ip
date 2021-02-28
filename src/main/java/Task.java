@@ -5,7 +5,7 @@ public class Task implements java.io.Serializable{
     protected String deadline = "";
 
     /**
-     * Constructor of Task class. This constructor assigns typeIcon, which differs based on the description.
+     * Assigns typeIcon, which differs based on the description.
      * @param description
      */
     public Task(String description) {
@@ -45,7 +45,7 @@ public class Task implements java.io.Serializable{
     }
 
     /**
-     * This method returns the status icon of the task.
+     * Returns the status icon of the task.
      * @return
      */
     public String getStatusIcon() {
@@ -54,6 +54,7 @@ public class Task implements java.io.Serializable{
     }
 
     /**
+     * Returns typeIcon
      * @return
      */
     public String getTypeIcon() {
@@ -61,6 +62,7 @@ public class Task implements java.io.Serializable{
     }
 
     /**
+     * Sets isDone to specified boolean value
      * @param isDone
      */
     public void setStatus(boolean isDone){
@@ -68,6 +70,7 @@ public class Task implements java.io.Serializable{
     }
 
     /**
+     * Sets description to specified string value
      * @param description
      */
     public void setDescription(String description) {
@@ -75,6 +78,7 @@ public class Task implements java.io.Serializable{
     }
 
     /**
+     * Sets typeIcon to specified string value
      * @param typeIcon
      */
     public void setTypeIcon(String typeIcon) {
@@ -82,6 +86,7 @@ public class Task implements java.io.Serializable{
     }
 
     /**
+     * Sets deadline to specified string value
      * @param deadline
      */
     public void setDeadline(String deadline) {

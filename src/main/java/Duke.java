@@ -3,7 +3,7 @@ import java.util.*;
 
 public class Duke {
     /**
-     * This method saves the ArrayList of tasks to duke.txt
+     * Saves the ArrayList of tasks to duke.txt
      * @param taskItems
      */
     public static void saveToFile(ArrayList<Task> taskItems){
