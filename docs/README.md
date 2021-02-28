@@ -307,6 +307,7 @@ Version 1.1
 > For Mac Users: Use **Spotlight** or **Finder**
 
 ## 5. Command Summary
+
 **Command** | **Format** | **Example**
 ------------ | -------------------- | ------------
 todo | `todo <task description>` | `todo save gotham`
