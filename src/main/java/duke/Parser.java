@@ -18,6 +18,14 @@ import java.util.regex.Pattern;
  */
 public class Parser {
     /**
+     * Constants used for accessing command, argument and parameter index number.
+     */
+    private static final int COMMAND_INDEX_NUMBER = 0;
+    private static final int ARGUMENT_INDEX_NUMBER = 1;
+    private static final int FIRST_PARAMETER_INDEX_NUMBER = 0;
+    private static final int SECOND_PARAMETER_INDEX_NUMBER = 1;
+
+    /**
      * Parses user input to corresponding command class based on command type in user input.
      *
      * @param userInput Raw argument taken from user.
@@ -26,8 +34,8 @@ public class Parser {
      */
     public static Command parse(String userInput) throws DukeException {
         String[] splitInputs = splitInput(userInput);
-        String command = splitInputs[0];
-        String argument = splitInputs[1];
+        String command = splitInputs[COMMAND_INDEX_NUMBER];
+        String argument = splitInputs[ARGUMENT_INDEX_NUMBER];
 
         if (command.equals("bye")) {
             return new ExitCommand();
@@ -41,13 +49,13 @@ public class Parser {
             return new TodoCommand(argument);
         } else if (command.equals("event")) {
             String[] parameters = splitParameter(argument,"/at ", 2);
-            String description = parameters[0];
-            String at = parameters[1];
+            String description = parameters[FIRST_PARAMETER_INDEX_NUMBER];
+            String at = parameters[SECOND_PARAMETER_INDEX_NUMBER];
             return new EventCommand(description, at);
         } else if (command.equals("deadline")) {
             String[] parameters = splitParameter(argument,"/by ", 2);
-            String description = parameters[0];
-            String by = parameters[1];
+            String description = parameters[FIRST_PARAMETER_INDEX_NUMBER];
+            String by = parameters[SECOND_PARAMETER_INDEX_NUMBER];
             return new DeadlineCommand(description, by);
         } else if (command.equals("delete")) {
             return new DeleteCommand(getIndexNumber(argument));
