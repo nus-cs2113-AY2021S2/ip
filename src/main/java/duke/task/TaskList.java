@@ -118,6 +118,14 @@ public class TaskList {
         }
     }
 
+    public void findTask(String keyword) {
+        System.out.println("Here are the matching tasks in your list:");
+        for (int counter = 0; counter < userTasks.size(); counter++) {
+            if(userTasks.get(counter).getDescription().contains(keyword))
+                System.out.println((counter+1) + "." + userTasks.get(counter).toString());
+        }
+    }
+
     private void showTaskCreationMessage(Task userTask, int noOfTasks) {
         System.out.println("Got it. I've added this task: ");
         System.out.println(userTask.toString());

@@ -42,6 +42,8 @@ public class Parser {
             return new DoneCommand(activity, action);
         case "delete":
             return new DeleteCommand(activity, action);
+        case "find":
+            return new FindCommand(activity, action);
         case "bye":
             return new ExitCommand(activity, action);
         default:
