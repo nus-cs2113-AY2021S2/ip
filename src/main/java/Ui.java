@@ -1,59 +1,54 @@
-import Task.Task;
-
-import java.util.ArrayList;
-
 public class Ui {
 
-    // TODO: Make a method to print line
-    public static final String LINE_STRING = "____________________________________________________________\n";
-
-    public void addToListMessage(int size, String status) {
-        System.out.print(LINE_STRING);
-        System.out.println("Say no more fam. The task is added:\n  " + status);
-        System.out.println(size + " tasks in the list.");
-        printLine();
-    }
+    public static final String LINE_STRING = "____________________________________________________________";
 
     private void printLine() {
         System.out.println(LINE_STRING);
     }
 
+    public void addToListMessage(int size, String status) {
+        printLine();
+        System.out.println("Say no more fam. The task is added:\n  " + status);
+        System.out.println(size + " tasks in the list.");
+        printLine();
+    }
+
     public void printList(TaskList tasks) {
-        System.out.print(Ui.LINE_STRING);
+        printLine();
         for (int i = 0; i < tasks.getSize(); i++) {
             System.out.println((i+1) + "." + tasks.getStatus(i));
         }
-        System.out.println(Ui.LINE_STRING);
+        printLine();
     }
 
     public void completeTaskMessage(String status) {
-        System.out.print(LINE_STRING);
+        printLine();
         System.out.println("Task.Task marked as done, gg ez");
         System.out.println("  " + status);
-        System.out.println(LINE_STRING);
+        printLine();
     }
 
     public void deleteTaskMessage(String status, int size) throws IndexOutOfBoundsException {
-        System.out.print(LINE_STRING);
+        printLine();
         System.out.println("You are a quitter 👎 Anyways, I removed this:");
         System.out.println("  " + status);
         System.out.println(size + " tasks left in the list.");
-        System.out.println(LINE_STRING);
+        printLine();
     }
 
     public void printDeleteTask(TaskList results, String query) {
-        System.out.print(LINE_STRING);
+        printLine();
         System.out.println("Here are the tasks in your list that match「" + query + "」:");
         for (int i = 0; i < results.getSize(); i++) {
             System.out.println((i+1) + "." + results.getStatus(i));
         }
-        System.out.print(LINE_STRING);
+        printLine();
     }
 
     public void printNoResultsFound() {
-        System.out.println(LINE_STRING);
+        printLine();
         System.out.println("No tasks found!");
-        System.out.println(LINE_STRING);
+        printLine();
     }
 
     public void welcomeMessage() {
