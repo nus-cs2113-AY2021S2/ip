@@ -98,7 +98,7 @@ Please assign me my tasks to complete!
 2. If you need help setting up Arthur, you can always look into the [Getting Started](#getting-started) section.
 3. You can learn more about the features, Arthur can offer, by viewing the [Features](#features) section.
 4. If you want to quickly glance a look at the features, you can resort to the [Cheat Sheet](#cheat-sheet).
-5. If you are experiencing any issue with Arthur, you can view the [Troubleshoot](#troubleshoot) section or get in touch with the [Contributor(s)](#contributor(s)).
+5. If you are experiencing any issue with Arthur, you can view the [Troubleshoot](#troubleshoot) section or get in touch with the [Contributor(s)](#contributors).
 
 &nbsp;
 ### Tasks classification
@@ -143,6 +143,7 @@ It is advisable that you do not make any changes to the saved file as it can be 
 &nbsp;
 
 Download `Arthur.jar` from [here](https://github.com/H-horizon/ip/releases/download/v0.2/Arthur.jar):
+
 **Requirement:**
 * Java 11
 
