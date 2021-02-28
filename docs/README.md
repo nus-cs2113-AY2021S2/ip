@@ -1,4 +1,6 @@
-# User Guide
+#Duke
+
+## User Guide
 
 Duke is a **desktop app for managing tasks, optimized for use via a Command 
 Line Interface** (CLI). If you can type fast, Duke can enable task list 
@@ -15,14 +17,14 @@ management faster than traditional GUI apps.
    2.7 [Finding a task](#27-finding-a-task-find)\
    2.8 [Exiting the program](#28-exiting-the-program-bye)\
    2.9 [Saving the data](#29-saving-the-data)\
-   2.10 [Editing the data file](#210-editing-the-data-file)
-   
+   2.10 [Loading the date](#210-loading-the-data)\
+   2.11 [Editing the data file](#211-editing-the-data-file)
 1. [Frequently Asked Questions (FAQ)](#3-faq)
 1. [Command Summary](#4-command-summary)
 
 ## 1. Quick Start
 1. Ensure you have Java `11` or above installed in your Computer.
-1. Download the latest `Duke.jar` from [here](#).
+1. Download the latest `Duke.jar` from [here](https://github.com/tzexern/ip/releases/download/A-Release/Duke.jar).
 1. Copy the file to the folder you want to use as the *home folder* for your Duke.
 1. For Windows users, pull up your **Command Prompt**.\
    For Mac users, pull up your **Terminal**.\
@@ -53,7 +55,7 @@ Examples:
 * `todo book bandroom`
 * `todo retrieve parcel`
 * Shows a message upon successful addition:\
-![todo example output]()
+![todo example output](https://github.com/tzexern/ip/blob/master/docs/img/Todo%20Example%20Output.png?raw=true)
 
 ### 2.2 Adding a deadline: `deadline`
 Adds a task with an associated deadline.
@@ -69,7 +71,7 @@ Examples:
 * `deadline CS2113T Deliverables 2 /by 03-28-2021`
 * `deadline CS3235 Quiz 4 /by 03-05-2021`
 * Shows a message upon successful addition:\
-  ![deadline example output]()
+  ![deadline example output](https://github.com/tzexern/ip/blob/master/docs/img/Deadline%20Example%20Output.png?raw=true)
 
 ### 2.3 Adding an event: `event`
 Adds an event with a date.
@@ -84,7 +86,7 @@ Examples:
 * `event CNY gathering /at 02-11-2021`
 * `event Valentines Date /at 02-14-2021`
 * Shows a message upon successful addition:\
-  ![event example output]()
+  ![event example output](https://github.com/tzexern/ip/blob/master/docs/img/Event%20Example%20Output.png?raw=true)
 
 ### 2.4 Listing all tasks: `list`
 Shows a list of all the tasks currently saved in Duke.
@@ -93,7 +95,7 @@ Format: `list`
 
 Examples:
 * Here's a sample output of an existing list of task:\
-  ![list example output]()
+  ![list example output](https://github.com/tzexern/ip/blob/master/docs/img/List%20Example%20Output.png?raw=true)
 
 ### 2.5 Marking a task done: `done`
 Marks an existing task in the list as done.
@@ -105,8 +107,8 @@ Format: `done INDEX`
 * `INDEX` must be referring to an existing task.
 
 Examples:
-* `done 2` where the current number of tasks in the list is 3.\
-  ![done example output]()
+* `done 2`\
+  ![done example output](https://github.com/tzexern/ip/blob/master/docs/img/Done%20Example%20Output.png?raw=true)
 
 ### 2.6 Deleting a task: `delete`
 Deletes an existing task in the list.
@@ -118,8 +120,8 @@ Format: `delete INDEX`
 * `INDEX` must be referring to an existing task.
 
 Examples:
-* `delete 3` where the current number of tasks in the list is 4.\
-  ![delete example output]()
+* `delete 3`\
+  ![delete example output](https://github.com/tzexern/ip/blob/master/docs/img/Delete%20Example%20Output.png?raw=true)
 
 ### 2.7 Finding a task: `find`
 Searches for  a task and shows a list of the search results with their corresponding
@@ -131,7 +133,7 @@ Format: `find SEARCH_KEYWORD`
 
 Examples: 
 * `find wash` returns the following results:\
-  ![find example output]()
+  ![find example output](https://github.com/tzexern/ip/blob/master/docs/img/Find%20Example%20Output.png?raw=true)
   
 ### 2.8 Exiting the program: `bye`
 Exits the program.
@@ -142,7 +144,17 @@ Format: `bye`
 Duke data are **saved automatically** in the hard disk after any commands that modifies
 data. There is no need to save manually.
 
-### 2.10 Editing the data file
+### 2.10 Loading the data
+The save file will be **loaded automatically** if there is an existing one.\
+Save file will be **created automatically** if it does not.
+
+Examples:
+* Here's a sample output of a save file being **loaded** successfully:\
+  ![save file loaded](https://github.com/tzexern/ip/blob/master/docs/img/Save%20File%20Loaded.png?raw=true)
+* Here's a sample output of a save file being **created** successfully:\
+  ![save file created](https://github.com/tzexern/ip/blob/master/docs/img/Save%20File%20Created.png?raw=true)
+  
+### 2.11 Editing the data file
 Duke data are saved as a text file `[JAR file location]/duke.txt`.\
 Advanced users are welcome to update data directly by editing that data file.
 > ***CAUTION***: If your changes to the data file makes its format invalid, you
