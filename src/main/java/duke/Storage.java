@@ -16,17 +16,17 @@ import java.util.Scanner;
 
 public class Storage {
 
-    private final String filePath;
+    private final String FILEPATH;
     private ArrayList<Task> taskList;
 
     public Storage(String filePath) {
-        this.filePath = filePath;
+        this.FILEPATH = filePath;
         taskList = new ArrayList<>();
     }
 
     public ArrayList<Task> load() throws DukeException {
 
-        File f = new File(filePath);
+        File f = new File(FILEPATH);
         Scanner s;
         try {
             s = new Scanner(f);
@@ -65,11 +65,11 @@ public class Storage {
 
     public void save(TaskList saveList) throws IOException {
         taskList = saveList.getTaskList();
-        File f = new File(filePath);
+        File f = new File(FILEPATH);
         if (f.createNewFile()) {
-            Ui.showCreateNewFile(filePath);
+            Ui.showCreateNewFile(FILEPATH);
         }
-        FileWriter fw = new FileWriter(filePath);
+        FileWriter fw = new FileWriter(FILEPATH);
 
         for (Task task : taskList) {
             if (task != null) {
