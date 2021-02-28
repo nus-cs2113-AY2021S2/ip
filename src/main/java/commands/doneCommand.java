@@ -1,6 +1,7 @@
 package commands;
 
 import duke.IncorrectFormatException;
+import duke.todoList;
 
 public class doneCommand extends Command{
     public static final String COMMAND_WORD = "done";
@@ -19,14 +20,19 @@ public class doneCommand extends Command{
         }
         num = number;
     }
-    public doneCommand(){
+    public doneCommand(todoList list){
+        inputList = list;
         num = Integer.toString(inputList.tasksTotal());
     }
 
     @Override
     public CommandResult execute() {
-        inputList.resolveTask(num);
-        return new CommandResult(MESSAGE_SUCCESS);
+        try {
+            inputList.resolveTask(num);
+            return new CommandResult(MESSAGE_SUCCESS);
+        }catch (IndexOutOfBoundsException e){
+            return new CommandResult("Selected task does not exist! Error: " + e.getMessage());
+        }
     }
 
 }

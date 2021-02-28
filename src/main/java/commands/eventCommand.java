@@ -1,5 +1,6 @@
 package commands;
 
+import duke.IncorrectFormatException;
 import duke.improvedTask;
 import duke.listTypes;
 
@@ -14,7 +15,10 @@ public class eventCommand extends Command{
     }
 
     @Override
-    public CommandResult execute() {
+    public CommandResult execute() throws IncorrectFormatException {
+        if(task == null) {
+            throw new IncorrectFormatException("Task was not entered!");
+        }
         inputList.addTask(task);
         return new CommandResult(String.format(MESSAGE_SUCCESS, task.displayDescription()));
     }

@@ -18,7 +18,10 @@ public class deadlineCommand extends Command{
     }
 
     @Override
-    public CommandResult execute() {
+    public CommandResult execute() throws IncorrectFormatException {
+        if(task == null) {
+            throw new IncorrectFormatException("Task was not entered!");
+        }
         inputList.addTask(task);
         return new CommandResult(String.format(MESSAGE_SUCCESS, task.displayDescription()));
     }

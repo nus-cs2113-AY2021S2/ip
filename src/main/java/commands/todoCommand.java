@@ -1,5 +1,6 @@
 package commands;
 
+import duke.IncorrectFormatException;
 import duke.improvedTask;
 import duke.listTypes;
 import duke.task;
@@ -16,9 +17,12 @@ public class todoCommand extends Command{
     }
 
     @Override
-    public CommandResult execute() {
-            inputList.addTask(task);
-            return new CommandResult(String.format(MESSAGE_SUCCESS, task.displayDescription()));
+    public CommandResult execute() throws IncorrectFormatException {
+        if(task.displayDescription() == null) {
+            throw new IncorrectFormatException("Task was not entered!");
+        }
+        inputList.addTask(task);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, task.displayDescription()));
     }
 
 

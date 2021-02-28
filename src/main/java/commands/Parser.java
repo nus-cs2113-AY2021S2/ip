@@ -12,9 +12,10 @@ public class Parser {
             return new incorrectCommand("Incorrect command format!");
         }
         String arguments = "";
-        if (tokens.length > 1){
-             arguments = tokens[1];
+        if (tokens.length == 1 && !commandWord.equals(byeCommand.COMMAND_WORD)){
+            throw new IncorrectFormatException("Command format is incorrect!");
         }
+        arguments = tokens[1];
         switch(commandWord){
         case todoCommand.COMMAND_WORD: // If command is todo, parse the task, print confirmation
             return new todoCommand(arguments);
@@ -45,21 +46,11 @@ public class Parser {
             command = "event " + tokens[2] + " /at " + tokens[3];
             break;
         case "T":
-            command = "todo " + tokens[2];
+            command = "todo " + tokens[1];
             break;
         }
         return parseCommand(command);
     }
-    public Command parseDoneTasks(String input){
-        String[] tokens = input.split("/");
-        String command = "";
-        if (tokens[1].equals("X")){
-            return new doneCommand();
-        }
-        return new Command();
-    }
-
-
     private Command prepareDeadlineCommand(String args) throws IncorrectFormatException {
         String[] parts = args.split("/by");
         // Validate arg string format

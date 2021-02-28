@@ -1,5 +1,6 @@
 package commands;
 
+import duke.IncorrectFormatException;
 import duke.todoList;
 
 public class Command {
@@ -20,7 +21,7 @@ public class Command {
         this.inputList = input;
     }
 
-    public CommandResult execute() {
+    public CommandResult execute() throws IncorrectFormatException {
         throw new UnsupportedOperationException("This method is to be implemented by child classes");
     };
 
