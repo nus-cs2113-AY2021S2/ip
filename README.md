@@ -32,7 +32,7 @@ This adds an event to the list.
 
 Format: event <TASK> /at <DETAILS ABOUT THE DATE/TIME>
 
-Example: event friend's birthday /at 1 jan 2021
+Example: event birthday party /at 31 dec 2021
 
 ### Add a task with deadline: deadline
 
@@ -85,3 +85,16 @@ This quits the program.
 Format: bye
 
 Example: bye
+
+## Functions Summary
+
+| Function  | Format | Example |
+| ------------- | ------------- | ------------- |
+| todo  | todo <TASK>  | todo read a book  |
+| event  | event <TASK> /at <DETAILS ABOUT THE DATE/TIME>  | event birthday party /at 31 dec 2021  |
+| deadline  | deadline <TASK> /by <DETAILS ABOUT THE DATE/TIME>  | deadline essay report /by next monday  |
+| list  | list  | list  |
+| done  | done <TASK NUMBER>  | done 1  |
+| delete  | delete <TASK NUMBER>  | delete 1  |
+| find  | find <KEYWORD>  | find essay  |
+| bye  | bye  | bye  |
