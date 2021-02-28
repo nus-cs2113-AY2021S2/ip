@@ -134,7 +134,25 @@ public class TaskList {
             throw new DukeException();
         }
     }
-    /**
+    // Finds tasks using keyword
+    public static void find(String userInput) {
+        int taskCount = 1;
+        boolean keywordFound = false;
+
+        String keyword = userInput.substring(5);
+        for (Task task : tasks) {
+            if (task.description.contains(keyword)) {
+                System.out.print(taskCount++ + ". ");
+                task.printTask();
+                keywordFound = true;
+            }
+        }
+        if (!keywordFound) {
+            System.out.println("Keyword was not found");
+        }
+        System.out.println(Ui.DIVIDER_LINE);
+    }
+   /**
      * Loads list of tasks from save file
      * @throws FileNotFoundException when file is not found
      */
@@ -152,6 +170,7 @@ public class TaskList {
             input = s.nextLine();
             String[] userInput = input.split(" ", 2);
             boolean isDone = Boolean.parseBoolean(userInput[0]);
+
             if (userInput[1].startsWith("todo")) {
                 try {
                     addTask(userInput[1], COMMAND_TODO, false);
@@ -169,8 +188,9 @@ public class TaskList {
                 }
             }
             if (isDone) {
-                tasks.get(taskCount++).markAsDone();
+                tasks.get(taskCount).markAsDone();
             }
+            taskCount++;
         }
         System.out.println(Ui.FILE_LOADED);
     }
