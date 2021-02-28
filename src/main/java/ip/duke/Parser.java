@@ -1,6 +1,10 @@
 package ip.duke;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Parser {
+
     /**
      * Parses the user's input into a format that can be recognized by the Duke project program.
      * Apart from "help" "list" and "bye" commands, all other valid commands must be followed by further information.
@@ -44,6 +48,9 @@ public class Parser {
         case "find":
             parseFindCommand(commandContent);
             break;
+        case "date":
+            parseDateCommand(commandContent);
+            break;
         default:
             break;
         }
@@ -57,6 +64,10 @@ public class Parser {
         int byTimePosition = commandContent.indexOf("/") + 4;
         String description = commandContent.substring(0, byTimePosition - 5);
         String byTime = commandContent.substring(byTimePosition);
+        if (byTime.contains("-")) {
+            LocalDate date = LocalDate.parse(byTime);
+            byTime = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        }
         TaskList.updateDeadline(description, byTime);
     }
 
@@ -64,6 +75,10 @@ public class Parser {
         int atTimePosition = commandContent.indexOf("/") + 4;
         String description = commandContent.substring(0, atTimePosition - 5);
         String atTime = commandContent.substring(atTimePosition);
+        if (atTime.contains("-")) {
+            LocalDate date = LocalDate.parse(atTime);
+            atTime = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        }
         TaskList.updateEvent(description, atTime);
     }
 
@@ -84,4 +99,11 @@ public class Parser {
     private static void parseFindCommand(String commandContent) {
         TaskList.getFoundTask(commandContent);
     }
+
+    private static void parseDateCommand(String commandContent) {
+        LocalDate date = LocalDate.parse(commandContent);
+        commandContent = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        TaskList.getDateTask(commandContent);
+    }
+
 }

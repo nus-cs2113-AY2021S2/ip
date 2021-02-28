@@ -21,4 +21,5 @@ public class Event extends Task {
     public String toDataString() {
         return "E" + super.toDataString() + " | " + at;
     }
+
 }

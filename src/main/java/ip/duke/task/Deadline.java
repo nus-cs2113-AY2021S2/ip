@@ -20,4 +20,5 @@ public class Deadline extends Task {
     public String toDataString() {
         return "D" + super.toDataString() + " | " + by;
     }
+
 }

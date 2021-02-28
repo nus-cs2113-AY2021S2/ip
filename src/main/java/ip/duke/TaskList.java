@@ -5,6 +5,7 @@ import ip.duke.task.Event;
 import ip.duke.task.Task;
 import ip.duke.task.Todo;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -94,7 +95,7 @@ public class TaskList {
     }
 
     /**
-     * Obtains the tasks that contains the keyword that inputs by the user and stores them in another task list.
+     * Obtains the tasks that contains the keyword that input by the user and stores them in another task list.
      * Prints the new list obtained before
      * Prints the warning message if there is no matching task in the new task list
      *
@@ -113,5 +114,27 @@ public class TaskList {
             Ui.printEmptyMessage();
         }
     }
+
+    /**
+     * Obtains the tasks that contains the date that input by the user and stores them in another task list.
+     * Prints the new list obtained before
+     * Prints the warning message if there is no matching task in the new task list
+     *
+     * @param dateToFind the date that the user wants all the matching tasks to contain
+     */
+    public static void getDateTask(String dateToFind) {
+        ArrayList<Task> dateList = new ArrayList<>();
+        for (Task task : list) {
+            if (task.toString().contains(dateToFind)) {
+                dateList.add(task);
+            }
+        }
+        if (dateList.size() != 0) {
+            Ui.printDateList(dateList);
+        } else {
+            Ui.printNoMessage();
+        }
+    }
+
 
 }

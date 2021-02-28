@@ -6,7 +6,7 @@ package ip.duke.task;
  * includes description only
  * status is undone by default unless marked done by user
  */
-public class Task {
+public abstract class Task {
     public String description;
     public boolean isDone;
 
@@ -28,6 +28,7 @@ public class Task {
         return description;
     }
 
+
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718");
     }
@@ -35,6 +36,7 @@ public class Task {
     public String getStatusNum() {
         return (isDone ? "1" : "0");
     }
+
 
     @Override
     /**
