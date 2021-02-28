@@ -39,7 +39,7 @@ Prerequisites: JDK11, the latest version of IntelliJ
 2. Download the latest `Duke.jar` from [here](https://github.com/oscarlai1998/ip/releases).
 3. Copy the file to a new folder you want to run `Duke` in.
 4. For Windows User, open **Command Prompt**.
-5. 
+ 
    For Mac Users, open **Terminal**.
    
    Navigate to the directory containing `Duke.jar` file.
