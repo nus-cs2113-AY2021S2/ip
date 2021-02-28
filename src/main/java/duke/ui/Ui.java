@@ -58,6 +58,11 @@ public class Ui {
     }
 
 
+    /**
+     * Prints out tasks matching queried keyword
+     *
+     * @param listOfTasks String containing all tasks containing the queried keyword
+     */
     public void printQueryList(String listOfTasks) {
         System.out.println("\tHere are the matching tasks in your list:");
         System.out.print(listOfTasks);
@@ -135,6 +140,9 @@ public class Ui {
         System.out.println("\t" + exceptionGreeting + "The description of a " + type + " cannot be empty.");
     }
 
+    /**
+     * Prints out error message to indicate user has tried to query but hasn't provided a keyword
+     */
     public void printEmptyQuery() {
         System.out.println("\t" + exceptionGreeting + "The query cannot be empty.");
     }

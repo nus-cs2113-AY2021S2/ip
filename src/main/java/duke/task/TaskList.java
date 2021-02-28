@@ -47,6 +47,12 @@ public class TaskList {
         return tasks.size();
     }
 
+    /**
+     * Returns ordered list of tasks whose description contains the keyword specified
+     *
+     * @param keyword String obtained from user's query
+     * @return String ordered list of tasks containing keyword
+     */
     public String getTasksByKeyword(String keyword) {
         String list = "";
         int taskCounter = 1;
