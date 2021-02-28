@@ -1,24 +1,39 @@
 package duke.task;
 
 import duke.exception.DukeException;
-
 import java.util.ArrayList;
 
+/*
+Class TaskList for creating multiple task objects as a collection
+*/
 public class TaskList {
     protected ArrayList<Task> userTasks;
 
+    /*
+    Constructor TaskList initializing multiple task objects as a collection
+    */
     public TaskList() {
         userTasks = new ArrayList<>();
     }
 
+    /*
+    Constructor for TaskList Object
+    Initialize userTasks variable from the argument passed in
+    */
     public TaskList(ArrayList<Task> userTasks) {
         this.userTasks = userTasks;
     }
 
+    /*
+    Returns all user tasks created
+    */
     public ArrayList<Task> getUserTasks(){
         return userTasks;
     }
 
+    /*
+    Function that delete a task from userTasks variable
+    */
     public void deleteATask(String action) throws DukeException{
         int activityNumber;
         Task temporaryTask;
@@ -34,6 +49,9 @@ public class TaskList {
         }
     }
 
+    /*
+    Function that mark a task done from userTasks variable
+    */
     public void markActivityAsDone(String action) throws DukeException{
         int activityNumber;
         try {
@@ -46,6 +64,9 @@ public class TaskList {
         }
     }
 
+    /*
+    Function that create a event task into userTasks variable
+    */
     public void createEventTask(String action) throws DukeException{
         String newUserTask;
         try {
@@ -58,6 +79,9 @@ public class TaskList {
         }
     }
 
+    /*
+    Function that create a deadline task into userTasks variable
+    */
     public void createDeadlineTask(String action) throws DukeException{
         String newUserTask;
         try {
@@ -70,6 +94,9 @@ public class TaskList {
         }
     }
 
+    /*
+    Function that create a todo task into userTasks variable
+    */
     public void createTodoTask(String action) throws DukeException{
         String newUserTask;
         try {
@@ -81,6 +108,9 @@ public class TaskList {
         }
     }
 
+    /*
+    Function displays all tasks created so far
+    */
     public void displayListOfActivities() {
         System.out.println("Here are the tasks in your list:");
         for (int counter = 0; counter < userTasks.size(); counter++) {

@@ -3,22 +3,36 @@ package duke.file;
 import duke.exception.DukeException;
 import duke.task.*;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
+/*
+Class Storage for handling file read and write operations
+*/
 public class Storage {
     protected String relativeFileName;
     protected ArrayList<Task> userTasks;
     protected final String SEPARATOR = "|";
 
+    /*
+    Constructor for Storage Object
+    Initialize relativeFileName, userTasks variables
+    */
     public Storage(String filePath) {
         relativeFileName = filePath;
         userTasks = new ArrayList<>();
     }
 
+    /*
+    Function that read a text file
+    Initialize Task object and return it
+    */
     public ArrayList<Task> load() throws DukeException{
         char taskSelection;
         try {
@@ -78,6 +92,9 @@ public class Storage {
         userTasks.get(userTasks.size()-1).setTaskStatus(isDone);
     }
 
+    /*
+    Function that writes back to the text file
+    */
     public void dump(TaskList userCurrentTasks){
         String newLineToBeInserted = null;
         try {

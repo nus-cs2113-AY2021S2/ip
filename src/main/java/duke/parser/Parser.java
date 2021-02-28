@@ -1,12 +1,22 @@
 package duke.parser;
 
-import duke.commands.*;
-import duke.exception.DukeException;
 
-import java.io.FileNotFoundException;
+import duke.commands.AddCommand;
+import duke.commands.Command;
+import duke.commands.DeleteCommand;
+import duke.commands.DoneCommand;
+import duke.commands.ExitCommand;
+import duke.commands.ListCommand;
 
+/*
+Class Parser for making sense of user input
+*/
 public class Parser {
 
+    /*
+    Static Function that create a class object based on user command
+    Returns the requested Command Object
+    */
     public static Command parse(String fullCommand) {
         String activity = null;
         String action = null;
