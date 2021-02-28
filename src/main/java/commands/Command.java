@@ -3,6 +3,7 @@ package commands;
 import duke.IncorrectFormatException;
 import duke.todoList;
 
+/**Default command class to be overwritten by the specific user commands*/
 public class Command {
 
     protected todoList inputList;
@@ -21,6 +22,7 @@ public class Command {
         this.inputList = input;
     }
 
+    /**Method containing instructions to execute when the command is called. Returns CommandResult to be read by Ui*/
     public CommandResult execute() throws IncorrectFormatException {
         throw new UnsupportedOperationException("This method is to be implemented by child classes");
     };

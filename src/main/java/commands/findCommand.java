@@ -5,6 +5,8 @@ import duke.todoList;
 
 import java.util.ArrayList;
 
+/**Command to find task entries based on a keyword and instructions to run when execute is called*
+ * */
 public class findCommand extends Command{
     public static final String COMMAND_WORD = "find";
     protected static String keyword;

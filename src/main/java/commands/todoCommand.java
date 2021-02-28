@@ -4,7 +4,7 @@ import duke.IncorrectFormatException;
 import duke.improvedTask;
 import duke.listTypes;
 import duke.task;
-
+/**todoCommand class contains the command keyword for the deadline command and instructions to run when execute is called**/
 public class todoCommand extends Command{
     public static final String COMMAND_WORD = "todo";
 

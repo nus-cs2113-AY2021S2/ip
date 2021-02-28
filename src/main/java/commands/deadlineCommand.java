@@ -3,7 +3,7 @@ package commands;
 import duke.IncorrectFormatException;
 import duke.improvedTask;
 import duke.listTypes;
-
+/**deadlineCommand class contains the command keyword for the deadline command and instructions to run when execute is called**/
 public class deadlineCommand extends Command{
     public static final String COMMAND_WORD = "deadline";
     protected static improvedTask task;

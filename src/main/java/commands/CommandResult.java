@@ -2,6 +2,7 @@ package commands;
 
 import java.util.List;
 
+
 public class CommandResult {
     /** The feedback message to be shown to the user. Contains a description of the execution result */
     public final String feedbackToUser;

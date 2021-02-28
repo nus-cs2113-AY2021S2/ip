@@ -1,5 +1,7 @@
 package commands;
 
+/**Command to list all current tasks
+ * */
 public class listCommand extends Command{
     public static final String COMMAND_WORD = "list";
     private static String MESSAGE_SUCCESS = "Task: [%s] has been added.";

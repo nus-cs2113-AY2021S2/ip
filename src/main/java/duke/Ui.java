@@ -10,16 +10,21 @@ public class Ui {
 
     public Ui(){
     }
-
+    /**Method reads the output expected from the CommandResult and outputs it to console
+     * @param output the CommandResult output from the user input command
+     * */
     public void showResult(CommandResult output){
         String toPrint = String.format(dividers,output.feedbackToUser);
         System.out.println(toPrint);
     }
-
+    /**Method reads the string input and outputs it to console
+     * @param output the String input from other parts in the program
+     * */
     public void showResult(String output){
         String toPrint = String.format(dividers,output);
         System.out.println(toPrint);
     }
+    /**Method outputs the greeting sequence when program starts up*/
     public void startupUi(){
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"

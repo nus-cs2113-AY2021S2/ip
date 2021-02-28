@@ -4,6 +4,7 @@ import duke.IncorrectFormatException;
 import duke.improvedTask;
 import duke.listTypes;
 
+/**eventCommand class contains the command keyword for the event command and instructions to run when execute is called*/
 public class eventCommand extends Command{
     public static final String COMMAND_WORD = "event";
     protected static improvedTask task;

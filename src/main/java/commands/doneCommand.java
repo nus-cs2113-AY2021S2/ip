@@ -3,6 +3,8 @@ package commands;
 import duke.IncorrectFormatException;
 import duke.todoList;
 
+/**Command to set tasks as done based on listed number
+ * */
 public class doneCommand extends Command{
     public static final String COMMAND_WORD = "done";
     protected static String num;

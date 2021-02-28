@@ -5,6 +5,9 @@ import duke.IncorrectFormatException;
 public class Parser {
     private String input;
 
+    /**Parses the user input and returns the respective command
+     * @param input user input
+     */
     public Command parseCommand(String input) throws IncorrectFormatException {
         String[] tokens = input.split(" ",2);
         String commandWord = tokens[0];
@@ -37,6 +40,9 @@ public class Parser {
             return new incorrectCommand("Incorrect command word was entered!");
         }
     }
+    /**Parses the imported file format and returns the respective command
+     * @param input input from imported file
+     */
     public Command parseImportTasks(String input) throws IncorrectFormatException {
         String[] tokens = input.split("/");
         String command = "";
@@ -53,6 +59,9 @@ public class Parser {
         }
         return parseCommand(command);
     }
+    /**Splits the description and date of the incoming deadline command
+     * @param args the input's combined description and date string
+     */
     private Command prepareDeadlineCommand(String args) throws IncorrectFormatException {
         String[] parts = args.split("/by");
         // Validate arg string format
@@ -61,7 +70,9 @@ public class Parser {
         }
         return new deadlineCommand(parts[0].trim(), parts[1].trim());
     }
-
+    /**Splits the description and date of the incoming event command
+     * @param args the input's combined description and date string
+     */
     private Command prepareEventCommand(String args) throws IncorrectFormatException {
         String[] parts = args.split("/at");
         // Validate arg string format
