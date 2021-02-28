@@ -1,4 +1,4 @@
-package Exceptions;
+package Duke.Exceptions;
 
 public class WrongEventFormatException extends DukeException {
 

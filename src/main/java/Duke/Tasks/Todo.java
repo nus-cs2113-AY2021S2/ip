@@ -1,5 +1,6 @@
+package Duke.Tasks;
+
 public class Todo extends Task {
-    protected String by;
 
     public Todo(String description) {
         super(description);
@@ -7,5 +8,10 @@ public class Todo extends Task {
 
     public String toString() {
         return "[T][" + super.getStatusIcon() + "] " + super.toString();
+    }
+
+    @Override
+    public String saveTask() {
+        return "T | " + (isDone ? 1 : 0) + " | " + description;
     }
 }

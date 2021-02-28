@@ -1,4 +1,4 @@
-package Exceptions;
+package Duke.Exceptions;
 
 public class WrongDeadlineFormatException extends DukeException {
     public String getMessage() {

@@ -1,4 +1,6 @@
-public class Task {
+package Duke.Tasks;
+
+public abstract class Task {
     protected String description;
     protected String by;
     protected boolean isDone;
@@ -19,5 +21,7 @@ public class Task {
     public void markAsDone() {
         this.isDone = true;
     }
+
+    public abstract String saveTask();
 
 }

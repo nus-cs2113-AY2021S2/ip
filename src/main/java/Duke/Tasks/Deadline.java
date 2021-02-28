@@ -1,3 +1,5 @@
+package Duke.Tasks;
+
 public class Deadline extends Task {
     protected String by;
 
@@ -8,5 +10,10 @@ public class Deadline extends Task {
 
     public String toString() {
         return "[D][" + super.getStatusIcon() + "] " + super.toString() + " (by: " + by + ")";
+    }
+
+
+    public String saveTask() {
+        return "D | " + (isDone ? 1 : 0) + " | " + description + " | " + by;
     }
 }
