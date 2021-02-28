@@ -151,6 +151,7 @@ Examples:
 **A**: Place the storage text file in the same folder as `ip.jar` when running on another computer
   
 ## Command Summary:  
+
 Command | Format, Examples|
 --------|------------------|
 **Add Todo** |`todo DESCRIPTION` <br/>e.g. `todo read book`|
