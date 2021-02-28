@@ -16,7 +16,9 @@ management faster than traditional GUI apps.
    2.8 [Exiting the program](#28-exiting-the-program-bye)\
    2.9 [Saving the data](#29-saving-the-data)\
    2.10 [Editing the data file](#210-editing-the-data-file)
-1. [Command Summary](#3-command-summary)
+   
+1. [Frequently Asked Questions (FAQ)](#3-faq)
+1. [Command Summary](#4-command-summary)
 
 ## 1. Quick Start
 1. Ensure you have Java `11` or above installed in your Computer.
@@ -153,7 +155,8 @@ Advanced users are welcome to update data directly by editing that data file.
 **A**: For Windows users, type `duke.txt` in the search panel and you should be able
 to find its location. For Mac users, use Spotlight or Finder for the above actions.
 
-## 3. Command Summary
+## 4. Command Summary
+
 Action | Format, Examples
 ------ | ----------------
 **Add todo** | `todo TASKNAME` e.g. `todo book bandroom`
