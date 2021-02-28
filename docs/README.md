@@ -4,10 +4,10 @@ Instead of a Graphical User Interface (GUI), Duke is purely Command-Line Interfa
 
 ## Quick Start
 1. Duke requires Java 11 or above to run. Ensure you have Java `11` or above installed in your Computer.
-2. Download the latest `Duke.jar` file from [here].
-3. Copy the jar file to a folder where you want to run Duke.
+2. Download the latest `ip.jar` file from [here](https://github.com/marklowsk/ip/releases/tag/v0.2).
+3. Copy the `ip.jar` file to a folder where you want to run Duke.
 4. Open your terminal emulator or command prompt and change your working directory to that folder.
-5. You can run Duke by entering `java -jar Duke.jar`.
+5. You can run Duke by entering `java -jar ip.jar`.
 6. Once running, you can start entering commands to Duke.
    Enter `help` to display the list of commands.
    Some basic commands you can enter:
@@ -200,3 +200,5 @@ On Duke's start-up, Duke will attempt to retrieve task data from the file.
 | find | `find <keyword>` |
 | date | `date <date>` |
 | bye | `bye` |
+
+> User guide inspiration is based on [AB-3 UG](https://se-education.org/addressbook-level3/UserGuide.html).
