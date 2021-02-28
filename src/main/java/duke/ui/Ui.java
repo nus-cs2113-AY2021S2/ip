@@ -107,4 +107,8 @@ public class Ui {
     public void printSaveError() {
         System.out.println("\t" + exceptionGreeting + "I've encountered an error saving your data :-(");
     }
+
+    public void printDateError() {
+        System.out.println("\t" + exceptionGreeting + "I've encountered an error parsing your date :-(");
+    }
 }
