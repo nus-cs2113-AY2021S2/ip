@@ -55,7 +55,7 @@ Examples:
   ![img_2.png](screenshots/img_2.png)
 - `event ` will cause Duke to produce an error message that the description and /at cannot be empty
   ![img_3.png](screenshots/img_3.png)
-  -`event meeting` will cause Duke to produce an error message to give the correct form.
+- `event meeting` will cause Duke to produce an error message to give the correct form.
   ![img_4.png](screenshots/img_4.png)
 
 ### Adding a Deadline: `deadline`
@@ -71,20 +71,20 @@ Examples:
   ![img_5.png](screenshots/img_5.png)
 - `deadline` will cause Duke to produce an error message that the description and /by cannot be empty
   ![img_6.png](screenshots/img_6.png)
-  -`deadline report` will cause Duke to produce an error message to give the correct input format.
+- `deadline report` will cause Duke to produce an error message to give the correct input format.
   ![img_7.png](screenshots/img_7.png)
 
 ### Listing tasks: `list`
 Lists all tasks tracked by Duke.
 
 Format: `list`
-- Lists all the tasks
-- The command must be only `list`, any additional input will not be known
+- Lists all the tasks.
+- The command must be only `list`, any additional input will not be known.
 
 Examples:
-- `list this` will not be recognized by Duke. 
+- `list this` will not be recognized by Duke.  
   ![img_8.png](screenshots/img_8.png)
-- `list`
+- `list` will show all tasks in the list.  
   ![img_9.png](screenshots/img_9.png)
   
 ### Finding tasks by name: `find`
@@ -95,10 +95,10 @@ Format: `find SEARCH_TERM`
 - Search term must be provided, otherwise error message occurs.
 
 #### Examples:
-- `find book` returns all the tasks that match with "book".
-  ![img_10.png](screenshots/img_10.png) 
-- `find` returns an error message to say the search term canntot be empty.
-  ![img_11.png](screenshots/img_11.png)
+- `find book` returns all the tasks that match with "book".  
+  ![img_10.png](screenshots/img_10.png)  
+- `find` returns an error message to say the search term canntot be empty.  
+  ![img_11.png](screenshots/img_11.png)  
 
 ### Delete a task: `delete`
 Deletes a task based on the index provided.
@@ -124,7 +124,7 @@ Format: `done INDEX`
 - Index provided is based on index in list from `list` command.
 - Index must be provided.
 
-Examples:
+Examples:  
 ![img_12.png](screenshots/img_12.png)
 - `done 2` will mark the task `[T][✘] this` as done from the task list.
   ![img_16.png](screenshots/img_16.png)![img_13.png](screenshots/img_13.png)
@@ -141,7 +141,7 @@ Format: `bye`
 - Data is saved to the storage text file before program terminates.
 
 Examples:
-- `bye` prints an exit message and exits the program.
+- `bye` prints an exit message and exits the program.  
   ![img_19.png](screenshots/img_19.png)
   
 
