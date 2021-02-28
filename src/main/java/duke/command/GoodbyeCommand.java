@@ -17,7 +17,6 @@ public class GoodbyeCommand extends Command {
      * @param tasks   Task list the user currently have.
      * @param ui      Tool to interact with user.
      * @param storage Storage to load and save data.
-     * @return Responses to be passed to user.
      * @throws DukeException If failed to save tasks.
      */
     @Override

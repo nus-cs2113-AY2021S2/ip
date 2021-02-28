@@ -18,10 +18,10 @@ import java.util.Scanner;
  */
 public class Storage {
     private final File data;
-    private final String FILE = "./ip/src/main/java/db/tasks.txt";
+    private final String FILE = "./tasks.txt";
 
     /**
-     * Intializes a Storage object.
+     * Initializes a Storage object.
      *
      * @throws DukeException If directory not found.
      */

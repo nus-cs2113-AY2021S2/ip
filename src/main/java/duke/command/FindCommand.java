@@ -14,7 +14,7 @@ import duke.ui.Ui;
  * @author Leonardo Irvin Pratama
  */
 public class FindCommand extends Command {
-    private String keyword;
+    private final String keyword;
 
     public FindCommand(String keyword) {
         this.keyword = keyword;
@@ -26,7 +26,6 @@ public class FindCommand extends Command {
      * @param tasks Task list the user currently have.
      * @param ui Tool to interact with user.
      * @param storage Storage to load and save data.
-     * @return Responses to be passed to user.
      */
     @Override
     public void executeCommand(TaskList tasks, Ui ui, Storage storage) {

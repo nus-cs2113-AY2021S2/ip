@@ -30,6 +30,11 @@ public class Task {
         this.isDone = true;
     }
 
+    /**
+     * Describes event to be saved in hard disk.
+     *
+     * @return String that will be stored on hard disk.
+     */
     public String saveToHardDisk() {
         int isDone = this.isDone ? 1 : 0;
         return " | " + isDone + " | " + description;

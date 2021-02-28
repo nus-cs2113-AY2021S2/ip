@@ -14,6 +14,18 @@ import java.util.function.BiFunction;
 public class Parser {
     private static final BiFunction<String[], Integer, Boolean> CHECK_LENGTH = (s, i) -> s.length <= i;
     private static String errorMessage = null;
+    private enum Commands {
+        BYE,
+        LIST,
+        DONE,
+        MARK,
+        DELETE,
+        REMOVE,
+        TODO,
+        DEADLINE,
+        EVENT,
+        FIND
+    };
 
     private static Command handleDoneOrDelete(Commands commandType, String[] separatedWords) {
         Command command = null;
@@ -37,6 +49,13 @@ public class Parser {
         return command;
     }
 
+    /**
+     * Executes task addition.
+     *
+     * @param commandType   User chosen type of command.
+     * @param input         User input.
+     * @param time          Time signature attached to the task.
+     */
     private static Command handleAddTask(Commands commandType, String input, String time) {
         StringBuilder description = new StringBuilder();
         Command command = null;
@@ -71,6 +90,11 @@ public class Parser {
         return command;
     }
 
+    /**
+     * Executes task searching.
+     *
+     * @param separatedWords   Keyword determined by the user's input.
+     */
     private static Command handleFind(String[] separatedWords) {
         Command command = null;
         if (CHECK_LENGTH.apply(separatedWords, 1)) {
@@ -135,18 +159,5 @@ public class Parser {
         } finally {
             errorMessage = null;
         }
-    }
-
-    private enum Commands {
-        BYE,
-        LIST,
-        DONE,
-        MARK,
-        DELETE,
-        REMOVE,
-        TODO,
-        DEADLINE,
-        EVENT,
-        FIND
     }
 }
