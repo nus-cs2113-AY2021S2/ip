@@ -48,6 +48,65 @@ public class Ui {
 	}
 
 	public void shutdownMessage() {
+		lineSeparator();
 		System.out.println("Bye. Hope to see you again soon!");
+		lineSeparator();
+	}
+
+	public void printMatchedList(ArrayList<Task> matchedTasks, int size) {
+		lineSeparator();
+		System.out.println("Here are the matching tasks in your list:");
+		for (int i = 0; i < size; i++){
+			System.out.printf("\t%d. %s\n", i + 1, matchedTasks.get(i).toString());
+		}
+	}
+
+	public void noTaskInListMessage() {
+		lineSeparator();
+		System.out.println("You have no tasks to in your list.");
+		lineSeparator();
+	}
+
+	public void noMatchMessage() {
+		lineSeparator();
+		System.out.println("No matches found!");
+		lineSeparator();
+	}
+
+	public void printList(ArrayList<Task> tasks, int noOfTasks) {
+		lineSeparator();
+		System.out.println("Here are the tasks in your list");
+		for (int i = 0; i < noOfTasks; i++){
+			System.out.printf("\t%d. %s\n", i + 1, tasks.get(i).toString());
+		}
+		lineSeparator();
+	}
+
+	public void invalidInputMessage() {
+		lineSeparator();
+		System.out.println("Sorry! Input not recognised, please try again.");
+		lineSeparator();
+	}
+
+	public void missingBy() {
+		lineSeparator();
+		System.out.println("OOPS!! The deadline of the task is missing!");
+		System.out.println("Format: deadline (description) /by (date time*)");
+		System.out.println("* - optional");
+		lineSeparator();
+	}
+
+	public void missingAt() {
+		lineSeparator();
+		System.out.println("OOPS!! The deadline of the task is missing!");
+		System.out.println("Format: event (description) /at (date time)");
+		lineSeparator();
+	}
+
+	public void invalidKeywordMessage() {
+		lineSeparator();
+		System.out.println("OOPS!! You have entered more than one keyword.");
+		System.out.println("Format: find (one keyword)");
+		lineSeparator();
 	}
 }

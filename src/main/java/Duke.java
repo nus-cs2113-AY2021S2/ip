@@ -41,6 +41,9 @@ public class Duke {
             case ("delete"):
                 tasks.deleteTask(userInput);
                 break;
+            case ("find"):
+                tasks.findTask(userInput);
+                break;
             case ("bye"):
                 int noOfTasks = tasks.size();
                 try {
@@ -48,10 +51,10 @@ public class Duke {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                ui.shutdownMessage();
                 System.exit(0);
             default:
-                System.out.println("Sorry! Input not recognised, please try again.");
-                ui.shutdownMessage();
+                ui.invalidInputMessage();
             }
         }
     }

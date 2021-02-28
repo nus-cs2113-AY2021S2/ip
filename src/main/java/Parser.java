@@ -1,6 +1,7 @@
 public class Parser {
 	private String userInput;
 
+	Ui ui = new Ui();
 	public Parser(String userInput){
 		this.userInput = userInput;
 	}
@@ -30,9 +31,7 @@ public class Parser {
 		try {
 			by = parsedString[1];
 		} catch (ArrayIndexOutOfBoundsException e){
-			System.out.println("OOPS!! The deadline of the task is missing!");
-			System.out.println("Format: deadline (description) /by (date time*)");
-			System.out.println("* - optional");
+			ui.missingBy();
 			return null;
 		}
 		return by;
@@ -44,8 +43,7 @@ public class Parser {
 		try {
 			at = parsedString[1];
 		} catch (ArrayIndexOutOfBoundsException e){
-			System.out.println("OOPS!! The deadline of the task is missing!");
-			System.out.println("Format: event (description) /at (date time)");
+			ui.missingAt();
 			return null;
 		}
 		return at;
@@ -59,10 +57,7 @@ public class Parser {
 		} catch (ArrayIndexOutOfBoundsException e){
 			System.out.println("OOPS!!! Please specify task number.");
 			return -1;
-		} catch (IndexOutOfBoundsException e) {
-			System.out.println("Task number not recognised.");
-			return -1;
-		} catch (NumberFormatException e) {
+		} catch (IndexOutOfBoundsException | NumberFormatException e) {
 			System.out.println("Task number not recognised.");
 			return -1;
 		}
@@ -80,5 +75,17 @@ public class Parser {
 		String[] parsedString = userInput.split(" /at ",2);
 		String eventDescription = parsedString[0].split(" ",2)[1];
 		return eventDescription;
+	}
+
+	public String getKeyword() {
+		String[] parsedString = userInput.split(" ",2);
+		String keyword = parsedString[1];
+		String[] keywordCheck = keyword.split(" ");
+		if (keywordCheck.length > 1){
+			ui.invalidKeywordMessage();
+			return null;
+		} else {
+			return keyword;
+		}
 	}
 }

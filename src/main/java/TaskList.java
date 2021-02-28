@@ -57,17 +57,12 @@ public class TaskList {
 	}
 
 	public void printList() {
-		ui.lineSeparator();
 		int noOfTasks = tasks.size();
 		if(noOfTasks > 0) {
-			System.out.println("Here are the tasks in your tasks:");
-			for (int i = 0; i < noOfTasks; i++) {
-				System.out.printf("\t%d. %s\n", i + 1, tasks.get(i).toString());
-			}
+			ui.printList(tasks,noOfTasks);
 		} else {
-			System.out.println("You have no tasks to complete.");
+			ui.noTaskInListMessage();
 		}
-		ui.lineSeparator();
 	}
 
 	public void markAsDone(Parser userInput) {
@@ -86,6 +81,28 @@ public class TaskList {
 			tasks.remove(taskIndex);
 			noOfTasks = tasks.size();
 			ui.taskDeletedMessage(taskToDelete, noOfTasks);
+		}
+	}
+
+	public void findTask(Parser userInput) {
+		String keyword = userInput.getKeyword();
+		int noOfTasks = tasks.size();
+		ArrayList<Task> matchedTasks = new ArrayList<>();
+		if(noOfTasks <= 0){
+			ui.noTaskInListMessage();
+		} else if(keyword != null){
+			for(int i = 0; i < noOfTasks; i++){
+				Task taskToCheck = tasks.get(i);
+				if(taskToCheck.getDescription().contains(keyword)){
+					matchedTasks.add(taskToCheck);
+				}
+			}
+			int noOfMatches = matchedTasks.size();
+			if (noOfMatches > 0){
+				ui.printMatchedList(matchedTasks, matchedTasks.size());
+			} else {
+				ui.noMatchMessage();
+			}
 		}
 	}
 }
