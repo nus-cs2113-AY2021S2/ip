@@ -138,4 +138,14 @@ public class Ui {
         printErrorLogo();
         System.out.println("No matching objectives found, Commander!");
     }
+
+    public static void printSaveFileCorrupted() {
+        String corrupted = "******************************************************\n"
+                + "*             ERROR: Archives Corrupted!             *\n"
+                + "*             Terminating Adjutant Now...            *\n"
+                + "******************************************************\n";
+
+        printErrorLogo();
+        System.out.println(corrupted);
+    }
 }

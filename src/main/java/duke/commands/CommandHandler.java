@@ -59,6 +59,7 @@ public class CommandHandler {
         } catch (IllegalTaskCommandException e) {
             Ui.printErrorLogo();
             System.out.println(e.getMessage());
+            System.out.println();
         }
 
         Storage.saveTasks();

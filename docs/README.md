@@ -77,10 +77,16 @@ Format: `bye`
 
 ### Saving Adjutant's data
 Adjutant's data are automatically saved in the hard disk after any command.
+> ❗ **WARNING:** Do ensure that Adjutant can write into the folder it is in,
+> `exit code -1` will be shown if the save file cannot be initialized or created,
+> and the Adjutant program will terminate.
 
 ### Editing the Adjutant's saved file
 Adjutant's data are saved as a `.TXT` file in `[base_folder]/Duke_Tasks.txt`.
 Experienced users may opt to edit the data by updating the saved file directly.
+> ❗ **WARNING:** While editing the saved file directly, do ensure to abide to the
+> format of Adjutant's save file, any inconsistencies will terminate the program with
+> `exit code -2`.
 
 ---
 
@@ -90,7 +96,7 @@ Experienced users may opt to edit the data by updating the saved file directly.
 
 **Question**: Can I load my friend's data into my Adjutant? 
 <br>**Answer**: Yes, if the saved file is from another Adjutant program.
-Or if the file is in a recognisable format by Adjutant.
+Or if the file is in a recognisable format.
 
 ---
 

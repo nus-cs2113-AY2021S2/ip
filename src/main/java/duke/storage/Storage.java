@@ -44,20 +44,24 @@ public class Storage {
             while (scanner.hasNext()) {
                 String[] fileInput = scanner.nextLine().split(",");
                 String loadedCommand = Parser.getLoadedCommand(fileInput);
-
-                switch (fileInput[0].strip()) {
-                case "T":
-                    CommandHandler.executeTodo(loadedCommand);
-                    CommandHandler.executeLoadMarkDone(fileInput);
-                    break;
-                case "D":
-                    CommandHandler.executeDeadline(loadedCommand);
-                    CommandHandler.executeLoadMarkDone(fileInput);
-                    break;
-                case "E":
-                    CommandHandler.executeEvent(loadedCommand);
-                    CommandHandler.executeLoadMarkDone(fileInput);
-                    break;
+                try {
+                    switch (fileInput[0].strip()) {
+                    case "T":
+                        CommandHandler.executeTodo(loadedCommand);
+                        CommandHandler.executeLoadMarkDone(fileInput);
+                        break;
+                    case "D":
+                        CommandHandler.executeDeadline(loadedCommand);
+                        CommandHandler.executeLoadMarkDone(fileInput);
+                        break;
+                    case "E":
+                        CommandHandler.executeEvent(loadedCommand);
+                        CommandHandler.executeLoadMarkDone(fileInput);
+                        break;
+                    }
+                } catch (IllegalTaskCommandException e) {
+                    Ui.printSaveFileCorrupted();
+                    System.exit(-2);
                 }
             }
             Ui.printSuccessfulLoad();
