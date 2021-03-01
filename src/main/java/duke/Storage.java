@@ -55,37 +55,42 @@ public class Storage {
     private ArrayList<Task> parse(ArrayList<String> dataItems) {
         ArrayList<Task> allTasks = new ArrayList<>();
         for (String line : dataItems) {
-            String[] tasksInTXT = line.split("\\|");
-            String taskType = tasksInTXT[0].trim();
-            String taskDone = tasksInTXT[1].trim();
-            String taskDescription = tasksInTXT[2].trim();
-            switch (taskType) {
-            case "T":
-                Todo todo = new Todo(taskDescription);
-                if(taskDone.equals("1")) {
-                    todo.setDone(true);
+            try {
+                String[] tasksInTXT = line.split("\\|");
+                String taskType = tasksInTXT[0].trim();
+                String taskDone = tasksInTXT[1].trim();
+                String taskDescription = tasksInTXT[2].trim();
+                switch (taskType) {
+                case "T":
+                    Todo todo = new Todo(taskDescription);
+                    if(taskDone.equals("1")) {
+                        todo.setDone(true);
+                    }
+                    allTasks.add(todo);
+                    break;
+                case "D":
+                    Deadline deadline = new Deadline(taskDescription,tasksInTXT[3].trim());
+                    if(taskDone.equals("1")) {
+                        deadline.setDone(true);
+                    }
+                    allTasks.add(deadline);
+                    break;
+                case "E":
+                    Event event = new Event(taskDescription,tasksInTXT[3].trim());
+                    if(taskDone.equals("1")) {
+                        event.setDone(true);
+                    }
+                    allTasks.add(event);
+                    break;
+                default:
+                    System.out.println("Unknown task encountered. Skipping");
+                    break;
                 }
-                allTasks.add(todo);
-                break;
-            case "D":
-                Deadline deadline = new Deadline(taskDescription,tasksInTXT[3].trim());
-                if(taskDone.equals("1")) {
-                    deadline.setDone(true);
-                }
-                allTasks.add(deadline);
-                break;
-            case "E":
-                Event event = new Event(taskDescription,tasksInTXT[3].trim());
-                if(taskDone.equals("1")) {
-                    event.setDone(true);
-                }
-                allTasks.add(event);
-                break;
-            default:
-                System.out.println("Unknown task encountered. Skipping");
-                break;
+            } catch (IndexOutOfBoundsException e) {
+                continue;
             }
-        }
+            }
+
         return allTasks;
     }
 
