@@ -173,4 +173,5 @@ Duke data is automatically saved as a textfile, `Duke.txt` at the location of `D
 
 ## FAQ
 **Q:** How do I transfer data between computers?
+
 **A:** To transfer data between computers, move the `Duke.txt` file from one computer to the other. Ensure the file is in the same folder as `Duke.jar`.
