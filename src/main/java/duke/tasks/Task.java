@@ -23,6 +23,11 @@ public class Task {
                 + this.getItem());
     }
 
+    public void printCondensedTask() {
+        System.out.print("[" + this.getStatus() + "] "
+                + this.getItem());
+    }
+
     /**
      * Formats this {@code Task} as a single string for saving in the .txt storage file, where
      * {@code statusAsInt} indicates if the task is done (1 for done, and 0 for otherwise).
