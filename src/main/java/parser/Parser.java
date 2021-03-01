@@ -243,7 +243,7 @@ public class Parser {
             throw new EmptyTimeDescriptionException();
         }
 
-        String taskDescription = splitUserInput[0].replaceAll("deadline", "");
+        String taskDescription = splitUserInput[0].replaceAll("deadline", "").trim();
         if (taskDescription.isEmpty()) {
             throw new EmptyTaskDescriptionException();
         }
@@ -272,7 +272,7 @@ public class Parser {
             throw new EmptyTimeDescriptionException();
         }
 
-        String taskDescription = splitUserInput[0].replaceAll("event", "");
+        String taskDescription = splitUserInput[0].replaceAll("event", "").trim();
         if (taskDescription.isEmpty()) {
             throw new EmptyTaskDescriptionException();
         }
