@@ -1,8 +1,11 @@
 package duke.parser;
 
 import duke.exception.DukeException;
+import duke.exception.InvalidTaskCommandException;
+import duke.task.Task;
 import duke.task.TaskList;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -15,20 +18,14 @@ public class Parser {
      *
      * @return Command to exit program.
      */
-    public static void determineCommand() {
-        Scanner in = new Scanner(System.in);
-        String input;
+    public static boolean determineCommand(String input) throws DukeException {
 
-        while (in.hasNext()) {
-            input = in.nextLine();
             if (input.equals("list")) {
                 TaskList.listTask();
             } else if (input.startsWith("done")) {
                 TaskList.markTaskDone(input);
             } else if (input.startsWith("delete")) {
                 TaskList.deleteTask(input);
-            } else if (input.startsWith("add")) {
-                TaskList.addTask(input);
             } else if (input.startsWith("todo")) {
                 TaskList.addToDo(input);
             } else if (input.startsWith("deadline")) {
@@ -38,11 +35,11 @@ public class Parser {
             } else if (input.startsWith("find")) {
                 TaskList.findTask(input);
             } else if (input.equals("bye")) {
-                break;
+                return true;
             } else {
-                DukeException.invalidCommand();
+                throw new InvalidTaskCommandException();
             }
-        }
-        in.close();
+
+       return false;
     }
 }

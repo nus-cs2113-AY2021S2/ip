@@ -28,6 +28,9 @@ public class Task {
         return taskType + this.getStatusIcon() + this.taskDescription;
     }
 
+    /**
+     * Formats input from duke.txt into task format
+     */
     public static Task textToTask(String text) {
         String[] task = text.split("\\|");
         Task existingTask;
@@ -51,6 +54,9 @@ public class Task {
         return existingTask;
     }
 
+    /**
+     * Formats list of tasks into duke.txt format
+     */
     public String taskToText() {
         return "A|" + completed + "|" + taskDescription;
     }

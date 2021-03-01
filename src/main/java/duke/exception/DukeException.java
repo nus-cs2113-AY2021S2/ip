@@ -1,42 +1,17 @@
 package duke.exception;
 
-public class DukeException {
-    private static final String WARNING_DIVIDER = "\txxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n";
+/**
+ * Represents the exceptions for Duke, allows extensions for other exceptions
+ */
 
-    public static void addTaskInvalidDescription() {
-        System.out.print(WARNING_DIVIDER
-                + "Invalid description! add description cannot be empty!\n"
-                + WARNING_DIVIDER);
+public class DukeException extends Throwable {
+    private static String WARNING_DIVIDER = "\txxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n";
+    /**
+     * Creates DukeExceptions for methods to throw.
+     * @param errorMessage Error message.
+     */
+
+    public DukeException(String errorMessage){
+        System.out.print(WARNING_DIVIDER + "\tERROR: " + errorMessage + WARNING_DIVIDER);
     }
-
-    public static void toDoInvalidDescription() {
-        System.out.print(WARNING_DIVIDER
-                + "Invalid description! todo description cannot be empty!\n"
-                + WARNING_DIVIDER);
-    }
-
-    public static void deadlineInvalidDescription() {
-        System.out.print(WARNING_DIVIDER
-                + "Invalid description! deadline cannot be empty!\n"
-                + WARNING_DIVIDER);
-    }
-
-    public static void eventInvalidDescription() {
-        System.out.print(WARNING_DIVIDER
-                + "Invalid description! event cannot be empty!\n"
-                + WARNING_DIVIDER);
-    }
-
-    public static void invalidCommand() {
-        System.out.print(WARNING_DIVIDER
-                + "Please enter a valid command!\n"
-                + WARNING_DIVIDER);
-    }
-
-    public static void invalidTask(){
-        System.out.print(WARNING_DIVIDER
-                + "Please enter a valid task!\n"
-                + WARNING_DIVIDER);
-    }
-
 }

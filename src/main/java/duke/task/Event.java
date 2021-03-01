@@ -16,7 +16,7 @@ public class Event extends Task {
     }
 
     /**
-    Prints task to user.
+     * Prints task to user.
      */
     @Override
     public String toString() {
@@ -24,7 +24,7 @@ public class Event extends Task {
     }
 
     /**
-    Translates data into text format.
+     * Translates data into text format.
      */
     @Override
     public String taskToText() {

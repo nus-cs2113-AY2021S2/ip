@@ -1,5 +1,6 @@
 package duke.storage;
 
+import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -8,6 +9,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -19,7 +21,7 @@ public class Storage {
     private static String path;
 
     public Storage() {
-        this.path = System.getProperty("user.dir") + "/data/duke.txt";
+        path = System.getProperty("user.dir") + "/data/duke.txt";
     }
 
     /**
@@ -62,29 +64,34 @@ public class Storage {
      *
      * @throws FileNotFoundException if duke.txt does not exist
      */
-    public void loadData() {
+    public ArrayList<String> loadData(){
+        ArrayList<String> tasks = new ArrayList<>();
         try {
             File data = new File(path);
             Scanner sc = new Scanner(data);
+            String taskToLoad;
             while (sc.hasNextLine()) {
-                String taskToLoad = sc.nextLine();
-                TaskList.tasks.add(Task.textToTask(taskToLoad));
+                taskToLoad = sc.nextLine();
+                tasks.add(taskToLoad);
             }
             sc.close();
         } catch (FileNotFoundException e) {
             Ui.printErrorMessage(e);
         }
+        return tasks;
     }
 
     /**
-     * Appends and saves new tasks to duke.txt
+     * Updates and saves new tasks to duke.txt.
+     *
+     * @param tasks Task list to be updated.
+     * @throws IOException if data cannot be saved.
      */
-    public static void saveData() {
+    public static void saveData(ArrayList<Task> tasks){
         try {
             FileWriter fileWriter = new FileWriter(path);
-            for (int i = 0; i < TaskList.tasks.size(); ++i) {
-                //get the task list items
-                String taskToWrite = TaskList.tasks.get(i).taskToText() + "\n";
+            for (int i = 0; i < tasks.size(); ++i) {
+                String taskToWrite = tasks.get(i).taskToText() + "\n";
                 fileWriter.write(taskToWrite);
             }
             fileWriter.close();
