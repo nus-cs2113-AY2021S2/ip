@@ -69,6 +69,8 @@ public class Storage {
      * and adds the corresponding new Task into the corresponding Duke Task List
      * Will also mark the task as Done if it is already marked as completed inside the file
      *
+     * taskType -> The first character ("T"/"E"/"D") as stored in the input file
+     * Done -> Whether the Task is Done ("Y"/"N") as stored in the input file
      * @param fileLine one line of input in the file
      */
     private static void processFileInputLines(String fileLine) {
@@ -97,6 +99,7 @@ public class Storage {
      * Executes commands to identify the new Task that was loaded from the Duke saved file
      * and adds the corresponding new Task into the corresponding Duke Task List
      * Will also directly process the time data for Deadlines and Events
+     * Legend: taskTypes 'T' -> Todo, 'D' -> Deadline, 'E' -> Event
      *
      * @param fileLine one line of input in the file
      * @param taskType the character indicating the task type in the file
@@ -168,4 +171,5 @@ public class Storage {
     private static char getDone(String fileLine) {
         return fileLine.charAt(4);
     }
+
 }

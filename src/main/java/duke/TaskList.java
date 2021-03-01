@@ -73,7 +73,8 @@ public class TaskList {
      * @param input the user input from Duke
      */
     public static void addNewDeadline(String input) {
-        tasks.add(new Deadline(input.substring(Parser.DEADLINE_START, Parser.getTimePosition(input)), Parser.getTime(input)));
+        tasks.add(new Deadline(input.substring(Parser.DEADLINE_START, Parser.getDeadlineTimePosition(input)),
+                Parser.getTimeString(input, Parser.getDeadlineTimePosition(input))));
     }
 
     /**
@@ -85,7 +86,8 @@ public class TaskList {
      * @param input the user input from Duke
      */
     public static void addNewEvent(String input) {
-        tasks.add(new Event(input.substring(Parser.EVENT_START, Parser.getTimePosition(input)), Parser.getTime(input)));
+        tasks.add(new Event(input.substring(Parser.EVENT_START, Parser.getEventTimePosition(input)),
+                Parser.getTimeString(input, Parser.getEventTimePosition(input))));
     }
 
     /**

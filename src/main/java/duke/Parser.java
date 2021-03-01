@@ -31,8 +31,9 @@ public class Parser {
      * @throws InvalidDeadlineTimeException if /by is not found when adding a new Deadline
      */
     public static void executeCommand(String input, Command c)
-            throws InvalidCommandException, EmptyInputException, InvalidEventTimeException,
-            InvalidDeadlineTimeException {
+            throws InvalidCommandException, EmptyInputException,
+            InvalidEventTimeException, InvalidDeadlineTimeException {
+
         switch (c) {
         case LIST:
             Ui.listBeginMessage();
@@ -69,7 +70,6 @@ public class Parser {
             break;
         case INVALID:
             throw new InvalidCommandException();
-
         }
     }
 
@@ -86,7 +86,9 @@ public class Parser {
      * @throws InvalidDeadlineTimeException if /by is not found when adding a new Deadline
      */
     static void verifyValidInput(String input, Command c)
-            throws EmptyInputException, InvalidEventTimeException, InvalidDeadlineTimeException {
+            throws EmptyInputException, InvalidEventTimeException,
+            InvalidDeadlineTimeException {
+
         if (isEmptyInput(input, c)) {
             throw new EmptyInputException();
         }
@@ -115,7 +117,7 @@ public class Parser {
      * @return Nothing.
      */
     private static boolean validDeadlineTime(String input) {
-        return input.substring(getTimePosition(input), getTimePosition(input) + 3).equals("/by");
+        return input.contains("/by");
     }
 
     /**
@@ -126,7 +128,7 @@ public class Parser {
      * @return Nothing.
      */
     private static boolean validEventTime(String input) {
-        return (input.substring(getTimePosition(input), getTimePosition(input) + 3).equals("/at"));
+        return (input.contains("/at"));
     }
 
     /**
@@ -143,10 +145,10 @@ public class Parser {
             isEmpty = input.substring(TODO_START).strip().equals("");
             break;
         case EVENT:
-            isEmpty = input.substring(EVENT_START, getTimePosition(input)).strip().equals("");
+            isEmpty = input.substring(EVENT_START, getEventTimePosition(input)).strip().equals("");
             break;
         case DEADLINE:
-            isEmpty = input.substring(DEADLINE_START, getTimePosition(input)).strip().equals("");
+            isEmpty = input.substring(DEADLINE_START, getDeadlineTimePosition(input)).strip().equals("");
             break;
         default:
             isEmpty = false;
@@ -155,26 +157,38 @@ public class Parser {
     }
 
     /**
-     * Returns the position of the '/' character in the input string.
+     * Returns the position of the '/by' character in the input string for Deadlines.
      * If the position is not found, the parent function "verifyValidInput" would throw exception.
      *
      * @param input the user input from Duke
      * @return '/' position
      */
-    static int getTimePosition(String input) {
-        return input.indexOf('/');
+    static int getDeadlineTimePosition(String input) {
+        int timePosition = input.indexOf("/by");
+        return timePosition;
     }
 
     /**
-     * Returns the position where the time information should start in the input string.
+     * Returns the position of the 'at' character in the input string for Events.
      * If the position is not found, the parent function "verifyValidInput" would throw exception.
      *
      * @param input the user input from Duke
      * @return time information position
      */
-    static String getTime(String input) {
-        int timePosition = getTimePosition(input);
-        return input.substring(timePosition + 3);
+    static int getEventTimePosition(String input) {
+        int timePosition = input.indexOf("/at");
+        return timePosition;
+    }
+
+    /**
+     * Returns the time String data from the input for both Events and Deadlines.
+     * If the position is not found, the parent function "verifyValidInput" would throw exception.
+     *
+     * @param input the user input from Duke
+     * @return String that represents time
+     */
+    static String getTimeString(String input, int TimeKeywordStartPosition) {
+        return input.substring(TimeKeywordStartPosition + 3);
     }
 
     /**
@@ -237,5 +251,4 @@ public class Parser {
         input = in.nextLine();
         return input;
     }
-
 }
