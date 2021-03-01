@@ -94,7 +94,6 @@ Examples:
 * `todo read book` creates `[T][N] read book`
 * `todo my homework` creates `[T][N] my homework`
 
-
 ### Adding an event: `event`
 Adds an event to be done during a certain time to Duke's Task List.
 
@@ -107,8 +106,7 @@ Examples:
 * `event seminar /at 4-6pm` creates `[E][N] seminar (at: 4-6pm)`
 * `event zoom lecture /at 9-10am` creates `[E][N] zoom lecture (at: 9-10am)`
 
-
-### Adding an deadline: `deadline`
+### Adding a deadline: `deadline`
 Adds a deadline to be done by a certain time to Duke's Task List.
 
 Format: `deadline TASK /by TIME`
@@ -120,14 +118,12 @@ Examples:
 * `deadline essay /by Friday 6pm` creates `[D][N] essay (by: Friday 6pm)`
 * `deadline Lab Assignment /by 5 Mar 9am` creates `[D][N] Lab Assignment (by: 5 Mar 9am)`
 
-  
 ### Listing all tasks: `list`
 Shows a list of all tasks in Duke's Task List.
 
 Format: `list`
 
 ![img_1.png](img_1.png)
-
 
 ### Marking a task as done: `done`
 Marks a task as done in Duke's Task List.
@@ -144,7 +140,6 @@ Examples:
 * If `[T][N] read book` was the first task that was marked as done, 
 it will now become `[T][Y] read book`.
   
-  
 ### Deleting a task: `delete`
 Deletes a specified task in Duke's Task List.
 
@@ -158,7 +153,6 @@ Examples:
 * If `[T][N] read book` was the task that was deleted,
   it will no longer exist. The subsequent tasks will be moved
   forward in the list.
-  
   
 ### Search for a task: `find`
 Lists all tasks that contains a certain keyword in Duke's Task List.
@@ -175,17 +169,14 @@ Examples:
 * `find book` returns the tasks `read book`, `book a taxi`, and `Fix Macbook`.
 ![img_2.png](img_2.png)
   
-  
 ### Exiting the program: `bye`
 Exits the program.
 
 Format: `bye`
 
-
 ### Saving the data
 Duke Task List data are saved in the hard disk automatically after any command that changes the data. 
 There is no need to save manually.
-
 
 ### Editing the data file
 Duke Task List data is saved as a text file `[JAR file location]/data.txt`.
