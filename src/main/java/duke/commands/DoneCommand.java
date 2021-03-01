@@ -1,8 +1,7 @@
 package duke.commands;
 
-import static duke.common.Constants.BORDER;
+import static duke.Ui.PRINT_DONE_TASK_STATEMENT;
 import static duke.common.Constants.DONE_STATUS;
-import static duke.common.Constants.NEWLINE;
 
 import duke.TaskList;
 
@@ -21,10 +20,6 @@ public class DoneCommand extends Command {
     @Override
     public void execute() {
         tasks.getTaskAtIndex(taskIndex-1).setStatus(DONE_STATUS);
-        System.out.print(BORDER);
-        System.out.print("Nice! This task is now done:" + NEWLINE);
-        System.out.print("\t");
-        tasks.getTaskAtIndex(taskIndex-1).printTask();
-        ui.printNumberOfTasks(tasks.getTasksCount());
+        ui.echo(tasks, PRINT_DONE_TASK_STATEMENT);
     }
 }

@@ -1,5 +1,6 @@
 package duke.commands;
 
+import static duke.Ui.PRINT_NEW_TASK_STATEMENT;
 import static duke.common.Constants.DEADLINE_TASK_TYPE;
 
 import java.time.LocalDate;
@@ -33,6 +34,6 @@ public class DeadlineCommand extends Command {
         task.setStatus(taskStatus);
         task.setType(DEADLINE_TASK_TYPE);
         tasks.addTaskToList(task);
-        ui.echo(tasks);
+        ui.echo(tasks, PRINT_NEW_TASK_STATEMENT);
     }
 }

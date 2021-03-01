@@ -117,21 +117,6 @@ public class Parser {
     }
 
     /**
-     * Checks if to-do {@code Task} is valid (meaningful).
-     *
-     * @param description task item string
-     * @throws DukeException if to-do {@code Task} contains only numerical digits.
-     */
-    public void checkTodoDescription(String description) throws DukeException {
-        try {
-            Long.parseLong(description);
-            throw new DukeException();
-        } catch (NumberFormatException e) {
-            //task description should be meaningful
-        }
-    }
-
-    /**
      * Creates the {@code Command} to add a valid {@code Deadline} with
      * given deadline {@code description} to {@code TaskList}.
      *
@@ -219,22 +204,19 @@ public class Parser {
     }
 
     /**
-     * Returns a task index in numerical form for done and delete commands.
+     * Checks if to-do {@code Task} is valid (meaningful).
      *
-     * @param description index of task
-     * @return valid index of task as a number
-     * @throws DukeException if task index is out of range of {@code TaskList}.
+     * @param description task item string
+     * @throws DukeException if to-do {@code Task} contains only numerical digits.
      */
-    public int getTaskIndex(String description) throws DukeException {
-        int index = Integer.parseInt(description);
-        boolean isPossibleIndex = index > 0;
-        boolean isValidIndex = index <= tasks.getTasksCount();
-        if (!isPossibleIndex || !isValidIndex) {
+    public void checkTodoDescription(String description) throws DukeException {
+        try {
+            Long.parseLong(description);
             throw new DukeException();
+        } catch (NumberFormatException e) {
+            //task description should be meaningful
         }
-        return index;
     }
-
 
     /**
      * Extracts from command args the task item and its details, for deadline and event commands.
@@ -251,5 +233,22 @@ public class Parser {
             throw new DukeException();
         }
         return words;
+    }
+
+    /**
+     * Returns a task index in numerical form for done and delete commands.
+     *
+     * @param description index of task
+     * @return valid index of task as a number
+     * @throws DukeException if task index is out of range of {@code TaskList}.
+     */
+    public int getTaskIndex(String description) throws DukeException {
+        int index = Integer.parseInt(description);
+        boolean isPossibleIndex = index > 0;
+        boolean isValidIndex = index <= tasks.getTasksCount();
+        if (!isPossibleIndex || !isValidIndex) {
+            throw new DukeException();
+        }
+        return index;
     }
 }

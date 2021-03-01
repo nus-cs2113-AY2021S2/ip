@@ -1,5 +1,6 @@
 package duke.commands;
 
+import static duke.Ui.PRINT_NEW_TASK_STATEMENT;
 import static duke.common.Constants.TODO_TASK_TYPE;
 
 import duke.TaskList;
@@ -25,6 +26,6 @@ public class TodoCommand extends Command {
         task.setStatus(taskStatus);
         task.setType(TODO_TASK_TYPE);
         tasks.addTaskToList(task);
-        ui.echo(tasks);
+        ui.echo(tasks, PRINT_NEW_TASK_STATEMENT);
     }
 }

@@ -44,6 +44,8 @@ public class Ui {
     public static final String GOODBYE_MESSAGE = BORDER
             + "Alright! Goodbye :)" + NEWLINE
             + BORDER;
+
+    // Help page
     public static final String HELP_PAGE = BORDER
             + "HELP PAGE" + NEWLINE
             + "Here are all the valid commands:" + NEWLINE + NEWLINE
@@ -54,22 +56,32 @@ public class Ui {
             + "\tlist" + NEWLINE
             + "\t- displays all tasks in the list" + NEWLINE + NEWLINE
             + "\ttodo     |    <task>" + NEWLINE
-            + "\t- adds specified task to the list" + NEWLINE + NEWLINE
+            + "\t- adds given task to the list" + NEWLINE + NEWLINE
             + "\tdeadline |    <task>    | /by | <yyyy-mm-dd> | <HH:mm>" + NEWLINE
-            + "\t- adds specified task with date and time to the list" + NEWLINE
+            + "\t- adds given task with date and time to the list" + NEWLINE
             + "\t- example: add task with deadline \"2 Dec 2021, 6PM\":" + NEWLINE
             + "\t  deadline final essay /by 2021-12-02 18:00" + NEWLINE + NEWLINE
             + "\tevent    |    <task>    | /at | <details>" + NEWLINE
-            + "\t- adds specified task with details to the list" + NEWLINE + NEWLINE
+            + "\t- adds given task with details to the list" + NEWLINE + NEWLINE
             + "\tfilter   | <yyyy-mm-dd>" + NEWLINE
-            + "\t- displays any deadlines in the list that match specified date" + NEWLINE + NEWLINE
+            + "\t- displays any deadlines in the list that match the given date" + NEWLINE + NEWLINE
+            + "\tfind     | <keyword>" + NEWLINE
+            + "\t- displays a list of any tasks that match the given keyword" + NEWLINE + NEWLINE
             + "\tdone     | <index>" + NEWLINE
-            + "\t- marks existing task matching the specified index" + NEWLINE
+            + "\t- marks existing task matching the given index" + NEWLINE
             + "\t  as completed in the list" + NEWLINE  + NEWLINE
             + "\tdelete   | <index>" + NEWLINE
-            + "\t- deletes existing task matching the specified index from the list" + NEWLINE + NEWLINE
+            + "\t- deletes existing task matching the given index from the list" + NEWLINE + NEWLINE
             + "<> indicates an input field and | is a field separator." + NEWLINE
             + BORDER + NEWLINE;
+
+    // Opening statements for printList method
+    public static final String PRINT_NEW_TASK_STATEMENT
+            = BORDER + "New task added:" + NEWLINE;
+    public static final String PRINT_DONE_TASK_STATEMENT
+            = BORDER + "Nice! This task is now done:" + NEWLINE;
+    public static final String PRINT_DELETED_TASK_STATEMENT
+            = BORDER + "This task has been removed:" + NEWLINE;
     public static final String PRINT_FULL_LIST_STATEMENT
             = BORDER + "Here are the tasks in your list:" + NEWLINE;
     public static final String PRINT_TARGET_LIST_STATEMENT
@@ -139,9 +151,8 @@ public class Ui {
      * {@code DeadlineCommand} or {@code EventCommand} is executed, by way of
      * confirmation to the user.
      */
-    public void echo(TaskList tasks) {
-        System.out.print(BORDER);
-        System.out.print("New task added:" + NEWLINE);
+    public void echo(TaskList tasks, String openingStatement) {
+        System.out.print(openingStatement);
         System.out.print("\t");
         tasks.getTaskAtIndex(tasks.getTasksCount() - 1).printTask();
         printNumberOfTasks(tasks.getTasksCount());
