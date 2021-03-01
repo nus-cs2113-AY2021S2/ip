@@ -1,9 +1,23 @@
 # User Guide
+---
 
-## Features 
+## Features
 
-###  Feature 1
-Description of feature.
+### Create a list of tasks to complete.
+The user is able to create up to 100 tasks of different types (i.e todo, deadline).
+
+### Easily find tasks with a keyword.
+The user is able to locate tasks easily by entering a keyword.
+
+### View all tasks
+The user can easily look at all the created task.
+
+### Marking a task
+The user can mark a task as done.
+
+### Delete a task
+The user can delete a task from the list.
+
 ---
 ## Usage
 
