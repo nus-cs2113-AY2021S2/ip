@@ -2,9 +2,12 @@
 
 Duke is a desktop app for managing your todos, events and deadlines, optimised for use via a Command Line Interface(CLI).
 * [Features](#features)
-  * [Adding a todo](#adding-a-todo-todo)
-  * [Adding a deadline](#adding-a-deadline-deadline)
+  * [Adding todos, deadlines and events](#adding-todos-deadlines-and-events)
+    * [Adding a todo](#adding-a-todo-todo)
+    * [Adding a deadline](#adding-a-deadline-deadline)
   * [Adding an event](#adding-an-event-event)
+  * [Deleting a task](#deleting-todos-deadlines-and-events-delete)
+  * [Listing all tasks](#listing-all-tasks-list)
   * [Exiting the program](#exiting-the-program)
 
 ## Features 
