@@ -5,10 +5,7 @@ import storage.FileManager;
 import tasklist.*;
 import ui.TextUI;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import static common.Messages.*;
 
@@ -18,7 +15,9 @@ public class Duke {
     //--------------------------------------------------------------------------------
     private TextUI ui;
 
-    private static void runCommandLoopUntilExitCommand() throws BlankDescriptionException, EmptyListException, MissingDateException, IOException {
+    private static void runCommandLoopUntilExitCommand()
+            throws BlankDescriptionException, EmptyListException,
+            MissingDateException, IOException, InvalidSpaceException, NoMatchesFoundException {
         boolean isExit = false;
         FileManager.restoreFileContents("Duke.txt");
         do {
@@ -26,7 +25,7 @@ public class Duke {
 
             String fullInputCommand = ui.getUserCommand();
 
-            String[] command = Parser.splitText(fullInputCommand);
+            String[] command = Parser.splitTextIntoTwoFields(fullInputCommand);
             switch (command[0]) {
             case "todo":
                 AddTodo.execute(fullInputCommand);
@@ -65,6 +64,26 @@ public class Duke {
                     System.out.println(EMPTY_LIST_EXCEPTION_MESSAGE);
                 }
                 break;
+            case "find":
+                try{
+                    Find.execute(fullInputCommand);
+                    break;
+                } catch (BlankDescriptionException e){
+                    System.out.println(BLANK_EXCEPTION_MESSAGE);
+                } catch (NoMatchesFoundException e) {
+                    System.out.println(NO_MATCHES_FOUND_MESSAGE);
+                }
+                break;
+
+            case "done":
+                try{
+                    MarkAsDone.execute(fullInputCommand);
+                } catch (OutOfRangeException e) {
+                    System.out.println(OUT_OF_RANGE_MESSAGE);
+                } catch (BlankDescriptionException e) {
+                    System.out.println(BLANK_EXCEPTION_MESSAGE);
+                }
+                break;
 
             default:
                 System.out.println("No valid command detected! Try again!");
@@ -74,7 +93,10 @@ public class Duke {
     }
 
 
-    public static void main(String[] args) throws InvalidCommandException, InvalidDateException, IOException, BlankDescriptionException, EmptyListException, MissingDateException {
+    public static void main(String[] args)
+            throws InvalidCommandException, InvalidDateException,
+            IOException, BlankDescriptionException, EmptyListException,
+            MissingDateException, InvalidSpaceException, NoMatchesFoundException {
 
 
         runCommandLoopUntilExitCommand();
