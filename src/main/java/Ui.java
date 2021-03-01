@@ -62,7 +62,7 @@ public class Ui {
 	 */
 	public void markedAsDoneMessage(ArrayList<Task> tasks, int taskIndex) {
 		lineSeparator();
-		System.out.println("Nice! I've marked this task as done:");
+		System.out.println("\tNice! I've marked this task as done:");
 		System.out.println("\t" + tasks.get(taskIndex).toString());
 		lineSeparator();
 	}
@@ -75,9 +75,9 @@ public class Ui {
 	 */
 	public void taskDeletedMessage(Task taskToDelete, int noOfTasks) {
 		lineSeparator();
-		System.out.println("Noted. I've removed this task.");
+		System.out.println("\tNoted. I've removed this task.");
 		System.out.println("\t" + taskToDelete.toString());
-		System.out.printf("Now you have %d tasks in the list.\n", noOfTasks);
+		System.out.printf("\tNow you have %d tasks in the list.\n", noOfTasks);
 		lineSeparator();
 	}
 
@@ -86,7 +86,7 @@ public class Ui {
 	 */
 	public void shutdownMessage() {
 		lineSeparator();
-		System.out.println("Bye. Hope to see you again soon!");
+		System.out.println("\tBye. Hope to see you again soon!");
 		lineSeparator();
 	}
 
@@ -98,10 +98,11 @@ public class Ui {
 	 */
 	public void printMatchedList(ArrayList<Task> matchedTasks, int size) {
 		lineSeparator();
-		System.out.println("Here are the matching tasks in your list:");
+		System.out.println("\tHere are the matching tasks in your list:");
 		for (int i = 0; i < size; i++){
 			System.out.printf("\t%d. %s\n", i + 1, matchedTasks.get(i).toString());
 		}
+		lineSeparator();
 	}
 
 	/**
@@ -109,7 +110,7 @@ public class Ui {
 	 */
 	public void noTaskInListMessage() {
 		lineSeparator();
-		System.out.println("You have no tasks to in your list.");
+		System.out.println("\tYou have no tasks to in your list.");
 		lineSeparator();
 	}
 
@@ -118,7 +119,7 @@ public class Ui {
 	 */
 	public void noMatchMessage() {
 		lineSeparator();
-		System.out.println("No matches found!");
+		System.out.println("\tNo matches found!");
 		lineSeparator();
 	}
 
@@ -130,7 +131,7 @@ public class Ui {
 	 */
 	public void printList(ArrayList<Task> tasks, int noOfTasks) {
 		lineSeparator();
-		System.out.println("Here are the tasks in your list");
+		System.out.println("\tHere are the tasks in your list");
 		for (int i = 0; i < noOfTasks; i++){
 			System.out.printf("\t%d. %s\n", i + 1, tasks.get(i).toString());
 		}
@@ -142,7 +143,7 @@ public class Ui {
 	 */
 	public void invalidInputMessage() {
 		lineSeparator();
-		System.out.println("Sorry! Input not recognised, please try again.");
+		System.out.println("\tSorry! Input not recognised, please try again.");
 		lineSeparator();
 	}
 
@@ -151,9 +152,9 @@ public class Ui {
 	 */
 	public void missingBy() {
 		lineSeparator();
-		System.out.println("OOPS!! The deadline of the task is missing!");
-		System.out.println("Format: deadline (description) /by (date time*)");
-		System.out.println("* - optional");
+		System.out.println("\tOOPS!! The deadline of the task is missing!");
+		System.out.println("\tFormat: deadline (description) /by (date time*)");
+		System.out.println("\t* - optional");
 		lineSeparator();
 	}
 
@@ -162,8 +163,8 @@ public class Ui {
 	 */
 	public void missingAt() {
 		lineSeparator();
-		System.out.println("OOPS!! The deadline of the task is missing!");
-		System.out.println("Format: event (description) /at (date time)");
+		System.out.println("\tOOPS!! The deadline of the task is missing!");
+		System.out.println("\tFormat: event (description) /at (date time)");
 		lineSeparator();
 	}
 
@@ -172,8 +173,8 @@ public class Ui {
 	 */
 	public void invalidKeywordMessage() {
 		lineSeparator();
-		System.out.println("OOPS!! You have entered more than one keyword.");
-		System.out.println("Format: find (one keyword)");
+		System.out.println("\tOOPS!! You have entered more than one keyword.");
+		System.out.println("\tFormat: find (one keyword)");
 		lineSeparator();
 	}
 }

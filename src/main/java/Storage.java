@@ -21,7 +21,7 @@ public class Storage {
 	 *
 	 * @return ArrayList of task objects from user's previous session from a txt file.
 	 */
-	public static TaskList readFromSaveFile() {
+	public TaskList readFromSaveFile() {
 
 		TaskList tasks = new TaskList();
 		int indexOfTask = 0;
@@ -75,15 +75,19 @@ public class Storage {
 	 * Writes Array list of task from user's current session into a txt file for future sessions.
 	 *
 	 * @param tasks TaskList object created and used during the session.
-	 * @param numberOfTasks Number of tasks in the TaskList object.
-	 * @throws IOException
 	 */
-	public static void writeToSaveFile(TaskList tasks, int numberOfTasks) throws IOException {
-		FileWriter fw = new FileWriter(PATH_TO_SAVE_FILE);
-		for (int i = 0; i < numberOfTasks; i++) {
-			String taskToSave = tasks.get(i).saveFormatString();
-			fw.write(taskToSave + "\n");
+	public void writeToSaveFile(TaskList tasks) {
+		int numberOfTasks = tasks.size();
+		FileWriter fw = null;
+		try {
+			fw = new FileWriter(PATH_TO_SAVE_FILE);
+			for (int i = 0; i < numberOfTasks; i++) {
+				String taskToSave = tasks.get(i).saveFormatString();
+				fw.write(taskToSave + "\n");
+			}
+			fw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-		fw.close();
 	}
 }

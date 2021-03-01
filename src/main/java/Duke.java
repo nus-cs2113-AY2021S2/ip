@@ -26,7 +26,7 @@ public class Duke {
     public Duke(){
         ui = new Ui();
         storage = new Storage();
-        tasks = Storage.readFromSaveFile();
+        tasks = storage.readFromSaveFile();
     }
 
     /**
@@ -63,17 +63,13 @@ public class Duke {
                 tasks.findTask(userInput);
                 break;
             case ("bye"):
-                int noOfTasks = tasks.size();
-                try {
-                    Storage.writeToSaveFile(tasks, noOfTasks);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                storage.writeToSaveFile(tasks);
                 ui.shutdownMessage();
                 System.exit(0);
             default:
                 ui.invalidInputMessage();
             }
+            storage.writeToSaveFile(tasks);
         }
     }
 }
