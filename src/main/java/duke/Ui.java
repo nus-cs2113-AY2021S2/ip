@@ -93,6 +93,9 @@ public class Ui {
         showExecuteResult("OOPS!!! No /by founded in the command");
     }
 
+    public void showWrongDateMessage() {
+        showExecuteResult("OOPS!!! the date you enter is in wrong format! (correct: yyyy-mm-dd)");
+    }
     public void showWriteToFileError() {
         showExecuteResult("Something wrong when writing to txt..");
     }

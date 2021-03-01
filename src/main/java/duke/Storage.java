@@ -7,10 +7,12 @@ import duke.task.Todo;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.channels.ScatteringByteChannel;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class Storage {
@@ -55,7 +57,11 @@ public class Storage {
     private ArrayList<Task> parse(ArrayList<String> dataItems) {
         ArrayList<Task> allTasks = new ArrayList<>();
         for (String line : dataItems) {
+<<<<<<< Updated upstream
             try {
+=======
+            try{
+>>>>>>> Stashed changes
                 String[] tasksInTXT = line.split("\\|");
                 String taskType = tasksInTXT[0].trim();
                 String taskDone = tasksInTXT[1].trim();
@@ -69,14 +75,22 @@ public class Storage {
                     allTasks.add(todo);
                     break;
                 case "D":
+<<<<<<< Updated upstream
                     Deadline deadline = new Deadline(taskDescription,tasksInTXT[3].trim());
+=======
+                    Deadline deadline = new Deadline(taskDescription,Parser.parseDate(tasksInTXT[3].trim()));
+>>>>>>> Stashed changes
                     if(taskDone.equals("1")) {
                         deadline.setDone(true);
                     }
                     allTasks.add(deadline);
                     break;
                 case "E":
+<<<<<<< Updated upstream
                     Event event = new Event(taskDescription,tasksInTXT[3].trim());
+=======
+                    Event event = new Event(taskDescription,Parser.parseDate(tasksInTXT[3].trim()));
+>>>>>>> Stashed changes
                     if(taskDone.equals("1")) {
                         event.setDone(true);
                     }
@@ -86,11 +100,21 @@ public class Storage {
                     System.out.println("Unknown task encountered. Skipping");
                     break;
                 }
+<<<<<<< Updated upstream
             } catch (IndexOutOfBoundsException e) {
                 continue;
             }
             }
 
+=======
+            } catch (DateTimeParseException e1) {
+                continue;
+            }catch (IndexOutOfBoundsException e2) {
+                continue;
+            }
+
+        }
+>>>>>>> Stashed changes
         return allTasks;
     }
 

@@ -6,6 +6,7 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 
@@ -34,13 +35,13 @@ public class TaskManager {
         return (Todo) taskAdded;
     }
 
-    public Deadline addDeadline(String content, String by) {
+    public Deadline addDeadline(String content, LocalDate by) {
         Task taskAdded = new Deadline(content, by);
         tasks.add(taskAdded);
         return (Deadline) taskAdded;
     }
 
-    public Event addEvent(String content, String at) {
+    public Event addEvent(String content, LocalDate at) {
         Task taskAdded = new Event(content, at);
         tasks.add(taskAdded);
         return (Event) taskAdded;

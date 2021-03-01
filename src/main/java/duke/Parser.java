@@ -2,6 +2,10 @@ package duke;
 
 import duke.command.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Parser {
     private Command cmd;
 
@@ -33,5 +37,10 @@ public class Parser {
             cmd = null;
         }
 
+    }
+
+    public static LocalDate parseDate(String dateStr) throws DateTimeParseException {
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ISO_LOCAL_DATE;
+        return LocalDate.parse(dateStr, dateFormatter);
     }
 }
