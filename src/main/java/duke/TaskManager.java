@@ -45,26 +45,25 @@ public class TaskManager {
         tasks.add(taskAdded);
         return (Event) taskAdded;
     }
+
     // done
-    public void markTaskDone(int taskIndexShow) {
+    public Task markTaskDone(int taskIndexShow) {
         tasks.get(taskIndexShow - 1).setDone(true);
-        System.out.println("Nice! I've marked this task as done:\n" + tasks.get(taskIndexShow - 1));
+        return tasks.get(taskIndexShow - 1);
     }
 
     // list
     public void listAllTasks() {
-        System.out.println("____________________________________________________________");
         for(int i=0; i< tasks.size() ; i++) {
             System.out.println(i+1 + ". " + tasks.get(i));
         }
-        System.out.println("____________________________________________________________");
     }
 
     //delete
-    public void deleteTask(int taskIndexShow){
+    public Task deleteTask(int taskIndexShow){
         Task temp = tasks.get(taskIndexShow - 1);
         tasks.remove(taskIndexShow - 1);
-        System.out.println("Noted. I've removed this task: \n" + temp + "\nNow you have " + getNumOfTasks() + " tasks in the list.");
+        return temp;
     }
 
 }

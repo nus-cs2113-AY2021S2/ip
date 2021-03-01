@@ -1,17 +1,15 @@
 package duke.command;
 
 import duke.Storage;
-import duke.Ui;
 import duke.TaskManager;
+import duke.Ui;
 
-public class ListCmd extends Command{
-    public ListCmd(String s) {
+public class HelpCmd extends Command {
+    public HelpCmd(String s) {
         super(s);
     }
 
     public void execute(TaskManager tasks, Ui ui, Storage storage) {
-        ui.showLine();
-        tasks.listAllTasks();
-        ui.showLine();
+        ui.showHelp();
     }
 }

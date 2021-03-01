@@ -13,9 +13,11 @@ public class Parser {
         cmd = null;
     }
     public void parse(String userInputString) {
-        if(userInputString.equalsIgnoreCase("LIST")) {
+        if(userInputString.equalsIgnoreCase("HELP")) {
+            cmd =  new HelpCmd(userInputString);
+        }else if(userInputString.equalsIgnoreCase("LIST")) {
             cmd =  new ListCmd(userInputString);
-        } else if (userInputString.toUpperCase().matches("^(DONE).*$")) {
+        } else if(userInputString.toUpperCase().matches("^(DONE).*$")) {
             cmd = new DoneCmd(userInputString);
         } else if (userInputString.toUpperCase().matches("^(DELETE).*$")) {
             cmd = new DeleteCmd(userInputString);

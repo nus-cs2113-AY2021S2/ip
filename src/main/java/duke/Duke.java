@@ -1,11 +1,5 @@
 package duke;
 
-import duke.command.Command;
-import duke.task.*;
-import duke.task.Event;
-
-import java.io.IOException;
-import java.util.Scanner;
 
 public class Duke {
 
@@ -21,22 +15,22 @@ public class Duke {
         p = new Parser();
     }
 
-    public void run() throws IOException {
+    public void run() {
         ui.showHello();
         while (true) {
             String userCommand = ui.getUserInput();
             p.parse(userCommand.trim());
             try {
                 p.getCmd().execute(tasks, ui, storage);
-            } catch (EmptyDescriptionException e) {
-                e.showMessage();
+            } catch (DukeException e) {
+                e.showMessage(ui);
             } catch (NullPointerException e) {
                 ui.showMessageForInvalidCommandInput();
             }
         }
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }
 

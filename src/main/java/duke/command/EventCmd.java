@@ -1,7 +1,7 @@
 package duke.command;
 
 import duke.CommandType;
-import duke.EmptyDescriptionException;
+import duke.DukeException;
 import duke.Storage;
 import duke.Ui;
 import duke.task.Event;
@@ -14,20 +14,20 @@ public class EventCmd extends Command{
         super(s);
     }
 
-    public void execute(TaskManager tasks, Ui ui, Storage storage) throws EmptyDescriptionException {
+    public void execute(TaskManager tasks, Ui ui, Storage storage) throws DukeException {
         try {
             String[] typeContentAt= userInput.trim().split("[Ee][Vv][Ee][Nn][Tt]", 2);
             String[] contentAt = typeContentAt[1].trim().split("/[Aa][Tt]", 2);
             if (contentAt[0].trim().equals("") || contentAt[1].trim().equals("")) {
-                throw new EmptyDescriptionException(CommandType.EVENT);
+                throw new DukeException(CommandType.EVENT);
             }
             Event e = tasks.addEvent(contentAt[0].trim(), contentAt[1].trim());
             ui.showAddResult(e, tasks.getNumOfTasks());
             storage.writeToTxt(tasks.getTasks());
         } catch (IndexOutOfBoundsException e){
-            System.out.println("OOPS!!! No /at founded in the command");
+            ui.showNoAtMessage();
         } catch (IOException e) {
-            System.out.println("Something wrong when writing to txt");
+            ui.showWriteToFileError();
         }
     }
 }
