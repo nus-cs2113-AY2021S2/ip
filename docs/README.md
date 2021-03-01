@@ -31,19 +31,19 @@ ip is a desktop app for managing tasks, optimized for use via a Command Line Int
 
 ## Features
 
-### Viewing help: `help`
+### Viewing help : `help`
 Shows a message with the format of possible commands that ip can handle.  
 Outcome:  
 ![Screenshot 2021-03-02 at 12 59 43 AM](https://user-images.githubusercontent.com/60348727/109531210-9414d680-7af2-11eb-848b-f5f04c8bbd62.png)  
 Format: `help`
-### Adding a todo task: `todo`
+### Adding a todo task : `todo`
 Adds a todo task to the tasks list.   
 Example: `todo make coffee`  
 Outcome:  
 ![Screenshot 2021-03-02 at 1 35 34 AM](https://user-images.githubusercontent.com/60348727/109535483-96c5fa80-7af7-11eb-8623-2b3393f1c3c7.png)  
 Format: `todo TASK_DESCRIPTION`
 
-### Adding a deadline: `deadline`
+### Adding a deadline : `deadline`
 Adds a deadline to the tasks list.  
 Example: `deadline finish project /by monday`  
 Outcome:  
@@ -51,14 +51,14 @@ Outcome:
 Format: `deadline TASK_DESCRIPTION /by WHEN`
 
 
-### Adding an event: `event`
+### Adding an event : `event`
 Adds an event to the tasks list.  
 Example: `event important meeting /at tuesday morning`  
 Outcome:  
 ![Screenshot 2021-03-02 at 1 37 22 AM](https://user-images.githubusercontent.com/60348727/109535714-d68ce200-7af7-11eb-9c11-a8c011dc8fa0.png)  
 Format: `event TASK_DESCRIPTION /at WHEN`
 
-### Marking a task as done: `done`
+### Marking a task as done : `done`
 Marks the specified task as done.  
 Example: `done 2`  
 Outcome:  
@@ -66,20 +66,20 @@ Outcome:
 Format: `done TASK_NUMBER`
 
 
-### List all tasks: `list`
+### List all tasks : `list`
 Lists all tasks.  
 Outcome:  
 ![Screenshot 2021-03-02 at 1 38 39 AM](https://user-images.githubusercontent.com/60348727/109535874-050abd00-7af8-11eb-99e6-2ee01e6afd58.png)  
 Format: `list`
 
-### Deleting a task: `delete`
+### Deleting a task : `delete`
 Deletes the specified task from the list.  
 Example: `delete 1`
 Outcome:  
 ![Screenshot 2021-03-02 at 1 39 07 AM](https://user-images.githubusercontent.com/60348727/109535925-15bb3300-7af8-11eb-9e0b-0c0f101e7df3.png)  
 Format: `delete TASK_NUMBER`
 
-### Searching for tasks by a keyword: `find`
+### Searching for tasks by a keyword : `find`
 Finds all tasks that contain the specified keyword from the list.  
 Example: `find important`
 Outcome:  
