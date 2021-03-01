@@ -11,8 +11,9 @@ import duke.commands.FinishCommand;
 import duke.commands.TodoCommand;
 import duke.commands.EventCommand;
 import duke.commands.DeadlineCommand;
-import duke.commands.DeleteCommand;
 import duke.commands.SaveCommand;
+import duke.commands.DeleteCommand;
+import duke.commands.FindCommand;
 import duke.commands.UnknownCommand;
 import duke.ui.TextUI;
 import duke.tasks.TaskList;
@@ -52,6 +53,8 @@ public class Parser {
             return checkDelete(commandString);
         case SaveCommand.COMMAND_WORD:
             return checkSave(commandString);
+        case FindCommand.COMMAND_WORD:
+            return checkFind(commandString);
         default:
             return new UnknownCommand(taskList);
         }
@@ -138,6 +141,11 @@ public class Parser {
 
     private Command checkSave(String commandString) {
         return new SaveCommand(taskList, storage);
+    }
+
+    private Command checkFind(String commandString) {
+        String searchWord = commandString.split(" ", 2)[1];
+        return new FindCommand(taskList, searchWord);
     }
 
 }
