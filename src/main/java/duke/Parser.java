@@ -215,35 +215,43 @@ public class Parser {
     }
 
     static boolean isBye() {
-        return input.equals("bye");
+        boolean isInputCommandBye = input.equals("bye");
+        return isInputCommandBye;
     }
 
     static boolean isDeadline() {
-        return input.length() > 8 && input.substring(0, 8).equals("deadline");
+        boolean isInputCommandDeadline = input.length() > 8 && input.startsWith("deadline");
+        return isInputCommandDeadline;
     }
 
     static boolean isEvent() {
-        return input.length() > 5 && input.substring(0, 5).equals("event");
+        boolean isInputCommandEvent = input.length() > 5 && input.startsWith("event");
+        return isInputCommandEvent;
     }
 
     static boolean isTodo() {
-        return input.length() > 4 && input.substring(0, 4).equals("todo");
+        boolean isInputCommandTodo = input.length() > 4 && input.startsWith("todo");
+        return isInputCommandTodo;
     }
 
     static boolean isFind() {
-        return input.length() > 4 && input.substring(0, 4).equals("find");
+        boolean isInputCommandFind = input.length() > 4 && input.startsWith("find");
+        return isInputCommandFind;
     }
 
     static boolean isList() {
-        return input.equals("list");
+        boolean isInputCommandList = input.startsWith("list");
+        return isInputCommandList;
     }
 
     static boolean isDelete() {
-        return input.length() > 6 && input.substring(0, 6).equals("delete");
+        boolean isInputCommandDelete = input.length() > 6 && input.startsWith("delete");
+        return isInputCommandDelete;
     }
 
     static boolean isDone() {
-        return input.length() > 4 && input.substring(0, 4).equals("done");
+        boolean isInputCommandDone = input.length() > 4 && input.startsWith("done");
+        return isInputCommandDone;
     }
 
     static String getInput(Scanner in) {
