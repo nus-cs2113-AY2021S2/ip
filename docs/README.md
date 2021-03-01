@@ -1,6 +1,12 @@
 # Duke User Guide
 Duke is a Personal Assistant Chatbot that helps you manage your various tasks. 
 
+## Quick start
+1. Ensure you have Java `11` installed on your computer
+1. Download the latest `v0.2.jar` from [here]()
+1. Open a command window in the folder containing the `.jar` file
+1. Run the command `java -jar {filename}.jar` <br> If you haven't changed the filename, run the command `java -jar v0.2.jar`
+
 ## Features 
 
 ### Add tasks
