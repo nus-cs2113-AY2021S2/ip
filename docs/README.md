@@ -1,8 +1,12 @@
 # User Guide
 
 ## Features 
-
-### Feature 1 
+<details>
+<summary>How do I dropdown?</summary>
+<br>
+This is how you dropdown.
+</details>
+###  
 Description of feature.
 
 ## Usage
