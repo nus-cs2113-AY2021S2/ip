@@ -27,14 +27,14 @@ done faster than traditional GUI apps.
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest `Duke_ip.jar` 
+2. Download the latest `ip.jar` 
    from [here](https://github.com/Leeyp/ip/releases).
 
 3. Copy the file to the folder you want to use 
    as the home folder for your Duke.
 
-4. Open your Command Line Terminal in that folder where `Duke_ip.jar` is 
-   located. Run Duke with `java -jar Duke_ip.jar`.
+4. Open your Command Line Terminal in that folder where `ip.jar` is 
+   located. Run Duke with `java -jar ip.jar`.
    
 5. Type the command in the command box and press Enter to execute
    it. e.g. typing `list` and pressing Enter will show a list of 
