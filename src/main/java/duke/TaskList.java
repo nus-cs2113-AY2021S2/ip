@@ -158,10 +158,14 @@ public class TaskList {
                     1, separatorIndex));
             String at = String.join(" ",Arrays.copyOfRange(command,
                     separatorIndex + 1, command.length));
-
-            Task newItem = new Event(description, at);
-            tasks.add(newItem);
-            return newItem;
+            if(Parser.checkValidLocalDate(at)){
+                Task newItem = new Deadline(description, at);
+                tasks.add(newItem);
+                return newItem;
+            } else{
+                System.out.println("Dates are to be entered in the following format: yyyy-mm-dd");
+                return null;
+            }
         } else{
             throw new DukeException();
         }
@@ -174,10 +178,14 @@ public class TaskList {
                     1, separatorIndex));
             String by = String.join(" ",Arrays.copyOfRange(command,
                     separatorIndex + 1, command.length));
-
-            Task newItem = new Deadline(description, by);
-            tasks.add(newItem);
-            return newItem;
+            if(Parser.checkValidLocalDate(by)){
+                Task newItem = new Deadline(description, by);
+                tasks.add(newItem);
+                return newItem;
+            } else{
+                System.out.println("Dates are to be entered in the following format: yyyy-mm-dd");
+                return null;
+            }
         } else{
             throw new DukeException();
         }

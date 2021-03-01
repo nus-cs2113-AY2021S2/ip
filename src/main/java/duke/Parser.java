@@ -1,5 +1,7 @@
 package duke;
 
+import java.time.LocalDate;
+
 public class Parser {
     public static boolean checkForSubstring(String[] input, String substring){
         for(String string : input){
@@ -38,4 +40,12 @@ public class Parser {
         return false;
     }
 
+    public static boolean checkValidLocalDate(String s){
+        try{
+            LocalDate date = LocalDate.parse(s);
+            return true;
+        } catch (Exception e){
+            return false;
+        }
+    }
 }
