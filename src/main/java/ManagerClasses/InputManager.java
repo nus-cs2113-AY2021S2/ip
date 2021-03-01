@@ -73,13 +73,20 @@ public class InputManager {
                 try {
                     taskManager.addTodoToList(command.getDescription());
                     storageManager.saveTasksInTxtFile();
-                } catch (EmptyTaskDescriptionException e) {
+                } catch (EmptyTaskDescriptionException | NullPointerException e) {
                     System.out.println("Error -> Empty task description");
                 }
                 break;
             case DELETE:
                 taskManager.deleteTask(command.getTaskNum());
                 storageManager.saveTasksInTxtFile();
+                break;
+            case FIND:
+                try {
+                    taskManager.findTasks(command.getDescription());
+                } catch (EmptyTaskDescriptionException e) {
+                    System.out.println("Error -> Please enter a keyword to search");
+                }
                 break;
             default:
                 PrintManager.printHelpMessage();

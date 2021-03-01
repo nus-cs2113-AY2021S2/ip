@@ -1,5 +1,6 @@
 package ManagerClasses;
 
+import ExceptionClasses.NoMatchingTaskException;
 import TaskClasses.Deadline;
 import TaskClasses.Event;
 import TaskClasses.Task;
@@ -12,7 +13,7 @@ import java.util.List;
  * Manages the task actions that the user may input.
  */
 public class TaskManager {
-    private final List<Task> tasks;
+    private final ArrayList<Task> tasks;
 
     /**
      * Constructor for the TaskManager class.
@@ -36,12 +37,7 @@ public class TaskManager {
         if (tasks.size() == 0) {
             System.out.println("Oops, it seems like you don't have any tasks.");
         } else {
-            int taskId = 1;
-            System.out.println("Here are the tasks in your list:");
-            for (Task task: tasks) {
-                System.out.println(taskId + ". " + task.toString());
-                taskId++;
-            }
+            printAllTasksInList(tasks);
         }
     }
 
@@ -132,6 +128,39 @@ public class TaskManager {
             System.out.println("Now you have " + tasks.size() + " task in the list.");
         } else {
             System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+        }
+    }
+
+    public void findTasks(String keyword) {
+        try {
+            ArrayList<Task> matches = new ArrayList<>();
+
+            checkTasks(keyword, matches);
+
+            if (!matches.isEmpty()) {
+                printAllTasksInList(matches);
+            } else {
+                throw new NoMatchingTaskException();
+            }
+        } catch (NoMatchingTaskException e) {
+            System.out.println("Oops there were no tasks that match that keyword");
+        }
+    }
+
+    private void checkTasks(String keyword, ArrayList<Task> matches) {
+        for (Task task : tasks) {
+            if (task.getDescription().contains(keyword)) {
+                matches.add(task);
+            }
+        }
+    }
+
+    private void printAllTasksInList(ArrayList<Task> matches) {
+        int taskId = 1;
+        System.out.println("Here are the tasks in your list:");
+        for (Task match : matches) {
+            System.out.println(taskId + ". " + match.toString());
+            taskId++;
         }
     }
 }
