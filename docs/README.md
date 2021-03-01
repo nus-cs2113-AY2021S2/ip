@@ -1,12 +1,16 @@
 # User Guide
 
-[Adding a todo](#adding-a-todo-todo)
-[Exiting the program](#exiting-the-program)
+Duke is a desktop app for managing your todos, events and deadlines, optimised for use via a Command Line Interface(CLI).
+* [Features](#features)
+  * [Adding a todo](#adding-a-todo-todo)
+  * [Adding a deadline](#adding-a-deadline-deadline)
+  * [Adding an event](#adding-an-event-event)
+  * [Exiting the program](#exiting-the-program)
 
 ## Features 
 
 ### 1. Adding todos, deadlines and events
-Duke allows the user to quickly track events and reminders through CLI
+Adding tasks.
 
 ### Usage
 
