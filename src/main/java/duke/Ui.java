@@ -7,6 +7,7 @@ public class Ui {
     public Ui(){
 
     }
+
     public static void runProgram(Storage storage) {
         Scanner in = new Scanner(System.in);
         String userInput;
