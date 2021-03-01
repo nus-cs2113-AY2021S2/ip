@@ -41,7 +41,7 @@ Expected outcome:
 ### 3. Listing all tasks
 For a quick overview on all added tasks
 
-## Usage
+### Usage
 
 ### `list`
 
@@ -66,7 +66,7 @@ Expected outcome:
 ### 4. Marking task as done
 To signal that task is completed
 
-## Usage
+### Usage
 
 ### `done`
 
@@ -91,7 +91,7 @@ Expected outcome:
 ### 5. Searching for specified keyword
 Should a user want to search for related task, a keyword search is provided
 
-## Usage
+### Usage
 
 ### `find`
 
