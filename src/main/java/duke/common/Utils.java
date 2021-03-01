@@ -57,9 +57,9 @@ public class Utils {
 
     /**
      * Takes in user input string and parses it to a LocalDateTime object if it matches the pattern.
-     * @param userInput
+     * @param userInput user input string
      * @return LocalDateTime object with date specified in user input string.
-     * @throws InvalidDateFormatException
+     * @throws InvalidDateFormatException invalid date format
      */
     public static LocalDateTime getDateFromUserInput(String userInput) throws InvalidDateFormatException {
         try {
@@ -73,7 +73,7 @@ public class Utils {
 
     /**
      * Checks if deadline specified is before current date.
-     * @param date
+     * @param date date of deadline
      * @return validity of deadline.
      */
     public static boolean isValidDeadline(LocalDateTime date) {
@@ -85,9 +85,9 @@ public class Utils {
 
     /**
      * Takes in user input string and parses it to a LocalDateTime object if it matches the pattern.
-     * @param userInput
+     * @param userInput user input string
      * @return LocalDateTime object with date and time specified in user input string.
-     * @throws InvalidDateTimeFormatException
+     * @throws InvalidDateTimeFormatException invalid date time format
      */
     public static LocalDateTime getDateTimeFromUserInput(String userInput) throws InvalidDateTimeFormatException {
         try {
@@ -101,7 +101,7 @@ public class Utils {
 
     /**
      * Checks if event specified is before current date and time.
-     * @param dateTime
+     * @param dateTime date and time of event
      * @return validity of event.
      */
     public static boolean isValidEvent(LocalDateTime dateTime) {
