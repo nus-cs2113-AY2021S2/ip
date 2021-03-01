@@ -94,6 +94,8 @@ public class Command {
             return CommandEnum.TODO;
         } else if (args[0].equals("delete")) {
             return CommandEnum.DELETE;
+        } else if (args[0].equals("find")) {
+            return CommandEnum.FIND;
         }
         return CommandEnum.INVALID;
     }

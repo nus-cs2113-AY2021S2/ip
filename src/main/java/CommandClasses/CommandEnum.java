@@ -8,5 +8,6 @@ public enum CommandEnum {
     EVENT,
     TODO,
     DELETE,
-    INVALID;
+    INVALID,
+    FIND
 }

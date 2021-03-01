@@ -68,6 +68,13 @@ public class InputManager {
                 taskManager.deleteTask(command.getTaskNum());
                 storageManager.saveTasksInTxtFile();
                 break;
+            case FIND:
+                try {
+                    taskManager.findTasks(command.getDescription());
+                } catch (EmptyTaskDescriptionException e) {
+                    System.out.println("Error -> Please enter a keyword to search");
+                }
+                break;
             default:
                 PrintManager.printHelpMessage();
             }
