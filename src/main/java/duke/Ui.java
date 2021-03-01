@@ -4,6 +4,7 @@ import duke.task.Task;
 
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -104,6 +105,13 @@ public class Ui {
             inputLine = in.nextLine();
         }
         return inputLine;
+    }
+
+    public void showFindResult(ArrayList<Task> tasks) {
+        showLine();
+        tasks.stream().forEach(System.out::println);
+        showLine();
+
     }
 
 

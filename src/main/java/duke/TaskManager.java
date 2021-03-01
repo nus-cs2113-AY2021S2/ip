@@ -8,6 +8,8 @@ import duke.task.Todo;
 
 import java.util.ArrayList;
 
+import static java.util.stream.Collectors.toList;
+
 
 public class TaskManager {
     private ArrayList<Task> tasks;
@@ -64,6 +66,14 @@ public class TaskManager {
         Task temp = tasks.get(taskIndexShow - 1);
         tasks.remove(taskIndexShow - 1);
         return temp;
+    }
+
+    // find tasks by string
+    public ArrayList<Task> filterTasksByString(String filterString) {
+        ArrayList<Task> filteredList = (ArrayList<Task>) tasks.stream()
+                .filter((s) -> s.getContent().toLowerCase().contains(filterString))
+                .collect(toList());
+        return filteredList;
     }
 
 }
