@@ -231,7 +231,11 @@ public class Parser {
         try {
             dateTime = parseDateTime(dateTimeString);
         } catch (Exception e) {
-            throw new InvalidCommandTimeException(commandType, e);
+            throw new InvalidCommandTimeException(commandType, e.getLocalizedMessage());
+        }
+        if (dateTime.isBefore(LocalDateTime.now())) {
+            String errorMessage = "Task is already due! Please input a future time and date. (:";
+            throw new InvalidCommandTimeException(commandType, errorMessage);
         }
 
         return dateTime;
@@ -254,9 +258,8 @@ public class Parser {
      * 
      * @param line string containing task details delimited by "~"
      * @return <code>Task</code> object
-     * @throws InvalidCommandTimeException if user input for due date is of invalid format
      */
-	public Task parseTask(String line) throws InvalidCommandTimeException {
+	public Task parseTask(String line) {
 	    String[] tokens = line.split("~");
 	    String taskType = tokens[0];
 	    String isDone = tokens[1];
@@ -265,19 +268,19 @@ public class Parser {
         LocalDateTime dateTime;
         String dateTimeString;
 	    switch (taskType) {
-	        case "Todo":
-	            task = new Todo(description);
-	            break;
-	        case "Deadline":
-                dateTimeString = tokens[3];
-                dateTime = parseDateTime(dateTimeString);
-	            task = new Deadline(description, dateTime);
-	            break;
-	        case "Event":
-	            dateTimeString = tokens[3];
-                dateTime = parseDateTime(dateTimeString);
-	            task = new Event(description, dateTime);
-	            break;
+        case "Todo":
+            task = new Todo(description);
+            break;
+        case "Deadline":
+            dateTimeString = tokens[3];
+            dateTime = parseDateTime(dateTimeString);
+            task = new Deadline(description, dateTime);
+            break;
+        case "Event":
+            dateTimeString = tokens[3];
+            dateTime = parseDateTime(dateTimeString);
+            task = new Event(description, dateTime);
+            break;
 	    }
 	    if (isDone == String.valueOf(true)) {
 	        task.setIsDone();

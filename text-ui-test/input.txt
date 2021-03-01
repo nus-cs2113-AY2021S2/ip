@@ -22,6 +22,7 @@ deadline project but invalid /by
 deadline project whitespace         /by            02/06/2021 2300
 deadline project bad date         /by            02062021 2300
 deadline project bad date         /by            02 06 2021 2300
+deadline project bad date           /by             01/01/1234 1346
 event
 event meeting but no by
 event meeting but invalid /at           

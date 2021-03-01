@@ -9,9 +9,9 @@ public class InvalidCommandTimeException extends Exception {
     private String commandType;
     private String parseErrorMessage;
 
-    public InvalidCommandTimeException(String commandType, Exception e) {
+    public InvalidCommandTimeException(String commandType, String message) {
         this.commandType = commandType;
-        this.parseErrorMessage = e.getLocalizedMessage();
+        this.parseErrorMessage = message;
     }
 
     public String getMessage() {
