@@ -47,13 +47,13 @@ public class PrintManager {
      */
     public static void printHelpMessage() {
         System.out.print("Help message:\n"
-                + "* Add deadline -> 'deadline <description> /by <when>'\n"
-                + "* Add event -> 'event <description> /at <when>'\n"
-                + "* Add todo task -> 'todo <description>'\n"
-                + "* Show list -> 'list'\n"
-                + "* Mark as done -> 'done <task number>'\n"
-                + "* Delete task -> 'delete <task number>'\n"
-                + "* Find task -> 'find <keyword>'\n"
+                + "* Adding a todo task -> 'todo <description>'\n"
+                + "* Adding a deadline -> 'deadline <description> /by <when>'\n"
+                + "* Adding an event -> 'event <description> /at <when>'\n"
+                + "* Marking a task as done -> 'done <task number>'\n"
+                + "* Listing all tasks -> 'list'\n"
+                + "* Deleting a task -> 'delete <task number>'\n"
+                + "* Searching for tasks by keyword -> 'find <keyword>'\n"
                 + "* Exit -> 'bye'\n");
     }
 }
