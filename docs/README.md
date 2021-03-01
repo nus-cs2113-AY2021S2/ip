@@ -13,7 +13,9 @@ ip is a desktop app for managing tasks, optimized for use via a Command Line Int
    * [Deleting a task](#deleting-a-task)
    * [Searching for tasks by a keyword](#searching-for-tasks-by-a-keyword)
 3. [Command summary](#command-summary)
+
 ---
+
 ## Quick start
 1. Ensure that you have Java 11 or above installed in your computer.
 2. Download the latest version of [ip.jar] from here.
@@ -26,17 +28,19 @@ ip is a desktop app for managing tasks, optimized for use via a Command Line Int
    * `deadline submit coding assignment /by Monday night`: Add a deadline to submit coding assignment by Monday night.
    * `delete 1`: Deletes the first task shown in the current list.
    * `bye`: Exits the app.
-6. Refer to the Features below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.  
+
 ---
+
 ## Features
 
-### Viewing help : `help`
+### Viewing help : `help`  
 Shows a message with the format of possible commands that ip can handle.  
 Outcome:  
 ![Screenshot 2021-03-02 at 12 59 43 AM](https://user-images.githubusercontent.com/60348727/109531210-9414d680-7af2-11eb-848b-f5f04c8bbd62.png)  
 Format: `help`
 
-### Adding a todo task : `todo`
+### Adding a todo task : `todo`  
 Adds a todo task to the tasks list.   
 Example: `todo make coffee`  
 Outcome:  
@@ -44,7 +48,7 @@ Outcome:
 Format: `todo TASK_DESCRIPTION`  
 * Note that the todo task is marked with a [T]
 
-### Adding a deadline : `deadline`
+### Adding a deadline : `deadline`  
 Adds a deadline to the tasks list.  
 Example: `deadline finish project /by monday`  
 Outcome:  
@@ -52,7 +56,7 @@ Outcome:
 Format: `deadline TASK_DESCRIPTION /by WHEN`  
 * Note that the deadline is marked with a [D]
 
-### Adding an event : `event`
+### Adding an event : `event`  
 Adds an event to the tasks list.  
 Example: `event important meeting /at tuesday morning`  
 Outcome:  
@@ -60,7 +64,7 @@ Outcome:
 Format: `event TASK_DESCRIPTION /at WHEN`  
 * Note that the event is marked with a [E]
 
-### Marking a task as done : `done`
+### Marking a task as done : `done`  
 Marks the specified task as done.  
 Example: `done 2`  
 Outcome:  
@@ -68,27 +72,29 @@ Outcome:
 Format: `done TASK_NUMBER` 
 * Note that the [✘] has changed to [✓] for the specified task
 
-### List all tasks : `list`
+### List all tasks : `list`  
 Lists all tasks.  
 Outcome:  
 ![Screenshot 2021-03-02 at 1 38 39 AM](https://user-images.githubusercontent.com/60348727/109535874-050abd00-7af8-11eb-99e6-2ee01e6afd58.png)  
 Format: `list`
 
-### Deleting a task : `delete`
+### Deleting a task : `delete`  
 Deletes the specified task from the list.  
-Example: `delete 1`
+Example: `delete 1`  
 Outcome:  
 ![Screenshot 2021-03-02 at 1 39 07 AM](https://user-images.githubusercontent.com/60348727/109535925-15bb3300-7af8-11eb-9e0b-0c0f101e7df3.png)  
 Format: `delete TASK_NUMBER`
 
-### Searching for tasks by a keyword : `find`
+### Searching for tasks by a keyword : `find`  
 Finds all tasks that contain the specified keyword from the list.  
-Example: `find important`
+Example: `find important`  
 Outcome:  
 ![Screenshot 2021-03-02 at 1 39 29 AM](https://user-images.githubusercontent.com/60348727/109535980-22d82200-7af8-11eb-86f5-c1ce6485a7e5.png)  
-Format: `find KEYWORD`
+Format: `find KEYWORD`  
+
 ---
-## Command summary
+
+## Command summary  
 
 |  Commands  |               Format               |                    Example                  |
 | ---------- |------------------------------------| --------------------------------------------|
