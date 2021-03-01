@@ -68,7 +68,8 @@ public class Ui {
             + BORDER + NEWLINE;
     public static final String PRINT_FULL_LIST_STATEMENT
             = BORDER + "Here are the tasks in your list:" + NEWLINE;
-
+    public static final String PRINT_TARGET_LIST_STATEMENT
+            = BORDER + "Tasks matching this keyword:" + NEWLINE;
 
     /** Invalid command error messages */
     public static final String DEFAULT_INVALID_MESSAGE
@@ -81,6 +82,8 @@ public class Ui {
             = "Squeal? There is no task in the list with index ";
     public static final String INVALID_TASK_MESSAGE
             = "Squeal... Are you sure that is a task?";
+    public static final String FOUND_NO_RESULTS_MESSAGE
+            = "Panda can't find tasks in your list with that keyword...";
     public static final String INVALID_DATE_FORMAT_MESSAGE
             = "Squeal, date format is invalid!" + NEWLINE
             + "Use \"help\" for more info.";

@@ -17,6 +17,7 @@ import duke.commands.DeadlineCommand;
 import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
 import duke.commands.EventCommand;
+import duke.commands.FindCommand;
 import duke.commands.FilterCommand;
 import duke.commands.HelpCommand;
 import duke.commands.InvalidCommand;
@@ -61,6 +62,8 @@ public class Parser {
             return prepareDoneCommand(userCommand[1]);
         case "delete":
             return prepareDeleteCommand(userCommand[1]);
+        case "find":
+            return new FindCommand(tasks, userCommand[1]);
         case "filter":
             return prepareFilterCommand(userCommand[1]);
         default:
