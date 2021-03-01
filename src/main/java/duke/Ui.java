@@ -42,13 +42,14 @@ public class Ui {
         showLine();
         System.out.println("User Guide: ");
         System.out.println("1. todo ...");
-        System.out.println("2. event ... /at ...");
-        System.out.println("3. deadline ... /by ...");
+        System.out.println("2. event ... /at yyyy-mm-dd");
+        System.out.println("3. deadline ... /by yyyy-mm-dd");
         System.out.println("4. done [index]");
         System.out.println("5. delete [index]");
         System.out.println("6. list");
-        System.out.println("7. bye");
-        System.out.println("8. help");
+        System.out.println("7. find ...");
+        System.out.println("8. bye");
+        System.out.println("9. help");
         showLine();
 
     }
