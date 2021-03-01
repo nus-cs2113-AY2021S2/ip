@@ -1,6 +1,7 @@
 package Duke.Commands;
 
-import Duke.Errors.Errors;
+import Duke.Exceptions.IllegalKeywordException;
+import Duke.UI.PrintMessages;
 import Duke.Task.Task;
 import Duke.Duke;
 import java.time.LocalDate;
@@ -8,38 +9,43 @@ import java.time.format.DateTimeFormatter;
 
 public class FindTaskCommand extends Duke {
     /**
-     * Find tasks on a specific date
-     * show error if theres no task on the date
+     * Finds tasks on a specific date
+     * Shows error if theres no task on the date
      * @param date
      */
     public static void FindWithDate(String date) {
         try {
-            LocalDate d1 = LocalDate.parse(date);
-            String d2 = d1.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-            for (Task t : lists) {
-                if (d2.equals(t.getTaskTime())) {
-                    System.out.println(lists.indexOf(t) + 1 + ". " + t.toString());
+            LocalDate parsedDate = LocalDate.parse(date);
+            String formattedDate = parsedDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+            for (Task task : lists) {
+                if (formattedDate.equals(task.getTaskTime())) {
+                    System.out.println(lists.indexOf(task) + 1 + ". " + task.toString());
                 }
             }
         } catch (Exception e) {
-            Errors.cannotRecognise(date);
+            PrintMessages.cannotFind(date);
         }
     }
 
     /**
-     * Find tasks with a specific keyword
-     * show error if theres no task on the date
+     * Finds tasks with a specific keyword
+     * Shows error if theres no task containing the keyword
      * @param keyword
      */
     public static void FindWithKeyword(String keyword) {
         try {
-            for (Task t : lists) {
-                if (t.getTask().contains(keyword)) {
-                    System.out.println(lists.indexOf(t) + 1 + ". " + t.toString());
+            boolean found = false;
+            for (Task task : lists) {
+                if (task.getTask().contains(keyword)) {
+                    System.out.println(lists.indexOf(task) + 1 + ". " + task.toString());
+                    found = true;
                 }
             }
-        } catch (Exception e) {
-            Errors.cannotRecognise(keyword);
+            if (!found) {
+                throw new IllegalKeywordException();
+            }
+        } catch (IllegalKeywordException e) {
+            PrintMessages.cannotFind(keyword);
         }
     }
 }

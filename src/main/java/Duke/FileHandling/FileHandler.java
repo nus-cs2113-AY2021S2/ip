@@ -12,20 +12,22 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+import static Duke.UI.TEXT.*;
+
 public class FileHandler extends Duke{
 
     /**
-     * Load tasks from file
+     * Loads tasks from file
      */
     public static void readFile(){
         try {
-            String localDir = System.getProperty("user.dir"); //get the path of current directory
-            File file = new File(localDir + "/Duke.txt");
+            String localDir = System.getProperty(USER_DIRECTORY); //get the path of current directory
+            File file = new File(localDir + FILE_NAME);
             if (file.createNewFile()) {
                 //create new file if file does not exist
-                System.out.println(" A new file [" + file.getName()+ "] has been created! ^_^\nIt could be found at " + localDir);
+                System.out.println( A_NEW_FILE + file.getName() + HAS_BEEN_CREATED + IT_COULD_BE_FOUND + localDir);
             } else {
-                System.out.println(" Reading saved Task Lists from [" + file.getName()+ "]^_^\nIt could be found at " + localDir);
+                System.out.println( READ_FILE + file.getName()+ "]^_^\n" + IT_COULD_BE_FOUND + localDir);
                 Scanner readingFile = new Scanner(file);
                 while (readingFile.hasNextLine()) {
                     String line = readingFile.nextLine();
@@ -35,22 +37,22 @@ public class FileHandler extends Duke{
                     String task = parts[2];
                     Task taskInFile = new Task(task);
                     switch (type) {
-                        case "[T]":
-                            taskInFile = new ToDoTask(task);
-                            lists.add(taskInFile);
-                            break;
-                        case "[D]":
-                            String time = parts[3];
-                            taskInFile = new DeadlineTask(task, time);
-                            lists.add(taskInFile);
-                            break;
-                        case "[E]":
-                            time = parts[3];
-                            taskInFile = new EventTask(task, time);
-                            lists.add(taskInFile);
-                            break;
+                    case TASK_TYPE_TODO:
+                    taskInFile = new ToDoTask(task);
+                    lists.add(taskInFile);
+                    break;
+                    case TASK_TYPE_DEADLINE:
+                    String time = parts[3];
+                    taskInFile = new DeadlineTask(task, time);
+                    lists.add(taskInFile);
+                    break;
+                    case TASK_TYPE_EVENT:
+                    time = parts[3];
+                    taskInFile = new EventTask(task, time);
+                    lists.add(taskInFile);
+                    break;
                     }
-                    if (isDone.equals("true")) {
+                    if (isDone.equals(TRUE)) {
                         taskInFile.markAsDone();
                     }
                 }
@@ -64,21 +66,21 @@ public class FileHandler extends Duke{
     }
 
     /**
-     * Copy list to file
+     * Copies list to file
      */
     public static void writeFile(){
         try {
-            String localDir = System.getProperty("user.dir");
-            FileWriter writer = new FileWriter(localDir + "/Duke.txt",false);
+            String localDir = System.getProperty(USER_DIRECTORY);
+            FileWriter writer = new FileWriter(localDir + FILE_NAME ,false);
             for (Task taskInList : lists) {
-                writer.write(taskInList.getTaskType() + "|" + taskInList.isDone() + "|" + taskInList.getTask().trim());
+                writer.write(taskInList.getTaskType() + DIVIDER + taskInList.isDone() + DIVIDER + taskInList.getTask().trim());
                 if (!(taskInList instanceof ToDoTask)) {
                     //if it's a deadline task or event task, there's time info
-                    writer.write("|" + taskInList.getTaskTime().trim());
+                    writer.write(DIVIDER + taskInList.getTaskTime().trim());
                 }
                 writer.write("\r\n");
             }
-            System.out.println(" File saved!");
+            System.out.println(FILE_SAVED);
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();

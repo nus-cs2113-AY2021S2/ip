@@ -23,7 +23,7 @@ public class DeadlineTask extends Task {
     }
 
     /**
-     * Print task type
+     * Prints task type
      * @return [D]
      */
     @Override

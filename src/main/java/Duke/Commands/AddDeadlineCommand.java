@@ -1,9 +1,8 @@
 package Duke.Commands;
 
 import Duke.Duke;
-import Duke.Errors.Errors;
+import Duke.UI.PrintMessages;
 import Duke.Task.DeadlineTask;
-import Duke.UI.UI;
 
 public class AddDeadlineCommand extends Duke {
     /**
@@ -15,10 +14,10 @@ public class AddDeadlineCommand extends Duke {
         if (taskDescription.contains("/")) {
             String[] taskAndTime = taskDescription.split("/", 2);
             lists.add(new DeadlineTask(taskAndTime[0].trim(), taskAndTime[1].trim()));
-            UI.taskAddedText();
+            PrintMessages.taskAddedText();
             taskCount++;
         } else {
-            Errors.taskWithoutTime();
+            PrintMessages.taskWithoutTime();
         }
     }
 }

@@ -3,7 +3,7 @@ package Duke;
 import Duke.FileHandling.FileHandler;
 import Duke.Parser.ProcessInput;
 import Duke.Task.*;
-import Duke.UI.UI;
+import Duke.UI.PrintMessages;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -14,10 +14,10 @@ public class Duke {
     public static List<Task> lists = new ArrayList<>();
 
     public static void main(String[] args) {
-        UI.greetings();
+        PrintMessages.greetings();
         FileHandler.readFile();
-        ProcessInput.processInput();
+        ProcessInput.processCommand();
         FileHandler.writeFile();
-        UI.goodbye();
+        PrintMessages.goodbye();
     }
 }
