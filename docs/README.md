@@ -55,7 +55,8 @@ Example of usage:
 
 Expected outcome:
 
-`Here are the tasks in your list:
+```
+Here are the tasks in your list:
 	1. [T][✘] 1
 	2. [T][✘] 3
 	3. [E][✘] 4 (at: Wednesday)
@@ -63,7 +64,8 @@ Expected outcome:
 	5. [E][✘] project meeting (at: Sunday)
 	6. [T][✘] run
 	7. [T][✘] study book
-	8. [T][✘] read book`
+	8. [T][✘] read book
+```
 
 ### 4. Marking task as done
 To signal that task is completed
@@ -80,7 +82,8 @@ Example of usage:
 
 Expected outcome:
 
-`Here are the tasks in your list:
+```
+Here are the tasks in your list:
 	1. [T][✘] 1
 	2. [T][✘] 3
 	3. [E][✘] 4 (at: Wednesday)
@@ -89,6 +92,7 @@ Expected outcome:
 	6. [T][✘] run
 	7. [T][✘] study book
 	8. [T][✘] read book`
+```
 
 ### 5. Searching for specified keyword
 Should a user want to search for related task, a keyword search is provided
@@ -104,7 +108,10 @@ Example of usage:
 `find book`
 
 Expected outcome:
-`Here are the matching tasks in your list:
+
+```
+Here are the matching tasks in your list:
 	1. [D][✓] return book (by: June 6th)
 	2. [T][✘] study book
 	3. [T][✓] read book`
+```
