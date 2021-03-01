@@ -9,7 +9,7 @@ Duke allows the user to quickly track events and reminders through CLI
 
 ### `todo`
 
-Will add a todo into the task list
+Adds a todo into the task list
 
 Format: `todo [task name]`
 
@@ -27,7 +27,7 @@ Now you have 8 tasks in the list.
 
 ### `deadline`
 
-Will add a task with a deadline into the task list
+Adds a task with a deadline into the task list
 
 Format: `deadline [task name] /by [date/time]`
 
@@ -45,7 +45,7 @@ Now you have 9 tasks in the list.
 
 ### `event`
 
-Will add an event into the task list
+Adds an event into the task list
 
 Format: `event [event name] /at [date/time]`
 
@@ -68,11 +68,13 @@ Should a user want to remove a task, deletion can be done
 
 ### `delete`
 
-Will delete a specified task at the given index
+Deletes a specified task at the given index
+
+Format: `delete [index]`
 
 Example of usage:
 
-`delete [index based on list, e.g 4]`
+`delete 4`
 
 Expected outcome:
 
@@ -114,6 +116,8 @@ To signal that task is completed
 
 Will mark task as completed at given index
 
+Format: `done [index]`
+
 Example of usage:
 
 `done 4`
@@ -140,6 +144,8 @@ Should a user want to search for related task, a keyword search is provided
 ### `find`
 
 Will search through task list for all tasks with specified keyword
+
+format: `find [keyword]`
 
 Example of usage:
 
