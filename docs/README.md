@@ -105,8 +105,6 @@ To signal that task is completed
 
 ### Usage
 
-### `done`
-
 Format: `done [index]`
 
 Example of usage:
@@ -131,8 +129,6 @@ Here are the tasks in your list:
 Will search through task list for all tasks with specified keyword
 
 ### Usage
-
-### `find`
 
 Format: `find [keyword]`
 
