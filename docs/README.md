@@ -1,6 +1,7 @@
 # User Guide
 
 [Adding a todo](#adding-a-todo)
+[Exiting the program](#exiting-the-program)
 
 ## Features 
 
