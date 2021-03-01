@@ -1,4 +1,2 @@
-T/1/read book
-T/1/buy book
-D/0/return book/02/12/2019 1800
-
+T/0/wash the dishes
+E/0/presentation/2021-05-29T10:00
