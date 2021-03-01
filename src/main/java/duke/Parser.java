@@ -1,6 +1,12 @@
 package duke;
 
-import duke.command.*;
+import duke.command.MarkCommand;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.AddCommand;
+import duke.command.FindCommand;
+import duke.command.DeleteCommand;
+import duke.command.ListCommand;
 
 public class Parser {
     private static final int COMMAND_EXIT = 0;
@@ -28,16 +34,12 @@ public class Parser {
         int command = getCommand(line);
         // No fallthrough required
         switch (command) {
-        // If user wants to mark a task as done
         case COMMAND_MARK:
             return new MarkCommand(line, this.tasks, this.ui);
-        // If user wants to list all tasks
         case COMMAND_LIST:
             return new ListCommand(line, this.tasks, this.ui);
-        // If user wants to add an item
         case COMMAND_ADD:
             return new AddCommand(line, this.tasks, this.ui);
-        // If user wants to delete an item
         case COMMAND_DELETE:
             return new DeleteCommand(line, this.tasks, this.ui);
         case COMMAND_FIND:
@@ -47,6 +49,7 @@ public class Parser {
             return new ByeCommand();
         }
     }
+
     /**
      * Parses the command that user has keyed in and returns a constant integer representing type of command.
      *

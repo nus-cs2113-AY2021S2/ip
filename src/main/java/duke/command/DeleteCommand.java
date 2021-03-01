@@ -33,8 +33,8 @@ public class DeleteCommand extends Command {
         } catch (EmptyNameFieldException e) {
             this.ui.printError(ERR_NO_NAME);
         }
-
     }
+
     /**
      * Deletes item from task list if input format is correct.
      *
@@ -49,13 +49,13 @@ public class DeleteCommand extends Command {
         int index = checkValidDelete(line);
         if (index == INVALID_INDEX) {
             throw new IllegalAccessException();
-        } else {
-            Task.totalNumberOfTasks -= 1;
-            this.ui.printDeletedTask(index-1, tasks);
-            tasks.remove(index-1);
         }
+        Task.totalNumberOfTasks -= 1;
+        this.ui.printDeletedTask(index-1, tasks);
+        tasks.remove(index-1);
         this.ui.printBorderLine();
     }
+
     /**
      * Checks for presence of number on index 7 of input.
      * Then check if the number is within bounds.

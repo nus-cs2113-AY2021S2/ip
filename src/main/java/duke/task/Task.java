@@ -17,6 +17,7 @@ public class Task {
     public boolean checkDone() {
         return this.isDone;
     }
+
     /**
      * @return "x" if duke.task is done, empty space otherwise
      */
@@ -27,14 +28,17 @@ public class Task {
     public String getName() {
         return name;
     }
+
     // To be overridden
     public String getType() {
         return "[ ]";
     }
+
     // To be overridden
     public String getDate() {
         return "";
     }
+
     // To be overridden
     public String getTime() {
         return "";

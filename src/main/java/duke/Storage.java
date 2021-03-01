@@ -17,8 +17,9 @@ public class Storage {
     public Storage(String filePath) {
         this.filePath = filePath;
     }
+
     /**
-     * Loads tasks from saved text file. If file does not exist, create a file.
+     * Loads tasks from saved text file. If file does not exist, create relevant directory and file.
      *
      * @param tasks The ArrayList to store all existing tasks from saved text file.
      * @throws IOException if there is IO error.
@@ -33,6 +34,7 @@ public class Storage {
             Task.totalNumberOfTasks += 1;
         }
     }
+
     /**
      * Converts format of tasks from text file format to program format.
      *
@@ -43,14 +45,14 @@ public class Storage {
         String[] components = line.split(" \\| ");
         // No fallthrough required
         switch(components[0]) {
-        // Case where task is Todo
+        // Case where task is todo
         case "[T]":
             Task fileTodo = new Todo(components[2]);
             if (components[1].equals("1")) {
                 fileTodo.setDone();
             }
             return fileTodo;
-        // Case where task is Event
+        // Case where task is event
         case "[E]":
             Task fileEvent = new Event(components[2], components[3]);
             if (components[1].equals("1")) {
@@ -66,6 +68,7 @@ public class Storage {
             return fileDeadline;
         }
     }
+
     /**
      * Saves all tasks into file after user inputs "bye".
      *
@@ -81,6 +84,7 @@ public class Storage {
         w.write(saveText.toString());
         w.close();
     }
+
     /**
      * Convert task from program format to text format to prepare for storage.
      *
