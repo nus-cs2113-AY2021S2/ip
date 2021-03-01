@@ -7,6 +7,20 @@ import Duke.Exceptions.*;
 import Duke.Storage.Storage;
 import Duke.Ui.Ui;
 
+/*
+@ This class is responsible for dealing with the various commands that changes the tasklists.
+@ it holds commands like add, delete, find etc.
+@ the addTask method is further broken down into addDeadline, addEvent, addTodo,
+@ these various methods breaks down the user input so that it fits the format to be added into the
+@ array list in addTask. addTask also calls the method storage.writeTofile which clears the file and rewrite
+@ with the current content of the file.
+@ Similarly for deleteTask, the task to be deleted is removed from the arrayList and a storage.writetofile is called
+@ to rewrite the content of the file to match the current arrayList
+@ findTask is a method that iterates through the current arraylist and adds any task that contains the keyword into
+@ another arraylist which is passed to the UI to print.
+*/
+
+
 public class TaskList {
     public ArrayList<Task> tasksLists;
     protected Storage storage = new Storage("data/tasksList.txt");
