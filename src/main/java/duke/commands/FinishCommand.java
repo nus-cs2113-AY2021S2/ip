@@ -12,6 +12,7 @@ public class FinishCommand extends Command {
         this.taskIndex = taskIndex;
     }
 
+    @Override
     public void execute(TaskList taskList, TextUI ui) {
         taskList.finishTask(taskIndex);
     }

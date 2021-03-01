@@ -1,5 +1,7 @@
 package duke.storage;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileWriter;
@@ -16,10 +18,14 @@ import duke.tasks.Todo;
 import duke.tasks.TaskList;
 import duke.ui.TextUI;
 
+import static duke.common.Messages.DIVIDER;
+
 public class Storage {
 
     public TaskList taskList;
     public static final String DIRECTORY_ERROR = "An error occured while trying to create a data directory :(";
+    public static final String POPULATING = "Populating list with existing tasks...";
+    public static final String FILE_NOT_FOUND = "No existing data found. Creating empty list";
     public static final String SAVING = "Saving your data...";
     public static final String SAVE_SUCCESS = "Data saved.";
     public static final String SAVE_ERROR = "An error occured while saving your data :(";
@@ -27,6 +33,7 @@ public class Storage {
     public Storage(TaskList taskList, TextUI ui) {
         try {
             this.taskList = taskList;
+            ui.printToScreen(POPULATING);
             Path dataFilePath = Paths.get("data/");
             Files.createDirectories(dataFilePath);
             File dataFile = new File("data/duke.txt");
@@ -43,7 +50,7 @@ public class Storage {
                     }
                 } else if (line.startsWith("E")) {
                     String description = splitLine[2];
-                    String date = splitLine[3];
+                    LocalDate date = LocalDate.parse(splitLine[3], DateTimeFormatter.ofPattern("d MMM yyyy"));
                     Event t = new Event(description, date);
                     taskList.silentAdd(t);
                     if (splitLine[1].equals("1")) {
@@ -51,7 +58,7 @@ public class Storage {
                     }
                 } else if (line.startsWith("D")) {
                     String description = splitLine[2];
-                    String date = splitLine[3];
+                    LocalDate date = LocalDate.parse(splitLine[3], DateTimeFormatter.ofPattern("d MMM yyyy"));
                     Deadline t = new Deadline(description, date);
                     taskList.silentAdd(t);
                     if (splitLine[1].equals("1")) {
@@ -61,10 +68,11 @@ public class Storage {
             }
             fileReader.close();
         } catch (FileNotFoundException e) {
-            ;
+            ui.printToScreen(FILE_NOT_FOUND);
         } catch (IOException e) {
             ui.printToScreen(DIRECTORY_ERROR);
-            //System.out.println(e.getMessage());
+        } finally {
+            ui.printToScreen(DIVIDER);
         }
     }
 
