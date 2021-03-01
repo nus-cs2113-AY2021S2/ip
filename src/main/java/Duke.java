@@ -6,7 +6,8 @@ public class Duke {
         PrintManager.showLogo();
         PrintManager.showGreetMessage();
 
-        InputManager listManager = new InputManager();
-        listManager.manageInput();
+        // Initialize InputManager
+        InputManager inputManager = new InputManager();
+        inputManager.manageInput();
     }
 }

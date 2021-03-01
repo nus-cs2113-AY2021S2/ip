@@ -8,31 +8,38 @@ import java.util.Scanner;
 
 public class InputManager {
     private final TaskManager taskManager;
+    private final StorageManager storageManager;
 
     public InputManager(){
         taskManager = new TaskManager();
+        storageManager = new StorageManager(taskManager);
     }
 
     public void manageInput() {
-        taskManager.importTasksFromTxt();
+        storageManager.importTasksFromTxtFile();
+        inputLoop();
+    }
+
+    private void inputLoop() {
         while(true) {
             String input = getUserInput();
             Command command = new Command(input);
+
             switch (command.getCommandType()) {
             case BYE:
                 PrintManager.printByeMessage();
                 return;
             case LIST:
-                taskManager.printTasks();
+                taskManager.showTasks();
                 break;
             case DONE:
                 taskManager.markDone(command.getTaskNum());
-                taskManager.saveTasksInTxt();
+                storageManager.saveTasksInTxtFile();
                 break;
             case DEADLINE:
                 try {
                     taskManager.addDeadlineToList(command.getDescription(), command.getWhen());
-                    taskManager.saveTasksInTxt();
+                    storageManager.saveTasksInTxtFile();
                 } catch (EmptyTaskDescriptionException e) {
                     System.out.println("Error -> Empty task description");
                 } catch (EmptyByOrAtWhenException | NullPointerException e) {
@@ -42,7 +49,7 @@ public class InputManager {
             case EVENT:
                 try {
                     taskManager.addEventToList(command.getDescription(), command.getWhen());
-                    taskManager.saveTasksInTxt();
+                    storageManager.saveTasksInTxtFile();
                 } catch (EmptyTaskDescriptionException e) {
                     System.out.println("Error -> Empty task description");
                 } catch (EmptyByOrAtWhenException | NullPointerException e) {
@@ -52,14 +59,14 @@ public class InputManager {
             case TODO:
                 try {
                     taskManager.addTodoToList(command.getDescription());
-                    taskManager.saveTasksInTxt();
+                    storageManager.saveTasksInTxtFile();
                 } catch (EmptyTaskDescriptionException e) {
                     System.out.println("Error -> Empty task description");
                 }
                 break;
             case DELETE:
                 taskManager.deleteTask(command.getTaskNum());
-                taskManager.saveTasksInTxt();
+                storageManager.saveTasksInTxtFile();
                 break;
             default:
                 PrintManager.printHelpMessage();

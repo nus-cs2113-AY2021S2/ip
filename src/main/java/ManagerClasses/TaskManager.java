@@ -1,18 +1,12 @@
 package ManagerClasses;
 
-import ExceptionClasses.SaveFileNotCreatedException;
 import TaskClasses.Deadline;
 import TaskClasses.Event;
 import TaskClasses.Task;
 import TaskClasses.Todo;
 
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class TaskManager {
     private final List<Task> tasks;
@@ -21,7 +15,11 @@ public class TaskManager {
         tasks = new ArrayList<>();
     }
 
-    public void printTasks() {
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void showTasks() {
         if (tasks.size() == 0) {
             System.out.println("Oops, it seems like you don't have any tasks.");
         } else {
@@ -92,69 +90,6 @@ public class TaskManager {
             System.out.println("Now you have " + tasks.size() + " task in the list.");
         } else {
             System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-        }
-    }
-
-    public void saveTasksInTxt() {
-        String currentPath = System.getProperty("user.dir");
-        java.nio.file.Path filePath = java.nio.file.Paths.get(currentPath, "data", "duke.txt");
-        try (PrintStream out = new PrintStream(new FileOutputStream(String.valueOf(filePath)))) {
-            for (Task task: tasks) {
-                out.print(task.toSaveFormat() + "\n");
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void importTasksFromTxt() {
-        String currentPath = System.getProperty("user.dir");
-        java.nio.file.Path folderPath = java.nio.file.Paths.get(currentPath, "data");
-        java.nio.file.Path filePath = java.nio.file.Paths.get(currentPath, "data", "duke.txt");
-        boolean directoryExists = java.nio.file.Files.exists(folderPath);
-        if (!directoryExists) {
-            createPath(folderPath, filePath);
-        }
-        parseTxtFile(filePath);
-    }
-
-    private void createPath(Path folderPath, Path filePath) {
-        File file = new File(String.valueOf(folderPath));
-        try{
-            if(file.mkdir()) {
-                Path newFilePath = Paths.get(String.valueOf(filePath));
-                Files.createFile(newFilePath);
-            } else {
-                throw new SaveFileNotCreatedException();
-            }
-        } catch (SaveFileNotCreatedException | IOException e) {
-            System.out.println("Save file was not created");
-        }
-    }
-
-    private void parseTxtFile(Path filePath) {
-        try(Scanner inputFileScanner = new Scanner(new File(String.valueOf(filePath)))) {
-            while (inputFileScanner.hasNextLine()) {
-                String line = inputFileScanner.nextLine();
-                String[] taskAttributes = line.split(" \\| ");
-                String taskType = taskAttributes[0];
-                switch (taskType) {
-                case "T":
-                    tasks.add(new Todo(Boolean.parseBoolean(taskAttributes[1]), taskAttributes[2]));
-                    break;
-                case "D":
-                    tasks.add(new Deadline(Boolean.parseBoolean(taskAttributes[1]), taskAttributes[2],
-                            taskAttributes[3]));
-                    break;
-                case "E":
-                    tasks.add(new Event(Boolean.parseBoolean(taskAttributes[1]), taskAttributes[2],
-                            taskAttributes[3]));
-                    break;
-                default:
-                }
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("No previous data found");
         }
     }
 }
