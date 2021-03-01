@@ -13,4 +13,7 @@ public class Messages {
     public static final String DELETE_TASK_MESSAGE = "Task has been deleted from list!";
     public static final String INVALID_NUMBER_MESSAGE = "Invalid value detected. Please input a number!";
     public static final String OUT_OF_RANGE_MESSAGE = "Your number is out of the range of the list! Try again!";
+    public static final String SEARCH_LIMIT_EXCEEDED_MESSAGE = "I can only search for 1 keyword at a time! Try again!";
+    public static final String NO_MATCHES_FOUND_MESSAGE = "No tasks with that keyword exists!";
+    public static final String MARKED_AS_DONE_MESSAGE = "Your task has been marked as done!";
 }

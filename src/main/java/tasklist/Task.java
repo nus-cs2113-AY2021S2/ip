@@ -2,7 +2,7 @@ package tasklist;
 
 public class Task {
 
-    public static boolean isDone;
+    public boolean isDone;
     public String description;
 
 
