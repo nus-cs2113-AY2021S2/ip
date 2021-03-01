@@ -95,7 +95,6 @@ Examples:
 * `todo my homework` creates `[T][N] my homework`
 
 <br />
-<br />
 
 ### Adding an event: `event`
 Adds an event to be done during a certain time to Duke's Task List.
@@ -109,7 +108,6 @@ Examples:
 * `event seminar /at 4-6pm` creates `[E][N] seminar (at: 4-6pm)`
 * `event zoom lecture /at 9-10am` creates `[E][N] zoom lecture (at: 9-10am)`
   
-<br />
 <br />
 
 ### Adding an deadline: `deadline`
@@ -125,7 +123,6 @@ Examples:
 * `deadline Lab Assignment /by 5 Mar 9am` creates `[D][N] Lab Assignment (by: 5 Mar 9am)`
   
 <br />
-<br />
   
 ### Listing all tasks: `list`
 Shows a list of all tasks in Duke's Task List.
@@ -134,7 +131,6 @@ Format: `list`
 
 ![img_1.png](img_1.png)
 
-<br />
 <br />
 
 ### Marking a task as done: `done`
@@ -153,7 +149,6 @@ Examples:
 it will now become `[T][Y] read book`.
   
 <br />
-<br />
   
 ### Deleting a task: `delete`
 Deletes a specified task in Duke's Task List.
@@ -169,7 +164,6 @@ Examples:
   it will no longer exist. The subsequent tasks will be moved
   forward in the list.
   
-<br />
 <br />
   
 ### Search for a task: `find`
@@ -188,7 +182,6 @@ Examples:
 ![img_2.png](img_2.png)
   
 <br />
-<br />
   
 ### Exiting the program: `bye`
 Exits the program.
@@ -196,13 +189,11 @@ Exits the program.
 Format: `bye`
 
 <br />
-<br />
 
 ### Saving the data
 Duke Task List data are saved in the hard disk automatically after any command that changes the data. 
 There is no need to save manually.
 
-<br />
 <br />
 
 ### Editing the data file
