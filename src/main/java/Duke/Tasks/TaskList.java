@@ -20,7 +20,6 @@ import Duke.Ui.Ui;
 @ another arraylist which is passed to the UI to print.
 */
 
-
 public class TaskList {
     public ArrayList<Task> tasksLists;
     protected Storage storage = new Storage("data/tasksList.txt");
