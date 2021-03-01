@@ -1,9 +1,9 @@
 package duke.tasks;
 
 public class Task {
-    public static final String NO_DESCRIPTION = "!!! Please specify the task description !!!";
-    public static final String NO_DATE = "!!! Please specify the task date !!!";
-    public static final String NO_INDEX = "!!! Please specify the task index !!!";
+    public static final String NO_DESCRIPTION = "!!! Please specify the task description. !!!";
+    public static final String NO_DATE = "!!! Please specify the task date. !!!";
+    public static final String NO_INDEX = "!!! Please specify the task index. !!!";
     public static final String EVENT_USAGE = "event [event description] /at [date]";
     public static final String DEADLINE_USAGE = "deadline [task description] /by [due date]";
     public static final String TODO_USAGE = "todo [task description]";

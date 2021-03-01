@@ -14,7 +14,6 @@ import static duke.tasks.Task.EVENT_USAGE;
 import static duke.tasks.Task.DONE_USAGE;
 import static duke.tasks.Task.DELETE_USAGE;
 
-import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
@@ -24,12 +23,8 @@ public class TextUI {
     private final PrintStream out;
 
     public TextUI() {
-        this(System.in, System.out);
-    }
-
-    public TextUI(InputStream in, PrintStream out) {
-        this.in = new Scanner(in);
-        this.out = out;
+        this.in = new Scanner(System.in);
+        this.out = System.out;
     }
 
     public void showWelcomeMessage() {

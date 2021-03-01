@@ -12,6 +12,7 @@ public class DeleteCommand extends Command {
         this.taskIndex = taskIndex;
     }
 
+    @Override
     public void execute(TaskList taskList, TextUI ui) {
         taskList.deleteTask(taskIndex);
     }
