@@ -145,7 +145,7 @@ Should a user want to search for related task, a keyword search is provided
 
 Will search through task list for all tasks with specified keyword
 
-format: `find [keyword]`
+Format: `find [keyword]`
 
 Example of usage:
 
@@ -159,3 +159,7 @@ Here are the matching tasks in your list:
 	2. [T][✘] study book
 	3. [T][✓] read book`
 ```
+
+### 6. Exiting the program
+Exits the program
+Format: `bye`
