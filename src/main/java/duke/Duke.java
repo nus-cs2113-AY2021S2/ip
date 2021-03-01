@@ -9,15 +9,15 @@ import duke.storage.Storage;
 public class Duke {
 
     private TextUI ui;
-    private Parser parser;
     private TaskList taskList;
     private Storage storage;
+    private Parser parser;
 
     public static void main(String[] args) {
-        new Duke().run(args);
+        new Duke().run();
     }
 
-    public void run(String[] launchArgs) {
+    public void run() {
         this.ui = new TextUI();
         ui.showWelcomeMessage();
         this.taskList = new TaskList(ui);

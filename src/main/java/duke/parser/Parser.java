@@ -1,5 +1,9 @@
 package duke.parser;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import duke.commands.Command;
 import duke.commands.ExitCommand;
 import duke.commands.ListCommand;
@@ -14,11 +18,14 @@ import duke.ui.TextUI;
 import duke.tasks.TaskList;
 import duke.storage.Storage;
 
+import static duke.common.Messages.DIVIDER;
+
 public class Parser {
 
     private TextUI ui;
     private TaskList taskList;
     private Storage storage;
+    public static final String INVALID_DATE = "!!! Invalid date. Please make sure date is in dd/mm/yy format. !!!";
 
     public Parser(TextUI ui, TaskList taskList, Storage storage) {
         this.ui = ui;
@@ -80,8 +87,14 @@ public class Parser {
         } else {
             try {
                 String description = splitCommand[1].split("/at")[0].strip();
-                String date = splitCommand[1].split("/at")[1].strip();
-                return new EventCommand(taskList, description, date);
+                String dateString = splitCommand[1].split("/at")[1].strip();
+                try {
+                    LocalDate date = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("dd/MM/yy"));
+                    return new EventCommand(taskList, description, date);
+                } catch (DateTimeParseException e) {
+                    ui.printToScreen(DIVIDER, INVALID_DATE, DIVIDER);
+                    return null;
+                }
             } catch (ArrayIndexOutOfBoundsException e) {
                 ui.noDate("event");
                 return null;
@@ -97,8 +110,14 @@ public class Parser {
         } else {
             try {
                 String description = splitCommand[1].split("/by")[0].strip();
-                String date = splitCommand[1].split("/by")[1].strip();
-                return new DeadlineCommand(taskList, description, date);
+                String dateString = splitCommand[1].split("/by")[1].strip();
+                try {
+                    LocalDate date = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("dd/MM/yy"));
+                    return new DeadlineCommand(taskList, description, date);
+                } catch (DateTimeParseException e) {
+                    ui.printToScreen(DIVIDER, INVALID_DATE, DIVIDER);
+                    return null;
+                }
             } catch (ArrayIndexOutOfBoundsException e) {
                 ui.noDate("deadline");
                 return null;

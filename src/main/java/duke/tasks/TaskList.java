@@ -13,7 +13,7 @@ public class TaskList {
     public static final String ADD_SUCCESS = "Got it. I've added this task to your list. ";
     public static final String DELETE_SUCCESS = "Noted. I've removed this task from your list. ";
     public static final String DONE_SUCCESS = "Nice! I've marked this task as done. ";
-    public static final String TASK_DNE = "!!! Item does not exist !!!";
+    public static final String TASK_DNE = "!!! Item does not exist. !!!";
     public static final String TASK_ALREADY_DONE = "This task is already done";
     public static final String NO_TASKS = "You have no tasks in your list";
     public static final String LIST_TASKS = "Here are the tasks in your list:";

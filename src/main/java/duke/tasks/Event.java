@@ -1,9 +1,12 @@
 package duke.tasks;
 
-public class Event extends Task {
-    protected String date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-    public Event(String description, String date) {
+public class Event extends Task {
+    protected LocalDate date;
+
+    public Event(String description, LocalDate date) {
         super(description);
         this.date = date;
     }
@@ -14,11 +17,11 @@ public class Event extends Task {
     }
 
     public String getDate() {
-        return date;
+        return date.format(DateTimeFormatter.ofPattern("d MMM yyyy"));
     }
 
     public String printDate() {
-        return " (at: " + date + ")";
+        return " (at: " + getDate() + ")";
     }
 
     @Override
