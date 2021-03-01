@@ -8,26 +8,31 @@ import tasks.Task;
 import tasks.Deadline;
 import tasks.Event;
 import tasks.ToDo;
+import ui.Ui;
+
 
 public class Duke {
+
+    private static final Ui ui = new Ui();
+
     public static void printList(ArrayList<Task> Tasks){
+        ui.showToUser(ui.DIVIDER, "Here are the tasks in your list:");
         for (int i=0; i<Tasks.size(); ++i){
             Task task = Tasks.get(i);
             Integer taskNumber = i+1;
-            System.out.println(taskNumber + "." + task.toString());
+            ui.showToUser(taskNumber + "." + task.toString());
         }
+        ui.showToUser(ui.DIVIDER);
     }
 
     public static void printTaskAdded(ArrayList<Task> Tasks){
-        printDashLine();
-        System.out.println(" Got it. I've added this task:\n" + Tasks.get(Tasks.size()-1).toString());
-        System.out.println("Now you have " + Tasks.size() + " tasks in the list.");
-        printDashLine();
+        ui.showToUser(
+                ui.DIVIDER,
+                " Got it. I've added this task:\n" + Tasks.get(Tasks.size()-1).toString(),
+                "Now you have " + Tasks.size() + " tasks in the list.",
+                ui.DIVIDER);
     }
 
-    public static void printDashLine(){
-        System.out.println("____________________________________________________________");
-    }
 
     public static void validateInput(String[] words) throws DukeException {
         boolean isList = words[0].equals("list");
@@ -97,24 +102,20 @@ public class Duke {
         fw.close();
     }
 
+
     public static void main(String[] args) {
-        ArrayList<Task> Tasks =  new ArrayList<Task>();
+        ArrayList<Task> Tasks = new ArrayList<>();
         String line;
-        String INTRO_MESSAGE = " Hello! I'm Duke\n" + " What can I do for you?";
-        String OUTRO_MESSAGE = "Bye. Hope to see you again soon!";
         Scanner Input = new Scanner(System.in);
-        printDashLine();
-        System.out.println(INTRO_MESSAGE);
-        printDashLine();
+        ui.showIntroMessage();
         try {
             loadFile(Tasks);
         } catch (FileNotFoundException e) {
-            System.out.println("File Not Found");
-            System.out.println("Creating new file...");
+            ui.showToUser("File Not Found", "Creating new file...");
         }
         line = Input.nextLine();
         boolean inSystem = !line.equals("bye");
-        while(inSystem){
+        while (inSystem) {
             String[] words = line.split(" ");
             boolean isList = words[0].equals("list");
             boolean isDone = words[0].equals("done");
@@ -124,46 +125,36 @@ public class Duke {
             boolean isDelete = words[0].equals("delete");
             try {
                 validateInput(words);
-            } catch (Exception e){
-                System.out.println(e);
+            } catch (Exception e) {
+                ui.showToUser(e.getMessage());
                 line = Input.nextLine();
                 inSystem = !line.equals("bye");
                 continue;
             }
-            if(isList){
+            if (isList) {
                 try {
                     validateListInput(words);
                 } catch (Exception e) {
-                    System.out.println(e);
+                    ui.showToUser(e.getMessage());
                     line = Input.nextLine();
                     inSystem = !line.equals("bye");
                     continue;
                 }
-                printDashLine();
-                System.out.println("Here are the tasks in your list:");
                 printList(Tasks);
-                printDashLine();
-            }
-            else if(isDone) {
+            } else if (isDone) {
                 int taskNumber = Integer.parseInt(words[1]) - 1;
                 Tasks.get(taskNumber).taskComplete();
-                printDashLine();
-                System.out.println("Nice! I've marked this task as done:\n" + " " + Tasks.get(taskNumber).toString());
-                printDashLine();
-            }
-            else if(isDelete) {
+                ui.showToUser(ui.DIVIDER, "Nice! I've marked this task as done:\n" + " " + Tasks.get(taskNumber).toString(), ui.DIVIDER);
+            } else if (isDelete) {
                 int taskNumber = Integer.parseInt(words[1]) - 1;
-                printDashLine();
-                System.out.println("Noted. I've removed this task:\n" + Tasks.get(taskNumber).toString());
+                ui.showToUser(ui.DIVIDER, "Noted. I've removed this task:\n" + Tasks.get(taskNumber).toString());
                 Tasks.remove(taskNumber);
-                System.out.println("Now you have " + Tasks.size() + " tasks in the list.");
-                printDashLine();
-            }
-            else if (isTodo){
+                ui.showToUser("Now you have " + Tasks.size() + " tasks in the list.", ui.DIVIDER);
+            } else if (isTodo) {
                 try {
                     validateToDoInput(words);
                 } catch (Exception e) {
-                    System.out.println(e);
+                    ui.showToUser(e.getMessage());
                     line = Input.nextLine();
                     inSystem = !line.equals("bye");
                     continue;
@@ -172,15 +163,13 @@ public class Duke {
                 ToDo toDo = new ToDo(line);
                 Tasks.add(toDo);
                 printTaskAdded(Tasks);
-            }
-            else if (isDeadline){
+            } else if (isDeadline) {
                 line = line.replace("deadline ", "");
                 words = line.split("/by ");
                 Deadline deadline = new Deadline(words[0], words[1]);
                 Tasks.add(deadline);
                 printTaskAdded(Tasks);
-            }
-            else if (isEvent) {
+            } else if (isEvent) {
                 line = line.replace("event ", "");
                 words = line.split("/at ");
                 Event event = new Event(words[0], words[1]);
@@ -191,13 +180,12 @@ public class Duke {
             inSystem = !line.equals("bye");
         }
         String file = "tasks.txt";
-        try{
+        try {
             saveFile(file, Tasks);
         } catch (IOException e) {
-            System.out.println("Something went wrong: " + e.getMessage());
+            ui.showToUser("Something went wrong: " + e.getMessage());
         }
-        printDashLine();
-        System.out.println(OUTRO_MESSAGE);
-        printDashLine();
+        ui.showExitMessage();
     }
+
 }
