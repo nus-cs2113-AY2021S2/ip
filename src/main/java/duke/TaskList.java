@@ -5,7 +5,6 @@ import java.util.Arrays;
 
 public class TaskList {
     protected ArrayList<Task> tasks = new ArrayList<>();
-
     protected Storage storage = new Storage();
 
     public TaskList(){
