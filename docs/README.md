@@ -29,7 +29,7 @@ Track-The-Mushroom is a beginner-friendly console application to manage all your
 Prerequisites: JDK 11, update Intellij to the most recent version.
 
 1. Ensure that you have `Java 11` or higher version installed on your computer.
-2. Download the latest `TTM.jar` from [here](https://github.com/LeeHanYongAndy/ip/releases/tag/A-Jar).
+2. Download the latest `TTM.jar` from [here](https://github.com/LeeHanYongAndy/ip/releases/tag/A-Release).
 3. Move the `TTM.jar` into the folder of your choice. This would be your **base folder**.
 4. Run `command prompt` and navigate into the base folder containing the `TTM.jar`.
 5. Run the command `java -jar TTM.jar` and you should see the welcome message:
