@@ -53,6 +53,7 @@ public class PrintManager {
                 + "* Show list -> 'list'\n"
                 + "* Mark as done -> 'done <task number>'\n"
                 + "* Delete task -> 'delete <task number>'\n"
+                + "* Find task -> 'find <keyword>'\n"
                 + "* Exit -> 'bye'\n");
     }
 }
