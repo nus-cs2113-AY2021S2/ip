@@ -91,19 +91,19 @@ public class Ui {
     /**
      * Prints Exception message if User does not input valid time in Deadline with keyword '/by'.
      */
-    static void showInvalidDeadlineTimeError() {
-        System.out.println("OOPS!!! You need to add time for new Deadline with keyword '/by'!!");
+    static void showInvalidDeadlineTimeError(InvalidDeadlineTimeException e) {
+        System.out.println(e.getMessage());
     }
 
     /**
      * Prints Exception message if User does not input valid time in Event with keyword '/at'.
      */
-    static void showInvalidEventTimeError() {
-        System.out.println("OOPS!!! You need to add time for new Event with keyword '/at'!!");
+    static void showInvalidEventTimeError(InvalidEventTimeException e) {
+        System.out.println(e.getMessage());
     }
 
     /**
-     * Prints Exception message if User did not even input time at all.
+     * Prints Exception message if User did not input time according to the format.
      */
     static void showNoTimeAddedError() {
         System.out.println("OOPS!!! You need to add time for new Event or Deadline with '/at' or '/by'!!");
@@ -112,15 +112,15 @@ public class Ui {
     /**
      * Prints Exception message if User did not even input Task description at all.
      */
-    static void showEmptyInputError() {
-        System.out.println("OOPS!!! The description of a new task cannot be empty.");
+    static void showEmptyInputError(EmptyInputException e) {
+        System.out.println(e.getMessage());
     }
 
     /**
      * Prints Exception message if User did not input valid Command keyword
      */
-    static void showInvalidCommandError() {
-        System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
+    static void showInvalidCommandError(InvalidCommandException e) {
+        System.out.println(e.getMessage());
     }
 
 

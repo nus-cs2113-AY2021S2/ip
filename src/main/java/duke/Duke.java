@@ -45,15 +45,15 @@ public class Duke {
             try {
                 Parser.executeCommand(Parser.input, command);
             } catch (InvalidCommandException e) {
-                Ui.showInvalidCommandError();
+                Ui.showInvalidCommandError(e);
             } catch (EmptyInputException e) {
-                Ui.showEmptyInputError();
+                Ui.showEmptyInputError(e);
             } catch (StringIndexOutOfBoundsException e) {
                 Ui.showNoTimeAddedError();
             } catch (InvalidEventTimeException e) {
-                Ui.showInvalidEventTimeError();
+                Ui.showInvalidEventTimeError(e);
             } catch (InvalidDeadlineTimeException e) {
-                Ui.showInvalidDeadlineTimeError();
+                Ui.showInvalidDeadlineTimeError(e);
             } catch (NumberFormatException e) {
                 Ui.showInvalidIntegerTaskIndexError();
             } catch (IndexOutOfBoundsException e) {
