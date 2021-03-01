@@ -164,3 +164,13 @@ Here are the matching tasks in your list:
 Exits the program
 
 Format: `bye`
+
+## Saving the data
+Duke automatically saves the data after each and every command, ensuring that data is always up to date. There is no need to save manually.
+
+## Editing the data
+Duke data is automatically saved as a textfile, `Duke.txt` at the location of `Duke.jar`. Advanced users are welcome to directly edit the textfile.
+
+## FAQ
+**Q:** How do I transfer data between computers?
+**A:** To transfer data between computers, move the `Duke.txt` file from one computer to the other. Ensure the file is in the same folder as `Duke.jar`.
