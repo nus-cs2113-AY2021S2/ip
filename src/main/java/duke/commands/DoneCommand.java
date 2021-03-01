@@ -6,6 +6,10 @@ import static duke.common.Constants.NEWLINE;
 
 import duke.TaskList;
 
+/**
+ *  Represents a command that marks a {@code Task} in
+ *  {@code TaskList} as completed when executed.
+ */
 public class DoneCommand extends Command {
     private int taskIndex;
 

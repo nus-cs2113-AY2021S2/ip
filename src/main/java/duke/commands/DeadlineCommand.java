@@ -9,6 +9,10 @@ import duke.TaskList;
 import duke.tasks.Deadline;
 import duke.tasks.Task;
 
+/**
+ * Represents a command that creates, initialises and adds a
+ * {@code Deadline} to {@code TaskList} when executed.
+ */
 public class DeadlineCommand extends Command {
     private String taskDescription;
     private String taskStatus;

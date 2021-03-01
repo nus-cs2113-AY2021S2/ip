@@ -4,6 +4,9 @@ import static duke.Ui.PRINT_FULL_LIST_STATEMENT;
 
 import duke.TaskList;
 
+/**
+ * Represents a command that displays all the tasks currently in {@code TaskList}.
+ */
 public class ListCommand extends Command {
 
     public ListCommand(TaskList tasks) {

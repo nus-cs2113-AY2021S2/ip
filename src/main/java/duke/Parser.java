@@ -25,8 +25,8 @@ import duke.commands.ListCommand;
 import duke.commands.TodoCommand;
 import duke.exceptions.DukeException;
 
-/** Parses user's input
- * and determines command to be run
+/**
+ * Parses user's input and determines command to be run.
  */
 public class Parser {
     private TaskList tasks;
@@ -35,6 +35,17 @@ public class Parser {
         this.tasks = tasks;
     }
 
+    /**
+     * Returns a {@code Command} to be executed in main.
+     * <p></p>
+     * For commands with no args, this method returns immediately
+     * (e.g. exiting the program with "bye" command word).
+     * Otherwise, it returns after preparing the {@code Command} based on the given args.
+     *
+     * @param userInput full user input string
+     * @return valid {@code Command} based on user's input or
+     * {@code InvalidCommand} explaining why given input is invalid
+     */
     public Command processInput(String userInput) {
         if (userInput.equals("bye")) {
             return new ByeCommand();
@@ -71,6 +82,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Separates commands that come with args into the command word and its args.
+     *
+     * @param userInput full user input string
+     * @return command word and command args
+     * @throws DukeException if no args are found
+     */
     public String[] prepareCommand(String userInput) throws DukeException {
         userInput = userInput.trim();
         String[] tokens = userInput.split(" ", 2);
@@ -80,10 +98,17 @@ public class Parser {
         return tokens;
     }
 
+    /**
+     * Creates the {@code TodoCommand} to add a valid {@code Task} with
+     * given {@code description} to {@code TaskList}.
+     *
+     * @param description task item string
+     * @return new {@code TodoCommand} or {@code InvalidCommand} explaining why given input is invalid
+     */
     public Command prepareTodoCommand(String description) {
         try {
-            String taskDescription = getTodoDescription(description);
-            return new TodoCommand(tasks, taskDescription, DEFAULT_STATUS);
+            checkTodoDescription(description);
+            return new TodoCommand(tasks, description, DEFAULT_STATUS);
         } catch (ArrayIndexOutOfBoundsException e) {
             return new InvalidCommand(MISSING_FIELDS_MESSAGE);
         } catch (DukeException e) {
@@ -91,16 +116,28 @@ public class Parser {
         }
     }
 
-    public String getTodoDescription(String description) throws DukeException {
+    /**
+     * Checks if to-do {@code Task} is valid (meaningful).
+     *
+     * @param description task item string
+     * @throws DukeException if to-do {@code Task} contains only numerical digits.
+     */
+    public void checkTodoDescription(String description) throws DukeException {
         try {
-            /* Task description contains only numbers */
             Long.parseLong(description);
             throw new DukeException();
         } catch (NumberFormatException e) {
-            return description;
+            //task description should be meaningful
         }
     }
 
+    /**
+     * Creates the {@code Command} to add a valid {@code Deadline} with
+     * given deadline {@code description} to {@code TaskList}.
+     *
+     * @param description string containing deadline item, keyword {@code /by}, date, time
+     * @return new {@code DeadlineCommand} or {@code InvalidCommand} explaining why given input is invalid
+     */
     public Command prepareDeadlineCommand(String description) {
         try {
             String[] words = getDeadlineOrEventDescription(" /by ", description);
@@ -116,6 +153,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Creates the {@code Command} to add a valid {@code Event} with
+     * given event {@code description} to the {@code TaskList}.
+     *
+     * @param description string containing event item, keyword {@code /at}, details
+     * @return new {@code EventCommand} or {@code InvalidCommand} explaining why given input is invalid
+     */
     public Command prepareEventCommand(String description) {
         try {
             String[] words = getDeadlineOrEventDescription(" /at ", description);
@@ -125,6 +169,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Creates the {@code Command} to mark a valid {@code Task} in the {@code TaskList} as completed.
+     *
+     * @param description index of task to be marked done
+     * @return new {@code DoneCommand} or {@code InvalidCommand} explaining why given input is invalid
+     */
     public Command prepareDoneCommand (String description) {
         try {
             int taskIndex = getTaskIndex(description);
@@ -138,6 +188,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Creates the {@code Command} to remove a valid {@code Task} from {@code TaskList}.
+     *
+     * @param description index of task to be deleted
+     * @return new {@code DeleteCommand} or {@code InvalidCommand} explaining why given input is invalid
+     */
     public Command prepareDeleteCommand(String description) {
         try {
             int taskIndex = getTaskIndex(description);
@@ -162,6 +218,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns a task index in numerical form for done and delete commands.
+     *
+     * @param description index of task
+     * @return valid index of task as a number
+     * @throws DukeException if task index is out of range of {@code TaskList}.
+     */
     public int getTaskIndex(String description) throws DukeException {
         int index = Integer.parseInt(description);
         boolean isPossibleIndex = index > 0;
@@ -172,6 +235,16 @@ public class Parser {
         return index;
     }
 
+
+    /**
+     * Extracts from command args the task item and its details, for deadline and event commands.
+     *
+     * @param keyword string separating the task item and its details
+     *                ({@code /by} for deadline, {@code /at} for event)
+     * @param sentence full command args string
+     * @return task item and task details
+     * @throws DukeException if no task item or details were given.
+     */
     public String[] getDeadlineOrEventDescription(String keyword, String sentence) throws DukeException {
         String[] words = sentence.split(keyword, 2);
         if (words.length < 2) {

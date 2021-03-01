@@ -19,7 +19,7 @@ import duke.commands.EventCommand;
 import duke.commands.TodoCommand;
 
 /**
- * Methods to load from and save to disk
+ * Represents the file used to store the {@code TaskList}.
  */
 public class Storage {
     private String filePath;
@@ -32,6 +32,10 @@ public class Storage {
         ui = new Ui();
     }
 
+    /**
+     * Loads the {@code TaskList} data from this storage file, then returns it.
+     * Returns a new {@code TaskList} if the directory or file does not exist.
+     */
     public TaskList loadFromDisk() {
         File f = new File(filePath);
         try {
@@ -48,6 +52,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the {@code TaskList} data created during a run to this storage file.
+     */
     public void saveToDisk(TaskList tasks) {
         String textToOverwrite = tasks.convertToText();
         try {
@@ -59,6 +66,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Generates the {@code TaskList} used throughout a run by converting, line-by-line,
+     * the differently-formatted data loaded from this storage file.
+     * @param f file to load from
+     * @return a {@code TaskList} loaded with previous data
+     * @throws IOException if file or directory does not exist.
+     */
     public TaskList convertLinesToList(File f) throws IOException {
         Scanner scan = new Scanner(f);
         while (scan.hasNext()) {
@@ -67,6 +81,10 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Parses the given {@code line} into a valid {@code Command}, then executes it.
+     * @param line line of text read from the storage .txt file
+     */
     public void convertLineToListItem(String line) {
         line = line.trim();
         String[] tokens = line.split(" \\| ");

@@ -1,5 +1,8 @@
 package duke.commands;
 
+/**
+ * Represents a command that displays a message explaining why given input is invalid.
+ */
 public class InvalidCommand extends Command {
     private String errorMessage;
 
