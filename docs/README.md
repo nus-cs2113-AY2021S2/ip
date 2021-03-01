@@ -11,7 +11,7 @@ Duke allows the user to quickly track events and reminders through CLI
 
 Will add a todo into the task list
 
-Format: todo [something you need to do] 
+Format: `todo [something you need to do]`
 
 Example of usage: 
 
