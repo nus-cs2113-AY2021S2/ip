@@ -92,8 +92,8 @@ Example of usage:
 
 Expected outcome:
 
-`Nice! I've marked this task as done:`\ 
- ` [T][X] return book`
+`Nice! I've marked this task as done:`\
+` [T][X] return book`\
  
 ### `find` - To search through the current tasks list to find any task matching a keyword.
 
