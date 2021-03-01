@@ -162,4 +162,5 @@ Here are the matching tasks in your list:
 
 ### 6. Exiting the program
 Exits the program
+
 Format: `bye`
