@@ -33,7 +33,8 @@ watchful protector, a dark knight.
 
 ## 2. Quick Start
 Prerequisites: JDK11, the latest version of IntelliJ
-###2.1 Quick Start by downloading the latest jar file
+
+### 2.1 Quick Start by downloading the latest jar file
 1. Ensure you have Java `11` installed in your computer.
 2. Download the latest `Duke.jar` from [here](https://github.com/oscarlai1998/ip/releases).
 3. Copy the file to a new folder you want to run `Duke` in.
@@ -44,6 +45,7 @@ Prerequisites: JDK11, the latest version of IntelliJ
    Navigate to the directory containing `Duke.jar` file.
 
    i.e. `cd <FILEPATH>`
+
 5. Run Duke.jar file by using the command `java -jar Duke.jar`.
 
 ### 2.2  Quick start on IntelliJ version 2020.3.2 (latest) and beyond
@@ -56,6 +58,7 @@ Prerequisites: JDK11, the latest version of IntelliJ
    ii. Find and select the project directory, and click `OK`
 
    iii. Accept default options
+
 4. Configure the project to use JDK11, as explained in [here](http://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).
 5. Locate  `src/main/java/Duke.java` file, right-click it, and `Run Duke.main()`.
 
@@ -88,6 +91,8 @@ Good Day, I'm Alfred.
     >
     >  e.g. `todo sleep` is the same as `TODO sleep`
 > - Unknown parameters will result in an error
+
+
 ### 3.1. Add a Todo task: `todo`
 This command adds a todo task to the list.
 
@@ -302,6 +307,7 @@ Version 1.1
 > For Mac Users: Use **Spotlight** or **Finder**
 
 ## 5. Command Summary
+
 **Command** | **Format** | **Example**
 ------------ | -------------------- | ------------
 todo | `todo <task description>` | `todo save gotham`
