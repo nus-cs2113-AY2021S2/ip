@@ -9,6 +9,15 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/*
+@ Storage class is written to write and save data into a file. More prominent methods like createfile, loadfile and writetofile
+@ loadfile reads the first letter of the saved data in the txt.file which passes the string into various methods to be processed like
+@ loadEvent, loadDeadline and loadTodo. These methods splits the strings to a format to be added into the arraylist = loadedTasks
+@ After processing, loadedTask is pass back into Duke which would be the arraylist to be used throughout the program.
+@ writeToFile clears the file whenever it is called and rewrites the data that is currently in the arraylist.
+*/
+
+
 public class Storage {
 
     private final String filePath;

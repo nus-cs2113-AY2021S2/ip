@@ -6,6 +6,12 @@ import Duke.Tasks.TaskList;
 
 import java.util.ArrayList;
 
+/*
+@ The UI class is used to hold methods responsible for interacting with the user
+@ the various methods in this class are used in Storage.Java or Tasklist.java to print out the various responses
+@ allowing a more OOP program.
+*/
+
 
 public class Ui {
     private final String GREETING_LINES =
