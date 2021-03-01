@@ -1,8 +1,14 @@
 package ManagerClasses;
 
+/**
+ * Handles the UI elements of Duke. It can print the greeting, bye and help messages.
+ */
 public class PrintManager {
     private static final String BREAK_LINE = "------------------------------------------------------------";
 
+    /**
+     * Prints Duke logo on the terminal.
+     */
     public static void showLogo() {
         String logo = " ____        _\n"
                 + "|  _ \\ _   _| | _____\n"
@@ -12,21 +18,33 @@ public class PrintManager {
         System.out.println(BREAK_LINE + "\n" + logo + "\n" + BREAK_LINE);
     }
 
+    /**
+     * Prints the breakline on the terminal.
+     */
     public static void printBreakLine() {
         System.out.println(BREAK_LINE);
     }
 
+    /**
+     * Prints the greeting message in the terminal.
+     */
     public static void showGreetMessage() {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
         printBreakLine();
     }
 
+    /**
+     * Prints the bye message in the terminal.
+     */
     public static void printByeMessage() {
         System.out.println("Bye. Hope to see you again soon!");
         printBreakLine();
     }
 
+    /**
+     * Prints the help message in the terminal. The help message entails the format that the user need to adhere to.
+     */
     public static void printHelpMessage() {
         System.out.print("Help message:\n"
                 + "* Add deadline -> 'deadline <description> /by <when>'\n"
