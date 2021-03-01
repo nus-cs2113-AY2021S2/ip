@@ -29,7 +29,7 @@ public class Storage {
             System.out.println("Welcome to Duke. Is this your first time using Duke on this machine?");
         } else {
             System.out.println("Your previous Task list from Duke has been loaded! :-)");
-            processFileContents(filepath);
+            readAndParseFileContents(filepath);
         }
     }
 
@@ -55,12 +55,12 @@ public class Storage {
      * @param filepath the path to load the file from
      * @throws FileNotFoundException if there file does not exist
      */
-    private static void processFileContents(String filepath) throws FileNotFoundException {
+    private static void readAndParseFileContents(String filepath) throws FileNotFoundException {
         File f = new File(filepath); // create a File for the given file path
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
         while (s.hasNext()) {
             String line = s.nextLine();
-            processFileInputLines(line);
+            addTaskAndMarkIfCompletedFromFile(line);
         }
     }
 
@@ -73,7 +73,7 @@ public class Storage {
      * Done -> Whether the Task is Done ("Y"/"N") as stored in the input file
      * @param fileLine one line of input in the file
      */
-    private static void processFileInputLines(String fileLine) {
+    private static void addTaskAndMarkIfCompletedFromFile(String fileLine) {
         char taskType = getTaskType(fileLine);
         char isDone = getDone(fileLine);
 
