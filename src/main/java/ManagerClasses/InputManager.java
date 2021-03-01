@@ -60,7 +60,7 @@ public class InputManager {
                 try {
                     taskManager.addTodoToList(command.getDescription());
                     storageManager.saveTasksInTxtFile();
-                } catch (EmptyTaskDescriptionException e) {
+                } catch (EmptyTaskDescriptionException | NullPointerException e) {
                     System.out.println("Error -> Empty task description");
                 }
                 break;

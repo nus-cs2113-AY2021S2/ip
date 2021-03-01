@@ -43,10 +43,16 @@ public class Command {
     private void setCommandFromInput(String input) throws EmptyByOrAtWhenException {
         // Remove whitespaces
         input = input.trim();
+
         commandType = getCommandTypeFromInput(input);
 
         // Split user input by the first "/" to separate description and second argument (at or by, if applicable).
         String[] arguments = input.split("/", 2);
+
+        // Check if task description is empty for todo and return
+        if (input.equals("todo")) {
+            return;
+        }
 
         // Remove the command word (eg. deadline, event, etc.) from the description.
         description = arguments[0].substring(arguments[0].indexOf(' ')+1);
