@@ -6,7 +6,7 @@ By: `Lee Han Yong Andy` Since: `February 2021`
 
 - [Track-The-Mushroom User Guide](#track-the-mushroom-user-guide)
     * [1. Introduction](#1-introduction)
-    * [2. Quick Start in Intellij](#2-quick-start-in-intellij)
+    * [2. Quick Start](#2-quick-start)
     * [3. Features](#3-features)
       + [3.1 Add a Todo task: `todo`](#31-add-a-todo-task-todo)
       + [3.2 Add a Deadline task: `deadline`](#32-add-a-deadline-task-deadline)
