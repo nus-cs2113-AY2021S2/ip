@@ -5,8 +5,12 @@ import static duke.common.Constants.NEWLINE;
 
 import java.util.Scanner;
 
+/**
+ * Text user interface of the application.
+ */
 public class Ui {
-    /** Constants used for displaying messages */
+
+    // Display messages
     public static final String LOGO =
             "                                      ,::::," + "\n"
                     + "                          ,,,,:::::::':::::::" + "\n"
@@ -62,7 +66,7 @@ public class Ui {
             + BORDER + NEWLINE;
 
 
-    /** Invalid command error messages */
+    // Invalid command error messages
     public static final String DEFAULT_INVALID_MESSAGE
             = "I'm sorry, I don't quite understand :( Could you try again?";
     public static final String MISSING_FIELDS_MESSAGE
@@ -75,21 +79,18 @@ public class Ui {
             = "Squeal... Are you sure that is a task?";
 
 
-    /** Other error messages */
+    // Other error messages
     public static final String LOADING_ERROR_MESSAGE
             = "Failed to load from disk, creating a new file!";
     public static final String SAVING_ERROR_MESSAGE
             = "Failed to save to disk.";
 
 
-    /** Read in input */
     public String readCommand() {
         Scanner in = new Scanner(System.in);
         return in.nextLine();
     }
 
-
-    /** Methods that display messages */
     public void printGreeting() {
         System.out.print(GREET_MESSAGE);
     }
@@ -98,6 +99,11 @@ public class Ui {
         System.out.print(GOODBYE_MESSAGE);
     }
 
+    /**
+     * Displays a pre-defined explanation for the error if {@code errorMessage} is
+     * not null, and a default message if it is null.
+     * @param errorMessage name of a specific explanation
+     */
     public void printErrorMessage(String errorMessage) {
         String closeString = NEWLINE + BORDER + NEWLINE;
         if (errorMessage == null) {
@@ -111,8 +117,10 @@ public class Ui {
         System.out.print(HELP_PAGE);
     }
 
-
-    /** Methods that print part of or full list */
+    /**
+     * Displays a newly-added task in the {@code TaskList} when a {@code TaskCommand},
+     * {@code DeadlineCommand} or {@code EventCommand} is executed.
+     */
     public void echo(TaskList tasks) {
         System.out.print(BORDER);
         System.out.print("New task added: " + NEWLINE);
@@ -130,6 +138,9 @@ public class Ui {
         System.out.print(BORDER + NEWLINE);
     }
 
+    /**
+     * Displays the entire {@code TaskList}.
+     */
     public void printList(TaskList tasks) {
         System.out.print(BORDER);
         System.out.print("Here are the tasks in your list:" + NEWLINE);

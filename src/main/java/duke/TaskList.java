@@ -6,9 +6,9 @@ import java.util.ArrayList;
 
 import duke.tasks.Task;
 
-/** List of tasks being maintained
- * and number of tasks it has
-*/
+/**
+ * Represents the list of tasks maintained throughout a run.
+ */
 public class TaskList {
     private ArrayList<Task> tasks = new ArrayList<>();
     private int tasksCount = 0;
@@ -31,6 +31,11 @@ public class TaskList {
         return tasks.get(taskIndex);
     }
 
+    /**
+     * Generates the data to save to the .txt storage file at the end of a run by converting, item-by-item,
+     * the differently-formatted {@code TaskList}.
+     * @return a multi-line string representation of {@code TaskList}
+     */
     public String convertToText() {
         StringBuilder text = new StringBuilder();
         for (int i = 0; i < tasksCount; i++) {

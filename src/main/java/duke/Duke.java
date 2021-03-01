@@ -2,12 +2,20 @@ package duke;
 
 import duke.commands.Command;
 
+/**
+ * Starts the Duke application and begins interactions with user.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
     private Parser parser;
 
+    /**
+     * Initialises required objects and loads any existing data from the storage file.
+     *
+     * @param filePath pre-defined path to the file where data is loaded from and saved to
+     */
     public Duke(String filePath) {
         storage = new Storage(filePath);
         tasks = storage.loadFromDisk();
@@ -19,6 +27,9 @@ public class Duke {
         new Duke("data/tasks.txt").run();
     }
 
+    /**
+     * Runs the application until termination.
+     */
     public void run() {
         ui.printGreeting();
         boolean isExit = false;
