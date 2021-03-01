@@ -58,9 +58,6 @@ public class TaskList {
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new InvalidTaskNumberException();
         }
-        if (taskNumberString.isBlank()) {
-            throw new InvalidTaskNumberException();
-        }
 
         int taskNumber = Integer.parseInt(taskNumberString);
         boolean taskNumberIsLessThanOne = (taskNumber < 1);
@@ -89,10 +86,6 @@ public class TaskList {
             throw new InvalidTaskDescriptionException();
         }
 
-        if (taskInfo.isBlank()) {
-            throw new InvalidTaskDescriptionException();
-        }
-
         Task currentTask = new ToDo(taskInfo);
         tasks.add(currentTask);
         Storage.saveData(tasks);
@@ -115,10 +108,6 @@ public class TaskList {
         try {
             taskInfo = input.split("deadline")[1].trim();
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new InvalidTaskDescriptionException();
-        }
-
-        if (taskInfo.isBlank()) {
             throw new InvalidTaskDescriptionException();
         }
 
@@ -147,9 +136,6 @@ public class TaskList {
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new InvalidTaskDescriptionException();
         }
-        if (taskInfo.isBlank()) {
-            throw new InvalidTaskDescriptionException();
-        }
 
         String[] splitTaskInfo = taskInfo.split("/at", 2);
         String taskDescription = splitTaskInfo[0].trim();
@@ -176,9 +162,6 @@ public class TaskList {
         try {
             taskNumberString = input.split("delete")[1];
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new InvalidTaskNumberException();
-        }
-        if (taskNumberString.isBlank()) {
             throw new InvalidTaskNumberException();
         }
 
@@ -211,9 +194,6 @@ public class TaskList {
         try {
             keyword = input.split("find")[1].trim();
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new InvalidTaskKeywordException();
-        }
-        if (keyword.isBlank()) {
             throw new InvalidTaskKeywordException();
         }
 
