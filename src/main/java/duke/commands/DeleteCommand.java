@@ -5,6 +5,9 @@ import static duke.common.Constants.NEWLINE;
 
 import duke.TaskList;
 
+/**
+ * Represents a command that removes a {@code Task} from {@TaskList} when executed.
+ */
 public class DeleteCommand extends Command {
     private int taskIndex;
 
@@ -21,9 +24,5 @@ public class DeleteCommand extends Command {
         tasks.getTaskAtIndex(taskIndex-1).printTask();
         tasks.deleteTaskFromList(taskIndex-1);
         ui.printNumberOfTasks(tasks.getTasksCount());
-    }
-
-    public boolean isExit() {
-        return super.isExit();
     }
 }

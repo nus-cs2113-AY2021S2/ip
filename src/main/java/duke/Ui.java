@@ -118,8 +118,9 @@ public class Ui {
     }
 
     /**
-     * Displays a newly-added task in the {@code TaskList} when a {@code TaskCommand},
-     * {@code DeadlineCommand} or {@code EventCommand} is executed.
+     * Displays a newly-added task in {@code TaskList} when a {@code TaskCommand},
+     * {@code DeadlineCommand} or {@code EventCommand} is executed, by way of
+     * confirmation to the user.
      */
     public void echo(TaskList tasks) {
         System.out.print(BORDER);
@@ -129,6 +130,11 @@ public class Ui {
         printNumberOfTasks(tasks.getTasksCount());
     }
 
+    /**
+     * Shows the number of items in {@code TaskList} when a {@code DoneCommand} or
+     * {@code DeleteCommand} is executed, so that the user can keep track of
+     * their tasks more easily.
+     */
     public void printNumberOfTasks(int tasksCount) {
         System.out.print(NEWLINE + "There ");
         System.out.print(tasksCount > 1 ? "are " : "is ");

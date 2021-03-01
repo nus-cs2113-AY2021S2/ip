@@ -6,6 +6,10 @@ import duke.TaskList;
 import duke.tasks.Event;
 import duke.tasks.Task;
 
+/**
+ * Represents a command that creates, initialises and adds an
+ * {@code Event} to {@code TaskList} when executed.
+ */
 public class EventCommand extends Command {
     private String taskDescription;
     private String taskStatus;

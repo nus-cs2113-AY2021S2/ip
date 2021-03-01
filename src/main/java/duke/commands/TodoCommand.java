@@ -5,6 +5,10 @@ import static duke.common.Constants.TODO_TASK_TYPE;
 import duke.TaskList;
 import duke.tasks.Task;
 
+/**
+ * Represents a command that creates, initialises and adds a
+ * {@code Task} to {@code TaskList} when executed.
+ */
 public class TodoCommand extends Command {
     private String taskDescription;
     private String taskStatus;
