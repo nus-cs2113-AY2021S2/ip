@@ -1,60 +1,42 @@
-public class Tasks{
-    protected String description;
-    protected  boolean isDone;
-    protected String taskType;
-    protected String extraDescription;
 
-    public Tasks(String description){
-        this.description = description;
-        this.isDone =false;
-        this.taskType = " ";
-        this.extraDescription =" ";
+
+public class Tasks {
+    protected String commandDescription;
+    protected boolean isDone =false;
+    protected String taskType =" ";
+
+    public Tasks(){};
+    public Tasks(String commandDescription){
+        this.commandDescription = commandDescription;
     }
-    public Tasks(String description, String taskType){
-        this.description = description;
-        this.isDone =false;
+    public Tasks(String commandDescription,boolean isDone){
+        this.commandDescription = commandDescription;
+        this.isDone = isDone;
+    }
+    public Tasks(String commandDescription, boolean isDone, String taskType){
+        this.commandDescription = commandDescription;
+        this.isDone= isDone;
         this.taskType = taskType;
     }
-    public void setDescription(String description) {
-        this.description = description;
+    public Tasks(String commandDescription, String taskType){
+        this.commandDescription = commandDescription;
+        this.taskType = taskType;
+    }
+
+    public void setCommandDescription(String cmd){
+        this.commandDescription = cmd;
     }
 
     public void setDone() {
-        this.isDone = true;
+        isDone = true;
     }
 
-    public String getDescription() {
-        return this.description;
-    }
-
-    public String  setDisplay(){
-        if(this.isDone == true){
-            return "\u2718";
-        }
-        else{
-            return " ";
+    public String toString(){
+        if (!this.isDone){
+            return "[✗]" + this.commandDescription;
+        } else {
+            return "[✓]" + this.commandDescription;
         }
     }
-    public String getTaskType(){
-        return taskType;
-    }
-    public String displayTaskType(){
-        if(taskType.equals("todo")){
-            return "T";
-        }
-        else if( taskType.equals("deadline")){
-            return "D";
-        }
-        else if( taskType.equals("event")){
-            return "E";
-        }
-        else{
-            return " ";
-        }
-    }
-
-
-
-
 
 }
