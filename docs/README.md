@@ -11,7 +11,7 @@ Duke allows the user to quickly track events and reminders through CLI
 
 Will add a todo into the task list
 
-Format: `todo [something you need to do]`
+Format: `todo [task name]`
 
 Example of usage: 
 
@@ -23,6 +23,42 @@ Expected outcome:
 Got it. I've added this task:
 	[T][✘] read book
 Now you have 8 tasks in the list.
+```
+
+### `deadline`
+
+Will add a task with a deadline into the task list
+
+Format: `deadline [task name] /by [date/time]`
+
+Example of usage:
+
+`deadline return book /by Sunday 7pm`
+
+Expected outcome:
+
+```
+Got it. I've added this task:
+	[D][✘] return book (by: Sunday 7pm)
+Now you have 9 tasks in the list.
+```
+
+### `event`
+
+Will add an event into the task list
+
+Format: `event [event name] /at [date/time]`
+
+Example of usage:
+
+`event project meeting /at Monday 7-8pm`
+
+Expected outcome:
+
+```
+Got it. I've added this task:
+	[E][✘] project meeting (at: Monday 7-8pm)
+Now you have 10 tasks in the list.
 ```
 
 ### 2. Deleting todos, deadlines and events
