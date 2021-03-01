@@ -55,9 +55,9 @@ Example of usage:
 
 Expected outcome:
 
-`Got it. I've added this task:`\ 
- ` [E][ ] project meeting (at: Mon 2-4pm)`\
- `Now you have 7 tasks in the list.`
+`Got it. I've added this task:`\
+` [D][ ] return book (by: Sunday)`\
+`Now you have 6 tasks in the list.`
  
 ### `delete` - Deletes the task specified from the current tasks list.
 
