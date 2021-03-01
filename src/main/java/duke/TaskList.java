@@ -189,7 +189,7 @@ public class TaskList {
             String at = String.join(" ",Arrays.copyOfRange(command,
                     separatorIndex + 1, command.length));
             if(Parser.checkValidLocalDate(at)){
-                Task newItem = new Deadline(description, at);
+                Task newItem = new Event(description, at);
                 tasks.add(newItem);
                 return newItem;
             } else{

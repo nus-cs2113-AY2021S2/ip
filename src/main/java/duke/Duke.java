@@ -14,6 +14,9 @@ public class Duke {
 
     public static Storage storage = new Storage();
 
+    /**
+     * Code to run the entire program
+     */
     public static void main(String[] args) {
         Messages.welcomeMessage();
         Ui.runProgram(storage);
