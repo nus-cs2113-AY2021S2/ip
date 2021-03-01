@@ -31,9 +31,9 @@ Example of usage:
 
 Expected outcome:
 
-`Got it. I've added this task: '
-' [D][ ] return book (by: Sunday)'
-'Now you have 6 tasks in the list.`
+`Got it. I've added this task: 
+ [D][ ] return book (by: Sunday)
+Now you have 6 tasks in the list.`
 
 ### `todo` - Adding a task to remind the user of a tasks that needs to be done.
 
