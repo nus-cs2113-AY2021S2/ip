@@ -27,14 +27,14 @@ done faster than traditional GUI apps.
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest `ip.jar` 
+2. Download the latest `Duke_ip.jar` 
    from [here](https://github.com/Leeyp/ip/releases).
 
 3. Copy the file to the folder you want to use 
    as the home folder for your Duke.
 
-4. Open your Command Line Terminal in that folder where `ip.jar` is 
-   located. Run Duke with `java -jar ip.jar`.
+4. Open your Command Line Terminal in that folder where `Duke_ip.jar` is 
+   located. Run Duke with `java -jar Duke_ip.jar`.
    
 5. Type the command in the command box and press Enter to execute
    it. e.g. typing `list` and pressing Enter will show a list of 
@@ -47,7 +47,9 @@ done faster than traditional GUI apps.
     * `bye`: Exits the app.
     
 6. Refer to the **Features** below for details of each command.
+
 ____
+
 ## User Notes
 _Notes about the command format:_
 
@@ -78,9 +80,11 @@ _Notes about Tasks in Duke:_
     * `Todo: ` `[T][N] myTodo`
     * `Event:` `[E][N] myEvent (at: event time)`
     * `Deadline:` `[D][Y] myDeadline (by: deadline time)`
+    
 ____
 
 ## Features
+
 ### Adding a todo: `todo`
 Adds a task to be done at an unspecified time to Duke's Task List.
 
@@ -89,8 +93,10 @@ Format: `todo TASK`
 Examples:
 * `todo read book` creates `[T][N] read book`
 * `todo my homework` creates `[T][N] my homework`
+
 <br />
-  <br />
+<br />
+
 ### Adding an event: `event`
 Adds an event to be done during a certain time to Duke's Task List.
 
@@ -102,8 +108,10 @@ the input will be flagged as invalid.
 Examples:
 * `event seminar /at 4-6pm` creates `[E][N] seminar (at: 4-6pm)`
 * `event zoom lecture /at 9-10am` creates `[E][N] zoom lecture (at: 9-10am)`
-  <br />
-  <br />
+  
+<br />
+<br />
+
 ### Adding an deadline: `deadline`
 Adds a deadline to be done by a certain time to Duke's Task List.
 
@@ -115,15 +123,19 @@ Format: `deadline TASK /by TIME`
 Examples:
 * `deadline essay /by Friday 6pm` creates `[D][N] essay (by: Friday 6pm)`
 * `deadline Lab Assignment /by 5 Mar 9am` creates `[D][N] Lab Assignment (by: 5 Mar 9am)`
-  <br />
-  <br />
+  
+<br />
+<br />
+  
 ### Listing all tasks: `list`
 Shows a list of all tasks in Duke's Task List.
 
 Format: `list`
 ![img_1.png](img_1.png)
+
 <br />
 <br />
+
 ### Marking a task as done: `done`
 Marks a task as done in Duke's Task List.
 
@@ -138,8 +150,10 @@ Examples:
 * `done 1` marks the first task as shown in `list` as done.
 * If `[T][N] read book` was the first task that was marked as done, 
 it will now become `[T][Y] read book`.
-  <br />
-  <br />
+  
+<br />
+<br />
+  
 ### Deleting a task: `delete`
 Deletes a specified task in Duke's Task List.
 
@@ -153,8 +167,10 @@ Examples:
 * If `[T][N] read book` was the task that was deleted,
   it will no longer exist. The subsequent tasks will be moved
   forward in the list.
-  <br />
-  <br />
+  
+<br />
+<br />
+  
 ### Search for a task: `find`
 Lists all tasks that contains a certain keyword in Duke's Task List.
 
@@ -169,19 +185,25 @@ Examples:
 * `find work` returns the tasks `homework` and `do housework`.
 * `find book` returns the tasks `read book`, `book a taxi`, and `Fix Macbook`.
 ![img_2.png](img_2.png)
-  <br />
-  <br />
+  
+<br />
+<br />
+  
 ### Exiting the program: `bye`
 Exits the program.
 
 Format: `bye`
+
 <br />
 <br />
+
 ### Saving the data
 Duke Task List data are saved in the hard disk automatically after any command that changes the data. 
 There is no need to save manually.
+
 <br />
 <br />
+
 ### Editing the data file
 Duke Task List data is saved as a text file `[JAR file location]/data.txt`.
 Advanced users are welcome to update data directly by editing that data file.
