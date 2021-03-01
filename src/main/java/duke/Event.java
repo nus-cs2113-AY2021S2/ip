@@ -1,11 +1,11 @@
 package duke;
 
 public class Event extends Task{
-    protected String at;
+    protected String atDate;
 
     public Event(String description, String at) {
         super(description);
-        this.at = at;
+        this.atDate = at;
         this.separator = "/at";
     }
 
@@ -14,7 +14,7 @@ public class Event extends Task{
     }
 
     public String getAt() {
-        return this.at;
+        return this.atDate.toString();
     }
 
     @Override
@@ -24,6 +24,6 @@ public class Event extends Task{
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at: " + atDate + ")";
     }
 }
