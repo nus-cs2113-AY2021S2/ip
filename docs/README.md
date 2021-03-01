@@ -5,9 +5,9 @@
 ### 1. Adding Tasks 
 This allows the program to have the ability to store text entered by the user and display them back to the user when requested.
 The program breaks down the adding of tasks using 3 different keywords.
-#### 1.Deadline 
-#### 2.Todo
-#### 3.Event
+#### i.Deadline 
+#### ii.Todo
+#### iii.Event
 
 ### 2. Deleting Tasks 
 Add support for deleting tasks from the list.
