@@ -89,10 +89,6 @@ public class Parser {
             throws EmptyInputException, InvalidEventTimeException,
             InvalidDeadlineTimeException {
 
-        if (isEmptyInput(input, c)) {
-            throw new EmptyInputException();
-        }
-
         switch (c) {
         case EVENT:
             if (validEventTime(input)) {
@@ -106,6 +102,10 @@ public class Parser {
             } else {
                 throw new InvalidDeadlineTimeException();
             }
+        }
+
+        if (isEmptyInput(input, c)) {
+            throw new EmptyInputException();
         }
     }
 
