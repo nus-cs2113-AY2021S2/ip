@@ -2,7 +2,7 @@
 
 ## Features 
 <details>
-<summary>### TODO</summary>
+<summary><h3> TODO</summary>
 <br>
 This is how you dropdown.
 </details>
