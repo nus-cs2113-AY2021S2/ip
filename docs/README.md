@@ -31,8 +31,8 @@ Example of usage:
 
 Expected outcome:
 
-`Got it. I've added this task:`\
-` [D][ ] return book (by: Sunday)`\
+`Got it. I've added this task:`
+` [D][ ] return book (by: Sunday)`
 `Now you have 6 tasks in the list.`
 
 ### `todo` - Adding a task to remind the user of a tasks that needs to be done.
@@ -43,8 +43,8 @@ Example of usage:
 
 Expected outcome:
 
-`Got it. I've added this task:`\  
- ` [T][ ] borrow book`\  
+`Got it. I've added this task:`  
+ ` [T][ ] borrow book`  
  `Now you have 5 tasks in the list`
 
 ### `event` - Adding a task to remind the user of an event scheduled.
@@ -55,8 +55,8 @@ Example of usage:
 
 Expected outcome:
 
-`Got it. I've added this task:`\ 
-` [E][ ] project meeting (at: Mon 2-4pm)`\
+`Got it. I've added this task:` 
+` [E][ ] project meeting (at: Mon 2-4pm)`
 `Now you have 7 tasks in the list.`
  
 ### `delete` - Deletes the task specified from the current tasks list.
