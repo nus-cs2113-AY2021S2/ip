@@ -6,20 +6,33 @@ import ExceptionClasses.EmptyTaskDescriptionException;
 
 import java.util.Scanner;
 
+/**
+ * Manages the user input received from the command line.
+ */
 public class InputManager {
     private final TaskManager taskManager;
     private final StorageManager storageManager;
 
+    /**
+     * Constructor for InputManager class
+     */
     public InputManager(){
         taskManager = new TaskManager();
         storageManager = new StorageManager(taskManager);
     }
 
+    /**
+     * Imports tasks from previously saved text file and contains the loop that receives user inputs.
+     */
     public void manageInput() {
         storageManager.importTasksFromTxtFile();
         inputLoop();
     }
 
+    /**
+     * Continuous loop that gets user input and invokes the necessary command according to the input.
+     * Exits when user enters 'bye' command.
+     */
     private void inputLoop() {
         while(true) {
             String input = getUserInput();
@@ -82,6 +95,10 @@ public class InputManager {
         }
     }
 
+    /**
+     * Returns the user input as a String which can then be parsed to execute commands.
+     * @return the user input received
+     */
     private String getUserInput() {
         System.out.print("> ");
         Scanner in = new Scanner(System.in);

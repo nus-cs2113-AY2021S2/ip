@@ -10,6 +10,10 @@ public class Command {
     private String when;
     private Integer taskNum;
 
+    /**
+     * Constructor for the Command class.
+     * @param userInput the input received from the user in the terminal.
+     */
     public Command(String userInput) {
         try {
             setCommandFromInput(userInput);
@@ -18,10 +22,19 @@ public class Command {
         }
     }
 
+    /**
+     * Getter for the command type.
+     * @return the command type which of type CommandEnum
+     */
     public CommandEnum getCommandType() {
         return commandType;
     }
 
+    /**
+     * Getter for the task description.
+     * @return the task description.
+     * @throws EmptyTaskDescriptionException when the task description is left empty by the user.
+     */
     public String getDescription() throws EmptyTaskDescriptionException {
         if (description.equals("")) {
             throw new EmptyTaskDescriptionException();
@@ -29,6 +42,11 @@ public class Command {
         return description;
     }
 
+    /**
+     * Getter for the 'by when' or 'at when' details for deadline and event tasks.
+     * @return the 'by when' or 'at when' details.
+     * @throws EmptyByOrAtWhenException when the 'by when' or 'at when' details is left empty by the user.
+     */
     public String getWhen() throws EmptyByOrAtWhenException {
         if (when.equals("")) {
             throw new EmptyByOrAtWhenException();
@@ -36,10 +54,20 @@ public class Command {
         return when;
     }
 
+    /**
+     * Getter for the task number that the user specified for the done or delete commands.
+     * @return the task number that the user specified.
+     */
     public Integer getTaskNum() {
         return taskNum;
     }
 
+    /**
+     * Converts the raw user input from String format to obtain the necessary data according to the specific user
+     * command.
+     * @param input the raw user input in String format.
+     * @throws EmptyByOrAtWhenException when the 'by when' or 'at when' details is left empty by the user.
+     */
     private void setCommandFromInput(String input) throws EmptyByOrAtWhenException {
         // Remove whitespaces
         input = input.trim();
@@ -84,6 +112,11 @@ public class Command {
         }
     }
 
+    /**
+     * Parses the raw user input and identifies the type of command that was passed in it.
+     * @param input the raw user input in String format.
+     * @return the user command in the CommandEnum format.
+     */
     private CommandEnum getCommandTypeFromInput(String input) {
         String[] args = input.split(" ");
         if (input.equals("bye")) {
