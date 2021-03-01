@@ -17,9 +17,11 @@ Example of usage:
 
 Expected outcome:
 
-`Got it. I've added this task:
+```
+Got it. I've added this task:
 	[T][✘] read book
-Now you have 8 tasks in the list.`
+Now you have 8 tasks in the list.
+```
 
 ### 2. Deleting todos, deadlines and events
 Should a user want to remove a task, deletion can be done
