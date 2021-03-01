@@ -83,4 +83,28 @@ public class TaskList {
         }
     }
 
+    public void findTask(String searchWord) {
+        ui.printToScreen(DIVIDER);
+        Task[] searchResults = new Task[tasks.size()];
+        for (int i=0; i<tasks.size(); i++) {
+            Task t = tasks.get(i);
+            if (t.getDescription().contains(searchWord)) {
+                searchResults[i] = t;
+            }
+        }
+        ui.printToScreen("Here are the matching tasks in your list. ");
+        boolean found = false;
+        for (int i=0; i<searchResults.length; i++) {
+            Task currentTask = searchResults[i];
+            if (currentTask!=null) {
+                found = true;
+                ui.printToScreen(Integer.toString(i+1) + ". " + currentTask.getDetails());
+            }
+        }
+        if (!found) {
+            ui.printToScreen("No tasks found :(");
+        }
+        ui.printToScreen(DIVIDER);
+    }
+
 }
