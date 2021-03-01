@@ -18,6 +18,11 @@ public class Task {
                 + this.getItem());
     }
 
+    public void printCondensedTask() {
+        System.out.print("[" + this.getStatus() + "] "
+                + this.getItem());
+    }
+
     @Override
     public String toString() {
         int statusAsInt = this.getStatus().equals("X") ? DONE_STATUS_AS_INT : DEFAULT_STATUS_AS_INT;

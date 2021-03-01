@@ -3,7 +3,8 @@ package duke.common;
 public class Constants {
     /** Constants used for displaying messages */
     public static final String NEWLINE = System.lineSeparator();
-    public static final String BORDER = "____________________________________________________________" + NEWLINE;
+    public static final String BORDER = "____________________________________________________________"
+            + NEWLINE + NEWLINE;
 
     /** Constants used to set status of a task */
     public static final String DEFAULT_STATUS = " ";

@@ -4,7 +4,12 @@ import static duke.Ui.INVALID_INDEX_MESSAGE;
 import static duke.Ui.INVALID_TASK_MESSAGE;
 import static duke.Ui.MISSING_FIELDS_MESSAGE;
 import static duke.Ui.OUTSIDE_RANGE_INDEX_MESSAGE;
+import static duke.Ui.INVALID_DATE_FORMAT_MESSAGE;
 import static duke.common.Constants.DEFAULT_STATUS;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 
 import duke.commands.ByeCommand;
 import duke.commands.Command;
@@ -13,6 +18,7 @@ import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
 import duke.commands.EventCommand;
 import duke.commands.FindCommand;
+import duke.commands.FilterCommand;
 import duke.commands.HelpCommand;
 import duke.commands.InvalidCommand;
 import duke.commands.ListCommand;
@@ -21,7 +27,7 @@ import duke.exceptions.DukeException;
 
 /** Parses user's input
  * and determines command to be run
-*/
+ */
 public class Parser {
     private TaskList tasks;
 
@@ -58,6 +64,8 @@ public class Parser {
             return prepareDeleteCommand(userCommand[1]);
         case "find":
             return new FindCommand(tasks, userCommand[1]);
+        case "filter":
+            return prepareFilterCommand(userCommand[1]);
         default:
             return new InvalidCommand(null);
         }
@@ -96,9 +104,15 @@ public class Parser {
     public Command prepareDeadlineCommand(String description) {
         try {
             String[] words = getDeadlineOrEventDescription(" /by ", description);
-            return new DeadlineCommand(tasks, words[0], DEFAULT_STATUS, words[1]);
+            String deadlineDescription = words[0];
+            String[] taskDeadline = prepareCommand(words[1]);
+            LocalDate deadlineDate = LocalDate.parse(taskDeadline[0]);
+            LocalTime deadlineTime = LocalTime.parse(taskDeadline[1]);
+            return new DeadlineCommand(tasks, deadlineDescription, DEFAULT_STATUS, deadlineDate, deadlineTime);
         } catch (ArrayIndexOutOfBoundsException | DukeException e) {
             return new InvalidCommand(MISSING_FIELDS_MESSAGE);
+        } catch (DateTimeParseException e) {
+            return new InvalidCommand(INVALID_DATE_FORMAT_MESSAGE);
         }
     }
 
@@ -113,8 +127,8 @@ public class Parser {
 
     public Command prepareDoneCommand (String description) {
         try {
-            int index = getTaskIndex(description);
-            return new DoneCommand(tasks, index);
+            int taskIndex = getTaskIndex(description);
+            return new DoneCommand(tasks, taskIndex);
         } catch (ArrayIndexOutOfBoundsException e) {
             return new InvalidCommand(MISSING_FIELDS_MESSAGE);
         } catch (NumberFormatException e) {
@@ -126,14 +140,25 @@ public class Parser {
 
     public Command prepareDeleteCommand(String description) {
         try {
-            int index = getTaskIndex(description);
-            return new DeleteCommand(tasks, index);
+            int taskIndex = getTaskIndex(description);
+            return new DeleteCommand(tasks, taskIndex);
         } catch (ArrayIndexOutOfBoundsException e) {
             return new InvalidCommand(MISSING_FIELDS_MESSAGE);
         } catch (NumberFormatException e) {
             return new InvalidCommand(INVALID_INDEX_MESSAGE);
         } catch (DukeException e) {
             return new InvalidCommand(OUTSIDE_RANGE_INDEX_MESSAGE + description);
+        }
+    }
+
+    public Command prepareFilterCommand(String date) {
+        try {
+            LocalDate targetDate = LocalDate.parse(date);
+            return new FilterCommand(tasks, targetDate);
+        } catch (NullPointerException e) {
+            return new InvalidCommand(MISSING_FIELDS_MESSAGE);
+        } catch (DateTimeParseException e) {
+            return new InvalidCommand(INVALID_DATE_FORMAT_MESSAGE);
         }
     }
 

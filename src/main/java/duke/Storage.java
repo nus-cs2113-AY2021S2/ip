@@ -6,6 +6,9 @@ import static duke.common.Constants.TODO_TASK_TYPE;
 import static duke.common.Constants.DEADLINE_TASK_TYPE;
 import static duke.common.Constants.EVENT_TASK_TYPE;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileWriter;
@@ -80,9 +83,11 @@ public class Storage {
         case DEADLINE_TASK_TYPE:
             try {
                 String status = Integer.parseInt(tokens[1]) == 1 ? DONE_STATUS : DEFAULT_STATUS;
-                DeadlineCommand addDeadline = new DeadlineCommand(tasks, tokens[2], status, tokens[3]);
+                LocalDate deadlineDate = LocalDate.parse(tokens[3]);
+                LocalTime deadlineTime = LocalTime.parse(tokens[4]);
+                DeadlineCommand addDeadline = new DeadlineCommand(tasks, tokens[2], status, deadlineDate, deadlineTime);
                 addDeadline.execute();
-            } catch (NumberFormatException e) {
+            } catch (NumberFormatException | DateTimeParseException e) {
                 return;
             }
             break;
