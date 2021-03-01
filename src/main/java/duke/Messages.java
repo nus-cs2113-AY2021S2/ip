@@ -18,7 +18,7 @@ public class Messages {
         System.out.println("Hello from\n" + logo);
 
         System.out.println();
-        System.out.println("____________________________________________________________");
+        System.out.println(LINE);
         System.out.println("Hello! I'm Lyon");
         System.out.println("What can I do for you?");
     }
@@ -55,5 +55,10 @@ public class Messages {
         System.out.println(LINE);
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println(LINE);
+    }
+
+    public static void noFindResults(String term){
+        System.out.println(LINE);
+        System.out.println("No results found for search term: " + term);
     }
 }

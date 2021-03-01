@@ -5,9 +5,6 @@ public abstract class Task {
     protected boolean isDone;
     protected String separator = "";
 
-
-    //can create static variable to get number of tasks (the range for indexes for the "done" command in main)
-
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -22,7 +19,7 @@ public abstract class Task {
     }
 
     public String getStatusIcon() {
-        //return tick or X symbols
+        //return space or X symbols
         return (isDone ? "X" : " ");
     }
 

@@ -88,11 +88,42 @@ public class TaskList {
                 Messages.badUserInputMessage();
             }
             break;
+        case "find":
+            findCommand(command, tasks);
+            break;
         default:
             System.out.println("I have no such feature!");
             break;
         }
         return newItem;
+    }
+
+    public void findCommand(String[] command, ArrayList<Task> tasks){
+        if(command.length == 1){
+            System.out.println("Kindly enter a term to search for!");
+        } else {
+            String searchTerm = String.join(" ", Arrays.copyOfRange(command, 1, command.length));
+            String searchString;
+            int count = 0;
+            int index = 1;
+            for (Task task : tasks) {
+                searchString = task.getDescription();
+                searchString += " ";
+                if (task instanceof Deadline) {
+                    searchString += ((Deadline) task).getBy();
+                } else if (task instanceof Event) {
+                    searchString += ((Event) task).getAt();
+                }
+                if(searchString.contains(searchTerm)){
+                    System.out.println(index + "." + task.toString());
+                    count += 1;
+                }
+                index += 1;
+            }
+            if(count == 0){
+                Messages.noFindResults(searchTerm);
+            }
+        }
     }
 
     public void listCommand(String[] command, ArrayList<Task> tasks) throws DukeException{
