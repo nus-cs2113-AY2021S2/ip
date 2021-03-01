@@ -61,6 +61,7 @@ Got it. I've added this task:
 Now you have 10 tasks in the list.
 ```
 
+
 ### 2. Deleting todos, deadlines and events: `delete`
 
 Deletes a task at the given index
@@ -76,6 +77,7 @@ Example of usage:
 Expected outcome:
 
 `Done! One less worry for you :)`
+
 
 ### 3. Listing all tasks: `list`
 For a quick overview on all added tasks, printed in chronological order.
@@ -99,6 +101,7 @@ Here are the tasks in your list:
 	7. [T][✘] study book
 	8. [T][✘] read book
 ```
+
 
 ### 4. Marking task as done: `done`
 To signal that task is completed
@@ -125,6 +128,7 @@ Here are the tasks in your list:
 	8. [T][✘] read book`
 ```
 
+
 ### 5. Searching for specified keyword: `find`
 Will search through task list for all tasks with specified keyword
 
@@ -145,10 +149,12 @@ Here are the matching tasks in your list:
 	3. [T][✓] read book`
 ```
 
+
 ### 6. Exiting the program: `bye`
 Exits the program
 
 Format: `bye`
+
 
 ## Saving the data
 Duke automatically saves the data after each and every command, ensuring that data is always up to date. There is no need to save manually.
