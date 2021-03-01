@@ -39,7 +39,7 @@ Adds an event to the tasks list.
 <br>* `DATE` has to be in the format of **YYYY-MM-DD**.
 <br> Examples :
 <br>* `event project meeting /at 2021-01-01` : add a new task with the description `project meeting` 
-on `2020-01-01`.
+on `2021-01-01`.
 
 ### Add a Deadline : `deadline`
 Adds a deadline to the tasks list.
@@ -47,7 +47,7 @@ Adds a deadline to the tasks list.
 * `DATE` has to be in the format of YYYY-MM-DD.
 <br> Examples :
 <br>* `deadline project submission /at 2021-03-05` : add a new task with the description `project submission`,
-  with the deadline `2020-03-05`.
+  with the deadline `2021-03-05`.
 
 ### Mark a task as done : `done`
 Marks the specified task as done 
