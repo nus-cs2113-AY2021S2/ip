@@ -131,6 +131,7 @@ Examples:
 Shows a list of all tasks in Duke's Task List.
 
 Format: `list`
+
 ![img_1.png](img_1.png)
 
 <br />
