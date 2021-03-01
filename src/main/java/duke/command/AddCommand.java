@@ -102,7 +102,7 @@ public class AddCommand extends Command {
         validateTodoFormat(line);
         int current = Task.totalNumberOfTasks;
         String nameOfTask = line.substring(5);
-        tasks.add(new Todo(nameOfTask));
+        tasks.add(new Todo(nameOfTask.trim()));
         Task.totalNumberOfTasks += 1;
         this.ui.printAddedToList(current, tasks);
     }
@@ -154,6 +154,29 @@ public class AddCommand extends Command {
      */
     public String[] extractDeadlineComponents(String line) throws EmptyNameFieldException,
             WrongFormatException, EmptyDateException, DateTimeException, ArrayIndexOutOfBoundsException {
+        validateDeadlineComponents(line);
+        String nameAndDate = line.substring(8);
+        String[] components = nameAndDate.split(" /by ");
+        String name = components[0];
+        String date = components[1];
+        // Remove any leading or trailing whitespace from name and date.
+        components[0] = name.trim();
+        components[1] = date.trim();
+
+        return components;
+    }
+
+    /** Does all necessary input validation for a deadline task.
+     *
+     * @param line user input.
+     * @throws EmptyNameFieldException if name is not provided or all whitespace.
+     * @throws WrongFormatException if input does not contain substring "/by".
+     * @throws EmptyDateException if date is not given or all whitespace.
+     * @throws DateTimeException if date is wrong format.
+     * @throws ArrayIndexOutOfBoundsException if there are no characters after the substring "/by".
+     */
+    public void validateDeadlineComponents(String line) throws EmptyNameFieldException,
+            WrongFormatException, EmptyDateException, DateTimeException, ArrayIndexOutOfBoundsException {
         if (!line.contains("/by")) {
             throw new WrongFormatException();
         }
@@ -169,10 +192,6 @@ public class AddCommand extends Command {
         }
         // Checks if date is of correct format
         LocalDate.parse(date);
-        // Removes any leading whitespace from name.
-        components[0] = name.trim();
-
-        return components;
     }
 
     /**
@@ -209,6 +228,29 @@ public class AddCommand extends Command {
      */
     public String[] extractEventComponents(String line) throws WrongFormatException,
             EmptyNameFieldException, EmptyDateException, DateTimeException, ArrayIndexOutOfBoundsException {
+        validateEventComponents(line);
+        String nameAndDate = line.substring(5);
+        String[] components = nameAndDate.split(" /at ");
+        String name = components[0];
+        String date = components[1];
+        // Remove any leading or trailing whitespace from name and date.
+        components[0] = name.trim();
+        components[1] = date.trim();
+
+        return components;
+    }
+
+    /** Does all necessary validation for an event task.
+     *
+     * @param line user input.
+     * @throws EmptyNameFieldException if name is not provided or all whitespace.
+     * @throws WrongFormatException if input does not contain substring "/at".
+     * @throws EmptyDateException if date is not given or all whitespace.
+     * @throws DateTimeException if date is wrong format.
+     * @throws ArrayIndexOutOfBoundsException if there are no characters after the substring "/at".
+     */
+    public void validateEventComponents(String line) throws WrongFormatException,
+            EmptyNameFieldException, EmptyDateException, DateTimeException, ArrayIndexOutOfBoundsException {
         if (!line.contains("/at")) {
             throw new WrongFormatException();
         }
@@ -224,9 +266,5 @@ public class AddCommand extends Command {
         }
         // Checks if date is of correct format
         LocalDate.parse(date);
-        // Removes any leading whitespace from name.
-        components[0] = name.trim();
-
-        return components;
     }
 }
