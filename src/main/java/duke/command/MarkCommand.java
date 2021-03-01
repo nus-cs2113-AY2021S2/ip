@@ -34,6 +34,7 @@ public class MarkCommand extends Command {
             this.ui.printError(ERR_NO_NAME);
         }
     }
+
     /**
      * Marks a task as done.
      * Checks for out of bounds access and presence of numerical value.
@@ -42,20 +43,21 @@ public class MarkCommand extends Command {
      * @throws IllegalAccessException if index given is out of bounds.
      * @throws EmptyNameFieldException if index is not given.
      */
-    public void markAsDone(String line, ArrayList<Task> tasks) throws IllegalAccessException, EmptyNameFieldException {
+    public void markAsDone(String line, ArrayList<Task> tasks)
+            throws IllegalAccessException, EmptyNameFieldException {
         if (line.length() < 6) {
             throw new EmptyNameFieldException();
         }
         int listNum = checkValidDone(line);
         if (listNum == INVALID_INDEX) {
             throw new IllegalAccessException();
-        } else {
-            listNum -= 1;
-            tasks.get(listNum).setDone();
-            this.ui.printMarkedDone(tasks.get(listNum).getName());
         }
+        listNum -= 1;
+        tasks.get(listNum).setDone();
+        this.ui.printMarkedDone(tasks.get(listNum).getName());
         this.ui.printBorderLine();
     }
+
     /**
      * Checks for presence of number on index 5 of input.
      * Then check if the number is within bounds.

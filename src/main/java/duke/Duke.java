@@ -14,6 +14,10 @@ public class Duke {
     private TaskList taskList;
     private Parser parser;
 
+    /**
+     * Duke constructor creates instances of storage, ui, tasklist and parser.
+     * It then loads the saved file into the created tasklist.
+     */
     public Duke() {
         storage = new Storage(FILEPATH);
         ui = new Ui();
@@ -38,11 +42,13 @@ public class Duke {
                 parsedCommand.execute(ui);
             }
             ui.sayGoodbye();
+            // Saves tasks into text file after user types 'bye'.
             storage.saveFile(taskList.getTasks());
         } catch (IOException e) {
             System.out.println("IO error.");
         }
     }
+
     public static void main(String[] args) {
         new Duke().run();
     }

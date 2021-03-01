@@ -32,26 +32,32 @@ public class Ui {
         Scanner in = new Scanner(System.in);
         return in.nextLine();
     }
+
     public void printGreeting() {
         System.out.println(GREETING_MESSAGE);
         printBorderLine();
     }
+
     public void printBorderLine() {
         System.out.println(BORDER_LINE);
     }
+
     /** Prints goodbye message after user inputs "bye". */
     public void sayGoodbye() {
         System.out.println(GOODBYE_MESSAGE);
         printBorderLine();
     }
+
     /** Prints total number of tasks in the list. */
     public void printTotalTasks() {
         System.out.println(String.format(TOTAL_TASK_MESSAGE, Task.totalNumberOfTasks));
     }
+
     /** Method used to print each item for "list" command. */
     public void printListItem(int index, String type, String status, String name, String date) {
         System.out.println(index + ". " + type + "[" + status + "] " + name + " " + date);
     }
+
     /** Prints name of item that was set to done. */
     public void printMarkedDone(String name) {
         System.out.println(name + SET_TO_DONE_MESSAGE);
@@ -70,23 +76,16 @@ public class Ui {
     /**
      * Prints all items in the list that contains a substring in its name.
      *
-     * @param substring substring to query.
-     * @param tasks ArrayList of tasks.
+     * @param foundItems list of items containing a substring.
      */
-    public void printFoundItems(String substring, ArrayList<Task> tasks) {
+    public void printFoundItems(ArrayList<Task> foundItems) {
         System.out.println(FIND_MESSAGE);
-        int foundCounter = 0;
-        for(int i = 0; i < Task.totalNumberOfTasks; i++) {
-            if (tasks.get(i).getName().contains(substring)) {
-                printDetailsOfTask(i, tasks);
-                foundCounter += 1;
-            }
-        }
-        if (foundCounter == 0) {
-            System.out.println(NO_SEARCH_RESULTS);
+        for(int i = 0; i < foundItems.size(); i++) {
+            printDetailsOfTask(i, foundItems);
         }
         printBorderLine();
     }
+
     /**
      * Prints the type, status, name and date of a given task.
      *
@@ -111,6 +110,7 @@ public class Ui {
         printTotalTasks();
         printBorderLine();
     }
+
     /**
      * Prints appropriate error message according to the error type.
      *

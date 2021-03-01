@@ -48,6 +48,7 @@ public class AddCommand extends Command {
             ui.printError(ERR_WRONG_DATE_FORMAT);
         }
     }
+
     /**
      * Parses type of item to add and calls appropriate method.
      *
@@ -55,8 +56,8 @@ public class AddCommand extends Command {
      */
     public void addItem(String line, ArrayList<Task> Tasks) throws WrongFormatException, EmptyNameFieldException,
             EmptyDateException {
-        String prefix = line.split(" ")[0];
-        int itemType = getItemType(prefix);
+        String command = line.split(" ")[0];
+        int itemType = getItemType(command);
         // No fallthrough required
         switch (itemType) {
         case ADD_TODO:
@@ -69,6 +70,7 @@ public class AddCommand extends Command {
             addEvent(line, Tasks);
         }
     }
+
     /**
      * Parses the type of task to add to list. Returns a constant integer representing type of task.
      *
@@ -88,6 +90,7 @@ public class AddCommand extends Command {
         }
         throw new WrongFormatException();
     }
+
     /**
      * Adds a task of type todo into the list after checking validity of the input.
      *
@@ -103,6 +106,7 @@ public class AddCommand extends Command {
         Task.totalNumberOfTasks += 1;
         this.ui.printAddedToList(current, tasks);
     }
+
     /**
      * Validates user input for task type Todo.
      *
@@ -115,6 +119,7 @@ public class AddCommand extends Command {
             throw new EmptyNameFieldException();
         }
     }
+
     /**
      * Adds a task of type deadline into the list after checking validity of input.
      *
@@ -130,15 +135,17 @@ public class AddCommand extends Command {
             WrongFormatException, EmptyDateException, DateTimeException, ArrayIndexOutOfBoundsException {
         String[] components = extractDeadlineComponents(line);
         int current = Task.totalNumberOfTasks;
+        // components[0] contains name, components[1] contains date
         tasks.add(new Deadline(components[0], components[1]));
         Task.totalNumberOfTasks += 1;
         this.ui.printAddedToList(current, tasks);
     }
+
     /**
      * Extracts the name and date of the deadline after checking validity of input.
      *
      * @param line user input.
-     * @return split, a string array with 2 elements: name and date.
+     * @return components, a string array with 2 elements: name and date.
      * @throws EmptyNameFieldException if task name is not given or is all whitespace.
      * @throws WrongFormatException if task name does not contain substring "/by"
      * @throws EmptyDateException if date is not given or is all whitespace.
@@ -151,9 +158,9 @@ public class AddCommand extends Command {
             throw new WrongFormatException();
         }
         String nameAndDate = line.substring(8);
-        String[] split = nameAndDate.split(" /by ");
-        String name = split[0];
-        String date = split[1];
+        String[] components = nameAndDate.split(" /by ");
+        String name = components[0];
+        String date = components[1];
         if (name.trim().length() == 0) {
             throw new EmptyNameFieldException();
         }
@@ -163,10 +170,11 @@ public class AddCommand extends Command {
         // Checks if date is of correct format
         LocalDate.parse(date);
         // Removes any leading whitespace from name.
-        split[0] = split[0].trim();
+        components[0] = name.trim();
 
-        return split;
+        return components;
     }
+
     /**
      * Adds a task of type event into the list after checking validity of input.
      *
@@ -182,15 +190,17 @@ public class AddCommand extends Command {
             WrongFormatException, EmptyDateException, DateTimeException, ArrayIndexOutOfBoundsException {
         String[] components = extractEventComponents(line);
         int current = Task.totalNumberOfTasks;
+        // components[0] contains name, components[1] contains date
         tasks.add(new Event(components[0], components[1]));
         Task.totalNumberOfTasks += 1;
         this.ui.printAddedToList(current, tasks);
     }
+
     /**
      * Extracts name and date of task after checking validity of input.
      *
      * @param line user input.
-     * @return split, a String array with 2 elements: name and date.
+     * @return components, a String array with 2 elements: name and date.
      * @throws WrongFormatException if task does not contain substring "/at".
      * @throws EmptyNameFieldException if task name is not given or all whitespace.
      * @throws EmptyDateException if date is not given or all whitespace.
@@ -203,9 +213,9 @@ public class AddCommand extends Command {
             throw new WrongFormatException();
         }
         String nameAndDate = line.substring(5);
-        String[] split = nameAndDate.split(" /at ");
-        String name = split[0];
-        String date = split[1];
+        String[] components = nameAndDate.split(" /at ");
+        String name = components[0];
+        String date = components[1];
         if (name.trim().length() == 0) {
             throw new EmptyNameFieldException();
         }
@@ -215,8 +225,8 @@ public class AddCommand extends Command {
         // Checks if date is of correct format
         LocalDate.parse(date);
         // Removes any leading whitespace from name.
-        split[0] = split[0].trim();
+        components[0] = name.trim();
 
-        return split;
+        return components;
     }
 }

@@ -39,7 +39,13 @@ public class FindCommand extends Command {
      */
     public void findItems(String line, ArrayList<Task> tasks) throws EmptyNameFieldException {
         String searchName = extractSearchName(line);
-        this.ui.printFoundItems(searchName, tasks);
+        ArrayList<Task> foundItems = new ArrayList<>();
+        for(int i = 0; i < Task.totalNumberOfTasks; i++) {
+            if (tasks.get(i).getName().contains(searchName)) {
+                foundItems.add(tasks.get(i));
+            }
+        }
+        this.ui.printFoundItems(foundItems);
     }
 
     /**
@@ -47,7 +53,7 @@ public class FindCommand extends Command {
      *
      * @param line user input.
      * @return substring to search.
-     * @throws EmptyNameFieldException if name is not given or is all whitespce.
+     * @throws EmptyNameFieldException if name is not given or is all whitespace.
      */
     public String extractSearchName(String line) throws EmptyNameFieldException {
         String searchName = line.substring(4).trim();

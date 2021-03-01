@@ -18,11 +18,13 @@ public class ListCommand extends Command {
         this.taskList = taskList;
         this.ui = ui;
     }
+
     @Override
     public void execute(Ui ui) {
         ArrayList<Task> tasks = this.taskList.getTasks();
         listItems(tasks);
     }
+
     /** Lists all items that were added to the list. */
     public void listItems(ArrayList<Task> tasks) {
         System.out.println(LIST_ITEMS_MESSAGE);
