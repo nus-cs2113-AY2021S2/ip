@@ -9,6 +9,10 @@ import duke.TaskList;
 import duke.tasks.Deadline;
 import duke.tasks.Task;
 
+/**
+ * Represents a command that searches for {@code Deadline} tasks in {@code TaskList} and
+ * displays any that fall on a given deadline date, when executed.
+ */
 public class FilterCommand extends Command {
     private TaskList targetTasks;
     private LocalDate targetDate;
@@ -34,6 +38,10 @@ public class FilterCommand extends Command {
         ui.printDeadlinesWithTargetDate(targetTasks);
     }
 
+    /**
+     * Checks if a {@code Deadline} is on a date matching the given {@code targetDate}.
+     * @param possibleTarget {@code Deadline} task found in {@code TaskList}
+     */
     public void checkTargetDate(Deadline possibleTarget) {
         LocalDate deadlineDate = possibleTarget.getDeadlineDate();
         if (deadlineDate.equals(targetDate)) {

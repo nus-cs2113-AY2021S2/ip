@@ -106,8 +106,6 @@ public class Ui {
     public static final String FILTERED_NO_RESULTS_MESSAGE
             = "Hmm, Panda couldn't find tasks in your list with that date...";
 
-
-
     // Other error messages
     public static final String LOADING_ERROR_MESSAGE
             = "Failed to load from disk, creating a new file!";
@@ -147,9 +145,8 @@ public class Ui {
     }
 
     /**
-     * Displays a newly-added task in {@code TaskList} when a {@code TaskCommand},
-     * {@code DeadlineCommand} or {@code EventCommand} is executed, by way of
-     * confirmation to the user.
+     * Displays the most-recently modified task in {@code TaskList},
+     * by way of confirmation to the user.
      */
     public void echo(TaskList tasks, String openingStatement) {
         System.out.print(openingStatement);
@@ -159,9 +156,24 @@ public class Ui {
     }
 
     /**
-     * Shows the number of items in {@code TaskList} when a {@code DoneCommand} or
-     * {@code DeleteCommand} is executed, so that the user can keep track of
-     * their tasks more easily.
+     * Displays all tasks in a {@code TaskList} in their full form, indexed.
+     * @param tasks list of tasks
+     * @param openingStatement message giving context on the type of {@code TaskList}
+     *                         being displayed (filtered or main list)
+     */
+    public void printList(TaskList tasks, String openingStatement) {
+        System.out.print(openingStatement);
+        for (int i=0; i<tasks.getTasksCount(); i++) {
+            System.out.print("\t" + (i + 1) + ". ");
+            tasks.getTaskAtIndex(i).printTask();
+            System.out.print(NEWLINE);
+        }
+        System.out.print(BORDER + NEWLINE);
+    }
+
+    /**
+     * Displays a filtered list of {@code Deadline} tasks in their condensed form
+     * (only deadline item and time).
      */
     public void printDeadlinesWithTargetDate(TaskList tasks) {
         System.out.print("Deadlines on this day:" + NEWLINE);
@@ -172,25 +184,17 @@ public class Ui {
         System.out.print(BORDER + NEWLINE);
     }
 
+    /**
+     * Shows the number of items in {@code TaskList} when a {@code DoneCommand} or
+     * {@code DeleteCommand} is executed, so that the user can keep track of
+     * their tasks more easily.
+     */
     public void printNumberOfTasks(int tasksCount) {
         System.out.print(NEWLINE + "There ");
         System.out.print(tasksCount > 1 ? "are " : "is ");
         System.out.print(tasksCount);
         System.out.print(tasksCount > 1 ? " tasks" : " task");
         System.out.print(" in your list." + NEWLINE);
-        System.out.print(BORDER + NEWLINE);
-    }
-
-    /**
-     * Displays the entire {@code TaskList}.
-     */
-    public void printList(TaskList tasks, String openingStatement) {
-        System.out.print(openingStatement);
-        for (int i=0; i<tasks.getTasksCount(); i++) {
-            System.out.print("\t" + (i + 1) + ". ");
-            tasks.getTaskAtIndex(i).printTask();
-            System.out.print(NEWLINE);
-        }
         System.out.print(BORDER + NEWLINE);
     }
 }

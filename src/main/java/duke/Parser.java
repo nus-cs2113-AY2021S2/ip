@@ -192,6 +192,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Creates the {@code Command} to extract any {@code Deadline} tasks from {@code TaskList}
+     * with matching deadline date as the given {@code date}.
+     *
+     * @param date date to search for
+     * @return new {@code FilterCommand} or {@code InvalidCommand} explaining why given input is invalid
+     */
     public Command prepareFilterCommand(String date) {
         try {
             LocalDate targetDate = LocalDate.parse(date);
