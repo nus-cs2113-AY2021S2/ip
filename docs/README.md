@@ -24,20 +24,15 @@ By: `Lee Han Yong Andy` Since: `February 2021`
 
 Track-The-Mushroom is a beginner-friendly console application to manage all your tasks.
 
-## 2. Quick Start in Intellij
+## 2. Quick Start
 
 Prerequisites: JDK 11, update Intellij to the most recent version.
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first)
-2. Set up the correct JDK version, as follows:
-    1. Click `Configure` > `Structure for New Projects` and then `Project Settings` > `Project` > `Project SDK`
-    2. If JDK 11 is listed in the drop-down, select it. If it is not, click `New...` and select the directory where you installed JDK 11
-    3. Click `OK`
-3. Import the project into Intellij as follows:
-    1. Click `Open or Import`.
-    2. Select the project directory, and click `OK`
-    3. If there are any further prompts, accept the defaults.
-4. After the importing is complete, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see a welcome message:
+1. Ensure that you have `Java 11` or higher version installed on your computer.
+2. Download the latest `TTM.jar` from [here](https://github.com/LeeHanYongAndy/ip/releases/tag/A-Jar).
+3. Move the `TTM.jar` into the folder of your choice. This would be your **base folder**.
+4. Run `command prompt` and navigate into the base folder containing the `TTM.jar`.
+5. Run the command `java -jar TTM.jar` and you should see the welcome message:
 
 ```
 Welcome to Track-The-Mushroom!
