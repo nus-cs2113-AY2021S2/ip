@@ -7,7 +7,7 @@ Duke allows the user to quickly track events and reminders through CLI
 
 ### Usage
 
-### `todo`
+### Adding a todo: `todo`
 
 Adds a todo into the task list
 
@@ -25,7 +25,7 @@ Got it. I've added this task:
 Now you have 8 tasks in the list.
 ```
 
-### `deadline`
+### Adding a deadline: `deadline`
 
 Adds a task with a deadline into the task list
 
@@ -43,7 +43,7 @@ Got it. I've added this task:
 Now you have 9 tasks in the list.
 ```
 
-### `event`
+### Adding an event: `event`
 
 Adds an event into the task list
 
@@ -61,14 +61,11 @@ Got it. I've added this task:
 Now you have 10 tasks in the list.
 ```
 
-### 2. Deleting todos, deadlines and events
-Should a user want to remove a task, deletion can be done
+### 2. Deleting todos, deadlines and events: `delete`
+
+Deletes a task at the given index
 
 ### Usage
-
-### `delete`
-
-Deletes a specified task at the given index
 
 Format: `delete [index]`
 
@@ -80,14 +77,10 @@ Expected outcome:
 
 `Done! One less worry for you :)`
 
-### 3. Listing all tasks
-For a quick overview on all added tasks
+### 3. Listing all tasks: `list`
+For a quick overview on all added tasks, printed in chronological order.
 
 ### Usage
-
-### `list`
-
-Will print all added tasks in chronological order
 
 Example of usage:
 
@@ -107,14 +100,12 @@ Here are the tasks in your list:
 	8. [T][✘] read book
 ```
 
-### 4. Marking task as done
+### 4. Marking task as done: `done`
 To signal that task is completed
 
 ### Usage
 
 ### `done`
-
-Will mark task as completed at given index
 
 Format: `done [index]`
 
@@ -136,14 +127,12 @@ Here are the tasks in your list:
 	8. [T][✘] read book`
 ```
 
-### 5. Searching for specified keyword
-Should a user want to search for related task, a keyword search is provided
+### 5. Searching for specified keyword: `find`
+Will search through task list for all tasks with specified keyword
 
 ### Usage
 
 ### `find`
-
-Will search through task list for all tasks with specified keyword
 
 Format: `find [keyword]`
 
@@ -160,7 +149,7 @@ Here are the matching tasks in your list:
 	3. [T][✓] read book`
 ```
 
-### 6. Exiting the program
+### 6. Exiting the program: `bye`
 Exits the program
 
 Format: `bye`
