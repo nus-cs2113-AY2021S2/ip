@@ -13,7 +13,8 @@ Will add a todo into the task list
 
 Example of usage: 
 
-`todo [something you need to do e.g read book]`
+todo [something you need to do e.g read book]
+`todo read book`
 
 Expected outcome:
 
