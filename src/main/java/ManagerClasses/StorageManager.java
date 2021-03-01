@@ -12,13 +12,25 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
+/**
+ * Manages the saving and retrieving of data from storage files for Duke.
+ */
 public class StorageManager {
     private final TaskManager taskManager;
 
+    /**
+     * Constructor for StorageManager class. The taskManager needs to be passed here so as to be able to update
+     * the list of tasks that are stored and updated in taskManager while Duke is running.
+     * @param taskManager the taskManager that was initiated in the inputManager class.
+     */
     public StorageManager(TaskManager taskManager) {
         this.taskManager = taskManager;
     }
 
+    /**
+     * Saves tasks into an existing data text file in the data folder that should have been created when
+     * importTasksFromTxtFile() method is called when Duke starts.
+     */
     public void saveTasksInTxtFile() {
         String currentPath = System.getProperty("user.dir");
         Path filePath = Paths.get(currentPath, "data", "duke.txt");
@@ -31,6 +43,10 @@ public class StorageManager {
         }
     }
 
+    /**
+     * Imports tasks from an existing data text file if it exists or creates one if it does not already exist.
+     * Calls the method to parse the text file.
+     */
     public void importTasksFromTxtFile() {
         String currentPath = System.getProperty("user.dir");
         Path folderPath = Paths.get(currentPath, "data");
@@ -42,6 +58,11 @@ public class StorageManager {
         parseTxtFile(filePath);
     }
 
+    /**
+     * Creates a new folder using the folderPath passed in and creates a file in it with the path of filePath.
+     * @param folderPath the folder path where the new data files are going to be stored in.
+     * @param filePath the file path where data is stored.
+     */
     void createPath(Path folderPath, Path filePath) {
         File file = new File(String.valueOf(folderPath));
         try {
@@ -56,6 +77,11 @@ public class StorageManager {
         }
     }
 
+    /**
+     * Parses the data file to read each line and convert it into 'Task' type which is then stored in the tasks list
+     * from the taskManager.
+     * @param filePath the file path where data is stored.
+     */
     void parseTxtFile(Path filePath) {
         try (Scanner inputFileScanner = new Scanner(new File(String.valueOf(filePath)))) {
             while (inputFileScanner.hasNextLine()) {
