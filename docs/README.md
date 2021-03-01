@@ -55,9 +55,9 @@ Example of usage:
 
 Expected outcome:
 
-`Got it. I've added this task:` \ 
-` [E][ ] project meeting (at: Mon 2-4pm)` \
-`Now you have 7 tasks in the list.`
+`Got it. I've added this task:`\ 
+ ` [E][ ] project meeting (at: Mon 2-4pm)`\
+ `Now you have 7 tasks in the list.`
  
 ### `delete` - Deletes the task specified from the current tasks list.
 
@@ -67,9 +67,9 @@ Example of usage:
 
 Expected outcome:
 
-`Noted. I've removed this task:` \ 
-` [E][ ] project meeting (at: Aug 6th 2-4pm)` \
-`Now you have 4 tasks in the list.`
+`Noted. I've removed this task:`\ 
+ ` [E][ ] project meeting (at: Aug 6th 2-4pm)`\
+ `Now you have 4 tasks in the list.`
 
 ### `list` - To display the tasks list currently in the program.
 
@@ -92,8 +92,8 @@ Example of usage:
 
 Expected outcome:
 
-`Nice! I've marked this task as done:` \ 
-` [T][X] return book`
+`Nice! I've marked this task as done:`\ 
+ ` [T][X] return book`
  
 ### `find` - To search through the current tasks list to find any task matching a keyword.
 
