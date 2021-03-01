@@ -1,5 +1,7 @@
 # User Guide
 
+[Adding a todo](#adding-a-todo)
+
 ## Features 
 
 ### 1. Adding todos, deadlines and events
