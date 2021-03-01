@@ -23,4 +23,20 @@ public class Tasks {
         this.taskType = taskType;
     }
 
+    public void setCommandDescription(String cmd){
+        this.commandDescription = cmd;
+    }
+
+    public void setDone() {
+        isDone = true;
+    }
+
+    public String toString(){
+        if (!this.isDone){
+            return "[✗]" + this.commandDescription;
+        } else {
+            return "[✓]" + this.commandDescription;
+        }
+    }
+
 }

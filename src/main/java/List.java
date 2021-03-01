@@ -2,7 +2,8 @@
 
 import java.util.ArrayList;
 
-public class List extends Commands{
+
+public class List extends Commands {
     protected int i =1;
     protected ArrayList<Tasks> listTasks;
     public List(ArrayList<Tasks> listTasks){

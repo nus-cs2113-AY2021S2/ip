@@ -2,7 +2,9 @@
 
 import java.util.ArrayList;
 
-public class Done extends Commands{
+
+public class Done extends Commands {
+
     protected ArrayList<Tasks> listTasks;
     protected int indexNumber =0;
     protected boolean isDone = false;
@@ -21,7 +23,9 @@ public class Done extends Commands{
     public void toPrintDone(){
         displayLine();
         System.out.println("Nice! I've marked this task as done: ");
-        System.out.println(" [X] "+ doneInput);
+
+        System.out.println(listTasks.get(indexNumber-1));
+//        System.out.println(" [X] "+ doneInput);
         displayLine();
     }
 }
