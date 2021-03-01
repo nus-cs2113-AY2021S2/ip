@@ -6,10 +6,10 @@ import duke.commands.Command;
  * Starts the Duke application and begins interactions with user.
  */
 public class Duke {
-    private Storage storage;
-    private TaskList tasks;
-    private Ui ui;
-    private Parser parser;
+    private final Storage storage;
+    private final TaskList tasks;
+    private final Ui ui;
+    private final Parser parser;
 
     /**
      * Initialises required objects and loads any existing data from the storage file.

@@ -10,12 +10,12 @@ import duke.tasks.Deadline;
 import duke.tasks.Task;
 
 /**
- * Represents a command that searches for {@code Deadline} tasks in {@code TaskList} and
+ * Represents a command that searches for any {@code Deadline} tasks in {@code TaskList} and
  * displays any that fall on a given deadline date, when executed.
  */
 public class FilterCommand extends Command {
-    private TaskList targetTasks;
-    private LocalDate targetDate;
+    private final TaskList targetTasks;
+    private final LocalDate targetDate;
 
     public FilterCommand(TaskList tasks, LocalDate targetDate) {
         super.tasks = tasks;

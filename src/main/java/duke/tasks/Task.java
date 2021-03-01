@@ -9,7 +9,7 @@ import static duke.common.Constants.DONE_STATUS_AS_INT;
  * This is also the base class for all three task types in this application.
  */
 public class Task {
-    private String item;
+    private final String item;
     private String status;
     private String type;
 

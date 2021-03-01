@@ -148,11 +148,11 @@ public class Ui {
      * Displays the most-recently modified task in {@code TaskList},
      * by way of confirmation to the user.
      */
-    public void echo(TaskList tasks, String openingStatement) {
+    public void echo(TaskList tasks, int taskIndex, String openingStatement) {
         System.out.print(openingStatement);
         System.out.print("\t");
-        tasks.getTaskAtIndex(tasks.getTasksCount() - 1).printTask();
-        printNumberOfTasks(tasks.getTasksCount());
+        tasks.getTaskAtIndex(taskIndex).printTask();
+        System.out.print(NEWLINE);
     }
 
     /**
@@ -190,11 +190,15 @@ public class Ui {
      * their tasks more easily.
      */
     public void printNumberOfTasks(int tasksCount) {
-        System.out.print(NEWLINE + "There ");
+        System.out.print("There ");
         System.out.print(tasksCount > 1 ? "are " : "is ");
         System.out.print(tasksCount);
         System.out.print(tasksCount > 1 ? " tasks" : " task");
         System.out.print(" in your list." + NEWLINE);
+        System.out.print(BORDER + NEWLINE);
+    }
+
+    public void printBorder() {
         System.out.print(BORDER + NEWLINE);
     }
 }

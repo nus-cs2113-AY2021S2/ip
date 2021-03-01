@@ -4,7 +4,7 @@ package duke.commands;
  * Represents a command that displays a message explaining why given input is invalid.
  */
 public class InvalidCommand extends Command {
-    private String errorMessage;
+    private final String errorMessage;
 
     public InvalidCommand(String errorMessage) {
         this.errorMessage = errorMessage;

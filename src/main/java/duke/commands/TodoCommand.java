@@ -11,8 +11,8 @@ import duke.tasks.Task;
  * {@code Task} to {@code TaskList} when executed.
  */
 public class TodoCommand extends Command {
-    private String taskDescription;
-    private String taskStatus;
+    private final String taskDescription;
+    private final String taskStatus;
 
     public TodoCommand(TaskList tasks, String taskDescription, String taskStatus) {
         super.tasks = tasks;
@@ -26,6 +26,7 @@ public class TodoCommand extends Command {
         task.setStatus(taskStatus);
         task.setType(TODO_TASK_TYPE);
         tasks.addTaskToList(task);
-        ui.echo(tasks, PRINT_NEW_TASK_STATEMENT);
+        ui.echo(tasks, tasks.getTasksCount() - 1, PRINT_NEW_TASK_STATEMENT);
+        ui.printBorder();
     }
 }

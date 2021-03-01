@@ -12,9 +12,9 @@ import duke.tasks.Task;
  * {@code Event} to {@code TaskList} when executed.
  */
 public class EventCommand extends Command {
-    private String taskDescription;
-    private String taskStatus;
-    private String taskTiming;
+    private final String taskDescription;
+    private final String taskStatus;
+    private final String taskTiming;
 
     public EventCommand(TaskList tasks, String taskDescription, String taskStatus, String taskTiming) {
         super.tasks = tasks;
@@ -29,6 +29,7 @@ public class EventCommand extends Command {
         task.setStatus(taskStatus);
         task.setType(EVENT_TASK_TYPE);
         tasks.addTaskToList(task);
-        ui.echo(tasks, PRINT_NEW_TASK_STATEMENT);
+        ui.echo(tasks, tasks.getTasksCount() - 1, PRINT_NEW_TASK_STATEMENT);
+        ui.printBorder();
     }
 }

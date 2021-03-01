@@ -10,7 +10,7 @@ import duke.TaskList;
  *  {@code TaskList} as completed when executed.
  */
 public class DoneCommand extends Command {
-    private int taskIndex;
+    private final int taskIndex;
 
     public DoneCommand(TaskList tasks, int taskIndex) {
         super.tasks = tasks;
@@ -19,7 +19,8 @@ public class DoneCommand extends Command {
 
     @Override
     public void execute() {
-        tasks.getTaskAtIndex(taskIndex-1).setStatus(DONE_STATUS);
-        ui.echo(tasks, PRINT_DONE_TASK_STATEMENT);
+        tasks.getTaskAtIndex(taskIndex - 1).setStatus(DONE_STATUS);
+        ui.echo(tasks, taskIndex - 1, PRINT_DONE_TASK_STATEMENT);
+        ui.printNumberOfTasks(tasks.getTasksCount());
     }
 }

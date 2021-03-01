@@ -3,11 +3,13 @@ package duke.commands;
 import duke.TaskList;
 import duke.Ui;
 
+import static duke.Ui.PRINT_DELETED_TASK_STATEMENT;
+
 /**
- * Represents a command that removes a {@code Task} from {@TaskList} when executed.
+ * Represents a command that removes a {@code Task} from {@code TaskList} when executed.
  */
 public class DeleteCommand extends Command {
-    private int taskIndex;
+    private final int taskIndex;
 
     public DeleteCommand(TaskList tasks, int taskIndex) {
         super.tasks = tasks;
@@ -16,8 +18,8 @@ public class DeleteCommand extends Command {
 
     @Override
     public void execute() {
-        tasks.getTaskAtIndex(taskIndex-1).printTask();
-        tasks.deleteTaskFromList(taskIndex-1);
-        ui.echo(tasks, Ui.PRINT_DELETED_TASK_STATEMENT);
+        ui.echo(tasks, taskIndex - 1, PRINT_DELETED_TASK_STATEMENT);
+        tasks.deleteTaskFromList(taskIndex - 1);
+        ui.printNumberOfTasks(tasks.getTasksCount());
     }
 }

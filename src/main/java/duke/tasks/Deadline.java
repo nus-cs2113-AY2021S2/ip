@@ -8,8 +8,8 @@ import java.time.format.DateTimeFormatter;
  * Represents a task with a deadline, which consists of date and time.
  */
 public class Deadline extends Task {
-    private LocalDate deadlineDate;
-    private LocalTime deadlineTime;
+    private final LocalDate deadlineDate;
+    private final LocalTime deadlineTime;
 
     public Deadline(String item, LocalDate deadlineDate, LocalTime deadlineTime) {
         super(item);

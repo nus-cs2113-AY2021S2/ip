@@ -5,7 +5,7 @@ package duke.tasks;
  * such as when it will happen, hence is considered an event.
  */
 public class Event extends Task {
-    private String time;
+    private final String time;
 
     public Event(String item, String time) {
         super(item);

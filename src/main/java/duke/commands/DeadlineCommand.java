@@ -15,10 +15,10 @@ import duke.tasks.Task;
  * {@code Deadline} to {@code TaskList} when executed.
  */
 public class DeadlineCommand extends Command {
-    private String taskDescription;
-    private String taskStatus;
-    private LocalDate deadlineDate;
-    private LocalTime deadlineTime;
+    private final String taskDescription;
+    private final String taskStatus;
+    private final LocalDate deadlineDate;
+    private final LocalTime deadlineTime;
 
     public DeadlineCommand(TaskList tasks, String description, String status, LocalDate date, LocalTime time) {
         super.tasks = tasks;
@@ -34,6 +34,7 @@ public class DeadlineCommand extends Command {
         task.setStatus(taskStatus);
         task.setType(DEADLINE_TASK_TYPE);
         tasks.addTaskToList(task);
-        ui.echo(tasks, PRINT_NEW_TASK_STATEMENT);
+        ui.echo(tasks, tasks.getTasksCount() - 1, PRINT_NEW_TASK_STATEMENT);
+        ui.printBorder();
     }
 }

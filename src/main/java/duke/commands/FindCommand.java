@@ -7,9 +7,13 @@ import duke.TaskList;
 import duke.Ui;
 import duke.tasks.Task;
 
+/**
+ * Represents a command that searches for tasks in the main {@code TaskList}
+ * containing a given keyword and displays any in a new {@code TaskList}, when executed.
+ */
 public class FindCommand extends Command {
-    private TaskList targetTasks;
-    private String targetKeyword;
+    private final TaskList targetTasks;
+    private final String targetKeyword;
 
     public FindCommand(TaskList tasks, String keyword) {
         super.tasks = tasks;

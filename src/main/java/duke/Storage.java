@@ -1,5 +1,7 @@
 package duke;
 
+import static duke.Ui.LOADING_ERROR_MESSAGE;
+import static duke.Ui.SAVING_ERROR_MESSAGE;
 import static duke.common.Constants.DEFAULT_STATUS;
 import static duke.common.Constants.DONE_STATUS;
 import static duke.common.Constants.TODO_TASK_TYPE;
@@ -22,9 +24,9 @@ import duke.commands.TodoCommand;
  * Represents the file used to store the {@code TaskList}.
  */
 public class Storage {
-    private String filePath;
+    private final String filePath;
     private TaskList tasks;
-    private Ui ui;
+    private final Ui ui;
 
     public Storage(String filePath) {
         tasks = new TaskList();
@@ -47,7 +49,7 @@ public class Storage {
             }
             return convertLinesToList(f);
         } catch (IOException e) {
-            ui.printErrorMessage(ui.LOADING_ERROR_MESSAGE);
+            ui.printErrorMessage(LOADING_ERROR_MESSAGE);
             return new TaskList();
         }
     }
@@ -62,7 +64,7 @@ public class Storage {
             fw.write(textToOverwrite);
             fw.close();
         } catch (IOException e) {
-            ui.printErrorMessage(ui.SAVING_ERROR_MESSAGE);
+            ui.printErrorMessage(SAVING_ERROR_MESSAGE);
         }
     }
 
