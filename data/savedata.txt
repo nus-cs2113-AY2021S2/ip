@@ -1,0 +1,9 @@
+Duke's Most Recent Task List
+D | 1 | Kidnap the chancellor || 20-02-2020 01:00 PM
+T | 0 | Learn about Jacen Solo
+T | 1 | Find out about Tenel-Ka and Allana
+T | 0 | Figure out what happened to Darth Krayt
+D | 0 | Blow up Death Star II || 20-02-2020 01:00 PM
+E | 0 | Hear the tragedy of Darth Plagueis the Wise || 20-02-2020 01:00 PM
+E | 1 | use the force Luke || 20-02-2020 01:00 PM
+E | 0 | use the force anakin || 02-02-2021 08:00 AM

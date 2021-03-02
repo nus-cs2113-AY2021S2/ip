@@ -5,3 +5,44 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+-----------------------------------
+Hello there! I'm duke.controller.Duke
+I have the high ground! How may I help you?
+-----------------------------------
+Roger Roger. The following task has been added:
+duke.task.Todo : [ ? ]  Manika Hennedige: Answer CS2113 tutorial questions
+You now have 1 tasks in your list!
+-----------------------------------
+What is thy bidding, my master?
+-----------------------------------
+Roger Roger. The following task has been added:
+duke.task.Deadline : [ ? ]  weekly CS2113 || Due by: Monday 9pm
+You now have 2 tasks in your list!
+-----------------------------------
+What is thy bidding, my master?
+-----------------------------------
+This is your current list:
+1: duke.task.Todo : [ ? ]  Manika Hennedige: Answer CS2113 tutorial questions
+2: duke.task.Deadline : [ ? ]  weekly CS2113 || Due by: Monday 9pm
+-----------------------------------
+What is thy bidding, my master?
+-----------------------------------
+Roger Roger. The following task has been added:
+duke.task.Event : [ ? ]  CS2113 || Happening on: Friday 4-6pm
+You now have 3 tasks in your list!
+-----------------------------------
+What is thy bidding, my master?
+-----------------------------------
+The Force is with you! The following task has been marked as done:
+duke.task.Todo : [ ? ]  Manika Hennedige: Answer CS2113 tutorial questions
+You still have 2 tasks to complete in your list!
+-----------------------------------
+What is thy bidding, my master?
+-----------------------------------
+This is your current list:
+1: duke.task.Todo : [ ? ]  Manika Hennedige: Answer CS2113 tutorial questions
+2: duke.task.Deadline : [ ? ]  weekly CS2113 || Due by: Monday 9pm
+3: duke.task.Event : [ ? ]  CS2113 || Happening on: Friday 4-6pm
+-----------------------------------
+What is thy bidding, my master?
+-----------------------------------

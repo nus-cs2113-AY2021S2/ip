@@ -1,0 +1,9 @@
+todo Manika Hennedige: Answer CS2113 tutorial questions
+deadline weekly CS2113 || Monday 9pm
+list
+event CS2113 || Friday 4-6pm
+done 1
+list
+deadline kill all the jedi ||
+event master the force
+event || master the Force
