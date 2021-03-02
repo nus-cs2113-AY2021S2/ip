@@ -41,7 +41,9 @@ public class Storage {
     }
 
     /**
-     * Checks if text file exists
+     * Checks if textfile exists, else create new file.
+     *
+     * @return True if file exists or text file is created.
      */
     public boolean retrieveTextFile() {
         boolean hasTextFile = false;
@@ -60,11 +62,11 @@ public class Storage {
     }
 
     /**
-     * Loads in tasks from duke.txt
+     * Loads information from data.txt into Duke's list without change.
      *
-     * @throws FileNotFoundException if duke.txt does not exist
+     * @return Loaded tasks into Duke's list unformatted.
      */
-    public ArrayList<String> loadData(){
+    public ArrayList<String> loadData() {
         ArrayList<String> tasks = new ArrayList<>();
         try {
             File data = new File(path);
@@ -85,9 +87,8 @@ public class Storage {
      * Updates and saves new tasks to duke.txt.
      *
      * @param tasks Task list to be updated.
-     * @throws IOException if data cannot be saved.
      */
-    public static void saveData(ArrayList<Task> tasks){
+    public static void saveData(ArrayList<Task> tasks) {
         try {
             FileWriter fileWriter = new FileWriter(path);
             for (int i = 0; i < tasks.size(); ++i) {

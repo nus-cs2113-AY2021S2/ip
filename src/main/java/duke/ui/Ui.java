@@ -48,27 +48,57 @@ public class Ui {
         System.out.println("Text file already exists.");
     }
 
-    public static void printDivider(){
+    public static void printDivider() {
         System.out.println(DIVIDER);
     }
+
+    /**
+     * Lists out the commands that the user can use.
+     *
+     * @return List of Commands.
+     */
+    public static void printHelpCommandList() {
+        System.out.println("\tHere are the commands you can use:\n" +
+                "\t\t+ To add tasks:\n" +
+                "\t\t\t\"todo <todo task name>\"\n" +
+                "\t\t\t\"deadline <deadline task name> /by <YYYY-MM-DD HH:mm>\"\n" +
+                "\t\t\t\"event <event task name> /at <YYYY-MM-DD HH:mm>\"\n\n" +
+                "\t\t- To delete tasks:\n" +
+                "\t\t\t\"delete <index of task>\"\n\n" +
+                "\t\t✓ To mark tasks as done:\n" +
+                "\t\t\t\"done <index of task>\"\n\n" +
+                "\t\t= To list the tasks on your task list:\n" +
+                "\t\t\t\"list\"\n\n" +
+                "\t\tỎ To find tasks on your task list:\n" +
+                "\t\t\t\"find <keyword>\"\n\n" +
+                "\t\t₿ To exit Duke:\n" +
+                "\t\t\t\"bye\"");
+    }
+
+    /**
+     * Greets the user upon entering Duke.
+     *
+     * @return Greetings.
+     */
     public void printGreeting() {
         System.out.print(LOGO);
         System.out.print("Hello! I'm Duke\nWhat can I do for you?\n");
     }
 
     public static void printSearchWordNotFoundMessage() {
-        System.out.println("No matches found! Please try again.");
+        System.out.println("\tNo matches found! Please try another keyword.");
     }
 
-    public static void printTask(ArrayList<Task> tasks, int taskNumber){
+    public static void printTask(ArrayList<Task> tasks, int taskNumber) {
         System.out.println("\t" + (taskNumber + 1) + "." +
                 tasks.get(taskNumber).toString());
     }
 
-    public static void printAddedTaskMessage(Task currentTask){
+    public static void printAddedTaskMessage(Task currentTask) {
         System.out.println("\tGot it. I've added this task:\n\t\t" +
                 currentTask.toString());
     }
+
     /**
      * Checks number of tasks for printing fluency
      */
@@ -78,15 +108,21 @@ public class Ui {
         }
         return " task ";
     }
-    public static void printRemainingTaskMessage(ArrayList<Task> tasks){
+
+    public static void printRemainingTaskMessage(ArrayList<Task> tasks) {
         System.out.print("\tNow you have " + tasks.size() + checkSingular(tasks) + "in your list.\n");
     }
 
-    public static void printMarkedTaskMessage(Task currentTask){
+    public static void printMarkedTaskMessage(Task currentTask) {
         System.out.print("\tNice! I've marked this task as done:" +
                 "\n\t" + currentTask.toString() + "\n");
     }
 
+    /**
+     * Exits Duke.
+     *
+     * @return Exit output.
+     */
     public void printExitMessage() {
         System.out.print("Bye. Hope to see you again soon!\n");
     }
