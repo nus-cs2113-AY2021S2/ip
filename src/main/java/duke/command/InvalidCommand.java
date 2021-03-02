@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.exception.EmptyDescriptionException;
 import duke.exception.EmptyStringException;
-import duke.exception.UnmatchListException;
+import duke.exception.UnmatchedListException;
 
 /**
  * Represent a invalid command entered the user.
@@ -40,7 +40,7 @@ public class InvalidCommand extends Command {
             message = "☹ OOPS!!! The description of " + commandWord + " must comes with a date.\n";
         } else if (error instanceof EmptyDescriptionException) {
             message = "☹ OOPS!!! The description of " + commandWord + " cannot be empty.\n";
-        } else if (error instanceof UnmatchListException) {
+        } else if (error instanceof UnmatchedListException) {
             message = "☹ OOPS!!! There is no matching task in the list.\n";
         } else {
             message = "☹ OOPS!!! Sorry I don't understand what you mean.\n";

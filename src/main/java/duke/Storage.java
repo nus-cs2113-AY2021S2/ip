@@ -9,6 +9,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -18,10 +20,7 @@ import java.util.Scanner;
  */
 public class Storage {
 
-    private final String filePath;
-
-    private static final String USER_DIRECTORY = System.getProperty("user.dir");
-    private static final String FILE_DIRECTORY = USER_DIRECTORY + "/src/data";
+    private final Path filePath;
 
     private static final int TASK_TYPE_INDEX = 0;
     private static final int DONE_INDEX = 1;
@@ -32,14 +31,15 @@ public class Storage {
     private static final String EVENT_TYPE = "[E]";
     private static final String DEADLINE_TYPE = "[D]";
     private static final String TODO_TYPE = "[T]";
+    private static final String separator = " | ";
 
     /**
      * Construct Storage using a file path.
      *
-     * @param filePath the file path specify by the user.
+     * @param path the default path to store task.
      */
-    public Storage (String filePath) {
-        this.filePath = filePath;
+    public Storage (String path) {
+        this.filePath = new File(path).toPath();
     }
 
     /**
@@ -57,26 +57,30 @@ public class Storage {
     /**
      * Save the TaskList into a local file.
      *
-     * @param tasks the supply data to be saved.
+     * @param tasks he supply data to be saved.
      */
-    public void save(TaskList tasks) {
-        try {
-            writeToFile(tasks);
-        } catch (IOException ioException) {
-            System.out.print("Something went wrong... System unable to find directory\n");
-        }
+    public void save(TaskList tasks) throws IOException {
+        writeToFile(tasks);
     }
 
     /**
      * Creates a directory from the specific file directory.
      * if the directory already exist, then no action is done.
      */
-    public void createDirectory() {
-        new File(FILE_DIRECTORY).mkdir();
+    public void createDirectory() throws IOException {
+        Path directory = filePath.getParent();
+
+        if (directory != null && !Files.isDirectory(directory)) {
+            Files.createDirectories(directory);
+        }
+
+        if (!Files.isRegularFile(filePath)) {
+            Files.createFile(filePath);
+        }
     }
 
     private void readFileContents(ArrayList<Task> tasksData) throws FileNotFoundException {
-        File file = new File(filePath);
+        File file = new File(String.valueOf(filePath));
         Scanner scanner = new Scanner(file);
         while(scanner.hasNext()){
             String data = scanner.nextLine();
@@ -122,23 +126,22 @@ public class Storage {
     }
 
     private void writeToFile(TaskList tasks) throws IOException {
-        String fileDestination = USER_DIRECTORY + "\\" + filePath;
-        FileWriter fileWriter = new FileWriter(fileDestination);
+        FileWriter fileWriter = new FileWriter(String.valueOf(filePath));
         for (int i = 0; i < tasks.size(); ++i) {
             switch (tasks.get(i).getTaskType()) {
             case EVENT_TYPE:
                 //Fallthrough
             case DEADLINE_TYPE:
                 tasks.get(i).getDate();
-                fileWriter.write(tasks.get(i).getTaskType() + " | "
-                        + tasks.get(i).getIsDone() + " | "
-                        + tasks.get(i).getDescription() + " | "
+                fileWriter.write(tasks.get(i).getTaskType() + separator
+                        + tasks.get(i).getIsDone() + separator
+                        + tasks.get(i).getDescription() + separator
                         + tasks.get(i).getDate()
                         + System.lineSeparator());
                 break;
             case TODO_TYPE:
-                fileWriter.write(tasks.get(i).getTaskType() + " | "
-                        + tasks.get(i).getIsDone() + " | "
+                fileWriter.write(tasks.get(i).getTaskType() + separator
+                        + tasks.get(i).getIsDone() + separator
                         + tasks.get(i).getDescription()
                         + System.lineSeparator());
             }

@@ -10,7 +10,8 @@ public class DoneCommand extends Command {
     public static final String DONE_COMMAND = "done";
 
     /**
-     * Construct DoneCommand using task number.
+     * Construct DoneCommand instance.
+     *
      * @param taskNumber the position of Task to be mark as done in TaskList.
      */
     public DoneCommand(int taskNumber) {

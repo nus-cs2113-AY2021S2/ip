@@ -4,6 +4,7 @@ import duke.command.Command;
 import duke.command.CommandResult;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 /**
  * <h1>Duke</h1>
@@ -15,7 +16,7 @@ import java.io.FileNotFoundException;
  * @version 0.2
  */
 public class Duke {
-    private Ui ui;
+    private final Ui ui;
     private TaskList tasks;
     private Storage storage;
 
@@ -33,10 +34,15 @@ public class Duke {
             ui.showLoadSuccess();
         } catch (FileNotFoundException fileNotFoundException) {
             ui.showLoadError();
-            storage.createDirectory();
+            try {
+                storage.createDirectory();
+                ui.showCreateDirectorySuccess();
+            } catch (IOException ioException) {
+                ui.showFailToCreateDirectory();
+            }
             tasks = new TaskList();
         }
-    }
+     }
 
     public static void main(String[] args) {
         new Duke("src/data/tasks.txt").run();
@@ -61,7 +67,11 @@ public class Duke {
             }
         }
         ui.showExitMessage();
-        storage.save(tasks);
-        ui.showSavedMessage();
+        try {
+            storage.save(tasks);
+            ui.showSaveSuccess();
+        } catch (IOException ioException) {
+            ui.showSaveFailed();
+        }
     }
 }

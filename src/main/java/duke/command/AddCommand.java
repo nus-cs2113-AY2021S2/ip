@@ -19,7 +19,7 @@ public class AddCommand extends Command {
     private static final String EMPTY_DESCRIPTION = "";
 
     /**
-     * Construct AddCommand using input values after being parsed.
+     * Construct AddCommand after parsed input.
      *
      * @param commandWord the command to identify the type of task.
      * @param description the description to be added to the TaskList.

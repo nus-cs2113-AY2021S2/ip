@@ -10,7 +10,8 @@ public class DeleteCommand extends Command {
     public static final String DELETE_COMMAND = "delete";
 
     /**
-     * Construct DeleteCommand using task number
+     * Construct DeleteCommand instance.
+     *
      * @param taskNumber the position of Task to be deleted in TaskList.
      */
     public DeleteCommand(int taskNumber) {

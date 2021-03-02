@@ -1,7 +1,5 @@
 package duke;
 
-import duke.exception.EmptyStringException;
-
 import java.io.InputStream;
 import java.io.PrintStream;
 
@@ -27,18 +25,10 @@ public class Ui {
         this.output = output;
     }
 
-    /**
-     * Reads the lines that user entered.
-     *
-     * @return the line that user entered.
-     */
     public String getUserInput() {
         return input.nextLine();
     }
 
-    /**
-     * Print welcome message to user when starting the application.
-     */
     public void showWelcomeMessage() {
         System.out.print(LINE_PREFIX + BORDER
                 + LINE_PREFIX + "Welcome to Task Tracker!\n"
@@ -48,7 +38,7 @@ public class Ui {
     }
 
     /**
-     * Print results of the message to user after entering their input.
+     * Format the result of the command and print the message.
      *
      * @param message results of user command.
      */
@@ -60,21 +50,13 @@ public class Ui {
         output.print(BORDER);
     }
 
-    /**
-     * Print load failure message when system unable load the file.
-     */
     public void showLoadError() {
         System.out.print(LINE_PREFIX +BORDER
                 + LINE_PREFIX + "System unable to find directory..." + "\n"
                 + LINE_PREFIX + "Load failed.\n"
-                + LINE_PREFIX + "Creating new directory...\n"
-                + LINE_PREFIX + "Directory created successfully.\n"
                 + LINE_PREFIX + BORDER);
     }
 
-    /**
-     * Print load success message when system able to load the file.
-     */
     public void showLoadSuccess() {
         System.out.print(LINE_PREFIX +BORDER
                 + LINE_PREFIX + "System able to find directory..." + "\n"
@@ -82,31 +64,41 @@ public class Ui {
                 + LINE_PREFIX + BORDER);
     }
 
-    /**
-     * Print error message when user entered empty string.
-     */
     public void showErrorMessage() {
         String errorMessage = "☹ OOPS!!! Sorry I don't understand what you mean.\n";
         showMessage(errorMessage);
     }
 
-    /**
-     * Print exit message when user entered exit command.
-     */
     public void showExitMessage() {
         System.out.print(LINE_PREFIX +BORDER
                 + LINE_PREFIX + "Good Bye. Hope to see you again soon!\n"
                 + LINE_PREFIX + BORDER);
     }
 
-    /**
-     * Print save message when system able to save the data successful.
-     */
-    public void showSavedMessage() {
+    public void showSaveSuccess() {
         System.out.print(LINE_PREFIX +BORDER
                 + LINE_PREFIX + "Data has been saved.\n"
                 + LINE_PREFIX + BORDER);
     }
+
+    public void showSaveFailed() {
+        System.out.print(LINE_PREFIX +BORDER
+                + LINE_PREFIX + "Save failed. System unable to find directory\n"
+                + LINE_PREFIX + BORDER);
+    }
+
+    public void showCreateDirectorySuccess() {
+        System.out.print(LINE_PREFIX +BORDER
+                + LINE_PREFIX + "Creating new directory...\n"
+                + LINE_PREFIX + "Directory created successfully.\n"
+                + LINE_PREFIX + BORDER);
+    }
+    public void showFailToCreateDirectory() {
+        System.out.print(LINE_PREFIX +BORDER
+                + LINE_PREFIX + "Unable create directory.. Please try again later. \n"
+                + LINE_PREFIX + BORDER);
+    }
+
 
 
 }

@@ -1,7 +1,7 @@
 package duke.command;
 
 import duke.exception.EmptyDescriptionException;
-import duke.exception.UnmatchListException;
+import duke.exception.UnmatchedListException;
 import duke.task.Task;
 
 /**
@@ -14,6 +14,13 @@ public class FindCommand extends Command{
     private static final int COUNTER_START_VALUE = 1;
     private boolean isMatch;
 
+
+    /**
+     * Construct FindCommand instance.
+     *
+     * @param description the keyword to search in TaskList
+     * @throws EmptyDescriptionException if description entered by user are empty.
+     */
     public FindCommand (String description) throws EmptyDescriptionException {
         this.description = description;
         this.isMatch = false;
@@ -26,8 +33,8 @@ public class FindCommand extends Command{
     public CommandResult execute() {
         try {
             return new CommandResult(findMessage());
-        } catch (UnmatchListException unmatchListException) {
-            return new InvalidCommand(commandWord, description, unmatchListException).execute();
+        } catch (UnmatchedListException unmatchedListException) {
+            return new InvalidCommand(commandWord, description, unmatchedListException).execute();
         }
     }
 
@@ -45,7 +52,7 @@ public class FindCommand extends Command{
         return isMatch;
     }
 
-    private String findMessage() throws UnmatchListException {
+    private String findMessage() throws UnmatchedListException {
         StringBuilder find = new StringBuilder("Here are the matching tasks in your list:\n");
         int count = COUNTER_START_VALUE;
         for (int i = 0; i < tasks.size(); ++i) {
@@ -57,7 +64,7 @@ public class FindCommand extends Command{
         }
 
         if (getIsMatch() == false) {
-            throw new UnmatchListException();
+            throw new UnmatchedListException();
         }
 
         return find.toString();
