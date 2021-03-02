@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 public class Todo extends Task {
 
@@ -11,7 +11,7 @@ public class Todo extends Task {
         return "T";
     }
 
-    public String toString(){
+    public String toString() {
         return this.description;
     }
 }

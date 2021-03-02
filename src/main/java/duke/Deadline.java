@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 public class Deadline extends Task {
 
@@ -11,7 +11,7 @@ public class Deadline extends Task {
         return "D";
     }
 
-    public String toString(){
-        return this.description + " (by: " + this.time + ")" ;
+    public String toString() {
+        return this.description + " (by: " + this.time + ")";
     }
 }

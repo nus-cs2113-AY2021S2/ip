@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 public class Event extends Task {
 
@@ -11,7 +11,7 @@ public class Event extends Task {
         return "E";
     }
 
-    public String toString(){
-        return this.description + " (at: " + this.time + ")" ;
+    public String toString() {
+        return this.description + " (at: " + this.time + ")";
     }
 }
