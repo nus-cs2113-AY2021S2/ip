@@ -165,11 +165,12 @@ There is no need to manually load the data file with the list contents.
  **Command** | **Format, examples** 
  --- | ---
  **List**| `list` |
- **Add TODO task** | `todo DESCRIPTION_OF_TASK`,<br/>e.g. `todo Return book`
- **Add EVENT task** | `event DESCRIPTION_OF_TASK /DATE_OF_EVENT [ADDITIONAL_COMMENTS_ON_EVENT]`,<br/> e.g.`event Attend concert /23/12/2019`
- **Add DEADLINE task** | `deadline DESCRIPTION_OF_TASK /DATE_OF_DEADLINE [ADDITIONAL_COMMENTS_ON_DEADLINE]`,<br/> e.g.`deadline Complete CS2113T assignment /23rd December`
- **Mark as done** | `done TASK_POSITION_IN_LIST`,<br/> e.g. `done 3`
- **Delete** | `delete TASK_POSITION_IN_LIST`,<br/> e.g. `delete 3`
- **Find** | `find KEYWORD`,<br/> e.g. `find book`
+ **Add TODO task** | `todo DESCRIPTION_OF_TASK`, e.g. `todo Return book`
+ **Add EVENT task** | `event DESCRIPTION_OF_TASK /DATE_OF_EVENT [ADDITIONAL_COMMENTS_ON_EVENT]`, e.g.`event Attend concert /23/12/2019`
+ **Add DEADLINE task** | `deadline DESCRIPTION_OF_TASK /DATE_OF_DEADLINE [ADDITIONAL_COMMENTS_ON_DEADLINE]`,e.g.`deadline Complete CS2113T assignment /23rd December`
+ **Mark as done** | `done TASK_POSITION_IN_LIST`, e.g. `done 3`
+ **Delete** | `delete TASK_POSITION_IN_LIST`,e.g. `delete 3`
+ **Find** | `find KEYWORD`, e.g. `find book`
  **Exit** | `bye`
+
 ---
