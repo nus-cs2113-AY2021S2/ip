@@ -8,7 +8,11 @@ import java.util.List;
 
 public class TaskActions {
 
-    /** Prints all tasks */
+    /**
+     * Prints all tasks
+     *
+     * @param tasks List of all tasks
+     */
     public void listTasks(List<Task> tasks) {
         int i = 0;
         if (tasks.size() == 0) {
@@ -23,7 +27,13 @@ public class TaskActions {
         }
     }
 
-    /** Marks specific task as done */
+    /**
+     * Marks specific task as done
+     *
+     * @param tasks List of all tasks and index of specified task.
+     * @throws EmptyListException when tasklist is empty
+     * @throws TaskDoneException when task is already marked as done
+     */
     public void markAsDone(List<Task> tasks, int index) throws EmptyListException, TaskDoneException {
         if (tasks.size() == 0) {
             throw new EmptyListException();
@@ -36,13 +46,23 @@ public class TaskActions {
         }
     }
 
-    /** Deletes specific task */
+    /**
+     * Deletes specific task
+     *
+     * @param tasks List of all tasks and index of specified task
+     */
     public void deleteTask(List<Task> tasks, int index) {
         tasks.remove(index);
         System.out.println("\tDone! One less worry for you :)");
     }
 
-    /** Finds and prints all tasks with user specified keyword */
+    /**
+     * Finds and prints all tasks with user specified keyword
+     *
+     * @param tasks List of all tasks
+     * @param findTasks List of tasks with specified keyword
+     * @param word Keyword to search
+     */
     public void findTask(List<Task> tasks, List<Task> findTasks, String word) {
         int i = 0;
         findTasks.clear();

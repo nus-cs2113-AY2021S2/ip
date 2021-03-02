@@ -24,7 +24,11 @@ public class StorageFile {
         }
     }
 
-    /** Reads contents of file and processes it */
+    /**
+     * Reads contents of file and processes it
+     *
+     * @param tasks List of all tasks
+     */
     private static void readFile(List<Task> tasks) {
         try {
             FileInputStream file = new FileInputStream("duke.txt");
@@ -63,7 +67,11 @@ public class StorageFile {
         }
     }
 
-    /** Modifies textfile */
+    /**
+     * Modifies textfile
+     *
+     * @param tasks List of all tasks
+     */
     public void writeToFile(List<Task> tasks) {
         try {
             File file = new File("duke.txt");
@@ -82,6 +90,11 @@ public class StorageFile {
         }
     }
 
+    /**
+     * Creates new file if does not exist. Then reads file for saved data
+     *
+     * @param tasks List of all tasks
+     */
     public void load(List<Task> tasks) {
         createFile();
         readFile(tasks);

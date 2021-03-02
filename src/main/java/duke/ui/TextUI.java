@@ -26,7 +26,12 @@ public class TextUI {
         System.out.println("\tBye fellow coder! Hope to see you again soon!");
     }
 
-    /** Confirmation of added task */
+    /**
+     * Confirmation of added task
+     *
+     * @param tasks List of all tasks
+     * @param taskCounter Counter that stores the current index of the list
+     */
     public void printAddedTask(List<Task> tasks, int taskCounter) {
         System.out.println("Got it. I've added this task:");
         System.out.println("\t" + tasks.get(taskCounter).toString());

@@ -39,9 +39,7 @@ public class Duke {
         exit();
     }
 
-    /**
-     * Sets up the required objects, loads up the data from the storage file, and prints the welcome message.
-     */
+    /** Sets up the required objects, loads up the data from the storage file, and prints the welcome message. */
     private void start() {
         this.ui = new TextUI();
         this.parser = new Parser();
