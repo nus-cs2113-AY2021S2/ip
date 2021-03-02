@@ -4,16 +4,21 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import exception.DukeException;
 import tasks.Task;
 import tasks.Deadline;
 import tasks.Event;
 import tasks.ToDo;
 import ui.Ui;
+import parser.Parser;
+
 
 
 public class Duke {
 
     private static final Ui ui = new Ui();
+    private static final Parser parser = new Parser();
 
     public static void printList(ArrayList<Task> Tasks){
         ui.showToUser(ui.DIVIDER, "Here are the tasks in your list:");
@@ -35,28 +40,19 @@ public class Duke {
 
 
     public static void validateInput(String[] words) throws DukeException {
-        boolean isList = words[0].equals("list");
-        boolean isDone = words[0].equals("done");
-        boolean isTodo = words[0].equals("todo");
-        boolean isDeadline = words[0].equals("deadline");
-        boolean isEvent = words[0].equals("event");
-        boolean isDelete = words[0].equals("delete");
-        boolean invalidCommand = !(isList || isDone || isTodo || isDeadline || isEvent || isDelete);
-        if(invalidCommand) {
+        if(parser.parseCommand(words)) {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 
     public static void validateToDoInput(String[] words) throws DukeException {
-        boolean invalidToDoInput = words.length == 1;
-        if(invalidToDoInput) {
+        if(parser.parseToDoCommand(words)) {
             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
         }
     }
 
     public static void validateListInput(String[] words) throws DukeException {
-        boolean invalidListInput = words.length > 1;
-        if (invalidListInput) {
+        if (parser.parseListCommand(words)) {
             throw new DukeException("☹ OOPS!!! The description of a list should be empty.");
         }
     }

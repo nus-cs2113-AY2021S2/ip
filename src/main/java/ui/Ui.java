@@ -2,9 +2,6 @@ package ui;
 
 public class Ui {
 
-    public Ui () {
-
-    }
 
     public final String DIVIDER = "____________________________________________________________";
     private static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
