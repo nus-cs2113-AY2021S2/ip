@@ -16,6 +16,11 @@ public class Parser {
     public Parser() {
         cmd = null;
     }
+
+    /**
+     * decide which type of command user want to operate
+     * @param userInputString what user has input
+     */
     public void parse(String userInputString) {
         if(userInputString.equalsIgnoreCase("HELP")) {
             cmd =  new HelpCmd(userInputString);
@@ -33,7 +38,9 @@ public class Parser {
             cmd = new EventCmd(userInputString);
         } else if (userInputString.toUpperCase().matches("^(FILTER).*$")) {
             cmd = new FilterCmd(userInputString);
-        } else if (userInputString.equalsIgnoreCase("BYE")) {
+        } else if (userInputString.toUpperCase().matches("^(FIND).*$")) {
+            cmd = new FindCmd(userInputString);
+        }else if (userInputString.equalsIgnoreCase("BYE")) {
             cmd = new ExitCmd(userInputString);
         } else {
             cmd = null;

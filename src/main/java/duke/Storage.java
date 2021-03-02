@@ -29,6 +29,11 @@ public class Storage {
         this.dataFile = new File(filePath);
     }
 
+    /**
+     * open the file or create the file if it not exists,
+     * read all lines and store them in an arraylist of strings
+     * @return ArrayList which store file strings
+     */
     private ArrayList readFile() throws IOException {
         String localDir = System.getProperty("user.dir");
         Path dirPath = Paths.get(localDir, "data");
@@ -54,6 +59,11 @@ public class Storage {
         return dataItems;
     }
 
+    /**
+     * parse strings to Task objects one by one
+     * @param dataItems file content stored in arraylist of strings
+     * @return ArrayList<Task> after convert each string to a task
+     */
     private ArrayList<Task> parse(ArrayList<String> dataItems) {
         ArrayList<Task> allTasks = new ArrayList<>();
         for (String line : dataItems) {
@@ -98,6 +108,10 @@ public class Storage {
         return allTasks;
     }
 
+    /**
+     * load the tasks stored in the file
+     * @return ArrayList<Task> store the tasks into an arraylist
+     */
     public ArrayList<Task> load() {
         ArrayList<Task> taskList = null;
         try {
@@ -109,6 +123,12 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Synchronise the file after modified the tasks.
+     * overwrite to the file with tasks passed in.
+     * @param tasks new arraylist of tasks which will be written to the file
+     * @throws IOException if write to file failed
+     */
     public void writeToTxt(ArrayList<Task> tasks) throws IOException {
         FileWriter fw = new FileWriter(filePath, false);
         for(Task t : tasks) {

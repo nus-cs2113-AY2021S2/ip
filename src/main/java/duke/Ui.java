@@ -42,14 +42,15 @@ public class Ui {
         showLine();
         System.out.println("User Guide: ");
         System.out.println("1. todo ...");
-        System.out.println("2. event ... /at ...");
-        System.out.println("3. deadline ... /by ...");
+        System.out.println("2. event ... /at yyyy-mm-dd");
+        System.out.println("3. deadline ... /by yyyy-mm-dd");
         System.out.println("4. done [index]");
         System.out.println("5. delete [index]");
         System.out.println("6. list");
         System.out.println("7. filter yyyy-mm-dd");
-        System.out.println("8. bye");
-        System.out.println("9. help");
+        System.out.println("8. find ...");
+        System.out.println("9. bye");
+        System.out.println("10. help");
         showLine();
 
     }
@@ -102,7 +103,12 @@ public class Ui {
         showExecuteResult("Something wrong when writing to txt..");
     }
 
-
+    /**
+     * Prompts for the command and reads the text entered by the user.
+     * Ignores empty, pure whitespace.
+     * Echos the command back to the user.
+     * @return command (full line) entered by the user
+     */
     public String getUserInput() {
         String inputLine = in.nextLine();
         while (inputLine.trim().isEmpty()) {
@@ -121,6 +127,7 @@ public class Ui {
         showLine();
 
     }
+
 
 
 
