@@ -9,7 +9,7 @@ public class Ui {
     public void printAddToList(int size, String status) {
         printLine();
         System.out.println("Say no more fam. The task is added:\n  " + status);
-        System.out.println(size + " tasks in the list.");
+        System.out.println(size + " task(s) in the list.");
         printLine();
     }
 
@@ -32,7 +32,7 @@ public class Ui {
         printLine();
         System.out.println("You are a quitter 👎 Anyways, I removed this:");
         System.out.println("  " + status);
-        System.out.println(size + " tasks left in the list.");
+        System.out.println(size + " task(s) left in the list.");
         printLine();
     }
 
@@ -83,7 +83,8 @@ public class Ui {
 
     public void printNoSuchMethod() {
         String exceptionMessage = LINE_STRING +
-                "\n 😥 I don't quite get what the command means\n" +
+                "\n 😥 I don't quite get what the command means, \n" +
+                "type 'help' for a list of commands\n" +
                 LINE_STRING;
         System.out.println(exceptionMessage);
     }
@@ -128,5 +129,21 @@ public class Ui {
                 "\n 😥 Please tell me what you are finding for\n" +
                 LINE_STRING;
         System.out.println(exceptionMessage);
+    }
+
+    public void printHelp() {
+        String helpMessage = LINE_STRING +
+                "\n Available commands:"
+                + "\n   todo taskLabel"
+                + "\n   deadline deadlineLabel /by time"
+                + "\n   event eventLabel /at time"
+                + "\n   list"
+                + "\n   done taskNumber"
+                + "\n   find query"
+                + "\n   delete taskNumber"
+                + "\n   help"
+                + "\n   bye\n"
+                + LINE_STRING;
+        System.out.println(helpMessage);
     }
 }

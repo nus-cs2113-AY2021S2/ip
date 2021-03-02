@@ -35,7 +35,7 @@ public class Parser {
             try {
                 inputString = scanner.nextLine();
                 commandType = getCommandType(inputString);
-                isScanning = scanSwitch(inputString, commandType, tasks);
+                isScanning = scanSwitch(inputString, commandType, tasks, ui);
                 storage.saveData(tasks);
             } catch (java.util.InputMismatchException e) {
                 ui.printInputMismatch();
@@ -68,7 +68,7 @@ public class Parser {
      * @throws IndexOutOfBoundsException If task number specified is out of TaskList bounds
      * @throws NoSearchQueryException If search query is not specified for search
      */
-    private static boolean scanSwitch(String inputString, Command commandType, TaskList tasks) throws
+    private static boolean scanSwitch(String inputString, Command commandType, TaskList tasks, Ui ui) throws
             NoSuchMethodException, NoCommandLabelException, NoCommandFormatException, NoTaskSpecifiedException,
             IndexOutOfBoundsException, NoSearchQueryException {
         String[] inputStringArr = inputString.split(" ");
@@ -95,6 +95,9 @@ public class Parser {
             break;
         case EVENT:
             tasks.addEvent(inputString);
+            break;
+        case HELP:
+            ui.printHelp();
             break;
         case BYE:
             isScanning = false;
@@ -136,6 +139,9 @@ public class Parser {
             break;
         case "event":
             command = Command.EVENT;
+            break;
+        case "help":
+            command = Command.HELP;
             break;
         case "bye":
             command = Command.BYE;
