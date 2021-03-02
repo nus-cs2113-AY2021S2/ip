@@ -6,17 +6,25 @@ import java.util.StringJoiner;
 
 public class Parser {
     private final static int INDEX_NOT_FOUND = -1;
+    private final static int INDEX_OF_COMMAND = 0;
+    private final static int MINIMUM_LENGTH_OF_COMMAND = 1;
     private final static int LENGTH_OF_TIMESTAMP = 2;
+    private final static String NULL_COMMAND = "NOCOMMAND";
 
     /**
      * Parses raw userInput to extract the command string.
+     * Returns the String "NOCOMMAND" which will fall into
+     * the default branch of executeCommand.
      *
      * @param userInput is the raw input from the console.
      * @return command string in upper case.
      */
     public static String getCommand(String userInput) {
         String[] inputArray = userInput.split(" ");
-        String command = inputArray[0];
+        if(inputArray.length < MINIMUM_LENGTH_OF_COMMAND) {
+            return NULL_COMMAND;
+        }
+        String command = inputArray[INDEX_OF_COMMAND];
         return command.toUpperCase();
     }
 
