@@ -35,7 +35,7 @@ public class PrintMessages extends TEXT {
     }
 
     public static void greetings(){
-        System.out.println( LOGO + LINE + "\n" + GREETING + LINE + "\n" );
+        System.out.println( LOGO + LINE + GREETING + LINE );
     }
 
     public static void goodbye(){

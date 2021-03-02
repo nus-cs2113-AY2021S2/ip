@@ -1,5 +1,7 @@
 package Duke.Task;
 
+import static Duke.UI.TEXT.TODO_ICON;
+
 public class ToDoTask extends Task {
 
     public ToDoTask(String taskDescription) {
@@ -13,6 +15,6 @@ public class ToDoTask extends Task {
 
     @Override
     public String getTaskType() {
-        return "[T]";
+        return TODO_ICON;
     }
 }

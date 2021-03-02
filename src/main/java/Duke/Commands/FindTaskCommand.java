@@ -7,7 +7,11 @@ import Duke.Duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import static Duke.UI.TEXT.DATE_FORMAT;
+
 public class FindTaskCommand extends Duke {
+    private static final String DOT = ". ";
+
     /**
      * Finds tasks on a specific date
      * Shows error if theres no task on the date
@@ -16,10 +20,10 @@ public class FindTaskCommand extends Duke {
     public static void FindWithDate(String date) {
         try {
             LocalDate parsedDate = LocalDate.parse(date);
-            String formattedDate = parsedDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+            String formattedDate = parsedDate.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
             for (Task task : lists) {
                 if (formattedDate.equals(task.getTaskTime())) {
-                    System.out.println(lists.indexOf(task) + 1 + ". " + task.toString());
+                    System.out.println(lists.indexOf(task) + 1 + DOT + task.toString());
                 }
             }
         } catch (Exception e) {
@@ -37,7 +41,7 @@ public class FindTaskCommand extends Duke {
             boolean found = false;
             for (Task task : lists) {
                 if (task.getTask().contains(keyword)) {
-                    System.out.println(lists.indexOf(task) + 1 + ". " + task.toString());
+                    System.out.println(lists.indexOf(task) + 1 + DOT + task.toString());
                     found = true;
                 }
             }

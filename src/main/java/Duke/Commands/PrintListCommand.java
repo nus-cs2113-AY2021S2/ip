@@ -2,7 +2,7 @@ package Duke.Commands;
 
 import Duke.Duke;
 
-import static Duke.UI.TEXT.LIST_EMPTY;
+import static Duke.UI.TEXT.*;
 
 public class PrintListCommand extends Duke {
     /**
@@ -16,7 +16,7 @@ public class PrintListCommand extends Duke {
             System.out.println(LIST_EMPTY);
         } else {
             for(int i = startIndex; i < endIndex; ++i) {
-                System.out.println(" " + (i + 1) + ": " + lists.get(i).toString());
+                System.out.println(SPACE + (i + 1) + SEMICOLON + lists.get(i).toString());
             }
         }
     }

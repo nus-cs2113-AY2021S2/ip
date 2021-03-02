@@ -1,8 +1,11 @@
 package Duke.Task;
 
+import static Duke.UI.TEXT.*;
+
 public class Task {
     protected String taskDescription;
     protected boolean isDone;
+
 
     public Task(String taskDescription) {
         this.taskDescription = taskDescription;
@@ -10,7 +13,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "X" : " ");
+        return (isDone ? DONE_ICON : SPACE);
     }
 
     public void markAsDone() {
@@ -32,6 +35,6 @@ public class Task {
     }
 
     public String toString() {
-        return "[" + getStatusIcon() + "] " + getTask();
+        return LEFT_SQUARE_BRACKET + getStatusIcon() + RIGHT_SQUARE_BRACKET + getTask();
     }
 }

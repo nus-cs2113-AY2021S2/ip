@@ -3,6 +3,9 @@ package Duke.Task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import static Duke.UI.TEXT.DATE_FORMAT;
+import static Duke.UI.TEXT.DEADLINE_ICON;
+
 public class DeadlineTask extends Task {
 
     protected String time;
@@ -16,7 +19,7 @@ public class DeadlineTask extends Task {
     public String getTaskTime() {
         try {
             LocalDate d1 = LocalDate.parse(time);
-            return d1.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+            return d1.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
         } catch (Exception e) {
             return time;
         }
@@ -28,7 +31,7 @@ public class DeadlineTask extends Task {
      */
     @Override
     public String getTaskType() {
-        return "[D]";
+        return DEADLINE_ICON;
     }
 
     @Override

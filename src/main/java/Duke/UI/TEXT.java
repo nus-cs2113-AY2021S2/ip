@@ -4,13 +4,14 @@ import Duke.Duke;
 
 public class TEXT extends Duke{
 
-    public static final String LINE = "____________________________________________________________";
+    public static final String LINE = "____________________________________________________________\n";
     public static final String LOGO =
-              " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
+            "\n██████   █████   ██████   ██████  ██ ███████ \n" +
+                    "██   ██ ██   ██ ██       ██       ██ ██      \n" +
+                    "██████  ███████ ██   ███ ██   ███ ██ █████   \n" +
+                    "██   ██ ██   ██ ██    ██ ██    ██ ██ ██      \n" +
+                    "██████  ██   ██  ██████   ██████  ██ ███████ \n" +
+                    "                                            \n";
     public static final String GREETING = " Hello! I'm Duke\n" + " Type 'help' to see what i could do for you\n";
     public static final String ENDING = " Bye! Hope to see you again soon!\n";
     public static final String HELP_MENU = " Here's what I could do for you ^_^\n"
@@ -52,4 +53,14 @@ public class TEXT extends Duke{
     public static final String TASK_TYPE_EVENT = "[E]";
     public static final String TRUE = "true";
     public static final String DIVIDER = "|";
+    public static final String TIME_DIVIDER = "/";
+    public static final String DONE_ICON = "X";
+    public static final String SPACE = " ";
+    public static final String LEFT_SQUARE_BRACKET = " [";
+    public static final String RIGHT_SQUARE_BRACKET = "] ";
+    public static final String DATE_FORMAT = "MMM d yyyy";
+    public static final String DEADLINE_ICON = "[D]";
+    public static final String EVENT_ICON = "[E]";
+    public static final String TODO_ICON = "[T]";
+    public static final String SEMICOLON = ": ";
 }
