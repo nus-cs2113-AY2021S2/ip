@@ -1,10 +1,11 @@
 package duke;
 
+import static duke.Ui.INVALID_DATE_FORMAT_MESSAGE;
 import static duke.Ui.INVALID_INDEX_MESSAGE;
+import static duke.Ui.INVALID_OR_MISSING_FIELDS_MESSAGE;
 import static duke.Ui.INVALID_TASK_MESSAGE;
 import static duke.Ui.MISSING_FIELDS_MESSAGE;
 import static duke.Ui.OUTSIDE_RANGE_INDEX_MESSAGE;
-import static duke.Ui.INVALID_DATE_FORMAT_MESSAGE;
 import static duke.common.Constants.DEFAULT_STATUS;
 
 import java.time.LocalDate;
@@ -60,7 +61,7 @@ public class Parser {
         try {
             userCommand = prepareCommand(userInput);
         } catch (DukeException e) {
-            return new InvalidCommand(MISSING_FIELDS_MESSAGE);
+            return new InvalidCommand(INVALID_OR_MISSING_FIELDS_MESSAGE);
         }
         switch(userCommand[0]) {
         case "todo":

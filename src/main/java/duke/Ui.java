@@ -47,15 +47,15 @@ public class Ui {
 
     // Help page
     public static final String HELP_PAGE = BORDER
-            + "HELP PAGE" + NEWLINE
+            + "PANDA'S HELP PAGE" + NEWLINE
             + "Here are all the valid commands:" + NEWLINE + NEWLINE
             + "\thelp" + NEWLINE
             + "\t - displays all valid commands" + NEWLINE + NEWLINE
-            + "\ttodo <task>" + NEWLINE
+            + "\ttodo <description>" + NEWLINE
             + "\t- adds given task to the list" + NEWLINE + NEWLINE
-            + "\tevent <task> /at <details>" + NEWLINE
+            + "\tevent <description> /at <timing>" + NEWLINE
             + "\t- adds given task with details to the list" + NEWLINE + NEWLINE
-            + "\tdeadline <task> /by <yyyy-mm-dd> <HH:mm>" + NEWLINE
+            + "\tdeadline <description> /by <yyyy-mm-dd> <HH:mm>" + NEWLINE
             + "\t- adds given task with date and time to the list" + NEWLINE
             + "\t- example: add task with deadline \"2 Dec 2021, 6PM\":" + NEWLINE
             + "\t  deadline final essay /by 2021-12-02 18:00" + NEWLINE + NEWLINE
@@ -89,7 +89,10 @@ public class Ui {
 
     // Invalid command error messages
     public static final String DEFAULT_INVALID_MESSAGE
-            = "I'm sorry, I don't quite understand :( Could you try again?";
+            = "Sorry, I don't quite understand :( Could you try again?";
+    public static final String INVALID_OR_MISSING_FIELDS_MESSAGE
+            = "Hmm... Panda thinks you either entered an invalid command, "
+            + "or missed some fields.";
     public static final String MISSING_FIELDS_MESSAGE
             = "Panda thinks you missed some fields! Try again?";
     public static final String INVALID_INDEX_MESSAGE

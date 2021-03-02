@@ -106,14 +106,14 @@ Adds the given deadline with its date and time to the list.
 <br><br>
 **Format:**&nbsp;`deadline <deadline description> /by <yyyy-mm-dd> <HH:mm>`
 
-**Example:** `deadline sign up for Bamboo Eating Contest /by 2021-12-02 18:00`
+**Example:** `deadline sign up for Bamboo Eating Contest /by 2021-12-02 23:59`
 
 **Expected outcome:**
 
     ______________________________________________________________________
 
     New task added:
-        [D] [ ] sign up for Bamboo Eating Contest (by: Dec 02 2021, 6.00 pm)
+        [D] [ ] sign up for Bamboo Eating Contest (by: Dec 02 2021, 11.59 pm)
     ______________________________________________________________________
 
 **Notes:**
@@ -136,7 +136,7 @@ Displays your tasks in a numbered list.
     Here are the tasks in your list:
     1. [T] [ ] buy bamboo
     2. [E] [ ] Panda Club Fundraising 2021 (at: 6.00 pm)
-    3. [D] [ ] sign up for Bamboo Eating Contest (by: Dec 02 2021, 6.00 pm)
+    3. [D] [ ] sign up for Bamboo Eating Contest (by: Dec 02 2021, 11.59 pm)
     ______________________________________________________________________
 
 <br>
@@ -154,7 +154,7 @@ _condensed form_.
     ______________________________________________________________________
 
     Deadlines on this day:
-        [ ] sign up for Bamboo Eating Contest (by: Dec 02 2021, 6.00 pm)
+        [ ] sign up for Bamboo Eating Contest (by: Dec 02 2021, 11.59 pm)
     ______________________________________________________________________
 
 **Notes:**
@@ -175,7 +175,7 @@ it is completed.
     ______________________________________________________________________
 
     Yay! This task is now done:
-        [D] [X] sign up for Bamboo Eating Contest (by: Dec 02 2021, 6.00 pm)
+        [D] [X] sign up for Bamboo Eating Contest (by: Dec 02 2021, 11.59 pm)
     There are 3 tasks in your list.
     ______________________________________________________________________
 
@@ -195,7 +195,7 @@ the given keyword.
 
     Tasks matching this keyword:
         1. [T] [ ] buy bamboo
-        2. [D] [ ] sign up for Bamboo Eating Contest (by: Dec 02 2021, 6.00 pm)
+        2. [D] [ ] sign up for Bamboo Eating Contest (by: Dec 02 2021, 11.59 pm)
     ______________________________________________________________________
 
 **Notes:**
@@ -243,13 +243,14 @@ For example, if you followed all the example commands on this user guide in the
 same order, opening `tasks.txt` shows something like this:
 
     E | 0 | Panda Club Fundraising 2021 | 6.00 pm
-    D | 0 | sign up for Bamboo Eating Contest | 2021-12-02 | 18:00
+    D | 0 | sign up for Bamboo Eating Contest | 2021-12-02 | 23:59
 
 <br>
 
 ## Command Summary
+
 Command Word | Input Format
------------- | ------------
+--------------|--------------
 help | `help`
 todo | `todo <task description>`
 event | `event <event description> /at <timing>`
