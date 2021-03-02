@@ -1,4 +1,5 @@
-#User Guide
+# User Guide
+
 Spark V3.0 is a personal planner application, optimized for use via a Command Line Interface (CLI),
 while still having the benefits of an understandable Graphical User Interface (GUI). 
 
@@ -21,7 +22,8 @@ while still having the benefits of an understandable Graphical User Interface (G
 ---
 
 
-##Quick Start 
+## Quick Start 
+
 1. Ensure you have Java 11.
 2. Download the latest Spark.jar from here (INSERT LINK).
 3. Copy the file to the folder you want to use as the *home folder* for Spark.
@@ -32,19 +34,19 @@ while still having the benefits of an understandable Graphical User Interface (G
 5. Type the command in the command box and press *Enter* to execute it. e.g. typing `list` and pressing *Enter* will
 display a list of current tasks.
    
-##Features
+## Features
 
-##Command Summary
+## Command Summary
 
 | Command | Format, examples |
-| ------- | ---------------- |
-| **List**| 
-| **Add todo task** | 
-| **Add event** |
-| **Add deadline task** |
-| **Mark as done** |
-| **Delete** |
-| **Find** | 
+| ------- | ---------------: |
+| **List**| To list |
+| **Add todo task** | test |
+| **Add event** | test |
+| **Add deadline task** | test |
+| **Mark as done** | test |
+| **Delete** | test |
+| **Find** | test |
 ### `Keyword` - Describe action
 
 Describe action and its outcome.
