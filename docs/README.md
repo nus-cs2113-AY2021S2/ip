@@ -1,5 +1,19 @@
 # User Guide
 
+Duke is a command line app for managing tasks and deadlines. If you can type fast, Duke can help you to record and manage your tasks faster than traditional GUI apps.
+
+- [Quick Start](#quick-start)
+- [Features](#features)
+    * [`help` - Show a help message](#-help----show-a-help-message)
+    * [`list` - List all tasks](#-list----list-all-tasks)
+    * [`done` - Mark a task as done](#-done----mark-a-task-as-done)
+    * [`todo` - Add a new task](#-todo----add-a-new-task)
+    * [`event` - Add a new task with a event date](#-event----add-a-new-task-with-a-event-date)
+    * [`delete` - Delete a selected task](#-delete----delete-a-selected-task)
+    * [`clear` - Deletes all tasks](#-clear----deletes-all-tasks)
+    * [`find` - List all matching tasks](#-find----list-all-matching-tasks)
+    * [`bye` - Exits the program](#-bye----exits-the-program)
+
 ## Quick Start
 
 1. Ensure you have Java `11` or above installed in your Computer.
