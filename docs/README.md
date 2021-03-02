@@ -21,7 +21,6 @@ while still having the benefits of an understandable Graphical User Interface (G
 
 ---
 
-
 ## Quick Start 
 
 1. Ensure you have Java 11.
@@ -33,7 +32,8 @@ while still having the benefits of an understandable Graphical User Interface (G
 **INSERT PICTURE**
 5. Type the command in the command box and press *Enter* to execute it. e.g. typing `list` and pressing *Enter* will
 display a list of current tasks.
-   
+
+<br/><br/>
 ## Features
 
 ### Viewing list of tasks: `list`
@@ -42,7 +42,7 @@ Displays the list of tasks already input by user.
 ~~insertpicture~~
 
 Format: `list`
-
+<br/><br/>
 ### Adding a TODO event: `todo`
 Adds a TODO task into the list
 
@@ -56,7 +56,7 @@ Format: `todo DESCRIPTION_OF_TASK`
 Examples:
 * `todo Return book` Stores the task `Return book` with a `[T]` tag.
 * `todo Collect delivery` Stores the task `Collect delivery` with a `[T]` tag.
-
+  <br/><br/>
 ### Adding an EVENT task: `event`
 Adds an EVENT task into the list
 
@@ -74,8 +74,7 @@ Examples:
   Stores the task `Attend concert` with a `[E]` (EVENT) tag, and the event date `23/12/2019`.
 * `event Sam's birthday party /today 3pm. Remember to bring cake!`
   Stores the task `Sam's birthday party` with a `[E]` (EVENT) tag, and the event date `today 3pm`.
-
-
+  <br/><br/>
 ### Adding a DEADLINE task: `deadline`
 Adds a DEADLINE task into the list
 
@@ -93,8 +92,7 @@ Examples:
   Stores the task `Complete CS2113T assignment` with a `[D]` (Deadline) tag, and the deadline `23rd December`.
 * `deadline Pay water bill /5pm` 
   Stores the task `Pay water bill` with a `[D]` (Deadline) tag, and the deadline `5pm`.
-
-  
+  <br/><br/>
 ### Marking a task as completed: `done`
 Marks the specified task number as completed.
 
@@ -106,7 +104,7 @@ Format: `done TASK_POSITION_IN_LIST`
 * `TASK_POSITION_IN_LIST` must be within range of the current list.
   
 * `TASK_POSITION_IN_LIST` can be viewed with `list` command.
-
+  <br/><br/>
 ### Deletes a task from the list: `delete`
 Removes the specified task from the list.
 
@@ -118,39 +116,34 @@ Format: `delete TASK_POSITION_IN_LIST`
 * `TASK_POSITION_IN_LIST` must be within range of the current list.
 
 * `TASK_POSITION_IN_LIST` can be viewed with `list` command.
-
-## Search for a task with a keyword: `find`
+  <br/><br/>
+### Search for a task with a keyword: `find`
 Searches for tasks in the list with the specified keyword.
 
 Format: `find KEYWORD`
-
 * Command `find` is case-insensitive.
 * `KEYWORD` can be a short sentence, and need not be a singular word.
 * Requires `KEYWORD` to run. Field cannot be left blank.
 * List of tasks with `KEYWORD` in it will be displayed on the screen in the order they were listed.
-
-
-## Exiting the program: `bye`
+  <br/><br/>
+### Exiting the program: `bye`
 Exits the program
 
 Format: `bye`
 
 * Command `bye` is case-insensitive.
 * List stored in the program will be auto saved upon execution of `bye`.
-
-
-## Saving the data
+  <br/><br/>
+### Saving the data
 List in the program's cache will be auto saved upon exit of program. 
 There is no need to save manually.
-
-
-## Editing the data file
+<br/><br/>
+### Editing the data file
 The list data is saved as a .TXT file.
 If changes to the data file makes its format invalid, Spark will discard all data
 and start with an empty data file at the next run.
-
-
-## Loading of saved data file
+<br/><br/>
+### Loading of saved data file
 The data file will be automatically restored when Spark starts up. 
 There is no need to manually load the data file with the list contents.
 
@@ -158,25 +151,14 @@ There is no need to manually load the data file with the list contents.
 
 ## Command Summary
 
- Command | Format, examples 
+ **Command** | **Format, examples** 
  --- | ---
- **List**| To list |
- **Add todo task** | test 
- **Add event** | test 
- **Add deadline task** | test 
- **Mark as done** | test 
- **Delete** | test 
- **Find** | test 
-
+ **List**| `list` |
+ **Add TODO task** | `todo DESCRIPTION_OF_TASK`,<br/>e.g. `todo Return book`
+ **Add EVENT task** | `event DESCRIPTION_OF_TASK /DATE_OF_EVENT [ADDITIONAL_COMMENTS_ON_EVENT]`,<br/> e.g.`event Attend concert /23/12/2019`
+ **Add DEADLINE task** | `deadline DESCRIPTION_OF_TASK /DATE_OF_DEADLINE [ADDITIONAL_COMMENTS_ON_DEADLINE]`,<br/> e.g.`deadline Complete CS2113T assignment /23rd December`
+ **Mark as done** | `done TASK_POSITION_IN_LIST`,<br/> e.g. `done 3`
+ **Delete** | `delete TASK_POSITION_IN_LIST`,<br/> e.g. `delete 3`
+ **Find** | `find KEYWORD`,<br/> e.g. `find book`
+ **Exit** | `bye`
 ---
-### `Keyword` - Describe action
-
-Describe action and its outcome.
-
-Example of usage: 
-
-`keyword (optional arguments)`
-
-Expected outcome:
-
-`outcome`
