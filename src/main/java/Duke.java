@@ -32,10 +32,8 @@ public class Duke {
         } while (!isBye);
     }
 
-
-    public static class Main {
-        public static void main(String[] args) throws FileNotFoundException, DukeException {
+    public static void main(String[] args) throws FileNotFoundException, DukeException {
             new Duke().run();
         }
-    }
 }
+
