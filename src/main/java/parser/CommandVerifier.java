@@ -44,6 +44,8 @@ public class CommandVerifier {
         case "delete":
             checkDelete();
             break;
+        case "find":
+            checkFind();
         default:
             break;
         }
@@ -56,7 +58,8 @@ public class CommandVerifier {
                 || firstWord.equals("event")
                 || firstWord.equals("done")
                 || firstWord.equals("bye")
-                || firstWord.equals("delete");
+                || firstWord.equals("delete")
+                || firstWord.equals("find");
     }
 
     private void checkTodo() {
@@ -75,13 +78,8 @@ public class CommandVerifier {
     }
 
     private void checkDeadline() {
-        checkKeywordExists("by", "/by");
+        checkKeywordExists("The keyword '/by'", "/by");
         String[] subStringsByKeyword = command.split("/by");
-
-        if (subStringsByKeyword.length < 2 || subStringsByKeyword[1].trim().equals("")) {
-            throw new MissingInfoException(
-                    String.format(MISSING_INFO_MESSAGE, "The keyword /by", subStrings[0]));
-        }
 
         if (subStringsByKeyword[0].substring(8).trim().equals("")) {
             throw new MissingInfoException(
@@ -97,12 +95,9 @@ public class CommandVerifier {
     }
 
     private void checkEvent() {
-        checkKeywordExists("at", "/at");
+        checkKeywordExists("The keyword '/at'", "/at");
         String[] subStringsByKeyword = command.split("/at");
-        if (subStringsByKeyword.length < 2 || subStringsByKeyword[1].trim().equals("")) {
-            throw new MissingInfoException(
-                    String.format(MISSING_INFO_MESSAGE, "The keyword /at", subStrings[0]));
-        }
+
         if (subStringsByKeyword[0].substring(5).trim().equals("")) {
             throw new MissingInfoException(
                     String.format(MISSING_INFO_MESSAGE, "description", subStrings[0]));
@@ -115,10 +110,10 @@ public class CommandVerifier {
         }
     }
 
-    private void checkKeywordExists(String infoMissing, String keyword) {
+    private void checkKeywordExists(String missing, String keyword) {
         if (!command.contains(keyword)) {
             throw new MissingInfoException(
-                    String.format(MISSING_INFO_MESSAGE, infoMissing, subStrings[0]));
+                    String.format(MISSING_INFO_MESSAGE, missing, subStrings[0]));
         }
     }
 
@@ -136,6 +131,13 @@ public class CommandVerifier {
         } catch (NumberFormatException e) {
             throw new UnknownFormatException(
                     String.format(UNKNOWN_FORMAT_MESSAGE, "index: " + subStrings[0]));
+        }
+    }
+
+    private void checkFind() {
+        if (subStrings.length < 2) {
+            throw new MissingInfoException(
+                    String.format(MISSING_INFO_MESSAGE, "The search keyword", subStrings[0] + " command"));
         }
     }
 }

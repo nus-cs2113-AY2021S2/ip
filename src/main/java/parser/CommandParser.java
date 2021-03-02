@@ -1,13 +1,6 @@
 package parser;
 
-import commands.AddDeadlineCommand;
-import commands.AddEventCommand;
-import commands.AddToDoCommand;
-import commands.Command;
-import commands.DeleteCommand;
-import commands.DoneCommand;
-import commands.ExitCommand;
-import commands.ListCommand;
+import commands.*;
 import exceptions.MissingInfoException;
 import exceptions.UnknownCommandException;
 import io.DukePrint;
@@ -62,10 +55,12 @@ public class CommandParser {
         case "delete":
             result = new DeleteCommand(taskList, Integer.parseInt(subStrings[1]), dukePrint);
             break;
+        case "find":
+            result = new FindCommand(command.substring(5), taskList, dukePrint);
+            break;
         default:
             break;
         }
-
         return result;
     }
 }
