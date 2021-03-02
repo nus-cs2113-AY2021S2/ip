@@ -67,7 +67,7 @@ List out all the tasks currently in your task list.
 
 **Format:** `list`
 
-| | Result |
+| | Example |
 | --------- | ------------------------------------------------------- |
 | Input | `list` |
 | Output | `1.[T][ ] apple`<br>`2.[E][ ] apple (at: pear)`<br>`3.[D][ ] apple (by: 24 Jun 1999)` |
@@ -79,7 +79,7 @@ List out all the tasks currently in your task list.
 Adds a todo with specified name into task list.<br>
 **Format:** `todo <name>`
 
-| | Result |
+| | Example |
 | --------- | ------------------------------------------------------- |
 | Input | `todo CS2113T Homework` |
 | Output | `8K: Added "CS2113T Homework" to list.` |
@@ -92,7 +92,7 @@ Adds a todo with specified name into task list.<br>
 Adds an event with specified name and information to your task list.<br>
 **Format:** `event <name> /at <additional info>`
 
-| | Result |
+| | Example |
 | --------- | ------------------------------------------------------- |
 | Input | `event OP2 Meeting /at COM2` |
 | Output | `8K: Added "OP2 Meeting" to list.` |
@@ -105,7 +105,7 @@ Adds an event with specified name and information to your task list.<br>
 Adds a deadline with specified name and due date to your task list.<br>
 **Format:** `deadline <name> /by <DD-MM-YYYY>`
 
-| | Result |
+| | Example |
 | --------- | ------------------------------------------------------- |
 | Input | `deadline Wk6 Quiz /by 19-2-2020` |
 | Output | `8K: Added "Wk6 Quiz" to list.` |
@@ -120,7 +120,7 @@ Seperate multiple indices with a space.<br>
 Invalid indices will be skipped.<br>
 **Format:** `delete <index 1> <index 2> ... <index n>`
 
-| | Result |
+| | Example |
 | --------- | ------------------------------------------------------- |
 | Input | `delete 1 2` |
 | Output | `Deleted:`<br>`[T][ ] task3`<br>`[T][ ] task1` |
@@ -135,7 +135,7 @@ Seperate multiple indices with a space.<br>
 Invalid indices will be skipped.<br>
 **Format:** `done <index 1> <index 2> ... <index n>`
 
-| | Result |
+| | Example |
 | --------- | ------------------------------------------------------- |
 | Input | `done 1 2` |
 | Output | `Marked as done:`<br>`[D][X] task1 (by: 12 Dec 2020)`<br>`[D][X] task2 (by: 20 Feb 2021)` |
@@ -150,7 +150,7 @@ Seperate multiple indices with a space.<br>
 Invalid indices will be skipped.<br>
 **Format:** `undo <index 1> <index 2> ... <index n>`
 
-| | Result |
+| | Example |
 | --------- | ------------------------------------------------------- |
 | Input | `undo 1 2` |
 | Output | `Marked as undone:`<br>`[D][ ] task1 (by: 12 Dec 2020)`<br>`[D][ ] task2 (by: 20 Feb 2021)` |
@@ -164,7 +164,7 @@ List out all tasks that contains keyword in name.<br>
 Index relative to task list is shown for easier deletion / mark as done.<br>
 **Format:** `find <keyword>`
 
-| | Result |
+| | Example |
 | --------- | ------------------------------------------------------- |
 | Input | `find quiz` |
 | Output | `3.[T][ ] CS2113T Quiz` |
@@ -177,7 +177,7 @@ List out all deadlines due on specified date.<br>
 Index relative to task list is shown for easier deletion / mark as done.<br>
 **Format:** `search <DD_MM_YYYY>`
 
-| | Result |
+| | Example |
 | --------- | ------------------------------------------------------- |
 | Input | `search 24-6-1999` |
 | Output | `3.[D][ ] Wake up (by: 24 Jun 1999)` |
