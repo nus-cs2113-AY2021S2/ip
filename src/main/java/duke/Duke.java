@@ -6,7 +6,6 @@ import duke.command.Command;
 import java.io.*;
 
 public class Duke {
-
     private static final String FILEPATH = "tasklogs/tasks.txt";
 
     private Storage storage;
@@ -43,6 +42,10 @@ public class Duke {
             while(true) {
                 String command = ui.getCommand();
                 Command parsedCommand = parser.parseCommands(command);
+                // If user provides input that is all whitespace.
+                if (parsedCommand == null) {
+                    continue;
+                }
                 if (parsedCommand instanceof ByeCommand) {
                     break;
                 }

@@ -9,6 +9,8 @@ import duke.command.DeleteCommand;
 import duke.command.ListCommand;
 
 public class Parser {
+    private static final int ERR_EMPTY_INPUT = -6;
+
     private static final int COMMAND_EXIT = 0;
     private static final int COMMAND_LIST = 1;
     private static final int COMMAND_MARK = 2;
@@ -31,22 +33,27 @@ public class Parser {
      * @return new instance of command.
      */
     public Command parseCommands(String line) {
-        int command = getCommand(line);
-        // No fallthrough required
-        switch (command) {
-        case COMMAND_MARK:
-            return new MarkCommand(line, this.tasks, this.ui);
-        case COMMAND_LIST:
-            return new ListCommand(line, this.tasks, this.ui);
-        case COMMAND_ADD:
-            return new AddCommand(line, this.tasks, this.ui);
-        case COMMAND_DELETE:
-            return new DeleteCommand(line, this.tasks, this.ui);
-        case COMMAND_FIND:
-            return new FindCommand(line, this.tasks, this.ui);
-        // If user wants to exit program
-        default:
-            return new ByeCommand();
+        try {
+            int command = getCommand(line);
+            // No fallthrough required
+            switch (command) {
+            case COMMAND_MARK:
+                return new MarkCommand(line, this.tasks, this.ui);
+            case COMMAND_LIST:
+                return new ListCommand(line, this.tasks, this.ui);
+            case COMMAND_ADD:
+                return new AddCommand(line, this.tasks, this.ui);
+            case COMMAND_DELETE:
+                return new DeleteCommand(line, this.tasks, this.ui);
+            case COMMAND_FIND:
+                return new FindCommand(line, this.tasks, this.ui);
+            // If user wants to exit program
+            default:
+                return new ByeCommand();
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            this.ui.printError(ERR_EMPTY_INPUT);
+            return null;
         }
     }
 
@@ -55,8 +62,9 @@ public class Parser {
      *
      * @param line input from user.
      * @return The type of command user inputted.
+     * @throws ArrayIndexOutOfBoundsException if input is all whitespace.
      */
-    public static int getCommand(String line) {
+    public static int getCommand(String line) throws ArrayIndexOutOfBoundsException {
         String[] subStrings = line.split(" ");
         String command = subStrings[0];
         if (command.equalsIgnoreCase("bye")) {
