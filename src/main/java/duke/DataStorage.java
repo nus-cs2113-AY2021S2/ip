@@ -39,26 +39,29 @@ public class DataStorage {
 
     /**
      * Reads the line of sava data and adds tasks accordingly to the ArrayList containing tasks
+     * If the description returned by dataParser() is null, the
      *
      * @param list Arraylist which tasks are to be added as they are parsed
      * @param line line of save data
      */
     private static void loadData(ArrayList<Task> list, String line) {
         Object[] parsedData = Parser.dataParser(line);
-        String desc = (String)parsedData[0];
-        boolean isDone = (boolean)parsedData[1];
-        String date = (String)parsedData[2];
+        if (parsedData[0] != null ) {
+            String desc = (String) parsedData[0];
+            boolean isDone = (boolean) parsedData[1];
+            String date = (String) parsedData[2];
 
-        switch (line.charAt(1)) {
-        case 'T':
-            list.add(new ToDo(desc, isDone));
-            break;
-        case 'D':
-            list.add(new Deadline(desc, isDone, date));
-            break;
-        case 'E':
-            list.add(new Event(desc, isDone, date));
-            break;
+            switch (line.charAt(1)) {
+            case 'T':
+                list.add(new ToDo(desc, isDone));
+                break;
+            case 'D':
+                list.add(new Deadline(desc, isDone, date));
+                break;
+            case 'E':
+                list.add(new Event(desc, isDone, date));
+                break;
+            }
         }
     }
 

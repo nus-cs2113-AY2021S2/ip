@@ -63,10 +63,17 @@ public class TaskList {
             Ui.printInvalidArgumentMessage(Constants.NO_DESCRIPTION_MESSAGE);
         } else if(input.toLowerCase().contains("/by")) {
             try {
-                String desc = input.substring(0, input.toLowerCase().indexOf("/by") - 1);
-                String dueDate = convertDate(input.substring(input.toLowerCase().indexOf("/by") + 4));
-                list.add(new Deadline(desc, dueDate));
-                Ui.printDeadlineAdded(desc, dueDate);
+                String[] parsedInput = Parser.descDateParser(input, "/by");
+                String desc = parsedInput[0];
+                String dueDate = parsedInput[1];
+                if (dueDate != null) {
+                    list.add(new Deadline(desc, dueDate));
+                    Ui.printDeadlineAdded(desc, dueDate);
+                } else {
+                    Ui.printInvalidArgumentMessage(Constants.NO_DEADLINE_MESSAGE);
+                }
+            } catch (StringIndexOutOfBoundsException e) {
+                Ui.printInvalidArgumentMessage(Constants.NO_DESCRIPTION_MESSAGE);
             } catch (Exception e) {
                 Ui.printGenericErrorMessage();
             }
@@ -86,10 +93,17 @@ public class TaskList {
             Ui.printInvalidArgumentMessage(Constants.NO_DESCRIPTION_MESSAGE);
         } else if(input.toLowerCase().contains("/at")) {
             try {
-                String description = input.substring(0, input.toLowerCase().indexOf("/at")-1);
-                String time = input.substring(input.toLowerCase().indexOf("/at")+4);
-                list.add(new Event(description, time));
-                Ui.printEventAdded(description, time);
+                String[] parsedInput = Parser.descDateParser(input, "/at");
+                String desc = parsedInput[0];
+                String date = parsedInput[1];
+                if (date != null) {
+                    list.add(new Event(desc, date));
+                    Ui.printEventAdded(desc, date);
+                } else {
+                    Ui.printInvalidArgumentMessage(Constants.NO_TIME_MESSAGE);
+                }
+            } catch (StringIndexOutOfBoundsException e) {
+                Ui.printInvalidArgumentMessage(Constants.NO_DESCRIPTION_MESSAGE);
             } catch (Exception e) {
                 Ui.printGenericErrorMessage();
             }
@@ -185,17 +199,5 @@ public class TaskList {
             task.setLength(0);
         }
         Ui.dukePrinter(taskList);
-    }
-
-    private static String convertDate(String date) {
-        try {
-            LocalDate parsedDate = LocalDate.parse(date);
-            return String.valueOf(parsedDate.getDayOfMonth()) +
-                    ' ' + parsedDate.getMonth() +
-                    ' ' + parsedDate.getYear();
-        } catch (DateTimeParseException e) {
-            return date;
-        }
-
     }
 }

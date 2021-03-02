@@ -1,5 +1,8 @@
 package duke;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 public class Parser {
 
     /**
@@ -23,11 +26,13 @@ public class Parser {
 
     /**
      * Parses save data from data.txt
+     * If the save data is invalid, return description and date as null
      *
      * @param data A line of save data
      * @return Array containing task description, boolean indicating if the task is done and a date (null if no date)
      */
     public static Object[] dataParser(String data) {
+
         String desc;
         boolean isDone = true;
         String date;
@@ -54,5 +59,29 @@ public class Parser {
         }
 
         return new Object[]{desc, isDone, date};
+    }
+
+    public static String[] descDateParser(String data, String delimiter) {
+        String desc = data.substring(0, data.toLowerCase().indexOf(delimiter) - 1);
+        String date;
+        try {
+            date = convertDate(data.substring(data.toLowerCase().indexOf(delimiter) + 4));
+        } catch (IndexOutOfBoundsException e) {
+            date = null;
+        }
+
+        return new String[]{desc, date};
+    }
+
+    private static String convertDate(String date) {
+        try {
+            LocalDate parsedDate = LocalDate.parse(date);
+            return String.valueOf(parsedDate.getDayOfMonth()) +
+                    ' ' + parsedDate.getMonth() +
+                    ' ' + parsedDate.getYear();
+        } catch (DateTimeParseException e) {
+            return date;
+        }
+
     }
 }

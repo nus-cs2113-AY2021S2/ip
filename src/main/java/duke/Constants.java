@@ -33,7 +33,7 @@ public class Constants {
             + "Please try again";
     public static final String GENERIC_ERROR_MESSAGE = "Something went wrong!";
 
-    public static final String TODO_INFO = "Add todo:\n"
+    public static final String TODO_INFO = "Add to do:\n"
             + "     Command prefix: todo\n"
             + "     Argument(s): description\n"
             + "     Usage: todo <description>\n"
@@ -62,7 +62,7 @@ public class Constants {
             + "     Usage: undo <task index>\n"
             + "     Example: undo 3\n";
     public static final String DELETE_INFO = "Remove task:\n"
-            + "! Note that deleting a task will cause the indices of tasks after in to change !\n"
+            + "! Note that deleting a task will cause the indices of tasks after it to change !\n"
             + "     Command prefix: delete\n"
             + "     Argument(s): task index (as seen from list)\n"
             + "     Usage: delete <task index>\n"
