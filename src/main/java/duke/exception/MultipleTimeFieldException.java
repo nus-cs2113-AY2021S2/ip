@@ -1,7 +1,6 @@
 package duke.exception;
 
 public class MultipleTimeFieldException extends DukeException {
-
     /**
      * Creates DukeExceptions for methods to throw.
      */

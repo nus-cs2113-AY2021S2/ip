@@ -21,7 +21,7 @@ the project to use JDK 11 (not other versions) as explained in here.
 After that, locate the src/main/java/Duke.java file, right-click it, and choose Run Duke.main(). If the setup is
 correct, you should see something like the output below.
 
-![Duke Greeting Image](/images/Greeting.PNG)
+![Duke Greeting Image](/docs/img.png)
 
 ## 3. Task Management Features
 

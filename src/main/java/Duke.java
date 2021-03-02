@@ -8,7 +8,6 @@ import duke.ui.Ui;
 
 import java.util.Scanner;
 
-
 public class Duke {
     /**
      * Storage created for user.

@@ -1,8 +1,6 @@
 package duke.storage;
 
-import duke.exception.DukeException;
 import duke.task.Task;
-import duke.task.TaskList;
 import duke.ui.Ui;
 
 import java.io.File;
@@ -91,8 +89,8 @@ public class Storage {
     public static void saveData(ArrayList<Task> tasks) {
         try {
             FileWriter fileWriter = new FileWriter(path);
-            for (int i = 0; i < tasks.size(); ++i) {
-                String taskToWrite = tasks.get(i).taskToText() + "\n";
+            for (Task task : tasks) {
+                String taskToWrite = task.taskToText() + "\n";
                 fileWriter.write(taskToWrite);
             }
             fileWriter.close();
