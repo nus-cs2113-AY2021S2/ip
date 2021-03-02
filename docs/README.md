@@ -2,7 +2,7 @@
 
 8K's Task Planner is a Command Line Interface (CLI) app for planning of tasks. 
 
-Comes with 3 type of tasks:
+Comes with 3 types of tasks:
 1. ToDo - Basic task with checkbox.
 1. Event - Task with checkbox and information field.
 1. Deadline - Task with checkbox and due date field.
