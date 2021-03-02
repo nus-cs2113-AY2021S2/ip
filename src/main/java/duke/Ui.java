@@ -97,7 +97,12 @@ public class Ui {
         showExecuteResult("Something wrong when writing to txt..");
     }
 
-
+    /**
+     * Prompts for the command and reads the text entered by the user.
+     * Ignores empty, pure whitespace.
+     * Echos the command back to the user.
+     * @return command (full line) entered by the user
+     */
     public String getUserInput() {
         String inputLine = in.nextLine();
         while (inputLine.trim().isEmpty()) {
