@@ -16,11 +16,12 @@ public class Task {
 
     public String getStatusIcon() {
         //if task is done, mark with X
-        return (isDone ? "[✓]" : "[ ]");
+        return (isDone ? "[X]" : "[ ]");
     }
 
     public void markAsDone() {
         this.isDone = true;
+        this.completed = "1";
     }
 
     public String toString() {
