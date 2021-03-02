@@ -11,7 +11,7 @@ public class Parser {
      * @return true if command is invalid otherwise false
      */
     public boolean parseCommand(String[] input){
-        String[] validInputs = {"list", "done", "todo", "deadline", "event", "delete"};
+        String[] validInputs = {"list", "done", "todo", "deadline", "event", "delete", "find"};
         return !Arrays.asList(validInputs).contains(input[0]);
     }
 

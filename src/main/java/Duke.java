@@ -53,6 +53,19 @@ public class Duke {
      * @param words user input split into individual words
      * @throws DukeException If input is not a valid command for the program
      */
+    public static void findTask(String input) {
+        int taskCount = 1;
+        ui.showToUser(ui.DIVIDER, "Here are the matching tasks in your list:");
+        for (Task task : Tasks) {
+            if (task.getDescription().contains(input)){
+                ui.showToUser(taskCount + "." + task.toString());
+                taskCount++;
+            }
+        }
+        ui.showToUser(ui.DIVIDER);
+    }
+
+
     public static void validateInput(String[] words) throws DukeException {
         if(parser.parseCommand(words)) {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -141,7 +154,6 @@ public class Duke {
      * @param args User input at the start of the program
      */
     public static void main(String[] args) {
-        ArrayList<Task> Tasks = new ArrayList<>();
         String line;
         Scanner Input = new Scanner(System.in);
         ui.showIntroMessage();
@@ -160,6 +172,7 @@ public class Duke {
             boolean isDeadline = words[0].equals("deadline");
             boolean isEvent = words[0].equals("event");
             boolean isDelete = words[0].equals("delete");
+            boolean isFind = words[0].equals("find");
             try {
                 validateInput(words);
             } catch (Exception e) {
@@ -212,6 +225,9 @@ public class Duke {
                 Event event = new Event(words[0], words[1]);
                 Tasks.add(event);
                 printTaskAdded();
+            } else if (isFind) {
+                line = line.replace("find ", "");
+                findTask(line);
             }
             line = Input.nextLine();
             inSystem = !line.equals("bye");
