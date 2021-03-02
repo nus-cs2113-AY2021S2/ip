@@ -74,6 +74,7 @@ public class Duke {
         }
     }
 
+    //details extracted: task description, (task deadline/timeslot) depending on taskType
     public static String[] extractDetailsFromInput(String input, String keyword) {
         String[] inputArray = new String[2];
         String inputWithoutKeyword = input.substring(keyword.length());
@@ -231,6 +232,7 @@ public class Duke {
                         System.out.println("Please input todo tasks in the correct format. (e.g. todo <task description>)");
                         break;
                     case INVALID:
+                    default:
                         System.out.println("Please input a valid command! (e.g. deadline..., done..., list)");
                     }
                 }
