@@ -182,7 +182,12 @@ public class TaskList {
         }
     }
 
-
+    /**
+     * Searches through tasks to find tasks with descriptions matching keyword(s) provided
+     *
+     * @param list ArrayList containing all tasks
+     * @param keyword Keyword(s) used for searching
+     */
     public static void find(ArrayList<Task> list, String keyword) {
         List<Task> filteredList = new ArrayList<>();
         filteredList = list.stream().filter(str -> str.contains(keyword)).collect(Collectors.toList());
