@@ -14,7 +14,8 @@ public class DoneCmd extends Command{
         super(s);
     }
 
-    public void execute(TaskManager tasks, Ui ui, Storage storage) throws DukeException { try{
+    public void execute(TaskManager tasks, Ui ui, Storage storage) throws DukeException {
+        try{
         String[] typeIndex = userInput.split("[Dd][Oo][Nn][Ee]",2);
         int taskIndexShow = Integer.parseInt(typeIndex[1].trim());
         if(taskIndexShow <= 0 || taskIndexShow > tasks.getNumOfTasks()) {

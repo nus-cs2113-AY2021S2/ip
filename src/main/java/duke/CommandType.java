@@ -6,5 +6,6 @@ public enum CommandType {
     LIST,
     EXIT,
     HELP,
+    FIND,
     UNDEFINED
 }

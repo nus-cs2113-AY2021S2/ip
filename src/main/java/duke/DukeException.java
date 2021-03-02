@@ -28,6 +28,7 @@ public class DukeException extends Exception{
         case TODO:
         case DEADLINE:
         case EVENT:
+        case FIND:
             ui.showEmptyFieldMessage(this.commandType);
             break;
         default:
