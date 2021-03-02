@@ -3,6 +3,8 @@ import Exceptions.MissingDeadlineException;
 import Exceptions.MissingEventTimeException;
 
 public class Parser {
+    public Parser() {}
+
     public static final String COMMAND_WORDS = "list" + "done" + "todo" + "deadline" + "event" + "delete";
 
     static void handleInput(String line) throws IllegalCommandWordException {

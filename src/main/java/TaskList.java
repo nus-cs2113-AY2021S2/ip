@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TaskList {
+    public TaskList() {}
+
     public static ArrayList<Task> tasks = new ArrayList<>();
 
     public static void addTask(String taskDescription) throws

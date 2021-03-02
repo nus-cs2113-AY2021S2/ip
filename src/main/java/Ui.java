@@ -1,5 +1,8 @@
 public class Ui {
 
+    public Ui() {
+    }
+
     static final String SECTION_DIVIDER = "____________________________________________________________";
 
     static void greetUser(){
