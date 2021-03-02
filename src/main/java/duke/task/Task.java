@@ -11,7 +11,6 @@ public class Task {
         this.description = description;
         this.isDone = false;
         taskCount += 1;
-
     }
 
     public String getStatusIcon(){

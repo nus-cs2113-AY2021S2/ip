@@ -1,11 +1,9 @@
 package duke.task;
 
+import duke.accessfile.FileManager;
 import duke.command.CommandNotFoundException;
 import duke.command.MainUI;
 
-
-import java.io.FileOutputStream;
-import java.io.PrintStream;
 import java.util.ArrayList;
 
 import java.io.IOException;
@@ -22,27 +20,31 @@ public class TaskManager {
     private static final String ADDED_TASK_MESSAGE = "Got it. I have added this task: ";
     private static final String MARKED_TASK_AS_DONE_MESSAGE = "Nice! I've marked this task as done: ";
 
+    private FileManager fileManager;
+    public TaskManager() {
+        fileManager = new FileManager();
+    }
 
-    public static void handleTask(String input) throws CommandNotFoundException {
-        String firstWord = StringManipulator.getFirstWord(input);
+    public void handleTask(String input) throws CommandNotFoundException {
+        String firstWord = StringParser.getFirstWord(input);
         switch (firstWord){
         case DONE_COMMAND:
             try {
-                int taskNumberDone = StringManipulator.getTaskNumberDone(input);
+                int taskNumberDone = StringParser.getTaskNumberDone(input);
                 markTaskAsDone(taskNumberDone);
-                updateDataFile();
+                fileManager.updateDataFile();
             } catch (IOException e) {
                 System.out.println("IOError at Done command");
             }
             break;
         case TODO_COMMAND:
             try{
-                String taskDescription = StringManipulator.getIndexOfStringAfterWhiteSpace(input);
+                String taskDescription = StringParser.getIndexOfStringAfterWhiteSpace(input);
                 Todo t = new Todo(taskDescription);
                 t.checkIfToDoDescriptionExists(taskDescription);
                 taskArrayList.add(t);
                 printMessageAfterTaskIsAdded(t);
-                updateDataFile();
+                fileManager.updateDataFile();
             } catch (TaskDescriptionMissingException e) {
                 System.out.println(e.getMessage());
                 MainUI.printDivider();
@@ -53,13 +55,13 @@ public class TaskManager {
             
         case DEADLINE_COMMAND:
             try {
-                String dueDate = StringManipulator.getStringAfterSlash(input);
-                String taskDescription = StringManipulator.getStringAfterWhiteSpaceAndBeforeSlash(input);
+                String dueDate = StringParser.getStringAfterSlash(input);
+                String taskDescription = StringParser.getStringAfterWhiteSpaceAndBeforeSlash(input);
                 Deadline d = new Deadline(taskDescription,dueDate);
                 d.checkIfDeadlineDescriptionExists(taskDescription);
                 taskArrayList.add(d);
                 printMessageAfterTaskIsAdded(d);
-                updateDataFile();
+                fileManager.updateDataFile();
             } catch (TaskDescriptionMissingException e) {
                 System.out.println(e.getMessage());
                 MainUI.printDivider();
@@ -69,24 +71,24 @@ public class TaskManager {
             break;
         case EVENT_COMMAND:
             try {
-                String eventPeriod = StringManipulator.getStringAfterSlash(input);
-                String taskDescription = StringManipulator.getStringAfterWhiteSpaceAndBeforeSlash(input);
+                String eventPeriod = StringParser.getStringAfterSlash(input);
+                String taskDescription = StringParser.getStringAfterWhiteSpaceAndBeforeSlash(input);
                 Event e = new Event(taskDescription,eventPeriod);
                 taskArrayList.add(e);
                 printMessageAfterTaskIsAdded(e);
-                updateDataFile();
+                fileManager.updateDataFile();
             } catch (IOException e) {
                 System.out.println("IOError at EVENT Command");
             }
             break;
         case DELETE_COMMAND:
             try {
-                int taskNumberDeleted = StringManipulator.getTaskNumberDeleted(input);
+                int taskNumberDeleted = StringParser.getTaskNumberDeleted(input);
                 System.out.println("Noted. I've removed this task:\n" + taskArrayList.get(taskNumberDeleted-1));
                 taskArrayList.remove(taskNumberDeleted-1);
                 Task.decreaseTaskCount();
                 System.out.println("Now you have " + Task.getTaskCount() + " tasks in the list.");
-                updateDataFile();
+                fileManager.updateDataFile();
         } catch (IOException e) {
             System.out.println("IOError at DELETE Command");
         }
@@ -97,7 +99,7 @@ public class TaskManager {
     }
 
 
-    private static void printMessageAfterTaskIsAdded(Task task) {
+    private void printMessageAfterTaskIsAdded(Task task) {
         MainUI.printDivider();
         System.out.println(ADDED_TASK_MESSAGE);
         System.out.println("\t"+task);
@@ -105,11 +107,11 @@ public class TaskManager {
         MainUI.printDivider();
     }
 
-    private static void printTaskCount() {
+    private void printTaskCount() {
         System.out.println("Now you have " + Task.getTaskCount() + " task(s) in the list.");
     }
 
-    public static void markTaskAsDone(int taskNumber){
+    public void markTaskAsDone(int taskNumber){
         System.out.println(MARKED_TASK_AS_DONE_MESSAGE);
         taskArrayList.get(taskNumber-1).markAsDone();
         System.out.println(taskArrayList.get(taskNumber-1));
@@ -117,7 +119,7 @@ public class TaskManager {
 
     }
 
-    public static void printAllTasks(ArrayList<Task> taskArrayList){
+    public void printAllTasks(ArrayList<Task> taskArrayList){
         int TaskCount = 0;
         MainUI.printDivider();
         System.out.println("Here are the tasks in your list:");
@@ -128,13 +130,5 @@ public class TaskManager {
         MainUI.printDivider();
     }
 
-    public static void updateDataFile() throws IOException {
-        PrintStream out = new PrintStream(new FileOutputStream(MainUI.FILE_PATH));
-        PrintStream stdout = System.out;
-        System.setOut(out);
-        for (Task task: taskArrayList){
-            System.out.println(task);
-        }
-        System.setOut(stdout);
-    }
+
 }

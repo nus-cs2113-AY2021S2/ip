@@ -1,6 +1,6 @@
 package duke.task;
 
-public class StringManipulator {
+public class StringParser {
 
     public static final int OUT_OF_BOUND_INDEX = -1;
     public static final int DONE_TASK_NUMBER_INDEX = 5;
