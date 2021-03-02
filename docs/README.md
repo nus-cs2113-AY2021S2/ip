@@ -3,7 +3,6 @@
 8K's Task Planner is a Command Line Interface (CLI) app for planning of tasks. 
 
 * [Quick start](#quick-start)
-* [Types of tasks](#types-of-tasks)
 * [Features](#features)
   * [View all commands : `help`](#view-all-commands--help)
   * [List all tasks : `list`](#list-all-tasks--list)
@@ -26,6 +25,10 @@
 
 ## Quick start
 Download `TaskManager.jar` from here: [https://github.com/8kdesign/ip/releases](https://github.com/8kdesign/ip/releases)
+8K's Task Planner comes with 3 type of tasks:
+1. ToDo - Basic task with checkbox.
+1. Event - Task with checkbox and information field.
+1. Deadline - Task with checkbox and due date field.
 
 **Requirement:** 
 1. Java 11 and above
@@ -35,16 +38,6 @@ Download `TaskManager.jar` from here: [https://github.com/8kdesign/ip/releases](
 2. Double-click to start.
 3. Type in command and press enter to execute.<br>
 For more information about commands, please refer to the list below.
-
-&nbsp;
-&nbsp;
-&nbsp;
-
-## Types of tasks
-8K's Task Planner comes with 3 type of tasks are available:
-1. ToDo - Basic task with checkbox.
-1. Event - Task with checkbox and information field.
-1. Deadline - Task with checkbox and due date field.
 
 &nbsp;
 &nbsp;
@@ -76,7 +69,7 @@ List out all the tasks currently in your task list.
 | | Result |
 | --------- | ------------------------------------------------------- |
 | Input | `list` |
-| Output | `1.[T][ ] apple<br>2.[E][ ] apple (at: pear)<br>3.[D][ ] apple (by: 24 Jun 1999)` |
+| Output | `1.[T][ ] apple`<br>`2.[E][ ] apple (at: pear)`<br>`3.[D][ ] apple (by: 24 Jun 1999)` |
 
 &nbsp;
 &nbsp;
@@ -129,7 +122,7 @@ Invalid indices will be skipped.<br>
 | | Result |
 | --------- | ------------------------------------------------------- |
 | Input | `delete 1 2` |
-| Output | `Deleted:<br>[T][ ] task3<br>[T][ ] task1` |
+| Output | `Deleted:`<br>`[T][ ] task3`<br>`[T][ ] task1` |
 | Action | Delete first and second task in task list |
 
 &nbsp;
@@ -144,7 +137,7 @@ Invalid indices will be skipped.<br>
 | | Result |
 | --------- | ------------------------------------------------------- |
 | Input | `done 1 2` |
-| Output | `Marked as done:<br>[D][X] task1 (by: 12 Dec 2020)<br>[D][X] task2 (by: 20 Feb 2021)` |
+| Output | `Marked as done:`<br>`[D][X] task1 (by: 12 Dec 2020)`<br>`[D][X] task2 (by: 20 Feb 2021)` |
 | Action | Mark first and second task in task list as done |
 
 &nbsp;
@@ -159,7 +152,7 @@ Invalid indices will be skipped.<br>
 | | Result |
 | --------- | ------------------------------------------------------- |
 | Input | `undo 1 2` |
-| Output | `Marked as undone:<br>[D][ ] task1 (by: 12 Dec 2020)<br>[D][ ] task2 (by: 20 Feb 2021)` |
+| Output | `Marked as undone:`<br>`[D][ ] task1 (by: 12 Dec 2020)`<br>`[D][ ] task2 (by: 20 Feb 2021)` |
 | Action | Mark first and second task in task list as not done |
 
 &nbsp;
