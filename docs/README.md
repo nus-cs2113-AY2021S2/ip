@@ -36,10 +36,9 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    | |_| | |_| |   <  __/
    |____/ \__,_|_|\_\___|
    ```
-##Using Duke Project
+## Using Duke Project
 
-
-###Help
+### Help
 
 * Display all acceptable commands
 * Format: `help`
@@ -74,7 +73,7 @@ Format: bye
 
 ___________________________________________
 ```
-###List
+### List
 
 * Display all recorded tasks in the list
 * Format: `list`
@@ -88,7 +87,7 @@ Here are the tasks in your list:
 ___________________________________________
 ```
 
-###Todo
+### Todo
 
 * Adds a todo task which has no time limit to finish.
 * Format: `todo DESCRIPTION`
@@ -112,7 +111,7 @@ Please input again!:)
 ___________________________________________
 ```
 
-###Deadline
+### Deadline
 
 * Adds a deadline task which has to be completed before a given time.
 * Format：`deadline DESCRIPTION /by BYTIME`
@@ -136,7 +135,7 @@ Please input again!:)
 ___________________________________________
 ```
 
-###Event
+### Event
 
 * Adds an event task which will start at a given time.
 * Format：`event DESCRIPTION /by ATTIME`
@@ -160,7 +159,7 @@ Please input again!:)
 ___________________________________________
 ```
 
-###Done
+### Done
 
 * Marks a certain task to be done.
 * Format: `done INDEX`
@@ -183,7 +182,7 @@ Please input again!:)
 ___________________________________________
 ```
 
-###Delete
+### Delete
 
 * Deletes a certain task
 * Format: 'delete INDEX'
@@ -208,7 +207,7 @@ Please input again!:)
 ___________________________________________
 ```
 
-###Find
+### Find
 
 * Finds the tasks that contains the certain keyword given by user.
 * Format: `find KEYWORD`
@@ -231,7 +230,7 @@ Please input again!:)
 ___________________________________________
 ```
 
-###Date
+### Date
 
 * Finds all the tasks that are relevant to the specific date
 * Format: `date [yyy-mm-dd]`
@@ -254,7 +253,7 @@ Please input again!:)
 ___________________________________________
 ```
 
-###Bye
+### Bye
 
 * Exits this running program
 * Format: `bye`
@@ -265,7 +264,7 @@ Bye. Hope to see you again soon!
 ___________________________________________
 ```
 
-####Exception
+#### Exception
 
 * The command is not acceptable by Duke
 * Example: `balh` or `hi`
