@@ -4,8 +4,8 @@
 PANDA is a basic task manager that runs on a Command Line Interface (CLI).
 With PANDA, you can add, view and find things you need to do as well as 
 important deadlines and events. Finished a task? Great! Mark it as done. 
-Task no longer relevant? Delete it from the list. PANDA gives you a simple  
-way to maintain a list of your everyday tasks.
+Task no longer relevant? Delete it from the list. PANDA gives you a simple way to
+maintain a list of your everyday tasks.
 
 ## Table of Contents 
 1. [Quick Start](#quick-start)
@@ -32,14 +32,14 @@ way to maintain a list of your everyday tasks.
 1. Ensure you have Java 11 or above installed. You can verify this with the 
    command `java --version` in the CLI.
 2. Download the latest version of `panda.jar` from [here](https://github.com/aliciatay-zls/ip/releases) 
-(under `Assets`). Move the file to your preferred folder location.
+(under `Assets`). Move the file to your preferred folder. 
    
 ### First run
 1. Open the CLI and navigate to the folder your `panda.jar` is located at.
 2. Start the program with this command: `java -jar panda.jar`
-3. If set up successfully you should see this welcome page:
+3. A successful first run should show this welcome page:
 
-![CLI screenshot of successful set up](screenshot-quickstart.png)
+![CLI screenshot of successful run](screenshot-quickstart.png)
 
 ## Features
 
@@ -57,7 +57,7 @@ way to maintain a list of your everyday tasks.
 <br>
 
 ### Showing the help page: `help`
-Displays the list of commands, and their input formats.
+Displays the list of command words, and their input formats.
 <br><br>
 **Format:**&nbsp;`help` 
 <br><br>
@@ -96,9 +96,9 @@ Similar to adding a to-do task, this adds the given event to the list.
 
 **Notes:**
 - `/at` must be part of the command
-- `<timing>`, as in when the event is going to happen, is the suggested input 
+- `<timing>` (when the event is happening) is the suggested input 
   for this field, but you can enter any other type and number of details 
-  on the event
+  of the event
 <br><br>
   
 ### Adding a deadline: `deadline`
@@ -163,7 +163,7 @@ _condensed form_.
 <br><br>
 
 ### Marking a task as done: `done`
-Marks the task with the given index in the list with an 'X' to indicate
+Marks the task that has the given index in the list with an 'X', to indicate
 it is completed.
 <br><br>
 **Format:**&nbsp;`done <index>`
@@ -182,8 +182,8 @@ it is completed.
 <br>
 
 ### Finding tasks by keyword: `find`
-Displays _a new, numbered list_ of tasks that contain the given keyword,
-extracted from the main task list.
+Displays _a new, numbered list_ of tasks from the main list that contain
+the given keyword.
 <br><br>
 **Format:**&nbsp;`find <keyword>`
 
@@ -236,11 +236,11 @@ So if you don't see any messages about saving/loading, that's a good thing :D
 
 **Q: Where can I view this list of tasks outside of PANDA??**
 <br>
-**A:** You can find it in the `data` folder that should be automatically created the 
-first time you run PANDA. The file name is `tasks.txt`. Do note however that PANDA
+**A:** You can find it in the `data` folder that should be automatically created on the first run
+(in the same folder `panda.jar` is located). The file name is `tasks.txt`. Do note however that PANDA
 saves your tasks in a different format than is displayed when running the program.
 For example, if you followed all the example commands on this user guide in the 
-same order, opening `tasks.txt` will show something like this:
+same order, opening `tasks.txt` shows something like this:
 
     E | 0 | Panda Club Fundraising 2021 | 6.00 pm
     D | 0 | sign up for Bamboo Eating Contest | 2021-12-02 | 18:00
@@ -250,16 +250,16 @@ same order, opening `tasks.txt` will show something like this:
 ## Command Summary
 Command Word | Input Format
 ------------ | ------------
-`help` | `help`
-`todo` | `todo <task description>`
-`event` | `event <event description> /at <timing>`
-`deadline` | `deadline <deadline description> /by <yyyy-mm-dd> <HH:mm>`
-`list` | `list`
-`filter` | `filter yyyy-mm-dd`
-`done` | `done <index>`
-`find` | `find <keyword>`
-`delete` | `delete <index>`
-`bye` | `bye`
+help | `help`
+todo | `todo <task description>`
+event | `event <event description> /at <timing>`
+deadline | `deadline <deadline description> /by <yyyy-mm-dd> <HH:mm>`
+list | `list`
+filter | `filter yyyy-mm-dd`
+done | `done <index>`
+find | `find <keyword>`
+delete | `delete <index>`
+bye | `bye`
 
 <br>
 
