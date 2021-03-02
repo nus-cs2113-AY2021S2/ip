@@ -3,21 +3,21 @@
 Spark V3.0 is a personal planner application, optimized for use via a Command Line Interface (CLI),
 while still having the benefits of an understandable Graphical User Interface (GUI). 
 
-- Quick Start
-- Features 
-  - Viewing list of tasks: list
-  - Adding a TODO task: todo 
-  - Adding a EVENT task: event
-  - Adding a DEADLINE task: deadline
-  - Mark a task as completed: done
-  - Delete a task from the list: delete
-  - Search for a task with a keyword: find
-  - Exiting the program: bye
-  - Saving the data
-  - Editing the data file
-  - Loading of saved data file
+- [Quick Start](#quick-start) 
+- [Features](#features) 
+  - [Viewing list of tasks: `list`](#viewing-list-of-tasks-list)
+  - [Adding a TODO task: `todo`](#adding-a-todo-task-todo)
+  - [Adding an EVENT task: `event`](#adding-an-event-task-event)
+  - [Adding a DEADLINE task: `deadline`](#adding-a-deadline-task-deadline)
+  - [Marking a task as completed: `done`](#marking-a-task-as-completed-done)
+  - [Deleting a task from the list: `delete`](#deleting-a-task-from-the-list-delete)
+  - [Searching for a task with a keyword: `find`](#searching-for-a-task-with-a-keyword-find)
+  - [Exiting the program: `bye`](#exiting-the-program-bye)
+  - [Saving the data](#saving-the-data)
+  - [Editing the data file](#editing-the-data-file)
+  - [Loading of saved data file](#loading-of-saved-data-file)
 - FAQ
-- Command Summary
+- [Command Summary](#command-summary)
 
 ---
 
@@ -43,7 +43,7 @@ Displays the list of tasks already input by user.
 
 Format: `list`
 <br/><br/>
-### Adding a TODO event: `todo`
+### Adding a TODO task: `todo`
 Adds a TODO task into the list
 
 Format: `todo DESCRIPTION_OF_TASK`
@@ -105,7 +105,7 @@ Format: `done TASK_POSITION_IN_LIST`
   
 * `TASK_POSITION_IN_LIST` can be viewed with `list` command.
   <br/><br/>
-### Deletes a task from the list: `delete`
+### Deleting a task from the list: `delete`
 Removes the specified task from the list.
 
 Format: `delete TASK_POSITION_IN_LIST`
@@ -117,7 +117,7 @@ Format: `delete TASK_POSITION_IN_LIST`
 
 * `TASK_POSITION_IN_LIST` can be viewed with `list` command.
   <br/><br/>
-### Search for a task with a keyword: `find`
+### Searching for a task with a keyword: `find`
 Searches for tasks in the list with the specified keyword.
 
 Format: `find KEYWORD`
@@ -146,6 +146,17 @@ and start with an empty data file at the next run.
 ### Loading of saved data file
 The data file will be automatically restored when Spark starts up. 
 There is no need to manually load the data file with the list contents.
+
+---
+
+## FAQ
+
+**Q**: Are commands case-sensitive?<br/>
+**A**: Commands are not case-sensitive.
+
+**Q**: What if I do not have an existing saved .TXT file on my computer?
+**A**: The program will detect this and create a new .TXT file automatically.
+
 
 ---
 
