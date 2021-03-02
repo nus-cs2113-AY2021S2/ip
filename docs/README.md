@@ -1,11 +1,15 @@
-# User Guide
+# Duke's User Guide (Jovan's version)
 
-## Features
+## Features in Duke Program
 
 ### View tasks in list: `list`
 Show the list of tasks
 
 #### Format: `list`
+Input:
+```text
+list
+```
 
 Output:
 ```text
@@ -15,10 +19,30 @@ Here are the tasks in your list:
 3.[E][✘] sleep (at: 2pm-4pm)
 4.[T][✘] danceeeee
 ```
+### Delete tasks : `delete`
+Delete task using task number
+
+#### Format: `delete INDEX`
+Input:
+```text
+delete 3
+```
+
+Output:
+```text
+Noted. I've removed this task:
+[E][✘] sleep (at: 2pm-4pm)
+Now you have 3 tasks in the list.
+```
 ### Mark task as completed: `done`
 Marks a task as completed using task number
 
 #### Format: `done INDEX`
+Input:
+```text
+done 1
+```
+
 
 Output:
 ```text
@@ -29,7 +53,10 @@ Nice! I've marked this task as done:
 Add a todo task to the task list
 
 #### Format: `todo DESCRIPTION`
-
+Input:
+```text
+todo run
+```
 Output:
 ```text
 Got it. I've added this task: 
@@ -40,7 +67,10 @@ Now you have 5 task(s) in the list.
 Add a deadline task to the task list
 
 #### Format: `deadline DESCRIPTION /by TIME`
-
+Input:
+```text
+deadline submit CS3223 Project /by Sunday 2359
+```
 Output:
 ```text
 Got it. I've added this task: 
@@ -51,21 +81,42 @@ Now you have 6 task(s) in the list.
 Add an event task to the task list
 
 #### Format: `event DESCRIPTION /at TIME`
+Input:
+```text
+event attend John's Birthday Party /at Monday 1430 to 1530
+```
 
 Output:
 ```text
 Got it. I've added this task: 
-    [E][✘]  attend John's Birthday Party(at: Monday 1430 to Monday 1530)
+    [E][✘]  attend John's Birthday Party (at: Monday 1430 to Monday 1530)
 Now you have 7 task(s) in the list.
 ```
 ### Find a task: `find`
 Find a task from the task list
 
 #### Format: `find DESCRIPTION`
+Input:
+```text
+find danceee
+```
 
 Output:
 ```text
 Here are the matching tasks in your list: 
 1.[T][✘] danceeeee
 ```
+### Terminate Program: `bye`
+Quit program
 
+#### Format: `bye`
+Input:
+```text
+bye
+```
+
+Output:
+```text
+Bye. Hope to see you again soon!
+________________________________
+```
