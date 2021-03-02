@@ -21,21 +21,17 @@ By: `Xia Fuxi` Latest update: `24 Feb 2021`
 
 ## 1. Introduction
 Diggity check it, booyakasha! Wagwan, my name be Ali G and I is here to help you manage your everyday life.
-Whether it be your weekly ganja shipment or your next court hearing session, I is able to help
-you remember bare important tings that your not very cleverer little head always be forgettin'.
+Whether it be your weekly ganja shipment or your next murder trial, I is able to help
+you remember bare important tings that your not very cleverer little head always be forgettin'. Just open up your compooter
+and click on a fancy tekmology called a **command line interface (CLI)** in order to use me.
 
 ## 2. Quick Start
 Prerequisites: JDK 11, update IntelliJ to the most recent version.
-
-### On IntelliJ version 2020.3.1 (latest) and beyond
-
-1. Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-2. Import the project into IntelliJ as follows:
-  1. Click `Open`
-  2. Select the project directory, and click `OK`
-  3. If there are any further prompts, accept the defaults.
-3. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).
-4. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the output below.
+1. Ensure you have `Java 11` installed on your computer.
+2. Download the latest `Duke.jar` from [here](https://github.com/fupernova/ip/releases).
+3. Move the `Duke.jar` into the folder you wish to run it from.
+4. Open up **command prompt** and navigate to the directory where `Duke.jar` resides.
+5. Run the command `java -jar Duke.jar` and you should see the welcome message:
 ```
 Wagwan! I is Ali G. West side.
 What is we chattin' bout today?
