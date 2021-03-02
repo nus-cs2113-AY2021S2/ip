@@ -58,10 +58,10 @@ public class Storage {
             outputArray[2] = task.getDescription();
         } else if (task instanceof Deadline) {
             outputArray[0] = "deadline ";
-            outputArray[2] = task.getDescription() + " /by " + ((Deadline) task).getEndTime();
+            outputArray[2] = task.getDescription() + "/by " + ((Deadline) task).getEndTime();
         } else if (task instanceof Event) {
             outputArray[0] = "event ";
-            outputArray[2] = task.getDescription() + " /at " + ((Event) task).getEventTime();
+            outputArray[2] = task.getDescription() + "/at " + ((Event) task).getEventTime();
         }
         if (task.isDone()){
             outputArray[1] = "|1|";

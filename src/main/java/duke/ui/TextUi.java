@@ -3,7 +3,9 @@ package duke.ui;
 import duke.Command;
 import duke.TaskList;
 import duke.parser.Parser;
+import duke.task.Task;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TextUi {
@@ -45,6 +47,16 @@ public class TextUi {
             taskNum = Parser.getTaskNum(userCommandText, Command.DELETE);
             System.out.println("Noted. I've removed this task:"+ System.lineSeparator() +
                     taskList.getDeletedTask(taskNum - 1));
+        case FIND:
+            ArrayList<Task> foundTasks = taskList.findTask(userCommandText.replaceFirst("find ", ""));
+            if (foundTasks.size() == 0){
+                System.out.println("No tasks found.");
+                break;
+            }
+            System.out.println("Here are the matching tasks in your list:");
+            for (Task task : foundTasks) {
+                System.out.println(task);
+            }
         case ERROR:
             break;
         default:

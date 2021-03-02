@@ -1,7 +1,7 @@
 package duke;
 
 import duke.exceptions.EmptyDescriptionException;
-import duke.exceptions.InvalidCommandException;
+import duke.parser.Parser;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -20,7 +20,7 @@ public class TaskList {
         Task newTask;
         String[] stringArray;
         try {
-            validateDescription(description, command);
+            Parser.validateDescription(description, command);
         } catch (EmptyDescriptionException e) {
             System.out.println("The description cannot be empty!");
             return Command.ERROR;
@@ -43,30 +43,6 @@ public class TaskList {
         }
         tasks.add(newTask);
         return command;
-    }
-
-    public void validateDescription(String description, Command command) throws EmptyDescriptionException {
-        if (description.equals("")) {
-            throw new EmptyDescriptionException();
-        }
-        switch (command) {
-        case TODO:
-            break;
-        case DEADLINE:
-            break;
-        case EVENT:
-            break;
-        case DONE:
-            if (description.replace("done ", "").equals("")) {
-                throw new EmptyDescriptionException();
-            }
-            break;
-        case DELETE:
-            if (description.replace("delete ", "").equals("")) {
-                throw new EmptyDescriptionException();
-            }
-            break;
-        }
     }
 
     @Override
@@ -110,7 +86,18 @@ public class TaskList {
         deleteTask(taskNum);
         return task;
     }
+
     public int getSize(){
         return tasks.size();
+    }
+
+    public ArrayList<Task> findTask(String keyword) {
+        ArrayList<Task> foundTasks = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.getDescription().contains(keyword)){
+                foundTasks.add(task);
+            }
+        }
+        return foundTasks;
     }
 }

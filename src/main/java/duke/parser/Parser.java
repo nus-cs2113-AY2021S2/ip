@@ -20,12 +20,12 @@ public class Parser {
             case EVENT:
                 command = taskList.addTask(input.replaceFirst("event ", ""), Command.EVENT);
                 break;
+
             case DONE:
                 try {
-                    taskList.validateDescription(input, Command.DONE);
+                    validateDescription(input, Command.DONE);
                 } catch (EmptyDescriptionException e) {
                     System.out.println("Done command needs task number!");
-                    ;
                     command = Command.ERROR;
                     break;
                 }
@@ -34,11 +34,18 @@ public class Parser {
                 break;
             case DELETE:
                 try {
-                    taskList.validateDescription(input, Command.DELETE);
+                    validateDescription(input, Command.DELETE);
                 } catch (EmptyDescriptionException e) {
                     System.out.println("Delete command needs task number!");
                     command = Command.ERROR;
-                    break;
+                }
+                break;
+            case FIND:
+                try {
+                    validateDescription(input, Command.FIND);
+                } catch (EmptyDescriptionException e) {
+                    System.out.println("Find command needs a description!");
+                    command = Command.ERROR;
                 }
                 break;
             default:
@@ -77,8 +84,35 @@ public class Parser {
             return Command.EVENT;
         } else if (input.startsWith("delete ")) {
             return Command.DELETE;
+        } else if (input.startsWith("find ")) {
+            return Command.FIND;
         } else {
             throw new InvalidCommandException();
+        }
+    }
+
+    public static void validateDescription(String description, Command command) throws EmptyDescriptionException {
+        if (description.equals("")) {
+            throw new EmptyDescriptionException();
+        }
+        switch (command) {
+        case DONE:
+            if (description.replace("done ", "").equals("")) {
+                throw new EmptyDescriptionException();
+            }
+            break;
+        case DELETE:
+            if (description.replace("delete ", "").equals("")) {
+                throw new EmptyDescriptionException();
+            }
+            break;
+        case FIND:
+            if (description.replace("find ", "").equals("")) {
+                throw new EmptyDescriptionException();
+            }
+            break;
+        default:
+            break;
         }
     }
 }
