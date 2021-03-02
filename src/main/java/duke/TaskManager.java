@@ -49,7 +49,7 @@ public class TaskManager {
      * @param by the date of the DeadlineTask
      * @return the added DeadlineTask object.
      */
-    public Deadline addDeadline(String content, String by) {
+    public Deadline addDeadline(String content, LocalDate by) {
         Task taskAdded = new Deadline(content, by);
         tasks.add(taskAdded);
         return (Deadline) taskAdded;
@@ -63,7 +63,7 @@ public class TaskManager {
      * @param at the date of the EventTask
      * @return the added EventTask object.
      */
-    public Event addEvent(String content, String at) {
+    public Event addEvent(String content, LocalDate at) {
         Task taskAdded = new Event(content, at);
         tasks.add(taskAdded);
         return (Event) taskAdded;
@@ -108,10 +108,10 @@ public class TaskManager {
                 .filter((t) -> (t instanceof Event))
                 .filter((s) -> ((Event) s).getAt().equals(date))
                 .collect(toList());
-        
+
         filteredDeadline.addAll(filteredEvent);
         return filteredDeadline;
-
+    }
 
     // find tasks by string
     public ArrayList<Task> filterTasksByString(String filterString) {
