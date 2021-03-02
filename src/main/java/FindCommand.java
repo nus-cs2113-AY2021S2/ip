@@ -1,20 +1,20 @@
 /**
- * Contains methods for marking tasks as done
+ * Contains methods for finding a task
  */
-public class MarkAsDoneCommand extends Command{
+public class FindCommand extends Command{
 
-    private int indexToBeProcessed;
+    private String messageToBeProcessed;
 
     /**
-     * Constructs a command for marking a task as done
-     * @param indexToBeProcessed user input
+     * Constructs a command for finding a task
+     * @param messageToBeProcessed user input
      */
-    public MarkAsDoneCommand(int indexToBeProcessed) {
-        this.indexToBeProcessed = indexToBeProcessed;
+    public FindCommand(String messageToBeProcessed) {
+        this.messageToBeProcessed = messageToBeProcessed;
     }
 
     /**
-     * Calls the markDone method
+     * Calls the findTasks method
      *
      * @param tasks instantiation of ArrayList of Tasks
      * @param ui Ui instantiation
@@ -22,7 +22,7 @@ public class MarkAsDoneCommand extends Command{
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.markDone(tasks, ui, storage, indexToBeProcessed);
+        tasks.findTasks(messageToBeProcessed);
     }
 
     /**
