@@ -7,13 +7,13 @@ import duke.taskexceptions.TaskDateFormatException;
 
 import java.io.IOException;
 
-public class dukeDup {
+public class Duke {
 
     private static Storage storage;
     private static TaskList tasks;
     private static Ui ui;
 
-    public dukeDup(String filePath) {
+    public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -61,15 +61,15 @@ public class dukeDup {
                 System.out.println("Please input a smaller or bigger valid task number.");
                 System.out.println("You can list all tasks to check the total number of tasks you have. :))"); //invalid TaskNumber
             }
-
             isExit = Command.execute(tasks, ui, storage);
             ui.showLine(); //end of current Response to User
+
         }
 
     }
 
     public static void main(String[] args) {
-        new dukeDup("data/dukeList.txt").run();
+        new Duke("data/dukeList.txt").run();
     }
 
 }

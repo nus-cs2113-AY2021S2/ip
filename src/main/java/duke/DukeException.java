@@ -1,2 +1,8 @@
-package duke;public class DukeException {
+package duke;
+
+import java.io.IOException;
+
+public class DukeException extends IOException {
+
 }
+
