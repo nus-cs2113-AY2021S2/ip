@@ -4,10 +4,19 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Ui {
+    /**
+     * Constructor for Ui class
+     *
+     */
     public Ui(){
 
     }
 
+    /**
+     * The method to run the program, which will handle interactions with the user
+     *
+     * @param storage the storage object, which contains information and methods to write to disk
+     */
     public static void runProgram(Storage storage) {
         Scanner in = new Scanner(System.in);
         String userInput;

@@ -15,11 +15,20 @@ public class Storage {
 
     private Path dataFileDirectory;
 
+    /**
+     * A constructor for Storage class
+     */
     public Storage(){
         this.dataDirectory = Path.of(System.getProperty("user.dir") + "\\data");
         this.dataFileDirectory = Path.of(System.getProperty("user.dir") + "\\data" + "\\duke.txt");
     }
 
+    /**
+     * Performs a write to disk operation.
+     *
+     * @param tasks an input arraylist of tasks, contents which are to be written to the disk, overwriting whatever
+     *              is currently present
+     */
     public void writeToDisk(ArrayList<Task> tasks) throws IOException {
         //Each time I want to write to the Disk, I clear away the entire contents of the data file and write everything
         //Done by deleting the file and creating it again
@@ -51,6 +60,12 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * A wrapper method for the writeToDisk method
+     *
+     * @param tasks an input arraylist of tasks, contents which are to be written to the disk, overwriting whatever
+     *              is currently present
+     */
     public void wrapWriteToDisk(ArrayList<Task> tasks){
         try{
             writeToDisk(tasks);
@@ -59,6 +74,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Performs a load from disk operation.
+     *
+     * @param taskList an input TaskList, which is updated from the contents in the disk
+     */
     public void loadDataFromDisk(TaskList taskList) throws FileNotFoundException {
         File dataFile = new File(String.valueOf(dataFileDirectory));
         Scanner s = new Scanner(dataFile);
@@ -77,6 +97,9 @@ public class Storage {
         s.close();
     }
 
+    /**
+     * Creates a new text file at a specified directory
+     */
     public void createNewFile() {
         try{
             // If directory does not exist, then create the directory
@@ -94,6 +117,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Checks if the text file exists, and creates one otherwise
+     */
     public void checkForFile() throws IOException {
         if(!Files.exists(this.dataFileDirectory)){
             File newFile = new File(String.valueOf(this.dataFileDirectory));
@@ -101,6 +127,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Checks if the directory to store the text file exists, and creates one otherwise
+     */
     public void checkForDirectory() throws IOException {
         if(!Files.exists(this.dataDirectory)){
             Files.createDirectory(this.dataDirectory);
