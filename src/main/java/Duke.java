@@ -5,6 +5,8 @@ import storage.FileManager;
 import tasklist.*;
 import ui.TextUI;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import static common.Messages.*;
@@ -24,7 +26,7 @@ public class Duke {
             throws BlankDescriptionException, EmptyListException,
             MissingDateException, IOException, InvalidSpaceException, NoMatchesFoundException {
         boolean isExit = false;
-        FileManager.restoreFileContents("Duke.txt");
+            FileManager.restoreFileContents("Duke.txt");
         do {
             TextUI ui = new TextUI();
 

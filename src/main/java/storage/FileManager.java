@@ -17,6 +17,7 @@ import java.util.Scanner;
  */
 public class FileManager {
 
+
     /**
      * This method writes the contents of the list to a text file
      * named Duke.txt. File writing takes place automatically upon quitting GuiltySpark
@@ -40,19 +41,24 @@ public class FileManager {
      * @throws FileNotFoundException if the specified file name in filePath is not located
      * @throws BlankDescriptionException if the file is blank
      */
-    public static void restoreFileContents(String filePath) throws FileNotFoundException, BlankDescriptionException {
-        File f = new File(filePath);
-        Scanner s = new Scanner(f);
-        if (s.hasNext()) {
-            System.out.println("Importing your saved list!");
-        } else {
-            System.out.println("You do not have any saved list!");
+    public static void restoreFileContents(String filePath) throws IOException, BlankDescriptionException {
+        try{
+            File f = new File(filePath);
+            Scanner s = new Scanner(f);
+            if (s.hasNext()) {
+                System.out.println("Importing your saved list!");
+            } else {
+                System.out.println("You do not have any saved list!");
+            }
+
+            while (s.hasNext()) {
+                String nextTask = s.nextLine();
+                Tasklist.addTask(taskDecoder.taskDecoder(nextTask));
+            }
+        } catch(FileNotFoundException e) {
+            new File("Duke.txt").createNewFile();
         }
 
-        while (s.hasNext()) {
-            String nextTask = s.nextLine();
-            Tasklist.addTask(taskDecoder.taskDecoder(nextTask));
-        }
 
     }
 }
