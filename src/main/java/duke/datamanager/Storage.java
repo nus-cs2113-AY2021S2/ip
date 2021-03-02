@@ -14,7 +14,7 @@ import java.util.Scanner;
 /**
  * This class handles all the file-processing activities
  */
-public class FileManager {
+public class Storage {
     /**
      * This method handles the reading and loading of saved data into Duke
      * @throws IOException when the file fails to be read

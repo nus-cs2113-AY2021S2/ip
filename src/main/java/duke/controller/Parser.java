@@ -5,11 +5,11 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
-import duke.ui.UI;
+import duke.ui.Ui;
 
 import java.util.ArrayList;
 
-public class TaskManager {
+public class Parser {
     /**
      * processTask is the main class which redirects and classifies various inputs
      * @param input is the raw user input
@@ -43,10 +43,10 @@ public class TaskManager {
     private static void processFindTask(String[] inputData) {
         try {
             ArrayList<Task> matches = Task.find(inputData[1]);
-            UI.tasksFound(inputData[1], matches);
+            Ui.tasksFound(inputData[1], matches);
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Please enter a search query");
-            UI.requestInput();
+            Ui.requestInput();
         }
 
     }
@@ -57,10 +57,10 @@ public class TaskManager {
             taskDetails = parseTaskDetails(inputData);
             Todo.checkTodoInput(taskDetails);
             Task.addNewTask(new Todo(taskDetails[0]));
-            UI.taskAddedSuccessfully();
+            Ui.taskAddedSuccessfully();
         } catch (MissingTaskDescriptionException e) {
             System.out.println(e.getMessage());
-            UI.requestInput();
+            Ui.requestInput();
         }
     }
 
@@ -70,16 +70,16 @@ public class TaskManager {
             taskDetails = parseTaskDetails(inputData);
             Event.checkEventInput(taskDetails);
             Task.addNewTask(new Event(taskDetails[0], taskDetails[1]));
-            UI.taskAddedSuccessfully();
+            Ui.taskAddedSuccessfully();
         } catch (MissingEventDurationException e) {
             System.out.println(e.getMessage());
-            UI.requestInput();
+            Ui.requestInput();
         } catch (MissingTaskDescriptionException e) {
             System.out.println(e.getMessage());
-            UI.requestInput();
+            Ui.requestInput();
         } catch (InvalidDateTimeException e) {
             System.out.println(e.getMessage());
-            UI.requestInput();
+            Ui.requestInput();
         }
     }
 
@@ -89,16 +89,16 @@ public class TaskManager {
             taskDetails = parseTaskDetails(inputData);
             Deadline.checkDeadlineInput(taskDetails);
             Task.addNewTask(new Deadline(taskDetails[0], taskDetails[1]));
-            UI.taskAddedSuccessfully();
+            Ui.taskAddedSuccessfully();
         } catch (MissingDueDateException e) {
             System.out.println(e.getMessage());
-            UI.requestInput();
+            Ui.requestInput();
         } catch (MissingTaskDescriptionException e) {
             System.out.println(e.getMessage());
-            UI.requestInput();
+            Ui.requestInput();
         } catch (InvalidDateTimeException e) {
             System.out.println(e.getMessage());
-            UI.requestInput();
+            Ui.requestInput();
         }
     }
 
@@ -110,25 +110,25 @@ public class TaskManager {
             if (inputData[0].equals("done")) {
                 Task.checkTaskComplete(taskIndex);
                 Task.completeTask(taskIndex);
-                UI.taskCompletedSuccessfully();
+                Ui.taskCompletedSuccessfully();
             }
             else {
                 Task.deleteTask(taskIndex);
-                UI.taskDeletedSuccessfully();
+                Ui.taskDeletedSuccessfully();
             }
 
         } catch (NumberFormatException e) {
             System.out.println("That didn't work...please enter a valid number");
-            UI.requestInput();
+            Ui.requestInput();
         } catch (TaskAlreadyCompletedException e) {
             System.out.println(e.getMessage());
-            UI.requestInput();
+            Ui.requestInput();
         } catch (TaskNotExistException e) {
             System.out.println(e.getMessage());
-            UI.requestInput();
+            Ui.requestInput();
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Please input the correct number of the task you wish to interact with");
-            UI.requestInput();
+            Ui.requestInput();
         }
     }
 

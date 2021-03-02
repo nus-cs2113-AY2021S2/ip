@@ -1,12 +1,12 @@
 package duke.ui;
 
-import duke.datamanager.FileManager;
+import duke.datamanager.Storage;
 import duke.task.Task;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class UI {
+public class Ui {
     /**
      * Prints the logo for Duke
      */
@@ -36,7 +36,7 @@ public class UI {
     public static void showLoadDataScreen() {
         System.out.println("Searching for saved data...");
         try {
-            FileManager.readFile();
+            Storage.readFile();
             System.out.println("Loading saved data...");
         } catch (IOException e) {
             System.out.println("No data found - please ensure that a directory " +
@@ -50,7 +50,7 @@ public class UI {
     public static void showSaveDataScreen() {
         System.out.println("Saving data...");
         try {
-            FileManager.saveToFile();
+            Storage.saveToFile();
             System.out.println("Data saved successfully!");
         } catch (IOException e) {
             System.out.println("Unable to save - please create a directory called 'data' in the project directory!");
@@ -73,7 +73,7 @@ public class UI {
         System.out.println("This is your current list:");
         showTaskList();
         System.out.println("Of these tasks, you still have " + Task.getRemainingTasks() + " to complete!");
-        UI.requestInput();
+        Ui.requestInput();
     }
 
     /**
@@ -95,7 +95,7 @@ public class UI {
         System.out.println(Task.getRecentTask(getCompletedTask));
         System.out.println("You now have " + Task.getTaskCounter() + " tasks in your list!");
         showSaveDataScreen();
-        UI.requestInput();
+        Ui.requestInput();
     }
 
     /**
@@ -107,7 +107,7 @@ public class UI {
         System.out.println(Task.getRecentTask(getCompletedTask));
         System.out.println("You still have " + Task.getRemainingTasks() + " tasks to complete in your list!");
         showSaveDataScreen();
-        UI.requestInput();
+        Ui.requestInput();
     }
 
     /**
@@ -119,7 +119,7 @@ public class UI {
         System.out.println(Task.getRecentTask(getDeletedTask));
         System.out.println("You still have " + Task.getRemainingTasks() + " tasks to complete in your list!");
         showSaveDataScreen();
-        UI.requestInput();
+        Ui.requestInput();
     }
 
     /**
@@ -133,7 +133,7 @@ public class UI {
             int displayedNumber = i + 1;
             System.out.println(displayedNumber + ". " + tasks.get(i));
         }
-        UI.requestInput();
+        Ui.requestInput();
 
     }
 
@@ -141,8 +141,8 @@ public class UI {
      * Simple farewell screen before the application exits
      */
     public static void showFarewellScreen() {
-        System.out.println(UI.divider);
+        System.out.println(Ui.divider);
         System.out.println("Bye! Hope to hear from you again soon!");
-        System.out.println(UI.divider);
+        System.out.println(Ui.divider);
     }
 }
