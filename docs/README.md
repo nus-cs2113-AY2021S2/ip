@@ -38,9 +38,9 @@ way to maintain a list of your everyday tasks.
 1. Open the CLI and navigate to the folder your `panda.jar` is located at.
 2. Start the program with this command: `java -jar panda.jar`
 3. If successful you should see the welcome page, like this:
-<br></br>
+
+
     ____________________________________________________________
-       ______________________________________________________________________
                                       ,::::,
                           ,,,,:::::::':::::::
         ,::::.     ..:::~~           \::::::
@@ -68,7 +68,6 @@ way to maintain a list of your everyday tasks.
        Hello, I'm Panda!
        What would you like to do today?
        Tip: use "help" to view all valid commands
-       ______________________________________________________________________
     ____________________________________________________________
 
 
