@@ -67,7 +67,7 @@ public class Task {
      * @return a status icon corresponding to whether a task is completed or not
      */
     public String getStatusIcon(){
-        return (isDone ? "[ \u2713 ] " : "[ \u2718 ] ");
+        return (isDone ? "[ Y ] " : "[ N ] ");
     }
 
     /**
