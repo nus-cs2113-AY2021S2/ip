@@ -13,6 +13,13 @@ import javax.naming.LimitExceededException;
 import javax.naming.directory.SearchResult;
 import java.util.ArrayList;
 
+/**
+ * Method that searches for the presence of a string or sequence
+ * of characters in the list, before outputting them in a list view for the user.
+ * Accepts both string sequences with spacing, or without.
+ * @param userInput This is the string sequence which the user wants to search for
+ */
+
 public class Find {
 
     public static void execute(String userInput)

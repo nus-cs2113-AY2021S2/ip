@@ -4,6 +4,9 @@ import myexceptions.EmptyListException;
 import tasklist.Task;
 import tasklist.Tasklist;
 
+/**
+ * Method that lists all recorded tasks for the user
+ */
 public class ListTasks {
 
     public static void execute() throws EmptyListException {

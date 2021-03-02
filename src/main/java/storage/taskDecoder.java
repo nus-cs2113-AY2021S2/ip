@@ -6,8 +6,19 @@ import tasklist.Event;
 import tasklist.Task;
 import tasklist.Todo;
 
+/**
+ * The task decoder converts the tasks in the text file, into a
+ * parsable from in the GuiltySpark program
+ */
 public class taskDecoder {
 
+    /**
+     * The task decoder converts the tasks in the text file, into a
+     * parsable from in the GuiltySpark program
+     * @param nextLine This is the next line of text in the text file
+     * @return returns the task
+     * @throws BlankDescriptionException if description fields are blank
+     */
     public static Task taskDecoder(String nextLine) throws BlankDescriptionException {
 
         char taskType = nextLine.charAt(1);
@@ -20,7 +31,6 @@ public class taskDecoder {
             if (taskStatus.equalsIgnoreCase("1")) {
                 task.isDone = true;
             }
-            //AddTodo.execute(taskDescription);
             break;
         case 'E':
             int indexOfBy = taskDescription.indexOf("--");

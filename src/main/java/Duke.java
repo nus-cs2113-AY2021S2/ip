@@ -9,6 +9,11 @@ import java.io.IOException;
 
 import static common.Messages.*;
 
+/**
+ * Main program of GuiltySpark.
+ * @author Jonathan Khoo
+ * @version 3.0
+ */
 public class Duke {
 
 
@@ -100,154 +105,5 @@ public class Duke {
 
 
         runCommandLoopUntilExitCommand();
-
-
-
-        /*
-        String text = "hi";
-
-        try{
-            restoreFileContents("Duke.txt");
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found!");
-        }
-
-        while(!text.equalsIgnoreCase("Bye")){
-            Scanner in = new Scanner(System.in);
-            text = in.nextLine();
-
-            //tasklist.Task t = new tasklist.Task(text);
-            try {
-                String[] arr = text.split(" "); //split command input into words
-                String command = arr[0];
-
-
-                switch (command) {
-                case "deadline":
-                case "tasklist.Deadline":
-                case "DEADLINE":
-                    try {
-                        if(!text.contains("/") && !text.substring(9).isBlank()){
-                            throw new MissingDateException();
-                        }
-                        int indexOfBy = text.indexOf('/');
-                        description = text.substring(9, indexOfBy - 1);
-                        by = text.substring(indexOfBy + 1);
-                        Deadline deadlineTask = new Deadline(description, by);
-
-                        storeTask(deadlineTask);
-                    } catch (StringIndexOutOfBoundsException | BlankDescriptionException e) {
-                        System.out.println("Description cannot be blank!");
-                    } catch (MissingDateException e){
-                        System.out.println("Missing date! Utilise '/' to key in your date!");
-                    }
-                    break;
-                case "todo":
-                case "tasklist.Todo":
-                case "TODO":
-
-                    try {
-                        if(text.substring(4).isBlank()){
-                            throw new BlankDescriptionException();
-                        }
-                        description = text.substring(5);
-                        Todo todoTask = new Todo(description);
-                        storeTask(todoTask);
-                        break;
-                    } catch (BlankDescriptionException e) {
-                        System.out.println("tasklist.Todo cannot be empty");
-                        break;
-                    }
-
-
-                case "event":
-                case "tasklist.Event":
-                case "EVENT":
-
-                    try {
-                        if(!text.contains("/") && !text.substring(6).isBlank()){
-                            throw new MissingDateException();
-                        }
-                        indexOfBy = text.indexOf('/');
-
-                        String description = text.substring(6, indexOfBy - 1);
-                        String by = text.substring(indexOfBy + 1);
-                        Event eventTask = new Event(description, by);
-                        storeTask(eventTask);
-                    } catch (IndexOutOfBoundsException | BlankDescriptionException e) {
-                        System.out.println("tasklist.Event description cannot be empty! Try again!");
-                    } catch (MissingDateException e){
-                        System.out.println("tasklist.Event must have a date! Try again!");
-                    }
-                    break;
-                case "List":
-                case "list":
-                case "LIST":
-                    listArray(tasks);
-                    break;
-                case "Done":
-                case "done":
-                case "DONE":
-                    try {
-                        Integer taskIndex = Integer.parseInt(arr[1]);
-                        markAsDone(taskIndex);
-                        break;
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        System.out.println("What do you want to mark as done?");
-                        break;
-                    } catch (IndexOutOfBoundsException e) {
-                        System.out.println("That's not in the list! Try again!");
-                        break;
-                    }
-                case "Delete":
-                case "delete":
-                case "DELETE":
-                    //try {
-                        Integer taskIndex = Integer.parseInt(arr[1]);
-                        markAsDeleted(taskIndex);
-                        break;
-                    //} catch (ArrayIndexOutOfBoundsException e) {
-                      //  System.out.println("What do you want to mark as done?");
-                        //break;
-                    //}
-                case "Bye":
-                case "bye":
-                case"BYE":
-                    break;
-
-
-                default:
-
-                    throw new InvalidCommandException();
-                }
-            } catch (ArrayIndexOutOfBoundsException e){
-                System.out.println("No input detected. What did you want to do?");
-            } catch (InvalidCommandException e){
-                System.out.println("Invalid command detected! What do you want to do?");
-            } catch (IndexOutOfBoundsException e){
-                System.out.println("There are only " + tasks.size() + " number of tasks in the list! Try again!");
-            }
-            String file2 = "Duke.txt";
-            try {
-                writeToFile(file2, tasks);
-            } catch (IOException e) {
-                System.out.println("Something went wrong: " + e.getMessage());
-            }
-        }
-        System.out.println("Bye! Hope to see you again soon!");
-    }
-
-    private static void markAsDeleted(Integer taskIndex) {
-        if (taskIndex > tasks.size() || taskIndex < 0) {
-            throw new IndexOutOfBoundsException();
-        }
-        Task t = tasks.get(taskIndex - 1);
-        System.out.println("Noted! I have deleted this task for you: ");
-        System.out.println(taskIndex + "." + t.getStatusIcon() + " " + t.getDescription());
-        tasks.remove(taskIndex - 1);
-        System.out.println("Now you have " + tasks.size() + " tasks in the list!");
-    }
-    */
-
     }
 }
