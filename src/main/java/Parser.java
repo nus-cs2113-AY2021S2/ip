@@ -16,9 +16,9 @@ public class Parser {
                 TaskList.displayTaskDone(Integer.parseInt(command[1]));
             } catch (IndexOutOfBoundsException oob) {
                 Ui.printTaskUnspecifiedMessage();
-            }catch (NullPointerException npe) {
+            } catch (NullPointerException npe) {
                 Ui.printInvalidTask();
-            } catch (DukeException de){
+            } catch (DukeException de) {
                 Ui.printTaskAlreadyMarkedAsDone();
             }
             break;
@@ -33,6 +33,9 @@ public class Parser {
             break;
         case "delete":
             TaskList.deleteTask(Integer.parseInt(command[1]));
+            break;
+        case "find":
+            TaskList.searchArrayList(command[1]);
             break;
         case "bye":
             isExit = true;

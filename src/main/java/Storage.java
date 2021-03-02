@@ -54,7 +54,7 @@ public class Storage {
             switch (type) {
             case 'T':
                 Task a = new Todo(info);
-                tasks.add(count,a);
+                tasks.add(count, a);
                 if (line.charAt(4) == '1') {
                     tasks.get(count).markAsDone();
                 }
@@ -64,9 +64,9 @@ public class Storage {
                 break;
             case 'D':
                 String dateOrTime = info.substring(dateIndex + 2);
-                String updatedInfo = info.substring(0, dateIndex );
+                String updatedInfo = info.substring(0, dateIndex);
                 Task b = new Deadline(updatedInfo, dateOrTime);
-                tasks.add(count,b);
+                tasks.add(count, b);
                 if (line.charAt(4) == '1') {
                     tasks.get(count).markAsDone();
                 }
@@ -76,9 +76,9 @@ public class Storage {
                 break;
             case 'E':
                 String dateOrTime1 = info.substring(dateIndex + 2);
-                String updatedInfo1 = info.substring(0, dateIndex );
+                String updatedInfo1 = info.substring(0, dateIndex);
                 Task c = new Event(updatedInfo1, dateOrTime1);
-                tasks.add(count,c);
+                tasks.add(count, c);
                 if (line.charAt(4) == '1') {
                     tasks.get(count).markAsDone();
                 }

@@ -34,30 +34,30 @@ public class TaskList {
     }
 
     public static void displayTaskDone(int index) throws DukeException {
-        if ((tasks.get(index-1)).isDone()) {
+        if ((tasks.get(index - 1)).isDone()) {
             throw new DukeException();
         } else {
-            (tasks.get(index-1)).markAsDone();
+            (tasks.get(index - 1)).markAsDone();
             Ui.printBorder();
             System.out.println("      Nice! I've marked this task as done: ");
             System.out.print("       ");
-            System.out.println((tasks.get(index-1)));
+            System.out.println((tasks.get(index - 1)));
             Ui.printBorder();
         }
     }
 
     public static void deleteTask(int index) {
-            Task temp = tasks.get(index - 1);
-            tasks.remove(index-1);
-            Ui.printBorder();
-            System.out.println("      Noted. I've removed this task:  ");
-            System.out.print("       ");
-            System.out.println(temp);
-            Ui.printBorder();
-            count--;
+        Task temp = tasks.get(index - 1);
+        tasks.remove(index - 1);
+        Ui.printBorder();
+        System.out.println("      Noted. I've removed this task:  ");
+        System.out.print("       ");
+        System.out.println(temp);
+        Ui.printBorder();
+        count--;
     }
 
-    public static void addToDo(String[] command){
+    public static void addToDo(String[] command) {
         try {
             Task a = new Todo(command[1]);
             addTaskToArrayList(a);
@@ -68,10 +68,10 @@ public class TaskList {
         Ui.printBorder();
     }
 
-    public static void addEvent(String[] command){
+    public static void addEvent(String[] command) {
         String[] newCommand = command[1].split(" /at ", 2);
         try {
-            Task c = new Event(newCommand[0],newCommand[1]);
+            Task c = new Event(newCommand[0], newCommand[1]);
             addTaskToArrayList(c);
             System.out.println("     Now you have " + count + " tasks in the list.");
         } catch (IndexOutOfBoundsException oob) {
@@ -80,10 +80,10 @@ public class TaskList {
         Ui.printBorder();
     }
 
-    public static void addDeadline(String[] command){
+    public static void addDeadline(String[] command) {
         String[] newCommand = command[1].split(" /by ", 2);
         try {
-            Task c = new Deadline(newCommand[0],newCommand[1]);
+            Task c = new Deadline(newCommand[0], newCommand[1]);
             addTaskToArrayList(c);
             System.out.println("     Now you have " + count + " tasks in the list.");
         } catch (IndexOutOfBoundsException oob) {
@@ -99,4 +99,26 @@ public class TaskList {
         count++;
         System.out.println("      " + a);
     }
+
+    public static void searchArrayList(String keyword) {
+        Ui.printBorder();
+        System.out.println("     Here are the matching tasks in your list:");
+        boolean hasTask = false;
+        for (Task task : tasks) {
+            if (!task.getDescription().contains(keyword)) {
+                continue;
+            }
+            printFoundTaskMessage(task);
+            hasTask = true;
+        }
+        if (!hasTask) {
+            System.out.println("     There are no tasks with that keyword!");
+        }
+        Ui.printBorder();
+    }
+
+    public static void printFoundTaskMessage(Task task) {
+        System.out.println("     " + (tasks.indexOf(task) + 1) + "." + task);
+    }
+
 }
