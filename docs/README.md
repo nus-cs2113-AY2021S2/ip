@@ -2,6 +2,11 @@
 
 8K's Task Planner is a Command Line Interface (CLI) app for planning of tasks. 
 
+Comes with 3 type of tasks:
+1. ToDo - Basic task with checkbox.
+1. Event - Task with checkbox and information field.
+1. Deadline - Task with checkbox and due date field.
+
 * [Quick start](#quick-start)
 * [Features](#features)
   * [View all commands : `help`](#view-all-commands--help)
@@ -25,10 +30,6 @@
 
 ## Quick start
 Download `TaskManager.jar` from here: [https://github.com/8kdesign/ip/releases](https://github.com/8kdesign/ip/releases)
-8K's Task Planner comes with 3 type of tasks:
-1. ToDo - Basic task with checkbox.
-1. Event - Task with checkbox and information field.
-1. Deadline - Task with checkbox and due date field.
 
 **Requirement:** 
 1. Java 11 and above
