@@ -1,8 +1,1 @@
-1|todo|task1||
-0|deadline|task2|/by|2020-12-05
-1|deadline|games|/by|2021-10-21
-0|deadline|this|/by|2020-01-01
-0|deadline|asofja|/by|2020-01-19
-1|event|new|/at|2010-02-01
-0|event|now|/at|2012-09-12
-0|deadline|cs2113|/by|2012-01-01
+1|event||/at|2020-11-12
