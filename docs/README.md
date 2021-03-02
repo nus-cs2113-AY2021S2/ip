@@ -1,20 +1,71 @@
 # User Guide
 
-## Features 
+## Features
 
-### Feature 1 
-Description of feature.
+### View tasks in list: `list`
+Show the list of tasks
 
-## Usage
+#### Format: `list`
 
-### `Keyword` - Describe action
+Output:
+```text
+Here are the tasks in your list:
+1.[T][✘] dance
+2.[D][✘] Finish CS3245 (by: Thurs 2pm)
+3.[E][✘] sleep (at: 2pm-4pm)
+4.[T][✘] danceeeee
+```
+### Mark task as completed: `done`
+Marks a task as completed using task number
 
-Describe action and its outcome.
+#### Format: `done INDEX`
 
-Example of usage: 
+Output:
+```text
+Nice! I've marked this task as done:
+[T][✓]  dance
+```
+### Add a todo task: `todo`
+Add a todo task to the task list
 
-`keyword (optional arguments)`
+#### Format: `todo DESCRIPTION`
 
-Expected outcome:
+Output:
+```text
+Got it. I've added this task: 
+    [T][✘]  run
+Now you have 5 task(s) in the list.
+```
+### Add a deadline task: `deadline`
+Add a deadline task to the task list
 
-`outcome`
+#### Format: `deadline DESCRIPTION /by TIME`
+
+Output:
+```text
+Got it. I've added this task: 
+    [D][✘]  submit CS3223 Project (by: Sunday 2359)
+Now you have 6 task(s) in the list.
+```
+### Add an event task: `event`
+Add an event task to the task list
+
+#### Format: `event DESCRIPTION /at TIME`
+
+Output:
+```text
+Got it. I've added this task: 
+    [E][✘]  attend John's Birthday Party(at: Monday 1430 to Monday 1530)
+Now you have 7 task(s) in the list.
+```
+### Find a task: `find`
+Find a task from the task list
+
+#### Format: `find DESCRIPTION`
+
+Output:
+```text
+Here are the matching tasks in your list: 
+1.[T][✘] danceeeee
+```
+
