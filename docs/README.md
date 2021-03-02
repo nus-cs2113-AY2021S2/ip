@@ -49,7 +49,7 @@ Example: `todo make coffee`
 Outcome:  
 ![Screenshot 2021-03-02 at 1 35 34 AM](https://user-images.githubusercontent.com/60348727/109535483-96c5fa80-7af7-11eb-8623-2b3393f1c3c7.png)  
 Format: `todo TASK_DESCRIPTION`  
-* Note that the todo task is marked with a [T]
+* Note that a todo task is marked with a [T]
 
 ### Adding a deadline  
 ### `deadline`  
@@ -58,7 +58,7 @@ Example: `deadline finish project /by monday`
 Outcome:  
 ![Screenshot 2021-03-02 at 1 36 45 AM](https://user-images.githubusercontent.com/60348727/109535636-c07f2180-7af7-11eb-839f-114d3efa6048.png)  
 Format: `deadline TASK_DESCRIPTION /by WHEN`  
-* Note that the deadline is marked with a [D]
+* Note that a deadline is marked with a [D]
 
 ### Adding an event  
 ### `event`  
@@ -67,7 +67,7 @@ Example: `event important meeting /at tuesday morning`
 Outcome:  
 ![Screenshot 2021-03-02 at 1 37 22 AM](https://user-images.githubusercontent.com/60348727/109535714-d68ce200-7af7-11eb-9c11-a8c011dc8fa0.png)  
 Format: `event TASK_DESCRIPTION /at WHEN`  
-* Note that the event is marked with a [E]
+* Note that an event is marked with a [E]
 
 ### Marking a task as done  
 ### `done`  
@@ -108,20 +108,21 @@ Exits the app.
 Outcome:  
 ![Screenshot 2021-03-02 at 10 47 13 AM](https://user-images.githubusercontent.com/60348727/109589064-b8999e80-7b44-11eb-88a6-13f8bceb85d7.png)  
 Format: `bye`
+
 ---
 
 ## Command summary  
 
-|  Commands  |               Format               |                    Example                  |
-| ---------- |------------------------------------| --------------------------------------------|
-| `help`     | help                               | -                                           |
-| `todo`     | todo TASK_DESCRIPTION              | todo make coffee                            |
-| `deadline` | deadline TASK_DESCRIPTION /by WHEN | deadline finish project /by monday          |
-| `event`    | event TASK_DESCRIPTION /at WHEN    | event important meeting /at tuesday morning |
-| `done`     | done TASK_NUMBER                   | done 2                                      |
-| `list`     | list                               | -                                           |
-| `delete`   | delete TASK_NUMBER                 | delete 1                                    |
-| `find`     | find KEYWORD                       | find important                              |
-| `bye`      | bye                                | -                                           |
+|  Commands  |               Format               |                      Example                    |
+| ---------- | ---------------------------------- | ----------------------------------------------- |
+| `help`     | help                               | -                                               |
+| `todo`     | todo TASK_DESCRIPTION              | todo *make coffee*                              |
+| `deadline` | deadline TASK_DESCRIPTION /by WHEN | deadline *finish project* /by *monday*          |
+| `event`    | event TASK_DESCRIPTION /at WHEN    | event *important meeting* /at *tuesday morning* |
+| `done`     | done TASK_NUMBER                   | done *2*                                        |
+| `list`     | list                               | -                                               |
+| `delete`   | delete TASK_NUMBER                 | delete *1*                                      |
+| `find`     | find KEYWORD                       | find *important*                                |
+| `bye`      | bye                                | -                                               |
 
 [ip.jar]: https://github.com/Rizavur/ip/releases/tag/A-Jar
