@@ -72,7 +72,7 @@ public class Storage {
             if (input.charAt(1) == '\u2713') {
                 t.markAsDone();
             }
-        } catch(WrongFormatException e) {
+        } catch (WrongFormatException e) {
             checkError("INVALID_FORMAT");
         }
     }
@@ -139,7 +139,7 @@ public class Storage {
      */
     public static void saveFile(ArrayList<Task> list) throws IOException {
         FileWriter fw = new FileWriter("Duke.txt");
-        for(int i = 0; i< list.size(); i++) {
+        for (int i = 0; i< list.size(); i++) {
             fw.write(list.get(i).outputData());
             fw.write("\n");
         }

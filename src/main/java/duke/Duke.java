@@ -40,7 +40,7 @@ public class Duke {
         try {
             Ui.printGreeting();
             File file = new File("Duke.txt");
-            if(file.exists()) {
+            if (file.exists()) {
                 System.out.println("Duke.txt successfully synced!");
                 Ui.printBorder();
             }

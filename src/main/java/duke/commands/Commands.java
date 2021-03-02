@@ -11,6 +11,7 @@ import duke.task.Task;
 import java.util.ArrayList;
 
 public class Commands {
+
     /**
      * Add a todo task to the list
      *
@@ -30,7 +31,7 @@ public class Commands {
             list.add(t);
             int index = list.indexOf(t);
             Ui.printAddedTask(index,list);
-        } catch(WrongFormatException e) {
+        } catch (WrongFormatException e) {
             Ui.checkError("INVALID_FORMAT");
         }
     }
@@ -170,7 +171,7 @@ public class Commands {
             Ui.printNoOfTask(list);
         } catch (WrongFormatException e) {
             Ui.checkError("WRONG_DELETE_FORMAT");
-        } catch (IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e) {
             Ui.checkError("DELETE_EMPTY_LIST");
         }
     }
@@ -207,7 +208,7 @@ public class Commands {
     public static void findTask(String input, ArrayList<Task> list) throws WrongFormatException {
         try {
             String searchItem = input.substring(5);
-            if(searchItem.length() == 0 ) {
+            if (searchItem.length() == 0 ) {
                 throw new WrongFormatException();
             }
             Ui.printFindTask(searchItem,list);
