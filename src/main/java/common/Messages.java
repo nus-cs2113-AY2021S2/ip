@@ -1,5 +1,8 @@
 package common;
 
+/**
+ * Collection of messages used by GuiltySpark for easy access
+ */
 public class Messages {
 
     public static final String WELCOME_MESSAGE = "Hellow! I'm GuiltySpark. How may I help you?";
