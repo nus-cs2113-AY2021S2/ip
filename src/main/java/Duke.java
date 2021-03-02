@@ -108,8 +108,6 @@ public class Duke {
                     System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
 
-
-
         }
 
         scanner.close();
