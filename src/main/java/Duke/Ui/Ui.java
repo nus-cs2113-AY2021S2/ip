@@ -6,11 +6,10 @@ import Duke.Tasks.TaskList;
 
 import java.util.ArrayList;
 
-/*
-@ The UI class is used to hold methods responsible for interacting with the user
-@ the various methods in this class are used in Storage.Java or Tasklist.java to print out the various responses
-@ allowing a more OOP program.
-*/
+/**
+ * The UI class is used to hold methods responsible for interacting with the user
+ * and to display messages to user
+ */
 
 
 public class Ui {
@@ -18,6 +17,7 @@ public class Ui {
             "Hello! I'm Duke" + "\n"
                     + "What can I do for you?";
 
+    /** Display the prompt for adding task */
 
     public static void printAddTask(ArrayList<Task> tasksLists, Task task) {
         System.out.println("Got it. I've added this task:");
@@ -29,14 +29,19 @@ public class Ui {
         }
     }
 
+    /** Display the prompt for welcome when starting the program. */
+
     public void showWelcome() {
         System.out.println(GREETING_LINES);
     }
 
+    /** Display the line to separate the prompt from command when starting the program. */
 
     public void showLine() {
         System.out.println("--------------------------------------------");
     }
+
+    /** Display the prompt for marking tasks as done. */
 
     public static String printDone(ArrayList<Task> tasksLists, int num) {
         System.out.println("Nice! I've marked this task as done:");
@@ -44,9 +49,13 @@ public class Ui {
         return "Nice! I've marked this task as done:";
     }
 
+    /** Display the prompt for when command is bye. */
+
     public static String goodBye() {
         return "Bye. Hope to see you again soon!";
     }
+
+    /** Display the prompt when deleting a task. */
 
     public static String printDelete(Task toDelete, ArrayList<Task> tasksLists) {
         System.out.println("Noted. I've removed this task:");
@@ -56,15 +65,19 @@ public class Ui {
         return "Task deleted!";
     }
 
+    /** Display the prompt when printing task list. */
+
     public static void printTasksLists(TaskList tasks) throws EmptyTaskListsException {
         if (tasks.size() == 0) throw new EmptyTaskListsException();
         else {
             System.out.println("These are the tasks on the list");
             for (int i = 0; i < tasks.size(); i++) {
-                System.out.println(i + 1 + "." + tasks.get(i).toString());
+                System.out.println(i + 1 + "." + tasks.getTaskIndex(i).toString());
             }
         }
     }
+
+    /** Display the prompt when finding a task.*/
 
     public static void printFind(ArrayList<Task> tasksLists) {
         if (tasksLists.size() == 0) {

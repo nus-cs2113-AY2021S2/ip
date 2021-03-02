@@ -1,5 +1,11 @@
 package Duke.Tasks;
 
+/**
+ * Represents an Event Task
+ * description represents the type of task this class is
+ * at represents the date or time task should be happening at
+ */
+
 public class Event extends Task {
     protected String at;
 

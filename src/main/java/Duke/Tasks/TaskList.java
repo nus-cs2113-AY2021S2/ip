@@ -7,18 +7,13 @@ import Duke.Exceptions.*;
 import Duke.Storage.Storage;
 import Duke.Ui.Ui;
 
-/*
-@ This class is responsible for dealing with the various commands that changes the tasklists.
-@ it holds commands like add, delete, find etc.
-@ the addTask method is further broken down into addDeadline, addEvent, addTodo,
-@ these various methods breaks down the user input so that it fits the format to be added into the
-@ array list in addTask. addTask also calls the method storage.writeTofile which clears the file and rewrite
-@ with the current content of the file.
-@ Similarly for deleteTask, the task to be deleted is removed from the arrayList and a storage.writetofile is called
-@ to rewrite the content of the file to match the current arrayList
-@ findTask is a method that iterates through the current arraylist and adds any task that contains the keyword into
-@ another arraylist which is passed to the UI to print.
-*/
+
+/**
+ * Represents a list of Task
+ * The ArrayList of Task <code>tasks</code> represents the list of all the tasks available
+ * This class is responsible for dealing with the various commands that changes the tasklists.
+ * it holds commands like add, delete, find etc.
+ */
 
 public class TaskList {
     public ArrayList<Task> tasksLists;
@@ -28,6 +23,12 @@ public class TaskList {
         this.tasksLists = loadedTasks;
     }
 
+    /**
+     * Add task into array list
+     *
+     * @param task type of ask added
+     * @throws IOException if tasks cannot be write to storage.
+     */
 
     public void addTask(Task task) throws IOException {
         task.toString();
@@ -35,6 +36,15 @@ public class TaskList {
         storage.writeToFile(tasksLists);
         Ui.printAddTask(tasksLists, task);
     }
+
+    /**
+     * Parsing Event task to be added
+     *
+     * @param inputs String from user input
+     * @return a String to show that event has been added
+     * @throws IOException if tasks cannot be write to storage.
+     * @throws WrongEventFormatException if event is passed in the wrong format
+     */
 
     public String addEvent(String inputs) throws WrongEventFormatException, IOException {
         if (!inputs.matches(".+/at.+")) throw new WrongEventFormatException();
@@ -49,6 +59,15 @@ public class TaskList {
         return "Event added!";
     }
 
+    /**
+     * Parsing Deadline task to be added
+     *
+     * @param inputs String from user input
+     * @return a String to show that deadline has been added
+     * @throws IOException if tasks cannot be write to storage.
+     * @throws WrongDeadlineFormatException if event is passed in the wrong format
+     */
+
     public String addDeadline(String inputs) throws WrongDeadlineFormatException, IOException {
         if (!inputs.matches(".+/by.+")) throw new WrongDeadlineFormatException();
 
@@ -62,6 +81,15 @@ public class TaskList {
         return "Deadline added!";
     }
 
+    /**
+     * Parsing Todo task to be added
+     *
+     * @param inputs String from user input
+     * @return a String to show that todo has been added
+     * @throws IOException if tasks cannot be write to storage.
+     * @throws WrongToDoFormatException if event is passed in the wrong format
+     */
+
     public String addTodo(String inputs) throws WrongToDoFormatException, IOException {
         String title = inputs.substring(inputs.indexOf(" ") + 1);
         if (inputs.equals("todo")) throw new WrongToDoFormatException();
@@ -72,6 +100,15 @@ public class TaskList {
         return "Todo added!";
     }
 
+    /**
+     * Marking Task as Done
+     *
+     * @param num To determine which task in the list is getting marked
+     * @return a String to display that item is marked as done.
+     * @throws IOException if tasksList cannot be write to storage.
+     * @throws NoSuchTaskException when there is no such task number in the task list.
+     */
+
     public String markAsDone(int num) throws NoSuchTaskException, IOException {
         if (!isValidTaskNumber(num)) {
             throw new NoSuchTaskException();
@@ -80,6 +117,15 @@ public class TaskList {
         storage.writeToFile(tasksLists);
         return Ui.printDone(tasksLists, num);
     }
+
+    /**
+     * Deleting Task from Array List
+     *
+     * @param taskNumber To determine which task in the list is getting deleted.
+     * @return a String to display that item has been deleted.
+     * @throws IOException if tasksList cannot be write to storage.
+     * @throws NoSuchTaskException when there is no such task number in the task list.
+     */
 
     public String deleteTask(int taskNumber) throws NoSuchTaskException, IOException {
         if (!isValidTaskNumber(taskNumber)) {
@@ -95,17 +141,33 @@ public class TaskList {
         return taskNumber >= 1 && taskNumber <= tasksLists.size();
     }
 
-    public void clearTaskList() {
-        tasksLists.clear();
-    }
+
+    /**
+     * Gets the size of the task list.
+     *
+     * @return size of task list.
+     */
 
     public int size() {
         return tasksLists.size();
     }
 
-    public Task get(int index) {
+    /**
+     * Gets the index of the task in the taskList
+     *
+     * @return index number of task.
+     */
+
+    public Task getTaskIndex(int index) {
         return tasksLists.get(index);
     }
+
+    /**
+     * Adds the tasks with keyword to a separate array to be display search result.
+     *
+     * @param inputs keyword to be search
+     * @return a string to determine that a task is found successfully.
+     */
 
     public String findTasks(String inputs) {
         String keyWord = inputs.substring(inputs.indexOf(" ") + 1);

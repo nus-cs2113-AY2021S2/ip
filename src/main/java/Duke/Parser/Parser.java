@@ -7,14 +7,21 @@ import Duke.Ui.Ui;
 
 import java.io.IOException;
 
-/*
-@ The parses class deals with the user inputs to determine which command will be called into the program
-@ depending on the user input, the string will determine what command is contain in the User input and calls upon
-@ the various methods as show below.
-@ the various exceptions are thrown below as well to catch any error that might occur during the program.
-* */
+/**
+ * The parses class deals with the user inputs to determine which command will be called into the program
+ * depending on the user input, the string will determine what command is contain in the User input and calls upon
+ * the various methods as show below.
+ */
 
 public class Parser {
+
+    /**
+     * Parses userInput and returns a command to be executed
+     *
+     * @param inputs Input from the user to determine command
+     * @param taskList List of task to execute command on
+     * @return Command to be executed
+     */
 
     public static String parse(String inputs, TaskList taskList) {
 
