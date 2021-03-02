@@ -19,8 +19,13 @@ public class Duke {
 
     private static final Ui ui = new Ui();
     private static final Parser parser = new Parser();
+    private static final ArrayList<Task> Tasks = new ArrayList<>();
 
-    public static void printList(ArrayList<Task> Tasks){
+    /**
+     * Prints all the tasks which is stored in the Task arraylist
+     *
+     */
+    public static void printList(){
         ui.showToUser(ui.DIVIDER, "Here are the tasks in your list:");
         for (int i=0; i<Tasks.size(); ++i){
             Task task = Tasks.get(i);
@@ -30,7 +35,11 @@ public class Duke {
         ui.showToUser(ui.DIVIDER);
     }
 
-    public static void printTaskAdded(ArrayList<Task> Tasks){
+    /**
+     * Prints the task which the user added
+     *
+     */
+    public static void printTaskAdded(){
         ui.showToUser(
                 ui.DIVIDER,
                 " Got it. I've added this task:\n" + Tasks.get(Tasks.size()-1).toString(),
@@ -38,26 +47,48 @@ public class Duke {
                 ui.DIVIDER);
     }
 
-
+    /**
+     * Checks if the user input is valid
+     *
+     * @param words user input split into individual words
+     * @throws DukeException If input is not a valid command for the program
+     */
     public static void validateInput(String[] words) throws DukeException {
         if(parser.parseCommand(words)) {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 
+    /**
+     * Checks if the todo command is valid
+     *
+     * @param words user input split into description
+     * @throws DukeException If input is not a valid todo command
+     */
     public static void validateToDoInput(String[] words) throws DukeException {
         if(parser.parseToDoCommand(words)) {
             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
         }
     }
 
+    /**
+     * Checks if the list command is valid
+     *
+     * @param words user input
+     * @throws DukeException If input is not a valid list command
+     */
     public static void validateListInput(String[] words) throws DukeException {
         if (parser.parseListCommand(words)) {
             throw new DukeException("☹ OOPS!!! The description of a list should be empty.");
         }
     }
 
-    public static void loadFile(ArrayList<Task> tasks) throws FileNotFoundException {
+    /**
+     * Loads the file and stores the information into the ArrayList Tasks
+     *
+     * @throws FileNotFoundException If the file cannot be found
+     */
+    public static void loadFile() throws FileNotFoundException {
         File f = new File("tasks.txt");
         if (!f.exists()) {
             throw new FileNotFoundException();
@@ -74,38 +105,48 @@ public class Duke {
             words = input.split("/d");
             if (isDeadline) {
                 Deadline deadline = new Deadline(words[0], words[1]);
-                tasks.add(deadline);
+                Tasks.add(deadline);
             }
             else if (isEvent) {
                 Event event = new Event(words[0], words[1]);
-                tasks.add(event);
+                Tasks.add(event);
             }
             else if (isTodo) {
                 ToDo toDo = new ToDo(words[0]);
-                tasks.add(toDo);
+                Tasks.add(toDo);
             }
             if (isDone) {
-                tasks.get(tasks.size()-1).taskComplete();
+                Tasks.get(Tasks.size()-1).taskComplete();
             }
         }
     }
 
-    public static void saveFile(String filepath, ArrayList<Task> tasks) throws IOException {
+    /**
+     * Saves the tasks information from the ArrayList into the file specified
+     *
+     * @param filepath Name of the file
+     * @throws IOException If there is something wrong with writing into the file
+     */
+    public static void saveFile(String filepath) throws IOException {
         FileWriter fw = new FileWriter(filepath);
-        for (Task task: tasks) {
+        for (Task task: Tasks) {
             fw.write(task.toSaveFormat());
         }
         fw.close();
     }
 
-
+    /**
+     * Runs the code necessary for the bot to run
+     *
+     * @param args User input at the start of the program
+     */
     public static void main(String[] args) {
         ArrayList<Task> Tasks = new ArrayList<>();
         String line;
         Scanner Input = new Scanner(System.in);
         ui.showIntroMessage();
         try {
-            loadFile(Tasks);
+            loadFile();
         } catch (FileNotFoundException e) {
             ui.showToUser("File Not Found", "Creating new file...");
         }
@@ -136,7 +177,7 @@ public class Duke {
                     inSystem = !line.equals("bye");
                     continue;
                 }
-                printList(Tasks);
+                printList();
             } else if (isDone) {
                 int taskNumber = Integer.parseInt(words[1]) - 1;
                 Tasks.get(taskNumber).taskComplete();
@@ -158,26 +199,26 @@ public class Duke {
                 line = line.replace("todo ", "");
                 ToDo toDo = new ToDo(line);
                 Tasks.add(toDo);
-                printTaskAdded(Tasks);
+                printTaskAdded();
             } else if (isDeadline) {
                 line = line.replace("deadline ", "");
                 words = line.split("/by ");
                 Deadline deadline = new Deadline(words[0], words[1]);
                 Tasks.add(deadline);
-                printTaskAdded(Tasks);
+                printTaskAdded();
             } else if (isEvent) {
                 line = line.replace("event ", "");
                 words = line.split("/at ");
                 Event event = new Event(words[0], words[1]);
                 Tasks.add(event);
-                printTaskAdded(Tasks);
+                printTaskAdded();
             }
             line = Input.nextLine();
             inSystem = !line.equals("bye");
         }
         String file = "tasks.txt";
         try {
-            saveFile(file, Tasks);
+            saveFile(file);
         } catch (IOException e) {
             ui.showToUser("Something went wrong: " + e.getMessage());
         }
