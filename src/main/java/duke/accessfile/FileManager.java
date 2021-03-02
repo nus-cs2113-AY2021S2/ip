@@ -64,7 +64,7 @@ public class FileManager {
         while (sc.hasNext()) {
             String taskSentence = sc.nextLine();
             char taskCategory = taskSentence.charAt(1);
-            boolean isDone = taskSentence.substring(4, 5).compareTo("\u2713") == 0;
+            boolean isDone = taskSentence.substring(4, 5).compareTo("X") == 0;
             switch (taskCategory) {
             case 'T':
                 String toDoDescription = taskSentence.substring(7);
