@@ -15,6 +15,10 @@ public class DukeException extends Exception{
         this.commandType = commandType;
     }
 
+    /**
+     * Show duke exception message according what command type is the exception occurs.
+     * @param ui the exception message interact with users
+     */
     public void showMessage(Ui ui) {
         switch (commandType) {
         case DONE:

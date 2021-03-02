@@ -12,6 +12,11 @@ public class Parser {
     public Parser() {
         cmd = null;
     }
+
+    /**
+     * decide which type of command user want to operate
+     * @param userInputString what user has input
+     */
     public void parse(String userInputString) {
         if(userInputString.equalsIgnoreCase("HELP")) {
             cmd =  new HelpCmd(userInputString);
