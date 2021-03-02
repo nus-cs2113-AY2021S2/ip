@@ -51,28 +51,28 @@ public class Ui {
             + "Here are all the valid commands:" + NEWLINE + NEWLINE
             + "\thelp" + NEWLINE
             + "\t - displays all valid commands" + NEWLINE + NEWLINE
-            +"\tbye" + NEWLINE
-            + "\t- stops the task manager" + NEWLINE + NEWLINE
-            + "\tlist" + NEWLINE
-            + "\t- displays all tasks in the list" + NEWLINE + NEWLINE
-            + "\ttodo     |    <task>" + NEWLINE
+            + "\ttodo <task>" + NEWLINE
             + "\t- adds given task to the list" + NEWLINE + NEWLINE
-            + "\tdeadline |    <task>    | /by | <yyyy-mm-dd> | <HH:mm>" + NEWLINE
+            + "\tevent <task> /at <details>" + NEWLINE
+            + "\t- adds given task with details to the list" + NEWLINE + NEWLINE
+            + "\tdeadline <task> /by <yyyy-mm-dd> <HH:mm>" + NEWLINE
             + "\t- adds given task with date and time to the list" + NEWLINE
             + "\t- example: add task with deadline \"2 Dec 2021, 6PM\":" + NEWLINE
             + "\t  deadline final essay /by 2021-12-02 18:00" + NEWLINE + NEWLINE
-            + "\tevent    |    <task>    | /at | <details>" + NEWLINE
-            + "\t- adds given task with details to the list" + NEWLINE + NEWLINE
-            + "\tfilter   | <yyyy-mm-dd>" + NEWLINE
+            + "\tlist" + NEWLINE
+            + "\t- displays all tasks in the list" + NEWLINE + NEWLINE
+            + "\tfilter <yyyy-mm-dd>" + NEWLINE
             + "\t- displays any deadlines in the list that match the given date" + NEWLINE + NEWLINE
-            + "\tfind     | <keyword>" + NEWLINE
-            + "\t- displays a list of any tasks that match the given keyword" + NEWLINE + NEWLINE
-            + "\tdone     | <index>" + NEWLINE
+            + "\tdone <index>" + NEWLINE
             + "\t- marks existing task matching the given index" + NEWLINE
             + "\t  as completed in the list" + NEWLINE  + NEWLINE
-            + "\tdelete   | <index>" + NEWLINE
+            + "\tfind <keyword>" + NEWLINE
+            + "\t- displays a list of any tasks that match the given keyword" + NEWLINE + NEWLINE
+            + "\tdelete <index>" + NEWLINE
             + "\t- deletes existing task matching the given index from the list" + NEWLINE + NEWLINE
-            + "<> indicates an input field and | is a field separator." + NEWLINE
+            +"\tbye" + NEWLINE
+            + "\t- stops the task manager" + NEWLINE + NEWLINE
+            + "<> indicates an input field." + NEWLINE
             + BORDER + NEWLINE;
 
     // Opening statements for printList method
