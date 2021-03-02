@@ -1,6 +1,7 @@
-package duke.command;
+package duke.ui;
 
 import duke.accessfile.FileManager;
+import duke.command.CommandNotFoundException;
 import duke.task.Task;
 import duke.task.TaskManager;
 
@@ -24,11 +25,18 @@ public class MainUI {
     private FileManager fileManager;
     private TaskManager taskManager;
 
+    /**
+     * Constructor for MainUI class. FileManager and TaskManager will be instantiated here.
+      */
     public MainUI() {
         fileManager = new FileManager();
         taskManager = new TaskManager();
     }
 
+    /**
+     * Calls program to run
+     * @param in Scanner input
+     */
     public void displayUI(Scanner in) {
         runProgram(in);
     }
@@ -67,7 +75,9 @@ public class MainUI {
         }
     }
 
-
+    /**
+     * Print a chunk of strings for the introduction of Duke program
+     */
     public void printWelcomeMessage() {
         System.out.println("Hello from\n" + LOGO_STRING);
         printDivider();
@@ -77,6 +87,9 @@ public class MainUI {
         printDivider();
     }
 
+    /**
+     * Print message before exiting Duke program
+     */
     public void stopProgram() {
         isEnding = true;
         System.out.println("Bye. Hope to see you again soon!");

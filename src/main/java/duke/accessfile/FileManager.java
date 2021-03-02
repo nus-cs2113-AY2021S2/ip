@@ -1,6 +1,6 @@
 package duke.accessfile;
 
-import duke.command.MainUI;
+import duke.ui.MainUI;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -11,19 +11,23 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static duke.command.MainUI.FILE_PATH;
-import static duke.command.MainUI.taskArrayList;
+import static duke.ui.MainUI.FILE_PATH;
+import static duke.ui.MainUI.taskArrayList;
 
+/**
+ * Represents a manager that manipulates files
+ */
 public class FileManager {
     private Deadline deadline;
     private Event event;
     private Todo todo;
 
-    public FileManager() {
 
-    }
-
-    public static void createDirectory(String directoryName) {
+    /**
+     * create a folder called directoryName in current directory
+     * @param directoryName name of folder to be created
+     */
+    public void createDirectory(String directoryName) {
         File relativePathFileName = new File(directoryName);
         String fullPath = relativePathFileName.getAbsolutePath();
         File absolutePathFileName = new File(fullPath);
@@ -35,6 +39,10 @@ public class FileManager {
         }
     }
 
+    /**
+     *Prints the message after creating a new file
+     * @param data name of the file object
+     */
     public void printMessageForCreatingNewFile(File data) {
         System.out.println("Your file that stores all your tasks is not found! (data/duke.txt) :(");
         System.out.println("Creating new file now to store your future tasks! :)");
@@ -42,6 +50,11 @@ public class FileManager {
         MainUI.printDivider();
     }
 
+    /**
+     * load the data from duke.txt into our program's task arraylist
+     * @return returns the loaded task array list
+     * @throws FileNotFoundException exception arises when duke.txt cannot be found
+     */
     public ArrayList<Task> loadData() throws FileNotFoundException {
         ArrayList<Task> taskArrayList = new ArrayList<>();
         System.out.println("Loading data from your file, 'duke.txt'...");
@@ -90,6 +103,10 @@ public class FileManager {
         return taskArrayList;
     }
 
+    /**
+     * Updates the data file by writing task array list into duke.txt file
+     * @throws IOException throws exception from FileOutPutStream
+     */
     public void updateDataFile() throws IOException {
         PrintStream out = new PrintStream(new FileOutputStream(MainUI.FILE_PATH));
         PrintStream stdout = System.out;
