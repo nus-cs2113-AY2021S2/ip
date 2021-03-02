@@ -8,7 +8,7 @@ Adjutant is also optimized for use via the **Command Line Interface** (CLI).
 ## Quick start
 _Prerequisites: JDK 11, update IntelliJ to the most recent version._
 1. Ensure that you have Java `11` or above installed in your computer.
-2. Download the latest `adjutant.jar` from [here](https://github.com/jonahtwl/ip/releases/download/v0.1/adjutant.jar).
+2. Download the latest `adjutant.jar` from [here](https://github.com/jonahtwl/ip/releases/download/v0.2/adjutant.jar).
 3. Copy the jar file into the folder where you want to use as the base folder for `Adjutant`
 4. Run `cmd` and navigate to the base folder where you saved the `adjutant.jar`.
 5. Run the command `java -jar adjutant.jar`. You should see something similar as follows:
