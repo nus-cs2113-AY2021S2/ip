@@ -12,6 +12,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class Duke {
@@ -210,6 +211,8 @@ public class Duke {
                 //this keeps track of indexes that user calls for actions on
                 ArrayList<Integer> indexes = new ArrayList<>();
                 indexes = cleanInput(input, "delete");
+                //sort indexes in descending order so deletion will not affect index
+                Collections.sort(indexes, Collections.reverseOrder());
                 deleteTasks(indexes);
                 writeTasklistToFile();
             } else {
