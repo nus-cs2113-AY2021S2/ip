@@ -75,7 +75,7 @@ public class Duke {
 
     public static String[] extractDetailsFromInput(String input, String keyword) {
         String[] inputArray = new String[2];
-        String inputWithoutKeyword = input.split(keyword)[1];
+        String inputWithoutKeyword = input.substring(keyword.length());
         int numDetails = 0;
         switch(keyword) {
         case "deadline":
@@ -102,21 +102,21 @@ public class Duke {
 
     public static void addTask(String input) throws DukeException {
         String[] inputArray;
-        if (input.contains("deadline")) {
+        if (input.startsWith("deadline")) {
             try {
                 inputArray = extractDetailsFromInput(input, "deadline");
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException(TaskType.DEADLINE);
             }
             tasks.add(Task.totalTasks, new Deadline(inputArray[0], inputArray[1]));
-        } else if (input.contains("event")) {
+        } else if (input.startsWith("event")) {
             try {
                 inputArray = extractDetailsFromInput(input, "event");
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException(TaskType.EVENT);
             }
             tasks.add(Task.totalTasks, new Event(inputArray[0], inputArray[1]));
-        } else if (input.contains("todo")){
+        } else if (input.startsWith("todo")){
             try {
                 inputArray = extractDetailsFromInput(input, "todo");
             } catch (ArrayIndexOutOfBoundsException e) {
@@ -200,13 +200,13 @@ public class Duke {
         while (!input.equals("bye")) {
             if (input.equals("list")) {
                 listTasks();
-            } else if (input.contains("done")) {
+            } else if (input.startsWith("done")) {
                 //this keeps track of indexes that user calls for actions on
                 ArrayList<Integer> indexes = new ArrayList<>();
                 indexes = cleanInput(input, "done");
                 markTasksAsDone(indexes);
                 writeTasklistToFile();
-            } else if (input.contains("delete")) {
+            } else if (input.startsWith("delete")) {
                 //this keeps track of indexes that user calls for actions on
                 ArrayList<Integer> indexes = new ArrayList<>();
                 indexes = cleanInput(input, "delete");
