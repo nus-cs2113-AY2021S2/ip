@@ -16,7 +16,7 @@ while still having the benefits of an understandable Graphical User Interface (G
   - [Saving the data](#saving-the-data)
   - [Editing the data file](#editing-the-data-file)
   - [Loading of saved data file](#loading-of-saved-data-file)
-- FAQ
+- [FAQ](#FAQ)
 - [Command Summary](#command-summary)
 
 ---
@@ -104,6 +104,8 @@ Format: `done TASK_POSITION_IN_LIST`
 * `TASK_POSITION_IN_LIST` must be within range of the current list.
   
 * `TASK_POSITION_IN_LIST` can be viewed with `list` command.
+  
+* Corrupted tasks cannot be marked as completed.
   <br/><br/>
 ### Deleting a task from the list: `delete`
 Removes the specified task from the list.
@@ -116,6 +118,8 @@ Format: `delete TASK_POSITION_IN_LIST`
 * `TASK_POSITION_IN_LIST` must be within range of the current list.
 
 * `TASK_POSITION_IN_LIST` can be viewed with `list` command.
+  
+* Corrupted tasks should be deleted from the list.
   <br/><br/>
 ### Searching for a task with a keyword: `find`
 Searches for tasks in the list with the specified keyword.
@@ -140,8 +144,8 @@ There is no need to save manually.
 <br/><br/>
 ### Editing the data file
 The list data is saved as a .TXT file.
-If changes to the data file makes its format invalid, Spark will discard all data
-and start with an empty data file at the next run.
+If changes to the data file makes its format invalid, Spark will mark that particular task as corrupted.
+Upon `list` command, corrupted tasks are labelled `Corrupted. Please delete.`
 <br/><br/>
 ### Loading of saved data file
 The data file will be automatically restored when Spark starts up. 
@@ -154,7 +158,8 @@ There is no need to manually load the data file with the list contents.
 **Q**: Are commands case-sensitive?<br/>
 **A**: Commands are not case-sensitive.
 
-**Q**: What if I do not have an existing saved .TXT file on my computer?
+**Q**: What if I do not have an existing saved .TXT file on my computer?<br/>
+
 **A**: The program will detect this and create a new .TXT file automatically.
 
 
@@ -163,7 +168,7 @@ There is no need to manually load the data file with the list contents.
 ## Command Summary
 
  **Command** | **Format, examples** 
- --- | ---
+ :--- | :---
  **List**| `list` |
  **Add TODO task** | `todo DESCRIPTION_OF_TASK`, e.g. `todo Return book`
  **Add EVENT task** | `event DESCRIPTION_OF_TASK /DATE_OF_EVENT [ADDITIONAL_COMMENTS_ON_EVENT]`, e.g.`event Attend concert /23/12/2019`
