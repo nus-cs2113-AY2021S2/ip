@@ -4,6 +4,7 @@ import duke.task.Task;
 
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -46,8 +47,9 @@ public class Ui {
         System.out.println("4. done [index]");
         System.out.println("5. delete [index]");
         System.out.println("6. list");
-        System.out.println("7. bye");
-        System.out.println("8. help");
+        System.out.println("7. filter yyyy-mm-dd");
+        System.out.println("8. bye");
+        System.out.println("9. help");
         showLine();
 
     }
@@ -109,6 +111,16 @@ public class Ui {
         return inputLine;
     }
 
+    public void showFindResult(ArrayList<Task> tasks) {
+        showLine();
+        if(!tasks.isEmpty()) {
+            tasks.stream().forEach(System.out::println);
+        } else {
+            System.out.println("The matching tasks are not existed!");
+        }
+        showLine();
+
+    }
 
 
 

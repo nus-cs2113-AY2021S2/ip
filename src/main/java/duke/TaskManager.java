@@ -9,6 +9,8 @@ import duke.task.Todo;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import static java.util.stream.Collectors.toList;
+
 
 public class TaskManager {
     private ArrayList<Task> tasks;
@@ -65,6 +67,23 @@ public class TaskManager {
         Task temp = tasks.get(taskIndexShow - 1);
         tasks.remove(taskIndexShow - 1);
         return temp;
+    }
+
+    //filter by date
+    public ArrayList<Task> filterByDate(LocalDate date) {
+        ArrayList<Task> filteredDeadline = (ArrayList<Task>) tasks.stream()
+                .filter((t) -> (t instanceof Deadline))
+                .filter((s) -> ((Deadline) s).getBy().equals(date))
+                .collect(toList());
+
+        ArrayList<Task> filteredEvent = (ArrayList<Task>) tasks.stream()
+                .filter((t) -> (t instanceof Event))
+                .filter((s) -> ((Event) s).getAt().equals(date))
+                .collect(toList());
+        
+        filteredDeadline.addAll(filteredEvent);
+        return filteredDeadline;
+
     }
 
 }

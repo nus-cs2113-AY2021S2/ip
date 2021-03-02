@@ -7,6 +7,14 @@ public class Event extends Task {
 
     protected LocalDate at;
 
+    public LocalDate getAt() {
+        return at;
+    }
+
+    public void setAt(LocalDate at) {
+        this.at = at;
+    }
+
     public Event(String content, LocalDate at) {
         super(content);
         this.at = at;

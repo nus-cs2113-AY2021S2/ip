@@ -7,6 +7,14 @@ public class Deadline extends Task {
 
     protected LocalDate by;
 
+    public LocalDate getBy() {
+        return by;
+    }
+
+    public void setBy(LocalDate by) {
+        this.by = by;
+    }
+
     public Deadline(String description, LocalDate by) {
         super(description);
         this.by = by;

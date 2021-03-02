@@ -31,6 +31,8 @@ public class Parser {
             cmd = new DeadlineCmd(userInputString);
         } else if (userInputString.toUpperCase().matches("^(EVENT).*$")) {
             cmd = new EventCmd(userInputString);
+        } else if (userInputString.toUpperCase().matches("^(FILTER).*$")) {
+            cmd = new FilterCmd(userInputString);
         } else if (userInputString.equalsIgnoreCase("BYE")) {
             cmd = new ExitCmd(userInputString);
         } else {
