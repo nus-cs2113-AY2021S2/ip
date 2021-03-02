@@ -1,6 +1,20 @@
 # Duke User Guide <hr/>
 Duke is a Personal Assistant Chatbot that helps you manage your various tasks. 
 
+## Table of contents <hr/>
+* [Quick start](#quick-start-hr)
+* [Features](#features-hr)
+* [Usage](#usage-hr)
+    * [`todo` - Add a Todo](#todo---add-a-todo)
+    * [`deadline` - Add a Deadline](#deadline---add-a-deadline)
+    * [`event` - Add an Event](#event---add-an-event)
+    * [`list` - Display all tasks](#list---display-all-tasks)
+    * [`done` - Mark a task as done ✓](#done---mark-a-task-as-done-)
+    * [`delete` - ~~Delete~~ a task](#delete---delete-a-task)
+    * [`find` - Find tasks](#find---find-tasks)
+    * [`bye` - Exit Duke](#bye---exit-duke)
+* [Command summary](#command-summary-hr)
+
 ## Quick start <hr/>
 1. Ensure you have Java `11` installed on your computer
 1. Download the latest `v0.2.jar` from [here]()
