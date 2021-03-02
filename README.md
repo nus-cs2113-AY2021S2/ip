@@ -4,7 +4,7 @@ This is a user guide for the Lyon chatbot Java project (originally named Duke). 
 
 ### Prerequisites: JDK 11
 
-### Note: The special character | has been reserved by Lyon to store information into the .txt file, so any inputs containing this character will be rejected by Lyon.
+### Special note: The special character | has been reserved by Lyon to store information into the .txt file, so any inputs containing this character will be rejected by Lyon.
 
 
 ## Setting up
