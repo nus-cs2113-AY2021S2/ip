@@ -21,6 +21,10 @@ public class Duke {
     private static final Parser parser = new Parser();
     private static final ArrayList<Task> Tasks = new ArrayList<>();
 
+    /**
+     * Prints all the tasks which is stored in the Task arraylist
+     *
+     */
     public static void printList(){
         ui.showToUser(ui.DIVIDER, "Here are the tasks in your list:");
         for (int i=0; i<Tasks.size(); ++i){
@@ -31,6 +35,10 @@ public class Duke {
         ui.showToUser(ui.DIVIDER);
     }
 
+    /**
+     * Prints the task which the user added
+     *
+     */
     public static void printTaskAdded(){
         ui.showToUser(
                 ui.DIVIDER,
@@ -39,6 +47,12 @@ public class Duke {
                 ui.DIVIDER);
     }
 
+    /**
+     * Checks if the user input is valid
+     *
+     * @param words user input split into individual words
+     * @throws DukeException If input is not a valid command for the program
+     */
     public static void findTask(String input) {
         int taskCount = 1;
         ui.showToUser(ui.DIVIDER, "Here are the matching tasks in your list:");
@@ -58,18 +72,35 @@ public class Duke {
         }
     }
 
+    /**
+     * Checks if the todo command is valid
+     *
+     * @param words user input split into description
+     * @throws DukeException If input is not a valid todo command
+     */
     public static void validateToDoInput(String[] words) throws DukeException {
         if(parser.parseToDoCommand(words)) {
             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
         }
     }
 
+    /**
+     * Checks if the list command is valid
+     *
+     * @param words user input
+     * @throws DukeException If input is not a valid list command
+     */
     public static void validateListInput(String[] words) throws DukeException {
         if (parser.parseListCommand(words)) {
             throw new DukeException("☹ OOPS!!! The description of a list should be empty.");
         }
     }
 
+    /**
+     * Loads the file and stores the information into the ArrayList Tasks
+     *
+     * @throws FileNotFoundException If the file cannot be found
+     */
     public static void loadFile() throws FileNotFoundException {
         File f = new File("tasks.txt");
         if (!f.exists()) {
@@ -103,6 +134,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Saves the tasks information from the ArrayList into the file specified
+     *
+     * @param filepath Name of the file
+     * @throws IOException If there is something wrong with writing into the file
+     */
     public static void saveFile(String filepath) throws IOException {
         FileWriter fw = new FileWriter(filepath);
         for (Task task: Tasks) {
@@ -111,7 +148,11 @@ public class Duke {
         fw.close();
     }
 
-
+    /**
+     * Runs the code necessary for the bot to run
+     *
+     * @param args User input at the start of the program
+     */
     public static void main(String[] args) {
         String line;
         Scanner Input = new Scanner(System.in);
