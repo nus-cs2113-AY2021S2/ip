@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class Parser {
 
     public boolean parseCommand(String[] input){
-        String[] validInputs = {"list", "done", "todo", "deadline", "event", "delete"};
+        String[] validInputs = {"list", "done", "todo", "deadline", "event", "delete", "find"};
         return !Arrays.asList(validInputs).contains(input[0]);
     }
 
