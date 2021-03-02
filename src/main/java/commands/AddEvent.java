@@ -18,6 +18,7 @@ public class AddEvent {
         try {
             Task event = Parser.parsingEvent(userInput);
             Tasklist.addTask(event);
+            System.out.println("Added a new event! :D");
         } catch (BlankDescriptionException e) {
             System.out.println(BLANK_EXCEPTION_MESSAGE);
         } catch (MissingDateException e) {

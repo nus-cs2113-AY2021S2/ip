@@ -2,6 +2,7 @@ package tasklist;
 
 public class Task {
 
+    public int isCorrupted;
     public boolean isDone;
     public String description;
 
@@ -9,6 +10,7 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.isCorrupted = 0;
     }
 
     public String getDescription(){

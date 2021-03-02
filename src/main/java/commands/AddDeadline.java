@@ -18,6 +18,7 @@ public class AddDeadline {
         try{
             Task deadline = Parser.parsingDeadline(userInput);
             Tasklist.addTask(deadline);
+            System.out.println("Added a new deadline! :D");
         } catch (BlankDescriptionException e) {
             System.out.println(BLANK_EXCEPTION_MESSAGE);
         }

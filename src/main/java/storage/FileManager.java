@@ -1,6 +1,7 @@
 package storage;
 
 import myexceptions.BlankDescriptionException;
+import myexceptions.FileModifiedException;
 import tasklist.Task;
 import tasklist.Tasklist;
 
@@ -10,6 +11,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import static common.Messages.FILE_MODIFIED_MESSAGE;
 
 /**
  * The methods here manage the file writing and reading, upon quitting and loading
@@ -56,6 +59,9 @@ public class FileManager {
                 Tasklist.addTask(taskDecoder.taskDecoder(nextTask));
             }
         } catch(FileNotFoundException e) {
+            new File("Spark.txt").createNewFile();
+        } catch(FileModifiedException e) {
+            System.out.println(FILE_MODIFIED_MESSAGE);
             new File("Spark.txt").createNewFile();
         }
 

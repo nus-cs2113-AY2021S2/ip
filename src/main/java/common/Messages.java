@@ -19,4 +19,5 @@ public class Messages {
     public static final String SEARCH_LIMIT_EXCEEDED_MESSAGE = "I can only search for 1 keyword at a time! Try again!";
     public static final String NO_MATCHES_FOUND_MESSAGE = "No tasks with that keyword exists!";
     public static final String MARKED_AS_DONE_MESSAGE = "Your task has been marked as done!";
+    public static final String FILE_MODIFIED_MESSAGE = "I've detected a modification to the TXT file! I'm unable to parse it, and will reset it!";
 }

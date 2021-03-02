@@ -7,10 +7,13 @@ public class Tasklist {
 
     private static final ArrayList<Task> tasks = new ArrayList<>();
 
+    public static Boolean isCorrupted(Task task) {
+        return (task.isCorrupted == -1);
+    }
     public static void addTask(Task task) {
         tasks.add(task);
-        System.out.println((RECEIVE_MESSAGE));
     }
+
 
     public static void removeTask(Task task) {
         tasks.remove(task);

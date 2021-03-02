@@ -14,6 +14,7 @@ public class AddTodo {
         try{
             Task todo = Parser.parsingTodo(userInput);
             Tasklist.addTask(todo);
+            System.out.println("Added a new task! :D");
         } catch (BlankDescriptionException e) {
             System.out.println(BLANK_EXCEPTION_MESSAGE);
         }
