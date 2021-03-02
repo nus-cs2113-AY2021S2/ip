@@ -3,10 +3,10 @@ ____
 Duke is a Personal Assistant Chatbot that helps you manage your various tasks. 
 
 ## Table of contents
-___
-* [Quick start](#quick-start-hr)
-* [Features](#features-hr)
-* [Usage](#usage-hr)
+____
+* [Quick start](#quick-start)
+* [Features](#features)
+* [Usage](#usage)
     * [`todo` - Add a Todo](#todo---add-a-todo)
     * [`deadline` - Add a Deadline](#deadline---add-a-deadline)
     * [`event` - Add an Event](#event---add-an-event)
@@ -15,17 +15,17 @@ ___
     * [`delete` - ~~Delete~~ a task](#delete---delete-a-task)
     * [`find` - Find tasks](#find---find-tasks)
     * [`bye` - Exit Duke](#bye---exit-duke)
-* [Command summary](#command-summary-hr)
+* [Command summary](#command-summary)
 
 ## Quick start
-___
+____
 1. Ensure you have Java `11` installed on your computer
 1. Download the latest `v0.2.jar` from [here]()
 1. Open a command window in the folder containing the `.jar` file
 1. Run the command `java -jar {filename}.jar` <br> If you haven't changed the filename, run the command `java -jar v0.2.jar`
 
 ## Features
-___
+____
 
 ### Add tasks
 Add tasks to keep track of.  
@@ -54,7 +54,7 @@ All your tasks data is saved in the hard disk automatically, every time you make
 
 
 ## Usage
-___
+____
 Words in `UPPER_CASE` are the parameters to be supplied by the user.
 <br>e.g. in `todo TASK_DESCRIPTION`, `TASK_DESCRIPTION` is a parameter which can be used as `todo wash the dishes`
 
@@ -149,7 +149,7 @@ Expected outcome:
 ![](bye.jpg)
 
 ## Command summary
-___
+____
 
 Action | Format, Examples
 ------ | ----------------
