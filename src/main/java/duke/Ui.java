@@ -7,7 +7,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
- * Class to deal with interactions with the user
+ * Class to deal with all interactions with the user
  */
 public class Ui {
 
@@ -94,8 +94,8 @@ public class Ui {
         return loadedCommand;
     }
 
-    public void printLoadError() {
-        System.out.println("Oh no! Error in loading tasks");
+    public static void printCreateFileError() {
+        System.out.println("Error in creating file");
     }
 
     public static void printSaveError() {
@@ -108,5 +108,9 @@ public class Ui {
 
     public void fileIsEmpty() {
         System.out.println("File loaded is empty!");
+    }
+
+    public static void printCreatedNewFile() {
+        System.out.println("Oops the file doesn't exist in your system so I created one for you!");
     }
 }

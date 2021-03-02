@@ -8,6 +8,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -17,9 +19,9 @@ import java.util.Scanner;
  */
 public class Storage {
 
-    private static String path;
+    private static Path path;
 
-    public Storage(String path) {
+    public Storage(Path path) {
         this.path = path;
     }
 
@@ -33,7 +35,7 @@ public class Storage {
         ArrayList<Task> tasks = new ArrayList<>();
         String loadedCommand;
         String[] words;
-        File f = new File(path);
+        File f = new File(String.valueOf(path));
         Scanner input = new Scanner(f);
 
         do {
@@ -75,14 +77,31 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the tasks into the file at the specified path
+     * Throws IOException if the path given is invalid
+     */
     public static void saveData() {
         try {
-            File path = new File("dukeSave.txt");
+            File path = new File("duke.txt");
             FileWriter fw = new FileWriter(path);
             writeData(fw);
             fw.close();
         } catch (IOException e) {
             Ui.printSaveError();
+        }
+    }
+
+    /**
+     * Creates a file at the specific path
+     * Throws IOException when the path given is invalid
+     */
+    public static void createFile() {
+        try {
+            Files.createFile(path);
+            Ui.printCreatedNewFile();
+        } catch (IOException e) {
+            Ui.printCreateFileError();
         }
     }
 }

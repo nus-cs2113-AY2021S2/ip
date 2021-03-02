@@ -15,18 +15,18 @@ public class Duke {
     private static Ui ui;
     private static TaskList tasks;
     private static Storage storage;
+    private java.nio.file.Path path = java.nio.file.Paths.get("duke.txt");
 
     /**
      * creates the duke object
-     * @param path is the path of the file to be loaded
      */
-    public Duke(String path) {
+    public Duke() {
         ui = new Ui();
         storage = new Storage(path);
         try {
             tasks = new TaskList(storage.loadTasks());
         } catch (FileNotFoundException e) {
-            ui.printLoadError();
+            Storage.createFile();
         } catch (NoSuchElementException e) {
             ui.fileIsEmpty();
         }
@@ -62,7 +62,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("dukeLoad.txt").run();
+        new Duke().run();
         Storage.saveData();
     }
 }
