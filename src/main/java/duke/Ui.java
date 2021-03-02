@@ -23,7 +23,7 @@ public class Ui {
     private static final String WRONG_DATE_FORMAT_MESSAGE = "Are you spasticated? The date format is wrong! It should be" +
             " like YY-DDDD-M or sumting like that...\nNo wait, its YYYY-MM-DD. I'm bare smart innit?";
     private static final String NO_SEARCH_RESULTS = "Wait, I can't find anyting with that name on the list. Are you chatting rubbish?";
-    private static final String EMPTY_INPUT_MESSAGE = "So you is one them not so brighterest persons eh? You did not type anything!";
+    private static final String EMPTY_INPUT_MESSAGE = "So you is one them not very brighterest persons eh? You did not type anything!";
     private static final String TOTAL_TASK_MESSAGE = "You is having %d task(s) on your list.";
     private static final String SET_TO_DONE_MESSAGE = " set to done. You is well smart innit?";
     private static final String ADDED_TO_LIST_MESSAGE = "Wicked. This ting is now on da list.";
@@ -140,8 +140,10 @@ public class Ui {
             break;
         case ERR_WRONG_DATE_FORMAT:
             System.out.println(WRONG_DATE_FORMAT_MESSAGE);
+            break;
         case ERR_EMPTY_INPUT:
             System.out.println(EMPTY_INPUT_MESSAGE);
+            break;
         }
         printBorderLine();
     }

@@ -7,6 +7,7 @@ import duke.command.AddCommand;
 import duke.command.FindCommand;
 import duke.command.DeleteCommand;
 import duke.command.ListCommand;
+import duke.error.EmptyInputException;
 
 public class Parser {
     private static final int ERR_EMPTY_INPUT = -6;
@@ -51,7 +52,7 @@ public class Parser {
             default:
                 return new ByeCommand();
             }
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (EmptyInputException e) {
             this.ui.printError(ERR_EMPTY_INPUT);
             return null;
         }
@@ -62,9 +63,12 @@ public class Parser {
      *
      * @param line input from user.
      * @return The type of command user inputted.
-     * @throws ArrayIndexOutOfBoundsException if input is all whitespace.
+     * @throws EmptyInputException if input is all whitespace.
      */
-    public static int getCommand(String line) throws ArrayIndexOutOfBoundsException {
+    public static int getCommand(String line) throws EmptyInputException {
+        if (line.trim().length() == 0) {
+            throw new EmptyInputException();
+        }
         String[] subStrings = line.split(" ");
         String command = subStrings[0];
         if (command.equalsIgnoreCase("bye")) {

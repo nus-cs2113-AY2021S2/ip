@@ -39,13 +39,13 @@ public class AddCommand extends Command {
             ArrayList<Task> Tasks = taskList.getTasks();
             addItem(this.input, Tasks);
         }  catch (WrongFormatException e) {
-            ui.printError(ERR_WRONG_FORMAT_MESSAGE);
+            this.ui.printError(ERR_WRONG_FORMAT_MESSAGE);
         } catch (EmptyNameFieldException e) {
-            ui.printError(ERR_NO_NAME);
+            this.ui.printError(ERR_NO_NAME);
         } catch (EmptyDateException | ArrayIndexOutOfBoundsException e) {
-            ui.printError(ERR_NO_DATE);
+            this.ui.printError(ERR_NO_DATE);
         } catch (DateTimeException e) {
-            ui.printError(ERR_WRONG_DATE_FORMAT);
+            this.ui.printError(ERR_WRONG_DATE_FORMAT);
         }
     }
 
