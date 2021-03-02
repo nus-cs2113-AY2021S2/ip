@@ -42,6 +42,8 @@ public class Ui {
         case "deadline":
         case "done":
         case "delete":
+        case "find":
+        case "date":
             System.out.println("🙁 OOPS!!! The description of a " + input + " cannot be empty.");
             break;
         case "event":
@@ -57,6 +59,32 @@ public class Ui {
 
     public static void printLine() {
         System.out.println("___________________________________________");
+    }
+
+    /**
+     * Prints all acceptable commands and the input examples of this project
+     */
+    public static void printHelpMessage() {
+        printLine();
+        System.out.println("Here are some available commands and their corresponding input format: ");
+        System.out.println(
+                "\nlist: Display all tasks in the list." +
+                "\nFormat: list\n" +
+                "\ntodo: Add a todo task." +
+                "\nFormat: todo read a book\n" +
+                "\ndeadline: Add a deadline task." +
+                "\nFormat: deadline submit a report /by 05 Mar\n" +
+                "\nevent: Add an event task." +
+                "\nFormat: event project meeting /at Mon 2-4pm\n" +
+                "\ndone: Mark a task as done." +
+                "\nFormat: done 1\n" +
+                "\nfind: find all tasks contain the input keyword" +
+                "\nFormat: find book\n" +
+                "\ndate: find all tasks occurring the specific date" +
+                "\nFormat: date 2021-02-28\n" +
+                "\nbye: Exit the program." +
+                "\nFormat: bye\n");
+        printLine();
     }
 
     /**

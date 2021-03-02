@@ -27,6 +27,9 @@ public class Parser {
         }
         String commandContent = input.substring(lengthOfCommandType + 1);
         switch (commandType) {
+        case "help":
+            parseHelpCommand();
+            break;
         case "todo":
             parseTodoCommand(commandContent);
             break;
@@ -56,6 +59,9 @@ public class Parser {
         }
     }
 
+    private static void parseHelpCommand() {
+        Ui.printHelpMessage();
+    }
     private static void parseTodoCommand(String description) {
         TaskList.updateTodo(description);
     }
