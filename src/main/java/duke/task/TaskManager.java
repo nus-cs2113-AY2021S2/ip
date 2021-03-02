@@ -2,14 +2,17 @@ package duke.task;
 
 import duke.accessfile.FileManager;
 import duke.command.CommandNotFoundException;
-import duke.command.MainUI;
+import duke.ui.MainUI;
 
 import java.util.ArrayList;
 
 import java.io.IOException;
 
-import static duke.command.MainUI.taskArrayList;
+import static duke.ui.MainUI.taskArrayList;
 
+/**
+ * Represents a manager that does operations for tasks (eg: add/delete tasks)
+ */
 public class TaskManager {
     private static final String TODO_COMMAND = "todo";
     private static final String DEADLINE_COMMAND = "deadline";
@@ -24,11 +27,19 @@ public class TaskManager {
     private FileManager fileManager;
     private StringParser stringParser;
 
+    /**
+     * Constructor for Task Manager
+     */
     public TaskManager() {
         fileManager = new FileManager();
         stringParser = new StringParser();
     }
 
+    /**
+     * Handles incoming commands to complete task, add tasks, delete tasks and find tasks that matches a keyword.
+     * @param input input from user
+     * @throws CommandNotFoundException Exception will be thrown when command is not recognisable
+     */
     public void handleTask(String input) throws CommandNotFoundException {
         String firstWord = stringParser.getFirstWord(input);
         switch (firstWord) {
@@ -56,7 +67,6 @@ public class TaskManager {
                 System.out.println("IOError at TODO Command");
             }
             break;
-
         case DEADLINE_COMMAND:
             try {
                 String dueDate = stringParser.getStringAfterSlash(input);
@@ -108,7 +118,12 @@ public class TaskManager {
 
     }
 
-    private ArrayList<Task> find(String keyword) {
+    /**
+     * Returns an arraylist containing all the tasks that matches the keyword
+     * @param keyword user's input for keyword
+     * @return arraylist of all the matching tasks
+     */
+    public ArrayList<Task> find(String keyword) {
         ArrayList<Task> matches = new ArrayList<>();
         for (Task task : taskArrayList) {
             if (task.getDescription().contains(keyword)) {
@@ -118,8 +133,11 @@ public class TaskManager {
         return matches;
     }
 
-
-    private void printMessageAfterTaskIsAdded(Task task) {
+    /**
+     * Prints the message when task has been added to Task List
+     * @param task Task object that has been added
+     */
+    public void printMessageAfterTaskIsAdded(Task task) {
         MainUI.printDivider();
         System.out.println(ADDED_TASK_MESSAGE);
         System.out.println("\t" + task);
@@ -127,10 +145,17 @@ public class TaskManager {
         MainUI.printDivider();
     }
 
-    private void printTaskCount() {
+    /**
+     * Prints the number of tasks in the task list
+     */
+    public void printTaskCount() {
         System.out.println("Now you have " + Task.getTaskCount() + " task(s) in the list.");
     }
 
+    /**
+     * Marks the task as done in the task list
+     * @param taskNumber task number of a task that is done
+     */
     public void markTaskAsDone(int taskNumber) {
         System.out.println(MARKED_TASK_AS_DONE_MESSAGE);
         taskArrayList.get(taskNumber - 1).markAsDone();
@@ -139,6 +164,10 @@ public class TaskManager {
 
     }
 
+    /**
+     * Prints all the tasks in task array list
+     * @param taskArrayList task array list containing all the tasks
+     */
     public void printAllTasks(ArrayList<Task> taskArrayList) {
         int TaskCount = 0;
         MainUI.printDivider();
@@ -150,6 +179,10 @@ public class TaskManager {
         MainUI.printDivider();
     }
 
+    /**
+     * Prints all the task that matches user's keyword in task array list
+     * @param taskArrayList task array list containing all the tasks
+     */
     public void printMatchingTasks(ArrayList<Task> taskArrayList) {
         int TaskCount = 0;
         MainUI.printDivider();
