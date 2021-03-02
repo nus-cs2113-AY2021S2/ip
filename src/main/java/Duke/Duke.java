@@ -9,15 +9,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
-/*
-@ This Duke class is where the main program runs.
-@ The duke method initialise the UI and storage.
-@ storage.loadflile loads the data saved in the file and writes it into an array list to be passed into the program
-@An error exception is written so that if there is no file present, the program will create a new file and initialise an array list
-@to be used
-@ the run method runs the UI.welcome to print responses from the program to interact with the user
-@ It reads in the user input and passes the command into the program to be processed.
-
+/**
+ * This Duke class is where the main program runs.
+ * The Duke program is an application that helps user keep track of their
+ * tasks in various forms such as Todos, Deadlines and Events.
 */
 
 
@@ -26,6 +21,12 @@ public class Duke {
     private final Storage storage;
     private TaskList tasks;
     private final Ui ui;
+
+    /**
+     * Creates a new instance of Ui, Storage.
+     * Initialises the taskList using Storage loadfile method
+     * and prints message if a file cannot be created.
+     */
 
     public Duke(String filePath) {
         ui = new Ui();
@@ -41,6 +42,12 @@ public class Duke {
             }
         }
     }
+
+    /**
+     * This method is used to runDuke continuously on a loop doing the following things:
+     * take in a userInput, parse the output through the Parser to get the command to run
+     * The loop is exited when the userInput is "bye"
+     */
 
     public void run() {
         ui.showWelcome();

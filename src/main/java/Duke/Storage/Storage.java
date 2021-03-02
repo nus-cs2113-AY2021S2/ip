@@ -9,14 +9,11 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/*
-@ Storage class is written to write and save data into a file. More prominent methods like createfile, loadfile and writetofile
-@ loadfile reads the first letter of the saved data in the txt.file which passes the string into various methods to be processed like
-@ loadEvent, loadDeadline and loadTodo. These methods splits the strings to a format to be added into the arraylist = loadedTasks
-@ After processing, loadedTask is pass back into Duke which would be the arraylist to be used throughout the program.
-@ writeToFile clears the file whenever it is called and rewrites the data that is currently in the arraylist.
-*/
 
+/**
+ * Reads and writes list of task to file
+ * Storage class is written to write and save data into a file. More prominent methods like createfile, loadfile and writetofile
+ */
 
 public class Storage {
 
@@ -28,11 +25,24 @@ public class Storage {
         this.file = new File(filePath);
     }
 
+    /**
+     * Creates a data file and its parent directory if it does not already exists
+     *
+     * @throws IOException When the file path is not available
+     */
+
     public void createFile() throws IOException {
         Path pathToFile = Paths.get(filePath);
         Files.createDirectories(pathToFile.getParent());
         file.createNewFile();
     }
+
+    /**
+     * Loads user data from file into loadedTask list.
+     *
+     * @return a loaded arraylist filled with data read from text file
+     * @throws FileNotFoundException When file does not exist
+     */
 
     public TaskList loadFile() throws FileNotFoundException {
         ArrayList<Task> loadedTasks = new ArrayList<>();
@@ -61,6 +71,12 @@ public class Storage {
         return new TaskList(loadedTasks);
     }
 
+    /**
+     * Writes list of task to file
+     *
+     * @param taskList list of task to write to data
+     */
+
     public void writeToFile(ArrayList<Task> taskList) throws IOException {
         FileWriter fileWriter = new FileWriter(filePath, false);
         fileWriter.write("");
@@ -69,6 +85,13 @@ public class Storage {
         }
         fileWriter.close();
     }
+
+    /**
+     * Load Event task into Task List format to be added into array list
+     *
+     * @param inputs a string from text file for event
+     * @return task type Event.
+     */
 
     public Event loadEvent(String inputs) {
         String[] inputArray = inputs.split("\\s\\|\\s", 4);
@@ -84,6 +107,13 @@ public class Storage {
 
     }
 
+    /**
+     * Load Deadline task into Task List format to be added into array list
+     *
+     * @param inputs a string from text file for event
+     * @return deadline type Event.
+     */
+
     public Deadline loadDeadline(String inputs) {
         String[] inputArray = inputs.split("\\s\\|\\s", 4);
 
@@ -97,6 +127,13 @@ public class Storage {
         return newDeadline;
 
     }
+
+    /**
+     * Load Todo task into Task List format to be added into array list
+     *
+     * @param inputs a string from text file for event
+     * @return todo type Event.
+     */
 
     public Todo loadTodo(String inputs) {
         String[] inputArray = inputs.split("\\s\\|\\s", 4);

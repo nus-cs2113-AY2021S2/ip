@@ -1,5 +1,10 @@
 package Duke.Tasks;
 
+/**
+ * Represents a Todo Task
+ * description represents the type of task this class is
+ */
+
 public class Todo extends Task {
 
     public Todo(String description) {

@@ -1,5 +1,11 @@
 package Duke.Tasks;
 
+/**
+ * Represents a Deadline Task
+ * description represents the type of task this class is
+ * by represents the date or time task should be completed by
+ */
+
 public class Deadline extends Task {
     protected String by;
 
@@ -13,6 +19,7 @@ public class Deadline extends Task {
     }
 
 
+    @Override
     public String saveTask() {
         return "D | " + (isDone ? 1 : 0) + " | " + description + " | " + by;
     }
