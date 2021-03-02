@@ -108,7 +108,11 @@ public class Ui {
 
     // Other error messages
     public static final String LOADING_ERROR_MESSAGE
-            = "Failed to load from disk, creating a new file!";
+            = "Warning: failed to create a new directory or file." + NEWLINE
+            + "Task list generated in this run will not be saved.";
+    public static final String LOAD_TASK_ERROR_MESSAGE
+            = "Warning: failed to load some tasks." + NEWLINE
+            + "Task list may be incomplete.";
     public static final String SAVING_ERROR_MESSAGE
             = "Failed to save to disk.";
 

@@ -32,6 +32,7 @@ public class TaskList {
     }
 
     /**
+     * This method is used to save data to the disk.
      * Generates the data to save to the .txt storage file at the end of a run by converting, item-by-item,
      * the differently-formatted {@code TaskList}.
      * @return a multi-line string representation of {@code TaskList}

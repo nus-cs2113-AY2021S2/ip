@@ -1,6 +1,7 @@
 package duke;
 
 import static duke.Ui.LOADING_ERROR_MESSAGE;
+import static duke.Ui.LOAD_TASK_ERROR_MESSAGE;
 import static duke.Ui.SAVING_ERROR_MESSAGE;
 import static duke.common.Constants.DEFAULT_STATUS;
 import static duke.common.Constants.DONE_STATUS;
@@ -18,6 +19,7 @@ import java.io.IOException;
 
 import duke.commands.DeadlineCommand;
 import duke.commands.EventCommand;
+import duke.commands.InvalidCommand;
 import duke.commands.TodoCommand;
 
 /**
@@ -69,6 +71,7 @@ public class Storage {
     }
 
     /**
+     * This method is used to load data from the disk.
      * Generates the {@code TaskList} used throughout a run by converting, line-by-line,
      * the differently-formatted data loaded from this storage file.
      * @param f file to load from
@@ -84,44 +87,59 @@ public class Storage {
     }
 
     /**
-     * Parses the given {@code line} into a valid {@code Command}, then executes it.
-     * @param line line of text read from the storage .txt file
+     * This method is used to load data from the disk.
+     * Parses the {@code line} read from the storage .txt file into a {@code Command} that
+     * adds a task to the {@code TaskList}. Then, calls the respective method to execute it
+     * silently, only displaying a message to user if there is an error in the conversion.
+     * @param line line of text
      */
     public void convertLineToListItem(String line) {
         line = line.trim();
-        String[] tokens = line.split(" \\| ");
-        switch (tokens[0]) {
+        String[] args = line.split(" \\| ");
+        switch (args[0]) {
         case TODO_TASK_TYPE:
-            try {
-                String status = Integer.parseInt(tokens[1]) == 1 ? DONE_STATUS : DEFAULT_STATUS;
-                TodoCommand addTodo = new TodoCommand(tasks, tokens[2], status);
-                addTodo.execute();
-            } catch (NumberFormatException e) {
-                return;
-            }
+            addTodoSilently(args);
             break;
         case DEADLINE_TASK_TYPE:
-            try {
-                String status = Integer.parseInt(tokens[1]) == 1 ? DONE_STATUS : DEFAULT_STATUS;
-                LocalDate deadlineDate = LocalDate.parse(tokens[3]);
-                LocalTime deadlineTime = LocalTime.parse(tokens[4]);
-                DeadlineCommand addDeadline = new DeadlineCommand(tasks, tokens[2], status, deadlineDate, deadlineTime);
-                addDeadline.execute();
-            } catch (NumberFormatException | DateTimeParseException e) {
-                return;
-            }
+            addDeadlineSilently(args);
             break;
         case EVENT_TASK_TYPE:
-            try {
-                String status = Integer.parseInt(tokens[1]) == 1 ? DONE_STATUS : DEFAULT_STATUS;
-                EventCommand addEvent = new EventCommand(tasks, tokens[2], status, tokens[3]);
-                addEvent.execute();
-            } catch (NumberFormatException e) {
-                return;
-            }
+            addEventSilently(args);
             break;
         default:
             break;
+        }
+    }
+
+    public void addTodoSilently(String[] args) {
+        try {
+            String status = Integer.parseInt(args[1]) == 1 ? DONE_STATUS : DEFAULT_STATUS;
+            TodoCommand addTodo = new TodoCommand(tasks, args[2], status, false);
+            addTodo.execute();
+        } catch (NumberFormatException e) {
+            new InvalidCommand(LOAD_TASK_ERROR_MESSAGE).execute();
+        }
+    }
+
+    public void addDeadlineSilently(String[] args) {
+        try {
+            String status = Integer.parseInt(args[1]) == 1 ? DONE_STATUS : DEFAULT_STATUS;
+            LocalDate deadlineDate = LocalDate.parse(args[3]);
+            LocalTime deadlineTime = LocalTime.parse(args[4]);
+            DeadlineCommand addDeadline = new DeadlineCommand(tasks, args[2], status, deadlineDate, deadlineTime, false);
+            addDeadline.execute();
+        } catch (NumberFormatException | DateTimeParseException e) {
+            new InvalidCommand(LOAD_TASK_ERROR_MESSAGE).execute();
+        }
+    }
+
+    public void addEventSilently(String[] args) {
+        try {
+            String status = Integer.parseInt(args[1]) == 1 ? DONE_STATUS : DEFAULT_STATUS;
+            EventCommand addEvent = new EventCommand(tasks, args[2], status, args[3], false);
+            addEvent.execute();
+        } catch (NumberFormatException e) {
+            new InvalidCommand(LOAD_TASK_ERROR_MESSAGE).execute();
         }
     }
 }

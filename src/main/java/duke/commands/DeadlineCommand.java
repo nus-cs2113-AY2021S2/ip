@@ -15,26 +15,48 @@ import duke.tasks.Task;
  * {@code Deadline} to {@code TaskList} when executed.
  */
 public class DeadlineCommand extends Command {
-    private final String taskDescription;
-    private final String taskStatus;
+    private final String deadlineDescription;
+    private final String deadlineStatus;
     private final LocalDate deadlineDate;
     private final LocalTime deadlineTime;
+    private boolean isEcho = true;
 
-    public DeadlineCommand(TaskList tasks, String description, String status, LocalDate date, LocalTime time) {
+    /**
+     * Class constructor.
+     */
+    public DeadlineCommand(TaskList tasks, String deadlineDescription, String deadlineStatus,
+                           LocalDate deadlineDate, LocalTime deadlineTime) {
         super.tasks = tasks;
-        taskDescription = description;
-        taskStatus = status;
-        deadlineDate = date;
-        deadlineTime = time;
+        this.deadlineDescription = deadlineDescription;
+        this.deadlineStatus = deadlineStatus;
+        this.deadlineDate = deadlineDate;
+        this.deadlineTime = deadlineTime;
+    }
+
+    /**
+     * Class constructor with parameter {@code isEcho} specifying that this
+     * command is executed silently (no message displayed to the user).
+     * Used when loading data from disk.
+     */
+    public DeadlineCommand(TaskList tasks, String deadlineDescription, String deadlineStatus,
+                           LocalDate deadlineDate, LocalTime deadlineTime, boolean isEcho) {
+        super.tasks = tasks;
+        this.deadlineDescription = deadlineDescription;
+        this.deadlineStatus = deadlineStatus;
+        this.deadlineDate = deadlineDate;
+        this.deadlineTime = deadlineTime;
+        this.isEcho = isEcho;
     }
 
     @Override
     public void execute() {
-        Task task = new Deadline(taskDescription, deadlineDate, deadlineTime);
-        task.setStatus(taskStatus);
+        Task task = new Deadline(deadlineDescription, deadlineDate, deadlineTime);
+        task.setStatus(deadlineStatus);
         task.setType(DEADLINE_TASK_TYPE);
         tasks.addTaskToList(task);
-        ui.echo(tasks, tasks.getTasksCount() - 1, PRINT_NEW_TASK_STATEMENT);
-        ui.printBorder();
+        if (isEcho) {
+            ui.echo(tasks, tasks.getTasksCount() - 1, PRINT_NEW_TASK_STATEMENT);
+            ui.printBorder();
+        }
     }
 }

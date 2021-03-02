@@ -12,24 +12,45 @@ import duke.tasks.Task;
  * {@code Event} to {@code TaskList} when executed.
  */
 public class EventCommand extends Command {
-    private final String taskDescription;
-    private final String taskStatus;
-    private final String taskTiming;
+    private final String eventDescription;
+    private final String eventStatus;
+    private final String eventTiming;
+    private boolean isEcho = true;
 
-    public EventCommand(TaskList tasks, String taskDescription, String taskStatus, String taskTiming) {
+    /**
+     * Class constructor.
+     */
+    public EventCommand(TaskList tasks, String eventDescription, String eventStatus,
+                        String eventTiming) {
         super.tasks = tasks;
-        this.taskDescription = taskDescription;
-        this.taskStatus = taskStatus;
-        this.taskTiming = taskTiming;
+        this.eventDescription = eventDescription;
+        this.eventStatus = eventStatus;
+        this.eventTiming = eventTiming;
+    }
+
+    /**
+     * Class constructor with parameter {@code isEcho} specifying that this
+     * command is executed silently (no message displayed to the user).
+     * Used when loading data from disk.
+     */
+    public EventCommand(TaskList tasks, String eventDescription, String eventStatus,
+                        String eventTiming, boolean isEcho) {
+        super.tasks = tasks;
+        this.eventDescription = eventDescription;
+        this.eventStatus = eventStatus;
+        this.eventTiming = eventTiming;
+        this.isEcho = isEcho;
     }
 
     @Override
     public void execute() {
-        Task task = new Event(taskDescription, taskTiming);
-        task.setStatus(taskStatus);
+        Task task = new Event(eventDescription, eventTiming);
+        task.setStatus(eventStatus);
         task.setType(EVENT_TASK_TYPE);
         tasks.addTaskToList(task);
-        ui.echo(tasks, tasks.getTasksCount() - 1, PRINT_NEW_TASK_STATEMENT);
-        ui.printBorder();
+        if (isEcho) {
+            ui.echo(tasks, tasks.getTasksCount() - 1, PRINT_NEW_TASK_STATEMENT);
+            ui.printBorder();
+        }
     }
 }

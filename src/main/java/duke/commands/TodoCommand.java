@@ -13,11 +13,27 @@ import duke.tasks.Task;
 public class TodoCommand extends Command {
     private final String taskDescription;
     private final String taskStatus;
+    private boolean isEcho = true;
 
+    /**
+     * Class constructor.
+     */
     public TodoCommand(TaskList tasks, String taskDescription, String taskStatus) {
         super.tasks = tasks;
         this.taskDescription = taskDescription;
         this.taskStatus = taskStatus;
+    }
+
+    /**
+     * Class constructor with parameter {@code isEcho} specifying that this
+     * command is executed silently (no message displayed to the user).
+     * Used when loading data from disk.
+     */
+    public TodoCommand(TaskList tasks, String taskDescription, String taskStatus, boolean isEcho) {
+        super.tasks = tasks;
+        this.taskDescription = taskDescription;
+        this.taskStatus = taskStatus;
+        this.isEcho = isEcho;
     }
 
     @Override
@@ -26,7 +42,9 @@ public class TodoCommand extends Command {
         task.setStatus(taskStatus);
         task.setType(TODO_TASK_TYPE);
         tasks.addTaskToList(task);
-        ui.echo(tasks, tasks.getTasksCount() - 1, PRINT_NEW_TASK_STATEMENT);
-        ui.printBorder();
+        if (isEcho) {
+            ui.echo(tasks, tasks.getTasksCount() - 1, PRINT_NEW_TASK_STATEMENT);
+            ui.printBorder();
+        }
     }
 }
