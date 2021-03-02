@@ -5,7 +5,6 @@ import ip.duke.task.Event;
 import ip.duke.task.Task;
 import ip.duke.task.Todo;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class TaskList {

@@ -37,7 +37,10 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    |____/ \__,_|_|\_\___|
    ```
 ##Using Duke Project
+
+
 ###Help
+
 * Display all acceptable commands
 * Format: `help`
 * Example of expected output:
@@ -72,6 +75,7 @@ Format: bye
 ___________________________________________
 ```
 ###List
+
 * Display all recorded tasks in the list
 * Format: `list`
 * Example of expected output:
@@ -85,6 +89,7 @@ ___________________________________________
 ```
 
 ###Todo
+
 * Adds a todo task which has no time limit to finish.
 * Format: `todo DESCRIPTION`
 * Example: `todo read a book`
@@ -106,7 +111,9 @@ ___________________________________________
 Please input again!:)
 ___________________________________________
 ```
+
 ###Deadline
+
 * Adds a deadline task which has to be completed before a given time.
 * Format：`deadline DESCRIPTION /by BYTIME`
 * Example: `deadline submit a report /by 05 Mar`
@@ -128,7 +135,9 @@ ___________________________________________
 Please input again!:)
 ___________________________________________
 ```
+
 ###Event
+
 * Adds an event task which will start at a given time.
 * Format：`event DESCRIPTION /by ATTIME`
 * Example: `event project group meeting /at 2-4 pm Sunday`
@@ -150,7 +159,9 @@ ___________________________________________
 Please input again!:)
 ___________________________________________
 ```
+
 ###Done
+
 * Marks a certain task to be done.
 * Format: `done INDEX`
 * Example: 'done 1'
@@ -171,7 +182,9 @@ ___________________________________________
 Please input again!:)
 ___________________________________________
 ```
+
 ###Delete
+
 * Deletes a certain task 
 * Format: 'delete INDEX'
 * Example: `delete 2`
@@ -196,6 +209,7 @@ ___________________________________________
 ```
 
 ###Find
+
 * Finds the tasks that contains the certain keyword given by user.
 * Format: `find KEYWORD`
 * Example: `find book`
@@ -218,6 +232,7 @@ ___________________________________________
 ```
 
 ###Date
+
 * Finds all the tasks that are relevant to the specific date
 * Format: `date [yyy-mm-dd]`
 * Example: `date 2020-02-28`
@@ -238,7 +253,9 @@ ___________________________________________
 Please input again!:)
 ___________________________________________
 ```
+
 ###Bye
+
 * Exits this running program
 * Format: `bye`
 * Example of expected output:
@@ -249,6 +266,7 @@ ___________________________________________
 ```
 
 ####Exception
+
 * The command is not acceptable by Duke
 * Example: `balh` or `hi`
 * Example of expected output:

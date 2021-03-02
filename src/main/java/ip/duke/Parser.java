@@ -62,6 +62,7 @@ public class Parser {
     private static void parseHelpCommand() {
         Ui.printHelpMessage();
     }
+
     private static void parseTodoCommand(String description) {
         TaskList.updateTodo(description);
     }
