@@ -1,14 +1,14 @@
 # Duke _the task manager_
 #### by, *Ivan Chong Zhi En*
-#### _Last updated:_ `27 February 2021`
+#### Last updated: `2 March 2021`
 Duke is a Command Line Interface (CLI) app for managing your day-to-day tasks.
 If you work faster by typing, managing tasks using Duke will be a breeze.
 
 ## Contents
 1. [Quick start](#1-quick-start)
 2. [Features](#2-features)
-   * [2.1 Viewing help](#21-viewing-help-help)
-   * [2.2 Adding a task](#22-adding-a-task-todo-deadline-event)
+    * [2.1 Viewing help](#21-viewing-help-help)
+    * [2.2 Adding a task](#22-adding-a-task-todo-deadline-event)
         1. [Todo](#a-todo)
         2. [Deadline](#b-deadline)
         3. [Event](#c-event)
@@ -20,7 +20,7 @@ If you work faster by typing, managing tasks using Duke will be a breeze.
     * [2.8 Exiting the program](#28-exiting-the-program-bye)
 3. [Transferring data to another device](#3-transferring-data-to-another-device)
 4. [Command Summary](#4-command-summary)
-    
+
 
 ## 1. Quick start
 1. Ensure you have Java `11` or above installed on your computer.
@@ -28,12 +28,19 @@ If you work faster by typing, managing tasks using Duke will be a breeze.
 3. Move the file to an empty folder. This will be the **home directory** for your Duke application.
 4. Open a terminal window in the home directory.
 5. To run Duke, enter `java -jar Duke.jar`
-6. Enter `help` for a quick list of commands. Refer to [features](#2-features) below for details of each command.
+6. If done correctly, you should see a greeting from Duke as such:
+```
+____________________________________________________________
+Hello I'm Duke!
+What would you like to do today?
+____________________________________________________________
+```
+7. Enter `help` for a quick list of commands. Refer to [features](#2-features) below for details of each command.
 
 * Note that on first run, a new data file `duke_data.txt` will be created. This file will store data about your tasks
-as you use Duke.
-You are ***strongly advised* not to** edit the text file directly as this may result in reading errors.
-Edit your data directly via Duke.
+  as you use Duke.
+  You are ***strongly advised* not to** edit the text file directly as this may result in reading errors.
+  Edit your data directly via Duke.
 
 [**> back to top**](#contents)
 
@@ -52,7 +59,7 @@ The most basic type of task, consists only of a task description.
 
 **Format:** `todo [description]...`
 
-* _description:_ _**String**_ task description
+* _**description**:_ _String_ task description
 
 **Example usage:** `todo organize exam notes`
 
@@ -70,10 +77,10 @@ Deadline has an additional field to include details on when a task is due.
 
 **Format:** `deadline [description]... /by [due]`
 
-* _description:_ _**String**_ task description
+* _**description**:_ _String_ task description
 
-* _due:_ _**String**_ due date of a task. For dates, use format `dd-mm-yyyy`. 
-Normal string descriptions are accepted, _eg: tomorrow, Wednesday 2PM, 2nd of May_.
+* _**due**:_ _String_ due date of a task. For dates, use format `dd-mm-yyyy`.
+  Normal string descriptions are accepted, _eg: tomorrow, Wednesday 2PM, 2nd of May_.
 
 **Example usage:** `deadline CS assignment /by tomorrow midnight`
 
@@ -87,14 +94,14 @@ Added to list:
 
 
 ###    c. Event
-Event has an additional field to include details on when described event happening.
+Event has an additional field to include details on when the described event happening.
 
 **Format:** `event [description]... /at [time/date]`
 
-* _description:_ _**String**_ event description
+* _**description**:_ _String_ event description
 
-* _time/date:_ _**String**_ time/date of event. For dates, use format `dd-mm-yyyy`.
-Normal string descriptions are accepted, _eg: next week, Thursday 4PM, 5th of May_
+* _**time/date:**_ _String_ time/date of event. For dates, use format `dd-mm-yyyy`.
+  Normal string descriptions are accepted, _eg: next week, Thursday 4PM, 5th of May_
 
 **Example usage:** `event John's party /at 25-5-2021`
 
@@ -115,15 +122,15 @@ Shows a list of all tasks currently stored in the task list.
 [**> back to top**](#contents)
 
 ## 2.4 Mark a task as done: `done`
-Marks selected task as completed. 
+Marks selected task as completed.
 An `[X]` beside a task shows that it has been marked as completed.
 * _Note:_ this command does not check if a task is already marked as _done_.
   It will set the task to an _done_ state regardless of its previous state.
-  
+
 **Format:** `done [index]`
 
-* _index:_ _**int**_ index of the task to be marked as done. 
- 
+* _**index**:_ _int_ index of the task to be marked as done.
+
 * Enter the _index_ following the numbering of the task as shown in `list`.
 
 **Example usage** : `list` followed by `done 2` (to mark the second item on the list)
@@ -147,11 +154,11 @@ Congrats! You've completed:
 ## 2.5 Unmark a completed task: `undo`
 Marks a task as uncompleted. A `[ ]` beside a task shows that it is not done.
 * _Note:_ this command does not check if the task is not marked _done_.
-It will set the task to an _undone_ state regardless of its previous state.
+  It will set the task to an _undone_ state regardless of its previous state.
 
 **Format:** `undo [index]`
 
-* _index:_ _**int**_ index of the task to be unmarked.
+* _**index**:_ _int_ index of the task to be unmarked.
 * Enter the _index_ following the numbering of the task as shown in `list`.
 
 **Example usage:** `undo 2`
@@ -169,7 +176,7 @@ Removes the specified task from the task list.
 
 **Format:** `delete [index]`
 
-* _index:_ _**int**_ index of the task to be deleted.
+* _**index**:_ _int_ index of the task to be deleted.
 * Enter the _index_ following the numbering of the task as shown in `list`.
 
 **Example usage:** `delete 3`
@@ -187,12 +194,12 @@ Tasks remaining: 3
 List tasks which contain the given keyword.
 * search is case-sensitive, _eg:_ `john` will not match `John`.
 * only tasks descriptions containing the entire keyword string will be matched, _eg:_ `birthday party`
-      will match `John's birhtday party` but **not** `Alice's birthday`.
-* Only find matches within task description. Task details (_due date, time etc._) will not be searched.  
+  will match `John's birhtday party` but **not** `Alice's birthday`.
+* Only find matches within task description. Task details (_due date, time etc._) will not be searched.
 * Index of search results are the same as index of `list`.
 
 **Format:** `find [keyword]`
-* _keyword:_ _**String**_ tasks will be checked if they contain this string.
+* _**keyword**:_ _String_ tasks will be checked if they contain this string.
 
 **Example usage:** `find assignment`
 
@@ -222,7 +229,8 @@ ____________________________________________________________
 ## 3. Transferring data to another device
 1. Copy the `duke_data.txt` file. **Do NOT** rename the file.
 2. Paste it in the same directory as the `Duke.jar` file on your new device.
-3. Running `Duke` should load your previous data.
+3. Delete the previous `duke_date.txt` file ( _if present_ ).
+4. Running `Duke` should load your previous data.
 
 ## 4. Command Summary
 
