@@ -1,4 +1,8 @@
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class TaskList {
     private static ArrayList<Task> tasks = new ArrayList<>();
@@ -34,30 +38,30 @@ public class TaskList {
     }
 
     public static void displayTaskDone(int index) throws DukeException {
-        if ((tasks.get(index-1)).isDone()) {
+        if ((tasks.get(index - 1)).isDone()) {
             throw new DukeException();
         } else {
-            (tasks.get(index-1)).markAsDone();
+            (tasks.get(index - 1)).markAsDone();
             Ui.printBorder();
             System.out.println("      Nice! I've marked this task as done: ");
             System.out.print("       ");
-            System.out.println((tasks.get(index-1)));
+            System.out.println((tasks.get(index - 1)));
             Ui.printBorder();
         }
     }
 
     public static void deleteTask(int index) {
-            Task temp = tasks.get(index - 1);
-            tasks.remove(index-1);
-            Ui.printBorder();
-            System.out.println("      Noted. I've removed this task:  ");
-            System.out.print("       ");
-            System.out.println(temp);
-            Ui.printBorder();
-            count--;
+        Task temp = tasks.get(index - 1);
+        tasks.remove(index - 1);
+        Ui.printBorder();
+        System.out.println("      Noted. I've removed this task:  ");
+        System.out.print("       ");
+        System.out.println(temp);
+        Ui.printBorder();
+        count--;
     }
 
-    public static void addToDo(String[] command){
+    public static void addToDo(String[] command) {
         try {
             Task a = new Todo(command[1]);
             addTaskToArrayList(a);
@@ -68,10 +72,26 @@ public class TaskList {
         Ui.printBorder();
     }
 
-    public static void addEvent(String[] command){
-        String[] newCommand = command[1].split(" /at ", 2);
+    public static String formatDateTime(String Command) {
+        String[] newCommand = Command.split(" ", 2);
         try {
-            Task c = new Event(newCommand[0],newCommand[1]);
+            LocalDate taskDate = LocalDate.parse(newCommand[0]);
+            String formattedDate = taskDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+
+            LocalTime taskTime = LocalTime.parse(newCommand[1]);
+            String formattedTime = taskTime.format(DateTimeFormatter.ofPattern("hh:mm a"));
+
+            return formattedDate + ", " + formattedTime;
+        } catch (DateTimeParseException | ArrayIndexOutOfBoundsException dpe) {
+            return Command;
+        }
+    }
+
+    public static void addEvent(String[] command) {
+        String[] newCommand = command[1].split(" /at ", 2);
+        newCommand[1] = formatDateTime(newCommand[1]);
+        try {
+            Task c = new Event(newCommand[0], newCommand[1]);
             addTaskToArrayList(c);
             System.out.println("     Now you have " + count + " tasks in the list.");
         } catch (IndexOutOfBoundsException oob) {
@@ -80,10 +100,11 @@ public class TaskList {
         Ui.printBorder();
     }
 
-    public static void addDeadline(String[] command){
+    public static void addDeadline(String[] command) {
         String[] newCommand = command[1].split(" /by ", 2);
+        newCommand[1] = formatDateTime(newCommand[1]);
         try {
-            Task c = new Deadline(newCommand[0],newCommand[1]);
+            Task c = new Deadline(newCommand[0], newCommand[1]);
             addTaskToArrayList(c);
             System.out.println("     Now you have " + count + " tasks in the list.");
         } catch (IndexOutOfBoundsException oob) {
