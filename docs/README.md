@@ -38,15 +38,15 @@ display a list of current tasks.
 
 ## Command Summary
 
-| Command | Format, examples |
-| ------- | ---------------: |
-| **List**| To list |
-| **Add todo task** | test |
-| **Add event** | test |
-| **Add deadline task** | test |
-| **Mark as done** | test |
-| **Delete** | test |
-| **Find** | test |
+ Command | Format, examples 
+ ------- | --------------- |
+ **List**| To list |
+ **Add todo task** | test 
+ **Add event** | test 
+ **Add deadline task** | test 
+ **Mark as done** | test 
+ **Delete** | test 
+ **Find** | test 
 ### `Keyword` - Describe action
 
 Describe action and its outcome.
