@@ -1,6 +1,9 @@
-package duke;
+package duke.storage;
 
+import duke.Command;
+import duke.TaskList;
 import duke.exceptions.InvalidCommandException;
+import duke.parser.Parser;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -79,7 +82,7 @@ public class Storage {
     private static void processTasks(TaskList taskList, String task) throws InvalidCommandException {
         String[] taskArray = task.split("\\|");
 
-        switch (TaskList.getCommand(taskArray[0])) {
+        switch (Parser.getCommand(taskArray[0])) {
         case TODO:
             taskList.addTask(taskArray[2], Command.TODO);
             break;

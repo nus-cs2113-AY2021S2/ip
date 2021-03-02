@@ -16,26 +16,6 @@ public class TaskList {
         tasks = new ArrayList<>();
     }
 
-    public static Command getCommand(String input) throws InvalidCommandException {
-        if (input.equals("list")) {
-            return Command.LIST;
-        } else if (input.equals("bye")) {
-            return Command.BYE;
-        } else if (input.startsWith("done ")) {
-            return Command.DONE;
-        } else if (input.startsWith("todo ")) {
-            return Command.TODO;
-        } else if (input.startsWith("deadline ")) {
-            return Command.DEADLINE;
-        } else if (input.startsWith("event ")) {
-            return Command.EVENT;
-        } else if (input.startsWith("delete ")) {
-            return Command.DELETE;
-        } else {
-            throw new InvalidCommandException();
-        }
-    }
-
     public Command addTask(String description, Command command) {
         Task newTask;
         String[] stringArray;
@@ -77,18 +57,16 @@ public class TaskList {
         case EVENT:
             break;
         case DONE:
-            if (!description.replace("done ", "").equals("")) {
-                break;
+            if (description.replace("done ", "").equals("")) {
+                throw new EmptyDescriptionException();
             }
+            break;
         case DELETE:
-            if (!description.replace("delete ", "").equals("")) {
-                break;
+            if (description.replace("delete ", "").equals("")) {
+                throw new EmptyDescriptionException();
             }
-        default:
-            throw new EmptyDescriptionException();
+            break;
         }
-
-
     }
 
     @Override
