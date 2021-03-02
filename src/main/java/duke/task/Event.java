@@ -3,15 +3,15 @@ package duke.task;
 public class Event extends Task {
 
     private String description;
-    private String timeslot;
+    private String timeSlot;
 
-    public Event(String description, String timeslot) {
+    public Event(String description, String timeSlot) {
         super(description);
-        this.timeslot = timeslot;
+        this.timeSlot = timeSlot;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.timeslot + ")";
+        return "[E]" + super.toString() + " (at: " + this.timeSlot + ")";
     }
 }
