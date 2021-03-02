@@ -1,4 +1,4 @@
-# 8K's Task Planner
+# User Guide
 
 8K's Task Planner is a Command Line Interface (CLI) app for planning of tasks. 
 
