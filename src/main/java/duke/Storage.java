@@ -7,10 +7,12 @@ import duke.task.Todo;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.channels.ScatteringByteChannel;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class Storage {
@@ -79,14 +81,14 @@ public class Storage {
                     allTasks.add(todo);
                     break;
                 case "D":
-                    Deadline deadline = new Deadline(taskDescription,tasksInTXT[3].trim());
+                    Deadline deadline = new Deadline(taskDescription,Parser.parseDate(tasksInTXT[3].trim()));
                     if(taskDone.equals("1")) {
                         deadline.setDone(true);
                     }
                     allTasks.add(deadline);
                     break;
                 case "E":
-                    Event event = new Event(taskDescription,tasksInTXT[3].trim());
+                    Event event = new Event(taskDescription,Parser.parseDate(tasksInTXT[3].trim()));
                     if(taskDone.equals("1")) {
                         event.setDone(true);
                     }
@@ -96,10 +98,12 @@ public class Storage {
                     System.out.println("Unknown task encountered. Skipping");
                     break;
                 }
-            } catch (IndexOutOfBoundsException e) {
+            } catch (DateTimeParseException e1) {
+                continue;
+            }catch (IndexOutOfBoundsException e2) {
                 continue;
             }
-            }
+        }
 
         return allTasks;
     }

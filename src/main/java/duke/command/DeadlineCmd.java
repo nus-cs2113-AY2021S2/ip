@@ -1,13 +1,10 @@
 package duke.command;
 
-import duke.CommandType;
-import duke.DukeException;
-import duke.Storage;
-import duke.Ui;
+import duke.*;
 import duke.task.Deadline;
-import duke.TaskManager;
 
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 
 public class DeadlineCmd extends Command{
 
@@ -22,14 +19,19 @@ public class DeadlineCmd extends Command{
             if (contentBy[0].trim().equals("") || contentBy[1].trim().equals("")) {
                 throw new DukeException(CommandType.DEADLINE);
             }
-            Deadline d = tasks.addDeadline(contentBy[0].trim(), contentBy[1].trim());
+
+            Deadline d = tasks.addDeadline(contentBy[0].trim(), Parser.parseDate(contentBy[1].trim()));
             ui.showAddResult(d, tasks.getNumOfTasks());
             storage.writeToTxt(tasks.getTasks());
         } catch (ArrayIndexOutOfBoundsException e) {
             ui.showNoByMessage();
         } catch (IOException e) {
             ui.showWriteToFileError();
+        } catch (DateTimeParseException e) {
+            ui.showWrongDateMessage();
         }
 
     }
+
+
 }

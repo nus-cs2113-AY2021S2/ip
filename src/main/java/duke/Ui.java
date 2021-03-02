@@ -47,9 +47,10 @@ public class Ui {
         System.out.println("4. done [index]");
         System.out.println("5. delete [index]");
         System.out.println("6. list");
-        System.out.println("7. find ...");
-        System.out.println("8. bye");
-        System.out.println("9. help");
+        System.out.println("7. filter yyyy-mm-dd");
+        System.out.println("8. find ...");
+        System.out.println("9. bye");
+        System.out.println("10. help");
         showLine();
 
     }
@@ -95,6 +96,9 @@ public class Ui {
         showExecuteResult("OOPS!!! No /by founded in the command");
     }
 
+    public void showWrongDateMessage() {
+        showExecuteResult("OOPS!!! the date you enter is in wrong format! (correct: yyyy-mm-dd)");
+    }
     public void showWriteToFileError() {
         showExecuteResult("Something wrong when writing to txt..");
     }
@@ -115,7 +119,11 @@ public class Ui {
 
     public void showFindResult(ArrayList<Task> tasks) {
         showLine();
-        tasks.stream().forEach(System.out::println);
+        if(!tasks.isEmpty()) {
+            tasks.stream().forEach(System.out::println);
+        } else {
+            System.out.println("The matching tasks are not existed!");
+        }
         showLine();
 
     }

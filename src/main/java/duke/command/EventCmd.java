@@ -1,13 +1,12 @@
 package duke.command;
 
-import duke.CommandType;
-import duke.DukeException;
-import duke.Storage;
-import duke.Ui;
+import duke.*;
 import duke.task.Event;
-import duke.TaskManager;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class EventCmd extends Command{
     public EventCmd(String s) {
@@ -21,13 +20,17 @@ public class EventCmd extends Command{
             if (contentAt[0].trim().equals("") || contentAt[1].trim().equals("")) {
                 throw new DukeException(CommandType.EVENT);
             }
-            Event e = tasks.addEvent(contentAt[0].trim(), contentAt[1].trim());
+            Event e = tasks.addEvent(contentAt[0].trim(), Parser.parseDate(contentAt[1].trim()));
             ui.showAddResult(e, tasks.getNumOfTasks());
             storage.writeToTxt(tasks.getTasks());
         } catch (IndexOutOfBoundsException e){
             ui.showNoAtMessage();
         } catch (IOException e) {
             ui.showWriteToFileError();
+        } catch (DateTimeParseException e) {
+            ui.showWrongDateMessage();
         }
     }
+
+
 }
