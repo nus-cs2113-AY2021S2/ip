@@ -1,6 +1,9 @@
-package duke;
+package duke.storage;
 
+import duke.Command;
+import duke.TaskList;
 import duke.exceptions.InvalidCommandException;
+import duke.parser.Parser;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -55,10 +58,10 @@ public class Storage {
             outputArray[2] = task.getDescription();
         } else if (task instanceof Deadline) {
             outputArray[0] = "deadline ";
-            outputArray[2] = task.getDescription() + " /by " + ((Deadline) task).getEndTime();
+            outputArray[2] = task.getDescription() + "/by " + ((Deadline) task).getEndTime();
         } else if (task instanceof Event) {
             outputArray[0] = "event ";
-            outputArray[2] = task.getDescription() + " /at " + ((Event) task).getEventTime();
+            outputArray[2] = task.getDescription() + "/at " + ((Event) task).getEventTime();
         }
         if (task.isDone()){
             outputArray[1] = "|1|";
@@ -79,7 +82,7 @@ public class Storage {
     private static void processTasks(TaskList taskList, String task) throws InvalidCommandException {
         String[] taskArray = task.split("\\|");
 
-        switch (TaskList.getCommand(taskArray[0])) {
+        switch (Parser.getCommand(taskArray[0])) {
         case TODO:
             taskList.addTask(taskArray[2], Command.TODO);
             break;

@@ -11,12 +11,15 @@ done 6
 event lecture /at tmr
 done 
 deadline 
-todo 
+todo
+delete 1
 event 
 done 1
 done 2
 done 3
 done 5
 done 7
+delete 7
+find want
 list
 bye
