@@ -80,8 +80,13 @@ public class Ui {
      */
     public void printFoundItems(ArrayList<Task> foundItems) {
         System.out.println(FIND_MESSAGE);
-        for(int i = 0; i < foundItems.size(); i++) {
-            printDetailsOfTask(i, foundItems);
+        int size = foundItems.size();
+        if (size > 0) {
+            for (int i = 0; i < size; i++) {
+                printDetailsOfTask(i, foundItems);
+            }
+        } else {
+            System.out.println(NO_SEARCH_RESULTS);
         }
         printBorderLine();
     }

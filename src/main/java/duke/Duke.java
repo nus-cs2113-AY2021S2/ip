@@ -30,6 +30,13 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the application.
+     * 1. Print greeting
+     * 2. Read commands in a loop and break when 'bye' is the command
+     * 3. Prints goodbye message
+     * 4. Save tasks into file
+     */
     public void run() {
         try {
             ui.printGreeting();

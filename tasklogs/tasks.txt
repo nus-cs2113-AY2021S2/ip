@@ -1,10 +1,6 @@
 [D] | 1 | remaster guitar track | 2020-04-09
-[E] | 0 | live gig | 2020-04-12
+[E] | 0 | live gig | 2020-03-04
 [T] | 0 | restring guitar
-[E] | 0 | guitar | 2020-04-12
+[E] | 0 | guitar | 2020-03-04
 [D] | 0 | guitar lesson | 2020-04-09
-[T] | 0 | neefa
-[E] | 0 | king krool | 2020-04-12
-[E] | 0 | king krule | 2020-04-12
-[T] | 0 |              kign            krule
-[T] | 0 | baby                        blue
+[E] | 0 | king krool | 2020-03-04

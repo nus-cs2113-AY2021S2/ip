@@ -191,7 +191,7 @@ public class AddCommand extends Command {
             throw new EmptyDateException();
         }
         // Checks if date is of correct format
-        LocalDate.parse(date);
+        LocalDate.parse(date.trim());
     }
 
     /**
@@ -265,6 +265,6 @@ public class AddCommand extends Command {
             throw new EmptyDateException();
         }
         // Checks if date is of correct format
-        LocalDate.parse(date);
+        LocalDate.parse(date.trim());
     }
 }
