@@ -25,7 +25,7 @@ public class taskDecoder {
     public static Task taskDecoder(String nextLine) throws BlankDescriptionException, FileModifiedException {
         Boolean isCorrupted = FileIntegrityChecker.isCorrupted(nextLine);
         if(isCorrupted) {
-            System.out.println("Task detected to be corrupted...Marked for deletion");
+            System.out.println("Task detected to be corrupted...Marked for deletion.");
             Task task = new Task("Corrupted. Please delete.");
             task.isCorrupted = -1;
             return task;
