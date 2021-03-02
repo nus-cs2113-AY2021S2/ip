@@ -101,6 +101,7 @@ public class Ui {
         System.out.println("\"done [index in list]\": marks a task in your list as done!");
         System.out.println("\"find [keyword to find]\": finds a keyword or phrase in your list!");
         System.out.println("\"bye\": exits duke");
+        System.out.println("Duke ONLY saves when you EXIT the program!");
     }
 
     /**
