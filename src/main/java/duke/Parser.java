@@ -61,11 +61,19 @@ public class Parser {
         return new Object[]{desc, isDone, date};
     }
 
+    /**
+     * Parses arguments for tasks with descriptions and dates
+     * i.e. Deadlines and Events
+     *
+     * @param data String to be parsed
+     * @param delimiter Delimiter used for splitting data
+     * @return String array containing task description and date
+     */
     public static String[] descDateParser(String data, String delimiter) {
-        String desc = data.substring(0, data.toLowerCase().indexOf(delimiter) - 1);
+        String desc = (data.substring(0, data.toLowerCase().indexOf(delimiter))).trim();
         String date;
         try {
-            date = convertDate(data.substring(data.toLowerCase().indexOf(delimiter) + 4));
+            date = convertDate((data.substring(data.toLowerCase().indexOf(delimiter) + 3)).trim());
         } catch (IndexOutOfBoundsException e) {
             date = null;
         }
@@ -73,6 +81,12 @@ public class Parser {
         return new String[]{desc, date};
     }
 
+    /**
+     * Converts user input date to java.time.localDate format if possible
+     * 
+     * @param date User input
+     * @return LocalDate format of user input date if possible. User input if not possible.
+     */
     private static String convertDate(String date) {
         try {
             LocalDate parsedDate = LocalDate.parse(date);

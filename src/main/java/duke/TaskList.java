@@ -5,8 +5,6 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -184,6 +182,7 @@ public class TaskList {
 
     /**
      * Searches through tasks to find tasks with descriptions matching keyword(s) provided
+     * then prints a list of all matching tasks
      *
      * @param list ArrayList containing all tasks
      * @param keyword Keyword(s) used for searching
