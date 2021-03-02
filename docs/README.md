@@ -36,10 +36,12 @@ display a list of current tasks.
    
 ## Features
 
+---
+
 ## Command Summary
 
  Command | Format, examples 
- ------- | --------------- |
+ --- | ---
  **List**| To list |
  **Add todo task** | test 
  **Add event** | test 
@@ -47,6 +49,8 @@ display a list of current tasks.
  **Mark as done** | test 
  **Delete** | test 
  **Find** | test 
+
+---
 ### `Keyword` - Describe action
 
 Describe action and its outcome.
