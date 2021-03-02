@@ -56,7 +56,7 @@ public class FileManager {
                 Tasklist.addTask(taskDecoder.taskDecoder(nextTask));
             }
         } catch(FileNotFoundException e) {
-            new File("Duke.txt").createNewFile();
+            new File("Spark.txt").createNewFile();
         }
 
 

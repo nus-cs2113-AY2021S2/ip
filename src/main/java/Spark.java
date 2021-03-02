@@ -16,7 +16,7 @@ import static common.Messages.*;
  * @author Jonathan Khoo
  * @version 3.0
  */
-public class Duke {
+public class Spark {
 
 
     //--------------------------------------------------------------------------------
@@ -26,7 +26,7 @@ public class Duke {
             throws BlankDescriptionException, EmptyListException,
             MissingDateException, IOException, InvalidSpaceException, NoMatchesFoundException {
         boolean isExit = false;
-            FileManager.restoreFileContents("Duke.txt");
+            FileManager.restoreFileContents("Spark.txt");
         do {
             TextUI ui = new TextUI();
 
@@ -53,7 +53,7 @@ public class Duke {
                 }
 
             case "bye":
-                FileManager.writeToFile("Duke.txt", Tasklist.getTaskList());
+                FileManager.writeToFile("Spark.txt", Tasklist.getTaskList());
                 SystemExit.execute();
                 isExit = true;
                 break;
