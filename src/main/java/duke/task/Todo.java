@@ -9,7 +9,7 @@ public class Todo extends Task {
     }
 
     public static void checkIfToDoDescriptionExists(String input) throws TaskDescriptionMissingException {
-        if (input.isBlank()){
+        if (input.isBlank()) {
             Task.decreaseTaskCount();
             throw new TaskDescriptionMissingException();
         }

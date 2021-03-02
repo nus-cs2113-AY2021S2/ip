@@ -4,20 +4,22 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
-    /** Total number of tasks keyed in Duke program **/
+    /**
+     * Total number of tasks keyed in Duke program
+     **/
     private static int taskCount = 0;
 
-    public Task(String description){
+    public Task(String description) {
         this.description = description;
         this.isDone = false;
         taskCount += 1;
     }
 
-    public String getStatusIcon(){
+    public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718");  //return tick or X symbols
     }
 
-    public static int getTaskCount(){
+    public static int getTaskCount() {
         return taskCount;
     }
 
@@ -33,15 +35,15 @@ public class Task {
         this.description = description;
     }
 
-    public void markAsDone(){
+    public void markAsDone() {
         isDone = true;
     }
 
-    public static void increaseTaskCount(){
+    public static void increaseTaskCount() {
         taskCount += 1;
     }
 
-    public static void decreaseTaskCount(){
+    public static void decreaseTaskCount() {
         taskCount -= 1;
     }
 

@@ -94,7 +94,7 @@ public class FileManager {
         PrintStream out = new PrintStream(new FileOutputStream(MainUI.FILE_PATH));
         PrintStream stdout = System.out;
         System.setOut(out);
-        for (Task task: taskArrayList){
+        for (Task task : taskArrayList) {
             System.out.println(task);
         }
         System.setOut(stdout);
