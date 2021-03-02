@@ -19,10 +19,10 @@ public class MainUI {
 
     public static ArrayList<Task> taskArrayList = new ArrayList<>();
     public static final String LOGO_STRING = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
+                                            + "|  _ \\ _   _| | _____ \n"
+                                            + "| | | | | | | |/ / _ \\\n"
+                                            + "| |_| | |_| |   <  __/\n"
+                                            + "|____/ \\__,_|_|\\_\\___|\n";
 
 
     public static void displayUI(Scanner in) {
