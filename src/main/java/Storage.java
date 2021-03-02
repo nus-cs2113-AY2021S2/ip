@@ -1,22 +1,18 @@
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 
-public class FileManager {
-    public static final String root = System.getProperty("user.dir");
-    public static final Path filePath = Paths.get(root, "data", "duke.txt");
-    public static final Path dirPath = Paths.get(root, "data");
-
+public class Storage {
 
     public static void saveFile() {
+        String filePath = new File("").getAbsolutePath();
         try {
-            FileWriter writer = new FileWriter(filePath.toString());
-            ArrayList<Task> tasks = TaskManager.getTasks();
+            FileWriter writer = new FileWriter(filePath + "/data.txt");
+            ArrayList<Task> tasks = TaskList.getTasks();
             for (Task task : tasks) {
                 if (task instanceof Todo) {
                     if (task.getStatusIcon().equals("[T][x] ")) {
@@ -40,24 +36,17 @@ public class FileManager {
             }
             writer.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("ERROR: something went wrong! :(");
         }
     }
 
-    public static void loadFile() throws IOException {
-        File fileDirectory = new File(dirPath.toString());
-
-        if (!fileDirectory.exists()) {
-            fileDirectory.mkdir();
-        }
-
-        File dataFile = new File(filePath.toString());
-        dataFile.createNewFile();
-        Scanner scanner = new Scanner(dataFile);
+    public static void loadFile(String filePath) throws FileNotFoundException {
+        File file = new File(filePath);
+        Scanner scanner = new Scanner(file);
+        ArrayList<Task> tasks = TaskList.getTasks();
 
         while (scanner.hasNext()) {
-            ArrayList<Task> tasks = TaskManager.getTasks();
-            int count = TaskManager.getCount();
+            int count = TaskList.getCount();
             String line = scanner.nextLine();
             char type = line.charAt(0);
             String info = line.substring(8);
@@ -70,8 +59,8 @@ public class FileManager {
                     tasks.get(count).markAsDone();
                 }
                 count++;
-                TaskManager.setCount(count);
-                TaskManager.setTasks(tasks);
+                TaskList.setCount(count);
+                TaskList.setTasks(tasks);
                 break;
             case 'D':
                 String dateOrTime = info.substring(dateIndex + 2);
@@ -82,8 +71,8 @@ public class FileManager {
                     tasks.get(count).markAsDone();
                 }
                 count++;
-                TaskManager.setCount(count);
-                TaskManager.setTasks(tasks);
+                TaskList.setCount(count);
+                TaskList.setTasks(tasks);
                 break;
             case 'E':
                 String dateOrTime1 = info.substring(dateIndex + 2);
@@ -94,8 +83,8 @@ public class FileManager {
                     tasks.get(count).markAsDone();
                 }
                 count++;
-                TaskManager.setCount(count);
-                TaskManager.setTasks(tasks);
+                TaskList.setCount(count);
+                TaskList.setTasks(tasks);
                 break;
             default:
                 break;
