@@ -4,7 +4,7 @@ public class Constants {
 
     // Constants used for displaying messages
     public static final String NEWLINE = System.lineSeparator();
-    public static final String BORDER = "____________________________________________________________"
+    public static final String BORDER = "______________________________________________________________________"
             + NEWLINE + NEWLINE;
 
     // Constants used to set status of a task

@@ -19,14 +19,14 @@ public class FindCommand extends Command {
         super.tasks = tasks;
         super.ui = new Ui();
         targetTasks = new TaskList();
-        targetKeyword = keyword;
+        targetKeyword = keyword.toLowerCase();
     }
 
     @Override
     public void execute() {
         for (int i=0; i<tasks.getTasksCount(); i++) {
             Task task = tasks.getTaskAtIndex(i);
-            if (task.getItem().contains(targetKeyword)) {
+            if (task.getItem().toLowerCase().contains(targetKeyword)) {
                 targetTasks.addTaskToList(task);
             }
         }

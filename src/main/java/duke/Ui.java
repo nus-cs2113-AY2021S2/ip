@@ -79,7 +79,7 @@ public class Ui {
     public static final String PRINT_NEW_TASK_STATEMENT
             = BORDER + "New task added:" + NEWLINE;
     public static final String PRINT_DONE_TASK_STATEMENT
-            = BORDER + "Nice! This task is now done:" + NEWLINE;
+            = BORDER + "Yay! This task is now done:" + NEWLINE;
     public static final String PRINT_DELETED_TASK_STATEMENT
             = BORDER + "This task has been removed:" + NEWLINE;
     public static final String PRINT_FULL_LIST_STATEMENT
@@ -180,8 +180,9 @@ public class Ui {
      * (only deadline item and time).
      */
     public void printDeadlinesWithTargetDate(TaskList tasks) {
-        System.out.print("Deadlines on this day:" + NEWLINE);
+        System.out.print(BORDER + "Deadlines on this day:" + NEWLINE);
         for (int i=0; i<tasks.getTasksCount(); i++) {
+            System.out.print("\t");
             tasks.getTaskAtIndex(i).printCondensedTask();
             System.out.print(NEWLINE);
         }
