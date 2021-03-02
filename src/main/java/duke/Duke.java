@@ -60,6 +60,7 @@ public class Duke {
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("Please input a smaller or bigger valid task number.");
                 System.out.println("You can list all tasks to check the total number of tasks you have. :))"); //invalid TaskNumber
+                continue;
             }
             isExit = Command.execute(tasks, ui, storage);
             ui.showLine(); //end of current Response to User
