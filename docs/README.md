@@ -1,5 +1,5 @@
 # User Guide
-A brief User Guide for CS2113T IP Project
+A brief User Guide for CS2113T IP Project.
 
 ## Features 
 
