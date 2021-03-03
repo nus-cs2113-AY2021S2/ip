@@ -43,6 +43,9 @@ public class Duke {
             case "delete":
                 processDeleteCommand(commandInput);
                 break;
+            case "find":
+                processFindCommand(commandInput);
+                break;
             default:
                 System.out.println("Invalid command entered, please try again.");
                 break;
@@ -50,6 +53,11 @@ public class Duke {
             commandInput = in.nextLine();
             parsedCommand = Parser.parse(commandInput);
         }
+    }
+
+    private static void processFindCommand(String commandInput) {
+        String keyWord = commandInput.substring(5);
+        TaskList.printKeywordTasks(keyWord);
     }
 
     private static void processDeleteCommand(String commandInput) {
