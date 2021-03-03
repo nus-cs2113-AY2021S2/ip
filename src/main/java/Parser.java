@@ -8,6 +8,18 @@ public class Parser {
     private static final String COMMAND_WORDS = "list" + "done" + "todo" + "deadline" + "event" + "delete" + "find";
 
     static void handleInput(String line) throws IllegalCommandWordException {
+        /**
+         * Handles the immediate input from the user.
+         *
+         * Priority given:
+         * 1. List
+         * 2. Done
+         * 3. Delete
+         * 4. FInd
+         * 5. todo/deadline/event
+         *
+         * Throws an error if the command word is does not belong to any of the above.
+         */
         line = line.trim();
         String[] wordsEntered = line.split(" ");
         if (!COMMAND_WORDS.contains(wordsEntered[0].toLowerCase())) {
