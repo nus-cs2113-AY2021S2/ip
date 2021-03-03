@@ -45,4 +45,30 @@ public class TaskList {
         Ui.printDivider();
     }
 
+    public static void printKeywordTasks(String keyword) {
+        ArrayList<Task> keywordTaskList = new ArrayList<>();
+        for (Task t : taskList) {
+            if (t.description.toLowerCase().contains(keyword.toLowerCase())) {
+                keywordTaskList.add(t);
+            }
+        }
+
+        if (keywordTaskList.isEmpty()) {
+            Ui.printDivider();
+            System.out.println("There are no matching tasks in your list.");
+            Ui.printDivider();
+            return;
+        }
+
+        int i = 0;
+        Ui.printDivider();
+        System.out.println("Here are the matching tasks in your list:");
+        for (Task t : keywordTaskList) {
+            System.out.print(i + 1 + ". [" + t.getAlphabet() + "]");
+            System.out.println("[" + t.getStatusIcon() + "] " + t.toString());
+            i++;
+        }
+        Ui.printDivider();
+    }
+
 }
