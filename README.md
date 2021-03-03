@@ -33,6 +33,8 @@ Adds a Todo task in your task list
 ### Usage: <code> todo descriptionOfTodo </code>
 ### Example of usage: <code> todo to go and buy groceries
 ### Examples of outcome:
+   ![image](https://user-images.githubusercontent.com/62389756/109859058-83519580-7c97-11eb-85ea-af69721d1318.png)
+
 
 <br>
 
