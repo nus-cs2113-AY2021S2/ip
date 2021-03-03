@@ -65,9 +65,9 @@ public class Storage {
             //Split given filepath by "/":
             String[] storagePathArray = storagePath.split("/");
             //For the first time, create a new file for the user:
-            File dataDirectory = new File(storagePathArray[1]);
+            File dataDirectory = new File(storagePathArray[0]);
             dataDirectory.mkdir();
-            File dukeFile = new File(storagePathArray[1], storagePathArray[2]); //File(parent, child)
+            File dukeFile = new File(storagePathArray[0], storagePathArray[1]); //File(parent, child)
             dukeFile.createNewFile();
         } finally {
             return updatedTasksList;
@@ -98,7 +98,7 @@ public class Storage {
     }
 
     public static void appendToDukeListFile(String textToAdd) throws IOException {
-        FileWriter fw = new FileWriter("data/dukeList.txt", true);
+        FileWriter fw = new FileWriter(storagePath, true);
         fw.write(textToAdd);
         fw.close();
     }
