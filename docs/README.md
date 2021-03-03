@@ -23,7 +23,7 @@ Listed below are the 8 functions that Duke supports:
 
 Each of the following section will guide you on how to use these functionalities and the required command format to follow.
 
-###Adding task
+### Adding task
 There are three types of tasks that can be added in Duke: todo, deadline and event. Todo is the most basic form of task, which is just a task you have on hand. Deadline tasks require a mandatory field /by yyyy-mm-dd, which is the deadline of your task. Lastly, event tasks require a mandatory field /at yyyy-mm-dd, which represents the day of which the event is happening
 
 Here are the exact formats of adding tasks to your list of tasks:
@@ -35,32 +35,32 @@ Here are the exact formats of adding tasks to your list of tasks:
 `deadline assignment /by 2021-01-29`
 
 
-###Listing task
+### Listing task
 The current tasks that you have can be listed with the command “list”. An example of the calling the list command is shown below
 
-![alt text](https://github.com/bryanwhl/ip/tree/master/docs/screenshots/img1.jpg)
+![alt text](https://github.com/bryanwhl/ip/tree/master/docs/screenshots/img1.png)
 
-###Marking tasks as done
+### Marking tasks as done
 Any of your tasks can be mark as done by calling the command: done x , replacing x with the specific task number as shown by the list command. An example of how this can be done, with the example output, is shown below:
 
-![alt text](https://github.com/bryanwhl/ip/tree/master/docs/screenshots/img2.jpg)
+![alt text](https://github.com/bryanwhl/ip/tree/master/docs/screenshots/img2.png)
 
-###Removing task
+### Removing task
 You can remove tasks from the data by calling the command: delete x , replacing x with the specific task number as shown by the list command. An example of how this can be done, with the example output, is shown below:
 
-![alt text](https://github.com/bryanwhl/ip/tree/master/docs/screenshots/img3.jpg)
+![alt text](https://github.com/bryanwhl/ip/tree/master/docs/screenshots/img3.png)
 
-###Finding tasks by keywords
+### Finding tasks by keywords
 You can filter tasks out by keywords or a specific character sequence by calling the command: find xxx , replacing xxx with the keyword or character sequence. Here is an example of how it can be done:
 
-![alt text](https://github.com/bryanwhl/ip/tree/master/docs/screenshots/img4.jpg)
+![alt text](https://github.com/bryanwhl/ip/tree/master/docs/screenshots/img4.png)
 
-###Find tasks by date
+### Find tasks by date
 You can filter tasks out by date by calling the command: date yyyy-mm-dd , replacing yyyy-mm-dd with the date of event or deadline that you want to check on. Here is an example of how it can be done:
 
-![alt text](https://github.com/bryanwhl/ip/tree/master/docs/screenshots/img5.jpg)
+![alt text](https://github.com/bryanwhl/ip/tree/master/docs/screenshots/img5.png)
 
-###Saving your data
+### Saving your data
 You can save your data by calling the command: 
 
 `save`
