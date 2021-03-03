@@ -1,74 +1,21 @@
 package duke.parser;
 
 import duke.Command;
-import duke.TaskList;
 import duke.exceptions.EmptyDescriptionException;
 import duke.exceptions.InvalidCommandException;
 
+/**
+ * Parses user inputs.
+ */
 public class Parser {
-    public static Command processInput(TaskList taskList, String input) {
-        Command command;
-        try {
-            command = getCommand(input);
-            switch (command) {
-            case TODO:
-                command = taskList.addTask(input.replaceFirst("todo ", ""), Command.TODO);
-                break;
-            case DEADLINE:
-                command = taskList.addTask(input.replaceFirst("deadline ", ""), Command.DEADLINE);
-                break;
-            case EVENT:
-                command = taskList.addTask(input.replaceFirst("event ", ""), Command.EVENT);
-                break;
 
-            case DONE:
-                try {
-                    validateDescription(input, Command.DONE);
-                } catch (EmptyDescriptionException e) {
-                    System.out.println("Done command needs task number!");
-                    command = Command.ERROR;
-                    break;
-                }
-                int taskNum = getTaskNum(input, Command.DONE);
-                taskList.finishTask(taskNum - 1);
-                break;
-            case DELETE:
-                try {
-                    validateDescription(input, Command.DELETE);
-                } catch (EmptyDescriptionException e) {
-                    System.out.println("Delete command needs task number!");
-                    command = Command.ERROR;
-                }
-                break;
-            case FIND:
-                try {
-                    validateDescription(input, Command.FIND);
-                } catch (EmptyDescriptionException e) {
-                    System.out.println("Find command needs a description!");
-                    command = Command.ERROR;
-                }
-                break;
-            default:
-                break;
-            }
-        } catch (InvalidCommandException e) {
-            System.out.println("Wrong command entered!: " + input);
-            command = Command.ERROR;
-        }
-        return command;
-    }
-
-    public static int getTaskNum(String input, Command command) {
-        switch (command) {
-        case DONE:
-            return Integer.parseInt(input.replaceFirst("done ", ""));
-        case DELETE:
-            return Integer.parseInt(input.replaceFirst("delete ", ""));
-        default:
-            return -1;
-        }
-    }
-
+    /**
+     * Parses user input into command for execution
+     *
+     * @param input full user input string
+     * @return the command based on the user input
+     * @throws InvalidCommandException  If wrong input entered by user
+     */
     public static Command getCommand(String input) throws InvalidCommandException {
         if (input.equals("list")) {
             return Command.LIST;
@@ -91,28 +38,69 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks if the description entered by user is valid for the respective command.
+     *
+     * @param description description part of the user input
+     * @param command user's intended command
+     * @throws EmptyDescriptionException If description is empty
+     */
     public static void validateDescription(String description, Command command) throws EmptyDescriptionException {
+        boolean isEmptyDescription = false;
         if (description.equals("")) {
-            throw new EmptyDescriptionException();
+            isEmptyDescription = true;
         }
         switch (command) {
         case DONE:
             if (description.replace("done ", "").equals("")) {
-                throw new EmptyDescriptionException();
+                isEmptyDescription = true;
             }
             break;
         case DELETE:
             if (description.replace("delete ", "").equals("")) {
-                throw new EmptyDescriptionException();
+                isEmptyDescription = true;
             }
             break;
         case FIND:
             if (description.replace("find ", "").equals("")) {
-                throw new EmptyDescriptionException();
+                isEmptyDescription = true;
+            }
+            break;
+        case EVENT:
+            String[] stringArray = description.split("/at");
+            for (String keyword : stringArray) {
+                isEmptyDescription = isEmptyDescription || keyword.trim().isEmpty();
+            }
+            break;
+        case DEADLINE:
+            stringArray = description.split("/by");
+            for (String keyword : stringArray) {
+                isEmptyDescription = isEmptyDescription || keyword.trim().isEmpty();
             }
             break;
         default:
             break;
+        }
+        if (isEmptyDescription){
+            throw new EmptyDescriptionException();
+        }
+    }
+
+    /**
+     * Parses the user input to get task number. Only for Done and Delete command.
+     *
+     * @param input full user input string
+     * @param command user's intended command
+     * @return the task number indicated by user
+     */
+    public static int getTaskNum(String input, Command command) throws NumberFormatException {
+        switch (command) {
+        case DONE:
+            return Integer.parseInt(input.replaceFirst("done ", ""));
+        case DELETE:
+            return Integer.parseInt(input.replaceFirst("delete ", ""));
+        default:
+            return -1;
         }
     }
 }

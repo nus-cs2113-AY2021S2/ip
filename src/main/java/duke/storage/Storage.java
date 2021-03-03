@@ -15,21 +15,80 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Represents the Storage used to store the tasks.
+ */
 public class Storage {
     private static final String DIRECTORY_NAME = "data";
     private static final String FILE_NAME = "duke.txt";
     private static final String DONE = "1";
 
+    /**
+     * Loads tasks from file into taskList.
+     *
+     * @param taskList ArrayList of tasks
+     * @throws IOException If I/O is failed or interrupted
+     * @throws InvalidCommandException If file was corrupted and wrong command is given
+     * @throws SecurityException If there is a security violation in accessing the file
+     */
     public static void loadFile(TaskList taskList) throws IOException, InvalidCommandException, SecurityException {
         createDirectory();
         createFile();
         loadTasks(taskList);
     }
 
+    /**
+     * Saves tasks into file from taskList.
+     *
+     * @param taskList ArrayList of tasks
+     * @throws IOException If I/O is failed or interrupted
+     * @throws SecurityException If there is a security violation in accessing the file
+     */
     public static void saveFile(TaskList taskList) throws IOException, SecurityException {
         createDirectory();
         createFile();
         saveTasks(taskList);
+    }
+
+    private static void createDirectory() throws SecurityException {
+        File directory = new File(DIRECTORY_NAME);
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
+    }
+
+    private static void createFile() throws SecurityException, IOException {
+        File file = new File(DIRECTORY_NAME + "/" + FILE_NAME);
+        if (!file.exists()) {
+            file.createNewFile();
+        }
+    }
+
+    private static void loadTasks(TaskList taskList) throws FileNotFoundException, InvalidCommandException {
+        File file = new File(DIRECTORY_NAME + "/" + FILE_NAME);
+        Scanner scanner = new Scanner(file);
+        while (scanner.hasNext()) {
+            processTasks(taskList, scanner.nextLine());
+        }
+    }
+
+    private static void processTasks(TaskList taskList, String task) throws InvalidCommandException {
+        String[] taskArray = task.split("\\|");
+
+        switch (Parser.getCommand(taskArray[0])) {
+        case TODO:
+            taskList.addTask(taskArray[2], Command.TODO);
+            break;
+        case EVENT:
+            taskList.addTask(taskArray[2], Command.EVENT);
+            break;
+        case DEADLINE:
+            taskList.addTask(taskArray[2], Command.DEADLINE);
+            break;
+        }
+        if (taskArray[1].equals(DONE)) {
+            taskList.finishLastTask();
+        }
     }
 
     private static void saveTasks(TaskList taskList) throws IOException {
@@ -61,47 +120,6 @@ public class Storage {
             outputArray[1] = "|0|";
         }
         return String.join("", outputArray);
-    }
-
-    private static void loadTasks(TaskList taskList) throws FileNotFoundException, InvalidCommandException {
-        File file = new File(DIRECTORY_NAME + "/" + FILE_NAME);
-        Scanner scanner = new Scanner(file);
-        while (scanner.hasNext()) {
-            processTasks(taskList, scanner.nextLine());
-        }
-    }
-
-    private static void processTasks(TaskList taskList, String task) throws InvalidCommandException {
-        String[] taskArray = task.split("\\|");
-
-        switch (Parser.getCommand(taskArray[0])) {
-        case TODO:
-            taskList.addTask(taskArray[2], Command.TODO);
-            break;
-        case EVENT:
-            taskList.addTask(taskArray[2], Command.EVENT);
-            break;
-        case DEADLINE:
-            taskList.addTask(taskArray[2], Command.DEADLINE);
-            break;
-        }
-        if (taskArray[1].equals(DONE)) {
-            taskList.finishLastTask();
-        }
-    }
-
-    private static void createFile() throws SecurityException, IOException {
-        File file = new File(DIRECTORY_NAME + "/" + FILE_NAME);
-        if (!file.exists()) {
-            file.createNewFile();
-        }
-    }
-
-    private static void createDirectory() throws SecurityException {
-        File directory = new File(DIRECTORY_NAME);
-        if (!directory.exists()) {
-            directory.mkdir();
-        }
     }
 
 }
