@@ -1,26 +1,101 @@
-# Duke project template
-
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
-
-## Setting up in Intellij
-
-Prerequisites: JDK 11, update IntelliJ to the most recent version.
-
-### On IntelliJ version 2020.3.1 (latest) and beyond
-
-1. Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Import the project into IntelliJ as follows:
-   1. Click `Open`
-   1. Select the project directory, and click `OK`
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).
-1. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the output below.
-
    ```
-   Hello from
     ____        _        
    |  _ \ _   _| | _____ 
    | | | | | | | |/ / _ \
    | |_| | |_| |   <  __/
    |____/ \__,_|_|\_\___|
    ```
+# Duke User Guide
+
+<br>
+
+## Setting up Duke
+1. Open Terminal(on mac) or Command Prompt(on Window)
+2. Change directory to the folder where ip.jar is stored
+3. Type in <code> java -jar ip.jar </code> to run Duke
+
+<br>
+
+## Features
+1. Todo
+2. Deadline
+3. Event
+4. List
+5. Done
+6. Delete
+7. Find
+8. Bye
+
+<br>
+
+## Feature 1: Todo
+Adds a Todo task in your task list
+### Usage: <code> todo descriptionOfTodo </code>
+### Example of usage: <code> todo to go and buy groceries
+### Examples of outcome:
+
+<br>
+
+## Feature 2: Deadline
+Adds a Deadline task in your task list
+### Usage: <code> deadline descriptionOfDeadline /by date time</code>
+### Example of usage: <code> deadline English Essay submission /by tomorrow 23:59 </code>
+### Examples of outcome:
+
+<br>
+
+## Feature 3: Event
+Adds an Event task in your task list
+### Usage: <code> event descriptionOfEvent /at date time </code>
+### Examples of usage: <code> Event Jamie birthday party /at 23 Feb 2021 </code>
+### Examples of outcome:
+
+<br>
+
+##  Feature 4: List
+Lists all task current task in Duke
+### Usage: <code> list <\code>
+### Examples of outcome:
+
+<br>
+
+## Feature 5: Done 
+Marks the task as done
+### Usage: <code> Done index </code>
+### Example of usage: <code> Done 2 </code>
+### Examples of outcome:
+
+<br>
+
+## Feature 6: Delete
+Deletes the task
+### Usage: <code> Delete index </code>
+### Example of usage: <code> Delete 2 </code>
+### Examples of outcome:
+
+<br>
+
+## Feature 7: Find
+Find the task with matching keyword
+### Usage: <code> Find keyword(s) </code>
+### Example of usage: <code> Find party </code>
+### Examples of outcome:
+
+<br>
+
+## Feature 8: Bye
+Exits the program
+### Usage: <code> bye </code>
+### Examples of outcome:
+
+
+
+
+
+
+
+
+
+
+
+
