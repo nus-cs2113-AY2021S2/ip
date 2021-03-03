@@ -79,7 +79,7 @@ ___________________________________________
 
 ### Todo
 
-* Adds a todo task which has no time limit to finish.
+* Adds a todo task which has no time limit to finish
 * Format: `todo DESCRIPTION`
 * Example: `todo read a book`
 * Example of expected output:
@@ -105,7 +105,7 @@ ___________________________________________
 
 ### Deadline
 
-* Adds a deadline task which has to be completed before a given time.
+* Adds a deadline task which has to be completed before a given time
 * Format：`deadline DESCRIPTION /by BYTIME`
 * Example: `deadline submit a report /by 05 Mar`
 * Example of expected output:
@@ -131,7 +131,7 @@ ___________________________________________
 
 ### Event
 
-* Adds an event task which will start at a given time.
+* Adds an event task which will start at a given time
 * Format：`event DESCRIPTION /by ATTIME`
 * Example: `event project group meeting /at 2-4 pm Sunday`
 * Example of expected output:
@@ -172,7 +172,7 @@ ___________________________________________
 
 ### Done
 
-* Marks a certain task to be done.
+* Marks a certain task to be done
 * Format: `done INDEX`
 * Example: 'done 1'
 * Example of expected output:
@@ -224,7 +224,7 @@ ___________________________________________
 
 ### Find
 
-* Finds the tasks that contains the certain keyword given by user.
+* Finds the tasks that contains the certain keyword given by user
 * Format: `find KEYWORD`
 * Example: `find book`
 * Example of expected output:
