@@ -1,26 +1,12 @@
-# Duke project template
+# Duke
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+Duke is a basic task management application written in Java 11. It is a desktop application, but with a
+Command Line Interface (CLI) only at this current stage. Although it is optimized for those who can type
+fast and used to type commands, everyone is welcomed to use this application.
 
-## Setting up in Intellij
+You can record and retrieve three kinds of tasks on this program - ToDo Tasks, Events and Deadlines. Each
+time you modify the task list, it will be saved onto your hard disk so you will be able to see your list
+after you close and open again this application.
 
-Prerequisites: JDK 11, update IntelliJ to the most recent version.
-
-### On IntelliJ version 2020.3.1 (latest) and beyond
-
-1. Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Import the project into IntelliJ as follows:
-   1. Click `Open`
-   1. Select the project directory, and click `OK`
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).
-1. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the output below.
-
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+You can refer to the github page with a more detailed explanation on the usage:
+https://fsgmhoward.github.io/ip/
