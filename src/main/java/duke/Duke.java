@@ -1,18 +1,15 @@
 package duke;
 
 import java.util.Scanner;
-import java.io.IOException;
 
 public class Duke {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         welcomeMessage();
 
         Storage.downloadTask();
 
         runProgram();
-
-        Storage.uploadTasks();
 
         exitMessage();
     }
@@ -50,6 +47,7 @@ public class Duke {
                 System.out.println("Invalid command entered, please try again.");
                 break;
             }
+            Storage.uploadTasks();
             commandInput = in.nextLine();
             parsedCommand = Parser.parse(commandInput);
         }
