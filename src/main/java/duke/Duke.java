@@ -5,20 +5,26 @@ import duke.record.Record;
 import duke.exception.DukeException;
 
 /**
- * This class is to build a personal assistant chatbot called "Happy"
+ * Represents a personal assistant chatbot called "Happy"
  * (Customized from Duke)
  *
  * @author NgManSing
+ * @version v1.0
  */
 public class Duke {
     public static final String NAME = "Happy";
-    static Record record;
+    private static Record record;
 
-    private static void initializeDuke() {
-        record = new Record();
-        printWelcomeMsg();
-    }
-
+    /**
+     * Call this method to start the program.
+     * <br>
+     * This method keeps on looping to ask for user inputs and perform related functions until
+     * false is returned from {@code command.receiveCommand()}
+     * <br>
+     * When DukeException is thrown, this method handles it by calling  {@code promptUserInputInvalid()}to
+     * notify users that their inputted command is invalid
+     * @param args Dummy command-line arguments (not used)
+     */
     public static void main(String[] args) {
         initializeDuke();
         Command command = new Command(record);
@@ -30,6 +36,11 @@ public class Duke {
                 promptUserInputInvalid();
             }
         }
+    }
+
+    private static void initializeDuke() {
+        record = new Record();
+        printWelcomeMsg();
     }
 
     private static void promptUserInputInvalid() {
