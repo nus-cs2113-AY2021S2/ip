@@ -1,10 +1,11 @@
 # User Guide
-
+- [Introduction](#2)
+- [Notes](#1)
 -  [Features](#a) 
    - [Adding tasks](#a)
-    	- [todo](#a)
-    	- [deadline](#b)
-	 - [event](#c)
+     - [todo](#a)
+     - [deadline](#b)
+     - [event](#c)
    - [Listing all tasks](#d)
    - [Completing a task](#e)
    - [Find](#f)
@@ -13,23 +14,45 @@
    - [Save and exit](#i)
 
 ***
-Notes: 
+# <a name="2"></a> Introduction
 
-The square brackets specifies that user input is required
-`command [variable input]`
+Your very own application to manage your to-do list!
+
 ***
-## Features
+
+# <a name="1"></a> Notes
+
+**General Formatting:**
+
+&nbsp;&nbsp;&nbsp;&nbsp; Description - Describes the functionality of the feature
+
+&nbsp;&nbsp;&nbsp;&nbsp; Formatting - Describes the code formatting to use a feature
+
+&nbsp;&nbsp;&nbsp;&nbsp; Examples - Examples of how to use a feature
+
+&nbsp;&nbsp;&nbsp;&nbsp; Example output - Snapshot of how the usage of a feature will appear in the application
+<br /> <br>
+
+**Additional notes:**
+
+&nbsp;&nbsp;&nbsp;&nbsp; The square brackets specifies that user input is required
+
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; `command [variable input]`
+
+***
+
+# Features
 ***
 ## <a name="a"></a> Adding tasks: Todo
 **Description:**
 
-Adding a simple task using the todo command
+&nbsp;&nbsp;&nbsp;&nbsp; Adding a simple task using the `todo` command
 
 **Formatting:**
 
-`todo` [task description]
+&nbsp;&nbsp;&nbsp;&nbsp; `todo` [task description]
 
-**Examples**
+**Examples:**
 
 &nbsp;&nbsp;&nbsp;&nbsp; Adding the task "read shakespeare"
 
@@ -39,7 +62,7 @@ Adding a simple task using the todo command
 
 &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; `todo finish java quiz`
 
-**Example output**
+**Example output:**
 ```
 todo read shakespeare
 ____________________________________________________________
@@ -60,7 +83,7 @@ ____________________________________________________________
 
 **Formatting:**
 
-&nbsp;&nbsp;&nbsp;&nbsp; 'deadline [task description] /by [date in format YYYY-MM-DD]`
+&nbsp;&nbsp;&nbsp;&nbsp; `deadline [task description] /by [date in format YYYY-MM-DD]`
 
 **Examples**
 
@@ -177,7 +200,7 @@ ____________________________________________________________
 
 **Formatting:**
 
-&nbsp;&nbsp;&nbsp;&nbsp;`find [task description]`
+&nbsp;&nbsp;&nbsp;&nbsp; `find [task description]`
 
 **Examples**
 
@@ -185,7 +208,7 @@ ____________________________________________________________
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `find read shakespeare`
 
-&nbsp;&nbsp;&nbsp;&nbsp;Find any tasks with the word book description
+&nbsp;&nbsp;&nbsp;&nbsp; Find any tasks with the word book description
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`find book`
 
@@ -216,11 +239,11 @@ ____________________________________________________________
 
 **Examples**
 
-&nbsp;&nbsp;&nbsp;&nbsp; Find events on 
+&nbsp;&nbsp;&nbsp;&nbsp; Find events happening on 10 March 2021
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `findAt 2021-03-0`
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `findAt 2021-03-10`
 
-&nbsp;&nbsp;&nbsp;&nbsp; Find any tasks with the word book description
+&nbsp;&nbsp;&nbsp;&nbsp; Find all deadlines that occurs before a 10 March 2021
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `findBy 2021-03-10`
 
