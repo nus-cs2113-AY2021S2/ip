@@ -8,6 +8,7 @@ import duke.tasksmanager.ToDos;
 import java.util.ArrayList;
 
 import static duke.Parser.*;
+import static duke.Parser.commandWord;
 import static duke.Storage.tasksCount;
 
 public class Command {
