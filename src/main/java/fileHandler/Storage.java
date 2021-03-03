@@ -7,6 +7,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+/**
+ * A class that deals with loading from and storing to the text file
+ */
 public class Storage {
     private FileHandler fileHandler;
     private FileTaskWriter fileTaskWriter;

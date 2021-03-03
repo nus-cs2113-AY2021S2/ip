@@ -1,5 +1,8 @@
 package task;
 
+/**
+ * Represent a To Do task
+ */
 public class ToDo extends Task {
     public static final String TASK_INFO_FORMAT = "[T][%s]%s";
 
@@ -7,6 +10,10 @@ public class ToDo extends Task {
         super(name, isDone);
     }
 
+    /**
+     * Get the information of a to do task in certain format for displaying.
+     * @return
+     */
     @Override
     public String getTaskInfo(){
         if(super.getDone()){
@@ -16,6 +23,10 @@ public class ToDo extends Task {
         }
     }
 
+    /**
+     * Get the information of a to do task in certain format for storing in file.
+     * @return
+     */
     @Override
     public String toFile(){
         if(taskDone) {

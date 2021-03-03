@@ -14,6 +14,9 @@ public class Duke {
     private TaskList tasks;
     private Storage storage;
 
+    /**
+     * Set up Duke, create Ui, storage object. Load task list from the file
+     */
     private void start() {
         ui = new Ui();
         String sourceFilePath = "data" + File.separator + "task.txt";
@@ -27,6 +30,9 @@ public class Duke {
         ui.showWelcomeMessage();
     }
 
+    /**
+     * Keep asking user input, execute command and display result
+     */
     private void runCommandLoopUntilExitCommand() {
         CommandParser parser = new CommandParser();
         Command command;

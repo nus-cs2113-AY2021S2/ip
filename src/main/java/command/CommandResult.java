@@ -6,6 +6,9 @@ import task.TaskList;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * Represent the result of command execution
+ */
 public class CommandResult {
     private String feedback;
     private TaskList relevantTasks;

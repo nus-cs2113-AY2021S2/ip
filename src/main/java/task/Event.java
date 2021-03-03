@@ -1,5 +1,8 @@
 package task;
 
+/**
+ * Represent a task that happens at specified time
+ */
 public class Event extends Task {
     public static final String TASK_INFO_FORMAT = "[E][%s]%s (at: %s)";
     private String duration;
@@ -9,7 +12,10 @@ public class Event extends Task {
         this.duration = duration;
     }
 
-
+    /**
+     * Get the information of an event task in certain format for displaying.
+     * @return
+     */
     @Override
     public String getTaskInfo(){
         if(super.getDone()){
@@ -19,6 +25,10 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Get the information of an event task in certain format for storing in file.
+     * @return
+     */
     @Override
     public String toFile() {
         if(taskDone) {

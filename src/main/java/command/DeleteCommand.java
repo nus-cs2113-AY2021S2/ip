@@ -2,6 +2,9 @@ package command;
 
 import exception.TaskAlreadyDoneException;
 
+/**
+ * Represent a command of deleting a task from the task list
+ */
 public class DeleteCommand extends Command{
     private String feedbackFormat;
     private int taskIndex;
@@ -10,6 +13,12 @@ public class DeleteCommand extends Command{
         this.taskIndex = taskIndex;
     }
 
+    /**
+     * delete the specified task from task list.
+     * @return feedback message of the command execution
+     * @throws IndexOutOfBoundsException
+     * @throws TaskAlreadyDoneException
+     */
     @Override
     public CommandResult execute() throws IndexOutOfBoundsException, TaskAlreadyDoneException {
         try{
