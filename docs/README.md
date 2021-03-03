@@ -47,7 +47,7 @@ Format: `help`
 Adds a todo task to the tasks list.   
 Example: `todo make coffee`  
 Outcome:  
-![Screenshot 2021-03-02 at 1 35 34 AM](https://user-images.githubusercontent.com/60348727/109535483-96c5fa80-7af7-11eb-8623-2b3393f1c3c7.png)  
+![Screenshot 2021-03-03 at 10 18 37 PM](https://user-images.githubusercontent.com/60348727/109818842-681e6000-7c6e-11eb-8f91-8e99e9d5d213.png)  
 Format: `todo TASK_DESCRIPTION`  
 * Note that a todo task is marked with a [T]
 
@@ -56,7 +56,7 @@ Format: `todo TASK_DESCRIPTION`
 Adds a deadline to the tasks list.  
 Example: `deadline finish project /by monday`  
 Outcome:  
-![Screenshot 2021-03-02 at 1 36 45 AM](https://user-images.githubusercontent.com/60348727/109535636-c07f2180-7af7-11eb-839f-114d3efa6048.png)  
+![Screenshot 2021-03-03 at 10 19 36 PM](https://user-images.githubusercontent.com/60348727/109818971-8ab07900-7c6e-11eb-8cef-77d919be61c7.png)  
 Format: `deadline TASK_DESCRIPTION /by WHEN`  
 * Note that a deadline is marked with a [D]
 
@@ -65,7 +65,7 @@ Format: `deadline TASK_DESCRIPTION /by WHEN`
 Adds an event to the tasks list.  
 Example: `event important meeting /at tuesday morning`  
 Outcome:  
-![Screenshot 2021-03-02 at 1 37 22 AM](https://user-images.githubusercontent.com/60348727/109535714-d68ce200-7af7-11eb-9c11-a8c011dc8fa0.png)  
+![Screenshot 2021-03-03 at 10 21 11 PM](https://user-images.githubusercontent.com/60348727/109819203-c3e8e900-7c6e-11eb-8f54-be21bdf9c9d7.png)  
 Format: `event TASK_DESCRIPTION /at WHEN`  
 * Note that an event is marked with a [E]
 
@@ -74,15 +74,15 @@ Format: `event TASK_DESCRIPTION /at WHEN`
 Marks the specified task as done.  
 Example: `done 2`  
 Outcome:  
-![Screenshot 2021-03-02 at 1 38 08 AM](https://user-images.githubusercontent.com/60348727/109535818-f2908380-7af7-11eb-82db-d6b7c3f578bd.png)  
+![Screenshot 2021-03-03 at 10 21 46 PM](https://user-images.githubusercontent.com/60348727/109819271-d82ce600-7c6e-11eb-8959-bb2e1ac913d5.png)    
 Format: `done TASK_NUMBER` 
-* Note that the [✘] has changed to [✓] for the specified task
+* Note that the [ ] has changed to [X] for the specified task
 
 ### Listing all tasks
 ### `list`  
 Lists all tasks.  
 Outcome:  
-![Screenshot 2021-03-02 at 1 38 39 AM](https://user-images.githubusercontent.com/60348727/109535874-050abd00-7af8-11eb-99e6-2ee01e6afd58.png)  
+![Screenshot 2021-03-03 at 10 22 26 PM](https://user-images.githubusercontent.com/60348727/109819361-f0046a00-7c6e-11eb-815e-44458accb809.png)  
 Format: `list`
 
 ### Deleting a task  
@@ -90,7 +90,7 @@ Format: `list`
 Deletes the specified task from the list.  
 Example: `delete 1`  
 Outcome:  
-![Screenshot 2021-03-02 at 1 39 07 AM](https://user-images.githubusercontent.com/60348727/109535925-15bb3300-7af8-11eb-9e0b-0c0f101e7df3.png)  
+![Screenshot 2021-03-03 at 10 23 40 PM](https://user-images.githubusercontent.com/60348727/109819520-1c1feb00-7c6f-11eb-921d-b390f0f914ef.png)  
 Format: `delete TASK_NUMBER`
 
 ### Searching for tasks by a keyword  
@@ -98,7 +98,7 @@ Format: `delete TASK_NUMBER`
 Finds all tasks that contain the specified keyword from the list.  
 Example: `find important`  
 Outcome:  
-![Screenshot 2021-03-02 at 1 39 29 AM](https://user-images.githubusercontent.com/60348727/109535980-22d82200-7af8-11eb-86f5-c1ce6485a7e5.png)  
+![Screenshot 2021-03-03 at 10 24 19 PM](https://user-images.githubusercontent.com/60348727/109819585-335ed880-7c6f-11eb-8eeb-e9d1a4d8702d.png)  
 Format: `find KEYWORD`  
 
 
