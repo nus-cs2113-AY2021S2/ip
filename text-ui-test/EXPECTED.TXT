@@ -11,19 +11,20 @@ I have added this task:
 [T][ ] borrow book
 You now have 1 tasks in your tasklist.
 1.[T][ ] borrow book
+Please input deadline tasks in the correct format. (e.g deadline <task description> /by YYYY-MM-DD)
 I have added this task:
-[D][ ] return book (by: Sunday)
+[D][ ] return book (by: 7 Mar 2020)
 You now have 2 tasks in your tasklist.
 I have added this task:
 [E][ ] project meeting (at: Mon 2-4pm)
 You now have 3 tasks in your tasklist.
 1.[T][ ] borrow book
-2.[D][ ] return book (by: Sunday)
+2.[D][ ] return book (by: 7 Mar 2020)
 3.[E][ ] project meeting (at: Mon 2-4pm)
 Great! I've marked this task as done:
-[D][X] return book (by: Sunday)
+[D][X] return book (by: 7 Mar 2020)
 1.[T][ ] borrow book
-2.[D][X] return book (by: Sunday)
+2.[D][X] return book (by: 7 Mar 2020)
 3.[E][ ] project meeting (at: Mon 2-4pm)
 Task 6 does not exist! Enter 'list' to view tasklist :)
 Task 6 does not exist! Enter 'list' to view tasklist :)
@@ -31,11 +32,11 @@ Okay, I've deleted this task:
 [E][ ] project meeting (at: Mon 2-4pm)
 You now have 2 tasks in your tasklist.
 1.[T][ ] borrow book
-2.[D][X] return book (by: Sunday)
+2.[D][X] return book (by: 7 Mar 2020)
 'hello' is not found in the description of any of your tasks!
 Here are the matching tasks in your list:
 1.[T][ ] borrow book
-2.[D][X] return book (by: Sunday)
+2.[D][X] return book (by: 7 Mar 2020)
 Here are the matching tasks in your list:
-1.[D][X] return book (by: Sunday)
+1.[D][X] return book (by: 7 Mar 2020)
 Goodbye. See you again soon :)
