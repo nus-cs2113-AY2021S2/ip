@@ -15,6 +15,10 @@ public class TaskList {
 
     public static void addTask(String taskDescription) throws
             MissingDeadlineException, MissingEventTimeException {
+        /**
+         * Adds new tasks to TaskList.
+         * Does a simple check for invalid input, if command word is given with no task description.
+         */
         Task t;
         if (taskDescription.contains("todo")) {
             if (taskDescription.length() < 5) {
@@ -47,7 +51,10 @@ public class TaskList {
     }
 
     public static void markTaskAsDone(String taskDescription){
-        // Marks one of the tasks as done.
+        /**
+         * Marks one of the tasks as done.
+         * Throws an error if index given is invalid.
+         */
         String[] input = taskDescription.split(" ");        // input = ["Done", taskIndex]
         int taskIndex = Integer.parseInt(input[1]);
         try {
@@ -63,7 +70,9 @@ public class TaskList {
     }
 
     public static void listTasks(){
-        // Lists out the things under tasks.
+        /**
+         * Lists out the things under tasks.
+         */
         System.out.println("\t Here are the tasks in your list:");
         int i = 0;
         for(Task t : tasks){
@@ -74,7 +83,10 @@ public class TaskList {
     }
 
     public static void deleteTask(String taskDescription){
-        // Deletes one of the tasks
+        /**
+         * Deletes a task based on the index given by user.
+         * Throws an error if invalid index is given.
+         */
         String[] input = taskDescription.split(" ");        // input = ["Done", taskIndex]
         int taskIndex = Integer.parseInt(input[1]);
         try {
@@ -114,7 +126,11 @@ public class TaskList {
 
     public static void setupTasks() throws FileNotFoundException,
             MissingDeadlineException, MissingEventTimeException {
-        // Reads in current tasks when main() starts running.
+        /**
+         * Reads in current tasks when main() starts running.
+         * If duke.txt does not exist, then a new txt file will be created.
+         * If duke.txt exists, contents will be loaded into TaskList
+         */
         File f = new File("duke.txt");
         if (!f.exists()) {
             try{
