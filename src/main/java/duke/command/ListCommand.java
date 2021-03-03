@@ -62,7 +62,6 @@ public class ListCommand extends Command {
         }
     }
 
-
     @Override
     public boolean isValidInput() {
         if (fullCommand.length() == 4) {
