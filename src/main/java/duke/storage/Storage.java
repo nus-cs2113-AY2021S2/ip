@@ -20,6 +20,9 @@ import duke.ui.TextUI;
 
 import static duke.common.Messages.DIVIDER;
 
+/**
+ * Class for handling all storage functions of Duke. 
+ */
 public class Storage {
 
     public TaskList taskList;
@@ -30,6 +33,12 @@ public class Storage {
     public static final String SAVE_SUCCESS = "Data saved.";
     public static final String SAVE_ERROR = "An error occured while saving your data :(";
 
+    /**
+     * Constructor for the <code>Storage</code> class. Initializes the instance and attempts to load the saved data into the tasklist. 
+     * 
+     * @param taskList task list in which the saved data is loaded into
+     * @param ui ui instance which controls where the text is displayed
+     */
     public Storage(TaskList taskList, TextUI ui) {
         try {
             this.taskList = taskList;
@@ -76,6 +85,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the current data from the tasklist into the storage
+     * 
+     * @param ui ui instance which decides input and output streams
+     * @return true if success, false on errors
+     */
     public boolean saveData(TextUI ui) {
         try {
             ui.printToScreen(SAVING);
