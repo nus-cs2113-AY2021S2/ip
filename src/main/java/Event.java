@@ -21,5 +21,15 @@ public class Event extends Task {
                 + this.getDescription() + "(at: " + getAt() + ")";
     }
 
+    @Override
+    public String formatData() {
+        int done;
+        if (isDone) {
+            done = 1;
+        } else {
+            done = 0;
+        }
+        return "E" + " | " + done + " | " + description + " | " + at;
+    }
 
 }

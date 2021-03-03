@@ -15,4 +15,14 @@ public class Task {
         return description;
     }
 
+    public String formatData() {
+        int done;
+        if (isDone) {
+            done = 1;
+        } else {
+            done = 0;
+        }
+        return  " | " + done + " | " + description;
+    }
+
 }
