@@ -17,8 +17,8 @@ after you close and open again this application.
    suggested to put it in an empty folder.
 4. Double click the file to launch the application. If the window is not shown up, you can open a Command
    Prompt (CMD), then run `java -jar ip.jar` to execute it.
-5. After the program start and see a welcome message, you may type your command in it. For example, you can
-   type `todo some task description` followed by `Enter` to execute it:
+5. After the program starts and prints a welcome message, you may type your command in it. For example, you
+   can type `todo some task description` followed by `Enter` to execute it:
 
    ```
             [We have a problem!] duke.exception.SaveException: No save file is found at the given path.
@@ -59,24 +59,24 @@ document as it contains more details on usage.
 
 ## Features
 
-> This section introduces usage and input/output format of each one of the
-> available commands. Here are some notions used for this section:
->
-> - Words in `<>`: These are compousory parameters you must provide. For example, for
->   `todo <TASK DESCRIPTION>`, `todo buy food` would be a valid input, while `todo` is not, since
->   the description part is missing.
-> - Words in `[]`: These are optional parameters you may provide, but is not a "MUST". Not providing
->   them is also a valid syntax and the program will accepts either one.
-> - Words not in any brackets: **Exact** words must be used for input. For example, for
->   `done <INDEX>`, `done 1` is valid while `doneat 1` is not valid.
->
-> Some parameters have additional constraints, such as only integers are accepted. This
-> will be stated clearly below.
->
-> For sample input/output (I/O), lines with indentation and wrapped in two long lines are
-> outputs. The remaining lines are input lines.
->
-> Commands are case sensitive.
+This section introduces the usage and input/output format of each one of the
+available commands. Here are some notions used for this section:
+
+- Words in `<>`: These are compulsory parameters you must provide. For example, for
+  `todo <TASK DESCRIPTION>`, `todo buy food` would be valid input, while `todo` would not, since
+  the description part is missing.
+- Words in `[]`: These are optional parameters you may provide, but is not a "MUST". Not providing
+  them is also a valid syntax and the program will accept either one.
+- Words not in any brackets: **Exact** words must be used for input. For example, for
+  `done <INDEX>`, `done 1` is valid while `doneat 1` is not valid.
+
+Some parameters have additional constraints, such as only integers are accepted. This
+will be stated clearly below.
+
+For sample input/output (I/O), lines with indentation and wrapped in two long lines are
+outputs. The remaining lines are the input lines.
+
+Commands are case sensitive.
 
 ### Add "ToDo" Task: `todo`
 
@@ -100,7 +100,7 @@ todo buy cup noodle
 Event is a special kind of task, which bear a "happening date". This date is specified after
 `/at` keyword. The date has a format of `31/12/2020`. If you want to record time as well, you
 can specify it in this format: `31/12/2020 17:59`. When no time is specified, it will be 12pm
-noon by default.
+by default.
 
 > In more specific terms,
 > - `<DATE>` is of format `dd/MM/yyyy`
@@ -130,7 +130,7 @@ event flight to Tokyo /at 30/04/2021 17:00
 
 Deadline is the other special kind of task, which contains a date (and time) that you need to
 finish it by. The date (and time) is specified after `/by` keyword. The date (and time) format
-is exactly same as the one for `event`.
+is exactly the same as the one for `event`.
 
 Format: `deadline <DEADLINE DESCRIPTION> /by <DATE|TIME>`
 
@@ -157,7 +157,7 @@ deadline submit CS2101's recess reflection /by 02/03/2021 23:59
 
 ### List All Tasks in List: `list`
 
-This command list out all tasks in the current task list. If you don't have any task in the list,
+This command list all tasks in the current task list. If you don't have any task on the list,
 it will tell you as well. Any task you have marked done (see `done` later), will have a tick after
 its type character (`T/E/D`). Those with a cross are the ones you have not completed.
 
@@ -208,11 +208,11 @@ done 6
 
 ### Delete Task: `delete`
 
-This command deletes a task from the list. A deletion action is inreversible so think twice before you
+This command deletes a task from the list. A deletion action is irreversible so think twice before you
 use this command. Similar to `done`, the `<INDEX>` is a positive integer.
 
-A deletion action can cause indices of the tasks in the list to change, since these indices are relative.
-For example, there are two task **A** and **B** and they have indices of 1 and 2 respectively. After you
+A deletion action can cause indices of the tasks in the list to change since these indices are relative.
+For example, there are two tasks **A** and **B** and they have indices of 1 and 2 respectively. After you
 delete **A**, the slot of index 1 is empty, so **B** becomes 1 in the new list. If there is anything behind
 **B**, their indices will deduct 1 as well. Sample I/O also illustrates this: deleting index 5 consecutively
 deletes two different tasks (which are 5 and 6 in the original list).
@@ -236,8 +236,8 @@ delete 5
 
 ### Find Task Based on Description: `find`
 
-This command finds tasks based on their description. It will print out a new list of the all
-the tasks having description containing this subtext.
+This command finds tasks based on their description. It will print out a new list of all the
+tasks having description containing this subtext.
 
 > **Note: the index print out here cannot be used for commands of `delete` and `done`. Please
 > use the index printout in the full list (`list`) for those two commands!**
@@ -314,7 +314,7 @@ bye
 **A**: By default, all data is saved in a file called `duke.save`. If you do not like this name,
 you can use a custom save file by launching the program with the first argument being the file name,
 like `java -jar ip.jar new_file.save`. Take note that, if you decided to do so, you have to launch
-this program everytime with the same parameter for your list to be properly loaded.
+this program every time with the same parameter for your list to be properly loaded.
 
 **Q**: How can I transfer my save file to the other folder/computer?
 
