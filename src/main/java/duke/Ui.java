@@ -32,15 +32,26 @@ public class Ui {
         System.out.println("Bye. Hope to see you again soon!"); //exits
     }
 
+    /**
+     * Prints Line for Start and End
+     * of current response to User
+     */
     public static void showLine() {
         System.out.println(line);
     }
 
+    /**
+     * takes in next line of User Command
+     * @return
+     */
     public static String readCommand() {
         String input = in.nextLine(); //take in User's current input
         return input;
     }
 
+    /**
+     * Shows Loading Error associated with IOException in main Duke Class
+     */
     public static void showLoadingError() {
         System.out.println("Loading Error :((");
     }

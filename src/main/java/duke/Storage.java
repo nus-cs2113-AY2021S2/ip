@@ -16,6 +16,9 @@ import java.util.Scanner;
 
 import static duke.TaskList.tasks;
 
+/**
+ * Storage Class: For handling saving into and loading of tasks from Storage
+ */
 public class Storage {
 
     public static ArrayList<Tasks> updatedTasksList;
@@ -74,6 +77,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Re-assigns all the tasks in the updated 'tasks' list
+     * to the given filepath for storage
+     */
     public static void overwriteDukeListFile() {
         //write to file:
         try {
@@ -97,6 +104,11 @@ public class Storage {
         }
     }
 
+    /**
+     * for complementing overwriteDukeListFile() function
+     * @param textToAdd
+     * @throws IOException
+     */
     public static void appendToDukeListFile(String textToAdd) throws IOException {
         FileWriter fw = new FileWriter(storagePath, true);
         fw.write(textToAdd);

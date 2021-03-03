@@ -1,5 +1,9 @@
 package duke.tasksmanager;
 
+/**
+ * Tasks Class: Parent of subsequent subtask classes
+ * for storing the typeOfTask, status of Task, taskName, Date
+ */
 public class Tasks {
 
     public String description;

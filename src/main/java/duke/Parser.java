@@ -5,6 +5,9 @@ import duke.taskexceptions.NoTaskDateException;
 import duke.taskexceptions.NoTaskNameException;
 import duke.taskexceptions.TaskDateFormatException;
 
+/**
+ * Parser Class: Parse Commands
+ */
 public class Parser {
 
     public static String commandWord;
@@ -19,6 +22,16 @@ public class Parser {
 
     }
 
+    /**
+     * Parse each command differently based on type(format) of command
+     * Parsing functions for each type of command included in this class
+     * @param input
+     * @throws NoTaskNameException
+     * @throws NoTaskDateException
+     * @throws EmptyTaskDateException
+     * @throws TaskDateFormatException
+     * @throws NumberFormatException
+     */
     public static void parse (String input) throws NoTaskNameException, NoTaskDateException, EmptyTaskDateException, TaskDateFormatException, NumberFormatException {
 
         if (input.startsWith("todo")) {

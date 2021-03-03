@@ -9,6 +9,9 @@ import static duke.Parser.*;
 import static duke.Parser.commandWord;
 import static duke.Storage.tasksCount;
 
+/**
+ * Executes User's command
+ */
 public class Command {
 
     public static boolean isExit = false;
@@ -16,7 +19,11 @@ public class Command {
     public Command() {
 
     }
-
+    /**
+     * Executes User's command
+     * through functions included in Command Class
+     * @return isExit - when user says 'bye', isExit = true
+    */
     public static boolean execute (TaskList tasks, Ui ui, Storage storage) {
 
         if (commandWord.equals("todo")) {

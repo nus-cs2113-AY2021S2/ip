@@ -7,12 +7,20 @@ import duke.taskexceptions.TaskDateFormatException;
 
 import java.io.IOException;
 
+/**
+ * Main Duke Class - Overall 'Parent' Class
+ */
 public class Duke {
 
     private static Storage storage;
     private static TaskList tasks;
     private static Ui ui;
 
+    /**
+     * Takes in filepath
+     * and load old list from Storage (which stores Duke List  with all tasks from previous User experience)
+     * @param filePath
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -26,6 +34,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Main that takes in User Command
+     * and Respond to User
+     */
     public void run() {
         ui.saysHiToUser();
         boolean isExit = false;
@@ -58,6 +70,12 @@ public class Duke {
 
     }
 
+    /**
+     * Runs entire program
+     * and loads data of tasks list from given filepath
+     * Otherwise, creates a directory/file from filepath and uses it as filepath for storage
+     * @param args
+     */
     public static void main(String[] args) {
         new Duke("data/dukeList.txt").run();
     }
