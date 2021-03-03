@@ -36,6 +36,7 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    | |_| | |_| |   <  __/
    |____/ \__,_|_|\_\___|
    ```
+
 ## Using Duke Project
 
 A guideline: how to use the Duke Project.
@@ -239,30 +240,14 @@ ___________________________________________
 ```
 ___________________________________________
 Here are some available commands and their corresponding input format: 
-
-list: Display all tasks in the list.
-Format: list
-
-todo: Add a todo task.
-Format: todo read a book
-
-deadline: Add a deadline task.
-Format: deadline submit a report /by 05 Mar
-
-event: Add an event task.
-Format: event project meeting /at Mon 2-4pm
-
-done: Mark a task as done.
-Format: done 1
-
-find: find all tasks contain the input keyword
-Format: find book
-
-date: find all tasks occurring the specific date
-Format: date 2021-02-28
-
-bye: Exit the program.
-Format: bye
+list: Display all tasks in the list. Format: list
+todo: Add a todo task. Format: todo read a book
+deadline: Add a deadline task. Format: deadline submit a report /by 05 Mar
+event: Add an event task. Format: event project meeting /at Mon 2-4pm
+done: Mark a task as done. Format: done 1
+find: find all tasks contain the input keyword. Format: find book
+date: find all tasks occurring the specific date. Format: date 2021-02-28
+bye: Exit the program. Format: bye
 
 ___________________________________________
 ```
