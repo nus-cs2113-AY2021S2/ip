@@ -66,17 +66,17 @@ public class SuccessMessagePrinter {
         String helpMessage =
                 " Try entering commands like :\n"
                         + " help,\n"
-                        + " list,\n"
-                        + " bye,\n"
-                        + " save,\n"
                         + " add new todo <taskName>\n"
                         + " add deadline <taskName> /by <date YYYY-MM-DD> <time hh:mm>\n"
                         + " add event    <taskName> /at <date YYYY-MM-DD> <time hh:mm>\n"
                         + " done <task number>,\n delete <task number>\n"
+                        + " save,\n"
+                        + " list,\n"
                         + " find <common keyword in tasks>\n"
                         + " print type <task type> (to filter based on type)\n"
                         + " print date <task date YYYY-MM-DD> (to filter based on date)\n"
                         + " print filepath\n"
+                        + " bye\n"
                         + " Remember: be nice!";
         System.out.println(helpMessage);
     }
