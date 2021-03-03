@@ -11,6 +11,10 @@ import java.util.Iterator;
 public class TaskList {
     private ArrayList<Task> tasks;
 
+    public TaskList() {
+        tasks = new ArrayList<Task>();
+    }
+
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
