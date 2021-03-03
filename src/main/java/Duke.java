@@ -1,10 +1,31 @@
+import common.Constants;
+import parser.Parser;
+import storage.Storage;
+
+import java.util.Scanner;
+
 public class Duke {
+
+    private static final Constants constants = new Constants();
+    private static final Storage storage = new Storage();
+    private static final Parser parser = new Parser();
+
+
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        Scanner scanner = new Scanner(System.in);
+        String input;
+        try {
+            storage.loadFile();
+            System.out.println(constants.MESSAGE_FILE_LOADED);
+        } catch (Exception e) {
+            //File does not exist
+            System.out.println(constants.MESSAGE_FILE_NOT_FOUND);
+        }
+        System.out.println(constants.MESSAGE_WELCOME);
+        do {
+            input = scanner.nextLine().trim();
+            parser.processInput(input);
+        } while (!parser.isEndProgramNow());
     }
+
 }

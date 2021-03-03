@@ -1,0 +1,26 @@
+help
+list
+todo apple
+event apple
+event apple /at pear
+deadline apple
+deadline apple /by pear
+deadline apple /by 24-06-1999
+todo pear
+find orange
+find app
+search apple
+search 12-12-1212
+search 24-06-1999
+list
+done 2
+list
+undo 2
+list
+done 0
+done 1 2
+delete 1 2 4
+list
+delete 2
+list
+bye
