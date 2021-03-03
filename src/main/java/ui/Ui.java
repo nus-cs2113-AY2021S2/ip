@@ -12,46 +12,71 @@ public class Ui {
     private final String ERROR_DIVIDER_LINE = "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
     public static final String FOUND_DIVIDER ="FOUND!!!FOUND!!!FOUND!!!FOUND!!!";
 
+    /**
+     * Greets user when the program starts
+     */
     public static void printMenu() {
-        print("Hello! Im Duke\n" + logo + "What can I do for you?");
-        print("> Use the keyword todo");
-        print("> Use the keyword deadlines followed \"/by YYYY-MM-DD HH:MM\"");
-        print("> Use the keyword event followed by \"/at\"");
-        print("> Use the keyword list to print");
-        print("> Use keyword \"done <Number>\"  to mark task as done!");
-        print("> Use keyword \"delete <Number>\"  to delete task!");
-        print("> Use keyword \"find <keyword>\"  to find task(s)!");
-        print("> Use the keyword \"bye\" to exit");
-        print("> Use the keyword \"menu\" to bring up the menu");
-        print("Input here: ");
+        System.out.println("Hello! Im Duke\n" + logo + "What can I do for you?");
+        System.out.println("> Use the keyword todo");
+        System.out.println("> Use the keyword deadlines followed \"/by\"");
+        System.out.println("> Use the keyword event followed by \"/at\"");
+        System.out.println("> Use the keyword list to print");
+        System.out.println("> Use keyword \"Done <Number>\"  to mark task as done!");
+        System.out.println("> Use the keyword \"bye\" to exit");
+        System.out.println("> Use the keyword \"menu\" to bring up the menu");
+        System.out.println("Input here: ");
     }
 
+    /**
+     * Retrieves the userInput that will determine the command
+     * @return userInput
+     */
     public String getUserInput() {
         Scanner sc = new Scanner(System.in);
-        String userInput = sc.nextLine().trim().toLowerCase();
+        String userInput = sc.nextLine().trim();
         return userInput;
     }
 
+    private void printErrorDivider() {
+        System.out.println(ERROR_DIVIDER_LINE);
+    }
+
+    /**
+     * Prints all error messages for errors encountered during the program runtime
+     * @param messages Error Messages to be printed
+     */
     public void printErrorMessage(String... messages) {
-        print(ERROR_DIVIDER_LINE);
+        printErrorDivider();
         print("Error Message: ");
         for (String message: messages) {
             print(message);
         }
-        print(ERROR_DIVIDER_LINE);
-        print("Enter next command: ");
+        printErrorDivider();
     }
 
+    /**
+     * To print any messages required
+     * @param messages Message to be printed
+     */
     public void printMessage(String ...messages){
         for(String message : messages){
-            System.out.println(message);
+            print(message);
         }
     }
 
-    public static void print(String message){
-        System.out.println(message);
+    /**
+     * To print single line message
+     * @param string string to print
+     */
+    public void print(String string) {
+        System.out.println(string);
     }
 
+    /**
+     * Ends the program when the user enters the command "bye"
+     * @param userInput userInput
+     * @return boolean value true if userInput contains "bye"
+     */
     public Boolean sayGoodBye(String userInput){
         if (userInput.contains("BYE")){
             printMessage("Bye Bye! See you Again");
