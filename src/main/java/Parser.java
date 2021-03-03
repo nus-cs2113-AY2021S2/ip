@@ -5,7 +5,7 @@ import Exceptions.MissingEventTimeException;
 public class Parser {
     public Parser() {}
 
-    public static final String COMMAND_WORDS = "list" + "done" + "todo" + "deadline" + "event" + "delete";
+    private static final String COMMAND_WORDS = "list" + "done" + "todo" + "deadline" + "event" + "delete" + "find";
 
     static void handleInput(String line) throws IllegalCommandWordException {
         line = line.trim();
@@ -17,8 +17,9 @@ public class Parser {
         } else if (line.toLowerCase().contains("done")){
             TaskList.markTaskAsDone(line);
         } else if (line.toLowerCase().contains("delete")) {
-            // Insert code for deleting task
             TaskList.deleteTask(line);
+        } else if (line.toLowerCase().contains("find")) {
+            TaskList.findTask(line);
         } else {
             try {
                 TaskList.addTask(line);
