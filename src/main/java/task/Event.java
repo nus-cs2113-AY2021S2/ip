@@ -8,7 +8,7 @@ public class Event extends Task {
         this.at = at;
     }
 
-    public String getAt(){
+    public String getAt() {
         return at;
     }
 

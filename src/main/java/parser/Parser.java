@@ -107,11 +107,17 @@ public class Parser {
      * Creates new Event task
      * @param userInput full userInput String
      * @return a new Event task
+     * @throws DukeException
      */
-    private static Event getEvent(String userInput) {
+    static Event getEvent(String userInput) throws DukeException {
         String removeKeyword = userInput.replaceAll("EVENT", "");
-        String[] inputSplit = removeKeyword.split("/AT");
-        return new Event(inputSplit[0], inputSplit[1]);
+        try {
+            String[] inputSplit = removeKeyword.split("/AT");
+            return new Event(inputSplit[0], inputSplit[1]);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("☹ Please use the appropriate formatting(/at) " +
+                    "and the description of event cannot be empty!");
+        }
     }
 
     /***
@@ -121,7 +127,6 @@ public class Parser {
      */
     private static Todo getToDo(String userInput) {
         String removeKeyword = userInput.replaceAll("TODO", "");
-        //create task.Todo
         return new Todo(removeKeyword);
     }
 
@@ -131,11 +136,18 @@ public class Parser {
      * @return a new Deadline task
      */
     private static Deadline getDeadline(String userInput) throws DukeException {
-        String removeKeyword = userInput.replaceAll("DEADLINE", "");
-        String[] inputSplit = removeKeyword.split("/BY");
-        LocalDate finalDate = parseDate(inputSplit[1]);
-        LocalTime finalTime = parseTime(inputSplit[1]);
-        return new Deadline(inputSplit[0], finalDate, finalTime);
+        try {
+            String removeKeyword = userInput.replaceAll("DEADLINE", "");
+            String[] inputSplit = removeKeyword.split("/BY");
+            LocalDate finalDate = parseDate(inputSplit[1]);
+            LocalTime finalTime = parseTime(inputSplit[1]);
+            return new Deadline(inputSplit[0], finalDate, finalTime);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("☹ Please use the appropriate formatting(/by) and " +
+                    "the description of deadline cannot be empty");
+        } catch (DukeException e) {
+            throw new DukeException("☹ Sorry! I don't understand what that means!");
+        }
     }
 
     /***
@@ -165,7 +177,6 @@ public class Parser {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
         try {
             LocalTime time = LocalTime.parse(inputTime, formatter);
-            System.out.println(time);
             return time;
         } catch (DateTimeParseException | StringIndexOutOfBoundsException e) {
             return null;

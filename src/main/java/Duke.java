@@ -7,7 +7,6 @@ import ui.Ui;
 import java.io.FileNotFoundException;
 
 
-
 public class Duke {
     private Ui ui;
     private TaskManager taskList;
@@ -30,14 +29,14 @@ public class Duke {
                 Command command = Parser.parseCommand(newUserInput.toUpperCase());
                 command.executeCommand(newUserInput, taskList);
                 isBye = ui.sayGoodBye(newUserInput);
-            }catch (DukeException e){
+            } catch (DukeException e) {
                 ui.printErrorMessage(e.getMessage());
             }
         } while (!isBye);
     }
 
     public static void main(String[] args) throws FileNotFoundException, DukeException {
-            new Duke().run();
-        }
+        new Duke().run();
+    }
 }
 

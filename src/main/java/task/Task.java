@@ -3,6 +3,7 @@ package task;
 public class Task {
     protected String description;
     protected boolean isDone;
+
     public Task(String Description) {
         this.description = Description;
         this.isDone = false;
@@ -21,7 +22,7 @@ public class Task {
     }
 
     public String toString() {
-        return getStatusIcon()  + description;
+        return getStatusIcon() + description;
     }
 
     public boolean setDone() {

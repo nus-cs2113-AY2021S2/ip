@@ -13,10 +13,11 @@ public class Deadline extends Task {
         this.time = time;
     }
 
-    public LocalDate getDate(){
+    public LocalDate getDate() {
         return date;
     }
-    public LocalTime getTime(){
+
+    public LocalTime getTime() {
         return time;
     }
 

@@ -1,2 +1,0 @@
-D|false|GO HOME|10PM
-E|false|GO HOME|10

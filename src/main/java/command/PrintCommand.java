@@ -10,8 +10,8 @@ public class PrintCommand extends Command {
     public void executeCommand(String userInput, TaskManager taskManager) {
         taskManager.printTaskItems();
         System.out.println("Enter next command: ");
-        }
     }
+}
 
 
 

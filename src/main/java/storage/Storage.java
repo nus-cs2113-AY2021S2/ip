@@ -84,7 +84,7 @@ public class Storage {
             } else if (task instanceof Deadline) {
                 Deadline deadline = (Deadline) task;
                 textToAppend = "D|" + isDone + "|" + descriptionOfTask + "|"
-                        + deadline.getDate() + "|" + deadline.getTime()  + "\n";
+                        + deadline.getDate() + "|" + deadline.getTime() + "\n";
             } else if (task instanceof Event) {
                 Event event = (Event) task;
                 textToAppend = "E|" + isDone + "|" + descriptionOfTask + "|" + event.getAt().strip() + "\n";
