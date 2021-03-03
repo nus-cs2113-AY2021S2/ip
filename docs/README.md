@@ -37,6 +37,9 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    |____/ \__,_|_|\_\___|
    ```
 ## Using Duke Project
+
+A guideline: how to use the Duke Project.
+
 ### Help
 
 * Display all acceptable commands
@@ -72,6 +75,7 @@ Format: bye
 
 ___________________________________________
 ```
+
 ### List
 
 * Display all recorded tasks in the list
