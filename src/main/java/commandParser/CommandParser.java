@@ -23,23 +23,12 @@ public class CommandParser {
             return prepareDone(inputParts);
         case "delete":
             return prepareDelete(inputParts);
-        case "find":
-            return prepareFind(inputParts);
         default:
             return new InvalidCommand(new InvalidCommandException());
         }
     }
 
-    private Command prepareFind(String[] inputParts){
-        try{
-            if(inputParts.length < 2){
-                throw new FindFormatException();
-            }
-            return new FindCommand(inputParts[1]);
-        } catch (FindFormatException e){
-            return new InvalidCommand(e);
-        }
-    }
+
 
     private Command prepareDone(String[] inputParts){
         try{
