@@ -1,34 +1,34 @@
 package dukchess.entity;
 
 public class Event extends Task {
-    private String at;
+    private String timeOfEvent;
 
     /**
      * Create an event based on its task description and when it is at.
      *
      * @param taskDescription
-     * @param at
+     * @param timeOfEvent
      */
-    public Event(String taskDescription, String at) {
+    public Event(String taskDescription, String timeOfEvent) {
         super(taskDescription);
-        this.at = at;
+        this.timeOfEvent = timeOfEvent;
     }
 
     public Event(String taskDescription, boolean isDone, String at) {
         super(taskDescription, isDone);
-        this.at = at;
+        this.timeOfEvent = at;
     }
 
-    public String getAt() {
-        return at;
+    public String getTimeOfEvent() {
+        return timeOfEvent;
     }
 
-    public void setAt(String at) {
-        this.at = at;
+    public void setTimeOfEvent(String timeOfEvent) {
+        this.timeOfEvent = timeOfEvent;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + String.format(" (at: %s)", at);
+        return "[E]" + super.toString() + String.format(" (at: %s)", timeOfEvent);
     }
 }

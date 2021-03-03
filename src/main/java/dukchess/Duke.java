@@ -18,6 +18,7 @@ import dukchess.entity.Todo;
 /**
  * Main application driver class.
  */
+// TODO: add try-catch for all handlers
 public class Duke {
 
     private static TaskList tasks;
@@ -53,6 +54,7 @@ public class Duke {
 
     private static void sayGoodbye() {
         String goodbyeText = "Goodbye, hope to see you soon!";
+        tasks.flushTaskList();
         System.out.println(goodbyeText);
     }
 
@@ -71,10 +73,25 @@ public class Duke {
                 originalTaskStatus, selectedTask.toString());
     }
 
+    private static void handleDoneTask(String commandArgs) {
+        int taskId = Integer.parseInt(commandArgs);
+        String taskStatusAdditionOutcome = setAddedTaskStatus(taskId, true);
+        System.out.println(taskStatusAdditionOutcome);
+    }
+
     private static String addTodo(String description) {
         Todo newTodo = new Todo(description);
         tasks.add(newTodo);
         return String.format("Gotcha, added this todo: %s", newTodo.toString());
+    }
+
+    private static void handleAddTodo(String commandArgs) {
+        if (commandArgs.length() == 0) {
+            System.out.println("Oops, todo description cannot be empty :(");
+            return;
+        }
+        String todoAdditionOutcome = addTodo(commandArgs);
+        System.out.println(todoAdditionOutcome);
     }
 
     private static String addDeadline(String description, String by) {
@@ -83,10 +100,38 @@ public class Duke {
         return String.format("Gotcha, added this deadline: %s", newDeadline.toString());
     }
 
+    private static void handleAddDeadline(String commandArgs) {
+        if (commandArgs.length() == 0) {
+            System.out.println("Oops, deadline description cannot be empty :(");
+            return;
+        }
+        String[] deadlineArgs = commandArgs.split(" /by ");
+        if (deadlineArgs.length != 2) {
+            System.out.println("Oops, deadline due date cannot be empty :(");
+            return;
+        }
+        String deadlineAdditionOutcome = addDeadline(deadlineArgs[0], deadlineArgs[1]);
+        System.out.println(deadlineAdditionOutcome);
+    }
+
     private static String addEvent(String description, String at) {
         Event newEvent = new Event(description, at);
         tasks.add(newEvent);
         return String.format("Gotcha, added this event: %s", newEvent.toString());
+    }
+
+    private static void handleAddEvent(String commandArgs) {
+        if (commandArgs.length() == 0) {
+            System.out.println("Oops, event description cannot be empty :(");
+            return;
+        }
+        String[] eventArgs = commandArgs.split(" /at ");
+        if (eventArgs.length != 2) {
+            System.out.println("Oops, event time cannot be empty :(");
+            return;
+        }
+        String eventAdditionOutcome = addEvent(eventArgs[0], eventArgs[1]);
+        System.out.println(eventAdditionOutcome);
     }
 
     private static String deleteTask(int taskIdToDelete) {
@@ -98,6 +143,21 @@ public class Duke {
                     "Now, you have %d tasks in the list.", taskToDelete.toString(), tasks.size());
         } catch (IndexOutOfBoundsException indexOutOfBoundsException) {
             return String.format("There is no task with id %d at the moment.", taskIdToDelete);
+        }
+    }
+
+
+    private static void handleDeleteTask(String commandArgs) {
+        if (commandArgs.length() == 0) {
+            System.out.println("You have to specify which task to delete!");
+            return;
+        }
+        try {
+            Integer taskIdToDelete = Integer.parseInt(commandArgs);
+            String deletionOutcome = deleteTask(taskIdToDelete);
+            System.out.println(deletionOutcome);
+        } catch (NumberFormatException numberFormatException) {
+            System.out.println("Invalid number passed to task deletion command.");
         }
     }
 
@@ -149,59 +209,21 @@ public class Duke {
                 continue;
             case "bye":
                 sayGoodbye();
-                tasks.flushTaskList();
                 return;
             case "done":
-                int taskId = Integer.parseInt(commandArgs);
-                String taskStatusAdditionOutcome = setAddedTaskStatus(taskId, true);
-                System.out.println(taskStatusAdditionOutcome);
+                handleDoneTask(commandArgs);
                 break;
             case "todo":
-                if (commandArgs.length() == 0) {
-                    System.out.println("Oops, todo description cannot be empty :(");
-                    break;
-                }
-                String todoAdditionOutcome = addTodo(commandArgs);
-                System.out.println(todoAdditionOutcome);
+                handleAddTodo(commandArgs);
                 break;
             case "deadline":
-                if (commandArgs.length() == 0) {
-                    System.out.println("Oops, deadline description cannot be empty :(");
-                    break;
-                }
-                String[] deadlineArgs = commandArgs.split(" /by ");
-                if (deadlineArgs.length != 2) {
-                    System.out.println("Oops, deadline due date cannot be empty :(");
-                    break;
-                }
-                String deadlineAdditionOutcome = addDeadline(deadlineArgs[0], deadlineArgs[1]);
-                System.out.println(deadlineAdditionOutcome);
+                handleAddDeadline(commandArgs);
                 break;
             case "event":
-                if (commandArgs.length() == 0) {
-                    System.out.println("Oops, event description cannot be empty :(");
-                    break;
-                }
-                String[] eventArgs = commandArgs.split(" /at ");
-                if (eventArgs.length != 2) {
-                    System.out.println("Oops, event time cannot be empty :(");
-                    break;
-                }
-                String eventAdditionOutcome = addEvent(eventArgs[0], eventArgs[1]);
-                System.out.println(eventAdditionOutcome);
+                handleAddEvent(commandArgs);
                 break;
             case "delete":
-                if (commandArgs.length() == 0) {
-                    System.out.println("You have to specify which task to delete!");
-                    break;
-                }
-                try {
-                    Integer taskIdToDelete = Integer.parseInt(commandArgs);
-                    String deletionOutcome = deleteTask(taskIdToDelete);
-                    System.out.println(deletionOutcome);
-                } catch (NumberFormatException numberFormatException) {
-                    System.out.println("Invalid number passed to task deletion command.");
-                }
+                handleDeleteTask(commandArgs);
                 break;
             default:
                 System.out.println("Invalid command :(");

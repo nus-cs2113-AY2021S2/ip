@@ -1,5 +1,6 @@
 package dukchess.dao;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.io.File;
@@ -21,9 +22,13 @@ public class TaskList extends ArrayList<Task> {
     public TaskList(File taskFile) throws IOException {
         super();
         this.taskFile = taskFile;
-        this.taskFileScanner = new Scanner(taskFile);
+        initializeFileAccessors(taskFile);
         initializeFromFile();
-        this.taskFileWriter = new FileWriter(taskFile);
+    }
+
+    private void initializeFileAccessors(File taskFile) throws IOException {
+        this.taskFileScanner = new Scanner(taskFile);
+        this.taskFileWriter = new FileWriter(taskFile, true);
     }
 
     public void flushTaskList() {
