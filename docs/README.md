@@ -1,11 +1,16 @@
 # Duke's User Guide (Jovan's version)
 
+## Quick start
+1) Ensure that you have Java 11 or above installed.
+2) Download the latest version of `Duke` from [here](https://github.com/jovanhuang/ip/releases/download/A-Release/IP.jar).
+
 ## Features in Duke Program
 
 ### View tasks in list: `list`
 Show the list of tasks
 
 #### Format: `list`
+##### Example of Usage:
 Input:
 ```text
 list
@@ -23,6 +28,7 @@ Here are the tasks in your list:
 Delete task using task number
 
 #### Format: `delete INDEX`
+##### Example of Usage:
 Input:
 ```text
 delete 3
@@ -38,6 +44,7 @@ Now you have 3 tasks in the list.
 Marks a task as completed using task number
 
 #### Format: `done INDEX`
+##### Example of Usage:
 Input:
 ```text
 done 1
@@ -53,6 +60,7 @@ Nice! I've marked this task as done:
 Add a todo task to the task list
 
 #### Format: `todo DESCRIPTION`
+##### Example of Usage:
 Input:
 ```text
 todo run
@@ -67,6 +75,7 @@ Now you have 5 task(s) in the list.
 Add a deadline task to the task list
 
 #### Format: `deadline DESCRIPTION /by TIME`
+##### Example of Usage:
 Input:
 ```text
 deadline submit CS3223 Project /by Sunday 2359
@@ -81,6 +90,7 @@ Now you have 6 task(s) in the list.
 Add an event task to the task list
 
 #### Format: `event DESCRIPTION /at TIME`
+##### Example of Usage:
 Input:
 ```text
 event attend John's Birthday Party /at Monday 1430 to 1530
@@ -96,6 +106,7 @@ Now you have 7 task(s) in the list.
 Find a task from the task list
 
 #### Format: `find DESCRIPTION`
+##### Example of Usage:
 Input:
 ```text
 find danceee
@@ -110,6 +121,7 @@ Here are the matching tasks in your list:
 Quit program
 
 #### Format: `bye`
+##### Example of Usage:
 Input:
 ```text
 bye
