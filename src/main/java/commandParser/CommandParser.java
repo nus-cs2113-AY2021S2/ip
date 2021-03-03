@@ -32,10 +32,13 @@ public class CommandParser {
             return prepareDone(inputParts);
         case "delete":
             return prepareDelete(inputParts);
+        case "find":
+            return prepareFind(inputParts);
         default:
             return new InvalidCommand(new InvalidCommandException());
         }
     }
+
 
     /**
      * Check validity of parameters for done command. The parameter should be in Integer format.
@@ -43,6 +46,18 @@ public class CommandParser {
      * @param inputParts
      * @return a DoneCommand object if the parameter is valid, an InvalidCommand object if the second parameter is invalid
      */
+    private Command prepareFind(String[] inputParts){
+        try{
+            if(inputParts.length < 2){
+                throw new FindFormatException();
+            }
+            return new FindCommand(inputParts[1]);
+        } catch (FindFormatException e){
+            return new InvalidCommand(e);
+        }
+    }
+
+
     private Command prepareDone(String[] inputParts){
         try{
             if(inputParts.length < 2){
