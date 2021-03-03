@@ -1,11 +1,13 @@
 package duke.command;
 
 import java.io.IOException;
-import duke.error.*;
 import duke.Constants;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.error.IllegalCommandException;
+import duke.error.InvalidSyntaxException;
+import duke.error.TaskListEmptyException;
 
 /**
  * Represents the command input by user. A Command object corresponds to a command input by the user. 

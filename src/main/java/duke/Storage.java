@@ -4,13 +4,12 @@ import java.util.ArrayList;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
-import duke.error.*;
 import java.util.Scanner;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
-
-import duke.task.*;
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.error.ImportTaskException;
+import duke.task.Task;
 
 /**
  * Represents an instance of a storage. An Storage object corresponds to the saving 
@@ -87,7 +86,8 @@ public class Storage {
      * 
      * @param data List of parameters in storage file. 
      */
-    private Task createTask(String[] extractedTaskParameters) throws ImportTaskException, DateTimeParseException {
+    private Task createTask(String[] extractedTaskParameters) 
+            throws ImportTaskException, DateTimeParseException {
         AddCommand addCommand = new AddCommand(extractedTaskParameters);
         switch(extractedTaskParameters[Constants.COMMAND_INDEX]) {
         case "todo":

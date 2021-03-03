@@ -1,7 +1,7 @@
 package duke.error;
 
 /**
- * Throws if the syntax recieved for a command is incorrect. 
+ * The exception is thrown if the syntax recieved for a command is incorrect. 
  * Exception message includes the correct syntax for the respective command. 
  */
 public class InvalidSyntaxException extends Exception{

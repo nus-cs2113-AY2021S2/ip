@@ -1,7 +1,7 @@
 package duke.error;
 
 /**
- * Throws if task list is empty. 
+ * The exception is thrown if task list is empty. 
  */
 public class TaskListEmptyException extends Exception {
 }

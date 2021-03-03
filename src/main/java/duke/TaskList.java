@@ -1,7 +1,7 @@
 package duke;
 
 import java.util.ArrayList;
-import duke.task.*;
+import duke.task.Task;
 
 /**
  * Represents a list of tasks. A TaskList object corresponds to a list of tasks represented by 

@@ -3,8 +3,11 @@ package duke;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
-import duke.error.*;
-import duke.command.*;
+import duke.command.Command;
+import duke.error.IllegalCommandException;
+import duke.error.ImportTaskException;
+import duke.error.InvalidSyntaxException;
+import duke.error.TaskListEmptyException;
 
 /**
  * Represents an instance of the program. A Duke object refers to one run of the application. 
@@ -35,9 +38,7 @@ public class Duke {
     }
 
     /**
-     * Runs the program. 
-     * Gets user input and parses command.
-     * Executes the program according to the command input.  
+     * Gets user input and executes the program according to the command input.  
      */
     public void run() {
         ui.displayWelcomeMessage();

@@ -103,7 +103,8 @@ public class Ui {
         StringBuilder message = new StringBuilder();
         for (int i = 0; i < tasks.getSize(); i++) {
             int displayIndex = i + 1;
-            message.append(System.lineSeparator() + String.format("\t %d. %s", displayIndex, tasks.getTask(i).toString()));
+            message.append(System.lineSeparator() + 
+                    String.format("\t %d. %s", displayIndex, tasks.getTask(i).toString()));
         }
         return message.toString();
     }
@@ -124,7 +125,8 @@ public class Ui {
             Task task = tasks.getTask(i);
             if (task.getTaskDescription().toLowerCase().contains(keyword)) {
                 matchNumber++;
-                message.append(System.lineSeparator() + String.format("\t %d. %s", matchNumber, task.toString()));
+                message.append(System.lineSeparator() + 
+                        String.format("\t %d. %s", matchNumber, task.toString()));
             }
         }
 
