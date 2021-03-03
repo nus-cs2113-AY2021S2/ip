@@ -1,8 +1,0 @@
-[T] [X] pp
-[D] [X] pp (by: aa)
-[E] [X] aa (at: ppt)
-[T] [X] pp
-[E] [X] pp (at: qq)
-[D] [X] qq (by: 7pm)
-[T] [X] aa
-[T] [X] aa
