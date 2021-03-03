@@ -5,7 +5,20 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Represents a storage that deals with the saving and loading
+ * of all tasks in the computer
+ */
 public class Storage {
+
+    /**
+     * checks if there is an existing previously saved file and call
+     * the private method "initializeExistingTasks" to load the tasks
+     *
+     * if there is no existing saved file, a new file is created.
+     *
+     * @throws java.io.IOException if file could not be created
+     */
     public static void downloadTask() throws IOException {
         File dataDir = new File("data");
         dataDir.mkdir();
@@ -41,6 +54,12 @@ public class Storage {
         }
     }
 
+
+    /**
+     * when user types "bye", tasks that are in the TaskList class will be saved into a file in the computer
+     *
+     * @throws java.io.IOException if file could not be saved
+     */
     public static void uploadTask() throws java.io.IOException {
         FileWriter fw = new FileWriter("data/tasks.txt");
         for (int i = 0; i < TaskList.getTaskCount(); ++i) {
