@@ -24,10 +24,11 @@ public class Ui {
     /**
      * Prints when a new Task is created
      * @param size Size of the task list
+     * @param status Type of task, checkbox, label and time of the task
      */
-    public void printAddToList(int size) {
+    public void printAddToList(int size, String status) {
         printLine();
-        System.out.println("Say no more fam. The task is added:\n  [✔]");
+        System.out.println("Say no more fam. The task is added:\n  " + status);
         System.out.println(size + " task(s) in the list.");
         printLine();
     }
@@ -46,17 +47,18 @@ public class Ui {
 
     /**
      * Prints when a task is marked as complete
+     * @param status Type of task, checkbox, label and time of the task
      */
-    public void printCompleteTask() {
+    public void printCompleteTask(String status) {
         printLine();
-        System.out.println("Task.Task marked as done, gg ez");
-        System.out.println("  [✔]");
+        System.out.println("Task marked as done, gg ez");
+        System.out.println("  " + status);
         printLine();
     }
 
     /**
      * Prints when a task is deleted
-     * @param status Checkbox status of the task
+     * @param status Type of task, checkbox, label and time of the task
      * @param size Size of the task list
      */
     public void printDeleteTask(String status, int size) {
@@ -67,11 +69,6 @@ public class Ui {
         printLine();
     }
 
-    /**
-     * Prints a list of task found to match the query
-     * @param results Task list of tasks that match the query
-     * @param query The string that the user is searching for
-     */
     public void printFindTask(TaskList results, String query) {
         printLine();
         System.out.println("Here are the tasks in your list that match「" + query + "」:");

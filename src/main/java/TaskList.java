@@ -94,7 +94,7 @@ public class TaskList {
     public void addToList(Task newTask, Boolean isPrinting) {
         tasks.add(newTask);
         if (isPrinting) {
-            ui.printAddToList(tasks.size());
+            ui.printAddToList(tasks.size(), getStatus(tasks.size() - 1));
         }
     }
 
@@ -147,7 +147,7 @@ public class TaskList {
         int index = number - 1; // adjust for the list label starting from 1
         tasks.get(index).isDone(true);
         if (isPrinting) {
-            ui.printCompleteTask();
+            ui.printCompleteTask(getStatus(index));
         }
     }
 
