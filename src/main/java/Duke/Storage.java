@@ -11,19 +11,27 @@ import java.io.FileWriter;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+/**
+ * Storage class for the user's task datas to be stored in a txt file after finishing the session
+ */
 public class Storage {
 
-    String filePath;
+    private String filePath;
 
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
-    public static TaskList loadTaskList() {
+    /**
+     * Method that loads the task list from database.txt
+     * @return the TaskList object as saved from the previous session
+     */
+    public TaskList loadTaskList() {
         TaskList taskList = new TaskList();
+
         File readFile;
         try {
-            readFile = new File("database.txt");
+            readFile = new File(filePath);
             if (readFile.createNewFile()) {
                 return taskList;
             }
@@ -77,6 +85,10 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Method that saves the user's task data into database.txt
+     * @param taskList the user's latest taskList
+     */
     public static void saveData(TaskList taskList) {
         try {
             File database;

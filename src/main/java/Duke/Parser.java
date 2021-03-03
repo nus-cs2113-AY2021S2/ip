@@ -1,18 +1,48 @@
 package Duke;
 
-import Duke.Commands.*;
+import Duke.Commands.AddCommand;
+import Duke.Commands.DateCommand;
+import Duke.Commands.Command;
+import Duke.Commands.DeleteCommand;
+import Duke.Commands.DoneCommand;
+import Duke.Commands.ExitCommand;
+import Duke.Commands.FindCommand;
+import Duke.Commands.ListCommand;
+import Duke.Commands.SaveCommand;
+
+import Duke.Exceptions.DukeException;
+import Duke.Exceptions.CommandNotFoundError;
+import Duke.Exceptions.DateInputError;
+import Duke.Exceptions.DeadlineInputError;
+import Duke.Exceptions.DeleteInputError;
+import Duke.Exceptions.DoneInputError;
+import Duke.Exceptions.EventInputError;
+import Duke.Exceptions.FindInputError;
+import Duke.Exceptions.TodoInputError;
+
+
 import Duke.Tasks.Deadline;
 import Duke.Tasks.Event;
 import Duke.Tasks.Todo;
 
-import Duke.Exceptions.*;
-
 import java.time.LocalDate;
 import java.util.Scanner;
 
+/**
+ * Parser class that processes the user input into useful commands,
+ * throwing exceptions if the user's command is not valid
+ */
 public class Parser {
-    public static Command parse(String fullCommand) throws DukeException {
-        Scanner scan = new Scanner(fullCommand);
+
+    /**
+     * Parser command to extract commands and parameters from the user input
+     * @param userInput
+     * @return The Command object of the command that the user is calling
+     * @throws DukeException
+     */
+
+    public static Command parse(String userInput) throws DukeException {
+        Scanner scan = new Scanner(userInput);
         String instruction = scan.next();
         Command currentCommand;
         if (instruction.equals("bye")) {
