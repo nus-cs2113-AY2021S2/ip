@@ -1,5 +1,6 @@
 # User Guide
-
+- [Introduction](#2)
+- [Notes](#1)
 -  [Features](#a) 
    - [Adding tasks](#a)
      - [todo](#a)
@@ -13,12 +14,34 @@
    - [Save and exit](#i)
 
 ***
-Notes: 
+# <a name="2"></a> Introduction
 
-The square brackets specifies that user input is required
-`command [variable input]`
+Your very own application to manage your to-do list!
+
 ***
-## Features
+
+# <a name="1"></a> Notes
+
+**General Formatting:**
+
+&nbsp;&nbsp;&nbsp;&nbsp; Description - Describes the functionality of the feature
+
+&nbsp;&nbsp;&nbsp;&nbsp; Formatting - Describes the code formatting to use a feature
+
+&nbsp;&nbsp;&nbsp;&nbsp; Examples - Examples of how to use a feature
+
+&nbsp;&nbsp;&nbsp;&nbsp; Example output - Snapshot of how the usage of a feature will appear in the application
+<br /> <br>
+
+**Additional notes:**
+
+&nbsp;&nbsp;&nbsp;&nbsp; The square brackets specifies that user input is required
+
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; `command [variable input]`
+
+***
+
+# Features
 ***
 ## <a name="a"></a> Adding tasks: Todo
 **Description:**
