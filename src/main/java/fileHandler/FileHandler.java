@@ -10,6 +10,9 @@ import task.Event;
 import task.Task;
 import task.ToDo;
 
+/**
+ * Represent the handler that processes the text file and converts the content to a task list
+ */
 public class FileHandler {
     private File source;
     public final static String SEPERATOR = " \\| ";
@@ -18,6 +21,11 @@ public class FileHandler {
         source = file;
     }
 
+    /**
+     * Convert the content of the file into a task list
+     * @return the task list as an ArrayList
+     * @throws FileNotFoundException if the file doesn't exist
+     */
     public ArrayList<Task> parseToArraylist() throws FileNotFoundException {
         ArrayList<Task> tasks = new ArrayList<>();
         Scanner sc = new Scanner(source);

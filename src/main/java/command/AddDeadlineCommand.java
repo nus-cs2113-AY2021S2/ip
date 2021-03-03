@@ -1,12 +1,16 @@
 package command;
 
-import exception.DeadlineFormatException;
+
 import exception.TaskFormatException;
 import exception.TodoFormatException;
 import task.Deadline;
 import task.Task;
 import task.TaskList;
 import task.ToDo;
+
+/**
+ * Represent a command of creating a new deadline task and adding it to the task list
+ */
 
 public class AddDeadlineCommand extends Command{
     private String feedbackFormat;
@@ -16,6 +20,11 @@ public class AddDeadlineCommand extends Command{
         newDeadline = new Deadline(name, false, time);
     }
 
+    /**
+     * add the new deadline to task list
+     * @return the feedback message of execution
+     * @throws TaskFormatException
+     */
     @Override
     public CommandResult execute() throws TaskFormatException {
         tasks.addTask(newDeadline);

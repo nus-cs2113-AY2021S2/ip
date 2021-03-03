@@ -3,10 +3,19 @@ package commandParser;
 import command.*;
 import exception.*;
 
+/**
+ * Represent the parser to handle the use input command
+ * the parser will check the validity of the parameters for different commands
+ */
 public class CommandParser {
     public CommandParser(){}
     private final String LINE_SEPERATOR = "    ________________________________________________\n";
 
+    /**
+     * classify command based on the command word
+     * @param input user input
+     * @return return a command object corresponding to user input, return an InvalidCommand object if the command is not recognizable
+     */
     public Command parseCommand(String input) {
         if (input.equals("list")) {
             return new ListCommand();
@@ -28,8 +37,12 @@ public class CommandParser {
         }
     }
 
-
-
+    /**
+     * Check validity of parameters for done command. The parameter should be in Integer format.
+     * The index should be within the bound.
+     * @param inputParts
+     * @return a DoneCommand object if the parameter is valid, an InvalidCommand object if the second parameter is invalid
+     */
     private Command prepareDone(String[] inputParts){
         try{
             if(inputParts.length < 2){
@@ -45,6 +58,12 @@ public class CommandParser {
         }
     }
 
+    /**
+     * Check validity of parameters for delete command. The parameter should be in Integer format.
+     * The index should be within the bound.
+     * @param inputParts
+     * @return a DeleteCommand object if the parameter is valid, an InvalidCommand object if the second parameter is invalid,
+     */
     private Command prepareDelete(String[] inputParts){
         try{
             if(inputParts.length < 2){
@@ -60,6 +79,12 @@ public class CommandParser {
         }
     }
 
+    /**
+     * Check validity of parameters for adding a new to do task command.
+     * The parameter should be the name of the to do.
+     * @param inputParts
+     * @return a AddTodoCommand object if the parameter is valid, an InvalidCommand object if the parameter is invalid,
+     */
     private Command prepareAddTodo(String[] inputParts) {
         try{
             if(inputParts.length < 2){
@@ -75,6 +100,12 @@ public class CommandParser {
         }
     }
 
+    /**
+     * Check validity of parameters for adding a new deadline task command.
+     * The parameter should be the task name and time separated by "/by".
+     * @param inputParts
+     * @return a AddDeadlineCommand object if the parameter is valid, an InvalidCommand object if the parameter is invalid,
+     */
     private Command prepareAddDeadline(String[] inputParts){
         try{
             if(inputParts.length < 2){
@@ -102,6 +133,12 @@ public class CommandParser {
         }
     }
 
+    /**
+     * Check validity of parameters for adding a new event task command.
+     * The parameter should be the task name and time separated by "/at".
+     * @param inputParts
+     * @return a AddEventCommand object if the parameter is valid, an InvalidCommand object if the parameter is invalid,
+     */
     private Command prepareAddEvent(String[] inputParts) throws EventFormatException{
         try{
             if(inputParts.length < 2){

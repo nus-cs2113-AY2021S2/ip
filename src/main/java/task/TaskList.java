@@ -7,7 +7,9 @@ import exception.DeleteFormatException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-
+/**
+ * Represent a list of different types of tasks
+ */
 public class TaskList {
     private ArrayList<Task> tasks;
 

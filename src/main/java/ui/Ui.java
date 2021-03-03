@@ -6,6 +6,9 @@ import task.Task;
 import java.util.Iterator;
 import java.util.Scanner;
 
+/**
+ * A class for getting user input and displaying messages to user
+ */
 public class Ui {
     private static final String LOGO = " ____        _\n"
             + "|  _ \\ _   _| | _____\n"
@@ -33,6 +36,10 @@ public class Ui {
         return sc.nextLine();
     }
 
+    /**
+     * Display the feedback for a command
+     * @param result
+     */
     public void printFeedback(CommandResult result){
         System.out.print(LINE_SEPARATOR);
         System.out.println(PRE_SPACE + result.getFeedback());
@@ -50,11 +57,17 @@ public class Ui {
         System.out.print(LINE_SEPARATOR);
     }
 
+    /**
+     * Display error message when the file can't be accessed
+     */
     public void showFileErrorMessage(){
         System.out.print(PRE_SPACE + "The file can't be loaded, please check" +
                 "and rebuild Duke\n" + LINE_SEPARATOR);
     }
 
+    /**
+     * Display error message when the file can't be written to
+     */
     public void showStoreIssueMessage(){
         System.out.print(PRE_SPACE + "The tasks can't be correctly stored back to " +
                 "the file, please check the setting and try again.\n" + LINE_SEPARATOR);

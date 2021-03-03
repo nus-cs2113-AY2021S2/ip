@@ -6,6 +6,9 @@ import task.Task;
 import task.TaskList;
 import task.ToDo;
 
+/**
+ * Represent a command of creating a new todo task and adding it to the task list
+ */
 public class AddTodoCommand extends Command{
     private String feedbackFormat;
     private ToDo newTodo;
@@ -14,6 +17,11 @@ public class AddTodoCommand extends Command{
         newTodo = new ToDo(todoName, false);
     }
 
+    /**
+     * add the new todo to task list
+     * @return the feedback message of execution
+     * @throws TaskFormatException
+     */
     @Override
     public CommandResult execute(){
         tasks.addTask(newTodo);

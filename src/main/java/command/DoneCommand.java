@@ -4,6 +4,9 @@ import exception.DoneFormatException;
 import exception.TaskAlreadyDoneException;
 import task.ToDo;
 
+/**
+ *  Represent a command of setting a task as done
+ */
 public class DoneCommand extends Command{
     private String feedbackFormat;
     private int taskIndex;
@@ -12,6 +15,12 @@ public class DoneCommand extends Command{
         this.taskIndex = taskIndex;
     }
 
+    /**
+     * Set the specified task as done
+     * @return feedback message of command execution
+     * @throws IndexOutOfBoundsException
+     * @throws TaskAlreadyDoneException
+     */
     @Override
     public CommandResult execute() throws IndexOutOfBoundsException, TaskAlreadyDoneException {
         try{
