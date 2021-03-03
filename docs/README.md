@@ -32,9 +32,10 @@ Given below are instructions on how to use it.
 1. [Command Summary](#summary)
 
 
-<a name="settingup"></a> <a name="quickstart"></a>
+<a name="quickstart"></a>
 ### Quick Start
 The **Duke** app is run via a file with the extension `.jar`. The following steps will help you set up **Duke** to run on your computer.
+<a name="settingup"></a>
 1. Set up the `.jar` file by downloading the latest version from [here](https://github.com/nivikcivik/ip/releases)
    1. Click on `ip.jar` under the latest version (`v0.1` or beyond)
    1. Once the download prompt appears, `save` the file to your desired folder on your computer. This folder will be the _home folder_ for your tasks list.
@@ -93,7 +94,8 @@ ____________________________________________________________
 ____________________________________________________________
 ```
 
-Back to [Table Of Contents](#toc)
+Back to [Table Of Contents](#toc)  
+Back to [Command Summary](#summary)
 
 <a name="help"></a>
 #### ii. Command: `help` 
@@ -120,11 +122,12 @@ ____________________________________________________________
 ____________________________________________________________
 ```
 
-Back to [Table Of Contents](#toc)
+Back to [Table Of Contents](#toc)  
+Back to [Command Summary](#summary)
 
 <a name="todo"></a>
 #### iii. Command `todo <task name>` 
-Adds a To-Do to your list
+Adds a To-Do to your list  
 indicated by `[T]` symbol  
 **e.g.** `todo be happy`  
 Output:
@@ -136,13 +139,14 @@ ____________________________________________________________
 ____________________________________________________________
 ```
 
-Back to [Table Of Contents](#toc)
+Back to [Table Of Contents](#toc)  
+Back to [Command Summary](#summary)
 
 
 <a name="deadline"></a>
 #### iv. Command `deadline <task name> /by <YYYY-MM-DD> <HH:MM>` 
-Adds a Deadline to your list
-indicated by `[D]` symbol
+Adds a Deadline to your list  
+indicated by `[D]` symbol  
 Time should be entered in 24-hour clock format  
 **e.g.** `deadline finish homework /by 2021-02-23 23:59`  
 Output:
@@ -154,12 +158,13 @@ ____________________________________________________________
 ____________________________________________________________
 ```
 
-Back to [Table Of Contents](#toc)
+Back to [Table Of Contents](#toc)  
+Back to [Command Summary](#summary)
 
 <a name="event"></a>
 #### v. Command `event <task name> /at <YYYY-MM-DD> <HH:MM>` 
-Adds an Event to your list
-indicated by `[E]` symbol
+Adds an Event to your list  
+indicated by `[E]` symbol  
 Time should be entered in 24-hour clock format  
 **e.g.** `event birthday party /at 2020-02-28 23:59`  
 Output:
@@ -171,11 +176,12 @@ ____________________________________________________________
 ____________________________________________________________
 ```
 
-Back to [Table Of Contents](#toc)
+Back to [Table Of Contents](#toc)  
+Back to [Command Summary](#summary)
 
 <a name="done"></a>
 #### vi. Command `done <task number` 
-Marks a task at task number in list as '_done_'
+Marks a task at task number in list as '_done_'  
 indicated by `[X]` in field beside task  
 **e.g.** `done 2`  
 Output:
@@ -192,7 +198,8 @@ D ~~ X ~~ finish homework ~~ 23 Feb 2021 ~~ 23:59
 E ~~   ~~ birthday party ~~ 28 Feb 2020 ~~ 23:59
 ```
 
-Back to [Table Of Contents](#toc)
+Back to [Table Of Contents](#toc)  
+Back to [Command Summary](#summary)
 
 <a name="delete"></a>
 #### vii. Command `delete <task number` 
@@ -208,7 +215,8 @@ ____________________________________________________________
 ____________________________________________________________
 ```
 
-Back to [Table Of Contents](#toc)
+Back to [Table Of Contents](#toc)  
+Back to [Command Summary](#summary)
 
 <a name="save"></a>
 #### viii. Command `save` 
@@ -223,7 +231,8 @@ ____________________________________________________________
 ____________________________________________________________
 ```
 
-Back to [Table Of Contents](#toc)
+Back to [Table Of Contents](#toc)  
+Back to [Command Summary](#summary)
 
 <a name="list"></a>
 #### ix. Command `list` 
@@ -245,7 +254,8 @@ Output:
 ____________________________________________________________
 ```
 
-Back to [Table Of Contents](#toc)
+Back to [Table Of Contents](#toc)  
+Back to [Command Summary](#summary)
 
 <a name="find"></a>
 #### x. Command `find <common keyword in tasks>` 
@@ -261,7 +271,8 @@ ____________________________________________________________
 ____________________________________________________________
 ```
 
-Back to [Table Of Contents](#toc)
+Back to [Table Of Contents](#toc)  
+Back to [Command Summary](#summary)
 
 <a name="printtype"></a>
 #### xi. Command `print type <task type>` 
@@ -275,7 +286,8 @@ ____________________________________________________________
 ____________________________________________________________
 ```
 
-Back to [Table Of Contents](#toc)
+Back to [Table Of Contents](#toc)  
+Back to [Command Summary](#summary)
 
 <a name="printdate"></a>
 #### xii. Command `print date <task date YYYY-MM-DD>` 
@@ -289,7 +301,8 @@ ____________________________________________________________
 ____________________________________________________________
 ```
 
-Back to [Table Of Contents](#toc)
+Back to [Table Of Contents](#toc)  
+Back to [Command Summary](#summary)
 
 <a name="printfilepath"></a>
 #### xiii. Command `print filepath` 
@@ -303,7 +316,8 @@ ____________________________________________________________
 ____________________________________________________________ 
 ```
 
-Back to [Table Of Contents](#toc)
+Back to [Table Of Contents](#toc)  
+Back to [Command Summary](#summary)
 
 <a name="bye"></a>
 #### xiv. Command `bye` 
@@ -322,12 +336,13 @@ ____________________________________________________________
 
 ```
 
-Back to [Table Of Contents](#toc)
+Back to [Table Of Contents](#toc)  
+Back to [Command Summary](#summary)
 
 <a name="saving"></a>
 ### Saving of tasks list locally on your computer 
 When the command `bye` is given to **Duke**, it will automatically save the current task list from the **Duke** program in the _tasks.txt_ file (located in your _home folder_ ; file path specified at beginning for the first time)  
-However, you can manually enter the `save` command (refer to Section **viii.**)
+However, you can manually enter the `save` command (refer to [**here**](#save))
 
 Back to [Table Of Contents](#toc)
 
@@ -353,12 +368,12 @@ Back to [Table Of Contents](#toc)
 
 1. I lost my task list because I forcefully stopped the program. What can I do to prevent this?
    - Try to end the **Duke** program by entering the `bye` command in order to save the tasks array.
-   - To prevent such errors, enter the `save` command if possible (refer to Section **viii.**) to save your files before your program gets interrupted.
+   - To prevent such errors, enter the `save` command if possible (refer to [**here**](#save)) to save your files before your program gets interrupted.
 
 1. Where can I find my _tasks.txt_ file?
    - Usually, the _tasks.txt_ file will be saved in the same folder where your **Duke** program is located.
    - You may search on your computer locally for the file.
-   - Enter the `print filepath` command in the Duke program to view the file path (refer to Section **xiii.**).
+   - Enter the `print filepath` command in the Duke program to view the file path (refer to [**here**](#printfilepath)).
 
 1. How do I edit the file path for _tasks.txt_ file?
    - The current version of **Duke** is not able to change the _tasks.txt_ file path. This feature may be implemented in future versions.
@@ -378,7 +393,7 @@ Back to [Table Of Contents](#toc)
 <a name="summary"></a>
 ### Command Summary
 | Command      | Function |
-| :----:      | :----      |
+| :----      | :----      |
 | [help](#help)      | Prints the command formats that Duke will respond to.  |
 | [todo \<task name\>](#todo)   | Adds a To-Do to your list |
 | [deadline \<task name\> /by \<YYYY-MM-DD\> \<HH:MM\>](#deadline)   | Adds a Deadline to your list  |
