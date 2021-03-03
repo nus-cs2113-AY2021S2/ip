@@ -38,9 +38,9 @@ public class Parser {
                 Commands.addDeadline(input,list);
             } else if (input.toLowerCase().startsWith("event")) {
                 Commands.addEvent(input,list);
-            } else if (input.toLowerCase().startsWith("delete")){
+            } else if (input.toLowerCase().startsWith("delete")) {
                 Commands.deleteTask(input,list);
-            } else if (input.toLowerCase().startsWith("find")){
+            } else if (input.toLowerCase().startsWith("find")) {
                 Commands.findTask(input,list);
             } else {
                 Ui.checkError("INVALID_COMMAND");
