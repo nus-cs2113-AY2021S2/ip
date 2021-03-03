@@ -12,21 +12,21 @@ Duke should now be ready for use.
 ### Overview
 Listed below are the 8 functions that Duke supports:
 
-1. Getting Started
-2. Adding task
-3. Listing tasks
-4. Marking tasks as done
-5. Removing task
-6. Finding tasks by name
-7. Finding tasks by date
-8. Saving your data
+1. Adding task
+2. Listing tasks
+3. Marking tasks as done
+4. Removing task
+5. Finding tasks by name
+6. Finding tasks by date
+7. Saving your data
+8. Exiting the program
 
 Each of the following section will guide you on how to use the functions, along with the required command format to follow.
 
-### Adding task
+### 1. Adding task
 There are three types of tasks that can be added in Duke: todo, deadline and event. Todo is the most basic form of task, which is just a task you have on hand. Deadline tasks require a mandatory field /by yyyy-mm-dd, which is the deadline of your task. Lastly, event tasks require a mandatory field /at yyyy-mm-dd, which represents the day of which the event is happening
 
-Here are the exact formats of adding tasks to your list of tasks:
+Here are the exact formats of adding tasks to your task list:
 
 `todo borrow book`
 
@@ -35,34 +35,42 @@ Here are the exact formats of adding tasks to your list of tasks:
 `deadline assignment /by 2021-01-29`
 
 
-### Listing task
-The current tasks that you have can be listed with the command “list”. An example of the calling the list command is shown below
+### 2. Listing task
+The current tasks that you have can be listed with the command “list”. An example of calling the list command is shown below
 
 ![](img1.png)
 
-### Marking tasks as done
-Any of your tasks can be mark as done by calling the command: done x , replacing x with the specific task number as shown by the list command. An example of how this can be done, with the example output, is shown below:
+### 3. Marking tasks as done
+Any of your tasks can be marked as done by calling the command: done x , replacing x with the specific task number as shown by the list command. An example of how this can be done, with the example output, is shown below:
 
 ![](img2.png)
 
-### Removing task
+### 4. Removing task
 You can remove tasks from the data by calling the command: delete x , replacing x with the specific task number as shown by the list command. An example of how this can be done, with the example output, is shown below:
 
 ![](img3.png)
 
-### Finding tasks by keywords
-You can filter tasks out by keywords or a specific character sequence by calling the command: find xxx , replacing xxx with the keyword or character sequence. Here is an example of how it can be done:
+### 5. Finding tasks by keywords
+You can filter tasks out by keywords or specific character sequences by calling the command: find xxx , replacing xxx with the keyword or character sequence. Here is an example of how it can be done:
 
 ![](img4.png)
 
-### Find tasks by date
+### 6. Find tasks by date
 You can filter tasks out by date by calling the command: date yyyy-mm-dd , replacing yyyy-mm-dd with the date of event or deadline that you want to check on. Here is an example of how it can be done:
 
 ![](img5.png)
 
-### Saving your data
+### 7. Saving your data
 You can save your data by calling the command: 
 
 `save`
 
-This will allow the changes you’ve made for the current session to be saved into the database, allowing you to continue from where you last saved on your next session upon exiting the app.
+This will save the changes you’ve made for the current session into the database, allowing you to continue from where you last saved on your next session.
+
+### 8. Exiting the program
+
+You can exit the program by simply calling:
+
+`bye`
+
+Do remember to save your changes before exiting the program!
