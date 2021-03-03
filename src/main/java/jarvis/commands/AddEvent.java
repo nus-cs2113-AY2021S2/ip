@@ -1,6 +1,7 @@
 package jarvis.commands;
 
 import jarvis.exception.EmptyDescriptionException;
+import jarvis.exception.EmptyDetailException;
 import jarvis.parser.Parser;
 import jarvis.task.Task;
 import jarvis.task.TaskList;
@@ -13,7 +14,7 @@ public class AddEvent extends Command {
      * @param userInput string entered by the user
      * @throws EmptyDescriptionException when description of the event task is empty
      */
-    public static void execute(String userInput) throws EmptyDescriptionException {
+    public static void execute(String userInput) throws EmptyDescriptionException, EmptyDetailException {
         Task deadline = Parser.parseStringToEvent(userInput);
         TaskList.addToTasks(deadline);
         addSuccessMessage(deadline);

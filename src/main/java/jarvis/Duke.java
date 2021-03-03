@@ -50,6 +50,8 @@ public class Duke {
                 ExceptionHandler.handleNoMatchException();
             } catch (EmptyTaskIdException exception) {
                 ExceptionHandler.handleEmptyTaskIdException();
+            } catch (EmptyDetailException e) {
+                ExceptionHandler.handleEmptyDetailException();
             }
         }
     }
