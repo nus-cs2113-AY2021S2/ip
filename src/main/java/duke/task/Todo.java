@@ -3,7 +3,7 @@ package duke.task;
 public class Todo extends Task {
 
     /**
-     * Constructor for Todo Class
+     * Constructor for Todo Class.
      *
      * @param description String description of task
      */
@@ -12,7 +12,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Returns a String representation of the task including the status icon and description
+     * Returns a String representation of the task including the status icon and description.
      *
      * @return String representation of task
      */

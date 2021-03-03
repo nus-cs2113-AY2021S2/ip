@@ -9,9 +9,9 @@ public class DoneCommand extends Command {
     private String line;
 
     /**
-     * Constructor of DoneCommand Class
+     * Constructor of DoneCommand Class.
      *
-     * @param line user input
+     * @param line user input containing index of task to be marked as done
      */
     public DoneCommand(String line) {
         this.line = line;

@@ -8,18 +8,23 @@ import java.util.Scanner;
 public class Ui {
 
     public static final String DIVIDER_LINE = "---------------------------------------------------------";
+    public static final String logo = " ____        _\n"
+                                + "|  _ \\ _   _| | _____\n"
+                                + "| | | | | | | |/ / _ \\\n"
+                                + "| |_| | |_| |   <  __/\n"
+                                + "|____/ \\__,_|_|\\_\\___|\n";
 
     private Scanner in;
 
     /**
-     * Constructor of Ui Class
+     * Constructor of Ui Class.
      */
     public Ui() {
         in = new Scanner(System.in);
     }
 
     /**
-     * Returns String of next line of user input
+     * Returns String user input.
      *
      * @return String of user input
      */
@@ -28,22 +33,16 @@ public class Ui {
     }
 
     /**
-     * Prints divider line made of dashes
+     * Prints divider line made of dashes.
      */
     public void showLine() {
         System.out.println(DIVIDER_LINE);
     }
 
     /**
-     * Prints Duke logo and welcome message
+     * Prints Duke logo and welcome message.
      */
     public void greet() {
-        String logo = " ____        _\n"
-                + "|  _ \\ _   _| | _____\n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-
         System.out.println(DIVIDER_LINE);
         System.out.println(logo);
         System.out.println("Hello! I'm Duke");
@@ -52,14 +51,14 @@ public class Ui {
     }
 
     /**
-     * Prints farewell message when exiting Duke
+     * Prints farewell message when exiting Duke.
      */
     public void bidGoodbye() {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
     /**
-     * Prints out tasks in TaskList
+     * Prints out tasks in task list in the order they were added.
      *
      * @param tasks ArrayList of tasks
      */
@@ -72,7 +71,7 @@ public class Ui {
     }
 
     /**
-     * Prints confirm message that task has been added
+     * Prints confirm message that task has been added.
      *
      * @param tasks ArrayList of tasks
      */
@@ -83,7 +82,7 @@ public class Ui {
     }
 
     /**
-     * Prints confirm message that task has been marked as done
+     * Prints confirm message that the task at the index specified has been marked as done.
      *
      * @param tasks ArrayList of tasks
      * @param itemNum index of task that was marked done
@@ -94,7 +93,7 @@ public class Ui {
     }
 
     /**
-     * Prints confirm message that task has been deleted
+     * Prints confirm message that the task at the specified index has been deleted.
      *
      * @param tasks ArrayList of tasks
      * @param justDeleted task that was deleted
@@ -105,7 +104,7 @@ public class Ui {
         System.out.println("Now you have " + tasks.size() + " tasks in the list");
     }
     /**
-     * Prints the corresponding error message
+     * Prints the corresponding error message.
      *
      * @param errorMessage error message returned from exception
      */

@@ -11,7 +11,7 @@ public class Deadline extends Task {
     protected boolean hasDate = false;
 
     /**
-     * Constructor for Deadline Class
+     * Constructor for Deadline Class.
      *
      * @param description String description of task
      * @param by due date or time of task
@@ -28,7 +28,7 @@ public class Deadline extends Task {
 
 
     /**
-     * Returns a LocalDate object parsed from input String
+     * Returns a LocalDate object parsed from input String.
      *
      * @param line String of date
      * @return LocalDate object parsed
@@ -45,7 +45,7 @@ public class Deadline extends Task {
 
 
     /**
-     * Returns the due date of the task
+     * Returns the due date of the task.
      *
      * @return String of by parameter
      */
@@ -54,7 +54,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns a String representation of the task including the status icon, description and due date
+     * Returns a String representation of the task including the status icon, description and due date.
      *
      * @return String representation of task
      */

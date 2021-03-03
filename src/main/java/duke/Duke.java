@@ -8,7 +8,6 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-import java.io.FileNotFoundException;
 
 
 public class Duke {
@@ -18,8 +17,8 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Constructor for Duke Class
-     * Initialises UI, Storage and TaskList
+     * Constructor for Duke Class.
+     * Initialises UI, Storage and TaskList.
      */
     public Duke() {
         try {
@@ -33,8 +32,8 @@ public class Duke {
     }
 
     /**
-     * Runs Duke
-     * Reads in commands and executes them
+     * Runs Duke.
+     * Reads in user input, parses input into commands and executes them.
      */
     public void run() {
         ui.greet();
@@ -55,7 +54,7 @@ public class Duke {
     }
 
     /**
-     * Runs an instance of Duke
+     * Runs an instance of Duke.
      *
      * @param args arguments from command line (if any)
      */

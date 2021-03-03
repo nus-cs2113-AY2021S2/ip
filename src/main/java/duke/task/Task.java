@@ -6,7 +6,7 @@ public class Task {
     protected boolean isDone;
 
     /**
-     * Constructor for Task Class
+     * Constructor for Task Class.
      *
      * @param description Description of the task
      */
@@ -16,7 +16,7 @@ public class Task {
     }
 
     /**
-     * Returns the current status icon of whether the task is done
+     * Returns the current status icon of whether the task is done.
      *
      * @return Y if task is done and N if task is not done
      */
@@ -25,7 +25,7 @@ public class Task {
     }
 
     /**
-     * Returns the description of the task
+     * Returns the description of the task.
      *
      * @return String description of the task
      */
@@ -35,14 +35,14 @@ public class Task {
 
 
     /**
-     * Sets the task as done
+     * Sets the task as done.
      */
     public void setAsDone() {
         this.isDone = true;
     }
 
     /**
-     * Returns a String representation of the task including the status icon and description
+     * Returns a String representation of the task including the status icon and description.
      *
      * @return String representation of the task
      */

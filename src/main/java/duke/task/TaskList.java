@@ -10,14 +10,14 @@ public class TaskList {
     private Ui ui = new Ui();
 
     /**
-     * Constructor of new TaskList
+     * Constructor of new TaskList.
      */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
     /**
-     * Constructor of loading a TaskList
+     * Constructor of loading a TaskList.
      *
      * @param tasks ArrayList of Tasks that was previously saved
      */
@@ -26,7 +26,7 @@ public class TaskList {
     }
 
     /**
-     * Returns all the tasks in ArrayList
+     * Returns all the tasks in the task list.
      *
      * @return ArrayList of tasks
      */
@@ -35,7 +35,7 @@ public class TaskList {
     }
 
     /**
-     * Prints a list of all tasks currently in TaskList
+     * Prints a list of all tasks currently in the task list
      */
     public void printList() {
         ui.printList(tasks);
@@ -43,7 +43,7 @@ public class TaskList {
 
 
     /**
-     * Adds a Todo task to the TaskList
+     * Adds a Todo task to the task list.
      *
      * @param line user input containing description of task
      */
@@ -59,7 +59,7 @@ public class TaskList {
     }
 
     /**
-     * Adds a Deadline task to the TaskList
+     * Adds a Deadline task to the task list.
      *
      * @param line user input containing description and due date
      */
@@ -78,7 +78,7 @@ public class TaskList {
     }
 
     /**
-     * Adds an Event task to the TaskList
+     * Adds an Event task to the task list.
      *
      * @param line user input containing description and date of event
      */
@@ -97,15 +97,15 @@ public class TaskList {
     }
 
     /**
-     * Marks a task as done
+     * Marks a task at specified index as done.
      *
-     * @param line user input containing index of task in TaskList
+     * @param line user input containing index of task to be marked as done
      */
     public void markDone(String line) {
         try {
-            int itemNum = Integer.parseInt(line.substring(5));
-            tasks.get(itemNum - 1).setAsDone();
-            ui.printMarkDoneMessage(tasks, itemNum);
+            int taskIndex = Integer.parseInt(line.substring(5));
+            tasks.get(taskIndex - 1).setAsDone();
+            ui.printMarkDoneMessage(tasks, taskIndex);
         } catch (StringIndexOutOfBoundsException e) {
             System.out.println("OOPS!!! The index of the task to be marked as done cannot be empty.");
         } catch (IndexOutOfBoundsException e) {
@@ -116,15 +116,15 @@ public class TaskList {
     }
 
     /**
-     * Deletes a task from the TaskList
+     * Deletes a task at specified index from the task list.
      *
      * @param line user input containing index of task to be deleted
      */
     public void deleteTask(String line) {
         try {
-            int itemNum = Integer.parseInt(line.substring(7));
-            Task toBeDeleted = tasks.get(itemNum - 1);
-            tasks.remove(itemNum - 1);
+            int taskIndex = Integer.parseInt(line.substring(7));
+            Task toBeDeleted = tasks.get(taskIndex - 1);
+            tasks.remove(taskIndex - 1);
             ui.printDeleteTaskMessage(tasks, toBeDeleted);
         } catch (StringIndexOutOfBoundsException e) {
             System.out.println("OOPS!!! The index of the task to be deleted cannot be empty.");
@@ -137,9 +137,9 @@ public class TaskList {
     }
 
     /**
-     * Searches for task in TaskList based on description
+     * Searches for task in task list containing keyword.
      *
-     * @param line user input containing description to be filtered
+     * @param line user input containing keyword
      */
     public void findTask(String line) {
         try {

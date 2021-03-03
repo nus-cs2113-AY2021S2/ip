@@ -45,11 +45,11 @@ public class Storage {
     }
 
     /**
-     * Loads saved task list from data file.
+     * Loads saved task information from data file.
      * Returns the tasks in an ArrayList of Tasks.
      *
      * @return ArrayList of tasks saved in file
-     * @throws DataFileNotFoundException if source is not found
+     * @throws DataFileNotFoundException if file does not exist
      */
     public ArrayList<Task> loadFile() throws DataFileNotFoundException {
         try {
@@ -66,24 +66,18 @@ public class Storage {
                 switch (type) {
                 case "T":
                     tasks.add(new Todo(info));
-                    if (line.charAt(4) == 'Y') {
-                        tasks.get(tasks.size() - 1).setAsDone();
-                    }
                     break;
                 case "D":
                     tasks.add(new Deadline(info.substring(0, dateIndex - 1), info.substring(dateIndex + 2)));
-                    if (line.charAt(4) == 'Y') {
-                        tasks.get(tasks.size() - 1).setAsDone();
-                    }
                     break;
                 case "E":
                     tasks.add(new Event(info.substring(0, dateIndex - 1), info.substring(dateIndex + 2)));
-                    if (line.charAt(4) == 'Y') {
-                        tasks.get(tasks.size() - 1).setAsDone();
-                    }
                     break;
                 default:
                     break;
+                }
+                if (line.charAt(4) == 'Y') {
+                    tasks.get(tasks.size() - 1).setAsDone();
                 }
             }
             return tasks;
