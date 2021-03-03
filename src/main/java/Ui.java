@@ -1,5 +1,5 @@
 import java.util.Scanner;
-
+import java.util.ArrayList;
 
 public class Ui {
     private static final String line = "____________________________________________________________\n";
@@ -41,6 +41,24 @@ public class Ui {
     public void printLoadErrorMessage(){
         System.out.println("no file found");
     }
+
+    public void printTask(Task a, Integer size){
+        System.out.print(line + "Got it. I've added this task:" + "\n" + a + "\n" + "Now you have " + size + " tasks in the list." + "\n" + line);
+    }
+
+    public static void printList(ArrayList<Task> tasks) {
+//        System.out.println(line);
+        for (int i = 1; i <= tasks.size(); i++) {
+            System.out.println(i + ". " + tasks.get(i - 1).toString());
+        }
+        System.out.print(line);
+    }
+    public static void printFoundList(ArrayList<Task> foundList) {
+        System.out.print(line);
+        System.out.println("Here are the matching tasks in your list: ");
+        printList(foundList);
+    }
+
 
 
 

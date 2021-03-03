@@ -1,47 +1,24 @@
-import java.util.ArrayList;
-import java.util.Scanner;
+
 import java.io.*;
-import java.io.IOException;
+
 
 public class Duke {
     private static final String line = "____________________________________________________________\n";
-    public static File filePath = new File("data/duke.txt");
-    public static ArrayList<Task> tasks = new ArrayList<>();
     public static int index = 0;
     private static Ui ui;
+    private static TaskList tasks = new TaskList();
+    private static Storage storage = new Storage(new File("data/duke.txt"));
 
 
-    private static void appendToFile(String textToAppend) throws IOException {
-        FileWriter fw = new FileWriter("data/duke.txt", true); // create a FileWriter in append mode
-        fw.write(textToAppend);
-        fw.close();
-    }
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
 
+        storage.readFile(tasks,index);
 
-        try {
-            printFileContents(filePath);
-        } catch (FileNotFoundException e) {
-            System.out.println("no file found");
-            File dataDirectory = new File("data");
-            dataDirectory.mkdir();
-            File dukeFile = new File("data/duke.txt");
-            //dukeFile.createNewFile();
-
-        }
         ui = new Ui();
         ui.printGreeting();
         String input = ui.readCommand();
-
-
         while (!input.equals("bye")) {
-
             if (input.contains("todo")) {
                 int dividerPosition = input.indexOf(" ");
                 String t = input.substring(dividerPosition + 1);
@@ -51,9 +28,10 @@ public class Duke {
                     System.out.print(line);
                 } else {
                     tasks.add(new Todo(t));
-                    System.out.print(line + "Got it. I've added this task:" + "\n" + new Todo(t) + "\n" + "Now you have " + tasks.size() + " tasks in the list." + "\n" + line);
+//                    tasks.add(new Todo(t));
+                    ui.printTask(new Todo(t), tasks.size());
+//                    System.out.print(line + "Got it. I've added this task:" + "\n" + new Todo(t) + "\n" + "Now you have " + tasks.size() + " tasks in the list." + "\n" + line);
                 }
-
             } else if (input.contains("deadline")) {
                 int dividerPosition = input.indexOf(" ");
                 int dividerPosition_1 = input.indexOf("/");
@@ -65,7 +43,7 @@ public class Duke {
                     System.out.print(line);
                 } else {
                     tasks.add(new Deadline(d, by));
-                    System.out.print(line + "Got it. I've added this task:" + "\n" + new Deadline(d, by) + "\n" + "Now you have " + tasks.size() + " tasks in the list." + "\n" + line);
+                    ui.printTask(new Deadline(d,by),tasks.size());
                 }
 
             } else if (input.contains("event")) {
@@ -79,7 +57,7 @@ public class Duke {
                     System.out.print(line);
                 } else {
                     tasks.add(new Event(e, at));
-                    System.out.print(line + "Got it. I've added this task:" + "\n" + new Event(e, at) + "\n" + "Now you have " + tasks.size() + " tasks in the list." + "\n" + line);
+                    ui.printTask(new Event(e,at), tasks.size());
                 }
 
             } else if (input.equals("list")) {
@@ -141,47 +119,20 @@ public class Duke {
                     System.out.print(line);
                 }
 
+
+            } else if (input.contains("find")) {
+                int dividerPosition = input.indexOf(" ");
+                String keyWords = input.substring(dividerPosition + 1);
+                tasks.getFoundTask(keyWords,ui);
+
             } else {
-                System.out.print(line);
-                System.out.print("Sorry, I didnt get you." + "\n" + "Please enter the command again." + "\n");
-                System.out.print(line);
+                ui.printErrorMessage();
             }
             input = ui.readCommand();
         }
-        try {
-            PrintWriter writer = new PrintWriter("data/duke.txt");
-            writer.print("");
-            writer.close();
-            for (Task i : tasks) {
-                appendToFile(i.toFileString() + "\n");
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found");
-        } catch (IOException e) {
-            System.out.println("Unable to write to file");
-        }
+
+        storage.writeToFile(tasks);
         ui.printByeMessage();
-
     }
-
-    private static void printFileContents(File filePath) throws FileNotFoundException {
-        Scanner s = new Scanner(filePath); // create a Scanner using the File as the source
-        while (s.hasNext()) {
-            String[] dataEntry = s.nextLine().split("\\|");
-            if (dataEntry[0].contains("T")) {
-                tasks.add(new Todo(dataEntry[2]));
-            } else if (dataEntry[0].contains("D")) {
-                tasks.add(new Deadline(dataEntry[2], dataEntry[3]));
-            } else if (dataEntry[0].contains("E")) {
-                tasks.add(new Event(dataEntry[2], dataEntry[3]));
-            }
-            if (dataEntry[1].equals("1")) {
-                tasks.get(index).markAsDone();
-            }
-            index++;
-
-        }
-    }
-
 
 }
