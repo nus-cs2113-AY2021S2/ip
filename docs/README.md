@@ -40,7 +40,7 @@ Exit from the application.
 ## Usage
 
 | :information_source: | Inputs in `UPPER_CASE` are parameters to be supplied by the user. |
-|----------------------|:-------------------------------------|
+|----------------------|-------------------------------------|
 
 ### Adding a Todo: `todo`
 
