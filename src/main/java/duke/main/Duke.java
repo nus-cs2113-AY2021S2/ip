@@ -9,10 +9,10 @@ public class Duke {
      * Main function that combines all functions from other files
      */
     public static void main(String[] args) {
-        UI.welcomeMessage();
+        UI.displayWelcomeMessage();
         UI.printLine();
         Storage.fileHandling();
         Parser.run();
-        UI.byeMessage();
+        UI.displayByeMessage();
     }
 }

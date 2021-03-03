@@ -2,13 +2,12 @@ package duke.main;
 
 import duke.items.Task;
 
-import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-/**
- * Class in charge of UI printing
- */
+import static duke.main.Parser.getCommand;
+
+/** Class in charge of UI printing */
 public class UI {
     private static final String DEADLINE_TEMPLATE = "deadline <task> /by <YYYY-MM-DD>";
     private static final String EVENT_TEMPLATE = "event <task> /at <YYYY-MM-DD>";
@@ -19,14 +18,39 @@ public class UI {
     }
 
     /**
+     * Prints the welcome message.
+     */
+    public static void displayWelcomeMessage(){
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        System.out.println("Hello from\n" + logo);
+        System.out.println("Hello! I'm duke.main.Duke\nWhat can I do for you?");
+    }
+
+    /**
+     * Prints the goodbye message
+     */
+    public static void displayByeMessage(){
+        System.out.println("Bye. Hope to see you again soon!");
+        UI.printLine();
+    }
+
+    /**
      * Printing the output when using the list function
      */
-    public static void listPreamble() {
+    public static void displayListPreamble() {
         if (Task.getNumOfTasks() != 0){
             System.out.println("Here are the tasks in your list:");
         }
     }
-    public static void findPreamble() {
+
+    /**
+     * Printing the output when using the find function
+     */
+    public static void displayFindPreamble() {
         if (Task.getNumOfTasks() != 0){
             System.out.println("Here are the matching tasks in your list:");
         }
@@ -35,31 +59,16 @@ public class UI {
         }
     }
 
-
     /**
      * Prints the updated number of tasks in list
      */
-    public static void listUpdate() {
+    public static void displayListUpdate() {
         if (Task.getNumOfTasks() == 0){
             System.out.println("There are no tasks in your list");
         }
         else {
             System.out.println("Now you have " + Task.getNumOfTasks() + " tasks in the list.");
         }
-
-    }
-
-    /**
-     * Prints the welcome message.
-     */
-    public static void welcomeMessage(){
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("Hello! I'm duke.main.Duke\nWhat can I do for you?");
     }
 
     /**
@@ -73,9 +82,9 @@ public class UI {
      * Error message for too little input parameters
      */
     public static void InvalidParameterLengthErrorMessage(String line){
-        System.out.println(" ☹ OOPS!!! Insufficient number of inputs for command: " + line.split(" ")[0]);
+        System.out.println(" ☹ OOPS!!! Insufficient number of inputs for command: " + getCommand(line));
         System.out.println(" Example inputs:");
-        switch (line.split(" ")[0]){
+        switch (getCommand(line)){
 
         case ("deadline"):
             System.out.println(" \t " + DEADLINE_TEMPLATE);
@@ -110,7 +119,7 @@ public class UI {
      * Error message when the /by indicator is not present when deadline command is used
      */
     public static void DeadlineParameterErrorMessage(){
-        System.out.println(" ☹ OOPS!!! For \"event\" command please input \"/by\"");
+        System.out.println(" ☹ OOPS!!! For \"deadline\" command please input \"/by\"");
     }
 
     /**
@@ -120,13 +129,6 @@ public class UI {
         System.out.println(" ☹ OOPS!!! Index is out of range");
     }
 
-    /**
-     * Prints the goodbye message
-     */
-    public static void byeMessage(){
-        System.out.println("Bye. Hope to see you again soon!");
-        UI.printLine();
-    }
 
     /**
      * Returns a String in the formatted version of the date input
@@ -134,7 +136,7 @@ public class UI {
      * @param date date in the YYYY-MM-DD format
      * @return String in the MMM-DD-YYYY date format
      */
-    public static String convertDateToStringFormat(String date) throws ParseException{
+    public static String convertDateToStringFormat(String date){
         LocalDate myDateObj = LocalDate.parse(date);
         DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("MMM-dd-yyyy ");
         return myDateObj.format(myFormatObj);
@@ -146,7 +148,7 @@ public class UI {
      * @param input date in the MMM-DD-YYYY format
      * @return LocalDate object
      */
-    public static LocalDate stringPatternToDate(String input) throws ParseException {
+    public static LocalDate convertStringFormatToDate(String input){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM-d-yyyy ");
         return LocalDate.parse(input, formatter);
     }

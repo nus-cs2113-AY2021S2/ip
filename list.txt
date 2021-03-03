@@ -1,21 +1,6 @@
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-D	true	sdf	1289
-D	false	owen	123 4252
-D	false	weidn	12930
-=======
->>>>>>> master
-T	false	owenwefo oqdn oasd fm 
-T	false	casowensdfkansd v
 D	false	owennsdck	Oct-10-2020 
 D	false	ppp	Oct-11-2020 
 D	false	qqq	Oct-12-2020 
 D	false	eee	Oct-13-2020 
-<<<<<<< HEAD
-=======
->>>>>>> 0fad1c0... Level 9: Find
-=======
->>>>>>> master
->>>>>>> master
+E	true	party	Sep-09-2020 
+T	false	owen

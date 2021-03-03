@@ -3,38 +3,15 @@ package duke.main;
 import java.io.IOException;
 import java.text.ParseException;
 import java.time.format.DateTimeParseException;
-import java.util.Arrays;
 import java.util.Scanner;
 
 import duke.exceptions.*;
-import duke.items.Deadline;
-import duke.items.Event;
 import duke.items.Task;
-import duke.items.Todo;
-
-
 
 import static duke.main.UI.convertDateToStringFormat;
 
-/**
- * Class in charge of understanding input commands
- */
+/** Class in charge of understanding input commands */
 public class Parser {
-    private static final String[] VALID_COMMANDS = {"findBy", "findAt", "find", "bye", "done", "list", "todo", "event", "deadline", "delete"};
-
-    /**
-     * Check that command word (1st word of input) is valid
-     *
-     * @param line  command used
-     * @return integer 1 if valid, else 0
-     */
-    public static int validateCommand(String line){
-        if ((Arrays.asList(VALID_COMMANDS).contains(line))) {
-            return 1;
-        } else {
-            return 0;
-        }
-    }
 
     /**
      * Check number of parameters in input command is valid
@@ -91,8 +68,51 @@ public class Parser {
     }
 
     /**
-     * Main parser function that decides the respective functions
-     * to run based on the input command
+     * Returns the command keyword of a an input line
+     *
+     * @param line  entire input command
+     * @return command keyword
+     */
+    public static String getCommand(String line) {
+        return line.split(" ")[0];
+    }
+
+    /**
+     * Returns the description of a todo task input
+     *
+     * @param line  entire input command
+     * @return String description of the todo task
+     */
+    public static String extractTodo(String line) {
+        return line.substring(line.indexOf(" ") + 1);
+    }
+
+    /**
+     * Returns the description and date of an Deadline/Event task input
+     *
+     * @param line  entire input command
+     * @return String array containing description and date of the Deadline/Event task
+     * @throws DeadlineParameterExceptions  If /by is missing for deadline task
+     * @throws EventParameterExceptions  If /at is missing for event task
+     * @throws InvalidParameterLengthExceptions  If number of parameters < 4
+     */
+    public static String[] extractDeadlineAndEvent(String line) throws InvalidParameterLengthExceptions,
+            DeadlineParameterExceptions, EventParameterExceptions {
+
+        int indexOfSlash;
+        if (getCommand(line).equals("deadline")) {
+            indexOfSlash = validateDeadlineCommand(line);
+        } else {
+            indexOfSlash = validateEventCommand(line);
+        }
+        String[] returnList = new String[2];
+        returnList[0] =  line.substring(line.indexOf(" ") + 1, indexOfSlash - 1);
+        returnList[1] =  line.substring(indexOfSlash + 4);
+        return returnList;
+    }
+
+    /**
+     * Decides which functions to run based on the input command
      *
      * @param line  entire input command
      * @return integer -1 when input request to exit, else 1
@@ -107,19 +127,13 @@ public class Parser {
     public static int commandHandler(String line) throws InvalidCommandExceptions, InvalidParameterLengthExceptions,
             DeadlineParameterExceptions, EventParameterExceptions, InvalidIndexExceptions, IOException, ParseException {
 
-        String[] arr;
-        arr = line.split(" ");
-        if (validateCommand(arr[0]) == 0){
-            throw new InvalidCommandExceptions();
-        }
-        switch (arr[0]) {
-
+        switch (getCommand(line)) {
         case ("bye"):
             Storage.writeToFile();
             return -1;
 
         case ("list"):
-            UI.listPreamble();
+            UI.displayListPreamble();
             Task.printList();
             break;
         case ("done"):
@@ -130,54 +144,32 @@ public class Parser {
             if (indexToDelete >= Task.getNumOfTasks()){
                 throw new InvalidIndexExceptions();
             }
-            Task.deleteTask(Integer.parseInt(line.split(" ")[1]) - 1);
-            UI.listUpdate();
+            Task.deleteTask(indexToDelete);
+            UI.displayListUpdate();
             break;
         case ("find"):
-            UI.findPreamble();
+            UI.displayFindPreamble();
             Task.findTask(line.split(" ")[1]);
             break;
         case ("findAt"):
-            UI.findPreamble();
+            UI.displayFindPreamble();
             Task.findAt(convertDateToStringFormat(line.split(" ")[1]));
             break;
         case ("findBy"):
-            UI.findPreamble();
+            UI.displayFindPreamble();
             Task.findBy(line.split(" ")[1]);
             break;
         case ("todo"):
-
-            validateTodoCommand(line);
-            System.out.println("Got it. I've added this task: ");
-            Todo todo = new Todo(line.substring(line.indexOf(" ") + 1));
-            Task.addTask(todo);
-            System.out.print("  ");
-            todo.print();
-            UI.listUpdate();
+            Task.addTodo(line);
             break;
-
         case ("deadline"):
-            int indexOfSlash = validateDeadlineCommand(line);
-            System.out.println("Got it. I've added this task: ");
-            String item = line.substring(line.indexOf(" ") + 1, indexOfSlash - 1);
-            String extra = line.substring(indexOfSlash + 4);
-            Deadline deadline = new Deadline(item, convertDateToStringFormat(extra));
-            Task.addTask(deadline);
-            System.out.print("  ");
-            deadline.print();
-            UI.listUpdate();
+            Task.addDeadline(line);
             break;
-
         case ("event"):
-            indexOfSlash = validateEventCommand(line);
-            System.out.println("Got it. I've added this task: ");
-            item = line.substring(line.indexOf(" ") + 1, indexOfSlash - 1);
-            extra = line.substring(indexOfSlash + 4);
-            Event event = new Event(item, convertDateToStringFormat(extra));
-            Task.addTask(event);
-            System.out.print("  ");
-            event.print();
-            UI.listUpdate();
+            Task.addEvent(line);
+            break;
+        default:
+            throw new InvalidCommandExceptions();
         }
         return 1;
     }
@@ -215,6 +207,5 @@ public class Parser {
             UI.printLine();
         }
     }
-
 }
 
