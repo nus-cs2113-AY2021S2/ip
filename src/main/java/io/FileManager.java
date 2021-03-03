@@ -18,6 +18,12 @@ public class FileManager {
         dataParser = new DataParser();
     }
 
+    /**
+     * Saves the current list of Tasks and writes them to a Text file
+     *
+     * @param tasks ArrayList of Tasks to be saved
+     * @throws IOException Exception while trying to create a new File
+     */
     public void saveFile(ArrayList<Task> tasks) throws IOException {
         File path = new File("tasks.txt");
         if (!path.exists()) {
@@ -33,6 +39,12 @@ public class FileManager {
         fileWriter.close();
     }
 
+    /**
+     * Loads the TaskList by reading the tasks from the Text file
+     *
+     * @return taskList ArrayList of previously saved Tasks
+     * @throws FileNotFoundException Exception when Text file does not exist
+     */
     public ArrayList<Task> loadFile() throws FileNotFoundException {
         ArrayList<Task> taskList = new ArrayList<>();
 

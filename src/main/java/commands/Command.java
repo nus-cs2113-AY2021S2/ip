@@ -9,5 +9,8 @@ public abstract class Command {
         this.dukePrint = dukePrint;
     }
 
+    /**
+     * Executes the specific command
+     */
     public abstract void execute();
 }

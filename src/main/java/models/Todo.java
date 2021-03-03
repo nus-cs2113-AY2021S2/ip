@@ -10,11 +10,17 @@ public class Todo extends Task {
         super(description, isDone);
     }
 
+    /**
+     * @return String describing the Todo Task
+     */
     @Override
     public String toString() {
         return "[T]" + super.toString();
     }
 
+    /**
+     * @return String with formatted Data to be written onto Text file
+     */
     @Override
     public String formatData() {
         int done;

@@ -13,6 +13,13 @@ public class DataParser {
 
     private final DateFormat inputFormat = Dates.inputFormat;
 
+    /**
+     * Parses the saved Tasks to be converted from text data to Task objects
+     *
+     * @param line String of saved data from the Text file
+     * @return parsedTask Task object after parsing
+     * @throws ParseException
+     */
     public Task parseData(String line) throws ParseException {
         String[] tokens = line.split("#");
         Task parsedTask = null;

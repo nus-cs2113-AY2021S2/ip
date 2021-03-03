@@ -1,6 +1,14 @@
 package parser;
 
-import commands.*;
+import commands.AddDeadlineCommand;
+import commands.AddEventCommand;
+import commands.AddToDoCommand;
+import commands.Command;
+import commands.DeleteCommand;
+import commands.DoneCommand;
+import commands.ExitCommand;
+import commands.FindCommand;
+import commands.ListCommand;
 import exceptions.MissingInfoException;
 import exceptions.UnknownCommandException;
 import io.DukePrint;
@@ -20,11 +28,25 @@ public class CommandParser {
         this.dukePrint = dukePrint;
     }
 
+    /**
+     * Parses the Command after verifying it
+     *
+     * @param command String command to be parsed
+     * @return Command to be executed
+     * @throws UnknownCommandException
+     * @throws MissingInfoException
+     * @throws ParseException
+     */
     public Command parse(String command) throws UnknownCommandException, MissingInfoException, ParseException {
         verifier.verify(command);
         return parseValidCommandString(command);
     }
 
+    /**
+     * @param command String Command to be parsed
+     * @return Command object to be returned
+     * @throws ParseException
+     */
     private Command parseValidCommandString(String command) throws ParseException {
         Command result = null;
         String[] subStrings = command.split(" ");

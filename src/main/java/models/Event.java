@@ -19,11 +19,17 @@ public class Event extends Task {
         this.eventTime = eventTime;
     }
 
+    /**
+     * @return String describing the Event Task
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + outputFormat.format(this.eventTime) + ")";
     }
 
+    /**
+     * @return String with formatted Data to be written onto Text file
+     */
     @Override
     public String formatData() {
         int done;

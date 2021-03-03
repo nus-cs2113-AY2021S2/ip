@@ -5,8 +5,11 @@ import models.TaskList;
 
 public class DoneCommand extends Command {
 
+    /**
+     * Index of the Task to be marked as done as specified by User
+     */
+    private final int taskCount;
     private TaskList taskList;
-    private int taskCount;
 
 
     public DoneCommand(TaskList taskList, int taskCount, DukePrint dukePrint) {
@@ -15,6 +18,9 @@ public class DoneCommand extends Command {
         this.taskCount = taskCount;
     }
 
+    /**
+     * Marks the specific Task as done and prints the done message
+     */
     @Override
     public void execute() {
         taskList.get(taskCount - 1).markAsDone();
