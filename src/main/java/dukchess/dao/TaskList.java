@@ -1,10 +1,9 @@
 package dukchess.dao;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -56,19 +55,21 @@ public class TaskList extends ArrayList<Task> {
             String taskDetails = taskStringMatches.group(5);
 
             switch (taskType) {
-                case "T":
-                    task = new Todo(taskDescription, isDone);
-                    break;
-                case "E":
-                    // TODO: add some checks to this
-                    String whenIsEventAt = taskDetails.split("at: ")[1];
-                    task = new Event(taskDescription, isDone, whenIsEventAt);
-                    break;
-                case "D":
-                    // TODO: add some checks to this
-                    String whenIsTaskDue = taskDetails.split("by: ")[1];
-                    task = new Deadline(taskDescription, isDone, whenIsTaskDue);
-                    break;
+            case "T":
+                task = new Todo(taskDescription, isDone);
+                break;
+            case "E":
+                // TODO: add some checks to this
+                String whenIsEventAt = taskDetails.split("at: ")[1];
+                task = new Event(taskDescription, isDone, whenIsEventAt);
+                break;
+            case "D":
+                // TODO: add some checks to this
+                String whenIsTaskDue = taskDetails.split("by: ")[1];
+                task = new Deadline(taskDescription, isDone, whenIsTaskDue);
+                break;
+            default:
+                break;
             }
             super.add(task);
         }

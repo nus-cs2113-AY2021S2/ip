@@ -1,13 +1,15 @@
 package dukchess;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.io.FileWriter;
 
 import dukchess.dao.TaskList;
 import dukchess.entity.Deadline;
@@ -138,9 +140,9 @@ public class Duke {
         try {
             Task taskToDelete = tasks.get(taskIdToDelete - 1);
             tasks.remove(taskIdToDelete - 1);
-            return String.format("Noted, I've removed this task:\n" +
-                    "%s\n" +
-                    "Now, you have %d tasks in the list.", taskToDelete.toString(), tasks.size());
+            return String.format("Noted, I've removed this task:\n"
+                    + "%s\n"
+                    + "Now, you have %d tasks in the list.", taskToDelete.toString(), tasks.size());
         } catch (IndexOutOfBoundsException indexOutOfBoundsException) {
             return String.format("There is no task with id %d at the moment.", taskIdToDelete);
         }
@@ -167,7 +169,7 @@ public class Duke {
      * @param defaultValue
      * @return
      */
-    public static <T> T getValueOrDefault(T value, T defaultValue) {
+    private static <T> T getValueOrDefault(T value, T defaultValue) {
         return value == null ? defaultValue : value;
     }
 
@@ -225,10 +227,45 @@ public class Duke {
             case "delete":
                 handleDeleteTask(commandArgs);
                 break;
+            case "find":
+                handleFindTask(commandArgs);
+                break;
             default:
                 System.out.println("Invalid command :(");
                 break;
             }
         }
     }
+
+    private static void handleFindTask(String commandArgs) {
+        if (commandArgs.length() == 0) {
+            System.out.println("You did not specify the keyword to find!");
+            return;
+        }
+        String[] searchArgs = commandArgs.trim().split(" ");
+        if (searchArgs.length != 1) {
+            System.out.println("I can only handle one keyword at a time, sorreh...");
+            return;
+        }
+        String keyword = searchArgs[0];
+        List<Task> searchResults = findTask(keyword);
+        if (searchResults.size() == 0) {
+            System.out.printf("Could not find any tasks matching \"%s\"%s", keyword, System.lineSeparator());
+            return;
+        }
+        for (int i = 0; i < searchResults.size(); i++) {
+            Task searchResult = searchResults.get(i);
+            System.out.printf(">>> %d. %s\n", i + 1, searchResult.toString());
+        }
+    }
+
+    private static List<Task> findTask(String keyword) {
+        List<Task> searchResults = new ArrayList<>();
+        for (Task task: tasks) {
+            if (task.getTaskDescription().contains(keyword)) {
+                searchResults.add(task);
+            }
+        };
+        return searchResults;
+    };
 }

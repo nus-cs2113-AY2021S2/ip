@@ -32,4 +32,8 @@ Now, you have 2 tasks in the list.
 What other tasks do you want to do?
 There is no task with id 69 at the moment.
 What other tasks do you want to do?
+Could not find any tasks matching "fakekeyword"
+What other tasks do you want to do?
+>>> 1. [D][ ] retire (by: 40)
+What other tasks do you want to do?
 Goodbye, hope to see you soon!
