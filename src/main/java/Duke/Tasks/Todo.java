@@ -1,5 +1,7 @@
 package Duke.Tasks;
 
+import java.time.LocalDate;
+
 public class Todo extends Task {
 
     public Todo(String nameInit) {
@@ -29,6 +31,10 @@ public class Todo extends Task {
         }
         saveString = saveString + name;
         return saveString;
+    }
+
+    public LocalDate getDate() {
+        return null;
     }
 
 }

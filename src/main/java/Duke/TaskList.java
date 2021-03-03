@@ -2,6 +2,7 @@ package Duke;
 
 import Duke.Tasks.Task;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -12,19 +13,9 @@ public class TaskList {
         tasks.add(inputTask);
     }
 
-    public void addAndPrint(Task inputTask) {
-        addTask(inputTask);
-        Output.printAdded(inputTask, tasks.size());
-    }
-
-    public void updateCompletion(int taskIndex) {
+    public Task updateCompletion(int taskIndex) {
         tasks.get(taskIndex - 1).setDone();
-        Output.printUpdated(tasks.get(taskIndex - 1).toString());
-    }
-
-
-    public void printTaskList() {
-        Output.printTaskList(tasks);
+        return tasks.get(taskIndex - 1);
     }
 
     public int size() {
@@ -35,9 +26,37 @@ public class TaskList {
         return tasks.get(index);
     }
 
-    public void deleteTask(int taskIndex) {
-        Output.printDeleted(tasks.get(taskIndex - 1).toString(), tasks.size() - 1);
-        tasks.remove(taskIndex - 1);
+    public Task deleteTask(int taskIndex) {
+        Task deletedTask = tasks.remove(taskIndex - 1);
+        return deletedTask;
+    }
+
+    public ArrayList<Task> findByDate(LocalDate queryDate) {
+        ArrayList<Task> tasksWithDate = new ArrayList<Task>();
+        for (int i = 0; i < tasks.size(); i++) {
+            Task currentTask = tasks.get(i);
+            if (currentTask.getDate() != null && currentTask.getDate().toString().equals(queryDate.toString())) {
+                tasksWithDate.add(currentTask);
+            }
+        }
+        return tasksWithDate;
+    }
+
+    public ArrayList<Task> returnTaskList() {
+        return tasks;
+    }
+
+    public ArrayList<Task> returnFilteredTaskList(String keyword) {
+        ArrayList<Task> tasksWithKeyword = new ArrayList<>();
+        for (int i = 0; i < tasks.size(); i++) {
+            Task currentTask = tasks.get(i);
+            String nameOfTask = currentTask.getName();
+            if (nameOfTask.contains(keyword)) {
+                tasksWithKeyword.add(currentTask);
+                continue;
+            }
+        }
+        return tasksWithKeyword;
     }
 
 }

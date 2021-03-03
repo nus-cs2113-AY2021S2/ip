@@ -1,12 +1,15 @@
 package Duke.Tasks;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
 
-    private String period;
+    LocalDate eventDate;
 
-    public Event(String nameInit, String timePeriod) {
+    public Event(String nameInit, LocalDate eventDate) {
         super(nameInit);
-        this.period = timePeriod;
+        this.eventDate = eventDate;
     }
 
     @Override
@@ -18,7 +21,9 @@ public class Event extends Task {
         else {
             outputString += "[\u2715]";
         }
-        outputString = outputString + " " + name + " (at: " + period + ")";
+        DateTimeFormatter formatObject = DateTimeFormatter.ofPattern("MMM dd yyyy");
+        String formattedStartTime = eventDate.format(formatObject);
+        outputString = outputString + " " + name + " (at: " + formattedStartTime + ")";
         return outputString;
     }
 
@@ -30,8 +35,11 @@ public class Event extends Task {
         else {
             saveString += "0 | ";
         }
-        saveString = saveString + name + " | " + period;
+        saveString = saveString + name + " | " + eventDate;
         return saveString;
     }
 
+    public LocalDate getDate() {
+        return eventDate;
+    }
 }

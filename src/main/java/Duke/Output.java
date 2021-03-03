@@ -6,97 +6,87 @@ import java.util.ArrayList;
 
 public class Output {
 
-    public static void printLogo() {
+    public static String printLogo() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println(logo);
+        return logo;
     }
 
-    private static void printLine() {
-        System.out.println("____________________________________________________________");
+    public static String printLine() {
+        String line = "____________________________________________________________";
+        return line;
     }
 
-    public static void printGreet() {
-        printLine();
-        System.out.println("Hello! I'm Duke");
-        printLogo();
-        System.out.println("What can I do for you?");
-        printLine();
+    public static String printGreet() {
+        String greetMessage = "Hello! I'm Duke\n"
+                + printLogo()
+                + "\nWhat can I do for you?";
+        return greetMessage;
     }
 
-    public static void printSaved() {
-        printLine();
-        System.out.println("Your data has been saved.");
-        printLine();
-    }
 
-    public static void printDeleted(String taskName, int size) {
-        printLine();
-        System.out.println(String.format("Noted. I've removed this task:\n  %1$s \nNow you have %2$d tasks in the list.",
+    public static String printDeleted(String taskName, int size) {
+        String deleteMessage = String.format("Noted. I've removed this task:\n  %1$s \nNow you have %2$d tasks in the list.",
                 taskName,
-                size));
-        printLine();
+                size);
+        return deleteMessage;
     }
 
-    public static void printUnknownCommandError() {
-        printLine();
-        System.out.println("\u2639 OOPS!! I'm sorry, but I don't know what that means :-(");
-        printLine();
+    public static String printAdded(String taskName, int size) {
+        String addMessage = String.format("Got it. I've added this task:\n  %1$s \nNow you have %2$d tasks in the list.",
+                taskName,
+                size);
+        return addMessage;
     }
 
-    public static void printGeneralError() {
-        printLine();
-        System.out.println("An error has occurred. Please check your commands again");
-        printLine();
+    public static String printUpdated(String taskName) {
+        String updateMessage = String.format("Nice! I've marked this task as done:\n  %s",
+                taskName);
+        return updateMessage;
     }
 
-    public static void printAdded(Task newTask, int size) {
-        printLine();
-        System.out.println(String.format("Got it. I've added this task:\n  %1$s \nNow you have %2$d tasks in the list.",
-                newTask.toString(),
-                size));
-        printLine();
+    public static String printTask(Task task) {
+        return task.toString();
     }
 
-    public static void printUpdated(String taskName) {
-        printLine();
-        System.out.println(String.format("Nice! I've marked this task as done:\n  %s",
-                taskName));
-        printLine();
-    }
-
-    public static void printTask(Task task) {
-        System.out.println(task);
-    }
-
-    public static void printTaskList(ArrayList<Task> taskList) {
-        printLine();
-        for (int i = 0; i < taskList.size(); i++) {
-            System.out.print(String.format("%d. ", i + 1));
-            printTask(taskList.get(i));
+    public static String printTaskList(ArrayList<Task> taskList) {
+        if (taskList.isEmpty()) {
+            return "You do not have any tasks currently.";
         }
-        printLine();
+        String listTasksMessage = "Here are the list of tasks that you have\n";
+        for (int i = 0; i < taskList.size(); i++) {
+            listTasksMessage += String.format("%d. ", i + 1);
+            listTasksMessage += printTask(taskList.get(i));
+            listTasksMessage += "\n";
+        }
+        return listTasksMessage;
     }
 
-    public static void printDoneRangeError() {
-        printLine();
-        System.out.println("\u2639 OOPS!! The number you provide is out of range for the \"done\" command.");
-        printLine();
+    public static String printFilteredTaskList(ArrayList<Task> taskList) {
+        if (taskList.isEmpty()) {
+            return "You do not have any tasks that matches the keyword";
+        }
+        String listTasksMessage = "Here are the tasks that matches:\n";
+        for (int i = 0; i < taskList.size(); i++) {
+            listTasksMessage += String.format("%d. ", i + 1);
+            listTasksMessage += printTask(taskList.get(i));
+            listTasksMessage += "\n";
+        }
+        return listTasksMessage;
     }
 
-    public static void printDoneInputError() {
-        printLine();
-        System.out.println("\u2639 OOPS!! \"done\" command must be followed by an integer.");
-        printLine();
+
+    public static String printExit() {
+        String exitMessage = "Bye. Hope to see you again soon!";
+        return exitMessage;
     }
 
-    public static void printExit() {
-        printLine();
-        System.out.println("Bye. Hope to see you again soon!");
-        printLine();
+    public static String printSave() {
+        String saveMessage = "Sure! Your data has been saved.";
+        return saveMessage;
     }
 
 }

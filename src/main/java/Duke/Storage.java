@@ -8,9 +8,16 @@ import Duke.Tasks.Todo;
 import java.io.File;
 import java.io.IOException;
 import java.io.FileWriter;
+import java.time.LocalDate;
 import java.util.Scanner;
 
-public class TextFile {
+public class Storage {
+
+    String filePath;
+
+    public Storage(String filePath) {
+        this.filePath = filePath;
+    }
 
     public static TaskList loadTaskList() {
         TaskList taskList = new TaskList();
@@ -41,7 +48,8 @@ public class TextFile {
                     case "D": {
                         String taskName = entryData.next().trim();
                         String period = entryData.next().trim();
-                        Deadline newDeadline = new Deadline(taskName, period);
+                        LocalDate deadlineDate = LocalDate.parse(period);
+                        Deadline newDeadline = new Deadline(taskName, deadlineDate);
                         if (isCompleted.equals("1")) {
                             newDeadline.setDone();
                         }
@@ -51,7 +59,8 @@ public class TextFile {
                     case "E": {
                         String taskName = entryData.next().trim();
                         String period = entryData.next().trim();
-                        Event newEvent = new Event(taskName, period);
+                        LocalDate eventDate = LocalDate.parse(period);
+                        Event newEvent = new Event(taskName, eventDate);
                         if (isCompleted.equals("1")) {
                             newEvent.setDone();
                         }

@@ -1,9 +1,11 @@
 package Duke;
 
 public class Duke {
+
     public static void main(String[] args) {
-        Output.printGreet();
-        Logic.loop();
-        Output.printExit();
+        String storagePath = "database.txt";
+        Logic logic = new Logic(storagePath);
+        logic.run();
     }
+
 }

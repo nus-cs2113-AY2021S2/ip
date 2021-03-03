@@ -1,5 +1,7 @@
 package Duke.Tasks;
 
+import java.time.LocalDate;
+
 public abstract class Task {
 
     protected String name;
@@ -13,6 +15,12 @@ public abstract class Task {
         isDone = true;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public abstract String toStringSave();
+
+    public abstract LocalDate getDate();
 
 }
