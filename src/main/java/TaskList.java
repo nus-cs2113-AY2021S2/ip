@@ -116,7 +116,7 @@ public class TaskList {
      * @return String of task details
      */
     public String getStatus(int index) {
-        return tasks.get(index).getTypeString() + tasks.get(index).getCheckbox() +
+        return tasks.get(index).getType() + tasks.get(index).getCheckbox() +
                 " " + tasks.get(index).toString();
     }
 
@@ -197,9 +197,9 @@ public class TaskList {
     /**
      * Creates a Todo and adds it to tasks
      * @param command User arguments to create the Todo
-     * @throws NoCommandLabelException If label field is not found in command
+     * @throws NoTaskLabelException If label field is not found in command
      */
-    public void addTodo(String command) throws NoCommandLabelException {
+    public void addTodo(String command) throws NoTaskLabelException {
         String commandType = Command.TODO.name().toLowerCase();
         String label = getLabel(command,commandType);
 
@@ -209,10 +209,10 @@ public class TaskList {
     /**
      * Creates a Event and adds it to tasks
      * @param command User arguments to create the Event
-     * @throws NoCommandLabelException If label field is not found in command
+     * @throws NoTaskLabelException If label field is not found in command
      * @throws NoCommandFormatException If /at is not found in command
      */
-    public void addEvent(String command) throws NoCommandLabelException, NoCommandFormatException {
+    public void addEvent(String command) throws NoTaskLabelException, NoCommandFormatException {
         final String TIME_MARKER = "/at";
         String commandType = Command.EVENT.name().toLowerCase();
         String[] commandArray = command.split(TIME_MARKER);
@@ -231,10 +231,10 @@ public class TaskList {
     /**
      * Creates a Deadline and adds it to tasks
      * @param command User arguments to create the Deadline
-     * @throws NoCommandLabelException If label field is not found in command
+     * @throws NoTaskLabelException If label field is not found in command
      * @throws NoCommandFormatException If /by is not found in command
      */
-    public void addDeadline(String command) throws NoCommandLabelException, NoCommandFormatException {
+    public void addDeadline(String command) throws NoTaskLabelException, NoCommandFormatException {
         final String TIME_MARKER = "/by";
         String commandType = Command.DEADLINE.name().toLowerCase();
         String[] commandArray = command.split(TIME_MARKER);
@@ -250,10 +250,10 @@ public class TaskList {
         addToList(new Deadline(label, dueTime));
     }
 
-    private static String getLabel(String string, String commandType) throws NoCommandLabelException {
+    private static String getLabel(String string, String commandType) throws NoTaskLabelException {
         String label = string.replaceFirst(commandType, "").trim();
         if (label.isEmpty()) {
-            throw new NoCommandLabelException();
+            throw new NoTaskLabelException();
         }
         return label;
     }

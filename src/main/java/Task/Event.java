@@ -1,5 +1,9 @@
 package Task;
 
+/**
+ *  Keeps track of a Task that has a start time
+ */
+
 public class Event extends Task{
     protected String startTime;
 
@@ -14,7 +18,7 @@ public class Event extends Task{
     }
 
     @Override
-    public String getTypeString() {
+    public String getType() {
         return "[E]";
     }
 

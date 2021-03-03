@@ -1,5 +1,9 @@
 package Task;
 
+/**
+ *  Keeps track of a Task that has a due time
+ */
+
 public class Deadline extends Task{
     protected String dueTime;
 
@@ -14,7 +18,7 @@ public class Deadline extends Task{
     }
 
     @Override
-    public String getTypeString() {
+    public String getType() {
         return "[D]";
     }
 

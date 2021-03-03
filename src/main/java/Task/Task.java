@@ -1,5 +1,9 @@
 package Task;
 
+/**
+ *  Gives the basic functionality of a task for inheritance
+ */
+
 public abstract class Task {
     protected static final String DATA_DELIMITER = " @_@ ";
 
@@ -23,8 +27,9 @@ public abstract class Task {
         return " ";
     }
 
-    /*
+    /**
      * Converts a task to the file data format
+     * @return File data formatted string
      */
     public String formatSaveTask() {
         String taskType = this.getClass().getSimpleName().toLowerCase();
@@ -44,13 +49,19 @@ public abstract class Task {
         this.isDone = done;
     }
 
-    // Returns a checkbox string depending on whether task is done
+    /**
+     * Returns a checkbox string depending on whether task is done
+     * @return A tick or a cross depending on the task completeness
+     */
     public String getCheckbox() {
         return this.isDone() ? "[✔]":"[❌]";
     }
 
-    // Returns a string depending on type of Task.Task
-    public String getTypeString() {
+    /**
+     * Returns the type of task,
+     * @return A box that indicates the Task little
+     */
+    public String getType() {
         return "[ ]";
     }
 }

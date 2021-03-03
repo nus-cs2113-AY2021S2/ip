@@ -1,3 +1,7 @@
+/**
+ * Manages the text ui interface
+ */
+
 public class Ui {
 
     public static final String LINE_STRING = "____________________________________________________________";
@@ -73,7 +77,7 @@ public class Ui {
         System.out.println(exceptionMessage);
     }
 
-    public void printNoCommandLabel(Command commandType) {
+    public void printNoTaskLabel(Command commandType) {
         String commandName = commandType.name().toLowerCase();
         String exceptionMessage = LINE_STRING +
                 "\n 😥 You gotta tell me what is the task for " + commandName + "\n" +

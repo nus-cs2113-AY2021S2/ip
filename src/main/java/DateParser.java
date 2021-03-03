@@ -1,11 +1,11 @@
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
+/**
+ * Manages the parsing of specific date inputs
+ */
 
 public class DateParser {
     private static final List<String> dateFormats = Arrays.asList("d/M/y H:m",

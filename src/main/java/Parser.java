@@ -41,8 +41,8 @@ public class Parser {
                 ui.printInputMismatch();
             } catch (NoSuchMethodException  e) {
                 ui.printNoSuchMethod();
-            } catch (NoCommandLabelException e) {
-                ui.printNoCommandLabel(commandType);
+            } catch (NoTaskLabelException e) {
+                ui.printNoTaskLabel(commandType);
             } catch (NoCommandFormatException e) {
                 ui.printNoCommandFormat(commandType);
             } catch (NoTaskSpecifiedException e) {
@@ -62,14 +62,14 @@ public class Parser {
      * @param tasks list of tasks of Bob class
      * @return isScanning which is true unless Command is Bye, then it would be false
      * @throws NoSuchMethodException If command type is invalid
-     * @throws NoCommandLabelException If task label is not stated for construction
+     * @throws NoTaskLabelException If task label is not stated for construction
      * @throws NoCommandFormatException If time marker is missing for deadline or event
      * @throws NoTaskSpecifiedException If task number is not specified for done or delete
      * @throws IndexOutOfBoundsException If task number specified is out of TaskList bounds
      * @throws NoSearchQueryException If search query is not specified for search
      */
     private static boolean scanSwitch(String inputString, Command commandType, TaskList tasks, Ui ui) throws
-            NoSuchMethodException, NoCommandLabelException, NoCommandFormatException, NoTaskSpecifiedException,
+            NoSuchMethodException, NoTaskLabelException, NoCommandFormatException, NoTaskSpecifiedException,
             IndexOutOfBoundsException, NoSearchQueryException {
         String[] inputStringArr = inputString.split(" ");
         boolean isScanning = true;
