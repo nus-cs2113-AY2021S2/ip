@@ -58,6 +58,7 @@ Exception:
 * No todo DESCRIPTION
 * Example: `todo`
 * Example of expected output:
+
 ```
 ___________________________________________
 🙁 OOPS!!! The description of a todo cannot be empty.
@@ -71,6 +72,7 @@ ___________________________________________
 * Format：`deadline DESCRIPTION /by BYTIME`
 * Example: `deadline submit a report /by 05 Mar`
 * Example of expected output:
+
 ```
 ___________________________________________
 Got it. I've added this task: 
@@ -82,6 +84,7 @@ Exception:
 * No deadline DESCRIPTION
 * Example: `deadline`
 * Example of expected output:
+
 ```
 ___________________________________________
 🙁 OOPS!!! The description of a deadline cannot be empty.
@@ -95,6 +98,7 @@ ___________________________________________
 * Format：`event DESCRIPTION /by ATTIME`
 * Example: `event project group meeting /at 2-4 pm Sunday`
 * Example of expected output:
+
 ```
 ___________________________________________
 Got it. I've added this task: 
@@ -106,6 +110,7 @@ Exception:
 * No event DESCRIPTION
 * Example: `event`
 * Example of expected output:
+
 ```
 ___________________________________________
 🙁 OOPS!!! The description of an event cannot be empty.
@@ -118,6 +123,7 @@ ___________________________________________
 * Display all recorded tasks in the list
 * Format: `list`
 * Example of expected output:
+
 ```
 ___________________________________________
 Here are the tasks in your list: 
@@ -133,6 +139,7 @@ ___________________________________________
 * Format: `done INDEX`
 * Example: 'done 1'
 * Example of expected output:
+
 ```
 ___________________________________________
 Nice! I've marked this task as done: 
@@ -143,6 +150,7 @@ Exception:
 * No done INDEX
 * Example: `done`
 * Example of expected output:
+
 ```
 ___________________________________________
 🙁 OOPS!!! The description of a done cannot be empty.
@@ -156,6 +164,7 @@ ___________________________________________
 * Format: 'delete INDEX'
 * Example: `delete 2`
 * Example of expected output:
+
 ```
 ___________________________________________
 Noted. I've removed this task: 
@@ -168,6 +177,7 @@ Exception:
 * No delete INDEX
 * Example: `delete`
 * Example of expected output:
+
 ```
 ___________________________________________
 🙁 OOPS!!! The description of a delete cannot be empty.
@@ -191,6 +201,7 @@ Exception:
 * No find DESCRIPTION
 * Example: `find`
 * Example of expected output:
+
 ```
 ___________________________________________
 🙁 OOPS!!! The description of a find cannot be empty.
@@ -204,6 +215,7 @@ ___________________________________________
 * Format: `date [yyy-mm-dd]`
 * Example: `date 2020-02-28`
 * Example of expected output:
+
 ```
 ___________________________________________
 Here are the tasks occurring on this specific date: 
@@ -214,6 +226,7 @@ Exception:
 * No date DESCRIPTION
 * Example: `date`
 * Example of expected output:
+
 ```
 ___________________________________________
 🙁 OOPS!!! The description of a date cannot be empty.
@@ -226,6 +239,7 @@ ___________________________________________
 * Exits this running program
 * Format: `bye`
 * Example of expected output:
+
 ```
 ___________________________________________
 Bye. Hope to see you again soon!
@@ -244,7 +258,7 @@ Here are some available commands and their corresponding input format:
 list: Display all tasks in the list.
 Format: list
 
-todo: Add a todo task. 
+todo: Add a todo task.
 Format: todo read a book
 
 deadline: Add a deadline task.
@@ -252,20 +266,21 @@ Format: deadline submit a report /by 05 Mar
 
 event: Add an event task.
 Format: event project meeting /at Mon 2-4pm
-       
+
 done: Mark a task as done.
 Format: done 1
 
-find: Find all tasks contain the input keyword.
+find: find all tasks contain the input keyword
 Format: find book
 
-date: Find all tasks occurring the specific date.
+date: find all tasks occurring the specific date
 Format: date 2021-02-28
-        
+
 bye: Exit the program.
 Format: bye
 
 ___________________________________________
+
 ```
 
 
@@ -274,6 +289,7 @@ ___________________________________________
 * The command is not acceptable by Duke
 * Example: `balh` or `hi`
 * Example of expected output:
+
 ```
 ___________________________________________
 🙁 OOPS!!! I'm sorry, but I don't know what that means :-(
