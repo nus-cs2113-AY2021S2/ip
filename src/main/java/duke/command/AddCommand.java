@@ -59,7 +59,7 @@ public class AddCommand extends Command {
             return;
         }
         if (fullCommand.contains("todo")) {
-            Todo todo = new Todo(fullCommand.replaceFirst("todo", ""));
+            Todo todo = new Todo(fullCommand.replaceFirst("todo", ""), false);
             taskList.addTask(todo);
             Keyword.setKeywords("T");
             ui.printTodoDescription();
@@ -69,7 +69,7 @@ public class AddCommand extends Command {
         } else if (fullCommand.contains("event")) {
             at = fullCommand.substring(fullCommand.indexOf("/") + START_INDEX_OF_AT);
             fullCommand = fullCommand.substring(START_INDEX_OF_EVENT, fullCommand.indexOf("/"));
-            Event event = new Event(fullCommand, at);
+            Event event = new Event(fullCommand, at, false);
             taskList.addTask(event);
             Keyword.setKeywords("E");
             Ui.printEventDescription();
@@ -79,7 +79,7 @@ public class AddCommand extends Command {
         } else if (fullCommand.contains("deadline")) {
             by = fullCommand.substring((fullCommand.indexOf("/") + 1) + START_INDEX_OF_BY);
             fullCommand = fullCommand.substring(START_INDEX_OF_DEADLINE, fullCommand.indexOf("/"));
-            Deadline deadline = new Deadline(fullCommand, Deadline.formatDeadline(by));
+            Deadline deadline = new Deadline(fullCommand, Deadline.formatDeadline(by), false);
             taskList.addTask(deadline);
             Keyword.setKeywords("D");
             Ui.printDeadlineDescription();

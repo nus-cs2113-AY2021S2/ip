@@ -35,6 +35,7 @@ public class Storage {
         ArrayList<Task> tasks = new ArrayList<>();
         String loadedCommand;
         String[] words;
+        Boolean isDone;
         File f = new File(String.valueOf(path));
         Scanner input = new Scanner(f);
 
@@ -42,16 +43,21 @@ public class Storage {
             loadedCommand = input.nextLine();
             words = loadedCommand.split(",");
 
+            if (words[words.length-1].contains("Y")) {
+                isDone = true;
+            } else {
+                isDone = false;
+            }
             if (loadedCommand.charAt(0) == 'T') {
-                tasks.add(new Todo(words[1]));
+                tasks.add(new Todo(words[1], isDone));
                 Keyword.setKeywords("T");
             }
             if (loadedCommand.charAt(0) == 'E') {
-                tasks.add(new Event(words[1], words[2]));
+                tasks.add(new Event(words[1], words[2], isDone));
                 Keyword.setKeywords("E");
             }
             if (loadedCommand.charAt(0) == 'D') {
-                tasks.add(new Deadline(words[1], words[2]));
+                tasks.add(new Deadline(words[1], words[2], isDone));
                 Keyword.setKeywords("D");
             }
         } while (input.hasNextLine());
@@ -67,12 +73,14 @@ public class Storage {
     public static void writeData(FileWriter fw) throws IOException {
         for (int i = 0; i < TaskList.getListSize(); ++i) {
             String keyword = Keyword.getKeywords(i);
+            Task task = TaskList.getTaskAtIndex(i);
             fw.write(keyword + "," + TaskList.getTaskAtIndex(i).getDescription());
             if (keyword == "E") {
-                fw.write(" | " + Event.getAt());
+                fw.write(" , " + Event.getAt());
             } else if (keyword == "D") {
-                fw.write(" | " + Deadline.getBy());
+                fw.write(" , " + Deadline.getBy());
             }
+            fw.write(" , " + task.getStatus());
             fw.write(System.lineSeparator());
         }
     }

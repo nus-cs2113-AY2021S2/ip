@@ -14,6 +14,13 @@ public class Task {
         return description;
     }
 
+    public String getStatus() {
+        if (isDone == false) {
+            return "N";
+        }
+        return "Y";
+    }
+
     public void printStatus() {
         if (isDone) {
             System.out.print("[X]");
