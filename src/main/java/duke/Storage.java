@@ -60,6 +60,7 @@ public class Storage {
                     updatedTasksList.get(tasksCount).markAsDone(); //if is a 'false', task is auto-marked as not done
                 }
                 tasksCount++; //increment taskCount for added task
+                return updatedTasksList;
             }
         } catch (FileNotFoundException e) {
             //Split given filepath by "/":

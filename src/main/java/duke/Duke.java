@@ -1,9 +1,6 @@
 package duke;
 
-import duke.taskexceptions.EmptyTaskDateException;
-import duke.taskexceptions.NoTaskDateException;
-import duke.taskexceptions.NoTaskNameException;
-import duke.taskexceptions.TaskDateFormatException;
+import duke.taskexceptions.*;
 
 import java.io.IOException;
 
@@ -18,10 +15,11 @@ public class Duke {
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.loadPrevListIntoNewList());
+        } catch (NullPointerException e) {
+            ui.showNullPointerError();
+            tasks = new TaskList();
         } catch (IOException e) {
             ui.showLoadingError();
-            tasks = new TaskList();
-        } catch (NullPointerException e) {
             tasks = new TaskList();
         }
     }
@@ -50,6 +48,8 @@ public class Duke {
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("Please input a smaller or bigger valid task number.");
                 System.out.println("You can list all tasks to check the total number of tasks you have. :))"); //invalid TaskNumber
+            } catch (KeywordFormatException e) {
+                System.out.println("Please input in the format of: find \'keyword\'"); //wrong format
             } finally {
                 ui.showLine(); //end of current Response to User
             }
