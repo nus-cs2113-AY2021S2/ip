@@ -15,7 +15,7 @@ import java.io.FileNotFoundException;
 
 public class Duke {
     public static final int maxTasks = 100;
-    private static final String border = "    ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――";
+    private static final String border = "    -------------------------------------------------------------------------------------------------------------------------------";
     private static TaskList tasks = new TaskList();
     private static final Ui ui = new Ui();
     private static Parser parser = new Parser();

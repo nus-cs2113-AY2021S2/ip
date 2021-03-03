@@ -11,7 +11,7 @@ import java.util.List;
 public class Parser {
 
 
-    public static final String border = "    ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――";
+    public static final String border = "    -------------------------------------------------------------------------------------------------------------------------------";
     public static final List<String> commands = Arrays.asList("event", "deadline", "todo", "list", "done", "delete", "bye","find");
 
     public String processUserCommand(String userCommand) {

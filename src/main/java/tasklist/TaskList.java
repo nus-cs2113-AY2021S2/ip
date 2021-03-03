@@ -17,7 +17,7 @@ public class TaskList {
     }
 
     private int taskCount = 0;
-    public static final String border = "    ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――";
+    public static final String border = "    -------------------------------------------------------------------------------------------------------------------------------";
     /*
     * The add task method within the TaskList class adds tasks from the list
     * @params task contains information of the task to be added to the list
