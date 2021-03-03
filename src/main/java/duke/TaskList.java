@@ -64,7 +64,7 @@ public class TaskList {
         tasks.get(taskNum).setDone();
     }
 
-    public void finishLastTask(){
+    public void finishLastTask() {
         tasks.get(tasks.size() - 1).setDone();
     }
 
@@ -73,11 +73,11 @@ public class TaskList {
     }
 
     // Gets the Last task of tasks array
-    public String getLastTask() {
-        return tasks.get(tasks.size() - 1).toString();
+    public Task getLastTask() {
+        return getTask(getSize() - 1);
     }
 
-    public void deleteTask(int taskNum) {
+    private void deleteTask(int taskNum) {
         tasks.remove(taskNum);
     }
 
@@ -87,14 +87,14 @@ public class TaskList {
         return task;
     }
 
-    public int getSize(){
+    public int getSize() {
         return tasks.size();
     }
 
     public ArrayList<Task> findTask(String keyword) {
         ArrayList<Task> foundTasks = new ArrayList<>();
         for (Task task : tasks) {
-            if (task.getDescription().contains(keyword)){
+            if (task.getDescription().contains(keyword)) {
                 foundTasks.add(task);
             }
         }

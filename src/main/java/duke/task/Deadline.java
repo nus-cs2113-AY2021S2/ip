@@ -2,6 +2,7 @@ package duke.task;
 
 public class Deadline extends Task {
     String endTime;
+
     public Deadline(String description, String endTime) {
         super(description);
         this.endTime = endTime;

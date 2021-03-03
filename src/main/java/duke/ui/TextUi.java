@@ -45,11 +45,11 @@ public class TextUi {
             break;
         case DELETE:
             taskNum = Parser.getTaskNum(userCommandText, Command.DELETE);
-            System.out.println("Noted. I've removed this task:"+ System.lineSeparator() +
+            System.out.println("Noted. I've removed this task:" + System.lineSeparator() +
                     taskList.getDeletedTask(taskNum - 1));
         case FIND:
             ArrayList<Task> foundTasks = taskList.findTask(userCommandText.replaceFirst("find ", ""));
-            if (foundTasks.size() == 0){
+            if (foundTasks.size() == 0) {
                 System.out.println("No tasks found.");
                 break;
             }
@@ -64,7 +64,7 @@ public class TextUi {
         }
     }
 
-    public Scanner initialiseInput() {
+    private Scanner initialiseInput() {
         Scanner scanner = new Scanner(System.in);
         return scanner;
     }

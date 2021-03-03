@@ -2,6 +2,7 @@ package duke.task;
 
 public class Event extends Task {
     String eventTime;
+
     public Event(String description, String eventTime) {
         super(description);
         this.eventTime = eventTime;

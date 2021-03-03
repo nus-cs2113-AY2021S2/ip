@@ -9,7 +9,7 @@ public class Parser {
     public static Command processInput(TaskList taskList, String input) {
         Command command;
         try {
-            command =  getCommand(input);
+            command = getCommand(input);
             switch (command) {
             case TODO:
                 command = taskList.addTask(input.replaceFirst("todo ", ""), Command.TODO);

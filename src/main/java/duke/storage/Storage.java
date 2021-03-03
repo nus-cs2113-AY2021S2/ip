@@ -20,30 +20,22 @@ public class Storage {
     private static final String FILE_NAME = "duke.txt";
     private static final String DONE = "1";
 
-    public static void loadFile(TaskList taskList) {
-        try {
-            createDirectory();
-            createFile();
-            loadTasks(taskList);
-        } catch (IOException | SecurityException | InvalidCommandException e) {
-            e.printStackTrace();
-        }
+    public static void loadFile(TaskList taskList) throws IOException, InvalidCommandException, SecurityException {
+        createDirectory();
+        createFile();
+        loadTasks(taskList);
     }
 
-    public static void saveFile(TaskList taskList) {
-        try {
-            createDirectory();
-            createFile();
-            saveTasks(taskList);
-        } catch (IOException | SecurityException e) {
-            e.printStackTrace();
-        }
+    public static void saveFile(TaskList taskList) throws IOException, SecurityException {
+        createDirectory();
+        createFile();
+        saveTasks(taskList);
     }
 
     private static void saveTasks(TaskList taskList) throws IOException {
         FileWriter writer = new FileWriter(DIRECTORY_NAME + "/" + FILE_NAME);
         int taskCount = taskList.getSize();
-        for (int i = 0; i < taskCount; i++){
+        for (int i = 0; i < taskCount; i++) {
             Task task = taskList.getTask(i);
             String outputString = processTasks(task) + "\n";
             writer.write(outputString);
@@ -63,7 +55,7 @@ public class Storage {
             outputArray[0] = "event ";
             outputArray[2] = task.getDescription() + "/at " + ((Event) task).getEventTime();
         }
-        if (task.isDone()){
+        if (task.isDone()) {
             outputArray[1] = "|1|";
         } else {
             outputArray[1] = "|0|";
@@ -93,7 +85,7 @@ public class Storage {
             taskList.addTask(taskArray[2], Command.DEADLINE);
             break;
         }
-        if (taskArray[1].equals(DONE)){
+        if (taskArray[1].equals(DONE)) {
             taskList.finishLastTask();
         }
     }
