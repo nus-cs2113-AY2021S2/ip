@@ -2,6 +2,18 @@
 
 Duke is a desktop app for managing tasks, optimized for use via a Command Line Interface (CLI).
 
+* Table of Contents
+  {:toc}
+  
+## Quick Start
+
+1. Ensure you have `Java 11` or above installed in your Computer.
+2. Download the latest `ip.jar` from here: [https://github.com/jianningzhuang/ip/releases](https://github.com/jianningzhuang/ip/releases)
+3. Copy the file to the folder you wish to use as the *home folder* for your Duke Task Manager. (Your data from the app will be stored in the same *home folder*)
+4. Double-click the file to start Duke.
+5. Refer to **Features** and **Usages** below for details of the commands available.
+
+
 ## Features
 
 ### Add a Task
@@ -30,11 +42,8 @@ Exit from the application.
 
 ## Usage
 
-<div markdown="block" class="alert alert-info">
-
-:information_source: Words in `UPPER_CASE` are the parameters to be supplied by the user.
-  
-</div>
+| :information_source: | Inputs in `UPPER_CASE` are parameters to be supplied by the user. |
+|----------------------|:-------------------------------------|
 
 ### Adding a Todo: `todo`
 
@@ -177,7 +186,7 @@ Bye. Hope to see you again soon!
 
 ## Command Summary
 
-Action | Format, Examples
+Command | Format
 --------|------------------
 **Todo** | `todo TASK_DESCRIPTION` <br> e.g. `todo read book`
 **Deadline** | `deadline TASK_DESCRIPTION /by DATETIME` <br> e.g. `deadline return book /by June 6th`
