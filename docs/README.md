@@ -32,7 +32,7 @@ after you close and open again this application.
     todo Buy Christmas gift for my friend
             ------------------------------------------------------------
             Great. We added a new task:
-                    [T][✘] Buy Christmas gift for my friend
+                    [T][×] Buy Christmas gift for my friend
             You have in total 1 tasks
             ------------------------------------------------------------
     ```
@@ -90,7 +90,7 @@ Sample I/O:
 todo buy cup noodle
         ------------------------------------------------------------
         Great. We added a new task:
-                [T][✘] buy cup noodle
+                [T][×] buy cup noodle
         You have in total 2 tasks
         ------------------------------------------------------------
 ```
@@ -114,14 +114,14 @@ Sample I/O:
 event friend's wedding ceremony /at 31/05/2021
         ------------------------------------------------------------
         Great. We added a new task:
-                [E][✘] friend's wedding ceremony (at: 31/05/2021 12:00)
+                [E][×] friend's wedding ceremony (at: 31/05/2021 12:00)
         You have in total 3 tasks
         ------------------------------------------------------------
 
 event flight to Tokyo /at 30/04/2021 17:00
         ------------------------------------------------------------
         Great. We added a new task:
-                [E][✘] flight to Tokyo (at: 30/04/2021 17:00)
+                [E][×] flight to Tokyo (at: 30/04/2021 17:00)
         You have in total 4 tasks
         ------------------------------------------------------------
 ```
@@ -139,14 +139,14 @@ Sample I/O:
 deadline prepare for CS2012 mid term /by 04/03/2021
         ------------------------------------------------------------
         Great. We added a new task:
-                [D][✘] prepare for CS2012 mid term (by: 04/03/2021 12:00)
+                [D][×] prepare for CS2012 mid term (by: 04/03/2021 12:00)
         You have in total 6 tasks
         ------------------------------------------------------------
 
 deadline submit CS2101's recess reflection /by 02/03/2021 23:59
         ------------------------------------------------------------
         Great. We added a new task:
-                [D][✘] submit CS2101's recess reflection (by: 02/03/2021 23:59)
+                [D][×] submit CS2101's recess reflection (by: 02/03/2021 23:59)
         You have in total 5 tasks
         ------------------------------------------------------------
 ```
@@ -173,12 +173,12 @@ list
 list
         ------------------------------------------------------------
         Here are the tasks in your list:
-        1.      [T][✓] Buy Christmas gift for my friend
-        2.      [T][✓] buy cup noodle
-        3.      [E][✘] friend's wedding ceremony (at: 31/05/2021 12:00)
-        4.      [E][✘] flight to Tokyo (at: 30/04/2021 17:00)
-        5.      [D][✓] submit CS2101's recess reflection (by: 02/03/2021 23:59)
-        6.      [D][✘] prepare for CS2012 mid term (by: 04/03/2021 12:00)
+        1.      [T][√] Buy Christmas gift for my friend
+        2.      [T][√] buy cup noodle
+        3.      [E][×] friend's wedding ceremony (at: 31/05/2021 12:00)
+        4.      [E][×] flight to Tokyo (at: 30/04/2021 17:00)
+        5.      [D][√] submit CS2101's recess reflection (by: 02/03/2021 23:59)
+        6.      [D][×] prepare for CS2012 mid term (by: 04/03/2021 12:00)
         ------------------------------------------------------------
 ```
 
@@ -196,13 +196,13 @@ Sample I/O:
 done 1
         ------------------------------------------------------------
         Nice! I've marked this task as done:
-                [T][✓] Buy Christmas gift for my friend
+                [T][√] Buy Christmas gift for my friend
         ------------------------------------------------------------
 
 done 6
         ------------------------------------------------------------
         Nice! I've marked this task as done:
-                [D][✓] prepare for CS2012 mid term (by: 04/03/2021 12:00)
+                [D][√] prepare for CS2012 mid term (by: 04/03/2021 12:00)
         ------------------------------------------------------------
 ```
 
@@ -224,13 +224,13 @@ Sample I/O:
 delete 5
         ------------------------------------------------------------
         Sure! I've removed this task:
-                [D][✘] submit CS2101's recess reflection (by: 02/03/2021 23:59)
+                [D][×] submit CS2101's recess reflection (by: 02/03/2021 23:59)
         ------------------------------------------------------------
 
 delete 5
         ------------------------------------------------------------
         Sure! I've removed this task:
-                [D][✓] prepare for CS2012 mid term (by: 04/03/2021 12:00)
+                [D][√] prepare for CS2012 mid term (by: 04/03/2021 12:00)
         ------------------------------------------------------------
 ```
 
@@ -249,15 +249,15 @@ Sample I/O:
 find buy
         ------------------------------------------------------------
         Here are the tasks in your list related to 'buy':
-        1.      [T][✘] buy food
-        2.      [T][✘] buy drinks
+        1.      [T][×] buy food
+        2.      [T][×] buy drinks
         ------------------------------------------------------------
 
 find food
         ------------------------------------------------------------
         Here are the tasks in your list related to 'food':
-        1.      [T][✘] buy food
-        2.      [E][✘] food sales at supermarket (at: 05/03/2021 12:00)
+        1.      [T][×] buy food
+        2.      [E][×] food sales at supermarket (at: 05/03/2021 12:00)
         ------------------------------------------------------------
 
 find some unknown terms
@@ -284,7 +284,7 @@ Sample I/O:
 searchdate 05/03/2021
         ------------------------------------------------------------
         Here are the tasks in your list at/by 05/03/2021 12:00:
-        1.      [E][✘] food sales at supermarket (at: 05/03/2021 12:00)
+        1.      [E][×] food sales at supermarket (at: 05/03/2021 12:00)
         ------------------------------------------------------------
 
 searchdate 06/03/2021

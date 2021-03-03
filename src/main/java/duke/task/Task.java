@@ -12,8 +12,8 @@ import duke.exception.InvalidInputException.InputExceptionType;
 public abstract class Task implements Serializable {
     public static final long serialVersionUID = 1L;
 
-    public static final String CROSS_ICON = "\u2718";
-    public static final String TICK_ICON = "\u2713";
+    public static final String CROSS_ICON = "×";
+    public static final String TICK_ICON = "√";
 
     // We set the default type icon to be *, which should be overwritten for child classes
     protected String typeIcon = "*";
