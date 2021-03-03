@@ -129,6 +129,27 @@ public class Duke {
                 }
                 System.out.println("____________________________________________________________");
                 break;
+            case "FIND":
+                String findDescription = splittedCommand[1];
+                ArrayList<Task> foundTasks = new ArrayList<>();
+                for (Task task : tasks) {
+                    if (task.getDescription().contains(findDescription)) {
+                        foundTasks.add(task);
+                    }
+                }
+
+                if (foundTasks.size() > 0) {
+                    System.out.println("____________________________________________________________");
+                    System.out.println("Here are the matching task in your list:");
+                    for (int i = 0; i < foundTasks.size(); i++) {
+                        int number = i + 1;
+                        System.out.println(number + "." + foundTasks.get(i));
+                    }
+                    System.out.println("____________________________________________________________");
+                } else {
+                    System.out.println("☹ OOPS!!! I cannot find the word " + findDescription + " in the list");
+                }
+                break;
             case "DONE":
                 int taskIndex =Integer.parseInt(splittedCommand[1]) ;
                 taskIndex--;
