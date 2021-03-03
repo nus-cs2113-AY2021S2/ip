@@ -15,35 +15,39 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.Scanner;
 
+/**
+ * Represents a record for storing user's tasks. A {@code Record} object retrieves/saves user's tasks from/to a text
+ * file in the local file system as well as stores the tasks during runtime.
+ */
 public class Record {
     private final ArrayList<Task> records = new ArrayList<>();
 
+    /**
+     * Constructor of Record <br>
+     * Initializes the Record object by retrieving user's tasks from the Record.txt (if any). If Record.txt is found,
+     * the program will print "Record found" and the tasks stored inside the text file will be retrieved and
+     * store to the ArrayList {@code records}. Otherwise, the program will print "No record found" and the ArrayList
+     * {@code records} remains an empty list.
+     */
     public Record() {
-        System.out.print("Initializing " + Duke.NAME + "...");
+        String line = "-----------------------------";
+        System.out.println("Initializing " + Duke.NAME + "...");
         readRecords();
-        System.out.println(" Completed!");
+        System.out.println("Completed!");
+        System.out.println(line);
     }
 
-    private void readRecords() {
-        try {
-            File myObj = new File("records.txt");
-            Scanner recordReader = new Scanner(myObj);
-            while (recordReader.hasNextLine()) {
-                InputData data = new InputData(recordReader.nextLine(), InputType.recordInput);
-                addRecordToCollection(data.getOtherArguments(), data.getFirstArgument());
-                if (data.isDone()) {
-                    records.get(records.size() - 1).setAsDone();
-                }
-            }
-            recordReader.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("No record found.");
-        }
-    }
-
+    /**
+     * Adds a new record to the {@code Record} object. If the record is added successfully, the program will print
+     * message to prompt users that the given task has been added.<br>
+     * If IllegalArgumentException is thrown, it indicates that the given task failed to be added and the related
+     * reason of failure will be printed in the CLI.
+     * @param detailFragments information of a given task (i.e. taskName, isDone indicator (1/0) and date [based on
+     *                        taskType])
+     * @param taskType Type of the given task (i.e. Deadline [D], Event [E] or Todo [T])
+     */
     public void addRecord(String[] detailFragments, String taskType) {
         boolean isAdded = false;
         try {
@@ -59,6 +63,107 @@ public class Record {
             System.out.printf("Now you have %d tasks in the list.\n", numberOfRecords);
             saveRecords();
         }
+    }
+
+    /**
+     * Deletes a record from the {@code Record} object based on the given {@code index}. If the record is deleted
+     * successfully, the program will print message to prompt users that the given task has been deleted.<br>
+     * Otherwise, the program will print the reason of failure and given task is failed to be deleted.
+     * @param index index of record, which could be found with {@code list} command, that the user wants to delete
+     */
+    public void deleteRecord(int index) {
+        if (isIndexOutOfBound(index)) {
+            System.out.println("Invalid input! (Index cannot be out of bounds)");
+            return;
+        }
+        System.out.println("Got it. I've deleted this task:");
+        System.out.println("\t" + records.remove(index));
+        System.out.printf("Now you have %d tasks in the list.\n", records.size());
+        saveRecords();
+    }
+
+    /**
+     * Mark a record as done based on the given {@code index}.If the record is marked as done successfully, the program
+     * will print message to prompt users that the given task has been marked as done.<br>
+     * Otherwise, the program will print the reason of failure and given task is failed to be marked.
+     * @param index index of record, which could be found with {@code list} command, that the user wants to mark as
+     *              done
+     */
+    public void markAsDone(int index) {
+        if (isIndexOutOfBound(index)) {
+            System.out.println("Invalid input! (Index cannot be out of bounds)");
+            return;
+        }
+        records.get(index).setAsDone();
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println("\t" + records.get(index));
+        saveRecords();
+    }
+
+    /**
+     * Searches records based on the given {@code date}. If the dates of stored tasks match the given {@code date}, the
+     * program will print those tasks in the CLI.
+     * @param date A date in format of yyyy-mm-dd
+     */
+    public void searchDate(String date) {
+        int counter = 1;
+        DateTime dateTime = new DateTime(date);
+        System.out.printf("Here is your task in %s:\n", date);
+        for (Task task : records) {
+            if(task.getDate().equals(dateTime.getDate())){
+                System.out.println(counter++ + ". " + task);
+            }
+        }
+    }
+
+    /**
+     * Finds records based on the given {@code keyword}. If the names of stored tasks contains the given
+     * {@code keyword}, the program will print those tasks in the CLI.
+     * @param keyword A target String for searching
+     */
+    public void findRecords(String keyword) {
+        boolean hasRecord = false;
+        System.out.printf("Here is your task List with keyword %s:\n", keyword);
+        for (int i = 0; i < records.size(); i++) {
+            if (records.get(i).getTaskName().contains(keyword)) {
+                System.out.println((i + 1) + ". " + records.get(i));
+                hasRecord = true;
+            }
+        }
+        if (!hasRecord) {
+            System.out.println("(Null)");
+        }
+    }
+
+    /**
+     * Prints all stored tasks inside the Record object to the CLI. If no task is stored,
+     */
+    public void showList() {
+        System.out.println("Here is your task List:");
+        for (int i = 0; i < records.size(); i++) {
+            System.out.println((i + 1) + ". " + records.get(i));
+        }
+        if (records.size() == 0) {
+            System.out.println("Null");
+        }
+    }
+
+    private void readRecords() {
+        try {
+            File myObj = new File("records.txt");
+            Scanner recordReader = new Scanner(myObj);
+            while (recordReader.hasNextLine()) {
+                InputData data = new InputData(recordReader.nextLine(), InputType.recordInput);
+                addRecordToCollection(data.getOtherArguments(), data.getFirstArgument());
+                if (data.isDone()) {
+                    records.get(records.size() - 1).setAsDone();
+                }
+            }
+            recordReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("No record found");
+        }
+        System.out.println("Record found");
     }
 
     private boolean addRecordToCollection(String[] detailFragments, String taskType) {
@@ -130,60 +235,12 @@ public class Record {
         try {
             FileWriter save = new FileWriter("Records.txt");
             for (Task task : records) {
-                save.write(task.getSaveString() + "\n");
+                save.write(task.toSave() + "\n");
             }
             save.close();
         } catch (IOException e) {
             System.out.println("IOException - File failed to be saved");
             e.printStackTrace();
-        }
-    }
-
-    public void deleteRecord(int index) {
-        if (isIndexOutOfBound(index)) {
-            System.out.println("Invalid input! (Index cannot be out of bounds)");
-            return;
-        }
-        System.out.println("Got it. I've deleted this task:");
-        System.out.println("\t" + records.remove(index));
-        System.out.printf("Now you have %d tasks in the list.\n", records.size());
-        saveRecords();
-    }
-
-    public void markAsDone(int index) {
-        if (isIndexOutOfBound(index)) {
-            System.out.println("Invalid input! (Index cannot be out of bounds)");
-            return;
-        }
-        records.get(index).setAsDone();
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println("\t" + records.get(index));
-        saveRecords();
-    }
-
-    public void showList() {
-        boolean hasRecord = false;
-        System.out.println("Here is your task List:");
-        for (int i = 0; i < records.size(); i++) {
-            System.out.println((i + 1) + ". " + records.get(i));
-            hasRecord = true;
-        }
-        if (!hasRecord) {
-            System.out.println("(Null)");
-        }
-    }
-
-    public void findRecords(String keyword) {
-        boolean hasRecord = false;
-        System.out.printf("Here is your task List with keyword %s:\n", keyword);
-        for (int i = 0; i < records.size(); i++) {
-            if (records.get(i).getTaskName().contains(keyword)) {
-                System.out.println((i + 1) + ". " + records.get(i));
-                hasRecord = true;
-            }
-        }
-        if (!hasRecord) {
-            System.out.println("(Null)");
         }
     }
 
@@ -193,16 +250,5 @@ public class Record {
 
     private void showInvalidEmptyDescription() {
         System.out.println("The description of a task cannot be empty.");
-    }
-
-    public void searchDate(String date) {
-        int counter = 1;
-        DateTime dateTime = new DateTime(date);
-        System.out.printf("Here is your task in %s:\n", date);
-        for (Task task : records) {
-            if(task.getDate().equals(dateTime.getDate())){
-                System.out.println(counter++ + ". " + task);
-            }
-        }
     }
 }

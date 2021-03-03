@@ -1,7 +1,5 @@
 package duke.task;
 
-import duke.task.dateTime.DateTime;
-
 import java.time.LocalDate;
 
 abstract public class Task {
@@ -19,10 +17,6 @@ abstract public class Task {
         isDone = true;
     }
 
-    public boolean isDone() {
-        return isDone;
-    }
-
     public String getTaskName() {
         return taskName;
     }
@@ -35,7 +29,7 @@ abstract public class Task {
         return mark + taskName;
     }
 
-    public String getSaveString() {
+    public String toSave() {
         String mark = isDone ? "|1|" : "|0|";
         return mark + taskName;
     }
