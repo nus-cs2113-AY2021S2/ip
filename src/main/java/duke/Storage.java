@@ -18,7 +18,7 @@ import static duke.TaskList.tasks;
 
 public class Storage {
 
-    public static ArrayList<Tasks> updatedTasksList;
+    public static ArrayList<Tasks> updatedTasksList = new ArrayList<>();
 
     public static String storagePath;
     public static int tasksCount;
