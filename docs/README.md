@@ -1,5 +1,6 @@
 # User Guide
 - [Introduction](#2)
+- [Setup](#3)
 - [Notes](#1)
 -  [Features](#a) 
    - [Adding tasks](#a)
@@ -18,7 +19,7 @@
 
 Your very own application to manage your to-do list!
 
-# <a name="2"></a> Setup
+# <a name="3"></a> Setup
 
 &nbsp;&nbsp;&nbsp;&nbsp; 1. Copy the jar file 
 
