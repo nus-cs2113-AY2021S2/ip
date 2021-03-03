@@ -46,8 +46,8 @@ public class Todo extends Task {
     }
 
     /**
-     *
-     * @return the date of the task, which is null as Todo objects does not have a date attribute
+     * Todo tasks does not have a date, thus null is returned.
+     * @return null
      */
     public LocalDate getDate() {
         return null;

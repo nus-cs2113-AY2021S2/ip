@@ -114,7 +114,7 @@ public class Output {
      */
     public static String printFilteredTaskList(ArrayList<Task> taskList) {
         if (taskList.isEmpty()) {
-            return "You do not have any tasks that matches the keyword.";
+            return "You do not have any tasks that matches the query.";
         }
         String listTasksMessage = "Here are the tasks that matches:\n";
         for (int i = 0; i < taskList.size(); i++) {

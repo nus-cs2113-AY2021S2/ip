@@ -1,6 +1,7 @@
 package Duke;
 
 import Duke.Tasks.Task;
+import Duke.Tasks.Todo;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -69,8 +70,11 @@ public class TaskList {
         ArrayList<Task> tasksWithDate = new ArrayList<Task>();
         for (int i = 0; i < tasks.size(); i++) {
             Task currentTask = tasks.get(i);
+            if (currentTask instanceof Todo) {
+                continue;
+            }
             String taskDateInString = currentTask.getDate().toString();
-            if (currentTask.getDate() != null && taskDateInString.equals(queryDate.toString())) {
+            if (taskDateInString.equals(queryDate.toString())) {
                 tasksWithDate.add(currentTask);
             }
         }

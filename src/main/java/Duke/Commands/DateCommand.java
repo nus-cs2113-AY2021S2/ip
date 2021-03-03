@@ -31,6 +31,6 @@ public class DateCommand extends Command {
      */
     public String execute(TaskList taskList, Storage storage) {
         ArrayList<Task> filteredTasks = taskList.findByDate(queryDate);
-        return Output.printTaskList(filteredTasks);
+        return Output.printFilteredTaskList(filteredTasks);
     }
 }
