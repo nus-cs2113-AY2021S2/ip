@@ -1,10 +1,16 @@
+import ManagerClasses.InputManager;
+import ManagerClasses.PrintManager;
+
+/**
+ * Duke's main class where greeting messages are printed and InputManager is initialized
+ */
 public class Duke {
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        PrintManager.showLogo();
+        PrintManager.showGreetMessage();
+
+        // Initialize InputManager
+        InputManager inputManager = new InputManager();
+        inputManager.manageInput();
     }
 }
