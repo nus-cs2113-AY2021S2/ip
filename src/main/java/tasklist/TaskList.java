@@ -1,9 +1,7 @@
 package tasklist;
 
 import commands.Task;
-
 import java.util.ArrayList;
-
 import ui.Ui;
 
 
@@ -69,7 +67,7 @@ public class TaskList {
     }
 
     public void printList() {
-        if(taskCount>0) {
+        if (taskCount > 0) {
             System.out.println(border);
             System.out.println("    Here are the tasks in your list:");
             for (int i = 0; i < taskCount; i++) {
@@ -77,14 +75,28 @@ public class TaskList {
             }
             System.out.println(" ");
             System.out.println(border);
-        }
-        else{
+        } else {
             System.out.println(border);
             System.out.println("    The list is empty");
             System.out.println(" ");
             System.out.println(border);
         }
     }
+
+    public void find(String keyword) {
+        int currentListNumber = 1;
+        System.out.println(border);
+        System.out.println("    Here are the matching tasks in your list:");
+        for (int i = 0; i < taskCount; i++) {
+            if ((tasks.get(i).getTask()).contains(keyword)) {
+                System.out.println("    " + currentListNumber + ". " + tasks.get(i));
+                currentListNumber++;
+            }
+        }
+        System.out.println(" ");
+        System.out.println(border);
+    }
+
 
     public Task printCurrentTask(int taskNum) {
         return tasks.get(taskNum);
