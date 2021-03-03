@@ -232,54 +232,37 @@ Bye. Hope to see you again soon!
 ___________________________________________
 ```
 ### Help
-Prints available commands  
-Format: `help`  
-Example:
-```$xslt
-help
-```
-Outcome:
-```
-        [List of commands available]
 
-        list: Display all tasks in the list.
-                Example: list
-
-        todo: Add a todo task.
-                Example: todo borrow book
-
-        deadline: Add a deadline.
-                Example: deadline return book /by Sunday
-
-        event: Add a event.
-                Example: event project meeting /at Mon 2-4pm
-
-        done: Mark a task as done.
-                Example: done 2
-
-        timeline: Print tasks in time order
-                Example: timeline
-
-        bye: Exit the program.
-                Example: bye
-
-```
-### Help
-
-* Display all acceptable commands
-* Format: `help`
+* Display all acceptable commands  
+* Format: `help`  
 * Example of expected output:
 ```
 ___________________________________________
 Here are some available commands and their corresponding input format: 
-list: Display all tasks in the list. Format: list
-todo: Add a todo task. Format: todo read a book
-deadline: Add a deadline task. Format: deadline submit a report /by 05 Mar
-event: Add an event task. Format: event project meeting /at Mon 2-4pm
-done: Mark a task as done. Format: done 1
-find: find all tasks contain the input keyword. Format: find book
-date: find all tasks occurring the specific date. Format: date 2021-02-28
-bye: Exit the program. Format: bye
+
+list: Display all tasks in the list.
+Format: list
+
+todo: Add a todo task. 
+Format: todo read a book
+
+deadline: Add a deadline task.
+Format: deadline submit a report /by 05 Mar
+
+event: Add an event task.
+Format: event project meeting /at Mon 2-4pm
+       
+done: Mark a task as done.
+Format: done 1
+
+find: Find all tasks contain the input keyword.
+Format: find book
+
+date: Find all tasks occurring the specific date.
+Format: date 2021-02-28
+        
+bye: Exit the program.
+Format: bye
 
 ___________________________________________
 ```
