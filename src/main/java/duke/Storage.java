@@ -11,6 +11,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.MonthDay;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -60,23 +63,29 @@ public class Storage {
             if (Files.exists(Paths.get(this.filePath))) {
                 File f = new File(filePath);
                 Scanner scanner = new Scanner(f);
+                boolean isDone;
                 while (scanner.hasNext()) {
                     String taskString = scanner.nextLine();
+                    if (taskString.contains("[X]")) {
+                        isDone = true;
+                    } else {
+                        isDone = false;
+                    }
                     if (taskString.startsWith("[E]")) {
                         String description = taskString.substring(7, taskString.indexOf('(')-1);
                         String timing = taskString.substring(taskString.indexOf('(') + 5, taskString.indexOf(')'));
-                        tasks.add(Task.taskCount, new Event(description, timing));
+                        tasks.add(Task.taskCount, new Event(description, timing, isDone));
                     } else if (taskString.startsWith("[D]")) {
                         String description = taskString.substring(7, taskString.indexOf('(')-1);
                         String timing = taskString.substring(taskString.indexOf('(') + 5, taskString.indexOf(')'));
-                        tasks.add(Task.taskCount, new Deadline(description, timing));
+                        MonthDay monthDay = MonthDay.parse(timing, DateTimeFormatter.ofPattern("d MMM YYYY"));
+                        LocalDate deadline = monthDay.atYear(Integer.parseInt(timing.split(" ")[2]));
+                        tasks.add(Task.taskCount, new Deadline(description, deadline, isDone));
                     } else if (taskString.startsWith("[T]")) {
                         String description = taskString.substring(7);
-                        tasks.add(Task.taskCount, new Todo(description));
+                        tasks.add(Task.taskCount, new Todo(description, isDone));
                     }
-                    if (taskString.contains("[X]")) {
-                        tasks.get(Task.taskCount - 1).markAsDone();
-                    }
+
                 }
             }
         } catch (FileNotFoundException e) {

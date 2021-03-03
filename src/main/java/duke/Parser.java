@@ -8,6 +8,8 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -94,24 +96,26 @@ public class Parser {
         if (input.startsWith("deadline")) {
             try {
                 inputArray = extractDetailsFromInput(input, "deadline");
-            } catch (ArrayIndexOutOfBoundsException e) {
+                //parse for dates
+                LocalDate deadline = LocalDate.parse(inputArray[1]);
+                return new Deadline(inputArray[0], deadline);//inputArray[1]);
+            } catch (ArrayIndexOutOfBoundsException | DateTimeParseException e) {
                 throw new DukeException(TaskType.DEADLINE);
             }
-            return new Deadline(inputArray[0], inputArray[1]);
         } else if (input.startsWith("event")) {
             try {
                 inputArray = extractDetailsFromInput(input, "event");
+                return new Event(inputArray[0], inputArray[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException(TaskType.EVENT);
             }
-            return new Event(inputArray[0], inputArray[1]);
         } else if (input.startsWith("todo")){
             try {
                 inputArray = extractDetailsFromInput(input, "todo");
+                return new Todo(inputArray[0]);
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException(TaskType.TODO);
             }
-            return new Todo(inputArray[0]);
         } else {
             throw new DukeException(TaskType.INVALID);
         }
