@@ -1,3 +1,6 @@
+/*
+* The Storage class deals with saving tasks into files and loading tasks from files.
+* */
 package storage;
 
 import java.util.Scanner;

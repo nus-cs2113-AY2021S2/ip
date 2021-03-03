@@ -1,3 +1,6 @@
+/*
+* The TaskListStores the task list and has operations to add/delete tasks
+*/
 package tasklist;
 
 import commands.Task;
@@ -15,11 +18,17 @@ public class TaskList {
 
     private int taskCount = 0;
     public static final String border = "    ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――";
-
+    /*
+    * The add task method within the TaskList class adds tasks from the list
+    * @params task contains information of the task to be added to the list
+    * */
     public void addTask(Task task) {
         tasks.add(task);
     }
-
+    /*
+    The deleteTask method within the TaskList class deletes tasks from the list
+    * @params taskNum specifies the task to be deleted
+    * */
     public void deleteTask(int taskNum) {
         if (taskNum < taskCount && taskNum >= 0) {
             System.out.println(border);

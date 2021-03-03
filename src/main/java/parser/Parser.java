@@ -1,3 +1,6 @@
+/*
+* The Parser class deals with making sense of the user input
+* */
 package parser;
 
 import exceptions.DukeException;
@@ -37,6 +40,10 @@ public class Parser {
             return "invalid_user_input";
         }
     }
+    /*
+    * The processTodo method within the Parser class processes the user input into the required format for the Todo Class
+    * @params userInput is a String[] that stores the user input
+    * */
 
     public String processTodo(String[] userInput) {
         String description = "";
@@ -62,7 +69,10 @@ public class Parser {
         }
         return description;
     }
-
+    /*
+     * The processEvent method within the Parser class processes the user input into the required format for the Event Class
+     * @params userInput is a String[] that stores the user input
+     * */
     public String[] processEvent(String[] userInput) {
         String[] information = new String[2];
         information[0] = "";
@@ -97,7 +107,10 @@ public class Parser {
         }
         return information;
     }
-
+    /*
+     * The processDeadline method within the Parser class processes the user input into the required format for the Deadline Class
+     * @params userInput is a String[] that stores the user input
+     * */
     public String[] processDeadline(String[] userInput) {
         String[] information = new String[2];
         information[0] = "";
