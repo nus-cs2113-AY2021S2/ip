@@ -21,14 +21,18 @@ public class Duke {
      * Runs the duke program
      */
     public void run() {
-        boolean isBye;
+        boolean isBye = false;
         ui.printMenu();
         do {
-            String userInput = ui.getUserInput();
-            String newUserInput = userInput.toUpperCase();
-            Command command = Parser.parseCommand(newUserInput.toUpperCase());
-            command.executeCommand(newUserInput, taskList);
-            isBye = ui.sayGoodBye(newUserInput);
+            try {
+                String userInput = ui.getUserInput();
+                String newUserInput = userInput.toUpperCase();
+                Command command = Parser.parseCommand(newUserInput.toUpperCase());
+                command.executeCommand(newUserInput, taskList);
+                isBye = ui.sayGoodBye(newUserInput);
+            }catch (DukeException e){
+                ui.printErrorMessage(e.getMessage());
+            }
         } while (!isBye);
     }
 

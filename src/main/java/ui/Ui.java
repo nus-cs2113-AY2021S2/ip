@@ -18,7 +18,7 @@ public class Ui {
         System.out.println("> Use the keyword deadlines followed \"/by\"");
         System.out.println("> Use the keyword event followed by \"/at\"");
         System.out.println("> Use the keyword list to print");
-        System.out.println("> Use keyword \"Done <Number>\"  to mark task as done!");
+        System.out.println("> Use keyword \"done <Number>\"  to mark task as done!");
         System.out.println("> Use the keyword \"bye\" to exit");
         System.out.println("> Use the keyword \"menu\" to bring up the menu");
         System.out.println("Input here: ");
@@ -30,17 +30,15 @@ public class Ui {
         return userInput;
     }
 
-    private void printErrorDivider() {
-        System.out.println(ERROR_DIVIDER_LINE);
-    }
 
     public void printErrorMessage(String... messages) {
-        printErrorDivider();
+        System.out.println(ERROR_DIVIDER_LINE);
         print("Error Message: ");
         for (String message: messages) {
             print(message);
         }
-        printErrorDivider();
+        System.out.println(ERROR_DIVIDER_LINE);
+        System.out.println("Enter next command: ");
     }
 
     public void printMessage(String ...messages){

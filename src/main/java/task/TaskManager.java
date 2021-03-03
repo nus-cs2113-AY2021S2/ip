@@ -6,13 +6,12 @@ import ui.Ui;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.ArrayList;
 
 public class TaskManager {
     public ArrayList<Task> taskList;
-    private Ui ui;
-    private Storage storage;
+    private final Ui ui;
+    private final Storage storage;
     private Task task;
 
     /**
@@ -48,25 +47,34 @@ public class TaskManager {
      * Deletes the task from the arrayList based on the index given
      * @param taskNoDelete task number to be deleted
      */
-    public void deleteTask(int taskNoDelete){
-        Task task = taskList.get(taskNoDelete-1);
-        taskList.remove(taskNoDelete-1);
-        ui.printMessage("Got it I have deleted this task");
-        ui.print(taskNoDelete + ":" +  task.toString());
-        ui.printMessage(ui.DIVIDER,
-                "Enter next command: ");
+    public void deleteTask(int taskNoDelete) throws DukeException{
+        try {
+
+            Task task = taskList.get(taskNoDelete - 1);
+            taskList.remove(taskNoDelete - 1);
+            ui.printMessage("Got it I have deleted this task");
+            ui.print(taskNoDelete + ":" + task.toString());
+            ui.printMessage(ui.DIVIDER,
+                    "Enter next command: ");
+        }catch (IndexOutOfBoundsException e){
+            throw new DukeException("The index is out of bounds!");
+        }
     }
 
     /**
      * Marks the task as done base on the index given
      * @param taskNoDone task number to be marked done
      */
-    public void markDone(int taskNoDone){
-        taskList.get(taskNoDone-1).setDone();
-        ui.printMessage("I have marked this task as done: " +
-                taskList.get(taskNoDone-1).toString(),
-                ui.DIVIDER,
-                "Enter next command: ");
+    public void markDone(int taskNoDone) throws DukeException{
+        try {
+            taskList.get(taskNoDone - 1).setDone();
+            ui.printMessage("I have marked this task as done: " +
+                            taskList.get(taskNoDone - 1).toString(),
+                    ui.DIVIDER,
+                    "Enter next command: ");
+        }catch (IndexOutOfBoundsException e){
+            throw new DukeException("The index number is out of range");
+        }
     }
 
     /**
