@@ -56,7 +56,20 @@ public class Output {
         if (taskList.isEmpty()) {
             return "You do not have any tasks currently.";
         }
-        String listTasksMessage = "";
+        String listTasksMessage = "Here are the list of tasks that you have\n";
+        for (int i = 0; i < taskList.size(); i++) {
+            listTasksMessage += String.format("%d. ", i + 1);
+            listTasksMessage += printTask(taskList.get(i));
+            listTasksMessage += "\n";
+        }
+        return listTasksMessage;
+    }
+
+    public static String printFilteredTaskList(ArrayList<Task> taskList) {
+        if (taskList.isEmpty()) {
+            return "You do not have any tasks that matches the keyword";
+        }
+        String listTasksMessage = "Here are the tasks that matches:\n";
         for (int i = 0; i < taskList.size(); i++) {
             listTasksMessage += String.format("%d. ", i + 1);
             listTasksMessage += printTask(taskList.get(i));
