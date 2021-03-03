@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class Logic {
     public static void loop() {
-        TaskList taskList = new TaskList();
+        TaskList taskList = TextFile.loadTaskList();
         while (true) {
             Scanner scan = new Scanner(System.in);
             String command = scan.next();
@@ -57,7 +57,7 @@ public class Logic {
             case "todo": {
                 String taskName = scan.nextLine();
                 Todo newTask = new Todo(taskName.trim());
-                taskList.addTask(newTask);
+                taskList.addAndPrint(newTask);
                 break;
             }
             case "deadline": {
@@ -70,7 +70,7 @@ public class Logic {
                 }
                 String endTime = scan.nextLine();
                 Deadline newDeadline = new Deadline(taskName.trim(), endTime.trim());
-                taskList.addTask(newDeadline);
+                taskList.addAndPrint(newDeadline);
                 break;
             }
             case "event": {
@@ -83,7 +83,12 @@ public class Logic {
                 }
                 String timePeriod = scan.nextLine();
                 Event newEvent = new Event(taskName.trim(), timePeriod.trim());
-                taskList.addTask(newEvent);
+                taskList.addAndPrint(newEvent);
+                break;
+            }
+            case "save": {
+                TextFile.saveData(taskList);
+                Output.printSaved();
                 break;
             }
             default: {

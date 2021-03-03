@@ -19,4 +19,16 @@ public class Todo extends Task {
         return outputString;
     }
 
+    public String toStringSave() {
+        String saveString = "T | ";
+        if (isDone) {
+            saveString += "1 | ";
+        }
+        else {
+            saveString += "0 | ";
+        }
+        saveString = saveString + name;
+        return saveString;
+    }
+
 }

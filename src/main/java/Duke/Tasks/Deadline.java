@@ -22,4 +22,16 @@ public class Deadline extends Task {
         return outputString;
     }
 
+    public String toStringSave() {
+        String saveString = "D | ";
+        if (isDone) {
+            saveString += "1 | ";
+        }
+        else {
+            saveString += "0 | ";
+        }
+        saveString = saveString + name + " | " + endTime;
+        return saveString;
+    }
+
 }

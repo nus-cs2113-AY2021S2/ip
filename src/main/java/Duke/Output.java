@@ -15,7 +15,7 @@ public class Output {
         System.out.println(logo);
     }
 
-    public static void printLine() {
+    private static void printLine() {
         System.out.println("____________________________________________________________");
     }
 
@@ -24,6 +24,12 @@ public class Output {
         System.out.println("Hello! I'm Duke");
         printLogo();
         System.out.println("What can I do for you?");
+        printLine();
+    }
+
+    public static void printSaved() {
+        printLine();
+        System.out.println("Your data has been saved.");
         printLine();
     }
 
@@ -38,6 +44,12 @@ public class Output {
     public static void printUnknownCommandError() {
         printLine();
         System.out.println("\u2639 OOPS!! I'm sorry, but I don't know what that means :-(");
+        printLine();
+    }
+
+    public static void printGeneralError() {
+        printLine();
+        System.out.println("An error has occurred. Please check your commands again");
         printLine();
     }
 
