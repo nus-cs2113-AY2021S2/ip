@@ -4,7 +4,7 @@ import ExceptionClasses.EmptyByOrAtWhenException;
 import ExceptionClasses.EmptyTaskDescriptionException;
 import ExceptionClasses.TooManyArgumentsException;
 
-public class Command {
+public class CommandManager {
     private CommandEnum commandType;
     private String description;
     private String when;
@@ -14,7 +14,7 @@ public class Command {
      * Constructor for the Command class.
      * @param userInput the input received from the user in the terminal.
      */
-    public Command(String userInput) {
+    public CommandManager(String userInput) {
         try {
             setCommandFromInput(userInput);
         } catch(EmptyByOrAtWhenException e) {

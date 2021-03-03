@@ -1,6 +1,6 @@
 package ManagerClasses;
 
-import CommandClasses.Command;
+import CommandClasses.CommandManager;
 import ExceptionClasses.EmptyByOrAtWhenException;
 import ExceptionClasses.EmptyTaskDescriptionException;
 
@@ -36,9 +36,9 @@ public class InputManager {
     private void inputLoop() {
         while(true) {
             String input = getUserInput();
-            Command command = new Command(input);
+            CommandManager commandManager = new CommandManager(input);
 
-            switch (command.getCommandType()) {
+            switch (commandManager.getCommandType()) {
             case BYE:
                 PrintManager.printByeMessage();
                 return;
@@ -46,52 +46,76 @@ public class InputManager {
                 taskManager.showTasks();
                 break;
             case DONE:
-                taskManager.markDone(command.getTaskNum());
-                storageManager.saveTasksInTxtFile();
+                executeDoneCommand(commandManager);
                 break;
             case DEADLINE:
-                try {
-                    taskManager.addDeadlineToList(command.getDescription(), command.getWhen());
-                    storageManager.saveTasksInTxtFile();
-                } catch (EmptyTaskDescriptionException e) {
-                    System.out.println("Error -> Empty task description");
-                } catch (EmptyByOrAtWhenException | NullPointerException e) {
-                    System.out.println("Error -> Deadline by when is not stated");
-                }
+                executeDeadlineCommand(commandManager);
                 break;
             case EVENT:
-                try {
-                    taskManager.addEventToList(command.getDescription(), command.getWhen());
-                    storageManager.saveTasksInTxtFile();
-                } catch (EmptyTaskDescriptionException e) {
-                    System.out.println("Error -> Empty task description");
-                } catch (EmptyByOrAtWhenException | NullPointerException e) {
-                    System.out.println("Error -> Event at when is not stated");
-                }
+                executeEventCommand(commandManager);
                 break;
             case TODO:
-                try {
-                    taskManager.addTodoToList(command.getDescription());
-                    storageManager.saveTasksInTxtFile();
-                } catch (EmptyTaskDescriptionException | NullPointerException e) {
-                    System.out.println("Error -> Empty task description");
-                }
+                executeTodoCommand(commandManager);
                 break;
             case DELETE:
-                taskManager.deleteTask(command.getTaskNum());
-                storageManager.saveTasksInTxtFile();
+                executeDeleteCommand(commandManager);
                 break;
             case FIND:
-                try {
-                    taskManager.findTasks(command.getDescription());
-                } catch (EmptyTaskDescriptionException e) {
-                    System.out.println("Error -> Please enter a keyword to search");
-                }
+                executeFindCommand(commandManager);
                 break;
             default:
                 PrintManager.printHelpMessage();
             }
             PrintManager.printBreakLine();
+        }
+    }
+
+    private void executeDoneCommand(CommandManager commandManager) {
+        taskManager.markDone(commandManager.getTaskNum());
+        storageManager.saveTasksInTxtFile();
+    }
+
+    private void executeFindCommand(CommandManager commandManager) {
+        try {
+            taskManager.findTasks(commandManager.getDescription());
+        } catch (EmptyTaskDescriptionException e) {
+            System.out.println("Error -> Please enter a keyword to search");
+        }
+    }
+
+    private void executeDeleteCommand(CommandManager commandManager) {
+        taskManager.deleteTask(commandManager.getTaskNum());
+        storageManager.saveTasksInTxtFile();
+    }
+
+    private void executeTodoCommand(CommandManager commandManager) {
+        try {
+            taskManager.addTodoToList(commandManager.getDescription());
+            storageManager.saveTasksInTxtFile();
+        } catch (EmptyTaskDescriptionException | NullPointerException e) {
+            System.out.println("Error -> Empty task description");
+        }
+    }
+
+    private void executeEventCommand(CommandManager commandManager) {
+        try {
+            taskManager.addEventToList(commandManager.getDescription(), commandManager.getWhen());
+            storageManager.saveTasksInTxtFile();
+        } catch (EmptyTaskDescriptionException e) {
+            System.out.println("Error -> Empty task description");
+        } catch (EmptyByOrAtWhenException | NullPointerException e) {
+            System.out.println("Error -> Event at when is not stated");
+        }
+    }
+
+    private void executeDeadlineCommand(CommandManager commandManager) {
+        try {
+            taskManager.addDeadlineToList(commandManager.getDescription(), commandManager.getWhen());
+            storageManager.saveTasksInTxtFile();
+        } catch (EmptyTaskDescriptionException e) {
+            System.out.println("Error -> Empty task description");
+        } catch (EmptyByOrAtWhenException | NullPointerException e) {
+            System.out.println("Error -> Deadline by when is not stated");
         }
     }
 

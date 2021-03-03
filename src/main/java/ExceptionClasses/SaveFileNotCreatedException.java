@@ -1,4 +1,4 @@
 package ExceptionClasses;
 
-public class SaveFileNotCreatedException extends Exception{
+public class SaveFileNotCreatedException extends Exception {
 }

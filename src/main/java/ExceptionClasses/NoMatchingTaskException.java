@@ -1,4 +1,4 @@
 package ExceptionClasses;
 
-public class NoMatchingTaskException extends Exception{
+public class NoMatchingTaskException extends Exception {
 }
