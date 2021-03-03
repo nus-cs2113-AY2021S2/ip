@@ -393,20 +393,21 @@ Back to [Table Of Contents](#toc)
 <a name="summary"></a>
 ### Command Summary  
 
-| Command      | Function |
-| :----      | :----      |
-| [help](#help)      | Prints the command formats that Duke will respond to.  |
-| [todo \<task name\>](#todo)   | Adds a To-Do to your list |
-| [deadline \<task name\> /by \<YYYY-MM-DD\> \<HH:MM\>](#deadline)   | Adds a Deadline to your list  |
-| [event \<task name\> /at \<YYYY-MM-DD\> \<HH:MM\>](#event)   | Adds an Event to your list |
-| [done \<task number\>](#done)   | Marks a task at task number in list as '_done_'|
-| [delete \<task number\>](#delete)   | Removes a task at task number from list|
-| [save](#save)   | Saves the current list in the _tasks.txt_ file.|
-| [list](#list)   | Prints all the current tasks along with dates and times|
-| [find \<common keyword in tasks\>](#find)   | Finds and filters out the tasks with a desired keyword|
-| [print type \<task type\>](#printtype)   | Prints out all tasks of a certain kind (e.g. deadlines, etc.) |
-| [print date \<task date YYYY-MM-DD\>](#printdate)   | Prints out all tasks with a certain date |
-| [print filepath](#printfilepath)   | Prints path of the _tasks.txt_ file.|
-| [bye](#bye)   | Exits the program.  |
+ Command  | Function 
+ :----  | :---- 
+ [help](#help)  | Prints the command formats that Duke will respond to.  
+ [todo \<task name\>](#todo)   | Adds a To-Do to your list 
+ [deadline \<task name\> /by \<YYYY-MM-DD\> \<HH:MM\>](#deadline)   | Adds a Deadline to your list  
+ [event \<task name\> /at \<YYYY-MM-DD\> \<HH:MM\>](#event)   | Adds an Event to your list 
+ [done \<task number\>](#done)   | Marks a task at task number in list as '_done_'
+ [delete \<task number\>](#delete)   | Removes a task at task number from list
+ [save](#save)   | Saves the current list in the _tasks.txt_ file
+ [list](#list)   | Prints all the current tasks along with dates and times
+ [find \<common keyword in tasks\>](#find)   | Finds and filters out the tasks with a desired keyword 
+ [print type \<task type\>](#printtype)   | Prints out all tasks of a certain kind (e.g. deadlines, etc.) 
+ [print date \<task date YYYY-MM-DD\>](#printdate)   | Prints out all tasks with a certain date 
+ [print filepath](#printfilepath)   | Prints path of the _tasks.txt_ file.
+ [bye](#bye)   | Exits the program. 
+
 
 Back to [Table Of Contents](#toc)
