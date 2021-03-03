@@ -1,0 +1,11 @@
+clear
+todo
+deadline /by empty input?
+event       how about some trailing spaces /at    
+deadline
+event
+todo add a proper task
+deadline a proper deadline /by 2021-04-20
+event exit this program /at 2021-04-20
+list
+bye

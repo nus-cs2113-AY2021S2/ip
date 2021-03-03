@@ -1,0 +1,9 @@
+clear
+list
+todo complete this project
+deadline CS2113T ip submission /by 2021-03-03
+list
+done 1
+event CS2101 lecture /at 2021-03-02
+list
+bye
