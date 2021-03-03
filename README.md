@@ -36,6 +36,7 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    | |_| | |_| |   <  __/
    |____/ \__,_|_|\_\___|
    ```
+
 ## Using Duke Project
 
 ### Help
@@ -43,6 +44,7 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
 * Display all acceptable commands
 * Format: `help`
 * Example of expected output:
+
 ```
 ___________________________________________
 Here are some available commands and their corresponding input format: 
@@ -72,19 +74,7 @@ bye: Exit the program.
 Format: bye
 
 ___________________________________________
-```
-### List
 
-* Display all recorded tasks in the list
-* Format: `list`
-* Example of expected output:
-```
-___________________________________________
-Here are the tasks in your list: 
-1. [T][✘] read a book
-2. [D][✘] submit a report (by: 05 Mar)
-3. [E][✘] project group meeting (at: 2-4 pm Sunday)
-___________________________________________
 ```
 
 ### Todo
@@ -93,6 +83,7 @@ ___________________________________________
 * Format: `todo DESCRIPTION`
 * Example: `todo read a book`
 * Example of expected output:
+
 ```
 ___________________________________________
 Got it. I've added this task: 
@@ -104,6 +95,7 @@ Exception:
 * No todo DESCRIPTION
 * Example: `todo`
 * Example of expected output:
+
 ```
 ___________________________________________
 🙁 OOPS!!! The description of a todo cannot be empty.
@@ -117,6 +109,7 @@ ___________________________________________
 * Format：`deadline DESCRIPTION /by BYTIME`
 * Example: `deadline submit a report /by 05 Mar`
 * Example of expected output:
+
 ```
 ___________________________________________
 Got it. I've added this task: 
@@ -128,6 +121,7 @@ Exception:
 * No deadline DESCRIPTION
 * Example: `deadline`
 * Example of expected output:
+
 ```
 ___________________________________________
 🙁 OOPS!!! The description of a deadline cannot be empty.
@@ -141,6 +135,7 @@ ___________________________________________
 * Format：`event DESCRIPTION /by ATTIME`
 * Example: `event project group meeting /at 2-4 pm Sunday`
 * Example of expected output:
+
 ```
 ___________________________________________
 Got it. I've added this task: 
@@ -152,10 +147,26 @@ Exception:
 * No event DESCRIPTION
 * Example: `event`
 * Example of expected output:
+
 ```
 ___________________________________________
 🙁 OOPS!!! The description of an event cannot be empty.
 Please input again!:)
+___________________________________________
+```
+
+### List
+
+* Display all recorded tasks in the list
+* Format: `list`
+* Example of expected output:
+
+```
+___________________________________________
+Here are the tasks in your list: 
+1. [T][✘] read a book
+2. [D][✘] submit a report (by: 05 Mar)
+3. [E][✘] project group meeting (at: 2-4 pm Sunday)
 ___________________________________________
 ```
 
@@ -165,6 +176,7 @@ ___________________________________________
 * Format: `done INDEX`
 * Example: 'done 1'
 * Example of expected output:
+
 ```
 ___________________________________________
 Nice! I've marked this task as done: 
@@ -175,6 +187,7 @@ Exception:
 * No done INDEX
 * Example: `done`
 * Example of expected output:
+
 ```
 ___________________________________________
 🙁 OOPS!!! The description of a done cannot be empty.
@@ -188,6 +201,7 @@ ___________________________________________
 * Format: 'delete INDEX'
 * Example: `delete 2`
 * Example of expected output:
+
 ```
 ___________________________________________
 Noted. I've removed this task: 
@@ -200,6 +214,7 @@ Exception:
 * No delete INDEX
 * Example: `delete`
 * Example of expected output:
+
 ```
 ___________________________________________
 🙁 OOPS!!! The description of a delete cannot be empty.
@@ -213,6 +228,7 @@ ___________________________________________
 * Format: `find KEYWORD`
 * Example: `find book`
 * Example of expected output:
+
 ```
 ___________________________________________
 Here are the matching tasks in your list: 
@@ -223,6 +239,7 @@ Exception:
 * No find DESCRIPTION
 * Example: `find`
 * Example of expected output:
+
 ```
 ___________________________________________
 🙁 OOPS!!! The description of a find cannot be empty.
@@ -236,6 +253,7 @@ ___________________________________________
 * Format: `date [yyy-mm-dd]`
 * Example: `date 2020-02-28`
 * Example of expected output:
+
 ```
 ___________________________________________
 Here are the tasks occurring on this specific date: 
@@ -246,6 +264,7 @@ Exception:
 * No date DESCRIPTION
 * Example: `date`
 * Example of expected output:
+
 ```
 ___________________________________________
 🙁 OOPS!!! The description of a date cannot be empty.
@@ -258,6 +277,7 @@ ___________________________________________
 * Exits this running program
 * Format: `bye`
 * Example of expected output:
+
 ```
 ___________________________________________
 Bye. Hope to see you again soon!
@@ -269,6 +289,7 @@ ___________________________________________
 * The command is not acceptable by Duke
 * Example: `balh` or `hi`
 * Example of expected output:
+
 ```
 ___________________________________________
 🙁 OOPS!!! I'm sorry, but I don't know what that means :-(
