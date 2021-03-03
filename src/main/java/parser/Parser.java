@@ -2,23 +2,15 @@ package parser;
 
 import exceptions.DukeException;
 
-import java.io.IOException;
-import java.io.FileNotFoundException;
-
-
 import java.util.Arrays;
 import java.util.List;
 
 public class Parser {
-    //protected String userCommand;
 
 
     public static final String border = "    ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――";
-    public static final List<String> commands = Arrays.asList("event", "deadline", "todo", "list", "done", "delete", "bye");
+    public static final List<String> commands = Arrays.asList("event", "deadline", "todo", "list", "done", "delete", "bye","find");
 
-    //    public Parser(String userCommand){
-//        this.userCommand = userCommand;
-//    }
     public String processUserCommand(String userCommand) {
         if (commands.contains(userCommand)) {
             switch (userCommand) {
@@ -36,6 +28,8 @@ public class Parser {
                 return "bye";
             case "delete":
                 return "delete";
+            case "find":
+                return "find";
             default:
                 return "invalid_user_input";
             }

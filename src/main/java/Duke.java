@@ -96,9 +96,12 @@ public class Duke {
                     } catch (IOException e) {
                         System.out.println("Unable to save the current list as a text file");
                     }
-                } else if (line.equals("list")) {
+                } else if (taskType.equals("list")) {
                     tasks.printList();
-                } else if (words[0].equals("delete")) {
+                } else if (taskType.equals("delete")) {
+                    if(words.length==1){
+                        throw new DukeException("unrecognized_input");
+                    }
                     int taskNum = Integer.parseInt(words[1]) - 1;
                     tasks.deleteTask(taskNum);
                     try {
@@ -106,6 +109,9 @@ public class Duke {
                     } catch (IOException e) {
                         System.out.println("Unable to save the current list as a text file");
                     }
+                } else if (taskType.equals("find")) {
+                    String keyword = words[1];
+                    tasks.find(keyword);
                 } else {
                     throw new DukeException("unrecognized_input");
                 }
