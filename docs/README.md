@@ -19,10 +19,10 @@ list
 Output:
 ```text
 Here are the tasks in your list:
-1.[T][✘] dance
-2.[D][✘] Finish CS3245 (by: Thurs 2pm)
-3.[E][✘] sleep (at: 2pm-4pm)
-4.[T][✘] danceeeee
+1.[T][ ] dance
+2.[D][ ] Finish CS3245 (by: Thurs 2pm)
+3.[E][ ] sleep (at: 2pm-4pm)
+4.[T][ ] danceeeee
 ```
 ### Delete tasks : `delete`
 Delete task using task number
@@ -37,7 +37,7 @@ delete 3
 Output:
 ```text
 Noted. I've removed this task:
-[E][✘] sleep (at: 2pm-4pm)
+[E][ ] sleep (at: 2pm-4pm)
 Now you have 3 tasks in the list.
 ```
 ### Mark task as completed: `done`
@@ -54,7 +54,7 @@ done 1
 Output:
 ```text
 Nice! I've marked this task as done:
-[T][✓]  dance
+[T][X]  dance
 ```
 ### Add a todo task: `todo`
 Add a todo task to the task list
@@ -68,7 +68,7 @@ todo run
 Output:
 ```text
 Got it. I've added this task: 
-    [T][✘]  run
+    [T][ ]  run
 Now you have 5 task(s) in the list.
 ```
 ### Add a deadline task: `deadline`
@@ -83,7 +83,7 @@ deadline submit CS3223 Project /by Sunday 2359
 Output:
 ```text
 Got it. I've added this task: 
-    [D][✘]  submit CS3223 Project (by: Sunday 2359)
+    [D][ ]  submit CS3223 Project (by: Sunday 2359)
 Now you have 6 task(s) in the list.
 ```
 ### Add an event task: `event`
@@ -99,7 +99,7 @@ event attend John's Birthday Party /at Monday 1430 to 1530
 Output:
 ```text
 Got it. I've added this task: 
-    [E][✘]  attend John's Birthday Party (at: Monday 1430 to Monday 1530)
+    [E][ ]  attend John's Birthday Party (at: Monday 1430 to Monday 1530)
 Now you have 7 task(s) in the list.
 ```
 ### Find a task: `find`
@@ -115,7 +115,7 @@ find danceee
 Output:
 ```text
 Here are the matching tasks in your list: 
-1.[T][✘] danceeeee
+1.[T][ ] danceeeee
 ```
 ### Terminate Program: `bye`
 Quit program
