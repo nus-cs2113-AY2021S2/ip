@@ -391,7 +391,8 @@ Back to [Table Of Contents](#toc)
 Back to [Table Of Contents](#toc)
 
 <a name="summary"></a>
-### Command Summary
+### Command Summary  
+
 | Command      | Function |
 | :----      | :----      |
 | [help](#help)      | Prints the command formats that Duke will respond to.  |
