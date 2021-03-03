@@ -48,4 +48,5 @@ public class Ui {
     public void showNullPointerError() {
         System.out.println("Null Pointer Error :((");
     }
+  
 }
