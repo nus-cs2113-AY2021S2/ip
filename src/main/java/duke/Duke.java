@@ -26,10 +26,11 @@ public class Duke {
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.loadPrevListIntoNewList());
+        } catch (NullPointerException e) {
+            ui.showNullPointerError();
+            tasks = new TaskList();
         } catch (IOException e) {
             ui.showLoadingError();
-            tasks = new TaskList();
-        } catch (NullPointerException e) {
             tasks = new TaskList();
         }
     }

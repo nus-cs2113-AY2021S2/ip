@@ -9,7 +9,7 @@ public class Ui {
     public static Scanner in = new Scanner(System.in);
 
     //deal with new user input:
-    public Ui(){
+    public Ui() {
 
     }
 
@@ -54,6 +54,10 @@ public class Ui {
      */
     public static void showLoadingError() {
         System.out.println("Loading Error :((");
+    }
+
+    public void showNullPointerError() {
+        System.out.println("Null Pointer Error :((");
     }
 
 }
