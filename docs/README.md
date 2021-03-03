@@ -233,8 +233,8 @@ ___________________________________________
 ```
 ### Help
 
-* Display all acceptable commands
-* Format: `help`
+* Display all acceptable commands  
+* Format: `help`  
 * Example of expected output:
 
 ```
