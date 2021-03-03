@@ -90,6 +90,28 @@ public class TaskList {
         }
     }
 
+    public static void findTask(String description){
+        /**
+         * Finds and prints tasks which task's description
+         * contains the user input.
+         */
+        int matchingTasks = 0;
+        String keyword = description.replace("find ", "");
+        for(Task t : tasks){
+            if (t.getDescription().contains(keyword)) {
+                if (matchingTasks == 0) {
+                    System.out.println("\tHere are the matching tasks in your list:");
+                }
+                String output = String.format("%02d. %s", matchingTasks+1, t);
+                System.out.println("\t" + output);
+                matchingTasks++;
+            }
+        }
+        if (matchingTasks == 0) {
+            System.out.println("\tNo tasks with matching description is found.");
+        }
+    }
+
     public static void setupTasks() throws FileNotFoundException,
             MissingDeadlineException, MissingEventTimeException {
         // Reads in current tasks when main() starts running.
