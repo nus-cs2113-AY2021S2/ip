@@ -43,7 +43,7 @@ public class Storage {
             loadedCommand = input.nextLine();
             words = loadedCommand.split(",");
 
-            if (words[words.length-1].contains("Y")) {
+            if (words[words.length - 1].contains("Y")) {
                 isDone = true;
             } else {
                 isDone = false;
@@ -86,8 +86,8 @@ public class Storage {
     }
 
     /**
-     * Saves the tasks into the file at the specified path
-     * Throws IOException if the path given is invalid
+     * Saves the tasks into the file at the specified path Throws IOException if the path given is
+     * invalid
      */
     public static void saveData() {
         try {
@@ -101,8 +101,7 @@ public class Storage {
     }
 
     /**
-     * Creates a file at the specific path
-     * Throws IOException when the path given is invalid
+     * Creates a file at the specific path Throws IOException when the path given is invalid
      */
     public static void createFile() {
         try {

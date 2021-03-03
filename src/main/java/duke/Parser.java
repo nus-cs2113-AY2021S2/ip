@@ -34,7 +34,7 @@ public class Parser {
         } else if (words[0].equals("todo") || words[0].equals("deadline") || words[0]
             .equals("event")) {
             return new AddCommand(command);
-        } else if (command.equals("bye")) {
+        } else if (command.contains("bye")) {
             return new ByeCommand(command);
         } else {
             throw new NullPointerException();

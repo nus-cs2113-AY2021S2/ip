@@ -20,9 +20,10 @@ public class DoneCommand extends Command {
      * Carries out the done command and marks the specified task as done in the task list
      * @param taskList the Task List object which has the current tasks
      * @param ui The Ui object for user to interact with
+     * Throws IndexOutOfBoundsException when the index number entered is invalid
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws IndexOutOfBoundsException {
         if (!isValidInput()) {
             Ui.printCommandIsInvalid();
             return;

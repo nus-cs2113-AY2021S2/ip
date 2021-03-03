@@ -31,7 +31,8 @@ public class ListCommand extends Command {
             return;
         }
         if (TaskList.getListSize() == 0) {
-            throw new IndexOutOfBoundsException();
+            Ui.printListIsEmpty();
+            return;
         }
         for (int i = 1; i <= TaskList.getListSize(); ++i) {
             System.out.print(i + ". ");

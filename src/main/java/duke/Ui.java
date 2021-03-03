@@ -19,6 +19,10 @@ public class Ui {
         System.out.println("No matching results found");
     }
 
+    public static void printIndexOfOfBounds() {
+        System.out.println("Please enter a valid index number");
+    }
+
     public  void printBye() {
         System.out.println("Bye. Hope to see you again soon!");
     }
