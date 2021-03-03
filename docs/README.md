@@ -46,13 +46,13 @@ Your very own application to manage your to-do list!
 ## <a name="a"></a> Adding tasks: Todo
 **Description:**
 
-Adding a simple task using the todo command
+&nbsp;&nbsp;&nbsp;&nbsp; Adding a simple task using the `todo` command
 
 **Formatting:**
 
-`todo` [task description]
+&nbsp;&nbsp;&nbsp;&nbsp; `todo` [task description]
 
-**Examples**
+**Examples:**
 
 &nbsp;&nbsp;&nbsp;&nbsp; Adding the task "read shakespeare"
 
@@ -62,7 +62,7 @@ Adding a simple task using the todo command
 
 &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; `todo finish java quiz`
 
-**Example output**
+**Example output:**
 ```
 todo read shakespeare
 ____________________________________________________________
@@ -200,7 +200,7 @@ ____________________________________________________________
 
 **Formatting:**
 
-&nbsp;&nbsp;&nbsp;&nbsp;`find [task description]`
+&nbsp;&nbsp;&nbsp;&nbsp; `find [task description]`
 
 **Examples**
 
@@ -208,7 +208,7 @@ ____________________________________________________________
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `find read shakespeare`
 
-&nbsp;&nbsp;&nbsp;&nbsp;Find any tasks with the word book description
+&nbsp;&nbsp;&nbsp;&nbsp; Find any tasks with the word book description
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`find book`
 
