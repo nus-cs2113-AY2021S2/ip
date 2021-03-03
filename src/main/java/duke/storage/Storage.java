@@ -1,7 +1,7 @@
 package duke.storage;
 
 import duke.Command;
-import duke.TaskList;
+import duke.list.TaskList;
 import duke.exceptions.InvalidCommandException;
 import duke.parser.Parser;
 import duke.task.Deadline;

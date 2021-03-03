@@ -1,5 +1,6 @@
-package duke;
+package duke.list;
 
+import duke.Command;
 import duke.exceptions.EmptyDescriptionException;
 import duke.parser.Parser;
 import duke.task.Deadline;

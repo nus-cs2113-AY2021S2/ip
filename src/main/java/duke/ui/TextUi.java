@@ -1,7 +1,7 @@
 package duke.ui;
 
 import duke.Command;
-import duke.TaskList;
+import duke.list.TaskList;
 import duke.parser.Parser;
 import duke.task.Task;
 
