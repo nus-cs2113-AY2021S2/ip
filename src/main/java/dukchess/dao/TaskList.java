@@ -15,20 +15,12 @@ import dukchess.entity.Task;
 import dukchess.entity.Todo;
 
 public class TaskList extends ArrayList<Task> {
-    private File taskFile;
     private FileWriter taskFileWriter;
     private Scanner taskFileScanner;
 
     public TaskList(File taskFile) throws IOException {
         super();
-        this.taskFile = taskFile;
-        initializeFileAccessors(taskFile);
-        initializeFromFile();
-    }
-
-    private void initializeFileAccessors(File taskFile) throws IOException {
-        this.taskFileScanner = new Scanner(taskFile);
-        this.taskFileWriter = new FileWriter(taskFile, true);
+        initializeFromFile(taskFile);
     }
 
     public void flushTaskList() {
@@ -45,14 +37,15 @@ public class TaskList extends ArrayList<Task> {
         }
     }
 
-    private void initializeFromFile() {
+    private void initializeFromFile(File taskFile) throws IOException {
         if (taskFile == null) {
             return;
         }
+        this.taskFileScanner = new Scanner(taskFile);
+
         Pattern taskStringPattern = Pattern.compile("\\[(\\w)\\]\\[(.?)\\] ([^(]+)(\\((.+)\\))?");
         while (taskFileScanner.hasNext()) {
             Task task = null;
-
             String currentTaskString = taskFileScanner.nextLine();
 
             Matcher taskStringMatches = taskStringPattern.matcher(currentTaskString);
@@ -63,21 +56,23 @@ public class TaskList extends ArrayList<Task> {
             String taskDetails = taskStringMatches.group(5);
 
             switch (taskType) {
-            case "T":
-                task = new Todo(taskDescription, isDone);
-                break;
-            case "E":
-                // TODO: add some checks to this
-                String whenIsEventAt = taskDetails.split("at: ")[1];
-                task = new Event(taskDescription, isDone, whenIsEventAt);
-                break;
-            case "D":
-                // TODO: add some checks to this
-                String whenIsTaskDue = taskDetails.split("by: ")[1];
-                task = new Deadline(taskDescription, isDone, whenIsTaskDue);
-                break;
+                case "T":
+                    task = new Todo(taskDescription, isDone);
+                    break;
+                case "E":
+                    // TODO: add some checks to this
+                    String whenIsEventAt = taskDetails.split("at: ")[1];
+                    task = new Event(taskDescription, isDone, whenIsEventAt);
+                    break;
+                case "D":
+                    // TODO: add some checks to this
+                    String whenIsTaskDue = taskDetails.split("by: ")[1];
+                    task = new Deadline(taskDescription, isDone, whenIsTaskDue);
+                    break;
             }
             super.add(task);
         }
+
+        this.taskFileWriter = new FileWriter(taskFile, false);
     }
 }
