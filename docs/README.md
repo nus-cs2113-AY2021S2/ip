@@ -36,56 +36,10 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    | |_| | |_| |   <  __/
    |____/ \__,_|_|\_\___|
    ```
+
 ## Using Duke Project
 
-### Help
-
-* Display all acceptable commands
-* Format: `help`
-* Example of expected output:
-```
-___________________________________________
-Here are some available commands and their corresponding input format: 
-
-list: Display all tasks in the list.
-Format: list
-
-todo: Add a todo task.
-Format: todo read a book
-
-deadline: Add a deadline task.
-Format: deadline submit a report /by 05 Mar
-
-event: Add an event task.
-Format: event project meeting /at Mon 2-4pm
-
-done: Mark a task as done.
-Format: done 1
-
-find: find all tasks contain the input keyword
-Format: find book
-
-date: find all tasks occurring the specific date
-Format: date 2021-02-28
-
-bye: Exit the program.
-Format: bye
-
-___________________________________________
-```
-### List
-
-* Display all recorded tasks in the list
-* Format: `list`
-* Example of expected output:
-```
-___________________________________________
-Here are the tasks in your list: 
-1. [T][✘] read a book
-2. [D][✘] submit a report (by: 05 Mar)
-3. [E][✘] project group meeting (at: 2-4 pm Sunday)
-___________________________________________
-```
+A guideline: how to use the Duke Project.
 
 ### Todo
 
@@ -156,6 +110,20 @@ Exception:
 ___________________________________________
 🙁 OOPS!!! The description of an event cannot be empty.
 Please input again!:)
+___________________________________________
+```
+
+### List
+
+* Display all recorded tasks in the list
+* Format: `list`
+* Example of expected output:
+```
+___________________________________________
+Here are the tasks in your list: 
+1. [T][✘] read a book
+2. [D][✘] submit a report (by: 05 Mar)
+3. [E][✘] project group meeting (at: 2-4 pm Sunday)
 ___________________________________________
 ```
 
@@ -263,6 +231,43 @@ ___________________________________________
 Bye. Hope to see you again soon!
 ___________________________________________
 ```
+### Help
+
+* Display all acceptable commands
+* Format: `help`
+* Example of expected output:
+
+```
+___________________________________________
+Here are some available commands and their corresponding input format: 
+
+list: Display all tasks in the list.
+Format: list
+
+todo: Add a todo task. 
+Format: todo read a book
+
+deadline: Add a deadline task.
+Format: deadline submit a report /by 05 Mar
+
+event: Add an event task.
+Format: event project meeting /at Mon 2-4pm
+       
+done: Mark a task as done.
+Format: done 1
+
+find: Find all tasks contain the input keyword.
+Format: find book
+
+date: Find all tasks occurring the specific date.
+Format: date 2021-02-28
+        
+bye: Exit the program.
+Format: bye
+
+___________________________________________
+```
+
 
 #### Exception
 
