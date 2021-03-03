@@ -1,0 +1,64 @@
+list
+todo be happy
+blah
+done x
+done 12
+done -1
+event meeting
+event meeting /at
+event /at 2021-02-21 23:59
+event meeting /at 2021-02-21 23:59
+deadline homework /by 2021-02-23 23:59
+done 1
+list
+done 2
+list
+deadline return books
+deadline return books /by
+deadline return books /by
+deadline /by tomorrow 5pm
+deadline return books /by tomorrow 5pm
+find
+find book
+deadline /by 2021-02-25 23:59
+deadline return books /by 2021-02-22 23:59
+deadline buy new books /by 2021-02-23 08:00
+event selling new books /at 2021-02-23 10:00
+list
+done 4
+list
+done 3
+list
+done 4
+done 3
+print type deadline
+print type deadlines
+print type event
+print type events
+print type todo
+print type todos
+print date 2021-02-23
+print filepath
+print file path
+delete 250
+hi
+delete -1
+delete 3
+list
+ls
+ll
+delete 4
+list
+help
+hello
+hey
+delete 2
+list
+delete 1
+list
+delete 2
+list
+delete 1
+list
+bye
+

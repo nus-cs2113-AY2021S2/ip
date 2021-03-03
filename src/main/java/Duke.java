@@ -1,10 +1,79 @@
+import dukehandler.FileManager;
+import dukehandler.TaskManager;
+import ui.ErrorMessagePrinter;
+import ui.SuccessMessagePrinter;
+
+import java.io.File;
+import java.util.Scanner;
+
 public class Duke {
+    static final String DOTTED_LINE
+            = "____________________________________________________________";
+    static final File F = FileManager.loadFileOnStartup();
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        SuccessMessagePrinter.printGreetMessage(F.getAbsolutePath());
+
+        String fullCommand;
+        Scanner in = new Scanner(System.in);
+        while (true) {
+            fullCommand = in.nextLine();
+            if (fullCommand.equals("bye")
+                    || fullCommand.equals("exit")) {
+                break;
+            }
+            System.out.println(DOTTED_LINE);
+            readUserCommands(fullCommand);
+            System.out.println(DOTTED_LINE);
+        }
+
+        FileManager.savingProgramRoutine(F);
+        SuccessMessagePrinter.printByeMessage(F.getAbsolutePath());
+
     }
+
+    private static void readUserCommands(String fullCommand) {
+        String[] partOfCommand = fullCommand.split(" ");
+        switch (partOfCommand[0]) {
+        case "help":
+            SuccessMessagePrinter.printHelpMessage();
+            break;
+        case "ll":
+        case "ls":
+        case "list":
+            TaskManager.printAllTasks();
+            break;
+        case "done":
+            TaskManager.markTaskAsDone(fullCommand.substring(4).trim());
+            break;
+        case "hi":
+        case "hey":
+        case "hello":
+            SuccessMessagePrinter.printHelloMessage();
+            break;
+        case "todo":
+        case "deadline":
+        case "event":
+            String taskType = partOfCommand[0];
+            TaskManager.addNewTask(taskType, fullCommand);
+            break;
+        case "delete":
+        case "remove":
+            TaskManager.removeTask(fullCommand.substring(6).trim());
+            break;
+        case "find":
+            TaskManager.findTasksWithKeywords(fullCommand.substring(4).trim());
+            break;
+        case "print":
+            TaskManager.checkPrintCommand(fullCommand, partOfCommand, F.getAbsolutePath());
+            break;
+        case "save":
+            FileManager.savingProgramRoutine(F);
+            SuccessMessagePrinter.printTasksSaved(F.getAbsolutePath());
+            break;
+        default:
+            ErrorMessagePrinter.printGenericErrorMessage();
+            break;
+        }
+    }
+
 }
