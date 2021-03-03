@@ -6,13 +6,22 @@ import duke.commands.Command;
 import duke.exception.DukeException;
 import java.util.Scanner;
 
+/**
+ * Main class that will start the program.
+ */
 public class Duke {
-
     private Parser parser;
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private Scanner scanner = new Scanner(System.in);
 
+    /**
+     * Instantiates Parser, Storage, TaskList and Ui objects.
+     * Loads tasklist from storage if file is valid.
+     *
+     * @param filePath Relative path from the current directory of tasklist in .txt format.
+     */
     public Duke(String filePath) {
         this.parser = new Parser();
         this.storage = new Storage(filePath);
@@ -20,8 +29,9 @@ public class Duke {
         this.ui = new Ui();
     }
 
-    private Scanner scanner = new Scanner(System.in);
-
+    /**
+     * Starts the entire Duke program.
+     */
     public void run() {
         ui.displayWelcome();
         String input = scanner.nextLine();

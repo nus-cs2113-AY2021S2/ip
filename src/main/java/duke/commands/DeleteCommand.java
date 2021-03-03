@@ -5,6 +5,11 @@ import duke.TaskList;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * Deletes tasks from the tasklist, based on their indexes.
+ * To prevent deletion of one task affect the index of other tasks,
+ * deletion occurs from the largest index to smallest index.
+ */
 public class DeleteCommand implements Command {
     ArrayList<Integer> indexes;
 

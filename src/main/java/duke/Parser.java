@@ -9,14 +9,21 @@ import duke.task.Task;
 import duke.task.Todo;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
+/**
+ * Provides methods to parse user input and call appropriate methods.
+ */
 public class Parser {
 
-    public Parser() {
-    }
+    public Parser() {}
 
-    //details extracted: task description, (task deadline/timeslot) depending on taskType
+    /**
+     * Extracts task details from user input.
+     *
+     * @param input full user input for adding task, containing keyword.
+     * @param keyword keyword identifying what taskType the user wants to add.
+     * @return array of details, depending on the taskType. [description, (deadline/timeslot)]
+     */
     public static String[] extractDetailsFromInput(String input, String keyword) {
         String[] inputArray = new String[2];
         String inputWithoutKeyword = input.substring(keyword.length());
@@ -44,6 +51,13 @@ public class Parser {
         return inputArray;
     }
 
+    /**
+     * Extracts indexes when multiple are given in user input.
+     *
+     * @param input Full user input with multiple indexes.
+     * @param keyword Command keyword found in input.
+     * @return ArrayList of indexes identified in input.
+     */
     public static ArrayList<Integer> getInputIndexes(String input, String keyword) {
         String[] inputArray = input.split(" ");
         ArrayList<Integer> indexes = new ArrayList<>();
@@ -68,6 +82,15 @@ public class Parser {
         return indexes;
     }
 
+    /**
+     * Parses user input by identifying command words.
+     * Processes input by identifying important details in input (e.g. description).
+     * Returns specific new Command object depending on keyword identified (e.g. ListCommand, AddCommand).
+     *
+     * @param input Full user input.
+     * @return new Command object.
+     * @throws DukeException If keyword is not identified/input is not in the right format
+     */
     public Command parseInput(String input) throws DukeException {
         if (input.equals("list")) {
             return new ListCommand();
@@ -84,11 +107,19 @@ public class Parser {
         } else if (input.startsWith("find")) {
             return new FindCommand(input.substring(4).strip());
         } else {
-                Task newTask = parseNewTask(input);
-                return new AddCommand(newTask);
+            Task newTask = parseNewTask(input);
+            return new AddCommand(newTask);
         }
     }
 
+    /**
+     * Parses input to identify important Task details.
+     * If no valid keywords are found, INVALID DukeException will be thrown.
+     *
+     * @param input Full user input.
+     * @return new Task object, depending on keyword identified.
+     * @throws DukeException If input does not have any keyword/has keyword but incorrect format.
+     */
     public Task parseNewTask(String input) throws DukeException {
         String[] inputArray;
         if (input.startsWith("deadline")) {

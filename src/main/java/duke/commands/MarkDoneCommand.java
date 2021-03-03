@@ -4,6 +4,9 @@ import duke.TaskList;
 
 import java.util.ArrayList;
 
+/**
+ * Marks a task as done, given the index of the task in the TaskList.
+ */
 public class MarkDoneCommand implements Command{
     ArrayList<Integer> indexes;
 
