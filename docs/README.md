@@ -195,6 +195,10 @@ Advanced users are welcome to update data directly by editing that data file.
 Duke will not run._** Please manually fix the data in the file into the correct format, otherwise delete all the invalid data in order 
 for Duke to resume operation.
 
+**_Note: Please ensure that you do not already have an existing file named `data.txt`, not in a valid Duke format, in the same location as the jar file._** 
+Otherwise, it may interfere with the operation of Duke. Please move the jar file into another location, or remove this `data.txt` file
+for Duke to resume operation.
+
 ____
 
 ## FAQ
