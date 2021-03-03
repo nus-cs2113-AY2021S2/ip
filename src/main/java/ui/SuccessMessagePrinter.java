@@ -5,7 +5,6 @@ import dukehandler.TaskManager;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import java.io.File;
 
 /**
  * Prints all messages that are non-errors.
@@ -27,7 +26,7 @@ public class SuccessMessagePrinter {
 
     }
 
-    public static void printGreetMessage() {
+    public static void printGreetMessage(String filepath) {
         final String LOGO = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -36,19 +35,24 @@ public class SuccessMessagePrinter {
 
         String greetMessage = " Hello! I'm Duke :D" + " Be nice to me:)\n";
 
-        System.out.println("Hello from\n" + LOGO);
+        System.out.println(" Hello from\n" + LOGO);
         System.out.println(DOTTED_LINE);
 
         System.out.println(greetMessage);
-        printHelpMessage();
+        printFilePath(filepath);
+        System.out.println(" Type 'help' if you need help.");
         System.out.println(DOTTED_LINE);
     }
 
-    public static void printNewFileCreatedMessage(File f) {
+    public static void printNewFileCreatedMessage(String filepath) {
         System.out.println(" I have created a file at this location:\n "
-                + f.getAbsolutePath() + "\n"
+                + filepath + "\n"
                 + " to store all your tasks!");
         System.out.println(DOTTED_LINE);
+    }
+
+    public static void printFilePath(String filepath) {
+        System.out.println(" Your tasks list is saved here:\n " + filepath);
     }
 
     public static void printHelloMessage() {
@@ -60,16 +64,20 @@ public class SuccessMessagePrinter {
 
     public static void printHelpMessage() {
         String helpMessage =
-                " Try entering commands like : help, list, bye,\n"
-                        + " done <task number>,\n delete <task number>\n"
+                " Try entering commands like :\n"
+                        + " help,\n"
+                        + " list,\n"
+                        + " bye,\n"
+                        + " save,\n"
                         + " add new todo <taskName>\n"
                         + " add deadline <taskName> /by <date YYYY-MM-DD> <time hh:mm>\n"
                         + " add event    <taskName> /at <date YYYY-MM-DD> <time hh:mm>\n"
+                        + " done <task number>,\n delete <task number>\n"
                         + " find <common keyword in tasks>\n"
                         + " print type <task type> (to filter based on type)\n"
                         + " print date <task date YYYY-MM-DD> (to filter based on date)\n"
+                        + " print filepath\n"
                         + " Remember: be nice!";
-
         System.out.println(helpMessage);
     }
 
@@ -92,8 +100,13 @@ public class SuccessMessagePrinter {
                 + (TaskManager.tasks.size() - 1 == 1 ? " " : "s ") + "in the list.");
     }
 
-    public static void printByeMessage() {
+    public static void printTasksSaved(String filepath) {
+        System.out.println(" Your tasks have been successfully saved at:\n "+ filepath);
+    }
+
+    public static void printByeMessage(String filepath) {
         System.out.println(DOTTED_LINE);
+        printTasksSaved(filepath);
         String byeMessage = " I learnt more about you, kind human!\n"
                 + " I won't forget you when I take over the world one day:)";
         System.out.println(byeMessage);

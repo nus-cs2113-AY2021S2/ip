@@ -38,10 +38,15 @@ print type events
 print type todo
 print type todos
 print date 2021-02-23
+print filepath
+print file path
 delete 250
+hi
 delete -1
 delete 3
 list
+ls
+ll
 delete 4
 list
 help

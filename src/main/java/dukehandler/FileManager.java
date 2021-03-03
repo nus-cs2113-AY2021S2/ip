@@ -25,7 +25,7 @@ public class FileManager {
         File f = new File(filePath + "/tasks.txt");
         try {
             if (f.createNewFile()) {
-                SuccessMessagePrinter.printNewFileCreatedMessage(f);
+                SuccessMessagePrinter.printNewFileCreatedMessage(f.getAbsolutePath());
                 return f;
             }
             loadTasksFromFile(f.getAbsolutePath());
@@ -67,17 +67,16 @@ public class FileManager {
     /**
      * Checks if contents of tasks ArrayList can be saved onto tasks.txt file.
      * If file can be accessed, the contents will be saved.
-     * Called when 'bye' command is given to end the program after saving tasks contents
+     * Called when 'save' or 'bye' command is given to end the program after saving tasks contents
      *
      * @param f tasks.txt File where tasks ArrayList contents are saved
      */
-    public static void endOfProgramRoutine(File f) {
+    public static void savingProgramRoutine(File f) {
         try {
-            saveTasksToFile(f.getAbsolutePath());
+            tasksFileSaver(f.getAbsolutePath());
         } catch (IOException e) {
             ErrorMessagePrinter.printIOErrorMessage();
         }
-        SuccessMessagePrinter.printByeMessage();
     }
 
     /**
@@ -87,7 +86,7 @@ public class FileManager {
      * @param filePath path of tasks.txt file
      * @throws IOException if tasks.txt file cannot be accessed.
      */
-    public static void saveTasksToFile(String filePath) throws IOException {
+    public static void tasksFileSaver(String filePath) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         for (Task task : TaskManager.tasks) {
             fw.write(task.getTaskType() + " ~~ "

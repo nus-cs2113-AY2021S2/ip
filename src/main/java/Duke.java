@@ -1,7 +1,7 @@
-import ui.ErrorMessagePrinter;
 import dukehandler.FileManager;
-import ui.SuccessMessagePrinter;
 import dukehandler.TaskManager;
+import ui.ErrorMessagePrinter;
+import ui.SuccessMessagePrinter;
 
 import java.io.File;
 import java.util.Scanner;
@@ -9,11 +9,9 @@ import java.util.Scanner;
 public class Duke {
     static final String DOTTED_LINE
             = "____________________________________________________________";
-
+    static final File F = FileManager.loadFileOnStartup();
     public static void main(String[] args) {
-        SuccessMessagePrinter.printGreetMessage();
-
-        File f = FileManager.loadFileOnStartup();
+        SuccessMessagePrinter.printGreetMessage(F.getAbsolutePath());
 
         String fullCommand;
         Scanner in = new Scanner(System.in);
@@ -28,7 +26,9 @@ public class Duke {
             System.out.println(DOTTED_LINE);
         }
 
-        FileManager.endOfProgramRoutine(f);
+        FileManager.savingProgramRoutine(F);
+        SuccessMessagePrinter.printByeMessage(F.getAbsolutePath());
+
     }
 
     private static void readUserCommands(String fullCommand) {
@@ -37,12 +37,15 @@ public class Duke {
         case "help":
             SuccessMessagePrinter.printHelpMessage();
             break;
+        case "ll":
+        case "ls":
         case "list":
             TaskManager.printAllTasks();
             break;
         case "done":
             TaskManager.markTaskAsDone(fullCommand.substring(4).trim());
             break;
+        case "hi":
         case "hey":
         case "hello":
             SuccessMessagePrinter.printHelloMessage();
@@ -54,6 +57,7 @@ public class Duke {
             TaskManager.addNewTask(taskType, fullCommand);
             break;
         case "delete":
+        case "remove":
             TaskManager.removeTask(fullCommand.substring(6).trim());
             break;
         case "find":
@@ -66,7 +70,16 @@ public class Duke {
             } else if (partOfCommand[1].trim().equals("date")) {
                 TaskManager.printOneTaskDateWithStreams(partOfCommand[2].trim());
                 break;
+            } else if (partOfCommand[1].trim().equals("filepath")
+                    || (partOfCommand[1].trim().equals("file"))
+                    && partOfCommand[2].trim().equals("path")) {
+                SuccessMessagePrinter.printFilePath(F.getAbsolutePath());
+                break;
             }
+        case "save":
+            FileManager.savingProgramRoutine(F);
+            SuccessMessagePrinter.printTasksSaved(F.getAbsolutePath());
+            break;
         default:
             ErrorMessagePrinter.printGenericErrorMessage();
             break;
