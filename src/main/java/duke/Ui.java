@@ -45,4 +45,8 @@ public class Ui {
         System.out.println("Loading Error :((");
     }
 
+    public void showNullPointerError() {
+        System.out.println("Null Pointer Error :((");
+    }
+
 }

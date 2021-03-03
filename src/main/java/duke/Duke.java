@@ -22,6 +22,7 @@ public class Duke {
             ui.showLoadingError();
             tasks = new TaskList();
         } catch (NullPointerException e) {
+            ui.showNullPointerError();
             tasks = new TaskList();
         }
     }
