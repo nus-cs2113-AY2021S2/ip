@@ -10,4 +10,7 @@ done 6
 delete 6
 delete 3
 list
+find hello
+find book
+find return
 bye

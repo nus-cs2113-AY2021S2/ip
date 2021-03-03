@@ -32,4 +32,10 @@ Okay, I've deleted this task:
 You now have 2 tasks in your tasklist.
 1.[T][ ] borrow book
 2.[D][X] return book (by: Sunday)
+'hello' is not found in the description of any of your tasks!
+Here are the matching tasks in your list:
+1.[T][ ] borrow book
+2.[D][X] return book (by: Sunday)
+Here are the matching tasks in your list:
+1.[D][X] return book (by: Sunday)
 Goodbye. See you again soon :)

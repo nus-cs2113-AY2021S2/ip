@@ -50,7 +50,11 @@ public class TaskList {
     }
 
     public void printNumTasks() {
-        System.out.println("You now have " + getTaskCount() + " tasks in your tasklist.");
+        if (getTaskCount() == 0) {
+            System.out.println("No tasks yet!");
+        } else {
+            System.out.println("You now have " + getTaskCount() + " tasks in your tasklist.");
+        }
     }
 
     /**

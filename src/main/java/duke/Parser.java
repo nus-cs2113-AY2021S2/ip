@@ -104,6 +104,8 @@ public class Parser {
             ArrayList<Integer> indexes = new ArrayList<>();
             indexes = getInputIndexes(input, "delete");
             return new DeleteCommand(indexes);
+        } else if (input.startsWith("find")) {
+            return new FindCommand(input.substring(4).strip());
         } else {
             Task newTask = parseNewTask(input);
             return new AddCommand(newTask);
