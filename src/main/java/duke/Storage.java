@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -14,8 +15,10 @@ import java.util.Scanner;
  */
 public class Storage {
 
-    protected static String path = System.getProperty("user.dir") + "\\data";
-    protected static final File importedList = new File(path);
+    protected static String home = System.getProperty("user.dir");
+    protected static Path path = java.nio.file.Paths.get(home, "data");
+    protected static Path dataFile = java.nio.file.Paths.get(home, "data", "duke.txt");
+    protected static final File importedList = new File(path.toString());
     protected static TodoList inputList;
 
     public Storage() {
@@ -37,8 +40,8 @@ public class Storage {
 
     //Creates an empty txt file at data/duke
     public static String createDataFile() throws IOException {
-        (new File(path)).mkdir();
-        writeToFile("data/duke.txt", "");
+        (new File(path.toString())).mkdir();
+        writeToFile(dataFile.toString(), "");
         return "No Data file found!\nData file created at: " + path;
     }
 
@@ -85,7 +88,7 @@ public class Storage {
      */
     private static String runImportLoopUntilEOF() throws FileNotFoundException, IncorrectFormatException {
         Command command;
-        File importedList = new File("data/duke.txt");
+        File importedList = new File(dataFile.toString());
         Scanner s = new Scanner(importedList);
         try {
             do {
