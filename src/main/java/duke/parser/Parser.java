@@ -21,6 +21,9 @@ import duke.storage.Storage;
 
 import static duke.common.Messages.DIVIDER;
 
+/**
+ * Parser class parses the command received and executes the various commands. 
+ */
 public class Parser {
 
     private TextUI ui;
@@ -28,12 +31,25 @@ public class Parser {
     private Storage storage;
     public static final String INVALID_DATE = "!!! Invalid date. Please make sure date is in dd/mm/yy format. !!!";
 
+    /**
+     * Constructor for the <code>Parser</code> class. 
+     * 
+     * @param ui ui instance for the input and output of the parser
+     * @param taskList tasklist instance on which the commands will be executed
+     * @param storage storage instance on which save and load commands will be executed
+     */
     public Parser(TextUI ui, TaskList taskList, Storage storage) {
         this.ui = ui;
         this.taskList = taskList;
         this.storage = storage;
     }
 
+    /**
+     * Parse the incoming command and calls the corresponding command methods. 
+     * 
+     * @param commandString string input from the user
+     * @return <code>Command</code> recognised by parser, or <code>UnknownCommand</code>
+     */
     public Command parse(String commandString) {
         String commandWord = commandString.split(" ", 2)[0];
         switch (commandWord) {
@@ -60,6 +76,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks the arguments for the mark as done command. 
+     * 
+     * @param commandString string input from the user
+     * @return <code>FinishCommand</code> with input arguments, <code>null</code> if invalid arguments
+     */
     private Command checkFinish(String commandString) {
         String[] splitCommand = commandString.split(" ", 2);
         if (splitCommand.length==1) {
@@ -71,6 +93,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks the arguments for the todo command. 
+     * 
+     * @param commandString string input from the user
+     * @return <code>TodoCommand</code> with input arguments, <code>null</code> if invalid arguments
+     */
     private Command checkTodo(String commandString) {
         String[] splitCommand = commandString.split(" ", 2);
         if (splitCommand.length==1) {
@@ -82,6 +110,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks the arguments for the event command. 
+     * 
+     * @param commandString string input from the user
+     * @return <code>EventCommand</code> with input arguments, <code>null</code> if invalid arguments
+     */
     private Command checkEvent(String commandString) {
         String[] splitCommand = commandString.split(" ", 2);
         if (splitCommand.length==1) {
@@ -105,6 +139,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks the arguments for the deadline command. 
+     * 
+     * @param commandString string input from the user
+     * @return <code>DeadlineCommand</code> with input arguments, <code>null</code> if invalid arguments
+     */
     private Command checkDeadline(String commandString) {
         String[] splitCommand = commandString.split(" ", 2);
         if (splitCommand.length==1) {
@@ -128,6 +168,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks the arguments for the delete command. 
+     * 
+     * @param commandString string input from the user
+     * @return <code>DeleteCommand</code> with input arguments, <code>null</code> if invalid arguments
+     */
     private Command checkDelete(String commandString) {
         String[] splitCommand = commandString.split(" ", 2);
         if (splitCommand.length==1) {
@@ -139,13 +185,31 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks the arguments for the save command. 
+     * 
+     * @param commandString string input from the user
+     * @return <code>SaveCommand</code> with input arguments, <code>null</code> if invalid arguments
+     */
     private Command checkSave(String commandString) {
         return new SaveCommand(taskList, storage);
     }
 
+    /**
+     * Checks the arguments for the find command. 
+     * 
+     * @param commandString string input from the user
+     * @return <code>FindCommand</code> with input arguments, <code>null</code> if invalid arguments
+     */
     private Command checkFind(String commandString) {
-        String searchWord = commandString.split(" ", 2)[1];
-        return new FindCommand(taskList, searchWord);
+        String[] splitCommand = commandString.split(" ", 2);
+        if (splitCommand.length==1) {
+            ui.noIndex("find");
+            return null;
+        } else {
+            String searchWord = splitCommand[1];
+            return new FindCommand(taskList, searchWord);
+        }
     }
 
 }

@@ -6,6 +6,9 @@ import duke.ui.TextUI;
 
 import static duke.common.Messages.DIVIDER;
 
+/**
+ * Tasklist stores the tasks in an ArrayList. 
+ */
 public class TaskList {
     public ArrayList<Task> tasks = new ArrayList<>();
     public TextUI ui;
@@ -18,10 +21,20 @@ public class TaskList {
     public static final String NO_TASKS = "You have no tasks in your list";
     public static final String LIST_TASKS = "Here are the tasks in your list:";
 
+    /**
+     * Constructor for the <code>TaskList</code> class. 
+     * 
+     * @param ui ui which determines the input and output streams
+     */
     public TaskList(TextUI ui) {
         this.ui = ui;
     }
 
+    /**
+     * Adds a task to the tasklist. 
+     * 
+     * @param t task to be added
+     */
     public void addTask(Task t) {
         tasks.add(t);
         ui.printToScreen(DIVIDER);
@@ -30,10 +43,20 @@ public class TaskList {
         ui.printToScreen(DIVIDER);
     }
 
+    /**
+     * Add a task silently without success acknowledgements. (to be used when loading data)
+     * 
+     * @param t task to be added
+     */
     public void silentAdd(Task t) {
         tasks.add(t);
     }
 
+    /**
+     * Deletes a task from the tasklist
+     * 
+     * @param taskIndex index of the task to be deleted
+     */
     public void deleteTask(int taskIndex) {
         ui.printToScreen(DIVIDER);
         if (taskIndex >= tasks.size() || taskIndex < 0) {
@@ -53,6 +76,11 @@ public class TaskList {
         ui.printToScreen(DIVIDER);
     }
 
+    /**
+     * Marks a task from the tasklist as done. 
+     * 
+     * @param taskIndex index of the task to be marked as done
+     */
     public void finishTask(int taskIndex) {
         ui.printToScreen(DIVIDER);
         if (taskIndex >= tasks.size() || taskIndex < 0) {
@@ -71,6 +99,9 @@ public class TaskList {
         ui.printToScreen(DIVIDER);
     }
 
+    /**
+     * Lists all the tasks in the tasklist. 
+     */
     public void listTasks() {
         if (tasks.size()==0) {
             ui.printToScreen(NO_TASKS);
@@ -83,6 +114,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Finds a task in the tasklist. 
+     * 
+     * @param searchWord string to be searched for
+     */
     public void findTask(String searchWord) {
         ui.printToScreen(DIVIDER);
         Task[] searchResults = new Task[tasks.size()];

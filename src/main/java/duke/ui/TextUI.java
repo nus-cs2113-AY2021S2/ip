@@ -13,15 +13,22 @@ import static duke.tasks.Task.DEADLINE_USAGE;
 import static duke.tasks.Task.EVENT_USAGE;
 import static duke.tasks.Task.DONE_USAGE;
 import static duke.tasks.Task.DELETE_USAGE;
+import static duke.tasks.Task.FIND_USAGE;
 
 import java.io.PrintStream;
 import java.util.Scanner;
 
+/**
+ * Deals with input/output streams and data to be shown to the user. 
+ */
 public class TextUI {
 
     private final Scanner in;
     private final PrintStream out;
 
+    /**
+     * Constructor for the <code>TextUI</code> class. 
+     */
     public TextUI() {
         this.in = new Scanner(System.in);
         this.out = System.out;
@@ -39,12 +46,22 @@ public class TextUI {
         printToScreen(DIVIDER, UNKNOWN_MESSAGE, DIVIDER);
     }
 
+    /**
+     * Prints a message to the output stream. 
+     * 
+     * @param message message to be printed
+     */
     public void printToScreen(String... message) {
         for (String m : message) {
             out.println("\t" + m);
         }
     }
 
+    /**
+     * Reads the input from the input stream. 
+     * 
+     * @return user input as a String
+     */
     public String readCommand() {
         String command = in.nextLine();
         return command;
@@ -71,6 +88,11 @@ public class TextUI {
         printToScreen(DIVIDER);
     }
 
+    /**
+     * Prints the usage hints of the particular command. 
+     * 
+     * @param type type of command of the hint to be shown
+     */
     public void printUsage(String type) {
         switch(type) {
         case "todo":
@@ -87,6 +109,9 @@ public class TextUI {
             break;
         case "delete":
             printToScreen("Usage: " + DELETE_USAGE);
+            break;
+        case "find":
+            printToScreen("Usage: " + FIND_USAGE);
             break;
         default:
             ;

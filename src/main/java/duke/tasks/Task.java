@@ -1,5 +1,8 @@
 package duke.tasks;
 
+/**
+ * Base class for tasks. 
+ */
 public class Task {
     public static final String NO_DESCRIPTION = "!!! Please specify the task description. !!!";
     public static final String NO_DATE = "!!! Please specify the task date. !!!";
@@ -9,19 +12,28 @@ public class Task {
     public static final String TODO_USAGE = "todo [task description]";
     public static final String DONE_USAGE = "done [index of task]";
     public static final String DELETE_USAGE = "delete [index of task]";
+    public static final String FIND_USAGE = "find [search word]";
 
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Constructor for the <code>Task</code> class. 
+     * 
+     * @param description description of the task
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
     public String getType() {
-        return " ";
+        return " "; // space as type is undefined
     }
 
+    /**
+     * Returns the status of the task. X for done, ' ' for not done. 
+     */
     public String getStatusIcon() {
         return (isDone ? "X" : " ");
     }
@@ -30,6 +42,9 @@ public class Task {
         return description;
     }
 
+    /**
+     * Gets the date of the task in recognised format (1 Jan 1901). 
+     */
     public String getDate() {
         return null;
     }
@@ -38,6 +53,10 @@ public class Task {
         return null;
     }
 
+    /**
+     * Returns the date in printable format. 
+     * @return
+     */
     public String printDate() {
         return "";
     }

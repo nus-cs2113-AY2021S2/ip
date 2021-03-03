@@ -1,5 +1,8 @@
 package duke.common;
 
+/**
+ * Some common messages. 
+ */
 public class Messages {
     
     public static final String DIVIDER = "________________________________________\n";
