@@ -1,3 +1,7 @@
+package Duke;
+
+import Duke.Tasks.Task;
+
 import java.util.ArrayList;
 
 public class Output {
@@ -20,6 +24,14 @@ public class Output {
         System.out.println("Hello! I'm Duke");
         printLogo();
         System.out.println("What can I do for you?");
+        printLine();
+    }
+
+    public static void printDeleted(String taskName, int size) {
+        printLine();
+        System.out.println(String.format("Noted. I've removed this task:\n  %1$s \nNow you have %2$d tasks in the list.",
+                taskName,
+                size));
         printLine();
     }
 
@@ -59,7 +71,7 @@ public class Output {
 
     public static void printDoneRangeError() {
         printLine();
-        System.out.println("\u2639 OOPS!! The number you provide is out of range.");
+        System.out.println("\u2639 OOPS!! The number you provide is out of range for the \"done\" command.");
         printLine();
     }
 

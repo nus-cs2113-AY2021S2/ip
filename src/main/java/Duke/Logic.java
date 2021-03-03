@@ -1,3 +1,8 @@
+package Duke;
+
+import Duke.Tasks.Deadline;
+import Duke.Tasks.Event;
+import Duke.Tasks.Todo;
 
 import java.util.Scanner;
 
@@ -29,6 +34,23 @@ public class Logic {
                 }
                 else {
                     taskList.updateCompletion(taskNumber);
+                }
+                break;
+            }
+            case "delete": {
+                int taskNumber;
+                try {
+                    taskNumber = scan.nextInt();
+                }
+                catch(Exception e) {
+                    Output.printDoneInputError();
+                    break;
+                }
+                if (taskNumber > taskList.size() || taskNumber < 1) {
+                    Output.printDoneRangeError();
+                }
+                else {
+                    taskList.deleteTask(taskNumber);
                 }
                 break;
             }
