@@ -15,7 +15,7 @@ public class Parser {
     private static final String FIND_COMMAND = "find";
 
     /**
-     * Returns the corresponding Command object based on user input
+     * Returns the corresponding Command object based on user input.
      *
      * @param line user input to be parsed
      * @return Command object

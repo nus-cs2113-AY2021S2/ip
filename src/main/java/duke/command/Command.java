@@ -7,7 +7,7 @@ import duke.ui.Ui;
 public abstract class Command {
 
     /**
-     * Executes corresponding method based on type of command
+     * Executes corresponding method based on type of command.
      *
      * @param tasks TaskList containing tasks
      * @param ui User Interface
@@ -16,7 +16,7 @@ public abstract class Command {
     public abstract void execute(TaskList tasks, Ui ui, Storage storage);
 
     /**
-     * Returns boolean isExit based on type of command
+     * Returns boolean isExit based on type of command.
      *
      * @return boolean isExit
      */

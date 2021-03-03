@@ -9,7 +9,7 @@ public class AddDeadlineCommand extends Command {
     private String line;
 
     /**
-     * Constructor of AddDeadlineCommand Class
+     * Constructor of AddDeadlineCommand Class.
      *
      * @param line user input
      */
@@ -18,7 +18,7 @@ public class AddDeadlineCommand extends Command {
     }
 
     /**
-     * Adds Deadline task to TaskList and saves it in a textfile
+     * Adds Deadline task to task list and saves it in the data file.
      *
      * @param tasks TaskList containing tasks
      * @param ui User Interface
@@ -31,7 +31,7 @@ public class AddDeadlineCommand extends Command {
     }
 
     /**
-     * Returns false as command is not of type bye
+     * Returns false as command is not of type bye.
      *
      * @return boolean false
      */

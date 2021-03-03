@@ -7,7 +7,7 @@ import duke.ui.Ui;
 public class ByeCommand extends Command{
 
     /**
-     * Prints farewell message and saves the textfile before exiting
+     * Prints farewell message and saves the text file before exiting.
      *
      * @param tasks TaskList containing tasks
      * @param ui User Interface
@@ -20,7 +20,7 @@ public class ByeCommand extends Command{
     }
 
     /**
-     * Returns true as command is of type bye
+     * Returns true as command is of type bye.
      *
      * @return boolean true
      */

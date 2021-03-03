@@ -9,7 +9,7 @@ public class DeleteCommand extends Command {
     private String line;
 
     /**
-     * Constructor of DeleteCommand Class
+     * Constructor of DeleteCommand Class.
      *
      * @param line user input
      */
@@ -18,7 +18,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Deletes a task from TaskList and saves the textfile
+     * Deletes a task from the task list and updates the data file.
      *
      * @param tasks TaskList containing tasks
      * @param ui User Interface
@@ -31,7 +31,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Returns false as command is not of type bye
+     * Returns false as command is not of type bye.
      *
      * @return boolean false
      */

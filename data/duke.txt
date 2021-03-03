@@ -1,3 +1,0 @@
-T | Y | read book
-T | Y | sleep
-D | Y | homework | tmr

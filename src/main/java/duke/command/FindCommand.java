@@ -18,7 +18,7 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Finds a task from TaskList based on keyword
+     * Finds task(s) in the task list based on keyword.
      *
      * @param tasks TaskList containing tasks
      * @param ui User Interface
@@ -30,7 +30,7 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Returns false as command is not of type bye
+     * Returns false as command is not of type bye.
      *
      * @return boolean false
      */

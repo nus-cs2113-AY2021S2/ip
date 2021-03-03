@@ -9,7 +9,7 @@ public class AddEventCommand extends Command {
     private String line;
 
     /**
-     * Constructor of AddEventCommand Class
+     * Constructor of AddEventCommand Class.
      *
      * @param line user input
      */
@@ -18,7 +18,7 @@ public class AddEventCommand extends Command {
     }
 
     /**
-     * Adds Event task to TaskList and saves it in a textfile
+     * Adds Event task to task list and saves it in the data file.
      *
      * @param tasks TaskList containing tasks
      * @param ui User Interface
@@ -31,7 +31,7 @@ public class AddEventCommand extends Command {
     }
 
     /**
-     * Returns false as command is not of type bye
+     * Returns false as command is not of type bye.
      *
      * @return boolean false
      */

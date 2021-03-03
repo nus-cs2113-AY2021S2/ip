@@ -18,7 +18,7 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Marks a task from TaskList as done and saves the textfile
+     * Marks a task from task list as done and updates the data file.
      *
      * @param tasks TaskList containing tasks
      * @param ui User Interface
@@ -31,7 +31,7 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Returns false as command is not of type bye
+     * Returns false as command is not of type bye.
      *
      * @return boolean false
      */

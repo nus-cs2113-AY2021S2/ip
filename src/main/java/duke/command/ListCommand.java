@@ -7,7 +7,7 @@ import duke.ui.Ui;
 public class ListCommand extends Command {
 
     /**
-     * Prints all tasks in TaskList
+     * Prints all tasks in the task list.
      *
      * @param tasks TaskList containing tasks
      * @param ui User Interface
@@ -19,7 +19,7 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Returns false as command is not of type bye
+     * Returns false as command is not of type bye.
      *
      * @return boolean false
      */
