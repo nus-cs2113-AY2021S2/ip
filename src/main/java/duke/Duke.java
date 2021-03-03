@@ -1,16 +1,20 @@
 package duke;
+
 import java.util.Scanner;
+
 import commands.Command;
 import commands.CommandResult;
 import commands.Parser;
-import commands.byeCommand;
+import commands.ByeCommand;
 
 
-public class duke {
+public class Duke {
 
-    private static todoList inputList = new todoList();
+    private static TodoList inputList = new TodoList();
 
-    /**Sets the command to act on the current list of tasks and executes the input command.
+    /**
+     * Sets the command to act on the current list of tasks and executes the input command.
+     *
      * @param command the command to be executed
      */
     private static CommandResult executeCommand(Command command) {
@@ -18,12 +22,15 @@ public class duke {
         CommandResult result;
         try {
             result = command.execute();
-        }catch(IncorrectFormatException e){
+        } catch (IncorrectFormatException e) {
             return new CommandResult(e.getMessage());
         }
         return result;
     }
-    /**Loops until bye command is detected. Write to storage every time command is entered
+
+    /**
+     * Loops until bye command is detected. Write to storage every time command is entered
+     *
      * @param Data the storage instance to update
      */
     private static void runCommandLoopUntilExitCommand(Storage Data) {
@@ -34,15 +41,16 @@ public class duke {
             String userCommandText = in.nextLine();
             try {
                 command = new Parser().parseCommand(userCommandText);
-            }catch(IncorrectFormatException e){
-                System.out.println(e.getMessage()); ;
+            } catch (IncorrectFormatException e) {
+                System.out.println(e.getMessage());
+                ;
                 continue;
             }
             CommandResult result = executeCommand(command);
             ui.showResult(result);
             Data.updateFile();
 
-        } while (!byeCommand.isBye(command));
+        } while (!ByeCommand.isBye(command));
     }
 
 

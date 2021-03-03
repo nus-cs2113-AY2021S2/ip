@@ -5,48 +5,53 @@ import duke.IncorrectFormatException;
 public class Parser {
     private String input;
 
-    /**Parses the user input and returns the respective command
+    /**
+     * Parses the user input and returns the respective command
+     *
      * @param input user input
      */
     public Command parseCommand(String input) throws IncorrectFormatException {
-        String[] tokens = input.split(" ",2);
+        String[] tokens = input.split(" ", 2);
         String commandWord = tokens[0];
         String arguments = "";
         if (tokens.length > 1) {
             try {
                 arguments = tokens[1];
-            }catch(IndexOutOfBoundsException e){
+            } catch (IndexOutOfBoundsException e) {
                 throw new IncorrectFormatException("Command format is incorrect!");
             }
         }
-        switch(commandWord){
-        case todoCommand.COMMAND_WORD: // If command is todo, parse the task, print confirmation
-            return new todoCommand(arguments);
-        case listCommand.COMMAND_WORD: // If command is list, print all tasks in list
-            return new listCommand();
-        case deadlineCommand.COMMAND_WORD: // If command is deadline, parse the task and by date, print confirmation
+        switch (commandWord) {
+        case TodoCommand.COMMAND_WORD: // If command is todo, parse the task, print confirmation
+            return new TodoCommand(arguments);
+        case ListCommand.COMMAND_WORD: // If command is list, print all tasks in list
+            return new ListCommand();
+        case DeadlineCommand.COMMAND_WORD: // If command is deadline, parse the task and by date, print confirmation
             return prepareDeadlineCommand(arguments);
-        case eventCommand.COMMAND_WORD: // If command is event, parse the task and at date, print confirmation
+        case EventCommand.COMMAND_WORD: // If command is event, parse the task and at date, print confirmation
             return prepareEventCommand(arguments);
-        case doneCommand.COMMAND_WORD: // If command is done, mark task as done, print confirmation
-            return new doneCommand(arguments);
-        case deleteCommand.COMMAND_WORD: // If command is  delete, delete task entry in list, print confirmation
-            return new deleteCommand(arguments);
-        case findCommand.COMMAND_WORD:
-            return new findCommand(arguments);
-        case byeCommand.COMMAND_WORD:
-            return new byeCommand();
+        case DoneCommand.COMMAND_WORD: // If command is done, mark task as done, print confirmation
+            return new DoneCommand(arguments);
+        case DeleteCommand.COMMAND_WORD: // If command is  delete, delete task entry in list, print confirmation
+            return new DeleteCommand(arguments);
+        case FindCommand.COMMAND_WORD:
+            return new FindCommand(arguments);
+        case ByeCommand.COMMAND_WORD:
+            return new ByeCommand();
         default: // If command entered is any other unrecognised command, print invalid command
-            return new incorrectCommand("Incorrect command word was entered!");
+            return new IncorrectCommand("Incorrect command word was entered!");
         }
     }
-    /**Parses the imported file format and returns the respective command
+
+    /**
+     * Parses the imported file format and returns the respective command
+     *
      * @param input input from imported file
      */
     public Command parseImportTasks(String input) throws IncorrectFormatException {
         String[] tokens = input.split("/");
         String command = "";
-        switch(tokens[0]){
+        switch (tokens[0]) {
         case "D":
             command = "deadline " + tokens[2] + " /by " + tokens[3];
             break;
@@ -59,7 +64,10 @@ public class Parser {
         }
         return parseCommand(command);
     }
-    /**Splits the description and date of the incoming deadline command
+
+    /**
+     * Splits the description and date of the incoming deadline command
+     *
      * @param args the input's combined description and date string
      */
     private Command prepareDeadlineCommand(String args) throws IncorrectFormatException {
@@ -68,9 +76,12 @@ public class Parser {
         if (parts.length != 2) {
             throw new IncorrectFormatException("Deadline command format is incorrect!");
         }
-        return new deadlineCommand(parts[0].trim(), parts[1].trim());
+        return new DeadlineCommand(parts[0].trim(), parts[1].trim());
     }
-    /**Splits the description and date of the incoming event command
+
+    /**
+     * Splits the description and date of the incoming event command
+     *
      * @param args the input's combined description and date string
      */
     private Command prepareEventCommand(String args) throws IncorrectFormatException {
@@ -79,16 +90,8 @@ public class Parser {
         if (parts.length != 2) {
             throw new IncorrectFormatException("Event command format is incorrect!");
         }
-        return new eventCommand(parts[0].trim(), parts[1].trim());
+        return new EventCommand(parts[0].trim(), parts[1].trim());
     }
-
-
-
-
-
-
-
-
 
 
 }

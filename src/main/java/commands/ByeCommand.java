@@ -1,7 +1,7 @@
 package commands;
 
 /**Bye command class contains the command keyword for the bye command and methods to trigger the flag to end the command input loop*/
-public class byeCommand extends Command{
+public class ByeCommand extends Command {
 
     public static final String COMMAND_WORD = "bye";
 
@@ -16,7 +16,7 @@ public class byeCommand extends Command{
      * @param command the input command
      */
     public static boolean isBye(Command command) {
-        return command instanceof byeCommand; // instanceof returns false if it is null
+        return command instanceof ByeCommand; // instanceof returns false if it is null
     }
 }
 

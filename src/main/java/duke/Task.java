@@ -2,16 +2,16 @@
 package duke;
 
 
-public class task {
+public class Task {
     protected String description;
     protected boolean resolved;
 
-    public task(String desc){
+    public Task(String desc) {
         this.description = desc;
         this.resolved = false;
     }
 
-    public void resolve(){
+    public void resolve() {
         this.resolved = true;
     }
 

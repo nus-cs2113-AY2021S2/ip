@@ -1,12 +1,12 @@
 package commands;
 
 import duke.IncorrectFormatException;
-import duke.todoList;
+import duke.TodoList;
 
 /**Default command class to be overwritten by the specific user commands*/
 public class Command {
 
-    protected todoList inputList;
+    protected TodoList inputList;
     private int separatorIndex = -1;
 
     public Command(int targetIndex) {
@@ -18,7 +18,7 @@ public class Command {
     private void separatorIndex(int targetIndex) {
         this.separatorIndex = targetIndex;
     }
-    public void setData(todoList input){
+    public void setData(TodoList input) {
         this.inputList = input;
     }
 
