@@ -83,7 +83,7 @@ ____________________________________________________________
 
 **Formatting:**
 
-&nbsp;&nbsp;&nbsp;&nbsp; 'deadline [task description] /by [date in format YYYY-MM-DD]`
+&nbsp;&nbsp;&nbsp;&nbsp; `deadline [task description] /by [date in format YYYY-MM-DD]`
 
 **Examples**
 
