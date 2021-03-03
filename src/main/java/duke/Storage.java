@@ -12,20 +12,26 @@ import java.util.Scanner;
 public class Storage {
 
     /**
-     * checks if there is an existing previously saved file and call
-     * the private method "initializeExistingTasks" to load the tasks
-     *
-     * if there is no existing saved file, a new file is created.
-     *
-     * @throws java.io.IOException if file could not be created
+     * Checks if there is an existing previously saved file and call
+     * the private method <code>initializeExistingTasks</code> to load the tasks
+     * <p>
+     * If there is no existing saved file, a new file is created.
+     * <p>
+     * If the file creation failed, the exception thrown will be captured
      */
-    public static void downloadTask() throws IOException {
-        File dataDir = new File("data");
-        dataDir.mkdir();
-        File dataFile = new File("data/tasks.txt");
-        if (!dataFile.createNewFile()) {
-            initializeExistingTasks(dataFile);
+    public static void downloadTask() {
+        try {
+            File dataDir = new File("data");
+            dataDir.mkdir();
+            File dataFile = new File("data/tasks.txt");
+            if (!dataFile.createNewFile()) {
+                initializeExistingTasks(dataFile);
+            }
+        } catch (IOException e) {
+            System.out.println("File creation failed.");
+            e.printStackTrace();
         }
+
     }
 
     private static void initializeExistingTasks(File dataFile) throws java.io.IOException {
@@ -56,11 +62,23 @@ public class Storage {
 
 
     /**
-     * when user types "bye", tasks that are in the TaskList class will be saved into a file in the computer
-     *
-     * @throws java.io.IOException if file could not be saved
+     * Calls the private method <code>processUploadTasks</code>
+     * to save the file
+     * <p>
+     * If the file saving process failed, the exception thrown
+     * will be captured
      */
-    public static void uploadTask() throws java.io.IOException {
+    public static void uploadTasks() {
+        try {
+            processUploadTasks();
+        } catch (IOException e) {
+            System.out.println("Failed to save file.");
+            e.printStackTrace();
+        }
+
+    }
+
+    private static void processUploadTasks() throws IOException {
         FileWriter fw = new FileWriter("data/tasks.txt");
         for (int i = 0; i < TaskList.getTaskCount(); ++i) {
             Task t = TaskList.getTask(i + 1);

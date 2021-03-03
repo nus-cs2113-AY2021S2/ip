@@ -12,7 +12,7 @@ public class Duke {
 
         runProgram();
 
-        Storage.uploadTask();
+        Storage.uploadTasks();
 
         exitMessage();
     }

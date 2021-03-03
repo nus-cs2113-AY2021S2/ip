@@ -6,7 +6,7 @@ package duke;
 public class Parser {
 
     /**
-     * parses the input from user to identify the command that was intended
+     * Parses the input from user to identify the command that was intended
      *
      * @param input Input from user
      * @return either the first word if the input has more than 1 word,

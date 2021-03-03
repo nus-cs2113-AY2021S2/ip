@@ -5,7 +5,7 @@ package duke;
  */
 public class Ui {
     /**
-     * print a welcome message when the program is launched
+     * Print a welcome message when the program is launched
      */
     public static void printStartMessage() {
         String STARTMESSAGE = "____________________________________________________________\n"
@@ -16,7 +16,7 @@ public class Ui {
     }
 
     /**
-     * prints the logo of this program
+     * Prints the logo of this program
      */
     public static void printLogo() {
         String LOGO = " ____        _        \n"
@@ -29,7 +29,7 @@ public class Ui {
     }
 
     /**
-     * prints an exit message when user enters "bye"
+     * Prints an exit message when user enters "bye"
      */
     public static void printExitMessage() {
         String ENDMESSAGE = "############################################################\n"
@@ -39,7 +39,7 @@ public class Ui {
     }
 
     /**
-     * prints multiple "*" which acts as a divider line
+     * Prints multiple "*" which acts as a divider line
      */
     public static void printDivider() {
         System.out.println("************************************************************");

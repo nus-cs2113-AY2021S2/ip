@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Represents a task manager where all the tasks are stored in
  * this class
- *
+ * <p>
  * User can add, delete, print tasks etc here
  */
 public class TaskList {
@@ -13,7 +13,7 @@ public class TaskList {
     private static int taskCount = 0;
 
     /**
-     * adds tasks(todo, event or deadline) to an ArrayList called taskList
+     * Adds tasks(todo, event or deadline) to an ArrayList called taskList
      *
      * @param task Task to be added
      */
@@ -24,7 +24,7 @@ public class TaskList {
 
 
     /**
-     * delete and print out the specific task in taskList
+     * Delete and print out the specific task in taskList
      *
      * @param taskIndex index of the specific task to be deleted
      */
@@ -63,6 +63,12 @@ public class TaskList {
         Ui.printDivider();
     }
 
+    /**
+     * Prints all tasks in taskList that contains a specific keyword
+     * in its description
+     *
+     * @param keyword Keyword to be searched in all the tasks in taskList
+     */
     public static void printKeywordTasks(String keyword) {
         ArrayList<Task> keywordTaskList = new ArrayList<>();
         for (Task t : taskList) {
