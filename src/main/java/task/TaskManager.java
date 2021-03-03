@@ -101,14 +101,14 @@ public class TaskManager {
      */
     public void findTask(String keywordToFind) {
         System.out.println("Here are the matching tasks found:");
-        ui.printMessage(ui.DIVIDER, ui.FOUNDLINE, ui.DIVIDER, "");
+        ui.printMessage(ui.DIVIDER, ui.FOUND_DIVIDER, ui.DIVIDER, "");
         for(Task task: taskList){
             String taskDescription = task.getDescription();
             if (taskDescription.contains(keywordToFind)){
                 System.out.println(task);
             }
         }
-        ui.printMessage("", ui.DIVIDER, ui.FOUNDLINE, ui.DIVIDER);
+        ui.printMessage("", ui.DIVIDER, ui.FOUND_DIVIDER, ui.DIVIDER);
         ui.printMessage("\nEnter next command: ");
     }
 }
