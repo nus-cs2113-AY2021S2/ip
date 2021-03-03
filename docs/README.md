@@ -38,27 +38,27 @@ Here are the exact formats of adding tasks to your list of tasks:
 ### Listing task
 The current tasks that you have can be listed with the command “list”. An example of the calling the list command is shown below
 
-![alt text](https://github.com/bryanwhl/ip/tree/master/docs/screenshots/img1.png?raw=true "img1")
+![Img1](https://github.com/bryanwhl/ip/tree/master/docs/screenshots/img1.png)
 
 ### Marking tasks as done
 Any of your tasks can be mark as done by calling the command: done x , replacing x with the specific task number as shown by the list command. An example of how this can be done, with the example output, is shown below:
 
-![alt text](https://github.com/bryanwhl/ip/tree/master/docs/screenshots/img2.png?raw=true "img2")
+![Img2](https://github.com/bryanwhl/ip/tree/master/docs/screenshots/img2.png)
 
 ### Removing task
 You can remove tasks from the data by calling the command: delete x , replacing x with the specific task number as shown by the list command. An example of how this can be done, with the example output, is shown below:
 
-![alt text](https://github.com/bryanwhl/ip/tree/master/docs/screenshots/img3.png?raw=true "img3")
+![Img3](https://github.com/bryanwhl/ip/tree/master/docs/screenshots/img3.png)
 
 ### Finding tasks by keywords
 You can filter tasks out by keywords or a specific character sequence by calling the command: find xxx , replacing xxx with the keyword or character sequence. Here is an example of how it can be done:
 
-![alt text](https://github.com/bryanwhl/ip/tree/master/docs/screenshots/img4.png?raw=true "img4")
+![Img4](https://github.com/bryanwhl/ip/tree/master/docs/screenshots/img4.png)
 
 ### Find tasks by date
 You can filter tasks out by date by calling the command: date yyyy-mm-dd , replacing yyyy-mm-dd with the date of event or deadline that you want to check on. Here is an example of how it can be done:
 
-![alt text](https://github.com/bryanwhl/ip/tree/master/docs/screenshots/img5.png?raw=true "img5")
+![Img5](https://github.com/bryanwhl/ip/tree/master/docs/screenshots/img5.png)
 
 ### Saving your data
 You can save your data by calling the command: 
