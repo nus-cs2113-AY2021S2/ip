@@ -2,9 +2,9 @@
 
 -  [Features](#a) 
    - [Adding tasks](#a)
-    	- [todo](#a)
-    	- [deadline](#b)
-	 - [event](#c)
+     - [todo](#a)
+     - [deadline](#b)
+     - [event](#c)
    - [Listing all tasks](#d)
    - [Completing a task](#e)
    - [Find](#f)
@@ -216,11 +216,11 @@ ____________________________________________________________
 
 **Examples**
 
-&nbsp;&nbsp;&nbsp;&nbsp; Find events on 
+&nbsp;&nbsp;&nbsp;&nbsp; Find events happening on 10 March 2021
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `findAt 2021-03-0`
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `findAt 2021-03-10`
 
-&nbsp;&nbsp;&nbsp;&nbsp; Find any tasks with the word book description
+&nbsp;&nbsp;&nbsp;&nbsp; Find all deadlines that occurs before a 10 March 2021
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `findBy 2021-03-10`
 
