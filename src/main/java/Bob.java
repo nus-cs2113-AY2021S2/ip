@@ -24,7 +24,7 @@ public class Bob {
     private void run() {
         tasks.load(storage.load());
         ui.printWelcome();
-        Parser.scanInput(tasks, storage, ui);
+        Parser.scanLoop(tasks, storage, ui);
         ui.printGoodbye();
     }
 

@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 /**
  * Reads user inputs and processes them
  */
@@ -7,52 +5,63 @@ import java.util.Scanner;
 public class Parser {
 
     /**
-     * Initializes a scanner and starts the loop
+     * Runs a loop to run the parser until the bye command is received
      * @param tasks list of tasks of Bob class
      * @param storage storage capabilities of Bob class
      * @param ui text ui of Bob class
      */
-    public static void scanInput(TaskList tasks, Storage storage, Ui ui) {
-        Scanner scanner = new Scanner(System.in);
-        scanLoop(scanner, tasks, storage, ui);
+    public static void scanLoop(TaskList tasks, Storage storage, Ui ui) {
+        boolean isScanning = true;
+        Command commandType;
+
+        while (isScanning) {
+            commandType = scanInput(tasks, storage, ui);
+            isScanning = checkExit(commandType);
+        }
+    }
+
+    /**
+     * Terminates the loop if the bye command is received
+     * @param commandType Command enum parsed by scanSwitch
+     * @return True if Command is not bye, False is Command is bye
+     */
+    private static boolean checkExit(Command commandType) {
+        return commandType != Command.BYE;
     }
 
     /**
      * Reads user input and processes it
      * Loops until bye command is received
-     * Prints out exceptions that maybe be caught
-     * @param scanner Scanner initialized in scanInput
+     * Prints out exceptions that may be caught
      * @param tasks list of tasks of Bob class
      * @param storage storage capabilities of Bob class
      * @param ui text ui of Bob class
+     * @return Command enum parsed by scanSwitch
      */
-    private static void scanLoop(Scanner scanner, TaskList tasks, Storage storage, Ui ui) {
-        boolean isScanning = true;
-        String inputString;
+    private static Command scanInput(TaskList tasks, Storage storage, Ui ui) {
         Command commandType = null;
+        String inputString;
 
-        while (isScanning) {
-            try {
-                inputString = scanner.nextLine();
-                commandType = getCommandType(inputString);
-                isScanning = scanSwitch(inputString, commandType, tasks, ui);
-                storage.saveData(tasks);
-            } catch (java.util.InputMismatchException e) {
-                ui.printInputMismatch();
-            } catch (NoSuchMethodException  e) {
-                ui.printNoSuchMethod();
-            } catch (NoTaskLabelException e) {
-                ui.printNoTaskLabel(commandType);
-            } catch (NoCommandFormatException e) {
-                ui.printNoCommandFormat(commandType);
-            } catch (NoTaskSpecifiedException e) {
-                ui.printNoTaskSpecified();
-            } catch (IndexOutOfBoundsException e) {
-                ui.printIndexOutOfBounds();
-            } catch (NoSearchQueryException e) {
-                ui.printNoSearchQuery();
-            }
+        try {
+            inputString = ui.getScanner().nextLine();
+            commandType = getCommandType(inputString);
+            scanSwitch(inputString, commandType, tasks, ui);
+            storage.saveData(tasks);
+
+        } catch (NoSuchMethodException  e) {
+            ui.printNoSuchMethod();
+        } catch (NoTaskLabelException e) {
+            ui.printNoTaskLabel(commandType);
+        } catch (NoCommandFormatException e) {
+            ui.printNoCommandFormat(commandType);
+        } catch (NoTaskSpecifiedException e) {
+            ui.printNoTaskSpecified();
+        } catch (IndexOutOfBoundsException e) {
+            ui.printIndexOutOfBounds();
+        } catch (NoSearchQueryException e) {
+            ui.printNoSearchQuery();
         }
+        return commandType;
     }
 
     /**
@@ -60,7 +69,6 @@ public class Parser {
      * @param inputString User input
      * @param commandType enum Command returned by getCommandType
      * @param tasks list of tasks of Bob class
-     * @return isScanning which is true unless Command is Bye, then it would be false
      * @throws NoSuchMethodException If command type is invalid
      * @throws NoTaskLabelException If task label is not stated for construction
      * @throws NoCommandFormatException If time marker is missing for deadline or event
@@ -68,11 +76,10 @@ public class Parser {
      * @throws IndexOutOfBoundsException If task number specified is out of TaskList bounds
      * @throws NoSearchQueryException If search query is not specified for search
      */
-    private static boolean scanSwitch(String inputString, Command commandType, TaskList tasks, Ui ui) throws
+    private static void scanSwitch(String inputString, Command commandType, TaskList tasks, Ui ui) throws
             NoSuchMethodException, NoTaskLabelException, NoCommandFormatException, NoTaskSpecifiedException,
             IndexOutOfBoundsException, NoSearchQueryException {
         String[] inputStringArr = inputString.split(" ");
-        boolean isScanning = true;
 
         switch (commandType) {
         case LIST:
@@ -100,12 +107,10 @@ public class Parser {
             ui.printHelp();
             break;
         case BYE:
-            isScanning = false;
             break;
         default:
             throw new NoSuchMethodException();
         }
-        return isScanning;
     }
 
     /**

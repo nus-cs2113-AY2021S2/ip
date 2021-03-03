@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 /**
  * Manages the text ui interface
  */
@@ -5,18 +7,35 @@
 public class Ui {
 
     public static final String LINE_STRING = "____________________________________________________________";
+    private Scanner scanner;
+
+    public Ui() {
+        this.scanner = new Scanner(System.in);
+    }
+
+    public Scanner getScanner() {
+        return scanner;
+    }
 
     private void printLine() {
         System.out.println(LINE_STRING);
     }
 
-    public void printAddToList(int size, String status) {
+    /**
+     * Prints when a new Task is created
+     * @param size Size of the task list
+     */
+    public void printAddToList(int size) {
         printLine();
-        System.out.println("Say no more fam. The task is added:\n  " + status);
+        System.out.println("Say no more fam. The task is added:\n  [✔]");
         System.out.println(size + " task(s) in the list.");
         printLine();
     }
 
+    /**
+     * Prints every task in the task list with the task details
+     * @param tasks The task list being printed
+     */
     public void printList(TaskList tasks) {
         printLine();
         for (int i = 0; i < tasks.getSize(); i++) {
@@ -25,14 +44,22 @@ public class Ui {
         printLine();
     }
 
-    public void printCompleteTask(String status) {
+    /**
+     * Prints when a task is marked as complete
+     */
+    public void printCompleteTask() {
         printLine();
         System.out.println("Task.Task marked as done, gg ez");
-        System.out.println("  " + status);
+        System.out.println("  [✔]");
         printLine();
     }
 
-    public void printDeleteTask(String status, int size) throws IndexOutOfBoundsException {
+    /**
+     * Prints when a task is deleted
+     * @param status Checkbox status of the task
+     * @param size Size of the task list
+     */
+    public void printDeleteTask(String status, int size) {
         printLine();
         System.out.println("You are a quitter 👎 Anyways, I removed this:");
         System.out.println("  " + status);
@@ -40,6 +67,11 @@ public class Ui {
         printLine();
     }
 
+    /**
+     * Prints a list of task found to match the query
+     * @param results Task list of tasks that match the query
+     * @param query The string that the user is searching for
+     */
     public void printFindTask(TaskList results, String query) {
         printLine();
         System.out.println("Here are the tasks in your list that match「" + query + "」:");
@@ -49,12 +81,18 @@ public class Ui {
         printLine();
     }
 
+    /**
+     * Prints when no tasks are found in a task list
+     */
     public void printNoResultsFound() {
         printLine();
         System.out.println("No tasks found!");
         printLine();
     }
 
+    /**
+     * Prints when Bob is started
+     */
     public void printWelcome() {
         String welcome = LINE_STRING +
                 "\n Hello! I'm Bob 😀\n" +
@@ -63,11 +101,18 @@ public class Ui {
         System.out.println(welcome);
     }
 
+    /**
+     * Prints when Bob closes
+     */
     public void printGoodbye() {
         String goodbye = LINE_STRING + "\n Chao 👌\n" + LINE_STRING;
         System.out.println(goodbye);
     }
 
+    /**
+     * Prints when the time marker is missing for Deadline or Event
+     * @param commandType Command enum parsed by scanSwitch
+     */
     public void printNoCommandFormat(Command commandType) {
         String commandName = commandType.name().toLowerCase();
         String exceptionMessage = LINE_STRING +
@@ -77,6 +122,10 @@ public class Ui {
         System.out.println(exceptionMessage);
     }
 
+    /**
+     * Prints when creating a task without a label
+     * @param commandType Command enum parsed by scanSwitch
+     */
     public void printNoTaskLabel(Command commandType) {
         String commandName = commandType.name().toLowerCase();
         String exceptionMessage = LINE_STRING +
@@ -85,17 +134,13 @@ public class Ui {
         System.out.println(exceptionMessage);
     }
 
+    /**
+     * Prints when input doesn't match any command
+     */
     public void printNoSuchMethod() {
         String exceptionMessage = LINE_STRING +
                 "\n 😥 I don't quite get what the command means, \n" +
                 "type 'help' for a list of commands\n" +
-                LINE_STRING;
-        System.out.println(exceptionMessage);
-    }
-
-    public void printInputMismatch() {
-        String exceptionMessage = LINE_STRING +
-                "\n 😥 There is some issue with getting you input\n" +
                 LINE_STRING;
         System.out.println(exceptionMessage);
     }
