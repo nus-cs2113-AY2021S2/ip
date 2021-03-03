@@ -1,4 +1,7 @@
 T | Y | read book
 D | N | return book | June 6th
-T | Y | join sports club
+T | Y | borrow book
+T | N | read book
+E | N | project meeting | Aug 6th 2-4pm
+T | N | join sports club
 T | N | borrow book

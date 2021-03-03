@@ -7,8 +7,9 @@ Duke is a desktop app for managing tasks, optimized for use via a Command Line I
 1. Ensure you have `Java 11` or above installed in your Computer.
 2. Download the latest `ip.jar` from here: [https://github.com/jianningzhuang/ip/releases](https://github.com/jianningzhuang/ip/releases)
 3. Copy the file to a folder you wish to use as the *home folder* for your Duke Task Manager. (Your data from the app will be stored in the same *home folder*)
-4. Double-click the file to start Duke.
-5. Refer to **Features** and **Usages** below for details of the commands available.
+4. Start a terminal and navigate to your *home folder*.
+5. Run the command `java -jar ip.jar`.  
+6. Refer to **Features** and **Usages** below for details of the commands available.
 
 
 ## Features

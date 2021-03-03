@@ -1,5 +1,7 @@
 package duke.storage;
 
+import duke.exception.DataFileNotFoundException;
+import duke.exception.DukeIOException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -23,70 +25,77 @@ public class Storage {
     /**
      * Constructor
      *
-     * Creates new directory and file based on dirPath and filePath if not found
+     * Creates a new directory based on dirPath if directory does not exist.
+     * Creates a new file based on filePath if file does not exist.
+     *
+     * @throws DukeIOException if an IO error occurs
      */
-    public Storage() {
-        File fileDirectory = new File(dirPath.toString());
+    public Storage() throws DukeIOException {
+        try{
+            File fileDirectory = new File(dirPath.toString());
+            if (!fileDirectory.exists()) {
+                fileDirectory.mkdir();
+            }
 
-        if (!fileDirectory.exists()) {
-            fileDirectory.mkdir();
-        }
-        try {
             File dataFile = new File(filePath.toString());
             dataFile.createNewFile();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new DukeIOException();
         }
     }
 
     /**
-     * Loads saved TaskList from file
+     * Loads saved task list from data file.
+     * Returns the tasks in an ArrayList of Tasks.
      *
      * @return ArrayList of tasks saved in file
-     * @throws FileNotFoundException when pathname does not exist
+     * @throws DataFileNotFoundException if source is not found
      */
-    public ArrayList<Task> loadFile() throws FileNotFoundException {
+    public ArrayList<Task> loadFile() throws DataFileNotFoundException {
+        try {
+            ArrayList<Task> tasks = new ArrayList<>();
 
-        ArrayList<Task> tasks = new ArrayList<>();
+            File dataFile = new File(filePath.toString());
+            Scanner scanner = new Scanner(dataFile);
 
-        File dataFile = new File(filePath.toString());
-        Scanner scanner = new Scanner(dataFile);
-
-        while (scanner.hasNext()) {
-            String line = scanner.nextLine();
-            String type = line.substring(0, 1);
-            String info = line.substring(8);
-            int dateIndex = info.indexOf('|');
-            switch (type) {
-            case "T":
-                tasks.add(new Todo(info));
-                if (line.charAt(4) == 'Y') {
-                    tasks.get(tasks.size() - 1).setAsDone();
+            while (scanner.hasNext()) {
+                String line = scanner.nextLine();
+                String type = line.substring(0, 1);
+                String info = line.substring(8);
+                int dateIndex = info.indexOf('|');
+                switch (type) {
+                case "T":
+                    tasks.add(new Todo(info));
+                    if (line.charAt(4) == 'Y') {
+                        tasks.get(tasks.size() - 1).setAsDone();
+                    }
+                    break;
+                case "D":
+                    tasks.add(new Deadline(info.substring(0, dateIndex - 1), info.substring(dateIndex + 2)));
+                    if (line.charAt(4) == 'Y') {
+                        tasks.get(tasks.size() - 1).setAsDone();
+                    }
+                    break;
+                case "E":
+                    tasks.add(new Event(info.substring(0, dateIndex - 1), info.substring(dateIndex + 2)));
+                    if (line.charAt(4) == 'Y') {
+                        tasks.get(tasks.size() - 1).setAsDone();
+                    }
+                    break;
+                default:
+                    break;
                 }
-                break;
-            case "D":
-                tasks.add(new Deadline(info.substring(0, dateIndex - 1), info.substring(dateIndex + 2)));
-                if (line.charAt(4) == 'Y') {
-                    tasks.get(tasks.size() - 1).setAsDone();
-                }
-                break;
-            case "E":
-                tasks.add(new Event(info.substring(0, dateIndex - 1), info.substring(dateIndex + 2)));
-                if (line.charAt(4) == 'Y') {
-                    tasks.get(tasks.size() - 1).setAsDone();
-                }
-                break;
-            default:
-                break;
             }
+            return tasks;
+        } catch (FileNotFoundException e) {
+            throw new DataFileNotFoundException();
         }
-        return tasks;
     }
 
     /**
-     * Saves tasks to file
+     * Saves tasks to data file
      *
-     * @param tasks ArrayList of tasks to be saved
+     * @param tasks ArrayList of Tasks to be saved
      */
     public void saveFile(ArrayList<Task> tasks) {
         try {

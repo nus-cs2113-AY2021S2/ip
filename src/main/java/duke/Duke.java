@@ -22,11 +22,12 @@ public class Duke {
      * Initialises UI, Storage and TaskList
      */
     public Duke() {
-        ui = new Ui();
-        storage = new Storage();
         try {
+            ui = new Ui();
+            storage = new Storage();
             tasks = new TaskList(storage.loadFile());
-        } catch (FileNotFoundException e) {
+        } catch (DukeException e) {
+            ui.showError(e.getErrorMessage());
             tasks = new TaskList();
         }
     }
