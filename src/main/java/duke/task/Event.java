@@ -12,6 +12,10 @@ public class Event extends Task {
         super(description);
         this.timeSlot = timeSlot;
     }
+    public Event(String description, String timeSlot, boolean isDone) {
+        super(description, isDone);
+        this.timeSlot = timeSlot;
+    }
 
     /**
      * Returns String representation of a Event task.

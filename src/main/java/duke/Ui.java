@@ -34,7 +34,7 @@ public class Ui {
         TaskType taskType = e.getTaskType();
         switch (taskType) {
         case DEADLINE:
-            System.out.println("Please input deadline tasks in the correct format. (e.g deadline <task description> /by <deadline>)");
+            System.out.println("Please input deadline tasks in the correct format. (e.g deadline <task description> /by YYYY-MM-DD)");
             break;
         case EVENT:
             System.out.println("Please input event tasks in the correct format. (e.g. event <task description> /at <timing>)");
