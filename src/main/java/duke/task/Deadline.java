@@ -20,6 +20,11 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    /**
+     * Returns String representation of a Deadline task.
+     * [D] represents Deadline, [X] represents the task is done.
+     * @return [D][X/ ] task description (at: deadline)
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + this.by.format(DateTimeFormatter.ofPattern("d MMM YYYY")) + ")";

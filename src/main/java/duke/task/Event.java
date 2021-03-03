@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Represents a type of Task, with description and a timeslot.
+ */
 public class Event extends Task {
 
     private String description;

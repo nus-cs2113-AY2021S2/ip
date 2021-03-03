@@ -17,9 +17,18 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Manages storage of data in a file at a defined filePath.
+ */
 public class Storage {
     String filePath;
 
+    /**
+     * Checks if filePath given leads to existing directories and files.
+     * If the directory/file does not exist, new directories/files will be created.
+     *
+     * @param filePath Relative path from current directory.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
         String[] directories = filePath.split("/");
@@ -42,6 +51,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves current tasklist at given filePath.
+     *
+     * @param tasks Current array of tasks, forming the tasklist.
+     */
     public void saveTasklist(ArrayList<Task> tasks) {
         try {
             FileWriter fw = new FileWriter(this.filePath);
@@ -56,6 +70,12 @@ public class Storage {
 
     }
 
+    /**
+     * Returns an ArrayList of tasks, loaded from file at given filePath.
+     * If file at given filePath is empty, an empty ArrayList is returned.
+     *
+     * @return ArrayList of tasks loaded from filePath.
+     */
     public ArrayList<Task> loadTasklist() {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
