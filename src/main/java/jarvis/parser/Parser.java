@@ -40,6 +40,7 @@ public class Parser {
      * @param userInput command entered by the user.
      * @return a Deadline object.
      * @throws EmptyDescriptionException if task description is empty.
+     * @throws EmptyDetailException if task detail is empty.
      */
     public static Deadline parseStringToDeadline(String userInput)
             throws EmptyDescriptionException, EmptyDetailException {
@@ -55,7 +56,7 @@ public class Parser {
         String details = descriptionArray[0];
         String by = descriptionArray[1].replaceFirst("by", "");
         if (by.equals("")) {
-            throw new EmptyDetailException();
+            by = "not specified";
         }
         return new Deadline(details, by);
     }
@@ -66,6 +67,7 @@ public class Parser {
      * @param userInput command entered by the user.
      * @return an Event object.
      * @throws EmptyDescriptionException if task description is empty.
+     * @throws EmptyDetailException if task detail is empty.
      */
     public static Event parseStringToEvent(String userInput) throws EmptyDescriptionException, EmptyDetailException {
         String[] command = splitUserInput(userInput);
@@ -78,9 +80,9 @@ public class Parser {
         }
         String[] descriptionArray = description.split("/", 2);
         String details = descriptionArray[0];
-        String at = descriptionArray[1];
+        String at = descriptionArray[1].replaceFirst("at","");
         if (at.equals("")) {
-            throw new EmptyDetailException();
+            at = "not specified";
         }
         return new Event(details, at);
     }
@@ -89,8 +91,8 @@ public class Parser {
      * Parses user input to obtain the keyword for finding tasks
      *
      * @param userInput command entered by the user.
-     * @return the keyword that is used to search in the list
-     * @throws EmptyKeywordException if keyword is missing
+     * @return the keyword that is used to search in the list.
+     * @throws EmptyKeywordException if keyword is missing.
      */
     public static String parseFindCommand(String userInput) throws EmptyKeywordException {
         String[] command = splitUserInput(userInput);
@@ -104,8 +106,8 @@ public class Parser {
      * Parses user input to obtain the task ID
      *
      * @param userInput command entered by the user.
-     * @return task ID in the list
-     * @throws EmptyTaskIdException if keyword is missing
+     * @return task ID in the list.
+     * @throws EmptyTaskIdException if keyword is missing.
      */
     public static String parseToGetTaskId(String userInput) throws EmptyTaskIdException {
         String[] command = splitUserInput(userInput);

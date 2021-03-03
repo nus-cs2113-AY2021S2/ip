@@ -56,6 +56,7 @@ public class JarvisUi {
      * @throws EmptyTaskIdException if the task number is not given by the user
      * @throws NoMatchException if no tasks in the list matches the keyword provided by the user
      * @throws EmptyKeywordException if the keyword is not provided by the user
+     * @throws EmptyDetailException if the details of the task is not provided by the user
      */
     public ArrayList<Task> performTask() throws InvalidCommandException, EmptyListException, InvalidTaskException,
             EmptyDescriptionException, EmptyTaskIdException, NoMatchException,
