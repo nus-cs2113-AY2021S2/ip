@@ -1,7 +1,6 @@
 package jarvis.parser;
 
 import jarvis.exception.EmptyDescriptionException;
-import jarvis.exception.EmptyDetailException;
 import jarvis.exception.EmptyKeywordException;
 import jarvis.exception.EmptyTaskIdException;
 import jarvis.task.Deadline;
@@ -41,22 +40,15 @@ public class Parser {
      * @return a Deadline object.
      * @throws EmptyDescriptionException if task description is empty.
      */
-    public static Deadline parseStringToDeadline(String userInput)
-            throws EmptyDescriptionException, EmptyDetailException {
+    public static Deadline parseStringToDeadline(String userInput) throws EmptyDescriptionException {
         String[] command = splitUserInput(userInput);
         String description = command[1];
         if (description.equals("")) {
             throw new EmptyDescriptionException();
         }
-        if (!description.contains("/by")) {
-            throw new EmptyDetailException();
-        }
-        String[] descriptionArray = description.split("/", 2);
+        String[] descriptionArray = description.split("/by ", 2);
         String details = descriptionArray[0];
-        String by = descriptionArray[1].replace("by", "");
-        if (by.equals("")) {
-            throw new EmptyDetailException();
-        }
+        String by = descriptionArray[1];
         return new Deadline(details, by);
     }
 
@@ -67,21 +59,15 @@ public class Parser {
      * @return an Event object.
      * @throws EmptyDescriptionException if task description is empty.
      */
-    public static Event parseStringToEvent(String userInput) throws EmptyDescriptionException, EmptyDetailException {
+    public static Event parseStringToEvent(String userInput) throws EmptyDescriptionException {
         String[] command = splitUserInput(userInput);
         String description = command[1];
         if (description.equals("")) {
             throw new EmptyDescriptionException();
         }
-        if (!description.contains("/at")) {
-            throw new EmptyDetailException();
-        }
-        String[] descriptionArray = description.split("/", 2);
+        String[] descriptionArray = description.split("/at ", 2);
         String details = descriptionArray[0];
-        String at = descriptionArray[1].replaceFirst("at", "");
-        if (at.equals("")) {
-            throw new EmptyDetailException();
-        }
+        String at = descriptionArray[1];
         return new Event(details, at);
     }
 

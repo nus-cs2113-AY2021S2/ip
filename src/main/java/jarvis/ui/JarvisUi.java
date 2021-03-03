@@ -58,7 +58,7 @@ public class JarvisUi {
      * @throws EmptyKeywordException if the keyword is not provided by the user
      */
     public ArrayList<Task> performTask() throws InvalidCommandException, EmptyListException, InvalidTaskException,
-            EmptyDescriptionException, EmptyTaskIdException, NoMatchException, EmptyKeywordException, EmptyDetailException {
+            EmptyDescriptionException, EmptyTaskIdException, NoMatchException, EmptyKeywordException {
         String userInput = in.nextLine();
         if (userInput.startsWith("bye")) {
             ExitJarvis.execute();

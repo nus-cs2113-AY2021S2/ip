@@ -64,10 +64,4 @@ public class ExceptionHandler {
         System.out.println("\tSorry sir, you need to include the task ID too.");
         Duke.jarvis.printDivider();
     }
-
-    /** Handles situation when the user forgets to provide the task details after the description */
-    public static void handleEmptyDetailException() {
-        System.out.println("\tSorry sir, you need to specify the details of the task.");
-        Duke.jarvis.printDivider();
-    }
 }
