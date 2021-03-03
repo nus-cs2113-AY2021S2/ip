@@ -16,11 +16,16 @@ import java.time.format.DateTimeParseException;
  * Parses the user input into useful data for easy handling
  */
 public class Parser {
-    /**Parses user input into command for execution
+
+    private static final int LENGTH_OF_DATE = 10;
+
+    /**
+     * Parses user input into command for execution
+     *
      * @param userInput processed for Uppercase full user input string
      * @return the command based on the user input
      */
-    public static Command parseCommand(String userInput) throws DukeException{
+    public static Command parseCommand(String userInput) throws DukeException {
         Command cmd = null;
         if (userInput.contains("LIST")) {
             cmd = new PrintCommand();
@@ -30,15 +35,13 @@ public class Parser {
             cmd = new DoneCommand();
         } else if (userInput.contains("DELETE")) {
             cmd = new DeleteCommand();
-        } else if(userInput.contains("FIND")){
+        } else if (userInput.contains("FIND")) {
             cmd = new FindCommand();
-        }else if(userInput.contains("MENU")){
+        } else if (userInput.contains("MENU")) {
             cmd = new HelpCommand();
-        }
-        else if (!userInput.contains("BYE")) {
+        } else if (!userInput.contains("BYE")) {
             cmd = new AddCommand();
-        }
-        else{
+        } else {
             throw new DukeException("Please use the appropriate commands");
         }
         return cmd;
@@ -46,15 +49,16 @@ public class Parser {
 
     /**
      * Extracts the task number in the current list that the user wants to mark as done
+     *
      * @param userInput full userInput String
      * @return task number to be marked done
      */
-    public static int getTaskNoToBeMarkDone(String userInput) throws DukeException{
+    public static int getTaskNoToBeMarkDone(String userInput) throws DukeException {
         String[] inputSplit = userInput.split("DONE ");
         int taskNoDone = 0;
         try {
             taskNoDone = Integer.parseInt(inputSplit[1]);
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             throw new DukeException("Please enter a valid number");
         }
         return taskNoDone;
@@ -63,17 +67,17 @@ public class Parser {
 
     /**
      * Extracts the task number in the current list that the user wants to delete
+     *
      * @param userInput full userInput String
      * @return task number to be deleted
      */
-    public static int getTaskNoToBeMarkDelete(String userInput) throws DukeException{
+    public static int getTaskNoToBeMarkDelete(String userInput) throws DukeException {
         int taskNoDelete;
         String[] inputSplit = userInput.split("DELETE ");
         System.out.println(inputSplit[1]);
         try {
             taskNoDelete = Integer.parseInt(inputSplit[1]);
-        }catch (NumberFormatException e)
-        {
+        } catch (NumberFormatException e) {
             throw new DukeException("Please enter a valid number!");
         }
         return taskNoDelete;
@@ -81,10 +85,11 @@ public class Parser {
 
     /**
      * parses through <code>userInput</code> to instantiates Tasks to be added to the Arraylist of Tasks
+     *
      * @param userInput full userInput String
      * @return taskToAdd Task object to be added
      */
-    public static Task getTask(String userInput) throws DukeException{
+    public static Task getTask(String userInput) throws DukeException {
         Task taskToAdd = null;
         if (userInput.contains("TODO")) {
             taskToAdd = getToDo(userInput);
@@ -92,7 +97,7 @@ public class Parser {
             taskToAdd = getDeadline(userInput);
         } else if (userInput.contains("EVENT")) {
             taskToAdd = getEvent(userInput);
-        } else{
+        } else {
             throw new DukeException("Please use the appropriate commands");
         }
         return taskToAdd;
@@ -106,7 +111,7 @@ public class Parser {
     private static Event getEvent(String userInput) {
         String removeKeyword = userInput.replaceAll("EVENT", "");
         String[] inputSplit = removeKeyword.split("/AT");
-        return new Event(inputSplit[0],inputSplit[1]);
+        return new Event(inputSplit[0], inputSplit[1]);
     }
 
     /***
@@ -128,8 +133,9 @@ public class Parser {
     private static Deadline getDeadline(String userInput) throws DukeException {
         String removeKeyword = userInput.replaceAll("DEADLINE", "");
         String[] inputSplit = removeKeyword.split("/BY");
-        LocalDate finalDate = parseTime(inputSplit[1]);
-        return new Deadline(inputSplit[0], finalDate);
+        LocalDate finalDate = parseDate(inputSplit[1]);
+        LocalTime finalTime = parseTime(inputSplit[1]);
+        return new Deadline(inputSplit[0], finalDate, finalTime);
     }
 
     /***
@@ -137,19 +143,32 @@ public class Parser {
      * @param userInput full userInput String
      * @return the keywords set that the users wants to find
      */
-    public static String getFindKeyword(String userInput){
+    public static String getFindKeyword(String userInput) {
         String keywordSet = userInput.replaceAll("FIND", "").strip();
         return keywordSet;
     }
 
-    public static LocalDate parseTime(String date) throws DukeException {
+    public static LocalDate parseDate(String inputDate) throws DukeException {
         try {
+            inputDate = inputDate.trim().substring(0, LENGTH_OF_DATE);
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDate date = LocalDate.parse(inputDate.strip(), formatter);
             return date;
-        }catch (DateTimeParseException|StringIndexOutOfBoundsException e){
-            throw new DukeException("\"Date format should be \"YYYY-MM-DD\"");
+        } catch (DateTimeParseException | StringIndexOutOfBoundsException e) {
+            throw new DukeException("Date format should be \"YYYY-MM-DD HH:mm\"");
         }
     }
 
+    public static LocalTime parseTime(String inputTime) {
+        int index = inputTime.strip().indexOf(" ");
+        inputTime = inputTime.strip().substring(index + 1);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        try {
+            LocalTime time = LocalTime.parse(inputTime, formatter);
+            System.out.println(time);
+            return time;
+        } catch (DateTimeParseException | StringIndexOutOfBoundsException e) {
+            return null;
+        }
+    }
 }
