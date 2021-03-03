@@ -8,7 +8,10 @@ import java.util.ArrayList;
 
 public class FindCommand extends Command {
 
-    private String search;
+    /**
+     * Keyword that the user searches
+     */
+    private final String search;
     private TaskList taskList;
 
     public FindCommand(String search, TaskList taskList,
@@ -18,6 +21,11 @@ public class FindCommand extends Command {
         this.taskList = taskList;
     }
 
+    /**
+     * Searches the TaskList for any matches with the keyword
+     *
+     * @return matchingTasks ArrayList of Tasks that matches the keyword
+     */
     private ArrayList<Task> findTasks() {
         ArrayList<Task> matchingTasks = new ArrayList<>();
         for (Task task : taskList.getTaskList()) {
@@ -28,6 +36,9 @@ public class FindCommand extends Command {
         return matchingTasks;
     }
 
+    /**
+     * Prints the list of tasks that contain the relevant keyword
+     */
     @Override
     public void execute() {
         ArrayList<Task> matchingTasks = findTasks();

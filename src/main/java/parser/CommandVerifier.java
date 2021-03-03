@@ -20,6 +20,13 @@ public class CommandVerifier {
     private String[] subStrings;
     private String command;
 
+    /**
+     * Verifies if the command is legal
+     *
+     * @param command String Command to be verified
+     * @throws UnknownCommandException
+     * @throws MissingInfoException
+     */
     public void verify(String command) throws UnknownCommandException, MissingInfoException {
 
         this.command = command;
@@ -51,6 +58,12 @@ public class CommandVerifier {
         }
     }
 
+    /**
+     * Checks if the command is a valid command
+     *
+     * @param firstWord First Word of the Command
+     * @return boolean whether the command is valid
+     */
     private boolean validCommand(String firstWord) {
         return firstWord.equals("todo")
                 || firstWord.equals("list")
@@ -62,6 +75,9 @@ public class CommandVerifier {
                 || firstWord.equals("find");
     }
 
+    /**
+     * Checks if the Todo description is missing
+     */
     private void checkTodo() {
         if (subStrings.length < 2) {
             throw new MissingInfoException(
@@ -69,14 +85,23 @@ public class CommandVerifier {
         }
     }
 
+    /**
+     * Checks if the index specified in the Delete command is out of range
+     */
     private void checkDelete() {
         checkValidRange();
     }
 
+    /**
+     * Checks if the index specified in the Done command is out of range
+     */
     private void checkDone() {
         checkValidRange();
     }
 
+    /**
+     * Checks if the description or the keyword is missing from the Deadline command
+     */
     private void checkDeadline() {
         checkKeywordExists("The keyword '/by'", "/by");
         String[] subStringsByKeyword = command.split("/by");
@@ -94,6 +119,9 @@ public class CommandVerifier {
         }
     }
 
+    /**
+     * Checks if the description or the keyword is missing from the Event command
+     */
     private void checkEvent() {
         checkKeywordExists("The keyword '/at'", "/at");
         String[] subStringsByKeyword = command.split("/at");
@@ -110,6 +138,12 @@ public class CommandVerifier {
         }
     }
 
+    /**
+     * Checks if the keyword exists
+     *
+     * @param missing String of the missing keyword
+     * @param keyword String of they keyword to check
+     */
     private void checkKeywordExists(String missing, String keyword) {
         if (!command.contains(keyword)) {
             throw new MissingInfoException(
@@ -117,6 +151,9 @@ public class CommandVerifier {
         }
     }
 
+    /**
+     * Checks whether index is out of range
+     */
     private void checkValidRange() {
         if (subStrings.length < 2) {
             throw new MissingInfoException(
@@ -125,6 +162,9 @@ public class CommandVerifier {
         checkValidNumber();
     }
 
+    /**
+     * Checks whether the input is a valid number
+     */
     private void checkValidNumber() {
         try {
             Integer.parseInt(subStrings[1]);
@@ -134,6 +174,9 @@ public class CommandVerifier {
         }
     }
 
+    /**
+     * Checks whether the description is missing from the Find Command
+     */
     private void checkFind() {
         if (subStrings.length < 2) {
             throw new MissingInfoException(

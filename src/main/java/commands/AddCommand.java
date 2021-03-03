@@ -13,6 +13,9 @@ public class AddCommand extends Command {
         this.tasks = tasks;
     }
 
+    /**
+     * Adds Task to the TaskList and prints the add message
+     */
     @Override
     public void execute() {
         tasks.add(taskToAdd);

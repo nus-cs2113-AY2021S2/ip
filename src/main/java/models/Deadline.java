@@ -5,9 +5,9 @@ import java.util.Date;
 
 public class Deadline extends Task {
 
+    private final DateFormat inputFormat = Dates.inputFormat;
+    private final DateFormat outputFormat = Dates.outputFormat;
     protected Date by;
-    private DateFormat inputFormat = Dates.inputFormat;
-    private DateFormat outputFormat = Dates.outputFormat;
 
     public Deadline(String description, Date by) {
         super(description);
@@ -19,11 +19,17 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    /**
+     * @return String describing the Deadline Task
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + outputFormat.format(this.by) + ")";
     }
 
+    /**
+     * @return String with formatted Data to be written onto Text file
+     */
     @Override
     public String formatData() {
         int done;

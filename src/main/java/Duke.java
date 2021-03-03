@@ -41,6 +41,9 @@ public class Duke {
         new Duke().run();
     }
 
+    /**
+     * Runs the main Duke application
+     */
     public void run() {
         Scanner sc = new Scanner(System.in);
         String phrase;

@@ -1,7 +1,6 @@
 package commands;
 
 import io.DukePrint;
-import models.Task;
 import models.TaskList;
 
 public class ListCommand extends Command {
@@ -13,6 +12,9 @@ public class ListCommand extends Command {
         this.taskList = taskList;
     }
 
+    /**
+     * Prints the TaskList
+     */
     @Override
     public void execute() {
         dukePrint.printList(taskList);

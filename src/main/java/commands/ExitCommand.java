@@ -8,6 +8,9 @@ public class ExitCommand extends Command {
         super(dukePrint);
     }
 
+    /**
+     * Prints the Goodbye Message
+     */
     @Override
     public void execute() {
         dukePrint.printBye();
