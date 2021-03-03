@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Represents a task, with a description and done status.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -20,6 +23,9 @@ public class Task {
         return this.description;
     }
 
+    /**
+     * Checks if a task is done, marks task as done if it is not.
+     */
     public void markAsDone(){
         if (!this.isDone) {
             this.isDone = true;

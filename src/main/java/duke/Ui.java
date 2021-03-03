@@ -3,6 +3,9 @@ package duke;
 import duke.exception.DukeException;
 import duke.exception.TaskType;
 
+/**
+ * Provides methods for general/repeating UI displays.
+ */
 public class Ui {
 
     public Ui() {}
@@ -22,6 +25,11 @@ public class Ui {
         System.out.println("Goodbye. See you again soon :)");
     }
 
+    /**
+     * Prints appropriate error message depending on the TaskType causing the exception.
+     *
+     * @param exception TaskType of exception is defined based on the input that caused the exception.
+     */
     public void displayError(DukeException e) {
         TaskType taskType = e.getTaskType();
         switch (taskType) {
