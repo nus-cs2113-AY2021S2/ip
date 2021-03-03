@@ -26,7 +26,8 @@ public class Task {
             System.out.println("Great! I've marked this task as done:");
             System.out.println(this.toString());
         } else {
-            System.out.println("You already completed this task previously!");
+            System.out.println("You already completed this task previously:");
+            System.out.println(this.toString());
         }
     }
 
