@@ -4,10 +4,18 @@ import java.time.LocalDate;
 
 public class Todo extends Task {
 
+    /**
+     * constructor for the Todo task
+     * @param nameInit name of the task
+     */
     public Todo(String nameInit) {
         super(nameInit);
     }
 
+    /**
+     *
+     * @return the task formatted nicely in a string for output purposes
+     */
     @Override
     public String toString() {
         String outputString = "[T]";
@@ -21,6 +29,10 @@ public class Todo extends Task {
         return outputString;
     }
 
+    /**
+     *
+     * @return the string to be saved by the program representing the different attributes of the task
+     */
     public String toStringSave() {
         String saveString = "T | ";
         if (isDone) {
@@ -33,6 +45,10 @@ public class Todo extends Task {
         return saveString;
     }
 
+    /**
+     *
+     * @return the date of the task, which is null as Todo objects does not have a date attribute
+     */
     public LocalDate getDate() {
         return null;
     }

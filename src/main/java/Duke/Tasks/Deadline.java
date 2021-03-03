@@ -5,13 +5,25 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
 
+    /**
+     * Deadline of the event
+     */
     LocalDate deadline;
 
+    /**
+     * Constructor for a deadline class
+     * @param nameInit
+     * @param deadline
+     */
     public Deadline(String nameInit, LocalDate deadline) {
         super(nameInit);
         this.deadline = deadline;
     }
 
+    /**
+     *
+     * @return the string to be saved by the program representing the different attributes of the task
+     */
     @Override
     public String toString() {
         String outputString = "[D]";
@@ -27,6 +39,10 @@ public class Deadline extends Task {
         return outputString;
     }
 
+    /**
+     *
+     * @return the string to be saved by the program representing the different attributes of the task
+     */
     public String toStringSave() {
         String saveString = "D | ";
         if (isDone) {
@@ -39,6 +55,10 @@ public class Deadline extends Task {
         return saveString;
     }
 
+    /**
+     *
+     * @return the date of the deadline
+     */
     public LocalDate getDate() {
         return deadline;
     }
