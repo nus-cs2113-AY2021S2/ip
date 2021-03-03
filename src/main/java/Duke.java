@@ -61,21 +61,11 @@ public class Duke {
             TaskManager.removeTask(fullCommand.substring(6).trim());
             break;
         case "find":
-            TaskManager.printTasksWithKeywords(fullCommand.substring(4).trim());
+            TaskManager.findTasksWithKeywords(fullCommand.substring(4).trim());
             break;
         case "print":
-            if (partOfCommand[1].trim().equals("type")) {
-                TaskManager.printOneTaskTypeWithStreams(fullCommand.substring(11, 12).trim());
-                break;
-            } else if (partOfCommand[1].trim().equals("date")) {
-                TaskManager.printOneTaskDateWithStreams(partOfCommand[2].trim());
-                break;
-            } else if (partOfCommand[1].trim().equals("filepath")
-                    || (partOfCommand[1].trim().equals("file"))
-                    && partOfCommand[2].trim().equals("path")) {
-                SuccessMessagePrinter.printFilePath(F.getAbsolutePath());
-                break;
-            }
+            TaskManager.checkPrintCommand(fullCommand, partOfCommand, F.getAbsolutePath());
+            break;
         case "save":
             FileManager.savingProgramRoutine(F);
             SuccessMessagePrinter.printTasksSaved(F.getAbsolutePath());

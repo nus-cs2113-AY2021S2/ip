@@ -155,11 +155,36 @@ public class TaskManager {
     }
 
     /**
+     * Checks if the 'print' command is input correctly. If it is, then it will carry out the parsing.
+     *
+     * @param fullCommand the complete user input
+     * @param partOfCommand String array that has the user input split up by whitespace
+     * @param filepath path of the tasks.txt file saved locally
+     */
+    public static void checkPrintCommand(String fullCommand, String[] partOfCommand, String filepath) {
+        try {
+            if (partOfCommand[1].trim().equals("type")) {
+                printOneTaskTypeWithStreams(fullCommand.substring(11, 12).trim());
+            } else if (partOfCommand[1].trim().equals("date")) {
+                printOneTaskDateWithStreams(partOfCommand[2].trim());
+            } else if (partOfCommand[1].trim().equals("filepath")
+                    || (partOfCommand[1].trim().equals("file"))
+                    && partOfCommand[2].trim().equals("path")) {
+                SuccessMessagePrinter.printFilePath(filepath);
+            } else {
+                ErrorMessagePrinter.printInvalidCommandMessage("print");
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            ErrorMessagePrinter.printInvalidCommandMessage("print");
+        }
+    }
+
+    /**
      * Prints all the tasks that contain a given keyword.
      *
      * @param keyword the search word that user inputs
      */
-    public static void printTasksWithKeywords(String keyword) {
+    public static void findTasksWithKeywords(String keyword) {
         try {
             Checker.checkTasksToFind(keyword.trim());
         } catch (InvalidCommandException i) {
@@ -185,7 +210,7 @@ public class TaskManager {
     public static void printOneTaskTypeWithStreams(String taskTypeInput) {
         try {
             Checker.checkTaskTypeStreamToPrint(taskTypeInput.trim());
-        } catch (StreamErrorException e) {
+        } catch (StreamErrorException | ArrayIndexOutOfBoundsException e) {
             ErrorMessagePrinter.printTaskStreamError("type");
             return;
         }
