@@ -1,6 +1,4 @@
-package TaskClass;
-
-import TaskClass.Task;
+package task;
 
 public class ToDo extends Task {
     public static final String TASK_INFO_FORMAT = "[T][%s]%s";
@@ -10,18 +8,12 @@ public class ToDo extends Task {
     }
 
     @Override
-    public void printTaskInfo() {
+    public String getTaskInfo(){
         if(super.getDone()){
-                System.out.println(String.format(TASK_INFO_FORMAT,"X",taskName));
+            return String.format(TASK_INFO_FORMAT,"X",taskName);
         } else {
-                System.out.println(String.format(TASK_INFO_FORMAT," ",taskName));
+            return String.format(TASK_INFO_FORMAT," ",taskName);
         }
-    }
-
-    @Override
-    public void newTaskOutput(){
-        System.out.print(LINE_SEPERATOR + "\n    ToDo added:\n      ");
-        this.printTaskInfo();
     }
 
     @Override

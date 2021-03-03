@@ -1,11 +1,8 @@
-package Exception;
+package exception;
 
 public class TaskAlreadyDoneException extends RuntimeException{
-    public TaskAlreadyDoneException(String s){
-        super(s);
-    }
 
-    public TaskAlreadyDoneException(){};
+    public TaskAlreadyDoneException(){}
 
     @Override
     public String toString(){

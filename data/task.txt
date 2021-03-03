@@ -1,4 +1,2 @@
-D | 1 | return book | June 6th
-E | 0 | project meeting | Aug 6th 2-4pm
-T | 1 | reading
-E | 0 | have lunch | 1pm
+E | 0 | meeting | thursay
+T | 0 | sleep

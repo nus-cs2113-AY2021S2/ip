@@ -1,9 +1,8 @@
-package FileHandler;
+package fileHandler;
 
-import TaskClass.Task;
-import TaskClass.TaskList;
+import task.Task;
+import task.TaskList;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;

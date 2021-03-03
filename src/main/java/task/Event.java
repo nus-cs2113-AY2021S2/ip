@@ -1,4 +1,4 @@
-package TaskClass;
+package task;
 
 public class Event extends Task {
     public static final String TASK_INFO_FORMAT = "[E][%s]%s (at: %s)";
@@ -9,19 +9,14 @@ public class Event extends Task {
         this.duration = duration;
     }
 
-    @Override
-    public void printTaskInfo() {
-        if(super.getDone()){
-            System.out.println(String.format(TASK_INFO_FORMAT,"X",taskName,duration));
-        } else {
-            System.out.println(String.format(TASK_INFO_FORMAT," ",taskName,duration));
-        }
-    }
 
     @Override
-    public void newTaskOutput(){
-        System.out.print(Task.LINE_SEPERATOR + "\n    Event added:\n      ");
-        this.printTaskInfo();
+    public String getTaskInfo(){
+        if(super.getDone()){
+            return String.format(TASK_INFO_FORMAT,"X",taskName,duration);
+        } else {
+            return String.format(TASK_INFO_FORMAT," ",taskName,duration);
+        }
     }
 
     @Override

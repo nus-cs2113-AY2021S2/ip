@@ -1,14 +1,14 @@
-package FileHandler;
+package fileHandler;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import TaskClass.Deadline;
-import TaskClass.Event;
-import TaskClass.Task;
-import TaskClass.ToDo;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.ToDo;
 
 public class FileHandler {
     private File source;

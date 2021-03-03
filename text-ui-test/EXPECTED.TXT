@@ -11,7 +11,7 @@
     ____________________________________________________________
     ____________________________________________________________
     ToDo added:
-      [T][ ]read a book
+        [T][ ]read a book
     Now you have 1 tasks in the list
     ____________________________________________________________
     ____________________________________________________________
@@ -20,7 +20,7 @@
     ____________________________________________________________
     ____________________________________________________________
     Deadline added:
-      [D][ ]return a book (by: Sunday 10am)
+        [D][ ]return a book (by: Sunday 10am)
     Now you have 2 tasks in the list
     ____________________________________________________________
     ____________________________________________________________
@@ -53,7 +53,7 @@
     ____________________________________________________________
     ____________________________________________________________
     Event added:
-      [E][ ]tutorial (at: Feb 5 10am)
+        [E][ ]tutorial (at: Feb 5 10am)
     Now you have 3 tasks in the list
     ____________________________________________________________
     ____________________________________________________________
@@ -64,14 +64,15 @@
     event event name /at time of the event
     ____________________________________________________________
     ____________________________________________________________
-    The task is done already.
+    The task is already marked as done
     ____________________________________________________________
     ____________________________________________________________
-    Invalid input format.
-    Input format:
-    todo todo name
-    deadline deadline name /by time of deadline
-    event event name /at time of the event
+    Duke only accepts the following commands:
+    1.todo + todo name
+    2.deadline + deadline name + /by + time of deadline
+    3.event + event name + /at + time of the event
+    4.done + task index
+    5.delete + task index
     ____________________________________________________________
     ____________________________________________________________
     Here are the tasks in your list:

@@ -1,6 +1,6 @@
-package TaskClass;
+package task;
 
-public class Task {
+public abstract class Task {
     protected String taskName;
     protected boolean taskDone;
     public static final String TASK_INFO_FORMAT = "[ ][%s]%s";
@@ -27,11 +27,11 @@ public class Task {
         taskDone = done;
     }
 
-    public void printTaskInfo(){};
+
+    public abstract String getTaskInfo();
 
     public void getDoneOutput(){};
 
-    public void newTaskOutput(){};
 
     public String toFile(){
         return "";
