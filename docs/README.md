@@ -31,8 +31,8 @@ Given below are instructions on how to use it.
 1. [Frequently Asked Questions (FAQ)](#faq)
 1. [Command Summary](#summary)
 
-<a name="quickstart"></a>
-<a name="settingup"></a>
+
+<a name="settingup"></a> <a name="quickstart"></a>
 ### Quick Start
 The **Duke** app is run via a file with the extension `.jar`. The following steps will help you set up **Duke** to run on your computer.
 1. Set up the `.jar` file by downloading the latest version from [here](https://github.com/nivikcivik/ip/releases)
@@ -41,7 +41,9 @@ The **Duke** app is run via a file with the extension `.jar`. The following step
 
 1. Ensure you have installed `Java 11` on your computer.
    1. Look for the `terminal` or `command prompt` application on your computer.
-   1. Type `java --version` in the terminal on your computer to check the version of java.
+   1. Type `java --version` in the terminal on your computer to check the version of java.  
+
+Back to [Table Of Contents](#toc)
 
 <a name="runningduke"></a>
 ### Running <span style="color:#2975C7">Duke</span> Program 
@@ -76,6 +78,8 @@ ____________________________________________________________
 ```
 1. If the _tasks.txt_ file does not already exist in the _home folder_ that you are in currently, **Duke** will tell you the file path where the _tasks.txt_ file is saved. It will be saved in your _home folder_ where your `.jar` file is located.
 
+Back to [Table Of Contents](#toc)
+
 <a name="hello"></a>
 #### i. Command: `hello`, `hey`, `hi` 
 Prints a friendly greeting  
@@ -88,6 +92,9 @@ ____________________________________________________________
  Type 'help' if you need help.
 ____________________________________________________________
 ```
+
+Back to [Table Of Contents](#toc)
+
 <a name="help"></a>
 #### ii. Command: `help` 
 Prints the command formats that **Duke** will respond to.  
@@ -112,6 +119,9 @@ ____________________________________________________________
  Remember: be nice!
 ____________________________________________________________
 ```
+
+Back to [Table Of Contents](#toc)
+
 <a name="todo"></a>
 #### iii. Command `todo <task name>` 
 Adds a To-Do to your list
@@ -125,6 +135,9 @@ ____________________________________________________________
  Now you have 1 task in the list.
 ____________________________________________________________
 ```
+
+Back to [Table Of Contents](#toc)
+
 
 <a name="deadline"></a>
 #### iv. Command `deadline <task name> /by <YYYY-MM-DD> <HH:MM>` 
@@ -140,6 +153,9 @@ ____________________________________________________________
  Now you have 2 tasks in the list.
 ____________________________________________________________
 ```
+
+Back to [Table Of Contents](#toc)
+
 <a name="event"></a>
 #### v. Command `event <task name> /at <YYYY-MM-DD> <HH:MM>` 
 Adds an Event to your list
@@ -154,6 +170,9 @@ ____________________________________________________________
  Now you have 3 tasks in the list.
 ____________________________________________________________
 ```
+
+Back to [Table Of Contents](#toc)
+
 <a name="done"></a>
 #### vi. Command `done <task number` 
 Marks a task at task number in list as '_done_'
@@ -172,6 +191,9 @@ T ~~   ~~ be happy
 D ~~ X ~~ finish homework ~~ 23 Feb 2021 ~~ 23:59
 E ~~   ~~ birthday party ~~ 28 Feb 2020 ~~ 23:59
 ```
+
+Back to [Table Of Contents](#toc)
+
 <a name="delete"></a>
 #### vii. Command `delete <task number` 
 Removes a task at task number from list  
@@ -185,6 +207,9 @@ ____________________________________________________________
  Now you have 2 tasks in the list.
 ____________________________________________________________
 ```
+
+Back to [Table Of Contents](#toc)
+
 <a name="save"></a>
 #### viii. Command `save` 
 Saves the current list in the _tasks.txt_ file.  
@@ -197,6 +222,9 @@ ____________________________________________________________
  C:\Users\user\Desktop\tasks.txt
 ____________________________________________________________
 ```
+
+Back to [Table Of Contents](#toc)
+
 <a name="list"></a>
 #### ix. Command `list` 
 Prints all the current tasks along with dates and times   
@@ -216,6 +244,9 @@ Output:
  6.[D][ ] buy dress for birthday party (by: 28 Feb 2020 23:00)
 ____________________________________________________________
 ```
+
+Back to [Table Of Contents](#toc)
+
 <a name="find"></a>
 #### x. Command `find <common keyword in tasks>` 
 Finds and filters out the tasks with a desired keyword  
@@ -229,6 +260,9 @@ ____________________________________________________________
  3. [E][X] go to book club (at: 3 Mar 2021 12:00)
 ____________________________________________________________
 ```
+
+Back to [Table Of Contents](#toc)
+
 <a name="printtype"></a>
 #### xi. Command `print type <task type>` 
 Prints out all tasks of a certain kind (e.g. deadlines, etc.)  
@@ -240,6 +274,9 @@ ____________________________________________________________
 [E][X] go to book club (at: 3 Mar 2021 12:00)
 ____________________________________________________________
 ```
+
+Back to [Table Of Contents](#toc)
+
 <a name="printdate"></a>
 #### xii. Command `print date <task date YYYY-MM-DD>` 
 Prints out all tasks with a certain date  
@@ -251,6 +288,9 @@ ____________________________________________________________
 [D][ ] buy dress for birthday party (by: 28 Feb 2020 23:00)
 ____________________________________________________________
 ```
+
+Back to [Table Of Contents](#toc)
+
 <a name="printfilepath"></a>
 #### xiii. Command `print filepath` 
 Prints path of the _tasks.txt_ file.  
@@ -262,6 +302,9 @@ ____________________________________________________________
  C:\Users\user\Desktop\tasks.txt
 ____________________________________________________________ 
 ```
+
+Back to [Table Of Contents](#toc)
+
 <a name="bye"></a>
 #### xiv. Command `bye` 
 Exits the program.
@@ -278,10 +321,16 @@ ____________________________________________________________
 ____________________________________________________________
 
 ```
+
+Back to [Table Of Contents](#toc)
+
 <a name="saving"></a>
 ### Saving of tasks list locally on your computer 
 When the command `bye` is given to **Duke**, it will automatically save the current task list from the **Duke** program in the _tasks.txt_ file (located in your _home folder_ ; file path specified at beginning for the first time)  
 However, you can manually enter the `save` command (refer to Section **viii.**)
+
+Back to [Table Of Contents](#toc)
+
 
 <a name="editing"></a>
 ### Editing of tasks list locally on your computer 
@@ -295,6 +344,9 @@ When you open the _tasks.txt_ file, you will notice that your tasks are saved an
 <span style="color:RED">**NOTE:**</span>. It is **highly discouraged** to edit this file directly instead of editing them on the **Duke** program, as it could cause some errors when **Duke** is loaded the next time. Simply change the individual fields (e.g. numbers on dates/times, the X icon, etc.).
 
 Please do **not** change the line structure or the format of the file.
+
+Back to [Table Of Contents](#toc)
+
 
 <a name="faq"></a>
 ### Frequently Asked Questions (FAQ)
@@ -321,6 +373,24 @@ Please do **not** change the line structure or the format of the file.
    What does this mean?
    - This simply means that  there are no results after searching through the tasks.
 
+Back to [Table Of Contents](#toc)
+
 <a name="summary"></a>
+### Command Summary
+| Command      | Function |
+| :----:      | :----      |
+| [help](#help)      | Prints the command formats that Duke will respond to.  |
+| [todo \<task name\>](#todo)   | Adds a To-Do to your list |
+| [deadline \<task name\> /by \<YYYY-MM-DD\> \<HH:MM\>](#deadline)   | Adds a Deadline to your list  |
+| [event \<task name\> /at \<YYYY-MM-DD\> \<HH:MM\>](#event)   | Adds an Event to your list |
+| [done \<task number\>](#done)   | Marks a task at task number in list as '_done_'|
+| [delete \<task number\>](#delete)   | Removes a task at task number from list|
+| [save](#save)   | Saves the current list in the _tasks.txt_ file.|
+| [list](#list)   | Prints all the current tasks along with dates and times|
+| [find \<common keyword in tasks\>](#find)   | Finds and filters out the tasks with a desired keyword|
+| [print type \<task type\>](#printtype)   | Prints out all tasks of a certain kind (e.g. deadlines, etc.) |
+| [print date \<task date YYYY-MM-DD\>](#printdate)   | Prints out all tasks with a certain date |
+| [print filepath](#printfilepath)   | Prints path of the _tasks.txt_ file.|
+| [bye](#bye)   | Exits the program.  |
 
 Back to [Table Of Contents](#toc)
