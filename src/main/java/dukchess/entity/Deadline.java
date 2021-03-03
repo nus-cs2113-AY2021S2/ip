@@ -13,6 +13,12 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    /**
+     * Create a deadline using its description, isDone status, and due date.
+     * @param taskDescription
+     * @param isDone
+     * @param by
+     */
     public Deadline(String taskDescription, boolean isDone, String by) {
         super(taskDescription, isDone);
         this.by = by;

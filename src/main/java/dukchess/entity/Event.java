@@ -14,9 +14,15 @@ public class Event extends Task {
         this.timeOfEvent = timeOfEvent;
     }
 
-    public Event(String taskDescription, boolean isDone, String at) {
+    /**
+     * Create an event using its task description, its isDone status, and when it is at.
+     * @param taskDescription
+     * @param isDone
+     * @param timeOfEvent
+     */
+    public Event(String taskDescription, boolean isDone, String timeOfEvent) {
         super(taskDescription, isDone);
-        this.timeOfEvent = at;
+        this.timeOfEvent = timeOfEvent;
     }
 
     public String getTimeOfEvent() {

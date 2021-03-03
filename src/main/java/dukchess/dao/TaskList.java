@@ -17,11 +17,19 @@ public class TaskList extends ArrayList<Task> {
     private FileWriter taskFileWriter;
     private Scanner taskFileScanner;
 
+    /**
+     * Create a taskList that superclasses ArrayList for easy filesystem interfacing
+     * @param taskFile
+     * @throws IOException
+     */
     public TaskList(File taskFile) throws IOException {
         super();
         initializeFromFile(taskFile);
     }
 
+    /**
+     * Flush the contents of the task list to filesystem. Created for easy interfacing
+     */
     public void flushTaskList() {
         try {
             for (int i = 0; i < this.size(); i++) {
