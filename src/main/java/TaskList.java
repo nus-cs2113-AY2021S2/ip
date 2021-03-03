@@ -8,9 +8,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TaskList {
-    public TaskList() {}
 
-    public static ArrayList<Task> tasks = new ArrayList<>();
+    public static ArrayList<Task> tasks = new ArrayList();
+
+    public TaskList() {}
 
     public static void addTask(String taskDescription) throws
             MissingDeadlineException, MissingEventTimeException {
@@ -89,7 +90,7 @@ public class TaskList {
         }
     }
 
-    static void setupTasks() throws FileNotFoundException,
+    public static void setupTasks() throws FileNotFoundException,
             MissingDeadlineException, MissingEventTimeException {
         // Reads in current tasks when main() starts running.
         File f = new File("duke.txt");
