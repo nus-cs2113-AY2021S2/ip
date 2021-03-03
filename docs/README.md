@@ -32,7 +32,7 @@ Your very own application to manage your to-do list!
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `chcp 65001`
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `java -jar -Dfile.encoding=UTF-8 path/to/your/runnable/jar`
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `java -jar -Dfile.encoding=UTF-8 [path to your runnable jar file]`
 
 
 ***
