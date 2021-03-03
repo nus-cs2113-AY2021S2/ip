@@ -22,13 +22,13 @@ public class EventCommand extends Command {
 
     @Override
     public void execute() throws InvalidInputException, IOException, SaveException {
-        String at = arguments.get("at");
-        if (at == null || at.length() == 0) {
+        String atDateTime = arguments.get("at");
+        if (atDateTime == null || atDateTime.length() == 0) {
             // Either /at is not found at all, or no dates are following /at
             throw new InvalidInputException(InputExceptionType.NO_AT_DATE);
         }
         try {
-            tasks.addTask(new Event(arguments.get("payload"), new DateTime(at)));
+            tasks.addTask(new Event(arguments.get("payload"), new DateTime(atDateTime)));
             ui.printNewTask(tasks);
         } catch (DateTimeParseException e) {
             throw new InvalidInputException(InputExceptionType.MALFORMED_DATE);

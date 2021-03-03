@@ -22,13 +22,13 @@ public class DeadlineCommand extends Command {
 
     @Override
     public void execute() throws InvalidInputException, IOException, SaveException {
-        String by = arguments.get("by");
-        if (by == null || by.length() == 0) {
+        String byDateTime = arguments.get("by");
+        if (byDateTime == null || byDateTime.length() == 0) {
             // Either /by is not found at all, or no dates are following /by
             throw new InvalidInputException(InputExceptionType.NO_BY_DATE);
         }
         try {
-            tasks.addTask(new Deadline(arguments.get("payload"), new DateTime(by)));
+            tasks.addTask(new Deadline(arguments.get("payload"), new DateTime(byDateTime)));
             ui.printNewTask(tasks);
         } catch (DateTimeParseException e) {
             throw new InvalidInputException(InputExceptionType.MALFORMED_DATE);
