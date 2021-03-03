@@ -53,9 +53,9 @@ public class Deadline extends Task {
     @Override
     public void print(){
         if (this.isDone) {
-            System.out.println("[D][\u2713] " + description + " (by: " + by + ")");
+            System.out.println("[D][√] " + description + " (by: " + by + ")");
         } else {
-            System.out.println("[D][\u2718] " + description + " (by: " + by + ")");
+            System.out.println("[D][X] " + description + " (by: " + by + ")");
         }
     }
 }

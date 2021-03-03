@@ -188,7 +188,7 @@ public class Task {
         }
         list.get(index).isDone = true;
         System.out.println("Nice! I've marked this task as done: ");
-        System.out.println("[\u2713] " + list.get(index).getDescription());
+        System.out.println("[√] " + list.get(index).getDescription());
     }
 
     /**
@@ -206,9 +206,9 @@ public class Task {
      */
     public void print(){
         if (this.isDone) {
-            System.out.println("[T][\u2713] " + description );
+            System.out.println("[T][√] " + description );
         } else {
-            System.out.println("[T][\u2718] " + description );
+            System.out.println("[T][X] " + description );
         }
     }
 

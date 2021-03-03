@@ -52,9 +52,9 @@ public class Event extends Task {
     @Override
     public void print(){
         if (this.isDone) {
-            System.out.println("[E][\u2713] " + description + " (at: " + at + ")" );
+            System.out.println("[E][√] " + description + " (at: " + at + ")" );
         } else {
-            System.out.println("[E][\u2718] " + description + " (at: " + at + ")" );
+            System.out.println("[E][X] " + description + " (at: " + at + ")" );
         }
     }
 }
