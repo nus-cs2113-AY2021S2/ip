@@ -1,20 +1,194 @@
-# User Guide
+# Duke User Guide
+
+Duke is a desktop app for managing tasks using a Command Line Interface (CLI). You can keep track of your tasks to be done and their respective dates. 
+
+* [Quick start](#quick-start)
+* [Features](#features)
+    * [Adding tasks: `todo/event/deadline`](#adding-tasks:-`todo/event/deadline`)
+    * [Listing tasks: `list`](#listing-tasks:-`list`)
+    * [Completing tasks: `done`](#completing-tasks:-`done`)
+    * [Finding tasks: `find`](#finding-tasks:-`find`)
+    * [Deleting tasks: `delete`](#deleting-tasks:-`delete`)
+    * [Saving tasks: `save`](#saving-tasks:-`save`)
+    * [Exiting: `exit`](#exiting:-`exit`)
+* [Command summary](#command-summary)
+
+---
+
+## Quick start
+1. Ensure you have Java 11 or above installed in your Computer. 
+2. Download the latest duke.jar from [here]()
+3. Copy the file to the folder you want to use as the _home folder_ for Duke
+4. Open a new terminal and navigate to the folder you just copied into. 
+5. In your terminal, type `java -jar Duke.jar` and press enter. This should start Duke. 
+6. Type in commands and press Enter to execute it. 
+    Refer to the [Command summary](#command-summary) for a list of recognised commands. 
+7. You should notice a new _data folder_ created in the _home folder_ you have chosen in step 3. The data for duke is saved in `duke.txt` in the _data folder_. 
+
+---
 
 ## Features 
 
-### Feature 1 
-Description of feature.
+### Adding tasks: `todo/event/deadline`
+Duke can add 3 types of tasks: [Todos](#todo), [Events](#event) and [Deadlines](#deadline). 
 
-## Usage
+#### Todo
+Format: `todo <DESCRIPTION>`
+* `<DESCRIPTION>`: description of the todo
 
-### `Keyword` - Describe action
+#### Event
+Format: `event <DESCRIPTION> /at <DATE>`
+* `<DESCRIPTION>`: description of the event
+* `<DATE>`: date of the event in dd/mm/yy
 
-Describe action and its outcome.
+#### Deadline
+Format: `deadline <DESCRIPTION /by <DATE>`
+* `<DESCRIPTION>`: description of the deadline task
+* `<DATE>`: due date of the deadline task in dd/mm/yy
 
-Example of usage: 
 
-`keyword (optional arguments)`
+### Listing tasks: `list`
+Duke will list all the current tasks and their details. 
 
-Expected outcome:
+Format: `list`
 
-`outcome`
+
+### Completing tasks: `done`
+Duke can mark any task as complete. This will continue displaying the task in the list function. Use `delete` to remove the task. 
+
+Format: `done <INDEX>`
+* `<INDEX>`: index of the task to be marked as complete. 
+* !!! Use `list` to find out the index of the task. 
+
+
+### Finding tasks: `find`
+Duke can search for any task based on the task description. Find returns a list of the tasks that contain the search term in its description. 
+
+Format: `find <SEARCHTERM>`
+* `<SEARCHTERM>`: search term to be used, it is case-sensitive. 
+
+
+### Deleting tasks: `delete`
+Duke can delete any task, even if it's not completed yet. 
+
+Format: `delete <INDEX>`
+* `<INDEX>`: index of the task to be deleted. 
+* !!! Delete removes the task and refreshes task indices, use `list` after deleting a task to see the new task indices. 
+
+### Saving tasks: `save`
+Duke can save your tasks onto your computer so that it remains there even if you restart Duke. This is automatically executed when you exit duke. 
+
+Format: `save`
+
+
+### Exiting: `exit`
+You can exit Duke with the exit command. 
+
+Format: `exit`
+
+---
+
+## Command summary
+<table>
+    <thead>
+        <tr>
+            <th>Command</th>
+            <th>Format, Examples</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td rowspan=2>todo</td>
+            <td>
+
+`todo <DESCRIPTION>`
+            </td>
+        </tr>
+        <tr>
+            <td>
+            
+`todo CS2113T exercises`
+            </td>
+        </tr>
+        <tr>
+            <td rowspan=2>event</td>
+            <td>
+            
+`event <DESCRIPTION> /at <DATE(dd/mm/yy)>`
+            </td>
+        </tr>
+        <tr>
+            <td>
+            
+`event CS2113T lecture /at 05/03/21`
+            </td>
+        </tr>
+        <tr>
+            <td rowspan=2>deadline</td>
+            <td>
+            
+`deadline <DESCRIPTION> /by <DATE(dd/mm/yy)>`
+            </td>
+        </tr>
+        <tr>
+            <td>
+            
+`deadline submit duke /by 05/03/21`
+            </td>
+        </tr>
+        <tr>
+            <td>list</td>
+            <td>
+            
+`list`
+            </td>
+        </tr>
+        <tr>
+            <td>done</td>
+            <td>
+            
+`done`
+            </td>
+        </tr>
+        <tr>
+            <td rowspan=2>find</td>
+            <td>
+            
+`find <SEARCHTERM>`
+            </td>
+        </tr>
+        <tr>
+            <td>
+            
+`find CS2113T`
+            </td>
+        </tr>
+        <tr>
+            <td rowspan=2>delete</td>
+            <td>
+            
+`delete <INDEX>`
+            </td>
+        </tr>
+        <tr>
+            <td>
+            
+`delete 1`
+            </td>
+        </tr>
+        <tr>
+            <td>save</td>
+            <td>
+            
+`save`
+            </td>
+        </tr>
+        <tr>
+            <td>exit</td>
+            <td>
+            
+`exit`
+            </td>
+        </tr>
+    </tbody>
+</table>
