@@ -3,7 +3,7 @@
 By: Tan Le Jun Latest Update: 4/3/2012
 
 
-##Content
+## Content
 1. [Introduction](#introduction)
 2. [Getting Started](#getting-started)
 3. [Features](#features)
@@ -15,7 +15,7 @@ By: Tan Le Jun Latest Update: 4/3/2012
     6. [Find](#find---find-tasks-in-task-list)
     7. [Bye](#bye---exit-the-application)
 
-##Introduction 
+## Introduction 
 
 Duke is a Command Line Interface (CLI) task manager application. 
 It can help you to keep track of your todos, deadlines and events. 
@@ -24,9 +24,9 @@ Duke can also help you to mark your tasks as done once you have successfully com
 Need to bring your tasks list around?
 Dukes got you covered by saving your task list as a text file in your local storage when you exit and loads it with every start up.
 
-##Getting Started
+## Getting Started
 
-###Setting up in Intellij
+### Setting up in Intellij
 
 Prerequisites: JDK 11, update IntelliJ to the most recent version.
 
@@ -58,10 +58,10 @@ ____________________________________________________________
 
 ## Features 
 
-###`todo` - Add todo task to task list
+### `todo` - Add todo task to task list
 
 
-###Usage
+### Usage
 
 `todo task` - Add a todo task named "task" to task list
 
@@ -69,7 +69,7 @@ Example of usage:
 
 `todo buy apples`
 
-###Outcome
+### Outcome
 
 Success outcome:
 
@@ -91,7 +91,7 @@ ____________________________________________________________
 ###`deadline` - Add deadline task to task list
 
 
-###Usage
+### Usage
 
 `deadline task /by date` - Add a deadline task named "task" to be done by date "date" to task list
 
@@ -99,7 +99,7 @@ Example of usage:
 
 `deadline CS2113T assignment /by Friday 2359`
 
-###Outcome
+### Outcome
 
 Success outcome:
 
@@ -120,9 +120,9 @@ ____________________________________________________________
 
 Failed outcome (no date):
 
-###`event` - Add event task to task list
+### `event` - Add event task to task list
 
-###Usage
+### Usage
 
 `event task /on date` - Add an event task named "task" to be done on date "date" to task list
 
@@ -130,7 +130,7 @@ Example of usage:
 
 `event CS2113T group meeting /on Monday 2.00pm`
 
-###Outcome
+### Outcome
 
 Success outcome:
 
@@ -151,9 +151,9 @@ ____________________________________________________________
 
 Failed outcome (no date):
 
-###`list` - List out the task list
+### `list` - List out the task list
 
-###Usage
+### Usage
 
 `list` - List the task list in order of entry
 
@@ -161,7 +161,7 @@ Example of usage:
 
 `list`
 
-###Outcome
+### Outcome
 
 Success outcome (with tasks in list):
 
@@ -180,9 +180,9 @@ list
 You have no task! :)
 ____________________________________________________________
 ```
-###`delete` - Delete task in task list
+### `delete` - Delete task in task list
 
-###Usage
+### Usage
 
 `delete index` - Delete task in task list with index "index"
 
@@ -190,7 +190,7 @@ Example of usage:
 
 `delete 1`
 
-###Outcome
+### Outcome
 
 Success outcome:
 
@@ -216,9 +216,9 @@ OOPS!!! You missed out the index of the task you want to delete.
 ____________________________________________________________
 ```
 
-###`find` - Find tasks in task list
+### `find` - Find tasks in task list
 
-###Usage
+### Usage
 
 `find keyword` - Find tasks in task list containing word "keyword"
 
@@ -226,7 +226,7 @@ Example of usage:
 
 `find apple`
 
-###Outcome
+### Outcome
 
 Success outcome:
 
@@ -251,9 +251,9 @@ OOPS!!! You forgot to give the keyword!!!
 ____________________________________________________________
 ```
 
-###`bye` - Exit the application
+### `bye` - Exit the application
 
-###Usage
+### Usage
 
 `bye` - Exit the application
 
@@ -261,7 +261,7 @@ Example of usage:
 
 `bye`
 
-###Outcome
+### Outcome
 
 Success outcome:
 
@@ -271,4 +271,4 @@ Bye. Hope to see you again soon!
 ____________________________________________________________
 ```
 
-##Thank you for reading!
+## Thank you for reading!
