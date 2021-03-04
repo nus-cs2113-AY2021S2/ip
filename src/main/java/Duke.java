@@ -4,14 +4,30 @@ import duke.Task;
 import duke.Todo;
 import exception.DukeException;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+
 public class Duke {
     static List<Task> tasks = new ArrayList<>();
     static Boolean notBye = true;
-    public static void main(String[] args) {
+    static fileManager fm = new fileManager();
+    public static void main(String[] args) throws FileNotFoundException {
+
+        // get the path of project_root
+        String home = System.getProperty("user.dir");
+        // concatenate folder data
+        Path path = Paths.get(home, "data", "duke.txt");
+        // set the path
+        fm.setPath(path.toString());
+        // load data
+        tasks = fm.readFile();
+
 //        String logo = " ____        _        \n"
 //                + "|  _ \\ _   _| | _____ \n"
 //                + "| | | | | | | |/ / _ \\\n"
@@ -27,7 +43,7 @@ public class Duke {
             userInput = sc.nextLine();
             try {
                 processUserInput(userInput);
-            }catch (DukeException e){
+            }catch (DukeException | IOException e){
                 System.out.println(e.toString());
             }
             System.out.println("-----------------------------");
@@ -39,7 +55,7 @@ public class Duke {
      * process the user input and understand the command
      * @param userInput: value input by a user
      */
-    private static void processUserInput(String userInput) throws DukeException {
+    private static void processUserInput(String userInput) throws DukeException, IOException {
         String description = null;
         if(userInput.startsWith("todo")){
             if(userInput.equals("todo")){
@@ -68,9 +84,11 @@ public class Duke {
                 System.out.println(i +  "." + task.toString());
                 i++;
             }
+            // save data to file
+            fm.writeFile((ArrayList<Task>) tasks);
         }
         else if(userInput.startsWith("done")){
-            int taskIndex = Integer.valueOf(userInput.split(" ")[1]) - 1;
+            int taskIndex = Integer.parseInt(userInput.split(" ")[1]) - 1;
             Task task_ = tasks.get(taskIndex);
             task_.markAsDone();
             System.out.println("Nice! I've marked this task as done:\n" +
