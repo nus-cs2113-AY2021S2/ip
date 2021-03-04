@@ -35,3 +35,54 @@ You can start by typing:
  5. **delete xxx** to delete **An activity**
  6. **done xxx** to mark **One activity as done**
  7. **bye** to end **The system**
+
+#### Possible user journey
+===================================================
+Duke - Version 1.0
+ ____        _        
+|  _ \ _   _| | _____ 
+| | | | | | | |/ / _ \
+| |_| | |_| |   <  __/
+|____/ \__,_|_|\_\___|
+
+Hello! I'm Duke
+What can I do for you?
+
+===================================================
+Enter command: list
+[Command entered:list]
+===================================================
+ 1: [deadline][done] return book (by: Sunday)
+ 2: [event][done] project meeting (at: Mon 2-4pm)
+ 3: [todo][done] run book (by: Sunday)
+Enter command: event finish breakfast /at Mon
+[Command entered:event finish breakfast /at Mon]
+===================================================
+Enter command: list
+[Command entered:list]
+===================================================
+ 1: [deadline][done] return book (by: Sunday)
+ 2: [event][done] project meeting (at: Mon 2-4pm)
+ 3: [todo][done] run book (by: Sunday)
+ 4: [event][undo] finish breakfast (at: Mon)
+Enter command: done 4
+[Command entered:done 4]
+===================================================
+Enter command: list
+[Command entered:list]
+===================================================
+ 1: [deadline][done] return book (by: Sunday)
+ 2: [event][done] project meeting (at: Mon 2-4pm)
+ 3: [todo][done] run book (by: Sunday)
+ 4: [event][done] finish breakfast (at: Mon)
+Enter command: delete 3
+[Command entered:delete 3]
+===================================================
+Enter command: find book
+[Command entered:find book]
+===================================================
+[deadline][done] return book (by: Sunday)
+Enter command: bye
+[Command entered:bye]
+===================================================
+Bye. Hope to see you again soon!
