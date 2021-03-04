@@ -43,6 +43,8 @@ public class Duke {
                 }
                 ui.showLine();
             } catch (NullPointerException e) {
+                //Command C can return as null if an error is triggered in parser
+                //Null Pointer Exception may hence occur, the catch statement is to ensure it does not exit the loop.
             }
         }
         storage.store(tasks);

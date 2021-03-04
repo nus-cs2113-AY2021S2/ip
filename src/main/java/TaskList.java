@@ -160,11 +160,6 @@ public class TaskList {
         }
     }
 
-    /**
-     * Returns the size of the task list
-     *
-     * @return the size of the current tasks list
-     */
     public int getSize() {
         return tasks.size();
     }
