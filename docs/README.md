@@ -4,7 +4,7 @@ Duke is a desktop app for managing tasks using a Command Line Interface (CLI). Y
 
 * [Quick start](#quick-start)
 * [Features](#features)
-    * [Adding tasks: `todo/event/deadline`](#adding-taskstodoeventdeadline)
+    * [Adding tasks: `todo/event/deadline`](#add)
     * [Listing tasks: `list`](#list)
     * [Completing tasks: `done`](#done)
     * [Finding tasks: `find`](#find)
@@ -29,7 +29,7 @@ Duke is a desktop app for managing tasks using a Command Line Interface (CLI). Y
 
 ## Features 
 
-### Adding tasks: `todo/event/deadline`
+### <a name="list"></a>Adding tasks: `todo/event/deadline`
 Duke can add 3 types of tasks: [Todos](#todo), [Events](#event) and [Deadlines](#deadline). 
 
 #### Todo
@@ -99,96 +99,54 @@ Format: `exit`
     <tbody>
         <tr>
             <td rowspan=2>todo</td>
-            <td>
-
-`todo <DESCRIPTION>`
-            </td>
+            <td><code>todo <DESCRIPTION></code></td>
         </tr>
         <tr>
-            <td>
-            
-`todo CS2113T exercises`
-            </td>
+            <td><code>todo CS2113T exercises</code></td>
         </tr>
         <tr>
             <td rowspan=2>event</td>
-            <td>
-            
-`event <DESCRIPTION> /at <DATE(dd/mm/yy)>`
-            </td>
+            <td><code>event <DESCRIPTION> /at <DATE(dd/mm/yy)></code></td>
         </tr>
         <tr>
-            <td>
-            
-`event CS2113T lecture /at 05/03/21`
-            </td>
+            <td><code>event CS2113T lecture /at 05/03/21</code></td>
         </tr>
         <tr>
             <td rowspan=2>deadline</td>
-            <td>
-            
-`deadline <DESCRIPTION> /by <DATE(dd/mm/yy)>`
-            </td>
+            <td><code>deadline <DESCRIPTION> /by <DATE(dd/mm/yy)></code></td>
         </tr>
         <tr>
-            <td>
-            
-`deadline submit duke /by 05/03/21`
-            </td>
+            <td><code>deadline submit duke /by 05/03/21</code></td>
         </tr>
         <tr>
             <td>list</td>
-            <td>
-            
-`list`
-            </td>
+            <td><code>list</code></td>
         </tr>
         <tr>
             <td>done</td>
-            <td>
-            
-`done`
-            </td>
+            <td><code>done</code></td>
         </tr>
         <tr>
             <td rowspan=2>find</td>
-            <td>
-            
-`find <SEARCHTERM>`
-            </td>
+            <td><code>find <SEARCHTERM></code></td>
         </tr>
         <tr>
-            <td>
-            
-`find CS2113T`
-            </td>
+            <td><code>find CS2113T</code></td>
         </tr>
         <tr>
             <td rowspan=2>delete</td>
-            <td>
-            
-`delete <INDEX>`
-            </td>
+            <td><code>delete <INDEX></code></td>
         </tr>
         <tr>
-            <td>
-            
-`delete 1`
-            </td>
+            <td><code>delete 1</code></td>
         </tr>
         <tr>
             <td>save</td>
-            <td>
-            
-`save`
-            </td>
+            <td><code>save</code></td>
         </tr>
         <tr>
             <td>exit</td>
-            <td>
-            
-`exit`
-            </td>
+            <td><code>exit</code></td>
         </tr>
     </tbody>
 </table>
