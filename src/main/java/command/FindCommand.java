@@ -7,6 +7,7 @@ import task.TaskList;
 import java.util.Iterator;
 
 public class FindCommand extends Command{
+    public static final String COMMAND_WORD = "find";
     private String keyword;
     private String feedbackFormat = "Here are the matching tasks in your list:";
 

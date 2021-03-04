@@ -3,6 +3,8 @@ package commandParser;
 import command.*;
 import exception.*;
 
+import java.util.Locale;
+
 /**
  * Represent the parser to handle the use input command
  * the parser will check the validity of the parameters for different commands
@@ -17,25 +19,25 @@ public class CommandParser {
      * @return return a command object corresponding to user input, return an InvalidCommand object if the command is not recognizable
      */
     public Command parseCommand(String input) {
-        if (input.trim().equals("list")) {
+        if (input.trim().equals(ListCommand.COMMAND_WORD)) {
             return new ListCommand();
         }
-        if(input.trim().equals("help")){
+        if(input.trim().equals(HelpCommand.COMMAND_WORD)){
             return new HelpCommand();
         }
         String[] inputParts = input.trim().split("\\s+", 2);
-        switch (inputParts[0]) {
-        case "todo":
+        switch (inputParts[0].toLowerCase(Locale.ROOT)) {
+        case AddTodoCommand.COMMAND_WORD:
             return prepareAddTodo(inputParts);
-        case "deadline":
+        case AddDeadlineCommand.COMMAND_WORD:
             return prepareAddDeadline(inputParts);
-        case "event":
+        case AddEventCommand.COMMAND_WORD:
             return prepareAddEvent(inputParts);
-        case "done":
+        case DoneCommand.COMMAND_WORD:
             return prepareDone(inputParts);
-        case "delete":
+        case DeleteCommand.COMMAND_WORD:
             return prepareDelete(inputParts);
-        case "find":
+        case FindCommand.COMMAND_WORD:
             return prepareFind(inputParts);
         default:
             return new InvalidCommand(new InvalidCommandException());

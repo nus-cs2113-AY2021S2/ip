@@ -14,6 +14,7 @@ import javax.swing.*;
  * Represent a command of creating a new event task and adding it to the task list
  */
 public class AddEventCommand extends Command{
+    public static final String COMMAND_WORD = "event";
     private Event newEvent;
     private String feedbackFormat;
     private final String FEEDBACK_FORMAT = "Event added:\n" + PRE_SPACE + PRE_SPACE + "%s\n" +

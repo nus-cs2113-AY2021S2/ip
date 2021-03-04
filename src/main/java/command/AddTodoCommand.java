@@ -10,6 +10,7 @@ import task.ToDo;
  * Represent a command of creating a new todo task and adding it to the task list
  */
 public class AddTodoCommand extends Command{
+    public static final String COMMAND_WORD = "todo";
     private String feedbackFormat;
     private ToDo newTodo;
     private final String FEEDBACK_FORMAT = "ToDo added:\n" + PRE_SPACE + PRE_SPACE + "%s\n" +

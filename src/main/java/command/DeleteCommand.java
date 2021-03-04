@@ -6,6 +6,7 @@ import exception.TaskAlreadyDoneException;
  * Represent a command of deleting a task from the task list
  */
 public class DeleteCommand extends Command{
+    public static final String COMMAND_WORD = "delete";
     private String feedbackFormat;
     private int taskIndex;
     private final String FEEDBACK_FORMAT = "Noted! I've removed this task:\n" + PRE_SPACE + PRE_SPACE  +

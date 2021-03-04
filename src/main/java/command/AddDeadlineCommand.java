@@ -13,6 +13,7 @@ import task.ToDo;
  */
 
 public class AddDeadlineCommand extends Command{
+    public static final String COMMAND_WORD = "deadline";
     private String feedbackFormat;
     private Deadline newDeadline;
     private final String FEEDBACK_FORMAT = "Deadline added:\n" + PRE_SPACE + PRE_SPACE + "%s\n" +

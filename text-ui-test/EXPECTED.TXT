@@ -34,10 +34,29 @@
     ____________________________________________________________
     ____________________________________________________________
     Name of event should be specified after keyword event. Name and the time should be separated by "/at"
-    Input format:
-    todo todo name
-    deadline deadline name /by time of deadline
-    event event name /at time of the event
+    Duke accepts the following command:
+    1.list
+      List current task list
+    2.todo <task name>
+      Add a new todo task to task list
+      Eg. todo do homework
+    3.deadline <task name> /by <deadline>
+      Add a new deadline to task list
+      Eg. deadline return a book /by tonight
+    4.event <task name> /at <time>
+      Add a new event to task list
+      Eg. event meeting /at 8pm
+    5.done <task index>
+      Mark a task as done
+      Eg. done 1
+    6.delete <task index>
+      Delete a task from task list
+      Eg. delete 2
+    7.find <keyword>
+      Search task list for tasks whose names contain the keyword
+      Eg. find book
+    8.help
+      Show help message
     ____________________________________________________________
     ____________________________________________________________
     Here are the tasks in your list:
@@ -46,10 +65,29 @@
     ____________________________________________________________
     ____________________________________________________________
     Name of event should be specified after keyword event. Name and the time should be separated by "/at"
-    Input format:
-    todo todo name
-    deadline deadline name /by time of deadline
-    event event name /at time of the event
+    Duke accepts the following command:
+    1.list
+      List current task list
+    2.todo <task name>
+      Add a new todo task to task list
+      Eg. todo do homework
+    3.deadline <task name> /by <deadline>
+      Add a new deadline to task list
+      Eg. deadline return a book /by tonight
+    4.event <task name> /at <time>
+      Add a new event to task list
+      Eg. event meeting /at 8pm
+    5.done <task index>
+      Mark a task as done
+      Eg. done 1
+    6.delete <task index>
+      Delete a task from task list
+      Eg. delete 2
+    7.find <keyword>
+      Search task list for tasks whose names contain the keyword
+      Eg. find book
+    8.help
+      Show help message
     ____________________________________________________________
     ____________________________________________________________
     Event added:
@@ -58,21 +96,57 @@
     ____________________________________________________________
     ____________________________________________________________
     Name of deadline should be specified after keyword deadline. Name and the time to finish should be separated by "/by"
-    Input format:
-    todo todo name
-    deadline deadline name /by time of deadline
-    event event name /at time of the event
+    Duke accepts the following command:
+    1.list
+      List current task list
+    2.todo <task name>
+      Add a new todo task to task list
+      Eg. todo do homework
+    3.deadline <task name> /by <deadline>
+      Add a new deadline to task list
+      Eg. deadline return a book /by tonight
+    4.event <task name> /at <time>
+      Add a new event to task list
+      Eg. event meeting /at 8pm
+    5.done <task index>
+      Mark a task as done
+      Eg. done 1
+    6.delete <task index>
+      Delete a task from task list
+      Eg. delete 2
+    7.find <keyword>
+      Search task list for tasks whose names contain the keyword
+      Eg. find book
+    8.help
+      Show help message
     ____________________________________________________________
     ____________________________________________________________
     The task is already marked as done
     ____________________________________________________________
     ____________________________________________________________
-    Duke only accepts the following commands:
-    1.todo + todo name
-    2.deadline + deadline name + /by + time of deadline
-    3.event + event name + /at + time of the event
-    4.done + task index
-    5.delete + task index
+    Duke accepts the following command:
+    1.list
+      List current task list
+    2.todo <task name>
+      Add a new todo task to task list
+      Eg. todo do homework
+    3.deadline <task name> /by <deadline>
+      Add a new deadline to task list
+      Eg. deadline return a book /by tonight
+    4.event <task name> /at <time>
+      Add a new event to task list
+      Eg. event meeting /at 8pm
+    5.done <task index>
+      Mark a task as done
+      Eg. done 1
+    6.delete <task index>
+      Delete a task from task list
+      Eg. delete 2
+    7.find <keyword>
+      Search task list for tasks whose names contain the keyword
+      Eg. find book
+    8.help
+      Show help message
     ____________________________________________________________
     ____________________________________________________________
     Here are the tasks in your list:
@@ -82,10 +156,29 @@
     ____________________________________________________________
     ____________________________________________________________
     Name of Todo should be specified after todo keyword
-    Input format:
-    todo todo name
-    deadline deadline name /by time of deadline
-    event event name /at time of the event
+    Duke accepts the following command:
+    1.list
+      List current task list
+    2.todo <task name>
+      Add a new todo task to task list
+      Eg. todo do homework
+    3.deadline <task name> /by <deadline>
+      Add a new deadline to task list
+      Eg. deadline return a book /by tonight
+    4.event <task name> /at <time>
+      Add a new event to task list
+      Eg. event meeting /at 8pm
+    5.done <task index>
+      Mark a task as done
+      Eg. done 1
+    6.delete <task index>
+      Delete a task from task list
+      Eg. delete 2
+    7.find <keyword>
+      Search task list for tasks whose names contain the keyword
+      Eg. find book
+    8.help
+      Show help message
     ____________________________________________________________
     ____________________________________________________________
     Invalid input format for delete command.

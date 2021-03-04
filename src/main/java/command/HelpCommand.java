@@ -1,7 +1,7 @@
 package command;
 
 public class HelpCommand extends Command{
-    public static final String COMMAND_WORD = "list";
+    public static final String COMMAND_WORD = "help";
     private static final String PRE_SPACE = "    ";
     private static final String FEEDBACK_FORMAT = "Duke accepts the following command:\n" +
             "    1.list\n      List current task list\n    2.todo <task name>\n" +

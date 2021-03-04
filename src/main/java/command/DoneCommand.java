@@ -8,6 +8,7 @@ import task.ToDo;
  *  Represent a command of setting a task as done
  */
 public class DoneCommand extends Command{
+    public static final String COMMAND_WORD = "done";
     private String feedbackFormat;
     private int taskIndex;
     private final String FEEDBACK_FORMAT = "Nice! I've marked this task as done:\n" + PRE_SPACE + PRE_SPACE + "%s";
