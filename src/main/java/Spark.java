@@ -33,9 +33,10 @@ public class Spark {
             MissingDateException, IOException, InvalidSpaceException {
         boolean isExit = false;
         FileManager.restoreFileContents("Spark.txt");
+        TextUI ui = new TextUI();
+        ui.printWelcomeMessage();
         do {
-            TextUI ui = new TextUI();
-            ui.printWelcomeMessage();
+
             String fullInputCommand = ui.getUserCommand();
 
             String[] command = Parser.splitTextIntoTwoFields(fullInputCommand);
@@ -109,4 +110,3 @@ public class Spark {
 
 }
 
- 
