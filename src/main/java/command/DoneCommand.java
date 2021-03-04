@@ -1,6 +1,6 @@
 package command;
 
-import exception.DoneFormatException;
+//import exception.DoneFormatException;
 import exception.TaskAlreadyDoneException;
 import task.ToDo;
 
@@ -9,6 +9,8 @@ import task.ToDo;
  */
 public class DoneCommand extends Command{
     public static final String COMMAND_WORD = "done";
+    public static final String ERROR_MESSAGE = "Invalid input format for done command.\n" + PRE_SPACE +
+            "The syntax for marking a task as done is: done <task index>    Eg. done 1";
     private String feedbackFormat;
     private int taskIndex;
     private final String FEEDBACK_FORMAT = "Nice! I've marked this task as done:\n" + PRE_SPACE + PRE_SPACE + "%s";

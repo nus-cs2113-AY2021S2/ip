@@ -34,29 +34,7 @@
     ____________________________________________________________
     ____________________________________________________________
     Name of event should be specified after keyword event. Name and the time should be separated by "/at"
-    Duke accepts the following command:
-    1.list
-      List current task list
-    2.todo <task name>
-      Add a new todo task to task list
-      Eg. todo do homework
-    3.deadline <task name> /by <deadline>
-      Add a new deadline to task list
-      Eg. deadline return a book /by tonight
-    4.event <task name> /at <time>
-      Add a new event to task list
-      Eg. event meeting /at 8pm
-    5.done <task index>
-      Mark a task as done
-      Eg. done 1
-    6.delete <task index>
-      Delete a task from task list
-      Eg. delete 2
-    7.find <keyword>
-      Search task list for tasks whose names contain the keyword
-      Eg. find book
-    8.help
-      Show help message
+    The syntax for adding an event task is: <task name> /at <event time>    Eg. event meeting /at 8pm
     ____________________________________________________________
     ____________________________________________________________
     Here are the tasks in your list:
@@ -65,29 +43,7 @@
     ____________________________________________________________
     ____________________________________________________________
     Name of event should be specified after keyword event. Name and the time should be separated by "/at"
-    Duke accepts the following command:
-    1.list
-      List current task list
-    2.todo <task name>
-      Add a new todo task to task list
-      Eg. todo do homework
-    3.deadline <task name> /by <deadline>
-      Add a new deadline to task list
-      Eg. deadline return a book /by tonight
-    4.event <task name> /at <time>
-      Add a new event to task list
-      Eg. event meeting /at 8pm
-    5.done <task index>
-      Mark a task as done
-      Eg. done 1
-    6.delete <task index>
-      Delete a task from task list
-      Eg. delete 2
-    7.find <keyword>
-      Search task list for tasks whose names contain the keyword
-      Eg. find book
-    8.help
-      Show help message
+    The syntax for adding an event task is: <task name> /at <event time>    Eg. event meeting /at 8pm
     ____________________________________________________________
     ____________________________________________________________
     Event added:
@@ -96,35 +52,14 @@
     ____________________________________________________________
     ____________________________________________________________
     Name of deadline should be specified after keyword deadline. Name and the time to finish should be separated by "/by"
-    Duke accepts the following command:
-    1.list
-      List current task list
-    2.todo <task name>
-      Add a new todo task to task list
-      Eg. todo do homework
-    3.deadline <task name> /by <deadline>
-      Add a new deadline to task list
-      Eg. deadline return a book /by tonight
-    4.event <task name> /at <time>
-      Add a new event to task list
-      Eg. event meeting /at 8pm
-    5.done <task index>
-      Mark a task as done
-      Eg. done 1
-    6.delete <task index>
-      Delete a task from task list
-      Eg. delete 2
-    7.find <keyword>
-      Search task list for tasks whose names contain the keyword
-      Eg. find book
-    8.help
-      Show help message
+    The syntax for adding a deadline task is: <task name> /by <deadline>    Eg. deadline return a book /by tonight
     ____________________________________________________________
     ____________________________________________________________
     The task is already marked as done
     ____________________________________________________________
     ____________________________________________________________
-    Duke accepts the following command:
+    The command input is invalid.
+    Duke accepts the following commands:
     1.list
       List current task list
     2.todo <task name>
@@ -155,34 +90,12 @@
     3.[E][ ]tutorial (at: Feb 5 10am)
     ____________________________________________________________
     ____________________________________________________________
-    Name of Todo should be specified after todo keyword
-    Duke accepts the following command:
-    1.list
-      List current task list
-    2.todo <task name>
-      Add a new todo task to task list
-      Eg. todo do homework
-    3.deadline <task name> /by <deadline>
-      Add a new deadline to task list
-      Eg. deadline return a book /by tonight
-    4.event <task name> /at <time>
-      Add a new event to task list
-      Eg. event meeting /at 8pm
-    5.done <task index>
-      Mark a task as done
-      Eg. done 1
-    6.delete <task index>
-      Delete a task from task list
-      Eg. delete 2
-    7.find <keyword>
-      Search task list for tasks whose names contain the keyword
-      Eg. find book
-    8.help
-      Show help message
+    Name of Todo should be specified after todo keyword.
+    The syntax for adding a ToDo task is: todo <task name>    Eg. todo do homework
     ____________________________________________________________
     ____________________________________________________________
     Invalid input format for delete command.
-    Input format for delete: delete + task index    eg. delete 1
+    The syntax for deleting a task from current task list is: delete <task index>    Eg. delete 1
     ____________________________________________________________
     ____________________________________________________________
     Noted! I've removed this task:

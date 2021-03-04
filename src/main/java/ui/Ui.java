@@ -51,7 +51,9 @@ public class Ui {
         int count = 1;
         while(taskIterator.hasNext()){
             Task currentTask = taskIterator.next();
-            System.out.println(PRE_SPACE + count + "." + currentTask.getTaskInfo());
+            if(currentTask != null){
+                System.out.println(PRE_SPACE + count + "." + currentTask.getTaskInfo());
+            }
             count++;
         }
         System.out.print(LINE_SEPARATOR);

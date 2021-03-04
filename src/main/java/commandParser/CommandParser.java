@@ -41,7 +41,7 @@ public class CommandParser {
         case FindCommand.COMMAND_WORD:
             return prepareFind(inputParts);
         default:
-            return new InvalidCommand(new InvalidCommandException());
+            return new InvalidCommand(InvalidCommand.ERROR_MESSGAE);
         }
     }
 
@@ -53,30 +53,26 @@ public class CommandParser {
      * @return a DoneCommand object if the parameter is valid, an InvalidCommand object if the second parameter is invalid
      */
     private Command prepareFind(String[] inputParts){
-        try{
-            if(inputParts.length < 2){
-                throw new FindFormatException();
-            }
-            return new FindCommand(inputParts[1]);
-        } catch (FindFormatException e){
-            return new InvalidCommand(e);
+        if(inputParts.length < 2){
+            return new InvalidCommand(FindCommand.ERROR_MESSAGE);
         }
+        return new FindCommand(inputParts[1]);
+
     }
 
 
     private Command prepareDone(String[] inputParts){
         try{
             if(inputParts.length < 2){
-                throw new DoneFormatException();
+                return new InvalidCommand(DoneCommand.ERROR_MESSAGE);
             }
             String index = inputParts[1];
             int indexInt = Integer.parseInt(index) - 1;
             return new DoneCommand(indexInt);
         } catch (NumberFormatException e){
-            return new InvalidCommand(new DoneFormatException());
-        } catch (DoneFormatException e){
-            return new InvalidCommand(e);
+            return new InvalidCommand(DoneCommand.ERROR_MESSAGE);
         }
+
     }
 
     /**
@@ -88,15 +84,13 @@ public class CommandParser {
     private Command prepareDelete(String[] inputParts){
         try{
             if(inputParts.length < 2){
-                throw new DeleteFormatException();
+                return new InvalidCommand(DeleteCommand.ERROR_MESSAGE);
             }
             String index = inputParts[1];
             int indexInt = Integer.parseInt(index) - 1;
             return new DeleteCommand(indexInt);
-        } catch (DeleteFormatException e){
-            return new InvalidCommand(e);
         } catch (NumberFormatException e){
-            return new InvalidCommand(new DeleteFormatException());
+            return new InvalidCommand(DeleteCommand.ERROR_MESSAGE);
         }
     }
 
@@ -107,18 +101,14 @@ public class CommandParser {
      * @return a AddTodoCommand object if the parameter is valid, an InvalidCommand object if the parameter is invalid,
      */
     private Command prepareAddTodo(String[] inputParts) {
-        try{
-            if(inputParts.length < 2){
-                throw new TodoFormatException();
-            }
-            String taskInfo = inputParts[1];
-            if (taskInfo.equals("")) {
-                throw new TodoFormatException();
-            }
-            return new AddTodoCommand(taskInfo);
-        } catch (TodoFormatException e){
-            return new InvalidCommand(e);
+        if(inputParts.length < 2){
+            return new InvalidCommand(AddTodoCommand.ERROR_MESSAGE);
         }
+        String taskInfo = inputParts[1];
+        if (taskInfo.equals("")) {
+            return new InvalidCommand(AddTodoCommand.ERROR_MESSAGE);
+        }
+        return new AddTodoCommand(taskInfo);
     }
 
     /**
@@ -128,30 +118,26 @@ public class CommandParser {
      * @return a AddDeadlineCommand object if the parameter is valid, an InvalidCommand object if the parameter is invalid,
      */
     private Command prepareAddDeadline(String[] inputParts){
-        try{
-            if(inputParts.length < 2){
-                throw new DeadlineFormatException();
-            }
-            String taskInfo = inputParts[1];
-            if (taskInfo.equals("")) {
-                throw new DeadlineFormatException();
-            }
-            String[] deadlineNameDoby = taskInfo.split("/by");
-            boolean hasFewerPatrs = deadlineNameDoby.length < 2;
-            if (hasFewerPatrs) {
-                throw new DeadlineFormatException();
-            }
-            boolean hasEmptyName = deadlineNameDoby[0].equals("") || deadlineNameDoby[0].equals("\\s+");
-            boolean hasEmptyTime = deadlineNameDoby[1].equals("") || deadlineNameDoby[1].equals("\\s+");
-            if(hasEmptyName || hasEmptyTime){
-                throw new DeadlineFormatException();
-            }
-            String deadlineName = deadlineNameDoby[0].trim();
-            String deadlineDoby = deadlineNameDoby[1].trim();
-            return new AddDeadlineCommand(deadlineName, deadlineDoby);
-        } catch (DeadlineFormatException e){
-            return new InvalidCommand(e);
+        if(inputParts.length < 2){
+            return new InvalidCommand(AddDeadlineCommand.ERROR_MESSAGE);
         }
+        String taskInfo = inputParts[1];
+        if (taskInfo.equals("")) {
+            return new InvalidCommand(AddDeadlineCommand.ERROR_MESSAGE);
+        }
+        String[] deadlineNameDoby = taskInfo.split("/by");
+        boolean hasFewerPatrs = deadlineNameDoby.length < 2;
+        if (hasFewerPatrs) {
+            return new InvalidCommand(AddDeadlineCommand.ERROR_MESSAGE);
+        }
+        boolean hasEmptyName = deadlineNameDoby[0].equals("") || deadlineNameDoby[0].equals("\\s+");
+        boolean hasEmptyTime = deadlineNameDoby[1].equals("") || deadlineNameDoby[1].equals("\\s+");
+        if(hasEmptyName || hasEmptyTime){
+            return new InvalidCommand(AddDeadlineCommand.ERROR_MESSAGE);
+        }
+        String deadlineName = deadlineNameDoby[0].trim();
+        String deadlineDoby = deadlineNameDoby[1].trim();
+        return new AddDeadlineCommand(deadlineName, deadlineDoby);
     }
 
     /**
@@ -161,29 +147,25 @@ public class CommandParser {
      * @return a AddEventCommand object if the parameter is valid, an InvalidCommand object if the parameter is invalid,
      */
     private Command prepareAddEvent(String[] inputParts){
-        try{
-            if(inputParts.length < 2){
-                throw new EventFormatException();
-            }
-            String taskInfo = inputParts[1];
-            if (taskInfo.equals("")) {
-                throw new EventFormatException();
-            }
-            String[] eventNameTime = taskInfo.split("/at");
-            boolean hasFewerPatrs = eventNameTime.length < 2;
-            if (hasFewerPatrs) {
-                throw new EventFormatException();
-            }
-            boolean hasEmptyName = eventNameTime[0].equals("") || eventNameTime[0].equals("\\s+");
-            boolean hasEmptyTime = eventNameTime[1].equals("") || eventNameTime[1].equals("\\s+");
-            if(hasEmptyName || hasEmptyTime){
-                throw new EventFormatException();
-            }
-            String eventName = eventNameTime[0].trim();
-            String eventTime = eventNameTime[1].trim();
-            return new AddEventCommand(eventName, eventTime);
-        } catch (EventFormatException e){
-             return new InvalidCommand(e);
+        if(inputParts.length < 2){
+            return new InvalidCommand(AddEventCommand.ERROR_MESSAGE);
         }
+        String taskInfo = inputParts[1];
+        if (taskInfo.equals("")) {
+            return new InvalidCommand(AddEventCommand.ERROR_MESSAGE);
+        }
+        String[] eventNameTime = taskInfo.split("/at");
+        boolean hasFewerPatrs = eventNameTime.length < 2;
+        if (hasFewerPatrs) {
+            return new InvalidCommand(AddEventCommand.ERROR_MESSAGE);
+        }
+        boolean hasEmptyName = eventNameTime[0].equals("") || eventNameTime[0].equals("\\s+");
+        boolean hasEmptyTime = eventNameTime[1].equals("") || eventNameTime[1].equals("\\s+");
+        if(hasEmptyName || hasEmptyTime){
+            return new InvalidCommand(AddEventCommand.ERROR_MESSAGE);
+        }
+        String eventName = eventNameTime[0].trim();
+        String eventTime = eventNameTime[1].trim();
+        return new AddEventCommand(eventName, eventTime);
     }
 }

@@ -7,6 +7,8 @@ import exception.TaskAlreadyDoneException;
  */
 public class DeleteCommand extends Command{
     public static final String COMMAND_WORD = "delete";
+    public static final String ERROR_MESSAGE = "Invalid input format for delete command.\n" + PRE_SPACE +
+            "The syntax for deleting a task from current task list is: delete <task index>    Eg. delete 1";
     private String feedbackFormat;
     private int taskIndex;
     private final String FEEDBACK_FORMAT = "Noted! I've removed this task:\n" + PRE_SPACE + PRE_SPACE  +

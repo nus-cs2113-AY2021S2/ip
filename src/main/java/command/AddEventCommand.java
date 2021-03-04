@@ -1,20 +1,18 @@
 package command;
 
-import exception.DeadlineFormatException;
-import exception.EventFormatException;
-import exception.TaskFormatException;
-import task.Deadline;
+//import exception.DeadlineFormatException;
+//import exception.EventFormatException;
 import task.Event;
-import task.Task;
-import task.TaskList;
-
-import javax.swing.*;
 
 /**
  * Represent a command of creating a new event task and adding it to the task list
  */
 public class AddEventCommand extends Command{
     public static final String COMMAND_WORD = "event";
+    public static final String ERROR_MESSAGE = "Name of event should be specified " +
+            "after keyword event. Name and the time should be separated " +
+            "by \"/at\"\n" + PRE_SPACE + "The syntax for adding an event task is:" +
+            " <task name> /at <event time>    Eg. event meeting /at 8pm";
     private Event newEvent;
     private String feedbackFormat;
     private final String FEEDBACK_FORMAT = "Event added:\n" + PRE_SPACE + PRE_SPACE + "%s\n" +

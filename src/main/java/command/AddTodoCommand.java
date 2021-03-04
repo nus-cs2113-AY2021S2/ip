@@ -1,7 +1,7 @@
 package command;
 
-import exception.TaskFormatException;
-import exception.TodoFormatException;
+//import exception.TaskFormatException;
+//import exception.TodoFormatException;
 import task.Task;
 import task.TaskList;
 import task.ToDo;
@@ -11,6 +11,8 @@ import task.ToDo;
  */
 public class AddTodoCommand extends Command{
     public static final String COMMAND_WORD = "todo";
+    public static final String ERROR_MESSAGE = "Name of Todo should be specified after todo keyword.\n" + PRE_SPACE +
+            "The syntax for adding a ToDo task is: todo <task name>    Eg. todo do homework";
     private String feedbackFormat;
     private ToDo newTodo;
     private final String FEEDBACK_FORMAT = "ToDo added:\n" + PRE_SPACE + PRE_SPACE + "%s\n" +
