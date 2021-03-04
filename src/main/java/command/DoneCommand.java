@@ -19,11 +19,9 @@ public class DoneCommand extends Command{
     /**
      * Set the specified task as done
      * @return feedback message of command execution
-     * @throws IndexOutOfBoundsException
-     * @throws TaskAlreadyDoneException
      */
     @Override
-    public CommandResult execute() throws IndexOutOfBoundsException, TaskAlreadyDoneException {
+    public CommandResult execute() {
         try{
             tasks.setTaskDone(taskIndex);
             feedbackFormat = String.format(FEEDBACK_FORMAT, tasks.get(taskIndex).getTaskInfo());

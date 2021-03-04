@@ -18,11 +18,9 @@ public class DeleteCommand extends Command{
     /**
      * delete the specified task from task list.
      * @return feedback message of the command execution
-     * @throws IndexOutOfBoundsException
-     * @throws TaskAlreadyDoneException
      */
     @Override
-    public CommandResult execute() throws IndexOutOfBoundsException, TaskAlreadyDoneException {
+    public CommandResult execute() {
         try{
             String taskInfo = tasks.get(taskIndex).getTaskInfo();
             tasks.deleteTask(taskIndex);

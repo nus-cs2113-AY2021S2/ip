@@ -1,3 +1,2 @@
 E | 0 | meeting | thursay
 T | 0 | sleep
-T | 1 | project meeting

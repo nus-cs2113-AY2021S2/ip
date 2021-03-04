@@ -26,10 +26,9 @@ public class AddEventCommand extends Command{
     /**
      * add the new event to task list
      * @return the feedback message of execution
-     * @throws TaskFormatException
      */
     @Override
-    public CommandResult execute() throws TaskFormatException {
+    public CommandResult execute() {
         tasks.addTask(newEvent);
         feedbackFormat = String.format(FEEDBACK_FORMAT, newEvent.getTaskInfo(), tasks.getTaskCount());
         return new CommandResult(feedbackFormat);

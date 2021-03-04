@@ -22,7 +22,6 @@ public class AddTodoCommand extends Command{
     /**
      * add the new todo to task list
      * @return the feedback message of execution
-     * @throws TaskFormatException
      */
     @Override
     public CommandResult execute(){

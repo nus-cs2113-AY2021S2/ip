@@ -25,10 +25,9 @@ public class AddDeadlineCommand extends Command{
     /**
      * add the new deadline to task list
      * @return the feedback message of execution
-     * @throws TaskFormatException
      */
     @Override
-    public CommandResult execute() throws TaskFormatException {
+    public CommandResult execute() {
         tasks.addTask(newDeadline);
         feedbackFormat = String.format(FEEDBACK_FORMAT, newDeadline.getTaskInfo(), tasks.getTaskCount());
         return new CommandResult(feedbackFormat);
