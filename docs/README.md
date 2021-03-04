@@ -1,9 +1,7 @@
 # Duke User Guide
-____
 Duke is a Personal Assistant Chatbot that helps you manage your various tasks. 
 
 ## Table of contents
-____
 * [Quick start](#quick-start)
 * [Features](#features)
 * [Usage](#usage)
@@ -18,14 +16,12 @@ ____
 * [Command summary](#command-summary)
 
 ## Quick start
-____
 1. Ensure you have Java `11` installed on your computer.
-1. Download the latest `v0.2.jar` from [here]()
+1. Download the latest `iP.jar` from [here]()
 1. Open a command window in the folder containing the `.jar` file.
-1. Run the command `java -jar {filename}.jar` <br> If you haven't changed the filename, run the command `java -jar v0.2.jar`
+1. Run the command `java -jar {filename}.jar` <br> If you haven't changed the filename, run the command `java -jar iP.jar`
 
 ## Features
-____
 
 ### Add tasks
 Add tasks to keep track of.  
@@ -54,7 +50,6 @@ All your tasks data is saved in the hard disk automatically, every time you make
 
 
 ## Usage
-____
 Words in `UPPER_CASE` are the parameters to be supplied by the user.
 <br>For example, in `todo TASK_DESCRIPTION`, `TASK_DESCRIPTION` is a parameter which can be used as `todo wash the dishes`
 
@@ -74,7 +69,7 @@ Expected outcome:
 
 Adds a Deadline task to your task list with a specified due date and time. Date and time must be in the given format. 
 
-Format: `deadline TASK_DESCRIPTION /by DDMMYYYY HHMM`
+Format: `deadline TASK_DESCRIPTION /by DD/MM/YYYY HHMM`
 
 Example of usage:
 `deadline finish project /by 02/04/2021 2359`
@@ -86,7 +81,7 @@ Expected outcome:
 
 Adds an Event task to your task list occuring at a specified date and time. Date and time must be in the given format.
 
-Format: `event TASK_DESCRIPTION /at DDMMYYYY HHMM`
+Format: `event TASK_DESCRIPTION /at DD/MM/YYYY HHMM`
 
 Example of usage:
 `event presentation /at 29/05/2021 1000`
@@ -159,7 +154,6 @@ Expected outcome:
 ![](bye.jpg)
 
 ## Command summary
-____
 
 Action | Format, Examples
 ------ | ----------------

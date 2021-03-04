@@ -11,7 +11,7 @@ import java.util.Scanner;
  */
 public class Ui {
     private final Scanner in;
-    private static final String exceptionGreeting = "\ud83d\ude16 OOPS!!! ";
+    private static final String exceptionGreeting = "OOPS!!! ";
 
     public Ui() {
         in = new Scanner(System.in);
@@ -173,20 +173,21 @@ public class Ui {
      * Prints out error message to indicate an error while loading data from the data file.
      */
     public void printLoadError() {
-        System.out.println("\t" + exceptionGreeting + "I've encountered an error loading your data :-(");
+        System.out.println("\t" + exceptionGreeting + "I've encountered an error loading your data.");
     }
 
     /**
      * Prints out error message to indicate an error while saving user's data to the data file.
      */
     public void printSaveError() {
-        System.out.println("\t" + exceptionGreeting + "I've encountered an error saving your data :-(");
+        System.out.println("\t" + exceptionGreeting + "I've encountered an error saving your data.");
     }
 
     /**
      * Prints out error message to indicate user has specified invalid or wrongly formatted date.
      */
     public void printDateError() {
-        System.out.println("\t" + exceptionGreeting + "I've encountered an error parsing your date :-(");
+        System.out.println("\t" + exceptionGreeting + "I've encountered an error parsing your date.");
+        System.out.println("\t"+ "Please ensure it is in the format dd/mm/yyyy hhmm");
     }
 }

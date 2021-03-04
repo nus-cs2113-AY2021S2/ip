@@ -29,17 +29,17 @@ public class Parser {
             command = new ExitCommand();
         } else if (fullCommand.equals("list")) {
             command = new ListCommand();
-        } else if (fullCommand.startsWith("done")) {
+        } else if (fullCommand.startsWith("done ")) {
             command = new DoneCommand(fullCommand);
-        } else if (fullCommand.startsWith("todo")) {
+        } else if (fullCommand.startsWith("todo ")) {
             command = new ToDoCommand(fullCommand);
-        } else if (fullCommand.startsWith("deadline")) {
+        } else if (fullCommand.startsWith("deadline ")) {
             command = new DeadlineCommand(fullCommand);
-        } else if (fullCommand.startsWith("event")) {
+        } else if (fullCommand.startsWith("event ")) {
             command = new EventCommand(fullCommand);
-        } else if (fullCommand.startsWith("delete")) {
+        } else if (fullCommand.startsWith("delete ")) {
             command = new DeleteCommand(fullCommand);
-        } else if (fullCommand.startsWith("find")) {
+        } else if (fullCommand.startsWith("find ")) {
             command = new FindCommand(fullCommand);
         } else {
             throw new InvalidCommandException();

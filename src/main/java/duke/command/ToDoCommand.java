@@ -41,6 +41,10 @@ public class ToDoCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             String description = fullCommand.substring(TODO_LENGTH);
+            if (description.isEmpty()) {
+                ui.printEmptyDescription("todo");
+                return;
+            }
             Task newTask = new ToDo(description);
             tasks.addTask(newTask);
             ui.printNewTask(newTask, tasks.getTaskCount());
