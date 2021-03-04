@@ -49,28 +49,31 @@ public class Ui {
         System.out.println(" \" to save your tasks!");
     }
 
+
     /**
      * Prints error message when invalid command is input by the user.
      */
-    public static void printInvalidCommandMessage(){
+    public static void printInvalidCommandMessage() {
         printBorder();
         System.out.println("     ERROR: there is no such command, try again!");
         printBorder();
     }
 
+
     /**
      * Prints error message when user does not specify the task number when inputting "done" command.
      */
-    public static void printTaskUnspecifiedMessage(){
+    public static void printTaskUnspecifiedMessage() {
         Ui.printBorder();
         System.out.println("     ☹ OOPS!!! Please specify which task number is done");
         Ui.printBorder();
     }
 
+
     /**
      * Prints error message when user inputs a non-existent the task number in "done" command.
      */
-    public static void printInvalidTask(){
+    public static void printInvalidTask() {
         Ui.printBorder();
         System.out.println("     ☹ OOPS!!! There is no such task number");
         Ui.printBorder();
@@ -79,7 +82,7 @@ public class Ui {
     /**
      * Prints error message when user inputs a task number that has already been marked as done in "done" command.
      */
-    public static void printTaskAlreadyMarkedAsDone(){
+    public static void printTaskAlreadyMarkedAsDone() {
         Ui.printBorder();
         System.out.println("     ☹ OOPS!!! This task is already marked as done");
         Ui.printBorder();

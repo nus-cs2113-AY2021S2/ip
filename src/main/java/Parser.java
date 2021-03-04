@@ -42,6 +42,9 @@ public class Parser {
         case "delete":
             TaskList.deleteTask(Integer.parseInt(command[1]));
             break;
+        case "find":
+            TaskList.searchArrayList(command[1]);
+            break;
         case "bye":
             isExit = true;
             Ui.printByeMessage();
