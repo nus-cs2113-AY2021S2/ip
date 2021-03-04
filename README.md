@@ -37,6 +37,7 @@ You can start by typing:
  7. **bye** to end **The system**
 
 #### Possible user journey
+```
 ===================================================
 Duke - Version 1.0
  ____        _        
@@ -86,3 +87,4 @@ Enter command: bye
 [Command entered:bye]
 ===================================================
 Bye. Hope to see you again soon!
+```
