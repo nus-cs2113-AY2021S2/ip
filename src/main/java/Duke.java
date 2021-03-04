@@ -49,6 +49,10 @@ public class Duke {
             } else if (command.contains("delete")) {
                 taskList.deleteTasks(command);
 
+                // finds task
+            } else if (command.contains("find")) {
+                taskList.filterList(command.substring(5));
+
                 // add tasks to list
             } else {
                 taskList.addTasks(command);
