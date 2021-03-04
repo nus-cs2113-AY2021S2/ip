@@ -99,7 +99,9 @@ public class Ui {
         System.out.println("\"list\": Brings up the list of all the items you stored!");
         System.out.println("\"delete [index in list]\": deletes an items from the list!");
         System.out.println("\"done [index in list]\": marks a task in your list as done!");
+        System.out.println("\"find [keyword to find]\": finds a keyword or phrase in your list!");
         System.out.println("\"bye\": exits duke");
+        System.out.println("Duke ONLY saves when you EXIT the program!");
     }
 
     /**
@@ -140,8 +142,6 @@ public class Ui {
     public void showLine() {
         System.out.print(LINEBREAK);
     }
-<<<<<<< HEAD
-=======
 
     /**
      * Prints a message for items found in the list
@@ -166,5 +166,4 @@ public class Ui {
     public static void noMatchingTasks() {
         System.out.println("OOPS! Looks like there are no matching tasks!");
     }
->>>>>>> c9dd745 (add comments to most classes and methods)
 }

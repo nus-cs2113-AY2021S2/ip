@@ -32,15 +32,20 @@ public class Duke {
         ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {
-            String fullCommand = ui.readCommand();
-            ui.showLine(); // show the divider line ("_______")
-            Command c = Parser.parse(fullCommand);
-            c.execute(tasks, ui, storage);
-            isExit = c.isExit();
-            if (isExit) {
-                ui.showGoodbye();
+            try {
+                String fullCommand = ui.readCommand();
+                ui.showLine(); // show the divider line ("_______")
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
+                if (isExit) {
+                    ui.showGoodbye();
+                }
+                ui.showLine();
+            } catch (NullPointerException e) {
+                //Command C can return as null if an error is triggered in parser
+                //Null Pointer Exception may hence occur, the catch statement is to ensure it does not exit the loop.
             }
-            ui.showLine();
         }
         storage.store(tasks);
     }
