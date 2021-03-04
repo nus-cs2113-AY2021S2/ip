@@ -8,7 +8,9 @@ import duke.taskexceptions.TaskDateFormatException;
 import java.io.IOException;
 
 /**
- * Main Duke Class - Overall 'Parent' Class
+ * Main Duke Class: This class controls the flow for the entire program which manages a User's tasks.
+ * When 'bye' command is executed, entire program stops immediately
+ * and program exits with status code -1.
  */
 public class Duke {
 
@@ -17,9 +19,11 @@ public class Duke {
     private static Ui ui;
 
     /**
-     * Takes in filepath
-     * and load old list from Storage (which stores Duke List  with all tasks from previous User experience)
-     * @param filePath
+     * Takes in a filepath given by User
+     * and load the older list from the <code>Storage</code> object containing the filepath
+     * into an empty list which stores the User's tasks
+     *
+     * @param filePath filepath given by User storing all the User's tasks
      */
     public Duke(String filePath) {
         ui = new Ui();
@@ -30,26 +34,26 @@ public class Duke {
             ui.showNullPointerError();
             tasks = new TaskList();
         } catch (IOException e) {
-            ui.showLoadingError();
+            ui.showCreateFileError();
             tasks = new TaskList();
         }
     }
 
     /**
-     * Main that takes in User Command
-     * and Respond to User
+     * Gives instructions for program to interact with User,
+     * store tasks given by User or execute other (valid) User's command.
      */
     public void run() {
         ui.saysHiToUser();
         boolean isExit = false;
-        while(!isExit) {
+        while (!isExit) {
 
             try {
                 storage.overwriteDukeListFile(); //update DukeList (stores all latest tasks)
                 String fullCommand = ui.readCommand(); //take in User's Command
                 ui.showLine(); // start of current Response to User
                 Parser.parse(fullCommand); //parse User's Command
-                isExit = Command.execute(tasks, ui, storage); //Check if command = 'bye' & Execute the current command
+                isExit = Command.execute(tasks, ui); //Check if command = 'bye' & Execute the current command
             } catch (NoTaskNameException e) {
                 System.out.println("☹ OOPS!!! The description of a task cannot be empty.");
             } catch (TaskDateFormatException e) {
@@ -72,9 +76,10 @@ public class Duke {
     }
 
     /**
-     * Runs entire program
-     * and loads data of tasks list from given filepath
-     * Otherwise, creates a directory/file from filepath and uses it as filepath for storage
+     * Loads older task data from the list in the given filepath
+     * Then, proceeds to run the entire program.
+     * Otherwise, creates a file (embedded in the created directory) from filepath and uses the file for storage of tasks.
+     *
      * @param args
      */
     public static void main(String[] args) {
