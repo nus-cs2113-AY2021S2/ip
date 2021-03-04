@@ -65,4 +65,19 @@ public class Ui {
             System.out.println("You don't have any tasks in the list");
         }
     }
+
+    public static void printFoundTasks(ArrayList<Task> foundTasks) {
+        if (foundTasks.isEmpty()) {
+            System.out.println("\uD83D\uDE1E No tasks found with given keyword. Please try again");
+            return;
+        }
+        System.out.println("Here are the matching tasks in your list!");
+        for (int i = 0; i < foundTasks.size(); i++) {
+            System.out.print((i+1) + ". ");
+            Task currentTask = foundTasks.get(i);
+            printTask(currentTask);
+
+        }
+//        System.out.println(LINE);
+    }
 }

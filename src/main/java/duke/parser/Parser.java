@@ -3,8 +3,6 @@ package duke.parser;
 import duke.Duke;
 import duke.command.*;
 import duke.exception.DukeException;
-import duke.tasklist.TaskList;
-import duke.tasks.Task;
 import duke.ui.Ui;
 import duke.storage.Storage;
 
@@ -43,6 +41,8 @@ public class Parser {
                 isExit = true;
             } else if (inputCommand.equals("save")) {
                 Storage.saveData();
+            } else if (inputCommand.startsWith("find")) {
+                new FindCommand(inputCommand);
             } else {
                 Ui.printInvalidMessage(inputCommand);
             }

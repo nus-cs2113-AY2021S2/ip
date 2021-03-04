@@ -13,6 +13,7 @@ import duke.ui.Ui;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class TaskList {
 
@@ -129,5 +130,15 @@ public class TaskList {
             tasks.remove(taskIndex);
             Ui.printTaskSize();
         }
+    }
+    public static void findListOfCommands(String inputCommand) {
+        String word = inputCommand.substring(5);
+        ArrayList<Task> foundTasks = findInput(word);
+        Ui.printFoundTasks(foundTasks);
+    }
+    public static ArrayList<Task> findInput (String word) {
+        return (ArrayList<Task>) tasks.stream()
+                .filter(t -> t.getDescription().toLowerCase().contains(word))
+                    .collect(Collectors.toList());
     }
 }
