@@ -92,7 +92,7 @@ Expected Outcome:
 ```
 **********************************************************
 Awesome! I have marked this task as done: 
-[T][✓] homework
+[T][x] homework
 **********************************************************
 ```
 
@@ -125,7 +125,7 @@ Expected Outcome:
 ```
 ************************************************************
 Here are the matching tasks in your list:
-1. [T][✓] homework
+1. [T][x] homework
 ************************************************************
 ```
 
