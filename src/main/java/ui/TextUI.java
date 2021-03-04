@@ -19,7 +19,7 @@ public class TextUI {
         System.out.print("What would you like to do? Enter command: ");
         String fullInputLine = in.nextLine();
 
-        return fullInputLine.toLowerCase();
+        return fullInputLine.toLowerCase().stripLeading();
     }
 
 
