@@ -1,9 +1,17 @@
 import java.util.Scanner;
 
+/**
+ * Makes sense of user command.
+ */
 public class Parser {
     public Parser() {
     }
 
+    /**
+     * Determines the command from user input.
+     *
+     * @return isExit to determine whether to exit program if user has input bye command.
+     */
     public static boolean processInput() {
         String[] command = determineCommand();
         boolean isExit = false;
@@ -49,6 +57,11 @@ public class Parser {
         return isExit;
     }
 
+    /**
+     * Splits input line to determine command.
+     *
+     * @return command the user inputted split into command type and additional description.
+     */
     private static String[] determineCommand() {
         Scanner userInput = new Scanner(System.in);
         String inputLine = userInput.nextLine().trim();

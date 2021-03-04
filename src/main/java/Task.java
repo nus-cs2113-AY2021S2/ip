@@ -2,6 +2,11 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Constructor for Task Class
+     *
+     * @param description Description of the task
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -15,6 +20,11 @@ public class Task {
         return getStatusIcon() + description;
     }
 
+    /**
+     * Returns the current status icon of whether the task is done
+     *
+     * @return  [x] if task is done and [ ] if task is not done
+     */
     public String getStatusIcon() {
         return (isDone ? "[x] ":"[ ] "); //return tick or X symbols
     }

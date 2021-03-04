@@ -7,6 +7,9 @@ import java.io.IOException;
 
 public class Storage {
 
+    /**
+     * Saves tasks to file
+     */
     public static void saveFile() {
         String filePath = new File("").getAbsolutePath();
         try {
@@ -39,6 +42,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads saved TaskList from file
+     *
+     * @throws FileNotFoundException when filepath does not exist
+     */
     public static void loadFile(String filePath) throws FileNotFoundException {
         File file = new File(filePath);
         Scanner scanner = new Scanner(file);
