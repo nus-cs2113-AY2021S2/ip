@@ -19,9 +19,9 @@ ____
 
 ## Quick start
 ____
-1. Ensure you have Java `11` installed on your computer
+1. Ensure you have Java `11` installed on your computer.
 1. Download the latest `v0.2.jar` from [here]()
-1. Open a command window in the folder containing the `.jar` file
+1. Open a command window in the folder containing the `.jar` file.
 1. Run the command `java -jar {filename}.jar` <br> If you haven't changed the filename, run the command `java -jar v0.2.jar`
 
 ## Features
@@ -44,7 +44,7 @@ Display all your added tasks as a list.
 Mark a task from your list of added tasks as done.
 
 ### Delete task
-You may delete tasks that you no longer want to manage
+You may delete tasks that you no longer want to manage.
 
 ### Find tasks
 Find all tasks that contain the queried keyword and view them as a list. 
@@ -56,11 +56,11 @@ All your tasks data is saved in the hard disk automatically, every time you make
 ## Usage
 ____
 Words in `UPPER_CASE` are the parameters to be supplied by the user.
-<br>e.g. in `todo TASK_DESCRIPTION`, `TASK_DESCRIPTION` is a parameter which can be used as `todo wash the dishes`
+<br>For example, in `todo TASK_DESCRIPTION`, `TASK_DESCRIPTION` is a parameter which can be used as `todo wash the dishes`
 
 ### `todo` - Add a Todo
 
-Adds a Todo task to your task list 
+Adds a Todo task to your task list. 
 
 Format: `todo TASK_DESCRIPTION`
 
@@ -97,6 +97,16 @@ Expected outcome:
 ### `list` - Display all tasks
 
 Displays all your tasks with their type, completion status, and date & time (for deadlines and events). Tasks are shown as an ordered list.
+
+For each task: <br/>
+First `[]` indicates task type: <br/>
+  `[T]` : Todo <br/>
+  `[D]` : Deadline <br/>
+  `[E]` : Event <br/>
+
+Second `[]` indicates task done status: <br/>
+  `[X]` : Done <br/>
+  `[ ]` : Not done <br/>
 
 Format: `list`
 

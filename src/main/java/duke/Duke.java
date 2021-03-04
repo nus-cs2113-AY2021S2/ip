@@ -8,8 +8,8 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 /**
- * Duke is a command line task manager
- * It allows users to add, delete, save, and complete to-dos, deadlines, and events
+ * Duke is a command line task manager.
+ * It allows users to add, delete, save, and complete to-dos, deadlines, and events.
  */
 public class Duke {
 
@@ -24,8 +24,8 @@ public class Duke {
     }
 
     /**
-     * The code to run the Duke program
-     * Takes in user input and executes command's accordingly
+     * The code to run the Duke program.
+     * Takes in user input and executes command's accordingly.
      */
     public void run() {
         ui.showWelcomeMessage();

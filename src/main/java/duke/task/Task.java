@@ -1,17 +1,17 @@
 package duke.task;
 
 /**
- * Each instance represents a task created by the user
- * A Task has two fields, a description and a boolean isDone to indicate if it's completed
+ * Each instance represents a task created by the user.
+ * A Task has two fields, a description and a boolean isDone to indicate if it's completed.
  */
 public class Task {
     protected String description;
     protected boolean isDone;
 
     /**
-     * Constructor method for the Task Class
+     * Constructor method for the Task Class.
      *
-     * @param description Description of the task
+     * @param description Description of the task.
      */
     public Task(String description) {
         this.description = description;
@@ -27,18 +27,18 @@ public class Task {
     }
 
     /**
-     * Returns a tick or cross icon depending on if the task is done
+     * Returns a cross if task is done or single space if not done.
      *
-     * @return String tick or cross icon
+     * @return String cross or single space
      */
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718");
+        return (isDone ? "X" : " ");
     }
 
     /**
-     * Returns a String that contains all details of the task (status and description)
+     * Returns a String that contains all details of the task (status and description).
      *
-     * @return String containing all details of the task
+     * @return String containing all details of the task.
      */
     @Override
     public String toString() {
@@ -46,7 +46,7 @@ public class Task {
     }
 
     /**
-     * Marks the task as done/completed
+     * Marks the task as done/completed.
      */
     public void markAsDone() {
         isDone = true;

@@ -6,7 +6,7 @@ import duke.ui.Ui;
 import duke.task.Task;
 
 /**
- * DeleteCommand is called when user wants to delete a task
+ * DeleteCommand is called when user wants to delete a task.
  */
 public class DeleteCommand extends Command {
     private boolean isExit;
@@ -14,9 +14,9 @@ public class DeleteCommand extends Command {
     private static final int DELETE_LENGTH = 7;
 
     /**
-     * Constructor method of DeleteCommand which stores the user input
+     * Constructor method of DeleteCommand which stores the user input.
      *
-     * @param fullCommand String of user input for deleting a task
+     * @param fullCommand String of user input for deleting a task.
      */
     public DeleteCommand(String fullCommand) {
         this.fullCommand = fullCommand;
@@ -28,12 +28,13 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Deletes a task from the TaskList tasks
-     * Prints output confirming task deletion to user
-     * Saves changes to data file
-     * @param tasks TaskList containing all tasks
-     * @param ui User Interface
-     * @param storage Storage to save all tasks, updating the data file
+     * Deletes a task from the TaskList tasks.
+     * Prints output confirming task deletion to user.
+     * Saves changes to data file.
+     *
+     * @param tasks TaskList containing all tasks.
+     * @param ui User Interface.
+     * @param storage Storage to save all tasks, updating the data file.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
@@ -43,7 +44,7 @@ public class DeleteCommand extends Command {
             tasks.removeTask(index);
             ui.printRemoveTask(deleted, tasks.getTaskCount());
             storage.saveToFile(tasks);
-        } catch (IndexOutOfBoundsException e) {
+        } catch (Exception e) {
             ui.printInvalidTask();
         }
     }

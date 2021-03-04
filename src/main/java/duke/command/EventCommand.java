@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * EventCommand is called when user wants to add a new Event
+ * EventCommand is called when user wants to add a new Event.
  */
 public class EventCommand extends Command {
     private boolean isExit;
@@ -19,9 +19,9 @@ public class EventCommand extends Command {
     private static final int AT_LENGTH = 3;
 
     /**
-     * Constructor method of EventCommand which stores the user input
+     * Constructor method of EventCommand which stores the user input.
      *
-     * @param fullCommand String of user input for adding a new Event
+     * @param fullCommand String of user input for adding a new Event.
      */
     public EventCommand(String fullCommand) {
         this.fullCommand = fullCommand;
@@ -33,12 +33,13 @@ public class EventCommand extends Command {
     }
 
     /**
-     * Adds new Event to the TaskList tasks
-     * Prints output confirming addition to user
-     * Saves changes to data file
-     * @param tasks TaskList containing all tasks
-     * @param ui User Interface
-     * @param storage Storage to save all tasks, updating the data file
+     * Adds new Event to the TaskList tasks.
+     * Prints output confirming addition to user.
+     * Saves changes to data file.
+     *
+     * @param tasks TaskList containing all tasks.
+     * @param ui User Interface.
+     * @param storage Storage to save all tasks, updating the data file.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {

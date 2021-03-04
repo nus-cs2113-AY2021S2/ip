@@ -10,10 +10,10 @@ public class Deadline extends Task {
     protected LocalDateTime by;
 
     /**
-     * Constructor method for Deadline class
+     * Constructor method for Deadline class.
      *
-     * @param description Description of the deadline
-     * @param by Date and time (deadline) that the task needs to be completed by
+     * @param description Description of the deadline.
+     * @param by Date and time (deadline) that the task needs to be completed by.
      */
     public Deadline(String description, LocalDateTime by) {
         super(description);
@@ -30,19 +30,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns the status icon depending on if the deadline is completed
+     * Returns a String that contains all details of the deadline (status, description, and deadline).
      *
-     * @return A tick if the deadline is done, and a space (rather than a cross) if it hasn't yet
-     */
-    @Override
-    public String getStatusIcon() {
-        return (isDone ? "\u2713" : " ");
-    }
-
-    /**
-     * Returns a String that contains all details of the deadline (status, description, and deadline)
-     *
-     * @return String containing all details of the deadline
+     * @return String containing all details of the deadline.
      */
     @Override
     public String toString() {

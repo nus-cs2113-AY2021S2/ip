@@ -6,8 +6,8 @@ import duke.task.TaskList;
 import java.util.Scanner;
 
 /**
- * The UI class contains methods that deal with the user
- * UI has methods to read user input and also print output
+ * The UI class contains methods that deal with the user.
+ * UI has methods to read user input and also print output.
  */
 public class Ui {
     private final Scanner in;
@@ -18,7 +18,7 @@ public class Ui {
     }
 
     /**
-     * Prints the Duke logo and welcomes the user
+     * Prints the Duke logo and welcomes the user.
      */
     public void showWelcomeMessage() {
         String logo = " ____        _        \n"
@@ -34,23 +34,23 @@ public class Ui {
     }
 
     /**
-     * Prints goodbye message when the user is exiting the program
+     * Prints goodbye message when the user is exiting the program.
      */
     public void showExitMessage() {
         System.out.println("\tBye. Hope to see you again soon!");
     }
 
     /**
-     * Prints a horizontal line made of dashes, intending to separate user input and program output
+     * Prints a horizontal line made of dashes, intending to separate user input and program output.
      */
     public void printHorizontalLine() {
         System.out.println("\t---------------------------------------------------------------------");
     }
 
     /**
-     * Prints out all existing tasks in the TaskList object
+     * Prints out all existing tasks in the TaskList object.
      *
-     * @param tasks TaskList object
+     * @param tasks TaskList object.
      */
     public void printTasksList(TaskList tasks) {
         System.out.println("\tHere are the tasks in your list:");
@@ -59,9 +59,9 @@ public class Ui {
 
 
     /**
-     * Prints out tasks matching queried keyword
+     * Prints out tasks matching queried keyword.
      *
-     * @param listOfTasks String containing all tasks containing the queried keyword
+     * @param listOfTasks String containing all tasks containing the queried keyword.
      */
     public void printQueryList(String listOfTasks) {
         System.out.println("\tHere are the matching tasks in your list:");
@@ -69,9 +69,9 @@ public class Ui {
     }
 
     /**
-     * Returns String of next line of user's input
+     * Returns String of next line of user's input.
      *
-     * @return String of user's input
+     * @return String of user's input.
      */
     public String readCommand() {
         String fullCommand = in.nextLine();
@@ -79,19 +79,19 @@ public class Ui {
     }
 
     /**
-     * Prints the error message prepended with an error greeting
+     * Prints the error message prepended with an error greeting.
      *
-     * @param message String obtained from exception
+     * @param message String obtained from exception.
      */
     public void showError(String message) {
         System.out.println("\t" + exceptionGreeting + message);
     }
 
     /**
-     * Prints out message to confirm to the user that the task has been marked as done
+     * Prints out message to confirm to the user that the task has been marked as done.
      *
-     * @param tasks TaskList object
-     * @param index index that the task that was marked as done corresponds to in tasks
+     * @param tasks TaskList object.
+     * @param index index that the task that was marked as done corresponds to in tasks.
      */
     public void printDoneTask(TaskList tasks, int index) {
         System.out.println("\tNice! I've marked this task as done:");
@@ -100,10 +100,10 @@ public class Ui {
     }
 
     /**
-     * Prints out message to confirm to the user that the task has been removed/deleted
+     * Prints out message to confirm to the user that the task has been removed/deleted.
      *
-     * @param t Task object that user has removed
-     * @param taskCounter Total number of tasks remaining
+     * @param t Task object that user has removed.
+     * @param taskCounter Total number of tasks remaining.
      */
     public void printRemoveTask(Task t, int taskCounter) {
         System.out.println("\tNoted. I've removed this task:");
@@ -117,9 +117,10 @@ public class Ui {
     }
 
     /**
-     * Prints out message to confirm to the user that the task has been added
-     * @param t Task object that user has added
-     * @param taskCounter Total number of tasks after adding new task
+     * Prints out message to confirm to the user that the task has been added.
+     *
+     * @param t Task object that user has added.
+     * @param taskCounter Total number of tasks after adding new task.
      */
     public void printNewTask(Task t, int taskCounter) {
         System.out.println("\tGot it. I've added this task:");
@@ -132,56 +133,59 @@ public class Ui {
     }
 
     /**
-     * Prints out error message to indicate user has tried to add new task but left description empty
+     * Prints out error message to indicate user has tried to add new task but left description empty.
      *
-     * @param type Type of task that the user tried to add
+     * @param type Type of task that the user tried to add.
      */
     public void printEmptyDescription(String type) {
         System.out.println("\t" + exceptionGreeting + "The description of a " + type + " cannot be empty.");
     }
 
     /**
-     * Prints out error message to indicate user has tried to query but hasn't provided a keyword
+     * Prints out error message to indicate user has tried to query but hasn't provided a keyword.
      */
     public void printEmptyQuery() {
         System.out.println("\t" + exceptionGreeting + "The query cannot be empty.");
     }
 
     /**
-     * Prints out error message prepended with error greeting to indicate user has specified invalid task number
+     * Prints out error message to indicate user has specified invalid task number.
      */
     public void printInvalidTask() {
         System.out.println("\t" + exceptionGreeting + "That task number does not exist.");
     }
 
     /**
-     * Prints out error message to indicate an error while creating a directory in which the data file would be stored
+     * Prints out error message to indicate an error while creating a directory for the data file.
      */
     public void printDirectoryError() {
         System.out.println("\t" + exceptionGreeting + "I've encountered an error while creating a directory :-(");
     }
 
     /**
-     * Prints out error message to indicate an error while creating the data file
+     * Prints out error message to indicate an error while creating the data file.
      */
     public void printFileError() {
         System.out.println("\t" + exceptionGreeting + "I've encountered an error while creating a data file :-(");
     }
 
     /**
-     * Prints out error message to indicate an error while loading data from the data file
+     * Prints out error message to indicate an error while loading data from the data file.
      */
     public void printLoadError() {
         System.out.println("\t" + exceptionGreeting + "I've encountered an error loading your data :-(");
     }
 
     /**
-     * Prints out error message to indicate an error while saving user's data to the data file
+     * Prints out error message to indicate an error while saving user's data to the data file.
      */
     public void printSaveError() {
         System.out.println("\t" + exceptionGreeting + "I've encountered an error saving your data :-(");
     }
 
+    /**
+     * Prints out error message to indicate user has specified invalid or wrongly formatted date.
+     */
     public void printDateError() {
         System.out.println("\t" + exceptionGreeting + "I've encountered an error parsing your date :-(");
     }

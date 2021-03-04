@@ -3,41 +3,41 @@ package duke.task;
 import java.util.ArrayList;
 
 /**
- * TaskList is a class used to contain the list of all tasks created by the user
+ * TaskList is a class used to contain the list of all tasks created by the user.
  */
 public class TaskList {
     private ArrayList<Task> tasks;
 
     /**
-     * Constructor method to create a new TaskList with no tasks
+     * Constructor method to create a new TaskList with no tasks.
      */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
     /**
-     * Constructor method that takes in an ArrayList<Task>
-     * Used to load tasks from the data file
+     * Constructor method that takes in an ArrayList<Task>.
+     * Used to load tasks from the data file.
      *
-     * @param tasks ArrayList<Task>
+     * @param tasks ArrayList<Task>.
      */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
     /**
-     * Takes in a task and adds it to the TaskList
+     * Takes in a task and adds it to the TaskList.
      *
-     * @param t Task
+     * @param t Task.
      */
     public void addTask(Task t) {
         tasks.add(t);
     }
 
     /**
-     * Takes in an index and removes the corresponding task from the TaskList
+     * Takes in an index and removes the corresponding task from the TaskList.
      *
-     * @param index
+     * @param index Index in the TaskList of the task to remove.
      */
     public void removeTask(int index) {
         tasks.remove(index);
@@ -48,10 +48,10 @@ public class TaskList {
     }
 
     /**
-     * Returns ordered list of tasks whose description contains the keyword specified
+     * Returns ordered list of tasks whose description contains the keyword specified.
      *
-     * @param keyword String obtained from user's query
-     * @return String ordered list of tasks containing keyword
+     * @param keyword String obtained from user's query.
+     * @return String ordered list of tasks containing keyword.
      */
     public String getTasksByKeyword(String keyword) {
         String list = "";
@@ -67,9 +67,9 @@ public class TaskList {
     }
 
     /**
-     * Returns a String to represent the tasks in TaskList as an ordered list
+     * Returns a String to represent the tasks in TaskList as an ordered list.
      *
-     * @return String that is an ordered list of tasks
+     * @return String that is an ordered list of tasks.
      */
     @Override
     public String toString() {
