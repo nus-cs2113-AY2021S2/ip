@@ -1,10 +1,8 @@
 import java.io.*;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
     public static File filePath;
-    public static ArrayList<Task> list = new ArrayList<>();
 
     public Storage(File filePath) {
         Storage.filePath = filePath;
@@ -35,7 +33,6 @@ public class Storage {
             File dataDirectory = new File("data");
             dataDirectory.mkdir();
             File dukeFile = new File("data/duke.txt");
-            //dukeFile.createNewFile();
 
         }
     }

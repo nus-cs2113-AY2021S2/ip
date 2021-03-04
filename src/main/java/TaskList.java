@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 
 public class TaskList {
-    private ArrayList<Task> tasks;
+    private final ArrayList<Task> tasks;
 
     public TaskList() {
         this.tasks = new ArrayList<>();
@@ -28,10 +28,6 @@ public class TaskList {
         return tasks;
     }
 
-
-    public Task getTaskAtIndex(int taskIndex) {
-        return tasks.get(taskIndex);
-    }
 
     public void getFoundTask(String keywordToFind, Ui ui) {
         ArrayList<Task> foundList = new ArrayList<>();

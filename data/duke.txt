@@ -1,4 +1,2 @@
-T |0 |ivp
-T |0 |ivp
-T |0 |ivp chanmp
-T |0 |ivp mvp
+T |1 |PGP study
+E |0 |CG2027 finals  |saturday
