@@ -16,7 +16,7 @@ while still having the benefits of an understandable Graphical User Interface (G
   - [Saving the data](#saving-the-data)
   - [Editing the data file](#editing-the-data-file)
   - [Loading of saved data file](#loading-of-saved-data-file)
-- [FAQ](#FAQ)
+- [FAQ](#faq)
 - [Command Summary](#command-summary)
 
 ---
@@ -26,10 +26,7 @@ while still having the benefits of an understandable Graphical User Interface (G
 1. Ensure you have Java 11.
 2. Download the latest Spark.jar from here (INSERT LINK).
 3. Copy the file to the folder you want to use as the *home folder* for Spark.
-4. Double-click the file to start the program. The CLI similar to below should appear within a few seconds. 
-
-
-**INSERT PICTURE**
+4. Double-click the file to start the program. The CLI similar to below should appear within a few seconds.
 5. Type the command in the command box and press *Enter* to execute it. e.g. typing `list` and pressing *Enter* will
 display a list of current tasks.
 
@@ -39,12 +36,14 @@ display a list of current tasks.
 ### Viewing list of tasks: `list`
 Displays the list of tasks already input by user.
 
-~~insertpicture~~
+![List](/docs/LIST1.JPG)
 
 Format: `list`
 <br/><br/>
 ### Adding a TODO task: `todo`
 Adds a TODO task into the list
+
+![Todo](/docs/TODO1.JPG)
 
 Format: `todo DESCRIPTION_OF_TASK`
 
@@ -59,6 +58,8 @@ Examples:
   <br/><br/>
 ### Adding an EVENT task: `event`
 Adds an EVENT task into the list
+
+![Event](/docs/EVENT1.JPG)
 
 Format: `event DESCRIPTION_OF_TASK /DATE_OF_EVENT [ADDITIONAL_COMMENTS_ON_EVENT]`
 
@@ -78,6 +79,8 @@ Examples:
 ### Adding a DEADLINE task: `deadline`
 Adds a DEADLINE task into the list
 
+![Deadline](/docs/DEADLINE1.JPG)
+
 Format: `deadline DESCRIPTION_OF_TASK /DATE_OF_DEADLINE [ADDITIONAL_COMMENTS_ON_DEADLINE]`
 
 * Task will have a `[D]` tagged to it.
@@ -96,6 +99,8 @@ Examples:
 ### Marking a task as completed: `done`
 Marks the specified task number as completed.
 
+![Done](/docs/DONE1.JPG)
+
 Format: `done TASK_POSITION_IN_LIST`
 
 * Command `done` is case-insensitive.
@@ -109,6 +114,8 @@ Format: `done TASK_POSITION_IN_LIST`
   <br/><br/>
 ### Deleting a task from the list: `delete`
 Removes the specified task from the list.
+
+![Delete](/docs/DONE1.JPG)
 
 Format: `delete TASK_POSITION_IN_LIST`
 
@@ -124,6 +131,8 @@ Format: `delete TASK_POSITION_IN_LIST`
 ### Searching for a task with a keyword: `find`
 Searches for tasks in the list with the specified keyword.
 
+[Find](/docs/FIND1.JPG)
+
 Format: `find KEYWORD`
 * Command `find` is case-insensitive.
 * `KEYWORD` can be a short sentence, and need not be a singular word.
@@ -132,6 +141,8 @@ Format: `find KEYWORD`
   <br/><br/>
 ### Exiting the program: `bye`
 Exits the program
+
+[Bye](/docs/BYE1.JPG)
 
 Format: `bye`
 
@@ -159,7 +170,6 @@ There is no need to manually load the data file with the list contents.
 **A**: Commands are not case-sensitive.
 
 **Q**: What if I do not have an existing saved .TXT file on my computer?<br/>
-
 **A**: The program will detect this and create a new .TXT file automatically.
 
 
