@@ -88,7 +88,7 @@ OOPS!!! The description of a todo cannot be empty.
 ____________________________________________________________
 ```
 
-###`deadline` - Add deadline task to task list
+### `deadline` - Add deadline task to task list
 
 
 ### Usage
