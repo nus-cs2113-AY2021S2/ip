@@ -1,6 +1,9 @@
 import java.io.*;
 import java.util.Scanner;
 
+/**
+ * Represents the file used to store the {@code TaskList}.
+ */
 public class Storage {
     public static File filePath;
 
@@ -8,6 +11,10 @@ public class Storage {
         Storage.filePath = filePath;
     }
 
+    /**
+     * Saves the {@code TaskList} data created during a run to this storage file.
+     * at the end of the programme
+     */
     public void writeToFile(TaskList tasks) {
         try {
             PrintWriter writer = new PrintWriter("data/duke.txt");
@@ -25,6 +32,10 @@ public class Storage {
     }
 
 
+    /**
+     * Loads the {@code TaskList} data from this storage file, then returns it.
+     * Creates a new file with same directory if the directory or file does not exist.
+     */
     public void readFile(TaskList tasks, Integer index) {
         try {
             printFileContents(filePath, tasks, index);
@@ -37,9 +48,11 @@ public class Storage {
         }
     }
 
-    public void createFile() {
-    }
 
+    /**
+     * Prints the {@code TaskList} data from this storage file.
+     * and create new task
+     */
     private static void printFileContents(File filePath, TaskList tasks, Integer index) throws FileNotFoundException {
         Scanner s = new Scanner(filePath); // create a Scanner using the File as the source
         while (s.hasNext()) {
@@ -58,7 +71,9 @@ public class Storage {
 
         }
     }
-
+    /**
+     * add task to storage file
+     */
     private static void appendToFile(String textToAppend) throws IOException {
         FileWriter fw = new FileWriter("data/duke.txt", true); // create a FileWriter in append mode
         fw.write(textToAppend);

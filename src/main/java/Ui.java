@@ -1,7 +1,11 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/**
+ * Text user interface of the application.
+ */
 public class Ui {
+    // Display messages
     private static final String line = "____________________________________________________________\n";
     public final static String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -30,6 +34,10 @@ public class Ui {
         System.out.println(exit);
     }
 
+    /**
+     * Displays a pre-defined explanation for the error if {@code errorMessage} is
+     * not null, and a default message if it is null.
+     */
     public void printErrorMessage() {
         System.out.print(line);
         System.out.print("I don't quite understand." + "\n" + "Please enter the command again." + "\n");
@@ -46,6 +54,11 @@ public class Ui {
         System.out.print(line + "Got it. I've added this task:" + "\n" + a + "\n" + "Now you have " + size + " tasks in the list." + "\n" + line);
     }
 
+    /**
+     * Displays all tasks in a {@code TaskList} in their full form, indexed.
+     * @param tasks list of tasks
+     * being displayed (filtered or main list)
+     */
     public void printList(ArrayList<Task> tasks) {
         for (int i = 1; i <= tasks.size(); i++) {
             System.out.println(i + ". " + tasks.get(i - 1).toString());
@@ -53,6 +66,11 @@ public class Ui {
         System.out.print(line);
     }
 
+    /**
+     * Prints the list of tasks that matches the find input.
+     *
+     * @param foundList the list of tasks that contains the finding keyword
+     */
     public void printFoundList(ArrayList<Task> foundList) {
         System.out.print(line);
         System.out.println("Here are the matching tasks in your list: ");
@@ -67,6 +85,12 @@ public class Ui {
         System.out.print(line);
     }
 
+    /**
+     * Prints a message to confirm marking a task as done successfully by printing the formatted task
+     * and the updated task status.
+     *
+     * @param tasks the task to be marked as done
+     */
     public void printTaskAsDone(TaskList tasks, Integer taskIndex) {
         System.out.print(line);
         System.out.print("Nice! I've marked this task as done:" + "\n" + tasks.get(taskIndex) + "\n");
@@ -79,6 +103,11 @@ public class Ui {
 
     }
 
+    /**
+     * Shows the number of items in {@code TaskList} when a {@code DoneCommand} or
+     * {@code DeleteCommand} is executed, so that the user can keep track of
+     * their tasks more easily.
+     */
     public void printNumberOfTask(TaskList tasks){
         System.out.print("Now you have " + tasks.size() + " tasks in the list." + "\n");
         System.out.print(line);

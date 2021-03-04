@@ -1,6 +1,9 @@
 public class Parser {
 
 
+    /**
+     * Process all user input message and give the right command
+     */
     public void processUserInput(Ui ui, TaskList tasks, String input) {
 
 
