@@ -14,7 +14,6 @@ public class FindCommand extends Command{
     private static final int COUNTER_START_VALUE = 1;
     private boolean isMatch;
 
-
     /**
      * Construct FindCommand instance.
      *

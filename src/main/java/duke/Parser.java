@@ -37,6 +37,9 @@ public class Parser {
 
     private static final String EMPTY_STRING = "";
 
+    //@@author SimJJ96-reused
+    /*Reused from https://github.com/se-edu/addressbook-level2/blob/master/src/
+            seedu/addressbook/parser/Parser.java with minor modification*/
     /**
      * Parses user input into command and description for execution.
      *
@@ -111,7 +114,7 @@ public class Parser {
             return new InvalidCommand(commandWord, description, indexOutOfBoundsException);
         }
     }
-
+    //@@author
 
     /**
      * Parse the description string into description of task and date for deadline subclass.

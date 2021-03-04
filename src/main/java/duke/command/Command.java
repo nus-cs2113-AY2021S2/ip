@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.TaskList;
 
+
 /**
  * Represents a command.
  */
@@ -11,12 +12,16 @@ public abstract class Command {
     protected String commandWord;
     protected String description;
 
+    //@@author SimJJ96-reused
+    /* https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/
+            addressbook/commands/Command.java*/
     /**
      * Executes the command in the child class and return the result.
      *
      * @return the result of user command.
      */
     public abstract CommandResult execute();
+    //@@author
 
     /**
      * Supply the data that the command will operate on.

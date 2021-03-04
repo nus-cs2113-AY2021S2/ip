@@ -16,6 +16,9 @@ public class Ui {
     private static final String LINE_PREFIX = "\t ";
     private static final String LS = System.lineSeparator();
 
+    //@@author SimJJ96-reused
+    /*Reused from https://github.com/se-edu/addressbook-level2/blob/master/src/
+            seedu/addressbook/ui/TextUi.java*/
     public Ui() {
         this(System.in,System.out);
     }
@@ -24,6 +27,7 @@ public class Ui {
         this.input = new Scanner(input);
         this.output = output;
     }
+    //@@author
 
     public String getUserInput() {
         return input.nextLine();
@@ -37,6 +41,9 @@ public class Ui {
                 + LINE_PREFIX + BORDER);
     }
 
+    //@@author SimJJ96-reused
+    /*Reused from https://github.com/se-edu/addressbook-level2/blob/master/src/
+            seedu/addressbook/ui/TextUi.java*/
     /**
      * Format the result of the command and print the message.
      *
@@ -49,6 +56,7 @@ public class Ui {
         }
         output.print(BORDER);
     }
+    //@@author
 
     public void showLoadError() {
         System.out.print(LINE_PREFIX +BORDER
