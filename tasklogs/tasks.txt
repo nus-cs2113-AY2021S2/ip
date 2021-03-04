@@ -1,8 +1,5 @@
-[D] | 1 | remaster guitar track | 2020-03-02
-[E] | 0 | live gig | 2020-03-22
-[T] | 0 | restring guitar
-[E] | 0 | guitar | 2020-03-22
-[D] | 0 | guitar lesson | 2020-03-02
-[E] | 0 | king krool | 2020-03-22
-[E] | 0 | ee | 2020-03-22
-[D] | 0 | eee | 2020-03-02
+[T] | 0 | roxy
+[E] | 0 | prefab sprout | 2020-04-04
+[T] | 0 | guitar
+[T] | 1 | guitar centre
+[T] | 0 | restring guitart

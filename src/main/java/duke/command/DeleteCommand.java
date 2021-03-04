@@ -11,9 +11,9 @@ import duke.task.Task;
 import java.util.ArrayList;
 
 public class DeleteCommand extends Command {
-    private static final int INVALID_INDEX = -1;
     private static final int ERR_NO_NAME = -4;
     private static final int ERR_OUT_OF_BOUNDS_MESSAGE = -3;
+    private static final int INVALID_INDEX = -1;
 
     private final String input;
     private final TaskList taskList;
@@ -60,7 +60,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Checks for presence of number on index 7 of input.
-     * Then check if the number is within bounds.
+     * Then checks if the number is within bounds.
      *
      * @param line input from user.
      * @return index of item to mark as done if valid, -1 otherwise.

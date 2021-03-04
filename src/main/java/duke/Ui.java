@@ -55,6 +55,14 @@ public class Ui {
         System.out.println(String.format(TOTAL_TASK_MESSAGE, Task.totalNumberOfTasks));
     }
 
+    /** Method used to print entire list. */
+    public void printEntireList(ArrayList<Task> tasks) {
+        for(int i = 0; i < Task.totalNumberOfTasks; i++) {
+            printListItem(i+1, tasks.get(i).getType(), tasks.get(i).getStatusIcon(),
+                    tasks.get(i).getName(), tasks.get(i).getDate());
+        }
+    }
+
     /** Method used to print each item for "list" command. */
     public void printListItem(int index, String type, String status, String name, String date) {
         System.out.println(index + ". " + type + "[" + status + "] " + name + " " + date);

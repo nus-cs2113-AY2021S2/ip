@@ -29,10 +29,7 @@ public class ListCommand extends Command {
     /** Lists all items that were added to the list. */
     public void listItems(ArrayList<Task> tasks) {
         System.out.println(LIST_ITEMS_MESSAGE);
-        for(int i = 0; i < Task.totalNumberOfTasks; i++) {
-            this.ui.printListItem(i+1, tasks.get(i).getType(), tasks.get(i).getStatusIcon(),
-                    tasks.get(i).getName(), tasks.get(i).getDate());
-        }
+        this.ui.printEntireList(tasks);
         this.ui.printBorderLine();
     }
 }

@@ -26,20 +26,22 @@ public class FindCommand extends Command {
     public void execute(Ui ui) {
         try {
             ArrayList<Task> tasks = taskList.getTasks();
-            findItems(this.input, tasks);
+            ArrayList<Task> foundItems = findItems(this.input, tasks);
+            this.ui.printFoundItems(foundItems);
         } catch (EmptyNameFieldException e) {
             this.ui.printError(ERR_NO_NAME);
         }
     }
 
     /**
-     * Searches the list for tasks containing a substring given by the user and prints the tasks found.
+     * Searches the list for tasks containing the substring given by the user.
      *
-     * @param line  user input.
-     * @param tasks ArrayList of tasks.
+     * @param line user input, substring to search for.
+     * @param tasks list of tasks to search.
+     * @return ArrayList of items found with substring.
      * @throws EmptyNameFieldException if name is not given or is all whitespace.
      */
-    public void findItems(String line, ArrayList<Task> tasks) throws EmptyNameFieldException {
+    public ArrayList<Task> findItems(String line, ArrayList<Task> tasks) throws EmptyNameFieldException {
         String searchName = extractSearchName(line);
         ArrayList<Task> foundItems = new ArrayList<>();
         for(int i = 0; i < Task.totalNumberOfTasks; i++) {
@@ -47,7 +49,7 @@ public class FindCommand extends Command {
                 foundItems.add(tasks.get(i));
             }
         }
-        this.ui.printFoundItems(foundItems);
+        return foundItems;
     }
 
     /**

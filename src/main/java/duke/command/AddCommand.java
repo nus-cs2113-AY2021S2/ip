@@ -39,8 +39,8 @@ public class AddCommand extends Command {
     @Override
     public void execute(Ui ui) {
         try {
-            ArrayList<Task> Tasks = taskList.getTasks();
-            addItem(this.input, Tasks);
+            ArrayList<Task> tasks = taskList.getTasks();
+            addItem(this.input, tasks);
         } catch (WrongFormatException e) {
             this.ui.printError(ERR_WRONG_FORMAT_MESSAGE);
         } catch (EmptyNameFieldException e) {
@@ -57,20 +57,20 @@ public class AddCommand extends Command {
      *
      * @param line raw input given by user.
      */
-    public void addItem(String line, ArrayList<Task> Tasks) throws WrongFormatException, EmptyNameFieldException,
+    public void addItem(String line, ArrayList<Task> tasks) throws WrongFormatException, EmptyNameFieldException,
             EmptyDateException {
         String command = line.split(" ")[0];
         int itemType = getItemType(command);
         // No fallthrough required
         switch (itemType) {
         case ADD_TODO:
-            addTodo(line, Tasks);
+            addTodo(line, tasks);
             break;
         case ADD_DEADLINE:
-            addDeadline(line, Tasks);
+            addDeadline(line, tasks);
             break;
         case ADD_EVENT:
-            addEvent(line, Tasks);
+            addEvent(line, tasks);
         }
     }
 
