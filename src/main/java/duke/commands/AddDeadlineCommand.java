@@ -12,9 +12,9 @@ public class AddDeadlineCommand extends Command {
     public static final String COMMAND_WORD = "deadline";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a Deadline to the task list. "
-            + "Parameters: description, time\n"
+            + "Parameters: description, time(in the format yyyy-mm-dd)\n"
             + "Example: " + COMMAND_WORD
-            + " complete quiz by/ tonight";
+            + " complete quiz by/ 2021-03-05";
 
     public static final String MESSAGE_SUCCESS = "Got it. I've added this task: %1$s\nNow you have %2$d tasks in the list.";
 
