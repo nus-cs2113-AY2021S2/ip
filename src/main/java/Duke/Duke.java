@@ -118,7 +118,8 @@ public class Duke {
         }
     }
 
-    /** Reieve users input*/
+    /** Recieve users input*/
+
     private static String getUserInput() {
         System.out.print("Enter command: ");
         String inputLine = SCANNER.nextLine();
