@@ -1,5 +1,6 @@
 # User Guide
 - [Introduction](#2)
+- [Setup](#3)
 - [Notes](#1)
 -  [Features](#a) 
    - [Adding tasks](#a)
@@ -17,6 +18,22 @@
 # <a name="2"></a> Introduction
 
 Your very own application to manage your to-do list!
+
+# <a name="3"></a> Setup
+
+&nbsp;&nbsp;&nbsp;&nbsp; 1. Copy the jar file 
+
+&nbsp;&nbsp;&nbsp;&nbsp; 2. Launch the jar file using the following command in `CMD`
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `java -jar [path to your runnable jar file]`
+
+<br /><br>
+&nbsp;&nbsp;&nbsp;&nbsp; In the event that some characters are not properly printed in the terminal, use the following commands:
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `chcp 65001`
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `java -jar -Dfile.encoding=UTF-8 [path to your runnable jar file]`
+
 
 ***
 
