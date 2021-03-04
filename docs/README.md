@@ -21,32 +21,32 @@ Duke will load task list from a specified file when launched and store any chang
 
 ### The command supported by Duke are
 
-1.`todo <task name>`
+#### 1.`todo <task name>`
 Add a todo task to the list.
 *Eg.* `todo read a book`
 
-1. `deadline <task name> /by <deadline of the task>`
+#### 2.`deadline <task name> /by <deadline of the task>`
 Add a deadline task to the list. The task name and deadline are separated by "/by".
 *Eg.* `deadline return a book /by Friday 10am`
 
-1. `event <task name> /at <time of the task>`
+#### 3.`event <task name> /at <time of the task>`
 Add an event task to the list. The task name and time are separated by "/at".
 *Eg.* `event meeting /at Friday 10am`
 
-1. `done <task index in task list>`
+#### 4.`done <task index in task list>`
 Mark a task as done. The index is the index of the task in the current complete task list.
 *Eg.* `done 1`
 
-1. `delete <task index in task list>`
+#### 5.`delete <task index in task list>`
 Delete a task. The index is the index of the task in the current complete task list.
 *Eg.* `delete 1`
 
-1. `find <keyword>`
+#### 6.`find <keyword>`
 Search task list with the keyword. Tasks whose name contains the keyword will be displayed.
 *Eg.* `search book`
 
-1. `list`
+#### 7.`list`
 list current task list.
 
-1. `bye`
+#### 8.`bye`
 Terminate Duke.
