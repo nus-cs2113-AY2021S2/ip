@@ -89,6 +89,8 @@ public class Spark {
                     System.out.println(OUT_OF_RANGE_MESSAGE);
                 } catch (BlankDescriptionException e) {
                     System.out.println(BLANK_EXCEPTION_MESSAGE);
+                } catch (NumberFormatException e) {
+                    System.out.println(INVALID_NUMBER_MESSAGE);
                 }
                 break;
 
