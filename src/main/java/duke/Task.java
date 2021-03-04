@@ -4,20 +4,17 @@ public class Task {
     protected String description;
     protected boolean isDone;
     protected String time;
-    private static int taskCount = 0;
 
     public Task(String description) {
         this.description = description;
         this.isDone = false;
         this.time = "";
-        taskCount++;
     }
 
     public Task(String description, String time) {
         this.description = description;
         this.isDone = false;
         this.time = time;
-        taskCount++;
     }
 
     public String getStatusIcon() {
@@ -35,7 +32,7 @@ public class Task {
     public void printDescription() {
         System.out.println("**********************************************************");
         System.out.println("[" + this.getAlphabet() + "]" + "[" + getStatusIcon() + "] " + this.toString());
-        System.out.println("Now you have " + taskCount + " tasks in the list.");
+        System.out.println("Now you have " + TaskList.getTaskCount() + " tasks in the list.");
         System.out.println("**********************************************************");
     }
 

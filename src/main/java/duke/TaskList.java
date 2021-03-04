@@ -34,7 +34,7 @@ public class TaskList {
         taskCount--;
         Ui.printDivider();
         System.out.println("Noted. I've removed this task:");
-        System.out.print("  [" + t.getAlphabet() + "]");
+        System.out.print("[" + t.getAlphabet() + "]");
         System.out.println("[" + t.getStatusIcon() + "] " + t.toString());
         System.out.println("Now you have " + taskCount + " tasks in the list.");
         Ui.printDivider();
