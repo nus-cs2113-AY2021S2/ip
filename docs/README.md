@@ -16,6 +16,7 @@ By: Tan Le Jun Latest Update: 4/3/2012
     7. [Bye](#bye---exit-the-application)
 
 ##Introduction 
+
 Duke is a Command Line Interface (CLI) task manager application. 
 It can help you to keep track of your todos, deadlines and events. 
 You can easily add and delete tasks with just a few simple commands. 
@@ -24,7 +25,9 @@ Need to bring your tasks list around?
 Dukes got you covered by saving your task list as a text file in your local storage when you exit and loads it with every start up.
 
 ##Getting Started
+
 ###Setting up in Intellij
+
 Prerequisites: JDK 11, update IntelliJ to the most recent version.
 
 On IntelliJ version 2020.3.1 (latest) and beyond
@@ -54,6 +57,7 @@ ____________________________________________________________
 ````
 
 ## Features 
+
 ###`todo` - Add todo task to task list
 
 
