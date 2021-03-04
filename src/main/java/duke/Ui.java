@@ -78,6 +78,7 @@ public class Ui {
     public void printMarkedDone(String name) {
         System.out.println(name + SET_TO_DONE_MESSAGE);
     }
+
     /**
      * Prints message for deletion of task.
      *
