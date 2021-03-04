@@ -8,12 +8,16 @@ import task.Event;
 import task.Task;
 import task.TaskList;
 
+import javax.swing.*;
+
 /**
  * Represent a command of creating a new event task and adding it to the task list
  */
 public class AddEventCommand extends Command{
     private Event newEvent;
     private String feedbackFormat;
+    private final String FEEDBACK_FORMAT = "Event added:\n" + PRE_SPACE + PRE_SPACE + "%s\n" +
+            PRE_SPACE + "Now you have %s tasks in the list";
 
     public AddEventCommand(String name, String time){
         newEvent = new Event(name, false, time);
@@ -27,8 +31,7 @@ public class AddEventCommand extends Command{
     @Override
     public CommandResult execute() throws TaskFormatException {
         tasks.addTask(newEvent);
-        feedbackFormat = "Event added:\n" + PRE_SPACE + PRE_SPACE + newEvent.getTaskInfo() + "\n" +
-                PRE_SPACE + "Now you have " + tasks.getTaskCount() + " tasks in the list";
+        feedbackFormat = String.format(FEEDBACK_FORMAT, newEvent.getTaskInfo(), tasks.getTaskCount());
         return new CommandResult(feedbackFormat);
     }
 }

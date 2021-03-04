@@ -12,6 +12,8 @@ import task.ToDo;
 public class AddTodoCommand extends Command{
     private String feedbackFormat;
     private ToDo newTodo;
+    private final String FEEDBACK_FORMAT = "ToDo added:\n" + PRE_SPACE + PRE_SPACE + "%s\n" +
+            PRE_SPACE + "Now you have %s tasks in the list";
 
     public AddTodoCommand(String todoName){
         newTodo = new ToDo(todoName, false);
@@ -25,8 +27,7 @@ public class AddTodoCommand extends Command{
     @Override
     public CommandResult execute(){
         tasks.addTask(newTodo);
-        feedbackFormat = "ToDo added:\n" + PRE_SPACE + PRE_SPACE + newTodo.getTaskInfo() + "\n" +
-                PRE_SPACE + "Now you have " + tasks.getTaskCount() + " tasks in the list";
+        feedbackFormat = String.format(FEEDBACK_FORMAT, newTodo.getTaskInfo(), tasks.getTaskCount());
         return new CommandResult(feedbackFormat);
     }
 }
