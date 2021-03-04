@@ -4,13 +4,13 @@ Duke is a desktop app for managing tasks using a Command Line Interface (CLI). Y
 
 * [Quick start](#quick-start)
 * [Features](#features)
-    * [Adding tasks: `todo/event/deadline`](#adding-tasks:-`todo/event/deadline`)
-    * [Listing tasks: `list`](#listing-tasks:-`list`)
-    * [Completing tasks: `done`](#completing-tasks:-`done`)
-    * [Finding tasks: `find`](#finding-tasks:-`find`)
-    * [Deleting tasks: `delete`](#deleting-tasks:-`delete`)
-    * [Saving tasks: `save`](#saving-tasks:-`save`)
-    * [Exiting: `exit`](#exiting:-`exit`)
+    * [Adding tasks: `todo/event/deadline`](#adding-taskstodoeventdeadline)
+    * [Listing tasks: `list`](#list)
+    * [Completing tasks: `done`](#done)
+    * [Finding tasks: `find`](#find)
+    * [Deleting tasks: `delete`](#delete)
+    * [Saving tasks: `save`](#save)
+    * [Exiting: `exit`](#exit)
 * [Command summary](#command-summary)
 
 ---
@@ -47,13 +47,13 @@ Format: `deadline <DESCRIPTION /by <DATE>`
 * `<DATE>`: due date of the deadline task in dd/mm/yy
 
 
-### Listing tasks: `list`
+### <a name="list"></a>Listing tasks: `list`
 Duke will list all the current tasks and their details. 
 
 Format: `list`
 
 
-### Completing tasks: `done`
+### <a name="done"></a>Completing tasks: `done`
 Duke can mark any task as complete. This will continue displaying the task in the list function. Use `delete` to remove the task. 
 
 Format: `done <INDEX>`
@@ -61,27 +61,27 @@ Format: `done <INDEX>`
 * !!! Use `list` to find out the index of the task. 
 
 
-### Finding tasks: `find`
+### <a name="find"></a>Finding tasks: `find`
 Duke can search for any task based on the task description. Find returns a list of the tasks that contain the search term in its description. 
 
 Format: `find <SEARCHTERM>`
 * `<SEARCHTERM>`: search term to be used, it is case-sensitive. 
 
 
-### Deleting tasks: `delete`
+### <a name="delete"></a>Deleting tasks: `delete`
 Duke can delete any task, even if it's not completed yet. 
 
 Format: `delete <INDEX>`
 * `<INDEX>`: index of the task to be deleted. 
 * !!! Delete removes the task and refreshes task indices, use `list` after deleting a task to see the new task indices. 
 
-### Saving tasks: `save`
+### <a name="save"></a>Saving tasks: `save`
 Duke can save your tasks onto your computer so that it remains there even if you restart Duke. This is automatically executed when you exit duke. 
 
 Format: `save`
 
 
-### Exiting: `exit`
+### <a name="exit"></a>Exiting: `exit`
 You can exit Duke with the exit command. 
 
 Format: `exit`
