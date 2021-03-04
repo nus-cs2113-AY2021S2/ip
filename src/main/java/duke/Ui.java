@@ -9,7 +9,7 @@ public class Ui {
      */
     public static void printStartMessage() {
         String STARTMESSAGE = "____________________________________________________________\n"
-                + "Hello! I'm Duke.Duke\n"
+                + "Hello! I'm Duke\n"
                 + "What can I do for you?\n"
                 + "____________________________________________________________\n";
         System.out.println(STARTMESSAGE);
@@ -25,7 +25,6 @@ public class Ui {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + LOGO);
-
     }
 
     /**
