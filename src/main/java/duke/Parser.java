@@ -4,6 +4,7 @@ import duke.taskexceptions.EmptyTaskDateException;
 import duke.taskexceptions.NoTaskDateException;
 import duke.taskexceptions.NoTaskNameException;
 import duke.taskexceptions.TaskDateFormatException;
+import duke.taskexceptions.KeywordFormatException;
 
 /**
  * Command Class: Contains methods for parsing and making sense of the User's command.
@@ -17,6 +18,7 @@ public class Parser {
     public static String taskDate;
 
     public static int index; //contains index of task to be 'marked as done' OR 'deleted'
+    public static String keyword; //tasks with 'keyword' are to be found
 
     public Parser() {
 
@@ -27,6 +29,7 @@ public class Parser {
      * For all commands, parses into commandWord to help identify the type of command during execution.
      * Parses commands into taskName, taskDate or index according to the format of the command
      * for execution.
+     *
      * @param input entire input of user.
      * @throws NoTaskNameException if user does not input the taskName.
      * @throws NoTaskDateException if user does not input the taskDate.
@@ -34,7 +37,7 @@ public class Parser {
      * @throws TaskDateFormatException if user input the portion of command after taskName incorrectly.
      * @throws NumberFormatException if user does not input a TaskNumber(index).
      */
-    public static void parse (String input) throws NoTaskNameException, NoTaskDateException, EmptyTaskDateException, TaskDateFormatException, NumberFormatException {
+    public static void parse (String input) throws NoTaskNameException, NoTaskDateException, EmptyTaskDateException, TaskDateFormatException, NumberFormatException, KeywordFormatException {
 
         if (input.startsWith("todo")) {
             commandWord = "todo";
@@ -58,7 +61,11 @@ public class Parser {
         else if (input.startsWith("list")) {
             commandWord = "list";
         }
-        else if (input.startsWith("bye")) {
+        else if (input.startsWith("find")) {
+            commandWord = "find";
+            parseFindCommand(input);
+        }
+         else if (input.startsWith("bye")) {
             commandWord = "bye";
         }
         else {
@@ -107,6 +114,21 @@ public class Parser {
     }
 
     /**
+     * Takes in User's input string and splits into 2 parts, the 'delete' command & the taskNumber.
+     * Index is derived from taskNumber, which tells the position of task in current list.
+     *
+     * @param input entire input string of the user, made up of 'delete' + taskNumber.
+     * @throws NumberFormatException if user does not input a TaskNumber(index).
+     */
+    private static void parseDeleteCommand(String input) throws NumberFormatException {
+        String[] commandAndTaskNumber = input.split(" ");
+        if (commandAndTaskNumber.length < 2) {
+            throw new NumberFormatException(); //throws NumberFormatException() when user does not input a number after word 'done'
+        }
+        index = Integer.parseInt(commandAndTaskNumber[1]) - 1; //obtain index from task number(which starts from 1)
+    }
+
+    /**
      * Takes in User's input string and splits into 2 parts, the 'done' command & the taskNumber.
      * Index is derived from taskNumber, which tells the position of task in current list.
      *
@@ -121,19 +143,13 @@ public class Parser {
         index = Integer.parseInt(commandAndTaskNumber[1]) - 1; //obtain index from task number(which starts from 1)
     }
 
-    /**
-     * Takes in User's input string and splits into 2 parts, the 'delete' command & the taskNumber.
-     * Index is derived from taskNumber, which tells the position of task in current list.
-     *
-     * @param input entire input string of the user, made up of 'delete' + taskNumber.
-     * @throws NumberFormatException if user does not input a TaskNumber(index).
-     */
-    private static void parseDeleteCommand(String input) throws NumberFormatException {
-        String[] commandAndTaskNumber = input.split(" ");
-        if (commandAndTaskNumber.length < 2) {
-            throw new NumberFormatException(); //throws NumberFormatException() when user does not input a number after word 'done'
+    private static void parseFindCommand(String input) throws KeywordFormatException {
+        //format: find + keyword
+        String[] commandAndKeyword= input.split(" ");
+        if (commandAndKeyword.length < 2) {
+            throw new KeywordFormatException(); //throws KeywordFormatException() when user does not input a keyword after 'find' command
         }
-        index = Integer.parseInt(commandAndTaskNumber[1]) - 1; //obtain index from task number(which starts from 1)
+        keyword = commandAndKeyword[1]; //tasks with 'keyword' are to be found
     }
 
     /**

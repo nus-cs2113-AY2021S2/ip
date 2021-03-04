@@ -5,6 +5,8 @@ import duke.tasksmanager.Events;
 import duke.tasksmanager.Tasks;
 import duke.tasksmanager.ToDos;
 
+import java.util.ArrayList;
+
 import static duke.Parser.commandWord;
 import static duke.Parser.index;
 import static duke.Parser.taskName;
@@ -56,6 +58,10 @@ public class Command {
         //OR: lists all the user's current tasks in the format of taskType,taskStatus,taskName(and taskDate):
         else if (commandWord.equals("list")) {
             printsList(tasks);
+        }
+        //OR: searches for all tasks with the keyword
+        else if (commandWord.equals("find")) {
+            findTasksContainingKeyWord(keyword, tasks);
         }
         //OR: exits program
         else if (commandWord.equals("bye")) {
@@ -193,6 +199,36 @@ public class Command {
         for (int i = 0; i < tasksCount; i++) {
             int taskNumber = i+1; //stores the current numbering of the bulleted tasks
             System.out.println(taskNumber + "." + tasks.get(i).convertToTaskOutputString());
+        }
+    }
+
+    /**
+     * Searches through the latest List called tasks
+     * to add all tasks with: taskName or taskDate containing the keyword
+     * to a list called matchingTasks
+     * Outputs 'no tasks found' or all matchingTasks
+     */
+    private static void findTasksContainingKeyWord(String keyword, TaskList tasks) {
+        int matchingTasksCount = 0;
+        //Adds all tasks containing 'keyword' to a list:
+        ArrayList<String> matchingTasks = new ArrayList<>();
+        for (int i = 0; i < tasksCount; i++) {
+            int taskNumber = i+1; //stores the current numbering of the bulleted tasks
+            if (tasks.get(i).description.contains(keyword) || tasks.get(i).date.contains(keyword)) {
+                matchingTasks.add(taskNumber + "." + tasks.get(i).convertToTaskOutputString());
+                matchingTasksCount++;
+            }
+        }
+
+        //Output:
+        if (matchingTasksCount == 0) {
+            System.out.println("There are no matching tasks that contains the word.");
+        }
+        else {
+            System.out.println("Here are the matching tasks in the list:");
+            for (String currentTask: matchingTasks) {
+                System.out.println(currentTask);
+            }
         }
     }
 

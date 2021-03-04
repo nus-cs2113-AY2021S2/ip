@@ -1,9 +1,11 @@
 package duke;
 
+
 import duke.taskexceptions.EmptyTaskDateException;
 import duke.taskexceptions.NoTaskDateException;
 import duke.taskexceptions.NoTaskNameException;
 import duke.taskexceptions.TaskDateFormatException;
+import duke.taskexceptions.KeywordFormatException;
 
 import java.io.IOException;
 
@@ -67,6 +69,8 @@ public class Duke {
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("Please input a smaller or bigger valid task number.");
                 System.out.println("You can list all tasks to check the total number of tasks you have. :))"); //invalid TaskNumber
+            } catch (KeywordFormatException e) {
+                System.out.println("Please input in the format of: find \'keyword\'"); //wrong format
             } finally {
                 ui.showLine(); //end of current Response to User
             }

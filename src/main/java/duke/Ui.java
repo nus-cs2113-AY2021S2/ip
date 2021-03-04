@@ -66,4 +66,8 @@ public class Ui {
         System.out.println("Null Pointer Error :((");
     }
 
+    public void showNullPointerError() {
+        System.out.println("Null Pointer Error :((");
+    }
+  
 }
