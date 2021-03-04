@@ -45,9 +45,6 @@ public class DeleteCommand extends Command {
      * @throws IllegalAccessException if index is out of bounds.
      */
     public void deleteItem(String line, ArrayList<Task> tasks) throws EmptyNameFieldException, IllegalAccessException {
-        if (line.length() < 8) {
-            throw new EmptyNameFieldException();
-        }
         int index = checkValidDelete(line);
         if (index == INVALID_INDEX) {
             throw new IllegalAccessException();
@@ -65,7 +62,10 @@ public class DeleteCommand extends Command {
      * @param line input from user.
      * @return index of item to mark as done if valid, -1 otherwise.
      */
-    public int checkValidDelete(String line) {
+    public int checkValidDelete(String line) throws EmptyNameFieldException {
+        if (line.length() < 8) {
+            throw new EmptyNameFieldException();
+        }
         if (line.substring(7).trim().matches("[0-9]+")) {
             int listNum = Integer.parseInt(line.substring(7).trim());
             // Check for illegal access to out of bounds index

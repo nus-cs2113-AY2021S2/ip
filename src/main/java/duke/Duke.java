@@ -6,6 +6,8 @@ import duke.command.Command;
 import java.io.IOException;
 
 public class Duke {
+    private static final int IO_ERROR = -7;
+
     private static final String FILEPATH = "tasklogs/tasks.txt";
 
     private Storage storage;
@@ -25,7 +27,7 @@ public class Duke {
         try {
             storage.loadFile(taskList.getTasks());
         } catch (IOException e) {
-            System.out.println("IO error.");
+            this.ui.printError(IO_ERROR);
         }
     }
 
@@ -55,7 +57,7 @@ public class Duke {
             // Saves tasks into text file after user types 'bye'.
             storage.saveFile(taskList.getTasks());
         } catch (IOException e) {
-            System.out.println("IO error.");
+            this.ui.printError(IO_ERROR);
         }
     }
 

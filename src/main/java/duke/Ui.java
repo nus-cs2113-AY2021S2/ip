@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
+    // Error constants
+    private static final int ERR_IO = -7;
     private static final int ERR_EMPTY_INPUT = -6;
     private static final int ERR_NO_DATE = -5;
     private static final int ERR_NO_NAME = -4;
@@ -16,6 +18,8 @@ public class Ui {
     private static final String GREETING_MESSAGE = "Wagwan! I is Ali G. West side.\nWhat is we chattin' bout today?";
     private static final String GOODBYE_MESSAGE = "Goodbye, big up yourself, keep it real, respekt.";
     private static final String BORDER_LINE = "___________________________________________________________";
+
+    // Error messages
     private static final String OUT_OF_BOUNDS_MESSAGE = "You are accessing something that doesn't exist! Stop being an ignoranus.";
     private static final String WRONG_FORMAT_MESSAGE = "I don't think you are cleverer enough to know that the format is wrong!";
     private static final String NO_NAME_MESSAGE = "Why you be trying to tell me something with no name? Ave' you been smoking me special stash?";
@@ -24,6 +28,8 @@ public class Ui {
             " like YY-DDDD-M or sumting like that...\nNo wait, its YYYY-MM-DD. I'm bare smart innit?";
     private static final String NO_SEARCH_RESULTS = "Wait, I can't find anyting with that name on the list. Are you chatting rubbish?";
     private static final String EMPTY_INPUT_MESSAGE = "So you is one them not very brighterest persons eh? You did not type anything!";
+    private static final String IO_ERROR_MESSAGE = "I can't find the file on your compooter! Has your compooter got some virus?";
+
     private static final String TOTAL_TASK_MESSAGE = "You is having %d task(s) on your list.";
     private static final String SET_TO_DONE_MESSAGE = " set to done. You is well smart innit?";
     private static final String ADDED_TO_LIST_MESSAGE = "Wicked. This ting is now on da list.";
@@ -151,6 +157,9 @@ public class Ui {
             break;
         case ERR_EMPTY_INPUT:
             System.out.println(EMPTY_INPUT_MESSAGE);
+            break;
+        case ERR_IO:
+            System.out.println(IO_ERROR_MESSAGE);
             break;
         }
         printBorderLine();

@@ -71,6 +71,7 @@ public class AddCommand extends Command {
             break;
         case ADD_EVENT:
             addEvent(line, tasks);
+            break;
         }
     }
 
