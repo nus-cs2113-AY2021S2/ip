@@ -191,7 +191,7 @@ public class TaskList {
         }
 
         Ui.printDivider();
-        System.out.print("\tRemoving task: \n");
+        System.out.print("\tRemoving task: \n\t");
         Ui.printTask(tasks, taskNumber - 1);
         tasks.remove(taskNumber - 1);
         Storage.saveData(tasks);
