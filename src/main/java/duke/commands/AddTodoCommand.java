@@ -27,7 +27,7 @@ public class AddTodoCommand extends Command {
      * @throws DukeException if any of the raw values are invalid
      */
     public AddTodoCommand(String description) throws DukeException {
-        if (description==null) {
+        if (description == null) {
             throw new DukeException("Description empty!");
         }
         this.toAdd = new Todo(description);

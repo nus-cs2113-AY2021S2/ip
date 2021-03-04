@@ -26,10 +26,10 @@ public class AddDeadlineCommand extends Command {
      * @throws DukeException if any of the raw values are invalid
      */
     public AddDeadlineCommand(String description, String by) throws DukeException {
-        if (description==null) {
+        if (description == null) {
             throw new DukeException("Description empty!");
         }
-        if (by==null) {
+        if (by == null) {
             throw new DukeException("Time not specified!");
         }
         this.toAdd = new Deadline(description, by);

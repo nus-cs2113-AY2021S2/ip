@@ -17,7 +17,7 @@ public class TaskList {
     /**
      * Constructs empty task list.
      */
-    public TaskList(){
+    public TaskList() {
     }
 
     /**
@@ -30,9 +30,10 @@ public class TaskList {
 
     /**
      * Constructs a list from the items in the given collection.
+     *
      * @param tasks a collection of persons
      */
-    public TaskList(ArrayList<Task> tasks){
+    public TaskList(ArrayList<Task> tasks) {
         internalList.addAll(tasks);
     }
 

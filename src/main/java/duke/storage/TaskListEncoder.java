@@ -8,8 +8,8 @@ import duke.data.TaskList;
 public class TaskListEncoder {
     public static String encoder(TaskList tasks) {
         String text = "";
-        for (int i=0; i<tasks.size(); i++) {
-            text += tasks.getTaskByIndex(i).toText(i+1) + System.lineSeparator();
+        for (int i = 0; i < tasks.size(); i++) {
+            text += tasks.getTaskByIndex(i).toText(i + 1) + System.lineSeparator();
         }
         return text;
     }

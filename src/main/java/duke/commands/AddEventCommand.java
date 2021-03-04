@@ -26,10 +26,10 @@ public class AddEventCommand extends Command {
      * @throws DukeException if any of the raw values are invalid
      */
     public AddEventCommand(String description, String at) throws DukeException {
-        if (description==null) {
+        if (description == null) {
             throw new DukeException("Description empty!");
         }
-        if (at==null) {
+        if (at == null) {
             throw new DukeException("Time not specified!");
         }
         this.toAdd = new Event(description, at);

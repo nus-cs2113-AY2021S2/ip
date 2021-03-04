@@ -54,7 +54,7 @@ public class Command {
      *
      * @throws IndexOutOfBoundsException if the target index is out of bounds of the last viewed listing
      */
-    protected Task getTargetTask() throws IndexOutOfBoundsException{
+    protected Task getTargetTask() throws IndexOutOfBoundsException {
         return (Task) tasks.getTaskList().get(getTargetIndex());
     }
 

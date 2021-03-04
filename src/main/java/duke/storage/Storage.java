@@ -18,7 +18,7 @@ public class Storage {
     public void createFileIfNotExist() {
         try {
             File directory = new File(directoryPath);
-            if (! directory.exists()){
+            if (!directory.exists()) {
                 directory.mkdir();
             }
 

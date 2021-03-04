@@ -30,11 +30,12 @@ public abstract class Task {
         this.isDone = true;
     }
 
-    public boolean getIsDone(){
+    public boolean getIsDone() {
         return isDone;
     }
 
     public abstract String toText(int number);
+
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + getDescription();

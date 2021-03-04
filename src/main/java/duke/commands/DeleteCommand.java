@@ -6,6 +6,9 @@ import duke.exception.DukeException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Delete a task by index from the task list.
+ */
 public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";

@@ -27,7 +27,7 @@ public class DoneCommand extends Command {
             throw new DukeException("Empty list. Nothing to be excecuted.");
         }
         Task target = getTargetTask();
-        if (target.getIsDone()){
+        if (target.getIsDone()) {
             throw new DukeException("Task has already been marked done.");
         }
         target.markAsDone();

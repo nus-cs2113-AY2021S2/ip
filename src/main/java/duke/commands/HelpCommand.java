@@ -7,19 +7,19 @@ public class HelpCommand extends Command {
 
     public static final String MESSAGE_USAGE = "Invalid command. Here are all the possible commands:";
 
-    public HelpCommand(){
+    public HelpCommand() {
         execute();
     }
 
     @Override
     public CommandResult execute() {
-        return new CommandResult( MESSAGE_USAGE
-                        + "\n" + AddTodoCommand.MESSAGE_USAGE
-                        + "\n" + AddDeadlineCommand.MESSAGE_USAGE
-                        + "\n" + DeleteCommand.MESSAGE_USAGE
-                        + "\n" + ListCommand.MESSAGE_USAGE
-                        + "\n" + DoneCommand.MESSAGE_USAGE
-                        + "\n" + ExitCommand.MESSAGE_USAGE
+        return new CommandResult(MESSAGE_USAGE
+                + "\n" + AddTodoCommand.MESSAGE_USAGE
+                + "\n" + AddDeadlineCommand.MESSAGE_USAGE
+                + "\n" + DeleteCommand.MESSAGE_USAGE
+                + "\n" + ListCommand.MESSAGE_USAGE
+                + "\n" + DoneCommand.MESSAGE_USAGE
+                + "\n" + ExitCommand.MESSAGE_USAGE
         );
     }
 }

@@ -6,6 +6,9 @@ import duke.exception.DukeException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/**
+ * Find a task with the search keyword in its description.
+ */
 public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
 
@@ -19,6 +22,7 @@ public class FindCommand extends Command {
     public FindCommand(String searchKey) {
         this.searchKey = searchKey;
     }
+
     @Override
     public CommandResult execute() throws DukeException {
         ArrayList<Task> taskList = tasks.getTaskList();

@@ -10,25 +10,27 @@ import java.util.Scanner;
  * Text UI of the application.
  */
 public class TextUi {
-    /** Offset required to convert between 1-indexing and 0-indexing.  */
+    /**
+     * Offset required to convert between 1-indexing and 0-indexing.
+     */
     public static final int DISPLAYED_INDEX_OFFSET = 1;
 
-    /** A tab prefix added to the beginning of lines printed by Duke TaskManager */
+    /**
+     * A tab prefix added to the beginning of lines printed by Duke TaskManager
+     */
     private static final String LINE_PREFIX = "";
 
-    /** A platform independent line separator. */
+    /**
+     * A platform independent line separator.
+     */
     private static final String LS = System.lineSeparator();
 
     private static final String DIVLINE = "__________________________________________________________________\n";
 
-    private static final String MESSAGE_USING_STORAGE_FILE = "Using storage file : %1$s";
     private static final String MESSAGE_WELCOME = "\tHello! I'm Ayanga, your personal task manager.\n" +
             "\tWhat can I note down for you?";
-    private static final String MESSAGE_GOODBYE = "Bye. Hope you have done your work next time I see you!\n" +
+    private static final String MESSAGE_GOODBYE = "\tBye. Hope you have done your work next time I see you!\n" +
             "\tAh, and also remember to take care of yourself and sleep early :)";
-
-//    /** Format of indexed list item */
-//    private static final String MESSAGE_INDEXED_LIST_ITEM = "\t%1$d. %2$s";
 
     private final Scanner in;
     private final PrintStream out;
@@ -56,6 +58,7 @@ public class TextUi {
     /**
      * Reads the text entered by the user.
      * Ignores empty and pure whitespace.
+     *
      * @return command (full line) entered by the user
      */
     public String getUserCommand() {
@@ -82,7 +85,7 @@ public class TextUi {
     public void showGoodbyeMessage() {
         showToUser(
                 DIVLINE,
-                MESSAGE_GOODBYE, 
+                MESSAGE_GOODBYE,
                 DIVLINE);
     }
 
@@ -94,7 +97,9 @@ public class TextUi {
         showToUser(DIVLINE);
     }
 
-    /** Shows message(s) to the user */
+    /**
+     * Shows message(s) to the user
+     */
     public void showToUser(String... message) {
         for (String m : message) {
             out.println(LINE_PREFIX + m.replace("\n", LS));
@@ -112,41 +117,4 @@ public class TextUi {
     public void showResultToUser(CommandResult result) {
         showToUser(result.feedbackToUser);
     }
-
-    /**
-     * Shows a list of persons to the user, formatted as an indexed list.
-     * Private contact details are hidden.
-     */
-//    private void showPersonListView(List<? extends ReadOnlyPerson> persons) {
-//        final List<String> formattedPersons = new ArrayList<>();
-//        for (ReadOnlyPerson person : persons) {
-//            formattedPersons.add(person.getAsTextHidePrivate());
-//        }
-//        showToUserAsIndexedList(formattedPersons);
-//    }
-
-    /** Shows a list of strings to the user, formatted as an indexed list. */
-//    private void showToUserAsIndexedList(List<String> list) {
-//        showToUser(getIndexedListForViewing(list));
-//    }
-
-    /** Formats a list of strings as a viewable indexed list. */
-//    private static String getIndexedListForViewing(List<String> listItems) {
-//        final StringBuilder formatted = new StringBuilder();
-//        int displayIndex = 0 + DISPLAYED_INDEX_OFFSET;
-//        for (String listItem : listItems) {
-//            formatted.append(getIndexedListItem(displayIndex, listItem)).append("\n");
-//            displayIndex++;
-//        }
-//        return formatted.toString();
-//    }
-
-    /**
-     * Formats a string as a viewable indexed list item.
-     *
-     * @param visibleIndex visible index for this listing
-     */
-//    private static String getIndexedListItem(int visibleIndex, String listItem) {
-//        return String.format(MESSAGE_INDEXED_LIST_ITEM, visibleIndex, listItem);
-//    }
 }
