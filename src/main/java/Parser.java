@@ -74,7 +74,7 @@ public class Parser {
                 }
             } catch (NumberFormatException e) {
                 ui.printErrorMessage();
-            }
+            } 
 
 
         } else {
