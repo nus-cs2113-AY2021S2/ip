@@ -119,22 +119,31 @@ public class TaskList {
     }
 
     public static void deleteTask(String inputCommand) {
-        String taskToHandle = inputCommand.split(" ", 2)[1];
-        int taskIndex = Integer.parseInt(taskToHandle) - 1;
-        if (taskIndex < 0 || taskIndex >= tasks.size()) {
-            System.out.println("Task does not exists!");
-        } else {
-            System.out.println("Noted. I've removed this task:");
-            Task currentTask = tasks.get(taskIndex);
-            Ui.printTask(currentTask);
-            tasks.remove(taskIndex);
-            Ui.printTaskSize();
+        try {
+            String taskToHandle = inputCommand.split(" ", 2)[1];
+            int taskIndex = Integer.parseInt(taskToHandle) - 1;
+            if (taskIndex < 0 || taskIndex >= tasks.size()) {
+                System.out.println("Task does not exists!");
+            } else {
+                System.out.println("Noted. I've removed this task:");
+                Task currentTask = tasks.get(taskIndex);
+                Ui.printTask(currentTask);
+                tasks.remove(taskIndex);
+                Ui.printTaskSize();
+            }
+        } catch (IndexOutOfBoundsException e) {
+            Ui.printInvalidMessage("delete");
         }
     }
+
     public static void findListOfCommands(String inputCommand) {
-        String word = inputCommand.substring(5);
-        ArrayList<Task> foundTasks = findInput(word);
-        Ui.printFoundTasks(foundTasks);
+        try {
+            String word = inputCommand.substring(5);
+            ArrayList<Task> foundTasks = findInput(word);
+            Ui.printFoundTasks(foundTasks);
+        } catch (IndexOutOfBoundsException e) {
+            Ui.printInvalidMessage("find");
+        }
     }
     public static ArrayList<Task> findInput (String word) {
         return (ArrayList<Task>) tasks.stream()
