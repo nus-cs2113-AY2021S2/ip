@@ -61,16 +61,6 @@ public class Ui {
 
 
     /**
-     * Prints error message when user does not specify the task number when inputting "done" command.
-     */
-    public static void printTaskUnspecifiedMessage() {
-        Ui.printBorder();
-        System.out.println("     ☹ OOPS!!! Please specify which task number is done");
-        Ui.printBorder();
-    }
-
-
-    /**
      * Prints error message when user inputs a non-existent the task number in "done" command.
      */
     public static void printInvalidTask() {

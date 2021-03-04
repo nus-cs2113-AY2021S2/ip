@@ -23,7 +23,9 @@ public class Parser {
             try {
                 TaskList.displayTaskDone(Integer.parseInt(command[1]));
             } catch (IndexOutOfBoundsException oob) {
-                Ui.printTaskUnspecifiedMessage();
+                Ui.printBorder();
+                System.out.println("     ☹ OOPS!!! There is no such task number");
+                Ui.printBorder();
             } catch (NullPointerException npe) {
                 Ui.printInvalidTask();
             } catch (DukeException de) {

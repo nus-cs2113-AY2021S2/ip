@@ -90,14 +90,18 @@ public class TaskList {
      * @param index indicates the task number which the user has deleted.
      */
     public static void deleteTask(int index) {
-        Task temp = tasks.get(index - 1);
-        tasks.remove(index - 1);
         Ui.printBorder();
-        System.out.println("      Noted. I've removed this task:  ");
-        System.out.print("       ");
-        System.out.println(temp);
+        try {
+            Task temp = tasks.get(index - 1);
+            tasks.remove(index - 1);
+            System.out.println("      Noted. I've removed this task:  ");
+            System.out.print("       ");
+            System.out.println(temp);
+            count--;
+        } catch (IndexOutOfBoundsException oob) {
+            System.out.println("     ☹ OOPS!!! That task number is invalid.");
+        }
         Ui.printBorder();
-        count--;
     }
 
     /**
@@ -106,8 +110,7 @@ public class TaskList {
      *
      * @param command consists of task description to be added to array list.
      */
-    public static void addToDo(String[] command){
-
+    public static void addToDo(String[] command) {
         try {
             Task a = new Todo(command[1]);
             addTaskToArrayList(a);
@@ -133,20 +136,21 @@ public class TaskList {
         }
     }
 
-        /**
-         * Adds event task to array list
-         * Updates total number of tasks.
-         *
-         * @param command consists of task description to be added to array list.
-         */
-        public static void addEvent(String[] command) {
-        String[] newCommand = command[1].split(" /at ", 2);
-        newCommand[1] = formatDateTime(newCommand[1]);
+    /**
+     * Adds event task to array list
+     * Updates total number of tasks.
+     *
+     * @param command consists of task description to be added to array list.
+     */
+    public static void addEvent(String[] command) {
         try {
+            String[] newCommand = command[1].split(" /at ", 2);
+            newCommand[1] = formatDateTime(newCommand[1]);
             Task c = new Event(newCommand[0], newCommand[1]);
             addTaskToArrayList(c);
             System.out.println("     Now you have " + count + " tasks in the list.");
-        } catch (IndexOutOfBoundsException oob) {
+        } catch (ArrayIndexOutOfBoundsException oob) {
+            Ui.printBorder();
             System.out.println("     ☹ OOPS!!! The description of a event cannot be empty.");
         }
         Ui.printBorder();
@@ -159,13 +163,14 @@ public class TaskList {
      * @param command consists of task description to be added to array list.
      */
     public static void addDeadline(String[] command) {
-        String[] newCommand = command[1].split(" /by ", 2);
-        newCommand[1] = formatDateTime(newCommand[1]);
         try {
+            String[] newCommand = command[1].split(" /by ", 2);
+            newCommand[1] = formatDateTime(newCommand[1]);
             Task c = new Deadline(newCommand[0], newCommand[1]);
             addTaskToArrayList(c);
             System.out.println("     Now you have " + count + " tasks in the list.");
         } catch (IndexOutOfBoundsException oob) {
+            Ui.printBorder();
             System.out.println("     ☹ OOPS!!! The description of a deadline cannot be empty.");
         }
         Ui.printBorder();
