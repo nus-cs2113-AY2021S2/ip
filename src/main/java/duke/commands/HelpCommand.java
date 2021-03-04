@@ -5,15 +5,16 @@ package duke.commands;
  */
 public class HelpCommand extends Command {
 
-    public static final String COMMAND_WORD = "help";
+    public static final String MESSAGE_USAGE = "Invalid command. Here are all the possible commands:";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n"
-            + "Example: " + COMMAND_WORD;
+    public HelpCommand(){
+        execute();
+    }
 
     @Override
     public CommandResult execute() {
-        return new CommandResult(
-                AddTodoCommand.MESSAGE_USAGE
+        return new CommandResult( MESSAGE_USAGE
+                        + "\n" + AddTodoCommand.MESSAGE_USAGE
                         + "\n" + AddDeadlineCommand.MESSAGE_USAGE
                         + "\n" + DeleteCommand.MESSAGE_USAGE
                         + "\n" + ListCommand.MESSAGE_USAGE

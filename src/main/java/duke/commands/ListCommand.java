@@ -29,7 +29,7 @@ public class ListCommand extends Command {
         int counter = 0;
         while (iter.hasNext()) {
             counter++;
-            taskListDisplay+= String.format("%1$d. %2%s", counter, iter.next().toString());
+            taskListDisplay+= String.format("%1$d. %2$s\n", counter, iter.next().toString());
         }
 
         return new CommandResult(taskListDisplay);

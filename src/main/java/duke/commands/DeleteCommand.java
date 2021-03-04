@@ -17,11 +17,8 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_DELETE_TASK_SUCCESS = "Noted. I've removed this task: %1$s";
 
-    public DeleteCommand(int targetIndex) throws DukeException {
+    public DeleteCommand(int targetIndex) {
         super(targetIndex);
-        if (getTargetIndex()>=tasks.size()) {
-            throw new DukeException("Index out of task list bound!");
-        }
     }
 
     @Override

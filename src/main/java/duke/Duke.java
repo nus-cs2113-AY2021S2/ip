@@ -1,6 +1,8 @@
 package duke;
 
 import duke.commands.Command;
+import duke.commands.CommandResult;
+import duke.commands.ExitCommand;
 import duke.data.TaskList;
 import duke.exception.DukeException;
 import duke.parser.Parser;
@@ -42,8 +44,8 @@ public class Duke {
             tasks = new TaskList();
         }
     }
-    
-    public static void main(String[] args) throws IOException {
+
+    public static void main(String[] args) {
         new Duke().run();
     }
 
@@ -56,9 +58,10 @@ public class Duke {
                 ui.showLine(); // show the divider line
                 Command c = Parser.parse(fullCommand);
                 c.setData(tasks, ui, storage);
-                c.execute();
-                isExit = c.isExit();
-            } catch (DukeException e) {
+                CommandResult result = c.execute();
+                ui.showResultToUser(result);
+                isExit = c instanceof ExitCommand;
+            } catch (DukeException | IOException | IndexOutOfBoundsException e) {
                 ui.showError(e.getMessage());
             } finally {
                 ui.showLine();

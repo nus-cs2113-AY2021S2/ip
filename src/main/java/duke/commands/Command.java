@@ -54,14 +54,11 @@ public class Command {
      *
      * @throws IndexOutOfBoundsException if the target index is out of bounds of the last viewed listing
      */
-    protected Task getTargetTask() throws IndexOutOfBoundsException {
+    protected Task getTargetTask() throws IndexOutOfBoundsException{
         return (Task) tasks.getTaskList().get(getTargetIndex());
     }
 
     public int getTargetIndex() {
         return targetIndex;
-    }
-    public boolean isExit() {
-        throw new UnsupportedOperationException("This method is to be implemented by child classes");
     }
 }

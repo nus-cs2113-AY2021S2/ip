@@ -68,7 +68,6 @@ public class Parser {
             case ExitCommand.COMMAND_WORD:
                 return new ExitCommand();
 
-            case HelpCommand.COMMAND_WORD: // Fallthrough
             default:
                 return new HelpCommand();
         }
@@ -142,11 +141,7 @@ public class Parser {
         if (!matcher.matches()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DoneCommand.MESSAGE_USAGE));
         }
-        try {
-            return new DoneCommand(Integer.parseInt(matcher.group("index")));
-        } catch (DukeException e) {
-            return new IncorrectCommand(e.getMessage());
-        }
+        return new DoneCommand(Integer.parseInt(matcher.group("index")));
 
     }
 
@@ -161,11 +156,8 @@ public class Parser {
         if (!matcher.matches()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DoneCommand.MESSAGE_USAGE));
         }
-        try {
-            return new DeleteCommand(Integer.parseInt(matcher.group("index")));
-        } catch (DukeException e) {
-            return new IncorrectCommand(e.getMessage());
-        }
+        int index = Integer.parseInt(matcher.group("index"));
+        return new DeleteCommand(index);
     }
 
 

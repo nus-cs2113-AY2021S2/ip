@@ -16,11 +16,8 @@ public class DoneCommand extends Command {
 
     public static final String MESSAGE_DONE_TASK_SUCCESS = "Nice! I've marked this task as done: %1$s";
 
-    public DoneCommand(int targetIndex) throws DukeException {
+    public DoneCommand(int targetIndex) {
         super(targetIndex);
-        if (getTargetIndex()>=tasks.size()) {
-            throw new DukeException("Index out of task list bound!");
-        }
     }
 
     @Override
