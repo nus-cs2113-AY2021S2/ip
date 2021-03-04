@@ -2,17 +2,14 @@ package duke.ui;
 
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 import java.util.Scanner;
 
 /**
  * Text UI of the application.
  */
 public class TextUi {
-//    /** Offset required to convert between 1-indexing and 0-indexing.  */
-//    public static final int DISPLAYED_INDEX_OFFSET = 1;
+    /** Offset required to convert between 1-indexing and 0-indexing.  */
+    public static final int DISPLAYED_INDEX_OFFSET = 1;
 
     /** A tab prefix added to the beginning of lines printed by Duke TaskManager */
     private static final String LINE_PREFIX = "\t";
@@ -78,14 +75,11 @@ public class TextUi {
 
     /**
      * Generates and prints the welcome message upon the start of the application.
-     * @param storageFilePath path to the storage file being used.
      */
-    public void showWelcomeMessage(String version, String storageFilePath) {
-        String storageFileInfo = String.format(MESSAGE_USING_STORAGE_FILE, storageFilePath);
+    public void showWelcomeMessage() {
         showToUser(
                 DIVLINE,
                 MESSAGE_WELCOME,
-                storageFileInfo,
                 DIVLINE);
     }
 
@@ -96,11 +90,23 @@ public class TextUi {
                 DIVLINE);
     }
 
+    public void showError(String message) {
+        showToUser(message);
+    }
+
+    public void showLine() {
+        showToUser(DIVLINE);
+    }
+
     /** Shows message(s) to the user */
     public void showToUser(String... message) {
         for (String m : message) {
             out.println(LINE_PREFIX + m.replace("\n", LS));
         }
+    }
+
+    public void showLoadingError() {
+        showToUser("File loading error.");
     }
 
     /**

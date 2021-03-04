@@ -1,5 +1,8 @@
 package duke.storage;
 
+import duke.data.TaskList;
+import duke.data.task.Task;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -7,12 +10,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class FileManager {
+public class Storage {
     private static String home = System.getProperty("user.dir");
     private static final String directoryPath = home + File.separator + "data";
     private static final String filePath = home + File.separator + "data" + File.separator + "task_list.txt";
 
-    public static void createFileIfNotExist() {
+    public void createFileIfNotExist() {
         try {
             File directory = new File(directoryPath);
             if (! directory.exists()){
@@ -30,7 +33,7 @@ public class FileManager {
         }
     }
 
-    public static ArrayList<String> readFile() throws FileNotFoundException {
+    public static ArrayList<Task> readFile() throws FileNotFoundException {
         File f = new File(filePath); // create a File for the given file path
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
         ArrayList<String> list = new ArrayList<>();
@@ -38,12 +41,19 @@ public class FileManager {
             list.add(s.nextLine());
         }
         s.close();
-        return list;
+        ArrayList<Task> decodedList = TaskListDecoder.decoder(list);
+        return decodedList;
     }
 
-    public static void writeToFile(String textToAdd) throws IOException {
+    public static void writeToFile(TaskList tasks) throws IOException {
+        String textToAdd = TaskListEncoder.encoder(tasks);
         FileWriter fw = new FileWriter(filePath);
         fw.write(textToAdd);
         fw.close();
+    }
+
+    public ArrayList<Task> load() throws FileNotFoundException {
+        createFileIfNotExist();
+        return readFile();
     }
 }
