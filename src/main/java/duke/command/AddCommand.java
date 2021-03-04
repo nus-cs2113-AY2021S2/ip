@@ -1,7 +1,7 @@
 package duke.command;
 
-import duke.TaskList;
-import duke.Ui;
+import duke.taslist.TaskList;
+import duke.ui.Ui;
 import duke.task.*;
 import duke.main.*;
 import java.util.Arrays;
@@ -96,9 +96,13 @@ public class AddCommand implements Command {
      * @param input description of task
      * @return deadline for Deadline tasks
      */
-    public static String getBy(String input) {
+    public static String getBy(String input) throws DukeException {
 
         String[] split = input.trim().split("/by");
+
+        if (split.length < 2) {
+            throw new DukeException("Error!!! No date given!");
+        }
 
         return split[1];
     }
@@ -109,9 +113,13 @@ public class AddCommand implements Command {
      * @param input description of task
      * @return on date for Event tasks
      */
-    public static String getOn(String input) {
+    public static String getOn(String input) throws DukeException {
 
-        String[] split = input.trim().split("/at");
+        String[] split = input.trim().split("/on");
+
+        if (split.length < 2) {
+            throw new DukeException("Error!!! No date given!");
+        }
 
         return split[1];
     }

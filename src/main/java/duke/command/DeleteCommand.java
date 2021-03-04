@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.Ui;
+import duke.ui.Ui;
 import duke.main.DukeException;
 import duke.task.Task;
-import duke.TaskList;
+import duke.taslist.TaskList;
 
 /**
  * Delete task requested from taskList

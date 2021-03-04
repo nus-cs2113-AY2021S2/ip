@@ -1,7 +1,7 @@
 package duke.command;
 
-import duke.TaskList;
-import duke.Ui;
+import duke.taslist.TaskList;
+import duke.ui.Ui;
 import duke.main.DukeException;
 
 /**
