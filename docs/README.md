@@ -100,54 +100,54 @@ Format: `exit`
     <tbody>
         <tr>
             <td rowspan=2>todo</td>
-            <td><code>todo <DESCRIPTION></code></td>
+            <td>{::nomarkdown}<code>todo <DESCRIPTION></code>{:/}</td>
         </tr>
         <tr>
-            <td><code>todo CS2113T exercises</code></td>
+            <td>{::nomarkdown}<code>todo CS2113T exercises</code>{:/}</td>
         </tr>
         <tr>
             <td rowspan=2>event</td>
-            <td><code>event <DESCRIPTION> /at <DATE(dd/mm/yy)></code></td>
+            <td>{::nomarkdown}<code>event <DESCRIPTION> /at <DATE(dd/mm/yy)></code>{:/}</td>
         </tr>
         <tr>
-            <td><code>event CS2113T lecture /at 05/03/21</code></td>
+            <td>{::nomarkdown}<code>event CS2113T lecture /at 05/03/21</code>{:/}</td>
         </tr>
         <tr>
             <td rowspan=2>deadline</td>
-            <td><code>deadline <DESCRIPTION> /by <DATE(dd/mm/yy)></code></td>
+            <td>{::nomarkdown}<code>deadline <DESCRIPTION> /by <DATE(dd/mm/yy)></code>{:/}</td>
         </tr>
         <tr>
-            <td><code>deadline submit duke /by 05/03/21</code></td>
+            <td>{::nomarkdown}<code>deadline submit duke /by 05/03/21</code>{:/}</td>
         </tr>
         <tr>
             <td>list</td>
-            <td><code>list</code></td>
+            <td>{::nomarkdown}<code>list</code>{:/}</td>
         </tr>
         <tr>
             <td>done</td>
-            <td><code>done</code></td>
+            <td>{::nomarkdown}<code>done</code>{:/}</td>
         </tr>
         <tr>
             <td rowspan=2>find</td>
-            <td><code>find <SEARCHTERM></code></td>
+            <td>{::nomarkdown}<code>find <SEARCHTERM></code>{:/}</td>
         </tr>
         <tr>
-            <td><code>find CS2113T</code></td>
+            <td>{::nomarkdown}<code>find CS2113T</code>{:/}</td>
         </tr>
         <tr>
             <td rowspan=2>delete</td>
-            <td><code>delete <INDEX></code></td>
+            <td>{::nomarkdown}<code>delete <INDEX></code>{:/}</td>
         </tr>
         <tr>
-            <td><code>delete 1</code></td>
+            <td>{::nomarkdown}<code>delete 1</code>{:/}</td>
         </tr>
         <tr>
             <td>save</td>
-            <td><code>save</code></td>
+            <td>{::nomarkdown}<code>save</code>{:/}</td>
         </tr>
         <tr>
             <td>exit</td>
-            <td><code>exit</code></td>
+            <td>{::nomarkdown}<code>exit</code>{:/}</td>
         </tr>
     </tbody>
 </table>
