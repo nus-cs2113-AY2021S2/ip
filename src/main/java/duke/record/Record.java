@@ -44,9 +44,10 @@ public class Record {
      * message to prompt users that the given task has been added.<br>
      * If IllegalArgumentException is thrown, it indicates that the given task failed to be added and the related
      * reason of failure will be printed in the CLI.
+     *
      * @param detailFragments information of a given task (i.e. taskName, isDone indicator (1/0) and date [based on
      *                        taskType])
-     * @param taskType Type of the given task (i.e. Deadline [D], Event [E] or Todo [T])
+     * @param taskType        Type of the given task (i.e. Deadline [D], Event [E] or Todo [T])
      */
     public void addRecord(String[] detailFragments, String taskType) {
         boolean isAdded = false;
@@ -69,6 +70,7 @@ public class Record {
      * Deletes a record from the {@code Record} object based on the given {@code index}. If the record is deleted
      * successfully, the program will print message to prompt users that the given task has been deleted.<br>
      * Otherwise, the program will print the reason of failure and given task is failed to be deleted.
+     *
      * @param index index of record, which could be found with {@code list} command, that the user wants to delete
      */
     public void deleteRecord(int index) {
@@ -86,6 +88,7 @@ public class Record {
      * Mark a record as done based on the given {@code index}.If the record is marked as done successfully, the program
      * will print message to prompt users that the given task has been marked as done.<br>
      * Otherwise, the program will print the reason of failure and given task is failed to be marked.
+     *
      * @param index index of record, which could be found with {@code list} command, that the user wants to mark as
      *              done
      */
@@ -103,22 +106,35 @@ public class Record {
     /**
      * Searches records based on the given {@code date}. If the dates of stored tasks match the given {@code date}, the
      * program will print those tasks in the CLI.
+     *
      * @param date A date in format of yyyy-mm-dd
      */
     public void searchDate(String date) {
+        DateTime dateTime;
         int counter = 1;
-        DateTime dateTime = new DateTime(date);
+        try {
+            dateTime = new DateTime(date);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return;
+        }
         System.out.printf("Here is your task in %s:\n", date);
         for (Task task : records) {
-            if(task.getDate().equals(dateTime.getDate())){
+            if(task.getDate() == null) continue;
+            if (task.getDate().equals(dateTime.getDate())) {
                 System.out.println(counter++ + ". " + task);
             }
+        }
+        if (counter == 1){
+            System.out.println("Null");
         }
     }
 
     /**
      * Finds records based on the given {@code keyword}. If the names of stored tasks contains the given
-     * {@code keyword}, the program will print those tasks in the CLI.
+     * {@code keyword}, the program will print those tasks in the CLI. If no record contains the given {@code keyword},
+     * "NULL" will be printed.
+     *
      * @param keyword A target String for searching
      */
     public void findRecords(String keyword) {
@@ -131,7 +147,7 @@ public class Record {
             }
         }
         if (!hasRecord) {
-            System.out.println("(Null)");
+            System.out.println("Null");
         }
     }
 
@@ -162,6 +178,7 @@ public class Record {
             recordReader.close();
         } catch (FileNotFoundException e) {
             System.out.println("No record found");
+            return;
         }
         System.out.println("Record found");
     }

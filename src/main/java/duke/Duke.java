@@ -16,13 +16,12 @@ public class Duke {
     private static Record record;
 
     /**
-     * Call this method to start the program.
-     * <br>
+     * Call this method to start the program. <br><br>
      * This method keeps on looping to ask for user inputs and perform related functions until
-     * false is returned from {@code command.receiveCommand()}
-     * <br>
+     * false is returned from {@code command.receiveCommand()} <br><br>
      * When DukeException is thrown, this method handles it by calling  {@code promptUserInputInvalid()}to
      * notify users that their inputted command is invalid
+     *
      * @param args Dummy command-line arguments (not used)
      */
     public static void main(String[] args) {

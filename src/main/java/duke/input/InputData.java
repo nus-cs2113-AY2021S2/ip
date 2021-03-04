@@ -16,6 +16,7 @@ public class InputData {
      * Constructor of InputData<br>
      * Processes the given {@code rawInput} based on the inputType by calling private method {@code processInput()}.
      * Useful information would be extracted and stored within the {@code InputData} object.
+     *
      * @param rawInput A String of input in standard format based on {@code InputType} (e.g. "E|1|ola /at 2021-08-31"
      *                 for recordInput, "todo job1" for userInput)
      * @param inputType Type of Input (i.e. userInput/recordInput)
@@ -26,6 +27,7 @@ public class InputData {
 
     /**
      * Returns if the task is marked as done
+     *
      * @return boolean value of whether the task is marked as done
      */
     public boolean isDone() {
@@ -34,6 +36,7 @@ public class InputData {
 
     /**
      * Returns the first argument extracted from the rawInput
+     *
      * @return the first argument
      */
     public String getFirstArgument() {
@@ -42,6 +45,7 @@ public class InputData {
 
     /**
      * Returns the other argument(s) extracted from the rawInput
+     *
      * @return the other argument(s)
      */
     public String[] getOtherArguments() {
