@@ -1,6 +1,9 @@
 package duke.data.task;
 
-
+/**
+ * Represents a Deadline in the task list.
+ * Guarantees: Has a by/ field indicating the time argument
+ */
 public class Deadline extends Task {
 
     protected String by;

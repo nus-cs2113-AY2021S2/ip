@@ -1,5 +1,9 @@
 package duke.data.task;
 
+/**
+ * Represents a task.
+ * Has field description and status named isDone.
+ */
 public abstract class Task {
     protected String description;
     protected boolean isDone;

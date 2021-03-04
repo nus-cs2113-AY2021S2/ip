@@ -1,5 +1,8 @@
 package duke.data.task;
 
+/**
+ * Represent a to-do item in the task list.
+ */
 public class Todo extends Task {
 
     public Todo(String description) {

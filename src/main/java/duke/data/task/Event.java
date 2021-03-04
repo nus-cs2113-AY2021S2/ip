@@ -1,5 +1,9 @@
 package duke.data.task;
 
+/**
+ * Represents an Event in the task list.
+ * Guarantees: Has an at/ field indicating the venue argument
+ */
 public class Event extends Task {
 
     protected String at;

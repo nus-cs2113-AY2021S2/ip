@@ -1,7 +1,11 @@
-package duke;
+package duke.exception;
 
 public class DukeException extends Exception{
-    public DukeException(String s) {
+    /**
+     * @param message should contain relevant information on the failed constraint(s)
+     */
+    public DukeException(String message) {
+        super(message);
     }
 
     public String getEmptyListMessage(){
