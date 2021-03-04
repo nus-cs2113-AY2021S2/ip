@@ -120,4 +120,26 @@ public class TaskList {
         count++;
         System.out.println("      " + a);
     }
+
+    public static void searchArrayList(String keyword) {
+        Ui.printBorder();
+        System.out.println("     Here are the matching tasks in your list:");
+        boolean hasTask = false;
+        for (Task task : tasks) {
+            if (!task.getDescription().contains(keyword)) {
+                continue;
+            }
+            printFoundTaskMessage(task);
+            hasTask = true;
+        }
+        if (!hasTask) {
+            System.out.println("     There are no tasks with that keyword!");
+        }
+        Ui.printBorder();
+    }
+
+    public static void printFoundTaskMessage(Task task) {
+        System.out.println("     " + (tasks.indexOf(task) + 1) + "." + task);
+    }
+
 }
