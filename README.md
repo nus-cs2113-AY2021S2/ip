@@ -1,4 +1,4 @@
-# Duke project template
+# Duke project create by Liu Ruiqian
 
 This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
 
@@ -24,3 +24,14 @@ Prerequisites: JDK 11, update IntelliJ to the most recent version.
    | |_| | |_| |   <  __/
    |____/ \__,_|_|\_\___|
    ```
+#### How to use it
+
+It has the function of save and read users activities including event activity, deadline activity and todo activity.
+You can start by typing:
+ 1. **list** to view **The list of activities**
+ 2. **event xxx** to add **A new event**
+ 3. **deadline xxx /by** to add **A new deadline**
+ 4. **todo xxx /at** to add **A new todo**
+ 5. **delete xxx** to delete **An activity**
+ 6. **done xxx** to mark **One activity as done**
+ 7. **bye** to end **The system**
