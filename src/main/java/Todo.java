@@ -4,8 +4,8 @@ public class Todo extends Task {
     }
 
     @Override
-    public String getSaveString() {
-        return "T | " + super.getSaveString();
+    public String getSaveFormatString() {
+        return "T | " + super.getSaveFormatString();
     }
 
     @Override

@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     private String description;
     private boolean isDone;
 
@@ -7,11 +7,11 @@ public class Task {
         this.isDone = false;
     }
 
-    public String getDescription() {
+    private String getDescription() {
         return this.description;
     }
 
-    public String getStatusIcon() {
+    private String getStatusIcon() {
         return (this.isDone ? "X" : " ");
     }
 
@@ -19,7 +19,7 @@ public class Task {
         this.isDone = true;
     }
 
-    public String getSaveString() {
+    public String getSaveFormatString() {
         return (this.isDone ? "1" : "0") + " | " + this.getDescription();
     }
 

@@ -1,7 +1,9 @@
 import java.io.File;
-import java.io.FileWriter;
-import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.FileWriter;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class Duke {
     private static final String SAVE_FILE_PATH = "saveFile.txt";
@@ -11,7 +13,7 @@ public class Duke {
     private static final ArrayList<Task> STORED_TASKS = new ArrayList<Task>();
 
     public static void main(String[] args) {
-        loadDataFromFile();
+        loadStoredTasksData();
         welcomeMsg();
 
         String command;
@@ -19,62 +21,68 @@ public class Duke {
             command = getCommandFromUser();
             handleCommand(command);
         } while (!command.equals("bye"));
-
         SCANNER.close();
     }
 
-    public static void loadDataFromFile() {
+
+    private static void loadStoredTasksData() {
         try {
-            Scanner saveFileScanner = new Scanner(SAVE_FILE);
-            while (saveFileScanner.hasNextLine()) {
-                String[] taskInfo = saveFileScanner.nextLine().split(" \\| ");
-                Task currentTask;
-                if (taskInfo[0].equals("T")) {
-                    currentTask = new Todo(taskInfo[2]);
-                    if (taskInfo[1].equals("1")) {
-                        currentTask.markAsDone();
-                    }
-                } else if (taskInfo[0].equals("D")) {
-                    currentTask = new Deadline(taskInfo[2], taskInfo[3]);
-                    if (taskInfo[1].equals("1")) {
-                        currentTask.markAsDone();
-                    }
-                } else {
-                    currentTask = new Event(taskInfo[2], taskInfo[3]);
-                    if (taskInfo[1].equals("1")) {
-                        currentTask.markAsDone();
-                    }
-                }
-                STORED_TASKS.add(currentTask);
-            }
-            saveFileScanner.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println(DIVIDER);
-            System.out.println("oops, something went wrong...");
-            System.out.println(DIVIDER);
+            readFromSaveFile();
+        } catch (FileNotFoundException e) {
+            createNewFile();
         }
     }
 
-    public static void saveDataToFile() {
-        try {
-            FileWriter saveFileWriter = new FileWriter(SAVE_FILE);
-            for (int i = 0; i < STORED_TASKS.size(); i++) {
-                Task currentTask = STORED_TASKS.get(i);
-                System.out.println(currentTask.getSaveString());
-                saveFileWriter.write(currentTask.getSaveString() + "\n");
+    private static void readFromSaveFile() throws FileNotFoundException {
+        Scanner saveFileScanner = new Scanner(SAVE_FILE);
+        int lineNum = 0;
+        while (saveFileScanner.hasNextLine()) {
+            lineNum++;
+            String[] currentTaskInfoWords = saveFileScanner.nextLine().split("\\|");
+            for (int i = 0; i < currentTaskInfoWords.length; i++) {
+                currentTaskInfoWords[i] = currentTaskInfoWords[i].strip();
             }
-            saveFileWriter.flush();
-            saveFileWriter.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println(DIVIDER);
-            System.out.println("oops, something went wrong...");
-            System.out.println(DIVIDER);
+
+            Task currentTask;
+            if (currentTaskInfoWords[0].equals("T") && currentTaskInfoWords.length == 3) {
+                currentTask = new Todo(currentTaskInfoWords[2]);
+            } else if (currentTaskInfoWords[0].equals("D") && currentTaskInfoWords.length == 4) {
+                currentTask = new Deadline(currentTaskInfoWords[2], currentTaskInfoWords[3]);
+            } else if (currentTaskInfoWords[0].equals("E") && currentTaskInfoWords.length == 4) {
+                currentTask = new Event(currentTaskInfoWords[2], currentTaskInfoWords[3]);
+            } else {
+                System.out.println("Bad format detected at line " + lineNum + " in save file! " +
+                        "Skipping this record...");
+                continue;
+            }
+
+            if (currentTaskInfoWords[1].equals("1")) {
+                currentTask.markAsDone();
+            } else if (!currentTaskInfoWords[1].equals("0")) {
+                System.out.println("Bad format detected at line " + lineNum + " in save file! " +
+                        "Skipping this record...");
+                continue;
+            }
+
+            STORED_TASKS.add(currentTask);
+        }
+        saveFileScanner.close();
+    }
+
+    private static void createNewFile() {
+        try {
+            if(SAVE_FILE.createNewFile()) {
+                System.out.println("Created a new save file called '" + SAVE_FILE_PATH  + "'");
+            } else {
+                throw new IOException();
+            }
+        } catch (IOException e) {
+            System.out.println("☹ OPPS! An I/O Error occurred when attempting to create the save file " +
+                    "'" + SAVE_FILE_PATH + "'!");
         }
     }
 
-    public static void welcomeMsg() {
+    private static void welcomeMsg() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -83,15 +91,16 @@ public class Duke {
         System.out.println(DIVIDER);
         System.out.println(logo);
         System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
+        System.out.println("Before we begin, do note that I am only able to accept lowercase commands.");
+        System.out.println("Now, what can I do for you?");
         System.out.println(DIVIDER);
     }
 
-    public static String getCommandFromUser() {
-        return SCANNER.nextLine().strip().toLowerCase();
+    private static String getCommandFromUser() {
+        return SCANNER.nextLine().strip();
     }
 
-    public static void handleCommand(String command) {
+    private static void handleCommand(String command) {
         try {
             if (command.startsWith("todo")) {
                 storeTodoTask(command);
@@ -111,11 +120,11 @@ public class Duke {
                 invalidCommand();
             }
         } catch (DukeException e) {
-            errorMsg(e);
+            commandErrorMsg(e);
         }
     }
 
-    public static void storeTodoTask(String command) throws DukeException {
+    private static void storeTodoTask(String command) throws DukeException {
         if (command.equals("todo")) {
             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
         }
@@ -128,7 +137,7 @@ public class Duke {
         storeTask(new Todo(description));
     }
 
-    public static void storeDeadlineTask(String command) throws DukeException {
+    private static void storeDeadlineTask(String command) throws DukeException {
         if (command.equals("deadline")) {
             throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
         }
@@ -150,7 +159,7 @@ public class Duke {
         storeTask(new Deadline(description, by));
     }
 
-    public static void storeEventTask(String command) throws DukeException {
+    private static void storeEventTask(String command) throws DukeException {
         if (command.equals("event")) {
             throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
         }
@@ -172,9 +181,9 @@ public class Duke {
         storeTask(new Event(description, at));
     }
 
-    public static void storeTask(Task taskToStore) {
+    private static void storeTask(Task taskToStore) {
         STORED_TASKS.add(taskToStore);
-        saveDataToFile();
+        saveStoredTasksData();
         System.out.println(DIVIDER);
         System.out.println(" Got it. I've added this task:");
         System.out.println("   " + taskToStore);
@@ -182,7 +191,25 @@ public class Duke {
         System.out.println(DIVIDER);
     }
 
-    public static void displayStoredTasks() {
+    private static void saveStoredTasksData() {
+        try {
+            writeToSaveFile();
+        } catch (IOException e) {
+            System.out.println("☹ OPPS! An I/O Error occurred when attempting to write into " +
+                    "'" + SAVE_FILE_PATH + "'!");
+        }
+    }
+
+    private static void writeToSaveFile() throws IOException {
+        FileWriter saveFileWriter = new FileWriter(SAVE_FILE);
+        for (Task currentTask : STORED_TASKS) {
+            saveFileWriter.write(currentTask.getSaveFormatString() + "\n");
+            saveFileWriter.flush();
+        }
+        saveFileWriter.close();
+    }
+
+    private static void displayStoredTasks() {
         if (STORED_TASKS.size() == 0) {
             System.out.println(DIVIDER);
             System.out.println(" You have no tasks in your list! :)");
@@ -199,7 +226,7 @@ public class Duke {
         System.out.println(DIVIDER);
     }
 
-    public static void markTaskAsDone(String command) throws DukeException {
+    private static void markTaskAsDone(String command) throws DukeException {
         if (command.equals("done")) {
             throw new DukeException("☹ OOPS!!! The task number of a done command cannot be empty.");
         }
@@ -222,14 +249,14 @@ public class Duke {
 
         Task taskToMark = STORED_TASKS.get(indexOfTaskToMark);
         taskToMark.markAsDone();
-        saveDataToFile();
+        saveStoredTasksData();
         System.out.println(DIVIDER);
         System.out.println(" Nice! I've marked this task as done:");
         System.out.println("   " + taskToMark);
         System.out.println(DIVIDER);
     }
 
-    public static void deleteTask(String command) throws DukeException {
+    private static void deleteTask(String command) throws DukeException {
         if (command.equals("delete")) {
             throw new DukeException("☹ OOPS!!! The task number of a delete command cannot be empty.");
         }
@@ -251,7 +278,7 @@ public class Duke {
         }
 
         Task deletedTask = STORED_TASKS.remove(indexOfTaskToDelete);
-        saveDataToFile();
+        saveStoredTasksData();
         System.out.println(DIVIDER);
         System.out.println(" Noted. I've removed this task:");
         System.out.println("   " + deletedTask);
@@ -260,17 +287,18 @@ public class Duke {
         System.out.println(DIVIDER);
     }
 
-    public static void exitMsg() {
+    private static void exitMsg() {
         System.out.println(DIVIDER);
         System.out.println(" Bye. Hope to see you again soon!");
         System.out.println(DIVIDER);
+        saveStoredTasksData();
     }
 
-    public static void invalidCommand() throws DukeException {
+    private static void invalidCommand() throws DukeException {
         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
-    public static void errorMsg(DukeException e) {
+    private static void commandErrorMsg(DukeException e) {
         System.out.println(DIVIDER);
         System.out.println(" " + e.getMessage());
         System.out.println(DIVIDER);

@@ -7,8 +7,8 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String getSaveString() {
-        return "D | " + super.getSaveString() + " | " + this.by;
+    public String getSaveFormatString() {
+        return "D | " + super.getSaveFormatString() + " | " + this.by;
     }
 
     @Override
