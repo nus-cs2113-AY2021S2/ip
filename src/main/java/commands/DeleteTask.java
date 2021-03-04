@@ -6,10 +6,12 @@ import myexceptions.OutOfRangeException;
 import parser.Parser;
 import tasklist.Task;
 import tasklist.Tasklist;
+
 import static common.Messages.DELETE_TASK_MESSAGE;
 
 /**
  * Method that deletes a task from the list
+ *
  * @param userInput This is the string input by the user
  */
 public class DeleteTask {

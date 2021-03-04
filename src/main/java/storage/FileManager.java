@@ -24,8 +24,9 @@ public class FileManager {
     /**
      * This method writes the contents of the list to a text file
      * named Duke.txt. File writing takes place automatically upon quitting GuiltySpark
+     *
      * @param filePath This is the name of the text file to be written into
-     * @param tasks This is the task list
+     * @param tasks    This is the task list
      * @throws IOException if file does not exist beforehand
      */
     public static void writeToFile(String filePath, ArrayList<Task> tasks) throws IOException {
@@ -40,12 +41,13 @@ public class FileManager {
     /**
      * This method transfers the contents of the list in the text file, into
      * the ArrayList
+     *
      * @param filePath This is the name of the text file to be read from
-     * @throws FileNotFoundException if the specified file name in filePath is not located
+     * @throws FileNotFoundException     if the specified file name in filePath is not located
      * @throws BlankDescriptionException if the file is blank
      */
     public static void restoreFileContents(String filePath) throws IOException, BlankDescriptionException {
-        try{
+        try {
             File f = new File(filePath);
             Scanner s = new Scanner(f);
             if (s.hasNext()) {
@@ -58,9 +60,9 @@ public class FileManager {
                 String nextTask = s.nextLine();
                 Tasklist.addTask(taskDecoder.taskDecoder(nextTask));
             }
-        } catch(FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             new File("Spark.txt").createNewFile();
-        } catch(FileModifiedException e) {
+        } catch (FileModifiedException e) {
             System.out.println(FILE_MODIFIED_MESSAGE);
             new File("Spark.txt").createNewFile();
         }

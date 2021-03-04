@@ -2,34 +2,40 @@ import commands.*;
 import myexceptions.*;
 import parser.Parser;
 import storage.FileManager;
-import tasklist.*;
+import tasklist.Tasklist;
 import ui.TextUI;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import static common.Messages.*;
 
 /**
  * Main program of GuiltySpark.
+ *
  * @author Jonathan Khoo
  * @version 3.0
  */
 public class Spark {
 
-
-    //--------------------------------------------------------------------------------
     private TextUI ui;
 
+    public static void main(String[] args)
+            throws
+            IOException, BlankDescriptionException,
+            MissingDateException, InvalidSpaceException {
+
+        runCommandLoopUntilExitCommand();
+    }
+
+
     private static void runCommandLoopUntilExitCommand()
-            throws BlankDescriptionException, EmptyListException,
-            MissingDateException, IOException, InvalidSpaceException, NoMatchesFoundException {
+            throws BlankDescriptionException,
+            MissingDateException, IOException, InvalidSpaceException {
         boolean isExit = false;
-            FileManager.restoreFileContents("Spark.txt");
+        FileManager.restoreFileContents("Spark.txt");
         do {
             TextUI ui = new TextUI();
-
+            ui.printWelcomeMessage();
             String fullInputCommand = ui.getUserCommand();
 
             String[] command = Parser.splitTextIntoTwoFields(fullInputCommand);
@@ -44,7 +50,7 @@ public class Spark {
                 AddEvent.execute(fullInputCommand);
                 break;
             case "list":
-                try{
+                try {
                     ListTasks.execute();
                     break;
                 } catch (EmptyListException e) {
@@ -62,7 +68,7 @@ public class Spark {
                     DeleteTask.execute(fullInputCommand);
                 } catch (BlankDescriptionException e) {
                     System.out.println(BLANK_EXCEPTION_MESSAGE);
-                } catch (NumberFormatException e){
+                } catch (NumberFormatException e) {
                     System.out.println(INVALID_NUMBER_MESSAGE);
                 } catch (OutOfRangeException e) {
                     System.out.println(OUT_OF_RANGE_MESSAGE);
@@ -72,10 +78,10 @@ public class Spark {
                 }
                 break;
             case "find":
-                try{
+                try {
                     Find.execute(fullInputCommand);
                     break;
-                } catch (BlankDescriptionException e){
+                } catch (BlankDescriptionException e) {
                     System.out.println(BLANK_EXCEPTION_MESSAGE);
                 } catch (NoMatchesFoundException e) {
                     System.out.println(NO_MATCHES_FOUND_MESSAGE);
@@ -83,7 +89,7 @@ public class Spark {
                 break;
 
             case "done":
-                try{
+                try {
                     MarkAsDone.execute(fullInputCommand);
                 } catch (OutOfRangeException e) {
                     System.out.println(OUT_OF_RANGE_MESSAGE);
@@ -101,13 +107,6 @@ public class Spark {
         } while (!isExit);
     }
 
-
-    public static void main(String[] args)
-            throws InvalidCommandException, InvalidDateException,
-            IOException, BlankDescriptionException, EmptyListException,
-            MissingDateException, InvalidSpaceException, NoMatchesFoundException {
-
-
-        runCommandLoopUntilExitCommand();
-    }
 }
+
+ 

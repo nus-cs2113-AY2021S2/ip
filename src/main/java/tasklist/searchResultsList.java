@@ -2,8 +2,6 @@ package tasklist;
 
 import java.util.ArrayList;
 
-import static common.Messages.RECEIVE_MESSAGE;
-
 public class searchResultsList {
     private static final ArrayList<Task> searchResults = new ArrayList<>();
 
@@ -24,7 +22,6 @@ public class searchResultsList {
     }
 
     public static int getSize() {
-        //System.out.println(GETSIZE_MESSAGE);
         return searchResults.size();
     }
 

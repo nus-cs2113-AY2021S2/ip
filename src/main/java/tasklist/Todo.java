@@ -1,7 +1,5 @@
 package tasklist;
 
-import tasklist.Task;
-
 public class Todo extends Task {
 
 
@@ -10,7 +8,7 @@ public class Todo extends Task {
     }
 
     public String getStatusIcon() {
-        return "[T]" + "[" + super.getStatusIcon() +"]";
+        return "[T]" + "[" + super.getStatusIcon() + "]";
     }
 
 

@@ -5,6 +5,7 @@ import tasklist.Task;
 public class Event extends Task {
 
     public String by;
+
     public Event(String description, String by) {
         super(description);
         this.by = by;
@@ -12,7 +13,7 @@ public class Event extends Task {
 
 
     public String getStatusIcon() {
-        return "[E]" + "[" + super.getStatusIcon() +"]";
+        return "[E]" + "[" + super.getStatusIcon() + "]";
     }
 
 

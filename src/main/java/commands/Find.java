@@ -17,6 +17,7 @@ import java.util.ArrayList;
  * Method that searches for the presence of a string or sequence
  * of characters in the list, before outputting them in a list view for the user.
  * Accepts both string sequences with spacing, or without.
+ *
  * @param userInput This is the string sequence which the user wants to search for
  */
 
@@ -27,13 +28,13 @@ public class Find {
 
         searchResultsList searchResults = new searchResultsList();
         String keyword = Parser.parsingFindCommand(userInput);
-        for (Task task : Tasklist.viewTasks()){
-            if(task.description.contains(keyword)){
+        for (Task task : Tasklist.viewTasks()) {
+            if (task.description.contains(keyword)) {
                 searchResultsList.addTask(task);
             }
         }
 
-        if(searchResultsList.isEmpty()){
+        if (searchResultsList.isEmpty()) {
             throw new NoMatchesFoundException();
         }
 

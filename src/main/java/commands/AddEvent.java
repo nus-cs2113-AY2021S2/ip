@@ -5,11 +5,13 @@ import myexceptions.MissingDateException;
 import parser.Parser;
 import tasklist.Task;
 import tasklist.Tasklist;
+
 import static common.Messages.BLANK_EXCEPTION_MESSAGE;
 import static common.Messages.MISSING_DATE_EXCEPTION_MESSAGE;
 
 /**
  * Method that adds an event to the tasklist
+ *
  * @param userInput This is the string input by the user.
  */
 public class AddEvent {

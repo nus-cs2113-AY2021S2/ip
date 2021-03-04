@@ -13,15 +13,12 @@ public class Task {
         this.isCorrupted = 0;
     }
 
-    public String getDescription(){
+    public String getDescription() {
         return description;
     }
+
     public String getStatusIcon() {
         return (isDone ? "1" : "0");
-    }
-
-    public String printStatus(){
-        return("[ " + getStatusIcon() + "] " + description);
     }
 
 
