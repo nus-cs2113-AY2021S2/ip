@@ -29,7 +29,7 @@ Duke is a desktop app for managing tasks using a Command Line Interface (CLI). Y
 
 ## Features 
 
-### <a name="list"></a>Adding tasks: `todo/event/deadline`
+### <a name="add"></a>Adding tasks: `todo/event/deadline`
 Duke can add 3 types of tasks: [Todos](#todo), [Events](#event) and [Deadlines](#deadline). 
 
 #### Todo
