@@ -5,6 +5,8 @@ import duke.command.*;
 import duke.exception.DukeException;
 import duke.tasklist.TaskList;
 import duke.tasks.Task;
+import duke.ui.Ui;
+import duke.storage.Storage;
 
 import java.util.Scanner;
 
@@ -37,14 +39,14 @@ public class Parser {
             } else if (inputCommand.equals(LIST_COMMAND)) {
                 new ListCommand();
             } else if (inputCommand.equals(EXIT_COMMAND)) {
-                Duke.printGoodbyeMessage();
+                Ui.printGoodbyeMessage();
                 isExit = true;
             } else if (inputCommand.equals("save")) {
-                Duke.saveData();
+                Storage.saveData();
             } else {
-                Duke.printInvalidMessage(inputCommand);
+                Ui.printInvalidMessage(inputCommand);
             }
-            System.out.println(Duke.LINE);
+            System.out.println(Ui.LINE);
         }
 
     }

@@ -1,11 +1,13 @@
 package duke.command;
 
-import duke.exception.DukeException;
-//import duke.tasklist.TaskList;
+import duke.tasks.Task;
+import duke.tasklist.TaskList;
+
+import java.util.ArrayList;
 import duke.Duke;
 
 public class AddEventCommand extends Command {
     public AddEventCommand(String description) {
-        Duke.addEvent(description);
+        TaskList.addEvent(description);
     }
 }

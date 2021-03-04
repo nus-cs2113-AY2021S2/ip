@@ -1,11 +1,12 @@
 package duke.command;
 
-import duke.exception.DukeException;
-//import duke.tasklist.TaskList;
-import duke.Duke;
+import duke.tasks.Task;
+import duke.tasklist.TaskList;
+
+import java.util.ArrayList;
 
 public class AddDeadlineCommand extends Command {
     public AddDeadlineCommand(String description) {
-        Duke.addDeadline(description);
+        TaskList.addDeadline(description);
     }
 }

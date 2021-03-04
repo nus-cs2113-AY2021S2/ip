@@ -1,7 +1,10 @@
 package duke.command;
-import duke.Duke;
+
+import duke.ui.Ui;
+
+import java.util.ArrayList;
 public class ExitCommand extends Command{
     public ExitCommand() {
-        Duke.printGoodbyeMessage();
+        Ui.printGoodbyeMessage();
     }
 }

@@ -1,9 +1,12 @@
 package duke.command;
 
-import duke.Duke;
+import duke.tasks.Task;
+import duke.tasklist.TaskList;
+
+import java.util.ArrayList;
 
 public class DeleteCommand extends Command{
     public DeleteCommand(String description) {
-        Duke.deleteTask(description);
+        TaskList.deleteTask(description);
     }
 }

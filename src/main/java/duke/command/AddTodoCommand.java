@@ -1,11 +1,14 @@
 package duke.command;
 
-import duke.exception.DukeException;
-//import duke.tasklist.TaskList;
+import duke.tasks.Task;
+import duke.tasklist.TaskList;
+
+import java.util.ArrayList;
+
 import duke.Duke;
 
 public class AddTodoCommand extends Command {
     public AddTodoCommand(String description) {
-        Duke.addToDo(description);
+        TaskList.addToDo(description);
     }
 }
