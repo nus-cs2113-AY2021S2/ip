@@ -1,6 +1,7 @@
-package duke;
+package duke.ui;
 
 import duke.task.Task;
+import duke.taslist.TaskList;
 
 /**
  * Prints responses to user input

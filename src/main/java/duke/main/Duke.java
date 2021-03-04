@@ -1,20 +1,11 @@
 package duke.main;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.taslist.TaskList;
+import duke.ui.Ui;
 import duke.command.Command;
-import duke.task.Task;
-import duke.task.Todo;
-import duke.task.Deadline;
-import duke.task.Event;
 
-import java.io.*;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -49,10 +40,13 @@ public class Duke {
         Scanner in = new Scanner(System.in);
         String input;
         input = in.nextLine();
-        while (!input.equals("bye")) {
+        while (true) {
             Command command = Parser.parse(input);
             try {
                 command.execute(input);
+                if (input.equals("bye")) {
+                    break;
+                }
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
                 Ui.commandDone();

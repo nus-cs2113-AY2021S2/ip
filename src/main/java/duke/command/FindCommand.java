@@ -1,7 +1,7 @@
 package duke.command;
 
-import duke.TaskList;
-import duke.Ui;
+import duke.taslist.TaskList;
+import duke.ui.Ui;
 
 
 /**
@@ -19,6 +19,11 @@ public class FindCommand implements Command {
      * @param input This is the command input by the user eg. find read book
      */
     public void execute(String input) {
+        if (input.length() == 4) {
+            System.out.println("OOPS!!! You forgot to give the keyword!!!");
+            Ui.commandDone();
+            return;
+        }
         String[] keyword = input.split(" ", 2);
         if (TaskList.numOfTasks == 0) {
             System.out.println("You have no task! :)");

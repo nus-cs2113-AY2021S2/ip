@@ -1,5 +1,6 @@
-package duke;
+package duke.storage;
 
+import duke.taslist.TaskList;
 import duke.task.*;
 
 import java.io.*;

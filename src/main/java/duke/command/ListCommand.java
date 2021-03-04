@@ -1,8 +1,7 @@
 package duke.command;
 
-import com.sun.source.util.TaskListener;
-import duke.TaskList;
-import duke.Ui;
+import duke.taslist.TaskList;
+import duke.ui.Ui;
 
 /**
  * Lists all the tasks in the taskList

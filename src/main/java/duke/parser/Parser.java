@@ -1,4 +1,4 @@
-package duke.main;
+package duke.parser;
 
 import duke.command.*;
 import duke.task.*;
