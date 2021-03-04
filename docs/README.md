@@ -36,14 +36,14 @@ display a list of current tasks.
 ### Viewing list of tasks: `list`
 Displays the list of tasks already input by user.
 
-![List](/docs/LIST1.JPG)
+![List](/docs/LIST1.JPG?raw=true)
 
 Format: `list`
 <br/><br/>
 ### Adding a TODO task: `todo`
 Adds a TODO task into the list
 
-![Todo](/docs/TODO1.JPG)
+![Todo](/docs/TODO1.JPG?raw=true)
 
 Format: `todo DESCRIPTION_OF_TASK`
 
@@ -59,7 +59,7 @@ Examples:
 ### Adding an EVENT task: `event`
 Adds an EVENT task into the list
 
-![Event](/docs/EVENT1.JPG)
+![Event](/docs/EVENT1.JPG?raw=true)
 
 Format: `event DESCRIPTION_OF_TASK /DATE_OF_EVENT [ADDITIONAL_COMMENTS_ON_EVENT]`
 
@@ -79,7 +79,7 @@ Examples:
 ### Adding a DEADLINE task: `deadline`
 Adds a DEADLINE task into the list
 
-![Deadline](/docs/DEADLINE1.JPG)
+![Deadline](/docs/DEADLINE1.JPG?raw=true)
 
 Format: `deadline DESCRIPTION_OF_TASK /DATE_OF_DEADLINE [ADDITIONAL_COMMENTS_ON_DEADLINE]`
 
@@ -99,7 +99,7 @@ Examples:
 ### Marking a task as completed: `done`
 Marks the specified task number as completed.
 
-![Done](/docs/DONE1.JPG)
+![Done](/docs/DONE1.JPG?raw=true)
 
 Format: `done TASK_POSITION_IN_LIST`
 
@@ -115,7 +115,7 @@ Format: `done TASK_POSITION_IN_LIST`
 ### Deleting a task from the list: `delete`
 Removes the specified task from the list.
 
-![Delete](/docs/DONE1.JPG)
+![Delete](/docs/DONE1.JPG?raw=true)
 
 Format: `delete TASK_POSITION_IN_LIST`
 
@@ -131,7 +131,7 @@ Format: `delete TASK_POSITION_IN_LIST`
 ### Searching for a task with a keyword: `find`
 Searches for tasks in the list with the specified keyword.
 
-[Find](/docs/FIND1.JPG)
+![Find](/docs/FIND1.JPG?raw=true)
 
 Format: `find KEYWORD`
 * Command `find` is case-insensitive.
@@ -142,7 +142,7 @@ Format: `find KEYWORD`
 ### Exiting the program: `bye`
 Exits the program
 
-[Bye](/docs/BYE1.JPG)
+![Bye](/docs/BYE1.JPG?raw=true)
 
 Format: `bye`
 
