@@ -1,5 +1,4 @@
 public class Parser {
-    private static final String line = "____________________________________________________________\n";
 
 
     public void processUserInput(Ui ui, TaskList tasks, String input) {
@@ -77,11 +76,6 @@ public class Parser {
                 ui.printErrorMessage();
             }
 
-
-        } else if (input.contains("find")) {
-            int dividerPosition = input.indexOf(" ");
-            String keyWords = input.substring(dividerPosition + 1);
-            tasks.getFoundTask(keyWords, ui);
 
         } else {
             ui.printErrorMessage();

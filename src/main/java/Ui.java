@@ -47,18 +47,13 @@ public class Ui {
     }
 
     public void printList(ArrayList<Task> tasks) {
-//        System.out.println(line);
         for (int i = 1; i <= tasks.size(); i++) {
             System.out.println(i + ". " + tasks.get(i - 1).toString());
         }
         System.out.print(line);
     }
 
-    public void printFoundList(ArrayList<Task> foundList) {
-        System.out.print(line);
-        System.out.println("Here are the matching tasks in your list: ");
-        printList(foundList);
-    }
+
 
     public void printNoSuchTask() {
         System.out.print(line);

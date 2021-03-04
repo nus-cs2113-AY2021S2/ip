@@ -29,19 +29,5 @@ public class TaskList {
     }
 
 
-    public void getFoundTask(String keywordToFind, Ui ui) {
-        ArrayList<Task> foundList = new ArrayList<>();
-        for (Task task : tasks) {
-            if (task.getDescription().contains(keywordToFind)) {
-                foundList.add(task);
-            }
-        }
-        if (foundList.size() != 0) {
-            ui.printFoundList(foundList);
-        } else {
-            ui.printErrorMessage();
-        }
-    }
-
 
 }
