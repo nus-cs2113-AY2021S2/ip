@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
+    //collection
     static List<Task> tasks = new ArrayList<>();
     static Boolean notBye = true;
     public static void main(String[] args) {
