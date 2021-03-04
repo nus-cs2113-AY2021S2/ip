@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 
 public class Duke {
-    public static ArrayList<Task> tasks = new ArrayList<Task>();
+    public static ArrayList<Task> tasks = new ArrayList<>();
     public static final Scanner SCANNER = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -22,31 +22,27 @@ public class Duke {
                 Output.printBye();
                 break;
             } else if (userInput.startsWith("list")) {
-                System.out.println("Here are the tasks in your list: ");
-                for (int i = 0; i < tasks.size(); i++) {
-                    System.out.print(i + 1 + ".");
-                    System.out.println(tasks.get(i));
-                }
+                Task.listTasks(tasks);
             } else if (userInput.split(" ")[0].equals("done")) {
                 if(userInput.length() < 6) {
                     Output.printEmptyCommand("done");
                     continue;
                 }
-                int processedInput;
-                processedInput = Integer.parseInt(userInput.replaceAll("[^0-9]", "")) - 1;
-                tasks.get(processedInput).setDone();
-                System.out.println("Nice! I've marked this task as done: ");
-                System.out.println(tasks.get(processedInput));
+                Task.markTaskDone(tasks, userInput);
+                Storage.writeToFile(tasks);
             } else if (userInput.split(" ")[0].equals("todo")) {
                 if(userInput.length() < 6) {
                     Output.printEmptyCommand("todo");
                     continue;
                 }
+                /*
                 System.out.println("Got it. I've added this task: ");
                 Task newTask = new Todo(userInput.substring(5));
                 tasks.add(newTask);
                 System.out.println("  " + newTask.toString());
-                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                System.out.println("Now you have " + tasks.size() + " tasks in the list.");*/
+                Task.addTodoTask(tasks, userInput);
+                Storage.writeToFile(tasks);
             } else if (userInput.split(" ")[0].equals("deadline")) {
                 if(userInput.length() < 10) {
                     Output.printEmptyCommand("deadline");
@@ -54,7 +50,6 @@ public class Duke {
                 }
                 System.out.println("Got it. I've added this task: ");
                 String by = "";
-                String processedDeadlineInput;
                 int getSlashIndex = 0;
                 for (int i = 0; i < userInput.length(); i++) {
                     char getSlash = userInput.charAt(i);
@@ -63,12 +58,8 @@ public class Duke {
                         break;
                     }
                 }
-                by = userInput.substring(getSlashIndex + 4);
-                processedDeadlineInput = userInput.substring(9, getSlashIndex).trim();
-                Task newTask = new Deadline(processedDeadlineInput, by);
-                tasks.add(newTask);
-                System.out.println("  " + newTask.toString());
-                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                Task.addDeadlineTask(by, tasks, userInput, getSlashIndex);
+                Storage.writeToFile(tasks);
             } else if (userInput.split(" ")[0].equals("event")) {
                 if(userInput.length() < 7) {
                     Output.printEmptyCommand("event");
@@ -91,6 +82,7 @@ public class Duke {
                 tasks.add(newTask);
                 System.out.println("  " + newTask.toString());
                 System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                Storage.writeToFile(tasks);
             } else if (userInput.split(" ")[0].equals("delete")) {
                 if(userInput.length() < 8) {
                     Output.printEmptyCommand("delete");
@@ -107,6 +99,7 @@ public class Duke {
                     tasks.remove(processedInput);
                     System.out.println("Now you have " + tasks.size()+ " tasks in the list.");
                 }
+                Storage.writeToFile(tasks);
             } else {
                 Output.printWrongCommand();
             }

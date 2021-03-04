@@ -1,12 +1,16 @@
 package duke;
-import java.io.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
 public class Storage {
-    public static void readFile(ArrayList<duke.Task> tasks) {
+    public static void readFile(ArrayList<Task> tasks) {
+        File file = new File("src/main/java/duke.txt");
         try {
-            File file = new File("src/main/java/duke.txt");
             Scanner SCANNER = new Scanner(file);
 
             while(SCANNER.hasNextLine()) {
@@ -14,33 +18,33 @@ public class Storage {
                 String taskType = split[0];
                 String isDoneString = split[1];
                 String taskDetails = split[2];
-                Boolean isDone = false;
-                if(isDoneString == "1") {
-                    isDone = true;
+                Boolean isDoneDone;
+                if(isDoneString.equals("1")) {
+                    isDoneDone = true;
                 } else {
-                    isDone = false;
+                    isDoneDone = false;
                 }
 
                 switch (taskType) {
                     case "T":
-                        duke.Task task = new duke.Todo(taskDetails);
-                        if (isDone) {
+                        Task task = new Todo(taskDetails);
+                        if (isDoneDone) {
                             task.setDone();
                         }
                         tasks.add(task);
                         break;
                     case "E":
                         String at = split[3];
-                        task = new duke.Event(taskDetails, at);
-                        if (isDone) {
+                        task = new Event(taskDetails, at);
+                        if (isDoneDone) {
                             task.setDone();
                         }
                         tasks.add(task);
                         break;
                     case "D":
                         String by = split[3];
-                        task = new duke.Deadline(taskDetails, by);
-                        if (isDone) {
+                        task = new Deadline(taskDetails, by);
+                        if (isDoneDone) {
                             task.setDone();
                         }
                         tasks.add(task);
@@ -48,20 +52,22 @@ public class Storage {
                 }
 
             }
-        } catch (Exception e) {
-            System.out.println(e);
+        } catch (FileNotFoundException e) {
+            System.out.println(e + "caught.");
+
         }
     }
 
-    public static void writeToFile(ArrayList<duke.Task> tasks) {
+    public static void writeToFile(ArrayList<Task> tasks) {
         try {
             FileWriter fileWriter = new FileWriter("src/main/java/duke.txt");
             for(int i=0; i<tasks.size(); i++) {
+                //System.out.println(tasks.get(i).isDone());
                 fileWriter.write(tasks.get(i).getDescription() + "\n");
             }
-         //   fileWriter.flush();
+            fileWriter.flush();
             fileWriter.close();
-        } catch (Exception e) {
+        } catch (IOException e) {
             System.out.println("Error while writing to file.");
         }
     }
