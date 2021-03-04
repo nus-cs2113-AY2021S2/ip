@@ -7,6 +7,7 @@ import duke.command.AddCommand;
 import duke.command.FindCommand;
 import duke.command.DeleteCommand;
 import duke.command.ListCommand;
+
 import duke.error.EmptyInputException;
 
 public class Parser {

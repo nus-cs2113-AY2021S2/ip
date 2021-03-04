@@ -2,9 +2,11 @@ package duke.command;
 
 import duke.TaskList;
 import duke.Ui;
+
 import duke.error.EmptyDateException;
 import duke.error.EmptyNameFieldException;
 import duke.error.WrongFormatException;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -12,6 +14,7 @@ import duke.task.Todo;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
+
 import java.util.ArrayList;
 
 public class AddCommand extends Command {
@@ -38,7 +41,7 @@ public class AddCommand extends Command {
         try {
             ArrayList<Task> Tasks = taskList.getTasks();
             addItem(this.input, Tasks);
-        }  catch (WrongFormatException e) {
+        } catch (WrongFormatException e) {
             this.ui.printError(ERR_WRONG_FORMAT_MESSAGE);
         } catch (EmptyNameFieldException e) {
             this.ui.printError(ERR_NO_NAME);
@@ -76,7 +79,7 @@ public class AddCommand extends Command {
      *
      * @param line input from user.
      * @return Type of task to add if valid input, error otherwise.
-     * @throws WrongFormatException If type of task is invalid.
+     * @throws WrongFormatException If type of task is not recognised.
      */
     public static int getItemType(String line) throws WrongFormatException {
         if (line.equalsIgnoreCase("todo")) {
@@ -166,7 +169,10 @@ public class AddCommand extends Command {
         return components;
     }
 
-    /** Does all necessary input validation for a deadline task.
+    /** Does the following validation checks on input of type Deadline:
+     *  1. Check for the substring "/by"
+     *  2. Checks that name and date of task are not empty or all whitespace
+     *  3. Checks that format of date is correct
      *
      * @param line user input.
      * @throws EmptyNameFieldException if name is not provided or all whitespace.
@@ -240,7 +246,10 @@ public class AddCommand extends Command {
         return components;
     }
 
-    /** Does all necessary validation for an event task.
+    /** Does the following validation checks on input of type Event:
+     *  1. Check for the substring "/at"
+     *  2. Checks that name and date of task are not empty or all whitespace
+     *  3. Checks that format of date is correct
      *
      * @param line user input.
      * @throws EmptyNameFieldException if name is not provided or all whitespace.

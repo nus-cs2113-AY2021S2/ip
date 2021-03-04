@@ -3,7 +3,7 @@ package duke;
 import duke.command.ByeCommand;
 import duke.command.Command;
 
-import java.io.*;
+import java.io.IOException;
 
 public class Duke {
     private static final String FILEPATH = "tasklogs/tasks.txt";
