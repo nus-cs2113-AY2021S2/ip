@@ -62,6 +62,9 @@ public class Parser {
             case ListCommand.COMMAND_WORD:
                 return new ListCommand();
 
+            case FindCommand.COMMAND_WORD:
+                return new FindCommand(arguments.trim());
+
             case DeleteCommand.COMMAND_WORD:
                 return prepareDelete(arguments);
 
@@ -102,10 +105,10 @@ public class Parser {
         final Matcher matcher = DEADLINE_ARGS_FORMAT.matcher(args.trim());
         // Validate arg string format
         if (!matcher.matches()) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTodoCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddDeadlineCommand.MESSAGE_USAGE));
         }
         try {
-            return new AddDeadlineCommand(matcher.group("description"), matcher.group("time"));
+            return new AddDeadlineCommand(matcher.group("description"), matcher.group("time").trim());
         } catch (DukeException e) {
             return new IncorrectCommand(e.getMessage());
         }
@@ -121,7 +124,7 @@ public class Parser {
         final Matcher matcher = EVENT_ARGS_FORMAT.matcher(args.trim());
         // Validate arg string format
         if (!matcher.matches()) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTodoCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE));
         }
         try {
             return new AddEventCommand(matcher.group("description"), matcher.group("venue"));
