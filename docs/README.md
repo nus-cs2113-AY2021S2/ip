@@ -89,6 +89,7 @@ Format: `exit`
 ---
 
 ## Command summary
+
 <table>
     <thead>
         <tr>
