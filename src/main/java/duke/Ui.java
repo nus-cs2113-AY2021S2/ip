@@ -79,9 +79,9 @@ public class Ui {
         System.out.println(name + SET_TO_DONE_MESSAGE);
     }
     /**
-     * Prints message for deletion of task
+     * Prints message for deletion of task.
      *
-     * @param index index of item to delete
+     * @param index index of item to delete.
      */
     public void printDeletedTask(int index, ArrayList<Task> tasks) {
         System.out.println(DELETED_MESSAGE);

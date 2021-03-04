@@ -96,7 +96,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Adds a task of type todo into the list after checking validity of the input.
+     * Adds a task of type Todo into the list after checking validity of the input.
      *
      * @param line user input.
      * @param tasks ArrayList containing all tasks.
@@ -125,7 +125,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Adds a task of type deadline into the list after checking validity of input.
+     * Adds a task of type Deadline into the list after checking validity of input.
      *
      * @param line user input.
      * @param tasks ArrayList of tasks.
@@ -146,7 +146,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Extracts the name and date of the deadline after checking validity of input.
+     * Extracts the name and date of the Deadline after checking validity of input.
      *
      * @param line user input.
      * @return components, a string array with 2 elements: name and date.
@@ -171,9 +171,9 @@ public class AddCommand extends Command {
     }
 
     /** Does the following validation checks on input of type Deadline:
-     *  1. Check for the substring "/by"
-     *  2. Checks that name and date of task are not empty or all whitespace
-     *  3. Checks that format of date is correct
+     *  1. Check for the substring "/by".
+     *  2. Checks that name and date of task are not empty or all whitespace.
+     *  3. Checks that format of date is correct.
      *
      * @param line user input.
      * @throws EmptyNameFieldException if name is not provided or all whitespace.
@@ -202,7 +202,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Adds a task of type event into the list after checking validity of input.
+     * Adds a task of type Event into the list after checking validity of input.
      *
      * @param line user input.
      * @param tasks ArrayList of tasks.
@@ -223,7 +223,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Extracts name and date of task after checking validity of input.
+     * Extracts name and date of Event after checking validity of input.
      *
      * @param line user input.
      * @return components, a String array with 2 elements: name and date.
@@ -248,9 +248,9 @@ public class AddCommand extends Command {
     }
 
     /** Does the following validation checks on input of type Event:
-     *  1. Check for the substring "/at"
-     *  2. Checks that name and date of task are not empty or all whitespace
-     *  3. Checks that format of date is correct
+     *  1. Check for the substring "/at".
+     *  2. Checks that name and date of task are not empty or all whitespace.
+     *  3. Checks that format of date is correct.
      *
      * @param line user input.
      * @throws EmptyNameFieldException if name is not provided or all whitespace.

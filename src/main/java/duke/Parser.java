@@ -32,7 +32,7 @@ public class Parser {
      * Parses the command user wants to execute and creates new instance of said command.
      *
      * @param line user input.
-     * @return new instance of command.
+     * @return new instance of command specified by user.
      */
     public Command parseCommands(String line) {
         try {

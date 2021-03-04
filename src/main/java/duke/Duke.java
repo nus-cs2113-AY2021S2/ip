@@ -16,8 +16,8 @@ public class Duke {
     private Parser parser;
 
     /**
-     * Duke constructor creates instances of storage, ui, tasklist and parser.
-     * It then loads the saved file into the created tasklist.
+     * Duke constructor creates instances of Storage, Ui, TaskList and Parser.
+     * It then loads the saved file into the created TaskList.
      */
     public Duke() {
         storage = new Storage(FILEPATH);
@@ -33,10 +33,10 @@ public class Duke {
 
     /**
      * Runs the application.
-     * 1. Print greeting
-     * 2. Read commands in a loop and break when 'bye' is the command
-     * 3. Prints goodbye message
-     * 4. Save tasks into file
+     * 1. Print greeting.
+     * 2. Read commands in a loop and break when 'bye' is the command.
+     * 3. Prints goodbye message.
+     * 4. Save tasks into file.
      */
     public void run() {
         try {
