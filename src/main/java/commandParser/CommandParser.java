@@ -17,8 +17,11 @@ public class CommandParser {
      * @return return a command object corresponding to user input, return an InvalidCommand object if the command is not recognizable
      */
     public Command parseCommand(String input) {
-        if (input.equals("list")) {
+        if (input.trim().equals("list")) {
             return new ListCommand();
+        }
+        if(input.trim().equals("help")){
+            return new HelpCommand();
         }
         String[] inputParts = input.trim().split("\\s+", 2);
         switch (inputParts[0]) {
@@ -154,7 +157,7 @@ public class CommandParser {
      * @param inputParts
      * @return a AddEventCommand object if the parameter is valid, an InvalidCommand object if the parameter is invalid,
      */
-    private Command prepareAddEvent(String[] inputParts) throws EventFormatException{
+    private Command prepareAddEvent(String[] inputParts){
         try{
             if(inputParts.length < 2){
                 throw new EventFormatException();
