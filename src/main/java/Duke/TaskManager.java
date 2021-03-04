@@ -26,4 +26,11 @@ public class TaskManager {
         tasksList.remove(taskNumber);
         return selectedTask;
     }
+
+    public Task getTask (String taskNo) {
+        int taskNumber = Integer.parseInt(taskNo);
+        taskNumber--;
+        Task selectedTask = tasksList.get(taskNumber);
+        return selectedTask;
+    }
 }
