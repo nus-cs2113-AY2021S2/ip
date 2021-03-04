@@ -11,6 +11,7 @@ import static duke.Parser.commandWord;
 import static duke.Parser.index;
 import static duke.Parser.taskName;
 import static duke.Parser.taskDate;
+import static duke.Parser.keyword;
 
 import static duke.Storage.tasksCount;
 
