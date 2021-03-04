@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import static duke.Storage.tasksCount;
 
 /**
- * TaskList Class: Type for List storing all the tasks
+ * <code>TaskList</code> object represents the list to store all tasks.
  */
 public class TaskList {
 
@@ -26,8 +26,9 @@ public class TaskList {
     }
 
     /**
-     * for adding new tasks into current TaskList
-     * @param currentTask
+     * Adds new tasks into current 'tasks' list using the index.
+     * It also increments the overall variable tasksCount.
+     * @param currentTask <code>TaskList</code> object given by user to be added to the current list.
      */
     public static void add(Tasks currentTask) {
         tasks.add(currentTask);
@@ -35,8 +36,9 @@ public class TaskList {
     }
 
     /**
-     * for removing new tasks from current TaskList
-     * @param index - remove tasks by their position in the TaskList
+     * Removes existing tasks from the current 'tasks' list using the index.
+     * It also decrements the overall variable tasksCount.
+     * @param index position of the task in the 'tasks' list.
      */
     public static void remove(int index) {
         tasks.remove(index);
@@ -44,6 +46,9 @@ public class TaskList {
     }
 
     /**
+     * Returns task with given 'index' position in the 'tasks' list.
+     * Complements methods for 'delete' and 'done' commands.
+     *
      * @return task with 'index' position in the TaskList
      */
     public static Tasks get(int index) {

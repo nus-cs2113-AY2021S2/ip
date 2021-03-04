@@ -5,12 +5,15 @@ import duke.tasksmanager.Events;
 import duke.tasksmanager.Tasks;
 import duke.tasksmanager.ToDos;
 
-import static duke.Parser.*;
 import static duke.Parser.commandWord;
+import static duke.Parser.index;
+import static duke.Parser.taskName;
+import static duke.Parser.taskDate;
+
 import static duke.Storage.tasksCount;
 
 /**
- * Executes User's command
+ * Command Class: Contains methods for executing the User's command.
  */
 public class Command {
 
@@ -19,13 +22,22 @@ public class Command {
     public Command() {
 
     }
-    /**
-     * Executes User's command
-     * through functions included in Command Class
-     * @return isExit - when user says 'bye', isExit = true
-    */
-    public static boolean execute (TaskList tasks, Ui ui, Storage storage) {
 
+    /**
+     * Executes User's command through specific methods included for each command.
+     * Adds task if command is of todo, deadline, or event type.
+     * Removes task if command is delete.
+     * Marks task as done if command is done.
+     * Lists all tasks in current list of tasks if command is list.
+     * Returns isExit to signal for Duke to stop program. Boolean value isExit is set to true when command is 'bye'.
+     *
+     * @param tasks most current list storing user's tasks
+     * @param ui ui object associated with methods that deals with interaction with User
+     * @return isExit
+    */
+    public static boolean execute(TaskList tasks, Ui ui) {
+
+        //adds task to list of tasks:
         if (commandWord.equals("todo")) {
             addToDo(taskName, tasks);
         } else if (commandWord.equals("deadline")) {
@@ -45,6 +57,7 @@ public class Command {
         else if (commandWord.equals("list")) {
             printsList(tasks);
         }
+        //OR: exits program
         else if (commandWord.equals("bye")) {
             ui.saysByeToUser();
             isExit = true;
@@ -58,13 +71,14 @@ public class Command {
     }
 
     /**
-     * Takes in User's input string
-     * Adds todo type task to 'tasks' array
-     * Prints added todo task
+     * Takes in user's input of 'todo' task to
+     * add task to current list of tasks.
+     * Then, it shows the user the added task for success of addition.
      *
-     * @param taskName - user's input for Name
+     * @param taskName Name of the task parsed from user's input
+     * @param tasks Most current list storing all tasks
      */
-    public static void addToDo(String taskName, TaskList tasks) {
+    private static void addToDo(String taskName, TaskList tasks) {
         tasks.add(new ToDos(taskName)); //add task to list
 
         System.out.println("Got it. I've added this task:");
@@ -72,11 +86,13 @@ public class Command {
     }
 
     /**
-     * Takes in User's input string
-     * Adds deadline type task to 'tasks' array
-     * Prints added deadline task
+     * Takes in user's input of 'deadline' task to
+     * add task to current list of tasks.
+     * Then, it shows the user the added task for success of addition.
      *
-     * @param taskName,taskDate - user's input
+     * @param taskName Name of the task parsed from user's input
+     * @param taskDate Date of the task parsed from user's input
+     * @param tasks Most current list storing all tasks
      */
     private static void addDeadline(String taskName, String taskDate, TaskList tasks) {
         tasks.add(new Deadlines(taskName, taskDate)); //add task to list
@@ -86,11 +102,13 @@ public class Command {
     }
 
     /**
-     * Takes in User's input string
-     * Adds event type task to 'tasks' array
-     * Prints added event task
+     * Takes in user's input of 'event' task to
+     * add task to current list of tasks.
+     * Then, it shows the user the added task for success of addition.
      *
-     * @param taskName,taskDate - user's input
+     * @param taskName Name of the task parsed from user's input.
+     * @param taskDate Date of the task parsed from user's input.
+     * @param tasks Most current list storing all tasks.
      */
     private static void addEvent(String taskName, String taskDate, TaskList tasks) {
         tasks.add(new Events(taskName, taskDate)); //add task to list
@@ -100,17 +118,15 @@ public class Command {
     }
 
     /**
-     * Takes in User's input string
-     * Splits into 2 parts, the command 'delete' & TaskNumber
-     * NumberFormatException() - when user does not input a TaskNumber
-     * Obtains Index of Task to be deleted from it's taskNumber
+     * Remove the task from the current list using the index.
+     * Finds task in current list using index parsed from the 'delete' command
+     * and show user the deleted task for success of deletion.
+     * <p>
+     * If user inputs an 'out of range' index, tells user to input index that is within current list.
      *
-     * IndexOutOfBoundsException() - when user inputs an 'out of range' taskNumber
-     * Removes Task from 'tasks' array
-     *
-     * Prints deleted task
-     *
-     * @param index - user's input - format: 'delete taskNumber'
+     * @param index derived from taskNumber, tells position of task in current list.
+     * @param tasks Most current list storing all tasks.
+     * @throws IndexOutOfBoundsException if user inputs an 'out of range' taskNumber.
      */
     private static void deleteAndPrintTask(int index, TaskList tasks) {
         try {
@@ -127,19 +143,17 @@ public class Command {
     }
 
     /**
-     * Takes in User's input string
-     * Splits into 2 parts, the command 'done' & TaskNumber
-     * NumberFormatException() - when user does not input a TaskNumber
-     * Obtains Index of Task to be deleted from it's taskNumber
+     * Mark the task (as 'done') from the current list using the index.
+     * Finds task in current list using index parsed from the 'done' command
+     * and show user the marked task for success of marking task.
+     * <p>
+     * If user inputs an 'out of range' index, tells user to input index that is within current list.
      *
-     * IndexOutOfBoundsException() - when user inputs an 'out of range' taskNumber
-     * Marks Task as done (in 'tasks' array)
-     *
-     * Prints marked task
-     *
-     * @param index - user's input string - format: 'delete taskNumber'
+     * @param index derived from taskNumber, tells position of task in current list.
+     * @param tasks Most current list storing all tasks.
+     * @throws IndexOutOfBoundsException if user inputs an 'out of range' taskNumber.
      */
-    public static void markAndPrintsTaskAsDone(int index, TaskList tasks) {
+    private static void markAndPrintsTaskAsDone(int index, TaskList tasks) {
         try {
             Tasks taskDone = tasks.get(index); //throws IndexOutOfBoundsException() if taskNumber out of bounds
             taskDone.markAsDone(); //mark task given by current command as 'done'
@@ -154,13 +168,14 @@ public class Command {
     }
 
     /**
-     * Prints out the taskType, status, taskName and taskDate of the task added by the user
-     * and prints the current total number of tasks in the user's list
-     * Add to total taskCount (since new task is added)
+     * Prints out the taskType, status, taskName and taskDate of the task added by the user.
+     * It also prints the current total number of tasks in the user's list.
+     *
+     * @param tasks Most current list storing all tasks.
      */
-    public static void printAddedTask(TaskList tasks) {
+    private static void printAddedTask(TaskList tasks) {
         System.out.println("  " + tasks.get(tasksCount-1).convertToTaskOutputString()); //prints task added
-        //prints current total number of tasks (in the list of tasks):don
+        //prints current total number of tasks:
         System.out.print("Now you have " + tasksCount + " task");
         if (tasksCount > 1) {
             System.out.print("s");
@@ -169,8 +184,10 @@ public class Command {
     }
 
     /**
-     * Prints all tasks in current List 'tasks'
-     * */
+     * Prints all tasks in the current list.
+     *
+     * @param tasks Most current list storing all tasks.
+     */
     private static void printsList(TaskList tasks) {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < tasksCount; i++) {

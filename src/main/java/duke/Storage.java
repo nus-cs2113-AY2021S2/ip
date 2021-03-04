@@ -17,7 +17,8 @@ import java.util.Scanner;
 import static duke.TaskList.tasks;
 
 /**
- * Storage Class: For handling saving into and loading of tasks from Storage
+ * <code>Storage</code> object represents a file (embedded in directory) in the filepath given by the User.
+ * Storage objects are associated with methods that handles the saving into and loading of tasks from storage object.
  */
 public class Storage {
 
@@ -34,10 +35,12 @@ public class Storage {
 
     //Methods to Save 'DukeList.txt':
     /**
-     * If file exists, loads older data from file into ArrayList 'tasks'
-     * Else, creates new file
-     * In both cases, file used to store new data in this iteration of Duke Main
-     * @throws IOException
+     * If file with given filepath (by user) exists, it loads older data from that file into the 'tasks' list.
+     * Else, creates a new file (in a new directory) with the given filepath.
+     * In both cases, the file which exists or may have been created
+     * is used to store the tasks, including older tasks.
+     *
+     * @throws IOException if the creation of new non-existent file was not successful.
      */
     public static ArrayList<Tasks> loadPrevListIntoNewList() throws IOException {
         try {
@@ -78,8 +81,8 @@ public class Storage {
     }
 
     /**
-     * Re-assigns all the tasks in the updated 'tasks' list
-     * to the given filepath for storage
+     * Clears the file in the given filepath and
+     * re-assigns all the tasks in the updated 'tasks' list to the given filepath.
      */
     public static void overwriteDukeListFile() {
         //write to file:
@@ -105,8 +108,9 @@ public class Storage {
     }
 
     /**
-     * for complementing overwriteDukeListFile() function
-     * @param textToAdd
+     * For complementing overwriteDukeListFile() function, it adds to the file in the given filepath.
+     *
+     * @param textToAdd text that is formatted and contains information about a task in the task list
      * @throws IOException
      */
     public static void appendToDukeListFile(String textToAdd) throws IOException {
