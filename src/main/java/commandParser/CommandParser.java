@@ -19,11 +19,12 @@ public class CommandParser {
      * @return return a command object corresponding to user input, return an InvalidCommand object if the command is not recognizable
      */
     public Command parseCommand(String input) {
-        if (input.trim().equals(ListCommand.COMMAND_WORD)) {
+        if (input.trim().equalsIgnoreCase(ListCommand.COMMAND_WORD)) {
             return new ListCommand();
-        }
-        if(input.trim().equals(HelpCommand.COMMAND_WORD)){
+        } else if(input.trim().equalsIgnoreCase(HelpCommand.COMMAND_WORD)){
             return new HelpCommand();
+        } else if(input.trim().equalsIgnoreCase(ClearCommand.COMMAND_WORD)){
+            return new ClearCommand();
         }
         String[] inputParts = input.trim().split("\\s+", 2);
         switch (inputParts[0].toLowerCase(Locale.ROOT)) {

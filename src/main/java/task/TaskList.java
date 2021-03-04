@@ -55,4 +55,8 @@ public class TaskList {
         tasks.remove(index);
     }
 
+    public void clearTasks(){
+        tasks.clear();
+    }
+
 }
