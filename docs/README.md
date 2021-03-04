@@ -9,7 +9,7 @@ Duke is a Personal Assistant Chatbot that helps you manage your various tasks.
     * [`deadline` - Add a Deadline](#deadline---add-a-deadline)
     * [`event` - Add an Event](#event---add-an-event)
     * [`list` - Display all tasks](#list---display-all-tasks)
-    * [`done` - Mark a task as done](#done---mark-a-task-as-done-)
+    * [`done` - Mark a task as done](#done---mark-a-task-as-done)
     * [`delete` - ~~Delete~~ a task](#delete---delete-a-task)
     * [`find` - Find tasks](#find---find-tasks)
     * [`bye` - Exit Duke](#bye---exit-duke)
@@ -17,7 +17,7 @@ Duke is a Personal Assistant Chatbot that helps you manage your various tasks.
 
 ## Quick start
 1. Ensure you have Java `11` installed on your computer.
-1. Download the latest `iP.jar` from [here]()
+1. Download the latest `iP.jar` from [here](https://github.com/vvvvh123/ip/releases/tag/v0.2)
 1. Open a command window in the folder containing the `.jar` file.
 1. Run the command `java -jar {filename}.jar` <br> If you haven't changed the filename, run the command `java -jar iP.jar`
 
