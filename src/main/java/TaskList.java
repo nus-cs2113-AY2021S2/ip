@@ -19,6 +19,12 @@ public class TaskList {
         }
         Duke.printDash();
     }
+    public void filterList(String filterString) {
+        Duke.printDash();
+        tasks.stream()
+                .filter((s) -> s.getDescription().contains(filterString))
+                .forEach(s -> System.out.println(s.toString()));
+    }
 
     public void addTasks(String description) {
         Duke.printDash();
