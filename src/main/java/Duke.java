@@ -81,6 +81,14 @@ public class Duke {
                 System.out.println(bye);
                 notBye = false;
         }
+        else if(userInput.startsWith("delete")){
+            int deleteIndex = Integer.parseInt(userInput.split(" ")[1]) - 1;
+            Task removedTask = tasks.remove(deleteIndex);
+            System.out.println("-----------------------------");
+            System.out.println("Noted. I've removed this task: \n" +
+                    removedTask.toString() + "\n" +
+                    "Now you have " + tasks.size() + " in the list.");
+        }
         else{
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
