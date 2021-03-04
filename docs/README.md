@@ -9,7 +9,7 @@ Duke is a Personal Assistant Chatbot that helps you manage your various tasks.
     * [`deadline` - Add a Deadline](#deadline---add-a-deadline)
     * [`event` - Add an Event](#event---add-an-event)
     * [`list` - Display all tasks](#list---display-all-tasks)
-    * [`done` - Mark a task as done ✓](#done---mark-a-task-as-done-)
+    * [`done` - Mark a task as done](#done---mark-a-task-as-done-)
     * [`delete` - ~~Delete~~ a task](#delete---delete-a-task)
     * [`find` - Find tasks](#find---find-tasks)
     * [`bye` - Exit Duke](#bye---exit-duke)
@@ -108,7 +108,7 @@ Format: `list`
 Expected outcome:  
 ![](list.jpg)
 
-### `done` - Mark a task as done ✓
+### `done` - Mark a task as done
 
 Mark a task at a specified index, in your task list, as done
 
