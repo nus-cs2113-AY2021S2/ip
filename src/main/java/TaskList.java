@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -6,7 +7,9 @@ public class TaskList {
         this.tasks = tasks;
     }
 
-    // print list as a checklist when command=list
+    /**
+     * print list as a checklist when command=list
+     */
     public void printList() {
         Duke.printDash();
         if (tasks.size() != 0) {
@@ -20,6 +23,22 @@ public class TaskList {
         Duke.printDash();
     }
 
+    /**
+     * finds for string in task Array List
+     *
+     * @param filterString
+     */
+    public void filterList(String filterString) {
+        Duke.printDash();
+        tasks.stream()
+                .filter((s) -> s.getDescription().contains(filterString))
+                .forEach(s -> System.out.println(s.toString()));
+    }
+
+    /**
+     * adds tasks into Array List
+     * @param description
+     */
     public void addTasks(String description) {
         Duke.printDash();
         if (description.contains("todo")) {
@@ -60,7 +79,11 @@ public class TaskList {
         Duke.printDash();
     }
 
-    // remove tasks from list
+    /**
+     * remove tasks from Array List
+     *
+     * @param command
+     */
     public void deleteTasks(String command) {
         command = command.replace("delete", " ");
         command = command.strip();
@@ -73,7 +96,11 @@ public class TaskList {
         System.out.println("\tNow you have " + tasks.size() + " tasks in the list");
     }
 
-    // update list when tasks are done
+    /**
+     * update list when tasks are done
+     *
+     * @param command
+     */
     public void taskCompleted(String command) {
         int count;
         // remove done from string

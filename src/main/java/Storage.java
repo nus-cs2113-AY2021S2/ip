@@ -8,10 +8,16 @@ import java.util.Scanner;
 public class Storage {
     protected String filepath;
     protected ArrayList<Task> tasks = new ArrayList<>();
+
     public Storage(String filepath) {
         this.filepath = filepath;
     }
 
+    /**
+     * creates new file
+     *
+     * @return tasks array
+     */
     public ArrayList<Task> createNewFile() {
 
         String pathOfFile = new File("").getAbsolutePath();
@@ -33,6 +39,11 @@ public class Storage {
         return this.filepath;
     }
 
+    /**
+     *
+     * @return
+     * @throws FileNotFoundException
+     */
     public ArrayList<Task> uploadTasks() throws FileNotFoundException {
         File f = new File(getFilepath());
         Scanner s = new Scanner(f);
@@ -52,6 +63,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * saves tasks into file
+     *
+     * @throws IOException
+     */
     public void saveTasks() throws IOException {
         FileWriter fw = new FileWriter(getFilepath());
         for (Task task : tasks) {
@@ -61,6 +77,9 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * exits program
+     */
     public void exitProgram() {
         Duke.printDash();
         System.out.println("Bye. Hope to see you again soon!");
@@ -73,3 +92,4 @@ public class Storage {
     }
 
 }
+

@@ -29,4 +29,7 @@ public class Task {
         return "";
     }
 
+    public String getDescription() {
+        return this.description;
+    }
 }
