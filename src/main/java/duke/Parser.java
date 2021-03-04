@@ -6,6 +6,9 @@ import duke.taskexceptions.NoTaskNameException;
 import duke.taskexceptions.TaskDateFormatException;
 import duke.taskexceptions.KeywordFormatException;
 
+/**
+ * Command Class: Contains methods for parsing and making sense of the User's command.
+ */
 public class Parser {
 
     public static String commandWord;
@@ -21,6 +24,19 @@ public class Parser {
 
     }
 
+    /**
+     * Parse each command differently based on the format of the command.
+     * For all commands, parses into commandWord to help identify the type of command during execution.
+     * Parses commands into taskName, taskDate or index according to the format of the command
+     * for execution.
+     *
+     * @param input entire input of user.
+     * @throws NoTaskNameException if user does not input the taskName.
+     * @throws NoTaskDateException if user does not input the taskDate.
+     * @throws EmptyTaskDateException if user does not input the taskDate.
+     * @throws TaskDateFormatException if user input the portion of command after taskName incorrectly.
+     * @throws NumberFormatException if user does not input a TaskNumber(index).
+     */
     public static void parse (String input) throws NoTaskNameException, NoTaskDateException, EmptyTaskDateException, TaskDateFormatException, NumberFormatException, KeywordFormatException {
 
         if (input.startsWith("todo")) {
@@ -34,17 +50,14 @@ public class Parser {
             commandWord = "event";
             parseAddEventCommand(input);
         }
-        //OR: remove task from list of tasks
         else if (input.startsWith("delete")) {
             commandWord = "delete";
             parseDeleteCommand(input);
         }
-        //OR: mark current task as 'done' & outputs the taskType,taskStatus,taskName(and taskDate):
         else if (input.startsWith("done")) {
             commandWord = "done";
             parseDoneCommand(input);
         }
-        //OR: lists all the user's current tasks in the format of taskType,taskStatus,taskName(and taskDate):
         else if (input.startsWith("list")) {
             commandWord = "list";
         }
@@ -55,28 +68,58 @@ public class Parser {
          else if (input.startsWith("bye")) {
             commandWord = "bye";
         }
-        //OR: deal with invalid command
         else {
             commandWord = "random";
         };
     }
 
+    /**
+     * Takes in User's input string and splits into 2 parts, the 'todo' command & the taskName.
+     *
+     * @param input entire input string of the user, made of taskType('todo') + taskName.
+     * @throws NoTaskNameException if user does not input a description of the task.
+     */
     private static void parseAddToDoCommand (String input) throws NoTaskNameException {
         separateTypeOfTaskAndTaskInputString(input);
         taskName = taskInputString;
     }
 
+    /**
+     * Takes in User's input string and splits into 3 parts, the 'deadline' command, the taskName & the taskDate.
+     *
+     * @param input entire input string of the user, made of taskType('deadline') + taskName + taskDate.
+     * @throws NoTaskNameException if user does not input the taskName.
+     * @throws NoTaskDateException if user does not input the taskDate.
+     * @throws EmptyTaskDateException if user does not input the taskDate.
+     * @throws TaskDateFormatException if user input the portion of command after taskName incorrectly.
+     */
     private static void parseAddDeadlineCommand(String input) throws NoTaskNameException, NoTaskDateException, EmptyTaskDateException, TaskDateFormatException {
         separateTypeOfTaskAndTaskInputString(input);
         splitTaskNameAndDate(taskInputString);
     }
 
+    /**
+     * Takes in User's input string and splits into 3 parts, the 'event' command, the taskName & the taskDate.
+     *
+     * @param input entire input string of the user, made of taskType('event') + taskName + taskDate.
+     * @throws NoTaskNameException if user does not input the taskName.
+     * @throws NoTaskDateException if user does not input the taskDate.
+     * @throws EmptyTaskDateException if user does not input the taskDate.
+     * @throws TaskDateFormatException if user input the portion of command after taskName incorrectly.
+     */
     private static void parseAddEventCommand(String input) throws NoTaskNameException, NoTaskDateException, EmptyTaskDateException, TaskDateFormatException {
         separateTypeOfTaskAndTaskInputString(input);
         splitTaskNameAndDate(taskInputString);
 
     }
 
+    /**
+     * Takes in User's input string and splits into 2 parts, the 'delete' command & the taskNumber.
+     * Index is derived from taskNumber, which tells the position of task in current list.
+     *
+     * @param input entire input string of the user, made up of 'delete' + taskNumber.
+     * @throws NumberFormatException if user does not input a TaskNumber(index).
+     */
     private static void parseDeleteCommand(String input) throws NumberFormatException {
         String[] commandAndTaskNumber = input.split(" ");
         if (commandAndTaskNumber.length < 2) {
@@ -85,6 +128,13 @@ public class Parser {
         index = Integer.parseInt(commandAndTaskNumber[1]) - 1; //obtain index from task number(which starts from 1)
     }
 
+    /**
+     * Takes in User's input string and splits into 2 parts, the 'done' command & the taskNumber.
+     * Index is derived from taskNumber, which tells the position of task in current list.
+     *
+     * @param input entire input string of the user, made up of 'done' + taskNumber.
+     * @throws NumberFormatException if user does not input a TaskNumber(index).
+     */
     private static void parseDoneCommand(String input) throws NumberFormatException {
         String[] commandAndTaskNumber = input.split(" ");
         if (commandAndTaskNumber.length < 2) {
@@ -103,13 +153,14 @@ public class Parser {
     }
 
     /**
+     * Complement all 'todo','deadline' and 'event' commands.
      * Removes taskType from user's entire input string
-     * Stores remaining string (with taskName and taskDate combined) in static variable taskInputString
+     * and stores remaining string (with taskName and taskDate combined) in static variable taskInputString.
      *
-     * throws exception if user string does not contain proper taskName (taskName, taskDate etc.)
-     * @param input - entire input string of the user, made of taskType + taskName + taskDate
+     * @param input entire input string of the user, made of taskType + taskName + taskDate.
+     * @throws NoTaskNameException if user does not input the taskName.
      */
-    public static void separateTypeOfTaskAndTaskInputString(String input) throws NoTaskNameException {
+    private static void separateTypeOfTaskAndTaskInputString(String input) throws NoTaskNameException {
         //find position between taskType and rest of task description:
         int taskInputStringPosition = input.indexOf(" ") + 1;
         taskInputString = input.substring(taskInputStringPosition);
@@ -126,19 +177,16 @@ public class Parser {
 
     /**
      * Takes in the remaining 'taskInputString' of the user's input
-     * Splits it into two parts, then stores into TaskName
-     * and TaskDateString of the task
+     * and splits it into two parts, the taskName and taskDate.
      *
-     * Splits TaskDateString into 2 parts, complement word "by:" or "at:" & taskDate (further split by " ")
+     * taskDate is derived from taskDateString which includes the complement word 'at' or 'by'.
      *
-     * TaskDateFormatException() - TaskDateString is written in an incorrect format
-     * NoTaskDateException() - no date after '/at' or '/by'
-     * EmptyTaskDateException() - empty date after '/at' or '/by'
-     *
-     * End Results: TaskName and TaskDate
-     * @param taskInput - essentially taskInputString, which does not include taskType
+     * @param taskInput - essentially taskInputString, which does not include taskType.
+     * @throws NoTaskDateException if user does not input the taskDate.
+     * @throws EmptyTaskDateException if user does not input the taskDate.
+     * @throws TaskDateFormatException if user input the portion of command after taskName incorrectly.
      */
-    public static void splitTaskNameAndDate(String taskInput) throws TaskDateFormatException, NoTaskDateException, EmptyTaskDateException {
+    private static void splitTaskNameAndDate(String taskInput) throws NoTaskDateException, EmptyTaskDateException, TaskDateFormatException {
         int beforeDatePosition = taskInput.indexOf("/");
         if (beforeDatePosition == -1) {
             throw new TaskDateFormatException(); //if no '/', asks user to change TaskDateString format
