@@ -7,7 +7,7 @@ public class RangeError extends DukeException {
      */
     public RangeError() {
 
-        this.errorMessage = "\u2639 OOPS!! The number you have provided is out of range.";
+        this.errorMessage = "OOPS!! The number you have provided is out of range.";
 
     }
 

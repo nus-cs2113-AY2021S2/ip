@@ -28,10 +28,10 @@ public class Event extends Task {
     public String toString() {
         String outputString = "[E]";
         if (isDone) {
-            outputString += "[\u2713]";
+            outputString += "[Y]";
         }
         else {
-            outputString += "[\u2715]";
+            outputString += "[N]";
         }
         DateTimeFormatter formatObject = DateTimeFormatter.ofPattern("MMM dd yyyy");
         String formattedStartTime = eventDate.format(formatObject);

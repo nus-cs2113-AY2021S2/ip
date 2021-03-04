@@ -7,7 +7,7 @@ public class DoneInputError extends DukeException {
      */
     public DoneInputError() {
 
-        this.errorMessage = "\u2639 OOPS!! \"done\" command must be followed by ONLY ONE integer.";
+        this.errorMessage = "OOPS!! \"done\" command must be followed by ONLY ONE integer.";
 
     }
 

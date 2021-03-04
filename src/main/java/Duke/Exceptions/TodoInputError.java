@@ -7,7 +7,7 @@ public class TodoInputError extends DukeException {
      */
     public TodoInputError() {
 
-        this.errorMessage = "\u2639 OOPS!! todo command must be in the format: \ntodo xxx";
+        this.errorMessage = "OOPS!! todo command must be in the format: \ntodo xxx";
 
     }
 

@@ -7,7 +7,7 @@ public class FindInputError extends DukeException {
      */
     public FindInputError() {
 
-        this.errorMessage = "\u2639 OOPS!! \"follow\" command must be followed by ONLY ONE \nkeyword for searching";
+        this.errorMessage = "OOPS!! \"follow\" command must be followed by ONLY ONE \nkeyword for searching";
 
     }
 

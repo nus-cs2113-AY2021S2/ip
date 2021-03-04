@@ -7,7 +7,7 @@ public class DeleteInputError extends DukeException {
      */
     public DeleteInputError() {
 
-        this.errorMessage = "\u2639 OOPS!! \"delete\" command must be followed by ONLY ONE integer.";
+        this.errorMessage = "OOPS!! \"delete\" command must be followed by ONLY ONE integer.";
 
     }
 

@@ -20,10 +20,10 @@ public class Todo extends Task {
     public String toString() {
         String outputString = "[T]";
         if (isDone) {
-            outputString += "[\u2713]";
+            outputString += "[Y]";
         }
         else {
-            outputString += "[\u2715]";
+            outputString += "[N]";
         }
         outputString = outputString + " " + name;
         return outputString;
