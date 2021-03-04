@@ -55,7 +55,7 @@ public class Parser {
                     ui.printNoSuchTask();
                 } else {
                     tasks.get(taskIndex).markAsDone();
-                    ui.printTaskAsDone(tasks,taskIndex);
+                    ui.printTaskAsDone(tasks, taskIndex);
                 }
             } catch (NumberFormatException e) {
                 ui.printErrorMessage();
@@ -76,6 +76,11 @@ public class Parser {
                 ui.printErrorMessage();
             }
 
+
+        } else if (input.contains("find")) {
+            int dividerPosition = input.indexOf(" ");
+            String keyWords = input.substring(dividerPosition + 1);
+            tasks.getFoundTask(keyWords, ui);
 
         } else {
             ui.printErrorMessage();

@@ -53,6 +53,12 @@ public class Ui {
         System.out.print(line);
     }
 
+    public void printFoundList(ArrayList<Task> foundList) {
+        System.out.print(line);
+        System.out.println("Here are the matching tasks in your list: ");
+        printList(foundList);
+    }
+
 
 
     public void printNoSuchTask() {
