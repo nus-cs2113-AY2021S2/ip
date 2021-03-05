@@ -4,7 +4,7 @@ As a task manager, the functionality of the program includes adding, deleting an
 a task(either a todo, deadline or event) to the list.
 
 ## How to use this User Guide
-The User Guide has two main sections. The first section "features" lists the features available while the second section 
+The User Guide has two main sections as well as a "Misc" section. The first section "features" lists the features available while the second section 
 "Usage" explains how the command can be used. The sample usage and expected output are included as well in the usage section
 for the purpose of clarity. The last section "Misc" shows the "welcome screen" generated when the program is opened and the
 "end screen" generated when the program is terminated.
