@@ -82,7 +82,6 @@ Expected Output:
 ```
  Task added! ^_^
  5: [E] [-] event CNY dinner (at: Feb 11 2021)
-
 ```
 
 Expected output when date is not in the right format:
@@ -101,7 +100,6 @@ Expected Output:
 ```
  Task added! ^_^
  5: [T] [-] submit UG
-
 ```
 
 
