@@ -1,11 +1,11 @@
-package parser;
+package duke.parser;
 
-import exceptions.DukeException;
-import preparetask.PrepareDeadline;
-import preparetask.PrepareEvent;
-import preparetask.PrepareTodo;
-import tasklist.TaskList;
-import ui.TextUi;
+import duke.exception.DukeException;
+import duke.preparetask.PrepareDeadline;
+import duke.preparetask.PrepareEvent;
+import duke.preparetask.PrepareTodo;
+import duke.tasklist.TaskList;
+import duke.ui.TextUi;
 
 /**
  * Parses user input into command for task objection creation.

@@ -1,8 +1,7 @@
-package tasklist;
+package duke.tasklist;
 
-import exceptions.DukeException;
-import storage.Storage;
-import ui.TextUi;
+import duke.exception.DukeException;
+import duke.storage.Storage;
 
 /**
  * Contains the list of operations such as list,done,delete and find
@@ -31,8 +30,8 @@ public class TaskList extends Storage {
      * Set the indexed task as done
      *
      * @param userInput contains the full user input
-     * @throws NullPointerException if array is empty. e.g, over the size of the current array
-     * @throws ArrayIndexOutOfBoundsException if index is out of bound e.g, 0.
+     * @throws NullPointerException if index is 0.
+     * @throws ArrayIndexOutOfBoundsException if array is empty. e.g, over the size of the current array
      */
     public static void done(String userInput) {
         try {
@@ -43,8 +42,10 @@ public class TaskList extends Storage {
             tasks[index - 1].printStatus();
             text = taskSentences.get(index - 1);
             text = text.replace("false", "true");
-            taskSentences.set(index - 1, text);                              //rewrite and update the status
-            Storage.writeFile();                                             //update file
+            //rewrite and update the status
+            taskSentences.set(index - 1, text);
+            //update file
+            Storage.writeFile();
         } catch (ArrayIndexOutOfBoundsException | NullPointerException e) {
             System.out.println("Index out of bound, please re-enter.");
         }
@@ -69,7 +70,8 @@ public class TaskList extends Storage {
             taskSentences.remove(index - 1);
             taskCount = taskCount - 1;
             System.out.println("Now you have " + taskArrayList.size() + " tasks in the list.");
-            Storage.writeFile();                                    //update file after deleting
+            //update file after deleting
+            Storage.writeFile();
         } catch (DukeException e) {
             System.out.println("Index out of bound, please re-enter.");
         }
@@ -87,17 +89,20 @@ public class TaskList extends Storage {
         int rememberIndex = -1;
         boolean hasFound = false;
 
-        for (int i = 0; i < taskArrayList.size(); i++) {        //first loop to check if there is at least 1 match
+        //first loop to check if there is at least 1 match
+        for (int i = 0; i < taskArrayList.size(); i++) {
             if (taskArrayList.get(i).getName().contains(keyword)) {
                 rememberIndex = i;
                 hasFound = true;
-                break;                                          //break out of loop after finding 1 match
+                //break out of loop after finding 1 match
+                break;
             }
         }
 
+        //loop again starting from the 1st match
         if (hasFound) {
             System.out.println("Here are the matching tasks in your list:");
-            for (int i = rememberIndex; i < taskArrayList.size(); i++) {    //loop again starting from the 1st match
+            for (int i = rememberIndex; i < taskArrayList.size(); i++) {
                 if (taskArrayList.get(i).getName().contains(keyword)) {
                     System.out.print(index++ + ".");
                     taskArrayList.get(i).printStatus();

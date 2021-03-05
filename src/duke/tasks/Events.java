@@ -1,4 +1,4 @@
-package tasks;
+package duke.tasks;
 
 /**
  * Represents a event Task
@@ -9,11 +9,11 @@ public class Events extends Task {
 
     /**
      * @param task contains the task
-     * @param dateAndTime contains the date and time
+     * @param dateTimeLocation contains the date/time/location
      */
-    public Events(String task, String dateAndTime) {
+    public Events(String task, String dateTimeLocation) {
         super(task);
-        this.at = dateAndTime;
+        this.at = dateTimeLocation;
     }
 
     /** Prints the task with its current status */

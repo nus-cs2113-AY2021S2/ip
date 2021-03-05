@@ -1,8 +1,8 @@
-package tasks;
+package duke.tasks;
 
 /**
  * Represents a Task
- * This is the primary class to other task classes
+ * This is the primary class to other subtask classes
  */
 public class Task {
 
@@ -15,18 +15,24 @@ public class Task {
         setDone(false);
     }
 
-    /** set the task done to true */
+    /**
+     * @param isDone contains the current task's status
+     * set the current task done status to true
+     */
     public void setDone(boolean isDone) {
+
         this.isDone = isDone;
     }
 
     /** @return task name */
     public String getName() {
+
         return this.taskName;
     }
 
     /** @return done status */
     public boolean getDone() {
+
         return isDone;
     }
 

@@ -1,17 +1,18 @@
-package storage;
+package duke.storage;
 
-import ui.TextUi;
-import tasks.DeadLines;
-import tasks.Events;
-import tasks.Task;
-import tasks.ToDos;
+import duke.ui.TextUi;
+import duke.tasks.DeadLines;
+import duke.tasks.Events;
+import duke.tasks.Task;
+import duke.tasks.ToDos;
 
 import java.io.*;
 import java.util.ArrayList;
 
 
 /**
- * Contains functions that stores the task data by reading and writing the task data
+ * Contains functions that stores the task data by writing
+ * and reading to and from the data file
  */
 public class Storage {
 

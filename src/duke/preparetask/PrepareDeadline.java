@@ -1,8 +1,8 @@
-package preparetask;
+package duke.preparetask;
 
-import exceptions.DukeException;
-import storage.Storage;
-import tasks.DeadLines;
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.tasks.DeadLines;
 
 /**
  * Parses argument in the context of the add event task command.

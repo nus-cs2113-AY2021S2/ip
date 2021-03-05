@@ -1,8 +1,8 @@
-package preparetask;
+package duke.preparetask;
 
-import exceptions.DukeException;
-import storage.Storage;
-import tasks.ToDos;
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.tasks.ToDos;
 
 /**
  * Parses argument in the context of the add todo task command.
@@ -13,7 +13,6 @@ public class PrepareTodo extends Storage {
 
     /**
      * @param userInput contains full command args string
-     *
      * @throws DukeException if todo is empty
      */
     public PrepareTodo(String userInput) {

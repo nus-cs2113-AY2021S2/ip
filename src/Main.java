@@ -1,8 +1,6 @@
-package duke;
-
-import storage.Storage;
-import ui.TextUi;
-import parser.Parser;
+import duke.storage.Storage;
+import duke.ui.TextUi;
+import duke.parser.Parser;
 
 
 /**
@@ -26,7 +24,10 @@ public class Main {
         exit();
     }
 
-    /** Sets up the required objects, loads up the data from the storage file, and prints the welcome message. */
+    /**
+     * Sets up the required objects, loads up the data from the storage file
+     *  and prints the welcome message.
+     */
     private void start() {
         ui = new TextUi();
         ui.showWelcomeMessage();
@@ -34,7 +35,7 @@ public class Main {
         storage.readFile();
     }
 
-    /** Reads the user command and executes it, until the user issues the bye command. */
+    /** Reads the user command and executes it until the user issues the "bye" command. */
     private void runCommandLoopUntilByeCommand() {
 
         while (true) {

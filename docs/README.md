@@ -21,7 +21,7 @@ their data will be retrieved from this text file and shown to the user upon requ
     - [Delete a task: `delete`](#delete-a-task-delete)
     - [Exit The Program: `bye`](#exit-the-program-exit)
 * [Errors](#errors)    
-    -[Command errors](#command-errors)
+    -[Command errors](#command-errors)<br/>
     -[Message errors](#file-errors)   
 * [Command summary](#command-summary)
 * [FAQ](#faq)
@@ -192,7 +192,8 @@ Answer 1 - Yes, simply locate the `tasklist.txt` file in the home directory and 
 
 Question 2 - If the system crashes mid-way will the new tasks that are added be lost?
 <br/>
-Answer 2 - No, The list of tasks will auto-save upon every entry, even when the system crashes midway all data will be saved and retrieve again when the application reboots.
+Answer 2 - No, The list of tasks will auto-save upon every entry, even when the system crashes midway all data will be saved and retrieve again 
+           when the application reboots.
 
 
 Question 3 - Can I add and edit from the text file directly?

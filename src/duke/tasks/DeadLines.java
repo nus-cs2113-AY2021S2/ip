@@ -1,4 +1,4 @@
-package tasks;
+package duke.tasks;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -12,9 +12,13 @@ public class DeadLines extends Task {
 
     private final String dateAndTime;
 
-    public DeadLines(String task, String by) {
+    /**
+     * @param task contains the task
+     * @param deadline contains the date/time
+     */
+    public DeadLines(String task, String deadline) {
         super(task);
-        this.dateAndTime = by;
+        this.dateAndTime = deadline;
     }
 
     /**
