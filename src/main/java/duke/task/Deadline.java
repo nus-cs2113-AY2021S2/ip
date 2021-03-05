@@ -4,11 +4,11 @@ import duke.task.dateTime.DateTime;
 
 import java.time.LocalDate;
 
+
 /**
- * Represents a deadline inherited from {@code Task}<br>
- * A {@code Deadline} object consists of two parameters:<br>
- * 1. {@code taskName}: name of the Deadline object<br>
- * 2. {@code dueDay}: date and time [optional] of the due day
+ * Represents a {@code Deadline} object, which is inherited from {@code Task}. An {@code Deadline} object is initialized
+ * with a task name and a date. Also, It provides methods for returning the stored date and a string of information of
+ * the object in displaying/saving formats.
  */
 public class Deadline extends Task {
 
@@ -17,8 +17,8 @@ public class Deadline extends Task {
     private final DateTime dueDay;
 
     /**
-     * Constructor of Deadline<br>
-     * Initializes the Deadline object with the given parameters
+     * Constructor of {@code Deadline}<br>
+     * Initializes the {@code Deadline} object with the given parameters.
      *
      * @param taskName name of the Deadline Object
      * @param dueDay   deadline of the Deadline Object
@@ -29,9 +29,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns the date of deadline of the Deadline object
+     * Returns the stored date of a {@code Deadline} object.
      *
-     * @return date of the Deadline object
+     * @return date of the {@code Deadline} object
      */
     @Override
     public LocalDate getDate() {
@@ -39,19 +39,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns the task type of the Deadline object, i.e. "D"
+     * Returns a string of all information about the {@code Deadline} object for displaying in Command-Line Interface.
      *
-     * @return Task type of the Deadline object
-     */
-    @Override
-    public String getTaskType() {
-        return TASK_TYPE;
-    }
-
-    /**
-     * Returns a string of all information about the Deadline object for displaying in Command-Line Interface
-     *
-     * @return A string of information about the Deadline object for CLI display
+     * @return A string of information about the {@code Deadline} object for CLI display
      */
     @Override
     public String toString() {
@@ -59,9 +49,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns a string of all information about the Deadline object for storage in text file
+     * Returns a string of all information about the {@code Deadline} object for storage in text file.
      *
-     * @return A string of information about the Deadline object for saving
+     * @return A string of information about the {@code Deadline} object for saving
      */
     @Override
     public String toSave() {

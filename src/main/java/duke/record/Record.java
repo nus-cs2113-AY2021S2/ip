@@ -1,7 +1,7 @@
 package duke.record;
 
 import duke.Duke;
-import duke.input.InputData;
+import duke.input.InputDataHandler;
 import duke.input.InputType;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -18,8 +18,9 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 /**
- * Represents a record for storing user's tasks. A {@code Record} object retrieves/saves user's tasks from/to a text
- * file in the local file system as well as stores the tasks during runtime.
+ * Represents a {@code Record} object for managing and storing user's tasks. A {@code Record} object retrieves user's
+ * tasks from a text file (Record.txt) in the local file system. It also manages (adds/deletes) tasks during runtime
+ * via CLI. Any updates of user's tasks will be synchronized to the local text file.
  */
 public class Record {
     private final ArrayList<Task> records = new ArrayList<>();
@@ -29,7 +30,7 @@ public class Record {
      * Initializes the Record object by retrieving user's tasks from the Record.txt (if any). If Record.txt is found,
      * the program will print "Record found" and the tasks stored inside the text file will be retrieved and
      * store to the ArrayList {@code records}. Otherwise, the program will print "No record found" and the ArrayList
-     * {@code records} remains an empty list.
+     * {@code records} remains empty.
      */
     public Record() {
         String line = "-----------------------------";
@@ -41,12 +42,11 @@ public class Record {
 
     /**
      * Adds a new record to the {@code Record} object. If the record is added successfully, the program will print
-     * message to prompt users that the given task has been added.<br>
-     * If IllegalArgumentException is thrown, it indicates that the given task failed to be added and the related
-     * reason of failure will be printed in the CLI.
+     * message to prompt users that the given task has been added. If IllegalArgumentException is thrown, it indicates
+     * that the given task failed to be added and the related reason of failure will be printed in the CLI.
      *
-     * @param detailFragments information of a given task (i.e. taskName, isDone indicator (1/0) and date [based on
-     *                        taskType])
+     * @param detailFragments ArrayList of information of a given task (i.e. taskName, isDone indicator (1/0) and date
+     *                        [based on taskType])
      * @param taskType        Type of the given task (i.e. Deadline [D], Event [E] or Todo [T])
      */
     public void addRecord(String[] detailFragments, String taskType) {
@@ -85,9 +85,9 @@ public class Record {
     }
 
     /**
-     * Mark a record as done based on the given {@code index}.If the record is marked as done successfully, the program
-     * will print message to prompt users that the given task has been marked as done.<br>
-     * Otherwise, the program will print the reason of failure and given task is failed to be marked.
+     * Mark a record as done based on the given {@code index}. If the record is marked as done successfully, the program
+     * will print message to prompt users that the given task has been marked as done. Otherwise, the program will print
+     * the reason of failure that makes the given task fail to be marked.
      *
      * @param index index of record, which could be found with {@code list} command, that the user wants to mark as
      *              done
@@ -104,8 +104,9 @@ public class Record {
     }
 
     /**
-     * Searches records based on the given {@code date}. If the dates of stored tasks match the given {@code date}, the
-     * program will print those tasks in the CLI.
+     * Searches records based on the given {@code date}. If the dates of stored tasks match the given {@code date},
+     * the program will print those tasks in the CLI. If no record contains the given {@code date}, "Null"
+     * will be printed in the CLI.
      *
      * @param date A date in format of yyyy-mm-dd
      */
@@ -133,7 +134,7 @@ public class Record {
     /**
      * Finds records based on the given {@code keyword}. If the names of stored tasks contains the given
      * {@code keyword}, the program will print those tasks in the CLI. If no record contains the given {@code keyword},
-     * "NULL" will be printed.
+     * "Null" will be printed in the CLI.
      *
      * @param keyword A target String for searching
      */
@@ -152,7 +153,8 @@ public class Record {
     }
 
     /**
-     * Prints all stored tasks inside the Record object to the CLI. If no task is stored,
+     * Prints all stored records inside the {@code Record} object to the CLI. If no task is stored, "Null" will be
+     * printed in the CLI.
      */
     public void showList() {
         System.out.println("Here is your task List:");
@@ -169,7 +171,7 @@ public class Record {
             File myObj = new File("records.txt");
             Scanner recordReader = new Scanner(myObj);
             while (recordReader.hasNextLine()) {
-                InputData data = new InputData(recordReader.nextLine(), InputType.recordInput);
+                InputDataHandler data = new InputDataHandler(recordReader.nextLine(), InputType.recordInput);
                 addRecordToCollection(data.getOtherArguments(), data.getFirstArgument());
                 if (data.isDone()) {
                     records.get(records.size() - 1).setAsDone();

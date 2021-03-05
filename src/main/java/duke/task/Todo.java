@@ -3,26 +3,25 @@ package duke.task;
 import java.time.LocalDate;
 
 /**
- * Represents a todo inherited from {@code Task}<br>
- * A {@code Todo} object consists of a parameter:<br>
- * 1. {@code taskName}: name of the Todo object<br>
+ * Represents a {@code Todo} object, which is inherited from {@code Task}. A {@code Todo} object is initialized
+ * with a task name and provide methods for returning a string of the object in displaying/saving format.
  */
 public class Todo extends Task {
 
     public static final String TASK_TYPE = "T";
 
     /**
-     * Constructor of Todo<br>
-     * Initializes the Todo object with the given parameter
+     * Constructor of {@code Todo}<br>
+     * Initializes the {@code Todo} object with the given parameter.
      *
-     * @param taskName name of the Todo Object
+     * @param taskName name of the {@code Todo} Object
      */
     public Todo(String taskName) {
         super(taskName);
     }
 
     /**
-     * Returns null (It is because Todo objects have no date/time)
+     * Returns null since {@code Todo} object does not have a date/deadline.
      *
      * @return null
      */
@@ -32,19 +31,9 @@ public class Todo extends Task {
     }
 
     /**
-     * Returns the task type of the Todo object, i.e. "T"
+     * Returns a string of all information about the {@code Todo} object for displaying in Command-Line Interface.
      *
-     * @return Task type of the Todo object
-     */
-    @Override
-    public String getTaskType() {
-        return TASK_TYPE;
-    }
-
-    /**
-     * Returns a string of all information about the Todo object for displaying in Command-Line Interface
-     *
-     * @return A string of information about the Todo object for CLI display
+     * @return A string of information about the {@code Todo} object for CLI display
      */
     @Override
     public String toString() {
@@ -52,9 +41,9 @@ public class Todo extends Task {
     }
 
     /**
-     * Returns a string of all information about the Todo object for storage in text file
+     * Returns a string of all information about the {@code Todo} object for storage in text file.
      *
-     * @return A string of information about the Todo object for saving
+     * @return A string of information about the {@code Todo} object for saving
      */
     @Override
     public String toSave() {

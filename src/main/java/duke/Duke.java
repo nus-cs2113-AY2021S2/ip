@@ -1,6 +1,6 @@
 package duke;
 
-import duke.command.Command;
+import duke.command.CommandHandler;
 import duke.record.Record;
 import duke.exception.DukeException;
 
@@ -15,31 +15,30 @@ public class Duke {
     public static final String NAME = "Happy";
     private static Record record;
 
+    private static void initializeDuke() {
+        record = new Record();
+        printWelcomeMsg();
+    }
+
     /**
-     * Call this method to start the program. <br><br>
-     * This method keeps on looping to ask for user inputs and perform related functions until
-     * false is returned from {@code command.receiveCommand()} <br><br>
-     * When DukeException is thrown, this method handles it by calling  {@code promptUserInputInvalid()}to
-     * notify users that their inputted command is invalid
+     * Call this method to start the program. This method keeps on looping to ask for user inputs and perform related
+     * functionalities until false is returned from {@code command.handleCommand()}. When DukeException is thrown,
+     * this method handles it by calling {@code promptUserInputInvalid()} to notify users that their inputted command
+     * is invalid.
      *
      * @param args Dummy command-line arguments (not used)
      */
     public static void main(String[] args) {
         initializeDuke();
-        Command command = new Command(record);
+        CommandHandler commandHandler = new CommandHandler(record);
         boolean isContinue = true;
         while (isContinue) {
             try {
-                isContinue = command.receiveCommand();
+                isContinue = commandHandler.handleCommand();
             } catch (DukeException e) {
                 promptUserInputInvalid();
             }
         }
-    }
-
-    private static void initializeDuke() {
-        record = new Record();
-        printWelcomeMsg();
     }
 
     private static void promptUserInputInvalid() {

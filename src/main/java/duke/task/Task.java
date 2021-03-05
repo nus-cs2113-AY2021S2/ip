@@ -3,68 +3,49 @@ package duke.task;
 import java.time.LocalDate;
 
 /**
- * It is an abstract class that represents general user task. A {@code Task} object stores information of a user task
- * such as {@code taskName} and {@code isDone} and perform functions related marking "done" and task string production.
+ * It is an abstract super class that represents the core of three subclass ({@code Todo/Deadline/Event}).
+ * Class {@code Task} handles task name initialization and setting task to be done. Also, it provides methods to
+ * return a string of task information for displaying via CLI or saving in local text file.
  */
 abstract public class Task {
     private final String taskName;
     private boolean isDone = false;
 
     /**
-     * Constructor of Task<br>
-     * Initializes the Task object with the given parameter.
+     * Constructor of {@code Task}<br>
+     * Initializes the {@code Task} object with the given parameter.
      *
-     * @param taskName name of the Task object
+     * @param taskName name of the {@code Task} object
      */
     public Task(String taskName) {
         this.taskName = taskName;
     }
 
-    /**
-     * It is an abstract method that returns date of a task. Behaviour of which are override in each subclass.
-     *
-     * @return date of a task
-     */
     abstract public LocalDate getDate();
 
-    /**
-     * Sets the Task object as Done.
-     */
     public void setAsDone() {
         isDone = true;
     }
 
-    /**
-     * Returns name of task stored in the Task Object
-     *
-     * @return name of task
-     */
     public String getTaskName() {
         return taskName;
     }
 
     /**
-     * It is an abstract method that returns type of a task. Behaviour of which are override in each subclass.
+     * Returns a string of part of information about the {@code Task} object for displaying in Command-Line Interface
      *
-     * @return type of a task
-     */
-    abstract public String getTaskType();
-
-    /**
-     * Returns a string of part of information about the Task object for displaying in Command-Line Interface
-     *
-     * @return A string of part of information about the Task object for displaying in CLI
+     * @return A string of part of information about the {@code Task} object for displaying in CLI
      */
     @Override
     public String toString() {
-        String mark = isDone ? "[X] " : "[ ] ";
+        String mark = isDone ? "[✓] " : "[X] ";
         return mark + taskName;
     }
 
     /**
-     * Returns a string of part of information about the Task object for storage in text file
+     * Returns a string of part of information about the {@code Task} object for storage in text file
      *
-     * @return A string of part of information about the Task object for saving
+     * @return A string of part of information about the {@code Task} object for saving
      */
     public String toSave() {
         String mark = isDone ? "|1|" : "|0|";

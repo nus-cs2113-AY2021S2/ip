@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.input.InputData;
+import duke.input.InputDataHandler;
 import duke.input.InputType;
 import duke.record.Record;
 import duke.exception.DukeException;
@@ -11,33 +11,34 @@ import duke.task.Todo;
 import java.util.Scanner;
 
 /**
- * Represents a {@code Command} object. It receives command provided by user and handle the valid ones accordingly.
+ * Represents a {@code CommandHandler} object. It receives and handles command provided by a user via CLI.
  */
-public class Command {
+public class CommandHandler {
     private final Record record;
     private final Scanner scan = new Scanner(System.in);
 
     /**
-     * Constructor of Command<br>
-     * Initializes the {@code Command} object by the given {@code Record} object.
+     * Constructor of CommandHandler<br>
+     * Initializes the {@code CommandHandler} object by the given {@code Record} object.
      *
-     * @param record A {@code Record} Object that stores user's tasks
+     * @param record A {@code Record} object that stores user's tasks
      */
-    public Command(Record record) {
+    public CommandHandler(Record record) {
         this.record = record;
     }
 
     /**
-     * Receiving user inputs and perform the related command accordingly. Also, it returns if the program continues to
-     * receive user inputs. (i.e. return {@code False} when command "bye" is inputted) <br>
-     * If the command is invalid, exception {@code DukeException} will be thrown.
+     * Receiving a user input string, process it and perform the related command accordingly. It returns {@code ture}
+     * normally so that the program continues to process user inputs unless the command "bye" is inputted.
+     * (i.e. {@code false} is returned when the user wants to exit the program) Also, If the command is invalid,
+     * exception {@code DukeException} will be thrown.
      *
-     * @return boolean value of whether to continue receiving user command
+     * @return boolean value of whether to continue processing user command
      * @throws DukeException if the command inputted is not valid
      */
-    public boolean receiveCommand() throws DukeException {
+    public boolean handleCommand() throws DukeException {
         boolean isLoop = true;
-        InputData userInput = getUserInput();
+        InputDataHandler userInput = getUserInput();
         switch (userInput.getFirstArgument()) {
         case "todo":
             record.addRecord(userInput.getOtherArguments(), Todo.TASK_TYPE);
@@ -126,13 +127,13 @@ public class Command {
         record.showList();
     }
 
-    private InputData getUserInput() {
+    private InputDataHandler getUserInput() {
         String userInput = "dummy";
         if (scan.hasNextLine()) {
             userInput = scan.nextLine();
         }
         System.out.println("Command entered: " + userInput);
-        return new InputData(userInput, InputType.userInput);
+        return new InputDataHandler(userInput, InputType.userInput);
     }
 
     private boolean isEndProgram(String[] arguments) {
