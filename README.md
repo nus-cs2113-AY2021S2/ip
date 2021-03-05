@@ -24,7 +24,7 @@ Prerequisites: JDK 11, update IntelliJ to the most recent version.
    | |_| | |_| |   <  __/
    |____/ \__,_|_|\_\___|
    ```
-#### How to use it
+### How to use it
 
 It has the function of save and read users activities including event activity, deadline activity and todo activity.
 You can start by typing:
@@ -36,7 +36,7 @@ You can start by typing:
  6. **done xxx** to mark **One activity as done**
  7. **bye** to end **The system**
 
-#### Function Table
+### Function Table
 | Syntax      | Description |
 | ----------- | ----------- |
 | list      | View list       |
@@ -46,7 +46,7 @@ You can start by typing:
 | done      | Done Item      |
 | bye   | End system        |
 
-#### Possible user journey
+### Possible user journey
 ```
 ===================================================
 Duke - Version 1.0
