@@ -66,6 +66,33 @@ public class TaskManager {
         DukeUI.print("[X] " + selectedTask.getDescription());
     }
 
+    public static void findTask(String s) {
+        ArrayList<Task> resultList = new ArrayList<>();
+        int i = 0;
+        while (i < taskCount()) {
+            i++;
+            Task selectedTask = getTaskWithInt(i);
+            String[] listOfDescriptions = selectedTask.getDescription().split(" ");
+            for(String words : listOfDescriptions) {
+                // DukeUI.print(words);
+                if (words.equalsIgnoreCase(s)) {
+                    resultList.add(selectedTask);
+                }
+            }
+        }
+        int j = 0;
+        DukeUI.print("Here are the matching tasks in your list:");
+        DukeUI.printLine();
+        if (resultList.size() == 0) {
+            DukeUI.print("No results.");
+        } else {
+        while (j < resultList.size()) {
+            Task selectedTask = resultList.get(j);
+            j++;
+            DukeUI.print(j + ". " + selectedTask.getTaskType() + selectedTask.getStatusIcon() + " " + selectedTask.getDescription());
+        }}
+    }
+
     public ArrayList<Task> returnTaskList() {
         return tasksList;
     }

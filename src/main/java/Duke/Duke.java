@@ -28,6 +28,8 @@ public class Duke {
                 TaskManager.markTaskAsDone(inputDetails);
             } else if (userCommand.equalsIgnoreCase("delete" )) {
                 TaskManager.deleteTask(inputDetails);
+            } else if (userCommand.equalsIgnoreCase("find")) {
+                TaskManager.findTask(inputDetails);
             } else  {
                 if (!DukeParser.isValidCommand(userCommand)) {
                     continue;
