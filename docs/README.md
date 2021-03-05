@@ -262,7 +262,7 @@ Expected Output:
 
 ## 3. Command Overview
 | Command | Format | Example |
-|---------|--------|---------|
+|:---:|:---:|:---:|
 | Help Menu|`help`|`help`|
 | Print List|`list`|`list`|
 | Mark As Done|`done [index]`|`done 1`|
