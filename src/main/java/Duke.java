@@ -18,6 +18,7 @@ public class Duke {
     public void run() throws IOException {
         ui.welcome();
         ArrayList<Task> Tasks = new ArrayList<>();
+        storage.createFile();
         storage.readFile(Tasks);
         String line;
         Scanner in = new Scanner(System.in);
@@ -93,15 +94,14 @@ public class Duke {
 
     /***
      * loads the required objects.
-     * @param filePath the file path that was saved previously.
      */
-    public Duke(String filePath) {
-        storage = new Storage(filePath);
+    public Duke() {
+        storage = new Storage();
         ui = new Ui();
     }
 
     public static void main(String[] args) throws IOException {
-        new Duke("src\\main\\java\\duke.txt").run();
+        new Duke().run();
     }
 
 

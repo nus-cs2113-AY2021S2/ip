@@ -5,19 +5,13 @@ import java.util.Scanner;
 
 public class Storage {
 
-    private static String filePath;
-
-    public Storage(String filePath) {
-            this.filePath = filePath;
-    }
-
     /***
      * Loads a file from a previously saved location.
      * @param Tasks An arraylist of tasks.
      * @throws FileNotFoundException location of the file does not exist.
      */
     static void readFile(ArrayList<Task> Tasks) throws FileNotFoundException {
-        FileInputStream data = new FileInputStream(filePath);
+        FileInputStream data = new FileInputStream("duke.txt");
         Scanner sc = new Scanner(data);
 
         while (sc.hasNextLine()) {
@@ -57,7 +51,8 @@ public class Storage {
      * @throws IOException
      */
     static void writeFile(ArrayList<Task> Tasks) throws IOException {
-        FileWriter writer = new FileWriter(filePath,false);
+        File file = new File("duke.txt");
+        FileWriter writer = new FileWriter(file);
         for (Task t : Tasks) {
             if (t instanceof Todo) {
                 writer.write("T | " + t.getStatusNumber().trim() + " | " + t.getDescription().trim());
@@ -71,5 +66,13 @@ public class Storage {
             writer.write("\r\n");
         }
         writer.close();
+    }
+    static void createFile() {
+        try {
+            File file = new File("duke.txt");
+            if (file.createNewFile()) {}
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
