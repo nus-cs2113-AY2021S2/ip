@@ -19,7 +19,7 @@ public class DukeUI {
         System.out.println(output);
     }
 
-    public String[] getUserInput() {
+    public static String[] getUserInput() {
         String userInput = scanner.nextLine();
         return splitInputIntoString(userInput);
     }
@@ -32,14 +32,14 @@ public class DukeUI {
         return listOfInputs;
     }
 
-    public void printWelcomeMessage() {
+    public static void printWelcomeMessage() {
         print("Hello from\n" + LOGO);
         printLine();
         print("Hello! I'm Duke");
         print("What can I do for you?");
     }
 
-    public void printExitingMessage() {
+    public static void printExitingMessage() {
         print("Bye. Hope to see you again soon!");
     }
 }

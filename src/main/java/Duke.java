@@ -4,22 +4,16 @@ import java.util.Scanner;
 import Duke.*;
 
 public class Duke {
-    private static final Scanner scanner = new Scanner(System.in);
     private static final TaskManager taskManager = new TaskManager();
-    public static final String LOGO = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
     public static final String FILE_PATH_TO_SAVE_TASKS = "duke.txt";
 
     public static void main(String[] args) {
         createFileIfThereIsNone();
         initializeData();
-        sendWelcomeMessage();
-        printLine();
+        DukeUI.printWelcomeMessage();
+        DukeUI.printLine();
         while(true) {
-            String[] listOfUserInputs = getUserInput();
+            String[] listOfUserInputs = DukeUI.getUserInput();
             String userCommand = listOfUserInputs[0];
             String inputDetails = listOfUserInputs[1];
             if (userCommand.equalsIgnoreCase("bye")){
@@ -43,7 +37,7 @@ public class Duke {
                 //process Todo, event or deadline
                 processCommandWithException(userCommand, inputDetails);
             }
-            printLine();
+            DukeUI.printLine();
         }
     }
 
@@ -51,8 +45,8 @@ public class Duke {
         try {
             processUserRequest(userCommand, inputDetails);
         } catch (TodoException e) {
-            printLine();
-            System.out.println(e.sendErrorMessage());
+            DukeUI.printLine();
+            DukeUI.print(e.sendErrorMessage());
         }
     }
 
@@ -61,9 +55,9 @@ public class Duke {
         try {
             isValidInput(userCommand);
         } catch (InvalidCommandException e) {
-            printLine();
-            System.out.println(e.sendErrorMessage());
-            printLine();
+            DukeUI.printLine();
+            DukeUI.print(e.sendErrorMessage());
+            DukeUI.printLine();
             isValid = false;
         }
         return isValid;
@@ -74,13 +68,6 @@ public class Duke {
         if (!isValid) {
             throw new InvalidCommandException();
         }
-    }
-
-    private static void sendWelcomeMessage() {
-        System.out.println("Hello from\n" + LOGO);
-        printLine();
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
     }
 
     private static void createFileIfThereIsNone() {
@@ -126,8 +113,8 @@ public class Duke {
         if (inputDetails.equalsIgnoreCase("filler") & userCommand.equalsIgnoreCase("todo")) {
             throw new TodoException();
         }
-        printLine();
-        printLine();
+        DukeUI.printLine();
+        DukeUI.printLine();
         Task newTask = new Task(inputDetails, userCommand);
         taskManager.addTask(newTask);
         notifyUser(newTask);
@@ -139,41 +126,31 @@ public class Duke {
     }
 
     private static void notifyUser(Task selectedTask) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println("  " + selectedTask.getTaskType() + selectedTask.getStatusIcon() + " " + selectedTask.getDescription());
-        System.out.println("Now you have " + taskManager.taskCount() + " tasks in the list.");
+        DukeUI.print("Got it. I've added this task:");
+        DukeUI.print("  " + selectedTask.getTaskType() + selectedTask.getStatusIcon() + " " + selectedTask.getDescription());
+        DukeUI.print("Now you have " + taskManager.taskCount() + " tasks in the list.");
     }
 
     private static void markTaskAsDone(String s) {
         Task selectedTask = taskManager.getTask(s);
         selectedTask.markAsDone();
-        System.out.println("Nice! Following task is now marked as done:");
-        System.out.println("[X] " + selectedTask.getDescription());
+        DukeUI.print("Nice! Following task is now marked as done:");
+        DukeUI.print("[X] " + selectedTask.getDescription());
     }
 
     private static void exitDuke() throws IOException {
-        printLine();
+        DukeUI.printLine();
         ArrayList<Task> finalTasksList = taskManager.returnTaskList();
         for (Task task : finalTasksList) {
             try {
                 writeToFile(FILE_PATH_TO_SAVE_TASKS, task);
             } catch (IOException e) {
-                System.out.println("Something went wrong: " + e.getMessage());
+                DukeUI.print("Something went wrong: " + e.getMessage());
             }
         }
-        System.out.println("Bye. Hope to see you again soon!");
+        DukeUI.printExitingMessage();
     }
 
-
-    private static void printLine() {
-        System.out.println("---------------------------------------------------");
-    }
-
-
-    private static String[] getUserInput() {
-        String userInput = scanner.nextLine();
-        return splitInputIntoString(userInput);
-    }
 
     private static String[] splitInputIntoString(String userInput) {
         String[] listOfInputs = userInput.split(" ", 2);
@@ -185,22 +162,22 @@ public class Duke {
 
 
     private static void listOutTasks() {
-        printLine();
+        DukeUI.printLine();
         int i = 0;
         while (i < taskManager.taskCount()) {
             i++;
             Task selectedTask = taskManager.getTaskWithInt(i);
-            System.out.println(i + ". " + selectedTask.getTaskType() + selectedTask.getStatusIcon() + " " + selectedTask.getDescription());
+            DukeUI.print(i + ". " + selectedTask.getTaskType() + selectedTask.getStatusIcon() + " " + selectedTask.getDescription());
         }
     }
 
 
     private static void deleteTask(String s) {
         Task selectedTask = taskManager.getTask(s);
-        System.out.println("Noted. I've removed this task");
-        System.out.println("\t" + selectedTask.getTaskType() + selectedTask.getStatusIcon() + " " + selectedTask.getDescription());
+        DukeUI.print("Noted. I've removed this task");
+        DukeUI.print("\t" + selectedTask.getTaskType() + selectedTask.getStatusIcon() + " " + selectedTask.getDescription());
         taskManager.removeTask(s);
-        System.out.println("Now you have " + taskManager.taskCount() + " tasks in the list.");
+        DukeUI.print("Now you have " + taskManager.taskCount() + " tasks in the list.");
     }
 
     private static void writeToFile(String filePath, Task tasks) throws IOException {
@@ -218,7 +195,7 @@ public class Duke {
 
     private static void initializeData() {
         File f = new File(FILE_PATH_TO_SAVE_TASKS);
-        System.out.println("Initializing data");
+        DukeUI.print("Initializing data");
         try {
             Scanner s = new Scanner(f);
             while(s.hasNext()) {
