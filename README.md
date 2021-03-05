@@ -4,7 +4,6 @@ Baggie is an interactive task-manager. He is purely based on Command-Line Interf
 ## Getting Started
 
 ## Table of Contents
-  * [Table of Contents](#table-of-contents)
   * [1. Before Start](#1-before-start)
   * [2. Features](#2-features)
     + [2.1 Help Menu](#21-help-menu)
