@@ -91,8 +91,9 @@ Got it. I've added this task:
 Now you have 1 tasks in the list. 
 ___________________________________________
 ```
-Exception:
-* No todo DESCRIPTION
+
+ Exception:
+* No Todo DESCRIPTION
 * Example: `todo`
 * Example of expected output:
 
@@ -117,8 +118,8 @@ Got it. I've added this task:
 Now you have 2 tasks in the list. 
 ___________________________________________
 ```
-Exception:
-* No deadline DESCRIPTION
+Exception 1:
+* No Deadline DESCRIPTION
 * Example: `deadline`
 * Example of expected output:
 
@@ -126,6 +127,18 @@ Exception:
 ___________________________________________
 🙁 OOPS!!! The description of a deadline cannot be empty.
 Please input again!:)
+___________________________________________
+```
+
+Exception 2:
+* No Deadline TIME
+* Example: `deadline submit a report`
+* Example of expected output:
+
+```
+___________________________________________
+🙁 OOPS!!! The time of the Deadline task is missing.
+Please complete the time information. :)
 ___________________________________________
 ```
 
@@ -143,8 +156,8 @@ Got it. I've added this task:
 Now you have 3 tasks in the list. 
 ___________________________________________
 ```
-Exception:
-* No event DESCRIPTION
+Exception 1:
+* No Event DESCRIPTION
 * Example: `event`
 * Example of expected output:
 
@@ -152,6 +165,18 @@ Exception:
 ___________________________________________
 🙁 OOPS!!! The description of an event cannot be empty.
 Please input again!:)
+___________________________________________
+```
+
+Exception 2:
+* No Event TIME
+* Example: `event group meeting`
+* Example of expected output:
+
+```
+___________________________________________
+🙁 OOPS!!! The time of the Event task is missing.
+Please complete the time information. :)
 ___________________________________________
 ```
 
@@ -169,12 +194,24 @@ Here are the tasks in your list:
 3. [E][✘] project group meeting (at: 2-4 pm Sunday)
 ___________________________________________
 ```
+Exception:
+* The list is empty
+* Example: `list`
+* Example of expected output:
+
+```
+___________________________________________
+The list is empty.
+You can add your task now! :)
+___________________________________________
+```
+
 
 ### Done
 
 * Marks a certain task to be done
 * Format: `done INDEX`
-* Example: 'done 1'
+* Example: `done 1`
 * Example of expected output:
 
 ```
@@ -183,7 +220,8 @@ Nice! I've marked this task as done:
 [T][✓] read a book
 ___________________________________________
 ```
-Exception:
+
+Exception 1:
 * No done INDEX
 * Example: `done`
 * Example of expected output:
@@ -192,6 +230,30 @@ Exception:
 ___________________________________________
 🙁 OOPS!!! The description of a done cannot be empty.
 Please input again!:)
+___________________________________________
+```
+
+Exception 2:
+* The given done INDEX is out of bound
+* Example: `done 5`
+* Example of expected output:
+
+```
+___________________________________________
+🙁 OOPS!!! The done index is not valid.
+Please input again.:)
+___________________________________________
+```
+
+Exception 3:
+* The list is empty
+* Example: `done 5`
+* Example of expected output:
+
+```
+___________________________________________
+The list is empty.
+You can add your task now! :)
 ___________________________________________
 ```
 
@@ -210,7 +272,7 @@ Now you have 2 tasks in the list.
 ___________________________________________
 ```
 
-Exception:
+Exception 1:
 * No delete INDEX
 * Example: `delete`
 * Example of expected output:
@@ -219,6 +281,30 @@ Exception:
 ___________________________________________
 🙁 OOPS!!! The description of a delete cannot be empty.
 Please input again!:)
+___________________________________________
+```
+
+Exception 2:
+* The given delete INDEX is out of bound
+* Example: `delete 5`
+* Example of expected output:
+
+```
+___________________________________________
+🙁 OOPS!!! The delete index is not valid.
+Please input again.:)
+___________________________________________
+```
+
+Exception 3:
+* The list is empty
+* Example: `delete 5`
+* Example of expected output:
+
+```
+___________________________________________
+The list is empty.
+You can add your task now! :)
 ___________________________________________
 ```
 
@@ -235,7 +321,7 @@ Here are the matching tasks in your list:
 1. [T][✓] read a book
 ___________________________________________
 ```
-Exception:
+Exception 1:
 * No find DESCRIPTION
 * Example: `find`
 * Example of expected output:
@@ -247,20 +333,32 @@ Please input again!:)
 ___________________________________________
 ```
 
+Exception 2:
+* The list is empty
+* Example: `find book`
+* Example of expected output:
+
+```
+___________________________________________
+The list is empty.
+You can add your task now! :)
+___________________________________________
+```
+
 ### Date
 
 * Finds all the tasks that are relevant to the specific date
 * Format: `date [yyy-mm-dd]`
-* Example: `date 2020-02-28`
+* Example: `date 2020-02-28 12:23`
 * Example of expected output:
 
 ```
 ___________________________________________
 Here are the tasks occurring on this specific date: 
-1. [D][✘] return a book(by: Feb 28 2021)
+1. [D][✘] return a book(by: Feb 28 2021 12:23)
 ___________________________________________
 ```
-Exception:
+Exception 1:
 * No date DESCRIPTION
 * Example: `date`
 * Example of expected output:
@@ -269,6 +367,30 @@ Exception:
 ___________________________________________
 🙁 OOPS!!! The description of a date cannot be empty.
 Please input again!:)
+___________________________________________
+```
+
+Exception 2:
+* The date format is incorrect
+* Example: `date 123`
+* Example of expected output:
+
+```
+___________________________________________
+🙁 OOPS!!! The date is not valid
+Please follow the format YYYY-MM-DD and input again.:)
+___________________________________________
+```
+
+Exception 3:
+* The list is empty
+* Example: `date 2020-12-21`
+* Example of expected output:
+
+```
+___________________________________________
+The list is empty.
+You can add your task now! :)
 ___________________________________________
 ```
 
