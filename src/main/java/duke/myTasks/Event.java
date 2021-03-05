@@ -2,7 +2,9 @@ package duke.myTasks;
 import duke.myExceptions.NoContent;
 import duke.myExceptions.NoTime;
 
-
+/**
+ * Todo class extended with time parameter
+ */
 public class Event extends Todo{
     protected String time;
 

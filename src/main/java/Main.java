@@ -1,6 +1,6 @@
 import duke.*;
 
-public class Main {
+public static class Main {
 
     public static void main(String[] args) {
         Duke.main(new String[]{});
