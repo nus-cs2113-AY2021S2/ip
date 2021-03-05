@@ -35,7 +35,7 @@ Views the current list.
 
 ## Usage
 
-### `todo task` - adds a todo task to the list ### Feature 1: Todo
+[### `todo task` - adds a todo task to the list](### `Todo`)
 
 Adds a task that is categorized as todo to the list.
 
