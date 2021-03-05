@@ -14,7 +14,7 @@ public abstract class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "\u2718" : ""); //return X or empty symbols
+        return (isDone ? "X" : ""); //return X or empty symbols
     }
     public void markAsDone(){
         isDone = true;
