@@ -230,6 +230,17 @@ Expected Output:
 ```
 
 
+
+### If the command entered is invalid
+Baggie shows error message.
+
+Example: `quit`
+
+Expected Output:
+```
+ Baggie doesn't know what to do with the command D:
+```
+
 ## Storage
 If File  `Baggie.txt` exists in the working directory, Baggie will read from the file and load the saved tasks into task list;
 If File  `Baggie.txt` does not exist in the working directory, Baggie will create a new file `Baggie.txt`;
@@ -238,4 +249,4 @@ Baggie updates `Baggie.txt` every time user exits the program by entering [Exit 
 
 
 ## Contributors
-[baggiiiie](https://github.com/baggiiiie)
+   [baggiiiie](https://github.com/baggiiiie)
