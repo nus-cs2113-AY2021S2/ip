@@ -1,7 +1,23 @@
 import java.io.IOException;
 
+/**
+ * This class deals with making sense of the user command.
+ * The commands includes: deadline, todo, event, done, delete, find, list.
+ */
 public class Parser {
 
+    /**
+     * Add a deadline task to the task list, if the user entered a deadline command.
+     * The deadline task must follow the format: deadline <description> /by time.
+     * Print our the number of tasks on the list after adding the new task.
+     * Save the new task to the data file.
+     * If the command does not follow the format, print an error message specifying the desired format.
+     * If something went wrong when save the task to the data file, print an error message.
+     * @param command The command users entered
+     * @param tasks  The existing list of tasks
+     * @throws StringIndexOutOfBoundsException If the command does not follow the correct format
+     * @throws IOException If something went wrong when save the task to the data file
+     */
     public static void deadlineTasks(String command, TaskList tasks) {
         try {
             String description = command.substring(9, command.indexOf("/by"));
@@ -19,6 +35,18 @@ public class Parser {
         }
     }
 
+    /**
+     * Add a event task to the task list, if the user entered a event command.
+     * The deadline task must follow the format: event <description> /at time.
+     * Print our the number of tasks on the list after adding the new task.
+     * Save the new task to the data file.
+     * If the command does not follow the format, print an error message specifying the desired format.
+     * If something went wrong when save the task to the data file, print an error message.
+     * @param command The command users entered
+     * @param tasks The existing list of tasks
+     * @throws StringIndexOutOfBoundsException If the command does not follow the correct format
+     * @throws IOException If something went wrong when save the task to the data file
+     */
     public static void eventTask(String command, TaskList tasks) {
         try {
             String description = command.substring(6, command.indexOf("/at"));
@@ -36,6 +64,18 @@ public class Parser {
         }
     }
 
+    /**
+     * Add a todo task to the task list, if the user entered a todo command.
+     * The todo task must follow the format: todo <description>.
+     * Print our the number of tasks on the list after adding the new task.
+     * Save the new task to the data file.
+     * If the command does not follow the format, print an error message specifying the desired format.
+     * If something went wrong when save the task to the data file, print an error message.
+     * @param command The command users entered
+     * @param tasks The existing list of tasks
+     * @throws StringIndexOutOfBoundsException If the command does not follow the correct format
+     * @throws IOException If something went wrong when save the task to the data file
+     */
     public static void todoTask(String command, TaskList tasks) {
         try {
             Task task = new Todo(command.substring(5));
@@ -50,7 +90,18 @@ public class Parser {
             System.out.println("Something went wrong when writing: " + e.getMessage());
         }
     }
-
+    /**
+     * Mark a specific task as done.
+     * The command must follow the format: done <index>.
+     * Save the new task status to the data file.
+     * If the command does not follow the format, print an error message specifying the desired format.
+     * If something went wrong when save the task to the data file, print an error message.
+     * @param command The command users entered
+     * @param tasks The existing list of tasks
+     * @throws NumberFormatException If the command does not follow the correct format
+     * @throws IOException If something went wrong when save the task to the data file
+     * @throws ArrayIndexOutOfBoundsException If the index is not on the existing task list.
+     */
     public static void doneTasks(String command, TaskList tasks) {
         try {
             int doneNumber=Integer.parseInt(command.substring(5));
@@ -66,6 +117,18 @@ public class Parser {
         }
     }
 
+    /**
+     * delete a specific task.
+     * The command must follow the format: delete <index>.
+     * delete the task from data file.
+     * If the command does not follow the format, print an error message specifying the desired format.
+     * If something went wrong when save the task to the data file, print an error message.
+     * @param command The command users entered
+     * @param tasks The existing list of tasks
+     * @throws NumberFormatException If the command does not follow the correct format
+     * @throws IOException If something went wrong when save the task to the data file
+     * @throws ArrayIndexOutOfBoundsException If the index is not on the existing task list.
+     */
     public static void deleteTask(String command, TaskList tasks) {
         try {
             int deleteNumber=Integer.parseInt(command.substring(7));

@@ -5,13 +5,32 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * This class deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
+    /**
+     * relative path of the data file.
+     */
     private String filePath;
 
+    /**
+     * Constructor for an storage object.
+     * @param filePath relative path of the data file
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Store the list of tasks to a data file.
+     * The tasks are saved as: [Task type][completion icon]Description
+     * If the task is done, it will be marked as [✓]
+     * If the task is still pending, it will be marked as [✘]
+     * @param filePath relative path to the data file
+     * @param tasks the list of existing tasks
+     * @throws IOException If something went wrong when saving the tasks
+     */
     static void writeToFile(String filePath, TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         for (int i=0; i<Task.getTaskCount(); i++) {
@@ -22,6 +41,15 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     *Read the data file and print ot the tasks written in the file as: [Task type][completion icon]Description
+     * If the task is done, it will be marked as [✓]
+     * If the task is still pending, it will be marked as [✘]
+     * Create a new file if the data file does not exist yet.
+     * @param filePath relative path to the data file
+     * @return list of tasks written in the data file
+     * @throws FileNotFoundException If the data file specified does not exist.
+     */
     static ArrayList<Task> printFileContents(String filePath) throws FileNotFoundException {
         File f = new File(filePath); // create a File for the given file path
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
@@ -34,6 +62,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Read from the data file content and store the data as a list of tasks
+     * @param item A line item read from the data file
+     * @param tasks A list of tasks
+     */
     private static void loadItem(String item, ArrayList<Task> tasks) {
         char type = item.charAt(1);
         Task task;
@@ -62,6 +95,9 @@ public class Storage {
         tasks.add(task);
     }
 
+    /**
+     * Create a new directory and an empty data file.
+     */
     static void createDirAndFile() {
         try {
             System.out.println("Creating file: data/duke.txt");

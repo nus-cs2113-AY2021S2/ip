@@ -1,13 +1,26 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ *  This class deals with interactions with users.
+ *  Get user commands and respond to the commands.
+ */
 public class Ui {
     private Parser parser;
 
+    /**
+     * Constructor for Ui object.
+     */
     public Ui() {
         parser = new Parser();
     }
 
+    /**
+     * Read the input stream to get user commands.
+     * Perform the actions corresponds to a specific command.
+     * Update the list of tasks if necessary.
+     * @param tasks The existing list of tasks
+     */
     public static void getCommand(TaskList tasks) {
         Scanner sc = new Scanner(System.in);
 
@@ -50,6 +63,12 @@ public class Ui {
         }
     }
 
+    /**
+     * Print the entire list of tasks. In the following format:
+     * [Task type][completion icon]Description
+     * If the task is done, it will be marked as [✓]
+     * If the task is still pending, it will be marked as [✘]
+     */
     private static void listTasks() {
         System.out.println("Here are the tasks in your list:");
         TaskList.printTaskList();
