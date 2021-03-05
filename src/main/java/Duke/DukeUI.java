@@ -21,7 +21,7 @@ public class DukeUI {
 
     public static String[] getUserInput() {
         String userInput = scanner.nextLine();
-        return splitInputIntoString(userInput);
+        return DukeParser.splitInputIntoString(userInput);
     }
 
     private static String[] splitInputIntoString(String userInput) {
