@@ -30,6 +30,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Initial the Duke class
+     */
     public void run() {
         String greeting = "Hello I'm Duke\n"
                 + "What can I do for you?";

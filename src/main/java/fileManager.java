@@ -15,6 +15,10 @@ public class fileManager implements Serializable{
         this.filePath = filePath;
     }
 
+    /**
+     * Write objects into file
+     * @param tasks serialized data
+     */
     public void writeFile(ArrayList<Task> tasks){
         try {
             fWrite = new FileOutputStream(filePath);
@@ -26,6 +30,11 @@ public class fileManager implements Serializable{
             }
         }
 
+    /**
+     * Load data from file
+     * @return  the deserialized data from file and store in a list
+     * @throws FileNotFoundException
+     */
     public List<Task> readFile() throws FileNotFoundException{
         fRead = new FileInputStream(filePath);
         List<Task> readTasks = new ArrayList<>();

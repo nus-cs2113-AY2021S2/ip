@@ -14,6 +14,9 @@ public class Task implements Serializable {
         return (isDone ? "[\u2718]" : "[ ]") + this.description;
     }
 
+    /**
+     * Mark a task done
+     */
     public void markAsDone(){
         this.isDone = true;
     }
