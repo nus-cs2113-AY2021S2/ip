@@ -30,7 +30,7 @@ Baggie is an interactive task-manager. He is purely based on Command-Line Interf
 - Open terminal(For MacOS)/command prompt(For Windows) and change working directory to that folder. 
 - Launch *Baggie* by entering *java -jar ip.jar*.
 
-**Following is the Welcome Page if Baggie is running successfull
+**Following is the Welcome Page if Baggie is running successfull**
    ```
   
 ██████   █████   ██████   ██████  ██ ███████ 
