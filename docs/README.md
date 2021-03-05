@@ -22,9 +22,8 @@ By: `Xia Fuxi` Latest update: `24 Feb 2021`
 ## 1. Introduction
 Diggity check it, booyakasha! Wagwan, my name be Ali G and I is here to help you manage your everyday life.
 Whether it be your weekly ganja shipment or your next murder trial, I is able to help
-you remember bare important tings that your not very cleverer little head always be forgettin'. Just open up your compooter
-and click on a fancy tekmology called a **command line interface (CLI)** in order to use me.
-
+you remember bare important tings that your not very cleverer little head always be forgettin'. I use only
+the most states of the art tekmology, the **command line interface (CLI)**, to help you out.
 ## 2. Quick Start
 Prerequisites: JDK 11, update IntelliJ to the most recent version.
 1. Ensure you have `Java 11` installed on your computer.
