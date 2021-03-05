@@ -92,6 +92,11 @@ public class TaskList {
         }
     }
 
+    /*
+    * The find method within the TaskList class searches for a keyword in the list of tasks
+    * @params keyword takes in a string as the keyword
+    * */
+
     public void find(String keyword) {
         int currentListNumber = 1;
         System.out.println(border);
@@ -106,7 +111,10 @@ public class TaskList {
         System.out.println(border);
     }
 
-
+    /*
+    * The printCurrentTask method within the TaskList class returns a specified task from the list of tasks
+    * @params taskNum specifies the task number of the task to be returned from the list of tasks
+    * */
     public Task printCurrentTask(int taskNum) {
         return tasks.get(taskNum);
     }
