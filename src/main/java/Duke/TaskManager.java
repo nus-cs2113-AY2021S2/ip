@@ -15,11 +15,11 @@ public class TaskManager {
         return toAdd;
     }
 
-    public int taskCount () {
+    public static int taskCount() {
         return tasksList.size();
     }
 
-    public Task removeTask (String taskNo) {
+    public static Task removeTask(String taskNo) {
         int taskNumber = Integer.parseInt(taskNo);
         taskNumber--;
         Task selectedTask = tasksList.get(taskNumber);
@@ -27,17 +27,33 @@ public class TaskManager {
         return selectedTask;
     }
 
-    public Task getTask (String taskNo) {
+    public static Task getTask(String taskNo) {
         int taskNumber = Integer.parseInt(taskNo);
         taskNumber--;
-        Task selectedTask = tasksList.get(taskNumber);
-        return selectedTask;
+        return tasksList.get(taskNumber);
     }
 
-    public Task getTaskWithInt (Integer taskNo) {
+    public static Task getTaskWithInt(Integer taskNo) {
         taskNo--;
-        Task selectedTask = tasksList.get(taskNo);
-        return selectedTask;
+        return tasksList.get(taskNo);
+    }
+
+    public static void listOutTasks() {
+        DukeUI.printLine();
+        int i = 0;
+        while (i <taskCount()) {
+            i++;
+            Task selectedTask = getTaskWithInt(i);
+            DukeUI.print(i + ". " + selectedTask.getTaskType() + selectedTask.getStatusIcon() + " " + selectedTask.getDescription());
+        }
+    }
+
+    public static void deleteTask(String s) {
+        Task selectedTask = getTask(s);
+        DukeUI.print("Noted. I've removed this task");
+        DukeUI.print("\t" + selectedTask.getTaskType() + selectedTask.getStatusIcon() + " " + selectedTask.getDescription());
+        removeTask(s);
+        DukeUI.print("Now you have " + TaskManager.taskCount() + " tasks in the list.");
     }
 
     public ArrayList<Task> returnTaskList() {

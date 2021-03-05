@@ -16,12 +16,11 @@ public class Duke {
                 DukeStorage.endDuke(taskManager);
                 break;
             }
-            if (userCommand.equalsIgnoreCase("list")){
-                listOutTasks();
-            } else if (userCommand.equalsIgnoreCase("done" )) {
+            if (userCommand.equalsIgnoreCase("list")) TaskManager.listOutTasks();
+            else if (userCommand.equalsIgnoreCase("done" )) {
                 markTaskAsDone(inputDetails);
             } else if (userCommand.equalsIgnoreCase("delete" )) {
-                deleteTask(inputDetails);
+                TaskManager.deleteTask(inputDetails);
             } else  {
                 if (!DukeParser.isValidCommand(userCommand)) {
                     continue;
@@ -45,28 +44,10 @@ public class Duke {
     }
 
     private static void markTaskAsDone(String s) {
-        Task selectedTask = taskManager.getTask(s);
+        Task selectedTask = TaskManager.getTask(s);
         selectedTask.markAsDone();
         DukeUI.print("Nice! Following task is now marked as done:");
         DukeUI.print("[X] " + selectedTask.getDescription());
     }
-
-    private static void listOutTasks() {
-        DukeUI.printLine();
-        int i = 0;
-        while (i < taskManager.taskCount()) {
-            i++;
-            Task selectedTask = taskManager.getTaskWithInt(i);
-            DukeUI.print(i + ". " + selectedTask.getTaskType() + selectedTask.getStatusIcon() + " " + selectedTask.getDescription());
-        }
-    }
-
-
-    private static void deleteTask(String s) {
-        Task selectedTask = taskManager.getTask(s);
-        DukeUI.print("Noted. I've removed this task");
-        DukeUI.print("\t" + selectedTask.getTaskType() + selectedTask.getStatusIcon() + " " + selectedTask.getDescription());
-        taskManager.removeTask(s);
-        DukeUI.print("Now you have " + taskManager.taskCount() + " tasks in the list.");
-    }
+    
 }
