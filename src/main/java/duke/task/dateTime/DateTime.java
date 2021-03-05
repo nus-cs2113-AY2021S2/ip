@@ -65,15 +65,15 @@ public class DateTime {
     private String convertTimeFormat(int hour, int minute) {
         boolean isMorning = true;
         int hourInNewFormat;
-        if (hour > 12) {
+        if (hour >= 12) {
             isMorning = false;
         }
         if (isMorning) {
             hourInNewFormat = hour == 0 ? 12 : hour;
-            return hourInNewFormat + ":" + minute + "am";
+            return hourInNewFormat + ":" + (minute < 10 ? "0" : "") + minute + "am";
         }
-        hourInNewFormat = hour - 12;
-        return hourInNewFormat + ":" + minute + "pm";
+        hourInNewFormat = hour == 12 ? hour : hour - 12;
+        return hourInNewFormat + ":" + (minute < 10 ? "0" : "") + minute + "pm";
     }
 
     public LocalDate getDate() {
@@ -94,7 +94,12 @@ public class DateTime {
      * @return date/time for CLI displaying
      */
     public String toString() {
-        return getDateToPrintFormat() + (hourIn24 < 0 ? "" : ", " + convertTimeFormat(hourIn24, minuteIn24));
+        StringBuilder builder = new StringBuilder();
+        builder.append(getDateToPrintFormat());
+        if (hourIn24 >= 0) {
+            builder.append(", ").append(convertTimeFormat(hourIn24, minuteIn24));
+        }
+        return builder.toString();
     }
 
     /**
@@ -103,6 +108,14 @@ public class DateTime {
      * @return date/time for saving
      */
     public String toSave() {
-        return getDateToSaveFormat() + (hourIn24 < 0 ? "" : " " + hourIn24 + minuteIn24);
+        StringBuilder builder = new StringBuilder();
+        builder.append(getDateToSaveFormat());
+        if (hourIn24 >= 0) {
+            builder.append(" ");
+            String hourPadding = hourIn24 < 10 ? "0" : "";
+            String minutePadding = minuteIn24 < 10 ? "0" : "";
+            builder.append(hourPadding).append(hourIn24).append(minutePadding).append(minuteIn24);
+        }
+        return builder.toString();
     }
 }

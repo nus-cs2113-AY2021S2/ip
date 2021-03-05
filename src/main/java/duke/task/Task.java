@@ -32,7 +32,8 @@ abstract public class Task {
     }
 
     /**
-     * Returns a string of part of information about the {@code Task} object for displaying in Command-Line Interface
+     * Returns a string of part of information about the {@code Task} object for displaying in Command-Line Interface.
+     * (✓: marked as done, X: marked as not done)
      *
      * @return A string of part of information about the {@code Task} object for displaying in CLI
      */
@@ -44,6 +45,7 @@ abstract public class Task {
 
     /**
      * Returns a string of part of information about the {@code Task} object for storage in text file
+     * (1: marked as done, 0: marked as not done)
      *
      * @return A string of part of information about the {@code Task} object for saving
      */
