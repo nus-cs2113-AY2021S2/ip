@@ -1,12 +1,12 @@
 # User Guide
 Duke is a task management application which is designed to handle 3 types of tasks: todo, event and deadline.
 * [Features](#features)
-  * [Adding a task](#1--Adding-a-task)
-  * [Listing down all tasks](#2--Listing-down-all-tasks)
-  * [Marking a task as done](#3--Marking-a-task-as-done)
-  * [Deleting a task](#4--Deleting-a-task)
-  * [Finding tasks contain keywords](#5--Finding-tasks-contain-keywords)
-  * [Save and exit](#6--Save-and-exit)
+  * [Adding a task](#1-Adding-a-task)
+  * [Listing down all tasks](#2-Listing-down-all-tasks)
+  * [Marking a task as done](#3-Marking-a-task-as-done)
+  * [Deleting a task](#4-Deleting-a-task)
+  * [Finding tasks contain keywords](#5-Finding-tasks-contain-keywords)
+  * [Save and exit](#6-Save-and-exit)
 ## Features 
 
 ### 1. Adding a task
