@@ -1,6 +1,6 @@
 package duke;
 
-public class Output {
+public class Ui {
 
     public static void printStart() {
         String logo = " ____        _        \n"

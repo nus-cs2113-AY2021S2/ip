@@ -1,15 +1,29 @@
 package duke;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 
 public class Storage {
-    public static void readFile(ArrayList<Task> tasks) {
-        File file = new File("src/main/java/duke.txt");
+
+    //public static String filePath = new File("").getAbsolutePath();
+
+    public static void readFile(String filePath, TaskList tasks) throws IOException {
+        File file = new File(filePath + "/duke.txt");
+        try {
+            if (file.createNewFile()){
+                System.out.println("file created at current location: " + String.format(file.getAbsolutePath()));
+                filePath = String.format(file.getAbsolutePath());
+            } else {
+                System.out.println("file already exist at current location: " + String.format(file.getAbsolutePath()));
+                filePath = String.format(file.getAbsolutePath());
+            }
+        } catch (IOException e) {
+            System.out.println("There was an error when creating file. Try again!");
+        }
+
         try {
             Scanner SCANNER = new Scanner(file);
 
@@ -18,36 +32,36 @@ public class Storage {
                 String taskType = split[0];
                 String isDoneString = split[1];
                 String taskDetails = split[2];
-                Boolean isDoneDone;
+                Boolean isDone;
                 if(isDoneString.equals("1")) {
-                    isDoneDone = true;
+                    isDone = true;
                 } else {
-                    isDoneDone = false;
+                    isDone = false;
                 }
 
                 switch (taskType) {
                     case "T":
                         Task task = new Todo(taskDetails);
-                        if (isDoneDone) {
+                        if (isDone) {
                             task.setDone();
                         }
-                        tasks.add(task);
+                        tasks.addTask(task);
                         break;
                     case "E":
                         String at = split[3];
                         task = new Event(taskDetails, at);
-                        if (isDoneDone) {
+                        if (isDone) {
                             task.setDone();
                         }
-                        tasks.add(task);
+                        tasks.addTask(task);
                         break;
                     case "D":
                         String by = split[3];
                         task = new Deadline(taskDetails, by);
-                        if (isDoneDone) {
+                        if (isDone) {
                             task.setDone();
                         }
-                        tasks.add(task);
+                        tasks.addTask(task);
                         break;
                 }
 
@@ -58,17 +72,20 @@ public class Storage {
         }
     }
 
-    public static void writeToFile(ArrayList<Task> tasks) {
+    public static void writeToFile(TaskList tasks) {
+        String filePath = new File("").getAbsolutePath();
+        filePath = filePath + "/duke.txt";
+
         try {
-            FileWriter fileWriter = new FileWriter("src/main/java/duke.txt");
+            FileWriter fileWriter = new FileWriter(filePath);
             for(int i=0; i<tasks.size(); i++) {
                 //System.out.println(tasks.get(i).isDone());
-                fileWriter.write(tasks.get(i).getDescription() + "\n");
+                fileWriter.write(tasks.getDescriptionAtIndex(i) + "\n");
             }
             fileWriter.flush();
             fileWriter.close();
         } catch (IOException e) {
-            System.out.println("Error while writing to file.");
+            System.out.println("Error while writing to file. Try again!");
         }
     }
 }
