@@ -1,5 +1,6 @@
 # User Guide
-A brief User Guide for CS2113T IP Project. This user guide explains briefly how to use the commands for the purpose of interaction.
+A brief User Guide for CS2113T IP Project. 
+This user guide explains briefly how to use the commands for the purpose of interaction.
 As a task manager, the functionality of the program includes adding, deleting and searching(to name a few features) 
 a task(either a todo, deadline or event) to the list.
 
@@ -35,7 +36,7 @@ Views the current list.
 
 ## Usage
 
-[### `todo task` - adds a todo task to the list](### `Todo`)
+### `todo task` - adds a todo task to the list
 
 Adds a task that is categorized as todo to the list.
 
