@@ -38,7 +38,7 @@ public class Duke {
 
         String userInput;
         do {
-            userInput = sc.nextLine().trim();
+            userInput = sc.nextLine();
             dukeManager(userInput, tasks);
         } while (!userInput.equals("bye"));
     }
@@ -64,6 +64,9 @@ public class Duke {
             break;
         case "delete":
             deleteTask(input, tasks);
+            break;
+        case "find":
+            findTasks(input, tasks);
             break;
         default:
             addTask(input, tasks);
@@ -267,6 +270,22 @@ public class Duke {
             System.out.println("\tOOPS!! Invalid task input!");
         }
         System.out.println("\t__________________________________________\n");
+    }
 
+    public static void findTasks(String userInput, ArrayList<Task> tasks) {
+        System.out.println("\t------------------------------------------");
+        System.out.println("\tHere are the matching tasks in your list:");
+        String taskInput = userInput.split(" ")[1];
+        ArrayList<Task> matchedTasks = new ArrayList<Task>();
+        for (Task task : tasks) {
+            if (task.getDescription().contains(taskInput)) {
+                matchedTasks.add(task);
+            }
+        }
+        int i = 1;
+        for (Task task : matchedTasks) {
+            System.out.println("\t"+ i++ + ". " + task.toString());
+        }
+        System.out.println("\t_________________________________________\n");
     }
 }
