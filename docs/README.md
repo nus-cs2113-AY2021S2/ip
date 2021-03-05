@@ -1,20 +1,35 @@
 # User Guide
 
-## Features 
+Hello, meet Duke!
+With me, you can organise your task, events, deadlines and todo easily.
 
-### Feature 1 
-Description of feature.
+## Adding a todo 
 
-## Usage
+### Usage
 
-### `Keyword` - Describe action
+### `todo (description)` 
 
-Describe action and its outcome.
+This will save (description) as a new todo.
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`todo learn java`
 
 Expected outcome:
 
-`outcome`
+`You have added new todo "learn java" into the list!`
+
+## Adding a deadline
+
+### Usage
+
+### `deadline (description) /by (deadline)` 
+This will save (description) with (deadline) as a new deadline.
+
+Example of usage:
+
+`deadline master java /by today`
+
+Expected outcome:
+
+`You have added new deadline "master java" by "today" into the list!`
