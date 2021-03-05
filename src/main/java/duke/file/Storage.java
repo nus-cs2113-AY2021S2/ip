@@ -37,9 +37,7 @@ public class Storage {
         char taskSelection;
         try {
             File dukeFileRead = new File(relativeFileName);
-            if (dukeFileRead.createNewFile()) {
-                System.out.println("File created: " + dukeFileRead.getName());
-            }
+
             Scanner myReader = new Scanner(dukeFileRead);
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
@@ -56,13 +54,15 @@ public class Storage {
                 case 'e':
                     createEventTask(userTasks, tokens);
                     break;
+                default:
+                    System.out.println("Unrecognizable task type. Skipped this particular task object creation.");
                 }
             }
             myReader.close();
         }catch (FileNotFoundException e) {
             throw new DukeException("File cannot be found.");
         }catch (IOException e) {
-            throw new DukeException("I/O Operations got errors");
+            throw new DukeException("I/O Operations got errors. Data cannot be read/");
         }catch (NoSuchElementException e) {
             throw new DukeException("The file is empty.");
         }
@@ -113,14 +113,15 @@ public class Storage {
                 case 'E':
                     newLineToBeInserted = convertEventDetailsToString(userTask);
                     break;
+                default:
+                    System.out.println("Unrecognizable task type. Please recreate the task.");
                 }
                 dukeFileWrite.write(newLineToBeInserted + "\n");
             }
             dukeFileWrite.close();
-            System.out.println("Successfully updated the file.");
+
         } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
+            System.out.println("An IO Operations Error has occurred. Data is not saved.");
         }
     }
 

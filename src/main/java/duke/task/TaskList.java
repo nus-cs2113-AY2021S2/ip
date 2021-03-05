@@ -44,8 +44,10 @@ public class TaskList {
             System.out.println("Noted. I've removed this task: ");
             System.out.println(temporaryTask.toString());
             System.out.println("Now you have " + userTasks.size() + " tasks in the list. ");
-        } catch (NumberFormatException e) {
-            throw new DukeException("Invalid task number");
+        } catch (NumberFormatException e){
+            throw new DukeException("Invalid task input");
+        } catch (IndexOutOfBoundsException e){
+            throw new DukeException("Invalid task input");
         }
     }
 
@@ -59,8 +61,10 @@ public class TaskList {
             userTasks.get(activityNumber-1).setTaskStatus(true);
             System.out.println("Nice! I've marked this task as done:");
             System.out.println(userTasks.get(activityNumber-1).toString());
-        } catch (NumberFormatException e) {
-            throw new DukeException("Invalid task number");
+        } catch (NumberFormatException e){
+            throw new DukeException("Invalid task input");
+        } catch (IndexOutOfBoundsException e){
+            throw new DukeException("Invalid task input");
         }
     }
 
@@ -70,8 +74,8 @@ public class TaskList {
     public void createEventTask(String action) throws DukeException{
         String newUserTask;
         try {
-            newUserTask = action.split("/at")[0];
-            String eventTime = action.split("/at")[1];
+            newUserTask = action.split("/at")[0].strip();
+            String eventTime = action.split("/at")[1].strip();
             userTasks.add(new Event(newUserTask, eventTime));
             showTaskCreationMessage(userTasks.get(userTasks.size()-1), userTasks.size());
         } catch (ArrayIndexOutOfBoundsException e){
@@ -85,8 +89,8 @@ public class TaskList {
     public void createDeadlineTask(String action) throws DukeException{
         String newUserTask;
         try {
-            newUserTask = action.split("/by")[0];
-            String date = action.split("/by")[1];
+            newUserTask = action.split("/by")[0].strip();
+            String date = action.split("/by")[1].strip();
             userTasks.add(new Deadline(newUserTask, date));
             showTaskCreationMessage(userTasks.get(userTasks.size()-1), userTasks.size());
         } catch (ArrayIndexOutOfBoundsException e){
@@ -112,20 +116,35 @@ public class TaskList {
     Function displays all tasks created so far
     */
     public void displayListOfActivities() {
+        boolean existsOneTask = false;
         System.out.println("Here are the tasks in your list:");
         for (int counter = 0; counter < userTasks.size(); counter++) {
             System.out.println((counter+1) + "." + userTasks.get(counter).toString());
+            existsOneTask = true;
+        }
+        if(!existsOneTask){
+            System.out.println("Sorry. There is no task existed currently. You may create one.");
         }
     }
 
     /*
     Function displays all tasks that contains the keyword
     */
-    public void findTask(String keyword) {
+    public void findTask(String keyword) throws DukeException{
+        boolean existsOneMatch = false;
         System.out.println("Here are the matching tasks in your list:");
-        for (int counter = 0; counter < userTasks.size(); counter++) {
-            if(userTasks.get(counter).getDescription().contains(keyword))
-                System.out.println((counter+1) + "." + userTasks.get(counter).toString());
+        try {
+            for (int counter = 0; counter < userTasks.size(); counter++) {
+                if(userTasks.get(counter).getDescription().contains(keyword)) {
+                    System.out.println((counter + 1) + "." + userTasks.get(counter).toString());
+                    existsOneMatch = true;
+                }
+            }
+            if(!existsOneMatch){
+                System.out.println("Sorry. None of the tasks match with your query");
+            }
+        } catch (NullPointerException e){
+            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
         }
     }
 

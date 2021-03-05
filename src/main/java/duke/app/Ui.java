@@ -26,8 +26,8 @@ public class Ui {
     /*
     Display error message when unable to load file
      */
-    public void showLoadingError() {
-        System.out.println("Unable to load the file.");
+    public void showLoadingError(String message) {
+        System.out.println(message);
     }
 
     /*
@@ -49,7 +49,7 @@ public class Ui {
     }
 
     /*
-    Display the error message passed in as arguement
+    Display the error message passed in as argument
      */
     public void showError(String message) {
         System.out.println(message);
