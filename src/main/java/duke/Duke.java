@@ -16,7 +16,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
-//built JAR file
+
 public class Duke {
 
     public static TaskList list = new TaskList();
@@ -60,7 +60,7 @@ public class Duke {
             throw new InvalidInput();
         }
     }
-
+    
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
