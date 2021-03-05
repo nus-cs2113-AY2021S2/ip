@@ -265,7 +265,7 @@ Expected Output:
 &nbsp;
 
 | Command | Format | Example |
-|:---:|:---:|:---:|
+|:-------:|:-------:|:-------:|
 | Help Menu|`help`|`help`|
 | Print List|`list`|`list`|
 | Mark As Done|`done [index]`|`done 1`|
