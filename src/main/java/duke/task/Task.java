@@ -33,13 +33,13 @@ abstract public class Task {
 
     /**
      * Returns a string of part of information about the {@code Task} object for displaying in Command-Line Interface.
-     * (✓: marked as done, X: marked as not done)
+     * (Done: marked as done, X: marked as not done)
      *
      * @return A string of part of information about the {@code Task} object for displaying in CLI
      */
     @Override
     public String toString() {
-        String mark = isDone ? "[✓] " : "[X] ";
+        String mark = isDone ? "[Done] " : "[X] ";
         return mark + taskName;
     }
 

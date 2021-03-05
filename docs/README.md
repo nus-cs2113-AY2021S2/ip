@@ -76,7 +76,7 @@ To mark a task indicated by an index, which could be found with `list` command, 
 ```
 Command entered: done 1
 Nice! I've marked this task as done:
-	[T][✓] task1
+	[T][Done] task1
 ```
 
 ### `delete` - Delete a task
@@ -87,7 +87,7 @@ To delete a task indicated by an index, which could be found with `list` command
 ```
 Command entered: delete 1
 Got it. I've deleted this task:
-	[T][✓] task1
+	[T][Done] task1
 Now you have 0 tasks in the list.
 ```
 
