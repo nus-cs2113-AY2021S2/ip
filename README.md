@@ -41,7 +41,7 @@ Prerequisites: JDK 11, update IntelliJ to the most recent version.
 =======
 ## 1. Before Start
 - Ensure you have Java 11 or above installed in your Computer.
-- Download the latest version of `Baggie.jar` file from [here](https://github.com/baggiiiie/ip/releases/tag/v0.1).
+- Download the latest version of `Baggie.jar` file from [here](https://github.com/baggiiiie/ip/releases/tag/v2.0).
 - Move the `Baggie.jar` file to the folder of your choice.
 - Open terminal(For MacOS)/command prompt(For Windows) and change working directory to that folder. 
 - Launch *Baggie* by entering *java -jar ip.jar*.
@@ -279,18 +279,18 @@ Expected Output:
 ```
 
 ## 3. Command Overview
- Command | Format | Example 
----------|--------|---------
- Help Menu|`help`|`help`
- Print List|`list`|`list`
- Mark As Done|`done [index]`|`done 1`
- Delete Task|`delete [index]`|`delete 1`
- Find With Date|`date [YYYY-MM-DD]`|`date 2021-03-05`
- Find With Keyword|`keyword [keyword]`|`keyword math`
- Add Deadline Task|`deadline [task]/[time]`|`deadline submit UG/2021-03-05`
- Add Event Task|`event [task]/[time]`|`event CNY dinner/2021-02-11`
- Add Todo Task|`todo [task]`|`todo submit UG`
- Exit Program|`bye`|`bye`
+| Command | Format | Example |
+|:---:|:---:|:---:|
+| Help Menu|`help`|`help`|
+| Print List|`list`|`list`|
+| Mark As Done|`done [index]`|`done 1`|
+| Delete Task|`delete [index]`|`delete 1`|
+| Find With Date|`date [YYYY-MM-DD]`|`date 2021-03-05`|
+| Find With Keyword|`keyword [keyword]`|`keyword math`|
+| Add Deadline Task|`deadline [task]/[time]`|`deadline submit UG/2021-03-05`|
+| Add Event Task|`event [task]/[time]`|`event CNY dinner/2021-02-11`|
+| Add Todo Task|`todo [task]`|`todo submit UG`|
+| Exit Program|`bye`|`bye`|
 
 
  
@@ -304,4 +304,4 @@ Baggie updates `Baggie.txt` every time user exits the program by entering [Exit 
 
 
 ## 5. Contributors
-   [baggiiiie](https://github.com/baggiiiie)
+   - [baggiiiie](https://github.com/baggiiiie)
