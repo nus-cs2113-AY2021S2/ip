@@ -17,7 +17,7 @@ public abstract class Command {
             "      Eg. event meeting /at 8pm\n    5.done <task index>\n      Mark a task as done\n" +
             "      Eg. done 1\n    6.delete <task index>\n      Delete a task from task list\n" +
             "      Eg. delete 2\n    7.find <keyword>\n      Search task list for tasks whose names contain the keyword\n" +
-            "      Eg. find book\n    8.help\n      Show help message";
+            "      Eg. find book\n    8.clear\n      Clear current task list\n    9.help\n      Show help message";
 
     public abstract CommandResult execute();
 
