@@ -58,9 +58,13 @@ Example of usage:
 Expected outcome:
 
 `-------------------------------`
+
 `Got it. I've added this task:`
+
 `[E][✘]project meeting  (at:  aug 6th 2-4pm)`
+
 `Now you have 3 tasks in the list.` 
+
 `-------------------------------`
 
 ### `deadline` - This action creates a deadline task in the system.
