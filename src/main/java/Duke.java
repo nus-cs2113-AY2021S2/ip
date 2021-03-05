@@ -315,6 +315,11 @@ public class Duke {
         System.out.println("\t__________________________________________\n");
     }
 
+    /**
+     * Search for a specific task via user's input
+     * @param userInput User's input
+     * @param tasks Array List of Task
+     */
     public static void findTasks(String userInput, ArrayList<Task> tasks) {
         System.out.println("\t------------------------------------------");
         System.out.println("\tHere are the matching tasks in your list:");
