@@ -135,6 +135,17 @@ public class Parser {
         }
         displayLine();
     }
+    public static void update(String request, TaskList list) {
+        assert !request.equals("") : "Input is invalid";
+        try {
+            int index = Integer.parseInt(request);
+            list.updateStatus(index);
+            String str = "Nice! I've marked this task as done: \n "
+                    + list.get(index);
+            str += ". Now you have " + list.getSize() + " tasks in the list";
+        } catch (NumberFormatException e) {
+        }
+    }
 
     public static ToDos getTodo(String work) throws ExceptionToDo{
         if (work.length() > 4){
