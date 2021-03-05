@@ -7,8 +7,8 @@ import task.TaskManager;
  */
 public class PrintCommand extends Command {
     @Override
-    public void executeCommand(String userInput, TaskManager taskManager) {
-        taskManager.printTaskItems();
+    public void executeCommand(String userInput, TaskManager tasksList) {
+        tasksList.printTaskItems();
         System.out.println("Enter next command: ");
     }
 }

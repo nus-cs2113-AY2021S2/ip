@@ -16,17 +16,17 @@ public class Ui {
      * Greets user when the program starts
      */
     public static void printMenu() {
-        print("Hello! Im Duke\n" + logo + "What can I do for you?");
-        print("> Use the keyword todo");
-        print("> Use the keyword deadlines followed \"/by YYYY-MM-DD HH:MM\"");
-        print("> Use the keyword event followed by \"/at\"");
-        print("> Use the keyword list to print");
+        print("Hello! I'm Duke\n" + logo + "What can I do for you?");
+        print("> Use the keyword \"todo\"");
+        print("> Use the keyword \"deadline\" followed by \"/by YYYY-MM-DD HH:MM\"");
+        print("> Use the keyword \"event\" followed by \"/at\"");
+        print("> Use the keyword \"list\" to print task list");
         print("> Use keyword \"done <Number>\"  to mark task as done!");
         print("> Use keyword \"delete <Number>\"  to delete task!");
         print("> Use keyword \"find <keyword>\"  to find task(s)!");
         print("> Use the keyword \"bye\" to exit");
         print("> Use the keyword \"menu\" to bring up the menu");
-        print("Input here: ");
+        print("Enter your command: ");
     }
 
     /**

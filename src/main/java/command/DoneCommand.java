@@ -1,6 +1,5 @@
 package command;
 
-import command.Command;
 import parser.Parser;
 import task.TaskManager;
 import exception.DukeException;
@@ -10,8 +9,8 @@ import exception.DukeException;
  */
 public class DoneCommand extends Command {
     @Override
-    public void executeCommand(String userInput, TaskManager taskList) throws DukeException {
+    public void executeCommand(String userInput, TaskManager tasksList) throws DukeException {
         int taskNoDone = Parser.getTaskNoToBeMarkDone(userInput);
-        taskList.markDone(taskNoDone);
+        tasksList.markDone(taskNoDone);
     }
 }

@@ -9,11 +9,11 @@ import java.io.FileNotFoundException;
 
 public class Duke {
     private Ui ui;
-    private TaskManager taskList;
+    private TaskManager tasksList;
 
     public Duke() throws FileNotFoundException, DukeException {
         ui = new Ui();
-        taskList = new TaskManager();
+        tasksList = new TaskManager();
     }
 
     /***
@@ -27,7 +27,7 @@ public class Duke {
                 String userInput = ui.getUserInput();
                 String newUserInput = userInput.toUpperCase();
                 Command command = Parser.parseCommand(newUserInput.toUpperCase());
-                command.executeCommand(newUserInput, taskList);
+                command.executeCommand(newUserInput, tasksList);
                 isBye = ui.sayGoodBye(newUserInput);
             } catch (DukeException e) {
                 ui.printErrorMessage(e.getMessage());

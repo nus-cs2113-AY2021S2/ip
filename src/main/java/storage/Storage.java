@@ -70,12 +70,12 @@ public class Storage {
 
     /***
      * Update the duke.txt file accordingly when list of task changes
-     * @param taskList ArrayList of task objects
+     * @param tasksList ArrayList of task objects
      * @throws IOException
      */
-    public void saveTaskListToFile(ArrayList<Task> taskList) throws IOException {
+    public void saveTasksListToFile(ArrayList<Task> tasksList) throws IOException {
         FileWriter fileWriter = new FileWriter(dukeFile);
-        for (Task task : taskList) {
+        for (Task task : tasksList) {
             String descriptionOfTask = task.getDescription().strip();
             boolean isDone = task.isDone();
             String textToAppend = null;
@@ -94,6 +94,7 @@ public class Storage {
         fileWriter.close();
     }
 
+
     /***
      * Load and process the text from the duke.txt file and add each task object into an ArrayList
      * @return ArrayList with the tasks added from the file
@@ -101,7 +102,7 @@ public class Storage {
      */
     public ArrayList<Task> loadFile() throws FileNotFoundException, DukeException {
         Scanner sc = new Scanner(dukeFile);
-        ArrayList<Task> taskList = new ArrayList<>();
+        ArrayList<Task> tasksList = new ArrayList<>();
         while (sc.hasNext()) {
             String fileText = sc.nextLine();
             String[] taskType = fileText.split("\\|");
@@ -119,9 +120,9 @@ public class Storage {
             if (taskType[1].equals(true)) {
                 task.setDone();
             }
-            taskList.add(task);
+            tasksList.add(task);
         }
-        return taskList;
+        return tasksList;
     }
 
     private LocalDate formatDate(String inputDate) throws DukeException {

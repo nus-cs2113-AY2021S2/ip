@@ -9,8 +9,8 @@ import exception.DukeException;
  */
 public class DeleteCommand extends Command {
     @Override
-    public void executeCommand(String userInput, TaskManager taskList) throws DukeException {
+    public void executeCommand(String userInput, TaskManager tasksList) throws DukeException {
         int taskNoDelete = Parser.getTaskNoToBeMarkDelete(userInput);
-        taskList.deleteTask(taskNoDelete);
+        tasksList.deleteTask(taskNoDelete);
     }
 }

@@ -10,8 +10,8 @@ import exception.DukeException;
  */
 public class AddCommand extends Command {
     @Override
-    public void executeCommand(String userInput, TaskManager taskList) throws DukeException {
+    public void executeCommand(String userInput, TaskManager tasksList) throws DukeException {
         Task taskToAdd = Parser.getTask(userInput);
-        taskList.addTask(taskToAdd);
+        tasksList.addTask(taskToAdd);
     }
 }

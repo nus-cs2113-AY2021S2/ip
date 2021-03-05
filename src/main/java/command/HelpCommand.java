@@ -8,7 +8,7 @@ public class HelpCommand extends Command {
     private Ui ui;
 
     @Override
-    public void executeCommand(String userInput, TaskManager taskManager) throws DukeException {
+    public void executeCommand(String userInput, TaskManager tasksList) throws DukeException {
         ui.printMenu();
     }
 }

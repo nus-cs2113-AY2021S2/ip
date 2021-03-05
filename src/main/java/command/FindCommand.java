@@ -9,8 +9,8 @@ import task.TaskManager;
  */
 public class FindCommand extends Command {
     @Override
-    public void executeCommand(String userInput, TaskManager taskList) {
+    public void executeCommand(String userInput, TaskManager tasksList) {
         String keywordToFind = Parser.getFindKeyword(userInput);
-        taskList.findTask(keywordToFind);
+        tasksList.findTask(keywordToFind);
     }
 }
