@@ -32,17 +32,17 @@ There is no need to save manually.
 
 ### 1. `todo TASKNAME` - Add a 'todo' task.
 
-Description: Add a 'todo' type task with the TASKNAME to the list of tasks. <p>
+**Description**: Add a 'todo' type task with the TASKNAME to the list of tasks. <p>
 
-Outcome: In updated list of tasks, there is a new task with the TASKNAME.
+**Outcome**: In updated list of tasks, there is a new task with the TASKNAME.
     Task will be displayed in the format: `[T][Status] TASKNAME`
 - Type can be 'T', 'E', or 'D'. They represent Todo, Event and Deadline tasks respectively.
 - Status: 'X' if task has been marked as 'done'. Otherwise, Empty.
 
-Example of usage: <p>
+**Example of usage**: <p>
 `todo read book`
 
-Expected outcome:
+**Expected outcome**:
 
 ````
 ____________________________________________________________
@@ -53,19 +53,19 @@ ____________________________________________________________
 ````
 ### 2. `deadline TASKNAME /by DATE` - Add a 'deadline' task.
 
-Description: Add a 'deadline' type task with its TASKNAME and its deadline which is DATE to the list of tasks. <p>
+**Description**: Add a 'deadline' type task with its TASKNAME and its deadline which is DATE to the list of tasks. <p>
 - DATE can be in any format. ie. DATE is a simply a word or phrase. 
 - There are no limits on the length of the DATE.
 
-Outcome: In updated list of tasks, there is a new task with the TASKNAME and the deadline DATE. <p>
+**Outcome**: In updated list of tasks, there is a new task with the TASKNAME and the deadline DATE. <p>
 Task will be displayed in the format: `[E][Status] TASKNAME (by: DATE)`
 - Type can be 'T', 'E', or 'D'. They represent Todo, Event and Deadline tasks respectively.
 - Status: 'X' if task has been marked as 'done'. Otherwise, Empty.
 
-Example of usage: <p>
+**Example of usage**: <p>
 `deadline return book /by June 6th`
 
-Expected outcome:
+**Expected outcome**:
 
 ````
 ____________________________________________________________
@@ -77,19 +77,19 @@ ____________________________________________________________
 
 ### 3. `event TASKNAME /at DATE` - Add a 'event' task.
 
-Description: Add a 'event' type task with its TASKNAME and the DATE the event is held on to the list of tasks. 
+**Description**: Add a 'event' type task with its TASKNAME and the DATE the event is held on to the list of tasks. 
 - DATE can be in any format. ie. DATE is a simply a word or phrase.
 - There are no limits on the length of the DATE.
 
-Outcome: In updated list of tasks, there is a new task with the TASKNAME and the DATE of the event. <p>
+**Outcome**: In updated list of tasks, there is a new task with the TASKNAME and the DATE of the event. <p>
 Task will be displayed in the format: `[E]][Status] TASKNAME (by: DATE)`
 - Type can be 'T', 'E', or 'D'. They represent Todo, Event and Deadline tasks respectively.
 - Status: 'X' if task has been marked as 'done'. Otherwise, Empty.
 
-Example of usage: <p>
+**Example of usage**: <p>
 `event project meeting /at Aug 6th 2-4pm`
 
-Expected outcome:
+**Expected outcome**:
 
 ````
 ____________________________________________________________
@@ -101,18 +101,18 @@ ____________________________________________________________
 
 ### 4. `delete INDEX` - Delete a task.
 
-Description: Delete a task at INDEX position in the list.
+**Description**: Delete a task at INDEX position in the list.
 - The INDEX refers to the index number shown in the displayed tasks list.
 - The INDEX must be a positive integer 1, 2, 3, …
 - The INDEX must be within the total number of tasks.
 
-Outcome: In updated list of tasks, the task is removed if it exists. <p> 
+**Outcome**: In updated list of tasks, the task is removed if it exists. <p> 
 - The index of all the other tasks in the list are updated automatically.
 
-Example of usage: <p>
+**Example of usage**: <p>
 `delete 2`
 
-Expected outcome:
+**Expected outcome**:
 
 ````
 ____________________________________________________________
@@ -123,14 +123,14 @@ ____________________________________________________________
 
 ### 5. `list` - List all tasks.
 
-Description: List all tasks in the updated list.
+**Description**: List all tasks in the updated list.
 
-Outcome: Shows the updated list of tasks.
+**Outcome**: Shows the updated list of tasks.
 
-Example of usage: <p>
+**Example of usage**: <p>
 `list`
 
-Expected outcome:
+**Expected outcome**:
 
 ````
 ____________________________________________________________
@@ -142,17 +142,17 @@ ____________________________________________________________
 
 ### 6. `done INDEX` - Mark task as done.
 
-Description: Mark a task at INDEX position in the list as 'done'.
+**Description**: Mark a task at INDEX position in the list as 'done'.
 - The INDEX refers to the index number shown in the displayed tasks list.
 - The INDEX must be a positive integer 1, 2, 3, …
 - The INDEX must be within the total number of tasks.
 
-Outcome: In updated list of tasks, the status of the task is marked as done with a 'X'.
+**Outcome**: In updated list of tasks, the status of the task is marked as done with a 'X'.
 
-Example of usage: <p>
+**Example of usage**: <p>
 `done 1`
 
-Expected outcome:
+**Expected outcome**:
 
 ````
 ____________________________________________________________
@@ -163,15 +163,15 @@ ____________________________________________________________
 
 ### 7. `find KEYWORD` - Find tasks by a keyword.
 
-Description: Filter out all tasks with a certain keyword.
+**Description**: Filter out all tasks with a certain keyword.
 - The KEYWORD can be a word, phrase or just one character. ie. no definite format for KEYWORD
 
-Outcome: Shows all tasks where their description (name or date) contains the keyword.
+**Outcome**: Shows all tasks where their description (name or date) contains the keyword.
 
-Example of usage: <p>
+**Example of usage**: <p>
 `find book`
 
-Expected outcome:
+**Expected outcome**:
 
 ````
 Here are the matching tasks in the list:
@@ -181,18 +181,17 @@ ____________________________________________________________
 
 ### 8. `bye` - Exit the program.
 
-Description: Says 'bye' to program to end the current session.
+**Description**: Says 'bye' to program to end the current session.
 
-Outcome: Shows greeting to indicate that program has exited.
+**Outcome**: Shows greeting to indicate that program has exited.
 
-Example of usage: <p>
+**Example of usage**: <p>
 `bye`
 
-Expected outcome:
+**Expected outcome**:
 
 ````
 ____________________________________________________________
 Bye. Hope to see you again soon!
 ____________________________________________________________
 ````
-
