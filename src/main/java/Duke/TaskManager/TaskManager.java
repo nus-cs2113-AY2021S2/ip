@@ -13,15 +13,32 @@ public class TaskManager {
         tasksList = new ArrayList<>();
     }
 
+    /**
+     * Add new Task object into tasksList
+     *
+     * @param toAdd Task object
+     * @return Task object that has been added
+     */
     public Task addTask (Task toAdd) {
         tasksList.add(toAdd);
         return toAdd;
     }
 
+    /**
+     * return the number of tasks in tasksList
+     *
+     * @return
+     */
     public static int taskCount() {
         return tasksList.size();
     }
 
+    /**
+     * remove specific Task object from ArrayList
+     *
+     * @param taskNo index of the Task to be removed
+     * @return The Task object that has just been removed
+     */
     public static Task removeTask(String taskNo) {
         int taskNumber = Integer.parseInt(taskNo);
         taskNumber--;
@@ -30,17 +47,33 @@ public class TaskManager {
         return selectedTask;
     }
 
+
+    /**
+     * returns specific Task from tasksList when the input is a string
+     *
+     * @param taskNo index of the Task from ArrayList
+     * @return The Task object from that index
+     */
     public static Task getTask(String taskNo) {
         int taskNumber = Integer.parseInt(taskNo);
         taskNumber--;
         return tasksList.get(taskNumber);
     }
 
+    /**
+     * returns specific Task from tasksList when the input is an integer
+     *
+     * @param taskNo index of the Task from ArrayList
+     * @return The Task object from that index
+     */
     public static Task getTaskWithInt(Integer taskNo) {
         taskNo--;
         return tasksList.get(taskNo);
     }
 
+    /**
+     * List out all the tasks and details through DukeUI
+     */
     public static void listOutTasks() {
         DukeUI.printLine();
         int i = 0;
@@ -51,6 +84,11 @@ public class TaskManager {
         }
     }
 
+    /**
+     * Call removeTask method and notify user of deletion and remaining number of Tasks
+     *
+     * @param s index of Task to be removed
+     */
     public static void deleteTask(String s) {
         Task selectedTask = getTask(s);
         DukeUI.print("Noted. I've removed this task");
@@ -59,6 +97,11 @@ public class TaskManager {
         DukeUI.print("Now you have " + TaskManager.taskCount() + " tasks in the list.");
     }
 
+    /**
+     * Set the Task.isDone as True
+     *
+     * @param s index of the Task that will be marked as Done
+     */
     public static void markTaskAsDone(String s) {
         Task selectedTask = TaskManager.getTask(s);
         selectedTask.markAsDone();
@@ -66,6 +109,11 @@ public class TaskManager {
         DukeUI.print("[X] " + selectedTask.getDescription());
     }
 
+    /**
+     * List out the tasks that contains the keyword s.
+     *
+     * @param s keyword input by the user
+     */
     public static void findTask(String s) {
         ArrayList<Task> resultList = new ArrayList<>();
         int i = 0;
