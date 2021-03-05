@@ -36,6 +36,16 @@ You can start by typing:
  6. **done xxx** to mark **One activity as done**
  7. **bye** to end **The system**
 
+#### Function Table
+| Syntax      | Description |
+| ----------- | ----------- |
+| list      | View list       |
+| event   | Add event        |
+| todo      | Add todo       |
+| deadline   | Add deadline        |
+| done      | Done Item      |
+| bye   | End system        |
+
 #### Possible user journey
 ```
 ===================================================
