@@ -118,6 +118,9 @@ public class Parser {
                     System.out.println("No index found. Please key an appropriate index");
                 }
             }
+        } else if (userInput.split(" ")[0].equals("find")) {
+            System.out.println("Here are the matching tasks in your list: ");
+            TaskList.findTask(userInput.split(" ")[1]);
         } else {
             Ui.printWrongCommand();
         }
