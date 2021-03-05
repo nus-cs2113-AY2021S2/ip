@@ -53,16 +53,25 @@ public class Save {
                 switch(line.charAt(1)) {
                 case 'T':
                     Todo todo = new Todo(line.substring(7));
+                    if (line.charAt(4) == 'X') {
+                        todo.markDone();
+                    }
                     list.add(todo);
                     break;
                 case 'D':
                     int add = line.indexOf(':') - 3;
                     Deadline deadline = new Deadline(line.substring(7, add + 1) + "/by" + line.substring(add + 4));
+                    if (line.charAt(4) == 'X') {
+                        deadline.markDone();
+                    }
                     list.add(deadline);
                     break;
                 case 'E':
                     int add1 = line.indexOf(':') - 3;
                     Event event = new Event(line.substring(7, add1 + 1) + "/at" + line.substring(add1 + 4));
+                    if (line.charAt(4) == 'X') {
+                        event.markDone();
+                    }
                     list.add(event);
                     break;
                 default:

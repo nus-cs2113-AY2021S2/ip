@@ -27,7 +27,7 @@ public class Todo {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "\u2718" : " ");
+        return (isDone ? "X" : " ");
     }
 
     /**
