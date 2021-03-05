@@ -165,7 +165,7 @@ or
 
 `find sleep`
 
-Expected outcome: (If there is no tasks with the specified keyword.)
+Expected outcome: (If there is no task with the specified keyword.)
 
 ```
 Here are the matching tasks in your list:
