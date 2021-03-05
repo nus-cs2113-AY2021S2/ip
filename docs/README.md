@@ -1,14 +1,18 @@
 # User Guide
 A brief User Guide for CS2113T IP Project. 
-This user guide explains briefly how to use the commands for the purpose of interaction.
+This user guide explains briefly how to use the commands to interact with the program.
 As a task manager, the functionality of the program includes adding, deleting and searching(to name a few features) 
-a task(either a todo, deadline or event) to the list.
+a task(either a todo, deadline or event) to the list. Do take note that the list is saved into a text file whenever the 
+list is modified and the list will be automatically loaded from the text file when the program starts up.
+
 
 ## How to use this User Guide
-The User Guide has two main sections as well as a "Misc" section. The first section "features" lists the features available while the second section 
-"Usage" explains how the command can be used. The sample usage and expected output are included as well in the usage section
-for the purpose of clarity. The last section "Misc" shows the "welcome screen" generated when the program is opened and the
+The User Guide has two main sections as well as a "Misc" section. The first section "features" lists the features 
+available while the second section "Usage" explains how the command can be used. 
+The sample usage and expected output are included as well in the usage section for the purpose of clarity. 
+The last section "Misc" shows the "welcome screen" generated when the program is opened and the
 "end screen" generated when the program is terminated.
+
 
 ## Features 
 
@@ -157,7 +161,9 @@ Expected outcome:
 
 ### Welcome screen
 
-The text that is shown when the JAR file runs for the first time. If the contents of the list is empty, "The list is empty" will be shown.
+The text that is shown when the program runs for the first time. The program will scan the contents of the text file 
+called "duke.txt" and load the list into the program. If no text file called "duke.txt" is found or if the contents of the 
+text file is empty, "The list is empty" will be displayed.
 
 Expected outcome:
 
@@ -182,7 +188,9 @@ Expected outcome:
 
 ### End screen
 
-The text that is shown when the JAR file is terminated. If the contents of the list is empty, "The list is empty" will be shown.
+The display that is shown when the program is terminated. The display shows the tasks that have been added to the list, which 
+is the content that has been written to the text file "duke.txt"(the content of the list is saved to the text file whenever 
+a command is called). If the contents of the list is empty, "The list is empty" will be shown and the text file will be blank.
 
 Example of usage:
 
