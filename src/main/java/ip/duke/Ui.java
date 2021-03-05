@@ -102,6 +102,26 @@ public class Ui {
     }
 
     /**
+     * Prints a warning message when user forgets to input the time of the Deadline task
+     */
+    public static void printDeadlineMissingMessage() {
+        printLine();
+        System.out.println("🙁 OOPS!!! The time of the Deadline task is missing.");
+        System.out.println("Please complete the time information. :)");
+        printLine();
+    }
+
+    /**
+     * Prints a warning message when user forgets to input the time of the Event task
+     */
+    public static void printEventTimeMissingMessage() {
+        printLine();
+        System.out.println("🙁 OOPS!!! The time of the Event task is missing.");
+        System.out.println("Please complete the time information. :)");
+        printLine();
+    }
+
+    /**
      * Prints all the tasks in the list.
      *
      * @param list the task list to be displayed
@@ -110,6 +130,16 @@ public class Ui {
         for (int i = 1; i <= list.size(); i++) {
             System.out.println(i + ". " + list.get(i - 1).toString());
         }
+        printLine();
+    }
+
+    /**
+     * Prints a message when there is no task in the task list
+     */
+    public static void printEmptyListMessage() {
+        printLine();
+        System.out.println("The list is empty.");
+        System.out.println("You can add your task now! :)");
         printLine();
     }
 
@@ -149,6 +179,16 @@ public class Ui {
     }
 
     /**
+     * Prints a message if the given index to mark as done does not exist in the list
+     */
+    public static void printDoneInvalidMessage() {
+        printLine();
+        System.out.println("🙁 OOPS!!! The done index is not valid.");
+        System.out.println("Please input again.:)");
+        printLine();
+    }
+
+    /**
      * Prints a message to confirm deleting a task successfully by printing the formatted task
      * and the current number of tasks in the task list.
      *
@@ -163,12 +203,32 @@ public class Ui {
     }
 
     /**
+     * Prints a message if the given index to mark as done does not exist in the list
+     */
+    public static void printDeletedInvalidMessage() {
+        printLine();
+        System.out.println("🙁 OOPS!!! The delete index is not valid.");
+        System.out.println("Please input again.:)");
+        printLine();
+    }
+
+    /**
      * Prints an error message if the task matches the find input cannot be found.
      */
     public static void printEmptyMessage() {
         printLine();
         System.out.println("There is no matching task in your list.");
         System.out.println("Please input another keyword! :)");
+        printLine();
+    }
+
+    /**
+     * Prints an warning message if the user input date is not follow the correct format.
+     */
+    public static void printDateInvalidMessage() {
+        printLine();
+        System.out.println("🙁 OOPS!!! The date is not valid");
+        System.out.println("Please follow the format YYYY-MM-DD and input again.:)");
         printLine();
     }
 

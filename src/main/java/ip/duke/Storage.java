@@ -21,6 +21,14 @@ import java.io.FileWriter;
 public class Storage {
     public static String filePath;
     public static ArrayList<Task> list = new ArrayList<>();
+    private static final int ONE_INDEX = 1;
+    private static final int ONE_SPACE_LENGTH = 1;
+    private static final int TWO_SPACE_LENGTH = 2;
+    private static final int START_POSITION = 0;
+    private static final int TYPE_POSITION = 1;
+    private static final int STATUS_POSITION = 4;
+    private static final int CONTENT_POSITION = 8;
+
 
     /**
      * Constructs a Storage object to access the data in the given address.
@@ -40,7 +48,7 @@ public class Storage {
      * @return the task list that read from that file
      * @throws IOException an exception occurs when encountered with problems reading into the file
      */
-    public static ArrayList<Task> loadData() throws IOException {
+    public static ArrayList<Task> load() throws IOException {
         File dataFile = new File(filePath);
         if (dataFile.createNewFile()) {
             Ui.printLine();
@@ -50,27 +58,27 @@ public class Storage {
         Scanner dataScanner = new Scanner(dataFile);
         while (dataScanner.hasNext()) {
             String data = dataScanner.nextLine();
-            String type = data.substring(0, 1);
-            boolean isDone = data.charAt(4) == '1';
-            String content = data.substring(8);
+            String type = data.substring(START_POSITION, TYPE_POSITION);
+            boolean isDone = data.charAt(STATUS_POSITION) == '1';
+            String content = data.substring(CONTENT_POSITION);
             String description = content;
             String byTime;
             String atTime;
-            int separatePoint = content.length() - 1;
+            int separatePoint = content.length() - ONE_SPACE_LENGTH;
             if (content.contains("|")) {
                 separatePoint = content.indexOf("|");
-                description = content.substring(0, separatePoint - 1);
+                description = content.substring(START_POSITION, separatePoint - ONE_SPACE_LENGTH);
             }
             switch (type) {
             case "T":
                 fileUpdateTodo(list, description, isDone);
                 break;
             case "D":
-                byTime = content.substring(separatePoint + 2);
+                byTime = content.substring(separatePoint + TWO_SPACE_LENGTH);
                 fileUpdateDeadline(list, description, byTime, isDone);
                 break;
             case "E":
-                atTime = content.substring(separatePoint + 2);
+                atTime = content.substring(separatePoint + TWO_SPACE_LENGTH);
                 fileUpdateEvent(list, description, atTime, isDone);
                 break;
             default:
@@ -89,7 +97,7 @@ public class Storage {
      */
     public static void fileUpdateTodo(ArrayList<Task> list, String description, boolean isDone) {
         list.add(new Todo(description));
-        list.get(list.size() - 1).setDone(isDone);
+        list.get(list.size() - ONE_INDEX).setDone(isDone);
     }
 
     /**
@@ -102,7 +110,7 @@ public class Storage {
      */
     public static void fileUpdateDeadline(ArrayList<Task> list, String description, String byTime, boolean isDone) {
         list.add(new Deadline(description, byTime));
-        list.get(list.size() - 1).setDone(isDone);
+        list.get(list.size() - ONE_INDEX).setDone(isDone);
     }
 
     /**
@@ -115,7 +123,7 @@ public class Storage {
      */
     public static void fileUpdateEvent(ArrayList<Task> list, String description, String atTime, boolean isDone) {
         list.add(new Event(description, atTime));
-        list.get(list.size() - 1).setDone(isDone);
+        list.get(list.size() - ONE_INDEX).setDone(isDone);
     }
 
     /**
@@ -126,7 +134,7 @@ public class Storage {
      *
      * @throws IOException an exception occurs when encountered with problems writing to the file
      */
-    public static void saveData() throws IOException {
+    public static void save() throws IOException {
         FileWriter fw = new FileWriter(filePath);
         for (int i = 0; i < TaskList.getSize(); i++) {
             fw.write(TaskList.getList().get(i).toDataString() + "\n");

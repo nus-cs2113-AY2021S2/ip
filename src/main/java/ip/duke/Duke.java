@@ -1,5 +1,7 @@
 package ip.duke;
 
+import ip.duke.exception.DukeException;
+
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -14,11 +16,13 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private static final String filePath = "data/duke.txt";
+
 
     /**
      * The constructor for a Duke object, returns nothing
      * loading the task information that already exist in the file
-     * which is written by previous runs before each run
+     * which is written by previous runs
      *
      * @param filePath the address of the file storing all task information into a certain taskList
      * @throws IOException the exception that occurs when encountered with problems in writing to
@@ -28,7 +32,7 @@ public class Duke {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
-            tasks = new TaskList(storage.loadData());
+            tasks = new TaskList(storage.load());
         } catch (IOException e) {
             ui.showLoadingError();
             tasks = new TaskList();
@@ -37,43 +41,32 @@ public class Duke {
 
     /**
      * Runs the Duke program.
-     */
-    public void run() throws IOException {
-        start();
-        runUntilExit();
-        exit();
-    }
-
-    /**
      * Starts the program by printing greeting information.
-     */
-    private void start() {
-        ui.printGreetings();
-    }
-
-    /**
-     * The program continues running to get the commands from user inputs until
-     * the user's input is an instruction (bye) to exit the program.
-     * The program helps to store all task information into a certain file
+     * The program continues running to get and handle the commands from user inputs until
+     * the user input is an instruction (bye)
+     * The program helps to store all task information into a specific file
+     * The program ends when receives a "bye" instruction
      *
      * @throws DukeException when the command received in is incomplete or different from any acceptable commands
      * @throws IOException   the exception that occurs when encountered with problems in writing to
      *                       or reading from a file
      */
-    private void runUntilExit() throws IOException {
+    public void run() throws IOException {
+        ui.printGreetings();
         Scanner in = new Scanner(System.in);
-        String commandText;
-
-        do {
-            commandText = in.nextLine();
+        String userCommand = in.nextLine();
+        while (!userCommand.equals("bye")) {
             try {
-                Parser.parseCommand(commandText);
+                Parser.parseCommand(userCommand);
             } catch (DukeException e) {
-                ui.printInvalidInputWarnings(commandText);
+                ui.printInvalidInputWarnings(userCommand);
             }
-        } while (!commandText.equals("bye"));
+            userCommand = in.nextLine();
+        }
 
-        storage.saveData();
+        storage.save();
+
+        exit();
     }
 
     /**
@@ -85,6 +78,6 @@ public class Duke {
     }
 
     public static void main(String[] args) throws IOException {
-        new Duke("data/duke.txt").run();
+        new Duke(filePath).run();
     }
 }

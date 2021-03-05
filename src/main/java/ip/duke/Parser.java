@@ -1,9 +1,12 @@
 package ip.duke;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+
+import ip.duke.exception.*;
 
 public class Parser {
+
+    private static final int ONE_SPACE_LENGTH = 1;
+    private static final int START_POSITION = 0;
 
     /**
      * Parses the user's input into a format that can be recognized by the Duke project program.
@@ -23,9 +26,9 @@ public class Parser {
             throw new DukeException();
         } else {
             lengthOfCommandType = input.indexOf(' ');
-            commandType = input.substring(0, lengthOfCommandType);
+            commandType = input.substring(START_POSITION, lengthOfCommandType);
         }
-        String commandContent = input.substring(lengthOfCommandType + 1);
+        String commandContent = input.substring(lengthOfCommandType + ONE_SPACE_LENGTH);
         switch (commandType) {
         case "help":
             parseHelpCommand();
@@ -68,25 +71,23 @@ public class Parser {
     }
 
     private static void parseDeadlineCommand(String commandContent) {
-        int byTimePosition = commandContent.indexOf("/") + 4;
-        String description = commandContent.substring(0, byTimePosition - 5);
-        String byTime = commandContent.substring(byTimePosition);
-        if (byTime.contains("-")) {
-            LocalDate date = LocalDate.parse(byTime);
-            byTime = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        try {
+            TaskList.updateDeadline(commandContent);
+        } catch (TimeException e) {
+            Ui.printDeadlineMissingMessage();
+        } catch (DateException e) {
+            Ui.printDateInvalidMessage();
         }
-        TaskList.updateDeadline(description, byTime);
     }
 
     private static void parseEventCommand(String commandContent) {
-        int atTimePosition = commandContent.indexOf("/") + 4;
-        String description = commandContent.substring(0, atTimePosition - 5);
-        String atTime = commandContent.substring(atTimePosition);
-        if (atTime.contains("-")) {
-            LocalDate date = LocalDate.parse(atTime);
-            atTime = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        try {
+            TaskList.updateEvent(commandContent);
+        } catch (TimeException e) {
+            Ui.printEventTimeMissingMessage();
+        } catch (DateException e) {
+            Ui.printDateInvalidMessage();
         }
-        TaskList.updateEvent(description, atTime);
     }
 
     private static void parseListCommand() {
@@ -95,22 +96,42 @@ public class Parser {
 
     private static void parseDoneCommand(String commandContent) {
         int doneIndex = Integer.parseInt(commandContent);
-        TaskList.markDone(doneIndex);
+        try {
+            TaskList.markDone(doneIndex);
+        } catch (IndexException e) {
+            Ui.printDoneInvalidMessage();
+        } catch (ListException e) {
+            Ui.printEmptyListMessage();
+        }
     }
 
     private static void parseDeleteCommand(String commandContent) {
         int deletedIndex = Integer.parseInt(commandContent);
-        TaskList.deleteTask(deletedIndex);
+        try {
+            TaskList.deleteTask(deletedIndex);
+        } catch (IndexException e) {
+            Ui.printDeletedInvalidMessage();
+        } catch (ListException e) {
+            Ui.printEmptyListMessage();
+        }
     }
 
     private static void parseFindCommand(String commandContent) {
-        TaskList.getFoundTask(commandContent);
+        try {
+            TaskList.getFoundTask(commandContent);
+        } catch (ListException e) {
+            Ui.printEmptyListMessage();
+        }
     }
 
     private static void parseDateCommand(String commandContent) {
-        LocalDate date = LocalDate.parse(commandContent);
-        commandContent = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        TaskList.getDateTask(commandContent);
+        try {
+            TaskList.getDateTask(commandContent);
+        } catch (DateException e) {
+            Ui.printDateInvalidMessage();
+        } catch (ListException e) {
+            Ui.printEmptyListMessage();
+        }
     }
 
 }
