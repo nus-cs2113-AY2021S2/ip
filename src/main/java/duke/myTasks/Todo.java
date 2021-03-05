@@ -2,7 +2,7 @@ package duke.myTasks;
 import duke.myExceptions.NoContent;
 
 public class Todo {
-    protected String name;
+    public String name;
     protected boolean isDone;
 
     public Todo(String name) throws NoContent{

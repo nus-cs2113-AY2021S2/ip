@@ -33,7 +33,16 @@ public class TaskList {
         System.out.println("Now you have " + index + " tasks in the list.");
     }
 
-    public void add(Todo task) {
-        list.add(task);
+    public void find(String content) {
+        boolean exists = false;
+        for (int i = 0; i < index; i++) {
+            if (list.get(i).name.contains(content)) {
+                exists = true;
+                System.out.println((i+1) + ". " + list.get(i).toString());
+            }
+        }
+        if (!exists) {
+            System.out.println("There is no task matching the search term.");
+        }
     }
 }
