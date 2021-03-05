@@ -288,7 +288,7 @@ If File  `Baggie.txt` exists in the working directory, Baggie will read from the
 
 If File  `Baggie.txt` does not exist in the working directory, Baggie will create a new file `Baggie.txt`.
 
-Baggie updates `Baggie.txt` every time user exits the program by entering [Exit Command](#28-exit-command)
+Baggie updates `Baggie.txt` every time user exits the program by entering [Exit Command](#28-exit-command).
 
 
 
