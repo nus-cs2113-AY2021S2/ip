@@ -82,4 +82,26 @@ public class Parser {
             System.out.println("Something went wrong when writing: " + e.getMessage());
         }
     }
+
+    public static void findTask(String command, TaskList tasks) {
+        try {
+            String keyword = command.substring(6);
+            int count = 0;
+            System.out.println("Here are the matching tasks in your list:");
+            for(int i=0; i<Task.getTaskCount(); i++) {
+                Task t = tasks.getTaskByIndex(i);
+                if(t.getDescription().contains(keyword)) {
+                    count++;
+                    System.out.print(count+". ");
+                    System.out.println(t);
+                }
+            }
+            if(count == 0) {
+                System.out.println("OOPS!!! There are no matching tasks.");
+            }
+        } catch (StringIndexOutOfBoundsException e) {
+            System.out.println("OOPS!!! The keyword cannot be empty.");
+        }
+    }
+
 }
