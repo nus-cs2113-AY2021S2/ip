@@ -1,1 +1,3 @@
-E | 0 | Xinjia attend CS2113 lecture | Friday 19 Feb 2021 from 4-6pm
+T | 1 | assignment1
+D | 0 | assignment2 | Friday 5/3/2021
+E | 0 | submit assignment3 | 6/3/2021

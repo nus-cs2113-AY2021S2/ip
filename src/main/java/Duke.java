@@ -25,11 +25,7 @@ public class Duke {
         while (!line.equals("bye")) {
             while(!line.equals("list")) {
                 if (line.startsWith("done")){
-                    String[] parts = line.split(" ");
-                    int i=Parser.parserToInteger(parts[1].trim());
-                    Tasks.get(i-1).markAsDone();
-                    System.out.println(Tasks.get(i-1).toString() + "\n");
-                    TaskList.showDone();
+                    TaskList.showDone(Tasks, line);
                 }
                 else if (line.startsWith("todo")) {
                     try {
@@ -68,6 +64,16 @@ public class Duke {
                 else if (line.startsWith("delete")) {
                     TaskList.showRemoveTasks(Tasks, line);
                 }
+                else if (line.startsWith("find")){
+                    try {
+                        line.substring(line.indexOf(" "));
+                        line = line.replace("find ", "");
+                        TaskList.findTasks(Tasks, line);
+                    } catch (java.lang.StringIndexOutOfBoundsException e) {
+                        Ui.showEmptyDescriptionException(line);
+                    }
+
+                }
                 else if (!line.equals("")){
                     Ui.showException();
                 }
@@ -95,7 +101,7 @@ public class Duke {
     }
 
     public static void main(String[] args) throws IOException {
-        new Duke("C:\\Users\\Xinjia\\Desktop\\cs2113t\\ip\\src\\main\\java\\duke.txt").run();
+        new Duke("src\\main\\java\\duke.txt").run();
     }
 
 
