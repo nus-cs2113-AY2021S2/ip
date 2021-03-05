@@ -2,7 +2,7 @@
 
 Baggie is an interactive task-manager. He is purely Command-Line Interface (CLI).
 ## Getting Started
-### Quick Start
+## Quick Start
 - Ensure you have Java 11 or above installed in your Computer.
 - Download the latest version of `Baggie.jar` file from [here](https://github.com/baggiiiie/ip/releases/tag/v0.1).
 - Move the `Baggie.jar` file to the folder of your choice.
@@ -23,9 +23,9 @@ ____________________________________________________________
 ____________________________________________________________
 
    ```
-### Features
+## Features
 
-**Help Menu** 
+### Help Menu 
 This command prints a help menu for the user.
 
 Format: `help`
@@ -48,7 +48,10 @@ Expected Output:
  	deadline-> format: deadline [task] / [time]
  	[tip: enter date as YYYY-MM-DD to help Baggie understand better!]
 ```
-**Print List** 
+
+
+
+### Help Menu 
 This command prints a task list for the user.
 
 Format: `list`
