@@ -128,6 +128,7 @@ Question: Will Happy update the changes made in CLI to the local text file?
 Answer: Yes, all changes (add / delete / set as Done) will be updated synchronously.
 
 ## Command Summary
+
 |Command|Format|
 |---------|---------|
 |todo|todo (name of the task)|
