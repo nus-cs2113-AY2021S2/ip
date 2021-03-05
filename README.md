@@ -286,4 +286,4 @@ Baggie updates `Baggie.txt` every time user exits the program by entering [Exit 
 
 
 ## 5. Contributors
-   [baggiiiie](https://github.com/baggiiiie)
+   - [baggiiiie](https://github.com/baggiiiie)
