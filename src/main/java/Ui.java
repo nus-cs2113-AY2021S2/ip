@@ -1,3 +1,4 @@
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Ui {
@@ -41,7 +42,7 @@ public class Ui {
         System.out.println(DIVIDER);
     }
 
-    public String getCommandFromUser() {
+    public String getCommandFromUser() throws NoSuchElementException {
         return scanner.nextLine().strip();
     }
 
@@ -55,6 +56,16 @@ public class Ui {
         System.out.println(" Got it. I've added this task:");
         System.out.println("   " + taskStored);
         System.out.println(" Now you have " + taskCount + " tasks in the list.");
+        System.out.println(DIVIDER);
+    }
+
+    public void printTasksFound(TaskList tasksFound) {
+        System.out.println(DIVIDER);
+        System.out.println(" Here are the matching tasks in your list:");
+        for (int i = 0; i < tasksFound.getTaskCount(); i++) {
+            Task currentTask = tasksFound.getTaskAt(i);
+            System.out.printf(" %d.%s\n", (i + 1), currentTask);
+        }
         System.out.println(DIVIDER);
     }
 
