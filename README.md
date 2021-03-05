@@ -7,7 +7,7 @@ Baggie is an interactive task-manager. He is purely based on Command-Line Interf
 - Download the latest version of `Baggie.jar` file from [here](https://github.com/baggiiiie/ip/releases/tag/v0.1).
 - Move the `Baggie.jar` file to the folder of your choice.
 - Open terminal(For MacOS)/command prompt(For Windows) and change working directory to that folder. 
-- Launch *Baggie* by entering *java -jar Baggie.jar*.
+- Launch *Baggie* by entering *java -jar ip.jar*.
 
 #### Following is the Welcome Page if Baggie is running successfully
    ```
@@ -239,6 +239,24 @@ Expected Output:
 ```
  Baggie doesn't know what to do with the command D:
 ```
+
+## 3. Command Overview
+ Command | Format | Example 
+---------|--------|---------
+ Help Menu|`help`|`help`
+ Print List|`list`|`list`
+ Mark As Done|`done [index]`|`done 1`
+ Delete Task|`delete [index]`|`delete 1`
+ Find With Date|`date [YYYY-MM-DD]`|`date 2021-03-05`
+ Find With Keyword|`keyword [keyword]`|`keyword math`
+ Add Deadline Task|`deadline [task]/[time]`|`deadline submit UG/2021-03-05`
+ Add Event Task|`event [task]/[time]`|`event CNY dinner/2021-02-11`
+ Add Todo Task|`todo [task]`|`todo submit UG`
+ Exit Program|`bye`|`bye`
+
+
+ 
+
 
 ## 3. Storage
 If File  `Baggie.txt` exists in the working directory, Baggie will read from the file and load the saved tasks into task list;
