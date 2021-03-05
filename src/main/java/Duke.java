@@ -10,6 +10,9 @@ import java.io.IOException;
 // git push origin --tags
 
 public class Duke {
+
+    private Ui ui;
+
     public static ArrayList<Task> tasks = new ArrayList<>();
     public static boolean isContinue = true;
 
@@ -212,7 +215,10 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        greetMessage();
+        Ui ui = new Ui();
+        System.out.println(ui.getWelcome());
+
+
         Scanner scanner = new Scanner(System.in);
         String input;
         try {
@@ -234,17 +240,6 @@ public class Duke {
         scanner.close();
     }
 
-    public static void greetMessage() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
 
-        System.out.println("____________________________________________________________");
-        System.out.println("Hello! I'm \n" + logo );
-        System.out.println("What can I do for you?");
-        System.out.println("____________________________________________________________");
-    }
 
 }
