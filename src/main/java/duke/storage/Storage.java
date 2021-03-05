@@ -12,17 +12,28 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Scanner;
+
+/**
+ * Represents storage data.
+ */
 
 public class Storage {
     public static String filePath;
 
-    public Storage (String input) {
+    public Storage(String input) {
         filePath = input;
-//        load();
+        loadData();
     }
 
+    /**
+     * Loads the file "data.txt".
+     * If the file "data.txt" exits, reads the file
+     * If the file "data.txt" does not exist, it creates the file.
+     * Reads data from "data.txt"
+     * Decodes data in data.txt according to task types.
+     * No return value
+     */
     public static void loadData() {
         try {
             Path dataFilePath = Paths.get("data/");
@@ -53,23 +64,19 @@ public class Storage {
 
 
     }
-//    public static void loadData() {
-//        try {
-//            createFile();
-//        }
-//        catch(IllegalStateException e) {
-//            System.out.println("Error in loading data! Please try again!");
-//        }
-//    }
 
+    /**
+     * Writes data into the file "data.txt".
+     *
+     */
     public static boolean saveData() {
         try {
             System.out.println("Saving your data...");
             File file = new File("duke.txt");
             FileWriter fileWriter = new FileWriter("data/duke.txt");
 
-            for (int i = 0; i <  TaskList.tasks.size(); i++) {
-                Task currentTask =  TaskList.tasks.get(i);
+            for (int i = 0; i < TaskList.tasks.size(); i++) {
+                Task currentTask = TaskList.tasks.get(i);
                 fileWriter.write(currentTask.getTaskType() + " | " + ((currentTask.getIsDone()) ? "1" : "0") + " | "
                         + currentTask.getDescription() + ((currentTask.hasDateTime()) ? " | "
                         + currentTask.getDateTime() : "") + "\n");

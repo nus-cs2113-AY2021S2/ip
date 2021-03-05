@@ -1,9 +1,12 @@
 package duke.command;
 
-import duke.tasks.Task;
 import duke.tasklist.TaskList;
 
-import java.util.ArrayList;
+/**
+ * Marks a task as done
+ *
+ * @param description input by user
+ */
 
 public class MarkAsDoneCommand extends Command{
     public MarkAsDoneCommand(String description) {

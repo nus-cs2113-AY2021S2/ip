@@ -1,21 +1,14 @@
 package duke;
 
-import duke.tasks.Task;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Todo;
 import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.tasklist.TaskList;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
-//import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.io.File;
-import java.io.FileWriter;
-//import java.io.FileNotFoundException;
-import java.io.IOException;
+/**
+ * Represents Duke program.
+ */
 
 public class Duke {
 
@@ -23,9 +16,30 @@ public class Duke {
     private TaskList taskList;
     private Ui ui;
 
-    public static void main(String[] args) throws DukeException{
+    /**
+     * Instantiates an instance of Duke.
+     *
+     * @param filePath file path of stored data.
+     */
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        taskList = new TaskList(storage);
+    }
+
+    /**
+     * Runs the program.
+     */
+    public void run() throws DukeException {
         Ui.printWelcomeMessage();
         Storage.loadData();
         Parser.getInput();
+    }
+
+    /**
+     * Runs Duke.
+     */
+    public static void main(String[] args) throws DukeException{
+        new Duke("data.txt").run();
     }
 }

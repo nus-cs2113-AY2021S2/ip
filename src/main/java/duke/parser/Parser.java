@@ -1,13 +1,14 @@
 package duke.parser;
 
-import duke.Duke;
 import duke.command.*;
-import duke.exception.DukeException;
 import duke.ui.Ui;
 import duke.storage.Storage;
 
 import java.util.Scanner;
 
+/**
+ * Represents a parser that parses commands input by user.
+ */
 public class Parser {
     public static final String EXIT_COMMAND = "bye";
     public static final String LIST_COMMAND = "list";
@@ -17,9 +18,13 @@ public class Parser {
     public static final String TASK_TYPE_EVENT_COMMAND = "event";
     public static final String DELETE_COMMAND = "delete";
 
-    private static final int DATA_TASK_TYPE_INDEX = 0;
-
-    public static void getInput() throws DukeException {
+    /**
+     * Returns nothing.
+     * Parses and executes commands until the user inputs the command to exit.
+     *
+     * @return not applicable.
+     */
+    public static void getInput() {
         boolean isExit = false;
         while (!isExit) {
             Scanner sc = new Scanner(System.in);

@@ -1,12 +1,13 @@
 package duke.command;
 
-import duke.tasks.Task;
 import duke.tasklist.TaskList;
 
-import java.util.ArrayList;
-import duke.Duke;
-
 public class AddEventCommand extends Command {
+    /**
+     * Add event task to TaskList
+     *
+     * @param description input by user
+     */
     public AddEventCommand(String description) {
         TaskList.addEvent(description);
     }

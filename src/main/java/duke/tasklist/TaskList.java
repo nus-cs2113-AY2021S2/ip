@@ -1,8 +1,6 @@
 package duke.tasklist;
 
 import java.util.ArrayList;
-
-
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.tasks.Deadline;
@@ -10,15 +8,14 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.Todo;
 import duke.ui.Ui;
-
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+/**
+ * Represents list of existing tasks.
+ */
 public class TaskList {
 
     public static ArrayList<Task> tasks = new ArrayList<Task>();
-
     private Storage storage;
 
     public TaskList(Storage input) {
@@ -26,6 +23,11 @@ public class TaskList {
         storage = input;
     }
 
+    /**
+     * Check for errors in input by user.
+     * @param input user input.
+     * @param type task type.
+     */
     public static void validateInput(String input, String type) throws DukeException {
         try {
             if (type.equals("done") && (!(input.strip()).matches("[-+]?\\\\d*\\\\.?\\\\d+\n"))
@@ -38,6 +40,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Print list of tasks when requested by user.
+     * If there are no existing tasks, method will request for user to input a task.
+     */
     public static void showList() {
         if (tasks.size() > 0) {
             System.out.println("Here are the tasks in your list:");
@@ -51,6 +57,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Marks task status as done.
+     *
+     * @param inputCommand user input.
+     */
     public static void markAsDone(String inputCommand) {
         try {
             String taskDone = inputCommand.split(" ", 2)[1];
@@ -66,10 +77,15 @@ public class TaskList {
                 Ui.printTask(currentTask);
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println(e + "invalid! Please try again");
+            System.out.println("Task done invalid! Please try again");
         }
     }
 
+    /**
+     * Add a todo to tasks.
+     *
+     * @param inputCommand user input.
+     */
     public static void addToDo(String inputCommand) {
         try {
             String taskToAdd = inputCommand.split(" ", 2)[1];
@@ -84,6 +100,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Add an event to tasks.
+     *
+     * @param inputCommand user input.
+     */
     public static void addEvent(String inputCommand) {
         try {
             String taskToAdd = inputCommand.split(" ", 2)[1];
@@ -101,6 +122,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Add a deadline to tasks
+     *
+     * @param inputCommand user input.
+     */
     public static void addDeadline(String inputCommand) {
         try {
             String taskToAdd = inputCommand.split(" ", 2)[1];
@@ -118,6 +144,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Delete task from tasks
+     *
+     * @param inputCommand user input.
+     */
     public static void deleteTask(String inputCommand) {
         try {
             String taskToHandle = inputCommand.split(" ", 2)[1];
@@ -136,6 +167,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Search in tasks for keyword input by user.
+     *
+     * @param inputCommand user input.
+     */
     public static void findListOfCommands(String inputCommand) {
         try {
             String word = inputCommand.substring(5);
@@ -145,6 +181,13 @@ public class TaskList {
             Ui.printInvalidMessage("find");
         }
     }
+
+    /**
+     * Search in tasks for keyword input by user.
+     *
+     * @param word keyword input by user.
+     * @return ArrayList of tasks that matches input keyword.
+     */
     public static ArrayList<Task> findInput (String word) {
         return (ArrayList<Task>) tasks.stream()
                 .filter(t -> t.getDescription().toLowerCase().contains(word))
