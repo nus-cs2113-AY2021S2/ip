@@ -72,6 +72,9 @@ public class Storage {
 
     /**
      * Converts the task list into a string in the storage format.
+     * 
+     * @param tasks Task list with current tasks. 
+     * @return Message formatted for storage. 
      */
     private String convertToFileFormat(TaskList tasks) {
         StringBuilder message = new StringBuilder();

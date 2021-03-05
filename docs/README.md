@@ -28,13 +28,13 @@ Prerequisites: JDK 11, update IntelliJ to the most recent version.
 
 ### 2.1. On IntelliJ version 2020.3.1 (latest) and beyond
 
-1. Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Import the project into IntelliJ as follows:
-   1. Click `Open`
-   1. Select the project directory, and click `OK`
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).
-1. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the output below.
+Prerequisites: JDK 11, update Intellij to the most recent version.
+
+1. Ensure that you have `Java 11` or higher version installed on your computer.
+1. Download the latest `Duke.jar` from [here](https://github.com/xseh/ip/releases/tag/A-Release).
+1. Move the `Duke.jar` into the folder of your choice. This would be your **base folder**.
+1. Run `command prompt` and navigate into the base folder containing the `Duke.jar`.
+1. Run the command `java -jar Duke.jar` and you should see the welcome message:
 
    ```
    -=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=-

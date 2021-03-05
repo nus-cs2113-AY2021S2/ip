@@ -59,6 +59,8 @@ public class Command {
      * - Finds and display all tasks that matches the keyword provided. 
      * DEFAULT: 
      * - Throw IllegalCommandException. 
+     * 
+     * @throws IllegalCommandException If invalid command is recieved. 
      */
     public void executeCommand(TaskList tasks, Ui ui, Storage storage) 
             throws IllegalCommandException, IndexOutOfBoundsException, 
