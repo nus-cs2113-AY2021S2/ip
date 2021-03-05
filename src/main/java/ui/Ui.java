@@ -10,7 +10,7 @@ public class Ui {
     public static final String INVALID_EVENT = "OOPS!!! Invalid event description\n" + DIVIDER_LINE;
     public static final String LIST_EMPTY = "The list is currently empty!\n" + DIVIDER_LINE;
     public static final String LIST_FULL = "The list is currently full!\n" + DIVIDER_LINE;
-    public static final String FILE_SAVED = "File has been saved!\n" + DIVIDER_LINE;
+    public static final String FILE_SAVED = "File has been saved!";
     public static final String SAVE_ERROR = "File is not able to be saved!\n" + DIVIDER_LINE;
     public static final String FILE_NOT_FOUND = "No save file found!\n" + DIVIDER_LINE;
     public static final String FILE_LOADED = "Save file has been loaded!\n" + DIVIDER_LINE;

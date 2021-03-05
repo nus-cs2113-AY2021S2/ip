@@ -145,13 +145,16 @@ public class TaskList {
         String keyword = userInput.substring(5);
         for (Task task : tasks) {
             if (task.description.contains(keyword)) {
+                if (!keywordFound) {
+                    System.out.println("The following tasks have been found:");
+                }
                 System.out.print(taskCount++ + ". ");
                 task.printTask();
                 keywordFound = true;
             }
         }
         if (!keywordFound) {
-            System.out.println("Keyword was not found");
+            System.out.println("Keyword was not found! Please try again!");
         }
         System.out.println(Ui.DIVIDER_LINE);
     }
