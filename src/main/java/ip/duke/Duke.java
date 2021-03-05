@@ -52,19 +52,19 @@ public class Duke {
      *                       or reading from a file
      */
     public void run() throws IOException {
-        ui.printGreetings();
+        Ui.printGreetings();
         Scanner in = new Scanner(System.in);
         String userCommand = in.nextLine();
         while (!userCommand.equals("bye")) {
             try {
                 Parser.parseCommand(userCommand);
             } catch (DukeException e) {
-                ui.printInvalidInputWarnings(userCommand);
+                Ui.printInvalidInputWarnings(userCommand);
             }
             userCommand = in.nextLine();
         }
 
-        storage.save();
+        Storage.save();
 
         exit();
     }
