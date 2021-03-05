@@ -9,6 +9,12 @@ public class TaskList {
         System.out.println("Nice! I've marked this task as done:\n ");
         System.out.println("____________________________________________________________\n");
     }
+
+    /***
+     * Tells the user the completion of adding the task into the task list and the total number of tasks in the list.
+     * @param string Task name that wants to be added.
+     * @param size Total number of tasks in the list.
+     */
     public static void showAddTasks(String string, int size){
         System.out.println("____________________________________________________________\n");
         System.out.println("Got it. I've added this task:\n");
@@ -17,6 +23,11 @@ public class TaskList {
         System.out.println("____________________________________________________________\n");
     }
 
+    /***
+     * Tells the user the completion of removing the task from the task list and the total number of tasks in the list.
+     * @param Tasks Tasks saved in the arraylist.
+     * @param line User input.
+     */
     public static void showRemoveTasks(ArrayList<Task> Tasks,String line){
         System.out.println("____________________________________________________________\n");
         String[] parts = line.split(" ");

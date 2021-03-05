@@ -11,6 +11,11 @@ public class Storage {
             this.filePath = filePath;
     }
 
+    /***
+     * Loads a file from a previously saved location.
+     * @param Tasks An arraylist of tasks.
+     * @throws FileNotFoundException location of the file does not exist.
+     */
     static void readFile(ArrayList<Task> Tasks) throws FileNotFoundException {
         FileInputStream data = new FileInputStream(filePath);
         Scanner sc = new Scanner(data);
@@ -46,6 +51,11 @@ public class Storage {
 
     }
 
+    /***
+     * Modifies the file
+     * @param Tasks Tasks in the arraylist that want to be saved.
+     * @throws IOException
+     */
     static void writeFile(ArrayList<Task> Tasks) throws IOException {
         FileWriter writer = new FileWriter(filePath,false);
         for (Task t : Tasks) {

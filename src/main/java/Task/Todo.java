@@ -1,5 +1,9 @@
 package Task;
 
+/***
+ * Represents a task that wants to be done in the task list.
+ */
+
 public class Todo extends Task {
 
 

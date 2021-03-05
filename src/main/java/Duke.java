@@ -3,13 +3,22 @@ import java.util.ArrayList;
 import java.io.*;
 import Task.*;
 
+/***
+ * Starts the application.
+ * initializes the interaction with the user.
+ */
+
 public class Duke {
     private final Storage storage;
+    private final Ui ui;
 
+    /**
+     * Runs the application.
+     */
     public void run() throws IOException {
-        Ui.welcome();
+        ui.welcome();
         ArrayList<Task> Tasks = new ArrayList<>();
-        Storage.readFile(Tasks);
+        storage.readFile(Tasks);
         String line;
         Scanner in = new Scanner(System.in);
         line = in.nextLine();
@@ -72,12 +81,17 @@ public class Duke {
             }
             line = in.nextLine();
         }
-        Ui.bye();
-        Storage.writeFile(Tasks);
+        ui.bye();
+        storage.writeFile(Tasks);
     }
 
+    /***
+     * loads the required objects.
+     * @param filePath the file path that was saved previously.
+     */
     public Duke(String filePath) {
         storage = new Storage(filePath);
+        ui = new Ui();
     }
 
     public static void main(String[] args) throws IOException {
