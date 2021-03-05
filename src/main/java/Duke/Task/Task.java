@@ -1,4 +1,6 @@
-package Duke;
+package Duke.Task;
+
+import Duke.Duke;
 
 public class Task {
     protected String description;

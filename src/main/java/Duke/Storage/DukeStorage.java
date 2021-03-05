@@ -1,4 +1,9 @@
-package Duke;
+package Duke.Storage;
+
+import Duke.Parser.DukeParser;
+import Duke.Task.Task;
+import Duke.TaskManager.TaskManager;
+import Duke.UI.DukeUI;
 
 import java.io.File;
 import java.io.FileNotFoundException;

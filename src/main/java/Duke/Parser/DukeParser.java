@@ -1,4 +1,7 @@
-package Duke;
+package Duke.Parser;
+
+import Duke.Task.Task;
+import Duke.UI.DukeUI;
 
 public class DukeParser {
     public static String[] splitInputIntoString(String userInput) {

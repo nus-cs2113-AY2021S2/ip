@@ -1,4 +1,6 @@
-package Duke;
+package Duke.Parser;
+
+import Duke.Duke;
 
 public class InvalidCommandException extends Exception {
     private String errorMessage;

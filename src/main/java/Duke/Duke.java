@@ -1,4 +1,11 @@
-import Duke.*;
+package Duke;
+
+import Duke.Parser.DukeParser;
+import Duke.Parser.TodoException;
+import Duke.Storage.DukeStorage;
+import Duke.Task.Task;
+import Duke.TaskManager.TaskManager;
+import Duke.UI.DukeUI;
 
 public class Duke {
     private static TaskManager taskManager = new TaskManager();

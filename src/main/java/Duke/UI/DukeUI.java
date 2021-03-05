@@ -1,4 +1,9 @@
-package Duke;
+package Duke.UI;
+import Duke.Parser.DukeParser;
+import Duke.Parser.TodoException;
+import Duke.Task.Task;
+import Duke.TaskManager.TaskManager;
+
 import java.util.Scanner;
 
 
@@ -27,7 +32,7 @@ public class DukeUI {
     public static void printWelcomeMessage() {
         print("Hello from\n" + LOGO);
         printLine();
-        print("Hello! I'm Duke");
+        print("Hello! I'm Duke.Duke");
         print("What can I do for you?");
     }
 

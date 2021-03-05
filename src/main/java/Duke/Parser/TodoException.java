@@ -1,4 +1,6 @@
-package Duke;
+package Duke.Parser;
+
+import Duke.Duke;
 
 public class TodoException extends Exception {
     private final String errorMessage;
