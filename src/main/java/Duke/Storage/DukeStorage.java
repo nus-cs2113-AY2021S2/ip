@@ -15,6 +15,9 @@ import java.util.Scanner;
 public class DukeStorage {
     public static final String FILE_PATH_TO_SAVE_TASKS = "duke.txt";
 
+    /**
+     * Perform a check on whether a file with name duke exist. If false, call createNewFile
+     */
     public static void createFileIfThereIsNone() {
         File toCheck = new File(FILE_PATH_TO_SAVE_TASKS);
         if (!toCheck.exists()) {
@@ -30,6 +33,9 @@ public class DukeStorage {
         }
     }
 
+    /**
+     * Clear the file after the tasks from the file has been loaded into tasksList in Duke.
+     */
     private static void emptyFileAfterInitializing() {
         FileWriter fw = null;
         fw = createFileWriterObject(null);
@@ -45,6 +51,7 @@ public class DukeStorage {
         return fw;
     }
 
+
     private static void writeEmptyStringToFile(FileWriter fw) {
         try {
             fw.write("");
@@ -53,6 +60,11 @@ public class DukeStorage {
         }
     }
 
+    /**
+     * Load data from Duke.txt into TaskManager and returns the TaskManager
+     *
+     * @return TaskManager object loaded with Tasks from Duke.txt
+     */
     public static TaskManager loadData() {
         final TaskManager taskManager = new TaskManager();
         File f = new File(FILE_PATH_TO_SAVE_TASKS);
@@ -73,6 +85,13 @@ public class DukeStorage {
         return taskManager;
     }
 
+    /**
+     * Write tasks into Duke.txt
+     *
+     * @param filePath Name and location of destinaton file
+     * @param tasks Task to be written
+     * @throws IOException If there is I/O errors
+     */
     private static void writeToFile(String filePath, Task tasks) throws IOException {
         FileWriter fw = new FileWriter(filePath, true);
         String description = tasks.getDescriptionWithoutBrackets();
@@ -86,6 +105,13 @@ public class DukeStorage {
         fw.close();
     }
 
+    /**
+     * Clear the file before saving the new list of Tasks.
+     * Print exiting message and end the program.
+     *
+     * @param latestTaskManager Most updated version of Task Manager
+     * @throws IOException If there is I/O error
+     */
     private static void exitDuke(TaskManager latestTaskManager) throws IOException {
         emptyFileAfterInitializing();
         DukeUI.printLine();
