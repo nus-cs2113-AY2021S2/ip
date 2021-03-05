@@ -1,49 +1,23 @@
-import java.io.*;
+
+
 import java.util.ArrayList;
 
 public class TaskList {
-    private ArrayList<Tasks> tasks = new ArrayList<>();
-    private InputStream input = null;
-    public TaskList() {
-        try {
-            FileReader file = new FileReader("Data/duke.txt");
-            BufferedReader reader = new BufferedReader(file);
-            String line;
-            while ((line = reader.readLine()) != null){
-                tasks.add(getTask(line));
-            }
-            file.close();
-        } catch (IOException e){
-            tasks = new ArrayList<>();
-        }
+    private ArrayList<Task> tasks = new ArrayList<>();
+
+    public TaskList(ArrayList<Task> tasks){
+        this.tasks = tasks;
     }
 
-    public ArrayList<Tasks> getList(){
-        return tasks;
+    public ArrayList<Task> getTasks(){
+        return this.tasks;
     }
 
-    private Tasks getTask(String line){
-        Tasks task;
-        if (line.charAt(1) == 'T'){
-            task = new ToDo(line.substring(6), true);
-        } else if (line.charAt(1) == 'D'){
-            int index = line.indexOf("(by:");
-            task = new Deadline(line.substring(6, index), line.substring(index + 5));
-        } else {
-            int index = line.indexOf("(at:");
-            task = new Event(line.substring(6, index), line.substring(index + 5));
-        }
-        if (line.charAt(4) == '✓'){
-            task.setDone();
-        }
-        return task;
-    }
-
-    public void update(Tasks task){
+    public void update(Task task){
         tasks.add(task);
     }
 
-    public Tasks get(int i){
+    public Task get(int i){
         return tasks.get(i - 1);
     }
 
@@ -52,63 +26,34 @@ public class TaskList {
     }
 
     public void updateStatus(int i){
-        tasks.get(i - 1).setDone();
+        tasks.get(i - 1).updateStatus();
     }
 
     public int getSize(){
         return tasks.size();
     }
 
-    public void save(){
+    public String save(){
         StringBuilder line = new StringBuilder();
-        for (Tasks task : tasks){
+        for (Task task : tasks){
+            if (!task.istodo()){
+                String append = task.description() + task.getWork() + "|" + task.getDate() + "\n";
+                line.append(append);
+                continue;
+            }
             String append = task.toString() + "\n";
             line.append(append);
         }
-        String folderPath = "data";
-        File directory = new File(folderPath);
-        try{
-            if (!directory.isDirectory()){
-                File folder = new File(folderPath);
-                if (!folder.mkdir()){
-                    System.out.println("cannot make a folder");
-                }
-            }
-            File file = new File("./data/duke.txt");
-            file.createNewFile();
-            FileWriter writer = new FileWriter(file);
-            writer.write(line.toString());
-            writer.close();
-        } catch (IOException e) {
-            System.out.println("No File found");
-        }
+        return line.toString();
     }
 
     public String toString(){
         StringBuilder line = new StringBuilder();
-        for (Tasks task : tasks) {
-            line.append(task.toString());
+        for(int i =0;i< tasks.size();i++){
+            line.append(tasks.get(i).toString());
             line.append('\n');
         }
-//        System.out.println(tasks);
         return line.toString();
-    }
-
-    public String toStr(){
-        StringBuilder line = new StringBuilder();
-        int i = 1;
-        for (Tasks task : tasks) {
-            line.append(i);
-            line.append(".");
-            line.append(task.toString());
-            line.append('\n');
-            i++;
-        }
-//        System.out.println(tasks);
-        return line.toString();
-    }
-
-    public static void main(String[] args) throws IOException {
-        TaskList task = new TaskList();
     }
 }
+

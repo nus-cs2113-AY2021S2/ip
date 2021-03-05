@@ -1,6 +1,0 @@
-[T][✗] 1235
-[D][✗]how is this(by: 2345)(by: 2345))))))
-[E][✗]make me(at: 234)(at: 234)))))
-[T][✗] what
-[T][✗] whattttt
-[T][✓] new job 
