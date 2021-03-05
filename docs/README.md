@@ -51,6 +51,7 @@ Expected outcome:
     Now you have 1 tasks in the list.
  
     -------------------------------------------------------------------------------------------------------------------------------
+
 ### `deadline task /by date` - adds a deadline task to the list
 
 Adds a task that is categorized as a deadline to the list.
@@ -67,6 +68,7 @@ Expected outcome:
     Now you have 2 tasks in the list.
 
     -------------------------------------------------------------------------------------------------------------------------------
+
 ### `event task /at location` - adds an event task to the list
 
 Adds a task that is categorized as an event to the list.
@@ -83,6 +85,7 @@ Expected outcome:
     Now you have 3 tasks in the list.
 
     -------------------------------------------------------------------------------------------------------------------------------
+
 ### `done task_number` - marks a task on the list as done
 
 Marks a task that has been added to the list as done.
@@ -98,6 +101,7 @@ Expected outcome:
       [T] [X] read book
 
     -------------------------------------------------------------------------------------------------------------------------------
+
 ### `delete task_number` - deletes a task from the list
 
 Deletes a task on the list.
@@ -113,6 +117,7 @@ Expected outcome:
       [T] [X] read book
 
     -------------------------------------------------------------------------------------------------------------------------------
+
 ### `find keyword` - searches for a task on the list
 
 Searches for a task on the list.
@@ -128,6 +133,7 @@ Expected outcome:
     1. [E] [ ] go to the library (at: town)
 
     -------------------------------------------------------------------------------------------------------------------------------
+
 ### `list` - Displays the current list
 
 Displays the current list.
@@ -172,6 +178,7 @@ Expected outcome:
         2. [E] [ ] go to the library (at: town)
 
         -------------------------------------------------------------------------------------------------------------------------------
+
 ### End screen
 
 The text that is shown when the JAR file is terminated. If the contents of the list is empty, "The list is empty" will be shown.
