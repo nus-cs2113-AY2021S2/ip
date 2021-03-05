@@ -24,3 +24,5 @@ Prerequisites: JDK 11, update IntelliJ to the most recent version.
    | |_| | |_| |   <  __/
    |____/ \__,_|_|\_\___|
    ```
+Refer [here](https://limwenfeng.github.io/ip/) 
+   for a detailed user guide.
