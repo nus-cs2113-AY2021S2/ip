@@ -132,12 +132,18 @@ public class Printer {
         System.out.println("____________________________________________________________");
     }
 
+    /**
+     * Prints a message to tell the user that the delete command is formatted incorrectly.
+     */
     public static void invalidDeleteFormatMessage() {
         System.out.println("____________________________________________________________");
         System.out.println("Invalid format! Format the delete command like this \"delete [index]\"");
         System.out.println("____________________________________________________________");
     }
 
+    /**
+     * Prints a message to tell the user that the done command is formatted incorrectly.
+     */
     public static void invalidDoneFormatMessage() {
         System.out.println("____________________________________________________________");
         System.out.println("Invalid format! Format the done command like this \"done [index]\"");

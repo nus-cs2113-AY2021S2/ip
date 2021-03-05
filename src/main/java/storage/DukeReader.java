@@ -6,7 +6,6 @@ import task.Task;
 import task.ToDo;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -16,7 +15,7 @@ import java.util.regex.Pattern;
  * Represents a class that reads in the data storage text file and loads it if it exists and has existing data.
  */
 public class DukeReader {
-    private static ArrayList<Task> tasks = new ArrayList<>();
+    private static final ArrayList<Task> tasks = new ArrayList<>();
 
     /**
      * Reads the data in the text file and creates tasks to add to the task list if data is present.

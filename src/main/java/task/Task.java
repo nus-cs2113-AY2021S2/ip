@@ -4,8 +4,8 @@ package task;
  * Represents a Task in the task list.
  */
 public class Task {
-    public static final String CHECK_MARK = "\u2713";
-    public static final String X_MARK = "\u2718";
+    public static final String ICON_TASK_DONE = "Y";
+    public static final String ICON_TASK_UNDONE = "N";
     protected String description;
     protected boolean isDone;
 
@@ -20,7 +20,7 @@ public class Task {
      * @return The status icon of the task based on its done status.
      */
     public String getStatusIcon() {
-        return (isDone ? CHECK_MARK : X_MARK);
+        return (isDone ? ICON_TASK_DONE : ICON_TASK_UNDONE);
     }
 
     /**
