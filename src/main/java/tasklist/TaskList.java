@@ -94,7 +94,7 @@ public class TaskList {
 
     /*
     * The find method within the TaskList class searches for a keyword in the list of tasks
-    * @params keyword takes in a string as the keyword
+    * @params keyword takes in a string as the keyword to be searched for in the list of tasks
     * */
 
     public void find(String keyword) {
@@ -112,7 +112,7 @@ public class TaskList {
     }
 
     /*
-    * The printCurrentTask method within the TaskList class returns a specified task from the list of tasks
+    * The printCurrentTask method within the TaskList class returns a specific task from the list of tasks
     * @params taskNum specifies the task number of the task to be returned from the list of tasks
     * */
     public Task printCurrentTask(int taskNum) {
