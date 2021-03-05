@@ -51,12 +51,149 @@ Expected Output:
 
 
 
-### Help Menu 
+### Add Task 
+This command add a task into task list for the user.
+
+**deadline task**
+
+Format: `deadline [task description] / [YYYY-MM-DD]`
+
+Example: `deadlilne submit UG / 2021-03-05`
+
+Expected Output:
+```
+ Task added! ^_^
+ 5: [D] [-] submit UG (by: Mar 5 2021)
+```
+
+Expected output when date is not in the right format:
+```
+ Task added! ^_^
+ 5: [D] [-] submit UG (by: 2021 03 05)
+```
+
+**event task**
+
+Format: `event [task description] / [YYYY-MM-DD]`
+
+Example: `event CNY dinner / 2021-02-11`
+
+Expected Output:
+```
+ Task added! ^_^
+ 5: [E] [-] event CNY dinner (at: Feb 11 2021)
+
+```
+
+Expected output when date is not in the right format:
+```
+ Task added! ^_^
+ 5: [E] [-] event CNY dinner (at: 2021 02 11)
+```
+
+**todo task**
+
+Format: `todo [task description]`
+
+Example: `todo submit UG`
+
+Expected Output:
+```
+ Task added! ^_^
+ 5: [T] [-] submit UG
+
+```
+
+### Print Task List 
 This command prints a task list for the user.
 
 Format: `list`
 
 Example: `list`
+
+Expected output when there is no task in the list:
+```
+  List is empty :o
+```
+
+Expected output when there are tasks in the list:
+```
+ 1: [D] [X] math tutorial (by: Feb 27 2021)
+ 2: [T] [-] submit UG
+ 3: [E] [-] CNY dinner (at: 5pm)
+```
+
+
+
+### Mark As Done 
+This command marks a task in the list as done.
+
+Format: `done [index]`
+
+Example: `done 1`
+
+Expected output when the task is in the list:
+```
+ Yay! This task is done!
+ 5: [D] [X] submit UG (by: Mar 5 2021)
+```
+
+Expected output when the task is not in the list:
+```
+ You don't have Task 5 in your list ^_^ 
+```
+
+
+
+
+### Delete Tasks 
+This command deletes a task from list for the user.
+
+Format: `delete [index]`
+
+Example: `delete 5`
+
+Expected output when the task is in the list:
+```
+ 5: [D] [X] submit UG (by: Mar 5 2021)
+ Yay! This task is deleted!
+```
+
+Expected output when the task is not in the list:
+```
+ You don't have Task 5 in your list ^_^ 
+```
+
+
+
+
+### Find Task On A date 
+This command finds tasks on a specific date for the user.
+
+Format: `date [YYYY-MM-DD]`
+
+Example: `date 2021-03-05`
+
+Expected Output:
+```
+ 4. [D] [-] submit UG (by: Mar 5 2021)
+ 6. [E] [-] math tutorial (at: Mar 5 2021)
+ There are 2 task(s)
+```
+
+Expected output when the date is not in the right format:
+```
+ Baggie could find any tasks related to 2021 03 05
+```
+
+
+
+### Find Task With Keyword 
+This command finds tasks containing the keyword for the user.
+
+Format: `keyword [keyword]`
+
+Example: `keyword math`
 
 Expected Output when there is no task in the list:
 ```
@@ -65,8 +202,7 @@ Expected Output when there is no task in the list:
 
 Expected Output when there are tasks in the list:
 ```
- 1: [D] [X] math tutorial (by: Feb 27 2021)
- 2: [T] [-] submit UG
- 3: [E] [-] CNY dinner (at: 5pm)
- There are 3 tasks in the list
+5. [E] [-] math tutorial (at: Mar 5 2021)
+6. [T] [-] math HW2
+ There are 2 task(s)
 ```
