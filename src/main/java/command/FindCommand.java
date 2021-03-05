@@ -4,6 +4,9 @@ import task.Task;
 import task.TaskList;
 import java.util.Iterator;
 
+/**
+ * Represents the command of searching within task list
+ */
 public class FindCommand extends Command{
     public static final String COMMAND_WORD = "find";
     public static final String ERROR_MESSAGE = "Invalid input format for find command.\n" +
@@ -18,8 +21,9 @@ public class FindCommand extends Command{
     }
 
     /**
-     * Search tasks whose names contain the keyword in task list.
-     * @return the feedback message and the list of tasks that satisfy the requirement.
+     * Searches tasks whose names contain the keyword in task list.
+     *
+     * @return the feedback message and the list of tasks that satisfy the requirement
      */
     @Override
     public CommandResult execute(){

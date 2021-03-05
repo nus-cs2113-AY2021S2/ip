@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
- * Represent a list of different types of tasks
+ * Represents a list of different types of tasks
  */
 public class TaskList {
     private ArrayList<Task> tasks;
@@ -35,10 +35,11 @@ public class TaskList {
     }
 
     /**
-     * Mark the task at given index as done.
+     * Marks the task at given index as done.
+     *
      * @param index index of the task
-     * @throws IndexOutOfBoundsException if the index is out of bound.
-     * @throws TaskAlreadyDoneException if the task at given index was marked as done before.
+     * @throws IndexOutOfBoundsException if the index is out of bound
+     * @throws TaskAlreadyDoneException if the task at given index was marked as done before
      */
     public void setTaskDone(int index) throws IndexOutOfBoundsException, TaskAlreadyDoneException {
 
@@ -53,9 +54,10 @@ public class TaskList {
     }
 
     /**
-     * Delete the task at given index.
-     * @param index index of the task.
-     * @throws IndexOutOfBoundsException if the index is out of bound.
+     * Deletes the task at given index.
+     *
+     * @param index index of the task
+     * @throws IndexOutOfBoundsException if the index is out of bound
      */
     public void deleteTask(int index) throws IndexOutOfBoundsException{
         tasks.remove(index);

@@ -1,7 +1,7 @@
 package command;
 
 /**
- * Represent a command of deleting a task from the task list
+ * Represents a command of deleting a task from the task list
  */
 public class DeleteCommand extends Command{
     public static final String COMMAND_WORD = "delete";
@@ -17,10 +17,8 @@ public class DeleteCommand extends Command{
     }
 
     /**
-     * Delete the specified task from task list.
-     * If a valid index is given, the task will be removed from the task list. A feedback message indicating
-     * the successful removal of the task will be given. If the given task index is out of range, an error message
-     * will be returned.
+     * Deletes the specified task from task list.
+     *
      * @return feedback message of the command execution
      */
     @Override

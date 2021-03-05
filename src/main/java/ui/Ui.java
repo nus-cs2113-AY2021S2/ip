@@ -37,7 +37,8 @@ public class Ui {
     }
 
     /**
-     * Display the feedback of a command.
+     * Displays the feedback of a command.
+     *
      * @param result
      */
     public void printFeedback(CommandResult result){
@@ -60,7 +61,7 @@ public class Ui {
     }
 
     /**
-     * Display error message when the file can't be accessed
+     * Display error message when the file can't be accessed.
      */
     public void showFileErrorMessage(){
         System.out.print(PRE_SPACE + "The file can't be loaded, please check" +
@@ -68,7 +69,7 @@ public class Ui {
     }
 
     /**
-     * Display error message when the file can't be written to
+     * Displays error message when the file can't be written to.
      */
     public void showStoreIssueMessage(){
         System.out.print(PRE_SPACE + "The tasks can't be correctly stored back to " +

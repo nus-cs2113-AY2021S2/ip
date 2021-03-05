@@ -3,7 +3,7 @@ package command;
 import task.TaskList;
 
 /**
- * Represent the result of command execution
+ * Represents the result of command execution
  */
 public class CommandResult {
     private String feedback;

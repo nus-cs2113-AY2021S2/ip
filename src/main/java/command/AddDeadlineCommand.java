@@ -3,7 +3,7 @@ package command;
 import task.Deadline;
 
 /**
- * Represent a command of creating a new deadline task and adding it to the task list
+ * Represents a command of creating a new deadline task and adding it to the task list
  */
 
 public class AddDeadlineCommand extends Command{
@@ -22,7 +22,8 @@ public class AddDeadlineCommand extends Command{
     }
 
     /**
-     * Add the new deadline to task list
+     * Adds the new deadline to task list.
+     *
      * @return the feedback message of execution
      */
     @Override

@@ -1,7 +1,7 @@
 package task;
 
 /**
- * Represent a task which has a deadline.
+ * Represents a task which has a deadline
  */
 public class Deadline extends Task {
     private static final String TASK_INFO_DISPLAY_FORMAT = "[D][%s]%s (by: %s)";
@@ -14,7 +14,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Get the information of a deadline task in certain format for displaying.
+     * Gets the information of a deadline task in certain format for displaying.
+     *
      * @return the string for displaying
      */
     @Override
@@ -27,7 +28,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Get the information of a deadline task in certain format for storing in file.
+     * Gets the information of a deadline task in certain format for storing in file.
+     *
      * @return the string for storage
      */
     @Override

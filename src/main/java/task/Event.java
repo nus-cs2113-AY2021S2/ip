@@ -1,7 +1,7 @@
 package task;
 
 /**
- * Represent a task that happens at specified time
+ * Represents a task that happens at specified time
  */
 public class Event extends Task {
     private static final String TASK_INFO_DISPLAY_FORMAT = "[E][%s]%s (at: %s)";
@@ -14,7 +14,8 @@ public class Event extends Task {
     }
 
     /**
-     * Get the information of an event task in certain format for displaying.
+     * Gets the information of an event task in certain format for displaying.
+     *
      * @return the string for displaying
      */
     @Override
@@ -27,7 +28,8 @@ public class Event extends Task {
     }
 
     /**
-     * Get the information of an event task in certain format for storing in file.
+     * Gets the information of an event task in certain format for storing in file.
+     *
      * @return the string for storage
      */
     @Override

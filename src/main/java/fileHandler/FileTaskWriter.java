@@ -8,7 +8,7 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 
 /**
- * Represent the handler that update current task list to the text file
+ * Represents the handler that update current task list to the text file
  */
 public class FileTaskWriter {
     private String filePath;
@@ -18,7 +18,8 @@ public class FileTaskWriter {
     }
 
     /**
-     * Store the current task list to the text file
+     * Stores the current task list to the text file.
+     *
      * @param taskList
      * @throws IOException if there is problem accessing or writing to the file
      */

@@ -1,7 +1,7 @@
 package command;
 
 /**
- * Represent the command of displaying help message
+ * Represents the command of displaying help message
  */
 public class HelpCommand extends Command{
     public static final String COMMAND_WORD = "help";

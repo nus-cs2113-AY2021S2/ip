@@ -11,7 +11,7 @@ import task.Task;
 import task.ToDo;
 
 /**
- * Represent the handler that processes the text file and converts the content to a task list
+ * Represents the handler that processes the text file and converts the content to a task list
  */
 public class FileTaskReader {
     private File source;
@@ -22,7 +22,8 @@ public class FileTaskReader {
     }
 
     /**
-     * Convert the content of the file into a task list
+     * Converts the content of the file into a task list.
+     *
      * @return the task list
      * @throws FileNotFoundException if the file doesn't exist
      */

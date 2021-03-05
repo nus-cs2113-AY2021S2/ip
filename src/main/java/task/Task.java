@@ -1,7 +1,7 @@
 package task;
 
 /**
- * Represent the parent class for different types of tasks
+ * Represents the parent class for different types of tasks
  */
 public abstract class Task {
     protected String taskName;

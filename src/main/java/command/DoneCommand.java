@@ -4,7 +4,7 @@ package command;
 import exception.TaskAlreadyDoneException;
 
 /**
- *  Represent a command of setting a task as done
+ *  Represents a command of setting a task as done
  */
 public class DoneCommand extends Command{
     public static final String COMMAND_WORD = "done";
@@ -19,11 +19,8 @@ public class DoneCommand extends Command{
     }
 
     /**
-     * Set the specified task as done
-     * If a valid index is given, the task will be marked as done. A feedback message indicatinG the successful
-     * removal of the task will be given. If the given task index is invalid, like a negative number or a number
-     * out of range, an error message will be returned. If the given task is already set as done, an error message
-     * will be returned.
+     * Sets the specified task as done.
+     *
      * @return feedback message of command execution
      */
     @Override

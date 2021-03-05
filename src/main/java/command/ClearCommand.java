@@ -1,7 +1,7 @@
 package command;
 
 /**
- * Represent a command of removing all tasks in current task list
+ * Represents a command of removing all tasks in current task list
  */
 public class ClearCommand extends Command{
     public static final String COMMAND_WORD = "clear";
@@ -13,7 +13,8 @@ public class ClearCommand extends Command{
     }
 
     /**
-     * Clear current task list.
+     * Clears current task list.
+     *
      * @return feedback message of the command execution
      */
     @Override

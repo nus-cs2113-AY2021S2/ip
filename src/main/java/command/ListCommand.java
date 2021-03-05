@@ -1,7 +1,7 @@
 package command;
 
 /**
- * Represent a command of listing all items in task list
+ * Represents a command of listing all items in task list
  */
 public class ListCommand extends Command{
     public static final String COMMAND_WORD = "list";

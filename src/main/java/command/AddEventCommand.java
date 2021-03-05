@@ -4,7 +4,7 @@ package command;
 import task.Event;
 
 /**
- * Represent a command of creating a new event task and adding it to the task list
+ * Represents a command of creating a new event task and adding it to the task list
  */
 public class AddEventCommand extends Command{
     public static final String COMMAND_WORD = "event";
@@ -22,7 +22,8 @@ public class AddEventCommand extends Command{
     }
 
     /**
-     * Add the new event to task list
+     * Adds the new event to task list.
+     *
      * @return the feedback message of execution
      */
     @Override

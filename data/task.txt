@@ -1,4 +1,0 @@
-D | 0 | return the book | Friday 10pm
-E | 1 | meeting | Sunday
-T | 0 | do homework
-E | 0 | hang out | 8pm

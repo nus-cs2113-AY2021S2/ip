@@ -1,7 +1,7 @@
 package task;
 
 /**
- * Represent a To Do task
+ * Represents a To Do task
  */
 public class ToDo extends Task {
     private static final String TASK_INFO_DISPLAY_FORMAT = "[T][%s]%s";
@@ -11,7 +11,8 @@ public class ToDo extends Task {
     }
 
     /**
-     * Get the information of a ToDo task in certain format for displaying.
+     * Gets the information of a ToDo task in certain format for displaying.
+     *
      * @return the string for displaying
      */
     @Override
@@ -24,7 +25,8 @@ public class ToDo extends Task {
     }
 
     /**
-     * Get the information of a ToDo task in certain format for storing in file.
+     * Gets the information of a ToDo task in certain format for storing in file.
+     *
      * @return the string for storage
      */
     @Override
