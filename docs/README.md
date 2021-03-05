@@ -21,8 +21,8 @@ their data will be retrieved from this text file and shown to the user upon requ
     - [Delete a task: `delete`](#delete-a-task-delete)
     - [Exit The Program: `bye`](#exit-the-program-exit)
 * [Errors](#errors)    
-    *[Command errors](#command-errors)<br/>
-    *[Message errors](#file-errors)   
+    - [Command errors](#command-errors)<br/>
+    - [Message errors](#file-errors)   
 * [Command summary](#command-summary)
 * [FAQ](#faq)
 <br/>
