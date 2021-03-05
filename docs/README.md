@@ -12,11 +12,11 @@ type fast, Duke allows you to manage your tasks faster than traditional GUI apps
         * event: `event`
         * deadline: `deadline`
     * [Listing](#2.2-list): `list`
-    * [Marking a task as done](#2.3 Marking Task as Done): `done`
-    * [Deleting a task](#2.4 Deleting a Task): `delete`
-    * [Searching for tasks](#2.5 Searching for tasks): `find`
-    * [Saving tasks](#2.6 Saving Tasks): `save`
-    * [Exit programme](#2.7 Exiting the programme): `bye`
+    * [Marking a task as done](#2.3-marking-task-as-done): `done`
+    * [Deleting a task](#2.4-deleting-a-task): `delete`
+    * [Searching for tasks](#2.5-searching-for-tasks): `find`
+    * [Saving tasks](#2.6-saving-tasks): `save`
+    * [Exit programme](#2.7-exiting-the-programme): `bye`
 * [Command Summary](#3-command-summary)
 
 ## 1 Quick start
