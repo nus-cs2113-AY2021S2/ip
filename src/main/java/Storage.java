@@ -8,7 +8,6 @@ import java.util.Scanner;
 public class Storage {
     protected String filepath;
     protected ArrayList<Task> tasks = new ArrayList<>();
-
     public Storage(String filepath) {
         this.filepath = filepath;
     }
@@ -41,7 +40,7 @@ public class Storage {
 
     /**
      *
-     * @return
+     * @return tasks
      * @throws FileNotFoundException
      */
     public ArrayList<Task> uploadTasks() throws FileNotFoundException {
@@ -79,6 +78,8 @@ public class Storage {
 
     /**
      * exits program
+     *
+     * saves tasks into duke.txt
      */
     public void exitProgram() {
         Duke.printDash();

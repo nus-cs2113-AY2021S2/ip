@@ -4,7 +4,7 @@ public class Todo extends Task{
         this.SYMBOL = "T";
     }
     @Override
-    public String toString() { return "\t[ " + SYMBOL + "]" + super.toString();
+    public String toString() { return "\t[" + SYMBOL + "]" + super.toString();
     }
     public String getDescription() {
         return this.description;

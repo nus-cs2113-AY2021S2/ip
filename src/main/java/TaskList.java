@@ -1,4 +1,3 @@
-
 import java.util.ArrayList;
 
 public class TaskList {
@@ -24,7 +23,7 @@ public class TaskList {
     }
 
     /**
-     * finds for string in task Array List
+     * finds keyword from list of tasks
      *
      * @param filterString
      */
@@ -33,6 +32,7 @@ public class TaskList {
         tasks.stream()
                 .filter((s) -> s.getDescription().contains(filterString))
                 .forEach(s -> System.out.println(s.toString()));
+        Duke.printDash();
     }
 
     /**
@@ -85,6 +85,7 @@ public class TaskList {
      * @param command
      */
     public void deleteTasks(String command) {
+        Duke.printDash();
         command = command.replace("delete", " ");
         command = command.strip();
 
@@ -94,6 +95,7 @@ public class TaskList {
 
         tasks.remove(tasks.get(count));
         System.out.println("\tNow you have " + tasks.size() + " tasks in the list");
+        Duke.printDash();
     }
 
     /**
@@ -102,6 +104,7 @@ public class TaskList {
      * @param command
      */
     public void taskCompleted(String command) {
+        Duke.printDash();
         int count;
         // remove done from string
         command = command.replace("done", " ");

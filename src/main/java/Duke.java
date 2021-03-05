@@ -6,6 +6,7 @@ public class Duke {
     static int TODO_LENGTH = 5;
     static int DEADLINE_LENGTH = 9;
     static int EVENT_LENGTH = 6;
+    static int FIND_LENGTH = 5;
 
     protected Storage storage;
     protected TaskList taskList;
@@ -51,7 +52,7 @@ public class Duke {
 
                 // finds task
             } else if (command.contains("find")) {
-                taskList.filterList(command.substring(5));
+                taskList.filterList(command.substring(FIND_LENGTH));
 
                 // add tasks to list
             } else {
