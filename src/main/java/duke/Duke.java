@@ -33,6 +33,9 @@ public class Duke {
         case "list":
             list.printList();
             break;
+        case "find":
+            list.find(content);
+            break;
         case "done":
             list.get(Integer.parseInt(content) - 1).markDone();
             System.out.println("Nice! I've marked this task as done:");
