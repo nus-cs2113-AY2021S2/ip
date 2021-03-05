@@ -2,12 +2,21 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * To make sense of commands by user.
+ */
 public class Parser {
+
     public static final Scanner SCANNER = new Scanner(System.in);
 
+    /**
+     * To run the type of command given by the user.
+     *
+     * @param tasks
+     * @throws MissingTaskException
+     */
     public static void selectCommand(TaskList tasks) throws MissingTaskException {
         String userInput = "";
-        String exceptionMessage = "";
         userInput = SCANNER.nextLine();
         Ui.printBorder();
         if (userInput.trim().equals("bye")) {
@@ -63,7 +72,6 @@ public class Parser {
                 Storage.writeToFile(tasks);
             } catch (StringIndexOutOfBoundsException e) {
                 System.out.println("Incorrect Slash input! Try again! Do event /at <something>");
-//                System.out.print(e.getMessage());
             }
         } else if (userInput.split(" ")[0].equals("event")) {
             if (userInput.length() < 7) {
@@ -72,8 +80,8 @@ public class Parser {
             }
 
             String at;
-            String processedEventInput = "";
-            int getSlashIndex = 0;
+            String processedEventInput;
+            int getSlashIndex;
             getSlashIndex = userInput.indexOf("/at");
             try {
                 at = userInput.substring(getSlashIndex + 4).trim();
@@ -83,34 +91,18 @@ public class Parser {
                 Storage.writeToFile(tasks);
             } catch (StringIndexOutOfBoundsException e) {
                 System.out.println("Incorrect Slash input! Try again! Do event /at <something>");
-//                System.out.print(e.getMessage());
             }
-//            Task newTask = new Event(processedEventInput, at);
-//            tasks.addTask(newTask);
-//            System.out.println("  " + newTask.toString());
-//            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-
 
         } else if (userInput.split(" ")[0].equals("delete")) {
             if (userInput.length() < 8) {
                 Ui.printEmptyCommand("delete");
                 return;
             } else {
-//                int processedInput;
-//                processedInput = Integer.parseInt(userInput.replaceAll("[^0-9]", "")) - 1;
-//                if (processedInput < 0 || processedInput > tasks.size()) {
-//                    System.out.println("No index found. Please key an appropriate index");
-//                    return;
-//                }
-//                System.out.println("Noted. I've removed this task: ");
-//                System.out.println("  " + tasks.getProcessedInputAtIndex(processedInput));
-//                tasks.removeTask(processedInput);
-//                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                 int processedInput;
                 processedInput = Integer.parseInt(userInput.replaceAll("[^0-9]", "")) - 1;
                 try {
-                    System.out.println("  " + tasks.getProcessedInputAtIndex(processedInput));
                     System.out.println("Noted. I've removed this task: ");
+                    System.out.println("  " + tasks.getProcessedInputAtIndex(processedInput));
                     tasks.removeTask(processedInput);
                     System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                     Storage.writeToFile(tasks);

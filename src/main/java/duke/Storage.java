@@ -8,17 +8,21 @@ import java.util.Scanner;
 
 public class Storage {
 
-    //public static String filePath = new File("").getAbsolutePath();
-
+    /**
+     *
+     * @param filePath
+     * @param tasks
+     * @throws IOException
+     */
     public static void readFile(String filePath, TaskList tasks) throws IOException {
         File file = new File(filePath + "/duke.txt");
         try {
             if (file.createNewFile()){
                 System.out.println("file created at current location: " + String.format(file.getAbsolutePath()));
-                filePath = String.format(file.getAbsolutePath());
+                //filePath = String.format(file.getAbsolutePath());
             } else {
                 System.out.println("file already exist at current location: " + String.format(file.getAbsolutePath()));
-                filePath = String.format(file.getAbsolutePath());
+                //filePath = String.format(file.getAbsolutePath());
             }
         } catch (IOException e) {
             System.out.println("There was an error when creating file. Try again!");
@@ -72,6 +76,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Update duke.txt file each time a new task is added/delete/marked.
+     *
+     * @param tasks
+     */
     public static void writeToFile(TaskList tasks) {
         String filePath = new File("").getAbsolutePath();
         filePath = filePath + "/duke.txt";
@@ -79,7 +88,6 @@ public class Storage {
         try {
             FileWriter fileWriter = new FileWriter(filePath);
             for(int i=0; i<tasks.size(); i++) {
-                //System.out.println(tasks.get(i).isDone());
                 fileWriter.write(tasks.getDescriptionAtIndex(i) + "\n");
             }
             fileWriter.flush();

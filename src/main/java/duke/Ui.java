@@ -22,9 +22,18 @@ public class Ui {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
+    /**
+     * Prints error message when command is empty.
+     *
+     * @param emptyCommand Command that follows an empty user input.
+     */
     public static void printEmptyCommand(String emptyCommand) {
         System.out.println("OOPS!!! The description of a " + emptyCommand + " cannot be empty.");
     }
+
+    /**
+     * Prints error message when command is not any operations define in TaskList.
+     */
     public static void printWrongCommand() {
         System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
