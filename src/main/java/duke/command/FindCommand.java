@@ -30,18 +30,19 @@ public class FindCommand implements Command {
         }
         else {
             int count = 0;
-            int i = 1;
+            int numOfMatches = 1;
             while (count < TaskList.numOfTasks) {
                 if (TaskList.findTask(keyword[1], count)) {
-                    System.out.println(i + ": " + TaskList.getTask(count));
-                    i++;
+                    System.out.println(numOfMatches + ": " + TaskList.getTask(count));
+                    numOfMatches++;
                 }
                 count++;
             }
-            if (i == 1) {
+            if (numOfMatches == 1) {
                 System.out.println("There is no such task!");
             }
         }
+
         Ui.commandDone();
     }
 }

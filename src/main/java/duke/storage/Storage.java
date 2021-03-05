@@ -1,7 +1,10 @@
 package duke.storage;
 
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 import duke.taslist.TaskList;
-import duke.task.*;
 
 import java.io.*;
 import java.nio.file.FileSystems;
@@ -18,7 +21,7 @@ public class Storage {
     public static String dir;
 
     /**
-     * Create Storage object
+     * Creates Storage object
      *
      * @param dir
      */
@@ -55,7 +58,7 @@ public class Storage {
     }
 
     /**
-     * Write list to file one by one, line by line.
+     * Writes list to file one by one, line by line.
      *
      * @param filePath
      * @param tasks
@@ -80,7 +83,6 @@ public class Storage {
      */
     public static void loadTasks() {
 
-        //String dir = System.getProperty("user.dir");
         Path path = Paths.get(dir, "data");
 
         try {

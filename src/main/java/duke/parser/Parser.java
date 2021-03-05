@@ -23,18 +23,18 @@ public class Parser {
         String[] command = getCommand(input);
 
         switch (command[0]) {
-            case BYE:
-                return new ExitCommand(input);
-            case LIST:
-                return new ListCommand(input);
-            case DONE:
-                return new DoneCommand(input);
-            case DELETE:
-                return new DeleteCommand(input);
-            case FIND:
-                return new FindCommand(input);
-            default:
-                return new AddCommand(input);
+        case BYE:
+            return new ExitCommand(input);
+        case LIST:
+            return new ListCommand(input);
+        case DONE:
+            return new DoneCommand(input);
+        case DELETE:
+            return new DeleteCommand(input);
+        case FIND:
+            return new FindCommand(input);
+        default:
+            return new AddCommand(input);
         }
     }
 

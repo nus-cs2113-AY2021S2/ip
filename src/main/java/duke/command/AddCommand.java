@@ -36,20 +36,20 @@ public class AddCommand implements Command {
         }
 
         switch (action) {
-            case TODO:
-                Todo todoTask = new Todo(getDescription(input));
-                addTask(todoTask);
-                break;
-            case DEADLINE:
-                Deadline deadlineTask = new Deadline(getDescription(input), getBy(input));
-                addTask(deadlineTask);
-                break;
-            case EVENT:
-                Event eventTask = new Event(getDescription(input), getOn(input));
-                addTask(eventTask);
-                break;
-            default:
-                System.out.println("This function is not recognized!");
+        case TODO:
+            Todo todoTask = new Todo(getDescription(input));
+            addTask(todoTask);
+            break;
+        case DEADLINE:
+            Deadline deadlineTask = new Deadline(getDescription(input), getBy(input));
+            addTask(deadlineTask);
+            break;
+        case EVENT:
+            Event eventTask = new Event(getDescription(input), getOn(input));
+            addTask(eventTask);
+            break;
+        default:
+            System.out.println("This function is not recognized!");
         }
 
         Ui.commandDone();
@@ -78,16 +78,15 @@ public class AddCommand implements Command {
      */
     private String splitCommand(String[] commandPlusDescription) {
 
-        String[] description = new String[commandPlusDescription.length - 1];
+        String[] des = new String[commandPlusDescription.length - 1];
 
         for (int i = 1; i < commandPlusDescription.length; i++) {
-            description[i - 1] = commandPlusDescription[i];
+            des[i - 1] = commandPlusDescription[i];
         }
 
-        return Arrays.toString(description).replace(",", "")
-                .replace("[", "")
-                .replace("]", "")
-                .trim();
+        String description = Arrays.toString(des).replace(",", "").replace("[", "").replace("]", "").trim();
+
+        return description;
     }
 
     /**
@@ -104,6 +103,7 @@ public class AddCommand implements Command {
             throw new DukeException("Error!!! No date given!");
         }
 
+        // returns everything after the /by in the user input as deadline for deadline task
         return split[1];
     }
 
@@ -121,6 +121,7 @@ public class AddCommand implements Command {
             throw new DukeException("Error!!! No date given!");
         }
 
+        // returns everything after the /on in the user input as date and/or time for event task
         return split[1];
     }
 
