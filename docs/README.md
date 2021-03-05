@@ -1,10 +1,10 @@
 # User Guide
 ## Introduction
-Duke is a simple task manager application that runs on a Command Line Interface
-(CLI). By using Duke, you will be able to add, view and find different type of 
+DUKE is a simple task manager application that runs on a Command Line Interface
+(CLI). By using DUKE, you will be able to add, view and find different type of 
 tasks you added previously. Once you finished a task, you will be able to 
 mark it as done or delete it once it is no longer relevant.
-Duke gives you a simple way to manage your daily tasks.
+DUKE gives you a simple way to manage your daily tasks.
 ##Table of Contents
 1. Quick Start
 2. Features
@@ -20,9 +20,9 @@ Duke gives you a simple way to manage your daily tasks.
 4. Other Information
 ## Quick Start
 1. Ensure you have Java 11 or above installed. You can verify this with the command `java --version` in the CLI.
-2. Download the latest version of `Duke.jar` from [here](https://github.com/e00426142/ip/releases). 
+2. Download the latest version of `DUKE.jar` from [here](https://github.com/e00426142/ip/releases). 
 3. Open the CLI and navigate to the folder your `Duke.jar` is located at.
-4. Type in the command `java -jar Duke.jar` to initiate the programme.
+4. Type in the command `java -jar DUKE.jar` to initiate the programme.
 5. You will see the following example below if the programme is run correctly.
 ```
  ____         _        
@@ -170,9 +170,9 @@ ____________________________________________________________
 
 ```
 ## FAQs
-**Q: Does Duke save the tasks I added after I stop the program?**
+**Q: Does DUKE save the tasks I added after I stop the program?**
 
-**A:** Yes,Duke will save all changes made after each run and loads the previous task list before each run from the data folder that will be created whenever the programme starts.
+**A:** Yes, DUKE will save all changes made after each run and loads the previous task list before each run from the data folder that will be created whenever the programme starts.
 
 **Q: Where can I view this list of tasks after the programme ends?**
 
