@@ -41,6 +41,7 @@ Mushroom Tracker is here to serve you!
 ```
 
 ## 3. Features
+> ❗ **CAUTION:** Avoid using "|" keystroke in your task description or any input. 
 
 ### 3.1 Add a Todo task: `todo`
 
@@ -75,14 +76,14 @@ Now you have 2 task(s) in the list.
 
 This operation will add an Event task to the task list.
 
-Format: `event <Task Description> /at <Date or Day>`
+Format: `event <Task Description> /at <Date or Day or any words>`
 
-Example: `event Mushroom Concert /at Sunday`
+Example: `event Mushroom Concert /at Sunday with parent`
 
 Expected Output:
 ```
 Got it. I've added this task:
-[E][ ] Mushroom Concert (at: Sunday)
+[E][ ] Mushroom Concert (at: Sunday with parent)
 Now you have 3 task(s) in the list.
 ```
 
@@ -97,7 +98,7 @@ Expected Output:
 Below are all your task(s):
 1.[T][ ] Grow Mushroom
 2.[D][ ] Plant Mushroom (by: 2020-02-25)
-3.[E][ ] Mushroom Concert (at: Sunday)
+3.[E][ ] Mushroom Concert (at: Sunday with parent)
 ```
 
 ### 3.5 Complete a task: `done`
@@ -142,7 +143,7 @@ Expected Output:
 ```
 Processing keyword searches, please wait.
 1.[T][ ] Grow Mushroom
-2.[E][ ] Mushroom Concert (at: Sunday)
+2.[E][ ] Mushroom Concert (at: Sunday with parent)
 Search is complete!
 ```
 
