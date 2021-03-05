@@ -24,8 +24,8 @@ public class Ui {
         print("> Use keyword \"done <Number>\"  to mark task as done!");
         print("> Use keyword \"delete <Number>\"  to delete task!");
         print("> Use keyword \"find <keyword>\"  to find task(s)!");
-        print("> Use the keyword \"bye\" to exit");
         print("> Use the keyword \"menu\" to bring up the menu");
+        print("> Use the keyword \"bye\" to exit");
         print("Enter your command: ");
     }
 
