@@ -2,14 +2,35 @@
 
 Baggie is an interactive task-manager. He is purely based on Command-Line Interface (CLI). With his help, you could be event more productive!
 ## Getting Started
-## 1. Quick Start
+
+## Table of Contents
+  * [Table of Contents](#table-of-contents)
+  * [1. Before Start](#1-before-start)
+  * [2. Features](#2-features)
+    + [2.1 Help Menu](#21-help-menu)
+    + [2.2 Add Task](#22-add-task)
+      - [Deadline Task](#deadline-task)
+      - [Event Task](#event-task)
+      - [Dodo Task](#todo-task)
+    + [2.3 Print Task List](#23-print-task-list)
+    + [2.4 Mark As Done](#24-mark-as-done)
+    + [2.5 Delete Tasks](#25-delete-tasks)
+    + [2.6 Find Task On A date](#26-find-task-on-a-date)
+    + [2.7 Find Task With Keyword](#27-find-task-with-keyword)
+    + [2.8 Exit Command](#28-exit-command)
+    + [2.9 If the command entered is invalid](#29-if-the-command-entered-is-invalid)
+  * [3. Command Overview](#3-command-overview)
+  * [4. Storage](#4-storage)
+  * [5. Contributors](#5-contributors)
+
+## 1. Before Start
 - Ensure you have Java 11 or above installed in your Computer.
 - Download the latest version of `Baggie.jar` file from [here](https://github.com/baggiiiie/ip/releases/tag/v0.1).
 - Move the `Baggie.jar` file to the folder of your choice.
 - Open terminal(For MacOS)/command prompt(For Windows) and change working directory to that folder. 
 - Launch *Baggie* by entering *java -jar ip.jar*.
 
-#### Following is the Welcome Page if Baggie is running successfully
+**Following is the Welcome Page if Baggie is running successfull
    ```
   
 ██████   █████   ██████   ██████  ██ ███████ 
@@ -54,7 +75,7 @@ Expected Output:
 ### 2.2 Add Task 
 This command add a task into task list for the user.
 
-**deadline task**
+#### Deadline Task
 
 Format: `deadline [task description] / [YYYY-MM-DD]`
 
@@ -72,7 +93,7 @@ Expected output when date is not in the right format:
  5: [D] [-] submit UG (by: 2021 03 05)
 ```
 
-**event task**
+#### Event Task
 
 Format: `event [task description] / [YYYY-MM-DD]`
 
@@ -90,7 +111,7 @@ Expected output when date is not in the right format:
  5: [E] [-] event CNY dinner (at: 2021 02 11)
 ```
 
-**todo task**
+#### Todo Task
 
 Format: `todo [task description]`
 
@@ -258,12 +279,12 @@ Expected Output:
  
 
 
-## 3. Storage
+## 4. Storage
 If File  `Baggie.txt` exists in the working directory, Baggie will read from the file and load the saved tasks into task list;
 If File  `Baggie.txt` does not exist in the working directory, Baggie will create a new file `Baggie.txt`;
 Baggie updates `Baggie.txt` every time user exits the program by entering [Exit Command](#exit-command).
 
 
 
-## 4. Contributors
+## 5. Contributors
    [baggiiiie](https://github.com/baggiiiie)
