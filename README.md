@@ -24,3 +24,9 @@ Prerequisites: JDK 11, update IntelliJ to the most recent version.
    | |_| | |_| |   <  __/
    |____/ \__,_|_|\_\___|
    ```
+
+
+## Run and test the program
+1. Open a terminal
+2. Change directory path to the root of the package, which contains jar `ip.jar`
+3. Run command `java -jar ip.jar` in terminal

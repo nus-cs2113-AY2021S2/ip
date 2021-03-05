@@ -123,7 +123,7 @@ public class Duke {
         // get the path of project_root
         String home = System.getProperty("user.dir");
         // concatenate folder data
-        Path path = Paths.get(home, "data", "duke.txt");
+        Path path = Paths.get(home, "duke.txt");
 
         new Duke(path.toString()).run();
     }

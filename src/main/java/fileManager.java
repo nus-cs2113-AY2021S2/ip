@@ -36,9 +36,14 @@ public class fileManager implements Serializable{
      * @throws FileNotFoundException
      */
     public List<Task> readFile() throws FileNotFoundException{
-        fRead = new FileInputStream(filePath);
         List<Task> readTasks = new ArrayList<>();
         try {
+            File file = new File(filePath);
+        if(!file.exists()){
+                file.createNewFile();
+                return readTasks;
+            }
+        fRead = new FileInputStream(filePath);
             if(fRead.available()>0) {
                 ois = new ObjectInputStream(fRead);
                 if (fRead != null) {
@@ -46,7 +51,6 @@ public class fileManager implements Serializable{
                 }
                 ois.close();
             }
-
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
