@@ -8,4 +8,9 @@ public class DukeParser {
         }
         return listOfInputs;
     }
+
+    public static Task processSavedData(String userCommand, String inputDetails) {
+        Task newTask = new Task(inputDetails, userCommand);
+        return newTask;
+    }
 }
