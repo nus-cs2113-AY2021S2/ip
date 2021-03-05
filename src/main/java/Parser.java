@@ -1,3 +1,6 @@
+/**
+ * Handles parsing of the user input and execution of the respective commands requested by user.
+ */
 public class Parser {
     private static final String TODO_CMD = "todo";
     private static final String DEADLINE_CMD = "deadline";
@@ -36,6 +39,11 @@ public class Parser {
         this.isExit = false;
     }
 
+    /**
+     * Parses the command entered by the user and execute the respective command method.
+     *
+     * @param command command entered by user
+     */
     public void handleCommand(String command) {
         try {
             if (command.startsWith(TODO_CMD)) {
@@ -199,6 +207,11 @@ public class Parser {
         ui.printCommandErrorMsg(e.getMessage());
     }
 
+    /**
+     * Indicates if the user wants to terminate the program.
+     *
+     * @return a boolean indicating if the user had entered a "bye" command to terminate the program.
+     */
     public boolean isExit() {
         return isExit;
     }
