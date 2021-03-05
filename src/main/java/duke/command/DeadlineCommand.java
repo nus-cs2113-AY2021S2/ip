@@ -44,7 +44,8 @@ public class DeadlineCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
-            int index = fullCommand.indexOf("/");
+            String separator = "/";
+            int index = fullCommand.indexOf(separator);
             String description = fullCommand.substring(DEADLINE_LENGTH, index - 1);
             String byString = fullCommand.substring(index + BY_LENGTH).trim();
             DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");

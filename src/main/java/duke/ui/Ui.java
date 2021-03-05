@@ -188,6 +188,6 @@ public class Ui {
      */
     public void printDateError() {
         System.out.println("\t" + exceptionGreeting + "I've encountered an error parsing your date.");
-        System.out.println("\t"+ "Please ensure it is in the format dd/mm/yyyy hhmm");
+        System.out.println("\t" + "Please ensure it is in the format dd/mm/yyyy hhmm");
     }
 }
