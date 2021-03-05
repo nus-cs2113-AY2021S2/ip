@@ -118,7 +118,7 @@ public class Storage {
 
     private void writeToSaveFile() throws IOException {
         FileWriter saveFileWriter = new FileWriter(saveFile);
-        for (int i=0; i< tasks.getTaskCount(); i++) {
+        for (int i = 0; i < tasks.getTaskCount(); i++) {
             Task currentTask = tasks.getTaskAt(i);
             saveFileWriter.write(currentTask.getSaveFormatString() + "\n");
             saveFileWriter.flush();
