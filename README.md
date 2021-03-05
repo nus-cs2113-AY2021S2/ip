@@ -24,7 +24,8 @@
 5. Done
 6. Delete
 7. Find
-8. Bye
+8. Menu
+9. Bye
 
 <br>
 
@@ -95,12 +96,12 @@ Find the task with matching keyword
 ## Feature 8: Menu
 Bring up menu
 ### Usage: <code> menu </code>
-### Examples of outcome:
+### Examples of outcome: ![image](https://user-images.githubusercontent.com/62389756/110118671-ab570b00-7df5-11eb-98e7-9e45021f8b45.png)
 
 
 <br>
 
-## Feature 8: Bye
+## Feature 9: Bye
 Exits the program
 ### Usage: <code> bye </code>
 ### Examples of outcome:
