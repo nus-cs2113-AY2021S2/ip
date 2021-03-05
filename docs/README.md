@@ -211,7 +211,7 @@ ___________________________________________
 
 * Marks a certain task to be done
 * Format: `done INDEX`
-* Example: 'done 1'
+* Example: `done 1`
 * Example of expected output:
 
 ```
