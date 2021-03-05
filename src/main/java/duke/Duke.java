@@ -32,7 +32,7 @@ public class Duke {
      */
     public void run() throws DukeException {
         Ui.printWelcomeMessage();
-        Storage.loadData();
+        Storage.createFile();
         Parser.getInput();
     }
 
@@ -40,6 +40,6 @@ public class Duke {
      * Runs Duke.
      */
     public static void main(String[] args) throws DukeException{
-        new Duke("data.txt").run();
+        new Duke("data/duke.txt").run();
     }
 }

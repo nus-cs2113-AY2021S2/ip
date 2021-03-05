@@ -27,11 +27,27 @@ public class Storage {
     }
 
     /**
-     * Loads the file "data.txt".
-     * If the file "data.txt" exits, reads the file
-     * If the file "data.txt" does not exist, it creates the file.
-     * Reads data from "data.txt"
-     * Decodes data in data.txt according to task types.
+     * If the file "duke.txt" exists, reads the file.
+     * If the file "duke.txt" does not exist, creates the file.
+     */
+    public static void createFile() {
+        try {
+            File f = new File(filePath); // create a File for the given file path
+
+            if (!f.exists()) {
+                f.createNewFile();
+            } else {
+                loadData();
+            }
+        } catch (IOException e) {
+            System.out.println("Something went wrong when creating file");
+        }
+    }
+
+    /**
+     * Loads the file "duke.txt".
+     * Reads data from "duke.txt"
+     * Decodes data in duke.txt according to task types.
      * No return value
      */
     public static void loadData() {
@@ -66,7 +82,7 @@ public class Storage {
     }
 
     /**
-     * Writes data into the file "data.txt".
+     * Writes data into the file "duke.txt".
      *
      */
     public static boolean saveData() {
