@@ -1,3 +1,5 @@
+import java.util.NoSuchElementException;
+
 /**
  * Main class of Duke.
  */
@@ -25,7 +27,11 @@ public class Duke {
         String command;
         boolean isExit;
         do {
-            command = ui.getCommandFromUser();
+            try {
+                command = ui.getCommandFromUser();
+            } catch (NoSuchElementException e) {
+                break;
+            }
             parser.handleCommand(command);
             isExit = parser.isExit();
         } while (!isExit);

@@ -22,6 +22,16 @@ public class TaskList {
         return storedTasks.remove(taskIndex);
     }
 
+    public TaskList findTasksByKeyword(String keyword) {
+        ArrayList<Task> tasksFound = new ArrayList<Task>();
+        for (Task currentTask: storedTasks) {
+            if (currentTask.toString().contains(keyword)) {
+                tasksFound.add(currentTask);
+            }
+        }
+        return new TaskList(tasksFound);
+    }
+
     public boolean isEmpty() {
         return storedTasks.isEmpty();
     }

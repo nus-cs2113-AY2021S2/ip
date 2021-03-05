@@ -5,6 +5,7 @@ public class Parser {
     private static final String TODO_CMD = "todo";
     private static final String DEADLINE_CMD = "deadline";
     private static final String EVENT_CMD = "event";
+    private static final String FIND_CMD = "find";
     private static final String LIST_CMD = "list";
     private static final String DONE_CMD = "done";
     private static final String DELETE_CMD = "delete";
@@ -12,6 +13,7 @@ public class Parser {
     private static final String TODO_CMD_VALID_START_STR = "todo ";
     private static final String DEADLINE_CMD_VALID_START_STR = "deadline ";
     private static final String EVENT_CMD_VALID_START_STR = "event ";
+    private static final String FIND_CMD_VALID_START_STR = "find ";
     private static final String DONE_CMD_VALID_START_STR = "done ";
     private static final String DELETE_CMD_VALID_START_STR = "delete ";
     private static final String BY_VALID_STR = " /by ";
@@ -20,6 +22,7 @@ public class Parser {
     private static final int TODO_CMD_DESCRIPTION_INDEX = 5;
     private static final int DEADLINE_CMD_DESCRIPTION_INDEX = 0;
     private static final int EVENT_CMD_DESCRIPTION_INDEX = 0;
+    private static final int FIND_CMD_KEYWORD_INDEX = 5;
     private static final int DEADLINE_CMD_REQUEST_INDEX = 9;
     private static final int EVENT_CMD_REQUEST_INDEX = 6;
     private static final int DONE_CMD_TASK_NUM_INDEX = 5;
@@ -52,6 +55,8 @@ public class Parser {
                 storeDeadlineTask(command);
             } else if (command.startsWith(EVENT_CMD)) {
                 storeEventTask(command);
+            } else if (command.startsWith(FIND_CMD)) {
+                findTask(command);
             } else if (command.equals(LIST_CMD)) {
                 displayStoredTasks();
             } else if (command.startsWith(DONE_CMD)) {
@@ -131,6 +136,20 @@ public class Parser {
         ui.printStoreTaskMsg(taskToStore, tasks.getTaskCount());
     }
 
+    private void findTask(String command) throws DukeException {
+        if (command.equals(FIND_CMD)) {
+            throw new DukeException("OOPS!!! The keyword for a find command cannot be empty.");
+        }
+
+        if (!command.startsWith(FIND_CMD_VALID_START_STR)) {
+            throw new DukeException("OOPS!!! The correct syntax for find command is: 'find keyword'");
+        }
+
+        String keyword = command.substring(FIND_CMD_KEYWORD_INDEX).strip();
+        TaskList tasksFound = tasks.findTasksByKeyword(keyword);
+        ui.printTasksFound(tasksFound);
+    }
+
     private void displayStoredTasks() {
         if (tasks.isEmpty()) {
             ui.printEmptyTaskListMsg();
@@ -190,7 +209,6 @@ public class Parser {
         Task deletedTask = tasks.deleteTask(indexOfTaskToDelete);
         storage.saveStoredTasksData();
         ui.printDeleteTaskMsg(deletedTask);
-
     }
 
     private void exitMsg() {

@@ -1,3 +1,4 @@
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
@@ -73,7 +74,7 @@ public class Ui {
      *
      * @return the String containing the command entered by user.
      */
-    public String getCommandFromUser() {
+    public String getCommandFromUser() throws NoSuchElementException {
         return scanner.nextLine().strip();
     }
 
@@ -101,6 +102,16 @@ public class Ui {
         System.out.println(DIVIDER);
     }
 
+    public void printTasksFound(TaskList tasksFound) {
+        System.out.println(DIVIDER);
+        System.out.println(" Here are the matching tasks in your list:");
+        for (int i = 0; i < tasksFound.getTaskCount(); i++) {
+            Task currentTask = tasksFound.getTaskAt(i);
+            System.out.printf(" %d.%s\n", (i + 1), currentTask);
+        }
+        System.out.println(DIVIDER);
+    }
+  
     /**
      * Informs the user that the task list is empty.
      */
