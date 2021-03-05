@@ -1,11 +1,11 @@
 # User Guide
 _**by Wong Li Ping**_
 
-##Introduction
+## Introduction
 This project is named after the Java mascot Duke. Duke, is a command line 
 program to keep track of your tasks in a list.
 
-##Features
+## Features
 Duke allows you to add three different type of tasks in your list:<p>
 Todo - tasks you plan to do. This is denoted as `[T]` in your task list!<br>
 Deadline - tasks that contains a deadline. This is denoted as `[D]` in your task list!<br>
@@ -16,7 +16,7 @@ saves your progress even after you exit the program!
 
 Duke can handle simple error handling too! 
 ## Commands
-####Below is a table that illustrates the list of commands available.
+#### Below is a table that illustrates the list of commands available.
 Command | Functionality
 --------|---------------
 todo \<task\> | Adds a ToDo task object to the list
@@ -55,7 +55,7 @@ Expected outcome:
 `Now you have 2 tasks in the list.`<br>
 `Got it. I've added this task: `
 
-######Note: event command usage is similar.
+###### Note: event command usage is similar.
 
 
 ### `list` - Prints the tasks in a list with indexing
@@ -85,8 +85,8 @@ Expected outcome:
 `2.[D][ ] cs2113t iP (by: 5/3/2021 2359)`<br>
 
 
-######Duke is still not capable of doing many functions sadly...
-######pst... He is trying his best to learn! :)
+###### Duke is still not capable of doing many functions sadly...
+###### pst... He is trying his best to learn! :)
 
 ### `random` - User inputs random words
 
@@ -99,5 +99,5 @@ Expected outcome:
 `OOPS!!! I'm sorry, but I don't know what that means :-(`
 
 
-###Hope you have fun using Duke! More functionalities to come...!
+### Hope you have fun using Duke! More functionalities to come...!
 
