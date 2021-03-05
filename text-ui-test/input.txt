@@ -1,0 +1,24 @@
+help
+todo read a book
+list
+deadline return a book /by Sunday 10am
+list
+done 1
+event
+list
+event join concert / at tomorrow
+event tutorial /at Feb 5 10am
+deadline do online quiz Tuesday 10pm
+done 1
+blah
+list
+find book
+todo
+delete
+delete 1
+done 2
+delete 2
+done 1
+list
+delete 1
+bye
