@@ -46,6 +46,8 @@ management faster than traditional GUI apps.
   result in an error.
 >* Extraneous parameters for all commands will result in an error.
 
+> ***WARNING*** ❗️: Do not use "|" in the parameter `TASKNAME` as it would cause errors
+> when loading up the file. Please refer to section 2.11 for a fix if the save file is corrupted.
 
 ### 2.1 Adding a to-do task: `todo`
 Adds a to-do task to the task list.
@@ -158,7 +160,7 @@ Examples:
 ### 2.11 Editing the data file
 Duke data are saved as a text file `[JAR file location]/duke.txt`.\
 Advanced users are welcome to update data directly by editing that data file.
-> ***CAUTION***: If your changes to the data file makes its format invalid, you
+> ***CAUTION*** ❗️: If your changes to the data file makes its format invalid, you
 > will have to manually delete the `duke.txt` file for the saving mechanism to
 > work as intended.
 
