@@ -1,5 +1,5 @@
 # User Guide
-Happy is designed to be a personal assistant chatbot in commandHandler line interface (CLI).
+Happy is designed to be a personal assistant chatbot in command line interface (CLI).
 By using Happy, you can make a list of tasks (todo, deadline and event) and manage your schedule 
 more easily.
 
@@ -12,13 +12,13 @@ more easily.
    detailed description of each command.
 
 ## Features
-```
-Notes about the command format:
+
+### Notes about the command format:
 - Parameters in brackets () are mandatory while the ones in square brackets [] are optional.
-- Valid command should be given in the following format: **command + parameter(s)**
+- Valid command should be given in the following format: __command + parameter(s)__
 - Date has to be provided in yyyy-mm-dd format (e.g. 2021-09-03)
 - Time has to be provided in hhmm 24-hour format (e.g. 2359)
-```
+
 
 ### `todo` - Adding a todo task
 To add a todo task to the task list
@@ -46,7 +46,7 @@ Now you have 1 tasks in the list.
 
 ### `event` - Adding an event task
 To add an event task to the task list
-#### Command: `event (name of the task) /at (date) [time]`
+#### Command: `event (name of the event) /at (date) [time]`
 #### Example: `event task1 /at 2020-09-03 1134`
 #### Expected outcome:
 ```
@@ -104,7 +104,7 @@ Here is your task List with keyword happy:
 ```
 
 ### `search` - List target tasks based on a given date
-To list all tasks in the task list whose date is the same as the given date.
+To list all tasks in the task list whose dates are the same as the given date.
 #### Command: `search (date)`
 #### Example: `find 2020-01-01`
 #### Expected outcome:
@@ -124,11 +124,12 @@ Bye. Hope to see you again soon!
 ```
 ## FAQ
 Question: Will Happy update the changes made in CLI to the local text file?
+
 Answer: Yes, all changes (add / delete / set as Done) will be updated synchronously.
 
 ##Command Summary
 Command|Format
-----|----
+---------|---------
 todo|todo (name of the task)
 deadline|deadline (name of the deadline) /by (date) [time]
 event|event (name of the task) /at (date) [time]
