@@ -91,6 +91,15 @@ Find the task with matching keyword
 
 <br>
 
+
+## Feature 8: Menu
+Bring up menu
+### Usage: <code> menu </code>
+### Examples of outcome:
+
+
+<br>
+
 ## Feature 8: Bye
 Exits the program
 ### Usage: <code> bye </code>
