@@ -6,6 +6,10 @@ public class Deadline extends Task{
         this.by = by;
     }
 
+    /**
+     * Format the deadline task as [D][status] description (by: time_to_complete).
+     * @return the deadline task
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
