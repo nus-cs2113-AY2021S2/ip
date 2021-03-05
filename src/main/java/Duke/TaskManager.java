@@ -56,6 +56,13 @@ public class TaskManager {
         DukeUI.print("Now you have " + TaskManager.taskCount() + " tasks in the list.");
     }
 
+    public static void markTaskAsDone(String s) {
+        Task selectedTask = TaskManager.getTask(s);
+        selectedTask.markAsDone();
+        DukeUI.print("Nice! Following task is now marked as done:");
+        DukeUI.print("[X] " + selectedTask.getDescription());
+    }
+
     public ArrayList<Task> returnTaskList() {
         return tasksList;
     }

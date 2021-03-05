@@ -18,7 +18,7 @@ public class Duke {
             }
             if (userCommand.equalsIgnoreCase("list")) TaskManager.listOutTasks();
             else if (userCommand.equalsIgnoreCase("done" )) {
-                markTaskAsDone(inputDetails);
+                TaskManager.markTaskAsDone(inputDetails);
             } else if (userCommand.equalsIgnoreCase("delete" )) {
                 TaskManager.deleteTask(inputDetails);
             } else  {
@@ -42,12 +42,4 @@ public class Duke {
             DukeUI.print(e.sendErrorMessage());
         }
     }
-
-    private static void markTaskAsDone(String s) {
-        Task selectedTask = TaskManager.getTask(s);
-        selectedTask.markAsDone();
-        DukeUI.print("Nice! Following task is now marked as done:");
-        DukeUI.print("[X] " + selectedTask.getDescription());
-    }
-    
 }
