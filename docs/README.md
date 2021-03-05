@@ -36,9 +36,9 @@ ____________________________________________________________
 What can I do for you?
 ____________________________________________________________
 ```
-##Features
+## Features
 
-### 1. **Adding a to-do task:** `todo`
+### 1. Adding a to-do task: `todo`
 Adds the given todo type of task to the list.
 
 **Format:** `todo <task description>`
@@ -55,7 +55,7 @@ Now you have 1 tasks in the list.
 ____________________________________________________________
 ```
 
-### 2. **Adding an event task:** `event`
+### 2. Adding an event task: `event`
 adds the given event type of task to the list.
 
 **Format:** `event <task description>/at <timing>`
@@ -72,7 +72,7 @@ Now you have 2 tasks in the list.
 ____________________________________________________________
 ```
 
-### 3. **Adding a deadline task:** `deadline`
+### 3. Adding a deadline task: `deadline`
 Adds the given deadline type of task to the list.
 
 **Format:** `event <task description>/by <timing>`
@@ -89,7 +89,7 @@ Now you have 3 tasks in the list.
 ____________________________________________________________
 ```
 
-### 4. **Listing all task:** `list`
+### 4. Listing all task: `list`
 Displays your tasks in a numbered list.
 
 **Format:** `list`
@@ -105,7 +105,7 @@ list
 ____________________________________________________________
 ```
 
-### 5. **Marking a task as done:** `done`
+### 5. Marking a task as done: `done`
 Marks the task that has the given index in the list with an 'X', to indicate it is completed.
 
 **Format:** `done <index>`
@@ -121,7 +121,7 @@ Nice! I've marked this task as done:
 ____________________________________________________________
 ```
 
-### 6. **Finding tasks by keyword:** `find`
+### 6. Finding tasks by key words: `find`
 Displays a new, numbered list of tasks from the main list that contain the given keyword.
 
 **Format:** `find <keywords>`
@@ -137,7 +137,7 @@ Here are the matching tasks in your list:
 ____________________________________________________________
 ```
 
-### 7. **Deleting a task from list of tasks:** `delete`
+### 7. Deleting a task from list of tasks: `delete`
 Removes the task with the given index from the list.
 
 **Format:** `delete <taskindex>`
@@ -154,7 +154,7 @@ Now you have 2 tasks in the list.
 ____________________________________________________________
 ```
 
-### 8. **Terminating the programme:** `bye`
+### 8. Terminating the programme: `bye`
 Stop the programme.
 
 **Format:** `bye`
