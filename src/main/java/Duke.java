@@ -23,7 +23,7 @@ public class Duke {
             } else if (userCommand.equalsIgnoreCase("delete" )) {
                 deleteTask(inputDetails);
             } else  {
-                if (!isValidCommand(userCommand)) {
+                if (!DukeParser.isValidCommand(userCommand)) {
                     continue;
                 }
                 //process Todo, event or deadline
@@ -41,26 +41,6 @@ public class Duke {
         } catch (TodoException e) {
             DukeUI.printLine();
             DukeUI.print(e.sendErrorMessage());
-        }
-    }
-
-    private static boolean isValidCommand(String userCommand) {
-        boolean isValid = true;
-        try {
-            isValidInput(userCommand);
-        } catch (InvalidCommandException e) {
-            DukeUI.printLine();
-            DukeUI.print(e.sendErrorMessage());
-            DukeUI.printLine();
-            isValid = false;
-        }
-        return isValid;
-    }
-
-    private static void isValidInput(String userCommand) throws InvalidCommandException {
-        var isValid = userCommand.equalsIgnoreCase("todo") | userCommand.equalsIgnoreCase("deadline") | userCommand.equalsIgnoreCase("event");
-        if (!isValid) {
-            throw new InvalidCommandException();
         }
     }
 

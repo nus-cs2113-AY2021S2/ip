@@ -64,7 +64,7 @@ public class DukeStorage {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        emptyFileAfterInitializing();
+        //emptyFileAfterInitializing();
         return taskManager;
     }
 
@@ -82,6 +82,7 @@ public class DukeStorage {
     }
 
     private static void exitDuke(TaskManager latestTaskManager) throws IOException {
+        emptyFileAfterInitializing();
         DukeUI.printLine();
         ArrayList<Task> finalTasksList = latestTaskManager.returnTaskList();
         for (Task task : finalTasksList) {

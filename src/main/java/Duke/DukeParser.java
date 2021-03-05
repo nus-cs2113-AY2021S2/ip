@@ -10,8 +10,7 @@ public class DukeParser {
     }
 
     public static Task processSavedData(String userCommand, String inputDetails) {
-        Task newTask = new Task(inputDetails, userCommand);
-        return newTask;
+        return new Task(inputDetails, userCommand);
     }
 
     public static Task processUserRequest(String userCommand, String inputDetails) throws TodoException {
@@ -20,7 +19,26 @@ public class DukeParser {
         }
         DukeUI.printLine();
         DukeUI.printLine();
-        Task newTask = new Task(inputDetails, userCommand);
-        return newTask;
+        return new Task(inputDetails, userCommand);
+    }
+
+    public static boolean isValidCommand(String userCommand) {
+        boolean isValid = true;
+        try {
+            isValidInput(userCommand);
+        } catch (InvalidCommandException e) {
+            DukeUI.printLine();
+            DukeUI.print(e.sendErrorMessage());
+            DukeUI.printLine();
+            isValid = false;
+        }
+        return isValid;
+    }
+
+    private static void isValidInput(String userCommand) throws InvalidCommandException {
+        var isValid = userCommand.equalsIgnoreCase("todo") | userCommand.equalsIgnoreCase("deadline") | userCommand.equalsIgnoreCase("event");
+        if (!isValid) {
+            throw new InvalidCommandException();
+        }
     }
 }
