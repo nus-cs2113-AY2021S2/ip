@@ -44,9 +44,9 @@ public class Duke {
     }
 
     /**
-     * Manager to
-     * @param input
-     * @param tasks
+     * Manager to handle logic
+     * @param input User's Input
+     * @param tasks Array List of Task
      */
     public static void dukeManager(String input, ArrayList<Task> tasks) {
         String [] subString = input.split(" ");
@@ -324,7 +324,7 @@ public class Duke {
         System.out.println("\t------------------------------------------");
         System.out.println("\tHere are the matching tasks in your list:");
         String taskInput = userInput.split(" ")[1];
-        ArrayList<Task> matchedTasks = new ArrayList<Task>();
+        ArrayList<Task> matchedTasks = new ArrayList<>();
         for (Task task : tasks) {
             if (task.getDescription().contains(taskInput)) {
                 matchedTasks.add(task);
