@@ -238,7 +238,7 @@ public class Duke {
             showError();}
     }
 
-    /** Print the keyword related item if found*/
+    /** Print the keyword related item if found the keyword inside the content*/
     public static void findKeyword(String keyword){
         for(int i = 0; i < count; ++i){
             if(lists.get(i).toString().contains(keyword)){
