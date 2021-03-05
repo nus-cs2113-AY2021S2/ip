@@ -9,7 +9,7 @@ Duke is a task management application which is designed to handle 3 types of tas
   * [Save and exit](#6--Save-and-exit)
 ## Features 
 
-### 1. Adding a task.
+### 1. Adding a task
 Adding a task into the list.
 
 There are 3 types of Task: Todo, Deadline and Event.
@@ -71,7 +71,7 @@ Now you have 3 tasks in the list.
 ```
 <br/>
 
-### 2. Listing down all tasks.
+### 2. Listing down all tasks
 show all tasks that have been added.
 ### Usage
 #### `list` - display all tasks.
@@ -92,7 +92,7 @@ Here are the tasks in your list:
 ```
 <br/>
 
-### 3. Marking a task as done.
+### 3. Marking a task as done
 "[X]" represents the completion of the task and "[ ]" represents the task is not completed.
 ### Usage
 #### `done <task index>` - Marks the selected task as done.
@@ -108,7 +108,7 @@ Nice! I've marked this task as done:
 ```
 <br/>
 
-### 4. Deleting a task.
+### 4. Deleting a task
 Removes the task from the list.
 ### Usage
 #### `delete <task index>` - Removes the task from the list.
@@ -126,7 +126,7 @@ Now you have 2 tasks in the list.
 ```
 <br/>
 
-### 5. Finding tasks contain keywords.
+### 5. Finding tasks contain keywords
 Uses a keyword to find the tasks.
 ### Usage
 #### `find <keyword>` - Lists down all tasks in the list contain a certain keyword.
@@ -142,7 +142,7 @@ Here are the matching tasks in your list:
 ```
 <br/>
 
-### 6. Save and exit.
+### 6. Save and exit
 Saves the list as a txt file in the local disk and exits the application.
 
 ### Usage
