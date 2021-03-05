@@ -17,7 +17,7 @@ Baggie is an interactive task-manager. He is purely based on Command-Line Interf
     + [2.6 Find Task On A date](#26-find-task-on-a-date)
     + [2.7 Find Task With Keyword](#27-find-task-with-keyword)
     + [2.8 Exit Command](#28-exit-command)
-    + [2.9 If the command entered is invalid](#29-if-the-command-entered-is-invalid)
+    + [2.9 Invalid Command](#29-invalid-command)
   * [3. Command Overview](#3-command-overview)
   * [4. Storage](#4-storage)
   * [5. Contributors](#5-contributors)
@@ -250,7 +250,7 @@ Expected Output:
 
 
 
-### 2.9 If the command entered is invalid
+### 2.9 Invalid Command
 Baggie shows error message.
 
 Example: `quit`
@@ -281,7 +281,7 @@ Expected Output:
 ## 4. Storage
 If File  `Baggie.txt` exists in the working directory, Baggie will read from the file and load the saved tasks into task list;
 If File  `Baggie.txt` does not exist in the working directory, Baggie will create a new file `Baggie.txt`;
-Baggie updates `Baggie.txt` every time user exits the program by entering [Exit Command](#2.8-exit-command).
+Baggie updates `Baggie.txt` every time user exits the program by entering [Exit Command](#28-exit-command)
 
 
 
