@@ -281,7 +281,9 @@ Expected Output:
 
 ## 4. Storage
 If File  `Baggie.txt` exists in the working directory, Baggie will read from the file and load the saved tasks into task list;
+
 If File  `Baggie.txt` does not exist in the working directory, Baggie will create a new file `Baggie.txt`;
+
 Baggie updates `Baggie.txt` every time user exits the program by entering [Exit Command](#28-exit-command)
 
 
