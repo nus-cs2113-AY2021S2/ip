@@ -14,7 +14,7 @@ public class Parser {
         try {
 
             int index = Integer.parseInt(request);
-            System.out.println("Event has been removed: " + list.get(index));
+            System.out.println("Noted.I've removed this task\n" + list.get(index));
             list.delete(index);
             System.out.println("Now you have " + list.getSize() + " tasks in the list");
             displayLine();
