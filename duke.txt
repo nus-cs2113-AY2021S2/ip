@@ -1,3 +1,6 @@
-E|1|cs21223 liping|rc4 capt
-T|0|iP
-E|0||something1
+T|0|read book
+D|0|return book|29/2/2021
+T|0|          
+T|0|list
+D|0||today
+E|0||tonight

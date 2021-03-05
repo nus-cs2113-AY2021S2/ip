@@ -43,12 +43,12 @@ public class Parser {
                 Ui.printEmptyCommand("todo");
                 return;
             }
-                if(userInput.split(" ")[1].replace(" ","").isEmpty()) {
-                    throw new MissingTaskException("Please key in an appropriate task.");
-                }
-                TaskList.addTodoTask(userInput);
-                Storage.writeToFile(tasks);
-
+            if(userInput.substring(6).replace(" ","").isEmpty()){
+                System.out.println("get in here");
+                throw new MissingTaskException("Please key in an appropriate task.");
+            }
+            TaskList.addTodoTask(userInput);
+            Storage.writeToFile(tasks);
         } else if (userInput.split(" ")[0].equals("deadline")) {
             if (userInput.length() < 10) {
                 Ui.printEmptyCommand("deadline");
@@ -71,7 +71,8 @@ public class Parser {
                 System.out.println("Got it. I've added this task: ");
                 Storage.writeToFile(tasks);
             } catch (StringIndexOutOfBoundsException e) {
-                System.out.println("Incorrect Slash input! Try again! Do event /at <something>");
+                System.out.println("Incorrect Slash input! " +
+                        "Try again! Do event /at <something>");
             }
         } else if (userInput.split(" ")[0].equals("event")) {
             if (userInput.length() < 7) {
@@ -90,7 +91,8 @@ public class Parser {
                 System.out.println("Got it. I've added this task: ");
                 Storage.writeToFile(tasks);
             } catch (StringIndexOutOfBoundsException e) {
-                System.out.println("Incorrect Slash input! Try again! Do event /at <something>");
+                System.out.println("Incorrect Slash input! " +
+                        "Try again! Do event /at <something>");
             }
 
         } else if (userInput.split(" ")[0].equals("delete")) {
@@ -99,7 +101,8 @@ public class Parser {
                 return;
             } else {
                 int processedInput;
-                processedInput = Integer.parseInt(userInput.replaceAll("[^0-9]", "")) - 1;
+                processedInput = Integer.parseInt
+                        (userInput.replaceAll("[^0-9]", "")) - 1;
                 try {
                     System.out.println("Noted. I've removed this task: ");
                     System.out.println("  " + tasks.getProcessedInputAtIndex(processedInput));
