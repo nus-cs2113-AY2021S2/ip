@@ -313,7 +313,7 @@ ___________________________________________
 * Finds the tasks that contains the certain keyword given by user
 * Format: `find KEYWORD`
 * Example: `find book`
-* Example of expected output:
+* Example of expected output 1:
 
 ```
 ___________________________________________
@@ -321,6 +321,16 @@ Here are the matching tasks in your list:
 1. [T][✓] read a book
 ___________________________________________
 ```
+
+* Example of expected output 2:
+
+```
+___________________________________________
+There is no matching task in your list.
+Please input another keyword! :)
+___________________________________________
+```
+
 Exception 1:
 * No find DESCRIPTION
 * Example: `find`
@@ -350,7 +360,7 @@ ___________________________________________
 * Finds all the tasks that are relevant to the specific date
 * Format: `date [yyy-mm-dd]`
 * Example: `date 2020-02-28 12:23`
-* Example of expected output:
+* Example of expected output 1:
 
 ```
 ___________________________________________
@@ -358,6 +368,16 @@ Here are the tasks occurring on this specific date:
 1. [D][✘] return a book(by: Feb 28 2021 12:23)
 ___________________________________________
 ```
+
+* Example of expected output 2:
+
+```
+___________________________________________
+There is no task occurring on this specific date.
+Please input another date! :)
+___________________________________________
+```
+
 Exception 1:
 * No date DESCRIPTION
 * Example: `date`
