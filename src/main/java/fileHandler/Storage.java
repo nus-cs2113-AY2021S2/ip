@@ -1,8 +1,7 @@
 package fileHandler;
 
-import task.Task;
-import task.TaskList;
 
+import task.TaskList;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;

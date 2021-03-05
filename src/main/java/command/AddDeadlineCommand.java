@@ -1,12 +1,6 @@
 package command;
 
-
-//import exception.TaskFormatException;
-//import exception.TodoFormatException;
 import task.Deadline;
-import task.Task;
-import task.TaskList;
-import task.ToDo;
 
 /**
  * Represent a command of creating a new deadline task and adding it to the task list

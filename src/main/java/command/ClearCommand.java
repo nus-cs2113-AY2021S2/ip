@@ -1,5 +1,8 @@
 package command;
 
+/**
+ * Represent a command of removing all tasks in current task list
+ */
 public class ClearCommand extends Command{
     public static final String COMMAND_WORD = "clear";
     private int taskIndex;

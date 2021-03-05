@@ -1,7 +1,5 @@
 package command;
 
-import exception.TaskAlreadyDoneException;
-
 /**
  * Represent a command of deleting a task from the task list
  */
@@ -20,6 +18,10 @@ public class DeleteCommand extends Command{
 
     /**
      * delete the specified task from task list.
+     * If a valid index is given, the task will be removed from the task list. A feedback message indicating
+     * the successful removal of the task will be given.
+     * If the given task index is invalid, like a negative number or a number out of range, an error message
+     * will be returned.
      * @return feedback message of the command execution
      */
     @Override

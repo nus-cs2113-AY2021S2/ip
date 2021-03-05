@@ -1,9 +1,7 @@
 package command;
 
-import fileHandler.FileHandler;
 import task.Task;
 import task.TaskList;
-
 import java.util.Iterator;
 
 public class FindCommand extends Command{
@@ -18,6 +16,10 @@ public class FindCommand extends Command{
         this.keyword = keyword;
     }
 
+    /**
+     * Search tasks whose names contain the keyword in task list.
+     * @return the feedback message and the list of tasks that satisfy the requirement.
+     */
     @Override
     public CommandResult execute(){
         TaskList relevantTasks = new TaskList();

@@ -1,10 +1,6 @@
 package command;
 
-import task.Task;
 import task.TaskList;
-
-import java.util.Iterator;
-import java.util.List;
 
 /**
  * Represent the result of command execution

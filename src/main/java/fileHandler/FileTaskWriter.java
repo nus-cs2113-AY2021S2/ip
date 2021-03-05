@@ -19,7 +19,7 @@ public class FileTaskWriter {
     }
 
     /**
-     * store the current task list to the text file
+     * Store the current task list to the text file
      * @param taskList
      * @throws IOException if there is problem accessing or writing to the file
      */

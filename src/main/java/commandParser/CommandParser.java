@@ -1,21 +1,18 @@
 package commandParser;
 
 import command.*;
-import exception.*;
 
 import java.util.Locale;
 
 /**
  * Represent the parser to handle the use input command
- * the parser will check the validity of the parameters for different commands
  */
 public class CommandParser {
     public CommandParser(){}
-    private final String LINE_SEPERATOR = "    ________________________________________________\n";
 
     /**
-     * classify command based on the command word
-     * @param input user input
+     * Classify command based on the command word
+     * @param input string of user input
      * @return return a command object corresponding to user input, return an InvalidCommand object if the command is not recognizable
      */
     public Command parseCommand(String input) {
@@ -41,26 +38,30 @@ public class CommandParser {
         case FindCommand.COMMAND_WORD:
             return prepareFind(inputParts);
         default:
-            return new InvalidCommand(InvalidCommand.ERROR_MESSGAE);
+            return new InvalidCommand();
         }
     }
 
-
     /**
-     * Check validity of parameters for done command. The parameter should be in Integer format.
-     * The index should be within the bound.
+     * Check validity of a find command. The keyword to search must be specified after command word.
      * @param inputParts
-     * @return a DoneCommand object if the parameter is valid, an InvalidCommand object if the second parameter is invalid
+     * @return a FindCommand object.  If keyword is not given, return an InvalidCommand object.
+     * given.
      */
     private Command prepareFind(String[] inputParts){
         if(inputParts.length < 2){
             return new InvalidCommand(FindCommand.ERROR_MESSAGE);
         }
         return new FindCommand(inputParts[1]);
-
     }
 
-
+    /**
+     * Check validity of a done command. There index of the task to mark as done must be specified after command
+     * word.
+     * @param inputParts
+     * @return a DoneCommand object. If the index is not given or the String of index can't be converted to integer
+     * or the index is out of bound, returns an InvalidCommand object
+     */
     private Command prepareDone(String[] inputParts){
         try{
             if(inputParts.length < 2){
@@ -76,10 +77,11 @@ public class CommandParser {
     }
 
     /**
-     * Check validity of parameters for delete command. The parameter should be in Integer format.
-     * The index should be within the bound.
+     * Check validity of a delete command. There index of the task to delete must be specified after command
+     * word.
      * @param inputParts
-     * @return a DeleteCommand object if the parameter is valid, an InvalidCommand object if the second parameter is invalid,
+     * @return a DeleteCommand object. If the index is not given or the String of index can't be converted to
+     * integer or the index is out of bound, returns an InvalidCommand object
      */
     private Command prepareDelete(String[] inputParts){
         try{
@@ -95,10 +97,9 @@ public class CommandParser {
     }
 
     /**
-     * Check validity of parameters for adding a new to do task command.
-     * The parameter should be the name of the to do.
+     * Check validity of adding a new ToDo task command. The name of ToDo task must be specified.
      * @param inputParts
-     * @return a AddTodoCommand object if the parameter is valid, an InvalidCommand object if the parameter is invalid,
+     * @return a AddTodoCommand object. If the ToDo name is not given, returns an InvalidCommand object .
      */
     private Command prepareAddTodo(String[] inputParts) {
         if(inputParts.length < 2){
@@ -112,10 +113,11 @@ public class CommandParser {
     }
 
     /**
-     * Check validity of parameters for adding a new deadline task command.
-     * The parameter should be the task name and time separated by "/by".
+     * Check validity of adding a new deadline task command. The name and deadline of the task must be given,
+     * task name and deadline are separated by "/by".
      * @param inputParts
-     * @return a AddDeadlineCommand object if the parameter is valid, an InvalidCommand object if the parameter is invalid,
+     * @return a AddDeadlineCommand object. If the input format is invalid or any part is missing, returns an
+     * Invalid command object.
      */
     private Command prepareAddDeadline(String[] inputParts){
         if(inputParts.length < 2){
@@ -141,10 +143,11 @@ public class CommandParser {
     }
 
     /**
-     * Check validity of parameters for adding a new event task command.
-     * The parameter should be the task name and time separated by "/at".
+     * Check validity of adding a new event task command. The name and time of the task must be given, task name
+     * and deadline are separated by "/at".
      * @param inputParts
-     * @return a AddEventCommand object if the parameter is valid, an InvalidCommand object if the parameter is invalid,
+     * @return a AddEventCommand object. If the input format is invalid or any part is missing, returns an
+     * InvalidCommand object.
      */
     private Command prepareAddEvent(String[] inputParts){
         if(inputParts.length < 2){

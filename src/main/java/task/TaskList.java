@@ -1,9 +1,6 @@
 package task;
 
 import exception.TaskAlreadyDoneException;
-
-//import exception.DoneFormatException;
-//import exception.DeleteFormatException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -29,7 +26,6 @@ public class TaskList {
         return tasks.size();
     }
 
-
     public void addTask(Task task){
         tasks.add(task);
     }
@@ -38,7 +34,12 @@ public class TaskList {
         return tasks.iterator();
     }
 
-
+    /**
+     * Mark the task at given index as done.
+     * @param index index of the task
+     * @throws IndexOutOfBoundsException if the index is out of bound.
+     * @throws TaskAlreadyDoneException if the task at given index was marked as done before.
+     */
     public void setTaskDone(int index) throws IndexOutOfBoundsException, TaskAlreadyDoneException {
 
         if(tasks.get(index).getDone()){
@@ -51,6 +52,11 @@ public class TaskList {
         return tasks.get(index);
     }
 
+    /**
+     * Delete the task at given index.
+     * @param index index of the task.
+     * @throws IndexOutOfBoundsException if the index is out of bound.
+     */
     public void deleteTask(int index) throws IndexOutOfBoundsException{
         tasks.remove(index);
     }

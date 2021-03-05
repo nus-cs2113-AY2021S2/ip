@@ -33,9 +33,6 @@ public abstract class Task {
 
     public abstract String getTaskInfo();
 
-    public void getDoneOutput(){};
-
-
     public String toFile(){
         return "";
     }

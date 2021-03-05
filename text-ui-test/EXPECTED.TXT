@@ -80,7 +80,9 @@
     7.find <keyword>
       Search task list for tasks whose names contain the keyword
       Eg. find book
-    8.help
+    8.clear
+      Clear current task list
+    9.help
       Show help message
     ____________________________________________________________
     ____________________________________________________________

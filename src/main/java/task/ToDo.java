@@ -11,7 +11,7 @@ public class ToDo extends Task {
     }
 
     /**
-     * Get the information of a to do task in certain format for displaying.
+     * Get the information of a ToDo task in certain format for displaying.
      * @return
      */
     @Override
@@ -24,7 +24,7 @@ public class ToDo extends Task {
     }
 
     /**
-     * Get the information of a to do task in certain format for storing in file.
+     * Get the information of a ToDo task in certain format for storing in file.
      * @return
      */
     @Override
