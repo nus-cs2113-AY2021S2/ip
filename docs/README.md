@@ -1,5 +1,5 @@
 # User Guide
-##Intro
+## Intro
 TaskManager (Duke) is a desktop app for managing tasks, along with dates if applicable, according to the type of the tasks. <p>
 It is optimized for use via a Command Line Interface (CLI).
 
