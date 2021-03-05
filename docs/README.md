@@ -22,6 +22,7 @@ Baggie is an interactive task-manager. He is purely based on Command-Line Interf
   * [4. Storage](#4-storage)
   * [5. Contributors](#5-contributors)
 
+
 ## 1. Before Start
 - Ensure you have Java 11 or above installed in your Computer.
 - Download the latest version of `Baggie.jar` file from [here](https://github.com/baggiiiie/ip/releases/tag/v2.0).
@@ -29,7 +30,7 @@ Baggie is an interactive task-manager. He is purely based on Command-Line Interf
 - Open terminal(For MacOS)/command prompt(For Windows) and change working directory to that folder. 
 - Launch *Baggie* by entering *java -jar ip.jar*.
 
-**Following is the Welcome Page if Baggie is running successfull
+**Following is the Welcome Page if Baggie is running successfull**
    ```
   
 ██████   █████   ██████   ██████  ██ ███████ 
