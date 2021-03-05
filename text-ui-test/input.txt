@@ -1,3 +1,4 @@
+help
 todo read a book
 list
 deadline return a book /by Sunday 10am
@@ -11,6 +12,7 @@ deadline do online quiz Tuesday 10pm
 done 1
 blah
 list
+find book
 todo
 delete
 delete 1

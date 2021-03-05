@@ -10,6 +10,33 @@
     What can I do for you?
     ____________________________________________________________
     ____________________________________________________________
+    Duke accepts the following commands:
+    1.list
+      List current task list
+    2.todo <task name>
+      Add a new todo task to task list
+      Eg. todo do homework
+    3.deadline <task name> /by <deadline>
+      Add a new deadline to task list
+      Eg. deadline return a book /by tonight
+    4.event <task name> /at <time>
+      Add a new event to task list
+      Eg. event meeting /at 8pm
+    5.done <task index>
+      Mark a task as done
+      Eg. done 1
+    6.delete <task index>
+      Delete a task from task list
+      Eg. delete 2
+    7.find <keyword>
+      Search task list for tasks whose names contain the keyword
+      Eg. find book
+    8.clear
+      Clear current task list
+    9.help
+      Show help message
+    ____________________________________________________________
+    ____________________________________________________________
     ToDo added:
         [T][ ]read a book
     Now you have 1 tasks in the list
@@ -90,6 +117,11 @@
     1.[T][X]read a book
     2.[D][ ]return a book (by: Sunday 10am)
     3.[E][ ]tutorial (at: Feb 5 10am)
+    ____________________________________________________________
+    ____________________________________________________________
+    Here are the matching tasks in your list:
+    1.[T][X]read a book
+    2.[D][ ]return a book (by: Sunday 10am)
     ____________________________________________________________
     ____________________________________________________________
     Name of Todo should be specified after todo keyword.
