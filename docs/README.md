@@ -3,7 +3,7 @@
 ## Features 
 
 ### Feature 1 
-Users are able to print and list out all the tasks created so far on the command prompt for display
+`Users are able to print and list out all the tasks created so far on the command prompt for display`
 
 ### Feature 2
 Users are able to create 3 types of tasks. They are todo, event and deadline task. Todo task has 2 attributes that users need to specify, which are the description of the task and the completion status of the task. Whereas for event and deadline task, both of them have 3 attributes that need to be specified, which are the description of the task, the completion status of the task and also the location of the event for event task or date of the deadline task.
