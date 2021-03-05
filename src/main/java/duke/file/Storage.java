@@ -37,7 +37,9 @@ public class Storage {
         char taskSelection;
         try {
             File dukeFileRead = new File(relativeFileName);
-
+            if (dukeFileRead.createNewFile()) {
+                //Create file if it does not exist
+            }
             Scanner myReader = new Scanner(dukeFileRead);
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();

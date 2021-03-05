@@ -75,6 +75,7 @@ public class TaskList {
         String newUserTask;
         try {
             newUserTask = action.split("/at")[0].strip();
+            checkDescriptionIsEmpty(newUserTask);
             String eventTime = action.split("/at")[1].strip();
             userTasks.add(new Event(newUserTask, eventTime));
             showTaskCreationMessage(userTasks.get(userTasks.size()-1), userTasks.size());
@@ -90,10 +91,17 @@ public class TaskList {
         String newUserTask;
         try {
             newUserTask = action.split("/by")[0].strip();
+            checkDescriptionIsEmpty(newUserTask);
             String date = action.split("/by")[1].strip();
             userTasks.add(new Deadline(newUserTask, date));
             showTaskCreationMessage(userTasks.get(userTasks.size()-1), userTasks.size());
         } catch (ArrayIndexOutOfBoundsException e){
+            throw new DukeException("☹ OOPS!!! The description or date of a deadline cannot be empty.");
+        }
+    }
+
+    private void checkDescriptionIsEmpty(String description) throws DukeException{
+        if(description.equals("")){
             throw new DukeException("☹ OOPS!!! The description or date of a deadline cannot be empty.");
         }
     }
