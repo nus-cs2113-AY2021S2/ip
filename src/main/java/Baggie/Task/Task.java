@@ -1,6 +1,6 @@
-package Duke.Task;
+package Baggie.Task;
 
-import static Duke.UI.TEXT.*;
+import static Baggie.UI.TEXT.*;
 
 public class Task {
     protected String taskDescription;
@@ -13,7 +13,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? DONE_ICON : SPACE);
+        return (isDone ? DONE_ICON : NOT_DONE_ICON);
     }
 
     public void markAsDone() {

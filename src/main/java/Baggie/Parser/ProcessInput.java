@@ -1,13 +1,13 @@
-package Duke.Parser;
+package Baggie.Parser;
 
-import Duke.Commands.*;
-import Duke.Duke;
-import Duke.UI.PrintMessages;
-import Duke.UI.TEXT;
+import Baggie.Commands.*;
+import Baggie.Baggie;
+import Baggie.UI.PrintMessages;
+import Baggie.UI.TEXT;
 
 import java.util.Scanner;
 
-public class ProcessInput extends Duke {
+public class ProcessInput extends Baggie {
     public static final String EXIT_COMMAND = "bye";
     public static final String LIST_COMMAND = "list";
     public static final String DONE_COMMAND = "done";

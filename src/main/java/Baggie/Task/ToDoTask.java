@@ -1,6 +1,6 @@
-package Duke.Task;
+package Baggie.Task;
 
-import static Duke.UI.TEXT.TODO_ICON;
+import static Baggie.UI.TEXT.TODO_ICON;
 
 public class ToDoTask extends Task {
 

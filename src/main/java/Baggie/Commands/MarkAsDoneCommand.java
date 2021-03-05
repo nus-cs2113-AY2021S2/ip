@@ -1,9 +1,9 @@
-package Duke.Commands;
+package Baggie.Commands;
 
-import Duke.Duke;
-import Duke.UI.PrintMessages;
+import Baggie.Baggie;
+import Baggie.UI.PrintMessages;
 
-public class MarkAsDoneCommand extends Duke {
+public class MarkAsDoneCommand extends Baggie {
     /**
      * Takes the index from input
      * and marks the task with the index as done

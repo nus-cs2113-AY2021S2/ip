@@ -1,15 +1,15 @@
-package Duke.Commands;
+package Baggie.Commands;
 
-import Duke.Duke;
-import Duke.UI.PrintMessages;
-import Duke.Task.EventTask;
+import Baggie.Baggie;
+import Baggie.UI.PrintMessages;
+import Baggie.Task.EventTask;
 
-import static Duke.UI.TEXT.TIME_DIVIDER;
+import static Baggie.UI.TEXT.TIME_DIVIDER;
 
-public class AddEventCommand extends Duke {
+public class AddEventCommand extends Baggie {
     /**
-     * Add Event Task into the list
-     * show error if theres no time input
+     * Adds Event Task into the list
+     * Shows error if theres no time input
      * @param taskDescription
      */
     public static void execute(String taskDescription) {

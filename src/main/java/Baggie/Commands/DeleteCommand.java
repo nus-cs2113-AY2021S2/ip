@@ -1,9 +1,9 @@
-package Duke.Commands;
+package Baggie.Commands;
 
-import Duke.Duke;
-import Duke.UI.PrintMessages;
+import Baggie.Baggie;
+import Baggie.UI.PrintMessages;
 
-public class DeleteCommand extends Duke {
+public class DeleteCommand extends Baggie {
     /**
      * Deletes a task
      * @param deleteTask

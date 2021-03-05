@@ -1,13 +1,14 @@
-package Duke.Commands;
+package Baggie.Commands;
 
-import Duke.Duke;
+import Baggie.Baggie;
+import Baggie.UI.PrintMessages;
 
-import static Duke.UI.TEXT.*;
+import static Baggie.UI.TEXT.*;
 
-public class PrintListCommand extends Duke {
+public class PrintListCommand extends Baggie {
     /**
-     * Print list from start index to end index
-     * Used to print both list and a single task
+     * Prints list from start index to end index
+     * Prints both list and a single task
      * @param startIndex
      * @param endIndex
      */

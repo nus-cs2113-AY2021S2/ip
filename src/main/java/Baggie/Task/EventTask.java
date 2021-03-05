@@ -1,10 +1,10 @@
-package Duke.Task;
+package Baggie.Task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import static Duke.UI.TEXT.DATE_FORMAT;
-import static Duke.UI.TEXT.EVENT_ICON;
+import static Baggie.UI.TEXT.DATE_FORMAT;
+import static Baggie.UI.TEXT.EVENT_ICON;
 
 public class EventTask extends Task {
 
@@ -20,6 +20,10 @@ public class EventTask extends Task {
         return EVENT_ICON;
     }
 
+    /**
+     * Gets time info
+     * @return time with correct format if applicable
+     */
     @Override
     public String getTaskTime(){
         try {

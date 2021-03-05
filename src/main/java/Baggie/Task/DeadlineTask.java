@@ -1,10 +1,10 @@
-package Duke.Task;
+package Baggie.Task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import static Duke.UI.TEXT.DATE_FORMAT;
-import static Duke.UI.TEXT.DEADLINE_ICON;
+import static Baggie.UI.TEXT.DATE_FORMAT;
+import static Baggie.UI.TEXT.DEADLINE_ICON;
 
 public class DeadlineTask extends Task {
 

@@ -1,20 +1,20 @@
-package Duke.FileHandling;
+package Baggie.FileHandling;
 
-import Duke.Commands.PrintListCommand;
-import Duke.Duke;
-import Duke.Task.DeadlineTask;
-import Duke.Task.EventTask;
-import Duke.Task.Task;
-import Duke.Task.ToDoTask;
+import Baggie.Baggie;
+import Baggie.Commands.PrintListCommand;
+import Baggie.Task.DeadlineTask;
+import Baggie.Task.EventTask;
+import Baggie.Task.Task;
+import Baggie.Task.ToDoTask;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-import static Duke.UI.TEXT.*;
+import static Baggie.UI.TEXT.*;
 
-public class FileHandler extends Duke{
+public class FileHandler extends Baggie {
 
     /**
      * Loads tasks from file
@@ -22,12 +22,12 @@ public class FileHandler extends Duke{
     public static void readFile(){
         try {
             String localDir = System.getProperty(USER_DIRECTORY); //get the path of current directory
-            File file = new File(localDir + FILE_NAME);
+            File file = new File(localDir + File.separator + FILE_NAME);
             if (file.createNewFile()) {
                 //create new file if file does not exist
-                System.out.println( A_NEW_FILE + file.getName() + HAS_BEEN_CREATED + IT_COULD_BE_FOUND + localDir);
+                System.out.println( A_NEW_FILE + file.getName() + HAS_BEEN_CREATED + IT_COULD_BE_FOUND + file.getAbsolutePath());
             } else {
-                System.out.println( READ_FILE + file.getName()+ "]^_^\n" + IT_COULD_BE_FOUND + localDir);
+                System.out.println( READ_FILE + file.getName()+ "] ^_^\n" + IT_COULD_BE_FOUND + file.getAbsolutePath());
                 Scanner readingFile = new Scanner(file);
                 while (readingFile.hasNextLine()) {
                     String line = readingFile.nextLine();
@@ -71,7 +71,7 @@ public class FileHandler extends Duke{
     public static void writeFile(){
         try {
             String localDir = System.getProperty(USER_DIRECTORY);
-            FileWriter writer = new FileWriter(localDir + FILE_NAME ,false);
+            FileWriter writer = new FileWriter(localDir + File.separator + FILE_NAME ,false);
             for (Task taskInList : lists) {
                 writer.write(taskInList.getTaskType() + DIVIDER + taskInList.isDone() + DIVIDER + taskInList.getTask().trim());
                 if (!(taskInList instanceof ToDoTask)) {

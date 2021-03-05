@@ -1,15 +1,15 @@
-package Duke.Commands;
+package Baggie.Commands;
 
-import Duke.Duke;
-import Duke.UI.PrintMessages;
-import Duke.Task.DeadlineTask;
+import Baggie.Baggie;
+import Baggie.UI.PrintMessages;
+import Baggie.Task.DeadlineTask;
 
-import static Duke.UI.TEXT.TIME_DIVIDER;
+import static Baggie.UI.TEXT.TIME_DIVIDER;
 
-public class AddDeadlineCommand extends Duke {
+public class AddDeadlineCommand extends Baggie {
     /**
-     * Add Deadline Task into the list,
-     * show error message if theres no time input
+     * Adds Deadline Task into the list,
+     * Shows error message if theres no time input
      * @param taskDescription
      */
     public static void execute(String taskDescription) {

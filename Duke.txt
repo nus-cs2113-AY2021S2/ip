@@ -1,4 +1,0 @@
-[T]|false|math class
-[D]|false|math tut|2021-02-2
-[E]|false|math tut|Feb 3 2021
-[D]|false|1|1

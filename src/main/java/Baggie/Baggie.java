@@ -1,14 +1,14 @@
-package Duke;
+package Baggie;
 
-import Duke.FileHandling.FileHandler;
-import Duke.Parser.ProcessInput;
-import Duke.Task.*;
-import Duke.UI.PrintMessages;
+import Baggie.FileHandling.FileHandler;
+import Baggie.Parser.ProcessInput;
+import Baggie.Task.*;
+import Baggie.UI.PrintMessages;
 
 import java.util.List;
 import java.util.ArrayList;
 
-public class Duke {
+public class Baggie {
     public static String inputString;
     public static int taskCount = 0;
     public static List<Task> lists = new ArrayList<>();

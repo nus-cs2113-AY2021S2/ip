@@ -1,6 +1,6 @@
-package Duke.UI;
+package Baggie.UI;
 
-import Duke.Commands.PrintListCommand;
+import Baggie.Commands.PrintListCommand;
 
 public class PrintMessages extends TEXT {
     /**
@@ -61,5 +61,7 @@ public class PrintMessages extends TEXT {
 
     public static void keywordEmpty() { System.out.println(KEYWORD_EMPTY);}
 
-    public static void dateEmpty() {System.out.println(DATE_EMPTY);}
+    public static void dateEmpty() { System.out.println(DATE_EMPTY); }
+
+    public static void printTaskCount(int taskCount) { System.out.println(THERE_ARE + taskCount + TASKS);}
 }

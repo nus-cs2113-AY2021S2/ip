@@ -1,12 +1,12 @@
-package Duke.Commands;
+package Baggie.Commands;
 
-import Duke.Duke;
-import Duke.Task.ToDoTask;
-import Duke.UI.PrintMessages;
+import Baggie.Baggie;
+import Baggie.Task.ToDoTask;
+import Baggie.UI.PrintMessages;
 
-public class AddTodoCommand extends Duke {
+public class AddTodoCommand extends Baggie {
     /**
-     * Add Todo Task into the list
+     * Adds Todo Task into the list
      * @param taskDescription
      */
     public static void execute(String taskDescription) {
