@@ -24,14 +24,6 @@ public class DukeUI {
         return DukeParser.splitInputIntoString(userInput);
     }
 
-    private static String[] splitInputIntoString(String userInput) {
-        String[] listOfInputs = userInput.split(" ", 2);
-        if (listOfInputs.length == 1) {
-            listOfInputs = new String[]{userInput, "filler"};
-        }
-        return listOfInputs;
-    }
-
     public static void printWelcomeMessage() {
         print("Hello from\n" + LOGO);
         printLine();
@@ -47,5 +39,10 @@ public class DukeUI {
         DukeUI.print("Got it. I've added this task:");
         DukeUI.print("  " + selectedTask.getTaskType() + selectedTask.getStatusIcon() + " " + selectedTask.getDescription());
         DukeUI.print("Now you have " + currentTaskManager.taskCount() + " tasks in the list.");
+    }
+
+    public static void informErrorToUser(TodoException e) {
+        DukeUI.printLine();
+        DukeUI.print(e.sendErrorMessage());
     }
 }

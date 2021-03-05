@@ -38,8 +38,7 @@ public class Duke {
             taskManager.addTask(newTask);
             DukeUI.notifyUserNewTask(newTask, taskManager);
         } catch (TodoException e) {
-            DukeUI.printLine();
-            DukeUI.print(e.sendErrorMessage());
+            DukeUI.informErrorToUser(e);
         }
     }
 }
