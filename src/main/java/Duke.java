@@ -1,3 +1,5 @@
+import java.util.NoSuchElementException;
+
 public class Duke {
     private static final String SAVE_FILE_PATH = "saveFile.txt";
     private Ui ui;
@@ -19,7 +21,11 @@ public class Duke {
         String command;
         boolean isExit;
         do {
-            command = ui.getCommandFromUser();
+            try {
+                command = ui.getCommandFromUser();
+            } catch (NoSuchElementException e) {
+                break;
+            }
             parser.handleCommand(command);
             isExit = parser.isExit();
         } while (!isExit);

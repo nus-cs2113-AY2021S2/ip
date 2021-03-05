@@ -1,3 +1,4 @@
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Ui {
@@ -41,7 +42,7 @@ public class Ui {
         System.out.println(DIVIDER);
     }
 
-    public String getCommandFromUser() {
+    public String getCommandFromUser() throws NoSuchElementException {
         return scanner.nextLine().strip();
     }
 
