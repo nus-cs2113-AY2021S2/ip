@@ -39,7 +39,7 @@ There is no need to save manually.
 - Type can be 'T', 'E', or 'D'. They represent Todo, Event and Deadline tasks respectively.
 - Status: 'X' if task has been marked as 'done'. Otherwise, Empty.
 
-**Example of usage**: <p>
+**Example of usage**:
 `todo read book`
 
 **Expected outcome**:
@@ -62,7 +62,7 @@ Task will be displayed in the format: `[E][Status] TASKNAME (by: DATE)`
 - Type can be 'T', 'E', or 'D'. They represent Todo, Event and Deadline tasks respectively.
 - Status: 'X' if task has been marked as 'done'. Otherwise, Empty.
 
-**Example of usage**: <p>
+**Example of usage**:
 `deadline return book /by June 6th`
 
 **Expected outcome**:
@@ -86,7 +86,7 @@ Task will be displayed in the format: `[E]][Status] TASKNAME (by: DATE)`
 - Type can be 'T', 'E', or 'D'. They represent Todo, Event and Deadline tasks respectively.
 - Status: 'X' if task has been marked as 'done'. Otherwise, Empty.
 
-**Example of usage**: <p>
+**Example of usage**: 
 `event project meeting /at Aug 6th 2-4pm`
 
 **Expected outcome**:
@@ -109,7 +109,7 @@ ____________________________________________________________
 **Outcome**: In updated list of tasks, the task is removed if it exists. <p> 
 - The index of all the other tasks in the list are updated automatically.
 
-**Example of usage**: <p>
+**Example of usage**: 
 `delete 2`
 
 **Expected outcome**:
@@ -127,7 +127,7 @@ ____________________________________________________________
 
 **Outcome**: Shows the updated list of tasks.
 
-**Example of usage**: <p>
+**Example of usage**: 
 `list`
 
 **Expected outcome**:
@@ -149,7 +149,7 @@ ____________________________________________________________
 
 **Outcome**: In updated list of tasks, the status of the task is marked as done with a 'X'.
 
-**Example of usage**: <p>
+**Example of usage**: 
 `done 1`
 
 **Expected outcome**:
@@ -168,7 +168,7 @@ ____________________________________________________________
 
 **Outcome**: Shows all tasks where their description (name or date) contains the keyword.
 
-**Example of usage**: <p>
+**Example of usage**: 
 `find book`
 
 **Expected outcome**:
@@ -185,7 +185,7 @@ ____________________________________________________________
 
 **Outcome**: Shows greeting to indicate that program has exited.
 
-**Example of usage**: <p>
+**Example of usage**:
 `bye`
 
 **Expected outcome**:
