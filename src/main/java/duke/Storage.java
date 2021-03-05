@@ -18,11 +18,11 @@ public class Storage {
         File file = new File(filePath + "/duke.txt");
         try {
             if (file.createNewFile()){
-                System.out.println("file created at current location: " + String.format(file.getAbsolutePath()));
-                //filePath = String.format(file.getAbsolutePath());
+                System.out.println("file created at current location: "
+                        + String.format(file.getAbsolutePath()));
             } else {
-                System.out.println("file already exist at current location: " + String.format(file.getAbsolutePath()));
-                //filePath = String.format(file.getAbsolutePath());
+                System.out.println("file already exist at current location: "
+                        + String.format(file.getAbsolutePath()));
             }
         } catch (IOException e) {
             System.out.println("There was an error when creating file. Try again!");

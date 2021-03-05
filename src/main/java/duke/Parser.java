@@ -44,8 +44,8 @@ public class Parser {
                 return;
             }
             if(userInput.substring(6).replace(" ","").isEmpty()){
-                System.out.println("get in here");
-                throw new MissingTaskException("Please key in an appropriate task.");
+                System.out.println("Try something else");
+//                throw new MissingTaskException("Please key in an appropriate task.");
             }
             TaskList.addTodoTask(userInput);
             Storage.writeToFile(tasks);
@@ -104,14 +104,16 @@ public class Parser {
                 processedInput = Integer.parseInt
                         (userInput.replaceAll("[^0-9]", "")) - 1;
                 try {
-                    System.out.println("Noted. I've removed this task: ");
                     System.out.println("  " + tasks.getProcessedInputAtIndex(processedInput));
                     tasks.removeTask(processedInput);
+                    System.out.println("I've removed the above task for you!");
                     System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                     Storage.writeToFile(tasks);
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println("No index found. Please key an appropriate index");
                 }
+
+
             }
         } else if (userInput.split(" ")[0].equals("find")) {
             System.out.println("Here are the matching tasks in your list: ");

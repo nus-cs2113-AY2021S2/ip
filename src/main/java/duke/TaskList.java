@@ -113,9 +113,6 @@ public class TaskList {
         return tasks.get(i).getDescription();
     }
 
-//    public void getIndex(int i) {
-//        tasks.get(i);
-//    }
     public int size() {
         return tasks.size();
     }

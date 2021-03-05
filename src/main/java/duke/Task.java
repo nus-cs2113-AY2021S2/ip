@@ -18,14 +18,9 @@ public class Task {
     return (isDone ? "[X] " : "[ ] ");
 }
 
-
     public void setDone() {
         isDone = true;
     }
-
-//    public boolean isDone() {
-//        return isDone;
-//    }
 
     @Override
     public String toString() {
