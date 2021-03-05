@@ -1,4 +1,4 @@
-# Duke project template
+# Duke project create by Liu Ruiqian
 
 This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
 
@@ -88,5 +88,7 @@ Enter command: bye
 ===================================================
 Bye. Hope to see you again soon!
 ```
+
 If you need more instruction, feel free to contact Ruiqian @ 2595903341@qq.com
 Thanks
+
