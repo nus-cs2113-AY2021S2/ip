@@ -33,4 +33,14 @@ public class TaskManager {
         Task selectedTask = tasksList.get(taskNumber);
         return selectedTask;
     }
+
+    public Task getTaskWithInt (Integer taskNo) {
+        taskNo--;
+        Task selectedTask = tasksList.get(taskNo);
+        return selectedTask;
+    }
+
+    public ArrayList<Task> returnTaskList() {
+        return tasksList;
+    }
 }

@@ -34,7 +34,8 @@ public class Task {
             }
             else if (taskType.equalsIgnoreCase("tododone")) {
                 String[] listOfInputs = description.split("/by",2);
-                description = listOfInputs[0] + " (by:" + listOfInputs[1] + ")";
+                //description = listOfInputs[0] + " (by:" + listOfInputs[1] + ")";
+                description = listOfInputs[0];
                 this.isDone = true;
                 this.taskType = removeDone;
             } else {

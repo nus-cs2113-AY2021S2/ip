@@ -5,7 +5,7 @@ import Duke.*;
 
 public class Duke {
     private static final Scanner scanner = new Scanner(System.in);
-    private static final ArrayList<Task> tasksList = new ArrayList<>();
+    // private static final ArrayList<Task> tasksList = new ArrayList<>();
     private static final TaskManager taskManager = new TaskManager();
     public static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -130,25 +130,27 @@ public class Duke {
         printLine();
         printLine();
         Task newTask = new Task(inputDetails, userCommand);
-        tasksList.add(newTask);
+        //tasksList.add(newTask);
+        taskManager.addTask(newTask);
         notifyUser(newTask);
     }
 
     private static void processSavedData(String userCommand, String inputDetails) {
         Task newTask = new Task(inputDetails, userCommand);
-        tasksList.add(newTask);
+        //tasksList.add(newTask);
+        taskManager.addTask(newTask);
     }
 
     private static void notifyUser(Task selectedTask) {
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + selectedTask.getTaskType() + selectedTask.getStatusIcon() + " " + selectedTask.getDescription());
-        System.out.println("Now you have " + tasksList.size() + " tasks in the list.");
+        //System.out.println("Now you have " + tasksList.size() + " tasks in the list.");
+        System.out.println("Now you have " + taskManager.taskCount() + " tasks in the list.");
     }
 
     private static void markTaskAsDone(String s) {
-        int taskNumber = Integer.parseInt(s);
-        taskNumber--;
-        Task selectedTask = tasksList.get(taskNumber);
+        //Task selectedTask = tasksList.get(taskNumber);
+        Task selectedTask = taskManager.getTask(s);
         selectedTask.markAsDone();
         System.out.println("Nice! Following task is now marked as done:");
         System.out.println("[X] " + selectedTask.getDescription());
@@ -156,7 +158,8 @@ public class Duke {
 
     private static void exitDuke() throws IOException {
         printLine();
-        for (Task task : tasksList) {
+        ArrayList<Task> finalTasksList = taskManager.returnTaskList();
+        for (Task task : finalTasksList) {
             try {
                 writeToFile(FILE_PATH_TO_SAVE_TASKS, task);
             } catch (IOException e) {
@@ -189,21 +192,35 @@ public class Duke {
     private static void listOutTasks() {
         printLine();
         int i = 0;
-        while (i < tasksList.size()) {
-            Task selectedTask = tasksList.get(i);
+        //while (i < tasksList.size()) {
+        //    Task selectedTask = tasksList.get(i);
+        //    i++;
+        //    System.out.println(i + ". " + selectedTask.getTaskType() + selectedTask.getStatusIcon() + " " + selectedTask.getDescription());
+        //}
+        while (i < taskManager.taskCount()) {
             i++;
+            Task selectedTask = taskManager.getTaskWithInt(i);
             System.out.println(i + ". " + selectedTask.getTaskType() + selectedTask.getStatusIcon() + " " + selectedTask.getDescription());
         }
     }
 
+//    private static void deleteTask(String s) {
+//        int taskNumber = Integer.parseInt(s);
+//        taskNumber--;
+//        //Task selectedTask = tasksList.get(taskNumber);
+//        Task selectedTask = taskManager.getTask(s);
+//        System.out.println("Noted. I've removed this task");
+//        System.out.println("\t" + selectedTask.getTaskType() + selectedTask.getStatusIcon() + " " + selectedTask.getDescription());
+//        tasksList.remove(taskNumber);
+//        System.out.println("Now you have " + tasksList.size() + " tasks in the list.");
+//    }
+
     private static void deleteTask(String s) {
-        int taskNumber = Integer.parseInt(s);
-        taskNumber--;
-        Task selectedTask = tasksList.get(taskNumber);
+        Task selectedTask = taskManager.getTask(s);
         System.out.println("Noted. I've removed this task");
         System.out.println("\t" + selectedTask.getTaskType() + selectedTask.getStatusIcon() + " " + selectedTask.getDescription());
-        tasksList.remove(taskNumber);
-        System.out.println("Now you have " + tasksList.size() + " tasks in the list.");
+        taskManager.removeTask(s);
+        System.out.println("Now you have " + taskManager.taskCount() + " tasks in the list.");
     }
 
     private static void writeToFile(String filePath, Task tasks) throws IOException {
