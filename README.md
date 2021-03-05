@@ -30,7 +30,7 @@ This command prints a help menu for the user.
 
 Format: `help`
 
-Command: `help`
+Example: `help`
 
 Expected Output:
 ```
@@ -47,4 +47,23 @@ Expected Output:
  	event-> format: event [task] / [time]
  	deadline-> format: deadline [task] / [time]
  	[tip: enter date as YYYY-MM-DD to help Baggie understand better!]
+```
+**Print List** 
+This command prints a task list for the user.
+
+Format: `list`
+
+Example: `list`
+
+Expected Output when there is no task in the list:
+```
+  List is empty :o
+```
+
+Expected Output when there are tasks in the list:
+```
+ 1: [D] [X] math tutorial (by: Feb 27 2021)
+ 2: [T] [-] submit UG
+ 3: [E] [-] CNY dinner (at: 5pm)
+ There are 3 tasks in the list
 ```
