@@ -2,6 +2,7 @@ package Duke;
 
 public class DukeParser {
     public static String[] splitInputIntoString(String userInput) {
+        userInput = userInput.trim();
         String[] listOfInputs = userInput.split(" ", 2);
         if (listOfInputs.length == 1) {
             listOfInputs = new String[]{userInput, "filler"};
@@ -15,6 +16,12 @@ public class DukeParser {
 
     public static Task processUserRequest(String userCommand, String inputDetails) throws TodoException {
         if (inputDetails.equalsIgnoreCase("filler") & userCommand.equalsIgnoreCase("todo")) {
+            throw new TodoException();
+        }
+        if (inputDetails.equalsIgnoreCase("filler") & userCommand.equalsIgnoreCase("deadline")) {
+            throw new TodoException();
+        }
+        if (inputDetails.equalsIgnoreCase("filler") & userCommand.equalsIgnoreCase("event")) {
             throw new TodoException();
         }
         DukeUI.printLine();
