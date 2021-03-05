@@ -14,7 +14,7 @@ public class Task {
      * @return tick or X symbol
      */
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : " ");
+        return (isDone ? "X" : " ");
     }
     /**
      * Marks task as done

@@ -122,7 +122,7 @@ Example: `done 2`
 Expected Output:
 ```
 Nice! I've marked this task as done:
-  [D][✓] return book (by: Monday 2pm)
+  [D][X] return book (by: Monday 2pm)
 ____________________________________________________________
 ```
 
@@ -137,7 +137,7 @@ Example: `delete 2`
 Expected Output:
 ```
 Noted. I've removed this task:
-  [D][✓] return book (by: Monday 2pm)
+  [D][X] return book (by: Monday 2pm)
 Now you have 2 tasks in the list.
 ____________________________________________________________
 ```
