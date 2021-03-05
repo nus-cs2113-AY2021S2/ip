@@ -11,7 +11,7 @@ public class fileManager implements Serializable{
     private FileInputStream fRead;
     private ObjectInputStream ois;
 
-    public void setPath(String filePath){
+    public fileManager(String filePath) {
         this.filePath = filePath;
     }
 
