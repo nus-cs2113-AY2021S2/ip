@@ -1,8 +1,8 @@
 # Baggie User Guide
 
-Baggie is an interactive task-manager. He is purely Command-Line Interface (CLI).
+Baggie is an interactive task-manager. He is purely based on Command-Line Interface (CLI). With his help, you could be event more productive!
 ## Getting Started
-## Quick Start
+## 1. Quick Start
 - Ensure you have Java 11 or above installed in your Computer.
 - Download the latest version of `Baggie.jar` file from [here](https://github.com/baggiiiie/ip/releases/tag/v0.1).
 - Move the `Baggie.jar` file to the folder of your choice.
@@ -23,9 +23,9 @@ ____________________________________________________________
 ____________________________________________________________
 
    ```
-## Features
+## 2. Features
 
-### Help Menu 
+### 2.1 Help Menu 
 This command prints a help menu for the user.
 
 Format: `help`
@@ -51,7 +51,7 @@ Expected Output:
 
 
 
-### Add Task 
+### 2.2 Add Task 
 This command add a task into task list for the user.
 
 **deadline task**
@@ -106,7 +106,7 @@ Expected Output:
 
 
 
-### Print Task List 
+### 2.3 Print Task List 
 This command prints a task list for the user.
 
 Format: `list`
@@ -129,7 +129,7 @@ Expected output when there are tasks in the list:
 
 
 
-### Mark As Done 
+### 2.4 Mark As Done 
 This command marks a task in the list as done.
 
 Format: `done [index]`
@@ -154,7 +154,7 @@ The task is already done ^_^
 
 
 
-### Delete Tasks 
+### 2.5 Delete Tasks 
 This command deletes a task from list for the user.
 
 Format: `delete [index]`
@@ -175,7 +175,7 @@ Expected output when the task is not in the list:
 
 
 
-### Find Task On A date 
+### 2.6 Find Task On A date 
 This command finds tasks on a specific date for the user.
 
 Format: `date [YYYY-MM-DD]`
@@ -196,7 +196,7 @@ Expected output when the date is not in the right format:
 
 
 
-### Find Task With Keyword 
+### 2.7 Find Task With Keyword 
 This command finds tasks containing the keyword for the user.
 
 Format: `keyword [keyword]`
@@ -215,7 +215,7 @@ Expected output when there is no task containing keyword in the list:
  Baggie could find any tasks related to math
 ```
 
-### Exit Command
+### 2.8 Exit Command
 This command exits the programm for the user.
 
 Format: `bye`
@@ -230,7 +230,7 @@ Expected Output:
 
 
 
-### If the command entered is invalid
+### 2.9 If the command entered is invalid
 Baggie shows error message.
 
 Example: `quit`
@@ -240,12 +240,12 @@ Expected Output:
  Baggie doesn't know what to do with the command D:
 ```
 
-## Storage
+## 3. Storage
 If File  `Baggie.txt` exists in the working directory, Baggie will read from the file and load the saved tasks into task list;
 If File  `Baggie.txt` does not exist in the working directory, Baggie will create a new file `Baggie.txt`;
 Baggie updates `Baggie.txt` every time user exits the program by entering [Exit Command](#exit-command).
 
 
 
-## Contributors
+## 4. Contributors
    [baggiiiie](https://github.com/baggiiiie)
