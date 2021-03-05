@@ -160,6 +160,13 @@ public class Parser {
         return keywordSet;
     }
 
+    /**
+     * Parses string into date object
+     *
+     * @param inputDate date given by the user
+     * @return date
+     * @throws DukeException
+     */
     public static LocalDate parseDate(String inputDate) throws DukeException {
         try {
             inputDate = inputDate.trim().substring(0, LENGTH_OF_DATE);
@@ -171,6 +178,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses string into time object
+     *
+     * @param inputTime time given by the user
+     * @return time
+     */
     public static LocalTime parseTime(String inputTime) {
         int index = inputTime.strip().indexOf(" ");
         inputTime = inputTime.strip().substring(index + 1);
