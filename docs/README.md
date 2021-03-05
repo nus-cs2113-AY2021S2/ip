@@ -14,7 +14,7 @@ By: `Lee Han Yong Andy` Since: `February 2021`
       + [3.4 List all the tasks: `list`](#34-list-all-the-tasks-list)
       + [3.5 Complete a task: `done`](#35-complete-a-task-done)
       + [3.6 Delete a task: `delete`](#36-delete-a-task-delete)
-      + [3.7 Search task by keyword: `find`](#37-search-task-by-keyword-find)
+      + [3.7 Search task by keyword: `find`](#37-search-task-for-keyword-find)
       + [3.8 Exit the program: `bye`](#38-exit-the-program-bye)
       + [3.9 Task Storage](#39-task-storage)
     * [4. Frequently Asked Question (FAQ)](#4-faq)
