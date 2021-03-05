@@ -29,12 +29,12 @@ Example of usage:
 `list`
 
 Expected outcome:
-
-`-------------------------------`
-`Here are the tasks in your list:`
-`1.[T][✓]read book`
-`-------------------------------`
-
+```
+-------------------------------
+Here are the tasks in your list:
+1.[T][✓]read book
+-------------------------------
+```
 ### `todo` - This action creates a todo task in the system.
 
 Example of usage: 
