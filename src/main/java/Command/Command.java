@@ -186,12 +186,12 @@ public class Command {
             }
             break;
         case "delete":
-            if(subStrings.length > 1){
+            if (subStrings.length > 1) {
                 int taskNo = Integer.parseInt(subStrings[1]);
-                Task taskDelete = tasks.get(taskNo-1);
+                Task taskDelete = tasks.get(taskNo - 1);
                 System.out.println("     Noted. I've removed this task:");
                 System.out.println("       " + taskDelete.getDescription());
-                tasks.remove(taskNo-1);
+                tasks.remove(taskNo - 1);
                 System.out.println("     Now you have " + tasks.size() + " tasks in this list.");
             }
             break;
@@ -199,9 +199,10 @@ public class Command {
             int i = 1;
 
             System.out.println("     Here are the matching tasks in your list:");
-            for(Task task:tasks){
-                if(task.getDescription().contains(description)){
-                    System.out.println("     "+i+"."+task.getDescription());
+            for (Task task : tasks) {
+                if (task.getDescription().contains(description)) {
+                    System.out.println("     " + i + "." + task.getDescription());
+                    ++i;
                 }
             }
             break;
