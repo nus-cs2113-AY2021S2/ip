@@ -110,7 +110,7 @@ public class Parser {
             Storage.writeToFile("data/duke.txt", tasks);
         } catch (NumberFormatException e) {
             System.out.println("OOPS!!! A number is expected after command done");
-        }catch (ArrayIndexOutOfBoundsException e) {
+        }catch (IndexOutOfBoundsException e) {
             System.out.println("OOPS!!! Please select from the task list.");
         }catch (IOException e) {
             System.out.println("Something went wrong when writing: " + e.getMessage());
@@ -139,7 +139,7 @@ public class Parser {
             Storage.writeToFile("data/duke.txt", tasks);
         } catch (NumberFormatException e) {
             System.out.println("OOPS!!! A number is expected after command done");
-        }catch (ArrayIndexOutOfBoundsException e) {
+        }catch (IndexOutOfBoundsException e) {
             System.out.println("OOPS!!! Please select from the task list.");
         }catch (IOException e) {
             System.out.println("Something went wrong when writing: " + e.getMessage());

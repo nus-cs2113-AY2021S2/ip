@@ -24,8 +24,9 @@ Prerequisites: JDK 11, update IntelliJ to the most recent version.
    | |_| | |_| |   <  __/
    |____/ \__,_|_|\_\___|
    ```
- 1.Type the command in the command box and press Enter to execute it.
- 1. Refer to the Features section below for details of the commands
+1. Type the command in the command box and press Enter to execute it.
+1. Refer to the Features section below for details of the commands
+
 ###Features
 #####Adding todo task: todo
 add a task of type "todo" to the task list
@@ -48,7 +49,7 @@ add a task of type "event" to the task list
   >Examples: event attend lecture /at Tonight
 >--> Got it. I've added this task:
                              [E][✘]attend lecture (at: Tonight)
-#####Listing all the task: deadline
+#####Listing all the task: list
 >Format: list
 >
 >Examples: list --> 1. [T][✓]123
