@@ -25,7 +25,7 @@ Welcome! Come and plan your tasks with Duke! :)
 ## Quick Start
 
 Download `Duke.jar` from
-here:
+here: https://github.com/beaniestanley/ip/releases/tag/A-Release
 
 **Requirements:**
 
@@ -99,7 +99,7 @@ Adds a deadline with description and datetime.<br>
 
 ### Delete Task : `delete`
 
-Deletes a task using specified index<br>
+Deletes a task using specified index.<br>
 **Format:** `delete <index> `
 
 | | Example |
@@ -111,7 +111,7 @@ Deletes a task using specified index<br>
 
 ### Mark Task As Done : `done`
 
-Marks task as done<br>
+Marks task as done.<br>
 **Format:** `done <index>`
 
 | | Example |
@@ -123,7 +123,7 @@ Marks task as done<br>
 
 ### Find by Keyword : `find`
 
-Displays all tasks containing the keyword<br>
+Displays all tasks containing the keyword.<br>
 **Format:** `find <keyword>`
 
 | | Example |
