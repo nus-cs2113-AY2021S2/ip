@@ -1,34 +1,41 @@
 # User Guide
 A brief User Guide for CS2113T IP Project. This user guide explains briefly how to use the commands for the purpose of interaction.
-As a task manager, the functionality of the JAR file includes adding, deleting and searching(to name a few features) a task(either a todo, deadline or event) to the list.
+As a task manager, the functionality of the program includes adding, deleting and searching(to name a few features) 
+a task(either a todo, deadline or event) to the list.
+
+## How to use this User Guide
+The User Guide has two main sections. The first section "features" lists the features available while the second section 
+"Usage" explains how the command can be used. The sample usage and expected output are included as well in the usage section
+for the purpose of clarity. The last section "Misc" shows the "welcome screen" generated when the program is opened and the
+"end screen" generated when the program is terminated.
 
 ## Features 
 
-### Feature 1: Todo
+### `Todo`
 Adds a todo to the list.
 
-### Feature 2: Deadline
+### `Deadline`
 Adds a deadline to the list.
 
-### Feature 3: Event
+### `Event`
 Adds an event to the list.
 
-### Feature 4: Mark Task as Done
+### `Mark Task as Done`
 Marks a task as completed on the list.
 
-### Feature 5: Delete
+### `Delete`
 Deletes a task from the list.
 
-### Feature 6: Find
+### `Find`
 Finds an item on the list.
 
-### Feature 7: Show current list
+### `Show current list`
 Views the current list.
 
 
 ## Usage
 
-### `todo task` - adds a todo task to the list
+### `todo task` - adds a todo task to the list ### Feature 1: Todo
 
 Adds a task that is categorized as todo to the list.
 
@@ -137,6 +144,54 @@ Expected outcome:
     2. [E] [ ] go to the library (at: town)
 
     -------------------------------------------------------------------------------------------------------------------------------
+
+
+## Misc
+
+### Welcome screen
+
+The text that is shown when the JAR file runs for the first time. If the contents of the list is empty, "The list is empty" will be shown.
+
+Expected outcome:
+
+    Hello from
+    ____        _
+    |  _ \ _   _| | _____
+    | | | | | | | |/ / _ \
+    | |_| | |_| |   <  __/
+    |____/ \__,_|_|\_\___|
+
+    -------------------------------------------------------------------------------------------------------------------------------
+    Hello! I'm Duke
+    What can I do for you?
+
+    -------------------------------------------------------------------------------------------------------------------------------
+        -------------------------------------------------------------------------------------------------------------------------------
+        Here are the tasks in your list:
+        1. [D] [ ] return book (by: June 6th)
+        2. [E] [ ] go to the library (at: town)
+
+        -------------------------------------------------------------------------------------------------------------------------------
+### End screen
+
+The text that is shown when the JAR file is terminated. If the contents of the list is empty, "The list is empty" will be shown.
+
+Example of usage:
+
+`bye`
+
+
+Expected outcome:
+
+    -------------------------------------------------------------------------------------------------------------------------------
+    Here are the tasks in your list:
+    1. [D] [ ] return book (by: June 6th)
+    2. [E] [ ] go to the library (at: town)
+
+    -------------------------------------------------------------------------------------------------------------------------------
+
+
+
 
 
 
