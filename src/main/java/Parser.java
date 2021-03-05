@@ -26,31 +26,12 @@ public class Parser {
 
         }
     }
-    // this will update the status of the task dependig on the input.
-    public static void update(String request, TaskList list){
-
-        try {
-
-            int index = Integer.parseInt(request);
-            list.updateStatus(index);
-            System.out.println("Nice! I've marked this task as done:" + list.get(index));
-            System.out.println("Now you have " + list.getSize() + " tasks in the list");
-
-        } catch (NumberFormatException e) {
-
-            displayLine();
-            System.out.println("You have not provided a valid number");
-
-        }
-
-
-    }
     // add a todo task to the tasks
     public static void addTodo(String request, TaskList list){
         try {
 
             ToDos todo = getTodo(request);
-            System.out.println("Got it. I've added this task:" + todo);
+            System.out.println("Got it. I've added this task:\n" + todo);
             list.update(todo);
             System.out.println("Now you have " + list.getSize() + " tasks in the list.");
         } catch (ExceptionToDo ex) {
@@ -89,7 +70,7 @@ public class Parser {
                 LocalDateTime date = LocalDateTime.parse(dateString, formatter);
                 Deadline deadline = new Deadline(word.substring(0, index), date);
                 list.update(deadline);
-                System.out.println("Got it. I've added this task: " + deadline);
+                System.out.println("Got it. I've added this task:\n " + deadline);
                 System.out.println("Now you have " + list.getSize() + " tasks in the list.");
             } catch (DateTimeParseException e){
                 System.out.println("Invalid date provided");
@@ -145,7 +126,7 @@ public class Parser {
     public static void find(String input, TaskList tasks) throws InvalidNumberException{
         String[] requests = input.split(" ");
         if (requests.length != 2){
-            throw new InvalidNumberException("More than one keyword was provided");
+            throw new InvalidNumberException("You have inputted more than one word for find");
         }
         for (int i = 1; i <= tasks.getSize(); i++){
             if (tasks.get(i).getWork().contains(requests[1])){
