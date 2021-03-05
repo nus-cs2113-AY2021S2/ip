@@ -1,26 +1,70 @@
-# Duke project template
+Duke User Guide
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+Introduction
+Duke is a Personal Assistant Chatbot that helps you to keep track of various things.
 
-## Setting up in Intellij
+Setting up Duke
+Download Duke file.
+Go to /ip/src/main/java
 
-Prerequisites: JDK 11, update IntelliJ to the most recent version.
+In command line key in:
+javac duke/Duke.java
+java duke.Duke   
 
-### On IntelliJ version 2020.3.1 (latest) and beyond
+Functions
 
-1. Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Import the project into IntelliJ as follows:
-   1. Click `Open`
-   1. Select the project directory, and click `OK`
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).
-1. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the output below.
+List
+Display all tasks in the list
+Format: list
 
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+Example:
+list
+
+
+Todo
+Add a todo task
+Format: todo [DESCRIPTION]
+
+Example:
+todo read book
+
+Deadline
+Add a deadline task
+Format: deadline [DESCRIPTION] /by [yyyy-mm-dd]
+
+Example:
+deadline return  book /by 2020-10-01
+
+Event
+Add an event task
+Format: event [DESCRIPTION] /at [yyyy-mm-dd]
+
+Example:
+event school activity /at 2020-10-01
+
+Done
+Mark a task as done
+Format: done [index]
+
+Example:
+done 2
+
+Delete
+Delete a task from duke
+Format: delete [index]
+
+Example:
+delete 2
+
+Find
+Find tasks that contains a certain keyword
+Format: find [keyword]
+
+Example:
+find book
+
+Bye
+Exits Duke Format: bye
+
+Example:
+bye
