@@ -13,7 +13,7 @@ As a cross-platform application, Duke can run on any PCs or Desktops as long as 
 
 * Track the progress of task completion
 
-<p>Duke can help users to mark the tasks they have done and delete tasks that they no longer need to keep track of the progress.</p>
+<p>Duke can help users to mark the tasks they have done and delete tasks that they no longer need.</p>
 
 * Search tasks using keyword
 
@@ -27,7 +27,7 @@ As a cross-platform application, Duke can run on any PCs or Desktops as long as 
 
 <p>Duke uses command line to interact with users</p>
 
-### The command supported by Duke are
+#### The commands supported by Duke are
 
 ##### 1. List all tasks in current task list: `list`
 <p>  Display all tasks in current task list with the type, name and completion status.</p>
@@ -98,7 +98,7 @@ As a cross-platform application, Duke can run on any PCs or Desktops as long as 
         ____________________________________________________________
 
 
-#### 5. Mark a task as done: `done <task index in task list>`
+#### 5. Mark a task as done: `done <task index>`
 <p> Mark a task as done by specifying the index of task after command word "done".</p>
 
 
@@ -114,7 +114,7 @@ As a cross-platform application, Duke can run on any PCs or Desktops as long as 
         ____________________________________________________________
 
 
-#### 6. Delete a task: ``delete <task index in task list>`
+#### 6. Delete a task: ``delete <task index>`
 <p> Delete a task from task list by specifying the index of task after command word "delete".</p>
 
 
@@ -133,6 +133,7 @@ As a cross-platform application, Duke can run on any PCs or Desktops as long as 
 
 #### 7. Search tasks: `find <keyword>`
 <p> Search task list for tasks whose names contain the keyword. The keyword should be specified after command word "find".</p>
+<p>Note that the index displayed in search result is the exact index of the task in the complete task list.</p>
 
 * sample input
 

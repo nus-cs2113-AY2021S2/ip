@@ -1,12 +1,16 @@
 # Duke project template
 
 This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+<hr>
 
-## Setting up in Intellij
+### User Guide for Duke
+View user guide of Duke [here](https://pingruili.github.io/ip/)
+
+### Setting up in Intellij
 
 Prerequisites: JDK 11, update IntelliJ to the most recent version.
 
-### On IntelliJ version 2020.3.1 (latest) and beyond
+#### On IntelliJ version 2020.3.1 (latest) and beyond
 
 1. Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
 1. Import the project into IntelliJ as follows:
