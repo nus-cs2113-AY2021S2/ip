@@ -1,18 +1,18 @@
 package command;
 
 /**
- * Represent an invalid command whose format is incorrect
+ * Represent an invalid command whose format is invalid.
  */
 public class InvalidCommand extends Command{
     public static final String ERROR_MESSGAE = "The command input is invalid.\n" + PRE_SPACE + VALID_COMMAND_LIST;
-    private String feedbackFormat;
+    //private String feedback;
 
     public InvalidCommand(){
-        feedbackFormat = ERROR_MESSGAE;
+        feedback = ERROR_MESSGAE;
     }
 
     public InvalidCommand(String errorMessage){
-        feedbackFormat = errorMessage;
+        feedback = errorMessage;
     }
 
     /**
@@ -20,6 +20,6 @@ public class InvalidCommand extends Command{
      */
     @Override
     public CommandResult execute(){
-        return new CommandResult(feedbackFormat);
+        return new CommandResult(feedback);
     }
 }

@@ -8,7 +8,9 @@ public class ClearCommand extends Command{
     private int taskIndex;
     private final String FEEDBACK_FORMAT = "Noted! I've removed all the tasks in current task list.";
 
-    public ClearCommand(){}
+    public ClearCommand(){
+        feedback = FEEDBACK_FORMAT;
+    }
 
     /**
      * Clear current task list.
@@ -17,6 +19,6 @@ public class ClearCommand extends Command{
     @Override
     public CommandResult execute() {
         tasks.clearTasks();
-        return new CommandResult(FEEDBACK_FORMAT);
+        return new CommandResult(feedback);
     }
 }

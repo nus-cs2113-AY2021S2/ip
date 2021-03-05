@@ -12,7 +12,7 @@ public class AddDeadlineCommand extends Command{
             "after keyword deadline. Name and the time to finish should be separated " +
             "by \"/by\"\n" + PRE_SPACE + "The syntax for adding a deadline task is:" +
             " <task name> /by <deadline>    Eg. deadline return a book /by tonight";
-    private String feedbackFormat;
+    //private String feedback;
     private Deadline newDeadline;
     private final String FEEDBACK_FORMAT = "Deadline added:\n" + PRE_SPACE + PRE_SPACE + "%s\n" +
             PRE_SPACE + "Now you have %s tasks in the list";
@@ -22,13 +22,13 @@ public class AddDeadlineCommand extends Command{
     }
 
     /**
-     * add the new deadline to task list
+     * Add the new deadline to task list
      * @return the feedback message of execution
      */
     @Override
     public CommandResult execute() {
         tasks.addTask(newDeadline);
-        feedbackFormat = String.format(FEEDBACK_FORMAT, newDeadline.getTaskInfo(), tasks.getTaskCount());
-        return new CommandResult(feedbackFormat);
+        feedback = String.format(FEEDBACK_FORMAT, newDeadline.getTaskInfoForDisplay(), tasks.getTaskCount());
+        return new CommandResult(feedback);
     }
 }

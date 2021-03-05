@@ -37,7 +37,7 @@ public class Ui {
     }
 
     /**
-     * Display the feedback for a command
+     * Display the feedback of a command.
      * @param result
      */
     public void printFeedback(CommandResult result){
@@ -52,7 +52,7 @@ public class Ui {
         while(taskIterator.hasNext()){
             Task currentTask = taskIterator.next();
             if(currentTask != null){
-                System.out.println(PRE_SPACE + count + "." + currentTask.getTaskInfo());
+                System.out.println(PRE_SPACE + count + "." + currentTask.getTaskInfoForDisplay());
             }
             count++;
         }

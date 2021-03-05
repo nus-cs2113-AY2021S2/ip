@@ -15,7 +15,7 @@ public class Duke {
     private Storage storage;
 
     /**
-     * Set up Duke, create Ui, storage object. Load task list from the file
+     * Set up Duke, create Ui, storage object. Load task list from the file.
      */
     private void start() {
         ui = new Ui();
@@ -31,7 +31,7 @@ public class Duke {
     }
 
     /**
-     * Keep asking user input, execute command and display result
+     * Keep asking user for input, execute command and display result
      */
     private void runCommandLoopUntilExitCommand() {
         CommandParser parser = new CommandParser();
@@ -57,14 +57,14 @@ public class Duke {
         System.exit(0);
     }
 
-    public void run() throws IOException {
+    public void run(){
         start();
         runCommandLoopUntilExitCommand();
         exit();
     }
 
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args){
         new Duke().run();
     }
 }

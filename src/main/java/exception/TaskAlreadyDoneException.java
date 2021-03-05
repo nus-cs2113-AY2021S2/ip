@@ -9,6 +9,6 @@ public class TaskAlreadyDoneException extends RuntimeException{
 
     @Override
     public String toString(){
-        return new String("The task is already marked as done");
+        return "The task is already marked as done";
     }
 }

@@ -4,7 +4,8 @@ package task;
  * Represent a task that happens at specified time
  */
 public class Event extends Task {
-    public static final String TASK_INFO_FORMAT = "[E][%s]%s (at: %s)";
+    private static final String TASK_INFO_DISPLAY_FORMAT = "[E][%s]%s (at: %s)";
+    private static final String TASK_INFO_STORAGE_FORMAT = "E | %s | %s | %s";
     private String duration;
 
     public Event(String name, boolean isDone, String duration){
@@ -14,27 +15,27 @@ public class Event extends Task {
 
     /**
      * Get the information of an event task in certain format for displaying.
-     * @return
+     * @return the string for displaying
      */
     @Override
-    public String getTaskInfo(){
+    public String getTaskInfoForDisplay(){
         if(super.getDone()){
-            return String.format(TASK_INFO_FORMAT,"X",taskName,duration);
+            return String.format(TASK_INFO_DISPLAY_FORMAT,"X",taskName,duration);
         } else {
-            return String.format(TASK_INFO_FORMAT," ",taskName,duration);
+            return String.format(TASK_INFO_DISPLAY_FORMAT," ",taskName,duration);
         }
     }
 
     /**
      * Get the information of an event task in certain format for storing in file.
-     * @return
+     * @return the string for storage
      */
     @Override
-    public String toFile() {
+    public String getTaskInfoForStorage() {
         if(taskDone) {
-            return "E | 1 | " + taskName + " | " + duration;
+            return String.format(TASK_INFO_STORAGE_FORMAT,"1",taskName,duration);
         } else {
-            return "E | 0 | " + taskName + " | " + duration;
+            return String.format(TASK_INFO_STORAGE_FORMAT,"0",taskName,duration);
         }
     }
 }

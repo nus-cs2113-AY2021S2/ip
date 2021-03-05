@@ -13,17 +13,17 @@ import task.ToDo;
 /**
  * Represent the handler that processes the text file and converts the content to a task list
  */
-public class FileHandler {
+public class FileTaskReader {
     private File source;
     public final static String SEPERATOR = " \\| ";
 
-    public FileHandler(File file) {
+    public FileTaskReader(File file) {
         source = file;
     }
 
     /**
      * Convert the content of the file into a task list
-     * @return the task list as an ArrayList
+     * @return the task list
      * @throws FileNotFoundException if the file doesn't exist
      */
     public ArrayList<Task> parseToArraylist() throws FileNotFoundException {

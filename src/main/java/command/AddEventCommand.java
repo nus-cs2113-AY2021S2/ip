@@ -13,7 +13,7 @@ public class AddEventCommand extends Command{
             "by \"/at\"\n" + PRE_SPACE + "The syntax for adding an event task is:" +
             " <task name> /at <event time>    Eg. event meeting /at 8pm";
     private Event newEvent;
-    private String feedbackFormat;
+    //private String feedback;
     private final String FEEDBACK_FORMAT = "Event added:\n" + PRE_SPACE + PRE_SPACE + "%s\n" +
             PRE_SPACE + "Now you have %s tasks in the list";
 
@@ -22,13 +22,13 @@ public class AddEventCommand extends Command{
     }
 
     /**
-     * add the new event to task list
+     * Add the new event to task list
      * @return the feedback message of execution
      */
     @Override
     public CommandResult execute() {
         tasks.addTask(newEvent);
-        feedbackFormat = String.format(FEEDBACK_FORMAT, newEvent.getTaskInfo(), tasks.getTaskCount());
-        return new CommandResult(feedbackFormat);
+        feedback = String.format(FEEDBACK_FORMAT, newEvent.getTaskInfoForDisplay(), tasks.getTaskCount());
+        return new CommandResult(feedback);
     }
 }

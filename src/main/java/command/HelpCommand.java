@@ -8,8 +8,12 @@ public class HelpCommand extends Command{
     private static final String PRE_SPACE = "    ";
     private static final String FEEDBACK_FORMAT = VALID_COMMAND_LIST;
 
+    public HelpCommand(){
+        feedback = FEEDBACK_FORMAT;
+    }
+
     @Override
     public CommandResult execute(){
-        return new CommandResult(FEEDBACK_FORMAT);
+        return new CommandResult(feedback);
     }
 }

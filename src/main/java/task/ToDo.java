@@ -4,35 +4,35 @@ package task;
  * Represent a To Do task
  */
 public class ToDo extends Task {
-    public static final String TASK_INFO_FORMAT = "[T][%s]%s";
-
+    private static final String TASK_INFO_DISPLAY_FORMAT = "[T][%s]%s";
+    public static final String TASK_INFO_STORAGE_FORMAT = "T | %s | %s";
     public ToDo(String name, boolean isDone){
         super(name, isDone);
     }
 
     /**
      * Get the information of a ToDo task in certain format for displaying.
-     * @return
+     * @return the string for displaying
      */
     @Override
-    public String getTaskInfo(){
+    public String getTaskInfoForDisplay(){
         if(super.getDone()){
-            return String.format(TASK_INFO_FORMAT,"X",taskName);
+            return String.format(TASK_INFO_DISPLAY_FORMAT,"X",taskName);
         } else {
-            return String.format(TASK_INFO_FORMAT," ",taskName);
+            return String.format(TASK_INFO_DISPLAY_FORMAT," ",taskName);
         }
     }
 
     /**
      * Get the information of a ToDo task in certain format for storing in file.
-     * @return
+     * @return the string for storage
      */
     @Override
-    public String toFile(){
+    public String getTaskInfoForStorage(){
         if(taskDone) {
-            return "T | 1 | " + taskName;
+            return String.format(TASK_INFO_STORAGE_FORMAT,"1",taskName);
         } else {
-            return "T | 0 | " +taskName;
+            return String.format(TASK_INFO_STORAGE_FORMAT,"0",taskName);
         }
     }
 }

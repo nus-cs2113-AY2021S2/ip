@@ -9,11 +9,12 @@ public class FindCommand extends Command{
     public static final String ERROR_MESSAGE = "Invalid input format for find command.\n" +
             PRE_SPACE + "The syntax for searching the task list for tasks whose names contain the " +
             "keyword is: find <keyword>    Eg. find book";
+    private final String FEEDBACK_FORMAT = "Here are the matching tasks in your list:";
     private String keyword;
-    private String feedbackFormat = "Here are the matching tasks in your list:";
 
     public FindCommand(String keyword){
         this.keyword = keyword;
+        feedback = FEEDBACK_FORMAT;
     }
 
     /**
@@ -32,6 +33,6 @@ public class FindCommand extends Command{
                 relevantTasks.addTask(null);
             }
         }
-        return new CommandResult(feedbackFormat,relevantTasks);
+        return new CommandResult(feedback, relevantTasks);
     }
 }

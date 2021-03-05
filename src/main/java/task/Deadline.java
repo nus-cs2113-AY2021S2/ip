@@ -1,10 +1,11 @@
 package task;
 
 /**
- * Represent a task with a deadline
+ * Represent a task which has a deadline.
  */
 public class Deadline extends Task {
-    public static final String TASK_INFO_FORMAT = "[D][%s]%s (by: %s)";
+    private static final String TASK_INFO_DISPLAY_FORMAT = "[D][%s]%s (by: %s)";
+    private static final String TASK_INFO_STORAGE_FORMAT = "D | %s | %s | %s";
     private String doBefore;
 
     public Deadline(String name, boolean isDone, String doBefore){
@@ -17,24 +18,24 @@ public class Deadline extends Task {
      * @return the string for displaying
      */
     @Override
-    public String getTaskInfo(){
+    public String getTaskInfoForDisplay(){
         if(super.getDone()){
-            return String.format(TASK_INFO_FORMAT,"X",taskName,doBefore);
+            return String.format(TASK_INFO_DISPLAY_FORMAT,"X",taskName,doBefore);
         } else {
-            return String.format(TASK_INFO_FORMAT," ",taskName,doBefore);
+            return String.format(TASK_INFO_DISPLAY_FORMAT," ",taskName,doBefore);
         }
     }
 
     /**
      * Get the information of a deadline task in certain format for storing in file.
-     * @return the string for storing
+     * @return the string for storage
      */
     @Override
-    public String toFile(){
+    public String getTaskInfoForStorage(){
         if(taskDone) {
-            return "D | 1 | " + taskName + " | " + doBefore;
+            return String.format(TASK_INFO_STORAGE_FORMAT,"1",taskName,doBefore);
         } else {
-            return "D | 0 | " + taskName + " | " + doBefore;
+            return String.format(TASK_INFO_STORAGE_FORMAT,"0",taskName,doBefore);
         }
     }
 }

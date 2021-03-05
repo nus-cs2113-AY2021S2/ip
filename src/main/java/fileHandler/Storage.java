@@ -10,7 +10,7 @@ import java.io.IOException;
  * A class that deals with loading from and storing to the text file
  */
 public class Storage {
-    private FileHandler fileHandler;
+    private FileTaskReader fileTaskReader;
     private FileTaskWriter fileTaskWriter;
     private String filePath;
     private File source;
@@ -25,11 +25,11 @@ public class Storage {
             }
         }
         fileTaskWriter = new FileTaskWriter(filePath);
-        fileHandler = new FileHandler(source);
+        fileTaskReader = new FileTaskReader(source);
     }
 
     public TaskList getTaskList() throws FileNotFoundException {
-        return new TaskList(fileHandler.parseToArraylist());
+        return new TaskList(fileTaskReader.parseToArraylist());
     }
 
     public void store(TaskList tasks) throws IOException{

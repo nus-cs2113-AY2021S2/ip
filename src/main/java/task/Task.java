@@ -31,9 +31,9 @@ public abstract class Task {
     }
 
 
-    public abstract String getTaskInfo();
+    public abstract String getTaskInfoForDisplay();
 
-    public String toFile(){
+    public String getTaskInfoForStorage(){
         return "";
     }
 }

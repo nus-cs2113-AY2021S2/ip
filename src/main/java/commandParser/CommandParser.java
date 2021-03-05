@@ -105,11 +105,11 @@ public class CommandParser {
         if(inputParts.length < 2){
             return new InvalidCommand(AddTodoCommand.ERROR_MESSAGE);
         }
-        String taskInfo = inputParts[1];
-        if (taskInfo.equals("")) {
+        String todoName = inputParts[1];
+        if (todoName.equals("")) {
             return new InvalidCommand(AddTodoCommand.ERROR_MESSAGE);
         }
-        return new AddTodoCommand(taskInfo);
+        return new AddTodoCommand(todoName);
     }
 
     /**

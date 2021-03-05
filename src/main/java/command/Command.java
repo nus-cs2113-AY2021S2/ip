@@ -3,7 +3,7 @@ package command;
 import task.TaskList;
 
 /**
- * the parent class of different command class.
+ * Parent class of different command classes.
  */
 public abstract class Command {
     protected TaskList tasks;
@@ -18,6 +18,7 @@ public abstract class Command {
             "      Eg. done 1\n    6.delete <task index>\n      Delete a task from task list\n" +
             "      Eg. delete 2\n    7.find <keyword>\n      Search task list for tasks whose names contain the keyword\n" +
             "      Eg. find book\n    8.clear\n      Clear current task list\n    9.help\n      Show help message";
+    protected String feedback;
 
     public abstract CommandResult execute();
 
