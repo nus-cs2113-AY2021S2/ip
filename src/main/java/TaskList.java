@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 
+/**
+ * Maintains a list of tasks provided by the user, and handles operations relating to the list.
+ */
 public class TaskList {
     private ArrayList<Task> storedTasks;
 

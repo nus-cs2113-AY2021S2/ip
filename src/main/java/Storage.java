@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
+/**
+ * Handles the loading and storing of tasks data, to and from the hard disk.
+ */
 public class Storage {
     private static final String TODO_SYMBOL = "T";
     private static final String DEADLINE_SYMBOL = "D";
@@ -29,10 +31,20 @@ public class Storage {
         this.saveFile = new File(filePath);
     }
 
+    /**
+     * Sets tasks to be used by the Storage class.
+     *
+     * @param tasks contains the list of tasks loaded from the save file.
+     */
     public void setTaskList(TaskList tasks) {
         this.tasks = tasks;
     }
 
+    /**
+     * Load the list of tasks saved within the save file.
+     *
+     * @return an ArrayList of tasks loaded from the save file.
+     */
     public ArrayList<Task> loadStoredTasksData() {
         ArrayList<Task> storedTasks;
         try {
@@ -108,6 +120,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Save the entire task list into to the save file.
+     */
     public void saveStoredTasksData() {
         try {
             writeToSaveFile();

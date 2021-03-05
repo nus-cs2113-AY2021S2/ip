@@ -1,5 +1,8 @@
 import java.util.NoSuchElementException;
 
+/**
+ * Main class of Duke.
+ */
 public class Duke {
     private static final String SAVE_FILE_PATH = "saveFile.txt";
     private Ui ui;
@@ -16,6 +19,9 @@ public class Duke {
         parser = new Parser(ui, storage, tasks);
     }
 
+    /**
+     * Runs the overall flow of Duke.
+     */
     private void run() {
         ui.printWelcomeMsg();
         String command;
@@ -33,6 +39,9 @@ public class Duke {
         ui.closeScanner();
     }
 
+    /**
+     * Main entry point of the application.
+     */
     public static void main(String[] args) {
         new Duke(SAVE_FILE_PATH).run();
     }
