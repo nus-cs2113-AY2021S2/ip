@@ -41,6 +41,9 @@ Format: `{todo/event/deadline} [description] /[timestamp header] [timestamp]`
 > 💡 **Tip:** The timestamp header following `/` can be 
 any word, examples: `before`, `at`
 
+> ❗ **WARNING:** Please do not use `,` in your task descriptions as it will cause errors for
+> the <br> save and loaded files. 
+
 ### List tasks: `list`
 _Lists all tasks in Adjutant's mainframe_
 
