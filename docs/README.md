@@ -19,7 +19,7 @@ Duke gives you a simple way to manage your daily tasks.
 3. FAQs
 4. Other Information
 ## Quick Start
-1. Ensure you have Java 11 or above installed. You can verify this with the command java --version in the CLI.
+1. Ensure you have Java 11 or above installed. You can verify this with the command `java --version` in the CLI.
 2. Download the latest version of `Duke.jar` from [here](https://github.com/e00426142/ip/releases). 
 3. Open the CLI and navigate to the folder your `Duke.jar` is located at.
 4. Type in the command `java -jar Duke.jar` to initiate the programme.
@@ -36,6 +36,7 @@ ____________________________________________________________
 What can I do for you?
 ____________________________________________________________
 ```
+##Features
 
 ### 1. **Adding a to-do task:** `todo`
 Adds the given todo type of task to the list.
