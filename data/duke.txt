@@ -1,2 +1,2 @@
-T |1 |PGP study
-E |0 |CG2027 finals  |saturday
+T |1 |read a book
+E |0 |attend lecture |Monday
