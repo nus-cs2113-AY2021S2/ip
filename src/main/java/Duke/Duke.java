@@ -118,6 +118,7 @@ public class Duke {
         }
     }
 
+
     /** Recieve users input*/
 
     private static String getUserInput() {
