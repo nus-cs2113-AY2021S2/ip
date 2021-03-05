@@ -42,11 +42,16 @@ public class Ui {
                 Parser.deleteTask(command, tasks);
                 System.out.println("____________________________________________________________");
 
+            } else if (command.contains("find")) {
+                System.out.println("____________________________________________________________");
+                Parser.findTask(command, tasks);
+                System.out.println("____________________________________________________________");
             } else {
-                System.out.println("____________________________________________________________");
-                System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
-                System.out.println("____________________________________________________________");
+                    System.out.println("____________________________________________________________");
+                    System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    System.out.println("____________________________________________________________");
             }
+
         }
     }
 
