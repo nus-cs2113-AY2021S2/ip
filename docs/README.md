@@ -153,7 +153,7 @@ Now you have 2 tasks in the list.
 ____________________________________________________________
 ```
 
-### 7. **Terminating the programme:** `bye`
+### 8. **Terminating the programme:** `bye`
 Stop the programme.
 
 **Format:** `bye`
