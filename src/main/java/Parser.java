@@ -2,11 +2,14 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-
+/**
+ * This class,Parser is used to analyse user commands.
+ */
 public class Parser {
     public static void displayLine(){
         System.out.println("_____________________________");
     }
+    // Removes the specific item from the user's tasklist
     public static void delete(String request, TaskList list){
         try {
 
@@ -23,6 +26,7 @@ public class Parser {
 
         }
     }
+    // this will update the status of the task dependig on the input.
     public static void update(String request, TaskList list){
 
         try {
@@ -41,7 +45,7 @@ public class Parser {
 
 
     }
-
+    // add a todo task to the tasks
     public static void addTodo(String request, TaskList list){
         try {
 
@@ -54,7 +58,7 @@ public class Parser {
         }
     }
 
-
+    // using this method we add a deadline task to the tasklist
     public static void getDeadline(String word, TaskList list) throws InvalidDeadlineException {
         if (word.contains("/by") && !word.substring(word.indexOf("/by") + 3).equals("")){
             word = word.substring(8);
@@ -96,6 +100,7 @@ public class Parser {
         }
     }
 
+    // from this event we add the event task to the task list.
     public static void getEvent(String word, TaskList list) throws InvalidEventException {
         if (word.contains("/at") && !word.substring(word.indexOf("/at") + 3).equals("")){
             word = word.substring(5);
@@ -136,7 +141,7 @@ public class Parser {
             throw new InvalidEventException();
         }
     }
-
+    // find the word from all the tasks
     public static void find(String input, TaskList tasks) throws InvalidNumberException{
         String[] requests = input.split(" ");
         if (requests.length != 2){

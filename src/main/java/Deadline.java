@@ -3,6 +3,10 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * This is the Deadline class which is used to tasks that start with deadline.
+ * this also includes the time and date function.
+ */
 public class Deadline extends Task {
     LocalDateTime deadline;
     DateTimeFormatter format = DateTimeFormatter.ofPattern("MMM dd yyyy hhmm");
@@ -17,11 +21,7 @@ public class Deadline extends Task {
                 ? "[D][✓]"
                 : "[D][✗]";
     }
-
-    public Deadline(String work, String end){
-        super(work + "(by: " + end);
-    }
-
+    // prints the formatted version of the date and time.
     public String toString() {
         return "[D]" + super.toString() + "(by: " + deadline.format(format) + ")";
     }

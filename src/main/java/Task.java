@@ -1,6 +1,9 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * This is the Task class. Each Task has a certain attributes to it like the type of task and this task class depicts that.
+ */
 public class Task {
     private boolean done;
     private String work;

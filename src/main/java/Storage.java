@@ -5,6 +5,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+/**
+ * This is the class which we use to store the value so of the task list onto our hardisk.
+ */
+
 public class Storage {
     final private String filePath = "data/duke.txt";
     private TaskList list;
@@ -48,12 +52,12 @@ public class Storage {
         }
         return task;
     }
-
+    // loads the elements of the task list
     public TaskList load(){
         this.list = new TaskList(this.tasks) ;
         return this.list;
     }
-
+    // saves the task onto the text file.
     public void save(){
         try {
             String folderPath = "Data";

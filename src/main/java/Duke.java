@@ -1,5 +1,6 @@
-
-
+/**
+ * The main code file of the project.
+ */
 public class Duke {
     private Storage storage;
     private UI ui;

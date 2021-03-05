@@ -2,6 +2,12 @@
 
 import java.util.Scanner;
 
+/**
+This class implements the Display Interface and this class basically takes in user input and writes and,
+ saves it to the hard disk file"duke.txt".
+ */
+
+
 public class UI implements Display {
     Scanner sc;
     Storage storage;
@@ -10,16 +16,18 @@ public class UI implements Display {
         this.storage = store;
         this.sc = new Scanner(System.in);
     }
+    // This function here just displays a line.
     public void displayLine(){
         System.out.println("_____________________________");
     }
 
+    // This function displays the welcome message
     public void welcomeMessage() {
         displayLine();
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
         displayLine();
     }
-
+    // this function will initiate or run the code and it will only end once bye has been entered.
     public void run() {
         String input = sc.nextLine();
         TaskList list = storage.load();
@@ -71,6 +79,7 @@ public class UI implements Display {
         }
     }
 
+    //This function here will print out the good bye message.
     public void goodByeMessage(){
         storage.save();
         displayLine();

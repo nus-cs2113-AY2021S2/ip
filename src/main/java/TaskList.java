@@ -2,6 +2,9 @@
 
 import java.util.ArrayList;
 
+/**
+ * This is task array class and we use this class to update new tasks onto the list.
+ */
 public class TaskList {
     private ArrayList<Task> tasks = new ArrayList<>();
 
