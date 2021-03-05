@@ -98,7 +98,19 @@ public class Duke {
             System.out.println("Noted. I've removed this task: \n" +
                     removedTask.toString() + "\n" +
                     "Now you have " + tasks.size() + " in the list.");
-        } else {
+        } else if(userInput.startsWith("find")){
+            String findText = userInput.split(" ")[1];
+            int i = 1;
+            // loop every task
+            for(Task task : tasks){
+                if(task.toString().contains(findText)){
+                    System.out.println(i + "." + task.toString());
+                    i++;
+                }
+            }
+            }
+
+        else {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
