@@ -205,17 +205,18 @@ Format: `keyword [keyword]`
 
 Example: `keyword math`
 
-Expected output when there is no task in the list:
-```
-  List is empty :o
-```
-
-Expected output when there are tasks in the list:
+Expected Output:
 ```
 5. [E] [-] math tutorial (at: Mar 5 2021)
 6. [T] [-] math HW2
- There are 2 task(s)
+There are 2 task(s)
 ```
+
+Expected output when there is no task containing keyword in the list:
+```
+ Baggie could find any tasks related to math
+```
+
 ### Exit Command
 This command exits the programm for the user.
 
