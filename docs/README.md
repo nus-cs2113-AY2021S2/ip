@@ -24,7 +24,8 @@ Plan your Tasks with Duke! :memo:
 
 ## Quick Start
 
-Download `TaskManager.jar` from here: [...](...)
+Download `TaskManager.jar` from
+here: [https://github.com/cloudy3/ip/releases/tag/A-Release](https://github.com/cloudy3/ip/releases/tag/A-Release)
 
 **Requirements:**
 
