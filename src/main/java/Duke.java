@@ -43,6 +43,11 @@ public class Duke {
         } while (!userInput.equals("bye"));
     }
 
+    /**
+     * Manager to
+     * @param input
+     * @param tasks
+     */
     public static void dukeManager(String input, ArrayList<Task> tasks) {
         String [] subString = input.split(" ");
         String command = subString[0];
@@ -70,6 +75,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Parses the data written in the text file into Task objects
+     * @param line String of data written in the text time
+     */
     public static void parseData(String line) {
         String[] tokens = line.split("-");
 
@@ -106,6 +115,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Saves the current list of Tasks and writes them into a text file
+     * @throws IOException Exception while trying to create a new file
+     */
     public static void saveFile() throws IOException {
         File path = new File("tasks.txt");
         if (!path.exists()) {
@@ -120,6 +133,10 @@ public class Duke {
         fileWriter.close();
     }
 
+    /**
+     * Loads the list of Tasks written in the text file
+     * @throws FileNotFoundException Exception when the text file does not exist
+     */
     public static void loadFile() throws FileNotFoundException {
         File path = new File("tasks.txt");
         if (!path.exists()) {
@@ -137,6 +154,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Exits the program
+     */
     public static void exitProgram() {
         // exits the program
         System.out.println("\t------------------------------------------");
@@ -144,6 +164,10 @@ public class Duke {
         System.out.println("\t__________________________________________\n");
     }
 
+    /**
+     * Displays all the tasks stored in the Array List
+     * @param tasks Array List of Task
+     */
     public static void listTasks(ArrayList<Task> tasks) {
         System.out.println("\t------------------------------------------");
         if (tasks.size() == 0) {
@@ -161,6 +185,13 @@ public class Duke {
         System.out.println("\t__________________________________________\n");
     }
 
+    /**
+     * Marks the specific task as done and notifies user the task is marked done
+     * @param userInput User's input
+     * @param tasks Array List of Task
+     * @throws NumberFormatException Exception when an integer is not given in the command
+     * @throws IndexOutOfBoundsException Exception when the input integer is out of bounds in the Array List
+     */
     public static void markTask(String userInput, ArrayList<Task> tasks) throws NumberFormatException,
             IndexOutOfBoundsException {
         // check if task exists
@@ -188,6 +219,12 @@ public class Duke {
         System.out.println("\t__________________________________________\n");
     }
 
+    /**
+     * Adds a new task to the list of Task
+     * @param userInput User's input
+     * @param tasks Array List of Task
+     * @throws StringIndexOutOfBoundsException Exception when wrong description format is entered
+     */
     public static void addTask(String userInput, ArrayList<Task> tasks) throws StringIndexOutOfBoundsException {
         // adds a task to the list
         System.out.println("\t------------------------------------------");
@@ -243,6 +280,12 @@ public class Duke {
         System.out.println("\t__________________________________________\n");
     }
 
+    /**
+     * Deletes a task from the list of Task
+     * @param userInput User's input
+     * @param tasks Array List of Task
+     * @throws StringIndexOutOfBoundsException Exception when wrong description format is entered
+     */
     public static void deleteTask(String userInput, ArrayList<Task> tasks) throws StringIndexOutOfBoundsException {
         System.out.println("\t------------------------------------------");
         try {
