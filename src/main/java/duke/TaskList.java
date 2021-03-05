@@ -50,9 +50,20 @@ public class TaskList {
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
     }
 
-    public int size() {
-        return tasks.size();
+    public static void findTask(String targetInput) {
+        int count = 0;
+        for(Task t : tasks) {
+            String[] mySplit = t.toString().split(" ");
+            for(String s: mySplit) {
+                if(s.equals(targetInput)) {
+                    count += 1;
+                    System.out.println(count + ". " + t);
+                }
+            }
+        }
+
     }
+
 
     public String getDescriptionAtIndex(int i) {
         return tasks.get(i).getDescription();
@@ -61,6 +72,10 @@ public class TaskList {
 //    public void getIndex(int i) {
 //        tasks.get(i);
 //    }
+    public int size() {
+        return tasks.size();
+    }
+
     public void addTask(Task newTask) {
         tasks.add(newTask);
     }
