@@ -151,16 +151,6 @@ public class Duke {
         DukeUI.printExitingMessage();
     }
 
-
-    private static String[] splitInputIntoString(String userInput) {
-        String[] listOfInputs = userInput.split(" ", 2);
-        if (listOfInputs.length == 1) {
-            listOfInputs = new String[]{userInput, "filler"};
-        }
-        return listOfInputs;
-    }
-
-
     private static void listOutTasks() {
         DukeUI.printLine();
         int i = 0;
@@ -199,7 +189,7 @@ public class Duke {
         try {
             Scanner s = new Scanner(f);
             while(s.hasNext()) {
-                String[] listOfDataFromFile = splitInputIntoString(s.nextLine());
+                String[] listOfDataFromFile = DukeParser.splitInputIntoString(s.nextLine());
                 String userCommand = listOfDataFromFile[0];
                 String inputDetails = listOfDataFromFile[1];
                 processSavedData(userCommand, inputDetails);
