@@ -73,6 +73,7 @@ public class Ui {
      * Get a line of input as command from user.
      *
      * @return the String containing the command entered by user.
+     * @throws NoSuchElementException when the user pressed CTRL+C.
      */
     public String getCommandFromUser() throws NoSuchElementException {
         return scanner.nextLine().strip();
@@ -102,7 +103,14 @@ public class Ui {
         System.out.println(DIVIDER);
     }
 
+    /**
+     * Display the contents of the search results of the 'find' command.
+     *
+     * @param tasksFound a tasklist object containing a list of tasks found,
+     *                   that match the keyword provided by user.
+     */
     public void printTasksFound(TaskList tasksFound) {
+        System.out.println(DIVIDER);
         System.out.println(DIVIDER);
         System.out.println(" Here are the matching tasks in your list:");
         for (int i = 0; i < tasksFound.getTaskCount(); i++) {
@@ -148,9 +156,9 @@ public class Ui {
 
     /**
      * Informs the user that the requested task has been deleted from the task list.
-     * Also informs the user of the number of tasks left in the task list.
+     * Also informs the user about the number of tasks left in the task list.
      *
-     * @param deletedTask user requested task that has just been deleted from the task list.
+     * @param deletedTask user requested task that has just been deleted off from the task list.
      */
     public void printDeleteTaskMsg(Task deletedTask) {
         System.out.println(DIVIDER);
@@ -171,11 +179,11 @@ public class Ui {
     }
 
     /**
-     * Printing of error messages caused by invalid command syntax or unknown commands
+     * Printing of error messages caused by either invalid command syntax or unknown commands
      * entered by the user.
      *
      * @param errorMsg error message containing user friendly explanation about the reason
-     *                 of the error occurred.
+     *                 why the error occurred.
      */
     public void printCommandErrorMsg(String errorMsg) {
         System.out.println(DIVIDER);

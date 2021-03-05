@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Handles the loading and storing of tasks data, to and from the hard disk.
+ * Handles the loading and storing of tasks data, from and to the hard disk.
  */
 public class Storage {
     private static final String TODO_SYMBOL = "T";
@@ -121,7 +121,7 @@ public class Storage {
     }
 
     /**
-     * Save the entire task list into to the save file.
+     * Save the entire task list into the save file.
      */
     public void saveStoredTasksData() {
         try {

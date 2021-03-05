@@ -45,7 +45,7 @@ public class Parser {
     /**
      * Parses the command entered by the user and execute the respective command method.
      *
-     * @param command command entered by user
+     * @param command command entered by user.
      */
     public void handleCommand(String command) {
         try {
