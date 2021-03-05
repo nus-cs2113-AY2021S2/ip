@@ -10,7 +10,7 @@ public class Event extends Task {
      * Creates a Event task with description and the event time.
      *
      * @param description description of a task
-     * @param eventTime event time of a event task
+     * @param eventTime   event time of a event task
      */
     public Event(String description, String eventTime) {
         super(description);
@@ -27,21 +27,22 @@ public class Event extends Task {
     }
 
     @Override
-    public String getStatusIcon() {
-        return "[E]" + super.getStatusIcon();
-    }
-
-    @Override
     public String getDescription() {
         return super.getDescription();
     }
 
     /**
      * {@inheritDoc}
+     *
      * @return concatenation of task status icon, its description and its event time.
      */
     @Override
     public String toString() {
         return getStatusIcon() + super.getDescription() + "(at: " + eventTime + ")";
+    }
+
+    @Override
+    public String getStatusIcon() {
+        return "[E]" + super.getStatusIcon();
     }
 }

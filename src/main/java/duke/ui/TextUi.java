@@ -52,8 +52,8 @@ public class TextUi {
     /**
      * Prints reaction based on the command value.
      *
-     * @param taskList ArrayList of tasks
-     * @param command Command of user
+     * @param taskList        ArrayList of tasks
+     * @param command         Command of user
      * @param userCommandText full String of user input
      */
     public void printReaction(TaskList taskList, Command command, String userCommandText) {

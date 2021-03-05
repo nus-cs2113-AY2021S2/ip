@@ -14,7 +14,7 @@ public class Parser {
      *
      * @param input full user input string
      * @return the command based on the user input
-     * @throws InvalidCommandException  If wrong input entered by user
+     * @throws InvalidCommandException If wrong input entered by user
      */
     public static Command getCommand(String input) throws InvalidCommandException {
         if (input.equals("list")) {
@@ -42,7 +42,7 @@ public class Parser {
      * Checks if the description entered by user is valid for the respective command.
      *
      * @param description description part of the user input
-     * @param command user's intended command
+     * @param command     user's intended command
      * @throws EmptyDescriptionException If description is empty
      */
     public static void validateDescription(String description, Command command) throws EmptyDescriptionException {
@@ -81,7 +81,7 @@ public class Parser {
         default:
             break;
         }
-        if (isEmptyDescription){
+        if (isEmptyDescription) {
             throw new EmptyDescriptionException();
         }
     }
@@ -89,7 +89,7 @@ public class Parser {
     /**
      * Parses the user input to get task number. Only for Done and Delete command.
      *
-     * @param input full user input string
+     * @param input   full user input string
      * @param command user's intended command
      * @return the task number indicated by user
      */

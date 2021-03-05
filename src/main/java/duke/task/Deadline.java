@@ -10,7 +10,7 @@ public class Deadline extends Task {
      * Creates a Deadline task with description and the end time of deadline.
      *
      * @param description description of a task
-     * @param endTime end time of a deadline task
+     * @param endTime     end time of a deadline task
      */
     public Deadline(String description, String endTime) {
         super(description);
@@ -27,21 +27,22 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String getStatusIcon() {
-        return "[D]" + super.getStatusIcon();
-    }
-
-    @Override
     public String getDescription() {
         return super.getDescription();
     }
 
     /**
      * {@inheritDoc}
+     *
      * @return concatenation of task status icon, its description and its end time.
      */
     @Override
     public String toString() {
         return getStatusIcon() + super.getDescription() + "(by: " + endTime + ")";
+    }
+
+    @Override
+    public String getStatusIcon() {
+        return "[D]" + super.getStatusIcon();
     }
 }

@@ -27,27 +27,14 @@ public class Storage {
      * Loads tasks from file into taskList.
      *
      * @param taskList ArrayList of tasks
-     * @throws IOException If I/O is failed or interrupted
+     * @throws IOException             If I/O is failed or interrupted
      * @throws InvalidCommandException If file was corrupted and wrong command is given
-     * @throws SecurityException If there is a security violation in accessing the file
+     * @throws SecurityException       If there is a security violation in accessing the file
      */
     public static void loadFile(TaskList taskList) throws IOException, InvalidCommandException, SecurityException {
         createDirectory();
         createFile();
         loadTasks(taskList);
-    }
-
-    /**
-     * Saves tasks into file from taskList.
-     *
-     * @param taskList ArrayList of tasks
-     * @throws IOException If I/O is failed or interrupted
-     * @throws SecurityException If there is a security violation in accessing the file
-     */
-    public static void saveFile(TaskList taskList) throws IOException, SecurityException {
-        createDirectory();
-        createFile();
-        saveTasks(taskList);
     }
 
     private static void createDirectory() throws SecurityException {
@@ -89,6 +76,19 @@ public class Storage {
         if (taskArray[1].equals(DONE)) {
             taskList.finishLastTask();
         }
+    }
+
+    /**
+     * Saves tasks into file from taskList.
+     *
+     * @param taskList ArrayList of tasks
+     * @throws IOException       If I/O is failed or interrupted
+     * @throws SecurityException If there is a security violation in accessing the file
+     */
+    public static void saveFile(TaskList taskList) throws IOException, SecurityException {
+        createDirectory();
+        createFile();
+        saveTasks(taskList);
     }
 
     private static void saveTasks(TaskList taskList) throws IOException {

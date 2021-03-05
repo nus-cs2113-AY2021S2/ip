@@ -1,4 +1,4 @@
-package duke.execute;
+package duke.executer;
 
 import duke.Command;
 import duke.exceptions.EmptyDescriptionException;
@@ -16,7 +16,7 @@ public class CommandExecutor {
      * Then, validates and executes those commands
      *
      * @param taskList ArrayList of tasks.
-     * @param input User input.
+     * @param input    User input.
      * @return the command based on input if it passes validation. Else, returns error.
      */
     public Command executeCommand(TaskList taskList, String input) {

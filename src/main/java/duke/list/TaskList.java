@@ -27,7 +27,7 @@ public class TaskList {
      * Add a Task to the TaskList
      *
      * @param description description of a task
-     * @param command user's command
+     * @param command     user's command
      * @return user's command if valid task. Else, return error.
      */
     public Command addTask(String description, Command command) {
@@ -91,7 +91,7 @@ public class TaskList {
      * @param taskIndex index of Task in TaskList
      * @throws IndexOutOfBoundsException If taskIndex is out of range
      */
-    public void finishTask(int taskIndex) throws IndexOutOfBoundsException{
+    public void finishTask(int taskIndex) throws IndexOutOfBoundsException {
         tasks.get(taskIndex).setDone();
     }
 
@@ -103,6 +103,15 @@ public class TaskList {
     }
 
     /**
+     * Get the last Task of TaskList
+     *
+     * @return the last Task in TaskList
+     */
+    public Task getLastTask() {
+        return getTask(getSize() - 1);
+    }
+
+    /**
      * Get a Task in TaskList given the index of Task
      *
      * @param taskIndex index of Task in TaskList
@@ -110,15 +119,6 @@ public class TaskList {
      */
     public Task getTask(int taskIndex) {
         return tasks.get(taskIndex);
-    }
-
-    /**
-     * Get the last Task of TaskList
-     *
-     * @return the last Task in TaskList
-     */
-    public Task getLastTask() {
-        return getTask(getSize() - 1);
     }
 
     /**

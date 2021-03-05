@@ -18,24 +18,6 @@ public class Task {
     }
 
     /**
-     * Get status icon of a task
-     *
-     * @return status icon
-     */
-    protected String getStatusIcon() {
-        return (isDone ? "[X] " : "[ ] ");
-    }
-
-    /**
-     * Get description of a task
-     *
-     * @return description of a task
-     */
-    public String getDescription() {
-        return description;
-    }
-
-    /**
      * Set status of a task to be done.
      */
     public void setDone() {
@@ -59,5 +41,23 @@ public class Task {
     @Override
     public String toString() {
         return getStatusIcon() + getDescription();
+    }
+
+    /**
+     * Get status icon of a task
+     *
+     * @return status icon
+     */
+    protected String getStatusIcon() {
+        return (isDone ? "[X] " : "[ ] ");
+    }
+
+    /**
+     * Get description of a task
+     *
+     * @return description of a task
+     */
+    public String getDescription() {
+        return description;
     }
 }
