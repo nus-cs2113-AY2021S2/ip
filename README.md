@@ -26,4 +26,25 @@ ____________________________________________________________
 ### Features
 
 **Help Menu** 
-`Help`
+This command prints a help menu for the user.
+
+Format: `help`
+
+Command: `help`
+
+Expected Output:
+```
+ Here's what I could do for you ^_^
+ help: print help menu
+ list: see saved tasks in the list
+ done: mark a task in the list as done
+ delete: delete a task from the list
+ date: search saved tasks on a specific day
+ find: search saved tasks by keywords
+ bye: exit Baggie
+ how to add tasks into the list:
+ 	todo-> format: todo [task]
+ 	event-> format: event [task] / [time]
+ 	deadline-> format: deadline [task] / [time]
+ 	[tip: enter date as YYYY-MM-DD to help Baggie understand better!]
+```
