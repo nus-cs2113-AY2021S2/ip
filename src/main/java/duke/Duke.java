@@ -1,9 +1,5 @@
 package duke;
 
-
-import java.awt.*;
-import java.time.format.DateTimeParseException;
-
 public class Duke {
 
     private TaskManager tasks;

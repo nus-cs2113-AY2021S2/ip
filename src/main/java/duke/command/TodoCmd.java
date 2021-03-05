@@ -14,6 +14,13 @@ public class TodoCmd extends Command{
         super(s);
     }
 
+    /**
+     * Executes a Todo command according to the user input
+     * @param tasks the arraylist of tasks currently stored
+     * @param ui show messages to interact with users
+     * @param storage update the file once the task lists changed
+     * @throws DukeException if the description of the deadline is empty
+     */
     public void execute(TaskManager tasks, Ui ui, Storage storage) throws DukeException {
         String[] typeContent = userInput.split("[Tt][Oo][Dd][Oo]",2);
         if (typeContent[1].equals("")) {

@@ -14,6 +14,14 @@ public class DeleteCmd extends Command{
         super(s);
     }
 
+    /**
+     * Executes a delete command according to the user input
+     * @param tasks the arraylist of tasks currently stored
+     * @param ui show messages to interact with users
+     * @param storage update the file once the task lists changed
+     * @throws DukeException if no index field is found in user input
+     *                       if the index in not in range of current tasks list
+     */
     public void execute(TaskManager tasks, Ui ui, Storage storage) throws DukeException {
         try{
             String[] typeIndex = userInput.split("[Dd][Ee][Ll][Ee][Tt][Ee]",2);

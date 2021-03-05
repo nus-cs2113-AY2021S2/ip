@@ -70,7 +70,7 @@ public class TaskManager {
     }
 
     /**
-     * Mark a certain task as done
+     * Marks a certain task as done
      * @param taskIndexShow the index of the task that user input
      * @return the modified to done Task object.
      */
@@ -86,7 +86,7 @@ public class TaskManager {
     }
 
     /**
-     * delete a certain task from tasks
+     * deletes a certain task from tasks
      * @param taskIndexShow the index of the task that user input
      * @return deleted Task object.
      */
@@ -97,7 +97,11 @@ public class TaskManager {
     }
 
 
-    //filter by date
+    /**
+     * filters tasks by date
+     * @param date the data user input, in form of yyyy-mm-dd
+     * @return arraylist of tasks /at or /by the specific date
+     */
     public ArrayList<Task> filterByDate(LocalDate date) {
         ArrayList<Task> filteredDeadline = (ArrayList<Task>) tasks.stream()
                 .filter((t) -> (t instanceof Deadline))
@@ -113,7 +117,11 @@ public class TaskManager {
         return filteredDeadline;
     }
 
-    // find tasks by string
+    /**
+     * filters tasks by keyword
+     * @param filterString the keyword user input to find
+     * @return arraylist of tasks contain the specific keyword
+     */
     public ArrayList<Task> filterTasksByString(String filterString) {
         ArrayList<Task> filteredList = (ArrayList<Task>) tasks.stream()
                 .filter((s) -> s.getContent().toLowerCase().contains(filterString))

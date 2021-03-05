@@ -32,7 +32,6 @@ public class DukeException extends Exception{
             ui.showEmptyFieldMessage(this.commandType);
             break;
         default:
-            return;
         }
     }
 

@@ -30,8 +30,8 @@ public class Storage {
     }
 
     /**
-     * open the file or create the file if it not exists,
-     * read all lines and store them in an arraylist of strings
+     * opens the file or create the file if it not exists,
+     * reads all lines and store them in an arraylist of strings
      * @return ArrayList which store file strings
      */
     private ArrayList readFile() throws IOException {
@@ -60,7 +60,7 @@ public class Storage {
     }
 
     /**
-     * parse strings to Task objects one by one
+     * parses strings to Task objects one by one
      * @param dataItems file content stored in arraylist of strings
      * @return ArrayList<Task> after convert each string to a task
      */
@@ -109,7 +109,7 @@ public class Storage {
     }
 
     /**
-     * load the tasks stored in the file
+     * loads the tasks stored in the file
      * @return ArrayList<Task> store the tasks into an arraylist
      */
     public ArrayList<Task> load() {
@@ -124,8 +124,8 @@ public class Storage {
     }
 
     /**
-     * Synchronise the file after modified the tasks.
-     * overwrite to the file with tasks passed in.
+     * Synchronises the file after modified the tasks.
+     * overwrites to the file with tasks passed in.
      * @param tasks new arraylist of tasks which will be written to the file
      * @throws IOException if write to file failed
      */

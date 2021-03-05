@@ -22,6 +22,13 @@ public class Command {
         userInput = s;
     }
 
+    /**
+     * Executes a command according to the user input
+     * @param tasks the arraylist of tasks currently stored
+     * @param ui show messages to interact with users
+     * @param storage update the file once the task lists changed
+     * @throws DukeException if the command user input is in wrong structure.
+     */
     public void execute(TaskManager tasks, Ui ui, Storage storage) throws DukeException {
 
     };
