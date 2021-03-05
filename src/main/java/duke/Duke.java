@@ -53,17 +53,17 @@ public class Duke {
             break;
         case "todo":
             Todo todo = new Todo(content);
-            list.addToList(todo);
+            list.add(todo);
             list.printAddMessage(todo);
             break;
         case "event":
             Event event = new Event(content);
-            list.addToList(event);
+            list.add(event);
             list.printAddMessage(event);
             break;
         case "deadline":
             Deadline deadline = new Deadline(content);
-            list.addToList(deadline);
+            list.add(deadline);
             list.printAddMessage(deadline);
             break;
         default:
