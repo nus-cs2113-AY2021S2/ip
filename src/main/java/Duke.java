@@ -1,10 +1,38 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+
+/**
+ * Starts Duke for user.
+ */
 public class Duke {
+
+    public Duke(String filePath) {
+        try {
+            Storage.loadFile(filePath + "/data.txt");
+        } catch (FileNotFoundException e) {
+            Ui.printFileCreatedMessage(filePath);
+        }
+    }
+
+    public void run() {
+        Ui.printWelcomeMessage();
+        boolean isExit = false;
+
+        while (!isExit) {
+            isExit = Parser.processInput();
+        }
+        Storage.saveFile();
+    }
+
+    /**
+     * Runs Duke and takes in user input until exit command is called.
+     */
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        String filePath = new File("").getAbsolutePath();
+        new Duke(filePath).run();
     }
 }
+
+
+
+
