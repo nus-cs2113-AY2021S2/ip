@@ -148,6 +148,10 @@ Expected output when the task is not in the list:
 ```
  You don't have Task 5 in your list ^_^ 
 ```
+Expected output when the task is already done:
+```
+The task is already done ^_^
+```
 
 
 
@@ -201,14 +205,37 @@ Format: `keyword [keyword]`
 
 Example: `keyword math`
 
-Expected Output when there is no task in the list:
+Expected output when there is no task in the list:
 ```
   List is empty :o
 ```
 
-Expected Output when there are tasks in the list:
+Expected output when there are tasks in the list:
 ```
 5. [E] [-] math tutorial (at: Mar 5 2021)
 6. [T] [-] math HW2
  There are 2 task(s)
 ```
+### Exit
+This command exits the programm for the user.
+
+Format: `bye`
+
+Example: `bye`
+
+Expected Output:
+```
+ File saved!
+ Bye! Hope to see you again soon!
+```
+
+
+## Storage
+If File  `Baggie.txt` exists in the working directory, Baggie will read from the file and load the saved tasks into task list;
+If File  `Baggie.txt` does not exist in the working directory, Baggie will create a new file `Baggie.txt`;
+Baggie updates `Baggie.txt` every time user exits the program by entering [Exit Command](#Exit)
+
+
+
+## Contributors
+[baggiiiie](https://github.com/baggiiiie)
