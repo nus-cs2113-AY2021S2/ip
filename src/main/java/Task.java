@@ -43,4 +43,9 @@ public class Task {
         if (s.equals("\u2713"))
             isDone = true;
     }
+
+    public static int updateTaskCount() {
+        taskCount--;
+        return taskCount;
+    }
 }
