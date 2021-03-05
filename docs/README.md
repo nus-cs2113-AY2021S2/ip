@@ -41,7 +41,7 @@ Mushroom Tracker is here to serve you!
 ```
 
 ## 3. Features
-> ❗ **CAUTION:** Avoid using "|" keystroke in your task description or any input. 
+> ❗ **CAUTION:** Avoid using vertical keystroke "│" in your task description or any input. 
 
 ### 3.1 Add a Todo task: `todo`
 
