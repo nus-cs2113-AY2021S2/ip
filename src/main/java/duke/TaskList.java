@@ -4,6 +4,9 @@ import duke.myTasks.Todo;
 
 import java.util.ArrayList;
 
+/**
+ * A customised ArrayList with additional methods for Duke
+ */
 public class TaskList {
     public static ArrayList<Todo> list = new ArrayList<>();
     public static int index;
@@ -16,7 +19,7 @@ public class TaskList {
         return list.get(i);
     }
 
-    public void addToList(Todo task) {
+    public void add(Todo task) {
         list.add(task);
         index++;
     }

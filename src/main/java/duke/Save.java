@@ -15,10 +15,20 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
+/**
+ * The Save class handles reading and writing data to a text file
+ * for saving memory between sessions.
+ *
+ * The parameter filePath is the relative path of the textfile.
+ */
 public class Save {
     public static String filePath = "savefile.txt";
 
     Save(){}
+
+    /**
+     * Creates a textfile if it does not already exist.
+     */
     public static void checkSave() {
         Path path = Paths.get(filePath); //creates Path instance
         try {
@@ -29,6 +39,10 @@ public class Save {
         }
     }
 
+    /**
+     * Reads the data from the textfile.
+     * @return a TaskList object constructed from the data in the savefile.
+     */
     public static TaskList loadSave() {
         TaskList list = new TaskList();
         File f = new File(filePath);
@@ -61,6 +75,10 @@ public class Save {
         return list;
     }
 
+    /**
+     * Overwrites the current textfile with data from the current session
+     * @param list the TaskList object from the current session to be encoded into the textfile
+     */
     public static void save(TaskList list) {
         try {
             FileWriter fw = new FileWriter(filePath);

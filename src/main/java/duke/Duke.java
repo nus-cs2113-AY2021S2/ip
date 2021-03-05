@@ -24,6 +24,16 @@ public class Duke {
     public static String filePath = "savefile.txt";
     public static Save save = new Save();
 
+    /**
+     * @param command the name if the instruction
+     * @param content additional information about the instruction, may or may not be needed
+     * @throws InvalidInput thrown if comman is incorrect
+     * @throws NoContent thrown if name is not given when initialising a Task
+     * @throws NoTime thrown if time is not given when initialising a time-dependant task.
+     * @throws NullPointerException thrown if the user asks for an index outside of the current range of the list
+     * @throws NumberFormatException thrown if the user enters something else when the program expects a number
+     * @throws ArrayIndexOutOfBoundsException thrown if the user asks for an index outside of the current range of the list
+     */
     public static void executeInstruction(String command, String content) throws InvalidInput, NoContent, NoTime, NullPointerException, NumberFormatException, ArrayIndexOutOfBoundsException{
         switch (command) {
         case "bye":
@@ -60,7 +70,12 @@ public class Duke {
             throw new InvalidInput();
         }
     }
-    
+
+    /**
+     * the main function handles reading user input and formatting it for
+     * use by the executeInstruction method.
+     * Exception handling is also done in the main fucntion.
+     */
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -90,7 +105,7 @@ public class Duke {
                 System.out.println("Needs a name");
             } catch (NoTime e) {
                 System.out.println("Needs time. Add \"/by <time>\" to command.");
-            } catch (NullPointerException | IndexOutOfBoundsException e) {
+            } catch (NullPointerException | ArrayIndexOutOfBoundsException e) {
                 System.out.println("You have inputted an invalid index number");
             } catch (NumberFormatException e) {
                 System.out.println("Specify which task to mark as done");
