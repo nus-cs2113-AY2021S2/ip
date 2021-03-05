@@ -13,4 +13,14 @@ public class DukeParser {
         Task newTask = new Task(inputDetails, userCommand);
         return newTask;
     }
+
+    public static Task processUserRequest(String userCommand, String inputDetails) throws TodoException {
+        if (inputDetails.equalsIgnoreCase("filler") & userCommand.equalsIgnoreCase("todo")) {
+            throw new TodoException();
+        }
+        DukeUI.printLine();
+        DukeUI.printLine();
+        Task newTask = new Task(inputDetails, userCommand);
+        return newTask;
+    }
 }

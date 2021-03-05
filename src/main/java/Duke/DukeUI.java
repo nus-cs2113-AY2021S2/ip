@@ -42,4 +42,10 @@ public class DukeUI {
     public static void printExitingMessage() {
         print("Bye. Hope to see you again soon!");
     }
+
+    public static void notifyUserNewTask(Task selectedTask, TaskManager currentTaskManager) {
+        DukeUI.print("Got it. I've added this task:");
+        DukeUI.print("  " + selectedTask.getTaskType() + selectedTask.getStatusIcon() + " " + selectedTask.getDescription());
+        DukeUI.print("Now you have " + currentTaskManager.taskCount() + " tasks in the list.");
+    }
 }
