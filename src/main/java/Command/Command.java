@@ -195,6 +195,16 @@ public class Command {
                 System.out.println("     Now you have " + tasks.size() + " tasks in this list.");
             }
             break;
+        case "find":
+            int i = 1;
+
+            System.out.println("     Here are the matching tasks in your list:");
+            for(Task task:tasks){
+                if(task.getDescription().contains(description)){
+                    System.out.println("     "+i+"."+task.getDescription());
+                }
+            }
+            break;
         default:
             throw new UnknownCommand();
         }
