@@ -260,8 +260,10 @@ Expected Output:
 ```
  Baggie doesn't know what to do with the command D:
 ```
-
 ## 3. Command Overview
+
+&nbsp;
+
 | Command | Format | Example |
 |:---:|:---:|:---:|
 | Help Menu|`help`|`help`|
@@ -275,6 +277,7 @@ Expected Output:
 | Add Todo Task|`todo [task]`|`todo submit UG`|
 | Exit Program|`bye`|`bye`|
 
+&nbsp;
 
  
 
