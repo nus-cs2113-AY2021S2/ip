@@ -83,20 +83,27 @@ Bye. Hope to see you again soon!
 Describe action and its outcome.
 
 Example of usage: 
+
 `
 list
 `
+
 Expected outcome:
+
 `
 1: [deadline][done] return book (by: Sunday)
 2: [event][done] project meeting (at: Mon 2-4pm)
 3: [todo][done] run book (by: Sunday)
 `
+
 Example of usage:
+
 `
 find book
 `
+
 Expected outcome:
+
 `
 [deadline][done] return book (by: Sunday)
 `
