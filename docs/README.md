@@ -21,7 +21,14 @@ Do take note:
 ### Expected outcome:
 
 - **todo eat dinner**
+  ```
   Ayy I got you my brother. I've added this ting: 
   [T][ ] eat dinner
   Dayuum son! You have 1 mad tings in the list.
-
+  ```
+- **event party time /at 01-03-2021 22:00
+  ```
+  Ayy I got you my brother. I've added this ting: 
+  [E][ ] party time (at: 1 Mar 2021 10:00 PM)
+  I feer! You have 2 mad tings in the list.
+  ```
