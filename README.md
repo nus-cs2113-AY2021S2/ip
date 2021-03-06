@@ -1,6 +1,6 @@
 # Duke project 
 
-This is a project template for a greenfield Java project. It's named after the Java baddest mascot _Duke the Dawg_. Duke is a certified fresh task list handler that allows you to plan your activities according to your schedule. Quite sick right? Given below are input commands:
+This is a project template for a greenfield Java project. It's named after the Java baddest mascot _Duke the Dawg_. Duke is a certified fresh task list handler that allows you to plan your activities according to your schedule. Quite sick right? Enough said... hope you give Duke much love!
    ```
    Hello from
     ____        _        
