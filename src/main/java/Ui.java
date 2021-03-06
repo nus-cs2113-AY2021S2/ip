@@ -111,7 +111,6 @@ public class Ui {
      */
     public void printTasksFound(TaskList tasksFound) {
         System.out.println(DIVIDER);
-        System.out.println(DIVIDER);
         System.out.println(" Here are the matching tasks in your list:");
         for (int i = 0; i < tasksFound.getTaskCount(); i++) {
             Task currentTask = tasksFound.getTaskAt(i);
