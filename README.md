@@ -16,7 +16,7 @@ This is a project template for a greenfield Java project. It's named after the J
 If the task list is saved, it will be re-loaded into the console and available for further edits upon running duke.main().
 Do take note:
 * TASKDATETIME: must be entered in the following format dd-MM-yyyy HH:mm.
-* * DATE: must be entered in the following format dd-MM-yyyy.
+* DATE: must be entered in the following format dd-MM-yyyy.
 
    ```
    Hello from
