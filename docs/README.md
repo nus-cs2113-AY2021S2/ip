@@ -3,29 +3,17 @@
 ## Features 
 
 &nbsp;
-| Syntax      | Description |
-|:-------:|:----------:|
-| list      | View list       |
-| event   | Add event        |
-| todo      | Add todo       |
-| deadline   | Add deadline  |
-| done      | Done Item      |
-| bye   | End system        |
-&nbsp;
-
-&nbsp;
 
 | Command | Format | Example |
 |:-------:|:----------:|:-------------------:|
-| Help Menu|`help`|`help`|
-| Print List|`list`|`list`|
-| Mark As Done|`done [index]`|`done 1`|
+| List|`help`|`help`|
+| Mark As Done|`list`|`list`|
 | Delete Task|`delete [index]`|`delete 1`|
-| Find With Date|`date [YYYY-MM-DD]`|`date 2021-03-05`|
-| Find With Keyword|`keyword [keyword]`|`keyword math`|
-| Add Deadline Task|`deadline [task]/[time]`|`deadline submit UG/2021-03-05`|
-| Add Event Task|`event [task]/[time]`|`event CNY dinner/2021-02-11`|
-| Add Todo Task|`todo [task]`|`todo submit UG`|
+| Done Task|`delete [index]`|`done 1`|
+| Find With Keyword|`keyword [keyword]`|`keyword football`|
+| Add Deadline Task|`deadline [task]/by [time]`|`deadline book update/by 2021-01-03`|
+| Add Event Task|`event [task]/at [time]`|`event FOOD delivery/at 2021-01-01`|
+| Add Todo Task|`todo [task]`|`todo upgrade game`|
 | Exit Program|`bye`|`bye`|
 
 &nbsp;
