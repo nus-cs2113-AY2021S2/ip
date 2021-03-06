@@ -19,7 +19,7 @@ Do take note:
 * TASKDATETIME: must be entered in the following format dd-MM-yyyy HH:mm.
 * DATE: must be entered in the following format dd-MM-yyyy.
 
-### Example expected outcomes:
+## Expected outcomes (examples):
 
 - **list**
 
@@ -89,6 +89,6 @@ Do take note:
 
   Process finished with exit code 0
   ```
-#### Credits
+## Credits
 
 I had assistance from fellow course mate Jethro Phuah for following methods: save and load file.
