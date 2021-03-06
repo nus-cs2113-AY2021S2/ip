@@ -8,8 +8,8 @@
 | list      | View list       |
 | event   | Add event        |
 | todo      | Add todo       |
-| deadline   | Add deadline  |<br />
-| done      | Done Item      |<br />
+| deadline   | Add deadline  |
+| done      | Done Item      |
 | bye   | End system        |
 &nbsp;
 
