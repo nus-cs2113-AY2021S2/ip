@@ -188,8 +188,7 @@ public class TaskList {
      * @param keyword Keyword(s) used for searching
      */
     public static void find(ArrayList<Task> list, String keyword) {
-        List<Task> filteredList = new ArrayList<>();
-        filteredList = list.stream().filter(str -> str.contains(keyword)).collect(Collectors.toList());
+        List<Task> filteredList = list.stream().filter(str -> str.contains(keyword)).collect(Collectors.toList());
 
         ArrayList<String> taskList = new ArrayList<>();
         taskList.add(String.format(Constants.TASKS_CONTAINING_KEYWORD_MESSAGE, filteredList.size(), keyword));
