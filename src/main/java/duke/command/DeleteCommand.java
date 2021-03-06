@@ -41,6 +41,7 @@ public class DeleteCommand extends Command {
      * Deletes item from task list if input format is correct.
      *
      * @param line user input.
+     * @param tasks ArrayList containing all tasks.
      * @throws EmptyNameFieldException if index to delete is not given.
      * @throws IllegalAccessException if index is out of bounds.
      */

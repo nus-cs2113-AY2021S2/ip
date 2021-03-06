@@ -74,7 +74,10 @@ public class Ui {
         System.out.println(index + ". " + type + "[" + status + "] " + name + " " + date);
     }
 
-    /** Prints name of item that was set to done. */
+    /** Prints name of item that was set to done.
+     *
+     * @param name name of task that was set to done.
+     * */
     public void printMarkedDone(String name) {
         System.out.println(name + SET_TO_DONE_MESSAGE);
     }
@@ -83,6 +86,7 @@ public class Ui {
      * Prints message for deletion of task.
      *
      * @param index index of item to delete.
+     * @param tasks ArrayList containing all tasks.
      */
     public void printDeletedTask(int index, ArrayList<Task> tasks) {
         System.out.println(DELETED_MESSAGE);

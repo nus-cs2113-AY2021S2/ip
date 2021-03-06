@@ -56,6 +56,10 @@ public class AddCommand extends Command {
      * Parses type of item to add and calls appropriate method.
      *
      * @param line raw input given by user.
+     * @param tasks ArrayList containing all tasks.
+     * @throws WrongFormatException if type of task is not recognised.
+     * @throws EmptyNameFieldException if name is not given or all whitespace.
+     * @throws EmptyDateException if date is not given or all whitespace.
      */
     public void addItem(String line, ArrayList<Task> tasks) throws WrongFormatException, EmptyNameFieldException,
             EmptyDateException {

@@ -26,7 +26,11 @@ public class ListCommand extends Command {
         listItems(tasks);
     }
 
-    /** Lists all items that were added to the list. */
+    /**
+     * List all items added to the list.
+     *
+     * @param tasks ArrayList containing all tasks.
+     */
     public void listItems(ArrayList<Task> tasks) {
         System.out.println(LIST_ITEMS_MESSAGE);
         this.ui.printEntireList(tasks);

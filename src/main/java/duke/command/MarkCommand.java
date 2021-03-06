@@ -42,6 +42,7 @@ public class MarkCommand extends Command {
      * Checks for out of bounds access and presence of numerical value.
      *
      * @param line user input.
+     * @param tasks ArrayList containing all tasks.
      * @throws IllegalAccessException if index given is out of bounds.
      * @throws EmptyNameFieldException if index is not given.
      */
