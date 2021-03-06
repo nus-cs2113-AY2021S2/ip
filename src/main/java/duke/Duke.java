@@ -7,13 +7,6 @@ import duke.myTasks.Deadline;
 import duke.myTasks.Event;
 import duke.myTasks.Todo;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Scanner;
 
 
@@ -27,7 +20,7 @@ public class Duke {
     /**
      * @param command the name if the instruction
      * @param content additional information about the instruction, may or may not be needed
-     * @throws InvalidInput thrown if comman is incorrect
+     * @throws InvalidInput thrown if command is incorrect
      * @throws NoContent thrown if name is not given when initialising a Task
      * @throws NoTime thrown if time is not given when initialising a time-dependant task.
      * @throws NullPointerException thrown if the user asks for an index outside of the current range of the list
