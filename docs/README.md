@@ -90,4 +90,5 @@ Do take note:
   Process finished with exit code 0
   ```
 #### Credits
+
 I had assistance from fellow course mate Jethro Phuah for following methods: save and load file.
