@@ -4,13 +4,13 @@ Duke is simple to use, so to get you started... here are command lines that you 
 ## Commands 
 
 - todo _TASKNAME_ : adds a todo task to the list.
-- event _TASKNAME_ /at _TASKDATETIME_* : adds a event task to the list.
-- deadline _TASKNAME_ /by _TASKDATETIME_* : adds a deadline task to the list.
+- event _TASKNAME_ /at _TASKDATETIME_ : adds a event task to the list.
+- deadline _TASKNAME_ /by _TASKDATETIME_ : adds a deadline task to the list.
 - list : displays list of tasks.
 - done _NUMBER_ : checks task as done.
 - delete _NUMBER_ : removes task from list.
 - find KEYWORD: search and display tasks that contains keywords.
-- date DATE**: search and display tasks that contains date.
+- date DATE: search and display tasks that contains date.
 - save : save task list in a seperate text file.
 - bye : exits system.
 
