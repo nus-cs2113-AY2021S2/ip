@@ -36,7 +36,7 @@ Prerequisites: JDK 11
 ![Welcome message of Duke](DukeWelcomeMsg.jpg)
 
 ## 3. Features
-NOTE: The commands listed below must be entered as **lowercase** letters.
+**NOTE:** The commands listed below must be entered as **lowercase** letters.
 
 ### 3.1 Adding a Todo task: `todo`
 
