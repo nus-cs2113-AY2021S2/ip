@@ -36,7 +36,7 @@ Format: deadline [DESCRIPTION] /by [yyyy-mm-dd]
 ---------------------------------------
 
 Example:
-deadline return  book /by 2020-10-01
+deadline return book /by 2020-10-01
 
 
 Event
@@ -45,7 +45,7 @@ Format: event [DESCRIPTION] /at [yyyy-mm-dd]
 ---------------------------------------
 
 Example:
-event school activity /at 2020-10-01
+event school celebration /at 2020-10-01
 
 
 Done
