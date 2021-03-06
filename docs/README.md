@@ -3,14 +3,14 @@
 ## Features 
 
 &nbsp;
-| Syntax      | Description |<br />
-| ----------- | ----------- |<br />
-| list      | View list       |<br />
-| event   | Add event        |<br />
-| todo      | Add todo       |<br />
+| Syntax      | Description |
+| ----------- | ----------- |
+| list      | View list       |
+| event   | Add event        |
+| todo      | Add todo       |
 | deadline   | Add deadline  |<br />
 | done      | Done Item      |<br />
-| bye   | End system        |<br />
+| bye   | End system        |
 &nbsp;
 
 ### Feature 1 
