@@ -1,7 +1,9 @@
 # User Guide
 
 ## Features 
+
 &nbsp;
+
 | Syntax      | Description |
 | ----------- | ----------- |
 | list      | View list       |
@@ -10,7 +12,9 @@
 | deadline   | Add deadline  |
 | done      | Done Item      |
 | bye   | End system        |
+
 &nbsp;
+
 ### Feature 1 
 1. **list** to view **The list of activities**
 ### Feature 2
