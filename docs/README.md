@@ -2,6 +2,7 @@
 
 ## Features 
 
+&nbsp;
 | Syntax      | Description |<br />
 | ----------- | ----------- |<br />
 | list      | View list       |<br />
@@ -10,7 +11,7 @@
 | deadline   | Add deadline  |<br />
 | done      | Done Item      |<br />
 | bye   | End system        |<br />
-
+&nbsp;
 
 ### Feature 1 
 **list** to view **The list of activities**
