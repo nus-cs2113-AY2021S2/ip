@@ -1,0 +1,3 @@
+[T][X] eat
+[T][ ] live
+[T][ ] aer
