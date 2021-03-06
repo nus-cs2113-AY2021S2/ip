@@ -111,3 +111,51 @@ Expected outcome:
 ```
 [deadline][done] return book (by: Sunday)
 ```
+
+Example of usage:
+
+```
+done 4
+```
+
+Expected outcome:
+
+```
+[Command entered:done 4]
+```
+
+Example of usage:
+
+```
+delete 4
+```
+
+Expected outcome:
+
+```
+[Command entered:delete 4]
+```
+
+Example of usage:
+
+```
+event book
+```
+
+Expected outcome:
+
+```
+[Command entered:event book]
+```
+
+Example of usage:
+
+```
+bye
+```
+
+Expected outcome:
+
+```
+Bye. Hope to see you again soon!
+```
