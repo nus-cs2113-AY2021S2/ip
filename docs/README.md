@@ -39,12 +39,12 @@ Do take note:
   Jeeeeeeez! You have 3 mad tings in the list.
   ```
 - **list**
-  ```
+  ````
   Here are the tings in yo list: 
   1. [T][ ] eat dinner
   2. [E][ ] party time (at: 1 Mar 2021 10:00 PM)
   3. [D][ ] ip assignment submission time (by: 1 Mar 2021 07:00 PM)
-  ```
+  ````
 - **done 1**
   ```
   Awwww yeah! I've marked this task as done... brrrrrap brrrrrap: 
