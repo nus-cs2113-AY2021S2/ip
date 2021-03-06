@@ -4,7 +4,7 @@
 
 &nbsp;
 | Syntax      | Description |
-| ----------- | ----------- |
+|:-------:|:----------:|:-------------------:|
 | list      | View list       |
 | event   | Add event        |
 | todo      | Add todo       |
