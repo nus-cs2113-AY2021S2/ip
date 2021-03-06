@@ -1,4 +1,5 @@
 # User Guide
+Duke is simple to use, so to get you started... here are command lines that you can input for Duke to execute swiftly! 
 
 ## Commands 
 
@@ -88,3 +89,5 @@ Do take note:
 
   Process finished with exit code 0
   ```
+  ### Credits
+I had assistance from fellow course mate Jethro Phuah for following methods: save and load file.
