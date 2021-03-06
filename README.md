@@ -92,7 +92,7 @@ Now you have 1 tasks in the list.
 ___________________________________________
 ```
 
- Exception:
+Exception:
 * No Todo DESCRIPTION
 * Example: `todo`
 * Example of expected output:
@@ -108,16 +108,27 @@ ___________________________________________
 
 * Adds a deadline task which has to be completed before a given time
 * Format：`deadline DESCRIPTION /by BYTIME`
-* Example: `deadline submit a report /by 05 Mar`
-* Example of expected output:
+* Example 1: `deadline submit a report /by 2020-12-21 12:45`
+* Example of expected output 1:
 
 ```
 ___________________________________________
 Got it. I've added this task: 
-[D][✘] submit a report (by: 05 Mar)
+[D][✘] submit a report (by: Dec 21 2020  12:45)
 Now you have 2 tasks in the list. 
 ___________________________________________
 ```
+
+* Example 2: `deadline submit a report /by Sunday`
+* Example of expected output 2:
+
+```
+___________________________________________
+🙁 OOPS!!! The date is not valid
+Please follow the format YYYY-MM-DD and input again.:)
+___________________________________________
+```
+
 Exception 1:
 * No Deadline DESCRIPTION
 * Example: `deadline`
@@ -146,16 +157,28 @@ ___________________________________________
 
 * Adds an event task which will start at a given time
 * Format：`event DESCRIPTION /by ATTIME`
-* Example: `event project group meeting /at 2-4 pm Sunday`
-* Example of expected output:
+* Example 1: `event project group meeting /at 2021-12-21 23:59`
+* Example of expected output 1:
 
 ```
 ___________________________________________
 Got it. I've added this task: 
-[E][✘] group meeting (at: 11am Thursday)
+[E][✘] project group meeting (at: Dec 21 2021  23:59)
 Now you have 3 tasks in the list. 
 ___________________________________________
 ```
+
+* Example 2: `event project group meeting /at Sunday`
+* Example of expected output 2:
+
+```
+___________________________________________
+🙁 OOPS!!! The date is not valid
+Please follow the format YYYY-MM-DD and input again.:)
+___________________________________________
+```
+
+
 Exception 1:
 * No Event DESCRIPTION
 * Example: `event`
@@ -313,7 +336,7 @@ ___________________________________________
 * Finds the tasks that contains the certain keyword given by user
 * Format: `find KEYWORD`
 * Example: `find book`
-* Example of expected output:
+* Example of expected output 1:
 
 ```
 ___________________________________________
@@ -321,6 +344,16 @@ Here are the matching tasks in your list:
 1. [T][✓] read a book
 ___________________________________________
 ```
+
+* Example of expected output 2:
+
+```
+___________________________________________
+There is no matching task in your list.
+Please input another keyword! :)
+___________________________________________
+```
+
 Exception 1:
 * No find DESCRIPTION
 * Example: `find`
@@ -350,7 +383,7 @@ ___________________________________________
 * Finds all the tasks that are relevant to the specific date
 * Format: `date [yyy-mm-dd]`
 * Example: `date 2020-02-28 12:23`
-* Example of expected output:
+* Example of expected output 1:
 
 ```
 ___________________________________________
@@ -358,6 +391,16 @@ Here are the tasks occurring on this specific date:
 1. [D][✘] return a book(by: Feb 28 2021 12:23)
 ___________________________________________
 ```
+
+* Example of expected output 2:
+
+```
+___________________________________________
+There is no task occurring on this specific date.
+Please input another date! :)
+___________________________________________
+```
+
 Exception 1:
 * No date DESCRIPTION
 * Example: `date`
