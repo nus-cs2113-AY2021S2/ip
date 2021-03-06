@@ -29,51 +29,60 @@ Do take note:
   3. [D][ ] ip assignment submission time (by: 1 Mar 2021 07:00 PM)
   ```
 - **todo eat dinner**
+
   ```
   Ayy I got you my brother. I've added this ting: 
   [T][ ] eat dinner
   Dayuum son! You have 1 mad tings in the list.
   ```
 - **event party time /at 01-03-2021 22:00**
+
   ```
   Ayy I got you my brother. I've added this ting: 
   [E][ ] party time (at: 1 Mar 2021 10:00 PM)
   I feer! You have 2 mad tings in the list.
   ```
 - **deadline ip assignment submission time /at 01-03-2021 19:00**
+
   ```
   Ayy I got you my brother. I've added this ting: 
   [D][ ] ip assignment submission time (by: 1 Mar 2021 07:00 PM)
   Jeeeeeeez! You have 3 mad tings in the list.
   ```
 - **done 1**
+
   ```
   Awwww yeah! I've marked this task as done... brrrrrap brrrrrap: 
   [T][✓] eat dinner
   ```
 - **delete 1**
+
   ```
   Awwww yeah! I've deleted this task like a beast: 
   [T][✓] eat dinner
   Now you have 2 tasks in the list.
   ```
 - **find time**
+
   ```
   Here are the search results:
   [E][ ] party time (at: 1 Mar 2021 10:00 PM)
   [D][ ] ip assignment submission time (by: 1 Mar 2021 07:00 PM)
   ```
 - **date 01-03-2021**
+
   ```
   Here are the search results:
   [E][ ] party time (at: 1 Mar 2021 10:00 PM)
   [D][ ] ip assignment submission time (by: 1 Mar 2021 07:00 PM)
   ```
 - **save**
+
   ```
   Yea cuhhhh... filed saved!
   ```
 - **bye**
+
   ```
   Ciao Ciao. See ya soon fam!
 
