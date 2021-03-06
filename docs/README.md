@@ -4,14 +4,14 @@
 
 &nbsp;
 
-| Syntax      | Description |
-| ----------- | ----------- |
-| list      | View list       |
-| event   | Add event        |
-| todo      | Add todo       |
-| deadline   | Add deadline  |
-| done      | Done Item      |
-| bye   | End system        |
+| Syntax      | Description |<br />
+| ----------- | ----------- |<br />
+| list      | View list       |<br />
+| event   | Add event        |<br />
+| todo      | Add todo       |<br />
+| deadline   | Add deadline  |<br />
+| done      | Done Item      |<br />
+| bye   | End system        |<br />
 
 &nbsp;
 
