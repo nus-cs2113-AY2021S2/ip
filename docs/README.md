@@ -21,6 +21,7 @@ Do take note:
 ### Example expected outcomes:
 
 - **list**
+
   ```
   Here are the tings in yo list: 
   1. [T][ ] eat dinner
