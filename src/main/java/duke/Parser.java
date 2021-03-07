@@ -2,6 +2,8 @@ package duke;
 
 import java.util.Scanner;
 
+import static duke.Constant.*;
+
 /**
  * To make sense of commands by user.
  */
@@ -39,32 +41,29 @@ public class Parser {
 
             Storage.writeToFile(tasks);
         } else if (userInput.split(" ")[0].equals("todo")) {
-            if (userInput.length() < 6) {
+            if (userInput.length() <= TODO_COMMAND) {
                 Ui.printEmptyCommand("todo");
                 return;
             }
-            if(userInput.substring(6).replace(" ","").isEmpty()){
-                System.out.println("Try something else");
-//                throw new MissingTaskException("Please key in an appropriate task.");
+
+            try {
+                emptyTask(userInput, TODO_COMMAND);
+                TaskList.addTodoTask(userInput);
+                Storage.writeToFile(tasks);
+            } catch (MissingTaskException e) {
+                System.out.println("Please key in an appropriate task.");
             }
-            TaskList.addTodoTask(userInput);
-            Storage.writeToFile(tasks);
         } else if (userInput.split(" ")[0].equals("deadline")) {
-            if (userInput.length() < 10) {
+            if (userInput.length() <= DEADLINE_COMMAND) {
                 Ui.printEmptyCommand("deadline");
                 return;
             }
-            String by = "";
+            String by;
             String processedDeadlineInput;
-            int getSlashIndex = 0;
-            for (int i = 0; i < userInput.length(); i++) {
-                char getSlash = userInput.charAt(i);
-                if (getSlash == '/') {
-                    getSlashIndex = i;
-                    break;
-                }
-            }
+            int getSlashIndex = userInput.indexOf("/by");
+
             try {
+                emptyTask(userInput, DEADLINE_COMMAND);
                 by = userInput.substring(getSlashIndex + 4);
                 processedDeadlineInput = userInput.substring(9, getSlashIndex).trim();
                 TaskList.addDeadlineTask(by, processedDeadlineInput);
@@ -72,10 +71,12 @@ public class Parser {
                 Storage.writeToFile(tasks);
             } catch (StringIndexOutOfBoundsException e) {
                 System.out.println("Incorrect Slash input! " +
-                        "Try again! Do event /at <something>");
+                        "Try again! Do deadline /by <something>");
+            } catch (MissingTaskException e) {
+                System.out.println("Please key in an appropriate task.");
             }
         } else if (userInput.split(" ")[0].equals("event")) {
-            if (userInput.length() < 7) {
+            if (userInput.length() <= EVENT_COMMAND) {
                 Ui.printEmptyCommand("event");
                 return;
             }
@@ -85,6 +86,7 @@ public class Parser {
             int getSlashIndex;
             getSlashIndex = userInput.indexOf("/at");
             try {
+                emptyTask(userInput, EVENT_COMMAND);
                 at = userInput.substring(getSlashIndex + 4).trim();
                 processedEventInput = userInput.substring(6, getSlashIndex).trim();
                 TaskList.addEventTask(at, processedEventInput);
@@ -93,6 +95,8 @@ public class Parser {
             } catch (StringIndexOutOfBoundsException e) {
                 System.out.println("Incorrect Slash input! " +
                         "Try again! Do event /at <something>");
+            } catch (MissingTaskException e) {
+                System.out.println("Please key in an appropriate task.");
             }
 
         } else if (userInput.split(" ")[0].equals("delete")) {
@@ -123,5 +127,18 @@ public class Parser {
         }
 
         Ui.printBorder();
+    }
+
+    /**
+     * Checks if the task input by the user is an empty task.
+     *
+     * @param userInput
+     * @param commandLength
+     * @throws MissingTaskException
+     */
+    public static void emptyTask(String userInput, int commandLength) throws MissingTaskException {
+        if(userInput.substring(commandLength).replace(" ","").isEmpty()) {
+            throw new MissingTaskException();
+        }
     }
 }
