@@ -1,0 +1,10 @@
+todo CS2113T iP
+deadline CG1112 design report /by 2359 Sunday
+event NUS blood donation /at 1300 Saturday
+list
+done 1
+list
+delete 1
+list
+search 1112
+bye
