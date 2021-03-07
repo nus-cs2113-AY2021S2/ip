@@ -151,7 +151,7 @@ For every run of input, Duke will attempt to save what is in the task lists into
 #### 9.2 Load list of tasks from a file
 When Duke is started by the user, the list of tasks will be loaded from *tasks.txt* automatically. If it is the first time the user is using, a file called *tasks.txt* will be created instead.
 
-##Notes
+## Notes
 
 #### 1. All commands are case-sensitive and should be typed in lower cases.
 
