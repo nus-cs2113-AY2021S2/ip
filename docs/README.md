@@ -18,7 +18,8 @@ Load the iP.jar file.
 
    ```
    
-2. The commands accepted by Duke are `list`, `done`, `delete`, `find`. To add a task for Duke to track, use the command words `todo`, `deadline`, and `event`. 
+1. The commands accepted by Duke are `list`, `done`, `delete`, `find`. To add a task for Duke to track, use the command words `todo`, `deadline`, and `event`. 
+
     1. A `todo` task will require a simple task description. Duke echos upon receiving a `todo` task successfully.
     
    ```
@@ -55,7 +56,7 @@ Load the iP.jar file.
    
    4. Using the command word `list` will cause Duke to list out all the current tasks saved.
   
-  ```
+   ```
    list
 	   ____________________________________________________________
 	   Here are the tasks in your list:
@@ -63,19 +64,21 @@ Load the iP.jar file.
 	   02. [D][✘] return book (by: Tuesday 6pm)
 	   03. [E][✘] family dinner (at: Friday 6-7pm)
 	   ____________________________________________________________
-   ```
-   5. Using the command word `done` will cause Duke to mark one of the tasks as completed. The status of the task will change from a ✘ to a ✓. When using the `done` command word, the index of the task which is to be marked as done must also be given. For example:
-   ```
-   done 2
+    ```
+   
+    5. Using the command word `done` will cause Duke to mark one of the tasks as completed. The status of the task will change from a ✘ to a ✓. When using the `done` command word, the index of the task which is to be marked as done must also be given. For example:
+   
+    ```
+    done 2
 	    ____________________________________________________________
 	    Nice! I've marked this task as done: 
 	    02. [✓] return book
 	    ____________________________________________________________
-   ```
+    ```
    
-   6. Using the command word `delete` will cause Duke to delete one of the tasks saved. Similar to `done`, the index of the task to be deleted must also be given. For example:
+    6. Using the command word `delete` will cause Duke to delete one of the tasks saved. Similar to `done`, the index of the task to be deleted must also be given. For example:
   
-  ```
+   ```
    delete 1
 	    ____________________________________________________________
 	    Noted. I have removed this task. 
@@ -87,7 +90,7 @@ Load the iP.jar file.
    
    at this point, using `list` will cause Duke to reply with the following:
   
-  ```
+   ```
    list
 	  ____________________________________________________________
 	  Here are the tasks in your list:
@@ -105,7 +108,7 @@ Load the iP.jar file.
 	  ____________________________________________________________
    ```
    
-3. If Duke has been used previously, a text file named `duke.txt` would be present in the same folder of the iP.jar file. When running Duke again, the contents of the `duke.txt` file would be read, and the tasks would be loaded automatically. If there are tasks loaded, using the command word `list` would cause the tasks to be shown. For example"
+1. If Duke has been used previously, a text file named `duke.txt` would be present in the same folder of the iP.jar file. When running Duke again, the contents of the `duke.txt` file would be read, and the tasks would be loaded automatically. If there are tasks loaded, using the command word `list` would cause the tasks to be shown. For example"
 
 ```
 	____________________________________________________________
