@@ -35,7 +35,7 @@ Expected outcome:
 `Todo : [✘] buy tesla stock`
 `You now have 1 tasks in your list!`
 
-### `deadline` - Add a deadline to your todo list
+### `deadline {task description} / {task deadline}` - Add a deadline to your todo list
 This command allows you to add an upcoming deadline to your todo list, together with the timing details
 
 Example of usage: 
@@ -48,7 +48,7 @@ Expected outcome:
 `Deadline : [✘] deposit money || Due by: monday 10am`
 `You now have 2 tasks in your list!`
 
-### `event` - Add an event to your todo list
+### `event {event description} / {event date}` - Add an event to your todo list
 This command allows you to add an event that is coming up, and the date details
 
 Example of usage: 
@@ -75,7 +75,7 @@ Expected outcome:
 `2: Deadline : [✘] deposit money || Due by: monday 10am`
 `3: Event : [✘] cheryl's birthday || Happening on: monday`
 
-### `done` - Removes a task from your list
+### `done {number}` - Removes a task from your list
 This command allows you to remove a task that you have completed from your list -> sense of accomplishment!
 
 Example of usage: 
