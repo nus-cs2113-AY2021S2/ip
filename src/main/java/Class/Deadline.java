@@ -13,11 +13,11 @@ public class Deadline extends Task {
         return "[D][" + super.getStatusIcon() + "] " + super.getDescription() + " (by: " + by + ")";
     }
 
-    public String getType(){
+    public String getType() {
         return "deadline";
     }
 
-    public String getTime(){
+    public String getTime() {
         return this.by;
     }
 }

@@ -13,11 +13,11 @@ public class Event extends Task {
         return "[E][" + super.getStatusIcon() + "] " + super.getDescription() + " (at: " + at + ")";
     }
 
-    public String getType(){
+    public String getType() {
         return "event";
     }
 
-    public String getTime(){
+    public String getTime() {
         return this.at;
     }
 }

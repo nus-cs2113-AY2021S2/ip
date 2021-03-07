@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    private static String lineDivider = "    --------------------------------------------------------------------------";
+    private static final String lineDivider = "    --------------------------------------------------------------------------";
 
     public static void main(String[] args) throws UnknownCommand, EmptyDescription, IOException {
         Scanner in = new Scanner(System.in).useDelimiter(" ");

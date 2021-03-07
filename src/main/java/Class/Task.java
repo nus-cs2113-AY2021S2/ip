@@ -17,24 +17,24 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
-    public void markAsDone(){
+    public void markAsDone() {
         this.isDone = true;
     }
 
-    public String getType(){
+    public String getType() {
         return "task";
     }
 
-    public String getTime(){
+    public String getTime() {
         return "nothing";
     }
 
-    public String getTaskName(){
+    public String getTaskName() {
         return this.description;
     }
 
-    public int isDone(){
-        if(this.isDone){
+    public int isDone() {
+        if (this.isDone) {
             return 1;
         } else {
             return 0;
