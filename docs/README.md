@@ -75,8 +75,8 @@ Expected outcome:
 `2: Deadline : [✘] deposit money || Due by: monday 10am`
 `3: Event : [✘] cheryl's birthday || Happening on: monday`
 
-### `done {number}` - Removes a task from your list
-This command allows you to remove a task that you have completed from your list -> sense of accomplishment!
+### `done {number}` - Sets a task as done
+This command allows you to set a task as completed -> sense of accomplishment!
 
 Example of usage: 
 
@@ -85,4 +85,17 @@ Example of usage:
 Expected outcome:
 
 `Nice! I've marked this task as done:`
-`buy tesla shares`
+`Todo : [✓] buy tesla shares`
+
+### `delete {number}` - Removes a task from your list
+This command allows you to remove a task that you have completed from your list -> Marie Kondo your life!
+
+Example of usage: 
+
+`delete 1` - 1 corresponds to the number in the list
+
+Expected outcome:
+
+`The deleted task is : Todo : [✓] buy tesla shares`
+`Noted. I've removed this task:`
+`Todo : [✓] buy tesla shares`
