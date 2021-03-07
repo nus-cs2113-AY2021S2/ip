@@ -1,4 +1,8 @@
+/**
+ * This block is to execute the commands given
+ */
 public class Command {
+
     public static void findCommand(String taskInput){
         String[] splitTaskInput = taskInput.toLowerCase().split(" ");
         String[] taskDescription;
@@ -49,6 +53,11 @@ public class Command {
         }
     }
 
+    /**
+     * This splits up the input the user provides to the console
+     * @param splitTaskInput is the string input
+     * @return an array, that is split into the description and date if any
+     */
     public static String[] findTaskDescription(String[] splitTaskInput){
         String[] taskDescription = new String[2];
         int slashIndex=1;
