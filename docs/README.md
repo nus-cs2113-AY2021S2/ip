@@ -20,6 +20,7 @@ Load the iP.jar file.
    
 2. The commands accepted by Duke are `list`, `done`, `delete`, `find`. To add a task for Duke to track, use the command words `todo`, `deadline`, and `event`. 
     1. A `todo` task will require a simple task description. Duke echos upon receiving a `todo` task successfully.
+    
    ```
    todo read book
 	    ____________________________________________________________
@@ -29,7 +30,9 @@ Load the iP.jar file.
 	    ____________________________________________________________
 
    ```
+   
    2. A `deadline` task will require the user to enter a task description, as well as a deadline to when the task should be completed by. Use `/by` to separate the task description from the deadline. For example:
+   
    ```
    deadline return book /by Tuesday 6pm
 	    ____________________________________________________________
@@ -38,7 +41,9 @@ Load the iP.jar file.
 	    ____________________________________________________________
 
    ```
+   
    3.  A `event` task will require the user to enter a task description, as well as the timing for the event. Use `/at` to separate the task description from the event timing. For example:
+   
    ```
    event family dinner /at Friday 6-7pm
 	    ____________________________________________________________
@@ -47,8 +52,10 @@ Load the iP.jar file.
 	    ____________________________________________________________
 
    ```
+   
    4. Using the command word `list` will cause Duke to list out all the current tasks saved.
-   ```
+  
+  ```
    list
 	   ____________________________________________________________
 	   Here are the tasks in your list:
@@ -65,8 +72,10 @@ Load the iP.jar file.
 	    02. [✓] return book
 	    ____________________________________________________________
    ```
+   
    6. Using the command word `delete` will cause Duke to delete one of the tasks saved. Similar to `done`, the index of the task to be deleted must also be given. For example:
-   ```
+  
+  ```
    delete 1
 	    ____________________________________________________________
 	    Noted. I have removed this task. 
@@ -75,8 +84,10 @@ Load the iP.jar file.
 	    ____________________________________________________________
 
    ```
+   
    at this point, using `list` will cause Duke to reply with the following:
-   ```
+  
+  ```
    list
 	  ____________________________________________________________
 	  Here are the tasks in your list:
@@ -84,14 +95,18 @@ Load the iP.jar file.
 	  02. [E][✘] family dinner (at: Friday 6-7pm)
 	  ____________________________________________________________
    ```
+   
    7. To properly terminate Duke, use the command word `bye`.
+   
    ```
    bye
 	  ____________________________________________________________
 	  Bye. Hope to see you again soon!
 	  ____________________________________________________________
    ```
+   
 3. If Duke has been used previously, a text file named `duke.txt` would be present in the same folder of the iP.jar file. When running Duke again, the contents of the `duke.txt` file would be read, and the tasks would be loaded automatically. If there are tasks loaded, using the command word `list` would cause the tasks to be shown. For example"
+
 ```
 	____________________________________________________________
 	Hello! I'm Duke. 
