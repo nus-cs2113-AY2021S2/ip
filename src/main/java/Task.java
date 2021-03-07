@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 
+/**
+ * Does everything that a task is supposed to do
+ */
 public class Task {
     protected String taskDescription;
     protected boolean isDone;

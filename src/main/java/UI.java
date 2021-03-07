@@ -1,3 +1,6 @@
+/**
+ * Provides the messages that are given after the command is executed
+ */
 public class UI {
     public static void taskAdded(){
         System.out.println("The following task has been added:");
