@@ -148,10 +148,13 @@ Bye. Hope to see you again soon!
 #### 9.1 Save list of tasks into a file
 For every run of input, Duke will attempt to save what is in the task lists into the *tasks.txt* file automatically. No input is needed.
 
-####9.2 Load list of tasks from a file
+#### 9.2 Load list of tasks from a file
 When Duke is started by the user, the list of tasks will be loaded from *tasks.txt* automatically. If it is the first time the user is using, a file called *tasks.txt* will be created instead.
 
 ##Notes
-####1. All commands are case-sensitive and should be typed in lower cases.
-####2. The date or time of deadlines and events do not need to follow a specific format.
-####3. If commands are entered are invalid or in an invalid format, Duke will ignore the input and prompt user to enter again.
+
+#### 1. All commands are case-sensitive and should be typed in lower cases.
+
+#### 2. The date or time of deadlines and events do not need to follow a specific format.
+
+#### 3. If commands are entered are invalid or in an invalid format, Duke will ignore the input and prompt user to enter again.
