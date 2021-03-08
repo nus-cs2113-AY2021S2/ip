@@ -1,7 +1,61 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+-=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=-
+	 File not found, loading new tasklist.
+-=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=-
+	 Hello! I'm Duke, what can I do for you?
+-=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=-
+	 No tasks found.
+-=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=-
+	 Got it. I've added this task: 
+	   [T][ ] read book
+	 You have 1 task(s) in the list. 
+-=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=-
+	 Got it. I've added this task: 
+	   [D][ ] return book (by: 06 Jun 2021)
+	 You have 2 task(s) in the list. 
+-=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=-
+	 Got it. I've added this task: 
+	   [E][ ] project meeting (at: 08 Aug 2021)
+	 You have 3 task(s) in the list. 
+-=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=-
+	 Got it. I've added this task: 
+	   [T][ ] join sports club
+	 You have 4 task(s) in the list. 
+-=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=-
+	 Nice! I've marked this task as done: 
+	 [T][X] read book
+-=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=-
+	 Nice! I've marked this task as done: 
+	 [T][X] join sports club
+-=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=-
+	 Got it. I've added this task: 
+	   [T][ ] borrow book
+	 You have 5 task(s) in the list. 
+-=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=-
+	 Here are the tasks in your list: 
+	 
+	 1. [T][X] read book
+	 2. [D][ ] return book (by: 06 Jun 2021)
+	 3. [E][ ] project meeting (at: 08 Aug 2021)
+	 4. [T][X] join sports club
+	 5. [T][ ] borrow book
+-=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=-
+	 Got it. I've added this task: 
+	   [D][ ] return book (by: 02 Feb 2021)
+	 You have 6 task(s) in the list. 
+-=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=-
+	 Got it. I've added this task: 
+	   [E][ ] project meeting (at: 04 Apr 2021)
+	 You have 7 task(s) in the list. 
+-=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=-
+	 Here are the tasks in your list: 
+	 
+	 1. [T][X] read book
+	 2. [D][ ] return book (by: 06 Jun 2021)
+	 3. [E][ ] project meeting (at: 08 Aug 2021)
+	 4. [T][X] join sports club
+	 5. [T][ ] borrow book
+	 6. [D][ ] return book (by: 02 Feb 2021)
+	 7. [E][ ] project meeting (at: 04 Apr 2021)
+-=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=-
+	 Bye. Hope to see you again soon! 
+-=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=--=-=-=-=-=-
