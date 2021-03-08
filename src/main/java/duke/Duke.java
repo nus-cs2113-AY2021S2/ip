@@ -33,6 +33,9 @@ public class Duke {
         new Duke().run();
     }
 
+    /**
+     * Routine of the task manager bot. During one loop, recognizes user input and respond.
+     */
     public void run() {
         ui.showWelcomeMessage();
         boolean isExit = false;
