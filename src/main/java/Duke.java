@@ -1,10 +1,42 @@
+/**
+ * Main class of Duke.
+ */
 public class Duke {
+    private static final String SAVE_FILE_PATH = "saveFile.txt";
+    private Ui ui;
+    private Storage storage;
+    private TaskList tasks;
+    private Parser parser;
+
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(ui, filePath);
+        tasks = new TaskList(storage.loadStoredTasksData());
+        ui.setTaskList(tasks);
+        storage.setTaskList(tasks);
+        parser = new Parser(ui, storage, tasks);
+    }
+
+    /**
+     * Runs the overall flow of Duke.
+     */
+    private void run() {
+        ui.printWelcomeMsg();
+        String command;
+        boolean isExit;
+        do {
+            command = ui.getCommandFromUser();
+            parser.handleCommand(command);
+            isExit = parser.isExit();
+        } while (!isExit);
+
+        ui.closeScanner();
+    }
+
+    /**
+     * Main entry point of the application.
+     */
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        new Duke(SAVE_FILE_PATH).run();
     }
 }
