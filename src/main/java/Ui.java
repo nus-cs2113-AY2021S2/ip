@@ -53,7 +53,7 @@ public class Ui {
     }
 
     /**
-     * Display the Ui banner and welcome message of Duke.
+     * Display the Ui logo and welcome message of Duke.
      */
     public void printWelcomeMsg() {
         String logo = " ____        _        \n"
@@ -63,8 +63,9 @@ public class Ui {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println(DIVIDER);
         System.out.println(logo);
-        System.out.println("Hello! I'm Duke");
-        System.out.println("Before we begin, do note that I am only able to accept lowercase commands.");
+        System.out.println("Hello! I'm Duke\n");
+        System.out.println("Before we begin, do note that I am only able to accept lowercase\n" +
+                "commands and I am not able to accept the character '|' as input.\n");
         System.out.println("Now, what can I do for you?");
         System.out.println(DIVIDER);
     }
@@ -73,10 +74,16 @@ public class Ui {
      * Get a line of input as command from user.
      *
      * @return the String containing the command entered by user.
-     * @throws NoSuchElementException when the user pressed CTRL+C.
+     * If the user entered either a CTRL+C or CTRL+Z, a "bye" command is returned instead.
      */
-    public String getCommandFromUser() throws NoSuchElementException {
-        return scanner.nextLine().strip();
+    public String getCommandFromUser() {
+        String command;
+        try {
+            command = scanner.nextLine().strip();
+        } catch (NoSuchElementException e) {
+            command = "bye";
+        }
+        return command;
     }
 
     /**
@@ -118,7 +125,7 @@ public class Ui {
         }
         System.out.println(DIVIDER);
     }
-  
+
     /**
      * Informs the user that the task list is empty.
      */
@@ -178,8 +185,8 @@ public class Ui {
     }
 
     /**
-     * Printing of error messages caused by either invalid command syntax or unknown commands
-     * entered by the user.
+     * Printing of error messages caused by either illegal characters, invalid command syntax
+     * or unknown commands entered by the user.
      *
      * @param errorMsg error message containing user friendly explanation about the reason
      *                 why the error occurred.

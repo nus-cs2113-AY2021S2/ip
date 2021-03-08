@@ -1,4 +1,5 @@
 public class Event extends Task {
+    private static final String EVENT_SYMBOL = "E";
     private String at;
 
     public Event(String description, String at) {
@@ -14,7 +15,8 @@ public class Event extends Task {
      */
     @Override
     public String getSaveFormatString() {
-        return "E | " + super.getSaveFormatString() + " | " + this.at;
+        return EVENT_SYMBOL + FILE_DELIMITER_WITH_SPACE + super.getSaveFormatString() +
+                FILE_DELIMITER_WITH_SPACE + this.at;
     }
 
     /**
@@ -26,6 +28,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(), this.at);
+        return String.format("[%s]%s (at: %s)", EVENT_SYMBOL, super.toString(), this.at);
     }
 }

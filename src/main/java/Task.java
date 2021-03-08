@@ -1,4 +1,10 @@
 public abstract class Task {
+    private static final String IS_DONE_STATUS_ICON = "X";
+    private static final String IS_NOT_DONE_STATUS_ICON = " ";
+    private static final String IS_DONE_STATUS = "1";
+    private static final String IS_NOT_DONE_STATUS = "0";
+    public static final String FILE_DELIMITER_WITH_SPACE = " | ";
+
     private String description;
     private boolean isDone;
 
@@ -12,7 +18,7 @@ public abstract class Task {
     }
 
     private String getStatusIcon() {
-        return (this.isDone ? "X" : " ");
+        return (this.isDone ? IS_DONE_STATUS_ICON : IS_NOT_DONE_STATUS_ICON);
     }
 
     /**
@@ -28,7 +34,7 @@ public abstract class Task {
      * @return a String representing the save file format of the current task instance.
      */
     public String getSaveFormatString() {
-        return (this.isDone ? "1" : "0") + " | " + this.getDescription();
+        return (this.isDone ? IS_DONE_STATUS : IS_NOT_DONE_STATUS) + FILE_DELIMITER_WITH_SPACE + this.getDescription();
     }
 
     /**

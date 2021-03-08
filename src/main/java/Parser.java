@@ -2,6 +2,7 @@
  * Handles parsing of the user input and execution of the respective commands requested by user.
  */
 public class Parser {
+    private static final String ILLEGAL_CHAR_STR = "|";
     private static final String TODO_CMD = "todo";
     private static final String DEADLINE_CMD = "deadline";
     private static final String EVENT_CMD = "event";
@@ -49,14 +50,16 @@ public class Parser {
      */
     public void handleCommand(String command) {
         try {
-            if (command.startsWith(TODO_CMD)) {
+            if (command.contains(ILLEGAL_CHAR_STR)) {
+                illegalCharStrInCommand();
+            } else if (command.startsWith(TODO_CMD)) {
                 storeTodoTask(command);
             } else if (command.startsWith(DEADLINE_CMD)) {
                 storeDeadlineTask(command);
             } else if (command.startsWith(EVENT_CMD)) {
                 storeEventTask(command);
             } else if (command.startsWith(FIND_CMD)) {
-                findTask(command);
+                findTasks(command);
             } else if (command.equals(LIST_CMD)) {
                 displayStoredTasks();
             } else if (command.startsWith(DONE_CMD)) {
@@ -71,6 +74,10 @@ public class Parser {
         } catch (DukeException e) {
             commandErrorMsg(e);
         }
+    }
+
+    private void illegalCharStrInCommand() throws DukeException {
+        throw new DukeException("OOPS!!! The character '|' is not allowed as input! :-(");
     }
 
     private void storeTodoTask(String command) throws DukeException {
@@ -136,7 +143,7 @@ public class Parser {
         ui.printStoreTaskMsg(taskToStore, tasks.getTaskCount());
     }
 
-    private void findTask(String command) throws DukeException {
+    private void findTasks(String command) throws DukeException {
         if (command.equals(FIND_CMD)) {
             throw new DukeException("OOPS!!! The keyword for a find command cannot be empty.");
         }
@@ -206,7 +213,7 @@ public class Parser {
         if (!isValidTaskIndex) {
             throw new DukeException("OOPS!!! You entered an invalid task number!");
         }
-        Task deletedTask = tasks.deleteTask(indexOfTaskToDelete);
+        Task deletedTask = tasks.deleteTaskAt(indexOfTaskToDelete);
         storage.saveStoredTasksData();
         ui.printDeleteTaskMsg(deletedTask);
     }
@@ -228,7 +235,8 @@ public class Parser {
     /**
      * Indicates if the user wants to terminate the program.
      *
-     * @return a boolean indicating if the user had entered a "bye" command to terminate the program.
+     * @return a boolean indicating if the user had entered either a "bye" command or a CTRL+C or a CTRL+Z
+     * to terminate the program.
      */
     public boolean isExit() {
         return isExit;

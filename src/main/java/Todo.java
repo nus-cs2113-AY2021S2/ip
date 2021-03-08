@@ -1,4 +1,6 @@
 public class Todo extends Task {
+    private static final String TODO_SYMBOL = "T";
+
     public Todo(String description) {
         super(description);
     }
@@ -11,7 +13,7 @@ public class Todo extends Task {
      */
     @Override
     public String getSaveFormatString() {
-        return "T | " + super.getSaveFormatString();
+        return TODO_SYMBOL + FILE_DELIMITER_WITH_SPACE + super.getSaveFormatString();
     }
 
     /**
@@ -23,6 +25,6 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return String.format("[%s]%s", TODO_SYMBOL, super.toString());
     }
 }

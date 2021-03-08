@@ -9,6 +9,8 @@ import java.util.Scanner;
  * Handles the loading and storing of tasks data, from and to the hard disk.
  */
 public class Storage {
+    private static final String FILE_DELIMITER_REGEX = "\\|";
+    private static final int PRESERVE_EMPTY_STR_ON_SPLIT = -1;
     private static final String TODO_SYMBOL = "T";
     private static final String DEADLINE_SYMBOL = "D";
     private static final String EVENT_SYMBOL = "E";
@@ -62,7 +64,8 @@ public class Storage {
         int lineNum = 0;
         while (saveFileScanner.hasNextLine()) {
             lineNum++;
-            String[] currentTaskRecordInfoWords = saveFileScanner.nextLine().split("\\|");
+            String[] currentTaskRecordInfoWords = saveFileScanner.nextLine().split(FILE_DELIMITER_REGEX,
+                    PRESERVE_EMPTY_STR_ON_SPLIT);
             stripWhiteSpacesForEachWord(currentTaskRecordInfoWords);
             processCurrentTaskRecord(currentTaskRecordInfoWords, lineNum, storedTasks);
         }

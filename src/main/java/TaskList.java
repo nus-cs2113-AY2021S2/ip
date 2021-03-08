@@ -18,13 +18,13 @@ public class TaskList {
         return storedTasks.get(taskIndex);
     }
 
-    public Task deleteTask(int taskIndex) {
+    public Task deleteTaskAt(int taskIndex) {
         return storedTasks.remove(taskIndex);
     }
 
     public TaskList findTasksByKeyword(String keyword) {
         ArrayList<Task> tasksFound = new ArrayList<Task>();
-        for (Task currentTask: storedTasks) {
+        for (Task currentTask : storedTasks) {
             if (currentTask.toString().contains(keyword)) {
                 tasksFound.add(currentTask);
             }

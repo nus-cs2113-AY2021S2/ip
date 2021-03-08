@@ -1,4 +1,5 @@
 public class Deadline extends Task {
+    private static final String DEADLINE_SYMBOL = "D";
     private String by;
 
     public Deadline(String description, String by) {
@@ -14,7 +15,8 @@ public class Deadline extends Task {
      */
     @Override
     public String getSaveFormatString() {
-        return "D | " + super.getSaveFormatString() + " | " + this.by;
+        return DEADLINE_SYMBOL + FILE_DELIMITER_WITH_SPACE + super.getSaveFormatString() +
+                FILE_DELIMITER_WITH_SPACE + this.by;
     }
 
     /**
@@ -26,6 +28,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), this.by);
+        return String.format("[%s]%s (by: %s)", DEADLINE_SYMBOL, super.toString(), this.by);
     }
 }
