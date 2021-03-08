@@ -54,15 +54,6 @@ public class TaskList implements Serializable {
     }
 
     /**
-     * Obtains Task List as unmodifiable java List view to show to the user
-     *
-     * @return List view of Task list
-     */
-    public List<Task> asList() {
-        return Collections.unmodifiableList(taskList);
-    }
-
-    /**
      * Obtains formatted format of entire task list
      *
      * @return Formatted string of the User's task list
@@ -75,7 +66,6 @@ public class TaskList implements Serializable {
         }
         return sb.toString();
     }
-
 
     /**
      * Deletes a task from the task list using its index

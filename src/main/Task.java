@@ -28,10 +28,10 @@ public class Task implements Serializable {
     /**
      * Gets done status icon of Task.
      *
-     * @return tick if task is done, cross if task is not done
+     * @return Y if task is done, N if task is not done
      */
     public String getStatusIcon() {
-        return (isDone ? "[\u2713]" : "[\u2718]");
+        return (isDone ? "[Y]" : "[N]");
     }
 
     /**

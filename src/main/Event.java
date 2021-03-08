@@ -29,7 +29,7 @@ public class Event extends Task {
 
     @Override
     public String getStatusIcon() {
-        return (isDone ? "[E][\u2713]" : "[E][\u2718]"); //return tick or X symbols
+        return (isDone ? "[E][Y]" : "[E][N]");
     }
 
     /**

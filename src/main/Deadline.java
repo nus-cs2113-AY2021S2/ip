@@ -29,7 +29,7 @@ public class Deadline extends Task {
      */
     @Override
     public String getStatusIcon() {
-        return (isDone ? "[D][\u2713]" : "[D][\u2718]"); //return tick or X symbols
+        return (isDone ? "[D][Y]" : "[D][N]");
     }
 
     /**
