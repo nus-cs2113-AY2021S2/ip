@@ -187,7 +187,7 @@ event       | `event <task description> /at <YYYY-MM-DD>`      | `event song rec
 list        | `list`                                     | `list`
 done        | `done <task number>`                       | `done 1`
 delete      | `delete <task number>`                     | `delete 2`
-find        | `find <task number>`                       | `find 3`
+find        | `find <task name>`                       | `find book`
 bye         | `bye`                                      | `bye`
 
 
