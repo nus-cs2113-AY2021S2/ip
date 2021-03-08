@@ -36,7 +36,7 @@ Prerequisites: JDK 11
 ![Welcome message of Duke](DukeWelcomeMsg.jpg)
 
 ## 3. Features
-**NOTE:** The commands listed below must be entered as **lowercase** letters.
+**NOTE:** The commands listed below must be entered as **lowercase** letters and **must not contain '|' as input.**
 
 ### 3.1 Adding a Todo task: `todo`
 
@@ -125,6 +125,9 @@ Expected Output:
 Exits the Duke program.
 
 Format: `bye`
+
+*Note: Even though the usage of `CTRL+C` or `CTRL+Z` will execute the `bye` command, but **please do not do it** as it 
+is not guaranteed that your data will be saved properly.*
 
 Expected Output:
 
