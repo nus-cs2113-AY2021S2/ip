@@ -103,7 +103,11 @@ public class Parser {
      * @return prepared command
      */
     protected Command prepareFindTask(String args) {
-        return new FindTaskCommand(args);
+        if (args.isBlank()) {
+            return new IncorrectCommand(String.format(Ui.MESSAGE_INCORRECT_COMMAND,FindTaskCommand.MESSAGE_USAGE));
+        } else {
+            return new FindTaskCommand(args);
+        }
     }
 
     /**

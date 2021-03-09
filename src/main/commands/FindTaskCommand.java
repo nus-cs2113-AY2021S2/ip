@@ -15,7 +15,7 @@ public class FindTaskCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Find tasks in the task list that matches given keywords.\n"
-            + "Parameters: FIND\n"
+            + "Parameters: KEYWORDS\n"
             + "Example: " + COMMAND_WORD + " book";
 
     public static String MESSAGE_FIND_TASK_SUCCESS = "Task that contains: ";
