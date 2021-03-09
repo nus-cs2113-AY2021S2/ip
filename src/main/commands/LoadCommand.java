@@ -21,8 +21,7 @@ public class LoadCommand extends Command {
             taskList = Storage.loadData();
             return new CommandResult(MESSAGE_LOAD_TASK_LIST_SUCCESS, taskList);
         } catch (Storage.StorageOperationException e) {
-            e.printStackTrace();
-            return new CommandResult(Ui.MESSAGE_INVALID_COMMAND, taskList);
+            return new CommandResult(Ui.MESSAGE_LOAD_DATA_ERROR, taskList);
         }
     }
 }

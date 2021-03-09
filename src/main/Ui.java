@@ -45,6 +45,11 @@ public class Ui {
      */
     public static final String MESSAGE_INVALID_COMMAND = "Invalid command! Please try again!";
     /**
+     * Invalid Command Message
+     */
+    public static final String MESSAGE_LOAD_DATA_ERROR =
+            "Previously saved data not found or corrupted. Please start a new task list! ";
+    /**
      * Index invalid message.
      */
     public static final String MESSAGE_INVALID_TASK_INDEX = "The task index you have provided is invalid";
@@ -52,7 +57,8 @@ public class Ui {
      * A platform independent line separator.
      */
     protected static final String LS = System.lineSeparator();
-    protected static final String LINE_DIVIDER = "\t__________________________________________________________________________";
+    protected static final String LINE_DIVIDER =
+            "\t__________________________________________________________________________";
     private static PrintStream out;
     private final Scanner in;
 
