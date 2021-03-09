@@ -44,11 +44,11 @@ Expected outcome:
 Tasks left: 2`
 
 ### `event` - Creates a new task that start at a specific time and ends at a specific time.
-`event {task description} /by {YYYY-MM-DD HH.MM-HH.MM}`
+`event {task description} /at {YYYY-MM-DD HH.MM-HH.MM}`
 
 Example of usage:
 
-`event zoom meeting /by 2021-01-10 18.00-20.00`
+`event zoom meeting /at 2021-01-10 18.00-20.00`
 
 Expected outcome:
 
