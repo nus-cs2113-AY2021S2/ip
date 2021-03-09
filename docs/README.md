@@ -24,7 +24,7 @@ Example of usage:
 
 `-h`
 
-### `todo` - Adds a todo to the user's list
+### `todo` - Adds a "ToDo" to the user's task list
 
 The description should follow the keyword.
 
@@ -38,11 +38,11 @@ Expected outcome:
 
 `[T][✘] do homework`
 
-### `deadline` - Adds a deadline to the user's task list
+### `deadline` - Adds a "Deadline" to the user's task list
 
 The description should follow the keyword and the date and time should be after "/by".
 
-Date and time format: "yyyy-MM-dd HH:mm"
+Date and time format: "yyyy-MM-dd HH:mm". e.g. 2021-04-01 12:00
 
 Example of usage:
 
@@ -54,7 +54,7 @@ Expected outcome:
 
 `[D][✘] go to bed  (by: Feb 23 2021 22:00)`
 
-### `event` - Adds an event to the user's task list
+### `event` - Adds an "Event" to the user's task list
 
 The description should follow the keyword and the date and time should be after "/at".
 
@@ -70,7 +70,7 @@ Expected outcome:
 
 `[E][✘] sister's wedding  (at: Feb 23 2021 22:00)`
 
-### `done` - Mark task as done
+### `done` - Marks task as done
 
 Marks the task at the task index as done.
 
@@ -84,7 +84,7 @@ Expected outcome:
 
 `[T][✓] do homework`
 
-### `list` - Displays task list
+### `list` - Displays user's task list
 
 Example of usage:
 
@@ -100,7 +100,7 @@ Expected outcome:
 
 `3.[D][✘] go to bed  (by: Feb 23 2021 22:00)`
 
-### `delete` - Delete's a task from the list
+### `delete` - Deletes a task from the user's list
 
 Deletes the task at the task index provided.
 
