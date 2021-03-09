@@ -46,7 +46,7 @@ Prerequisites: JDK11, the latest version of IntelliJ
 
    i.e. `cd <FILEPATH>`
 
-5. Run Duke.jar file by using the command `java -jar Duke.jar`.
+5. Run Duke.jar file by using the command `java -jar Duke-[version].jar`.
 
 ### 2.2  Quick start on IntelliJ version 2020.3.2 (latest) and beyond
 1. Clone the latest version of the project to your local computer from [here](https://github.com/oscarlai1998/ip).
