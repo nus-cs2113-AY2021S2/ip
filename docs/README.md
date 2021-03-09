@@ -28,9 +28,11 @@ Example of usage:
 
 The description should follow the keyword.
 
+`todo <task description>`
+
 Example of usage:
 
-`todo <task description>`
+`todo do homework`
 
 Expected outcome:
 
@@ -42,11 +44,13 @@ Expected outcome:
 
 The description should follow the keyword and the date and time should be after "/by".
 
-Date and time format: "yyyy-MM-dd HH:mm". e.g. 2021-04-01 12:00
+Date and time format: "yyyy-MM-dd HH:mm"
+
+`deadline <task description> /by <date and time>`
 
 Example of usage:
 
-`deadline <task description> /by <date and time>`
+`deadline go to bed /by 2021-02-23 22:00`
 
 Expected outcome:
 
@@ -60,9 +64,11 @@ The description should follow the keyword and the date and time should be after 
 
 Date and time format: "yyyy-MM-dd HH:mm"
 
+`event <task description> /at <date and time>`
+
 Example of usage:
 
-`event <task description> /at <date and time>`
+`event sister's wedding /at 2021-02-23 22:00`
 
 Expected outcome:
 
@@ -74,9 +80,11 @@ Expected outcome:
 
 Marks the task at the task index as done.
 
+`done <task index>`
+
 Example of usage:
 
-`done <task index>`
+`done 1`
 
 Expected outcome:
 
@@ -104,9 +112,11 @@ Expected outcome:
 
 Deletes the task at the task index provided.
 
+`delete <task index>`
+
 Example of usage:
 
-`delete <task index>`
+`delete 1`
 
 Expected outcome:
 
@@ -117,6 +127,8 @@ Expected outcome:
 ### `Find` - Find a task by searching for a keyword
 
 Filters and shows all tasks with the keyword in their description.
+
+`find <keyword>`
 
 Example of usage:
 
