@@ -1,6 +1,6 @@
 # User Guide
 
-ip is a desktop app for managing tasks, optimized for use via a Command Line Interface (CLI). Duke is a versatile task manager and it is able to manage various types of tasks that you may want to keep track of.
+Duke is a desktop app for managing tasks, optimized for use via a Command Line Interface (CLI). Duke is a versatile task manager and it is able to manage various types of tasks that you may want to keep track of.
 
 1. [Quick start](#quick-start)
 2. [Features](#features)
@@ -18,18 +18,19 @@ ip is a desktop app for managing tasks, optimized for use via a Command Line Int
 ---
 
 ## Quick start
-1. Ensure that you have Java 11 or above installed in your computer.
-2. Download the latest version of [ip.jar] from here.
-3. Copy the file to the folder you want to use as the home folder for your ip.
-4. Double-click the file to start the app. A terminal console similar to the below should appear in a few seconds.    
-   ![Screenshot 2021-03-02 at 12 34 35 AM](https://user-images.githubusercontent.com/60348727/109528031-4185eb00-7aef-11eb-9f0b-270c2e2cae8e.png)
-5. Type the command in the command box and press Enter to execute it. e.g. typing help and pressing Enter will open the help window.  
-   Some example commands you can try:
-   * `list`: Lists all tasks.
-   * `deadline submit coding assignment /by Monday night`: Add a deadline to submit coding assignment by Monday night.
-   * `delete 1`: Deletes the first task shown in the current list.
-   * `bye`: Exits the app.
-6. Refer to the [Features](#features) below for details of each command.  
+1. Ensure that you have Java 11 or above installed in your computer.  
+2. Download the latest version of [ip.jar] from here.  
+3. Copy the file to the folder you want to use as the home folder for your ip.  
+4. Open a terminal console and navigate to the folder where the downloaded jar file was placed.  
+5. In your terminal, type `java -jar ip.jar` and press enter. The terminal should look similar to the image shown below.    
+   ![Screenshot 2021-03-02 at 12 34 35 AM](https://user-images.githubusercontent.com/60348727/109528031-4185eb00-7aef-11eb-9f0b-270c2e2cae8e.png)  
+6. Type the command in the command box and press Enter to execute it. e.g. typing help and pressing Enter will open the help window.  
+   Some example commands you can try: 
+   * `list`: Lists all tasks.  
+   * `deadline submit coding assignment /by Monday night`: Add a deadline to submit coding assignment by Monday night.  
+   * `delete 1`: Deletes the first task shown in the current list. 
+   * `bye`: Exits the app.  
+7. Refer to the [Features](#features) below for details of each command.  
 
 ---
 
