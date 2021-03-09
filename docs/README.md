@@ -44,6 +44,9 @@ command-line style user interface in order to communicate your intentions to Duk
 We have made removing tasks easily done - simply choose a number that appears next
 to the task you wish to have deleted, and voila!
 
+### Find
+
+Searching for a task is a piece of cake with Duke!
 
 ## Usage
 
@@ -79,6 +82,15 @@ have outstanding - this includes tasks that have been marked as done
 Example of usage:
 
 `list`
+
+### `find` - Shows all tasks related to search query
+
+This command allows you to search for a view any tasks based on a query!
+Please note that this feature is case-sensitive!
+
+Example of usage:
+
+`find blaster`
 
 ### `done { task number }` - Mark the desired task as complete
 
