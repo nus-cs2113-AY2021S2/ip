@@ -53,7 +53,7 @@ Example of usage:
 Expected outcome:
 
 `Got it. I've added this task:
-[E][ ] zoom meeting (by: JANUARY 10 2021, 06.00 PM - 08.00 PM)
+[E][ ] zoom meeting (at: JANUARY 10 2021, 06.00 PM - 08.00 PM)
 Tasks left: 3`
 
 ### `done` - Marks a task as done by its index number.
