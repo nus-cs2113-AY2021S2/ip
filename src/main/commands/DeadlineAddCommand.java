@@ -15,8 +15,8 @@ public class DeadlineAddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New Deadline added: %1$s";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a deadline task to your task list. \n"
-            + "Parameters: TASK at/ DATE\n"
-            + "Example: " + COMMAND_WORD + " Math Homework 1 at/ Tues 2pm";
+            + "Parameters: TASK by/ DATE\n"
+            + "Example: " + COMMAND_WORD + " Math Homework 1 by/ Tues 2pm";
 
     public final Deadline newDeadline;
 
