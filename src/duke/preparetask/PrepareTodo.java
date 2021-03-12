@@ -23,7 +23,6 @@ public class PrepareTodo extends Storage {
                 throw new DukeException();
             }
             String task = userInput.substring(5);
-
             tasks[taskCount] = new ToDos(task);
             taskArrayList.add(tasks[taskCount]);
             taskSentences.add("T" + "|" + tasks[taskCount].getDone() + "|" + task);  //add task in string format
