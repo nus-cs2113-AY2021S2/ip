@@ -1,0 +1,39 @@
+help
+todo team project
+deadline individual project /by 09/03/2022 2359
+event lecture /at 28/10/2022 1200
+list
+urgent
+done 2
+list
+urgent
+find project
+find oesinr
+find
+delete 2
+list
+done 1
+list
+todo
+todo      with a lot of whitespace         
+deadline
+deadline project but no by
+deadline project but invalid /by           
+deadline project whitespace         /by            02/06/2021 2300
+deadline project bad date         /by            02062021 2300
+deadline project bad date         /by            02 06 2021 2300
+deadline project bad date           /by             01/01/1234 1346
+event
+event meeting but no by
+event meeting but invalid /at           
+event meeting whitespace         /at            09/03/2021 0000
+invalid command test
+done
+done -2
+done 0
+done 21324
+delete
+delete -5
+delete 0
+delete 3498
+bye
