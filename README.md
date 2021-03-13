@@ -24,3 +24,50 @@ Prerequisites: JDK 11, update IntelliJ to the most recent version.
    | |_| | |_| |   <  __/
    |____/ \__,_|_|\_\___|
    ```
+1. Type the command in the command box and press Enter to execute it.
+1. Refer to the Features section below for details of the commands
+
+###Features
+#####Adding todo task: todo
+add a task of type "todo" to the task list
+
+> Format: todo [name_of_task]
+>
+ >Examples: todo read books --> Got it. I've added this task:
+                            [T][✘]read books
+#####Adding deadline task: deadline
+add a task of type "deadline" to the task list
+
+> Format: deadline [name_of_task] /by [time_to_complete]
+>
+  >Examples: deadline return books /by Thursday --> Got it. I've added this task:
+                             [D][✘]return books (by: Thursday)
+#####Adding event task: event
+add a task of type "event" to the task list
+>Format: event [name_of_task] /at [time_of_event]
+>
+  >Examples: event attend lecture /at Tonight
+>--> Got it. I've added this task:
+                             [E][✘]attend lecture (at: Tonight)
+#####Listing all the task: list
+>Format: list
+>
+>Examples: list --> 1. [T][✓]123
+                   2. [D][✓]ddl1  (by: Thursday)
+#####Mark a task as done: done
+mark a task of a specific index as done
+>Format: done INDEX
+#####Finding a task by keywords: find
+find all the tasks whose names contain the keyword
+>Format: find [keyword]
+>
+>Examples: find 12 --> Here are the matching tasks in your list:
+                           1. [T][✓]123
+#####Delete a task: delete
+delete a task of a specific index
+>Format: delete INDEX
+>
+>Examples: delete 1 --> Noted. I've removed this task: 
+           [T][✓]123
+#####End the project: bye
+>Format: bye
