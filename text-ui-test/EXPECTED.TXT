@@ -5,3 +5,46 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+	------------------------------------------
+	Hello there! I'm Duke.
+	What can I help you with?
+	__________________________________________
+
+	------------------------------------------
+	Got it. I've added this task: 
+	[T][ ] read book
+	Now you have 1 tasks in the list.
+	__________________________________________
+
+	------------------------------------------
+	Here are the tasks in your list: 
+	1.[T][ ] read book
+	__________________________________________
+
+	------------------------------------------
+	Got it. I've added this task: 
+	[D][ ] finish homeowork (by: Saturday)
+	Now you have 2 tasks in the list.
+	__________________________________________
+
+	------------------------------------------
+	Great job! I've marked this task as done: 
+	[T][X] read book
+	__________________________________________
+
+	------------------------------------------
+	Got it. I've added this task: 
+	[E][ ] dance (at: Thurday 6-8pm)
+	Now you have 3 tasks in the list.
+	__________________________________________
+
+	------------------------------------------
+	Here are the tasks in your list: 
+	1.[T][X] read book
+	2.[D][ ] finish homeowork (by: Saturday)
+	3.[E][ ] dance (at: Thurday 6-8pm)
+	__________________________________________
+
+	------------------------------------------
+	See you soon! Goodbye! ^.^
+	__________________________________________
