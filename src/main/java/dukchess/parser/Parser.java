@@ -35,7 +35,7 @@ public final class Parser {
         String commandArgs = getValueOrDefault(commandMatches.group(2), "");
         commandArgs = commandArgs.trim();
 
-        return new ArrayList<>(Arrays.asList(nextCommand, commandArgs)) ;
+        return new ArrayList<>(Arrays.asList(nextCommand, commandArgs));
     }
 
     /**
