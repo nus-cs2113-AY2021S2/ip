@@ -1,30 +1,26 @@
 /*
-* The Storage class deals with saving tasks into files and loading tasks from files.
-* */
+ * The Storage class deals with saving tasks into files and loading tasks from files.
+ * */
 package storage;
 
 import java.util.Scanner;
 
-import commands.Task;
-import commands.Todo;
-import commands.Deadline;
-import commands.Event;
-import exceptions.DukeException;
-import tasklist.TaskList;
-import ui.Ui;
 import parser.Parser;
-
-import java.util.ArrayList;
+import tasklist.TaskList;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 
-
-
 public class Storage {
+    private static Parser parser = new Parser();
 
+    /*
+     * The loadFile method loads the contents of a text file.
+     * If the text file "duke.txt" cannot be found, a FileNotFoundException is thrown
+     * @params tasks specifies the tasklist to which the tasks from the text file "duke.txt" are added to.
+     * */
     public static void loadFile(TaskList tasks) throws FileNotFoundException {
         File filePath = new File("duke.txt");
         if (!filePath.exists()) {
@@ -34,84 +30,28 @@ public class Storage {
         if (filePath.length() != 0) {
             while (s.hasNext()) {
                 String currentLine = s.nextLine();
-                String[] words = currentLine.split(" ");
-                if (words[0].equals("[T]")) {
-                    String description = "";
-                    int startingIndex = 2;
-                    if (words[1].equals("[")) {
-                        startingIndex = 3;
-                    }
-                    for (int i = startingIndex; i < words.length; i++) {
-                        description = description + words[i] + " ";
-                    }
-                    Todo todo = new Todo(description);
-                    tasks.addTask(todo);
-                    if (words[1].equals("[X]")) {
-                        tasks.markTaskAsDone(tasks.getTaskCount());
-                    }
-                    tasks.incrementTaskCount();
-
-                } else if (words[0].equals("[D]")) {
-                    String description = "";
-                    String by = "";
-                    boolean byFlag = false;
-                    int startingIndex = 2;
-                    if (words[1].equals("[")) {
-                        startingIndex = 3;
-                    }
-                    for (int i = startingIndex; i < words.length; i++) {
-                        if (words[i].equals("(by:")) {
-                            byFlag = true;
-                        } else if (!byFlag) {
-                            description = description + words[i] + " ";
-                        } else {
-                            if (i == words.length - 1) {
-                                by = by + words[i];
-                            } else {
-                                by = by + words[i] + " ";
-                            }
-                        }
-                    }
-                    by = by.replace(")", "");
-                    Deadline deadline = new Deadline(description, by);
-                    tasks.addTask(deadline);
-                    if (words[1].equals("[X]")) {
-                        tasks.markTaskAsDone(tasks.getTaskCount());
-                    }
-                    tasks.incrementTaskCount();
-                } else if (words[0].equals("[E]")) {
-                    String description = "";
-                    String at = "";
-                    boolean atFlag = false;
-                    int startingIndex = 2;
-                    if (words[1].equals("[")) {
-                        startingIndex = 3;
-                    }
-                    for (int i = startingIndex; i < words.length; i++) {
-                        if (words[i].equals("(at:")) {
-                            atFlag = true;
-                        } else if (!atFlag) {
-                            description = description + words[i] + " ";
-                        } else {
-                            if (i == words.length - 1) {
-                                at = at + words[i];
-                            } else {
-                                at = at + words[i] + " ";
-                            }
-                        }
-                    }
-                    at = at.replace(")", "");
-                    Event event = new Event(description, at);
-                    tasks.addTask(event);
-                    if (words[1].equals("[X]")) {
-                        tasks.markTaskAsDone(tasks.getTaskCount());
-                    }
-                    tasks.incrementTaskCount();
+                String[] inputs = currentLine.split(" ");
+                int startingIndex = 2;
+                if (inputs[1].equals("[")) {
+                    startingIndex = 3;
+                }
+                if (inputs[0].equals("[T]")) {
+                    parser.loadTodo(tasks, inputs, startingIndex);
+                } else if (inputs[0].equals("[D]")) {
+                    parser.loadDeadline(tasks, inputs, startingIndex);
+                } else if (inputs[0].equals("[E]")) {
+                    parser.loadEvent(tasks, inputs, startingIndex);
                 }
             }
         }
     }
 
+    /*
+     * The saveFile method saves the contents of the list into a text file "duke.txt".
+     * If an error is encountered when creating a new file "duke.txt", an IOException is thrown
+     * @params tasks specifies the tasklist from which the tasks to be written onto the text file "duke.txt"
+     * are retrieved from.
+     * */
     public static void saveFile(TaskList tasks) throws IOException {
         File filePath = new File("duke.txt");
         if (!filePath.exists()) {
@@ -121,7 +61,7 @@ public class Storage {
         }
         FileWriter fileWriter = new FileWriter(filePath);
         for (int i = 0; i < tasks.getTaskCount(); i++) {
-            String task = tasks.printCurrentTask(i).toString() + "\n";
+            String task = tasks.getCurrentTask(i).toString() + "\n";
             fileWriter.write(task);
         }
         fileWriter.close();
