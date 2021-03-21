@@ -64,10 +64,6 @@ Deletes a task in the list
 
 Expected outcome:
 ```text
-Got it. I've added this task: 
-[E][ ]  attend tutorial (at: Monday 1430)
-Now you have 5 tasks in the list.
-```text
 Noted. I've removed this task:
 [E][ ]  attend tutorial (at: Monday 1430)
 Now you have 4 tasks in the list.
