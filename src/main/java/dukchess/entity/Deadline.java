@@ -1,7 +1,7 @@
 package dukchess.entity;
 
 public class Deadline extends Task {
-    private String by;
+    private final String by;
 
     /**
      * Create a deadline using its description and its due date.

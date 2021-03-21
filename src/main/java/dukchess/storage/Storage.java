@@ -35,7 +35,7 @@ public final class Storage {
      * @throws IOException
      */
     public static ArrayList<Task> loadData() throws IOException {
-        ArrayList<Task> tasks = new ArrayList<Task>();
+        ArrayList<Task> tasks = new ArrayList<>();
 
         Storage.createStorageFileIfNotFound();
         File storageFile = new File(String.valueOf(storageFilePath));

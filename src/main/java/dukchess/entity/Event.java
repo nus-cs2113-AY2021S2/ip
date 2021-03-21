@@ -1,7 +1,7 @@
 package dukchess.entity;
 
 public class Event extends Task {
-    private String timeOfEvent;
+    private final String timeOfEvent;
 
     /**
      * Create an event based on its task description and when it is at.
