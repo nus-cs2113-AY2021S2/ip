@@ -3,6 +3,7 @@ package dukchess.parser;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import dukchess.controller.Controller;
 import dukchess.dao.TaskList;
 import dukchess.storage.Storage;
 import dukchess.ui.Ui;
@@ -12,7 +13,7 @@ public final class Parser {
     /**
      * Source: https://stackoverflow.com/questions/31412294/java-check-not-null-empty-else-assign-default-value
      * Get value of object, and if it is null, set it to the default value.
-     * @param defaultValue
+     * @param defaultValue - the default value to set the variable to
      * @return
      */
     private static <T> T getValueOrDefault(T value, T defaultValue) {
@@ -22,7 +23,7 @@ public final class Parser {
     /**
      * Executes a given raw input from stdin.
      * @param input - raw input string from stdin
-     * @return
+     * @return whether to exit from the interaction loop
      */
     public static boolean execute(String input) {
         boolean toExit = false;

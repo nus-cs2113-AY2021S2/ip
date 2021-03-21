@@ -22,7 +22,7 @@ public class Duke {
         }
     }
 
-    private void interactionLoop() {
+    private void runInteractionLoop() {
         Scanner in = new Scanner(System.in);
         String input = in.nextLine().toLowerCase(Locale.ROOT).trim();
         boolean toExit = Parser.execute(input);
@@ -39,7 +39,7 @@ public class Duke {
     public void run() {
         initializeDukchessData();
         Ui.printGreeting();
-        interactionLoop();
+        runInteractionLoop();
         Ui.sayGoodbye();
     }
 
