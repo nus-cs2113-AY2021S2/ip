@@ -25,14 +25,6 @@ public class Event extends Task {
         this.timeOfEvent = timeOfEvent;
     }
 
-    public String getTimeOfEvent() {
-        return timeOfEvent;
-    }
-
-    public void setTimeOfEvent(String timeOfEvent) {
-        this.timeOfEvent = timeOfEvent;
-    }
-
     @Override
     public String toString() {
         return "[E]" + super.toString() + String.format(" (at: %s)", timeOfEvent);
