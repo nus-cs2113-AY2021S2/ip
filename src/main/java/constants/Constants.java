@@ -8,7 +8,7 @@ public class Constants {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-    public static final String welcomeMessage = "    Hello from\n" + logo
+    public static final String welcomeMessage = "Hello from\n" + logo
             + border + "\n"
             + "Hello! I'm Duke\n"
             + "What can I do for you?\n"
