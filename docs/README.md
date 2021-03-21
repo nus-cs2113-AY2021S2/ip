@@ -78,4 +78,19 @@ Expected outcome:
 Here are the matching tasks in your list: 
 1.[D][ ]  submit assignment (by: Sunday 2359)
 ```
+### Terminate Program: `bye`
+Exit program
+
+#### Format: `bye`
+##### Example of Usage:
+Input:
+```text
+bye
+```
+
+Output:
+```text
+Bye. Hope to see you again soon!
+________________________________
+```
 
