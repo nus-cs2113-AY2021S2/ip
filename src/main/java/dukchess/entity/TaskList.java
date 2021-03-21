@@ -1,12 +1,8 @@
-package dukchess.dao;
+package dukchess.entity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import dukchess.entity.Deadline;
-import dukchess.entity.Event;
-import dukchess.entity.Task;
-import dukchess.entity.Todo;
 import dukchess.ui.Ui;
 
 public class TaskList {

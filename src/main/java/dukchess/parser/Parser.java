@@ -3,8 +3,7 @@ package dukchess.parser;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import dukchess.controller.Controller;
-import dukchess.dao.TaskList;
+import dukchess.entity.TaskList;
 import dukchess.storage.Storage;
 import dukchess.ui.Ui;
 

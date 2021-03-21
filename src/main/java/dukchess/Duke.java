@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Locale;
 import java.util.Scanner;
 
-import dukchess.dao.TaskList;
+import dukchess.entity.TaskList;
 import dukchess.parser.Parser;
 import dukchess.storage.Storage;
 import dukchess.ui.Ui;
