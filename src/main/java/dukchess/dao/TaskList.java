@@ -50,9 +50,13 @@ public class TaskList {
      * @param taskIdString - A task ID in integer form
      */
     public static void handleDoneTask(String taskIdString) {
-        int taskId = Integer.parseInt(taskIdString);
-        String taskStatusAdditionOutcome = setAddedTaskStatus(taskId, true);
-        System.out.println(taskStatusAdditionOutcome);
+        try {
+            int taskId = Integer.parseInt(taskIdString);
+            String taskStatusAdditionOutcome = setAddedTaskStatus(taskId, true);
+            System.out.println(taskStatusAdditionOutcome);
+        } catch (NumberFormatException e) {
+            Ui.printErrorMessage("The task ID provided must be a string.");
+        }
     }
 
     /**
