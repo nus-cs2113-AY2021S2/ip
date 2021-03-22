@@ -78,14 +78,25 @@ public class Storage {
      */
     public static void changeFile(int num) {
 
-            for (int i = 1; i <= num; i++) {
-                try {
-                    appendToFile(filePath, "[" + t[i].getStatusIcon() + "] " + t[i].getDescription() + "\n");
-                    //appendToFile("/Users/chenlingcui/Desktop/CS2113/duke.txt", "\n");
-                } catch (IOException e) {
-                    System.out.println("Something went wrong: " + e.getMessage());
-                }
+        if(num>=1){
+            try{
+                writeToFile(filePath,"[" + t[1].getStatusIcon() + "] " + t[1].getDescription() + "\n");
+            }catch (IOException e){
+                System.out.println("Something went wrong: " + e.getMessage());
             }
+
+        }
+
+        for (int i = 2; i <= num; i++) {
+            try {
+                    appendToFile(filePath, "[" + t[i].getStatusIcon() + "] " + t[i].getDescription() + "\n");
+            } catch (IOException e) {
+                    System.out.println("Something went wrong: " + e.getMessage());
+            }
+        }
+
+
+
 
 
 
