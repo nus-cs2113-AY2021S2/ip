@@ -1,7 +1,7 @@
 package dukchess.entity;
 
 public class Deadline extends Task {
-    private String by;
+    private final String by;
 
     /**
      * Create a deadline using its description and its due date.
@@ -21,14 +21,6 @@ public class Deadline extends Task {
      */
     public Deadline(String taskDescription, boolean isDone, String by) {
         super(taskDescription, isDone);
-        this.by = by;
-    }
-
-    public String getBy() {
-        return by;
-    }
-
-    public void setBy(String by) {
         this.by = by;
     }
 

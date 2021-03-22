@@ -1,7 +1,7 @@
 package dukchess.entity;
 
 public class Event extends Task {
-    private String timeOfEvent;
+    private final String timeOfEvent;
 
     /**
      * Create an event based on its task description and when it is at.
@@ -22,14 +22,6 @@ public class Event extends Task {
      */
     public Event(String taskDescription, boolean isDone, String timeOfEvent) {
         super(taskDescription, isDone);
-        this.timeOfEvent = timeOfEvent;
-    }
-
-    public String getTimeOfEvent() {
-        return timeOfEvent;
-    }
-
-    public void setTimeOfEvent(String timeOfEvent) {
         this.timeOfEvent = timeOfEvent;
     }
 

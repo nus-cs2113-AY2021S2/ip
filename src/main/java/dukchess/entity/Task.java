@@ -5,11 +5,8 @@ package dukchess.entity;
  */
 public class Task {
 
-    private String taskDescription;
+    private final String taskDescription;
     private boolean isDone;
-
-    public Task() {
-    }
 
     public Task(String taskDescription) {
         this.taskDescription = taskDescription;
@@ -27,14 +24,6 @@ public class Task {
 
     public String getTaskDescription() {
         return taskDescription;
-    }
-
-    public void setTaskDescription(String taskDescription) {
-        this.taskDescription = taskDescription;
-    }
-
-    public boolean isDone() {
-        return isDone;
     }
 
     public void setDone(boolean done) {
