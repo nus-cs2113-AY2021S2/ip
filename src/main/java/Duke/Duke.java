@@ -40,7 +40,7 @@ public class Duke {
     "| Add Deadline Task|deadline [task]/by [time]|deadline book update/by 2021-01-03|\n"+
     "| Add Event Task   |event [task]/at [time]   |event FOOD delivery/at 2021-01-01 |\n"+
     "| Add Todo Task    |todo [task]              |todo upgrade game                 |\n"+
-    "| Exit Program     |bye                      |bye                               |";
+    "| Exit and save    |bye                      |bye                               |";
     private static int count;
 
     public static List<Task> lists = new ArrayList<Task>();
