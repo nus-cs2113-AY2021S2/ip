@@ -1,20 +1,32 @@
-# User Guide
+# Duke project template
 
-## Features 
+This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
 
-### Feature 1 
-Description of feature.
+## Setting up in Intellij
 
-## Usage
+Prerequisites: JDK 11, update IntelliJ to the most recent version.
 
-### `Keyword` - Describe action
+### On IntelliJ version 2020.3.1 (latest) and beyond
 
-Describe action and its outcome.
+1. Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
+1. Import the project into IntelliJ as follows:
+   1. Click `Open`
+   1. Select the project directory, and click `OK`
+   1. If there are any further prompts, accept the defaults.
+1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).
+1. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the output below.
 
-Example of usage: 
+   ```
+   Hello from
+    ____        _        
+   |  _ \ _   _| | _____ 
+   | | | | | | | |/ / _ \
+   | |_| | |_| |   <  __/
+   |____/ \__,_|_|\_\___|
+   ```
 
-`keyword (optional arguments)`
 
-Expected outcome:
-
-`outcome`
+## Run and test the program
+1. Open a terminal
+2. Change directory path to the root of the package, which contains jar `ip.jar`
+3. Run command `java -jar ip.jar` in terminal
