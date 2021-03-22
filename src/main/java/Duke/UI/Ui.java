@@ -6,6 +6,7 @@ public class Ui {
     private static final String LOGO = " ____        _        \n" + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n" + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
     private static final String GREETING = "Hello! I'm Duke\n" + "What can I do for you?\n";
+    private static final String ERROR_MESSAGE = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
     private static final String HELP = "You can type:\n"+
     "| List             | list                    |list                              |\n"+
     "| Mark As Done     | done [index]            |done 1                            |\n"+
@@ -44,5 +45,11 @@ public class Ui {
         Ui.showToUser(HELP);
     }
 
+    /***
+     *  Show the error message with one divider
+     ***/
+    public static void showError(){
+        Ui.showToUser(ERROR_MESSAGE,DIVIDER);
+    }
 
 }
