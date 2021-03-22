@@ -95,11 +95,13 @@ public class Duke {
      * @param args
      */
     public static void main(String[] args) {
+
         show_welcome_msg();
         Command command;
         storage.loadFile();
         Scanner in = new Scanner(System.in);
         user_input = ui.getString(in);
+
 
 
         while (!parser.isBye(user_input)) {
@@ -124,18 +126,17 @@ public class Duke {
             try {
                 executeCommand(user_input, command);
             } catch (InvalidCommandException e) {
-                System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                System.out.println("Oh no! I'm sorry, but I don't know what that means, please try again! ");
             } catch (EmptyInputException e) {
-                System.out.println("OOPS!!! The description of a new task cannot be empty.");
+                System.out.println("The description of a new task cannot be empty.");
             } catch (StringIndexOutOfBoundsException e) {
-                System.out.println("OOPS!!! You need to add time for new Event or Deadline with '/at' or '/by'!!");
+                System.out.println(" Add time for new Event or Deadline with '/at' or '/by'!!");
             } catch (InvalidEventException e) {
-                System.out.println("OOPS!!! You need to add time for new Event with keyword '/at'!!");
+                System.out.println(" Add time for new Event with keyword '/at'!!");
             } catch (InvalidDeadlineException e) {
-                System.out.println("OOPS!!! You need to add time for new Deadline with keyword '/by'!!");
+                System.out.println("Add time for new Deadline with keyword '/by'!!");
             }
 
-            System.out.println(ui.num_of_goals);
             user_input = ui.getString(in);
             storage.changeFile(ui.num_of_goals);
         }
