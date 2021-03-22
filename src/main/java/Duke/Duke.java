@@ -169,46 +169,51 @@ public class Duke {
         Task taskInput;
         switch (commandType) {
         case COMMAND_TODO_WORD:
+            if (checkError(commandArgs)){
             taskInput = new TodoTask(commandArgs);
             lists.add(taskInput);
             showToUser("You have add "+commandType+" "+commandArgs);
-            count++;
+            count++;}
             return 1;
         case COMMAND_EVENT_WORD:
-            checkError(commandArgs);
+            if (checkError(commandArgs)){
             commandArgs = commandArgs.replace("/", "(");
             commandArgs = commandArgs.replace("at", "at:");
             commandArgs = commandArgs+")";
             taskInput = new EventTask(commandArgs);
             showToUser("You have add "+commandType+" "+commandArgs);
             lists.add(taskInput);
-            count++;
+            count++;}
             return 1;
         case COMMAND_DEADLINE_WORD:
+            if (checkError(commandArgs)){
             commandArgs = commandArgs.replace("/", "(");
             commandArgs = commandArgs.replace("by", "by:");
             commandArgs = commandArgs+")";
             taskInput = new DeadlineTask(commandArgs);
             showToUser("You have add "+commandType+" "+commandArgs);
             lists.add(taskInput);
-            count++;
+            count++;}
             return 1;
         case COMMAND_LIST_WORD:
             printList(0,count);
             return 1;
         case COMMAND_DONE_WORD:
+            if(checkError(commandArgs)){
             doneItem(commandArgs);
-            showToUser("You have "+commandType+" "+commandArgs);
+            showToUser("You have "+commandType+" "+commandArgs);}
             return 1;
         case COMMAND_END_WORD:
             endSystem();
             return 0;
         case COMMAND_DELETE_WORD:
+            if(checkError(commandArgs)){
             deleteItem(commandArgs);
-            showToUser("You have "+commandType+" "+commandArgs);
+            showToUser("You have "+commandType+" "+commandArgs);}
             return 1;
         case COMMAND_FIND_WORD:
-            findKeyword(commandArgs);
+            if(checkError(commandArgs)){
+            findKeyword(commandArgs);}
             return 1;
         case COMMAND_HELP_WORD:
             showHelpMenu();
@@ -272,7 +277,7 @@ public class Duke {
     /***
      *  End the system by write the list into the file and show bye message
      ***/
-    public static void endSystem(){
+    public static void endSystem (){
         writeFile(lists);
         showToUser(BYE);
     }
@@ -285,15 +290,19 @@ public class Duke {
     /***
      *  Show error message if error appear
      ***/
-    public static void checkError(String commandArgs){
+    public static boolean checkError (String commandArgs){
         if (commandArgs.isEmpty()){
-            showError();}
+            showError();
+            return false;
+        }else{
+            return true;
+        }
     }
 
     /***
      *  Print the keyword related item if found the keyword inside the content
      ***/
-    public static void findKeyword(String keyword){
+    public static void findKeyword (String keyword){
         for(int i = 0; i < count; ++i){
             if(lists.get(i).toString().contains(keyword)){
                 showToUser(lists.get(i).toString());
