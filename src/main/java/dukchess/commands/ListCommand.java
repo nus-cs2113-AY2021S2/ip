@@ -2,6 +2,9 @@ package dukchess.commands;
 
 import dukchess.ui.Ui;
 
+/**
+ * Command for listing all commands
+ */
 public final class ListCommand extends Command {
     /**
      * Prints out all added tasks

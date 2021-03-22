@@ -3,6 +3,9 @@ package dukchess.commands;
 import dukchess.entity.Deadline;
 import dukchess.ui.Ui;
 
+/**
+ * Command for adding a new deadline
+ */
 public class AddDeadlineCommand extends Command {
     private static String addDeadline(String description, String by) {
         Deadline newDeadline = new Deadline(description, by);

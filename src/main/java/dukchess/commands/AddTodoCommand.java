@@ -2,6 +2,9 @@ package dukchess.commands;
 
 import dukchess.entity.Todo;
 
+/**
+ * Command for adding a new Todo
+ */
 public class AddTodoCommand extends Command {
     private static String addTodo(String description) {
         Todo newTodo = new Todo(description);

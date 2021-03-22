@@ -3,6 +3,9 @@ package dukchess.commands;
 import dukchess.entity.Event;
 import dukchess.ui.Ui;
 
+/**
+ * Command for adding a new events
+ */
 public class AddEventCommand extends Command {
     private static String addEvent(String description, String at) {
         Event newEvent = new Event(description, at);

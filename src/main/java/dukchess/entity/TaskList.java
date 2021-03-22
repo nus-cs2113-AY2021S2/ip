@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A Data Access Object clasas that provides convenience methods for CRUD operations on the list of tasks in the app
+ * A Data Access Object class that provides convenience methods for CRUD operations on the list of tasks in the app
  */
 public class TaskList {
     private static ArrayList<Task> tasks;

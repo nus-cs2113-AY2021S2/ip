@@ -20,6 +20,9 @@ import dukchess.exceptions.InvalidCommandException;
 import dukchess.storage.Storage;
 import dukchess.ui.Ui;
 
+/**
+ * Delegates business logic from user to individual commands
+ */
 public class Controller {
 
     /**

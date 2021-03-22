@@ -4,6 +4,9 @@ import static dukchess.entity.TaskList.deleteTask;
 
 import dukchess.ui.Ui;
 
+/**
+ * Command for deleting a task
+ */
 public class DeleteCommand extends Command {
     /**
      * Performs input validation before deleting a task from the list of tasks.

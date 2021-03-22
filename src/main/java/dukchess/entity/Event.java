@@ -1,5 +1,8 @@
 package dukchess.entity;
 
+/**
+ * Abstraction of an event
+ */
 public class Event extends Task {
     private final String timeOfEvent;
 

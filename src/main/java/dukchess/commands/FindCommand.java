@@ -7,6 +7,9 @@ import java.util.List;
 import dukchess.entity.Task;
 import dukchess.ui.Ui;
 
+/**
+ * Command for finding tasks based on a keyword
+ */
 public class FindCommand extends Command {
     /**
      * Performs input validation before finding a task from the list of tasks.

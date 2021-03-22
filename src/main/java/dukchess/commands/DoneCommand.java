@@ -3,6 +3,9 @@ package dukchess.commands;
 import dukchess.entity.Task;
 import dukchess.ui.Ui;
 
+/**
+ * Command for setting a task to done
+ */
 public final class DoneCommand extends Command {
     private static String setAddedTaskStatus(int taskId, boolean isDone) {
         int actualTaskId = taskId - 1;

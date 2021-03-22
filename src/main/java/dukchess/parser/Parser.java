@@ -8,6 +8,9 @@ import java.util.regex.Pattern;
 
 import dukchess.exceptions.InvalidCommandException;
 
+/**
+ * Class that handles the parsing of user input into the command keyword and its corresponding arguments
+ */
 public final class Parser {
     public static final int NEXT_COMMAND_INDEX = 0;
     public static final int COMMAND_ARGS_INDEX = 1;

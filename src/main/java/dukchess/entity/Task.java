@@ -1,9 +1,10 @@
 package dukchess.entity;
 
 /**
- * An dukess.entity representing a Task.
+ * The base Task class for all other types of tasks in the application.
+ * Can also be a vanilla Task on its own.
  */
-public class Task {
+public abstract class Task {
 
     private final String taskDescription;
     private boolean isDone;

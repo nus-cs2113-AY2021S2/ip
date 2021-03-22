@@ -16,6 +16,9 @@ import dukchess.entity.Task;
 import dukchess.entity.Todo;
 import dukchess.ui.Ui;
 
+/**
+ * Class that handles loading and storage of data from disk
+ */
 public final class Storage {
     private static final Path storageFilePath = Path.of("data" + File.separator + "data.txt");
 

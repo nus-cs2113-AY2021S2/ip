@@ -1,5 +1,8 @@
 package dukchess.entity;
 
+/**
+ * Abstraction of a deadline
+ */
 public class Deadline extends Task {
     private final String by;
 

@@ -4,6 +4,9 @@ import java.util.List;
 
 import dukchess.entity.Task;
 
+/**
+ * Class that contains utilites for enhanced user greeting and instructions
+ */
 public final class Ui {
     /**
      * Utility for printing all unexpected exceptions
