@@ -9,9 +9,6 @@ import Duke.Parser.Parser;
 import Duke.Command.Command;
 
 public class Duke {
-    public static final String COMMAND_TODO_WORD = "todo";
-    public static final String COMMAND_EVENT_WORD = "event";
-    public static final String COMMAND_DEADLINE_WORD = "deadline";
     public static int count;
 
     public static List<Task> lists = new ArrayList<Task>();

@@ -11,6 +11,9 @@ import Duke.UI.Ui;
 
 public class Storage {
     private static final String FILE_LOCATION = "src/main/java/Duke/Storage/Duke.txt";
+    private static final String COMMAND_TODO_WORD = "todo";
+    private static final String COMMAND_EVENT_WORD = "event";
+    private static final String COMMAND_DEADLINE_WORD = "deadline";
 
     /***
      *  Before running the system, read the file which contains the information which user type inside before
@@ -29,21 +32,21 @@ public class Storage {
                     String type = parts[0];
                     String isDone = parts[1];
                     String task = parts[2];
-                    if (type.equals(Duke.COMMAND_EVENT_WORD)) {
+                    if (type.equals(COMMAND_EVENT_WORD)) {
                         Task taskInFile = new EventTask(task);
                         Duke.lists.add(taskInFile);
                         Ui.showToUser(taskInFile.toString());
                         if (isDone.equals("true")) {
                             taskInFile.markAsDone();
                         }
-                    }else if (type.equals(Duke.COMMAND_DEADLINE_WORD)) {
+                    }else if (type.equals(COMMAND_DEADLINE_WORD)) {
                         Task taskInFile = new DeadlineTask(task);
                         Duke.lists.add(taskInFile);
                         Ui.showToUser(taskInFile.toString());
                         if (isDone.equals("true")) {
                             taskInFile.markAsDone();
                         }
-                    }else if (type.equals(Duke.COMMAND_TODO_WORD)) {
+                    }else if (type.equals(COMMAND_TODO_WORD)) {
                         Task taskInFile = new TodoTask(task);
                         Duke.lists.add(taskInFile);
                         Ui.showToUser(taskInFile.toString());
