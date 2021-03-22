@@ -118,7 +118,9 @@ public class Duke {
         }
     }
 
-    /** Reieve users input*/
+
+    /** Recieve users input*/
+
     private static String getUserInput() {
         System.out.print("Enter command: ");
         String inputLine = SCANNER.nextLine();
@@ -236,7 +238,7 @@ public class Duke {
             showError();}
     }
 
-    /** Print the keyword related item if found*/
+    /** Print the keyword related item if found the keyword inside the content*/
     public static void findKeyword(String keyword){
         for(int i = 0; i < count; ++i){
             if(lists.get(i).toString().contains(keyword)){
@@ -244,5 +246,4 @@ public class Duke {
             }
         }
     }
-    
 }
