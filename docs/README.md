@@ -95,7 +95,7 @@ Format: `find /keyword`
 
 Example of usage:
 
-* `find task`
+* `find book`
 
 Expected outcome:
 
