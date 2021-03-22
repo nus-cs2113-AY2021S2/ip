@@ -30,8 +30,8 @@
 
 | Command | Format | Example |
 |:-------:|:----------:|:-------------------:|
-| List|`help`|`help`|
-| Mark As Done|`list`|`list`|
+| List|`list`|`list`|
+| Mark As Done|`done [index]`|`done 1`|
 | Delete Task|`delete [index]`|`delete 1`|
 | Done Task|`delete [index]`|`done 1`|
 | Find With Keyword|`keyword [keyword]`|`keyword football`|

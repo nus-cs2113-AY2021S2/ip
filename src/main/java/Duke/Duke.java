@@ -30,6 +30,17 @@ public class Duke {
     private static final String ERROR_MESSAGE = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
     private static final String FILE_LOCATION = "src/main/java/Duke/Duke.txt";
     private static final String COMMAND_FIND_WORD = "find";
+    private static final String COMMAND_HELP_WORD = "help";
+    private static final String HELP = "You can type:\n"+
+    "| List             | list                    |list                              |\n"+
+    "| Mark As Done     | done [index]            |done 1                            |\n"+
+    "| Delete Task      |delete [index]           |delete 1                          |\n"+
+    "| Done Task        |delete [index]`          |done 1                            |\n"+
+    "| Find With Keyword|keyword [keyword]        |keyword football                  |\n"+
+    "| Add Deadline Task|deadline [task]/by [time]|deadline book update/by 2021-01-03|\n"+
+    "| Add Event Task   |event [task]/at [time]   |event FOOD delivery/at 2021-01-01 |\n"+
+    "| Add Todo Task    |todo [task]              |todo upgrade game                 |\n"+
+    "| Exit Program     |bye                      |bye                               |";
     private static int count;
 
     public static List<Task> lists = new ArrayList<Task>();
@@ -95,7 +106,7 @@ public class Duke {
     }
 
     /***
-     *  Before end the system, write all thelist information inside the file
+     *  Before end the system, write all the list information inside the file
      ***/
     private static void writeFile(List<Task> lists) {
         try {
@@ -118,7 +129,7 @@ public class Duke {
     }
 
     /***
-     *  Show users infromation one line by one line
+     *  Show users information one line by one line
      ***/
     private static void showToUser(String... message) {
         for (String m : message) {
@@ -128,7 +139,7 @@ public class Duke {
 
 
     /***
-     *  Recieve users input
+     *  Receive users input
      ***/
 
     private static String getUserInput() {
@@ -160,6 +171,7 @@ public class Duke {
         case COMMAND_TODO_WORD:
             taskInput = new TodoTask(commandArgs);
             lists.add(taskInput);
+            showToUser("You have add "+commandType+" "+commandArgs);
             count++;
             return 1;
         case COMMAND_EVENT_WORD:
@@ -168,6 +180,7 @@ public class Duke {
             commandArgs = commandArgs.replace("at", "at:");
             commandArgs = commandArgs+")";
             taskInput = new EventTask(commandArgs);
+            showToUser("You have add "+commandType+" "+commandArgs);
             lists.add(taskInput);
             count++;
             return 1;
@@ -176,6 +189,7 @@ public class Duke {
             commandArgs = commandArgs.replace("by", "by:");
             commandArgs = commandArgs+")";
             taskInput = new DeadlineTask(commandArgs);
+            showToUser("You have add "+commandType+" "+commandArgs);
             lists.add(taskInput);
             count++;
             return 1;
@@ -184,15 +198,20 @@ public class Duke {
             return 1;
         case COMMAND_DONE_WORD:
             doneItem(commandArgs);
+            showToUser("You have "+commandType+" "+commandArgs);
             return 1;
         case COMMAND_END_WORD:
             endSystem();
             return 0;
         case COMMAND_DELETE_WORD:
             deleteItem(commandArgs);
+            showToUser("You have "+commandType+" "+commandArgs);
             return 1;
         case COMMAND_FIND_WORD:
             findKeyword(commandArgs);
+            return 1;
+        case COMMAND_HELP_WORD:
+            showHelpMenu();
             return 1;
         default:
             showError();
@@ -242,7 +261,7 @@ public class Duke {
      ***/
     public static void deleteItem(String deleteStringNumber){
         checkError(deleteStringNumber);
-        if(Integer.parseInt(deleteStringNumber)>=count){
+        if(Integer.parseInt(deleteStringNumber)>count){
             showError();
         } else{
             lists.remove(Integer.parseInt(deleteStringNumber)-1);
@@ -257,6 +276,11 @@ public class Duke {
         writeFile(lists);
         showToUser(BYE);
     }
+
+    public static void showHelpMenu(){
+        showToUser(HELP);
+    }
+
 
     /***
      *  Show error message if error appear
