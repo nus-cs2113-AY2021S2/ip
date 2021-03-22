@@ -33,8 +33,8 @@
 | List|`list`|`list`|
 | Mark As Done|`done [index]`|`done 1`|
 | Delete Task|`delete [index]`|`delete 1`|
-| Done Task|`delete [index]`|`done 1`|
-| Find With Keyword|`keyword [keyword]`|`keyword football`|
+| Done Task|`done [index]`|`done 1`|
+| Find With Keyword|`find [keyword]`|`find football`|
 | Add Deadline Task|`deadline [task]/by [time]`|`deadline book update/by 2021-01-03`|
 | Add Event Task|`event [task]/at [time]`|`event FOOD delivery/at 2021-01-01`|
 | Add Todo Task|`todo [task]`|`todo upgrade game`|
