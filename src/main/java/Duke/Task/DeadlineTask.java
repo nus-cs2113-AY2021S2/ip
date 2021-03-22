@@ -8,7 +8,6 @@ public class DeadlineTask extends Task {
 
     public DeadlineTask(String taskDetail) {
         super(taskDetail);
-        // TODO Auto-generated constructor stub
     }
 
     @Override
