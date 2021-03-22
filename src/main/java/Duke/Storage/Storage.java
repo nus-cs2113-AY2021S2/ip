@@ -10,17 +10,19 @@ import Duke.Task.*;
 import Duke.UI.Ui;
 
 public class Storage {
-    private static final String FILE_LOCATION = "src/main/java/Duke/Storage/Duke.txt";
+    private static final String FILE_NAME = "Duke.txt";
     private static final String COMMAND_TODO_WORD = "todo";
     private static final String COMMAND_EVENT_WORD = "event";
     private static final String COMMAND_DEADLINE_WORD = "deadline";
+    private static final String USER_DIRECTORY = "user.dir";
 
     /***
      *  Before running the system, read the file which contains the information which user type inside before
      ***/
     public static void readFile(List<Task> lists){
         try {
-            File file = new File(FILE_LOCATION);
+            String localDir = System.getProperty(USER_DIRECTORY); //get the path of current directory
+            File file = new File(localDir + File.separator + FILE_NAME);
             if (file.createNewFile()) {
                 System.out.println("A new file has been created!");
             } else {
@@ -67,7 +69,8 @@ public class Storage {
      ***/
     public static void writeFile(List<Task> lists) {
         try {
-            FileWriter writer = new FileWriter(FILE_LOCATION,false);
+            String localDir = System.getProperty(USER_DIRECTORY); //get the path of current directory
+            FileWriter writer = new FileWriter(localDir + File.separator + FILE_NAME,false);
             for (Task taskInList : lists) {
                 writer.write(taskInList.getTaskType() + "-" + taskInList.isDone() + "-" + taskInList.getTask());
                 writer.write("\r\n");
