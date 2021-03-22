@@ -47,7 +47,9 @@ public class Duke {
         }
     }
 
-    /** Before running the system, read the file which contains the information which user type inside before */
+    /***
+     *  Before running the system, read the file which contains the information which user type inside before
+     ***/
     private static void readFile(List<Task> lists){
         try {
             File file = new File(FILE_LOCATION);
@@ -92,7 +94,9 @@ public class Duke {
         }
     }
 
-    /** Before ened the system, write all thelist information inside the file*/
+    /***
+     *  Before end the system, write all thelist information inside the file
+     ***/
     private static void writeFile(List<Task> lists) {
         try {
             FileWriter writer = new FileWriter(FILE_LOCATION,false);
@@ -106,12 +110,16 @@ public class Duke {
         }
     }
 
-    /** Show welcome message*/
+    /***
+     *  Show welcome message
+     ***/
     private static void showWelcomeMessage() {
         showToUser(DIVIDER, DIVIDER, VERSION, LOGO, GREETING, DIVIDER);
     }
 
-    /** Show users infromation one line by one line*/
+    /***
+     *  Show users infromation one line by one line
+     ***/
     private static void showToUser(String... message) {
         for (String m : message) {
             System.out.println(m);
@@ -119,7 +127,9 @@ public class Duke {
     }
 
 
-    /** Recieve users input*/
+    /***
+     *  Recieve users input
+     ***/
 
     private static String getUserInput() {
         System.out.print("Enter command: ");
@@ -131,12 +141,16 @@ public class Duke {
         return inputLine;
     }
 
-    /** Repeat users command after user input*/
+    /***
+     *  Repeat users command after user input
+     ***/
     private static void echoUserCommand(String userCommand) {
         showToUser("[Command entered:" + userCommand + "]", DIVIDER);
     }
 
-    /** Run users input with a split of type and content*/
+    /***
+     *  Run users input with a split of type and content
+     ***/
     private static int executeCommand(String userInputString) {
         final String[] commandTypeAndParams = splitCommandWordAndArgs(userInputString);
         final String commandType = commandTypeAndParams[0];
@@ -186,13 +200,17 @@ public class Duke {
         }
     }
 
-    /** Trims the input of when there is a empty space*/
+    /***
+     *  Trims the input of when there is a empty space
+     ***/
     private static String[] splitCommandWordAndArgs(String rawUserInput) {
         final String[] split = rawUserInput.trim().split("\\s+", 2);
         return split.length == 2 ? split : new String[] { split[0] , "" }; // else case: no parameters
     }
 
-    /** Print the list when user type list*/
+    /***
+     *  Print the list when user type list
+     ***/
     public static void printList(int startIndex, int endIndex) {
         if (endIndex == 0) {
             System.out.println("List is empty :o\n" + "\n");
@@ -203,19 +221,25 @@ public class Duke {
         }
     }
 
-    /** Show the error message with one divider*/
+    /***
+     *  Show the error message with one divider
+     ***/
     public static void showError(){
         showToUser(ERROR_MESSAGE,DIVIDER);
     }
 
-    /** Mark the selected item as done*/
+    /***
+     *  Mark the selected item as done
+     ***/
     public static void doneItem(String doneStringNumber){
         checkError(doneStringNumber);
         int doneInteger = Integer.parseInt(doneStringNumber)-1;
         lists.get(doneInteger).markAsDone();
     }
 
-    /** Delete the selected item*/
+    /***
+     *  Delete the selected item
+     ***/
     public static void deleteItem(String deleteStringNumber){
         checkError(deleteStringNumber);
         if(Integer.parseInt(deleteStringNumber)>=count){
@@ -226,19 +250,25 @@ public class Duke {
         }
     }
 
-    /** End the system by write the list into the file and show bye message*/
+    /***
+     *  End the system by write the list into the file and show bye message
+     ***/
     public static void endSystem(){
         writeFile(lists);
         showToUser(BYE);
     }
 
-    /** Show error message if error appear*/
+    /***
+     *  Show error message if error appear
+     ***/
     public static void checkError(String commandArgs){
         if (commandArgs.isEmpty()){
             showError();}
     }
 
-    /** Print the keyword related item if found the keyword inside the content*/
+    /***
+     *  Print the keyword related item if found the keyword inside the content
+     ***/
     public static void findKeyword(String keyword){
         for(int i = 0; i < count; ++i){
             if(lists.get(i).toString().contains(keyword)){
