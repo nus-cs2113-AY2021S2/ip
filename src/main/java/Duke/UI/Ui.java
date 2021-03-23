@@ -8,15 +8,15 @@ public class Ui {
     private static final String GREETING = "Hello! I'm Duke\n" + "What can I do for you?\n";
     private static final String ERROR_MESSAGE = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
     private static final String HELP = "You can type:\n"+
-    "| List             | list                    |list                              |\n"+
-    "| Mark As Done     | done [index]            |done 1                            |\n"+
-    "| Delete Task      |delete [index]           |delete 1                          |\n"+
-    "| Done Task        |done [index]             |done 1                            |\n"+
-    "| Find With Keyword|find [keyword]           |find football                  |\n"+
-    "| Add Deadline Task|deadline [task]/by [time]|deadline book update/by 2021-01-03|\n"+
-    "| Add Event Task   |event [task]/at [time]   |event FOOD delivery/at 2021-01-01 |\n"+
-    "| Add Todo Task    |todo [task]              |todo upgrade game                 |\n"+
-    "| Exit and save    |bye                      |bye                               |";
+    "| List             | list                     | list                              |\n"+
+    "| Mark As Done     | done [index]             | done 1                            |\n"+
+    "| Delete Task      | delete [index]           | delete 1                          |\n"+
+    "| Done Task        | done [index]             | done 1                            |\n"+
+    "| Find With Keyword| find [keyword]           | find football                     |\n"+
+    "| Add Deadline Task| deadline [task]/by [time]| deadline book update/by 2021-01-03|\n"+
+    "| Add Event Task   | event [task]/at [time]   | event FOOD delivery/at 2021-01-01 |\n"+
+    "| Add Todo Task    | todo [task]              | todo upgrade game                 |\n"+
+    "| Exit and save    | bye                      | bye                               |";
 
     /***
      *  Show welcome message
