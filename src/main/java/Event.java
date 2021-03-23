@@ -3,6 +3,7 @@ public class Event extends Deadline{
         super(description, eventDuration);
     }
 
+
     public String toString(){
         return "Event : " + super.toBaseString() + " || Happening on: " + this.getDateTime();
     }

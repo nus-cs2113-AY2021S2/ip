@@ -34,7 +34,10 @@ public class Task {
     }
 
     public static int getNumberOfRemainingTasks(){
-        return taskNumber - numberOfCompletedTasks;
+        if (taskNumber - numberOfCompletedTasks > 0) {
+            return taskNumber - numberOfCompletedTasks;
+        }
+        else {return 0;}
     }
 
     public static ArrayList<Task> getTaskList(){
@@ -46,18 +49,31 @@ public class Task {
         taskNumber++;
     }
 
-    public static void completeTask(int taskNumber) {
-        tasks.get(taskNumber).markAsDone();
-        completedTaskCounter = taskNumber;
-        numberOfCompletedTasks++;
+    public static boolean completeTask(int taskNumber) {
+        if (tasks.get(taskNumber).isDone == true){
+            System.out.println("This task has already been marked as done!");
+            return false;
+        }
+        else {
+            tasks.get(taskNumber).markAsDone();
+            newestTask = tasks.get(taskNumber);
+            completedTaskCounter = taskNumber;
+            numberOfCompletedTasks++;
+            return true;
+        }
     }
 
     public static Task getLatestTask(boolean adjustedTask) {
         if (adjustedTask) {
-            return newestTask;
-        } else {
+            //return newestTask;
             return tasks.get(getTaskNumber()-1);
+        } else {
+            return newestTask;
         }
+    }
+
+    public static Task getAddedTask(){
+        return tasks.get(getTaskNumber()-1);
     }
 
     @Override
@@ -67,11 +83,32 @@ public class Task {
 
     public static void deleteTask(int task){
         newestTask = tasks.get(task);
-        if (tasks.get(task).isDone) {
-            numberOfCompletedTasks--;
-        }
+//        if (tasks.get(task).isDone) {
+//            numberOfCompletedTasks--;
+//        }
         tasks.remove(task);
         System.out.println("The deleted task is : " + newestTask);
         taskNumber--;
+    }
+
+    public static void increaseNumberOfCompletedTasks(){
+        numberOfCompletedTasks++;
+    }
+
+    public boolean getIsDone(){
+        return isDone;
+    }
+
+    public static void find(String query) {
+        ArrayList<Task> matches = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.getTaskDescription().contains(query)) {
+                matches.add(task);
+            }
+        }
+        for (int i = 0; i < matches.size(); i++) {
+            int displayedNumber = i + 1;
+            System.out.println(displayedNumber + ". " + matches.get(i));
+        }
     }
 }

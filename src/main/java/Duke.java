@@ -1,7 +1,17 @@
 import java.util.Scanner;
+import java.io.IOException;
 
 public class Duke {
     public static void main(String[] args) {
+        System.out.println("Searching for saved data...");
+        try {
+            Storage.readFile();
+            System.out.println("Loading saved data...");
+        } catch (IOException e) {
+            System.out.println("No data found - please ensure that a directory " +
+                    "called 'data' is in your project directory");
+        }
+
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
