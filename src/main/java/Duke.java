@@ -6,12 +6,20 @@ public class Duke {
     private final Storage storage;
     private final TaskList inputTasks;
 
+    /**
+     * Duke Constructor
+     */
     public Duke() {
         ui = new Ui();
         storage = new Storage("./duke.txt");
         inputTasks = new TaskList(storage.readFile("./duke.txt"));
     }
 
+    /**
+     * getting input from user
+     * @param input the input string from user
+     * @return ui from different commands
+     */
     public String getInput(String input) {
         try {
             Command c = Parser.parse(input);

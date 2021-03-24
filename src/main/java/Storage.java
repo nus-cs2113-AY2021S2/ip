@@ -4,13 +4,25 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * storage of list of taks into a file
+ */
 public class Storage {
+
     public static String filePath;
 
+    /**
+     * Storage Constructor
+     * @param filePath the location of file stored
+     */
     public Storage(String filePath){
         this.filePath = filePath;
     }
 
+    /**
+     * adding task to file
+     * @param lst tasks to be added to file
+     */
     public static void writeToFile(TaskList lst){
         try{
             FileWriter fw = new FileWriter(filePath);
@@ -23,7 +35,11 @@ public class Storage {
         }
     }
 
-
+    /**
+     * reads the existing tasks in file
+     * @param filePath location of file
+     * @return the existing tasks in file
+     */
     static ArrayList<Task> readFile(String filePath){
         ArrayList<Task> tasks = new ArrayList<>();
         try{

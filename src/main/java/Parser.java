@@ -1,8 +1,16 @@
-
 import java.time.LocalDate;
 
+/**
+ * parse input as commands
+ */
 public class Parser {
 
+    /**
+     * parese inputs as different commands
+     * @param input input by user
+     * @return returns a command
+     * @throws DukeException exceptions found in the input
+     */
     public static Command parse(String input) throws DukeException{
         String[] commandline = input.split(" ");
         Command command;
