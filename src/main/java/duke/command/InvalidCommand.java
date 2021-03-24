@@ -1,7 +1,7 @@
 package duke.command;
 
 import duke.exception.EmptyDescriptionException;
-import duke.exception.EmptyStringException;
+import duke.exception.InvalidInputException;
 import duke.exception.UnmatchedListException;
 
 /**
@@ -36,7 +36,7 @@ public class InvalidCommand extends Command {
             message = "☹ OOPS!!! The description of " + commandWord + " can only be numeric.\n";
         } else if (error instanceof IndexOutOfBoundsException) {
             message = "☹ OOPS!!! The number " + description + " is not in the list.\n";
-        } else if (error instanceof EmptyStringException) {
+        } else if (error instanceof InvalidInputException) {
             message = "☹ OOPS!!! The description of " + commandWord + " must comes with a date.\n";
         } else if (error instanceof EmptyDescriptionException) {
             message = "☹ OOPS!!! The description of " + commandWord + " cannot be empty.\n";

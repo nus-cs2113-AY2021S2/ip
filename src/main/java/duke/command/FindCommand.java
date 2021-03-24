@@ -55,7 +55,7 @@ public class FindCommand extends Command{
         StringBuilder find = new StringBuilder("Here are the matching tasks in your list:\n");
         int count = COUNTER_START_VALUE;
         for (int i = 0; i < tasks.size(); ++i) {
-            if (isFound(i,description)) {
+            if (isFound(i, description)) {
                 find.append(count).append(".").append(tasks.get(i)).append("\n");
                 ++count;
                 setIsMatch();

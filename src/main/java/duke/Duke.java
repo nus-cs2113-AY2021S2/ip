@@ -2,6 +2,11 @@ package duke;
 
 import duke.command.Command;
 import duke.command.CommandResult;
+import duke.exception.InvalidFileFormatException;
+import duke.utilities.Parser;
+import duke.utilities.Storage;
+import duke.utilities.TaskList;
+import duke.utilities.Ui;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -41,6 +46,9 @@ public class Duke {
                 ui.showFailToCreateDirectory();
             }
             tasks = new TaskList();
+        } catch (InvalidFileFormatException invalidFileFormatException) {
+            tasks = new TaskList();
+            ui.showExceptionMessage(invalidFileFormatException);
         }
      }
 
@@ -61,17 +69,12 @@ public class Duke {
                 command.setTasks(tasks);
                 CommandResult result = command.execute();
                 ui.showMessage(result.messageToUser);
+                storage.save(tasks);
                 isExit = command.isExit();
             } catch (Exception exception) {
-                ui.showErrorMessage();
+                ui.showExceptionMessage(exception);
             }
         }
         ui.showExitMessage();
-        try {
-            storage.save(tasks);
-            ui.showSaveSuccess();
-        } catch (IOException ioException) {
-            ui.showSaveFailed();
-        }
     }
 }

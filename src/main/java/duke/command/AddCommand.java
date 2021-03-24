@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.Parser;
-import duke.TaskList;
+import duke.utilities.Parser;
+import duke.utilities.TaskList;
 import duke.exception.EmptyDescriptionException;
-import duke.exception.EmptyStringException;
+import duke.exception.InvalidInputException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -50,16 +50,16 @@ public class AddCommand extends Command {
                 Deadline deadline = new Parser().parseDeadline(description);
                 addDeadline(deadline);
                 return new CommandResult(addMessage(deadline));
-            } catch (EmptyStringException emptyStringException) {
-                return new InvalidCommand(commandWord, description, emptyStringException).execute();
+            } catch (Exception exception) {
+                return new InvalidCommand(commandWord, description, exception).execute();
             }
         case EVENT_COMMAND:
             try {
                 Event event = new Parser().parseEvent(description);
                 addEvent(event);
                 return new CommandResult(addMessage(event));
-            } catch (EmptyStringException emptyStringException) {
-                return new InvalidCommand(commandWord, description, emptyStringException).execute();
+            } catch (InvalidInputException | EmptyDescriptionException invalidInputException) {
+                return new InvalidCommand(commandWord, description, invalidInputException).execute();
              }
         }
         return null;

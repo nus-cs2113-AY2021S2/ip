@@ -14,7 +14,9 @@ find
 find abcdefg
 delete fun
 delete 10
-list
+list 200
+event /at asd
+deadline /by asd
 delete 3
 list
 blah blah
