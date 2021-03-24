@@ -17,29 +17,35 @@ public class Parser {
                 ui.printTask(new Todo(t), tasks.size());
             }
         } else if (input.contains("deadline")) {
-            int dividerPosition = input.indexOf(" ");
-            int dividerPosition_1 = input.indexOf("/");
-            String d = input.substring(dividerPosition + 1, dividerPosition_1);
-            String by = input.substring(dividerPosition_1 + 4);
-            if (dividerPosition == -1 || d.equals("") || !input.contains(" ")) {
+            try {
+                int dividerPosition = input.indexOf(" ");
+                int dividerPosition_1 = input.indexOf("/");
+                String d = input.substring(dividerPosition + 1, dividerPosition_1);
+                String by = input.substring(dividerPosition_1 + 4);
+                if (dividerPosition == -1 || d.equals("") || !input.contains(" ")) {
+                    ui.printErrorMessage();
+                } else {
+                    tasks.add(new Deadline(d, by));
+                    ui.printTask(new Deadline(d, by), tasks.size());
+                }
+            } catch (StringIndexOutOfBoundsException e) {
                 ui.printErrorMessage();
-            } else {
-                tasks.add(new Deadline(d, by));
-                ui.printTask(new Deadline(d, by), tasks.size());
             }
-
         } else if (input.contains("event")) {
-            int dividerPosition = input.indexOf(" ");
-            int dividerPosition_1 = input.indexOf("/");
-            String e = input.substring(dividerPosition + 1, dividerPosition_1);
-            String at = input.substring(dividerPosition_1 + 4);
-            if (dividerPosition == -1 || e.equals("") || !input.contains(" ")) {
+            try {
+                int dividerPosition = input.indexOf(" ");
+                int dividerPosition_1 = input.indexOf("/");
+                String e = input.substring(dividerPosition + 1, dividerPosition_1);
+                String at = input.substring(dividerPosition_1 + 4);
+                if (dividerPosition == -1 || e.equals("") || !input.contains(" ")) {
+                    ui.printErrorMessage();
+                } else {
+                    tasks.add(new Event(e, at));
+                    ui.printTask(new Event(e, at), tasks.size());
+                }
+            } catch (StringIndexOutOfBoundsException e) {
                 ui.printErrorMessage();
-            } else {
-                tasks.add(new Event(e, at));
-                ui.printTask(new Event(e, at), tasks.size());
             }
-
         } else if (input.equals("list")) {
             if (tasks.size() == 0) {
                 ui.printZeroTask();

@@ -1,2 +1,2 @@
-T |1 |read a book
-E |0 |attend lecture |Monday
+T |0 |eat
+E |0 |eat ice cream  |sunday 12pm
