@@ -1,5 +1,6 @@
-package duke;
+package duke.utilities;
 
+import duke.exception.InvalidFileFormatException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -26,6 +27,8 @@ public class Storage {
     private static final int DONE_INDEX = 1;
     private static final int DESCRIPTION_INDEX = 2;
     private static final int DATE_INDEX = 3;
+    public static final int TODO_FORMAT = 3;
+    public static final int EVENT_DEADLINE_FORMAT = 4;
 
     private static final String IS_DONE = "1";
     private static final String EVENT_TYPE = "[E]";
@@ -43,12 +46,12 @@ public class Storage {
     }
 
     /**
-     * Returns a list of task load from a specific file location.
+     * Load the saved data from a specific file location into TaskList.
      *
      * @return a list of task.
      * @throws FileNotFoundException if data is not found in the file path.
      */
-    public ArrayList<Task> load() throws FileNotFoundException {
+    public ArrayList<Task> load() throws FileNotFoundException, InvalidFileFormatException {
         ArrayList<Task> tasksData = new ArrayList<>();
         readFileContents(tasksData);
         return tasksData;
@@ -79,7 +82,8 @@ public class Storage {
         }
     }
 
-    private void readFileContents(ArrayList<Task> tasksData) throws FileNotFoundException {
+    private void readFileContents(ArrayList<Task> tasksData) throws FileNotFoundException,
+            InvalidFileFormatException {
         File file = new File(String.valueOf(filePath));
         Scanner scanner = new Scanner(file);
         while(scanner.hasNext()){
@@ -88,20 +92,29 @@ public class Storage {
         }
     }
 
-    private void addFileContents(String data, ArrayList<Task> tasksData) {
+    private void addFileContents(String data, ArrayList<Task> tasksData) throws InvalidFileFormatException {
         String[] contents  = splitContent(data);
+        if (contents.length < TODO_FORMAT || contents.length > EVENT_DEADLINE_FORMAT) {
+            throw new InvalidFileFormatException();
+        }
         String taskType = contents[TASK_TYPE_INDEX].trim();
         String isDone = contents[DONE_INDEX].trim();
         String description = contents[DESCRIPTION_INDEX].trim();
 
         switch(taskType) {
         case EVENT_TYPE:
+            if (contents.length != EVENT_DEADLINE_FORMAT) {
+                throw  new InvalidFileFormatException();
+            }
             String at = contents[DATE_INDEX].trim();
             Task event = new Event(description, at);
             checkIsDone(isDone, event);
             tasksData.add(event);
             break;
         case DEADLINE_TYPE:
+            if (contents.length != EVENT_DEADLINE_FORMAT) {
+                throw  new InvalidFileFormatException();
+            }
             String by = contents[DATE_INDEX].trim();
             Task deadline = new Deadline(description, by);
             checkIsDone(isDone, deadline);

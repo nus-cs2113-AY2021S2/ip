@@ -21,10 +21,18 @@ public class Task {
         return (isDone ? "X" : " "); //return space or tick symbols
     }
 
+    /**
+     * Mark the task as completed.
+     */
     public void setAsDone() {
         isDone = true;
     }
 
+    /**
+     * Returns the description of the task.
+     *
+     * @return a description of the task
+     */
     public String getDescription() {
         return description;
     }
@@ -33,6 +41,11 @@ public class Task {
         return taskType + "[" + getStatusIcon() + "] " + description;
     }
 
+    /**
+     * Return the specific type of the task.
+     *
+     * @return the type of the task
+     */
     public String getTaskType() {
         return taskType;
     }
@@ -41,6 +54,11 @@ public class Task {
         return null;
     }
 
+    /**
+     * Check if a task has been done.
+     *
+     * @return true if the task has been done
+     */
     public int getIsDone() {
         return isDone ? TRUE : FALSE ;
     }

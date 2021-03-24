@@ -1,4 +1,4 @@
-package duke;
+package duke.utilities;
 
 import duke.command.AddCommand;
 import duke.command.Command;
@@ -10,7 +10,7 @@ import duke.command.ListCommand;
 import duke.command.InvalidCommand;
 
 import duke.exception.EmptyDescriptionException;
-import duke.exception.EmptyStringException;
+import duke.exception.InvalidInputException;
 
 import duke.task.Deadline;
 import duke.task.Event;
@@ -46,16 +46,16 @@ public class Parser {
      * @param userInput user input string.
      * @param tasks a list of task store together.
      * @return the command based on the user input.
-     * @throws EmptyStringException if the user input an empty string.
+     * @throws InvalidInputException if the user input an empty string.
      */
-    public Command parseInput(String userInput, TaskList tasks) throws EmptyStringException {
+    public Command parseInput(String userInput, TaskList tasks) throws InvalidInputException {
 
         String[] words = userInput.trim().split("\\s+", SPLIT_SIZE);
         String commandWord = words[FIRST_WORD].toLowerCase();
         String description = userInput.replaceFirst(commandWord, EMPTY_STRING).trim();
 
-        if (words.length == EMPTY_WORD_SIZE) {
-            throw new EmptyStringException();
+        if(words.length == EMPTY_WORD_SIZE) {
+            throw new InvalidInputException();
         }
 
         switch (commandWord) {
@@ -80,11 +80,17 @@ public class Parser {
                 return new InvalidCommand(commandWord, description, emptyDescriptionException);
             }
         case LIST_COMMAND:
+            if (words.length > ONE_WORD_SIZE) {
+                throw new InvalidInputException();
+            }
             return new ListCommand();
         case EXIT_COMMAND:
+            if (words.length > ONE_WORD_SIZE) {
+                throw new InvalidInputException();
+            }
             return new ExitCommand();
         default:
-            throw new EmptyStringException();
+            throw new InvalidInputException();
         }
     }
 
@@ -121,17 +127,23 @@ public class Parser {
      *
      * @param description the description of string based on user input.
      * @return the task in deadline format.
-     * @throws EmptyStringException if the description does not contain the required regex.
+     * @throws InvalidInputException if the description does not contain the required regex.
+     * @throws EmptyDescriptionException if the description is an empty string.
      */
-    public Deadline parseDeadline(String description) throws EmptyStringException {
+    public Deadline parseDeadline(String description) throws InvalidInputException, EmptyDescriptionException {
         String[] words = description.trim().split("/by", SPLIT_SIZE);
         String extractedDescription = words[FIRST_WORD].trim();
-
+        if (extractedDescription.equals(EMPTY_STRING)) {
+            throw new EmptyDescriptionException();
+        }
         if (words.length == ONE_WORD_SIZE) {
-            throw new EmptyStringException();
+            throw new InvalidInputException();
+        }
+        String date = words[SECOND_WORD].trim();
+        if (date.equals(EMPTY_STRING)) {
+            throw new InvalidInputException();
         }
 
-        String date = words[SECOND_WORD].trim();
         return new Deadline(extractedDescription,date);
     }
 
@@ -140,17 +152,25 @@ public class Parser {
      *
      * @param description the description of string based on user input.
      * @return the task in event format.
-     * @throws EmptyStringException if the description does not contain the required regex.
+     * @throws InvalidInputException if the description does not contain the required regex.
+     * @throws EmptyDescriptionException if the description is an empty string.
      */
-    public Event parseEvent(String description) throws EmptyStringException {
+    public Event parseEvent(String description) throws InvalidInputException, EmptyDescriptionException {
         String[] words = description.trim().split("/at", SPLIT_SIZE);
         String extractedDescription = words[FIRST_WORD].trim();
 
-        if (words.length == ONE_WORD_SIZE) {
-            throw new EmptyStringException();
+        if (extractedDescription.equals(EMPTY_STRING)) {
+            throw new EmptyDescriptionException();
         }
 
+        if (words.length == ONE_WORD_SIZE) {
+            throw new InvalidInputException();
+        }
         String date = words[SECOND_WORD].trim();
+        if (date.equals(EMPTY_STRING)) {
+            throw new InvalidInputException();
+        }
+
         return new Event(extractedDescription,date);
     }
 }

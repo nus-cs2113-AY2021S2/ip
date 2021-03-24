@@ -1,5 +1,6 @@
-package duke;
+package duke.utilities;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
 
@@ -29,10 +30,18 @@ public class Ui {
     }
     //@@author
 
+    /**
+     * Retrieves the next line of input entered by the user.
+     *
+     * @return string of the next input
+     */
     public String getUserInput() {
         return input.nextLine();
     }
 
+    /**
+     * Print to user a welcome message.
+     */
     public void showWelcomeMessage() {
         System.out.print(LINE_PREFIX + BORDER
                 + LINE_PREFIX + "Welcome to Task Tracker!\n"
@@ -58,6 +67,9 @@ public class Ui {
     }
     //@@author
 
+    /**
+     * Print error loading message to user when the required file does not exist.
+     */
     public void showLoadError() {
         System.out.print(LINE_PREFIX +BORDER
                 + LINE_PREFIX + "System unable to find directory..." + "\n"
@@ -65,6 +77,9 @@ public class Ui {
                 + LINE_PREFIX + BORDER);
     }
 
+    /**
+     * Print success loading message to user when the required file exist.
+     */
     public void showLoadSuccess() {
         System.out.print(LINE_PREFIX +BORDER
                 + LINE_PREFIX + "System able to find directory..." + "\n"
@@ -72,41 +87,54 @@ public class Ui {
                 + LINE_PREFIX + BORDER);
     }
 
-    public void showErrorMessage() {
-        String errorMessage = "☹ OOPS!!! Sorry I don't understand what you mean.\n";
-        showMessage(errorMessage);
+    /**
+     * Print the exception message when the program encounter an exception.
+     *
+     * @param exception the exception encountered
+     */
+    public void showExceptionMessage(Exception exception) {
+        if (exception instanceof IOException) {
+            showSaveFailedMessage();
+        } else {
+            showMessage(exception.getMessage());
+        }
     }
 
+    /**
+     * Print exit message to give acknowledgement to user to end the program.
+     */
     public void showExitMessage() {
         System.out.print(LINE_PREFIX +BORDER
                 + LINE_PREFIX + "Good Bye. Hope to see you again soon!\n"
                 + LINE_PREFIX + BORDER);
     }
 
-    public void showSaveSuccess() {
-        System.out.print(LINE_PREFIX +BORDER
-                + LINE_PREFIX + "Data has been saved.\n"
-                + LINE_PREFIX + BORDER);
-    }
-
-    public void showSaveFailed() {
+    /**
+     * Print failure message in saving the data into the specified file.
+     */
+    public void showSaveFailedMessage() {
         System.out.print(LINE_PREFIX +BORDER
                 + LINE_PREFIX + "Save failed. System unable to find directory\n"
                 + LINE_PREFIX + BORDER);
     }
 
+    /**
+     * Print success message in creating the directory.
+     */
     public void showCreateDirectorySuccess() {
         System.out.print(LINE_PREFIX +BORDER
                 + LINE_PREFIX + "Creating new directory...\n"
                 + LINE_PREFIX + "Directory created successfully.\n"
                 + LINE_PREFIX + BORDER);
     }
+
+    /**
+     * Print failure message in creating the directory.
+     */
     public void showFailToCreateDirectory() {
         System.out.print(LINE_PREFIX +BORDER
                 + LINE_PREFIX + "Unable create directory.. Please try again later. \n"
                 + LINE_PREFIX + BORDER);
     }
-
-
 
 }
