@@ -3,6 +3,7 @@ _**by Wong Li Ping**_
 
 ## Table of Contents
 [Introduction](#introduction)  
+[Getting Started with Duke](#getting-started-with-duke)  
 [Features](#features)  
 &nbsp;&nbsp;&nbsp;&nbsp;[Adding of Tasks](#adding-of-tasks)  
 &nbsp;&nbsp;&nbsp;&nbsp;[Deletion of Tasks](#deletion-of-tasks)  
@@ -19,6 +20,16 @@ _**by Wong Li Ping**_
 ## Introduction
 This project is named after the Java mascot Duke. Duke, is a command line 
 program to keep track of your tasks in a list.
+
+## Getting started with Duke
+
+__Duke__ is run with a file ending with extension `.jar`. Click here to download the JAR file for running latest version of __Duke__.
+
+1. Open your Command Line on your desktop.  
+2. Go to the directory where you stored the JAR file.  
+3. Key in `java -jar <Name of JAR file>`.  
+
+Now you should see __Duke__ welcoming you!
 
 ## Features
 
