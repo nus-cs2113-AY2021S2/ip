@@ -23,7 +23,7 @@ program to keep track of your tasks in a list.
 
 ## Getting started with Duke
 
-__Duke__ is run with a file ending with extension `.jar`. Click here to download the JAR file for running latest version of __Duke__.
+__Duke__ is run with a file ending with extension `.jar`. Click [here](https://github.com/liping-eng/ip/releases) to download the JAR file for running latest version of __Duke__.
 
 1. Open your Command Line on your desktop.  
 2. Go to the directory where you stored the JAR file.  
