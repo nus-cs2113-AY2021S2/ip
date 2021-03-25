@@ -21,11 +21,11 @@ public class Storage {
                 System.out.println("file created at current location: "
                         + String.format(file.getAbsolutePath()));
             } else {
-                System.out.println("file already exist at current location: "
+                System.out.println("file is at location: \n"
                         + String.format(file.getAbsolutePath()));
             }
         } catch (IOException e) {
-            System.out.println("There was an error when creating file. Try again!");
+            Ui.errorMessageDuringFileCreation();
         }
 
         try {
@@ -44,29 +44,29 @@ public class Storage {
                 }
 
                 switch (taskType) {
-                    case "T":
-                        Task task = new Todo(taskDetails);
-                        if (isDone) {
-                            task.setDone();
-                        }
-                        tasks.addTask(task);
-                        break;
-                    case "E":
-                        String at = split[3];
-                        task = new Event(taskDetails, at);
-                        if (isDone) {
-                            task.setDone();
-                        }
-                        tasks.addTask(task);
-                        break;
-                    case "D":
-                        String by = split[3];
-                        task = new Deadline(taskDetails, by);
-                        if (isDone) {
-                            task.setDone();
-                        }
-                        tasks.addTask(task);
-                        break;
+                case "T":
+                    Task task = new Todo(taskDetails);
+                    if (isDone) {
+                        task.setDone();
+                    }
+                    tasks.addTask(task);
+                    break;
+                case "E":
+                    String at = split[3];
+                    task = new Event(taskDetails, at);
+                    if (isDone) {
+                        task.setDone();
+                    }
+                    tasks.addTask(task);
+                    break;
+                case "D":
+                    String by = split[3];
+                    task = new Deadline(taskDetails, by);
+                    if (isDone) {
+                        task.setDone();
+                    }
+                    tasks.addTask(task);
+                    break;
                 }
 
             }

@@ -37,4 +37,8 @@ public class Ui {
     public static void printWrongCommand() {
         System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
+
+    public static void errorMessageDuringFileCreation() {
+        System.out.println("There was an error when creating file. Try again!");
+    }
 }
