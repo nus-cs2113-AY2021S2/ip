@@ -16,7 +16,7 @@ public class Parser {
         String arguments;
         if (input.contains(" ")) {
             command = input.substring(0, input.indexOf(" "));
-            arguments = input.substring(input.indexOf(" ") + 1);
+            arguments = input.substring(input.indexOf(" ") + 1).trim();
         } else {
             command = input;
             arguments = null;

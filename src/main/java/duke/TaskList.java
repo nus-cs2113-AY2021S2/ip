@@ -42,7 +42,7 @@ public class TaskList {
      * @param list Arraylist containing all tasks
      */
     public static void addToDo(String input, ArrayList<Task> list) {
-        if(input == null) {
+        if(input == null || input.length() == 0) {
             Ui.printInvalidArgumentMessage(Constants.NO_DESCRIPTION_MESSAGE);
         } else {
             list.add(new ToDo(input));
@@ -179,7 +179,7 @@ public class TaskList {
     }
 
     private static boolean checkValidIndex(int listSize, int taskNo) {
-        if (!(taskNo <= listSize + 1 && taskNo > 0)) {
+        if (!(taskNo <= listSize && taskNo > 0)) {
             Ui.printInvalidArgumentMessage(String.format(Constants.TASK_DOES_NOT_EXIST_MESSAGE));
             return false;
         }
