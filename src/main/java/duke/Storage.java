@@ -9,6 +9,8 @@ import java.util.Scanner;
 public class Storage {
 
     /**
+     * Creates text file that is to be read from if file does not exist.
+     * Else, read from existing text file.
      *
      * @param filePath
      * @param tasks
