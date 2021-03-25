@@ -1,0 +1,31 @@
+todo borrow book
+deadline weekly CS2113 quiz /by Monday 9pm
+event CS2113 lecture /at Friday 4 to 6 pm
+list
+done 1
+todo read book
+done 3
+list
+deadline return book /by June 6th
+find book
+done 500
+done fun
+find
+find abcdefg
+delete fun
+delete 10
+list 200
+event /at asd
+deadline /by asd
+delete 3
+list
+blah blah
+
+todo
+deadline
+event
+done
+delete
+deadline return book
+event CS2113 lecture
+bye
