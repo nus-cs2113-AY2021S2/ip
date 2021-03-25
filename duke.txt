@@ -1,6 +1,4 @@
-T|0|read book
 D|0|return book|29/2/2021
-T|1|          
-D|0||today
-E|0||tonight
-T|0|a
+T|0|maths homework
+T|1|english assignment
+T|0|english practice paper
