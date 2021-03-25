@@ -16,7 +16,7 @@ Prerequisites: JDK 11, update IntelliJ to the most recent version.
 1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).
 1. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the output below.
 
-### **Duke UserGuide**
+# **Duke UserGuide**
 
    ```
 _____________________________
@@ -29,107 +29,109 @@ ____        _
 What can I do for you?
 _____________________________
    ```
-Setting up Duke 
-1.Open your Terminal
-2. Change you directory to where the Jar file is located at.
-3. Type in the command **java -jar ip.jar** to execute.
+## `Setting up Duke`  <br />
 
-Features
+1. Open your Terminal <br />
+2. Change you directory to where the Jar file is located at. <br />
+3. Type in the command **java -jar ip.jar** to execute. <br />
 
-1.Todo
-2.Deadline
-3.Event
-4.List
-5.Done
-6.Delete
-7.Find
-8.Bye
+## `Features` <br />
 
-Commands you can give and their uses:
-1. list
-   The chatbot lists down all the tasks written by you.
-   Ex:
-   list
-Expected Outcome:
+1.list <br />
+2.done <br />
+3.delete <br />
+4.deadline <br />
+5.event <br />
+6.todo <br />
+7.find <br />
+8.bye <br />
 
-1. [T]["cross mark"] buy milk from 7-11
+`Commands you can give and their uses:`
 
-2. [D]["tick"] finish maths assignment (by: Jan 16 2021, 9:00pm)
+### 1. `list` <br />
+   The chatbot lists down all the tasks written by you. <br />
+   Ex: <br />
+   list <br />
+Expected Outcome: <br />
 
-3. [E]["cross mark"] Attend friend's wedding  (at: Jan 24 2021, 12:00pm)
+1. [T]["cross mark"] buy milk from 7-11 <br />
+
+2. [D]["tick"] finish maths assignment (by: Jan 16 2021, 9:00pm) <br />
+
+3. [E]["cross mark"] Attend friend's wedding  (at: Jan 24 2021, 12:00pm) <br />
 
 
-2. done [int number]
-   This means that the respective task in the task bot will be done and will be "ticked"
-   Ex:
-   done 3
+### 2. `done` [int number]<br />
+   This means that the respective task in the task bot will be done and will be "ticked" <br />
+   Ex: <br />
+   done 3 <br />
    
-Expected outcome:
+Expected outcome: <br />
 
-Nice! I've marked this task as done: [E]["tick"] Attend friend's wedding  (at: Jan 24 2021, 12:00pm). Now you have 3 tasks in the list
+Nice! I've marked this task as done: [E]["tick"] Attend friend's wedding  (at: Jan 24 2021, 12:00pm). Now you have 3 tasks in the list <br />
 
-3. delete [int number]
-   deletes teh respective task from the list
-   Ex:
-   delete 3
+ ### 3. `delete`  <br />
+   deletes teh respective task from the list <br />
+   Ex: <br />
+   delete 3 <br />
 
-Expected outcome:
+Expected outcome: <br />
 
-Noted. Ive remoevd this task:
+Noted. I've removed this task: <br />
 
-[E]["tick"] Attend friend's wedding  (at: Jan 24 2021, 12:00pm).
+[E]["tick"] Attend friend's wedding  (at: Jan 24 2021, 12:00pm). <br />
 
-Now you have 2 tasks to the list
+Now you have 2 tasks on the list <br />
 
-4. deadline
-   add a deadline task at the time and date and adds it to the lsit of tasks.
-   Ex: 
-   deadline get groceries  /by 22/02/2021 23:59
+ ### 4. `deadline` <br />
+   add a deadline task at the time and date and adds it to the lsit of tasks. <br />
+   Ex: <br />
+   deadline get groceries  /by 22/02/2021 23:59 <br />
 
-Expected outcome:
-Got it. I've added this task:
+Expected outcome:<br />
+Got it. I've added this task: <br />
 
-[D]["cross mark"] deadline get groceries by 22/02/2021 23:59.
-You have 7 tasks left to do.
+[D]["cross mark"] deadline get groceries by 22/02/2021 23:59. <br />
+You have 7 tasks left to do. <br />
 
-5. event
-   adds a event task at the time and date and adds it to the lsit of tasks.
-   Ex: 
-   event go watch cinema  /at 23/02/2021 23:59
+### 5. `event` <br />
+   adds a event task at the time and date and adds it to the lsit of tasks. <br />
+   Ex:  <br />
+   event go watch cinema  /at 23/02/2021 23:59 <br />
 
-Expected outcome:
-Got it. I've added this task:
+Expected outcome: <br />
+Got it. I've added this task: <br />
 
-[E]["crossmark"] event project meeting at 23/02/2021 23:59
-You have 7 tasks left to do.
+[E]["crossmark"] event project meeting at 23/02/2021 23:59 <br />
+You have 7 tasks left to do. <br />
 
-6. todo
-   adds a todo task to the list of objects.
-   Ex: 
-   todo this assignemnt
+### 6. `todo` <br />
+   adds a todo task to the list of objects.<br />
+   Ex: <br />
+   todo this assignment <br />
 
-Expected outcome:
-Got it. I've added this task:
+Expected outcome: <br />
+Got it. I've added this task: <br />
 
-[E]["cross amrk"] todo this assignment
-You have 5 tasks left to do.
+[E]["cross mark"] todo this assignment <br />
+You have 5 tasks left to do. <br />
 
-7. find
-   finds for the respective word from all the tasks in the list.
-   Ex:
-   find Attend
+### 7. `find` <br />
+   finds for the respective word from all the tasks in the list.<br />
+   Ex: <br />
+   find Attend <br />
    
-Expected outcome:
+Expected outcome: <br />
 
-[E]["cross mark"] Attend friend's wedding  (at: Jan 24 2021, 12:00pm)
+[E]["cross mark"] Attend friend's wedding  (at: Jan 24 2021, 12:00pm) <br />
 
-8. bye
-   Entering this word will exit the program and will display the good bye message.
-   Ex: 
-   bye
+### 8. `bye` <br />
+   Entering this word will exit the program and will display the good bye message. <br />
+   Ex: <br />
+   bye <br />
    
-Expected Outcome:
+Expected Outcome: <br />
    
-Bye. Hope to see you again soon!
+Bye. Hope to see you again soon! <br />
 
 
