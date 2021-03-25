@@ -13,4 +13,6 @@ delete 2
 delete 69
 find fakeKeyword
 find retire
+event meeting /at -1
+deadline retire /by -1
 bye

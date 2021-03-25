@@ -1,5 +1,7 @@
 package dukchess.commands;
 
+import static dukchess.utility.Utils.isNumeric;
+
 import dukchess.entity.Deadline;
 import dukchess.ui.Ui;
 
@@ -26,6 +28,12 @@ public class AddDeadlineCommand extends Command {
         String[] deadlineArgs = commandArgs.split(" /by ");
         if (deadlineArgs.length != 2) {
             Ui.printErrorMessage("Oops, deadline due date cannot be empty :(");
+            return;
+        }
+        String deadlineDueBy = deadlineArgs[1];
+        if (isNumeric(deadlineDueBy) && Double.parseDouble(deadlineDueBy) <= 0) {
+            Ui.printErrorMessage("A numeric deadline should never be negative, " +
+                    "otherwise the time travel police is gonna come find you!");
             return;
         }
         String deadlineAdditionOutcome = addDeadline(deadlineArgs[0], deadlineArgs[1]);

@@ -1,5 +1,7 @@
 package dukchess.commands;
 
+import static dukchess.utility.Utils.isNumeric;
+
 import dukchess.entity.Event;
 import dukchess.ui.Ui;
 
@@ -26,6 +28,12 @@ public class AddEventCommand extends Command {
         String[] eventArgs = commandArgs.split(" /at ");
         if (eventArgs.length != 2) {
             Ui.printErrorMessage("Oops, event time cannot be empty :(");
+            return;
+        }
+        String whenEventIsAt = eventArgs[1];
+        if (isNumeric(whenEventIsAt) && Double.parseDouble(whenEventIsAt) <= 0) {
+            Ui.printErrorMessage("A numeric event time should never be negative, " +
+                    "why would you want that???");
             return;
         }
         String eventAdditionOutcome = addEvent(eventArgs[0], eventArgs[1]);

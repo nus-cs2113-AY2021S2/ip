@@ -36,4 +36,8 @@ Could not find any tasks matching "fakekeyword"
 What other tasks do you want to do?
 >>> 1. [D][ ] retire (by: 40)
 What other tasks do you want to do?
+A numeric event time should never be negative, why would you want that???
+What other tasks do you want to do?
+A numeric deadline should never be negative, otherwise the time travel police is gonna come find you!
+What other tasks do you want to do?
 Goodbye, hope to see you soon!
