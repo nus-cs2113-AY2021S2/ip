@@ -118,6 +118,7 @@ Duke can handle simple error handling too!
 
 ## Command Summary  
 #### Below is a table that illustrates the list of commands available.
+
 Command | Functionality  
 --------------- | ---------------   
 todo \<task\> | Adds a ToDo task object to the list  
