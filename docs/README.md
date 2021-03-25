@@ -61,7 +61,7 @@ Expected Outcome: <br />
 3. [E]["cross mark"] Attend friend's wedding  (at: Jan 24 2021, 12:00pm) <br />
 
 
-### 2. `done` [int number]<br />
+### 2. `done` <br />
    This means that the respective task in the task bot will be done and will be "ticked" <br />
    Ex: <br />
    done 3 <br />
@@ -70,9 +70,10 @@ Expected outcome: <br />
 
 Nice! I've marked this task as done: [E]["tick"] Attend friend's wedding  (at: Jan 24 2021, 12:00pm). Now you have 3 tasks in the list <br />
 
- ### 3. `delete`  <br />
-   deletes teh respective task from the list <br />
-   Ex: <br />
+
+### 3. `delete` <br />
+   deletes the respective task from the list <br />
+   Ex: <br /e>
    delete 3 <br />
 
 Expected outcome: <br />
@@ -83,7 +84,7 @@ Noted. I've removed this task: <br />
 
 Now you have 2 tasks on the list <br />
 
- ### 4. `deadline` <br />
+### 3. `deadline` <br />
    add a deadline task at the time and date and adds it to the lsit of tasks. <br />
    Ex: <br />
    deadline get groceries  /by 22/02/2021 23:59 <br />
