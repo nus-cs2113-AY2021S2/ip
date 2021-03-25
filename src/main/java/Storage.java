@@ -7,6 +7,8 @@ import java.util.ArrayList;
 
 /**
  * This is the class which we use to store the value so of the task list onto our hardisk.
+ * This Storage object has a fixed filepath that has been hardcoded.
+ * We will be using this file as our main source to either write into it or read from it.
  */
 
 public class Storage {
@@ -26,6 +28,13 @@ public class Storage {
             tasks = new ArrayList<>();
         }
     }
+
+    /**
+     * Reads the file that was defined above and it parses the strings
+     * which can then be added as tasks to the tasklist array.
+     *
+     * @return could either be a todo task, deadline task or even a event task.
+     */
 
     private Task getTask(String line){
         Task task;
@@ -52,12 +61,21 @@ public class Storage {
         }
         return task;
     }
-    // loads the elements of the task list
+
+    /**
+     * This loads the elements of the task list.
+     * @return returns the tasklist of the elements of the list.
+     */
+
     public TaskList load(){
         this.list = new TaskList(this.tasks) ;
         return this.list;
     }
-    // saves the task onto the text file.
+
+    /**
+     * This methods will save all the tasks on to the text file
+     */
+
     public void save(){
         try {
             String folderPath = "Data";

@@ -5,12 +5,26 @@ import java.time.format.DateTimeParseException;
 /**
  * This class,Parser is used to analyse user commands.
  */
+
 public class Parser {
+
+    /**
+     * This method just prints a line.
+     */
+
     public static void displayLine(){
         System.out.println("_____________________________");
     }
-    // Removes the specific item from the user's tasklist
-    public static void delete(String request, TaskList list){
+
+    /**
+     * Removes the requested task suggested by the user from the tasklist.
+     *
+     * @param request A string that contains the value of the index.
+     * @param list lists the tasklist object.
+     * @throws InvalidDeleteException will only be thrown if the delete function is not in the right format.
+     */
+
+    public static void delete(String request, TaskList list) throws InvalidDeleteException{
         try {
 
             int index = Integer.parseInt(request);
@@ -26,7 +40,13 @@ public class Parser {
 
         }
     }
-    // add a todo task to the tasks
+
+    /**
+     * Adds a todo task to the tasklist array.
+     * @param request A string that contains the value of the index.
+     * @param list lists the tasklist object.
+     */
+
     public static void addTodo(String request, TaskList list){
         try {
 
@@ -39,7 +59,14 @@ public class Parser {
         }
     }
 
-    // using this method we add a deadline task to the tasklist
+    /**
+     * Adds a deadline task to the tasklist array
+     *
+     * @param word the description provided by the user.
+     * @param list lists the tasklist object
+     * @throws InvalidDeadlineException
+     */
+
     public static void getDeadline(String word, TaskList list) throws InvalidDeadlineException {
         if (word.contains("/by") && !word.substring(word.indexOf("/by") + 3).equals("")){
             word = word.substring(8);
@@ -59,7 +86,7 @@ public class Parser {
             }
             if (!dateString.contains(":")){
                 String[] arr = dateString.split(" ");
-                if (arr.length > 2){
+                if (arr.length != 2){
                     throw new InvalidDeadlineException();
                 }
                 arr[1] = arr[1].substring(0, 2) + ":" + arr[1].substring(2);
@@ -81,7 +108,14 @@ public class Parser {
         }
     }
 
-    // from this event we add the event task to the task list.
+    /**
+     * Adds an event task to the tasklist array
+     *
+     * @param word the description provided by the user.
+     * @param list lists the tasklist object.
+     * @throws InvalidEventException
+     */
+
     public static void getEvent(String word, TaskList list) throws InvalidEventException {
         if (word.contains("/at") && !word.substring(word.indexOf("/at") + 3).equals("")){
             word = word.substring(5);
@@ -101,7 +135,7 @@ public class Parser {
             }
             if (!dateString.contains(":")){
                 String[] arr = dateString.split(" ");
-                if (arr.length > 2){
+                if (arr.length != 2){
                     throw new InvalidEventException();
                 }
                 arr[1] = arr[1].substring(0, 2) + ":" + arr[1].substring(2);
@@ -122,7 +156,14 @@ public class Parser {
             throw new InvalidEventException();
         }
     }
-    // find the word from all the tasks
+
+    /**
+     * This method is used the find any keyword inputted by the user.
+     * @param input This is the keyword that will be found in the tasklist.
+     * @param tasks All the tasks from which the keyword will be found from.
+     * @throws InvalidNumberException
+     */
+
     public static void find(String input, TaskList tasks) throws InvalidNumberException{
         String[] requests = input.split(" ");
         if (requests.length != 2){
@@ -135,6 +176,13 @@ public class Parser {
         }
         displayLine();
     }
+
+    /**
+     * This method will update a particular task to done.
+     * @param request A string that contains the value of the index.
+     * @param list lists the tasklist object.
+     */
+
     public static void update(String request, TaskList list) {
         assert !request.equals("") : "Input is invalid";
         try {
@@ -143,9 +191,16 @@ public class Parser {
             String str = "Nice! I've marked this task as done: \n "
                     + list.get(index);
             str += ". Now you have " + list.getSize() + " tasks in the list";
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException ignored) {
         }
     }
+
+    /**
+     * Adds a todo object containing the descriptions provided the list of tasks
+     * @param work A string object that has the right description.
+     * @return The String that contains the information about the todo object.
+     * @throws ExceptionToDo
+     */
 
     public static ToDos getTodo(String work) throws ExceptionToDo{
         if (work.length() > 4){

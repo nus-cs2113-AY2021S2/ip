@@ -1,9 +1,14 @@
 /**
  * The main code file of the project.
  */
+
 public class Duke {
     private Storage storage;
     private UI ui;
+
+    /**
+     * Constructor that initialises two new objects
+     */
 
     public Duke(){
         this.storage = new Storage();
