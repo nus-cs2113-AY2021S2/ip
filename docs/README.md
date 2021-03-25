@@ -119,7 +119,7 @@ Duke can handle simple error handling too!
 ## Command Summary  
 #### Below is a table that illustrates the list of commands available.
 Command | Functionality  
---------|---------------   
+--------------- | ---------------   
 todo \<task\> | Adds a ToDo task object to the list  
 deadline \<task\> /by \<date or time\> | Adds a Deadline task object to the list  
 event \<task\> /at \<venue or date\> | Adds a Deadline task object to the list  
