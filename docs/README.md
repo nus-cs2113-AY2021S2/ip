@@ -16,7 +16,7 @@ Prerequisites: JDK 11, update IntelliJ to the most recent version.
 1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).
 1. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the output below.
 
-### **Duke UserGuide**
+# **Duke UserGuide**
 
    ```
 _____________________________
@@ -29,12 +29,13 @@ ____        _
 What can I do for you?
 _____________________________
    ```
-Setting up Duke <br />
-1.Open your Terminal <br />
+## `Setting up Duke`  <br />
+
+1. Open your Terminal <br />
 2. Change you directory to where the Jar file is located at. <br />
 3. Type in the command **java -jar ip.jar** to execute. <br />
 
-Features<br />
+## `Features` <br />
 
 1.list <br />
 2.done <br />
@@ -45,9 +46,9 @@ Features<br />
 7.find <br />
 8.bye <br />
 
-Commands you can give and their uses:
+`Commands you can give and their uses:`
 
-1. list <br />
+### 1. `list` <br />
    The chatbot lists down all the tasks written by you. <br />
    Ex: <br />
    list <br />
@@ -60,7 +61,7 @@ Expected Outcome: <br />
 3. [E]["cross mark"] Attend friend's wedding  (at: Jan 24 2021, 12:00pm) <br />
 
 
-2. done [int number]<br />
+### 2. `done` [int number]<br />
    This means that the respective task in the task bot will be done and will be "ticked" <br />
    Ex: <br />
    done 3 <br />
@@ -69,20 +70,20 @@ Expected outcome: <br />
 
 Nice! I've marked this task as done: [E]["tick"] Attend friend's wedding  (at: Jan 24 2021, 12:00pm). Now you have 3 tasks in the list <br />
 
-3. delete [int number] <br />
+ ### 3. `delete`  <br />
    deletes teh respective task from the list <br />
    Ex: <br />
    delete 3 <br />
 
 Expected outcome: <br />
 
-Noted. Ive remoevd this task: <br />
+Noted. I've removed this task: <br />
 
 [E]["tick"] Attend friend's wedding  (at: Jan 24 2021, 12:00pm). <br />
 
-Now you have 2 tasks to the list <br />
+Now you have 2 tasks on the list <br />
 
-4. deadline <br />
+ ### 4. `deadline` <br />
    add a deadline task at the time and date and adds it to the lsit of tasks. <br />
    Ex: <br />
    deadline get groceries  /by 22/02/2021 23:59 <br />
@@ -93,7 +94,7 @@ Got it. I've added this task: <br />
 [D]["cross mark"] deadline get groceries by 22/02/2021 23:59. <br />
 You have 7 tasks left to do. <br />
 
-5. event <br />
+### 5. `event` <br />
    adds a event task at the time and date and adds it to the lsit of tasks. <br />
    Ex:  <br />
    event go watch cinema  /at 23/02/2021 23:59 <br />
@@ -104,7 +105,7 @@ Got it. I've added this task: <br />
 [E]["crossmark"] event project meeting at 23/02/2021 23:59 <br />
 You have 7 tasks left to do. <br />
 
-6. todo<br />
+### 6. `todo` <br />
    adds a todo task to the list of objects.<br />
    Ex: <br />
    todo this assignment <br />
@@ -112,10 +113,10 @@ You have 7 tasks left to do. <br />
 Expected outcome: <br />
 Got it. I've added this task: <br />
 
-[E]["cross amrk"] todo this assignment <br />
+[E]["cross mark"] todo this assignment <br />
 You have 5 tasks left to do. <br />
 
-7. find <br />
+### 7. `find` <br />
    finds for the respective word from all the tasks in the list.<br />
    Ex: <br />
    find Attend <br />
@@ -124,7 +125,7 @@ Expected outcome: <br />
 
 [E]["cross mark"] Attend friend's wedding  (at: Jan 24 2021, 12:00pm) <br />
 
-8. bye <br />
+### 8. `bye` <br />
    Entering this word will exit the program and will display the good bye message. <br />
    Ex: <br />
    bye <br />
