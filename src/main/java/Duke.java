@@ -83,7 +83,6 @@ public class Duke {
             case FIND:
                 tasks.findTasks(user_input);
                 break;
-
             case INVALID:
                 throw new InvalidCommandException();
 
@@ -136,12 +135,9 @@ public class Duke {
             } catch (InvalidDeadlineException e) {
                 System.out.println("Add time for new Deadline with keyword '/by'!!");
             }
-
             user_input = ui.getString(in);
             storage.changeFile(ui.num_of_goals);
         }
-
-
         show_exit_msg();
         storage.clearFile();
     }
