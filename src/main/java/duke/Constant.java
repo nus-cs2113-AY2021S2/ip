@@ -16,4 +16,14 @@ public class Constant {
     public static final String EVENT_STR_COMMAND = "event";
     public static final String DELETE_STR_COMMAND = "delete";
     public static final String FIND_STR_COMMAND = "find";
+    public static final String SLASH_AT_STR = "/at";
+    public static final String SLASH_BY_STR = "/by";
+
+    public static final String MARK_DONE = "1";
+    public static final String MARK_UNDONE = "0";
+
+    public static final String TODO_TASK_TYPE = "T";
+    public static final String DEADLINE_TASK_TYPE = "D";
+    public static final String EVENT_TASK_TYPE = "E";
+
 }

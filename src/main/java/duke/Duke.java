@@ -32,11 +32,11 @@ public class Duke {
         Ui.printStart();
         isRunning = true;
 
-        while(isRunning) {
+        while (isRunning) {
             try {
                 Parser.selectCommand(tasks);
             } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("Please key in an appropriate command!");
+                Ui.printErrorMessageOnWhitespaces();
             }
         }
 

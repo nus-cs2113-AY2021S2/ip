@@ -1,5 +1,7 @@
 package duke;
 
+import static duke.Constant.*;
+
 public class Deadline extends Task {
     protected String by;
 
@@ -10,7 +12,8 @@ public class Deadline extends Task {
 
     @Override
     public String getDescription() {
-        return "D" + "|" + (isDone ? "1" : "0") + "|" + this.description + "|" + by;
+        return DEADLINE_TASK_TYPE + "|" + (isDone ? MARK_DONE : MARK_UNDONE)
+                + "|" + this.description + "|" + by;
     }
 
     @Override

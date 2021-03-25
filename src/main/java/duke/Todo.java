@@ -1,5 +1,7 @@
 package duke;
 
+import static duke.Constant.*;
+
 public class Todo extends Task {
 
     public Todo(String description) {
@@ -8,7 +10,8 @@ public class Todo extends Task {
 
     @Override
     public String getDescription() {
-        return "T" + "|" + (isDone ? "1" : "0") + "|" + this.description;
+        return TODO_TASK_TYPE + "|"
+                + (isDone ? MARK_DONE : MARK_UNDONE) + "|" + this.description;
     }
     @Override
     public String toString() {

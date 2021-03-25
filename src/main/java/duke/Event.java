@@ -1,5 +1,7 @@
 package duke;
 
+import static duke.Constant.*;
+
 public class Event extends Task {
     protected String at;
 
@@ -10,7 +12,8 @@ public class Event extends Task {
 
     @Override
     public String getDescription() {
-        return "E" + "|" + (isDone ? "1" : "0") + "|" + this.description + "|" + at;
+        return EVENT_TASK_TYPE + "|"
+                + (isDone ? MARK_DONE : MARK_UNDONE) + "|" + this.description + "|" + at;
     }
 
     @Override

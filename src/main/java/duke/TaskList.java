@@ -93,11 +93,12 @@ public class TaskList {
      * @param targetInput Keyword specified by the user.
      */
     public static void findTask(String targetInput) {
+        System.out.println("Here are the matching tasks in your list: ");
         int count = 0;
-        for(Task t : tasks) {
+        for (Task t : tasks) {
             String[] mySplit = t.toString().split(" ");
-            for(String s: mySplit) {
-                if(s.equals(targetInput)) {
+            for (String s: mySplit) {
+                if (s.equals(targetInput)) {
                     count += 1;
                     System.out.println(count + ". " + t);
                 }
@@ -117,20 +118,11 @@ public class TaskList {
         return tasks.get(i).getDescription();
     }
 
-    public int size() {
-        return tasks.size();
-    }
-
     /**
-     * Add new tasks when reading duke.txt file
-     * at the start of the program.
+     * Deletes a task at index specified by the user.
      *
-     * @param newTask
+     * @param userInput
      */
-    public void addTask(Task newTask) {
-        tasks.add(newTask);
-    }
-
     public static void removeTask(String userInput) {
         int processedInput;
         try {
@@ -145,13 +137,19 @@ public class TaskList {
         }
     }
 
-    /**
-     * Get task that user wants to delete.
-     *
-     * @param processedInput Index retrieved to delete a task.
-     * @return task to be deleted by the user.
-     */
-    public String getProcessedInputAtIndex(int processedInput) {
-        return String.valueOf(tasks.get(processedInput));
+    public int size() {
+        return tasks.size();
     }
+
+    /**
+     * Add new tasks when reading duke.txt file
+     * at the start of the program.
+     *
+     * @param newTask
+     */
+    public void addTask(Task newTask) {
+        tasks.add(newTask);
+    }
+
+
 }
