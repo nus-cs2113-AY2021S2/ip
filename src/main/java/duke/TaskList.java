@@ -37,10 +37,14 @@ public class TaskList {
      */
     public static void markTaskDone(String userInput) {
         int processedInput;
-        processedInput = Integer.parseInt(userInput.replaceAll("[^0-9]", "")) - 1;
-        tasks.get(processedInput).setDone();
-        System.out.println("Nice! I've marked this task as done: ");
-        System.out.println(tasks.get(processedInput));
+        try {
+            processedInput = Integer.parseInt(userInput.replaceAll("[^0-9]", "")) - 1;
+            tasks.get(processedInput).setDone();
+            System.out.println("Nice! I've marked this task as done: ");
+            System.out.println(tasks.get(processedInput));
+        } catch (NumberFormatException e) {
+            System.out.println("Key in an appropriate number. E.g. [done 1]");
+        }
     }
 
     /**
@@ -127,8 +131,18 @@ public class TaskList {
         tasks.add(newTask);
     }
 
-    public void removeTask(int i) {
-        tasks.remove(i);
+    public static void removeTask(String userInput) {
+        int processedInput;
+        try {
+            processedInput = Integer.parseInt
+                    (userInput.replaceAll("[^0-9]", "")) - 1;
+            System.out.println(tasks.get(processedInput));
+            tasks.remove(processedInput);
+            System.out.println("I've removed the above task for you!");
+            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+        } catch (NumberFormatException e) {
+            System.out.println("Key in an appropriate number. E.g. [delete 1]");
+        }
     }
 
     /**

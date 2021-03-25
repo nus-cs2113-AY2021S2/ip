@@ -28,17 +28,21 @@ public class Duke {
         }
     }
 
-    public void run() throws MissingTaskException {
+    public void run() {
         Ui.printStart();
         isRunning = true;
 
         while(isRunning) {
-            Parser.selectCommand(tasks);
+            try {
+                Parser.selectCommand(tasks);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("Please key in an appropriate command!");
+            }
         }
 
     }
 
-    public static void main(String[] args) throws MissingTaskException {
+    public static void main(String[] args) {
         String filePath = new File("").getAbsolutePath();
         new Duke(filePath).run();
     }
