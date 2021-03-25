@@ -65,7 +65,7 @@ public class TaskList {
     public static void addDeadlineTask(String by, String processedDeadlineInput) {
         Task newTask = new Deadline(processedDeadlineInput, by);
         tasks.add(newTask);
-        System.out.println("  " + newTask.toString());
+        System.out.println(newTask.toString());
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
     }
 
@@ -78,7 +78,7 @@ public class TaskList {
     public static void addEventTask(String at, String processedEventInput) {
         Task newTask = new Event(processedEventInput, at);
         tasks.add(newTask);
-        System.out.println("  " + newTask.toString());
+        System.out.println(newTask.toString());
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
     }
 

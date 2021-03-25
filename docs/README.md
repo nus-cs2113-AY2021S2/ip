@@ -1,19 +1,40 @@
 # User Guide
 _**by Wong Li Ping**_
 
+## Table of Contents
+[Introduction](#introduction)  
+[Features](#features)  
+&nbsp;&nbsp;&nbsp;&nbsp;[Adding of Tasks](#adding-of-tasks)  
+&nbsp;&nbsp;&nbsp;&nbsp;[Deletion of Tasks](#deletion-of-tasks)  
+&nbsp;&nbsp;&nbsp;&nbsp;[Listing of Tasks](#listing-of-tasks)  
+&nbsp;&nbsp;&nbsp;&nbsp;[Marking of Tasks](#marking-of-tasks)  
+&nbsp;&nbsp;&nbsp;&nbsp;[Finding of Tasks](#finding-of-tasks)  
+[Command Summary](#command-summary)  
+[Usage](#usage)
+
+
+
+
+
 ## Introduction
 This project is named after the Java mascot Duke. Duke, is a command line 
 program to keep track of your tasks in a list.
 
 ## Features
+
+### Adding of Tasks  
+
 Duke allows you to add three different type of tasks in your list:<p>
+
 - Todo - tasks you plan to do. This is denoted as `[T]` in your task list!<br>
 - Deadline - tasks that contains a deadline. This is denoted as `[D]` in your task list!<br>
 Event - event you wish to attend. This is denoted as `[E]` in your task list!<br>
 
 - Duke saves your list of tasks every time you input your command `[Refer to Commands Section to learn more!]` and
 saves your progress even after you exit the program!
-  
+
+### Deletion of Tasks  
+
 Duke also allows you to delete tasks from your list. Below is the before and after of the list of tasks with the use of command `delete 1`.
 
 #### Initial List  
@@ -36,6 +57,8 @@ Here are the tasks in your list:
 2.[T][ ] math homework
 ````
 
+### Listing of Tasks  
+
 Duke allows you to list all of your tasks with the command `list`. Below is an illustration of the use of command `list`.
 
 Input: `list`
@@ -47,6 +70,7 @@ Here are the tasks in your list:
 3.[T][ ] english assignment
 4.[T][ ] english practice paper
 ````
+### Marking of Tasks  
 
 Duke allows you to mark tasks as done! Below shows the before and after list of tasks with the use of command `done 1`.
 
@@ -66,6 +90,7 @@ Here are the tasks in your list:
 1.[D][X] return book (by: 29/2/2021)
 2.[T][ ] math homework
 ````
+### Finding of Tasks  
 
 Duke can help you find your tasks in the list too! Given a word, Duke can help to filter out tasks that contain the keyword you specified!  
 
@@ -90,6 +115,7 @@ Here are the matching tasks in your list:
 2. [T][ ] english practice paper
 ````
 Duke can handle simple error handling too! 
+
 ## Command Summary  
 #### Below is a table that illustrates the list of commands available.
 Command | Functionality
@@ -103,23 +129,33 @@ done \<task index\> | Mark task at specified task index with a `X`
 find \<keyword\> | Find and print tasks that contains the keyword
 bye | Exits and terminates Duke. Progress is saved.
 
+###### Note: \<something\> refers to user input to be decided by the user.
 
 ## Usage
 
+This section shows input and expected output of the commands with the use of examples.  
+Note: Words CAPITALISED in this section refers user input to be decided by the user.  
+
 ### `todo` - Adds a ToDo task object to the list
 
+Format:  
+`todo TASK DESCRIPTION`  
 Example of usage: 
 
 `todo cs2113t homework`
 
 Expected outcome:
 
-`Got it. I've added this task:`<br>
-`[T][ ] cs2113t homework`<br>
-`Now you have 1 tasks in the list.`
+````
+Got it. I've added this task:
+[T][ ] cs2113t homework
+Now you have 1 tasks in the list.
+````
 
 ### `deadline` - Adds a Deadline task object to the list
 
+Format:  
+`deadline TASK DESCRIPTION /by TIMING DESCRIPTION`  
 Example of usage:
 
 `deadline cs2113t iP /by 5/3/2021 2359`
@@ -127,16 +163,31 @@ Example of usage:
 Expected outcome:
 
 ````
+Got it. I've added this task:
 [D][ ] cs2113t iP (by: 5/3/2021 2359)
 Now you have 2 tasks in the list.
-Got it. I've added this task:
 ````
 
-###### Note: event command usage is similar.
+### `event` - Adds a Event task object to the list
 
+Format:  
+`event TASK DESCRIPTION /at TIMING DESCRIPTION`  
+Example of usage:
+
+`event informal dinner /at NUS 5/3/2021`
+
+Expected outcome:
+
+````
+Got it. I've added this task: 
+[E][ ] informal dinner (at: NUS 5/3/2021)
+Now you have 5 tasks in the list.
+````
 
 ### `list` - Prints the tasks in a list with indexing
 
+Format:  
+`list`  
 Example of usage:
 
 `list`
@@ -163,6 +214,8 @@ Here are the tasks in your list:
 5.[T][ ] science reading
 ````
 
+Format:  
+`delete NUMBERING`  
 Example of usage:
 
 `delete 5`
@@ -186,6 +239,8 @@ Here are the tasks in your list:
 4.[T][ ] english practice paper
 ````
 
+Format:  
+`done NUMBERING`  
 Example of usage:
 
 `done 3`
@@ -200,6 +255,8 @@ Nice! I've marked this task as done:
 
 ### `find` - Find and print tasks that contains the keyword
 
+Format:  
+`find KEYWORD`  
 Example of usage:
 
 `find cs2113t`

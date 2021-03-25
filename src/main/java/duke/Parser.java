@@ -72,8 +72,8 @@ public class Parser {
                 emptyTask(userInput, DEADLINE_COMMAND);
                 by = userInput.substring(getSlashIndex + 4);
                 processedDeadlineInput = userInput.substring(9, getSlashIndex).trim();
-                TaskList.addDeadlineTask(by, processedDeadlineInput);
                 System.out.println("Got it. I've added this task: ");
+                TaskList.addDeadlineTask(by, processedDeadlineInput);
                 Storage.writeToFile(tasks);
             } catch (StringIndexOutOfBoundsException e) {
                 System.out.println("Incorrect Slash input! " +
@@ -96,8 +96,8 @@ public class Parser {
                 emptyTask(userInput, EVENT_COMMAND);
                 at = userInput.substring(getSlashIndex + 4).trim();
                 processedEventInput = userInput.substring(6, getSlashIndex).trim();
-                TaskList.addEventTask(at, processedEventInput);
                 System.out.println("Got it. I've added this task: ");
+                TaskList.addEventTask(at, processedEventInput);
                 Storage.writeToFile(tasks);
             } catch (StringIndexOutOfBoundsException e) {
                 System.out.println("Incorrect Slash input! " +
