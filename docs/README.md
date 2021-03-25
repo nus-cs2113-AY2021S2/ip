@@ -120,14 +120,14 @@ Duke can handle simple error handling too!
 #### Below is a table that illustrates the list of commands available.
 Command | Functionality
 --------|---------------
-todo \<task\> | Adds a ToDo task object to the list
-deadline \<task\> /by \<date or time\> | Adds a Deadline task object to the list
-event \<task\> /at \<venue or date\> | Adds a Deadline task object to the list
-list | Prints the tasks in a list with indexing
-delete \<task index\> | Removes the task at specified task index 
-done \<task index\> | Mark task at specified task index with a `X`
-find \<keyword\> | Find and print tasks that contains the keyword
-bye | Exits and terminates Duke. Progress is saved.
+todo \<task\> | Adds a ToDo task object to the list  
+deadline \<task\> /by \<date or time\> | Adds a Deadline task object to the list  
+event \<task\> /at \<venue or date\> | Adds a Deadline task object to the list  
+list | Prints the tasks in a list with indexing  
+delete \<task index\> | Removes the task at specified task index   
+done \<task index\> | Mark task at specified task index with a `X`  
+find \<keyword\> | Find and print tasks that contains the keyword  
+bye | Exits and terminates Duke. Progress is saved.  
 
 ###### Note: \<something\> refers to user input to be decided by the user.
 
