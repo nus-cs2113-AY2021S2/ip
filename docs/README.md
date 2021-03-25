@@ -36,16 +36,17 @@ Setting up Duke
 
 Features
 
-1.Todo
-2.Deadline
-3.Event
-4.List
-5.Done
-6.Delete
-7.Find
-8.Bye
+1.list
+2.done
+3.delete
+4.deadline
+5.event
+6.todo
+7.find
+8.bye
 
 Commands you can give and their uses:
+
 1. list
    The chatbot lists down all the tasks written by you.
    Ex:
