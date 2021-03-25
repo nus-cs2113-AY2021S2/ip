@@ -131,8 +131,8 @@ Example of usage: `find retire`
 Expected outcome:
 
 ```markdown
-Noted, I've removed this task:
-[E][ ] meeting (at: 9.30)
+Here are the tasks matching "retire":
+>>> 1. [D][ ] retire (by: 40)
 ```
 
 ### `bye` - Close program gracefully

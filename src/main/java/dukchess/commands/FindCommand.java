@@ -25,6 +25,7 @@ public class FindCommand extends Command {
             Ui.printErrorMessage(String.format("Could not find any tasks matching \"%s\"", keyword));
             return;
         }
+        System.out.println("Here are the tasks matching " + "\"" + keyword + "\":");
         Ui.printListOfTasks(searchResults);
     }
 }
