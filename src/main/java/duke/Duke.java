@@ -23,10 +23,8 @@ public class Duke {
      * @param list ArrayList containing all tasks
      */
     public static void interact(ArrayList<Task> list) {
-
         Scanner scan = new Scanner(System.in);
         String input = scan.nextLine();
-
 
         String[] parsedInput = Parser.inputParser(input);
         String command = parsedInput[0];

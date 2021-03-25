@@ -39,7 +39,7 @@ public class DataStorage {
 
     /**
      * Reads the line of sava data and adds tasks accordingly to the ArrayList containing tasks
-     * If the description returned by dataParser() is null, the
+     * If the description returned by dataParser() is null, nothing is loaded
      *
      * @param list Arraylist which tasks are to be added as they are parsed
      * @param line line of save data

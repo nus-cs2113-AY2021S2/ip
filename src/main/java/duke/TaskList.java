@@ -119,17 +119,7 @@ public class TaskList {
     public static void markAsDone(ArrayList<Task> list, String argument) {
         try {
             int taskNo = Integer.parseInt(argument);
-            if (taskNo <= list.size() + 1 && taskNo > 0) { //no. is valid
-                if (list.get(taskNo - 1).getStatus()) {
-                    Ui.printTaskAlreadyCheckedMessage(taskNo, list.get(taskNo - 1).getDesc());
-                } else {
-                    list.get(taskNo - 1).check();
-                    Ui.printTaskChecked(taskNo, list.get(taskNo - 1).getStatusSymbol(),
-                            list.get(taskNo - 1).getDesc(), Task.getTasksRemaining());
-                }
-            } else {
-                Ui.printInvalidArgumentMessage(String.format(Constants.TASK_DOES_NOT_EXIST_MESSAGE, taskNo));
-            }
+            checkTask(list, taskNo);
         } catch (Exception e) {
             Ui.printGenericErrorMessage();
         }
@@ -144,17 +134,7 @@ public class TaskList {
     public static void undoMarkAsDone(ArrayList<Task> list, String input) {
         try {
             int taskNo = Integer.parseInt(input);
-            if (taskNo <= list.size() + 1 && taskNo > 0) { //no. is valid
-                if (!list.get(taskNo - 1).getStatus()) {
-                    Ui.printTaskNotCheckedMessage(taskNo, list.get(taskNo - 1).getDesc());
-                } else {
-                    list.get(taskNo - 1).uncheck();
-                    Ui.printTaskUnchecked(taskNo, list.get(taskNo - 1).getStatusSymbol(),
-                            list.get(taskNo - 1).getDesc());
-                }
-            } else {
-                Ui.printInvalidArgumentMessage(String.format(Constants.TASK_DOES_NOT_EXIST_MESSAGE, taskNo));
-            }
+            uncheckTask(list, taskNo);
         } catch (Exception e) {
             Ui.printGenericErrorMessage();
         }
@@ -168,13 +148,7 @@ public class TaskList {
     public static void delete(ArrayList<Task> list, String input) {
         try {
             int taskNo = Integer.parseInt(input);
-            if (taskNo <= list.size() + 1 && taskNo > 0) {
-                Ui.printTaskDeleted(taskNo, list.get(taskNo - 1).toString());
-                list.get(taskNo - 1).remove();
-                list.remove(taskNo - 1);
-            } else {
-                Ui.printInvalidArgumentMessage(String.format(Constants.TASK_DOES_NOT_EXIST_MESSAGE, taskNo));
-            }
+            removeTask(list, taskNo);
         } catch (Exception e) {
             Ui.printGenericErrorMessage();
         }
@@ -202,5 +176,45 @@ public class TaskList {
             task.setLength(0);
         }
         Ui.dukePrinter(taskList);
+    }
+
+    private static boolean checkValidIndex(int listSize, int taskNo) {
+        if (!(taskNo <= listSize + 1 && taskNo > 0)) {
+            Ui.printInvalidArgumentMessage(String.format(Constants.TASK_DOES_NOT_EXIST_MESSAGE));
+            return false;
+        }
+        return true;
+    }
+
+    private static void checkTask(ArrayList<Task> list, int taskNo) {
+        if (checkValidIndex(list.size(), taskNo)) {
+            if (list.get(taskNo - 1).getStatus()) {
+                Ui.printTaskAlreadyCheckedMessage(taskNo, list.get(taskNo - 1).getDesc());
+            } else {
+                list.get(taskNo - 1).check();
+                Ui.printTaskChecked(taskNo, list.get(taskNo - 1).getStatusSymbol(),
+                        list.get(taskNo - 1).getDesc(), Task.getTasksRemaining());
+            }
+        }
+    }
+
+    private static void uncheckTask(ArrayList<Task> list, int taskNo) {
+        if (checkValidIndex(list.size(), taskNo)) {
+            if (!list.get(taskNo - 1).getStatus()) {
+                Ui.printTaskNotCheckedMessage(taskNo, list.get(taskNo - 1).getDesc());
+            } else {
+                list.get(taskNo - 1).uncheck();
+                Ui.printTaskUnchecked(taskNo, list.get(taskNo - 1).getStatusSymbol(),
+                        list.get(taskNo - 1).getDesc());
+            }
+        }
+    }
+
+    private static void removeTask(ArrayList<Task> list, int taskNo) {
+        if (checkValidIndex(list.size(), taskNo)) {
+            Ui.printTaskDeleted(taskNo, list.get(taskNo - 1).toString());
+            list.get(taskNo - 1).remove();
+            list.remove(taskNo - 1);
+        }
     }
 }
