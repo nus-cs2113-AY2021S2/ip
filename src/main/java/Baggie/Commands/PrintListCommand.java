@@ -1,16 +1,15 @@
 package Baggie.Commands;
 
 import Baggie.Baggie;
-import Baggie.UI.PrintMessages;
-
 import static Baggie.UI.TEXT.*;
 
 public class PrintListCommand extends Baggie {
     /**
-     * Prints list from start index to end index
-     * Prints both list and a single task
-     * @param startIndex
-     * @param endIndex
+     * Prints list from start index to end index.
+     * Prints both list and a single task.
+     *
+     * @param startIndex Index of the start to print list.
+     * @param endIndex Index of the end to print list.
      */
     public static void printList(int startIndex, int endIndex) {
         if (endIndex == 0) {

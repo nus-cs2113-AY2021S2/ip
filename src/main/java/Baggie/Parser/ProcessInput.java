@@ -6,6 +6,7 @@ import Baggie.UI.PrintMessages;
 import Baggie.UI.TEXT;
 
 import java.util.Scanner;
+import java.lang.*;
 
 public class ProcessInput extends Baggie {
     public static final String EXIT_COMMAND = "bye";
@@ -18,38 +19,32 @@ public class ProcessInput extends Baggie {
     public static final String TODO_COMMAND = "todo";
     public static final String DEADLINE_COMMAND = "deadline";
     public static final String EVENT_COMMAND = "event";
+    public static final String COMMAND_DELIMITER = " ";
 
     /**
-     * Reads command input from user
-     * Switches to different tasks according to the first word
-     * Shows errors if the second word is invalid
+     * Reads command input from user.
+     * Switches to different tasks according to the first word.
+     * Shows errors if the second word is invalid.
      */
-    public static void processCommand(){
+    public static void processCommand() {
         Scanner userInput = new Scanner(System.in);
         while(true) {
             inputString = userInput.nextLine().trim();
-            String[] inputStringSplit = inputString.split(" ", 2);
+            String[] inputStringSplit = inputString.split(COMMAND_DELIMITER, 2);
             System.out.println(TEXT.LINE);
-            switch (inputStringSplit[0].toLowerCase()) {
+            String commandKeyword = inputStringSplit[0].toLowerCase();
+            String commandContent = inputString.substring(commandKeyword.length()).trim();
+            switch (commandKeyword) {
             case EXIT_COMMAND:
                 //ends program
                 return;
             case DONE_COMMAND:
                 //marks a task as done
-                if (inputStringSplit.length > 1) {
-                    //makes sure there's an index after "done", otherwise shows error
-                    MarkAsDoneCommand.markAsDone(inputStringSplit[1]);
-                } else {
-                    PrintMessages.noIndexInput();
-                }
+                CommandHandler.doneHandler(commandContent);
                 break;
             case DELETE_COMMAND:
                 //deletes a task
-                if (inputStringSplit.length > 1) {
-                    DeleteCommand.deleteTask(inputStringSplit[1]);
-                } else {
-                    PrintMessages.noIndexInput();
-                }
+                CommandHandler.deleteHandler(commandContent);
                 break;
             case LIST_COMMAND:
                 //shows list
@@ -61,40 +56,20 @@ public class ProcessInput extends Baggie {
                 break;
             case DATE_COMMAND:
                 //finds tasks on a date
-                if (inputStringSplit.length > 1) {
-                    FindTaskCommand.FindWithDate(inputStringSplit[1]);
-                } else {
-                    PrintMessages.dateEmpty();
-                }
+                CommandHandler.dateHandler(commandContent);
                 break;
             case KEYWORD_COMMAND:
                 //finds tasks containing keyword
-                if (inputStringSplit.length > 1) {
-                    FindTaskCommand.FindWithKeyword(inputStringSplit[1]);
-                } else {
-                    PrintMessages.keywordEmpty();
-                }
+                CommandHandler.keywordHandler(commandContent);
                 break;
             case TODO_COMMAND:
-                if (inputStringSplit.length > 1) {
-                    AddTodoCommand.execute(inputStringSplit[1]);
-                } else {
-                    PrintMessages.taskDescriptionEmpty();
-                }
+                CommandHandler.todoHandler(commandContent);
                 break;
             case DEADLINE_COMMAND:
-                if (inputStringSplit.length > 1) {
-                    AddDeadlineCommand.execute(inputStringSplit[1]);
-                } else {
-                    PrintMessages.taskDescriptionEmpty();
-                }
+                CommandHandler.deadlineHandler(commandContent);
                 break;
             case EVENT_COMMAND:
-                if (inputStringSplit.length > 1) {
-                    AddEventCommand.execute(inputStringSplit[1]);
-                } else {
-                    PrintMessages.taskDescriptionEmpty();
-                }
+                CommandHandler.eventHandler(commandContent);
                 break;
             default:
                 PrintMessages.illegalInput();

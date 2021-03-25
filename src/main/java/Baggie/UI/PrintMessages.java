@@ -4,7 +4,7 @@ import Baggie.Commands.PrintListCommand;
 
 public class PrintMessages extends TEXT {
     /**
-     * Shows messages
+     * Prints messages
      */
     public static void taskDescriptionEmpty(){
         System.out.println(TASK_EMPTY);
@@ -63,5 +63,9 @@ public class PrintMessages extends TEXT {
 
     public static void dateEmpty() { System.out.println(DATE_EMPTY); }
 
-    public static void printTaskCount(int taskCount) { System.out.println(THERE_ARE + taskCount + TASKS);}
+    public static void illegalDate() { System.out.println(ILLEGAL_DATE); }
+
+    public static void timeWrongFarmat() { System.out.println(TIME_WRONG_FORMAT);}
+
+    public static void printTaskCount(int taskCount, String foundContent) { System.out.println(taskCount + TASKS + RELATED_TO + foundContent);}
 }

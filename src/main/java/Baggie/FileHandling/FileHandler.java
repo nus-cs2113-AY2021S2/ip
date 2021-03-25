@@ -17,7 +17,7 @@ import static Baggie.UI.TEXT.*;
 public class FileHandler extends Baggie {
 
     /**
-     * Loads tasks from file
+     * Loads tasks from file.
      */
     public static void readFile(){
         try {
@@ -66,7 +66,7 @@ public class FileHandler extends Baggie {
     }
 
     /**
-     * Copies list to file
+     * Copies list to file.
      */
     public static void writeFile(){
         try {
