@@ -71,7 +71,13 @@ public class InputParser {
     }
 
     private void setDone(String infoFragment) {
-        isDone = infoFragment.equals("1");
+        if (infoFragment.equals("1")) {
+            isDone = true;
+        } else if (infoFragment.equals("0")) {
+            isDone = false;
+        } else {
+            throw new IllegalArgumentException("Done section in the record is not either 1 or 0.");
+        }
     }
 
     private void initializeCommandAndArgumentsFromRecord(String inputString) {

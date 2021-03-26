@@ -159,6 +159,6 @@ public class CommandHandler {
     }
 
     private void printErrorMsg(String message) {
-        System.out.println("Error:" + message);
+        System.out.println("Error: " + message);
     }
 }
