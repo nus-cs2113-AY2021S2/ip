@@ -1,7 +1,8 @@
 package duke.record;
 
 import duke.Duke;
-import duke.input.InputDataHandler;
+import duke.exception.InvalidArgumentException;
+import duke.input.InputParser;
 import duke.input.InputType;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -33,37 +34,88 @@ public class Record {
      * {@code records} remains empty.
      */
     public Record() {
-        String line = "-----------------------------";
-        System.out.println("Initializing " + Duke.NAME + "...");
+        printStartInitializationPrompt();
         readRecords();
+        printEndInitializationPrompt();
+    }
+
+    private void printStartInitializationPrompt() {
+        System.out.println("Initializing " + Duke.APP_NAME + "...");
+    }
+
+    private void printEndInitializationPrompt() {
         System.out.println("Completed!");
-        System.out.println(line);
+        System.out.println("-----------------------------");
     }
 
     /**
-     * Adds a new record to the {@code Record} object. If the record is added successfully, the program will print
-     * message to prompt users that the given task has been added. If IllegalArgumentException is thrown, it indicates
+     * Adds a new task to the {@code Record} object. If the task is added successfully, the program will print
+     * message to prompt users that the given task has been added. If InvalidArgumentException is thrown, it indicates
      * that the given task failed to be added and the related reason of failure will be printed in the CLI.
      *
-     * @param detailFragments ArrayList of information of a given task (i.e. taskName, isDone indicator (1/0) and date
-     *                        [based on taskType])
-     * @param taskType        Type of the given task (i.e. Deadline [D], Event [E] or Todo [T])
+     * @param inputFragments ArrayList of information of a given task (i.e. taskName, isDone indicator (1/0) and date
+     *                       [based on taskType])
+     * @param taskType       Type of the given task (i.e. Deadline [D], Event [E] or Todo [T])
      */
-    public void addRecord(String[] detailFragments, String taskType) {
+    public void addRecord(String[] inputFragments, String taskType) {
         boolean isAdded = false;
         try {
-            isAdded = addRecordToCollection(detailFragments, taskType);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+            isAdded = addTaskToArrayList(inputFragments, taskType);
+        } catch (InvalidArgumentException e) {
+            printErrorMsg(e.getMessage());
         }
 
         if (isAdded) {
             int numberOfRecords = records.size();
-            System.out.println("Got it. I've added this task:");
-            System.out.println("\t" + records.get(numberOfRecords - 1));
-            System.out.printf("Now you have %d tasks in the list.\n", numberOfRecords);
+            printSuccessAddedPrompt(numberOfRecords);
             saveRecords();
         }
+    }
+
+    private void printSuccessAddedPrompt(int numberOfRecords) {
+        System.out.println("Got it. I've added this task:");
+        System.out.println("\t" + records.get(numberOfRecords - 1));
+        System.out.printf("Now you have %d tasks in the list.\n", numberOfRecords);
+    }
+
+    private boolean addTaskToArrayList(String[] inputFragments, String taskType) throws InvalidArgumentException {
+        boolean isAdded;
+
+        if (taskType.equals(Todo.TASK_TYPE)) {
+            isAdded = addTodo(inputFragments);
+        } else if (taskType.equals(Deadline.TASK_TYPE) || taskType.equals(Event.TASK_TYPE)) {
+            isAdded = addTask(inputFragments, taskType);
+        } else {
+            throw new InvalidArgumentException("A non-taskType is passed to addRecord. Program terminated.");
+        }
+
+        return isAdded;
+    }
+
+    private boolean addTodo(String[] detailFragments) throws InvalidArgumentException {
+        String taskName;
+        if (detailFragments.length > 0) {
+            taskName = String.join(" ", detailFragments);
+            records.add(new Todo(taskName));
+        } else {
+            throw new InvalidArgumentException("The description of a To-do task cannot be empty.");
+        }
+
+        return true;
+    }
+
+    private boolean addTask(String[] inputFragments, String taskType) throws InvalidArgumentException {
+        String[] taskNameAndDate = getTaskNameAndDate(inputFragments, taskType);
+        String taskName = taskNameAndDate[0];
+        String date = taskNameAndDate[1];
+
+        if (taskType.equals(Deadline.TASK_TYPE)) {
+            records.add(new Deadline(taskName, date));
+        } else {
+            records.add(new Event(taskName, date));
+        }
+
+        return true;
     }
 
     /**
@@ -75,13 +127,19 @@ public class Record {
      */
     public void deleteRecord(int index) {
         if (isIndexOutOfBound(index)) {
-            System.out.println("Invalid input! (Index cannot be out of bounds)");
+            printErrorMsg("Index provided is out of bounds.");
             return;
         }
-        System.out.println("Got it. I've deleted this task:");
-        System.out.println("\t" + records.remove(index));
-        System.out.printf("Now you have %d tasks in the list.\n", records.size());
+
+        Task deletedTask = records.remove(index);
+        printSuccessDeletedPrompt(deletedTask);
         saveRecords();
+    }
+
+    private void printSuccessDeletedPrompt(Task deletedTask) {
+        System.out.println("Got it. I've deleted this task:");
+        System.out.println("\t" + deletedTask);
+        System.out.printf("Now you have %d tasks in the list.\n", records.size());
     }
 
     /**
@@ -94,53 +152,61 @@ public class Record {
      */
     public void markAsDone(int index) {
         if (isIndexOutOfBound(index)) {
-            System.out.println("Invalid input! (Index cannot be out of bounds)");
-            return;
+            printErrorMsg("Index provided is out of bounds.");
         }
         records.get(index).setAsDone();
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println("\t" + records.get(index));
+        printSuccessMarkedDonePrompt(index);
         saveRecords();
     }
 
+    private void printSuccessMarkedDonePrompt(int index) {
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println("\t" + records.get(index));
+    }
+
     /**
-     * Searches records based on the given {@code date}. If the dates of stored tasks match the given {@code date},
+     * Searches records based on the given {@code date}. If the date of stored tasks match the given {@code date},
      * the program will print those tasks in the CLI. If no record contains the given {@code date}, "Null"
-     * will be printed in the CLI.
+     * will be printed.
      *
      * @param date A date in format of yyyy-mm-dd
      */
-    public void searchDate(String date) {
+    public void searchDate(String date) throws InvalidArgumentException {
         DateTime dateTime;
+        dateTime = new DateTime(date);
+        System.out.printf("Here is your task with deadline/Due day by %s:\n", date);
+        searchFromTheArrayList(dateTime);
+    }
+
+    private void searchFromTheArrayList(DateTime dateTime) {
         int counter = 1;
-        try {
-            dateTime = new DateTime(date);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return;
-        }
-        System.out.printf("Here is your task in %s:\n", date);
         for (Task task : records) {
-            if(task.getDate() == null) continue;
+            if (task.getDate() == null) {
+                continue;
+            }
             if (task.getDate().equals(dateTime.getDate())) {
                 System.out.println(counter++ + ". " + task);
             }
         }
-        if (counter == 1){
-            System.out.println("Null");
+        if (counter == 1) {
+            printNullMsg();
         }
     }
 
     /**
-     * Finds records based on the given {@code keyword}. If the names of stored tasks contains the given
+     * Finds records based on the given {@code keyword}. If the name of stored tasks contains the given
      * {@code keyword}, the program will print those tasks in the CLI. If no record contains the given {@code keyword},
-     * "Null" will be printed in the CLI.
+     * "Null" will be printed.
      *
      * @param keyword A target String for searching
      */
     public void findRecords(String keyword) {
-        boolean hasRecord = false;
         System.out.printf("Here is your task List with keyword %s:\n", keyword);
+        findFromTheArrayList(keyword);
+    }
+
+    private void findFromTheArrayList(String keyword) {
+        boolean hasRecord = false;
         for (int i = 0; i < records.size(); i++) {
             if (records.get(i).getTaskName().contains(keyword)) {
                 System.out.println((i + 1) + ". " + records.get(i));
@@ -148,7 +214,7 @@ public class Record {
             }
         }
         if (!hasRecord) {
-            System.out.println("Null");
+            printNullMsg();
         }
     }
 
@@ -158,11 +224,15 @@ public class Record {
      */
     public void showList() {
         System.out.println("Here is your task List:");
+        listAllTasksFromTheArrayList();
+    }
+
+    private void listAllTasksFromTheArrayList() {
         for (int i = 0; i < records.size(); i++) {
             System.out.println((i + 1) + ". " + records.get(i));
         }
         if (records.size() == 0) {
-            System.out.println("Null");
+            printNullMsg();
         }
     }
 
@@ -170,96 +240,77 @@ public class Record {
         try {
             File myObj = new File("records.txt");
             Scanner recordReader = new Scanner(myObj);
-            while (recordReader.hasNextLine()) {
-                InputDataHandler data = new InputDataHandler(recordReader.nextLine(), InputType.recordInput);
-                addRecordToCollection(data.getOtherArguments(), data.getFirstArgument());
-                if (data.isDone()) {
-                    records.get(records.size() - 1).setAsDone();
-                }
-            }
+            retrieveRecordFromLocalFile(recordReader);
             recordReader.close();
+        } catch (InvalidArgumentException | IllegalArgumentException e) {
+            throw new Error("The local file is damaged. Please recover it or remove it manually.");
         } catch (FileNotFoundException e) {
-            System.out.println("No record found");
+            printNotFoundMsg();
             return;
         }
-        System.out.println("Record found");
+        printFoundMsg();
     }
 
-    private boolean addRecordToCollection(String[] detailFragments, String taskType) {
-        String date;
-        String taskName;
-        String[] details;
-        boolean isAdded = false;
-
-        switch (taskType) {
-        case Todo.TASK_TYPE:
-            if (detailFragments.length > 0) {
-                taskName = String.join(" ", detailFragments);
-                records.add(new Todo(taskName));
-                isAdded = true;
-            } else {
-                showInvalidEmptyDescription();
+    private void retrieveRecordFromLocalFile(Scanner recordReader) throws InvalidArgumentException {
+        while (recordReader.hasNextLine()) {
+            InputParser data = new InputParser(recordReader.nextLine(), InputType.recordInput);
+            addTaskToArrayList(data.getArguments(), data.getTaskType());
+            if (data.isDone()) {
+                int indexOfNewlyAddedTask = records.size() - 1;
+                records.get(indexOfNewlyAddedTask).setAsDone();
             }
-            break;
-        case Deadline.TASK_TYPE:
-            details = getTaskNameAndDate(detailFragments, taskType);
-            if (details != null) {
-                taskName = details[0];
-                date = details[1];
-                records.add(new Deadline(taskName, date));
-                isAdded = true;
-            }
-            break;
-        case Event.TASK_TYPE:
-            details = getTaskNameAndDate(detailFragments, taskType);
-            if (details != null) {
-                taskName = details[0];
-                date = details[1];
-                records.add(new Event(taskName, date));
-                isAdded = true;
-            }
-            break;
-        default:
-            throw new IllegalArgumentException("A non-taskType is passed to addRecord. Program terminated.");
         }
-        return isAdded;
     }
 
-    private String[] getTaskNameAndDate(String[] detailFragments, String taskType) {
-        int keywordIndex = Arrays.asList(detailFragments).indexOf(taskType.equals(Deadline.TASK_TYPE) ? "/by" : "/at");
-        if (keywordIndex < 0 || keywordIndex == detailFragments.length - 1) {
-            System.out.println("Invalid argument! It may be resulted from:");
-            System.out.println("1. No date/time provided");
-            System.out.println("2. keywords not matching");
-            return null;
+    private String[] getTaskNameAndDate(String[] inputFragments, String taskType) throws InvalidArgumentException {
+        int keywordIndex = getKeywordIndex(inputFragments, taskType);
+        if (keywordIndex < 0 || keywordIndex == inputFragments.length - 1) {
+            throw new InvalidArgumentException("Date is not provided or keyword is not matching");
         }
         if (keywordIndex == 0) {
-            showInvalidEmptyDescription();
-            return null;
+            throw new InvalidArgumentException("Description cannot be empty!");
         }
+
+        String taskName = getTaskName(inputFragments, keywordIndex);
+        String dateTime = getDateTime(inputFragments, keywordIndex);
+        return new String[]{taskName, dateTime};
+    }
+
+    private int getKeywordIndex(String[] inputFragments, String taskType) {
+        return Arrays.asList(inputFragments).indexOf(taskType.equals(Deadline.TASK_TYPE) ? "/by" : "/at");
+    }
+
+    private String getTaskName(String[] inputFragments, int keywordIndex) {
         StringBuilder taskName = new StringBuilder();
-        StringBuilder dueDay = new StringBuilder();
-        taskName.append(detailFragments[0]);
+        taskName.append(inputFragments[0]);
         for (int i = 1; i < keywordIndex; i++) {
-            taskName.append(" ").append(detailFragments[i]);
+            taskName.append(" ").append(inputFragments[i]);
         }
-        dueDay.append(detailFragments[keywordIndex + 1]);
-        for (int i = keywordIndex + 2; i < detailFragments.length; i++) {
-            dueDay.append(" ").append(detailFragments[i]);
+        return taskName.toString();
+    }
+
+    private String getDateTime(String[] inputFragments, int keywordIndex) {
+        StringBuilder dueDay = new StringBuilder();
+        dueDay.append(inputFragments[keywordIndex + 1]);
+        for (int i = keywordIndex + 2; i < inputFragments.length; i++) {
+            dueDay.append(" ").append(inputFragments[i]);
         }
-        return new String[]{taskName.toString(), dueDay.toString()};
+        return dueDay.toString();
     }
 
     private void saveRecords() {
         try {
             FileWriter save = new FileWriter("Records.txt");
-            for (Task task : records) {
-                save.write(task.toSave() + "\n");
-            }
+            writeRecordToLocalFile(save);
             save.close();
         } catch (IOException e) {
-            System.out.println("IOException - File failed to be saved");
-            e.printStackTrace();
+            printErrorMsg("File failed to be saved");
+        }
+    }
+
+    private void writeRecordToLocalFile(FileWriter save) throws IOException {
+        for (Task task : records) {
+            save.write(task.toSave() + "\n");
         }
     }
 
@@ -267,7 +318,19 @@ public class Record {
         return index < 0 || index >= records.size();
     }
 
-    private void showInvalidEmptyDescription() {
-        System.out.println("The description of a task cannot be empty.");
+    private void printNotFoundMsg() {
+        System.out.println("No record found");
+    }
+
+    private void printNullMsg() {
+        System.out.println("Null");
+    }
+
+    private void printFoundMsg() {
+        System.out.println("Record found");
+    }
+
+    private void printErrorMsg(String message) {
+        System.out.println("Error: " + message);
     }
 }

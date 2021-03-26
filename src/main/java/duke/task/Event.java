@@ -1,5 +1,6 @@
 package duke.task;
 
+import duke.exception.InvalidArgumentException;
 import duke.task.dateTime.DateTime;
 
 import java.time.LocalDate;
@@ -22,7 +23,7 @@ public class Event extends Task {
      * @param taskName name of the {@code Event} Object
      * @param schedule date and time (optional) of the {@code Event} Object
      */
-    public Event(String taskName, String schedule) {
+    public Event(String taskName, String schedule) throws InvalidArgumentException {
         super(taskName);
         this.schedule = new DateTime(schedule);
     }

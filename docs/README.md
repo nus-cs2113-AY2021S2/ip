@@ -26,55 +26,62 @@ To add a todo task to the task list
 #### Example: `todo task1`
 #### Expected outcome:
 ```
-Command entered: todo task1
 Got it. I've added this task:
-    [T][X] task1
+	[T][X] task1
 Now you have 5 tasks in the list.
 ```
 
 ### `deadline` - Adding a deadline task
 To add a deadline task to the task list
 #### Command: `deadline (name of the deadline) /by (date) [time]`
-#### Example: `deadline task1 /by 2020-09-03 1134`
+#### Example: `deadline task2 /by 2020-09-03 1134`
 #### Expected outcome:
 ```
-Command entered: deadline task1 /by 2020-09-03 1134
 Got it. I've added this task:
-	[D][X] task1 (by: Sep 3 2020, 11:34am)
-Now you have 1 tasks in the list.
+	[D][X] task2 (by: Sep 3 2020, 11:34am)
+Now you have 6 tasks in the list.
 ```
 
 ### `event` - Adding an event task
 To add an event task to the task list
 #### Command: `event (name of the event) /at (date) [time]`
-#### Example: `event task1 /at 2020-09-03 1134`
+#### Example: `event task3 /at 2020-10-15 1745`
 #### Expected outcome:
 ```
-Command entered: event task1 /at 2020-09-03 1134
 Got it. I've added this task:
-	[E][X] task1 (at: Sep 3 2020, 11:34am)
-Now you have 1 tasks in the list.
+	[E][X] task3 (at: Oct 15 2020, 5:45pm)
+Now you have 3 tasks in the list.
 ```
 
 ### `list` - Show the task list
 To list all tasks stored in the task list
 #### Command: `list`
-#### Expected outcome:
+#### Assume we have the following tasks in the task list:
 ```
-Command entered: list
-Here is your task List:
 1. [T][X] task1
 2. [D][X] task2 (by: Jan 1 2020, 11:59pm)
 3. [E][X] task3 (at: Mar 1 2020)
+```
+#### Expected outcome:
+```
+Here is your task List:
+1. [T][X] task1
+2. [D][X] task2 (by: Sep 3 2020, 11:34am)
+3. [E][X] task3 (at: Oct 15 2020, 5:45pm)
 ```
 
 ### `done` - Mark a task as "Done"
 To mark a task indicated by an index, which could be found with `list` command, as "Done".
 #### Command: `done (index)`
 #### Example: `done 1`
+#### Assume we have the following tasks in the task list:
+```
+1. [T][X] task1
+2. [D][X] task2 (by: Jan 1 2020, 11:59pm)
+3. [E][X] task3 (at: Mar 1 2020)
+```
 #### Expected outcome:
 ```
-Command entered: done 1
 Nice! I've marked this task as done:
 	[T][Done] task1
 ```
@@ -82,36 +89,48 @@ Nice! I've marked this task as done:
 ### `delete` - Delete a task
 To delete a task indicated by an index, which could be found with `list` command, stored in the task list
 #### Command: `delete (index)`
-#### Example: `delete 1`
+#### Example: `delete 2`
+#### Assume we have the following tasks in the task list:
+```
+1. [T][Done] task1
+2. [D][X] task2 (by: Sep 3 2020, 11:34am)
+3. [E][X] task3 (at: Oct 15 2020, 5:45pm)
+```
 #### Expected outcome:
 ```
-Command entered: delete 1
 Got it. I've deleted this task:
-	[T][Done] task1
-Now you have 0 tasks in the list.
+	[D][X] task2 (by: Sep 3 2020, 11:34am)
+Now you have 2 tasks in the list.
 ```
 
 ### `find` - List target tasks based on a given keyword
 To list all tasks in the task list whose task names contain the keyword.
 #### Command: `find (keyword)`
-#### Example: `find happy`
+#### Example: `find 1`
+#### Assume we have the following tasks in the task list:
+```
+1. [T][Done] task1
+2. [E][X] task3 (at: Oct 15 2020, 5:45pm)
+```
 #### Expected outcome:
 ```
-Command entered: find happy
-Here is your task List with keyword happy:
-1. [T][X] happyhappy
-2. [E][X] happy night (at: Feb 2 2020, 6:00pm)
+Here is your task List with keyword 1:
+1. [T][Done] task1
 ```
 
 ### `search` - List target tasks based on a given date
 To list all tasks in the task list whose dates are the same as the given date.
 #### Command: `search (date)`
-#### Example: `find 2020-01-01`
+#### Example: `search 2020-10-15`
+#### Assume we have the following tasks in the task list:
+```
+1. [T][Done] task1
+2. [E][X] task3 (at: Oct 15 2020, 5:45pm)
+```
 #### Expected outcome:
 ```
-Command entered: search 2020-01-01
-Here is your task in 2020-01-01:
-1. [D][X] task1 (by: Jan 1 2020)
+Here is your task with deadline/Due day by 2020-10-15:
+1. [E][X] task3 (at: Oct 15 2020, 5:45pm)
 ```
 
 ### `bye` - Exit the program
@@ -119,7 +138,6 @@ To exit the program
 #### Command: `bye`
 #### Expected outcome:
 ```
-Command entered: bye
 Bye. Hope to see you again soon!
 ```
 ## FAQ

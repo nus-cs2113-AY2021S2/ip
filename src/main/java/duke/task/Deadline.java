@@ -1,5 +1,6 @@
 package duke.task;
 
+import duke.exception.InvalidArgumentException;
 import duke.task.dateTime.DateTime;
 
 import java.time.LocalDate;
@@ -23,7 +24,7 @@ public class Deadline extends Task {
      * @param taskName name of the Deadline Object
      * @param dueDay   deadline of the Deadline Object
      */
-    public Deadline(String taskName, String dueDay) {
+    public Deadline(String taskName, String dueDay) throws InvalidArgumentException {
         super(taskName);
         this.dueDay = new DateTime(dueDay);
     }
