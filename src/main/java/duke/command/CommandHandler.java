@@ -53,7 +53,7 @@ public class CommandHandler {
             showList(userInput.getArguments());
             break;
         case "done":
-            processCommand(userInput.getArguments(), CommandType.markAsDone);
+            processCommand(userInput.getArguments(), CommandType.done);
             break;
         case "delete":
             processCommand(userInput.getArguments(), CommandType.delete);
@@ -91,23 +91,25 @@ public class CommandHandler {
 
     private void processCommand(String[] arguments, CommandType commandType) {
         if (arguments.length != 1) {
-            printErrorMsg("Command \"" + commandType + "\" requires an integer argument. Please try again!\n");
+            printErrorMsg("Command \"" + commandType + "\" requires an integer argument.");
             return;
         }
-        int targetRecordIndex = convertStringToIndex(arguments[0]);
-        if (targetRecordIndex == -1) {
-            printErrorMsg("Command \"" + commandType + "\" only requires an integer argument. Please try again!\n");
+        int targetRecordIndex;
+        try {
+            targetRecordIndex = convertStringToIndex(arguments[0]);
+        } catch (InvalidArgumentException e) {
+            printErrorMsg(e.getMessage());
             return;
         }
         executeCommand(commandType, targetRecordIndex);
     }
 
-    private int convertStringToIndex(String targetString) {
+    private int convertStringToIndex(String targetString) throws InvalidArgumentException {
         int targetRecordIndex;
         try {
             targetRecordIndex = Integer.parseInt(targetString) - 1;
         } catch (NumberFormatException e) {
-            return -1;
+            throw new InvalidArgumentException("Provided argument is not an integer.");
         }
         return targetRecordIndex;
     }
@@ -115,7 +117,7 @@ public class CommandHandler {
     private void executeCommand(CommandType commandType, int targetRecordIndex) {
         if (commandType.equals(CommandType.delete)) {
             record.deleteRecord(targetRecordIndex);
-        } else if (commandType.equals(CommandType.markAsDone)) {
+        } else if (commandType.equals(CommandType.done)) {
             record.markAsDone(targetRecordIndex);
         } else {
             throw new IllegalArgumentException("Unrecognized task type is provided.");
@@ -124,7 +126,7 @@ public class CommandHandler {
 
     private void findRecords(String[] arguments) {
         if (arguments.length != 1) {
-            printErrorMsg("Command \"find\" requires 1 argument as keyword. Please try again!");
+            printErrorMsg("Command \"find\" requires 1 argument as keyword.");
             return;
         }
         record.findRecords(arguments[0]);
@@ -132,7 +134,7 @@ public class CommandHandler {
 
     private void searchDate(String[] arguments) {
         if (arguments.length != 1) {
-            printErrorMsg("Command \"search\" requires a date argument. Please try again!\n");
+            printErrorMsg("Command \"search\" requires a date argument.");
             return;
         }
         try {
@@ -145,7 +147,7 @@ public class CommandHandler {
 
     private boolean isContinueToRun(String[] arguments) {
         if (arguments.length != 0) {
-            printErrorMsg("Command \"bye\" requires no argument. Please try again!");
+            printErrorMsg("Command \"bye\" requires no argument.");
             return true;
         }
         printQuitMsg();

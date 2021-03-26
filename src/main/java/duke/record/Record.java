@@ -153,6 +153,7 @@ public class Record {
     public void markAsDone(int index) {
         if (isIndexOutOfBound(index)) {
             printErrorMsg("Index provided is out of bounds.");
+            return;
         }
         records.get(index).setAsDone();
         printSuccessMarkedDonePrompt(index);

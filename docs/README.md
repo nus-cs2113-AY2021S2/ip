@@ -28,7 +28,7 @@ To add a todo task to the task list
 ```
 Got it. I've added this task:
 	[T][X] task1
-Now you have 5 tasks in the list.
+Now you have 1 tasks in the list.
 ```
 
 ### `deadline` - Adding a deadline task
@@ -39,7 +39,7 @@ To add a deadline task to the task list
 ```
 Got it. I've added this task:
 	[D][X] task2 (by: Sep 3 2020, 11:34am)
-Now you have 6 tasks in the list.
+Now you have 2 tasks in the list.
 ```
 
 ### `event` - Adding an event task
