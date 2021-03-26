@@ -6,7 +6,7 @@ package duke.exception;
 public class InvalidArgumentException extends Exception {
     String errorMsg;
 
-    public InvalidArgumentException(String errorMsg){
+    public InvalidArgumentException(String errorMsg) {
         this.errorMsg = errorMsg;
     }
 

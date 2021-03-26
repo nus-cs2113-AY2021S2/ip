@@ -243,24 +243,33 @@ public class Record {
             Scanner recordReader = new Scanner(myObj);
             retrieveRecordFromLocalFile(recordReader);
             recordReader.close();
-        } catch (InvalidArgumentException | IllegalArgumentException e) {
-            throw new Error("The local file is damaged. Please recover it or remove it manually.");
         } catch (FileNotFoundException e) {
             printNotFoundMsg();
             return;
         }
-        printFoundMsg();
+        printRecordRetrievedMsg();
     }
 
-    private void retrieveRecordFromLocalFile(Scanner recordReader) throws InvalidArgumentException {
+    private void retrieveRecordFromLocalFile(Scanner recordReader) {
+        InputParser data;
         while (recordReader.hasNextLine()) {
-            InputParser data = new InputParser(recordReader.nextLine(), InputType.recordInput);
-            addTaskToArrayList(data.getArguments(), data.getTaskType());
+            String record = recordReader.nextLine();
+            try {
+                data = new InputParser(record, InputType.recordInput);
+                addTaskToArrayList(data.getArguments(), data.getTaskType());
+            } catch (InvalidArgumentException | IllegalArgumentException e) {
+                printErrorMsg("The following record failed to be added: " + record);
+                continue;
+            }
             if (data.isDone()) {
-                int indexOfNewlyAddedTask = records.size() - 1;
-                records.get(indexOfNewlyAddedTask).setAsDone();
+                setAsDone();
             }
         }
+    }
+
+    private void setAsDone() {
+        int indexOfNewlyAddedTask = records.size() - 1;
+        records.get(indexOfNewlyAddedTask).setAsDone();
     }
 
     private String[] getTaskNameAndDate(String[] inputFragments, String taskType) throws InvalidArgumentException {
@@ -327,8 +336,8 @@ public class Record {
         System.out.println("Null");
     }
 
-    private void printFoundMsg() {
-        System.out.println("Record found");
+    private void printRecordRetrievedMsg() {
+        System.out.println("Record retrieved");
     }
 
     private void printErrorMsg(String message) {
