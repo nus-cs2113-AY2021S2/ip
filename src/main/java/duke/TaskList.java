@@ -16,7 +16,7 @@ public class TaskList {
      *
      * @param list ArrayList containing all tasks
      */
-    public static void printList(ArrayList<Task> list) {
+    public static void listCommand(ArrayList<Task> list) {
         if(list.size() == 0) {
             Ui.printEmptyListMessage();
         } else {
@@ -41,7 +41,7 @@ public class TaskList {
      * @param input String containing the description of the To Do
      * @param list Arraylist containing all tasks
      */
-    public static void addToDo(String input, ArrayList<Task> list) {
+    public static void toDoCommand(String input, ArrayList<Task> list) {
         if(input == null || input.length() == 0) {
             Ui.printInvalidArgumentMessage(Constants.NO_DESCRIPTION_MESSAGE);
         } else {
@@ -56,25 +56,11 @@ public class TaskList {
      * @param input String containing the description amd dueDate of the Deadline
      * @param list ArrayList containing all tasks
      */
-    public static void addDeadline(String input, ArrayList<Task> list) {
+    public static void deadlineCommand(String input, ArrayList<Task> list) {
         if (input == null) {
             Ui.printInvalidArgumentMessage(Constants.NO_DESCRIPTION_MESSAGE);
         } else if(input.toLowerCase().contains("/by")) {
-            try {
-                String[] parsedInput = Parser.descDateParser(input, "/by");
-                String desc = parsedInput[0];
-                String dueDate = parsedInput[1];
-                if (dueDate != null) {
-                    list.add(new Deadline(desc, dueDate));
-                    Ui.printDeadlineAdded(desc, dueDate);
-                } else {
-                    Ui.printInvalidArgumentMessage(Constants.NO_DEADLINE_MESSAGE);
-                }
-            } catch (StringIndexOutOfBoundsException e) {
-                Ui.printInvalidArgumentMessage(Constants.NO_DESCRIPTION_MESSAGE);
-            } catch (Exception e) {
-                Ui.printGenericErrorMessage();
-            }
+            addDeadline(input, list);
         } else {
             Ui.printInvalidArgumentMessage(Constants.NO_DEADLINE_MESSAGE);
         }
@@ -86,25 +72,11 @@ public class TaskList {
      * @param input String containing the description and date of the Event
      * @param list ArrayList containing all tasks
      */
-    public static void addEvent(String input, ArrayList<Task> list) {
+    public static void eventCommand(String input, ArrayList<Task> list) {
         if (input == null) {
             Ui.printInvalidArgumentMessage(Constants.NO_DESCRIPTION_MESSAGE);
         } else if(input.toLowerCase().contains("/at")) {
-            try {
-                String[] parsedInput = Parser.descDateParser(input, "/at");
-                String desc = parsedInput[0];
-                String date = parsedInput[1];
-                if (date != null) {
-                    list.add(new Event(desc, date));
-                    Ui.printEventAdded(desc, date);
-                } else {
-                    Ui.printInvalidArgumentMessage(Constants.NO_TIME_MESSAGE);
-                }
-            } catch (StringIndexOutOfBoundsException e) {
-                Ui.printInvalidArgumentMessage(Constants.NO_DESCRIPTION_MESSAGE);
-            } catch (Exception e) {
-                Ui.printGenericErrorMessage();
-            }
+            addEvent(input, list);
         } else {
             Ui.printInvalidArgumentMessage(Constants.NO_TIME_MESSAGE);
         }
@@ -116,7 +88,7 @@ public class TaskList {
      * @param list ArrayList containing all tasks
      * @param argument Task number of task to be checked off
      */
-    public static void markAsDone(ArrayList<Task> list, String argument) {
+    public static void doneCommand(ArrayList<Task> list, String argument) {
         try {
             int taskNo = Integer.parseInt(argument);
             checkTask(list, taskNo);
@@ -131,7 +103,7 @@ public class TaskList {
      * @param list ArrayList containing all tasks
      * @param input Task number of task to be unchecked
      */
-    public static void undoMarkAsDone(ArrayList<Task> list, String input) {
+    public static void undoCommand(ArrayList<Task> list, String input) {
         try {
             int taskNo = Integer.parseInt(input);
             uncheckTask(list, taskNo);
@@ -145,7 +117,7 @@ public class TaskList {
      * @param list ArrayList containing all tasks
      * @param input Task number of task to be deleted
      */
-    public static void delete(ArrayList<Task> list, String input) {
+    public static void deleteCommand(ArrayList<Task> list, String input) {
         try {
             int taskNo = Integer.parseInt(input);
             removeTask(list, taskNo);
@@ -161,7 +133,7 @@ public class TaskList {
      * @param list ArrayList containing all tasks
      * @param keyword Keyword(s) used for searching
      */
-    public static void find(ArrayList<Task> list, String keyword) {
+    public static void findCommand(ArrayList<Task> list, String keyword) {
         List<Task> filteredList = list.stream().filter(str -> str.contains(keyword)).collect(Collectors.toList());
 
         ArrayList<String> taskList = new ArrayList<>();
@@ -178,6 +150,41 @@ public class TaskList {
         Ui.dukePrinter(taskList);
     }
 
+    private static void addDeadline(String input, ArrayList<Task> list) {
+        try {
+            String[] parsedInput = Parser.descDateParser(input, "/by");
+            String desc = parsedInput[0];
+            String dueDate = parsedInput[1];
+            if (dueDate != null) {
+                list.add(new Deadline(desc, dueDate));
+                Ui.printDeadlineAdded(desc, dueDate);
+            } else {
+                Ui.printInvalidArgumentMessage(Constants.NO_DEADLINE_MESSAGE);
+            }
+        } catch (StringIndexOutOfBoundsException e) {
+            Ui.printInvalidArgumentMessage(Constants.NO_DESCRIPTION_MESSAGE);
+        } catch (Exception e) {
+            Ui.printGenericErrorMessage();
+        }
+    }
+
+    private static void addEvent(String input, ArrayList<Task> list) {
+        try {
+            String[] parsedInput = Parser.descDateParser(input, "/at");
+            String desc = parsedInput[0];
+            String date = parsedInput[1];
+            if (date != null) {
+                list.add(new Event(desc, date));
+                Ui.printEventAdded(desc, date);
+            } else {
+                Ui.printInvalidArgumentMessage(Constants.NO_TIME_MESSAGE);
+            }
+        } catch (StringIndexOutOfBoundsException e) {
+            Ui.printInvalidArgumentMessage(Constants.NO_DESCRIPTION_MESSAGE);
+        } catch (Exception e) {
+            Ui.printGenericErrorMessage();
+        }
+    }
     private static boolean checkValidIndex(int listSize, int taskNo) {
         if (!(taskNo <= listSize && taskNo > 0)) {
             Ui.printInvalidArgumentMessage(String.format(Constants.TASK_DOES_NOT_EXIST_MESSAGE));
