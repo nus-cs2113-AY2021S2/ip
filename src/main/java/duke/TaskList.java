@@ -36,7 +36,8 @@ public class TaskList {
     }
 
     /**
-     * Adds a new To Do to the list of tasks
+     * Adds a new To Do to the list of tasks after checking
+     * if there is an input
      *
      * @param input String containing the description of the To Do
      * @param list Arraylist containing all tasks
@@ -52,6 +53,7 @@ public class TaskList {
 
     /**
      * Adds a new Deadline to the list of tasks
+     * after checking if there is a description and a deadline
      *
      * @param input String containing the description amd dueDate of the Deadline
      * @param list ArrayList containing all tasks
@@ -68,6 +70,7 @@ public class TaskList {
 
     /**
      * Adds a new Event to the list of tasks
+     * after checking if there is a description and a time/date
      *
      * @param input String containing the description and date of the Event
      * @param list ArrayList containing all tasks
@@ -114,6 +117,7 @@ public class TaskList {
 
     /**
      * Deletes a task
+     *
      * @param list ArrayList containing all tasks
      * @param input Task number of task to be deleted
      */
@@ -150,6 +154,13 @@ public class TaskList {
         Ui.dukePrinter(taskList);
     }
 
+    /**
+     * Passes the input to a parser then uses the parsed data to
+     * create a new deadline and add it to the task list
+     *
+     * @param input user input
+     * @param list ArrayList containing all tasks
+     */
     private static void addDeadline(String input, ArrayList<Task> list) {
         try {
             String[] parsedInput = Parser.descDateParser(input, "/by");
@@ -168,6 +179,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Passes the input to a parser then uses the parsed data to
+     * create a new event and add it to the list
+     *
+     * @param input user input
+     * @param list ArrayList containing all tasks
+     */
     private static void addEvent(String input, ArrayList<Task> list) {
         try {
             String[] parsedInput = Parser.descDateParser(input, "/at");
@@ -185,6 +203,15 @@ public class TaskList {
             Ui.printGenericErrorMessage();
         }
     }
+
+    /**
+     * Checks if the task requested by the user exists
+     * (Checks if the task number is valid)
+     *
+     * @param listSize number of tasks in the list
+     * @param taskNo index of task requested by the user
+     * @return true if the task number is valid, false if the task number is invalid
+     */
     private static boolean checkValidIndex(int listSize, int taskNo) {
         if (!(taskNo <= listSize && taskNo > 0)) {
             Ui.printInvalidArgumentMessage(String.format(Constants.TASK_DOES_NOT_EXIST_MESSAGE));
@@ -193,6 +220,12 @@ public class TaskList {
         return true;
     }
 
+    /**
+     * Checks the task off as done
+     *
+     * @param list ArrayList containing all tasks
+     * @param taskNo task number of the task to be checked off
+     */
     private static void checkTask(ArrayList<Task> list, int taskNo) {
         if (checkValidIndex(list.size(), taskNo)) {
             if (list.get(taskNo - 1).getStatus()) {
@@ -205,6 +238,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Unchecks an already checked task
+     *
+     * @param list ArrayList containing all tasks
+     * @param taskNo task number of the task to be unchecked
+     */
     private static void uncheckTask(ArrayList<Task> list, int taskNo) {
         if (checkValidIndex(list.size(), taskNo)) {
             if (!list.get(taskNo - 1).getStatus()) {
@@ -217,6 +256,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Removes the task from the list
+     * @param list ArrayList containing all tasks
+     * @param taskNo task number of the task to be removed
+     */
     private static void removeTask(ArrayList<Task> list, int taskNo) {
         if (checkValidIndex(list.size(), taskNo)) {
             Ui.printTaskDeleted(taskNo, list.get(taskNo - 1).toString());
