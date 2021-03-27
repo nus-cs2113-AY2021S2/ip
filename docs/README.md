@@ -32,7 +32,9 @@ Example of usage:
 Expected outcome:
 
 `The following task has been added:`
+
 `Todo : [✘] buy tesla stock`
+
 `You now have 1 tasks in your list!`
 
 ### `deadline {task description} / {task deadline}` - Add a deadline to your todo list
@@ -58,8 +60,11 @@ Example of usage:
 Expected outcome:
 
 `event cheryl's birthday / monday`
+
 `The following task has been added:`
+
 `Event : [✘] cheryl's birthday || Happening on: monday`
+
 `You now have 3 tasks in your list!`
 
 ### `list` - Displays the list of tasks
@@ -72,7 +77,9 @@ Example of usage:
 Expected outcome:
 
 `1: Todo : [✘] buy tesla shares`
+
 `2: Deadline : [✘] deposit money || Due by: monday 10am`
+
 `3: Event : [✘] cheryl's birthday || Happening on: monday`
 
 ### `done {number}` - Sets a task as done
@@ -97,5 +104,21 @@ Example of usage:
 Expected outcome:
 
 `The deleted task is : Todo : [✓] buy tesla shares`
+
 `Noted. I've removed this task:`
+
 `Todo : [✓] buy tesla shares`
+
+
+### `find {query}` - Finds the task matching the query 
+This command allows you to find a specific task with a certain query
+
+Example of usage: 
+
+`find deposit` 
+
+Expected outcome:
+
+`We found these tasks matching the query: hw`
+
+`1. Deadline : [✘] deposit money || Due by: monday 10am`
