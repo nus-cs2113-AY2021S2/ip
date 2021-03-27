@@ -79,7 +79,6 @@ public class TaskList {
 
         }catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("☹ OOPS!!! The task number is invalid!");
-            showLine();
         }
     }
 
@@ -91,15 +90,19 @@ public class TaskList {
     public static void addTodo(String newTask) {
         try {
             newTask = newTask.substring(TODO_LENGTH);
-            System.out.println("Got it. I've added this task: ");
-            Todo todo = new Todo(newTask);
-            tasks.add(todo);
-            tasksCount++;
-            System.out.println(todo.toString());
-            printTotalTasks();
+            newTask = newTask.trim();
+            if (newTask.isBlank()) {
+                throw new StringIndexOutOfBoundsException();
+            } else {
+                System.out.println("Got it. I've added this task: ");
+                Todo todo = new Todo(newTask);
+                tasks.add(todo);
+                tasksCount++;
+                System.out.println(todo.toString());
+                printTotalTasks();
+            }
         } catch (StringIndexOutOfBoundsException e) {
             System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
-            showLine();
         }
     }
 
@@ -110,15 +113,20 @@ public class TaskList {
     public static void addDeadline(String input){
         try{
             String[] split = input.split(" /by");
-            Deadline deadline = new Deadline(split[0], split[1]);
-            System.out.println("Got it. I've added this task: ");
-            tasks.add(deadline);
-            tasksCount++;
-            System.out.println(deadline.toString());
-            printTotalTasks();
+            if (split[0].isBlank() || split[1].isBlank() ) {
+                throw new ArrayIndexOutOfBoundsException();
+            } else {
+                Deadline deadline = new Deadline(split[0], split[1]);
+                System.out.println("Got it. I've added this task: ");
+                tasks.add(deadline);
+                tasksCount++;
+                System.out.println(deadline.toString());
+                printTotalTasks();
+            }
+
 
         } catch(ArrayIndexOutOfBoundsException e){
-            System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            System.out.println("☹ OOPS!!! I'm sorry, you need to have both description and by timing:-(");
         }
     }
 
@@ -136,14 +144,18 @@ public class TaskList {
     public static void addEvent(String input) {
         try{
             String[] split = input.split(" /at");
-            Event event = new Event(split[0], split[1]);
-            System.out.println("Got it. I've added this task: ");
-            tasks.add(event);
-            tasksCount++;
-            System.out.println(event.toString());
-            printTotalTasks();
+            if (split[0].isBlank() || split[1].isBlank()) {
+                throw new ArrayIndexOutOfBoundsException();
+            } else {
+                Event event = new Event(split[0], split[1]);
+                System.out.println("Got it. I've added this task: ");
+                tasks.add(event);
+                tasksCount++;
+                System.out.println(event.toString());
+                printTotalTasks();
+            }
         } catch(ArrayIndexOutOfBoundsException e){
-            System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            System.out.println("☹ OOPS!!! I'm sorry, but you need to have both description and at timing :-(");
         }
 
     }
