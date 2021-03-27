@@ -82,6 +82,9 @@ public class Ui {
         System.out.println("No index found. Please key an appropriate index");
     }
 
+    /**
+     * Prints message after user adds a new task to the list.
+     */
     public static void printAddTaskMessage() {
         System.out.println("Got it. I've added this task: ");
     }
@@ -112,4 +115,5 @@ public class Ui {
     public static void printFileNotFoundExceptionMessage() {
         System.out.println("File not found. An attempt to open the file has failed.");
     }
+
 }

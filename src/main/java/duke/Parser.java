@@ -56,6 +56,7 @@ public class Parser {
 
             try {
                 incompleteCommand(userInput, TODO_STR_COMMAND, TODO_COMMAND);
+                Ui.printAddTaskMessage();
                 TaskList.addTodoTask(userInput);
                 Storage.writeToFile(tasks);
             } catch (IncompleteCommandException e) {
@@ -73,7 +74,7 @@ public class Parser {
 
             try {
                 incompleteCommand(userInput, DEADLINE_STR_COMMAND, DEADLINE_COMMAND);
-                by = userInput.substring(getSlashIndex + 4);
+                by = userInput.substring(getSlashIndex + 3);
                 processedDeadlineInput = userInput.substring(9, getSlashIndex).trim();
                 Ui.printAddTaskMessage();
                 TaskList.addDeadlineTask(by, processedDeadlineInput);
@@ -96,7 +97,7 @@ public class Parser {
             getSlashIndex = userInput.indexOf(SLASH_AT_STR);
             try {
                 incompleteCommand(userInput, EVENT_STR_COMMAND, EVENT_COMMAND);
-                at = userInput.substring(getSlashIndex + 4).trim();
+                at = userInput.substring(getSlashIndex + 3).trim();
                 processedEventInput = userInput.substring(6, getSlashIndex).trim();
                 Ui.printAddTaskMessage();
                 TaskList.addEventTask(at, processedEventInput);

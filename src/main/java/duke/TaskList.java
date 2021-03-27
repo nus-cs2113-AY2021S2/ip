@@ -53,10 +53,9 @@ public class TaskList {
      * @param userInput
      */
     public static void addTodoTask(String userInput) {
-        System.out.println("Got it. I've added this task: ");
         Task newTask = new Todo(userInput.substring(5));
         tasks.add(newTask);
-        System.out.println("  " + newTask.toString());
+        System.out.println(newTask.toString());
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
     }
 
