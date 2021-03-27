@@ -136,5 +136,8 @@ public class Task {
             int displayedNumber = i + 1;
             System.out.println(displayedNumber + ". " + matches.get(i));
         }
+        if(matches.size()==0){
+            System.out.println("None of the tasks match your query!");
+        }
     }
 }
