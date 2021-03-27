@@ -35,14 +35,19 @@ Now you should see __Duke__ welcoming you!
 
 ### Adding of Tasks  
 
-Duke allows you to add three different type of tasks in your list:<p>
+Duke allows you to add three different type of tasks in your list:  
 
-- Todo - tasks you plan to do. This is denoted as `[T]` in your task list!<br>
-- Deadline - tasks that contains a deadline. This is denoted as `[D]` in your task list!<br>
-Event - event you wish to attend. This is denoted as `[E]` in your task list!<br>
+- Todo - tasks you plan to do. This is denoted as `[T]` in your task list!
 
-- Duke saves your list of tasks every time you input your command `[Refer to Commands Section to learn more!]` and
-saves your progress even after you exit the program!
+
+- Deadline - tasks that contains a deadline. This is denoted as `[D]` in your task list!  
+
+
+- Event - event you wish to attend. This is denoted as `[E]` in your task list!  
+
+Note:
+- Duke saves your list of tasks every time you input your command `[Refer to Commands Summary to see the full list of commands!]` and
+  saves your progress even after you exit the program!
 
 ### Deletion of Tasks  
 
