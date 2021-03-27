@@ -44,21 +44,21 @@ public class Storage {
      * @throws FileNotFoundException
      */
     public ArrayList<Task> uploadTasks() throws FileNotFoundException {
-        File f = new File(getFilepath());
-        Scanner s = new Scanner(f);
-        while (s.hasNext()) {
-            String[] task = s.nextLine().split(" ==> ");
-            if (task[0].equals("T")) {
-                tasks.add(new Todo(task[2]));
-            } else if (task[0].equals("D")) {
-                tasks.add(new Deadline(task[2], task[3]));
-            } else {
-                tasks.add(new Event(task[2], task[3]));
+            File f = new File(getFilepath());
+            Scanner s = new Scanner(f);
+            while (s.hasNext()) {
+                String[] task = s.nextLine().split(" ==> ");
+                if (task[0].equals("T")) {
+                    tasks.add(new Todo(task[2]));
+                } else if (task[0].equals("D")) {
+                    tasks.add(new Deadline(task[2], task[3]));
+                } else {
+                    tasks.add(new Event(task[2], task[3]));
+                }
+                if (task[1].equals("[X]")) {
+                    tasks.get(tasks.size() - 1).markAsDone();
+                }
             }
-            if (task[1].equals("[X]")) {
-                tasks.get(tasks.size()-1).markAsDone();
-            }
-        }
         return tasks;
     }
 
@@ -82,9 +82,9 @@ public class Storage {
      * saves tasks into duke.txt
      */
     public void exitProgram() {
-        Duke.printDash();
+        Ui.printDash();
         System.out.println("Bye. Hope to see you again soon!");
-        Duke.printDash();
+        Ui.printDash();
         try {
             saveTasks();
         } catch (IOException e) {

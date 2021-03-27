@@ -1,5 +1,11 @@
 public class Event extends Task{
     protected String by;
+
+    /**
+     *
+     * @param description
+     * @param by
+     */
     public Event(String description, String by) {
         super(description);
         this.by = by;

@@ -3,7 +3,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Duke {
-    static int TODO_LENGTH = 5;
+    static int TODO_LENGTH = 4;
     static int DEADLINE_LENGTH = 9;
     static int EVENT_LENGTH = 6;
     static int FIND_LENGTH = 5;
@@ -29,10 +29,6 @@ public class Duke {
 
     }
 
-    public static void printDash() {
-        System.out.println("-".repeat(80));
-    }
-
     public void run() {
         Ui.printGreetMessage();
         Scanner myObj = new Scanner(System.in);
@@ -55,8 +51,14 @@ public class Duke {
                 taskList.filterList(command.substring(FIND_LENGTH));
 
                 // add tasks to list
-            } else {
+            } else if (command.contains("todo")
+                    || command.contains("deadline")
+                    || command.contains("event")) {
                 taskList.addTasks(command);
+            } else {
+                Ui.printDash();
+                System.out.println("\tOOPS!!! Please enter a valid command.");
+                Ui.printDash();
             }
             command = myObj.nextLine();
         }

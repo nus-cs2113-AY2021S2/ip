@@ -4,6 +4,10 @@ public class Task {
     protected String SYMBOL;
     protected String ARROW = " ==> ";
 
+    /**
+     *
+     * @param description
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;

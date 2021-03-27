@@ -10,16 +10,16 @@ public class TaskList {
      * print list as a checklist when command=list
      */
     public void printList() {
-        Duke.printDash();
+        Ui.printDash();
         if (tasks.size() != 0) {
-            System.out.println("\tHere are the tasks in your list: ");
+            Ui.validListMessage();
             for (int i = 1; i <= tasks.size(); ++i) {
                 System.out.println("\t" + i + "." + tasks.get(i - 1).toString());
             }
         } else {
-            System.out.println("\tYou do not have any pending task.");
+            Ui.emptyListMessage();
         }
-        Duke.printDash();
+        Ui.printDash();
     }
 
     /**
@@ -28,55 +28,56 @@ public class TaskList {
      * @param filterString
      */
     public void filterList(String filterString) {
-        Duke.printDash();
+        Ui.printDash();
         tasks.stream()
                 .filter((s) -> s.getDescription().contains(filterString))
                 .forEach(s -> System.out.println(s.toString()));
-        Duke.printDash();
+        Ui.printDash();
     }
 
     /**
      * adds tasks into Array List
-     * @param description
+     * @param line
      */
-    public void addTasks(String description) {
-        Duke.printDash();
-        if (description.contains("todo")) {
+    public void addTasks(String line) {
+        Ui.printDash();
+        String[] action = line.split(" ");
+        if (action[0].equals("todo")) {
             try {
-                description = description.substring(Duke.TODO_LENGTH);
-                runTodo(description);
-            } catch (StringIndexOutOfBoundsException e) {
-                System.out.println("\tOOPS!!! The description of a todo cannot be empty.");
-                Duke.printDash();
+                line = line.substring(Duke.TODO_LENGTH).trim();
+                runTodo(line);
+            } catch (NullPointerException | EmptyLineException | StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
+                System.out.println("\tOOPS!!! Please enter a valid command.");
+                Ui.printDash();
                 return;
             }
-        } else if (description.contains("deadline")) {
+        } else if (action[0].equals("deadline")) {
             try {
-                description = description.substring(Duke.DEADLINE_LENGTH);
-                runDeadline(description);
-            } catch (StringIndexOutOfBoundsException e) {
-                System.out.println("\tOOPS!!! The description of a deadline cannot be empty.");
-                Duke.printDash();
+                line = line.substring(Duke.DEADLINE_LENGTH);
+                runDeadline(line);
+            } catch (EmptyLineException | StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
+                System.out.println("\tOOPS!!! Please enter a valid command.");
+                Ui.printDash();
                 return;
             }
-        } else if (description.contains("event")) {
+        } else if (action[0].contains("event")) {
             try {
-                description = description.substring(Duke.EVENT_LENGTH);
-                runEvent(description);
-            } catch (StringIndexOutOfBoundsException e) {
-                System.out.println("\tOOPS!!! The description of a event cannot be empty");
-                Duke.printDash();
+                line = line.substring(Duke.EVENT_LENGTH);
+                runEvent(line);
+            } catch (EmptyLineException | StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
+                System.out.println("\tOOPS!!! Please enter a valid command.");
+                Ui.printDash();
                 return;
             }
         } else {
-            System.out.println("\tOOPS!!! I'm sorry, but I don't know what that means :-(");
-            Duke.printDash();
+            Ui.invalidCommandMessage();
+            Ui.printDash();
             return;
         }
-        System.out.println("\tGot it. I've added this task: ");
+        Ui.addedTaskMessage();
         System.out.println(tasks.get(tasks.size()-1).toString());
         System.out.println("\tNow you have " + tasks.size() + " tasks in the list");
-        Duke.printDash();
+        Ui.printDash();
     }
 
     /**
@@ -85,17 +86,21 @@ public class TaskList {
      * @param command
      */
     public void deleteTasks(String command) {
-        Duke.printDash();
+        Ui.printDash();
         command = command.replace("delete", " ");
         command = command.strip();
+        try {
+            int count = Integer.parseInt(command);
+            --count; // array starts from 0
+            System.out.println("\tNoted. I've removed this task:\n" + tasks.get(count).toString());
 
-        int count = Integer.parseInt(command);
-        --count; // array starts from 0
-        System.out.println("\tNoted. I've removed this task:\n" + tasks.get(count).toString());
-
-        tasks.remove(tasks.get(count));
-        System.out.println("\tNow you have " + tasks.size() + " tasks in the list");
-        Duke.printDash();
+            tasks.remove(tasks.get(count));
+            System.out.println("\tNow you have " + tasks.size() + " tasks in the list");
+            Ui.printDash();
+        } catch (NumberFormatException e) {
+            Ui.invalidTaskNumberMessage();
+            Ui.printDash();
+        }
     }
 
     /**
@@ -104,9 +109,8 @@ public class TaskList {
      * @param command
      */
     public void taskCompleted(String command) {
-        Duke.printDash();
+        Ui.printDash();
         int count;
-        // remove done from string
         command = command.replace("done", " ");
         command = command.strip();
         count = Integer.parseInt(command);
@@ -116,35 +120,57 @@ public class TaskList {
         try {
             count = Integer.parseInt(command); // convert string 2 into int 2
         } catch (NumberFormatException e) {
-            System.out.println("\tOOPS!!! Please indicate task number");
-            Duke.printDash();
+            Ui.emptyTaskNumberMessage();
+            Ui.printDash();
             return;
         }
         try {
             --count; // array starts from 0
             tasks.get(count).markAsDone();
-            System.out.println("\tNice! I've marked this task as done: ");
+            Ui.taskIsDoneMessage();
             System.out.println(tasks.get(count).toString());
         } catch (NullPointerException e) {
-            System.out.println("\tOOPS!!! Please enter valid task number");
-            Duke.printDash();
+            Ui.invalidTaskNumberMessage();
+            Ui.printDash();
             return;
         }
-        Duke.printDash();
+        Ui.printDash();
     }
 
-    public void runDeadline(String description) {
-        String[] details = description.split(" /by");
+    /**
+     *
+     * @param description
+     */
+    public void runDeadline(String description) throws EmptyLineException {
+        String[] details = description.trim().split("/by");
+        if (details.length != 2 || details[0].trim().isEmpty() || details[1].trim().isEmpty()) {
+            throw new EmptyLineException();
+        }
         tasks.add(new Deadline(details[0], details[1]));
     }
 
-    public void runTodo(String description) {
+    /**
+     *
+     * @param description
+     * @throws EmptyLineException
+     */
+    public void runTodo(String description) throws EmptyLineException {
+        if (description.length() == 0) {
+           throw new EmptyLineException();
+        }
         tasks.add(new Todo(description));
     }
 
-    public void runEvent(String description) {
-        String[] details = description.split(" /at");
-        tasks.add(new Event(details[0], details[1]));
+    /**
+     *
+     * @param description
+     */
+    public void runEvent(String description) throws EmptyLineException {
+        String[] details = description.split("/at");
+        if (details.length != 2 || details[0].trim().isEmpty() || details[1].trim().isEmpty()) {
+            throw new EmptyLineException();
+        }
+        tasks.add(new Event(details[0].trim(), details[1]));
     }
 
 
