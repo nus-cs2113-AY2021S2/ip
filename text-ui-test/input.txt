@@ -1,0 +1,18 @@
+todo buy milk
+event meeting /at 9.30
+deadline retire /by 40
+done 1
+list
+todo
+event
+event meeting
+deadline
+deadline retire
+blah
+delete 2
+delete 69
+find fakeKeyword
+find retire
+event meeting /at -1
+deadline retire /by -1
+bye
