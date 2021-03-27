@@ -258,6 +258,7 @@ public class TaskList {
 
     /**
      * Removes the task from the list
+     * 
      * @param list ArrayList containing all tasks
      * @param taskNo task number of the task to be removed
      */
