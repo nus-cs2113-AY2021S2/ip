@@ -1,0 +1,23 @@
+Testing
+todo
+todo Task-1
+list
+deadline Task-2
+deadline Task-2 /at 10:00am
+deadline Task-2 /by 10:00am
+list
+event Task-3
+event Task-3 /by tmr
+event Task-3 /at tmr
+list
+done 0
+done 2
+list
+done
+list 2
+delete
+delete 10
+delete 2
+list
+bye again~
+bye
