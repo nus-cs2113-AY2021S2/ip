@@ -1,0 +1,5 @@
+deadline-true-return book (by: Sunday)
+event-true-project meeting (at: Mon 2-4pm)
+todo-true-run book (by: Sunday)
+todo-true-goto gym
+todo-false-go to excercise
