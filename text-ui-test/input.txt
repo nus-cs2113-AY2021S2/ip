@@ -1,0 +1,10 @@
+todo read book
+deadline Week 5 exercises /by 11 Feb
+event Valentine's day /at 14 Feb
+list
+done 1
+list
+done r
+undo 1
+list
+bye
