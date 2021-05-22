@@ -1,0 +1,7 @@
+T/1/wash the dishes
+E/1/presentation/2021-05-29T10:00
+E/0/jidos/0210-02-03T20:11
+T/0/ds
+T/0/read book
+T/0/1
+D/1/watch tv/1999-08-07T12:40
