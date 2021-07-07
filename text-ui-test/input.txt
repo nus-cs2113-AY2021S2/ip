@@ -1,0 +1,37 @@
+todo Grow Mushroom
+deadline Plant Mushroom /by 2020-02-25
+event Mushroom Concert /at Sunday
+list
+done 2
+delete 2
+find mushroom
+todo testdelete todo
+deadline testdelete deadline /by 2020-02-02
+event testfind event /at monday
+list
+find test
+find testdelete
+find jackma
+find find
+delete jackma
+done jackma
+delete 0
+list
+delete 7
+done 4
+done 5
+list
+delete 4
+delete 4
+list
+done -1
+done 7
+list
+todo test invalid format for command code
+deadline /by 2019-01-01
+deadline purposely wrong date /by 2019-30-30
+deadline purposely wrong identifier format /at 2019-01-01
+deadline purposely wrong identifier format/by2019-01-01
+deadline purpose no identifier format
+list
+bye

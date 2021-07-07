@@ -1,7 +1,219 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+____________________________________________________________
+           ____
+       _.-'78o `"`--._
+   ,o888o.  .o888o,   ''-.
+ ,88888P  `78888P..______.]
+/_..__..----""        __.'
+`-._       /""| _..-''
+    "`-----\  `\
+            |   ;.-""--..
+            | ,8o.  o88. `.
+            `;888P  `788P  :
+      .o""-.|`-._         ./
+     J88 _.-/    ";"-P----'
+     `--'\`|     /  /
+         | /     |  |
+         \|     /   |akn
+          `-----`---'
 
+Welcome to Track-The-Mushroom!
+Mushroom Tracker is here to serve you!
+____________________________________________________________
+Loading file...
+Loading failed - Unable to detect file.
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+[T][ ] Grow Mushroom
+Now you have 1 task(s) in the list.
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+[D][ ] Plant Mushroom (by: 2020-02-25)
+Now you have 2 task(s) in the list.
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+[E][ ] Mushroom Concert (at: Sunday)
+Now you have 3 task(s) in the list.
+____________________________________________________________
+____________________________________________________________
+Below are all your task(s):
+1.[T][ ] Grow Mushroom
+2.[D][ ] Plant Mushroom (by: 2020-02-25)
+3.[E][ ] Mushroom Concert (at: Sunday)
+____________________________________________________________
+____________________________________________________________
+Nice! I've marked the task as done:
+[D][X] Plant Mushroom (by: 2020-02-25)
+____________________________________________________________
+____________________________________________________________
+Noted. I will remove this task:
+[D][X] Plant Mushroom (by: 2020-02-25)
+Now you have 2 task(s) in the list.
+____________________________________________________________
+____________________________________________________________
+Processing keyword searches, please wait.
+1.[T][ ] Grow Mushroom
+2.[E][ ] Mushroom Concert (at: Sunday)
+Search is complete!
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+[T][ ] testdelete todo
+Now you have 3 task(s) in the list.
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+[D][ ] testdelete deadline (by: 2020-02-02)
+Now you have 4 task(s) in the list.
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+[E][ ] testfind event (at: monday)
+Now you have 5 task(s) in the list.
+____________________________________________________________
+____________________________________________________________
+Below are all your task(s):
+1.[T][ ] Grow Mushroom
+2.[E][ ] Mushroom Concert (at: Sunday)
+3.[T][ ] testdelete todo
+4.[D][ ] testdelete deadline (by: 2020-02-02)
+5.[E][ ] testfind event (at: monday)
+____________________________________________________________
+____________________________________________________________
+Processing keyword searches, please wait.
+3.[T][ ] testdelete todo
+4.[D][ ] testdelete deadline (by: 2020-02-02)
+5.[E][ ] testfind event (at: monday)
+Search is complete!
+____________________________________________________________
+____________________________________________________________
+Processing keyword searches, please wait.
+3.[T][ ] testdelete todo
+4.[D][ ] testdelete deadline (by: 2020-02-02)
+Search is complete!
+____________________________________________________________
+____________________________________________________________
+Processing keyword searches, please wait.
+Oh no mushroom head could not find any matches!
+____________________________________________________________
+____________________________________________________________
+Processing keyword searches, please wait.
+5.[E][ ] testfind event (at: monday)
+Search is complete!
+____________________________________________________________
+____________________________________________________________
+Invalid command: delete jackma
+You need task number not a word!
+Please try again with correct format!
+____________________________________________________________
+____________________________________________________________
+Invalid command: done jackma
+You need task number not a word!
+Please try again with correct format!
+____________________________________________________________
+____________________________________________________________
+Invalid command: delete 0
+You cannot delete a task smaller than 1!
+Please try again with correct format!
+____________________________________________________________
+____________________________________________________________
+Below are all your task(s):
+1.[T][ ] Grow Mushroom
+2.[E][ ] Mushroom Concert (at: Sunday)
+3.[T][ ] testdelete todo
+4.[D][ ] testdelete deadline (by: 2020-02-02)
+5.[E][ ] testfind event (at: monday)
+____________________________________________________________
+____________________________________________________________
+There is no task number 7 to delete.
+Please try again!
+____________________________________________________________
+____________________________________________________________
+Nice! I've marked the task as done:
+[D][X] testdelete deadline (by: 2020-02-02)
+____________________________________________________________
+____________________________________________________________
+Nice! I've marked the task as done:
+[E][X] testfind event (at: monday)
+____________________________________________________________
+____________________________________________________________
+Below are all your task(s):
+1.[T][ ] Grow Mushroom
+2.[E][ ] Mushroom Concert (at: Sunday)
+3.[T][ ] testdelete todo
+4.[D][X] testdelete deadline (by: 2020-02-02)
+5.[E][X] testfind event (at: monday)
+____________________________________________________________
+____________________________________________________________
+Noted. I will remove this task:
+[D][X] testdelete deadline (by: 2020-02-02)
+Now you have 4 task(s) in the list.
+____________________________________________________________
+____________________________________________________________
+Noted. I will remove this task:
+[E][X] testfind event (at: monday)
+Now you have 3 task(s) in the list.
+____________________________________________________________
+____________________________________________________________
+Below are all your task(s):
+1.[T][ ] Grow Mushroom
+2.[E][ ] Mushroom Concert (at: Sunday)
+3.[T][ ] testdelete todo
+____________________________________________________________
+____________________________________________________________
+Invalid command: done -1
+There is no task smaller than 1!
+Please try again with correct format!
+____________________________________________________________
+____________________________________________________________
+There is no task number 7 to mark done.
+Please try again!
+____________________________________________________________
+____________________________________________________________
+Below are all your task(s):
+1.[T][ ] Grow Mushroom
+2.[E][ ] Mushroom Concert (at: Sunday)
+3.[T][ ] testdelete todo
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+[T][ ] test invalid format for command code
+Now you have 4 task(s) in the list.
+____________________________________________________________
+____________________________________________________________
+Invalid command: deadline /by 2019-01-01
+Please enter a task description!
+Please try again with correct format!
+____________________________________________________________
+____________________________________________________________
+Invalid command: deadline purposely wrong date /by 2019-30-30
+Your date format is wrong!
+Please try again with correct format!
+____________________________________________________________
+____________________________________________________________
+Invalid command: deadline purposely wrong identifier format /at 2019-01-01
+Please use a correct format with ' /by '!
+Please try again with correct format!
+____________________________________________________________
+____________________________________________________________
+Invalid command: deadline purposely wrong identifier format/by2019-01-01
+Please use a correct format with ' /by '!
+Please try again with correct format!
+____________________________________________________________
+____________________________________________________________
+Invalid command: deadline purpose no identifier format
+Please use a correct format with ' /by '!
+Please try again with correct format!
+____________________________________________________________
+____________________________________________________________
+Below are all your task(s):
+1.[T][ ] Grow Mushroom
+2.[E][ ] Mushroom Concert (at: Sunday)
+3.[T][ ] testdelete todo
+4.[T][ ] test invalid format for command code
+____________________________________________________________
+____________________________________________________________
+Goodbye! Hope to see you again soon!
+____________________________________________________________
