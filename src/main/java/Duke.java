@@ -1,10 +1,27 @@
+/**
+ * The main code file of the project.
+ */
+
 public class Duke {
+    private Storage storage;
+    private UI ui;
+
+    /**
+     * Constructor that initialises two new objects
+     */
+
+    public Duke(){
+        this.storage = new Storage();
+        this.ui = new UI(storage);
+    }
+
+    public void run(){
+        ui.welcomeMessage();
+        ui.run();
+        ui.goodByeMessage();
+    }
+
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        new Duke().run();
     }
 }
