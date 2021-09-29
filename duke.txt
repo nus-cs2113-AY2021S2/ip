@@ -1,0 +1,4 @@
+D|1|return book|29/2/2021
+T|0|maths homework
+T|0|english practice paper
+E|0|informal dinner|NUS 5/3/2021
