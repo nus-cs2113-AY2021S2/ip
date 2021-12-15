@@ -1,0 +1,2 @@
+T |0 |eat
+E |0 |eat ice cream  |sunday 12pm
