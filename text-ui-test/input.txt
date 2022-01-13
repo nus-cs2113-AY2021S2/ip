@@ -1,0 +1,9 @@
+todo read book
+event eat lunch /at nus
+deadline math hw /by wed
+list
+done 1
+list
+delete 3
+list
+bye

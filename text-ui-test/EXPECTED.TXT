@@ -1,7 +1,37 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+____________________________________________________________
+Hi! I'm Duke UwU
+What can I do for you today?
+____________________________________________________________
+Loading data....
+Error in loading. File not found
+____________________________________________________________
+Gotcha! I've added this task:
+[T][ ] read book
+Only 1 task in the list
+____________________________________________________________
+Gotcha! I've added this task:
+[E][ ] eat lunch (at: nus)
+2  tasks left in the list
+____________________________________________________________
+Gotcha! I've added this task:
+[D][ ] math hw (by: wed)
+3  tasks left in the list
+____________________________________________________________
+1. [T][ ] read book
+2. [E][ ] eat lunch (at: nus)
+3. [D][ ] math hw (by: wed)
+____________________________________________________________
+This task has been done. Good job!
+[X] read book
+____________________________________________________________
+1. [T][X] read book
+2. [E][ ] eat lunch (at: nus)
+3. [D][ ] math hw (by: wed)
+____________________________________________________________
+The task has been deleted.
+____________________________________________________________
+1. [T][X] read book
+2. [E][ ] eat lunch (at: nus)
+____________________________________________________________
+Bye. Hope to see you again soon!
+____________________________________________________________
